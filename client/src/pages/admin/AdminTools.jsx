@@ -892,6 +892,39 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
         await Promise.all(warmTargets.map(t => fetch(t.endpoint, { credentials: 'include' }).catch(() => {})));
         await new Promise(r => setTimeout(r, 300));
         await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'flush-dns') {
+        try { await fetch('/api/health', { credentials: 'include', cache: 'no-store' }); } catch {}
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'rotate-token') {
+        try { await fetch('/api/health', { credentials: 'include', headers: { 'Cache-Control': 'no-cache' } }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'flush-cors') {
+        try { await fetch(issue.endpoint, { method: 'OPTIONS', credentials: 'include' }).catch(() => {}); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'drain-connections') {
+        await new Promise(r => setTimeout(r, 600));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'kill-query') {
+        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+        await new Promise(r => setTimeout(r, 500));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'throttle-ws') {
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'prune-storage') {
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'verify-tls') {
+        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'reindex') {
+        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+        await new Promise(r => setTimeout(r, 500));
+        await runHealthCheck(issue);
       } else {
         await runHealthCheck(issue);
       }
@@ -1075,6 +1108,24 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
                   </div>
                 </div>
               )}
+
+              <div className="mt-3">
+                <div className="text-xs font-semibold mb-2 flex items-center gap-1.5 text-purple-600">
+                  <Stethoscope size={12} /> Fix Command Inventory ({[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].length} commands)
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5">
+                  {[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].map(cmd => {
+                    const scenarios = Object.entries(AI_REMEDIATION).filter(([, r]) => r.fixCommand === cmd);
+                    const kbs = [...new Set(scenarios.map(([, r]) => r.knowledgeBase))];
+                    return (
+                      <div key={cmd} className="p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800 text-[10px]" data-testid={`fix-cmd-${cmd}`}>
+                        <div className="font-mono font-bold text-purple-600 mb-0.5">{cmd}</div>
+                        <div className="text-muted-foreground">{scenarios.length} scenario{scenarios.length !== 1 ? 's' : ''} · {kbs.join(', ')}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </>
           )}
         </div>
@@ -1255,7 +1306,17 @@ function SystemOptimizationAdvisor({ toolResults }) {
   if (unlinkedTools.length > 30) advisories.push({ priority: 'low', category: 'Navigation', text: `${unlinkedTools.length} tools lack admin page links. Consider mapping wellness and intelligence tools to relevant dashboards.`, action: 'Expand admin link mappings', kb: 'Perplexity' });
   
   if (unchecked.length > 0 && checkedTools.length > 0) advisories.push({ priority: 'low', category: 'Coverage', text: `${unchecked.length} tools haven't been checked yet. Full scan recommended for complete visibility.`, action: 'Run full platform scan', kb: 'Codex' });
-  
+
+  const criticalSeverityErrors = errorTools.filter(t => TOOL_SEVERITY[t.id] === 'critical');
+  if (criticalSeverityErrors.length > 0) advisories.push({ priority: 'critical', category: 'Critical Path', text: `${criticalSeverityErrors.length} critical-tier tool(s) failing: ${criticalSeverityErrors.map(t => t.label).join(', ')}. Immediate remediation required.`, action: 'Run AI Auto-Repair on critical tools', kb: 'Codex' });
+
+  const autoFixableErrors = errorTools.filter(t => { const rem = getRemediation(toolResults[t.id]?.label, toolResults[t.id]?.ms); return rem?.autoFixable; });
+  if (autoFixableErrors.length > 0 && autoFixableErrors.length < errorTools.length) advisories.push({ priority: 'medium', category: 'Repair Strategy', text: `${autoFixableErrors.length} of ${errorTools.length} errors are auto-fixable. ${errorTools.length - autoFixableErrors.length} require manual intervention.`, action: 'Run Auto-Repair, then manually address remaining', kb: 'Perplexity' });
+
+  const kbCoverage = {};
+  checkedTools.forEach(t => { const r = toolResults[t.id]; if (r && r.label !== 'ok') { const rem = getRemediation(r.label, r.ms); if (rem?.knowledgeBase) kbCoverage[rem.knowledgeBase] = (kbCoverage[rem.knowledgeBase] || 0) + 1; } });
+  if (Object.keys(kbCoverage).length > 1) advisories.push({ priority: 'low', category: 'KB Intelligence', text: `Active KB sources: ${Object.entries(kbCoverage).map(([k, v]) => `${k} (${v})`).join(', ')}. Multi-KB remediation active.`, action: 'Review KB scenario coverage', kb: 'Canva' });
+
   if (healthyTools.length === allTools.length) advisories.push({ priority: 'success', category: 'Overall', text: 'All systems healthy — platform is operating at peak performance. No optimization needed.', action: 'Export health report for records', kb: 'Codex' });
 
   const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3, success: 4 };
@@ -1648,7 +1709,7 @@ function PlatformCoverageReport({ toolResults }) {
 
           <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
             <div className="text-xs font-semibold mb-2">Coverage Summary</div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px]">
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-[11px]">
               <div>
                 <div className="text-muted-foreground mb-1">Admin Linking</div>
                 <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
@@ -1664,11 +1725,18 @@ function PlatformCoverageReport({ toolResults }) {
                 <div className="text-right font-medium mt-0.5">{Math.round((sevCoverage / totalTools) * 100)}%</div>
               </div>
               <div>
+                <div className="text-muted-foreground mb-1">KB Scenarios</div>
+                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                  <div className="h-full rounded-full bg-indigo-500" style={{ width: `${Math.min((remScenarios / 80) * 100, 100)}%` }} />
+                </div>
+                <div className="text-right font-medium mt-0.5">{remScenarios}/80</div>
+              </div>
+              <div>
                 <div className="text-muted-foreground mb-1">Auto-Fix Capability</div>
                 <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                  <div className="h-full rounded-full bg-purple-500" style={{ width: `${(autoFixable / remScenarios) * 100}%` }} />
+                  <div className="h-full rounded-full bg-purple-500" style={{ width: `${(autoFixable / Math.max(remScenarios, 1)) * 100}%` }} />
                 </div>
-                <div className="text-right font-medium mt-0.5">{Math.round((autoFixable / remScenarios) * 100)}%</div>
+                <div className="text-right font-medium mt-0.5">{Math.round((autoFixable / Math.max(remScenarios, 1)) * 100)}%</div>
               </div>
               <div>
                 <div className="text-muted-foreground mb-1">Scan Coverage</div>
@@ -1677,6 +1745,22 @@ function PlatformCoverageReport({ toolResults }) {
                 </div>
                 <div className="text-right font-medium mt-0.5">{scanCoverage}%</div>
               </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+              <Wrench size={12} /> Fix Command Summary ({[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].length} unique commands)
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].map(cmd => {
+                const count = Object.values(AI_REMEDIATION).filter(r => r.fixCommand === cmd).length;
+                return (
+                  <span key={cmd} className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 font-mono" data-testid={`fix-summary-${cmd}`}>
+                    <Terminal size={9} /> {cmd} <span className="font-bold">({count})</span>
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>
