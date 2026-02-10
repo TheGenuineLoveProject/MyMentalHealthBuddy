@@ -22,6 +22,7 @@ async function sendEvent(eventName, eventCategory, path, meta) {
   try {
     await fetch("/api/analytics/event", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         "x-session-id": getSessionId(),
