@@ -198,6 +198,7 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = () => {
     if (replitUser) return true;
+    if (token && localUser && !isTokenExpired(token)) return true;
     return false;
   };
   
