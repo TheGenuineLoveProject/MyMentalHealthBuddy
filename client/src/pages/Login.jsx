@@ -1,13 +1,11 @@
 import { Link, useLocation } from "wouter";
 import { useEffect } from "react";
-import { ArrowRight, Shield, Heart, Sparkles, LayoutDashboard } from "lucide-react";
+import { ArrowRight, Shield, Heart, Sparkles } from "lucide-react";
 import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
-import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
-import { pickBenefits } from "@/lib/benefits";
 
 export default function Login() {
-  const { isAuthenticated, isLoading, user } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const [, setLocation] = useLocation();
 
   useEffect(() => {
@@ -39,45 +37,26 @@ export default function Login() {
   }
 
   return (
-  <WellnessPageShell
-    title="Sign In"
-    subtitle="Sign in to your account."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
     <>
       <SEO 
         title="Sign In - The Genuine Love Project"
         description="Sign in to your Genuine Love Project account to access your wellness tools."
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-12" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
         
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <Link href="/" className="inline-flex flex-col items-center gap-3 group">
               <img 
                 src="/brand/login-logo.png" 
                 alt="The Genuine Love Project" 
-                className="w-24 h-24 object-contain transition-all group-hover:scale-105"
+                className="w-20 h-20 object-contain transition-all group-hover:scale-105"
                 data-testid="img-login-logo"
               />
-              <span className="text-xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
+              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
 
@@ -132,6 +111,5 @@ export default function Login() {
         </div>
       </div>
     </>
-  </WellnessPageShell>
   );
 }

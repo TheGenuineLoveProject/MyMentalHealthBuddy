@@ -1,8 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, Shield, Heart, Sparkles, Check, Leaf, Brain, Sun, Star } from "lucide-react";
 import SEO from "../components/SEO";
-import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
-import { pickBenefits } from "@/lib/benefits";
 
 export default function Register() {
   const benefits = [
@@ -13,31 +11,12 @@ export default function Register() {
   ];
 
   return (
-  <WellnessPageShell
-    title="Get Started"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
     <>
       <SEO 
         title="Create Account - The Genuine Love Project"
         description="Create your free account. Mood tracking, journaling, reflection prompts, and AI chat — no credit card required."
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-6 py-12" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
         <div className="decorative-orb sage animate-drift w-[500px] h-[500px] -top-24 -right-24" style={{ animationDelay: '0s' }} aria-hidden="true" />
         <div className="decorative-orb rose animate-drift w-[400px] h-[400px] -bottom-32 -left-32" style={{ animationDelay: '5s' }} aria-hidden="true" />
         <div className="decorative-orb teal animate-drift w-[300px] h-[300px] top-1/3 left-10" style={{ animationDelay: '10s' }} aria-hidden="true" />
@@ -62,17 +41,17 @@ export default function Register() {
         </div>
         
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-4 group">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
                 <img 
                   src="/brand/logo-mark.png" 
                   alt="The Genuine Love Project" 
-                  className="w-10 h-10 object-contain"
+                  className="w-9 h-9 object-contain"
                   data-testid="img-register-logo"
                 />
               </div>
-              <span className="text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
+              <span className="text-xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
 
@@ -147,6 +126,5 @@ export default function Register() {
         </div>
       </div>
     </>
-  </WellnessPageShell>
   );
 }
