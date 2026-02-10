@@ -47,14 +47,11 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/serviceWorker.js')
       .then((registration) => {
-        console.log('SW registered:', registration.scope);
-        
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;
           if (newWorker) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                console.log('New content available; showing update banner');
                 try {
                   if (document.body) {
                     showUpdateBanner(newWorker);
@@ -86,7 +83,7 @@ if ('serviceWorker' in navigator) {
   });
 
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    console.log('SW controller changed');
+    window.location.reload();
   });
 
   navigator.serviceWorker.addEventListener('message', (event) => {
