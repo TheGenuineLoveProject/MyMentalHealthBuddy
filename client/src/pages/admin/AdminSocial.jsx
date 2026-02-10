@@ -96,6 +96,8 @@ export default function AdminSocial() {
   const [redirectsList, setRedirectsList] = useState([]);
   const [clickStats, setClickStats] = useState([]);
   const [blogPosts, setBlogPosts] = useState([]);
+  const [signals, setSignals] = useState({ topThemes: [], recentBlogActivity: [], statusCounts: {}, suggestedFocus: [] });
+  const [auditLog, setAuditLog] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("");
   const [campaignFilter, setCampaignFilter] = useState("");
@@ -113,13 +115,15 @@ export default function AdminSocial() {
       if (statusFilter) params.set("status", statusFilter);
       if (campaignFilter) params.set("campaign_id", campaignFilter);
 
-      const [postsRes, weeklyRes, campaignsRes, redirectsRes, clicksRes, blogRes] = await Promise.all([
+      const [postsRes, weeklyRes, campaignsRes, redirectsRes, clicksRes, blogRes, signalsRes, auditRes] = await Promise.all([
         fetch(`${API_BASE}/posts?${params}`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
         fetch(`${API_BASE}/weekly-queue`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
         fetch(`${API_BASE}/campaigns`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
         fetch(`/r/list`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
         fetch(`${API_BASE}/click-stats`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
         fetch(`/api/blog/posts?limit=20`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+        fetch(`${API_BASE}/signals`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: {} })),
+        fetch(`${API_BASE}/audit?limit=50`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
       ]);
       setPosts(postsRes.data || []);
       setWeeklyQueue(weeklyRes.data || []);
@@ -127,16 +131,22 @@ export default function AdminSocial() {
       setRedirectsList(redirectsRes.data || []);
       setClickStats(clicksRes.data || []);
       setBlogPosts(Array.isArray(blogRes.data) ? blogRes.data : Array.isArray(blogRes) ? blogRes : []);
+      setSignals(signalsRes.data || { topThemes: [], recentBlogActivity: [], statusCounts: {}, suggestedFocus: [] });
+      setAuditLog(auditRes.data || []);
     } catch (e) { console.error("Fetch error:", e); }
     setLoading(false);
   }, [statusFilter, campaignFilter]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
-  const transitionPost = async (id, action) => {
+  const transitionPost = async (id, action, extra = {}) => {
     setActionLoading(id);
     try {
-      await fetch(`${API_BASE}/post/${id}/${action}`, { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" } });
+      await fetch(`${API_BASE}/post/${id}/${action}`, {
+        method: "POST", credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(extra),
+      });
       await fetchData();
     } catch (e) { console.error("Transition error:", e); }
     setActionLoading("");
@@ -151,6 +161,7 @@ export default function AdminSocial() {
     { id: "editor", label: "Create Post", icon: Plus },
     { id: "signals", label: "Signals", icon: BarChart3 },
     { id: "repurpose", label: "Repurpose", icon: BookOpen },
+    { id: "audit", label: "Audit Log", icon: Shield },
   ];
 
   return (
@@ -249,12 +260,17 @@ export default function AdminSocial() {
 
             {/* Signals */}
             {activeTab === "signals" && (
-              <SignalsPanel clickStats={clickStats} redirectsList={redirectsList} onRefresh={fetchData} />
+              <SignalsPanel clickStats={clickStats} redirectsList={redirectsList} signals={signals} onRefresh={fetchData} />
             )}
 
             {/* Repurpose from Blog */}
             {activeTab === "repurpose" && (
               <RepurposePanel blogPosts={blogPosts} campaigns={campaigns} onDone={fetchData} />
+            )}
+
+            {/* Audit Log */}
+            {activeTab === "audit" && (
+              <AuditLogPanel auditLog={auditLog} />
             )}
           </>
         )}
@@ -270,6 +286,9 @@ export default function AdminSocial() {
 }
 
 function PipelineBoard({ grouped, actionLoading, transitionPost, onEdit }) {
+  const [markPostedId, setMarkPostedId] = useState(null);
+  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+
   const columns = [
     { status: "draft", nextAction: "submit", nextLabel: "Submit for Review" },
     { status: "review", nextAction: "approve", nextLabel: "Approve" },
@@ -277,51 +296,103 @@ function PipelineBoard({ grouped, actionLoading, transitionPost, onEdit }) {
     { status: "posted", nextAction: null, nextLabel: null },
   ];
 
+  const handleAction = (postId, action, post) => {
+    if (action === "mark-posted") {
+      setMarkPostedId(postId);
+      setSelectedPlatforms(post.platform ? [post.platform] : []);
+      return;
+    }
+    transitionPost(postId, action);
+  };
+
+  const confirmMarkPosted = () => {
+    if (selectedPlatforms.length === 0) return;
+    transitionPost(markPostedId, "mark-posted", { platforms: selectedPlatforms });
+    setMarkPostedId(null);
+    setSelectedPlatforms([]);
+  };
+
+  const togglePlatform = (p) => {
+    setSelectedPlatforms(prev => prev.includes(p) ? prev.filter(x => x !== p) : [...prev, p]);
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4" data-testid="pipeline-board">
-      {columns.map(col => {
-        const cfg = STATUS_CONFIG[col.status];
-        const Icon = cfg.icon;
-        const items = grouped[col.status] || [];
-        return (
-          <div key={col.status} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-            <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Icon className="w-4 h-4" />
-                <span className="font-semibold text-sm text-gray-900 dark:text-white">{cfg.label}</span>
-              </div>
-              <span className="text-xs text-gray-400 font-mono">{items.length}</span>
-            </div>
-            <div className="p-2 space-y-2 max-h-[500px] overflow-y-auto">
-              {items.length === 0 && (
-                <p className="text-xs text-gray-400 dark:text-gray-500 text-center py-4">No posts</p>
-              )}
-              {items.map(post => (
-                <div key={post.id} className="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 space-y-2" data-testid={`card-post-${post.id}`}>
-                  <div className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">{post.title || "Untitled"}</div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">{post.content?.substring(0, 100)}</p>
-                  <div className="flex items-center gap-1 flex-wrap">
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300">{post.platform}</span>
-                    {post.theme && <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">{post.theme}</span>}
-                    {post.scheduledFor && <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center gap-0.5"><Clock className="w-2.5 h-2.5" />{new Date(post.scheduledFor).toLocaleDateString()}</span>}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <button onClick={() => onEdit(post)} className="text-[10px] px-2 py-1 rounded bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors" data-testid={`button-edit-${post.id}`}>
-                      <Edit className="w-3 h-3" />
-                    </button>
-                    {col.nextAction && (
-                      <button onClick={() => transitionPost(post.id, col.nextAction)} disabled={actionLoading === post.id} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 disabled:opacity-50 transition-colors flex items-center gap-1" data-testid={`button-${col.nextAction}-${post.id}`}>
-                        {actionLoading === post.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <ArrowRight className="w-3 h-3" />}
-                        {col.nextLabel}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+    <div className="space-y-4">
+      {markPostedId && (
+        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4" data-testid="mark-posted-panel">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Select platforms where this was posted:</h3>
+          <div className="flex flex-wrap gap-2 mb-3">
+            {PLATFORMS.map(p => {
+              const Icon = p.icon;
+              const active = selectedPlatforms.includes(p.id);
+              return (
+                <button key={p.id} onClick={() => togglePlatform(p.id)} className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${active ? "border-indigo-400 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300" : "border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-500"}`} data-testid={`button-platform-${p.id}`}>
+                  <Icon className="w-3 h-3" style={{ color: active ? p.color : undefined }} />
+                  {p.name}
+                  {active && <Check className="w-3 h-3" />}
+                </button>
+              );
+            })}
           </div>
-        );
-      })}
+          <div className="flex gap-2">
+            <button onClick={confirmMarkPosted} disabled={selectedPlatforms.length === 0} className="px-4 py-2 rounded-lg bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 disabled:opacity-50 transition-colors flex items-center gap-1" data-testid="button-confirm-posted">
+              <CheckCircle2 className="w-3 h-3" /> Confirm Posted
+            </button>
+            <button onClick={() => setMarkPostedId(null)} className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 text-xs text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-testid="button-cancel-posted">Cancel</button>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4" data-testid="pipeline-board">
+        {columns.map(col => {
+          const cfg = STATUS_CONFIG[col.status];
+          const Icon = cfg.icon;
+          const items = grouped[col.status] || [];
+          return (
+            <div key={col.status} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Icon className="w-4 h-4" />
+                  <span className="font-semibold text-sm text-gray-900 dark:text-white">{cfg.label}</span>
+                </div>
+                <span className="text-xs text-gray-400 font-mono">{items.length}</span>
+              </div>
+              <div className="p-2 space-y-2 max-h-[500px] overflow-y-auto">
+                {items.length === 0 && (
+                  <p className="text-xs text-gray-400 dark:text-gray-500 text-center py-4">No posts</p>
+                )}
+                {items.map(post => (
+                  <div key={post.id} className="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-100 dark:border-gray-600 space-y-2" data-testid={`card-post-${post.id}`}>
+                    <div className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">{post.title || "Untitled"}</div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">{post.content?.substring(0, 100)}</p>
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300">{post.platform}</span>
+                      {post.theme && <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400">{post.theme}</span>}
+                      {post.scheduledFor && <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center gap-0.5"><Clock className="w-2.5 h-2.5" />{new Date(post.scheduledFor).toLocaleDateString()}</span>}
+                      {Array.isArray(post.postedPlatforms) && post.postedPlatforms.length > 0 && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">{post.postedPlatforms.join(", ")}</span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      {col.status !== "posted" && (
+                        <button onClick={() => onEdit(post)} className="text-[10px] px-2 py-1 rounded bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors" data-testid={`button-edit-${post.id}`}>
+                          <Edit className="w-3 h-3" />
+                        </button>
+                      )}
+                      {col.nextAction && (
+                        <button onClick={() => handleAction(post.id, col.nextAction, post)} disabled={actionLoading === post.id} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 disabled:opacity-50 transition-colors flex items-center gap-1" data-testid={`button-${col.nextAction}-${post.id}`}>
+                          {actionLoading === post.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <ArrowRight className="w-3 h-3" />}
+                          {col.nextLabel}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -385,7 +456,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
     canvaUrl: post?.canvaUrl || "",
     mediaAssetUrl: post?.mediaAssetUrl || "",
     gentleCtaUrl: post?.gentleCtaUrl || "/tools",
-    captions: post?.captions || { instagram: "", x: "", tiktok: "", facebook: "", linkedin: "", youtube: "" },
+    captions: post?.captions || { instagram: "", x: "", tiktok: "", facebook: "", linkedin: "", youtube: "", pinterest: "" },
   });
   const [saving, setSaving] = useState(false);
   const [safetyResult, setSafetyResult] = useState(null);
@@ -443,7 +514,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
     }
     setSaving(true);
     try {
-      const url = isEdit ? `${API_BASE}/post/${post.id}` : `${API_BASE}/posts`;
+      const url = isEdit ? `${API_BASE}/post/${post.id}` : `${API_BASE}/post`;
       const method = isEdit ? "PUT" : "POST";
       const body = {
         ...form,
@@ -660,13 +731,79 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
   );
 }
 
-function SignalsPanel({ clickStats, redirectsList, onRefresh }) {
+function SignalsPanel({ clickStats, redirectsList, signals, onRefresh }) {
   return (
     <div className="space-y-4" data-testid="signals-panel">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2"><BarChart3 className="w-5 h-5 text-indigo-500" /> Traffic Signals</h2>
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2"><BarChart3 className="w-5 h-5 text-indigo-500" /> Traffic Signals & Intelligence</h2>
+
+      {signals.suggestedFocus && signals.suggestedFocus.length > 0 && (
+        <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800 rounded-xl p-4" data-testid="suggested-focus">
+          <h3 className="text-sm font-semibold text-amber-700 dark:text-amber-400 mb-2 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Suggested Focus</h3>
+          <ul className="space-y-1">
+            {signals.suggestedFocus.map((tip, i) => (
+              <li key={i} className="text-xs text-amber-600 dark:text-amber-300 flex items-start gap-2">
+                <ChevronRight className="w-3 h-3 mt-0.5 flex-shrink-0" /> {tip}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Pipeline Status Counts */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2"><Zap className="w-4 h-4 text-purple-500" /> Pipeline Status</h3>
+          {signals.statusCounts && Object.keys(signals.statusCounts).length > 0 ? (
+            <div className="space-y-2">
+              {Object.entries(signals.statusCounts).map(([status, count]) => (
+                <div key={status} className="flex items-center justify-between py-1 border-b border-gray-50 dark:border-gray-700 last:border-0">
+                  <StatusBadge status={status} />
+                  <span className="text-sm font-bold text-gray-900 dark:text-white">{count}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-gray-400">No pipeline data yet.</p>
+          )}
+        </div>
+
+        {/* Top Themes */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2"><Hash className="w-4 h-4 text-indigo-500" /> Top Posted Themes</h3>
+          {signals.topThemes && signals.topThemes.length > 0 ? (
+            <div className="space-y-2">
+              {signals.topThemes.map((t, i) => (
+                <div key={i} className="flex items-center justify-between py-1 border-b border-gray-50 dark:border-gray-700 last:border-0">
+                  <span className="text-xs text-gray-600 dark:text-gray-400">{t.theme || "untagged"}</span>
+                  <span className="text-sm font-bold text-gray-900 dark:text-white">{t.count}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-gray-400">No theme data yet. Post content to see trending themes.</p>
+          )}
+        </div>
+
+        {/* Recent Blog Activity */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2"><FileText className="w-4 h-4 text-emerald-500" /> Blog Activity (7 days)</h3>
+          {signals.recentBlogActivity && signals.recentBlogActivity.length > 0 ? (
+            <div className="space-y-2">
+              {signals.recentBlogActivity.map((a, i) => (
+                <div key={i} className="flex items-center justify-between py-1 border-b border-gray-50 dark:border-gray-700 last:border-0">
+                  <span className="text-xs text-gray-600 dark:text-gray-400 truncate max-w-[160px]">{a.path}</span>
+                  <span className="text-sm font-bold text-gray-900 dark:text-white">{a.count}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-gray-400">No blog activity data yet.</p>
+          )}
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Click Stats */}
+        {/* UTM Click Stats */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2"><TrendingUp className="w-4 h-4 text-emerald-500" /> UTM Clicks (7 days)</h3>
           {clickStats.length === 0 ? (
@@ -821,6 +958,68 @@ function CampaignModal({ onClose, onCreated }) {
             Create Campaign
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function AuditLogPanel({ auditLog }) {
+  const eventLabels = {
+    social_draft_created: "Draft Created",
+    social_post_edited: "Post Edited",
+    social_submitted_for_review: "Submitted for Review",
+    social_post_approved: "Post Approved",
+    social_post_marked_posted: "Marked as Posted",
+    social_post_scheduled: "Post Scheduled",
+    social_drafts_generated_from_blog: "Drafts from Blog",
+    campaign_created: "Campaign Created",
+  };
+
+  return (
+    <div className="space-y-4" data-testid="audit-log-panel">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2"><Shield className="w-5 h-5 text-indigo-500" /> Publishing Audit Log</h2>
+      <p className="text-sm text-gray-500 dark:text-gray-400">Every publishing action is logged for transparency and accountability. No auto-actions — all transitions are human-initiated.</p>
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+        {auditLog.length === 0 ? (
+          <div className="p-8 text-center">
+            <Shield className="w-8 h-8 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+            <p className="text-sm text-gray-400">No audit events yet. Actions will appear here as you use the publishing pipeline.</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-gray-100 dark:divide-gray-700 max-h-[600px] overflow-y-auto">
+            {auditLog.map((event, i) => {
+              const meta = typeof event.meta === "string" ? JSON.parse(event.meta || "{}") : (event.meta || {});
+              const label = eventLabels[event.type] || event.type;
+              return (
+                <div key={event.id || i} className="px-4 py-3 flex items-start gap-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors" data-testid={`audit-event-${i}`}>
+                  <div className="w-2 h-2 mt-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-sm font-medium text-gray-900 dark:text-white">{label}</span>
+                      {meta.createdBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500">by {meta.createdBy}</span>}
+                      {meta.submittedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500">by {meta.submittedBy}</span>}
+                      {meta.approvedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500">by {meta.approvedBy}</span>}
+                      {meta.postedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500">by {meta.postedBy}</span>}
+                      {meta.editedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500">by {meta.editedBy}</span>}
+                      {meta.scheduledBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500">by {meta.scheduledBy}</span>}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {meta.title && <span>"{meta.title}" </span>}
+                      {meta.blogTitle && <span>from "{meta.blogTitle}" </span>}
+                      {meta.draftCount && <span>({meta.draftCount} drafts) </span>}
+                      {meta.platforms && <span>on {Array.isArray(meta.platforms) ? meta.platforms.join(", ") : meta.platforms} </span>}
+                      {meta.name && <span>"{meta.name}" </span>}
+                    </div>
+                    <div className="text-[10px] text-gray-400 mt-0.5">
+                      {event.createdAt ? new Date(event.createdAt).toLocaleString() : ""}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
