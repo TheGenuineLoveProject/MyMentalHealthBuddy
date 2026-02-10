@@ -476,6 +476,18 @@ export const socialPosts = pgTable("social_posts", {
   index("idx_social_posts_scheduled").on(table.scheduledFor),
 ]);
 
+/* ================= TRACKED REDIRECTS ================= */
+export const redirects = pgTable("redirects", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  url: text("url").notNull(),
+  clicks: integer("clicks").default(0).notNull(),
+  campaignId: uuid("campaign_id"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_redirects_slug").on(table.slug),
+]);
+
 /* ================= DIGITAL PRODUCTS (E-books, Tools, Courses) ================= */
 export const digitalProducts = pgTable("digital_products", {
   id: uuid("id").defaultRandom().primaryKey(),
