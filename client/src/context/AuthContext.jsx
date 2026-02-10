@@ -8,10 +8,27 @@ const USER_KEY = "mmhb_user";
 const TOKEN_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
 
 async function fetchReplitUser() {
-  const response = await fetch("/api/auth/user", { credentials: "include" });
-  if (response.status === 401) return null;
+  const headers = {};
+  const storedToken = safeGetItem(TOKEN_KEY);
+  if (storedToken) {
+    headers["Authorization"] = `Bearer ${storedToken}`;
+  }
+  const response = await fetch("/api/auth/user", {
+    credentials: "include",
+    headers,
+  });
+  if (response.status === 401) {
+    safeRemoveItem(TOKEN_KEY);
+    safeRemoveItem(USER_KEY);
+    return null;
+  }
   if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
-  return response.json();
+  const data = await response.json();
+  if (!data) {
+    safeRemoveItem(TOKEN_KEY);
+    safeRemoveItem(USER_KEY);
+  }
+  return data;
 }
 
 function parseJwt(token) {
@@ -180,16 +197,8 @@ export function AuthProvider({ children }) {
   };
 
   const isAuthenticated = () => {
-    // Check Replit auth first, then local auth
     if (replitUser) return true;
-    
-    const currentToken = token || safeGetItem(TOKEN_KEY);
-    if (!currentToken) return false;
-    if (isTokenExpired(currentToken)) {
-      logout();
-      return false;
-    }
-    return true;
+    return false;
   };
   
   const combinedLoading = isLoading || replitLoading;
