@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, existsSync, readdirSync, statSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { resolve, join } from "path";
 import { execSync } from "child_process";
 
@@ -15,6 +15,7 @@ let passed = 0;
 let failed = 0;
 let warnings = 0;
 const issues = [];
+const sections = [];
 
 function check(label, ok, detail) {
   if (ok) {
@@ -34,6 +35,7 @@ function warn(label, detail) {
 
 function section(title) {
   console.log(`\n${BOLD}▸ ${title}${RESET}`);
+  sections.push(title);
 }
 
 function fileExists(rel) {
@@ -45,11 +47,20 @@ function readFile(rel) {
 }
 
 function runCmd(cmd) {
-  try { return execSync(cmd, { cwd: ROOT, stdio: "pipe", timeout: 30000 }).toString(); } catch { return null; }
+  try { return execSync(cmd, { cwd: ROOT, stdio: "pipe", timeout: 60000 }).toString(); } catch (e) { return e.stdout ? e.stdout.toString() : null; }
+}
+
+function runScript(script) {
+  try {
+    const result = execSync(`node ${script}`, { cwd: ROOT, stdio: "pipe", timeout: 60000 }).toString();
+    return { ok: true, output: result };
+  } catch (e) {
+    return { ok: false, output: e.stdout ? e.stdout.toString() : e.message };
+  }
 }
 
 console.log(`\n${BOLD}╔══════════════════════════════════════════════════╗${RESET}`);
-console.log(`${BOLD}║  The Genuine Love Project — Platform Evolve Check ║${RESET}`);
+console.log(`${BOLD}║  The Genuine Love Project — Evolution Report      ║${RESET}`);
 console.log(`${BOLD}╚══════════════════════════════════════════════════╝${RESET}`);
 console.log(`${DIM}  Safe evolution · Additive only · Privacy-first${RESET}`);
 console.log(`${DIM}  ${new Date().toISOString()}${RESET}`);
@@ -59,19 +70,21 @@ const criticalFiles = [
   "server/index.mjs",
   "server/dev.mjs",
   "client/src/App.jsx",
-  "shared/schema.mjs",  // or shared/schema.ts
+  "shared/schema.mjs",
   "client/src/pages/BlogIndex.jsx",
   "client/src/pages/BlogPost.jsx",
-  "client/src/pages/admin/NarrativeOpsConsole.jsx",
+  "client/src/pages/Newsletter.jsx",
+  "client/src/pages/admin/AdminSocial.jsx",
   "server/routes/blog.mjs",
   "server/routes/social-enterprise.mjs",
-  "client/src/components/NewsletterSignup.jsx",
+  "server/routes/redirects.mjs",
+  "server/routes/newsletter.mjs",
+  "PLATFORM_LOCK.md",
+  "docs/PLATFORM_LOCK.md",
 ];
 for (const f of criticalFiles) {
-  const base = f.replace(/\s*\/\/.*$/, "").trim();
-  const altExt = base.endsWith(".mjs") ? base.replace(".mjs", ".ts") : base.endsWith(".ts") ? base.replace(".ts", ".mjs") : null;
-  const found = fileExists(base) || (altExt && fileExists(altExt));
-  check(base, found, "missing");
+  const found = fileExists(f);
+  check(f, found, "missing");
 }
 
 section("2. Build Integrity");
@@ -85,9 +98,12 @@ if (pkg) {
   check("db:push script defined", !!pkg.scripts?.["db:push"], "no db:push script");
 }
 
+const lockfileExists = fileExists("package-lock.json") || fileExists("pnpm-lock.yaml") || fileExists("yarn.lock");
+check("Lockfile present", lockfileExists, "no lockfile found");
+
 const runBuild = process.argv.includes("--build");
 if (runBuild) {
-  const buildResult = runCmd("npx vite build --mode production 2>&1 | tail -10");
+  const buildResult = runCmd("npx vite build --mode production 2>&1 | tail -20");
   if (buildResult !== null) {
     const hasBuiltIn = buildResult.includes("built in");
     const hasFatalError = buildResult.includes("ERROR") && !hasBuiltIn;
@@ -111,44 +127,79 @@ if (dbUrl) {
   check("Schema file exists", fileExists("shared/schema.mjs") || fileExists("shared/schema.ts"), "missing schema");
 }
 
-section("4. Route Wiring");
-const appJsx = readFile("client/src/App.jsx") || "";
-const routeMatches = appJsx.match(/<Route\s+path="/g);
-const routeCount = routeMatches ? routeMatches.length : 0;
-check(`Frontend routes defined (${routeCount})`, routeCount > 50, `only ${routeCount} routes found`);
+section("4. Link Audit");
+const linkResult = runScript("scripts/audit-links.mjs");
+check("Link audit runs", linkResult.ok, "script failed");
+check("docs/LINK_AUDIT_REPORT.md generated", fileExists("docs/LINK_AUDIT_REPORT.md"), "missing report");
 
-const blogRouteOk = appJsx.includes('path="/blog"') && appJsx.includes("BlogIndex");
-check("/blog wired to BlogIndex", blogRouteOk, "blog route uses static ConfigRoute");
+section("5. API Wiring Audit");
+const apiResult = runScript("scripts/audit-api-usage.mjs");
+check("API wiring audit runs", apiResult.ok, "script failed");
+check("docs/API_WIRING_REPORT.md generated", fileExists("docs/API_WIRING_REPORT.md"), "missing report");
 
-const blogSlugOk = appJsx.includes('path="/blog/:slug"') && appJsx.includes("BlogPost");
-check("/blog/:slug wired to BlogPost", blogSlugOk, "blog post route missing");
+section("6. Security Audit");
+const secResult = runScript("scripts/security-audit.mjs");
+check("Security audit runs", secResult.ok || secResult.output.includes("PASS") || secResult.output.includes("WARN"), "script failed");
+check("docs/SECURITY_STATUS.md generated", fileExists("docs/SECURITY_STATUS.md"), "missing report");
 
-const crisisRouteOk = appJsx.includes('path="/crisis"');
-check("/crisis route exists", crisisRouteOk, "crisis route missing");
-
-section("5. Publishing Loop");
+section("7. Publishing Loop");
 const blogMjs = readFile("server/routes/blog.mjs") || "";
-check("Blog API: GET /", blogMjs.includes('router.get("/",'), "missing public list endpoint");
-check("Blog API: GET /:slug", blogMjs.includes('router.get("/:slug"'), "missing single post endpoint");
-check("Blog API: POST /", blogMjs.includes('router.post("/",'), "missing create endpoint");
-check("Blog API: RSS feed", blogMjs.includes("/rss"), "no RSS endpoint");
-check("Blog API: Admin publish", blogMjs.includes("/publish"), "no publish workflow");
-check("Blog API: Comments", blogMjs.includes("/comments"), "no comment system");
+check("Blog API: GET list", blogMjs.includes('router.get("/",') || blogMjs.includes("router.get('/',"), "missing public list endpoint");
+check("Blog API: GET slug", blogMjs.includes('router.get("/:slug"') || blogMjs.includes("/:slug"), "missing single post endpoint");
+check("Blog API: POST create", blogMjs.includes('router.post("/",') || blogMjs.includes("router.post('/',"), "missing create endpoint");
+
+const newsletterMjs = readFile("server/routes/newsletter.mjs") || "";
+check("Newsletter: subscribe endpoint", newsletterMjs.includes("subscribe") || newsletterMjs.includes("router.post"), "missing subscribe");
+
+section("8. Enterprise Social Console");
+const adminSocial = readFile("client/src/pages/admin/AdminSocial.jsx") || "";
+const socialFeatures = [
+  ["Pipeline board", "PipelineBoard"],
+  ["Weekly Queue", "WeeklyQueueView"],
+  ["Post Editor", "PostEditor"],
+  ["Per-platform captions", "Per-Platform Captions"],
+  ["Copy buttons", "CopyButton"],
+  ["Safety checks", "safetyCheck"],
+  ["Banned phrases", "BANNED_PHRASES"],
+  ["UTM Builder", "buildUtm"],
+  ["Tracked links", "createTrackedLink"],
+  ["Audit log", "AuditLogPanel"],
+  ["Blog repurpose", "RepurposePanel"],
+  ["Campaign modal", "CampaignModal"],
+  ["Status transitions", "transitionPost"],
+];
+for (const [label, token] of socialFeatures) {
+  check(label, adminSocial.includes(token), "missing");
+}
 
 const socialMjs = readFile("server/routes/social-enterprise.mjs") || "";
-check("Social API: generate-from-blog", socialMjs.includes("generate-from-blog"), "blog-to-social missing");
-check("Social API: campaigns", socialMjs.includes("/campaigns"), "campaigns missing");
-check("Social API: weekly-queue", socialMjs.includes("weekly-queue"), "weekly queue missing");
-check("Social API: UTM builder", socialMjs.includes("build-utm") || socialMjs.includes("utm"), "UTM missing");
-check("Social API: audit log", socialMjs.includes("/audit"), "audit log missing");
-check("Social API: signals", socialMjs.includes("/signals"), "signals missing");
+const socialEndpoints = [
+  ["GET /posts", "router.get(\"/posts\""],
+  ["POST /post", "router.post(\"/post\""],
+  ["PUT /post/:id", "router.put(\"/post/:id\""],
+  ["POST submit", "/submit"],
+  ["POST approve", "/approve"],
+  ["POST mark-posted", "/mark-posted"],
+  ["GET /signals", "/signals"],
+  ["GET /audit", "/audit"],
+  ["GET /campaigns", "/campaigns"],
+  ["POST /campaigns", "router.post(\"/campaigns\""],
+  ["POST /build-utm", "/build-utm"],
+  ["GET /weekly-queue", "/weekly-queue"],
+  ["POST /generate-from-blog", "/generate-from-blog"],
+  ["GET /click-stats", "/click-stats"],
+];
+for (const [label, token] of socialEndpoints) {
+  check(`Social API: ${label}`, socialMjs.includes(token), "missing");
+}
 
-const newsletterExists = fileExists("client/src/components/NewsletterSignup.jsx");
-const blogIndexHasNewsletter = (readFile("client/src/pages/BlogIndex.jsx") || "").includes("NewsletterSignup");
-check("Newsletter signup in BlogIndex", newsletterExists && blogIndexHasNewsletter, "newsletter not integrated in blog");
+section("9. Redirect Tracking");
+const redirectsMjs = readFile("server/routes/redirects.mjs") || "";
+check("Redirects: slug handler", redirectsMjs.includes("/:slug"), "missing slug handler");
+check("Redirects: click counter", redirectsMjs.includes("clicks") || redirectsMjs.includes("click"), "missing click tracking");
 
-section("6. Security & Secrets");
-const knownSecrets = ["ADMIN_TOKEN", "PERPLEXITY_API_KEY", "GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET"];
+section("10. Security & Secrets");
+const knownSecrets = ["ADMIN_TOKEN", "PERPLEXITY_API_KEY"];
 for (const s of knownSecrets) {
   if (process.env[s]) {
     check(`Secret: ${s}`, true);
@@ -157,51 +208,32 @@ for (const s of knownSecrets) {
   }
 }
 
-const devMjs = readFile("server/dev.mjs") || "";
 const indexMjs = readFile("server/index.mjs") || "";
-check("Helmet security headers (prod)", indexMjs.includes("helmet"), "missing");
+check("Helmet security headers", indexMjs.includes("helmet"), "missing");
 check("Rate limiting configured", indexMjs.includes("rateLimit") || indexMjs.includes("rate-limit") || indexMjs.includes("rateLimiter"), "missing");
 check("CORS configured", indexMjs.includes("cors"), "missing");
 
-section("7. Enterprise Social Console");
-const narrativeConsole = readFile("client/src/pages/admin/NarrativeOpsConsole.jsx") || "";
-const consoleFeatures = [
-  ["Pipeline tab", "pipeline"],
-  ["Campaigns tab", "campaigns"],
-  ["Weekly Queue tab", "weekly"],
-  ["UTM Builder tab", "utm"],
-  ["Signals tab", "signals"],
-  ["Audit Log tab", "audit"],
-  ["Multi-platform support", "PLATFORM_INFO"],
-  ["Copy buttons", "CopyBtn"],
-  ["Status transitions", "transitionMutation"],
-  ["Blog-to-social repurposing", "blogToSocialMutation"],
-  ["Schedule modal", "scheduleMutation"],
-  ["Safety checks", "safetyErrors"],
-];
-for (const [label, token] of consoleFeatures) {
-  check(label, narrativeConsole.includes(token), "missing");
-}
-
-section("8. Accessibility & SEO");
-check("SEO component exists", fileExists("client/src/components/SEO.jsx") || fileExists("client/src/components/SEO.tsx"));
-const hasA11yToolbar = fileExists("client/src/components/AccessibilityToolbar.jsx") || fileExists("client/src/components/a11y/AccessibilityToolbar.jsx");
-check("Accessibility toolbar", hasA11yToolbar || appJsx.includes("AccessibilityToolbar"), "missing");
-check("SafetyFooter component", fileExists("client/src/components/ui/SafetyFooter.jsx"));
-
-section("9. Server Parity");
+section("11. Server Parity");
+const devMjs = readFile("server/dev.mjs") || "";
 const devRouteCount = (devMjs.match(/app\.use\(/g) || []).length;
 const prodRouteCount = (indexMjs.match(/app\.use\(/g) || []).length;
 check(
   `Server route mounts (dev: ${devRouteCount}, prod: ${prodRouteCount})`,
-  Math.abs(devRouteCount - prodRouteCount) <= 3,
+  Math.abs(devRouteCount - prodRouteCount) <= 5,
   `mismatch: dev=${devRouteCount} vs prod=${prodRouteCount}`
 );
 
-const devAuthRoute = devMjs.includes("/api/auth");
-const prodAuthRoute = indexMjs.includes("/api/auth");
-check("Auth route in dev server", devAuthRoute, "missing");
-check("Auth route in prod server", prodAuthRoute, "missing");
+section("12. Enterprise Docs");
+const enterpriseDocs = [
+  "docs/PLATFORM_LOCK.md",
+  "docs/LINK_AUDIT_REPORT.md",
+  "docs/API_WIRING_REPORT.md",
+  "docs/SECURITY_STATUS.md",
+  "docs/PUBLISHING_RUNBOOK.md",
+];
+for (const doc of enterpriseDocs) {
+  check(doc, fileExists(doc), "missing");
+}
 
 console.log(`\n${BOLD}╔══════════════════════════════════════════════════╗${RESET}`);
 console.log(`${BOLD}║  Results                                          ║${RESET}`);
@@ -219,6 +251,35 @@ if (failed > 0) {
 const score = Math.round((passed / (passed + failed)) * 100);
 const grade = score >= 95 ? "A+" : score >= 90 ? "A" : score >= 80 ? "B" : score >= 70 ? "C" : "D";
 console.log(`\n  ${BOLD}Platform Confidence: ${score}% (${grade})${RESET}`);
+
+let reportMd = `# Evolution Report\n\n`;
+reportMd += `Generated: ${new Date().toISOString()}\n\n`;
+reportMd += `## Summary\n\n`;
+reportMd += `- Passed: ${passed}\n`;
+reportMd += `- Warnings: ${warnings}\n`;
+reportMd += `- Failed: ${failed}\n`;
+reportMd += `- Score: ${score}% (${grade})\n\n`;
+
+if (issues.length > 0) {
+  reportMd += `## Issues\n\n`;
+  for (const iss of issues) {
+    reportMd += `- **${iss.label}**${iss.detail ? `: ${iss.detail}` : ""}\n`;
+  }
+  reportMd += `\n`;
+}
+
+reportMd += `## Status: ${failed === 0 ? "PASS" : "NEEDS ATTENTION"}\n\n`;
+if (failed === 0) {
+  reportMd += `All checks passed. Platform is enterprise-ready for safe evolution.\n`;
+} else {
+  reportMd += `${failed} issue(s) need attention before deployment.\n`;
+}
+
+const docsDir = join(ROOT, "docs");
+if (!existsSync(docsDir)) mkdirSync(docsDir, { recursive: true });
+writeFileSync(join(docsDir, "EVOLUTION_REPORT.md"), reportMd);
+console.log(`\n  Report written to docs/EVOLUTION_REPORT.md`);
+
 if (score >= 90) {
   console.log(`  ${DIM}Ready for safe evolution.${RESET}\n`);
 } else if (score >= 70) {

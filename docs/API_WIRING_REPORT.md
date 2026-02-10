@@ -1,0 +1,433 @@
+# API Wiring Integrity Report
+
+Generated: 2026-02-10T19:14:19.623Z
+
+## Summary
+
+- Mounted backend paths: 128
+- Unique API paths called from client: 274
+- Unmounted API calls: 5
+- Double-mounted routes: 2
+
+## Unmounted API Calls
+
+| # | API Path | Severity | Called From |
+|---|----------|----------|-------------|
+| 1 | `POST` | high | client/src/components/AICompanion.jsx:110, client/src/components/AffirmationDeck.jsx:46, client/src/components/ChatWidget.tsx:27 |
+| 2 | `PATCH` | high | client/src/components/ReminderSettings.jsx:51, client/src/pages/account/Settings.jsx:60, client/src/pages/admin/AdminPublishing.jsx:106 |
+| 3 | `DELETE` | high | client/src/components/wellness/EmotionLog.jsx:63, client/src/pages/AIChatPage.jsx:77, client/src/pages/BoundariesPage.jsx:103 |
+| 4 | `GET` | high | client/src/context/GamificationContext.jsx:62, client/src/context/GamificationContext.jsx:74, client/src/pages/GratitudePractice.jsx:53 |
+| 5 | `PUT` | high | client/src/pages/account/Profile.jsx:49, client/src/pages/admin/AdminPublishing.jsx:157, client/src/pages/admin/NarrativeOpsConsole.jsx:212 |
+
+## Double-Mounted Routes
+
+- `server/index.mjs:/api`
+- `server/dev.mjs:/api`
+
+## All Mounted Backend Paths
+
+- `/`
+- `/api`
+- `/api/account`
+- `/api/account-actions`
+- `/api/admin`
+- `/api/admin/audit-logs`
+- `/api/admin/billing`
+- `/api/admin/publishing`
+- `/api/admin/security`
+- `/api/admin/social`
+- `/api/admin/social/enterprise`
+- `/api/admin/soft-launch-metrics`
+- `/api/ai`
+- `/api/ai-dashboard`
+- `/api/analytics`
+- `/api/analytics-events`
+- `/api/auth`
+- `/api/auth/github`
+- `/api/badges`
+- `/api/billing`
+- `/api/blog`
+- `/api/canva-oauth`
+- `/api/cognitive-enhancement`
+- `/api/cognitive-lab`
+- `/api/cognitive-mastery`
+- `/api/collective-intelligence`
+- `/api/community`
+- `/api/consciousness`
+- `/api/contact`
+- `/api/contemplative`
+- `/api/content`
+- `/api/content-generator`
+- `/api/content-intelligence`
+- `/api/content-studio`
+- `/api/creativity`
+- `/api/dashboard`
+- `/api/deep-learning`
+- `/api/deployment-readiness`
+- `/api/dialectics`
+- `/api/email`
+- `/api/embodiment`
+- `/api/emotional-mastery`
+- `/api/emotional-resilience`
+- `/api/ethical-reasoning`
+- `/api/existential`
+- `/api/favorites`
+- `/api/feed`
+- `/api/feedback`
+- `/api/figma`
+- `/api/foresight`
+- `/api/gamification`
+- `/api/gratitude`
+- `/api/healing`
+- `/api/healing-core`
+- `/api/healing-intelligence`
+- `/api/healing-modalities`
+- `/api/health`
+- `/api/holistic-healing`
+- `/api/human-potential`
+- `/api/insights`
+- `/api/integrations`
+- `/api/invites`
+- `/api/journal`
+- `/api/knowledge`
+- `/api/leads`
+- `/api/life-design`
+- `/api/life-purpose`
+- `/api/login`
+- `/api/mastery-excellence`
+- `/api/meaning`
+- `/api/meaning-core`
+- `/api/metacognition`
+- `/api/metrics`
+- `/api/metrics/summary`
+- `/api/mfa`
+- `/api/mind-body`
+- `/api/mirror`
+- `/api/mood`
+- `/api/narrative`
+- `/api/narrative-drafts`
+- `/api/neuro-integration`
+- `/api/newsletter`
+- `/api/onboarding`
+- `/api/peak-performance`
+- `/api/perplexity`
+- `/api/personal-growth`
+- `/api/philosophy`
+- `/api/post-trauma`
+- `/api/practices`
+- `/api/praxis`
+- `/api/pro-features`
+- `/api/products`
+- `/api/progress`
+- `/api/prompts`
+- `/api/psychological-safety`
+- `/api/purpose-compass`
+- `/api/reflection`
+- `/api/relational`
+- `/api/relationship-dynamics`
+- `/api/resilience`
+- `/api/self-mastery`
+- `/api/self-mastery-intelligence`
+- `/api/social-intelligence`
+- `/api/social-posting`
+- `/api/social-posts`
+- `/api/social/posts`
+- `/api/socio-ecology`
+- `/api/spiritual-intelligence`
+- `/api/states`
+- `/api/systems-compassion`
+- `/api/therapy`
+- `/api/transformation`
+- `/api/trauma-healing`
+- `/api/universal-content`
+- `/api/uploads`
+- `/api/user`
+- `/api/user-settings`
+- `/api/values`
+- `/api/webhook`
+- `/api/wellness-tools`
+- `/api/wisdom`
+- `/api/wisdom-engine`
+- `/api/wisdom-synthesis`
+- `/api/wisdom-traditions`
+- `/health`
+- `/r`
+- `/rss.xml`
+- `/{*splat}`
+
+## All Client API Calls
+
+- `/api/account` (2 calls)
+- `/api/account-actions` (2 calls)
+- `/api/account/2fa/disable` (2 calls)
+- `/api/account/2fa/setup` (2 calls)
+- `/api/account/2fa/verify` (2 calls)
+- `/api/account/delete-request` (2 calls)
+- `/api/account/export` (2 calls)
+- `/api/account/password` (2 calls)
+- `/api/account/password-reset/confirm` (1 call)
+- `/api/account/password-reset/request` (3 calls)
+- `/api/account/profile` (1 call)
+- `/api/account/security` (6 calls)
+- `/api/account/sessions` (4 calls)
+- `/api/admin` (2 calls)
+- `/api/admin/audit-logs` (5 calls)
+- `/api/admin/audit-logs/actions` (4 calls)
+- `/api/admin/audit-logs/stats` (4 calls)
+- `/api/admin/billing` (2 calls)
+- `/api/admin/billing/overview` (4 calls)
+- `/api/admin/billing/plan-distribution` (2 calls)
+- `/api/admin/billing/subscriptions` (2 calls)
+- `/api/admin/dashboard-stats` (6 calls)
+- `/api/admin/diagnostics` (2 calls)
+- `/api/admin/health` (2 calls)
+- `/api/admin/publishing` (2 calls)
+- `/api/admin/publishing/calendar` (2 calls)
+- `/api/admin/publishing/draft-packs` (4 calls)
+- `/api/admin/publishing/draft-packs/:param` (1 call)
+- `/api/admin/publishing/drafts` (2 calls)
+- `/api/admin/publishing/featured` (6 calls)
+- `/api/admin/publishing/mark-posted/:param` (1 call)
+- `/api/admin/publishing/recommendations` (2 calls)
+- `/api/admin/publishing/registry` (4 calls)
+- `/api/admin/publishing/signals/summary` (2 calls)
+- `/api/admin/security` (2 calls)
+- `/api/admin/security/overview` (4 calls)
+- `/api/admin/security/rate-limits` (4 calls)
+- `/api/admin/social` (2 calls)
+- `/api/admin/social/analytics` (4 calls)
+- `/api/admin/social/calendar` (7 calls)
+- `/api/admin/social/compliance/check` (1 call)
+- `/api/admin/social/compliance/rewrite` (1 call)
+- `/api/admin/social/drafts` (19 calls)
+- `/api/admin/social/drafts/bulk/approve` (1 call)
+- `/api/admin/social/drafts/bulk/delete` (1 call)
+- `/api/admin/social/enhance` (1 call)
+- `/api/admin/social/enterprise` (4 calls)
+- `/api/admin/social/generate` (1 call)
+- `/api/admin/social/generate/image` (1 call)
+- `/api/admin/social/platforms/specs` (2 calls)
+- `/api/admin/social/publish/batch` (1 call)
+- `/api/admin/social/templates` (9 calls)
+- `/api/admin/social/templates/seed` (1 call)
+- `/api/admin/soft-launch-metrics` (2 calls)
+- `/api/admin/stats` (2 calls)
+- `/api/admin/verify-session` (2 calls)
+- `/api/admin/verify-token` (2 calls)
+- `/api/ai` (2 calls)
+- `/api/ai-dashboard` (2 calls)
+- `/api/ai/analyze-journal` (2 calls)
+- `/api/ai/chat` (8 calls)
+- `/api/ai/history` (9 calls)
+- `/api/ai/reflect` (1 call)
+- `/api/ai/weekly-reflection` (1 call)
+- `/api/analytics` (6 calls)
+- `/api/analytics-events` (2 calls)
+- `/api/analytics/admin/summary` (2 calls)
+- `/api/analytics/event` (2 calls)
+- `/api/auth/github` (2 calls)
+- `/api/auth/login` (1 call)
+- `/api/auth/refresh` (4 calls)
+- `/api/auth/register` (1 call)
+- `/api/auth/user` (16 calls)
+- `/api/badges` (8 calls)
+- `/api/billing` (4 calls)
+- `/api/billing/checkout` (7 calls)
+- `/api/billing/invoices` (4 calls)
+- `/api/billing/portal` (5 calls)
+- `/api/billing/pricing-view` (2 calls)
+- `/api/billing/subscription-status` (6 calls)
+- `/api/blog` (20 calls)
+- `/api/blog/:param` (1 call)
+- `/api/blog/admin` (2 calls)
+- `/api/blog/admin/create` (1 call)
+- `/api/blog/admin/stats` (8 calls)
+- `/api/blog/admin/test-send` (1 call)
+- `/api/blog/posts` (2 calls)
+- `/api/canva-oauth` (6 calls)
+- `/api/chat` (1 call)
+- `/api/cognitive-enhancement` (2 calls)
+- `/api/cognitive-lab` (1 call)
+- `/api/cognitive-lab/daily` (1 call)
+- `/api/cognitive-mastery` (2 calls)
+- `/api/cognitive-mastery/frameworks` (2 calls)
+- `/api/collective-intelligence` (2 calls)
+- `/api/community` (2 calls)
+- `/api/community/affirmations` (11 calls)
+- `/api/community/completion-stats` (4 calls)
+- `/api/community/question` (4 calls)
+- `/api/community/reflect` (2 calls)
+- `/api/community/reflections` (17 calls)
+- `/api/community/reflections:param` (1 call)
+- `/api/consciousness` (2 calls)
+- `/api/contact` (3 calls)
+- `/api/contemplative` (2 calls)
+- `/api/content` (2 calls)
+- `/api/content-generator` (2 calls)
+- `/api/content-intelligence` (2 calls)
+- `/api/content-studio` (2 calls)
+- `/api/content/drafts` (3 calls)
+- `/api/content/formats` (2 calls)
+- `/api/content/generate` (1 call)
+- `/api/content/stats` (2 calls)
+- `/api/creativity` (1 call)
+- `/api/creativity/daily` (1 call)
+- `/api/dashboard` (20 calls)
+- `/api/deep-learning` (2 calls)
+- `/api/deployment-readiness` (2 calls)
+- `/api/dialectics` (1 call)
+- `/api/dialectics/daily` (1 call)
+- `/api/email` (4 calls)
+- `/api/embodiment` (2 calls)
+- `/api/emotional-mastery` (1 call)
+- `/api/emotional-mastery/daily-eq` (1 call)
+- `/api/emotional-resilience` (1 call)
+- `/api/emotional-resilience/daily` (1 call)
+- `/api/ethical-reasoning` (2 calls)
+- `/api/existential` (2 calls)
+- `/api/favorites` (14 calls)
+- `/api/feed` (3 calls)
+- `/api/feedback` (6 calls)
+- `/api/figma` (2 calls)
+- `/api/foresight` (2 calls)
+- `/api/gamification` (2 calls)
+- `/api/gamification/complete-quest` (1 call)
+- `/api/gamification/progress` (9 calls)
+- `/api/gamification/quests` (1 call)
+- `/api/gamification/record-session` (4 calls)
+- `/api/gratitude` (15 calls)
+- `/api/gratitude/today` (1 call)
+- `/api/gratitude/weekly-summary` (5 calls)
+- `/api/healing` (1 call)
+- `/api/healing-core` (2 calls)
+- `/api/healing-intelligence` (1 call)
+- `/api/healing-intelligence/categories` (1 call)
+- `/api/healing-intelligence/modalities` (2 calls)
+- `/api/healing-modalities` (2 calls)
+- `/api/healing/all` (1 call)
+- `/api/health` (35 calls)
+- `/api/health/git-status` (6 calls)
+- `/api/health/platform-integrity` (6 calls)
+- `/api/health/repair` (66 calls)
+- `/api/holistic-healing` (2 calls)
+- `/api/human-potential` (2 calls)
+- `/api/insights` (2 calls)
+- `/api/insights/daily` (4 calls)
+- `/api/insights/mood` (2 calls)
+- `/api/integrations` (3 calls)
+- `/api/invites` (5 calls)
+- `/api/journal` (26 calls)
+- `/api/journals` (4 calls)
+- `/api/knowledge` (1 call)
+- `/api/knowledge/all` (1 call)
+- `/api/leads` (6 calls)
+- `/api/life-design` (2 calls)
+- `/api/life-purpose` (2 calls)
+- `/api/login` (4 calls)
+- `/api/logout` (5 calls)
+- `/api/mastery-excellence` (2 calls)
+- `/api/meaning` (2 calls)
+- `/api/meaning-core` (2 calls)
+- `/api/metacognition` (1 call)
+- `/api/metacognition/daily` (1 call)
+- `/api/metrics` (2 calls)
+- `/api/metrics/summary` (2 calls)
+- `/api/mfa` (2 calls)
+- `/api/mind-body` (1 call)
+- `/api/mind-body/daily` (1 call)
+- `/api/mirror` (5 calls)
+- `/api/mirror/frameworks` (1 call)
+- `/api/mood` (35 calls)
+- `/api/mood/stats` (2 calls)
+- `/api/moods` (10 calls)
+- `/api/narrative` (2 calls)
+- `/api/narrative-drafts` (10 calls)
+- `/api/narrative-drafts/:param` (2 calls)
+- `/api/neuro-integration` (2 calls)
+- `/api/newsletter` (2 calls)
+- `/api/newsletter/subscribe` (2 calls)
+- `/api/onboarding` (2 calls)
+- `/api/onboarding/complete` (1 call)
+- `/api/onboarding/status` (2 calls)
+- `/api/pathways/progress` (2 calls)
+- `/api/peak-performance` (2 calls)
+- `/api/perplexity` (5 calls)
+- `/api/personal-growth` (2 calls)
+- `/api/philosophy` (1 call)
+- `/api/philosophy/daily` (1 call)
+- `/api/post-trauma` (1 call)
+- `/api/post-trauma/daily` (1 call)
+- `/api/practices` (1 call)
+- `/api/practices/daily` (1 call)
+- `/api/praxis` (2 calls)
+- `/api/pro-features` (2 calls)
+- `/api/products` (7 calls)
+- `/api/progress` (2 calls)
+- `/api/progress/achievements` (4 calls)
+- `/api/progress/stats` (4 calls)
+- `/api/prompts` (1 call)
+- `/api/prompts/daily` (1 call)
+- `/api/psychological-safety` (1 call)
+- `/api/psychological-safety/daily` (1 call)
+- `/api/purpose-compass` (2 calls)
+- `/api/reflection` (3 calls)
+- `/api/reflection/entries` (6 calls)
+- `/api/reflection/prompt` (1 call)
+- `/api/relational` (2 calls)
+- `/api/relationship-dynamics` (2 calls)
+- `/api/resilience` (1 call)
+- `/api/resilience/daily` (1 call)
+- `/api/self-mastery` (2 calls)
+- `/api/self-mastery-intelligence` (2 calls)
+- `/api/session/extend` (2 calls)
+- `/api/social-intelligence` (2 calls)
+- `/api/social-posting` (2 calls)
+- `/api/social-posting/platforms/status` (2 calls)
+- `/api/social-posts` (2 calls)
+- `/api/social/posts` (7 calls)
+- `/api/socio-ecology` (2 calls)
+- `/api/spiritual-intelligence` (2 calls)
+- `/api/states` (8 calls)
+- `/api/subscribe` (2 calls)
+- `/api/systems-compassion` (2 calls)
+- `/api/therapy` (1 call)
+- `/api/therapy/crisis-resources` (1 call)
+- `/api/transformation` (2 calls)
+- `/api/trauma-healing` (2 calls)
+- `/api/universal-content` (2 calls)
+- `/api/uploads` (3 calls)
+- `/api/uploads/request-url` (6 calls)
+- `/api/user` (2 calls)
+- `/api/user-settings` (18 calls)
+- `/api/user/activity` (2 calls)
+- `/api/user/profile` (1 call)
+- `/api/user/reflection` (1 call)
+- `/api/user/reflection/today` (4 calls)
+- `/api/user/reflections` (4 calls)
+- `/api/user/settings` (16 calls)
+- `/api/user/stats` (6 calls)
+- `/api/user/tasks` (4 calls)
+- `/api/values` (2 calls)
+- `/api/webhook` (2 calls)
+- `/api/wellness-tools` (2 calls)
+- `/api/wellness-tools/all` (1 call)
+- `/api/wellness-tools/boundaries` (7 calls)
+- `/api/wellness-tools/challenge-progress` (4 calls)
+- `/api/wellness-tools/coherence` (5 calls)
+- `/api/wellness-tools/grief-letter` (1 call)
+- `/api/wellness-tools/meaning-map` (1 call)
+- `/api/wellness-tools/meaning-map/latest` (2 calls)
+- `/api/wellness-tools/movement` (5 calls)
+- `/api/wellness-tools/values` (5 calls)
+- `/api/wellness-tools/weekly-reflection` (1 call)
+- `/api/wisdom` (3 calls)
+- `/api/wisdom-engine` (1 call)
+- `/api/wisdom-engine/daily` (3 calls)
+- `/api/wisdom-engine/patterns` (2 calls)
+- `/api/wisdom-synthesis` (2 calls)
+- `/api/wisdom-traditions` (2 calls)
+- `DELETE` (9 calls)
+- `GET` (6 calls)
+- `PATCH` (7 calls)
+- `POST` (77 calls)
+- `PUT` (3 calls)

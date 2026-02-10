@@ -1,0 +1,96 @@
+THE GENUINE LOVE PROJECT — ENTERPRISE COMPLETION + HARDENING v3.0
+No refactors. No renames. No deletes. Fix in place. Add only what is missing.
+No background daemons. No cron. No auto-posting to social platforms.
+
+OBJECTIVE:
+Bring www.TheGenuineLoveProject.com to enterprise-grade completeness:
+- Fix GitHub + Replit shell errors (signing, lockfiles, audit stability)
+- Fix page crashes, missing pages, broken links/buttons
+- Ensure routing/mounting is single-source-of-truth (no double mounts)
+- Upgrade Social Admin dashboard to enterprise operations level (manual-first)
+- Ensure blog/newsletter/publishing are fully functional end-to-end
+- Add human-triggered “Evolve” scripts that produce PASS/FAIL reports
+
+PHASE 0 — TRUTH REPORT (NO CHANGES YET)
+1) Print the real entrypoint used by .replit (show .replit contents).
+2) Identify canonical router file(s) on frontend and backend (exact paths).
+3) Identify publishing system sources:
+   - blog posts source (DB? markdown? json?)
+   - newsletter signup provider and route
+4) Identify social admin routes/pages and data storage.
+5) Identify which package manager is intended (npm vs pnpm vs yarn).
+OUTPUT:
+- FOUND (paths)
+- MISSING (what’s required but absent)
+- DUPLICATE RISKS (double mounts, multiple routers, multiple entrypoints)
+Stop after printing the report.
+
+PHASE 1 — ROUTING + BUTTON INTEGRITY (STOP USER PAIN FIRST)
+Implement a human-triggered audit script: scripts/audit-links.mjs
+It must:
+- scan client/src/** for href/to
+- flag empty href, "#", missing routes
+- verify each route exists in the router OR is handled by redirects
+- output docs/LINK_AUDIT_REPORT.md with file:line references
+Do NOT auto-fix blindly. Provide Top 30 fixes ranked by impact.
+
+PHASE 2 — API WIRING INTEGRITY
+Add scripts/audit-api-usage.mjs
+It must:
+- scan client for /api/* calls
+- verify backend routes exist and are mounted once
+- output docs/API_WIRING_REPORT.md with file:line references
+
+PHASE 3 — PUBLISHING HARDENING (BLOG + NEWSLETTER)
+Must be true end-to-end:
+- /blog loads list
+- /blog/:slug loads post
+- /newsletter shows signup and it works
+- publishing audit already exists: keep it, ensure it runs in CI/local
+If content source missing, add minimal seed content (3 posts) using the existing content system.
+
+PHASE 4 — ENTERPRISE SOCIAL ADMIN (MANUAL-FIRST, HUMAN-IN-THE-LOOP)
+Upgrade /admin/social to enterprise ops:
+Required features:
+- Role-protected admin access
+- Pipeline: Draft → Review → Approved → Posted
+- Weekly queue (7-day plan)
+- Per-platform tabs + Copy buttons
+- Campaign tagging
+- UTM builder + tracking links
+- Redirect tracking: GET /r/:slug increments clicks then 302 redirect
+- “Repurpose from Blog” helper to generate drafts (DRAFT ONLY)
+Safety gates:
+- Block medical/therapy claims
+- Block urgency/shame/dependency framing
+- Require safety_note
+No social API keys. No auto-posting.
+
+PHASE 5 — LOCKFILES + SECURITY STABILITY
+Decide and enforce ONE package manager by repository reality.
+If npm:
+- ensure package-lock.json exists and is committed
+- run npm audit (no-force first)
+- apply overrides if needed
+If pnpm:
+- ensure pnpm-lock.yaml exists and is committed
+- run pnpm audit
+Output docs/SECURITY_STATUS.md.
+
+PHASE 6 — HUMAN-TRIGGERED EVOLUTION (SAFE “AUTO-REFINEMENT”)
+Create scripts/evolve.mjs that runs:
+1) node scripts/audit-links.mjs
+2) node scripts/audit-api-usage.mjs
+3) publishing audit (existing)
+4) build (optional flag)
+Output docs/EVOLUTION_REPORT.md with PASS/FAIL gates.
+
+PHASE 7 — VERIFICATION (MUST PROVE)
+Must confirm:
+[ ] build passes
+[ ] /blog works
+[ ] /newsletter signup works
+[ ] /admin/social loads and workflow functions
+[ ] /r/:slug redirects and tracks clicks
+[ ] audit scripts generate reports
+Stop on any FAIL and print exact fixes with paths.
