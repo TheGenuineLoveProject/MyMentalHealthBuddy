@@ -14,10 +14,54 @@ import {
   ShieldCheck, ClipboardList, BarChart3, Activity, PackageCheck,
   DollarSign, Webhook, Contact, Key, Handshake, Upload, UserCog,
   ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox,
-  Clock, Download, Timer, Filter, RotateCcw
+  Clock, Download, Timer, Filter, RotateCcw,
+  Wrench, ExternalLink, Stethoscope, Terminal, FileWarning, Cpu,
+  Clipboard, ScanLine, HardDrive, GitBranch
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+
+const TOOL_ADMIN_LINKS = {
+  "admin-core": "/admin", "admin-security": "/admin/security", "admin-audit": "/admin/audit-log",
+  "admin-billing": "/admin/billing", "admin-publishing": "/admin/publishing",
+  "admin-social": "/admin/social-studio", "admin-enterprise": "/admin/social/ops",
+  "analytics": "/admin/analytics", "soft-launch": "/admin/health",
+  "health-api": "/admin/health", "deployment": "/admin/tools",
+  "integrations": "/admin/tools", "newsletter-api": "/admin/newsletter",
+  "blog-api": "/admin/publishing", "feedback": "/admin/feedback",
+  "leads": "/admin/revenue", "billing": "/admin/billing",
+  "email": "/admin/newsletter", "ai-chat": "/chat",
+  "content-studio": "/admin/content-studio", "social-posts": "/admin/social-studio",
+  "narrative-drafts": "/admin/narrative",
+};
+
+const TOOL_SEVERITY = {
+  "health-api": "critical", "ai-chat": "critical", "auth-core": "critical",
+  "billing": "critical", "email": "critical", "perplexity": "critical",
+  "canva-oauth": "critical", "webhook": "critical",
+  "admin-core": "high", "admin-security": "high", "analytics": "high",
+  "blog-api": "high", "newsletter-api": "high", "login": "high",
+  "user-mgmt": "high", "mfa-auth": "high",
+};
+
+const AI_REMEDIATION = {
+  "timeout": { suggestion: "Server may be under heavy load or endpoint is slow. Check server resources and consider adding response caching.", action: "Check server CPU/memory usage" },
+  "unreachable": { suggestion: "Network connectivity issue or server is down. Verify the server process is running and the route is properly mounted.", action: "Restart application server" },
+  "server-error": { suggestion: "Internal server error (500). Check server logs for stack traces and recent code changes that may have introduced bugs.", action: "Review server error logs" },
+  "rate-limited": { suggestion: "Rate limit exceeded (429). This is normal for high-traffic endpoints. Consider increasing rate limits or implementing request queuing.", action: "Adjust rate limits in config" },
+  "auth-gated": { suggestion: "Endpoint requires authentication (401). This is expected behavior for user-facing APIs.", action: "No action needed - working as designed" },
+  "admin-only": { suggestion: "Admin authorization required (403). Ensure admin token is configured in environment.", action: "Verify ADMIN_TOKEN secret" },
+  "post-only": { suggestion: "Endpoint only accepts POST/PUT requests (405). Health check passed - endpoint is reachable.", action: "No action needed - POST-only endpoint" },
+  "404": { suggestion: "Endpoint not found. Route may not be mounted or the path may be incorrect.", action: "Check server/app.mjs for route mount" },
+  "ok": { suggestion: "Endpoint is responding normally. No issues detected.", action: "No action needed" },
+};
+
+function getRemediation(label) {
+  if (AI_REMEDIATION[label]) return AI_REMEDIATION[label];
+  if (/^4\d\d$/.test(label)) return AI_REMEDIATION["404"];
+  if (/^5\d\d$/.test(label)) return AI_REMEDIATION["server-error"];
+  return AI_REMEDIATION["server-error"];
+}
 
 const toolCategories = [
   {
@@ -280,6 +324,184 @@ function QuickDiagnostics({ toolResults, runHealthCheck, runningTools }) {
   );
 }
 
+function AIDiagnosticsPanel({ toolResults, runHealthCheck }) {
+  const [expanded, setExpanded] = useState(false);
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const issues = allTools.filter(t => {
+    const r = toolResults[t.id];
+    return r && (r.status === 'error' || r.status === 'warning');
+  }).map(t => ({ ...t, result: toolResults[t.id], severity: TOOL_SEVERITY[t.id] || 'normal' }));
+
+  const criticalIssues = issues.filter(i => i.severity === 'critical');
+  const highIssues = issues.filter(i => i.severity === 'high');
+  const normalIssues = issues.filter(i => i.severity !== 'critical' && i.severity !== 'high');
+
+  if (issues.length === 0 && Object.keys(toolResults).length > 0) {
+    return (
+      <div className="mb-6 p-4 rounded-xl border border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20" data-testid="panel-ai-diagnostics-clear">
+        <div className="flex items-center gap-2">
+          <Stethoscope size={16} className="text-green-600" />
+          <span className="text-sm font-semibold text-green-700 dark:text-green-400">AI Diagnostics: All Systems Healthy</span>
+          <CheckCircle size={14} className="text-green-600" />
+        </div>
+        <p className="text-xs text-green-600 dark:text-green-500 mt-1">Codex Knowledge Base confirms all monitored tools are operational. No remediation required.</p>
+      </div>
+    );
+  }
+
+  if (issues.length === 0) return null;
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20" data-testid="panel-ai-diagnostics">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Stethoscope size={16} className="text-amber-600" />
+          <span className="text-sm font-semibold">AI Diagnostics & Remediation</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 font-medium">{issues.length} issues</span>
+        </div>
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="text-xs px-3 py-1.5 rounded-lg border border-amber-300 dark:border-amber-700 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
+          data-testid="button-toggle-diagnostics"
+        >
+          {expanded ? 'Collapse' : 'Expand'} Details
+        </button>
+      </div>
+
+      {criticalIssues.length > 0 && (
+        <div className="mb-2 flex items-center gap-2 text-xs">
+          <span className="px-1.5 py-0.5 rounded bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 font-semibold">CRITICAL: {criticalIssues.length}</span>
+          <span className="text-muted-foreground">{criticalIssues.map(i => i.label).join(', ')}</span>
+        </div>
+      )}
+      {highIssues.length > 0 && (
+        <div className="mb-2 flex items-center gap-2 text-xs">
+          <span className="px-1.5 py-0.5 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 font-semibold">HIGH: {highIssues.length}</span>
+          <span className="text-muted-foreground">{highIssues.map(i => i.label).join(', ')}</span>
+        </div>
+      )}
+      {normalIssues.length > 0 && (
+        <div className="mb-2 flex items-center gap-2 text-xs">
+          <span className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium">NORMAL: {normalIssues.length}</span>
+          <span className="text-muted-foreground">{normalIssues.map(i => i.label).join(', ')}</span>
+        </div>
+      )}
+
+      {expanded && (
+        <div className="mt-3 space-y-2">
+          {[...criticalIssues, ...highIssues, ...normalIssues].map(issue => {
+            const remediation = getRemediation(issue.result.label);
+            const sevColor = issue.severity === 'critical' ? 'border-red-300 dark:border-red-700' : issue.severity === 'high' ? 'border-orange-300 dark:border-orange-700' : 'border-gray-200 dark:border-gray-700';
+            return (
+              <div key={issue.id} className={`p-3 rounded-lg border ${sevColor} bg-background`} data-testid={`diagnostics-${issue.id}`}>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-2">
+                    <issue.icon size={14} className={issue.result.status === 'error' ? 'text-red-500' : 'text-amber-500'} />
+                    <span className="text-sm font-medium">{issue.label}</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                      {issue.result.label} · {issue.result.ms}ms
+                    </span>
+                    {issue.severity !== 'normal' && (
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+                        {issue.severity.toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => runHealthCheck(issue)}
+                    className="text-xs px-2 py-1 rounded border border-gray-200 dark:border-gray-700 hover:bg-muted transition-colors flex items-center gap-1"
+                    data-testid={`button-retry-${issue.id}`}
+                  >
+                    <RotateCcw size={10} /> Retry
+                  </button>
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  <div className="flex items-start gap-1.5 mb-1">
+                    <Brain size={11} className="mt-0.5 text-purple-500 flex-shrink-0" />
+                    <span>{remediation?.suggestion}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Wrench size={11} className="text-blue-500 flex-shrink-0" />
+                    <span className="font-medium">{remediation?.action}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnly, lastFullCheck, runHealthCheck }) {
+  const [showRunbook, setShowRunbook] = useState(false);
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const totalTools = allTools.length;
+  const checkedCount = Object.keys(toolResults).length;
+  const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
+  const errorCount = Object.values(toolResults).filter(r => r.status === 'error').length;
+  const warningCount = Object.values(toolResults).filter(r => r.status === 'warning').length;
+
+  const opsSteps = [
+    { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap },
+    { id: 'full-scan', label: 'Full Platform Scan (123 tools)', done: checkedCount === totalTools, icon: ScanLine },
+    { id: 'review-errors', label: 'Review & Fix Errors', done: checkedCount === totalTools && errorCount === 0, icon: FileWarning },
+    { id: 'recheck', label: 'Re-check Fixed Issues', done: checkedCount === totalTools && errorCount === 0 && warningCount === 0, icon: RotateCcw },
+    { id: 'export', label: 'Export Health Report', done: false, icon: Download },
+  ];
+
+  const completedSteps = opsSteps.filter(s => s.done).length;
+  const progress = Math.round((completedSteps / opsSteps.length) * 100);
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50/30 dark:bg-blue-950/20" data-testid="panel-daily-ops-runbook">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Clipboard size={16} className="text-blue-600" />
+          <span className="text-sm font-semibold">Daily Operations Runbook</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 font-medium">{completedSteps}/{opsSteps.length} steps</span>
+        </div>
+        <button
+          onClick={() => setShowRunbook(!showRunbook)}
+          className="text-xs px-3 py-1.5 rounded-lg border border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+          data-testid="button-toggle-runbook"
+        >
+          {showRunbook ? 'Hide' : 'Show'} Runbook
+        </button>
+      </div>
+
+      <div className="h-1.5 rounded-full bg-blue-200 dark:bg-blue-800 overflow-hidden mb-2">
+        <div className="h-full rounded-full bg-blue-500 transition-all duration-300" style={{ width: `${progress}%` }} />
+      </div>
+
+      {showRunbook && (
+        <div className="mt-3 space-y-2">
+          {opsSteps.map((step, i) => {
+            const StepIcon = step.icon;
+            return (
+              <div key={step.id} className={`flex items-center gap-3 p-2.5 rounded-lg border ${step.done ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20' : 'border-gray-200 dark:border-gray-700 bg-background'}`} data-testid={`runbook-step-${step.id}`}>
+                <span className="text-xs font-bold text-muted-foreground w-5">{i + 1}.</span>
+                {step.done ? <CheckCircle size={14} className="text-green-600 flex-shrink-0" /> : <StepIcon size={14} className="text-muted-foreground flex-shrink-0" />}
+                <span className={`text-sm flex-1 ${step.done ? 'text-green-700 dark:text-green-400 line-through' : ''}`}>{step.label}</span>
+                {!step.done && step.id === 'quick-diag' && (
+                  <button onClick={() => Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)))} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-quick-diag">Run</button>
+                )}
+                {!step.done && step.id === 'full-scan' && (
+                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50" data-testid="button-runbook-full-scan">Run All</button>
+                )}
+                {!step.done && step.id === 'recheck' && checkedCount === totalTools && (
+                  <button onClick={runErrorsOnly} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-recheck">Re-check</button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 const STORAGE_KEY = 'glp_tools_last_check';
 const AUTO_REFRESH_INTERVALS = [
   { label: 'Off', value: 0 },
@@ -319,8 +541,12 @@ export default function AdminTools() {
   });
   const [searchFilter, setSearchFilter] = useState("");
   const [isRunningAll, setIsRunningAll] = useState(false);
-  const [autoRefreshInterval, setAutoRefreshInterval] = useState(0);
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [autoRefreshInterval, setAutoRefreshInterval] = useState(() => {
+    try { return Number(localStorage.getItem('glp_tools_auto_refresh')) || 0; } catch { return 0; }
+  });
+  const [statusFilter, setStatusFilter] = useState(() => {
+    try { return localStorage.getItem('glp_tools_status_filter') || 'all'; } catch { return 'all'; }
+  });
   const [showErrorsOnly, setShowErrorsOnly] = useState(false);
   const autoRefreshRef = useRef(null);
   const runAllRef = useRef(null);
@@ -403,6 +629,7 @@ export default function AdminTools() {
   }, []);
 
   useEffect(() => {
+    try { localStorage.setItem('glp_tools_auto_refresh', String(autoRefreshInterval)); } catch {}
     if (autoRefreshRef.current) {
       clearInterval(autoRefreshRef.current);
       autoRefreshRef.current = null;
@@ -416,6 +643,10 @@ export default function AdminTools() {
       if (autoRefreshRef.current) clearInterval(autoRefreshRef.current);
     };
   }, [autoRefreshInterval, runAllChecks]);
+
+  useEffect(() => {
+    try { localStorage.setItem('glp_tools_status_filter', statusFilter); } catch {}
+  }, [statusFilter]);
 
   const clearResults = () => {
     setToolResults({});
@@ -529,6 +760,10 @@ export default function AdminTools() {
         </header>
 
         <QuickDiagnostics toolResults={toolResults} runHealthCheck={runHealthCheck} runningTools={runningTools} />
+
+        <DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} />
+
+        <AIDiagnosticsPanel toolResults={toolResults} runHealthCheck={runHealthCheck} />
 
         {checkedCount > 0 && (
           <div className="mb-4">
@@ -723,20 +958,33 @@ export default function AdminTools() {
                       const ToolIcon = tool.icon;
                       const result = toolResults[tool.id];
                       const isRunning = runningTools[tool.id];
+                      const adminLink = TOOL_ADMIN_LINKS[tool.id];
+                      const severity = TOOL_SEVERITY[tool.id];
+                      const sevBorder = severity === 'critical' && result?.status === 'error' ? 'border-red-300 dark:border-red-700' : severity === 'high' && result?.status === 'error' ? 'border-orange-300 dark:border-orange-700' : 'border-gray-100 dark:border-gray-800';
                       return (
                         <div 
                           key={tool.id} 
-                          className="flex items-center gap-3 p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-card hover:bg-muted/50 transition-colors"
+                          className={`flex items-center gap-3 p-3 rounded-lg border ${sevBorder} bg-card hover:bg-muted/50 transition-colors`}
                           data-testid={`tool-card-${tool.id}`}
                         >
-                          <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <ToolIcon size={16} className="text-primary" />
+                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${severity === 'critical' ? 'bg-red-100 dark:bg-red-900/20' : severity === 'high' ? 'bg-orange-100 dark:bg-orange-900/20' : 'bg-primary/10'}`}>
+                            <ToolIcon size={16} className={severity === 'critical' ? 'text-red-600' : severity === 'high' ? 'text-orange-600' : 'text-primary'} />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="text-sm font-medium truncate">{tool.label}</div>
-                            <div className="text-xs text-muted-foreground truncate">{tool.desc}</div>
+                            <div className="text-sm font-medium truncate flex items-center gap-1.5">
+                              {tool.label}
+                              {severity && (
+                                <span className={`text-[9px] px-1 py-0.5 rounded font-semibold ${severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+                                  {severity === 'critical' ? 'CRIT' : 'HIGH'}
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-xs text-muted-foreground truncate flex items-center gap-1">
+                              {tool.desc}
+                              {!adminLink && <span className="text-[9px] px-1 py-0 rounded bg-muted text-muted-foreground">API</span>}
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2 flex-shrink-0">
+                          <div className="flex items-center gap-1.5 flex-shrink-0">
                             {result && (
                               <span title={`HTTP ${result.code} - ${result.label || ''} - ${result.ms}ms - checked ${result.time}`} className="flex items-center gap-1">
                                 {result.status === 'healthy' ? (
@@ -751,6 +999,11 @@ export default function AdminTools() {
                                 </span>
                               </span>
                             )}
+                            {adminLink && (
+                              <Link href={adminLink} className="p-1 rounded hover:bg-muted transition-colors" title={`Open ${tool.label} admin page`} data-testid={`link-admin-${tool.id}`}>
+                                <ExternalLink size={12} className="text-muted-foreground" />
+                              </Link>
+                            )}
                             <button
                               onClick={() => runHealthCheck(tool)}
                               disabled={isRunning}
@@ -758,7 +1011,6 @@ export default function AdminTools() {
                               data-testid={`button-check-${tool.id}`}
                             >
                               {isRunning ? <RefreshCw size={10} className="animate-spin" /> : <CheckSquare size={10} />}
-                              Check
                             </button>
                           </div>
                         </div>
