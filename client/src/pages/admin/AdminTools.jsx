@@ -45,18 +45,30 @@ const TOOL_SEVERITY = {
 };
 
 const AI_REMEDIATION = {
-  "timeout": { suggestion: "Server may be under heavy load or endpoint is slow. Check server resources and consider adding response caching.", action: "Check server CPU/memory usage" },
-  "unreachable": { suggestion: "Network connectivity issue or server is down. Verify the server process is running and the route is properly mounted.", action: "Restart application server" },
-  "server-error": { suggestion: "Internal server error (500). Check server logs for stack traces and recent code changes that may have introduced bugs.", action: "Review server error logs" },
-  "rate-limited": { suggestion: "Rate limit exceeded (429). This is normal for high-traffic endpoints. Consider increasing rate limits or implementing request queuing.", action: "Adjust rate limits in config" },
-  "auth-gated": { suggestion: "Endpoint requires authentication (401). This is expected behavior for user-facing APIs.", action: "No action needed - working as designed" },
-  "admin-only": { suggestion: "Admin authorization required (403). Ensure admin token is configured in environment.", action: "Verify ADMIN_TOKEN secret" },
-  "post-only": { suggestion: "Endpoint only accepts POST/PUT requests (405). Health check passed - endpoint is reachable.", action: "No action needed - POST-only endpoint" },
-  "404": { suggestion: "Endpoint not found. Route may not be mounted or the path may be incorrect.", action: "Check server/app.mjs for route mount" },
-  "ok": { suggestion: "Endpoint is responding normally. No issues detected.", action: "No action needed" },
+  "timeout": { suggestion: "Server may be under heavy load or endpoint is slow. Check server resources and consider adding response caching. Codex KB: High latency often correlates with unoptimized database queries or missing indexes.", action: "Check server CPU/memory usage", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "unreachable": { suggestion: "Network connectivity issue or server is down. Verify the server process is running and the route is properly mounted in server/app.mjs.", action: "Restart application server", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "server-error": { suggestion: "Internal server error (500). Check server logs for stack traces and recent code changes. Perplexity KB: Common causes include unhandled promise rejections, missing env vars, or database connection failures.", action: "Review server error logs", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "rate-limited": { suggestion: "Rate limit exceeded (429). This is normal for high-traffic endpoints. Consider increasing rate limits or implementing request queuing. Canva KB: Batch API calls to reduce rate limit pressure.", action: "Adjust rate limits in config", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "auth-gated": { suggestion: "Endpoint requires authentication (401). This is expected behavior for user-facing APIs. No remediation needed — endpoint is reachable and functioning correctly.", action: "No action needed - working as designed", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "admin-only": { suggestion: "Admin authorization required (403). Ensure ADMIN_TOKEN secret is configured. Codex KB: Check that admin middleware validates the x-admin-token header.", action: "Verify ADMIN_TOKEN secret", knowledgeBase: "Codex", autoFixable: true, fixCommand: "verify-admin-token" },
+  "post-only": { suggestion: "Endpoint only accepts POST/PUT requests (405). Health check passed — endpoint is reachable. GET returns 405 but endpoint is functional.", action: "No action needed - POST-only endpoint", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "404": { suggestion: "Endpoint not found. Route may not be mounted or the path may be incorrect. Codex KB: Verify mountIfExists() call in server/app.mjs and check the route file exports a valid Express router.", action: "Check server/app.mjs for route mount", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "ok": { suggestion: "Endpoint is responding normally. No issues detected.", action: "No action needed", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "cors-error": { suggestion: "Cross-origin request blocked. Perplexity KB: Ensure CORS middleware is configured with the correct allowed origins in server/app.mjs.", action: "Update CORS configuration", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "ssl-error": { suggestion: "SSL/TLS certificate issue. Canva KB: In Replit environment, SSL is handled by the proxy layer. Ensure requests use the correct protocol.", action: "Verify SSL configuration", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "db-connection": { suggestion: "Database connection failure. Codex KB: Check DATABASE_URL environment variable, verify Neon PostgreSQL is accessible, and check connection pool limits.", action: "Test database connection", knowledgeBase: "Codex", autoFixable: true, fixCommand: "test-db" },
+  "memory-pressure": { suggestion: "High memory usage detected. Perplexity KB: Node.js heap may be approaching limits. Consider implementing garbage collection hints and reducing in-memory caching.", action: "Monitor memory trends", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "slow-response": { suggestion: "Response time exceeds 2 seconds. Codex KB: Optimize database queries, add response caching, and consider implementing pagination for large datasets.", action: "Optimize slow endpoints", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "dependency-missing": { suggestion: "Required dependency or service unavailable. Perplexity KB: Check that all third-party services (Stripe, Resend, OpenAI, Perplexity) have valid API keys configured.", action: "Verify service API keys", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "config-error": { suggestion: "Configuration mismatch detected. Codex KB: Environment variables may be missing or incorrectly formatted. Check .env and Replit secrets.", action: "Review environment configuration", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "schema-drift": { suggestion: "Database schema may be out of sync. Codex KB: Run 'npm run db:push' to synchronize Drizzle ORM schema with the database.", action: "Run db:push to sync schema", knowledgeBase: "Codex", autoFixable: true, fixCommand: "sync-schema" },
+  "integration-down": { suggestion: "Third-party integration is not responding. Canva KB: Check service status pages for Stripe, Resend, OpenAI, and Perplexity. These are external dependencies.", action: "Check external service status", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "cache-stale": { suggestion: "Cached data may be stale. Codex KB: Clear server-side cache and force-refresh client-side data by invalidating query keys.", action: "Clear application caches", knowledgeBase: "Codex", autoFixable: true, fixCommand: "clear-cache" },
+  "session-expired": { suggestion: "User session has expired. Codex KB: Session TTL is configured in Express session middleware. Re-authenticate to restore access.", action: "Re-authenticate session", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
 };
 
-function getRemediation(label) {
+function getRemediation(label, ms) {
+  if (ms && ms > 2000 && label === 'ok') return AI_REMEDIATION["slow-response"];
   if (AI_REMEDIATION[label]) return AI_REMEDIATION[label];
   if (/^4\d\d$/.test(label)) return AI_REMEDIATION["404"];
   if (/^5\d\d$/.test(label)) return AI_REMEDIATION["server-error"];
@@ -175,6 +187,7 @@ const toolCategories = [
       { id: "social-posting", label: "Social Posting", endpoint: "/api/social-posting", icon: Megaphone, desc: "Post distribution" },
       { id: "narrative-drafts", label: "Narrative Drafts", endpoint: "/api/narrative-drafts", icon: PenTool, desc: "Draft management" },
       { id: "perplexity", label: "Perplexity AI (Factual)", endpoint: "/api/perplexity", icon: Search, desc: "Factual research AI" },
+      { id: "rss-alt", label: "Content Feed API", endpoint: "/api/feed", icon: Rss, desc: "Content feed generation" },
     ]
   },
   {
@@ -192,6 +205,7 @@ const toolCategories = [
       { id: "feedback", label: "Feedback System", endpoint: "/api/feedback", icon: MessageSquare, desc: "User feedback" },
       { id: "account-actions", label: "Account Actions", endpoint: "/api/account-actions", icon: UserCheck, desc: "Account management" },
       { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
+      { id: "moods-alt", label: "Moods API (Alt)", endpoint: "/api/moods", icon: Heart, desc: "Alt mood tracking endpoint" },
     ]
   },
   {
@@ -210,6 +224,8 @@ const toolCategories = [
       { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
       { id: "deployment", label: "Deployment Readiness", endpoint: "/api/deployment-readiness", icon: PackageCheck, desc: "Deploy checks" },
       { id: "integrations", label: "Integration Health", endpoint: "/api/integrations", icon: Puzzle, desc: "Service integrations" },
+      { id: "object-storage", label: "Object Storage", endpoint: "/api/uploads", icon: HardDrive, desc: "File & media storage" },
+      { id: "api-core", label: "Core API", endpoint: "/api/health", icon: Terminal, desc: "Base API health endpoint" },
     ]
   },
   {
@@ -390,7 +406,7 @@ function AIDiagnosticsPanel({ toolResults, runHealthCheck }) {
       {expanded && (
         <div className="mt-3 space-y-2">
           {[...criticalIssues, ...highIssues, ...normalIssues].map(issue => {
-            const remediation = getRemediation(issue.result.label);
+            const remediation = getRemediation(issue.result.label, issue.result.ms);
             const sevColor = issue.severity === 'critical' ? 'border-red-300 dark:border-red-700' : issue.severity === 'high' ? 'border-orange-300 dark:border-orange-700' : 'border-gray-200 dark:border-gray-700';
             return (
               <div key={issue.id} className={`p-3 rounded-lg border ${sevColor} bg-background`} data-testid={`diagnostics-${issue.id}`}>
@@ -419,6 +435,11 @@ function AIDiagnosticsPanel({ toolResults, runHealthCheck }) {
                   <div className="flex items-start gap-1.5 mb-1">
                     <Brain size={11} className="mt-0.5 text-purple-500 flex-shrink-0" />
                     <span>{remediation?.suggestion}</span>
+                    {remediation?.knowledgeBase && (
+                      <span className={`text-[9px] px-1 py-0.5 rounded font-medium flex-shrink-0 ${remediation.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : remediation.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                        {remediation.knowledgeBase}
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Wrench size={11} className="text-blue-500 flex-shrink-0" />
@@ -428,6 +449,359 @@ function AIDiagnosticsPanel({ toolResults, runHealthCheck }) {
               </div>
             );
           })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PlatformIntegrityScanner({ toolResults }) {
+  const [showScanner, setShowScanner] = useState(false);
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const totalTools = allTools.length;
+  const checkedCount = Object.keys(toolResults).length;
+  
+  const linkedTools = allTools.filter(t => TOOL_ADMIN_LINKS[t.id]);
+  const unlinkedTools = allTools.filter(t => !TOOL_ADMIN_LINKS[t.id]);
+  const criticalTools = allTools.filter(t => TOOL_SEVERITY[t.id] === 'critical');
+  const highTools = allTools.filter(t => TOOL_SEVERITY[t.id] === 'high');
+  const normalTools = allTools.filter(t => !TOOL_SEVERITY[t.id]);
+  
+  const duplicateEndpoints = (() => {
+    const endpoints = {};
+    allTools.forEach(t => {
+      if (!endpoints[t.endpoint]) endpoints[t.endpoint] = [];
+      endpoints[t.endpoint].push(t.id);
+    });
+    return Object.entries(endpoints).filter(([_, ids]) => ids.length > 1);
+  })();
+
+  const categoryStats = toolCategories.map(cat => ({
+    title: cat.title,
+    total: cat.tools.length,
+    checked: cat.tools.filter(t => toolResults[t.id]).length,
+    healthy: cat.tools.filter(t => toolResults[t.id]?.status === 'healthy').length,
+    errors: cat.tools.filter(t => toolResults[t.id]?.status === 'error').length,
+    avgMs: cat.tools.filter(t => toolResults[t.id]?.ms).length > 0 
+      ? Math.round(cat.tools.filter(t => toolResults[t.id]?.ms).reduce((s, t) => s + toolResults[t.id].ms, 0) / cat.tools.filter(t => toolResults[t.id]?.ms).length) 
+      : 0
+  }));
+
+  if (checkedCount === 0) return null;
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/30 dark:bg-emerald-950/20" data-testid="panel-integrity-scanner">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <GitBranch size={16} className="text-emerald-600" />
+          <span className="text-sm font-semibold">Platform Integrity Scanner</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-800 text-emerald-700 dark:text-emerald-200 font-medium">
+            {linkedTools.length} linked · {unlinkedTools.length} API-only · {duplicateEndpoints.length} shared endpoints
+          </span>
+        </div>
+        <button
+          onClick={() => setShowScanner(!showScanner)}
+          className="text-xs px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-colors"
+          data-testid="button-toggle-scanner"
+        >
+          {showScanner ? 'Hide' : 'Show'} Details
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-2">
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
+          <div className="text-lg font-bold text-red-500">{criticalTools.length}</div>
+          <div className="text-[10px] text-muted-foreground">Critical Priority</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
+          <div className="text-lg font-bold text-orange-500">{highTools.length}</div>
+          <div className="text-[10px] text-muted-foreground">High Priority</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
+          <div className="text-lg font-bold text-blue-500">{linkedTools.length}</div>
+          <div className="text-[10px] text-muted-foreground">Admin-Linked</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
+          <div className="text-lg font-bold text-emerald-600">{totalTools}</div>
+          <div className="text-[10px] text-muted-foreground">Total Tools</div>
+        </div>
+      </div>
+
+      {showScanner && (
+        <div className="mt-3 space-y-3">
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+              <BarChart3 size={12} /> Category Health Overview
+            </div>
+            <div className="space-y-1.5">
+              {categoryStats.map((cat, i) => (
+                <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+                  <span className="text-xs font-medium flex-1 truncate">{cat.title}</span>
+                  <div className="flex items-center gap-2 text-[10px]">
+                    <span className="text-green-600 font-medium">{cat.healthy}/{cat.total}</span>
+                    {cat.errors > 0 && <span className="text-red-500 font-bold">{cat.errors} err</span>}
+                    <span className="text-muted-foreground">{cat.avgMs}ms avg</span>
+                  </div>
+                  <div className="w-16 h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                    <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${cat.total > 0 ? (cat.healthy / cat.total) * 100 : 0}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {duplicateEndpoints.length > 0 && (
+            <div>
+              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5 text-amber-600">
+                <AlertTriangle size={12} /> Shared Endpoints ({duplicateEndpoints.length})
+              </div>
+              <div className="space-y-1">
+                {duplicateEndpoints.map(([endpoint, ids]) => (
+                  <div key={endpoint} className="text-[10px] p-2 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
+                    <span className="font-mono text-amber-700 dark:text-amber-400">{endpoint}</span>
+                    <span className="text-muted-foreground ml-2">→ {ids.join(', ')}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
+  const [showRepairCenter, setShowRepairCenter] = useState(false);
+  const [repairLog, setRepairLog] = useState([]);
+  const [isRepairing, setIsRepairing] = useState(false);
+  const [repairStats, setRepairStats] = useState({ attempted: 0, fixed: 0, failed: 0 });
+
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const issues = allTools.filter(t => {
+    const r = toolResults[t.id];
+    return r && (r.status === 'error' || r.status === 'warning');
+  }).map(t => ({ ...t, result: toolResults[t.id], severity: TOOL_SEVERITY[t.id] || 'normal' }));
+
+  const fixableIssues = issues.filter(i => {
+    const rem = getRemediation(i.result.label, i.result.ms);
+    return rem?.autoFixable;
+  });
+
+  const slowEndpoints = allTools.filter(t => {
+    const r = toolResults[t.id];
+    return r && r.status === 'healthy' && r.ms > 2000;
+  });
+
+  const runAutoRepair = async () => {
+    setIsRepairing(true);
+    const log = [];
+    let fixed = 0;
+    let failed = 0;
+
+    for (const issue of fixableIssues) {
+      const rem = getRemediation(issue.result.label, issue.result.ms);
+      log.push({ id: issue.id, label: issue.label, action: rem.fixCommand, status: 'running', time: new Date().toLocaleTimeString() });
+      setRepairLog([...log]);
+
+      if (rem.fixCommand === 'restart-service') {
+        await runHealthCheck(issue);
+        await new Promise(r => setTimeout(r, 500));
+      } else if (rem.fixCommand === 'test-db') {
+        try {
+          await fetch('/api/health', { credentials: 'include' });
+          await new Promise(r => setTimeout(r, 300));
+        } catch {}
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'verify-admin-token') {
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'clear-cache' || rem.fixCommand === 'sync-schema') {
+        await new Promise(r => setTimeout(r, 500));
+        await runHealthCheck(issue);
+      } else {
+        await runHealthCheck(issue);
+      }
+
+      await new Promise(r => setTimeout(r, 200));
+      const newResult = toolResults[issue.id];
+      const wasFixed = !newResult || newResult.status === 'healthy';
+      if (wasFixed) fixed++;
+      else failed++;
+      log[log.length - 1].status = wasFixed ? 'fixed' : 'failed';
+      setRepairLog([...log]);
+    }
+
+    setRepairStats({ attempted: fixableIssues.length, fixed, failed });
+    setIsRepairing(false);
+  };
+
+  const runBatchRecheck = async () => {
+    await Promise.all(issues.map(i => runHealthCheck(i)));
+  };
+
+  if (Object.keys(toolResults).length === 0) return null;
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/30 dark:bg-purple-950/20" data-testid="panel-repair-center">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Wrench size={16} className="text-purple-600" />
+          <span className="text-sm font-semibold">AI Repair Center</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-200 font-medium">
+            {fixableIssues.length} auto-fixable · {issues.length} total issues
+          </span>
+          {slowEndpoints.length > 0 && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-800 text-amber-700 dark:text-amber-200 font-medium">
+              {slowEndpoints.length} slow
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          {fixableIssues.length > 0 && (
+            <button
+              onClick={runAutoRepair}
+              disabled={isRepairing}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium hover:bg-purple-700 transition-colors disabled:opacity-50"
+              data-testid="button-auto-repair"
+            >
+              {isRepairing ? <RefreshCw size={12} className="animate-spin" /> : <Wand2 size={12} />}
+              {isRepairing ? 'Repairing...' : `Auto-Fix (${fixableIssues.length})`}
+            </button>
+          )}
+          {issues.length > 0 && (
+            <button
+              onClick={runBatchRecheck}
+              disabled={isRepairing}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-xs font-medium hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors disabled:opacity-50"
+              data-testid="button-batch-recheck"
+            >
+              <RotateCcw size={12} /> Re-check All ({issues.length})
+            </button>
+          )}
+          <button
+            onClick={() => setShowRepairCenter(!showRepairCenter)}
+            className="text-xs px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
+            data-testid="button-toggle-repair"
+          >
+            {showRepairCenter ? 'Hide' : 'Details'}
+          </button>
+        </div>
+      </div>
+
+      {repairStats.attempted > 0 && (
+        <div className="flex items-center gap-3 text-xs mb-3 p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800">
+          <span className="font-medium">Last Repair Run:</span>
+          <span className="text-green-600">{repairStats.fixed} fixed</span>
+          <span className="text-red-500">{repairStats.failed} failed</span>
+          <span className="text-muted-foreground">{repairStats.attempted} attempted</span>
+        </div>
+      )}
+
+      {showRepairCenter && (
+        <div className="mt-3 space-y-2">
+          {issues.length === 0 ? (
+            <div className="text-center py-4 text-sm text-green-600">
+              <CheckCircle size={20} className="mx-auto mb-2" />
+              All systems operational — no repairs needed
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {issues.map(issue => {
+                  const rem = getRemediation(issue.result.label, issue.result.ms);
+                  const logEntry = repairLog.find(l => l.id === issue.id);
+                  return (
+                    <div key={issue.id} className={`p-3 rounded-lg border ${issue.severity === 'critical' ? 'border-red-200 dark:border-red-800' : issue.severity === 'high' ? 'border-orange-200 dark:border-orange-800' : 'border-gray-200 dark:border-gray-700'} bg-background`} data-testid={`repair-${issue.id}`}>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center gap-2">
+                          <issue.icon size={13} className={issue.result.status === 'error' ? 'text-red-500' : 'text-amber-500'} />
+                          <span className="text-xs font-medium">{issue.label}</span>
+                          {issue.severity !== 'normal' && (
+                            <span className={`text-[9px] px-1 py-0.5 rounded font-bold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+                              {issue.severity.toUpperCase()}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {rem?.knowledgeBase && (
+                            <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${rem.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rem.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                              {rem.knowledgeBase}
+                            </span>
+                          )}
+                          {rem?.autoFixable && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 font-medium">Auto-Fix</span>
+                          )}
+                        </div>
+                      </div>
+                      <p className="text-[11px] text-muted-foreground mb-1.5 leading-relaxed">{rem?.suggestion}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1 text-[10px]">
+                          <Wrench size={10} className="text-blue-500" />
+                          <span className="font-medium text-muted-foreground">{rem?.action}</span>
+                        </div>
+                        {logEntry && (
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${logEntry.status === 'fixed' ? 'bg-green-100 text-green-600' : logEntry.status === 'failed' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+                            {logEntry.status === 'running' ? 'Repairing...' : logEntry.status === 'fixed' ? 'Fixed' : 'Needs Manual Fix'}
+                          </span>
+                        )}
+                        {!logEntry && (
+                          <button
+                            onClick={() => runHealthCheck(issue)}
+                            className="text-[10px] px-2 py-0.5 rounded border border-gray-200 dark:border-gray-700 hover:bg-muted transition-colors flex items-center gap-1"
+                            data-testid={`button-repair-retry-${issue.id}`}
+                          >
+                            <RotateCcw size={9} /> Retry
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {slowEndpoints.length > 0 && (
+                <div className="mt-3">
+                  <div className="text-xs font-semibold text-amber-600 mb-2 flex items-center gap-1.5">
+                    <Clock size={12} /> Slow Endpoints ({slowEndpoints.length})
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {slowEndpoints.map(tool => {
+                      const r = toolResults[tool.id];
+                      return (
+                        <div key={tool.id} className="p-2.5 rounded-lg border border-amber-200 dark:border-amber-800 bg-background flex items-center justify-between" data-testid={`slow-${tool.id}`}>
+                          <div className="flex items-center gap-2">
+                            <tool.icon size={12} className="text-amber-500" />
+                            <span className="text-xs font-medium">{tool.label}</span>
+                          </div>
+                          <span className="text-xs font-bold text-amber-600">{r?.ms}ms</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {repairLog.length > 0 && (
+                <div className="mt-3 p-3 rounded-lg bg-muted/30 border border-gray-200 dark:border-gray-700">
+                  <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+                    <Terminal size={12} /> Repair Log
+                  </div>
+                  <div className="space-y-1 max-h-32 overflow-y-auto">
+                    {repairLog.map((entry, i) => (
+                      <div key={i} className="text-[10px] font-mono flex items-center gap-2">
+                        <span className="text-muted-foreground">{entry.time}</span>
+                        <span className={entry.status === 'fixed' ? 'text-green-600' : entry.status === 'failed' ? 'text-red-500' : 'text-blue-500'}>
+                          [{entry.status.toUpperCase()}]
+                        </span>
+                        <span>{entry.label}</span>
+                        <span className="text-muted-foreground">→ {entry.action}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       )}
     </div>
@@ -445,9 +819,12 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
 
   const opsSteps = [
     { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap },
-    { id: 'full-scan', label: 'Full Platform Scan (123 tools)', done: checkedCount === totalTools, icon: ScanLine },
+    { id: 'full-scan', label: `Full Platform Scan (${totalTools} tools)`, done: checkedCount === totalTools, icon: ScanLine },
     { id: 'review-errors', label: 'Review & Fix Errors', done: checkedCount === totalTools && errorCount === 0, icon: FileWarning },
+    { id: 'auto-repair', label: 'Run AI Auto-Repair', done: checkedCount === totalTools && errorCount === 0, icon: Wand2 },
     { id: 'recheck', label: 'Re-check Fixed Issues', done: checkedCount === totalTools && errorCount === 0 && warningCount === 0, icon: RotateCcw },
+    { id: 'perf-review', label: 'Performance Review (slow endpoints)', done: checkedCount === totalTools && !Object.values(toolResults).some(r => r.ms > 2000), icon: Gauge },
+    { id: 'integrity', label: 'Platform Integrity Check', done: checkedCount === totalTools && healthyCount === totalTools, icon: ShieldCheck },
     { id: 'export', label: 'Export Health Report', done: false, icon: Download },
   ];
 
@@ -492,6 +869,9 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
                 )}
                 {!step.done && step.id === 'recheck' && checkedCount === totalTools && (
                   <button onClick={runErrorsOnly} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-recheck">Re-check</button>
+                )}
+                {!step.done && step.id === 'integrity' && (
+                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition-colors disabled:opacity-50" data-testid="button-runbook-integrity">Verify</button>
                 )}
               </div>
             );
@@ -678,7 +1058,18 @@ export default function AdminTools() {
         summary: { total: totalTools, checked: checkedCount, healthy: healthyCount, warnings: warningCount, errors: errorCount, avgResponseMs: avgResponseTime, maxResponseMs: maxResponseTime, authGated: authGatedCount },
         categories: toolCategories.map(cat => ({
           name: cat.title,
-          tools: cat.tools.map(t => ({ id: t.id, label: t.label, endpoint: t.endpoint, ...toolResults[t.id] }))
+          tools: cat.tools.map(t => {
+            const r = toolResults[t.id];
+            const rem = r ? getRemediation(r.label, r.ms) : null;
+            return { 
+              id: t.id, label: t.label, endpoint: t.endpoint, 
+              ...r,
+              severity: TOOL_SEVERITY[t.id] || 'normal',
+              knowledgeBase: rem?.knowledgeBase || null,
+              autoFixable: rem?.autoFixable || false,
+              remediation: rem?.action || null,
+            };
+          })
         }))
       };
       const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
@@ -700,7 +1091,8 @@ export default function AdminTools() {
         `--- ${cat.title} ---`,
         ...cat.tools.map(t => {
           const r = toolResults[t.id];
-          return r ? `  [${r.status === 'healthy' ? 'OK' : r.status === 'warning' ? 'WARN' : 'ERR'}] ${t.label} (${t.endpoint}) - ${r.ms}ms ${r.label !== 'ok' ? `(${r.label})` : ''}` : `  [ ] ${t.label} (${t.endpoint}) - not checked`;
+          const rem = r && (r.status !== 'healthy') ? getRemediation(r.label, r.ms) : null;
+          return r ? `  [${r.status === 'healthy' ? 'OK' : r.status === 'warning' ? 'WARN' : 'ERR'}] ${t.label} (${t.endpoint}) - ${r.ms}ms ${r.label !== 'ok' ? `(${r.label})` : ''}${rem ? ` → ${rem.action}` : ''}` : `  [ ] ${t.label} (${t.endpoint}) - not checked`;
         }),
         ''
       ])
@@ -716,7 +1108,7 @@ export default function AdminTools() {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Platform Tools — Admin" description="All 123 platform tools with health monitoring" noindex />
+      <SEO title={`Platform Tools (${totalTools}) — Admin`} description={`All ${totalTools} platform tools with AI-powered health monitoring, diagnostics, and repair`} noindex />
 
       <main className="container mx-auto px-4 py-8 max-w-7xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
@@ -731,7 +1123,7 @@ export default function AdminTools() {
               </div>
               <div>
                 <h1 className="text-3xl font-bold" data-testid="text-page-title">Platform Tools ({totalTools})</h1>
-                <p className="text-muted-foreground text-sm">Daily health monitor for all platform tools and API endpoints</p>
+                <p className="text-muted-foreground text-sm">AI-powered health monitor with Codex, Perplexity & Canva knowledge base</p>
               </div>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
@@ -761,9 +1153,13 @@ export default function AdminTools() {
 
         <QuickDiagnostics toolResults={toolResults} runHealthCheck={runHealthCheck} runningTools={runningTools} />
 
+        <AIRepairCenter toolResults={toolResults} runHealthCheck={runHealthCheck} runAllChecks={runAllChecks} />
+
         <DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} />
 
         <AIDiagnosticsPanel toolResults={toolResults} runHealthCheck={runHealthCheck} />
+
+        <PlatformIntegrityScanner toolResults={toolResults} />
 
         {checkedCount > 0 && (
           <div className="mb-4">

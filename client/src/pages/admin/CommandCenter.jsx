@@ -1009,12 +1009,12 @@ function AIKnowledgeHub() {
     { label: 'Intelligence APIs', count: 14, href: '/admin/tools', icon: Brain, desc: 'Wisdom, cognitive, deep learning' },
     { label: 'Healing Protocols', count: 11, href: '/admin/tools', icon: Leaf, desc: 'Trauma, emotional, holistic' },
     { label: 'Mastery & Purpose', count: 13, href: '/admin/tools', icon: Target, desc: 'Self-mastery, performance, values' },
-    { label: 'Content Pipeline', count: 11, href: '/admin/tools', icon: FileText, desc: 'Studio, blog, newsletter, social' },
+    { label: 'Content Pipeline', count: 12, href: '/admin/tools', icon: FileText, desc: 'Studio, blog, newsletter, social, feeds' },
     { label: 'Relational & Social', count: 8, href: '/admin/tools', icon: HeartHandshake, desc: 'Relationships, community, empathy' },
     { label: 'Advanced Intelligence', count: 11, href: '/admin/tools', icon: Sparkles, desc: 'Consciousness, spiritual, ethical' },
-    { label: 'User & Engagement', count: 12, href: '/admin/tools', icon: Users, desc: 'Accounts, gamification, feedback' },
-    { label: 'Admin Systems', count: 13, href: '/admin/tools', icon: Shield, desc: 'Security, audit, analytics' },
-    { label: 'Infrastructure', count: 20, href: '/admin/tools', icon: Server, desc: 'Auth, billing, email, storage' },
+    { label: 'User & Engagement', count: 13, href: '/admin/tools', icon: Users, desc: 'Accounts, gamification, feedback' },
+    { label: 'Admin Systems', count: 15, href: '/admin/tools', icon: Shield, desc: 'Security, audit, analytics, storage' },
+    { label: 'Infrastructure', count: 20, href: '/admin/tools', icon: Server, desc: 'Auth, billing, email, webhooks' },
   ];
 
   const totalToolCount = knowledgeAreas.reduce((sum, a) => sum + a.count, 0);
@@ -1157,7 +1157,7 @@ function AdminNavGrid() {
         { label: "Feedback Aggregator", icon: MessageSquare, href: "/admin/feedback", desc: "User feedback & suggestions" },
         { label: "System Alerts", icon: AlertTriangle, href: "/admin/alerts", desc: "Alert configuration & resolution" },
         { label: "Admin Users", icon: UserCheck, href: "/admin/users", desc: "Admin user management" },
-        { label: "Platform Tools", icon: Zap, href: "/admin/tools", desc: "All 123 tools health monitor" },
+        { label: "Platform Tools", icon: Zap, href: "/admin/tools", desc: "All 127 tools + AI repair center" },
       ]
     },
   ];
