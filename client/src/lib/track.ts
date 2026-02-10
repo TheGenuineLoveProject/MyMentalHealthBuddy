@@ -1,12 +1,5 @@
 import { ANALYTICS_EVENTS, sanitizeParams, type EventName } from '@/content/analytics/eventSchema';
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-    dataLayer?: unknown[];
-  }
-}
-
 const IS_DEV = import.meta.env.DEV;
 const ANALYTICS_ENABLED = Boolean(import.meta.env.VITE_GA_MEASUREMENT_ID);
 
