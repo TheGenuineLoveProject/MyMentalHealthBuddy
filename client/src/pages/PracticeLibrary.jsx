@@ -196,10 +196,10 @@ export default function PracticeLibrary() {
 
         <section className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-10" data-testid="section-core-tools">
           {[
-            { title: "Mood Check-In", description: "Track how you feel", icon: Smile, href: "/mood", bgStyle: "#fffbeb", iconBg: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300" },
-            { title: "Journal", description: "Write and reflect", icon: Notebook, href: "/journal", bgStyle: "#ecfdf5", iconBg: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300" },
-            { title: "Reframe Tool", description: "Shift your perspective", icon: RefreshCw, href: "/tools/reframe", bgStyle: "#f5f3ff", iconBg: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-300" },
-            { title: "Topic Hubs", description: "Explore by topic", icon: Compass, href: "/hubs", bgStyle: "#f0f9ff", iconBg: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300" },
+            { title: "Mood Check-In", description: "Track how you feel", icon: Smile, href: "/mood", cardBg: "bg-amber-50 dark:bg-amber-950/40", iconBg: "bg-amber-200 dark:bg-amber-800 text-amber-700 dark:text-amber-200", borderColor: "border-amber-200 dark:border-amber-800" },
+            { title: "Journal", description: "Write and reflect", icon: Notebook, href: "/journal", cardBg: "bg-emerald-50 dark:bg-emerald-950/40", iconBg: "bg-emerald-200 dark:bg-emerald-800 text-emerald-700 dark:text-emerald-200", borderColor: "border-emerald-200 dark:border-emerald-800" },
+            { title: "Reframe Tool", description: "Shift your perspective", icon: RefreshCw, href: "/tools/reframe", cardBg: "bg-violet-50 dark:bg-violet-950/40", iconBg: "bg-violet-200 dark:bg-violet-800 text-violet-700 dark:text-violet-200", borderColor: "border-violet-200 dark:border-violet-800" },
+            { title: "Topic Hubs", description: "Explore by topic", icon: Compass, href: "/hubs", cardBg: "bg-sky-50 dark:bg-sky-950/40", iconBg: "bg-sky-200 dark:bg-sky-800 text-sky-700 dark:text-sky-200", borderColor: "border-sky-200 dark:border-sky-800" },
           ].map(tool => {
             const Icon = tool.icon;
             return (
@@ -208,16 +208,15 @@ export default function PracticeLibrary() {
                 role="link"
                 tabIndex={0}
                 onClick={() => navigate(tool.href)}
-                onKeyDown={(e) => e.key === 'Enter' && navigate(tool.href)}
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', padding: '20px 16px', borderRadius: '12px', cursor: 'pointer', backgroundColor: tool.bgStyle }}
-                className="group border border-border/60 hover:border-primary/40 hover:shadow-md transition-all"
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), navigate(tool.href))}
+                className={`group flex flex-col items-center gap-3 p-5 rounded-xl cursor-pointer border ${tool.cardBg} ${tool.borderColor} hover:shadow-lg hover:scale-[1.02] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
                 data-testid={`link-tool-${tool.title.toLowerCase().replace(/\s+/g, '-')}`}
               >
                 <div className={`p-3 rounded-xl ${tool.iconBg}`}>
                   <Icon className="w-6 h-6" />
                 </div>
                 <div className="text-center">
-                  <p className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">{tool.title}</p>
+                  <p className="font-bold text-sm text-foreground group-hover:text-primary transition-colors">{tool.title}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{tool.description}</p>
                 </div>
               </div>
@@ -225,25 +224,39 @@ export default function PracticeLibrary() {
           })}
         </section>
 
-        <section className="mb-10 p-5 rounded-xl border border-primary/20 bg-primary/5" data-testid="section-twelve-practices">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+        <section className="mb-10 p-6 rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20" data-testid="section-twelve-practices" aria-label="12 Practices for Transformation">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <BookOpen className="w-5 h-5 text-primary" />
+              <div className="p-2.5 rounded-xl bg-primary/15">
+                <BookOpen className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-foreground">12 Practices for Transformation</h2>
+                <h2 className="text-xl font-bold text-foreground">12 Practices for Transformation</h2>
                 <p className="text-sm text-muted-foreground">A guided path through mind, body, soul, and action</p>
               </div>
             </div>
             <Link href="/twelve-practices">
-              <Button variant="outline" className="min-h-[40px] rounded-lg" data-testid="link-twelve-practices">
+              <Button variant="default" className="min-h-[40px] rounded-lg" data-testid="link-twelve-practices">
                 Explore All 12
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5">
+
+          <div className="flex flex-wrap gap-2 mb-4">
+            {[
+              { label: "Mind", color: "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700" },
+              { label: "Body", color: "bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700" },
+              { label: "Soul", color: "bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700" },
+              { label: "Action", color: "bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-700" },
+            ].map(d => (
+              <span key={d.label} className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border ${d.color}`}>
+                {d.label}
+              </span>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
             {[
               { n: 1, name: "Willingness", domain: "mind" },
               { n: 2, name: "Clarity", domain: "mind" },
@@ -258,28 +271,27 @@ export default function PracticeLibrary() {
               { n: 11, name: "Gratitude", domain: "soul" },
               { n: 12, name: "Service", domain: "action" },
             ].map(p => {
-              const domainColors = {
-                mind: "bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300",
-                body: "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300",
-                soul: "bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300",
-                action: "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300",
+              const domainStyles = {
+                mind: { badge: "bg-blue-600 dark:bg-blue-500 text-white", hover: "hover:bg-blue-50 dark:hover:bg-blue-950/30" },
+                body: { badge: "bg-green-600 dark:bg-green-500 text-white", hover: "hover:bg-green-50 dark:hover:bg-green-950/30" },
+                soul: { badge: "bg-purple-600 dark:bg-purple-500 text-white", hover: "hover:bg-purple-50 dark:hover:bg-purple-950/30" },
+                action: { badge: "bg-orange-600 dark:bg-orange-500 text-white", hover: "hover:bg-orange-50 dark:hover:bg-orange-950/30" },
               };
+              const style = domainStyles[p.domain];
               return (
                 <div
                   key={p.n}
                   role="link"
                   tabIndex={0}
                   onClick={() => navigate("/twelve-practices")}
-                  onKeyDown={(e) => e.key === 'Enter' && navigate("/twelve-practices")}
-                  style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer' }}
-                  className="hover:bg-primary/10 transition-colors"
+                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), navigate("/twelve-practices"))}
+                  className={`flex items-center gap-3 p-2.5 rounded-lg cursor-pointer transition-colors ${style.hover} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
                   data-testid={`link-practice-${p.n}`}
                 >
-                  <div
-                    className={domainColors[p.domain]}
-                    style={{ width: '28px', height: '28px', minWidth: '28px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontSize: '12px', fontWeight: '700', flexShrink: 0 }}
-                  >{p.n}</div>
-                  <div style={{ fontSize: '14px', fontWeight: '500' }} className="text-foreground">{p.name}</div>
+                  <span className={`w-7 h-7 min-w-[28px] inline-flex items-center justify-center rounded-full text-xs font-bold ${style.badge}`}>
+                    {p.n}
+                  </span>
+                  <span className="text-sm font-medium text-foreground">{p.name}</span>
                 </div>
               );
             })}
