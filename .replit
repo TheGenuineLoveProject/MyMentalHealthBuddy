@@ -4,7 +4,7 @@ run = "echo 'Use npm run dev to start the server manually'"
 modules = ["nodejs-20", "python-3.11", "postgresql-16"]
 
 [deployment]
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
 build = ["npm", "run", "build"]
 run = ["node", "server/index.mjs"]
 
