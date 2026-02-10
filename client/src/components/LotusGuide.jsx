@@ -50,6 +50,7 @@ export default function LotusGuide({ className = "" }) {
   const [showTip, setShowTip] = useState(false);
   const [currentTip, setCurrentTip] = useState(0);
   const [isDismissed, setIsDismissed] = useState(false);
+  const [voicesReady, setVoicesReady] = useState(false);
   const hasSpokenWelcome = useRef(false);
   const synth = useRef(null);
 
@@ -61,26 +62,36 @@ export default function LotusGuide({ className = "" }) {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      synth.current = window.speechSynthesis;
-    }
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    synth.current = window.speechSynthesis;
+
+    const loadVoices = () => {
+      const v = synth.current.getVoices();
+      if (v.length > 0) setVoicesReady(true);
+    };
+
+    loadVoices();
+    synth.current.addEventListener("voiceschanged", loadVoices);
+    return () => {
+      synth.current?.removeEventListener("voiceschanged", loadVoices);
+    };
   }, []);
 
   const speak = useCallback((text) => {
-    if (!voiceEnabled || !synth.current) return;
-    
+    if (!synth.current) return;
+
     synth.current.cancel();
-    
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = 0.9;
     utterance.pitch = 1.0;
     utterance.volume = 0.8;
-    
+
     const voices = synth.current.getVoices();
-    const preferredVoice = voices.find(v => 
+    const preferredVoice = voices.find(v =>
       v.lang.startsWith("en") && v.name.includes("Female")
     ) || voices.find(v => v.lang.startsWith("en"));
-    
+
     if (preferredVoice) {
       utterance.voice = preferredVoice;
     }
@@ -90,30 +101,17 @@ export default function LotusGuide({ className = "" }) {
     utterance.onerror = () => setIsActive(false);
 
     synth.current.speak(utterance);
-  }, [voiceEnabled]);
+  }, []);
 
   useEffect(() => {
-    if (!hasSpokenWelcome.current && voiceEnabled) {
-      const timer = setTimeout(() => {
-        const welcome = VOICE_AFFIRMATIONS.welcome[
-          Math.floor(Math.random() * VOICE_AFFIRMATIONS.welcome.length)
-        ];
-        speak(welcome);
-        hasSpokenWelcome.current = true;
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [speak, voiceEnabled]);
-
-  useEffect(() => {
-    if (currentEmotion && currentEmotion !== lastSpokenEmotion && voiceEnabled) {
+    if (currentEmotion && currentEmotion !== lastSpokenEmotion && voiceEnabled && voicesReady) {
       const affirmation = VOICE_AFFIRMATIONS.mood_change[currentEmotion];
       if (affirmation) {
         speak(affirmation);
         setLastSpokenEmotion(currentEmotion);
       }
     }
-  }, [currentEmotion, lastSpokenEmotion, speak, voiceEnabled]);
+  }, [currentEmotion, lastSpokenEmotion, speak, voiceEnabled, voicesReady]);
 
   const speakJournalSaved = useCallback(() => {
     const affirmation = VOICE_AFFIRMATIONS.journal_saved[
@@ -129,26 +127,53 @@ export default function LotusGuide({ className = "" }) {
   const handleDismiss = () => {
     setIsDismissed(true);
     sessionStorage.setItem('lotus-dismissed', 'true');
+    if (synth.current) synth.current.cancel();
   };
 
-  const handleShowTip = () => {
-    setShowTip(!showTip);
+  const handleFlowerTap = () => {
     if (!showTip) {
       setCurrentTip(Math.floor(Math.random() * WELLNESS_TIPS.length));
+      setShowTip(true);
+
+      if (voiceEnabled && voicesReady) {
+        if (!hasSpokenWelcome.current) {
+          const welcome = VOICE_AFFIRMATIONS.welcome[
+            Math.floor(Math.random() * VOICE_AFFIRMATIONS.welcome.length)
+          ];
+          speak(welcome);
+          hasSpokenWelcome.current = true;
+        } else {
+          const tip = WELLNESS_TIPS[Math.floor(Math.random() * WELLNESS_TIPS.length)];
+          speak(tip);
+        }
+      }
+    } else {
+      setShowTip(false);
+      if (synth.current) synth.current.cancel();
+    }
+  };
+
+  const handleToggleVoice = (e) => {
+    e.stopPropagation();
+    const next = !voiceEnabled;
+    setVoiceEnabled(next);
+    if (!next && synth.current) {
+      synth.current.cancel();
+      setIsActive(false);
     }
   };
 
   if (!shouldShow || isDismissed) return null;
 
   return (
-    <div 
+    <div
       className={`fixed bottom-[10.5rem] right-6 z-30 ${className}`}
       data-testid="lotus-guide"
       role="complementary"
       aria-label="Lotus wellness guide"
     >
       {showTip && (
-        <div 
+        <div
           className="absolute bottom-20 right-0 w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 mb-2 animate-in fade-in slide-in-from-bottom-2"
           data-testid="lotus-tip-panel"
         >
@@ -159,7 +184,7 @@ export default function LotusGuide({ className = "" }) {
             </div>
             <button
               onClick={handleDismiss}
-              className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+              className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Dismiss lotus guide"
               data-testid="button-dismiss-lotus"
             >
@@ -174,48 +199,50 @@ export default function LotusGuide({ className = "" }) {
 
       <div className="relative">
         <button
-          onClick={handleShowTip}
-          onDoubleClick={() => setVoiceEnabled(!voiceEnabled)}
+          onClick={handleFlowerTap}
           className={`
             w-14 h-14 rounded-full flex items-center justify-center
             transition-all duration-300 shadow-lg glow-healing
-            ${isActive 
-              ? "bg-gradient-to-br from-[var(--glp-gold)] to-[var(--glp-sage)] animate-pulse scale-110" 
+            ${isActive
+              ? "bg-gradient-to-br from-[var(--glp-gold)] to-[var(--glp-sage)] animate-pulse scale-110"
               : "bg-gradient-to-br from-[var(--glp-sage)] to-[var(--glp-teal)]"
             }
             ${voiceEnabled ? "ring-2 ring-[var(--glp-gold)] ring-offset-2" : "opacity-70"}
-            hover:scale-110 focus-visible:outline-none focus-visible:ring-2 
+            hover:scale-110 focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2
           `}
-          aria-label="Show wellness tip (double-click to toggle voice)"
-          data-testid="button-toggle-lotus-voice"
+          aria-label={showTip ? "Close wellness tip" : "Show wellness tip"}
+          data-testid="button-lotus-flower"
         >
-          <Flower2 
-            className={`w-7 h-7 text-white ${isActive ? "animate-spin" : ""}`} 
+          <Flower2
+            className={`w-7 h-7 text-white ${isActive ? "animate-spin" : ""}`}
             style={{ animationDuration: "3s" }}
           />
         </button>
-        
-        <div 
+
+        <button
+          onClick={handleToggleVoice}
           className={`
-            absolute -top-1 -right-1 w-5 h-5 rounded-full
+            absolute -top-1 -right-1 w-6 h-6 rounded-full
             flex items-center justify-center
             ${voiceEnabled ? "bg-[var(--glp-sage)]" : "bg-gray-400"}
-            transition-colors
+            transition-colors hover:scale-110 border-2 border-white dark:border-gray-900
           `}
+          aria-label={voiceEnabled ? "Turn off voice" : "Turn on voice"}
+          data-testid="button-toggle-lotus-voice"
         >
           {voiceEnabled ? (
             <Volume2 className="w-3 h-3 text-white" />
           ) : (
             <VolumeX className="w-3 h-3 text-white" />
           )}
-        </div>
+        </button>
 
         {isActive && (
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 rounded-full bg-[var(--glp-gold)]/30 animate-ping" />
-            <div 
-              className="absolute inset-0 rounded-full bg-[var(--glp-sage)]/20 animate-ping" 
+            <div
+              className="absolute inset-0 rounded-full bg-[var(--glp-sage)]/20 animate-ping"
               style={{ animationDelay: "0.5s" }}
             />
           </div>
