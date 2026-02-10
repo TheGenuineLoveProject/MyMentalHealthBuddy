@@ -1,0 +1,261 @@
+Proceed with Option A ✅ (because it creates the enterprise-grade social + publishing control plane without breaking your ethical + manual-first constraints). Now here’s the exact Replit AI prompt to paste.
+
+THE GENUINE LOVE PROJECT — ENTERPRISE SOCIAL + PUBLISHING + LINK INTEGRITY
+v3.0 (Manual-first, Ethical-first, Human-triggered refinement)
+
+NON-NEGOTIABLE RULES
+- ADDITIVE CHANGES ONLY unless a change is required to fix broken behavior.
+- NO renames / NO deletes / NO restructures. Fix-in-place.
+- NO background daemons, NO cron, NO auto-posting to social platforms.
+- NO storing social platform API keys.
+- Keep single-port Replit behavior. Keep existing server entrypoint + routing style.
+- Use existing project conventions (ESM .mjs on server if that’s what the repo uses).
+- Mount each server route exactly once (avoid duplicate mounts).
+- Keep crisis-safe, non-clinical language. No medical/therapy claims.
+
+PRIMARY OUTCOME
+Upgrade the Social Media Admin dashboard to true enterprise level and ensure:
+1) Admin can generate, review, approve, and manually publish daily posts.
+2) Publishing system (blog + newsletter) is robust, audited, and measurable.
+3) All buttons/links/routes are verified; “page not found” issues are fixed.
+4) Git state is clean; deployment + build pass.
+5) Refinement becomes signal-driven via passive observability + human-triggered scripts.
+
+════════════════════════════════════════════════════════════
+PHASE 0 — TRUTH REPORT (STOP AFTER REPORT, BEFORE EDITS)
+1) Print the REAL entrypoints:
+   - Show contents of .replit
+   - Identify server entry file actually launched (e.g. server/index.mjs or server/index.ts etc.)
+2) Locate existing Social Admin infrastructure:
+   - client/src/pages/**admin**
+   - client/src/pages/**social**
+   - server/routes/**social**
+   - docs/**SOCIAL**
+3) Locate existing publishing infrastructure:
+   - blog routes/pages, newsletter routes/pages
+   - any scripts like scripts/audit-publishing.mjs (looks like it exists)
+4) Link integrity check sources:
+   - router definitions (client)
+   - server routes mounts
+   - any existing “scan broken links” scripts or reports
+5) Git status diagnosis:
+   - Run `git status`
+   - Identify untracked PLATFORM_LOCK.md path mismatch (root vs docs/)
+   - Do NOT move files; instead stage the correct file path.
+
+OUTPUT FORMAT (PHASE 0)
+- FOUND (exact paths)
+- MISSING (exact features/pages/routes absent)
+- DUPLICATE RISK (multi-mount routes, multiple entrypoints, overlapping paths)
+- “PAGE NOT FOUND” SUSPECTS (routes referenced but not defined)
+STOP AFTER PRINTING THIS REPORT.
+
+════════════════════════════════════════════════════════════
+PHASE 1 — FIX “PAGE NOT FOUND” + BUTTON/LINK WIRING (TARGETED)
+Goal: eliminate broken navigation without guesswork.
+
+1) Create: scripts/audit-links.mjs (human-triggered)
+   - Scan client/src for:
+     - <Link to="...">, navigate("..."), href="..."
+   - Extract internal paths.
+   - Validate each path exists in client router (or redirect list).
+   - Flag:
+     - "#", empty href, placeholder routes, missing handlers
+   - Output:
+     - docs/LINK_AUDIT_REPORT.md (rank top 25)
+     - include file path + line number for each issue
+   - SAFE AUTOFIX (ONLY THESE):
+     - href="#" -> remove link or replace with correct existing route ONLY if clearly intended (e.g. “Pricing” -> /pricing).
+     - Blank onClick -> add TODO tag but do not invent behavior.
+
+2) Create: scripts/audit-api-usage.mjs
+   - Scan for fetch/axios calls to /api/*
+   - Validate server route exists and is mounted
+   - Output docs/API_WIRING_REPORT.md (top 25)
+
+3) Apply fixes for top 10 broken links/routes only.
+   - Fix routes or buttons by wiring to existing pages first (pricing, blog, newsletter, dashboard, account/billing).
+   - If a referenced page is missing entirely, add a minimal page that routes correctly and uses brand-safe copy.
+
+════════════════════════════════════════════════════════════
+PHASE 2 — ENTERPRISE SOCIAL ADMIN (MANUAL-FIRST, NO AUTO-POST)
+Goal: /admin/social becomes an enterprise Social Studio: queue, pipeline, campaigns, templates, tracking links.
+
+DATA (canonical)
+- Create (if missing): content/narrative/social_posts.json
+  Each post:
+  {
+    "id": "sp_YYYYMMDD_xxx",
+    "theme": "Reflection | Boundaries | Emotional literacy | Presence | Self-compassion | Orientation",
+    "campaign": "launch_week_1",
+    "platforms": {
+      "instagram": { "caption": "", "hashtags": [] },
+      "tiktok": { "caption": "", "shotlist": ["..."], "on_screen_text": ["..."] },
+      "x": { "caption": "" },
+      "youtube_shorts": { "caption": "", "title": "" }
+    },
+    "cta": { "label": "Explore", "route": "/blog" },
+    "tracking": { "slug": "calm-60s", "url": "/r/calm-60s" },
+    "safety_note": "Non-clinical, crisis-safe, no claims.",
+    "status": "draft | review | approved | posted",
+    "scheduled_for": "YYYY-MM-DD",
+    "posted_at": null,
+    "created_at": "ISO"
+  }
+
+BACKEND
+- Create: server/routes/admin-social.mjs (admin-only)
+  Endpoints:
+  - GET    /api/admin/social/posts?status=&campaign=&date=
+  - POST   /api/admin/social/posts
+  - PUT    /api/admin/social/posts/:id
+  - POST   /api/admin/social/posts/:id/submit
+  - POST   /api/admin/social/posts/:id/approve
+  - POST   /api/admin/social/posts/:id/mark-posted
+  - POST   /api/admin/social/build-utm  (returns canonical url + utm params)
+  Admin auth:
+  - Reuse existing auth context / middleware already in project. If none exists, implement a minimal guard using existing session/JWT conventions.
+  - DO NOT invent a new auth system if one exists.
+
+TRACKING REDIRECTS
+- Create: server/routes/redirects.mjs
+  - GET /r/:slug
+    - increments counter (file-based JSON is OK if no DB table exists; prefer DB if metrics tables already exist)
+    - 302 redirect to stored destination
+  - Provide admin endpoint to create/update redirect targets for slugs used in social posts:
+    - POST /api/admin/social/redirects { slug, targetUrl }
+
+MOUNT ONCE
+- Mount routes exactly once in the real server entry file:
+  - /api/admin/social -> admin-social.mjs
+  - /r -> redirects.mjs
+
+FRONTEND
+- Create or upgrade: client/src/pages/admin/AdminSocial.jsx (or existing admin social page path you found)
+  Enterprise UI requirements:
+  A) “Weekly Queue” (7-day list by scheduled_for)
+  B) Pipeline board (Draft → Review → Approved → Posted)
+  C) Post Editor:
+     - platform tabs (IG/TikTok/X/Shorts)
+     - copy-to-clipboard buttons per platform
+     - generate tracking link slug + preview /r/:slug
+  D) Campaign Manager:
+     - create campaign name
+     - filter by campaign
+  E) Templates Library:
+     - 10 ethical templates (reflection, boundary, orientation, micro-tool, journaling prompt, gentle CTA)
+     - “Create from template” -> draft
+  F) Signals Panel:
+     - clicks per slug (from /r metrics)
+     - counts: drafts/review/approved/posted
+  G) “Mark posted” modal:
+     - select platform(s)
+     - timestamp posted_at
+     - status -> posted
+
+APPROVAL SAFETY GATE (must be enforced on server AND mirrored in UI)
+Block approval if:
+- medical/therapy claims (“treats”, “cures”, “diagnose”, “clinical”, etc.)
+- shame/urgency/dependency framing (“you must”, “fix yourself now”, “don’t miss or else”)
+Require:
+- safety_note non-empty
+Optional:
+- crisis_link_required -> ensures CTA route includes /crisis or footer includes crisis resources
+
+OUTPUT ARTIFACTS
+- docs/ENTERPRISE_SOCIAL_SPEC.md (how it works + guardrails)
+- docs/SOCIAL_DAILY_WORKFLOW.md (15-minute daily steps)
+
+════════════════════════════════════════════════════════════
+PHASE 3 — NEWSLETTER + BLOG + PUBLISHING HARDENING (ROBUST + MEASURABLE)
+Goal: publishing is clean, safe, and consistent.
+
+1) Blog
+- Ensure /blog index loads reliably
+- Ensure /blog/:slug resolves (seed 3 posts if needed, using existing content approach)
+- Add internal link validation between posts using your audit script
+
+2) Newsletter
+- Ensure /newsletter page has working signup
+- Ensure unsubscribe flow exists (link + backend handler)
+- If Resend exists, ensure transactional newsletter ops are safe and failures do not crash app
+
+3) Publishing audit
+- If scripts/audit-publishing.mjs already exists, extend it to:
+  - validate newsletter templates exist
+  - validate forbidden-language scan for both blog + newsletter
+  - validate internal links allowed
+  - output docs/PUBLISHING_AUDIT_REPORT.md
+- Ensure the audit prints PASS/FAIL gates (like your current PUBLISHING_AUDIT: PASS style)
+
+════════════════════════════════════════════════════════════
+PHASE 4 — SIGNAL-DRIVEN REFINEMENT (PASSIVE OBSERVABILITY ONLY)
+Goal: track what matters without surveillance vibes.
+
+1) Create a minimal metrics module (file-based or DB-based depending on project)
+Track:
+- pricing page views
+- checkout initiations
+- newsletter signups
+- blog post views
+- redirect clicks (/r/:slug)
+- feature gate checks (free vs pro boundary touches)
+
+2) Admin view:
+- Add “Signals” section either inside /admin/social or existing admin dashboard route
+- Show last 7 days counts + top 10 slugs clicked
+
+No user-level behavioral profiling. Aggregate only.
+
+════════════════════════════════════════════════════════════
+PHASE 5 — HUMAN-TRIGGERED EVOLUTION COMMAND (NO BACKGROUND AUTONOMY)
+Create: scripts/evolve.mjs
+Runs in order:
+1) node scripts/audit-links.mjs
+2) node scripts/audit-api-usage.mjs
+3) node scripts/audit-publishing.mjs (if present)
+4) npm run build (optional flag --build)
+Outputs:
+- docs/EVOLUTION_REPORT.md with PASS/FAIL for:
+  - Link integrity
+  - API wiring
+  - Publishing audit
+  - Build success
+
+════════════════════════════════════════════════════════════
+PHASE 6 — VERIFICATION (PRINT CHECKLIST + RESULTS)
+Must confirm:
+[ ] /admin/social loads (admin-only)
+[ ] create/edit/submit/approve works
+[ ] copy buttons work
+[ ] /r/:slug redirects + increments
+[ ] /blog loads + /blog/:slug loads
+[ ] /newsletter signup works + unsubscribe exists
+[ ] audit scripts output docs reports
+[ ] evolve script outputs EVOLUTION_REPORT.md
+[ ] build passes
+Stop on any FAIL and print exact fix steps with file paths.
+
+END.
+
+One immediate thing from your screenshot 🧠
+
+You tried git add docs/PLATFORM_LOCK.md, but git status shows the untracked file is PLATFORM_LOCK.md at the repo root. So Git said “did not match any files” because that docs path didn’t exist.
+
+Run exactly this (no guessing):
+
+git status
+ls -la PLATFORM_LOCK.md docs/PLATFORM_LOCK.md || true
+git add PLATFORM_LOCK.md
+git commit -m "Add PLATFORM_LOCK v1.0.0"
+git push
+
+What “enterprise-level” means here (in plain terms)
+	•	Queue + calendar (so daily posting is effortless)
+	•	Pipeline states (draft → review → approved → posted)
+	•	Templates + campaigns (so you’re not reinventing the wheel daily)
+	•	Tracking links (/r/:slug) (so you learn what works)
+	•	Signals panel (so refinement is evidence-led, not vibes-led)
+	•	Still manual publishing (so you don’t get platform-banned or ethically weird) ✅
+
+When Replit AI prints PHASE 0 — TRUTH REPORT, paste that output here and I’ll give you the top 10 fixes in exact order (buttons/routes first, then social studio wiring, then publishing polish). 🚀

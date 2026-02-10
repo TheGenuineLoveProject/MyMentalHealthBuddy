@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { Dumbbell, Clock, Star, Heart, Wind, Brain, Sparkles, Search, ArrowRight, Loader2, Smile, Notebook, RefreshCw, Compass, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +13,7 @@ import { useAuth } from "@/context/AuthContext";
 const FAVORITES_KEY = "glp-practice-favorites";
 
 export default function PracticeLibrary() {
+  const [, navigate] = useLocation();
   const { user } = useAuth();
   const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
@@ -195,17 +196,21 @@ export default function PracticeLibrary() {
 
         <section className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-10" data-testid="section-core-tools">
           {[
-            { title: "Mood Check-In", description: "Track how you feel", icon: Smile, href: "/mood", bg: "bg-amber-50 dark:bg-amber-950/40", iconBg: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300" },
-            { title: "Journal", description: "Write and reflect", icon: Notebook, href: "/journal", bg: "bg-emerald-50 dark:bg-emerald-950/40", iconBg: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300" },
-            { title: "Reframe Tool", description: "Shift your perspective", icon: RefreshCw, href: "/tools/reframe", bg: "bg-violet-50 dark:bg-violet-950/40", iconBg: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-300" },
-            { title: "Topic Hubs", description: "Explore by topic", icon: Compass, href: "/hubs", bg: "bg-sky-50 dark:bg-sky-950/40", iconBg: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300" },
+            { title: "Mood Check-In", description: "Track how you feel", icon: Smile, href: "/mood", bgStyle: "#fffbeb", iconBg: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300" },
+            { title: "Journal", description: "Write and reflect", icon: Notebook, href: "/journal", bgStyle: "#ecfdf5", iconBg: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300" },
+            { title: "Reframe Tool", description: "Shift your perspective", icon: RefreshCw, href: "/tools/reframe", bgStyle: "#f5f3ff", iconBg: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-300" },
+            { title: "Topic Hubs", description: "Explore by topic", icon: Compass, href: "/hubs", bgStyle: "#f0f9ff", iconBg: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300" },
           ].map(tool => {
             const Icon = tool.icon;
             return (
-              <Link
+              <div
                 key={tool.href}
-                href={tool.href}
-                className={`group flex flex-col items-center gap-3 p-5 rounded-xl border border-border/60 hover:border-primary/40 hover:shadow-md transition-all ${tool.bg}`}
+                role="link"
+                tabIndex={0}
+                onClick={() => navigate(tool.href)}
+                onKeyDown={(e) => e.key === 'Enter' && navigate(tool.href)}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', padding: '20px 16px', borderRadius: '12px', cursor: 'pointer', backgroundColor: tool.bgStyle }}
+                className="group border border-border/60 hover:border-primary/40 hover:shadow-md transition-all"
                 data-testid={`link-tool-${tool.title.toLowerCase().replace(/\s+/g, '-')}`}
               >
                 <div className={`p-3 rounded-xl ${tool.iconBg}`}>
@@ -215,7 +220,7 @@ export default function PracticeLibrary() {
                   <p className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">{tool.title}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">{tool.description}</p>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </section>
@@ -238,7 +243,7 @@ export default function PracticeLibrary() {
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5">
             {[
               { n: 1, name: "Willingness", domain: "mind" },
               { n: 2, name: "Clarity", domain: "mind" },
@@ -260,15 +265,22 @@ export default function PracticeLibrary() {
                 action: "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300",
               };
               return (
-                <Link
+                <div
                   key={p.n}
-                  href="/twelve-practices"
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-primary/10 transition-colors"
+                  role="link"
+                  tabIndex={0}
+                  onClick={() => navigate("/twelve-practices")}
+                  onKeyDown={(e) => e.key === 'Enter' && navigate("/twelve-practices")}
+                  style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer' }}
+                  className="hover:bg-primary/10 transition-colors"
                   data-testid={`link-practice-${p.n}`}
                 >
-                  <span className={`w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold flex-shrink-0 ${domainColors[p.domain]}`}>{p.n}</span>
-                  <span className="text-sm font-medium text-foreground">{p.name}</span>
-                </Link>
+                  <div
+                    className={domainColors[p.domain]}
+                    style={{ width: '28px', height: '28px', minWidth: '28px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontSize: '12px', fontWeight: '700', flexShrink: 0 }}
+                  >{p.n}</div>
+                  <div style={{ fontSize: '14px', fontWeight: '500' }} className="text-foreground">{p.name}</div>
+                </div>
               );
             })}
           </div>

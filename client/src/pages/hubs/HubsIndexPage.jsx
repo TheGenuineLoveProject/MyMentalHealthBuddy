@@ -5,7 +5,7 @@
  */
 
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { 
   Moon, Shield, Heart, Zap, Wind, Users, 
   Feather, Sparkles, Eye, Brain, TrendingUp, Flame, 
@@ -300,6 +300,7 @@ const ALL_HUBS = [
 ];
 
 export default function HubsIndexPage() {
+  const [, navigate] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredHubs = searchQuery.trim()
@@ -345,27 +346,28 @@ export default function HubsIndexPage() {
         {filteredHubs.map((hub) => {
           const Icon = hub.icon;
           return (
-            <Link
+            <div
               key={hub.href}
-              href={hub.href}
-              className="group block p-4 bg-card rounded-xl border border-border hover:border-primary/40 hover:shadow-md transition-all"
+              role="link"
+              tabIndex={0}
+              onClick={() => navigate(hub.href)}
+              onKeyDown={(e) => e.key === 'Enter' && navigate(hub.href)}
+              className="group flex items-center gap-3 p-4 bg-card rounded-xl border border-border hover:border-primary/40 hover:shadow-md transition-all cursor-pointer"
               data-testid={`link-hub-${hub.title.toLowerCase().replace(/\s+/g, '-')}`}
             >
-              <div className="flex items-center gap-3">
-                <div className={`p-2.5 rounded-xl flex-shrink-0 ${hub.color || "bg-primary/10 text-primary"}`}>
-                  <Icon className="w-5 h-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
-                    {hub.title}
-                    <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    {hub.description}
-                  </p>
-                </div>
+              <div className={`p-2.5 rounded-xl flex-shrink-0 ${hub.color || "bg-primary/10 text-primary"}`}>
+                <Icon className="w-5 h-5" />
               </div>
-            </Link>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+                  {hub.title}
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                </h3>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  {hub.description}
+                </p>
+              </div>
+            </div>
           );
         })}
       </div>
