@@ -196,6 +196,18 @@ logger.info("Environment validation complete", { mode: isProduction ? 'PRODUCTIO
 
 const app = express();
 
+const PORT = process.env.PORT || 5000;
+let serverReady = false;
+
+app.get("/__health", (_req, res) => {
+  res.status(200).json({ ok: true, ready: serverReady });
+});
+
+const server = app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server listening on http://0.0.0.0:${PORT}`);
+  logger.info("Server listening", { url: `http://0.0.0.0:${PORT}`, port: PORT });
+});
+
 async function startProductionServer() {
 
 app.set('trust proxy', 1);
@@ -665,11 +677,11 @@ app.use((err, req, res, _next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server listening on http://0.0.0.0:${PORT}`);
-  logger.info("Server listening", { url: `http://0.0.0.0:${PORT}`, port: PORT });
-});
+serverReady = true;
+console.log("Server fully initialized and ready");
+logger.info("Server fully initialized and ready");
+
+} // end startProductionServer
 
 async function gracefulShutdown(signal) {
   logger.info(`${signal} received, shutting down gracefully...`);
@@ -694,8 +706,6 @@ async function gracefulShutdown(signal) {
 
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
 process.on("SIGINT", () => gracefulShutdown("SIGINT"));
-
-} // end startProductionServer
 
 process.on("unhandledRejection", (reason) => {
   logger.error("Unhandled promise rejection", { error: reason?.message || reason });
