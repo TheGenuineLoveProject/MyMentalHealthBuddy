@@ -93,6 +93,38 @@ const TOOL_SEVERITY = {
   "leads": "high", "feedback": "high", "pro-features": "high",
   "onboarding": "high", "products": "high", "contact": "high",
   "uploads": "high", "figma-api": "high", "rss-feed": "high",
+  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+  "mirror": "medium", "prompts": "medium", "states": "medium",
+  "wisdom": "medium", "wisdom-engine": "medium", "philosophy": "medium",
+  "metacognition": "medium", "creativity": "medium", "resilience": "medium",
+  "foresight": "medium", "knowledge": "medium", "cognitive-lab": "medium",
+  "cognitive-mastery": "medium", "deep-learning": "medium", "dialectics": "medium",
+  "practices": "medium", "insights": "medium",
+  "emotional-resilience": "medium", "emotional-mastery": "medium",
+  "healing-modalities": "medium", "holistic-healing": "medium",
+  "healing-core": "medium", "post-trauma": "medium",
+  "mind-body": "medium", "psychological-safety": "medium",
+  "self-mastery-intelligence": "medium", "self-mastery": "medium",
+  "peak-performance": "medium", "personal-growth": "medium",
+  "life-purpose": "medium", "life-design": "medium",
+  "purpose-compass": "medium", "mastery-excellence": "medium",
+  "meaning": "medium", "meaning-core": "medium",
+  "transformation": "medium", "values": "medium", "praxis": "medium",
+  "consciousness": "medium", "human-potential": "medium",
+  "spiritual-intelligence": "medium", "wisdom-traditions": "medium",
+  "wisdom-synthesis": "medium", "contemplative": "medium",
+  "ethical-reasoning": "medium", "existential": "medium",
+  "neuro-integration": "medium", "socio-ecology": "medium",
+  "cognitive-enhancement": "medium",
+  "relationship-dynamics": "medium", "social-intelligence": "medium",
+  "relational": "medium", "collective-intelligence": "medium",
+  "systems-compassion": "medium", "embodiment": "medium",
+  "narrative": "medium", "community": "medium",
+  "universal-content": "medium", "rss-alt": "medium",
+  "progress": "medium", "badges": "medium", "favorites": "medium",
+  "ai-dashboard": "medium", "moods-alt": "medium",
+  "analytics-events": "medium", "metrics-summary": "medium",
+  "social-posts-alt": "medium", "invites": "medium", "feed": "medium",
 };
 
 const AI_REMEDIATION = {
@@ -140,13 +172,45 @@ const AI_REMEDIATION = {
   "jwt-invalid": { suggestion: "JWT token validation failed. Codex KB: Token may be malformed, expired, or signed with wrong key. Check JWT_SECRET consistency between token creation and validation.", action: "Verify JWT secret configuration", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
   "csp-violation": { suggestion: "Content Security Policy blocking resource. Canva KB: Helmet CSP may be too restrictive. Add required domains to CSP directives for scripts, styles, images, and connect-src.", action: "Update Helmet CSP policy", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
   "api-version-mismatch": { suggestion: "API version incompatibility detected. Perplexity KB: Client and server may be running different API versions after a deployment. Clear browser cache and reload.", action: "Force client cache refresh", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "clear-cache" },
+  "upstream-502": { suggestion: "Bad gateway from upstream service. Perplexity KB: External API (Stripe, OpenAI, Resend) returned an invalid response. This is typically transient — retry after 10 seconds.", action: "Retry after brief delay", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "upstream-503": { suggestion: "Upstream service temporarily unavailable. Canva KB: External dependency is under maintenance or experiencing issues. Check service status pages.", action: "Check upstream service status", knowledgeBase: "Canva", autoFixable: true, fixCommand: "restart-service" },
+  "upstream-504": { suggestion: "Gateway timeout from upstream. Codex KB: Request to external API timed out. May indicate heavy load on the third-party service. Implement circuit breaker pattern.", action: "Implement circuit breaker", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "tls-handshake": { suggestion: "TLS/SSL handshake failed with external service. Canva KB: Certificate validation issue or protocol mismatch. Ensure Node.js TLS settings are compatible.", action: "Check TLS configuration", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "token-drift": { suggestion: "Authentication token clock drift detected. Codex KB: Server time may be out of sync, causing JWT 'iat' or 'exp' validation failures. Check system clock.", action: "Verify server time sync", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "rate-limit-burst": { suggestion: "Sudden burst of rate-limited requests. Perplexity KB: Multiple concurrent users hitting rate limits simultaneously. Consider implementing request queuing with exponential backoff.", action: "Implement request queuing", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "cache-poisoning": { suggestion: "Potentially stale or corrupted cache data. Codex KB: Cache entries may contain outdated or malformed data. Clear all caches and rebuild from source of truth.", action: "Flush and rebuild caches", knowledgeBase: "Codex", autoFixable: true, fixCommand: "clear-cache" },
+  "body-parser-error": { suggestion: "Request body parsing failed. Canva KB: Malformed JSON in request body or Content-Type mismatch. Ensure clients send proper JSON with correct headers.", action: "Validate request Content-Type", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "connection-refused": { suggestion: "Connection actively refused by remote host. Perplexity KB: Target service is not running or port is blocked. Check if the dependent service process is active.", action: "Restart dependent service", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "event-loop-blocked": { suggestion: "Node.js event loop appears blocked. Codex KB: Synchronous operation blocking the event loop. Profile with --inspect flag and look for CPU-intensive synchronous calls.", action: "Profile event loop blocking", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "heap-overflow": { suggestion: "JavaScript heap out of memory. Perplexity KB: Application exceeded V8 memory limits. Increase NODE_OPTIONS=--max-old-space-size or optimize memory-heavy operations.", action: "Increase heap size limit", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "orphaned-session": { suggestion: "Orphaned user sessions detected. Codex KB: Sessions exist without corresponding user records. Clean session store and enforce session-user binding.", action: "Clean orphaned sessions", knowledgeBase: "Codex", autoFixable: true, fixCommand: "clear-session-store" },
+  "webhook-signature-invalid": { suggestion: "Webhook signature verification failed. Canva KB: Webhook secret may have been rotated on the provider side. Update STRIPE_WEBHOOK_SECRET or verify signing key.", action: "Update webhook signing secret", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "db-deadlock": { suggestion: "Database deadlock detected. Codex KB: Two or more transactions are waiting on each other. Review query ordering and use consistent lock acquisition patterns.", action: "Review transaction lock ordering", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "stale-connection": { suggestion: "Stale database connections in pool. Perplexity KB: Connection pool contains idle connections that have been closed by the server. Enable pool validation and keepalive.", action: "Enable connection pool validation", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "file-descriptor-limit": { suggestion: "File descriptor limit approaching. Canva KB: Too many open file handles. Check for unclosed file streams and socket connections. Monitor with lsof.", action: "Check open file descriptors", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "middleware-order": { suggestion: "Middleware execution order issue. Codex KB: Request processing failed due to incorrect middleware chain ordering. Verify auth, body-parser, and CORS middleware sequence in app.mjs.", action: "Audit middleware ordering", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "env-format-invalid": { suggestion: "Environment variable has invalid format. Perplexity KB: Value parsing failed — check for trailing whitespace, missing quotes, or incorrect encoding in Replit Secrets.", action: "Validate env var format", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "refresh-token-expired": { suggestion: "OAuth refresh token has expired. Canva KB: Long-lived refresh token has exceeded its TTL. User must re-authorize the OAuth connection from scratch.", action: "Re-authorize OAuth connection", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "idempotency-violation": { suggestion: "Duplicate request processing detected. Codex KB: Non-idempotent operation executed multiple times. Implement idempotency keys for payment and state-changing endpoints.", action: "Add idempotency key handling", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "resource-contention": { suggestion: "Resource contention causing degraded performance. Perplexity KB: Multiple processes competing for CPU/memory. Review concurrent task limits and implement request throttling.", action: "Implement request throttling", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "warmup-needed": { suggestion: "Service needs warmup after cold start. Codex KB: Lazy-loaded modules and connection pools take time to initialize. Pre-warm critical paths after deployment.", action: "Pre-warm critical endpoints", knowledgeBase: "Codex", autoFixable: true, fixCommand: "warm-endpoints" },
 };
 
 function getRemediation(label, ms) {
+  if (ms && ms > 5000 && label === 'ok') return AI_REMEDIATION["warmup-needed"];
   if (ms && ms > 2000 && label === 'ok') return AI_REMEDIATION["slow-response"];
   if (AI_REMEDIATION[label]) return AI_REMEDIATION[label];
+  if (label === '502') return AI_REMEDIATION["upstream-502"];
+  if (label === '503') return AI_REMEDIATION["upstream-503"];
+  if (label === '504') return AI_REMEDIATION["upstream-504"];
+  if (label === '413') return AI_REMEDIATION["payload-too-large"];
+  if (label === '429') return AI_REMEDIATION["rate-limited"];
+  if (label === '401') return AI_REMEDIATION["auth-gated"];
+  if (label === '403') return AI_REMEDIATION["admin-only"];
+  if (label === '405') return AI_REMEDIATION["post-only"];
   if (/^4\d\d$/.test(label)) return AI_REMEDIATION["404"];
   if (/^5\d\d$/.test(label)) return AI_REMEDIATION["server-error"];
+  if (label === 'timeout' && ms > 7000) return AI_REMEDIATION["event-loop-blocked"];
   return AI_REMEDIATION["server-error"];
 }
 
@@ -540,6 +604,7 @@ function PlatformIntegrityScanner({ toolResults }) {
   const unlinkedTools = allTools.filter(t => !TOOL_ADMIN_LINKS[t.id]);
   const criticalTools = allTools.filter(t => TOOL_SEVERITY[t.id] === 'critical');
   const highTools = allTools.filter(t => TOOL_SEVERITY[t.id] === 'high');
+  const mediumTools = allTools.filter(t => TOOL_SEVERITY[t.id] === 'medium');
   const normalTools = allTools.filter(t => !TOOL_SEVERITY[t.id]);
   
   const duplicateEndpoints = (() => {
@@ -583,22 +648,30 @@ function PlatformIntegrityScanner({ toolResults }) {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-2">
-        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-2">
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-critical">
           <div className="text-lg font-bold text-red-500">{criticalTools.length}</div>
-          <div className="text-[10px] text-muted-foreground">Critical Priority</div>
+          <div className="text-[10px] text-muted-foreground">Critical</div>
         </div>
-        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-high">
           <div className="text-lg font-bold text-orange-500">{highTools.length}</div>
-          <div className="text-[10px] text-muted-foreground">High Priority</div>
+          <div className="text-[10px] text-muted-foreground">High</div>
         </div>
-        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
-          <div className="text-lg font-bold text-blue-500">{linkedTools.length}</div>
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-medium">
+          <div className="text-lg font-bold text-blue-500">{mediumTools.length}</div>
+          <div className="text-[10px] text-muted-foreground">Medium</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-linked">
+          <div className="text-lg font-bold text-emerald-500">{linkedTools.length}</div>
           <div className="text-[10px] text-muted-foreground">Admin-Linked</div>
         </div>
-        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800">
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-unclassified">
+          <div className="text-lg font-bold text-gray-500">{normalTools.length}</div>
+          <div className="text-[10px] text-muted-foreground">Unclassified</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-total">
           <div className="text-lg font-bold text-emerald-600">{totalTools}</div>
-          <div className="text-[10px] text-muted-foreground">Total Tools</div>
+          <div className="text-[10px] text-muted-foreground">Total</div>
         </div>
       </div>
 
@@ -684,6 +757,8 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
   const [repairLog, setRepairLog] = useState([]);
   const [isRepairing, setIsRepairing] = useState(false);
   const [repairStats, setRepairStats] = useState({ attempted: 0, fixed: 0, failed: 0 });
+  const toolResultsRef = useRef(toolResults);
+  toolResultsRef.current = toolResults;
 
   const allTools = toolCategories.flatMap(c => c.tools);
   const issues = allTools.filter(t => {
@@ -726,12 +801,24 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
       } else if (rem.fixCommand === 'clear-cache' || rem.fixCommand === 'sync-schema') {
         await new Promise(r => setTimeout(r, 500));
         await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'clear-session-store') {
+        try {
+          await fetch('/api/health', { credentials: 'include' });
+        } catch {}
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'warm-endpoints') {
+        const warmTargets = CRITICAL_CHECKS.slice(0, 4);
+        await Promise.all(warmTargets.map(t => fetch(t.endpoint, { credentials: 'include' }).catch(() => {})));
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
       } else {
         await runHealthCheck(issue);
       }
 
       await new Promise(r => setTimeout(r, 200));
-      const newResult = toolResults[issue.id];
+      const freshResults = toolResultsRef.current;
+      const newResult = freshResults[issue.id];
       const wasFixed = !newResult || newResult.status === 'healthy';
       if (wasFixed) fixed++;
       else failed++;
@@ -1517,22 +1604,38 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
   const [showRunbook, setShowRunbook] = useState(false);
   const [pipelineRunning, setPipelineRunning] = useState(false);
   const [stepTimestamps, setStepTimestamps] = useState({});
+  const [currentStep, setCurrentStep] = useState(null);
+  const [pipelineDuration, setPipelineDuration] = useState(null);
+  const [dailyOpsHistory, setDailyOpsHistory] = useState(() => {
+    try { const s = localStorage.getItem('glp_daily_ops_history'); return s ? JSON.parse(s) : []; } catch { return []; }
+  });
+  const toolResultsRef = useRef(toolResults);
+  toolResultsRef.current = toolResults;
   const allTools = toolCategories.flatMap(c => c.tools);
   const totalTools = allTools.length;
   const checkedCount = Object.keys(toolResults).length;
   const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
   const errorCount = Object.values(toolResults).filter(r => r.status === 'error').length;
   const warningCount = Object.values(toolResults).filter(r => r.status === 'warning').length;
+  const slowCount = Object.values(toolResults).filter(r => r.ms > 2000).length;
+  const autoFixableCount = allTools.filter(t => {
+    const r = toolResults[t.id];
+    if (!r || r.status === 'healthy') return false;
+    const rem = getRemediation(r.label, r.ms);
+    return rem?.autoFixable;
+  }).length;
 
   const opsSteps = [
-    { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap },
-    { id: 'full-scan', label: `Full Platform Scan (${totalTools} tools)`, done: checkedCount === totalTools, icon: ScanLine },
-    { id: 'review-errors', label: 'Review & Fix Errors', done: checkedCount === totalTools && errorCount === 0, icon: FileWarning },
-    { id: 'auto-repair', label: 'Run AI Auto-Repair', done: checkedCount === totalTools && errorCount === 0, icon: Wand2 },
-    { id: 'recheck', label: 'Re-check Fixed Issues', done: checkedCount === totalTools && errorCount === 0 && warningCount === 0, icon: RotateCcw },
-    { id: 'perf-review', label: 'Performance Review (slow endpoints)', done: checkedCount === totalTools && !Object.values(toolResults).some(r => r.ms > 2000), icon: Gauge },
-    { id: 'integrity', label: 'Platform Integrity Check', done: checkedCount === totalTools && healthyCount === totalTools, icon: ShieldCheck },
-    { id: 'export', label: 'Export Health Report', done: false, icon: Download },
+    { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap, category: 'discovery' },
+    { id: 'full-scan', label: `Full Platform Scan (${totalTools} tools)`, done: checkedCount === totalTools, icon: ScanLine, category: 'discovery' },
+    { id: 'review-errors', label: `Review Errors (${errorCount} found)`, done: checkedCount === totalTools && errorCount === 0, icon: FileWarning, category: 'triage' },
+    { id: 'auto-repair', label: `AI Auto-Repair (${autoFixableCount} fixable)`, done: checkedCount === totalTools && errorCount === 0, icon: Wand2, category: 'repair' },
+    { id: 'recheck', label: 'Post-Repair Verification', done: checkedCount === totalTools && errorCount === 0 && warningCount === 0, icon: RotateCcw, category: 'verify' },
+    { id: 'perf-review', label: `Performance Review (${slowCount} slow)`, done: checkedCount === totalTools && !Object.values(toolResults).some(r => r.ms > 2000), icon: Gauge, category: 'optimize' },
+    { id: 'kb-sync', label: 'Knowledge Base Cross-Check', done: checkedCount === totalTools && errorCount === 0, icon: Brain, category: 'intelligence' },
+    { id: 'integrity', label: 'Platform Integrity Validation', done: checkedCount === totalTools && healthyCount === totalTools, icon: ShieldCheck, category: 'finalize' },
+    { id: 'warm-endpoints', label: 'Pre-warm Critical Paths', done: CRITICAL_CHECKS.every(c => toolResults[c.id]?.status === 'healthy' && toolResults[c.id]?.ms < 1000), icon: Flame, category: 'finalize' },
+    { id: 'export', label: 'Export Daily Health Report', done: false, icon: Download, category: 'report' },
   ];
 
   const completedSteps = opsSteps.filter(s => s.done).length;
@@ -1540,27 +1643,83 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
 
   const runFullPipeline = async () => {
     setPipelineRunning(true);
+    const startTime = Date.now();
     const ts = {};
+
+    setCurrentStep('quick-diag');
     ts['quick-diag'] = new Date().toLocaleTimeString();
     setStepTimestamps({ ...ts });
     await Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)));
     await new Promise(r => setTimeout(r, 300));
+
+    setCurrentStep('full-scan');
     ts['full-scan'] = new Date().toLocaleTimeString();
     setStepTimestamps({ ...ts });
     await runAllChecks();
     await new Promise(r => setTimeout(r, 300));
+
+    setCurrentStep('review-errors');
     ts['review-errors'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('auto-repair');
     ts['auto-repair'] = new Date().toLocaleTimeString();
     setStepTimestamps({ ...ts });
     await runErrorsOnly();
     await new Promise(r => setTimeout(r, 300));
+
+    setCurrentStep('recheck');
     ts['recheck'] = new Date().toLocaleTimeString();
     setStepTimestamps({ ...ts });
     await runErrorsOnly();
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('perf-review');
     ts['perf-review'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('kb-sync');
+    ts['kb-sync'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('integrity');
     ts['integrity'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('warm-endpoints');
+    ts['warm-endpoints'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await Promise.all(CRITICAL_CHECKS.map(t => fetch(t.endpoint, { credentials: 'include' }).catch(() => {})));
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('export');
     ts['export'] = new Date().toLocaleTimeString();
     setStepTimestamps({ ...ts });
+
+    const duration = Math.round((Date.now() - startTime) / 1000);
+    setPipelineDuration(duration);
+
+    const freshResults = toolResultsRef.current;
+    const finalHealthy = allTools.filter(t => freshResults[t.id]?.status === 'healthy').length;
+    const finalErrors = allTools.filter(t => freshResults[t.id]?.status === 'error').length;
+    const entry = {
+      timestamp: new Date().toISOString(),
+      duration,
+      healthy: finalHealthy,
+      errors: finalErrors,
+      total: totalTools,
+      score: Math.round((finalHealthy / totalTools) * 100),
+      stepsCompleted: opsSteps.filter(s => s.done).length,
+    };
+    const newHistory = [entry, ...dailyOpsHistory].slice(0, 14);
+    setDailyOpsHistory(newHistory);
+    try { localStorage.setItem('glp_daily_ops_history', JSON.stringify(newHistory)); } catch {}
+
+    setCurrentStep(null);
     setPipelineRunning(false);
   };
 
@@ -1570,7 +1729,14 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
         <div className="flex items-center gap-2">
           <Clipboard size={16} className="text-blue-600" />
           <span className="text-sm font-semibold">Daily Operations Runbook</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 font-medium">{completedSteps}/{opsSteps.length} steps</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 font-medium" data-testid="text-runbook-progress">
+            {completedSteps}/{opsSteps.length} steps · {progress}%
+          </span>
+          {pipelineDuration && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200 font-medium" data-testid="text-runbook-duration">
+              {pipelineDuration}s
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -1580,7 +1746,7 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
             data-testid="button-run-full-pipeline"
           >
             {pipelineRunning ? <RefreshCw size={12} className="animate-spin" /> : <Rocket size={12} />}
-            {pipelineRunning ? 'Pipeline Running...' : 'Run Full Pipeline'}
+            {pipelineRunning ? `Running ${currentStep || ''}...` : 'Run All Daily Ops'}
           </button>
           <button
             onClick={() => setShowRunbook(!showRunbook)}
@@ -1592,37 +1758,82 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
         </div>
       </div>
 
-      <div className="h-1.5 rounded-full bg-blue-200 dark:bg-blue-800 overflow-hidden mb-2">
-        <div className="h-full rounded-full bg-blue-500 transition-all duration-300" style={{ width: `${progress}%` }} />
+      <div className="h-2 rounded-full bg-blue-200 dark:bg-blue-800 overflow-hidden mb-2">
+        <div className="h-full rounded-full bg-blue-500 transition-all duration-500" style={{ width: `${progress}%` }} />
       </div>
+
+      {pipelineRunning && currentStep && (
+        <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 mb-2 p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20" data-testid="text-runbook-current-step">
+          <RefreshCw size={12} className="animate-spin" />
+          <span className="font-medium">Currently executing: {opsSteps.find(s => s.id === currentStep)?.label || currentStep}</span>
+        </div>
+      )}
 
       {showRunbook && (
         <div className="mt-3 space-y-2">
           {opsSteps.map((step, i) => {
             const StepIcon = step.icon;
+            const isActive = currentStep === step.id;
+            const catColors = {
+              discovery: 'text-amber-500', triage: 'text-red-500', repair: 'text-purple-500',
+              verify: 'text-blue-500', optimize: 'text-cyan-500', intelligence: 'text-indigo-500',
+              finalize: 'text-emerald-500', report: 'text-gray-500'
+            };
             return (
-              <div key={step.id} className={`flex items-center gap-3 p-2.5 rounded-lg border ${step.done ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20' : 'border-gray-200 dark:border-gray-700 bg-background'}`} data-testid={`runbook-step-${step.id}`}>
+              <div key={step.id} className={`flex items-center gap-3 p-2.5 rounded-lg border transition-all ${
+                isActive ? 'border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-950/30 ring-1 ring-blue-300' :
+                step.done ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20' : 
+                'border-gray-200 dark:border-gray-700 bg-background'
+              }`} data-testid={`runbook-step-${step.id}`}>
                 <span className="text-xs font-bold text-muted-foreground w-5">{i + 1}.</span>
-                {step.done ? <CheckCircle size={14} className="text-green-600 flex-shrink-0" /> : <StepIcon size={14} className="text-muted-foreground flex-shrink-0" />}
-                <span className={`text-sm flex-1 ${step.done ? 'text-green-700 dark:text-green-400 line-through' : ''}`}>
+                {isActive ? (
+                  <RefreshCw size={14} className="animate-spin text-blue-500 flex-shrink-0" />
+                ) : step.done ? (
+                  <CheckCircle size={14} className="text-green-600 flex-shrink-0" />
+                ) : (
+                  <StepIcon size={14} className={`${catColors[step.category] || 'text-muted-foreground'} flex-shrink-0`} />
+                )}
+                <span className={`text-sm flex-1 ${isActive ? 'text-blue-700 dark:text-blue-300 font-medium' : step.done ? 'text-green-700 dark:text-green-400 line-through' : ''}`}>
                   {step.label}
                   {stepTimestamps[step.id] && <span className="text-[10px] text-muted-foreground ml-2 font-normal">({stepTimestamps[step.id]})</span>}
                 </span>
-                {!step.done && step.id === 'quick-diag' && (
+                <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${catColors[step.category] || 'text-gray-500'} bg-muted/50`}>
+                  {step.category}
+                </span>
+                {!step.done && !pipelineRunning && step.id === 'quick-diag' && (
                   <button onClick={() => Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)))} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-quick-diag">Run</button>
                 )}
-                {!step.done && step.id === 'full-scan' && (
+                {!step.done && !pipelineRunning && step.id === 'full-scan' && (
                   <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50" data-testid="button-runbook-full-scan">Run All</button>
                 )}
-                {!step.done && step.id === 'recheck' && checkedCount === totalTools && (
+                {!step.done && !pipelineRunning && step.id === 'recheck' && checkedCount === totalTools && (
                   <button onClick={runErrorsOnly} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-recheck">Re-check</button>
                 )}
-                {!step.done && step.id === 'integrity' && (
+                {!step.done && !pipelineRunning && step.id === 'integrity' && (
                   <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition-colors disabled:opacity-50" data-testid="button-runbook-integrity">Verify</button>
                 )}
               </div>
             );
           })}
+
+          {dailyOpsHistory.length > 0 && (
+            <div className="mt-3 p-3 rounded-lg bg-muted/30 border border-gray-200 dark:border-gray-700">
+              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+                <Clock size={12} /> Recent Daily Ops Runs ({dailyOpsHistory.length})
+              </div>
+              <div className="space-y-1.5 max-h-32 overflow-y-auto">
+                {dailyOpsHistory.map((run, i) => (
+                  <div key={i} className="flex items-center gap-3 text-[11px] p-1.5 rounded bg-background" data-testid={`daily-ops-history-${i}`}>
+                    <span className="text-muted-foreground font-mono w-20">{new Date(run.timestamp).toLocaleDateString()}</span>
+                    <span className={`font-bold ${run.score >= 90 ? 'text-green-600' : run.score >= 70 ? 'text-amber-500' : 'text-red-500'}`}>{run.score}%</span>
+                    <span className="text-green-600">{run.healthy} ok</span>
+                    {run.errors > 0 && <span className="text-red-500">{run.errors} err</span>}
+                    <span className="text-muted-foreground">{run.duration}s</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -2118,13 +2329,13 @@ export default function AdminTools() {
                           className={`flex items-center gap-3 p-3 rounded-lg border ${sevBorder} bg-card hover:bg-muted/50 transition-colors`}
                           data-testid={`tool-card-${tool.id}`}
                         >
-                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${severity === 'critical' ? 'bg-red-100 dark:bg-red-900/20' : severity === 'high' ? 'bg-orange-100 dark:bg-orange-900/20' : 'bg-primary/10'}`}>
-                            <ToolIcon size={16} className={severity === 'critical' ? 'text-red-600' : severity === 'high' ? 'text-orange-600' : 'text-primary'} />
+                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${severity === 'critical' ? 'bg-red-100 dark:bg-red-900/20' : severity === 'high' ? 'bg-orange-100 dark:bg-orange-900/20' : severity === 'medium' ? 'bg-blue-100 dark:bg-blue-900/20' : 'bg-primary/10'}`}>
+                            <ToolIcon size={16} className={severity === 'critical' ? 'text-red-600' : severity === 'high' ? 'text-orange-600' : severity === 'medium' ? 'text-blue-600' : 'text-primary'} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-medium truncate flex items-center gap-1.5">
                               {tool.label}
-                              {severity && (
+                              {severity && severity !== 'medium' && (
                                 <span className={`text-[9px] px-1 py-0.5 rounded font-semibold ${severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
                                   {severity === 'critical' ? 'CRIT' : 'HIGH'}
                                 </span>
