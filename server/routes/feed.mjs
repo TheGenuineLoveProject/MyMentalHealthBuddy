@@ -144,8 +144,7 @@ Sitemap: ${SITE_URL}/sitemap.xml
 });
 
 
-// Health check endpoint for admin daily tools monitoring
-router.get("/", (req, res) => {
+router.get("/health", (req, res) => {
   res.json({ ok: true, module: "feed", status: "operational", timestamp: new Date().toISOString() });
 });
 
