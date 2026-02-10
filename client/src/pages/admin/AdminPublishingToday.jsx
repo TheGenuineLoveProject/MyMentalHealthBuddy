@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import { useToast } from "@/hooks/use-toast";
 
 const PLATFORMS = [
   { key: "instagram", label: "Instagram" },
@@ -51,6 +52,7 @@ function CopyButton({ text, label }) {
 
 export default function AdminPublishingToday() {
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [filter, setFilter] = useState("all");
   const today = new Date().toISOString().split("T")[0];
 
@@ -90,7 +92,9 @@ export default function AdminPublishingToday() {
     onSuccess: () => {
       refetchFeatured();
       refetchDrafts();
+      toast({ title: "Featured post set" });
     },
+    onError: (err) => toast({ title: "Failed to set featured", description: err.message, variant: "destructive" }),
   });
 
   const markPostedMutation = useMutation({
@@ -106,7 +110,9 @@ export default function AdminPublishingToday() {
     onSuccess: () => {
       refetchDrafts();
       refetchFeatured();
+      toast({ title: "Marked as posted" });
     },
+    onError: (err) => toast({ title: "Failed to mark posted", description: err.message, variant: "destructive" }),
   });
 
   const drafts = draftsData?.ok ? (draftsData.data || []) : [];

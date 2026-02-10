@@ -106,7 +106,11 @@ export default function AdminPublishing() {
       const res = await apiRequest("PATCH", `/api/admin/publishing/registry/${id}`, { status });
       return res.json();
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/admin/publishing/registry"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/publishing/registry"] });
+      toast({ title: "Status updated" });
+    },
+    onError: (err) => toast({ title: "Status update failed", description: err.message, variant: "destructive" }),
   });
 
   const pipelineActionMutation = useMutation({
