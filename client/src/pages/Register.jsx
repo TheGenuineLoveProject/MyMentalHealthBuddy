@@ -16,58 +16,37 @@ export default function Register() {
         title="Create Account - The Genuine Love Project"
         description="Create your free account. Mood tracking, journaling, reflection prompts, and AI chat — no credit card required."
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-6 py-12" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
-        <div className="decorative-orb sage animate-drift w-[500px] h-[500px] -top-24 -right-24" style={{ animationDelay: '0s' }} aria-hidden="true" />
-        <div className="decorative-orb rose animate-drift w-[400px] h-[400px] -bottom-32 -left-32" style={{ animationDelay: '5s' }} aria-hidden="true" />
-        <div className="decorative-orb teal animate-drift w-[300px] h-[300px] top-1/3 left-10" style={{ animationDelay: '10s' }} aria-hidden="true" />
-        
-        <div className="floating-icon-container top-16 left-[8%] w-12 h-12 rounded-xl animate-float opacity-60" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '0s' }} aria-hidden="true">
-          <Leaf className="w-6 h-6 text-white" />
-        </div>
-        <div className="floating-icon-container top-24 right-[10%] w-10 h-10 rounded-lg animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 6px 20px var(--glp-rose-20)', animationDelay: '1.2s' }} aria-hidden="true">
-          <Heart className="w-5 h-5 text-white" />
-        </div>
-        <div className="floating-icon-container bottom-32 left-[6%] w-11 h-11 rounded-xl animate-float opacity-45" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '2.4s' }} aria-hidden="true">
-          <Brain className="w-5 h-5 text-white" />
-        </div>
-        <div className="floating-icon-container top-1/3 right-[6%] w-9 h-9 rounded-lg animate-float opacity-55" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dim))', boxShadow: '0 6px 20px var(--glp-gold-30)', animationDelay: '3.6s' }} aria-hidden="true">
-          <Sun className="w-4 h-4 text-white" />
-        </div>
-        <div className="floating-icon-container bottom-40 right-[12%] w-10 h-10 rounded-xl animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '0.8s' }} aria-hidden="true">
-          <Star className="w-5 h-5 text-white" />
-        </div>
-        <div className="floating-icon-container top-12 left-1/4 w-8 h-8 rounded-lg animate-float opacity-35" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-rose))', boxShadow: '0 6px 20px var(--glp-rose-20)', animationDelay: '4s' }} aria-hidden="true">
-          <Sparkles className="w-4 h-4 text-white" />
-        </div>
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-8" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+        <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
+        <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
         
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center gap-4 group">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
-                <img 
-                  src="/brand/logo-mark.png" 
-                  alt="The Genuine Love Project" 
-                  className="w-9 h-9 object-contain"
-                  data-testid="img-register-logo"
-                />
-              </div>
-              <span className="text-xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
+          <div className="text-center mb-5">
+            <Link href="/" className="inline-flex items-center gap-3 group">
+              <img 
+                src="/brand/login-logo.png" 
+                alt="The Genuine Love Project" 
+                className="w-14 h-14 object-contain transition-all group-hover:scale-105"
+                data-testid="img-register-logo"
+              />
+              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
 
           <div 
-            className="rounded-3xl p-8 shadow-2xl"
+            className="rounded-3xl p-6 shadow-2xl"
             style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}
             data-testid="form-register"
           >
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold font-display mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-register-title">
+            <div className="text-center mb-4">
+              <h1 className="text-2xl font-bold font-display mb-1" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-register-title">
                 Create Your Account
               </h1>
-              <p style={{ color: 'var(--glp-sage)' }}>Free to start. No credit card required.</p>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Free to start. No credit card required.</p>
             </div>
 
-            <div className="mb-6 p-4 rounded-xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
+            <div className="mb-4 p-3 rounded-xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
               <ul className="space-y-2">
                 {benefits.map((benefit, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -90,7 +69,7 @@ export default function Register() {
               <ArrowRight className="w-5 h-5" />
             </a>
 
-            <div className="mt-6 space-y-3">
+            <div className="mt-4 space-y-2">
               <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
                 <Shield className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
                 <span>Sign in with Google, GitHub, or email</span>
@@ -105,7 +84,7 @@ export default function Register() {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
+            <div className="mt-4 pt-4 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
               <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 Already have an account?{" "}
                 <Link href="/login" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}

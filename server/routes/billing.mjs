@@ -50,8 +50,6 @@ async function getOrCreateStripeCustomer(userId, email) {
   return customer.id;
 }
 
-router.use(requireAuth);
-
 router.get("/plans", async (req, res) => {
   return success(res, {
     plans: Object.entries(PLANS).map(([key, plan]) => ({
@@ -62,6 +60,18 @@ router.get("/plans", async (req, res) => {
     })),
   });
 });
+
+router.post("/pricing-view", (req, res) => {
+  const plan = req.session?.userData ? "authenticated" : "anonymous";
+  increment("pricing_page_view", { plan });
+  res.status(204).end();
+});
+
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "billing", status: "operational", timestamp: new Date().toISOString() });
+});
+
+router.use(requireAuth);
 
 router.post("/checkout", async (req, res) => {
   try {
@@ -232,18 +242,6 @@ router.get("/invoices", async (req, res) => {
     logger.error("Invoices error", { error: err.message });
     return serverError(res, err);
   }
-});
-
-router.post("/pricing-view", (req, res) => {
-  const plan = req.session?.userData ? "authenticated" : "anonymous";
-  increment("pricing_page_view", { plan });
-  res.status(204).end();
-});
-
-
-// Health check endpoint for admin daily tools monitoring
-router.get("/", (req, res) => {
-  res.json({ ok: true, module: "billing", status: "operational", timestamp: new Date().toISOString() });
 });
 
 export default router;
