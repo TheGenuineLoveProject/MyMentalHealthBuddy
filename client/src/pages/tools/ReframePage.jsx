@@ -122,30 +122,6 @@ export default function ReframePage() {
 
     <div>
       <div className="max-w-2xl mx-auto space-y-8">
-        <BenefitsBlock
-          benefits={[
-            "Turn harsh thoughts into gentler perspectives",
-            "Find one observable next step",
-            "Practice self-compassion through language"
-          ]}
-          control="Pause or stop anytime—only do what feels safe."
-          crisisLink="/crisis"
-        />
-
-        <ClarityCard
-          what="A way of shifting harsh self-talk so your mind can find better options."
-          who="Anyone stuck in harsh inner criticism or hopeless thoughts."
-          when="When your mind says 'I can't,' 'I'm broken,' or 'it's hopeless.'"
-          why="Words shape what you notice and what you attempt. Gentler words open new paths."
-          howSteps={[
-            "Notice the harsh phrase your mind is saying",
-            "See 3 alternative reframes",
-            "Pick one observable step to try"
-          ]}
-          whereLinkText="View in System Map"
-          whereHref="/system-map"
-        />
-
         <section
           className="p-6 rounded-2xl border bg-background dark:bg-[hsl(var(--gray-900))] border-[hsl(var(--gray-200))] dark:border-[hsl(var(--gray-700))]"
           aria-labelledby="reframe-input-heading"
@@ -278,6 +254,30 @@ export default function ReframePage() {
             ))}
           </ul>
         </section>
+
+        <ClarityCard
+          what="A way of shifting harsh self-talk so your mind can find better options."
+          who="Anyone stuck in harsh inner criticism or hopeless thoughts."
+          when="When your mind says 'I can't,' 'I'm broken,' or 'it's hopeless.'"
+          why="Words shape what you notice and what you attempt. Gentler words open new paths."
+          howSteps={[
+            "Notice the harsh phrase your mind is saying",
+            "See 3 alternative reframes",
+            "Pick one observable step to try"
+          ]}
+          whereLinkText="View in System Map"
+          whereHref="/system-map"
+        />
+
+        <BenefitsBlock
+          benefits={[
+            "Turn harsh thoughts into gentler perspectives",
+            "Find one observable next step",
+            "Practice self-compassion through language"
+          ]}
+          control="Pause or stop anytime—only do what feels safe."
+          crisisLink="/crisis"
+        />
 
         <ExamplesAccordion
           title="See examples at each level"

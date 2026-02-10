@@ -119,35 +119,15 @@ export default function MoodPage() {
 
   if (success) {
     return (
-  <WellnessPageShell
-    title="Mood Saved"
-    subtitle="Your check-in has been recorded."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
-      <div className="min-h-screen flex items-center justify-center bg-gradient-mesh" role="status" aria-label="Mood saved successfully">
+      <div className="min-h-[60vh] flex items-center justify-center" role="status" aria-label="Mood saved successfully">
         <div className="text-center animate-scale-in">
-          <div className="w-24 h-24 rounded-full bg-[var(--accent-teal-soft)] flex items-center justify-center mx-auto mb-6">
-            <Check className="w-12 h-12 text-[var(--accent-teal)]" aria-hidden="true" />
+          <div className="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mx-auto mb-5">
+            <Check className="w-10 h-10 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
           </div>
-          <h2 className="text-3xl font-bold mb-2">Mood Saved!</h2>
-          <p className="text-[var(--text-secondary)]">Redirecting to dashboard...</p>
+          <h2 className="text-2xl font-bold text-foreground mb-2" data-testid="text-mood-saved">Mood Saved</h2>
+          <p className="text-muted-foreground">Redirecting to dashboard...</p>
         </div>
       </div>
-    </WellnessPageShell>
     );
   }
 

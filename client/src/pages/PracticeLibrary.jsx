@@ -194,35 +194,35 @@ export default function PracticeLibrary() {
           </p>
         </header>
 
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12" data-testid="section-core-tools">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-10" data-testid="section-core-tools">
           {[
-            { title: "Mood Check-In", description: "Track how you feel", icon: Smile, href: "/mood", color: "bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-300" },
-            { title: "Journal", description: "Write and reflect", icon: Notebook, href: "/journal", color: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300" },
-            { title: "Reframe Tool", description: "Shift your perspective", icon: RefreshCw, href: "/tools/reframe", color: "bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-300" },
-            { title: "Topic Hubs", description: "Explore by topic", icon: Compass, href: "/hubs", color: "bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-300" },
+            { title: "Mood Check-In", description: "Track how you feel", icon: Smile, href: "/mood", bg: "bg-amber-50 dark:bg-amber-950/40", iconBg: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300" },
+            { title: "Journal", description: "Write and reflect", icon: Notebook, href: "/journal", bg: "bg-emerald-50 dark:bg-emerald-950/40", iconBg: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300" },
+            { title: "Reframe Tool", description: "Shift your perspective", icon: RefreshCw, href: "/tools/reframe", bg: "bg-violet-50 dark:bg-violet-950/40", iconBg: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-300" },
+            { title: "Topic Hubs", description: "Explore by topic", icon: Compass, href: "/hubs", bg: "bg-sky-50 dark:bg-sky-950/40", iconBg: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300" },
           ].map(tool => {
             const Icon = tool.icon;
             return (
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="group flex flex-col items-center gap-3 p-5 rounded-xl border border-border hover:border-primary/40 hover:shadow-md transition-all bg-card"
+                className={`group flex flex-col items-center gap-3 p-5 rounded-xl border border-border/60 hover:border-primary/40 hover:shadow-md transition-all ${tool.bg}`}
                 data-testid={`link-tool-${tool.title.toLowerCase().replace(/\s+/g, '-')}`}
               >
-                <div className={`p-3 rounded-xl ${tool.color}`}>
+                <div className={`p-3 rounded-xl ${tool.iconBg}`}>
                   <Icon className="w-6 h-6" />
                 </div>
                 <div className="text-center">
                   <p className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">{tool.title}</p>
-                  <p className="text-xs text-muted-foreground">{tool.description}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{tool.description}</p>
                 </div>
               </Link>
             );
           })}
         </section>
 
-        <section className="mb-12 p-6 rounded-2xl border border-primary/20 bg-primary/5" data-testid="section-twelve-practices">
-          <div className="flex items-center justify-between mb-4">
+        <section className="mb-10 p-5 sm:p-6 rounded-2xl border border-primary/20 bg-primary/5" data-testid="section-twelve-practices">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-primary/10">
                 <BookOpen className="w-5 h-5 text-primary" />
@@ -239,7 +239,7 @@ export default function PracticeLibrary() {
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5 sm:gap-2">
             {[
               { n: 1, name: "Willingness", domain: "mind" },
               { n: 2, name: "Clarity", domain: "mind" },
@@ -253,17 +253,27 @@ export default function PracticeLibrary() {
               { n: 10, name: "Resilience", domain: "action" },
               { n: 11, name: "Gratitude", domain: "soul" },
               { n: 12, name: "Service", domain: "action" },
-            ].map(p => (
-              <Link
-                key={p.n}
-                href="/twelve-practices"
-                className="flex items-center gap-2 p-2 rounded-lg hover:bg-primary/10 transition-colors"
-                data-testid={`link-practice-${p.n}`}
-              >
-                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/15 text-primary text-xs font-bold flex-shrink-0">{p.n}</span>
-                <span className="text-sm text-foreground truncate">{p.name}</span>
-              </Link>
-            ))}
+            ].map(p => {
+              const domainColors = {
+                mind: "bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300",
+                body: "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300",
+                soul: "bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300",
+                action: "bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300",
+              };
+              return (
+                <Link
+                  key={p.n}
+                  href="/twelve-practices"
+                  className="hover:bg-primary/10 transition-colors rounded-lg"
+                  data-testid={`link-practice-${p.n}`}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px' }}>
+                    <div className={`flex items-center justify-center rounded-full text-xs font-bold ${domainColors[p.domain]}`} style={{ width: '28px', height: '28px', minWidth: '28px', flexShrink: 0 }}>{p.n}</div>
+                    <div className="text-sm font-medium text-foreground">{p.name}</div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
