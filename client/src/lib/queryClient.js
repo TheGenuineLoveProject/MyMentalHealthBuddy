@@ -1,12 +1,20 @@
 import { QueryClient } from "@tanstack/react-query";
 
 const TOKEN_KEY = "mmhb_token";
+const CONSENT_STORAGE_KEY = "glp_age_confirmed";
 
 function getToken() {
   if (typeof window === "undefined" || typeof localStorage === "undefined") {
     return null;
   }
   return localStorage.getItem(TOKEN_KEY);
+}
+
+function hasAgeConsent() {
+  if (typeof window === "undefined" || typeof localStorage === "undefined") {
+    return false;
+  }
+  return localStorage.getItem(CONSENT_STORAGE_KEY) === "true";
 }
 
 async function throwIfResNotOk(res) {
@@ -24,6 +32,10 @@ export async function apiRequest(method, url, data) {
   
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  if (hasAgeConsent()) {
+    headers["x-age-confirmed"] = "true";
   }
 
   const res = await fetch(url, {
@@ -57,6 +69,10 @@ export const queryClient = new QueryClient({
         
         if (token) {
           headers["Authorization"] = `Bearer ${token}`;
+        }
+
+        if (hasAgeConsent()) {
+          headers["x-age-confirmed"] = "true";
         }
 
         const res = await fetch(url, {
