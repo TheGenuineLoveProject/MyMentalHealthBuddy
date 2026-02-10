@@ -93,7 +93,7 @@ waitForPort = 5000
 
 [nix]
 channel = "stable-25_05"
-packages = ["lsof", "unzip", "python313Packages.pytest"]
+packages = ["lsof", "unzip", "python313Packages.pytest", "gnupg1"]
 
 [userenv]
 
