@@ -16,7 +16,8 @@ import {
   ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox,
   Clock, Download, Timer, Filter, RotateCcw,
   Wrench, ExternalLink, Stethoscope, Terminal, FileWarning, Cpu,
-  Clipboard, ScanLine, HardDrive, GitBranch
+  Clipboard, ScanLine, HardDrive, GitBranch,
+  XCircle, CheckCircle2, Loader2
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -255,6 +256,21 @@ const AI_REMEDIATION = {
   "data-integrity-warning": { suggestion: "Potential data integrity issue in database records. Perplexity KB: Orphaned records, broken foreign key references, or NULL values in required fields detected.", action: "Run data integrity audit", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
   "load-balancer-health": { suggestion: "Load balancer health check may be failing. Canva KB: Ensure /api/health endpoint responds within 5 seconds with 200 status. Check timeout and retry settings.", action: "Verify health endpoint", knowledgeBase: "Canva", autoFixable: true, fixCommand: "warm-all" },
   "drizzle-sync-needed": { suggestion: "Drizzle ORM schema out of sync with database. Codex KB: Run npm run db:push to synchronize schema changes. Check for pending model changes in shared/schema.mjs.", action: "Sync Drizzle schema", knowledgeBase: "Codex", autoFixable: true, fixCommand: "sync-schema" },
+  "vacuum-needed": { suggestion: "Database needs vacuuming to reclaim dead tuple space. Codex KB: Run VACUUM ANALYZE to clean up dead rows and update query planner statistics for optimal performance.", action: "Run database vacuum", knowledgeBase: "Codex", autoFixable: true, fixCommand: "vacuum-db" },
+  "table-bloat": { suggestion: "Database tables have significant dead tuple bloat. Perplexity KB: Tables with >20% dead tuples need VACUUM. Bloated tables cause slower sequential scans and increased storage.", action: "Run table health check", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "table-health" },
+  "index-unused": { suggestion: "Unused database indexes detected. Codex KB: Indexes with zero scans consume write overhead without query benefit. Review and consider removing unused indexes.", action: "Audit index usage", knowledgeBase: "Codex", autoFixable: true, fixCommand: "index-health" },
+  "index-missing": { suggestion: "High sequential scan count suggests missing indexes. Perplexity KB: Tables with frequent seq scans may benefit from targeted indexes on commonly queried columns.", action: "Review sequential scan hotspots", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "index-health" },
+  "dependency-outdated": { suggestion: "Critical dependencies may be outdated. Canva KB: Check package versions for security vulnerabilities and breaking changes. Run dependency audit regularly.", action: "Run dependency audit", knowledgeBase: "Canva", autoFixable: true, fixCommand: "dependency-audit" },
+  "dependency-missing-critical": { suggestion: "Critical dependency not found in package.json. Codex KB: Essential packages like express, drizzle-orm, react, or vite are missing from the dependency list.", action: "Verify critical dependencies", knowledgeBase: "Codex", autoFixable: true, fixCommand: "dependency-audit" },
+  "security-headers-weak": { suggestion: "Security headers may not be properly configured. Canva KB: Verify Helmet middleware is active with CSP, X-Frame-Options, HSTS, and other protective headers.", action: "Audit security headers", knowledgeBase: "Canva", autoFixable: true, fixCommand: "security-headers-audit" },
+  "secret-exposed-risk": { suggestion: "Sensitive environment variables need security verification. Codex KB: Ensure all API keys and secrets are stored in Replit Secrets, not hardcoded or logged.", action: "Verify secret security", knowledgeBase: "Codex", autoFixable: true, fixCommand: "security-headers-audit" },
+  "optimize-all-needed": { suggestion: "Platform needs comprehensive optimization pass. Perplexity KB: Run full optimization — vacuum, cache rebuild, endpoint warmup, session cleanup, and log rotation in one command.", action: "Run full optimization", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "optimize-all" },
+  "db-statistics-stale": { suggestion: "Database planner statistics are outdated. Codex KB: Run ANALYZE to update statistics used by the query planner. Stale stats lead to suboptimal query plans.", action: "Update query planner stats", knowledgeBase: "Codex", autoFixable: true, fixCommand: "vacuum-db" },
+  "table-fragmentation": { suggestion: "Table data fragmentation reducing scan performance. Perplexity KB: Fragmented tables benefit from VACUUM FULL (offline) or regular VACUUM to reduce physical bloat.", action: "Defragment tables", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "vacuum-db" },
+  "seq-scan-hotspot": { suggestion: "Sequential scan hotspot detected on frequently queried table. Codex KB: Add targeted index on the WHERE clause columns to convert seq scans to index scans.", action: "Create targeted index", knowledgeBase: "Codex", autoFixable: true, fixCommand: "index-health" },
+  "node-version-check": { suggestion: "Node.js version should be verified for compatibility. Canva KB: Ensure runtime version matches package.json engines field and supports all used language features.", action: "Check Node.js version", knowledgeBase: "Canva", autoFixable: true, fixCommand: "dependency-audit" },
+  "csrf-gap": { suggestion: "CSRF protection may have gaps on state-changing endpoints. Codex KB: Verify all POST/PUT/DELETE routes have CSRF token validation or SameSite cookie protection.", action: "Audit CSRF coverage", knowledgeBase: "Codex", autoFixable: true, fixCommand: "security-headers-audit" },
+  "full-optimization-overdue": { suggestion: "Last full optimization was more than 24 hours ago. Perplexity KB: Regular optimization passes keep DB healthy, caches warm, and response times low.", action: "Run optimize-all command", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "optimize-all" },
 };
 
 function getRemediation(label, ms) {
@@ -1030,6 +1046,30 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
         try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }); } catch {}
         await new Promise(r => setTimeout(r, 300));
         await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'vacuum-db') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'vacuum-db' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 600));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'table-health') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'table-health' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'index-health') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'index-health' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'dependency-audit') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'dependency-audit' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'security-headers-audit') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'security-headers-audit' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'optimize-all') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 800));
+        await runHealthCheck(issue);
       } else {
         await runHealthCheck(issue);
       }
@@ -1719,7 +1759,7 @@ function PlatformCoverageReport({ toolResults }) {
   const overallScore = Math.round(
     ((linkCoverage / totalTools) * 20) +
     ((sevCoverage / totalTools) * 25) +
-    ((Math.min(remScenarios, 127) / 127) * 20) +
+    ((Math.min(remScenarios, 143) / 143) * 20) +
     ((autoFixable / Math.max(remScenarios, 1)) * 10) +
     ((scanCoverage) * 0.25)
   );
@@ -1847,9 +1887,9 @@ function PlatformCoverageReport({ toolResults }) {
               <div>
                 <div className="text-muted-foreground mb-1">KB Scenarios</div>
                 <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                  <div className="h-full rounded-full bg-indigo-500" style={{ width: `${Math.min((remScenarios / 80) * 100, 100)}%` }} />
+                  <div className="h-full rounded-full bg-indigo-500" style={{ width: `${Math.min((remScenarios / 143) * 100, 100)}%` }} />
                 </div>
-                <div className="text-right font-medium mt-0.5">{remScenarios}/80</div>
+                <div className="text-right font-medium mt-0.5">{remScenarios}/143</div>
               </div>
               <div>
                 <div className="text-muted-foreground mb-1">Auto-Fix Capability</div>
@@ -1883,6 +1923,128 @@ function PlatformCoverageReport({ toolResults }) {
               })}
             </div>
           </div>
+
+          <div className="p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20 border border-emerald-200 dark:border-emerald-800">
+            <div className="text-xs font-semibold mb-2.5 flex items-center gap-1.5">
+              <Activity size={12} className="text-emerald-600" /> System Health Summary
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-pass">
+                <div className="text-xl font-bold text-green-600">{healthyCount}</div>
+                <div className="text-[9px] text-muted-foreground">Pass</div>
+              </div>
+              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fail">
+                <div className="text-xl font-bold text-red-500">{errorCount}</div>
+                <div className="text-[9px] text-muted-foreground">Fail</div>
+              </div>
+              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-unchecked">
+                <div className="text-xl font-bold text-gray-400">{totalTools - checkedCount}</div>
+                <div className="text-[9px] text-muted-foreground">Unchecked</div>
+              </div>
+              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fix-cmds">
+                <div className="text-xl font-bold text-purple-600">{[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].length}</div>
+                <div className="text-[9px] text-muted-foreground">Fix Commands</div>
+              </div>
+            </div>
+            {(() => {
+              const latencyBands = { fast: 0, normal: 0, slow: 0, timeout: 0 };
+              Object.values(toolResults).forEach(r => {
+                if (!r.ms) return;
+                if (r.ms < 500) latencyBands.fast++;
+                else if (r.ms < 2000) latencyBands.normal++;
+                else if (r.ms < 5000) latencyBands.slow++;
+                else latencyBands.timeout++;
+              });
+              return (
+                <div className="mb-3">
+                  <div className="text-[10px] font-semibold mb-1.5">Latency Distribution</div>
+                  <div className="flex gap-1.5">
+                    <div className="flex-1 text-center p-1.5 rounded bg-green-100 dark:bg-green-900/30 text-[10px]" data-testid="latency-fast">
+                      <div className="font-bold text-green-700 dark:text-green-400">{latencyBands.fast}</div>
+                      <div className="text-green-600 dark:text-green-500">&lt;500ms</div>
+                    </div>
+                    <div className="flex-1 text-center p-1.5 rounded bg-blue-100 dark:bg-blue-900/30 text-[10px]" data-testid="latency-normal">
+                      <div className="font-bold text-blue-700 dark:text-blue-400">{latencyBands.normal}</div>
+                      <div className="text-blue-600 dark:text-blue-500">500-2s</div>
+                    </div>
+                    <div className="flex-1 text-center p-1.5 rounded bg-amber-100 dark:bg-amber-900/30 text-[10px]" data-testid="latency-slow">
+                      <div className="font-bold text-amber-700 dark:text-amber-400">{latencyBands.slow}</div>
+                      <div className="text-amber-600 dark:text-amber-500">2-5s</div>
+                    </div>
+                    <div className="flex-1 text-center p-1.5 rounded bg-red-100 dark:bg-red-900/30 text-[10px]" data-testid="latency-timeout">
+                      <div className="font-bold text-red-700 dark:text-red-400">{latencyBands.timeout}</div>
+                      <div className="text-red-600 dark:text-red-500">&gt;5s</div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+            <OptimizeAllButton />
+          </div>
+
+          <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+              <Shield size={12} /> Tool Coverage Audit
+            </div>
+            <div className="space-y-1 max-h-48 overflow-y-auto">
+              {allTools.filter(t => !TOOL_ADMIN_LINKS[t.id] || !TOOL_SEVERITY[t.id]).map(t => (
+                <div key={t.id} className="flex items-center gap-2 text-[10px] p-1.5 rounded bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-800" data-testid={`audit-gap-${t.id}`}>
+                  <AlertTriangle size={10} className="text-amber-500 shrink-0" />
+                  <span className="font-mono font-medium">{t.id}</span>
+                  {!TOOL_ADMIN_LINKS[t.id] && <span className="text-amber-600 text-[9px] px-1 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30">missing admin link</span>}
+                  {!TOOL_SEVERITY[t.id] && <span className="text-orange-600 text-[9px] px-1 py-0.5 rounded bg-orange-100 dark:bg-orange-900/30">unclassified severity</span>}
+                </div>
+              ))}
+              {allTools.filter(t => !TOOL_ADMIN_LINKS[t.id] || !TOOL_SEVERITY[t.id]).length === 0 && (
+                <div className="text-[11px] text-green-600 flex items-center gap-1.5 p-2">
+                  <CheckCircle2 size={12} /> All {totalTools} tools have admin links and severity classification
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function OptimizeAllButton() {
+  const [running, setRunning] = useState(false);
+  const [result, setResult] = useState(null);
+
+  const runOptimizeAll = async () => {
+    setRunning(true);
+    setResult(null);
+    try {
+      const resp = await fetch('/api/health/repair', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ command: 'optimize-all' })
+      });
+      if (resp.ok) setResult(await resp.json());
+    } catch {}
+    setRunning(false);
+  };
+
+  return (
+    <div data-testid="panel-optimize-all">
+      <button
+        onClick={runOptimizeAll}
+        disabled={running}
+        className="w-full py-2 px-4 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white text-xs font-semibold hover:from-emerald-600 hover:to-blue-600 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+        data-testid="button-optimize-all"
+      >
+        {running ? <><Loader2 size={14} className="animate-spin" /> Running Full Optimization...</> : <><Zap size={14} /> Optimize All — Vacuum + Cache + Warm + Clean</>}
+      </button>
+      {result && (
+        <div className="mt-2 space-y-1 max-h-32 overflow-y-auto">
+          {result.actions?.map((a, i) => (
+            <div key={i} className="text-[10px] p-1 rounded bg-background border flex items-center gap-1.5" data-testid={`optimize-result-${i}`}>
+              {a.startsWith('✓') ? <CheckCircle2 size={9} className="text-green-500 shrink-0" /> : a.startsWith('✗') ? <XCircle size={9} className="text-red-500 shrink-0" /> : <Zap size={9} className="text-amber-500 shrink-0" />}
+              <span className="font-mono">{a}</span>
+            </div>
+          ))}
+          <div className="text-[10px] font-semibold text-emerald-600 mt-1">{result.message}</div>
         </div>
       )}
     </div>
@@ -2198,6 +2360,7 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
     { id: 'integrity', label: 'Platform Integrity Validation', done: checkedCount === totalTools && healthyCount === totalTools, icon: ShieldCheck, category: 'finalize' },
     { id: 'warm-endpoints', label: 'Pre-warm Critical Paths', done: CRITICAL_CHECKS.every(c => toolResults[c.id]?.status === 'healthy' && toolResults[c.id]?.ms < 1000), icon: Flame, category: 'finalize' },
     { id: 'cache-rebuild', label: 'Cache Rebuild & Optimize', done: checkedCount === totalTools && slowCount === 0, icon: HardDrive, category: 'optimize' },
+    { id: 'optimize-all', label: 'Full 360° Optimization Pass', done: checkedCount === totalTools && errorCount === 0 && slowCount === 0, icon: Zap, category: 'finalize' },
     { id: 'export', label: 'Export Daily Health Report', done: false, icon: Download, category: 'report' },
   ];
 
@@ -2294,6 +2457,12 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
     setStepTimestamps({ ...ts });
     try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {}); } catch {}
     await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('optimize-all');
+    ts['optimize-all'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {}); } catch {}
+    await new Promise(r => setTimeout(r, 300));
 
     setCurrentStep('export');
     ts['export'] = new Date().toLocaleTimeString();
@@ -2426,6 +2595,9 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
                 )}
                 {!step.done && !pipelineRunning && step.id === 'cache-rebuild' && (
                   <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
+                )}
+                {!step.done && !pipelineRunning && step.id === 'optimize-all' && (
+                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
                 )}
               </div>
             );
