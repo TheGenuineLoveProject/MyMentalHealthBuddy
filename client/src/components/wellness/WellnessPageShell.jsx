@@ -33,10 +33,8 @@ export function WellnessPageShell({
         </header>
       ) : null}
 
-      <section className="rounded-xl border border-border bg-card p-4 md:p-6 mb-6 overflow-hidden">
-        <div className="overflow-x-hidden overflow-y-visible break-words">
-          {children}
-        </div>
+      <section className="rounded-xl border border-border bg-card p-4 md:p-6 mb-6">
+        {children}
       </section>
 
       <button

@@ -379,7 +379,7 @@ export default function App() {
                 <ProtectedRoute><DailyFlow /></ProtectedRoute>
               </Route>
               <Route path="/mood">
-                <WellnessRoute><MoodPage /></WellnessRoute>
+                <AgeConsentGate><MoodPage /></AgeConsentGate>
               </Route>
               <Route path="/state">
                 <WellnessRoute><StatePage /></WellnessRoute>

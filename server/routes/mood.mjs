@@ -18,6 +18,29 @@ router.get("/ping", (_req, res) => {
   return success(res, { route: "mood" }, "Mood route is healthy.");
 });
 
+/**
+ * GET /api/mood
+ * List moods for authenticated user; returns empty for unauthenticated
+ */
+router.get("/", async (req, res) => {
+  try {
+    const userId = req.dbUserId;
+    if (!userId) {
+      return success(res, [], "Sign in to view your mood history.");
+    }
+    const rows = await db
+      .select()
+      .from(moods)
+      .where(eq(moods.userId, userId))
+      .orderBy(sql`${moods.createdAt} DESC`)
+      .limit(100);
+    return success(res, rows, "Mood entries retrieved.");
+  } catch (err) {
+    logger.error("Failed to retrieve moods", { error: err.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Error retrieving mood data." });
+  }
+});
+
 // Apply auth middleware to protected routes
 router.use(requireAuth);
 
@@ -72,35 +95,6 @@ router.post("/", validateBody(createMoodSchema), async (req, res) => {
   }
 });
 
-/**
- * GET /api/mood
- * List all moods for authenticated user
- */
-router.get("/", async (req, res) => {
-  try {
-    const userId = req.dbUserId;
-
-    const rows = await db
-      .select()
-      .from(moods)
-      .where(eq(moods.userId, userId))
-      .orderBy(sql`${moods.createdAt} DESC`);
-
-    // Parse activities back to array if needed
-    const parsed = rows.map((row) => ({
-      ...row,
-      activities: row.activities ? row.activities.split(",").filter(Boolean) : [],
-    }));
-
-    return success(res, parsed, "Mood entries loaded.");
-  } catch (err) {
-    logger.error("Failed to list mood entries", { error: err.message, requestId: req.requestId });
-    return res.status(500).json({
-      ok: false,
-      message: "Unexpected error when loading mood entries.",
-    });
-  }
-});
 
 /**
  * GET /api/mood/stats

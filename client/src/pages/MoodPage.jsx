@@ -182,7 +182,7 @@ export default function MoodPage() {
   const [successMsg, setSuccessMsg] = useState("");
   const { awardXp } = useGamification();
 
-  const { data: moodData, isLoading } = useQuery({
+  const { data: moodData, isLoading, isError } = useQuery({
     queryKey: ["/api/mood"],
     select: (data) => {
       if (data?.ok && Array.isArray(data.data)) return data.data;
@@ -190,6 +190,7 @@ export default function MoodPage() {
       if (data?.entries && Array.isArray(data.entries)) return data.entries;
       return [];
     },
+    retry: false,
   });
 
   const entries = moodData || [];

@@ -1,0 +1,196 @@
+THE GENUINE LOVE PROJECT — ENTERPRISE HARDENING v3.0
+( GitHub Ruleset Fix + Broken Link/Button Repair + Publishing/Newsletter + Enterprise Social Admin )
+
+NON-NEGOTIABLE RULES:
+- ADDITIVE changes only unless a change is required to fix broken behavior.
+- No renames, no deletes, no big refactors.
+- No background daemons, no cron jobs, no auto-posting to social platforms.
+- Human-in-the-loop only. Manual publish only.
+- Mount server routes exactly once in the true entry file referenced by .replit.
+
+PRIMARY GOAL:
+Make the platform “enterprise clean”:
+- GitHub ruleset compliance (signed commits going forward)
+- No Page Not Found routes
+- All buttons/link targets actually wired
+- Newsletter/blog/publishing robust end-to-end
+- Social Media Admin becomes enterprise-grade (queue, pipeline, tracking links, audit logs)
+- Provide a single “EVOLVE” command (human-triggered) that validates everything and produces reports.
+
+========================
+PHASE 0 — TRUTH REPORT (STOP AFTER REPORT)
+========================
+1) Print the true run entrypoint from .replit (show exact file).
+2) Print where router is defined on client (routes file path).
+3) Locate Social Admin pages/routes (exact file paths).
+4) Locate Blog + Newsletter pages + endpoints (exact file paths).
+5) Locate any existing link audits, publishing audits, or scripts (exact file paths).
+6) Identify where PLATFORM_LOCK actually lives:
+   - check for PLATFORM_LOCK.md at repo root
+   - check for docs/PLATFORM_LOCK.md
+Output a report with:
+- FOUND (paths)
+- GAPS
+- DUPLICATE RISK (multiple server entrypoints, double-mounted routes)
+STOP. Do not edit until this report is printed.
+
+========================
+PHASE 1 — FIX THE PLATFORM_LOCK PATH BUG (NO GUESSING)
+========================
+Goal: git add works and the file is canonical.
+Actions:
+A) If PLATFORM_LOCK.md exists at repo root, create docs/ directory if missing, then ADD a copy:
+   - docs/PLATFORM_LOCK.md must exist
+   - Keep root PLATFORM_LOCK.md unchanged (no delete)
+B) If docs/PLATFORM_LOCK.md exists but is stale, sync content from root (additive or overwrite only if required)
+C) Confirm with:
+   - ls -la PLATFORM_LOCK.md docs/PLATFORM_LOCK.md
+   - git status
+
+========================
+PHASE 2 — GITHUB SIGNED COMMITS (ENTERPRISE COMPLIANCE GOING FORWARD)
+========================
+Problem: GitHub ruleset requires verified signatures. Existing history has 344 unsigned commits.
+Solution: Start signing from now on inside Replit.
+Implement BOTH:
+A) Document exact “how to sign commits from Replit” in docs/GITHUB_SIGNING.md
+   Include two options:
+   Option 1 (Preferred): SSH commit signing
+   Option 2: GPG commit signing
+B) Add a script that checks whether signing is enabled locally:
+   scripts/check-signing.mjs
+   It prints PASS if:
+   - git config --get commit.gpgsign is true
+   - git config --get gpg.format is set (ssh or openpgp)
+   Otherwise prints FAIL + exact commands to fix.
+
+IMPORTANT:
+- Do NOT rewrite history in this phase.
+- We only enforce signed commits forward.
+- Create docs/HISTORY_SIGNATURE_PLAN.md describing the safe later option (separate maintenance window) if we ever decide to rewrite history.
+
+========================
+PHASE 3 — SECURITY (DEPENDABOT VULNS) WITHOUT CHAOS
+========================
+Create scripts/security-audit.mjs that:
+- runs npm audit --json (or pnpm if project uses it)
+- writes docs/SECURITY_AUDIT.md summary
+- proposes a “minimal safe upgrade set” (patch/minor only) first
+- never auto-upgrades major versions unless explicitly required
+
+If package manager differs (pnpm/yarn), detect and use correct command.
+
+========================
+PHASE 4 — LINK + BUTTON INTEGRITY (PAGE NOT FOUND ELIMINATION)
+========================
+Create scripts/audit-links.mjs that:
+- scans client/src for:
+  - <Link to="...">
+  - navigate("...")
+  - href="..."
+  - buttons with onClick handlers that should navigate
+- extracts route targets
+- validates route exists in router OR is covered by redirects
+- flags:
+  - href="#"
+  - empty href
+  - placeholder routes
+Outputs:
+- docs/LINK_AUDIT_REPORT.md
+with Top 25 Fixes ranked by impact.
+For each fix include:
+- file path
+- line number (best effort)
+- expected correct target route
+Do NOT apply fixes automatically — produce the ranked list.
+
+========================
+PHASE 5 — ENTERPRISE SOCIAL ADMIN (MANUAL PUBLISH, NO AUTO-POSTING)
+========================
+Goal: /admin/social becomes an enterprise ops console.
+
+Backend (admin-only):
+- Create server/routes/admin-social.mjs
+- Store posts in the existing DB if present; if no DB table exists, use a simple JSON store at:
+  content/narrative/social_posts.json
+Do NOT introduce new infra if DB already exists.
+
+Endpoints:
+- GET  /api/admin/social/posts?status=&campaign=&from=&to=
+- POST /api/admin/social/posts
+- PUT  /api/admin/social/posts/:id
+- POST /api/admin/social/posts/:id/submit
+- POST /api/admin/social/posts/:id/approve   (runs safety checks)
+- POST /api/admin/social/posts/:id/mark-posted  (records platform + posted_at)
+- POST /api/admin/social/build-utm  (returns utmUrl)
+- GET  /api/admin/social/metrics    (counts: drafts, approved, posted, clicks by slug)
+
+Tracking redirects:
+- Create server/routes/redirects.mjs
+- GET /r/:slug -> increments clicks -> 302 to destination
+Mount routes ONCE in the true entry file:
+- /api/admin/social
+- /r
+
+Frontend:
+- Create/upgrade client/src/pages/admin/AdminSocial.jsx (or .tsx if project is TS)
+Required UI:
+A) Weekly Queue (7-day planner)
+B) Pipeline board (Draft → Review → Approved → Posted)
+C) Editor tabs per platform (IG/FB, TikTok/Shorts, X/Threads)
+D) Copy buttons + “Copied” feedback
+E) Campaign tags + filters
+F) Link builder (/r/:slug + UTM)
+G) Audit log panel (who changed status, when)
+
+Safety rules on Approve (hard gate):
+- Block medical/therapy claims
+- Block shame/urgency/dependency framing
+- Require safety_note field
+- Optional crisis CTA rule when theme=crisis
+
+========================
+PHASE 6 — NEWSLETTER + BLOG + PUBLISHING HARDENING (END-TO-END)
+========================
+Verify:
+- /blog index renders
+- /blog/:slug renders
+- /newsletter signup works (no dead form)
+- publishing audit (if scripts exist) stays PASS
+If missing:
+- Add minimal seed content (3 posts) using the project’s existing content method
+- Add /api/newsletter/subscribe endpoint if absent
+- Ensure unsubscribe + privacy language exists (gentle, non-urgent)
+
+Create docs/PUBLISHING_RUNBOOK.md:
+- how to write a post
+- how to publish
+- how to send newsletter
+- how to link to /r/:slug tracking
+
+========================
+PHASE 7 — ONE HUMAN-TRIGGERED EVOLUTION COMMAND
+========================
+Create scripts/evolve.mjs that runs, in order:
+1) node scripts/check-signing.mjs
+2) node scripts/security-audit.mjs
+3) node scripts/audit-links.mjs
+4) build command (detect correct one) as an optional flag: --build
+Outputs:
+- docs/EVOLUTION_REPORT.md
+with PASS/FAIL and exact next actions.
+
+========================
+PHASE 8 — VERIFICATION (PASS/FAIL)
+========================
+Must confirm:
+[ ] docs/PLATFORM_LOCK.md exists
+[ ] scripts/check-signing.mjs PASS after applying signing config
+[ ] /admin/social loads (admin only)
+[ ] create/edit/approve/mark-posted works
+[ ] /r/:slug redirects + counts clicks
+[ ] /blog and /newsletter work end-to-end
+[ ] evolve.mjs produces EVOLUTION_REPORT.md
+[ ] build passes (if run)
+
+If any FAIL: stop and print the minimal fix steps with exact files.
