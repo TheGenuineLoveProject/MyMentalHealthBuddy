@@ -209,6 +209,7 @@ const server = app.listen(PORT, "0.0.0.0", () => {
 });
 
 async function startProductionServer() {
+console.log("[startup] Beginning server initialization...");
 
 app.set('trust proxy', 1);
 
@@ -250,20 +251,19 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(cookieParser());
 
-// Sanitize all incoming request bodies (strip script tags, event handlers, etc.)
+console.log("[startup] Loading security middleware...");
 const { sanitizeBody, securityHeaders } = await import("./middleware/security.mjs");
 app.use(sanitizeBody);
-
-// Security headers for API responses (no-cache, XSS protection)
 app.use("/api", securityHeaders);
 
-// Global API rate limiter (120 requests/min per IP)
+console.log("[startup] Loading rate limiter...");
 const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
 app.use("/api", apiRateLimit);
 
-// Replit Auth (session + OIDC) — must be before routes
+console.log("[startup] Setting up auth...");
 await setupAuth(app);
 registerAuthRoutes(app);
+console.log("[startup] Auth setup complete");
 
 const corsOrigins = isProduction
   ? [...allowedDomains, /\.replit\.dev$/, /\.replit\.com$/]
@@ -642,6 +642,7 @@ app.all("/api/*", (_req, res) => {
   res.status(404).json({ ok: false, error: "NOT_FOUND", message: "Endpoint not found" });
 });
 
+console.log("[startup] Setting up static file serving...");
 const distPath = join(__dirname, "../client/dist");
 
 app.use(express.static(distPath, {
@@ -716,7 +717,9 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-startProductionServer().catch(err => {
-  logger.error("Failed to start production server", { error: err?.message || err });
-  process.exit(1);
+startProductionServer().then(() => {
+  console.log("All routes and middleware initialized successfully");
+}).catch(err => {
+  console.error("Failed to initialize server routes:", err?.message || err);
+  logger.error("Failed to initialize server routes (server still listening)", { error: err?.message || err, stack: err?.stack });
 });
