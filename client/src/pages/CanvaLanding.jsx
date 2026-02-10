@@ -208,12 +208,20 @@ export default function CanvaLanding() {
           </div>
           <div className="pt-4 mt-4 border-t" style={{ borderColor: 'var(--glp-sage-30)' }}>
             <Link href="/pricing" onClick={() => setMobileMenuOpen(false)} className="block text-lg font-semibold mb-4" style={{ color: 'var(--glp-sage)' }} data-testid="mobile-nav-pricing">Pricing</Link>
-            <Link href="/login">
-              <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Sign In</button>
-            </Link>
-            <a href="/api/login">
-              <button className="btn-secondary w-full" data-testid="button-mobile-getstarted">Get Started</button>
-            </a>
+            {!isLoading && isAuthenticated() ? (
+              <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                <button className="btn-primary w-full" data-testid="button-mobile-dashboard">My Dashboard</button>
+              </Link>
+            ) : (
+              <>
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Sign In</button>
+                </Link>
+                <a href="/api/login">
+                  <button className="btn-secondary w-full" data-testid="button-mobile-getstarted">Get Started</button>
+                </a>
+              </>
+            )}
           </div>
         </div>
       </nav>
