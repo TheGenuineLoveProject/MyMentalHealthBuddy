@@ -113,7 +113,7 @@ export default function ReframePage() {
                 id="thought-input"
                 value={inputThought}
                 onChange={(e) => setInputThought(e.target.value)}
-                placeholder={"e.g., \"I'm failing at everything\" or \"I'll never get better\""}
+                placeholder="e.g., I am failing at everything or I will never get better"
                 className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm"
                 rows={3}
                 data-testid="input-thought"
