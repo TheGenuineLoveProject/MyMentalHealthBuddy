@@ -1157,7 +1157,7 @@ function AdminNavGrid() {
         { label: "Feedback Aggregator", icon: MessageSquare, href: "/admin/feedback", desc: "User feedback & suggestions" },
         { label: "System Alerts", icon: AlertTriangle, href: "/admin/alerts", desc: "Alert configuration & resolution" },
         { label: "Admin Users", icon: UserCheck, href: "/admin/users", desc: "Admin user management" },
-        { label: "Platform Tools", icon: Zap, href: "/admin/tools", desc: "All 127 tools + AI repair center" },
+        { label: "Platform Tools", icon: Zap, href: "/admin/tools", desc: "127 tools · AI repair · optimization advisor" },
       ]
     },
   ];

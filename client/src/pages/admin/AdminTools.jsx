@@ -32,16 +32,42 @@ const TOOL_ADMIN_LINKS = {
   "leads": "/admin/revenue", "billing": "/admin/billing",
   "email": "/admin/newsletter", "ai-chat": "/chat",
   "content-studio": "/admin/content-studio", "social-posts": "/admin/social-studio",
-  "narrative-drafts": "/admin/narrative",
+  "narrative-drafts": "/admin/narrative", "social-posting": "/admin/social-studio",
+  "social-posts-alt": "/admin/social-studio", "content-generator": "/admin/content-studio",
+  "content-intelligence": "/admin/content-studio", "content-api": "/admin/content-studio",
+  "universal-content": "/admin/content-studio", "rss-feed": "/admin/publishing",
+  "rss-alt": "/admin/publishing", "gamification": "/admin/engagement",
+  "account": "/admin/users", "account-actions": "/admin/users",
+  "onboarding": "/admin/engagement", "progress": "/admin/engagement",
+  "badges": "/admin/engagement", "favorites": "/admin/engagement",
+  "dashboard-api": "/admin/health", "pro-features": "/admin/revenue",
+  "ai-dashboard": "/admin/health", "moods-alt": "/admin/health",
+  "object-storage": "/admin/tools", "api-core": "/admin/health",
+  "auth-github": "/admin/security", "auth-core": "/admin/security",
+  "login": "/admin/security", "mfa-auth": "/admin/security",
+  "user-mgmt": "/admin/users", "user-settings": "/admin/users",
+  "uploads": "/admin/tools", "figma-api": "/admin/tools",
+  "canva-oauth": "/admin/tools", "perplexity": "/admin/tools",
+  "metrics": "/admin/analytics", "metrics-summary": "/admin/analytics",
+  "analytics-events": "/admin/analytics", "contact": "/admin/feedback",
+  "products": "/admin/revenue", "invites": "/admin/engagement",
+  "feed": "/admin/publishing", "webhook": "/admin/billing",
+  "mood-tracker": "/admin/health", "journal": "/admin/health",
+  "wisdom": "/admin/tools", "community": "/admin/engagement",
+  "trauma-healing": "/admin/tools", "healing-tools": "/admin/tools",
+  "healing-intelligence": "/admin/tools", "therapy": "/admin/tools",
 };
 
 const TOOL_SEVERITY = {
   "health-api": "critical", "ai-chat": "critical", "auth-core": "critical",
   "billing": "critical", "email": "critical", "perplexity": "critical",
-  "canva-oauth": "critical", "webhook": "critical",
+  "canva-oauth": "critical", "webhook": "critical", "api-core": "critical",
   "admin-core": "high", "admin-security": "high", "analytics": "high",
   "blog-api": "high", "newsletter-api": "high", "login": "high",
-  "user-mgmt": "high", "mfa-auth": "high",
+  "user-mgmt": "high", "mfa-auth": "high", "auth-github": "high",
+  "object-storage": "high", "mood-tracker": "high", "journal": "high",
+  "content-studio": "high", "social-posts": "high", "gamification": "high",
+  "account": "high", "integrations": "high", "deployment": "high",
 };
 
 const AI_REMEDIATION = {
@@ -550,6 +576,39 @@ function PlatformIntegrityScanner({ toolResults }) {
             </div>
           </div>
 
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+              <ExternalLink size={12} /> Admin Page Connectivity ({linkedTools.length} linked)
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 max-h-36 overflow-y-auto">
+              {linkedTools.map(t => {
+                const result = toolResults[t.id];
+                return (
+                  <div key={t.id} className="flex items-center gap-1.5 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`linked-${t.id}`}>
+                    {result?.status === 'healthy' ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : result?.status === 'error' ? <AlertCircle size={10} className="text-red-500 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
+                    <span className="truncate">{t.label}</span>
+                    <Link href={TOOL_ADMIN_LINKS[t.id]} className="ml-auto" data-testid={`scanner-link-${t.id}`}>
+                      <ExternalLink size={9} className="text-blue-500" />
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {unlinkedTools.length > 0 && (
+            <div>
+              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5 text-blue-600">
+                <Puzzle size={12} /> API-Only Tools ({unlinkedTools.length})
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {unlinkedTools.map(t => (
+                  <span key={t.id} className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground" data-testid={`unlinked-${t.id}`}>{t.label}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
           {duplicateEndpoints.length > 0 && (
             <div>
               <div className="text-xs font-semibold mb-2 flex items-center gap-1.5 text-amber-600">
@@ -808,8 +867,257 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
   );
 }
 
+function AIKnowledgeBaseSummary({ toolResults }) {
+  const [expanded, setExpanded] = useState(false);
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const checkedTools = allTools.filter(t => toolResults[t.id]);
+  
+  const kbStats = { Codex: { total: 0, applied: 0, fixes: 0 }, Perplexity: { total: 0, applied: 0, fixes: 0 }, Canva: { total: 0, applied: 0, fixes: 0 } };
+  Object.entries(AI_REMEDIATION).forEach(([key, rem]) => {
+    if (rem.knowledgeBase && kbStats[rem.knowledgeBase]) {
+      kbStats[rem.knowledgeBase].total++;
+      if (rem.autoFixable) kbStats[rem.knowledgeBase].fixes++;
+    }
+  });
+  
+  checkedTools.forEach(t => {
+    const r = toolResults[t.id];
+    if (r && r.label !== 'ok') {
+      const rem = getRemediation(r.label, r.ms);
+      if (rem?.knowledgeBase && kbStats[rem.knowledgeBase]) {
+        kbStats[rem.knowledgeBase].applied++;
+      }
+    }
+  });
+
+  const totalScenarios = Object.keys(AI_REMEDIATION).length;
+  const autoFixableCount = Object.values(AI_REMEDIATION).filter(r => r.autoFixable).length;
+  const linkedCount = Object.keys(TOOL_ADMIN_LINKS).length;
+  const severityCount = Object.keys(TOOL_SEVERITY).length;
+
+  const recommendations = [];
+  const errorTools = checkedTools.filter(t => toolResults[t.id]?.status === 'error');
+  const slowTools = checkedTools.filter(t => toolResults[t.id]?.ms > 2000);
+  const unlinkedTools = allTools.filter(t => !TOOL_ADMIN_LINKS[t.id]);
+  const uncheckedTools = allTools.filter(t => !toolResults[t.id]);
+  
+  if (errorTools.length > 0) recommendations.push({ level: 'critical', text: `${errorTools.length} endpoints have errors — run AI Auto-Repair`, kb: 'Codex' });
+  if (slowTools.length > 0) recommendations.push({ level: 'warning', text: `${slowTools.length} endpoints responding >2s — optimize or add caching`, kb: 'Codex' });
+  if (uncheckedTools.length > 0 && checkedTools.length > 0) recommendations.push({ level: 'info', text: `${uncheckedTools.length} tools unchecked — run full scan for complete coverage`, kb: 'Codex' });
+  if (unlinkedTools.length > 0) recommendations.push({ level: 'info', text: `${unlinkedTools.length} tools are API-only without admin page links`, kb: 'Perplexity' });
+  if (checkedTools.length === allTools.length && errorTools.length === 0) recommendations.push({ level: 'success', text: 'All systems operational — platform integrity confirmed', kb: 'Codex' });
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50/30 dark:bg-indigo-950/20" data-testid="panel-ai-knowledge-base">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Brain size={16} className="text-indigo-600" />
+          <span className="text-sm font-semibold">AI Knowledge Base Intelligence</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-800 text-indigo-700 dark:text-indigo-200 font-medium">
+            {totalScenarios} scenarios · {autoFixableCount} auto-fixable
+          </span>
+        </div>
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="text-xs px-3 py-1.5 rounded-lg border border-indigo-300 dark:border-indigo-700 hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition-colors"
+          data-testid="button-toggle-kb-summary"
+        >
+          {expanded ? 'Hide' : 'Show'} Details
+        </button>
+      </div>
+
+      <div className="grid grid-cols-3 gap-3 mb-3">
+        {Object.entries(kbStats).map(([name, stats]) => {
+          const colors = name === 'Codex' ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300' :
+            name === 'Perplexity' ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-700 dark:text-green-300' :
+            'bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800 text-pink-700 dark:text-pink-300';
+          const icon = name === 'Codex' ? Brain : name === 'Perplexity' ? Search : Palette;
+          const Icon = icon;
+          return (
+            <div key={name} className={`p-3 rounded-lg border ${colors}`} data-testid={`kb-${name.toLowerCase()}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <Icon size={14} />
+                <span className="text-xs font-bold">{name} AI</span>
+              </div>
+              <div className="text-lg font-bold">{stats.total}</div>
+              <div className="text-[10px] opacity-80">{stats.total} scenarios · {stats.fixes} auto-fixable · {stats.applied} active</div>
+            </div>
+          );
+        })}
+      </div>
+
+      {recommendations.length > 0 && (
+        <div className="space-y-1.5">
+          {recommendations.map((rec, i) => (
+            <div key={i} className={`flex items-center gap-2 p-2 rounded-lg text-xs ${
+              rec.level === 'critical' ? 'bg-red-50 dark:bg-red-900/15 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400' :
+              rec.level === 'warning' ? 'bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400' :
+              rec.level === 'success' ? 'bg-green-50 dark:bg-green-900/15 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400' :
+              'bg-muted/30 border border-gray-200 dark:border-gray-700 text-muted-foreground'
+            }`} data-testid={`kb-rec-${i}`}>
+              {rec.level === 'critical' ? <AlertCircle size={12} /> : rec.level === 'warning' ? <AlertTriangle size={12} /> : rec.level === 'success' ? <CheckCircle size={12} /> : <Lightbulb size={12} />}
+              <span className="flex-1">{rec.text}</span>
+              <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${rec.kb === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rec.kb === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                {rec.kb}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {expanded && (
+        <div className="mt-3 space-y-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
+              <div className="text-lg font-bold text-indigo-600">{linkedCount}</div>
+              <div className="text-[10px] text-muted-foreground">Admin-Linked Tools</div>
+            </div>
+            <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
+              <div className="text-lg font-bold text-indigo-600">{severityCount}</div>
+              <div className="text-[10px] text-muted-foreground">Priority-Classified</div>
+            </div>
+            <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
+              <div className="text-lg font-bold text-indigo-600">{totalScenarios}</div>
+              <div className="text-[10px] text-muted-foreground">Error Scenarios</div>
+            </div>
+            <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
+              <div className="text-lg font-bold text-indigo-600">{autoFixableCount}</div>
+              <div className="text-[10px] text-muted-foreground">Auto-Fixable</div>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold mb-2">All Remediation Scenarios</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-48 overflow-y-auto">
+              {Object.entries(AI_REMEDIATION).map(([key, rem]) => (
+                <div key={key} className="flex items-center gap-2 p-2 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[11px]" data-testid={`kb-scenario-${key}`}>
+                  <span className="font-mono font-medium text-foreground/70 flex-1 truncate">{key}</span>
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${rem.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rem.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                    {rem.knowledgeBase}
+                  </span>
+                  {rem.autoFixable && <span className="text-[9px] px-1 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 font-medium">Fix</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SystemOptimizationAdvisor({ toolResults }) {
+  const [showAdvisor, setShowAdvisor] = useState(false);
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const checkedTools = allTools.filter(t => toolResults[t.id]);
+  if (checkedTools.length === 0) return null;
+
+  const errorTools = checkedTools.filter(t => toolResults[t.id]?.status === 'error');
+  const warningTools = checkedTools.filter(t => toolResults[t.id]?.status === 'warning');
+  const slowTools = checkedTools.filter(t => toolResults[t.id]?.ms > 1500);
+  const verySlowTools = checkedTools.filter(t => toolResults[t.id]?.ms > 3000);
+  const healthyTools = checkedTools.filter(t => toolResults[t.id]?.status === 'healthy');
+  const authGated = checkedTools.filter(t => toolResults[t.id]?.label === 'auth-gated' || toolResults[t.id]?.label === 'admin-only');
+  const unlinkedTools = allTools.filter(t => !TOOL_ADMIN_LINKS[t.id]);
+  const unchecked = allTools.filter(t => !toolResults[t.id]);
+  const avgMs = checkedTools.length > 0 ? Math.round(checkedTools.reduce((s, t) => s + (toolResults[t.id]?.ms || 0), 0) / checkedTools.length) : 0;
+
+  const advisories = [];
+  
+  if (errorTools.length > 3) advisories.push({ priority: 'critical', category: 'Reliability', text: `${errorTools.length} endpoints failing — indicates potential systemic issue. Check database connection and server health first.`, action: 'Run Quick Diagnostics', kb: 'Codex' });
+  else if (errorTools.length > 0) advisories.push({ priority: 'high', category: 'Reliability', text: `${errorTools.length} endpoint(s) need attention. Most are likely missing route files or unmounted routes.`, action: 'Review 404 errors in diagnostics panel', kb: 'Codex' });
+  
+  if (verySlowTools.length > 0) advisories.push({ priority: 'high', category: 'Performance', text: `${verySlowTools.length} endpoints take >3 seconds: ${verySlowTools.slice(0, 3).map(t => t.label).join(', ')}${verySlowTools.length > 3 ? '...' : ''}`, action: 'Add response caching or optimize queries', kb: 'Codex' });
+  else if (slowTools.length > 2) advisories.push({ priority: 'medium', category: 'Performance', text: `${slowTools.length} endpoints respond >1.5 seconds. Consider implementing server-side caching for frequently accessed data.`, action: 'Review slow endpoints in Repair Center', kb: 'Perplexity' });
+  
+  if (avgMs > 1000) advisories.push({ priority: 'medium', category: 'Performance', text: `Average response time is ${avgMs}ms (target: <500ms). Global optimization recommended.`, action: 'Enable compression and response caching', kb: 'Perplexity' });
+  
+  if (authGated.length > 0 && authGated.length === checkedTools.length) advisories.push({ priority: 'medium', category: 'Security', text: 'All endpoints require authentication — verify public-facing routes are accessible for unauthenticated users (crisis, health).', action: 'Check public route configuration', kb: 'Codex' });
+  
+  if (warningTools.length > 5) advisories.push({ priority: 'medium', category: 'Stability', text: `${warningTools.length} endpoints returning warnings. Rate limiting or partial failures detected.`, action: 'Review rate limit configuration', kb: 'Canva' });
+  
+  if (unlinkedTools.length > 30) advisories.push({ priority: 'low', category: 'Navigation', text: `${unlinkedTools.length} tools lack admin page links. Consider mapping wellness and intelligence tools to relevant dashboards.`, action: 'Expand admin link mappings', kb: 'Perplexity' });
+  
+  if (unchecked.length > 0 && checkedTools.length > 0) advisories.push({ priority: 'low', category: 'Coverage', text: `${unchecked.length} tools haven't been checked yet. Full scan recommended for complete visibility.`, action: 'Run full platform scan', kb: 'Codex' });
+  
+  if (healthyTools.length === allTools.length) advisories.push({ priority: 'success', category: 'Overall', text: 'All systems healthy — platform is operating at peak performance. No optimization needed.', action: 'Export health report for records', kb: 'Codex' });
+
+  const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3, success: 4 };
+  advisories.sort((a, b) => (priorityOrder[a.priority] ?? 5) - (priorityOrder[b.priority] ?? 5));
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-cyan-200 dark:border-cyan-800 bg-cyan-50/30 dark:bg-cyan-950/20" data-testid="panel-optimization-advisor">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Cpu size={16} className="text-cyan-600" />
+          <span className="text-sm font-semibold">System Optimization Advisor</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-800 text-cyan-700 dark:text-cyan-200 font-medium">
+            {advisories.length} recommendations
+          </span>
+        </div>
+        <button
+          onClick={() => setShowAdvisor(!showAdvisor)}
+          className="text-xs px-3 py-1.5 rounded-lg border border-cyan-300 dark:border-cyan-700 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 transition-colors"
+          data-testid="button-toggle-advisor"
+        >
+          {showAdvisor ? 'Hide' : 'Show'} Advisor
+        </button>
+      </div>
+
+      {!showAdvisor && advisories.length > 0 && (
+        <div className={`flex items-center gap-2 p-2 rounded-lg text-xs ${
+          advisories[0].priority === 'critical' ? 'bg-red-50 dark:bg-red-900/15 text-red-700 dark:text-red-400' :
+          advisories[0].priority === 'high' ? 'bg-orange-50 dark:bg-orange-900/15 text-orange-700 dark:text-orange-400' :
+          advisories[0].priority === 'success' ? 'bg-green-50 dark:bg-green-900/15 text-green-700 dark:text-green-400' :
+          'bg-muted/30 text-muted-foreground'
+        }`}>
+          {advisories[0].priority === 'critical' ? <AlertCircle size={12} /> : advisories[0].priority === 'success' ? <CheckCircle size={12} /> : <Lightbulb size={12} />}
+          <span className="font-medium">{advisories[0].category}:</span>
+          <span>{advisories[0].text}</span>
+        </div>
+      )}
+
+      {showAdvisor && (
+        <div className="space-y-2">
+          {advisories.map((adv, i) => (
+            <div key={i} className={`p-3 rounded-lg border ${
+              adv.priority === 'critical' ? 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/15' :
+              adv.priority === 'high' ? 'border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-950/15' :
+              adv.priority === 'success' ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' :
+              'border-gray-200 dark:border-gray-700 bg-background'
+            }`} data-testid={`advisor-${i}`}>
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-2">
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold uppercase ${
+                    adv.priority === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' :
+                    adv.priority === 'high' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-600' :
+                    adv.priority === 'success' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' :
+                    adv.priority === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700' :
+                    'bg-gray-100 dark:bg-gray-800 text-gray-600'
+                  }`}>{adv.priority}</span>
+                  <span className="text-xs font-semibold">{adv.category}</span>
+                </div>
+                <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${adv.kb === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : adv.kb === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                  {adv.kb}
+                </span>
+              </div>
+              <p className="text-[11px] text-muted-foreground mb-1">{adv.text}</p>
+              <div className="flex items-center gap-1.5 text-[10px]">
+                <Wrench size={10} className="text-cyan-500" />
+                <span className="font-medium text-cyan-700 dark:text-cyan-400">{adv.action}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnly, lastFullCheck, runHealthCheck }) {
   const [showRunbook, setShowRunbook] = useState(false);
+  const [pipelineRunning, setPipelineRunning] = useState(false);
+  const [stepTimestamps, setStepTimestamps] = useState({});
   const allTools = toolCategories.flatMap(c => c.tools);
   const totalTools = allTools.length;
   const checkedCount = Object.keys(toolResults).length;
@@ -831,6 +1139,32 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
   const completedSteps = opsSteps.filter(s => s.done).length;
   const progress = Math.round((completedSteps / opsSteps.length) * 100);
 
+  const runFullPipeline = async () => {
+    setPipelineRunning(true);
+    const ts = {};
+    ts['quick-diag'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)));
+    await new Promise(r => setTimeout(r, 300));
+    ts['full-scan'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await runAllChecks();
+    await new Promise(r => setTimeout(r, 300));
+    ts['review-errors'] = new Date().toLocaleTimeString();
+    ts['auto-repair'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await runErrorsOnly();
+    await new Promise(r => setTimeout(r, 300));
+    ts['recheck'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await runErrorsOnly();
+    ts['perf-review'] = new Date().toLocaleTimeString();
+    ts['integrity'] = new Date().toLocaleTimeString();
+    ts['export'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    setPipelineRunning(false);
+  };
+
   return (
     <div className="mb-6 p-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50/30 dark:bg-blue-950/20" data-testid="panel-daily-ops-runbook">
       <div className="flex items-center justify-between mb-3">
@@ -839,13 +1173,24 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
           <span className="text-sm font-semibold">Daily Operations Runbook</span>
           <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 font-medium">{completedSteps}/{opsSteps.length} steps</span>
         </div>
-        <button
-          onClick={() => setShowRunbook(!showRunbook)}
-          className="text-xs px-3 py-1.5 rounded-lg border border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
-          data-testid="button-toggle-runbook"
-        >
-          {showRunbook ? 'Hide' : 'Show'} Runbook
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={runFullPipeline}
+            disabled={pipelineRunning || isAnyRunning}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
+            data-testid="button-run-full-pipeline"
+          >
+            {pipelineRunning ? <RefreshCw size={12} className="animate-spin" /> : <Rocket size={12} />}
+            {pipelineRunning ? 'Pipeline Running...' : 'Run Full Pipeline'}
+          </button>
+          <button
+            onClick={() => setShowRunbook(!showRunbook)}
+            className="text-xs px-3 py-1.5 rounded-lg border border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+            data-testid="button-toggle-runbook"
+          >
+            {showRunbook ? 'Hide' : 'Show'} Runbook
+          </button>
+        </div>
       </div>
 
       <div className="h-1.5 rounded-full bg-blue-200 dark:bg-blue-800 overflow-hidden mb-2">
@@ -860,7 +1205,10 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
               <div key={step.id} className={`flex items-center gap-3 p-2.5 rounded-lg border ${step.done ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20' : 'border-gray-200 dark:border-gray-700 bg-background'}`} data-testid={`runbook-step-${step.id}`}>
                 <span className="text-xs font-bold text-muted-foreground w-5">{i + 1}.</span>
                 {step.done ? <CheckCircle size={14} className="text-green-600 flex-shrink-0" /> : <StepIcon size={14} className="text-muted-foreground flex-shrink-0" />}
-                <span className={`text-sm flex-1 ${step.done ? 'text-green-700 dark:text-green-400 line-through' : ''}`}>{step.label}</span>
+                <span className={`text-sm flex-1 ${step.done ? 'text-green-700 dark:text-green-400 line-through' : ''}`}>
+                  {step.label}
+                  {stepTimestamps[step.id] && <span className="text-[10px] text-muted-foreground ml-2 font-normal">({stepTimestamps[step.id]})</span>}
+                </span>
                 {!step.done && step.id === 'quick-diag' && (
                   <button onClick={() => Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)))} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-quick-diag">Run</button>
                 )}
@@ -1153,7 +1501,11 @@ export default function AdminTools() {
 
         <QuickDiagnostics toolResults={toolResults} runHealthCheck={runHealthCheck} runningTools={runningTools} />
 
+        <AIKnowledgeBaseSummary toolResults={toolResults} />
+
         <AIRepairCenter toolResults={toolResults} runHealthCheck={runHealthCheck} runAllChecks={runAllChecks} />
+
+        <SystemOptimizationAdvisor toolResults={toolResults} />
 
         <DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} />
 

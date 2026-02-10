@@ -49,8 +49,8 @@ router.get("/", async (_req, res) => {
       ai: { available: isConfigured() },
       softLaunch: process.env.SOFT_LAUNCH_MODE === "true",
       platform: {
-        totalTools: 123,
-        totalRoutes: 123,
+        totalTools: 127,
+        totalRoutes: 127,
         adminPages: 27,
       },
       services: {
