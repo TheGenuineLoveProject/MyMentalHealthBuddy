@@ -12,13 +12,6 @@ export default function AnalyticsDashboard() {
 
   const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['/api/analytics/admin/summary'],
-    queryFn: async () => {
-      const res = await fetch("/api/analytics/admin/summary");
-      if (!res.ok) throw new Error("Failed to load analytics");
-      return res.json();
-    },
-    retry: 2,
-    retryDelay: 1000,
     staleTime: 30000,
   });
 

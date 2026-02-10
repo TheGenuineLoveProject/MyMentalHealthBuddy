@@ -27,7 +27,7 @@ export default function AuditLogExplorer() {
       const params = new URLSearchParams({ page: String(page), limit: "25" });
       if (action) params.set("action", action);
       if (search) params.set("search", search);
-      const res = await fetch(`/api/admin/audit-logs?${params}`);
+      const res = await fetch(`/api/admin/audit-logs?${params}`, { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch logs");
       return res.json();
     },
@@ -36,7 +36,7 @@ export default function AuditLogExplorer() {
   const { data: actionsData } = useQuery({
     queryKey: ["/api/admin/audit-logs/actions"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/audit-logs/actions");
+      const res = await fetch("/api/admin/audit-logs/actions", { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch actions");
       return res.json();
     },
@@ -45,7 +45,7 @@ export default function AuditLogExplorer() {
   const { data: statsData } = useQuery({
     queryKey: ["/api/admin/audit-logs/stats"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/audit-logs/stats");
+      const res = await fetch("/api/admin/audit-logs/stats", { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch stats");
       return res.json();
     },

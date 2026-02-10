@@ -14,7 +14,7 @@ export default function SecurityDashboard() {
   const { data: overviewData, isLoading: overviewLoading, error: overviewError, refetch: refetchOverview, isRefetching } = useQuery({
     queryKey: ['/api/admin/security/overview'],
     queryFn: async () => {
-      const res = await fetch("/api/admin/security/overview");
+      const res = await fetch("/api/admin/security/overview", { credentials: "include" });
       if (!res.ok) throw new Error("Failed to load security overview");
       const data = await res.json();
       return data.data;
@@ -27,7 +27,7 @@ export default function SecurityDashboard() {
   const { data: rateLimitLogs = [], refetch: refetchLogs } = useQuery({
     queryKey: ['/api/admin/security/rate-limits'],
     queryFn: async () => {
-      const res = await fetch("/api/admin/security/rate-limits?limit=50&blockedOnly=false");
+      const res = await fetch("/api/admin/security/rate-limits?limit=50&blockedOnly=false", { credentials: "include" });
       if (!res.ok) throw new Error("Failed to load rate limit logs");
       const data = await res.json();
       return data.data || [];
