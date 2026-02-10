@@ -194,23 +194,43 @@ const AI_REMEDIATION = {
   "idempotency-violation": { suggestion: "Duplicate request processing detected. Codex KB: Non-idempotent operation executed multiple times. Implement idempotency keys for payment and state-changing endpoints.", action: "Add idempotency key handling", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
   "resource-contention": { suggestion: "Resource contention causing degraded performance. Perplexity KB: Multiple processes competing for CPU/memory. Review concurrent task limits and implement request throttling.", action: "Implement request throttling", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
   "warmup-needed": { suggestion: "Service needs warmup after cold start. Codex KB: Lazy-loaded modules and connection pools take time to initialize. Pre-warm critical paths after deployment.", action: "Pre-warm critical endpoints", knowledgeBase: "Codex", autoFixable: true, fixCommand: "warm-endpoints" },
+  "index-corruption": { suggestion: "Database index may be corrupted or missing. Codex KB: Query performance degradation can indicate stale or dropped indexes. Rebuild indexes on affected tables.", action: "Rebuild database indexes", knowledgeBase: "Codex", autoFixable: true, fixCommand: "sync-schema" },
+  "dns-cache-stale": { suggestion: "DNS cache contains stale entries. Perplexity KB: Cached DNS records for external services may point to deprecated IPs. Flush DNS resolver cache.", action: "Flush DNS cache", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "token-rotation-needed": { suggestion: "API tokens require rotation. Canva KB: Long-lived tokens should be rotated periodically for security. Check token age and refresh credentials.", action: "Rotate API tokens", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "preflight-failed": { suggestion: "CORS preflight request failed. Codex KB: OPTIONS request rejected — verify Access-Control-Allow-Methods and Access-Control-Allow-Headers in CORS config.", action: "Update CORS preflight config", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "graceful-shutdown": { suggestion: "Service did not shut down gracefully. Perplexity KB: Previous process may have left open handles or locked resources. Force cleanup and restart.", action: "Force cleanup and restart", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "query-timeout": { suggestion: "Database query timed out. Codex KB: Long-running queries may lock tables. Check for missing WHERE clauses, full table scans, or uncommitted transactions.", action: "Optimize slow queries", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "websocket-backpressure": { suggestion: "WebSocket message backpressure detected. Perplexity KB: Send buffer is full — client cannot consume messages fast enough. Implement message prioritization.", action: "Implement WS message throttling", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "storage-quota": { suggestion: "Object storage quota nearing limit. Canva KB: Uploaded files approaching storage cap. Archive old files or increase storage allocation.", action: "Review storage usage", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "response-truncated": { suggestion: "Response body was truncated. Codex KB: Large payloads may be cut off by proxy or body size limits. Enable streaming for large responses or paginate results.", action: "Enable response streaming", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "certificate-expiry": { suggestion: "SSL certificate approaching expiry. Canva KB: Certificate renewal should be automated. In Replit, certificates are managed by the platform layer.", action: "Verify certificate auto-renewal", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "session-fixation": { suggestion: "Potential session fixation vulnerability. Codex KB: Session ID should be regenerated after authentication. Ensure express-session regenerates on login.", action: "Regenerate session on login", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "partial-response": { suggestion: "Server returned a partial response (206). Perplexity KB: Range requests or chunked transfer incomplete. May indicate interrupted file downloads or streaming.", action: "Check transfer encoding", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
 };
 
 function getRemediation(label, ms) {
+  if (ms && ms > 7000 && label === 'ok') return AI_REMEDIATION["event-loop-blocked"];
   if (ms && ms > 5000 && label === 'ok') return AI_REMEDIATION["warmup-needed"];
+  if (ms && ms > 3000 && label === 'ok') return AI_REMEDIATION["slow-response"];
   if (ms && ms > 2000 && label === 'ok') return AI_REMEDIATION["slow-response"];
   if (AI_REMEDIATION[label]) return AI_REMEDIATION[label];
   if (label === '502') return AI_REMEDIATION["upstream-502"];
   if (label === '503') return AI_REMEDIATION["upstream-503"];
   if (label === '504') return AI_REMEDIATION["upstream-504"];
+  if (label === '206') return AI_REMEDIATION["partial-response"];
   if (label === '413') return AI_REMEDIATION["payload-too-large"];
   if (label === '429') return AI_REMEDIATION["rate-limited"];
   if (label === '401') return AI_REMEDIATION["auth-gated"];
   if (label === '403') return AI_REMEDIATION["admin-only"];
   if (label === '405') return AI_REMEDIATION["post-only"];
+  if (label === '408') return AI_REMEDIATION["query-timeout"];
+  if (label === '409') return AI_REMEDIATION["idempotency-violation"];
+  if (label === '422') return AI_REMEDIATION["content-type-mismatch"];
   if (/^4\d\d$/.test(label)) return AI_REMEDIATION["404"];
   if (/^5\d\d$/.test(label)) return AI_REMEDIATION["server-error"];
   if (label === 'timeout' && ms > 7000) return AI_REMEDIATION["event-loop-blocked"];
+  if (label === 'timeout') return AI_REMEDIATION["timeout"];
+  if (label === 'unreachable') return AI_REMEDIATION["unreachable"];
   return AI_REMEDIATION["server-error"];
 }
 
@@ -746,6 +766,66 @@ function PlatformIntegrityScanner({ toolResults }) {
               </div>
             </div>
           )}
+
+          {checkedCount > 0 && (
+            <div>
+              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+                <ShieldCheck size={12} /> Component Health Matrix
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {[
+                  { label: 'AI/Wellness', tools: allTools.filter(t => ['ai-chat','therapy','mood-tracker','journal','gratitude','reflection','wellness-tools','mirror','prompts','states'].includes(t.id)), color: 'text-purple-600' },
+                  { label: 'Healing', tools: allTools.filter(t => t.id.includes('healing') || t.id.includes('trauma') || t.id.includes('emotional') || t.id === 'mind-body' || t.id === 'post-trauma' || t.id === 'psychological-safety'), color: 'text-pink-600' },
+                  { label: 'Intelligence', tools: allTools.filter(t => t.id.includes('wisdom') || t.id.includes('cognitive') || t.id.includes('consciousness') || t.id.includes('philosophy') || t.id === 'metacognition' || t.id === 'creativity' || t.id === 'foresight' || t.id === 'knowledge' || t.id === 'deep-learning' || t.id === 'dialectics'), color: 'text-indigo-600' },
+                  { label: 'Content', tools: allTools.filter(t => t.id.includes('content') || t.id.includes('blog') || t.id.includes('newsletter') || t.id.includes('social') || t.id.includes('narrative') || t.id === 'rss-alt' || t.id === 'rss-feed' || t.id === 'perplexity'), color: 'text-cyan-600' },
+                  { label: 'Auth/Security', tools: allTools.filter(t => t.id.includes('auth') || t.id.includes('login') || t.id.includes('mfa') || t.id.includes('security') || t.id === 'admin-audit'), color: 'text-red-600' },
+                  { label: 'Billing', tools: allTools.filter(t => t.id.includes('billing') || t.id === 'webhook' || t.id === 'products' || t.id === 'pro-features' || t.id === 'leads'), color: 'text-green-600' },
+                  { label: 'Platform', tools: allTools.filter(t => t.id.includes('health') || t.id.includes('api-core') || t.id.includes('deployment') || t.id.includes('integration') || t.id.includes('object') || t.id === 'analytics' || t.id === 'metrics' || t.id === 'soft-launch'), color: 'text-emerald-600' },
+                  { label: 'User/Engage', tools: allTools.filter(t => t.id.includes('account') || t.id.includes('gamification') || t.id.includes('progress') || t.id.includes('badges') || t.id.includes('favorites') || t.id.includes('onboarding') || t.id.includes('feedback') || t.id.includes('dashboard') || t.id.includes('user')), color: 'text-amber-600' },
+                ].map((group, gi) => {
+                  const groupHealthy = group.tools.filter(t => toolResults[t.id]?.status === 'healthy').length;
+                  const groupErrors = group.tools.filter(t => toolResults[t.id]?.status === 'error').length;
+                  const groupChecked = group.tools.filter(t => toolResults[t.id]).length;
+                  const pct = groupChecked > 0 ? Math.round((groupHealthy / groupChecked) * 100) : 0;
+                  return (
+                    <div key={gi} className="p-2.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800" data-testid={`matrix-${gi}`}>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className={`text-[10px] font-bold ${group.color}`}>{group.label}</span>
+                        <span className={`text-xs font-bold ${pct >= 90 ? 'text-green-600' : pct >= 60 ? 'text-amber-500' : groupChecked === 0 ? 'text-gray-400' : 'text-red-500'}`}>{groupChecked > 0 ? `${pct}%` : '—'}</span>
+                      </div>
+                      <div className="text-[9px] text-muted-foreground">{groupHealthy}/{group.tools.length} healthy{groupErrors > 0 ? ` · ${groupErrors} err` : ''}</div>
+                      <div className="w-full h-1 rounded-full bg-gray-200 dark:bg-gray-700 mt-1 overflow-hidden">
+                        <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${groupChecked > 0 ? (groupHealthy / group.tools.length) * 100 : 0}%` }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+              <Target size={12} /> KB Coverage by Severity Tier
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { tier: 'Critical', tools: criticalTools, color: 'border-red-200 dark:border-red-800 bg-red-50/30 dark:bg-red-950/15', textColor: 'text-red-600' },
+                { tier: 'High', tools: highTools, color: 'border-orange-200 dark:border-orange-800 bg-orange-50/30 dark:bg-orange-950/15', textColor: 'text-orange-600' },
+                { tier: 'Medium', tools: mediumTools, color: 'border-blue-200 dark:border-blue-800 bg-blue-50/30 dark:bg-blue-950/15', textColor: 'text-blue-600' },
+              ].map((t, ti) => {
+                const tierHealthy = t.tools.filter(tool => toolResults[tool.id]?.status === 'healthy').length;
+                const tierChecked = t.tools.filter(tool => toolResults[tool.id]).length;
+                return (
+                  <div key={ti} className={`p-2.5 rounded-lg border ${t.color}`} data-testid={`kb-tier-${t.tier.toLowerCase()}`}>
+                    <div className={`text-xs font-bold ${t.textColor} mb-0.5`}>{t.tier} ({t.tools.length})</div>
+                    <div className="text-[10px] text-muted-foreground">{tierHealthy}/{tierChecked > 0 ? tierChecked : t.tools.length} healthy</div>
+                    <div className="text-[10px] text-muted-foreground">{t.tools.filter(tool => TOOL_ADMIN_LINKS[tool.id]).length} admin-linked</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -1438,6 +1518,7 @@ function PlatformCoverageReport({ toolResults }) {
 
   const critCount = Object.values(TOOL_SEVERITY).filter(s => s === 'critical').length;
   const highCount = Object.values(TOOL_SEVERITY).filter(s => s === 'high').length;
+  const medCount = Object.values(TOOL_SEVERITY).filter(s => s === 'medium').length;
   const normalCount = totalTools - sevCoverage;
 
   const checkedCount = Object.keys(toolResults).length;
@@ -1455,10 +1536,10 @@ function PlatformCoverageReport({ toolResults }) {
   }));
 
   const overallScore = Math.round(
-    ((linkCoverage / totalTools) * 25) +
-    ((sevCoverage / totalTools) * 20) +
-    ((remScenarios / 50) * 15) +
-    ((autoFixable / remScenarios) * 15) +
+    ((linkCoverage / totalTools) * 20) +
+    ((sevCoverage / totalTools) * 25) +
+    ((Math.min(remScenarios, 80) / 80) * 20) +
+    ((autoFixable / Math.max(remScenarios, 1)) * 10) +
     ((scanCoverage) * 0.25)
   );
 
@@ -1481,14 +1562,14 @@ function PlatformCoverageReport({ toolResults }) {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-admin-links">
           <div className="text-lg font-bold text-emerald-600">{linkCoverage}/{totalTools}</div>
           <div className="text-[9px] text-muted-foreground">Admin Links</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-prioritized">
-          <div className="text-lg font-bold text-orange-600">{sevCoverage}</div>
-          <div className="text-[9px] text-muted-foreground">Prioritized</div>
+          <div className="text-lg font-bold text-orange-600">{sevCoverage}/{totalTools}</div>
+          <div className="text-[9px] text-muted-foreground">Classified</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-critical-count">
           <div className="text-lg font-bold text-red-500">{critCount}</div>
@@ -1497,6 +1578,10 @@ function PlatformCoverageReport({ toolResults }) {
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-high-count">
           <div className="text-lg font-bold text-amber-500">{highCount}</div>
           <div className="text-[9px] text-muted-foreground">High</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-medium-count">
+          <div className="text-lg font-bold text-blue-500">{medCount}</div>
+          <div className="text-[9px] text-muted-foreground">Medium</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-ai-scenarios">
           <div className="text-lg font-bold text-indigo-600">{remScenarios}</div>
@@ -1512,7 +1597,7 @@ function PlatformCoverageReport({ toolResults }) {
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-normal-priority">
           <div className="text-lg font-bold text-gray-500">{normalCount}</div>
-          <div className="text-[9px] text-muted-foreground">Normal Priority</div>
+          <div className="text-[9px] text-muted-foreground">Unclassified</div>
         </div>
       </div>
 
@@ -2010,22 +2095,48 @@ export default function AdminTools() {
 
   const exportResults = (format = 'txt') => {
     const now = new Date();
+    const allTools = toolCategories.flatMap(c => c.tools);
+    const kbStats = { Codex: 0, Perplexity: 0, Canva: 0 };
+    Object.values(AI_REMEDIATION).forEach(r => { if (r.knowledgeBase && kbStats[r.knowledgeBase] !== undefined) kbStats[r.knowledgeBase]++; });
+
     if (format === 'json') {
       const report = {
         generated: now.toISOString(),
-        summary: { total: totalTools, checked: checkedCount, healthy: healthyCount, warnings: warningCount, errors: errorCount, avgResponseMs: avgResponseTime, maxResponseMs: maxResponseTime, authGated: authGatedCount },
+        platform: "The Genuine Love Project",
+        version: "3.0",
+        summary: {
+          total: totalTools, checked: checkedCount, healthy: healthyCount, warnings: warningCount, errors: errorCount,
+          avgResponseMs: avgResponseTime, maxResponseMs: maxResponseTime, authGated: authGatedCount,
+          healthScore: totalTools > 0 ? Math.round((healthyCount / Math.max(checkedCount, 1)) * 100) : 0,
+        },
+        severityDistribution: {
+          critical: Object.values(TOOL_SEVERITY).filter(s => s === 'critical').length,
+          high: Object.values(TOOL_SEVERITY).filter(s => s === 'high').length,
+          medium: Object.values(TOOL_SEVERITY).filter(s => s === 'medium').length,
+          unclassified: totalTools - Object.keys(TOOL_SEVERITY).length,
+          totalClassified: Object.keys(TOOL_SEVERITY).length,
+        },
+        knowledgeBase: {
+          totalScenarios: Object.keys(AI_REMEDIATION).length,
+          autoFixable: Object.values(AI_REMEDIATION).filter(r => r.autoFixable).length,
+          distribution: kbStats,
+          fixCommands: [...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))],
+        },
         categories: toolCategories.map(cat => ({
           name: cat.title,
           tools: cat.tools.map(t => {
             const r = toolResults[t.id];
             const rem = r ? getRemediation(r.label, r.ms) : null;
             return { 
-              id: t.id, label: t.label, endpoint: t.endpoint, 
+              id: t.id, label: t.label, endpoint: t.endpoint, desc: t.desc,
               ...r,
-              severity: TOOL_SEVERITY[t.id] || 'normal',
+              severity: TOOL_SEVERITY[t.id] || 'unclassified',
+              adminLink: TOOL_ADMIN_LINKS[t.id] || null,
               knowledgeBase: rem?.knowledgeBase || null,
               autoFixable: rem?.autoFixable || false,
-              remediation: rem?.action || null,
+              fixCommand: rem?.fixCommand || null,
+              remediation: rem?.suggestion || null,
+              action: rem?.action || null,
             };
           })
         }))
@@ -2034,23 +2145,63 @@ export default function AdminTools() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `tools-health-${now.toISOString().split('T')[0]}.json`;
+      a.download = `glp-health-report-${now.toISOString().split('T')[0]}.json`;
       a.click();
       URL.revokeObjectURL(url);
       return;
     }
+
+    if (format === 'csv') {
+      const csvLines = ['ID,Label,Endpoint,Status,Code,Response(ms),Severity,KB,AutoFix,AdminLink,Remediation'];
+      allTools.forEach(t => {
+        const r = toolResults[t.id];
+        const rem = r ? getRemediation(r.label, r.ms) : null;
+        const row = [
+          t.id, `"${t.label}"`, t.endpoint,
+          r?.status || 'unchecked', r?.code || '', r?.ms || '',
+          TOOL_SEVERITY[t.id] || 'unclassified',
+          rem?.knowledgeBase || '', rem?.autoFixable ? 'yes' : 'no',
+          TOOL_ADMIN_LINKS[t.id] || '',
+          `"${(rem?.action || '').replace(/"/g, '""')}"`,
+        ].join(',');
+        csvLines.push(row);
+      });
+      const blob = new Blob([csvLines.join('\n')], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `glp-health-report-${now.toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      return;
+    }
+
+    const healthScore = totalTools > 0 ? Math.round((healthyCount / Math.max(checkedCount, 1)) * 100) : 0;
     const lines = [
-      `Platform Tools Health Report - ${now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`,
-      `Generated: ${now.toLocaleTimeString()}`,
+      `═══════════════════════════════════════════════════════════`,
+      `  THE GENUINE LOVE PROJECT — Platform Health Report`,
+      `  ${now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`,
+      `  Generated: ${now.toLocaleTimeString()}`,
+      `═══════════════════════════════════════════════════════════`,
+      '',
+      `HEALTH SCORE: ${healthScore}%`,
       `Total: ${totalTools} | Checked: ${checkedCount} | Healthy: ${healthyCount} | Warnings: ${warningCount} | Errors: ${errorCount}`,
-      `Avg Response: ${avgResponseTime}ms | Slowest: ${maxResponseTime}ms`,
+      `Avg Response: ${avgResponseTime}ms | Slowest: ${maxResponseTime}ms | Auth-Gated: ${authGatedCount}`,
+      '',
+      `SEVERITY DISTRIBUTION:`,
+      `  Critical: ${Object.values(TOOL_SEVERITY).filter(s => s === 'critical').length} | High: ${Object.values(TOOL_SEVERITY).filter(s => s === 'high').length} | Medium: ${Object.values(TOOL_SEVERITY).filter(s => s === 'medium').length}`,
+      '',
+      `AI KNOWLEDGE BASE:`,
+      `  Scenarios: ${Object.keys(AI_REMEDIATION).length} | Auto-Fixable: ${Object.values(AI_REMEDIATION).filter(r => r.autoFixable).length}`,
+      `  Codex: ${kbStats.Codex} | Perplexity: ${kbStats.Perplexity} | Canva: ${kbStats.Canva}`,
       '',
       ...toolCategories.flatMap(cat => [
-        `--- ${cat.title} ---`,
+        `─── ${cat.title} ───`,
         ...cat.tools.map(t => {
           const r = toolResults[t.id];
+          const sev = TOOL_SEVERITY[t.id] || '—';
           const rem = r && (r.status !== 'healthy') ? getRemediation(r.label, r.ms) : null;
-          return r ? `  [${r.status === 'healthy' ? 'OK' : r.status === 'warning' ? 'WARN' : 'ERR'}] ${t.label} (${t.endpoint}) - ${r.ms}ms ${r.label !== 'ok' ? `(${r.label})` : ''}${rem ? ` → ${rem.action}` : ''}` : `  [ ] ${t.label} (${t.endpoint}) - not checked`;
+          return r ? `  [${r.status === 'healthy' ? 'OK  ' : r.status === 'warning' ? 'WARN' : 'ERR '}] ${t.label.padEnd(28)} ${String(r.ms).padStart(5)}ms  ${sev.padEnd(8)} ${r.label !== 'ok' ? `(${r.label})` : ''}${rem ? ` → ${rem.action}` : ''}` : `  [    ] ${t.label.padEnd(28)}         ${sev.padEnd(8)} not checked`;
         }),
         ''
       ])
@@ -2059,7 +2210,7 @@ export default function AdminTools() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `tools-health-${now.toISOString().split('T')[0]}.txt`;
+    a.download = `glp-health-report-${now.toISOString().split('T')[0]}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -2246,6 +2397,13 @@ export default function AdminTools() {
               data-testid="button-export-json"
             >
               <Download size={10} /> JSON
+            </button>
+            <button
+              onClick={() => exportResults('csv')}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-gray-200 dark:border-gray-700 text-xs hover:bg-muted transition-colors"
+              data-testid="button-export-csv"
+            >
+              <Download size={10} /> CSV
             </button>
             <button
               onClick={clearResults}
