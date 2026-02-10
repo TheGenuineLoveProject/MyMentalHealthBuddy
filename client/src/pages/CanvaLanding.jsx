@@ -257,25 +257,41 @@ export default function CanvaLanding() {
 
             {/* CTA Buttons - Right aligned */}
             <div className="flex items-center gap-5 sm:gap-6 shrink-0">
-              <Link href="/login">
-                <button 
-                  className="hidden md:inline-flex font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:shadow-md"
-                  style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
-                  data-testid="button-signin"
-                >
-                  Sign In
-                </button>
-              </Link>
-              <a 
-                href="/api/login"
-                className="inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
-                style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 14px var(--glp-gold-30)' }}
-                data-testid="button-getstarted"
-              >
-                <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
-                <span className="hidden sm:inline">Get Started</span>
-                <span className="sm:hidden">Start</span>
-              </a>
+              {!isLoading && isAuthenticated() ? (
+                <Link href="/dashboard">
+                  <button 
+                    className="inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
+                    style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 14px var(--glp-gold-30)' }}
+                    data-testid="button-go-dashboard"
+                  >
+                    <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
+                    <span className="hidden sm:inline">My Dashboard</span>
+                    <span className="sm:hidden">Dashboard</span>
+                  </button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <button 
+                      className="hidden md:inline-flex font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:shadow-md"
+                      style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
+                      data-testid="button-signin"
+                    >
+                      Sign In
+                    </button>
+                  </Link>
+                  <a 
+                    href="/api/login"
+                    className="inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
+                    style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 14px var(--glp-gold-30)' }}
+                    data-testid="button-getstarted"
+                  >
+                    <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
+                    <span className="hidden sm:inline">Get Started</span>
+                    <span className="sm:hidden">Start</span>
+                  </a>
+                </>
+              )}
 
               {/* Mobile Menu Button */}
               <button 
