@@ -1,10 +1,43 @@
-import { Link } from "wouter";
-import { ArrowRight, Shield, Heart, Sparkles } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { useEffect } from "react";
+import { ArrowRight, Shield, Heart, Sparkles, LayoutDashboard } from "lucide-react";
 import SEO from "../components/SEO";
+import { useAuth } from "../context/AuthContext.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
 export default function Login() {
+  const { isAuthenticated, isLoading, user } = useAuth();
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated()) {
+      setLocation("/dashboard");
+    }
+  }, [isLoading, isAuthenticated, setLocation]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+        <div className="text-center">
+          <div className="w-10 h-10 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--glp-sage-deep)', borderTopColor: 'transparent' }} />
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Checking your session...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated()) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+        <div className="text-center">
+          <div className="w-10 h-10 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--glp-sage-deep)', borderTopColor: 'transparent' }} />
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Taking you to your dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
   <WellnessPageShell
     title="Sign In"
