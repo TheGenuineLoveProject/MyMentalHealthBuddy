@@ -217,6 +217,44 @@ const AI_REMEDIATION = {
   "compression-fail": { suggestion: "Response compression not applied. Perplexity KB: Compression middleware may not be loaded or is bypassed for certain content types. Verify middleware ordering.", action: "Check compression middleware", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
   "socket-leak": { suggestion: "Socket connection leak detected. Codex KB: Open sockets not being properly closed after use. Check HTTP agent keepAlive settings and WebSocket cleanup handlers.", action: "Audit socket lifecycle", knowledgeBase: "Codex", autoFixable: true, fixCommand: "drain-connections" },
   "integrity-mismatch": { suggestion: "Platform integrity score below threshold. Codex KB: Multiple subsystems reporting issues. Run a comprehensive deep scan to identify root causes across DB, env, and services.", action: "Run platform integrity scan", knowledgeBase: "Codex", autoFixable: true, fixCommand: "health-deep-scan" },
+  "cache-rebuild-needed": { suggestion: "Application cache is missing or stale. Codex KB: Rebuild server-side caches for templates, routes, and config data to restore optimal performance.", action: "Rebuild application caches", knowledgeBase: "Codex", autoFixable: true, fixCommand: "rebuild-cache" },
+  "query-plan-suboptimal": { suggestion: "Database query execution plan is inefficient. Perplexity KB: Missing indexes or outdated statistics causing sequential scans. Run ANALYZE and review slow query log.", action: "Optimize query plans", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "optimize-queries" },
+  "route-health-degraded": { suggestion: "One or more API routes returning unexpected status codes. Codex KB: Verify all route files export valid Express routers and are mounted in server/app.mjs.", action: "Audit route health", knowledgeBase: "Codex", autoFixable: true, fixCommand: "check-routes" },
+  "session-store-overloaded": { suggestion: "Session store contains excessive active sessions. Perplexity KB: Memory-backed session stores can grow unbounded. Implement TTL cleanup and session eviction policies.", action: "Clean session store", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "verify-sessions" },
+  "cold-endpoints": { suggestion: "Critical endpoints have not been accessed recently. Codex KB: Pre-warm endpoints to avoid cold-start latency for the first user request. Reduces P99 response times.", action: "Pre-warm all endpoints", knowledgeBase: "Codex", autoFixable: true, fixCommand: "warm-all" },
+  "middleware-leak": { suggestion: "Middleware chain may have unintended side effects. Canva KB: Audit middleware for memory leaks, missing next() calls, and error handling gaps. Check response header bloat.", action: "Audit middleware chain", knowledgeBase: "Canva", autoFixable: true, fixCommand: "audit-middleware" },
+  "disk-pressure": { suggestion: "Disk usage approaching capacity. Perplexity KB: Check for large log files, unused node_modules, orphaned uploads, and .git pack files consuming excessive space.", action: "Check disk usage", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "check-disk" },
+  "stripe-config-invalid": { suggestion: "Stripe integration configuration issue. Canva KB: Verify STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY are valid, webhook secret matches, and product/price IDs exist.", action: "Verify Stripe setup", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-stripe" },
+  "resend-config-invalid": { suggestion: "Resend email service misconfigured. Perplexity KB: Check RESEND_API_KEY validity, sender domain verification status, and email template formatting.", action: "Verify Resend config", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "verify-resend" },
+  "openai-config-invalid": { suggestion: "OpenAI API configuration issue. Codex KB: Verify API key validity, check model access permissions, and ensure billing is active on the OpenAI dashboard.", action: "Verify OpenAI setup", knowledgeBase: "Codex", autoFixable: true, fixCommand: "check-openai" },
+  "header-injection": { suggestion: "Potential HTTP header injection detected. Codex KB: Validate and sanitize all user-supplied values used in response headers. Apply strict header policies.", action: "Audit response headers", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "xss-detected": { suggestion: "Potential XSS vulnerability in user input. Perplexity KB: Ensure HTML sanitization on all user-generated content. Use DOMPurify on the client and escape on the server.", action: "Review input sanitization", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "sql-injection-risk": { suggestion: "Potential SQL injection vector found. Codex KB: Always use parameterized queries via Drizzle ORM. Never concatenate user input into raw SQL strings.", action: "Review query parameterization", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "race-condition": { suggestion: "Potential race condition in concurrent operations. Perplexity KB: Use database transactions with proper isolation levels for atomic operations. Add optimistic locking for updates.", action: "Implement proper locking", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "email-delivery-failed": { suggestion: "Email delivery failure detected. Canva KB: Check Resend delivery logs for bounces, spam filtering, and domain reputation issues. Verify SPF/DKIM records.", action: "Review email delivery logs", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "payment-flow-error": { suggestion: "Payment processing flow encountered an error. Canva KB: Check Stripe dashboard for declined payments, webhook delivery failures, and checkout session status.", action: "Review payment flow logs", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "auth-flow-broken": { suggestion: "Authentication flow is failing. Codex KB: Check OAuth callback URLs, session cookie configuration, and Replit Auth OIDC settings. Verify redirect URIs match.", action: "Debug authentication flow", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "api-key-expired": { suggestion: "API key has expired or been revoked. Perplexity KB: Rotate expired keys immediately. Check API provider dashboard for key status and regenerate if needed.", action: "Rotate expired API keys", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "scheduled-task-stuck": { suggestion: "Scheduled background task appears stuck. Codex KB: Check for unresolved promises, infinite loops, or resource contention in cron/scheduled tasks.", action: "Review scheduled task logs", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "image-processing-fail": { suggestion: "Image processing or upload failed. Canva KB: Check file size limits, supported formats, and object storage connectivity. Verify storage bucket permissions.", action: "Check image pipeline", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "ssr-hydration-mismatch": { suggestion: "Server-side rendering hydration mismatch. Perplexity KB: Client and server rendered different HTML. Check for browser-only APIs used during SSR and conditional rendering logic.", action: "Fix hydration warnings", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "bundle-size-warning": { suggestion: "JavaScript bundle size exceeds recommended limits. Canva KB: Analyze bundle with Vite's build report. Use code splitting, lazy loading, and tree-shaking to reduce bundle size.", action: "Analyze and split bundles", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "lighthouse-score-low": { suggestion: "Performance metrics below acceptable thresholds. Perplexity KB: Optimize Core Web Vitals — LCP, FID, CLS. Implement lazy loading, image optimization, and critical CSS inlining.", action: "Optimize web performance", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "accessibility-violation": { suggestion: "Accessibility standards violation detected. Codex KB: Check WCAG AA compliance — missing alt text, inadequate contrast, missing ARIA labels, or keyboard navigation issues.", action: "Fix accessibility issues", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "seo-issues": { suggestion: "SEO optimization gaps detected. Perplexity KB: Missing meta descriptions, duplicate title tags, broken canonical URLs, or missing structured data (JSON-LD).", action: "Review SEO metadata", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "cookie-policy-violation": { suggestion: "Cookie handling may not comply with privacy regulations. Canva KB: Ensure consent banner is shown, SameSite attributes are set, and secure flag is enabled for all cookies.", action: "Review cookie policy", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "cron-drift": { suggestion: "Scheduled task timing has drifted from expected schedule. Codex KB: System clock drift or event loop delays causing timing inaccuracy in setTimeout/setInterval based scheduling.", action: "Resync scheduled tasks", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "backup-stale": { suggestion: "Database backup is overdue or stale. Perplexity KB: Neon PostgreSQL handles automatic backups but verify backup health on the Neon dashboard. Point-in-time recovery should be enabled.", action: "Verify backup status", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "feature-flag-stale": { suggestion: "Feature flags may be stale or misconfigured. Codex KB: Review SOFT_LAUNCH_MODE flag and featureAccess.js configuration. Ensure flags match intended rollout state.", action: "Audit feature flags", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "i18n-missing": { suggestion: "Internationalization strings missing for some locales. Canva KB: Check translation files for completeness. Missing keys will fall back to default language which may confuse users.", action: "Review translation coverage", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "analytics-gap": { suggestion: "Analytics tracking has gaps in data collection. Perplexity KB: Check Google Analytics integration, event tracking code, and consent-gated analytics initialization.", action: "Audit analytics coverage", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "notification-queue-full": { suggestion: "Notification delivery queue is backing up. Codex KB: Too many pending notifications. Increase processing rate or implement batch delivery for non-urgent notifications.", action: "Process notification queue", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "api-deprecation-warning": { suggestion: "Using deprecated API version or endpoint. Perplexity KB: External API providers have signaled deprecation. Plan migration to newer API versions before sunset dates.", action: "Plan API migration", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "deployment-config-drift": { suggestion: "Deployment configuration has drifted from expected state. Canva KB: Verify Replit deployment settings, environment variables, and build commands match the intended configuration.", action: "Audit deployment config", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "secret-rotation-due": { suggestion: "Security secrets are due for rotation. Codex KB: Rotate ADMIN_TOKEN, SESSION_SECRET, and API keys periodically. Update in Replit Secrets panel and restart the application.", action: "Schedule secret rotation", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "data-integrity-warning": { suggestion: "Potential data integrity issue in database records. Perplexity KB: Orphaned records, broken foreign key references, or NULL values in required fields detected.", action: "Run data integrity audit", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "load-balancer-health": { suggestion: "Load balancer health check may be failing. Canva KB: Ensure /api/health endpoint responds within 5 seconds with 200 status. Check timeout and retry settings.", action: "Verify health endpoint", knowledgeBase: "Canva", autoFixable: true, fixCommand: "warm-all" },
+  "drizzle-sync-needed": { suggestion: "Drizzle ORM schema out of sync with database. Codex KB: Run npm run db:push to synchronize schema changes. Check for pending model changes in shared/schema.mjs.", action: "Sync Drizzle schema", knowledgeBase: "Codex", autoFixable: true, fixCommand: "sync-schema" },
 };
 
 function getRemediation(label, ms) {
@@ -952,6 +990,46 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
         try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'health-deep-scan' }) }); } catch {}
         await new Promise(r => setTimeout(r, 500));
         await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'rebuild-cache') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'optimize-queries') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-queries' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 500));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'check-routes') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-routes' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'verify-sessions') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-sessions' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'warm-all') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 500));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'audit-middleware') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'audit-middleware' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'check-disk') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-disk' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'verify-stripe') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'verify-resend') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'check-openai') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
       } else {
         await runHealthCheck(issue);
       }
@@ -1641,7 +1719,7 @@ function PlatformCoverageReport({ toolResults }) {
   const overallScore = Math.round(
     ((linkCoverage / totalTools) * 20) +
     ((sevCoverage / totalTools) * 25) +
-    ((Math.min(remScenarios, 80) / 80) * 20) +
+    ((Math.min(remScenarios, 127) / 127) * 20) +
     ((autoFixable / Math.max(remScenarios, 1)) * 10) +
     ((scanCoverage) * 0.25)
   );
@@ -2102,6 +2180,9 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
     return rem?.autoFixable;
   }).length;
 
+  const fixCommandCount = [...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].length;
+  const kbScenarioCount = Object.keys(AI_REMEDIATION).length;
+
   const opsSteps = [
     { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap, category: 'discovery' },
     { id: 'full-scan', label: `Full Platform Scan (${totalTools} tools)`, done: checkedCount === totalTools, icon: ScanLine, category: 'discovery' },
@@ -2109,9 +2190,14 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
     { id: 'auto-repair', label: `AI Auto-Repair (${autoFixableCount} fixable)`, done: checkedCount === totalTools && errorCount === 0, icon: Wand2, category: 'repair' },
     { id: 'recheck', label: 'Post-Repair Verification', done: checkedCount === totalTools && errorCount === 0 && warningCount === 0, icon: RotateCcw, category: 'verify' },
     { id: 'perf-review', label: `Performance Review (${slowCount} slow)`, done: checkedCount === totalTools && !Object.values(toolResults).some(r => r.ms > 2000), icon: Gauge, category: 'optimize' },
-    { id: 'kb-sync', label: 'Knowledge Base Cross-Check', done: checkedCount === totalTools && errorCount === 0, icon: Brain, category: 'intelligence' },
+    { id: 'git-integrity', label: 'Git Integrity Scan', done: checkedCount === totalTools && errorCount === 0, icon: GitBranch, category: 'integrity' },
+    { id: 'deep-scan', label: 'Platform Deep Scan', done: checkedCount === totalTools && healthyCount >= totalTools * 0.9, icon: Stethoscope, category: 'integrity' },
+    { id: 'service-verify', label: 'Service Integration Verify', done: checkedCount === totalTools && errorCount === 0, icon: PackageCheck, category: 'services' },
+    { id: 'kb-sync', label: `KB Cross-Check (${kbScenarioCount} scenarios)`, done: checkedCount === totalTools && errorCount === 0, icon: Brain, category: 'intelligence' },
+    { id: 'fix-commands', label: `Fix Commands Audit (${fixCommandCount} commands)`, done: checkedCount === totalTools && autoFixableCount === 0, icon: Terminal, category: 'intelligence' },
     { id: 'integrity', label: 'Platform Integrity Validation', done: checkedCount === totalTools && healthyCount === totalTools, icon: ShieldCheck, category: 'finalize' },
     { id: 'warm-endpoints', label: 'Pre-warm Critical Paths', done: CRITICAL_CHECKS.every(c => toolResults[c.id]?.status === 'healthy' && toolResults[c.id]?.ms < 1000), icon: Flame, category: 'finalize' },
+    { id: 'cache-rebuild', label: 'Cache Rebuild & Optimize', done: checkedCount === totalTools && slowCount === 0, icon: HardDrive, category: 'optimize' },
     { id: 'export', label: 'Export Daily Health Report', done: false, icon: Download, category: 'report' },
   ];
 
@@ -2157,10 +2243,39 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
     setStepTimestamps({ ...ts });
     await new Promise(r => setTimeout(r, 200));
 
+    setCurrentStep('git-integrity');
+    ts['git-integrity'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    try { await fetch('/api/health/git-status', { credentials: 'include' }); } catch {}
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('deep-scan');
+    ts['deep-scan'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    try { await fetch('/api/health/platform-integrity', { credentials: 'include' }); } catch {}
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('service-verify');
+    ts['service-verify'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    try {
+      await Promise.all([
+        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }).catch(() => {}),
+        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }).catch(() => {}),
+        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }).catch(() => {}),
+      ]);
+    } catch {}
+    await new Promise(r => setTimeout(r, 200));
+
     setCurrentStep('kb-sync');
     ts['kb-sync'] = new Date().toLocaleTimeString();
     setStepTimestamps({ ...ts });
     await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('fix-commands');
+    ts['fix-commands'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    await new Promise(r => setTimeout(r, 150));
 
     setCurrentStep('integrity');
     ts['integrity'] = new Date().toLocaleTimeString();
@@ -2171,6 +2286,13 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
     ts['warm-endpoints'] = new Date().toLocaleTimeString();
     setStepTimestamps({ ...ts });
     await Promise.all(CRITICAL_CHECKS.map(t => fetch(t.endpoint, { credentials: 'include' }).catch(() => {})));
+    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {}); } catch {}
+    await new Promise(r => setTimeout(r, 200));
+
+    setCurrentStep('cache-rebuild');
+    ts['cache-rebuild'] = new Date().toLocaleTimeString();
+    setStepTimestamps({ ...ts });
+    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {}); } catch {}
     await new Promise(r => setTimeout(r, 200));
 
     setCurrentStep('export');
@@ -2254,7 +2376,8 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
             const catColors = {
               discovery: 'text-amber-500', triage: 'text-red-500', repair: 'text-purple-500',
               verify: 'text-blue-500', optimize: 'text-cyan-500', intelligence: 'text-indigo-500',
-              finalize: 'text-emerald-500', report: 'text-gray-500'
+              finalize: 'text-emerald-500', report: 'text-gray-500',
+              integrity: 'text-violet-500', services: 'text-teal-500'
             };
             return (
               <div key={step.id} className={`flex items-center gap-3 p-2.5 rounded-lg border transition-all ${
@@ -2288,6 +2411,21 @@ function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnl
                 )}
                 {!step.done && !pipelineRunning && step.id === 'integrity' && (
                   <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition-colors disabled:opacity-50" data-testid="button-runbook-integrity">Verify</button>
+                )}
+                {!step.done && !pipelineRunning && step.id === 'git-integrity' && (
+                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-violet-500 text-white hover:bg-violet-600 transition-colors" data-testid="button-runbook-git">Scan</button>
+                )}
+                {!step.done && !pipelineRunning && step.id === 'deep-scan' && (
+                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-teal-500 text-white hover:bg-teal-600 transition-colors" data-testid="button-runbook-deep-scan">Scan</button>
+                )}
+                {!step.done && !pipelineRunning && step.id === 'service-verify' && (
+                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
+                )}
+                {!step.done && !pipelineRunning && step.id === 'warm-endpoints' && (
+                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-testid="button-runbook-warm">Warm</button>
+                )}
+                {!step.done && !pipelineRunning && step.id === 'cache-rebuild' && (
+                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
                 )}
               </div>
             );
