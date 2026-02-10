@@ -36,6 +36,7 @@ const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.jsx"));
+const BlogIndex = lazy(() => import("./pages/BlogIndex.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
 const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
 const StatePage = lazy(() => import("./pages/StatePage.jsx"));
@@ -1261,8 +1262,9 @@ export default function App() {
               <Route path="/damaged">{() => <Redirect to="/healing" />}</Route>
               <Route path="/ashamed">{() => <Redirect to="/shame" />}</Route>
               <Route path="/guilty">{() => <Redirect to="/guilt" />}</Route>
-              <Route path="/jealous">{() => <Redirect to="/jealousy" />}</Route>
-              <Route path="/envious">{() => <Redirect to="/jealousy" />}</Route>
+              <Route path="/jealous">{() => <Redirect to="/emotions" />}</Route>
+              <Route path="/envious">{() => <Redirect to="/emotions" />}</Route>
+              <Route path="/jealousy">{() => <Redirect to="/emotions" />}</Route>
               <Route path="/resentful">{() => <Redirect to="/anger" />}</Route>
               <Route path="/bitter">{() => <Redirect to="/anger" />}</Route>
               <Route path="/exhausted">{() => <Redirect to="/rest" />}</Route>
@@ -1495,8 +1497,8 @@ export default function App() {
                 <WellnessRoute><SocialHub /></WellnessRoute>
               </Route>
 
-              {/* Blog & Content - Config Driven */}
-              <Route path="/blog">{() => <ConfigRoute route="/blog" />}</Route>
+              {/* Blog & Content */}
+              <Route path="/blog" component={BlogIndex} />
               <Route path="/blog/:slug" component={BlogPost} />
               <Route path="/write">
                 <ProtectedRoute><BlogEditor /></ProtectedRoute>
