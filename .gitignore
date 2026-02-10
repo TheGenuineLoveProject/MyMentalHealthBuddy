@@ -39,3 +39,8 @@ _quarantine/
 # Temp files
 *.tmp
 *.temp
+
+publickey.asc
+gpg-batch
+echo "publickey.asc" >> .gitignore
+echo "gpg-batch" >> .gitignore
