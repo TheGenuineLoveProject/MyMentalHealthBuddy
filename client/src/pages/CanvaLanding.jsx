@@ -18,12 +18,6 @@ export default function CanvaLanding() {
   
   const { isAuthenticated, isLoading } = useAuth();
   
-  useEffect(() => {
-    if (!isLoading && isAuthenticated()) {
-      setLocation("/dashboard");
-    }
-  }, [isLoading, isAuthenticated, setLocation]);
-  
   // Admin login state
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [adminToken, setAdminToken] = useState("");
