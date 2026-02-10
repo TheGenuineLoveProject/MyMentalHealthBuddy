@@ -9,16 +9,6 @@
 import { useState } from "react";
 import { Heart, Bookmark, Share2, Copy, Check, Sparkles } from "lucide-react";
 
-interface InfinityHeartCardProps {
-  quote: string;
-  microTool: string;
-  action: string;
-  category?: string;
-  onSave?: () => void;
-  onShare?: () => void;
-  className?: string;
-}
-
 export function InfinityHeartCard({
   quote,
   microTool,
@@ -27,7 +17,7 @@ export function InfinityHeartCard({
   onSave,
   onShare,
   className = ""
-}: InfinityHeartCardProps) {
+}) {
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -44,7 +34,7 @@ export function InfinityHeartCard({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      console.log("Copy failed");
+      // clipboard write not supported or denied
     }
   };
 

@@ -8,26 +8,18 @@
 import { useState } from "react";
 import { Flame, Trophy, Share2, Copy, Check, Calendar, Sparkles } from "lucide-react";
 
-interface StreakShareProps {
-  streakDays: number;
-  activityType?: string;
-  milestone?: boolean;
-  onShare?: () => void;
-  className?: string;
-}
-
 const STREAK_MESSAGES = [
-  { min: 1, max: 3, message: "Every journey starts with a single step", emoji: "🌱" },
-  { min: 4, max: 7, message: "Building new neural pathways", emoji: "✨" },
-  { min: 8, max: 14, message: "Consistency is self-love in action", emoji: "💪" },
-  { min: 15, max: 30, message: "Your future self thanks you", emoji: "🔥" },
-  { min: 31, max: 60, message: "Habits are forming, healing is happening", emoji: "🌟" },
-  { min: 61, max: 90, message: "You're rewriting your story", emoji: "🏆" },
-  { min: 91, max: 365, message: "Living in Genuine Love", emoji: "💝" },
-  { min: 366, max: Infinity, message: "A year of choosing yourself", emoji: "👑" }
+  { min: 1, max: 3, message: "Every journey starts with a single step", emoji: "\u{1F331}" },
+  { min: 4, max: 7, message: "Building new neural pathways", emoji: "\u2728" },
+  { min: 8, max: 14, message: "Consistency is self-love in action", emoji: "\u{1F4AA}" },
+  { min: 15, max: 30, message: "Your future self thanks you", emoji: "\u{1F525}" },
+  { min: 31, max: 60, message: "Habits are forming, healing is happening", emoji: "\u{1F31F}" },
+  { min: 61, max: 90, message: "You're rewriting your story", emoji: "\u{1F3C6}" },
+  { min: 91, max: 365, message: "Living in Genuine Love", emoji: "\u{1F49D}" },
+  { min: 366, max: Infinity, message: "A year of choosing yourself", emoji: "\u{1F451}" }
 ];
 
-function getStreakMessage(days: number) {
+function getStreakMessage(days) {
   return STREAK_MESSAGES.find(m => days >= m.min && days <= m.max) || STREAK_MESSAGES[0];
 }
 
@@ -37,19 +29,19 @@ export function StreakShare({
   milestone = false,
   onShare,
   className = ""
-}: StreakShareProps) {
+}) {
   const [copied, setCopied] = useState(false);
   const streakInfo = getStreakMessage(streakDays);
 
   const handleCopy = async () => {
-    const text = `${streakInfo.emoji} ${streakDays} day streak!\n\n${streakInfo.message}\n\n— The Genuine Love Project`;
+    const text = `${streakInfo.emoji} ${streakDays} day streak!\n\n${streakInfo.message}\n\n\u2014 The Genuine Love Project`;
     
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      console.log("Copy failed");
+      // clipboard write not supported or denied
     }
   };
 
