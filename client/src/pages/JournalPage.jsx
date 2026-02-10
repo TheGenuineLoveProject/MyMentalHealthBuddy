@@ -257,8 +257,8 @@ export default function JournalPage() {
 
   return (
     <WellnessPageShell
-      title=""
-      subtitle=""
+      title="Reflective Journal"
+      subtitle="Write freely, at your own pace. There's no right way to do this."
       benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "A private journaling space with gentle prompts.",

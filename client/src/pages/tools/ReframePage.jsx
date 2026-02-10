@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { RefreshCw, ArrowRight, Shield, Sparkles } from "lucide-react";
-import PageTemplate from "@/components/PageTemplate";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
@@ -102,16 +101,16 @@ export default function ReframePage() {
 
   return (
   <WellnessPageShell
-    title="ReframePage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    title="Reframe Tool"
+    subtitle="Shift harsh self-talk into something gentler and more actionable."
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
+      what: "A way of shifting harsh self-talk so your mind can find better options.",
+      why: "Words shape what you notice and what you attempt. Gentler words open new paths.",
+      who: "Anyone stuck in harsh inner criticism or hopeless thoughts.",
+      when: "When your mind says 'I can't,' 'I'm broken,' or 'it's hopeless.'",
       where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
+      how: "Notice the harsh phrase, see 3 reframes, pick one observable step."
     }}
     examples={[
       { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
@@ -119,13 +118,9 @@ export default function ReframePage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Reframe — The Genuine Love Project" description="Tools for shifting perspective on challenges." />
+      <SEO title="Reframe Tool — The Genuine Love Project" description="Shift harsh self-talk into gentler, more actionable perspectives. Educational cognitive reframing exercises." />
 
-
-    <PageTemplate
-      title="Reframe Tool"
-      description="Shift harsh self-talk into something gentler and more actionable."
-    >
+    <div>
       <div className="max-w-2xl mx-auto space-y-8">
         <BenefitsBlock
           benefits={[
@@ -315,7 +310,7 @@ export default function ReframePage() {
 
         <CrisisNotice />
       </div>
-    </PageTemplate>
+    </div>
   </WellnessPageShell>
   );
 }

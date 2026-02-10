@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useMutation } from "@tanstack/react-query";
-import { Dumbbell, Clock, Star, Heart, Wind, Brain, Sparkles, Search, ArrowRight, Loader2 } from "lucide-react";
+import { Dumbbell, Clock, Star, Heart, Wind, Brain, Sparkles, Search, ArrowRight, Loader2, Smile, Notebook, RefreshCw, Compass, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
@@ -193,6 +193,81 @@ export default function PracticeLibrary() {
             Start with what feels right for you.
           </p>
         </header>
+
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12" data-testid="section-core-tools">
+          {[
+            { title: "Mood Check-In", description: "Track how you feel", icon: Smile, href: "/mood", color: "bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-300" },
+            { title: "Journal", description: "Write and reflect", icon: Notebook, href: "/journal", color: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-300" },
+            { title: "Reframe Tool", description: "Shift your perspective", icon: RefreshCw, href: "/tools/reframe", color: "bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-300" },
+            { title: "Topic Hubs", description: "Explore by topic", icon: Compass, href: "/hubs", color: "bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-300" },
+          ].map(tool => {
+            const Icon = tool.icon;
+            return (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="group flex flex-col items-center gap-3 p-5 rounded-xl border border-border hover:border-primary/40 hover:shadow-md transition-all bg-card"
+                data-testid={`link-tool-${tool.title.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                <div className={`p-3 rounded-xl ${tool.color}`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <div className="text-center">
+                  <p className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">{tool.title}</p>
+                  <p className="text-xs text-muted-foreground">{tool.description}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </section>
+
+        <section className="mb-12 p-6 rounded-2xl border border-primary/20 bg-primary/5" data-testid="section-twelve-practices">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <BookOpen className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold text-foreground">12 Practices for Transformation</h2>
+                <p className="text-sm text-muted-foreground">A guided path through mind, body, soul, and action</p>
+              </div>
+            </div>
+            <Link href="/twelve-practices">
+              <Button variant="outline" className="min-h-[40px] rounded-lg" data-testid="link-twelve-practices">
+                Explore All 12
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {[
+              { n: 1, name: "Willingness", domain: "mind" },
+              { n: 2, name: "Clarity", domain: "mind" },
+              { n: 3, name: "Values", domain: "soul" },
+              { n: 4, name: "Awareness", domain: "mind" },
+              { n: 5, name: "Community", domain: "action" },
+              { n: 6, name: "Repair", domain: "action" },
+              { n: 7, name: "Boundaries", domain: "body" },
+              { n: 8, name: "Presence", domain: "body" },
+              { n: 9, name: "Purpose", domain: "soul" },
+              { n: 10, name: "Resilience", domain: "action" },
+              { n: 11, name: "Gratitude", domain: "soul" },
+              { n: 12, name: "Service", domain: "action" },
+            ].map(p => (
+              <Link
+                key={p.n}
+                href="/twelve-practices"
+                className="flex items-center gap-2 p-2 rounded-lg hover:bg-primary/10 transition-colors"
+                data-testid={`link-practice-${p.n}`}
+              >
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/15 text-primary text-xs font-bold flex-shrink-0">{p.n}</span>
+                <span className="text-sm text-foreground truncate">{p.name}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <h2 className="text-2xl font-bold text-foreground mb-6">Wellness Exercises</h2>
 
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">

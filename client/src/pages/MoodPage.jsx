@@ -120,8 +120,8 @@ export default function MoodPage() {
   if (success) {
     return (
   <WellnessPageShell
-    title=""
-    subtitle=""
+    title="Mood Saved"
+    subtitle="Your check-in has been recorded."
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
@@ -153,8 +153,8 @@ export default function MoodPage() {
 
   return (
     <WellnessPageShell
-      title=""
-      subtitle=""
+      title="Mood Check-In"
+      subtitle="Pause, breathe, and notice what's present."
       benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "A gentle mood tracking tool.",

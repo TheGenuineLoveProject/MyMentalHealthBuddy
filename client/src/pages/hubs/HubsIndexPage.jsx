@@ -35,7 +35,7 @@ const ALL_HUBS = [
     icon: Heart
   },
   {
-    title: "resilience",
+    title: "Resilience",
     description: "Build emotional strength",
     href: "/hubs/resilience",
     icon: Zap
