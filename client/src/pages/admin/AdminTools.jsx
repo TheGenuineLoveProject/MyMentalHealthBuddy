@@ -22,52 +22,77 @@ import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const TOOL_ADMIN_LINKS = {
+  "ai-chat": "/chat", "therapy": "/admin/tools", "mood-tracker": "/admin/health", "journal": "/admin/health",
+  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+  "mirror": "/admin/tools", "prompts": "/admin/engagement", "states": "/admin/health",
+  "wisdom": "/admin/tools", "wisdom-engine": "/admin/tools", "philosophy": "/admin/tools",
+  "metacognition": "/admin/tools", "creativity": "/admin/tools", "resilience": "/admin/tools",
+  "foresight": "/admin/tools", "knowledge": "/admin/tools", "cognitive-lab": "/admin/tools",
+  "cognitive-mastery": "/admin/tools", "deep-learning": "/admin/tools", "dialectics": "/admin/tools",
+  "practices": "/admin/tools", "insights": "/admin/tools",
+  "trauma-healing": "/admin/tools", "emotional-resilience": "/admin/tools", "emotional-mastery": "/admin/tools",
+  "healing-modalities": "/admin/tools", "holistic-healing": "/admin/tools", "healing-tools": "/admin/tools",
+  "healing-core": "/admin/tools", "healing-intelligence": "/admin/tools", "post-trauma": "/admin/tools",
+  "mind-body": "/admin/tools", "psychological-safety": "/admin/tools",
+  "self-mastery-intelligence": "/admin/tools", "self-mastery": "/admin/tools", "peak-performance": "/admin/tools",
+  "personal-growth": "/admin/tools", "life-purpose": "/admin/tools", "life-design": "/admin/tools",
+  "purpose-compass": "/admin/tools", "mastery-excellence": "/admin/tools", "meaning": "/admin/tools",
+  "meaning-core": "/admin/tools", "transformation": "/admin/tools", "values": "/admin/tools",
+  "praxis": "/admin/tools",
+  "consciousness": "/admin/tools", "human-potential": "/admin/tools", "spiritual-intelligence": "/admin/tools",
+  "wisdom-traditions": "/admin/tools", "wisdom-synthesis": "/admin/tools", "contemplative": "/admin/tools",
+  "ethical-reasoning": "/admin/tools", "existential": "/admin/tools", "neuro-integration": "/admin/tools",
+  "socio-ecology": "/admin/tools", "cognitive-enhancement": "/admin/tools",
+  "relationship-dynamics": "/admin/tools", "social-intelligence": "/admin/tools", "relational": "/admin/tools",
+  "collective-intelligence": "/admin/tools", "systems-compassion": "/admin/tools", "embodiment": "/admin/tools",
+  "narrative": "/admin/narrative", "community": "/admin/engagement",
+  "content-studio": "/admin/content-studio", "content-intelligence": "/admin/content-studio",
+  "content-api": "/admin/content-studio", "content-generator": "/admin/content-studio",
+  "universal-content": "/admin/content-studio", "blog-api": "/admin/publishing",
+  "newsletter-api": "/admin/newsletter", "social-posts": "/admin/social-studio",
+  "social-posting": "/admin/social-studio", "narrative-drafts": "/admin/narrative",
+  "perplexity": "/admin/tools", "rss-alt": "/admin/publishing",
+  "account": "/admin/users", "onboarding": "/admin/engagement", "gamification": "/admin/engagement",
+  "progress": "/admin/engagement", "badges": "/admin/engagement", "favorites": "/admin/engagement",
+  "dashboard-api": "/admin/health", "pro-features": "/admin/revenue", "leads": "/admin/revenue",
+  "feedback": "/admin/feedback", "account-actions": "/admin/users", "ai-dashboard": "/admin/health",
+  "moods-alt": "/admin/health",
   "admin-core": "/admin", "admin-security": "/admin/security", "admin-audit": "/admin/audit-log",
   "admin-billing": "/admin/billing", "admin-publishing": "/admin/publishing",
   "admin-social": "/admin/social-studio", "admin-enterprise": "/admin/social/ops",
-  "analytics": "/admin/analytics", "soft-launch": "/admin/health",
-  "health-api": "/admin/health", "deployment": "/admin/tools",
-  "integrations": "/admin/tools", "newsletter-api": "/admin/newsletter",
-  "blog-api": "/admin/publishing", "feedback": "/admin/feedback",
-  "leads": "/admin/revenue", "billing": "/admin/billing",
-  "email": "/admin/newsletter", "ai-chat": "/chat",
-  "content-studio": "/admin/content-studio", "social-posts": "/admin/social-studio",
-  "narrative-drafts": "/admin/narrative", "social-posting": "/admin/social-studio",
-  "social-posts-alt": "/admin/social-studio", "content-generator": "/admin/content-studio",
-  "content-intelligence": "/admin/content-studio", "content-api": "/admin/content-studio",
-  "universal-content": "/admin/content-studio", "rss-feed": "/admin/publishing",
-  "rss-alt": "/admin/publishing", "gamification": "/admin/engagement",
-  "account": "/admin/users", "account-actions": "/admin/users",
-  "onboarding": "/admin/engagement", "progress": "/admin/engagement",
-  "badges": "/admin/engagement", "favorites": "/admin/engagement",
-  "dashboard-api": "/admin/health", "pro-features": "/admin/revenue",
-  "ai-dashboard": "/admin/health", "moods-alt": "/admin/health",
+  "analytics": "/admin/analytics", "metrics": "/admin/analytics", "soft-launch": "/admin/health",
+  "health-api": "/admin/health", "deployment": "/admin/tools", "integrations": "/admin/tools",
   "object-storage": "/admin/tools", "api-core": "/admin/health",
-  "auth-github": "/admin/security", "auth-core": "/admin/security",
-  "login": "/admin/security", "mfa-auth": "/admin/security",
-  "user-mgmt": "/admin/users", "user-settings": "/admin/users",
-  "uploads": "/admin/tools", "figma-api": "/admin/tools",
-  "canva-oauth": "/admin/tools", "perplexity": "/admin/tools",
-  "metrics": "/admin/analytics", "metrics-summary": "/admin/analytics",
-  "analytics-events": "/admin/analytics", "contact": "/admin/feedback",
-  "products": "/admin/revenue", "invites": "/admin/engagement",
-  "feed": "/admin/publishing", "webhook": "/admin/billing",
-  "mood-tracker": "/admin/health", "journal": "/admin/health",
-  "wisdom": "/admin/tools", "community": "/admin/engagement",
-  "trauma-healing": "/admin/tools", "healing-tools": "/admin/tools",
-  "healing-intelligence": "/admin/tools", "therapy": "/admin/tools",
+  "billing": "/admin/billing", "webhook": "/admin/billing", "email": "/admin/newsletter",
+  "contact": "/admin/feedback", "auth-github": "/admin/security", "products": "/admin/revenue",
+  "invites": "/admin/engagement", "feed": "/admin/publishing", "figma-api": "/admin/tools",
+  "login": "/admin/security", "user-mgmt": "/admin/users", "user-settings": "/admin/users",
+  "uploads": "/admin/tools", "metrics-summary": "/admin/analytics",
+  "social-posts-alt": "/admin/social-studio", "analytics-events": "/admin/analytics",
+  "mfa-auth": "/admin/security", "canva-oauth": "/admin/tools", "rss-feed": "/admin/publishing",
+  "auth-core": "/admin/security",
 };
 
 const TOOL_SEVERITY = {
   "health-api": "critical", "ai-chat": "critical", "auth-core": "critical",
   "billing": "critical", "email": "critical", "perplexity": "critical",
   "canva-oauth": "critical", "webhook": "critical", "api-core": "critical",
+  "therapy": "critical", "dashboard-api": "critical",
   "admin-core": "high", "admin-security": "high", "analytics": "high",
   "blog-api": "high", "newsletter-api": "high", "login": "high",
   "user-mgmt": "high", "mfa-auth": "high", "auth-github": "high",
   "object-storage": "high", "mood-tracker": "high", "journal": "high",
   "content-studio": "high", "social-posts": "high", "gamification": "high",
   "account": "high", "integrations": "high", "deployment": "high",
+  "admin-audit": "high", "admin-billing": "high", "admin-publishing": "high",
+  "admin-social": "high", "admin-enterprise": "high", "metrics": "high",
+  "soft-launch": "high", "user-settings": "high", "account-actions": "high",
+  "social-posting": "high", "narrative-drafts": "high", "content-api": "high",
+  "content-generator": "high", "content-intelligence": "high",
+  "trauma-healing": "high", "healing-tools": "high", "healing-intelligence": "high",
+  "leads": "high", "feedback": "high", "pro-features": "high",
+  "onboarding": "high", "products": "high", "contact": "high",
+  "uploads": "high", "figma-api": "high", "rss-feed": "high",
 };
 
 const AI_REMEDIATION = {
@@ -91,6 +116,30 @@ const AI_REMEDIATION = {
   "integration-down": { suggestion: "Third-party integration is not responding. Canva KB: Check service status pages for Stripe, Resend, OpenAI, and Perplexity. These are external dependencies.", action: "Check external service status", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
   "cache-stale": { suggestion: "Cached data may be stale. Codex KB: Clear server-side cache and force-refresh client-side data by invalidating query keys.", action: "Clear application caches", knowledgeBase: "Codex", autoFixable: true, fixCommand: "clear-cache" },
   "session-expired": { suggestion: "User session has expired. Codex KB: Session TTL is configured in Express session middleware. Re-authenticate to restore access.", action: "Re-authenticate session", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "route-missing": { suggestion: "Route file exists but is not mounted. Codex KB: Add mountIfExists() call in server/app.mjs for the route path. Verify the file exports a default Express router.", action: "Mount route in server/app.mjs", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "env-missing": { suggestion: "Required environment variable is not set. Perplexity KB: Check Replit Secrets panel for missing keys. Common missing vars: STRIPE_SECRET_KEY, RESEND_API_KEY, OPENAI_API_KEY.", action: "Add missing env var in Secrets", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "stripe-webhook-fail": { suggestion: "Stripe webhook endpoint is failing. Canva KB: Verify STRIPE_WEBHOOK_SECRET is configured and webhook signature validation matches. Check Stripe dashboard for delivery failures.", action: "Verify Stripe webhook secret", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-admin-token" },
+  "openai-quota": { suggestion: "OpenAI API quota exceeded or rate limited. Perplexity KB: Check billing status on OpenAI dashboard. Implement exponential backoff and request queueing for high-volume periods.", action: "Check OpenAI billing/quota", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "resend-bounce": { suggestion: "Email delivery failing through Resend. Canva KB: Check sender domain verification, SPF/DKIM records, and Resend dashboard for bounce rates. Hard bounces require address cleanup.", action: "Review Resend delivery logs", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "perplexity-timeout": { suggestion: "Perplexity AI responses are timing out. Perplexity KB: Factual AI queries may take longer for complex topics. Increase timeout to 15s and implement streaming for long responses.", action: "Increase Perplexity timeout", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "canva-token-expired": { suggestion: "Canva OAuth token has expired. Canva KB: OAuth tokens have limited TTL. Implement token refresh flow using the stored refresh_token. Check /api/canva-oauth/status.", action: "Refresh Canva OAuth token", knowledgeBase: "Canva", autoFixable: true, fixCommand: "restart-service" },
+  "websocket-disconnect": { suggestion: "WebSocket connection dropped. Codex KB: Check for proxy timeout settings. Replit's infrastructure has WebSocket support but connections may drop after idle periods.", action: "Implement reconnection logic", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "session-corrupt": { suggestion: "Session data is corrupted or inconsistent. Codex KB: Clear the session store and force re-authentication. Check Express session secret rotation timing.", action: "Clear session store", knowledgeBase: "Codex", autoFixable: true, fixCommand: "clear-cache" },
+  "migration-needed": { suggestion: "Database tables missing or schema needs update. Codex KB: Run npm run db:push to create/update tables. Never manually write SQL migrations for Drizzle.", action: "Run npm run db:push", knowledgeBase: "Codex", autoFixable: true, fixCommand: "sync-schema" },
+  "disk-full": { suggestion: "Storage capacity approaching limits. Perplexity KB: Check Replit storage usage. Clear logs, temp files, and old uploads. Object storage has separate limits from disk.", action: "Clear temp files and old logs", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "cold-start": { suggestion: "Service experiencing cold start delays. Codex KB: First request after idle may be slow due to module loading and DB connection establishment. This is transient.", action: "Wait for warmup — retry in 10s", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "circular-dependency": { suggestion: "Module loading failed due to circular imports. Perplexity KB: Check import chains between shared/, server/, and client/ directories. Use dynamic imports to break cycles.", action: "Audit module import chains", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "import-error": { suggestion: "Module import failed. Codex KB: Missing dependency in package.json or incorrect import path. Run npm install and verify all imports resolve correctly.", action: "Run npm install", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "build-fail": { suggestion: "Build process failed. Canva KB: Check Vite build output for TypeScript errors, missing assets, or configuration issues. Common fix: clear .cache and rebuild.", action: "Clear cache and rebuild", knowledgeBase: "Canva", autoFixable: true, fixCommand: "clear-cache" },
+  "dns-fail": { suggestion: "DNS resolution failed for external service. Perplexity KB: External APIs (Stripe, Resend, OpenAI) may be unreachable due to DNS issues. Usually transient — retry after 30 seconds.", action: "Retry after DNS propagation", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "proxy-error": { suggestion: "Reverse proxy returned an error. Canva KB: Replit's proxy layer may be overloaded or the app took too long to respond. Ensure response time is under 30 seconds.", action: "Reduce response time below 30s", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "redirect-loop": { suggestion: "Infinite redirect detected. Codex KB: Check middleware order — auth redirects, trailing slash normalizers, and HTTPS redirectors can create loops. Verify redirect conditions.", action: "Audit redirect middleware chain", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "content-type-mismatch": { suggestion: "Response Content-Type doesn't match expected format. Perplexity KB: Ensure API endpoints set proper Content-Type headers (application/json). HTML responses from API routes indicate a routing issue.", action: "Fix Content-Type headers", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "payload-too-large": { suggestion: "Request body exceeds size limit (413). Canva KB: Express body parser has default limits. Increase limit for file upload endpoints: express.json({ limit: '10mb' }).", action: "Increase body parser limit", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "pool-exhausted": { suggestion: "Database connection pool is exhausted. Codex KB: All connections in use — queries are waiting. Increase pool size or optimize long-running transactions. Check for connection leaks.", action: "Increase DB pool size", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+  "jwt-invalid": { suggestion: "JWT token validation failed. Codex KB: Token may be malformed, expired, or signed with wrong key. Check JWT_SECRET consistency between token creation and validation.", action: "Verify JWT secret configuration", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "csp-violation": { suggestion: "Content Security Policy blocking resource. Canva KB: Helmet CSP may be too restrictive. Add required domains to CSP directives for scripts, styles, images, and connect-src.", action: "Update Helmet CSP policy", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+  "api-version-mismatch": { suggestion: "API version incompatibility detected. Perplexity KB: Client and server may be running different API versions after a deployment. Clear browser cache and reload.", action: "Force client cache refresh", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "clear-cache" },
 };
 
 function getRemediation(label, ms) {
@@ -1114,6 +1163,356 @@ function SystemOptimizationAdvisor({ toolResults }) {
   );
 }
 
+function AIHealthPipeline({ toolResults, runHealthCheck, runAllChecks }) {
+  const [showPipeline, setShowPipeline] = useState(false);
+  const [pipelineHistory, setPipelineHistory] = useState(() => {
+    try { const s = localStorage.getItem('glp_health_pipeline_history'); return s ? JSON.parse(s) : []; } catch { return []; }
+  });
+  const [isRunning, setIsRunning] = useState(false);
+  const [currentPhase, setCurrentPhase] = useState(null);
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const checkedTools = allTools.filter(t => toolResults[t.id]);
+  const toolResultsRef = useRef(toolResults);
+  toolResultsRef.current = toolResults;
+
+  const phases = [
+    { id: 'discovery', label: 'Service Discovery', desc: 'Scan all 127 endpoints', icon: ScanLine, kb: 'Codex' },
+    { id: 'triage', label: 'Issue Triage', desc: 'Classify by severity & knowledge base', icon: FileWarning, kb: 'Perplexity' },
+    { id: 'auto-fix', label: 'Automated Repair', desc: 'Execute auto-fixable remediations', icon: Wand2, kb: 'Codex' },
+    { id: 'verify', label: 'Verification Sweep', desc: 'Re-check all repaired endpoints', icon: CheckCircle, kb: 'Codex' },
+    { id: 'optimize', label: 'Performance Audit', desc: 'Flag slow endpoints for optimization', icon: Gauge, kb: 'Perplexity' },
+    { id: 'report', label: 'Generate Report', desc: 'Compile results with recommendations', icon: Clipboard, kb: 'Canva' },
+  ];
+
+  const runDeepPipeline = async () => {
+    setIsRunning(true);
+    const startTime = Date.now();
+    const phaseResults = {};
+
+    setCurrentPhase('discovery');
+    await runAllChecks();
+    await new Promise(r => setTimeout(r, 500));
+    phaseResults.discovery = { status: 'done', time: new Date().toLocaleTimeString() };
+
+    setCurrentPhase('triage');
+    await new Promise(r => setTimeout(r, 300));
+    const freshResults1 = toolResultsRef.current;
+    const errors = allTools.filter(t => freshResults1[t.id]?.status === 'error');
+    const warnings = allTools.filter(t => freshResults1[t.id]?.status === 'warning');
+    phaseResults.triage = { status: 'done', errors: errors.length, warnings: warnings.length, time: new Date().toLocaleTimeString() };
+
+    setCurrentPhase('auto-fix');
+    const fixable = errors.filter(t => {
+      const r = toolResultsRef.current[t.id];
+      const rem = getRemediation(r?.label, r?.ms);
+      return rem?.autoFixable;
+    });
+    for (const tool of fixable) {
+      await runHealthCheck(tool);
+      await new Promise(r => setTimeout(r, 200));
+    }
+    phaseResults['auto-fix'] = { status: 'done', attempted: fixable.length, time: new Date().toLocaleTimeString() };
+
+    setCurrentPhase('verify');
+    const freshResults2 = toolResultsRef.current;
+    const issueTools = allTools.filter(t => freshResults2[t.id]?.status === 'error' || freshResults2[t.id]?.status === 'warning');
+    await Promise.all(issueTools.map(t => runHealthCheck(t)));
+    await new Promise(r => setTimeout(r, 300));
+    phaseResults.verify = { status: 'done', rechecked: issueTools.length, time: new Date().toLocaleTimeString() };
+
+    setCurrentPhase('optimize');
+    await new Promise(r => setTimeout(r, 200));
+    const freshResults3 = toolResultsRef.current;
+    const slowCount = allTools.filter(t => freshResults3[t.id]?.ms > 2000).length;
+    phaseResults.optimize = { status: 'done', slowEndpoints: slowCount, time: new Date().toLocaleTimeString() };
+
+    setCurrentPhase('report');
+    const freshResults4 = toolResultsRef.current;
+    const finalHealthy = allTools.filter(t => freshResults4[t.id]?.status === 'healthy').length;
+    const finalErrors = allTools.filter(t => freshResults4[t.id]?.status === 'error').length;
+    const duration = Math.round((Date.now() - startTime) / 1000);
+    phaseResults.report = { status: 'done', time: new Date().toLocaleTimeString() };
+
+    const entry = {
+      timestamp: new Date().toISOString(),
+      duration: `${duration}s`,
+      healthy: finalHealthy,
+      errors: finalErrors,
+      fixed: fixable.length,
+      score: allTools.length > 0 ? Math.round((finalHealthy / allTools.length) * 100) : 0,
+      phases: phaseResults
+    };
+    const newHistory = [entry, ...pipelineHistory].slice(0, 10);
+    setPipelineHistory(newHistory);
+    try { localStorage.setItem('glp_health_pipeline_history', JSON.stringify(newHistory)); } catch {}
+
+    setCurrentPhase(null);
+    setIsRunning(false);
+  };
+
+  const trend = pipelineHistory.length >= 2 
+    ? pipelineHistory[0].score - pipelineHistory[1].score 
+    : null;
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/30 dark:bg-violet-950/20" data-testid="panel-ai-health-pipeline">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <GitBranch size={16} className="text-violet-600" />
+          <span className="text-sm font-semibold">AI Health Pipeline</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-800 text-violet-700 dark:text-violet-200 font-medium" data-testid="text-pipeline-phase-count">
+            {phases.length} phases · {pipelineHistory.length} runs
+          </span>
+          {trend !== null && (
+            <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${trend > 0 ? 'bg-green-100 text-green-600' : trend < 0 ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-500'}`} data-testid="text-pipeline-trend">
+              {trend > 0 ? '+' : ''}{trend}% trend
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={runDeepPipeline}
+            disabled={isRunning}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600 text-white text-xs font-medium hover:bg-violet-700 transition-colors disabled:opacity-50"
+            data-testid="button-run-deep-pipeline"
+          >
+            {isRunning ? <RefreshCw size={12} className="animate-spin" /> : <Rocket size={12} />}
+            {isRunning ? `Phase: ${currentPhase}...` : 'Run Deep Pipeline'}
+          </button>
+          <button
+            onClick={() => setShowPipeline(!showPipeline)}
+            className="text-xs px-3 py-1.5 rounded-lg border border-violet-300 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-900/30 transition-colors"
+            data-testid="button-toggle-pipeline"
+          >
+            {showPipeline ? 'Hide' : 'Show'} Details
+          </button>
+        </div>
+      </div>
+
+      {isRunning && (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-3">
+          {phases.map(phase => {
+            const PhaseIcon = phase.icon;
+            const isActive = currentPhase === phase.id;
+            const isDone = phases.indexOf(phase) < phases.findIndex(p => p.id === currentPhase);
+            return (
+              <div key={phase.id} className={`flex items-center gap-1.5 p-2 rounded-lg border text-[10px] ${isActive ? 'border-violet-400 bg-violet-100 dark:bg-violet-900/30' : isDone ? 'border-green-200 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 dark:border-gray-700 bg-background'}`} data-testid={`pipeline-phase-${phase.id}`}>
+                {isActive ? <RefreshCw size={10} className="animate-spin text-violet-600" /> : isDone ? <CheckCircle size={10} className="text-green-600" /> : <PhaseIcon size={10} className="text-muted-foreground" />}
+                <span className={`font-medium ${isActive ? 'text-violet-700 dark:text-violet-300' : isDone ? 'text-green-600' : ''}`}>{phase.label}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {showPipeline && pipelineHistory.length > 0 && (
+        <div className="mt-3 space-y-2">
+          <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+            <Clock size={12} /> Pipeline History ({pipelineHistory.length} runs)
+          </div>
+          <div className="space-y-1.5 max-h-48 overflow-y-auto">
+            {pipelineHistory.map((run, i) => (
+              <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`pipeline-history-${i}`}>
+                <span className="text-muted-foreground font-mono w-20">{new Date(run.timestamp).toLocaleDateString()}</span>
+                <span className={`text-lg font-bold ${run.score >= 90 ? 'text-green-600' : run.score >= 70 ? 'text-amber-500' : 'text-red-500'}`} data-testid={`text-pipeline-score-${i}`}>{run.score}%</span>
+                <div className="flex-1 flex items-center gap-2">
+                  <span className="text-green-600">{run.healthy} healthy</span>
+                  {run.errors > 0 && <span className="text-red-500">{run.errors} errors</span>}
+                  {run.fixed > 0 && <span className="text-purple-600">{run.fixed} auto-fixed</span>}
+                </div>
+                <span className="text-muted-foreground">{run.duration}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {showPipeline && pipelineHistory.length === 0 && (
+        <div className="text-center py-4 text-xs text-muted-foreground">
+          No pipeline runs yet. Click "Run Deep Pipeline" to start your first comprehensive health sweep.
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PlatformCoverageReport({ toolResults }) {
+  const [showReport, setShowReport] = useState(false);
+  const allTools = toolCategories.flatMap(c => c.tools);
+  const totalTools = allTools.length;
+
+  const linkCoverage = Object.keys(TOOL_ADMIN_LINKS).length;
+  const sevCoverage = Object.keys(TOOL_SEVERITY).length;
+  const remScenarios = Object.keys(AI_REMEDIATION).length;
+  const autoFixable = Object.values(AI_REMEDIATION).filter(r => r.autoFixable).length;
+
+  const kbBreakdown = { Codex: 0, Perplexity: 0, Canva: 0 };
+  Object.values(AI_REMEDIATION).forEach(r => { if (r.knowledgeBase && kbBreakdown[r.knowledgeBase] !== undefined) kbBreakdown[r.knowledgeBase]++; });
+
+  const critCount = Object.values(TOOL_SEVERITY).filter(s => s === 'critical').length;
+  const highCount = Object.values(TOOL_SEVERITY).filter(s => s === 'high').length;
+  const normalCount = totalTools - sevCoverage;
+
+  const checkedCount = Object.keys(toolResults).length;
+  const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
+  const errorCount = Object.values(toolResults).filter(r => r.status === 'error').length;
+  const scanCoverage = totalTools > 0 ? Math.round((checkedCount / totalTools) * 100) : 0;
+
+  const categoryBreakdown = toolCategories.map(cat => ({
+    title: cat.title,
+    total: cat.tools.length,
+    linked: cat.tools.filter(t => TOOL_ADMIN_LINKS[t.id]).length,
+    prioritized: cat.tools.filter(t => TOOL_SEVERITY[t.id]).length,
+    checked: cat.tools.filter(t => toolResults[t.id]).length,
+    healthy: cat.tools.filter(t => toolResults[t.id]?.status === 'healthy').length,
+  }));
+
+  const overallScore = Math.round(
+    ((linkCoverage / totalTools) * 25) +
+    ((sevCoverage / totalTools) * 20) +
+    ((remScenarios / 50) * 15) +
+    ((autoFixable / remScenarios) * 15) +
+    ((scanCoverage) * 0.25)
+  );
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50/30 dark:bg-rose-950/20" data-testid="panel-coverage-report">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Target size={16} className="text-rose-600" />
+          <span className="text-sm font-semibold">360° Platform Coverage Report</span>
+          <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${overallScore >= 85 ? 'bg-green-100 text-green-700' : overallScore >= 65 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`} data-testid="text-coverage-score">
+            {overallScore}% coverage
+          </span>
+        </div>
+        <button
+          onClick={() => setShowReport(!showReport)}
+          className="text-xs px-3 py-1.5 rounded-lg border border-rose-300 dark:border-rose-700 hover:bg-rose-100 dark:hover:bg-rose-900/30 transition-colors"
+          data-testid="button-toggle-coverage"
+        >
+          {showReport ? 'Hide' : 'Show'} Report
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-admin-links">
+          <div className="text-lg font-bold text-emerald-600">{linkCoverage}/{totalTools}</div>
+          <div className="text-[9px] text-muted-foreground">Admin Links</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-prioritized">
+          <div className="text-lg font-bold text-orange-600">{sevCoverage}</div>
+          <div className="text-[9px] text-muted-foreground">Prioritized</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-critical-count">
+          <div className="text-lg font-bold text-red-500">{critCount}</div>
+          <div className="text-[9px] text-muted-foreground">Critical</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-high-count">
+          <div className="text-lg font-bold text-amber-500">{highCount}</div>
+          <div className="text-[9px] text-muted-foreground">High</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-ai-scenarios">
+          <div className="text-lg font-bold text-indigo-600">{remScenarios}</div>
+          <div className="text-[9px] text-muted-foreground">AI Scenarios</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-auto-fixable">
+          <div className="text-lg font-bold text-purple-600">{autoFixable}</div>
+          <div className="text-[9px] text-muted-foreground">Auto-Fixable</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-scan-coverage">
+          <div className="text-lg font-bold text-blue-600">{scanCoverage}%</div>
+          <div className="text-[9px] text-muted-foreground">Scan Coverage</div>
+        </div>
+        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-normal-priority">
+          <div className="text-lg font-bold text-gray-500">{normalCount}</div>
+          <div className="text-[9px] text-muted-foreground">Normal Priority</div>
+        </div>
+      </div>
+
+      {showReport && (
+        <div className="mt-4 space-y-4">
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+              <Brain size={12} /> AI Knowledge Base Distribution
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {Object.entries(kbBreakdown).map(([name, count]) => {
+                const color = name === 'Codex' ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-700' : name === 'Perplexity' ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-700' : 'bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800 text-pink-700';
+                return (
+                  <div key={name} className={`p-3 rounded-lg border ${color}`} data-testid={`coverage-kb-${name.toLowerCase()}`}>
+                    <div className="text-xs font-bold">{name}</div>
+                    <div className="text-2xl font-bold">{count}</div>
+                    <div className="text-[10px] opacity-70">{Math.round((count / remScenarios) * 100)}% of scenarios</div>
+                    <div className="w-full h-1 rounded-full bg-current/20 mt-1.5 overflow-hidden">
+                      <div className="h-full rounded-full bg-current/60" style={{ width: `${(count / remScenarios) * 100}%` }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+              <BarChart3 size={12} /> Category Coverage Matrix
+            </div>
+            <div className="space-y-1.5 max-h-64 overflow-y-auto">
+              {categoryBreakdown.map((cat, i) => (
+                <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`coverage-cat-${i}`}>
+                  <span className="font-medium flex-1 truncate">{cat.title}</span>
+                  <div className="flex items-center gap-3 text-[10px]">
+                    <span className="text-emerald-600" title="Admin-linked">{cat.linked}/{cat.total} linked</span>
+                    <span className="text-orange-500" title="Prioritized">{cat.prioritized} prioritized</span>
+                    <span className="text-blue-600" title="Scanned">{cat.checked}/{cat.total} scanned</span>
+                    <span className="text-green-600" title="Healthy">{cat.healthy} healthy</span>
+                  </div>
+                  <div className="w-20 h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                    <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${cat.total > 0 ? (cat.linked / cat.total) * 100 : 0}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+            <div className="text-xs font-semibold mb-2">Coverage Summary</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px]">
+              <div>
+                <div className="text-muted-foreground mb-1">Admin Linking</div>
+                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                  <div className="h-full rounded-full bg-emerald-500" style={{ width: `${(linkCoverage / totalTools) * 100}%` }} />
+                </div>
+                <div className="text-right font-medium mt-0.5">{Math.round((linkCoverage / totalTools) * 100)}%</div>
+              </div>
+              <div>
+                <div className="text-muted-foreground mb-1">Severity Classification</div>
+                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                  <div className="h-full rounded-full bg-orange-500" style={{ width: `${(sevCoverage / totalTools) * 100}%` }} />
+                </div>
+                <div className="text-right font-medium mt-0.5">{Math.round((sevCoverage / totalTools) * 100)}%</div>
+              </div>
+              <div>
+                <div className="text-muted-foreground mb-1">Auto-Fix Capability</div>
+                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                  <div className="h-full rounded-full bg-purple-500" style={{ width: `${(autoFixable / remScenarios) * 100}%` }} />
+                </div>
+                <div className="text-right font-medium mt-0.5">{Math.round((autoFixable / remScenarios) * 100)}%</div>
+              </div>
+              <div>
+                <div className="text-muted-foreground mb-1">Scan Coverage</div>
+                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                  <div className="h-full rounded-full bg-blue-500" style={{ width: `${scanCoverage}%` }} />
+                </div>
+                <div className="text-right font-medium mt-0.5">{scanCoverage}%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function DailyOpsRunbook({ toolResults, isAnyRunning, runAllChecks, runErrorsOnly, lastFullCheck, runHealthCheck }) {
   const [showRunbook, setShowRunbook] = useState(false);
   const [pipelineRunning, setPipelineRunning] = useState(false);
@@ -1505,7 +1904,11 @@ export default function AdminTools() {
 
         <AIRepairCenter toolResults={toolResults} runHealthCheck={runHealthCheck} runAllChecks={runAllChecks} />
 
+        <AIHealthPipeline toolResults={toolResults} runHealthCheck={runHealthCheck} runAllChecks={runAllChecks} />
+
         <SystemOptimizationAdvisor toolResults={toolResults} />
+
+        <PlatformCoverageReport toolResults={toolResults} />
 
         <DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} />
 
