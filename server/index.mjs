@@ -435,9 +435,6 @@ app.get("/healthz", (_req, res) => {
     uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
   });
 });
-app.get("/api/health", (_req, res) => {
-  res.json({ ok: true });
-});
 app.post("/api/session/extend", (req, res) => {
   if (req.session) {
     req.session.touch();
@@ -582,6 +579,46 @@ app.get("/api/admin/platform-tools-status", async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ ok: false, message: "Failed to check platform tools status." });
+  }
+});
+
+app.get("/api/content/stats", async (req, res) => {
+  try {
+    const { requireAuth } = await import("./middleware/auth.mjs");
+    const authResult = await new Promise((resolve) => {
+      requireAuth(req, res, (err) => resolve(err ? "auth_failed" : "ok"));
+    });
+    if (authResult === "auth_failed") return;
+    
+    if (req.user?.role !== "admin") {
+      return res.status(403).json({ message: "Admin access required" });
+    }
+    
+    const { blogPosts, socialPosts, digitalProducts, productPurchases } = await import("../shared/schema.mjs");
+    const { db } = await import("./db.mjs");
+    const { sql, eq } = await import("drizzle-orm");
+    
+    const [blogCount] = await db.select({ count: sql`count(*)` }).from(blogPosts);
+    const [publishedBlogCount] = await db.select({ count: sql`count(*)` }).from(blogPosts).where(eq(blogPosts.status, "published"));
+    const [socialCount] = await db.select({ count: sql`count(*)` }).from(socialPosts);
+    const [scheduledCount] = await db.select({ count: sql`count(*)` }).from(socialPosts).where(eq(socialPosts.status, "scheduled"));
+    const [productCount] = await db.select({ count: sql`count(*)` }).from(digitalProducts);
+    const [revenueResult] = await db.select({ total: sql`COALESCE(SUM(price_paid), 0)` }).from(productPurchases);
+    
+    res.json({
+      totalPosts: Number(blogCount?.count || 0),
+      publishedPosts: Number(publishedBlogCount?.count || 0),
+      socialPosts: Number(socialCount?.count || 0),
+      scheduledPosts: Number(scheduledCount?.count || 0),
+      totalProducts: Number(productCount?.count || 0),
+      totalRevenue: Number(revenueResult?.total || 0),
+    });
+  } catch (error) {
+    logger.error("Content stats error", { error: error?.message || error });
+    res.json({
+      totalPosts: 0, publishedPosts: 0, socialPosts: 0,
+      scheduledPosts: 0, totalProducts: 0, totalRevenue: 0,
+    });
   }
 });
 

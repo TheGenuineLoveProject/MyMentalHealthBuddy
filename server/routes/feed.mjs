@@ -144,8 +144,4 @@ Sitemap: ${SITE_URL}/sitemap.xml
 });
 
 
-router.get("/health", (req, res) => {
-  res.json({ ok: true, module: "feed", status: "operational", timestamp: new Date().toISOString() });
-});
-
 export default router;
