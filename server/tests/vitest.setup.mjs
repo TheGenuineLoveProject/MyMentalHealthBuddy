@@ -1,6 +1,6 @@
 // tests/vitest.setup.mjs
 import { spawn } from "node:child_process";
-
+import { beforeAll, afterAll } from 'vitest'
 const PORT = process.env.PORT || "5000";
 const BASE_URL = process.env.BASE_URL || `http://127.0.0.1:${PORT}`;
 
