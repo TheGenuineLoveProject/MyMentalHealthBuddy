@@ -24,7 +24,6 @@
  * 
  * ============================================================================
  */
-
 import { getMicrocopyForRoute } from './microcopy.js';
 import { 
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf, 
@@ -38,7 +37,7 @@ import {
   Grid, List, Quote, Keyboard
 } from 'lucide-react';
     // client/src/content/routes.js
-    import { normalizePathname, routeKeyFromPathname } from "./routeKey";
+import { normalizePathname, routeKeyFromPathname } from "./routeKey";
 import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
 
 let __routeByPathCache = null;
@@ -69,7 +68,7 @@ function getRouteByPath(pathname, routesArray) {
   }
   return route;
 }
-
+// Routes are defined below via rawRoutes and processed at line ~8719
 /**
  * Return the page config for PageTemplate.
  * Now routeKey is deterministic and always available.
@@ -8720,7 +8719,6 @@ export const routes = rawRoutes.map(route => {
   }
   return applyPreset(route);
 });
-
 
 // ============================================================================
 // ROUTE UTILITIES
