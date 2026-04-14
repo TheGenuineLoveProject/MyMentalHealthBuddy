@@ -476,21 +476,21 @@ export default function CanvaLanding() {
 
           {/* Hero Stats */}
           <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            <div className="text-center p-4 sm:p-6 rounded-2xl transition-all hover:scale-105 shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-30)' }}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>$0</div>
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+            <div className="glass-card text-center p-5 sm:p-8 rounded-3xl" style={{ border: '1px solid var(--glp-sage-20)' }}>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 Core Tools, Always Free
               </p>
             </div>
-            <div className="text-center p-4 sm:p-6 rounded-2xl transition-all hover:scale-105 shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-gold-30)' }}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style={{ color: 'var(--glp-gold-dark)' }}>500+</div>
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+            <div className="glass-card text-center p-5 sm:p-8 rounded-3xl" style={{ border: '1px solid var(--glp-gold-20)' }}>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 Wellness Tools
               </p>
             </div>
-            <div className="text-center p-4 sm:p-6 rounded-2xl transition-all hover:scale-105 shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-rose-20)' }}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>24/7</div>
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+            <div className="glass-card text-center p-5 sm:p-8 rounded-3xl" style={{ border: '1px solid var(--glp-rose-20)' }}>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 AI Companion
               </p>
             </div>
@@ -827,89 +827,81 @@ export default function CanvaLanding() {
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-20">
-          {/* Start your transformation today */}
-          <div className="inline-flex items-center justify-center gap-7 px-14 py-8 rounded-full bg-white/10 backdrop-blur-sm mb-12">
-            <Sparkles className="w-16 h-16 text-[var(--glp-gold)]" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }} />
-            <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 4px 6px rgba(0,0,0,0.2)' }}>A place to begin, whenever you're ready</span>
-          </div>
-          
+        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-16">
           {/* Lotus Accent */}
-          <div className="w-full flex items-center justify-center mt-28 mb-12" style={{ position: 'relative' }}>
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '6px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)' }}></div>
-            <div className="relative rounded-full overflow-hidden" style={{ width: '220px', height: '220px', background: 'var(--glp-white)', boxShadow: '0 14px 56px rgba(0,0,0,0.22)' }}>
+          <div className="w-full flex items-center justify-center mb-10" style={{ position: 'relative' }}>
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '2px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)' }}></div>
+            <div className="relative rounded-full overflow-hidden ring-4 ring-white/20" style={{ width: '120px', height: '120px', background: 'var(--glp-white)', boxShadow: '0 12px 48px rgba(0,0,0,0.25)' }}>
               <img 
                 src="/brand/footer-wellness-graphic.png" 
                 alt="Lotus flower" 
-                style={{ width: '220px', height: '220px', objectFit: 'cover' }}
+                style={{ width: '120px', height: '120px', objectFit: 'cover' }}
               />
             </div>
           </div>
+
+          {/* Tagline Badge */}
+          <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm mb-10 border border-white/15">
+            <Sparkles className="w-5 h-5 text-[var(--glp-gold)]" />
+            <span className="text-lg sm:text-xl text-white/90 font-medium tracking-wide">A place to begin, whenever you're ready</span>
+          </div>
           
-          {/* CTA Section - moved closer to paragraph */}
-          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mt-80 mb-4 text-white leading-tight text-center">
+          {/* Main Heading */}
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 text-white leading-tight text-center">
             If This Feels
             <br />
-            <span className="text-[var(--glp-gold)]">Right, Come In</span>
+            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px rgba(234, 195, 59, 0.3)' }}>Right, Come In</span>
           </h2>
           
-          {/* Paragraph - close to heading */}
-          <p className="text-5xl md:text-6xl lg:text-7xl mt-4 mb-12 text-white/90 max-w-6xl mx-auto font-medium text-center">
+          {/* Subtext */}
+          <p className="text-xl sm:text-2xl md:text-3xl mt-2 mb-14 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
             Free to start. Free to pause. Free to leave. Always here if you come back.
           </p>
           
-          {/* Buttons - refined shape with gold text */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
             {!isLoading && isAuthenticated() ? (
               <Link href="/dashboard">
                 <button
-                  className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105 inline-block"
+                  className="group inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                   style={{
                     background: 'var(--glp-white)',
-                    color: 'var(--glp-gold)',
-                    boxShadow: '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'
+                    color: 'var(--glp-gold-dark, #c49a2d)',
+                    boxShadow: '0 0 25px rgba(234, 195, 59, 0.3), 0 8px 32px rgba(0,0,0,0.2)'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 40px rgba(234, 195, 59, 0.5), 0 16px 48px var(--glp-overlay-50)'}
-                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'}
                   data-testid="button-final-dashboard"
                 >
-                  <span className="flex items-center gap-4">
-                    My Dashboard
-                    <ArrowRight className="w-10 h-10 transition-transform group-hover:translate-x-2" />
-                  </span>
+                  <Sparkles className="w-5 h-5" />
+                  My Dashboard
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
             ) : (
               <Link href="/login">
                 <button
-                  className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105 inline-block"
+                  className="group inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                   style={{
                     background: 'var(--glp-white)',
-                    color: 'var(--glp-gold)',
-                    boxShadow: '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'
+                    color: 'var(--glp-gold-dark, #c49a2d)',
+                    boxShadow: '0 0 25px rgba(234, 195, 59, 0.3), 0 8px 32px rgba(0,0,0,0.2)'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 40px rgba(234, 195, 59, 0.5), 0 16px 48px var(--glp-overlay-50)'}
-                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'}
                   data-testid="button-final-cta"
                 >
-                  <span className="flex items-center gap-4">
-                    Try It Free
-                    <ArrowRight className="w-10 h-10 transition-transform group-hover:translate-x-2" />
-                  </span>
+                  <Sparkles className="w-5 h-5" />
+                  Try It Free
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
             )}
             <Link href="/pricing">
               <button 
-                className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105"
+                className="group inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2"
                 style={{
                   background: 'transparent',
                   color: 'var(--glp-gold)',
-                  border: '3px solid var(--glp-gold)',
-                  boxShadow: '0 0 20px rgba(234, 195, 59, 0.3), 0 10px 36px rgba(0,0,0,0.15)'
+                  borderColor: 'rgba(234, 195, 59, 0.5)',
+                  boxShadow: '0 0 15px rgba(234, 195, 59, 0.15)'
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--glp-gold)'; e.currentTarget.style.color = 'var(--glp-charcoal)'; e.currentTarget.style.boxShadow = '0 0 35px rgba(234, 195, 59, 0.5), 0 14px 44px rgba(0,0,0,0.2)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--glp-gold)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(234, 195, 59, 0.3), 0 10px 36px rgba(0,0,0,0.15)'; }}
                 data-testid="button-view-pricing"
               >
                 View Pricing

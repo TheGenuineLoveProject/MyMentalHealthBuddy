@@ -30,7 +30,9 @@
   --glp-rose-10: rgba(244, 199, 195, 0.1);
   --glp-rose-15: rgba(244, 199, 195, 0.15);
   --glp-rose-20: rgba(244, 199, 195, 0.2);
+  --glp-rose-30: rgba(244, 199, 195, 0.3);
   --glp-gold-10: rgba(234, 195, 59, 0.1);
+  --glp-gold-15: rgba(234, 195, 59, 0.15);
   --glp-gold-20: rgba(234, 195, 59, 0.2);
   --glp-gold-30: rgba(234, 195, 59, 0.3);
   --glp-gold-60: rgba(234, 195, 59, 0.6);
@@ -42,6 +44,7 @@
   --glp-paper-95: rgba(250, 249, 247, 0.95);
   --glp-paper-98: rgba(250, 249, 247, 0.98);
   --glp-overlay-50: rgba(0, 0, 0, 0.5);
+  --glp-white-40: rgba(255, 255, 255, 0.4);
   --glp-white-80: rgba(255, 255, 255, 0.8);
   --glp-white: #ffffff;
 

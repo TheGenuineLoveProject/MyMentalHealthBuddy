@@ -201,6 +201,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 let serverReady = false;
 
+app.use(requestId);
+app.use(requestLogger);
+
 app.get("/__health", (_req, res) => {
   res.status(200).json({ ok: true, ready: serverReady });
 });
@@ -211,6 +214,8 @@ app.use((req, res, next) => {
   res.status(503).json({ ok: false, error: "SERVICE_UNAVAILABLE", message: "Server is starting up, please retry shortly." });
 });
 
+import { setupWebSocket } from "./lib/websocket.mjs";
+
 const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server listening on http://0.0.0.0:${PORT}`);
   logger.info("Server listening", { url: `http://0.0.0.0:${PORT}`, port: PORT });
@@ -220,10 +225,6 @@ async function startProductionServer() {
 console.log("[startup] Beginning server initialization...");
 
 app.set('trust proxy', 1);
-
-// Request tracking middleware (first in chain)
-app.use(requestId);
-app.use(requestLogger);
 
 app.use((req, res, next) => {
   res.on("finish", () => trackSystemResponse(res.statusCode));
@@ -692,6 +693,9 @@ app.use((err, req, res, _next) => {
     message: "Something went wrong. Please try again.",
   });
 });
+
+setupWebSocket(server);
+logger.info("WebSocket server initialized", { path: "/ws" });
 
 serverReady = true;
 console.log("Server fully initialized and ready");

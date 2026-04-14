@@ -668,6 +668,9 @@ async function startServer() {
     process.exit(1);
   }
   
+  setupWebSocket(server);
+  logger.info("WebSocket server initialized", { path: "/ws" });
+
   logger.info("Dev server listening", { url: `http://0.0.0.0:${boundPort}`, port: boundPort });
   if (boundPort !== preferredPort) {
     logger.info("Preferred port was busy", { preferredPort, boundPort });
