@@ -63,6 +63,9 @@ const protectedEndpoints = [
   "/api/system/history",
   "/api/kernel/health",
   "/api/kernel/schema",
+  "/api/revenue/summary",
+  "/api/revenue/intelligence",
+  "/api/revenue/recommendations",
 ];
 for (const ep of protectedEndpoints) {
   check(`GET ${ep} → 401`, () => {

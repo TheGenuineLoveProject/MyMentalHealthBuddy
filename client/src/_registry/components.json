@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "lastUpdated": "2026-04-14",
   "active": {
     "sacred": [
@@ -16,10 +16,24 @@
       "LotusGuide"
     ],
     "admin": [
+      "PanelShell",
       "SystemHealthPanel",
-      "KernelStatusPanel",
       "SystemTelemetryPanel",
+      "KernelStatusPanel",
       "RecentActivityPanel",
+      "AnalyticsPanel",
+      "RevenuePanel",
+      "OptimizationPanel",
+      "ConversionPanel",
+      "FunnelStatusPanel",
+      "ExperimentsPanel",
+      "RetentionPanel",
+      "AcquisitionPanel",
+      "BrandIntegrityPanel",
+      "HealingIntelligencePanel",
+      "PromptOSPanel",
+      "DeploymentPanel",
+      "SystemStatusBar",
       "DailyOpsChecklist",
       "ToolsStatusWidget",
       "AdminNavGrid",
@@ -36,10 +50,12 @@
     ],
     "layout": [
       "SoftLaunchBanner",
-      "AccessibilityToolbar"
+      "AccessibilityToolbar",
+      "BrandLogo"
     ],
     "ui": [
-      "QuoteBlock"
+      "QuoteBlock",
+      "RecoveryErrorBoundary"
     ]
   },
   "quarantined": [
@@ -60,5 +76,9 @@
     "addComponent": "Must pass CHANGE_GATE.md gates before adding",
     "removeComponent": "Move to quarantined first, delete after 30 days",
     "modifyFrozen": "Only if a failure is proven, requires full verification"
+  },
+  "notes": {
+    "rule": "Only components listed in active may be modified without migration review.",
+    "quarantine_rule": "Quarantined components are inventory only until explicitly restored."
   }
 }
