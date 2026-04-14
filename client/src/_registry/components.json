@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-14",
+  "active": {
+    "sacred": [
+      "SacredHero",
+      "SacredLayout",
+      "SacredSection",
+      "SacredButton",
+      "SacredFooter",
+      "SacredBackground",
+      "SacredDivider",
+      "GlowingHeartLogo",
+      "Hero",
+      "PlatformComponent",
+      "LotusGuide"
+    ],
+    "admin": [
+      "SystemHealthPanel",
+      "KernelStatusPanel",
+      "SystemTelemetryPanel",
+      "RecentActivityPanel",
+      "DailyOpsChecklist",
+      "ToolsStatusWidget",
+      "AdminNavGrid",
+      "AIKnowledgeHub"
+    ],
+    "safety": [
+      "SafetyFooter"
+    ],
+    "wellness": [
+      "WellnessPageShell",
+      "ClarityCard",
+      "ConsentStrip",
+      "ExamplesAccordion"
+    ],
+    "layout": [
+      "SoftLaunchBanner",
+      "AccessibilityToolbar"
+    ],
+    "ui": [
+      "QuoteBlock"
+    ]
+  },
+  "quarantined": [
+    "AchievementToast",
+    "BadgeDisplay",
+    "DailyCheckIn",
+    "SiteFooter"
+  ],
+  "frozen": [
+    "SafetyFooter",
+    "WellnessPageShell",
+    "SystemHealthPanel",
+    "KernelStatusPanel",
+    "SystemTelemetryPanel",
+    "RecentActivityPanel"
+  ],
+  "rules": {
+    "addComponent": "Must pass CHANGE_GATE.md gates before adding",
+    "removeComponent": "Move to quarantined first, delete after 30 days",
+    "modifyFrozen": "Only if a failure is proven, requires full verification"
+  }
+}

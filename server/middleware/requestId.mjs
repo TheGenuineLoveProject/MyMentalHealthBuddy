@@ -4,8 +4,9 @@
 import crypto from "crypto";
 import { logger } from "../utils/logger.mjs";
 
-export function requestId(req, _res, next) {
+export function requestId(req, res, next) {
   req.requestId = req.headers["x-request-id"] || crypto.randomUUID();
+  res.setHeader("x-request-id", req.requestId);
   next();
 }
 

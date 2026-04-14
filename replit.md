@@ -69,7 +69,14 @@ A unified `blog_posts` table supports all publishable content types (blog, newsl
 - **Readiness gate**: `server/index.mjs` returns 503 for all non-health requests until `serverReady=true` (prevents 401 race during async initialization).
 - **Health probes**: `/__health` (readiness), `/healthz` (liveness), `/api/health` (deep probe with DB/AI/services), `/api/health-check` (simple liveness).
 - **Telemetry parity**: Response status tracking middleware installed in `dev.mjs`, `app.mjs`, AND `index.mjs`.
+- **Request tracing**: `x-request-id` header set on every response for correlation tracking.
 - **Security hardened**: `requireAdminForRepair` no longer allows non-admin authenticated users to access maintenance endpoints.
+
+### Phase 4: Controlled Expansion Engine
+- **Change Gate**: `prompt-os-kernel/governance/CHANGE_GATE.md` — 5-gate protocol (domain classification, impact scope, risk check, verification steps, rollback plan). All changes must pass all gates.
+- **Component Registry**: `client/src/_registry/components.json` — tracks active, quarantined, and frozen components with modification rules.
+- **System Verification**: `node scripts/verify-system.mjs` — single-command truth check (build, endpoints, auth, telemetry, kernel, health). 13 automated checks.
+- **Frozen Components**: Core routes, auth middleware, telemetry, kernel bridge, safety footer, wellness shell — no modification without proven failure.
 
 ### System Design Choices
 `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
