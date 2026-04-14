@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "wouter";
-import { Check, Star, Crown, ArrowLeft, Loader2 } from "lucide-react";
+import { Check, Star, Crown, Zap, Gem, ArrowLeft, Loader2 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { TrustSignals, BeforeAfter } from "../components/benefits";
@@ -27,9 +27,26 @@ const freeTier = {
   popular: false,
 };
 
+const starterTier = {
+  name: "Starter",
+  price: "$9.99",
+  period: "one-time",
+  description: "A gentle step up — unlock deeper tools with a single payment, yours to keep",
+  features: [
+    "Everything in Free",
+    "25 AI chat sessions per day",
+    "Journal insights & patterns",
+    "Guided reflection exercises"
+  ],
+  planId: "starter",
+  interval: "one_time",
+  icon: Zap,
+  popular: false,
+};
+
 const proMonthly = {
   name: "Pro",
-  price: "$12",
+  price: "$12.99",
   period: "/month",
   description: "Unlimited AI sessions and the full wellness toolkit — cancel anytime",
   planId: "pro",
@@ -40,24 +57,55 @@ const proMonthly = {
 
 const proYearly = {
   name: "Pro",
-  price: "$99",
+  price: "$109",
   period: "/year",
-  description: "Save 31% — everything in Pro, billed annually",
+  description: "Save 30% — everything in Pro, billed annually",
   planId: "pro",
   interval: "yearly",
   icon: Crown,
   popular: true,
-  savings: "Save $45/year",
+  savings: "Save $47/year",
 };
 
 const proFeatures = [
-  "Everything in Free",
+  "Everything in Starter",
   "Unlimited AI chat sessions",
   "Advanced emotional insights",
   "Guided healing journeys",
   "Content studio access",
   "Progress analytics",
   "Priority support"
+];
+
+const eliteMonthly = {
+  name: "Elite",
+  price: "$29.99",
+  period: "/month",
+  description: "The complete experience — premium tools, early access, and personal onboarding",
+  planId: "elite",
+  interval: "monthly",
+  icon: Gem,
+  popular: false,
+};
+
+const eliteYearly = {
+  name: "Elite",
+  price: "$249",
+  period: "/year",
+  description: "Save 31% — full Elite access, billed annually",
+  planId: "elite",
+  interval: "yearly",
+  icon: Gem,
+  popular: false,
+  savings: "Save $111/year",
+};
+
+const eliteFeatures = [
+  "Everything in Pro",
+  "Voice affirmations",
+  "1-on-1 onboarding session",
+  "Early access to new features",
+  "Elite community access"
 ];
 
 export default function Pricing() {
@@ -72,7 +120,13 @@ export default function Pricing() {
   }, []);
 
   const proTier = interval === "yearly" ? proYearly : proMonthly;
-  const tiers = [freeTier, { ...proTier, features: proFeatures }];
+  const eliteTier = interval === "yearly" ? eliteYearly : eliteMonthly;
+  const tiers = [
+    freeTier,
+    { ...starterTier },
+    { ...proTier, features: proFeatures },
+    { ...eliteTier, features: eliteFeatures },
+  ];
 
   const startCheckout = async (plan, billingInterval) => {
     if (!user) {
@@ -135,7 +189,7 @@ export default function Pricing() {
     <div className="min-h-screen overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 50%, var(--glp-paper) 100%)' }}>
       <SEO 
         title="Pricing - The Genuine Love Project"
-        description="Free core tools or Pro with unlimited AI sessions. No lock-in, cancel anytime."
+        description="Four plans — Free, Starter ($9.99 one-time), Pro ($12.99/mo), Elite ($29.99/mo). No lock-in, cancel anytime."
       />
       
       <div className="absolute -top-48 -right-48 w-[600px] h-[600px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
@@ -159,8 +213,8 @@ export default function Pricing() {
               Choose What Feels <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Right</span>
             </h1>
             <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--glp-sage)' }}>
-              Core tools are free, always. Pro adds unlimited AI sessions and deeper insights — only if you want them.
-              Cancel anytime, no questions asked.
+              Core tools are free, always. Step up at your own pace — from a one-time Starter unlock
+              to unlimited Pro or the full Elite experience. Cancel anytime, no questions asked.
             </p>
 
             <div className="mt-8 inline-flex items-center rounded-full p-1" style={{ background: 'var(--glp-sage-20)' }} data-testid="toggle-billing-interval">
@@ -183,7 +237,7 @@ export default function Pricing() {
             </div>
           </div>
           
-          <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
             {tiers.map((tier, index) => {
               const Icon = tier.icon;
               return (
@@ -243,6 +297,8 @@ export default function Pricing() {
                     >
                       {checkingOut ? (
                         <span className="flex items-center justify-center gap-2"><Loader2 className="w-4 h-4 animate-spin" />Redirecting to checkout...</span>
+                      ) : tier.interval === "one_time" ? (
+                        `Get ${tier.name} — ${tier.price}`
                       ) : (
                         `Subscribe to ${tier.name} — ${tier.price}${tier.period}`
                       )}

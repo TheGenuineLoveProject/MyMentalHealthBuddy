@@ -12,6 +12,7 @@ const PLANS = [
     id: "free",
     name: "Free",
     price: 0,
+    period: "forever",
     description: "Core wellness tools, always free",
     features: [
       "Mood tracking & journaling",
@@ -25,12 +26,28 @@ const PLANS = [
     popular: false
   },
   {
-    id: "pro",
-    name: "Pro",
-    price: 12,
-    description: "Unlimited AI sessions and the full wellness toolkit",
+    id: "starter",
+    name: "Starter",
+    price: 9.99,
+    period: "one-time",
+    description: "A gentle step up — unlock deeper tools with a single payment",
     features: [
       "Everything in Free",
+      "25 AI chat sessions per day",
+      "Journal insights & patterns",
+      "Guided reflection exercises"
+    ],
+    cta: "Get Starter",
+    popular: false
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    price: 12.99,
+    period: "/month",
+    description: "Unlimited AI sessions and the full wellness toolkit",
+    features: [
+      "Everything in Starter",
       "Unlimited AI chat sessions",
       "Advanced emotional insights",
       "Guided healing journeys",
@@ -40,6 +57,22 @@ const PLANS = [
     ],
     cta: "Upgrade to Pro",
     popular: true
+  },
+  {
+    id: "elite",
+    name: "Elite",
+    price: 29.99,
+    period: "/month",
+    description: "The complete experience with premium tools and early access",
+    features: [
+      "Everything in Pro",
+      "Voice affirmations",
+      "1-on-1 onboarding session",
+      "Early access to new features",
+      "Elite community access"
+    ],
+    cta: "Go Elite",
+    popular: false
   }
 ];
 
@@ -83,12 +116,12 @@ export default function PricingPage() {
             Choose What Feels <span className="text-primary">Right</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Core tools — mood tracking, journaling, reflection, and crisis support — are free, always.
-            Pro adds unlimited AI sessions and deeper insights, only if you want them.
+            Core tools are free, always. Step up at your own pace — from a one-time Starter unlock
+            to unlimited Pro or the full Elite experience. Cancel anytime.
           </p>
         </header>
 
-        <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto mb-20">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto mb-20">
           {PLANS.map(plan => (
             <Card 
               key={plan.id}
@@ -97,7 +130,7 @@ export default function PricingPage() {
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-white text-xs font-medium rounded-full">
-                  Full Access
+                  Most Popular
                 </div>
               )}
               <CardHeader className="text-center pb-2">
@@ -108,7 +141,7 @@ export default function PricingPage() {
                 <div className="mb-6">
                   <span className="text-4xl font-bold">{plan.price === 0 ? "Free" : `$${plan.price}`}</span>
                   {plan.price > 0 && (
-                    <span className="text-muted-foreground">/month</span>
+                    <span className="text-muted-foreground text-sm ml-1">{plan.period}</span>
                   )}
                 </div>
 
@@ -121,7 +154,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <a href={plan.id === "free" ? "/login" : "/upgrade"}>
+                <a href={plan.id === "free" ? "/login" : "/pricing"}>
                   <Button 
                     className="w-full min-h-[48px] px-6 py-3 text-base font-semibold rounded-lg" 
                     variant={plan.popular ? "default" : "outline"}

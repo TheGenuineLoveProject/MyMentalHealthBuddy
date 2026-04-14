@@ -12,6 +12,7 @@ const router = Router();
 router.use(aiRateLimit);
 
 const FREE_DAILY_SESSION_LIMIT = 5;
+const STARTER_DAILY_SESSION_LIMIT = 25;
 
 const CRISIS_KEYWORDS = [
   "kill myself", "end my life", "suicide", "suicidal", "want to die",
@@ -74,7 +75,9 @@ router.post("/chat", authGuard, async (req, res) => {
     const subStatus = userSubResult.rows?.[0]?.subscription_status || "free";
 
     increment("feature_gate_check", { plan: subStatus });
-    if (subStatus !== "pro") {
+    const hasUnlimited = ["pro", "elite"].includes(subStatus);
+    if (!hasUnlimited) {
+      const dailyLimit = subStatus === "starter" ? STARTER_DAILY_SESSION_LIMIT : FREE_DAILY_SESSION_LIMIT;
       const todayStart = new Date();
       todayStart.setHours(0, 0, 0, 0);
       const countResult = await db.execute(sql`
@@ -82,12 +85,15 @@ router.post("/chat", authGuard, async (req, res) => {
         WHERE user_id = ${userId} AND role = 'user' AND created_at >= ${todayStart.toISOString()}
       `);
       const todayCount = parseInt(countResult.rows?.[0]?.count || "0", 10);
-      if (todayCount >= FREE_DAILY_SESSION_LIMIT) {
-        increment("ai_chat_limit_hit", { plan: "free" });
+      if (todayCount >= dailyLimit) {
+        increment("ai_chat_limit_hit", { plan: subStatus });
+        const upgradeHint = subStatus === "starter"
+          ? "You've used your 25 Starter sessions for today. They reset tomorrow, or upgrade to Pro for unlimited access."
+          : "You've used your 5 free sessions for today. They reset tomorrow, or upgrade for more access.";
         return res.status(429).json({
           error: "Daily session limit reached",
-          limit: FREE_DAILY_SESSION_LIMIT,
-          message: "You've used your free sessions for today. They reset tomorrow, or you can upgrade to Pro for unlimited access.",
+          limit: dailyLimit,
+          message: upgradeHint,
         });
       }
     }

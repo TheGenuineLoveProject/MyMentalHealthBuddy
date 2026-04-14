@@ -16,13 +16,20 @@ if (STRIPE_SECRET_KEY) {
 }
 
 const PLANS = {
-  free: { name: "Free", priceId: null, features: ["mood_tracking", "journaling", "daily_reflection", "community_wall", "crisis_support", "daily_wisdom"] },
-  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
+  free: { name: "Free", priceId: null, mode: null, features: ["mood_tracking", "journaling", "daily_reflection", "community_wall", "crisis_support", "daily_wisdom"] },
+  starter: { name: "Starter", priceId: process.env.STRIPE_PRICE_STARTER, mode: "payment", features: ["mood_tracking", "journaling", "daily_reflection", "community_wall", "crisis_support", "daily_wisdom", "extended_ai_chat", "journal_insights", "guided_reflections"] },
+  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
+  elite: { name: "Elite", priceId: process.env.STRIPE_PRICE_ELITE, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support", "voice_affirmations", "1on1_onboarding", "early_access", "elite_community"] },
 };
 
 const PRO_INTERVAL_PRICES = {
   monthly: process.env.STRIPE_PRICE_PRO_MONTHLY || process.env.STRIPE_PRICE_PRO,
   yearly: process.env.STRIPE_PRICE_PRO_YEARLY || process.env.STRIPE_PRICE_PRO,
+};
+
+const ELITE_INTERVAL_PRICES = {
+  monthly: process.env.STRIPE_PRICE_ELITE_MONTHLY || process.env.STRIPE_PRICE_ELITE,
+  yearly: process.env.STRIPE_PRICE_ELITE_YEARLY || process.env.STRIPE_PRICE_ELITE,
 };
 
 function generateIdempotencyKey(userId, plan, timestamp) {
@@ -80,12 +87,18 @@ router.post("/checkout", async (req, res) => {
 
     const { plan = "pro", interval = "monthly", priceId: directPriceId } = req.body;
 
+    const planConfig = PLANS[plan];
+    if (!planConfig) {
+      return badRequest(res, `Unknown plan: ${plan}`);
+    }
+
     let resolvedPriceId = directPriceId;
     if (!resolvedPriceId) {
       if (plan === "pro" && PRO_INTERVAL_PRICES[interval]) {
         resolvedPriceId = PRO_INTERVAL_PRICES[interval];
+      } else if (plan === "elite" && ELITE_INTERVAL_PRICES[interval]) {
+        resolvedPriceId = ELITE_INTERVAL_PRICES[interval];
       } else {
-        const planConfig = PLANS[plan];
         resolvedPriceId = planConfig?.priceId;
       }
     }
@@ -94,6 +107,8 @@ router.post("/checkout", async (req, res) => {
       return badRequest(res, `No price configured for plan: ${plan}, interval: ${interval}`);
     }
 
+    const checkoutMode = planConfig.mode || "subscription";
+
     const dbUserId = req.dbUserId;
     const customerId = await getOrCreateStripeCustomer(dbUserId, req.user?.email || req.user?.claims?.email);
     const idempotencyKey = generateIdempotencyKey(dbUserId, `${plan}-${interval}`, Date.now());
@@ -101,7 +116,7 @@ router.post("/checkout", async (req, res) => {
     const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
     const baseUrl = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
     const session = await stripe.checkout.sessions.create({
-      mode: "subscription",
+      mode: checkoutMode,
       customer: customerId,
       client_reference_id: dbUserId,
       line_items: [{ price: resolvedPriceId, quantity: 1 }],
@@ -157,10 +172,10 @@ router.get("/subscription-status", async (req, res) => {
     }
 
     const plan = user.subscription_status || "free";
-    const isActive = plan === "pro";
+    const isActive = ["starter", "pro", "elite"].includes(plan);
 
     let cancelAtPeriodEnd = false;
-    if (isActive && stripe && user.stripe_customer_id) {
+    if (["pro", "elite"].includes(plan) && stripe && user.stripe_customer_id) {
       try {
         const subs = await stripe.subscriptions.list({
           customer: user.stripe_customer_id,
@@ -202,7 +217,9 @@ router.get("/current-plan", async (req, res) => {
       plan,
       name: planConfig.name,
       features: planConfig.features,
-      canAccessPro: plan === "pro",
+      canAccessPro: ["pro", "elite"].includes(plan),
+      canAccessStarter: ["starter", "pro", "elite"].includes(plan),
+      canAccessElite: plan === "elite",
     });
   } catch (err) {
     logger.error("Current plan error", { error: err.message });

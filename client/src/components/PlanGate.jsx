@@ -1,6 +1,13 @@
 import { Link } from "wouter";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { PLAN_HIERARCHY } from "../config/featureAccess";
+
+const PLAN_LABELS = {
+  starter: "Starter",
+  pro: "Pro",
+  elite: "Elite",
+};
 
 export default function PlanGate({ 
   requiredPlan = "pro",
@@ -12,8 +19,10 @@ export default function PlanGate({
 }) {
   const { user, isPro } = useAuth();
   
-  const hasAccess = 
-    requiredPlan === "free" || isPro;
+  const userPlan = user?.subscriptionStatus || (isPro ? "pro" : "free");
+  const userLevel = PLAN_HIERARCHY.indexOf(userPlan);
+  const requiredLevel = PLAN_HIERARCHY.indexOf(requiredPlan);
+  const hasAccess = requiredPlan === "free" || userLevel >= requiredLevel;
 
   if (hasAccess) {
     return children;
@@ -26,6 +35,8 @@ export default function PlanGate({
   if (!showTeaser) {
     return null;
   }
+
+  const planLabel = PLAN_LABELS[requiredPlan] || "Pro";
 
   return (
     <div 
@@ -45,23 +56,23 @@ export default function PlanGate({
           </div>
           
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-            {user ? "This is a Pro feature" : "Sign up to explore"}
+            {user ? `This is a ${planLabel} feature` : "Sign up to explore"}
           </h3>
           
           <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-            {feature} is part of Pro. 
+            {feature} is part of {planLabel}. 
             Your free tools — journaling, mood tracking, reflection — are always available.
           </p>
           
           <div className="space-y-2">
             {user ? (
               <Link
-                href="/account/billing"
+                href="/pricing"
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[var(--glp-sage)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity"
                 data-testid="link-upgrade"
               >
                 <Sparkles className="w-4 h-4" />
-                Learn about Pro
+                View Plans
                 <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (

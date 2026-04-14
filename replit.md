@@ -41,7 +41,7 @@ The platform provides:
 - **Content Organization**: Learning Hub, Comprehensive Route Redirects.
 
 ### Monetization Architecture
-A two-tier (Free/Pro) monetization model is managed via `client/src/config/featureAccess.js`. Subscription status is stored in `users.subscription_status` and exposed via `AuthContext`. Pro-only features are gently gated with `PlanGate.jsx`, and server-side enforcement for limits is in `server/routes/ai.mjs`. Stripe handles billing with webhooks (`server/routes/webhook.mjs`) for user status updates and email lifecycles via Resend.
+A four-tier (Free/Starter/Pro/Elite) monetization model is managed via `client/src/config/featureAccess.js` with a `PLAN_HIERARCHY` array for access-level comparisons. Plans: Free ($0/forever), Starter ($9.99 one-time payment), Pro ($12.99/mo or $109/yr subscription), Elite ($29.99/mo or $249/yr subscription). Subscription status is stored in `users.subscription_status` and exposed via `AuthContext`. Features are gently gated with `PlanGate.jsx` (hierarchy-aware), and server-side enforcement for AI chat limits is in `server/routes/ai.mjs` (Free: 5/day, Starter: 25/day, Pro/Elite: unlimited). Stripe handles billing with webhooks (`server/routes/webhook.mjs`) for user status updates and email lifecycles via Resend. Backend billing routes (`server/routes/billing.mjs`) support `payment` mode for Starter one-time purchases and `subscription` mode for Pro/Elite.
 
 ### Soft Launch & Selective Visibility
 A `SOFT_LAUNCH_MODE=true` environment flag activates a soft launch with a dismissible banner and feedback widget. Aggregate, privacy-first metrics track page views. Smoke tests validate critical routes, and a trauma-informed error recovery system is in place.
