@@ -136,6 +136,8 @@ import mfaRouter from "./routes/mfa.mjs";
 import canvaOAuthRouter from "./routes/canva-oauth.mjs";
 import apiCoreRouter from "./routes/api.mjs";
 import integrationHealthRouter from "./routes/integrationHealth.mjs";
+import systemRouter, { trackResponse as trackSystemResponse } from "./routes/system.mjs";
+import kernelRouter from "./routes/kernel.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -216,6 +218,11 @@ app.set('trust proxy', 1);
 // Request tracking middleware (first in chain)
 app.use(requestId);
 app.use(requestLogger);
+
+app.use((req, res, next) => {
+  res.on("finish", () => trackSystemResponse(res.statusCode));
+  next();
+});
 
 const replitDevDomain = process.env.REPLIT_DEV_DOMAIN;
 const replitDomainsList = process.env.REPLIT_DOMAINS?.split(",").map(d => d.trim()) || [];
@@ -432,6 +439,8 @@ app.use('/api/canva-oauth', canvaOAuthRouter);
 app.use('/api', apiCoreRouter);
 app.use('/api/integrations', integrationHealthRouter);
 app.use('/api/content-generator', contentGeneratorRouter);
+app.use('/api/system', systemRouter);
+app.use('/api/kernel', kernelRouter);
 
 const SERVER_START_TIME = Date.now();
 

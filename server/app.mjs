@@ -11,6 +11,19 @@ app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+let _trackSystemResponse = null;
+try {
+  const systemMod = await import("./routes/system.mjs");
+  _trackSystemResponse = systemMod.trackResponse;
+} catch {}
+if (_trackSystemResponse) {
+  const track = _trackSystemResponse;
+  app.use((req, res, next) => {
+    res.on("finish", () => track(res.statusCode));
+    next();
+  });
+}
+
 // Root-level health endpoints (tests expect these)
 app.get("/healthz", (_req, res) => {
   res.status(200).json({ 
@@ -165,6 +178,8 @@ await mountIfExists("/api/healing-core", "./routes/healing.mjs");
 await mountIfExists("/api/meaning-core", "./routes/meaning.mjs");
 await mountIfExists("/api/figma", "./routes/figma.mjs");
 await mountIfExists("/api/analytics-events", "./routes/analytics-events.mjs");
+await mountIfExists("/api/system", "./routes/system.mjs");
+await mountIfExists("/api/kernel", "./routes/kernel.mjs");
 await mountIfExists("/api/mfa", "./routes/mfa.mjs");
 await mountIfExists("/api/canva-oauth", "./routes/canva-oauth.mjs");
 await mountIfExists("/api/content", "./routes/content.mjs");

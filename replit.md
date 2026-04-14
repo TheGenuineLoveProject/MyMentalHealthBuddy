@@ -1,7 +1,7 @@
 # The Genuine Love Project
 
 ## Overview
-The Genuine Love Project is an AI-powered mental wellness platform focused on self-love, healing, and emotional growth. It offers a private, compassionate, and accessible environment through AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools. The platform integrates AI with trauma-informed psychological principles to provide a comprehensive wellness toolkit, aiming to empower users to "Live in Genuine Love." Its business vision is to deliver an ethical, accessible, and personalized mental wellness solution, leveraging AI to foster emotional resilience for a broad user base.
+The Genuine Love Project is an AI-powered mental wellness platform offering self-love, healing, and emotional growth through AI-assisted guidance, mood tracking, journaling, crisis support, and evidence-based tools. It aims to provide an ethical, accessible, and personalized mental wellness solution, leveraging AI and trauma-informed psychological principles to foster emotional resilience.
 
 ## User Preferences
 - Preferred communication style: Simple, everyday language
@@ -21,40 +21,52 @@ The Genuine Love Project is an AI-powered mental wellness platform focused on se
 ## System Architecture
 
 ### UI/UX Decisions
-The frontend features a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features including ARIA, semantic HTML, keyboard navigation, and `prefers-reduced-motion` support. A design token system ensures consistent styling across Default, Low-Stim, and Reading visual modes. All UI primitives include `data-testid` attributes, `focus-visible` rings, ARIA labels, `prefers-reduced-motion` support, and semantic HTML. A 3-Level Reading Mode System allows users to toggle content levels. A "Sacred UI Component Library" provides reusable components.
+The frontend features a premium, Canva-inspired design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features (ARIA, semantic HTML, keyboard navigation, `prefers-reduced-motion`). A design token system ensures consistent styling across Default, Low-Stim, and Reading visual modes. UI primitives include `data-testid` attributes, `focus-visible` rings, ARIA labels, and semantic HTML. A 3-Level Reading Mode System and a "Sacred UI Component Library" are provided.
 
 ### Social Work-Informed Frameworks
-The platform integrates evidence-based social work approaches, including Motivational Interviewing (MI) for language patterns, a Strengths-Based Approach for framing, and "The 12-Phase Self-Alignment Path™" as an educational framework. Ethical NLP patterns are used with guardrails, and an 18+ age gating mechanism is implemented. Persistent disclaimers reinforce the educational, non-clinical nature of the platform, always including crisis support links.
+The platform integrates Motivational Interviewing (MI), a Strengths-Based Approach, and "The 12-Phase Self-Alignment Path™." It uses ethical NLP patterns with guardrails, implements 18+ age gating, and includes persistent disclaimers reinforcing its educational, non-clinical nature, always with crisis support links.
 
 ### Technical Implementations
-The project uses a monorepo with separate client (React 18 SPA with TypeScript, Vite, Wouter, React Hook Form, Zod, Tailwind CSS, Lucide React) and server (Node.js/Express with TypeScript) applications. The backend provides a RESTful API with middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). Shared TypeScript types ensure monorepo consistency. A trauma-informed NLP layer, supported by a "Wellness Microcopy Library" and "Shared TypeScript Microcopy" system, ensures supportive user-facing text.
+The project uses a monorepo with a client (React 18 SPA with TypeScript, Vite, Wouter, React Hook Form, Zod, Tailwind CSS, Lucide React) and a server (Node.js/Express with TypeScript). The backend offers a RESTful API with middleware for CORS, security (Helmet), compression, logging (Morgan), and session management (Express Session). Shared TypeScript types ensure monorepo consistency. A trauma-informed NLP layer, supported by a "Wellness Microcopy Library" and "Shared TypeScript Microcopy" system, ensures supportive user-facing text.
 
 ### Feature Specifications
-The platform offers:
+The platform provides:
 - **Core Features**: AI-powered Chat Therapy, Wellness Tools (State Tracker, Journal Prompts, Reflection, Wisdom, Mastery, Perception Refinement, Permaculture Wellness, Self-Worth Reflection).
 - **Specialized APIs**: A broad range of APIs for Knowledge Synthesis, Philosophy, Metacognition, Creativity, Resilience, Foresight, Systems Compassion, Collective Intelligence, Wisdom Synthesis, Cognitive Lab, Contemplative, Ethical Reasoning, Existential, Embodiment, Narrative, Relational, Values, Neuro-Integration, Socio-Ecology, Praxis, Post-Trauma, Self-Mastery Intelligence, Universal Content, Trauma Healing Protocols, Spiritual Intelligence, Relationship Dynamics, Cognitive Enhancement, Emotional Resilience, Life Purpose, Mind-Body Integration, Social Intelligence, Peak Performance, Personal Growth, Psychological Safety, Consciousness Expansion, Human Potential, Wisdom Traditions, Life Design, Healing Modalities.
 - **Advanced API Suites**: Deep Learning API, Purpose Compass API, Emotional Mastery API, Holistic Healing API, Mastery Excellence API, Content Studio API, Consciousness Expansion API, Human Potential API, Wisdom Traditions API, Life Design API, Healing Modalities API.
-- **Navigation & Discovery**: Intellectual Atlas, Strategy Maps, Collaborative Intelligence Lab, Resilience Metrics, Adaptive Companion.
 - **Security**: Rate limiting, CSP, input sanitization, CSRF protection, and account lifecycle management.
-- **Engagement**: Gamification (XP, levels, streaks, daily quests), Content Studio (UI for content transformation and social media templates), Study Vault (evidence-based research summaries).
-- **Admin Tools**: Admin Health Dashboard (monitors uptime, DB status, system metrics), Admin Social Studio (multi-platform social media content management), Platform Tools Dashboard (all 123 API endpoints with daily ops health checks, auto-refresh, status filters, persistent results, TXT/JSON export, re-check issues), Admin Command Center (unified hub with real-time metrics, daily ops checklist, tools status widget, navigation to all 26 admin pages), Shared AdminQueryStates components (AdminErrorBanner, AdminLoadingState, AdminInlineError) for consistent error/loading handling across all admin pages.
-- **User Features**: Resend Email Integration (transactional emails), Replit Auth Integration (OIDC authentication), Crisis Page Public Access (`/crisis` route), SEO Enhancement (JSON-LD, OG tags, Twitter cards), Accessibility Toolbar (high contrast, font size, reduce motion, dyslexia-friendly font), Daily Healing Reminders (customizable check-in times, tones, messages), Voice Affirmation Settings (voice tone, speed, pitch, volume controls), Community Affirmation Wall (anonymous affirmations, "Send Light" feature), Journal Insights (client-side sentiment analysis, emotional flow graph, suggested prompts), AI Companion Animations (pulsing heart orb, bouncing dots), Floating Lotus Guide (route-conditional wellness assistant), Sacred Glow Utilities (CSS utility classes), Emotion-Linked Backgrounds (gradient backgrounds with dark mode variants and animation option).
-- **Content Organization**: Learning Hub (`/learn` page with guides, articles, courses), Comprehensive Route Redirects (510+ semantic redirects for improved discoverability).
+- **Engagement**: Gamification, Content Studio, Study Vault.
+- **Admin Tools**: Admin Health Dashboard, Admin Social Studio, Platform Tools Dashboard, Admin Command Center, Shared AdminQueryStates components.
+- **User Features**: Resend Email Integration, Replit Auth Integration, Crisis Page Public Access, SEO Enhancement, Accessibility Toolbar, Daily Healing Reminders, Voice Affirmation Settings, Community Affirmation Wall, Journal Insights, AI Companion Animations, Floating Lotus Guide, Sacred Glow Utilities, Emotion-Linked Backgrounds.
+- **Content Organization**: Learning Hub, Comprehensive Route Redirects.
 
-### Monetization Architecture (Two-Tier: Free/Pro)
-The platform implements a two-tier monetization model (Free/Pro) managed via `client/src/config/featureAccess.js`. User subscription status is canonicalized in `users.subscription_status` and exposed via `AuthContext`. Pro-only features are gently gated with `PlanGate.jsx`, offering blurred teasers and upgrade CTAs. Server-side enforcement for limits (e.g., AI Chat sessions) is implemented in `server/routes/ai.mjs`. Stripe handles billing, with webhooks (`server/routes/webhook.mjs`) updating user statuses and triggering email lifecycles via Resend.
+### Monetization Architecture
+A two-tier (Free/Pro) monetization model is managed via `client/src/config/featureAccess.js`. Subscription status is stored in `users.subscription_status` and exposed via `AuthContext`. Pro-only features are gently gated with `PlanGate.jsx`, and server-side enforcement for limits is in `server/routes/ai.mjs`. Stripe handles billing with webhooks (`server/routes/webhook.mjs`) for user status updates and email lifecycles via Resend.
 
 ### Soft Launch & Selective Visibility
-A `SOFT_LAUNCH_MODE=true` environment flag activates a soft launch, displaying a dismissible banner and enabling a feedback widget for user input. Aggregate, privacy-first metrics track page views and funnel steps. Smoke tests validate critical routes, and a trauma-informed error recovery system is in place.
+A `SOFT_LAUNCH_MODE=true` environment flag activates a soft launch with a dismissible banner and feedback widget. Aggregate, privacy-first metrics track page views. Smoke tests validate critical routes, and a trauma-informed error recovery system is in place.
 
 ### Narrative Amplification System
-A `docs/NARRATIVE_SPINE.md` defines the project's messaging and brand voice. Social media content drafts (`content/narrative/social_posts.json`) are provided for various platforms, adhering to ethical constraints. A `docs/CANVA_EXPORT_PACK.md` contains visual templates for consistent branding. An admin UI (`/admin/narrative`) facilitates the drafting, review, and approval workflow for narrative content.
+`docs/NARRATIVE_SPINE.md` defines messaging and brand voice. Social media content drafts (`content/narrative/social_posts.json`) are provided, and `docs/CANVA_EXPORT_PACK.md` contains visual templates. An admin UI (`/admin/narrative`) facilitates narrative content workflow.
 
 ### Publishing & Narrative Distribution Layer
-The platform utilizes a unified `blog_posts` table for all publishable content types (blog, newsletter, reflection, essay, note), supporting CRUD operations, RSS feeds, and comment sections. Newsletter readiness includes subscriber collection and consent tracking via Resend for transactional emails. A `socialPosts` table and `SocialStudioAdmin.jsx` manage social content creation, emphasizing a human-in-the-loop approach. Admin tools for newsletters display subscriber statistics, and publishing observability tracks `view_count` on blog posts.
+A unified `blog_posts` table supports all publishable content types (blog, newsletter, reflection, essay, note) with CRUD operations, RSS feeds, and comments. Newsletter readiness includes subscriber collection via Resend. A `socialPosts` table and `SocialStudioAdmin.jsx` manage social content creation. Admin tools for newsletters display subscriber statistics, and publishing observability tracks `view_count`.
+
+### Observability & Governance Layer
+- `/api/health` — Pure liveness probe (DB, AI, memory, services). No dead counters.
+- `/api/system` — Real-time system telemetry (5xx/4xx tracking, total requests, memory). Middleware tracks every response status code. Mounted in `dev.mjs`, `app.mjs`, AND `index.mjs` (production parity).
+- `/api/system/history` — Auth-protected (JWT + admin). 60-second snapshots, 120-entry rolling window.
+- `/api/kernel/version` — Public. Returns Prompt-OS v8.0.0 metadata (6 domains, 15 states, 9 gates, 11 failure types).
+- `/api/kernel/health` — Auth-protected. Runs 51 kernel integrity checks against `prompt-os-kernel/` files.
+- `/api/kernel/validate` — Auth-protected (POST). Validates PromptSpec module definitions against governance schema. Domains aligned with `promptspec.schema.json` enums (HEALING_DOMAIN, BUSINESS_DOMAIN, PLATFORM_DOMAIN, DESIGN_DOMAIN, RESEARCH_DOMAIN, CROSS_DOMAIN).
+- `/api/kernel/schema` — Auth-protected. Returns the PromptSpec JSON Schema.
+- Kernel bridge: `server/engine/prompt-os/kernel-bridge.mjs`. Kernel files: `prompt-os-kernel/`.
+- Command Center (`/command`) renders KernelStatusPanel, SystemTelemetryPanel, SystemHealthPanel, RecentActivityPanel inline.
+- Architecture Lock: `prompt-os-kernel/governance/ARCHITECTURE_LOCK.md` — frozen routes, panels, domain separation rules.
+- Quarantine: `client/src/components/_quarantine/` — orphaned components (AchievementToast, BadgeDisplay, DailyCheckIn, SiteFooter) moved non-destructively. 30-day retention before deletion.
 
 ### System Design Choices
-A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
+`shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
 
 ## External Dependencies
 

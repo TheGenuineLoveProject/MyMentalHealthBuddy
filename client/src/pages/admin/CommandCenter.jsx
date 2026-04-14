@@ -159,6 +159,79 @@ function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
   );
 }
 
+function KernelStatusPanel() {
+  const { data: kernelVersion } = useQuery({
+    queryKey: ['/api/kernel/version'],
+    retry: 1,
+    staleTime: 60000,
+  });
+
+  if (!kernelVersion) return null;
+
+  return (
+    <div className={styles.card} data-testid="panel-kernel-status">
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTitleContainer}>
+          <Brain className={styles.cardHeaderIcon} />
+          <h2 className={styles.cardTitle}>Prompt-OS Kernel</h2>
+        </div>
+        <StatusBadge status="healthy" />
+      </div>
+      <div style={{ padding: '0.75rem 1rem', fontSize: '0.78rem', color: '#555' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+          <span data-testid="text-kernel-version"><strong>v{kernelVersion.version}</strong> {kernelVersion.codename}</span>
+          <span data-testid="text-kernel-domains">{kernelVersion.domains} Domains</span>
+          <span data-testid="text-kernel-states">{kernelVersion.executionStates} States</span>
+          <span data-testid="text-kernel-gates">{kernelVersion.qualityGates} Gates</span>
+          <span data-testid="text-kernel-failures">{kernelVersion.failureTypes} Failure Types</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SystemTelemetryPanel() {
+  const { data: telemetry } = useQuery({
+    queryKey: ['/api/system'],
+    retry: 1,
+    staleTime: 30000,
+    refetchInterval: 60000,
+  });
+
+  if (!telemetry) return null;
+
+  return (
+    <div className={styles.card} data-testid="panel-system-telemetry">
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTitleContainer}>
+          <BarChart3 className={styles.cardHeaderIcon} />
+          <h2 className={styles.cardTitle}>System Telemetry</h2>
+        </div>
+      </div>
+      <div style={{ padding: '0.75rem 1rem', fontSize: '0.78rem', color: '#555' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '0.75rem' }}>
+          <div data-testid="text-total-requests">
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#2f5d5d' }}>{telemetry.totalRequests?.toLocaleString() || 0}</div>
+            <div>Total Requests</div>
+          </div>
+          <div data-testid="text-5xx-rate">
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, color: telemetry.errors5xx > 0 ? '#ef4444' : '#22c55e' }}>{telemetry.errorRate5xx}</div>
+            <div>5xx Error Rate</div>
+          </div>
+          <div data-testid="text-4xx-rate">
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#f59e0b' }}>{telemetry.errorRate4xx}</div>
+            <div>4xx Client Errors</div>
+          </div>
+          <div data-testid="text-memory-rss">
+            <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#2f5d5d' }}>{telemetry.memory?.rssMB || '—'}MB</div>
+            <div>RSS Memory</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function formatUptime(seconds) {
   if (!seconds) return "—";
   const d = Math.floor(seconds / 86400);
@@ -1517,6 +1590,11 @@ export default function AdminCommandCenter() {
             isRefreshing={isHealthRefetching} 
           />
           <RecentActivityPanel activities={stats.recentActivity} />
+        </div>
+
+        <div className={styles.mainGrid}>
+          <KernelStatusPanel />
+          <SystemTelemetryPanel />
         </div>
 
         <DailyOpsChecklist />

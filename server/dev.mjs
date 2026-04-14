@@ -130,6 +130,8 @@ import healingCoreRouter from "./routes/healing.mjs";
 import meaningCoreRouter from "./routes/meaning.mjs";
 import figmaRouter from "./routes/figma.mjs";
 import analyticsEventsRouter from "./routes/analytics-events.mjs";
+import systemRouter, { trackResponse as trackSystemResponse } from "./routes/system.mjs";
+import kernelRouter from "./routes/kernel.mjs";
 import mfaRouter from "./routes/mfa.mjs";
 import canvaOAuthRouter from "./routes/canva-oauth.mjs";
 import contentRouter from "./routes/content.mjs";
@@ -203,6 +205,14 @@ async function startServer() {
   // Global API rate limiter (120 requests/min per IP)
   const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
   app.use("/api", apiRateLimit);
+
+  // System telemetry — track response status codes for /api/system metrics
+  app.use((req, res, next) => {
+    res.on("finish", () => {
+      try { trackSystemResponse(res.statusCode); } catch {}
+    });
+    next();
+  });
 
   // Setup Replit Auth (must be before other routes)
   // Integration: blueprint:javascript_log_in_with_replit
@@ -349,6 +359,8 @@ async function startServer() {
   app.use("/api/meaning-core", meaningCoreRouter);
   app.use("/api/figma", figmaRouter);
   app.use("/api/analytics-events", analyticsEventsRouter);
+  app.use("/api/system", systemRouter);
+  app.use("/api/kernel", kernelRouter);
   app.use("/api/mfa", mfaRouter);
   app.use("/api/canva-oauth", canvaOAuthRouter);
   app.use("/api/content", contentRouter);

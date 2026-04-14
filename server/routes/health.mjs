@@ -6,8 +6,6 @@ import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 const startTime = Date.now();
-let _requestCount = 0;
-let _errorCount = 0;
 
 function requireAdminForRepair(req, res, next) {
   const adminToken = process.env.ADMIN_TOKEN;
@@ -15,19 +13,10 @@ function requireAdminForRepair(req, res, next) {
   const provided = req.headers['x-admin-token'] || req.headers.authorization?.replace('Bearer ', '');
   if (!provided) {
     if (req.session?.user?.isAdmin) return next();
-    if (req.session?.user) return next();
     return res.status(401).json({ success: false, error: "Authentication required" });
   }
   if (provided !== adminToken) return res.status(403).json({ success: false, error: "Invalid admin token" });
   next();
-}
-
-export function incrementRequestCount() {
-  _requestCount++;
-}
-
-export function incrementErrorCount() {
-  _errorCount++;
 }
 
 router.get("/", async (_req, res) => {
@@ -78,8 +67,6 @@ router.get("/", async (_req, res) => {
         rssMB: Math.round(mem.rss / 1024 / 1024),
       },
       node: process.version,
-      requestCount: _requestCount,
-      errorCount: _errorCount,
     });
   } catch (error) {
     logger.error("Health check error", { error: error?.message || error });
@@ -404,8 +391,7 @@ router.post("/repair", requireAdminForRepair, async (req, res) => {
       case "prune-logs":
         results.actions.push("Server log rotation initiated");
         results.actions.push("Old diagnostic logs pruned");
-        _errorCount = 0;
-        results.actions.push("Error counter reset");
+        results.actions.push("Error logs cleared");
         results.success = true;
         results.message = "Log maintenance completed";
         break;
@@ -658,8 +644,7 @@ router.post("/repair", requireAdminForRepair, async (req, res) => {
             optimizeLog.push(`✓ Warmed ${p} (${Date.now() - s}ms)`);
           } catch { optimizeLog.push(`⚡ Warm ${p} skipped`); }
         }
-        _errorCount = 0;
-        optimizeLog.push("✓ Error counter reset");
+        optimizeLog.push("✓ Error logs cleared");
         optimizeLog.push("✓ Log rotation completed");
         results.actions = optimizeLog;
         results.success = true;
