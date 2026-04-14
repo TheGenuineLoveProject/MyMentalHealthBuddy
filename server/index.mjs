@@ -205,6 +205,12 @@ app.get("/__health", (_req, res) => {
   res.status(200).json({ ok: true, ready: serverReady });
 });
 
+app.use((req, res, next) => {
+  if (serverReady) return next();
+  if (req.path === "/__health" || req.path === "/healthz") return next();
+  res.status(503).json({ ok: false, error: "SERVICE_UNAVAILABLE", message: "Server is starting up, please retry shortly." });
+});
+
 const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server listening on http://0.0.0.0:${PORT}`);
   logger.info("Server listening", { url: `http://0.0.0.0:${PORT}`, port: PORT });

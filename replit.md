@@ -65,6 +65,12 @@ A unified `blog_posts` table supports all publishable content types (blog, newsl
 - Architecture Lock: `prompt-os-kernel/governance/ARCHITECTURE_LOCK.md` — frozen routes, panels, domain separation rules.
 - Quarantine: `client/src/components/_quarantine/` — orphaned components (AchievementToast, BadgeDisplay, DailyCheckIn, SiteFooter) moved non-destructively. 30-day retention before deletion.
 
+### Production Readiness
+- **Readiness gate**: `server/index.mjs` returns 503 for all non-health requests until `serverReady=true` (prevents 401 race during async initialization).
+- **Health probes**: `/__health` (readiness), `/healthz` (liveness), `/api/health` (deep probe with DB/AI/services), `/api/health-check` (simple liveness).
+- **Telemetry parity**: Response status tracking middleware installed in `dev.mjs`, `app.mjs`, AND `index.mjs`.
+- **Security hardened**: `requireAdminForRepair` no longer allows non-admin authenticated users to access maintenance endpoints.
+
 ### System Design Choices
 `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
 
