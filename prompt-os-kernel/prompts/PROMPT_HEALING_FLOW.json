@@ -1,0 +1,59 @@
+{
+  "id": "PROMPT_HEALING_FLOW",
+  "name": "Healing Flow Builder",
+  "domain": "HEALING_DOMAIN",
+  "ownerEngine": "Healing Engine",
+  "purpose": "Design and implement a trauma-informed healing flow with journaling prompts, reflection exercises, or psychoeducation content",
+  "inputs": [
+    { "name": "flowName", "type": "string", "description": "Name of the healing flow", "required": true },
+    { "name": "theme", "type": "string", "description": "Emotional theme (e.g., self-compassion, anxiety coping, grief processing)", "required": true },
+    { "name": "format", "type": "string", "description": "Format: guided_journal, reflection, psychoeducation, breathing_exercise", "required": true }
+  ],
+  "constraints": [
+    "No diagnosis or clinical claims",
+    "No therapy replacement language",
+    "No coercion or manipulation",
+    "No monetization logic inside flow",
+    "Safety-first: crisis routing must be accessible",
+    "Trauma-informed language only",
+    "Educational framing required"
+  ],
+  "process": [
+    "Define flow objective and emotional theme",
+    "Select evidence-based approach",
+    "Design flow steps with trauma-informed language",
+    "Include consent and opt-out at each step",
+    "Include crisis routing link",
+    "Include educational disclaimer",
+    "Design UI with calm, accessible design tokens",
+    "Define verification criteria"
+  ],
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "flowName": { "type": "string" },
+      "theme": { "type": "string" },
+      "steps": { "type": "array" },
+      "crisisRouting": { "type": "object" },
+      "disclaimer": { "type": "string" },
+      "designTokens": { "type": "object" }
+    }
+  },
+  "evaluationCriteria": [
+    "Language is trauma-informed and non-coercive",
+    "Crisis routing is present and accessible",
+    "Educational disclaimer is visible",
+    "No business logic contamination",
+    "Flow is completable without emotional distress"
+  ],
+  "safetyRules": [
+    "Never suggest diagnosis",
+    "Never replace professional therapy",
+    "Always provide crisis exit",
+    "Never use emotional vulnerability for engagement",
+    "Respect user autonomy at every step"
+  ],
+  "dependencies": [],
+  "version": "1.0.0",
+  "status": "CANONICAL"
+}

@@ -73,10 +73,20 @@ A unified `blog_posts` table supports all publishable content types (blog, newsl
 - **Security hardened**: `requireAdminForRepair` no longer allows non-admin authenticated users to access maintenance endpoints.
 
 ### Phase 4: Controlled Expansion Engine
-- **Change Gate**: `prompt-os-kernel/governance/CHANGE_GATE.md` — 5-gate protocol (domain classification, impact scope, risk check, verification steps, rollback plan). All changes must pass all gates.
+- **Change Gate**: `prompt-os-kernel/governance/CHANGE_GATE.md` — 6-rule protocol (domain classification, impact scope, risk check, implementation package, stop conditions, smallest safe patch). All changes must pass all gates.
 - **Component Registry**: `client/src/_registry/components.json` — tracks active, quarantined, and frozen components with modification rules.
-- **System Verification**: `node scripts/verify-system.mjs` — single-command truth check (build, endpoints, auth, telemetry, kernel, health). 13 automated checks.
+- **System Verification**: `npm run verify:system` — runs build + full test suite (175 tests across 13 files).
 - **Frozen Components**: Core routes, auth middleware, telemetry, kernel bridge, safety footer, wellness shell — no modification without proven failure.
+
+### Prompt-OS Execution Prompt Library
+Six canonical prompt modules in `prompt-os-kernel/prompts/`, validated against `promptspec.schema.json`:
+- **PROMPT_FEATURE_BUILD** (PLATFORM_DOMAIN) — Convert feature requests into implementation plans with exact files, routes, schema, UI, tests.
+- **PROMPT_SEO_CLUSTER** (BUSINESS_DOMAIN) — Generate SEO topic clusters with keyword mapping, blog titles, internal linking.
+- **PROMPT_SYSTEM_DIAGNOSTIC** (PLATFORM_DOMAIN) — Run system diagnostics to identify and fix highest-impact blockers.
+- **PROMPT_BLOG_PUBLISH** (BUSINESS_DOMAIN) — Guide blog posts through draft → validate → publish → measure → optimize.
+- **PROMPT_HEALING_FLOW** (HEALING_DOMAIN) — Design trauma-informed healing flows with safety constraints.
+- **PROMPT_MONETIZATION_FLOW** (BUSINESS_DOMAIN) — Design ethical monetization flows with conversion tracking.
+- Lifecycle: create → validate → store → execute → evolve. Status values: DRAFT, PROPOSED, CANONICAL, DEPRECATED, ARCHIVED.
 
 ### System Design Choices
 `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.

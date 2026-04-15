@@ -1,0 +1,57 @@
+{
+  "id": "PROMPT_SEO_CLUSTER",
+  "name": "SEO Topic Cluster",
+  "domain": "BUSINESS_DOMAIN",
+  "ownerEngine": "SEO Engine",
+  "purpose": "Generate a complete SEO topic cluster with keyword mapping, blog titles, internal linking structure, and content plan",
+  "inputs": [
+    { "name": "topic", "type": "string", "description": "Core topic for the cluster", "required": true },
+    { "name": "audience", "type": "string", "description": "Target audience segment", "required": true },
+    { "name": "contentCount", "type": "number", "description": "Number of content pieces to generate", "required": false }
+  ],
+  "constraints": [
+    "No keyword stuffing",
+    "No fabricated authority",
+    "No manipulative mental health claims",
+    "Separate education from clinical claims",
+    "Preserve brand tone and trust",
+    "Never mix business logic into healing content"
+  ],
+  "process": [
+    "Identify core topic and search intent",
+    "Map primary and secondary keywords",
+    "Classify search intent per keyword (informational, transactional, navigational)",
+    "Generate hub page concept",
+    "Generate cluster page titles with keyword targets",
+    "Define internal linking structure",
+    "Define content types (hub, cluster, conversion)",
+    "Create distribution plan (blog, social, newsletter)",
+    "Define measurement metrics"
+  ],
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "hubPage": { "type": "object" },
+      "clusterPages": { "type": "array" },
+      "keywords": { "type": "array" },
+      "internalLinks": { "type": "array" },
+      "distributionPlan": { "type": "object" },
+      "metrics": { "type": "array" }
+    }
+  },
+  "evaluationCriteria": [
+    "All titles are unique and keyword-targeted",
+    "Internal linking forms a coherent cluster",
+    "Search intent is correctly classified",
+    "No healing-domain contamination",
+    "Content plan is actionable"
+  ],
+  "safetyRules": [
+    "No emotional vulnerability targeting in SEO content",
+    "No clinical claims without evidence basis",
+    "All mental health content includes appropriate disclaimers"
+  ],
+  "dependencies": [],
+  "version": "1.0.0",
+  "status": "CANONICAL"
+}

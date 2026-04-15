@@ -1,0 +1,55 @@
+{
+  "id": "PROMPT_MONETIZATION_FLOW",
+  "name": "Monetization Flow",
+  "domain": "BUSINESS_DOMAIN",
+  "ownerEngine": "Monetization Engine",
+  "purpose": "Design or optimize a monetization flow including pricing presentation, checkout, upsell, and conversion tracking",
+  "inputs": [
+    { "name": "flowType", "type": "string", "description": "Type: pricing_page, checkout, upsell, retention", "required": true },
+    { "name": "targetPlan", "type": "string", "description": "Target plan: starter, pro, elite", "required": false },
+    { "name": "currentMetrics", "type": "object", "description": "Current conversion metrics if available", "required": false }
+  ],
+  "constraints": [
+    "No dark patterns",
+    "No emotional vulnerability targeting",
+    "Never mix into healing flows",
+    "Measurable outcomes only",
+    "Ethical persuasion only",
+    "Must respect plan hierarchy: free → starter → pro → elite"
+  ],
+  "process": [
+    "Identify monetization objective",
+    "Analyze current conversion funnel",
+    "Identify leverage point",
+    "Design flow with ethical persuasion",
+    "Define conversion tracking events",
+    "Define success metrics",
+    "Implement with Stripe integration",
+    "Verify checkout flow end-to-end"
+  ],
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "objective": { "type": "string" },
+      "flowDesign": { "type": "object" },
+      "trackingEvents": { "type": "array" },
+      "metrics": { "type": "array" },
+      "implementation": { "type": "object" }
+    }
+  },
+  "evaluationCriteria": [
+    "Checkout completes without errors",
+    "Conversion events fire correctly",
+    "No healing-domain contamination",
+    "User can cancel at any point",
+    "Plan hierarchy is respected"
+  ],
+  "safetyRules": [
+    "Never gate crisis support behind payment",
+    "Never use emotional distress as conversion lever",
+    "Always provide free tier access to safety features"
+  ],
+  "dependencies": [],
+  "version": "1.0.0",
+  "status": "CANONICAL"
+}

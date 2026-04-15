@@ -1,0 +1,60 @@
+{
+  "id": "PROMPT_SYSTEM_DIAGNOSTIC",
+  "name": "System Diagnostic",
+  "domain": "PLATFORM_DOMAIN",
+  "ownerEngine": "Engineering Engine",
+  "purpose": "Run a full system diagnostic to identify the highest-impact blocker and produce an exact fix with verification",
+  "inputs": [
+    { "name": "scope", "type": "string", "description": "Diagnostic scope: full, routes, build, auth, telemetry", "required": false },
+    { "name": "symptom", "type": "string", "description": "Observed symptom or error if any", "required": false }
+  ],
+  "constraints": [
+    "Fix ONE problem at a time",
+    "Smallest safe change only",
+    "No refactors",
+    "No unrelated edits",
+    "Must verify before declaring success"
+  ],
+  "process": [
+    "Run build gate",
+    "Run route gate (public + auth-protected)",
+    "Run schema gate",
+    "Run telemetry gate",
+    "Run kernel health check",
+    "Identify highest-impact blocker",
+    "Diagnose root cause",
+    "Produce exact fix with file paths",
+    "Produce shell commands",
+    "Produce verification steps",
+    "Produce rollback plan"
+  ],
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "hardTruth": { "type": "string" },
+      "blocker": { "type": "string" },
+      "rootCause": { "type": "string" },
+      "exactFiles": { "type": "array" },
+      "exactFix": { "type": "string" },
+      "shellCommands": { "type": "array" },
+      "verification": { "type": "array" },
+      "result": { "type": "string", "enum": ["PASS", "FAIL"] },
+      "rollback": { "type": "string" },
+      "nextStep": { "type": "string" }
+    }
+  },
+  "evaluationCriteria": [
+    "Blocker is correctly identified",
+    "Fix is minimal and targeted",
+    "Verification confirms resolution",
+    "No regressions introduced"
+  ],
+  "safetyRules": [
+    "Never modify frozen components without proven failure",
+    "Never skip verification",
+    "Always provide rollback"
+  ],
+  "dependencies": [],
+  "version": "1.0.0",
+  "status": "CANONICAL"
+}

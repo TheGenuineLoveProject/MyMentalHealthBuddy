@@ -1,0 +1,60 @@
+{
+  "id": "PROMPT_FEATURE_BUILD",
+  "name": "Feature Build",
+  "domain": "PLATFORM_DOMAIN",
+  "ownerEngine": "Engineering Engine",
+  "purpose": "Convert a feature request into a complete implementation plan with exact files, routes, schema changes, UI components, and tests",
+  "inputs": [
+    { "name": "featureName", "type": "string", "description": "Name of the feature to build", "required": true },
+    { "name": "domain", "type": "string", "description": "Primary domain classification", "required": true },
+    { "name": "userStory", "type": "string", "description": "What the user should be able to do", "required": true },
+    { "name": "constraints", "type": "array", "description": "Hard constraints or limitations", "required": false }
+  ],
+  "constraints": [
+    "One feature per execution",
+    "Smallest safe implementation",
+    "Must include rollback plan",
+    "Must not break existing routes or schema",
+    "Must include test coverage"
+  ],
+  "process": [
+    "Parse feature request and classify domain",
+    "Scan current state of affected files",
+    "Design schema changes if needed",
+    "Design API routes",
+    "Design UI components",
+    "Generate implementation plan with exact file paths",
+    "Generate shell commands",
+    "Define verification steps",
+    "Define rollback steps"
+  ],
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "featureName": { "type": "string" },
+      "domain": { "type": "string" },
+      "schemaChanges": { "type": "array" },
+      "apiRoutes": { "type": "array" },
+      "uiComponents": { "type": "array" },
+      "filePlan": { "type": "array" },
+      "shellCommands": { "type": "array" },
+      "verification": { "type": "array" },
+      "rollback": { "type": "array" }
+    }
+  },
+  "evaluationCriteria": [
+    "All files exist and are syntactically valid",
+    "Build passes after implementation",
+    "Routes return expected status codes",
+    "Tests pass",
+    "No regressions in existing functionality"
+  ],
+  "safetyRules": [
+    "Never modify frozen routes without governance approval",
+    "Never change primary key types",
+    "Never skip verification step"
+  ],
+  "dependencies": [],
+  "version": "1.0.0",
+  "status": "CANONICAL"
+}

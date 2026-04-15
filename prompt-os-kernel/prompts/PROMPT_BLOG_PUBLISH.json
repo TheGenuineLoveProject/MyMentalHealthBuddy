@@ -1,0 +1,56 @@
+{
+  "id": "PROMPT_BLOG_PUBLISH",
+  "name": "Blog Publish",
+  "domain": "BUSINESS_DOMAIN",
+  "ownerEngine": "Publishing Engine",
+  "purpose": "Guide a blog post through the publishing workflow from draft to published with SEO optimization, metadata, and distribution plan",
+  "inputs": [
+    { "name": "title", "type": "string", "description": "Blog post title", "required": true },
+    { "name": "topic", "type": "string", "description": "Core topic", "required": true },
+    { "name": "audience", "type": "string", "description": "Target audience", "required": true },
+    { "name": "contentType", "type": "string", "description": "Type: blog, newsletter, reflection, essay, note", "required": false }
+  ],
+  "constraints": [
+    "Must include structured metadata",
+    "Must include schema.org JSON-LD",
+    "Must include canonical URL",
+    "Must follow publishing flow: draft → validate → publish → measure → optimize",
+    "No clinical claims without evidence"
+  ],
+  "process": [
+    "Define content objective and angle",
+    "Classify search intent",
+    "Generate metadata (title, description, keywords)",
+    "Generate schema.org JSON-LD",
+    "Define internal linking targets",
+    "Validate against quality gates",
+    "Publish to blog system",
+    "Generate social distribution content",
+    "Define measurement plan"
+  ],
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "post": { "type": "object" },
+      "metadata": { "type": "object" },
+      "jsonLd": { "type": "object" },
+      "internalLinks": { "type": "array" },
+      "socialContent": { "type": "object" },
+      "measurementPlan": { "type": "object" }
+    }
+  },
+  "evaluationCriteria": [
+    "Metadata is complete and accurate",
+    "JSON-LD validates against schema.org",
+    "Content aligns with topic cluster",
+    "Distribution plan is actionable"
+  ],
+  "safetyRules": [
+    "No emotional exploitation in content",
+    "Mental health content must include disclaimers",
+    "No fabricated credentials or authority"
+  ],
+  "dependencies": ["PROMPT_SEO_CLUSTER"],
+  "version": "1.0.0",
+  "status": "CANONICAL"
+}
