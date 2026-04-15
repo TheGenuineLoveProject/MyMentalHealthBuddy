@@ -89,7 +89,7 @@
     "check:links": "node scripts/routeKeyLinkChecker.mjs",
     "check:bundle": "node scripts/bundleSizeCheck.mjs",
     "next50": "node scripts/next50.mjs",
-    "verify:system": "node scripts/verify-system.mjs"
+    "verify:system": "npm run build && npm run test"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",

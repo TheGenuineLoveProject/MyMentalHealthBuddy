@@ -10,6 +10,11 @@ import { validatePublishingContent } from "../../shared/publishingRules.mjs";
 
 const router = express.Router();
 
+// GET /api/blog/posts
+router.get('/posts', (req, res) => {
+  res.json({ posts: [] });
+});
+
 function generateSlug(title) {
   return title
     .toLowerCase()
