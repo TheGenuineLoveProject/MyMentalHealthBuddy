@@ -135,13 +135,12 @@ export default function ForgotPassword() {
             className="flex items-center justify-center gap-4 mb-10 hover:opacity-90 transition-opacity group"
             data-testid="link-home"
           >
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
-              <img 
-                src="/brand/logo-mark.png" 
-                alt="MyMentalHealthBuddy" 
-                className="w-9 h-9 object-contain"
-              />
-            </div>
+            <img 
+              src="/brand/mmhb-icon.svg" 
+              alt="MyMentalHealthBuddy" 
+              className="w-14 h-14 rounded-2xl object-contain transition-all group-hover:scale-105"
+              style={{ boxShadow: '0 4px 16px var(--glp-sage-30)' }}
+            />
             <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
           </Link>
           

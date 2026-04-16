@@ -25,9 +25,10 @@ export default function Register() {
           <div className="text-center mb-5">
             <Link href="/" className="inline-flex items-center gap-3 group">
               <img 
-                src="/brand/login-logo.png" 
+                src="/brand/mmhb-icon.svg" 
                 alt="MyMentalHealthBuddy" 
-                className="w-14 h-14 object-contain transition-all group-hover:scale-105"
+                className="w-14 h-14 rounded-xl object-contain transition-all group-hover:scale-105"
+                style={{ boxShadow: '0 3px 16px var(--glp-sage-deep-20)' }}
                 data-testid="img-register-logo"
               />
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>

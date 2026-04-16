@@ -74,9 +74,7 @@ export default function CRMPage() {
             <div className="flex justify-between h-16">
               <div className="flex items-center gap-8">
                 <Link href="/" className="flex items-center gap-3" data-testid="link-home">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
-                    <img src="/brand/logo-mark.png" alt="TGLP" className="h-6 w-6" />
-                  </div>
+                  <img src="/brand/mmhb-icon.svg" alt="MyMentalHealthBuddy" className="h-10 w-10 rounded-xl object-contain" style={{ boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }} />
                   <span className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Dashboard</span>
                 </Link>
                 <div className="hidden md:flex items-center gap-1">

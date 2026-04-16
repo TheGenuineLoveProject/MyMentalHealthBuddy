@@ -51,9 +51,10 @@ export default function Login() {
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex flex-col items-center gap-3 group">
               <img 
-                src="/brand/login-logo.png" 
+                src="/brand/mmhb-icon.svg" 
                 alt="MyMentalHealthBuddy" 
-                className="w-20 h-20 object-contain transition-all group-hover:scale-105"
+                className="w-20 h-20 rounded-2xl object-contain transition-all group-hover:scale-105"
+                style={{ boxShadow: '0 4px 20px var(--glp-sage-deep-20)' }}
                 data-testid="img-login-logo"
               />
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>

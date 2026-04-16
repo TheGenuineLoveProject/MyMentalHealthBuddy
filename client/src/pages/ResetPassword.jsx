@@ -218,9 +218,10 @@ export default function ResetPassword() {
             data-testid="link-home"
           >
             <img 
-              src="/brand/logo-mark.png" 
+              src="/brand/mmhb-icon.svg" 
               alt="MyMentalHealthBuddy" 
-              className="w-12 h-12 object-contain"
+              className="w-12 h-12 rounded-xl object-contain"
+              style={{ boxShadow: '0 3px 14px var(--glp-sage-deep-20)' }}
             />
             <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
           </Link>

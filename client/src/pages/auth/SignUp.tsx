@@ -71,9 +71,10 @@ export default function SignUp() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 mb-6" data-testid="link-home">
             <img 
-              src="/brand/logo-mark.png" 
+              src="/brand/mmhb-icon.svg" 
               alt="MyMentalHealthBuddy" 
-              className="w-14 h-14 object-contain"
+              className="w-14 h-14 rounded-xl object-contain"
+              style={{ boxShadow: '0 3px 16px rgba(38,79,79,0.2)' }}
             />
             <span className="text-heading-lg text-teal">MyMentalHealthBuddy</span>
           </Link>

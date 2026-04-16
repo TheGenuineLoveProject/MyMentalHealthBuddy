@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="glow-wide-t" cx="50%" cy="58%" r="30%">
+      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.48"/>
+      <stop offset="50%" stop-color="#d4a843" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-core-t" cx="50%" cy="58%" r="14%">
+      <stop offset="0%" stop-color="#fffcef" stop-opacity="1"/>
+      <stop offset="35%" stop-color="#ffe8a0" stop-opacity="0.85"/>
+      <stop offset="65%" stop-color="#d4a843" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body-fill-t" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#7ab393" stop-opacity="0.88"/>
+      <stop offset="35%" stop-color="#8ec4a5" stop-opacity="0.65"/>
+      <stop offset="70%" stop-color="#5a9a82" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#3a7a6a" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="head-fill-t" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#a8d8b8" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.78"/>
+    </linearGradient>
+    <filter id="body-blur-t" x="-8%" y="-8%" width="116%" height="116%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
+    </filter>
+    <filter id="glow-bloom-t" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="18"/>
+    </filter>
+    <filter id="core-bloom-t" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
+    </filter>
+    <filter id="head-blur-t" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <ellipse cx="256" cy="300" rx="165" ry="140" fill="url(#glow-wide-t)" filter="url(#glow-bloom-t)"/>
+  <ellipse cx="256" cy="295" rx="85" ry="75" fill="url(#glow-core-t)" filter="url(#core-bloom-t)"/>
+
+  <g filter="url(#body-blur-t)">
+    <path d="
+      M256,198
+      C244,203 226,216 214,236
+      C200,260 194,286 198,310
+      C202,330 212,348 228,362
+      C238,370 248,376 256,378
+      C264,376 274,370 284,362
+      C300,348 310,330 314,310
+      C318,286 312,260 298,236
+      C286,216 268,203 256,198Z
+    " fill="url(#body-fill-t)"/>
+
+    <path d="M228,238 C212,255 200,278 204,304 C206,318 216,328 228,328" fill="none" stroke="rgba(122,179,147,0.50)" stroke-width="16" stroke-linecap="round"/>
+    <path d="M284,238 C300,255 312,278 308,304 C306,318 296,328 284,328" fill="none" stroke="rgba(122,179,147,0.50)" stroke-width="16" stroke-linecap="round"/>
+
+    <path d="
+      M232,358
+      C240,366 248,372 256,374
+      C264,372 272,366 280,358
+      C288,348 294,336 296,324
+      L256,340
+      L216,324
+      C218,336 224,348 232,358Z
+    " fill="rgba(122,179,147,0.22)"/>
+  </g>
+
+  <circle cx="256" cy="162" r="36" fill="url(#head-fill-t)" filter="url(#head-blur-t)"/>
+  <circle cx="256" cy="155" r="6" fill="rgba(168,216,184,0.35)"/>
+
+  <ellipse cx="256" cy="294" rx="24" ry="22" fill="#fffdf0" opacity="0.88"/>
+  <ellipse cx="256" cy="294" rx="11" ry="10" fill="#ffffff" opacity="0.95"/>
+  <circle cx="256" cy="294" r="4" fill="#ffffff"/>
+</svg>

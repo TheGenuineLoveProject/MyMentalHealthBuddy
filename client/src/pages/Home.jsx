@@ -169,20 +169,13 @@ export default function Home() {
           aria-label="Main navigation"
         >
           <Link href="/" className="flex items-center gap-4 min-w-0">
-            <div 
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0 sacred-animate-breathe" 
-              style={{ 
-                background: 'linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d))', 
-                boxShadow: '0 4px 16px rgba(143, 191, 159, 0.3)' 
-              }}
-            >
-              <img 
-                src="/brand/logo.svg" 
-                alt="MyMentalHealthBuddy" 
-                className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
-                data-testid="img-home-logo"
-              />
-            </div>
+            <img 
+              src="/brand/mmhb-icon.svg" 
+              alt="MyMentalHealthBuddy" 
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-contain flex-shrink-0 sacred-animate-breathe"
+              style={{ boxShadow: '0 4px 16px var(--glp-sage-deep-20)' }}
+              data-testid="img-home-logo"
+            />
             <span 
               className="sacred-heading text-xl hidden md:block"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
@@ -213,20 +206,13 @@ export default function Home() {
       <main id="main-content" className="relative z-10">
         <Hero
           logo={
-            <div 
-              className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center sacred-animate-rotate-glow"
-              style={{ 
-                background: 'linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d))',
-                boxShadow: '0 8px 32px rgba(143, 191, 159, 0.4)'
-              }}
-            >
-              <img 
-                src="/brand/logo.svg" 
-                alt="Decorative illustration" 
-                className="w-12 h-12 md:w-14 md:h-14 object-contain"
-                aria-hidden="true"
-              />
-            </div>
+            <img 
+              src="/brand/mmhb-icon.svg" 
+              alt="Decorative illustration" 
+              className="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-contain sacred-animate-rotate-glow"
+              style={{ boxShadow: '0 8px 32px var(--glp-sage-deep-30)' }}
+              aria-hidden="true"
+            />
           }
           badge={
             <span 

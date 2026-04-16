@@ -14,9 +14,13 @@ export default function Footer() {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--glp-gold)] to-[var(--glp-teal)] flex items-center justify-center">
-              <Heart className="w-5 h-5 text-white" aria-hidden="true" />
-            </div>
+            <img 
+              src="/brand/mmhb-icon.svg" 
+              alt="MyMentalHealthBuddy" 
+              className="w-10 h-10 rounded-xl object-contain"
+              style={{ boxShadow: '0 2px 10px rgba(38,79,79,0.12)' }}
+              aria-hidden="true"
+            />
             <span className="font-serif text-xl font-bold text-gray-900 dark:text-white">
               MyMentalHealthBuddy
             </span>

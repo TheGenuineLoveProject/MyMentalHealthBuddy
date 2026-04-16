@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg-d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#162f3f"/>
+      <stop offset="40%" stop-color="#0f2230"/>
+      <stop offset="100%" stop-color="#0a1824"/>
+    </linearGradient>
+    <radialGradient id="bg-aura-d" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#1a4a5a" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#0a1824" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-wide-d" cx="50%" cy="58%" r="32%">
+      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.50"/>
+      <stop offset="50%" stop-color="#d4a843" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-core-d" cx="50%" cy="58%" r="16%">
+      <stop offset="0%" stop-color="#fffcef" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#ffe8a0" stop-opacity="0.90"/>
+      <stop offset="65%" stop-color="#d4a843" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body-fill-d" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#7ab393" stop-opacity="0.82"/>
+      <stop offset="40%" stop-color="#5a9a82" stop-opacity="0.55"/>
+      <stop offset="75%" stop-color="#3a7a6a" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#264f4f" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="head-fill-d" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#a8d8b8" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#6aaa88" stop-opacity="0.68"/>
+    </linearGradient>
+    <filter id="body-blur-d" x="-8%" y="-8%" width="116%" height="116%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+    <filter id="glow-bloom-d" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="24"/>
+    </filter>
+    <filter id="core-bloom-d" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
+    </filter>
+    <filter id="head-blur-d" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.8"/>
+    </filter>
+    <filter id="star-d" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bg-d)"/>
+  <rect width="512" height="512" rx="112" fill="url(#bg-aura-d)"/>
+
+  <ellipse cx="256" cy="300" rx="190" ry="160" fill="url(#glow-wide-d)" filter="url(#glow-bloom-d)"/>
+  <ellipse cx="256" cy="295" rx="95" ry="85" fill="url(#glow-core-d)" filter="url(#core-bloom-d)"/>
+
+  <g filter="url(#body-blur-d)">
+    <path d="
+      M256,198
+      C244,203 226,216 214,236
+      C200,260 194,286 198,310
+      C202,330 212,348 228,362
+      C238,370 248,376 256,378
+      C264,376 274,370 284,362
+      C300,348 310,330 314,310
+      C318,286 312,260 298,236
+      C286,216 268,203 256,198Z
+    " fill="url(#body-fill-d)"/>
+
+    <path d="M228,238 C212,255 200,278 204,304 C206,318 216,328 228,328" fill="none" stroke="rgba(122,179,147,0.48)" stroke-width="16" stroke-linecap="round"/>
+    <path d="M284,238 C300,255 312,278 308,304 C306,318 296,328 284,328" fill="none" stroke="rgba(122,179,147,0.48)" stroke-width="16" stroke-linecap="round"/>
+
+    <path d="
+      M232,358
+      C240,366 248,372 256,374
+      C264,372 272,366 280,358
+      C288,348 294,336 296,324
+      L256,340
+      L216,324
+      C218,336 224,348 232,358Z
+    " fill="rgba(122,179,147,0.20)"/>
+  </g>
+
+  <circle cx="256" cy="162" r="36" fill="url(#head-fill-d)" filter="url(#head-blur-d)"/>
+  <circle cx="256" cy="155" r="6" fill="rgba(168,216,184,0.30)"/>
+
+  <ellipse cx="256" cy="294" rx="28" ry="26" fill="#fffdf0" opacity="0.85"/>
+  <ellipse cx="256" cy="294" rx="13" ry="12" fill="#ffffff" opacity="0.95"/>
+  <circle cx="256" cy="294" r="4.5" fill="#ffffff"/>
+
+  <line x1="256" y1="260" x2="256" y2="328" stroke="#fffdf0" stroke-width="2" opacity="0.22" filter="url(#star-d)"/>
+  <line x1="222" y1="294" x2="290" y2="294" stroke="#fffdf0" stroke-width="2" opacity="0.22" filter="url(#star-d)"/>
+</svg>

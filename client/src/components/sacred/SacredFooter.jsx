@@ -81,14 +81,12 @@ export default function SacredFooter() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div 
-                className="w-10 h-10 rounded-full flex items-center justify-center animate-breathing"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(143, 191, 159, 0.3), rgba(244, 199, 195, 0.2))',
-                }}
-              >
-                <Heart className="w-5 h-5" style={{ color: '#8fbf9f' }} />
-              </div>
+              <img 
+                src="/brand/mmhb-icon.svg" 
+                alt="MyMentalHealthBuddy" 
+                className="w-10 h-10 rounded-xl object-contain animate-breathing"
+                style={{ boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }}
+              />
               <span 
                 className="font-serif text-xl font-semibold"
                 style={{ color: '#2f5d5d', fontFamily: "'Cormorant Garamond', serif" }}

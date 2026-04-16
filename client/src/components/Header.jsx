@@ -47,9 +47,10 @@ export default function Header() {
           data-testid="link-brand"
         >
           <img
-            src="/brand/logo-mark.png"
+            src="/brand/mmhb-icon.svg"
             alt={BRAND?.name ?? "Logo"}
-            className="h-10 w-10 object-contain"
+            className="h-10 w-10 rounded-xl object-contain"
+            style={{ boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }}
             draggable="false"
           />
           <span className="hidden sm:inline text-heading-sm text-brand tracking-tight">
