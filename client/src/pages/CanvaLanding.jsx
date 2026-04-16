@@ -74,20 +74,20 @@ export default function CanvaLanding() {
   const steps = [
     {
       icon: Feather,
-      title: "Create Your Safe Space",
-      description: "30 seconds to set up a space that adapts to you — your priorities, your pace, your language. Everything else stays quiet.",
+      title: "Create Your Sacred Space",
+      description: "In 30 seconds, you'll have a private sanctuary that adapts to your emotional language, your pace, and your priorities. Nothing loud. Nothing forced. Just space that already feels like yours.",
       link: "/login"
     },
     {
       icon: MessageCircle,
-      title: "Talk, Write, or Just Breathe",
-      description: "Journal freely, have a conversation with your AI companion, or follow a guided reflection. There's no wrong way to begin.",
+      title: "Express Yourself Freely",
+      description: "Journal, reflect, or talk with your AI companion — someone who genuinely listens, remembers what matters, and never rushes you. There's no wrong way to begin understanding yourself.",
       link: "/chat"
     },
     {
       icon: Eye,
-      title: "See What You Couldn't Before",
-      description: "Over time, patterns emerge that only quiet attention reveals — the kind of self-understanding that changes how you move through the world.",
+      title: "Discover What's Been Hidden",
+      description: "Watch as patterns emerge that only quiet, patient attention can reveal — the kind of self-knowledge that transforms not just how you think, but how you experience being alive.",
       link: "/dashboard"
     }
   ];
@@ -127,25 +127,25 @@ export default function CanvaLanding() {
     {
       icon: Waves,
       title: "Attunement Over Advice",
-      description: "We don't tell you what you need. We help you discover what you already know but haven't had the space to hear. Real wisdom comes from within — we just create the conditions for it to surface.",
+      description: "The answers you're looking for already live inside you. We don't prescribe — we create the conditions for your own wisdom to surface. True understanding begins when someone stops telling you what to feel and starts helping you hear what you already know.",
       color: "sage"
     },
     {
       icon: Fingerprint,
-      title: "Your Mind Is Unique",
-      description: "No two healing journeys are alike. Our AI adapts to your emotional language, your communication style, and your pace — because understanding begins with being truly seen.",
+      title: "Your Mind Is One of a Kind",
+      description: "Your emotional landscape is as unique as your fingerprint. Our AI learns your specific language, adapts to your rhythms, and recognizes your patterns — because genuine support means seeing you, not a category.",
       color: "gold"
     },
     {
       icon: HeartHandshake,
-      title: "Unconditional Presence",
-      description: "Like a friend who never judges, never rushes you, and never makes you feel like you should be further along. We meet you exactly where you are, every single time.",
+      title: "Unconditional Friendship",
+      description: "Imagine a companion who never judges where you are, never compares you to where you should be, and meets every version of you with the same warmth. That's what we built — presence without conditions.",
       color: "rose"
     },
     {
       icon: Infinity,
-      title: "Growth Without Pressure",
-      description: "Consciousness expands when you feel safe enough to explore. No metrics to hit, no streaks to maintain, no performance to measure. Just genuine, patient, unconditional support.",
+      title: "Growth at Your Own Speed",
+      description: "Real transformation happens in safety, not pressure. No metrics to chase, no streaks to protect, no performance anxiety. Your consciousness expands naturally when given genuine patience and unconditional space.",
       color: "teal"
     }
   ];
@@ -154,37 +154,37 @@ export default function CanvaLanding() {
     {
       icon: Brain,
       title: "Emotionally Intelligent AI",
-      description: "Trained in trauma-informed communication and active listening principles. Your companion remembers what matters, senses emotional shifts, and responds with the nuance of someone who truly cares.",
+      description: "Your companion is trained in trauma-informed attunement, active listening, and neuro-linguistic precision. It remembers what matters to you, notices patterns in how you express yourself, and responds with the depth of someone who genuinely wants to understand.",
       accent: "sage"
     },
     {
       icon: BarChart3,
-      title: "Patterns You Can't See Alone",
-      description: "Mood tracking that quietly reveals the invisible connections between how you feel, what triggers you, and why — surfacing insights that only emerge through gentle, consistent awareness.",
+      title: "Patterns Only You Can See",
+      description: "Gentle mood awareness that reveals the invisible threads connecting how you feel to why you feel it. Over time, insights emerge that bring fresh clarity — connections you may not have noticed before.",
       accent: "gold"
     },
     {
       icon: PenLine,
-      title: "Journaling That Goes Deeper",
-      description: "Expert-designed prompts that bypass the surface and unlock the thoughts you didn't know you were carrying. Each prompt is a doorway to deeper self-understanding.",
+      title: "Journaling That Transforms",
+      description: "Psychologically crafted prompts designed to move past surface thoughts and into the deeper layers of self-understanding. Each prompt is a quiet doorway to the parts of yourself waiting to be heard.",
       accent: "rose"
     },
     {
       icon: Compass,
-      title: "500+ Curated Wellness Tools",
-      description: "Breathing techniques, guided meditations, cognitive reframes, resilience builders, and reflection exercises — organized by what you need right now, never overwhelming.",
+      title: "500+ Evidence-Based Tools",
+      description: "Breathing exercises, guided reflections, cognitive reframes, resilience builders, and consciousness-expanding practices — organized by what you need in this moment, never overwhelming.",
       accent: "teal"
     },
     {
       icon: Shield,
-      title: "Privacy as a Sacred Promise",
-      description: "Your inner world is encrypted, protected, and belongs only to you. No ads, no data sales, no social feeds. We built this the way we'd want our own deepest thoughts safeguarded.",
+      title: "Your Privacy Is Sacred",
+      description: "Your inner world is encrypted with industry-standard security and belongs only to you. No ads, no data sales, no social exposure. We protect your vulnerability with the reverence it deserves.",
       accent: "sage"
     },
     {
       icon: Sun,
-      title: "Healing at Your Own Rhythm",
-      description: "No streaks to protect. No guilt for stepping away. Your tools wait with infinite patience and welcome you back without a single question. Healing isn't linear — your companion knows that.",
+      title: "Healing Without Pressure",
+      description: "No streaks to maintain. No guilt for stepping away. Your companion waits with infinite patience and greets you warmly whenever you return — because real growth isn't linear, and we honor that.",
       accent: "gold"
     }
   ];
@@ -210,7 +210,7 @@ export default function CanvaLanding() {
     },
     {
       question: "Is my private information truly safe?",
-      answer: "Sacred. Your journal entries, mood data, and conversations are encrypted with bank-level security and belong only to you. We don't sell data, show ads, or share anything with third parties. There's no social feed, no public profile, and no way for anyone else to see your space. We built this the way we'd want our own innermost thoughts protected — because your vulnerability deserves that level of respect."
+      answer: "Sacred. Your journal entries, mood data, and conversations are encrypted with industry-standard security and belong only to you. We don't sell data, show ads, or share anything with third parties. There's no social feed, no public profile, and no way for anyone else to see your space. We built this the way we'd want our own innermost thoughts protected — because your vulnerability deserves that level of respect."
     },
     {
       question: "How is the AI companion different from ChatGPT?",
@@ -406,24 +406,24 @@ export default function CanvaLanding() {
             >
               <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
               <span className="font-bold uppercase tracking-widest text-xs md:text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
-                Your Wellness, Your Way
+                Your Mind Deserves This
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.08] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
-              You Deserve Someone
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.06] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
+              Finally, Someone Who
               <br />
               <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-gold), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                Who Really Listens
+                Truly Understands
               </span>
             </h1>
 
             <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
-              An emotionally intelligent companion that understands before it responds
+              An emotionally intelligent companion that listens deeply, learns who you are, and helps you evolve
             </p>
 
-            <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s', lineHeight: '1.7' }}>
-              Journaling, mood awareness, and AI-guided reflection — designed around how your mind actually works. No judgment, no pressure, no generic advice. A safe space that learns your emotional language, senses what you need, and helps you discover the understanding you've been searching for.
+            <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s', lineHeight: '1.75' }}>
+              AI-guided reflection, mood awareness, and journaling — designed around the science of how your mind actually works. No judgment. No generic advice. No pressure to perform. A private sanctuary that learns your emotional language, builds your self-awareness, and helps you discover the strength and clarity that were always inside you.
             </p>
 
             <div className="safe-space-box max-w-md mx-auto mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
@@ -509,14 +509,15 @@ export default function CanvaLanding() {
           </div>
 
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5" style={{ color: 'var(--glp-sage-deep)' }}>
-            Built for How Your Mind Actually Works
+            Designed for How Your Mind
+            <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Actually Works</span>
           </h2>
 
           <p 
             className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto mb-4"
-            style={{ color: 'var(--glp-ink)' }}
+            style={{ color: 'var(--glp-ink)', lineHeight: '1.75' }}
           >
-            Most wellness apps are designed to maximize your screen time. We designed this one to maximize your self-awareness. No streaks to protect, no engagement tricks, no manufactured urgency. Just emotionally intelligent tools that respect the complexity of your inner world and support you at your own pace — because real transformation happens when you feel genuinely safe enough to explore what's underneath.
+            Most wellness apps are built to maximize your screen time. We built this to maximize your self-understanding. No streaks to chase. No engagement tricks. No manufactured urgency. Just emotionally intelligent tools that honor the depth and complexity of your inner world — because lasting transformation begins when you finally feel safe enough to look within.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
@@ -579,10 +580,11 @@ export default function CanvaLanding() {
               Our Philosophy
             </span>
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
-              What We Believe About Your Mind
+              What We Believe About
+              <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Your Beautiful Mind</span>
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-              Every design decision, every word our AI speaks, and every tool we build is rooted in a simple truth: you already have the answers. You just need the right conditions to hear them.
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--glp-ink)', lineHeight: '1.75' }}>
+              Every design choice, every word our AI speaks, every tool we build is grounded in one truth: the wisdom you need is already within you. We simply create the conditions for it to be heard.
             </p>
           </div>
 
@@ -613,8 +615,8 @@ export default function CanvaLanding() {
           </div>
 
           <div className="manifesto-quote" data-testid="section-manifesto">
-            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-white text-center" style={{ opacity: 0.95 }}>
-              "We didn't build an app. We built a mirror — one that reflects you back to yourself with more clarity, more compassion, and more truth than you've been shown before."
+            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-white text-center" style={{ opacity: 0.95, lineHeight: '1.7' }}>
+              "We didn't build an app. We built a mirror — one that reflects your mind back to itself with more clarity, more compassion, and more truth than anyone has shown you before. Because the most powerful thing you can do for yourself is truly understand who you are."
             </p>
             <p className="relative z-10 text-sm font-semibold text-center mt-4 shimmer-text">
               — The Genuine Love Project
@@ -629,10 +631,11 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              Everything You Need to Feel Understood
+              Everything Your Mind Needs
+              <span className="block text-2xl md:text-4xl mt-1" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>to Feel Truly Understood</span>
             </h2>
-            <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              Use what resonates. Ignore what doesn't. Nothing here is mandatory — everything here is meaningful.
+            <p className="text-base md:text-lg max-w-3xl mx-auto mt-3" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+              Use what resonates. Leave what doesn't. Nothing here is mandatory — every tool is designed to meet you exactly where you are.
             </p>
           </div>
 
@@ -667,10 +670,11 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
           <div className="text-center mb-8 md:mb-14">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              Three Steps to Feeling Understood
+              Three Steps to
+              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Knowing Yourself Better</span>
             </h2>
-            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              No commitments. No credit card. Just you and a safe space.
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+              No commitments. No credit card. Just you, a safe space, and the beginning of something meaningful.
             </p>
           </div>
 
@@ -719,10 +723,11 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-              Real People, Real Transformations
+              Real People,
+              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Real Breakthroughs</span>
             </h2>
-            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              From people who discovered something they didn't know they were looking for
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+              From people who found something they didn't know they were looking for — themselves
             </p>
           </div>
 
@@ -751,9 +756,14 @@ export default function CanvaLanding() {
                     <p className="text-xs md:text-sm" style={{ color: 'var(--glp-sage)' }}>{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="leading-relaxed italic text-sm md:text-base" style={{ color: 'var(--glp-ink)' }}>
+                <p className="leading-relaxed italic text-sm md:text-base" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
                   "{testimonial.text}"
                 </p>
+                {testimonial.highlight && (
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage)' }}>
+                    — "{testimonial.highlight}"
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -792,10 +802,11 @@ export default function CanvaLanding() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              Questions You Might Be Wondering
+              Questions Worth
+              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Answering Honestly</span>
             </h2>
-            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              We'd rather you felt confident before you started
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+              We'd rather you felt fully confident before you began
             </p>
           </div>
 
@@ -808,6 +819,7 @@ export default function CanvaLanding() {
               >
                 <button 
                   className="faq-question w-full text-left"
+                  id={`faq-question-${index}`}
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                   aria-expanded={activeFaq === index}
                   aria-controls={`faq-answer-${index}`}
@@ -835,17 +847,17 @@ export default function CanvaLanding() {
         <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-4 md:py-8">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-8 md:py-4 rounded-full bg-white/10 backdrop-blur-sm mb-6 md:mb-10 border border-white/15">
             <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-[var(--glp-gold)]" />
-            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">Something brought you here — trust that</span>
+            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">Something brought you here — trust that instinct</span>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
             Your Mind Is Ready
             <br />
-            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>To Know Itself Better</span>
+            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>To Know Itself Deeply</span>
           </h2>
           
-          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
-            Free to start. No credit card. No trial that expires. No pressure to commit. Your emotionally intelligent companion is here whenever you are — patient, present, and ready to listen without conditions.
+          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/85 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.75' }}>
+            Free to start. No credit card. No trial that expires. No pressure to commit. Your emotionally intelligent companion is here whenever you're ready — patient, present, and genuinely caring.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">
