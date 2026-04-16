@@ -1,59 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" width="280" height="60">
   <defs>
     <linearGradient id="lbg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#9ad0b2"/>
-      <stop offset="50%" stop-color="#6aaa8a"/>
-      <stop offset="100%" stop-color="#264f4f"/>
+      <stop offset="0%" stop-color="#78c8a0"/>
+      <stop offset="50%" stop-color="#4a9e80"/>
+      <stop offset="100%" stop-color="#1e4f4f"/>
     </linearGradient>
     <radialGradient id="lglow" cx="50%" cy="62%" r="20%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="50%" stop-color="#ffe088" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="lbody" x1="50%" y1="0%" x2="50%" y2="100%">
       <stop offset="0%" stop-color="#e8f6ee" stop-opacity="0.88"/>
-      <stop offset="50%" stop-color="#b0d8c0" stop-opacity="0.52"/>
-      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.16"/>
+      <stop offset="50%" stop-color="#b0d8c0" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#78b898" stop-opacity="0.15"/>
     </linearGradient>
-    <linearGradient id="larm-l" x1="100%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="lal" x1="80%" y1="10%" x2="20%" y2="90%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.76"/>
-      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#78b898" stop-opacity="0.12"/>
     </linearGradient>
-    <linearGradient id="larm-r" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="lar" x1="20%" y1="10%" x2="80%" y2="90%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
-      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#78b898" stop-opacity="0.10"/>
     </linearGradient>
-    <radialGradient id="lhead" cx="45%" cy="35%" r="55%">
+    <radialGradient id="lh" cx="42%" cy="38%" r="55%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
-      <stop offset="100%" stop-color="#b0d8c0" stop-opacity="0.70"/>
+      <stop offset="100%" stop-color="#a0d4b8" stop-opacity="0.72"/>
     </radialGradient>
-    <filter id="ls" x="-10%" y="-10%" width="120%" height="120%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="0.4"/>
-    </filter>
-    <filter id="la" x="-12%" y="-12%" width="124%" height="124%">
+    <filter id="ls" x="-8%" y="-8%" width="116%" height="116%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0.35"/>
     </filter>
     <filter id="lg" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
     </filter>
-    <filter id="lgc" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="1"/>
+    <filter id="lc" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.8"/>
     </filter>
   </defs>
   <g transform="translate(5, 5)">
     <rect width="50" height="50" rx="11" fill="url(#lbg)"/>
-    <ellipse cx="25" cy="30" rx="12" ry="11" fill="url(#lglow)" filter="url(#lg)"/>
+    <ellipse cx="25" cy="31" rx="11" ry="10" fill="url(#lglow)" filter="url(#lg)"/>
     <g filter="url(#ls)">
-      <path d="M25,18 C23.5,18.5 21,20 20,22 C19,24 18.5,26.5 19,29 C19.5,31 20.5,33 22,34.5 C23.5,35.8 24.5,36.5 25,37 C25.5,36.5 26.5,35.8 28,34.5 C29.5,33 30.5,31 31,29 C31.5,26.5 31,24 30,22 C29,20 26.5,18.5 25,18Z" fill="url(#lbody)"/>
+      <path d="M25,19 C24,19.5 22,21 21,23 C20,25.5 19.5,28 20,30.5 C20.5,32.5 21.5,34 23,35.5 C24,36.5 24.8,37 25,37.5 C25.2,37 26,36.5 27,35.5 C28.5,34 29.5,32.5 30,30.5 C30.5,28 30,25.5 29,23 C28,21 26,19.5 25,19Z" fill="url(#lbody)"/>
+      <path d="M24,20 C23,20.5 21.5,22 20.8,24 C20,26 20,28 20.5,29.5 C21,31 22,31.5 22.8,31 C23.5,30.5 24,29.5 24,28.5 C24,27.5 23.8,26.5 23.8,25 C23.8,24 24,22 24,20Z" fill="url(#lal)"/>
+      <path d="M26,20 C27,20.5 28.5,22 29.2,24 C30,26 30,28 29.5,29.5 C29,31 28,31.5 27.2,31 C26.5,30.5 26,29.5 26,28.5 C26,27.5 26.2,26.5 26.2,25 C26.2,24 26,22 26,20Z" fill="url(#lar)"/>
     </g>
-    <g filter="url(#la)">
-      <path d="M24,19.5 C22.5,20 21,21.5 20,23.5 C19,25.5 18.5,27.5 19,29.5 C19.5,31 20.5,32 21.5,31.8 C22.3,31.6 23,30.8 23.3,29.5 C23.5,28.5 23.3,27 23.2,25.5 C23,24 23.5,21.5 24,19.5Z" fill="url(#larm-l)"/>
-      <path d="M26,19.5 C27.5,20 29,21.5 30,23.5 C31,25.5 31.5,27.5 31,29.5 C30.5,31 29.5,32 28.5,31.8 C27.7,31.6 27,30.8 26.7,29.5 C26.5,28.5 26.7,27 26.8,25.5 C27,24 26.5,21.5 26,19.5Z" fill="url(#larm-r)"/>
-    </g>
-    <circle cx="24.5" cy="14.5" r="3.8" fill="url(#lhead)"/>
-    <ellipse cx="25" cy="29" rx="2.5" ry="2.3" fill="#fffbe0" opacity="0.80" filter="url(#lgc)"/>
-    <ellipse cx="25" cy="29" rx="1.2" ry="1.1" fill="#fff8d0" opacity="0.90"/>
-    <circle cx="25" cy="28.8" r="0.5" fill="#ffffff" opacity="0.95"/>
+    <circle cx="24.8" cy="15" r="4" fill="url(#lh)"/>
+    <path d="M24,17 Q25,17.8 26,17.2" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="0.6" stroke-linecap="round"/>
+    <ellipse cx="25" cy="30" rx="2.2" ry="2" fill="#fffbe0" opacity="0.78" filter="url(#lc)"/>
+    <ellipse cx="25" cy="30" rx="1" ry="0.9" fill="#fff8d0" opacity="0.90"/>
+    <circle cx="25" cy="29.8" r="0.4" fill="#ffffff" opacity="0.95"/>
   </g>
   <text x="64" y="28" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="700" fill="#264f4f">MyMentalHealthBuddy</text>
   <text x="64" y="44" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="#7ab393" letter-spacing="1.8">BY THE GENUINE LOVE PROJECT</text>

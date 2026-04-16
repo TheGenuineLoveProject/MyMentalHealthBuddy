@@ -10,12 +10,12 @@ MyMentalHealthBuddy (MMHB) by The Genuine Love Project is an AI-powered mental w
 - **Short Name**: MMHB
 - **Domain**: TheGenuineLoveProject.com
 - **Brand Config Files**: `brand-config.mjs`, `client/src/brand/brand.ts`, `client/src/brand/copy.ts`, `client/src/brand/tokens.ts`, `client/src/layouts/brand.ts`, `client/src/shared/brand/copy.js`
-- **Brand Icon**: Meditation figure SVG — seated person cradling warm inner glow. Three variants:
-  - `client/public/brand/mmhb-icon.svg` — Light mode (sage-to-teal gradient bg, rounded square)
-  - `client/public/brand/mmhb-icon-dark.svg` — Dark mode (deep navy bg, luminous figure)
+- **Brand Icon**: Modern futuristic wellness avatar — friendly figure with clean geometric lines, subtle tech-arc accents, cradling warm golden inner glow, soft smile. Three variants:
+  - `client/public/brand/mmhb-icon.svg` — Light mode (sage-to-teal gradient bg, rounded square, decorative orbital arcs)
+  - `client/public/brand/mmhb-icon-dark.svg` — Dark mode (deep navy bg, sage-toned figure, star-cross light rays)
   - `client/public/brand/mmhb-icon-transparent.svg` — No background (standalone figure)
   - `client/public/brand/favicon.svg` — Favicon version (simplified for small sizes)
-  - `client/public/brand/logo.svg` — Full logo with meditation figure + brand text
+  - `client/public/brand/logo.svg` — Full logo with avatar figure + brand text
 - **Brand Component**: `client/src/components/brand/BrandLogo.jsx` — Shared reusable component for consistent brand icon rendering (sizes: xs/sm/md/lg/xl, optional text, optional link)
 
 ## User Preferences
