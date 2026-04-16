@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useLocation } from "wouter";
-import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Brain, KeyRound, Settings, Eye, Compass, Sun, Feather } from "lucide-react";
+import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Brain, KeyRound, Settings, Eye, Compass, Sun, Feather, Waves, Fingerprint, HeartHandshake, Infinity } from "lucide-react";
 import "../styles/canva-landing.css";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
@@ -75,19 +75,19 @@ export default function CanvaLanding() {
     {
       icon: Feather,
       title: "Create Your Safe Space",
-      description: "Takes 30 seconds. Choose what matters to you — everything else stays out of the way.",
+      description: "30 seconds to set up a space that adapts to you — your priorities, your pace, your language. Everything else stays quiet.",
       link: "/login"
     },
     {
       icon: MessageCircle,
       title: "Talk, Write, or Just Breathe",
-      description: "Journal your thoughts, chat with your AI companion, or simply sit with a guided reflection.",
+      description: "Journal freely, have a conversation with your AI companion, or follow a guided reflection. There's no wrong way to begin.",
       link: "/chat"
     },
     {
       icon: Eye,
       title: "See What You Couldn't Before",
-      description: "Over time, gentle patterns emerge — insights about yourself that only quiet attention reveals.",
+      description: "Over time, patterns emerge that only quiet attention reveals — the kind of self-understanding that changes how you move through the world.",
       link: "/dashboard"
     }
   ];
@@ -96,61 +96,95 @@ export default function CanvaLanding() {
     {
       initial: "S",
       name: "Sarah M.",
-      text: "I came here feeling stuck. The AI didn't tell me what to do — it asked the right questions until I found my own answer. That's rare.",
+      text: "I came here feeling stuck in the same loop. The AI didn't tell me what to do — it asked the question nobody else thought to ask. For the first time in months, I heard my own answer clearly.",
       role: "Teacher",
-      highlight: "found my own answer"
+      highlight: "heard my own answer"
     },
     {
       initial: "J",
       name: "James K.",
-      text: "I started tracking my mood just to try it. Three weeks later, I noticed a pattern that explained years of frustration. That one insight changed everything.",
+      text: "I tracked my mood for three weeks, just to try it. Then I saw a pattern that explained years of frustration — a connection I'd never made. That single insight shifted my entire perspective.",
       role: "Software Engineer",
-      highlight: "changed everything"
+      highlight: "shifted my entire perspective"
     },
     {
       initial: "M",
       name: "Maria L.",
-      text: "This feels like talking to someone who actually listens — not someone waiting for their turn to speak. I didn't know an app could feel this safe.",
+      text: "This is the first place that feels like talking to someone who genuinely understands — not someone performing empathy. I didn't know a tool could feel this emotionally intelligent.",
       role: "Healthcare Worker",
-      highlight: "actually listens"
+      highlight: "genuinely understands"
+    },
+    {
+      initial: "D",
+      name: "David R.",
+      text: "I've tried every wellness app. They all wanted me to build habits. This one helped me understand why I couldn't — and that understanding was the breakthrough itself.",
+      role: "Creative Director",
+      highlight: "understanding was the breakthrough"
+    }
+  ];
+
+  const philosophyPillars = [
+    {
+      icon: Waves,
+      title: "Attunement Over Advice",
+      description: "We don't tell you what you need. We help you discover what you already know but haven't had the space to hear. Real wisdom comes from within — we just create the conditions for it to surface.",
+      color: "sage"
+    },
+    {
+      icon: Fingerprint,
+      title: "Your Mind Is Unique",
+      description: "No two healing journeys are alike. Our AI adapts to your emotional language, your communication style, and your pace — because understanding begins with being truly seen.",
+      color: "gold"
+    },
+    {
+      icon: HeartHandshake,
+      title: "Unconditional Presence",
+      description: "Like a friend who never judges, never rushes you, and never makes you feel like you should be further along. We meet you exactly where you are, every single time.",
+      color: "rose"
+    },
+    {
+      icon: Infinity,
+      title: "Growth Without Pressure",
+      description: "Consciousness expands when you feel safe enough to explore. No metrics to hit, no streaks to maintain, no performance to measure. Just genuine, patient, unconditional support.",
+      color: "teal"
     }
   ];
 
   const features = [
     {
       icon: Brain,
-      title: "AI That Truly Listens",
-      description: "Your companion remembers what matters, asks what others miss, and reflects your words back with the clarity of a trusted friend.",
+      title: "Emotionally Intelligent AI",
+      description: "Trained in trauma-informed communication and active listening principles. Your companion remembers what matters, senses emotional shifts, and responds with the nuance of someone who truly cares.",
       accent: "sage"
     },
     {
       icon: BarChart3,
       title: "Patterns You Can't See Alone",
-      description: "Mood tracking that quietly reveals the connections between how you feel, what you do, and why — on your timeline.",
+      description: "Mood tracking that quietly reveals the invisible connections between how you feel, what triggers you, and why — surfacing insights that only emerge through gentle, consistent awareness.",
       accent: "gold"
     },
     {
       icon: PenLine,
       title: "Journaling That Goes Deeper",
-      description: "Guided prompts designed by mental health experts to unlock the thoughts you didn't know you were holding.",
+      description: "Expert-designed prompts that bypass the surface and unlock the thoughts you didn't know you were carrying. Each prompt is a doorway to deeper self-understanding.",
       accent: "rose"
     },
     {
       icon: Compass,
-      title: "500+ Wellness Tools",
-      description: "Breathing exercises, meditations, resilience builders, and reflection frameworks — curated, never overwhelming.",
+      title: "500+ Curated Wellness Tools",
+      description: "Breathing techniques, guided meditations, cognitive reframes, resilience builders, and reflection exercises — organized by what you need right now, never overwhelming.",
       accent: "teal"
     },
     {
       icon: Shield,
-      title: "Privacy as a Promise",
-      description: "No ads. No data sales. No social feeds. Your inner world stays yours — encrypted, protected, always.",
+      title: "Privacy as a Sacred Promise",
+      description: "Your inner world is encrypted, protected, and belongs only to you. No ads, no data sales, no social feeds. We built this the way we'd want our own deepest thoughts safeguarded.",
       accent: "sage"
     },
     {
       icon: Sun,
-      title: "Healing at Your Rhythm",
-      description: "No streaks. No guilt. No pressure to return. Your tools wait patiently and welcome you back without judgment.",
+      title: "Healing at Your Own Rhythm",
+      description: "No streaks to protect. No guilt for stepping away. Your tools wait with infinite patience and welcome you back without a single question. Healing isn't linear — your companion knows that.",
       accent: "gold"
     }
   ];
@@ -162,30 +196,37 @@ export default function CanvaLanding() {
     teal: { bg: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', shadow: 'var(--glp-sage-deep-20)' }
   };
 
+  const philosophyAccentColors = {
+    sage: { bg: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', text: 'var(--glp-sage)' },
+    gold: { bg: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', text: 'var(--glp-gold)' },
+    rose: { bg: 'linear-gradient(135deg, var(--glp-blush-400), var(--glp-blush-600))', text: 'var(--glp-blush-500)' },
+    teal: { bg: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', text: 'var(--glp-teal-400)' }
+  };
+
   const faqs = [
     {
       question: "What exactly is MyMentalHealthBuddy?",
-      answer: "Think of it as a private space where you can think out loud — with an AI companion that listens without judgment, tools that help you understand your own patterns, and resources built by people who genuinely care about mental wellness. It's not therapy. It's the quiet, supportive space between therapy sessions — or for when you're not ready for that step yet."
+      answer: "Think of it as the wisest, most patient friend you've ever had — available whenever you need them. An AI companion trained in emotional intelligence and active listening, tools that help you understand your own patterns, and a private space designed by people who genuinely believe in the transformative power of self-understanding. It's not therapy. It's the supportive presence between therapy sessions — or for when you're not ready for that step yet."
     },
     {
       question: "Is my private information truly safe?",
-      answer: "Completely. Your journal entries, mood data, and conversations are encrypted and belong only to you. We don't sell data, show ads, or share anything with third parties. There's no social feed, no public profile, and no way for anyone else to see your space. We built this the way we'd want our own private thoughts protected."
+      answer: "Sacred. Your journal entries, mood data, and conversations are encrypted with bank-level security and belong only to you. We don't sell data, show ads, or share anything with third parties. There's no social feed, no public profile, and no way for anyone else to see your space. We built this the way we'd want our own innermost thoughts protected — because your vulnerability deserves that level of respect."
     },
     {
       question: "How is the AI companion different from ChatGPT?",
-      answer: "Our AI is specifically trained in trauma-informed communication principles. It doesn't give generic advice — it listens, reflects what you're feeling back with care, asks questions that help you think deeper, and knows when to simply be present. It won't diagnose you or tell you what to do. It helps you hear yourself more clearly."
+      answer: "Our AI is specifically designed around trauma-informed communication, neuro-linguistic attunement, and active listening principles. It doesn't give generic advice — it reads emotional undertones, reflects what you're feeling back with precision and care, asks the questions that unlock deeper awareness, and knows when to simply hold space in silence. It won't diagnose you or tell you what to do. It helps you become more conscious of what you already know."
     },
     {
       question: "What if I can't afford it?",
-      answer: "The core experience — mood tracking, journaling, daily reflections, community affirmations, and crisis resources — is completely free, forever. No trial that expires. No features that disappear. Pro unlocks unlimited AI conversations and advanced tools, but free isn't a lesser version — it's the foundation we believe everyone deserves."
+      answer: "The core experience — mood tracking, journaling, daily reflections, community affirmations, and crisis resources — is completely free, forever. No trial that expires. No features that disappear. No lesser experience. Pro unlocks unlimited AI conversations and advanced consciousness tools, but free isn't a teaser — it's the foundation we believe every person deserves access to, regardless of circumstance."
     },
     {
-      question: "What if I stop using it?",
-      answer: "Nothing happens. No guilt notifications. No streak that breaks. No emails asking where you went. Your space stays exactly as you left it — warm, patient, and ready whenever you are. Healing isn't linear, and your tools shouldn't pretend it is."
+      question: "What if I stop using it for a while?",
+      answer: "Your space stays exactly as you left it — warm, patient, unchanged. No guilt notifications. No streak that breaks. No emails wondering where you went. We understand that growth comes in waves, not straight lines. Your companion will be here whenever you return, without judgment, without conditions, ready to continue right where you left off."
     },
     {
       question: "Is this a replacement for therapy?",
-      answer: "No, and we'll never pretend it is. This is an educational wellness companion — a place for self-reflection, pattern recognition, and emotional skill-building. If you're in crisis, we connect you directly to professional help. If you have a therapist, this can complement that work beautifully. If you're not ready for therapy, this is a gentle first step."
+      answer: "No, and we'll always be transparent about that. This is an educational wellness companion — a space for deepening self-awareness, recognizing patterns, and building emotional resilience. If you're in crisis, we connect you directly to professional help immediately. If you have a therapist, this complements that work beautifully. If you're not ready for therapy, this is a gentle, empowering first step toward understanding your own mind."
     }
   ];
 
@@ -378,11 +419,11 @@ export default function CanvaLanding() {
             </h1>
 
             <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
-              An AI companion that understands before it responds
+              An emotionally intelligent companion that understands before it responds
             </p>
 
             <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-10 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.7' }}>
-              Journaling, mood tracking, and AI-guided reflection — built around how you actually feel. No judgment, no pressure, no generic advice. Just a safe space that learns your emotional language and helps you hear yourself more clearly.
+              Journaling, mood awareness, and AI-guided reflection — designed around how your mind actually works. No judgment, no pressure, no generic advice. A safe space that learns your emotional language, senses what you need, and helps you discover the understanding you've been searching for.
             </p>
 
             <div className="safe-space-box max-w-md mx-auto mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
@@ -466,14 +507,14 @@ export default function CanvaLanding() {
           </div>
 
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5" style={{ color: 'var(--glp-sage-deep)' }}>
-            Built for How Healing Actually Works
+            Built for How Your Mind Actually Works
           </h2>
 
           <p 
             className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto mb-4"
             style={{ color: 'var(--glp-ink)' }}
           >
-            Most wellness apps are designed to maximize your screen time. We designed this one to maximize your self-understanding. No streaks to protect, no engagement tricks, no manufactured urgency. Just tools that respect your intelligence and support your pace — because real growth happens when you feel safe enough to be honest with yourself.
+            Most wellness apps are designed to maximize your screen time. We designed this one to maximize your self-awareness. No streaks to protect, no engagement tricks, no manufactured urgency. Just emotionally intelligent tools that respect the complexity of your inner world and support you at your own pace — because real transformation happens when you feel genuinely safe enough to explore what's underneath.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
@@ -522,11 +563,67 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <section id="features" className="py-10 md:py-16 px-4 md:px-6" style={{ background: 'var(--glp-paper)' }}>
+      <section id="philosophy" className="py-12 md:py-20 px-4 md:px-6 relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
+        <div className="aurora-bg" aria-hidden="true"></div>
+        <div className="max-w-[1100px] mx-auto relative z-10">
+          <div className="text-center mb-10 md:mb-14">
+            <span 
+              className="inline-block text-xs md:text-sm font-semibold uppercase tracking-widest mb-4 px-4 py-1.5 rounded-full"
+              style={{ background: 'var(--glp-sage-10)', color: 'var(--glp-sage-deep)', border: '1px solid var(--glp-sage-20)' }}
+              data-testid="badge-philosophy"
+            >
+              Our Philosophy
+            </span>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
+              What We Believe About Your Mind
+            </h2>
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
+              Every design decision, every word our AI speaks, and every tool we build is rooted in a simple truth: you already have the answers. You just need the right conditions to hear them.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-10">
+            {philosophyPillars.map((pillar, index) => {
+              const accent = philosophyAccentColors[pillar.color] || philosophyAccentColors.sage;
+              return (
+                <div key={index} className="philosophy-card" data-testid={`card-philosophy-${index}`}>
+                  <div className="flex items-start gap-4">
+                    <div 
+                      className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+                      style={{ background: accent.bg }}
+                    >
+                      <pillar.icon className="w-5 h-5 text-white" strokeWidth={2} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-lg md:text-xl font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                        {pillar.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+                        {pillar.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="manifesto-quote" data-testid="section-manifesto">
+            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-white text-center" style={{ opacity: 0.95 }}>
+              "We didn't build an app. We built a mirror — one that reflects you back to yourself with more clarity, more compassion, and more truth than you've been shown before."
+            </p>
+            <p className="relative z-10 text-sm font-semibold text-center mt-4 shimmer-text">
+              — The Genuine Love Project
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" className="py-10 md:py-16 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-sage-10) 0%, var(--glp-paper) 30%)' }}>
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              Everything You Need to Feel Heard
+              Everything You Need to Feel Understood
             </h2>
             <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
               Use what resonates. Ignore what doesn't. Nothing here is mandatory — everything here is meaningful.
@@ -612,14 +709,14 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-              Real People, Real Breakthroughs
+              Real People, Real Transformations
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              From people who found something they weren't expecting
+              From people who discovered something they didn't know they were looking for
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index} 
@@ -724,17 +821,17 @@ export default function CanvaLanding() {
         <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-4 md:py-8">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-8 md:py-4 rounded-full bg-white/10 backdrop-blur-sm mb-6 md:mb-10 border border-white/15">
             <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-[var(--glp-gold)]" />
-            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">You've read this far for a reason</span>
+            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">Something brought you here — trust that</span>
           </div>
           
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
-            The Best Time to Start
+            Your Mind Is Ready
             <br />
-            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Is When You Feel Ready</span>
+            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>To Know Itself Better</span>
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
-            Free to start. No credit card. No trial that expires. Your companion is here whenever you are — today, next week, or whenever the moment feels right.
+            Free to start. No credit card. No trial that expires. No pressure to commit. Your emotionally intelligent companion is here whenever you are — patient, present, and ready to listen without conditions.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">
