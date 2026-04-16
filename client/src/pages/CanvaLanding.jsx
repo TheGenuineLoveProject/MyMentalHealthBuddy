@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useLocation } from "wouter";
-import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Sun, Flower2, Brain, Eye, KeyRound, Settings } from "lucide-react";
+import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Brain, KeyRound, Settings } from "lucide-react";
 import "../styles/canva-landing.css";
 import SafetyFooter from "../components/ui/SafetyFooter";
-import SacredBackground, { SacredDivider } from "../components/sacred/SacredBackground";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
 
 export default function CanvaLanding() {
@@ -314,56 +313,31 @@ export default function CanvaLanding() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative py-16 md:py-22 lg:py-28 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
-        {/* Sacred Geometry Background */}
-        <SacredBackground variant="hero" opacity={0.15} />
-        
+      <section id="home" className="relative py-16 md:py-20 lg:py-24 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          {/* Large ambient orbs with drift animation */}
           <div 
-            className="decorative-orb sage animate-drift w-[600px] h-[600px] -top-32 -right-32"
+            className="decorative-orb sage animate-drift w-[500px] h-[500px] -top-32 -right-32"
             style={{ animationDelay: '0s' }}
           />
           <div 
-            className="decorative-orb rose animate-drift w-[500px] h-[500px] -bottom-40 -left-40"
+            className="decorative-orb rose animate-drift w-[400px] h-[400px] -bottom-40 -left-40"
             style={{ animationDelay: '5s' }}
           />
           <div 
-            className="decorative-orb teal animate-drift w-[400px] h-[400px] top-1/4 left-1/4"
-            style={{ animationDelay: '10s' }}
-          />
-          <div 
-            className="decorative-orb gold animate-drift w-[300px] h-[300px] bottom-1/4 right-1/4"
-            style={{ animationDelay: '15s' }}
-          />
-          
-          {/* Central radial glow */}
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full opacity-40"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-30"
             style={{ background: 'radial-gradient(circle, var(--glp-sage-20) 0%, transparent 50%)' }}
           />
           
-          {/* Floating Decorative Icons - Enhanced positioning and variety */}
-          <div className="floating-icon-container top-16 left-[8%] w-14 h-14 rounded-2xl animate-float opacity-70" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', boxShadow: '0 10px 30px var(--glp-sage-40)', animationDelay: '0s' }}>
-            <Leaf className="w-7 h-7 text-white" />
+          <div className="floating-icon-container top-16 left-[8%] w-12 h-12 rounded-xl animate-float opacity-50 hidden md:flex" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '0s' }}>
+            <Leaf className="w-6 h-6 text-white" />
           </div>
-          <div className="floating-icon-container top-24 right-[12%] w-12 h-12 rounded-xl animate-float opacity-60" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 8px 24px var(--glp-rose-30)', animationDelay: '0.7s' }}>
-            <Heart className="w-6 h-6 text-white" />
+          <div className="floating-icon-container top-24 right-[12%] w-10 h-10 rounded-lg animate-float opacity-40 hidden md:flex" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 6px 20px var(--glp-rose-20)', animationDelay: '0.7s' }}>
+            <Heart className="w-5 h-5 text-white" />
           </div>
-          <div className="floating-icon-container bottom-32 left-[6%] w-16 h-16 rounded-2xl animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-teal-500), var(--glp-sage-deep))', boxShadow: '0 12px 36px var(--glp-sage-deep-40)', animationDelay: '1.2s' }}>
-            <Brain className="w-8 h-8 text-white" />
+          <div className="floating-icon-container bottom-32 left-[6%] w-11 h-11 rounded-xl animate-float opacity-40 hidden lg:flex" style={{ background: 'linear-gradient(135deg, var(--glp-teal-500), var(--glp-sage-deep))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '1.2s' }}>
+            <Brain className="w-5 h-5 text-white" />
           </div>
-          <div className="floating-icon-container bottom-20 right-[10%] w-13 h-13 rounded-xl animate-float opacity-55" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '1.8s' }}>
-            <Flower2 className="w-6 h-6 text-white" />
-          </div>
-          <div className="floating-icon-container top-[45%] left-[3%] w-10 h-10 rounded-lg animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 6px 20px var(--glp-gold-30)', animationDelay: '2.3s' }}>
-            <Sun className="w-5 h-5 text-white" />
-          </div>
-          <div className="floating-icon-container top-[30%] right-[4%] w-11 h-11 rounded-xl animate-float opacity-45" style={{ background: 'linear-gradient(135deg, var(--glp-teal-300), var(--glp-teal-500))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '2.8s' }}>
-            <Eye className="w-5 h-5 text-white" />
-          </div>
-          
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -384,7 +358,7 @@ export default function CanvaLanding() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold mb-8 leading-[1.05] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-[1.08] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
               A Private Space
               <br />
               <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-gold), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -393,12 +367,12 @@ export default function CanvaLanding() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl sm:text-2xl md:text-3xl font-serif mb-8 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
+            <p className="text-lg sm:text-xl md:text-2xl font-serif mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
               Wellness tools that respect your pace
             </p>
 
             {/* Description */}
-            <p className="text-lg sm:text-xl md:text-[1.35rem] max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.8' }}>
+            <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.7' }}>
               Most wellness apps want your attention. This one gives it back. Journaling, mood tracking, and AI-assisted reflection — built around how you actually feel, not how a product wants you to engage.
             </p>
 
@@ -412,7 +386,7 @@ export default function CanvaLanding() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-14 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               {!isLoading && isAuthenticated() ? (
                 <Link href="/dashboard">
                   <button
@@ -475,26 +449,26 @@ export default function CanvaLanding() {
       {/* Mission Statement Section */}
       <section 
         id="about" 
-        className="py-16 px-6"
+        className="py-12 px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}
       >
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <div 
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-8 sacred-pulse"
-            style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 30px var(--metallic-gold-glow), inset 0 1px 0 rgba(255,255,255,0.3)', border: '2px solid var(--glp-gold)' }}
+            className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6"
+            style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 20px var(--metallic-gold-glow)' }}
           >
-            <Heart className="w-8 h-8 text-white drop-shadow-sm" aria-hidden="true" />
+            <Heart className="w-7 h-7 text-white" aria-hidden="true" />
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6" style={{ color: 'var(--glp-sage-deep)' }}>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-5" style={{ color: 'var(--glp-sage-deep)' }}>
             Why This Exists
           </h2>
 
           <p 
-            className="text-xl md:text-2xl leading-relaxed font-serif max-w-4xl mx-auto"
+            className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto"
             style={{ color: 'var(--glp-ink)' }}
           >
-            Most wellness apps are built to maximize engagement. This one was built to respect it. There are no streaks to protect, no notifications designed to pull you back, and no punishment for stepping away. The tools here — journaling, mood tracking, guided reflection, AI-assisted conversation — are available when you want them and quiet when you don't.
+            Most wellness apps are built to maximize engagement. This one was built to respect it. No streaks to protect, no notifications pulling you back, no punishment for stepping away. The tools here are available when you want them and quiet when you don't.
           </p>
 
           {/* Values Grid */}
@@ -571,8 +545,6 @@ export default function CanvaLanding() {
           </div>
         </div>
       </section>
-      
-      <SacredDivider icon={Flower2} />
 
       {/* How It Works Section */}
       <section className="py-12 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
@@ -633,8 +605,6 @@ export default function CanvaLanding() {
         className="py-12 px-6 relative overflow-hidden"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-15))' }}
       >
-        <SacredBackground variant="flowerOfLife" opacity={0.08} />
-        
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -682,7 +652,7 @@ export default function CanvaLanding() {
           </div>
 
           {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-4 mt-16">
+          <div className="flex flex-wrap justify-center gap-3 mt-10">
             <div className="trust-badge" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-20)', boxShadow: '0 4px 12px var(--glp-sage-10)' }}>
               <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}>
                 <Lock className="w-3.5 h-3.5" style={{ color: 'var(--glp-sage-deep)' }} />
@@ -709,12 +679,12 @@ export default function CanvaLanding() {
       {/* FAQ Section */}
       <section 
         id="faq" 
-        className="py-16 px-6"
+        className="py-12 px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-sage-10), var(--glp-paper))' }}
       >
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               Frequently Asked Questions
             </h2>
           </div>
@@ -743,24 +713,12 @@ export default function CanvaLanding() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
+      <section className="py-14 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
         <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-8">
-          {/* Lotus Accent */}
-          <div className="w-full flex items-center justify-center mb-10" style={{ position: 'relative' }}>
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '2px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)' }}></div>
-            <div className="relative rounded-full overflow-hidden ring-4 ring-white/20" style={{ width: '120px', height: '120px', background: 'var(--glp-white)', boxShadow: '0 12px 48px rgba(0,0,0,0.25)' }}>
-              <img 
-                src="/brand/footer-wellness-graphic.png" 
-                alt="Lotus flower" 
-                style={{ width: '120px', height: '120px', objectFit: 'cover' }}
-              />
-            </div>
-          </div>
-
           {/* Tagline Badge */}
           <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm mb-10 border border-white/15">
             <Sparkles className="w-5 h-5 text-[var(--glp-gold)]" />
@@ -768,14 +726,14 @@ export default function CanvaLanding() {
           </div>
           
           {/* Main Heading */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 text-white leading-tight text-center">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-5 text-white leading-tight text-center">
             If This Feels
             <br />
             <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px rgba(234, 195, 59, 0.3)' }}>Right, Come In</span>
           </h2>
           
           {/* Subtext */}
-          <p className="text-xl sm:text-2xl md:text-3xl mt-2 mb-14 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
+          <p className="text-lg sm:text-xl md:text-2xl mt-2 mb-10 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
             Free to start. Free to pause. Free to leave. Always here if you come back.
           </p>
           
