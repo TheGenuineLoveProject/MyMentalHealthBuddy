@@ -368,7 +368,7 @@ export default function CanvaLanding() {
         </div>
       </header>
 
-      <section id="home" className="relative py-16 md:py-20 lg:py-28 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
+      <section id="home" className="relative py-14 md:py-16 lg:py-20 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div 
             className="decorative-orb sage animate-drift w-[500px] h-[500px] -top-32 -right-32"
@@ -422,7 +422,7 @@ export default function CanvaLanding() {
               An emotionally intelligent companion that understands before it responds
             </p>
 
-            <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-10 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.7' }}>
+            <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s', lineHeight: '1.7' }}>
               Journaling, mood awareness, and AI-guided reflection — designed around how your mind actually works. No judgment, no pressure, no generic advice. A safe space that learns your emotional language, senses what you need, and helps you discover the understanding you've been searching for.
             </p>
 
@@ -493,9 +493,11 @@ export default function CanvaLanding() {
         </div>
       </section>
 
+      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+
       <section 
         id="about" 
-        className="py-10 md:py-16 px-4 md:px-6"
+        className="py-14 md:py-20 px-4 md:px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}
       >
         <div className="max-w-4xl mx-auto text-center">
@@ -563,7 +565,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <section id="philosophy" className="py-12 md:py-20 px-4 md:px-6 relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
+      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+
+      <section id="philosophy" className="py-14 md:py-24 px-4 md:px-6 relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
         <div className="aurora-bg" aria-hidden="true"></div>
         <div className="max-w-[1100px] mx-auto relative z-10">
           <div className="text-center mb-10 md:mb-14">
@@ -619,7 +623,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <section id="features" className="py-10 md:py-16 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-sage-10) 0%, var(--glp-paper) 30%)' }}>
+      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+
+      <section id="features" className="py-14 md:py-24 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-sage-10) 0%, var(--glp-paper) 30%)' }}>
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -655,9 +661,11 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <section className="py-10 md:py-16 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
+      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+
+      <section className="py-14 md:py-24 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-8 md:mb-14">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               Three Steps to Feeling Understood
             </h2>
@@ -702,8 +710,10 @@ export default function CanvaLanding() {
         </div>
       </section>
 
+      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+
       <section 
-        className="py-10 md:py-16 px-4 md:px-6 relative overflow-hidden"
+        className="py-14 md:py-24 px-4 md:px-6 relative overflow-hidden"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-15))' }}
       >
         <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
@@ -772,9 +782,11 @@ export default function CanvaLanding() {
         </div>
       </section>
 
+      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+
       <section 
         id="faq" 
-        className="py-10 md:py-16 px-6"
+        className="py-14 md:py-24 px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-sage-10), var(--glp-paper))' }}
       >
         <div className="max-w-3xl mx-auto">
@@ -813,7 +825,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
+      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+
+      <section className="py-14 md:py-24 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />

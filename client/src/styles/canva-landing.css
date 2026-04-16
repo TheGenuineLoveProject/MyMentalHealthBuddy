@@ -13,12 +13,12 @@
   
   /* Metallic Gold Gradient */
   --metallic-gold: linear-gradient(90deg, var(--glp-gold-dark), var(--glp-gold));
-  --metallic-gold-glow: rgba(218, 178, 76, 0.35);
-  --metallic-gold-strong: rgba(218, 178, 76, 0.55);
+  --metallic-gold-glow: rgba(212, 168, 64, 0.35);
+  --metallic-gold-strong: rgba(212, 168, 64, 0.55);
   
   /* Sacred Design Tokens */
-  --sacred-glow-soft: 0 0 20px rgba(218, 178, 76, 0.4);
-  --sacred-glow-strong: 0 0 40px rgba(218, 178, 76, 0.6);
+  --sacred-glow-soft: 0 0 20px rgba(212, 168, 64, 0.4);
+  --sacred-glow-strong: 0 0 40px rgba(212, 168, 64, 0.6);
   --sacred-pulse-duration: 4s;
 }
 
@@ -399,11 +399,11 @@
 @keyframes sacred-pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 20px rgba(212, 168, 64, 0.3);
   }
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 40px rgba(212, 168, 64, 0.5);
   }
 }
 
@@ -614,11 +614,11 @@
 
 /* Section divider */
 .canva-landing .section-divider {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--warm-gold), transparent);
-  margin: 48px auto;
-  max-width: 320px;
-  opacity: 0.5;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, var(--glp-sage-30) 30%, var(--warm-gold) 50%, var(--glp-sage-30) 70%, transparent 95%);
+  margin: 0 auto;
+  max-width: 480px;
+  opacity: 0.6;
 }
 
 /* Stats counter */
@@ -1161,11 +1161,11 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(72, 184, 140, 0.08) 0%,
+    rgba(74, 191, 144, 0.08) 0%,
     rgba(22, 61, 61, 0.04) 25%,
-    rgba(218, 178, 76, 0.06) 50%,
+    rgba(212, 168, 64, 0.06) 50%,
     rgba(224, 160, 156, 0.05) 75%,
-    rgba(72, 184, 140, 0.08) 100%
+    rgba(74, 191, 144, 0.08) 100%
   );
   background-size: 400% 400%;
   animation: aurora-drift 20s ease-in-out infinite;
@@ -1174,10 +1174,10 @@
 
 @keyframes awareness-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(72, 184, 140, 0.25), 0 0 0 0 rgba(218, 178, 76, 0.15);
+    box-shadow: 0 0 0 0 rgba(74, 191, 144, 0.25), 0 0 0 0 rgba(212, 168, 64, 0.15);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(72, 184, 140, 0), 0 0 0 20px rgba(218, 178, 76, 0);
+    box-shadow: 0 0 0 12px rgba(74, 191, 144, 0), 0 0 0 20px rgba(212, 168, 64, 0);
   }
 }
 
@@ -1238,8 +1238,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(72, 184, 140, 0.12), transparent 60%),
-              radial-gradient(ellipse at 70% 80%, rgba(218, 178, 76, 0.08), transparent 50%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(74, 191, 144, 0.12), transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(212, 168, 64, 0.08), transparent 50%);
   pointer-events: none;
 }
 
