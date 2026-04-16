@@ -15,12 +15,22 @@ Define the required SEO metadata fields, validation rules, and safety constraint
 |-------|------|----------|-------------|
 | title | string | yes | SEO title, max 70 characters |
 | metaDescription | string | yes | Meta description, 120–160 characters |
-| canonicalUrl | string | yes | Canonical URL for deduplication |
 | ogTitle | string | yes | Open Graph title for social sharing |
 | ogDescription | string | yes | Open Graph description, max 200 characters |
 | ogImage | string | yes | Open Graph image URL, absolute path |
 | robots | string | no | Robots directive, defaults to "index, follow" |
 | schemaType | enum | yes | Schema.org type for JSON-LD structured data |
+
+## canonicalUrl Reference
+
+`canonicalUrl` is defined and owned at the root content-entity level in B1 (CONTENT_MODEL_CONTRACT). It is NOT a field inside the `seo` object.
+
+This contract references `canonicalUrl` for the following purposes:
+- JSON-LD generation uses `canonicalUrl` as the `url` field
+- Open Graph tags use `canonicalUrl` as the `og:url` value
+- Validation rule 4 (uniqueness) applies to the root-level `canonicalUrl`
+
+All canonicalUrl generation, normalization, and uniqueness rules are governed by B1 and B4 (SLUG_CANONICALIZATION_CONTRACT). This contract must not redefine or duplicate those rules.
 
 ## Field Constraints
 
@@ -37,12 +47,6 @@ Define the required SEO metadata fields, validation rules, and safety constraint
 - Must summarize the page content accurately
 - Must not contain false clinical claims
 - Must not use manipulative urgency language
-
-### canonicalUrl
-- Must be a valid absolute or root-relative URL
-- Pattern: `^(https?://|/)[a-z0-9/_-]+$`
-- Must match the content's actual published URL
-- One canonical URL per content item, no duplicates across content
 
 ### ogTitle
 - Max length: 95 characters
@@ -77,10 +81,10 @@ Define the required SEO metadata fields, validation rules, and safety constraint
 
 ## Validation Rules
 
-1. All required fields must be present and non-empty before content status can transition to `approved` (per B3)
+1. All required fields in the seo object must be present and non-empty before content status can transition to `approved` (per B3)
 2. Title must not exceed 70 characters
 3. Meta description must be between 120 and 160 characters
-4. Canonical URL must be unique across all published content
+4. Root-level canonicalUrl (B1) must be unique across all published content
 5. Open Graph image must resolve to a valid image URL
 6. Schema type must be from the allowed enum list
 7. Robots directive must use only valid directives
@@ -97,22 +101,23 @@ Define the required SEO metadata fields, validation rules, and safety constraint
 
 1. Every published content item must generate a valid JSON-LD block
 2. The `@type` field must match the `schemaType` value
-3. Required JSON-LD fields per schema type:
-   - `Article` / `BlogPosting`: headline, description, author, datePublished, dateModified, image, publisher
+3. The `url` field in JSON-LD must use the root-level `canonicalUrl` from B1
+4. Required JSON-LD fields per schema type:
+   - `Article` / `BlogPosting`: headline, description, author, datePublished, dateModified, image, publisher, url
    - `WebPage`: name, description, url
    - `FAQPage`: mainEntity (array of Question/Answer)
    - `HowTo`: name, description, step (array)
    - `MedicalWebPage`: name, description, lastReviewed, specialty (set to "Mental Health Education")
-4. Publisher must reference TheGenuineLoveProject brand entity
-5. Author must reference a valid system user
+5. Publisher must reference TheGenuineLoveProject brand entity
+6. Author must reference a valid system user
 
 ## Dependencies
-- B1 (CONTENT_MODEL_CONTRACT) — this contract defines the `seo` field shape
-- B4 (SLUG_CANONICALIZATION_CONTRACT) — canonical URL generation
+- B1 (CONTENT_MODEL_CONTRACT) — this contract defines the `seo` field shape; canonicalUrl is authoritative at root level in B1
+- B4 (SLUG_CANONICALIZATION_CONTRACT) — canonical URL generation and normalization
 - B7 (CONTENT_QA_CHECKLIST_CONTRACT) — SEO completeness is a pre-publish check
 
 ## Version
-1.0.0
+1.1.0
 
 ## Status
 CANONICAL

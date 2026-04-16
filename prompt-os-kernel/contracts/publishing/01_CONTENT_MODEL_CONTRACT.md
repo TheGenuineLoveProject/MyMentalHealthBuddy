@@ -1,146 +1,71 @@
-# B1 — CONTENT MODEL CONTRACT
+# CONTENT_MODEL_CONTRACT
+Version: 1.1.0
+Status: CANONICAL
+Domain: PLATFORM_DOMAIN
+Contract ID: publishing.content_model.v1
 
-## Contract ID
-CONTENT_MODEL_CONTRACT
+## PURPOSE
+Define the single canonical content entity used across publishing, SEO, blog, newsletter, social distribution, and audit logging.
 
-## Domain
-BUSINESS_DOMAIN / PLATFORM_DOMAIN
+## PRIMARY LAW
+Strict separation:
+- BUSINESS / PLATFORM content ≠ HEALING content
+- No emotional state, therapy data, crisis flows, or monetization logic inside HEALING content
 
-## Purpose
-Define the canonical content entity shape used by all publishing, SEO, distribution, and audit contracts. Every content item in the system must conform to this model.
+## CANONICAL ENTITY
 
-## Canonical Content Entity
+### Required Fields
+id (UUID v4)
+title (5–200 chars)
+slug (canonical, unique)
+summary (20–300 chars)
+body (markdown | sanitized HTML | structured)
+status (enum)
+author (user id)
+domain (enum)
+updatedAt (ISO datetime)
+visibility (enum)
+audit (object)
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| id | string (UUID) | yes | Unique content identifier |
-| title | string | yes | Content title, max 200 characters |
-| slug | string | yes | URL-safe identifier, unique, lowercase, hyphenated |
-| summary | string | yes | Plain-text summary, max 300 characters |
-| body | string | yes | Full content body (markdown or HTML) |
-| status | enum | yes | Publication state: idea, draft, review, approved, scheduled, published, archived |
-| author | string | yes | Author identifier (user ID or display name) |
-| domain | enum | yes | Content domain: HEALING_DOMAIN, BUSINESS_DOMAIN, PLATFORM_DOMAIN, DESIGN_DOMAIN, RESEARCH_DOMAIN |
-| tags | string[] | no | Content tags for classification, max 10 |
-| category | string | no | Primary content category |
-| seo | object | no | SEO metadata (defined in B2 SEO_METADATA_CONTRACT) |
-| publishAt | ISO 8601 datetime | no | Scheduled publish date, null if immediate or not scheduled |
-| updatedAt | ISO 8601 datetime | yes | Last modification timestamp, auto-set |
-| canonicalUrl | string | no | Canonical URL for this content, auto-generated from slug if not set |
-| visibility | enum | yes | Access level: public, subscribers, plan_gated, internal |
-| distribution | object | no | Distribution metadata (defined in B8, B9) |
-| audit | object | yes | Audit trail (defined in B10 PUBLISHING_AUDIT_CONTRACT) |
+### Optional Fields
+tags (max 10)
+category (required before publish)
+seo (required before approved)
+publishAt (ISO datetime, required if scheduled)
+canonicalUrl (required before published)
+distribution (object)
 
-## Field Constraints
+## STATUS ENUM
+idea, draft, review, approved, scheduled, published, archived
 
-### id
-- Format: UUID v4
-- Generated at creation, immutable after
+## DOMAIN ENUM
+HEALING_DOMAIN, BUSINESS_DOMAIN, PLATFORM_DOMAIN, DESIGN_DOMAIN, RESEARCH_DOMAIN
 
-### title
-- Min length: 5 characters
-- Max length: 200 characters
-- Must not be empty or whitespace-only
+## VISIBILITY ENUM
+public, subscribers, plan_gated, internal
 
-### slug
-- Lowercase alphanumeric plus hyphens only
-- Pattern: `^[a-z0-9]+(?:-[a-z0-9]+)*$`
-- Max length: 100 characters
-- Must be unique across all content
-- Canonicalization rules defined in B4
+## VALIDATION RULES
+- All required fields present
+- Slug canonical and unique
+- SEO valid before approval
+- canonicalUrl present before publish
+- Audit object required
+- Status transitions must follow B3
 
-### summary
-- Plain text only, no HTML or markdown
-- Min length: 20 characters
-- Max length: 300 characters
+## DOMAIN SAFETY RULES
+1. HEALING_DOMAIN:
+   - No monetization CTAs
+   - No pricing or conversion links
 
-### body
-- Markdown or sanitized HTML
-- Min length: 100 characters for publishable content
-- No embedded scripts or unsafe tags
+2. BUSINESS_DOMAIN:
+   - Must not appear inside healing flows
 
-### status
-Legal values and transitions defined in B3 (PUBLICATION_STATE_MACHINE_CONTRACT):
-- `idea` — initial capture
-- `draft` — in progress
-- `review` — submitted for review
-- `approved` — passed review
-- `scheduled` — approved with future publish date
-- `published` — live and visible
-- `archived` — removed from active display
+3. SEO:
+   - No manipulation or false clinical authority
 
-### author
-- Must reference a valid user ID in the system
-- Cannot be empty for any status beyond `idea`
+## DEPENDENCIES
+B2, B3, B4, B7, B8, B9, B10
 
-### domain
-- Must be one of: HEALING_DOMAIN, BUSINESS_DOMAIN, PLATFORM_DOMAIN, DESIGN_DOMAIN, RESEARCH_DOMAIN
-- Determines which safety rules apply
-- HEALING_DOMAIN content must not contain monetization, SEO pressure, or conversion logic
-
-### tags
-- Array of strings
-- Max 10 tags per content item
-- Each tag: lowercase, max 50 characters
-
-### category
-- Single primary category
-- Must match a defined category in the content taxonomy
-
-### seo
-- Optional object conforming to B2 (SEO_METADATA_CONTRACT)
-- Required before status can transition to `approved`
-
-### publishAt
-- ISO 8601 format
-- Must be in the future if status is `scheduled`
-- Null for immediate publish or non-scheduled content
-
-### updatedAt
-- Auto-set on every modification
-- ISO 8601 format
-
-### canonicalUrl
-- Auto-generated as `/{category}/{slug}` if not explicitly set
-- Must be a valid relative or absolute URL
-
-### visibility
-- `public` — accessible to all visitors
-- `subscribers` — requires email subscription
-- `plan_gated` — requires active paid plan
-- `internal` — admin/author only
-
-### distribution
-- Optional object, shape defined in B8 and B9
-- Contains newsletter and social distribution metadata
-
-### audit
-- Required object, shape defined in B10
-- Tracks created_by, created_at, updated_by, updated_at, published_by, published_at, version
-
-## Domain Safety Rules
-1. Content with domain `HEALING_DOMAIN` must not contain monetization calls-to-action in body or summary
-2. Content with domain `BUSINESS_DOMAIN` must not appear inside healing user flows
-3. SEO metadata is allowed on all domains but must not use manipulative mental health claims
-4. Tags and categories must not create false clinical authority
-
-## Validation Rules
-1. All required fields must be present and non-empty
-2. Status transitions must follow B3 state machine
-3. Slug must be unique and canonicalized per B4
-4. SEO object must be valid per B2 before `approved` status
-5. Audit object must be present and valid per B10
-
-## Dependencies
-- B2 (SEO_METADATA_CONTRACT) — seo field shape
-- B3 (PUBLICATION_STATE_MACHINE_CONTRACT) — status transitions
-- B4 (SLUG_CANONICALIZATION_CONTRACT) — slug rules
-- B8 (NEWSLETTER_DISTRIBUTION_CONTRACT) — distribution.newsletter shape
-- B9 (SOCIAL_DISTRIBUTION_CONTRACT) — distribution.social shape
-- B10 (PUBLISHING_AUDIT_CONTRACT) — audit field shape
-
-## Version
-1.0.0
-
-## Status
-CANONICAL
+## CHANGE CONTROL
+- Increment version on change
+- Avoid breaking changes without migration
