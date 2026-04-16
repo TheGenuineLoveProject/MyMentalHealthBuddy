@@ -13,12 +13,12 @@
   
   /* Metallic Gold Gradient */
   --metallic-gold: linear-gradient(90deg, var(--glp-gold-dark), var(--glp-gold));
-  --metallic-gold-glow: rgba(201, 149, 46, 0.35);
-  --metallic-gold-strong: rgba(201, 149, 46, 0.55);
+  --metallic-gold-glow: rgba(196, 138, 40, 0.35);
+  --metallic-gold-strong: rgba(196, 138, 40, 0.55);
   
   /* Sacred Design Tokens */
-  --sacred-glow-soft: 0 0 20px rgba(201, 149, 46, 0.4);
-  --sacred-glow-strong: 0 0 40px rgba(201, 149, 46, 0.6);
+  --sacred-glow-soft: 0 0 20px rgba(196, 138, 40, 0.4);
+  --sacred-glow-strong: 0 0 40px rgba(196, 138, 40, 0.6);
   --sacred-pulse-duration: 4s;
 }
 
@@ -377,11 +377,11 @@
 @keyframes sacred-pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 20px rgba(201, 149, 46, 0.3);
+    box-shadow: 0 0 20px rgba(196, 138, 40, 0.3);
   }
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(201, 149, 46, 0.5);
+    box-shadow: 0 0 40px rgba(196, 138, 40, 0.5);
   }
 }
 
@@ -1097,11 +1097,11 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(46, 204, 135, 0.08) 0%,
-    rgba(11, 56, 56, 0.04) 25%,
-    rgba(133, 115, 200, 0.06) 50%,
-    rgba(224, 150, 142, 0.05) 75%,
-    rgba(46, 204, 135, 0.08) 100%
+    rgba(34, 196, 142, 0.08) 0%,
+    rgba(8, 46, 46, 0.04) 25%,
+    rgba(116, 96, 192, 0.06) 50%,
+    rgba(212, 140, 120, 0.05) 75%,
+    rgba(34, 196, 142, 0.08) 100%
   );
   background-size: 400% 400%;
   animation: aurora-drift 20s ease-in-out infinite;
@@ -1110,10 +1110,10 @@
 
 @keyframes awareness-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(46, 204, 135, 0.25), 0 0 0 0 rgba(133, 115, 200, 0.15);
+    box-shadow: 0 0 0 0 rgba(34, 196, 142, 0.25), 0 0 0 0 rgba(116, 96, 192, 0.15);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(46, 204, 135, 0), 0 0 0 20px rgba(133, 115, 200, 0);
+    box-shadow: 0 0 0 12px rgba(34, 196, 142, 0), 0 0 0 20px rgba(116, 96, 192, 0);
   }
 }
 
@@ -1174,8 +1174,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(54, 179, 126, 0.12), transparent 60%),
-              radial-gradient(ellipse at 70% 80%, rgba(124, 111, 189, 0.08), transparent 50%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(34, 196, 142, 0.12), transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(116, 96, 192, 0.08), transparent 50%);
   pointer-events: none;
 }
 

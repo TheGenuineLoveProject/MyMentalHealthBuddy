@@ -1,84 +1,84 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3dd896"/>
-      <stop offset="20%" stop-color="#28b87a"/>
-      <stop offset="55%" stop-color="#145050"/>
-      <stop offset="100%" stop-color="#0a3535"/>
+      <stop offset="0%" stop-color="#38d49e"/>
+      <stop offset="18%" stop-color="#22c48e"/>
+      <stop offset="50%" stop-color="#0f5050"/>
+      <stop offset="100%" stop-color="#082e2e"/>
     </linearGradient>
-    <radialGradient id="bg-shine" cx="25%" cy="18%" r="65%">
-      <stop offset="0%" stop-color="#78ecc0" stop-opacity="0.15"/>
-      <stop offset="45%" stop-color="#28b87a" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#0a3535" stop-opacity="0"/>
+    <radialGradient id="bg-shine" cx="22%" cy="15%" r="60%">
+      <stop offset="0%" stop-color="#72ecc0" stop-opacity="0.18"/>
+      <stop offset="40%" stop-color="#22c48e" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bg-violet" cx="75%" cy="78%" r="38%">
-      <stop offset="0%" stop-color="#7d6bc4" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#0a3535" stop-opacity="0"/>
+    <radialGradient id="bg-violet" cx="78%" cy="80%" r="40%">
+      <stop offset="0%" stop-color="#7460c0" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bg-gold-ambient" cx="50%" cy="55%" r="35%">
-      <stop offset="0%" stop-color="#c9952e" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#0a3535" stop-opacity="0"/>
+    <radialGradient id="bg-gold-ambient" cx="50%" cy="52%" r="38%">
+      <stop offset="0%" stop-color="#c48a28" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
     </radialGradient>
 
     <radialGradient id="glow-heart" cx="50%" cy="56%" r="30%">
-      <stop offset="0%" stop-color="#ffe0a0" stop-opacity="0.65"/>
-      <stop offset="25%" stop-color="#c9952e" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#0a3535" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ffe0a0" stop-opacity="0.68"/>
+      <stop offset="25%" stop-color="#c48a28" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-core" cx="50%" cy="56%" r="12%">
       <stop offset="0%" stop-color="#fffae4" stop-opacity="0.98"/>
-      <stop offset="35%" stop-color="#ffd460" stop-opacity="0.70"/>
-      <stop offset="100%" stop-color="#c9952e" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#ffd460" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#c48a28" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-crown" cx="50%" cy="20%" r="28%">
-      <stop offset="0%" stop-color="#b8a8e8" stop-opacity="0.20"/>
-      <stop offset="45%" stop-color="#7d6bc4" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#0a3535" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#b0a0e0" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#7460c0" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-halo" cx="50%" cy="25%" r="20%">
-      <stop offset="0%" stop-color="#ffe498" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#c9952e" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ffe498" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#c48a28" stop-opacity="0"/>
     </radialGradient>
 
     <radialGradient id="head-fill" cx="42%" cy="32%" r="58%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
-      <stop offset="35%" stop-color="#d0f0e4" stop-opacity="0.96"/>
-      <stop offset="75%" stop-color="#88d8b8" stop-opacity="0.88"/>
-      <stop offset="100%" stop-color="#58c8a0" stop-opacity="0.72"/>
+      <stop offset="30%" stop-color="#ccf0e2" stop-opacity="0.96"/>
+      <stop offset="70%" stop-color="#82d8b4" stop-opacity="0.90"/>
+      <stop offset="100%" stop-color="#50c49c" stop-opacity="0.75"/>
     </radialGradient>
 
     <linearGradient id="body-fill" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#e0f6ec" stop-opacity="0.96"/>
-      <stop offset="20%" stop-color="#a8e4c8" stop-opacity="0.82"/>
-      <stop offset="55%" stop-color="#60c4a0" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#28b87a" stop-opacity="0.15"/>
+      <stop offset="0%" stop-color="#dcf4ea" stop-opacity="0.96"/>
+      <stop offset="18%" stop-color="#a0e4c4" stop-opacity="0.84"/>
+      <stop offset="50%" stop-color="#58c09c" stop-opacity="0.58"/>
+      <stop offset="100%" stop-color="#22c48e" stop-opacity="0.16"/>
     </linearGradient>
     <linearGradient id="arm-l" x1="88%" y1="8%" x2="12%" y2="92%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
-      <stop offset="45%" stop-color="#b0e8d0" stop-opacity="0.65"/>
-      <stop offset="100%" stop-color="#60b490" stop-opacity="0.20"/>
+      <stop offset="45%" stop-color="#a8e8cc" stop-opacity="0.68"/>
+      <stop offset="100%" stop-color="#58b48c" stop-opacity="0.22"/>
     </linearGradient>
     <linearGradient id="arm-r" x1="12%" y1="8%" x2="88%" y2="92%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.88"/>
-      <stop offset="45%" stop-color="#b0e8d0" stop-opacity="0.60"/>
-      <stop offset="100%" stop-color="#60b490" stop-opacity="0.18"/>
+      <stop offset="45%" stop-color="#a8e8cc" stop-opacity="0.62"/>
+      <stop offset="100%" stop-color="#58b48c" stop-opacity="0.20"/>
     </linearGradient>
 
     <linearGradient id="arc-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#78ecc0" stop-opacity="0.32"/>
-      <stop offset="100%" stop-color="#28b87a" stop-opacity="0.08"/>
+      <stop offset="0%" stop-color="#72ecc0" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#22c48e" stop-opacity="0.08"/>
     </linearGradient>
     <linearGradient id="arc-violet" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a090d8" stop-opacity="0.30"/>
-      <stop offset="100%" stop-color="#7d6bc4" stop-opacity="0.06"/>
+      <stop offset="0%" stop-color="#9888d4" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#7460c0" stop-opacity="0.06"/>
     </linearGradient>
     <linearGradient id="arc-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c9952e" stop-opacity="0.24"/>
+      <stop offset="0%" stop-color="#c48a28" stop-opacity="0.26"/>
       <stop offset="100%" stop-color="#ffe0a0" stop-opacity="0.06"/>
     </linearGradient>
     <linearGradient id="arc-rose" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#d99585" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#d99585" stop-opacity="0.04"/>
+      <stop offset="0%" stop-color="#d48c78" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#d48c78" stop-opacity="0.04"/>
     </linearGradient>
 
     <filter id="soft-body" x="-5%" y="-5%" width="110%" height="110%">
@@ -118,7 +118,7 @@
   <rect width="512" height="512" rx="108" fill="url(#bg-violet)"/>
   <rect width="512" height="512" rx="108" fill="url(#bg-gold-ambient)"/>
 
-  <g filter="url(#arc-blur)" opacity="0.38">
+  <g filter="url(#arc-blur)" opacity="0.40">
     <circle cx="256" cy="285" r="160" fill="none" stroke="url(#arc-emerald)" stroke-width="1.2" stroke-dasharray="5 16"/>
     <circle cx="256" cy="288" r="135" fill="none" stroke="url(#arc-emerald)" stroke-width="1.8"/>
     <circle cx="256" cy="290" r="112" fill="none" stroke="url(#arc-violet)" stroke-width="1.4"/>
@@ -126,7 +126,7 @@
     <path d="M168,378 A120,88 0 0,0 344,378" fill="none" stroke="url(#arc-emerald)" stroke-width="0.9"/>
   </g>
 
-  <g filter="url(#arc-blur)" opacity="0.28">
+  <g filter="url(#arc-blur)" opacity="0.30">
     <path d="M130,190 A150,150 0 0,1 382,190" fill="none" stroke="url(#arc-gold)" stroke-width="1.8" stroke-linecap="round"/>
     <path d="M180,388 A110,68 0 0,0 332,388" fill="none" stroke="url(#arc-rose)" stroke-width="1.2"/>
     <circle cx="256" cy="270" r="180" fill="none" stroke="url(#arc-violet)" stroke-width="0.8" stroke-dasharray="3 20"/>
@@ -148,8 +148,8 @@
     <path d="M278,210 C294,216 311,232 322,256 C332,280 334,304 326,320 C317,336 304,340 292,334 C281,328 274,314 272,298 C270,284 272,266 274,250 C276,236 278,222 278,210Z" fill="url(#arm-r)"/>
   </g>
 
-  <g opacity="0.30" filter="url(#soft-body)">
-    <path d="M228,364 C238,376 248,382 256,384 C264,382 274,376 284,364 C294,350 302,336 306,322 L256,340 L206,322 C210,336 218,350 228,364Z" fill="rgba(255,255,255,0.42)"/>
+  <g opacity="0.32" filter="url(#soft-body)">
+    <path d="M228,364 C238,376 248,382 256,384 C264,382 274,376 284,364 C294,350 302,336 306,322 L256,340 L206,322 C210,336 218,350 228,364Z" fill="rgba(255,255,255,0.44)"/>
   </g>
 
   <g filter="url(#soft-head)">
@@ -157,50 +157,50 @@
   </g>
 
   <g filter="url(#eye-glow)">
-    <circle cx="242" cy="145" r="6" fill="rgba(255,255,255,0.15)"/>
-    <circle cx="268" cy="148" r="5" fill="rgba(255,255,255,0.12)"/>
+    <circle cx="242" cy="145" r="6" fill="rgba(255,255,255,0.16)"/>
+    <circle cx="268" cy="148" r="5" fill="rgba(255,255,255,0.13)"/>
   </g>
-  <circle cx="242" cy="145" r="5.2" fill="rgba(255,255,255,0.58)"/>
-  <circle cx="268" cy="148" r="3.8" fill="rgba(255,255,255,0.40)"/>
-  <circle cx="241" cy="143" r="1.8" fill="rgba(255,255,255,0.85)"/>
-  <circle cx="267" cy="146" r="1.2" fill="rgba(255,255,255,0.70)"/>
+  <circle cx="242" cy="145" r="5.2" fill="rgba(255,255,255,0.60)"/>
+  <circle cx="268" cy="148" r="3.8" fill="rgba(255,255,255,0.42)"/>
+  <circle cx="241" cy="143" r="1.8" fill="rgba(255,255,255,0.88)"/>
+  <circle cx="267" cy="146" r="1.2" fill="rgba(255,255,255,0.72)"/>
 
-  <path d="M242,168 Q255,177 268,169" fill="none" stroke="rgba(255,255,255,0.48)" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M246,171 Q255,175 264,172" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M242,168 Q255,177 268,169" fill="none" stroke="rgba(255,255,255,0.50)" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M246,171 Q255,175 264,172" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.4" stroke-linecap="round"/>
 
-  <ellipse cx="256" cy="298" rx="32" ry="30" fill="#fffce4" opacity="0.88" filter="url(#bloom-h)"/>
-  <ellipse cx="256" cy="298" rx="18" ry="17" fill="#fff8d4" opacity="0.95"/>
+  <ellipse cx="256" cy="298" rx="32" ry="30" fill="#fffce4" opacity="0.90" filter="url(#bloom-h)"/>
+  <ellipse cx="256" cy="298" rx="18" ry="17" fill="#fff8d4" opacity="0.96"/>
   <ellipse cx="256" cy="298" rx="9" ry="8" fill="#ffffff" opacity="0.98"/>
   <circle cx="256" cy="297" r="3.5" fill="#ffffff"/>
 
-  <g opacity="0.35" filter="url(#particle-glow)">
-    <circle cx="162" cy="162" r="3.4" fill="#78ecc0"/>
-    <circle cx="352" cy="178" r="2.8" fill="#88ecc8"/>
-    <circle cx="140" cy="295" r="2.6" fill="#78dcb0"/>
-    <circle cx="375" cy="315" r="3.2" fill="#88e4c0"/>
-    <circle cx="185" cy="415" r="2.4" fill="#70d4a0"/>
-    <circle cx="335" cy="425" r="2.6" fill="#80dcb4"/>
-    <circle cx="125" cy="235" r="2.0" fill="#c9952e"/>
-    <circle cx="388" cy="245" r="2.2" fill="#c9952e"/>
-    <circle cx="195" cy="132" r="1.8" fill="#d99585"/>
-    <circle cx="318" cy="122" r="2.0" fill="#d99585"/>
-    <circle cx="256" cy="90" r="2.4" fill="#b8a8e8"/>
-    <circle cx="175" cy="95" r="1.6" fill="#a090d8"/>
-    <circle cx="335" cy="100" r="1.4" fill="#a090d8"/>
-    <circle cx="215" cy="435" r="1.8" fill="#90e4c8"/>
-    <circle cx="295" cy="440" r="1.6" fill="#88dcc0"/>
+  <g opacity="0.38" filter="url(#particle-glow)">
+    <circle cx="162" cy="162" r="3.4" fill="#72ecc0"/>
+    <circle cx="352" cy="178" r="2.8" fill="#82ecc4"/>
+    <circle cx="140" cy="295" r="2.6" fill="#72dcac"/>
+    <circle cx="375" cy="315" r="3.2" fill="#82e4bc"/>
+    <circle cx="185" cy="415" r="2.4" fill="#6cd49c"/>
+    <circle cx="335" cy="425" r="2.6" fill="#7adcb0"/>
+    <circle cx="125" cy="235" r="2.0" fill="#c48a28"/>
+    <circle cx="388" cy="245" r="2.2" fill="#c48a28"/>
+    <circle cx="195" cy="132" r="1.8" fill="#d48c78"/>
+    <circle cx="318" cy="122" r="2.0" fill="#d48c78"/>
+    <circle cx="256" cy="90" r="2.4" fill="#b0a0e0"/>
+    <circle cx="175" cy="95" r="1.6" fill="#9888d4"/>
+    <circle cx="335" cy="100" r="1.4" fill="#9888d4"/>
+    <circle cx="215" cy="435" r="1.8" fill="#88e4c4"/>
+    <circle cx="295" cy="440" r="1.6" fill="#82dcc0"/>
   </g>
 
-  <g opacity="0.22">
-    <circle cx="175" cy="175" r="2.8" fill="#98f0d4"/>
-    <circle cx="345" cy="188" r="2.4" fill="#88ecc0"/>
-    <circle cx="148" cy="305" r="2.0" fill="#78dcb0"/>
-    <circle cx="365" cy="335" r="2.6" fill="#88e4c0"/>
-    <circle cx="195" cy="400" r="1.8" fill="#70d4a0"/>
-    <circle cx="325" cy="410" r="2.2" fill="#80dcb4"/>
-    <circle cx="135" cy="176" r="1.4" fill="#a898d8"/>
-    <circle cx="378" cy="168" r="1.2" fill="#9888c8"/>
-    <circle cx="218" cy="82" r="1.0" fill="#d0c0e8"/>
-    <circle cx="294" cy="78" r="0.8" fill="#c8b8e0"/>
+  <g opacity="0.24">
+    <circle cx="175" cy="175" r="2.8" fill="#90f0d0"/>
+    <circle cx="345" cy="188" r="2.4" fill="#82ecc0"/>
+    <circle cx="148" cy="305" r="2.0" fill="#72dcac"/>
+    <circle cx="365" cy="335" r="2.6" fill="#82e4bc"/>
+    <circle cx="195" cy="400" r="1.8" fill="#6cd49c"/>
+    <circle cx="325" cy="410" r="2.2" fill="#7adcb0"/>
+    <circle cx="135" cy="176" r="1.4" fill="#a090d4"/>
+    <circle cx="378" cy="168" r="1.2" fill="#9080c4"/>
+    <circle cx="218" cy="82" r="1.0" fill="#c8b8e4"/>
+    <circle cx="294" cy="78" r="0.8" fill="#c0b0dc"/>
   </g>
 </svg>

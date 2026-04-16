@@ -17,51 +17,51 @@
     visual language that draws the visitor inward and holds them
     in a state of calm, empowered awareness.
 
-    Color Psychology Map:
-    • Living Emerald (#28b87a) — Grounded vitality, wise growth, calming renewal
-    • Abyssal Wisdom (#0a3535) — Hypnotic depth, grounding trust, deep knowing
-    • Luminous Pearl (#fefaf5) — Sacred warmth, soft luminosity, welcoming embrace
-    • Wisdom Ink (#192c2c) — Quiet intelligence, gentle authority, grounded presence
-    • Amber Radiance (#c9952e) — Inner light, warm confidence, joyful encouragement
-    • Compassion Bloom (#d99585) — Unconditional love, tender warmth, heart connection
-    • Consciousness Amethyst (#7d6bc4) — Expanded awareness, intuition, deeper seeing
+    Color Psychology Map (Evolved — Enterprise Elite):
+    • Luminous Sage (#22c48e) — Alive, radiant growth; calm vitality; sensory magnetism
+    • Abyssal Wisdom (#082e2e) — Hypnotic depth, infinite trust, grounding mystery
+    • Sacred Pearl (#fdf8f0) — Warm sanctuary light, luminous safety, gentle embrace
+    • Wisdom Ink (#172a2a) — Quiet authority, deep knowing, intelligent presence
+    • Liquid Amber (#c48a28) — Molten confidence, warm radiance, inner power
+    • Heart Rose (#d48c78) — Tender compassion, unconditional warmth, loving kindness
+    • Consciousness Violet (#7460c0) — Expanded perception, intuitive depth, awakened seeing
   ------------------------------------------------------------ */
-  --glp-sage: #28b87a;          /* Living Emerald — grounded vitality, wise growth */
-  --glp-blush: #d99585;         /* Compassion Bloom — unconditional love, heart warmth */
-  --glp-rose: #d99585;          /* Alias for blush */
-  --glp-sage-deep: #0a3535;     /* Abyssal Wisdom — hypnotic depth, grounding trust */
-  --glp-paper: #fefaf5;         /* Luminous Pearl — sacred warmth, welcoming embrace */
-  --glp-ink: #192c2c;           /* Wisdom Ink — quiet intelligence, gentle authority */
-  --glp-gold: #c9952e;          /* Amber Radiance — inner light, warm confidence */
-  --glp-gold-dark: #a87d24;     /* Deep Amber — rich depth, grounded wisdom */
-  --glp-violet: #7d6bc4;        /* Consciousness Amethyst — expanded awareness, intuition */
-  --glp-violet-dark: #6558a8;   /* Deep Amethyst — profound perception */
+  --glp-sage: #22c48e;          /* Luminous Sage — alive radiant growth, calm vitality */
+  --glp-blush: #d48c78;         /* Heart Rose — tender compassion, unconditional warmth */
+  --glp-rose: #d48c78;          /* Alias for blush */
+  --glp-sage-deep: #082e2e;     /* Abyssal Wisdom — hypnotic depth, infinite trust */
+  --glp-paper: #fdf8f0;         /* Sacred Pearl — warm sanctuary light, gentle embrace */
+  --glp-ink: #172a2a;           /* Wisdom Ink — quiet authority, intelligent presence */
+  --glp-gold: #c48a28;          /* Liquid Amber — molten confidence, warm radiance */
+  --glp-gold-dark: #a37420;     /* Deep Amber — rich depth, grounded wisdom */
+  --glp-violet: #7460c0;        /* Consciousness Violet — expanded perception, awakened seeing */
+  --glp-violet-dark: #6050a8;   /* Deep Violet — profound intuition */
 
   /* Opacity variants for UI components */
-  --glp-sage-10: rgba(40, 184, 122, 0.1);
-  --glp-sage-15: rgba(40, 184, 122, 0.15);
-  --glp-sage-20: rgba(40, 184, 122, 0.2);
-  --glp-sage-30: rgba(40, 184, 122, 0.3);
-  --glp-sage-40: rgba(40, 184, 122, 0.4);
-  --glp-rose-10: rgba(217, 149, 133, 0.1);
-  --glp-rose-15: rgba(217, 149, 133, 0.15);
-  --glp-rose-20: rgba(217, 149, 133, 0.2);
-  --glp-rose-30: rgba(217, 149, 133, 0.3);
-  --glp-gold-10: rgba(201, 149, 46, 0.1);
-  --glp-gold-15: rgba(201, 149, 46, 0.15);
-  --glp-gold-20: rgba(201, 149, 46, 0.2);
-  --glp-gold-30: rgba(201, 149, 46, 0.3);
-  --glp-gold-60: rgba(201, 149, 46, 0.6);
-  --glp-violet-10: rgba(125, 107, 196, 0.1);
-  --glp-violet-20: rgba(125, 107, 196, 0.2);
-  --glp-violet-30: rgba(125, 107, 196, 0.3);
-  --glp-sage-deep-12: rgba(10, 53, 53, 0.12);
-  --glp-sage-deep-20: rgba(10, 53, 53, 0.2);
-  --glp-sage-deep-30: rgba(10, 53, 53, 0.3);
-  --glp-sage-deep-40: rgba(10, 53, 53, 0.4);
-  --glp-paper-70: rgba(254, 250, 245, 0.7);
-  --glp-paper-95: rgba(254, 250, 245, 0.95);
-  --glp-paper-98: rgba(254, 250, 245, 0.98);
+  --glp-sage-10: rgba(34, 196, 142, 0.1);
+  --glp-sage-15: rgba(34, 196, 142, 0.15);
+  --glp-sage-20: rgba(34, 196, 142, 0.2);
+  --glp-sage-30: rgba(34, 196, 142, 0.3);
+  --glp-sage-40: rgba(34, 196, 142, 0.4);
+  --glp-rose-10: rgba(212, 140, 120, 0.1);
+  --glp-rose-15: rgba(212, 140, 120, 0.15);
+  --glp-rose-20: rgba(212, 140, 120, 0.2);
+  --glp-rose-30: rgba(212, 140, 120, 0.3);
+  --glp-gold-10: rgba(196, 138, 40, 0.1);
+  --glp-gold-15: rgba(196, 138, 40, 0.15);
+  --glp-gold-20: rgba(196, 138, 40, 0.2);
+  --glp-gold-30: rgba(196, 138, 40, 0.3);
+  --glp-gold-60: rgba(196, 138, 40, 0.6);
+  --glp-violet-10: rgba(116, 96, 192, 0.1);
+  --glp-violet-20: rgba(116, 96, 192, 0.2);
+  --glp-violet-30: rgba(116, 96, 192, 0.3);
+  --glp-sage-deep-12: rgba(8, 46, 46, 0.12);
+  --glp-sage-deep-20: rgba(8, 46, 46, 0.2);
+  --glp-sage-deep-30: rgba(8, 46, 46, 0.3);
+  --glp-sage-deep-40: rgba(8, 46, 46, 0.4);
+  --glp-paper-70: rgba(253, 248, 240, 0.7);
+  --glp-paper-95: rgba(253, 248, 240, 0.95);
+  --glp-paper-98: rgba(253, 248, 240, 0.98);
   --glp-overlay-50: rgba(0, 0, 0, 0.5);
   --glp-white-40: rgba(255, 255, 255, 0.4);
   --glp-white-80: rgba(255, 255, 255, 0.8);
@@ -73,53 +73,53 @@
   --glp-gold-gradient: linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark));
   --glp-gold-shadow: 0 4px 16px var(--glp-gold-30);
 
-  /* Extended teal palette — Wisdom & Deep Safety spectrum */
-  --glp-teal-50: #e3f2f2;
-  --glp-teal-100: #bbdede;
-  --glp-teal-200: #86c2c2;
-  --glp-teal-300: #4ca1a1;
-  --glp-teal-400: #267575;
-  --glp-teal-500: #135050;
-  --glp-teal-600: #0f4444;
-  --glp-teal-700: #0a3535;
-  --glp-teal-800: #072828;
-  --glp-teal-900: #041a1a;
+  /* Extended teal palette — Abyssal Wisdom spectrum */
+  --glp-teal-50: #e0f2f0;
+  --glp-teal-100: #b0ddd8;
+  --glp-teal-200: #78c0b8;
+  --glp-teal-300: #429e96;
+  --glp-teal-400: #1e7270;
+  --glp-teal-500: #0f5050;
+  --glp-teal-600: #0c4242;
+  --glp-teal-700: #082e2e;
+  --glp-teal-800: #052222;
+  --glp-teal-900: #031616;
 
-  /* Extended gold palette — Amber Radiance spectrum */
-  --glp-gold-50: #fbf5e8;
-  --glp-gold-100: #f3e3c0;
-  --glp-gold-200: #e8cc8e;
-  --glp-gold-300: #dbb45c;
-  --glp-gold-400: #c9952e;
-  --glp-gold-500: #a87d24;
-  --glp-gold-600: #8a671c;
-  --glp-gold-700: #6c5016;
-  --glp-gold-800: #503c10;
-  --glp-gold-900: #34280a;
+  /* Extended gold palette — Liquid Amber spectrum */
+  --glp-gold-50: #faf4e6;
+  --glp-gold-100: #f0e0ba;
+  --glp-gold-200: #e4c88a;
+  --glp-gold-300: #d8ae58;
+  --glp-gold-400: #c48a28;
+  --glp-gold-500: #a37420;
+  --glp-gold-600: #856018;
+  --glp-gold-700: #674a12;
+  --glp-gold-800: #4c380e;
+  --glp-gold-900: #302408;
 
-  /* Extended sage palette — Living Emerald spectrum */
-  --glp-sage-50: #e5f8ee;
-  --glp-sage-100: #beefd7;
-  --glp-sage-200: #8ce4b8;
-  --glp-sage-300: #58d89a;
-  --glp-sage-400: #28b87a;
-  --glp-sage-500: #229c68;
-  --glp-sage-600: #1b7f54;
-  --glp-sage-700: #146140;
-  --glp-sage-800: #0e432d;
-  --glp-sage-900: #072519;
+  /* Extended sage palette — Luminous Sage spectrum */
+  --glp-sage-50: #e2f9f0;
+  --glp-sage-100: #b5f0d8;
+  --glp-sage-200: #82e5bc;
+  --glp-sage-300: #50d8a2;
+  --glp-sage-400: #22c48e;
+  --glp-sage-500: #1ca678;
+  --glp-sage-600: #168862;
+  --glp-sage-700: #106a4c;
+  --glp-sage-800: #0a4c36;
+  --glp-sage-900: #052e20;
 
-  /* Extended blush palette — Compassion & Heart spectrum */
-  --glp-blush-50: #faf0ee;
-  --glp-blush-100: #f2dbd6;
-  --glp-blush-200: #e6b8b0;
-  --glp-blush-300: #d99585;
-  --glp-blush-400: #cb7c6e;
-  --glp-blush-500: #bc6357;
-  --glp-blush-600: #a5504a;
-  --glp-blush-700: #893e38;
-  --glp-blush-800: #70302c;
-  --glp-blush-900: #52201e;
+  /* Extended blush palette — Heart Rose spectrum */
+  --glp-blush-50: #f9eee9;
+  --glp-blush-100: #f0d6ce;
+  --glp-blush-200: #e4b5a8;
+  --glp-blush-300: #d48c78;
+  --glp-blush-400: #c47464;
+  --glp-blush-500: #b25c50;
+  --glp-blush-600: #9c4a42;
+  --glp-blush-700: #823a34;
+  --glp-blush-800: #682e28;
+  --glp-blush-900: #4e201c;
 
   /* Shorthand aliases for utilities (teal/gold/sage/blush) */
   --teal-50: var(--glp-teal-50);
@@ -166,14 +166,14 @@
   --blush-800: var(--glp-blush-800);
   --blush-900: var(--glp-blush-900);
 
-  /* RGB helpers (for rgba(var(--x-rgb), a)) */
-  --glp-sage-rgb: 46, 204, 135;       /* #2ecc87 */
-  --glp-sage-deep-rgb: 11, 56, 56;    /* #0b3838 */
-  --glp-blush-rgb: 224, 150, 142;     /* #e0968e */
-  --glp-paper-rgb: 253, 249, 243;     /* #fdf9f3 */
-  --glp-ink-rgb: 26, 46, 46;          /* #1a2e2e */
-  --glp-gold-rgb: 212, 160, 53;       /* #d4a035 */
-  --glp-violet-rgb: 133, 115, 200;    /* #8573c8 */
+  /* RGB helpers (for rgba(var(--x-rgb), a)) — synced to Enterprise Elite palette */
+  --glp-sage-rgb: 34, 196, 142;       /* #22c48e */
+  --glp-sage-deep-rgb: 8, 46, 46;     /* #082e2e */
+  --glp-blush-rgb: 212, 140, 120;     /* #d48c78 */
+  --glp-paper-rgb: 253, 248, 240;     /* #fdf8f0 */
+  --glp-ink-rgb: 23, 42, 42;          /* #172a2a */
+  --glp-gold-rgb: 196, 138, 40;       /* #c48a28 */
+  --glp-violet-rgb: 116, 96, 192;     /* #7460c0 */
 
   /* ------------------------------------------------------------
     Semantic tokens (use these everywhere in new code)
@@ -197,14 +197,14 @@
   /* Shorthand semantic aliases */
   --bg: var(--glp-paper);
   --text-1: var(--glp-ink);
-  --text-2: rgba(24, 40, 40, 0.72);
+  --text-2: rgba(var(--glp-ink-rgb), 0.72);
   --surface-1: #FFFFFF;
-  --surface-2: rgba(250, 248, 244, 0.70);
+  --surface-2: rgba(253, 248, 240, 0.70);
   --primary: var(--glp-sage-deep);
   --primary-contrast: var(--glp-paper);
   --accent: var(--glp-gold);
   --ring: var(--glp-gold);
-  --border: rgba(24, 40, 40, 0.12);
+  --border: rgba(var(--glp-ink-rgb), 0.12);
 
   /* Radius tokens */
   --glp-radius-1: 12px;

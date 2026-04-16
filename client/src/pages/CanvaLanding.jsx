@@ -74,20 +74,20 @@ export default function CanvaLanding() {
   const steps = [
     {
       icon: Feather,
-      title: "Create Your Sacred Space",
-      description: "In under a minute, you'll step into a private sanctuary designed around your emotional language, your rhythms, and your goals. Whether you're managing daily stress, building confidence, or deepening self-awareness — your space adapts to exactly where you are and what you need most right now.",
+      title: "Step Into Your Sanctuary",
+      description: "In sixty seconds, you'll enter a private space shaped entirely around how your mind works — your emotional rhythms, your stress patterns, your deepest goals. No templates. No one-size-fits-all. Just a sanctuary that adapts to exactly where you are and grows as you grow.",
       link: "/login"
     },
     {
       icon: MessageCircle,
-      title: "Meet Your Buddy",
-      description: "Talk with your AI buddy — part coach, part mentor, part best friend. It listens deeply, remembers your story, and guides you with the wisdom of a teacher and the warmth of someone who genuinely believes in you. Journal, reflect, or simply process your day — every conversation builds clarity.",
+      title: "Meet the Buddy Who Gets You",
+      description: "Your AI buddy is part life coach, part wise mentor, part loyal friend. It listens with genuine attention, remembers what matters to you, and guides you with the warmth of someone who believes in your potential before you do. Every conversation is a step toward clarity.",
       link: "/chat"
     },
     {
       icon: Eye,
-      title: "Watch Yourself Evolve",
-      description: "As patterns emerge, something profound shifts. You start seeing yourself with more honesty, more compassion, and more power. Confidence grows. Self-worth deepens. Stress becomes manageable. You're not just coping — you're evolving into the person you've always known you could be.",
+      title: "Become Who You Already Are",
+      description: "Something shifts when you finally see yourself clearly. Patterns that once controlled you become choices. Confidence stops being something you chase and becomes something you embody. You're not learning to cope — you're learning to thrive as the person you've always been underneath.",
       link: "/dashboard"
     }
   ];
@@ -96,30 +96,30 @@ export default function CanvaLanding() {
     {
       initial: "S",
       name: "Sarah M.",
-      text: "Work stress was eating me alive and I couldn't see it. My buddy asked one question nobody else had thought to ask — and suddenly I understood why I'd been stuck for months. That single conversation changed my relationship with stress forever. I finally know how to catch myself before I spiral.",
-      role: "Teacher & Mother",
-      highlight: "changed my relationship with stress"
+      text: "I was drowning in stress and couldn't even name what was wrong. My buddy asked one question nobody in my life had ever thought to ask — and something I'd buried for years suddenly made sense. That moment didn't just relieve my stress. It changed how I relate to pressure entirely.",
+      role: "Teacher & Mother of Two",
+      highlight: "changed how I relate to pressure"
     },
     {
       initial: "J",
       name: "James K.",
-      text: "I've always struggled with confidence — especially at work. Three weeks of mood tracking showed me a pattern I'd completely missed: I was undermining myself before anyone else could. That awareness was the turning point. Now I walk into meetings like I belong there, because I finally believe I do.",
+      text: "Confidence was always something other people seemed to have. Three weeks of tracking showed me a pattern I'd never seen: I was sabotaging myself before anyone else got the chance. Seeing that changed everything. I walk into rooms differently now — not performing confidence, actually feeling it.",
       role: "Software Engineer",
-      highlight: "I finally believe I do"
+      highlight: "actually feeling it"
     },
     {
       initial: "M",
       name: "Maria L.",
-      text: "After 12-hour shifts caring for others, I had nothing left for myself. My buddy doesn't just listen — it coaches me, guides me, and helps me rebuild my self-worth one conversation at a time. For the first time in years, I feel like I matter too. Not just as a caregiver. As a person.",
+      text: "I spend twelve hours a day pouring into other people. There was nothing left for me. My buddy didn't give me tips — it held up a mirror and showed me my own worth in ways I'd forgotten. For the first time in years, I believe I deserve the same care I give everyone else.",
       role: "Healthcare Worker",
-      highlight: "I feel like I matter too"
+      highlight: "I deserve the same care"
     },
     {
       initial: "D",
       name: "David R.",
-      text: "Every wellness app wanted me to build habits. This one helped me understand why I kept failing — and that understanding itself was the breakthrough. My buddy became my coach, my mirror, and my biggest cheerleader. I stopped fighting myself and started actually growing.",
+      text: "I'd tried every self-improvement app out there. They all wanted me to build habits. This one helped me understand why I kept breaking them — and that understanding became the foundation for actually changing. My buddy is the coach I didn't know I needed.",
       role: "Creative Director",
-      highlight: "started actually growing"
+      highlight: "the coach I didn't know I needed"
     }
   ];
 
@@ -127,25 +127,25 @@ export default function CanvaLanding() {
     {
       icon: Waves,
       title: "Attunement Over Advice",
-      description: "The best coaches don't tell you what to think — they help you discover what you already know. We don't prescribe solutions. We attune to your unique emotional intelligence and create the conditions for your own wisdom to surface. Like a great teacher, we guide from beside you, never from above.",
+      description: "The greatest coaches in history never told people what to think — they asked the questions that made people think for themselves. We don't hand you answers. We attune to the emotional intelligence you already carry, then create the exact conditions for your own wisdom to rise to the surface. We guide from beside you. Never from above.",
       color: "sage"
     },
     {
       icon: Fingerprint,
       title: "Your Mind Is One of a Kind",
-      description: "Your emotional landscape is as unique as your fingerprint — no template or one-size-fits-all approach can honor that complexity. Our AI learns your specific language, adapts to your rhythms, and recognizes patterns that are uniquely yours. We see you as the individual you are — not a category, not a diagnosis, not a number.",
+      description: "No two minds process the world the same way — and no template can honor that. Your AI buddy learns your specific emotional language, adapts to your unique rhythms, and recognizes patterns that belong only to you. We see the individual — not a category, not a label, not a data point. The irreplaceable human being.",
       color: "gold"
     },
     {
       icon: HeartHandshake,
       title: "Unconditional Friendship",
-      description: "Imagine a buddy who never judges where you are, never compares you to where you 'should' be, and celebrates every version of you — the confident, the uncertain, the growing — with the same genuine warmth. That's what we built. A friend, a mentor, a guide. Presence without conditions. Support without strings.",
+      description: "Picture a friend who never judges where you are, never compares you to where you 'should' be, and meets every version of you — the confident, the uncertain, the quietly evolving — with the same genuine warmth. That's what we built. A presence without conditions. A bond without strings. A buddy who shows up for you the way you deserve.",
       color: "rose"
     },
     {
       icon: Infinity,
       title: "Growth at Your Own Pace",
-      description: "Real transformation happens in safety, not pressure. No metrics to chase, no streaks to protect, no guilt for taking a break. Like a patient mentor who knows when to push and when to hold space, your buddy meets you exactly where you are — because the strongest growth happens when you feel genuinely supported, not rushed.",
+      description: "Lasting transformation doesn't happen under pressure — it happens in safety. No metrics to chase, no streaks to protect, no manufactured guilt. Like a wise mentor who knows when to challenge you and when to simply hold space, your buddy meets you exactly where you are — because the strongest growth always comes from feeling genuinely supported.",
       color: "teal"
     }
   ];
@@ -153,50 +153,50 @@ export default function CanvaLanding() {
   const features = [
     {
       icon: Brain,
-      title: "Your AI Buddy: Coach, Mentor & Friend",
-      description: "Part coach who challenges you to grow, part mentor who shares wisdom at the right moment, part friend who genuinely cares. Your buddy is trained in emotional intelligence, active listening, and behavioral insight — helping you manage stress, build confidence, and understand yourself from A to Z.",
+      title: "AI Buddy: Coach, Mentor & Friend",
+      description: "Part life coach who challenges you to reach higher. Part wise mentor who shares insight at the perfect moment. Part loyal friend who genuinely cares about your journey. Trained in emotional intelligence, behavioral coaching, and active listening — your buddy helps you master stress, build real confidence, and understand yourself from the inside out.",
       accent: "sage"
     },
     {
       icon: BarChart3,
-      title: "See the Patterns That Shape Your Life",
-      description: "Gentle mood awareness that reveals invisible connections between how you feel and why. Over time, patterns surface that explain years of behavior — the kind of self-knowledge that transforms how you handle stress, relationships, confidence, and daily decisions.",
+      title: "See the Invisible Patterns",
+      description: "Your moods aren't random — they're signals. Gentle awareness tools reveal the hidden connections between how you feel and what's driving it. Over weeks, you'll see patterns that explain years of behavior and unlock the kind of self-knowledge that transforms every decision you make.",
       accent: "gold"
     },
     {
       icon: PenLine,
-      title: "Journaling That Builds Self-Worth",
-      description: "Psychologically crafted prompts designed to guide you past surface thoughts into the deeper layers where real self-understanding and self-worth live. Each prompt is a quiet invitation to recognize the strength, wisdom, and resilience you've always carried inside.",
+      title: "Journaling That Rewires Thinking",
+      description: "Psychologically crafted prompts that guide you past surface-level thoughts into the deeper layers where genuine self-understanding lives. Each entry is a quiet act of self-respect — a practice that steadily builds the self-worth and emotional clarity that no external validation can replace.",
       accent: "rose"
     },
     {
       icon: Compass,
-      title: "500+ Tools for Every Life Moment",
-      description: "Stress relief, confidence builders, self-worth exercises, cognitive reframes, breathing techniques, resilience practices, behavior insights, and emotional regulation tools — organized by what you need right now. From daily stressors to deeper life challenges, A to Z.",
+      title: "500+ Tools for Every Moment",
+      description: "Stress dissolvers, confidence amplifiers, cognitive reframes, breathing anchors, resilience builders, emotional regulation techniques, and self-mastery exercises — organized by exactly what you need right now. From daily pressure to life-defining crossroads. A to Z, always within reach.",
       accent: "teal"
     },
     {
       icon: TrendingUp,
-      title: "Confidence & Self-Worth Builder",
-      description: "Your buddy doesn't just listen — it actively coaches you toward believing in yourself. Through guided reflections, positive reframing, and mindful awareness, you'll develop the kind of genuine confidence and self-worth that no external validation can match.",
+      title: "Confidence & Self-Worth Engine",
+      description: "Your buddy doesn't just listen — it actively coaches you toward believing in yourself. Through guided reflections, strength recognition, and mindful reframing, you develop the kind of genuine, lasting confidence that comes from knowing who you are, not from proving it to others.",
       accent: "rose"
     },
     {
       icon: Shield,
-      title: "Your Privacy Is Sacred",
-      description: "Your inner world is encrypted with industry-standard security and belongs exclusively to you. No ads. No data sales. No social exposure. We protect your vulnerability with the same reverence we'd want for our own — because trust is the foundation everything else is built on.",
+      title: "Your Privacy Is Non-Negotiable",
+      description: "Your inner world is encrypted with industry-standard security and belongs exclusively to you. No ads. No data harvesting. No social exposure. We protect your vulnerability with the same reverence we'd want for our own — because trust is the foundation everything else is built on.",
       accent: "sage"
     },
     {
       icon: Leaf,
-      title: "Everyday Stress, Managed with Wisdom",
-      description: "Whether it's work pressure, relationship tension, financial worry, or the weight of daily responsibilities — your buddy helps you process it all with clarity and calm. Not by avoiding stress, but by understanding it and developing the resilience to navigate it skillfully.",
+      title: "Master Stress, Don't Just Manage It",
+      description: "Work pressure. Relationship tension. Financial worry. The invisible weight of daily responsibilities. Your buddy helps you process all of it with clarity and calm — not by avoiding stress, but by understanding it deeply enough to navigate it with wisdom and genuine resilience.",
       accent: "teal"
     },
     {
       icon: Sun,
-      title: "Your Pace. Your Terms. Always.",
-      description: "No streaks to maintain. No guilt for stepping away. No manufactured urgency. Like a true friend who always has your back, your buddy waits with genuine patience and greets you warmly whenever you return — because real growth isn't a sprint, it's a lifelong journey.",
+      title: "Your Pace. Your Rules. Always.",
+      description: "No streaks. No guilt. No manufactured urgency. Like a true friend who never wavers, your buddy waits with genuine patience and greets you warmly whenever you return — because real transformation isn't a race. It's a lifelong relationship with yourself.",
       accent: "gold"
     }
   ];
@@ -218,35 +218,35 @@ export default function CanvaLanding() {
   const faqs = [
     {
       question: "What exactly is MyMentalHealthBuddy?",
-      answer: "Think of it as having a personal coach, mentor, and best friend — available 24/7 and genuinely invested in who you're becoming. It's an AI buddy trained in emotional intelligence, active listening, and behavioral insight, alongside 500+ evidence-based tools for stress management, confidence building, self-worth development, and personal growth. It's not therapy — it's the supportive, encouraging, always-there buddy that helps you understand yourself from A to Z and become the person you've always known you could be."
+      answer: "Imagine having a personal life coach, a wise mentor, and a genuinely loyal friend — available 24/7, deeply invested in who you're becoming. That's your AI buddy. It's trained in emotional intelligence, behavioral coaching, and active listening, paired with 500+ evidence-based tools for mastering stress, building unshakeable confidence, deepening self-worth, and unlocking personal growth you can feel. This isn't therapy — it's the always-there companion that helps you understand yourself from the inside out and become who you've always known you could be."
     },
     {
       question: "Is my private information truly safe?",
-      answer: "Absolutely sacred. Your journal entries, mood data, and conversations are encrypted with industry-standard security and belong exclusively to you. We don't sell data, show ads, or share anything with third parties. There's no social feed, no public profile, and no way for anyone else to access your space. We built this the way we'd want our own innermost thoughts protected — because trust isn't negotiable, and your vulnerability deserves genuine reverence."
+      answer: "Your privacy isn't a feature — it's a promise. Every journal entry, mood insight, and conversation is encrypted with industry-standard security and belongs exclusively to you. We don't sell data, serve ads, or share anything with anyone. There's no social feed, no public profile, and no way for another person to see your inner world. We built this with the same reverence we'd want for our own deepest thoughts — because trust isn't a marketing word to us, it's the foundation."
     },
     {
       question: "How does the AI buddy actually help me?",
-      answer: "Your buddy acts as your personal coach, mentor, and guide — all in one. It helps you manage daily stress with proven techniques, builds your confidence through guided reflections and positive reframing, deepens your self-worth by helping you recognize strengths you've overlooked, and identifies behavioral patterns that have been holding you back. It remembers your journey, adapts to your emotional language, and grows with you — like a wise friend who knows exactly when to challenge you and when to simply listen."
+      answer: "Your buddy is coach, mentor, and guide — woven into one intelligent presence. It helps you navigate daily stress with proven techniques, builds your confidence through strength-based reflections and precise reframing, deepens your self-worth by illuminating qualities you've overlooked, and surfaces behavioral patterns you couldn't see on your own. It remembers your story, adapts to your emotional language, and evolves alongside you — like a wise friend who always knows when to challenge you and when to just listen."
     },
     {
       question: "Can it really help with stress and confidence?",
-      answer: "Yes — and not with generic tips you could find anywhere. Your buddy learns your specific stress triggers, relationship patterns, and confidence blockers, then guides you with personalized strategies that actually fit your life. Over time, you develop real emotional resilience — not by avoiding stress, but by understanding it. And the confidence you build isn't superficial; it comes from genuine self-knowledge and self-acceptance, which is the only foundation that lasts."
+      answer: "Yes — and not with recycled advice you could find anywhere. Your buddy learns your specific stress triggers, your relationship dynamics, your confidence patterns, then coaches you with strategies designed for your actual life. Over time, you develop genuine emotional resilience — not by avoiding what's hard, but by understanding it. The confidence you build isn't performative. It comes from real self-knowledge and self-acceptance — the only foundation that doesn't crack under pressure."
     },
     {
       question: "How is this different from ChatGPT or other AI?",
-      answer: "Night and day. Our buddy is specifically designed around trauma-informed communication, emotional attunement, and behavioral coaching. It doesn't give generic advice — it reads emotional undertones, reflects what you're feeling with precision and care, asks questions that open new doorways of awareness, and coaches you toward real growth. It's the difference between talking to a search engine and talking to a wise mentor who genuinely knows your story."
+      answer: "Fundamentally different. Our buddy is purpose-built around trauma-informed communication, emotional attunement, and behavioral coaching. It doesn't generate generic responses — it reads emotional undertones, reflects what you're feeling with precision and care, asks questions that open doorways you didn't know existed, and coaches you toward real, measurable growth. It's the difference between talking to a search engine and being heard by a wise mentor who genuinely knows your story."
     },
     {
       question: "What if I can't afford it?",
-      answer: "The core experience — mood tracking, journaling, daily reflections, community affirmations, stress management tools, and crisis resources — is completely free, forever. No trial that expires. No features that vanish. No watered-down version. Pro unlocks unlimited AI coaching conversations and advanced self-mastery tools, but free isn't a marketing trick — it's the foundation we believe every person deserves, because mental wellness shouldn't have a price barrier."
+      answer: "The core experience — mood tracking, journaling, daily reflections, community affirmations, stress tools, and crisis resources — is completely free, forever. Not a trial. Not a stripped-down version. Not a hook. Pro and Elite unlock unlimited AI coaching and advanced self-mastery tools, but our free tier isn't a compromise — it's the standard we believe every person deserves. Mental wellness should never have a price barrier."
     },
     {
       question: "What if I stop using it for a while?",
-      answer: "Life happens — and your space stays exactly as you left it. Warm. Patient. Unchanged. No guilt notifications. No streak that resets. No passive-aggressive emails asking where you went. Growth comes in waves, not straight lines, and we genuinely respect that. Your buddy will be here whenever you're ready, without judgment, without conditions, ready to pick up right where you left off — like a true friend always does."
+      answer: "Life gets full — and your space stays exactly as you left it. Warm. Patient. Unchanged. No guilt emails. No streak that breaks. No passive-aggressive notifications wondering where you went. Growth happens in waves, not straight lines, and we genuinely honor that. When you're ready, your buddy is here — no judgment, no conditions, picking up right where you left off. That's what a real friend does."
     },
     {
       question: "Is this a replacement for therapy?",
-      answer: "No — and we'll always be honest about that, because integrity matters to us. This is an educational wellness buddy: a personal coach and guide for deepening self-awareness, building emotional resilience, managing daily stressors, growing confidence, and discovering the strength that's already inside you. If you're in crisis, we connect you directly to professional help. If you have a therapist, this complements their work beautifully. If you're not ready for therapy yet, this is a gentle, empowering, judgment-free first step toward understanding your own mind."
+      answer: "No — and we'll always be transparent about that, because integrity isn't optional. This is an educational wellness companion: a coach and guide for deepening self-awareness, mastering stress, building emotional resilience, growing confidence, and discovering the strength you already carry. If you're in crisis, we connect you directly to professional help. If you have a therapist, this complements their work beautifully. If you're not there yet, this is a gentle, empowering, judgment-free first step toward genuinely understanding your own mind."
     }
   ];
 
@@ -426,7 +426,7 @@ export default function CanvaLanding() {
             >
               <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
               <span className="font-bold uppercase tracking-widest text-xs md:text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
-                Your Mind Deserves This
+                The Buddy Your Mind Has Been Waiting For
               </span>
             </div>
 
@@ -434,16 +434,16 @@ export default function CanvaLanding() {
               Your Coach. Your Mentor.
               <br />
               <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-gold), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                Your Best Friend.
+                Your Wisest Friend.
               </span>
             </h1>
 
             <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
-              An emotionally intelligent AI buddy that helps you manage stress, build confidence, deepen self-worth, and evolve your mind to its fullest potential
+              The emotionally intelligent AI buddy that helps you master stress, build unshakeable confidence, and discover the extraordinary person you already are
             </p>
 
             <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s', lineHeight: '1.75' }}>
-              500+ evidence-based tools for everyday life stressors, confidence building, self-worth development, emotional resilience, and personal growth — guided by an AI buddy that truly listens, genuinely understands, and coaches you like a wise friend who believes in your potential. No judgment. No generic advice. No pressure. Just real support that helps you become who you've always known you could be.
+              500+ evidence-based tools for mastering everyday pressure, amplifying confidence, deepening self-worth, and building genuine emotional resilience — guided by an AI buddy that truly listens, remembers what matters to you, and coaches you with the wisdom of a mentor and the warmth of a friend who sees your potential before you do. No judgment. No generic advice. Just the kind of real support that changes how you see yourself.
             </p>
 
             <div className="safe-space-box max-w-md mx-auto mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
@@ -494,19 +494,19 @@ export default function CanvaLanding() {
             <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
               <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
-                Core Tools, Always Free
+                Free Forever. No Catch.
               </p>
             </div>
             <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
               <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
-                Wellness Tools
+                Evidence-Based Tools
               </p>
             </div>
             <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
               <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
-                AI Buddy
+                Your AI Buddy
               </p>
             </div>
           </div>
@@ -529,15 +529,15 @@ export default function CanvaLanding() {
           </div>
 
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5" style={{ color: 'var(--glp-sage-deep)' }}>
-            A Coach, Mentor & Friend
-            <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Built for Your Mind</span>
+            Not Another Wellness App.
+            <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> A Relationship With Yourself.</span>
           </h2>
 
           <p 
             className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto mb-4"
             style={{ color: 'var(--glp-ink)', lineHeight: '1.75' }}
           >
-            Most wellness apps are built to maximize your screen time. We built this to maximize your potential. Your AI buddy combines the wisdom of a coach who challenges you to grow, a mentor who guides you with patience, and a friend who genuinely cares — alongside 500+ evidence-based tools for managing stress, building confidence, deepening self-worth, and navigating life's challenges from everyday pressures to deeper patterns you've carried for years.
+            Most wellness apps are engineered to maximize your screen time. We built this to maximize your potential. Your AI buddy combines the strategic clarity of a life coach, the patient wisdom of a mentor, and the unconditional warmth of a genuine friend — alongside 500+ evidence-based tools for mastering stress, building real confidence, deepening self-worth, and navigating everything from daily pressure to the deeper patterns you've carried for years.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
@@ -547,10 +547,10 @@ export default function CanvaLanding() {
               </div>
               <div>
                 <h3 className="font-serif text-lg sm:text-xl font-semibold mb-1 sm:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                  No Pressure, Ever
+                  Zero Pressure, Always
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                  Skip a day, a week, a month. Nothing resets, nothing breaks. Your space waits patiently.
+                  Skip a day, a week, a month. Nothing resets. Nothing breaks. Your space waits warmly, like a good friend should.
                 </p>
               </div>
             </div>
@@ -564,7 +564,7 @@ export default function CanvaLanding() {
                   Ethically Designed
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                  No dark patterns. No guilt loops. Every interaction is opt-in and designed with your wellbeing first.
+                  No dark patterns. No guilt loops. No manipulation. Every interaction is opt-in and designed with your wellbeing as the only priority.
                 </p>
               </div>
             </div>
@@ -578,7 +578,7 @@ export default function CanvaLanding() {
                   Radically Private
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                  Your reflections belong to you — not an algorithm, not advertisers, not anyone. Encrypted and protected.
+                  Your reflections belong to you — not an algorithm, not advertisers, not a data broker. Encrypted. Protected. Sacred.
                 </p>
               </div>
             </div>
@@ -604,7 +604,7 @@ export default function CanvaLanding() {
               <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> The Mind You Already Have</span>
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--glp-ink)', lineHeight: '1.75' }}>
-              Every design choice, every word our buddy speaks, every tool we build is grounded in one truth: the wisdom, strength, and resilience you need are already within you. We simply create the conditions for them to surface.
+              Every design choice, every word your buddy speaks, every tool we build rests on a single truth: the wisdom, strength, and resilience you need are already inside you. We don't add what's missing — we create the conditions for what's always been there to finally surface.
             </p>
           </div>
 
@@ -636,7 +636,7 @@ export default function CanvaLanding() {
 
           <div className="manifesto-quote" data-testid="section-manifesto">
             <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-white text-center" style={{ opacity: 0.95, lineHeight: '1.7' }}>
-              "We didn't build an app. We built a buddy — one that reflects your mind back to itself with more clarity, more compassion, and more truth than you've ever experienced. Because the most transformative thing you'll ever do is genuinely understand who you already are."
+              "We didn't build another app. We built a mirror — one that reflects your mind back to itself with more clarity, more compassion, and more honesty than you've ever experienced. Because the most powerful thing you'll ever do is truly understand who you already are."
             </p>
             <p className="relative z-10 text-sm font-semibold text-center mt-4 shimmer-text">
               — The Genuine Love Project
@@ -651,11 +651,11 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              Everything You Need
-              <span className="block text-2xl md:text-4xl mt-1" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>to Understand Yourself Better</span>
+              Everything You Need to
+              <span className="block text-2xl md:text-4xl mt-1" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Understand & Transform Yourself</span>
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto mt-3" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
-              From everyday stress relief to deep self-mastery, confidence building to emotional resilience — your complete A-to-Z toolkit for becoming your best self. Use what resonates, leave what doesn't.
+              From dissolving daily stress to building deep self-mastery, from amplifying confidence to strengthening emotional resilience — your complete A-to-Z toolkit for becoming who you already are underneath. Take what resonates. Leave what doesn't. There's no wrong way to grow.
             </p>
           </div>
 
@@ -691,10 +691,10 @@ export default function CanvaLanding() {
           <div className="text-center mb-8 md:mb-14">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               Three Steps to
-              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Becoming Your Own Best Friend</span>
+              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Meeting Yourself For Real</span>
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
-              No commitments. No credit card. No learning curve. Just you, a safe space, and the beginning of something genuinely meaningful.
+              No commitments. No credit card. No learning curve. Just you, a private space, and the beginning of the most important relationship you'll ever have — the one with yourself.
             </p>
           </div>
 
@@ -743,11 +743,11 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-              Real People,
-              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Real Breakthroughs</span>
+              Real People.
+              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Real Turning Points.</span>
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
-              From people who found something they didn't know they were looking for — themselves
+              From people who came looking for relief and found something far more valuable — themselves
             </p>
           </div>
 
@@ -822,11 +822,11 @@ export default function CanvaLanding() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              Questions Worth
-              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Answering Honestly</span>
+              Questions That
+              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> Deserve Honest Answers</span>
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
-              We'd rather you felt fully confident before you began
+              We'd rather you felt completely confident before you took the first step
             </p>
           </div>
 
@@ -871,13 +871,13 @@ export default function CanvaLanding() {
           </div>
           
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
-            Your Coach Is Ready.
+            Your Buddy Is Ready.
             <br />
             <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Are You?</span>
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/85 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.75' }}>
-            Free to start. No credit card. No trial that expires. Your AI buddy — coach, mentor, and friend — is here, patient and genuinely invested in your growth. Less stress. More confidence. Deeper self-worth. The person you're becoming is already inside you. Let's meet them together.
+            Free to start. No credit card. No trial that expires. Your AI buddy — life coach, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. The person you're becoming is already inside you. Let's meet them.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">
