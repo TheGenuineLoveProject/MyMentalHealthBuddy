@@ -344,21 +344,21 @@ export default function CanvaLanding() {
           <div className="text-center">
             {/* Badge */}
             <div 
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-10 shadow-lg animate-fade-in-up"
+              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full mb-6 md:mb-10 shadow-lg animate-fade-in-up"
               style={{
                 background: 'var(--glp-paper)',
                 border: '2px solid var(--glp-sage-30)',
                 boxShadow: '0 8px 32px var(--glp-sage-20)'
               }}
             >
-              <Star className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
-              <span className="font-bold uppercase tracking-widest text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
+              <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
+              <span className="font-bold uppercase tracking-widest text-xs md:text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
                 A Quieter Kind of Wellness
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-[1.08] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.08] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
               A Private Space
               <br />
               <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-gold), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -367,52 +367,52 @@ export default function CanvaLanding() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl md:text-2xl font-serif mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
+            <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
               Wellness tools that respect your pace
             </p>
 
             {/* Description */}
-            <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.7' }}>
+            <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-10 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.7' }}>
               Most wellness apps want your attention. This one gives it back. Journaling, mood tracking, and AI-assisted reflection — built around how you actually feel, not how a product wants you to engage.
             </p>
 
             {/* Safety Box */}
-            <div className="safe-space-box max-w-md mx-auto mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
+            <div className="safe-space-box max-w-md mx-auto mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
               <div className="flex items-center justify-center gap-3">
-                <Shield className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
-                <span className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>You Are Safe Here</span>
-                <Shield className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
+                <Shield className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
+                <span className="font-semibold text-sm md:text-base" style={{ color: 'var(--glp-sage-deep)' }}>You Are Safe Here</span>
+                <Shield className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 md:mb-10 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               {!isLoading && isAuthenticated() ? (
                 <Link href="/dashboard">
                   <button
-                    className="btn-sacred-gold group inline-flex items-center gap-3 font-bold text-lg px-10 py-5"
+                    className="btn-sacred-gold group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                     data-testid="button-hero-dashboard"
                   >
-                    <Sparkles className="w-6 h-6" aria-hidden="true" />
+                    <Sparkles className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
                     Go to My Dashboard
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </button>
                 </Link>
               ) : (
                 <Link href="/login">
                   <button
-                    className="btn-sacred-gold group inline-flex items-center gap-3 font-bold text-lg px-10 py-5"
+                    className="btn-sacred-gold group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                     data-testid="button-hero-begin"
                   >
-                    <Sparkles className="w-6 h-6" aria-hidden="true" />
+                    <Sparkles className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
                     Try It Free
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </button>
                 </Link>
               )}
               <Link href="/pricing">
                 <button 
-                  className="inline-flex items-center gap-3 font-bold text-lg px-10 py-5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:-translate-y-1 hover:shadow-lg"
+                  className="inline-flex items-center gap-2 md:gap-3 font-bold text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:-translate-y-1 hover:shadow-lg"
                   style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)', boxShadow: '0 2px 8px var(--glp-sage-deep-12)' }}
                   data-testid="button-hero-explore"
                 >
@@ -423,22 +423,22 @@ export default function CanvaLanding() {
           </div>
 
           {/* Hero Stats */}
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            <div className="glass-card text-center p-5 sm:p-8 rounded-3xl" style={{ border: '1px solid var(--glp-sage-20)' }}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
-              <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
+            <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
+              <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
+              <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 Core Tools, Always Free
               </p>
             </div>
-            <div className="glass-card text-center p-5 sm:p-8 rounded-3xl" style={{ border: '1px solid var(--glp-gold-20)' }}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
-              <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+            <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }}>
+              <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
+              <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 Wellness Tools
               </p>
             </div>
-            <div className="glass-card text-center p-5 sm:p-8 rounded-3xl" style={{ border: '1px solid var(--glp-rose-20)' }}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
-              <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+            <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }}>
+              <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
+              <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 AI Companion
               </p>
             </div>
@@ -449,73 +449,79 @@ export default function CanvaLanding() {
       {/* Mission Statement Section */}
       <section 
         id="about" 
-        className="py-12 px-6"
+        className="py-8 md:py-12 px-4 md:px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}
       >
         <div className="max-w-4xl mx-auto text-center">
           <div 
-            className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6"
+            className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-2xl mb-4 md:mb-6"
             style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 20px var(--metallic-gold-glow)' }}
           >
-            <Heart className="w-7 h-7 text-white" aria-hidden="true" />
+            <Heart className="w-6 h-6 md:w-7 md:h-7 text-white" aria-hidden="true" />
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-5" style={{ color: 'var(--glp-sage-deep)' }}>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5" style={{ color: 'var(--glp-sage-deep)' }}>
             Why This Exists
           </h2>
 
           <p 
-            className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto"
+            className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto"
             style={{ color: 'var(--glp-ink)' }}
           >
             Most wellness apps are built to maximize engagement. This one was built to respect it. No streaks to protect, no notifications pulling you back, no punishment for stepping away. The tools here are available when you want them and quiet when you don't.
           </p>
 
           {/* Values Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
-            <div className="glass-card rounded-2xl p-6 text-center reveal">
-              <div className="w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))' }}>
-                <Lightbulb className="w-6 h-6 text-white" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
+            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
+              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))' }}>
+                <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                No Streak Pressure
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                Use the tools when they help. Skip a day, a week, a month — nothing resets.
-              </p>
+              <div>
+                <h3 className="font-serif text-lg sm:text-xl font-semibold mb-1 sm:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                  No Streak Pressure
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
+                  Use the tools when they help. Skip a day, a week, a month — nothing resets.
+                </p>
+              </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-6 text-center reveal" style={{ animationDelay: '0.2s' }}>
-              <div className="w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
-                <Users className="w-6 h-6 text-white" />
+            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
+              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                No Dark Patterns
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                No guilt notifications, no manufactured urgency. Every interaction is opt-in.
-              </p>
+              <div>
+                <h3 className="font-serif text-lg sm:text-xl font-semibold mb-1 sm:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                  No Dark Patterns
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
+                  No guilt notifications, no manufactured urgency. Every interaction is opt-in.
+                </p>
+              </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-6 text-center reveal" style={{ animationDelay: '0.4s' }}>
-              <div className="w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))' }}>
-                <Zap className="w-6 h-6 text-white" />
+            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
+              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))' }}>
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                Your Data, Your Space
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                Private by default. Your reflections belong to you — not an algorithm.
-              </p>
+              <div>
+                <h3 className="font-serif text-lg sm:text-xl font-semibold mb-1 sm:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                  Your Data, Your Space
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
+                  Private by default. Your reflections belong to you — not an algorithm.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Core Features Section */}
-      <section id="features" className="py-12 px-6" style={{ background: 'var(--glp-paper)' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-          <div className="text-center mb-10">
+      <section id="features" className="py-8 md:py-12 px-4 md:px-6" style={{ background: 'var(--glp-paper)' }}>
+        <div className="max-w-[1200px] mx-auto px-2 md:px-8">
+          <div className="text-center mb-6 md:mb-10">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               What's Available
             </h2>
@@ -524,21 +530,21 @@ export default function CanvaLanding() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {features.map((feature, index) => (
-              <div key={index} className="glass-card rounded-3xl p-6 group scale-on-hover">
-                <div className="mb-5 flex items-center justify-center w-12 h-12 max-w-[48px] rounded-2xl transition-all group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15))', boxShadow: '0 4px 12px var(--glp-sage-20)' }}>
-                  <feature.icon className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} aria-hidden="true" />
+              <div key={index} className="rounded-2xl p-4 md:p-6 group transition-all duration-300 hover:-translate-y-1" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
+                <div className="mb-3 md:mb-5 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl transition-all group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15))', boxShadow: '0 4px 12px var(--glp-sage-20)' }}>
+                  <feature.icon className="w-5 h-5 md:w-6 md:h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                <h3 className="text-base md:text-xl font-serif font-semibold mb-1 md:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
                   {feature.title}
                 </h3>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--glp-ink)' }}>
+                <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4" style={{ color: 'var(--glp-ink)' }}>
                   {feature.description}
                 </p>
-                <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
+                <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
                     Explore
-                    <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
+                    <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1" aria-hidden="true" />
                 </Link>
               </div>
             ))}
@@ -547,53 +553,47 @@ export default function CanvaLanding() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-12 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-          <div className="text-center mb-10">
+      <section className="py-8 md:py-12 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
+        <div className="max-w-[1200px] mx-auto px-2 md:px-8">
+          <div className="text-center mb-6 md:mb-10">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               How It Works
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
               Three ways to get oriented — no commitments
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row items-start justify-center gap-6">
+          <div className="flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-6">
             {steps.map((step, index) => (
               <Link 
                 key={index} 
                 href={step.link}
-                className="flex flex-col items-center text-center max-w-xs mx-auto group cursor-pointer transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" 
-                style={{ '--tw-ring-color': 'var(--glp-sage)' }}
+                className="flex items-center gap-4 md:flex-col md:items-center md:text-center md:max-w-xs mx-auto group cursor-pointer transition-transform duration-300 hover:scale-[1.02] md:hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-2xl p-4 md:p-6" 
+                style={{ '--tw-ring-color': 'var(--glp-sage)', background: 'var(--glp-white)', border: '1px solid var(--glp-sage-15)' }}
                 data-testid={`step-card-${index}`}
                 aria-label={`${step.title} - ${step.description}`}
               >
-                <div 
-                  className="relative mb-4 sacred-pulse"
-                  style={{ animationDelay: `${index * 0.5}s` }}
-                >
+                <div className="relative shrink-0">
                   <div 
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold text-white transition-shadow duration-300 group-hover:shadow-lg"
-                    style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 20px var(--metallic-gold-glow)' }}
+                    className="w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center text-base md:text-lg font-bold text-white"
+                    style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 16px var(--metallic-gold-glow)' }}
                     aria-hidden="true"
                   >
                     {index + 1}
                   </div>
                   {index < steps.length - 1 && (
-                    <div className="hidden md:block absolute top-1/2 left-full w-24 h-0.5" style={{ background: 'linear-gradient(90deg, var(--glp-gold), transparent)' }} aria-hidden="true" />
+                    <div className="hidden md:block absolute top-1/2 left-full w-20 h-0.5" style={{ background: 'linear-gradient(90deg, var(--glp-gold), transparent)' }} aria-hidden="true" />
                   )}
                 </div>
-                <div className="mb-4 flex justify-center">
-                  <div className="w-12 h-12 max-w-[48px] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:shadow-md" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-sage-10))', boxShadow: '0 4px 12px var(--glp-sage-20)', border: '2px solid var(--glp-sage-30)' }}>
-                    <step.icon className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} aria-hidden="true" />
-                  </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-serif font-semibold mb-1 group-hover:underline" style={{ color: 'var(--glp-sage-deep)' }}>
+                    {step.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
+                    {step.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-2 group-hover:underline" style={{ color: 'var(--glp-sage-deep)' }}>
-                  {step.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                  {step.description}
-                </p>
               </Link>
             ))}
           </div>
@@ -602,51 +602,47 @@ export default function CanvaLanding() {
 
       {/* Testimonials Section */}
       <section 
-        className="py-12 px-6 relative overflow-hidden"
+        className="py-8 md:py-12 px-4 md:px-6 relative overflow-hidden"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-15))' }}
       >
-        <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
+        <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
+          <div className="text-center mb-6 md:mb-10">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
               What People Say
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
               From people who use the platform
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-5">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index} 
-                className="glass-card rounded-3xl p-8 animate-fade-in-scale"
+                className="rounded-2xl p-6 md:p-8"
                 style={{ 
-                  animationDelay: `${index * 0.2}s`,
                   background: 'var(--glp-white)',
                   border: '1px solid var(--glp-sage-20)',
-                  boxShadow: '0 8px 32px var(--glp-sage-10)'
+                  boxShadow: '0 4px 16px var(--glp-sage-10)'
                 }}
                 data-testid={`testimonial-${index}`}
               >
-                <div className="flex items-start gap-2 mb-4">
-                  <span className="text-3xl font-serif" style={{ color: '#d4af37' }}>"</span>
-                </div>
-                <p className="mb-6 leading-relaxed italic text-lg" style={{ color: 'var(--glp-ink)' }}>
-                  {testimonial.text}
-                </p>
-                <div className="flex items-center gap-4 pt-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+                <div className="flex items-center gap-3 mb-4">
                   <div 
-                    className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg text-white"
+                    className="w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center font-bold text-base md:text-lg text-white shrink-0"
                     style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
                     aria-hidden="true"
                   >
                     {testimonial.initial}
                   </div>
                   <div>
-                    <p className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>{testimonial.name}</p>
-                    <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{testimonial.role}</p>
+                    <p className="font-semibold text-sm md:text-base" style={{ color: 'var(--glp-sage-deep)' }}>{testimonial.name}</p>
+                    <p className="text-xs md:text-sm" style={{ color: 'var(--glp-sage)' }}>{testimonial.role}</p>
                   </div>
                 </div>
+                <p className="leading-relaxed italic text-sm md:text-base" style={{ color: 'var(--glp-ink)' }}>
+                  "{testimonial.text}"
+                </p>
               </div>
             ))}
           </div>
@@ -679,11 +675,11 @@ export default function CanvaLanding() {
       {/* FAQ Section */}
       <section 
         id="faq" 
-        className="py-12 px-6"
+        className="py-8 md:py-12 px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-sage-10), var(--glp-paper))' }}
       >
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-10">
+          <div className="text-center mb-6 md:mb-10">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               Frequently Asked Questions
             </h2>
@@ -713,36 +709,32 @@ export default function CanvaLanding() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-14 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
+      <section className="py-10 md:py-14 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
-        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-8">
-          {/* Tagline Badge */}
-          <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm mb-10 border border-white/15">
-            <Sparkles className="w-5 h-5 text-[var(--glp-gold)]" />
-            <span className="text-lg sm:text-xl text-white/90 font-medium tracking-wide">A place to begin, whenever you're ready</span>
+        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-4 md:py-8">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-8 md:py-4 rounded-full bg-white/10 backdrop-blur-sm mb-6 md:mb-10 border border-white/15">
+            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-[var(--glp-gold)]" />
+            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">A place to begin, whenever you're ready</span>
           </div>
           
-          {/* Main Heading */}
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-5 text-white leading-tight text-center">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
             If This Feels
             <br />
             <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px rgba(234, 195, 59, 0.3)' }}>Right, Come In</span>
           </h2>
           
-          {/* Subtext */}
-          <p className="text-lg sm:text-xl md:text-2xl mt-2 mb-10 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
+          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
             Free to start. Free to pause. Free to leave. Always here if you come back.
           </p>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">
             {!isLoading && isAuthenticated() ? (
               <Link href="/dashboard">
                 <button
-                  className="group inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  className="group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                   style={{
                     background: 'var(--glp-white)',
                     color: 'var(--glp-gold-dark, #c49a2d)',
@@ -750,15 +742,15 @@ export default function CanvaLanding() {
                   }}
                   data-testid="button-final-dashboard"
                 >
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
                   My Dashboard
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
             ) : (
               <Link href="/login">
                 <button
-                  className="group inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  className="group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                   style={{
                     background: 'var(--glp-white)',
                     color: 'var(--glp-gold-dark, #c49a2d)',
@@ -766,15 +758,15 @@ export default function CanvaLanding() {
                   }}
                   data-testid="button-final-cta"
                 >
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
                   Try It Free
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
             )}
             <Link href="/pricing">
               <button 
-                className="group inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2"
+                className="group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-105 border-2"
                 style={{
                   background: 'transparent',
                   color: 'var(--glp-gold)',
