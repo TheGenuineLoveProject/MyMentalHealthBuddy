@@ -1,0 +1,1082 @@
+Use this exact implementation.
+
+Hard truth
+
+Your current server/routes/content.mjs is still a placeholder generator route. That is not B1 enforcement.
+A real B1 implementation needs:
+	1.	one canonical schema file
+	2.	one reusable validator middleware
+	3.	API routes that call that validator
+	4.	no duplicated field rules across routes
+
+Also, your screenshot shows EADDRINUSE on port 5000, so do not start a second server process. Update files first, then run the existing verification commands.
+
+⸻
+
+1) Install dependency
+
+cd /workspace
+npm install zod
+
+
+⸻
+
+2) Create canonical B1 schema file
+
+Create server/contracts/content-model.schema.mjs
+
+cat > /workspace/server/contracts/content-model.schema.mjs <<'EOF'
+import { z } from "zod";
+
+/**
+ * CONTENT_MODEL_CONTRACT
+ * Canonical runtime schema for B1
+ * Single source of truth for content entity validation at API boundary.
+ */
+
+export const CONTENT_STATUS = [
+  "idea",
+  "draft",
+  "review",
+  "approved",
+  "scheduled",
+  "published",
+  "archived",
+];
+
+export const CONTENT_DOMAIN = [
+  "HEALING_DOMAIN",
+  "BUSINESS_DOMAIN",
+  "PLATFORM_DOMAIN",
+  "DESIGN_DOMAIN",
+  "RESEARCH_DOMAIN",
+];
+
+export const CONTENT_VISIBILITY = [
+  "public",
+  "subscribers",
+  "plan_gated",
+  "internal",
+];
+
+export const SEO_SCHEMA_TYPES = [
+  "Article",
+  "BlogPosting",
+  "WebPage",
+  "FAQPage",
+  "HowTo",
+  "MedicalWebPage",
+  "EducationalOccupationalProgram",
+];
+
+const uuidV4 =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const tagPattern = /^[a-z0-9-]{1,50}$/;
+
+const reservedSlugs = new Set([
+  "admin",
+  "api",
+  "auth",
+  "billing",
+  "command",
+  "crisis",
+  "health",
+  "login",
+  "register",
+  "settings",
+  "ws",
+]);
+
+const safePlainText = (value) =>
+  typeof value === "string" &&
+  value.trim().length > 0 &&
+  !/[<>]/.test(value);
+
+const noUnsafeHtml = (value) => {
+  if (typeof value !== "string") return false;
+  const blocked =
+    /<script\b|<\/script>|on\w+\s*=|javascript:|<iframe\b|<\/iframe>|<object\b|<embed\b/i;
+  return !blocked.test(value);
+};
+
+const noManipulativeHealingCta = (value) => {
+  if (typeof value !== "string") return true;
+  const blocked =
+    /\b(buy now|subscribe now|upgrade now|limited time|last chance|act now|start your paid plan|checkout now)\b/i;
+  return !blocked.test(value);
+};
+
+const noClinicalClaims = (value) => {
+  if (typeof value !== "string") return true;
+  const blocked =
+    /\b(cures?|guaranteed recovery|replaces therapy|diagnose|diagnosis|clinically proven to cure)\b/i;
+  return !blocked.test(value);
+};
+
+export const seoSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(10, "seo.title must be at least 10 characters")
+    .max(70, "seo.title must be at most 70 characters"),
+
+  metaDescription: z
+    .string()
+    .trim()
+    .min(120, "seo.metaDescription must be at least 120 characters")
+    .max(160, "seo.metaDescription must be at most 160 characters")
+    .refine(noClinicalClaims, "seo.metaDescription contains prohibited clinical claims"),
+
+  ogTitle: z
+    .string()
+    .trim()
+    .min(1, "seo.ogTitle is required")
+    .max(95, "seo.ogTitle must be at most 95 characters"),
+
+  ogDescription: z
+    .string()
+    .trim()
+    .min(1, "seo.ogDescription is required")
+    .max(200, "seo.ogDescription must be at most 200 characters")
+    .refine(noClinicalClaims, "seo.ogDescription contains prohibited clinical claims"),
+
+  ogImage: z
+    .string()
+    .trim()
+    .url("seo.ogImage must be a valid absolute URL"),
+
+  robots: z
+    .enum([
+      "index, follow",
+      "noindex, follow",
+      "index, nofollow",
+      "noindex, nofollow",
+    ])
+    .default("index, follow"),
+
+  schemaType: z.enum(SEO_SCHEMA_TYPES),
+});
+
+export const transitionSchema = z.object({
+  from: z.string().trim().min(1),
+  to: z.string().trim().min(1),
+  by: z.string().trim().min(1),
+  at: z.string().datetime({ offset: true }),
+  reason: z.string().trim().nullable().optional(),
+});
+
+export const qaResultSchema = z.object({
+  checked_at: z.string().datetime({ offset: true }),
+  checked_by: z.string().trim().min(1),
+  result: z.enum(["pass", "fail"]),
+  blocks: z.array(z.string()).default([]),
+  warnings: z.array(z.string()).default([]),
+});
+
+export const distributionLogSchema = z.object({
+  channel: z.enum([
+    "newsletter",
+    "twitter",
+    "instagram",
+    "linkedin",
+    "facebook",
+    "threads",
+  ]),
+  action: z.enum(["sent", "scheduled", "failed", "cancelled"]),
+  at: z.string().datetime({ offset: true }),
+  by: z.string().trim().min(1),
+  details: z.string().nullable().optional(),
+});
+
+export const auditSchema = z
+  .object({
+    created_by: z.string().trim().min(1),
+    created_at: z.string().datetime({ offset: true }),
+    updated_by: z.string().trim().min(1),
+    updated_at: z.string().datetime({ offset: true }),
+
+    published_by: z.string().trim().min(1).nullable().optional(),
+    published_at: z.string().datetime({ offset: true }).nullable().optional(),
+
+    archived_by: z.string().trim().min(1).nullable().optional(),
+    archived_at: z.string().datetime({ offset: true }).nullable().optional(),
+
+    version: z.number().int().min(1),
+
+    transitions: z.array(transitionSchema).default([]),
+    qa_results: z.array(qaResultSchema).default([]),
+    distribution_log: z.array(distributionLogSchema).default([]),
+  })
+  .superRefine((audit, ctx) => {
+    if ((audit.published_by && !audit.published_at) || (!audit.published_by && audit.published_at)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "audit.published_by and audit.published_at must appear together",
+        path: ["published_at"],
+      });
+    }
+
+    if ((audit.archived_by && !audit.archived_at) || (!audit.archived_by && audit.archived_at)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "audit.archived_by and audit.archived_at must appear together",
+        path: ["archived_at"],
+      });
+    }
+  });
+
+export const newsletterDistributionSchema = z.object({
+  eligible: z.boolean(),
+  sent: z.boolean(),
+  sentAt: z.string().datetime({ offset: true }).nullable().optional(),
+  audience: z.enum(["all_subscribers", "plan_subscribers", "segment"]).optional(),
+  segmentId: z.string().nullable().optional(),
+  subject: z.string().nullable().optional(),
+  campaignId: z.string().nullable().optional(),
+});
+
+export const socialPostSchema = z.object({
+  channel: z.enum(["twitter", "instagram", "linkedin", "facebook", "threads"]),
+  text: z.string().trim().min(1),
+  imageUrl: z.string().url().nullable().optional(),
+  scheduledAt: z.string().datetime({ offset: true }).nullable().optional(),
+  postedAt: z.string().datetime({ offset: true }).nullable().optional(),
+  postUrl: z.string().url().nullable().optional(),
+});
+
+export const socialDistributionSchema = z.object({
+  eligible: z.boolean(),
+  channels: z.array(z.string()).default([]),
+  posts: z.array(socialPostSchema).default([]),
+});
+
+export const distributionSchema = z
+  .object({
+    newsletter: newsletterDistributionSchema.optional(),
+    social: socialDistributionSchema.optional(),
+  })
+  .optional();
+
+export const contentModelSchema = z
+  .object({
+    id: z
+      .string()
+      .trim()
+      .regex(uuidV4, "id must be a valid UUID v4"),
+
+    title: z
+      .string()
+      .trim()
+      .min(5, "title must be at least 5 characters")
+      .max(200, "title must be at most 200 characters"),
+
+    slug: z
+      .string()
+      .trim()
+      .min(3, "slug must be at least 3 characters")
+      .max(100, "slug must be at most 100 characters")
+      .regex(slugPattern, "slug must be lowercase alphanumeric plus hyphens only")
+      .refine((value) => !reservedSlugs.has(value), "slug uses a reserved path"),
+
+    summary: z
+      .string()
+      .trim()
+      .min(20, "summary must be at least 20 characters")
+      .max(300, "summary must be at most 300 characters")
+      .refine(safePlainText, "summary must be plain text only"),
+
+    body: z
+      .string()
+      .trim()
+      .min(1, "body is required")
+      .refine(noUnsafeHtml, "body contains unsafe HTML"),
+
+    status: z.enum(CONTENT_STATUS),
+
+    author: z
+      .string()
+      .trim()
+      .min(1, "author is required"),
+
+    domain: z.enum(CONTENT_DOMAIN),
+
+    tags: z
+      .array(
+        z.string().trim().regex(tagPattern, "each tag must be lowercase and at most 50 chars")
+      )
+      .max(10, "tags may contain at most 10 items")
+      .optional()
+      .default([]),
+
+    category: z.string().trim().min(1).optional(),
+
+    seo: seoSchema.optional(),
+
+    publishAt: z.string().datetime({ offset: true }).nullable().optional(),
+
+    updatedAt: z.string().datetime({ offset: true }),
+
+    canonicalUrl: z
+      .string()
+      .trim()
+      .refine(
+        (value) => /^(https?:\/\/|\/)[a-z0-9/_-]+$/i.test(value),
+        "canonicalUrl must be a valid relative or absolute URL"
+      )
+      .optional(),
+
+    visibility: z.enum(CONTENT_VISIBILITY),
+
+    distribution: distributionSchema,
+
+    audit: auditSchema,
+  })
+  .superRefine((content, ctx) => {
+    const publishableStatuses = ["review", "approved", "scheduled", "published"];
+
+    if (publishableStatuses.includes(content.status) && content.body.trim().length < 100) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "body must be at least 100 characters for review/approved/scheduled/published content",
+        path: ["body"],
+      });
+    }
+
+    if (content.status === "scheduled") {
+      if (!content.publishAt) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "publishAt is required when status is scheduled",
+          path: ["publishAt"],
+        });
+      } else {
+        const publishDate = new Date(content.publishAt);
+        if (Number.isNaN(publishDate.getTime()) || publishDate.getTime() <= Date.now()) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "publishAt must be a future ISO datetime when status is scheduled",
+            path: ["publishAt"],
+          });
+        }
+      }
+    }
+
+    if (["approved", "scheduled", "published"].includes(content.status) && !content.seo) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "seo is required before approved/scheduled/published status",
+        path: ["seo"],
+      });
+    }
+
+    if (content.status === "published" && !content.canonicalUrl) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "canonicalUrl is required before published status",
+        path: ["canonicalUrl"],
+      });
+    }
+
+    if (content.status === "published") {
+      if (!content.audit.published_by || !content.audit.published_at) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "audit.published_by and audit.published_at are required when status is published",
+          path: ["audit", "published_at"],
+        });
+      }
+    }
+
+    if (content.status === "archived") {
+      if (!content.audit.archived_by || !content.audit.archived_at) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "audit.archived_by and audit.archived_at are required when status is archived",
+          path: ["audit", "archived_at"],
+        });
+      }
+    }
+
+    if (content.domain === "HEALING_DOMAIN") {
+      if (!noManipulativeHealingCta(content.summary)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "HEALING_DOMAIN summary must not contain monetization CTA language",
+          path: ["summary"],
+        });
+      }
+
+      if (!noManipulativeHealingCta(content.body)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "HEALING_DOMAIN body must not contain monetization CTA language",
+          path: ["body"],
+        });
+      }
+    }
+
+    if (!noClinicalClaims(content.summary)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "summary contains prohibited clinical claims",
+        path: ["summary"],
+      });
+    }
+
+    if (!noClinicalClaims(content.body)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "body contains prohibited clinical claims",
+        path: ["body"],
+      });
+    }
+  });
+
+export const contentPatchSchema = contentModelSchema.partial();
+
+export function validateContentModel(payload) {
+  return contentModelSchema.safeParse(payload);
+}
+
+export function validateContentPatch(payload) {
+  return contentPatchSchema.safeParse(payload);
+}
+EOF
+
+
+⸻
+
+3) Create reusable validator middleware
+
+Create server/middleware/validate-content-model.mjs
+
+cat > /workspace/server/middleware/validate-content-model.mjs <<'EOF'
+import {
+  validateContentModel,
+  validateContentPatch,
+} from "../contracts/content-model.schema.mjs";
+
+function formatZodError(error) {
+  return error.issues.map((issue) => ({
+    path: issue.path.join("."),
+    message: issue.message,
+    code: issue.code,
+  }));
+}
+
+export function requireValidContentModel(req, res, next) {
+  const result = validateContentModel(req.body);
+
+  if (!result.success) {
+    return res.status(400).json({
+      ok: false,
+      message: "CONTENT_MODEL_CONTRACT validation failed",
+      contract: "CONTENT_MODEL_CONTRACT",
+      errors: formatZodError(result.error),
+    });
+  }
+
+  req.validatedContent = result.data;
+  next();
+}
+
+export function requireValidContentPatch(req, res, next) {
+  const result = validateContentPatch(req.body);
+
+  if (!result.success) {
+    return res.status(400).json({
+      ok: false,
+      message: "CONTENT_MODEL_CONTRACT patch validation failed",
+      contract: "CONTENT_MODEL_CONTRACT",
+      errors: formatZodError(result.error),
+    });
+  }
+
+  req.validatedContentPatch = result.data;
+  next();
+}
+EOF
+
+
+⸻
+
+4) Replace placeholder content route with API-boundary enforcement
+
+Replace server/routes/content.mjs
+
+cat > /workspace/server/routes/content.mjs <<'EOF'
+import { Router } from "express";
+import { randomUUID } from "node:crypto";
+import { logger } from "../utils/logger.mjs";
+import {
+  requireValidContentModel,
+  requireValidContentPatch,
+} from "../middleware/validate-content-model.mjs";
+
+const router = Router();
+
+/**
+ * Temporary in-memory store.
+ * Replace with DB-backed persistence later without changing validation ownership.
+ */
+const contentStore = new Map();
+
+router.get("/", (_req, res) => {
+  const items = Array.from(contentStore.values());
+  res.json({ ok: true, count: items.length, items });
+});
+
+router.get("/:id", (req, res) => {
+  const item = contentStore.get(req.params.id);
+  if (!item) {
+    return res.status(404).json({
+      ok: false,
+      message: "Content not found",
+    });
+  }
+  return res.json({ ok: true, item });
+});
+
+router.post("/", requireValidContentModel, (req, res) => {
+  const content = req.validatedContent;
+
+  if (contentStore.has(content.id)) {
+    return res.status(409).json({
+      ok: false,
+      message: "Content with this id already exists",
+    });
+  }
+
+  const slugCollision = Array.from(contentStore.values()).find(
+    (item) => item.slug === content.slug
+  );
+
+  if (slugCollision) {
+    return res.status(409).json({
+      ok: false,
+      message: "Slug already exists",
+      field: "slug",
+    });
+  }
+
+  contentStore.set(content.id, content);
+
+  return res.status(201).json({
+    ok: true,
+    contract: "CONTENT_MODEL_CONTRACT",
+    item: content,
+  });
+});
+
+router.patch("/:id", requireValidContentPatch, (req, res) => {
+  const existing = contentStore.get(req.params.id);
+
+  if (!existing) {
+    return res.status(404).json({
+      ok: false,
+      message: "Content not found",
+    });
+  }
+
+  const merged = {
+    ...existing,
+    ...req.validatedContentPatch,
+    audit: {
+      ...existing.audit,
+      ...(req.validatedContentPatch.audit || {}),
+    },
+    distribution: {
+      ...(existing.distribution || {}),
+      ...(req.validatedContentPatch.distribution || {}),
+    },
+    seo: req.validatedContentPatch.seo
+      ? { ...(existing.seo || {}), ...req.validatedContentPatch.seo }
+      : existing.seo,
+  };
+
+  // Re-run full validation after merge by using internal self-check.
+  // Avoid duplicating rules here.
+  const { validateContentModel } = await import("../contracts/content-model.schema.mjs");
+  const result = validateContentModel(merged);
+
+  if (!result.success) {
+    return res.status(400).json({
+      ok: false,
+      message: "Merged content failed CONTENT_MODEL_CONTRACT validation",
+      contract: "CONTENT_MODEL_CONTRACT",
+      errors: result.error.issues.map((issue) => ({
+        path: issue.path.join("."),
+        message: issue.message,
+        code: issue.code,
+      })),
+    });
+  }
+
+  const slugCollision = Array.from(contentStore.values()).find(
+    (item) => item.id !== req.params.id && item.slug === result.data.slug
+  );
+
+  if (slugCollision) {
+    return res.status(409).json({
+      ok: false,
+      message: "Slug already exists",
+      field: "slug",
+    });
+  }
+
+  contentStore.set(req.params.id, result.data);
+
+  return res.json({
+    ok: true,
+    contract: "CONTENT_MODEL_CONTRACT",
+    item: result.data,
+  });
+});
+
+router.post("/validate", requireValidContentModel, (req, res) => {
+  return res.json({
+    ok: true,
+    contract: "CONTENT_MODEL_CONTRACT",
+    message: "Payload is valid",
+    item: req.validatedContent,
+  });
+});
+
+router.get("/health", (_req, res) => {
+  res.json({
+    ok: true,
+    module: "content",
+    validator: "CONTENT_MODEL_CONTRACT",
+    status: "operational",
+    now: new Date().toISOString(),
+    count: contentStore.size,
+  });
+});
+
+/**
+ * Seed endpoint for quick manual verification only.
+ * Remove later if not wanted.
+ */
+router.post("/seed-demo", (_req, res) => {
+  const now = new Date().toISOString();
+  const id = randomUUID();
+
+  const demo = {
+    id,
+    title: "A grounded practice for settling your nervous system",
+    slug: "a-grounded-practice-for-settling-your-nervous-system",
+    summary:
+      "A simple educational reflection that helps readers understand one calming practice without making clinical or exaggerated claims.",
+    body:
+      "This educational article walks through a simple grounding practice for moments of stress. It is not a substitute for therapy or crisis care. Step one is to pause. Step two is to notice your breath. Step three is to name one feeling and one need. Step four is to choose one kind, realistic next action. If you are in crisis, use emergency support resources immediately.",
+    status: "draft",
+    author: "system-demo-author",
+    domain: "HEALING_DOMAIN",
+    tags: ["grounding", "nervous-system", "self-regulation"],
+    category: "healing-tools",
+    seo: {
+      title: "Grounding practice for nervous system regulation",
+      metaDescription:
+        "Learn a grounded, educational nervous system practice that supports self-awareness and gentle regulation without hype, manipulation, or clinical overreach.",
+      ogTitle: "Grounding practice for nervous system regulation",
+      ogDescription:
+        "A calm, educational guide to one grounding practice that supports self-awareness, reflection, and gentle nervous system regulation.",
+      ogImage: "https://thegenuineloveproject.com/images/grounding-practice.png",
+      robots: "index, follow",
+      schemaType: "Article",
+    },
+    publishAt: null,
+    updatedAt: now,
+    canonicalUrl:
+      "/healing-tools/a-grounded-practice-for-settling-your-nervous-system",
+    visibility: "public",
+    distribution: {
+      newsletter: {
+        eligible: true,
+        sent: false,
+        sentAt: null,
+        audience: "all_subscribers",
+        segmentId: null,
+        subject: null,
+        campaignId: null,
+      },
+      social: {
+        eligible: true,
+        channels: ["twitter", "linkedin"],
+        posts: [],
+      },
+    },
+    audit: {
+      created_by: "system-demo-author",
+      created_at: now,
+      updated_by: "system-demo-author",
+      updated_at: now,
+      published_by: null,
+      published_at: null,
+      archived_by: null,
+      archived_at: null,
+      version: 1,
+      transitions: [],
+      qa_results: [],
+      distribution_log: [],
+    },
+  };
+
+  contentStore.set(id, demo);
+
+  res.status(201).json({
+    ok: true,
+    contract: "CONTENT_MODEL_CONTRACT",
+    item: demo,
+  });
+});
+
+export default router;
+EOF
+
+
+⸻
+
+5) Fix the dynamic import inside patch route
+
+Because await import() inside the handler is avoidable, replace that file with the cleaner version below.
+
+python - <<'PY'
+from pathlib import Path
+p = Path("/workspace/server/routes/content.mjs")
+text = p.read_text()
+text = text.replace(
+"""import {
+  requireValidContentModel,
+  requireValidContentPatch,
+} from "../middleware/validate-content-model.mjs";
+""",
+"""import {
+  requireValidContentModel,
+  requireValidContentPatch,
+} from "../middleware/validate-content-model.mjs";
+import { validateContentModel } from "../contracts/content-model.schema.mjs";
+"""
+)
+text = text.replace(
+"""  // Re-run full validation after merge by using internal self-check.
+  // Avoid duplicating rules here.
+  const { validateContentModel } = await import("../contracts/content-model.schema.mjs");
+  const result = validateContentModel(merged);
+""",
+"""  // Re-run full validation after merge. Keep B1 as single source of truth.
+  const result = validateContentModel(merged);
+"""
+)
+p.write_text(text)
+PY
+
+
+⸻
+
+6) Ensure the route is mounted in your server entrypoint
+
+Search first:
+
+grep -R "contentRouter\\|routes/content.mjs\\|/api/content" /workspace/server /workspace/app/backend/server 2>/dev/null
+
+If you already have a content route mounted, stop and inspect before changing anything.
+
+If not mounted, add it to the active server entrypoint.
+From your screenshots, your app appears to use server/index.mjs. Use this patch:
+
+python - <<'PY'
+from pathlib import Path
+
+candidates = [
+    Path("/workspace/server/index.mjs"),
+    Path("/workspace/app/backend/server/index.mjs"),
+]
+
+target = next((p for p in candidates if p.exists()), None)
+if not target:
+    raise SystemExit("No server entrypoint found at expected paths.")
+
+text = target.read_text()
+
+if 'import contentRouter from "./routes/content.mjs";' not in text:
+    marker = 'import'
+    lines = text.splitlines()
+    insert_at = 0
+    for i, line in enumerate(lines):
+        if line.startswith("import "):
+            insert_at = i + 1
+    lines.insert(insert_at, 'import contentRouter from "./routes/content.mjs";')
+    text = "\n".join(lines)
+
+if 'app.use("/api/content", contentRouter);' not in text:
+    if 'app.use("/api/' in text:
+        idx = text.rfind('app.use("/api/')
+        nl = text.find("\n", idx)
+        if nl == -1:
+            text += '\napp.use("/api/content", contentRouter);\n'
+        else:
+            text = text[:nl+1] + 'app.use("/api/content", contentRouter);\n' + text[nl+1:]
+    else:
+        text += '\napp.use("/api/content", contentRouter);\n'
+
+target.write_text(text)
+print(f"Updated {target}")
+PY
+
+
+⸻
+
+7) Do not run npm start again if port 5000 is already occupied
+
+Your screenshot shows:
+
+EADDRINUSE: address already in use 0.0.0.0:5000
+
+So use this to inspect instead of starting another process:
+
+lsof -i :5000 || ss -ltnp | grep 5000 || true
+
+If the app is already running, keep it running.
+
+If you truly need to restart it, first stop the existing process:
+
+pkill -f "node server/index.mjs" || true
+pkill -f "node app/backend/server/index.mjs" || true
+
+Then start once:
+
+cd /workspace
+npm start
+
+
+⸻
+
+8) Verification commands
+
+Run these exactly:
+
+cd /workspace
+
+npm run build
+npm run test
+
+curl -s http://localhost:5000/api/content/health | jq .
+curl -s http://localhost:5000/api/content | jq .
+
+Validate a correct B1 payload
+
+curl -s -X POST http://localhost:5000/api/content/validate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "title": "A grounded practice for settling your nervous system",
+    "slug": "a-grounded-practice-for-settling-your-nervous-system",
+    "summary": "A simple educational reflection that helps readers understand one calming practice without making clinical or exaggerated claims.",
+    "body": "This educational article walks through a simple grounding practice for moments of stress. It is not a substitute for therapy or crisis care. Step one is to pause. Step two is to notice your breath. Step three is to name one feeling and one need. Step four is to choose one kind, realistic next action. If you are in crisis, use emergency support resources immediately.",
+    "status": "draft",
+    "author": "system-demo-author",
+    "domain": "HEALING_DOMAIN",
+    "tags": ["grounding", "nervous-system", "self-regulation"],
+    "category": "healing-tools",
+    "seo": {
+      "title": "Grounding practice for nervous system regulation",
+      "metaDescription": "Learn a grounded, educational nervous system practice that supports self-awareness and gentle regulation without hype, manipulation, or clinical overreach.",
+      "ogTitle": "Grounding practice for nervous system regulation",
+      "ogDescription": "A calm, educational guide to one grounding practice that supports self-awareness, reflection, and gentle nervous system regulation.",
+      "ogImage": "https://thegenuineloveproject.com/images/grounding-practice.png",
+      "robots": "index, follow",
+      "schemaType": "Article"
+    },
+    "publishAt": null,
+    "updatedAt": "2026-04-16T01:00:00.000Z",
+    "canonicalUrl": "/healing-tools/a-grounded-practice-for-settling-your-nervous-system",
+    "visibility": "public",
+    "distribution": {
+      "newsletter": {
+        "eligible": true,
+        "sent": false,
+        "sentAt": null,
+        "audience": "all_subscribers",
+        "segmentId": null,
+        "subject": null,
+        "campaignId": null
+      },
+      "social": {
+        "eligible": true,
+        "channels": ["twitter", "linkedin"],
+        "posts": []
+      }
+    },
+    "audit": {
+      "created_by": "system-demo-author",
+      "created_at": "2026-04-16T01:00:00.000Z",
+      "updated_by": "system-demo-author",
+      "updated_at": "2026-04-16T01:00:00.000Z",
+      "published_by": null,
+      "published_at": null,
+      "archived_by": null,
+      "archived_at": null,
+      "version": 1,
+      "transitions": [],
+      "qa_results": [],
+      "distribution_log": []
+    }
+  }' | jq .
+
+Validate an invalid B1 payload
+
+This should return 400:
+
+curl -i -X POST http://localhost:5000/api/content/validate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "not-a-uuid",
+    "title": "Hi",
+    "slug": "BAD SLUG",
+    "summary": "too short",
+    "body": "<script>alert(1)</script>",
+    "status": "published",
+    "author": "",
+    "domain": "HEALING_DOMAIN",
+    "updatedAt": "2026-04-16T01:00:00.000Z",
+    "visibility": "public",
+    "audit": {
+      "created_by": "x",
+      "created_at": "2026-04-16T01:00:00.000Z",
+      "updated_by": "x",
+      "updated_at": "2026-04-16T01:00:00.000Z",
+      "version": 1,
+      "transitions": []
+    }
+  }'
+
+Create a valid content item
+
+curl -s -X POST http://localhost:5000/api/content \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "660e8400-e29b-41d4-a716-446655440000",
+    "title": "A practical reflection for steady self-trust",
+    "slug": "a-practical-reflection-for-steady-self-trust",
+    "summary": "An educational reflection that supports calm self-trust and grounded awareness without making diagnosis or therapy replacement claims.",
+    "body": "This article offers a practical reflection for moments when your mind feels loud. It focuses on naming what is present, grounding in one value, and choosing one clear next step. It is educational in nature and is not a substitute for professional care. If you are in crisis, seek urgent support immediately through emergency or crisis resources.",
+    "status": "draft",
+    "author": "system-demo-author",
+    "domain": "HEALING_DOMAIN",
+    "tags": ["self-trust", "reflection"],
+    "category": "healing-tools",
+    "seo": {
+      "title": "Practical reflection for steady self-trust",
+      "metaDescription": "Explore a grounded educational reflection that supports self-trust, calm awareness, and one clear next step without hype or clinical overreach.",
+      "ogTitle": "Practical reflection for steady self-trust",
+      "ogDescription": "A grounded educational reflection to support self-trust, clarity, and one realistic next step.",
+      "ogImage": "https://thegenuineloveproject.com/images/self-trust-reflection.png",
+      "robots": "index, follow",
+      "schemaType": "Article"
+    },
+    "publishAt": null,
+    "updatedAt": "2026-04-16T01:00:00.000Z",
+    "canonicalUrl": "/healing-tools/a-practical-reflection-for-steady-self-trust",
+    "visibility": "public",
+    "distribution": {
+      "newsletter": {
+        "eligible": true,
+        "sent": false,
+        "sentAt": null,
+        "audience": "all_subscribers",
+        "segmentId": null,
+        "subject": null,
+        "campaignId": null
+      },
+      "social": {
+        "eligible": true,
+        "channels": ["twitter"],
+        "posts": []
+      }
+    },
+    "audit": {
+      "created_by": "system-demo-author",
+      "created_at": "2026-04-16T01:00:00.000Z",
+      "updated_by": "system-demo-author",
+      "updated_at": "2026-04-16T01:00:00.000Z",
+      "published_by": null,
+      "published_at": null,
+      "archived_by": null,
+      "archived_at": null,
+      "version": 1,
+      "transitions": [],
+      "qa_results": [],
+      "distribution_log": []
+    }
+  }' | jq .
+
+
+⸻
+
+9) Replit AI prompt
+
+Paste this into Replit AI only if you want it to make the edits for you:
+
+Implement a centralized runtime validator for CONTENT_MODEL_CONTRACT (B1) as the single source of truth at the API boundary.
+
+Requirements:
+1. Create server/contracts/content-model.schema.mjs using Zod.
+2. Include enums for:
+   - status: idea, draft, review, approved, scheduled, published, archived
+   - domain: HEALING_DOMAIN, BUSINESS_DOMAIN, PLATFORM_DOMAIN, DESIGN_DOMAIN, RESEARCH_DOMAIN
+   - visibility: public, subscribers, plan_gated, internal
+3. Include nested schemas for:
+   - seo
+   - audit
+   - distribution.newsletter
+   - distribution.social
+4. Enforce root-level canonicalUrl ownership from B1, not inside seo.
+5. Enforce:
+   - UUID v4 id
+   - slug regex
+   - title/summary/body length rules
+   - no unsafe HTML in body
+   - HEALING_DOMAIN cannot contain monetization CTA language
+   - published requires canonicalUrl and published audit fields
+   - scheduled requires future publishAt
+   - approved/scheduled/published require seo
+6. Create reusable middleware:
+   - requireValidContentModel
+   - requireValidContentPatch
+7. Replace placeholder server/routes/content.mjs with real CRUD-ish validation routes:
+   - GET /api/content
+   - GET /api/content/:id
+   - POST /api/content
+   - PATCH /api/content/:id
+   - POST /api/content/validate
+   - GET /api/content/health
+8. Mount content router in the active server entrypoint if missing.
+9. Do not start a second server if port 5000 is already in use.
+10. After changes, run:
+   - npm run build
+   - npm run test
+   - curl checks for /api/content/health and /api/content/validate
+
+Rules:
+- smallest safe patch only
+- no duplicate validation logic across routes
+- keep B1 as single source of truth
+- preserve existing working systems
+- stop after verification
+
+
+⸻
+
+Expected result
+
+When done correctly:
+	•	invalid B1 payloads fail with 400
+	•	valid B1 payloads pass at /api/content/validate
+	•	all content route enforcement flows through one Zod schema
+	•	canonicalUrl stays owned by B1 root level
+	•	no duplicate rule drift across routes
+
+If you want, the next clean move is B2 runtime enforcement so the seo object becomes contract-accurate end to end.
