@@ -43,4 +43,9 @@ _quarantine/
 publickey.asc
 gpg-batch
 echo "publickey.asc" >> .gitignore
-echo "gpg-batch" >> .gitignore
+echo "gpg-batch" >> .gitignore.env
+.env.local
+.env.production
+node_modules/
+dist/
+*.log
