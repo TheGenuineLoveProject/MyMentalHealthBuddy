@@ -67,6 +67,28 @@ export default function CanvaLanding() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const sections = document.querySelectorAll('.section-reveal');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      sections.forEach(el => el.classList.add('revealed'));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    sections.forEach(section => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -388,7 +410,8 @@ export default function CanvaLanding() {
         </div>
       </header>
 
-      <section id="home" className="relative py-14 md:py-16 lg:py-20 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
+      <section id="home" className="relative py-16 md:py-20 lg:py-28 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
+        <div className="hero-depth-layer" aria-hidden="true"></div>
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div 
             className="decorative-orb sage animate-drift w-[500px] h-[500px] -top-32 -right-32"
@@ -491,19 +514,19 @@ export default function CanvaLanding() {
           </div>
 
           <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
-            <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
+            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
               <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 Free Forever. No Catch.
               </p>
             </div>
-            <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }}>
+            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
               <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 Evidence-Based Tools
               </p>
             </div>
-            <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }}>
+            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
               <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
                 Your AI Buddy
@@ -513,16 +536,16 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
       <section 
         id="about" 
-        className="py-14 md:py-20 px-4 md:px-6"
+        className="section-breathe section-reveal px-4 md:px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}
       >
         <div className="max-w-4xl mx-auto text-center">
           <div 
-            className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-2xl mb-4 md:mb-6"
+            className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-2xl mb-4 md:mb-6 breathe"
             style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 20px var(--metallic-gold-glow)' }}
           >
             <Heart className="w-6 h-6 md:w-7 md:h-7 text-white" aria-hidden="true" />
@@ -541,8 +564,8 @@ export default function CanvaLanding() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
-            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
-              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))' }}>
+            <div className="about-card-elite stagger-child flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 sm:text-center">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))' }}>
                 <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
@@ -555,8 +578,8 @@ export default function CanvaLanding() {
               </div>
             </div>
 
-            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
-              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+            <div className="about-card-elite stagger-child flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 sm:text-center">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
                 <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
@@ -569,8 +592,8 @@ export default function CanvaLanding() {
               </div>
             </div>
 
-            <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
-              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-blush-400), var(--glp-blush-600))' }}>
+            <div className="about-card-elite stagger-child flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 sm:text-center">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-blush-400), var(--glp-blush-600))' }}>
                 <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
@@ -586,9 +609,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
-      <section id="philosophy" className="py-14 md:py-24 px-4 md:px-6 relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
+      <section id="philosophy" className="section-breathe section-reveal px-4 md:px-6 relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
         <div className="aurora-bg" aria-hidden="true"></div>
         <div className="max-w-[1100px] mx-auto relative z-10">
           <div className="text-center mb-10 md:mb-14">
@@ -612,7 +635,7 @@ export default function CanvaLanding() {
             {philosophyPillars.map((pillar, index) => {
               const accent = philosophyAccentColors[pillar.color] || philosophyAccentColors.sage;
               return (
-                <div key={index} className="philosophy-card" data-testid={`card-philosophy-${index}`}>
+                <div key={index} className="philosophy-card stagger-child" data-testid={`card-philosophy-${index}`}>
                   <div className="flex items-start gap-4">
                     <div 
                       className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
@@ -645,11 +668,11 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
-      <section id="features" className="py-14 md:py-24 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-sage-10) 0%, var(--glp-paper) 30%)' }}>
+      <section id="features" className="section-breathe section-reveal px-4 md:px-6 section-flow-sage">
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-8 md:mb-14">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               Everything You Need to
               <span className="block text-2xl md:text-4xl mt-1" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Understand, Regulate & Evolve Your Mind</span>
@@ -662,9 +685,15 @@ export default function CanvaLanding() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {features.map((feature, index) => {
               const accent = featureAccentColors[feature.accent] || featureAccentColors.sage;
+              const accentGradients = {
+                sage: 'linear-gradient(90deg, var(--glp-sage), var(--glp-teal-400))',
+                gold: 'linear-gradient(90deg, var(--glp-gold), var(--glp-gold-dark))',
+                rose: 'linear-gradient(90deg, var(--glp-blush-400), var(--glp-blush-600))',
+                teal: 'linear-gradient(90deg, var(--glp-teal-400), var(--glp-sage-deep))'
+              };
               return (
-                <div key={index} className="rounded-2xl p-5 md:p-7 group transition-all duration-300 hover:-translate-y-2" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
-                  <div className="mb-4 md:mb-5 flex items-center justify-center w-11 h-11 md:w-13 md:h-13 rounded-xl transition-all group-hover:shadow-lg" style={{ background: accent.bg, boxShadow: `0 4px 16px ${accent.shadow}`, width: '3rem', height: '3rem' }}>
+                <div key={index} className="feature-card-elite stagger-child group" style={{ '--card-accent': accentGradients[feature.accent] || accentGradients.sage }}>
+                  <div className="mb-4 md:mb-5 feature-icon-wrap flex items-center justify-center rounded-xl" style={{ background: accent.bg, boxShadow: `0 4px 16px ${accent.shadow}`, width: '3rem', height: '3rem' }}>
                     <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2} aria-hidden="true" />
                   </div>
                   <h3 className="text-base md:text-xl font-serif font-semibold mb-2 md:mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -675,7 +704,7 @@ export default function CanvaLanding() {
                   </p>
                   <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
                       Explore
-                      <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1" aria-hidden="true" />
+                      <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
                 </div>
               );
@@ -684,9 +713,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
-      <section className="py-14 md:py-24 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
+      <section className="section-breathe section-reveal px-4 md:px-6 section-flow-warm">
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
           <div className="text-center mb-8 md:mb-14">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -703,8 +732,8 @@ export default function CanvaLanding() {
               <Link 
                 key={index} 
                 href={step.link}
-                className="flex items-center gap-4 md:flex-col md:items-center md:text-center md:max-w-xs mx-auto group cursor-pointer transition-transform duration-300 hover:scale-[1.02] md:hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-2xl p-4 md:p-6" 
-                style={{ '--tw-ring-color': 'var(--glp-sage)', background: 'var(--glp-white)', border: '1px solid var(--glp-sage-15)' }}
+                className="step-card-elite stagger-child flex items-center gap-4 md:flex-col md:items-center md:text-center md:max-w-xs mx-auto group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" 
+                style={{ '--tw-ring-color': 'var(--glp-sage)' }}
                 data-testid={`step-card-${index}`}
                 aria-label={`${step.title} - ${step.description}`}
               >
@@ -734,10 +763,10 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
       <section 
-        className="py-14 md:py-24 px-4 md:px-6 relative overflow-hidden"
+        className="section-breathe section-reveal px-4 md:px-6 relative overflow-hidden"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-15))' }}
       >
         <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
@@ -755,12 +784,7 @@ export default function CanvaLanding() {
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index} 
-                className="rounded-2xl p-6 md:p-8"
-                style={{ 
-                  background: 'var(--glp-white)',
-                  border: '1px solid var(--glp-sage-20)',
-                  boxShadow: '0 4px 16px var(--glp-sage-10)'
-                }}
+                className="testimonial-card-elite stagger-child"
                 data-testid={`testimonial-${index}`}
               >
                 <div className="flex items-center gap-3 mb-4">
@@ -812,11 +836,11 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
       <section 
         id="faq" 
-        className="py-14 md:py-24 px-6"
+        className="section-breathe section-reveal px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-sage-10), var(--glp-paper))' }}
       >
         <div className="max-w-3xl mx-auto">
@@ -857,9 +881,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      <div className="section-divider" style={{ margin: '0 auto' }} aria-hidden="true"></div>
+      <div className="gold-accent-line" aria-hidden="true"></div>
 
-      <section className="py-14 md:py-24 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
+      <section className="section-breathe section-reveal cta-enterprise px-6 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />

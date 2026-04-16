@@ -27,6 +27,8 @@ The frontend employs a premium, Canva-inspired design with HSL color formatting,
 
 **Consciousness-Expanding CSS Layer** (canva-landing.css): Includes `aurora-drift` animated background, `awareness-pulse` ring animation, `gentle-breathe` scale animation, `text-shimmer` gold gradient text, `depth-shadow` multi-layer shadows, `.philosophy-card` with hover gradient border, `.manifesto-quote` with radial gradient overlays. All animations respect `prefers-reduced-motion`.
 
+**Enterprise Elite II Advanced Design System** (canva-landing.css, bottom section): Scroll-triggered reveal system (`.section-reveal` + IntersectionObserver with `stagger-child` cascade delays), philosophical section flow gradients (`.section-flow-sage`, `.section-flow-warm`, `.section-flow-deep`), elite card depth systems (`.feature-card-elite` with accent-colored top border reveal, `.testimonial-card-elite`, `.step-card-elite`, `.stat-card-elite`, `.about-card-elite`), consciousness dividers (gold gradient line + glowing dot), hero depth layer (multi-gradient radial overlay), CTA enterprise ambient glow animation, `.section-breathe` responsive vertical padding, and `.gold-accent-line` section separator. IntersectionObserver has fallback for unsupported browsers. All elite hover transforms disabled under `prefers-reduced-motion`.
+
 **Avatar SVG System**: The mmhb-icon.svg features a futuristic humanoid figure with sage-to-teal gradient background, tech orbital arcs, golden inner glow, crown glow, rose accent arcs, ambient particles (sage, gold, rose colors), and multiple blur/bloom filters for depth.
 
 ### Technical Implementations

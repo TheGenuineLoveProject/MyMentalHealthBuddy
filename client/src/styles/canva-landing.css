@@ -1,6 +1,6 @@
 /* Canva Landing Page Styles - MyMentalHealthBuddy by The Genuine Love Project */
 /* Uses --glp-* tokens from brand-tokens.css - single source of truth */
-/* Enhanced with sacred geometry, Playfair Display + Inter typography */
+/* Enterprise Elite II — Philosophical, Attuned, Powerful Design System */
 
 /* Alias tokens for legacy class compatibility */
 :root {
@@ -1157,11 +1157,6 @@
   opacity: 1;
 }
 
-.canva-landing .philosophy-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px var(--glp-sage-deep-12), 0 0 0 1px var(--glp-sage-15);
-}
-
 .canva-landing .manifesto-quote {
   position: relative;
   padding: 2.5rem 3rem;
@@ -1390,6 +1385,423 @@
   .canva-landing .icon-circle,
   .canva-landing .btn-sacred-gold:hover {
     transition: none;
+    transform: none;
+  }
+}
+
+/* ===== ENTERPRISE ELITE II — ADVANCED DESIGN SYSTEM ===== */
+
+/* --- Scroll-Triggered Reveal System --- */
+.canva-landing .section-reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canva-landing .section-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.canva-landing .section-reveal.revealed .stagger-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.canva-landing .stagger-child {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canva-landing .stagger-child:nth-child(1) { transition-delay: 0.08s; }
+.canva-landing .stagger-child:nth-child(2) { transition-delay: 0.16s; }
+.canva-landing .stagger-child:nth-child(3) { transition-delay: 0.24s; }
+.canva-landing .stagger-child:nth-child(4) { transition-delay: 0.32s; }
+.canva-landing .stagger-child:nth-child(5) { transition-delay: 0.40s; }
+.canva-landing .stagger-child:nth-child(6) { transition-delay: 0.48s; }
+.canva-landing .stagger-child:nth-child(7) { transition-delay: 0.56s; }
+.canva-landing .stagger-child:nth-child(8) { transition-delay: 0.64s; }
+
+/* --- Philosophical Section Transitions --- */
+.canva-landing .section-flow-sage {
+  background: linear-gradient(180deg,
+    var(--glp-paper) 0%,
+    var(--glp-sage-10) 30%,
+    var(--glp-teal-50) 70%,
+    var(--glp-paper) 100%
+  );
+}
+
+.canva-landing .section-flow-warm {
+  background: linear-gradient(180deg,
+    var(--glp-paper) 0%,
+    rgba(var(--glp-gold-rgb), 0.06) 25%,
+    rgba(var(--glp-paper-rgb), 0.95) 50%,
+    rgba(var(--glp-rose-rgb), 0.04) 75%,
+    var(--glp-paper) 100%
+  );
+}
+
+.canva-landing .section-flow-deep {
+  background: linear-gradient(180deg,
+    var(--glp-sage-deep) 0%,
+    #0a3636 40%,
+    #0d4242 70%,
+    var(--glp-sage-deep) 100%
+  );
+}
+
+/* --- Enhanced Feature Cards — Enterprise Depth --- */
+.canva-landing .feature-card-elite {
+  background: var(--glp-white);
+  border-radius: 24px;
+  padding: 2rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--glp-sage-15);
+  transition: all 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    0 1px 3px rgba(var(--glp-sage-deep-rgb), 0.04),
+    0 4px 12px rgba(var(--glp-sage-deep-rgb), 0.06);
+}
+
+.canva-landing .feature-card-elite::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-accent, linear-gradient(90deg, var(--glp-sage), var(--glp-gold)));
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.canva-landing .feature-card-elite::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(var(--glp-sage-rgb), 0.03), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.canva-landing .feature-card-elite:hover {
+  transform: translateY(-8px);
+  border-color: var(--glp-sage-30);
+  box-shadow:
+    0 4px 8px rgba(var(--glp-sage-deep-rgb), 0.04),
+    0 12px 28px rgba(var(--glp-sage-deep-rgb), 0.08),
+    0 24px 56px rgba(var(--glp-sage-deep-rgb), 0.06);
+}
+
+.canva-landing .feature-card-elite:hover::before {
+  opacity: 1;
+}
+
+.canva-landing .feature-card-elite:hover::after {
+  opacity: 1;
+}
+
+.canva-landing .feature-card-elite:hover .feature-icon-wrap {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 24px var(--glp-sage-30);
+}
+
+.canva-landing .feature-icon-wrap {
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* --- Testimonial Card — Enterprise Depth --- */
+.canva-landing .testimonial-card-elite {
+  background: var(--glp-white);
+  border-radius: 28px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--glp-sage-15);
+  transition: all 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.04),
+    0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06);
+}
+
+.canva-landing .testimonial-card-elite::before {
+  content: '"';
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  font-size: 100px;
+  font-family: 'Playfair Display', serif;
+  line-height: 1;
+  opacity: 0.08;
+  color: var(--glp-sage);
+  pointer-events: none;
+}
+
+.canva-landing .testimonial-card-elite:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 8px 20px rgba(var(--glp-sage-deep-rgb), 0.06),
+    0 20px 48px rgba(var(--glp-sage-deep-rgb), 0.08);
+  border-color: var(--glp-sage-20);
+}
+
+/* --- Stats Section — Premium Floating Cards --- */
+.canva-landing .stat-card-elite {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.canva-landing .stat-card-elite:hover {
+  transform: translateY(-4px);
+}
+
+.canva-landing .stat-card-elite::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--glp-sage), var(--glp-gold));
+  opacity: 0;
+  transition: opacity 0.4s ease, width 0.4s ease;
+}
+
+.canva-landing .stat-card-elite:hover::after {
+  opacity: 1;
+  width: 80px;
+}
+
+/* --- Step Card — Enterprise Depth with Connector --- */
+.canva-landing .step-card-elite {
+  position: relative;
+  background: var(--glp-white);
+  border-radius: 28px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border: 1px solid var(--glp-sage-15);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.04),
+    0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06);
+}
+
+.canva-landing .step-card-elite:hover {
+  transform: translateY(-8px);
+  border-color: var(--glp-sage-30);
+  box-shadow:
+    0 12px 36px rgba(var(--glp-sage-deep-rgb), 0.08),
+    0 0 0 1px var(--glp-sage-20);
+}
+
+/* --- Philosophy Card — Deep Hover Gradient Border --- */
+.canva-landing .philosophy-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 12px 36px rgba(var(--glp-sage-deep-rgb), 0.08),
+    0 24px 56px rgba(var(--glp-sage-deep-rgb), 0.04),
+    0 0 0 1px var(--glp-sage-15);
+}
+
+/* --- FAQ — Enterprise Hover States --- */
+.canva-landing .faq-item-elite {
+  border-bottom: 1px solid var(--glp-sage-10);
+  padding: 1.75rem 0;
+  transition: all 0.35s ease;
+}
+
+.canva-landing .faq-item-elite:hover {
+  padding-left: 0.75rem;
+  border-bottom-color: var(--glp-sage-20);
+}
+
+.canva-landing .faq-question-elite {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--glp-sage-deep);
+  font-size: 1.125rem;
+  padding: 4px 0;
+  transition: color 0.25s ease;
+  gap: 1rem;
+}
+
+.canva-landing .faq-question-elite:hover {
+  color: var(--glp-gold-dark);
+}
+
+/* --- Section Spacing & Breathing Room --- */
+.canva-landing .section-breathe {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .canva-landing .section-breathe {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .canva-landing .section-breathe {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* --- Philosophical Divider — Consciousness Line --- */
+.canva-landing .consciousness-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  opacity: 0.5;
+}
+
+.canva-landing .consciousness-divider::before,
+.canva-landing .consciousness-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  max-width: 240px;
+  background: linear-gradient(90deg, transparent, var(--glp-gold), transparent);
+}
+
+.canva-landing .consciousness-divider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--glp-gold);
+  box-shadow: 0 0 8px rgba(var(--glp-gold-rgb), 0.4);
+}
+
+/* --- Hero Section Enhanced Depth --- */
+.canva-landing .hero-depth-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(var(--glp-sage-rgb), 0.06), transparent),
+    radial-gradient(ellipse 40% 50% at 80% 60%, rgba(var(--glp-gold-rgb), 0.04), transparent),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(var(--glp-violet-rgb), 0.03), transparent);
+}
+
+/* --- CTA Section — Enterprise Glow --- */
+.canva-landing .cta-enterprise {
+  position: relative;
+  overflow: hidden;
+}
+
+.canva-landing .cta-enterprise::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -25%;
+  width: 150%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 30%, rgba(var(--glp-sage-rgb), 0.12), transparent 50%),
+              radial-gradient(ellipse at 70% 70%, rgba(var(--glp-gold-rgb), 0.08), transparent 50%);
+  pointer-events: none;
+  animation: cta-ambient 12s ease-in-out infinite alternate;
+}
+
+@keyframes cta-ambient {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-5%, 3%) scale(1.05); }
+}
+
+/* --- About Section Cards — Refined Elevation --- */
+.canva-landing .about-card-elite {
+  background: var(--glp-white);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid var(--glp-sage-15);
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.04);
+}
+
+@media (min-width: 640px) {
+  .canva-landing .about-card-elite {
+    padding: 2rem;
+  }
+}
+
+.canva-landing .about-card-elite:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06),
+    0 0 0 1px var(--glp-sage-15);
+}
+
+/* --- Manifesto Section — Enhanced Consciousness --- */
+.canva-landing .manifesto-quote {
+  border: 1px solid rgba(var(--glp-sage-rgb), 0.15);
+}
+
+/* --- Gold Accent Line Between Sections --- */
+.canva-landing .gold-accent-line {
+  width: 100%;
+  max-width: 560px;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(var(--glp-gold-rgb), 0.2) 20%,
+    rgba(var(--glp-gold-rgb), 0.5) 50%,
+    rgba(var(--glp-gold-rgb), 0.2) 80%,
+    transparent 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing .section-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .canva-landing .stagger-child {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .canva-landing .cta-enterprise::before {
+    animation: none;
+  }
+  .canva-landing .feature-card-elite,
+  .canva-landing .testimonial-card-elite,
+  .canva-landing .step-card-elite,
+  .canva-landing .stat-card-elite,
+  .canva-landing .about-card-elite,
+  .canva-landing .philosophy-card {
+    transition: none;
+  }
+  .canva-landing .feature-card-elite:hover,
+  .canva-landing .testimonial-card-elite:hover,
+  .canva-landing .step-card-elite:hover,
+  .canva-landing .stat-card-elite:hover,
+  .canva-landing .about-card-elite:hover,
+  .canva-landing .philosophy-card:hover {
+    transform: none;
+  }
+  .canva-landing .feature-icon-wrap {
+    transition: none;
+  }
+  .canva-landing .feature-card-elite:hover .feature-icon-wrap {
     transform: none;
   }
 }
