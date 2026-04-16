@@ -1,5 +1,3 @@
-const fs = require("fs");
-
 function logEvent(event, data = {}) {
   const payload = {
     event,
@@ -7,10 +5,27 @@ function logEvent(event, data = {}) {
     ...data
   };
 
-  const line = JSON.stringify(payload) + "\n";
-
-  console.log(line);
-  fs.appendFileSync("logs/ai.log", line);
+  console.log(JSON.stringify(payload));
 }
 
-module.exports = { logEvent };
+function trackPromptUsage(engine, promptId, inputText) {
+  logEvent("prompt_used", {
+    engine,
+    promptId,
+    inputLength: inputText.length
+  });
+}
+
+function trackOutcome(engine, promptId, success = true) {
+  logEvent("prompt_outcome", {
+    engine,
+    promptId,
+    success
+  });
+}
+
+module.exports = {
+  logEvent,
+  trackPromptUsage,
+  trackOutcome
+};
