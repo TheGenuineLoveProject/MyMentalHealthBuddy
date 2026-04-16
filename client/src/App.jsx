@@ -707,7 +707,6 @@ export default function App() {
               <Route path="/well-being">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/mental-wellness">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/emotional-health"><WellnessRoute><MoodPage /></WellnessRoute></Route>
-              <Route path="/joy"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/trust"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/compassion"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/patience"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
@@ -954,7 +953,6 @@ export default function App() {
               <Route path="/recovery">{() => <Redirect to="/healing-journey" />}</Route>
               <Route path="/therapy">{() => <Redirect to="/support" />}</Route>
               <Route path="/counseling">{() => <Redirect to="/support" />}</Route>
-              <Route path="/mental-health">{() => <Redirect to="/wellness" />}</Route>
               <Route path="/assistance">{() => <Redirect to="/support" />}</Route>
               <Route path="/toolbox">{() => <Redirect to="/tools" />}</Route>
               <Route path="/calm-down">{() => <Redirect to="/calm" />}</Route>
@@ -1763,7 +1761,6 @@ export default function App() {
               <Route path="/admin/analytics">{() => <ProtectedRoute><AdminGuard><AnalyticsDashboard /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/users">{() => <ProtectedRoute><AdminGuard><AdminUsers /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/tools">{() => <ProtectedRoute><AdminGuard><AdminTools /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/profile">{() => <ProtectedRoute><UserProfile /></ProtectedRoute>}</Route>
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
               <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
               <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>

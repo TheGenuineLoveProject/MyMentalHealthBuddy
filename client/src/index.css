@@ -66,7 +66,7 @@ html {
 }
 
 body {
-  font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   min-height: 100vh;
@@ -74,7 +74,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
