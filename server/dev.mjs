@@ -652,6 +652,34 @@ async function startServer() {
     throw lastErr;
   }
   
+  // Safe port reclaim: kill ONLY stale `server/dev.mjs` PIDs (never PID 1, never unrelated processes).
+  async function reclaimPortFromStaleDev(port) {
+    try {
+      const { execSync } = await import('child_process');
+      const raw = execSync(`lsof -ti tcp:${port} 2>/dev/null || true`, { encoding: 'utf-8' }).trim();
+      if (!raw) return false;
+      const pids = raw.split('\n').map((s) => parseInt(s, 10)).filter((n) => Number.isFinite(n) && n > 1 && n !== process.pid);
+      const reclaimed = [];
+      for (const pid of pids) {
+        try {
+          const cmd = execSync(`ps -p ${pid} -o args= 2>/dev/null || true`, { encoding: 'utf-8' }).trim();
+          if (cmd && /server\/dev\.mjs/.test(cmd)) {
+            process.kill(pid, 'SIGKILL');
+            reclaimed.push(pid);
+          } else {
+            logger.info("Port held by non-dev process; leaving untouched", { port, pid, cmd: cmd.slice(0, 120) });
+          }
+        } catch (_) {}
+      }
+      if (reclaimed.length) {
+        logger.info("Reclaimed port from stale dev.mjs", { port, pids: reclaimed.join(', ') });
+        await new Promise((r) => setTimeout(r, 750));
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  }
+
   let server = null;
   let boundPort = null;
   
@@ -663,6 +691,17 @@ async function startServer() {
       break;
     } catch (err) {
       if (err.code === 'EADDRINUSE') {
+        // Preferred port: one-shot reclaim of stale dev.mjs, then retry once.
+        if (idx === 0) {
+          const reclaimed = await reclaimPortFromStaleDev(port);
+          if (reclaimed) {
+            try {
+              server = await tryListenWithRetry(port, 6, 500);
+              boundPort = port;
+              break;
+            } catch (_) {}
+          }
+        }
         logger.info("Port is busy, trying next", { port });
         try {
           const { execSync } = await import('child_process');
