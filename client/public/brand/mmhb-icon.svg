@@ -1,87 +1,138 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8ec4a5"/>
-      <stop offset="35%" stop-color="#5a9a82"/>
-      <stop offset="70%" stop-color="#3a7a6a"/>
+      <stop offset="0%" stop-color="#9ad0b2"/>
+      <stop offset="30%" stop-color="#6aaa8a"/>
+      <stop offset="60%" stop-color="#448070"/>
       <stop offset="100%" stop-color="#264f4f"/>
     </linearGradient>
-    <radialGradient id="bg-aura" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#a8d8b8" stop-opacity="0.30"/>
+    <radialGradient id="bg-aura" cx="48%" cy="48%" r="50%">
+      <stop offset="0%" stop-color="#b8e0cc" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#5a9a80" stop-opacity="0.08"/>
       <stop offset="100%" stop-color="#264f4f" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow-wide" cx="50%" cy="58%" r="30%">
-      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.55"/>
-      <stop offset="50%" stop-color="#d4a843" stop-opacity="0.20"/>
+
+    <radialGradient id="glow-ambient" cx="50%" cy="60%" r="38%">
+      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.45"/>
+      <stop offset="35%" stop-color="#d4a843" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#264f4f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-mid" cx="50%" cy="60%" r="18%">
+      <stop offset="0%" stop-color="#fff5d0" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#ffe088" stop-opacity="0.6"/>
       <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow-core" cx="50%" cy="58%" r="14%">
-      <stop offset="0%" stop-color="#fffcef" stop-opacity="1"/>
-      <stop offset="30%" stop-color="#ffe8a0" stop-opacity="0.92"/>
-      <stop offset="65%" stop-color="#d4a843" stop-opacity="0.50"/>
-      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+    <radialGradient id="glow-hot" cx="50%" cy="60%" r="8%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#fffcef" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffe8a0" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="body-fill" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="40%" stop-color="#e0f0e6" stop-opacity="0.72"/>
-      <stop offset="75%" stop-color="#a8d8b8" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.20"/>
+
+    <linearGradient id="body-grad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#e8f6ee" stop-opacity="0.90"/>
+      <stop offset="30%" stop-color="#c8e6d5" stop-opacity="0.68"/>
+      <stop offset="60%" stop-color="#95cfae" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#5a9a80" stop-opacity="0.15"/>
     </linearGradient>
-    <linearGradient id="head-fill" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.97"/>
-      <stop offset="100%" stop-color="#d0ecd8" stop-opacity="0.85"/>
+    <linearGradient id="arm-grad-l" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.82"/>
+      <stop offset="40%" stop-color="#d0ecd8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.18"/>
     </linearGradient>
-    <filter id="body-blur" x="-8%" y="-8%" width="116%" height="116%">
+    <linearGradient id="arm-grad-r" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.78"/>
+      <stop offset="40%" stop-color="#d0ecd8" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.16"/>
+    </linearGradient>
+    <radialGradient id="head-grad" cx="45%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="60%" stop-color="#e0f2e6" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#b0d8c0" stop-opacity="0.72"/>
+    </radialGradient>
+
+    <filter id="soft-body" x="-6%" y="-6%" width="112%" height="112%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.8"/>
+    </filter>
+    <filter id="soft-arm" x="-8%" y="-8%" width="116%" height="116%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+    <filter id="bloom-wide" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="28"/>
+    </filter>
+    <filter id="bloom-mid" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="14"/>
+    </filter>
+    <filter id="bloom-hot" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
+    </filter>
+    <filter id="soft-head" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5"/>
+    </filter>
+    <filter id="highlight" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
-    </filter>
-    <filter id="glow-bloom" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="22"/>
-    </filter>
-    <filter id="core-bloom" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
-    </filter>
-    <filter id="head-blur" x="-15%" y="-15%" width="130%" height="130%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="1.8"/>
     </filter>
   </defs>
 
   <rect width="512" height="512" rx="112" fill="url(#bg)"/>
   <rect width="512" height="512" rx="112" fill="url(#bg-aura)"/>
 
-  <ellipse cx="256" cy="300" rx="180" ry="155" fill="url(#glow-wide)" filter="url(#glow-bloom)"/>
-  <ellipse cx="256" cy="295" rx="90" ry="80" fill="url(#glow-core)" filter="url(#core-bloom)"/>
+  <ellipse cx="256" cy="308" rx="200" ry="175" fill="url(#glow-ambient)" filter="url(#bloom-wide)"/>
+  <ellipse cx="256" cy="305" rx="100" ry="90" fill="url(#glow-mid)" filter="url(#bloom-mid)"/>
 
-  <g filter="url(#body-blur)">
+  <g filter="url(#soft-body)">
     <path d="
-      M256,198
-      C244,203 226,216 214,236
-      C200,260 194,286 198,310
-      C202,330 212,348 228,362
-      C238,370 248,376 256,378
-      C264,376 274,370 284,362
-      C300,348 310,330 314,310
-      C318,286 312,260 298,236
-      C286,216 268,203 256,198Z
-    " fill="url(#body-fill)"/>
-
-    <path d="M228,238 C212,255 200,278 204,304 C206,318 216,328 228,328" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="16" stroke-linecap="round"/>
-    <path d="M284,238 C300,255 312,278 308,304 C306,318 296,328 284,328" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="16" stroke-linecap="round"/>
-
-    <path d="
-      M232,358
-      C240,366 248,372 256,374
-      C264,372 272,366 280,358
-      C288,348 294,336 296,324
-      L256,340
-      L216,324
-      C218,336 224,348 232,358Z
-    " fill="rgba(255,255,255,0.25)"/>
+      M256,192
+      C238,196 212,212 198,238
+      C182,268 176,302 184,332
+      C190,355 204,374 222,388
+      C238,400 248,406 256,408
+      C264,406 274,400 290,388
+      C308,374 322,355 328,332
+      C336,302 330,268 314,238
+      C300,212 274,196 256,192Z
+    " fill="url(#body-grad)"/>
   </g>
 
-  <circle cx="256" cy="162" r="36" fill="url(#head-fill)" filter="url(#head-blur)"/>
-  <circle cx="256" cy="155" r="6" fill="rgba(255,255,255,0.30)"/>
+  <g filter="url(#soft-arm)">
+    <path d="
+      M238,208
+      C222,216 204,234 192,258
+      C180,282 176,306 184,324
+      C192,340 206,346 220,340
+      C232,334 240,320 244,304
+      C246,292 245,276 242,260
+      C240,244 238,224 238,208Z
+    " fill="url(#arm-grad-l)"/>
+    <path d="
+      M274,208
+      C290,216 308,234 320,258
+      C332,282 336,306 328,324
+      C320,340 306,346 292,340
+      C280,334 272,320 268,304
+      C266,292 267,276 270,260
+      C272,244 274,224 274,208Z
+    " fill="url(#arm-grad-r)"/>
+  </g>
 
-  <ellipse cx="256" cy="294" rx="26" ry="24" fill="#fffdf0" opacity="0.90"/>
-  <ellipse cx="256" cy="294" rx="12" ry="11" fill="#ffffff" opacity="0.97"/>
-  <circle cx="256" cy="294" r="4" fill="#ffffff"/>
+  <g filter="url(#soft-body)" opacity="0.40">
+    <path d="
+      M228,375
+      C240,390 250,400 256,404
+      C262,400 272,390 284,375
+      C296,358 304,340 308,326
+      L256,350
+      L204,326
+      C208,340 216,358 228,375Z
+    " fill="rgba(255,255,255,0.5)"/>
+  </g>
+
+  <g filter="url(#soft-head)">
+    <circle cx="252" cy="158" r="36" fill="url(#head-grad)"/>
+  </g>
+  <circle cx="246" cy="150" r="7" fill="rgba(255,255,255,0.30)" filter="url(#highlight)"/>
+
+  <ellipse cx="256" cy="302" rx="30" ry="28" fill="#fffbe0" opacity="0.85" filter="url(#bloom-hot)"/>
+  <ellipse cx="256" cy="302" rx="16" ry="15" fill="#fff8d0" opacity="0.94"/>
+  <ellipse cx="256" cy="302" rx="8" ry="7.5" fill="#ffffff" opacity="0.98"/>
+  <circle cx="256" cy="301" r="3" fill="#ffffff"/>
 </svg>

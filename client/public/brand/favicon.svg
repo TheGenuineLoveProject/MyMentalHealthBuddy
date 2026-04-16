@@ -1,34 +1,71 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
     <linearGradient id="fbg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8ec4a5"/>
-      <stop offset="50%" stop-color="#5a9a82"/>
+      <stop offset="0%" stop-color="#9ad0b2"/>
+      <stop offset="40%" stop-color="#6aaa8a"/>
       <stop offset="100%" stop-color="#264f4f"/>
     </linearGradient>
-    <radialGradient id="fglow" cx="50%" cy="60%" r="25%">
-      <stop offset="0%" stop-color="#fffcef" stop-opacity="1"/>
-      <stop offset="40%" stop-color="#ffe8a0" stop-opacity="0.8"/>
+    <radialGradient id="fglow-w" cx="50%" cy="62%" r="30%">
+      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.50"/>
       <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="ffig" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.30"/>
+    <radialGradient id="fglow-c" cx="50%" cy="62%" r="14%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#ffe8a0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fbody" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#e8f6ee" stop-opacity="0.88"/>
+      <stop offset="50%" stop-color="#b0d8c0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.18"/>
     </linearGradient>
-    <filter id="fs" x="-15%" y="-15%" width="130%" height="130%">
+    <linearGradient id="farm-l" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="farm-r" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.74"/>
+      <stop offset="100%" stop-color="#7ab393" stop-opacity="0.14"/>
+    </linearGradient>
+    <radialGradient id="fhead" cx="45%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#b0d8c0" stop-opacity="0.72"/>
+    </radialGradient>
+    <filter id="fs" x="-10%" y="-10%" width="120%" height="120%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0.6"/>
     </filter>
-    <filter id="fg" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="3.5"/>
+    <filter id="fa" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>
+    </filter>
+    <filter id="fgb" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+    <filter id="fgc" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.8"/>
+    </filter>
+    <filter id="fh" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.4"/>
     </filter>
   </defs>
+
   <rect width="64" height="64" rx="14" fill="url(#fbg)"/>
-  <ellipse cx="32" cy="37" rx="16" ry="14" fill="url(#fglow)" filter="url(#fg)"/>
+
+  <ellipse cx="32" cy="39" rx="18" ry="16" fill="url(#fglow-w)" filter="url(#fgb)"/>
+
   <g filter="url(#fs)">
-    <circle cx="32" cy="19.5" r="4.8" fill="url(#ffig)"/>
-    <path d="M32,24 C29.5,25.5 26,28.5 25,31.5 C24,35 24.5,38 26,40.5 C27.5,42.5 30,44 32,44.5 C34,44 36.5,42.5 38,40.5 C39.5,38 40,35 39,31.5 C38,28.5 34.5,25.5 32,24Z" fill="url(#ffig)" opacity="0.72"/>
-    <path d="M28.5,29 C27,31 25.8,33.5 26.2,36 C26.4,37.5 27.5,38.5 28.8,38.5" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round"/>
-    <path d="M35.5,29 C37,31 38.2,33.5 37.8,36 C37.6,37.5 36.5,38.5 35.2,38.5" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M32,24 C29,25 25,28 24,31 C22,35 22,39 23,42 C24,44 26,46 28,48 C30,49 31,50 32,50.5 C33,50 34,49 36,48 C38,46 40,44 41,42 C42,39 42,35 40,31 C39,28 35,25 32,24Z" fill="url(#fbody)"/>
   </g>
-  <ellipse cx="32" cy="36.5" rx="3.5" ry="3.2" fill="#fffdf0" opacity="0.88"/>
-  <ellipse cx="32" cy="36.5" rx="1.5" ry="1.4" fill="#ffffff" opacity="0.95"/>
+
+  <g filter="url(#fa)">
+    <path d="M30,26 C28,27 25.5,29 24.5,32 C23.5,35 23,37.5 24,40 C25,42 26.5,43 28,42.5 C29,42 30,41 30.5,39 C30.8,37.5 30.5,35.5 30.2,33.5 C30,31.5 30,28.5 30,26Z" fill="url(#farm-l)"/>
+    <path d="M34,26 C36,27 38.5,29 39.5,32 C40.5,35 41,37.5 40,40 C39,42 37.5,43 36,42.5 C35,42 34,41 33.5,39 C33.2,37.5 33.5,35.5 33.8,33.5 C34,31.5 34,28.5 34,26Z" fill="url(#farm-r)"/>
+  </g>
+
+  <g filter="url(#fh)">
+    <circle cx="31.5" cy="19.5" r="4.8" fill="url(#fhead)"/>
+  </g>
+
+  <ellipse cx="32" cy="38.5" rx="4" ry="3.8" fill="#fffbe0" opacity="0.82" filter="url(#fgc)"/>
+  <ellipse cx="32" cy="38.5" rx="2" ry="1.9" fill="#fff8d0" opacity="0.92"/>
+  <circle cx="32" cy="38.3" r="0.9" fill="#ffffff" opacity="0.96"/>
 </svg>
