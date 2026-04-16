@@ -73,19 +73,4 @@ export const chatMessageSchema = z.object({
   sessionId: z.string().optional(),
 });
 
-// Helper function to validate request body
-export function validateBody(schema) {
-  return (req, res, next) => {
-    const result = schema.safeParse(req.body);
-    if (!result.success) {
-      const errors = result.error.flatten();
-      return res.status(400).json({
-        ok: false,
-        message: "Validation failed",
-        errors: errors.fieldErrors,
-      });
-    }
-    req.validatedBody = result.data;
-    next();
-  };
-}
+export { validateBody } from "../middleware/validate-body.mjs";

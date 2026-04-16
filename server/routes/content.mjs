@@ -6,7 +6,7 @@ import {
   normalizeGenerateInput,
   slugify,
 } from "../contracts/content/b1-content-contract.mjs";
-import { validateBody } from "../validation/schemas.mjs";
+import { validateBody } from "../middleware/validate-body.mjs";
 
 const router = Router();
 
