@@ -72,16 +72,15 @@ export default function TglpNavbar() {
           data-testid="link-brand-home"
         >
           <div 
-            className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
+            className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
             style={{ 
-              background: "var(--glp-logo-gradient)",
-              boxShadow: "var(--glp-logo-shadow)",
+              boxShadow: "0 2px 12px var(--glp-sage-deep-20)",
             }}
           >
             <img 
-              src="/brand/logo-mark.png" 
+              src="/brand/mmhb-icon.svg" 
               alt="MyMentalHealthBuddy" 
-              className="w-11 h-11 md:w-14 md:h-14 object-contain"
+              className="w-full h-full object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling.style.display = 'block';

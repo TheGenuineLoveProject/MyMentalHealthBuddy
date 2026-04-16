@@ -229,9 +229,9 @@ export default function CanvaLanding() {
             {/* Logo - Compact on mobile, expanded on desktop */}
             <Link href="/">
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[64px] lg:h-[64px] flex items-center justify-center transition-all duration-300 group-hover:scale-105">
+                <div className="relative w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] lg:w-[56px] lg:h-[56px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl overflow-hidden" style={{ boxShadow: '0 2px 12px var(--glp-sage-deep-20)' }}>
                   <img 
-                    src="/brand/logo-monogram.png" 
+                    src="/brand/mmhb-icon.svg" 
                     alt="MyMentalHealthBuddy" 
                     className="w-full h-full object-contain"
                   />
@@ -723,7 +723,7 @@ export default function CanvaLanding() {
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
             If This Feels
             <br />
-            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px rgba(234, 195, 59, 0.3)' }}>Right, Come In</span>
+            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Right, Come In</span>
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
@@ -738,7 +738,7 @@ export default function CanvaLanding() {
                   style={{
                     background: 'var(--glp-white)',
                     color: 'var(--glp-gold-dark, #c49a2d)',
-                    boxShadow: '0 0 25px rgba(234, 195, 59, 0.3), 0 8px 32px rgba(0,0,0,0.2)'
+                    boxShadow: '0 0 25px var(--glp-gold-30), 0 8px 32px rgba(0,0,0,0.2)'
                   }}
                   data-testid="button-final-dashboard"
                 >
@@ -754,7 +754,7 @@ export default function CanvaLanding() {
                   style={{
                     background: 'var(--glp-white)',
                     color: 'var(--glp-gold-dark, #c49a2d)',
-                    boxShadow: '0 0 25px rgba(234, 195, 59, 0.3), 0 8px 32px rgba(0,0,0,0.2)'
+                    boxShadow: '0 0 25px var(--glp-gold-30), 0 8px 32px rgba(0,0,0,0.2)'
                   }}
                   data-testid="button-final-cta"
                 >
@@ -770,8 +770,8 @@ export default function CanvaLanding() {
                 style={{
                   background: 'transparent',
                   color: 'var(--glp-gold)',
-                  borderColor: 'rgba(234, 195, 59, 0.5)',
-                  boxShadow: '0 0 15px rgba(234, 195, 59, 0.15)'
+                  borderColor: 'var(--glp-gold-60)',
+                  boxShadow: '0 0 15px var(--glp-gold-15)'
                 }}
                 data-testid="button-view-pricing"
               >
@@ -825,10 +825,13 @@ export default function CanvaLanding() {
             </div>
           </div>
 
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-            <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>
-              © {new Date().getFullYear()} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
-            </p>
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+            <div className="flex items-center gap-3">
+              <img src="/brand/mmhb-icon.svg" alt="MyMentalHealthBuddy" className="w-8 h-8 rounded-lg" style={{ boxShadow: '0 1px 4px var(--glp-sage-deep-12)' }} />
+              <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>
+                © {new Date().getFullYear()} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
+              </p>
+            </div>
             <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--glp-sage)' }}>
               <span>Built with care.</span>
               <Heart className="w-3 h-3" style={{ color: 'var(--glp-blush)' }} fill="currentColor" />

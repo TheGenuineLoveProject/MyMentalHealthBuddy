@@ -12,9 +12,9 @@
   --warm-gold: var(--glp-gold);
   
   /* Metallic Gold Gradient */
-  --metallic-gold: linear-gradient(90deg, #d4af37, #ffd700);
-  --metallic-gold-glow: rgba(212, 175, 55, 0.4);
-  --metallic-gold-strong: rgba(212, 175, 55, 0.6);
+  --metallic-gold: linear-gradient(90deg, var(--glp-gold-dark), var(--glp-gold));
+  --metallic-gold-glow: rgba(212, 168, 67, 0.35);
+  --metallic-gold-strong: rgba(212, 168, 67, 0.55);
   
   /* Sacred Design Tokens */
   --sacred-glow-soft: 0 0 20px rgba(212, 175, 55, 0.4);
@@ -1265,7 +1265,7 @@
 }
 
 .canva-landing .btn-sacred-gold {
-  background: linear-gradient(135deg, #d4af37, #ffd700, #d4af37);
+  background: linear-gradient(135deg, var(--glp-gold-dark), var(--glp-gold), var(--glp-gold-dark));
   background-size: 200% 200%;
   animation: gradient-shift 4s ease-in-out infinite;
   color: white;
@@ -1275,7 +1275,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 1.125rem;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 4px 20px var(--glp-gold-30), 0 0 0 0 rgba(212, 175, 55, 0);
+  box-shadow: 0 4px 20px var(--glp-gold-30), 0 0 0 0 var(--glp-gold-10);
   border: none;
   cursor: pointer;
   position: relative;
@@ -1285,7 +1285,7 @@
 
 .canva-landing .btn-sacred-gold:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 8px 32px var(--glp-gold-60), 0 0 0 4px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 8px 32px var(--glp-gold-60), 0 0 0 4px var(--glp-gold-15);
 }
 
 .canva-landing .icon-circle {
