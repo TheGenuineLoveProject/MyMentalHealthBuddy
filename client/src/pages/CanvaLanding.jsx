@@ -424,7 +424,7 @@ export default function CanvaLanding() {
             </p>
 
             {/* Description */}
-            <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s' }}>
+            <p className="text-lg sm:text-xl md:text-[1.35rem] max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.8' }}>
               Most wellness apps want your attention. This one gives it back. Journaling, mood tracking, and AI-assisted reflection — built around how you actually feel, not how a product wants you to engage.
             </p>
 
@@ -464,8 +464,8 @@ export default function CanvaLanding() {
               )}
               <Link href="/pricing">
                 <button 
-                  className="inline-flex items-center gap-3 font-bold text-lg px-10 py-5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:-translate-y-1"
-                  style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
+                  className="inline-flex items-center gap-3 font-bold text-lg px-10 py-5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:-translate-y-1 hover:shadow-lg"
+                  style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)', boxShadow: '0 2px 8px var(--glp-sage-deep-12)' }}
                   data-testid="button-hero-explore"
                 >
                   See What's Included

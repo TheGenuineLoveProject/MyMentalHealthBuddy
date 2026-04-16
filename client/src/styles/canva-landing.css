@@ -504,12 +504,12 @@
 
 /* Safe Space Box */
 .canva-landing .safe-space-box {
-  background: linear-gradient(135deg, var(--glp-gold-10), var(--glp-sage-10));
+  background: linear-gradient(135deg, var(--glp-gold-15), var(--glp-sage-10));
   border: 2px solid var(--glp-gold-30);
-  border-radius: 16px;
-  padding: 1.5rem 2rem;
+  border-radius: 20px;
+  padding: 1.25rem 2.5rem;
   text-align: center;
-  box-shadow: 0 0 30px var(--glp-gold-15);
+  box-shadow: 0 4px 24px var(--glp-gold-20), 0 0 40px var(--glp-gold-10);
 }
 
 /* ===== PREFERS REDUCED MOTION ===== */
@@ -616,9 +616,9 @@
 .canva-landing .section-divider {
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--warm-gold), transparent);
-  margin: 80px auto;
-  max-width: 400px;
-  opacity: 0.4;
+  margin: 48px auto;
+  max-width: 320px;
+  opacity: 0.5;
 }
 
 /* Stats counter */
@@ -908,7 +908,7 @@
   font-size: 120px;
   font-family: 'Cormorant Garamond', serif;
   color: var(--warm-gold);
-  opacity: 0.2;
+  opacity: 0.28;
   line-height: 1;
 }
 
