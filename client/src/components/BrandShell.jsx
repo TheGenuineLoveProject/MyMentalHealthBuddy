@@ -17,12 +17,12 @@ export default function BrandShell({ children, logoSrc = "/logo.png" }) {
             <div 
               className="icon-premium icon-premium-lg icon-teal-gradient"
               role="img"
-              aria-label="The Genuine Love Project logo"
+              aria-label="MyMentalHealthBuddy logo"
               data-testid="logo-icon"
             >
               <img
                 src={logoSrc}
-                alt="The Genuine Love Project"
+                alt="MyMentalHealthBuddy"
                 className="w-full h-full object-cover rounded-lg"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
@@ -38,13 +38,13 @@ export default function BrandShell({ children, logoSrc = "/logo.png" }) {
                 className="text-card-title text-[var(--teal-600)] dark:text-[var(--teal-300)]"
                 data-testid="text-brand-title"
               >
-                The Genuine Love Project
+                MyMentalHealthBuddy
               </h1>
               <p 
                 className="text-meta text-[var(--sage-500)] dark:text-[var(--sage-400)]"
                 data-testid="text-brand-tagline"
               >
-                Mental Health from A to Z
+                by The Genuine Love Project
               </p>
             </div>
           </a>

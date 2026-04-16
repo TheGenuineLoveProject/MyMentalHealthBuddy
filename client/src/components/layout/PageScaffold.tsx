@@ -52,7 +52,7 @@ export function PageScaffold({
   return (
     <div className={`min-h-screen safe-padding ${className}`}>
       <SEO 
-        title={`${pageTitle} — The Genuine Love Project`} 
+        title={`${pageTitle} — MyMentalHealthBuddy`} 
         description={pageDescription}
         noIndex={noIndex}
       />

@@ -1,6 +1,8 @@
 export const BRAND = {
-  name: "The Genuine Love Project",
-  shortName: "Genuine Love",
+  name: "MyMentalHealthBuddy",
+  shortName: "MMHB",
+  byline: "by The Genuine Love Project",
+  fullName: "MyMentalHealthBuddy by The Genuine Love Project",
   tagline: "Live in Genuine Love",
   mission: "A safe, private space for healing, reflection, and conscious growth.",
 
@@ -54,9 +56,9 @@ export const BRAND = {
   },
 
   seo: {
-    title: "The Genuine Love Project",
+    title: "MyMentalHealthBuddy by The Genuine Love Project",
     description: "Live in Genuine Love — healing, self-love, and consciousness tools.",
-    ogTitle: "The Genuine Love Project",
+    ogTitle: "MyMentalHealthBuddy by The Genuine Love Project",
     ogDescription: "A private AI-powered space for healing, reflection, and emotional growth."
   }
 };

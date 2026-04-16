@@ -68,7 +68,7 @@ export default function TglpNavbar() {
         <Link 
           href="/" 
           className="flex items-center gap-4 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-sage)] focus-visible:ring-offset-2 rounded-xl py-2 px-3 transition-all hover:bg-[var(--glp-sage)]/5" 
-          aria-label="The Genuine Love Project home" 
+          aria-label="MyMentalHealthBuddy home" 
           data-testid="link-brand-home"
         >
           <div 
@@ -80,7 +80,7 @@ export default function TglpNavbar() {
           >
             <img 
               src="/brand/logo-mark.png" 
-              alt="The Genuine Love Project" 
+              alt="MyMentalHealthBuddy" 
               className="w-11 h-11 md:w-14 md:h-14 object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
@@ -98,10 +98,10 @@ export default function TglpNavbar() {
               className="text-xl md:text-2xl font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]"
               data-testid="text-brand-name"
             >
-              The Genuine Love Project
+              MyMentalHealthBuddy
             </span>
             <span className="text-sm md:text-base font-medium tracking-wide text-[var(--glp-sage)]">
-              Live in Genuine Love
+              by The Genuine Love Project
             </span>
           </div>
         </Link>

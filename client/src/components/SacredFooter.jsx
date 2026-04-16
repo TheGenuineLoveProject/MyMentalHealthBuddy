@@ -91,7 +91,7 @@ export default function SacredFooter() {
                 className="font-serif text-xl font-semibold"
                 style={{ color: '#2f5d5d', fontFamily: "'Cormorant Garamond', serif" }}
               >
-                The Genuine Love Project
+                MyMentalHealthBuddy
               </span>
             </div>
             <p 
@@ -227,7 +227,7 @@ export default function SacredFooter() {
             className="text-sm text-center md:text-left"
             style={{ color: '#3a3a3a', opacity: 0.6 }}
           >
-            © {currentYear} The Genuine Love Project. All rights reserved.
+            © {currentYear} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
           </p>
           
           <div className="flex items-center gap-2">

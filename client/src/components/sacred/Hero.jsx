@@ -67,7 +67,7 @@ export default function Hero({
             {typeof logo === 'string' ? (
               <img 
                 src={logo} 
-                alt="The Genuine Love Project" 
+                alt="MyMentalHealthBuddy" 
                 className={styles.logoBadgeIcon}
                 data-testid="hero-logo"
               />

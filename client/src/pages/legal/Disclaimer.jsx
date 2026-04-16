@@ -7,7 +7,7 @@ export default function Disclaimer() {
   return (
     <>
       <SEO 
-        title="Important Information - The Genuine Love Project"
+        title="Important Information - MyMentalHealthBuddy"
         description="Important disclaimer about the nature of this platform and when to seek professional help."
       />
       <div className="min-h-screen bg-[var(--glp-paper)]">

@@ -1,5 +1,7 @@
 export const Brand = {
-  name: "The Genuine Love Project",
+  name: "MyMentalHealthBuddy",
+  byline: "by The Genuine Love Project",
+  fullName: "MyMentalHealthBuddy by The Genuine Love Project",
   tagline: "Build genuine love. Practice real healing. Live aligned.",
   palette: {
     serenitySage: "#7BAE9D",

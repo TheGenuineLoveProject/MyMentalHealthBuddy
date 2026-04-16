@@ -2804,7 +2804,7 @@ export default function AdminTools() {
     if (format === 'json') {
       const report = {
         generated: now.toISOString(),
-        platform: "The Genuine Love Project",
+        platform: "MyMentalHealthBuddy",
         version: "3.0",
         summary: {
           total: totalTools, checked: checkedCount, healthy: healthyCount, warnings: warningCount, errors: errorCount,

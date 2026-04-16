@@ -72,7 +72,7 @@ export function ShareCardPrompt({
     if (navigator.share && (quote || microTool)) {
       try {
         await navigator.share({
-          title: "The Genuine Love Project",
+          title: "MyMentalHealthBuddy",
           text: quote || microTool || "A small step toward self-love",
           url: window.location.href
         });

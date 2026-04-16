@@ -153,8 +153,8 @@ export default function CanvaLanding() {
 
   const faqs = [
     {
-      question: "What is The Genuine Love Project?",
-      answer: "A private wellness platform with journaling, mood tracking, guided reflection, and an AI companion. It's educational — not clinical — and designed for adults exploring self-awareness at their own pace."
+      question: "What is MyMentalHealthBuddy?",
+      answer: "MyMentalHealthBuddy by The Genuine Love Project is a private wellness platform with journaling, mood tracking, guided reflection, and an AI companion. It's educational — not clinical — and designed for adults exploring self-awareness at their own pace."
     },
     {
       question: "Is my data private and secure?",
@@ -236,16 +236,16 @@ export default function CanvaLanding() {
                 <div className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[64px] lg:h-[64px] flex items-center justify-center transition-all duration-300 group-hover:scale-105">
                   <img 
                     src="/brand/logo-monogram.png" 
-                    alt="The Genuine Love Project" 
+                    alt="MyMentalHealthBuddy" 
                     className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="flex flex-col leading-snug">
                   <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
-                    The Genuine Love Project
+                    MyMentalHealthBuddy
                   </span>
                   <span className="text-[10px] sm:text-xs lg:text-[13px] font-semibold tracking-[0.12em] sm:tracking-[0.18em] uppercase mt-0.5" style={{ color: 'var(--glp-sage)' }}>
-                    Live in Genuine Love
+                    by The Genuine Love Project
                   </span>
                 </div>
               </div>
@@ -1006,7 +1006,7 @@ export default function CanvaLanding() {
               <GlowingHeartLogo size={56} />
             </div>
             <h3 className="text-2xl font-serif font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-              The Genuine Love Project
+              MyMentalHealthBuddy
             </h3>
             <p className="text-lg text-center" style={{ color: 'var(--glp-sage)' }}>
               Wellness tools that respect your time, your privacy, and your pace
@@ -1071,7 +1071,7 @@ export default function CanvaLanding() {
           {/* Brand Column - Now at Bottom */}
           <div className="flex flex-col items-center text-center py-8 mb-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
             <h4 className="font-serif font-bold text-xl mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              The Genuine Love Project
+              MyMentalHealthBuddy
             </h4>
             <p className="text-sm leading-relaxed mb-4 max-w-md" style={{ color: 'var(--glp-ink)' }}>
               Private wellness tools, AI-assisted reflection, and a quiet community — available when you need them.
@@ -1091,7 +1091,7 @@ export default function CanvaLanding() {
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
             <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-              © {new Date().getFullYear()} The Genuine Love Project. All rights reserved.
+              © {new Date().getFullYear()} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
             </p>
             <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--glp-sage)' }}>
               <span>Built with care.</span>

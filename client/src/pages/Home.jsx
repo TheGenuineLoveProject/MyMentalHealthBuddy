@@ -159,7 +159,7 @@ export default function Home() {
   return (
     <SacredLayout>
       <SEO 
-        title="The Genuine Love Project — A Private Space for Honest Reflection" 
+        title="MyMentalHealthBuddy — A Private Space for Honest Reflection" 
         description="Journaling, mood tracking, and AI-assisted reflection — built with trauma-informed care. Evidence-informed tools including inner child work, nervous system education, and somatic practices, all in complete privacy."
       />
 
@@ -178,7 +178,7 @@ export default function Home() {
             >
               <img 
                 src="/brand/logo.svg" 
-                alt="The Genuine Love Project" 
+                alt="MyMentalHealthBuddy" 
                 className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
                 data-testid="img-home-logo"
               />

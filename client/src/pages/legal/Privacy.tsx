@@ -6,8 +6,8 @@ export default function PrivacyPage() {
   return (
     <>
       <SEO
-        title="Privacy Policy | The Genuine Love Project"
-        description="Our commitment to protecting your privacy on The Genuine Love Project wellness platform."
+        title="Privacy Policy | MyMentalHealthBuddy"
+        description="Our commitment to protecting your privacy on MyMentalHealthBuddy by The Genuine Love Project wellness platform."
         canonicalPath="/legal/privacy"
       />
       <PageScaffold>
@@ -18,7 +18,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-xl font-semibold mb-4">Your Privacy Matters</h2>
               <p>
-                The Genuine Love Project is committed to protecting your privacy. 
+                MyMentalHealthBuddy is committed to protecting your privacy. 
                 This policy explains how we collect, use, and safeguard your information.
               </p>
             </section>

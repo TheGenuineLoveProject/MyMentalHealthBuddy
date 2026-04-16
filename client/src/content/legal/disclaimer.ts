@@ -1,7 +1,7 @@
 export const PLATFORM_DISCLAIMER = {
   ageGate: "This platform is intended for adults 18+ only. By continuing, you confirm you are at least 18 years old.",
   notMedical:
-    "The Genuine Love Project provides educational wellness tools and self-reflection content. It is not medical advice, diagnosis, or treatment, and it is not a substitute for licensed professional care.",
+    "MyMentalHealthBuddy by The Genuine Love Project provides educational wellness tools and self-reflection content. It is not medical advice, diagnosis, or treatment, and it is not a substitute for licensed professional care.",
   emergency:
     "If you feel unsafe or may harm yourself or others, call your local emergency number immediately. If you are in the U.S., you can call or text 988 (Suicide & Crisis Lifeline).",
   privacyNote:

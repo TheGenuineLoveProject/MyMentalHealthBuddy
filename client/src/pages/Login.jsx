@@ -39,8 +39,8 @@ export default function Login() {
   return (
     <>
       <SEO 
-        title="Sign In - The Genuine Love Project"
-        description="Sign in to your Genuine Love Project account to access your wellness tools."
+        title="Sign In - MyMentalHealthBuddy"
+        description="Sign in to your MyMentalHealthBuddy account to access your wellness tools."
       />
       <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-12" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
@@ -52,11 +52,11 @@ export default function Login() {
             <Link href="/" className="inline-flex flex-col items-center gap-3 group">
               <img 
                 src="/brand/login-logo.png" 
-                alt="The Genuine Love Project" 
+                alt="MyMentalHealthBuddy" 
                 className="w-20 h-20 object-contain transition-all group-hover:scale-105"
                 data-testid="img-login-logo"
               />
-              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
+              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>
           </div>
 

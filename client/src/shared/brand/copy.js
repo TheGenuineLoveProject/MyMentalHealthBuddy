@@ -1,5 +1,7 @@
 export const BRAND = {
-  name: "The Genuine Love Project",
-  shortName: "Genuine Love Project",
+  name: "MyMentalHealthBuddy",
+  shortName: "MMHB",
+  byline: "by The Genuine Love Project",
+  fullName: "MyMentalHealthBuddy by The Genuine Love Project",
   tagline: "A calmer, kinder way back to yourself.",
 };

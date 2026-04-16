@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 
 const steps = [
-  { title: "Welcome", message: "Welcome to The Genuine Love Project 💗" },
+  { title: "Welcome", message: "Welcome to MyMentalHealthBuddy 💗" },
   { title: "Your Intention", message: "What's your intention for healing today?" },
   { title: "Personalization", message: "We'll personalize your experience with love." },
   { title: "Begin", message: "You're ready to begin your healing journey 🌸" }

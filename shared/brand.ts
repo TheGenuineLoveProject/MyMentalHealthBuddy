@@ -1,15 +1,17 @@
 // shared/brand.ts
-// Canonical Brand Source of Truth for: The Genuine Love Project
+// Canonical Brand Source of Truth for: MyMentalHealthBuddy by The Genuine Love Project
 // Keep this file small, stable, and referenced everywhere.
 // NOTE: BRAND_HEX_ALLOWLIST MUST be *only hex strings* (your scanner expects this).
 
 export const BRAND = {
-  name: "The Genuine Love Project",
+  name: "MyMentalHealthBuddy",
+  byline: "by The Genuine Love Project",
+  fullName: "MyMentalHealthBuddy by The Genuine Love Project",
   tagline: "Live in Genuine Love",
   mission:
     "Helping people heal, grow, and align through everyday self-love and consciousness.",
   seo: {
-    title: "The Genuine Love Project — Live in Genuine Love",
+    title: "MyMentalHealthBuddy by The Genuine Love Project — Live in Genuine Love",
     description:
       "AI-powered mental wellness platform for self-love, healing, and emotional growth — private, compassionate, available 24/7.",
   },

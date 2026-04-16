@@ -44,7 +44,7 @@ export function InfinityHeartCard({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "The Genuine Love Project",
+          title: "MyMentalHealthBuddy",
           text,
           url: window.location.origin
         });

@@ -20,7 +20,7 @@ export default function About() {
               <Flower2 className="w-10 h-10 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4" data-testid="text-about-title">
-              About The Genuine Love Project
+              About MyMentalHealthBuddy
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto" data-testid="text-about-subtitle">
               A private space for reflection, built around what wellness apps usually get wrong.
@@ -77,13 +77,13 @@ export default function About() {
               "The quietest tools are often the most useful ones."
             </blockquote>
             <p className="text-muted-foreground" data-testid="text-quote-attribution">
-              — The Genuine Love Project
+              — MyMentalHealthBuddy by The Genuine Love Project
             </p>
           </div>
 
           <div className="mt-12 text-center">
             <p className="text-sm text-muted-foreground mb-4">
-              <strong>Important:</strong> The Genuine Love Project is an educational wellness platform and is not a substitute for professional mental health treatment. If you're in crisis, please reach out to a qualified professional or call your local emergency services.
+              <strong>Important:</strong> MyMentalHealthBuddy by The Genuine Love Project is an educational wellness platform and is not a substitute for professional mental health treatment. If you're in crisis, please reach out to a qualified professional or call your local emergency services.
             </p>
             <Link 
               href="/crisis" 

@@ -39,7 +39,7 @@ export default function ForgotPassword() {
   return (
     <>
       <SEO
-        title="Reset Password | The Genuine Love Project"
+        title="Reset Password | MyMentalHealthBuddy"
         description="Reset your password. Educational wellness tools for adults 18+."
       />
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
@@ -48,10 +48,10 @@ export default function ForgotPassword() {
           <Link href="/" className="inline-flex items-center gap-3 mb-6" data-testid="link-home">
             <img 
               src="/brand/logo-mark.png" 
-              alt="The Genuine Love Project" 
+              alt="MyMentalHealthBuddy" 
               className="w-14 h-14 object-contain"
             />
-            <span className="text-heading-lg text-teal">Genuine Love</span>
+            <span className="text-heading-lg text-teal">MyMentalHealthBuddy</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Reset Password</h1>
           <p className="text-lead">We'll help you get back in</p>
@@ -140,7 +140,7 @@ export default function ForgotPassword() {
         <div className="mt-8 text-center">
           <p className="text-caption flex items-center justify-center gap-1">
             <Sparkles className="w-4 h-4 text-[var(--gold-500)]" />
-            Live in Genuine Love
+            by The Genuine Love Project
           </p>
           <p className="text-sm opacity-70 mt-2">
             Adults 18+ only. Educational wellness tools, not medical care.

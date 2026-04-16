@@ -6,8 +6,8 @@ export default function TermsPage() {
   return (
     <>
       <SEO
-        title="Terms of Service | The Genuine Love Project"
-        description="Terms of service for The Genuine Love Project educational wellness platform."
+        title="Terms of Service | MyMentalHealthBuddy"
+        description="Terms of service for MyMentalHealthBuddy by The Genuine Love Project educational wellness platform."
         canonicalPath="/legal/terms"
       />
       <PageScaffold>
@@ -18,7 +18,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold mb-4">Agreement to Terms</h2>
               <p>
-                By accessing or using The Genuine Love Project, you agree to be 
+                By accessing or using MyMentalHealthBuddy, you agree to be 
                 bound by these Terms of Service. If you do not agree to these terms, 
                 please do not use our platform.
               </p>
@@ -56,7 +56,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-xl font-semibold mb-4">Limitation of Liability</h2>
               <p>
-                The Genuine Love Project and its operators are not liable for any 
+                MyMentalHealthBuddy and its operators are not liable for any 
                 damages arising from your use of the platform. Results vary and 
                 are not guaranteed.
               </p>

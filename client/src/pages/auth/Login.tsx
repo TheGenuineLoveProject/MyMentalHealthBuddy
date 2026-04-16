@@ -47,7 +47,7 @@ export default function Login() {
   return (
     <>
       <SEO
-        title="Login | The Genuine Love Project"
+        title="Login | MyMentalHealthBuddy"
         description="Sign in to your wellness journey. Educational wellness tools for adults 18+."
       />
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
@@ -56,10 +56,10 @@ export default function Login() {
           <Link href="/" className="inline-flex items-center gap-3 mb-6" data-testid="link-home">
             <img 
               src="/brand/logo-mark.png" 
-              alt="The Genuine Love Project" 
+              alt="MyMentalHealthBuddy" 
               className="w-14 h-14 object-contain"
             />
-            <span className="text-heading-lg text-teal">Genuine Love</span>
+            <span className="text-heading-lg text-teal">MyMentalHealthBuddy</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Welcome Back</h1>
           <p className="text-lead">Sign in to your account</p>
@@ -133,7 +133,7 @@ export default function Login() {
 
           <div className="mt-6 pt-6 border-t border-[var(--sage-200)] text-center">
             <p className="text-body-sm">
-              New to Genuine Love?{" "}
+              New to MyMentalHealthBuddy?{" "}
               <a href="/register" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium" data-testid="link-signup">
                 Create an account
               </a>
@@ -144,7 +144,7 @@ export default function Login() {
         <div className="mt-8 text-center">
           <p className="text-caption flex items-center justify-center gap-1">
             <Sparkles className="w-4 h-4 text-[var(--gold-500)]" />
-            Live in Genuine Love
+            by The Genuine Love Project
           </p>
           <p className="text-sm opacity-70 mt-2">
             Adults 18+ only. Educational wellness tools, not medical care.

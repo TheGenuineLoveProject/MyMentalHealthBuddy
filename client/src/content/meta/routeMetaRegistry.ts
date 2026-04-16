@@ -42,7 +42,7 @@ function titleizeFromRouteKey(routeKey: string) {
     .replace(/\bparam\b/gi, "")
     .trim();
 
-  const base = cleaned || "The Genuine Love Project";
+  const base = cleaned || "MyMentalHealthBuddy";
   return base
     .split(" ")
     .filter(Boolean)
@@ -1049,7 +1049,7 @@ const MANUAL_REGISTRY: Record<string, Partial<RouteMeta>> = {
   // ═══════════════════════════════════════════════════════════════════
   home: {
     canonicalPath: "/",
-    title: "The Genuine Love Project",
+    title: "MyMentalHealthBuddy by The Genuine Love Project",
     description: "AI-powered mental wellness tools for self-love, healing, and emotional growth.",
     benefits: [
       "Access trauma-informed emotional support anytime.",

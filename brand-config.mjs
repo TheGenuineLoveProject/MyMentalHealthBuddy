@@ -1,6 +1,8 @@
 // scripts/brand-config.mjs
 export const BRAND = {
-  name: "TheGenuineLoveProject",
+  name: "MyMentalHealthBuddy",
+  byline: "by The Genuine Love Project",
+  fullName: "MyMentalHealthBuddy by The Genuine Love Project",
   tagline: "Mental Health from A to Z",
   palette: {
     serenitySage: "#6D9B8D",
@@ -31,6 +33,6 @@ export const LEGACY_HEX_DENYLIST = new Set(
 
 // Legacy names we want to eliminate from text/docs
 export const LEGACY_NAMES = [
-  "MyMentalHealthBuddy",
-  "mymentalhealthbuddy",
+  "GenuineLoveProject",
+  "genuineloveproject",
 ];

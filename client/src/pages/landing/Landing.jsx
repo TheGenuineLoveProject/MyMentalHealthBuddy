@@ -62,7 +62,7 @@ export default function Landing() {
   const isActive = (path) => location === path;
 
   useSEO({
-    title: "The Genuine Love Project — A Gentle Space for Healing",
+    title: "MyMentalHealthBuddy — A Gentle Space for Healing",
     description: "A private, trauma-informed sanctuary for emotional healing. Evidence-based tools for inner child work, nervous system regulation, and self-compassion.",
     canonical: "/",
   });
@@ -113,15 +113,15 @@ export default function Landing() {
             <Link
               href="/"
               className="inline-flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2 rounded-lg"
-              aria-label="The Genuine Love Project home"
+              aria-label="MyMentalHealthBuddy home"
               data-testid="link-brand-home"
             >
               <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-sage-500 to-sage-600 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
                 <Heart className="h-5 w-5 text-white" aria-hidden="true" />
               </div>
               <div className="leading-tight text-left">
-                <div className="font-semibold text-teal">The Genuine Love Project</div>
-                <div className="text-xs text-sage-400">Live in Genuine Love</div>
+                <div className="font-semibold text-teal">MyMentalHealthBuddy</div>
+                <div className="text-xs text-sage-400">by The Genuine Love Project</div>
               </div>
             </Link>
           </div>

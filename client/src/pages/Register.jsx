@@ -13,7 +13,7 @@ export default function Register() {
   return (
     <>
       <SEO 
-        title="Create Account - The Genuine Love Project"
+        title="Create Account - MyMentalHealthBuddy"
         description="Create your free account. Mood tracking, journaling, reflection prompts, and AI chat — no credit card required."
       />
       <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-8" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
@@ -26,11 +26,11 @@ export default function Register() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <img 
                 src="/brand/login-logo.png" 
-                alt="The Genuine Love Project" 
+                alt="MyMentalHealthBuddy" 
                 className="w-14 h-14 object-contain transition-all group-hover:scale-105"
                 data-testid="img-register-logo"
               />
-              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
+              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>
           </div>
 

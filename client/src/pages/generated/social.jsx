@@ -35,7 +35,7 @@ const SOCIAL_CHANNELS = [
   { 
     id: "facebook",
     name: "Facebook", 
-    handle: "The Genuine Love Project", 
+    handle: "MyMentalHealthBuddy", 
     url: "https://facebook.com/profile.php?id=61583664864191", 
     icon: MessageCircle, 
     color: "#1877F2",

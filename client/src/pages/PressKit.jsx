@@ -131,7 +131,7 @@ export default function PressKit() {
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Use our full name: "The Genuine Love Project"</span>
+                  <span>Use our full name: "MyMentalHealthBuddy by The Genuine Love Project"</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-bold">✓</span>

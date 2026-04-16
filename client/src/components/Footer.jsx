@@ -18,7 +18,7 @@ export default function Footer() {
               <Heart className="w-5 h-5 text-white" aria-hidden="true" />
             </div>
             <span className="font-serif text-xl font-bold text-gray-900 dark:text-white">
-              The Genuine Love Project
+              MyMentalHealthBuddy
             </span>
           </div>
 
@@ -63,7 +63,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-          <p>© {currentYear} The Genuine Love Project. All rights reserved.</p>
+          <p>© {currentYear} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:underline" data-testid="link-privacy">Privacy Policy</Link>
             <Link href="/terms" className="hover:underline" data-testid="link-terms">Terms of Service</Link>

@@ -6,7 +6,7 @@ export default function DisclaimerPage() {
   return (
     <>
       <SEO
-        title="Disclaimer | The Genuine Love Project"
+        title="Disclaimer | MyMentalHealthBuddy"
         description="Important disclaimers about our educational wellness platform. This is not therapy or medical advice."
         canonicalPath="/legal/disclaimer"
       />
@@ -27,7 +27,7 @@ export default function DisclaimerPage() {
             <section>
               <h2 className="text-xl font-semibold mb-4">Not Therapy or Medical Advice</h2>
               <p>
-                The Genuine Love Project is <strong>not</strong> therapy, counseling, 
+                MyMentalHealthBuddy is <strong>not</strong> therapy, counseling, 
                 or medical advice. Our content is educational in nature and designed 
                 to support self-reflection and skill-building.
               </p>

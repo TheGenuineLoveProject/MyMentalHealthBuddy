@@ -7,7 +7,7 @@ export default function Ethics() {
   return (
     <>
       <SEO 
-        title="Our Ethics - The Genuine Love Project"
+        title="Our Ethics - MyMentalHealthBuddy"
         description="Learn about our ethical commitments including user autonomy, transparency, and responsible AI use."
       />
       <div className="min-h-screen bg-[var(--glp-paper)]">

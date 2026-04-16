@@ -123,7 +123,7 @@ export default function ForgotPassword() {
       <>
         <SEO 
           title="Forgot Password"
-          description="Reset your Genuine Love Project password. We'll send you a secure link to create a new password."
+          description="Reset your MyMentalHealthBuddy password. We'll send you a secure link to create a new password."
         />
       <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse motion-reduce:animate-none" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
@@ -138,11 +138,11 @@ export default function ForgotPassword() {
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
               <img 
                 src="/brand/logo-mark.png" 
-                alt="The Genuine Love Project" 
+                alt="MyMentalHealthBuddy" 
                 className="w-9 h-9 object-contain"
               />
             </div>
-            <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
+            <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
           </Link>
           
           <div className="card-elevated p-8">

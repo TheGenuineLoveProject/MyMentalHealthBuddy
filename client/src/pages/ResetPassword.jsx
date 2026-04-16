@@ -26,7 +26,7 @@ export default function ResetPassword() {
   const token = useMemo(() => {
     if (!searchString) return (
     <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Reset Password — The Genuine Love Project" description="Explore reset password tools for your wellness journey." />
+      <SEO title="Reset Password — MyMentalHealthBuddy" description="Explore reset password tools for your wellness journey." />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Reset Password</h1>
         <p className="text-muted-foreground mb-8">
@@ -205,7 +205,7 @@ export default function ResetPassword() {
     <>
       <SEO 
         title="Reset Password"
-        description="Create a new password for your Genuine Love Project account."
+        description="Create a new password for your MyMentalHealthBuddy account."
       />
       <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
         <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
@@ -219,10 +219,10 @@ export default function ResetPassword() {
           >
             <img 
               src="/brand/logo-mark.png" 
-              alt="The Genuine Love Project" 
+              alt="MyMentalHealthBuddy" 
               className="w-12 h-12 object-contain"
             />
-            <span className="font-display font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
+            <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
           </Link>
           
           <div className="card-elevated p-8">

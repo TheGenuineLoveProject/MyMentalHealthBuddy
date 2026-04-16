@@ -1,7 +1,15 @@
-# The Genuine Love Project
+# MyMentalHealthBuddy by The Genuine Love Project
 
 ## Overview
-The Genuine Love Project is an AI-powered mental wellness platform offering self-love, healing, and emotional growth through AI-assisted guidance, mood tracking, journaling, crisis support, and evidence-based tools. It aims to provide an ethical, accessible, and personalized mental wellness solution, leveraging AI and trauma-informed psychological principles to foster emotional resilience.
+MyMentalHealthBuddy (MMHB) by The Genuine Love Project is an AI-powered mental wellness platform offering self-love, healing, and emotional growth through AI-assisted guidance, mood tracking, journaling, crisis support, and evidence-based tools. It aims to provide an ethical, accessible, and personalized mental wellness solution, leveraging AI and trauma-informed psychological principles to foster emotional resilience.
+
+## Brand Identity
+- **Product Name**: MyMentalHealthBuddy
+- **Attribution**: by The Genuine Love Project
+- **Full Brand**: MyMentalHealthBuddy by The Genuine Love Project
+- **Short Name**: MMHB
+- **Domain**: TheGenuineLoveProject.com
+- **Brand Config Files**: `brand-config.mjs`, `client/src/brand/brand.ts`, `client/src/brand/copy.ts`, `client/src/brand/tokens.ts`, `client/src/layouts/brand.ts`, `client/src/shared/brand/copy.js`
 
 ## User Preferences
 - Preferred communication style: Simple, everyday language

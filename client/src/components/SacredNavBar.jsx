@@ -9,7 +9,7 @@ export default function SacredNavBar() {
             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
               <span className="text-white text-xl">💗</span>
             </div>
-            <span className="font-serif text-xl text-[#2f5d5d] font-bold">The Genuine Love Project</span>
+            <span className="font-serif text-xl text-[#2f5d5d] font-bold">MyMentalHealthBuddy</span>
           </div>
         </Link>
         <div className="space-x-6 hidden md:flex text-[#333] font-sans">

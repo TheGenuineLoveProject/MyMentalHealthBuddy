@@ -13,7 +13,7 @@ export function Footer({ className = '' }) {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <Heart className="w-5 h-5 text-[var(--glp-gold)]" aria-hidden="true" />
-            <span className="font-sacred text-lg">The Genuine Love Project</span>
+            <span className="font-sacred text-lg">MyMentalHealthBuddy</span>
           </div>
 
           <nav aria-label="Footer navigation" className="flex flex-wrap justify-center gap-6 text-sm">
@@ -24,7 +24,7 @@ export function Footer({ className = '' }) {
           </nav>
 
           <p className="text-sm text-white/70">
-            © {currentYear} The Genuine Love Project
+            © {currentYear} MyMentalHealthBuddy by The Genuine Love Project
           </p>
         </div>
 

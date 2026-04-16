@@ -11,7 +11,7 @@ interface SEOProps {
   jsonLd?: object;
 }
 
-const SITE_NAME = "The Genuine Love Project";
+const SITE_NAME = "MyMentalHealthBuddy by The Genuine Love Project";
 const DEFAULT_OG_IMAGE = "/og-image.png";
 const BASE_URL = typeof window !== "undefined" ? window.location.origin : "";
 

@@ -30,7 +30,7 @@ export default function ControlDashboard() {
   const [activeSection, setActiveSection] = useState("general");
   const { toast } = useToast();
   const [settings, setSettings] = useState({
-    siteName: "The Genuine Love Project",
+    siteName: "MyMentalHealthBuddy",
     siteDescription: "AI-powered mental wellness platform",
     maintenanceMode: false,
     allowSignups: true,

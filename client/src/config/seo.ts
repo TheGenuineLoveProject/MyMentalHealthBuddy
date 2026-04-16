@@ -1,9 +1,9 @@
 /**
- * SEO Configuration for The Genuine Love Project
+ * SEO Configuration for MyMentalHealthBuddy by The Genuine Love Project
  * Topic pillars, meta templates, and content architecture
  */
 
-export const SITE_NAME = 'The Genuine Love Project';
+export const SITE_NAME = 'MyMentalHealthBuddy by The Genuine Love Project';
 export const SITE_TAGLINE = 'Self-Love, Healing & Emotional Growth';
 export const DEFAULT_DESCRIPTION = 'A trauma-informed mental wellness platform offering AI-assisted emotional guidance, mood tracking, journaling, and evidence-based healing tools.';
 

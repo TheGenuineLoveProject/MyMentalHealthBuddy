@@ -116,7 +116,7 @@ if ('serviceWorker' in navigator) {
       if (now >= scheduledTime) {
         navigator.serviceWorker.ready.then(registration => {
           if (Notification.permission === 'granted') {
-            registration.showNotification('The Genuine Love Project', {
+            registration.showNotification('MyMentalHealthBuddy', {
               body: settings.message || 'Would you like to check in with your emotions today?',
               icon: '/android-chrome-192x192.png',
               badge: '/android-chrome-192x192.png',

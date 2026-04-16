@@ -6,8 +6,8 @@ export default function EthicsPage() {
   return (
     <>
       <SEO
-        title="Our Ethics | The Genuine Love Project"
-        description="The ethical principles guiding The Genuine Love Project wellness platform."
+        title="Our Ethics | MyMentalHealthBuddy"
+        description="The ethical principles guiding MyMentalHealthBuddy by The Genuine Love Project wellness platform."
         canonicalPath="/legal/ethics"
       />
       <PageScaffold>
@@ -18,7 +18,7 @@ export default function EthicsPage() {
             <section>
               <h2 className="text-xl font-semibold mb-4">Our Commitment</h2>
               <p>
-                The Genuine Love Project is built on a foundation of ethical principles 
+                MyMentalHealthBuddy is built on a foundation of ethical principles 
                 that guide everything we do. We are committed to creating a safe, 
                 supportive, and honest environment for personal growth.
               </p>

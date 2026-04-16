@@ -51,7 +51,7 @@ export default function GlowFooter({ className = "" }) {
             className="font-serif text-xl font-semibold"
             style={{ color: '#2f5d5d' }}
           >
-            The Genuine Love Project
+            MyMentalHealthBuddy
           </span>
         </div>
         
@@ -84,7 +84,7 @@ export default function GlowFooter({ className = "" }) {
           style={{ borderColor: 'rgba(143, 191, 159, 0.15)' }}
         >
           <p className="text-xs" style={{ color: 'rgba(58, 58, 58, 0.5)' }}>
-            © {currentYear} The Genuine Love Project. All rights reserved.
+            © {currentYear} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
           </p>
           
           <div className="flex items-center gap-2">

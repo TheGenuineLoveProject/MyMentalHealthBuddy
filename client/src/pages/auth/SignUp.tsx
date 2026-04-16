@@ -48,7 +48,7 @@ export default function SignUp() {
       return res;
     },
     onSuccess: () => {
-      toast({ title: "Welcome to Genuine Love!", description: "Your account has been created successfully." });
+      toast({ title: "Welcome to MyMentalHealthBuddy!", description: "Your account has been created successfully." });
       navigate("/dashboard");
     },
     onError: () => {
@@ -63,7 +63,7 @@ export default function SignUp() {
   return (
     <>
       <SEO
-        title="Sign Up | The Genuine Love Project"
+        title="Sign Up | MyMentalHealthBuddy"
         description="Free wellness tools for self-reflection and emotional awareness. For adults 18+."
       />
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
@@ -72,10 +72,10 @@ export default function SignUp() {
           <Link href="/" className="inline-flex items-center gap-3 mb-6" data-testid="link-home">
             <img 
               src="/brand/logo-mark.png" 
-              alt="The Genuine Love Project" 
+              alt="MyMentalHealthBuddy" 
               className="w-14 h-14 object-contain"
             />
-            <span className="text-heading-lg text-teal">Genuine Love</span>
+            <span className="text-heading-lg text-teal">MyMentalHealthBuddy</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Create Your Account</h1>
           <p className="text-lead">Free to start. No credit card required.</p>
