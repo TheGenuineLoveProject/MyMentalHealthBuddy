@@ -13,12 +13,12 @@
   
   /* Metallic Gold Gradient */
   --metallic-gold: linear-gradient(90deg, var(--glp-gold-dark), var(--glp-gold));
-  --metallic-gold-glow: rgba(200, 149, 46, 0.35);
-  --metallic-gold-strong: rgba(200, 149, 46, 0.55);
+  --metallic-gold-glow: rgba(212, 160, 53, 0.35);
+  --metallic-gold-strong: rgba(212, 160, 53, 0.55);
   
   /* Sacred Design Tokens */
-  --sacred-glow-soft: 0 0 20px rgba(200, 149, 46, 0.4);
-  --sacred-glow-strong: 0 0 40px rgba(200, 149, 46, 0.6);
+  --sacred-glow-soft: 0 0 20px rgba(212, 160, 53, 0.4);
+  --sacred-glow-strong: 0 0 40px rgba(212, 160, 53, 0.6);
   --sacred-pulse-duration: 4s;
 }
 
@@ -37,21 +37,24 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 3rem;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 
 .canva-landing h2 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
 }
 
 .canva-landing h3 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.5rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 /* Gradient text fallback for accessibility */
@@ -109,23 +112,7 @@
 }
 
 /* Glass morphism effects - uses glp token opacity variants */
-.canva-landing .glass-card {
-  background: var(--glp-paper-70);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glp-sage-20);
-  box-shadow: 
-    0 8px 32px var(--glp-sage-deep-12),
-    inset 0 1px 0 var(--glp-white-80);
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.canva-landing .glass-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 
-    0 16px 48px var(--glp-sage-deep-20),
-    0 0 0 2px var(--glp-gold),
-    inset 0 1px 0 var(--glp-white-80);
-}
+/* Canonical definition at end of file, after consciousness-expanding layer */
 
 /* Floating animation for decorative icons */
 @keyframes float {
@@ -356,23 +343,8 @@
 
 /* ===== SACRED DESIGN ELEMENTS ===== */
 
-/* Metallic Gold CTA Button */
-.canva-landing .btn-sacred-gold {
-  background: var(--metallic-gold);
-  color: white;
-  padding: 18px 44px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.125rem;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 0 20px var(--metallic-gold-glow);
-  border: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
+/* Metallic Gold CTA Button - base in canonical block at end of file */
+/* Keep ::before pseudo-element here for glow border effect */
 .canva-landing .btn-sacred-gold::before {
   content: '';
   position: absolute;
@@ -387,11 +359,6 @@
 
 .canva-landing .btn-sacred-gold:hover::before {
   opacity: 1;
-}
-
-.canva-landing .btn-sacred-gold:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 0 40px var(--glp-gold-60);
 }
 
 /* Sacred Border Glow Animation */
@@ -569,29 +536,7 @@
   animation: canva-fade-in-up 0.8s ease-out forwards;
 }
 
-/* Icon containers */
-.canva-landing .icon-circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep));
-  box-shadow: 0 6px 20px var(--glp-sage-30), inset 0 1px 0 rgba(255,255,255,0.2);
-  border: 2px solid var(--glp-sage-40);
-  transition: all 0.4s ease;
-}
-
-.canva-landing .icon-circle:hover {
-  transform: scale(1.08) rotate(3deg);
-  box-shadow: 0 10px 28px var(--glp-sage-40), inset 0 1px 0 rgba(255,255,255,0.3);
-}
-
-.canva-landing .icon-circle svg {
-  width: 28px;
-  height: 28px;
-}
+/* Icon containers - canonical definition at end of file */
 
 /* Testimonial card */
 .canva-landing .testimonial-card {
@@ -601,6 +546,12 @@
   position: relative;
   box-shadow: 0 12px 40px var(--glp-sage-deep-12);
   border: 1px solid var(--glp-sage-20);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.canva-landing .testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px var(--glp-sage-deep-20);
 }
 
 .canva-landing .testimonial-card::before {
@@ -626,10 +577,10 @@
 /* Section divider */
 .canva-landing .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent 5%, var(--glp-sage-30) 30%, var(--warm-gold) 50%, var(--glp-sage-30) 70%, transparent 95%);
+  background: linear-gradient(90deg, transparent 5%, var(--glp-sage-30) 25%, var(--warm-gold) 45%, var(--glp-gold) 55%, var(--glp-sage-30) 75%, transparent 95%);
   margin: 0 auto;
-  max-width: 480px;
-  opacity: 0.6;
+  max-width: 520px;
+  opacity: 0.7;
 }
 
 /* Stats counter */
@@ -694,22 +645,7 @@
   pointer-events: all;
 }
 
-/* FAQ accordion */
-.canva-landing .faq-item {
-  border-bottom: 1px solid var(--glp-sage-20);
-  padding: 24px 0;
-  transition: all 0.3s ease;
-}
-
-.canva-landing .faq-question {
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  color: var(--deep-teal);
-  font-size: 18px;
-}
+/* FAQ accordion - canonical styles at end of file, keep answer/icon transitions here */
 
 .canva-landing .faq-answer {
   max-height: 0;
@@ -721,7 +657,7 @@
 }
 
 .canva-landing .faq-item.active .faq-answer {
-  max-height: 300px;
+  max-height: 600px;
   margin-top: 16px;
 }
 
@@ -778,12 +714,12 @@
   padding: 32px;
   text-align: center;
   border: 1px solid var(--glp-sage-20);
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .canva-landing .step-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px var(--glp-sage-20);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px var(--glp-sage-20), 0 0 0 1px var(--glp-sage-30);
   border-color: var(--sage-green);
 }
 
@@ -832,18 +768,7 @@
   line-height: 1;
 }
 
-/* Trust badges */
-.canva-landing .trust-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: var(--glp-sage-10);
-  border: 1px solid var(--glp-sage-20);
-  border-radius: 50px;
-  font-size: 14px;
-  color: var(--glp-sage-deep);
-}
+/* Trust badges - canonical definition at end of file */
 
 /* Animated underline for headings */
 .canva-landing .animated-underline {
@@ -1172,11 +1097,11 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(54, 179, 126, 0.08) 0%,
-    rgba(15, 61, 62, 0.04) 25%,
-    rgba(124, 111, 189, 0.06) 50%,
-    rgba(212, 145, 138, 0.05) 75%,
-    rgba(54, 179, 126, 0.08) 100%
+    rgba(46, 204, 135, 0.08) 0%,
+    rgba(11, 56, 56, 0.04) 25%,
+    rgba(133, 115, 200, 0.06) 50%,
+    rgba(224, 150, 142, 0.05) 75%,
+    rgba(46, 204, 135, 0.08) 100%
   );
   background-size: 400% 400%;
   animation: aurora-drift 20s ease-in-out infinite;
@@ -1185,10 +1110,10 @@
 
 @keyframes awareness-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(54, 179, 126, 0.25), 0 0 0 0 rgba(124, 111, 189, 0.15);
+    box-shadow: 0 0 0 0 rgba(46, 204, 135, 0.25), 0 0 0 0 rgba(133, 115, 200, 0.15);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(54, 179, 126, 0), 0 0 0 20px rgba(124, 111, 189, 0);
+    box-shadow: 0 0 0 12px rgba(46, 204, 135, 0), 0 0 0 20px rgba(133, 115, 200, 0);
   }
 }
 
