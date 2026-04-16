@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Heart, Sparkles, Send, RefreshCw, Lightbulb } from "lucide-react";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const GRATITUDE_PROMPTS = [
   "What made you smile today?",
@@ -25,6 +26,7 @@ const GRATITUDE_PROMPTS = [
 ];
 
 export default function GratitudePrompt({ onSave }) {
+  const { isAuthenticated, isLoading } = useAuth();
   const [currentPrompt, setCurrentPrompt] = useState(
     GRATITUDE_PROMPTS[Math.floor(Math.random() * GRATITUDE_PROMPTS.length)]
   );
@@ -70,6 +72,8 @@ export default function GratitudePrompt({ onSave }) {
 
     setIsSaved(true);
   };
+
+  if (isLoading || !isAuthenticated()) return null;
 
   return (
     <div className="card-elevated p-8 relative overflow-hidden" data-testid="gratitude-prompt">
