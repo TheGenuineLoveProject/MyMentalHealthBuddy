@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useLocation } from "wouter";
-import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Brain, KeyRound, Settings } from "lucide-react";
+import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Brain, KeyRound, Settings, Eye, Compass, Sun, Feather } from "lucide-react";
 import "../styles/canva-landing.css";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
@@ -14,7 +14,6 @@ export default function CanvaLanding() {
   
   const { isAuthenticated, isLoading } = useAuth();
   
-  // Admin login state
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [adminToken, setAdminToken] = useState("");
   const [adminError, setAdminError] = useState("");
@@ -74,21 +73,21 @@ export default function CanvaLanding() {
 
   const steps = [
     {
-      icon: PenLine,
-      title: "Set Up Your Space",
-      description: "Choose what feels relevant — skip anything that doesn't",
+      icon: Feather,
+      title: "Create Your Safe Space",
+      description: "Takes 30 seconds. Choose what matters to you — everything else stays out of the way.",
       link: "/login"
     },
     {
       icon: MessageCircle,
-      title: "Explore at Your Pace",
-      description: "Journal, reflect, or talk with the AI companion — whatever suits the day",
+      title: "Talk, Write, or Just Breathe",
+      description: "Journal your thoughts, chat with your AI companion, or simply sit with a guided reflection.",
       link: "/chat"
     },
     {
-      icon: TrendingUp,
-      title: "Check In When You Want",
-      description: "Your patterns are tracked privately, available whenever you're curious",
+      icon: Eye,
+      title: "See What You Couldn't Before",
+      description: "Over time, gentle patterns emerge — insights about yourself that only quiet attention reveals.",
       link: "/dashboard"
     }
   ];
@@ -97,95 +96,115 @@ export default function CanvaLanding() {
     {
       initial: "S",
       name: "Sarah M.",
-      text: "I use this when I need to think something through. The AI companion doesn't tell me what to do — it just reflects things back in a way that helps me see more clearly.",
-      role: "Teacher"
+      text: "I came here feeling stuck. The AI didn't tell me what to do — it asked the right questions until I found my own answer. That's rare.",
+      role: "Teacher",
+      highlight: "found my own answer"
     },
     {
       initial: "J",
       name: "James K.",
-      text: "The mood tracking helped me notice patterns I wasn't seeing on my own. I don't use it every day, but when I do, it's useful.",
-      role: "Software Engineer"
+      text: "I started tracking my mood just to try it. Three weeks later, I noticed a pattern that explained years of frustration. That one insight changed everything.",
+      role: "Software Engineer",
+      highlight: "changed everything"
     },
     {
       initial: "M",
       name: "Maria L.",
-      text: "Finally, a wellness app that doesn't feel clinical. It's warm, supportive, and genuinely helpful.",
-      role: "Healthcare Worker"
+      text: "This feels like talking to someone who actually listens — not someone waiting for their turn to speak. I didn't know an app could feel this safe.",
+      role: "Healthcare Worker",
+      highlight: "actually listens"
     }
   ];
 
   const features = [
     {
-      icon: Smile,
-      title: "Mindful Practices",
-      description: "Daily meditations, breathing exercises, and guided visualizations for inner peace"
+      icon: Brain,
+      title: "AI That Truly Listens",
+      description: "Your companion remembers what matters, asks what others miss, and reflects your words back with the clarity of a trusted friend.",
+      accent: "sage"
     },
     {
       icon: BarChart3,
-      title: "Personal Growth",
-      description: "Track how you're feeling over time with mood patterns, reflection history, and progress insights"
+      title: "Patterns You Can't See Alone",
+      description: "Mood tracking that quietly reveals the connections between how you feel, what you do, and why — on your timeline.",
+      accent: "gold"
     },
     {
-      icon: Users,
-      title: "Community Support",
-      description: "Share anonymous affirmations and read others' — a quiet, moderated space with no social pressure"
+      icon: PenLine,
+      title: "Journaling That Goes Deeper",
+      description: "Guided prompts designed by mental health experts to unlock the thoughts you didn't know you were holding.",
+      accent: "rose"
     },
     {
-      icon: BookOpen,
-      title: "Wisdom Library",
-      description: "Browse reflection prompts, educational articles, and evidence-informed wellness concepts"
+      icon: Compass,
+      title: "500+ Wellness Tools",
+      description: "Breathing exercises, meditations, resilience builders, and reflection frameworks — curated, never overwhelming.",
+      accent: "teal"
     },
     {
       icon: Shield,
-      title: "Safe Space",
-      description: "Private by default. No social feeds, no public profiles, no pressure to share"
+      title: "Privacy as a Promise",
+      description: "No ads. No data sales. No social feeds. Your inner world stays yours — encrypted, protected, always.",
+      accent: "sage"
     },
     {
-      icon: Zap,
-      title: "AI Companion",
-      description: "An AI reflection partner available anytime — it listens, reflects back, and doesn't tell you what to do"
+      icon: Sun,
+      title: "Healing at Your Rhythm",
+      description: "No streaks. No guilt. No pressure to return. Your tools wait patiently and welcome you back without judgment.",
+      accent: "gold"
     }
   ];
 
+  const featureAccentColors = {
+    sage: { bg: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', shadow: 'var(--glp-sage-30)' },
+    gold: { bg: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', shadow: 'var(--glp-gold-30)' },
+    rose: { bg: 'linear-gradient(135deg, var(--glp-blush-400), var(--glp-blush-600))', shadow: 'var(--glp-rose-20)' },
+    teal: { bg: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', shadow: 'var(--glp-sage-deep-20)' }
+  };
+
   const faqs = [
     {
-      question: "What is MyMentalHealthBuddy?",
-      answer: "MyMentalHealthBuddy by The Genuine Love Project is a private wellness platform with journaling, mood tracking, guided reflection, and an AI companion. It's educational — not clinical — and designed for adults exploring self-awareness at their own pace."
+      question: "What exactly is MyMentalHealthBuddy?",
+      answer: "Think of it as a private space where you can think out loud — with an AI companion that listens without judgment, tools that help you understand your own patterns, and resources built by people who genuinely care about mental wellness. It's not therapy. It's the quiet, supportive space between therapy sessions — or for when you're not ready for that step yet."
     },
     {
-      question: "Is my data private and secure?",
-      answer: "Yes. Your entries are encrypted and private. We don't sell your data, we don't show ads, and we don't share your information with third parties."
+      question: "Is my private information truly safe?",
+      answer: "Completely. Your journal entries, mood data, and conversations are encrypted and belong only to you. We don't sell data, show ads, or share anything with third parties. There's no social feed, no public profile, and no way for anyone else to see your space. We built this the way we'd want our own private thoughts protected."
     },
     {
-      question: "How does the AI companion work?",
-      answer: "It uses trauma-informed language principles to reflect what you share back to you with care. It won't diagnose, prescribe, or replace professional support — it's a thinking-out-loud space, not a therapist."
+      question: "How is the AI companion different from ChatGPT?",
+      answer: "Our AI is specifically trained in trauma-informed communication principles. It doesn't give generic advice — it listens, reflects what you're feeling back with care, asks questions that help you think deeper, and knows when to simply be present. It won't diagnose you or tell you what to do. It helps you hear yourself more clearly."
     },
     {
-      question: "Do I have to pay?",
-      answer: "Core tools — mood tracking, journaling, daily reflection, and community features — are free with no expiration. Pro adds unlimited AI conversations and additional tools. You can cancel Pro anytime with no penalties."
+      question: "What if I can't afford it?",
+      answer: "The core experience — mood tracking, journaling, daily reflections, community affirmations, and crisis resources — is completely free, forever. No trial that expires. No features that disappear. Pro unlocks unlimited AI conversations and advanced tools, but free isn't a lesser version — it's the foundation we believe everyone deserves."
     },
     {
-      question: "What if I stop using it for a while?",
-      answer: "Nothing happens. There are no streaks to lose, no progress that resets, and no notifications asking you to come back. Your space stays exactly as you left it."
+      question: "What if I stop using it?",
+      answer: "Nothing happens. No guilt notifications. No streak that breaks. No emails asking where you went. Your space stays exactly as you left it — warm, patient, and ready whenever you are. Healing isn't linear, and your tools shouldn't pretend it is."
+    },
+    {
+      question: "Is this a replacement for therapy?",
+      answer: "No, and we'll never pretend it is. This is an educational wellness companion — a place for self-reflection, pattern recognition, and emotional skill-building. If you're in crisis, we connect you directly to professional help. If you have a therapist, this can complement that work beautifully. If you're not ready for therapy, this is a gentle first step."
     }
   ];
 
   return (
     <div className="canva-landing min-h-screen">
       <SoftLaunchBanner />
-      {/* Mobile Overlay */}
       <div 
         className={`mobile-overlay ${mobileMenuOpen ? 'active' : ''}`}
         onClick={() => setMobileMenuOpen(false)}
+        aria-hidden="true"
       />
 
-      {/* Mobile Menu */}
       <nav className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
         <button 
           onClick={() => setMobileMenuOpen(false)}
           className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center"
           style={{ color: 'var(--glp-ink)' }}
           data-testid="button-close-mobile-menu"
+          aria-label="Close mobile menu"
         >
           <X className="w-6 h-6" />
         </button>
@@ -214,7 +233,7 @@ export default function CanvaLanding() {
                   <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Sign In</button>
                 </Link>
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="btn-secondary w-full" data-testid="button-mobile-getstarted">Get Started</button>
+                  <button className="btn-secondary w-full" data-testid="button-mobile-getstarted">Get Started Free</button>
                 </Link>
               </>
             )}
@@ -222,11 +241,9 @@ export default function CanvaLanding() {
         </div>
       </nav>
 
-      {/* Header / Navigation */}
       <header className="sticky top-0 z-50 backdrop-blur-xl border-b" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-deep-12)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-[80px] sm:h-[92px] lg:h-[108px]">
-            {/* Logo - Compact on mobile, expanded on desktop */}
             <Link href="/">
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
                 <div className="relative w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] lg:w-[56px] lg:h-[56px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl overflow-hidden" style={{ boxShadow: '0 2px 12px var(--glp-sage-deep-20)' }}>
@@ -247,7 +264,6 @@ export default function CanvaLanding() {
               </div>
             </Link>
 
-            {/* Desktop Navigation - Centered */}
             <nav className="hidden lg:flex items-center gap-2 xl:gap-3 absolute left-1/2 transform -translate-x-1/2">
               <a href="#home" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-home">Home</a>
               <a href="#about" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-about">About</a>
@@ -259,7 +275,6 @@ export default function CanvaLanding() {
               <Link href="/pricing" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-pricing">Pricing</Link>
             </nav>
 
-            {/* CTA Buttons - Right aligned */}
             <div className="flex items-center gap-5 sm:gap-6 shrink-0">
               {!isLoading && isAuthenticated() ? (
                 <Link href="/dashboard">
@@ -291,19 +306,19 @@ export default function CanvaLanding() {
                       data-testid="button-getstarted"
                     >
                       <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
-                      <span className="hidden sm:inline">Get Started</span>
+                      <span className="hidden sm:inline">Start Free</span>
                       <span className="sm:hidden">Start</span>
                     </button>
                   </Link>
                 </>
               )}
 
-              {/* Mobile Menu Button */}
               <button 
                 onClick={() => setMobileMenuOpen(true)}
                 className="lg:hidden p-2.5 rounded-xl transition-colors hover:bg-[var(--glp-sage-10)]"
                 style={{ color: 'var(--glp-sage-deep)' }}
                 data-testid="button-open-mobile-menu"
+                aria-label="Open mobile menu"
               >
                 <Menu className="w-6 h-6 sm:w-7 sm:h-7" />
               </button>
@@ -312,9 +327,7 @@ export default function CanvaLanding() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section id="home" className="relative py-16 md:py-20 lg:py-24 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
-        {/* Decorative Background Elements */}
+      <section id="home" className="relative py-16 md:py-20 lg:py-28 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div 
             className="decorative-orb sage animate-drift w-[500px] h-[500px] -top-32 -right-32"
@@ -342,7 +355,6 @@ export default function CanvaLanding() {
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center">
-            {/* Badge */}
             <div 
               className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full mb-6 md:mb-10 shadow-lg animate-fade-in-up"
               style={{
@@ -353,30 +365,26 @@ export default function CanvaLanding() {
             >
               <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
               <span className="font-bold uppercase tracking-widest text-xs md:text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
-                A Quieter Kind of Wellness
+                Your Wellness, Your Way
               </span>
             </div>
 
-            {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.08] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
-              A Private Space
+              You Deserve Someone
               <br />
               <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-gold), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                for Honest Reflection
+                Who Really Listens
               </span>
             </h1>
 
-            {/* Subheadline */}
             <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
-              Wellness tools that respect your pace
+              An AI companion that understands before it responds
             </p>
 
-            {/* Description */}
             <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-10 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', opacity: 0.88, animationDelay: '0.3s', lineHeight: '1.7' }}>
-              Most wellness apps want your attention. This one gives it back. Journaling, mood tracking, and AI-assisted reflection — built around how you actually feel, not how a product wants you to engage.
+              Journaling, mood tracking, and AI-guided reflection — built around how you actually feel. No judgment, no pressure, no generic advice. Just a safe space that learns your emotional language and helps you hear yourself more clearly.
             </p>
 
-            {/* Safety Box */}
             <div className="safe-space-box max-w-md mx-auto mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
               <div className="flex items-center justify-center gap-3">
                 <Shield className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
@@ -385,7 +393,6 @@ export default function CanvaLanding() {
               </div>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 md:mb-10 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               {!isLoading && isAuthenticated() ? (
                 <Link href="/dashboard">
@@ -405,7 +412,7 @@ export default function CanvaLanding() {
                     data-testid="button-hero-begin"
                   >
                     <Sparkles className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-                    Try It Free
+                    Start Your Journey — Free
                     <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </button>
                 </Link>
@@ -422,7 +429,6 @@ export default function CanvaLanding() {
             </div>
           </div>
 
-          {/* Hero Stats */}
           <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
             <div className="text-center p-4 sm:p-8 rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
@@ -446,10 +452,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      {/* Mission Statement Section */}
       <section 
         id="about" 
-        className="py-8 md:py-12 px-4 md:px-6"
+        className="py-10 md:py-16 px-4 md:px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}
       >
         <div className="max-w-4xl mx-auto text-center">
@@ -461,17 +466,16 @@ export default function CanvaLanding() {
           </div>
 
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5" style={{ color: 'var(--glp-sage-deep)' }}>
-            Why This Exists
+            Built for How Healing Actually Works
           </h2>
 
           <p 
-            className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto"
+            className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto mb-4"
             style={{ color: 'var(--glp-ink)' }}
           >
-            Most wellness apps are built to maximize engagement. This one was built to respect it. No streaks to protect, no notifications pulling you back, no punishment for stepping away. The tools here are available when you want them and quiet when you don't.
+            Most wellness apps are designed to maximize your screen time. We designed this one to maximize your self-understanding. No streaks to protect, no engagement tricks, no manufactured urgency. Just tools that respect your intelligence and support your pace — because real growth happens when you feel safe enough to be honest with yourself.
           </p>
 
-          {/* Values Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
             <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
               <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))' }}>
@@ -479,10 +483,10 @@ export default function CanvaLanding() {
               </div>
               <div>
                 <h3 className="font-serif text-lg sm:text-xl font-semibold mb-1 sm:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                  No Streak Pressure
+                  No Pressure, Ever
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                  Use the tools when they help. Skip a day, a week, a month — nothing resets.
+                  Skip a day, a week, a month. Nothing resets, nothing breaks. Your space waits patiently.
                 </p>
               </div>
             </div>
@@ -493,24 +497,24 @@ export default function CanvaLanding() {
               </div>
               <div>
                 <h3 className="font-serif text-lg sm:text-xl font-semibold mb-1 sm:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                  No Dark Patterns
+                  Ethically Designed
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                  No guilt notifications, no manufactured urgency. Every interaction is opt-in.
+                  No dark patterns. No guilt loops. Every interaction is opt-in and designed with your wellbeing first.
                 </p>
               </div>
             </div>
 
             <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 rounded-2xl p-4 sm:p-6 sm:text-center" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
-              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))' }}>
+              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-blush-400), var(--glp-blush-600))' }}>
                 <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
                 <h3 className="font-serif text-lg sm:text-xl font-semibold mb-1 sm:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                  Your Data, Your Space
+                  Radically Private
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                  Private by default. Your reflections belong to you — not an algorithm.
+                  Your reflections belong to you — not an algorithm, not advertisers, not anyone. Encrypted and protected.
                 </p>
               </div>
             </div>
@@ -518,49 +522,50 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      {/* Core Features Section */}
-      <section id="features" className="py-8 md:py-12 px-4 md:px-6" style={{ background: 'var(--glp-paper)' }}>
+      <section id="features" className="py-10 md:py-16 px-4 md:px-6" style={{ background: 'var(--glp-paper)' }}>
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
-          <div className="text-center mb-6 md:mb-10">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              What's Available
+              Everything You Need to Feel Heard
             </h2>
             <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              Use what resonates. Ignore what doesn't. Everything here is optional.
+              Use what resonates. Ignore what doesn't. Nothing here is mandatory — everything here is meaningful.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {features.map((feature, index) => (
-              <div key={index} className="rounded-2xl p-4 md:p-6 group transition-all duration-300 hover:-translate-y-1" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
-                <div className="mb-3 md:mb-5 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl transition-all group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15))', boxShadow: '0 4px 12px var(--glp-sage-20)' }}>
-                  <feature.icon className="w-5 h-5 md:w-6 md:h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} aria-hidden="true" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {features.map((feature, index) => {
+              const accent = featureAccentColors[feature.accent] || featureAccentColors.sage;
+              return (
+                <div key={index} className="rounded-2xl p-5 md:p-7 group transition-all duration-300 hover:-translate-y-2" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
+                  <div className="mb-4 md:mb-5 flex items-center justify-center w-11 h-11 md:w-13 md:h-13 rounded-xl transition-all group-hover:shadow-lg" style={{ background: accent.bg, boxShadow: `0 4px 16px ${accent.shadow}`, width: '3rem', height: '3rem' }}>
+                    <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2} aria-hidden="true" />
+                  </div>
+                  <h3 className="text-base md:text-xl font-serif font-semibold mb-2 md:mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
+                    {feature.title}
+                  </h3>
+                  <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+                    {feature.description}
+                  </p>
+                  <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
+                      Explore
+                      <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1" aria-hidden="true" />
+                  </Link>
                 </div>
-                <h3 className="text-base md:text-xl font-serif font-semibold mb-1 md:mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-                  {feature.title}
-                </h3>
-                <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4" style={{ color: 'var(--glp-ink)' }}>
-                  {feature.description}
-                </p>
-                <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
-                    Explore
-                    <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1" aria-hidden="true" />
-                </Link>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-8 md:py-12 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
+      <section className="py-10 md:py-16 px-4 md:px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
         <div className="max-w-[1200px] mx-auto px-2 md:px-8">
-          <div className="text-center mb-6 md:mb-10">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              How It Works
+              Three Steps to Feeling Understood
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              Three ways to get oriented — no commitments
+              No commitments. No credit card. Just you and a safe space.
             </p>
           </div>
 
@@ -600,18 +605,17 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section 
-        className="py-8 md:py-12 px-4 md:px-6 relative overflow-hidden"
+        className="py-10 md:py-16 px-4 md:px-6 relative overflow-hidden"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-15))' }}
       >
         <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
-          <div className="text-center mb-6 md:mb-10">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-              What People Say
+              Real People, Real Breakthroughs
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              From people who use the platform
+              From people who found something they weren't expecting
             </p>
           </div>
 
@@ -647,7 +651,6 @@ export default function CanvaLanding() {
             ))}
           </div>
 
-          {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-3 mt-10">
             <div className="trust-badge" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-20)', boxShadow: '0 4px 12px var(--glp-sage-10)' }}>
               <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}>
@@ -665,24 +668,26 @@ export default function CanvaLanding() {
               <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}>
                 <Clock className="w-3.5 h-3.5" style={{ color: 'var(--glp-sage-deep)' }} />
               </div>
-              <span style={{ color: 'var(--glp-ink)' }}>24/7 Support</span>
+              <span style={{ color: 'var(--glp-ink)' }}>24/7 Available</span>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section 
         id="faq" 
-        className="py-8 md:py-12 px-6"
+        className="py-10 md:py-16 px-6"
         style={{ background: 'linear-gradient(180deg, var(--glp-sage-10), var(--glp-paper))' }}
       >
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-6 md:mb-10">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-              Frequently Asked Questions
+              Questions You Might Be Wondering
             </h2>
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
+              We'd rather you felt confident before you started
+            </p>
           </div>
 
           <div className="space-y-0">
@@ -695,11 +700,14 @@ export default function CanvaLanding() {
                 <button 
                   className="faq-question w-full text-left"
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  aria-expanded={activeFaq === index}
+                  aria-controls={`faq-answer-${index}`}
+                  data-testid={`button-faq-toggle-${index}`}
                 >
                   {faq.question}
                   <ChevronDown className="faq-icon w-5 h-5 flex-shrink-0" />
                 </button>
-                <div className="faq-answer">
+                <div className="faq-answer" id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`}>
                   {faq.answer}
                 </div>
               </div>
@@ -708,8 +716,7 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="py-10 md:py-14 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
+      <section className="py-12 md:py-16 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
@@ -717,17 +724,17 @@ export default function CanvaLanding() {
         <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-4 md:py-8">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-8 md:py-4 rounded-full bg-white/10 backdrop-blur-sm mb-6 md:mb-10 border border-white/15">
             <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-[var(--glp-gold)]" />
-            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">A place to begin, whenever you're ready</span>
+            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">You've read this far for a reason</span>
           </div>
           
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
-            If This Feels
+            The Best Time to Start
             <br />
-            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Right, Come In</span>
+            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Is When You Feel Ready</span>
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/80 max-w-3xl mx-auto font-light leading-relaxed text-center">
-            Free to start. Free to pause. Free to leave. Always here if you come back.
+            Free to start. No credit card. No trial that expires. Your companion is here whenever you are — today, next week, or whenever the moment feels right.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">
@@ -759,7 +766,7 @@ export default function CanvaLanding() {
                   data-testid="button-final-cta"
                 >
                   <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
-                  Try It Free
+                  Begin Your Journey
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
@@ -782,7 +789,6 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-10 px-6" style={{ background: 'var(--glp-paper)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-[1100px] mx-auto px-4 md:px-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8">
@@ -842,7 +848,6 @@ export default function CanvaLanding() {
         </div>
       </footer>
 
-      {/* Admin Access Section - Discrete at bottom */}
       <section className="py-4 px-6" style={{ background: 'var(--glp-teal-800)' }}>
         <div className="max-w-md mx-auto text-center">
           {!showAdminLogin ? (
@@ -937,6 +942,7 @@ export default function CanvaLanding() {
                     className="px-4 py-3 rounded-xl transition-all hover:bg-[var(--glp-teal-600)]"
                     style={{ color: 'var(--glp-teal-200)' }}
                     data-testid="button-admin-cancel"
+                    aria-label="Cancel admin login"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -951,7 +957,6 @@ export default function CanvaLanding() {
         </div>
       </section>
 
-      {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
         className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
