@@ -13,12 +13,12 @@
   
   /* Metallic Gold Gradient */
   --metallic-gold: linear-gradient(90deg, var(--glp-gold-dark), var(--glp-gold));
-  --metallic-gold-glow: rgba(212, 160, 53, 0.35);
-  --metallic-gold-strong: rgba(212, 160, 53, 0.55);
+  --metallic-gold-glow: rgba(201, 149, 46, 0.35);
+  --metallic-gold-strong: rgba(201, 149, 46, 0.55);
   
   /* Sacred Design Tokens */
-  --sacred-glow-soft: 0 0 20px rgba(212, 160, 53, 0.4);
-  --sacred-glow-strong: 0 0 40px rgba(212, 160, 53, 0.6);
+  --sacred-glow-soft: 0 0 20px rgba(201, 149, 46, 0.4);
+  --sacred-glow-strong: 0 0 40px rgba(201, 149, 46, 0.6);
   --sacred-pulse-duration: 4s;
 }
 
@@ -377,11 +377,11 @@
 @keyframes sacred-pulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 20px rgba(200, 149, 46, 0.3);
+    box-shadow: 0 0 20px rgba(201, 149, 46, 0.3);
   }
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(200, 149, 46, 0.5);
+    box-shadow: 0 0 40px rgba(201, 149, 46, 0.5);
   }
 }
 
