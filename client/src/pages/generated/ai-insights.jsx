@@ -24,7 +24,7 @@ export default function AiInsightsPage() {
   return (
     <>
       <SEO
-        title="AI Insights | The Genuine Love Project"
+        title="AI Insights | MyMentalHealthBuddy"
         description="Personalized wisdom from your data - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

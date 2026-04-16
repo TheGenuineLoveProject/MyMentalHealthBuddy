@@ -96,7 +96,7 @@ export default function GlossaryPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Glossary — The Genuine Love Project" description="Definitions of key wellness and self-care terms." />
+      <SEO title="Glossary — MyMentalHealthBuddy" description="Definitions of key wellness and self-care terms." />
 
 
     <div className="min-h-screen hero-gradient">

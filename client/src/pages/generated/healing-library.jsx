@@ -24,7 +24,7 @@ export default function HealingLibraryPage() {
   return (
     <>
       <SEO
-        title="Healing Library | The Genuine Love Project"
+        title="Healing Library | MyMentalHealthBuddy"
         description="Resources for your healing journey - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

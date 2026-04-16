@@ -129,7 +129,7 @@ export default function MirrorPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Mirror — The Genuine Love Project" description="Reflective tools for self-discovery." />
+      <SEO title="Mirror — MyMentalHealthBuddy" description="Reflective tools for self-discovery." />
 
 
     <main className="min-h-screen hero-gradient">

@@ -24,7 +24,7 @@ export default function SoulWellnessPage() {
   return (
     <>
       <SEO
-        title="Soul Wellness | The Genuine Love Project"
+        title="Soul Wellness | MyMentalHealthBuddy"
         description="Nurturing meaning, purpose, and inner peace - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

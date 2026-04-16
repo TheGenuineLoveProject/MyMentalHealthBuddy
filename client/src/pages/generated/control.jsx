@@ -24,7 +24,7 @@ export default function ControlPage() {
   return (
     <>
       <SEO
-        title="Control Panel | The Genuine Love Project"
+        title="Control Panel | MyMentalHealthBuddy"
         description="System controls - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

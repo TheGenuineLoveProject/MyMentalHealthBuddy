@@ -24,7 +24,7 @@ export default function BodyWellnessPage() {
   return (
     <>
       <SEO
-        title="Body Wellness | The Genuine Love Project"
+        title="Body Wellness | MyMentalHealthBuddy"
         description="Listening to and caring for your physical self - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

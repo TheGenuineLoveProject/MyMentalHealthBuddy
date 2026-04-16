@@ -24,7 +24,7 @@ export default function MoodPage() {
   return (
     <>
       <SEO
-        title="Mood Tracking | The Genuine Love Project"
+        title="Mood Tracking | MyMentalHealthBuddy"
         description="Understanding your emotional patterns - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

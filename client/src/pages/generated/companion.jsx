@@ -24,7 +24,7 @@ export default function CompanionPage() {
   return (
     <>
       <SEO
-        title="Wellness Companion | The Genuine Love Project"
+        title="Wellness Companion | MyMentalHealthBuddy"
         description="Your supportive guide through each day - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

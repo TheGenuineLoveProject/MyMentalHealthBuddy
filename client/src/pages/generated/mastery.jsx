@@ -24,7 +24,7 @@ export default function MasteryPage() {
   return (
     <>
       <SEO
-        title="Mastery Practices | The Genuine Love Project"
+        title="Mastery Practices | MyMentalHealthBuddy"
         description="Excellence through devoted practice - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

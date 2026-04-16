@@ -24,7 +24,7 @@ export default function StrategyMapsPage() {
   return (
     <>
       <SEO
-        title="Strategy Maps | The Genuine Love Project"
+        title="Strategy Maps | MyMentalHealthBuddy"
         description="Planning your growth with intention - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

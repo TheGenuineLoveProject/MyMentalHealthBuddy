@@ -24,7 +24,7 @@ export default function StressResponsePage() {
   return (
     <>
       <SEO
-        title="Stress Response Tools | The Genuine Love Project"
+        title="Stress Response Tools | MyMentalHealthBuddy"
         description="Understanding and regulating your stress system - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

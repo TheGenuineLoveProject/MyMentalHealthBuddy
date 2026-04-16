@@ -188,7 +188,7 @@ export default function GrowthAnalyticsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Growth Analytics — The Genuine Love Project" description="Track your wellness journey and growth patterns." />
+      <SEO title="Growth Analytics — MyMentalHealthBuddy" description="Track your wellness journey and growth patterns." />
 
 
     <div className="min-h-screen hero-gradient">

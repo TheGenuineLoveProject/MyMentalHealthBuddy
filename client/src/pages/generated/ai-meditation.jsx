@@ -24,7 +24,7 @@ export default function AiMeditationPage() {
   return (
     <>
       <SEO
-        title="AI-Guided Meditation | The Genuine Love Project"
+        title="AI-Guided Meditation | MyMentalHealthBuddy"
         description="Personalized meditation experiences - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

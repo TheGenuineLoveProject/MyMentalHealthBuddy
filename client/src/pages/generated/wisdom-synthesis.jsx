@@ -24,7 +24,7 @@ export default function WisdomSynthesisPage() {
   return (
     <>
       <SEO
-        title="Wisdom Synthesis | The Genuine Love Project"
+        title="Wisdom Synthesis | MyMentalHealthBuddy"
         description="Integrating insights across traditions - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

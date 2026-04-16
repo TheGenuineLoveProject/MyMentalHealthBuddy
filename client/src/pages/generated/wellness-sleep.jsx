@@ -24,7 +24,7 @@ export default function WellnessSleepPage() {
   return (
     <>
       <SEO
-        title="Sleep Wellness | The Genuine Love Project"
+        title="Sleep Wellness | MyMentalHealthBuddy"
         description="Restoring through quality rest - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

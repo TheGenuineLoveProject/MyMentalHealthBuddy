@@ -24,7 +24,7 @@ export default function BreathingPage() {
   return (
     <>
       <SEO
-        title="Breathing Exercises | The Genuine Love Project"
+        title="Breathing Exercises | MyMentalHealthBuddy"
         description="Gentle breath practices to calm your nervous system - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

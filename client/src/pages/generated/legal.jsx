@@ -24,7 +24,7 @@ export default function LegalPage() {
   return (
     <>
       <SEO
-        title="Legal Information | The Genuine Love Project"
+        title="Legal Information | MyMentalHealthBuddy"
         description="Important legal notices - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

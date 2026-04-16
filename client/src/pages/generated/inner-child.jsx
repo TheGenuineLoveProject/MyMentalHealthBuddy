@@ -24,7 +24,7 @@ export default function InnerChildPage() {
   return (
     <>
       <SEO
-        title="Inner Child Healing | The Genuine Love Project"
+        title="Inner Child Healing | MyMentalHealthBuddy"
         description="Gentle reconnection with your younger self - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

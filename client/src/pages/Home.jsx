@@ -187,7 +187,7 @@ export default function Home() {
               className="sacred-heading text-xl hidden md:block"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              The Genuine Love Project
+              MyMentalHealthBuddy
             </span>
           </Link>
           <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0" role="group" aria-label="Account actions">

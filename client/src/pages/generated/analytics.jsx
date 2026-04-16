@@ -24,7 +24,7 @@ export default function AnalyticsPage() {
   return (
     <>
       <SEO
-        title="Wellness Analytics | The Genuine Love Project"
+        title="Wellness Analytics | MyMentalHealthBuddy"
         description="Insights from your practice data - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

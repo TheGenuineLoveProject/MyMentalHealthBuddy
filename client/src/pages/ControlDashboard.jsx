@@ -75,7 +75,7 @@ export default function ControlDashboard() {
 
     <>
       <SEO 
-        title="Control Center - The Genuine Love Project"
+        title="Control Center - MyMentalHealthBuddy"
         description="Platform configuration, settings, and system controls."
       />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30 relative overflow-hidden">

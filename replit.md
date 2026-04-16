@@ -83,7 +83,8 @@ A unified `blog_posts` table supports all publishable content types (blog, newsl
 ### Phase 4: Controlled Expansion Engine
 - **Change Gate**: `prompt-os-kernel/governance/CHANGE_GATE.md` — 6-rule protocol (domain classification, impact scope, risk check, implementation package, stop conditions, smallest safe patch). All changes must pass all gates.
 - **Component Registry**: `client/src/_registry/components.json` — tracks active, quarantined, and frozen components with modification rules.
-- **System Verification**: `npm run verify:system` — runs build + full test suite (175 tests across 13 files).
+- **System Verification**: `npm run verify:system` — runs build + full test suite (187 tests across 14 files).
+- **B1 CRUD Regression Tests**: `tests/content-crud.test.mjs` — 12 tests covering validate, create, list, fetch, patch, duplicate slug, healing CTA block, unsafe HTML, reserved slug, formats, and generate guardrails.
 - **Frozen Components**: Core routes, auth middleware, telemetry, kernel bridge, safety footer, wellness shell — no modification without proven failure.
 
 ### Prompt-OS Execution Prompt Library

@@ -24,7 +24,7 @@ export default function ContentAdminPage() {
   return (
     <>
       <SEO
-        title="Content Administration | The Genuine Love Project"
+        title="Content Administration | MyMentalHealthBuddy"
         description="Manage platform content - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

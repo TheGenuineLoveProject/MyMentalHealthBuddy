@@ -24,7 +24,7 @@ export default function SleepGuidePage() {
   return (
     <>
       <SEO
-        title="Sleep Wellness Guide | The Genuine Love Project"
+        title="Sleep Wellness Guide | MyMentalHealthBuddy"
         description="Restful nights for restored days - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

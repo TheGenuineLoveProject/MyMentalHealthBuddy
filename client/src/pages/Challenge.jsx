@@ -151,7 +151,7 @@ export default function Challenge() {
 
     <div className="min-h-screen bg-gradient-to-b from-[var(--glp-sage-10)] to-white dark:from-slate-900 dark:to-slate-800">
       <SEO 
-        title="7-Day Gentle Challenge | The Genuine Love Project"
+        title="7-Day Gentle Challenge | MyMentalHealthBuddy"
         description="A gentle 7-day self-reflection practice. Skip anytime. You're always welcome."
       />
       

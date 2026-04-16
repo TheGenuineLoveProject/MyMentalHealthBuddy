@@ -24,7 +24,7 @@ export default function CommunityEventsPage() {
   return (
     <>
       <SEO
-        title="Community Events | The Genuine Love Project"
+        title="Community Events | MyMentalHealthBuddy"
         description="Gather and grow together - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

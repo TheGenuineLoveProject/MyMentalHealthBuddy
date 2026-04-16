@@ -1,3 +1,19 @@
+/**
+ * ============================================================================
+ * B1 CONTENT GENERATE-INPUT CONTRACT
+ * ============================================================================
+ * AUTHORITY: POST /api/content/generate request validation ONLY.
+ * This file is NOT the canonical persisted entity schema.
+ * For CRUD entity validation, see: server/contracts/content-model.schema.mjs
+ *
+ * Exports:
+ *   - B1ContentGenerateSchema  → /generate input validation
+ *   - contentGenerateSchema    → alias (backward compat)
+ *   - B1ContentEntitySchema    → draft entity shape for normalization
+ *   - normalizeGenerateInput() → transforms raw input → B1 entity seed
+ *   - slugify(), summarize(), createAudit() → helpers
+ * ============================================================================
+ */
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 

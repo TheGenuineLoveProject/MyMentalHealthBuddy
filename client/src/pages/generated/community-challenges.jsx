@@ -24,7 +24,7 @@ export default function CommunityChallengesPage() {
   return (
     <>
       <SEO
-        title="Community Challenges | The Genuine Love Project"
+        title="Community Challenges | MyMentalHealthBuddy"
         description="Grow together through shared practice - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

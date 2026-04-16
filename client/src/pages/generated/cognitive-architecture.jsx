@@ -24,7 +24,7 @@ export default function CognitiveArchitecturePage() {
   return (
     <>
       <SEO
-        title="Cognitive Architecture | The Genuine Love Project"
+        title="Cognitive Architecture | MyMentalHealthBuddy"
         description="Understanding how your mind works - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

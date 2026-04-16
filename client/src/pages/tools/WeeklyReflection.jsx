@@ -68,7 +68,7 @@ export default function WeeklyReflection() {
   if (isComplete) {
     return (
       <div className="min-h-screen bg-background">
-        <SEO title="Weekly Reflection — The Genuine Love Project" />
+        <SEO title="Weekly Reflection — MyMentalHealthBuddy" />
         <main className="container mx-auto px-4 py-12 max-w-2xl">
           <Card>
             <CardContent className="pt-8 text-center">
@@ -112,7 +112,7 @@ export default function WeeklyReflection() {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Weekly Reflection — The Genuine Love Project" />
+      <SEO title="Weekly Reflection — MyMentalHealthBuddy" />
 
       <main className="container mx-auto px-4 py-12 max-w-2xl">
         <header className="text-center mb-8">

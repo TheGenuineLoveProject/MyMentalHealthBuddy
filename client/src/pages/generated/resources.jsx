@@ -24,7 +24,7 @@ export default function ResourcesPage() {
   return (
     <>
       <SEO
-        title="Additional Resources | The Genuine Love Project"
+        title="Additional Resources | MyMentalHealthBuddy"
         description="Curated external resources - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

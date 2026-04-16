@@ -102,7 +102,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
       <SEO 
-        title="Pricing — The Genuine Love Project"
+        title="Pricing — MyMentalHealthBuddy"
         description="Free core tools or Pro with unlimited AI sessions. No lock-in, cancel anytime."
       />
       

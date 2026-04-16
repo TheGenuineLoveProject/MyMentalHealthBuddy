@@ -23,7 +23,7 @@ export function getServerSideProps() {
 export default function WelcomeRedirect() {
   return (
     <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="welcome — The Genuine Love Project" description="Welcome to your wellness journey." />
+      <SEO title="welcome — MyMentalHealthBuddy" description="Welcome to your wellness journey." />
       <main className="container mx-auto px-4 py-8">
         <BenefitsBlock
           benefit="Educational support for your personal growth journey"

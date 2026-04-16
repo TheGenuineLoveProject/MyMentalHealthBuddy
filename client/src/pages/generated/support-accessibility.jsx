@@ -24,7 +24,7 @@ export default function SupportAccessibilityPage() {
   return (
     <>
       <SEO
-        title="Accessibility | The Genuine Love Project"
+        title="Accessibility | MyMentalHealthBuddy"
         description="Making wellness available to everyone - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

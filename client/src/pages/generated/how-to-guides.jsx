@@ -24,7 +24,7 @@ export default function HowToGuidesPage() {
   return (
     <>
       <SEO
-        title="How-To Guides | The Genuine Love Project"
+        title="How-To Guides | MyMentalHealthBuddy"
         description="Step-by-step instructions - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

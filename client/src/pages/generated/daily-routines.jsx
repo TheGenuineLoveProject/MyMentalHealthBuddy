@@ -24,7 +24,7 @@ export default function DailyRoutinesPage() {
   return (
     <>
       <SEO
-        title="Daily Routines | The Genuine Love Project"
+        title="Daily Routines | MyMentalHealthBuddy"
         description="Rhythms that support your wellbeing - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function SafetyPage() {
   return (
     <>
       <SEO
-        title="Safety Information | The Genuine Love Project"
+        title="Safety Information | MyMentalHealthBuddy"
         description="Important safety resources - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

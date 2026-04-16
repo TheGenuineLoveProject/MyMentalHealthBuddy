@@ -24,7 +24,7 @@ export default function AdvancedPage() {
   return (
     <>
       <SEO
-        title="Advanced Practices | The Genuine Love Project"
+        title="Advanced Practices | MyMentalHealthBuddy"
         description="Deeper work for continued growth - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

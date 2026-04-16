@@ -24,7 +24,7 @@ export default function DesignDashboardPage() {
   return (
     <>
       <SEO
-        title="Design Dashboard | The Genuine Love Project"
+        title="Design Dashboard | MyMentalHealthBuddy"
         description="Design team workspace - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function CommunityMentorsPage() {
   return (
     <>
       <SEO
-        title="Community Mentors | The Genuine Love Project"
+        title="Community Mentors | MyMentalHealthBuddy"
         description="Learn from those ahead on the path - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

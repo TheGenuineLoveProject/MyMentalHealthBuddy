@@ -24,7 +24,7 @@ export default function WellnessNutritionPage() {
   return (
     <>
       <SEO
-        title="Nutrition Wellness | The Genuine Love Project"
+        title="Nutrition Wellness | MyMentalHealthBuddy"
         description="Nourishing body and mind - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function SystemsThinkingPage() {
   return (
     <>
       <SEO
-        title="Systems Thinking | The Genuine Love Project"
+        title="Systems Thinking | MyMentalHealthBuddy"
         description="Seeing patterns and connections - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

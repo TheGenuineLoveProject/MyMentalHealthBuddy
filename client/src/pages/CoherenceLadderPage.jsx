@@ -156,7 +156,7 @@ export default function CoherenceLadderPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Coherence Ladder — The Genuine Love Project" description="Step-by-step guidance for emotional regulation." />
+      <SEO title="Coherence Ladder — MyMentalHealthBuddy" description="Step-by-step guidance for emotional regulation." />
 
 
     <LayoutWrapper>

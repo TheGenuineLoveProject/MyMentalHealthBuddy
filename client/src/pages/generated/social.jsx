@@ -110,7 +110,7 @@ export default function SocialPage() {
   return (
     <>
       <SEO
-        title="Social Connection | The Genuine Love Project"
+        title="Social Connection | MyMentalHealthBuddy"
         description="Connect with our community across social platforms - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -9,7 +9,7 @@ export default function ComingSoon() {
   return (
     <>
       <SEO
-        title={`${featureName} - Coming Soon | The Genuine Love Project`}
+        title={`${featureName} - Coming Soon | MyMentalHealthBuddy`}
         description="This feature is currently being developed with care. Explore our available tools in the meantime."
       />
       <div

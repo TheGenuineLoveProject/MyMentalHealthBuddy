@@ -24,7 +24,7 @@ export default function BlogPage() {
   return (
     <>
       <SEO
-        title="Wellness Blog | The Genuine Love Project"
+        title="Wellness Blog | MyMentalHealthBuddy"
         description="Articles for your journey - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

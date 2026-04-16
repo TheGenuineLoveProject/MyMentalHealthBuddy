@@ -24,7 +24,7 @@ export default function CalmingScenesPage() {
   return (
     <>
       <SEO
-        title="Calming Scenes | The Genuine Love Project"
+        title="Calming Scenes | MyMentalHealthBuddy"
         description="Visual escapes for mental rest - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

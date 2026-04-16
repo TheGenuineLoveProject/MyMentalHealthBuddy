@@ -119,7 +119,7 @@ export default function GratitudePractice() {
       style={{ background: "linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))" }}
     >
       <SEO
-        title="Gratitude Practice — The Genuine Love Project"
+        title="Gratitude Practice — MyMentalHealthBuddy"
         description="A gentle daily practice to notice what's good. Write what you're grateful for and build appreciation over time."
       />
 

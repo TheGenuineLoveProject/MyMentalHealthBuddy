@@ -204,7 +204,7 @@ export default function GuidedJournalingPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Guided Journaling — The Genuine Love Project" description="Prompts and guidance for reflective writing." />
+      <SEO title="Guided Journaling — MyMentalHealthBuddy" description="Prompts and guidance for reflective writing." />
 
 
     <div className="min-h-screen hero-gradient">

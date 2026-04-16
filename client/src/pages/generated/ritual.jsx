@@ -24,7 +24,7 @@ export default function RitualPage() {
   return (
     <>
       <SEO
-        title="Personal Rituals | The Genuine Love Project"
+        title="Personal Rituals | MyMentalHealthBuddy"
         description="Meaningful practices that mark your days - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

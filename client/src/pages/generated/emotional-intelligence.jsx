@@ -24,7 +24,7 @@ export default function EmotionalIntelligencePage() {
   return (
     <>
       <SEO
-        title="Emotional Intelligence | The Genuine Love Project"
+        title="Emotional Intelligence | MyMentalHealthBuddy"
         description="Understanding and working with your feelings - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -79,7 +79,7 @@ export default function MetaLearningPage() {
     const entries = Object.entries(profile.bestTechniques);
     if (entries.length === 0) return (
     <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Meta Learning — The Genuine Love Project" description="Explore learning about learning itself." />
+      <SEO title="Meta Learning — MyMentalHealthBuddy" description="Explore learning about learning itself." />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Meta Learning</h1>
         <p className="text-muted-foreground mb-8">
@@ -152,7 +152,7 @@ export default function MetaLearningPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Meta Learning — The Genuine Love Project" description="Explore learning about learning itself." />
+      <SEO title="Meta Learning — MyMentalHealthBuddy" description="Explore learning about learning itself." />
 
 
     <div className="min-h-screen hero-gradient">

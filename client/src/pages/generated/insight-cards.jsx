@@ -24,7 +24,7 @@ export default function InsightCardsPage() {
   return (
     <>
       <SEO
-        title="Insight Cards | The Genuine Love Project"
+        title="Insight Cards | MyMentalHealthBuddy"
         description="Wisdom in bite-sized form - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

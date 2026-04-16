@@ -24,7 +24,7 @@ export default function TermsPage() {
   return (
     <>
       <SEO
-        title="Terms of Service | The Genuine Love Project"
+        title="Terms of Service | MyMentalHealthBuddy"
         description="Our agreement with you - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

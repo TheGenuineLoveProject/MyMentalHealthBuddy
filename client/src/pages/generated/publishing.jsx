@@ -24,7 +24,7 @@ export default function PublishingPage() {
   return (
     <>
       <SEO
-        title="Publishing Tools | The Genuine Love Project"
+        title="Publishing Tools | MyMentalHealthBuddy"
         description="Content publication management - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

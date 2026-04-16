@@ -24,7 +24,7 @@ export default function ResearchPage() {
   return (
     <>
       <SEO
-        title="Research Hub | The Genuine Love Project"
+        title="Research Hub | MyMentalHealthBuddy"
         description="Evidence-based wellness insights - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

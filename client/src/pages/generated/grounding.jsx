@@ -24,7 +24,7 @@ export default function GroundingPage() {
   return (
     <>
       <SEO
-        title="Grounding Techniques | The Genuine Love Project"
+        title="Grounding Techniques | MyMentalHealthBuddy"
         description="Return to the present moment through your senses - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

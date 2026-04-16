@@ -7,7 +7,7 @@ export default function NotFoundPage() {
   return (
     <>
       <SEO
-        title="Taking a Different Path | The Genuine Love Project"
+        title="Taking a Different Path | MyMentalHealthBuddy"
         description="This page isn't here, but you are. Let's find what you're looking for together."
       />
       <div 

@@ -24,7 +24,7 @@ export default function HealthPage() {
   return (
     <>
       <SEO
-        title="System Health | The Genuine Love Project"
+        title="System Health | MyMentalHealthBuddy"
         description="Platform status and monitoring - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

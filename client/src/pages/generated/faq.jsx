@@ -24,7 +24,7 @@ export default function FaqPage() {
   return (
     <>
       <SEO
-        title="Frequently Asked Questions | The Genuine Love Project"
+        title="Frequently Asked Questions | MyMentalHealthBuddy"
         description="Answers to common questions - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

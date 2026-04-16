@@ -24,7 +24,7 @@ export default function ToolsPage() {
   return (
     <>
       <SEO
-        title="Wellness Tools | The Genuine Love Project"
+        title="Wellness Tools | MyMentalHealthBuddy"
         description="Your complete toolkit for emotional wellbeing - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

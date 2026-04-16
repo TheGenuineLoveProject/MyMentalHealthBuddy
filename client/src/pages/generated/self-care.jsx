@@ -24,7 +24,7 @@ export default function SelfCarePage() {
   return (
     <>
       <SEO
-        title="Self-Care Practices | The Genuine Love Project"
+        title="Self-Care Practices | MyMentalHealthBuddy"
         description="Nurturing routines that honor your needs - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

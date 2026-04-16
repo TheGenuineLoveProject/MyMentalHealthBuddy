@@ -201,7 +201,7 @@ function TechniqueCard({ technique, onSelect, isSelected }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Grounding Techniques — The Genuine Love Project" description="Methods for staying present and centered." />
+      <SEO title="Grounding Techniques — MyMentalHealthBuddy" description="Methods for staying present and centered." />
 
 
     <button
@@ -329,7 +329,7 @@ export default function GroundingTechniquesPage() {
   const [selectedTechnique, setSelectedTechnique] = useState(techniques[0]);
 
   useSEO({
-    title: "Grounding Techniques for Anxiety & Dissociation | The Genuine Love Project",
+    title: "Grounding Techniques for Anxiety & Dissociation | MyMentalHealthBuddy",
     description: "Evidence-based grounding exercises to anchor in the present moment. 5-4-3-2-1 senses, body-based grounding, butterfly hug, and safe place visualization.",
   });
 

@@ -88,7 +88,7 @@ export default function ReframePage() {
         { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
       ]}
     >
-      <SEO title="Reframe Tool — The Genuine Love Project" description="Shift harsh self-talk into gentler, more actionable perspectives. Educational cognitive reframing exercises." />
+      <SEO title="Reframe Tool — MyMentalHealthBuddy" description="Shift harsh self-talk into gentler, more actionable perspectives. Educational cognitive reframing exercises." />
 
       <div className="space-y-6">
         <section

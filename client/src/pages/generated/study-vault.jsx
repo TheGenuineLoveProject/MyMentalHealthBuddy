@@ -24,7 +24,7 @@ export default function StudyVaultPage() {
   return (
     <>
       <SEO
-        title="Study Vault | The Genuine Love Project"
+        title="Study Vault | MyMentalHealthBuddy"
         description="Research and evidence behind our approach - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

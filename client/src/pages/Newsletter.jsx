@@ -9,7 +9,7 @@ export default function Newsletter() {
   return (
     <div className="min-h-screen hero-premium relative overflow-hidden">
       <SEO
-        title="Newsletter | The Genuine Love Project"
+        title="Newsletter | MyMentalHealthBuddy"
         description="Receive gentle wellness tips, new articles, and healing resources in your inbox. No spam, no pressure — unsubscribe anytime."
       />
       <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />

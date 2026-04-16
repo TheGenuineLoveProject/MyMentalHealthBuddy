@@ -51,7 +51,7 @@ export default function RepairScript() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-background dark:from-pink-900/10 dark:to-background">
       <SEO 
-        title="Repair Script — The Genuine Love Project"
+        title="Repair Script — MyMentalHealthBuddy"
         description="Templates for difficult conversations and relationship repair."
       />
       

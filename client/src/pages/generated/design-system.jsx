@@ -24,7 +24,7 @@ export default function DesignSystemPage() {
   return (
     <>
       <SEO
-        title="Design System | The Genuine Love Project"
+        title="Design System | MyMentalHealthBuddy"
         description="Visual design reference - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function AccountSettingsPage() {
   return (
     <>
       <SEO
-        title="Account Settings | The Genuine Love Project"
+        title="Account Settings | MyMentalHealthBuddy"
         description="Security and preferences - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

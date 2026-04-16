@@ -24,7 +24,7 @@ export default function EliteToolsPage() {
   return (
     <>
       <SEO
-        title="Elite Wellness Tools | The Genuine Love Project"
+        title="Elite Wellness Tools | MyMentalHealthBuddy"
         description="Premium practices for dedicated practitioners - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

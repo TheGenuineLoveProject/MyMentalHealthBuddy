@@ -188,7 +188,7 @@ export default function Pricing() {
 
     <div className="min-h-screen overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 50%, var(--glp-paper) 100%)' }}>
       <SEO 
-        title="Pricing - The Genuine Love Project"
+        title="Pricing - MyMentalHealthBuddy"
         description="Four plans — Free, Starter ($9.99 one-time), Pro ($12.99/mo), Elite ($29.99/mo). No lock-in, cancel anytime."
       />
       

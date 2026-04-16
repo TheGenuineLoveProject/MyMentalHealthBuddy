@@ -24,7 +24,7 @@ export default function WellnessHubPage() {
   return (
     <>
       <SEO
-        title="Wellness Hub | The Genuine Love Project"
+        title="Wellness Hub | MyMentalHealthBuddy"
         description="Your central space for wellbeing - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

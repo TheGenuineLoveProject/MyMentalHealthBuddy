@@ -24,7 +24,7 @@ export default function WellnessCreativityPage() {
   return (
     <>
       <SEO
-        title="Creative Wellness | The Genuine Love Project"
+        title="Creative Wellness | MyMentalHealthBuddy"
         description="Healing through creative expression - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

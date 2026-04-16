@@ -24,7 +24,7 @@ export default function StatePage() {
   return (
     <>
       <SEO
-        title="State Awareness | The Genuine Love Project"
+        title="State Awareness | MyMentalHealthBuddy"
         description="Tuning into how you're doing right now - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

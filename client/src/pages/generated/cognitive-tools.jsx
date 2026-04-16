@@ -24,7 +24,7 @@ export default function CognitiveToolsPage() {
   return (
     <>
       <SEO
-        title="Cognitive Tools | The Genuine Love Project"
+        title="Cognitive Tools | MyMentalHealthBuddy"
         description="Working with thoughts more skillfully - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

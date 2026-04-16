@@ -24,7 +24,7 @@ export default function CollaborativeLabPage() {
   return (
     <>
       <SEO
-        title="Collaborative Lab | The Genuine Love Project"
+        title="Collaborative Lab | MyMentalHealthBuddy"
         description="Growing together with others - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

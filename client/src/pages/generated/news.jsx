@@ -24,7 +24,7 @@ export default function NewsPage() {
   return (
     <>
       <SEO
-        title="Wellness News | The Genuine Love Project"
+        title="Wellness News | MyMentalHealthBuddy"
         description="Updates and announcements - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

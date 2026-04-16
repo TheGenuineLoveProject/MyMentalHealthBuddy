@@ -279,7 +279,7 @@ export default function MoodPage() {
       ]}
     >
       <SEO 
-        title="Mood Check-In — The Genuine Love Project"
+        title="Mood Check-In — MyMentalHealthBuddy"
         description="Pause, breathe, and notice what's present. Track your emotional state with gentleness."
       />
 

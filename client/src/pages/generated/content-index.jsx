@@ -24,7 +24,7 @@ export default function ContentIndexPage() {
   return (
     <>
       <SEO
-        title="Content Index | The Genuine Love Project"
+        title="Content Index | MyMentalHealthBuddy"
         description="Find what you need - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

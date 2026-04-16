@@ -225,7 +225,7 @@ export default function EliteToolsDashboard() {
   return (
     <>
       <SEO 
-        title="Elite Intellectual Tools | The Genuine Love Project"
+        title="Elite Intellectual Tools | MyMentalHealthBuddy"
         description="Access 700+ world-class intellectual instruments for MIT-level minds: healing modalities, cognitive frameworks, and wisdom synthesis."
       />
       

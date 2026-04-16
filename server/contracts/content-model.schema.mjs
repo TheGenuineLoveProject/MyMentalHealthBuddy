@@ -1,3 +1,17 @@
+/**
+ * ============================================================================
+ * CANONICAL B1 CONTENT ENTITY SCHEMA — SINGLE SOURCE OF TRUTH
+ * ============================================================================
+ * AUTHORITY: All persisted content entity validation (CRUD create/patch).
+ * This file owns the shape of every stored content record.
+ * For /generate request-input validation, see:
+ *   server/contracts/content/b1-content-contract.mjs
+ *
+ * Consumed by:
+ *   - server/middleware/validate-content-model.mjs (requireValidContentModel)
+ *   - server/routes/content.mjs (/validate, /items CRUD)
+ * ============================================================================
+ */
 import { z } from "zod";
 
 export const CONTENT_STATUS = [

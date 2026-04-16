@@ -24,7 +24,7 @@ export default function WisdomPracticesPage() {
   return (
     <>
       <SEO
-        title="Wisdom Practices | The Genuine Love Project"
+        title="Wisdom Practices | MyMentalHealthBuddy"
         description="Ancient and modern paths to understanding - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

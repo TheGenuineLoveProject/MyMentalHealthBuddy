@@ -24,7 +24,7 @@ export default function QaPage() {
   return (
     <>
       <SEO
-        title="Q&A Sessions | The Genuine Love Project"
+        title="Q&A Sessions | MyMentalHealthBuddy"
         description="Your questions answered - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function WritePage() {
   return (
     <>
       <SEO
-        title="Write & Express | The Genuine Love Project"
+        title="Write & Express | MyMentalHealthBuddy"
         description="Share your thoughts and experiences - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

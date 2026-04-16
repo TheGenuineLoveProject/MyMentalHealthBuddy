@@ -24,7 +24,7 @@ export default function SupportFeedbackPage() {
   return (
     <>
       <SEO
-        title="Share Feedback | The Genuine Love Project"
+        title="Share Feedback | MyMentalHealthBuddy"
         description="Help us improve - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function PremiumPage() {
   return (
     <>
       <SEO
-        title="Premium Features | The Genuine Love Project"
+        title="Premium Features | MyMentalHealthBuddy"
         description="Unlock your full potential - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

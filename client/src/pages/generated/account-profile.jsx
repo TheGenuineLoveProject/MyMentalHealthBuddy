@@ -24,7 +24,7 @@ export default function AccountProfilePage() {
   return (
     <>
       <SEO
-        title="Your Profile | The Genuine Love Project"
+        title="Your Profile | MyMentalHealthBuddy"
         description="Manage your account information - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

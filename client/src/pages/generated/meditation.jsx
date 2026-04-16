@@ -24,7 +24,7 @@ export default function MeditationPage() {
   return (
     <>
       <SEO
-        title="Meditation Guides | The Genuine Love Project"
+        title="Meditation Guides | MyMentalHealthBuddy"
         description="Quiet moments for clarity and inner peace - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

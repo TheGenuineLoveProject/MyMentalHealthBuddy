@@ -24,7 +24,7 @@ export default function ContentStudioPage() {
   return (
     <>
       <SEO
-        title="Content Studio | The Genuine Love Project"
+        title="Content Studio | MyMentalHealthBuddy"
         description="Create and customize your practice - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

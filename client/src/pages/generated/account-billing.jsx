@@ -24,7 +24,7 @@ export default function AccountBillingPage() {
   return (
     <>
       <SEO
-        title="Billing & Subscription | The Genuine Love Project"
+        title="Billing & Subscription | MyMentalHealthBuddy"
         description="Manage your payment details - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function KnowledgeSynthesisPage() {
   return (
     <>
       <SEO
-        title="Knowledge Synthesis | The Genuine Love Project"
+        title="Knowledge Synthesis | MyMentalHealthBuddy"
         description="Connecting ideas for deeper understanding - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

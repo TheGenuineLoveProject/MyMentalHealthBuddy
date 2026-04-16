@@ -24,7 +24,7 @@ export default function ProgressPage() {
   return (
     <>
       <SEO
-        title="Progress Tracking | The Genuine Love Project"
+        title="Progress Tracking | MyMentalHealthBuddy"
         description="Celebrating how far you've come - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

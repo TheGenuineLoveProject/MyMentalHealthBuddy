@@ -36,7 +36,7 @@ export function exportToMarkdown(): string {
     return "# My Reflections\n\nNo reflections saved yet.";
   }
 
-  let md = `# My Reflections - The Genuine Love Project\n\n`;
+  let md = `# My Reflections - MyMentalHealthBuddy\n\n`;
   md += `*Exported on ${formatDate(new Date().toISOString())}*\n\n`;
   md += `---\n\n`;
 
@@ -84,7 +84,7 @@ export function exportToJSON(): string {
   return JSON.stringify(
     {
       exportedAt: new Date().toISOString(),
-      platform: "The Genuine Love Project",
+      platform: "MyMentalHealthBuddy by The Genuine Love Project",
       reflectionCount: reflections.length,
       reflections,
     },

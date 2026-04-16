@@ -33,6 +33,6 @@ export function titleFromRouteKey(routeKey = "") {
     .replace(/^hubs\//, "")
     .replace(/[\/\-]+/g, " ")
     .trim();
-  if (!s) return "The Genuine Love Project";
+  if (!s) return "MyMentalHealthBuddy";
   return s.replace(/\b\w/g, (m) => m.toUpperCase());
 }

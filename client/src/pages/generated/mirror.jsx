@@ -24,7 +24,7 @@ export default function MirrorPage() {
   return (
     <>
       <SEO
-        title="Mirror Work | The Genuine Love Project"
+        title="Mirror Work | MyMentalHealthBuddy"
         description="Meeting yourself with compassion - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

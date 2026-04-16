@@ -24,7 +24,7 @@ export default function HealingJourneysPage() {
   return (
     <>
       <SEO
-        title="Healing Journeys | The Genuine Love Project"
+        title="Healing Journeys | MyMentalHealthBuddy"
         description="Guided paths toward wholeness - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

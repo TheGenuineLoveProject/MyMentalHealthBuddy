@@ -24,7 +24,7 @@ export default function AdminPage() {
   return (
     <>
       <SEO
-        title="Admin Dashboard | The Genuine Love Project"
+        title="Admin Dashboard | MyMentalHealthBuddy"
         description="Platform management - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

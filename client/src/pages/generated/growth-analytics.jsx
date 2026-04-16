@@ -24,7 +24,7 @@ export default function GrowthAnalyticsPage() {
   return (
     <>
       <SEO
-        title="Growth Analytics | The Genuine Love Project"
+        title="Growth Analytics | MyMentalHealthBuddy"
         description="Measuring your personal development - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

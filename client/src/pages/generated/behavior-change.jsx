@@ -24,7 +24,7 @@ export default function BehaviorChangePage() {
   return (
     <>
       <SEO
-        title="Behavior Change | The Genuine Love Project"
+        title="Behavior Change | MyMentalHealthBuddy"
         description="Building habits that align with your values - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function DisclaimerPage() {
   return (
     <>
       <SEO
-        title="Important Disclaimers | The Genuine Love Project"
+        title="Important Disclaimers | MyMentalHealthBuddy"
         description="Please read carefully - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

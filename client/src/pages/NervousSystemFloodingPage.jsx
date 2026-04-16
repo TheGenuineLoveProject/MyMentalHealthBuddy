@@ -112,7 +112,7 @@ export default function NervousSystemFloodingPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Nervous System Flooding — The Genuine Love Project" description="Understand and work with nervous system responses." />
+      <SEO title="Nervous System Flooding — MyMentalHealthBuddy" description="Understand and work with nervous system responses." />
 
 
     <LayoutWrapper>

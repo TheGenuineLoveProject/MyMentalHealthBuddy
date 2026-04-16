@@ -24,7 +24,7 @@ export default function PrivacyPage() {
   return (
     <>
       <SEO
-        title="Privacy Policy | The Genuine Love Project"
+        title="Privacy Policy | MyMentalHealthBuddy"
         description="How we protect your information - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

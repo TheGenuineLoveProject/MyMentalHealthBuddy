@@ -59,7 +59,7 @@ export default function UrgeSurf() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-50 to-background dark:from-cyan-900/10 dark:to-background">
       <SEO 
-        title="Urge Surf — The Genuine Love Project"
+        title="Urge Surf — MyMentalHealthBuddy"
         description="A mindful practice for riding through difficult urges without acting on them."
       />
       

@@ -24,7 +24,7 @@ export default function AffirmationsPage() {
   return (
     <>
       <SEO
-        title="Affirmation Practice | The Genuine Love Project"
+        title="Affirmation Practice | MyMentalHealthBuddy"
         description="Kind words to strengthen your inner voice - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

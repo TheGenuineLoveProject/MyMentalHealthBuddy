@@ -24,7 +24,7 @@ export default function WisdomPage() {
   return (
     <>
       <SEO
-        title="Daily Wisdom | The Genuine Love Project"
+        title="Daily Wisdom | MyMentalHealthBuddy"
         description="Insights for reflection and growth - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

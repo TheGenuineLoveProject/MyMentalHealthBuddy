@@ -24,7 +24,7 @@ export default function SupportPage() {
   return (
     <>
       <SEO
-        title="Support Center | The Genuine Love Project"
+        title="Support Center | MyMentalHealthBuddy"
         description="We're here to help - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -215,7 +215,7 @@ export default function CollaborativeLabPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Collaborative Lab — The Genuine Love Project" description="Explore wellness tools in a collaborative environment." />
+      <SEO title="Collaborative Lab — MyMentalHealthBuddy" description="Explore wellness tools in a collaborative environment." />
 
 
     <div className="min-h-screen hero-gradient">

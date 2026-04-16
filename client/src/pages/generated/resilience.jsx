@@ -24,7 +24,7 @@ export default function ResiliencePage() {
   return (
     <>
       <SEO
-        title="Resilience Building | The Genuine Love Project"
+        title="Resilience Building | MyMentalHealthBuddy"
         description="Strengthening your ability to bounce back - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

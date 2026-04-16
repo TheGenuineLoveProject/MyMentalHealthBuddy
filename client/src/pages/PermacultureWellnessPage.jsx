@@ -188,7 +188,7 @@ export default function PermacultureWellnessPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Permaculture Wellness — The Genuine Love Project" description="Ecological principles for personal wellbeing." />
+      <SEO title="Permaculture Wellness — MyMentalHealthBuddy" description="Ecological principles for personal wellbeing." />
 
 
     <LayoutWrapper>

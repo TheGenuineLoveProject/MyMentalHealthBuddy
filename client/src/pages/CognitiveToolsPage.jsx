@@ -250,7 +250,7 @@ export default function CognitiveToolsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Cognitive Tools — The Genuine Love Project" description="Practical tools for clearer thinking and decision-making." />
+      <SEO title="Cognitive Tools — MyMentalHealthBuddy" description="Practical tools for clearer thinking and decision-making." />
 
 
     <div className="min-h-screen hero-gradient">

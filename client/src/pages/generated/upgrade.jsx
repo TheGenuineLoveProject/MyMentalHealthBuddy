@@ -24,7 +24,7 @@ export default function UpgradePage() {
   return (
     <>
       <SEO
-        title="Upgrade Your Plan | The Genuine Love Project"
+        title="Upgrade Your Plan | MyMentalHealthBuddy"
         description="Access more features - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

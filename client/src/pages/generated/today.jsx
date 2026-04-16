@@ -24,7 +24,7 @@ export default function TodayPage() {
   return (
     <>
       <SEO
-        title="Today's Practice | The Genuine Love Project"
+        title="Today's Practice | MyMentalHealthBuddy"
         description="Your daily wellness focus - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

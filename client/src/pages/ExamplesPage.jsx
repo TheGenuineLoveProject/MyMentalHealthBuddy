@@ -161,7 +161,7 @@ function ExampleCard({ example }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Examples — The Genuine Love Project" description="See examples of wellness tools and practices." />
+      <SEO title="Examples — MyMentalHealthBuddy" description="See examples of wellness tools and practices." />
 
 
     <div 

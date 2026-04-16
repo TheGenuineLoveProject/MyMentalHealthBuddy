@@ -151,7 +151,7 @@ export default function MovementSnacksPage() {
       }}
       examples={[]}
     >
-      <SEO title="Movement Snacks — The Genuine Love Project" description="Quick movement breaks for body wellness." />
+      <SEO title="Movement Snacks — MyMentalHealthBuddy" description="Quick movement breaks for body wellness." />
 
     <LayoutWrapper>
       <Hero

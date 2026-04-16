@@ -117,7 +117,7 @@ export default function NewsPage() {
   const newsJsonLd = useMemo(() => {
     if (!latestArticle) return (
     <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="News — The Genuine Love Project" description="Latest updates from The Genuine Love Project." />
+      <SEO title="News — MyMentalHealthBuddy" description="Latest updates from MyMentalHealthBuddy." />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">News</h1>
         <p className="text-muted-foreground mb-8">
@@ -136,7 +136,7 @@ export default function NewsPage() {
 
   useSEO({
     title: "News & Updates",
-    description: "Latest wellness tips, research insights, and platform updates from The Genuine Love Project. Stay informed about mental health and healing practices.",
+    description: "Latest wellness tips, research insights, and platform updates from MyMentalHealthBuddy. Stay informed about mental health and healing practices.",
     ogType: "article",
     jsonLd: newsJsonLd,
   });
@@ -176,7 +176,7 @@ export default function NewsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="News — The Genuine Love Project" description="Latest updates from The Genuine Love Project." />
+      <SEO title="News — MyMentalHealthBuddy" description="Latest updates from MyMentalHealthBuddy." />
 
 
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">

@@ -24,7 +24,7 @@ export default function ExamplesPage() {
   return (
     <>
       <SEO
-        title="Practice Examples | The Genuine Love Project"
+        title="Practice Examples | MyMentalHealthBuddy"
         description="See how others practice - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

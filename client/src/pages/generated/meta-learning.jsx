@@ -24,7 +24,7 @@ export default function MetaLearningPage() {
   return (
     <>
       <SEO
-        title="Meta-Learning | The Genuine Love Project"
+        title="Meta-Learning | MyMentalHealthBuddy"
         description="Learning how to learn better - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

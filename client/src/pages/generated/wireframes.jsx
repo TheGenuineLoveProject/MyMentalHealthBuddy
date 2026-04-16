@@ -24,7 +24,7 @@ export default function WireframesPage() {
   return (
     <>
       <SEO
-        title="Wireframes | The Genuine Love Project"
+        title="Wireframes | MyMentalHealthBuddy"
         description="Page structure templates - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

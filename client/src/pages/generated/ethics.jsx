@@ -24,7 +24,7 @@ export default function EthicsPage() {
   return (
     <>
       <SEO
-        title="Our Ethics | The Genuine Love Project"
+        title="Our Ethics | MyMentalHealthBuddy"
         description="Values that guide us - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

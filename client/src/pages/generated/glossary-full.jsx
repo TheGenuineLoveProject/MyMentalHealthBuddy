@@ -24,7 +24,7 @@ export default function GlossaryFullPage() {
   return (
     <>
       <SEO
-        title="Complete Glossary | The Genuine Love Project"
+        title="Complete Glossary | MyMentalHealthBuddy"
         description="Comprehensive term reference - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

@@ -24,7 +24,7 @@ export default function JournalPage() {
   return (
     <>
       <SEO
-        title="Journaling Practice | The Genuine Love Project"
+        title="Journaling Practice | MyMentalHealthBuddy"
         description="Writing your way to clarity - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

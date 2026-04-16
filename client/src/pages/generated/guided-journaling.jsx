@@ -24,7 +24,7 @@ export default function GuidedJournalingPage() {
   return (
     <>
       <SEO
-        title="Guided Journaling | The Genuine Love Project"
+        title="Guided Journaling | MyMentalHealthBuddy"
         description="Prompts to deepen your reflection - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

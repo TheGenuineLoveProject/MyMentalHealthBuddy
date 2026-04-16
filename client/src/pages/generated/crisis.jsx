@@ -24,7 +24,7 @@ export default function CrisisPage() {
   return (
     <>
       <SEO
-        title="Crisis Resources | The Genuine Love Project"
+        title="Crisis Resources | MyMentalHealthBuddy"
         description="Immediate support when you need it most - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

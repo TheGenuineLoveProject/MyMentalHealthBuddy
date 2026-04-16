@@ -161,7 +161,7 @@ export default function PhilosophicalInquiryPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Philosophical Inquiry — The Genuine Love Project" description="Explore life's big questions with gentle guidance." />
+      <SEO title="Philosophical Inquiry — MyMentalHealthBuddy" description="Explore life's big questions with gentle guidance." />
 
 
     <div className="min-h-screen hero-gradient">

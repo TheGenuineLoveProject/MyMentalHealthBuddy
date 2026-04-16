@@ -24,7 +24,7 @@ export default function AtlasPage() {
   return (
     <>
       <SEO
-        title="Wellness Atlas | The Genuine Love Project"
+        title="Wellness Atlas | MyMentalHealthBuddy"
         description="Navigate your personal growth landscape - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

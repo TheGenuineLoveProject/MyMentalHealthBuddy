@@ -24,7 +24,7 @@ export default function AiCoachPage() {
   return (
     <>
       <SEO
-        title="AI Wellness Coach | The Genuine Love Project"
+        title="AI Wellness Coach | MyMentalHealthBuddy"
         description="Personalized guidance and support - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell

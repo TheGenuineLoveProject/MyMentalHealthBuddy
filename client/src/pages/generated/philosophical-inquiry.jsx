@@ -24,7 +24,7 @@ export default function PhilosophicalInquiryPage() {
   return (
     <>
       <SEO
-        title="Philosophical Inquiry | The Genuine Love Project"
+        title="Philosophical Inquiry | MyMentalHealthBuddy"
         description="Exploring life's meaningful questions - Educational wellness tools for adults 18+."
       />
       <WellnessPageShell
