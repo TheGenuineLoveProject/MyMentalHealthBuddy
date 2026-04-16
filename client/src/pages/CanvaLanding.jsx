@@ -75,19 +75,19 @@ export default function CanvaLanding() {
     {
       icon: Feather,
       title: "Step Into Your Sanctuary",
-      description: "In sixty seconds, you'll enter a private space shaped entirely around how your mind works — your emotional rhythms, your stress patterns, your deepest goals. No templates. No one-size-fits-all. Just a sanctuary that adapts to exactly where you are and grows as you grow.",
+      description: "In sixty seconds, you'll enter a private space shaped entirely around how your mind works — your emotional rhythms, your stress patterns, your focus style, your deepest goals. No templates. No one-size-fits-all. Whether you're managing ADHD, navigating overwhelm, or simply seeking clarity, this sanctuary adapts to exactly where you are and evolves as you grow.",
       link: "/login"
     },
     {
       icon: MessageCircle,
-      title: "Meet the Buddy Who Gets You",
-      description: "Your AI buddy is part life coach, part wise mentor, part loyal friend. It listens with genuine attention, remembers what matters to you, and guides you with the warmth of someone who believes in your potential before you do. Every conversation is a step toward clarity.",
+      title: "Meet Your Metacognitive Coach",
+      description: "Your AI buddy is part life coach, part wise mentor, part loyal friend, part behavioral strategist. It doesn't just listen — it helps you think about how you think. Through active listening, intelligent questioning, and real-time pattern recognition, it guides you toward insights that change how you understand yourself. Every conversation builds metacognitive skill — the ability to observe, regulate, and evolve your own mind.",
       link: "/chat"
     },
     {
       icon: Eye,
       title: "Become Who You Already Are",
-      description: "Something shifts when you finally see yourself clearly. Patterns that once controlled you become choices. Confidence stops being something you chase and becomes something you embody. You're not learning to cope — you're learning to thrive as the person you've always been underneath.",
+      description: "Something shifts when you finally see yourself clearly. Patterns that once controlled you become conscious choices. Self-regulation becomes natural. Confidence stops being something you perform and becomes something you embody. You're not learning to cope — you're mastering the inner skills that let you thrive as the person you've always been underneath.",
       link: "/dashboard"
     }
   ];
@@ -96,30 +96,30 @@ export default function CanvaLanding() {
     {
       initial: "S",
       name: "Sarah M.",
-      text: "I was drowning in stress and couldn't even name what was wrong. My buddy asked one question nobody in my life had ever thought to ask — and something I'd buried for years suddenly made sense. That moment didn't just relieve my stress. It changed how I relate to pressure entirely.",
+      text: "I was drowning in stress and couldn't even name what was wrong. My buddy asked one question nobody in my life had ever thought to ask — and something I'd buried for years suddenly made sense. It didn't just relieve the stress. It taught me how to observe my own mind, catch the pattern before it spirals, and respond with clarity instead of panic. That's a skill I'll carry forever.",
       role: "Teacher & Mother of Two",
-      highlight: "changed how I relate to pressure"
+      highlight: "respond with clarity instead of panic"
     },
     {
       initial: "J",
       name: "James K.",
-      text: "Confidence was always something other people seemed to have. Three weeks of tracking showed me a pattern I'd never seen: I was sabotaging myself before anyone else got the chance. Seeing that changed everything. I walk into rooms differently now — not performing confidence, actually feeling it.",
+      text: "Living with ADHD, my brain moves faster than I can follow. Every app wanted me to build habits I couldn't sustain. This buddy understood that my mind works differently — and instead of fighting it, helped me build self-regulation strategies that actually fit how I think. Three weeks in, I finally stopped sabotaging myself. Not through willpower. Through genuine self-understanding.",
       role: "Software Engineer",
-      highlight: "actually feeling it"
+      highlight: "strategies that actually fit how I think"
     },
     {
       initial: "M",
       name: "Maria L.",
-      text: "I spend twelve hours a day pouring into other people. There was nothing left for me. My buddy didn't give me tips — it held up a mirror and showed me my own worth in ways I'd forgotten. For the first time in years, I believe I deserve the same care I give everyone else.",
+      text: "I spend twelve hours a day pouring into other people. There was nothing left for me. My buddy didn't give me tips — it used this beautiful coaching approach where it gently helped me see my own worth from angles I'd completely missed. For the first time in years, I believe I deserve the same care I give everyone else. That shift in perspective changed everything.",
       role: "Healthcare Worker",
       highlight: "I deserve the same care"
     },
     {
       initial: "D",
       name: "David R.",
-      text: "I'd tried every self-improvement app out there. They all wanted me to build habits. This one helped me understand why I kept breaking them — and that understanding became the foundation for actually changing. My buddy is the coach I didn't know I needed.",
+      text: "I'd tried every self-improvement app out there. They all wanted me to build habits. This one helped me understand why I kept breaking them — the unconscious behavioral patterns driving everything. Once I could see the mechanics of my own thinking, change became natural instead of forced. My buddy is the metacognitive coach I didn't know I needed.",
       role: "Creative Director",
-      highlight: "the coach I didn't know I needed"
+      highlight: "the metacognitive coach I didn't know I needed"
     }
   ];
 
@@ -127,25 +127,25 @@ export default function CanvaLanding() {
     {
       icon: Waves,
       title: "Attunement Over Advice",
-      description: "The greatest coaches in history never told people what to think — they asked the questions that made people think for themselves. We don't hand you answers. We attune to the emotional intelligence you already carry, then create the exact conditions for your own wisdom to rise to the surface. We guide from beside you. Never from above.",
+      description: "The greatest coaches in history never told people what to think — they asked the questions that unlocked how people think about themselves. We don't hand you answers. We attune to your emotional intelligence, your cognitive patterns, your unique processing style. Then we create the precise metacognitive conditions for your own wisdom to surface. We guide from beside you. Never from above.",
       color: "sage"
     },
     {
       icon: Fingerprint,
       title: "Your Mind Is One of a Kind",
-      description: "No two minds process the world the same way — and no template can honor that. Your AI buddy learns your specific emotional language, adapts to your unique rhythms, and recognizes patterns that belong only to you. We see the individual — not a category, not a label, not a data point. The irreplaceable human being.",
+      description: "No two minds process the world the same way — whether you think in spirals, in bursts, in deep dives, or in rapid connections. Your AI buddy learns your specific emotional language, your attention patterns, your behavioral rhythms, and the cognitive style that makes you irreplaceable. ADHD, anxiety, overthinking, scattered focus — we don't see problems. We see a unique mind that deserves tools built for how it actually works.",
       color: "gold"
     },
     {
       icon: HeartHandshake,
       title: "Unconditional Friendship",
-      description: "Picture a friend who never judges where you are, never compares you to where you 'should' be, and meets every version of you — the confident, the uncertain, the quietly evolving — with the same genuine warmth. That's what we built. A presence without conditions. A bond without strings. A buddy who shows up for you the way you deserve.",
+      description: "Picture a friend who never judges where you are, never compares you to where you 'should' be, and meets every version of you — the confident, the uncertain, the brilliantly chaotic, the quietly evolving — with the same genuine warmth. That's what we built. A presence without conditions. A bond without strings. A buddy who shows up with compassion, humor, and wisdom exactly when you need it.",
       color: "rose"
     },
     {
       icon: Infinity,
       title: "Growth at Your Own Pace",
-      description: "Lasting transformation doesn't happen under pressure — it happens in safety. No metrics to chase, no streaks to protect, no manufactured guilt. Like a wise mentor who knows when to challenge you and when to simply hold space, your buddy meets you exactly where you are — because the strongest growth always comes from feeling genuinely supported.",
+      description: "Lasting behavioral change doesn't happen under pressure — it happens in safety. No metrics to chase, no streaks to protect, no manufactured guilt. Like a wise mentor who knows when to challenge you, when to teach you, and when to simply hold space, your buddy meets you exactly where you are — because the strongest growth always comes from feeling genuinely supported, understood, and believed in.",
       color: "teal"
     }
   ];
@@ -153,50 +153,50 @@ export default function CanvaLanding() {
   const features = [
     {
       icon: Brain,
-      title: "AI Buddy: Coach, Mentor & Friend",
-      description: "Part life coach who challenges you to reach higher. Part wise mentor who shares insight at the perfect moment. Part loyal friend who genuinely cares about your journey. Trained in emotional intelligence, behavioral coaching, and active listening — your buddy helps you master stress, build real confidence, and understand yourself from the inside out.",
+      title: "AI Buddy: Coach, Mentor & Guide",
+      description: "Part success coach who challenges you to reach higher. Part wise mentor who shares insight at the perfect moment. Part loyal friend who genuinely cares. Part behavioral strategist who helps you understand why you do what you do. Trained in metacognitive coaching, emotional intelligence, and active listening — your buddy helps you master stress, build genuine confidence, regulate your own mind, and evolve into your fullest potential.",
       accent: "sage"
     },
     {
       icon: BarChart3,
       title: "See the Invisible Patterns",
-      description: "Your moods aren't random — they're signals. Gentle awareness tools reveal the hidden connections between how you feel and what's driving it. Over weeks, you'll see patterns that explain years of behavior and unlock the kind of self-knowledge that transforms every decision you make.",
+      description: "Your moods aren't random — they're signals your mind is sending. Advanced awareness tools reveal the hidden connections between thoughts, emotions, and behaviors you've never consciously seen. Over weeks, you'll develop metacognitive insight — the ability to observe your own thinking in real time — and unlock the kind of self-knowledge that transforms every decision, relationship, and moment of your life.",
       accent: "gold"
     },
     {
       icon: PenLine,
-      title: "Journaling That Rewires Thinking",
-      description: "Psychologically crafted prompts that guide you past surface-level thoughts into the deeper layers where genuine self-understanding lives. Each entry is a quiet act of self-respect — a practice that steadily builds the self-worth and emotional clarity that no external validation can replace.",
+      title: "Journaling That Evolves Your Thinking",
+      description: "Psychologically crafted prompts designed by behavioral science principles to guide you past surface-level thoughts into the deeper cognitive layers where genuine self-understanding lives. Each entry builds metacognitive muscle — the skill of observing and refining your own thought patterns — while steadily growing the self-worth and emotional clarity that no external validation can replace.",
       accent: "rose"
     },
     {
       icon: Compass,
       title: "500+ Tools for Every Moment",
-      description: "Stress dissolvers, confidence amplifiers, cognitive reframes, breathing anchors, resilience builders, emotional regulation techniques, and self-mastery exercises — organized by exactly what you need right now. From daily pressure to life-defining crossroads. A to Z, always within reach.",
+      description: "Stress dissolvers, confidence amplifiers, cognitive reframes, self-regulation techniques, ADHD focus strategies, behavioral modification guides, breathing anchors, resilience builders, and self-mastery exercises — organized by exactly what you need right now. From daily overwhelm to life-defining crossroads. A to Z, 360 degrees, always within reach.",
       accent: "teal"
     },
     {
       icon: TrendingUp,
-      title: "Confidence & Self-Worth Engine",
-      description: "Your buddy doesn't just listen — it actively coaches you toward believing in yourself. Through guided reflections, strength recognition, and mindful reframing, you develop the kind of genuine, lasting confidence that comes from knowing who you are, not from proving it to others.",
+      title: "Confidence & Self-Worth Builder",
+      description: "Your buddy doesn't just listen — it actively coaches you toward genuine self-belief through strength-based reflections, precise cognitive reframing, and behavioral insight. You develop the kind of lasting confidence that comes from truly knowing who you are, understanding your patterns, and building the self-regulation skills that make you resilient under pressure.",
       accent: "rose"
     },
     {
       icon: Shield,
       title: "Your Privacy Is Non-Negotiable",
-      description: "Your inner world is encrypted with industry-standard security and belongs exclusively to you. No ads. No data harvesting. No social exposure. We protect your vulnerability with the same reverence we'd want for our own — because trust is the foundation everything else is built on.",
+      description: "Your inner world is encrypted with industry-standard security and belongs exclusively to you. No ads. No data harvesting. No social exposure. Every thought you share, every pattern you explore, every moment of vulnerability — protected with the same reverence we'd want for our own. Trust is the foundation everything else is built on.",
       accent: "sage"
     },
     {
       icon: Leaf,
-      title: "Master Stress, Don't Just Manage It",
-      description: "Work pressure. Relationship tension. Financial worry. The invisible weight of daily responsibilities. Your buddy helps you process all of it with clarity and calm — not by avoiding stress, but by understanding it deeply enough to navigate it with wisdom and genuine resilience.",
+      title: "Master Stress from A to Z",
+      description: "Work pressure. Relationship tension. Financial worry. ADHD overwhelm. The invisible weight of daily responsibilities. Your buddy helps you process all of it through advanced self-regulation techniques — not by avoiding stress, but by understanding the behavioral and cognitive mechanics behind it deeply enough to navigate any situation with wisdom, calm, and genuine resilience.",
       accent: "teal"
     },
     {
       icon: Sun,
       title: "Your Pace. Your Rules. Always.",
-      description: "No streaks. No guilt. No manufactured urgency. Like a true friend who never wavers, your buddy waits with genuine patience and greets you warmly whenever you return — because real transformation isn't a race. It's a lifelong relationship with yourself.",
+      description: "No streaks. No guilt. No manufactured urgency. Like a true friend who never wavers, your buddy waits with genuine patience and greets you warmly whenever you return — because real behavioral transformation isn't a race. It's a lifelong relationship with your own mind, built on unconditional support, humor, honesty, and love.",
       accent: "gold"
     }
   ];
@@ -218,35 +218,35 @@ export default function CanvaLanding() {
   const faqs = [
     {
       question: "What exactly is MyMentalHealthBuddy?",
-      answer: "Imagine having a personal life coach, a wise mentor, and a genuinely loyal friend — available 24/7, deeply invested in who you're becoming. That's your AI buddy. It's trained in emotional intelligence, behavioral coaching, and active listening, paired with 500+ evidence-based tools for mastering stress, building unshakeable confidence, deepening self-worth, and unlocking personal growth you can feel. This isn't therapy — it's the always-there companion that helps you understand yourself from the inside out and become who you've always known you could be."
+      answer: "Imagine having a personal success coach, a wise mentor, a behavioral strategist, and a genuinely loyal friend — available 24/7, deeply invested in who you're becoming. That's your AI buddy. It's trained in metacognitive coaching, emotional intelligence, behavioral science, and active listening, paired with 500+ evidence-based tools for mastering everyday stressors from A to Z, building genuine confidence, deepening self-worth, developing self-regulation skills, and unlocking personal growth you can feel. Whether you're navigating ADHD, managing overwhelm, or seeking your fullest potential — this is the always-there companion that helps you understand your own mind from the inside out."
     },
     {
       question: "Is my private information truly safe?",
-      answer: "Your privacy isn't a feature — it's a promise. Every journal entry, mood insight, and conversation is encrypted with industry-standard security and belongs exclusively to you. We don't sell data, serve ads, or share anything with anyone. There's no social feed, no public profile, and no way for another person to see your inner world. We built this with the same reverence we'd want for our own deepest thoughts — because trust isn't a marketing word to us, it's the foundation."
+      answer: "Your privacy isn't a feature — it's a promise. Every journal entry, mood insight, behavioral pattern, and conversation is encrypted with industry-standard security and belongs exclusively to you. We don't sell data, serve ads, or share anything with anyone. There's no social feed, no public profile, and no way for another person to see your inner world. We built this with the same reverence we'd want for our own deepest thoughts — because trust isn't a marketing word to us, it's the foundation."
     },
     {
       question: "How does the AI buddy actually help me?",
-      answer: "Your buddy is coach, mentor, and guide — woven into one intelligent presence. It helps you navigate daily stress with proven techniques, builds your confidence through strength-based reflections and precise reframing, deepens your self-worth by illuminating qualities you've overlooked, and surfaces behavioral patterns you couldn't see on your own. It remembers your story, adapts to your emotional language, and evolves alongside you — like a wise friend who always knows when to challenge you and when to just listen."
+      answer: "Your buddy is coach, mentor, behavioral guide, and friend — woven into one emotionally intelligent presence. It helps you navigate daily stressors with advanced self-regulation techniques, builds your confidence through strength-based coaching and precise cognitive reframing, develops your metacognitive skills so you can observe and evolve your own thinking patterns, and surfaces unconscious behaviors you couldn't see on your own. It remembers your story, adapts to your unique cognitive style, and evolves alongside you — like a wise friend who always knows when to challenge you, when to teach you, and when to just listen."
     },
     {
-      question: "Can it really help with stress and confidence?",
-      answer: "Yes — and not with recycled advice you could find anywhere. Your buddy learns your specific stress triggers, your relationship dynamics, your confidence patterns, then coaches you with strategies designed for your actual life. Over time, you develop genuine emotional resilience — not by avoiding what's hard, but by understanding it. The confidence you build isn't performative. It comes from real self-knowledge and self-acceptance — the only foundation that doesn't crack under pressure."
+      question: "Can it help with ADHD, focus, and overwhelm?",
+      answer: "Absolutely — and not with generic productivity tips. Your buddy understands that ADHD, scattered focus, and chronic overwhelm aren't character flaws — they're unique cognitive styles that deserve tools built specifically for how your mind actually works. Through personalized self-regulation strategies, attention-aware coaching, behavioral pattern recognition, and metacognitive skill-building, your buddy helps you work with your mind instead of against it. The goal isn't to 'fix' you — it's to help you harness the brilliant way your brain already operates."
     },
     {
       question: "How is this different from ChatGPT or other AI?",
-      answer: "Fundamentally different. Our buddy is purpose-built around trauma-informed communication, emotional attunement, and behavioral coaching. It doesn't generate generic responses — it reads emotional undertones, reflects what you're feeling with precision and care, asks questions that open doorways you didn't know existed, and coaches you toward real, measurable growth. It's the difference between talking to a search engine and being heard by a wise mentor who genuinely knows your story."
+      answer: "Fundamentally different. Our buddy is purpose-built around trauma-informed communication, metacognitive coaching, emotional attunement, and behavioral science. It doesn't generate generic responses — it reads emotional undertones, recognizes cognitive patterns, reflects what you're feeling with precision and care, asks questions that open doorways you didn't know existed, and coaches you toward real, measurable growth. It's the difference between talking to a search engine and being guided by a wise mentor who genuinely understands how your unique mind works."
     },
     {
       question: "What if I can't afford it?",
-      answer: "The core experience — mood tracking, journaling, daily reflections, community affirmations, stress tools, and crisis resources — is completely free, forever. Not a trial. Not a stripped-down version. Not a hook. Pro and Elite unlock unlimited AI coaching and advanced self-mastery tools, but our free tier isn't a compromise — it's the standard we believe every person deserves. Mental wellness should never have a price barrier."
+      answer: "The core experience — mood tracking, journaling, daily reflections, community affirmations, self-regulation tools, focus strategies, and crisis resources — is completely free, forever. Not a trial. Not a stripped-down version. Not a hook. Pro and Elite unlock unlimited AI coaching and advanced metacognitive tools, but our free tier isn't a compromise — it's the standard we believe every person deserves. Understanding your own mind should never have a price barrier."
     },
     {
       question: "What if I stop using it for a while?",
-      answer: "Life gets full — and your space stays exactly as you left it. Warm. Patient. Unchanged. No guilt emails. No streak that breaks. No passive-aggressive notifications wondering where you went. Growth happens in waves, not straight lines, and we genuinely honor that. When you're ready, your buddy is here — no judgment, no conditions, picking up right where you left off. That's what a real friend does."
+      answer: "Life gets full — and your space stays exactly as you left it. Warm. Patient. Unchanged. No guilt emails. No streak that breaks. No passive-aggressive notifications wondering where you went. Behavioral growth happens in waves, not straight lines, and we genuinely honor that. When you're ready, your buddy is here — no judgment, no conditions, picking up right where you left off. That's what a real friend does."
     },
     {
       question: "Is this a replacement for therapy?",
-      answer: "No — and we'll always be transparent about that, because integrity isn't optional. This is an educational wellness companion: a coach and guide for deepening self-awareness, mastering stress, building emotional resilience, growing confidence, and discovering the strength you already carry. If you're in crisis, we connect you directly to professional help. If you have a therapist, this complements their work beautifully. If you're not there yet, this is a gentle, empowering, judgment-free first step toward genuinely understanding your own mind."
+      answer: "No — and we'll always be transparent about that, because integrity isn't optional. This is an educational wellness companion: a metacognitive coach and behavioral guide for deepening self-awareness, mastering stress, building emotional resilience, developing self-regulation skills, growing genuine confidence, and discovering the strength you already carry. If you're in crisis, we connect you directly to professional help. If you have a therapist, this complements their work beautifully. If you're not there yet, this is a gentle, empowering, judgment-free first step toward genuinely understanding and evolving your own mind."
     }
   ];
 
@@ -426,7 +426,7 @@ export default function CanvaLanding() {
             >
               <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
               <span className="font-bold uppercase tracking-widest text-xs md:text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
-                The Buddy Your Mind Has Been Waiting For
+                The Coach Your Mind Has Been Waiting For
               </span>
             </div>
 
@@ -439,11 +439,11 @@ export default function CanvaLanding() {
             </h1>
 
             <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
-              The emotionally intelligent AI buddy that helps you master stress, build unshakeable confidence, and discover the extraordinary person you already are
+              The emotionally intelligent AI buddy that helps you master stress, build genuine confidence, develop self-regulation skills, and evolve your mind to its fullest potential
             </p>
 
             <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s', lineHeight: '1.75' }}>
-              500+ evidence-based tools for mastering everyday pressure, amplifying confidence, deepening self-worth, and building genuine emotional resilience — guided by an AI buddy that truly listens, remembers what matters to you, and coaches you with the wisdom of a mentor and the warmth of a friend who sees your potential before you do. No judgment. No generic advice. Just the kind of real support that changes how you see yourself.
+              500+ evidence-based tools for mastering everyday stressors from A to Z, building genuine confidence, deepening self-worth, and developing the metacognitive skills to understand and evolve your own mind — guided by an AI buddy that truly listens, remembers what matters to you, and coaches you with the intelligence of a behavioral strategist, the wisdom of a mentor, and the warmth of a best friend. Whether you're managing ADHD, navigating overwhelm, or seeking your highest potential — this is the support that changes how you relate to your own mind.
             </p>
 
             <div className="safe-space-box max-w-md mx-auto mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
@@ -537,7 +537,7 @@ export default function CanvaLanding() {
             className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto mb-4"
             style={{ color: 'var(--glp-ink)', lineHeight: '1.75' }}
           >
-            Most wellness apps are engineered to maximize your screen time. We built this to maximize your potential. Your AI buddy combines the strategic clarity of a life coach, the patient wisdom of a mentor, and the unconditional warmth of a genuine friend — alongside 500+ evidence-based tools for mastering stress, building real confidence, deepening self-worth, and navigating everything from daily pressure to the deeper patterns you've carried for years.
+            Most wellness apps are engineered to maximize your screen time. We built this to maximize your potential. Your AI buddy combines the strategic intelligence of a success coach, the patient wisdom of a mentor, the behavioral insight of a metacognitive guide, and the unconditional warmth of a genuine friend — alongside 500+ evidence-based tools for mastering every stressor from A to Z, building genuine confidence, developing self-regulation skills, and understanding the cognitive patterns you've carried for years. Whether you're navigating ADHD, managing overwhelm, building emotional resilience, or seeking your fullest potential — this is the relationship with yourself you've been searching for.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
@@ -636,7 +636,7 @@ export default function CanvaLanding() {
 
           <div className="manifesto-quote" data-testid="section-manifesto">
             <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-white text-center" style={{ opacity: 0.95, lineHeight: '1.7' }}>
-              "We didn't build another app. We built a mirror — one that reflects your mind back to itself with more clarity, more compassion, and more honesty than you've ever experienced. Because the most powerful thing you'll ever do is truly understand who you already are."
+              "We didn't build another app. We built a metacognitive mirror — one that reflects your mind back to itself with more clarity, more compassion, and more insight than you've ever experienced. Because the most powerful thing you'll ever do is learn to observe, understand, and consciously evolve the extraordinary mind you already have."
             </p>
             <p className="relative z-10 text-sm font-semibold text-center mt-4 shimmer-text">
               — The Genuine Love Project
@@ -652,10 +652,10 @@ export default function CanvaLanding() {
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               Everything You Need to
-              <span className="block text-2xl md:text-4xl mt-1" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Understand & Transform Yourself</span>
+              <span className="block text-2xl md:text-4xl mt-1" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Understand, Regulate & Evolve Your Mind</span>
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto mt-3" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
-              From dissolving daily stress to building deep self-mastery, from amplifying confidence to strengthening emotional resilience — your complete A-to-Z toolkit for becoming who you already are underneath. Take what resonates. Leave what doesn't. There's no wrong way to grow.
+              From dissolving daily stress to developing metacognitive mastery, from building genuine confidence to strengthening self-regulation — your complete A-to-Z, 360-degree toolkit for understanding and evolving your own mind. ADHD strategies. Behavioral insight. Emotional resilience. Cognitive coaching. Take what resonates. Leave what doesn't. There's no wrong way to grow.
             </p>
           </div>
 
@@ -877,7 +877,7 @@ export default function CanvaLanding() {
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/85 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.75' }}>
-            Free to start. No credit card. No trial that expires. Your AI buddy — life coach, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. The person you're becoming is already inside you. Let's meet them.
+            Free to start. No credit card. No trial that expires. Your AI buddy — success coach, metacognitive guide, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. Real self-regulation. The person you're becoming is already inside you — let's meet them.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">

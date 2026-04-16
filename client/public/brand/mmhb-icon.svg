@@ -2,42 +2,42 @@
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38d49e"/>
-      <stop offset="18%" stop-color="#22c48e"/>
-      <stop offset="50%" stop-color="#0f5050"/>
-      <stop offset="100%" stop-color="#082e2e"/>
+      <stop offset="18%" stop-color="#1ec890"/>
+      <stop offset="50%" stop-color="#0e4e4e"/>
+      <stop offset="100%" stop-color="#062a2a"/>
     </linearGradient>
     <radialGradient id="bg-shine" cx="22%" cy="15%" r="60%">
       <stop offset="0%" stop-color="#72ecc0" stop-opacity="0.18"/>
-      <stop offset="40%" stop-color="#22c48e" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#1ec890" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#062a2a" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="bg-violet" cx="78%" cy="80%" r="40%">
-      <stop offset="0%" stop-color="#7460c0" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#6c58b8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#062a2a" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="bg-gold-ambient" cx="50%" cy="52%" r="38%">
-      <stop offset="0%" stop-color="#c48a28" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#be8622" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#062a2a" stop-opacity="0"/>
     </radialGradient>
 
     <radialGradient id="glow-heart" cx="50%" cy="56%" r="30%">
       <stop offset="0%" stop-color="#ffe0a0" stop-opacity="0.68"/>
-      <stop offset="25%" stop-color="#c48a28" stop-opacity="0.38"/>
-      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#be8622" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#062a2a" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-core" cx="50%" cy="56%" r="12%">
       <stop offset="0%" stop-color="#fffae4" stop-opacity="0.98"/>
       <stop offset="35%" stop-color="#ffd460" stop-opacity="0.72"/>
-      <stop offset="100%" stop-color="#c48a28" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#be8622" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-crown" cx="50%" cy="20%" r="28%">
-      <stop offset="0%" stop-color="#b0a0e0" stop-opacity="0.22"/>
-      <stop offset="45%" stop-color="#7460c0" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#082e2e" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#a898d8" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#6c58b8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#062a2a" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-halo" cx="50%" cy="25%" r="20%">
       <stop offset="0%" stop-color="#ffe498" stop-opacity="0.24"/>
-      <stop offset="100%" stop-color="#c48a28" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#be8622" stop-opacity="0"/>
     </radialGradient>
 
     <radialGradient id="head-fill" cx="42%" cy="32%" r="58%">
@@ -51,7 +51,7 @@
       <stop offset="0%" stop-color="#dcf4ea" stop-opacity="0.96"/>
       <stop offset="18%" stop-color="#a0e4c4" stop-opacity="0.84"/>
       <stop offset="50%" stop-color="#58c09c" stop-opacity="0.58"/>
-      <stop offset="100%" stop-color="#22c48e" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#1ec890" stop-opacity="0.16"/>
     </linearGradient>
     <linearGradient id="arm-l" x1="88%" y1="8%" x2="12%" y2="92%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
@@ -66,19 +66,19 @@
 
     <linearGradient id="arc-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#72ecc0" stop-opacity="0.34"/>
-      <stop offset="100%" stop-color="#22c48e" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#1ec890" stop-opacity="0.08"/>
     </linearGradient>
     <linearGradient id="arc-violet" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#9888d4" stop-opacity="0.32"/>
-      <stop offset="100%" stop-color="#7460c0" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#6c58b8" stop-opacity="0.06"/>
     </linearGradient>
     <linearGradient id="arc-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c48a28" stop-opacity="0.26"/>
+      <stop offset="0%" stop-color="#be8622" stop-opacity="0.26"/>
       <stop offset="100%" stop-color="#ffe0a0" stop-opacity="0.06"/>
     </linearGradient>
     <linearGradient id="arc-rose" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#d48c78" stop-opacity="0.24"/>
-      <stop offset="100%" stop-color="#d48c78" stop-opacity="0.04"/>
+      <stop offset="0%" stop-color="#d08672" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#d08672" stop-opacity="0.04"/>
     </linearGradient>
 
     <filter id="soft-body" x="-5%" y="-5%" width="110%" height="110%">
@@ -180,10 +180,10 @@
     <circle cx="375" cy="315" r="3.2" fill="#82e4bc"/>
     <circle cx="185" cy="415" r="2.4" fill="#6cd49c"/>
     <circle cx="335" cy="425" r="2.6" fill="#7adcb0"/>
-    <circle cx="125" cy="235" r="2.0" fill="#c48a28"/>
-    <circle cx="388" cy="245" r="2.2" fill="#c48a28"/>
-    <circle cx="195" cy="132" r="1.8" fill="#d48c78"/>
-    <circle cx="318" cy="122" r="2.0" fill="#d48c78"/>
+    <circle cx="125" cy="235" r="2.0" fill="#be8622"/>
+    <circle cx="388" cy="245" r="2.2" fill="#be8622"/>
+    <circle cx="195" cy="132" r="1.8" fill="#d08672"/>
+    <circle cx="318" cy="122" r="2.0" fill="#d08672"/>
     <circle cx="256" cy="90" r="2.4" fill="#b0a0e0"/>
     <circle cx="175" cy="95" r="1.6" fill="#9888d4"/>
     <circle cx="335" cy="100" r="1.4" fill="#9888d4"/>
