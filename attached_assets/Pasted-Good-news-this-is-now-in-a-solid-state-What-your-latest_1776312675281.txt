@@ -1,0 +1,213 @@
+Good news: this is now in a solid state.
+
+What your latest results mean
+
+The B1 runtime validation layer is working as intended.
+
+Confirmed from your output
+	•	The server starts cleanly on port 5000.
+	•	The bad import mismatch was fixed.
+	•	/api/content returns 200.
+	•	/api/content/formats returns 200 and still returns 10 formats.
+	•	POST /api/content/generate with a valid healing request returns 200.
+	•	The response now includes generated contract metadata:
+	•	id
+	•	slug
+	•	domain
+	•	visibility
+	•	category
+	•	tags
+	•	canonicalUrl
+	•	status
+	•	updatedAt
+	•	Short invalid input returns 400.
+	•	Healing-domain monetization language returns 400.
+	•	Build passes.
+	•	verify:system passes.
+	•	Tests pass.
+
+That means the API boundary enforcement for B1 is no longer just documentation. It is active runtime behavior.
+
+Hard truth
+
+You were blocked mostly by path confusion and symbol mismatch, not by architecture failure.
+
+The real issues were:
+	•	using /workspace when your repo root was not there
+	•	importing contentGenerateSchema when the file exported B1ContentGenerateSchema
+	•	trying to restart an already-running server and creating EADDRINUSE
+
+Those are now resolved.
+
+⸻
+
+Exact next move
+
+You are ready for the next safe patch:
+
+Phase: lock B1 fully as the single source of truth
+
+The next job is to stop treating /generate as a special route and make the B1 contract reusable everywhere content is created or updated.
+
+Do this in order
+
+cd ~
+pwd
+ls
+
+Find the folder that contains:
+	•	package.json
+	•	server/
+	•	client/
+
+Then enter that actual repo root. If it is already ~, stay there.
+
+⸻
+
+1) Verify current repo root before doing anything else
+
+pwd
+test -f package.json && echo "package.json found"
+test -d server && echo "server folder found"
+git rev-parse --show-toplevel
+
+If all 3 succeed, continue.
+
+⸻
+
+2) Create a checkpoint commit before the next patch
+
+git status
+git add server/contracts/content/b1-content-contract.mjs server/routes/content.mjs
+git commit -m "Lock B1 runtime validation at API boundary"
+
+If Git says nothing to commit, that is fine. Continue.
+
+⸻
+
+3) Run the clean verification block
+
+pkill -f node || true
+sleep 2
+npm run build
+npm run verify:system
+npm test
+
+
+⸻
+
+4) Run the endpoint verification block
+
+curl -s http://localhost:5000/api/content
+curl -s http://localhost:5000/api/content/formats
+curl -s -X POST http://localhost:5000/api/content/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "topic":"gentle nervous system reset",
+    "tone":"warm, evidence-based, non-clinical",
+    "domain":"HEALING_DOMAIN",
+    "visibility":"public",
+    "tags":["nervous-system","grounding"]
+  }'
+
+Invalid short input should fail
+
+curl -s -X POST http://localhost:5000/api/content/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "topic":"hi",
+    "tone":"x",
+    "domain":"HEALING_DOMAIN",
+    "visibility":"public"
+  }'
+
+Healing monetization input should fail
+
+curl -s -X POST http://localhost:5000/api/content/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "topic":"healing offer",
+    "prompt":"buy now limited time discount",
+    "domain":"HEALING_DOMAIN",
+    "visibility":"public"
+  }'
+
+
+⸻
+
+What I recommend next
+
+Recommendation 1 — best next patch
+
+Create a shared B1 entity validator and use it for all content create/update routes, not just /generate.
+
+That means:
+	•	one schema file
+	•	one normalizer
+	•	one validator middleware
+	•	reused by:
+	•	content create
+	•	content update
+	•	blog publishing
+	•	draft save
+	•	scheduling routes later
+
+Recommendation 2 — add response contract tests
+
+Add tests that assert the response shape includes:
+	•	meta.id
+	•	meta.slug
+	•	meta.domain
+	•	meta.visibility
+	•	meta.status
+	•	meta.updatedAt
+
+Recommendation 3 — add canonicalUrl finalization rule
+
+Right now canonicalUrl can remain null on generated draft-like content. That is okay for draft generation, but before publish you should enforce:
+	•	category present
+	•	canonicalUrl derived or explicit
+	•	seo valid
+	•	audit complete
+
+That belongs in the next contract layer, not this patch.
+
+⸻
+
+Do not do these yet
+	•	Do not delete old validation code unless you confirm nothing else imports it.
+	•	Do not refactor every route at once.
+	•	Do not add more duplicate validators under a new middleware folder.
+	•	Do not restart the server repeatedly without killing the existing node process first.
+
+⸻
+
+Safe operating commands going forward
+
+Use these exact commands whenever Replit gets confused:
+
+cd ~
+pwd
+git rev-parse --show-toplevel
+pkill -f node || true
+lsof -i :5000 || true
+npm run build
+npm run verify:system
+npm test
+
+If port 5000 is still busy:
+
+kill -9 $(lsof -ti :5000) 2>/dev/null || true
+
+
+⸻
+
+Bottom line
+
+Your B1 enforcement patch is working.
+The platform is not broken.
+The next correct step is to promote B1 from a route-specific validator into a shared contract layer for all content write paths.
+
+Use the command blocks above exactly. After that, the next implementation target should be:
+
+“wire B1 schema into all content create/update paths with no duplicate validators.”
