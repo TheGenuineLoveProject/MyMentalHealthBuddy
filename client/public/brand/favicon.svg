@@ -1,31 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
     <linearGradient id="fbg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#78c8a0"/>
-      <stop offset="45%" stop-color="#4a9e80"/>
-      <stop offset="100%" stop-color="#1e4f4f"/>
+      <stop offset="0%" stop-color="#68d0a8"/>
+      <stop offset="45%" stop-color="#48b88c"/>
+      <stop offset="100%" stop-color="#163d3d"/>
     </linearGradient>
     <radialGradient id="fgl" cx="50%" cy="62%" r="22%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.62"/>
+      <stop offset="100%" stop-color="#dab24c" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="fb" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#e8f6ee" stop-opacity="0.90"/>
-      <stop offset="50%" stop-color="#b0d8c0" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#78b898" stop-opacity="0.18"/>
+      <stop offset="0%" stop-color="#e0f6ec" stop-opacity="0.90"/>
+      <stop offset="50%" stop-color="#a0d8c0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#60b090" stop-opacity="0.18"/>
     </linearGradient>
     <linearGradient id="fal" x1="80%" y1="10%" x2="20%" y2="90%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.80"/>
-      <stop offset="100%" stop-color="#78b898" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#60b090" stop-opacity="0.15"/>
     </linearGradient>
     <linearGradient id="far" x1="20%" y1="10%" x2="80%" y2="90%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.76"/>
-      <stop offset="100%" stop-color="#78b898" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#60b090" stop-opacity="0.12"/>
     </linearGradient>
     <radialGradient id="fh" cx="42%" cy="38%" r="55%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.97"/>
-      <stop offset="100%" stop-color="#a0d4b8" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#88d0b0" stop-opacity="0.75"/>
     </radialGradient>
     <filter id="fs" x="-8%" y="-8%" width="116%" height="116%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>

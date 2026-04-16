@@ -1,57 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bg-d" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a3850"/>
-      <stop offset="35%" stop-color="#112a3c"/>
-      <stop offset="100%" stop-color="#0a1e2c"/>
+      <stop offset="0%" stop-color="#142e42"/>
+      <stop offset="35%" stop-color="#0e2232"/>
+      <stop offset="100%" stop-color="#081820"/>
     </linearGradient>
     <radialGradient id="bg-shine-d" cx="35%" cy="30%" r="55%">
-      <stop offset="0%" stop-color="#1e506a" stop-opacity="0.30"/>
-      <stop offset="100%" stop-color="#0a1e2c" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#1a4860" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#081820" stop-opacity="0"/>
     </radialGradient>
 
     <radialGradient id="glow-amb-d" cx="50%" cy="62%" r="34%">
-      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.45"/>
-      <stop offset="40%" stop-color="#e8b840" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#0a1e2c" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.48"/>
+      <stop offset="40%" stop-color="#dab24c" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#081820" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-mid-d" cx="50%" cy="62%" r="17%">
       <stop offset="0%" stop-color="#fff8e0" stop-opacity="0.94"/>
-      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.52"/>
-      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glow-hot-d" cx="50%" cy="62%" r="8%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="60%" stop-color="#fffae8" stop-opacity="0.92"/>
-      <stop offset="100%" stop-color="#ffd860" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#dab24c" stop-opacity="0"/>
     </radialGradient>
 
     <radialGradient id="head-d" cx="42%" cy="38%" r="58%">
-      <stop offset="0%" stop-color="#a0d8b8" stop-opacity="0.92"/>
-      <stop offset="50%" stop-color="#70b895" stop-opacity="0.78"/>
-      <stop offset="100%" stop-color="#4a9878" stop-opacity="0.60"/>
+      <stop offset="0%" stop-color="#88d4b0" stop-opacity="0.92"/>
+      <stop offset="50%" stop-color="#58b088" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#388868" stop-opacity="0.60"/>
     </radialGradient>
 
     <linearGradient id="body-d" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#78b898" stop-opacity="0.80"/>
-      <stop offset="35%" stop-color="#5a9a80" stop-opacity="0.55"/>
-      <stop offset="70%" stop-color="#3e7a68" stop-opacity="0.32"/>
-      <stop offset="100%" stop-color="#264f4f" stop-opacity="0.12"/>
+      <stop offset="0%" stop-color="#60b090" stop-opacity="0.80"/>
+      <stop offset="35%" stop-color="#489078" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#307058" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#1a4040" stop-opacity="0.12"/>
     </linearGradient>
     <linearGradient id="arm-l-d" x1="90%" y1="10%" x2="10%" y2="90%">
-      <stop offset="0%" stop-color="#88c8a8" stop-opacity="0.72"/>
-      <stop offset="50%" stop-color="#5a9a80" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#3a7060" stop-opacity="0.15"/>
+      <stop offset="0%" stop-color="#70c0a0" stop-opacity="0.72"/>
+      <stop offset="50%" stop-color="#489078" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#2a6050" stop-opacity="0.15"/>
     </linearGradient>
     <linearGradient id="arm-r-d" x1="10%" y1="10%" x2="90%" y2="90%">
-      <stop offset="0%" stop-color="#88c8a8" stop-opacity="0.68"/>
-      <stop offset="50%" stop-color="#5a9a80" stop-opacity="0.42"/>
-      <stop offset="100%" stop-color="#3a7060" stop-opacity="0.12"/>
+      <stop offset="0%" stop-color="#70c0a0" stop-opacity="0.68"/>
+      <stop offset="50%" stop-color="#489078" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#2a6050" stop-opacity="0.12"/>
     </linearGradient>
 
     <linearGradient id="arc-d" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4aa888" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#2a7868" stop-opacity="0.06"/>
+      <stop offset="0%" stop-color="#38a078" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#1a6858" stop-opacity="0.08"/>
     </linearGradient>
 
     <filter id="sb-d" x="-5%" y="-5%" width="110%" height="110%">
@@ -83,7 +78,7 @@
   <rect width="512" height="512" rx="112" fill="url(#bg-d)"/>
   <rect width="512" height="512" rx="112" fill="url(#bg-shine-d)"/>
 
-  <g filter="url(#ab-d)" opacity="0.35">
+  <g filter="url(#ab-d)" opacity="0.38">
     <circle cx="256" cy="300" r="130" fill="none" stroke="url(#arc-d)" stroke-width="1.8"/>
     <circle cx="256" cy="300" r="105" fill="none" stroke="url(#arc-d)" stroke-width="1.2"/>
     <path d="M160,230 A120,120 0 0,1 352,230" fill="none" stroke="url(#arc-d)" stroke-width="1.5" stroke-linecap="round"/>
@@ -103,15 +98,15 @@
   </g>
 
   <g opacity="0.28" filter="url(#sb-d)">
-    <path d="M232,362 C242,374 250,380 256,382 C262,380 270,374 280,362 C290,350 298,336 302,322 L256,340 L210,322 C214,336 222,350 232,362Z" fill="rgba(122,179,147,0.40)"/>
+    <path d="M232,362 C242,374 250,380 256,382 C262,380 270,374 280,362 C290,350 298,336 302,322 L256,340 L210,322 C214,336 222,350 232,362Z" fill="rgba(72,184,140,0.40)"/>
   </g>
 
   <g filter="url(#sh-d)">
     <circle cx="253" cy="160" r="40" fill="url(#head-d)"/>
   </g>
-  <circle cx="244" cy="150" r="4.5" fill="rgba(160,216,184,0.40)"/>
-  <circle cx="264" cy="153" r="3" fill="rgba(160,216,184,0.25)"/>
-  <path d="M245,172 Q253,178 262,173" fill="none" stroke="rgba(160,216,184,0.30)" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="244" cy="150" r="4.5" fill="rgba(136,212,176,0.42)"/>
+  <circle cx="264" cy="153" r="3" fill="rgba(136,212,176,0.28)"/>
+  <path d="M245,172 Q253,178 262,173" fill="none" stroke="rgba(136,212,176,0.32)" stroke-width="2.2" stroke-linecap="round"/>
 
   <line x1="256" y1="270" x2="256" y2="342" stroke="#fffbe0" stroke-width="1.8" opacity="0.16" filter="url(#star-d)"/>
   <line x1="220" y1="306" x2="292" y2="306" stroke="#fffbe0" stroke-width="1.8" opacity="0.16" filter="url(#star-d)"/>
@@ -121,12 +116,12 @@
   <ellipse cx="256" cy="306" rx="7.5" ry="7" fill="#ffffff" opacity="0.97"/>
   <circle cx="256" cy="305" r="3" fill="#ffffff"/>
 
-  <g opacity="0.18">
-    <circle cx="180" cy="180" r="2.5" fill="#60c0a0"/>
-    <circle cx="340" cy="195" r="2" fill="#50b090"/>
-    <circle cx="155" cy="310" r="1.8" fill="#48a888"/>
-    <circle cx="360" cy="330" r="2.2" fill="#58b898"/>
-    <circle cx="200" cy="400" r="1.5" fill="#40a080"/>
-    <circle cx="320" cy="410" r="1.8" fill="#48a888"/>
+  <g opacity="0.20">
+    <circle cx="180" cy="180" r="2.5" fill="#48b88c"/>
+    <circle cx="340" cy="195" r="2" fill="#38a07a"/>
+    <circle cx="155" cy="310" r="1.8" fill="#309870"/>
+    <circle cx="360" cy="330" r="2.2" fill="#40a880"/>
+    <circle cx="200" cy="400" r="1.5" fill="#289068"/>
+    <circle cx="320" cy="410" r="1.8" fill="#309870"/>
   </g>
 </svg>

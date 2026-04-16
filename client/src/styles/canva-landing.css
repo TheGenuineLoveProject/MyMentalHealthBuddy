@@ -13,12 +13,12 @@
   
   /* Metallic Gold Gradient */
   --metallic-gold: linear-gradient(90deg, var(--glp-gold-dark), var(--glp-gold));
-  --metallic-gold-glow: rgba(212, 168, 67, 0.35);
-  --metallic-gold-strong: rgba(212, 168, 67, 0.55);
+  --metallic-gold-glow: rgba(218, 178, 76, 0.35);
+  --metallic-gold-strong: rgba(218, 178, 76, 0.55);
   
   /* Sacred Design Tokens */
-  --sacred-glow-soft: 0 0 20px rgba(212, 175, 55, 0.4);
-  --sacred-glow-strong: 0 0 40px rgba(212, 175, 55, 0.6);
+  --sacred-glow-soft: 0 0 20px rgba(218, 178, 76, 0.4);
+  --sacred-glow-strong: 0 0 40px rgba(218, 178, 76, 0.6);
   --sacred-pulse-duration: 4s;
 }
 

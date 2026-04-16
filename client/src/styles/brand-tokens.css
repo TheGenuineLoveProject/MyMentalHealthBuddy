@@ -1,6 +1,7 @@
 /* client/src/styles/brand-tokens.css */
-/* MyMentalHealthBuddy by The Genuine Love Project — Design Tokens (Deep Teal + Gold) */
+/* MyMentalHealthBuddy by The Genuine Love Project — Design Tokens */
 /* SINGLE SOURCE OF TRUTH for all brand colors and semantic tokens */
+/* Color Psychology: Empathic Intelligence — calming, empowering, mesmerizing, safe, loving */
 
 :root{
   /* Safe area insets for mobile devices */
@@ -9,40 +10,40 @@
   --glp-safe-left: env(safe-area-inset-left, 0px);
   --glp-safe-right: env(safe-area-inset-right, 0px);
   /* ------------------------------------------------------------
-    Core palette - Canva AI Design System Colors
-    (Exact match to: TheGenuineLoveProject.com brand spec)
+    Core palette — Empathic Intelligence Color System
+    Every color chosen for emotional resonance and psychological depth
   ------------------------------------------------------------ */
-  --glp-sage: #7ab393;        /* Sage Green - refined, calming */
-  --glp-blush: #f0bfba;       /* Rose Pink - warm, subdued */
-  --glp-rose: #f0bfba;        /* Alias for blush */
-  --glp-sage-deep: #264f4f;   /* Deep Teal - PRIMARY, grounding */
-  --glp-paper: #f9f8f6;       /* Warm Ivory - soft background */
-  --glp-ink: #2d2d2d;         /* Rich Charcoal - premium text */
-  --glp-gold: #d4a843;        /* Warm Gold - refined accent */
-  --glp-gold-dark: #c09530;   /* Deeper gold for gradients */
+  --glp-sage: #48b88c;          /* Living Sage — vibrant, alive, growth-energy */
+  --glp-blush: #e0a09c;         /* Heart Rose — warmth, compassion, unconditional care */
+  --glp-rose: #e0a09c;          /* Alias for blush */
+  --glp-sage-deep: #163d3d;     /* Mystic Teal — deep trust, hypnotic safety, grounding */
+  --glp-paper: #faf8f4;         /* Moonlit Pearl — luminous warmth, welcoming softness */
+  --glp-ink: #1c2b2b;           /* Teal Ink — intelligent, connected, gently authoritative */
+  --glp-gold: #dab24c;          /* Luminous Amber — joyful, encouraging, optimistic warmth */
+  --glp-gold-dark: #c69d35;     /* Deep Amber — rich, grounding golden depth */
 
   /* Opacity variants for UI components */
-  --glp-sage-10: rgba(122, 179, 147, 0.1);
-  --glp-sage-15: rgba(122, 179, 147, 0.15);
-  --glp-sage-20: rgba(122, 179, 147, 0.2);
-  --glp-sage-30: rgba(122, 179, 147, 0.3);
-  --glp-sage-40: rgba(122, 179, 147, 0.4);
-  --glp-rose-10: rgba(240, 191, 186, 0.1);
-  --glp-rose-15: rgba(240, 191, 186, 0.15);
-  --glp-rose-20: rgba(240, 191, 186, 0.2);
-  --glp-rose-30: rgba(240, 191, 186, 0.3);
-  --glp-gold-10: rgba(212, 168, 67, 0.1);
-  --glp-gold-15: rgba(212, 168, 67, 0.15);
-  --glp-gold-20: rgba(212, 168, 67, 0.2);
-  --glp-gold-30: rgba(212, 168, 67, 0.3);
-  --glp-gold-60: rgba(212, 168, 67, 0.6);
-  --glp-sage-deep-12: rgba(38, 79, 79, 0.12);
-  --glp-sage-deep-20: rgba(38, 79, 79, 0.2);
-  --glp-sage-deep-30: rgba(38, 79, 79, 0.3);
-  --glp-sage-deep-40: rgba(38, 79, 79, 0.4);
-  --glp-paper-70: rgba(249, 248, 246, 0.7);
-  --glp-paper-95: rgba(249, 248, 246, 0.95);
-  --glp-paper-98: rgba(249, 248, 246, 0.98);
+  --glp-sage-10: rgba(72, 184, 140, 0.1);
+  --glp-sage-15: rgba(72, 184, 140, 0.15);
+  --glp-sage-20: rgba(72, 184, 140, 0.2);
+  --glp-sage-30: rgba(72, 184, 140, 0.3);
+  --glp-sage-40: rgba(72, 184, 140, 0.4);
+  --glp-rose-10: rgba(224, 160, 156, 0.1);
+  --glp-rose-15: rgba(224, 160, 156, 0.15);
+  --glp-rose-20: rgba(224, 160, 156, 0.2);
+  --glp-rose-30: rgba(224, 160, 156, 0.3);
+  --glp-gold-10: rgba(218, 178, 76, 0.1);
+  --glp-gold-15: rgba(218, 178, 76, 0.15);
+  --glp-gold-20: rgba(218, 178, 76, 0.2);
+  --glp-gold-30: rgba(218, 178, 76, 0.3);
+  --glp-gold-60: rgba(218, 178, 76, 0.6);
+  --glp-sage-deep-12: rgba(22, 61, 61, 0.12);
+  --glp-sage-deep-20: rgba(22, 61, 61, 0.2);
+  --glp-sage-deep-30: rgba(22, 61, 61, 0.3);
+  --glp-sage-deep-40: rgba(22, 61, 61, 0.4);
+  --glp-paper-70: rgba(250, 248, 244, 0.7);
+  --glp-paper-95: rgba(250, 248, 244, 0.95);
+  --glp-paper-98: rgba(250, 248, 244, 0.98);
   --glp-overlay-50: rgba(0, 0, 0, 0.5);
   --glp-white-40: rgba(255, 255, 255, 0.4);
   --glp-white-80: rgba(255, 255, 255, 0.8);
@@ -54,53 +55,53 @@
   --glp-gold-gradient: linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark));
   --glp-gold-shadow: 0 4px 16px var(--glp-gold-30);
 
-  /* Extended teal palette for depth */
-  --glp-teal-50: #EBF3F3;
-  --glp-teal-100: #D0E4E4;
-  --glp-teal-200: #A1C9C9;
-  --glp-teal-300: #6AADAD;
-  --glp-teal-400: #3A8282;
-  --glp-teal-500: #264f4f;
-  --glp-teal-600: #1F4242;
-  --glp-teal-700: #183535;
-  --glp-teal-800: #122828;
-  --glp-teal-900: #0C1C1C;
+  /* Extended teal palette — Trust & Safety spectrum */
+  --glp-teal-50: #e8f4f4;
+  --glp-teal-100: #c8e4e4;
+  --glp-teal-200: #94c8c8;
+  --glp-teal-300: #5eaaaa;
+  --glp-teal-400: #358585;
+  --glp-teal-500: #1a5a5a;
+  --glp-teal-600: #164d4d;
+  --glp-teal-700: #123d3d;
+  --glp-teal-800: #0e2e2e;
+  --glp-teal-900: #091e1e;
 
-  /* Extended gold palette for depth */
-  --glp-gold-50: #FBF6EC;
-  --glp-gold-100: #F4E8CE;
-  --glp-gold-200: #E8D19E;
-  --glp-gold-300: #DCB96E;
-  --glp-gold-400: #D4A843;
-  --glp-gold-500: #C09530;
-  --glp-gold-600: #9E7A26;
-  --glp-gold-700: #7C5F1D;
-  --glp-gold-800: #5A4415;
-  --glp-gold-900: #3A2C0D;
+  /* Extended gold palette — Joy & Encouragement spectrum */
+  --glp-gold-50: #fdf8ec;
+  --glp-gold-100: #f8ecd0;
+  --glp-gold-200: #f0d8a0;
+  --glp-gold-300: #e6c270;
+  --glp-gold-400: #dab24c;
+  --glp-gold-500: #c69d35;
+  --glp-gold-600: #a48028;
+  --glp-gold-700: #82641e;
+  --glp-gold-800: #604816;
+  --glp-gold-900: #3e2f0e;
 
-  /* Extended sage palette */
-  --glp-sage-50: #F0F7F2;
-  --glp-sage-100: #D9EBE0;
-  --glp-sage-200: #BFDDCA;
-  --glp-sage-300: #A1CDB2;
-  --glp-sage-400: #7FB39A;
-  --glp-sage-500: #5D9A7F;
-  --glp-sage-600: #4A7A65;
-  --glp-sage-700: #375A4B;
-  --glp-sage-800: #253D32;
-  --glp-sage-900: #131F1A;
+  /* Extended sage palette — Growth & Healing spectrum */
+  --glp-sage-50: #edf8f2;
+  --glp-sage-100: #d0ece0;
+  --glp-sage-200: #a8dcc4;
+  --glp-sage-300: #78c8a6;
+  --glp-sage-400: #48b88c;
+  --glp-sage-500: #38a07a;
+  --glp-sage-600: #2c8062;
+  --glp-sage-700: #22604a;
+  --glp-sage-800: #184034;
+  --glp-sage-900: #0e221c;
 
-  /* Extended blush palette */
-  --glp-blush-50: #FDF6F5;
-  --glp-blush-100: #FAEAE8;
-  --glp-blush-200: #F5D5D2;
-  --glp-blush-300: #EFC0BB;
-  --glp-blush-400: #E8A9A3;
-  --glp-blush-500: #E0918A;
-  --glp-blush-600: #D47A72;
-  --glp-blush-700: #C4635A;
-  --glp-blush-800: #A54D45;
-  --glp-blush-900: #7A3933;
+  /* Extended blush palette — Love & Compassion spectrum */
+  --glp-blush-50: #fcf2f1;
+  --glp-blush-100: #f6e0de;
+  --glp-blush-200: #ecc4c0;
+  --glp-blush-300: #e0a09c;
+  --glp-blush-400: #d68884;
+  --glp-blush-500: #cc706c;
+  --glp-blush-600: #b85856;
+  --glp-blush-700: #9e4442;
+  --glp-blush-800: #7e3634;
+  --glp-blush-900: #5e2826;
 
   /* Shorthand aliases for utilities (teal/gold/sage/blush) */
   --teal-50: var(--glp-teal-50);
@@ -147,45 +148,44 @@
   --blush-800: var(--glp-blush-800);
   --blush-900: var(--glp-blush-900);
 
-  /* RGB helpers (for rgba(var(--x-rgb), a)) - Canva AI Design System */
-  --glp-sage-rgb: 122, 179, 147;     /* #7ab393 */
-  --glp-sage-deep-rgb: 38, 79, 79;   /* #264f4f */
-  --glp-blush-rgb: 240, 191, 186;    /* #f0bfba */
-  --glp-paper-rgb: 249, 248, 246;    /* #f9f8f6 */
-  --glp-ink-rgb: 45, 45, 45;         /* #2d2d2d */
-  --glp-gold-rgb: 212, 168, 67;      /* #d4a843 */
+  /* RGB helpers (for rgba(var(--x-rgb), a)) */
+  --glp-sage-rgb: 72, 184, 140;       /* #48b88c */
+  --glp-sage-deep-rgb: 22, 61, 61;    /* #163d3d */
+  --glp-blush-rgb: 224, 160, 156;     /* #e0a09c */
+  --glp-paper-rgb: 250, 248, 244;     /* #faf8f4 */
+  --glp-ink-rgb: 28, 43, 43;          /* #1c2b2b */
+  --glp-gold-rgb: 218, 178, 76;       /* #dab24c */
 
   /* ------------------------------------------------------------
     Semantic tokens (use these everywhere in new code)
-    (We keep raw palette above for compatibility with existing code)
   ------------------------------------------------------------ */
   --glp-bg: var(--glp-paper);
   --glp-surface: #FFFFFF;
-  --glp-surface-2: #F5F3F0;
+  --glp-surface-2: #F5F2EE;
 
   --glp-text: var(--glp-ink);
-  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.78);
+  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.72);
 
-  --glp-primary: var(--glp-sage-deep);           /* Deep Teal */
-  --glp-primary-foreground: var(--glp-paper);    /* Ivory text on teal */
+  --glp-primary: var(--glp-sage-deep);
+  --glp-primary-foreground: var(--glp-paper);
 
-  --glp-accent: var(--glp-gold);                 /* Gold */
+  --glp-accent: var(--glp-gold);
   --glp-accent-foreground: #1A1A1A;
 
-  --glp-border: rgba(var(--glp-ink-rgb), 0.12);
+  --glp-border: rgba(var(--glp-ink-rgb), 0.10);
   --glp-ring: var(--glp-gold);
 
-  /* Shorthand semantic aliases (for strict specification compliance) */
+  /* Shorthand semantic aliases */
   --bg: var(--glp-paper);
   --text-1: var(--glp-ink);
-  --text-2: rgba(45, 45, 45, 0.78);
+  --text-2: rgba(28, 43, 43, 0.72);
   --surface-1: #FFFFFF;
-  --surface-2: rgba(249, 248, 246, 0.70);
+  --surface-2: rgba(250, 248, 244, 0.70);
   --primary: var(--glp-sage-deep);
   --primary-contrast: var(--glp-paper);
   --accent: var(--glp-gold);
   --ring: var(--glp-gold);
-  --border: rgba(45, 45, 45, 0.14);
+  --border: rgba(28, 43, 43, 0.12);
 
   /* Radius tokens */
   --glp-radius-1: 12px;
@@ -193,9 +193,9 @@
   --glp-radius-sm: 12px;
   --glp-radius-md: 16px;
 
-  /* Shadow tokens */
-  --glp-shadow-1: 0 6px 20px rgba(0,0,0,0.06);
-  --glp-shadow-2: 0 10px 32px rgba(0,0,0,0.08);
+  /* Shadow tokens — deeper, more dimensional */
+  --glp-shadow-1: 0 6px 24px rgba(22, 61, 61, 0.06);
+  --glp-shadow-2: 0 10px 36px rgba(22, 61, 61, 0.08);
 
   /* Motion tokens */
   --glp-motion-fast: 140ms;
@@ -317,39 +317,39 @@
     Enhanced Semantic Text Colors
   ------------------------------------------------------------ */
   --glp-text-primary: var(--glp-ink);
-  --glp-text-secondary: rgba(var(--glp-ink-rgb), 0.78);
-  --glp-text-tertiary: rgba(var(--glp-ink-rgb), 0.56);
-  --glp-text-disabled: rgba(var(--glp-ink-rgb), 0.38);
+  --glp-text-secondary: rgba(var(--glp-ink-rgb), 0.72);
+  --glp-text-tertiary: rgba(var(--glp-ink-rgb), 0.52);
+  --glp-text-disabled: rgba(var(--glp-ink-rgb), 0.36);
   --glp-text-inverse: var(--glp-paper);
   --glp-text-brand: var(--glp-sage-deep);
   --glp-text-accent: var(--glp-gold);
 
   /* ------------------------------------------------------------
-    Enhanced Shadow System
+    Enhanced Shadow System — teal-tinted for brand cohesion
   ------------------------------------------------------------ */
-  --glp-shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
-  --glp-shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-  --glp-shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --glp-shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
-  --glp-shadow-xl: 0 16px 48px rgba(0,0,0,0.12);
-  --glp-shadow-2xl: 0 24px 64px rgba(0,0,0,0.16);
-  --glp-shadow-inner: inset 0 2px 4px rgba(0,0,0,0.06);
-  --glp-shadow-glow-sage: 0 0 24px rgba(var(--glp-sage-rgb), 0.3);
-  --glp-shadow-glow-gold: 0 0 24px rgba(var(--glp-gold-rgb), 0.4);
-  --glp-shadow-glow-teal: 0 0 24px rgba(var(--glp-sage-deep-rgb), 0.3);
+  --glp-shadow-xs: 0 1px 3px rgba(22, 61, 61, 0.04);
+  --glp-shadow-sm: 0 2px 6px rgba(22, 61, 61, 0.05);
+  --glp-shadow-md: 0 4px 14px rgba(22, 61, 61, 0.07);
+  --glp-shadow-lg: 0 8px 28px rgba(22, 61, 61, 0.09);
+  --glp-shadow-xl: 0 16px 48px rgba(22, 61, 61, 0.11);
+  --glp-shadow-2xl: 0 24px 64px rgba(22, 61, 61, 0.14);
+  --glp-shadow-inner: inset 0 2px 4px rgba(22, 61, 61, 0.06);
+  --glp-shadow-glow-sage: 0 0 28px rgba(var(--glp-sage-rgb), 0.35);
+  --glp-shadow-glow-gold: 0 0 28px rgba(var(--glp-gold-rgb), 0.40);
+  --glp-shadow-glow-teal: 0 0 28px rgba(var(--glp-sage-deep-rgb), 0.30);
 
   /* ------------------------------------------------------------
-    Premium Gradient Presets
+    Premium Gradient Presets — layered, dimensional, mesmerizing
   ------------------------------------------------------------ */
   --glp-gradient-hero: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(var(--glp-sage-rgb), 0.18), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(var(--glp-blush-rgb), 0.10), transparent),
-    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(var(--glp-gold-rgb), 0.06), transparent),
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(var(--glp-sage-rgb), 0.20), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(var(--glp-blush-rgb), 0.12), transparent),
+    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(var(--glp-gold-rgb), 0.08), transparent),
     linear-gradient(180deg, var(--glp-bg), var(--glp-surface));
   
-  --glp-gradient-card: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
-  --glp-gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
-  --glp-gradient-shimmer: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  --glp-gradient-card: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.72));
+  --glp-gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0.06));
+  --glp-gradient-shimmer: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
   --glp-gradient-sage: linear-gradient(135deg, var(--glp-sage), var(--glp-primary));
   --glp-gradient-gold: linear-gradient(135deg, var(--glp-gold), var(--glp-warning-dark));
   --glp-gradient-premium: linear-gradient(135deg, var(--glp-primary), var(--glp-sage), var(--glp-gold));
@@ -381,23 +381,21 @@
   Apply by setting: <html data-mode="low-stim">
 ------------------------------------------------------------ */
 html[data-mode="low-stim"]{
-  --glp-gold: #D9B43A; /* quieter gold */
+  --glp-gold: #D9B43A;
   --glp-gold-rgb: 217, 180, 58;
 
-  --glp-surface-2: #F4F2EF;
-  --glp-border: rgba(var(--glp-ink-rgb), 0.10);
+  --glp-surface-2: #F4F2EE;
+  --glp-border: rgba(var(--glp-ink-rgb), 0.08);
   --glp-shadow-1: none;
   --glp-shadow-2: none;
 
-  /* keep primary teal (calm + accessible) */
   --glp-primary: var(--glp-sage-deep);
   --glp-accent: var(--glp-gold);
   --glp-ring: var(--glp-gold);
 
-  /* Semantic aliases for low-stim mode */
   --accent: var(--glp-gold);
   --ring: var(--glp-gold);
-  --border: rgba(45, 45, 45, 0.10);
+  --border: rgba(28, 43, 43, 0.08);
   --surface-2: rgba(245, 243, 240, 0.70);
 }
 
@@ -418,14 +416,12 @@ html[data-mode="reading"]{
   --glp-ink-rgb: 42, 42, 42;
   --glp-text-muted: rgba(var(--glp-ink-rgb), 0.68);
 
-  --glp-border: rgba(var(--glp-ink-rgb), 0.16);
+  --glp-border: rgba(var(--glp-ink-rgb), 0.14);
   --glp-shadow-1: 0 2px 8px rgba(0,0,0,0.04);
   --glp-shadow-2: 0 4px 16px rgba(0,0,0,0.06);
 
-  /* keep ring visible */
   --glp-ring: var(--glp-gold);
 
-  /* Semantic aliases for reading mode */
   --bg: #FFFFFF;
   --text-1: #2A2A2A;
   --text-2: rgba(42, 42, 42, 0.68);
@@ -433,5 +429,5 @@ html[data-mode="reading"]{
   --surface-2: rgba(250, 250, 250, 0.85);
   --primary-contrast: #FFFFFF;
   --ring: var(--glp-gold);
-  --border: rgba(42, 42, 42, 0.16);
+  --border: rgba(42, 42, 42, 0.14);
 }

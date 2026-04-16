@@ -1,31 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" width="280" height="60">
   <defs>
     <linearGradient id="lbg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#78c8a0"/>
-      <stop offset="50%" stop-color="#4a9e80"/>
-      <stop offset="100%" stop-color="#1e4f4f"/>
+      <stop offset="0%" stop-color="#68d0a8"/>
+      <stop offset="50%" stop-color="#48b88c"/>
+      <stop offset="100%" stop-color="#163d3d"/>
     </linearGradient>
     <radialGradient id="lglow" cx="50%" cy="62%" r="20%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.48"/>
+      <stop offset="100%" stop-color="#dab24c" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="lbody" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#e8f6ee" stop-opacity="0.88"/>
-      <stop offset="50%" stop-color="#b0d8c0" stop-opacity="0.50"/>
-      <stop offset="100%" stop-color="#78b898" stop-opacity="0.15"/>
+      <stop offset="0%" stop-color="#e0f6ec" stop-opacity="0.88"/>
+      <stop offset="50%" stop-color="#a0d8c0" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#60b090" stop-opacity="0.15"/>
     </linearGradient>
     <linearGradient id="lal" x1="80%" y1="10%" x2="20%" y2="90%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.76"/>
-      <stop offset="100%" stop-color="#78b898" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#60b090" stop-opacity="0.12"/>
     </linearGradient>
     <linearGradient id="lar" x1="20%" y1="10%" x2="80%" y2="90%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
-      <stop offset="100%" stop-color="#78b898" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#60b090" stop-opacity="0.10"/>
     </linearGradient>
     <radialGradient id="lh" cx="42%" cy="38%" r="55%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
-      <stop offset="100%" stop-color="#a0d4b8" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#88d0b0" stop-opacity="0.72"/>
     </radialGradient>
     <filter id="ls" x="-8%" y="-8%" width="116%" height="116%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0.35"/>
@@ -51,6 +51,6 @@
     <ellipse cx="25" cy="30" rx="1" ry="0.9" fill="#fff8d0" opacity="0.90"/>
     <circle cx="25" cy="29.8" r="0.4" fill="#ffffff" opacity="0.95"/>
   </g>
-  <text x="64" y="28" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="700" fill="#264f4f">MyMentalHealthBuddy</text>
-  <text x="64" y="44" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="#7ab393" letter-spacing="1.8">BY THE GENUINE LOVE PROJECT</text>
+  <text x="64" y="28" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="700" fill="#163d3d">MyMentalHealthBuddy</text>
+  <text x="64" y="44" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="#48b88c" letter-spacing="1.8">BY THE GENUINE LOVE PROJECT</text>
 </svg>

@@ -1,40 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <radialGradient id="glow-a-t" cx="50%" cy="62%" r="32%">
-      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.44"/>
-      <stop offset="40%" stop-color="#e8b840" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ffe8a0" stop-opacity="0.46"/>
+      <stop offset="40%" stop-color="#dab24c" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#dab24c" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow-m-t" cx="50%" cy="62%" r="15%">
       <stop offset="0%" stop-color="#fff8e0" stop-opacity="0.92"/>
-      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.50"/>
-      <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glow-h-t" cx="50%" cy="62%" r="7%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="60%" stop-color="#fffae8" stop-opacity="0.88"/>
-      <stop offset="100%" stop-color="#ffd860" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffd860" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#dab24c" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="head-t" cx="42%" cy="38%" r="58%">
-      <stop offset="0%" stop-color="#b8e0cc" stop-opacity="0.95"/>
-      <stop offset="50%" stop-color="#88c0a0" stop-opacity="0.80"/>
-      <stop offset="100%" stop-color="#60a080" stop-opacity="0.62"/>
+      <stop offset="0%" stop-color="#a0dcc0" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#70b894" stop-opacity="0.80"/>
+      <stop offset="100%" stop-color="#489870" stop-opacity="0.62"/>
     </radialGradient>
     <linearGradient id="body-t" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#78b898" stop-opacity="0.85"/>
-      <stop offset="35%" stop-color="#88c8a8" stop-opacity="0.60"/>
-      <stop offset="70%" stop-color="#5a9a80" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#3a7060" stop-opacity="0.12"/>
+      <stop offset="0%" stop-color="#60b090" stop-opacity="0.85"/>
+      <stop offset="35%" stop-color="#70c0a0" stop-opacity="0.60"/>
+      <stop offset="70%" stop-color="#489078" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#286050" stop-opacity="0.12"/>
     </linearGradient>
     <linearGradient id="al-t" x1="90%" y1="10%" x2="10%" y2="90%">
-      <stop offset="0%" stop-color="#a0d8b8" stop-opacity="0.80"/>
-      <stop offset="50%" stop-color="#78b898" stop-opacity="0.48"/>
-      <stop offset="100%" stop-color="#5a9a80" stop-opacity="0.15"/>
+      <stop offset="0%" stop-color="#88d4b0" stop-opacity="0.80"/>
+      <stop offset="50%" stop-color="#60b090" stop-opacity="0.48"/>
+      <stop offset="100%" stop-color="#489078" stop-opacity="0.15"/>
     </linearGradient>
     <linearGradient id="ar-t" x1="10%" y1="10%" x2="90%" y2="90%">
-      <stop offset="0%" stop-color="#a0d8b8" stop-opacity="0.76"/>
-      <stop offset="50%" stop-color="#78b898" stop-opacity="0.44"/>
-      <stop offset="100%" stop-color="#5a9a80" stop-opacity="0.12"/>
+      <stop offset="0%" stop-color="#88d4b0" stop-opacity="0.76"/>
+      <stop offset="50%" stop-color="#60b090" stop-opacity="0.44"/>
+      <stop offset="100%" stop-color="#489078" stop-opacity="0.12"/>
     </linearGradient>
     <filter id="sb-t" x="-5%" y="-5%" width="110%" height="110%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="1.8"/>
@@ -69,15 +64,15 @@
   </g>
 
   <g opacity="0.30" filter="url(#sb-t)">
-    <path d="M232,362 C242,374 250,380 256,382 C262,380 270,374 280,362 C290,350 298,336 302,322 L256,340 L210,322 C214,336 222,350 232,362Z" fill="rgba(122,179,147,0.42)"/>
+    <path d="M232,362 C242,374 250,380 256,382 C262,380 270,374 280,362 C290,350 298,336 302,322 L256,340 L210,322 C214,336 222,350 232,362Z" fill="rgba(72,184,140,0.42)"/>
   </g>
 
   <g filter="url(#sh-t)">
     <circle cx="253" cy="160" r="40" fill="url(#head-t)"/>
   </g>
-  <circle cx="244" cy="150" r="4.5" fill="rgba(168,216,184,0.40)"/>
-  <circle cx="264" cy="153" r="3" fill="rgba(168,216,184,0.28)"/>
-  <path d="M245,172 Q253,178 262,173" fill="none" stroke="rgba(168,216,184,0.32)" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="244" cy="150" r="4.5" fill="rgba(136,212,176,0.42)"/>
+  <circle cx="264" cy="153" r="3" fill="rgba(136,212,176,0.30)"/>
+  <path d="M245,172 Q253,178 262,173" fill="none" stroke="rgba(136,212,176,0.34)" stroke-width="2.2" stroke-linecap="round"/>
 
   <ellipse cx="256" cy="306" rx="26" ry="24" fill="#fffbe0" opacity="0.80" filter="url(#bh-t)"/>
   <ellipse cx="256" cy="306" rx="14" ry="13" fill="#fff8d0" opacity="0.92"/>
