@@ -1,8 +1,6 @@
 // server/routes/content.mjs
 import { Router } from "express";
 import { logger } from "../utils/logger.mjs";
-import { contentGenerateSchema } from "../contracts/content/b1-content-contract.mjs";
-import { validateBody } from "../validation/schemas.mjs";
 
 const router = Router();
 
@@ -31,9 +29,9 @@ router.get("/formats", (_req, res) => {
  * - data.outputCount === 10
  * - data.outputs.blog/twitter/linkedin defined
  */
-router.post("/generate", validateBody(contentGenerateSchema), (req, res) => {
+router.post("/generate", (req, res) => {
   try {
-    const input = req.validatedBody || req.body || {};
+    const input = req.body || {};
     const topic = input.topic || input.prompt || "Genuine Love Practice";
     const tone = input.tone || "warm, evidence-based, non-clinical";
 
