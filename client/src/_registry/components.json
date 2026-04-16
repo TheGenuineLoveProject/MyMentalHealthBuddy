@@ -1,29 +1,82 @@
 {
-  "active": [
-    "PanelShell",
-    "SystemHealthPanel",
-    "AnalyticsPanel",
-    "RevenuePanel",
-    "OptimizationPanel",
-    "ConversionPanel",
-    "FunnelStatusPanel",
-    "ExperimentsPanel",
-    "RetentionPanel",
-    "AcquisitionPanel",
-    "BrandIntegrityPanel",
-    "HealingIntelligencePanel",
-    "PromptOSPanel",
-    "DeploymentPanel",
-    "SystemStatusBar",
-    "BrandLogo",
-    "RecoveryErrorBoundary"
-  ],
+  "version": "1.1.0",
+  "lastUpdated": "2026-04-16",
+  "active": {
+    "sacred": [
+      "SacredHero",
+      "SacredLayout",
+      "SacredSection",
+      "SacredButton",
+      "SacredFooter",
+      "SacredBackground",
+      "SacredDivider",
+      "GlowingHeartLogo",
+      "Hero",
+      "PlatformComponent",
+      "LotusGuide"
+    ],
+    "admin": [
+      "PanelShell",
+      "SystemHealthPanel",
+      "SystemTelemetryPanel",
+      "KernelStatusPanel",
+      "RecentActivityPanel",
+      "AnalyticsPanel",
+      "RevenuePanel",
+      "OptimizationPanel",
+      "ConversionPanel",
+      "FunnelStatusPanel",
+      "ExperimentsPanel",
+      "RetentionPanel",
+      "AcquisitionPanel",
+      "BrandIntegrityPanel",
+      "HealingIntelligencePanel",
+      "PromptOSPanel",
+      "DeploymentPanel",
+      "SystemStatusBar",
+      "DailyOpsChecklist",
+      "ToolsStatusWidget",
+      "AdminNavGrid",
+      "AIKnowledgeHub"
+    ],
+    "safety": [
+      "SafetyFooter"
+    ],
+    "wellness": [
+      "WellnessPageShell",
+      "ClarityCard",
+      "ConsentStrip",
+      "ExamplesAccordion"
+    ],
+    "layout": [
+      "SoftLaunchBanner",
+      "AccessibilityToolbar",
+      "BrandLogo"
+    ],
+    "ui": [
+      "QuoteBlock",
+      "RecoveryErrorBoundary"
+    ]
+  },
   "quarantined": [
     "AchievementToast",
     "BadgeDisplay",
     "DailyCheckIn",
     "SiteFooter"
   ],
+  "frozen": [
+    "SafetyFooter",
+    "WellnessPageShell",
+    "SystemHealthPanel",
+    "KernelStatusPanel",
+    "SystemTelemetryPanel",
+    "RecentActivityPanel"
+  ],
+  "rules": {
+    "addComponent": "Must pass CHANGE_GATE.md gates before adding",
+    "removeComponent": "Move to quarantined first, delete after 30 days",
+    "modifyFrozen": "Only if a failure is proven, requires full verification"
+  },
   "notes": {
     "rule": "Only components listed in active may be modified without migration review.",
     "quarantine_rule": "Quarantined components are inventory only until explicitly restored."

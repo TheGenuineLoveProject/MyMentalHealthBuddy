@@ -89,7 +89,7 @@
     "check:links": "node scripts/routeKeyLinkChecker.mjs",
     "check:bundle": "node scripts/bundleSizeCheck.mjs",
     "next50": "node scripts/next50.mjs",
-    "verify:system": "npm run build && npm run test"
+    "verify:system": "node scripts/verify-system.mjs"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
@@ -170,6 +170,7 @@
     "react-icons": "^5.5.0",
     "resend": "^4.0.0",
     "sharp": "^0.34.5",
+    "speakeasy": "^2.0.0",
     "stripe": "^20.0.0",
     "stripe-replit-sync": "^1.0.0",
     "supertest": "^7.1.4",
@@ -191,6 +192,7 @@
     "drizzle-kit": "^0.31.9",
     "eslint": "^9.39.2",
     "postcss": "^8.5.6",
+    "rollup-plugin-visualizer": "^6.0.11",
     "tailwindcss": "^4.1.18",
     "vite": "^7.3.1",
     "vitest": "^4.0.16"
