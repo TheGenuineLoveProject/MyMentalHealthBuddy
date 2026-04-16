@@ -1,17 +1,17 @@
 {
   "engine": "business",
   "version": "1.0.0",
-  "allowed_audiences": ["admin", "staff"],
+  "allowed_audiences": ["admin","staff"],
   "prompts": [
-    { "id": "b01_offer_design",      "intent": ["offer","value_prop"],  "risk": "low" },
-    { "id": "b02_funnel_map",        "intent": ["funnel","conversion"], "risk": "low" },
-    { "id": "b03_content_factory",   "intent": ["content","social"],    "risk": "low" },
-    { "id": "b04_email_sequences",   "intent": ["email","drip"],        "risk": "low" },
-    { "id": "b05_seo_briefs",        "intent": ["seo","keyword"],       "risk": "low" },
-    { "id": "b06_competitive_scan",  "intent": ["competitor","market"], "risk": "medium" },
-    { "id": "b07_pricing_packaging", "intent": ["price","tier"],        "risk": "low" },
-    { "id": "b08_retention_loyalty", "intent": ["retain","churn"],      "risk": "low" },
-    { "id": "b09_partnerships",      "intent": ["partner","affiliate"], "risk": "low" },
-    { "id": "b10_ops_sops",          "intent": ["sop","automate"],      "risk": "low" }
+    { "id": "b01_offer_design", "intent": ["offer"], "risk": "low" },
+    { "id": "b02_funnel_map", "intent": ["funnel"], "risk": "low" },
+    { "id": "b03_content_factory", "intent": ["content"], "risk": "low" },
+    { "id": "b04_email_sequences", "intent": ["email"], "risk": "low" },
+    { "id": "b05_seo_briefs", "intent": ["seo"], "risk": "low" },
+    { "id": "b06_competitive_scan", "intent": ["competitor"], "risk": "medium" },
+    { "id": "b07_pricing_packaging", "intent": ["pricing"], "risk": "low" },
+    { "id": "b08_retention_loyalty", "intent": ["retention"], "risk": "low" },
+    { "id": "b09_partnerships", "intent": ["partnership"], "risk": "low" },
+    { "id": "b10_ops_sops", "intent": ["operations"], "risk": "low" }
   ]
 }

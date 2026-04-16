@@ -19,6 +19,8 @@ import moodRouter from "./routes/mood.mjs";
 import healthRouter from "./routes/health.mjs";
 import accountRouter from "./routes/account.mjs";
 import aiRouter from "./routes/ai.mjs";
+import aiHealingRouter from "./routes/ai.healing.mjs";
+import aiBusinessRouter from "./routes/ai.business.mjs";
 import analyticsRouter from "./routes/analytics.mjs";
 import billingRouter from "./routes/billing.mjs";
 import revenueRouter from "./routes/revenue.mjs";
@@ -251,6 +253,8 @@ async function startServer() {
   app.use("/api/mood", moodRouter);
   app.use("/api/health", healthRouter);
   app.use("/api/account", accountRouter);
+  app.use("/api/ai/healing", requireAdult, aiHealingRouter);
+  app.use("/api/ai/business", aiBusinessRouter);
   app.use("/api/ai", requireAdult, aiRouter);
   app.use("/api/analytics", analyticsRouter);
   app.use("/api/billing", billingRouter);
@@ -629,22 +633,32 @@ async function startServer() {
     return new Promise((resolve, reject) => {
       const server = app.listen(port, "0.0.0.0");
       server.once('listening', () => resolve(server));
-      server.once('error', (err) => {
-        if (err.code === 'EADDRINUSE') {
-          reject(err);
-        } else {
-          reject(err);
-        }
-      });
+      server.once('error', (err) => reject(err));
     });
+  }
+
+  async function tryListenWithRetry(port, attempts = 10, delayMs = 500) {
+    let lastErr;
+    for (let i = 0; i < attempts; i++) {
+      try {
+        return await tryListen(port);
+      } catch (err) {
+        lastErr = err;
+        if (err.code !== 'EADDRINUSE') throw err;
+        logger.info("Preferred port busy, retrying", { port, attempt: i + 1, attempts });
+        await new Promise((r) => setTimeout(r, delayMs));
+      }
+    }
+    throw lastErr;
   }
   
   let server = null;
   let boundPort = null;
   
-  for (const port of fallbackPorts) {
+  for (let idx = 0; idx < fallbackPorts.length; idx++) {
+    const port = fallbackPorts[idx];
     try {
-      server = await tryListen(port);
+      server = idx === 0 ? await tryListenWithRetry(port) : await tryListen(port);
       boundPort = port;
       break;
     } catch (err) {

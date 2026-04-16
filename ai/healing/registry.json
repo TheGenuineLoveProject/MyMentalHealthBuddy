@@ -1,16 +1,15 @@
 {
   "engine": "healing",
   "version": "1.0.0",
-  "allowed_audiences": ["subscriber", "anonymous"],
+  "allowed_audiences": ["anonymous", "subscriber"],
   "prompts": [
-    { "id": "h01_intake",              "intent": ["new","start"],          "risk": "low"    },
-    { "id": "h02_journal_reflect",     "intent": ["journal","reflect"],    "risk": "low"    },
-    { "id": "h03_cbt_reframe",         "intent": ["reframe","anxiety"],    "risk": "medium" },
-    { "id": "h04_act_values",          "intent": ["values","purpose"],     "risk": "low"    },
-    { "id": "h05_breathing_grounding", "intent": ["breath","calm"],        "risk": "medium" },
-    { "id": "h06_sleep_reset",         "intent": ["sleep","insomnia"],     "risk": "low"    },
-    { "id": "h07_conflict_script",     "intent": ["conflict","relation"],  "risk": "medium" },
-    { "id": "h08_safety_check",        "intent": ["crisis","self_harm"],   "risk": "high",
-      "requires": ["safety_protocol", "crisis_resources"] }
+    { "id": "h01_intake", "intent": ["start","help"], "risk": "low" },
+    { "id": "h02_journal_reflect", "intent": ["journal","reflect"], "risk": "low" },
+    { "id": "h03_cbt_reframe", "intent": ["anxiety","thoughts"], "risk": "medium" },
+    { "id": "h04_act_values", "intent": ["purpose","values"], "risk": "low" },
+    { "id": "h05_breathing_grounding", "intent": ["calm","panic"], "risk": "low" },
+    { "id": "h06_sleep_reset", "intent": ["sleep"], "risk": "low" },
+    { "id": "h07_conflict_script", "intent": ["conflict"], "risk": "medium" },
+    { "id": "h08_safety_check", "intent": ["self harm"], "risk": "high" }
   ]
 }

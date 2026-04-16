@@ -8,7 +8,7 @@ export const ENGINE_RULES = {
   },
   business: {
     allowedAudiences: new Set<Audience>(['staff', 'admin']),
-    forbiddenTopics:  ['user_journal', 'crisis_log', 'therapy_note', 'diagnosis', 'phi'],
+    forbiddenTopics:  ['user_journal', 'crisis_log', 'therapy_note', 'diagnosis', 'phi', 'user data'],
   },
 } as const;
 

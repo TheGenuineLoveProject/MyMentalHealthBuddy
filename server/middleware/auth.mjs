@@ -45,6 +45,15 @@ export function requireAdmin(req, res, next) {
   return next();
 }
 
+// Allows both admin and staff roles (for business engine + ops tooling)
+export function requireStaff(req, res, next) {
+  const role = req.user?.role;
+  if (role !== "admin" && role !== "staff") {
+    return res.status(403).json({ message: "Staff access required" });
+  }
+  return next();
+}
+
 export async function optionalAuth(req, _res, next) {
   try {
     const token = getToken(req);
