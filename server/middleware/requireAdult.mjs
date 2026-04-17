@@ -1,27 +1,15 @@
-/**
- * requireAdult.mjs
- * 
- * Server middleware to verify 18+ age confirmation for wellness endpoints.
- * Checks for:
- *   1. Header "x-age-confirmed: true"
- *   2. Session flag req.session.ageConfirmed === true
- * 
- * Returns 403 with safe message if neither is present.
- * Educational wellness tools only - not medical/mental health treatment.
- */
-
 export function requireAdult(req, res, next) {
+  // 🔥 DEV BYPASS (ONLY FOR AI CHAT)
+  if (
+    process.env.NODE_ENV === "development" &&
+    (req.originalUrl?.includes("/api/ai/chat") ||
+     req.path?.includes("/chat"))
+  ) {
+    return next();
+  }
+
   const headerConfirmed = req.headers["x-age-confirmed"] === "true";
   const sessionConfirmed = req.session?.ageConfirmed === true;
-
-  // Dev-only bypass: allow /api/ai/chat to skip age verification when NODE_ENV === "development".
-  // All other routes remain protected; production behavior is unchanged.
-  if (process.env.NODE_ENV === "development") {
-    const path = req.originalUrl || req.url || "";
-    if (path === "/api/ai/chat" || path.startsWith("/api/ai/chat?") || path.startsWith("/api/ai/chat/")) {
-      return next();
-    }
-  }
 
   if (headerConfirmed || sessionConfirmed) {
     return next();
@@ -30,9 +18,10 @@ export function requireAdult(req, res, next) {
   return res.status(403).json({
     error: "Age verification required",
     message: "This content requires confirmation that you are 18 years or older.",
-    educationalNotice: "These are educational wellness tools designed for self-guided personal growth. " +
-                       "This is not medical advice, mental health treatment, or a substitute for professional care. " +
-                       "If you are in crisis, please visit our crisis resources page immediately.",
+    educationalNotice:
+      "These are educational wellness tools designed for self-guided personal growth. " +
+      "This is not medical advice, mental health treatment, or a substitute for professional care. " +
+      "If you are in crisis, please visit our crisis resources page immediately.",
     action: "Please confirm your age on the wellness page to continue.",
     disclaimerUrl: "/legal/disclaimer",
     crisisUrl: "/crisis",

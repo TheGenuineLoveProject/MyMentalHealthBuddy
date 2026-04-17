@@ -94,7 +94,7 @@ await mountIfExists("/api/healing", "./routes/healing-tools.mjs");
 await mountIfExists("/api/meaning", "./routes/meaning-future.mjs");
 await mountIfExists("/api/content-generator", "./routes/content-generator.mjs");
 await mountIfExists("/api/mirror", "./routes/mirror.mjs");
-await mountIfExists("/api/ai", "./routes/ai.mjs");
+await mountIfExists("/api/ai", "./routes/ai.js");
 await mountIfExists("/api/gamification", "./routes/gamification.mjs");
 await mountIfExists("/api/health", "./routes/health.mjs");
 await mountIfExists("/api/admin/soft-launch-metrics", "./routes/soft-launch-metrics.mjs");
@@ -189,8 +189,9 @@ await mountIfExists("/api", "./routes/api.mjs");
 app.use((req, res) => {
   res.status(404).json({ ok: false, error: "Not found", path: req.path });
 });
+const PORT = process.env.PORT || 5000;
 
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 export default app;
-
-import aiRoutes from "./routes/ai.js";
-app.use("/api/ai", aiRoutes);
