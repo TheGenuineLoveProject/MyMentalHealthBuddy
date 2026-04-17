@@ -3,7 +3,12 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import { logger } from "./utils/logger.mjs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+app.use(express.static(path.join(__dirname, "../public")));
 const app = express();
 
 // Core middleware
