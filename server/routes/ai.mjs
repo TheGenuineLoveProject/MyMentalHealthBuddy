@@ -14,6 +14,21 @@ router.use(aiRateLimit);
 const FREE_DAILY_SESSION_LIMIT = 5;
 const STARTER_DAILY_SESSION_LIMIT = 25;
 
+function detectCrisis(text = "") {
+  const normalized = text.toLowerCase();
+
+  const highRiskPatterns = [
+    "i want to kill myself",
+    "i want to die",
+    "suicide",
+    "end my life",
+    "hurt myself",
+    "self harm",
+  ];
+
+  return highRiskPatterns.some((pattern) => normalized.includes(pattern));
+}
+
 const CRISIS_KEYWORDS = [
   "kill myself", "end my life", "suicide", "suicidal", "want to die",
   "don't want to live", "hurt myself", "self-harm", "cut myself",
@@ -50,11 +65,6 @@ const SYSTEM_PROMPT = `You are a gentle companion for The Genuine Love Project. 
 You are a mirror, not an authority. The user knows themselves better than you ever could.
 Always end with: "Take what serves you. You know yourself best."`;
 
-
-function detectCrisis(message) {
-  const lowerMessage = message.toLowerCase();
-  return CRISIS_KEYWORDS.some(keyword => lowerMessage.includes(keyword));
-}
 
 function generateId(prefix = "id") {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
