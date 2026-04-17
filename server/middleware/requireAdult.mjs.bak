@@ -14,15 +14,6 @@ export function requireAdult(req, res, next) {
   const headerConfirmed = req.headers["x-age-confirmed"] === "true";
   const sessionConfirmed = req.session?.ageConfirmed === true;
 
-  // Dev-only bypass: allow /api/ai/chat to skip age verification when NODE_ENV === "development".
-  // All other routes remain protected; production behavior is unchanged.
-  if (process.env.NODE_ENV === "development") {
-    const path = req.originalUrl || req.url || "";
-    if (path === "/api/ai/chat" || path.startsWith("/api/ai/chat?") || path.startsWith("/api/ai/chat/")) {
-      return next();
-    }
-  }
-
   if (headerConfirmed || sessionConfirmed) {
     return next();
   }

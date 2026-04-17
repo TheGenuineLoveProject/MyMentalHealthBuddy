@@ -1,0 +1,11 @@
+<!-- /public/sacred-pattern.svg -->
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="p" width="160" height="160" patternUnits="userSpaceOnUse">
+      <path d="M80 16L144 80L80 144L16 80L80 16Z" stroke="#2F5D5D" stroke-opacity="0.22" stroke-width="2"/>
+      <path d="M80 36L124 80L80 124L36 80L80 36Z" stroke="#8FBF9F" stroke-opacity="0.22" stroke-width="2"/>
+      <circle cx="80" cy="80" r="4" fill="#F4C7C3" fill-opacity="0.28"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="640" fill="url(#p)"/>
+</svg>

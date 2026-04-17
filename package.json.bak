@@ -1,13 +1,15 @@
 {
-    "name": "mental-health-platform",
-    "version": "1.0.0",
-    "type": "module",
-    "main": "server/app.mjs",
+  "name": "the-genuine-love-project",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "node server/app.mjs",
-    "start": "node server/app.mjs",
+    "dev": "tsx watch server/index.ts",
     "build": "tsc --project tsconfig.json",
+    "start": "node dist/server/index.js",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -75,7 +77,6 @@
     "memoizee": "^0.4.17",
     "morgan": "^1.10.1",
     "next": "^16.1.6",
-    "node-fetch": "^3.3.2",
     "nodemailer": "^8.0.5",
     "openai": "^6.34.0",
     "openid-client": "^6.8.1",

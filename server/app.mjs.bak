@@ -191,6 +191,3 @@ app.use((req, res) => {
 });
 
 export default app;
-
-import aiRoutes from "./routes/ai.js";
-app.use("/api/ai", aiRoutes);

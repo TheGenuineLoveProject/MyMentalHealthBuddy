@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2520"/>
+      <stop offset="100%" style="stop-color:#0f1412"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7FAF9B"/>
+      <stop offset="100%" style="stop-color:#D7B56D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g transform="translate(500,180) scale(2)">
+    <path fill="url(#heart)" d="M50 90c-2.5-2.5-40-27.5-40-50 0-15 12.5-27.5 27.5-27.5 10 0 17.5 7.5 22.5 15 5-7.5 12.5-15 22.5-15 15 0 27.5 12.5 27.5 27.5 0 22.5-37.5 47.5-40 50l-10 7.5-10-7.5z"/>
+  </g>
+  <text x="600" y="420" text-anchor="middle" fill="#F5F8F6" font-family="system-ui" font-size="48" font-weight="700">The Genuine Love Project</text>
+  <text x="600" y="480" text-anchor="middle" fill="#7FAF9B" font-family="system-ui" font-size="28">Live in Genuine Love</text>
+</svg>

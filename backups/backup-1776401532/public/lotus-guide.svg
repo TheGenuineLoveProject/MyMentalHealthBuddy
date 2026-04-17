@@ -1,0 +1,19 @@
+<!-- lotus-guide.svg -->
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(100,100)">
+    <circle r="60" fill="#f4c7c3" opacity="0.3" />
+    <path d="M0,-60 C10,-40 10,-20 0,0 C-10,-20 -10,-40 0,-60 Z" fill="#8fbf9f"/>
+    <path d="M0,-50 C12,-30 12,-10 0,10 C-12,-10 -12,-30 0,-50 Z" fill="#d4af37" />
+    <circle r="8" fill="#3a3a3a" />
+    <text x="-25" y="80" font-size="12" font-family="Inter" fill="#2f5d5d">Hi, I’m Lotus!</text>
+  </g>
+</svg><!-- lotus-guide.svg -->
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(100,100)">
+    <circle r="60" fill="#f4c7c3" opacity="0.3" />
+    <path d="M0,-60 C10,-40 10,-20 0,0 C-10,-20 -10,-40 0,-60 Z" fill="#8fbf9f"/>
+    <path d="M0,-50 C12,-30 12,-10 0,10 C-12,-10 -12,-30 0,-50 Z" fill="#d4af37" />
+    <circle r="8" fill="#3a3a3a" />
+    <text x="-25" y="80" font-size="12" font-family="Inter" fill="#2f5d5d">Hi, I’m Lotus!</text>
+  </g>
+</svg>

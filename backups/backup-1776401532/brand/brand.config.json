@@ -1,0 +1,17 @@
+{
+  "name": "TheGenuineLoveProject",
+  "tagline": "Mental Health from A to Z",
+  "logo": "Infinity-Heart Fusion",
+  "palette": {
+    "primary": "var(--glp-sage)",
+    "secondary": "var(--glp-blush)",
+    "accent": "var(--glp-sage-deep)",
+    "background": "var(--glp-paper)",
+    "text": "var(--glp-ink)",
+    "premium": "var(--glp-gold)"
+  },
+  "fonts": {
+    "heading": "Playfair Display",
+    "body": "Inter"
+  }
+}
