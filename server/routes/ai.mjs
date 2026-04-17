@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
-import { authGuard } from "../middleware/auth.mjs";
+import { authGuard, optionalAuth } from "../middleware/auth.mjs";
 import { aiRateLimit } from "../middleware/rateLimit.mjs";
 import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
@@ -60,41 +60,44 @@ function generateId(prefix = "id") {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 }
 
-router.post("/chat", authGuard, async (req, res) => {
+router.post("/chat", optionalAuth, async (req, res) => {
   try {
-    const userId = req.dbUserId;
+    const userId = req.dbUserId || null;
     const { message } = req.body;
 
-    if (!userId || !message) {
-      return res.status(400).json({ error: "Missing userId or message" });
+    if (!message) {
+      return res.status(400).json({ error: "Missing message" });
     }
 
-    const userSubResult = await db.execute(sql`
-      SELECT subscription_status FROM users WHERE id = ${userId} LIMIT 1
-    `);
-    const subStatus = userSubResult.rows?.[0]?.subscription_status || "free";
-
-    increment("feature_gate_check", { plan: subStatus });
-    const hasUnlimited = ["pro", "elite"].includes(subStatus);
-    if (!hasUnlimited) {
-      const dailyLimit = subStatus === "starter" ? STARTER_DAILY_SESSION_LIMIT : FREE_DAILY_SESSION_LIMIT;
-      const todayStart = new Date();
-      todayStart.setHours(0, 0, 0, 0);
-      const countResult = await db.execute(sql`
-        SELECT COUNT(*) as count FROM ai_messages 
-        WHERE user_id = ${userId} AND role = 'user' AND created_at >= ${todayStart.toISOString()}
+    let subStatus = "guest";
+    if (userId) {
+      const userSubResult = await db.execute(sql`
+        SELECT subscription_status FROM users WHERE id = ${userId} LIMIT 1
       `);
-      const todayCount = parseInt(countResult.rows?.[0]?.count || "0", 10);
-      if (todayCount >= dailyLimit) {
-        increment("ai_chat_limit_hit", { plan: subStatus });
-        const upgradeHint = subStatus === "starter"
-          ? "You've used your 25 Starter sessions for today. They reset tomorrow, or upgrade to Pro for unlimited access."
-          : "You've used your 5 free sessions for today. They reset tomorrow, or upgrade for more access.";
-        return res.status(429).json({
-          error: "Daily session limit reached",
-          limit: dailyLimit,
-          message: upgradeHint,
-        });
+      subStatus = userSubResult.rows?.[0]?.subscription_status || "free";
+
+      increment("feature_gate_check", { plan: subStatus });
+      const hasUnlimited = ["pro", "elite"].includes(subStatus);
+      if (!hasUnlimited) {
+        const dailyLimit = subStatus === "starter" ? STARTER_DAILY_SESSION_LIMIT : FREE_DAILY_SESSION_LIMIT;
+        const todayStart = new Date();
+        todayStart.setHours(0, 0, 0, 0);
+        const countResult = await db.execute(sql`
+          SELECT COUNT(*) as count FROM ai_messages 
+          WHERE user_id = ${userId} AND role = 'user' AND created_at >= ${todayStart.toISOString()}
+        `);
+        const todayCount = parseInt(countResult.rows?.[0]?.count || "0", 10);
+        if (todayCount >= dailyLimit) {
+          increment("ai_chat_limit_hit", { plan: subStatus });
+          const upgradeHint = subStatus === "starter"
+            ? "You've used your 25 Starter sessions for today. They reset tomorrow, or upgrade to Pro for unlimited access."
+            : "You've used your 5 free sessions for today. They reset tomorrow, or upgrade for more access.";
+          return res.status(429).json({
+            error: "Daily session limit reached",
+            limit: dailyLimit,
+            message: upgradeHint,
+          });
+        }
       }
     }
 
@@ -103,17 +106,19 @@ router.post("/chat", authGuard, async (req, res) => {
       return res.json(CRISIS_RESPONSE);
     }
 
-    const historyResult = await db.execute(sql`
-      SELECT role, content FROM ai_messages 
-      WHERE user_id = ${userId}
-      ORDER BY created_at DESC 
-      LIMIT 10
-    `);
-
-    const history = (historyResult.rows || []).reverse().map(row => ({
-      role: row.role,
-      content: row.content,
-    }));
+    let history = [];
+    if (userId) {
+      const historyResult = await db.execute(sql`
+        SELECT role, content FROM ai_messages 
+        WHERE user_id = ${userId}
+        ORDER BY created_at DESC 
+        LIMIT 10
+      `);
+      history = (historyResult.rows || []).reverse().map(row => ({
+        role: row.role,
+        content: row.content,
+      }));
+    }
 
     const messages = [
       { role: "system", content: SYSTEM_PROMPT },
@@ -151,18 +156,22 @@ router.post("/chat", authGuard, async (req, res) => {
     const messageId = generateId("msg");
     const responseId = generateId("msg");
 
-    await db.execute(sql`
-      INSERT INTO ai_messages (id, user_id, role, content, created_at)
-      VALUES (${messageId}, ${userId}, 'user', ${message}, NOW())
-    `);
+    if (userId) {
+      await db.execute(sql`
+        INSERT INTO ai_messages (id, user_id, role, content, created_at)
+        VALUES (${messageId}, ${userId}, 'user', ${message}, NOW())
+      `);
 
-    await db.execute(sql`
-      INSERT INTO ai_messages (id, user_id, role, content, created_at)
-      VALUES (${responseId}, ${userId}, 'assistant', ${aiResponse}, NOW())
-    `);
+      await db.execute(sql`
+        INSERT INTO ai_messages (id, user_id, role, content, created_at)
+        VALUES (${responseId}, ${userId}, 'assistant', ${aiResponse}, NOW())
+      `);
 
-    increment("ai_chat_message_count", { plan: subStatus });
-    if (subStatus === "pro") increment("pro_user_action", { plan: "pro" });
+      increment("ai_chat_message_count", { plan: subStatus });
+      if (subStatus === "pro") increment("pro_user_action", { plan: "pro" });
+    } else {
+      increment("ai_chat_message_count", { plan: "guest" });
+    }
     res.json({ reply: aiResponse, messageId: responseId });
   } catch (err) {
     logger.error("AI chat error", { error: err.message, userId: req.dbUserId });

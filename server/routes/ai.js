@@ -1,5 +1,6 @@
 import express from "express";
 import OpenAI from "openai";
+import { getSession, addMessage } from "../memory/store.mjs";
 
 const router = express.Router();
 
@@ -72,7 +73,7 @@ Keep responses concise but human.
 
 router.post("/chat", async (req, res) => {
   try {
-    const { message } = req.body;
+    const { message, userId = "default-user" } = req.body;
 
     if (!message || typeof message !== "string") {
       return res.status(400).json({

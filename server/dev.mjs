@@ -593,6 +593,11 @@ async function startServer() {
     res.status(404).json({ ok: false, error: "NOT_FOUND", message: "Endpoint not found" });
   });
 
+  // Serve standalone /chat.html directly (bypass Vite HMR client injection)
+  app.get("/chat.html", (_req, res) => {
+    res.sendFile(resolve(__dirname, "../public/chat.html"));
+  });
+
   // Vite middleware MUST be registered before any catch-all routes
   app.use(vite.middlewares);
 

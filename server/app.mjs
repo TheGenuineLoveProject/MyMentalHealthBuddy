@@ -1,20 +1,34 @@
 // server/app.mjs
 // Shared Express app for testing and production
 import express from "express";
-import cookieParser from "cookie-parser";
-import { logger } from "./utils/logger.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
+import cookieParser from "cookie-parser";
+import { logger } from "./utils/logger.mjs";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "../public")));
+// ✅ CREATE APP FIRST
 const app = express();
+
+// ✅ THEN USE MIDDLEWARE
+app.use(express.json());
+
+// ✅ STATIC FILES
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Core middleware
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// 🔓 PUBLIC ROUTES
+app.use("/api/ai", aiRoutes);
+
+// 🔐 PROTECTED (LIMITED)
+app.use("/api/auth", authMiddleware);
+app.use("/api/admin", authMiddleware);
 
 let _trackSystemResponse = null;
 try {

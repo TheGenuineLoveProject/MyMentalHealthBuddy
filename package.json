@@ -8,7 +8,9 @@
     "dev": "node server/app.mjs"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
     "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.5.0",
     "bcrypt": "^6.0.0",
     "compression": "^1.8.1",
     "connect-pg-simple": "^10.0.0",
@@ -29,12 +31,16 @@
     "passport-github2": "^0.1.12",
     "pg": "^8.20.0",
     "qrcode": "^1.5.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "resend": "^6.12.0",
     "speakeasy": "^2.0.0",
     "stripe": "^22.0.2",
     "supertest": "^7.2.2",
+    "tailwindcss": "^4.2.2",
     "vite": "^8.0.8",
     "vitest": "^4.1.4",
+    "wouter": "^3.9.0",
     "ws": "^8.20.0",
     "zod": "^4.3.6"
   },
