@@ -70,6 +70,35 @@ function generateId(prefix = "id") {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 }
 
+// Phase 3: structured CBT/DBT-informed fallback used when OpenAI is offline
+// or the API call fails. Validation -> reflection -> one coping step -> one
+// gentle question. Non-clinical, no diagnosis, no monetization.
+function buildSupportiveReply(text = "") {
+  const normalized = String(text).toLowerCase();
+
+  if (normalized.includes("overwhelmed") || normalized.includes("anxious") || normalized.includes("anxiety")) {
+    return "It's understandable to feel anxious or overwhelmed when there's a lot on your plate. It sounds like your mind may be carrying many things at once right now. One gentle next step could be to pause and take three slow breaths, then choose just one small task that feels most manageable. What feels heaviest right now?";
+  }
+
+  if (normalized.includes("sad") || normalized.includes("depressed") || normalized.includes("hopeless") || normalized.includes("empty")) {
+    return "It takes courage to put words to a heavy feeling like that. It sounds like something inside is asking to be heard. One small step could be to place a hand on your chest and notice your breath for a few seconds, simply acknowledging the feeling without trying to fix it. What's been weighing on you most lately?";
+  }
+
+  if (normalized.includes("angry") || normalized.includes("frustrated") || normalized.includes("furious")) {
+    return "Anger and frustration often show up when something important to us feels unmet. It makes sense to feel strongly here. One option is to step away for a moment and let your body settle — feet on the floor, a slow exhale longer than the inhale. What do you think this feeling might be protecting?";
+  }
+
+  if (normalized.includes("lonely") || normalized.includes("alone") || normalized.includes("isolated")) {
+    return "Loneliness is one of the harder feelings to sit with, and it's okay to name it. It sounds like a part of you is longing for connection. One small step might be to send a brief message to someone who has felt safe in the past — even a single sentence. Who comes to mind when you think of someone who has truly listened to you?";
+  }
+
+  if (normalized.includes("tired") || normalized.includes("exhausted") || normalized.includes("burned out") || normalized.includes("burnt out")) {
+    return "That kind of tiredness is real, and your body and mind may be asking for rest in a way that is hard to ignore. One gentle next step could be to lower the bar for the next hour — just one small thing instead of many. What would 'enough' look like for you today?";
+  }
+
+  return "Thank you for sharing that with me. I'm here to listen without judgment. Sometimes naming a feeling out loud is itself a small step. If you'd like, we can try a quick grounding exercise — noticing five things you can see, four you can touch, three you can hear. What's most on your mind right now?";
+}
+
 router.post("/chat", optionalAuth, async (req, res) => {
   try {
     const userId = req.dbUserId || null;
@@ -148,11 +177,11 @@ router.post("/chat", optionalAuth, async (req, res) => {
       if (result.success) {
         aiResponse = result.content;
       } else {
-        logger.warn("OpenAI failed, using fallback", { error: result.error });
-        aiResponse = "I'm here with you. While I'm having a brief moment of difficulty, please know that you are not alone. Would you like to share more about how you're feeling?";
+        logger.warn("OpenAI failed, using structured fallback", { error: result.error });
+        aiResponse = buildSupportiveReply(message);
       }
     } else {
-      aiResponse = "I'm here with you. You are not alone. (AI is currently in offline mode)";
+      aiResponse = buildSupportiveReply(message);
     }
 
     const safetyResult = checkResponseSafety(aiResponse);
