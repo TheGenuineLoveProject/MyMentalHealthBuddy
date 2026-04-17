@@ -6,18 +6,19 @@ function logEvent(event, data = {}) {
   };
 
   console.log(JSON.stringify(payload));
+  return payload;
 }
 
 function trackPromptUsage(engine, promptId, inputText) {
-  logEvent("prompt_used", {
+  return logEvent("prompt_used", {
     engine,
     promptId,
-    inputLength: inputText.length
+    inputLength: String(inputText || "").length
   });
 }
 
 function trackOutcome(engine, promptId, success = true) {
-  logEvent("prompt_outcome", {
+  return logEvent("prompt_outcome", {
     engine,
     promptId,
     success

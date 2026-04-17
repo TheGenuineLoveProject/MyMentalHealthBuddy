@@ -1,4 +1,4 @@
-const { trackPromptUsage } = require("./telemetry");
+const { trackPromptUsage } = require("./telemetry.cjs");
 
 function routePrompt(engine, text) {
   const t = String(text || "").toLowerCase();

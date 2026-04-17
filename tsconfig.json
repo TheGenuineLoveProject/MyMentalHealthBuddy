@@ -9,7 +9,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["node"]
   },
-  "include": ["shared/**/*.ts", "drizzle.config.ts"]
+  "include": ["shared/**/*.ts"],
+  "exclude": ["node_modules", "dist", "drizzle.config.ts"]
 }
