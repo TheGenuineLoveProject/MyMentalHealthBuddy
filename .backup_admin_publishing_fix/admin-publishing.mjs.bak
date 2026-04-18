@@ -1,0 +1,379 @@
+import { Router } from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { z } from 'zod';
+import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
+import { logger } from '../utils/logger.mjs';
+import db from '../db/client.mjs';
+import { analyticsEvents, newsletterSubscribers, leads } from '../../shared/schema.mjs';
+import { desc, sql, count, gte, eq } from 'drizzle-orm';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '../..');
+
+const router = Router();
+
+const publishingRegistrySchema = z.object({
+  type: z.string().trim().min(1, "type is required").max(100),
+  pillar: z.string().trim().max(120).optional().default(""),
+  title: z.string().trim().min(1, "title is required").max(200),
+  slug: z.string().trim().max(200).optional().default(""),
+  primaryCta: z.string().trim().max(200).optional().default(""),
+  notes: z.string().trim().max(5000).optional().default("")
+});
+
+const publishingRegistryPatchSchema = publishingRegistrySchema.partial();
+
+router.use(requireAuth);
+router.use(requireAdmin);
+
+function readJsonFile(filepath) {
+  try {
+    if (fs.existsSync(filepath)) {
+      return JSON.parse(fs.readFileSync(filepath, 'utf8'));
+    }
+  } catch (err) {
+    logger.error('Failed to read JSON file', { filepath, error: err.message });
+  }
+  return null;
+}
+
+function writeJsonFile(filepath, data) {
+  try {
+    const dir = path.dirname(filepath);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+    const tempFilepath = filepath + ".tmp";
+    fs.writeFileSync(tempFilepath, JSON.stringify(data, null, 2));
+    fs.renameSync(tempFilepath, filepath);
+    return true;
+  } catch (err) {
+    logger.error('Failed to write JSON file', { filepath, error: err.message });
+    return false;
+  }
+}
+
+router.get('/registry', (req, res) => {
+  const registry = readJsonFile(path.join(ROOT, 'content/publishing/publishingRegistry.json')) || [];
+  res.json({ ok: true, data: registry });
+});
+
+router.post('/registry', (req, res) => {
+  const filepath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
+  const registry = readJsonFile(filepath) || [];
+
+  const parsed = publishingRegistrySchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      ok: false,
+      error: 'Invalid registry payload',
+      details: parsed.error.flatten()
+    });
+  }
+
+  const { type, pillar, title, slug, primaryCta, notes } = parsed.data;
+
+  const id = `glp-${type}-${Date.now().toString(36)}`;
+  const entry = {
+    id,
+    type,
+    pillar: pillar || 'PLATFORM_ORIENTATION',
+    title,
+    slug: slug || null,
+    status: 'draft',
+    primaryCta: primaryCta || '/blog',
+    createdAt: new Date().toISOString(),
+    publishAt: null,
+    owner: 'admin',
+    sourceFile: null,
+    notes: notes || '',
+  };
+
+  registry.push(entry);
+  writeJsonFile(filepath, registry);
+  res.json({ ok: true, data: entry });
+});
+
+router.patch('/registry/:id', (req, res) => {
+  const parsed = publishingRegistryPatchSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      ok: false,
+      error: 'Invalid registry patch payload',
+      details: parsed.error.flatten()
+    });
+  }
+  req.body = parsed.data;
+  const filepath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
+  const registry = readJsonFile(filepath) || [];
+  const idx = registry.findIndex(r => r.id === req.params.id);
+
+  if (idx === -1) {
+    return res.status(404).json({ ok: false, error: 'Item not found' });
+  }
+
+  const allowed = ['status', 'notes', 'publishAt', 'primaryCta'];
+  for (const key of allowed) {
+    if (req.body[key] !== undefined) {
+      registry[idx][key] = req.body[key];
+    }
+  }
+
+  writeJsonFile(filepath, registry);
+  res.json({ ok: true, data: registry[idx] });
+});
+
+router.get('/calendar', (req, res) => {
+  const calendar = readJsonFile(path.join(ROOT, 'content/publishing/calendar/editorial_calendar.json')) || [];
+  res.json({ ok: true, data: calendar });
+});
+
+router.get('/pillars', (req, res) => {
+  const pillars = readJsonFile(path.join(ROOT, 'content/publishing/pillars.json')) || [];
+  res.json({ ok: true, data: pillars });
+});
+
+router.get('/drafts', (req, res) => {
+  const drafts = readJsonFile(path.join(ROOT, 'content/publishing/newsletter/drafts.json')) || [];
+  res.json({ ok: true, data: drafts });
+});
+
+router.get('/draft-packs', (req, res) => {
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packs = {};
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const data = readJsonFile(path.join(packDir, file));
+    if (data) packs[file] = data;
+  }
+  const all = Object.values(packs).flat();
+  res.json({ ok: true, data: all });
+});
+
+router.get('/draft-packs/:id', (req, res) => {
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const data = readJsonFile(path.join(packDir, file));
+    if (data) {
+      const item = data.find(d => d.id === req.params.id);
+      if (item) return res.json({ ok: true, data: item });
+    }
+  }
+  res.status(404).json({ ok: false, error: 'Draft not found' });
+});
+
+router.get('/featured', (req, res) => {
+  const featured = readJsonFile(path.join(ROOT, 'data/publishing_featured.json')) || {};
+  res.json({ ok: true, data: featured });
+});
+
+router.post('/featured', (req, res) => {
+  const filepath = path.join(ROOT, 'data/publishing_featured.json');
+  const featured = readJsonFile(filepath) || {};
+  const { date, glpId } = req.body;
+
+  if (!date || !glpId) {
+    return res.status(400).json({ ok: false, error: 'date and glpId required' });
+  }
+
+  featured[date] = {
+    glpId,
+    setAt: new Date().toISOString(),
+    setBy: 'admin',
+  };
+
+  writeJsonFile(filepath, featured);
+  res.json({ ok: true, data: featured[date] });
+});
+
+router.post('/mark-posted/:id', (req, res) => {
+  const registryPath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
+  const registry = readJsonFile(registryPath) || [];
+  const idx = registry.findIndex(r => r.id === req.params.id);
+
+  if (idx === -1) {
+    return res.status(404).json({ ok: false, error: 'Item not found in registry' });
+  }
+
+  registry[idx].status = 'posted';
+  registry[idx].postedAt = new Date().toISOString();
+  writeJsonFile(registryPath, registry);
+
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const filePath = path.join(packDir, file);
+    const data = readJsonFile(filePath);
+    if (data) {
+      const draftIdx = data.findIndex(d => d.id === req.params.id);
+      if (draftIdx !== -1) {
+        data[draftIdx].status = 'posted';
+        data[draftIdx].postedAt = new Date().toISOString();
+        writeJsonFile(filePath, data);
+        break;
+      }
+    }
+  }
+
+  res.json({ ok: true, data: registry[idx] });
+});
+
+router.get('/status', (req, res) => {
+  const status = readJsonFile(path.join(ROOT, 'data/publishing_status.json')) || {};
+  res.json({ ok: true, data: status });
+});
+
+router.post('/status', (req, res) => {
+  const filepath = path.join(ROOT, 'data/publishing_status.json');
+  const status = readJsonFile(filepath) || {};
+  const { itemId, newStatus } = req.body;
+
+  if (!itemId || !newStatus) {
+    return res.status(400).json({ ok: false, error: 'itemId and newStatus required' });
+  }
+
+  status[itemId] = {
+    status: newStatus,
+    updatedAt: new Date().toISOString(),
+    updatedBy: 'admin',
+  };
+
+  writeJsonFile(filepath, status);
+  res.json({ ok: true, data: status[itemId] });
+});
+
+router.get('/signals/summary', async (req, res) => {
+  try {
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const signalsPath = path.join(ROOT, 'logs/signals.jsonl');
+
+    const events = [];
+    if (fs.existsSync(signalsPath)) {
+      const lines = fs.readFileSync(signalsPath, 'utf8').trim().split('\n').filter(Boolean);
+      for (const line of lines) {
+        try {
+          const ev = JSON.parse(line);
+          if (ev.ts >= sevenDaysAgo) events.push(ev);
+        } catch {}
+      }
+    }
+
+    const byEvent = {};
+    const byRoute = {};
+    for (const ev of events) {
+      byEvent[ev.eventType] = (byEvent[ev.eventType] || 0) + 1;
+      if (ev.page) byRoute[ev.page] = (byRoute[ev.page] || 0) + 1;
+    }
+
+    res.json({
+      ok: true,
+      data: {
+        totalEvents: events.length,
+        period: '7d',
+        byEvent: Object.entries(byEvent).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count),
+        byRoute: Object.entries(byRoute).map(([route, count]) => ({ route, count })).sort((a, b) => b.count - a.count).slice(0, 20),
+        recentEvents: events.slice(-50).reverse().map(e => ({ eventType: e.eventType, page: e.page, ts: e.ts })),
+      },
+    });
+  } catch (err) {
+    logger.error('Signals summary error', { error: err.message });
+    res.status(500).json({ ok: false, error: 'Failed to load signals' });
+  }
+});
+
+const TOPIC_MAP = {
+  '/tools': 'Wellness Tools Deep Dive',
+  '/mood': 'Mood Tracking & Emotional Awareness',
+  '/journal': 'Journaling for Healing',
+  '/chat': 'AI-Assisted Reflection',
+  '/meditation': 'Meditation & Mindfulness',
+  '/breathing': 'Breathwork for Calm',
+  '/grounding': 'Grounding Techniques',
+  '/affirmations': 'The Power of Affirmations',
+  '/resilience': 'Building Resilience',
+  '/self-care': 'Self-Care Practices',
+  '/healing': 'Healing Journeys',
+  '/wisdom': 'Wisdom & Inner Growth',
+  '/pricing': 'Getting the Most from Your Wellness Practice',
+  '/crisis': 'Mental Health Resources & Support',
+  '/blog': 'Community Stories & Insights',
+  '/dashboard': 'Your Personal Wellness Path',
+  '/learn': 'Learning & Growth Resources',
+  '/challenge': 'Wellness Challenges',
+};
+
+router.get('/recommendations', async (req, res) => {
+  try {
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+    const topPages = await db
+      .select({
+        path: analyticsEvents.path,
+        views: count(),
+      })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventName} = 'page_view' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`)
+      .groupBy(analyticsEvents.path)
+      .orderBy(desc(count()))
+      .limit(10);
+
+    const topCTAs = await db
+      .select({
+        eventName: analyticsEvents.eventName,
+        clicks: count(),
+      })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventCategory} = 'cta' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`)
+      .groupBy(analyticsEvents.eventName)
+      .orderBy(desc(count()))
+      .limit(10);
+
+    const suggestedTopics = topPages
+      .map(p => {
+        const basePath = (p.path || '').split('?')[0].replace(/\/$/, '') || '/';
+        const topic = TOPIC_MAP[basePath];
+        return topic ? { path: basePath, topic, views: Number(p.views) } : null;
+      })
+      .filter(Boolean)
+      .slice(0, 5);
+
+    const [signupAttempts] = await db
+      .select({ total: count() })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventName} = 'newsletter_signup_attempt' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`);
+
+    const [signupSuccesses] = await db
+      .select({ total: count() })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventName} = 'newsletter_signup_success' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`);
+
+    const [subscriberCount] = await db.select({ total: count() }).from(leads);
+
+    res.json({
+      ok: true,
+      data: {
+        topPages: topPages.map(p => ({ path: p.path, views: Number(p.views) })),
+        topCTAs: topCTAs.map(c => ({ name: c.eventName, clicks: Number(c.clicks) })),
+        suggestedTopics,
+        newsletter: {
+          totalSubscribers: Number(subscriberCount?.total || 0),
+          attemptsLast7d: Number(signupAttempts?.total || 0),
+          successesLast7d: Number(signupSuccesses?.total || 0),
+        },
+      },
+    });
+  } catch (err) {
+    logger.error('Recommendations error', { error: err.message });
+    res.status(500).json({ ok: false, error: 'Failed to load recommendations' });
+  }
+});
+
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "admin-publishing", status: "operational", timestamp: new Date().toISOString() });
+});
+
+export default router;
