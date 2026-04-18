@@ -321,7 +321,14 @@
       }
       return id;
     }
-
+    function getGuestId() {
+      let id = localStorage.getItem("guest_id");
+      if (!id) {
+        id = "guest_" + Math.random().toString(36).slice(2);
+        localStorage.setItem("guest_id", id);
+      }
+      return id;
+    }
     const guestId = getGuestId();
 
     function escapeHtml(str) {
@@ -419,6 +426,20 @@
           },
           body: JSON.stringify({ message: text })
         });
+        const API_URL = window.location.origin;
+
+        async function sendMessage(message) {
+          const res = await fetch(`${API_URL}/api/ai/chat`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-guest-id": getGuestId()
+            },
+            body: JSON.stringify({ message })
+          });
+
+          return res.json();
+        }
 
         const data = await res.json();
 
@@ -439,6 +460,17 @@
         clearBtn.disabled = false;
         inputEl.focus();
       }
+    }
+
+    async function loadHistory() {
+      const res = await fetch(`${API_URL}/api/ai/history`, {
+        headers: {
+          "x-guest-id": getGuestId()
+        }
+      });
+
+      const data = await res.json();
+      renderMessages(data.messages || []);
     }
 
     async function clearHistory() {

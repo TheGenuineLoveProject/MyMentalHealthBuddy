@@ -9,6 +9,12 @@ import express from "express";
 import cors from "cors";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import rateLimit from "express-rate-limit";
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 30
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -52,6 +58,8 @@ app.use("/api/ai/business", aiBusinessRoutes);
 
 // AI routes
 app.use("/api/ai", optionalAuth, aiRoutes);
+
+app.use("/api/ai", limiter);
 
 // ----------------------------
 // ROOT
