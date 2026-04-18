@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chat</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    input, textarea, button {
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #0b1220;
+      color: #e2e8f0;
+      padding: 12px;
+      font-size: 14px;
+    }
+    input, textarea { width: 100%; }
+    textarea { min-height: 88px; resize: vertical; }
+    button {
+      cursor: pointer;
+      background: #2563eb;
+      border: none;
+      min-width: 120px;
+    }
+    button.secondary { background: #374151; }
+    .messages {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 280px;
+    }
+    .msg {
+      padding: 12px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      line-height: 1.45;
+    }
+    .user { background: #1e293b; }
+    .assistant { background: #0b3b2e; }
+    .meta { color: #94a3b8; font-size: 12px; }
+    .status-ok { color: #22c55e; }
+    .status-bad { color: #ef4444; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: #1f2937;
+      border: 1px solid #334155;
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>AI Chat</h1>
+      <div id="health" class="meta">Checking server…</div>
+    </div>
+
+    <div class="card">
+      <h3>Auth</h3>
+      <div class="row">
+        <div style="flex:1; min-width:260px;">
+          <input id="email" placeholder="email" />
+        </div>
+        <div style="flex:1; min-width:260px;">
+          <input id="password" type="password" placeholder="password" />
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <button onclick="register()">Register</button>
+        <button onclick="login()">Login</button>
+        <button class="secondary" onclick="logout()">Logout</button>
+      </div>
+      <div id="authStatus" class="meta" style="margin-top:10px;">Guest mode active</div>
+    </div>
+
+    <div class="card">
+      <h3>Starter prompts</h3>
+      <div class="chips">
+        <div class="chip" onclick="usePrompt('I feel overwhelmed')">I feel overwhelmed</div>
+        <div class="chip" onclick="usePrompt('I feel anxious')">I feel anxious</div>
+        <div class="chip" onclick="usePrompt('I feel sad')">I feel sad</div>
+        <div class="chip" onclick="usePrompt('I feel angry')">I feel angry</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div id="messages" class="messages"></div>
+    </div>
+
+    <div class="card">
+      <textarea id="message" placeholder="Type what is going on..."></textarea>
+      <div class="row" style="margin-top:10px;">
+        <button onclick="sendMessage()">Send</button>
+        <button class="secondary" onclick="clearHistory()">Clear</button>
+      </div>
+      <div class="meta" style="margin-top:10px;">
+        Take what serves you. You know yourself best.
+      </div>
+    </div>
+  </div>
+
+  <script>
+const API_BASE = window.location.origin;
+
+    const API_URL = window.location.origin;
+
+    function getGuestId() {
+      let id = localStorage.getItem("guest_id");
+      if (!id) {
+        id = "guest_" + Math.random().toString(36).slice(2);
+        localStorage.setItem("guest_id", id);
+      }
+      return id;
+    }
+
+    function getToken() {
+      return localStorage.getItem("auth_token") || "";
+    }
+
+    function setToken(token) {
+      if (token) localStorage.setItem("auth_token", token);
+      else localStorage.removeItem("auth_token");
+      renderAuthStatus();
+    }
+
+    function authHeaders() {
+      const headers = { "Content-Type": "application/json" };
+      const token = getToken();
+
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      } else {
+        headers["x-guest-id"] = getGuestId();
+      }
+
+      return headers;
+    }
+
+    function renderAuthStatus() {
+      const el = document.getElementById("authStatus");
+      if (getToken()) {
+        el.textContent = "Authenticated mode active";
+      } else {
+        el.textContent = `Guest mode active (${getGuestId()})`;
+      }
+    }
+
+    function renderMessages(messages) {
+      const wrap = document.getElementById("messages");
+      wrap.innerHTML = "";
+
+      if (!messages || !messages.length) {
+        wrap.innerHTML = `<div class="meta">No messages yet.</div>`;
+        return;
+      }
+
+      for (const msg of messages) {
+        const div = document.createElement("div");
+        div.className = `msg ${msg.role === "user" ? "user" : "assistant"}`;
+        div.textContent = msg.content;
+        wrap.appendChild(div);
+      }
+
+      wrap.scrollTop = wrap.scrollHeight;
+    }
+
+    async function checkHealth() {
+      const el = document.getElementById("health");
+      try {
+        const res = await fetch(`${API_URL}/api/health`);
+        const data = await res.json();
+        el.innerHTML = `<span class="status-ok">Server healthy</span> • ${data.environment || "unknown"} • v${data.version || "?"}`;
+      } catch (err) {
+        el.innerHTML = `<span class="status-bad">Server unavailable</span>`;
+      }
+    }
+
+    async function loadHistory() {
+      try {
+        const res = await fetch(`${API_URL}/api/ai/history`, {
+          headers: getToken()
+            ? { "Authorization": `Bearer ${getToken()}` }
+            : { "x-guest-id": getGuestId() }
+        });
+        const data = await res.json();
+        renderMessages(data.messages || []);
+      } catch (err) {
+        renderMessages([]);
+      }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("message");
+      const message = input.value.trim();
+      if (!message) return;
+
+      const current = document.getElementById("messages");
+      const userDiv = document.createElement("div");
+      userDiv.className = "msg user";
+      userDiv.textContent = message;
+      current.appendChild(userDiv);
+
+      input.value = "";
+
+      const res = await fetch(`${API_URL}/api/ai/chat`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({ message })
+      });
+
+      const data = await res.json();
+
+      const aiDiv = document.createElement("div");
+      aiDiv.className = "msg assistant";
+      aiDiv.textContent = data.reply || data.error || "No response";
+      current.appendChild(aiDiv);
+      current.scrollTop = current.scrollHeight;
+    }
+
+    async function clearHistory() {
+      await fetch(`${API_URL}/api/ai/history`, {
+        method: "DELETE",
+        headers: getToken()
+          ? { "Authorization": `Bearer ${getToken()}` }
+          : { "x-guest-id": getGuestId() }
+      });
+      await loadHistory();
+    }
+
+    function usePrompt(text) {
+      document.getElementById("message").value = text;
+    }
+
+    async function register() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const res = await fetch(`${API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      if (data.token) {
+        setToken(data.token);
+        await loadHistory();
+      } else {
+        alert(data.error || "Registration failed");
+      }
+    }
+
+    async function login() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      if (data.token) {
+        setToken(data.token);
+        await loadHistory();
+      } else {
+        alert(data.error || "Login failed");
+      }
+    }
+
+    function logout() {
+      setToken("");
+      loadHistory();
+    }
+
+    window.onload = async () => {
+      renderAuthStatus();
+      await checkHealth();
+      await loadHistory();
+    };
+  </script>
+</body>
+</html>
