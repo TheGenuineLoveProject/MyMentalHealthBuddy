@@ -1,6 +1,11 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "dev_jwt_secret_change_me";
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+  throw new Error(
+    "JWT_SECRET is required and must be at least 32 characters. Refusing to boot."
+  );
+}
 
 function getBearerToken(req) {
   const auth = req.headers?.authorization || "";

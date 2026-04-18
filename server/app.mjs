@@ -21,8 +21,9 @@ import aiBusinessRoutes from "./routes/ai.business.mjs";
 import healthRoutes from "./routes/health.mjs";
 
 // ✅ OPTIONAL AUTH (FIXES authMiddleware error)
-import { optionalAuth } from "./middleware/auth.mjs";
+import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
 import { requireAdult } from "./middleware/requireAdult.mjs";
+import adminRoutes from "./routes/admin.mjs";
 
 // ----------------------------
 // APP INIT
@@ -53,7 +54,13 @@ const aiLimiter = rateLimit({
 
 app.use("/api/ai", aiLimiter);
 
-
+// ===== ADMIN RATE LIMIT (stricter) =====
+const adminLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Serve static frontend assets (public/ai-chat.html, etc.)
 app.use(express.static(path.join(__dirname, "..", "public")));
@@ -73,6 +80,9 @@ app.use("/api/ai/business", aiBusinessRoutes);
 
 // Auth routes (mount before AI routes so /api/auth/* works)
 app.use("/api/auth", authRoutes);
+
+// Admin routes (strict: limiter -> requireAuth -> requireAdmin). Only admin.mjs is mounted.
+app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
 
 // AI routes (aiLimiter already mounted above on /api/ai before this handler)
 app.use("/api/ai", optionalAuth, aiRoutes);
