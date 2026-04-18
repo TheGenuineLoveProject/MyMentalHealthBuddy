@@ -1,0 +1,94 @@
+set -e
+
+echo "===== STEP 0: BACKUP ====="
+mkdir -p .backup_admin_security_mount
+cp -f server/app.mjs .backup_admin_security_mount/app.mjs.bak
+
+echo
+echo "===== STEP 1: VERIFY FILE EXISTS ====="
+ls -l server/routes/admin-security.mjs
+
+echo
+echo "===== STEP 2: PATCH server/app.mjs ADDITIVELY ====="
+node <<'NODE'
+const fs = require('fs');
+const file = 'server/app.mjs';
+let s = fs.readFileSync(file, 'utf8');
+
+if (!s.includes('import adminSecurityRoutes from "./routes/admin-security.mjs";')) {
+  const anchor = 'import adminPublishingRoutes from "./routes/admin-publishing.mjs";';
+  if (!s.includes(anchor)) {
+    throw new Error('Anchor import not found: adminPublishingRoutes');
+  }
+  s = s.replace(
+    anchor,
+    anchor + '\nimport adminSecurityRoutes from "./routes/admin-security.mjs";'
+  );
+}
+
+if (!s.includes('app.use("/api/admin/security"')) {
+  const mountAnchor = 'app.use("/api/admin/publishing", adminLimiter, requireAuth, requireAdmin, adminPublishingRoutes);';
+  if (!s.includes(mountAnchor)) {
+    throw new Error('Mount anchor not found: admin publishing mount');
+  }
+
+  const block = `
+app.use("/api/admin/security", adminLimiter, requireAuth, requireAdmin, adminSecurityRoutes);
+`;
+
+  s = s.replace(mountAnchor, mountAnchor + '\n' + block);
+}
+
+fs.writeFileSync(file, s);
+console.log('OK: server/app.mjs patched for admin-security mount');
+NODE
+
+echo
+echo "===== STEP 3: SYNTAX CHECK ====="
+node --check server/app.mjs
+node --check server/routes/admin-security.mjs
+
+echo
+echo "===== STEP 4: CLEAN RESTART ====="
+pkill -f "node server/app.mjs" || true
+pkill -f "npm run dev" || true
+sleep 2
+node server/app.mjs >/tmp/mmhb-admin-security-mount.log 2>&1 &
+sleep 4
+
+echo
+echo "===== STEP 5: HEALTH CHECK ====="
+curl -s http://localhost:5000/api/health
+echo
+
+echo
+echo "===== STEP 6: VERIFY ADMIN-SECURITY IS GATED ====="
+curl -s -o /dev/null -w "GET /api/admin/security/overview -> %{http_code}\n" \
+  http://localhost:5000/api/admin/security/overview
+
+curl -s -o /dev/null -w "GET /api/admin/security/rate-limits -> %{http_code}\n" \
+  http://localhost:5000/api/admin/security/rate-limits
+
+echo
+echo "===== STEP 7: SHOW LOGS ====="
+tail -n 100 /tmp/mmhb-admin-security-mount.log || true
+
+echo
+echo "===== STEP 8: WRITE REPORT ====="
+mkdir -p reports
+{
+  echo "ADMIN-SECURITY SAFE MOUNT REPORT"
+  echo
+  echo "[HEALTH]"
+  curl -s http://localhost:5000/api/health || true
+  echo
+  echo "[UNAUTH OVERVIEW]"
+  curl -s -i http://localhost:5000/api/admin/security/overview || true
+  echo
+  echo "[UNAUTH RATE LIMITS]"
+  curl -s -i http://localhost:5000/api/admin/security/rate-limits || true
+} > reports/admin-security-mount-report.txt
+
+echo "WROTE reports/admin-security-mount-report.txt"
+echo
+echo "===== DONE ====="
