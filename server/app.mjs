@@ -10,12 +10,6 @@ import express from "express";
 import cors from "cors";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import rateLimit from "express-rate-limit";
-
-const limiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 30
-});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,6 +35,31 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+// ===== SECURITY LAYER =====
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import cookieParser from "cookie-parser";
+
+// basic security headers
+app.use(helmet());
+
+// cookies (for future session use)
+app.use(cookieParser());
+
+// ===== RATE LIMIT (AI ROUTES ONLY) =====
+const aiLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// apply limiter ONLY to AI routes
+app.use("/api/ai", aiLimiter);
+
+
+
 // Serve static frontend assets (public/ai-chat.html, etc.)
 app.use(express.static(path.join(__dirname, "..", "public")));
 
@@ -57,10 +76,11 @@ app.use("/api/ai/healing", requireAdult, aiHealingRoutes);
 // Business engine (staff/admin only; admin sub-routes self-gate)
 app.use("/api/ai/business", aiBusinessRoutes);
 
-// AI routes
-app.use("/api/ai", optionalAuth, aiRoutes);
+// Auth routes (mount before AI routes so /api/auth/* works)
+app.use("/api/auth", authRoutes);
 
-app.use("/api/ai", limiter);
+// AI routes (aiLimiter already mounted above on /api/ai before this handler)
+app.use("/api/ai", optionalAuth, aiRoutes);
 
 // ----------------------------
 // ROOT
@@ -81,6 +101,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
-app.use("/api/auth", authRoutes);
-
-app.use("/api/ai", aiRoutes);

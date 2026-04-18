@@ -7,15 +7,14 @@ import { signUserToken, requireAuth } from "../middleware/auth.mjs";
 const router = express.Router();
 
 async function ensureUsersTable() {
-  await db.execute(sql`
-    CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
-      email TEXT UNIQUE NOT NULL,
-      password_hash TEXT NOT NULL,
-      role TEXT NOT NULL DEFAULT 'user',
-      created_at TIMESTAMP NOT NULL DEFAULT NOW()
-    )
-  `);
+  // users table is managed by Drizzle schema (uuid id, name NOT NULL, etc.)
+  // No-op here to avoid schema collision with the canonical table.
+  return;
+}
+
+function deriveNameFromEmail(email) {
+  const local = String(email || "").split("@")[0] || "user";
+  return local.slice(0, 64) || "user";
 }
 
 router.post("/register", async (req, res) => {
@@ -45,10 +44,11 @@ router.post("/register", async (req, res) => {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
+    const name = deriveNameFromEmail(email);
 
     const created = await db.execute(sql`
-      INSERT INTO users (email, password_hash, role)
-      VALUES (${email}, ${passwordHash}, 'user')
+      INSERT INTO users (email, password_hash, name, role)
+      VALUES (${email}, ${passwordHash}, ${name}, 'user')
       RETURNING id, email, role
     `);
 

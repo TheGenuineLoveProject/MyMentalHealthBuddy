@@ -57,3 +57,17 @@ export function requireAdmin(req, res, next) {
   }
   return next();
 }
+
+export function requireStaff(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({ error: "Authentication required" });
+  }
+  const role = req.user.role;
+  if (role !== "admin" && role !== "staff") {
+    return res.status(403).json({ error: "Staff access required" });
+  }
+  return next();
+}
+
+// Backward-compat alias used by older routes (business, therapy, reflection, gamification, etc.)
+export const authGuard = requireAuth;

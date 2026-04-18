@@ -144,27 +144,14 @@ router.post("/chat", optionalAuth, async (req, res) => {
     }
 
     const guarded = safetyGuardInput(message);
-    if (guarded?.blocked) {
-      // Crisis hits short-circuit with the canonical 988/741741 response
-      if (guarded.crisis) {
-        return res.json({
-          isCrisis: true,
-          reply: guarded.response?.reply || CRISIS_RESPONSE.reply,
-          resources: guarded.response?.resources || CRISIS_RESPONSE.resources,
-          signals: ["safety_guard_crisis"],
-          action: "escalate_immediately"
-        });
-      }
-      // Non-crisis blocked pattern (e.g. self-harm instructions, diagnosis requests)
+    if (!guarded?.allowed) {
       return res.status(400).json({
         blocked: true,
-        reply:
-          guarded.response?.reply ||
-          "I can’t help with that, but I can support you with safer options. Want to try grounding or naming what’s going on?"
+        reply: "I’m here to support you, but I couldn’t process that safely. Could you rephrase it?"
       });
     }
 
-    const cleanText = guarded.cleanText || message;
+    const cleanText = guarded.text || message;
 
     if (detectCrisis(cleanText)) {
       return res.json({
