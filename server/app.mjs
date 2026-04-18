@@ -3,10 +3,12 @@ import cors from "cors";
 
 // ✅ ROUTES (FIXES aiRoutes error)
 import aiRoutes from "./routes/ai.mjs";
+import aiHealingRoutes from "./routes/ai.healing.mjs";
 import healthRoutes from "./routes/health.mjs";
 
 // ✅ OPTIONAL AUTH (FIXES authMiddleware error)
 import { optionalAuth } from "./middleware/auth.mjs";
+import { requireAdult } from "./middleware/requireAdult.mjs";
 
 // ----------------------------
 // APP INIT
@@ -25,6 +27,9 @@ app.use(express.json());
 
 // Health check (must work first)
 app.use("/api/health", healthRoutes);
+
+// Healing engine (gated by age verification; admin sub-routes self-gate)
+app.use("/api/ai/healing", requireAdult, aiHealingRoutes);
 
 // AI routes
 app.use("/api/ai", optionalAuth, aiRoutes);
