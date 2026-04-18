@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyMentalHealthBuddy — AI Chat</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --border: #334155;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #7c3aed;
+      --accent-2: #8b5cf6;
+      --danger: #dc2626;
+      --ok: #16a34a;
+      --user: #2563eb;
+      --assistant: #374151;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 960px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      gap: 16px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .brand p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #64748b;
+    }
+
+    .dot.ok { background: var(--ok); }
+    .dot.bad { background: var(--danger); }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      min-height: 72vh;
+      overflow: hidden;
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 14px 14px 0 14px;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      background: #0f172a;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      border-color: var(--accent-2);
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+
+    .msg {
+      max-width: 82%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border: 1px solid transparent;
+    }
+
+    .msg.user {
+      align-self: flex-end;
+      background: var(--user);
+      color: white;
+      border-bottom-right-radius: 6px;
+    }
+
+    .msg.assistant {
+      align-self: flex-start;
+      background: var(--assistant);
+      color: var(--text);
+      border: 1px solid #475569;
+      border-bottom-left-radius: 6px;
+    }
+
+    .msg.system {
+      align-self: center;
+      max-width: 92%;
+      background: #3f1d1d;
+      border: 1px solid #7f1d1d;
+      color: #fecaca;
+      text-align: left;
+    }
+
+    .composer {
+      border-top: 1px solid var(--border);
+      padding: 14px;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .composer-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    textarea {
+      flex: 1;
+      min-height: 56px;
+      max-height: 180px;
+      resize: vertical;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      padding: 14px;
+      font: inherit;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .send {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font-weight: 600;
+    }
+
+    .clear {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .helper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .typing {
+      font-style: italic;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+
+    @media (max-width: 768px) {
+      .app {
+        padding: 12px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .composer-row {
+        flex-direction: column;
+      }
+
+      .buttons {
+        width: 100%;
+      }
+
+      .buttons button {
+        flex: 1;
+      }
+
+      .msg {
+        max-width: 92%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <h1>MyMentalHealthBuddy — AI Chat</h1>
+        <p>TheGenuineLoveProject • supportive chat • guest-safe memory</p>
+      </div>
+      <div class="status">
+        <span id="statusDot" class="dot"></span>
+        <span id="statusText">Checking server…</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="chips">
+        <button class="chip" data-prompt="I feel overwhelmed">I feel overwhelmed</button>
+        <button class="chip" data-prompt="I feel anxious today">I feel anxious today</button>
+        <button class="chip" data-prompt="I feel sad and empty">I feel sad and empty</button>
+        <button class="chip" data-prompt="I feel frustrated">I feel frustrated</button>
+        <button class="chip" data-prompt="I want to talk about stress">Talk about stress</button>
+      </div>
+
+      <div id="messages" class="messages"></div>
+
+      <div class="composer">
+        <div class="composer-row">
+          <textarea
+            id="messageInput"
+            placeholder="Type what’s going on…"
+          ></textarea>
+          <div class="buttons">
+            <button id="clearBtn" class="clear" type="button">Clear</button>
+            <button id="sendBtn" class="send" type="button">Send</button>
+          </div>
+        </div>
+        <div class="helper">
+          <span id="typing" class="typing"></span>
+          <span>Ends with: “Take what serves you. You know yourself best.”</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const messagesEl = document.getElementById("messages");
+    const inputEl = document.getElementById("messageInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const typingEl = document.getElementById("typing");
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
+
+    const GUEST_KEY = "mmhb_guest_id_v1";
+
+    function getGuestId() {
+      let id = localStorage.getItem(GUEST_KEY);
+      if (!id) {
+        id = "guest_" + Math.random().toString(36).slice(2) + "_" + Date.now();
+        localStorage.setItem(GUEST_KEY, id);
+      }
+      return id;
+    }
+
+    const guestId = getGuestId();
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function addMessage(role, text) {
+      const div = document.createElement("div");
+      div.className = "msg " + role;
+      div.innerHTML = escapeHtml(text);
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function setTyping(text = "") {
+      typingEl.textContent = text;
+    }
+
+    function setStatus(ok, text) {
+      statusDot.className = "dot " + (ok ? "ok" : "bad");
+      statusText.textContent = text;
+    }
+
+    async function checkHealth() {
+      try {
+        const res = await fetch("/api/health");
+        const data = await res.json();
+        if (res.ok && data.status === "healthy") {
+          setStatus(true, "Server healthy");
+        } else {
+          setStatus(false, "Server not healthy");
+        }
+      } catch {
+        setStatus(false, "Server offline");
+      }
+    }
+
+    async function loadHistory() {
+      try {
+        const res = await fetch("/api/ai/history", {
+          headers: {
+            "x-guest-id": guestId
+          }
+        });
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+        const messages = data.messages || [];
+
+        if (messages.length === 0) {
+          addMessage(
+            "assistant",
+            "Hello! It’s nice to see you here. How are you feeling today?"
+          );
+          return;
+        }
+
+        messagesEl.innerHTML = "";
+        for (const msg of messages) {
+          addMessage(msg.role === "user" ? "user" : "assistant", msg.content || "");
+        }
+      } catch {
+        addMessage(
+          "assistant",
+          "Hello! It’s nice to see you here. How are you feeling today?"
+        );
+      }
+    }
+
+    async function sendMessage(prefill = null) {
+      const text = prefill ?? inputEl.value.trim();
+      if (!text) return;
+
+      if (!prefill) {
+        inputEl.value = "";
+      }
+
+      addMessage("user", text);
+      setTyping("Thinking…");
+      sendBtn.disabled = true;
+      clearBtn.disabled = true;
+
+      try {
+        const res = await fetch("/api/ai/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-guest-id": guestId
+          },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await res.json();
+
+        if (data.reply) {
+          addMessage(data.isCrisis || data.type === "crisis" ? "system" : "assistant", data.reply);
+        } else if (data.response) {
+          addMessage("assistant", data.response);
+        } else if (data.error) {
+          addMessage("system", data.error);
+        } else {
+          addMessage("system", "No response returned.");
+        }
+      } catch (err) {
+        addMessage("system", "Network error. Please try again.");
+      } finally {
+        setTyping("");
+        sendBtn.disabled = false;
+        clearBtn.disabled = false;
+        inputEl.focus();
+      }
+    }
+
+    async function clearHistory() {
+      try {
+        await fetch("/api/ai/history", {
+          method: "DELETE",
+          headers: {
+            "x-guest-id": guestId
+          }
+        });
+      } catch {}
+
+      messagesEl.innerHTML = "";
+      addMessage(
+        "assistant",
+        "Conversation cleared. Hello again — how are you feeling today?"
+      );
+    }
+
+    sendBtn.addEventListener("click", () => sendMessage());
+
+    clearBtn.addEventListener("click", clearHistory);
+
+    inputEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    document.querySelectorAll(".chip").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        sendMessage(btn.dataset.prompt || "");
+      });
+    });
+
+    checkHealth();
+    loadHistory();
+  </script>
+</body>
+</html>

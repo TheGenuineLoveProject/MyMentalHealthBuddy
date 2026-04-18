@@ -1,13 +1,21 @@
-import { Router } from "express";
-import { sql } from "drizzle-orm";
-import db from "../db/client.mjs";
-import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
-import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
-import { increment, getSummary } from "../utils/metrics.mjs";
-import { detect as detectCrisisUnified } from "../engine/crisisDetection.mjs";
+import { Router } from "express"
+import { sql } from "drizzle-orm"
+import db from "../db/client.mjs"
 
-const router = Router();
+import { optionalAuth } from "../middleware/auth.mjs"
+import { chatCompletion, isConfigured } from "../utils/aiClient.mjs"
+import { increment, getSummary } from "../utils/metrics.mjs"
 
+import { safetyGuardInput } from "../ai/safety/guard.mjs"
+import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs"
+import { classifyCrisis } from "../ai/crisisClassifier.mjs"
+import { assessRisk } from "../lib/promptEngine.mjs"
+
+const router = Router()
+
+// =========================
+// SYSTEM PROMPT
+// =========================
 const SYSTEM_PROMPT = `
 You are a gentle, supportive mental health companion.
 - Validate feelings
@@ -17,124 +25,151 @@ You are a gentle, supportive mental health companion.
 - If crisis → provide help resources
 Always end with:
 "Take what serves you. You know yourself best."
-`;
+`
 
-const FALLBACK_BRANCHES = [
-  {
-    name: "overwhelmed",
-    keywords: ["overwhelmed","too much","can't cope","cant cope","drowning","swamped"],
-    reply: "It sounds like a lot is landing on you at once. When everything feels stacked up, even one slow breath can create a small pocket of space. What is the single heaviest piece right now?"
-  },
-  {
-    name: "anxious",
-    keywords: ["anxious","anxiety","panic","panicking","worried","nervous","on edge"],
-    reply: "Anxiety can make the body feel like it is bracing for something. You might try naming five things you can see around you — that often helps the nervous system soften a little. What feels most uncertain right now?"
-  },
-  {
-    name: "sad",
-    keywords: ["sad","hopeless","empty","numb","depressed","down","blue"],
-    reply: "I hear the heaviness in what you shared. Sadness deserves to be witnessed, not rushed. Is there anything small that has felt even a little kind to you today?"
-  },
-  {
-    name: "angry",
-    keywords: ["angry","furious","rage","mad","frustrated","irritated","resentful"],
-    reply: "Anger is often a signal that something important to you was crossed. You are allowed to feel it without acting on it. What boundary or value do you think this is pointing toward?"
-  },
-  {
-    name: "lonely",
-    keywords: ["lonely","alone","isolated","no one","nobody","disconnected"],
-    reply: "Loneliness can feel like a quiet ache, even when others are around. Being seen — even by yourself, even right now — counts. Who or what has felt safest to you recently?"
-  },
-  {
-    name: "tired",
-    keywords: ["tired","exhausted","burned out","burnout","drained","no energy"],
-    reply: "Burnout often shows up when you have been carrying more than your share for too long. Rest is not a reward you have to earn. What is one thing you could set down today, even briefly?"
-  },
-  {
-    name: "generic",
-    keywords: [],
-    reply: "I am here with you. Whatever you are carrying right now is welcome in this space. Would you like to tell me a little more about what is going on?"
-  }
-];
-
-// In-memory guest history keyed by x-guest-id header.
-// Authed users persist to DB; guests get an ephemeral, per-process buffer
-// (cleared on server restart, no PII storage).
-const guestHistory = new Map(); // guestId -> [{role, content}]
-const GUEST_HISTORY_MAX = 20;
-const GUEST_BUCKETS_MAX = 5000;
-
-function getGuestIdFromReq(req) {
-  const raw = req.headers?.["x-guest-id"];
-  if (!raw || typeof raw !== "string") return null;
-  const trimmed = raw.trim();
-  if (!trimmed || trimmed.length > 100) return null;
-  return trimmed;
-}
-
-function pushGuestMessage(guestId, role, content) {
-  if (!guestId) return;
-  if (!guestHistory.has(guestId)) {
-    if (guestHistory.size >= GUEST_BUCKETS_MAX) {
-      const firstKey = guestHistory.keys().next().value;
-      guestHistory.delete(firstKey);
-    }
-    guestHistory.set(guestId, []);
-  }
-  const arr = guestHistory.get(guestId);
-  arr.push({ role, content });
-  if (arr.length > GUEST_HISTORY_MAX) arr.splice(0, arr.length - GUEST_HISTORY_MAX);
-}
-
+// =========================
+// FALLBACK THERAPY ENGINE (CBT/DBT)
+// =========================
 function buildSupportiveReply(text = "") {
-  const t = (text || "").toLowerCase();
-  for (const branch of FALLBACK_BRANCHES) {
-    if (branch.keywords.length === 0) continue;
-    if (branch.keywords.some(k => t.includes(k))) {
-      return { reply: `${branch.reply}\n\nTake what serves you. You know yourself best.`, branch: branch.name };
-    }
+  const t = text.toLowerCase()
+
+  if (t.includes("overwhelmed") || t.includes("stressed")) {
+    return `It sounds like a lot is landing on you at once.
+
+Let’s slow this down together:
+• What feels like the heaviest part right now?
+
+Try this:
+Take a slow breath in for 4… hold… and out for 6.
+
+You don’t need to solve everything — just one small step.
+
+Take what serves you. You know yourself best.`
   }
-  const generic = FALLBACK_BRANCHES[FALLBACK_BRANCHES.length - 1];
-  return { reply: `${generic.reply}\n\nTake what serves you. You know yourself best.`, branch: generic.name };
+
+  if (t.includes("anxious") || t.includes("panic")) {
+    return `Anxiety can make everything feel urgent.
+
+Let’s ground your body:
+• Look around and name 5 things you can see
+• Feel your feet on the ground
+
+You're safe in this moment.
+
+Take what serves you. You know yourself best.`
+  }
+
+  if (t.includes("sad") || t.includes("empty")) {
+    return `I hear the heaviness in what you're sharing.
+
+You don’t have to rush out of this feeling.
+
+• When did it start?
+• What has helped even a little before?
+
+I'm here with you.
+
+Take what serves you. You know yourself best.`
+  }
+
+  if (t.includes("angry") || t.includes("frustrated")) {
+    return `Anger often points to something important.
+
+Before reacting:
+• Name what boundary may have been crossed
+
+Let your body settle first — then decide your next step.
+
+Take what serves you. You know yourself best.`
+  }
+
+  return `I'm here with you.
+
+Tell me a little more about what’s going on.
+
+Take what serves you. You know yourself best.`
 }
 
+// =========================
+// IN-MEMORY GUEST HISTORY
+// =========================
+const guestHistory = new Map()
+const MAX_HISTORY = 10
+
+function getGuestId(req) {
+  const id = req.headers["x-guest-id"]
+  return typeof id === "string" ? id : null
+}
+
+function pushGuestMessage(id, role, content) {
+  if (!id) return
+  const arr = guestHistory.get(id) || []
+  arr.push({ role, content })
+  if (arr.length > MAX_HISTORY) arr.shift()
+  guestHistory.set(id, arr)
+}
+
+// =========================
+// MAIN CHAT ROUTE
+// =========================
 router.post("/chat", optionalAuth, async (req, res) => {
   try {
-    const userId = req.dbUserId || null;
-    const guestId = userId ? null : getGuestIdFromReq(req);
-    const { message } = req.body;
-
-    if (!message) {
-      return res.status(400).json({ error: "Missing message" });
+    const { message } = req.body
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({ error: "Message required" })
     }
 
-    // 🚨 unified safety pipeline FIRST (crisis + blocked-pattern guard)
-    const safety = await detectCrisisUnified(message);
-    if (safety.crisis) {
-      increment("ai_chat_message_count", { plan: userId ? "user" : "guest" });
-      increment("ai_crisis_detected", { plan: userId ? "user" : "guest" });
+    // =========================
+    // 1. INPUT SAFETY
+    // =========================
+    const guarded = safetyGuardInput(message)
+    if (!guarded.allowed) {
       return res.json({
-        isCrisis: true,
-        reply: safety.response.reply,
-        resources: safety.response.resources,
-        escalate988: safety.escalate988,
-        signals: safety.signals,
-        action: "escalate_immediately",
-      });
-    }
-    if (safety.blocked) {
-      increment("ai_chat_message_count", { plan: userId ? "user" : "guest" });
-      increment("ai_chat_blocked", { plan: userId ? "user" : "guest" });
-      return res.json({
-        blocked: true,
-        reply: safety.response.reply,
-        resources: safety.response.resources,
-        signals: safety.signals,
-      });
+        reply: "I’m here to support you — could you rephrase that so I can better help?"
+      })
     }
 
-    // history: authed users from DB, guests from in-memory map (last 10)
-    let history = [];
+    const cleanText = guarded.text
+
+    // =========================
+    // 2. CRISIS KEYWORD CHECK
+    // =========================
+    if (detectCrisis(cleanText)) {
+      return res.json({
+        type: "crisis",
+        reply: CRISIS_RESPONSE
+      })
+    }
+
+    // =========================
+    // 3. AI CLASSIFIER
+    // =========================
+    let score = 0
+    try {
+      const result = await classifyCrisis(global.openai, cleanText)
+      score = result?.score || 0
+    } catch {}
+
+    // =========================
+    // 4. RISK ENGINE
+    // =========================
+    const risk = assessRisk({ text: cleanText, score })
+
+    if (risk.level === "high") {
+      return res.json({
+        type: "crisis",
+        reply: CRISIS_RESPONSE
+      })
+    }
+
+    // =========================
+    // 5. HISTORY
+    // =========================
+    const userId = req.dbUserId || null
+    const guestId = getGuestId(req)
+
+    let history = []
+
     if (userId) {
       const result = await db.execute(sql`
         SELECT role, content
@@ -142,139 +177,75 @@ router.post("/chat", optionalAuth, async (req, res) => {
         WHERE user_id = ${userId}
         ORDER BY created_at DESC
         LIMIT 10
-      `);
-      history = (result.rows || []).reverse();
+      `)
+      history = (result.rows || []).reverse()
     } else if (guestId) {
-      const buf = guestHistory.get(guestId) || [];
-      history = buf.slice(-10);
+      history = guestHistory.get(guestId) || []
     }
 
     const messages = [
       { role: "system", content: SYSTEM_PROMPT },
       ...history,
-      { role: "user", content: message }
-    ];
+      { role: "user", content: cleanText }
+    ]
 
-    let reply;
-    let source = "openai";
-    let fallbackBranch = null;
+    // =========================
+    // 6. AI OR FALLBACK
+    // =========================
+    let reply
 
     if (isConfigured()) {
-      const result = await chatCompletion({
-        messages,
-        temperature: 0.7,
-        maxTokens: 300
-      });
+      try {
+        const result = await chatCompletion({
+          messages,
+          temperature: 0.7,
+          maxTokens: 300
+        })
 
-      if (result.success) {
-        reply = result.content;
-      } else {
-        const fb = buildSupportiveReply(message);
-        reply = fb.reply;
-        source = "fallback_error";
-        fallbackBranch = fb.branch;
+        reply = result?.content || buildSupportiveReply(cleanText)
+      } catch {
+        reply = buildSupportiveReply(cleanText)
       }
     } else {
-      const fb = buildSupportiveReply(message);
-      reply = fb.reply;
-      source = "fallback_offline";
-      fallbackBranch = fb.branch;
+      reply = buildSupportiveReply(cleanText)
     }
 
-    // 💾 persist ONLY if user exists; guests get ephemeral in-memory buffer
+    // =========================
+    // 7. SAVE HISTORY
+    // =========================
     if (userId) {
       await db.execute(sql`
         INSERT INTO ai_messages (user_id, role, content)
-        VALUES (${userId}, 'user', ${message})
-      `);
+        VALUES (${userId}, 'user', ${cleanText})
+      `)
 
       await db.execute(sql`
         INSERT INTO ai_messages (user_id, role, content)
         VALUES (${userId}, 'assistant', ${reply})
-      `);
+      `)
     } else if (guestId) {
-      pushGuestMessage(guestId, "user", message);
-      pushGuestMessage(guestId, "assistant", reply);
+      pushGuestMessage(guestId, "user", cleanText)
+      pushGuestMessage(guestId, "assistant", reply)
     }
 
-    increment("ai_chat_message_count", { plan: userId ? "user" : "guest" });
-    increment("ai_chat_reply_source", { plan: source });
-    if (fallbackBranch) {
-      increment("ai_fallback_branch", { plan: fallbackBranch });
-    }
+    increment("ai_chat_message_count")
 
-    res.json({ reply });
+    return res.json({ reply })
 
   } catch (err) {
-    console.error("AI chat error:", err);
-    res.status(500).json({ error: "AI chat failed" });
+    console.error("AI chat error:", err)
+    return res.status(500).json({
+      reply: "Something went wrong, but I’m still here with you."
+    })
   }
-});
+})
 
-// Returns conversation history. Authed users get DB-persisted rows;
-// guests with x-guest-id get the in-memory buffer for this process.
-router.get("/history", optionalAuth, async (req, res) => {
-  try {
-    const userId = req.dbUserId || null;
-    const guestId = userId ? null : getGuestIdFromReq(req);
+// =========================
+// INSIGHTS
+// =========================
+router.get("/insights", async (req, res) => {
+  const summary = getSummary()
+  return res.json({ ok: true, summary })
+})
 
-    if (userId) {
-      const result = await db.execute(sql`
-        SELECT role, content
-        FROM ai_messages
-        WHERE user_id = ${userId}
-        ORDER BY created_at ASC
-        LIMIT 50
-      `);
-      return res.json({ ok: true, messages: result.rows || [] });
-    }
-    if (guestId) {
-      return res.json({ ok: true, messages: guestHistory.get(guestId) || [] });
-    }
-    return res.json({ ok: true, messages: [] });
-  } catch (err) {
-    console.error("AI history error:", err);
-    res.status(500).json({ error: "Failed to load history" });
-  }
-});
-
-// Clears conversation history. Authed users wipe their DB rows;
-// guests with x-guest-id wipe their in-memory bucket.
-router.delete("/history", optionalAuth, async (req, res) => {
-  try {
-    const userId = req.dbUserId || null;
-    const guestId = userId ? null : getGuestIdFromReq(req);
-
-    if (userId) {
-      await db.execute(sql`DELETE FROM ai_messages WHERE user_id = ${userId}`);
-      return res.json({ ok: true, cleared: "user" });
-    }
-    if (guestId) {
-      guestHistory.delete(guestId);
-      return res.json({ ok: true, cleared: "guest" });
-    }
-    return res.json({ ok: true, cleared: "none" });
-  } catch (err) {
-    console.error("AI history delete error:", err);
-    res.status(500).json({ error: "Failed to clear history" });
-  }
-});
-
-// Admin-only self-tuning insights: see which fallback branches users hit,
-// how often the AI vs the offline/error fallback served them, and crisis volume.
-router.get("/insights", requireAuth, requireAdmin, (_req, res) => {
-  const summary = getSummary();
-  const all = summary.counters || {};
-  const insights = {
-    chatVolume: all.ai_chat_message_count || { total: 0, byPlan: {} },
-    replySource: all.ai_chat_reply_source || { total: 0, byPlan: {} },
-    fallbackBranchHits: all.ai_fallback_branch || { total: 0, byPlan: {} },
-    crisisDetected: all.ai_crisis_detected || { total: 0, byPlan: {} },
-    knownBranches: FALLBACK_BRANCHES.map(b => b.name),
-    uptimeSeconds: summary.uptimeSeconds,
-    collectedSince: summary.collectedSince,
-  };
-  res.json({ ok: true, insights });
-});
-
-export default router;
+export default router

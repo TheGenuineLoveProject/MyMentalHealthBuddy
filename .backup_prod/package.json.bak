@@ -4,9 +4,8 @@
   "type": "module",
   "main": "server/app.mjs",
   "scripts": {
-    "start": "node server/app.mjs",
-    "dev": "node server/app.mjs",
-    "build": "echo build-complete"
+    "start": "killall node || true && nodemon server/app.mjs",
+    "dev": "node server/app.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
