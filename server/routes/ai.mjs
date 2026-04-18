@@ -4,6 +4,7 @@ import db from "../db/client.mjs";
 import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { increment, getSummary } from "../utils/metrics.mjs";
+import { detect as detectCrisisUnified } from "../engine/crisisDetection.mjs";
 
 const router = Router();
 
@@ -17,38 +18,6 @@ You are a gentle, supportive mental health companion.
 Always end with:
 "Take what serves you. You know yourself best."
 `;
-
-const CRISIS_KEYWORDS = [
-  "kill myself","suicide","end my life","want to die",
-  "hurt myself","self harm","cut myself"
-];
-
-function detectCrisis(text = "") {
-  const t = text.toLowerCase();
-  return CRISIS_KEYWORDS.some(k => t.includes(k));
-}
-
-const CRISIS_RESPONSE = {
-  isCrisis: true,
-  reply: `I hear you, and I’m really glad you said something. You don’t have to carry this alone.
-
-If you're in immediate danger, please call emergency services (911 in the U.S.).
-
-You can also reach out right now:
-- Call or text 988 (Suicide & Crisis Lifeline)
-- Text HOME to 741741 (Crisis Text Line)
-
-If calling feels like too much, even texting can be a small first step.
-
-If you can, consider reaching out to someone you trust — a friend, family member, or someone safe.
-
-You matter. Your safety matters. And support is available right now.`,
-  resources: [
-    { name: "988 Lifeline", contact: "988", type: "phone" },
-    { name: "Crisis Text Line", contact: "741741", type: "text" }
-  ],
-  action: "escalate_immediately"
-};
 
 const FALLBACK_BRANCHES = [
   {
@@ -139,11 +108,29 @@ router.post("/chat", optionalAuth, async (req, res) => {
       return res.status(400).json({ error: "Missing message" });
     }
 
-    // 🚨 crisis handling FIRST
-    if (detectCrisis(message)) {
+    // 🚨 unified safety pipeline FIRST (crisis + blocked-pattern guard)
+    const safety = await detectCrisisUnified(message);
+    if (safety.crisis) {
       increment("ai_chat_message_count", { plan: userId ? "user" : "guest" });
       increment("ai_crisis_detected", { plan: userId ? "user" : "guest" });
-      return res.json(CRISIS_RESPONSE);
+      return res.json({
+        isCrisis: true,
+        reply: safety.response.reply,
+        resources: safety.response.resources,
+        escalate988: safety.escalate988,
+        signals: safety.signals,
+        action: "escalate_immediately",
+      });
+    }
+    if (safety.blocked) {
+      increment("ai_chat_message_count", { plan: userId ? "user" : "guest" });
+      increment("ai_chat_blocked", { plan: userId ? "user" : "guest" });
+      return res.json({
+        blocked: true,
+        reply: safety.response.reply,
+        resources: safety.response.resources,
+        signals: safety.signals,
+      });
     }
 
     // history: authed users from DB, guests from in-memory map (last 10)
