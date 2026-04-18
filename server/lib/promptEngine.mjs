@@ -1,6 +1,7 @@
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, existsSync, writeFileSync, renameSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { createHash } from "crypto";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const AI_ROOT = join(__dir, "..", "..", "ai");
@@ -118,4 +119,58 @@ export function getRegistryInfo() {
     healing:  { version: registries.healing.version,  promptIds: [...registries.healing.ids]  },
     business: { version: registries.business.version, promptIds: [...registries.business.ids] },
   };
+}
+
+const MAX_PROMPT_BYTES = 50_000;
+
+const ALLOWED_ENGINES = new Set(["healing", "business"]);
+
+function resolvePromptPath(engine, promptId) {
+  if (!ALLOWED_ENGINES.has(engine)) {
+    throw Object.assign(new Error(`Invalid engine: '${engine}'.`), { code: "invalid_engine" });
+  }
+  if (promptId === "_system") {
+    return join(AI_ROOT, engine, "system.md");
+  }
+  if (!VALID_PROMPT_ID.test(promptId) || promptId.includes("..") || promptId.includes("/") || promptId.includes("\\")) {
+    throw Object.assign(new Error(`Invalid promptId format: '${promptId}'.`), { code: "invalid_prompt_id" });
+  }
+  if (!registries[engine]?.ids.has(promptId)) {
+    throw Object.assign(new Error(`Prompt '${promptId}' not registered in '${engine}' engine.`), { code: "unregistered_prompt" });
+  }
+  return join(AI_ROOT, engine, "prompts", `${promptId}.md`);
+}
+
+export function readPromptSource(engine, promptId) {
+  const path = resolvePromptPath(engine, promptId);
+  if (!existsSync(path)) {
+    throw Object.assign(new Error(`Prompt file missing for '${promptId}'.`), { code: "missing_prompt_files" });
+  }
+  const content = readFileSync(path, "utf-8");
+  const sha256 = createHash("sha256").update(content).digest("hex");
+  return { engine, promptId, content, sha256, bytes: Buffer.byteLength(content, "utf-8"), path };
+}
+
+export function writePromptSource(engine, promptId, content) {
+  if (typeof content !== "string" || content.length === 0) {
+    throw Object.assign(new Error("Prompt content must be a non-empty string."), { code: "empty_content" });
+  }
+  const bytes = Buffer.byteLength(content, "utf-8");
+  if (bytes > MAX_PROMPT_BYTES) {
+    throw Object.assign(new Error(`Prompt content exceeds ${MAX_PROMPT_BYTES} bytes.`), { code: "content_too_large" });
+  }
+  const path = resolvePromptPath(engine, promptId);
+  let prevSha = null;
+  if (existsSync(path)) {
+    prevSha = createHash("sha256").update(readFileSync(path, "utf-8")).digest("hex");
+  }
+  const tmp = `${path}.tmp-${process.pid}-${Date.now()}`;
+  writeFileSync(tmp, content, "utf-8");
+  renameSync(tmp, path);
+  const newSha = createHash("sha256").update(content).digest("hex");
+  return { engine, promptId, prevSha, newSha, bytes, path };
+}
+
+export function listPromptIds(engine) {
+  return [...(registries[engine]?.ids ?? [])];
 }

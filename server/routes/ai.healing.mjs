@@ -1,19 +1,29 @@
 import { Router } from "express";
 import { z } from "zod";
+import { appendFileSync, existsSync, readFileSync, mkdirSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import { aiRateLimit } from "../middleware/rateLimit.mjs";
 import { promptShield } from "../middleware/promptshield.mjs";
 import { requireEngineAccess } from "../middleware/rbac.mjs";
+import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import {
   assessRisk,
   routePrompt,
   loadPromptModule,
   assertDataBoundary,
   getRegistryInfo,
+  readPromptSource,
+  writePromptSource,
+  listPromptIds,
 } from "../lib/promptEngine.mjs";
 import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
 
 const router = Router();
+
+const __dir = dirname(fileURLToPath(import.meta.url));
+const AUDIT_LOG_PATH = join(__dir, "..", "..", "ai", "healing", "_audit.log.jsonl");
 
 const BodySchema = z.object({
   userText:   z.string().min(1).max(4000),
@@ -22,6 +32,86 @@ const BodySchema = z.object({
 
 router.get("/registry", (_req, res) => {
   res.json(getRegistryInfo().healing);
+});
+
+const PromptIdParam = z.string().regex(/^(_system|[a-z]\d{2}_[a-z0-9_]+)$/);
+const PromptBodySchema = z.object({
+  content: z.string().min(1).refine(
+    (s) => Buffer.byteLength(s, "utf-8") <= 50_000,
+    { message: "Content exceeds 50,000 bytes (UTF-8)." }
+  ),
+  reason:  z.string().max(500).optional(),
+});
+
+function appendAudit(entry) {
+  try {
+    mkdirSync(dirname(AUDIT_LOG_PATH), { recursive: true });
+    appendFileSync(AUDIT_LOG_PATH, JSON.stringify(entry) + "\n", "utf-8");
+  } catch (err) {
+    logger.error("audit log write failed", { error: err.message });
+  }
+}
+
+router.get("/admin/prompts", requireAuth, requireAdmin, (_req, res) => {
+  res.json({ engine: "healing", promptIds: ["_system", ...listPromptIds("healing")] });
+});
+
+router.get("/admin/prompts/:id", requireAuth, requireAdmin, (req, res) => {
+  const idCheck = PromptIdParam.safeParse(req.params.id);
+  if (!idCheck.success) return res.status(400).json({ error: "invalid_prompt_id" });
+  try {
+    const data = readPromptSource("healing", idCheck.data);
+    res.json({ ...data, path: undefined });
+  } catch (err) {
+    const status = err.code === "missing_prompt_files" ? 404
+                 : err.code === "unregistered_prompt"  ? 404
+                 : err.code === "invalid_prompt_id"    ? 400
+                 : 500;
+    res.status(status).json({ error: err.code ?? "read_failed", message: err.message });
+  }
+});
+
+router.put("/admin/prompts/:id", requireAuth, requireAdmin, (req, res) => {
+  const idCheck = PromptIdParam.safeParse(req.params.id);
+  if (!idCheck.success) return res.status(400).json({ error: "invalid_prompt_id" });
+  const body = PromptBodySchema.safeParse(req.body);
+  if (!body.success) return res.status(400).json({ error: "invalid_body", details: body.error.issues });
+
+  try {
+    const result = writePromptSource("healing", idCheck.data, body.data.content);
+    const auditEntry = {
+      ts: new Date().toISOString(),
+      actor: req.dbUserId ?? req.user?.id ?? "unknown",
+      engine: "healing",
+      promptId: idCheck.data,
+      prevSha: result.prevSha,
+      newSha: result.newSha,
+      bytes: result.bytes,
+      reason: body.data.reason ?? null,
+    };
+    appendAudit(auditEntry);
+    logger.info("healing prompt hot-edited", { promptId: idCheck.data, actor: auditEntry.actor, newSha: result.newSha });
+    res.json({ ok: true, ...result, path: undefined });
+  } catch (err) {
+    const status = err.code === "content_too_large"   ? 413
+                 : err.code === "empty_content"       ? 400
+                 : err.code === "invalid_prompt_id"   ? 400
+                 : err.code === "unregistered_prompt" ? 404
+                 : 500;
+    res.status(status).json({ error: err.code ?? "write_failed", message: err.message });
+  }
+});
+
+router.get("/admin/audit", requireAuth, requireAdmin, (req, res) => {
+  const limit = Math.min(parseInt(req.query.limit, 10) || 50, 500);
+  if (!existsSync(AUDIT_LOG_PATH)) return res.json({ entries: [] });
+  try {
+    const lines = readFileSync(AUDIT_LOG_PATH, "utf-8").trim().split("\n").filter(Boolean);
+    const tail = lines.slice(-limit).map((l) => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    res.json({ entries: tail.reverse(), total: lines.length });
+  } catch (err) {
+    res.status(500).json({ error: "audit_read_failed", message: err.message });
+  }
 });
 
 router.post(
