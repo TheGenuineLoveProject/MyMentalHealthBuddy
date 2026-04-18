@@ -3,324 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyMentalHealthBuddy — AI Chat</title>
+  <title>AI Chat</title>
   <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --panel-2: #1f2937;
-      --border: #334155;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --accent: #7c3aed;
-      --accent-2: #8b5cf6;
-      --danger: #dc2626;
-      --ok: #16a34a;
-      --user: #2563eb;
-      --assistant: #374151;
-    }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    .app {
-      max-width: 960px;
-      margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      gap: 16px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      background: rgba(17, 24, 39, 0.85);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px 18px;
-      backdrop-filter: blur(10px);
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.2;
-    }
-
-    .brand p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: #64748b;
-    }
-
-    .dot.ok { background: var(--ok); }
-    .dot.bad { background: var(--danger); }
-
-    .panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: rgba(17, 24, 39, 0.92);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      min-height: 72vh;
-      overflow: hidden;
-    }
-
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding: 14px 14px 0 14px;
-    }
-
-    .chip {
-      border: 1px solid var(--border);
+      font-family: Inter, system-ui, sans-serif;
       background: #0f172a;
-      color: var(--text);
+      color: #e2e8f0;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    input, textarea, button {
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #0b1220;
+      color: #e2e8f0;
+      padding: 12px;
+      font-size: 14px;
+    }
+    input, textarea { width: 100%; }
+    textarea { min-height: 88px; resize: vertical; }
+    button {
+      cursor: pointer;
+      background: #2563eb;
+      border: none;
+      min-width: 120px;
+    }
+    button.secondary { background: #374151; }
+    .messages {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 280px;
+    }
+    .msg {
+      padding: 12px;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      line-height: 1.45;
+    }
+    .user { background: #1e293b; }
+    .assistant { background: #0b3b2e; }
+    .meta { color: #94a3b8; font-size: 12px; }
+    .status-ok { color: #22c55e; }
+    .status-bad { color: #ef4444; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: #1f2937;
+      border: 1px solid #334155;
       border-radius: 999px;
       padding: 8px 12px;
+      cursor: pointer;
       font-size: 13px;
-      cursor: pointer;
-    }
-
-    .chip:hover {
-      border-color: var(--accent-2);
-    }
-
-    .messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      scroll-behavior: smooth;
-    }
-
-    .msg {
-      max-width: 82%;
-      padding: 12px 14px;
-      border-radius: 16px;
-      line-height: 1.5;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      border: 1px solid transparent;
-    }
-
-    .msg.user {
-      align-self: flex-end;
-      background: var(--user);
-      color: white;
-      border-bottom-right-radius: 6px;
-    }
-
-    .msg.assistant {
-      align-self: flex-start;
-      background: var(--assistant);
-      color: var(--text);
-      border: 1px solid #475569;
-      border-bottom-left-radius: 6px;
-    }
-
-    .msg.system {
-      align-self: center;
-      max-width: 92%;
-      background: #3f1d1d;
-      border: 1px solid #7f1d1d;
-      color: #fecaca;
-      text-align: left;
-    }
-
-    .composer {
-      border-top: 1px solid var(--border);
-      padding: 14px;
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .composer-row {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-    }
-
-    textarea {
-      flex: 1;
-      min-height: 56px;
-      max-height: 180px;
-      resize: vertical;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: #0b1220;
-      color: var(--text);
-      padding: 14px;
-      font: inherit;
-      outline: none;
-    }
-
-    textarea:focus {
-      border-color: var(--accent-2);
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18);
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    button {
-      border: none;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font: inherit;
-      cursor: pointer;
-    }
-
-    .send {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
-      font-weight: 600;
-    }
-
-    .clear {
-      background: #1e293b;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .helper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .typing {
-      font-style: italic;
-      color: var(--muted);
-      padding: 0 4px;
-    }
-
-    @media (max-width: 768px) {
-      .app {
-        padding: 12px;
-      }
-
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .composer-row {
-        flex-direction: column;
-      }
-
-      .buttons {
-        width: 100%;
-      }
-
-      .buttons button {
-        flex: 1;
-      }
-
-      .msg {
-        max-width: 92%;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <div class="topbar">
-      <div class="brand">
-        <h1>MyMentalHealthBuddy — AI Chat</h1>
-        <p>TheGenuineLoveProject • supportive chat • guest-safe memory</p>
+  <div class="wrap">
+    <div class="card">
+      <h1>AI Chat</h1>
+      <div id="health" class="meta">Checking server…</div>
+    </div>
+
+    <div class="card">
+      <h3>Auth</h3>
+      <div class="row">
+        <div style="flex:1; min-width:260px;">
+          <input id="email" placeholder="email" />
+        </div>
+        <div style="flex:1; min-width:260px;">
+          <input id="password" type="password" placeholder="password" />
+        </div>
       </div>
-      <div class="status">
-        <span id="statusDot" class="dot"></span>
-        <span id="statusText">Checking server…</span>
+      <div class="row" style="margin-top:10px;">
+        <button onclick="register()">Register</button>
+        <button onclick="login()">Login</button>
+        <button class="secondary" onclick="logout()">Logout</button>
+      </div>
+      <div id="authStatus" class="meta" style="margin-top:10px;">Guest mode active</div>
+    </div>
+
+    <div class="card">
+      <h3>Starter prompts</h3>
+      <div class="chips">
+        <div class="chip" onclick="usePrompt('I feel overwhelmed')">I feel overwhelmed</div>
+        <div class="chip" onclick="usePrompt('I feel anxious')">I feel anxious</div>
+        <div class="chip" onclick="usePrompt('I feel sad')">I feel sad</div>
+        <div class="chip" onclick="usePrompt('I feel angry')">I feel angry</div>
       </div>
     </div>
 
-    <div class="panel">
-      <div class="chips">
-        <button class="chip" data-prompt="I feel overwhelmed">I feel overwhelmed</button>
-        <button class="chip" data-prompt="I feel anxious today">I feel anxious today</button>
-        <button class="chip" data-prompt="I feel sad and empty">I feel sad and empty</button>
-        <button class="chip" data-prompt="I feel frustrated">I feel frustrated</button>
-        <button class="chip" data-prompt="I want to talk about stress">Talk about stress</button>
-      </div>
-
+    <div class="card">
       <div id="messages" class="messages"></div>
+    </div>
 
-      <div class="composer">
-        <div class="composer-row">
-          <textarea
-            id="messageInput"
-            placeholder="Type what’s going on…"
-          ></textarea>
-          <div class="buttons">
-            <button id="clearBtn" class="clear" type="button">Clear</button>
-            <button id="sendBtn" class="send" type="button">Send</button>
-          </div>
-        </div>
-        <div class="helper">
-          <span id="typing" class="typing"></span>
-          <span>Ends with: “Take what serves you. You know yourself best.”</span>
-        </div>
+    <div class="card">
+      <textarea id="message" placeholder="Type what is going on..."></textarea>
+      <div class="row" style="margin-top:10px;">
+        <button onclick="sendMessage()">Send</button>
+        <button class="secondary" onclick="clearHistory()">Clear</button>
+      </div>
+      <div class="meta" style="margin-top:10px;">
+        Take what serves you. You know yourself best.
       </div>
     </div>
   </div>
 
   <script>
-    const messagesEl = document.getElementById("messages");
-    const inputEl = document.getElementById("messageInput");
-    const sendBtn = document.getElementById("sendBtn");
-    const clearBtn = document.getElementById("clearBtn");
-    const typingEl = document.getElementById("typing");
-    const statusDot = document.getElementById("statusDot");
-    const statusText = document.getElementById("statusText");
+    const API_URL = window.location.origin;
 
-    const GUEST_KEY = "mmhb_guest_id_v1";
-
-    function getGuestId() {
-      let id = localStorage.getItem(GUEST_KEY);
-      if (!id) {
-        id = "guest_" + Math.random().toString(36).slice(2) + "_" + Date.now();
-        localStorage.setItem(GUEST_KEY, id);
-      }
-      return id;
-    }
     function getGuestId() {
       let id = localStorage.getItem("guest_id");
       if (!id) {
@@ -329,186 +132,173 @@
       }
       return id;
     }
-    const guestId = getGuestId();
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    function getToken() {
+      return localStorage.getItem("auth_token") || "";
     }
 
-    function addMessage(role, text) {
-      const div = document.createElement("div");
-      div.className = "msg " + role;
-      div.innerHTML = escapeHtml(text);
-      messagesEl.appendChild(div);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+    function setToken(token) {
+      if (token) localStorage.setItem("auth_token", token);
+      else localStorage.removeItem("auth_token");
+      renderAuthStatus();
     }
 
-    function setTyping(text = "") {
-      typingEl.textContent = text;
+    function authHeaders() {
+      const headers = { "Content-Type": "application/json" };
+      const token = getToken();
+
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      } else {
+        headers["x-guest-id"] = getGuestId();
+      }
+
+      return headers;
     }
 
-    function setStatus(ok, text) {
-      statusDot.className = "dot " + (ok ? "ok" : "bad");
-      statusText.textContent = text;
+    function renderAuthStatus() {
+      const el = document.getElementById("authStatus");
+      if (getToken()) {
+        el.textContent = "Authenticated mode active";
+      } else {
+        el.textContent = `Guest mode active (${getGuestId()})`;
+      }
+    }
+
+    function renderMessages(messages) {
+      const wrap = document.getElementById("messages");
+      wrap.innerHTML = "";
+
+      if (!messages || !messages.length) {
+        wrap.innerHTML = `<div class="meta">No messages yet.</div>`;
+        return;
+      }
+
+      for (const msg of messages) {
+        const div = document.createElement("div");
+        div.className = `msg ${msg.role === "user" ? "user" : "assistant"}`;
+        div.textContent = msg.content;
+        wrap.appendChild(div);
+      }
+
+      wrap.scrollTop = wrap.scrollHeight;
     }
 
     async function checkHealth() {
+      const el = document.getElementById("health");
       try {
-        const res = await fetch("/api/health");
+        const res = await fetch(`${API_URL}/api/health`);
         const data = await res.json();
-        if (res.ok && data.status === "healthy") {
-          setStatus(true, "Server healthy");
-        } else {
-          setStatus(false, "Server not healthy");
-        }
-      } catch {
-        setStatus(false, "Server offline");
-      }
-    }
-
-    async function loadHistory() {
-      try {
-        const res = await fetch("/api/ai/history", {
-          headers: {
-            "x-guest-id": guestId
-          }
-        });
-
-        if (!res.ok) return;
-
-        const data = await res.json();
-        const messages = data.messages || [];
-
-        if (messages.length === 0) {
-          addMessage(
-            "assistant",
-            "Hello! It’s nice to see you here. How are you feeling today?"
-          );
-          return;
-        }
-
-        messagesEl.innerHTML = "";
-        for (const msg of messages) {
-          addMessage(msg.role === "user" ? "user" : "assistant", msg.content || "");
-        }
-      } catch {
-        addMessage(
-          "assistant",
-          "Hello! It’s nice to see you here. How are you feeling today?"
-        );
-      }
-    }
-
-    async function sendMessage(prefill = null) {
-      const text = prefill ?? inputEl.value.trim();
-      if (!text) return;
-
-      if (!prefill) {
-        inputEl.value = "";
-      }
-
-      addMessage("user", text);
-      setTyping("Thinking…");
-      sendBtn.disabled = true;
-      clearBtn.disabled = true;
-
-      try {
-        const res = await fetch("/api/ai/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-guest-id": guestId
-          },
-          body: JSON.stringify({ message: text })
-        });
-        const API_URL = window.location.origin;
-
-        async function sendMessage(message) {
-          const res = await fetch(`${API_URL}/api/ai/chat`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-guest-id": getGuestId()
-            },
-            body: JSON.stringify({ message })
-          });
-
-          return res.json();
-        }
-
-        const data = await res.json();
-
-        if (data.reply) {
-          addMessage(data.isCrisis || data.type === "crisis" ? "system" : "assistant", data.reply);
-        } else if (data.response) {
-          addMessage("assistant", data.response);
-        } else if (data.error) {
-          addMessage("system", data.error);
-        } else {
-          addMessage("system", "No response returned.");
-        }
+        el.innerHTML = `<span class="status-ok">Server healthy</span> • ${data.environment || "unknown"} • v${data.version || "?"}`;
       } catch (err) {
-        addMessage("system", "Network error. Please try again.");
-      } finally {
-        setTyping("");
-        sendBtn.disabled = false;
-        clearBtn.disabled = false;
-        inputEl.focus();
+        el.innerHTML = `<span class="status-bad">Server unavailable</span>`;
       }
     }
 
     async function loadHistory() {
-      const res = await fetch(`${API_URL}/api/ai/history`, {
-        headers: {
-          "x-guest-id": getGuestId()
-        }
+      try {
+        const res = await fetch(`${API_URL}/api/ai/history`, {
+          headers: getToken()
+            ? { "Authorization": `Bearer ${getToken()}` }
+            : { "x-guest-id": getGuestId() }
+        });
+        const data = await res.json();
+        renderMessages(data.messages || []);
+      } catch (err) {
+        renderMessages([]);
+      }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("message");
+      const message = input.value.trim();
+      if (!message) return;
+
+      const current = document.getElementById("messages");
+      const userDiv = document.createElement("div");
+      userDiv.className = "msg user";
+      userDiv.textContent = message;
+      current.appendChild(userDiv);
+
+      input.value = "";
+
+      const res = await fetch(`${API_URL}/api/ai/chat`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({ message })
       });
 
       const data = await res.json();
-      renderMessages(data.messages || []);
+
+      const aiDiv = document.createElement("div");
+      aiDiv.className = "msg assistant";
+      aiDiv.textContent = data.reply || data.error || "No response";
+      current.appendChild(aiDiv);
+      current.scrollTop = current.scrollHeight;
     }
 
     async function clearHistory() {
-      try {
-        await fetch("/api/ai/history", {
-          method: "DELETE",
-          headers: {
-            "x-guest-id": guestId
-          }
-        });
-      } catch {}
-
-      messagesEl.innerHTML = "";
-      addMessage(
-        "assistant",
-        "Conversation cleared. Hello again — how are you feeling today?"
-      );
+      await fetch(`${API_URL}/api/ai/history`, {
+        method: "DELETE",
+        headers: getToken()
+          ? { "Authorization": `Bearer ${getToken()}` }
+          : { "x-guest-id": getGuestId() }
+      });
+      await loadHistory();
     }
 
-    sendBtn.addEventListener("click", () => sendMessage());
+    function usePrompt(text) {
+      document.getElementById("message").value = text;
+    }
 
-    clearBtn.addEventListener("click", clearHistory);
+    async function register() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
 
-    inputEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-
-    document.querySelectorAll(".chip").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        sendMessage(btn.dataset.prompt || "");
+      const res = await fetch(`${API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
       });
-    });
 
-    checkHealth();
-    loadHistory();
+      const data = await res.json();
+      if (data.token) {
+        setToken(data.token);
+        await loadHistory();
+      } else {
+        alert(data.error || "Registration failed");
+      }
+    }
+
+    async function login() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+      if (data.token) {
+        setToken(data.token);
+        await loadHistory();
+      } else {
+        alert(data.error || "Login failed");
+      }
+    }
+
+    function logout() {
+      setToken("");
+      loadHistory();
+    }
+
+    window.onload = async () => {
+      renderAuthStatus();
+      await checkHealth();
+      await loadHistory();
+    };
   </script>
 </body>
 </html>

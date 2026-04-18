@@ -1,79 +1,59 @@
 import jwt from "jsonwebtoken";
-import { db } from "../db/client.mjs";
-import { eq } from "drizzle-orm";
-import { users } from "../db/schema.mjs";
-import { JWT_SECRET } from "../config/secrets.mjs";
 
-// Reads: Authorization: Bearer <token>
-function getToken(req) {
-  const auth = req.headers?.authorization;
-  if (!auth || typeof auth !== "string") return null;
+const JWT_SECRET = process.env.JWT_SECRET || "dev_jwt_secret_change_me";
+
+function getBearerToken(req) {
+  const auth = req.headers?.authorization || "";
   if (!auth.startsWith("Bearer ")) return null;
-  return auth.slice("Bearer ".length).trim() || null;
+  return auth.slice("Bearer ".length).trim();
 }
 
-export async function requireAuth(req, res, next) {
+export function signUserToken(user) {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      role: user.role || "user"
+    },
+    JWT_SECRET,
+    { expiresIn: "7d" }
+  );
+}
+
+export function optionalAuth(req, _res, next) {
   try {
-    const token = getToken(req);
-    if (!token) {
-      return res.status(401).json({ message: "Authentication required" });
-    }
-
-    const payload = jwt.verify(token, JWT_SECRET);
-
-    const user = await db.query.users.findFirst({
-      where: eq(users.id, payload.id),
-    });
-
-    if (!user) {
-      return res.status(401).json({ message: "User not found" });
-    }
-
-    req.user = user;
-    req.dbUserId = user.id;
+    const token = getBearerToken(req);
+    if (!token) return next();
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    req.dbUserId = decoded.id;
     return next();
-  } catch (err) {
-    return res.status(401).json({ message: "Invalid token" });
+  } catch {
+    return next();
+  }
+}
+
+export function requireAuth(req, res, next) {
+  try {
+    const token = getBearerToken(req);
+    if (!token) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    req.dbUserId = decoded.id;
+    return next();
+  } catch {
+    return res.status(401).json({ error: "Invalid token" });
   }
 }
 
 export function requireAdmin(req, res, next) {
-  // Must be used AFTER requireAuth
-  if (req.user?.role !== "admin") {
-    return res.status(403).json({ message: "Admin access required" });
+  if (!req.user) {
+    return res.status(401).json({ error: "Authentication required" });
+  }
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Admin access required" });
   }
   return next();
 }
-
-// Allows both admin and staff roles (for business engine + ops tooling)
-export function requireStaff(req, res, next) {
-  const role = req.user?.role;
-  if (role !== "admin" && role !== "staff") {
-    return res.status(403).json({ message: "Staff access required" });
-  }
-  return next();
-}
-
-export async function optionalAuth(req, _res, next) {
-  try {
-    const token = getToken(req);
-    if (!token) return next();
-
-    const payload = jwt.verify(token, JWT_SECRET);
-
-    const user = await db.query.users.findFirst({
-      where: eq(users.id, payload.id),
-    });
-
-    if (user) {
-      req.user = user;
-      req.dbUserId = user.id;
-    }
-  } catch (_) {
-    // intentionally ignore optional auth failures
-  }
-  return next();
-}
-
-// Back-compat aliases (so old imports don’t break)
-export { requireAuth as auth, requireAuth as authGuard };

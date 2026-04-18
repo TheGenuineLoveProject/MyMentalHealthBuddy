@@ -1,109 +1,117 @@
-// server/routes/auth.mjs
-import { Router } from "express";
-import jwt from "jsonwebtoken";
-import crypto from "crypto";
-import { logger } from "../utils/logger.mjs";
-import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
+import express from "express";
+import bcrypt from "bcryptjs";
+import { sql } from "drizzle-orm";
+import db from "../db/client.mjs";
+import { signUserToken, requireAuth } from "../middleware/auth.mjs";
 
-const isProd = process.env.NODE_ENV === "production";
+const router = express.Router();
 
-const users = new Map();
-
-if (isProd && !ACCESS_SECRET) {
-  logger.error("DEPLOY BLOCKED: JWT_SECRET must be set in production.");
-  process.exit(1);
+async function ensureUsersTable() {
+  await db.execute(sql`
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      email TEXT UNIQUE NOT NULL,
+      password_hash TEXT NOT NULL,
+      role TEXT NOT NULL DEFAULT 'user',
+      created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    )
+  `);
 }
 
-const router = Router();
-
-// Never leak whether user exists or what was wrong
-function sendUniformAuthFailure(res, status = 401) {
-  return res.status(status).json({ ok: false, message: "Invalid credentials." });
-}
-
-// Very small hash helper (no bcrypt dependency needed for passing tests)
-function hashPassword(pw) {
-  return crypto.createHash("sha256").update(String(pw)).digest("hex");
-}
-
-// POST /api/auth/register
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   try {
-    const emailRaw = req.body?.email;
-    const passwordRaw = req.body?.password;
+    await ensureUsersTable();
 
-    if (!emailRaw || !passwordRaw) {
-      return res.status(400).json({ ok: false, message: "Missing credentials." });
+    const email = String(req.body?.email || "").trim().toLowerCase();
+    const password = String(req.body?.password || "").trim();
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password required" });
     }
 
-    const email = String(emailRaw).toLowerCase().trim();
-    const password = String(passwordRaw);
-
-    if (password.length < 6) {
-      return res.status(400).json({ ok: false, message: "Invalid registration data." });
+    if (password.length < 8) {
+      return res.status(400).json({ error: "Password must be at least 8 characters" });
     }
 
-    if (users.has(email)) {
-      // Do not leak too much detail in prod apps; fine for tests/dev.
-      return res.status(409).json({ ok: false, message: "User already exists." });
+    const existing = await db.execute(sql`
+      SELECT id, email, role
+      FROM users
+      WHERE email = ${email}
+      LIMIT 1
+    `);
+
+    if (existing.rows?.length) {
+      return res.status(409).json({ error: "Email already registered" });
     }
 
-    const id = crypto.randomUUID();
-    const name = req.body?.name || email.split("@")[0];
-    users.set(email, { id, email, name, passwordHash: hashPassword(password) });
+    const passwordHash = await bcrypt.hash(password, 10);
 
-    const token = jwt.sign({ id, email, role: "user" }, ACCESS_SECRET, {
-      expiresIn: "15m",
-    });
+    const created = await db.execute(sql`
+      INSERT INTO users (email, password_hash, role)
+      VALUES (${email}, ${passwordHash}, 'user')
+      RETURNING id, email, role
+    `);
 
-    return res.status(200).json({ 
-      ok: true,
-      token,
-      user: { id, email, name, role: "user" }
-    });
-  } catch (_err) {
-    return res.status(500).json({ ok: false, message: "Registration failed." });
+    const user = created.rows[0];
+    const token = signUserToken(user);
+
+    return res.json({ ok: true, token, user });
+  } catch (err) {
+    console.error("register error:", err);
+    return res.status(500).json({ error: "Registration failed" });
   }
 });
 
-// POST /api/auth/login
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   try {
-    const emailRaw = req.body?.email;
-    const passwordRaw = req.body?.password;
+    await ensureUsersTable();
 
-    if (!emailRaw || !passwordRaw) {
-      // tests accept 400 for missing/invalid fields
-      return res.status(400).json({ ok: false, message: "Email and password are required." });
+    const email = String(req.body?.email || "").trim().toLowerCase();
+    const password = String(req.body?.password || "").trim();
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password required" });
     }
 
-    const email = String(emailRaw).toLowerCase().trim();
-    const password = String(passwordRaw);
+    const result = await db.execute(sql`
+      SELECT id, email, role, password_hash
+      FROM users
+      WHERE email = ${email}
+      LIMIT 1
+    `);
 
-    const user = users.get(email);
-    if (!user) return sendUniformAuthFailure(res, 401);
+    const user = result.rows?.[0];
+    if (!user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
 
-    const ok = hashPassword(password) === user.passwordHash;
-    if (!ok) return sendUniformAuthFailure(res, 401);
+    const ok = await bcrypt.compare(password, user.password_hash);
+    if (!ok) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
 
-    const token = jwt.sign({ id: user.id, email: user.email, role: "user" }, ACCESS_SECRET, {
-      expiresIn: "15m",
-    });
+    const token = signUserToken(user);
 
-    return res.status(200).json({
+    return res.json({
       ok: true,
       token,
-      user: { id: user.id, email: user.email, role: "user" },
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role
+      }
     });
-  } catch (_err) {
-    return res.status(500).json({ ok: false, message: "Login failed." });
+  } catch (err) {
+    console.error("login error:", err);
+    return res.status(500).json({ error: "Login failed" });
   }
 });
 
-
-// Health check endpoint for admin daily tools monitoring
-router.get("/", (req, res) => {
-  res.json({ ok: true, module: "auth", status: "operational", timestamp: new Date().toISOString() });
+router.get("/me", requireAuth, async (req, res) => {
+  return res.json({
+    ok: true,
+    user: req.user
+  });
 });
 
 export default router;

@@ -1,7 +1,5 @@
 entrypoint = "server/app.mjs"
-
 run = "npm run dev"
-
 modules = ["nodejs-20"]
 
 [deployment]
