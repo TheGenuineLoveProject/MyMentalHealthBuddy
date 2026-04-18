@@ -1,0 +1,680 @@
+===== AUTH DRIFT =====
+server/middleware/adminAuth.mjs:2:// Re-export requireAdmin for backwards compatibility
+server/middleware/adminAuth.mjs:4:export { requireAdmin };
+server/middleware/adminAuth.mjs:5:export default requireAdmin;
+server/middleware/requireAdmin.mjs:1:export default function requireAdmin(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:51:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs:56:export function requireAdmin(req, res, next) {
+server/routes/deploymentReadiness.mjs:9:function requireAdminToken(req, res, next) {
+server/routes/feedback.mjs:13:function requireAdmin(req, res, next) {
+server/routes/narrative-drafts.mjs:17:function requireAdmin(req, res, next) {
+server/routes/soft-launch-metrics.mjs:22:function requireAdmin(req, res, next) {
+server/routes/health.mjs:10:function requireAdminForRepair(req, res, next) {
+server/middleware/adminAuth.mjs:2:// Re-export requireAdmin for backwards compatibility
+server/middleware/adminAuth.mjs:4:export { requireAdmin };
+server/middleware/adminAuth.mjs:5:export default requireAdmin;
+server/middleware/requireAdmin.mjs:1:export default function requireAdmin(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:51:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs:56:export function requireAdmin(req, res, next) {
+server/routes/deploymentReadiness.mjs:9:function requireAdminToken(req, res, next) {
+server/routes/feedback.mjs:13:function requireAdmin(req, res, next) {
+server/routes/narrative-drafts.mjs:17:function requireAdmin(req, res, next) {
+server/routes/soft-launch-metrics.mjs:22:function requireAdmin(req, res, next) {
+server/routes/health.mjs:10:function requireAdminForRepair(req, res, next) {
+
+===== AUTH IMPORTS =====
+server/routes/account.mjs:11:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/account.mjs:19:router.put("/profile", requireAuth, async (req, res) => {
+server/routes/account.mjs:46:router.post("/onboarding", requireAuth, async (req, res) => {
+server/routes/account.mjs:211:router.delete("/", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:258:router.get("/export", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:317:router.get('/sessions', requireAuth, async (req, res) => {
+server/routes/account.mjs:344:router.delete('/sessions/:sessionId', requireAuth, async (req, res) => {
+server/routes/account.mjs:371:router.post('/delete-request', requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:398:router.get("/security", requireAuth, async (req, res) => {
+server/routes/account.mjs:431:router.post("/password", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:480:router.post("/2fa/setup", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:524:router.post("/2fa/verify", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:567:router.post("/2fa/disable", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/admin-social-studio.mjs:6:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/admin-social-studio.mjs:47:router.get("/drafts", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:60:router.get("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:79:router.post("/drafts", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:105:router.patch("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:126:router.delete("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:137:router.post("/drafts/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:161:router.get("/templates", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:176:router.post("/templates", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:196:router.delete("/templates/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:291:router.post("/templates/seed", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:311:router.get("/templates/presets", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:320:router.get("/calendar", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:335:router.post("/calendar", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:360:router.delete("/calendar/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:376:router.post("/export", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:409:router.get("/analytics", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:467:router.get("/analytics/content-calendar", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:505:router.post("/generate", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:571:router.post("/generate/repurpose", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:615:router.post("/compliance/check", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:684:router.post("/compliance/rewrite", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:727:router.post("/generate/image", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:785:router.post("/generate/batch", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:844:router.post("/enhance", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:888:router.get("/platforms/specs", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:896:router.post("/drafts/bulk/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:925:router.post("/drafts/bulk/delete", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:948:router.post("/publish/batch", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:1021:router.get("/publish/platforms", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:1034:router.get("/analytics", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin.mjs:10:function requireAuth(req, res, next) {
+server/routes/admin.mjs:89:router.get("/stats", requireAuth, (_req, res) => {
+server/routes/adminBilling.mjs:11:import { requireAdmin } from '../middleware/adminAuth.mjs';
+server/routes/adminBilling.mjs:16:router.use(requireAdmin);
+server/routes/ai-dashboard.mjs:8:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/ai-dashboard.mjs:14:router.use(requireAuth);
+server/routes/analytics.mjs:7:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/analytics.mjs:175:router.use(requireAuth);
+server/routes/audit-logs.mjs:9:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/audit-logs.mjs:13:router.use(requireAuth);
+server/routes/audit-logs.mjs:14:router.use(requireAdmin);
+server/routes/community.mjs:2:import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
+server/routes/community.mjs:85:router.post("/reflect", requireAuth, async (req, res) => {
+server/routes/community.mjs:114:router.post("/reflections", requireAuth, async (req, res) => {
+server/routes/community.mjs:167:router.get("/completion-stats", requireAuth, async (req, res) => {
+server/routes/deploymentReadiness.mjs:9:function requireAdminToken(req, res, next) {
+server/routes/deploymentReadiness.mjs:17:router.get("/check", requireAdminToken, async (_req, res) => {
+server/routes/feedback.mjs:13:function requireAdmin(req, res, next) {
+server/routes/feedback.mjs:54:router.get("/", requireAdmin, async (_req, res) => {
+server/routes/insights.mjs:12:function requireAuth(req, res, next) {
+server/routes/insights.mjs:152:router.get("/mood", requireAuth, async (req, res) => {
+server/routes/journal.mjs:15:function requireAuth(req, res, next) {
+server/routes/journal.mjs:36:router.post("/", requireAuth, async (req, res) => {
+server/routes/journal.mjs:92:router.get("/", requireAuth, async (req, res) => {
+server/routes/journal.mjs:110:router.get("/:id", requireAuth, async (req, res) => {
+server/routes/journal.mjs:137:router.put("/:id", requireAuth, async (req, res) => {
+server/routes/journal.mjs:179:router.delete("/:id", requireAuth, async (req, res) => {
+server/routes/leads.mjs:7:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/narrative-drafts.mjs:17:function requireAdmin(req, res, next) {
+server/routes/narrative-drafts.mjs:30:router.get("/", requireAdmin, async (_req, res) => {
+server/routes/narrative-drafts.mjs:54:router.patch("/:postId", requireAdmin, async (req, res) => {
+server/routes/onboarding.mjs:4:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/onboarding.mjs:10:router.use(requireAuth);
+server/routes/pro-features.mjs:2:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/pro-features.mjs:9:router.use(requireAuth);
+server/routes/products.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/products.mjs:20:router.get("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:127:router.post("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:181:router.patch("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:233:router.delete("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:253:router.post("/:id/purchase", requireAuth, async (req, res) => {
+server/routes/products.mjs:293:router.get("/:id/purchases", requireAuth, requireAdmin, async (req, res) => {
+server/routes/progress.mjs:9:function requireAuth(req, res, next) {
+server/routes/progress.mjs:16:router.get("/stats", requireAuth, async (req, res) => {
+server/routes/progress.mjs:124:router.get("/achievements", requireAuth, async (req, res) => {
+server/routes/redirects.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/redirects.mjs:25:router.get("/list", requireAuth, requireAdmin, async (req, res) => {
+server/routes/redirects.mjs:35:router.post("/create", requireAuth, requireAdmin, async (req, res) => {
+server/routes/redirects.mjs:58:router.delete("/remove/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/social-enterprise.mjs:34:router.get("/posts", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:72:router.get("/post/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:84:router.post("/post", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:134:router.put("/post/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:183:router.post("/post/:id/submit", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:210:router.post("/post/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:274:router.post("/post/:id/mark-posted", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:314:router.get("/signals", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:386:router.get("/audit", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:405:router.get("/themes", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/social-enterprise.mjs:409:router.get("/platforms", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/social-enterprise.mjs:413:router.get("/campaigns", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:430:router.post("/campaigns", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:453:router.put("/campaigns/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:475:router.post("/post/:id/schedule", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:503:router.post("/build-utm", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:524:router.get("/weekly-queue", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:545:router.post("/generate-from-blog", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:604:router.get("/click-stats", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:10:import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
+server/routes/social-posting.mjs:64:router.get('/platforms', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:80:router.get('/platforms/:platformId/status', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:103:router.post('/post', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:146:router.post('/schedule', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:180:router.get('/scheduled', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:199:router.delete('/scheduled/:id', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:218:router.post('/process-scheduled', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:278:router.post('/drafts/:id/publish', requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/social-posts.mjs:15:router.get("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:39:router.get("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:59:router.post("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:94:router.patch("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:126:router.delete("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:146:router.post("/:id/publish", requireAuth, requireAdmin, async (req, res) => {
+server/routes/soft-launch-metrics.mjs:22:function requireAdmin(req, res, next) {
+server/routes/soft-launch-metrics.mjs:46:router.get("/", requireAdmin, (_req, res) => {
+server/routes/states.mjs:2:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/states.mjs:19:router.get("/", requireAuth, async (req, res) => {
+server/routes/states.mjs:38:router.post("/", requireAuth, async (req, res) => {
+server/routes/ui-dashboard.mjs:9:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/ui-dashboard.mjs:15:router.use(requireAuth);
+server/routes/wellness-tools.mjs:6:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/wellness-tools.mjs:16:router.get("/values", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:32:router.post("/values", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:58:router.get("/boundaries", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:74:router.post("/boundaries", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:97:router.patch("/boundaries/:id", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:118:router.delete("/boundaries/:id", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:134:router.get("/movement", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:150:router.post("/movement", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:178:router.get("/coherence", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:194:router.post("/coherence", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:222:router.get("/meaning-map", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:238:router.get("/meaning-map/latest", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:254:router.post("/meaning-map", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:281:router.get("/grief-letter", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:297:router.post("/grief-letter", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:322:router.delete("/grief-letter/:id", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:348:router.get("/weekly-reflection", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:364:router.post("/weekly-reflection", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:394:router.get("/challenge-progress", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:423:router.post("/challenge-progress", requireAuth, async (req, res) => {
+server/routes/system.mjs:2:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/system.mjs:56:router.get("/history", requireAuth, requireAdmin, (_req, res) => {
+server/routes/kernel.mjs:2:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/kernel.mjs:16:router.get("/health", requireAuth, requireAdmin, (_req, res) => {
+server/routes/kernel.mjs:21:router.post("/validate", requireAuth, requireAdmin, (req, res) => {
+server/routes/kernel.mjs:27:router.get("/schema", requireAuth, requireAdmin, (_req, res) => {
+server/routes/health.mjs:10:function requireAdminForRepair(req, res, next) {
+server/routes/health.mjs:190:router.post("/repair", requireAdminForRepair, async (req, res) => {
+server/routes/health.mjs:668:router.get("/git-status", requireAdminForRepair, async (_req, res) => {
+server/routes/health.mjs:693:router.get("/platform-integrity", requireAdminForRepair, async (_req, res) => {
+server/routes/billing.mjs:5:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/billing.mjs:81:router.use(requireAuth);
+server/routes/revenue.mjs:3:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/revenue.mjs:10:router.use(requireAuth);
+server/routes/revenue.mjs:11:router.use(requireAdmin);
+server/routes/blog.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/blog.mjs:99:router.get("/admin", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:114:router.get("/admin/stats", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:167:router.post("/admin/test-send", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:334:router.post("/", requireAuth, async (req, res) => {
+server/routes/blog.mjs:380:router.put("/:id", requireAuth, async (req, res) => {
+server/routes/blog.mjs:444:router.delete("/:id", requireAuth, async (req, res) => {
+server/routes/blog.mjs:469:router.post("/:postId/comments", requireAuth, async (req, res) => {
+server/routes/blog.mjs:518:router.delete("/comments/:commentId", requireAuth, async (req, res) => {
+server/routes/blog.mjs:543:router.post("/admin/create", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:587:router.put("/admin/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:618:router.post("/admin/:id/submit", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:642:router.post("/admin/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:666:router.post("/admin/:id/publish", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:705:router.get("/user/drafts", requireAuth, async (req, res) => {
+server/routes/mood.mjs:9:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/mood.mjs:26:  router.get('/', requireAuth, async (req, res) => {
+server/routes/mood.mjs:44:router.use(requireAuth);
+server/routes/ai.healing.mjs:9:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.healing.mjs:55:router.get("/admin/prompts", requireAuth, requireAdmin, (_req, res) => {
+server/routes/ai.healing.mjs:59:router.get("/admin/prompts/:id", requireAuth, requireAdmin, (req, res) => {
+server/routes/ai.healing.mjs:74:router.put("/admin/prompts/:id", requireAuth, requireAdmin, (req, res) => {
+server/routes/ai.healing.mjs:105:router.get("/admin/audit", requireAuth, requireAdmin, (req, res) => {
+server/routes/ai.business.mjs:6:import { authGuard, requireStaff, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.business.mjs:54:router.get("/admin/prompts", authGuard, requireAdmin, (_req, res) => {
+server/routes/ai.business.mjs:58:router.get("/admin/prompts/:id", authGuard, requireAdmin, (req, res) => {
+server/routes/ai.business.mjs:73:router.put("/admin/prompts/:id", authGuard, requireAdmin, (req, res) => {
+server/routes/ai.business.mjs:104:router.get("/admin/audit", authGuard, requireAdmin, (req, res) => {
+server/routes/ai.mjs.bak:5:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs.bak:321:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/auth.mjs:5:import { signUserToken, requireAuth } from "../middleware/auth.mjs";
+server/routes/auth.mjs:110:router.get("/me", requireAuth, async (req, res) => {
+server/routes/ai.mjs.bak.1776489294:5:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs.bak.1776489294:321:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/ai.mjs.bak.1776489488:10:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs.bak.1776489488:345:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/session-boundary.mjs:4:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/session-boundary.mjs:14:router.post("/upgrade-history", requireAuth, async (req, res) => {
+server/routes/ai.mjs:5:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs:411:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/admin-publishing.mjs:6:import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
+server/routes/admin-publishing.mjs:28:router.use(requireAuth);
+server/routes/admin-publishing.mjs:29:router.use(requireAdmin);
+server/middleware/adminAuth.mjs:2:// Re-export requireAdmin for backwards compatibility
+server/middleware/adminAuth.mjs:3:import requireAdmin from "./requireAdmin.mjs";
+server/middleware/adminAuth.mjs:4:export { requireAdmin };
+server/middleware/adminAuth.mjs:5:export default requireAdmin;
+server/middleware/requireAdmin.mjs:1:export default function requireAdmin(req, res, next) {
+server/middleware/requireAuth.mjs:1:// server/middleware/requireAuth.mjs
+server/middleware/requireAuth.mjs:9:export function requireAuth(req, res, next) {
+server/middleware/requireRole.mjs:5: * Must be used AFTER requireAuth.
+server/middleware/auth.mjs.bak.1776489488:36:export function requireAuth(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:51:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:73:export const authGuard = requireAuth;
+server/middleware/auth.mjs:41:export function requireAuth(req, res, next) {
+server/middleware/auth.mjs:56:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs:78:export const authGuard = requireAuth;
+server/middleware/auth.mjs:82:export function requireAuthStrict(req, res, next) {
+server/auth/authMiddleware.js:3:export function requireAuth(req, res, next) {
+server/middleware/adminAuth.mjs:2:// Re-export requireAdmin for backwards compatibility
+server/middleware/adminAuth.mjs:3:import requireAdmin from "./requireAdmin.mjs";
+server/middleware/adminAuth.mjs:4:export { requireAdmin };
+server/middleware/adminAuth.mjs:5:export default requireAdmin;
+server/middleware/requireAdmin.mjs:1:export default function requireAdmin(req, res, next) {
+server/middleware/requireAuth.mjs:1:// server/middleware/requireAuth.mjs
+server/middleware/requireAuth.mjs:9:export function requireAuth(req, res, next) {
+server/middleware/requireRole.mjs:5: * Must be used AFTER requireAuth.
+server/middleware/auth.mjs.bak.1776489488:36:export function requireAuth(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:51:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:73:export const authGuard = requireAuth;
+server/middleware/auth.mjs:41:export function requireAuth(req, res, next) {
+server/middleware/auth.mjs:56:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs:78:export const authGuard = requireAuth;
+server/middleware/auth.mjs:82:export function requireAuthStrict(req, res, next) {
+server/routes/account.mjs:11:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/account.mjs:19:router.put("/profile", requireAuth, async (req, res) => {
+server/routes/account.mjs:46:router.post("/onboarding", requireAuth, async (req, res) => {
+server/routes/account.mjs:211:router.delete("/", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:258:router.get("/export", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:317:router.get('/sessions', requireAuth, async (req, res) => {
+server/routes/account.mjs:344:router.delete('/sessions/:sessionId', requireAuth, async (req, res) => {
+server/routes/account.mjs:371:router.post('/delete-request', requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:398:router.get("/security", requireAuth, async (req, res) => {
+server/routes/account.mjs:431:router.post("/password", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:480:router.post("/2fa/setup", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:524:router.post("/2fa/verify", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/account.mjs:567:router.post("/2fa/disable", requireAuth, sensitiveRateLimit, async (req, res) => {
+server/routes/admin-social-studio.mjs:6:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/admin-social-studio.mjs:47:router.get("/drafts", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:60:router.get("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:79:router.post("/drafts", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:105:router.patch("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:126:router.delete("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:137:router.post("/drafts/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:161:router.get("/templates", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:176:router.post("/templates", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:196:router.delete("/templates/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:291:router.post("/templates/seed", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:311:router.get("/templates/presets", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:320:router.get("/calendar", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:335:router.post("/calendar", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:360:router.delete("/calendar/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:376:router.post("/export", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:409:router.get("/analytics", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:467:router.get("/analytics/content-calendar", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:505:router.post("/generate", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:571:router.post("/generate/repurpose", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:615:router.post("/compliance/check", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:684:router.post("/compliance/rewrite", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:727:router.post("/generate/image", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:785:router.post("/generate/batch", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:844:router.post("/enhance", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:888:router.get("/platforms/specs", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:896:router.post("/drafts/bulk/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:925:router.post("/drafts/bulk/delete", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:948:router.post("/publish/batch", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:1021:router.get("/publish/platforms", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:1034:router.get("/analytics", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin.mjs:10:function requireAuth(req, res, next) {
+server/routes/admin.mjs:89:router.get("/stats", requireAuth, (_req, res) => {
+server/routes/adminBilling.mjs:11:import { requireAdmin } from '../middleware/adminAuth.mjs';
+server/routes/adminBilling.mjs:16:router.use(requireAdmin);
+server/routes/ai-dashboard.mjs:8:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/ai-dashboard.mjs:14:router.use(requireAuth);
+server/routes/analytics.mjs:7:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/analytics.mjs:175:router.use(requireAuth);
+server/routes/audit-logs.mjs:9:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/audit-logs.mjs:13:router.use(requireAuth);
+server/routes/audit-logs.mjs:14:router.use(requireAdmin);
+server/routes/community.mjs:2:import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
+server/routes/community.mjs:85:router.post("/reflect", requireAuth, async (req, res) => {
+server/routes/community.mjs:114:router.post("/reflections", requireAuth, async (req, res) => {
+server/routes/community.mjs:167:router.get("/completion-stats", requireAuth, async (req, res) => {
+server/routes/deploymentReadiness.mjs:9:function requireAdminToken(req, res, next) {
+server/routes/deploymentReadiness.mjs:17:router.get("/check", requireAdminToken, async (_req, res) => {
+server/routes/feedback.mjs:13:function requireAdmin(req, res, next) {
+server/routes/feedback.mjs:54:router.get("/", requireAdmin, async (_req, res) => {
+server/routes/insights.mjs:12:function requireAuth(req, res, next) {
+server/routes/insights.mjs:152:router.get("/mood", requireAuth, async (req, res) => {
+server/routes/journal.mjs:15:function requireAuth(req, res, next) {
+server/routes/journal.mjs:36:router.post("/", requireAuth, async (req, res) => {
+server/routes/journal.mjs:92:router.get("/", requireAuth, async (req, res) => {
+server/routes/journal.mjs:110:router.get("/:id", requireAuth, async (req, res) => {
+server/routes/journal.mjs:137:router.put("/:id", requireAuth, async (req, res) => {
+server/routes/journal.mjs:179:router.delete("/:id", requireAuth, async (req, res) => {
+server/routes/leads.mjs:7:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/narrative-drafts.mjs:17:function requireAdmin(req, res, next) {
+server/routes/narrative-drafts.mjs:30:router.get("/", requireAdmin, async (_req, res) => {
+server/routes/narrative-drafts.mjs:54:router.patch("/:postId", requireAdmin, async (req, res) => {
+server/routes/onboarding.mjs:4:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/onboarding.mjs:10:router.use(requireAuth);
+server/routes/pro-features.mjs:2:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/pro-features.mjs:9:router.use(requireAuth);
+server/routes/products.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/products.mjs:20:router.get("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:127:router.post("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:181:router.patch("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:233:router.delete("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/products.mjs:253:router.post("/:id/purchase", requireAuth, async (req, res) => {
+server/routes/products.mjs:293:router.get("/:id/purchases", requireAuth, requireAdmin, async (req, res) => {
+server/routes/progress.mjs:9:function requireAuth(req, res, next) {
+server/routes/progress.mjs:16:router.get("/stats", requireAuth, async (req, res) => {
+server/routes/progress.mjs:124:router.get("/achievements", requireAuth, async (req, res) => {
+server/routes/redirects.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/redirects.mjs:25:router.get("/list", requireAuth, requireAdmin, async (req, res) => {
+server/routes/redirects.mjs:35:router.post("/create", requireAuth, requireAdmin, async (req, res) => {
+server/routes/redirects.mjs:58:router.delete("/remove/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/social-enterprise.mjs:34:router.get("/posts", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:72:router.get("/post/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:84:router.post("/post", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:134:router.put("/post/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:183:router.post("/post/:id/submit", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:210:router.post("/post/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:274:router.post("/post/:id/mark-posted", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:314:router.get("/signals", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:386:router.get("/audit", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:405:router.get("/themes", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/social-enterprise.mjs:409:router.get("/platforms", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/social-enterprise.mjs:413:router.get("/campaigns", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:430:router.post("/campaigns", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:453:router.put("/campaigns/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:475:router.post("/post/:id/schedule", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:503:router.post("/build-utm", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:524:router.get("/weekly-queue", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:545:router.post("/generate-from-blog", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-enterprise.mjs:604:router.get("/click-stats", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:10:import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
+server/routes/social-posting.mjs:64:router.get('/platforms', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:80:router.get('/platforms/:platformId/status', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:103:router.post('/post', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:146:router.post('/schedule', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:180:router.get('/scheduled', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:199:router.delete('/scheduled/:id', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:218:router.post('/process-scheduled', requireAdmin, async (req, res) => {
+server/routes/social-posting.mjs:278:router.post('/drafts/:id/publish', requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/social-posts.mjs:15:router.get("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:39:router.get("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:59:router.post("/", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:94:router.patch("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:126:router.delete("/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/social-posts.mjs:146:router.post("/:id/publish", requireAuth, requireAdmin, async (req, res) => {
+server/routes/soft-launch-metrics.mjs:22:function requireAdmin(req, res, next) {
+server/routes/soft-launch-metrics.mjs:46:router.get("/", requireAdmin, (_req, res) => {
+server/routes/states.mjs:2:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/states.mjs:19:router.get("/", requireAuth, async (req, res) => {
+server/routes/states.mjs:38:router.post("/", requireAuth, async (req, res) => {
+server/routes/ui-dashboard.mjs:9:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/ui-dashboard.mjs:15:router.use(requireAuth);
+server/routes/wellness-tools.mjs:6:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/wellness-tools.mjs:16:router.get("/values", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:32:router.post("/values", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:58:router.get("/boundaries", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:74:router.post("/boundaries", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:97:router.patch("/boundaries/:id", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:118:router.delete("/boundaries/:id", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:134:router.get("/movement", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:150:router.post("/movement", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:178:router.get("/coherence", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:194:router.post("/coherence", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:222:router.get("/meaning-map", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:238:router.get("/meaning-map/latest", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:254:router.post("/meaning-map", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:281:router.get("/grief-letter", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:297:router.post("/grief-letter", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:322:router.delete("/grief-letter/:id", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:348:router.get("/weekly-reflection", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:364:router.post("/weekly-reflection", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:394:router.get("/challenge-progress", requireAuth, async (req, res) => {
+server/routes/wellness-tools.mjs:423:router.post("/challenge-progress", requireAuth, async (req, res) => {
+server/routes/system.mjs:2:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/system.mjs:56:router.get("/history", requireAuth, requireAdmin, (_req, res) => {
+server/routes/kernel.mjs:2:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/kernel.mjs:16:router.get("/health", requireAuth, requireAdmin, (_req, res) => {
+server/routes/kernel.mjs:21:router.post("/validate", requireAuth, requireAdmin, (req, res) => {
+server/routes/kernel.mjs:27:router.get("/schema", requireAuth, requireAdmin, (_req, res) => {
+server/routes/health.mjs:10:function requireAdminForRepair(req, res, next) {
+server/routes/health.mjs:190:router.post("/repair", requireAdminForRepair, async (req, res) => {
+server/routes/health.mjs:668:router.get("/git-status", requireAdminForRepair, async (_req, res) => {
+server/routes/health.mjs:693:router.get("/platform-integrity", requireAdminForRepair, async (_req, res) => {
+server/routes/billing.mjs:5:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/billing.mjs:81:router.use(requireAuth);
+server/routes/revenue.mjs:3:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/revenue.mjs:10:router.use(requireAuth);
+server/routes/revenue.mjs:11:router.use(requireAdmin);
+server/routes/blog.mjs:7:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/blog.mjs:99:router.get("/admin", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:114:router.get("/admin/stats", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:167:router.post("/admin/test-send", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:334:router.post("/", requireAuth, async (req, res) => {
+server/routes/blog.mjs:380:router.put("/:id", requireAuth, async (req, res) => {
+server/routes/blog.mjs:444:router.delete("/:id", requireAuth, async (req, res) => {
+server/routes/blog.mjs:469:router.post("/:postId/comments", requireAuth, async (req, res) => {
+server/routes/blog.mjs:518:router.delete("/comments/:commentId", requireAuth, async (req, res) => {
+server/routes/blog.mjs:543:router.post("/admin/create", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:587:router.put("/admin/:id", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:618:router.post("/admin/:id/submit", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:642:router.post("/admin/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:666:router.post("/admin/:id/publish", requireAuth, requireAdmin, async (req, res) => {
+server/routes/blog.mjs:705:router.get("/user/drafts", requireAuth, async (req, res) => {
+server/routes/mood.mjs:9:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/mood.mjs:26:  router.get('/', requireAuth, async (req, res) => {
+server/routes/mood.mjs:44:router.use(requireAuth);
+server/routes/ai.healing.mjs:9:import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.healing.mjs:55:router.get("/admin/prompts", requireAuth, requireAdmin, (_req, res) => {
+server/routes/ai.healing.mjs:59:router.get("/admin/prompts/:id", requireAuth, requireAdmin, (req, res) => {
+server/routes/ai.healing.mjs:74:router.put("/admin/prompts/:id", requireAuth, requireAdmin, (req, res) => {
+server/routes/ai.healing.mjs:105:router.get("/admin/audit", requireAuth, requireAdmin, (req, res) => {
+server/routes/ai.business.mjs:6:import { authGuard, requireStaff, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.business.mjs:54:router.get("/admin/prompts", authGuard, requireAdmin, (_req, res) => {
+server/routes/ai.business.mjs:58:router.get("/admin/prompts/:id", authGuard, requireAdmin, (req, res) => {
+server/routes/ai.business.mjs:73:router.put("/admin/prompts/:id", authGuard, requireAdmin, (req, res) => {
+server/routes/ai.business.mjs:104:router.get("/admin/audit", authGuard, requireAdmin, (req, res) => {
+server/routes/ai.mjs.bak:5:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs.bak:321:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/auth.mjs:5:import { signUserToken, requireAuth } from "../middleware/auth.mjs";
+server/routes/auth.mjs:110:router.get("/me", requireAuth, async (req, res) => {
+server/routes/ai.mjs.bak.1776489294:5:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs.bak.1776489294:321:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/ai.mjs.bak.1776489488:10:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs.bak.1776489488:345:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/session-boundary.mjs:4:import { requireAuth } from "../middleware/auth.mjs";
+server/routes/session-boundary.mjs:14:router.post("/upgrade-history", requireAuth, async (req, res) => {
+server/routes/ai.mjs:5:import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+server/routes/ai.mjs:411:router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
+server/routes/admin-publishing.mjs:6:import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
+server/routes/admin-publishing.mjs:28:router.use(requireAuth);
+server/routes/admin-publishing.mjs:29:router.use(requireAdmin);
+server/index.mjs:483:    const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+server/index.mjs:485:      requireAuth(req, res, (err) => {
+server/index.mjs:487:        requireAdmin(req, res, (err2) => resolve(!err2));
+server/index.mjs:544:    const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+server/index.mjs:546:      requireAuth(req, res, (err) => {
+server/index.mjs:548:        requireAdmin(req, res, (err2) => resolve(!err2));
+server/index.mjs:617:    const { requireAuth } = await import("./middleware/auth.mjs");
+server/index.mjs:619:      requireAuth(req, res, (err) => resolve(err ? "auth_failed" : "ok"));
+server/dev.mjs:406:      const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+server/dev.mjs:408:        requireAuth(req, res, (err) => {
+server/dev.mjs:410:          requireAdmin(req, res, (err2) => resolve(!err2));
+server/dev.mjs:467:      const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+server/dev.mjs:469:        requireAuth(req, res, (err) => {
+server/dev.mjs:471:          requireAdmin(req, res, (err2) => resolve(!err2));
+server/dev.mjs:540:      const { requireAuth } = await import("./middleware/auth.mjs");
+server/dev.mjs:542:        requireAuth(req, res, (err) => resolve(err ? "auth_failed" : "ok"));
+server/app.mjs:26:import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
+server/app.mjs:101:// Admin routes (strict: limiter -> requireAuth -> requireAdmin). Only admin.mjs is mounted.
+server/app.mjs:102:app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
+server/app.mjs:108:  requireAuth,
+server/app.mjs:109:  requireAdmin,
+server/app.mjs:118:  requireAuth,
+server/app.mjs:119:  requireAdmin,
+
+===== CSRF =====
+server/lib/csrf.mjs
+server/middleware/csrf.mjs
+server/security/csrf.mjs
+
+server/lib/csrf.mjs:77:export function csrfProtection(req, res, next) {
+server/lib/csrf.mjs:82:    res.locals.csrfToken = token;
+server/lib/csrf.mjs:87:  const token = req.headers['x-csrf-token'] || req.body?._csrf;
+server/lib/csrf.mjs:98:  res.locals.csrfToken = newToken;
+server/middleware/csrf.mjs:3:const CSRF_COOKIE_NAME = "csrf_token";
+server/middleware/csrf.mjs:4:const CSRF_HEADER_NAME = "x-csrf-token";
+server/middleware/csrf.mjs:11:export function csrfProtection(options = {}) {
+server/routes/admin-security.mjs:3:import { getCSRFStats } from '../lib/csrf.mjs';
+server/routes/admin-security.mjs:44:router.get('/csrf/stats', (_req, res) => {
+server/routes/admin-security.mjs:72:  const csrfStats = getCSRFStats();
+server/routes/admin-security.mjs:84:      csrf: {
+server/routes/admin-security.mjs:85:        activeTokens: csrfStats.activeTokens,
+server/routes/admin-security.mjs:86:        tokenRotationActive: csrfStats.activeTokens > 0,
+server/routes/session-boundary.mjs:5:import { issueCsrfToken } from "../security/csrf.mjs";
+server/routes/session-boundary.mjs:9:router.get("/csrf-token", (req, res) => {
+server/routes/session-boundary.mjs:11:  return res.json({ ok: true, csrfToken: token });
+server/security/csrf.mjs:3:const COOKIE_NAME = "csrf_secret";
+server/security/csrf.mjs:4:const HEADER_NAME = "x-csrf-token";
+server/security/csrf.mjs:42:export function csrfProtection(req, res, next) {
+server/app.mjs:31:import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
+server/app.mjs:56:app.use(csrfProtection);
+
+===== DB IMPORTS =====
+server/auth/refreshFlow.mjs:1:import { db } from "../db/client.mjs";
+server/auth/webhookStripe.mjs:1:import { db } from "../db/client.mjs";
+server/billing/applyPendingEntitlements.mjs:1:import { db } from "../db/client.mjs";
+server/billing/entitlements.mjs:1:import { db } from "../db/client.mjs";
+server/billing/stripeCustomer.mjs:2:import db from "../db/client.mjs";
+server/db.mjs:3:export { db, pool, schema, closeDb } from "./db/connection.mjs";
+server/intelligence/journalingMirror.mjs:1:import { db } from "../db/index.mjs";
+server/middleware/requirePlan.mjs:2:import db from "../db/client.mjs";
+server/replit_integrations/auth/storage.mjs:7:import db from "../../db/client.mjs";
+server/routes/account.mjs:7:import { db } from "../db/connection.mjs";
+server/routes/accountActions.mjs:8:import db from '../db/client.mjs';
+server/routes/admin-social-studio.mjs:2:import { db } from "../db/connection.mjs";
+server/routes/adminBilling.mjs:8:import db from '../db/client.mjs';
+server/routes/ai-dashboard.mjs:5:import { db } from "../db/connection.mjs";
+server/routes/analytics-events.mjs:2:import { db } from "../db.mjs";
+server/routes/analytics.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/audit-logs.mjs:5:import { db } from "../db.mjs";
+server/routes/badges.mjs:2:import { db } from "../db.mjs";
+server/routes/community.mjs:3:import { db } from "../db/client.mjs";
+server/routes/deploymentReadiness.mjs:3:import db from "../db/client.mjs";
+server/routes/favorites.mjs:2:import { db } from "../db/client.mjs";
+server/routes/feedback.mjs:3:import { db } from "../db.mjs";
+server/routes/gamification.mjs:2:import { db } from "../db/connection.mjs";
+server/routes/github-auth.mjs:6:import { db } from "../db/client.mjs";
+server/routes/gratitude.mjs:2:import { db } from "../db/client.mjs";
+server/routes/insights.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/invites.mjs:2:import { db } from "../db.mjs";
+server/routes/journal.mjs:5:import { db } from "../db/client.mjs";
+server/routes/leads.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/narrative-drafts.mjs:3:import { db } from "../db.mjs";
+server/routes/newsletter.mjs:4:import { db } from "../db/connection.mjs";
+server/routes/onboarding.mjs:3:import db from "../db/client.mjs";
+server/routes/products.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/progress.mjs:2:import { db } from "../db/connection.mjs";
+server/routes/redirects.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/reflection.mjs:5:import { db } from "../db/client.mjs";
+server/routes/rss.mjs:2:import { db } from '../db/connection.mjs';
+server/routes/social-enterprise.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/social-posting.mjs:7:import { db } from '../db/connection.mjs';
+server/routes/social-posts.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/states.mjs:3:import { db } from "../db/client.mjs";
+server/routes/therapy.mjs:3:import db from "../db/client.mjs";
+server/routes/ui-dashboard.mjs:5:import { db } from "../db/connection.mjs";
+server/routes/user.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/userSettings.mjs:2:import { db } from "../db.mjs";
+server/routes/webhook.mjs:4:import { db } from "../db/client.mjs";
+server/routes/wellness-tools.mjs:2:import { db } from "../db/connection.mjs";
+server/routes/health.mjs:1:import db from "../db/client.mjs";
+server/routes/billing.mjs:6:import db from "../db/client.mjs";
+server/routes/revenue.mjs:4:import db from "../db/client.mjs";
+server/routes/blog.mjs:3:import { db } from "../db/connection.mjs";
+server/routes/mood.mjs:5:import { db } from "../db/connection.mjs";
+server/routes/ai.mjs.bak:4:import db from "../db/client.mjs";
+server/routes/auth.mjs:4:import db from "../db/client.mjs";
+server/routes/ai.mjs.bak.1776489294:4:import db from "../db/client.mjs";
+server/routes/ai.mjs.bak.1776489488:9:import db from "../db/client.mjs";
+server/routes/ai.mjs:4:import db from "../db/client.mjs";
+server/routes/admin-publishing.mjs:8:import { db } from '../db/connection.mjs';
+server/scripts/setAdminPassword.mjs:14:import { db } from '../db/client.mjs';
+server/security/audit.mjs:1:import db from "../db/client.mjs";
+server/services/auditLog.mjs:1:import { db } from "../db/client.mjs";
+server/services/refreshTokens.service.mjs:1:import { db } from "../db/client.mjs";
+server/services/stripeSync.mjs:2:import db from "../db/client.mjs";
+server/services/users.mjs:3:import { db } from "../db/client.mjs";
+server/services/canvaDesignService.js:2:import { db } from '../db/client.mjs';
+server/utils/auditLogger.mjs:5:import { db } from "../db/connection.mjs";
+server/app.mjs:32:import db from "./db/client.mjs";
+
+===== CRISIS =====
+server/ai/crisisClassifier.mjs:1:export async function classifyCrisis(openai, message) {
+server/ai/safety/crisis.mjs:17:export function detectCrisis(text = "") {
+server/ai/safety/guard.mjs:2:import { detectCrisis, CRISIS_RESPONSE } from "./crisis.mjs";
+server/ai/safety/guard.mjs:9:  if (detectCrisis(msg)) {
+server/lib/promptEngine.mjs:38:export function assessRisk(text = "") {
+server/lib/promptEngine.mjs:70:    const risk = assessRisk(userText);
+server/routes/therapy.mjs:51:function detectCrisis(message) {
+server/routes/therapy.mjs:117:    if (detectCrisis(message)) {
+server/routes/ai.js:11:function detectCrisis(message = "") {
+server/routes/ai.js:84:    if (detectCrisis(message)) {
+server/routes/ai.healing.mjs:11:  assessRisk,
+server/routes/ai.healing.mjs:135:    const risk = assessRisk(userText);
+server/routes/ai.mjs.bak:6:import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs";
+server/routes/ai.mjs.bak:8:import { classifyCrisis } from "../ai/crisisClassifier.mjs";
+server/routes/ai.mjs.bak:9:import { assessRisk } from "../lib/promptEngine.mjs";
+server/routes/ai.mjs.bak:169:    if (detectCrisis(cleanText)) {
+server/routes/ai.mjs.bak:182:        const result = await classifyCrisis(global.openai, cleanText);
+server/routes/ai.mjs.bak:186:      console.error("classifyCrisis failed:", err?.message || err);
+server/routes/ai.mjs.bak:191:      risk = assessRisk({
+server/routes/ai.mjs.bak:196:      console.error("assessRisk failed:", err?.message || err);
+server/routes/ai.mjs.bak.1776489294:6:import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs";
+server/routes/ai.mjs.bak.1776489294:8:import { classifyCrisis } from "../ai/crisisClassifier.mjs";
+server/routes/ai.mjs.bak.1776489294:9:import { assessRisk } from "../lib/promptEngine.mjs";
+server/routes/ai.mjs.bak.1776489294:169:    if (detectCrisis(cleanText)) {
+server/routes/ai.mjs.bak.1776489294:182:        const result = await classifyCrisis(global.openai, cleanText);
+server/routes/ai.mjs.bak.1776489294:186:      console.error("classifyCrisis failed:", err?.message || err);
+server/routes/ai.mjs.bak.1776489294:191:      risk = assessRisk({
+server/routes/ai.mjs.bak.1776489294:196:      console.error("assessRisk failed:", err?.message || err);
+server/routes/ai.mjs.bak.1776489488:11:import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs";
+server/routes/ai.mjs.bak.1776489488:13:import { classifyCrisis } from "../ai/crisisClassifier.mjs";
+server/routes/ai.mjs.bak.1776489488:14:import { assessRisk } from "../lib/promptEngine.mjs";
+server/routes/ai.mjs.bak.1776489488:179:    if (detectCrisis(cleanText)) {
+server/routes/ai.mjs.bak.1776489488:192:        const result = await classifyCrisis(global.openai, cleanText);
+server/routes/ai.mjs.bak.1776489488:196:      console.error("classifyCrisis failed:", err?.message || err);
+server/routes/ai.mjs.bak.1776489488:201:      // assessRisk expects a string; score is an additive signal we OR-in below
+server/routes/ai.mjs.bak.1776489488:202:      risk = assessRisk(cleanText) || { level: "low" };
+server/routes/ai.mjs.bak.1776489488:207:      console.error("assessRisk failed:", err?.message || err);
+server/routes/ai.mjs:6:import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs";
+server/routes/ai.mjs:8:import { classifyCrisis } from "../ai/crisisClassifier.mjs";
+server/routes/ai.mjs:9:import { assessRisk } from "../lib/promptEngine.mjs";
+server/routes/ai.mjs:176:    if (detectCrisis(cleanText)) {
+server/routes/ai.mjs:189:        const result = await classifyCrisis(global.openai, cleanText);
+server/routes/ai.mjs:193:      console.error("classifyCrisis failed:", err?.message || err);
+server/routes/ai.mjs:198:      // assessRisk expects a string; score is an additive signal we OR-in below
+server/routes/ai.mjs:199:      risk = assessRisk(cleanText) || { level: "low" };
+server/routes/ai.mjs:204:      console.error("assessRisk failed:", err?.message || err);
+server/routes/ai.mjs:392:      if (detectCrisis(guarded?.cleanText || message)) {
+server/engine/crisisDetection.mjs:2:import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs";
+server/engine/crisisDetection.mjs:4:import { assessRisk } from "../lib/promptEngine.mjs";
+server/engine/crisisDetection.mjs:5:import { classifyCrisis } from "../ai/crisisClassifier.mjs";
+server/engine/crisisDetection.mjs:34:  const rulesCrisis = detectCrisis(userText);
+server/engine/crisisDetection.mjs:35:  const risk = assessRisk(userText);
+server/engine/crisisDetection.mjs:42:      const verdict = await classifyCrisis(opts.openai, userText);
+
+===== ADMIN MOUNTS =====
+server/app.mjs:102:app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
+server/app.mjs:102:app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
+server/dev.mjs:246:  app.use("/api/admin", adminRouter);
+server/dev.mjs:247:  app.use("/api/admin/soft-launch-metrics", softLaunchMetricsRouter);
+server/dev.mjs:340:  app.use("/api/admin/social/enterprise", socialEnterpriseRouter);
+server/dev.mjs:341:  app.use("/api/admin/social", adminSocialStudioRouter);
+server/dev.mjs:347:  app.use("/api/admin/security", adminSecurityRouter);
+server/dev.mjs:348:  app.use("/api/admin/audit-logs", auditLogsRouter);
+server/dev.mjs:349:  app.use("/api/admin/billing", adminBillingRouter);
+server/dev.mjs:350:  app.use("/api/admin/publishing", adminPublishingRouter);
+server/index.mjs:327:app.use('/api/admin', adminRouter);
+server/index.mjs:333:app.use('/api/admin/audit-logs', auditLogsRouter);
+server/index.mjs:334:app.use('/api/admin/billing', adminBillingRouter);
+server/index.mjs:367:app.use('/api/admin/security', adminSecurityRouter);
+server/index.mjs:375:app.use('/api/admin/soft-launch-metrics', softLaunchMetricsRouter);
+server/index.mjs:429:app.use('/api/admin/social/enterprise', socialEnterpriseRouter);
+server/index.mjs:430:app.use('/api/admin/social', adminSocialStudioRouter);
+server/index.mjs:437:app.use('/api/admin/publishing', adminPublishingRouter);
