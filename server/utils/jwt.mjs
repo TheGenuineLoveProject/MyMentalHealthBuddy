@@ -4,8 +4,8 @@ import { logger } from "./logger.mjs";
 const isProduction = process.env.NODE_ENV === "production";
 
 function getJwtSecret() {
-  if (process.env.JWT_SECRET || "dev_insecure_secret_change_me") {
-    return process.env.JWT_SECRET || "dev_insecure_secret_change_me";
+  if (process.env.JWT_SECRET || "dev_insecure_secret_change_me" || "dev_insecure_secret_change_me") {
+    return process.env.JWT_SECRET || "dev_insecure_secret_change_me" || "dev_insecure_secret_change_me";
   }
   if (isProduction) {
     logger.error("CRITICAL: JWT_SECRET must be set in production!");

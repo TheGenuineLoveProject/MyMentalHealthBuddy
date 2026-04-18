@@ -1,3 +1,8 @@
+import {
+  upgradeTherapyReply,
+  buildJournalSummary,
+  buildCopingPlan
+} from "../engine/therapyIntelligence.mjs";
 import express from "express";
 import crypto from "node:crypto";
 import { sql } from "drizzle-orm";
@@ -334,75 +339,6 @@ router.delete("/history", optionalAuth, async (req, res) => {
   } catch (err) {
     console.error("AI history delete error:", err);
     return res.status(500).json({ error: "Failed to clear history" });
-  }
-});
-
-/**
- * POST /api/ai/journal-summary
- * Body: { entries: Array<string | { content }> }
- * Pure, non-destructive. No DB writes. Safe for guest + auth.
- */
-router.post("/journal-summary", optionalAuth, async (req, res) => {
-  try {
-    const entries = Array.isArray(req.body?.entries) ? req.body.entries : [];
-    if (entries.length > 500) {
-      return res.status(400).json({ error: "Too many entries (max 500)" });
-    }
-    const summary = buildJournalSummary({ entries });
-    return res.json({ ok: true, summary });
-  } catch (err) {
-    console.error("journal-summary error:", err);
-    return res.status(500).json({ error: "Failed to build journal summary" });
-  }
-});
-
-/**
- * POST /api/ai/coping-plan
- * Body: { message?: string, mood?: string, energy?: 1-5 }
- * Routes through the unified safety guard first; on crisis, returns
- * the canonical 988/741741 response and refuses to produce a plan.
- */
-router.post("/coping-plan", optionalAuth, async (req, res) => {
-  try {
-    const message = String(req.body?.message || "").trim();
-    const mood = req.body?.mood;
-    const energy = req.body?.energy;
-
-    if (message) {
-      const guarded = safetyGuardInput(message);
-      if (guarded?.blocked && guarded?.crisis) {
-        return res.json({
-          isCrisis: true,
-          reply: guarded.response?.reply || CRISIS_RESPONSE.reply,
-          resources: guarded.response?.resources || CRISIS_RESPONSE.resources,
-          signals: ["safety_guard_crisis"],
-          action: "escalate_immediately",
-        });
-      }
-      if (guarded?.blocked) {
-        return res.status(400).json({
-          blocked: true,
-          reply:
-            guarded.response?.reply ||
-            "I can't help with that, but I can support you with safer options.",
-        });
-      }
-      if (detectCrisis(guarded?.cleanText || message)) {
-        return res.json({
-          isCrisis: true,
-          reply: CRISIS_RESPONSE.reply,
-          resources: CRISIS_RESPONSE.resources,
-          signals: ["keyword_match"],
-          action: "escalate_immediately",
-        });
-      }
-    }
-
-    const plan = buildCopingPlan({ message, mood, energy });
-    return res.json({ ok: true, plan });
-  } catch (err) {
-    console.error("coping-plan error:", err);
-    return res.status(500).json({ error: "Failed to build coping plan" });
   }
 });
 

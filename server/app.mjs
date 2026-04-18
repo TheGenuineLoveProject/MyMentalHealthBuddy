@@ -35,19 +35,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 // ===== SECURITY LAYER =====
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
-// basic security headers
 app.use(helmet());
-
-// cookies (for future session use)
 app.use(cookieParser());
 
-// ===== RATE LIMIT (AI ROUTES ONLY) =====
+// ===== AI RATE LIMIT (single source of truth) =====
 const aiLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 30,
@@ -55,7 +51,6 @@ const aiLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// apply limiter ONLY to AI routes
 app.use("/api/ai", aiLimiter);
 
 
