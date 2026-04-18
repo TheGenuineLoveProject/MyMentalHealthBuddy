@@ -1,9 +1,17 @@
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT ERROR:', err);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED PROMISE:', err);
+});
 import express from "express";
 import cors from "cors";
 
 // ✅ ROUTES (FIXES aiRoutes error)
 import aiRoutes from "./routes/ai.mjs";
 import aiHealingRoutes from "./routes/ai.healing.mjs";
+import aiBusinessRoutes from "./routes/ai.business.mjs";
 import healthRoutes from "./routes/health.mjs";
 
 // ✅ OPTIONAL AUTH (FIXES authMiddleware error)
@@ -30,6 +38,9 @@ app.use("/api/health", healthRoutes);
 
 // Healing engine (gated by age verification; admin sub-routes self-gate)
 app.use("/api/ai/healing", requireAdult, aiHealingRoutes);
+
+// Business engine (staff/admin only; admin sub-routes self-gate)
+app.use("/api/ai/business", aiBusinessRoutes);
 
 // AI routes
 app.use("/api/ai", optionalAuth, aiRoutes);
