@@ -1,4 +1,3 @@
-import adminPublishingRoutes from "./routes/admin-publishing.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
 import authRoutes from "./routes/auth.mjs";
 process.on('uncaughtException', (err) => {
@@ -109,17 +108,6 @@ app.use(
   requireAdmin,
   adminBillingRoutes
 );
-
-
-/* ===== ADMIN PUBLISHING (SAFE MOUNT) ===== */
-app.use(
-  "/api/admin/publishing",
-  adminLimiter,
-  requireAuth,
-  requireAdmin,
-  adminPublishingRoutes
-);
-
 
 
 // AI routes (aiLimiter already mounted above on /api/ai before this handler)
