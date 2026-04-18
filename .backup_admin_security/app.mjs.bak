@@ -1,4 +1,3 @@
-import adminSecurityRoutes from "./routes/admin-security.mjs";
 import authRoutes from "./routes/auth.mjs";
 process.on('uncaughtException', (err) => {
   console.error('UNCAUGHT ERROR:', err);
