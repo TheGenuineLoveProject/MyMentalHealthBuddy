@@ -1,12 +1,8 @@
-entrypoint = "server/index.mjs"
+entrypoint = "server/app.mjs"
 
-run = "echo 'Use npm run dev to start the server manually'"
-modules = ["nodejs-20", "python-3.11", "postgresql-16"]
+run = "node server/app.mjs"
 
-[deployment]
-deploymentTarget = "vm"
-build = ["npm", "run", "build"]
-run = ["node", "server/index.mjs"]
+modules = ["nodejs-20"]
 
 [[ports]]
 localPort = 5000
@@ -14,46 +10,4 @@ externalPort = 80
 
 [env]
 NODE_ENV = "development"
-
-[agent]
-expertMode = true
-integrations = ["javascript_openai_ai_integrations:2.0.0", "stripe:2.0.0", "perplexity_v0:1.0.0", "javascript_log_in_with_replit:2.0.0", "resend:1.0.0", "javascript_google_analytics:1.0.0", "javascript_object_storage:2.0.0", "javascript_websocket:1.0.0"]
-
-[workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "webview"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "NODE_ENV=development node server/dev.mjs"
-waitForPort = 5000
-
-[nix]
-channel = "stable-25_05"
-packages = ["lsof", "unzip", "python313Packages.pytest", "gnupg1", "haskellPackages.haskakafka", "tree", "vlang", "psmisc", "rs"]
-
-[userenv]
-
-[userenv.production]
-NODE_ENV = "production"
-
-[userenv.shared]
-ADMIN_EMAILS = "marglanda92@yahoo.com"
-STRIPE_PRICE_PRO_MONTHLY = "price_1San16RtwDw9mKhak1ibDurJ"
-STRIPE_PRICE_PRO_YEARLY = "price_1San2IRtwDw9mKhaH1bCV0Vv"
-SOFT_LAUNCH_MODE = "true"
+PORT = "5000"
