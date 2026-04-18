@@ -2,7 +2,6 @@ import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { z } from 'zod';
 import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
 import { logger } from '../utils/logger.mjs';
 import { db } from '../db/connection.mjs';
@@ -13,18 +12,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
 
 const router = Router();
-
-const publishingRegistrySchema = z.object({
-  type: z.string().trim().min(1, "type is required").max(100),
-  pillar: z.string().trim().max(120).optional().default(""),
-  title: z.string().trim().min(1, "title is required").max(200),
-  slug: z.string().trim().max(200).optional().default(""),
-  primaryCta: z.string().trim().max(200).optional().default(""),
-  notes: z.string().trim().max(5000).optional().default("")
-});
-
-const publishingRegistryPatchSchema = publishingRegistrySchema.partial();
-
 router.use(requireAuth);
 router.use(requireAdmin);
 
@@ -43,10 +30,7 @@ function writeJsonFile(filepath, data) {
   try {
     const dir = path.dirname(filepath);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-
-    const tempFilepath = filepath + ".tmp";
-    fs.writeFileSync(tempFilepath, JSON.stringify(data, null, 2));
-    fs.renameSync(tempFilepath, filepath);
+    fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
     return true;
   } catch (err) {
     logger.error('Failed to write JSON file', { filepath, error: err.message });
@@ -62,17 +46,11 @@ router.get('/registry', (req, res) => {
 router.post('/registry', (req, res) => {
   const filepath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
   const registry = readJsonFile(filepath) || [];
+  const { type, pillar, title, slug, primaryCta, notes } = req.body;
 
-  const parsed = publishingRegistrySchema.safeParse(req.body);
-  if (!parsed.success) {
-    return res.status(400).json({
-      ok: false,
-      error: 'Invalid registry payload',
-      details: parsed.error.flatten()
-    });
+  if (!type || !title) {
+    return res.status(400).json({ ok: false, error: 'type and title are required' });
   }
-
-  const { type, pillar, title, slug, primaryCta, notes } = parsed.data;
 
   const id = `glp-${type}-${Date.now().toString(36)}`;
   const entry = {
@@ -96,15 +74,6 @@ router.post('/registry', (req, res) => {
 });
 
 router.patch('/registry/:id', (req, res) => {
-  const parsed = publishingRegistryPatchSchema.safeParse(req.body);
-  if (!parsed.success) {
-    return res.status(400).json({
-      ok: false,
-      error: 'Invalid registry patch payload',
-      details: parsed.error.flatten()
-    });
-  }
-  req.body = parsed.data;
   const filepath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
   const registry = readJsonFile(filepath) || [];
   const idx = registry.findIndex(r => r.id === req.params.id);
