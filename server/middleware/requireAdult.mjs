@@ -1,9 +1,11 @@
 export function requireAdult(req, res, next) {
-  // 🔥 DEV BYPASS (ONLY FOR AI CHAT)
+  // 🔥 DEV BYPASS (ONLY FOR AI CHAT + GUEST HISTORY)
   if (
     process.env.NODE_ENV === "development" &&
     (req.originalUrl?.includes("/api/ai/chat") ||
-     req.path?.includes("/chat"))
+     req.originalUrl?.includes("/api/ai/history") ||
+     req.path?.includes("/chat") ||
+     req.path?.includes("/history"))
   ) {
     return next();
   }

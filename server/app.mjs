@@ -5,12 +5,18 @@ import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 import { logger } from "./utils/logger.mjs";
+import { appHelmet, appCors, apiLimiter } from "./middleware/security.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ✅ CREATE APP FIRST
 const app = express();
+
+// 🛡️ SECURITY MIDDLEWARE (helmet → cors → rate limit on /api)
+app.use(appHelmet);
+app.use(appCors);
+app.use("/api", apiLimiter);
 
 // ✅ THEN USE MIDDLEWARE
 app.use(express.json());

@@ -42,7 +42,7 @@ const StatePage = lazy(() => import("./pages/StatePage.jsx"));
 const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
 const ReflectionPage = lazy(() => import("./pages/Reflection.jsx"));
 const DailyReflection = lazy(() => import("./pages/DailyReflection.jsx"));
-const AIChatPage = lazy(() => import("./pages/AIChatPage.jsx"));
+const AIChatPage = lazy(() => import("./pages/AIChatPage.tsx"));
 const Analytics = lazy(() => import("./pages/Analytics.jsx"));
 const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));

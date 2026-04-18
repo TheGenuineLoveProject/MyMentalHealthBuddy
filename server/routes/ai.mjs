@@ -81,6 +81,35 @@ const FALLBACK_BRANCHES = [
   }
 ];
 
+// In-memory guest history keyed by x-guest-id header.
+// Authed users persist to DB; guests get an ephemeral, per-process buffer
+// (cleared on server restart, no PII storage).
+const guestHistory = new Map(); // guestId -> [{role, content}]
+const GUEST_HISTORY_MAX = 20;
+const GUEST_BUCKETS_MAX = 5000;
+
+function getGuestIdFromReq(req) {
+  const raw = req.headers?.["x-guest-id"];
+  if (!raw || typeof raw !== "string") return null;
+  const trimmed = raw.trim();
+  if (!trimmed || trimmed.length > 100) return null;
+  return trimmed;
+}
+
+function pushGuestMessage(guestId, role, content) {
+  if (!guestId) return;
+  if (!guestHistory.has(guestId)) {
+    if (guestHistory.size >= GUEST_BUCKETS_MAX) {
+      const firstKey = guestHistory.keys().next().value;
+      guestHistory.delete(firstKey);
+    }
+    guestHistory.set(guestId, []);
+  }
+  const arr = guestHistory.get(guestId);
+  arr.push({ role, content });
+  if (arr.length > GUEST_HISTORY_MAX) arr.splice(0, arr.length - GUEST_HISTORY_MAX);
+}
+
 function buildSupportiveReply(text = "") {
   const t = (text || "").toLowerCase();
   for (const branch of FALLBACK_BRANCHES) {
@@ -96,6 +125,7 @@ function buildSupportiveReply(text = "") {
 router.post("/chat", optionalAuth, async (req, res) => {
   try {
     const userId = req.dbUserId || null;
+    const guestId = userId ? null : getGuestIdFromReq(req);
     const { message } = req.body;
 
     if (!message) {
@@ -109,7 +139,7 @@ router.post("/chat", optionalAuth, async (req, res) => {
       return res.json(CRISIS_RESPONSE);
     }
 
-    // history (only if authed)
+    // history: authed users from DB, guests from in-memory map (last 10)
     let history = [];
     if (userId) {
       const result = await db.execute(sql`
@@ -120,6 +150,9 @@ router.post("/chat", optionalAuth, async (req, res) => {
         LIMIT 10
       `);
       history = (result.rows || []).reverse();
+    } else if (guestId) {
+      const buf = guestHistory.get(guestId) || [];
+      history = buf.slice(-10);
     }
 
     const messages = [
@@ -154,7 +187,7 @@ router.post("/chat", optionalAuth, async (req, res) => {
       fallbackBranch = fb.branch;
     }
 
-    // 💾 persist ONLY if user exists
+    // 💾 persist ONLY if user exists; guests get ephemeral in-memory buffer
     if (userId) {
       await db.execute(sql`
         INSERT INTO ai_messages (user_id, role, content)
@@ -165,6 +198,9 @@ router.post("/chat", optionalAuth, async (req, res) => {
         INSERT INTO ai_messages (user_id, role, content)
         VALUES (${userId}, 'assistant', ${reply})
       `);
+    } else if (guestId) {
+      pushGuestMessage(guestId, "user", message);
+      pushGuestMessage(guestId, "assistant", reply);
     }
 
     increment("ai_chat_message_count", { plan: userId ? "user" : "guest" });
@@ -178,6 +214,55 @@ router.post("/chat", optionalAuth, async (req, res) => {
   } catch (err) {
     console.error("AI chat error:", err);
     res.status(500).json({ error: "AI chat failed" });
+  }
+});
+
+// Returns conversation history. Authed users get DB-persisted rows;
+// guests with x-guest-id get the in-memory buffer for this process.
+router.get("/history", optionalAuth, async (req, res) => {
+  try {
+    const userId = req.dbUserId || null;
+    const guestId = userId ? null : getGuestIdFromReq(req);
+
+    if (userId) {
+      const result = await db.execute(sql`
+        SELECT role, content
+        FROM ai_messages
+        WHERE user_id = ${userId}
+        ORDER BY created_at ASC
+        LIMIT 50
+      `);
+      return res.json({ ok: true, messages: result.rows || [] });
+    }
+    if (guestId) {
+      return res.json({ ok: true, messages: guestHistory.get(guestId) || [] });
+    }
+    return res.json({ ok: true, messages: [] });
+  } catch (err) {
+    console.error("AI history error:", err);
+    res.status(500).json({ error: "Failed to load history" });
+  }
+});
+
+// Clears conversation history. Authed users wipe their DB rows;
+// guests with x-guest-id wipe their in-memory bucket.
+router.delete("/history", optionalAuth, async (req, res) => {
+  try {
+    const userId = req.dbUserId || null;
+    const guestId = userId ? null : getGuestIdFromReq(req);
+
+    if (userId) {
+      await db.execute(sql`DELETE FROM ai_messages WHERE user_id = ${userId}`);
+      return res.json({ ok: true, cleared: "user" });
+    }
+    if (guestId) {
+      guestHistory.delete(guestId);
+      return res.json({ ok: true, cleared: "guest" });
+    }
+    return res.json({ ok: true, cleared: "none" });
+  } catch (err) {
+    console.error("AI history delete error:", err);
+    res.status(500).json({ error: "Failed to clear history" });
   }
 });
 
