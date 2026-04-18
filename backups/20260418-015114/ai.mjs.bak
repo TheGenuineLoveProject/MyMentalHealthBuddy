@@ -1,0 +1,115 @@
+import { Router } from "express";
+import { sql } from "drizzle-orm";
+import db from "../db/client.mjs";
+import { optionalAuth } from "../middleware/auth.mjs";
+import { chatCompletion, isConfigured } from "../utils/aiclient.mjs";
+
+const router = Router();
+
+const SYSTEM_PROMPT = `
+You are a gentle, supportive mental health companion.
+- Validate feelings
+- Do NOT diagnose
+- Do NOT give commands
+- Use soft language
+- If crisis → provide help resources
+Always end with:
+"Take what serves you. You know yourself best."
+`;
+
+const CRISIS_KEYWORDS = [
+  "kill myself","suicide","end my life","want to die",
+  "hurt myself","self harm","cut myself"
+];
+
+function detectCrisis(text = "") {
+  const t = text.toLowerCase();
+  return CRISIS_KEYWORDS.some(k => t.includes(k));
+}
+
+const CRISIS_RESPONSE = {
+  reply: `I'm really sorry you're going through this.
+
+You deserve support right now.
+
+Please reach out:
+- Call or text 988 (US)
+- Text HOME to 741741
+
+If in danger call 911 immediately.
+
+You are not alone.`,
+  crisis: true
+};
+
+router.post("/chat", optionalAuth, async (req, res) => {
+  try {
+    const userId = req.dbUserId || null;
+    const { message } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ error: "Missing message" });
+    }
+
+    // 🚨 crisis handling FIRST
+    if (detectCrisis(message)) {
+      return res.json(CRISIS_RESPONSE);
+    }
+
+    // history (only if authed)
+    let history = [];
+    if (userId) {
+      const result = await db.execute(sql`
+        SELECT role, content
+        FROM ai_messages
+        WHERE user_id = ${userId}
+        ORDER BY created_at DESC
+        LIMIT 10
+      `);
+      history = (result.rows || []).reverse();
+    }
+
+    const messages = [
+      { role: "system", content: SYSTEM_PROMPT },
+      ...history,
+      { role: "user", content: message }
+    ];
+
+    let reply;
+
+    if (isConfigured()) {
+      const result = await chatCompletion({
+        messages,
+        temperature: 0.7,
+        maxTokens: 300
+      });
+
+      reply = result.success
+        ? result.content
+        : "I'm here with you. You're not alone.";
+    } else {
+      reply = "I'm here with you. You're not alone.";
+    }
+
+    // 💾 persist ONLY if user exists
+    if (userId) {
+      await db.execute(sql`
+        INSERT INTO ai_messages (user_id, role, content)
+        VALUES (${userId}, 'user', ${message})
+      `);
+
+      await db.execute(sql`
+        INSERT INTO ai_messages (user_id, role, content)
+        VALUES (${userId}, 'assistant', ${reply})
+      `);
+    }
+
+    res.json({ reply });
+
+  } catch (err) {
+    console.error("AI chat error:", err);
+    res.status(500).json({ error: "AI chat failed" });
+  }
+});
+
+export default router;
