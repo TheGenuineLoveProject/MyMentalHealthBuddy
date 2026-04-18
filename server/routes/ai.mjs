@@ -29,18 +29,25 @@ function detectCrisis(text = "") {
 }
 
 const CRISIS_RESPONSE = {
-  reply: `I'm really sorry you're going through this.
+  isCrisis: true,
+  reply: `I hear you, and I’m really glad you said something. You don’t have to carry this alone.
 
-You deserve support right now.
+If you're in immediate danger, please call emergency services (911 in the U.S.).
 
-Please reach out:
-- Call or text 988 (US)
-- Text HOME to 741741
+You can also reach out right now:
+- Call or text 988 (Suicide & Crisis Lifeline)
+- Text HOME to 741741 (Crisis Text Line)
 
-If in danger call 911 immediately.
+If calling feels like too much, even texting can be a small first step.
 
-You are not alone.`,
-  crisis: true
+If you can, consider reaching out to someone you trust — a friend, family member, or someone safe.
+
+You matter. Your safety matters. And support is available right now.`,
+  resources: [
+    { name: "988 Lifeline", contact: "988", type: "phone" },
+    { name: "Crisis Text Line", contact: "741741", type: "text" }
+  ],
+  action: "escalate_immediately"
 };
 
 const FALLBACK_BRANCHES = [
