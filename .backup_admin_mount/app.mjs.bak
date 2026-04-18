@@ -24,7 +24,6 @@ import healthRoutes from "./routes/health.mjs";
 import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
 import { requireAdult } from "./middleware/requireAdult.mjs";
 import adminRoutes from "./routes/admin.mjs";
-import adminBillingRoutes from "./routes/adminBilling.mjs";
 import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
 import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
 import db from "./db/client.mjs";
@@ -98,16 +97,6 @@ app.use("/api/session", sessionBoundaryRoutes);
 
 // Admin routes (strict: limiter -> requireAuth -> requireAdmin). Only admin.mjs is mounted.
 app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
-
-/* ===== ADMIN BILLING (SAFE MOUNT) ===== */
-app.use(
-  "/api/admin/billing",
-  adminLimiter,
-  requireAuth,
-  requireAdmin,
-  adminBillingRoutes
-);
-
 
 // AI routes (aiLimiter already mounted above on /api/ai before this handler)
 app.use("/api/ai", optionalAuth, aiRoutes);
