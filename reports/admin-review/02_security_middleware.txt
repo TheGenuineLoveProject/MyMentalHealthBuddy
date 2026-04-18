@@ -1,0 +1,127 @@
+## middleware files
+server/middleware/adminAuth.mjs
+server/middleware/audit.mjs
+server/middleware/auth.mjs
+server/middleware/csrf.mjs
+server/middleware/errorHandler.mjs
+server/middleware/loginRateLimit.mjs
+server/middleware/promptshield.mjs
+server/middleware/rateLimit.mjs
+server/middleware/rbac.mjs
+server/middleware/requestId.mjs
+server/middleware/requireAdmin.mjs
+server/middleware/requireAdult.mjs
+server/middleware/requireAuth.mjs
+server/middleware/requirePlan.mjs
+server/middleware/requireRole.mjs
+server/middleware/security.mjs
+server/middleware/session.mjs
+server/middleware/validate-body.mjs
+server/middleware/validate-content-model.mjs
+
+## requireAdmin definitions
+server/middleware/adminAuth.mjs:2:// Re-export requireAdmin for backwards compatibility
+server/middleware/adminAuth.mjs:4:export { requireAdmin };
+server/middleware/adminAuth.mjs:5:export default requireAdmin;
+server/middleware/requireAdmin.mjs:1:export default function requireAdmin(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:51:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs:56:export function requireAdmin(req, res, next) {
+server/middleware/adminAuth.mjs:2:// Re-export requireAdmin for backwards compatibility
+server/middleware/adminAuth.mjs:4:export { requireAdmin };
+server/middleware/adminAuth.mjs:5:export default requireAdmin;
+server/middleware/requireAdmin.mjs:1:export default function requireAdmin(req, res, next) {
+server/middleware/auth.mjs.bak.1776489488:51:export function requireAdmin(req, res, next) {
+server/middleware/auth.mjs:56:export function requireAdmin(req, res, next) {
+server/routes/deploymentReadiness.mjs:9:function requireAdminToken(req, res, next) {
+server/routes/feedback.mjs:13:function requireAdmin(req, res, next) {
+server/routes/narrative-drafts.mjs:17:function requireAdmin(req, res, next) {
+server/routes/soft-launch-metrics.mjs:22:function requireAdmin(req, res, next) {
+server/routes/health.mjs:10:function requireAdminForRepair(req, res, next) {
+
+## rate limiting middleware
+server/lib/rateLimitLogger.mjs:1:const rateLimitLogs = [];
+server/lib/rateLimitLogger.mjs:5:  rateLimitLogs.unshift(log);
+server/lib/rateLimitLogger.mjs:7:  if (rateLimitLogs.length > MAX_LOGS) {
+server/lib/rateLimitLogger.mjs:8:    rateLimitLogs.length = MAX_LOGS;
+server/lib/rateLimitLogger.mjs:13:  let logs = [...rateLimitLogs];
+server/lib/rateLimitLogger.mjs:39:  const blocked = rateLimitLogs.filter(log => log.blocked);
+server/lib/rateLimitLogger.mjs:45:  for (const log of rateLimitLogs) {
+server/lib/rateLimitLogger.mjs:74:    totalRequests: rateLimitLogs.length,
+server/lib/rateLimitLogger.mjs:76:    blockRate: rateLimitLogs.length > 0 
+server/lib/rateLimitLogger.mjs:77:      ? Math.round((blocked.length / rateLimitLogs.length) * 10000) / 100 
+server/lib/rateLimitLogger.mjs:114:  rateLimitLogs.length = 0;
+server/middleware/rateLimit.mjs:1:// server/middleware/rateLimit.mjs
+server/middleware/rateLimit.mjs:7:import rateLimit from "express-rate-limit";
+server/middleware/rateLimit.mjs:105:export const apiRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:122:export const authRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:153:export const aiRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:167:export const sensitiveRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:181:export const mirrorRateLimit = rateLimit({
+server/middleware/security.mjs:3:import rateLimit from "express-rate-limit";
+server/middleware/security.mjs:15:export const apiLimiter = rateLimit({
+server/routes/account.mjs:10:import { authRateLimit, sensitiveRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/admin-security.mjs:2:import { getRateLimitLogs, getRateLimitStats, clearRateLimitLogs } from '../lib/rateLimitLogger.mjs';
+server/routes/admin-security.mjs:71:  const rateLimitStats = getRateLimitStats();
+server/routes/admin-security.mjs:78:      rateLimit: {
+server/routes/admin-security.mjs:79:        totalRequests: rateLimitStats.totalRequests,
+server/routes/admin-security.mjs:80:        blockedRequests: rateLimitStats.blockedRequests,
+server/routes/admin-security.mjs:81:        blockRate: rateLimitStats.blockRate,
+server/routes/admin-security.mjs:82:        topBlockedIP: rateLimitStats.topBlockedIPs[0] || null,
+server/routes/leads.mjs:6:import { authRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/mirror.mjs:4:import rateLimit from "express-rate-limit";
+server/routes/mirror.mjs:10:const mirrorLimiter = rateLimit({
+server/routes/newsletter.mjs:11:const rateLimitStore = new Map();
+server/routes/newsletter.mjs:15:function rateLimit(req, res, next) {
+server/routes/newsletter.mjs:18:  const entry = rateLimitStore.get(ip);
+server/routes/newsletter.mjs:21:    rateLimitStore.set(ip, { windowStart: now, count: 1 });
+server/routes/newsletter.mjs:41:  for (const [key, entry] of rateLimitStore) {
+server/routes/newsletter.mjs:43:      rateLimitStore.delete(key);
+server/routes/newsletter.mjs:52:router.post('/subscribe', rateLimit, async (req, res) => {
+server/routes/newsletter.mjs:124:router.post('/unsubscribe', rateLimit, async (req, res) => {
+server/routes/perplexity.mjs:9:import { aiRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/ai.healing.mjs:6:import { aiRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/ai.business.mjs:7:import { aiRateLimit } from "../middleware/rateLimit.mjs";
+server/security/hardening.mjs:2:import rateLimit from "express-rate-limit";
+server/security/hardening.mjs:29:    rateLimit({
+server/security/hardening.mjs:39:    rateLimit({
+server/services/social-platforms.mjs:43:    rateLimit: { posts: 50, period: '24h' },
+server/services/social-platforms.mjs:62:    rateLimit: { posts: 50, period: '24h' },
+server/services/social-platforms.mjs:80:    rateLimit: { requests: 6, period: '1m' },
+server/services/social-platforms.mjs:98:    rateLimit: { uploads: 100, period: '24h' },
+server/services/social-platforms.mjs:116:    rateLimit: { tweets: 300, period: '3h' },
+server/services/social-platforms.mjs:131:    rateLimit: { posts: 250, period: '24h' },
+server/services/social-platforms.mjs:146:    rateLimit: { pins: 1000, period: '24h' },
+server/services/social-platforms.mjs:162:    rateLimit: { posts: 100, period: '24h' },
+server/shared/importMap.mjs:20:    rateLimiter: "../middleware/rateLimiter.mjs"
+server/index.mjs:275:const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
+server/app.mjs.bak:41:import rateLimit from "express-rate-limit";
+server/app.mjs.bak:51:const aiLimiter = rateLimit({
+server/dev.mjs:209:  const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
+server/app.mjs.bak.1776489488:41:import rateLimit from "express-rate-limit";
+server/app.mjs.bak.1776489488:51:const aiLimiter = rateLimit({
+server/app.mjs:48:import rateLimit from "express-rate-limit";
+server/app.mjs:56:const aiLimiter = rateLimit({
+server/app.mjs:66:const adminLimiter = rateLimit({
+
+## csrf middleware
+server/lib/csrf.mjs:77:export function csrfProtection(req, res, next) {
+server/lib/csrf.mjs:82:    res.locals.csrfToken = token;
+server/lib/csrf.mjs:87:  const token = req.headers['x-csrf-token'] || req.body?._csrf;
+server/lib/csrf.mjs:98:  res.locals.csrfToken = newToken;
+server/middleware/csrf.mjs:3:const CSRF_COOKIE_NAME = "csrf_token";
+server/middleware/csrf.mjs:4:const CSRF_HEADER_NAME = "x-csrf-token";
+server/middleware/csrf.mjs:11:export function csrfProtection(options = {}) {
+server/routes/admin-security.mjs:3:import { getCSRFStats } from '../lib/csrf.mjs';
+server/routes/admin-security.mjs:44:router.get('/csrf/stats', (_req, res) => {
+server/routes/admin-security.mjs:72:  const csrfStats = getCSRFStats();
+server/routes/admin-security.mjs:84:      csrf: {
+server/routes/admin-security.mjs:85:        activeTokens: csrfStats.activeTokens,
+server/routes/admin-security.mjs:86:        tokenRotationActive: csrfStats.activeTokens > 0,
+server/routes/session-boundary.mjs:5:import { issueCsrfToken } from "../security/csrf.mjs";
+server/routes/session-boundary.mjs:9:router.get("/csrf-token", (req, res) => {
+server/routes/session-boundary.mjs:11:  return res.json({ ok: true, csrfToken: token });
+server/security/csrf.mjs:3:const COOKIE_NAME = "csrf_secret";
+server/security/csrf.mjs:4:const HEADER_NAME = "x-csrf-token";
+server/security/csrf.mjs:42:export function csrfProtection(req, res, next) {
+server/app.mjs:28:import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
+server/app.mjs:53:app.use(csrfProtection);

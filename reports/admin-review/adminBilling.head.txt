@@ -1,0 +1,136 @@
+FILE: server/routes/adminBilling.mjs
+
+/**
+ * Admin Billing Routes (P128)
+ * Read-only billing information for admins
+ */
+
+import { Router } from 'express';
+import { sql } from 'drizzle-orm';
+import db from '../db/client.mjs';
+import { logger } from '../utils/logger.mjs';
+import { success, unauthorized, forbidden, serverError } from '../utils/responses.mjs';
+import { requireAdmin } from '../middleware/adminAuth.mjs';
+
+const router = Router();
+
+// Apply admin check to all routes
+router.use(requireAdmin);
+
+// P128: Get billing overview stats
+router.get('/overview', async (req, res) => {
+  try {
+    // Total subscriptions
+    const totalResult = await db.execute(sql`
+      SELECT COUNT(*) as count FROM subscriptions
+    `);
+    const totalSubscriptions = parseInt(totalResult.rows?.[0]?.count || 0);
+
+    // Active subscriptions
+    const activeResult = await db.execute(sql`
+      SELECT COUNT(*) as count FROM subscriptions 
+      WHERE status IN ('active', 'trialing')
+    `);
+    const activeSubscriptions = parseInt(activeResult.rows?.[0]?.count || 0);
+
+    // Calculate MRR (simplified - just count active at assumed price)
+    const mrrResult = await db.execute(sql`
+      SELECT tier, COUNT(*) as count FROM subscriptions 
+      WHERE status = 'active'
+      GROUP BY tier
+    `);
+    
+    const tierPrices = { pro: 1999 }; // cents
+    let mrr = 0;
+    mrrResult.rows?.forEach(row => {
+      mrr += (tierPrices[row.tier] || 0) * parseInt(row.count || 0);
+    });
+
+    // Churn rate (simplified - canceled in last 30 days / total)
+    const churnResult = await db.execute(sql`
+      SELECT COUNT(*) as count FROM subscriptions 
+      WHERE status = 'canceled' 
+      AND updated_at > NOW() - INTERVAL '30 days'
+    `);
+    const churned = parseInt(churnResult.rows?.[0]?.count || 0);
+    const churnRate = totalSubscriptions > 0 ? (churned / totalSubscriptions) * 100 : 0;
+
+    return success(res, {
+      totalSubscriptions,
+      activeSubscriptions,
+      mrr,
+      churnRate,
+      updatedAt: new Date().toISOString()
+    });
+  } catch (err) {
+    logger.error('Admin billing overview error', { error: err.message });
+    return serverError(res, err);
+  }
+});
+
+// P128: Get subscription list (read-only)
+router.get('/subscriptions', async (req, res) => {
+  try {
+    const result = await db.execute(sql`
+      SELECT 
+        s.id,
+        s.user_id as "userId",
+        u.email as "userEmail",
+        s.tier,
+        s.status,
+        s.stripe_subscription_id as "stripeSubscriptionId",
+        s.current_period_start as "currentPeriodStart",
+        s.current_period_end as "currentPeriodEnd",
+        s.cancel_at_period_end as "cancelAtPeriodEnd",
+        s.created_at as "createdAt",
+        s.updated_at as "updatedAt"
+      FROM subscriptions s
+      LEFT JOIN users u ON s.user_id = u.id
+      ORDER BY s.created_at DESC
+      LIMIT 50
+    `);
+
+    // Redact sensitive info for read-only view
+    const subscriptions = result.rows?.map(s => ({
+      id: s.id,
+      userId: s.userId ? `${s.userId.substring(0, 8)}...` : null,
+      userEmail: s.userEmail ? `${s.userEmail.substring(0, 3)}***@***` : null,
+      tier: s.tier,
+      status: s.status,
+      currentPeriodStart: s.currentPeriodStart,
+      currentPeriodEnd: s.currentPeriodEnd,
+      cancelAtPeriodEnd: s.cancelAtPeriodEnd,
+      createdAt: s.createdAt,
+    })) || [];
+
+    return success(res, { subscriptions });
+  } catch (err) {
+    logger.error('Admin subscriptions fetch error', { error: err.message });
+    return serverError(res, err);
+  }
+});
+
+// P128: Get plan distribution
+router.get('/plan-distribution', async (req, res) => {
+  try {
+    const result = await db.execute(sql`
+      SELECT tier, status, COUNT(*) as count 
+      FROM subscriptions 
+      GROUP BY tier, status
+      ORDER BY tier, status
+    `);
+
+    return success(res, { distribution: result.rows || [] });
+  } catch (err) {
+    logger.error('Plan distribution error', { error: err.message });
+    return serverError(res, err);
+  }
+});
+
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "adminBilling", status: "operational", timestamp: new Date().toISOString() });
+});
+
+export default router;

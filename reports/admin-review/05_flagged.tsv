@@ -1,0 +1,6 @@
+file	hasRequireAdmin	hasWrites	risk
+server/routes/admin-publishing.mjs	true	true	MEDIUM
+server/routes/admin-security.mjs	false	true	HIGH
+server/routes/admin-social-studio.mjs	true	true	MEDIUM
+server/routes/admin.mjs	false	true	HIGH
+server/routes/adminBilling.mjs	true	true	MEDIUM

@@ -1,0 +1,222 @@
+FILE: server/routes/admin-publishing.mjs
+
+import { Router } from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
+import { logger } from '../utils/logger.mjs';
+import { db } from '../db/connection.mjs';
+import { analyticsEvents, newsletterSubscribers, leads } from '../../shared/schema.mjs';
+import { desc, sql, count, gte, eq } from 'drizzle-orm';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '../..');
+
+const router = Router();
+router.use(requireAuth);
+router.use(requireAdmin);
+
+function readJsonFile(filepath) {
+  try {
+    if (fs.existsSync(filepath)) {
+      return JSON.parse(fs.readFileSync(filepath, 'utf8'));
+    }
+  } catch (err) {
+    logger.error('Failed to read JSON file', { filepath, error: err.message });
+  }
+  return null;
+}
+
+function writeJsonFile(filepath, data) {
+  try {
+    const dir = path.dirname(filepath);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
+    return true;
+  } catch (err) {
+    logger.error('Failed to write JSON file', { filepath, error: err.message });
+    return false;
+  }
+}
+
+router.get('/registry', (req, res) => {
+  const registry = readJsonFile(path.join(ROOT, 'content/publishing/publishingRegistry.json')) || [];
+  res.json({ ok: true, data: registry });
+});
+
+router.post('/registry', (req, res) => {
+  const filepath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
+  const registry = readJsonFile(filepath) || [];
+  const { type, pillar, title, slug, primaryCta, notes } = req.body;
+
+  if (!type || !title) {
+    return res.status(400).json({ ok: false, error: 'type and title are required' });
+  }
+
+  const id = `glp-${type}-${Date.now().toString(36)}`;
+  const entry = {
+    id,
+    type,
+    pillar: pillar || 'PLATFORM_ORIENTATION',
+    title,
+    slug: slug || null,
+    status: 'draft',
+    primaryCta: primaryCta || '/blog',
+    createdAt: new Date().toISOString(),
+    publishAt: null,
+    owner: 'admin',
+    sourceFile: null,
+    notes: notes || '',
+  };
+
+  registry.push(entry);
+  writeJsonFile(filepath, registry);
+  res.json({ ok: true, data: entry });
+});
+
+router.patch('/registry/:id', (req, res) => {
+  const filepath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
+  const registry = readJsonFile(filepath) || [];
+  const idx = registry.findIndex(r => r.id === req.params.id);
+
+  if (idx === -1) {
+    return res.status(404).json({ ok: false, error: 'Item not found' });
+  }
+
+  const allowed = ['status', 'notes', 'publishAt', 'primaryCta'];
+  for (const key of allowed) {
+    if (req.body[key] !== undefined) {
+      registry[idx][key] = req.body[key];
+    }
+  }
+
+  writeJsonFile(filepath, registry);
+  res.json({ ok: true, data: registry[idx] });
+});
+
+router.get('/calendar', (req, res) => {
+  const calendar = readJsonFile(path.join(ROOT, 'content/publishing/calendar/editorial_calendar.json')) || [];
+  res.json({ ok: true, data: calendar });
+});
+
+router.get('/pillars', (req, res) => {
+  const pillars = readJsonFile(path.join(ROOT, 'content/publishing/pillars.json')) || [];
+  res.json({ ok: true, data: pillars });
+});
+
+router.get('/drafts', (req, res) => {
+  const drafts = readJsonFile(path.join(ROOT, 'content/publishing/newsletter/drafts.json')) || [];
+  res.json({ ok: true, data: drafts });
+});
+
+router.get('/draft-packs', (req, res) => {
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packs = {};
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const data = readJsonFile(path.join(packDir, file));
+    if (data) packs[file] = data;
+  }
+  const all = Object.values(packs).flat();
+  res.json({ ok: true, data: all });
+});
+
+router.get('/draft-packs/:id', (req, res) => {
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const data = readJsonFile(path.join(packDir, file));
+    if (data) {
+      const item = data.find(d => d.id === req.params.id);
+      if (item) return res.json({ ok: true, data: item });
+    }
+  }
+  res.status(404).json({ ok: false, error: 'Draft not found' });
+});
+
+router.get('/featured', (req, res) => {
+  const featured = readJsonFile(path.join(ROOT, 'data/publishing_featured.json')) || {};
+  res.json({ ok: true, data: featured });
+});
+
+router.post('/featured', (req, res) => {
+  const filepath = path.join(ROOT, 'data/publishing_featured.json');
+  const featured = readJsonFile(filepath) || {};
+  const { date, glpId } = req.body;
+
+  if (!date || !glpId) {
+    return res.status(400).json({ ok: false, error: 'date and glpId required' });
+  }
+
+  featured[date] = {
+    glpId,
+    setAt: new Date().toISOString(),
+    setBy: 'admin',
+  };
+
+  writeJsonFile(filepath, featured);
+  res.json({ ok: true, data: featured[date] });
+});
+
+router.post('/mark-posted/:id', (req, res) => {
+  const registryPath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
+  const registry = readJsonFile(registryPath) || [];
+  const idx = registry.findIndex(r => r.id === req.params.id);
+
+  if (idx === -1) {
+    return res.status(404).json({ ok: false, error: 'Item not found in registry' });
+  }
+
+  registry[idx].status = 'posted';
+  registry[idx].postedAt = new Date().toISOString();
+  writeJsonFile(registryPath, registry);
+
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const filePath = path.join(packDir, file);
+    const data = readJsonFile(filePath);
+    if (data) {
+      const draftIdx = data.findIndex(d => d.id === req.params.id);
+      if (draftIdx !== -1) {
+        data[draftIdx].status = 'posted';
+        data[draftIdx].postedAt = new Date().toISOString();
+        writeJsonFile(filePath, data);
+        break;
+      }
+    }
+  }
+
+  res.json({ ok: true, data: registry[idx] });
+});
+
+router.get('/status', (req, res) => {
+  const status = readJsonFile(path.join(ROOT, 'data/publishing_status.json')) || {};
+  res.json({ ok: true, data: status });
+});
+
+router.post('/status', (req, res) => {
+  const filepath = path.join(ROOT, 'data/publishing_status.json');
+  const status = readJsonFile(filepath) || {};
+  const { itemId, newStatus } = req.body;
+
+  if (!itemId || !newStatus) {
+    return res.status(400).json({ ok: false, error: 'itemId and newStatus required' });
+  }
+
+  status[itemId] = {
+    status: newStatus,
+    updatedAt: new Date().toISOString(),
+    updatedBy: 'admin',
+  };
+
+  writeJsonFile(filepath, status);
+  res.json({ ok: true, data: status[itemId] });
+});
+
+router.get('/signals/summary', async (req, res) => {
+  try {
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const signalsPath = path.join(ROOT, 'logs/signals.jsonl');
+

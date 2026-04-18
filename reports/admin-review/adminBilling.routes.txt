@@ -1,0 +1,30 @@
+FILE: server/routes/adminBilling.mjs
+
+---- IMPORTS ----
+6:import { Router } from 'express';
+7:import { sql } from 'drizzle-orm';
+8:import db from '../db/client.mjs';
+9:import { logger } from '../utils/logger.mjs';
+10:import { success, unauthorized, forbidden, serverError } from '../utils/responses.mjs';
+11:import { requireAdmin } from '../middleware/adminAuth.mjs';
+
+---- ROUTE DEFINITIONS ----
+19:router.get('/overview', async (req, res) => {
+70:router.get('/subscriptions', async (req, res) => {
+112:router.get('/plan-distribution', async (req, res) => {
+130:router.get("/", (req, res) => {
+
+---- AUTH / RBAC REFERENCES ----
+11:import { requireAdmin } from '../middleware/adminAuth.mjs';
+16:router.use(requireAdmin);
+
+---- VALIDATION REFERENCES ----
+
+---- SIDE EFFECT HINTS ----
+22:    const totalResult = await db.execute(sql`
+28:    const activeResult = await db.execute(sql`
+35:    const mrrResult = await db.execute(sql`
+48:    const churnResult = await db.execute(sql`
+72:    const result = await db.execute(sql`
+79:        s.stripe_subscription_id as "stripeSubscriptionId",
+114:    const result = await db.execute(sql`

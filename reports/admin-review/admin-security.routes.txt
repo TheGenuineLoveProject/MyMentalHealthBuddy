@@ -1,0 +1,22 @@
+FILE: server/routes/admin-security.mjs
+
+---- IMPORTS ----
+1:import { Router } from 'express';
+2:import { getRateLimitLogs, getRateLimitStats, clearRateLimitLogs } from '../lib/rateLimitLogger.mjs';
+3:import { getCSRFStats } from '../lib/csrf.mjs';
+4:import { getWebSocketStats } from '../lib/websocket.mjs';
+
+---- ROUTE DEFINITIONS ----
+8:router.get('/rate-limits', (req, res) => {
+26:router.get('/rate-limits/stats', (_req, res) => {
+35:router.delete('/rate-limits/logs', (_req, res) => {
+44:router.get('/csrf/stats', (_req, res) => {
+61:router.get('/websocket/stats', (_req, res) => {
+70:router.get('/overview', (_req, res) => {
+99:router.get("/", (req, res) => {
+
+---- AUTH / RBAC REFERENCES ----
+
+---- VALIDATION REFERENCES ----
+
+---- SIDE EFFECT HINTS ----

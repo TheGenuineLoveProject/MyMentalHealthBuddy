@@ -24,6 +24,13 @@ import healthRoutes from "./routes/health.mjs";
 import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
 import { requireAdult } from "./middleware/requireAdult.mjs";
 import adminRoutes from "./routes/admin.mjs";
+import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
+import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
+import db from "./db/client.mjs";
+
+// Expose to session-boundary helpers without touching working modules.
+globalThis.issueCsrfToken = issueCsrfToken;
+if (db) globalThis.db = db;
 
 // ----------------------------
 // APP INIT
@@ -43,6 +50,7 @@ import cookieParser from "cookie-parser";
 
 app.use(helmet());
 app.use(cookieParser());
+app.use(csrfProtection);
 
 // ===== AI RATE LIMIT (single source of truth) =====
 const aiLimiter = rateLimit({
@@ -83,6 +91,9 @@ app.use("/api/ai/business", aiBusinessRoutes);
 
 // Auth routes (mount before AI routes so /api/auth/* works)
 app.use("/api/auth", authRoutes);
+
+// Session boundary (CSRF token issuance + guest->user history upgrade)
+app.use("/api/session", sessionBoundaryRoutes);
 
 // Admin routes (strict: limiter -> requireAuth -> requireAdmin). Only admin.mjs is mounted.
 app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);

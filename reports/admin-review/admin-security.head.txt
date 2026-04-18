@@ -1,0 +1,105 @@
+FILE: server/routes/admin-security.mjs
+
+import { Router } from 'express';
+import { getRateLimitLogs, getRateLimitStats, clearRateLimitLogs } from '../lib/rateLimitLogger.mjs';
+import { getCSRFStats } from '../lib/csrf.mjs';
+import { getWebSocketStats } from '../lib/websocket.mjs';
+
+const router = Router();
+
+router.get('/rate-limits', (req, res) => {
+  const { limit, blockedOnly, ip, path, since } = req.query;
+  
+  const logs = getRateLimitLogs({
+    limit: limit ? parseInt(limit) : 100,
+    blockedOnly: blockedOnly === 'true',
+    ip: ip,
+    path: path,
+    since: since ? parseInt(since) : undefined,
+  });
+  
+  res.json({
+    success: true,
+    data: logs,
+    count: logs.length,
+  });
+});
+
+router.get('/rate-limits/stats', (_req, res) => {
+  const stats = getRateLimitStats();
+  
+  res.json({
+    success: true,
+    data: stats,
+  });
+});
+
+router.delete('/rate-limits/logs', (_req, res) => {
+  clearRateLimitLogs();
+  
+  res.json({
+    success: true,
+    message: 'Rate limit logs cleared',
+  });
+});
+
+router.get('/csrf/stats', (_req, res) => {
+  const stats = getCSRFStats();
+  
+  res.json({
+    success: true,
+    data: {
+      ...stats,
+      oldestTokenAge: stats.oldestToken 
+        ? Math.round((Date.now() - stats.oldestToken) / 1000 / 60) 
+        : null,
+      newestTokenAge: stats.newestToken 
+        ? Math.round((Date.now() - stats.newestToken) / 1000) 
+        : null,
+    },
+  });
+});
+
+router.get('/websocket/stats', (_req, res) => {
+  const stats = getWebSocketStats();
+  
+  res.json({
+    success: true,
+    data: stats,
+  });
+});
+
+router.get('/overview', (_req, res) => {
+  const rateLimitStats = getRateLimitStats();
+  const csrfStats = getCSRFStats();
+  const wsStats = getWebSocketStats();
+  
+  res.json({
+    success: true,
+    data: {
+      rateLimit: {
+        totalRequests: rateLimitStats.totalRequests,
+        blockedRequests: rateLimitStats.blockedRequests,
+        blockRate: rateLimitStats.blockRate,
+        topBlockedIP: rateLimitStats.topBlockedIPs[0] || null,
+      },
+      csrf: {
+        activeTokens: csrfStats.activeTokens,
+        tokenRotationActive: csrfStats.activeTokens > 0,
+      },
+      websocket: {
+        activeConnections: wsStats.totalConnections,
+        activeRooms: wsStats.rooms.length,
+      },
+      timestamp: Date.now(),
+    },
+  });
+});
+
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "admin-security", status: "operational", timestamp: new Date().toISOString() });
+});
+
+export default router;

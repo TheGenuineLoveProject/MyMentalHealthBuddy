@@ -1,0 +1,6 @@
+file	routeCount	hasRequireAuth	hasRequireAdmin	hasValidation	hasWrites	hasOptionalAuth	risk
+server/routes/admin-publishing.mjs	16	true	true	true	true	false	MEDIUM
+server/routes/admin-security.mjs	7	false	false	false	true	false	HIGH
+server/routes/admin-social-studio.mjs	31	true	true	true	true	false	MEDIUM
+server/routes/admin.mjs	6	true	false	false	true	false	HIGH
+server/routes/adminBilling.mjs	4	false	true	false	true	false	MEDIUM

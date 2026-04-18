@@ -29,6 +29,8 @@ Always end with:
 `.trim();
 
 const guestHistory = new Map();
+// Expose for session-boundary upgrade-history endpoint (read + clear only).
+globalThis.__guestHistory__ = guestHistory;
 const GUEST_HISTORY_MAX = 10;
 const GUEST_BUCKETS_MAX = 5000;
 

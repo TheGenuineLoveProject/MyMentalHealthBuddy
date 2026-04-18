@@ -1,0 +1,18 @@
+---- adminBilling.mjs ----
+server/index.mjs:110:import adminBillingRouter from "./routes/adminBilling.mjs";
+server/dev.mjs:119:import adminBillingRouter from "./routes/adminBilling.mjs";
+---- admin.mjs ----
+server/app.mjs:26:import adminRoutes from "./routes/admin.mjs";
+server/app.mjs:98:// Admin routes (strict: limiter -> requireAuth -> requireAdmin). Only admin.mjs is mounted.
+server/index.mjs:15:import adminRouter from './routes/admin.mjs';
+server/dev.mjs:14:import adminRouter from "./routes/admin.mjs";
+server/routes/admin.mjs:1:// server/routes/admin.mjs
+---- admin-publishing.mjs ----
+server/index.mjs:111:import adminPublishingRouter from "./routes/admin-publishing.mjs";
+server/dev.mjs:120:import adminPublishingRouter from "./routes/admin-publishing.mjs";
+---- admin-security.mjs ----
+server/index.mjs:120:import adminSecurityRouter from "./routes/admin-security.mjs";
+server/dev.mjs:110:import adminSecurityRouter from "./routes/admin-security.mjs";
+---- admin-social-studio.mjs ----
+server/index.mjs:99:import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
+server/dev.mjs:103:import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
