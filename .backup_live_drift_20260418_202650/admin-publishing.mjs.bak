@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { z } from 'zod';
 import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
 import { logger } from '../utils/logger.mjs';
-import db from '../db/client.mjs';
+import { db } from '../db/connection.mjs';
 import { analyticsEvents, newsletterSubscribers, leads } from '../../shared/schema.mjs';
 import { desc, sql, count, gte, eq } from 'drizzle-orm';
 

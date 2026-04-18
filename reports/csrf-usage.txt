@@ -1,0 +1,21 @@
+server/lib/csrf.mjs:77:export function csrfProtection(req, res, next) {
+server/lib/csrf.mjs:82:    res.locals.csrfToken = token;
+server/lib/csrf.mjs:87:  const token = req.headers['x-csrf-token'] || req.body?._csrf;
+server/lib/csrf.mjs:98:  res.locals.csrfToken = newToken;
+server/middleware/csrf.mjs:3:const CSRF_COOKIE_NAME = "csrf_token";
+server/middleware/csrf.mjs:4:const CSRF_HEADER_NAME = "x-csrf-token";
+server/middleware/csrf.mjs:11:export function csrfProtection(options = {}) {
+server/routes/admin-security.mjs:3:import { getCSRFStats } from '../lib/csrf.mjs';
+server/routes/admin-security.mjs:44:router.get('/csrf/stats', (_req, res) => {
+server/routes/admin-security.mjs:72:  const csrfStats = getCSRFStats();
+server/routes/admin-security.mjs:84:      csrf: {
+server/routes/admin-security.mjs:85:        activeTokens: csrfStats.activeTokens,
+server/routes/admin-security.mjs:86:        tokenRotationActive: csrfStats.activeTokens > 0,
+server/routes/session-boundary.mjs:5:import { issueCsrfToken } from "../security/csrf.mjs";
+server/routes/session-boundary.mjs:9:router.get("/csrf-token", (req, res) => {
+server/routes/session-boundary.mjs:11:  return res.json({ ok: true, csrfToken: token });
+server/security/csrf.mjs:3:const COOKIE_NAME = "csrf_secret";
+server/security/csrf.mjs:4:const HEADER_NAME = "x-csrf-token";
+server/security/csrf.mjs:42:export function csrfProtection(req, res, next) {
+server/app.mjs:31:import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
+server/app.mjs:56:app.use(csrfProtection);

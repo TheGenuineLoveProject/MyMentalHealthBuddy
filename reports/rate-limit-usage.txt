@@ -1,0 +1,72 @@
+server/lib/rateLimitLogger.mjs:1:const rateLimitLogs = [];
+server/lib/rateLimitLogger.mjs:5:  rateLimitLogs.unshift(log);
+server/lib/rateLimitLogger.mjs:7:  if (rateLimitLogs.length > MAX_LOGS) {
+server/lib/rateLimitLogger.mjs:8:    rateLimitLogs.length = MAX_LOGS;
+server/lib/rateLimitLogger.mjs:13:  let logs = [...rateLimitLogs];
+server/lib/rateLimitLogger.mjs:39:  const blocked = rateLimitLogs.filter(log => log.blocked);
+server/lib/rateLimitLogger.mjs:45:  for (const log of rateLimitLogs) {
+server/lib/rateLimitLogger.mjs:74:    totalRequests: rateLimitLogs.length,
+server/lib/rateLimitLogger.mjs:76:    blockRate: rateLimitLogs.length > 0 
+server/lib/rateLimitLogger.mjs:77:      ? Math.round((blocked.length / rateLimitLogs.length) * 10000) / 100 
+server/lib/rateLimitLogger.mjs:114:  rateLimitLogs.length = 0;
+server/middleware/rateLimit.mjs:1:// server/middleware/rateLimit.mjs
+server/middleware/rateLimit.mjs:7:import rateLimit from "express-rate-limit";
+server/middleware/rateLimit.mjs:105:export const apiRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:122:export const authRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:153:export const aiRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:167:export const sensitiveRateLimit = rateLimit({
+server/middleware/rateLimit.mjs:181:export const mirrorRateLimit = rateLimit({
+server/middleware/security.mjs:3:import rateLimit from "express-rate-limit";
+server/middleware/security.mjs:15:export const apiLimiter = rateLimit({
+server/routes/account.mjs:10:import { authRateLimit, sensitiveRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/admin-security.mjs:2:import { getRateLimitLogs, getRateLimitStats, clearRateLimitLogs } from '../lib/rateLimitLogger.mjs';
+server/routes/admin-security.mjs:71:  const rateLimitStats = getRateLimitStats();
+server/routes/admin-security.mjs:78:      rateLimit: {
+server/routes/admin-security.mjs:79:        totalRequests: rateLimitStats.totalRequests,
+server/routes/admin-security.mjs:80:        blockedRequests: rateLimitStats.blockedRequests,
+server/routes/admin-security.mjs:81:        blockRate: rateLimitStats.blockRate,
+server/routes/admin-security.mjs:82:        topBlockedIP: rateLimitStats.topBlockedIPs[0] || null,
+server/routes/leads.mjs:6:import { authRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/mirror.mjs:4:import rateLimit from "express-rate-limit";
+server/routes/mirror.mjs:10:const mirrorLimiter = rateLimit({
+server/routes/newsletter.mjs:11:const rateLimitStore = new Map();
+server/routes/newsletter.mjs:15:function rateLimit(req, res, next) {
+server/routes/newsletter.mjs:18:  const entry = rateLimitStore.get(ip);
+server/routes/newsletter.mjs:21:    rateLimitStore.set(ip, { windowStart: now, count: 1 });
+server/routes/newsletter.mjs:41:  for (const [key, entry] of rateLimitStore) {
+server/routes/newsletter.mjs:43:      rateLimitStore.delete(key);
+server/routes/newsletter.mjs:52:router.post('/subscribe', rateLimit, async (req, res) => {
+server/routes/newsletter.mjs:124:router.post('/unsubscribe', rateLimit, async (req, res) => {
+server/routes/perplexity.mjs:9:import { aiRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/ai.healing.mjs:6:import { aiRateLimit } from "../middleware/rateLimit.mjs";
+server/routes/ai.business.mjs:7:import { aiRateLimit } from "../middleware/rateLimit.mjs";
+server/security/hardening.mjs:2:import rateLimit from "express-rate-limit";
+server/security/hardening.mjs:29:    rateLimit({
+server/security/hardening.mjs:39:    rateLimit({
+server/services/social-platforms.mjs:43:    rateLimit: { posts: 50, period: '24h' },
+server/services/social-platforms.mjs:62:    rateLimit: { posts: 50, period: '24h' },
+server/services/social-platforms.mjs:80:    rateLimit: { requests: 6, period: '1m' },
+server/services/social-platforms.mjs:98:    rateLimit: { uploads: 100, period: '24h' },
+server/services/social-platforms.mjs:116:    rateLimit: { tweets: 300, period: '3h' },
+server/services/social-platforms.mjs:131:    rateLimit: { posts: 250, period: '24h' },
+server/services/social-platforms.mjs:146:    rateLimit: { pins: 1000, period: '24h' },
+server/services/social-platforms.mjs:162:    rateLimit: { posts: 100, period: '24h' },
+server/shared/importMap.mjs:20:    rateLimiter: "../middleware/rateLimiter.mjs"
+server/index.mjs:275:const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
+server/app.mjs.bak:41:import rateLimit from "express-rate-limit";
+server/app.mjs.bak:51:const aiLimiter = rateLimit({
+server/app.mjs.bak:59:app.use("/api/ai", aiLimiter);
+server/app.mjs.bak:82:// AI routes (aiLimiter already mounted above on /api/ai before this handler)
+server/dev.mjs:209:  const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
+server/app.mjs.bak.1776489488:41:import rateLimit from "express-rate-limit";
+server/app.mjs.bak.1776489488:51:const aiLimiter = rateLimit({
+server/app.mjs.bak.1776489488:59:app.use("/api/ai", aiLimiter);
+server/app.mjs.bak.1776489488:82:// AI routes (aiLimiter already mounted above on /api/ai before this handler)
+server/app.mjs:51:import rateLimit from "express-rate-limit";
+server/app.mjs:59:const aiLimiter = rateLimit({
+server/app.mjs:66:app.use("/api/ai", aiLimiter);
+server/app.mjs:69:const adminLimiter = rateLimit({
+server/app.mjs:102:app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
+server/app.mjs:107:  adminLimiter,
+server/app.mjs:117:  adminLimiter,
+server/app.mjs:125:// AI routes (aiLimiter already mounted above on /api/ai before this handler)

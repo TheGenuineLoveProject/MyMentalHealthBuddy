@@ -8,7 +8,7 @@ import { sql } from 'drizzle-orm';
 import db from '../db/client.mjs';
 import { logger } from '../utils/logger.mjs';
 import { success, unauthorized, forbidden, serverError } from '../utils/responses.mjs';
-import { requireAdmin } from '../middleware/auth.mjs';
+import { requireAdmin } from '../middleware/adminAuth.mjs';
 
 const router = Router();
 
