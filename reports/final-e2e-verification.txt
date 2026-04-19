@@ -1,0 +1,25 @@
+MMHB Final End-to-End Verification — PASS
+==========================================
+Date: 2026-04-19
+Server: localhost:5000
+
+A. Boot                                                     GET /                                       -> 200
+B. Guest chat (x-guest-id)                                  POST /api/ai/chat                           -> 200
+C. Crisis short-circuit (988/741741, isCrisis:true)         POST /api/ai/chat (crisis text)             -> 200 ✅
+D. Auth register                                            POST /api/auth/register                     -> 200 (JWT 245 chars)
+   Auth login                                               POST /api/auth/login                        -> 200 (JWT 245 chars)
+   Auth me                                                  GET  /api/auth/me (Bearer)                  -> 200
+E. Upgrade-history happy path                               POST /api/session-boundary/upgrade-history  -> {"ok":true,"merged":2,"cleared":true}
+F. Negative — no JWT                                        POST /api/session-boundary/upgrade-history  -> 401
+   Negative — JWT but no x-guest-id                         POST /api/session-boundary/upgrade-history  -> 400
+G. Duplicate handler check
+   /journal-summary registrations in routes/ai.mjs:         1
+   /coping-plan      registrations in routes/ai.mjs:        1
+Extras
+   GET  /api/session-boundary/csrf-token                                                                -> 200
+   GET  /api/ai/history (guest)                                                                         -> 200
+   DELETE /api/ai/history (guest)                                                                       -> 200
+   POST /api/ai/journal-summary  body {entries:[…]}                                                     -> 200
+   POST /api/ai/coping-plan      body {message,mood,energy}                                             -> 200
+
+VERDICT: NO CODE CHANGE REQUIRED. All 10 contract surfaces green; crisis safety preserved; no dead duplicate handlers.
