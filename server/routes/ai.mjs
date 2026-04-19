@@ -418,34 +418,4 @@ router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
   });
 });
 
-router.post("/journal-summary", optionalAuth, async (req, res) => {
-  try {
-    const { text } = req.body || {};
-    if (!text || typeof text !== "string") {
-      return res.status(400).json({ error: "Text required" });
-    }
-
-    const result = buildJournalSummary(text);
-    return res.json({ ok: true, ...result });
-  } catch (err) {
-    console.error("journal-summary-error:", err);
-    return res.status(500).json({ error: "Failed to summarize journal" });
-  }
-});
-
-router.post("/coping-plan", optionalAuth, async (req, res) => {
-  try {
-    const { text } = req.body || {};
-    if (!text || typeof text !== "string") {
-      return res.status(400).json({ error: "Text required" });
-    }
-
-    const result = buildCopingPlan(text);
-    return res.json({ ok: true, ...result });
-  } catch (err) {
-    console.error("coping-plan-error:", err);
-    return res.status(500).json({ error: "Failed to build coping plan" });
-  }
-});
-
 export default router;
