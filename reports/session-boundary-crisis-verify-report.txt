@@ -1,0 +1,77 @@
+SESSION BOUNDARY + CRISIS VERIFY REPORT
+
+[COMMIT]
+fa2ccc5c Add crisis detection to AI chat functionality
+
+[ROUTE INVENTORY]
+server/routes/session-boundary.mjs:9:router.get("/csrf-token", (req, res) => {
+server/app.mjs:30:import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
+server/app.mjs:34:// Expose to session-boundary helpers without touching working modules.
+
+[HEALTH]
+{"status":"healthy","environment":"development","version":"2.0.0","uptime":4,"uptimeFormatted":"4s","startedAt":"2026-04-19T05:11:55.240Z","database":{"connected":true},"ai":{"available":true},"softLaunch":false,"platform":{"totalTools":127,"totalRoutes":127,"adminPages":27},"services":{"stripe":true,"resend":true,"perplexity":true,"sentry":true},"memory":{"heapUsedMB":21,"heapTotalMB":33,"rssMB":94},"node":"v20.20.0"}
+[CORRECT CSRF TOKEN ENDPOINT]
+HTTP/1.1 404 Not Found
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Content-Type: text/html; charset=utf-8
+Content-Length: 170
+Date: Sun, 19 Apr 2026 05:11:59 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/session-boundary/csrf-token</pre>
+</body>
+</html>
+
+[OLD WRONG PATH]
+HTTP/1.1 404 Not Found
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Content-Type: text/html; charset=utf-8
+Content-Length: 164
+Date: Sun, 19 Apr 2026 05:11:59 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/session-boundary/csrf</pre>
+</body>
+</html>
+
+[CRISIS FACADE GREP]
