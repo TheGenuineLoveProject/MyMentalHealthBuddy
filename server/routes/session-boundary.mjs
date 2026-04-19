@@ -3,7 +3,9 @@ import crypto from "node:crypto";
 import { sql } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth.mjs";
 import { issueCsrfToken } from "../security/csrf.mjs";
+import { csrfProtection, issueCsrfToken } from "../security/csrf.mjs";
 
+router.get("/csrf-token", csrfProtection, issueCsrfToken);
 const router = express.Router();
 
 router.get("/csrf-token", (req, res) => {

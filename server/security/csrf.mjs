@@ -1,5 +1,21 @@
 import crypto from "node:crypto";
+import csrf from "csurf";
 
+// SINGLE shared instance
+export const csrfProtection = csrf({
+  cookie: {
+    httpOnly: true,
+    sameSite: "lax",
+  },
+});
+
+// helper to send token
+export function issueCsrfToken(req, res) {
+  res.json({
+    ok: true,
+    csrfToken: req.csrfToken(),
+  });
+}
 const COOKIE_NAME = "csrf_secret";
 const HEADER_NAME = "x-csrf-token";
 const SAFE_METHODS = new Set(["GET", "HEAD", "OPTIONS"]);

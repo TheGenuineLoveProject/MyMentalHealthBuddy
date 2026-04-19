@@ -40,9 +40,7 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
-// ----------------------------
-// MIDDLEWARE
-// ----------------------------
+// ===== MIDDLEWARE =====
 app.use(cors());
 app.use(express.json());
 
@@ -52,7 +50,12 @@ import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
 app.use(helmet());
-app.use(cookieParser());
+app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
+
+// ===== SESSION BOUNDARY FIRST (NO CSRF) =====
+app.use('/api/session-boundary', sessionBoundaryRoutes);
+
+// ===== THEN APPLY CSRF GLOBALLY =====
 app.use(csrfProtection);
 
 // ===== AI RATE LIMIT (single source of truth) =====
@@ -94,9 +97,6 @@ app.use("/api/ai/business", aiBusinessRoutes);
 
 // Auth routes (mount before AI routes so /api/auth/* works)
 app.use("/api/auth", authRoutes);
-
-// Session boundary (CSRF token issuance + guest->user history upgrade)
-app.use("/api/session", sessionBoundaryRoutes);
 
 // Admin routes (strict: limiter -> requireAuth -> requireAdmin). Only admin.mjs is mounted.
 app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
