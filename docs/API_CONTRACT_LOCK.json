@@ -1,0 +1,67 @@
+{
+	"version": "1.0.0",
+	"baseUrl": "/api",
+	"endpoints": {
+		"health": {
+			"method": "GET",
+			"path": "/health",
+			"auth": "none",
+			"expectedStatus": 200
+		},
+		"chat": {
+			"method": "POST",
+			"path": "/ai/chat",
+			"auth": "guest-or-bearer",
+			"requiredHeaders": ["x-guest-id"],
+			"expectedStatus": 200
+		},
+		"history": {
+			"method": "GET",
+			"path": "/ai/history",
+			"auth": "guest-or-bearer",
+			"requiredHeaders": ["x-guest-id"],
+			"expectedStatus": 200
+		},
+		"journalSummary": {
+			"method": "POST",
+			"path": "/ai/journal-summary",
+			"auth": "guest-or-bearer",
+			"expectedStatus": 200
+		},
+		"copingPlan": {
+			"method": "POST",
+			"path": "/ai/coping-plan",
+			"auth": "guest-or-bearer",
+			"expectedStatus": 200
+		},
+		"authRegister": {
+			"method": "POST",
+			"path": "/auth/register",
+			"auth": "none",
+			"expectedStatus": 200
+		},
+		"authMe": {
+			"method": "GET",
+			"path": "/auth/me",
+			"auth": "bearer",
+			"expectedStatus": 200
+		},
+		"upgradeHistory": {
+			"method": "POST",
+			"path": "/session-boundary/upgrade-history",
+			"auth": "bearer",
+			"requiredHeaders": ["x-guest-id"],
+			"successStatus": 200,
+			"failureCases": {
+				"noJWT": 401,
+				"noGuestId": 400
+			}
+		},
+		"csrfToken": {
+			"method": "GET",
+			"path": "/session-boundary/csrf-token",
+			"auth": "none",
+			"expectedStatus": 200
+		}
+	}
+}

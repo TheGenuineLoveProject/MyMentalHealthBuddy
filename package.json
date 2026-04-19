@@ -5,6 +5,7 @@
   "main": "server/app.mjs",
   "scripts": {
     "dev": "node server/app.mjs",
+    "verify": "bash scripts/verify.sh",
     "start": "node server/app.mjs",
     "build": "echo build-ok"
   },
