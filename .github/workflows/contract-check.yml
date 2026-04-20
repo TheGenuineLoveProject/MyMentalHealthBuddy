@@ -1,4 +1,4 @@
-name: Contract Enforcement
+name: contract-check
 
 on:
   pull_request:
@@ -6,11 +6,11 @@ on:
     branches:
       - main
       - fix/system-history-auth-and-panel-trust
-      - fix/ci-contract-gate
       - fix/route-manifest-clean
+      - fix/ci-contract-gate
 
 jobs:
-  verify-contract:
+  contract-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,13 +23,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Generate route manifest
         run: npm run routes:manifest
 
-      - name: Contract pretest
+      - name: Contract duplicate guard
         run: npm run pretest
 
-      - name: Full verify
+      - name: Full verification
         run: npm run verify
