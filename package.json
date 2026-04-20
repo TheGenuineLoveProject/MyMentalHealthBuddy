@@ -9,7 +9,12 @@
     "start": "node server/app.mjs",
     "build": "echo build-ok",
     "routes:manifest": "node scripts/generate-route-manifest.mjs",
-    "pretest": "bash scripts/check-contract-routes.sh"
+    "pretest": "bash scripts/check-contract-routes.sh",
+    "governor": "bash scripts/governor/run-governor.sh",
+    "governor:schema": "bash scripts/governor/schema-validator.sh",
+    "governor:contract": "bash scripts/governor/api-contract-enforcer.sh",
+    "governor:prompts": "bash scripts/governor/prompt-registry-linter.sh",
+    "governor:refactor-report": "bash scripts/governor/auto-refactor-report.sh"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",

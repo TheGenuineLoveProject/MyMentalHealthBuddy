@@ -49,3 +49,6 @@ echo "gpg-batch" >> .gitignore.env
 node_modules/
 dist/
 *.log
+archive/
+*.bak
+reports/safe-backups/
