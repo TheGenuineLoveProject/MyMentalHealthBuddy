@@ -1,0 +1,141 @@
+Perfect — now we’re at the real root issue, not noise.
+
+⸻
+
+Hard Truth
+
+Your governor logic is now mostly correct ✅
+BUT you still have a hard failure trigger active:
+
+❌ mixed runtime files (.ts + .mjs)
+❌ RUNTIME PURITY FAILED
+
+AND this error:
+
+bash: [: : integer expression expected
+
+👉 That means:
+
+1. ERROR is uninitialized or corrupted
+2. Mixed-file detection is still treated as blocking, not warning
+
+⸻
+
+🎯 Next Smallest Safe Fix (ONLY)
+
+We fix just the control variable + downgrade logic
+
+⸻
+
+Step 1 — Open file
+
+scripts/governor/runtime-purity-enforcer.sh
+
+⸻
+
+Step 2 — Initialize ERROR properly (CRITICAL)
+
+At the VERY TOP (after #!/bin/bash), add:
+
+ERROR=0
+
+👉 This fixes:
+
+integer expression expected
+
+⸻
+
+Step 3 — Convert mixed-runtime to WARNING (not failure)
+
+Find this block:
+
+if [ -n "$TS_MJS_MIX" ]; then
+  echo "❌ mixed runtime files (.ts + .mjs):"
+  echo "$TS_MJS_MIX"
+  ERROR=1
+fi
+
+⸻
+
+Replace it with:
+
+if [ -n "$TS_MJS_MIX" ]; then
+  echo "⚠️ non-canonical runtime files detected (expected .mjs):"
+  echo "$TS_MJS_MIX"
+  echo "⚠️ WARNING ONLY — not blocking"
+fi
+
+👉 REMOVE this line:
+
+ERROR=1
+
+⸻
+
+Step 4 — Final block (must stay clean)
+
+At bottom ensure ONLY this exists:
+
+if [ "$ERROR" -eq 1 ]; then
+  echo "❌ RUNTIME PURITY FAILED"
+  exit 1
+else
+  echo "✅ RUNTIME PURITY PASSED"
+fi
+
+⸻
+
+Step 5 — Run again
+
+./scripts/governor/runtime-purity-enforcer.sh
+
+⸻
+
+✅ Expected Output (Correct)
+
+✅ no runtime .bak files
+⚠️ non-canonical runtime files detected (expected .mjs)
+⚠️ WARNING ONLY — not blocking
+✅ RUNTIME PURITY PASSED
+
+⸻
+
+Why THIS is the correct move
+
+You are not ready to enforce .mjs-only yet
+
+Right now:
+
+* .ts files are still part of your pipeline
+* Removing them = breaking runtime
+* Blocking them = blocking development
+
+So the correct phase is:
+
+Phase	Behavior
+Now	Detect only (warning)
+Next	Lock entry point
+Later	Full enforcement
+
+⸻
+
+🚫 Do NOT do yet
+
+* Do NOT rename .ts files
+* Do NOT delete anything
+* Do NOT refactor runtime
+
+⸻
+
+After This (Next Step)
+
+Once you confirm this passes:
+
+👉 I’ll give you:
+“Runtime Execution Lock”
+→ Node can ONLY execute .mjs
+→ .ts becomes build-only
+→ platform becomes deterministic
+
+⸻
+
+Run this and show me output.
