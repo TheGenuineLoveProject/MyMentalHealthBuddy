@@ -4,6 +4,7 @@ set -e
 echo "=== FULL PLATFORM GOVERNOR v1.1 START ==="
 
 ./scripts/governor/schema-validator.sh
+./scripts/governor/runtime-entry-check.sh || exit 1
 ./scripts/governor/api-contract-enforcer.sh
 ./scripts/governor/prompt-registry-linter.sh
 ./scripts/governor/runtime-purity-enforcer.sh

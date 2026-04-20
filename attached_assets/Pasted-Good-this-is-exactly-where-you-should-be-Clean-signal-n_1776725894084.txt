@@ -1,0 +1,166 @@
+Good — this is exactly where you should be. Clean signal, no noise.
+
+⸻
+
+Hard Truth
+
+You’ve now reached controlled dual-runtime state:
+
+* .mjs = runtime (intended)
+* .ts = still present (currently leaking into runtime surface)
+
+Your governor is correctly:
+
+* ✅ detecting
+* ✅ not blocking
+* ❌ not yet enforcing
+
+👉 The next move is NOT refactoring files
+👉 The next move is locking execution, not structure
+
+⸻
+
+🎯 Next Smallest Safe Fix
+
+👉 Runtime Execution Lock (NO refactor, NO renames)
+
+We force Node to only ever execute .mjs entry
+
+⸻
+
+Step 1 — Open package.json
+
+package.json
+
+⸻
+
+Step 2 — Find this (or similar)
+
+"main": "server/index.ts"
+
+OR
+
+"main": "server/index.js"
+
+⸻
+
+Step 3 — Replace with canonical runtime entry
+
+"main": "server/index.mjs",
+"type": "module"
+
+⸻
+
+Step 4 — Fix start script
+
+Find:
+
+"scripts": {
+  "start": "node server/index.ts"
+}
+
+⸻
+
+Replace with:
+
+"scripts": {
+  "start": "node server/index.mjs"
+}
+
+⸻
+
+Step 5 — Add runtime guard (VERY IMPORTANT)
+
+Create:
+
+scripts/governor/runtime-entry-check.sh
+
+⸻
+
+Paste this:
+
+#!/bin/bash
+ENTRY=$(cat package.json | grep '"main"' | grep -o 'server/[^"]*')
+if [[ "$ENTRY" != *.mjs ]]; then
+  echo "❌ INVALID RUNTIME ENTRY: must be .mjs"
+  echo "Found: $ENTRY"
+  exit 1
+else
+  echo "✅ Runtime entry is .mjs"
+fi
+
+⸻
+
+Step 6 — Add to governor
+
+Open:
+
+scripts/governor/run-governor.sh
+
+⸻
+
+Add THIS line:
+
+./scripts/governor/runtime-entry-check.sh || exit 1
+
+Place it right after:
+
+schema-validator.sh
+
+⸻
+
+Step 7 — Run
+
+npm run governor
+
+⸻
+
+✅ Expected Output
+
+✅ Runtime entry is .mjs
+⚠️ non-canonical runtime files detected
+✅ RUNTIME PURITY PASSED
+
+⸻
+
+What This Achieves (Important)
+
+You now have:
+
+Layer	Status
+Runtime execution	🔒 LOCKED to .mjs
+.ts files	🟡 allowed (build/dev only)
+Governor	🧠 detecting violations
+System	⚙️ deterministic
+
+⸻
+
+🚫 Still NOT allowed
+
+Do NOT:
+
+* rename .ts
+* delete .ts
+* merge files
+* run refactor
+
+⸻
+
+What happens next
+
+After this is confirmed:
+
+👉 I will give you:
+
+“Canonical Runtime Promotion Engine”
+
+This will:
+
+* auto-select .mjs winners
+* mark .ts as shadow/dev
+* prepare safe migration
+* eliminate duplication permanently
+
+⸻
+
+Run this and show output.
