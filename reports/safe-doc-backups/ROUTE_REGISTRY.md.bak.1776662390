@@ -71,19 +71,3 @@ Expected:
 #### CSRF Token
 - GET /api/session-boundary/csrf-token
 - Expected: 200
----
-
-## Canonical governance note
-
-This route registry must be read together with:
-
-- `docs/CANONICAL_FILE_TREE.md`
-- `docs/OWNERSHIP_MATRIX.md`
-- `docs/API_CONTRACT_LOCK.json`
-- `docs/ROUTE_MANIFEST.json`
-
-Rules:
-- one route family = one canonical runtime file
-- no route registration outside `server/routes/`
-- no backup files inside `server/routes/`
-- no runtime imports from `.archive/`
