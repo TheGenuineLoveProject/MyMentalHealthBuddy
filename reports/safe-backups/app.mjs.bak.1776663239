@@ -41,17 +41,7 @@ if (db) globalThis.db = db;
 const app = express();
 
 // ===== MIDDLEWARE =====
-app.use(cors({
-  origin: (origin, cb) => {
-    const allowed = (process.env.CORS_ORIGIN || "")
-      .split(",").map(s => s.trim()).filter(Boolean);
-    if (!origin) return cb(null, true);
-    if (allowed.length === 0) return cb(null, true);
-    if (allowed.includes("*")) return cb(null, true);
-    return allowed.includes(origin) ? cb(null, true) : cb(new Error("CORS: origin not allowed"));
-  },
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
 
 // ===== SECURITY LAYER =====
