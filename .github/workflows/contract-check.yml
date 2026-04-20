@@ -1,0 +1,35 @@
+name: Contract Enforcement
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - fix/system-history-auth-and-panel-trust
+      - fix/ci-contract-gate
+      - fix/route-manifest-clean
+
+jobs:
+  verify-contract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate route manifest
+        run: npm run routes:manifest
+
+      - name: Contract pretest
+        run: npm run pretest
+
+      - name: Full verify
+        run: npm run verify
