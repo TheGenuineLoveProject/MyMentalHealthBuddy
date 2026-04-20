@@ -1,11 +1,77 @@
 import express from "express";
+import { z } from "zod";
 import { db } from "../db/connection.mjs";
 import { postDrafts, contentTemplates, calendarEntries } from "../../shared/schema.mjs";
 import { eq, desc, and } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
+import { adminAiLimiter, adminImageLimiter, adminBulkLimiter } from "../middleware/admin-rate-limit.mjs";
 import { logger } from "../utils/logger.mjs";
 import OpenAI from "openai";
+
+const PLATFORM_KEYS = [
+  "instagram","tiktok","youtube","x","threads","facebook","linkedin","pinterest"
+];
+
+const zPlatform = z.enum(PLATFORM_KEYS);
+const zShortStr = z.string().trim().min(1).max(2000);
+const zLongStr = z.string().trim().min(1).max(20000);
+
+const zGenerateBody = z.object({
+  theme: zShortStr,
+  platform: zPlatform.optional(),
+  style: z.string().trim().max(60).optional(),
+  level: z.enum(["beginner","intermediate","advanced"]).optional(),
+});
+
+const zRepurposeBody = z.object({
+  content: zLongStr,
+  sourcePlatform: zPlatform.optional(),
+  targetPlatforms: z.array(zPlatform).min(1).max(8),
+});
+
+const zComplianceCheckBody = z.object({ text: zLongStr });
+const zComplianceRewriteBody = z.object({
+  text: zLongStr,
+  issues: z.array(z.any()).max(200).optional(),
+});
+
+const zImageBody = z.object({
+  theme: zShortStr,
+  platform: zPlatform.optional(),
+  style: z.string().trim().max(60).optional(),
+});
+
+const zBatchBody = z.object({
+  themes: z.array(zShortStr).min(1).max(10),
+  platforms: z.array(zPlatform).min(1).max(8),
+  style: z.string().trim().max(60).optional(),
+  level: z.enum(["beginner","intermediate","advanced"]).optional(),
+});
+
+const zEnhanceBody = z.object({
+  text: zLongStr,
+  enhancements: z.array(z.string().max(60)).max(20).optional(),
+});
+
+const zBulkIdsBody = z.object({
+  ids: z.array(z.string().min(1).max(128)).min(1).max(100),
+});
+
+const zPublishBatchBody = z.object({
+  draftId: z.string().min(1).max(128),
+  platforms: z.array(zPlatform).min(1).max(8),
+});
+
+function validate(schema, req, res) {
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) {
+    const first = parsed.error.issues[0];
+    badRequest(res, `Invalid input: ${first?.path?.join(".") || "body"} — ${first?.message || "invalid"}`);
+    return null;
+  }
+  return parsed.data;
+}
 
 const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
@@ -502,14 +568,15 @@ router.get("/analytics/content-calendar", requireAuth, requireAdmin, async (req,
  * AI CONTENT GENERATION
  * ===================================================== */
 
-router.post("/generate", requireAuth, requireAdmin, async (req, res) => {
+router.post("/generate", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
   try {
-    const { theme, platform, style = "warm", level = "intermediate" } = req.body;
-    
-    if (!theme) {
-      return badRequest(res, "Theme is required");
-    }
-    
+    const data = validate(zGenerateBody, req, res);
+    if (!data) return;
+    const { theme } = data;
+    const platform = data.platform;
+    const style = data.style || "warm";
+    const level = data.level || "intermediate";
+
     const platformSpec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
     
     const systemPrompt = `You are a trauma-informed social media content creator for The Genuine Love Project, a mental wellness platform.
@@ -568,14 +635,12 @@ OUTPUT FORMAT (JSON):
   }
 });
 
-router.post("/generate/repurpose", requireAuth, requireAdmin, async (req, res) => {
+router.post("/generate/repurpose", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
   try {
-    const { content, sourcePlatform, targetPlatforms } = req.body;
-    
-    if (!content || !targetPlatforms?.length) {
-      return badRequest(res, "Content and target platforms are required");
-    }
-    
+    const data = validate(zRepurposeBody, req, res);
+    if (!data) return;
+    const { content, targetPlatforms } = data;
+
     const repurposed = {};
     
     for (const platform of targetPlatforms) {
@@ -614,12 +679,10 @@ OUTPUT JSON: { "hook": "...", "caption": "...", "cta": "...", "hashtags": "..." 
 
 router.post("/compliance/check", requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { text } = req.body;
-    
-    if (!text) {
-      return badRequest(res, "Text is required");
-    }
-    
+    const data = validate(zComplianceCheckBody, req, res);
+    if (!data) return;
+    const { text } = data;
+
     const issues = [];
     const suggestions = [];
     const lowerText = text.toLowerCase();
@@ -681,14 +744,12 @@ router.post("/compliance/check", requireAuth, requireAdmin, async (req, res) => 
   }
 });
 
-router.post("/compliance/rewrite", requireAuth, requireAdmin, async (req, res) => {
+router.post("/compliance/rewrite", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
   try {
-    const { text, issues } = req.body;
-    
-    if (!text) {
-      return badRequest(res, "Text is required");
-    }
-    
+    const data = validate(zComplianceRewriteBody, req, res);
+    if (!data) return;
+    const { text, issues } = data;
+
     const response = await openai.chat.completions.create({
       model: "gpt-5.1",
       messages: [
@@ -724,14 +785,14 @@ OUTPUT JSON: { "rewritten": "...", "changes": ["list of key changes made"] }`
  * IMAGE GENERATION
  * ===================================================== */
 
-router.post("/generate/image", requireAuth, requireAdmin, async (req, res) => {
+router.post("/generate/image", requireAuth, requireAdmin, adminImageLimiter, async (req, res) => {
   try {
-    const { theme, platform, style = "minimalist" } = req.body;
-    
-    if (!theme) {
-      return badRequest(res, "Theme is required");
-    }
-    
+    const data = validate(zImageBody, req, res);
+    if (!data) return;
+    const { theme } = data;
+    const platform = data.platform;
+    const style = data.style || "minimalist";
+
     const platformSpec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
     const sizeMap = {
       instagram: "1024x1024",
@@ -782,17 +843,14 @@ REQUIREMENTS:
  * BATCH CONTENT GENERATION
  * ===================================================== */
 
-router.post("/generate/batch", requireAuth, requireAdmin, async (req, res) => {
+router.post("/generate/batch", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
   try {
-    const { themes, platform, style = "warm", level = "intermediate" } = req.body;
-    
-    if (!themes?.length) {
-      return badRequest(res, "Themes array is required");
-    }
-    
-    if (themes.length > 5) {
-      return badRequest(res, "Maximum 5 themes per batch");
-    }
+    const data = validate(zBatchBody, req, res);
+    if (!data) return;
+    const { themes } = data;
+    const platform = data.platforms[0];
+    const style = data.style || "warm";
+    const level = data.level || "intermediate";
     
     const platformSpec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
     const results = [];
@@ -841,14 +899,13 @@ OUTPUT JSON: { "hook": "...", "caption": "...", "cta": "...", "hashtags": "...",
  * CONTENT ENHANCEMENT SUGGESTIONS
  * ===================================================== */
 
-router.post("/enhance", requireAuth, requireAdmin, async (req, res) => {
+router.post("/enhance", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
   try {
-    const { text, type = "engagement" } = req.body;
-    
-    if (!text) {
-      return badRequest(res, "Text is required");
-    }
-    
+    const data = validate(zEnhanceBody, req, res);
+    if (!data) return;
+    const { text } = data;
+    const type = (data.enhancements && data.enhancements[0]) || req.body?.type || "engagement";
+
     const enhancePrompts = {
       engagement: "Suggest 3 ways to make this content more engaging while maintaining trauma-informed principles",
       accessibility: "Suggest 3 ways to make this content more accessible (content tier, clarity, inclusivity)",
@@ -893,14 +950,12 @@ router.get("/platforms/specs", requireAuth, requireAdmin, async (req, res) => {
  * BULK OPERATIONS
  * ===================================================== */
 
-router.post("/drafts/bulk/approve", requireAuth, requireAdmin, async (req, res) => {
+router.post("/drafts/bulk/approve", requireAuth, requireAdmin, adminBulkLimiter, async (req, res) => {
   try {
-    const { ids } = req.body;
-    
-    if (!ids?.length) {
-      return badRequest(res, "Draft IDs are required");
-    }
-    
+    const data = validate(zBulkIdsBody, req, res);
+    if (!data) return;
+    const { ids } = data;
+
     const results = [];
     for (const id of ids) {
       try {
@@ -922,14 +977,12 @@ router.post("/drafts/bulk/approve", requireAuth, requireAdmin, async (req, res) 
   }
 });
 
-router.post("/drafts/bulk/delete", requireAuth, requireAdmin, async (req, res) => {
+router.post("/drafts/bulk/delete", requireAuth, requireAdmin, adminBulkLimiter, async (req, res) => {
   try {
-    const { ids } = req.body;
-    
-    if (!ids?.length) {
-      return badRequest(res, "Draft IDs are required");
-    }
-    
+    const data = validate(zBulkIdsBody, req, res);
+    if (!data) return;
+    const { ids } = data;
+
     for (const id of ids) {
       await db.delete(postDrafts).where(eq(postDrafts.id, id));
     }
@@ -945,18 +998,12 @@ router.post("/drafts/bulk/delete", requireAuth, requireAdmin, async (req, res) =
  * BATCH PUBLISHING
  * ===================================================== */
 
-router.post("/publish/batch", requireAuth, requireAdmin, async (req, res) => {
+router.post("/publish/batch", requireAuth, requireAdmin, adminBulkLimiter, async (req, res) => {
   try {
-    const { draftId, platforms } = req.body;
-    
-    if (!draftId) {
-      return badRequest(res, "Draft ID is required");
-    }
-    
-    if (!platforms?.length) {
-      return badRequest(res, "At least one platform is required");
-    }
-    
+    const data = validate(zPublishBatchBody, req, res);
+    if (!data) return;
+    const { draftId, platforms } = data;
+
     const [draft] = await db.select().from(postDrafts).where(eq(postDrafts.id, draftId));
     
     if (!draft) {
