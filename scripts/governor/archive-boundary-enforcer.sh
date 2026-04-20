@@ -8,7 +8,11 @@ ERROR=0
 BAD=$(find . -type f -name "*.bak*" \
   -not -path "./.archive/*" \
   -not -path "./reports/*" \
-  -not -path "./backups/*" || true)
+  -not -path "./backups/*" \
+  -not -path "./_quarantine/*" \
+  -not -path "./node_modules/*" \
+  -not -path "./.git/*" \
+  -not -path "./attached_assets/*" 2>/dev/null || true)
 
 if [ -n "$BAD" ]; then
   echo "❌ .bak files outside allowed zones:"

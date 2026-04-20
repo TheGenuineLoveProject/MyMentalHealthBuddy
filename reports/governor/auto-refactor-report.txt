@@ -1,5 +1,5 @@
 AUTO-REFACTOR REPORT
-Generated: Mon Apr 20 10:12:14 PM UTC 2026
+Generated: Mon Apr 20 10:56:59 PM UTC 2026
 
 === duplicate basenames (scoped to runtime + shared) ===
 app.mjs
@@ -43,11 +43,6 @@ utils.ts
 wellnessToolsData.js
 
 === runtime .bak files ===
-server/app.mjs.bak.1776489488
-server/middleware/auth.mjs.bak.1776489488
-server/routes/ai.mjs.bak.1776489294
-server/routes/ai.mjs.bak.1776489488
-server/routes/__backup/content.mjs.bak.1776310290
 
 === runtime .ts files inside mjs-governed runtime ===
 server/app.ts
