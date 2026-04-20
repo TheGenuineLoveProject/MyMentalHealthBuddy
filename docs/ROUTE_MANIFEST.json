@@ -891,11 +891,6 @@
   },
   {
     "method": "GET",
-    "path": "/analytics",
-    "file": "server/routes/admin-social-studio.mjs"
-  },
-  {
-    "method": "GET",
     "path": "/analytics/content-calendar",
     "file": "server/routes/admin-social-studio.mjs"
   },

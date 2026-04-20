@@ -15,20 +15,20 @@ if (!fs.existsSync(manifestPath)) {
 
 const routes = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 
-const seen = new Set();
+const seen = new Map();
 const duplicates = [];
 
 for (const r of routes) {
-  const key = `${r.method} ${r.path}`;
+  const key = `${r.file} ${r.method} ${r.path}`;
   if (seen.has(key)) {
-    duplicates.push(key);
+    duplicates.push(`${r.file}: ${r.method} ${r.path}`);
   } else {
-    seen.add(key);
+    seen.set(key, true);
   }
 }
 
 if (duplicates.length > 0) {
-  console.error("DUPLICATE_CONTRACT_ROUTES:");
+  console.error("DUPLICATE_ROUTES_WITHIN_FILE:");
   console.error(duplicates.join("\n"));
   process.exit(1);
 }

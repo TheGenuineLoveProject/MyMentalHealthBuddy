@@ -1029,36 +1029,10 @@ router.get("/publish/platforms", requireAuth, requireAdmin, async (req, res) => 
 
 /* =====================================================
  * ANALYTICS
+ * (Note: GET /analytics is registered earlier in this file at line ~409.
+ *  Express keeps the first registration; the duplicate previously here was
+ *  unreachable dead code and has been removed. See git history for prior body.)
  * ===================================================== */
-
-router.get("/analytics", requireAuth, requireAdmin, async (req, res) => {
-  try {
-    const drafts = await db.select().from(postDrafts);
-    
-    const published = drafts.filter(d => d.status === "published");
-    const platformCounts = {};
-    
-    for (const draft of published) {
-      const platform = draft.platform || "other";
-      platformCounts[platform] = (platformCounts[platform] || 0) + 1;
-    }
-    
-    return success(res, {
-      totalDrafts: drafts.length,
-      published: published.length,
-      approved: drafts.filter(d => d.status === "approved").length,
-      scheduled: drafts.filter(d => d.status === "scheduled").length,
-      draft: drafts.filter(d => d.status === "draft").length,
-      platformBreakdown: platformCounts,
-      totalReach: "9.5K",
-      avgEngagement: "3.2%",
-      generatedAt: new Date().toISOString(),
-    });
-  } catch (error) {
-    logger.error("Failed to fetch analytics:", error);
-    return badRequest(res, "Failed to fetch analytics");
-  }
-});
 
 
 // Health check endpoint for admin daily tools monitoring
