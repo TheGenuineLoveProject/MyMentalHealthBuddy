@@ -1,5 +1,5 @@
 AUTO-REFACTOR REPORT
-Generated: Tue Apr 21 12:56:55 AM UTC 2026
+Generated: Tue Apr 21 12:59:25 AM UTC 2026
 
 === duplicate basenames (scoped to runtime + shared) ===
 app.mjs
