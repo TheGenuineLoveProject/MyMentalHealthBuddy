@@ -1,1 +1,0 @@
-export { wellnessTools } from "../wellnessToolsData";

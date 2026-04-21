@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 120" fill="none">
+  <circle cx="52" cy="60" r="48" fill="#8fbf9f"/>
+  <path d="M52 90c-10-8-22-16-22-28a14 14 0 0114-14c5 0 7 2 8 4 1-2 3-4 8-4a14 14 0 0114 14c0 12-12 20-22 28z" fill="#ffffff" opacity="0.95"/>
+  <text x="124" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#2f5d5d" letter-spacing="0.5">MyMentalHealth</text>
+  <text x="124" y="72" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#2f5d5d" letter-spacing="0.5">Buddy</text>
+  <text x="124" y="100" font-family="Georgia, serif" font-size="11" fill="#8fbf9f" letter-spacing="1" font-style="italic">by The Genuine Love Project</text>
+</svg>

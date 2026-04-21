@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100" fill="none">
+  <rect x="0" y="0" width="100" height="100" rx="8" fill="#2f5d5d"/>
+  <text x="50" y="60" text-anchor="middle" font-family="monospace" font-size="8" fill="#fff">deepTeal</text>
+  <text x="50" y="75" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff">#2f5d5d</text>
+  <rect x="100" y="0" width="100" height="100" rx="8" fill="#8fbf9f"/>
+  <text x="150" y="60" text-anchor="middle" font-family="monospace" font-size="8" fill="#1a3333">sage</text>
+  <text x="150" y="75" text-anchor="middle" font-family="monospace" font-size="7" fill="#1a3333">#8fbf9f</text>
+  <rect x="200" y="0" width="100" height="100" rx="8" fill="#f4c7c3"/>
+  <text x="250" y="60" text-anchor="middle" font-family="monospace" font-size="8" fill="#333">dustyRose</text>
+  <text x="250" y="75" text-anchor="middle" font-family="monospace" font-size="7" fill="#333">#f4c7c3</text>
+  <rect x="300" y="0" width="100" height="100" rx="8" fill="#d4af37"/>
+  <text x="350" y="60" text-anchor="middle" font-family="monospace" font-size="8" fill="#fff">metallicGold</text>
+  <text x="350" y="75" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff">#d4af37</text>
+  <rect x="400" y="0" width="100" height="100" rx="8" fill="#f9fafb" stroke="#ddd"/>
+  <text x="450" y="60" text-anchor="middle" font-family="monospace" font-size="8" fill="#333">softWhite</text>
+  <text x="450" y="75" text-anchor="middle" font-family="monospace" font-size="7" fill="#333">#f9fafb</text>
+</svg>

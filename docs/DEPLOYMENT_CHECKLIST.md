@@ -1,5 +1,0 @@
-- [ ] npm start runs
-- [ ] Brand colors applied
-- [ ] Old names removed
-- [ ] App icon updated
-- [ ] Cover image uploaded
