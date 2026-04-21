@@ -5,9 +5,10 @@
   "main": "server/app.mjs",
   "scripts": {
     "dev": "node server/app.mjs",
-    "verify": "bash scripts/verify.sh",
+    "dev:clean": "sh -c 'pkill -f \"node server/app.mjs\" || true; sleep 1; node server/app.mjs'",
     "start": "node server/app.mjs",
-    "build": "echo build-ok",
+    "build": "vite build",
+    "verify": "bash scripts/verify.sh",
     "routes:manifest": "node scripts/generate-route-manifest.mjs",
     "pretest": "bash scripts/check-contract-routes.sh",
     "governor": "bash scripts/governor/run-governor.sh",

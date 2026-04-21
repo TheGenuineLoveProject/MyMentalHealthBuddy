@@ -143,19 +143,32 @@ app.get("/api/_meta", (_req, res) => {
   });
 });
 
+app.get("/health", (_req, res) => {
+  res.status(200).json({
+    ok: true,
+    service: "mymmentalhealthbuddy",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get("/ready", (_req, res) => {
+  res.status(200).json({ ok: true });
+});
+
 // SPA fallback: any non-API, non-asset GET serves the React index.
 app.get("*", (req, res, next) => {
   if (req.method !== "GET") return next();
   if (req.path.startsWith("/api/")) return next();
+  if (req.path === "/health" || req.path === "/ready") return next();
   if (req.path.includes(".")) return next();
   return res.sendFile(path.join(CLIENT_DIST, "index.html"));
 });
-
 // ----------------------------
 // START SERVER
 // ----------------------------
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
