@@ -12,8 +12,11 @@ import {
   buildJournalSummary,
   buildCopingPlan,
 } from "../engine/therapyIntelligence.mjs";
+import { chatCompletion, isConfigured as aiConfigured } from "../utils/aiClient.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
+const MAX_INPUT_LENGTH = 4000;
 
 const SYSTEM_PROMPT = `
 You are a gentle, supportive mental health companion.
@@ -145,6 +148,11 @@ router.post("/chat", optionalAuth, async (req, res) => {
     if (!message) {
       return res.status(400).json({ error: "Message required" });
     }
+    if (message.length > MAX_INPUT_LENGTH) {
+      return res.status(400).json({
+        error: `Message too long (max ${MAX_INPUT_LENGTH} characters).`,
+      });
+    }
 
     if (!userId && !guestId) {
       return res.status(400).json({ error: "Guest ID or auth required" });
@@ -230,7 +238,48 @@ router.post("/chat", optionalAuth, async (req, res) => {
       history.push(...guestHistory.get(guestId));
     }
 
+    // Try canonical AI client (with circuit breaker, retry, timeout, key check).
+    // Falls back to deterministic buildTherapyReply on ANY failure.
+    // Crisis branches above already short-circuited — this code only runs on safe paths.
     let reply = buildTherapyReply(cleanText);
+    let aiSource = "fallback";
+    let aiError = null;
+
+    if (aiConfigured()) {
+      const aiMessages = [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...history.map((m) => ({
+          role: m.role === "assistant" ? "assistant" : "user",
+          content: String(m.content || ""),
+        })),
+        { role: "user", content: cleanText },
+      ];
+      const aiResult = await chatCompletion({
+        messages: aiMessages,
+        model: process.env.AI_MODEL || "gpt-4o-mini",
+        temperature: 0.7,
+        maxTokens: 500,
+      });
+      if (aiResult.success && aiResult.content) {
+        reply = aiResult.content;
+        aiSource = "openai";
+      } else {
+        aiError = aiResult.error || "ai_unavailable";
+      }
+    } else {
+      aiError = "not_configured";
+    }
+
+    logger.info("ai_chat", {
+      route: "/api/ai/chat",
+      source: aiSource,
+      ok: aiSource === "openai",
+      error: aiError,
+      userType: userId ? "user" : "guest",
+      msgLen: cleanText.length,
+      replyLen: reply.length,
+      historyUsed: history.length,
+    });
 
     if (userId) {
       const userMsgId = newMessageId();

@@ -1,28 +1,26 @@
 // server/services/aiService.mjs
-import OpenAI from "openai";
-import { logger } from "../utils/logger.mjs";
+// Thin shim — delegates to canonical client at server/utils/aiClient.mjs
+import { chatCompletion } from "../utils/aiClient.mjs";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const SYSTEM_PROMPT =
+  "You are Genuine Love, a warm, compassionate AI wellness companion from " +
+  "The Genuine Love Project. You support users on their journey of self-love, " +
+  "healing, and emotional growth. Respond with empathy, encouragement, and " +
+  "gentle guidance. Never diagnose. Never claim to be a therapist.";
+
+const FALLBACK =
+  "I'm having trouble thinking right now, but you're not alone. " +
+  "Please try again in a moment.";
 
 export async function askAI(message) {
-  try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: "You are Genuine Love, a warm, compassionate AI wellness companion from The Genuine Love Project. You support users on their journey of self-love, healing, and emotional growth. Respond with empathy, encouragement, and gentle guidance." },
-        { role: "user", content: message },
-      ],
-    });
+  const result = await chatCompletion({
+    messages: [
+      { role: "system", content: SYSTEM_PROMPT },
+      { role: "user", content: String(message || "") },
+    ],
+    model: "gpt-4o-mini",
+  });
 
-    const reply =
-      completion.choices?.[0]?.message?.content ??
-      "I'm here with you, but I couldn't think of a reply right now.";
-
-    return reply;
-  } catch (err) {
-    logger.error("AI service error", { error: err.message });
-    return "I'm having trouble thinking right now, but you're not alone. Please try again in a moment.";
-  }
+  if (result.success && result.content) return result.content;
+  return FALLBACK;
 }
