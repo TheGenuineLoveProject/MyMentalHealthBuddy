@@ -1,12 +1,11 @@
 AUTO-REFACTOR REPORT
-Generated: Mon Apr 20 10:59:03 PM UTC 2026
+Generated: Tue Apr 21 12:56:55 AM UTC 2026
 
 === duplicate basenames (scoped to runtime + shared) ===
 app.mjs
 App.tsx
 audit.mjs
 auth.mjs
-auth.ts
 BenefitsBlock.tsx
 brand.ts
 client.ts
@@ -47,13 +46,6 @@ wellnessToolsData.js
 === runtime .ts files inside mjs-governed runtime ===
 server/app.ts
 server/contracts/content.schema.ts
-server/index.ts
-server/middleware/auth.ts
-server/middleware/errorHandler.ts
-server/middleware/promptshield.ts
-server/middleware/rateLimit.ts
-server/middleware/rbac.ts
-server/middleware/validate.ts
 server/premium/features.ts
 server/replit_integrations/audio/client.ts
 server/replit_integrations/audio/index.ts
@@ -70,19 +62,6 @@ server/replit_integrations/object_storage/index.ts
 server/replit_integrations/object_storage/objectAcl.ts
 server/replit_integrations/object_storage/objectStorage.ts
 server/replit_integrations/object_storage/routes.ts
-server/routes/ai.business.ts
-server/routes/ai.healing.ts
-server/routes/auth.ts
-server/routes/content.ts
-server/routes/health.ts
-server/routes/subscriptions.ts
-server/routes/users.ts
-server/routes/webhooks.ts
-server/services/email.ts
-server/services/openai.ts
-server/services/stripe.ts
-server/utils/env.ts
-server/utils/logger.ts
 
 === duplicate route signatures by file ===
 --- server/routes/account.mjs ---
@@ -215,11 +194,3 @@ server/utils/logger.ts
 --- server/routes/session-boundary.mjs ---
 --- server/routes/ai.mjs ---
 --- server/routes/admin-social-studio.mjs ---
---- server/routes/ai.business.ts ---
---- server/routes/ai.healing.ts ---
---- server/routes/auth.ts ---
---- server/routes/content.ts ---
---- server/routes/health.ts ---
---- server/routes/subscriptions.ts ---
---- server/routes/users.ts ---
---- server/routes/webhooks.ts ---
