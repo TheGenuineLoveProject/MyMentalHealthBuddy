@@ -252,15 +252,14 @@ export async function orchestrateAIRequest({
         }
 
         // Persist conversation memory (skip on crisis — already short-circuited above).
-        // Pass openai so the summarizer can run AI compression when history > 12.
-        // Failures here MUST NOT break the locked response contract — saveMemory
-        // has its own try/catch but we double-guard for safety.
+        // Fire-and-forget: the AI summarization step inside saveMemory takes ~1.8s
+        // when history > 12, so we MUST NOT await it on the request path. saveMemory
+        // has its own try/catch; the .catch() here is belt-and-suspenders so an
+        // unhandled rejection cannot crash the process.
         if (!isCrisis) {
-                try {
-                        await saveMemory(userKey, cleanText, aiResult.reply, openai);
-                } catch (err) {
-                        console.warn("orchestrator: saveMemory failed:", err?.message);
-                }
+                saveMemory(userKey, cleanText, aiResult.reply, openai).catch((err) => {
+                        console.warn("orchestrator: saveMemory background error:", err?.message);
+                });
         }
 
         return {

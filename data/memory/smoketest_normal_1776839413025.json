@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I had a quiet morning"
+  },
+  {
+    "role": "assistant",
+    "content": "mocked reply"
+  }
+]
