@@ -14,6 +14,7 @@ import {
 } from "../engine/therapyIntelligence.mjs";
 import { chatCompletion, isConfigured as aiConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
+import { logAISuccess, logAIFailure, logAIFallback } from "../logging/aiLogger.mjs";
 
 const router = express.Router();
 const MAX_INPUT_LENGTH = 4000;
@@ -137,13 +138,22 @@ function buildTherapyReply(message) {
   ].join("\n");
 }
 
+// Lightweight GET probe so browser hits don't show "Cannot GET"
+router.get("/chat", (req, res) => {
+  res.json({ status: "AI route is alive (use POST)" });
+});
+
 router.post("/chat", optionalAuth, async (req, res) => {
+  const start = Date.now();
+  let messageLen = 0;
+  const model = process.env.AI_MODEL || "gpt-4o-mini";
   try {
     await ensureAiMessagesTable();
 
     const userId = req.dbUserId || null;
     const guestId = userId ? null : getGuestId(req);
     const message = String(req.body?.message || "").trim();
+    messageLen = message.length;
 
     if (!message) {
       return res.status(400).json({ error: "Message required" });
@@ -270,6 +280,8 @@ router.post("/chat", optionalAuth, async (req, res) => {
       aiError = "not_configured";
     }
 
+    const latencyMs = Date.now() - start;
+
     logger.info("ai_chat", {
       route: "/api/ai/chat",
       source: aiSource,
@@ -279,7 +291,24 @@ router.post("/chat", optionalAuth, async (req, res) => {
       msgLen: cleanText.length,
       replyLen: reply.length,
       historyUsed: history.length,
+      latencyMs,
     });
+
+    if (aiSource === "openai") {
+      logAISuccess({
+        route: "/api/ai/chat",
+        model,
+        latencyMs,
+        inputLength: cleanText.length,
+        outputLength: reply.length,
+      });
+    } else {
+      logAIFallback({
+        route: "/api/ai/chat",
+        reason: aiError || "unknown",
+        inputLength: cleanText.length,
+      });
+    }
 
     if (userId) {
       const userMsgId = newMessageId();
@@ -318,6 +347,13 @@ router.post("/chat", optionalAuth, async (req, res) => {
     });
   } catch (err) {
     console.error("AI chat error:", err);
+    logAIFailure({
+      route: "/api/ai/chat",
+      model,
+      error: err,
+      latencyMs: Date.now() - start,
+      inputLength: messageLen,
+    });
     return res.status(500).json({ error: "AI chat failed" });
   }
 });
