@@ -6,6 +6,7 @@ import { classifyCrisis } from "./crisisClassifier.mjs";
 import { assessRisk } from "../lib/promptEngine.mjs";
 import { getProviderPolicy, canUseLiveAI } from "./providerPolicy.mjs";
 import { logSafetyEvent } from "../logging/safetyLogger.mjs";
+import { callAIProvider } from "./provider.mjs";
 
 // ================================
 // FEATURE FLAGS (CONTROL LAYER)
