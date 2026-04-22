@@ -43,7 +43,7 @@ export function loadMemory(userId, limit = 6) {
 /**
  * Save interaction
  */
-export function saveMemory(userId, message, reply) {
+        export async function saveMemory(userId, message, reply, openai) {
         try {
                 ensureDir();
 
@@ -61,7 +61,11 @@ export function saveMemory(userId, message, reply) {
 
                 // trigger summarization if too large
                 if (history.length > 12) {
-                        const summary = summarizeHistory(history);
+
+                        const summary = await summarizeWithAI({
+                          openai,
+                          history
+                        });
                         saveSummary(userId, summary);
 
                         // keep only last few messages
