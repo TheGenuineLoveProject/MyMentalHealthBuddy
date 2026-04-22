@@ -33,6 +33,7 @@ import { scoreRequest } from "./scoring.mjs";
 import { loadMemory, saveMemory } from "./memory.mjs";
 import { loadSummary } from "./memorySummary.mjs";
 import { loadProfile, profileHasContent } from "./profileStore.mjs";
+import { buildResponsePolicy, renderPolicySystemMessage } from "./responsePolicy.mjs";
 
 // ================================
 // FEATURE FLAGS (CONTROL LAYER)
@@ -223,6 +224,8 @@ export async function orchestrateAIRequest({
         const memory = loadMemory(userKey);
         const summary = loadSummary(userKey);
         const profile = loadProfile(userKey);
+        const policy = buildResponsePolicy({ risk, profile, scoring });
+        const policyMsg = renderPolicySystemMessage(policy);
 
         const aiResult = await callAIProvider({
                 openai,
@@ -233,6 +236,7 @@ export async function orchestrateAIRequest({
                 history: memory,
                 summary,
                 profile,
+                policyMsg,
                 modelOverride: scoring.model,
                 temperatureOverride: scoring.temperature,
                 extraTelemetry: {
@@ -242,6 +246,11 @@ export async function orchestrateAIRequest({
                         memorySize: memory.length,
                         hasSummary: !!summary,
                         hasProfile: profileHasContent(profile),
+                        policy: {
+                                level: risk?.level || "low",
+                                tier: scoring?.tier || "standard",
+                                interventions: policy.interventions.length,
+                        },
                 },
         });
 

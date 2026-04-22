@@ -32,6 +32,7 @@ export async function callAIProvider({
         history = [],
         summary = "",
         profile = null,
+        policyMsg = "",
         modelOverride = null,
         temperatureOverride = null,
         extraTelemetry = {}
@@ -97,6 +98,11 @@ export async function callAIProvider({
                                                                           content: formatProfileForPrompt(profile),
                                                                   },
                                                           ]
+                                                        : []),
+                                                // Response policy LAST among system messages so it wins
+                                                // instruction precedence over generic assistant guidance.
+                                                ...(policyMsg
+                                                        ? [{ role: "system", content: policyMsg }]
                                                         : []),
                                                 ...safeHistory,
                                                 { role: "user", content: input }

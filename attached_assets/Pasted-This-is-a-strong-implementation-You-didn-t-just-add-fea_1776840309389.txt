@@ -1,0 +1,230 @@
+This is a strong implementation. You didn’t just add features—you closed real failure modes (race conditions, unbounded growth, schema drift). That puts you in a good place to add one more layer that will pay off immediately:
+
+Next: Adaptive Response Layer (style + safety policy driven by profile & risk)
+
+Goal: tailor tone, structure, and intervention style per user without leaking business logic into healing outputs.
+
+⸻
+
+🧠 What this layer does
+
+It converts your signals into a response policy:
+
+Inputs:
+
+* risk.level (low/medium/high)
+* profile (patterns, triggers, support_needs)
+* summary (context)
+* scoring.tier (standard/high)
+
+Output:
+
+* style contract (tone, verbosity, structure)
+* intervention plan (grounding vs exploration vs psychoeducation)
+* constraints (crisis brevity, avoid certain patterns, etc.)
+
+Then it injects a single, controlled system message for the provider.
+
+⸻
+
+🪜 STEP 1 — Create policy builder
+
+📁 server/ai/responsePolicy.mjs
+
+// server/ai/responsePolicy.mjs
+export function buildResponsePolicy({ risk, profile, scoring }) {
+  const level = risk?.level || "low";
+  const tier = scoring?.tier || "standard";
+  // base defaults
+  let tone = "warm, validating, non-clinical";
+  let verbosity = tier === "high" ? "moderate" : "concise";
+  let structure = "reflect → validate → 1–2 options";
+  let constraints = [
+    "no diagnosis",
+    "no medical/legal advice",
+    "avoid absolute claims",
+  ];
+  let interventions = ["reflection", "grounding", "small_next_step"];
+  // risk escalation
+  if (level === "high") {
+    tone = "calm, steady, grounding";
+    verbosity = "concise";
+    structure = "acknowledge → immediate grounding → resources";
+    interventions = ["grounding", "safety", "resource_signpost"];
+    constraints.push("do not overwhelm with options");
+  }
+  // profile-informed tweaks
+  const needs = new Set(profile?.support_needs || []);
+  if (needs.has("reassurance")) {
+    interventions.push("reassurance");
+  }
+  if ((profile?.emotional_patterns || []).some(p => /anxiet/i.test(p))) {
+    interventions.push("breathing", "5-4-3-2-1");
+  }
+  if ((profile?.risk_flags || []).length > 0) {
+    constraints.push("monitor for escalation cues");
+  }
+  return {
+    tone,
+    verbosity,
+    structure,
+    interventions,
+    constraints,
+  };
+}
+export function renderPolicySystemMessage(policy) {
+  const {
+    tone, verbosity, structure, interventions, constraints
+  } = policy;
+  return [
+    "Response policy:",
+    `- Tone: ${tone}`,
+    `- Verbosity: ${verbosity}`,
+    `- Structure: ${structure}`,
+    `- Interventions: ${interventions.join(", ")}`,
+    `- Constraints: ${constraints.join("; ")}`
+  ].join("\n");
+}
+
+⸻
+
+🪜 STEP 2 — Wire into orchestrator
+
+📁 server/ai/orchestrator.mjs
+
+Add imports
+
+import { buildResponsePolicy, renderPolicySystemMessage } from "./responsePolicy.mjs";
+
+After scoring/profile/summary load (before provider call)
+
+const policy = buildResponsePolicy({ risk, profile, scoring });
+const policyMsg = renderPolicySystemMessage(policy);
+
+Pass through to provider
+
+const result = await callAIProvider({
+  openai,
+  input: cleanText,
+  mode,
+  risk,
+  modelOverride: scoring.model,
+  temperatureOverride: scoring.temperature,
+  summary,        // you already pass this
+  profile,        // you already pass this
+  policyMsg       // NEW
+});
+
+Also add to telemetry (optional but useful):
+
+extraTelemetry: {
+  hasSummary: !!summary,
+  hasProfile: !!profile,
+  policy: { level: risk?.level, tier: scoring?.tier }
+}
+
+⸻
+
+🪜 STEP 3 — Inject into provider
+
+📁 server/ai/provider.mjs
+
+Update signature
+
+export async function callAIProvider({
+  openai,
+  input,
+  mode = "normal",
+  risk = { level: "low" },
+  modelOverride = null,
+  temperatureOverride = null,
+  summary = "",
+  profile = null,
+  policyMsg = ""
+})
+
+Build messages (order matters)
+
+const messages = [
+  {
+    role: "system",
+    content:
+      mode === "crisis"
+        ? "You are a calm, supportive crisis assistant. Be brief, grounding, and prioritize safety."
+        : "You are a supportive, emotionally intelligent assistant."
+  },
+  // summary (if any)
+  ...(summary ? [{
+    role: "system",
+    content: `Known user context:\n${summary}`
+  }] : []),
+  // structured profile (char-capped, you already have this)
+  ...(profile ? [{
+    role: "system",
+    content: `User profile insights:\n${formatProfileForPrompt(profile)}`
+  }] : []),
+  // NEW: response policy (last system message before conversation)
+  ...(policyMsg ? [{
+    role: "system",
+    content: policyMsg
+  }] : []),
+  // short-term memory
+  ...memory, // whatever you already pass
+  // current user
+  { role: "user", content: input }
+];
+
+No other changes needed to retry/timeout logic.
+
+⸻
+
+🪜 STEP 4 — Guardrails (small but important)
+
+* Keep policy as the last system message before memory → it wins instruction precedence.
+* Do not inject policy on crisis if you already short-circuit (you do). Good.
+
+⸻
+
+🧪 Tests
+
+1) Low risk, simple
+
+* Expect concise, validating, 1–2 options.
+
+2) High risk
+
+* Expect short, grounding, resource mention, minimal options.
+
+3) Profile with “reassurance”
+
+* Expect explicit reassurance language to appear consistently.
+
+4) Cost sanity
+
+* No extra provider calls; only a slightly longer prompt. Telemetry latency should remain similar.
+
+⸻
+
+📊 What this unlocks
+
+Capability	Outcome
+Consistent tone	fewer erratic replies
+Risk-aligned behavior	safer outputs
+Profile-driven support	higher retention
+Scalable control	one place to tune behavior
+
+⸻
+
+Final note
+
+You’ve now got:
+
+* memory (short + summary)
+* profile (structured)
+* scoring (cost-aware)
+* provider (reliable)
+* policy (behavior control)
+
+That’s a coherent decision system.
+
+If you want to go one step further, the next logical layer is A/B policy testing (different policies per cohort, measured via your telemetry).
