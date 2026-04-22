@@ -1,0 +1,234 @@
+Perfect—this is the right moment to add telemetry. Your system is stable enough now that measurement will actually be meaningful.
+
+We’re going to do this cleanly and minimally:
+
+* no performance hit
+* no coupling to business logic
+* JSONL logs (matches your current logging system)
+* usable immediately
+
+⸻
+
+🧠 HARD TRUTH
+
+Right now you don’t know:
+
+* how fast responses are over time
+* how often retries/fallbacks happen
+* how much each request is costing
+
+That’s fine for testing—but dangerous for scale.
+
+Telemetry fixes that.
+
+⸻
+
+🎯 OBJECTIVE
+
+Every AI call should produce a structured log like:
+
+{
+  "type": "ai_call",
+  "timestamp": "...",
+  "model": "gpt-4o-mini",
+  "latencyMs": 882,
+  "tokens": { "input": 120, "output": 180 },
+  "costUsd": 0.0021,
+  "success": true,
+  "route": "/api/ai/chat"
+}
+
+⸻
+
+🪜 STEP 1 — CREATE TELEMETRY FILE
+
+📁 File (NEW)
+
+server/ai/telemetry.mjs
+
+⸻
+
+✅ COPY + PASTE
+
+import fs from "node:fs";
+import path from "node:path";
+const LOG_PATH = path.join(process.cwd(), "logs", "ai-telemetry.jsonl");
+function ensureLogFile() {
+  const dir = path.dirname(LOG_PATH);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+function estimateCost(model, inputTokens = 0, outputTokens = 0) {
+  // Rough pricing (adjust later if needed)
+  const pricing = {
+    "gpt-4o-mini": { input: 0.00000015, output: 0.0000006 }
+  };
+  const p = pricing[model] || pricing["gpt-4o-mini"];
+  return (
+    inputTokens * p.input +
+    outputTokens * p.output
+  );
+}
+export function logAICall({
+  route,
+  model,
+  latencyMs,
+  inputTokens,
+  outputTokens,
+  success,
+}) {
+  try {
+    ensureLogFile();
+    const costUsd = estimateCost(model, inputTokens, outputTokens);
+    const entry = {
+      type: "ai_call",
+      timestamp: new Date().toISOString(),
+      route,
+      model,
+      latencyMs,
+      tokens: {
+        input: inputTokens,
+        output: outputTokens
+      },
+      costUsd,
+      success
+    };
+    fs.appendFileSync(LOG_PATH, JSON.stringify(entry) + "\n");
+  } catch (err) {
+    // Silent fail (never break request flow)
+    console.error("Telemetry error:", err.message);
+  }
+}
+
+⸻
+
+🪜 STEP 2 — WIRE INTO PROVIDER (CRITICAL POINT)
+
+📁 File:
+
+server/ai/provider.mjs
+
+⸻
+
+🔝 ADD IMPORT AT TOP
+
+import { logAICall } from "./telemetry.mjs";
+
+⸻
+
+🔍 FIND SUCCESS RETURN BLOCK
+
+You already have something like:
+
+return {
+  ok: true,
+  reply,
+  modelUsed,
+  latency
+};
+
+⸻
+
+✅ ADD TELEMETRY RIGHT BEFORE RETURN
+
+logAICall({
+  route: "/api/ai/chat",
+  model: modelUsed,
+  latencyMs: latency,
+  inputTokens: response.usage?.prompt_tokens || 0,
+  outputTokens: response.usage?.completion_tokens || 0,
+  success: true
+});
+
+⸻
+
+🔍 FIND ERROR / CATCH BLOCK
+
+⸻
+
+✅ ADD FAILURE TELEMETRY
+
+logAICall({
+  route: "/api/ai/chat",
+  model,
+  latencyMs: Date.now() - startTime,
+  inputTokens: 0,
+  outputTokens: 0,
+  success: false
+});
+
+⸻
+
+🪜 STEP 3 — VERIFY LOGGING
+
+📁 Run in shell:
+
+cat logs/ai-telemetry.jsonl
+
+⸻
+
+✅ You should see entries like:
+
+{"type":"ai_call","timestamp":"2026-04-21T...","route":"/api/ai/chat","model":"gpt-4o-mini","latencyMs":882,"tokens":{"input":120,"output":180},"costUsd":0.0021,"success":true}
+
+⸻
+
+🧪 STEP 4 — TEST AGAIN
+
+Run your normal test:
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat \
+-H "Content-Type: application/json" \
+-H "x-guest-id: t1" \
+-d '{"message":"I feel anxious"}'
+
+⸻
+
+Then:
+
+tail -n 5 logs/ai-telemetry.jsonl
+
+⸻
+
+🔒 WHAT YOU JUST ADDED
+
+Capability	Status
+Latency tracking	✅
+Token tracking	✅
+Cost estimation	✅
+Success/failure tracking	✅
+JSONL logging	✅
+Zero impact to API	✅
+
+⸻
+
+🚀 WHAT THIS UNLOCKS NEXT
+
+Now you can:
+
+* detect slow models
+* detect expensive prompts
+* track failure rate
+* build analytics dashboard
+* optimize cost per user
+
+⸻
+
+⚡ NEXT STEP (HIGH IMPACT)
+
+Now the smartest next move is:
+
+👉 “add request scoring layer”
+
+This will:
+
+* rate input complexity
+* decide model dynamically (cheap vs expensive)
+* reduce cost automatically
+
+⸻
+
+You’re not just building a feature anymore.
+
+You’re building a controlled AI system.

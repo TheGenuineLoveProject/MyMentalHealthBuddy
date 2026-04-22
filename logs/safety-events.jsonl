@@ -3,3 +3,4 @@
 {"id":"safe_1776834047840_9glgd0","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-22T05:00:47.840Z"}
 {"id":"safe_1776834129766_8y0i2r","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-22T05:02:09.766Z"}
 {"id":"safe_1776835163333_6m7ngz","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-22T05:19:23.333Z"}
+{"id":"safe_1776836140904_5w79z3","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-22T05:35:40.904Z"}
