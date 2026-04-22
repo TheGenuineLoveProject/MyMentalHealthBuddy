@@ -9,6 +9,7 @@ import { logSafetyEvent } from "../logging/safetyLogger.mjs";
 import { callAIProvider } from "./provider.mjs";
 import { scoreRequest } from "./scoring.mjs";
 import { loadMemory, saveMemory } from "./memory.mjs";
+import { loadSummary } from "./memorySummary.mjs";
 
 // ================================
 // FEATURE FLAGS (CONTROL LAYER)
@@ -197,6 +198,7 @@ export async function orchestrateAIRequest({
         // ================================
         const scoring = scoreRequest({ input: cleanText, risk });
         const memory = loadMemory(userKey);
+        const summary = loadSummary(userKey);
 
         const aiResult = await callAIProvider({
                 openai,
@@ -205,6 +207,7 @@ export async function orchestrateAIRequest({
                 risk,
                 route,
                 history: memory,
+                summary,
                 modelOverride: scoring.model,
                 temperatureOverride: scoring.temperature,
                 extraTelemetry: {
@@ -212,6 +215,7 @@ export async function orchestrateAIRequest({
                         score: scoring.score,
                         memoryUsed: memory.length > 0,
                         memorySize: memory.length,
+                        hasSummary: !!summary,
                 },
         });
 

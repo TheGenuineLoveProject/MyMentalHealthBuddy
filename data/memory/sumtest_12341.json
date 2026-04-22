@@ -1,0 +1,34 @@
+[
+  {
+    "role": "user",
+    "content": "Turn 5: I feel anxious about work"
+  },
+  {
+    "role": "assistant",
+    "content": "I hear you, and I appreciate you sharing how you feel. It seems like this is a persistent concern for you. Would you like to talk about what aspects of work are making you anxious? Sometimes, breaking it down can make it feel more manageable."
+  },
+  {
+    "role": "user",
+    "content": "Turn 6: I feel anxious about work"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like this anxiety is really affecting you, and I want you to know that it’s completely valid to feel this way. If you’re comfortable, could you share more about what’s specifically causing your anxiety? Whether it’s deadlines, workload, or something else, talking about it might help lighten the load a bit."
+  },
+  {
+    "role": "user",
+    "content": "Turn 7: I feel anxious about work"
+  },
+  {
+    "role": "assistant",
+    "content": "I can see that this is a recurring feeling for you, and it’s important to address it. It might help to explore what’s at the root of this anxiety. Are there specific situations or tasks at work that trigger these feelings? Sometimes identifying the source can be the first step toward finding ways to cope. I'm here to listen."
+  },
+  {
+    "role": "user",
+    "content": "Following up — does this pattern make sense?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, it definitely makes sense. Repeating the statement \"I feel anxious about work\" indicates that this is a significant concern for you at the moment. It might reflect a need for support or a desire to process your feelings about work-related stress. Sometimes, people express their emotions in a way that emphasizes their struggle, seeking reassurance or validation. If you’d like, we can explore this further together or talk about strategies to help manage that anxiety. What feels right for you?"
+  }
+]

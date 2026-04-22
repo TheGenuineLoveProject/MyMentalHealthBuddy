@@ -29,6 +29,7 @@ export async function callAIProvider({
         risk = { level: "low" },
         route = "/api/ai/chat",
         history = [],
+        summary = "",
         modelOverride = null,
         temperatureOverride = null,
         extraTelemetry = {}
@@ -79,6 +80,14 @@ export async function callAIProvider({
                                         model,
                                         messages: [
                                                 { role: "system", content: systemPrompt },
+                                                ...(summary
+                                                        ? [
+                                                                  {
+                                                                          role: "system",
+                                                                          content: `Known user context:\n${summary}`,
+                                                                  },
+                                                          ]
+                                                        : []),
                                                 ...safeHistory,
                                                 { role: "user", content: input }
                                         ],

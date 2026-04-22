@@ -1,0 +1,6 @@
+User context summary:
+- Emotional patterns: recurring stress/anxiety themes
+- Topics discussed: user: Turn 2: I feel anxious about work
+assistant: I understand. Work can be a significant source of stress. Is there something specific about your job or upcoming tasks that’s contributing to your anxiety? Talking through it might help you feel a bit lighter.
+user: Turn 3: I feel anxious about work
+- Tone: user seeks support and understanding
