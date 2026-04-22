@@ -172,17 +172,13 @@ export async function orchestrateAIRequest({
         if (!canUseLiveAI(providerPolicy)) {
                 return {
                         ok: true,
-                        stage: "provider",
-                        outcome: "fallback",
-                        mode: "fallback",
-                        providerPolicy,
-                        cleanText,
+                        stage: "fallback",
+                        outcome: "soft_response",
                         response: {
-                                ok: true,
-                                reply:
-                                        "I’m here with you. I can’t reach my full thinking right now, " +
-                                        "but you’re not alone — take a slow breath, and tell me what’s on your mind.",
+                                reply: "I'm here with you. Let's take this one step at a time.",
                                 source: "fallback",
+                                modelUsed: null,
+                                latencyMs: 0,
                         },
                 };
         }
@@ -199,21 +195,18 @@ export async function orchestrateAIRequest({
                         ok: false,
                         status: 500,
                         stage: "ai",
+                        outcome: "failure",
                         response: {
-                                error: "AI unavailable. Please try again.",
+                                error: aiResult.error || "AI unavailable",
                         },
                 };
         }
 
         return {
                 ok: true,
-                stage: "provider",
-                outcome: "live_ai",
-                mode: "live_ai",
-                providerPolicy,
-                cleanText,
+                stage: "ai",
+                outcome: "success",
                 response: {
-                        ok: true,
                         reply: aiResult.reply,
                         source: "openai",
                         modelUsed: aiResult.modelUsed,

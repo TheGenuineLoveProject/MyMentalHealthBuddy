@@ -1,0 +1,213 @@
+This is a clean, correct implementation. You didn’t just “make it work” — you aligned it with proper separation of concerns and eliminated a real failure mode (empty-body). That matters.
+
+Now let’s lock this in properly and make one small but critical reinforcement so this doesn’t regress later.
+
+⸻
+
+🧠 HARD TRUTH
+
+Your system is now functionally correct, but not yet contract-safe.
+
+Right now:
+
+* provider returns one shape
+* orchestrator reshapes it
+* route assumes consistency
+
+If that contract drifts later → silent bugs return
+
+We fix that now with one small standardization layer
+
+⸻
+
+🎯 GOAL (THIS STEP)
+
+Make sure every successful AI path returns the SAME shape
+
+{
+  ok: true,
+  stage: "ai",
+  response: {
+    reply,
+    source,
+    modelUsed,
+    latencyMs
+  }
+}
+
+⸻
+
+🪜 STEP 1 — LOCK RESPONSE CONTRACT (ORCHESTRATOR)
+
+📁 File:
+
+server/ai/orchestrator.mjs
+
+⸻
+
+🔍 FIND your live_ai branch
+
+You likely have something like:
+
+const aiResult = await callAIProvider(...)
+
+⸻
+
+✅ REPLACE RETURN BLOCK WITH THIS EXACT STRUCTURE
+
+return {
+  ok: true,
+  stage: "ai",
+  outcome: "success",
+  response: {
+    reply: aiResult.reply,
+    source: "openai",
+    modelUsed: aiResult.modelUsed,
+    latencyMs: aiResult.latency
+  }
+};
+
+⸻
+
+🔒 THEN HANDLE FAILURE CONSISTENTLY
+
+Replace any ad-hoc error return with:
+
+return {
+  ok: false,
+  status: 500,
+  stage: "ai",
+  outcome: "failure",
+  response: {
+    error: aiResult.error || "AI unavailable"
+  }
+};
+
+⸻
+
+🪜 STEP 2 — FIX FALLBACK BRANCH (IMPORTANT)
+
+You said you fixed empty-body — good.
+Now make sure it matches the SAME contract.
+
+⸻
+
+🔍 FIND fallback return
+
+⸻
+
+✅ REPLACE WITH:
+
+return {
+  ok: true,
+  stage: "fallback",
+  outcome: "soft_response",
+  response: {
+    reply: "I'm here with you. Let's take this one step at a time.",
+    source: "fallback",
+    modelUsed: null,
+    latencyMs: 0
+  }
+};
+
+⸻
+
+🪜 STEP 3 — ROUTE SHOULD NOT “THINK”
+
+📁 File:
+
+server/routes/ai.mjs
+
+⸻
+
+🔍 FIND final res.json(...)
+
+⸻
+
+✅ ENSURE IT IS EXACTLY:
+
+const result = await orchestrateAIRequest({
+  route: "/api/ai/chat",
+  message,
+  openai: req.app.locals.openai || getOpenAIClient()
+});
+return res.status(result.status || 200).json(result);
+
+⸻
+
+👉 The route should:
+
+* NOT reshape
+* NOT interpret
+* ONLY forward
+
+⸻
+
+🧪 STEP 4 — VERIFY (IMPORTANT)
+
+Run this again:
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat \
+-H "Content-Type: application/json" \
+-H "x-guest-id: t1" \
+-d '{"message":"I feel anxious"}'
+
+⸻
+
+✅ EXPECTED FINAL SHAPE
+
+{
+  "ok": true,
+  "stage": "ai",
+  "outcome": "success",
+  "response": {
+    "reply": "...",
+    "source": "openai",
+    "modelUsed": "gpt-4o-mini",
+    "latencyMs": 929
+  }
+}
+
+⸻
+
+🔐 WHAT THIS FIXES (IMPORTANT)
+
+Risk	Now Fixed
+Empty responses	✅
+Inconsistent JSON shapes	✅
+Frontend breakage risk	✅
+Future provider swap issues	✅
+Silent regressions	✅
+
+⸻
+
+🚀 NEXT MOVE (HIGH VALUE)
+
+Now that provider is stable, the correct next layer is NOT features.
+
+It is:
+
+👉 provider telemetry + cost tracking
+
+Because without it:
+
+* you can’t optimize
+* you can’t scale
+* you can’t control spend
+
+⸻
+
+💬 Say:
+
+👉 “add telemetry layer”
+
+and I’ll give you:
+
+* exact file
+* exact placement
+* logging format (JSONL aligned with your system)
+* zero overhead + production safe
+
+⸻
+
+You’re now officially past “prototype” and into real system architecture.

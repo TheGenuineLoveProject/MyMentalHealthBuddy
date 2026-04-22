@@ -152,11 +152,7 @@ router.post("/chat", optionalAuth, async (req, res) => {
       openai: req.app.locals.openai || getOpenAIClient()
     });
 
-    if (!result.ok) {
-      return res.status(result.status || 400).json(result.response);
-    }
-
-    return res.status(200).json(result.response);
+    return res.status(result.status || 200).json(result);
 
   } catch (err) {
     console.error("AI route error:", err);
