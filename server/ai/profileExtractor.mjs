@@ -19,8 +19,16 @@ Return ONLY valid JSON matching EXACTLY this shape (no prose, no markdown, no co
   "relationship_themes": [],
   "coping_strategies": [],
   "support_needs": [],
-  "risk_flags": []
+  "risk_flags": [],
+  "core_beliefs": [],
+  "behavior_loops": [],
+  "values": []
 }
+
+Field guidance:
+- "core_beliefs" = recurring self-statements ("I'm not enough", "I have to be perfect")
+- "behavior_loops" = stimulus → response patterns ("when stressed → withdraws from partner")
+- "values" = what the user explicitly cares about ("creativity", "being a good parent")
 
 Rules:
 - Each value MUST be an array of short strings (max 8 words each).

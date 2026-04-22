@@ -6,7 +6,9 @@
 //
 // Pure function — no I/O, no side effects, never throws.
 
-export function buildResponsePolicy({ risk, profile, scoring } = {}) {
+import { resolveModules } from "./moduleRouter.mjs";
+
+export function buildResponsePolicy({ risk, profile, scoring, modules = [] } = {}) {
         const level = risk?.level || "low";
         const tier = scoring?.tier || "standard";
 
@@ -58,6 +60,23 @@ export function buildResponsePolicy({ risk, profile, scoring } = {}) {
         }
         if (riskFlags.length > 0) {
                 constraints.push("monitor for escalation cues");
+        }
+
+        // Module-driven interventions (resolved via MODULE_REGISTRY).
+        // Modules layer ON TOP of profile-driven tweaks — they don't replace them.
+        if (Array.isArray(modules) && modules.length > 0) {
+                const resolved = resolveModules(modules);
+                interventions.push(...resolved.interventions);
+
+                // Structure switch: if cognitive_reframe is in play (CBT thought-pattern
+                // module), swap to a CBT-shaped response unless we're in high-risk mode
+                // where grounding-first structure stays.
+                if (
+                        level !== "high" &&
+                        resolved.interventions.includes("cognitive_reframe")
+                ) {
+                        structure = "reflect → identify thought → reframe → small next step";
+                }
         }
 
         // Dedupe interventions while preserving order

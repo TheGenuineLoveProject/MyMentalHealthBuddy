@@ -18,6 +18,10 @@ export const EMPTY_PROFILE = {
         coping_strategies: [],
         support_needs: [],
         risk_flags: [],
+        // Module-system fields (added with module router):
+        core_beliefs: [],
+        behavior_loops: [],
+        values: [],
 };
 
 function ensureDir() {
@@ -110,19 +114,49 @@ export function profileHasContent(profile) {
  * Render a profile as a compact bullet list for system-prompt injection.
  * Hard char-cap so the prompt stays bounded even if profile growth bypasses
  * mergeProfiles (e.g. via direct file edit). At ~4 chars/token this is ~1k tokens.
+ *
+ * Categories are rendered in PRIORITY ORDER so that if truncation fires, the
+ * safety- and need-critical fields survive and the lowest-priority fields
+ * (e.g. values, growth-oriented data) get dropped first.
  */
 const PROMPT_CHAR_CAP = 4000;
+const RENDER_PRIORITY = [
+        "risk_flags",            // safety-critical — must survive truncation
+        "support_needs",         // immediate user need
+        "emotional_patterns",    // most actionable for tone matching
+        "triggers",              // pairs with patterns
+        "coping_strategies",     // proven-helpful tools to recommend
+        "behavior_loops",        // pattern-level insight
+        "core_beliefs",          // depth work
+        "relationship_themes",   // contextual
+        "values",                // long-horizon, drop first
+];
 export function formatProfileForPrompt(profile) {
         if (!profileHasContent(profile)) return "";
         const lines = ["Known user profile (cumulative):"];
-        for (const [key, vals] of Object.entries(profile)) {
-                if (!Array.isArray(vals) || vals.length === 0) continue;
+        const seenKeys = new Set();
+
+        const renderKey = (key) => {
+                const vals = profile[key];
+                if (!Array.isArray(vals) || vals.length === 0) return;
                 const label = key.replace(/_/g, " ");
                 const items = vals
                         .map((v) => (typeof v === "string" ? v : JSON.stringify(v)))
                         .join("; ");
                 lines.push(`- ${label}: ${items}`);
+        };
+
+        // Priority pass first
+        for (const key of RENDER_PRIORITY) {
+                renderKey(key);
+                seenKeys.add(key);
         }
+        // Forward-compat: any new categories not in RENDER_PRIORITY render last
+        for (const key of Object.keys(profile)) {
+                if (seenKeys.has(key)) continue;
+                renderKey(key);
+        }
+
         const out = lines.join("\n");
         return out.length > PROMPT_CHAR_CAP
                 ? out.slice(0, PROMPT_CHAR_CAP) + "\n…(truncated)"

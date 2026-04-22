@@ -34,6 +34,7 @@ import { loadMemory, saveMemory } from "./memory.mjs";
 import { loadSummary } from "./memorySummary.mjs";
 import { loadProfile, profileHasContent } from "./profileStore.mjs";
 import { buildResponsePolicy, renderPolicySystemMessage } from "./responsePolicy.mjs";
+import { selectModules } from "./moduleRouter.mjs";
 
 // ================================
 // FEATURE FLAGS (CONTROL LAYER)
@@ -224,7 +225,8 @@ export async function orchestrateAIRequest({
         const memory = loadMemory(userKey);
         const summary = loadSummary(userKey);
         const profile = loadProfile(userKey);
-        const policy = buildResponsePolicy({ risk, profile, scoring });
+        const modules = selectModules({ profile, input: cleanText });
+        const policy = buildResponsePolicy({ risk, profile, scoring, modules });
         const policyMsg = renderPolicySystemMessage(policy);
 
         const aiResult = await callAIProvider({
@@ -250,6 +252,7 @@ export async function orchestrateAIRequest({
                                 level: risk?.level || "low",
                                 tier: scoring?.tier || "standard",
                                 interventions: policy.interventions.length,
+                                modules,
                         },
                 },
         });
