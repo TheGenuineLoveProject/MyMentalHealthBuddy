@@ -1,5 +1,6 @@
 // server/ai/provider.mjs
 import { logAICall } from "./telemetry.mjs";
+import { formatProfileForPrompt } from "./profileStore.mjs";
 
 const DEFAULT_MODEL = process.env.AI_MODEL || "gpt-4o-mini";
 const FALLBACK_MODEL = "gpt-4o-mini"; // safe fallback
@@ -30,6 +31,7 @@ export async function callAIProvider({
         route = "/api/ai/chat",
         history = [],
         summary = "",
+        profile = null,
         modelOverride = null,
         temperatureOverride = null,
         extraTelemetry = {}
@@ -85,6 +87,14 @@ export async function callAIProvider({
                                                                   {
                                                                           role: "system",
                                                                           content: `Known user context:\n${summary}`,
+                                                                  },
+                                                          ]
+                                                        : []),
+                                                ...(profile && formatProfileForPrompt(profile)
+                                                        ? [
+                                                                  {
+                                                                          role: "system",
+                                                                          content: formatProfileForPrompt(profile),
                                                                   },
                                                           ]
                                                         : []),
