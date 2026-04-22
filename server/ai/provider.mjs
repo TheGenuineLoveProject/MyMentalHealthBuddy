@@ -1,6 +1,7 @@
 // server/ai/provider.mjs
 import { logAICall } from "./telemetry.mjs";
 import { formatProfileForPrompt } from "./profileStore.mjs";
+import { MODULE_REGISTRY } from "./moduleRouter.mjs";
 
 const DEFAULT_MODEL = process.env.AI_MODEL || "gpt-4o-mini";
 const FALLBACK_MODEL = "gpt-4o-mini"; // safe fallback
@@ -33,6 +34,7 @@ export async function callAIProvider({
         summary = "",
         profile = null,
         policyMsg = "",
+        modules = [],
         modelOverride = null,
         temperatureOverride = null,
         extraTelemetry = {}
@@ -96,6 +98,22 @@ export async function callAIProvider({
                                                                   {
                                                                           role: "system",
                                                                           content: formatProfileForPrompt(profile),
+                                                                  },
+                                                          ]
+                                                        : []),
+                                                // Internal-only framework hint just before the policy. We map
+                                                // module ids → human-readable tags (so the model sees a clinically
+                                                // sensible label, not the raw registry key) and explicitly tell the
+                                                // model not to surface this label to the user — prevents replies
+                                                // like "I'm using my anxiety_regulation module to help you."
+                                                ...(Array.isArray(modules) && modules.length > 0
+                                                        ? [
+                                                                  {
+                                                                          role: "system",
+                                                                          content: `Internal context (do not mention to the user): supporting frameworks active for this turn — ${modules
+                                                                                  .map((id) => MODULE_REGISTRY[id]?.tag || id)
+                                                                                  .join(", ")
+                                                                                  .replace(/_/g, " ")}.`,
                                                                   },
                                                           ]
                                                         : []),

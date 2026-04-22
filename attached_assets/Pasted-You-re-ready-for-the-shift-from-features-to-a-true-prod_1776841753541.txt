@@ -1,0 +1,300 @@
+You’re ready for the shift from “features” to a true product system.
+
+We’ll build this so it plugs directly into what you already have (orchestrator → policy → provider), without breaking anything.
+
+⸻
+
+🧠 HARD TRUTH
+
+If modules are just “ideas,” they won’t scale.
+
+They must be:
+
+* codified
+* selectable
+* injectable into policy
+* reusable across chat + content + tools
+
+⸻
+
+🎯 GOAL
+
+Create a Module System that:
+
+input → module detection → module config → policy → AI response
+
+⸻
+
+🪜 STEP 1 — CREATE MODULE DEFINITIONS
+
+📁 File:
+
+server/ai/modules.mjs
+
+⸻
+
+✅ PASTE THIS
+
+// server/ai/modules.mjs
+export const MODULES = {
+  anxiety: {
+    triggers: /anxious|panic|worry|overthinking/i,
+    interventions: ["breathing", "5-4-3-2-1", "grounding"],
+    structure: "ground → slow breath → reframe",
+    priority: 2
+  },
+  cognitive_reframe: {
+    triggers: /why do I|I keep thinking|I can't stop/i,
+    interventions: ["identify_thought", "challenge_thought", "reframe"],
+    structure: "identify → challenge → reframe",
+    priority: 3
+  },
+  emotional_processing: {
+    triggers: /sad|overwhelmed|empty|hurt/i,
+    interventions: ["name_feeling", "body_awareness", "needs_check"],
+    structure: "feel → locate → need",
+    priority: 2
+  },
+  relationship: {
+    triggers: /partner|relationship|fight|argument/i,
+    interventions: ["needs_vs_expression", "repair_prompt"],
+    structure: "clarify need → communicate",
+    priority: 2
+  },
+  behavioral_loop: {
+    triggers: /always|every time|pattern|cycle/i,
+    interventions: ["pattern_detection", "interrupt_pattern"],
+    structure: "identify loop → break loop",
+    priority: 3
+  },
+  self_regulation: {
+    triggers: /stress|burnout|too much/i,
+    interventions: ["reduce_load", "next_small_step"],
+    structure: "simplify → act",
+    priority: 1
+  }
+};
+
+⸻
+
+🪜 STEP 2 — CREATE MODULE ROUTER
+
+📁 File:
+
+server/ai/moduleRouter.mjs
+
+⸻
+
+✅ PASTE THIS
+
+// server/ai/moduleRouter.mjs
+import { MODULES } from "./modules.mjs";
+export function selectModules({ input = "", profile = {} }) {
+  const selected = [];
+  for (const [name, mod] of Object.entries(MODULES)) {
+    if (mod.triggers.test(input)) {
+      selected.push({ name, ...mod });
+    }
+  }
+  // profile-based activation
+  if (profile?.behavior_loops?.length) {
+    selected.push({ name: "behavioral_loop", ...MODULES.behavioral_loop });
+  }
+  // sort by priority
+  selected.sort((a, b) => b.priority - a.priority);
+  return selected.slice(0, 2); // limit to top 2 modules
+}
+
+⸻
+
+🪜 STEP 3 — INTEGRATE INTO ORCHESTRATOR
+
+📁 File:
+
+server/ai/orchestrator.mjs
+
+⸻
+
+📍 ADD IMPORT
+
+import { selectModules } from "./moduleRouter.mjs";
+
+⸻
+
+📍 AFTER PROFILE + INPUT
+
+const modules = selectModules({
+  input: cleanText,
+  profile
+});
+
+⸻
+
+📍 PASS INTO POLICY
+
+const policy = buildResponsePolicy({
+  risk,
+  profile,
+  scoring,
+  modules
+});
+
+⸻
+
+🪜 STEP 4 — UPDATE POLICY TO USE MODULES
+
+📁 File:
+
+server/ai/responsePolicy.mjs
+
+⸻
+
+📍 UPDATE FUNCTION SIGNATURE
+
+export function buildResponsePolicy({ risk, profile, scoring, modules = [] })
+
+⸻
+
+📍 ADD MODULE INFLUENCE
+
+for (const mod of modules) {
+  if (mod.interventions) {
+    interventions.push(...mod.interventions);
+  }
+  if (mod.structure && !structureLocked) {
+    structure = mod.structure;
+  }
+}
+
+⸻
+
+📍 DEDUPE INTERVENTIONS
+
+interventions = Array.from(new Set(interventions));
+
+⸻
+
+🪜 STEP 5 — ADD MODULE CONTEXT TO PROMPT
+
+📁 provider.mjs
+
+⸻
+
+📍 BEFORE POLICY MESSAGE
+
+...(modules.length
+  ? [{
+      role: "system",
+      content: `Active support modules: ${modules.map(m => m.name).join(", ")}`
+    }]
+  : []),
+
+⸻
+
+🪜 STEP 6 — TELEMETRY (IMPORTANT)
+
+Add:
+
+modules: modules.map(m => m.name),
+
+⸻
+
+🧪 TEST
+
+⸻
+
+Anxiety input
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat \
+-H "Content-Type: application/json" \
+-H "x-guest-id: modtest1" \
+-d '{"message":"I feel anxious and overwhelmed"}'
+
+✅ Expect:
+
+* breathing used
+* grounding used
+
+⸻
+
+Loop detection
+
+-d '{"message":"This always happens to me in relationships"}'
+
+✅ Expect:
+
+* pattern recognition
+* loop interruption
+
+⸻
+
+🧠 WHAT YOU JUST BUILT
+
+Layer	Role
+Modules	domain intelligence
+Router	decision engine
+Policy	behavior control
+Provider	execution
+
+⸻
+
+⚡ HARD TRUTH
+
+Without modules:
+
+your system reacts to words
+
+With modules:
+
+your system applies structured psychological frameworks
+
+⸻
+
+🚀 WHAT THIS UNLOCKS
+
+1. Content system
+
+Each module → blogs, tools, guides
+
+2. Product features
+
+Buttons:
+
+* “Calm me down”
+* “Understand this pattern”
+
+3. Monetization
+
+Premium modules:
+
+* trauma recovery
+* relationship coaching
+* burnout programs
+
+⸻
+
+🔥 NEXT STEP (VERY HIGH IMPACT)
+
+Say:
+
+👉 “build tool execution layer”
+
+This will:
+
+* turn modules into interactive exercises
+* not just conversation
+* actual transformation tools
+
+⸻
+
+You now have:
+
+* AI engine ✅
+* memory system ✅
+* profile intelligence ✅
+* adaptive behavior ✅
+* modular psychology system ✅
+
+This is no longer software.
+
+This is a mental health operating system.

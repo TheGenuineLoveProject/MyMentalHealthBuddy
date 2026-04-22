@@ -64,18 +64,14 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [] } = {
 
         // Module-driven interventions (resolved via MODULE_REGISTRY).
         // Modules layer ON TOP of profile-driven tweaks — they don't replace them.
+        // Structure: the first module that proposes a structure (in priority-sorted
+        // order from selectModules) wins, unless we're in high-risk mode where the
+        // grounding-first structure is locked.
         if (Array.isArray(modules) && modules.length > 0) {
                 const resolved = resolveModules(modules);
                 interventions.push(...resolved.interventions);
-
-                // Structure switch: if cognitive_reframe is in play (CBT thought-pattern
-                // module), swap to a CBT-shaped response unless we're in high-risk mode
-                // where grounding-first structure stays.
-                if (
-                        level !== "high" &&
-                        resolved.interventions.includes("cognitive_reframe")
-                ) {
-                        structure = "reflect → identify thought → reframe → small next step";
+                if (level !== "high" && resolved.structure) {
+                        structure = resolved.structure;
                 }
         }
 

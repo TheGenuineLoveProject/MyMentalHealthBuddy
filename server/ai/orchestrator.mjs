@@ -239,6 +239,7 @@ export async function orchestrateAIRequest({
                 summary,
                 profile,
                 policyMsg,
+                modules,
                 modelOverride: scoring.model,
                 temperatureOverride: scoring.temperature,
                 extraTelemetry: {
