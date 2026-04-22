@@ -1,0 +1,319 @@
+Good—now we move into the user profile extraction layer, but we’ll do it in a way that doesn’t destabilize anything you just built.
+
+This layer turns your system from:
+
+remembering conversations → understanding patterns
+
+⸻
+
+🧠 HARD TRUTH
+
+If you skip structure and just store text, you’ll end up with:
+
+* messy, unusable data
+* no personalization
+* no analytics
+
+So we force structure from day one.
+
+⸻
+
+🎯 TARGET
+
+Create a persistent, structured profile like:
+
+{
+  "emotional_patterns": ["recurring anxiety in mornings"],
+  "triggers": ["work stress"],
+  "relationship_themes": [],
+  "coping_strategies": ["deep breathing"],
+  "support_needs": ["reassurance", "grounding"],
+  "risk_flags": []
+}
+
+⸻
+
+🪜 STEP 1 — CREATE PROFILE STORE
+
+📁 Create:
+
+server/ai/profileStore.mjs
+
+⸻
+
+✅ PASTE THIS
+
+// server/ai/profileStore.mjs
+import fs from "fs";
+import path from "path";
+const PROFILE_DIR = path.resolve("data/user-profile");
+function ensureDir() {
+  if (!fs.existsSync(PROFILE_DIR)) {
+    fs.mkdirSync(PROFILE_DIR, { recursive: true });
+  }
+}
+function sanitize(userId) {
+  return userId.replace(/[^a-zA-Z0-9_-]/g, "_");
+}
+function getFile(userId) {
+  return path.join(PROFILE_DIR, `${sanitize(userId)}.json`);
+}
+export function loadProfile(userId) {
+  try {
+    ensureDir();
+    const file = getFile(userId);
+    if (!fs.existsSync(file)) {
+      return {
+        emotional_patterns: [],
+        triggers: [],
+        relationship_themes: [],
+        coping_strategies: [],
+        support_needs: [],
+        risk_flags: []
+      };
+    }
+    return JSON.parse(fs.readFileSync(file, "utf-8"));
+  } catch {
+    return {
+      emotional_patterns: [],
+      triggers: [],
+      relationship_themes: [],
+      coping_strategies: [],
+      support_needs: [],
+      risk_flags: []
+    };
+  }
+}
+export function saveProfile(userId, profile) {
+  try {
+    ensureDir();
+    const file = getFile(userId);
+    fs.writeFileSync(file, JSON.stringify(profile, null, 2));
+  } catch (err) {
+    console.warn("Profile save failed:", err.message);
+  }
+}
+
+⸻
+
+🪜 STEP 2 — CREATE PROFILE EXTRACTOR
+
+📁 Create:
+
+server/ai/profileExtractor.mjs
+
+⸻
+
+✅ PASTE THIS
+
+// server/ai/profileExtractor.mjs
+export async function extractProfile({ openai, history }) {
+  try {
+    const text = history
+      .map(m => `${m.role}: ${m.content}`)
+      .join("\n");
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      temperature: 0.2,
+      messages: [
+        {
+          role: "system",
+          content: `
+Extract structured psychological insights.
+Return ONLY valid JSON with:
+- emotional_patterns (array)
+- triggers (array)
+- relationship_themes (array)
+- coping_strategies (array)
+- support_needs (array)
+- risk_flags (array)
+Be concise. No explanations.
+          `.trim()
+        },
+        {
+          role: "user",
+          content: text
+        }
+      ]
+    });
+    const raw = response.choices?.[0]?.message?.content || "{}";
+    return JSON.parse(raw);
+  } catch (err) {
+    console.warn("Profile extraction failed:", err.message);
+    return null;
+  }
+}
+
+⸻
+
+🪜 STEP 3 — WIRE INTO ORCHESTRATOR
+
+📁 File:
+
+server/ai/orchestrator.mjs
+
+⸻
+
+📍 ADD IMPORTS
+
+import { loadProfile, saveProfile } from "./profileStore.mjs";
+import { extractProfile } from "./profileExtractor.mjs";
+
+⸻
+
+📍 LOAD PROFILE
+
+Add near memory:
+
+const profile = loadProfile(userKey);
+
+⸻
+
+📍 AFTER MEMORY SAVE (NOT CRISIS)
+
+Find:
+
+await saveMemory(...)
+
+⸻
+
+✅ ADD BELOW IT
+
+if (!isCrisis) {
+  const extracted = await extractProfile({
+    openai,
+    history: [...memory, { role: "user", content: cleanText }]
+  });
+  if (extracted) {
+    const merged = mergeProfiles(profile, extracted);
+    saveProfile(userKey, merged);
+  }
+}
+
+⸻
+
+🪜 STEP 4 — ADD MERGE FUNCTION
+
+📍 ADD TO BOTTOM OF ORCHESTRATOR
+
+function mergeProfiles(existing, incoming) {
+  const result = { ...existing };
+  for (const key of Object.keys(existing)) {
+    const set = new Set([
+      ...(existing[key] || []),
+      ...(incoming[key] || [])
+    ]);
+    result[key] = Array.from(set).slice(-10);
+  }
+  return result;
+}
+
+⸻
+
+🪜 STEP 5 — INJECT PROFILE INTO PROMPT
+
+⸻
+
+📍 MODIFY MESSAGES ARRAY
+
+Add BEFORE summary:
+
+...(profile
+  ? [
+      {
+        role: "system",
+        content: `User profile insights:\n${JSON.stringify(profile)}`
+      }
+    ]
+  : []),
+
+⸻
+
+🧪 TEST
+
+⸻
+
+Run multiple messages:
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat \
+-H "Content-Type: application/json" \
+-H "x-guest-id: profiletest1" \
+-d '{"message":"I feel anxious about work every morning"}'
+
+Repeat 3–5 times.
+
+⸻
+
+Then:
+
+cat data/user-profile/profiletest1.json
+
+⸻
+
+✅ EXPECTED
+
+{
+  "emotional_patterns": ["recurring anxiety"],
+  "triggers": ["work stress"],
+  "coping_strategies": [],
+  "support_needs": ["reassurance"],
+  "risk_flags": []
+}
+
+⸻
+
+🧠 WHAT YOU JUST BUILT
+
+Layer	Purpose
+Memory	short-term context
+Summary	long-term compression
+Profile	structured intelligence
+
+⸻
+
+⚡ HARD TRUTH
+
+This is the first layer that enables:
+
+* personalization
+* retention
+* product differentiation
+* monetization
+
+Without it:
+
+your system reacts
+
+With it:
+
+your system learns
+
+⸻
+
+🚀 NEXT STEP (VERY HIGH IMPACT)
+
+Say:
+
+👉 “add adaptive response layer”
+
+That will:
+
+* change tone per user
+* adjust support style dynamically
+* make the AI feel person-specific
+
+⸻
+
+You now have:
+
+* orchestration ✅
+* provider ✅
+* telemetry ✅
+* scoring ✅
+* memory ✅
+* summary ✅
+* profile extraction ✅
+
+This is no longer a backend.
+
+This is a learning behavioral system.
