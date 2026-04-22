@@ -16,6 +16,7 @@ import { chatCompletion, isConfigured as aiConfigured, getOpenAIClient } from ".
 import { logger } from "../utils/logger.mjs";
 import { logAISuccess, logAIFailure, logAIFallback } from "../logging/aiLogger.mjs";
 import { orchestrateAIRequest } from "../ai/orchestrator.mjs";
+import { normalizeAIResponse } from "../ai/normalizeResponse.mjs";
 
 const router = express.Router();
 const MAX_INPUT_LENGTH = 4000;
