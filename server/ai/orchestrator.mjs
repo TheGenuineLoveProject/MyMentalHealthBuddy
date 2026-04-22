@@ -8,6 +8,7 @@ import { getProviderPolicy, canUseLiveAI } from "./providerPolicy.mjs";
 import { logSafetyEvent } from "../logging/safetyLogger.mjs";
 import { callAIProvider } from "./provider.mjs";
 import { scoreRequest } from "./scoring.mjs";
+import { loadMemory, saveMemory } from "./memory.mjs";
 
 // ================================
 // FEATURE FLAGS (CONTROL LAYER)
@@ -15,11 +16,11 @@ import { scoreRequest } from "./scoring.mjs";
 const ENABLE_CLASSIFIER = false;
 const ENABLE_RISK = false;
 
-
 export async function orchestrateAIRequest({
         route = "/api/ai/chat",
         message = "",
         openai = null,
+        userKey = "anonymous",
 } = {}) {
         const trimmed = String(message || "").trim();
 
@@ -142,7 +143,9 @@ export async function orchestrateAIRequest({
                 });
         }
 
-        if (classifierScore >= 1 || risk?.level === "high") {
+        const isCrisis = classifierScore >= 1 || risk?.level === "high";
+
+        if (isCrisis) {
                 logSafetyEvent({
                         route,
                         type: "risk_escalation",
@@ -173,57 +176,65 @@ export async function orchestrateAIRequest({
         if (!canUseLiveAI(providerPolicy)) {
                 return {
                         ok: true,
-                        stage: "provider",
-                        outcome: "fallback",
+                        stage: "fallback",
+                        outcome: "soft_response",
                         mode: "fallback",
                         providerPolicy,
                         cleanText,
                         response: {
-                                ok: true,
                                 reply:
                                         "I’m here with you. I can’t reach my full thinking right now, " +
                                         "but you’re not alone — take a slow breath, and tell me what’s on your mind.",
                                 source: "fallback",
+                                modelUsed: null,
+                                latencyMs: 0,
                         },
                 };
         }
-        const scoring = scoreRequest({
-          input: cleanText,
-          risk
-        });
 
-        const result = await callAIProvider({
-          openai,
-          input: cleanText,
-          mode,
-          risk,
-          modelOverride: scoring.model,
-          temperatureOverride: scoring.temperature
+        // ================================
+        // SCORING + MEMORY (pre-provider)
+        // ================================
+        const scoring = scoreRequest({ input: cleanText, risk });
+        const memory = loadMemory(userKey);
+
+        const aiResult = await callAIProvider({
+                openai,
+                input: cleanText,
+                mode: "normal",
+                risk,
+                route,
+                history: memory,
+                modelOverride: scoring.model,
+                temperatureOverride: scoring.temperature,
+                extraTelemetry: {
+                        tier: scoring.tier,
+                        score: scoring.score,
+                        memoryUsed: memory.length > 0,
+                        memorySize: memory.length,
+                },
         });
 
         if (!aiResult.ok) {
                 return {
-                  ok: true,
-                  stage: "ai",
-                  outcome: "success",
-                  response: {
-                    reply: aiResult.reply,
-                    source: "openai",
-                    modelUsed: aiResult.modelUsed,
-                    latencyMs: aiResult.latency
-                  }
+                        ok: false,
+                        status: 500,
+                        stage: "ai",
+                        outcome: "failure",
+                        response: { error: aiResult.error || "AI provider failed" },
                 };
+        }
+
+        // Persist conversation memory (skip on crisis — already short-circuited above)
+        if (!isCrisis) {
+                saveMemory(userKey, cleanText, aiResult.reply);
         }
 
         return {
                 ok: true,
-                stage: "provider",
-                outcome: "live_ai",
-                mode: "live_ai",
-                providerPolicy,
-                cleanText,
+                stage: "ai",
+                outcome: "success",
                 response: {
-                        ok: true,
                         reply: aiResult.reply,
                         source: "openai",
                         modelUsed: aiResult.modelUsed,

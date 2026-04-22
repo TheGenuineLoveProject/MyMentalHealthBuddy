@@ -150,7 +150,8 @@ router.post("/chat", optionalAuth, async (req, res) => {
     const result = await orchestrateAIRequest({
       route: "/api/ai/chat",
       message: req.body?.message || "",
-      openai: req.app.locals.openai || getOpenAIClient()
+      openai: req.app.locals.openai || getOpenAIClient(),
+      userKey: req.dbUserId || getGuestId(req) || "anonymous"
     });
 
     return res.status(result.status || 200).json(result);

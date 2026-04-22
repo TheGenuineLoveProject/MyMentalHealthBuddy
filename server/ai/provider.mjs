@@ -27,20 +27,47 @@ export async function callAIProvider({
         input,
         mode = "normal",
         risk = { level: "low" },
-        route = "/api/ai/chat"
+        route = "/api/ai/chat",
+        history = [],
+        modelOverride = null,
+        temperatureOverride = null,
+        extraTelemetry = {}
 }) {
         if (!openai) {
                 throw new Error("OpenAI client not available");
         }
 
         let lastError = null;
-        let lastModel = DEFAULT_MODEL;
         const overallStart = Date.now();
 
+        const primaryModel = modelOverride || DEFAULT_MODEL;
         const modelsToTry = [
-                DEFAULT_MODEL,
-                ...(DEFAULT_MODEL !== FALLBACK_MODEL ? [FALLBACK_MODEL] : [])
+                primaryModel,
+                ...(primaryModel !== FALLBACK_MODEL ? [FALLBACK_MODEL] : [])
         ];
+        let lastModel = primaryModel;
+
+        const temperature =
+                temperatureOverride != null
+                        ? temperatureOverride
+                        : risk.level === "high"
+                                ? 0.2
+                                : 0.6;
+
+        const systemPrompt =
+                mode === "crisis"
+                        ? "You are a calm, supportive crisis assistant. Be brief, grounding, and prioritize safety."
+                        : "You are a supportive, emotionally intelligent assistant.";
+
+        // Sanitize history → only well-formed {role, content} entries
+        const safeHistory = Array.isArray(history)
+                ? history.filter(
+                          (m) =>
+                                  m &&
+                                  typeof m.content === "string" &&
+                                  (m.role === "user" || m.role === "assistant")
+                  )
+                : [];
 
         for (const model of modelsToTry) {
                 lastModel = model;
@@ -51,19 +78,11 @@ export async function callAIProvider({
                                 const response = await callOpenAIWithTimeout(openai, {
                                         model,
                                         messages: [
-                                                {
-                                                        role: "system",
-                                                        content:
-                                                                mode === "crisis"
-                                                                        ? "You are a calm, supportive crisis assistant. Be brief, grounding, and prioritize safety."
-                                                                        : "You are a supportive, emotionally intelligent assistant."
-                                                },
-                                                {
-                                                        role: "user",
-                                                        content: input
-                                                }
+                                                { role: "system", content: systemPrompt },
+                                                ...safeHistory,
+                                                { role: "user", content: input }
                                         ],
-                                        temperature: risk.level === "high" ? 0.2 : 0.6
+                                        temperature
                                 });
 
                                 const latency = Date.now() - start;
@@ -74,7 +93,8 @@ export async function callAIProvider({
                                         latencyMs: latency,
                                         inputTokens: response.usage?.prompt_tokens || 0,
                                         outputTokens: response.usage?.completion_tokens || 0,
-                                        success: true
+                                        success: true,
+                                        extra: extraTelemetry
                                 });
 
                                 return {
@@ -105,7 +125,8 @@ export async function callAIProvider({
                 latencyMs: Date.now() - overallStart,
                 inputTokens: 0,
                 outputTokens: 0,
-                success: false
+                success: false,
+                extra: extraTelemetry
         });
 
         return {
