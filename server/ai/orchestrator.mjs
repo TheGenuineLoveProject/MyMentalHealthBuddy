@@ -7,6 +7,7 @@ import { assessRisk } from "../lib/promptEngine.mjs";
 import { getProviderPolicy, canUseLiveAI } from "./providerPolicy.mjs";
 import { logSafetyEvent } from "../logging/safetyLogger.mjs";
 import { callAIProvider } from "./provider.mjs";
+import { scoreRequest } from "./scoring.mjs";
 
 // ================================
 // FEATURE FLAGS (CONTROL LAYER)
@@ -172,41 +173,57 @@ export async function orchestrateAIRequest({
         if (!canUseLiveAI(providerPolicy)) {
                 return {
                         ok: true,
-                        stage: "fallback",
-                        outcome: "soft_response",
+                        stage: "provider",
+                        outcome: "fallback",
+                        mode: "fallback",
+                        providerPolicy,
+                        cleanText,
                         response: {
-                                reply: "I'm here with you. Let's take this one step at a time.",
+                                ok: true,
+                                reply:
+                                        "I’m here with you. I can’t reach my full thinking right now, " +
+                                        "but you’re not alone — take a slow breath, and tell me what’s on your mind.",
                                 source: "fallback",
-                                modelUsed: null,
-                                latencyMs: 0,
                         },
                 };
         }
+        const scoring = scoreRequest({
+          input: cleanText,
+          risk
+        });
 
-        const aiResult = await callAIProvider({
-                openai,
-                input: cleanText,
-                mode: "normal",
-                risk,
+        const result = await callAIProvider({
+          openai,
+          input: cleanText,
+          mode,
+          risk,
+          modelOverride: scoring.model,
+          temperatureOverride: scoring.temperature
         });
 
         if (!aiResult.ok) {
                 return {
-                        ok: false,
-                        status: 500,
-                        stage: "ai",
-                        outcome: "failure",
-                        response: {
-                                error: aiResult.error || "AI unavailable",
-                        },
+                  ok: true,
+                  stage: "ai",
+                  outcome: "success",
+                  response: {
+                    reply: aiResult.reply,
+                    source: "openai",
+                    modelUsed: aiResult.modelUsed,
+                    latencyMs: aiResult.latency
+                  }
                 };
         }
 
         return {
                 ok: true,
-                stage: "ai",
-                outcome: "success",
+                stage: "provider",
+                outcome: "live_ai",
+                mode: "live_ai",
+                providerPolicy,
+                cleanText,
                 response: {
+                        ok: true,
                         reply: aiResult.reply,
                         source: "openai",
                         modelUsed: aiResult.modelUsed,
