@@ -100,6 +100,10 @@ if (OPENAI_API_KEY) {
   });
 }
 
+export function getOpenAIClient() {
+  return openaiClient;
+}
+
 async function withTimeout(promise, timeoutMs) {
   let timeoutId;
   const timeoutPromise = new Promise((_, reject) => {

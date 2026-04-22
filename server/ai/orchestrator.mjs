@@ -177,6 +177,31 @@ export async function orchestrateAIRequest({
                         mode: "fallback",
                         providerPolicy,
                         cleanText,
+                        response: {
+                                ok: true,
+                                reply:
+                                        "I’m here with you. I can’t reach my full thinking right now, " +
+                                        "but you’re not alone — take a slow breath, and tell me what’s on your mind.",
+                                source: "fallback",
+                        },
+                };
+        }
+
+        const aiResult = await callAIProvider({
+                openai,
+                input: cleanText,
+                mode: "normal",
+                risk,
+        });
+
+        if (!aiResult.ok) {
+                return {
+                        ok: false,
+                        status: 500,
+                        stage: "ai",
+                        response: {
+                                error: "AI unavailable. Please try again.",
+                        },
                 };
         }
 
@@ -187,5 +212,12 @@ export async function orchestrateAIRequest({
                 mode: "live_ai",
                 providerPolicy,
                 cleanText,
+                response: {
+                        ok: true,
+                        reply: aiResult.reply,
+                        source: "openai",
+                        modelUsed: aiResult.modelUsed,
+                        latencyMs: aiResult.latency,
+                },
         };
 }

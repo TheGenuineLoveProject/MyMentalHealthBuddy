@@ -12,7 +12,7 @@ import {
   buildJournalSummary,
   buildCopingPlan,
 } from "../engine/therapyIntelligence.mjs";
-import { chatCompletion, isConfigured as aiConfigured } from "../utils/aiClient.mjs";
+import { chatCompletion, isConfigured as aiConfigured, getOpenAIClient } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
 import { logAISuccess, logAIFailure, logAIFallback } from "../logging/aiLogger.mjs";
 import { orchestrateAIRequest } from "../ai/orchestrator.mjs";
@@ -149,7 +149,7 @@ router.post("/chat", optionalAuth, async (req, res) => {
     const result = await orchestrateAIRequest({
       route: "/api/ai/chat",
       message: req.body?.message || "",
-      openai: req.app.locals.openai
+      openai: req.app.locals.openai || getOpenAIClient()
     });
 
     if (!result.ok) {
