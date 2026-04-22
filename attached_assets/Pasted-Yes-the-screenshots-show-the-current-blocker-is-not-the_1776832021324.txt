@@ -1,0 +1,211 @@
+Yes — the screenshots show the current blocker is not the orchestrator logic.
+
+It is request validation at the HTTP layer.
+
+What the screenshots prove
+
+Two things are happening:
+
+1. Your curl test is being blocked by CSRF middleware
+
+The response is:
+
+{"error":"CSRF token missing or invalid"}
+
+That means:
+
+* the route is alive
+* the server received the POST
+* the request was rejected before orchestrator execution
+
+So this is not an AI routing failure yet.
+
+2. Your shell command is getting mashed together
+
+The line:
+
+{"error":"CSRFcurl -X POST ...
+
+shows the shell pasted the next command immediately after the previous response.
+
+That means your multi-line curl testing is noisy and hard to trust.
+
+⸻
+
+Decision
+
+Do not debug server/ai/orchestrator.mjs any further yet.
+
+First make the route testable in a controlled way.
+
+⸻
+
+Best next move
+
+Use this exact order:
+
+Step 1 — test with a one-line curl command only
+
+Run this exact command as one single line:
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat -H "Content-Type: application/json" -d '{"message":"I feel anxious"}'
+
+If CSRF is still enabled on that route, you will still get:
+
+{"error":"CSRF token missing or invalid"}
+
+That is expected.
+
+⸻
+
+Step 2 — find where CSRF is applied
+
+Search these files:
+
+* server/app.mjs
+* server/index.mjs
+* server/middleware/
+* any file containing csrf, csurf, verifyCsrf, requireCsrf, or CSRF token missing or invalid
+
+You are looking for something like:
+
+app.use(csrfProtection)
+
+or
+
+router.post("/chat", verifyCsrf, ...)
+
+or custom middleware that checks headers/cookies.
+
+⸻
+
+Step 3 — make /api/ai/chat temporarily testable in development
+
+For development only, the best enterprise-safe move is:
+
+* keep CSRF for browser session routes
+* exempt API chat test route in development
+* do not weaken production globally
+
+Preferred rule
+
+If the route is intended for JS/XHR from your app only, then either:
+
+* fetch and send a real CSRF token from frontend, or
+* exempt only this route in development while you stabilize AI
+
+⸻
+
+Exact implementation pattern
+
+Option A — temporary dev bypass for this route only
+
+If your CSRF is applied in server/app.mjs, change the mount order so AI route is mounted before the CSRF middleware, only in development.
+
+Example pattern:
+
+if (process.env.NODE_ENV !== "production") {
+  app.use("/api/ai", aiRouter);
+}
+app.use(csrfProtection);
+if (process.env.NODE_ENV === "production") {
+  app.use("/api/ai", aiRouter);
+}
+
+That is a temporary stabilization move.
+
+⸻
+
+Option B — route-level exemption wrapper
+
+If you have custom middleware, use a conditional skip:
+
+function maybeSkipCsrf(req, res, next) {
+  if (
+    process.env.NODE_ENV !== "production" &&
+    req.path.startsWith("/api/ai/")
+  ) {
+    return next();
+  }
+  return csrfProtection(req, res, next);
+}
+
+Then apply that instead of unconditional CSRF.
+
+⸻
+
+What not to do
+
+Do not do this:
+
+app.use((req, res, next) => next())
+
+globally replacing CSRF.
+
+Do not disable all protection for the whole app.
+
+Do not keep testing orchestrator behavior until the route is actually reachable.
+
+⸻
+
+After CSRF is handled, run these exact tests
+
+Normal
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat -H "Content-Type: application/json" -d '{"message":"I feel anxious"}'
+
+Crisis
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat -H "Content-Type: application/json" -d '{"message":"I want to kill myself"}'
+
+GET liveness
+
+curl http://0.0.0.0:5000/api/ai/chat
+
+Expected GET response should be your route-alive message.
+
+⸻
+
+Interpretation of your screenshots
+
+From an A-to-Z systems view:
+
+* Network layer: working
+* Route mount: likely working
+* CSRF/security layer: blocking POST
+* Orchestrator layer: not yet proven in live POST path
+* AI provider layer: not yet under test from this curl
+* Safety layer: not yet truly verified through the endpoint because middleware stops earlier
+
+So the real state is:
+
+Current status
+
+* GET/liveness: likely fine
+* POST path: blocked at CSRF
+* orchestrator: structurally present, not fully end-to-end verified yet
+
+⸻
+
+Best enterprise recommendation
+
+The best recommendation is:
+
+Stabilize in this exact order
+
+1. Fix testability of /api/ai/chat by handling CSRF correctly
+2. Re-run one-line POST tests
+3. Verify normal + crisis responses
+4. Only then continue thinning server/routes/ai.mjs
+5. Only after that proceed to full AI service extraction
+
+⸻
+
+Your next exact move
+
+Open the file where CSRF is applied and paste that section here, or show the screenshots of:
+
+* server/app.mjs
+* any middleware file containing CSRF logic
+
+Then I’ll tell you the exact lines to move or replace.
