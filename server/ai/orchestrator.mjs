@@ -1,4 +1,26 @@
 // server/ai/orchestrator.mjs
+//
+// =====================================================================
+// CONTRACT (DO NOT BREAK)
+// =====================================================================
+// orchestrateAIRequest({ route, message, openai, userKey })
+//
+// Returns:
+//   {
+//     ok: boolean,
+//     status?: number,         // present when ok === false
+//     stage: string,           // validation | safety | risk | fallback | ai
+//     outcome: string,         // crisis | blocked | soft_response | success | failure
+//     mode?: string,
+//     response: object         // shape depends on stage/outcome
+//   }
+//
+// This is a PURE orchestration function — NOT an Express route handler.
+// DO NOT introduce `req`, `res`, `next`, or any Express idioms here.
+// Identity comes in pre-resolved via `userKey`. The route layer is the
+// ONLY place that touches `req`. Variable names are stable: `aiResult`
+// (not `result`), `mode` is hard-coded for the post-safety branch.
+// =====================================================================
 
 import { safetyGuardInput } from "./safety/guard.mjs";
 import { detectCrisis, CRISIS_RESPONSE } from "./safety/crisis.mjs";
@@ -229,9 +251,16 @@ export async function orchestrateAIRequest({
                 };
         }
 
-        // Persist conversation memory (skip on crisis — already short-circuited above)
+        // Persist conversation memory (skip on crisis — already short-circuited above).
+        // Pass openai so the summarizer can run AI compression when history > 12.
+        // Failures here MUST NOT break the locked response contract — saveMemory
+        // has its own try/catch but we double-guard for safety.
         if (!isCrisis) {
-                saveMemory(userKey, cleanText, aiResult.reply);
+                try {
+                        await saveMemory(userKey, cleanText, aiResult.reply, openai);
+                } catch (err) {
+                        console.warn("orchestrator: saveMemory failed:", err?.message);
+                }
         }
 
         return {

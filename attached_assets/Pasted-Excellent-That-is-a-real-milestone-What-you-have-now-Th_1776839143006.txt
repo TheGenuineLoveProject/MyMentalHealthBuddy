@@ -1,0 +1,119 @@
+Excellent. That is a real milestone.
+
+What you have now
+
+The summary memory layer is doing the right things:
+
+* short-term memory is bounded
+* long-term summary is persisted
+* summary is injected only when available
+* crisis flow still bypasses memory correctly
+* response contract stayed intact
+* path traversal is being sanitized
+
+The turn-7 / turn-8 behavior you described is also correct. hasSummary: false on the same turn that generates the summary is expected if the summary is saved after the provider call. Seeing it flip to true on turn 8 is the right signal.
+
+The important warning you found
+
+The orchestrator repeatedly reverting into a broken shape is the bigger issue now.
+
+That is not an AI problem. It is a change-control problem.
+
+The bad pattern is clear:
+
+* Express-style snippets are being pasted into a non-Express orchestrator
+* variable names drift (req, mode, result, aiResult)
+* memory loads get placed after returns
+* response shape gets broken
+
+That will keep costing you time unless you lock the file down.
+
+Best next move before adding more intelligence
+
+Do these three things first.
+
+1. Freeze the orchestrator contract
+
+At the top of server/ai/orchestrator.mjs, add a comment block like this:
+
+/**
+ * CONTRACT
+ * orchestrateAIRequest({ route, message, openai, userKey, extraTelemetry })
+ *
+ * Returns:
+ * {
+ *   ok: boolean,
+ *   status?: number,
+ *   stage: string,
+ *   outcome: string,
+ *   response: object
+ * }
+ *
+ * DO NOT paste Express req/res patterns into this file.
+ * This is a pure orchestration function, not a route handler.
+ */
+
+2. Add a smoke test for the orchestrator
+
+Create a tiny script like scripts/test-orchestrator.mjs that imports the function directly and asserts:
+
+* empty message returns 400-style error
+* crisis message returns isCrisis: true
+* normal message returns valid response contract
+* no req references exist at runtime
+
+3. Add a grep guard
+
+Run this in your checks:
+
+grep -n "\breq\b" server/ai/orchestrator.mjs && echo "BAD: req leaked into orchestrator" || echo "OK"
+grep -n "\bres\b" server/ai/orchestrator.mjs && echo "BAD: res leaked into orchestrator" || echo "OK"
+
+That catches the exact regression pattern quickly.
+
+On the summary layer itself
+
+Your honesty about the current summary being heuristic is correct and important.
+
+Right now it is:
+
+* cheap
+* fast
+* safe
+* deterministic
+
+But not truly semantic.
+
+That is fine for this stage. It was the right choice to stabilize the memory architecture first.
+
+Recommendation
+
+Yes — the right next feature is:
+
+Add user profile extraction layer
+
+But do it as structured extraction, not fuzzy prose.
+
+Target shape:
+
+{
+  "emotional_patterns": [],
+  "triggers": [],
+  "relationship_themes": [],
+  "coping_strategies": [],
+  "support_needs": [],
+  "risk_flags": []
+}
+
+And keep it:
+
+* separate from short-term memory
+* separate from summary text
+* append/update, not overwrite blindly
+
+If you want, I’ll give you the exact implementation order and copy-paste files for:
+
+* server/ai/profileExtractor.mjs
+* server/ai/profileStore.mjs
+* orchestrator wiring
+* safe JSON schema for the profile layer

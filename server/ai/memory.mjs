@@ -43,7 +43,7 @@ export function loadMemory(userId, limit = 6) {
 /**
  * Save interaction
  */
-        export async function saveMemory(userId, message, reply, openai) {
+export async function saveMemory(userId, message, reply, openai) {
         try {
                 ensureDir();
 
@@ -76,18 +76,4 @@ export function loadMemory(userId, limit = 6) {
         } catch (err) {
                 console.warn("Memory save failed:", err.message);
         }
-}
-function summarizeHistory(history) {
-        const lastMessages = history.slice(-12);
-
-        const combined = lastMessages
-                .map(m => `${m.role}: ${m.content}`)
-                .join("\n");
-
-        return `
-User context summary:
-- Emotional patterns: recurring stress/anxiety themes
-- Topics discussed: ${combined.slice(0, 300)}
-- Tone: user seeks support and understanding
-`.trim();
 }
