@@ -15,6 +15,7 @@ import {
 import { chatCompletion, isConfigured as aiConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
 import { logAISuccess, logAIFailure, logAIFallback } from "../logging/aiLogger.mjs";
+import { orchestrateAIRequest } from "../ai/orchestrator.mjs";
 
 const router = express.Router();
 const MAX_INPUT_LENGTH = 4000;
@@ -144,217 +145,25 @@ router.get("/chat", (req, res) => {
 });
 
 router.post("/chat", optionalAuth, async (req, res) => {
-  const start = Date.now();
-  let messageLen = 0;
-  const model = process.env.AI_MODEL || "gpt-4o-mini";
   try {
-    await ensureAiMessagesTable();
-
-    const userId = req.dbUserId || null;
-    const guestId = userId ? null : getGuestId(req);
-    const message = String(req.body?.message || "").trim();
-    messageLen = message.length;
-
-    if (!message) {
-      return res.status(400).json({ error: "Message required" });
-    }
-    if (message.length > MAX_INPUT_LENGTH) {
-      return res.status(400).json({
-        error: `Message too long (max ${MAX_INPUT_LENGTH} characters).`,
-      });
-    }
-
-    if (!userId && !guestId) {
-      return res.status(400).json({ error: "Guest ID or auth required" });
-    }
-
-    const guarded = safetyGuardInput(message);
-    if (guarded?.blocked) {
-      // Crisis hits short-circuit with the canonical 988/741741 response
-      if (guarded.crisis) {
-        return res.json({
-          isCrisis: true,
-          reply: guarded.response?.reply || CRISIS_RESPONSE.reply,
-          resources: guarded.response?.resources || CRISIS_RESPONSE.resources,
-          signals: ["safety_guard_crisis"],
-          action: "escalate_immediately"
-        });
-      }
-      // Non-crisis blocked pattern (e.g. self-harm instructions, diagnosis requests)
-      return res.status(400).json({
-        blocked: true,
-        reply:
-          guarded.response?.reply ||
-          "I can’t help with that, but I can support you with safer options. Want to try grounding or naming what’s going on?"
-      });
-    }
-
-    const cleanText = guarded.cleanText || message;
-
-    if (detectCrisis(cleanText)) {
-      return res.json({
-        isCrisis: true,
-        reply: CRISIS_RESPONSE.reply,
-        resources: CRISIS_RESPONSE.resources,
-        signals: ["keyword_match"],
-        action: "escalate_immediately"
-      });
-    }
-
-    let crisisScore = 0;
-    try {
-      if (global.openai) {
-        const result = await classifyCrisis(global.openai, cleanText);
-        crisisScore = Number(result?.score || 0);
-      }
-    } catch (err) {
-      console.error("classifyCrisis failed:", err?.message || err);
-    }
-
-    let risk = { level: "low" };
-    try {
-      // assessRisk expects a string; score is an additive signal we OR-in below
-      risk = assessRisk(cleanText) || { level: "low" };
-      if (crisisScore >= 0.8 && risk.level !== "high") {
-        risk = { ...risk, level: "high", crisis: true };
-      }
-    } catch (err) {
-      console.error("assessRisk failed:", err?.message || err);
-    }
-
-    if (risk.level === "high") {
-      return res.json({
-        isCrisis: true,
-        reply: CRISIS_RESPONSE.reply,
-        resources: CRISIS_RESPONSE.resources,
-        signals: ["risk_engine_high"],
-        action: "escalate_immediately"
-      });
-    }
-
-    const history = [];
-
-    if (userId) {
-      const result = await db.execute(sql`
-        SELECT role, content
-        FROM ai_messages
-        WHERE user_id = ${userId}
-        ORDER BY created_at DESC
-        LIMIT 10
-      `);
-
-      history.push(...(result.rows || []).reverse());
-    } else if (guestId && guestHistory.has(guestId)) {
-      history.push(...guestHistory.get(guestId));
-    }
-
-    // Try canonical AI client (with circuit breaker, retry, timeout, key check).
-    // Falls back to deterministic buildTherapyReply on ANY failure.
-    // Crisis branches above already short-circuited — this code only runs on safe paths.
-    let reply = buildTherapyReply(cleanText);
-    let aiSource = "fallback";
-    let aiError = null;
-
-    if (aiConfigured()) {
-      const aiMessages = [
-        { role: "system", content: SYSTEM_PROMPT },
-        ...history.map((m) => ({
-          role: m.role === "assistant" ? "assistant" : "user",
-          content: String(m.content || ""),
-        })),
-        { role: "user", content: cleanText },
-      ];
-      const aiResult = await chatCompletion({
-        messages: aiMessages,
-        model: process.env.AI_MODEL || "gpt-4o-mini",
-        temperature: 0.7,
-        maxTokens: 500,
-      });
-      if (aiResult.success && aiResult.content) {
-        reply = aiResult.content;
-        aiSource = "openai";
-      } else {
-        aiError = aiResult.error || "ai_unavailable";
-      }
-    } else {
-      aiError = "not_configured";
-    }
-
-    const latencyMs = Date.now() - start;
-
-    logger.info("ai_chat", {
+    const result = await orchestrateAIRequest({
       route: "/api/ai/chat",
-      source: aiSource,
-      ok: aiSource === "openai",
-      error: aiError,
-      userType: userId ? "user" : "guest",
-      msgLen: cleanText.length,
-      replyLen: reply.length,
-      historyUsed: history.length,
-      latencyMs,
+      message: req.body?.message || "",
+      openai: req.app.locals.openai
     });
 
-    if (aiSource === "openai") {
-      logAISuccess({
-        route: "/api/ai/chat",
-        model,
-        latencyMs,
-        inputLength: cleanText.length,
-        outputLength: reply.length,
-      });
-    } else {
-      logAIFallback({
-        route: "/api/ai/chat",
-        reason: aiError || "unknown",
-        inputLength: cleanText.length,
-      });
+    if (!result.ok) {
+      return res.status(result.status || 400).json(result.response);
     }
 
-    if (userId) {
-      const userMsgId = newMessageId();
-      const aiMsgId = newMessageId();
-      await db.execute(sql`
-        INSERT INTO ai_messages (id, user_id, role, content)
-        VALUES (${userMsgId}, ${userId}, 'user', ${message})
-      `);
+    return res.status(200).json(result.response);
 
-      await db.execute(sql`
-        INSERT INTO ai_messages (id, user_id, role, content)
-        VALUES (${aiMsgId}, ${userId}, 'assistant', ${reply})
-      `);
-    } else if (guestId) {
-      pushGuestMessage(guestId, "user", message);
-      pushGuestMessage(guestId, "assistant", reply);
-    }
-
-    // Therapy Intelligence Layer (additive — runs only on non-crisis path)
-    let therapy = null;
-    try {
-      const upgraded = upgradeTherapyReply(reply, {
-        message: cleanText,
-        history,
-      });
-      therapy = upgraded?.therapy || null;
-    } catch (err) {
-      console.error("upgradeTherapyReply failed:", err?.message || err);
-    }
-
-    return res.json({
-      ok: true,
-      reply,
-      therapy,
-      historyUsed: history.length
-    });
   } catch (err) {
-    console.error("AI chat error:", err);
-    logAIFailure({
-      route: "/api/ai/chat",
-      model,
-      error: err,
-      latencyMs: Date.now() - start,
-      inputLength: messageLen,
+    console.error("AI route error:", err);
+
+    return res.status(500).json({
+      error: "Internal server error"
     });
-    return res.status(500).json({ error: "AI chat failed" });
   }
 });
 
