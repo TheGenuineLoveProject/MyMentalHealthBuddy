@@ -3,7 +3,7 @@
 // LLM-driven structured profile extraction.
 // Returns a JSON object matching EMPTY_PROFILE shape; never throws.
 
-import { logAICall } from "./telemetry.mjs";
+import { logAICall } from "./aiTelemetry.mjs";
 import { EMPTY_PROFILE } from "./profileStore.mjs";
 
 const MODEL = "gpt-4o-mini";

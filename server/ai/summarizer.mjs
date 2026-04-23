@@ -1,5 +1,5 @@
 // server/ai/summarizer.mjs
-import { logAICall } from "./telemetry.mjs";
+import { logAICall } from "./aiTelemetry.mjs";
 
 /**
  * AI-powered semantic summarization of conversation history.

@@ -1,5 +1,5 @@
 // server/ai/provider.mjs
-import { logAICall } from "./telemetry.mjs";
+import { logAICall } from "./aiTelemetry.mjs";
 import { formatProfileForPrompt } from "./profileStore.mjs";
 import { MODULE_REGISTRY } from "./moduleRouter.mjs";
 
