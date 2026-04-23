@@ -34,6 +34,7 @@ import { loadMemory, saveMemory } from "./memory.mjs";
 import { loadSummary } from "./memorySummary.mjs";
 import { loadProfile, profileHasContent } from "./profileStore.mjs";
 import { buildResponsePolicy, renderPolicySystemMessage } from "./responsePolicy.mjs";
+import { inferEmotionalState } from "./emotionInference.mjs";
 import { selectModules } from "./moduleRouter.mjs";
 import { selectTool } from "./toolSelector.mjs";
 import { executeTool } from "./toolExecutor.mjs";
@@ -240,14 +241,21 @@ export async function orchestrateAIRequest({
         const summary = loadSummary(userKey);
         const profile = loadProfile(userKey);
         const modules = selectModules({ profile, input: cleanText });
-        const policy = buildResponsePolicy({ risk, profile, scoring, modules });
-        const policyMsg = renderPolicySystemMessage(policy);
+        const inferredStates = inferEmotionalState(cleanText);
+        const policy = buildResponsePolicy({ risk, profile, scoring, modules, inferredStates });
 
-        // Tool selection runs BEFORE the provider call so the exercise structure
-        // can be injected into the prompt and the model is steered to actually
-        // walk the user through the exercise rather than mention it abstractly.
+        // Tool selection runs BEFORE policy rendering so an active exercise can
+        // override the "1–2 step cap" constraint that otherwise governs guidance.
+        // Without this precedence note the model gets contradictory instructions
+        // (cap to 2 steps vs. walk the user through the full exercise verbatim).
         const tool = selectTool({ modules, profile, input: cleanText });
         const toolPayload = executeTool(tool);
+        if (toolPayload) {
+                policy.constraints.push(
+                        "An Active exercise is present — follow all listed steps verbatim; the 1–2 step cap does not apply.",
+                );
+        }
+        const policyMsg = renderPolicySystemMessage(policy);
 
         const aiResult = await callAIProvider({
                 openai,
@@ -275,6 +283,7 @@ export async function orchestrateAIRequest({
                                 tier: scoring?.tier || "standard",
                                 interventions: policy.interventions.length,
                                 modules,
+                                inferredStates,
                         },
                         toolId: toolPayload?.tool?.id || null,
                         toolType: toolPayload?.tool?.type || null,

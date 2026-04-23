@@ -8,9 +8,10 @@
 
 import { resolveModules } from "./moduleRouter.mjs";
 
-export function buildResponsePolicy({ risk, profile, scoring, modules = [] } = {}) {
+export function buildResponsePolicy({ risk, profile, scoring, modules = [], inferredStates = [] } = {}) {
         const level = risk?.level || "low";
         const tier = scoring?.tier || "standard";
+        const states = Array.isArray(inferredStates) ? inferredStates : [];
 
         // Base defaults
         let tone = "warm, validating, non-clinical";
@@ -20,6 +21,12 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [] } = {
                 "no diagnosis",
                 "no medical/legal advice",
                 "avoid absolute claims",
+                // Validation-line precision: emotional acknowledgment leads, brief.
+                "Open with a short emotional acknowledgment (max 6–8 words) that reflects feeling, not facts, before any guidance.",
+                // Cognitive load cap when we're not actively walking through an exercise.
+                "Keep guidance to 1–2 concrete steps unless the user is mid-exercise.",
+                // Escalation guardrail.
+                "If emotional intensity rises within the message, slow the pace and prioritize grounding.",
         ];
         const interventions = ["reflection", "grounding", "small_next_step"];
 
@@ -60,6 +67,36 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [] } = {
         }
         if (riskFlags.length > 0) {
                 constraints.push("monitor for escalation cues");
+        }
+
+        // Profile-driven personalization: shape constraints from learned patterns.
+        if (emotionalPatterns.some((p) => /withdraw|isolat|shut down|shut-down/i.test(String(p)))) {
+                constraints.push("Encourage staying present rather than withdrawing or isolating.");
+        }
+
+        // Inferred-state tone shaping (gated to non-crisis paths so the high-risk
+        // grounding tone lock above is preserved). Tone is resolved via an explicit
+        // priority map — the highest-priority state in `states` wins on tone, while
+        // every active state still contributes its associated interventions. This
+        // replaces the previous implicit last-write-wins ordering, which was
+        // brittle to refactor and hard to reason about.
+        const STATE_TONE_PRIORITY = [
+                ["overwhelm", "slow, grounding, simplifying"],
+                ["sadness", "tender, slow, validating"],
+                ["self_doubt", "reassuring, stabilizing"],
+                ["avoidance", "gentle, non-pressuring"],
+                ["anxiety", "calm, steadying"],
+        ];
+        if (level !== "high" && states.length > 0) {
+                for (const [stateId, stateTone] of STATE_TONE_PRIORITY) {
+                        if (states.includes(stateId)) {
+                                tone = stateTone;
+                                break;
+                        }
+                }
+                if (states.includes("overwhelm")) verbosity = "concise";
+                if (states.includes("self_doubt")) interventions.push("self_compassion_prompt");
+                if (states.includes("anxiety")) interventions.push("breathing", "grounding");
         }
 
         // Module-driven interventions (resolved via MODULE_REGISTRY).

@@ -1,0 +1,263 @@
+Hard truth
+
+Your system understands what users say.
+It doesn’t yet fully capture how they feel beneath what they say.
+
+That gap is the difference between:
+
+* “helpful”
+    vs
+* deeply understood
+
+We’re going to close that — without touching your core architecture.
+
+⸻
+
+🎯 OBJECTIVE
+
+Upgrade:
+
+* emotional mirroring accuracy
+* subtle state detection
+* real-time tone adaptation
+
+Using prompt-layer + lightweight inference only
+
+⸻
+
+🧠 LAYER 1 — Subtle emotion detection (pre-policy)
+
+Problem
+
+Right now detection is mostly keyword-based:
+
+anxious / overwhelmed / sad
+
+That misses:
+
+* suppressed emotion
+* mixed states
+* indirect language
+
+⸻
+
+🔧 FIX — Add inference layer (no AI rewrite)
+
+Create:
+
+cat > server/ai/emotionInference.mjs <<'EOF'
+export function inferEmotionalState(text = "") {
+  const t = text.toLowerCase();
+  const signals = {
+    anxiety: /overthink|what if|racing|can't stop thinking/.test(t),
+    overwhelm: /too much|everything|can't handle/.test(t),
+    sadness: /tired of|pointless|nothing matters/.test(t),
+    avoidance: /i'll deal later|ignore|don't want to/.test(t),
+    self_doubt: /i always mess up|not good enough/.test(t),
+  };
+  return Object.keys(signals).filter(k => signals[k]);
+}
+EOF
+
+⸻
+
+Wire into orchestrator (SAFE)
+
+import { inferEmotionalState } from "./emotionInference.mjs";
+const inferred = inferEmotionalState(cleanText);
+
+Pass to policy:
+
+const policy = buildResponsePolicy({
+  risk,
+  profile,
+  scoring,
+  modules,
+  inferredStates: inferred
+});
+
+⸻
+
+🧠 LAYER 2 — Emotional mirroring upgrade
+
+Problem
+
+AI reflects content, not felt intensity
+
+⸻
+
+🔧 FIX — Force emotional reflection rule
+
+In responsePolicy.mjs
+
+Add:
+
+if (inferredStates?.includes("overwhelm")) {
+  tone = "slow, grounding, simplifying";
+}
+if (inferredStates?.includes("self_doubt")) {
+  tone = "reassuring, stabilizing";
+}
+if (inferredStates?.includes("avoidance")) {
+  tone = "gentle, non-pressuring";
+}
+
+⸻
+
+Add constraint:
+
+constraints.push(
+  "Start with a short emotional acknowledgment that reflects feeling, not facts."
+);
+
+⸻
+
+🧠 LAYER 3 — Validation precision (prompt-level fix)
+
+This is the one you skipped — now we do it correctly
+
+In provider system message:
+
+"Open with a short emotional acknowledgment (max 6–8 words) that captures the user's feeling."
+
+⸻
+
+Example transformation
+
+User:
+
+“I feel like everything is stacking up”
+
+Before:
+
+“It sounds like you’re feeling overwhelmed…”
+
+After:
+
+“That’s a lot to carry.”
+
+⸻
+
+Result
+
+Faster emotional landing → higher trust
+
+⸻
+
+🧠 LAYER 4 — Adaptive tone shaping
+
+Problem
+
+Tone doesn’t shift enough mid-response
+
+⸻
+
+🔧 FIX — structure rule
+
+In policy:
+
+structure = "validate → guide → reinforce → close";
+
+Add constraint:
+
+constraints.push(
+  "Do not overload with options. Keep guidance to 1–2 steps maximum unless tool is active."
+);
+
+⸻
+
+🧠 LAYER 5 — Micro-personalization from profile
+
+Problem
+
+Profile exists, but impact is underused
+
+⸻
+
+🔧 FIX
+
+In policy:
+
+if (profile?.emotional_patterns?.includes("withdraws when stressed")) {
+  constraints.push(
+    "Encourage staying present instead of withdrawing."
+  );
+}
+
+⸻
+
+Result
+
+Feels like:
+
+“this understands me specifically”
+
+⸻
+
+🧠 LAYER 6 — Emotional escalation awareness
+
+Add guardrail
+
+constraints.push(
+  "If intensity increases, slow down response and prioritize grounding."
+);
+
+⸻
+
+📊 WHAT CHANGES AFTER THIS
+
+Before	After
+Generic empathy	Precise emotional mirroring
+Keyword detection	Pattern inference
+Static tone	Dynamic tone shaping
+Helpful	Feels deeply understood
+
+⸻
+
+⚠️ DO NOT BREAK THESE
+
+* crisis short-circuit
+* tool execution
+* memory/profile writes
+* response latency
+
+⸻
+
+🎯 DIRECT ASSIGNMENT
+
+Run 3 tests:
+
+1. Subtle anxiety
+    → “I just can’t stop thinking about it”
+2. Hidden overwhelm
+    → “There’s just a lot going on”
+3. Self-doubt
+    → “I feel like I always mess things up”
+
+⸻
+
+Ask:
+
+👉 Did the first line feel exactly right?
+
+If not → we refine inference patterns
+
+⸻
+
+🚀 NEXT STEP
+
+Say:
+
+👉 “optimize intelligence + learning loop”
+
+And I’ll build:
+
+* pattern learning from user behavior
+* adaptive tool selection improvements
+* self-improving system logic
+
+⸻
+
+You’re now shaping:
+
+how the system understands humans in real time
