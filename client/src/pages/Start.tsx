@@ -432,7 +432,7 @@ export default function Start() {
                       className="text-xs text-amber-700 dark:text-amber-400 italic text-center pl-10"
                       data-testid="text-mid-reinforce"
                     >
-                      You're doing this right.
+                      You're doing this right — keep going.
                     </p>
                   )}
                 </Fragment>
@@ -445,7 +445,7 @@ export default function Start() {
               className="text-sm font-medium text-slate-800 dark:text-slate-100 text-center mt-3"
               data-testid="text-completion-anchor"
             >
-              Notice how you feel now.
+              Take a second — something just shifted.
             </p>
             <div className="mt-5 pt-4 border-t border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
               <p className="text-xs text-slate-600 dark:text-slate-400 text-center sm:text-left">
