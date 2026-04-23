@@ -435,7 +435,7 @@ export default function Start() {
                       You're doing this right.
                     </p>
                   )}
-                </React.Fragment>
+                </Fragment>
               ))}
             </ol>
             <p className="text-slate-700 dark:text-slate-300 text-sm border-t border-amber-200 dark:border-amber-800 pt-3" data-testid="text-tool-closing">

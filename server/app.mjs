@@ -61,7 +61,22 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
-app.use(helmet());
+const IS_DEV = process.env.NODE_ENV !== "production";
+console.log(`[boot] mode=${IS_DEV ? "development" : "production"} (NODE_ENV=${process.env.NODE_ENV || "<unset>"})`);
+app.use(helmet({
+  contentSecurityPolicy: IS_DEV
+    ? {
+        useDefaults: true,
+        directives: {
+          "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+          "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+          "connect-src": ["'self'", "ws:", "wss:", "http:", "https:"],
+          "img-src": ["'self'", "data:", "blob:", "https:"],
+          "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
+        },
+      }
+    : undefined,
+}));
 app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
 
 // ===== SESSION BOUNDARY FIRST (NO CSRF) =====
@@ -88,11 +103,25 @@ const adminLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// Serve built React app first (real homepage), then legacy /public assets.
-const CLIENT_DIST = path.join(__dirname, "..", "client", "dist");
+// Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
+const CLIENT_ROOT = path.join(__dirname, "..", "client");
+const CLIENT_DIST = path.join(CLIENT_ROOT, "dist");
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
-app.use(express.static(CLIENT_DIST, { index: "index.html" }));
-app.use(express.static(PUBLIC_DIR));
+
+let viteDevServer = null;
+if (IS_DEV) {
+  const { createServer: createViteServer } = await import("vite");
+  viteDevServer = await createViteServer({
+    root: CLIENT_ROOT,
+    configFile: path.join(__dirname, "..", "vite.config.js"),
+    server: { middlewareMode: true, hmr: false },
+    appType: "custom",
+  });
+  app.use(viteDevServer.middlewares);
+} else {
+  app.use(express.static(CLIENT_DIST, { index: "index.html" }));
+}
+app.use(express.static(PUBLIC_DIR, { index: false }));
 
 // ----------------------------
 // ROUTES
@@ -161,11 +190,23 @@ app.get("/ready", (_req, res) => {
 });
 
 // SPA fallback: any non-API, non-asset GET serves the React index.
-app.get("*", (req, res, next) => {
+app.get("*", async (req, res, next) => {
   if (req.method !== "GET") return next();
   if (req.path.startsWith("/api/")) return next();
   if (req.path === "/health" || req.path === "/ready") return next();
   if (req.path.includes(".")) return next();
+  if (IS_DEV && viteDevServer) {
+    try {
+      const fs = await import("node:fs/promises");
+      const indexPath = path.join(CLIENT_ROOT, "index.html");
+      let html = await fs.readFile(indexPath, "utf-8");
+      html = await viteDevServer.transformIndexHtml(req.originalUrl, html);
+      return res.status(200).set({ "Content-Type": "text/html" }).end(html);
+    } catch (e) {
+      viteDevServer.ssrFixStacktrace(e);
+      return next(e);
+    }
+  }
   return res.sendFile(path.join(CLIENT_DIST, "index.html"));
 });
 // ----------------------------

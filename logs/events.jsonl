@@ -4,3 +4,4 @@
 {"type":"streak_incremented","guestId":"te_8657","metadata":{"day":1},"ts":1776975128863}
 {"type":"paywall_shown","guestId":"paywalltest_9889","metadata":{"reason":"value_proven"},"ts":1776976315786}
 {"type":"paywall_clicked","guestId":"paywalltest_9889","metadata":{"action":"upgrade"},"ts":1776976315827}
+{"type":"start_page_click","guestId":"g_moc2defo_ri68tk","metadata":{},"ts":1776983964765}
