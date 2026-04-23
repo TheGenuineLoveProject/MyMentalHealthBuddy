@@ -35,6 +35,7 @@ export async function callAIProvider({
         profile = null,
         policyMsg = "",
         modules = [],
+        toolPayload = null,
         modelOverride = null,
         temperatureOverride = null,
         extraTelemetry = {}
@@ -98,6 +99,30 @@ export async function callAIProvider({
                                                                   {
                                                                           role: "system",
                                                                           content: formatProfileForPrompt(profile),
+                                                                  },
+                                                          ]
+                                                        : []),
+                                                // Active exercise: a structured tool the model should walk the
+                                                // user through concretely (steps surfaced verbatim) rather than
+                                                // mention abstractly. Placed before the framework hint so the
+                                                // policy and framework labels can shape the delivery style.
+                                                ...(toolPayload
+                                                        ? [
+                                                                  {
+                                                                          role: "system",
+                                                                          content:
+                                                                                  `Active exercise:\n` +
+                                                                                  `Title: ${toolPayload.tool.title}\n` +
+                                                                                  `Type: ${toolPayload.tool.type}\n` +
+                                                                                  `Intro: ${toolPayload.exercise.intro}\n` +
+                                                                                  `Steps: ${
+                                                                                          Array.isArray(toolPayload.exercise.steps) &&
+                                                                                          toolPayload.exercise.steps.length
+                                                                                                  ? toolPayload.exercise.steps.join(" | ")
+                                                                                                  : "Follow the intro instructions."
+                                                                                  }\n` +
+                                                                                  `Closing: ${toolPayload.exercise.closing}\n` +
+                                                                                  `When appropriate, guide the user through this exercise concretely instead of speaking only in general advice.`,
                                                                   },
                                                           ]
                                                         : []),

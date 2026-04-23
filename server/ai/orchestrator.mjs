@@ -35,6 +35,8 @@ import { loadSummary } from "./memorySummary.mjs";
 import { loadProfile, profileHasContent } from "./profileStore.mjs";
 import { buildResponsePolicy, renderPolicySystemMessage } from "./responsePolicy.mjs";
 import { selectModules } from "./moduleRouter.mjs";
+import { selectTool } from "./toolSelector.mjs";
+import { executeTool } from "./toolExecutor.mjs";
 
 // ================================
 // FEATURE FLAGS (CONTROL LAYER)
@@ -200,6 +202,16 @@ export async function orchestrateAIRequest({
         const providerPolicy = getProviderPolicy();
 
         if (!canUseLiveAI(providerPolicy)) {
+                // Even in fallback we surface the suggested module + tool so the UI
+                // can show an exercise card (e.g. "Try box breathing while I'm offline").
+                const fbProfile = loadProfile(userKey);
+                const fbModules = selectModules({ profile: fbProfile, input: cleanText });
+                const fbTool = selectTool({
+                        modules: fbModules,
+                        profile: fbProfile,
+                        input: cleanText,
+                });
+                const fbToolPayload = executeTool(fbTool);
                 return {
                         ok: true,
                         stage: "fallback",
@@ -214,6 +226,8 @@ export async function orchestrateAIRequest({
                                 source: "fallback",
                                 modelUsed: null,
                                 latencyMs: 0,
+                                modules: fbModules,
+                                tool: fbToolPayload,
                         },
                 };
         }
@@ -229,6 +243,12 @@ export async function orchestrateAIRequest({
         const policy = buildResponsePolicy({ risk, profile, scoring, modules });
         const policyMsg = renderPolicySystemMessage(policy);
 
+        // Tool selection runs BEFORE the provider call so the exercise structure
+        // can be injected into the prompt and the model is steered to actually
+        // walk the user through the exercise rather than mention it abstractly.
+        const tool = selectTool({ modules, profile, input: cleanText });
+        const toolPayload = executeTool(tool);
+
         const aiResult = await callAIProvider({
                 openai,
                 input: cleanText,
@@ -240,6 +260,7 @@ export async function orchestrateAIRequest({
                 profile,
                 policyMsg,
                 modules,
+                toolPayload,
                 modelOverride: scoring.model,
                 temperatureOverride: scoring.temperature,
                 extraTelemetry: {
@@ -255,6 +276,9 @@ export async function orchestrateAIRequest({
                                 interventions: policy.interventions.length,
                                 modules,
                         },
+                        toolId: toolPayload?.tool?.id || null,
+                        toolType: toolPayload?.tool?.type || null,
+                        moduleCount: modules.length,
                 },
         });
 
@@ -288,6 +312,8 @@ export async function orchestrateAIRequest({
                         source: "openai",
                         modelUsed: aiResult.modelUsed,
                         latencyMs: aiResult.latency,
+                        modules,
+                        tool: toolPayload,
                 },
         };
 }
