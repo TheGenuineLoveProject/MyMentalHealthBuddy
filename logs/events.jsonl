@@ -2,3 +2,5 @@
 {"type":"first_tool_selected","guestId":"te_8657","metadata":{"tool":"calm"},"ts":1776975128774}
 {"type":"first_response_success","guestId":"te_8657","metadata":{"toolId":"box_breathing"},"ts":1776975128817}
 {"type":"streak_incremented","guestId":"te_8657","metadata":{"day":1},"ts":1776975128863}
+{"type":"paywall_shown","guestId":"paywalltest_9889","metadata":{"reason":"value_proven"},"ts":1776976315786}
+{"type":"paywall_clicked","guestId":"paywalltest_9889","metadata":{"action":"upgrade"},"ts":1776976315827}

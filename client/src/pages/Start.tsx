@@ -7,10 +7,20 @@ type ToolPayload = {
   exercise: { intro: string; steps: string[]; closing: string };
 } | null;
 
+type PaywallHint = {
+  show: boolean;
+  reason: "value_proven" | "daily_limit" | "premium_feature" | null;
+} | null;
+
 type ChatResponse = {
   ok: boolean;
   outcome: string;
-  response: { reply?: string; tool?: ToolPayload; modules?: string[] };
+  response: {
+    reply?: string;
+    tool?: ToolPayload;
+    modules?: string[];
+    paywall?: PaywallHint;
+  };
 };
 
 type StreakResult = {
@@ -19,6 +29,60 @@ type StreakResult = {
   longestStreak?: number;
   incremented?: boolean;
 } | null;
+
+type PaywallReason = "value_proven" | "daily_limit" | "premium_feature" | null;
+
+function PaywallCard({ reason }: { reason: PaywallReason }) {
+  useEffect(() => {
+    track("paywall_shown", { reason: reason ?? "unspecified" });
+  }, [reason]);
+
+  const headline =
+    reason === "daily_limit"
+      ? "You've made the most of today's free reset"
+      : reason === "premium_feature"
+        ? "This one's part of Pro"
+        : "Keep your momentum going";
+
+  const body =
+    reason === "daily_limit"
+      ? "Pro removes the daily cap so you can come back as often as you need — plus longer memory and deeper tools."
+      : reason === "premium_feature"
+        ? "Unlock advanced modules, longer memory, and personalized insights."
+        : "You're starting to build real patterns. Unlock deeper tools, longer memory, and more personalized support when you're ready.";
+
+  return (
+    <section
+      className="mt-6 rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50/70 dark:bg-amber-950/30 p-6"
+      data-testid="panel-paywall"
+    >
+      <h3 className="font-semibold text-lg text-slate-900 dark:text-slate-100" data-testid="text-paywall-headline">
+        {headline}
+      </h3>
+      <p className="text-sm text-slate-700 dark:text-slate-300 mt-2" data-testid="text-paywall-body">
+        {body}
+      </p>
+      <div className="mt-4 flex flex-col sm:flex-row gap-3">
+        <Link
+          href="/pricing"
+          onClick={() => track("paywall_clicked", { reason: reason ?? "unspecified", action: "upgrade" })}
+          className="inline-flex items-center justify-center rounded-lg bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 text-sm font-medium"
+          data-testid="link-paywall-upgrade"
+        >
+          Unlock Pro
+        </Link>
+        <button
+          type="button"
+          onClick={() => track("paywall_clicked", { reason: reason ?? "unspecified", action: "dismiss" })}
+          className="inline-flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+          data-testid="button-paywall-dismiss"
+        >
+          Keep using free tools
+        </button>
+      </div>
+    </section>
+  );
+}
 
 function streakMeaningCopy(day: number): string {
   if (day >= 7) return "A week of showing up matters.";
@@ -335,6 +399,11 @@ export default function Start() {
               Come back tomorrow for a 1-minute reset.
             </p>
           </section>
+        )}
+
+        {/* SOFT PAYWALL — only after value, never on crisis */}
+        {result && !crisis && result.response?.paywall?.show && (
+          <PaywallCard reason={result.response.paywall.reason} />
         )}
 
         {/* HOW IT WORKS */}

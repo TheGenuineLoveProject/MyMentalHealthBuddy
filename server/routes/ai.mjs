@@ -3,6 +3,8 @@ import crypto from "node:crypto";
 import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
+import { incrementSuccessfulSession } from "../utils/usageCounter.mjs";
+import { shouldShowPaywall, getPaywallReason } from "../ai/paywallPolicy.mjs";
 import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs";
 import { safetyGuardInput } from "../ai/safety/guard.mjs";
 import { classifyCrisis } from "../ai/crisisClassifier.mjs";
@@ -153,6 +155,29 @@ router.post("/chat", optionalAuth, async (req, res) => {
       openai: req.app.locals.openai || getOpenAIClient(),
       userKey: req.dbUserId || getGuestId(req) || "anonymous"
     });
+
+    // Soft paywall hint: only on successful, non-crisis responses.
+    try {
+      const isCrisis = Boolean(result?.response?.isCrisis);
+      const hasReply = Boolean(result?.response?.reply);
+      if (result?.ok && !isCrisis && hasReply) {
+        const identity =
+          req.dbUserId || getGuestId(req) || "anonymous";
+        const usage = await incrementSuccessfulSession(identity);
+        const decisionInput = {
+          isCrisis,
+          successfulSessions: usage.successfulSessions,
+          dailySessions: usage.dailySessions,
+        };
+        result.response.paywall = {
+          show: shouldShowPaywall(decisionInput),
+          reason: getPaywallReason(decisionInput),
+        };
+      }
+    } catch (e) {
+      // Never break the AI response on paywall accounting failure.
+      console.error("paywall hint failed:", e?.message || e);
+    }
 
     return res.status(result.status || 200).json(result);
 
