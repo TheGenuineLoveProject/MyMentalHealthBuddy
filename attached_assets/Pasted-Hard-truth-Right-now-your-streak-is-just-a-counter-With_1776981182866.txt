@@ -1,0 +1,186 @@
+Hard truth
+
+Right now your “streak” is just a counter.
+Without decay, rewards, and reactivation, users drop off after 2–3 days.
+
+We’ll upgrade it into a real habit loop system—without breaking anything.
+
+⸻
+
+STEP 1 — Add streak decay (prevents false streaks)
+
+Edit: server/routes/streaks.mjs
+
+Find your check-in logic and replace ONLY the streak calculation block with:
+
+const today = new Date();
+const last = user.lastCheckin ? new Date(user.lastCheckin) : null;
+let streak = user.streak || 0;
+if (!last) {
+  streak = 1;
+} else {
+  const diffDays = Math.floor((today - last) / (1000 * 60 * 60 * 24));
+  if (diffDays === 0) {
+    // already checked in today
+  } else if (diffDays === 1) {
+    streak += 1;
+  } else {
+    streak = 1; // reset if missed a day
+  }
+}
+user.streak = streak;
+user.lastCheckin = today;
+
+⸻
+
+Verify
+
+curl -X POST http://0.0.0.0:5000/api/streaks/checkin \
+-H "x-guest-id: streaktest1"
+
+⸻
+
+STEP 2 — Add milestone rewards (behavior reinforcement)
+
+Edit: client/src/pages/Start.tsx
+
+After streak updates:
+
+const milestoneMessages = {
+  3: "You're building momentum.",
+  7: "This is becoming a real habit.",
+  14: "You're showing consistency most people never reach."
+};
+const milestone = milestoneMessages[streak];
+
+Render:
+
+{milestone && (
+  <div style={{ marginTop: 10 }}>
+    🎉 {milestone}
+  </div>
+)}
+
+⸻
+
+STEP 3 — Emotional personalization (higher retention)
+
+Add:
+
+const emotionalPrompts = {
+  anxiety: "Let’s steady your body first.",
+  overwhelm: "We’ll make this simpler together.",
+  sadness: "You don’t have to carry this alone."
+};
+const detected = response?.modules?.[0];
+const emotionalLine = emotionalPrompts[detected];
+
+Render above tool:
+
+{emotionalLine && (
+  <div style={{ marginBottom: 10 }}>
+    {emotionalLine}
+  </div>
+)}
+
+⸻
+
+STEP 4 — Add streak recovery (reactivation trigger)
+
+Edit UI:
+
+{streak === 1 && (
+  <div style={{ marginTop: 12 }}>
+    You’re starting fresh. That still counts.
+  </div>
+)}
+
+⸻
+
+STEP 5 — Add “missed day” recovery message
+
+Add:
+
+const missedMessage = "Missed a day? That’s okay. Start again now.";
+
+Render:
+
+{streak === 1 && (
+  <div style={{ marginTop: 6 }}>
+    {missedMessage}
+  </div>
+)}
+
+⸻
+
+STEP 6 — Add return urgency cue
+
+<div style={{ marginTop: 16 }}>
+  Tomorrow’s reset is easier if you come back.
+</div>
+
+⸻
+
+STEP 7 — Add micro-progress reinforcement
+
+After tool:
+
+<div style={{ marginTop: 8 }}>
+  Even one minute counts.
+</div>
+
+⸻
+
+STEP 8 — Verify full system
+
+Manual test:
+
+1. Open /start
+2. Run tool
+3. Confirm:
+    * streak increments
+    * milestone appears (if applicable)
+    * emotional line appears
+    * recovery message appears (if reset)
+    * return message visible
+
+⸻
+
+What you just built
+
+Layer	Now upgraded
+Trigger	/start
+Action	tool
+Reward	emotional relief
+Reinforcement	streak + milestone
+Recovery	no-shame reset
+Identity	“you’re building a habit”
+Return cue	tomorrow message
+
+This is now a complete behavioral loop system.
+
+⸻
+
+Next move (highest leverage)
+
+Say:
+
+👉 “optimize reactivation + growth loop”
+
+and I’ll build:
+
+* viral sharing hooks (from emotional peaks)
+* return-after-drop system (2–3 day reactivation)
+* conversion → paywall timing optimization
+* daily content → habit synchronization
+
+⸻
+
+Direct challenge
+
+Use your own app for 3 days straight.
+
+If you don’t come back naturally →
+the system isn’t strong enough yet.
+
+That’s the real test.

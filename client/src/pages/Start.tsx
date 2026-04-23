@@ -151,6 +151,19 @@ export default function Start() {
 
   useEffect(() => {
     track("start_page_click");
+    void (async () => {
+      try {
+        const res = await fetch("/api/streaks/me", {
+          headers: { "x-guest-id": getOrCreateGuestId() },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data === "object") setStreak(data);
+        }
+      } catch {
+        /* never break UI on streak fetch */
+      }
+    })();
   }, []);
 
   async function recordStreak(toolId: string) {
@@ -401,6 +414,15 @@ export default function Start() {
           </section>
         )}
 
+        {result && !crisis && !error && (
+          <p
+            className="text-sm text-center text-slate-600 dark:text-slate-300 mb-6"
+            data-testid="text-identity-reinforce"
+          >
+            You're building a habit of taking care of yourself.
+          </p>
+        )}
+
         {/* SOFT PAYWALL — only after value, never on crisis */}
         {result && !crisis && result.response?.paywall?.show && (
           <PaywallCard reason={result.response.paywall.reason} />
@@ -423,6 +445,9 @@ export default function Start() {
         {/* FINAL CTA */}
         <footer className="mt-16 text-center text-xs text-slate-500 dark:text-slate-400">
           <p className="mb-2">You don't need to figure everything out. Start with one small reset.</p>
+          <p className="mb-3 opacity-80" data-testid="text-bookmark-tip">
+            Tip: bookmark this page and come back daily.
+          </p>
           <Link href="/" className="underline" data-testid="link-home">Back to homepage</Link>
         </footer>
       </main>
