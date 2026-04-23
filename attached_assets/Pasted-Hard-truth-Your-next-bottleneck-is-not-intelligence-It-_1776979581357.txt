@@ -1,0 +1,275 @@
+Hard truth
+
+Your next bottleneck is not intelligence.
+It is consistent publishing + simple user acquisition.
+
+Build the launch content pack now.
+
+⸻
+
+1. Shell commands
+
+Run this:
+
+mkdir -p content/launch-pack
+mkdir -p content/social/launch
+mkdir -p content/blog/launch
+mkdir -p content/newsletters/launch
+mkdir -p content/guides/launch
+cat > content/launch-pack/LAUNCH_CONTENT_SYSTEM.md <<'EOF'
+# MyMentalHealthBuddy Launch Content System
+Core promise:
+Feel better in 60 seconds.
+Primary user outcomes:
+1. Calm down
+2. Think clearly
+3. Understand the pattern
+4. Come back tomorrow
+5. Build trust before upgrade
+Content pillars:
+1. Anxiety relief
+2. Thought loops
+3. Emotional overwhelm
+4. Relationship repair
+5. Self-regulation
+6. Pattern awareness
+7. Sleep/racing thoughts
+8. Self-worth and wholeness
+Content formula:
+Hook → Truth → Tool → Tiny action → CTA
+CTA examples:
+- Try a 1-minute reset
+- Start where you are
+- Save this for later
+- Send this to someone who needs it
+- Try MyMentalHealthBuddy
+EOF
+
+⸻
+
+2. Create 20 short-form posts
+
+cat > content/social/launch/20_SHORT_FORM_POSTS.md <<'EOF'
+# 20 Short-Form Launch Posts
+## 1
+Hook: Your brain is not broken.
+Truth: It may just be overloaded.
+Tool: Take one slow breath and name one thing you can control.
+CTA: Try a 1-minute reset.
+## 2
+Hook: Anxiety lies by making everything feel urgent.
+Truth: Not everything needs your response right now.
+Tool: Ask: “What is actually required in the next 10 minutes?”
+CTA: Save this.
+## 3
+Hook: Overthinking is often an unfinished emotional loop.
+Truth: Your mind keeps replaying what your body has not processed.
+Tool: Write the thought. Name the feeling. Choose one next step.
+CTA: Try this tonight.
+## 4
+Hook: You are not lazy.
+Truth: You may be overwhelmed.
+Tool: Make the task smaller until your body stops resisting it.
+CTA: Send this to someone who needs relief.
+## 5
+Hook: If your thoughts race at night, try this.
+Truth: Your mind may be trying to solve tomorrow before resting today.
+Tool: Write one worry, one truth, one next step.
+CTA: Save for bedtime.
+## 6
+Hook: The fastest reset is not motivation.
+Truth: It is regulation.
+Tool: Inhale 4, hold 4, exhale 4, hold 4.
+CTA: Try it now.
+## 7
+Hook: Sometimes healing starts with less pressure.
+Truth: You do not need to fix your whole life today.
+Tool: Pick one kind next step.
+CTA: Start small.
+## 8
+Hook: If you shut down when stressed, you are not weak.
+Truth: Your nervous system may be protecting you.
+Tool: Name what feels too much.
+CTA: Try a 60-second reset.
+## 9
+Hook: Your patterns are not your identity.
+Truth: They are signals.
+Tool: Ask: “What happens right before this pattern starts?”
+CTA: Reflect on this today.
+## 10
+Hook: Emotional clarity starts with one sentence.
+Truth: “I feel ___ because ___.”
+Tool: Fill it in without judging yourself.
+CTA: Save this prompt.
+## 11
+Hook: You do not need perfect confidence.
+Truth: You need one grounded step.
+Tool: Ask: “What would I do if I felt 5% calmer?”
+CTA: Try it.
+## 12
+Hook: If everything feels too much, reduce the load.
+Truth: Your brain cannot prioritize while flooded.
+Tool: Choose one task, one pause, one next step.
+CTA: Start with one.
+## 13
+Hook: Relationship stress often hides an unmet need.
+Truth: The argument may not be the real issue.
+Tool: Ask: “What am I needing but not saying?”
+CTA: Save for later.
+## 14
+Hook: You can be self-aware and still need support.
+Truth: Understanding the pattern is not the same as regulating it.
+Tool: Pair insight with action.
+CTA: Try a guided tool.
+## 15
+Hook: Your body knows before your mind admits it.
+Truth: Tension, racing, numbness, or shutdown are signals.
+Tool: Ask: “Where do I feel this?”
+CTA: Check in now.
+## 16
+Hook: Healing is not always dramatic.
+Truth: Sometimes it is one honest breath.
+Tool: Breathe, name, soften.
+CTA: Take 30 seconds.
+## 17
+Hook: If you keep repeating the same pattern, pause here.
+Truth: Repetition usually means the system has not learned a safer option.
+Tool: Identify the trigger and choose one interruption.
+CTA: Write it down.
+## 18
+Hook: You are allowed to need reassurance.
+Truth: Needing support does not make you too much.
+Tool: Ask for clarity, not proof of worth.
+CTA: Share this.
+## 19
+Hook: Calm is a skill.
+Truth: It grows through repetition, not perfection.
+Tool: One reset per day builds the loop.
+CTA: Come back tomorrow.
+## 20
+Hook: Feel better in 60 seconds.
+Truth: You do not have to process everything at once.
+Tool: Choose calm, clarity, or understanding.
+CTA: Try MyMentalHealthBuddy.
+EOF
+
+⸻
+
+3. Create 5 launch blog drafts
+
+cat > content/blog/launch/5_LAUNCH_BLOG_DRAFTS.md <<'EOF'
+# 5 Launch Blog Drafts
+## 1. Why Your Anxiety Spikes When Life Feels Uncertain
+Purpose: SEO + anxiety module.
+Sections:
+- Anxiety is often a prediction system, not a personal failure
+- Why uncertainty feels urgent
+- 60-second grounding tool
+- When to seek support
+CTA: Try the Calm Me Down tool.
+## 2. How to Stop a Thought Loop Without Fighting Your Mind
+Purpose: CBT/thought reframe.
+Sections:
+- Why thought loops repeat
+- The mistake of arguing with every thought
+- The 4-step reframe
+- Example worksheet
+CTA: Try Help Me Think Clearly.
+## 3. What Emotional Overwhelm Is Trying to Tell You
+Purpose: emotional processing.
+Sections:
+- Overwhelm as too many signals at once
+- Naming the feeling
+- Locating it in the body
+- Choosing one need
+CTA: Try Understand This Feeling.
+## 4. Why You Pull Away When You Need Support
+Purpose: relationship/pattern awareness.
+Sections:
+- Stress responses in relationships
+- Needs vs expression
+- Repair conversation prep
+- One sentence to start repair
+CTA: Try Relationship Repair.
+## 5. The 1-Minute Reset: A Simple Daily Habit for Self-Regulation
+Purpose: habit loop + retention.
+Sections:
+- Why small resets work
+- How daily regulation compounds
+- Box breathing
+- Streaks and self-trust
+CTA: Start your 1-minute reset.
+EOF
+
+⸻
+
+4. Create newsletter starter
+
+cat > content/newsletters/launch/4_WEEK_NEWSLETTER_STARTER.md <<'EOF'
+# 4-Week Newsletter Starter
+## Week 1 — Calm First
+Subject: Start with one breath
+Insight: You do not need to solve everything before you regulate.
+Tool: Box breathing.
+Reflection: What feels most urgent right now?
+## Week 2 — Thought Loops
+Subject: When your mind keeps replaying
+Insight: Repeating thoughts often need structure, not shame.
+Tool: Thought reframe.
+Reflection: What thought keeps returning?
+## Week 3 — Emotional Clarity
+Subject: Name it to soften it
+Insight: Feelings become easier to work with when they become specific.
+Tool: Emotion check-in.
+Reflection: What feeling needs attention?
+## Week 4 — Patterns
+Subject: The pattern is not the person
+Insight: Repeating behavior is information.
+Tool: Pattern interrupt.
+Reflection: What happens right before the loop begins?
+EOF
+
+⸻
+
+5. Replit AI prompt
+
+Paste this into Replit AI:
+
+Build the launch content pack without changing working runtime behavior.
+Goals:
+1. Create a reusable content system for MyMentalHealthBuddy.
+2. Map content to the existing modules/tools:
+   - anxiety
+   - cognitive_reframe
+   - emotional_processing
+   - relationship
+   - behavioral_loop
+   - self_regulation
+3. Generate launch-ready social, blog, newsletter, and guide content.
+4. Preserve all AI routes, crisis behavior, telemetry, memory, profile, summary, provider, paywall, and /start functionality.
+5. Do not move or delete stable runtime files.
+Create or update:
+- content/launch-pack/LAUNCH_CONTENT_SYSTEM.md
+- content/social/launch/20_SHORT_FORM_POSTS.md
+- content/blog/launch/5_LAUNCH_BLOG_DRAFTS.md
+- content/newsletters/launch/4_WEEK_NEWSLETTER_STARTER.md
+- content/guides/launch/CORE_TOOLS_GUIDE.md
+Return:
+- files created
+- content summary
+- verification checklist
+- next recommended launch action
+
+⸻
+
+6. Next verification
+
+find content/launch-pack content/social/launch content/blog/launch content/newsletters/launch -type f
+
+Then continue with:
+
+npm run dev
+
+Your next real move after this is:
+
+publish 20 posts + launch /start publicly.
