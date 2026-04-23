@@ -85,8 +85,9 @@ import { somethingElse } from '../logging/anything.mjs';      // ✗ forbidden
 
 1. `mv server/utils/safetyCheck.mjs server/ai/safety/safetyCheck.mjs` — 0 importers, dead code
 2. `mv server/utils/aiGuardrails.mjs server/ai/safety/aiGuardrails.mjs` — 0 importers, dead code
+3. `mv server/ai/therapyFlows.mjs server/ai/_dead/therapyFlows.mjs` — 0 importers, dead code (surfaced in `ADVISOR_AUDIT_RECONCILIATION.md` second-pass audit)
 
-> Note: a third zero-importer move (`ai/aiTelemetry.mjs → logging/`) was removed from Phase 1 after the ownership clarification — see correction box above. `aiTelemetry.mjs` stays in `server/ai/`.
+> Note: an earlier candidate (`ai/aiTelemetry.mjs → logging/`) was removed from Phase 1 after the ownership clarification — see correction box above. `aiTelemetry.mjs` stays in `server/ai/`.
 
 **Verify after Phase 1:** `npm run dev` boots; `/health`, `/ready`, AI E2E (`POST /api/ai/chat` with `"I feel anxious"`) all return same shape with `tool: box_breathing`.
 
