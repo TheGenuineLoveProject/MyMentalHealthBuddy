@@ -204,7 +204,13 @@ export default function Start() {
         });
         if (res.ok) {
           const data = await res.json();
-          if (data && typeof data === "object") setStreak(data);
+          if (data && typeof data === "object") {
+            setStreak(data);
+            const away = typeof data.daysAway === "number" ? data.daysAway : 0;
+            if (away >= 2) {
+              track("return_user_detected", { daysAway: away, currentStreak: data.currentStreak ?? 0 });
+            }
+          }
         }
       } catch {
         /* never break UI on streak fetch */

@@ -19,6 +19,8 @@ const ALLOWED_EVENT_TYPES = new Set([
         "streak_incremented",
         "paywall_shown",
         "paywall_clicked",
+        "share_clicked",
+        "return_user_detected",
 ]);
 
 export function logEvent({ type, guestId = null, metadata = {} } = {}) {
