@@ -27,3 +27,4 @@
 {"id":"safe_1776968668295_w973n3","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-23T18:24:28.295Z"}
 {"id":"safe_1776968837061_6ycwus","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-23T18:27:17.061Z"}
 {"id":"safe_1776970118518_ixvmpg","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-23T18:48:38.518Z"}
+{"id":"safe_1776974194756_fqrj1o","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-23T19:56:34.756Z"}
