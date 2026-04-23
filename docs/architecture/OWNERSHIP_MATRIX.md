@@ -32,7 +32,8 @@
 |---|---|---|---|---|
 | `auditLogger.mjs` | `server/utils/` | `server/logging/` | 1 | Low |
 | `metrics.mjs` | `server/utils/` | `server/logging/` | 6 | Moderate |
-| `aiTelemetry.mjs` | `server/ai/` | `server/logging/` | **0** (dead) | Zero |
+
+**Correction (2026-04-23, second pass):** `server/ai/aiTelemetry.mjs` was previously listed for migration to `server/logging/`. **Reversed.** It STAYS in `server/ai/`. Rationale: it measures AI-call shape (model selection, tool usage, module counts, token usage, latency, AI-path outcomes) and belongs co-located with `orchestrator.mjs`, `provider.mjs`, and `providerPolicy.mjs`. The `logging/` directory is for platform-wide sinks (`logger`, `aiLogger`, `safetyLogger`, `auditLogger`); domain-specific telemetry stays with its domain.
 
 ### Naming inconsistency / partial duplicate
 
@@ -84,37 +85,38 @@ import { somethingElse } from '../logging/anything.mjs';      // ✗ forbidden
 
 1. `mv server/utils/safetyCheck.mjs server/ai/safety/safetyCheck.mjs` — 0 importers, dead code
 2. `mv server/utils/aiGuardrails.mjs server/ai/safety/aiGuardrails.mjs` — 0 importers, dead code
-3. `mv server/ai/aiTelemetry.mjs server/logging/aiTelemetry.mjs` — 0 importers, dead code
+
+> Note: a third zero-importer move (`ai/aiTelemetry.mjs → logging/`) was removed from Phase 1 after the ownership clarification — see correction box above. `aiTelemetry.mjs` stays in `server/ai/`.
 
 **Verify after Phase 1:** `npm run dev` boots; `/health`, `/ready`, AI E2E (`POST /api/ai/chat` with `"I feel anxious"`) all return same shape with `tool: box_breathing`.
 
 ### Phase 2 — single-importer move
 
-4. `mv server/utils/auditLogger.mjs server/logging/auditLogger.mjs`
-5. Update the 1 importer's path.
+3. `mv server/utils/auditLogger.mjs server/logging/auditLogger.mjs`
+4. Update the 1 importer's path.
 
 **Verify:** repeat Phase 1 verify + `tail logs/audit*` shows new entries.
 
 ### Phase 3 — six-importer move
 
-6. `mv server/utils/metrics.mjs server/logging/metrics.mjs`
-7. Update 6 importers (mechanical sed-friendly path swap).
+5. `mv server/utils/metrics.mjs server/logging/metrics.mjs`
+6. Update 6 importers (mechanical sed-friendly path swap).
 
 **Verify:** repeat verify + telemetry tail still populates `latencyMs`.
 
 ### Phase 4 — fold partial duplicate
 
-8. Move `forbidden` and `notFound` exports from `utils/responses.mjs` into `utils/response.mjs`.
-9. Update the 2 importers of `responses.mjs` to import from `response.mjs`.
-10. Delete `utils/responses.mjs`.
+7. Move `forbidden` and `notFound` exports from `utils/responses.mjs` into `utils/response.mjs`.
+8. Update the 2 importers of `responses.mjs` to import from `response.mjs`.
+9. Delete `utils/responses.mjs`.
 
 **Verify:** `grep -r "from.*utils/responses" server/` returns empty.
 
 ### Phase 5 — heavy move (deferred, requires its own change window)
 
-11. `mv server/utils/aiClient.mjs server/ai/aiClient.mjs`
-12. Update 10 importers across routes + services + health.
-13. Reconcile with the existing 4-line `server/ai/openaiClient.mjs` (merge or formally separate).
+10. `mv server/utils/aiClient.mjs server/ai/aiClient.mjs`
+11. Update 10 importers across routes + services + health.
+12. Reconcile with the existing 4-line `server/ai/openaiClient.mjs` (merge or formally separate).
 
 **Verify:** full E2E + admin endpoints + therapy + reflection routes all return prior shapes.
 

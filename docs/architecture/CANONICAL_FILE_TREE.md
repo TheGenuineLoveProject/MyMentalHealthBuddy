@@ -14,6 +14,7 @@ server/
     orchestrator.mjs               (stay)  CORE decision engine — composition only
     provider.mjs                   (stay)  LLM execution
     openaiClient.mjs               (stay)  4-line OpenAI SDK wrapper
+    aiTelemetry.mjs                (stay)  AI-call telemetry — co-located with orchestrator/provider per ownership clarification (measures model calls, tool usage, module counts, token usage, latency)
     aiClient.mjs                   (move)  ← server/utils/aiClient.mjs    [Phase 2]
     responsePolicy.mjs             (stay)  behavior contract (pure)
     providerPolicy.mjs             (stay)  provider-side policy
@@ -43,12 +44,13 @@ server/
       mental-health-ux.txt         (stay)
       wellnessSystemPrompt.mjs     (stay)
 
-  logging/                         # Observability sinks (write-side)
+  logging/                         # Observability sinks (write-side) — platform-wide, not AI-specific
     aiLogger.mjs                   (stay)  AI structured log sink
     safetyLogger.mjs               (stay)  safety event sink
-    aiTelemetry.mjs                (move)  ← server/ai/aiTelemetry.mjs      (dead)
     auditLogger.mjs                (move)  ← server/utils/auditLogger.mjs   [1 importer]
     metrics.mjs                    (move)  ← server/utils/metrics.mjs       [6 importers]
+    # NOTE: aiTelemetry.mjs intentionally lives in server/ai/, not here.
+    # It measures AI-call shape (model, tool, module, latency, tokens) and belongs to the AI domain.
 
   utils/                           # Low-level infra helpers (stateless, no domain)
     asyncLock.mjs                  (stay)  concurrency primitive
