@@ -1,71 +1,137 @@
 # 20 Short-Form Launch Posts
 
-Ready-to-post pieces for X / Threads / LinkedIn / Bluesky. Each is tagged with the in-app module so analytics can attribute back. Add the crisis line as a reply or pinned footer when posting on platforms that allow it.
-
-**Default CTA**: `Try a 60-second reset → mymentalhealthbuddy.com/start`
+Ready-to-post pieces for X / Threads / LinkedIn / Bluesky. Format: **Hook → Truth → Tool → CTA**. Pin or reply with the crisis line on every thread.
 
 ---
 
-## Anxiety Reset (module: `anxiety` → `box_breathing`)
+## 1
+Hook: Your brain is not broken.
+Truth: It may just be overloaded.
+Tool: Take one slow breath and name one thing you can control.
+CTA: Try a 1-minute reset.
 
-**1.** When your chest tightens, your body is asking for slower air, not better thinking. Four in. Four hold. Four out. Four hold. One round, then decide.
+## 2
+Hook: Anxiety lies by making everything feel urgent.
+Truth: Not everything needs your response right now.
+Tool: Ask: "What is actually required in the next 10 minutes?"
+CTA: Save this.
 
-**2.** Anxiety isn't a sign you're broken. It's a signal that your nervous system is running ahead of the room. You can let it catch up.
+## 3
+Hook: Overthinking is often an unfinished emotional loop.
+Truth: Your mind keeps replaying what your body has not processed.
+Tool: Write the thought. Name the feeling. Choose one next step.
+CTA: Try this tonight.
 
-**3.** You don't have to "calm down." You only have to slow one breath. The next breath gets easier on its own.
+## 4
+Hook: You are not lazy.
+Truth: You may be overwhelmed.
+Tool: Make the task smaller until your body stops resisting it.
+CTA: Send this to someone who needs relief.
 
-**4.** A 60-second box breath won't fix the day. It will give you the next 60 seconds back.
+## 5
+Hook: If your thoughts race at night, try this.
+Truth: Your mind may be trying to solve tomorrow before resting today.
+Tool: Write one worry, one truth, one next step.
+CTA: Save for bedtime.
 
-## Cognitive Reframe (module: `thought_pattern` → `thought_reframe`)
+## 6
+Hook: The fastest reset is not motivation.
+Truth: It is regulation.
+Tool: Inhale 4, hold 4, exhale 4, hold 4.
+CTA: Try it now.
 
-**5.** "I always mess this up" is a sentence, not a fact. Try the smaller, truer version: "I've messed this up before. I might do better this time."
+## 7
+Hook: Sometimes healing starts with less pressure.
+Truth: You do not need to fix your whole life today.
+Tool: Pick one kind next step.
+CTA: Start small.
 
-**6.** A thought is not a verdict. It's a draft. You're allowed to revise it.
+## 8
+Hook: If you shut down when stressed, you are not weak.
+Truth: Your nervous system may be protecting you.
+Tool: Name what feels too much.
+CTA: Try a 60-second reset.
 
-**7.** Catastrophizing has a script: jump to the worst, skip the middle. Naming the script out loud is half the way out.
+## 9
+Hook: Your patterns are not your identity.
+Truth: They are signals.
+Tool: Ask: "What happens right before this pattern starts?"
+CTA: Reflect on this today.
 
-**8.** Most "shoulds" are someone else's voice in your head. You can ask whose. You don't have to keep the answer.
+## 10
+Hook: Emotional clarity starts with one sentence.
+Truth: "I feel ___ because ___."
+Tool: Fill it in without judging yourself.
+CTA: Save this prompt.
 
-## Emotional Processing (module: `emotional_processing` → `emotional_checkin`)
+## 11
+Hook: You do not need perfect confidence.
+Truth: You need one grounded step.
+Tool: Ask: "What would I do if I felt 5% calmer?"
+CTA: Try it.
 
-**9.** Try this: name the feeling, then locate it in your body. Most of the relief is in the naming.
+## 12
+Hook: If everything feels too much, reduce the load.
+Truth: Your brain cannot prioritize while flooded.
+Tool: Choose one task, one pause, one next step.
+CTA: Start with one.
 
-**10.** "Fine" is a door, not a room. What's behind it today?
+## 13
+Hook: Relationship stress often hides an unmet need.
+Truth: The argument may not be the real issue.
+Tool: Ask: "What am I needing but not saying?"
+CTA: Save for later.
 
-**11.** Sadness wants to be felt, not fixed. Sit with it for one minute. Set a timer if you need to.
+## 14
+Hook: You can be self-aware and still need support.
+Truth: Understanding the pattern is not the same as regulating it.
+Tool: Pair insight with action.
+CTA: Try a guided tool.
 
-**12.** Numbness is a feeling too. It usually means something underneath is asking for safety first.
+## 15
+Hook: Your body knows before your mind admits it.
+Truth: Tension, racing, numbness, or shutdown are signals.
+Tool: Ask: "Where do I feel this?"
+CTA: Check in now.
 
-## Relationship (module: `relationship` → `relationship_repair`)
+## 16
+Hook: Healing is not always dramatic.
+Truth: Sometimes it is one honest breath.
+Tool: Breathe, name, soften.
+CTA: Take 30 seconds.
 
-**13.** "I want to fix this with you" is a stronger sentence than "I'm sorry." It invites a next step.
+## 17
+Hook: If you keep repeating the same pattern, pause here.
+Truth: Repetition usually means the system has not learned a safer option.
+Tool: Identify the trigger and choose one interruption.
+CTA: Write it down.
 
-**14.** Repair doesn't require agreement. It requires showing up after the rupture.
+## 18
+Hook: You are allowed to need reassurance.
+Truth: Needing support does not make you too much.
+Tool: Ask for clarity, not proof of worth.
+CTA: Share this.
 
-**15.** You can love someone and need a boundary with them. Both are true. Both can be said gently.
+## 19
+Hook: Calm is a skill.
+Truth: It grows through repetition, not perfection.
+Tool: One reset per day builds the loop.
+CTA: Come back tomorrow.
 
-**16.** A hard conversation goes better when you start with what you want to be true between you, not what went wrong.
-
-## Behavioral Loop (module: `loop_detection` → `pattern_interrupt`)
-
-**17.** The loop isn't proof you're stuck. It's a pattern with an entry point. Find the entry, not the exit.
-
-**18.** Doomscrolling is your nervous system asking for a smaller decision. Try standing up. That's the whole step.
-
-**19.** "Just one more" is the loop talking. The interrupt is one breath and a question: what was I actually looking for?
-
-## Self-Regulation (module: `self_regulation` → `overload_reset`)
-
-**20.** Overwhelm is too many open tabs in your nervous system. Close one. Any one. The rest get easier.
+## 20
+Hook: Feel better in 60 seconds.
+Truth: You do not have to process everything at once.
+Tool: Choose calm, clarity, or understanding.
+CTA: Try MyMentalHealthBuddy → /start
 
 ---
 
 ## Posting Notes
 
-- **Cadence**: 4-5 posts per week is enough at launch. Quality > volume.
-- **Mix**: rotate modules so no single tone dominates a week.
-- **Reply hooks**: when a post lands, follow with a one-line reply linking to `/start` — never to a paywall.
-- **Don't promise outcomes**: "feel calmer," "stop your anxiety," "fix your relationship" are off-limits.
-- **Crisis line on every thread**: pin or reply with the standard line.
+- **Day 1 ship**: post #1, #6, #10, #19, #20 (covers anxiety, regulation, clarity, retention, brand).
+- **Cadence**: 4-5 posts/week. Rotate modules so no single tone dominates.
+- **Default link**: `mymentalhealthbuddy.com/start` — never link directly to a paywall.
+- **Don't promise outcomes**: no "feel calmer guaranteed", no "stop your anxiety", no "fix your relationship".
+- **Crisis line on every thread**: pin or reply with the standard line below.
 
 > In crisis or thinking of suicide? Call or text **988** (US) or text **HOME** to **741741**. International: findahelpline.com.
