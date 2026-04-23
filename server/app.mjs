@@ -21,6 +21,7 @@ import aiRoutes from "./routes/ai.mjs";
 import aiHealingRoutes from "./routes/ai.healing.mjs";
 import aiBusinessRoutes from "./routes/ai.business.mjs";
 import healthRoutes from "./routes/health.mjs";
+import streaksRoutes from "./routes/streaks.mjs";
 
 // ✅ OPTIONAL AUTH (FIXES authMiddleware error)
 import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
@@ -98,6 +99,7 @@ app.use(express.static(PUBLIC_DIR));
 
 // Health check (must work first)
 app.use("/api/health", healthRoutes);
+app.use("/api/streaks", optionalAuth, streaksRoutes);
 
 // Healing engine (gated by age verification; admin sub-routes self-gate)
 app.use("/api/ai/healing", requireAdult, aiHealingRoutes);

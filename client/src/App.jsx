@@ -30,6 +30,7 @@ const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
 const CanvaLanding = lazy(() => import("./pages/CanvaLanding.jsx"));
+const Start = lazy(() => import("./pages/Start.tsx"));
 const Register = lazy(() => import("./pages/Register.jsx"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
@@ -353,6 +354,7 @@ export default function App() {
               <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />
+              <Route path="/start" component={Start} />
               <Route path="/pricing" component={PricingReal} />
               <Route path="/coming-soon">{() => <ComingSoon />}</Route>
               <Route path="/challenge" component={Challenge} />

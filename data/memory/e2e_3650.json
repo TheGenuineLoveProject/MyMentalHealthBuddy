@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I feel anxious right now and need to calm down"
+  },
+  {
+    "role": "assistant",
+    "content": "I’m really sorry to hear that you’re feeling anxious. Let’s take a moment to ground ourselves together. \n\nIf you’re comfortable, let’s try a short breathing exercise called box breathing. It can help bring a sense of calm. \n\nLet’s start:\n\n1. Inhale deeply through your nose for a count of 4... (1, 2, 3, 4)\n2. Hold that breath for a count of 4... (1, 2, 3, 4)\n3. Exhale slowly through your mouth for a count of 4... (1, 2, 3, 4)\n4. Hold that breath again for a count of 4... (1, 2, 3, 4)\n\nGreat job! Let’s take a moment to notice how you feel now. Remember, it’s okay to take things one step at a time. What helps you feel a bit more at ease?"
+  }
+]
