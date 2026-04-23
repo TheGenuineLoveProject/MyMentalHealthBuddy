@@ -860,7 +860,6 @@ export default function App() {
               <Route path="/apps">{() => <Redirect to="/tools" />}</Route>
               <Route path="/appointment">{() => <Redirect to="/booking" />}</Route>
               <Route path="/test">{() => <Redirect to="/demo" />}</Route>
-              <Route path="/start">{() => <Redirect to="/onboarding" />}</Route>
               <Route path="/begin">{() => <Redirect to="/onboarding" />}</Route>
               <Route path="/join">{() => <Redirect to="/register" />}</Route>
               <Route path="/worksheets">{() => <Redirect to="/practices" />}</Route>

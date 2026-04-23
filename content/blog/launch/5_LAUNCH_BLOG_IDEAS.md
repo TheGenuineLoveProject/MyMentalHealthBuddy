@@ -5,3 +5,8 @@
 3. The Simple Reset for Racing Thoughts
 4. How One Small Next Step Reduces Overwhelm
 5. Why Daily Emotional Check-Ins Build Self-Regulation
+
+
+---
+
+> In crisis or thinking of suicide? Call or text **988** (US) or text **HOME** to **741741**. International: findahelpline.com.

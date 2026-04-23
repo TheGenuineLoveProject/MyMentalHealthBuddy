@@ -19,3 +19,8 @@ CTA: Use Understand This Feeling.
 Insight: Healing becomes stronger through repetition.
 Tool: Daily 1-minute reset.
 CTA: Return to /start.
+
+
+---
+
+> In crisis or thinking of suicide? Call or text **988** (US) or text **HOME** to **741741**. International: findahelpline.com.

@@ -14,3 +14,8 @@ Tool: thought reframe.
 Purpose: emotional clarity and self-awareness.
 Best for: sadness, anger, numbness, overwhelm.
 Tool: emotion check-in.
+
+
+---
+
+> In crisis or thinking of suicide? Call or text **988** (US) or text **HOME** to **741741**. International: findahelpline.com.

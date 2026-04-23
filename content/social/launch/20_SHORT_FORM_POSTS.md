@@ -99,3 +99,8 @@ CTA: Visit /start.
 Truth: But it can help you breathe, think, and choose better.
 Tool: MyMentalHealthBuddy reset.
 CTA: Start at /start.
+
+
+---
+
+> In crisis or thinking of suicide? Call or text **988** (US) or text **HOME** to **741741**. International: findahelpline.com.
