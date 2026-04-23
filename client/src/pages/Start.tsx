@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Link } from "wouter";
 import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
 
@@ -374,19 +374,32 @@ export default function Start() {
           </div>
         )}
 
-        {reply && !crisis && (
-          <section
-            className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 mb-4 shadow-sm"
-            data-testid="panel-reply"
-          >
-            <p
-              className="text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap"
-              data-testid="text-reply"
+        {reply && !crisis && (() => {
+          const match = reply.match(/^([^.!?]+[.!?])\s+([\s\S]+)$/);
+          const validation = match ? match[1] : reply;
+          const body = match ? match[2] : null;
+          return (
+            <section
+              className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 mb-4 shadow-sm"
+              data-testid="panel-reply"
             >
-              {reply}
-            </p>
-          </section>
-        )}
+              <p
+                className="text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-50 leading-snug mb-3"
+                data-testid="text-reply-validation"
+              >
+                {validation}
+              </p>
+              {body && (
+                <p
+                  className="text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-wrap"
+                  data-testid="text-reply-body"
+                >
+                  {body}
+                </p>
+              )}
+            </section>
+          );
+        })()}
 
         {tool && !crisis && (
           <section
@@ -407,16 +420,32 @@ export default function Start() {
             </p>
             <ol className="space-y-3 mb-4" data-testid="list-tool-steps">
               {tool.exercise.steps.map((step, i) => (
-                <li key={i} className="flex gap-3" data-testid={`step-tool-${i}`}>
-                  <span className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-200 dark:bg-amber-800 text-amber-900 dark:text-amber-100 font-semibold text-sm flex items-center justify-center">
-                    {i + 1}
-                  </span>
-                  <span className="text-slate-800 dark:text-slate-200 pt-0.5">{step}</span>
-                </li>
+                <Fragment key={i}>
+                  <li className="flex gap-3" data-testid={`step-tool-${i}`}>
+                    <span className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-200 dark:bg-amber-800 text-amber-900 dark:text-amber-100 font-semibold text-sm flex items-center justify-center">
+                      {i + 1}
+                    </span>
+                    <span className="text-slate-800 dark:text-slate-200 pt-0.5">{step}</span>
+                  </li>
+                  {i === 0 && tool.exercise.steps.length > 1 && (
+                    <p
+                      className="text-xs text-amber-700 dark:text-amber-400 italic text-center pl-10"
+                      data-testid="text-mid-reinforce"
+                    >
+                      You're doing this right.
+                    </p>
+                  )}
+                </React.Fragment>
               ))}
             </ol>
             <p className="text-slate-700 dark:text-slate-300 text-sm border-t border-amber-200 dark:border-amber-800 pt-3" data-testid="text-tool-closing">
               {tool.exercise.closing}
+            </p>
+            <p
+              className="text-sm font-medium text-slate-800 dark:text-slate-100 text-center mt-3"
+              data-testid="text-completion-anchor"
+            >
+              Notice how you feel now.
             </p>
             <div className="mt-5 pt-4 border-t border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
               <p className="text-xs text-slate-600 dark:text-slate-400 text-center sm:text-left">
