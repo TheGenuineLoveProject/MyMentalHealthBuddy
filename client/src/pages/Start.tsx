@@ -27,10 +27,56 @@ type StreakResult = {
   authenticated: boolean;
   currentStreak?: number;
   longestStreak?: number;
+  daysAway?: number;
   incremented?: boolean;
 } | null;
 
 type PaywallReason = "value_proven" | "daily_limit" | "premium_feature" | null;
+
+function ShareCard({ reply }: { reply: string | null }) {
+  const [copied, setCopied] = useState(false);
+  const message = "This actually helped me reset in 60 seconds → https://mymentalhealthbuddy.com/start";
+
+  async function handleShare() {
+    try {
+      const nav = navigator as Navigator & { share?: (data: ShareData) => Promise<void> };
+      if (typeof nav.share === "function") {
+        await nav.share({ text: message });
+        track("share_clicked", { method: "native" });
+        return;
+      }
+    } catch {
+      /* user cancelled or share failed — fall through to clipboard */
+    }
+    try {
+      await navigator.clipboard.writeText(message);
+      setCopied(true);
+      track("share_clicked", { method: "clipboard" });
+      setTimeout(() => setCopied(false), 2400);
+    } catch {
+      /* clipboard unavailable — silent */
+    }
+  }
+
+  if (!reply) return null;
+  return (
+    <section
+      className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-sky-50/60 dark:bg-sky-950/30 p-5 mb-6 flex flex-col sm:flex-row items-center gap-4"
+      data-testid="panel-share"
+    >
+      <p className="text-sm text-sky-900 dark:text-sky-100 flex-1 text-center sm:text-left">
+        This helped. Someone else might need it too.
+      </p>
+      <button
+        onClick={handleShare}
+        className="inline-flex items-center gap-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium px-4 py-2 transition-colors"
+        data-testid="button-share"
+      >
+        {copied ? "Copied" : "Share"}
+      </button>
+    </section>
+  );
+}
 
 function PaywallCard({ reason }: { reason: PaywallReason }) {
   useEffect(() => {
@@ -421,6 +467,49 @@ export default function Start() {
           >
             You're building a habit of taking care of yourself.
           </p>
+        )}
+
+        {streak?.authenticated && typeof streak.currentStreak === "number" && (
+          <>
+            {streak.currentStreak === 3 && (
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-3">
+                You're building momentum.
+              </p>
+            )}
+            {streak.currentStreak === 7 && (
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-7">
+                This is becoming a real habit.
+              </p>
+            )}
+            {streak.currentStreak === 14 && (
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-14">
+                You're showing up for yourself consistently.
+              </p>
+            )}
+            {streak.currentStreak === 30 && (
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-30">
+                This is part of who you are now.
+              </p>
+            )}
+            {streak.currentStreak === 1 && (streak.longestStreak ?? 0) > 1 && (
+              <p className="text-sm text-center text-slate-600 dark:text-slate-300 mb-4" data-testid="text-recovery">
+                Starting fresh counts. You're back.
+              </p>
+            )}
+          </>
+        )}
+
+        {result && !crisis && !error && (streak?.daysAway ?? 0) >= 2 && (
+          <p
+            className="text-sm text-center text-slate-700 dark:text-slate-200 mb-6"
+            data-testid="text-reactivation"
+          >
+            It's been {streak?.daysAway} days. Let's reset together.
+          </p>
+        )}
+
+        {result && !crisis && !error && (
+          <ShareCard reply={reply} />
         )}
 
         {/* SOFT PAYWALL — only after value, never on crisis */}

@@ -34,10 +34,19 @@ function isYesterday(prev, today) {
   return diff === 1;
 }
 
+function computeDaysAway(last, now) {
+  if (!last) return 0;
+  const p = new Date(last);
+  const t = new Date(now);
+  const diff = Math.floor((Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()) -
+                           Date.UTC(p.getUTCFullYear(), p.getUTCMonth(), p.getUTCDate())) / 86400000);
+  return Math.max(0, diff);
+}
+
 router.get("/me", async (req, res) => {
   const userId = getAuthedUserId(req);
   if (!userId) {
-    return res.json({ authenticated: false, currentStreak: 0, longestStreak: 0 });
+    return res.json({ authenticated: false, currentStreak: 0, longestStreak: 0, daysAway: 0 });
   }
   try {
     const rows = await db.select().from(userProgress).where(eq(userProgress.userId, userId)).limit(1);
@@ -49,6 +58,7 @@ router.get("/me", async (req, res) => {
         longestStreak: 0,
         lastActivityDate: null,
         toolsUsedToday: 0,
+        daysAway: 0,
       });
     }
     res.json({
@@ -57,6 +67,7 @@ router.get("/me", async (req, res) => {
       longestStreak: row.longestStreak,
       lastActivityDate: row.lastActivityDate,
       toolsUsedToday: row.toolsUsedToday,
+      daysAway: computeDaysAway(row.lastActivityDate, new Date()),
     });
   } catch (err) {
     logger.error("streak.me failed", { error: err.message });
@@ -86,7 +97,7 @@ router.post("/checkin", async (req, res) => {
         toolsUsedToday: 1,
         totalToolsUsed: 1,
       });
-      return res.json({ authenticated: true, currentStreak: 1, longestStreak: 1, incremented: true });
+      return res.json({ authenticated: true, currentStreak: 1, longestStreak: 1, incremented: true, daysAway: 0 });
     }
 
     const last = existing.lastActivityDate;
@@ -122,6 +133,7 @@ router.post("/checkin", async (req, res) => {
       longestStreak: nextLongest,
       toolsUsedToday: nextToolsToday,
       incremented: !isSameDay(last, now),
+      daysAway: computeDaysAway(last, now),
     });
   } catch (err) {
     logger.error("streak.checkin failed", { error: err.message });
