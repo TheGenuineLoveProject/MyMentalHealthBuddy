@@ -43,6 +43,29 @@ function incrementDailySession() {
   }
 }
 
+// Fail-silent telemetry beacon. Mirrors the /start surface helper so behavior
+// signals from the chat surface flow into the same events.jsonl sink.
+function trackEvent(type, metadata = {}) {
+  try {
+    let guestId = null;
+    try {
+      guestId = localStorage.getItem("mmhb_guest_id");
+    } catch {
+      /* localStorage may be blocked — beacon still fires without guest id */
+    }
+    void fetch("/api/telemetry/event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(guestId ? { "x-guest-id": guestId } : {}),
+      },
+      body: JSON.stringify({ type, metadata }),
+    }).catch(() => {});
+  } catch {
+    /* never break UI on telemetry */
+  }
+}
+
 export default function AIChatPage() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
@@ -137,6 +160,13 @@ export default function AIChatPage() {
     const userMessage = input.trim();
     setInput("");
     setError("");
+    // Continuation signal: when this becomes the user's 2nd message in the
+    // conversation, they returned after the first AI response — the strongest
+    // proxy we have for "the first line landed well enough to continue."
+    const userMessagesSoFar = messages.filter((m) => m.role === "user").length;
+    if (userMessagesSoFar === 1) {
+      trackEvent("first_line_continued", { surface: "chat" });
+    }
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     const newCount = incrementDailySession();
     setSessionCount(newCount);

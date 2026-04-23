@@ -88,16 +88,41 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [], infe
                 ["avoidance", "gentle, non-pressuring"],
                 ["anxiety", "calm, steadying"],
         ];
-        if (level !== "high" && states.length > 0) {
+        // Module → state fallback: when inference returns nothing but a module
+        // fired, derive a probable state so the tone branch still runs instead
+        // of falling through to default. Adapted from the advisor's
+        // `inferredStates[0] ?? modules[0]?.name` lever — our `modules` are
+        // already string ids (not objects), so we just map id → state.
+        const MODULE_TO_STATE = {
+                anxiety: "anxiety",
+                thought_pattern: "self_doubt",
+                emotional_processing: "sadness",
+                loop_detection: "self_doubt",
+                relationship: "sadness",
+                self_regulation: "overwhelm",
+                awareness: "avoidance",
+                growth: null,
+        };
+        const moduleFallbackState =
+                states.length === 0 && Array.isArray(modules) && modules.length > 0
+                        ? MODULE_TO_STATE[modules[0]] ?? null
+                        : null;
+        const effectiveStates = states.length > 0
+                ? states
+                : moduleFallbackState
+                        ? [moduleFallbackState]
+                        : [];
+
+        if (level !== "high" && effectiveStates.length > 0) {
                 for (const [stateId, stateTone] of STATE_TONE_PRIORITY) {
-                        if (states.includes(stateId)) {
+                        if (effectiveStates.includes(stateId)) {
                                 tone = stateTone;
                                 break;
                         }
                 }
-                if (states.includes("overwhelm")) verbosity = "concise";
-                if (states.includes("self_doubt")) interventions.push("self_compassion_prompt");
-                if (states.includes("anxiety")) interventions.push("breathing", "grounding");
+                if (effectiveStates.includes("overwhelm")) verbosity = "concise";
+                if (effectiveStates.includes("self_doubt")) interventions.push("self_compassion_prompt");
+                if (effectiveStates.includes("anxiety")) interventions.push("breathing", "grounding");
         }
 
         // Module-driven interventions (resolved via MODULE_REGISTRY).

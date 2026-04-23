@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import { Link } from "wouter";
 import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
 
@@ -194,6 +194,14 @@ export default function Start() {
   const [error, setError] = useState<string | null>(null);
   const [crisis, setCrisis] = useState(false);
   const [streak, setStreak] = useState<StreakResult>(null);
+  // Engagement signals — fire-once per /start session.
+  const [toolClickCount, setToolClickCount] = useState(0);
+  const [toolCompleted, setToolCompleted] = useState(false);
+  // Synchronous one-shot latch for tool_completed: React state updates are
+  // async, so two rapid clicks can both observe `toolCompleted === false`
+  // before re-render fires. The ref mutates synchronously and guarantees
+  // the telemetry call happens at most once per result panel.
+  const toolCompletedLatchRef = useRef(false);
 
   useEffect(() => {
     track("start_page_click");
@@ -241,11 +249,21 @@ export default function Start() {
   }
 
   async function runTool(buttonId: string, message: string) {
+    // Continuation signal: clicking a SECOND tool while a result is showing
+    // is the /start analog of "user sent a 2nd message" — they re-engaged
+    // with the surface after the first AI line.
+    const nextClickCount = toolClickCount + 1;
+    setToolClickCount(nextClickCount);
+    if (nextClickCount === 2) {
+      track("first_line_continued", { surface: "start", trigger: "second_tool_click" });
+    }
     setLoading(buttonId);
     setError(null);
     setResult(null);
     setCrisis(false);
     setStreak(null);
+    setToolCompleted(false);
+    toolCompletedLatchRef.current = false;
     track("first_tool_selected", { tool: buttonId });
     try {
       const res = await fetch("/api/ai/chat", {
@@ -447,6 +465,28 @@ export default function Start() {
             >
               Take a second — something just shifted.
             </p>
+            <div className="mt-4 flex justify-center">
+              <button
+                type="button"
+                disabled={toolCompleted}
+                onClick={() => {
+                  // Synchronous latch wins over async setState — guarantees
+                  // a single tool_completed beacon even under rapid double-click.
+                  if (toolCompletedLatchRef.current) return;
+                  toolCompletedLatchRef.current = true;
+                  setToolCompleted(true);
+                  track("tool_completed", {
+                    toolId: tool.tool.id,
+                    toolType: tool.tool.type,
+                    stepCount: tool.exercise.steps.length,
+                  });
+                }}
+                className="inline-flex items-center gap-2 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-medium text-amber-800 dark:text-amber-200 hover:bg-amber-50 dark:hover:bg-amber-950/40 disabled:opacity-60 disabled:cursor-default transition-colors"
+                data-testid="button-tool-complete"
+              >
+                {toolCompleted ? "Marked complete" : "I did it"}
+              </button>
+            </div>
             <div className="mt-5 pt-4 border-t border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
               <p className="text-xs text-slate-600 dark:text-slate-400 text-center sm:text-left">
                 Want to track your streak and unlock deeper tools?

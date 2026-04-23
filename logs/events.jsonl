@@ -5,3 +5,5 @@
 {"type":"paywall_shown","guestId":"paywalltest_9889","metadata":{"reason":"value_proven"},"ts":1776976315786}
 {"type":"paywall_clicked","guestId":"paywalltest_9889","metadata":{"action":"upgrade"},"ts":1776976315827}
 {"type":"start_page_click","guestId":"g_moc2defo_ri68tk","metadata":{},"ts":1776983964765}
+{"type":"first_line_continued","guestId":"smoke_g_final","metadata":{"surface":"smoke"},"ts":1776986544642}
+{"type":"tool_completed","guestId":"smoke_g_final","metadata":{"toolId":"box_breathing","stepCount":4},"ts":1776986544681}

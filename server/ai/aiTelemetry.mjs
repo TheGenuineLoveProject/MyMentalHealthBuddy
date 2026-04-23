@@ -21,6 +21,13 @@ const ALLOWED_EVENT_TYPES = new Set([
         "paywall_clicked",
         "share_clicked",
         "return_user_detected",
+        // Engagement-depth signals (advisor: "measure, don't build").
+        // first_line_continued — fires when user re-engages after the first AI
+        //   response (2nd tool click on /start, or 2nd user message on /chat).
+        // tool_completed — fires when user explicitly marks an exercise done
+        //   on /start ("I did it" button).
+        "first_line_continued",
+        "tool_completed",
 ]);
 
 export function logEvent({ type, guestId = null, metadata = {} } = {}) {

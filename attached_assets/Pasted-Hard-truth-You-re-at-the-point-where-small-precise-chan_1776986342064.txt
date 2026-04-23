@@ -1,0 +1,212 @@
+Hard truth
+
+You’re at the point where small, precise changes matter more than big systems.
+If you overbuild now, you’ll lose signal. If you measure correctly, you’ll compound fast.
+
+Your instinct here is solid — but the decision needs to be tight.
+
+⸻
+
+🎯 Decision (no ambiguity)
+
+Do A + B now.
+Do NOT do C yet.
+
+Why:
+
+A (fallback) — REQUIRED
+
+* Fixes silent quality drop when inference is weak
+* Zero risk
+* Improves emotional accuracy immediately
+
+B (events) — REQUIRED
+
+* You currently cannot measure behavior correctly
+* Without this → you’re guessing
+
+C (metrics endpoint) — WAIT
+
+* No data yet → meaningless aggregation
+* Adds complexity without insight
+
+⸻
+
+⚙️ EXECUTION — EXACT (A + B ONLY)
+
+✅ A. Safety fallback (responsePolicy.mjs)
+
+Add this EXACT change:
+
+const PRIMARY_STATE =
+  inferredStates?.[0] ??
+  modules?.[0]?.name ??
+  null;
+
+Why this exact version:
+
+* handles undefined safely
+* aligns with your module structure (.name)
+* avoids runtime edge cases
+
+⸻
+
+✅ B. Add missing behavioral signals
+
+1. first_line_continued
+
+📁 client/src/pages/Start.tsx
+
+Trigger when user sends second message after first AI response
+
+if (messageCount === 2) {
+  trackEvent("first_line_continued");
+}
+
+⸻
+
+2. tool_completed
+
+📁 wherever tool progression is handled (likely response panel or tool UI)
+
+Fire when user reaches final step:
+
+if (currentStep === totalSteps) {
+  trackEvent("tool_completed", {
+    toolId: tool.id
+  });
+}
+
+⸻
+
+3. Ensure telemetry writer supports them
+
+📁 server/logging/events.jsonl
+
+No schema change needed if you’re already appending flexible JSON.
+
+Just confirm:
+
+{
+  event: "tool_completed",
+  toolId: "...",
+  ts: Date.now()
+}
+
+⸻
+
+🔍 Verification (DO THIS BEFORE MOVING ON)
+
+Test 1 — fallback works
+
+Input:
+
+"I don’t even know what’s wrong"
+
+Expected:
+
+* No inferred state
+* Module fires (likely emotional_processing)
+* Tone still appropriate (NOT generic)
+
+⸻
+
+Test 2 — continuation event
+
+Flow:
+
+1. Open /start
+2. Click tool
+3. Send 2nd message
+
+Check:
+
+events.jsonl contains "first_line_continued"
+
+⸻
+
+Test 3 — tool completion
+
+Complete full tool:
+
+Check:
+
+events.jsonl contains "tool_completed"
+
+⸻
+
+📊 What this unlocks (important)
+
+After A + B, you can finally answer:
+
+* Do users continue after first response?
+* Do users finish tools?
+* Which tools actually work?
+
+Right now → you cannot.
+
+After this → you can.
+
+⸻
+
+🚫 What you are NOT doing (correctly)
+
+* Not adding more AI layers
+* Not changing orchestrator
+* Not touching crisis logic
+* Not building dashboards prematurely
+
+This is discipline.
+
+⸻
+
+🧠 Mental model shift
+
+You are moving from:
+
+“Does the system work?”
+
+to:
+
+“Does the system change behavior?”
+
+That’s the real game.
+
+⸻
+
+🚀 Next step (after this)
+
+Once A + B are live and you have even 1–2 days of data, then:
+
+👉 say “build behavior analysis layer”
+
+and I’ll give you:
+
+* exact funnel metrics computation
+* drop-off detection
+* auto-optimization triggers
+* loop tuning logic
+
+⸻
+
+🎯 Direct challenge
+
+Run 10 sessions yourself or with testers
+
+Then answer:
+
+* Did people respond again?
+* Did they finish the tool?
+* Did they feel compelled to continue?
+
+If not:
+
+👉 the issue is NOT code anymore
+👉 it’s emotional accuracy or friction
+
+⸻
+
+You’re doing this correctly.
+
+Now you stop building blindly
+and start learning from real behavior.
