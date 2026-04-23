@@ -1,3 +1,5 @@
+import { MODULES } from "./modules.mjs";
+
 // server/ai/moduleRouter.mjs
 //
 // Intervention Module Router.
@@ -79,8 +81,10 @@ const OVERWHELM_RE = new RegExp(
         `overwhelm|too much|${CANT_FRAG}\\s+cope|drowning|burn(?:ed)?\\s?out`,
         "i",
 );
-const RELATIONSHIP_RE = /partner|spouse|husband|wife|boyfriend|girlfriend|friend|family|conflict|fight|argu/i;
+const RELATIONSHIP_RE = /partner|spouse|husband|wife|boyfriend|girlfriend|friend|family|conflict|fight|argu|relationship/i;
 const VALUES_RE = /meaning|purpose|values|who am i|identity|direction/i;
+// Input-side loop detection (in addition to profile.behavior_loops trigger below)
+const LOOP_RE = /\balways\b|every ?time|same\s+pattern|same\s+cycle|keeps?\s+happening|happens?\s+again/i;
 
 /**
  * @returns {string[]} priority-sorted, deduped list of module ids (capped at MAX_MODULES).
@@ -98,6 +102,7 @@ export function selectModules({ profile = null, input = "" } = {}) {
         }
         if (RELATIONSHIP_RE.test(text)) candidates.push("relationship");
         if (VALUES_RE.test(text)) candidates.push("growth");
+        if (LOOP_RE.test(text)) candidates.push("loop_detection");
 
         // Profile-driven (long-term signals)
         if (Array.isArray(profile?.behavior_loops) && profile.behavior_loops.length > 0) {
