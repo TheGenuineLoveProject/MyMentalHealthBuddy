@@ -2,6 +2,7 @@
 import { logAICall } from "./aiTelemetry.mjs";
 import { formatProfileForPrompt } from "./profileStore.mjs";
 import { MODULE_REGISTRY } from "./moduleRouter.mjs";
+import { getEmotionHint } from "./emotionPhrases.mjs";
 
 const DEFAULT_MODEL = process.env.AI_MODEL || "gpt-4o-mini";
 const FALLBACK_MODEL = "gpt-4o-mini"; // safe fallback
@@ -36,6 +37,7 @@ export async function callAIProvider({
         policyMsg = "",
         modules = [],
         toolPayload = null,
+        inferredStates = [],
         modelOverride = null,
         temperatureOverride = null,
         extraTelemetry = {}
@@ -142,6 +144,20 @@ export async function callAIProvider({
                                                                   },
                                                           ]
                                                         : []),
+                                                // Emotion-tone hint (vary naturally — NOT forced output).
+                                                // The phrase bank seeds texture so consecutive responses don't
+                                                // recycle the same validation line. Placed before the policy
+                                                // so the policy's "vary phrasing" constraint can govern usage.
+                                                ...((() => {
+                                                        const hint = getEmotionHint(inferredStates);
+                                                        return hint
+                                                                ? [{
+                                                                          role: "system",
+                                                                          content:
+                                                                                  `Possible emotional tones for the opening (vary naturally; do not quote verbatim, do not reuse the same phrasing as recent turns): ${hint}`,
+                                                                  }]
+                                                                : [];
+                                                })()),
                                                 // Response policy LAST among system messages so it wins
                                                 // instruction precedence over generic assistant guidance.
                                                 ...(policyMsg

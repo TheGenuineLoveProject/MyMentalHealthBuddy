@@ -23,6 +23,7 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [], infe
                 "avoid absolute claims",
                 // Validation-line precision: emotional acknowledgment leads, brief.
                 "Open with a short emotional acknowledgment (max 6–8 words) that reflects feeling, not facts, before any guidance.",
+                "Vary the phrasing of that opening across responses — never reuse the same sentence as a recent turn, and do not echo any phrase-bank hint verbatim.",
                 // Cognitive load cap when we're not actively walking through an exercise.
                 "Keep guidance to 1–2 concrete steps unless the user is mid-exercise.",
                 // Escalation guardrail.
