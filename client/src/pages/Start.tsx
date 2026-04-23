@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle } from "lucide-react";
+import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
 
 type ToolPayload = {
   tool: { id: string; title: string; type: string; durationMin: number };
@@ -12,6 +12,20 @@ type ChatResponse = {
   outcome: string;
   response: { reply?: string; tool?: ToolPayload; modules?: string[] };
 };
+
+type StreakResult = {
+  authenticated: boolean;
+  currentStreak?: number;
+  longestStreak?: number;
+  incremented?: boolean;
+} | null;
+
+function streakMeaningCopy(day: number): string {
+  if (day >= 7) return "A week of showing up matters.";
+  if (day >= 3) return "You're building a real pattern.";
+  if (day >= 1) return "You showed up for yourself today.";
+  return "";
+}
 
 const TOOL_BUTTONS = [
   {
@@ -54,12 +68,32 @@ export default function Start() {
   const [result, setResult] = useState<ChatResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [crisis, setCrisis] = useState(false);
+  const [streak, setStreak] = useState<StreakResult>(null);
+
+  async function recordStreak(toolId: string) {
+    try {
+      const res = await fetch("/api/streaks/checkin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-guest-id": getOrCreateGuestId(),
+        },
+        body: JSON.stringify({ toolId }),
+      });
+      const data = await res.json();
+      if (res.ok) setStreak(data);
+      else setStreak({ authenticated: false });
+    } catch {
+      setStreak({ authenticated: false });
+    }
+  }
 
   async function runTool(buttonId: string, message: string) {
     setLoading(buttonId);
     setError(null);
     setResult(null);
     setCrisis(false);
+    setStreak(null);
     try {
       const res = await fetch("/api/ai/chat", {
         method: "POST",
@@ -81,6 +115,8 @@ export default function Start() {
         return;
       }
       setResult(data);
+      const toolId = data?.response?.tool?.tool?.id ?? buttonId;
+      void recordStreak(toolId);
     } catch {
       setError("Connection problem. Please check your connection and try again.");
     } finally {
@@ -240,6 +276,39 @@ export default function Start() {
                 Create free account <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
+          </section>
+        )}
+
+        {result && !crisis && !error && (
+          <section
+            className="rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/60 dark:bg-emerald-950/30 p-5 mb-6 flex flex-col sm:flex-row items-center gap-4"
+            data-testid="panel-return-cta"
+          >
+            {streak?.authenticated && typeof streak.currentStreak === "number" && streak.currentStreak > 0 ? (
+              <div
+                className="flex items-center gap-2 text-emerald-900 dark:text-emerald-100"
+                data-testid="badge-streak"
+              >
+                <Flame className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <span className="font-semibold" data-testid="text-streak-day">
+                  Day {streak.currentStreak}
+                </span>
+                <span className="text-sm text-emerald-800 dark:text-emerald-200">
+                  · {streakMeaningCopy(streak.currentStreak)}
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 text-emerald-900 dark:text-emerald-100" data-testid="badge-progress">
+                <Sunrise className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <span className="text-sm font-medium">You showed up for yourself today.</span>
+              </div>
+            )}
+            <p
+              className="text-sm text-emerald-800 dark:text-emerald-200 sm:ml-auto text-center sm:text-right"
+              data-testid="text-return-tomorrow"
+            >
+              Come back tomorrow for a 1-minute reset.
+            </p>
           </section>
         )}
 
