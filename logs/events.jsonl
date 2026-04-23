@@ -1,0 +1,4 @@
+{"type":"start_page_click","guestId":"te_8657","metadata":{},"ts":1776975128730}
+{"type":"first_tool_selected","guestId":"te_8657","metadata":{"tool":"calm"},"ts":1776975128774}
+{"type":"first_response_success","guestId":"te_8657","metadata":{"toolId":"box_breathing"},"ts":1776975128817}
+{"type":"streak_incremented","guestId":"te_8657","metadata":{"day":1},"ts":1776975128863}

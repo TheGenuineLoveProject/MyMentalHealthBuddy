@@ -1,0 +1,241 @@
+Perfect—now we move forward cleanly and safely from Phase C-lite.
+
+You’ve added the streak + return loop. Now we build the next highest-leverage layer without breaking anything.
+
+⸻
+
+🎯 NEXT STEP: Phase E-lite (Telemetry — minimal, surgical)
+
+Why this is next
+
+Right now you have:
+
+* ✅ working AI
+* ✅ first-use flow
+* ✅ streak loop
+
+But you don’t know what users actually do.
+
+Telemetry gives you:
+
+* where users drop off
+* which button gets clicked most
+* whether first response succeeds
+* if streak loop is working
+
+Without this, you’re optimizing blind.
+
+⸻
+
+🧠 RULES (stay within your system constraints)
+
+* DO NOT touch AI core (no responsePolicy changes)
+* DO NOT log sensitive user text
+* DO NOT restructure routes
+* ONLY add lightweight event logging
+
+⸻
+
+🔧 IMPLEMENTATION (exact, copy-paste safe)
+
+1. Extend your existing telemetry
+
+File:
+
+server/ai/aiTelemetry.mjs
+
+Add event logger
+
+export function logEvent({
+  type,
+  guestId = null,
+  metadata = {}
+}) {
+  try {
+    console.log(JSON.stringify({
+      type,
+      guestId,
+      metadata,
+      ts: Date.now()
+    }));
+  } catch (err) {
+    // fail silently (never break app)
+  }
+}
+
+⸻
+
+2. Track Start Page Clicks
+
+File:
+
+client/src/pages/Start.tsx
+
+On button click
+
+const track = async (type, metadata = {}) => {
+  try {
+    await fetch("/api/telemetry/event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-guest-id": guestId
+      },
+      body: JSON.stringify({ type, metadata })
+    });
+  } catch (err) {
+    // ignore errors
+  }
+};
+
+⸻
+
+Add to buttons
+
+onClick={() => {
+  track("first_tool_selected", { tool: "calm" });
+  handleCalm();
+}}
+
+Repeat for:
+
+* "think"
+* "understand"
+
+⸻
+
+3. Track Start Page Load
+
+useEffect(() => {
+  track("start_page_click");
+}, []);
+
+⸻
+
+4. Track First Response Success
+
+After AI response:
+
+if (response?.ok && response?.response?.tool) {
+  track("first_response_success", {
+    tool: response.response.tool?.id
+  });
+}
+
+⸻
+
+5. Track Streak Increment
+
+Right after checkin call:
+
+track("streak_incremented");
+
+⸻
+
+6. Add Backend Route
+
+File:
+
+server/routes/telemetry.mjs
+import express from "express";
+import { logEvent } from "../ai/aiTelemetry.mjs";
+const router = express.Router();
+router.post("/event", (req, res) => {
+  try {
+    const guestId = req.headers["x-guest-id"] || null;
+    const { type, metadata } = req.body || {};
+    if (!type) {
+      return res.status(400).json({ error: "Missing type" });
+    }
+    logEvent({
+      type,
+      guestId,
+      metadata
+    });
+    return res.json({ ok: true });
+  } catch (err) {
+    return res.status(500).json({ error: "Telemetry failed" });
+  }
+});
+export default router;
+
+⸻
+
+7. Register Route
+
+In:
+
+server/app.mjs
+import telemetryRoutes from "./routes/telemetry.mjs";
+app.use("/api/telemetry", telemetryRoutes);
+
+⸻
+
+✅ VERIFICATION (DO THIS)
+
+Restart:
+
+pkill -f "node server/app.mjs" || true
+npm run dev
+
+Then test:
+
+* Open /start
+* Click “Calm Me Down”
+* Trigger response
+
+👉 Watch console logs
+
+You should see:
+
+{"type":"start_page_click"}
+{"type":"first_tool_selected","metadata":{"tool":"calm"}}
+{"type":"first_response_success","metadata":{"tool":"box_breathing"}}
+{"type":"streak_incremented"}
+
+⸻
+
+🚀 WHAT THIS UNLOCKS
+
+Now you can answer:
+
+* Which button is used most?
+* Are users completing first responses?
+* Are streaks actually triggering?
+* Where are users dropping off?
+
+⸻
+
+📈 NEXT STEP AFTER THIS
+
+Say:
+
+👉 “optimize response safely”
+
+Then I’ll help you:
+
+* compress responses WITHOUT breaking AI system
+* adjust tone + structure safely
+* improve perceived intelligence + speed
+
+⸻
+
+⚡ STRATEGIC NOTE
+
+You are now doing what real high-performing products do:
+
+1. ship behavior
+2. measure behavior
+3. refine behavior
+
+Not:
+
+* overbuild
+* guess
+* hope it works
+
+⸻
+
+You’re in the execution phase now, not architecture phase.
+
+Let’s keep it tight, surgical, and compounding.

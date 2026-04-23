@@ -10,6 +10,35 @@ function ensureLogFile() {
         }
 }
 
+const EVENTS_LOG_PATH = path.join(process.cwd(), "logs", "events.jsonl");
+
+const ALLOWED_EVENT_TYPES = new Set([
+        "start_page_click",
+        "first_tool_selected",
+        "first_response_success",
+        "streak_incremented",
+        "paywall_shown",
+        "paywall_clicked",
+]);
+
+export function logEvent({ type, guestId = null, metadata = {} } = {}) {
+        try {
+                if (!type || !ALLOWED_EVENT_TYPES.has(type)) return;
+                const dir = path.dirname(EVENTS_LOG_PATH);
+                if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+                const safeMeta = metadata && typeof metadata === "object" ? metadata : {};
+                const line = JSON.stringify({
+                        type,
+                        guestId: guestId ? String(guestId).slice(0, 64) : null,
+                        metadata: safeMeta,
+                        ts: Date.now(),
+                });
+                fs.appendFileSync(EVENTS_LOG_PATH, line + "\n");
+        } catch {
+                // fail silently — telemetry must never break the app
+        }
+}
+
 function estimateCost(model, inputTokens = 0, outputTokens = 0) {
         // Rough pricing (adjust later if needed)
         const pricing = {

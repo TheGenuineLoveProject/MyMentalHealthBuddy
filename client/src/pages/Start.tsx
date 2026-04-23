@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
 
@@ -63,12 +63,31 @@ function getOrCreateGuestId(): string {
   }
 }
 
+function track(type: string, metadata: Record<string, unknown> = {}): void {
+  try {
+    void fetch("/api/telemetry/event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-guest-id": getOrCreateGuestId(),
+      },
+      body: JSON.stringify({ type, metadata }),
+    }).catch(() => {});
+  } catch {
+    /* never break UI on telemetry */
+  }
+}
+
 export default function Start() {
   const [loading, setLoading] = useState<string | null>(null);
   const [result, setResult] = useState<ChatResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [crisis, setCrisis] = useState(false);
   const [streak, setStreak] = useState<StreakResult>(null);
+
+  useEffect(() => {
+    track("start_page_click");
+  }, []);
 
   async function recordStreak(toolId: string) {
     try {
@@ -81,8 +100,12 @@ export default function Start() {
         body: JSON.stringify({ toolId }),
       });
       const data = await res.json();
-      if (res.ok) setStreak(data);
-      else setStreak({ authenticated: false });
+      if (res.ok) {
+        setStreak(data);
+        if (data?.incremented) track("streak_incremented", { day: data?.currentStreak });
+      } else {
+        setStreak({ authenticated: false });
+      }
     } catch {
       setStreak({ authenticated: false });
     }
@@ -94,6 +117,7 @@ export default function Start() {
     setResult(null);
     setCrisis(false);
     setStreak(null);
+    track("first_tool_selected", { tool: buttonId });
     try {
       const res = await fetch("/api/ai/chat", {
         method: "POST",
@@ -116,6 +140,7 @@ export default function Start() {
       }
       setResult(data);
       const toolId = data?.response?.tool?.tool?.id ?? buttonId;
+      track("first_response_success", { button: buttonId, toolId });
       void recordStreak(toolId);
     } catch {
       setError("Connection problem. Please check your connection and try again.");

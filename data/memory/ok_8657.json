@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I feel anxious right now"
+  },
+  {
+    "role": "assistant",
+    "content": "I'm really sorry to hear that you're feeling this way. It’s okay to feel anxious sometimes. Let’s take a moment to ground ourselves together. \n\nHow about we try a short breathing exercise called box breathing? It can help bring a sense of calm. \n\nLet’s do it together:\n\n1. Inhale deeply through your nose for a count of 4... (1, 2, 3, 4)\n2. Hold that breath for a count of 4... (1, 2, 3, 4)\n3. Now, exhale slowly through your mouth for a count of 4... (1, 2, 3, 4)\n4. Hold that breath again for a count of 4... (1, 2, 3, 4)\n\nGreat job! You can repeat this a few times if you’d like. Remember, it’s okay to take things one step at a time. What’s one small thing you can do right now to care for yourself?"
+  }
+]
