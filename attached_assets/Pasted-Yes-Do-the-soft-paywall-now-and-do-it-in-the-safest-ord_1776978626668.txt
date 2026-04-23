@@ -1,0 +1,254 @@
+Yes. Do the soft paywall now, and do it in the safest order.
+
+Decision
+
+Implement only this slice:
+
+1. server-side paywall policy
+2. usage counter
+3. attach paywall hint to successful non-crisis responses
+4. render inline upgrade card on /start
+5. track paywall_shown and paywall_clicked
+
+Do not:
+
+* touch crisis behavior
+* gate first relief
+* change provider/orchestrator logic
+* interrupt active tool execution
+
+⸻
+
+Exact implementation sequence
+
+1) Create server/ai/paywallPolicy.mjs
+
+export function shouldShowPaywall({
+  isCrisis = false,
+  successfulSessions = 0,
+  dailySessions = 0,
+  requestedPremium = false
+}) {
+  if (isCrisis) return false;
+  if (requestedPremium) return true;
+  if (successfulSessions >= 3) return true;
+  if (dailySessions >= 3) return true;
+  return false;
+}
+export function getPaywallReason({
+  successfulSessions = 0,
+  dailySessions = 0,
+  requestedPremium = false
+}) {
+  if (requestedPremium) return "premium_feature";
+  if (successfulSessions >= 3) return "value_proven";
+  if (dailySessions >= 3) return "daily_limit";
+  return null;
+}
+
+⸻
+
+2) Create server/utils/usageCounter.mjs
+
+import fs from "fs";
+import path from "path";
+const DIR = path.resolve("data/usage");
+function ensureDir() {
+  if (!fs.existsSync(DIR)) fs.mkdirSync(DIR, { recursive: true });
+}
+function sanitize(id) {
+  return String(id || "anonymous").replace(/[^a-zA-Z0-9_-]/g, "_");
+}
+function getFile(id) {
+  return path.join(DIR, `${sanitize(id)}.json`);
+}
+export function readUsage(id) {
+  try {
+    ensureDir();
+    const file = getFile(id);
+    if (!fs.existsSync(file)) {
+      return {
+        successfulSessions: 0,
+        dailySessions: 0,
+        lastDay: new Date().toISOString().slice(0, 10)
+      };
+    }
+    const data = JSON.parse(fs.readFileSync(file, "utf-8"));
+    const today = new Date().toISOString().slice(0, 10);
+    if (data.lastDay !== today) {
+      data.dailySessions = 0;
+      data.lastDay = today;
+    }
+    return data;
+  } catch {
+    return {
+      successfulSessions: 0,
+      dailySessions: 0,
+      lastDay: new Date().toISOString().slice(0, 10)
+    };
+  }
+}
+export function incrementSuccessfulSession(id) {
+  const data = readUsage(id);
+  data.successfulSessions += 1;
+  data.dailySessions += 1;
+  ensureDir();
+  fs.writeFileSync(getFile(id), JSON.stringify(data, null, 2));
+  return data;
+}
+
+⸻
+
+3) Update server/routes/ai.mjs
+
+Add imports:
+
+import { incrementSuccessfulSession } from "../utils/usageCounter.mjs";
+import { shouldShowPaywall, getPaywallReason } from "../ai/paywallPolicy.mjs";
+
+Then, after a successful non-crisis result and before res.json(...), add:
+
+const identity =
+  req.dbUserId ||
+  req.headers["x-guest-id"] ||
+  "anonymous";
+const isCrisis = Boolean(result?.response?.isCrisis);
+if (result?.ok && !isCrisis && result?.response?.reply) {
+  const usage = incrementSuccessfulSession(identity);
+  result.response.paywall = {
+    show: shouldShowPaywall({
+      isCrisis,
+      successfulSessions: usage.successfulSessions,
+      dailySessions: usage.dailySessions
+    }),
+    reason: getPaywallReason({
+      successfulSessions: usage.successfulSessions,
+      dailySessions: usage.dailySessions
+    })
+  };
+}
+
+⸻
+
+4) Update client/src/pages/Start.tsx
+
+After rendering a successful response, add the inline paywall card:
+
+{response?.paywall?.show && (
+  <div className="mt-6 rounded-xl border p-4">
+    <h3 className="font-semibold">Keep your momentum going</h3>
+    <p className="mt-2 text-sm opacity-80">
+      Unlock deeper tools, more personalized support, and longer-term insights when you’re ready.
+    </p>
+    <div className="mt-4 flex gap-3">
+      <button
+        className="rounded-lg px-4 py-2 border"
+        onClick={() => track("paywall_clicked", { reason: response.paywall.reason })}
+      >
+        Unlock Pro
+      </button>
+      <button className="rounded-lg px-4 py-2">
+        Keep using free tools
+      </button>
+    </div>
+  </div>
+)}
+
+If your response is nested, use the real path from your component, for example response?.response?.paywall?.show.
+
+Also, when the paywall appears, track it:
+
+if (data?.response?.paywall?.show) {
+  track("paywall_shown", {
+    reason: data.response.paywall.reason
+  });
+}
+
+⸻
+
+Exact shell commands
+
+mkdir -p data/usage
+touch server/ai/paywallPolicy.mjs
+touch server/utils/usageCounter.mjs
+npm run dev
+
+⸻
+
+Verification commands
+
+Use straight apostrophes only.
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat -H "Content-Type: application/json" -H "x-guest-id: paywalltest1" -d '{"message":"I feel anxious"}'
+curl -X POST http://0.0.0.0:5000/api/ai/chat -H "Content-Type: application/json" -H "x-guest-id: paywalltest1" -d '{"message":"I feel overwhelmed"}'
+curl -X POST http://0.0.0.0:5000/api/ai/chat -H "Content-Type: application/json" -H "x-guest-id: paywalltest1" -d '{"message":"I keep overthinking"}'
+
+Expected:
+
+* first response: paywall.show = false
+* second response: usually still false
+* third successful non-crisis response: paywall.show = true
+
+Crisis check:
+
+curl -X POST http://0.0.0.0:5000/api/ai/chat -H "Content-Type: application/json" -H "x-guest-id: paywalltest2" -d '{"message":"I want to hurt myself"}'
+
+Expected:
+
+* crisis response
+* no paywall
+
+⸻
+
+Replit AI prompt
+
+Paste this exactly:
+
+Implement soft paywall safely without changing working AI behavior.
+Goals:
+1. Show upgrade only after repeated value
+2. Never show paywall on crisis
+3. Never interrupt the first successful relief experience
+4. Keep core free tools available
+Constraints:
+- Preserve all working AI routes, crisis behavior, telemetry, memory, profile, summary, provider, and tool execution
+- Smallest safe changes only
+- No changes to responsePolicy/provider logic unless strictly necessary
+- Keep HTTP transport in server/routes
+- Keep AI-domain decision helpers in server/ai
+- Keep low-level usage storage helper in server/utils
+Implement:
+A. Add server/ai/paywallPolicy.mjs
+B. Add server/utils/usageCounter.mjs
+C. After successful non-crisis responses in server/routes/ai.mjs, increment usage and attach:
+   response.paywall = { show, reason }
+D. On /start UI, render a soft inline upgrade card only when response.paywall.show === true
+E. Add telemetry events for:
+   - paywall_shown
+   - paywall_clicked
+Before edits return:
+- exact files to edit
+- exact rollback plan
+- verification checklist
+After edits verify:
+- first successful session shows no paywall
+- third successful non-crisis session shows paywall
+- crisis flow never shows paywall
+- existing / and /start still work
+
+⸻
+
+Best next move after this
+
+Once paywall is working, the next highest-value move is:
+
+build the launch content pack
+
+That gives you:
+
+* short-form posts
+* blog drafts
+* newsletter starter
+* shareable relief content
+
+Say build the exact launch content pack and I’ll give you the paste-ready content system.
