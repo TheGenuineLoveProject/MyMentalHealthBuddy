@@ -89,6 +89,7 @@ export default function Start() {
   }
 
   const tool = result?.response?.tool ?? null;
+  const reply = result?.response?.reply ?? null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
@@ -181,6 +182,20 @@ export default function Start() {
               More crisis resources <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
+        )}
+
+        {reply && !crisis && (
+          <section
+            className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 mb-4 shadow-sm"
+            data-testid="panel-reply"
+          >
+            <p
+              className="text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap"
+              data-testid="text-reply"
+            >
+              {reply}
+            </p>
+          </section>
         )}
 
         {tool && !crisis && (
