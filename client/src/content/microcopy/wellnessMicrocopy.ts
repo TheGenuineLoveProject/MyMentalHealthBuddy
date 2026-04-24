@@ -972,3 +972,37 @@ export const MICROCOPY = {
     journal: "Private journaling prompts for clarity, calm, and self-respect.",
   },
 } as const;
+
+/**
+ * BUDDY PANEL COMPANION COPY (v2.2)
+ *
+ * Single source of truth for the title + subtitle strings rendered by
+ * <BuddyPanel surface=... /> on calm work surfaces. Centralizing this copy:
+ *   - keeps tone consistent across pages,
+ *   - lets editors update phrasing in one place,
+ *   - makes the strings searchable / unit-testable / i18n-ready.
+ *
+ * Keys MATCH the `surface` prop passed to BuddyPanel (used for telemetry
+ * bucketing). Add a new entry whenever a new surface adopts the panel.
+ *
+ * NOT included: /start. Start.tsx is in the strict-protected set; its
+ * dynamic title is computed contextually (return-user, first-line, etc.)
+ * and intentionally lives next to that logic.
+ *
+ * COPY RULES (mirrors LOCKED_CANONICAL_PHRASES):
+ *   - Inviting, never commanding.
+ *   - Short — typically 2 to 8 words per line.
+ *   - Always frames Buddy as company, not authority.
+ */
+export const BUDDY_PANEL_COPY = {
+  journal: {
+    title: "Buddy is here while you write",
+    subtitle: "No pressure — just gentle company.",
+  },
+  mood: {
+    title: "Buddy is here with you",
+    subtitle: "Take a breath. There are no wrong answers.",
+  },
+} as const;
+
+export type BuddyPanelSurfaceKey = keyof typeof BUDDY_PANEL_COPY;

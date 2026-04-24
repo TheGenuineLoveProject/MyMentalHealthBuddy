@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { PROMPT_SETS } from "./PromptLibrary";
 import BuddyPanel from "@/components/avatar/BuddyPanel";
+import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
 
 const CATEGORIES = [
   { key: "clarity", label: "Clarity" },
@@ -30,8 +31,8 @@ export default function JournalPage() {
           no AI, no profile/streak/paywall logic per BuddyPanel contract. */}
       <BuddyPanel
         state="calm"
-        title="Buddy is here while you write"
-        subtitle="No pressure — just gentle company."
+        title={BUDDY_PANEL_COPY.journal.title}
+        subtitle={BUDDY_PANEL_COPY.journal.subtitle}
         surface="journal"
         size={88}
         className="mb-6"

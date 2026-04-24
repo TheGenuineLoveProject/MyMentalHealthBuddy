@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import BuddyPanel from "@/components/avatar/BuddyPanel";
+import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
 
 const STATE_DIMENSIONS = [
   { key: "energy", label: "Energy", hint: "low → steady → high" },
@@ -56,8 +57,8 @@ export default function StatePage() {
           profile/streak/paywall logic per BuddyPanel contract. */}
       <BuddyPanel
         state="calm"
-        title="Buddy is here with you"
-        subtitle="Take a breath. There are no wrong answers."
+        title={BUDDY_PANEL_COPY.mood.title}
+        subtitle={BUDDY_PANEL_COPY.mood.subtitle}
         surface="mood"
         size={88}
         className="mb-6"
