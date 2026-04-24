@@ -84,3 +84,9 @@
 {"type":"buddy_panel_viewed","guestId":"g_modgrrwk_9qbzr3","metadata":{"surface":"start","state":"calm"},"ts":1777068616200}
 {"type":"start_page_click","guestId":"g_modgrrwk_9qbzr3","metadata":{},"ts":1777068616203}
 {"type":"buddy_accessibility_ready","guestId":"g_modgrrwk_9qbzr3","metadata":{},"ts":1777068616204}
+{"type":"buddy_panel_viewed","guestId":"g_modileud_ydr8d3","metadata":{"surface":"start","state":"calm"},"ts":1777071678568}
+{"type":"start_page_click","guestId":"g_modileud_ydr8d3","metadata":{},"ts":1777071678570}
+{"type":"buddy_accessibility_ready","guestId":"g_modileud_ydr8d3","metadata":{},"ts":1777071678571}
+{"type":"buddy_panel_viewed","guestId":"g_modileud_ydr8d3","metadata":{"surface":"start","state":"calm"},"ts":1777072091319}
+{"type":"start_page_click","guestId":"g_modileud_ydr8d3","metadata":{},"ts":1777072091320}
+{"type":"buddy_accessibility_ready","guestId":"g_modileud_ydr8d3","metadata":{},"ts":1777072091323}

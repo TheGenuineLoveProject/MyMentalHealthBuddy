@@ -5,6 +5,7 @@ import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star,
 import "../styles/canva-landing.css";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
+import BuddyAvatar from "../components/avatar/BuddyAvatar";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -329,11 +330,12 @@ export default function CanvaLanding() {
           <div className="flex items-center justify-between h-[80px] sm:h-[92px] lg:h-[108px]">
             <Link href="/">
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] lg:w-[56px] lg:h-[56px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl overflow-hidden" style={{ boxShadow: '0 2px 12px var(--glp-sage-deep-20)' }}>
-                  <img 
-                    src="/brand/mmhb-icon.svg" 
-                    alt="MyMentalHealthBuddy" 
-                    className="w-full h-full object-contain"
+                <div className="relative w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] lg:w-[56px] lg:h-[56px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 12px var(--glp-sage-deep-20)' }}>
+                  <BuddyAvatar
+                    state="calm"
+                    size={56}
+                    className="w-full h-full"
+                    data-testid="header-buddy-avatar"
                   />
                 </div>
                 <div className="flex flex-col leading-snug">
@@ -456,7 +458,7 @@ export default function CanvaLanding() {
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.06] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
               Your Coach. Your Mentor.
               <br />
-              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-gold), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep) 0%, var(--glp-gold-dark) 55%, var(--glp-sage-deep) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 Your Wisest Friend.
               </span>
             </h1>

@@ -3618,11 +3618,17 @@ a, a:visited {
 
 /* --- ANIMATION UTILITIES --- */
 
+/* Safety net: opacity:1 base ensures content is ALWAYS visible even if
+   the keyframe never fires (slow first paint, broken keyframe, etc.).
+   The animation still runs; it briefly dips to opacity:0 from the keyframe
+   then returns to 1 — but content can never be permanently invisible. */
 .animate-fade-in-up {
+  opacity: 1;
   animation: fadeInUp 0.5s ease-out forwards;
 }
 
 .animate-fade-in-scale {
+  opacity: 1;
   animation: fadeInScale 0.4s ease-out forwards;
 }
 
