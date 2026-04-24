@@ -191,8 +191,10 @@ export default function BuddyAvatar({
 
         {/* Ambient aura — sits behind everything; gives a soft "alive" glow
             that follows the heart color so it adapts per state. Decorative.
-            v1.13: bigger ellipse so the halo extends past the figure edge. */}
-        <ellipse cx="100" cy="128" rx="106" ry="124" fill="url(#buddyAura)" aria-hidden="true" />
+            v1.13: bigger ellipse so the halo extends past the figure edge.
+            v1.14: className "buddy__aura" enables a gentle breathing pulse
+            (state-class gated; disabled for crisis/steady — see CSS). */}
+        <ellipse className="buddy__aura" cx="100" cy="128" rx="106" ry="124" fill="url(#buddyAura)" aria-hidden="true" />
 
         {/* Antenna with soft glow tip + base mount + outer halo ring */}
         <g className="buddy__antenna">
@@ -402,7 +404,7 @@ export default function BuddyAvatar({
             Sits between the figure and the dark shadow so Buddy reads as
             gently floating on a warm halo rather than sitting flat.
             v1.13: bigger ellipse + boosted opacity for visibility. */}
-        <ellipse cx="100" cy="232" rx="74" ry="13" fill="url(#buddyFloorGlow)" aria-hidden="true" />
+        <ellipse className="buddy__floor" cx="100" cy="232" rx="74" ry="13" fill="url(#buddyFloorGlow)" aria-hidden="true" />
 
         {/* Base / shadow — v1.7 explicit aria-hidden for defensive a11y. */}
         <ellipse cx="100" cy="234" rx="58" ry="6" fill="#0a0f0e" opacity="0.18" className="buddy__shadow" aria-hidden="true" />

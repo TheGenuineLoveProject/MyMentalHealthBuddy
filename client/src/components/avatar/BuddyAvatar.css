@@ -72,14 +72,61 @@
   transform-box: fill-box;
 }
 
-/* idle — gentle baseline breath (calm) */
+/* idle — gentle baseline breath (calm).
+   v1.14: amplitude bumped from 1.5px → 4px and scale 1.015 → 1.025 so
+   Buddy visibly "breathes" instead of looking static. v1.13's micro-motion
+   was too subtle on light page surfaces — users read it as plain/flat.
+   The cadence (5200ms) is still well within calm-presence range and is
+   gentler than the anxious-state breathing animation (4200ms / -3px). */
 .buddy--motion-idle .buddy__body,
 .buddy--motion-idle .buddy__head {
   animation: buddyIdle 5200ms ease-in-out infinite;
 }
 @keyframes buddyIdle {
   0%, 100% { transform: translateY(0) scale(1); }
-  50%      { transform: translateY(-1.5px) scale(1.015); }
+  50%      { transform: translateY(-4px) scale(1.025); }
+}
+
+/* v1.14 — Aura breathing pulse. Decorative outer halo softly expands +
+   contracts with a slower cadence than the body so the two motions
+   layer instead of locking. Gated to NON-steady states so crisis
+   stays motionless (safety contract preserved). */
+.buddy:not(.buddy--motion-steady) .buddy__aura {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyAuraBreathe 6400ms ease-in-out infinite;
+}
+@keyframes buddyAuraBreathe {
+  0%, 100% { transform: scale(1);    opacity: 0.55; }
+  50%      { transform: scale(1.04); opacity: 0.72; }
+}
+
+/* v1.14 — Floor glow gentle pulse. Synced with aura so the "halo" and
+   the "floor pool" feel like one breathing system. Crisis: motionless. */
+.buddy:not(.buddy--motion-steady) .buddy__floor {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyFloorBreathe 6400ms ease-in-out infinite;
+}
+@keyframes buddyFloorBreathe {
+  0%, 100% { transform: scaleX(1);    opacity: 0.65; }
+  50%      { transform: scaleX(1.06); opacity: 0.85; }
+}
+
+/* v1.14 — Antenna outer halo "ping". The first <circle> in
+   .buddy__antenna is the outer fuzzy halo (r=14, see BuddyAvatar.tsx
+   v1.13 comment). It gently expands + fades on a 2.6s cadence so
+   Buddy's antenna feels like an alive sensor, not a static prop.
+   Gated to NON-steady states. */
+.buddy:not(.buddy--motion-steady) .buddy__antenna circle:nth-of-type(1) {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyAntennaPing 2600ms ease-out infinite;
+}
+@keyframes buddyAntennaPing {
+  0%       { transform: scale(0.85); opacity: 0.85; }
+  70%      { transform: scale(1.35); opacity: 0.20; }
+  100%     { transform: scale(1.55); opacity: 0;    }
 }
 
 /* slow_glow — gentle sway with deepened heart glow (sad) */
