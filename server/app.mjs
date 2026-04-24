@@ -243,6 +243,8 @@ const EXTENDED_ROUTES = [
   { mount: "/api/reflection",    file: "./routes/reflection.mjs",    auth: "adult" },
   { mount: "/api/states",        file: "./routes/states.mjs" },
   { mount: "/api/prompts",       file: "./routes/prompts.mjs",       auth: "optional" },
+  // Forever-companion metacognition mirror — read-only aggregator
+  { mount: "/api/growth",        file: "./routes/growth-journey.mjs",auth: "optional" },
 ];
 
 const mountedExtended = [];
