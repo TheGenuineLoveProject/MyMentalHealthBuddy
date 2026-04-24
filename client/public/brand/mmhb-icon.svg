@@ -1,11 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <style type="text/css"><![CDATA[
-      /* Heart-core breathing — anchored at the figure's heart */
-      .breathe { transform-origin: 256px 298px; animation: breathe 5.2s ease-in-out infinite; }
+      /* Heart-core breathing — anchored at the figure's heart.
+         Chains a transform/opacity breath with an independent
+         filter-luminance pulse (drop-shadow warmth + slight
+         brightness lift) for a subtle inner-light feel. */
+      .breathe { transform-origin: 256px 298px;
+                 animation: breathe 5.2s ease-in-out infinite,
+                            heartGlow 5.2s ease-in-out infinite; }
       @keyframes breathe {
         0%, 100% { transform: scale(1);    opacity: 0.96; }
         50%      { transform: scale(1.06); opacity: 1.00; }
+      }
+      @keyframes heartGlow {
+        0%, 100% { filter: drop-shadow(0 0 6px  rgba(255, 232, 168, 0.40)) brightness(1);    }
+        50%      { filter: drop-shadow(0 0 14px rgba(255, 216, 120, 0.70)) brightness(1.06); }
       }
       /* Soft halo bloom around head */
       .halo-pulse { transform-origin: 256px 140px; animation: haloPulse 7s ease-in-out infinite; }

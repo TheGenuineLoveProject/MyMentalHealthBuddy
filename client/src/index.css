@@ -6558,3 +6558,78 @@ h3, .h3, .heading-3 {
   .card-aurora::before,
   .card-aurora:hover { transition: none !important; animation: none !important; transform: none !important; }
 }
+
+/* =====================================================================
+   Visual polish v4 — dark-mode aurora, text-aurora, selection, focus
+   ===================================================================== */
+
+/* --- Dark mode: deeper, richer aurora -------------------------------- */
+.dark {
+  --glp-aurora-1: rgba(56, 220, 168, 0.62);   /* brighter sage at night */
+  --glp-aurora-2: rgba(220, 168, 60,  0.55);  /* warmer amber */
+  --glp-aurora-3: rgba(140, 116, 220, 0.55);  /* fuller violet */
+  --glp-aurora-4: rgba(232, 156, 132, 0.50);  /* lifted rose */
+  --glp-aurora-glow: 0 0 40px rgba(56, 220, 168, 0.22),
+                     0 0 80px rgba(140, 116, 220, 0.16);
+}
+
+/* --- Text utility: aurora gradient for accent words ------------------ */
+.text-aurora {
+  background: var(--glp-aurora-linear, linear-gradient(115deg,
+    rgba(30,200,144,0.95) 0%,
+    rgba(190,134,34,0.95) 38%,
+    rgba(108,88,184,0.90) 72%,
+    rgba(208,134,114,0.90) 100%));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  background-size: 200% 100%;
+  animation: textAuroraDrift 12s ease-in-out infinite;
+}
+@keyframes textAuroraDrift {
+  0%, 100% { background-position:   0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* --- Branded text selection ----------------------------------------- */
+::selection {
+  background: rgba(30, 200, 144, 0.32);
+  color: var(--glp-sage-deep, #062a2a);
+  text-shadow: none;
+}
+::-moz-selection {
+  background: rgba(30, 200, 144, 0.32);
+  color: var(--glp-sage-deep, #062a2a);
+}
+.dark ::selection {
+  background: rgba(56, 220, 168, 0.40);
+  color: var(--glp-paper, #fcf6ea);
+}
+.dark ::-moz-selection {
+  background: rgba(56, 220, 168, 0.40);
+  color: var(--glp-paper, #fcf6ea);
+}
+
+/* --- Focus ring upgrade: aurora glow on top of accessible outline --- */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--glp-sage, #1ec890);
+  outline-offset: 2px;
+  box-shadow:
+    0 0 0 4px rgba(30, 200, 144, 0.14),
+    0 0 18px rgba(190, 134, 34, 0.20),
+    0 0 28px rgba(108, 88, 184, 0.16);
+  transition: box-shadow 180ms ease, outline-color 180ms ease;
+}
+.dark :where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline-color: rgba(56, 220, 168, 0.95);
+  box-shadow:
+    0 0 0 4px rgba(56, 220, 168, 0.20),
+    0 0 22px rgba(220, 168, 60, 0.22),
+    0 0 32px rgba(140, 116, 220, 0.20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-aurora { animation: none !important; }
+  :where(button, a, input, select, textarea, [tabindex]):focus-visible { transition: none !important; }
+}
