@@ -32,6 +32,7 @@ export default function JournalPage() {
       <BuddyPanel
         state="calm"
         title={BUDDY_PANEL_COPY.journal.title}
+        titleAs="p"
         subtitle={BUDDY_PANEL_COPY.journal.subtitle}
         surface="journal"
         size={88}

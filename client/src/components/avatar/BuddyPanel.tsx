@@ -31,6 +31,16 @@ export interface BuddyPanelProps {
   state: BuddyState;
   /** Headline copy near the avatar. Optional — omit for surfaces that need only the avatar. */
   title?: string;
+  /**
+   * Element used to render `title`. Defaults to `"h2"` (preserves /start hero
+   * semantics where Buddy IS the page heading). Pass `"p"` on companion
+   * placements where the host page already owns its primary `<h1>` so the
+   * panel does not inject a competing heading into the document outline
+   * (work-surface adopters: /journal, /state, /pathways/onboarding).
+   * v2.4 a11y sweep — keeps the page's own h1 as the unambiguous primary
+   * heading without changing /start (default unchanged).
+   */
+  titleAs?: "h2" | "p";
   /** Subtitle string. For richer subtitle content (live regions, formatted copy), use `children` instead. */
   subtitle?: string;
   /** Surface identifier for telemetry bucketing (e.g. "start", "onboarding", "journal"). */
@@ -46,6 +56,7 @@ export interface BuddyPanelProps {
 export default function BuddyPanel({
   state,
   title,
+  titleAs = "h2",
   subtitle,
   surface,
   size = 140,
@@ -76,13 +87,22 @@ export default function BuddyPanel({
         data-testid={`${testId}-avatar`}
       />
 
-      {title && (
+      {title && titleAs === "h2" && (
         <h2
           className="mt-4 text-base font-semibold text-slate-800 dark:text-slate-100"
           data-testid={`${testId}-title`}
         >
           {title}
         </h2>
+      )}
+
+      {title && titleAs === "p" && (
+        <p
+          className="mt-4 text-base font-semibold text-slate-800 dark:text-slate-100"
+          data-testid={`${testId}-title`}
+        >
+          {title}
+        </p>
       )}
 
       {subtitle && (

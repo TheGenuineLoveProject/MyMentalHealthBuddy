@@ -70,6 +70,7 @@ export default function GoalOnboarding() {
       <BuddyPanel
         state="calm"
         title={BUDDY_PANEL_COPY.onboarding.title}
+        titleAs="p"
         subtitle={BUDDY_PANEL_COPY.onboarding.subtitle}
         surface="onboarding"
         size={88}

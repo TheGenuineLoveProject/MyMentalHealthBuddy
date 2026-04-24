@@ -44,3 +44,4 @@
 {"id":"safe_1777012384982_p7dv6h","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T06:33:04.982Z"}
 {"id":"safe_1777013324878_31nlta","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T06:48:44.878Z"}
 {"id":"safe_1777015027600_qqkj4v","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T07:17:07.600Z"}
+{"id":"safe_1777015294930_h59ss8","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T07:21:34.930Z"}

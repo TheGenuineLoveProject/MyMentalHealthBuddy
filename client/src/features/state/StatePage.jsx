@@ -58,6 +58,7 @@ export default function StatePage() {
       <BuddyPanel
         state="calm"
         title={BUDDY_PANEL_COPY.mood.title}
+        titleAs="p"
         subtitle={BUDDY_PANEL_COPY.mood.subtitle}
         surface="mood"
         size={88}
