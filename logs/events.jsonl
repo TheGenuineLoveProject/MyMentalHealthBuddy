@@ -57,3 +57,6 @@
 {"type":"buddy_panel_viewed","guestId":"g_mocofoq8_pao2u3","metadata":{"surface":"start","state":"calm"},"ts":1777022569310}
 {"type":"start_page_click","guestId":"g_mocofoq8_pao2u3","metadata":{},"ts":1777022569314}
 {"type":"buddy_accessibility_ready","guestId":"g_mocofoq8_pao2u3","metadata":{},"ts":1777022569316}
+{"type":"buddy_panel_viewed","guestId":"g_mocq6ami_b6wv8m","metadata":{"surface":"start","state":"calm"},"ts":1777023944014}
+{"type":"start_page_click","guestId":"g_mocq6ami_b6wv8m","metadata":{},"ts":1777023944016}
+{"type":"buddy_accessibility_ready","guestId":"g_mocq6ami_b6wv8m","metadata":{},"ts":1777023944017}
