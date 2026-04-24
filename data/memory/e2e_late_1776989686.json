@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I don't know why I'm late"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you're feeling a bit unsettled about being late. That’s completely understandable; it can be frustrating not to have clarity. \n\nTake a moment to breathe deeply and ground yourself. You might try reflecting on what events led to this moment—was it unexpected traffic, a last-minute task, or something else? \n\nAs a next step, consider jotting down the main factors that contributed to your lateness. This might help you gain some clarity and feel more in control moving forward."
+  }
+]

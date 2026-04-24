@@ -85,6 +85,30 @@ const RELATIONSHIP_RE = /partner|spouse|husband|wife|boyfriend|girlfriend|friend
 const VALUES_RE = /meaning|purpose|values|who am i|identity|direction/i;
 // Input-side loop detection (in addition to profile.behavior_loops trigger below)
 const LOOP_RE = /\balways\b|every ?time|same\s+pattern|same\s+cycle|keeps?\s+happening|happens?\s+again/i;
+// Ambiguous distress: user signals "something is off" without naming the feeling.
+// Two intents are split:
+//   • Feeling-label ambiguity → emotional_processing (feel → locate → need)
+//     "what's wrong", "what to feel/think/say", "why I feel/am [emotional]"
+//   • Action paralysis → self_regulation (chunking → small next step)
+//     "what to do", "where to start", "how to start"
+// The "why I'm" branch requires an emotional predicate (sad/anxious/upset/etc.
+// or "feeling/like this/this way") to avoid false-positives on practical
+// uncertainty like "I don't know why I'm late".
+const DONT_KNOW_FRAG = "(?:don'?t|dont|do\\s+not|have\\s+no\\s+idea|no\\s+idea)";
+const EMOTION_PREDICATE_FRAG =
+        "(?:feeling|sad|anxious|upset|angry|crying|empty|numb|overwhelmed|so\\s+\\w+|like\\s+this|this\\s+way)";
+const AMBIGUOUS_FEELING_RE = new RegExp(
+        `${DONT_KNOW_FRAG}\\s+(?:even\\s+)?(?:know|tell)?\\s*` +
+                `(?:what(?:'s|s|\\s+is)?\\s+wrong|` +
+                `what\\s+to\\s+(?:feel|think|say)|` +
+                `why\\s+i(?:'m|\\s+am|\\s+feel)\\s+${EMOTION_PREDICATE_FRAG})`,
+        "i",
+);
+const AMBIGUOUS_ACTION_RE = new RegExp(
+        `${DONT_KNOW_FRAG}\\s+(?:even\\s+)?(?:know|tell)?\\s*` +
+                `(?:what\\s+to\\s+do|where\\s+to\\s+start|how\\s+to\\s+start|where\\s+to\\s+begin)`,
+        "i",
+);
 
 /**
  * @returns {string[]} priority-sorted, deduped list of module ids (capped at MAX_MODULES).
@@ -103,6 +127,8 @@ export function selectModules({ profile = null, input = "" } = {}) {
         if (RELATIONSHIP_RE.test(text)) candidates.push("relationship");
         if (VALUES_RE.test(text)) candidates.push("growth");
         if (LOOP_RE.test(text)) candidates.push("loop_detection");
+        if (AMBIGUOUS_FEELING_RE.test(text)) candidates.push("emotional_processing");
+        if (AMBIGUOUS_ACTION_RE.test(text)) candidates.push("self_regulation");
 
         // Profile-driven (long-term signals)
         if (Array.isArray(profile?.behavior_loops) && profile.behavior_loops.length > 0) {

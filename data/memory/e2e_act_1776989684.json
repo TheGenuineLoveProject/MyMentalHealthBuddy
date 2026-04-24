@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I don't know what to do"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you’re feeling overwhelmed. Let’s take a moment to sort through this together. \n\nFirst, can you name the heaviest task on your mind right now?"
+  }
+]
