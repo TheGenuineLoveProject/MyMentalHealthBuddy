@@ -1,0 +1,102 @@
+Upgrade MMHB Buddy Engine to v1.2: polished visual avatar states only.
+
+STRICT RULES:
+- Do not modify /api/ai/chat.
+- Do not modify server/routes/buddy.mjs.
+- Do not modify orchestrator, provider, memory, profile, summary, telemetry, crisis logic.
+- Do not replace /start.
+- Do not delete files.
+- Only improve BuddyAvatar visual quality and state animations.
+
+Target file:
+client/src/components/avatar/BuddyAvatar.tsx
+
+Goal:
+Make Buddy feel like the official emotional interface of MyMentalHealthBuddy:
+- calm
+- safe
+- warm
+- loving
+- intelligent
+- non-clinical
+- non-threatening
+
+Preserve visual DNA:
+- white rounded robot body
+- black expressive face screen
+- soft green eyes
+- glowing heart
+- circular base
+- gentle desk-companion presence
+
+Add or improve these visual states:
+
+1. calm
+- soft green curved eyes
+- slow heart glow
+- gentle idle breathing
+
+2. sad
+- lowered gentle eyes
+- slower purple/soft heart glow
+- reduced movement
+
+3. anxious
+- slightly brighter eyes
+- visible breathing pulse
+- heart pulses slowly, not alarmingly
+
+4. overwhelmed
+- dimmed eyes
+- grounding pulse from heart outward
+- minimal movement
+
+5. encouraged
+- brighter eyes
+- warm heart glow
+- subtle lift animation
+
+6. crisis
+- stable calm eyes
+- steady green heart
+- no flashing
+- no alarming red animation
+- emotionally safe and grounded
+
+7. celebrate
+- tiny sparkle animation
+- warm gold heart accent
+- not overstimulating
+
+Accessibility:
+- Respect prefers-reduced-motion.
+- No flashing.
+- No seizure-risk animation.
+- Keep contrast readable.
+- Keep animations slow and calming.
+
+Implementation:
+- Use React + CSS inside the component or existing styling pattern.
+- No external packages.
+- No fetch calls.
+- No business logic.
+- No AI logic.
+- Keep props stable:
+  state
+  size optional
+
+After changes, verify:
+npm run dev
+
+Then confirm:
+- /start loads
+- Buddy appears
+- no console runtime errors
+- /api/ai/chat still works
+- /api/buddy still works
+
+Return:
+- files changed
+- exact states improved
+- verification results
+- skipped changes

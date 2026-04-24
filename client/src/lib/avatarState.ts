@@ -64,6 +64,17 @@ export interface BuddyVisualOutput {
  */
 export type BuddyOutput = BuddyVisualOutput;
 
+// VISUAL_MAP — v1.2 (polished, emotionally-safe, non-clinical).
+// Color and cadence choices are deliberate:
+//   - Crisis is GREEN and SLOW. Never red, never fast — emotionally safe and
+//     grounded, not alarming. Calm presence is the safety message.
+//   - Anxious pulses SLOWLY (4400ms) so the visual itself coaches the user
+//     toward a slower breath, instead of mirroring their distress.
+//   - Sad uses a soft purple heart glow, not blue, per healing-domain spec.
+//   - Overwhelmed eyes are dimmed (low-opacity) so the visual feels held,
+//     not flooded.
+//   - Celebrate uses warm gold (heart) with green eyes — joyful but never
+//     overstimulating.
 const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
   calm: {
     state: "calm",
@@ -75,27 +86,27 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
   },
   sad: {
     state: "sad",
-    eyeColor: "#7FB3D5",
-    heartColor: "#5DA3C9",
-    heartPulse: 6400,
+    eyeColor: "#9D8FCC",
+    heartColor: "#B19CD9",
+    heartPulse: 6800,
     motion: "slow_glow",
     label: "Holding sadness gently",
   },
   anxious: {
     state: "anxious",
-    eyeColor: "#F2C94C",
-    heartColor: "#F0B040",
-    heartPulse: 2200,
+    eyeColor: "#8FF0BC",
+    heartColor: "#7FD8A8",
+    heartPulse: 4400,
     motion: "breathing",
-    label: "Noticing anxious energy",
+    label: "Noticing anxious energy — slow breath together",
   },
   overwhelmed: {
     state: "overwhelmed",
-    eyeColor: "#E08AB8",
-    heartColor: "#D4729E",
-    heartPulse: 1800,
+    eyeColor: "#5DA88E",
+    heartColor: "#5DA88E",
+    heartPulse: 4800,
     motion: "grounding",
-    label: "Feeling overwhelmed — slow breath together",
+    label: "Feeling overwhelmed — grounding together",
   },
   encouraged: {
     state: "encouraged",
@@ -107,17 +118,17 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
   },
   crisis: {
     state: "crisis",
-    eyeColor: "#FF6B6B",
-    heartColor: "#FF8585",
-    heartPulse: 1400,
+    eyeColor: "#6FE3B0",
+    heartColor: "#7FD8A8",
+    heartPulse: 5800,
     motion: "steady",
-    label: "Crisis support — you're not alone",
+    label: "Crisis support — you are safe with me",
   },
   celebrate: {
     state: "celebrate",
-    eyeColor: "#A78BFA",
+    eyeColor: "#7AE2A6",
     heartColor: "#FFD75A",
-    heartPulse: 3200,
+    heartPulse: 3600,
     motion: "sparkle",
     label: "Celebrating with you",
   },

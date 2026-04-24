@@ -1,0 +1,145 @@
+Hard truth
+
+If you keep “adding,” you’ll destabilize what already works. The highest-leverage move now is tight integration + measurability, not more features.
+
+Next step:
+
+Buddy Engine v1.3 — bind avatar state to real user outcomes on /start (no AI changes)
+
+⸻
+
+Paste this into Replit AI
+
+Upgrade MMHB Buddy Engine to v1.3: connect BuddyAvatar state to real /start tool outcomes.
+STRICT RULES:
+- Do not modify /api/ai/chat
+- Do not modify server/routes/buddy.mjs
+- Do not modify orchestrator, provider, memory, profile, telemetry, crisis logic
+- Do not change tool execution logic
+- Only connect existing signals to BuddyAvatar
+TARGET FILE:
+client/src/pages/Start.tsx
+GOAL:
+BuddyAvatar must reflect REAL user state from tool + response, not just static or input-based state.
+--------------------------------
+PHASE 1 — MAP EXISTING SIGNALS
+--------------------------------
+From /start, identify:
+- selectedTool (calm, reframe, emotional)
+- response.modules (anxiety, cognitive_reframe, emotional_processing)
+- response.tool.id (box_breathing, thought_reframe, etc.)
+- success state (response received)
+--------------------------------
+PHASE 2 — CREATE STATE MAPPER
+--------------------------------
+Inside Start.tsx (or a helper):
+function mapToBuddyState({ modules = [], toolId = "" }) {
+  if (modules.includes("anxiety")) return "anxious";
+  if (modules.includes("emotional_processing")) return "sad";
+  if (modules.includes("cognitive_reframe")) return "encouraged";
+  if (toolId === "overload_reset") return "overwhelmed";
+  return "calm";
+}
+--------------------------------
+PHASE 3 — UPDATE BUDDY STATE
+--------------------------------
+When response arrives:
+const buddyState = mapToBuddyState({
+  modules: response.modules,
+  toolId: response.tool?.id
+});
+setBuddyState(buddyState);
+--------------------------------
+PHASE 4 — PASS INTO AVATAR
+--------------------------------
+<BuddyAvatar state={buddyState} />
+--------------------------------
+PHASE 5 — ADD TRANSITION POLISH
+--------------------------------
+- Smooth state transitions (CSS transition or class fade)
+- Do not flash or snap
+- Keep calming motion
+--------------------------------
+PHASE 6 — ADD COMPLETION STATE
+--------------------------------
+After tool completes:
+if (toolCompleted) {
+  setBuddyState("encouraged");
+}
+--------------------------------
+PHASE 7 — TELEMETRY (OPTIONAL ADDITIVE ONLY)
+--------------------------------
+Emit event:
+trackEvent("buddy_state_change", {
+  state: buddyState,
+  toolId: response.tool?.id
+});
+--------------------------------
+PHASE 8 — VERIFY
+--------------------------------
+Run:
+npm run dev
+Test flows:
+1. Click "Calm Me Down"
+→ expect: anxious → calm progression
+2. Click "Help Me Think Clearly"
+→ expect: encouraged
+3. Click "Understand This Feeling"
+→ expect: sad → calm progression
+Confirm:
+- /start loads
+- no console errors
+- avatar updates correctly
+- no changes to AI responses
+- no changes to backend routes
+Return:
+- files changed
+- mapping logic added
+- verification results
+- skipped changes
+
+⸻
+
+Shell verification
+
+npm run dev
+
+Manual checks:
+
+* Open /start
+* Trigger each tool
+* Confirm avatar state changes correctly
+
+Health:
+
+curl http://0.0.0.0:5000/health
+
+⸻
+
+What you just upgraded
+
+Before:
+
+* Avatar = decorative
+
+After:
+
+* Avatar = feedback system tied to user state
+
+This is where it becomes psychologically meaningful.
+
+⸻
+
+Next step (after this passes)
+
+Upgrade Buddy Engine v1.4: add subtle time-based state recovery (calm return + grounding loop) without touching AI or routes.
+
+⸻
+
+Direct challenge
+
+Use /start 5 times yourself.
+
+If the avatar doesn’t feel like it understands the moment, the mapping is wrong — fix that before moving forward.
+
+That’s how this becomes real.
