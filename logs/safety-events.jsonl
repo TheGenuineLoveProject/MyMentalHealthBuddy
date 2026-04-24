@@ -53,3 +53,4 @@
 {"id":"safe_1777017758159_q1ajs4","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T08:02:38.159Z"}
 {"id":"safe_1777018220388_s7uogp","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T08:10:20.388Z"}
 {"id":"safe_1777019183287_2sm5wa","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T08:26:23.287Z"}
+{"id":"safe_1777020076681_5c8zkq","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T08:41:16.681Z"}
