@@ -25,6 +25,21 @@ const STATES = [
   "celebrate",
 ];
 
+// Spec-required canonical crisis line. This exact string MUST appear in every
+// crisis-state response (verified at the boundary by ensureCrisisLineInText).
+const CRISIS_LINE =
+  "988 Suicide & Crisis Lifeline by calling or texting 988";
+
+function ensureCrisisLineInText(text) {
+  const t = String(text || "").trim();
+  if (t.includes(CRISIS_LINE)) return t;
+  const opener =
+    "You are not alone, and reaching out matters. If you are in crisis or thinking of harming yourself, you can reach the " +
+    CRISIS_LINE +
+    ". I'm here with you while you take the next small step.";
+  return t ? `${opener}\n\n${t}` : opener;
+}
+
 const REPLY_LIBRARY = {
   calm: [
     "I'm here with you. Whatever's on your mind, we can take it one breath at a time.",
@@ -110,9 +125,10 @@ router.post("/buddy", async (req, res) => {
   try {
     const verdict = await detectCrisisFacade(message);
     if (verdict?.crisis) {
-      const reply =
-        verdict?.response?.reply ||
-        pickReply("crisis");
+      const baseReply = verdict?.response?.reply || pickReply("crisis");
+      // Boundary guarantee: every crisis response includes the spec-required
+      // "988 Suicide & Crisis Lifeline by calling or texting 988" phrase.
+      const reply = ensureCrisisLineInText(baseReply);
       return res.json({
         ok: true,
         state: "crisis",
