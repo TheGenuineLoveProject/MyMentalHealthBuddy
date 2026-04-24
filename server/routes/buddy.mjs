@@ -25,18 +25,34 @@ const STATES = [
   "celebrate",
 ];
 
-// Server-side mirror of the client BUDDY visual contract (v1.1).
-// Kept here so /api/buddy can return a complete `buddy` block in its response,
-// which lets a future hardware adapter or alternate client render correctly
-// without re-implementing the visual vocabulary.
+// Server-side mirror of the client v1.9 `BuddyOutput` contract.
+// MUST match client/src/lib/avatarState.ts VISUAL_MAP field-for-field —
+// any drift means a non-/start consumer (mobile client, hardware adapter,
+// alternate renderer) would render off-spec colors / cadence / motion.
+//
+// Healing-spec rules baked in (DO NOT regress):
+//   - Crisis is GREEN and SLOW. NEVER red, never fast — calm presence is
+//     the safety message, not alarm.
+//   - Anxious pulses SLOWLY (4400ms) so the visual coaches a slower
+//     breath instead of mirroring distress.
+//   - Sad uses soft purple, not blue.
+//   - Overwhelmed eyes are dimmed/desaturated (held, not flooded).
+//   - Celebrate is warm gold + green — joyful but never overstimulating.
+//
+// `safetyMode` vocabulary aligned to v1.9 client contract:
+//   "crisis_safe" (crisis only) | "normal" (everything else).
+//
+// `expression` field (v1.9 contract) added so the server emits the full
+// 8-field BuddyOutput (state + safetyMode + eyeColor + heartColor +
+// heartPulse + motion + expression + label).
 const BUDDY_VISUALS = {
-  calm:        { motion: "idle",       eyeColor: "#6FE3B0", heartColor: "#7FD8A8", heartPulse: 5200 },
-  sad:         { motion: "slow_glow",  eyeColor: "#7FB3D5", heartColor: "#5DA3C9", heartPulse: 6400 },
-  anxious:     { motion: "breathing",  eyeColor: "#F2C94C", heartColor: "#F0B040", heartPulse: 2200 },
-  overwhelmed: { motion: "grounding",  eyeColor: "#E08AB8", heartColor: "#D4729E", heartPulse: 1800 },
-  encouraged:  { motion: "warm_glow",  eyeColor: "#7AE2A6", heartColor: "#5DDB94", heartPulse: 4400 },
-  crisis:      { motion: "steady",     eyeColor: "#FF6B6B", heartColor: "#FF8585", heartPulse: 1400 },
-  celebrate:   { motion: "sparkle",    eyeColor: "#A78BFA", heartColor: "#FFD75A", heartPulse: 3200 },
+  calm:        { safetyMode: "normal",      motion: "idle",       eyeColor: "#6FE3B0", heartColor: "#7FD8A8", heartPulse: 5200, expression: "soft",        label: "Calm and present" },
+  sad:         { safetyMode: "normal",      motion: "slow_glow",  eyeColor: "#9D8FCC", heartColor: "#B19CD9", heartPulse: 6800, expression: "lowered",     label: "Holding sadness gently" },
+  anxious:     { safetyMode: "normal",      motion: "breathing",  eyeColor: "#8FF0BC", heartColor: "#7FD8A8", heartPulse: 4400, expression: "focused",     label: "Noticing anxious energy — slow breath together" },
+  overwhelmed: { safetyMode: "normal",      motion: "grounding",  eyeColor: "#5DA88E", heartColor: "#5DA88E", heartPulse: 4800, expression: "grounded",    label: "Feeling overwhelmed — grounding together" },
+  encouraged:  { safetyMode: "normal",      motion: "warm_glow",  eyeColor: "#7AE2A6", heartColor: "#5DDB94", heartPulse: 4400, expression: "bright",      label: "Steady and encouraged" },
+  crisis:      { safetyMode: "crisis_safe", motion: "steady",     eyeColor: "#6FE3B0", heartColor: "#7FD8A8", heartPulse: 5800, expression: "steady",      label: "Crisis support — you are safe with me" },
+  celebrate:   { safetyMode: "normal",      motion: "sparkle",    eyeColor: "#7AE2A6", heartColor: "#FFD75A", heartPulse: 3600, expression: "celebratory", label: "Celebrating with you" },
 };
 
 function buildBuddyBlock(state) {
@@ -44,11 +60,13 @@ function buildBuddyBlock(state) {
   const v = BUDDY_VISUALS[safeStateName] || BUDDY_VISUALS.calm;
   return {
     state: safeStateName,
-    safetyMode: safeStateName === "crisis" ? "active" : "passive",
-    motion: v.motion,
+    safetyMode: v.safetyMode,
     eyeColor: v.eyeColor,
     heartColor: v.heartColor,
     heartPulse: v.heartPulse,
+    motion: v.motion,
+    expression: v.expression,
+    label: v.label,
   };
 }
 
