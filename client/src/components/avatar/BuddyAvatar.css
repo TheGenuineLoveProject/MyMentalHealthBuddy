@@ -238,18 +238,47 @@
   50%      { transform: translateY(-15px) scale(1.20); opacity: 0.95; }
 }
 
-/* v1.12 antenna tip pulse — the soft halo around the antenna tip
-   gently breathes so Buddy reads as alive even while still. The tip
-   is the first <circle> in .buddy__antenna (the large fuzzy halo). */
-.buddy__antenna circle:nth-of-type(1) {
-  transform-origin: center;
-  transform-box: fill-box;
-  animation: buddyAntennaPulse 3200ms ease-in-out infinite;
+/* v1.14 — gentle warm-glow sparkles for the encouraged state. Softer
+   than celebrate (smaller dots, slower float, lower opacity ceiling)
+   so encouragement reads as supportive warmth rather than a party.
+   Crisis (.buddy--motion-steady) is excluded by selector. */
+.buddy--motion-warm_glow::before,
+.buddy--motion-warm_glow::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--buddy-heart-color, #5DDB94);
+  box-shadow: 0 0 8px var(--buddy-heart-color, #5DDB94);
+  pointer-events: none;
+  opacity: 0.55;
 }
-@keyframes buddyAntennaPulse {
-  0%, 100% { transform: scale(1.00); opacity: 1.00; }
-  50%      { transform: scale(1.18); opacity: 0.75; }
+.buddy--motion-warm_glow::before {
+  top: 12%;
+  left: 8%;
+  animation: buddyWarmSparkleA 3200ms ease-in-out infinite;
 }
+.buddy--motion-warm_glow::after {
+  top: 18%;
+  right: 8%;
+  animation: buddyWarmSparkleB 3200ms ease-in-out infinite 1100ms;
+}
+@keyframes buddyWarmSparkleA {
+  0%, 100% { transform: translateY(2px) scale(0.7);  opacity: 0.20; }
+  50%      { transform: translateY(-10px) scale(1.05); opacity: 0.70; }
+}
+@keyframes buddyWarmSparkleB {
+  0%, 100% { transform: translateY(2px) scale(0.7);  opacity: 0.20; }
+  50%      { transform: translateY(-12px) scale(1.05); opacity: 0.70; }
+}
+
+/* v1.14 — antenna ping replaces the v1.12 buddyAntennaPulse rule that
+   was state-agnostic and would have animated the antenna in crisis
+   (motion: steady) too — a subtle but real safety-contract violation
+   on a mental-health surface. The replacement is gated to non-steady
+   states (see "Antenna outer halo ping" earlier in this file). Crisis
+   stays motionless. */
 
 /* ---------- State-specific accents ---------- */
 .buddy--sad .buddy__mouth      { d: path("M 80 92 Q 100 84 120 92"); opacity: 0.6; }
