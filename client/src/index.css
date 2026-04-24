@@ -6878,3 +6878,187 @@ html.dark {
     filter: none !important;
   }
 }
+
+/* ==========================================================================
+   Round 7 Polish: Native checkbox/radio, <select>, blockquote, list markers
+   All cascades scoped via :where() so they never raise specificity and
+   shadcn / Radix-styled controls (which use custom DOM, not native chrome)
+   are unaffected.
+   ========================================================================== */
+
+/* --- Branded native checkbox + radio --------------------------------------
+   Targets ONLY native <input type="checkbox|radio"> that hasn't been hidden
+   by shadcn/Radix (which set sr-only or hidden styles on the underlying
+   native input and render their own visual square). The :not(.peer):not([hidden])
+   guard keeps Radix-style controls untouched.
+*/
+:where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]) {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  border: 1.5px solid var(--glp-sage-400, rgba(143,188,143,0.65));
+  background-color: var(--glp-cream-50, #fdfaf3);
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  transition: background-color 200ms ease, border-color 200ms ease,
+              box-shadow 200ms ease, transform 120ms ease;
+  flex-shrink: 0;
+}
+:where(input[type="checkbox"]):not(.peer):not([hidden]) {
+  border-radius: 4px;
+}
+:where(input[type="radio"]):not(.peer):not([hidden]) {
+  border-radius: 50%;
+}
+:where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]):hover {
+  border-color: var(--glp-sage-600, #4f8b80);
+  box-shadow: 0 0 0 4px rgba(143,188,143,0.12);
+}
+:where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]):focus-visible {
+  box-shadow:
+    0 0 0 1px var(--glp-sage-500, #6fa39a),
+    0 0 0 4px rgba(143,188,143,0.25),
+    0 0 14px -2px var(--glp-aurora-1, rgba(143,188,143,0.5));
+  outline: none;
+}
+:where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]):checked {
+  background-color: var(--glp-sage-600, #4f8b80);
+  border-color: var(--glp-sage-700, #3a6b62);
+  box-shadow: 0 0 0 1px var(--glp-sage-700, #3a6b62),
+              0 4px 14px -4px var(--glp-aurora-1, rgba(143,188,143,0.55));
+}
+/* Checkmark glyph for checkbox */
+:where(input[type="checkbox"]):not(.peer):not([hidden]):checked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M3.5 8.5l3 3 6-7' stroke='%23fdfaf3' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80% 80%;
+}
+/* Inner dot for radio */
+:where(input[type="radio"]):not(.peer):not([hidden]):checked::after {
+  content: "";
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  background: var(--glp-cream-50, #fdfaf3);
+  box-shadow: 0 0 6px rgba(253,250,243,0.6);
+}
+:where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]):disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.dark :where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]) {
+  background-color: rgba(15, 30, 28, 0.6);
+  border-color: var(--glp-sage-500, #6fa39a);
+}
+.dark :where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]):checked {
+  background-color: var(--glp-sage-500, #6fa39a);
+  border-color: var(--glp-sage-400, #88b8af);
+}
+
+/* --- Branded native <select> ----------------------------------------------
+   Replaces the OS chevron with an inline aurora-tinted SVG. Only touches
+   native <select> elements; shadcn Select renders a div-based combobox.
+*/
+:where(select):not(.no-aurora-select) {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M4 6l4 4 4-4' stroke='%234f8b80' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem 1rem;
+  padding-right: 2.25rem;
+  cursor: pointer;
+  transition: box-shadow 240ms ease, border-color 240ms ease;
+}
+.dark :where(select):not(.no-aurora-select) {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M4 6l4 4 4-4' stroke='%2388b8af' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+
+/* --- Branded blockquote ---------------------------------------------------
+   Long-form content surfaces (about, learning hub, blog posts, journal
+   excerpts) gain an elegant left aurora rail + decorative oversized opening
+   quote, italic body, soft cream tint background.
+*/
+:where(blockquote):not(.no-aurora) {
+  position: relative;
+  margin: 1.75rem 0;
+  padding: 1rem 1.25rem 1rem 1.75rem;
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(
+    180deg,
+    var(--glp-aurora-1, rgba(143,188,143,0.65)) 0%,
+    var(--glp-aurora-2, rgba(212,175,55,0.55)) 50%,
+    var(--glp-aurora-3, rgba(167,139,250,0.6)) 100%
+  ) 1 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(143,188,143,0.06) 0%,
+    transparent 60%
+  );
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+  color: var(--glp-ink-800, #2d3748);
+  line-height: 1.65;
+}
+:where(blockquote):not(.no-aurora)::before {
+  content: "\201C"; /* curly opening quote */
+  position: absolute;
+  top: -0.35rem;
+  left: 0.55rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--glp-sage-500, #6fa39a);
+  opacity: 0.55;
+  pointer-events: none;
+}
+:where(blockquote):not(.no-aurora) > :first-child { margin-top: 0; }
+:where(blockquote):not(.no-aurora) > :last-child { margin-bottom: 0; }
+
+.dark :where(blockquote):not(.no-aurora) {
+  color: var(--glp-cream-100, #f4ede0);
+  background: linear-gradient(
+    90deg,
+    rgba(143,188,143,0.10) 0%,
+    transparent 60%
+  );
+}
+.dark :where(blockquote):not(.no-aurora)::before {
+  color: var(--glp-sage-300, #a8d0c7);
+  opacity: 0.7;
+}
+
+/* --- Branded list markers --------------------------------------------------
+   Sage-tinted ::marker for <ul>/<ol> in long-form content, leaving Tailwind
+   list-* utilities and shadcn-styled lists untouched (since they typically
+   render custom bullets via padding+pseudo or remove markers entirely).
+   Only applied inside .prose-aurora opt-in containers OR inside <blockquote>.
+*/
+.prose-aurora :where(ul, ol) > li::marker,
+:where(blockquote) :where(ul, ol) > li::marker {
+  color: var(--glp-sage-600, #4f8b80);
+  font-weight: 600;
+}
+.dark .prose-aurora :where(ul, ol) > li::marker,
+.dark :where(blockquote) :where(ul, ol) > li::marker {
+  color: var(--glp-sage-300, #a8d0c7);
+}
+
+/* --- Reduced motion --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :where(input[type="checkbox"], input[type="radio"]):not(.peer):not([hidden]),
+  :where(select):not(.no-aurora-select) {
+    transition: none !important;
+  }
+}
