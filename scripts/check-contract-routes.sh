@@ -42,3 +42,9 @@ echo "PASS: locked contract route registry is unique"
 # Joined into the same pre-test gate so both architectural contracts
 # (locked routes + Buddy heading prop convention) fail loudly together.
 node scripts/check-buddy-heading-contract.mjs
+
+# v2.8 — Buddy Engine placement-geometry + surface↔library alignment guard.
+# Sibling to the v2.7 heading guard. Catches "wrong size on companion",
+# "added a surface but forgot the copy", and "title pulls from a different
+# surface key than the surface prop declares" regressions.
+node scripts/check-buddy-placement-contract.mjs
