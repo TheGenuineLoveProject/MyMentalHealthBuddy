@@ -32,3 +32,4 @@
 {"type":"buddy_panel_viewed","guestId":"g_mocl12kh_g9ndb6","metadata":{"surface":"start","state":"calm"},"ts":1777015302212}
 {"type":"start_page_click","guestId":"g_mocl12kh_g9ndb6","metadata":{},"ts":1777015302216}
 {"type":"buddy_accessibility_ready","guestId":"g_mocl12kh_g9ndb6","metadata":{},"ts":1777015302216}
+{"type":"buddy_panel_viewed","guestId":"v29_live","metadata":{"surface":"journal","state":"calm"},"ts":1777016673971}
