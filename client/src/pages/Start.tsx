@@ -659,7 +659,12 @@ export default function Start() {
       if (result?.response?.paywall?.show) {
         return "Buddy can help you go deeper when you\u2019re ready.";
       }
-      return "Buddy is here with you.";
+      // v1.13: avoid echoing the BuddyPanel title ("Buddy is here with you").
+      // The panel heading already says this on first load — duplicating it in
+      // the helper-copy line below the avatar reads as noisy filler. Returning
+      // null makes the live region collapse (opacity:0 + min-height preserves
+      // layout) and the calm baseline gets quieter, more spacious framing.
+      return null;
     }
     return null;
   })();
