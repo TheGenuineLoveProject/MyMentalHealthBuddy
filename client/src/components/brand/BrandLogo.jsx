@@ -21,13 +21,16 @@ export default function BrandLogo({
 
   const content = (
     <div className={`flex items-center gap-3 ${className}`} data-testid={testId}>
-      <img
-        src="/brand/mmhb-icon.svg"
-        alt="MyMentalHealthBuddy"
-        className={`${s.img} ${s.radius} object-contain transition-transform hover:scale-105`}
-        style={{ boxShadow: `${s.shadow} ${shadowColor}` }}
-        draggable="false"
-      />
+      <span className={`brand-logo-mark relative inline-block ${s.img} ${s.radius}`}>
+        <span aria-hidden className="brand-logo-halo" />
+        <img
+          src="/brand/mmhb-icon.svg"
+          alt="MyMentalHealthBuddy"
+          className={`brand-logo-img relative z-[1] w-full h-full ${s.radius} object-contain transition-transform duration-300`}
+          style={{ boxShadow: `${s.shadow} ${shadowColor}` }}
+          draggable="false"
+        />
+      </span>
       {showText && (
         <div className={`flex flex-col leading-snug ${textClassName}`}>
           <span

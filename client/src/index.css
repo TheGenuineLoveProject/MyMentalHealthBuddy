@@ -6341,3 +6341,120 @@ button[type="submit"]:active {
     padding-top: max(0.5rem, env(safe-area-inset-top));
   }
 }
+
+/* =====================================================================
+   Visual polish v2 — brand logo halo, button aurora sheen, skeleton shimmer
+   All gated by prefers-reduced-motion: reduce.
+   ===================================================================== */
+
+/* --- Brand logo: soft sage→gold conic halo on hover ----------------- */
+.brand-logo-mark { isolation: isolate; }
+.brand-logo-mark .brand-logo-halo {
+  position: absolute;
+  inset: -22%;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    rgba(56, 212, 158, 0)    0%,
+    rgba(56, 212, 158, 0.45) 18%,
+    rgba(190, 134, 34, 0.50) 50%,
+    rgba(108, 88, 184, 0.45) 82%,
+    rgba(56, 212, 158, 0)    100%
+  );
+  filter: blur(12px);
+  opacity: 0;
+  transform: scale(0.85) rotate(0deg);
+  transition: opacity 320ms ease, transform 480ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.brand-logo-mark:hover .brand-logo-halo,
+a:hover .brand-logo-mark .brand-logo-halo,
+.group:hover .brand-logo-mark .brand-logo-halo {
+  opacity: 0.85;
+  transform: scale(1) rotate(45deg);
+  animation: brandLogoHaloSpin 7s linear infinite;
+}
+.brand-logo-mark:hover .brand-logo-img,
+a:hover .brand-logo-mark .brand-logo-img,
+.group:hover .brand-logo-mark .brand-logo-img {
+  transform: scale(1.06);
+}
+@keyframes brandLogoHaloSpin {
+  to { transform: scale(1) rotate(405deg); }
+}
+
+/* --- Primary button: subtle aurora sheen sweep on hover ------------- */
+.btn-primary { position: relative; overflow: hidden; isolation: isolate; }
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 25%,
+    rgba(255, 224, 160, 0.28) 45%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 224, 160, 0.28) 55%,
+    transparent 75%
+  );
+  transform: translateX(-110%);
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+.btn-primary > * { position: relative; z-index: 1; }
+.btn-primary:hover::before { transform: translateX(110%); }
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(60% 80% at 50% 100%,
+    rgba(190, 134, 34, 0.45) 0%,
+    rgba(190, 134, 34, 0)   70%);
+  opacity: 0;
+  transition: opacity 320ms ease;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(10px);
+}
+.btn-primary:hover::after { opacity: 1; }
+
+/* --- Skeleton: replace blunt animate-pulse with elegant shimmer ----- */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgba(143, 191, 159, 0.12) 0%,
+    rgba(143, 191, 159, 0.22) 50%,
+    rgba(143, 191, 159, 0.12) 100%
+  );
+}
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent      30%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent      70%
+  );
+  transform: translateX(-100%);
+  animation: skeletonSweep 1.8s ease-in-out infinite;
+}
+@keyframes skeletonSweep {
+  to { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo-mark .brand-logo-halo,
+  .btn-primary::before,
+  .btn-primary::after,
+  .skeleton-shimmer::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,5 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
+    <style type="text/css"><![CDATA[
+      .fav-breathe { transform-origin: 32px 38px; animation: favBreathe 5.2s ease-in-out infinite; }
+      @keyframes favBreathe {
+        0%, 100% { transform: scale(1);    opacity: 0.92; }
+        50%      { transform: scale(1.10); opacity: 1.00; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .fav-breathe { animation: none !important; transform: none !important; }
+      }
+    ]]></style>
     <linearGradient id="fbg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#68d0a8"/>
       <stop offset="45%" stop-color="#48b88c"/>
@@ -50,7 +60,9 @@
   <circle cx="31.5" cy="20" r="5.2" fill="url(#fh)"/>
   <path d="M30.5,23 Q31.5,24.2 33,23.2" fill="none" stroke="rgba(255,255,255,0.30)" stroke-width="0.8" stroke-linecap="round"/>
 
-  <ellipse cx="32" cy="38" rx="3.5" ry="3.2" fill="#fffbe0" opacity="0.80" filter="url(#fc)"/>
-  <ellipse cx="32" cy="38" rx="1.8" ry="1.7" fill="#fff8d0" opacity="0.92"/>
-  <circle cx="32" cy="37.8" r="0.8" fill="#ffffff" opacity="0.97"/>
+  <g class="fav-breathe">
+    <ellipse cx="32" cy="38" rx="3.5" ry="3.2" fill="#fffbe0" opacity="0.80" filter="url(#fc)"/>
+    <ellipse cx="32" cy="38" rx="1.8" ry="1.7" fill="#fff8d0" opacity="0.92"/>
+    <circle cx="32" cy="37.8" r="0.8" fill="#ffffff" opacity="0.97"/>
+  </g>
 </svg>
