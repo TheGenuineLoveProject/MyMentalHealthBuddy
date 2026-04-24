@@ -23,6 +23,7 @@ import aiBusinessRoutes from "./routes/ai.business.mjs";
 import healthRoutes from "./routes/health.mjs";
 import streaksRoutes from "./routes/streaks.mjs";
 import telemetryRoutes from "./routes/telemetry.mjs";
+import buddyRoutes from "./routes/buddy.mjs";
 
 // ✅ OPTIONAL AUTH (FIXES authMiddleware error)
 import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
@@ -164,6 +165,9 @@ app.use(
 
 // AI routes (aiLimiter already mounted above on /api/ai before this handler)
 app.use("/api/ai", optionalAuth, aiRoutes);
+
+// MMHB Buddy Engine — healing-domain visual+text endpoint (POST /api/buddy)
+app.use("/api", buddyRoutes);
 
 // ----------------------------
 // ROOT

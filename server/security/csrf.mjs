@@ -43,6 +43,8 @@ export function csrfProtection(req, res, next) {
   if (SAFE_METHODS.has(req.method)) return next();
   if (!req.path.startsWith("/api/")) return next();
   if (req.path.startsWith("/api/auth/")) return next();
+  // MMHB Buddy Engine: stateless healing surface (no DB writes, no auth state).
+  if (req.path === "/api/buddy") return next();
 
   const auth = req.headers?.authorization || "";
   if (auth.startsWith("Bearer ")) return next();

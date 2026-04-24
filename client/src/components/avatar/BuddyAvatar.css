@@ -1,0 +1,148 @@
+/* BuddyAvatar.css — visual-only styles. State classes drive motion + glow.
+   All animations gated by prefers-reduced-motion. */
+
+.buddy {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  user-select: none;
+}
+.buddy__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* ---------- Heart pulse (cadence varies via --buddy-heart-pulse) ---------- */
+.buddy__heart-shape,
+.buddy__heart-glow {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyHeartBeat var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+  filter: drop-shadow(0 0 6px var(--buddy-heart-color, #7FD8A8));
+}
+.buddy__heart-glow {
+  animation-duration: calc(var(--buddy-heart-pulse, 5200ms) * 1.05);
+  opacity: 0.7;
+}
+.buddy__heart-core {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyHeartCore var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+}
+
+@keyframes buddyHeartBeat {
+  0%, 100% { transform: scale(1.00); }
+  35%      { transform: scale(1.08); }
+  55%      { transform: scale(0.97); }
+}
+@keyframes buddyHeartCore {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%      { opacity: 1.00; transform: scale(1.15); }
+}
+
+/* ---------- Eyes ---------- */
+.buddy__eye {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyEyeBlink 9s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px var(--buddy-eye-color, #6FE3B0));
+}
+@keyframes buddyEyeBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 96%      { transform: scaleY(0.1); }
+}
+
+/* ---------- Body micro-motion (state class driven) ---------- */
+.buddy__body, .buddy__head {
+  transform-origin: center bottom;
+  transform-box: fill-box;
+}
+
+.buddy--motion-breathe .buddy__body,
+.buddy--motion-breathe .buddy__head {
+  animation: buddyBreathe 5200ms ease-in-out infinite;
+}
+@keyframes buddyBreathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-1.5px) scale(1.015); }
+}
+
+.buddy--motion-sway .buddy__head {
+  animation: buddySway 5800ms ease-in-out infinite;
+}
+@keyframes buddySway {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+.buddy--motion-tremor .buddy__body,
+.buddy--motion-tremor .buddy__head {
+  animation: buddyTremor 240ms ease-in-out infinite;
+}
+@keyframes buddyTremor {
+  0%, 100% { transform: translateX(-0.6px); }
+  50%      { transform: translateX(0.6px); }
+}
+
+.buddy--motion-rise .buddy__body,
+.buddy--motion-rise .buddy__head {
+  animation: buddyRise 3600ms ease-in-out infinite;
+}
+@keyframes buddyRise {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+.buddy--motion-bounce .buddy__body,
+.buddy--motion-bounce .buddy__head {
+  animation: buddyBounce 1400ms cubic-bezier(.34,1.56,.64,1) infinite;
+}
+@keyframes buddyBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.buddy--motion-still .buddy__body,
+.buddy--motion-still .buddy__head {
+  animation: none;
+}
+
+/* ---------- State-specific accents ---------- */
+.buddy--sad .buddy__mouth      { d: path("M 80 92 Q 100 84 120 92"); opacity: 0.6; }
+.buddy--anxious .buddy__mouth  { d: path("M 80 90 L 120 90"); opacity: 0.55; }
+.buddy--overwhelmed .buddy__mouth { d: path("M 80 92 Q 100 86 120 92"); opacity: 0.55; }
+.buddy--encouraged .buddy__mouth { d: path("M 78 86 Q 100 100 122 86"); opacity: 0.75; }
+.buddy--celebrate .buddy__mouth  { d: path("M 76 84 Q 100 104 124 84"); opacity: 0.85; }
+.buddy--crisis .buddy__mouth     { d: path("M 82 90 L 118 90"); opacity: 0.65; }
+
+.buddy--crisis .buddy__heart-shape,
+.buddy--crisis .buddy__heart-glow {
+  animation-duration: 1400ms;
+  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #FF8585));
+}
+.buddy--celebrate .buddy__heart-shape {
+  filter: drop-shadow(0 0 12px var(--buddy-heart-color, #FFD75A))
+          drop-shadow(0 0 4px #A78BFA);
+}
+
+.buddy__shadow {
+  animation: buddyShadow var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+}
+@keyframes buddyShadow {
+  0%, 100% { transform: scale(1, 1); opacity: 0.10; }
+  50%      { transform: scale(0.94, 1); opacity: 0.13; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .buddy *,
+  .buddy {
+    animation: none !important;
+  }
+  .buddy__heart-shape,
+  .buddy__heart-glow {
+    filter: drop-shadow(0 0 4px var(--buddy-heart-color, #7FD8A8));
+  }
+}
