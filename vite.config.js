@@ -24,6 +24,12 @@ export default defineConfig({
           if (!id.includes('node_modules')) return undefined;
           if (id.includes('/@tanstack/react-query/')) return 'vendor-query';
           if (id.includes('/react-dom/') || id.includes('/react/')) return 'vendor-react';
+          if (id.includes('/lucide-react/')) return 'vendor-lucide';
+          if (id.includes('/react-icons/')) return 'vendor-icons';
+          if (id.includes('/chart.js/') || id.includes('/react-chartjs-2/')) return 'vendor-charts';
+          if (id.includes('/canvas-confetti/')) return 'vendor-confetti';
+          if (id.includes('/react-helmet-async/') || id.includes('/wouter/')) return 'vendor-router';
+          if (id.includes('/zod/') || id.includes('/react-hook-form/') || id.includes('/@hookform/')) return 'vendor-forms';
           return undefined;
         }
       }

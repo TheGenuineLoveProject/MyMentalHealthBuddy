@@ -76,7 +76,20 @@ app.use(helmet({
           "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
         },
       }
-    : undefined,
+    : {
+        useDefaults: true,
+        directives: {
+          // 'unsafe-inline' required for the inline theme-bootstrap IIFE in client/index.html
+          // (prevents FOUC / dark-mode flicker on a mental-wellness surface). External JS
+          // is still locked to 'self' + Stripe.
+          "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+          "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+          "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+          "img-src": ["'self'", "data:", "blob:", "https:"],
+          "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
+          "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+        },
+      },
 }));
 app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
 
