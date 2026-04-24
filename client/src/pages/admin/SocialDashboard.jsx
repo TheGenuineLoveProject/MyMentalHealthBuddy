@@ -3,11 +3,17 @@ import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
   ArrowLeft, Plus, Calendar, FileText, CheckCircle, Clock, 
-  Send, LayoutGrid, ListFilter, Sparkles, Instagram, 
-  Twitter, Youtube, MessageCircle, Linkedin, AlertCircle,
+  Send, LayoutGrid, ListFilter, Sparkles,
+  MessageCircle, AlertCircle,
   ExternalLink, Settings, Wifi, WifiOff, TrendingUp, BarChart2,
   Activity, PieChart
 } from "lucide-react";
+import { SiInstagram, SiX, SiYoutube } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
+const Instagram = SiInstagram;
+const Twitter = SiX;
+const Youtube = SiYoutube;
+const Linkedin = FaLinkedin;
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { SEO } from "@/components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";

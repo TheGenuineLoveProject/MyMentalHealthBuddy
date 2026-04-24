@@ -4,7 +4,8 @@
  * Displays official social media channels with verified handles
  */
 
-import { Youtube, Instagram, Twitter, Facebook, MessageCircle } from 'lucide-react';
+import { MessageCircle } from "lucide-react";
+import { Youtube, Instagram, Twitter, Facebook } from "../lib/lucide-brands";
 import { VERIFIED_CHANNELS } from '../config/social';
 import { SEO } from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";

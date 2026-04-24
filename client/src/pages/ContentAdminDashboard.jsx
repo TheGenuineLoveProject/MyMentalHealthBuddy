@@ -2,12 +2,8 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
-  ArrowLeft, FileText, Share2, BookOpen, ShoppingBag, Calendar,
-  Plus, Edit, Trash2, Eye, Send, Clock, CheckCircle, AlertCircle,
-  Instagram, Linkedin, Youtube, RefreshCw, DollarSign, Download,
-  TrendingUp, BarChart3, Loader2, Search, Filter, MoreVertical,
-  Sparkles, BookMarked, Package, Zap
-} from "lucide-react";
+  ArrowLeft, FileText, Share2, BookOpen, ShoppingBag, Calendar, Plus, Edit, Trash2, Eye, Send, Clock, CheckCircle, AlertCircle, RefreshCw, DollarSign, Download, TrendingUp, BarChart3, Loader2, Search, Filter, MoreVertical, Sparkles, BookMarked, Package, Zap } from "lucide-react";
+import { Instagram, Linkedin, Youtube } from "../lib/lucide-brands";
 import { SiTiktok, SiPinterest } from "react-icons/si";
 import SEO from "../components/SEO";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

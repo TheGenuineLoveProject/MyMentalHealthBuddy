@@ -1,16 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { 
-  Share2, Calendar, Hash, Zap, FileText, Check, Clock, 
-  AlertTriangle, RefreshCw, Download, Copy, Eye, Edit,
-  TrendingUp, BarChart, Loader2, Plus, Trash2, Send,
-  Image, Video, Save, X, Sparkles, Target, Users, Heart, 
-  MessageSquare, ArrowRight, ExternalLink, Palette, Type, 
-  Layout, Settings, Wand2, Bot, Globe, Link2, ChevronRight,
-  Instagram, Twitter, Linkedin, Youtube, Facebook, PinIcon,
-  MoreHorizontal, Grip, Star, Filter, Search, Bell, ArrowLeft
-} from "lucide-react";
-import { SiInstagram, SiX, SiLinkedin, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
+  Share2, Calendar, Hash, Zap, FileText, Check, Clock, AlertTriangle, RefreshCw, Download, Copy, Eye, Edit, TrendingUp, BarChart, Loader2, Plus, Trash2, Send, Image, Video, Save, X, Sparkles, Target, Users, Heart, MessageSquare, ArrowRight, ExternalLink, Palette, Type, Layout, Settings, Wand2, Bot, Globe, Link2, ChevronRight, PinIcon, MoreHorizontal, Grip, Star, Filter, Search, Bell, ArrowLeft } from "lucide-react";
+import { Instagram, Twitter, Linkedin, Youtube, Facebook } from "../../lib/lucide-brands";
+import { SiInstagram, SiX, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
+import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";

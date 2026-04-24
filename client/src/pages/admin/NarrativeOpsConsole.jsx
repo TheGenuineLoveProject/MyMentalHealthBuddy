@@ -8,7 +8,8 @@ import {
   Calendar, Target, Link2, ExternalLink, ChevronDown, ChevronRight,
   Megaphone, Zap, TrendingUp, Clipboard, Search, RefreshCw, AlertCircle
 } from "lucide-react";
-import { SiInstagram, SiX, SiTiktok, SiYoutube, SiFacebook, SiLinkedin, SiPinterest } from "react-icons/si";
+import { SiInstagram, SiX, SiTiktok, SiYoutube, SiFacebook, SiPinterest } from "react-icons/si";
+import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/SafetyFooter";

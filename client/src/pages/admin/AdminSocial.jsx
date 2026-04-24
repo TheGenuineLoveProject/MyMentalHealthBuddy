@@ -8,7 +8,8 @@ import {
   Filter, Search, BarChart3, Clipboard, CheckCircle2,
   XCircle, Globe, Shield, BookOpen, Mail, Megaphone
 } from "lucide-react";
-import { SiInstagram, SiX, SiLinkedin, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
+import { SiInstagram, SiX, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
+import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 

@@ -16,7 +16,8 @@
  */
 
 import { Link } from "wouter";
-import { Heart, Mail, Instagram, Twitter, Facebook, Sparkles } from "lucide-react";
+import { Heart, Mail, Sparkles } from "lucide-react";
+import { Instagram, Twitter, Facebook } from "../lib/lucide-brands";
 import SacredGeometryBg from "./SacredGeometryBg";
 import NewsletterSignup from "./NewsletterSignup";
 import "../styles/healing-animations.css";

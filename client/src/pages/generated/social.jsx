@@ -2,7 +2,8 @@
 import { SEO } from "@/components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import { Youtube, Instagram, MessageCircle, Twitter, ExternalLink } from "lucide-react";
+import { Youtube, MessageCircle, ExternalLink } from "lucide-react";
+import { Instagram, Twitter } from "../../lib/lucide-brands";
 
 const SOCIAL_CHANNELS = [
   { 

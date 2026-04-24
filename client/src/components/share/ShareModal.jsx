@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { X, Copy, Check, Share2, MessageCircle, Twitter, Facebook, Linkedin, Mail } from "lucide-react";
+import { X, Copy, Check, Share2, MessageCircle, Mail } from "lucide-react";
+import { Twitter, Facebook, Linkedin } from "../../lib/lucide-brands";
 
 const SHARE_PLATFORMS = [
   { 

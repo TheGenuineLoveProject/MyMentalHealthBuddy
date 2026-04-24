@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { Heart, Shield, ExternalLink, Instagram, Youtube, BookOpen, Mail } from "lucide-react";
+import { Heart, Shield, ExternalLink, BookOpen, Mail } from "lucide-react";
+import { Instagram, Youtube } from "../lib/lucide-brands";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();

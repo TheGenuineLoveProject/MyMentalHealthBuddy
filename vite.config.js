@@ -20,9 +20,11 @@ export default defineConfig({
       input: resolve(__dirname, 'client/index.html'),
       output: {
         format: 'es',
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-query': ['@tanstack/react-query']
+        manualChunks: (id) => {
+          if (!id.includes('node_modules')) return undefined;
+          if (id.includes('/@tanstack/react-query/')) return 'vendor-query';
+          if (id.includes('/react-dom/') || id.includes('/react/')) return 'vendor-react';
+          return undefined;
         }
       }
     },

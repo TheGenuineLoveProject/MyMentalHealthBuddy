@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
-  ArrowLeft, Calendar, ChevronLeft, ChevronRight, 
-  Instagram, Twitter, Youtube, MessageCircle, Trash2,
-  Plus, X, Loader2, Clock, Send, AlertCircle
-} from "lucide-react";
+  ArrowLeft, Calendar, ChevronLeft, ChevronRight, MessageCircle, Trash2, Plus, X, Loader2, Clock, Send, AlertCircle } from "lucide-react";
+import { Instagram, Twitter, Youtube } from "../../lib/lucide-brands";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
