@@ -21,3 +21,10 @@
 {"type":"buddy_accessibility_ready","guestId":"gap_1777012115","metadata":{"surface":"start","state":"calm","toolId":"breath","buddyState":"calm","method":"clipboard"},"ts":1777012115644}
 {"type":"start_page_click","guestId":"gap_1777012115","metadata":{},"ts":1777012116761}
 {"type":"buddy_panel_viewed","guestId":"emit_1777012380","metadata":{"surface":"journal","state":"calm"},"ts":1777012380721}
+{"type":"buddy_panel_viewed","guestId":"g_mocjkqum_0onqnh","metadata":{"surface":"start","state":"calm"},"ts":1777012860918}
+{"type":"start_page_click","guestId":"g_mocjkqum_0onqnh","metadata":{},"ts":1777012860920}
+{"type":"buddy_accessibility_ready","guestId":"g_mocjkqum_0onqnh","metadata":{},"ts":1777012860929}
+{"type":"buddy_panel_viewed","guestId":"g_mocjnatu_c244uv","metadata":{"surface":"start","state":"calm"},"ts":1777012980123}
+{"type":"start_page_click","guestId":"g_mocjnatu_c244uv","metadata":{},"ts":1777012980125}
+{"type":"buddy_accessibility_ready","guestId":"g_mocjnatu_c244uv","metadata":{},"ts":1777012980132}
+{"type":"buddy_panel_viewed","guestId":"arch_1777013081","metadata":{"surface":"start","state":"calm"},"ts":1777013081207}
