@@ -124,19 +124,36 @@ export default function BuddyAvatar({
             <stop offset="0%" stopColor="var(--buddy-eye-color)" stopOpacity="0.65" />
             <stop offset="100%" stopColor="var(--buddy-eye-color)" stopOpacity="0" />
           </radialGradient>
+          {/* v1.11 ambient aura — soft heart-color halo behind the whole
+              figure makes Buddy feel "alive" and warm at any render size,
+              and shifts color with state via var(--buddy-heart-color). */}
+          <radialGradient id="buddyAura" cx="50%" cy="55%" r="58%">
+            <stop offset="0%" stopColor="var(--buddy-heart-color)" stopOpacity="0.20" />
+            <stop offset="55%" stopColor="var(--buddy-heart-color)" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="var(--buddy-heart-color)" stopOpacity="0" />
+          </radialGradient>
         </defs>
 
-        {/* Antenna with soft glow tip */}
+        {/* Ambient aura — sits behind everything; gives a soft "alive" glow
+            that follows the heart color so it adapts per state. Decorative. */}
+        <ellipse cx="100" cy="130" rx="98" ry="118" fill="url(#buddyAura)" aria-hidden="true" />
+
+        {/* Antenna with soft glow tip + base mount */}
         <g className="buddy__antenna">
-          <line x1="100" y1="22" x2="100" y2="9" stroke="#cdd5d2" strokeWidth="2.6" strokeLinecap="round" />
-          <circle cx="100" cy="7" r="10" fill="url(#buddyAntennaGlow)" />
-          <circle cx="100" cy="7" r="4" fill="var(--buddy-eye-color)" />
-          <circle cx="99" cy="6" r="1.4" fill="#ffffff" opacity="0.92" />
+          {/* Base mount where antenna meets head */}
+          <rect x="94" y="20" width="12" height="6" rx="2" fill="#cdd5d2" />
+          <line x1="100" y1="22" x2="100" y2="9" stroke="#b8c0bd" strokeWidth="3" strokeLinecap="round" />
+          <line x1="100" y1="22" x2="100" y2="9" stroke="#dde3e0" strokeWidth="1.4" strokeLinecap="round" />
+          <circle cx="100" cy="7" r="11" fill="url(#buddyAntennaGlow)" />
+          <circle cx="100" cy="7" r="4.5" fill="var(--buddy-eye-color)" />
+          <circle cx="99" cy="5.5" r="1.6" fill="#ffffff" opacity="0.95" />
         </g>
 
         {/* BODY first (renders behind head + collar so they appear seated on top).
             Wider than head + softer rounding makes the silhouette read as
-            "rounded body with a screen-head" instead of two stacked boxes. */}
+            "rounded body with a screen-head" instead of two stacked boxes.
+            v1.11: body extended UP so it overlaps the head bottom and
+            forms natural "shoulders" that rise to meet the head sides. */}
         <g className="buddy__body">
           {/* Arms — rounded, behind body so they emerge naturally */}
           <rect x="22" y="142" width="18" height="68" rx="9" fill="#dde3e0" className="buddy__arm buddy__arm--left" />
@@ -147,12 +164,13 @@ export default function BuddyAvatar({
           <circle cx="31" cy="208" r="8" fill="none" stroke="#d3dad6" strokeWidth="0.8" />
           <circle cx="169" cy="208" r="8" fill="none" stroke="#d3dad6" strokeWidth="0.8" />
 
-          {/* Body shell — wider than head, softer corners */}
+          {/* Body shell — wider than head, softer corners, raised to fuse
+              with head bottom under the collar. */}
           <rect
             x="34"
-            y="124"
+            y="118"
             width="132"
-            height="104"
+            height="110"
             rx="36"
             ry="36"
             fill="url(#buddyBodyShine)"
@@ -257,6 +275,11 @@ export default function BuddyAvatar({
             <circle cx="77" cy="75" r="1" fill="#ffffff" opacity="0.6" />
             <circle cx="117" cy="75" r="1" fill="#ffffff" opacity="0.6" />
           </g>
+
+          {/* Cheek blush — soft tinted dots add warmth & character.
+              Uses eye-color so it tints with state. Decorative. */}
+          <ellipse cx="68" cy="86" rx="5" ry="3" fill="var(--buddy-eye-color)" opacity="0.20" />
+          <ellipse cx="132" cy="86" rx="5" ry="3" fill="var(--buddy-eye-color)" opacity="0.20" />
 
           {/* Subtle smile (varies by state via CSS) */}
           <path
