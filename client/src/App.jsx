@@ -30,6 +30,7 @@ const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
 const CanvaLanding = lazy(() => import("./pages/CanvaLanding.jsx"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
 const Start = lazy(() => import("./pages/Start.tsx"));
 const Register = lazy(() => import("./pages/Register.jsx"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
@@ -367,6 +368,8 @@ export default function App() {
               <Route path="/signup" component={Register} />
               <Route path="/sign-up" component={Register} />
               <Route path="/signin" component={Login} />
+              <Route path="/admin-login" component={AdminLogin} />
+              <Route path="/admin/login" component={AdminLogin} />
               <Route path="/sign-in" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={ResetPassword} />
