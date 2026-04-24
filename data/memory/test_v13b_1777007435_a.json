@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I feel anxious right now and need to calm down"
+  },
+  {
+    "role": "assistant",
+    "content": "It’s understandable to feel anxious. Let’s take a moment to ground ourselves with some breathing. \n\nWe'll do a round of Box Breathing together. \n\n1. **Inhale deeply through your nose for 4 seconds...**  \n   (1... 2... 3... 4...)\n\n2. **Hold that breath for 4 seconds...**  \n   (1... 2... 3... 4...)\n\n3. **Exhale slowly through your mouth for 4 seconds...**  \n   (1... 2... 3... 4...)\n\n4. **Hold your breath again for 4 seconds...**  \n   (1... 2... 3... 4...)\n\nTake a moment to notice how you feel now. Remember, you can always return to this practice whenever you need. Take what serves you. You know yourself best."
+  }
+]

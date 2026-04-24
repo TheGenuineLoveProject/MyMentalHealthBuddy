@@ -147,10 +147,21 @@
 .buddy--celebrate .buddy__mouth  { d: path("M 76 84 Q 100 104 124 84"); opacity: 0.85; }
 .buddy--crisis .buddy__mouth     { d: path("M 82 90 L 118 90"); opacity: 0.65; }
 
+/* v1.2 safety: crisis must NEVER pulse fast or use a red fallback.
+   No animation-duration override here — cadence stays slow (5800ms) from
+   VISUAL_MAP. Fallback color is green, not red. Steady, grounded presence. */
 .buddy--crisis .buddy__heart-shape,
 .buddy--crisis .buddy__heart-glow {
-  animation-duration: 1400ms;
-  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #FF8585));
+  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #7FD8A8));
+}
+
+/* v1.3 transition polish: smooth color shift between buddy states.
+   Only `fill` transitions (filter is keyframe-driven, leave it alone).
+   Disabled under prefers-reduced-motion below. */
+.buddy__eye,
+.buddy__heart-shape,
+.buddy__heart-glow {
+  transition: fill 600ms ease;
 }
 
 .buddy__shadow {

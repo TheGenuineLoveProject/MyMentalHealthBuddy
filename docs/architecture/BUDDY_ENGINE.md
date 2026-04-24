@@ -1,9 +1,46 @@
 # MMHB Buddy Engine — Architecture
 
-> **Status: v1.1**
+> **Status: v1.3**
 > Healing-domain modular companion for MyMentalHealthBuddy.
 > Visual avatar + emotional state machine + safe AI route + React hook +
-> telemetry-ready output.
+> telemetry-ready output + signal-driven /start integration.
+
+## v1.3 Changes (April 2026)
+
+- **Avatar bound to real /start outcomes** (not just static or input-based).
+  `client/src/pages/Start.tsx` now derives `buddyState` from a pure mapper
+  `mapToBuddyState({modules, toolId, selectedToolId})` driven off the
+  existing `/api/ai/chat` response and the entry-point button the user
+  clicked.
+- **Signal precedence (highest first):** `crisis` → `toolCompleted` →
+  `mapToBuddyState(modules + toolId + selectedToolId)` → `calm`. Crisis is
+  never overridden; tool completion always lifts to `encouraged`.
+- **`selectedToolId` fallback** ensures the avatar reacts immediately on
+  click (before AI responds) AND stays meaningful when the AI doesn't tag
+  modules. Mapping: `calm`→anxious, `think`→encouraged, `feel`→sad.
+- **Smooth color transitions** (`transition: fill 600ms ease`) on eyes and
+  heart so state changes never snap or flash. Disabled under
+  `prefers-reduced-motion`.
+- **No AI / route / orchestrator changes.** Pure read-only client wiring
+  on top of existing surfaces.
+
+## v1.2 Changes (April 2026)
+
+- **Crisis safety re-grounded.** Crisis state now uses calm green eyes
+  (`#6FE3B0`) and steady green heart (`#7FD8A8`) at a slow 5800ms pulse —
+  emotionally safe and grounded, never alarming. The previous red+fast
+  values were removed from both `VISUAL_MAP` and the CSS override.
+- **Slower, calmer cadences.** Anxious heart pulse slowed to 4400ms (was
+  2200ms — too close to mirroring distress). Sad shifted from blue to soft
+  purple (`#B19CD9`) per healing-domain spec. Overwhelmed dimmed to sage
+  green for a held-not-flooded feel. Celebrate kept warm gold heart with
+  green eyes.
+- **Server-side `BUDDY_VISUALS` mirror in `server/routes/buddy.mjs` is
+  intentionally NOT updated** in v1.2 — strict rule forbade modifying
+  that file. The rendered avatar on `/start` reads from the *client*
+  `VISUAL_MAP` (via `getBuddyVisualOutput`), so the visible UI is correct.
+  The `/api/buddy` response's `buddy` block returns slightly older visual
+  values; this is informational drift only and doesn't affect rendering.
 
 ## v1.1 Changes (April 2026)
 

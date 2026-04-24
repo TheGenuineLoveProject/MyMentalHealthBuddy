@@ -163,6 +163,49 @@ const TOOL_BUTTONS = [
   },
 ] as const;
 
+/**
+ * MMHB Buddy Engine v1.3 — state mapper.
+ *
+ * Translates real signals from the /start surface into a BuddyState the
+ * avatar can render. Pure function — no side effects, no AI logic, no
+ * business logic.
+ *
+ * Signal precedence (highest first):
+ *   1. modules: "anxiety"              → "anxious"
+ *   2. modules: "emotional_processing" → "sad"
+ *   3. modules: "cognitive_reframe"    → "encouraged"
+ *   4. toolId  "overload_reset"        → "overwhelmed"
+ *   5. selectedToolId fallback (the button the user actually clicked):
+ *        "calm"  (Calm Me Down)         → "anxious"
+ *        "think" (Help Me Think Clearly)→ "encouraged"
+ *        "feel"  (Understand Feeling)   → "sad"
+ *      Used when AI didn't tag modules — Buddy still understands the
+ *      moment because the user's chosen entry-point IS a signal.
+ *   6. fallback                        → "calm"
+ *
+ * Crisis and toolCompleted are handled separately at the call site
+ * (they outrank module-based mapping; see Start.tsx useEffect).
+ */
+function mapToBuddyState({
+  modules = [],
+  toolId = "",
+  selectedToolId = "",
+}: {
+  modules?: string[];
+  toolId?: string;
+  selectedToolId?: string;
+}): BuddyState {
+  if (modules.includes("anxiety")) return "anxious";
+  if (modules.includes("emotional_processing")) return "sad";
+  if (modules.includes("cognitive_reframe")) return "encouraged";
+  if (toolId === "overload_reset") return "overwhelmed";
+  // Fallback: derive from the entry-point button the user clicked.
+  if (selectedToolId === "calm") return "anxious";
+  if (selectedToolId === "think") return "encouraged";
+  if (selectedToolId === "feel") return "sad";
+  return "calm";
+}
+
 function getOrCreateGuestId(): string {
   try {
     const existing = localStorage.getItem("mmhb_guest_id");
@@ -199,6 +242,9 @@ export default function Start() {
   // Engagement signals — fire-once per /start session.
   const [toolClickCount, setToolClickCount] = useState(0);
   const [toolCompleted, setToolCompleted] = useState(false);
+  // v1.3: tracks the entry-point button the user clicked. Read-only signal
+  // for BuddyAvatar — never affects AI / tool execution / response logic.
+  const [selectedToolId, setSelectedToolId] = useState<string | null>(null);
   // Synchronous one-shot latch for tool_completed: React state updates are
   // async, so two rapid clicks can both observe `toolCompleted === false`
   // before re-render fires. The ref mutates synchronously and guarantees
@@ -266,6 +312,10 @@ export default function Start() {
     setStreak(null);
     setToolCompleted(false);
     toolCompletedLatchRef.current = false;
+    // v1.3: capture the entry-point as a Buddy signal so the avatar can
+    // react immediately (before the AI response arrives) and as a fallback
+    // when the AI doesn't tag modules. See mapToBuddyState above.
+    setSelectedToolId(buttonId);
     track("first_tool_selected", { tool: buttonId });
     try {
       const res = await fetch("/api/ai/chat", {
@@ -301,11 +351,47 @@ export default function Start() {
   const tool = result?.response?.tool ?? null;
   const reply = result?.response?.reply ?? null;
 
-  // MMHB Buddy Engine v1.1 — visual companion only on /start.
-  // Drives state from the existing `crisis` flag if set; otherwise calm.
-  // Does NOT call /api/buddy here, does NOT change /api/ai/chat behavior,
-  // does NOT change tool execution or response rendering.
-  const buddyState: BuddyState = crisis ? "crisis" : "calm";
+  // MMHB Buddy Engine v1.3 — connect avatar to REAL user-flow signals.
+  //
+  // Strict scope:
+  //   - Read-only on existing state (`crisis`, `toolCompleted`, `result`).
+  //   - Does NOT call /api/buddy, does NOT touch /api/ai/chat, does NOT
+  //     change tool execution, does NOT change response rendering.
+  //   - Pure signal-to-visual mapping. The mapper itself is pure
+  //     (mapToBuddyState above the component).
+  //
+  // Precedence (highest first):
+  //   1. crisis           → "crisis"     (safety — never overridden)
+  //   2. toolCompleted    → "encouraged" (user finished the exercise)
+  //   3. result OR selectedToolId → mapToBuddyState(...)
+  //        - prefers AI signals (modules, toolId)
+  //        - falls back to selectedToolId so Buddy reacts immediately
+  //          and stays meaningful even if the AI doesn't tag modules
+  //   4. otherwise        → "calm"       (idle / pre-interaction)
+  const [buddyState, setBuddyState] = useState<BuddyState>("calm");
+  useEffect(() => {
+    if (crisis) {
+      setBuddyState("crisis");
+      return;
+    }
+    if (toolCompleted) {
+      setBuddyState("encouraged");
+      return;
+    }
+    // Map from any signal we have: AI response (preferred) OR the
+    // entry-point button (immediate, available before AI responds).
+    if (result?.response || selectedToolId) {
+      setBuddyState(
+        mapToBuddyState({
+          modules: result?.response?.modules,
+          toolId: result?.response?.tool?.tool?.id,
+          selectedToolId: selectedToolId ?? undefined,
+        }),
+      );
+      return;
+    }
+    setBuddyState("calm");
+  }, [crisis, toolCompleted, result, selectedToolId]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
