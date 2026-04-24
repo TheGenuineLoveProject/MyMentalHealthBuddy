@@ -50,6 +50,26 @@ consistent framing.
     deferred pending UX review.
 - **Sizing convention:** 140px on landing surfaces (centerpiece);
   88px on work-focused surfaces (supportive presence, not centerpiece).
+- **Shared client emitter (v2.1 — DRY + correlation gap-fix):**
+  `client/src/lib/buddyTelemetry.ts` exports `emitBuddyEvent<E>(type, metadata)`,
+  a typed fire-and-forget helper for the four `buddy_*` events. The
+  metadata parameter is a discriminated union of `BuddyEventMap`, so
+  the wrong shape for a given event name is a compile error.
+  - Fixes a guest-correlation gap: the previous `BuddyPanel` local
+    `emitPanelEvent` only attached `x-guest-id` if localStorage
+    *already* held one. A brand-new visitor landing on `/journal` or
+    `/state` would emit panel-view events with no correlation key,
+    breaking funnel analysis for first-touch panel impressions. The
+    shared helper uses get-or-create, matching `Start.tsx`'s
+    `getOrCreateGuestId()` behaviour.
+  - `BuddyPanel` migrated to the helper. `Start.tsx` is grandfathered
+    on its local `track()` because it lives in the strict-protected
+    "/start behavior" set; wire format is identical, so there is no
+    observable difference.
+  - Adding a new Buddy event now requires touching two places:
+    (1) `BuddyEventMap` here, (2) `ALLOWED_EVENT_TYPES` in
+    `server/ai/aiTelemetry.mjs`. This dual-touch is by design — keeps
+    the two pipelines from drifting silently.
 - **Server telemetry allowlist (closes a v1.8/v1.9/v2.0 silent-drop gap):**
   `server/ai/aiTelemetry.mjs` `ALLOWED_EVENT_TYPES` now accepts
   `buddy_panel_viewed`, `buddy_share_shown`, `buddy_share_clicked`,

@@ -24,34 +24,7 @@
 import { useEffect, type ReactNode } from "react";
 import BuddyAvatar from "./BuddyAvatar";
 import type { BuddyState } from "@/lib/avatarState";
-
-/**
- * Local telemetry helper — same pattern as Start.tsx's `track()`. POSTs
- * directly to /api/telemetry/event with no schema gating, so additive
- * Buddy Engine events (`buddy_panel_viewed`, etc.) flow through without
- * requiring registration in the GA4 event registry. Telemetry failure
- * NEVER breaks the UI — fire-and-forget, swallow all errors.
- */
-function emitPanelEvent(type: string, metadata: Record<string, unknown>): void {
-  try {
-    let guestId = "";
-    try {
-      guestId = localStorage.getItem("mmhb_guest_id") || "";
-    } catch {
-      /* localStorage may be unavailable (private mode, SSR) — proceed without */
-    }
-    void fetch("/api/telemetry/event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(guestId ? { "x-guest-id": guestId } : {}),
-      },
-      body: JSON.stringify({ type, metadata }),
-    }).catch(() => {});
-  } catch {
-    /* never break UI on telemetry */
-  }
-}
+import { emitBuddyEvent } from "@/lib/buddyTelemetry";
 
 export interface BuddyPanelProps {
   /** Buddy emotional state (drives avatar visuals via the v1.9 contract). */
@@ -84,8 +57,11 @@ export default function BuddyPanel({
   // Re-fires when state changes so funnel analyses can attribute panel
   // impressions to the emotional state Buddy was rendering at that moment.
   // No message text, no AI reply, no profile data — only enum metadata.
+  // Uses the shared, typed `emitBuddyEvent` helper (v2.1) so every
+  // Buddy surface — present and future — gets identical wire shape,
+  // identical guest-ID handling, and compile-time payload checking.
   useEffect(() => {
-    emitPanelEvent("buddy_panel_viewed", { surface, state });
+    emitBuddyEvent("buddy_panel_viewed", { surface, state });
   }, [surface, state]);
 
   return (

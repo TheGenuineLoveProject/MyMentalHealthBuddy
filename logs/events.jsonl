@@ -20,3 +20,4 @@
 {"type":"buddy_share_clicked","guestId":"gap_1777012115","metadata":{"surface":"start","state":"calm","toolId":"breath","buddyState":"calm","method":"clipboard"},"ts":1777012115607}
 {"type":"buddy_accessibility_ready","guestId":"gap_1777012115","metadata":{"surface":"start","state":"calm","toolId":"breath","buddyState":"calm","method":"clipboard"},"ts":1777012115644}
 {"type":"start_page_click","guestId":"gap_1777012115","metadata":{},"ts":1777012116761}
+{"type":"buddy_panel_viewed","guestId":"emit_1777012380","metadata":{"surface":"journal","state":"calm"},"ts":1777012380721}
