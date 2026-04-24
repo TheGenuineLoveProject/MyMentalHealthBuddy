@@ -6633,3 +6633,46 @@ h3, .h3, .heading-3 {
   .text-aurora { animation: none !important; }
   :where(button, a, input, select, textarea, [tabindex]):focus-visible { transition: none !important; }
 }
+
+/* =====================================================================
+   Visual polish v5 — branded loading states
+   Cascades to every <Loader2 /> already in the codebase via Lucide's
+   .lucide-loader-2 class. Zero file edits required.
+   ===================================================================== */
+.lucide-loader-2,
+.lucide-loader,
+.lucide-loader-circle,
+.animate-spin.lucide {
+  color: var(--glp-sage, #1ec890);
+  filter: drop-shadow(0 0 6px rgba(30, 200, 144, 0.35))
+          drop-shadow(0 0 12px rgba(190, 134, 34, 0.18));
+}
+.dark .lucide-loader-2,
+.dark .lucide-loader,
+.dark .lucide-loader-circle,
+.dark .animate-spin.lucide {
+  color: rgba(56, 220, 168, 0.95);
+  filter: drop-shadow(0 0 8px rgba(56, 220, 168, 0.45))
+          drop-shadow(0 0 14px rgba(140, 116, 220, 0.22));
+}
+
+/* Inline branded spinner — sage breathing dot for new code */
+.brand-spinner {
+  display: inline-block;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%,
+    var(--glp-sage, #1ec890) 0%,
+    var(--glp-sage-deep, #062a2a) 95%);
+  box-shadow:
+    0 0 8px  rgba(30, 200, 144, 0.45),
+    0 0 18px rgba(190, 134, 34, 0.18);
+  animation: brandSpinnerPulse 1.6s ease-in-out infinite;
+  vertical-align: middle;
+}
+@keyframes brandSpinnerPulse {
+  0%, 100% { transform: scale(0.85); opacity: 0.65; }
+  50%      { transform: scale(1.05); opacity: 1.00; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-spinner { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
