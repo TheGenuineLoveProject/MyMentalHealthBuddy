@@ -182,6 +182,85 @@ app.use("/api/ai", optionalAuth, aiRoutes);
 // MMHB Buddy Engine — healing-domain visual+text endpoint (POST /api/buddy)
 app.use("/api", buddyRoutes);
 
+// ============================================================================
+// EXTENDED ROUTE SURFACE — safe-mount of feature routers
+// ============================================================================
+// app.mjs historically mounted only the locked AI/admin/buddy contracts. The
+// platform's user-facing features (blog, newsletter, leads/contact/feedback,
+// user/account, journal/mood/gratitude, billing/revenue, gamification,
+// onboarding/dashboard/insights, social-posts, uploads, progress) have their
+// router files in server/routes/ but were never mounted here, so they 404'd
+// at runtime — leaving the user unable to test those features end-to-end.
+//
+// This block dynamically imports and mounts each missing router behind a
+// try/catch so a single broken router file never crashes boot. Each entry
+// declares its [path, file, options] — options can include `auth: 'optional'
+// | 'required' | 'admin' | 'adult'` and `limiter: aiLimiter | adminLimiter`.
+// Locked contract routes above are NOT touched.
+// ============================================================================
+const EXTENDED_ROUTES = [
+  // Public-facing content
+  { mount: "/api/blog",          file: "./routes/blog.mjs" },
+  { mount: "/api/newsletter",    file: "./routes/newsletter.mjs" },
+  { mount: "/api/leads",         file: "./routes/leads.mjs" },
+  { mount: "/api/contact",       file: "./routes/contact.mjs" },
+  { mount: "/api/feedback",      file: "./routes/feedback.mjs" },
+  // User profile / account
+  { mount: "/api/user",          file: "./routes/user.mjs",          auth: "optional" },
+  { mount: "/api/account",       file: "./routes/account.mjs",       auth: "optional" },
+  // Core wellness features (adult-gated)
+  { mount: "/api/journal",       file: "./routes/journal.mjs",       auth: "adult" },
+  { mount: "/api/mood",          file: "./routes/mood.mjs",          auth: "optional" },
+  { mount: "/api/gratitude",     file: "./routes/gratitude.mjs",     auth: "optional" },
+  { mount: "/api/favorites",     file: "./routes/favorites.mjs",     auth: "optional" },
+  { mount: "/api/progress",      file: "./routes/progress.mjs",      auth: "optional" },
+  // Engagement
+  { mount: "/api/gamification",  file: "./routes/gamification.mjs",  auth: "optional" },
+  { mount: "/api/badges",        file: "./routes/badges.mjs",        auth: "optional" },
+  { mount: "/api/onboarding",    file: "./routes/onboarding.mjs",    auth: "optional" },
+  { mount: "/api/insights",      file: "./routes/insights.mjs",      auth: "optional" },
+  // Billing
+  { mount: "/api/billing",       file: "./routes/billing.mjs",       auth: "optional" },
+  { mount: "/api/revenue",       file: "./routes/revenue.mjs",       auth: "required" },
+  { mount: "/api/pro-features",  file: "./routes/pro-features.mjs",  auth: "optional" },
+  // Social
+  { mount: "/api/social/posts",  file: "./routes/social-posts.mjs" },
+  { mount: "/api/uploads",       file: "./routes/object-storage.mjs",auth: "required" },
+  // Telemetry / analytics (already have telemetry mounted; these are extra)
+  { mount: "/api/metrics",       file: "./routes/metrics.mjs" },
+  { mount: "/api/analytics",     file: "./routes/analytics.mjs" },
+];
+
+const mountedExtended = [];
+const failedExtended = [];
+for (const r of EXTENDED_ROUTES) {
+  try {
+    const mod = await import(r.file);
+    const handler = mod.default || mod.router || mod;
+    if (typeof handler !== "function" && (typeof handler !== "object" || !handler.use)) {
+      failedExtended.push(`${r.mount} (no default export)`);
+      continue;
+    }
+    const middleware = [];
+    if (r.auth === "optional") middleware.push(optionalAuth);
+    if (r.auth === "required") middleware.push(requireAuth);
+    if (r.auth === "admin")    middleware.push(requireAuth, requireAdmin);
+    if (r.auth === "adult")    middleware.push(requireAdult);
+    if (middleware.length) {
+      app.use(r.mount, ...middleware, handler);
+    } else {
+      app.use(r.mount, handler);
+    }
+    mountedExtended.push(r.mount);
+  } catch (e) {
+    failedExtended.push(`${r.mount} (${e?.message || e})`);
+  }
+}
+console.log(`[boot] extended routes mounted: ${mountedExtended.length}/${EXTENDED_ROUTES.length}`);
+if (failedExtended.length) {
+  console.warn(`[boot] extended routes skipped: ${failedExtended.join(", ")}`);
+}
+
 // ----------------------------
 // ROOT
 // ----------------------------
