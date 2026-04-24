@@ -37,3 +37,8 @@ console.log("NO_DUPLICATE_CONTRACT_ROUTES");
 NODE
 
 echo "PASS: locked contract route registry is unique"
+
+# v2.7 — Buddy Engine heading-semantics architectural-invariant guard.
+# Joined into the same pre-test gate so both architectural contracts
+# (locked routes + Buddy heading prop convention) fail loudly together.
+node scripts/check-buddy-heading-contract.mjs
