@@ -1,5 +1,6 @@
 import { Heart, Mail } from 'lucide-react';
-import { SiX, SiInstagram, SiLinkedin, SiYoutube, SiFacebook } from 'react-icons/si';
+import { SiX, SiInstagram, SiYoutube, SiFacebook } from 'react-icons/si';
+import { FaLinkedin as SiLinkedin } from 'react-icons/fa';
 import { Link } from 'wouter';
 
 /**
