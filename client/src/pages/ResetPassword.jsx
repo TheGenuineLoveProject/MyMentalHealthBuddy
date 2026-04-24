@@ -7,6 +7,7 @@ import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, AlertCircle, Lock, Eye, EyeOff, Heart, Shield, ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import SEO from "../components/SEO";
+import BuddyAvatar from "../components/avatar/BuddyAvatar";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -217,12 +218,13 @@ export default function ResetPassword() {
             className="flex items-center justify-center gap-3 mb-8 hover:opacity-80 transition-opacity"
             data-testid="link-home"
           >
-            <img 
-              src="/brand/mmhb-icon.svg" 
-              alt="MyMentalHealthBuddy" 
-              className="w-12 h-12 rounded-xl object-contain"
-              style={{ boxShadow: '0 3px 14px var(--glp-sage-deep-20)' }}
-            />
+            <span
+              aria-hidden="true"
+              className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 14px var(--glp-sage-deep-20)' }}
+            >
+              <BuddyAvatar state="calm" size={48} className="w-full h-full" />
+            </span>
             <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
           </Link>
           

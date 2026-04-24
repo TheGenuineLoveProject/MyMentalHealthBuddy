@@ -6,6 +6,7 @@ import { z } from "zod";
 import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, ArrowLeft, Mail, Send, Heart, Shield, Clock } from "lucide-react";
 import SEO from "../components/SEO";
+import BuddyAvatar from "../components/avatar/BuddyAvatar";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -135,12 +136,13 @@ export default function ForgotPassword() {
             className="flex items-center justify-center gap-4 mb-10 hover:opacity-90 transition-opacity group"
             data-testid="link-home"
           >
-            <img 
-              src="/brand/mmhb-icon.svg" 
-              alt="MyMentalHealthBuddy" 
-              className="w-14 h-14 rounded-2xl object-contain transition-all group-hover:scale-105"
-              style={{ boxShadow: '0 4px 16px var(--glp-sage-30)' }}
-            />
+            <span
+              aria-hidden="true"
+              className="w-14 h-14 rounded-2xl flex items-center justify-center overflow-hidden transition-all group-hover:scale-105"
+              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 4px 16px var(--glp-sage-30)' }}
+            >
+              <BuddyAvatar state="calm" size={56} className="w-full h-full" />
+            </span>
             <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
           </Link>
           

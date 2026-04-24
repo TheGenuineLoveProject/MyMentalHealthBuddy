@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SEO from '../components/SEO';
+import BuddyAvatar from '../components/avatar/BuddyAvatar';
 import { 
   SacredLayout, 
   SacredSection, 
@@ -169,13 +170,14 @@ export default function Home() {
           aria-label="Main navigation"
         >
           <Link href="/" className="flex items-center gap-4 min-w-0">
-            <img 
-              src="/brand/mmhb-icon.svg" 
-              alt="MyMentalHealthBuddy" 
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-contain flex-shrink-0 sacred-animate-breathe"
-              style={{ boxShadow: '0 4px 16px var(--glp-sage-deep-20)' }}
+            <span
+              aria-hidden="true"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0 sacred-animate-breathe"
+              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 4px 16px var(--glp-sage-deep-20)' }}
               data-testid="img-home-logo"
-            />
+            >
+              <BuddyAvatar state="calm" size={64} className="w-full h-full" />
+            </span>
             <span 
               className="sacred-heading text-xl hidden md:block"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
@@ -206,13 +208,13 @@ export default function Home() {
       <main id="main-content" className="relative z-10">
         <Hero
           logo={
-            <img 
-              src="/brand/mmhb-icon.svg" 
-              alt="Decorative illustration" 
-              className="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-contain sacred-animate-rotate-glow"
-              style={{ boxShadow: '0 8px 32px var(--glp-sage-deep-30)' }}
+            <span
               aria-hidden="true"
-            />
+              className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center overflow-hidden sacred-animate-rotate-glow"
+              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 8px 32px var(--glp-sage-deep-30)' }}
+            >
+              <BuddyAvatar state="calm" size={96} className="w-full h-full" />
+            </span>
           }
           badge={
             <span 

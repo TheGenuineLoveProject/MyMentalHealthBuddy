@@ -5,6 +5,7 @@ import SEO from "../components/SEO";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
 import { useAuth } from "../context/AuthContext.jsx";
+import BuddyAvatar from "../components/avatar/BuddyAvatar";
 
 export default function Register() {
   const [, setLocation] = useLocation();
@@ -86,13 +87,14 @@ export default function Register() {
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-5">
             <Link href="/" className="inline-flex items-center gap-3 group">
-              <img
-                src="/brand/mmhb-icon.svg"
-                alt="MyMentalHealthBuddy"
-                className="w-14 h-14 rounded-xl object-contain transition-all group-hover:scale-105"
-                style={{ boxShadow: '0 3px 16px var(--glp-sage-deep-20)' }}
+              <span
+                aria-hidden="true"
+                className="w-14 h-14 rounded-xl flex items-center justify-center overflow-hidden transition-all group-hover:scale-105"
+                style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 16px var(--glp-sage-deep-20)' }}
                 data-testid="img-register-logo"
-              />
+              >
+                <BuddyAvatar state="calm" size={56} className="w-full h-full" />
+              </span>
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>
           </div>

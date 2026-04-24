@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import BuddyAvatar from "../components/avatar/BuddyAvatar";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 
@@ -74,7 +75,9 @@ export default function CRMPage() {
             <div className="flex justify-between h-16">
               <div className="flex items-center gap-8">
                 <Link href="/" className="flex items-center gap-3" data-testid="link-home">
-                  <img src="/brand/mmhb-icon.svg" alt="MyMentalHealthBuddy" className="h-10 w-10 rounded-xl object-contain" style={{ boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }} />
+                  <span aria-hidden="true" className="h-10 w-10 rounded-xl flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }}>
+                    <BuddyAvatar state="calm" size={40} className="w-full h-full" />
+                  </span>
                   <span className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Dashboard</span>
                 </Link>
                 <div className="hidden md:flex items-center gap-1">

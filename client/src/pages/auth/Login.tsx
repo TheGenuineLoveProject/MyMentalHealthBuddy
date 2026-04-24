@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/Input";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email"),
@@ -54,12 +55,13 @@ export default function Login() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 mb-6" data-testid="link-home">
-            <img 
-              src="/brand/mmhb-icon.svg" 
-              alt="MyMentalHealthBuddy" 
-              className="w-14 h-14 rounded-xl object-contain"
-              style={{ boxShadow: '0 3px 16px rgba(38,79,79,0.2)' }}
-            />
+            <span
+              aria-hidden="true"
+              className="w-14 h-14 rounded-xl flex items-center justify-center overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 16px rgba(38,79,79,0.2)' }}
+            >
+              <BuddyAvatar state="calm" size={56} className="w-full h-full" />
+            </span>
             <span className="text-heading-lg text-teal">MyMentalHealthBuddy</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Welcome Back</h1>

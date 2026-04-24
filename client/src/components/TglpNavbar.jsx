@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ModeToggle from "./ModeToggle.jsx";
 import GlobalSearch from "./GlobalSearch.jsx";
 import { useAuth } from "../context/AuthContext";
+import BuddyAvatar from "./avatar/BuddyAvatar";
 
 function ProBadge() {
   return (
@@ -77,14 +78,10 @@ export default function TglpNavbar() {
               boxShadow: "0 2px 12px var(--glp-sage-deep-20)",
             }}
           >
-            <img 
-              src="/brand/mmhb-icon.svg" 
-              alt="MyMentalHealthBuddy" 
-              className="w-full h-full object-contain"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling.style.display = 'block';
-              }}
+            <BuddyAvatar
+              state="calm"
+              size={40}
+              className="w-full h-full"
               data-testid="img-brand-logo"
             />
             <Heart 

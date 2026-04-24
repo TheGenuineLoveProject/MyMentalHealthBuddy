@@ -5,6 +5,7 @@ import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
+import BuddyAvatar from "../components/avatar/BuddyAvatar";
 
 export default function Login() {
   const { isAuthenticated, isLoading, login } = useAuth();
@@ -90,13 +91,14 @@ export default function Login() {
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-6">
             <Link href="/" className="inline-flex flex-col items-center gap-3 group">
-              <img
-                src="/brand/mmhb-icon.svg"
-                alt="MyMentalHealthBuddy"
-                className="w-20 h-20 rounded-2xl object-contain transition-all group-hover:scale-105"
-                style={{ boxShadow: '0 4px 20px var(--glp-sage-deep-20)' }}
+              <span
+                aria-hidden="true"
+                className="w-20 h-20 rounded-2xl flex items-center justify-center overflow-hidden transition-all group-hover:scale-105"
+                style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 4px 20px var(--glp-sage-deep-20)' }}
                 data-testid="img-login-logo"
-              />
+              >
+                <BuddyAvatar state="calm" size={80} className="w-full h-full" />
+              </span>
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>
           </div>

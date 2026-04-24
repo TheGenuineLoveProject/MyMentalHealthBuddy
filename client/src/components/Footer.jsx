@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Heart, Shield, ExternalLink, BookOpen, Mail } from "lucide-react";
 import { Instagram, Youtube } from "../lib/lucide-brands";
+import BuddyAvatar from "./avatar/BuddyAvatar";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,13 +16,13 @@ export default function Footer() {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div className="flex items-center gap-3">
-            <img 
-              src="/brand/mmhb-icon.svg" 
-              alt="MyMentalHealthBuddy" 
-              className="w-10 h-10 rounded-xl object-contain"
-              style={{ boxShadow: '0 2px 10px rgba(38,79,79,0.12)' }}
+            <span
               aria-hidden="true"
-            />
+              className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 10px rgba(38,79,79,0.12)' }}
+            >
+              <BuddyAvatar state="calm" size={40} className="w-full h-full" />
+            </span>
             <span className="font-serif text-xl font-bold text-gray-900 dark:text-white">
               MyMentalHealthBuddy
             </span>
