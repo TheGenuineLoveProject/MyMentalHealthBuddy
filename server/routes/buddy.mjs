@@ -25,6 +25,33 @@ const STATES = [
   "celebrate",
 ];
 
+// Server-side mirror of the client BUDDY visual contract (v1.1).
+// Kept here so /api/buddy can return a complete `buddy` block in its response,
+// which lets a future hardware adapter or alternate client render correctly
+// without re-implementing the visual vocabulary.
+const BUDDY_VISUALS = {
+  calm:        { motion: "idle",       eyeColor: "#6FE3B0", heartColor: "#7FD8A8", heartPulse: 5200 },
+  sad:         { motion: "slow_glow",  eyeColor: "#7FB3D5", heartColor: "#5DA3C9", heartPulse: 6400 },
+  anxious:     { motion: "breathing",  eyeColor: "#F2C94C", heartColor: "#F0B040", heartPulse: 2200 },
+  overwhelmed: { motion: "grounding",  eyeColor: "#E08AB8", heartColor: "#D4729E", heartPulse: 1800 },
+  encouraged:  { motion: "warm_glow",  eyeColor: "#7AE2A6", heartColor: "#5DDB94", heartPulse: 4400 },
+  crisis:      { motion: "steady",     eyeColor: "#FF6B6B", heartColor: "#FF8585", heartPulse: 1400 },
+  celebrate:   { motion: "sparkle",    eyeColor: "#A78BFA", heartColor: "#FFD75A", heartPulse: 3200 },
+};
+
+function buildBuddyBlock(state) {
+  const safeStateName = STATES.includes(state) ? state : "calm";
+  const v = BUDDY_VISUALS[safeStateName] || BUDDY_VISUALS.calm;
+  return {
+    state: safeStateName,
+    safetyMode: safeStateName === "crisis" ? "active" : "passive",
+    motion: v.motion,
+    eyeColor: v.eyeColor,
+    heartColor: v.heartColor,
+    heartPulse: v.heartPulse,
+  };
+}
+
 // Spec-required canonical crisis line. This exact string MUST appear in every
 // crisis-state response (verified at the boundary by ensureCrisisLineInText).
 const CRISIS_LINE =
@@ -103,25 +130,29 @@ function safeState(value) {
 }
 
 router.post("/buddy", async (req, res) => {
-  const message = typeof req.body?.message === "string" ? req.body.message : "";
+  // === Validation: non-empty string, trimmed, <= 1000 chars ===
+  const raw = typeof req.body?.message === "string" ? req.body.message : "";
+  const message = raw.trim();
 
-  if (!message.trim()) {
+  if (!message) {
     return res.status(400).json({
       ok: false,
       error: "Please share a message so I can respond.",
       state: "calm",
+      buddy: buildBuddyBlock("calm"),
     });
   }
 
-  if (message.length > 2000) {
+  if (message.length > 1000) {
     return res.status(413).json({
       ok: false,
       error: "Message is too long. Please shorten it and try again.",
       state: "calm",
+      buddy: buildBuddyBlock("calm"),
     });
   }
 
-  // === Crisis short-circuit (server-canonical) ===
+  // === Crisis short-circuit (server-canonical, BEFORE any AI/provider call) ===
   try {
     const verdict = await detectCrisisFacade(message);
     if (verdict?.crisis) {
@@ -133,6 +164,7 @@ router.post("/buddy", async (req, res) => {
         ok: true,
         state: "crisis",
         text: reply,
+        buddy: buildBuddyBlock("crisis"),
         crisis: true,
         resources: verdict?.response?.resources || [],
       });
@@ -144,6 +176,7 @@ router.post("/buddy", async (req, res) => {
         text:
           verdict?.response?.reply ||
           "I can't help with that, but I can stay with you. What would feel supportive right now?",
+        buddy: buildBuddyBlock("calm"),
       });
     }
   } catch (err) {
@@ -157,7 +190,12 @@ router.post("/buddy", async (req, res) => {
   const state = safeState(classifyState(message));
   const text = pickReply(state);
 
-  return res.json({ ok: true, state, text });
+  return res.json({
+    ok: true,
+    state,
+    text,
+    buddy: buildBuddyBlock(state),
+  });
 });
 
 export default router;

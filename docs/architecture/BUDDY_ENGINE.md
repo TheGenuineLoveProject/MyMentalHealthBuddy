@@ -1,8 +1,29 @@
 # MMHB Buddy Engine — Architecture
 
+> **Status: v1.1**
 > Healing-domain modular companion for MyMentalHealthBuddy.
 > Visual avatar + emotional state machine + safe AI route + React hook +
 > telemetry-ready output.
+
+## v1.1 Changes (April 2026)
+
+- **Server response contract** now returns a complete `buddy` block with
+  `safetyMode`, `motion`, `eyeColor`, `heartColor`, `heartPulse` so any client
+  (web, mobile, future hardware companion) can render the visual without
+  re-implementing the vocabulary.
+- **Motion vocabulary upgraded** to semantic, healing-domain names:
+  `idle`, `slow_glow`, `breathing`, `grounding`, `warm_glow`, `steady`,
+  `sparkle`. The previous mechanical names (`breathe`/`sway`/`tremor`/etc.)
+  were replaced — the visual behavior was preserved, only the vocabulary
+  changed.
+- **Input validation tightened** — server now trims input and enforces a
+  1000-character maximum (was 2000). Empty input returns `400`.
+- **/start integration (visual-only)** — `BuddyAvatar` now renders at the top
+  of `client/src/pages/Start.tsx`. State is driven by the existing `crisis`
+  flag (calm by default). Buddy does **not** call `/api/buddy` from `/start`;
+  it does **not** alter `/api/ai/chat`, tool execution, or response
+  rendering. The `/start` `useBuddy()` integration is intentionally deferred
+  to a future task.
 
 ---
 

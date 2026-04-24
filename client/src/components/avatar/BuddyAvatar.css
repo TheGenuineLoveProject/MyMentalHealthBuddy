@@ -1,4 +1,5 @@
-/* BuddyAvatar.css — visual-only styles. State classes drive motion + glow.
+/* BuddyAvatar.css — visual-only styles. State + motion classes drive feel.
+   v1.1: motion vocabulary aligned with healing-domain semantics.
    All animations gated by prefers-reduced-motion. */
 
 .buddy {
@@ -54,59 +55,88 @@
   94%, 96%      { transform: scaleY(0.1); }
 }
 
-/* ---------- Body micro-motion (state class driven) ---------- */
+/* ---------- Body micro-motion (motion class driven, v1.1 vocab) ---------- */
 .buddy__body, .buddy__head {
   transform-origin: center bottom;
   transform-box: fill-box;
 }
 
-.buddy--motion-breathe .buddy__body,
-.buddy--motion-breathe .buddy__head {
-  animation: buddyBreathe 5200ms ease-in-out infinite;
+/* idle — gentle baseline breath (calm) */
+.buddy--motion-idle .buddy__body,
+.buddy--motion-idle .buddy__head {
+  animation: buddyIdle 5200ms ease-in-out infinite;
 }
-@keyframes buddyBreathe {
+@keyframes buddyIdle {
   0%, 100% { transform: translateY(0) scale(1); }
   50%      { transform: translateY(-1.5px) scale(1.015); }
 }
 
-.buddy--motion-sway .buddy__head {
-  animation: buddySway 5800ms ease-in-out infinite;
+/* slow_glow — gentle sway with deepened heart glow (sad) */
+.buddy--motion-slow_glow .buddy__head {
+  animation: buddySlowSway 5800ms ease-in-out infinite;
 }
-@keyframes buddySway {
+.buddy--motion-slow_glow .buddy__heart-shape,
+.buddy--motion-slow_glow .buddy__heart-glow {
+  filter: drop-shadow(0 0 12px var(--buddy-heart-color, #5DA3C9));
+}
+@keyframes buddySlowSway {
   0%, 100% { transform: rotate(-2deg); }
   50%      { transform: rotate(2deg); }
 }
 
-.buddy--motion-tremor .buddy__body,
-.buddy--motion-tremor .buddy__head {
-  animation: buddyTremor 240ms ease-in-out infinite;
+/* breathing — pronounced slow inhale/exhale (anxious) */
+.buddy--motion-breathing .buddy__body,
+.buddy--motion-breathing .buddy__head {
+  animation: buddyBreathing 4200ms ease-in-out infinite;
 }
-@keyframes buddyTremor {
-  0%, 100% { transform: translateX(-0.6px); }
-  50%      { transform: translateX(0.6px); }
+@keyframes buddyBreathing {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-3px) scale(1.025); }
 }
 
-.buddy--motion-rise .buddy__body,
-.buddy--motion-rise .buddy__head {
-  animation: buddyRise 3600ms ease-in-out infinite;
+/* grounding — long, deliberate pulse (overwhelmed) */
+.buddy--motion-grounding .buddy__body,
+.buddy--motion-grounding .buddy__head {
+  animation: buddyGrounding 3200ms ease-in-out infinite;
 }
-@keyframes buddyRise {
+@keyframes buddyGrounding {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.022); }
+}
+
+/* warm_glow — subtle rise + warm halo (encouraged) */
+.buddy--motion-warm_glow .buddy__body,
+.buddy--motion-warm_glow .buddy__head {
+  animation: buddyWarmRise 3600ms ease-in-out infinite;
+}
+.buddy--motion-warm_glow .buddy__heart-shape {
+  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #5DDB94))
+          drop-shadow(0 0 4px #FFD75A);
+}
+@keyframes buddyWarmRise {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-3px); }
 }
 
-.buddy--motion-bounce .buddy__body,
-.buddy--motion-bounce .buddy__head {
-  animation: buddyBounce 1400ms cubic-bezier(.34,1.56,.64,1) infinite;
-}
-@keyframes buddyBounce {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
+/* steady — motionless presence (crisis) */
+.buddy--motion-steady .buddy__body,
+.buddy--motion-steady .buddy__head {
+  animation: none;
 }
 
-.buddy--motion-still .buddy__body,
-.buddy--motion-still .buddy__head {
-  animation: none;
+/* sparkle — joyful bounce + shimmer (celebrate) */
+.buddy--motion-sparkle .buddy__body,
+.buddy--motion-sparkle .buddy__head {
+  animation: buddySparkleBounce 1400ms cubic-bezier(.34,1.56,.64,1) infinite;
+}
+.buddy--motion-sparkle .buddy__heart-shape {
+  filter: drop-shadow(0 0 14px var(--buddy-heart-color, #FFD75A))
+          drop-shadow(0 0 6px #A78BFA);
+}
+@keyframes buddySparkleBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  35%      { transform: translateY(-7px) rotate(-1.5deg); }
+  65%      { transform: translateY(-2px) rotate(1.5deg); }
 }
 
 /* ---------- State-specific accents ---------- */
@@ -121,10 +151,6 @@
 .buddy--crisis .buddy__heart-glow {
   animation-duration: 1400ms;
   filter: drop-shadow(0 0 10px var(--buddy-heart-color, #FF8585));
-}
-.buddy--celebrate .buddy__heart-shape {
-  filter: drop-shadow(0 0 12px var(--buddy-heart-color, #FFD75A))
-          drop-shadow(0 0 4px #A78BFA);
 }
 
 .buddy__shadow {

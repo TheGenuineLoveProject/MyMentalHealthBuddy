@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import { Link } from "wouter";
 import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import type { BuddyState } from "@/lib/avatarState";
 
 type ToolPayload = {
   tool: { id: string; title: string; type: string; durationMin: number };
@@ -299,9 +301,20 @@ export default function Start() {
   const tool = result?.response?.tool ?? null;
   const reply = result?.response?.reply ?? null;
 
+  // MMHB Buddy Engine v1.1 — visual companion only on /start.
+  // Drives state from the existing `crisis` flag if set; otherwise calm.
+  // Does NOT call /api/buddy here, does NOT change /api/ai/chat behavior,
+  // does NOT change tool execution or response rendering.
+  const buddyState: BuddyState = crisis ? "crisis" : "calm";
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       <main className="mx-auto max-w-2xl px-6 py-12 md:py-20" data-testid="page-start">
+        {/* MMHB Buddy — visual companion (v1.1, /start integration) */}
+        <div className="flex justify-center mb-6" data-testid="container-buddy-avatar">
+          <BuddyAvatar state={buddyState} size={140} data-testid="buddy-avatar-start" />
+        </div>
+
         {/* HERO */}
         <section className="text-center mb-10" data-testid="section-hero">
           <h1

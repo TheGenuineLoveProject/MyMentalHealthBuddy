@@ -1,0 +1,115 @@
+Upgrade MMHB Buddy Engine to v1.1 safely.
+
+Goal:
+Verify the isolated Buddy Engine, harden it, then connect BuddyAvatar to /start as a visual companion only.
+
+STRICT RULES:
+- Do not modify /api/ai/chat.
+- Do not modify orchestrator, provider, memory, profile, summary, telemetry, crisis logic.
+- Do not replace /start.
+- Do not delete files.
+- Do not add business logic to Buddy.
+- Buddy is healing-domain only.
+
+PHASE 1 — VERIFY EXISTING BUDDY ENGINE
+Check these files exist:
+- client/src/components/avatar/BuddyAvatar.tsx
+- client/src/lib/avatarState.ts
+- client/src/hooks/useBuddy.ts
+- server/routes/buddy.mjs
+- docs/architecture/BUDDY_ENGINE.md
+
+If missing, create them from the prior Buddy Engine spec.
+If present, preserve them and only patch missing safeguards.
+
+PHASE 2 — HARDEN SERVER ROUTE
+In server/routes/buddy.mjs:
+- validate message is a non-empty string
+- max length 1000 chars
+- trim input
+- resolve state server-side
+- crisis short-circuit before any AI/provider call
+- return stable shape:
+  {
+    ok: true,
+    text: string,
+    state: string,
+    buddy: {
+      state,
+      safetyMode,
+      motion,
+      eyeColor,
+      heartColor,
+      heartPulse
+    }
+  }
+
+Crisis text must include:
+988 Suicide & Crisis Lifeline by calling or texting 988.
+
+PHASE 3 — HARDEN CLIENT STATE
+In client/src/lib/avatarState.ts:
+Ensure BuddyState includes:
+calm, sad, anxious, overwhelmed, encouraged, crisis, celebrate.
+
+Ensure getBuddyVisualOutput(state) returns:
+{
+  eyeColor,
+  heartColor,
+  heartPulse,
+  motion
+}
+
+Motions:
+- calm: idle
+- sad: slow_glow
+- anxious: breathing
+- overwhelmed: grounding
+- encouraged: warm_glow
+- crisis: steady
+- celebrate: sparkle
+
+PHASE 4 — CONNECT VISUALLY TO /start ONLY
+In client/src/pages/Start.tsx:
+- import BuddyAvatar
+- render BuddyAvatar near the top of the /start experience
+- drive its state from existing tool/message state if available
+- if no state exists, default to calm
+- do not change existing /api/ai/chat calls
+- do not change tool execution
+- do not change response rendering logic
+
+PHASE 5 — DOC UPDATE
+Update docs/architecture/BUDDY_ENGINE.md with:
+- v1.1 status
+- server response contract
+- visual-only /start integration
+- safety rules
+- future physical robot compatibility
+
+PHASE 6 — VERIFY
+Run:
+npm run dev
+
+Then verify:
+curl http://0.0.0.0:5000/health
+
+curl -X POST http://0.0.0.0:5000/api/buddy \
+-H "Content-Type: application/json" \
+-d '{"message":"I feel anxious"}'
+
+curl -X POST http://0.0.0.0:5000/api/buddy \
+-H "Content-Type: application/json" \
+-d '{"message":"I want to kill myself"}'
+
+Expected:
+- /health returns 200
+- anxious returns ok:true, state:"anxious"
+- crisis returns ok:true, state:"crisis", text includes 988
+- /start still loads
+- /api/ai/chat still works unchanged
+
+Return:
+- files changed
+- verification results
+- any skipped changes

@@ -24,14 +24,36 @@ export const BUDDY_STATES: readonly BuddyState[] = [
   "celebrate",
 ] as const;
 
+/**
+ * Motion vocabulary (v1.1).
+ * Semantic, healing-domain names — chosen to communicate intent to both the
+ * visual renderer and a future hardware adapter.
+ *
+ *   idle       — gentle baseline breath (calm)
+ *   slow_glow  — slow rocking with deepened heart glow (sad)
+ *   breathing  — pronounced slow inhale/exhale to coax the nervous system (anxious)
+ *   grounding  — long, deliberate scale pulse (overwhelmed)
+ *   warm_glow  — subtle rise with warm halo (encouraged)
+ *   steady     — motionless, present (crisis)
+ *   sparkle    — joyful bounce with extra glow (celebrate)
+ */
+export type BuddyMotion =
+  | "idle"
+  | "slow_glow"
+  | "breathing"
+  | "grounding"
+  | "warm_glow"
+  | "steady"
+  | "sparkle";
+
 export interface BuddyVisualOutput {
   state: BuddyState;
   eyeColor: string;
   heartColor: string;
   /** Heart-pulse cadence in ms (one full breath cycle) */
   heartPulse: number;
-  /** Body micro-motion descriptor: still | breathe | sway | tremor | rise | bounce */
-  motion: "still" | "breathe" | "sway" | "tremor" | "rise" | "bounce";
+  /** Body micro-motion descriptor (semantic, healing-domain vocabulary) */
+  motion: BuddyMotion;
   /** Optional copy hint for tooltips / aria-labels */
   label: string;
 }
@@ -48,7 +70,7 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     eyeColor: "#6FE3B0",
     heartColor: "#7FD8A8",
     heartPulse: 5200,
-    motion: "breathe",
+    motion: "idle",
     label: "Calm and present",
   },
   sad: {
@@ -56,7 +78,7 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     eyeColor: "#7FB3D5",
     heartColor: "#5DA3C9",
     heartPulse: 6400,
-    motion: "sway",
+    motion: "slow_glow",
     label: "Holding sadness gently",
   },
   anxious: {
@@ -64,7 +86,7 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     eyeColor: "#F2C94C",
     heartColor: "#F0B040",
     heartPulse: 2200,
-    motion: "tremor",
+    motion: "breathing",
     label: "Noticing anxious energy",
   },
   overwhelmed: {
@@ -72,7 +94,7 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     eyeColor: "#E08AB8",
     heartColor: "#D4729E",
     heartPulse: 1800,
-    motion: "tremor",
+    motion: "grounding",
     label: "Feeling overwhelmed — slow breath together",
   },
   encouraged: {
@@ -80,7 +102,7 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     eyeColor: "#7AE2A6",
     heartColor: "#5DDB94",
     heartPulse: 4400,
-    motion: "rise",
+    motion: "warm_glow",
     label: "Steady and encouraged",
   },
   crisis: {
@@ -88,7 +110,7 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     eyeColor: "#FF6B6B",
     heartColor: "#FF8585",
     heartPulse: 1400,
-    motion: "still",
+    motion: "steady",
     label: "Crisis support — you're not alone",
   },
   celebrate: {
@@ -96,7 +118,7 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     eyeColor: "#A78BFA",
     heartColor: "#FFD75A",
     heartPulse: 3200,
-    motion: "bounce",
+    motion: "sparkle",
     label: "Celebrating with you",
   },
 };
