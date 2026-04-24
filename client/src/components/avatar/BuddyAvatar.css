@@ -13,6 +13,17 @@
   height: 100%;
   display: block;
   overflow: visible;
+  /* v1.13 visible-presence — soft dimensional drop-shadow so Buddy reads
+     as "floating" on any page background. Without this, the body fills
+     blend into near-white surfaces and the figure feels flat. The shadow
+     is layered: a tight contact shadow + a soft cast shadow. Keeps Buddy
+     visible against light AND dark surfaces.
+     v1.13.1 — softened cast shadow (12/.14 → 10/.10) so smaller companion
+     renders (~80px on Journal/Mood/Onboarding panels per BUDDY_PANEL_COPY)
+     don't get a "cloudy" haze beneath them at tiny sizes. */
+  filter:
+    drop-shadow(0 3px 5px rgba(20, 30, 25, 0.09))
+    drop-shadow(0 10px 22px rgba(20, 30, 25, 0.10));
 }
 
 /* ---------- Heart pulse (cadence varies via --buddy-heart-pulse) ---------- */
