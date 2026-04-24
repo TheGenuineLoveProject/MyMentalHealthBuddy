@@ -36,6 +36,12 @@ export interface BuddyVisualOutput {
   label: string;
 }
 
+/**
+ * BuddyOutput — public, spec-canonical alias of BuddyVisualOutput.
+ * Use this name in new code; BuddyVisualOutput is kept for backward compat.
+ */
+export type BuddyOutput = BuddyVisualOutput;
+
 const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
   calm: {
     state: "calm",
