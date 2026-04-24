@@ -1,11 +1,170 @@
 # MMHB Buddy Engine — Architecture
 
-> **Status: v1.7**
+> **Status: v2.0**
 > Healing-domain modular companion for MyMentalHealthBuddy.
 > Visual avatar + emotional state machine + safe AI route + React hook +
 > telemetry-ready output + signal-driven /start integration + time-based
 > recovery + tool-specific expressions + memory-aware visual baseline +
-> accessibility & safety polish.
+> accessibility & safety polish + privacy-safe shareable moments +
+> standardized cross-platform `BuddyOutput` contract +
+> reusable `BuddyPanel` companion wrapper.
+
+## v2.0 Changes (April 2026)
+
+Cross-platform visual companion placement — zero changes to AI, server,
+orchestrator, memory, profile, telemetry crisis, or tool-execution logic.
+Buddy gains a reusable wrapper so future healing surfaces render with
+consistent framing.
+
+- **`BuddyPanel` reusable wrapper.** New file
+  `client/src/components/avatar/BuddyPanel.tsx`:
+  - Props: `state`, `title?`, `subtitle?`, `surface`, `size?`,
+    `children?`, `className?`, `data-testid?`.
+  - Composes `BuddyAvatar` with optional title/subtitle and an arbitrary
+    `children` slot (for surface-specific content like /start's
+    `aria-live` helper-copy region).
+  - **Visual / presentational only:** no fetch, no AI, no business
+    logic, no monetization logic, no crisis detection — entirely
+    delegates state to upstream.
+  - Accessible: `<section>` semantics, no new tab stops, no
+    interactive children inside the panel.
+- **`/start` migrated to `BuddyPanel`.** The previous direct
+  `<BuddyAvatar />` placement in `client/src/pages/Start.tsx` now uses
+  `<BuddyPanel state={buddyState} title="Buddy is here with you"
+   surface="start" size={140}>`. The existing v1.7 sr-only companion
+  line and v1.4 `aria-live="polite"` helper-copy region pass through as
+  `children` — preserving every behavior from v1.4–v1.9.
+- **Allowed surfaces** (visual-only, no backend wiring):
+  - `start` (live)
+  - `onboarding` (eligible — copy: "Start with one small step.")
+  - `journal` (eligible — copy: "Buddy can help you reflect gently.")
+  - `mood/check-in` (eligible — copy: "Name what is here right now.")
+  - `tools` (eligible — copy: "Choose one small reset.")
+  Optional surfaces are **not** wired automatically — they require an
+  explicit, additive integration when the corresponding page exists.
+- **Additive telemetry:** `buddy_panel_viewed { surface, state }` fires
+  once per `(surface, state)` mount tuple. Both fields are bucketed
+  enums chosen by the parent surface — no message text, no AI reply,
+  no profile data. Posts directly to `/api/telemetry/event` (same
+  pattern as Start.tsx's `track()`) so it doesn't depend on the GA4
+  event registry.
+- **Visual-only rule (enforced by code review).** `BuddyPanel` MUST NOT
+  be widened to:
+  - call `/api/ai/chat`, `/api/buddy`, or any business endpoint
+  - read or write profile / memory / streak / paywall data
+  - render monetization or upsell copy
+  - own crisis detection (it consumes `state` from the parent)
+
+## v1.9 Changes (April 2026)
+
+Standardized `BuddyOutput` contract — a contract/typing/normalization
+upgrade only. No AI changes, no route changes, no hardware logic.
+
+- **New types in `client/src/lib/avatarState.ts`:**
+  - `BuddyExpression` — facial / postural expression vocabulary:
+    `soft | lowered | focused | grounded | bright | steady | celebratory`.
+  - `BuddySafetyMode` — coarse safety routing flag:
+    `normal | crisis_safe`. `crisis_safe` is the authoritative signal
+    that any downstream renderer (web, mobile, future hardware) MUST
+    apply non-flashing, non-alarming, calm-presence rendering.
+- **Extended `BuddyOutput` contract** (alias of `BuddyVisualOutput`,
+  kept for backward compat):
+  ```ts
+  {
+    state: BuddyState,
+    safetyMode: "normal" | "crisis_safe",
+    eyeColor: string,
+    heartColor: string,
+    heartPulse: number,
+    motion: "idle" | "slow_glow" | "breathing" | "grounding"
+          | "warm_glow" | "steady" | "sparkle",
+    expression: "soft" | "lowered" | "focused" | "grounded"
+              | "bright" | "steady" | "celebratory",
+    label: string,
+  }
+  ```
+- **Per-state mapping** (color/cadence values UNCHANGED from v1.2 —
+  re-verified emotionally safe; v1.9 only adds `safetyMode` +
+  `expression`):
+  | state | safetyMode | expression |
+  |---|---|---|
+  | calm | normal | soft |
+  | sad | normal | lowered |
+  | anxious | normal | focused |
+  | overwhelmed | normal | grounded |
+  | encouraged | normal | bright |
+  | crisis | **crisis_safe** | steady |
+  | celebrate | normal | celebratory |
+- **`getBuddyVisualOutput(state)`** now returns the full `BuddyOutput`
+  contract for every state.
+- **`BuddyAvatar` exposes the contract via DOM data-attributes.** New
+  `data-safety-mode`, `data-motion`, `data-expression` (alongside the
+  existing `data-state`) so any observer (a11y tool, e2e test, hardware
+  adapter polling the DOM, telemetry probe) can read the canonical
+  contract without re-deriving it from CSS classes or color values.
+  Also adds `buddy--expr-<expression>` CSS class for future state-class-
+  scoped styling. **No visual changes** — purely additive surface area.
+
+### Future physical compatibility
+
+The `BuddyOutput` contract is intentionally device-agnostic:
+
+- `eyeColor` / `heartColor` → addressable LEDs
+- `heartPulse` → PWM cadence
+- `motion` → servo-driven micro-motions
+- `expression` → optional secondary actuator vocabulary (e.g. eyelid
+  servos, mouth LED matrix)
+- `safetyMode` → top-level renderer routing flag (forces calm rendering)
+- `label` → optional TTS announcement
+
+**No hardware logic exists yet.** v1.9 only standardizes the contract
+that future adapters will consume.
+
+## v1.8 Changes (April 2026)
+
+Shareable Buddy moments after relief — privacy-safe by construction.
+Zero changes to AI, server, orchestrator, memory, profile, telemetry
+crisis, or tool-execution logic.
+
+- **`ShareCard` refactored to v1.8 spec** (`client/src/pages/Start.tsx`):
+  - Title: `Share a reset`
+  - Body: `If this helped, someone else may need a gentle reset too.`
+  - Button: `Share Buddy`
+  - Share message: `Buddy helped me reset for one minute. Try
+    MyMentalHealthBuddy: https://mymentalhealthbuddy.com/start`
+- **Privacy guarantees (enforced by component design):**
+  - Share payload is a `const` inside the component — NOT derived from
+    user message, AI reply, emotional state inference, profile data,
+    streak data, or paywall data.
+  - Component props are `{ toolId: string; buddyState: BuddyState }` —
+    bucketed system-defined enums only. The previous `reply` prop is
+    REMOVED so it cannot accidentally leak into share content.
+  - Telemetry metadata uses the same enums (no free-text leakage).
+- **Eligibility gate** at the call site:
+  ```ts
+  result && !crisis && !error && tool && (
+    <ShareCard toolId={tool.tool?.id ?? ""} buddyState={buddyState} />
+  )
+  ```
+  ALL must be true: response received, NOT a crisis flow, NOT an error,
+  AND the response carries a tool payload. Prior version omitted the
+  `tool` requirement and gated only on `reply` existence — fixed.
+- **Share API:** `navigator.share` if available, falling back to
+  `navigator.clipboard.writeText`, then to "unavailable" telemetry mark
+  if both APIs fail. Cancel from native share is treated as a fall-
+  through to clipboard (common pattern when users cancel to copy
+  instead).
+- **Additive telemetry** (additive — does NOT remove the legacy
+  `share_clicked` event consumed by `server/ai/aiTelemetry.mjs`):
+  - `buddy_share_shown { toolId, buddyState }` — fires once per
+    unique `toolId` (architect-refined dependency `[toolId]`, not `[]`,
+    so each new tool run within a single visit gets its own funnel
+    impression).
+  - `buddy_share_clicked { toolId, buddyState, method }` —
+    method ∈ `"native" | "clipboard" | "unavailable"`.
+- **Reduced-motion compliance:** button transition uses
+  `motion-reduce:transition-none` for vestibular-safety alignment with
+  v1.7.
 
 ## v1.7 Changes (April 2026)
 

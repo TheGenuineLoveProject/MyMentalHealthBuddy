@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import { Link } from "wouter";
 import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import BuddyPanel from "@/components/avatar/BuddyPanel";
 import type { BuddyState } from "@/lib/avatarState";
 
 type ToolPayload = {
@@ -69,12 +69,20 @@ function ShareCard({
   const message =
     "Buddy helped me reset for one minute. Try MyMentalHealthBuddy: https://mymentalhealthbuddy.com/start";
 
-  // v1.8 impression telemetry — fires once when the share card mounts.
-  // Parent gating means this only fires after a real, safe relief moment.
+  // v1.8 impression telemetry — fires once per unique toolId.
+  //
+  // Architect refinement: dep `[toolId]` (not `[]`) means each NEW tool run
+  // within the same /start visit (e.g. user runs Calm Me Down, then later
+  // Help Me Think Clearly) gets its own funnel impression. This is the
+  // correct measurement granularity — share opportunities are per-tool,
+  // not per-visit. `buddyState` intentionally omitted from deps to avoid
+  // double-counting when the avatar transitions (anxious → encouraged
+  // soft-landing) for the same underlying tool. Parent gating already
+  // ensures this only fires after a real, safe relief moment.
   useEffect(() => {
     track("buddy_share_shown", { toolId, buddyState });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [toolId]);
 
   async function handleShare() {
     let method: "native" | "clipboard" | "unavailable" = "unavailable";
@@ -659,10 +667,22 @@ export default function Start() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       <main className="mx-auto max-w-2xl px-6 py-12 md:py-20" data-testid="page-start">
-        {/* MMHB Buddy — visual companion (v1.4: signal-driven + recovery,
-            v1.7: accessibility-polished) */}
-        <div className="flex flex-col items-center mb-6" data-testid="container-buddy-avatar">
-          <BuddyAvatar state={buddyState} size={140} data-testid="buddy-avatar-start" />
+        {/* MMHB Buddy v2.0 — cross-platform visual companion via BuddyPanel.
+            Wraps the visual avatar + companion sr-only + dynamic helper-copy
+            live region in one reusable shell so other healing surfaces
+            (onboarding, journaling, mood/check-in, tools) render Buddy
+            with consistent framing. Preserves v1.4 (helper-copy grounding),
+            v1.5/v1.6 (tool/baseline copy), v1.7 (sr-only companion line +
+            keyboard-pass-through), v1.8 (share gating downstream), v1.9
+            (BuddyOutput contract surfaced via avatar data-attrs). */}
+        <BuddyPanel
+          state={buddyState}
+          title="Buddy is here with you"
+          surface="start"
+          size={140}
+          className="mb-6"
+          data-testid="panel-buddy-start"
+        >
           {/*
             v1.7 — screen-reader-only companion line. Reassures users on
             assistive tech (and reduced-motion users) that the avatar is
@@ -678,7 +698,10 @@ export default function Start() {
             overwhelmed (Phase 2) or when the user just completed a tool
             (Phase 3 soft landing). aria-live="polite" so screen readers
             announce it without interrupting. Subtle opacity transition,
-            no transform/keyframe motion (vestibular-safe).
+            no transform/keyframe motion (vestibular-safe). Lives INSIDE
+            BuddyPanel so the dynamic copy continues to flow visually
+            beneath the avatar/title for /start, while other surfaces
+            can use BuddyPanel without it.
           */}
           <div
             role="status"
@@ -689,7 +712,7 @@ export default function Start() {
           >
             {buddyHelperCopy ?? "\u00A0"}
           </div>
-        </div>
+        </BuddyPanel>
 
         {/* HERO */}
         <section className="text-center mb-10" data-testid="section-hero">

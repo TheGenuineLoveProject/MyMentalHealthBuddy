@@ -46,21 +46,64 @@ export type BuddyMotion =
   | "steady"
   | "sparkle";
 
+/**
+ * BuddyExpression (v1.9) — facial / postural expression vocabulary.
+ *
+ * Semantic, healing-domain names so any future surface (mobile, hardware
+ * companion, third-party integration) can render or actuate the right
+ * expression without re-deriving it from raw colors or motion.
+ *
+ *   soft         — calm, neutral resting expression (calm)
+ *   lowered      — gentle, eyes-down compassion (sad)
+ *   focused      — present, attentive, breath-coaching (anxious)
+ *   grounded     — settled, held, low-arousal (overwhelmed)
+ *   bright       — uplifted, warm, hopeful (encouraged)
+ *   steady       — non-flashing, grounding presence (crisis)
+ *   celebratory  — joyful, sparkling (celebrate)
+ */
+export type BuddyExpression =
+  | "soft"
+  | "lowered"
+  | "focused"
+  | "grounded"
+  | "bright"
+  | "steady"
+  | "celebratory";
+
+/**
+ * BuddySafetyMode (v1.9) — coarse safety routing flag.
+ *
+ * `crisis_safe` is the unique non-default mode. It signals that ANY
+ * downstream renderer (web visual, mobile UI, future hardware) MUST
+ * apply non-flashing, non-alarming, calm-presence rendering — even if
+ * its local color/motion mapping would otherwise be more energetic.
+ * `normal` is the default visual mode.
+ */
+export type BuddySafetyMode = "normal" | "crisis_safe";
+
 export interface BuddyVisualOutput {
   state: BuddyState;
+  /** v1.9 — coarse safety routing, drives non-flashing crisis rendering. */
+  safetyMode: BuddySafetyMode;
   eyeColor: string;
   heartColor: string;
   /** Heart-pulse cadence in ms (one full breath cycle) */
   heartPulse: number;
   /** Body micro-motion descriptor (semantic, healing-domain vocabulary) */
   motion: BuddyMotion;
+  /** v1.9 — facial / postural expression descriptor. */
+  expression: BuddyExpression;
   /** Optional copy hint for tooltips / aria-labels */
   label: string;
 }
 
 /**
- * BuddyOutput — public, spec-canonical alias of BuddyVisualOutput.
- * Use this name in new code; BuddyVisualOutput is kept for backward compat.
+ * BuddyOutput (v1.9) — canonical, spec-stable contract for any surface
+ * that consumes Buddy state (web, mobile, hardware adapters, telemetry).
+ *
+ * Public alias of BuddyVisualOutput. Use `BuddyOutput` in new code;
+ * `BuddyVisualOutput` is kept for backward compatibility with v1.0–v1.8
+ * call sites.
  */
 export type BuddyOutput = BuddyVisualOutput;
 
@@ -75,61 +118,81 @@ export type BuddyOutput = BuddyVisualOutput;
 //     not flooded.
 //   - Celebrate uses warm gold (heart) with green eyes — joyful but never
 //     overstimulating.
+// VISUAL_MAP — v1.9 spec-compliant. Adds `safetyMode` + `expression`
+// fields to every state per the BuddyOutput contract. Color/cadence
+// values are unchanged from v1.2 (re-verified emotionally safe):
+//   - Crisis remains GREEN and SLOW. `safetyMode: "crisis_safe"` is the
+//     authoritative routing flag — any future surface MUST honor it.
+//   - All other states are `safetyMode: "normal"`.
 const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
   calm: {
     state: "calm",
+    safetyMode: "normal",
     eyeColor: "#6FE3B0",
     heartColor: "#7FD8A8",
     heartPulse: 5200,
     motion: "idle",
+    expression: "soft",
     label: "Calm and present",
   },
   sad: {
     state: "sad",
+    safetyMode: "normal",
     eyeColor: "#9D8FCC",
     heartColor: "#B19CD9",
     heartPulse: 6800,
     motion: "slow_glow",
+    expression: "lowered",
     label: "Holding sadness gently",
   },
   anxious: {
     state: "anxious",
+    safetyMode: "normal",
     eyeColor: "#8FF0BC",
     heartColor: "#7FD8A8",
     heartPulse: 4400,
     motion: "breathing",
+    expression: "focused",
     label: "Noticing anxious energy — slow breath together",
   },
   overwhelmed: {
     state: "overwhelmed",
+    safetyMode: "normal",
     eyeColor: "#5DA88E",
     heartColor: "#5DA88E",
     heartPulse: 4800,
     motion: "grounding",
+    expression: "grounded",
     label: "Feeling overwhelmed — grounding together",
   },
   encouraged: {
     state: "encouraged",
+    safetyMode: "normal",
     eyeColor: "#7AE2A6",
     heartColor: "#5DDB94",
     heartPulse: 4400,
     motion: "warm_glow",
+    expression: "bright",
     label: "Steady and encouraged",
   },
   crisis: {
     state: "crisis",
+    safetyMode: "crisis_safe",
     eyeColor: "#6FE3B0",
     heartColor: "#7FD8A8",
     heartPulse: 5800,
     motion: "steady",
+    expression: "steady",
     label: "Crisis support — you are safe with me",
   },
   celebrate: {
     state: "celebrate",
+    safetyMode: "normal",
     eyeColor: "#7AE2A6",
     heartColor: "#FFD75A",
     heartPulse: 3600,
     motion: "sparkle",
+    expression: "celebratory",
     label: "Celebrating with you",
   },
 };

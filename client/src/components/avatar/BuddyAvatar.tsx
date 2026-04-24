@@ -62,12 +62,19 @@ export default function BuddyAvatar({
 
   return (
     <div
-      className={`buddy buddy--${v.state} buddy--motion-${v.motion} ${className}`}
+      className={`buddy buddy--${v.state} buddy--motion-${v.motion} buddy--expr-${v.expression} ${className}`}
       style={styleVars}
       role="img"
       aria-label={ariaLabel}
       data-testid={testId}
       data-state={v.state}
+      // v1.9 — full BuddyOutput contract surfaced as data-attributes so any
+      // downstream observer (a11y tool, e2e test, hardware adapter polling
+      // the DOM, telemetry probe) can read the canonical contract without
+      // re-deriving it from CSS classes or color values.
+      data-safety-mode={v.safetyMode}
+      data-motion={v.motion}
+      data-expression={v.expression}
     >
       <svg
         viewBox="0 0 200 240"
