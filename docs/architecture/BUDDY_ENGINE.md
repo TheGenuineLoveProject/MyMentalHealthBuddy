@@ -1,10 +1,105 @@
 # MMHB Buddy Engine — Architecture
 
-> **Status: v1.4**
+> **Status: v1.7**
 > Healing-domain modular companion for MyMentalHealthBuddy.
 > Visual avatar + emotional state machine + safe AI route + React hook +
 > telemetry-ready output + signal-driven /start integration + time-based
-> recovery and grounding loop.
+> recovery + tool-specific expressions + memory-aware visual baseline +
+> accessibility & safety polish.
+
+## v1.7 Changes (April 2026)
+
+Accessibility-only and safety polish — zero changes to AI, server,
+orchestrator, memory, profile, telemetry crisis, or tool-execution logic.
+
+- **State-specific aria-label vocabulary.** New `BUDDY_ARIA_LABEL`
+  Record in `BuddyAvatar.tsx` maps every BuddyState to a calm,
+  consent-based, trauma-informed phrase that screen-reader users can
+  rely on:
+  - calm        → "Buddy avatar showing calm support mode"
+  - sad         → "Buddy avatar showing gentle support mode"
+  - anxious     → "Buddy avatar showing anxious breathing support mode"
+  - overwhelmed → "Buddy avatar showing grounding support mode"
+  - encouraged  → "Buddy avatar showing encouraging support mode"
+  - crisis      → "Buddy avatar showing crisis-safe support mode"
+  - celebrate   → "Buddy avatar showing celebrating support mode"
+  Falls back to the existing `v.label` if a future state is added before
+  the map is updated, so screen readers never go silent.
+- **Defensive aria-hidden on decorative SVG inner groups.** Eyes, heart
+  group, and base shadow now carry explicit `aria-hidden="true"` even
+  though they inherit from the outer SVG's `aria-hidden`. Belt-and-
+  suspenders against future refactors that might un-hide the parent.
+- **`focusable="false"`** added to the SVG element to keep legacy
+  IE/Edge from inserting Buddy into the keyboard tab order.
+- **Screen-reader companion copy on /start.** A visually-hidden
+  `<p className="sr-only">` line near BuddyAvatar tells AT users:
+  *"Buddy is a visual companion. Your support tools still work without
+  animation."* — read once on initial reading order, never re-announced.
+- **Reduced-motion + non-flashing crisis safety preserved.** Already
+  shipped in v1.2/v1.4 and re-verified for v1.7:
+  - `BuddyAvatar.css` global `@media (prefers-reduced-motion: reduce)`
+    gate (lines 176-185) cancels all keyframe animations and the
+    `fill` transition.
+  - Crisis state uses calm green (`#7FD8A8`), never red, with steady
+    motion (`buddyMotion: "steady"`) and a slow heart cadence.
+  - No interactive children inside BuddyAvatar — no `onClick`, no
+    `tabindex`, no buttons. Pure visual, keyboard-pass-through.
+- **Additive telemetry:** `buddy_accessibility_ready` fires once per
+  /start mount alongside `start_page_click`. Confirms Buddy mounted
+  with all a11y affordances. No message text, no profile data.
+
+## v1.6 Changes (April 2026)
+
+- **Memory-aware visual baseline.** Buddy's idle (calm) tone is gently
+  personalized using ONLY existing client-side signals — `currentStreak`,
+  `daysAway`, completion-of-tool, paywall hint. NEVER reads or writes
+  profile data. The pure helper `resolveBuddyBaseline({...})` returns the
+  suggested baseline; the call site gates application on `buddyState ===
+  "calm"` so tool/emotional states ALWAYS win.
+- **Loop guard via signal fingerprint.** `baselineAppliedRef` and
+  `baselineSignalsRef` (a fingerprint of `streak:daysAway:completed:paywall`)
+  prevent infinite ping-pong with v1.4 recovery. After baseline applies
+  and v1.4 recovers Buddy to calm 20s later, the same fingerprint hits
+  the latch and the effect returns early. The fingerprint correctly
+  ALLOWS re-baseline when signals genuinely change (e.g., streak
+  increments after `recordStreak` succeeds).
+- **Baseline copy beneath avatar:**
+  - `daysAway >= 2` → "Buddy is here to help you restart gently."
+  - `currentStreak >= 7` → "Buddy remembers your consistency."
+  - `currentStreak >= 3` → "Buddy is here for today's reset."
+  - paywall hint → "Buddy can help you go deeper when you're ready."
+  - default → "Buddy is here with you."
+- **Additive telemetry:** `buddy_baseline_applied { baseline, currentStreak,
+  daysAway }`. No private profile data; no message text.
+
+## v1.5 Changes (April 2026)
+
+- **Tool-specific avatar expressions.** `mapToBuddyState` now has
+  explicit, highest-specificity branches for all 7 canonical tool IDs so
+  Buddy visually participates in the active tool, not just the user's
+  worded request:
+  - `box_breathing` → anxious (breathing pulse)
+  - `grounding_54321` → overwhelmed (sensory grounding)
+  - `thought_reframe` → encouraged (focused/reframe)
+  - `emotional_checkin` → sad (soft/gentle)
+  - `overload_reset` → overwhelmed (held-not-flooded)
+  - `relationship_repair` → encouraged (warm preparation)
+  - `pattern_interrupt` → encouraged (loop-breaking)
+- **Module fallbacks** kept for cases where the AI tags a domain but no
+  tool yet: `anxiety / emotional_processing / cognitive_reframe /
+  self_regulation`.
+- **Tool-specific helper copy.** New `buddyToolCopy` map adds a clear
+  micro-line per tool ("Buddy is helping you think clearly.", "Let Buddy
+  help you ground.", etc.). The helper-copy precedence is now layered:
+  crisis → completion (v1.4) → active tool (v1.5) → grounding (v1.4) →
+  baseline (v1.6) → null.
+- **Robust toolId access.** Reads both `tool.tool.id` (orchestrator
+  double-nested shape) AND `tool.id` (flatter shape) so future server
+  refactors don't silently drop tool-aware mapping.
+- **Additive telemetry:** `buddy_tool_expression { toolId, buddyState }`,
+  emitted inline in the v1.3 mapping effect with the freshly-computed
+  state (no stale closure). Deduped per unique toolId via
+  `buddyToolExpressionRef`.
 
 ## v1.4 Changes (April 2026)
 

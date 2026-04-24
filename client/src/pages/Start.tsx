@@ -172,19 +172,30 @@ const TOOL_BUTTONS = [
  *
  * Signal precedence (highest first):
  *   1. modules: "anxiety"              → "anxious"
- *   2. modules: "emotional_processing" → "sad"
- *   3. modules: "cognitive_reframe"    → "encouraged"
- *   4. toolId  "overload_reset"        → "overwhelmed"
- *   5. selectedToolId fallback (the button the user actually clicked):
- *        "calm"  (Calm Me Down)         → "anxious"
- *        "think" (Help Me Think Clearly)→ "encouraged"
- *        "feel"  (Understand Feeling)   → "sad"
- *      Used when AI didn't tag modules — Buddy still understands the
- *      moment because the user's chosen entry-point IS a signal.
- *   6. fallback                        → "calm"
+ *   v1.5 — Tool-specific expressions (richer toolId mapping):
+ *     toolId  "box_breathing"        → "anxious"      (breathing pulse)
+ *     toolId  "grounding_54321"      → "overwhelmed"  (sensory grounding)
+ *     toolId  "thought_reframe"      → "encouraged"   (focused/reframe)
+ *     toolId  "emotional_checkin"    → "sad"          (soft/gentle)
+ *     toolId  "overload_reset"       → "overwhelmed"  (held-not-flooded)
+ *     toolId  "relationship_repair"  → "encouraged"   (warm preparation)
+ *     toolId  "pattern_interrupt"    → "encouraged"   (loop-breaking)
+ *
+ *   Module fallbacks (when toolId not yet known but modules tagged):
+ *     modules "anxiety"              → "anxious"
+ *     modules "emotional_processing" → "sad"
+ *     modules "cognitive_reframe"    → "encouraged"
+ *     modules "self_regulation"      → "overwhelmed"
+ *
+ *   selectedToolId fallback (entry-point button — pre-AI responsiveness):
+ *     "calm"  (Calm Me Down)         → "anxious"
+ *     "think" (Help Me Think Clearly)→ "encouraged"
+ *     "feel"  (Understand Feeling)   → "sad"
+ *
+ *   Default                          → "calm"
  *
  * Crisis and toolCompleted are handled separately at the call site
- * (they outrank module-based mapping; see Start.tsx useEffect).
+ * (they outrank tool/module mapping; see Start.tsx useEffect).
  */
 function mapToBuddyState({
   modules = [],
@@ -195,14 +206,66 @@ function mapToBuddyState({
   toolId?: string;
   selectedToolId?: string;
 }): BuddyState {
+  // v1.5: explicit toolId branches first (highest specificity).
+  if (toolId === "box_breathing") return "anxious";
+  if (toolId === "grounding_54321") return "overwhelmed";
+  if (toolId === "thought_reframe") return "encouraged";
+  if (toolId === "emotional_checkin") return "sad";
+  if (toolId === "overload_reset") return "overwhelmed";
+  if (toolId === "relationship_repair") return "encouraged";
+  if (toolId === "pattern_interrupt") return "encouraged";
+  // Module-level signals (when toolId is missing or unmapped).
   if (modules.includes("anxiety")) return "anxious";
   if (modules.includes("emotional_processing")) return "sad";
   if (modules.includes("cognitive_reframe")) return "encouraged";
-  if (toolId === "overload_reset") return "overwhelmed";
-  // Fallback: derive from the entry-point button the user clicked.
+  if (modules.includes("self_regulation")) return "overwhelmed";
+  // Entry-point button fallback — Buddy reacts before the AI responds.
   if (selectedToolId === "calm") return "anxious";
   if (selectedToolId === "think") return "encouraged";
   if (selectedToolId === "feel") return "sad";
+  return "calm";
+}
+
+/**
+ * v1.5 — Tool-specific helper copy shown beneath BuddyAvatar.
+ * Keys are the canonical toolIds returned by the AI / orchestrator.
+ * Pure visual; no AI / route / response changes.
+ */
+const buddyToolCopy: Record<string, string> = {
+  box_breathing: "Follow Buddy\u2019s breath.",
+  grounding_54321: "Let Buddy help you ground.",
+  thought_reframe: "Buddy is helping you think clearly.",
+  emotional_checkin: "Buddy is staying gentle with you.",
+  overload_reset: "Buddy is helping you make this smaller.",
+  relationship_repair: "Buddy is helping you prepare with care.",
+  pattern_interrupt: "Buddy is helping you break the loop.",
+};
+
+/**
+ * v1.6 — Memory-aware visual baseline using EXISTING client-side signals
+ * only (streak, daysAway, completion, paywall hint). NEVER reads or
+ * writes profile data; never exposes private content.
+ *
+ * Returns the suggested baseline state for an idle (calm) Buddy. Tool
+ * states and active emotional states ALWAYS win over baseline (applied
+ * at the call site by gating on `buddyState === "calm"`).
+ */
+function resolveBuddyBaseline({
+  currentStreak = 0,
+  daysAway = 0,
+  hasCompletedTool = false,
+  hasPaywall = false,
+}: {
+  currentStreak?: number;
+  daysAway?: number;
+  hasCompletedTool?: boolean;
+  hasPaywall?: boolean;
+}): BuddyState {
+  if (daysAway >= 2) return "overwhelmed";
+  if (hasCompletedTool) return "encouraged";
+  if (currentStreak >= 7) return "encouraged";
+  if (currentStreak >= 3) return "calm";
+  if (hasPaywall) return "encouraged";
   return "calm";
 }
 
@@ -250,9 +313,24 @@ export default function Start() {
   // before re-render fires. The ref mutates synchronously and guarantees
   // the telemetry call happens at most once per result panel.
   const toolCompletedLatchRef = useRef(false);
+  // v1.5 — dedupe `buddy_tool_expression` telemetry per unique toolId so
+  // we don't re-fire on every Buddy state change while the same tool is
+  // still showing.
+  const buddyToolExpressionRef = useRef<string>("");
+  // v1.6 — one-shot baseline application per signal-set. Without this,
+  // v1.4 recovery (calm) and v1.6 baseline (non-calm) would ping-pong
+  // forever every 20 seconds. The signals fingerprint resets the latch
+  // when the user's identity-level signals (streak, daysAway) change.
+  const baselineAppliedRef = useRef(false);
+  const baselineSignalsRef = useRef<string>("");
 
   useEffect(() => {
     track("start_page_click");
+    // v1.7 — fire once on mount to confirm Buddy mounted with all
+    // accessibility affordances in place (state-specific aria-label,
+    // sr-only companion copy, prefers-reduced-motion CSS gate). Pure
+    // additive telemetry; no message text, no profile data.
+    track("buddy_accessibility_ready");
     void (async () => {
       try {
         const res = await fetch("/api/streaks/me", {
@@ -381,13 +459,27 @@ export default function Start() {
     // Map from any signal we have: AI response (preferred) OR the
     // entry-point button (immediate, available before AI responds).
     if (result?.response || selectedToolId) {
-      setBuddyState(
-        mapToBuddyState({
-          modules: result?.response?.modules,
-          toolId: result?.response?.tool?.tool?.id,
-          selectedToolId: selectedToolId ?? undefined,
-        }),
-      );
+      // v1.5: support both `tool.tool.id` (orchestrator double-nesting)
+      // AND `tool.id` (flatter shape) so future server changes don't
+      // silently drop tool-aware mapping.
+      const responseToolId =
+        result?.response?.tool?.tool?.id ?? result?.response?.tool?.id ?? "";
+      const nextState = mapToBuddyState({
+        modules: result?.response?.modules,
+        toolId: responseToolId,
+        selectedToolId: selectedToolId ?? undefined,
+      });
+      setBuddyState(nextState);
+      // v1.5 telemetry — emit once per unique active toolId. Captures
+      // the freshly-computed nextState (no stale closure). Additive
+      // event only; no message text logged.
+      if (responseToolId && responseToolId !== buddyToolExpressionRef.current) {
+        buddyToolExpressionRef.current = responseToolId;
+        track("buddy_tool_expression", {
+          toolId: responseToolId,
+          buddyState: nextState,
+        });
+      }
       return;
     }
     setBuddyState("calm");
@@ -427,20 +519,105 @@ export default function Start() {
     }
   }, [buddyState]);
 
-  // Helper copy shown beneath the avatar (Phases 2 + 3). Visual only.
-  const buddyHelperCopy: string | null =
-    buddyState === "anxious" || buddyState === "overwhelmed"
-      ? "Follow Buddy’s breath."
-      : buddyState === "encouraged" && toolCompleted
-      ? "You did one small thing for yourself."
-      : null;
+  // MMHB Buddy Engine v1.6 — memory-aware visual baseline.
+  //
+  // Applies a gentle, personalized starting tone using ONLY existing
+  // client-side signals (streak, daysAway, completion, paywall hint).
+  // Never reads or writes profile data. Tool/emotional states ALWAYS
+  // win — baseline only fires when buddyState is calm and no
+  // interaction is in flight.
+  //
+  // Loop guard: a one-shot ref keyed by a signals fingerprint prevents
+  // ping-pong with v1.4 recovery (which periodically returns Buddy to
+  // calm). The latch resets only when identity-level signals change.
+  useEffect(() => {
+    if (loading) return;
+    if (crisis) return;
+    if (buddyState !== "calm") return;
+    const currentStreakNum = streak?.currentStreak ?? 0;
+    const daysAwayNum = streak?.daysAway ?? 0;
+    const hasCompletedTool = Boolean(result?.response?.tool);
+    const hasPaywall = Boolean(result?.response?.paywall?.show);
+    const signalsKey = `${currentStreakNum}:${daysAwayNum}:${hasCompletedTool}:${hasPaywall}`;
+    if (
+      baselineAppliedRef.current &&
+      baselineSignalsRef.current === signalsKey
+    ) {
+      return;
+    }
+    baselineSignalsRef.current = signalsKey;
+    const baseline = resolveBuddyBaseline({
+      currentStreak: currentStreakNum,
+      daysAway: daysAwayNum,
+      hasCompletedTool,
+      hasPaywall,
+    });
+    if (baseline !== "calm" && baseline !== buddyState) {
+      baselineAppliedRef.current = true;
+      setBuddyState(baseline);
+      track("buddy_baseline_applied", {
+        baseline,
+        currentStreak: currentStreakNum,
+        daysAway: daysAwayNum,
+      });
+    } else {
+      // Mark as applied even when baseline is calm — prevents the effect
+      // from re-evaluating on every unrelated state change.
+      baselineAppliedRef.current = true;
+    }
+  }, [loading, crisis, buddyState, streak, result]);
+
+  // Layered helper copy beneath the avatar:
+  //   1. crisis           → null (avatar speaks via presence)
+  //   2. completion       → v1.4 "you did one small thing" (12s soft landing)
+  //   3. active toolId    → v1.5 tool-specific copy
+  //   4. anxious/overwhelmed (no tool) → v1.4 "Follow Buddy's breath"
+  //   5. calm baseline    → v1.6 personalized line based on signals
+  //   6. otherwise        → null
+  const activeToolIdForCopy: string =
+    result?.response?.tool?.tool?.id ?? result?.response?.tool?.id ?? "";
+  const buddyHelperCopy: string | null = (() => {
+    if (buddyState === "crisis") return null;
+    if (buddyState === "encouraged" && toolCompleted) {
+      return "You did one small thing for yourself.";
+    }
+    if (activeToolIdForCopy && buddyToolCopy[activeToolIdForCopy]) {
+      return buddyToolCopy[activeToolIdForCopy];
+    }
+    if (buddyState === "anxious" || buddyState === "overwhelmed") {
+      return "Follow Buddy\u2019s breath.";
+    }
+    if (buddyState === "calm") {
+      const daysAwayNum = streak?.daysAway ?? 0;
+      const currentStreakNum = streak?.currentStreak ?? 0;
+      if (daysAwayNum >= 2) return "Buddy is here to help you restart gently.";
+      if (currentStreakNum >= 7) return "Buddy remembers your consistency.";
+      if (currentStreakNum >= 3) return "Buddy is here for today\u2019s reset.";
+      if (result?.response?.paywall?.show) {
+        return "Buddy can help you go deeper when you\u2019re ready.";
+      }
+      return "Buddy is here with you.";
+    }
+    return null;
+  })();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       <main className="mx-auto max-w-2xl px-6 py-12 md:py-20" data-testid="page-start">
-        {/* MMHB Buddy — visual companion (v1.4: signal-driven + recovery) */}
+        {/* MMHB Buddy — visual companion (v1.4: signal-driven + recovery,
+            v1.7: accessibility-polished) */}
         <div className="flex flex-col items-center mb-6" data-testid="container-buddy-avatar">
           <BuddyAvatar state={buddyState} size={140} data-testid="buddy-avatar-start" />
+          {/*
+            v1.7 — screen-reader-only companion line. Reassures users on
+            assistive tech (and reduced-motion users) that the avatar is
+            decorative and the support tools below work without animation.
+            Visually hidden via sr-only; not announced unless an SR is on.
+          */}
+          <p className="sr-only" data-testid="text-buddy-sr-companion">
+            Buddy is a visual companion. Your support tools still work
+            without animation.
+          </p>
           {/*
             v1.4 grounding helper copy — appears when Buddy is anxious /
             overwhelmed (Phase 2) or when the user just completed a tool

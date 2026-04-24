@@ -22,6 +22,24 @@ export interface BuddyAvatarProps {
   "data-testid"?: string;
 }
 
+/**
+ * MMHB Buddy Engine v1.7 — accessibility-first aria-label vocabulary.
+ *
+ * State-specific phrasing chosen so a screen-reader user gets a clear,
+ * calm understanding of what Buddy is doing right now WITHOUT exposing
+ * private chat content. Wording is consent-based and trauma-informed:
+ * never alarmist, never clinical.
+ */
+const BUDDY_ARIA_LABEL: Record<BuddyState, string> = {
+  calm: "Buddy avatar showing calm support mode",
+  sad: "Buddy avatar showing gentle support mode",
+  anxious: "Buddy avatar showing anxious breathing support mode",
+  overwhelmed: "Buddy avatar showing grounding support mode",
+  encouraged: "Buddy avatar showing encouraging support mode",
+  crisis: "Buddy avatar showing crisis-safe support mode",
+  celebrate: "Buddy avatar showing celebrating support mode",
+};
+
 export default function BuddyAvatar({
   state = "calm",
   size = 160,
@@ -29,6 +47,10 @@ export default function BuddyAvatar({
   "data-testid": testId = "buddy-avatar",
 }: BuddyAvatarProps) {
   const v = getBuddyVisualOutput(state);
+  // v1.7 — fall back to v.label only if the state slips past the mapper
+  // (e.g., a future state added in avatarState.ts before this map is
+  // updated). Keeps screen readers from going silent.
+  const ariaLabel = BUDDY_ARIA_LABEL[v.state] ?? `MMHB Buddy: ${v.label}`;
 
   const styleVars: React.CSSProperties & Record<`--${string}`, string> = {
     width: `${size}px`,
@@ -43,7 +65,7 @@ export default function BuddyAvatar({
       className={`buddy buddy--${v.state} buddy--motion-${v.motion} ${className}`}
       style={styleVars}
       role="img"
-      aria-label={`MMHB Buddy: ${v.label}`}
+      aria-label={ariaLabel}
       data-testid={testId}
       data-state={v.state}
     >
@@ -52,6 +74,7 @@ export default function BuddyAvatar({
         xmlns="http://www.w3.org/2000/svg"
         className="buddy__svg"
         aria-hidden="true"
+        focusable="false"
       >
         {/* Antenna */}
         <g className="buddy__antenna">
@@ -82,8 +105,11 @@ export default function BuddyAvatar({
             ry="14"
             fill="#0a0f0e"
           />
-          {/* Eyes — green by default, recolored per state */}
-          <g className="buddy__eyes">
+          {/* Eyes — green by default, recolored per state. v1.7: aria-hidden
+              on decorative inner pieces is technically redundant (parent
+              SVG is aria-hidden) but it's defensive in case a future
+              refactor un-hides the SVG. */}
+          <g className="buddy__eyes" aria-hidden="true">
             <circle cx="82" cy="69" r="7.5" fill="var(--buddy-eye-color)" className="buddy__eye buddy__eye--left" />
             <circle cx="118" cy="69" r="7.5" fill="var(--buddy-eye-color)" className="buddy__eye buddy__eye--right" />
           </g>
@@ -121,8 +147,9 @@ export default function BuddyAvatar({
           {/* Chest plate cutout */}
           <ellipse cx="100" cy="172" rx="30" ry="34" fill="#f4f6f5" />
 
-          {/* Heart — glowing, pulse cadence is state-driven */}
-          <g className="buddy__heart" transform="translate(100 172)">
+          {/* Heart — glowing, pulse cadence is state-driven. v1.7: explicit
+              aria-hidden so this decorative pulse never reaches AT. */}
+          <g className="buddy__heart" transform="translate(100 172)" aria-hidden="true">
             <g className="buddy__heart-glow">
               <circle r="20" fill="var(--buddy-heart-color)" opacity="0.18" />
               <circle r="13" fill="var(--buddy-heart-color)" opacity="0.32" />
@@ -140,8 +167,8 @@ export default function BuddyAvatar({
           <rect x="154" y="138" width="14" height="56" rx="7" fill="#e2e7e4" className="buddy__arm buddy__arm--right" />
         </g>
 
-        {/* Base / shadow */}
-        <ellipse cx="100" cy="228" rx="46" ry="6" fill="#0a0f0e" opacity="0.10" className="buddy__shadow" />
+        {/* Base / shadow — v1.7 explicit aria-hidden for defensive a11y. */}
+        <ellipse cx="100" cy="228" rx="46" ry="6" fill="#0a0f0e" opacity="0.10" className="buddy__shadow" aria-hidden="true" />
       </svg>
     </div>
   );
