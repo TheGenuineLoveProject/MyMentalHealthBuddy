@@ -6676,3 +6676,205 @@ h3, .h3, .heading-3 {
 @media (prefers-reduced-motion: reduce) {
   .brand-spinner { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* ==========================================================================
+   Round 6 Polish: Branded scrollbar, aurora text-input focus, branded <hr>
+   All cascades — zero file edits required, gated by prefers-reduced-motion.
+   ========================================================================== */
+
+/* --- Branded Scrollbar (WebKit + Firefox) ---------------------------------
+   Opt-out class `.scrollbar-hide` (already defined ~line 4635) is preserved
+   because we scope our overrides to `html` only. Component-level scrollbars
+   inherit the OS default unless they explicitly use the `.brand-scroll`
+   utility — keeps existing UI predictable while elevating the page chrome.
+*/
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--glp-sage-400, #6fa39a) transparent;
+}
+html::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--glp-aurora-1, rgba(143,188,143,0.55)) 0%,
+    var(--glp-aurora-2, rgba(212,175,55,0.45)) 50%,
+    var(--glp-aurora-3, rgba(167,139,250,0.45)) 100%
+  );
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  transition: filter 240ms ease;
+}
+html::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.15) saturate(1.2)
+          drop-shadow(0 0 6px var(--glp-aurora-glow, rgba(143,188,143,0.5)));
+}
+html::-webkit-scrollbar-corner { background: transparent; }
+
+.dark html,
+html.dark {
+  scrollbar-color: var(--glp-sage-500, #88b8af) transparent;
+}
+
+/* Opt-in branded scroll for any internal scroll container */
+.brand-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--glp-sage-400, #6fa39a) transparent;
+}
+.brand-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.brand-scroll::-webkit-scrollbar-track { background: transparent; }
+.brand-scroll::-webkit-scrollbar-thumb {
+  background: var(--glp-sage-300, rgba(143,188,143,0.45));
+  border-radius: 999px;
+  transition: background 200ms ease;
+}
+.brand-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--glp-aurora-linear, var(--glp-sage-500, #88b8af));
+}
+
+/* --- Aurora Text-Input Focus -----------------------------------------------
+   Adds a soft aurora-tinted underline glow to text-style inputs on focus,
+   layered ON TOP of the existing :focus-visible ring (no specificity conflict
+   thanks to :where()). Skipped on .no-aurora-focus and on color/file/range/
+   checkbox/radio types where a glow underline would look wrong.
+*/
+:where(
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+):not(.no-aurora-focus) {
+  transition: box-shadow 280ms ease, border-color 280ms ease,
+              background-color 280ms ease;
+}
+
+:where(
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+):not(.no-aurora-focus):focus,
+:where(
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+):not(.no-aurora-focus):focus-visible {
+  box-shadow:
+    0 0 0 1px var(--glp-sage-400, rgba(143,188,143,0.55)),
+    0 0 0 4px rgba(143,188,143,0.18),
+    0 6px 18px -8px var(--glp-aurora-1, rgba(143,188,143,0.55)),
+    0 6px 18px -8px var(--glp-aurora-2, rgba(212,175,55,0.45));
+}
+
+.dark :where(
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+):not(.no-aurora-focus):focus,
+.dark :where(
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  textarea
+):not(.no-aurora-focus):focus-visible {
+  box-shadow:
+    0 0 0 1px var(--glp-sage-300, rgba(143,188,143,0.7)),
+    0 0 0 4px rgba(143,188,143,0.22),
+    0 6px 22px -6px var(--glp-aurora-1, rgba(143,188,143,0.7)),
+    0 6px 22px -6px var(--glp-aurora-3, rgba(167,139,250,0.55));
+}
+
+/* Branded placeholder color (subtle, accessible contrast > 4.5:1 against
+   cream-50 / cream-100 backgrounds) */
+:where(input, textarea)::placeholder {
+  color: var(--glp-ink-400, rgba(45, 55, 72, 0.5));
+  opacity: 1;
+}
+
+/* --- Branded Horizontal Rule ----------------------------------------------
+   Replaces the browser's blunt 1px line with a soft aurora gradient that
+   fades in/out at the edges, matching the platform's gentle visual language.
+*/
+:where(hr):not(.no-aurora) {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--glp-aurora-1, rgba(143,188,143,0.45)) 25%,
+    var(--glp-aurora-2, rgba(212,175,55,0.4)) 50%,
+    var(--glp-aurora-3, rgba(167,139,250,0.45)) 75%,
+    transparent 100%
+  );
+  opacity: 0.7;
+  margin: 1.25rem 0;
+}
+
+.dark :where(hr):not(.no-aurora) {
+  opacity: 0.85;
+}
+
+/* --- Reduced motion respects -------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html::-webkit-scrollbar-thumb,
+  .brand-scroll::-webkit-scrollbar-thumb,
+  :where(input, textarea):not(.no-aurora-focus) {
+    transition: none !important;
+  }
+  html::-webkit-scrollbar-thumb:hover {
+    filter: none !important;
+  }
+}
