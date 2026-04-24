@@ -1002,7 +1002,18 @@ export default function CanvaLanding() {
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
             <div className="flex items-center gap-3">
-              <img src="/brand/mmhb-icon.svg" alt="MyMentalHealthBuddy" className="w-8 h-8 rounded-lg" style={{ boxShadow: '0 1px 4px var(--glp-sage-deep-12)' }} />
+              <div
+                className="relative w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0"
+                style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 1px 4px var(--glp-sage-deep-12)' }}
+                aria-hidden="true"
+              >
+                <BuddyAvatar
+                  state="calm"
+                  size={32}
+                  className="w-full h-full"
+                  data-testid="footer-buddy-avatar"
+                />
+              </div>
               <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>
                 © {new Date().getFullYear()} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
               </p>
