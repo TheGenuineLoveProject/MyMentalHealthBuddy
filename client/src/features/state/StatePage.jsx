@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import BuddyPanel from "@/components/avatar/BuddyPanel";
 
 const STATE_DIMENSIONS = [
   { key: "energy", label: "Energy", hint: "low → steady → high" },
@@ -46,6 +47,22 @@ export default function StatePage() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10">
+      {/* MMHB Buddy v2.0 — friction-reducing companion for the state-tracker
+          surface. The page asks the user to expose 5 vulnerability dimensions
+          (energy, clarity, safety, connection, agency) on sliders. Buddy at
+          calm baseline reduces felt isolation during self-assessment.
+          Smaller (88px) so Buddy is a presence, not the centerpiece.
+          Visual-only — no fetch, no inference from slider values, no
+          profile/streak/paywall logic per BuddyPanel contract. */}
+      <BuddyPanel
+        state="calm"
+        title="Buddy is here with you"
+        subtitle="Take a breath. There are no wrong answers."
+        surface="mood"
+        size={88}
+        className="mb-6"
+        data-testid="panel-buddy-state"
+      />
       <div className="rounded-2xl border bg-white/60 p-6 shadow-sm">
         <p className="text-xs uppercase tracking-wider text-neutral-500">State Tracker</p>
         <h1 className="mt-2 text-2xl font-semibold text-neutral-900">

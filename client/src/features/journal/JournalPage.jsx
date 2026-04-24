@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { PROMPT_SETS } from "./PromptLibrary";
+import BuddyPanel from "@/components/avatar/BuddyPanel";
 
 const CATEGORIES = [
   { key: "clarity", label: "Clarity" },
@@ -22,6 +23,20 @@ export default function JournalPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-10">
+      {/* MMHB Buddy v2.0 — friction-reducing companion for the journaling
+          surface. State is `calm` (the page itself doesn't infer emotion;
+          the user controls what they write). Smaller (88px) than /start so
+          Buddy stays supportive, not centerpiece. Visual-only — no fetch,
+          no AI, no profile/streak/paywall logic per BuddyPanel contract. */}
+      <BuddyPanel
+        state="calm"
+        title="Buddy is here while you write"
+        subtitle="No pressure — just gentle company."
+        surface="journal"
+        size={88}
+        className="mb-6"
+        data-testid="panel-buddy-journal"
+      />
       <div className="rounded-2xl border bg-white/60 p-6 shadow-sm">
         <p className="text-xs uppercase tracking-wider text-neutral-500">Journal</p>
         <h1 className="mt-2 text-2xl font-semibold text-neutral-900">Write with care and clarity</h1>

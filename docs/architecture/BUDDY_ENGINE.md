@@ -34,14 +34,22 @@ consistent framing.
    surface="start" size={140}>`. The existing v1.7 sr-only companion
   line and v1.4 `aria-live="polite"` helper-copy region pass through as
   `children` — preserving every behavior from v1.4–v1.9.
-- **Allowed surfaces** (visual-only, no backend wiring):
-  - `start` (live)
-  - `onboarding` (eligible — copy: "Start with one small step.")
-  - `journal` (eligible — copy: "Buddy can help you reflect gently.")
-  - `mood/check-in` (eligible — copy: "Name what is here right now.")
-  - `tools` (eligible — copy: "Choose one small reset.")
-  Optional surfaces are **not** wired automatically — they require an
-  explicit, additive integration when the corresponding page exists.
+- **Placement audit (v2.0 — applied):**
+  - `start` (live, 140px) — landing surface; Buddy is the centerpiece.
+  - `journal` (live, 88px, `state="calm"`) — friction-reducing companion
+    above the prompt set. The page is heavy emotional writing
+    (clarity / nervous system / self-respect / meaning) with no other
+    companion presence.
+  - `mood/check-in` → `/state` (live, 88px, `state="calm"`) — strongest
+    friction-reduction case. The page asks the user to expose 5
+    vulnerability dimensions on sliders (energy, clarity, safety,
+    connection, agency). Buddy at calm baseline reduces felt isolation.
+  - **Skipped on purpose:** individual tool pages (Breath, BodyScan,
+    etc.) — they launch from /start where Buddy already lives, so per-
+    tool Buddy would be over-placement. `onboarding/goal-onboarding`
+    deferred pending UX review.
+- **Sizing convention:** 140px on landing surfaces (centerpiece);
+  88px on work-focused surfaces (supportive presence, not centerpiece).
 - **Additive telemetry:** `buddy_panel_viewed { surface, state }` fires
   once per `(surface, state)` mount tuple. Both fields are bucketed
   enums chosen by the parent surface — no message text, no AI reply,
