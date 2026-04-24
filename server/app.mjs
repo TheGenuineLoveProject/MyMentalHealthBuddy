@@ -229,6 +229,20 @@ const EXTENDED_ROUTES = [
   // Telemetry / analytics (already have telemetry mounted; these are extra)
   { mount: "/api/metrics",       file: "./routes/metrics.mjs" },
   { mount: "/api/analytics",     file: "./routes/analytics.mjs" },
+  // ─── Round 2 (extended-routes): user-facing wellness + content surfaces ───
+  { mount: "/api/dashboard",     file: "./routes/dashboard.mjs",     auth: "optional" },
+  { mount: "/api/community",     file: "./routes/community.mjs",     auth: "optional" },
+  { mount: "/api/email",         file: "./routes/email.mjs" },
+  { mount: "/api/practices",     file: "./routes/practices.mjs" },
+  { mount: "/api/wisdom",        file: "./routes/wisdom.mjs" },
+  { mount: "/api/knowledge",     file: "./routes/knowledge.mjs" },
+  { mount: "/api/content",       file: "./routes/content.mjs" },
+  { mount: "/api/content-studio",file: "./routes/content-studio.mjs",auth: "optional" },
+  { mount: "/api/social-posting",file: "./routes/social-posting.mjs",auth: "optional" },
+  { mount: "/api/therapy",       file: "./routes/therapy.mjs",       auth: "adult" },
+  { mount: "/api/reflection",    file: "./routes/reflection.mjs",    auth: "adult" },
+  { mount: "/api/states",        file: "./routes/states.mjs" },
+  { mount: "/api/prompts",       file: "./routes/prompts.mjs",       auth: "optional" },
 ];
 
 const mountedExtended = [];

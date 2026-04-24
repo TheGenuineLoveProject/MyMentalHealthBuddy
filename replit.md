@@ -31,6 +31,8 @@ The "Buddy Engine" is a separate visual companion layer that renders alongside t
 ### Feature Specifications
 Core features include AI-powered Chat Therapy, Wellness Tools (State Tracker, Journal Prompts), and specialized APIs. The platform supports a four-tier subscription model and includes security features like rate limiting, CSP, and input sanitization. Engagement tools comprise gamification and a Content Studio. User features offer daily healing reminders, voice affirmations, and an AI companion. Admin tools provide dashboards, and content is organized via a Learning Hub.
 
+The `/register` and `/login` pages render real email/password forms (`client/src/pages/Register.jsx` and `client/src/pages/Login.jsx`) that POST to `/api/auth/register` and `/api/auth/login`. On success they call `useAuth().login(token, user)` which writes the JWT to `localStorage["mmhb_token"]` (the canonical key consumed by `apiRequest` in `client/src/lib/queryClient.js`) and starts the refresh timer. Backend errors surface as destructive toasts with the verbatim server message (e.g. "Invalid credentials"). Both pages are CSRF-exempt because `csrfProtection` in `server/security/csrf.mjs` skips `/api/auth/*`.
+
 ### System Design Choices
 Drizzle ORM is used with a Neon PostgreSQL database. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting. An observability layer provides health and system endpoints. A `Prompt-OS Execution Prompt Library` ensures canonical prompt modules validated against `promptspec.schema.json`. Production readiness features include a 503 readiness gate, health probes, telemetry parity, request tracing, and hardened administration access governed by a `CHANGE_GATE` protocol.
 
