@@ -92,99 +92,186 @@ export default function BuddyAvatar({
         aria-hidden="true"
         focusable="false"
       >
-        {/* Antenna */}
+        {/* v1.10 visual polish — gradients, depth, warmer companion feel.
+            All gradient stops with stop-color="var(--buddy-...)" inherit
+            the same canonical CSS vars (no new vars introduced). */}
+        <defs>
+          <radialGradient id="buddyHeadShine" cx="50%" cy="32%" r="70%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="65%" stopColor="#f4f7f5" />
+            <stop offset="100%" stopColor="#e6ebe8" />
+          </radialGradient>
+          <radialGradient id="buddyBodyShine" cx="50%" cy="38%" r="75%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="70%" stopColor="#f1f5f3" />
+            <stop offset="100%" stopColor="#e2e8e4" />
+          </radialGradient>
+          <radialGradient id="buddyFaceShine" cx="50%" cy="35%" r="85%">
+            <stop offset="0%" stopColor="#1c2322" />
+            <stop offset="60%" stopColor="#0e1413" />
+            <stop offset="100%" stopColor="#050807" />
+          </radialGradient>
+          <radialGradient id="buddyChestPlate" cx="50%" cy="40%" r="80%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="100%" stopColor="#eaefec" />
+          </radialGradient>
+          <radialGradient id="buddyHeartHalo">
+            <stop offset="0%" stopColor="var(--buddy-heart-color)" stopOpacity="0.55" />
+            <stop offset="55%" stopColor="var(--buddy-heart-color)" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="var(--buddy-heart-color)" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="buddyAntennaGlow">
+            <stop offset="0%" stopColor="var(--buddy-eye-color)" stopOpacity="0.65" />
+            <stop offset="100%" stopColor="var(--buddy-eye-color)" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Antenna with soft glow tip */}
         <g className="buddy__antenna">
-          <line x1="100" y1="22" x2="100" y2="6" stroke="#cdd5d2" strokeWidth="2.4" strokeLinecap="round" />
-          <circle cx="100" cy="5" r="4" fill="var(--buddy-eye-color)" />
+          <line x1="100" y1="22" x2="100" y2="9" stroke="#cdd5d2" strokeWidth="2.6" strokeLinecap="round" />
+          <circle cx="100" cy="7" r="10" fill="url(#buddyAntennaGlow)" />
+          <circle cx="100" cy="7" r="4" fill="var(--buddy-eye-color)" />
+          <circle cx="99" cy="6" r="1.4" fill="#ffffff" opacity="0.92" />
         </g>
 
-        {/* Head */}
-        <g className="buddy__head">
+        {/* BODY first (renders behind head + collar so they appear seated on top).
+            Wider than head + softer rounding makes the silhouette read as
+            "rounded body with a screen-head" instead of two stacked boxes. */}
+        <g className="buddy__body">
+          {/* Arms — rounded, behind body so they emerge naturally */}
+          <rect x="22" y="142" width="18" height="68" rx="9" fill="#dde3e0" className="buddy__arm buddy__arm--left" />
+          <rect x="160" y="142" width="18" height="68" rx="9" fill="#dde3e0" className="buddy__arm buddy__arm--right" />
+          {/* Hand caps */}
+          <circle cx="31" cy="208" r="8" fill="#e6ebe8" />
+          <circle cx="169" cy="208" r="8" fill="#e6ebe8" />
+          <circle cx="31" cy="208" r="8" fill="none" stroke="#d3dad6" strokeWidth="0.8" />
+          <circle cx="169" cy="208" r="8" fill="none" stroke="#d3dad6" strokeWidth="0.8" />
+
+          {/* Body shell — wider than head, softer corners */}
           <rect
-            x="44"
-            y="22"
-            width="112"
-            height="92"
-            rx="22"
-            ry="22"
-            fill="#ffffff"
-            stroke="#d8dedb"
-            strokeWidth="1.2"
+            x="34"
+            y="124"
+            width="132"
+            height="104"
+            rx="36"
+            ry="36"
+            fill="url(#buddyBodyShine)"
+            stroke="#d3dad6"
+            strokeWidth="1.4"
           />
-          {/* Face screen (black) */}
+
+          {/* Chest plate — bigger, two-tone with soft ring */}
+          <ellipse cx="100" cy="180" rx="38" ry="38" fill="url(#buddyChestPlate)" />
+          <ellipse cx="100" cy="180" rx="38" ry="38" fill="none" stroke="#dee3e0" strokeWidth="1.2" opacity="0.8" />
+
+          {/* Heart — bigger, with multi-layer halo. v1.7: explicit
+              aria-hidden so this decorative pulse never reaches AT. */}
+          <g className="buddy__heart" transform="translate(100 180)" aria-hidden="true">
+            <g className="buddy__heart-glow">
+              <circle r="34" fill="url(#buddyHeartHalo)" />
+              <circle r="24" fill="var(--buddy-heart-color)" opacity="0.16" />
+              <circle r="15" fill="var(--buddy-heart-color)" opacity="0.30" />
+            </g>
+            <path
+              d="M 0 10 C -14 -6 -22 -2 -22 -11 C -22 -20 -14 -22 0 -11 C 14 -22 22 -20 22 -11 C 22 -2 14 -6 0 10 Z"
+              fill="var(--buddy-heart-color)"
+              className="buddy__heart-shape"
+            />
+            {/* Soft top-left highlight on heart for dimensionality */}
+            <ellipse cx="-8" cy="-12" rx="4.5" ry="2.8" fill="#ffffff" opacity="0.45" transform="rotate(-30 -8 -12)" />
+            <circle r="3.4" cx="-1" cy="-6" fill="#fffbe6" className="buddy__heart-core" opacity="0.92" />
+          </g>
+        </g>
+
+        {/* Neck collar — wide chunky band that bridges head ↔ body so they
+            visually fuse instead of reading as two stacked rectangles. */}
+        <g>
+          <rect x="74" y="116" width="52" height="16" rx="5" fill="#cdd5d2" />
+          <rect x="76" y="118" width="48" height="3" rx="1.5" fill="#b6beba" opacity="0.75" />
+          <rect x="76" y="127" width="48" height="2.5" rx="1.2" fill="#b6beba" opacity="0.55" />
+        </g>
+
+        {/* HEAD — sits on top of the collar/body, slightly narrower so the
+            silhouette tapers naturally. */}
+        <g className="buddy__head">
+          {/* Side ears — softer, integrated */}
+          <rect x="36" y="58" width="12" height="28" rx="6" fill="#dde3e0" />
+          <rect x="152" y="58" width="12" height="28" rx="6" fill="#dde3e0" />
+          <rect x="38" y="62" width="3" height="20" rx="1.5" fill="#c4ccc8" opacity="0.7" />
+          <rect x="159" y="62" width="3" height="20" rx="1.5" fill="#c4ccc8" opacity="0.7" />
+
+          {/* Head shell with radial highlight */}
+          <rect
+            x="46"
+            y="22"
+            width="108"
+            height="100"
+            rx="24"
+            ry="24"
+            fill="url(#buddyHeadShine)"
+            stroke="#d3dad6"
+            strokeWidth="1.4"
+          />
+
+          {/* Face screen with inner gradient + bezel */}
           <rect
             x="58"
             y="40"
             width="84"
-            height="58"
-            rx="14"
-            ry="14"
-            fill="#0a0f0e"
+            height="64"
+            rx="16"
+            ry="16"
+            fill="url(#buddyFaceShine)"
           />
-          {/* Eyes — green by default, recolored per state. v1.7: aria-hidden
+          {/* Screen bezel highlight */}
+          <rect
+            x="58"
+            y="40"
+            width="84"
+            height="64"
+            rx="16"
+            ry="16"
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="0.8"
+            opacity="0.08"
+          />
+          {/* Screen sheen — top arc */}
+          <path
+            d="M 62 48 Q 100 44 138 48 L 138 58 Q 100 53 62 58 Z"
+            fill="#ffffff"
+            opacity="0.05"
+          />
+
+          {/* Eyes — bigger, with white highlight for life. v1.7: aria-hidden
               on decorative inner pieces is technically redundant (parent
               SVG is aria-hidden) but it's defensive in case a future
               refactor un-hides the SVG. */}
           <g className="buddy__eyes" aria-hidden="true">
-            <circle cx="82" cy="69" r="7.5" fill="var(--buddy-eye-color)" className="buddy__eye buddy__eye--left" />
-            <circle cx="118" cy="69" r="7.5" fill="var(--buddy-eye-color)" className="buddy__eye buddy__eye--right" />
+            <circle cx="80" cy="72" r="10" fill="var(--buddy-eye-color)" className="buddy__eye buddy__eye--left" />
+            <circle cx="120" cy="72" r="10" fill="var(--buddy-eye-color)" className="buddy__eye buddy__eye--right" />
+            {/* Highlight specks — give the eyes life and depth */}
+            <circle cx="83.5" cy="68.5" r="2.6" fill="#ffffff" opacity="0.95" />
+            <circle cx="123.5" cy="68.5" r="2.6" fill="#ffffff" opacity="0.95" />
+            {/* Tiny secondary glints */}
+            <circle cx="77" cy="75" r="1" fill="#ffffff" opacity="0.6" />
+            <circle cx="117" cy="75" r="1" fill="#ffffff" opacity="0.6" />
           </g>
+
           {/* Subtle smile (varies by state via CSS) */}
           <path
-            d="M 80 88 Q 100 96 120 88"
+            d="M 82 92 Q 100 100 118 92"
             stroke="var(--buddy-eye-color)"
-            strokeWidth="2.2"
+            strokeWidth="2.4"
             strokeLinecap="round"
             fill="none"
             className="buddy__mouth"
-            opacity="0.55"
+            opacity="0.65"
           />
-          {/* Side ears */}
-          <rect x="36" y="56" width="10" height="22" rx="4" fill="#e2e7e4" />
-          <rect x="154" y="56" width="10" height="22" rx="4" fill="#e2e7e4" />
-        </g>
-
-        {/* Neck */}
-        <rect x="92" y="114" width="16" height="10" rx="3" fill="#cdd5d2" />
-
-        {/* Body */}
-        <g className="buddy__body">
-          <rect
-            x="48"
-            y="124"
-            width="104"
-            height="96"
-            rx="26"
-            ry="26"
-            fill="#ffffff"
-            stroke="#d8dedb"
-            strokeWidth="1.2"
-          />
-          {/* Chest plate cutout */}
-          <ellipse cx="100" cy="172" rx="30" ry="34" fill="#f4f6f5" />
-
-          {/* Heart — glowing, pulse cadence is state-driven. v1.7: explicit
-              aria-hidden so this decorative pulse never reaches AT. */}
-          <g className="buddy__heart" transform="translate(100 172)" aria-hidden="true">
-            <g className="buddy__heart-glow">
-              <circle r="20" fill="var(--buddy-heart-color)" opacity="0.18" />
-              <circle r="13" fill="var(--buddy-heart-color)" opacity="0.32" />
-            </g>
-            <path
-              d="M 0 6 C -10 -6 -16 -2 -16 -8 C -16 -14 -10 -16 0 -8 C 10 -16 16 -14 16 -8 C 16 -2 10 -6 0 6 Z"
-              fill="var(--buddy-heart-color)"
-              className="buddy__heart-shape"
-            />
-            <circle r="2.6" fill="#fffbe6" className="buddy__heart-core" />
-          </g>
-
-          {/* Arms */}
-          <rect x="32" y="138" width="14" height="56" rx="7" fill="#e2e7e4" className="buddy__arm buddy__arm--left" />
-          <rect x="154" y="138" width="14" height="56" rx="7" fill="#e2e7e4" className="buddy__arm buddy__arm--right" />
         </g>
 
         {/* Base / shadow — v1.7 explicit aria-hidden for defensive a11y. */}
-        <ellipse cx="100" cy="228" rx="46" ry="6" fill="#0a0f0e" opacity="0.10" className="buddy__shadow" aria-hidden="true" />
+        <ellipse cx="100" cy="234" rx="58" ry="6" fill="#0a0f0e" opacity="0.13" className="buddy__shadow" aria-hidden="true" />
       </svg>
     </div>
   );
