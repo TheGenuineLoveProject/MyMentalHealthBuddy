@@ -86,3 +86,16 @@ node scripts/check-buddy-crisis-stability.mjs
 # pattern handles transitive concerns; e.g. server/engine/crisisDetection.mjs
 # is the approved facade for crisis-detection semantics).
 node scripts/check-buddy-import-boundary.mjs
+
+# v2.13 — Buddy Engine VISUAL_MAP exhaustiveness + state↔key consistency
+# + resolveBuddyState fallback-coverage guard.
+# Closes the last gap in the visual contract that TypeScript catches only
+# partially. TS catches missing Record<BuddyState, BuddyVisualOutput> keys
+# but not per-entry `state` field desync, not field-value validity (e.g.
+# crisis silently set to safetyMode: "normal" still types), and not
+# regex coverage in resolveBuddyState (adding a new BuddyState literal
+# without a regex branch silently falls through to "calm" at runtime).
+# 7 invariants A–G locked: exhaustiveness, no extra keys, key↔state
+# match, all 8 fields populated, structural validity, crisis safety-mode
+# lock, resolveBuddyState fallback coverage.
+node scripts/check-buddy-visual-map.mjs
