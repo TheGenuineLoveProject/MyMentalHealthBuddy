@@ -4,6 +4,8 @@ import { ArrowRight, ArrowLeft, Check, Heart, Brain, Shield, Sparkles, Target, S
 import SEO from "../../components/SEO";
 import { Button } from "@/components/ui/Button.jsx";
 import { Card, CardContent } from "@/components/ui/Card.jsx";
+import BuddyPanel from "@/components/avatar/BuddyPanel";
+import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
 
 const GOALS = [
   { id: "self-love", label: "Build self-compassion", icon: Heart, color: "text-rose-500" },
@@ -55,12 +57,26 @@ export default function GoalOnboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <SEO 
         title="Choose Your Goals — The Genuine Love Project"
         description="Set your wellness goals to get personalized recommendations."
       />
-      
+
+      {/* v2.3 BuddyPanel placement — calm/88px work-surface treatment, matching
+          /journal and /state. State is FIXED to "calm" — no inference from the
+          user's goal/experience/time selections per BuddyPanel placement contract.
+          Visual-only — no fetch, no AI, no profile/streak/paywall logic. */}
+      <BuddyPanel
+        state="calm"
+        title={BUDDY_PANEL_COPY.onboarding.title}
+        subtitle={BUDDY_PANEL_COPY.onboarding.subtitle}
+        surface="onboarding"
+        size={88}
+        className="w-full max-w-2xl mb-6"
+        data-testid="panel-buddy-onboarding"
+      />
+
       <Card className="w-full max-w-2xl">
         <CardContent className="p-8">
           <div className="flex justify-between items-center mb-8">

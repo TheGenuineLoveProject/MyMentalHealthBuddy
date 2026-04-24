@@ -1003,6 +1003,10 @@ export const BUDDY_PANEL_COPY = {
     title: "Buddy is here with you",
     subtitle: "Take a breath. There are no wrong answers.",
   },
+  onboarding: {
+    title: "Buddy is here as you choose",
+    subtitle: "Take your time. You can change these anytime.",
+  },
 } as const;
 
 export type BuddyPanelSurfaceKey = keyof typeof BUDDY_PANEL_COPY;
