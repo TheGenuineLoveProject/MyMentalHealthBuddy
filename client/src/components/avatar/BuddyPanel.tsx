@@ -21,10 +21,33 @@
  * system-defined enums chosen by the parent.
  */
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import BuddyAvatar from "./BuddyAvatar";
 import type { BuddyState } from "@/lib/avatarState";
 import { emitBuddyEvent } from "@/lib/buddyTelemetry";
+import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
+
+/**
+ * v1.15 active-listener reflection rotator.
+ *
+ * Looks up the surface key in BUDDY_PANEL_COPY and, if a `reflections`
+ * array exists, returns the current reflection for the rotation index.
+ * Returns null otherwise — keeps surfaces that don't define reflections
+ * (or any future surface that opts out) completely silent.
+ *
+ * Pure read-only data lookup. No network, no AI, no fetch. Fully typed.
+ */
+function getReflectionForSurface(
+  surface: string,
+  index: number,
+): string | null {
+  const entry = (BUDDY_PANEL_COPY as Record<string, { reflections?: readonly string[] }>)[surface];
+  const list = entry?.reflections;
+  if (!list || list.length === 0) return null;
+  return list[index % list.length];
+}
+
+const REFLECTION_ROTATE_MS = 5500;
 
 export interface BuddyPanelProps {
   /** Buddy emotional state (drives avatar visuals via the v1.9 contract). */
@@ -75,6 +98,23 @@ export default function BuddyPanel({
     emitBuddyEvent("buddy_panel_viewed", { surface, state });
   }, [surface, state]);
 
+  // v1.15 active-listener — gentle rotation of trauma-informed reflective
+  // microcopy. Pure presentational. No fetch, no AI, no business logic.
+  // Index advances on a calm cadence (5.5s) so phrases never feel pushy.
+  // `prefers-reduced-motion` users still see the rotation (opacity stays
+  // constant, only the text content changes), so no motion-policy issue.
+  // The text region is wrapped in aria-live="polite" so screen readers
+  // get the supportive companion phrase without it interrupting.
+  const [reflectionIndex, setReflectionIndex] = useState(0);
+  const reflection = getReflectionForSurface(surface, reflectionIndex);
+  useEffect(() => {
+    if (!reflection) return; // surface has no reflections — nothing to rotate
+    const id = window.setInterval(() => {
+      setReflectionIndex((i) => i + 1);
+    }, REFLECTION_ROTATE_MS);
+    return () => window.clearInterval(id);
+  }, [reflection, surface]);
+
   return (
     <section
       className={`flex flex-col items-center text-center ${className}`}
@@ -111,6 +151,20 @@ export default function BuddyPanel({
           data-testid={`${testId}-subtitle`}
         >
           {subtitle}
+        </p>
+      )}
+
+      {/* v1.15 active-listener reflection — calmly rotating reflective
+          microcopy. Politely announced via aria-live so screen readers
+          hear the supportive companion phrase without losing focus.
+          Hidden entirely if the surface has no reflections defined. */}
+      {reflection && (
+        <p
+          className="mt-2 text-xs italic text-slate-500 dark:text-slate-400 transition-opacity duration-500"
+          data-testid={`${testId}-reflection`}
+          aria-live="polite"
+        >
+          {reflection}
         </p>
       )}
 

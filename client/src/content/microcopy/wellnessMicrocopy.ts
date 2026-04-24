@@ -994,18 +994,61 @@ export const MICROCOPY = {
  *   - Short — typically 2 to 8 words per line.
  *   - Always frames Buddy as company, not authority.
  */
+/**
+ * BUDDY_PANEL_COPY — visual companion microcopy.
+ *
+ * v1.15 active-listener enhancement:
+ *   Each surface entry now also carries `reflections` — short, NLP-rooted
+ *   reflective phrases that BuddyPanel may rotate beneath the subtitle to
+ *   give the avatar an "active dedicated listener" feel without claiming
+ *   to read the user's content. The phrases are:
+ *     - inviting, never commanding
+ *     - 4–10 words each (skim-readable on small screens)
+ *     - rooted in trauma-informed reflective-listening patterns:
+ *         paraphrase / mirror, validate, normalize, gentle open question,
+ *         consent affirmation, agency-protecting check-in
+ *     - never diagnostic, never claiming to know what the user feels
+ *     - WCAG-friendly: no idiom that requires figurative parsing
+ *
+ * The original `title` + `subtitle` shape is unchanged so the
+ * placement-contract gate (which locks both fields) keeps passing.
+ */
 export const BUDDY_PANEL_COPY = {
   journal: {
     title: "Buddy is here while you write",
     subtitle: "No pressure — just gentle company.",
+    reflections: [
+      "I'm right here while you find the words.",
+      "Whatever comes is okay.",
+      "Take the pause you need.",
+      "Your story belongs to you.",
+      "Even one sentence is enough today.",
+      "I'm listening, no rush.",
+    ],
   },
   mood: {
     title: "Buddy is here with you",
     subtitle: "Take a breath. There are no wrong answers.",
+    reflections: [
+      "Whatever you're feeling is welcome here.",
+      "There's no need to label it perfectly.",
+      "Slow breath in… and out.",
+      "I notice you showed up — that matters.",
+      "We can sit with this together.",
+      "Your check-in is private and yours.",
+    ],
   },
   onboarding: {
     title: "Buddy is here as you choose",
     subtitle: "Take your time. You can change these anytime.",
+    reflections: [
+      "There's no wrong way to begin.",
+      "Choose what feels true today.",
+      "You can always come back and adjust.",
+      "Small steps count.",
+      "I'm with you at your pace.",
+      "Your choices stay yours.",
+    ],
   },
 } as const;
 
