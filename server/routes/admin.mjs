@@ -1,6 +1,7 @@
 // server/routes/admin.mjs
 import { Router } from "express";
 import jwt from "jsonwebtoken";
+import crypto from "node:crypto";
 import { logger } from "../utils/logger.mjs";
 import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
 
@@ -43,7 +44,6 @@ router.post("/verify-token", (req, res) => {
     return res.status(401).json({ success: false, message: "Invalid token" });
   }
   
-  const crypto = require("crypto");
   if (!crypto.timingSafeEqual(tokenBuffer, adminBuffer)) {
     logger.info("[Admin] Invalid token attempt", { ip: req.ip });
     return res.status(401).json({ success: false, message: "Invalid token" });

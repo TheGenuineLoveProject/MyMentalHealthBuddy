@@ -155,6 +155,15 @@ app.use("/api/ai/business", aiBusinessRoutes);
 // Auth routes (mount before AI routes so /api/auth/* works)
 app.use("/api/auth", authRoutes);
 
+// Admin login token verification — must be PUBLIC (chicken-and-egg: you can't
+// require admin auth on the very endpoint that grants it). Mounted BEFORE the
+// protected /api/admin chain so Express resolves it first. Rate-limited only.
+app.post("/api/admin/verify-token", adminLimiter, (req, res, next) => {
+  // Re-dispatch into adminRoutes so the original handler logic stays in admin.mjs
+  req.url = "/verify-token";
+  return adminRoutes(req, res, next);
+});
+
 // Admin routes (strict: limiter -> requireAuth -> requireAdmin). Only admin.mjs is mounted.
 app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
 
@@ -325,6 +334,13 @@ app.get("*", async (req, res, next) => {
 // START SERVER
 // ----------------------------
 const PORT = process.env.PORT || 5000;
+
+try {
+  const { ensureSchema } = await import("./db/ensureSchema.mjs");
+  await ensureSchema();
+} catch (err) {
+  console.warn("[boot] ensureSchema skipped:", err?.message || err);
+}
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);

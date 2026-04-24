@@ -45,6 +45,14 @@ export function csrfProtection(req, res, next) {
   if (req.path.startsWith("/api/auth/")) return next();
   // MMHB Buddy Engine: stateless healing surface (no DB writes, no auth state).
   if (req.path === "/api/buddy") return next();
+  // Public/bootstrap entry points that must work without an established session:
+  // admin login token verification + public lead / newsletter forms.
+  if (req.path === "/api/admin/verify-token") return next();
+  if (req.path === "/api/newsletter/subscribe") return next();
+  if (req.path === "/api/newsletter/unsubscribe") return next();
+  if (req.path === "/api/leads") return next();
+  if (req.path === "/api/contact") return next();
+  if (req.path === "/api/feedback") return next();
 
   const auth = req.headers?.authorization || "";
   if (auth.startsWith("Bearer ")) return next();
