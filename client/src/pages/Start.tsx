@@ -35,47 +35,102 @@ type StreakResult = {
 
 type PaywallReason = "value_proven" | "daily_limit" | "premium_feature" | null;
 
-function ShareCard({ reply }: { reply: string | null }) {
+/**
+ * MMHB Buddy Engine v1.8 — Shareable Buddy Moments after relief.
+ *
+ * Privacy-first share card. NEVER includes user message text, AI reply
+ * text, inferred emotional state in the SHARE PAYLOAD, profile data,
+ * streak data, or paywall data. Share copy is generic, warm, and safe.
+ *
+ * Visibility gate is enforced by the parent (caller passes only when
+ * response succeeded + tool exists + crisis is false + no error).
+ *
+ * Telemetry:
+ *   - "buddy_share_shown"   { toolId, buddyState }   — once per mount
+ *   - "buddy_share_clicked" { toolId, buddyState, method } — per click
+ *   - "share_clicked"       { method }               — legacy event,
+ *     kept for aiTelemetry.mjs aggregation backwards-compat.
+ *
+ * The toolId/buddyState in telemetry are bucketed labels (e.g.
+ * "box_breathing", "anxious") not private content. Safe to log.
+ */
+function ShareCard({
+  toolId,
+  buddyState,
+}: {
+  toolId: string;
+  buddyState: BuddyState;
+}) {
   const [copied, setCopied] = useState(false);
-  const message = "This actually helped me reset in 60 seconds → https://mymentalhealthbuddy.com/start";
+
+  // Privacy-safe canonical share copy. Hard-coded; never derived from
+  // user text or AI reply. Keep generic enough that no observer can
+  // infer the sharer's emotional state.
+  const message =
+    "Buddy helped me reset for one minute. Try MyMentalHealthBuddy: https://mymentalhealthbuddy.com/start";
+
+  // v1.8 impression telemetry — fires once when the share card mounts.
+  // Parent gating means this only fires after a real, safe relief moment.
+  useEffect(() => {
+    track("buddy_share_shown", { toolId, buddyState });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleShare() {
+    let method: "native" | "clipboard" | "unavailable" = "unavailable";
     try {
       const nav = navigator as Navigator & { share?: (data: ShareData) => Promise<void> };
       if (typeof nav.share === "function") {
         await nav.share({ text: message });
+        method = "native";
         track("share_clicked", { method: "native" });
+        track("buddy_share_clicked", { toolId, buddyState, method });
         return;
       }
     } catch {
-      /* user cancelled or share failed — fall through to clipboard */
+      /* user cancelled native share or it failed — fall through to clipboard */
     }
     try {
       await navigator.clipboard.writeText(message);
       setCopied(true);
+      method = "clipboard";
       track("share_clicked", { method: "clipboard" });
+      track("buddy_share_clicked", { toolId, buddyState, method });
       setTimeout(() => setCopied(false), 2400);
     } catch {
-      /* clipboard unavailable — silent */
+      /* clipboard unavailable — silent. Still log the attempt for funnel
+         visibility, but mark method unavailable. */
+      track("buddy_share_clicked", { toolId, buddyState, method });
     }
   }
 
-  if (!reply) return null;
   return (
     <section
-      className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-sky-50/60 dark:bg-sky-950/30 p-5 mb-6 flex flex-col sm:flex-row items-center gap-4"
+      className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-sky-50/60 dark:bg-sky-950/30 p-5 mb-6"
       data-testid="panel-share"
     >
-      <p className="text-sm text-sky-900 dark:text-sky-100 flex-1 text-center sm:text-left">
-        This helped. Someone else might need it too.
-      </p>
-      <button
-        onClick={handleShare}
-        className="inline-flex items-center gap-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium px-4 py-2 transition-colors"
-        data-testid="button-share"
+      <h3
+        className="text-base font-semibold text-sky-900 dark:text-sky-100 mb-1"
+        data-testid="text-share-title"
       >
-        {copied ? "Copied" : "Share"}
-      </button>
+        Share a reset
+      </h3>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <p
+          className="text-sm text-sky-800 dark:text-sky-200 flex-1 text-center sm:text-left"
+          data-testid="text-share-body"
+        >
+          If this helped, someone else may need a gentle reset too.
+        </p>
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium px-4 py-2 transition-colors motion-reduce:transition-none"
+          data-testid="button-share"
+          aria-label={copied ? "Share message copied to clipboard" : "Share Buddy with someone who may need a reset"}
+        >
+          {copied ? "Copied" : "Share Buddy"}
+        </button>
+      </div>
     </section>
   );
 }
@@ -917,8 +972,21 @@ export default function Start() {
           </p>
         )}
 
-        {result && !crisis && !error && (
-          <ShareCard reply={reply} />
+        {/* MMHB Buddy Engine v1.8 — share gate.
+            Eligibility (ALL must be true):
+              - response received successfully (`result`)
+              - NOT a crisis flow (`!crisis`)
+              - NOT an error (`!error`)
+              - response has a tool payload (`tool`) — this is the
+                "received tool response" trigger from v1.8 spec.
+            Privacy: ShareCard never receives `reply` or any user-message
+            content. Only neutral metadata (toolId, buddyState) for
+            telemetry bucketing. */}
+        {result && !crisis && !error && tool && (
+          <ShareCard
+            toolId={tool.tool?.id ?? ""}
+            buddyState={buddyState}
+          />
         )}
 
         {/* SOFT PAYWALL — only after value, never on crisis */}

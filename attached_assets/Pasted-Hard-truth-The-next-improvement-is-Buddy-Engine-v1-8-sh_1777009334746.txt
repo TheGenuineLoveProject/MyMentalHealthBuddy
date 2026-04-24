@@ -1,0 +1,150 @@
+Hard truth
+
+The next improvement is Buddy Engine v1.8 — shareable Buddy moments after relief.
+
+But only if v1.7 accessibility is verified first.
+
+Do not generate share cards from private user messages.
+Do not include emotional details from the user’s text.
+Do not add AI calls.
+
+The share should be generic, safe, and privacy-preserving.
+
+⸻
+
+Buddy Engine v1.8 — Shareable Buddy Moments
+
+Paste this into Replit AI:
+
+Upgrade MMHB Buddy Engine to v1.8: shareable Buddy moments after relief.
+STRICT RULES:
+- Do not modify /api/ai/chat
+- Do not modify server/routes/buddy.mjs
+- Do not modify orchestrator, provider, memory, profile, summary, telemetry, crisis logic
+- Do not add AI calls
+- Do not add memory writes
+- Do not change tool execution logic
+- Do not replace /start
+- Do not delete files
+- Do not include private user message text in any share content
+- Do not include crisis content in share content
+- Share copy must be generic and privacy-safe
+TARGET FILE:
+client/src/pages/Start.tsx
+OPTIONAL TARGET:
+client/src/components/avatar/BuddyAvatar.tsx only if a small visual share badge is needed.
+GOAL:
+After a successful non-crisis tool response, show a gentle share prompt:
+"Buddy helped me reset for one minute."
+The share must help growth without exposing user emotion or private text.
+PHASE 1 — SHARE ELIGIBILITY
+Only show share prompt if:
+- response is successful
+- response has a tool
+- crisis is false
+- user has completed or received a tool response
+Never show share prompt if:
+- response contains crisis state
+- response is error
+- no tool exists
+PHASE 2 — SHARE COPY
+Use privacy-safe copy only:
+Primary:
+"Buddy helped me reset for one minute. Try MyMentalHealthBuddy: /start"
+Alternate:
+"I took a 60-second reset with Buddy. Try it here: /start"
+Do not include:
+- the user's message
+- the AI reply
+- inferred emotional state
+- profile data
+- streak data
+- paywall data
+PHASE 3 — SHARE BUTTON
+Add a share card below the completed tool area:
+Title:
+"Share a reset"
+Body:
+"If this helped, someone else may need a gentle reset too."
+Button:
+"Share Buddy"
+Use:
+- navigator.share if available
+- navigator.clipboard.writeText fallback if not
+PHASE 4 — BUDDY VISUAL SUPPORT
+Optional small copy near Buddy:
+"Buddy can help someone else reset too."
+Do not animate aggressively.
+PHASE 5 — TELEMETRY
+Track additive-only:
+buddy_share_shown
+buddy_share_clicked
+Metadata:
+{
+  toolId,
+  buddyState
+}
+Do not log message text.
+Do not log AI reply.
+Do not log crisis content.
+PHASE 6 — VERIFY
+Run:
+npm run dev
+Manual tests:
+1. /start → Calm Me Down
+Expected:
+- tool response appears
+- share prompt appears
+- share copy contains no private text
+- share button works
+2. /start → Help Me Think Clearly
+Expected:
+- share prompt appears after tool response
+3. Crisis input
+Expected:
+- share prompt does not appear
+4. Error response
+Expected:
+- share prompt does not appear
+Confirm:
+- /start loads
+- no console errors
+- /api/ai/chat unchanged
+- /api/buddy unchanged
+- crisis behavior unchanged
+Return:
+- files changed
+- share copy added
+- privacy protections
+- verification results
+- skipped changes
+
+⸻
+
+Shell verification
+
+npm run dev
+curl http://0.0.0.0:5000/health
+curl -X POST http://0.0.0.0:5000/api/buddy \
+-H "Content-Type: application/json" \
+-d '{"message":"I feel anxious"}'
+
+⸻
+
+Why v1.8 matters
+
+Buddy becomes part of your growth loop without violating user privacy.
+
+The loop becomes:
+
+relief → safe share → new user → /start → relief
+
+That is the correct viral mechanism for a mental wellness product.
+
+⸻
+
+Next evolution after v1.8
+
+Upgrade Buddy Engine v1.9: standardize BuddyOutput for future app/mobile/physical companion compatibility. No hardware logic, no AI changes.
+
+Direct challenge: test one share flow yourself. If the share copy feels exposing or too personal, it is wrong. Keep it generic, warm, and safe.

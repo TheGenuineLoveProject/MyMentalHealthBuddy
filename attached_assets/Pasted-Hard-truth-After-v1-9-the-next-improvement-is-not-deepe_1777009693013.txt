@@ -1,0 +1,175 @@
+Hard truth
+
+After v1.9, the next improvement is not deeper Buddy internals.
+
+It is:
+
+Buddy Engine v2.0 — cross-platform visual companion placement
+
+Buddy should now appear consistently across key user journeys, but still as a visual companion only.
+
+No new AI calls.
+No new memory writes.
+No route changes.
+No business logic.
+
+⸻
+
+Buddy Engine v2.0 — Cross-Platform Companion
+
+Paste this into Replit AI:
+
+Upgrade MMHB Buddy Engine to v2.0: cross-platform visual companion placement.
+STRICT RULES:
+- Do not modify /api/ai/chat
+- Do not modify server/routes/buddy.mjs
+- Do not modify orchestrator, provider, memory, profile, summary, telemetry, crisis logic
+- Do not add AI calls
+- Do not add memory writes
+- Do not change tool execution logic
+- Do not replace /start
+- Do not delete files
+- Buddy must remain visual-only on added surfaces
+- No monetization logic inside Buddy
+TARGET FILES:
+- client/src/components/avatar/BuddyAvatar.tsx
+- client/src/lib/avatarState.ts
+- client/src/pages/Start.tsx
+- optional existing pages only if already present:
+  - onboarding page
+  - journal page
+  - mood/check-in page
+  - tools page
+GOAL:
+Use Buddy consistently as a calm visual companion across main healing surfaces.
+PHASE 1 — CREATE REUSABLE WRAPPER
+Create if missing:
+client/src/components/avatar/BuddyPanel.tsx
+BuddyPanel props:
+- state
+- title
+- subtitle
+- size optional
+Rules:
+- imports BuddyAvatar
+- visual/presentation only
+- no fetch
+- no AI
+- no business logic
+- accessible label
+- calm copy
+PHASE 2 — USE BUDDY PANEL ON /start
+In Start.tsx:
+- replace direct BuddyAvatar placement with BuddyPanel
+- preserve current buddyState logic
+- preserve v1.4/v1.5/v1.6/v1.7/v1.8/v1.9 behavior
+- do not change AI chat logic
+Suggested copy:
+title: "Buddy is here with you"
+subtitle: dynamic existing Buddy copy if present
+PHASE 3 — OPTIONAL SURFACE PLACEMENT
+If these pages already exist, add BuddyPanel visually only:
+- onboarding: state calm, copy "Start with one small step."
+- journaling: state sad/calm, copy "Buddy can help you reflect gently."
+- mood/check-in: state calm, copy "Name what is here right now."
+- tools: state encouraged, copy "Choose one small reset."
+Do not create large new page systems.
+Do not wire new backend.
+PHASE 4 — TELEMETRY
+If existing trackEvent helper is available, add additive-only:
+buddy_panel_viewed
+Metadata:
+{
+  surface,
+  state
+}
+Do not log message text.
+Do not log AI reply.
+Do not log profile content.
+PHASE 5 — DOC UPDATE
+Update docs/architecture/BUDDY_ENGINE.md:
+- v2.0 status
+- BuddyPanel component
+- allowed surfaces
+- visual-only rule
+- no business logic rule
+- no AI-route changes
+PHASE 6 — VERIFY
+Run:
+npm run dev
+Verify:
+curl http://0.0.0.0:5000/health
+Manual:
+- /start loads
+- BuddyPanel renders
+- Buddy state still changes on /start
+- no console errors
+- keyboard tab order unchanged
+- reduced motion still respected
+- /api/ai/chat unchanged
+- /api/buddy unchanged
+Return:
+- files changed
+- surfaces updated
+- verification results
+- skipped optional pages
+
+⸻
+
+Shell verification
+
+npm run dev
+curl http://0.0.0.0:5000/health
+curl -X POST http://0.0.0.0:5000/api/buddy \
+-H "Content-Type: application/json" \
+-d '{"message":"I feel anxious"}'
+
+⸻
+
+A–Z Buddy improvement roadmap after v2.0
+
+Do this order only:
+
+v2.1 — Buddy placement audit
+
+Make sure Buddy appears only where it helps, not everywhere.
+
+v2.2 — Buddy microcopy library
+
+Centralize all Buddy copy in one file.
+
+v2.3 — Buddy telemetry review
+
+Measure whether Buddy increases tool completion and return rate.
+
+v2.4 — Buddy visual polish pass
+
+Refine spacing, size, animation intensity, and mobile layout.
+
+v2.5 — Buddy onboarding guide
+
+Buddy introduces the 3 core tools.
+
+⸻
+
+Do not do yet
+
+Do not add:
+
+* voice
+* hardware
+* camera/mic
+* diagnosis language
+* paywall logic inside Buddy
+* AI personality rewrite
+* physical robot code
+
+⸻
+
+Direct challenge
+
+After v2.0, open every page where Buddy appears and ask:
+
+Does Buddy reduce friction here, or is it decorative?
+
+If decorative, remove it from that surface.
