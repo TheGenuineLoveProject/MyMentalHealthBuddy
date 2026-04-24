@@ -73,6 +73,34 @@
   --glp-gold-gradient: linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark));
   --glp-gold-shadow: 0 4px 16px var(--glp-gold-30);
 
+  /* ----------------------------------------------------------------
+     Aurora system — sage→gold→violet→rose triad used by halos,
+     button sheen, premium card rings, and ambient glows. Composed
+     so any surface can opt-in with a single var().
+     ---------------------------------------------------------------- */
+  --glp-aurora-1: rgba(30, 200, 144, 0.55);   /* Luminous Sage */
+  --glp-aurora-2: rgba(190, 134, 34, 0.50);   /* Liquid Amber */
+  --glp-aurora-3: rgba(108, 88, 184, 0.45);   /* Consciousness Violet */
+  --glp-aurora-4: rgba(208, 134, 114, 0.45);  /* Heart Rose */
+  --glp-aurora-conic: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--glp-aurora-1) 18%,
+    var(--glp-aurora-2) 42%,
+    var(--glp-aurora-3) 66%,
+    var(--glp-aurora-4) 86%,
+    transparent 100%
+  );
+  --glp-aurora-linear: linear-gradient(
+    115deg,
+    var(--glp-aurora-1) 0%,
+    var(--glp-aurora-2) 38%,
+    var(--glp-aurora-3) 72%,
+    var(--glp-aurora-4) 100%
+  );
+  --glp-aurora-glow: 0 0 32px rgba(30, 200, 144, 0.18),
+                     0 0 64px rgba(108, 88, 184, 0.12);
+
   /* Extended teal palette — Abyssal Wisdom spectrum */
   --glp-teal-50: #dff1ee;
   --glp-teal-100: #aedcd6;

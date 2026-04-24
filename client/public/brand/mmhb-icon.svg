@@ -13,10 +13,21 @@
         0%, 100% { opacity: 0.85; transform: scale(1); }
         50%      { opacity: 1;    transform: scale(1.08); }
       }
-      /* Aurora arcs — glacial rotation */
-      .aurora-cw  { transform-origin: 256px 285px; animation: spin 90s linear infinite; }
-      .aurora-ccw { transform-origin: 256px 270px; animation: spin 120s linear infinite reverse; }
+      /* Aurora arcs — glacial rotation + slow hue drift on filter
+         (transform and filter are independent properties, so both
+         animations run simultaneously without conflict). */
+      .aurora-cw  { transform-origin: 256px 285px;
+                    animation: spin 90s linear infinite,
+                               auroraHue 28s ease-in-out infinite; }
+      .aurora-ccw { transform-origin: 256px 270px;
+                    animation: spin 120s linear infinite reverse,
+                               auroraHue 36s ease-in-out infinite reverse; }
       @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes auroraHue {
+        0%, 100% { filter: url(#arc-blur) hue-rotate(0deg)   saturate(1);    }
+        33%      { filter: url(#arc-blur) hue-rotate(8deg)   saturate(1.08); }
+        66%      { filter: url(#arc-blur) hue-rotate(-8deg)  saturate(0.96); }
+      }
       /* Particle twinkle — wrapped in translated <g> so the child scales
          around its own origin without needing transform-box: fill-box
          (which is unreliable on older Safari/iOS). */
