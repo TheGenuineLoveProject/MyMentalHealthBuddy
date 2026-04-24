@@ -28,6 +28,35 @@ const ALLOWED_EVENT_TYPES = new Set([
         //   on /start ("I did it" button).
         "first_line_continued",
         "tool_completed",
+        // ─────────────────────────────────────────────────────────────────
+        // MMHB Buddy Engine v1.8 / v1.9 / v2.0 signals (additive, registry
+        // update only — no change to logEvent's dispatch logic).
+        //
+        // The client (Start.tsx ShareCard, BuddyPanel) was already POSTing
+        // these to /api/telemetry/event, but the allowlist above was
+        // silently dropping them. Adding the names here makes the events
+        // land in logs/events.jsonl alongside every other engagement signal.
+        //
+        // Schema (all share the same { type, guestId?, metadata } envelope):
+        //   buddy_panel_viewed       { surface, state }
+        //     fires once per (surface, state) mount tuple from BuddyPanel.
+        //     surface ∈ "start" | "journal" | "mood" (today's wired set).
+        //   buddy_share_shown        { toolId, buddyState }
+        //     fires once per ShareCard mount on /start.
+        //   buddy_share_clicked      { toolId, buddyState, method }
+        //     fires per share interaction; complements the legacy
+        //     `share_clicked` event so Buddy attribution can be A/B'd.
+        //   buddy_accessibility_ready (no metadata)
+        //     fires once when /start completes its a11y readiness check.
+        //
+        // PII boundary: never carry message text, never carry user PII —
+        // strictly the bucketed fields above. logEvent itself does no
+        // sanitisation, so the surface (BuddyPanel, ShareCard) MUST keep
+        // payloads bucketed.
+        "buddy_panel_viewed",
+        "buddy_share_shown",
+        "buddy_share_clicked",
+        "buddy_accessibility_ready",
 ]);
 
 export function logEvent({ type, guestId = null, metadata = {} } = {}) {

@@ -75,6 +75,15 @@ export default function BuddyAvatar({
       data-safety-mode={v.safetyMode}
       data-motion={v.motion}
       data-expression={v.expression}
+      // v1.9 gap-fix — eyeColor / heartColor / heartPulse were exposed only
+      // as CSS variables (--buddy-eye-color, etc.), which a hardware adapter
+      // or e2e probe cannot read without computed-style introspection. Mirror
+      // them as data-attributes so the canonical 8-field BuddyOutput contract
+      // is fully readable from the DOM. CSS variables remain authoritative
+      // for paint; data-attributes are the read-only mirror for observers.
+      data-eye-color={v.eyeColor}
+      data-heart-color={v.heartColor}
+      data-heart-pulse={v.heartPulse}
     >
       <svg
         viewBox="0 0 200 240"

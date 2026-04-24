@@ -15,3 +15,8 @@
 {"type":"start_page_click","guestId":"g_mocg85u6_jm1uo5","metadata":{},"ts":1777007440737}
 {"type":"start_page_click","guestId":"g_mocg85u6_jm1uo5","metadata":{},"ts":1777007690784}
 {"type":"start_page_click","guestId":"g_mocg85u6_jm1uo5","metadata":{},"ts":1777007721159}
+{"type":"buddy_panel_viewed","guestId":"gap_1777012115","metadata":{"surface":"start","state":"calm","toolId":"breath","buddyState":"calm","method":"clipboard"},"ts":1777012115529}
+{"type":"buddy_share_shown","guestId":"gap_1777012115","metadata":{"surface":"start","state":"calm","toolId":"breath","buddyState":"calm","method":"clipboard"},"ts":1777012115569}
+{"type":"buddy_share_clicked","guestId":"gap_1777012115","metadata":{"surface":"start","state":"calm","toolId":"breath","buddyState":"calm","method":"clipboard"},"ts":1777012115607}
+{"type":"buddy_accessibility_ready","guestId":"gap_1777012115","metadata":{"surface":"start","state":"calm","toolId":"breath","buddyState":"calm","method":"clipboard"},"ts":1777012115644}
+{"type":"start_page_click","guestId":"gap_1777012115","metadata":{},"ts":1777012116761}

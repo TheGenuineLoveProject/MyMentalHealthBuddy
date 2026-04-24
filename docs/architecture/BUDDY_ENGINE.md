@@ -50,6 +50,24 @@ consistent framing.
     deferred pending UX review.
 - **Sizing convention:** 140px on landing surfaces (centerpiece);
   88px on work-focused surfaces (supportive presence, not centerpiece).
+- **Server telemetry allowlist (closes a v1.8/v1.9/v2.0 silent-drop gap):**
+  `server/ai/aiTelemetry.mjs` `ALLOWED_EVENT_TYPES` now accepts
+  `buddy_panel_viewed`, `buddy_share_shown`, `buddy_share_clicked`,
+  and `buddy_accessibility_ready`. Before this fix, the client was
+  POSTing these to `/api/telemetry/event` and the route returned 200,
+  but `logEvent` silently dropped them at the allowlist check — so they
+  never reached `logs/events.jsonl`. The fix is **registry-only**: no
+  change to `logEvent` dispatch logic and no change to any pre-existing
+  event's behavior. Payloads stay bucketed (no message text, no PII)
+  per the per-event schema documented in `aiTelemetry.mjs`.
+- **DOM contract completeness (v1.9 gap-fix):** `BuddyAvatar` now mirrors
+  every field of the 8-field `BuddyVisualOutput` contract as a
+  `data-*` attribute — including `data-eye-color`, `data-heart-color`,
+  and `data-heart-pulse`, which previously were exposed only as CSS
+  custom properties. CSS variables remain authoritative for paint; the
+  data-attributes are the read-only mirror so a hardware adapter, an
+  e2e probe, or a telemetry observer can read the full contract from
+  the DOM without `getComputedStyle` introspection.
 - **Additive telemetry:** `buddy_panel_viewed { surface, state }` fires
   once per `(surface, state)` mount tuple. Both fields are bucketed
   enums chosen by the parent surface — no message text, no AI reply,
