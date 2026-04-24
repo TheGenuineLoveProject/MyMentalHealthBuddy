@@ -132,6 +132,13 @@ export default function BuddyAvatar({
             <stop offset="55%" stopColor="var(--buddy-heart-color)" stopOpacity="0.06" />
             <stop offset="100%" stopColor="var(--buddy-heart-color)" stopOpacity="0" />
           </radialGradient>
+          {/* v1.12 floor glow — soft pool of light beneath Buddy so the
+              figure reads as gently floating rather than sitting flat. */}
+          <radialGradient id="buddyFloorGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="var(--buddy-heart-color)" stopOpacity="0.32" />
+            <stop offset="55%" stopColor="var(--buddy-heart-color)" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="var(--buddy-heart-color)" stopOpacity="0" />
+          </radialGradient>
         </defs>
 
         {/* Ambient aura — sits behind everything; gives a soft "alive" glow
@@ -292,6 +299,11 @@ export default function BuddyAvatar({
             opacity="0.65"
           />
         </g>
+
+        {/* Floor glow — soft pool of state-tinted light beneath Buddy.
+            Sits between the figure and the dark shadow so Buddy reads as
+            gently floating on a warm halo rather than sitting flat. */}
+        <ellipse cx="100" cy="232" rx="62" ry="10" fill="url(#buddyFloorGlow)" aria-hidden="true" />
 
         {/* Base / shadow — v1.7 explicit aria-hidden for defensive a11y. */}
         <ellipse cx="100" cy="234" rx="58" ry="6" fill="#0a0f0e" opacity="0.13" className="buddy__shadow" aria-hidden="true" />

@@ -679,7 +679,7 @@ export default function Start() {
           state={buddyState}
           title="Buddy is here with you"
           surface="start"
-          size={140}
+          size={180}
           className="mb-6"
           data-testid="panel-buddy-start"
         >

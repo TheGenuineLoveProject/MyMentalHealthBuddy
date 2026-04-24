@@ -104,10 +104,14 @@
   50%      { transform: scale(1.022); }
 }
 
-/* warm_glow — subtle rise + warm halo (encouraged) */
-.buddy--motion-warm_glow .buddy__body,
-.buddy--motion-warm_glow .buddy__head {
+/* warm_glow — subtle rise + warm halo + gentle head tilt (encouraged).
+   The head tilts a couple degrees while the body rises — reads as a
+   compassionate, listening posture. */
+.buddy--motion-warm_glow .buddy__body {
   animation: buddyWarmRise 3600ms ease-in-out infinite;
+}
+.buddy--motion-warm_glow .buddy__head {
+  animation: buddyWarmTilt 3600ms ease-in-out infinite;
 }
 .buddy--motion-warm_glow .buddy__heart-shape {
   filter: drop-shadow(0 0 10px var(--buddy-heart-color, #5DDB94))
@@ -117,6 +121,10 @@
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-3px); }
 }
+@keyframes buddyWarmTilt {
+  0%, 100% { transform: translateY(0) rotate(-1.4deg); }
+  50%      { transform: translateY(-3px) rotate(1.4deg); }
+}
 
 /* steady — motionless presence (crisis) */
 .buddy--motion-steady .buddy__body,
@@ -124,7 +132,7 @@
   animation: none;
 }
 
-/* sparkle — joyful bounce + shimmer (celebrate) */
+/* sparkle — joyful bounce + shimmer + floating particles (celebrate) */
 .buddy--motion-sparkle .buddy__body,
 .buddy--motion-sparkle .buddy__head {
   animation: buddySparkleBounce 1400ms cubic-bezier(.34,1.56,.64,1) infinite;
@@ -137,6 +145,52 @@
   0%, 100% { transform: translateY(0) rotate(0deg); }
   35%      { transform: translateY(-7px) rotate(-1.5deg); }
   65%      { transform: translateY(-2px) rotate(1.5deg); }
+}
+
+/* v1.12 sparkle particles — two soft floating dots that orbit upward
+   during celebration. Pure CSS pseudo-elements so they cost zero DOM. */
+.buddy--motion-sparkle::before,
+.buddy--motion-sparkle::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--buddy-heart-color, #FFD75A);
+  box-shadow: 0 0 10px var(--buddy-heart-color, #FFD75A);
+  pointer-events: none;
+  opacity: 0.85;
+}
+.buddy--motion-sparkle::before {
+  top: 8%;
+  left: 6%;
+  animation: buddySparkleFloatA 1900ms ease-in-out infinite;
+}
+.buddy--motion-sparkle::after {
+  top: 14%;
+  right: 6%;
+  animation: buddySparkleFloatB 1900ms ease-in-out infinite 650ms;
+}
+@keyframes buddySparkleFloatA {
+  0%, 100% { transform: translateY(2px) scale(0.85); opacity: 0.40; }
+  50%      { transform: translateY(-12px) scale(1.25); opacity: 0.95; }
+}
+@keyframes buddySparkleFloatB {
+  0%, 100% { transform: translateY(2px) scale(0.85); opacity: 0.40; }
+  50%      { transform: translateY(-15px) scale(1.20); opacity: 0.95; }
+}
+
+/* v1.12 antenna tip pulse — the soft halo around the antenna tip
+   gently breathes so Buddy reads as alive even while still. The tip
+   is the first <circle> in .buddy__antenna (the large fuzzy halo). */
+.buddy__antenna circle:nth-of-type(1) {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyAntennaPulse 3200ms ease-in-out infinite;
+}
+@keyframes buddyAntennaPulse {
+  0%, 100% { transform: scale(1.00); opacity: 1.00; }
+  50%      { transform: scale(1.18); opacity: 0.75; }
 }
 
 /* ---------- State-specific accents ---------- */
@@ -172,11 +226,20 @@
   50%      { transform: scale(0.94, 1); opacity: 0.13; }
 }
 
-/* ---------- Reduced motion ---------- */
+/* ---------- Reduced motion ----------
+   v1.12: pseudo-elements (::before, ::after) are NOT selected by `*`
+   in CSS, so they need their own explicit reset to fully respect the
+   user's motion preference. Sparkle particles also fade to invisible
+   under reduced-motion (they're decorative joy, not info). */
 @media (prefers-reduced-motion: reduce) {
   .buddy *,
   .buddy {
     animation: none !important;
+  }
+  .buddy--motion-sparkle::before,
+  .buddy--motion-sparkle::after {
+    animation: none !important;
+    opacity: 0 !important;
   }
   .buddy__heart-shape,
   .buddy__heart-glow {
