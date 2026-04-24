@@ -1,0 +1,183 @@
+Hard truth
+
+You already know the correct next move.
+
+Do not expand Buddy into more backend, memory, hardware, or AI logic yet.
+
+The next improvement is:
+
+Buddy Engine v1.5 — tool-specific expressions only
+
+This makes Buddy feel connected to what the user is doing, not just what the user said.
+
+⸻
+
+Buddy Engine v1.5 — Tool-Specific Expressions
+
+Paste this into Replit AI:
+
+Upgrade MMHB Buddy Engine to v1.5: tool-specific avatar expressions only.
+STRICT RULES:
+- Do not modify /api/ai/chat
+- Do not modify server/routes/buddy.mjs
+- Do not modify orchestrator, provider, memory, profile, summary, telemetry, crisis logic
+- Do not change tool execution logic
+- Do not replace /start
+- Do not delete files
+- Only improve BuddyAvatar visual state mapping on /start
+TARGET FILE:
+client/src/pages/Start.tsx
+OPTIONAL TARGET:
+client/src/components/avatar/BuddyAvatar.tsx only if visual classes need support.
+GOAL:
+BuddyAvatar should visually match the active tool:
+- box_breathing → breathing visual
+- thought_reframe → focused/encouraged visual
+- emotional_checkin → soft/sad visual
+- overload_reset → grounded/overwhelmed visual
+- relationship_repair → warm/encouraged visual
+- pattern_interrupt → focused/encouraged visual
+PHASE 1 — ADD TOOL-TO-BUDDY MAPPER
+In Start.tsx, add helper:
+function mapToolToBuddyState(toolId = "", modules = []) {
+  if (toolId === "box_breathing") return "anxious";
+  if (toolId === "grounding_54321") return "overwhelmed";
+  if (toolId === "thought_reframe") return "encouraged";
+  if (toolId === "emotional_checkin") return "sad";
+  if (toolId === "overload_reset") return "overwhelmed";
+  if (toolId === "relationship_repair") return "encouraged";
+  if (toolId === "pattern_interrupt") return "encouraged";
+  if (modules.includes("anxiety")) return "anxious";
+  if (modules.includes("emotional_processing")) return "sad";
+  if (modules.includes("cognitive_reframe")) return "encouraged";
+  if (modules.includes("self_regulation")) return "overwhelmed";
+  return "calm";
+}
+PHASE 2 — APPLY AFTER AI RESPONSE
+When /api/ai/chat returns:
+const nextBuddyState = mapToolToBuddyState(
+  response?.tool?.tool?.id || response?.tool?.id || "",
+  response?.modules || []
+);
+setBuddyState(nextBuddyState);
+PHASE 3 — ADD TOOL HELPER COPY
+Near BuddyAvatar, show text based on active tool:
+const buddyToolCopy = {
+  box_breathing: "Follow Buddy’s breath.",
+  grounding_54321: "Let Buddy help you ground.",
+  thought_reframe: "Buddy is helping you think clearly.",
+  emotional_checkin: "Buddy is staying gentle with you.",
+  overload_reset: "Buddy is helping you make this smaller.",
+  relationship_repair: "Buddy is helping you prepare with care.",
+  pattern_interrupt: "Buddy is helping you break the loop."
+};
+Render only when toolId exists.
+PHASE 4 — KEEP STATE RECOVERY
+Preserve v1.4 behavior:
+- non-crisis states recover to calm
+- crisis state never auto-transitions
+- reduced motion respected
+- no flashing
+PHASE 5 — ADD TELEMETRY EVENT
+Add additive-only event:
+buddy_tool_expression
+Metadata:
+{
+  toolId,
+  buddyState
+}
+Do not log message text.
+PHASE 6 — VERIFY
+Run:
+npm run dev
+Manual tests:
+1. Calm Me Down
+Expected:
+- toolId box_breathing
+- Buddy state anxious/breathing
+- helper says Follow Buddy’s breath.
+2. Help Me Think Clearly
+Expected:
+- toolId thought_reframe
+- Buddy state encouraged/focused
+3. Understand This Feeling
+Expected:
+- toolId emotional_checkin
+- Buddy state sad/soft
+4. Crisis content
+Expected:
+- crisis-safe Buddy behavior preserved
+- no auto recovery out of crisis
+Return:
+- files changed
+- mapping added
+- verification results
+- skipped changes
+
+⸻
+
+Shell verification
+
+npm run dev
+curl http://0.0.0.0:5000/health
+curl -X POST http://0.0.0.0:5000/api/buddy \
+-H "Content-Type: application/json" \
+-d '{"message":"I feel anxious"}'
+
+⸻
+
+How Buddy can improve A–Z without destabilizing the app
+
+Use this roadmap, in this exact order:
+
+v1.5 — Tool-specific expressions
+
+Buddy mirrors the active tool.
+
+v1.6 — Memory-aware baseline
+
+Buddy defaults to the user’s preferred support style.
+
+v1.7 — Accessibility polish
+
+Reduced motion, contrast, keyboard behavior.
+
+v1.8 — Shareable Buddy moments
+
+Share cards after relief, no private text.
+
+v1.9 — Physical-device abstraction
+
+Stable BuddyOutput for future robot/device use.
+
+v2.0 — Buddy as system companion
+
+Buddy appears across journaling, check-ins, tools, and onboarding.
+
+⸻
+
+Do not do yet
+
+Do not add:
+
+* voice
+* physical robot logic
+* new AI provider calls
+* new memory writes
+* hardware abstraction beyond docs
+* advanced personalization
+
+Those come after Buddy is stable and users respond positively.
+
+⸻
+
+Direct challenge
+
+Test the three /start tools.
+
+Ask only one question:
+
+Did Buddy feel like it was participating in the tool?
+
+If yes, continue to v1.6.
+If no, fix visual mapping before adding anything else.

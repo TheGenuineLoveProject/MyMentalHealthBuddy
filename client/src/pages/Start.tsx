@@ -393,12 +393,70 @@ export default function Start() {
     setBuddyState("calm");
   }, [crisis, toolCompleted, result, selectedToolId]);
 
+  // MMHB Buddy Engine v1.4 — time-based state recovery.
+  //
+  // Buddy gradually returns to "calm" after any emotional state, except
+  // crisis (which must remain steady — the user needs grounding, not
+  // motion). Two timing tiers, by spec:
+  //   • encouraged AFTER toolCompleted → 12s "soft landing" recovery
+  //   • all other emotional states     → 20s natural recovery
+  //
+  // No flashing. Cleanup cancels the timer on unmount or state change so
+  // we never set state on an unmounted component.
+  useEffect(() => {
+    if (buddyState === "calm" || buddyState === "crisis") return;
+    const isSoftLanding = toolCompleted && buddyState === "encouraged";
+    const recoveryMs = isSoftLanding ? 12000 : 20000;
+    const eventName = isSoftLanding
+      ? "buddy_completion_soft_landing"
+      : "buddy_state_recovered";
+    const from = buddyState;
+    const timer = window.setTimeout(() => {
+      setBuddyState("calm");
+      track(eventName, { from, to: "calm" });
+    }, recoveryMs);
+    return () => window.clearTimeout(timer);
+  }, [buddyState, toolCompleted]);
+
+  // MMHB Buddy Engine v1.4 — grounding-helper visibility telemetry.
+  // Fires once per state-entry when the helper copy below the avatar
+  // becomes visible. Pure read; never affects AI/tool/response behavior.
+  useEffect(() => {
+    if (buddyState === "anxious" || buddyState === "overwhelmed") {
+      track("buddy_grounding_visible", { state: buddyState });
+    }
+  }, [buddyState]);
+
+  // Helper copy shown beneath the avatar (Phases 2 + 3). Visual only.
+  const buddyHelperCopy: string | null =
+    buddyState === "anxious" || buddyState === "overwhelmed"
+      ? "Follow Buddy’s breath."
+      : buddyState === "encouraged" && toolCompleted
+      ? "You did one small thing for yourself."
+      : null;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       <main className="mx-auto max-w-2xl px-6 py-12 md:py-20" data-testid="page-start">
-        {/* MMHB Buddy — visual companion (v1.1, /start integration) */}
-        <div className="flex justify-center mb-6" data-testid="container-buddy-avatar">
+        {/* MMHB Buddy — visual companion (v1.4: signal-driven + recovery) */}
+        <div className="flex flex-col items-center mb-6" data-testid="container-buddy-avatar">
           <BuddyAvatar state={buddyState} size={140} data-testid="buddy-avatar-start" />
+          {/*
+            v1.4 grounding helper copy — appears when Buddy is anxious /
+            overwhelmed (Phase 2) or when the user just completed a tool
+            (Phase 3 soft landing). aria-live="polite" so screen readers
+            announce it without interrupting. Subtle opacity transition,
+            no transform/keyframe motion (vestibular-safe).
+          */}
+          <div
+            role="status"
+            aria-live="polite"
+            className="mt-3 min-h-[1.25rem] text-sm text-slate-600 dark:text-slate-400 text-center transition-opacity duration-500 motion-reduce:transition-none"
+            style={{ opacity: buddyHelperCopy ? 1 : 0 }}
+            data-testid="text-buddy-helper-copy"
+          >
+            {buddyHelperCopy ?? "\u00A0"}
+          </div>
         </div>
 
         {/* HERO */}

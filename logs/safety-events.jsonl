@@ -32,3 +32,4 @@
 {"id":"safe_1776975131199_wx5d47","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-23T20:12:11.199Z"}
 {"id":"safe_1776976315699_wjf4nv","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-23T20:31:55.699Z"}
 {"id":"safe_1776976469908_rzyfrk","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-23T20:34:29.908Z"}
+{"id":"safe_1777007689000_l2ijaz","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-24T05:14:49.000Z"}

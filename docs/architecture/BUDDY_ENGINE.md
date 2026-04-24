@@ -1,9 +1,33 @@
 # MMHB Buddy Engine — Architecture
 
-> **Status: v1.3**
+> **Status: v1.4**
 > Healing-domain modular companion for MyMentalHealthBuddy.
 > Visual avatar + emotional state machine + safe AI route + React hook +
-> telemetry-ready output + signal-driven /start integration.
+> telemetry-ready output + signal-driven /start integration + time-based
+> recovery and grounding loop.
+
+## v1.4 Changes (April 2026)
+
+- **Time-based state recovery.** Non-crisis emotional states gradually
+  return to `calm` so Buddy feels emotionally synchronized rather than
+  stuck. Two timing tiers: 12s "soft landing" after `toolCompleted`
+  (`encouraged → calm`), 20s natural recovery for everything else
+  (`anxious / sad / overwhelmed / encouraged → calm`). Crisis NEVER
+  auto-transitions — the user needs steady grounding, not motion.
+- **Grounding helper copy.** A small `aria-live="polite"` line appears
+  beneath the avatar:
+  - `anxious / overwhelmed` → "Follow Buddy's breath."
+  - `encouraged + toolCompleted` → "You did one small thing for yourself."
+  Layout reserves the line height (`min-h-[1.25rem]`) so the page never
+  shifts when copy appears or disappears. Subtle opacity-only fade,
+  disabled under `prefers-reduced-motion`.
+- **Additive telemetry events** (client-side `track()` only — no pipeline
+  changes): `buddy_state_recovered`, `buddy_completion_soft_landing`,
+  `buddy_grounding_visible`. No message text is logged.
+- **Three-effect coordination, race-free.** The v1.3 mapping effect
+  (signal-driven) and the v1.4 recovery effect cannot ping-pong because
+  the recovery's setBuddyState("calm") doesn't change any of the v1.3
+  effect's dependencies. Architect-reviewed.
 
 ## v1.3 Changes (April 2026)
 
