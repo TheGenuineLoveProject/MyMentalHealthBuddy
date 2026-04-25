@@ -386,11 +386,10 @@ export default function CanvaLanding() {
                   </Link>
                   <Link href="/login">
                     <button
-                      className="inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
-                      style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 14px var(--glp-gold-30)' }}
+                      className="header-cta-gold inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full text-white"
                       data-testid="button-getstarted"
                     >
-                      <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
+                      <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" aria-hidden="true" />
                       <span className="hidden sm:inline">Start Free</span>
                       <span className="sm:hidden">Start</span>
                     </button>
@@ -441,18 +440,14 @@ export default function CanvaLanding() {
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center">
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full mb-6 md:mb-10 shadow-lg animate-fade-in-up"
-              style={{
-                background: 'var(--glp-paper)',
-                border: '2px solid var(--glp-sage-30)',
-                boxShadow: '0 8px 32px var(--glp-sage-20)'
-              }}
+            <div
+              className="hero-eyebrow inline-flex items-center gap-2.5 md:gap-3 px-5 py-2.5 md:px-7 md:py-3 rounded-full mb-6 md:mb-10 animate-fade-in-up"
             >
-              <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
+              <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" aria-hidden="true" />
               <span className="font-bold uppercase tracking-widest text-xs md:text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
                 The Coach Your Mind Has Been Waiting For
               </span>
+              <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" aria-hidden="true" />
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.06] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
@@ -519,19 +514,19 @@ export default function CanvaLanding() {
           <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
             <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
-              <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+              <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
                 Free Forever. No Catch.
               </p>
             </div>
             <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
-              <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+              <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
                 Evidence-Based Tools
               </p>
             </div>
             <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }}>
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
-              <p className="text-[10px] sm:text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
+              <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
                 Your AI Buddy
               </p>
             </div>
