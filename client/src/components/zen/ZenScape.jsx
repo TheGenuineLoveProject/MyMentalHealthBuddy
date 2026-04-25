@@ -1,4 +1,5 @@
 import BuddyAvatar from "../avatar/BuddyAvatar";
+import BuddyBubble from "./BuddyBubble";
 import "./zen-scape.css";
 
 /**
@@ -21,6 +22,8 @@ export default function ZenScape({
   buddySize = 140,
   buddyLabel,
   className = "",
+  bubble = true,
+  bubbleRotateMs = 14000,
 }) {
   return (
     <div className={`zenscape ${className}`}>
@@ -59,11 +62,16 @@ export default function ZenScape({
 
       {showBuddy ? (
         <div className="zenscape__hero">
-          <BuddyAvatar
-            state={buddyState}
-            size={buddySize}
-            data-testid="zenscape-buddy"
-          />
+          <div className="zenscape__hero-row">
+            <BuddyAvatar
+              state={buddyState}
+              size={buddySize}
+              data-testid="zenscape-buddy"
+            />
+            {bubble ? (
+              <BuddyBubble state={buddyState} rotateMs={bubbleRotateMs} />
+            ) : null}
+          </div>
           {buddyLabel ? (
             <p className="zenscape__hero-label" data-testid="zenscape-buddy-label">
               {buddyLabel}

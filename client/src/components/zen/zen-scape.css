@@ -100,6 +100,22 @@
   padding: 14px 0 18px;
 }
 
+.zenscape__hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 18px;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .zenscape__hero-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
 .zenscape__hero-label {
   margin: 0;
   font-size: 14px;
