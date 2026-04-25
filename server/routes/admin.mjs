@@ -217,6 +217,7 @@ router.get("/health-deep", async (_req, res) => {
         sampleCount: Array.isArray(watch.samples) ? watch.samples.length : 0,
       } : null,
       probeHistory: _probeHistory.slice(0, PROBE_HISTORY_MAX),
+      selfHealHistory: _selfHealHistory.slice(0, SELF_HEAL_HISTORY_MAX),
     });
   } catch (error) {
     logger.error("Admin health-deep error", { error: error?.message || error });
@@ -301,6 +302,84 @@ router.post("/health-deep/run", async (req, res) => {
   } catch (error) {
     logger.error("Admin re-probe error", { error: error?.message || error });
     res.status(500).json({ ok: false, error: "Re-probe failed" });
+  }
+});
+
+// Admin-triggered self-heal.  Spawns `node scripts/heal-self.mjs --silent`
+// (which itself runs heal-360 → safe-only heal-repair → re-probe and persists
+// docs/health-self-status.json).  heal-self NEVER passes --apply-destructive,
+// so this remains within the safe-only contract.
+//
+// Cooldown is longer (60s) because heal-self does more work than a probe and
+// can trigger `npm run build`.  Timeout is 90s for the same reason.  Each run
+// appends to `_selfHealHistory` (in-memory ring buffer, last 10).
+let _lastSelfHealAt = 0;
+const _selfHealHistory = [];
+const SELF_HEAL_HISTORY_MAX = 10;
+
+router.post("/health-deep/self-heal", async (req, res) => {
+  const now = Date.now();
+  const COOLDOWN_MS = 60_000;
+  const since = now - _lastSelfHealAt;
+  if (since < COOLDOWN_MS) {
+    return res.status(429).json({
+      ok: false,
+      error: "Self-heal cooldown active",
+      retryAfterMs: COOLDOWN_MS - since,
+    });
+  }
+  _lastSelfHealAt = now;
+
+  try {
+    const { spawn } = await import("node:child_process");
+    const fs = await import("node:fs");
+    const STATUS_PATH = "docs/health-self-status.json";
+
+    const startedAt = Date.now();
+    const exitCode = await new Promise((resolve) => {
+      const child = spawn("node", ["scripts/heal-self.mjs", "--silent"], {
+        stdio: ["ignore", "ignore", "ignore"],
+      });
+      const timer = setTimeout(() => {
+        try { child.kill("SIGTERM"); } catch { /* ignore */ }
+        resolve(124);
+      }, 90_000);
+      child.on("error", () => { clearTimeout(timer); resolve(3); });
+      child.on("close", (code) => { clearTimeout(timer); resolve(code ?? 3); });
+    });
+    const durationMs = Date.now() - startedAt;
+
+    let status = null;
+    if (fs.existsSync(STATUS_PATH)) {
+      try { status = JSON.parse(fs.readFileSync(STATUS_PATH, "utf8")); }
+      catch { /* unreadable */ }
+    }
+
+    const outcome = status?.outcome || (exitCode === 124 ? "TIMEOUT" : "INTERNAL_ERROR");
+
+    _selfHealHistory.unshift({
+      at: new Date().toISOString(),
+      outcome,
+      exitCode,
+      before: status?.before || null,
+      after: status?.after || null,
+      durationMs,
+      actorId: req.user?.id || null,
+    });
+    while (_selfHealHistory.length > SELF_HEAL_HISTORY_MAX) _selfHealHistory.pop();
+
+    logger.info("Admin self-heal completed", { outcome, exitCode, durationMs });
+    res.json({
+      ok: true,
+      outcome,
+      exitCode,
+      durationMs,
+      before: status?.before || null,
+      after: status?.after || null,
+    });
+  } catch (error) {
+    logger.error("Admin self-heal error", { error: error?.message || error });
+    res.status(500).json({ ok: false, error: "Self-heal failed" });
   }
 });
 

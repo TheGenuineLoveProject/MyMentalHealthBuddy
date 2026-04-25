@@ -115,6 +115,31 @@ export default function HealthDashboard() {
     },
   });
 
+  // Self-heal: triggers heal-self.mjs (probe → safe-only repair → re-probe).
+  // Heavier than re-probe; longer cooldown (60s) and may take ~30s to finish.
+  const selfHeal = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/admin/health-deep/self-heal");
+      return res.json();
+    },
+    onSuccess: (data) => {
+      const before = data?.before?.verdict || "?";
+      const after = data?.after?.verdict || "?";
+      toast({
+        title: `Self-heal: ${data?.outcome || "unknown"}`,
+        description: `${before} → ${after}${data?.durationMs ? ` · ${data.durationMs}ms` : ""}`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+    },
+    onError: (err) => {
+      toast({
+        title: "Self-heal failed",
+        description: err?.message || "Try again in 60 seconds.",
+        variant: "destructive",
+      });
+    },
+  });
+
   const handleRefresh = () => {
     setRefreshKey(prev => prev + 1);
     refetch();
@@ -289,13 +314,24 @@ export default function HealthDashboard() {
               )}
               <button
                 onClick={() => reprobe.mutate()}
-                disabled={reprobe.isPending}
+                disabled={reprobe.isPending || selfHeal.isPending}
                 className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-sage-600 text-white rounded-lg hover:bg-sage-700 disabled:opacity-60 disabled:cursor-not-allowed transition min-h-[36px]"
                 data-testid="btn-reprobe"
                 aria-label="Re-run deep health probe"
               >
                 <RefreshCw className={`w-4 h-4 ${reprobe.isPending ? "animate-spin motion-reduce:animate-none" : ""}`} />
                 {reprobe.isPending ? "Probing..." : "Re-probe now"}
+              </button>
+              <button
+                onClick={() => selfHeal.mutate()}
+                disabled={selfHeal.isPending || reprobe.isPending}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-60 disabled:cursor-not-allowed transition min-h-[36px]"
+                data-testid="btn-self-heal"
+                aria-label="Run autonomous self-heal (probe + safe-only repair + re-probe)"
+                title="Probe + safe-only repair + re-probe (autonomous, never destructive)"
+              >
+                <Stethoscope className={`w-4 h-4 ${selfHeal.isPending ? "animate-pulse motion-reduce:animate-none" : ""}`} />
+                {selfHeal.isPending ? "Healing..." : "Self-heal now"}
               </button>
             </div>
           </div>
@@ -390,6 +426,46 @@ export default function HealthDashboard() {
                 </div>
               )}
 
+              {/* Self-heal history (admin-triggered closed-loop runs, last 10) */}
+              {Array.isArray(deep?.selfHealHistory) && deep.selfHealHistory.length > 0 && (
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4" data-testid="section-self-heal-history">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Recent autonomous self-heals</h3>
+                  <ul className="space-y-1">
+                    {deep.selfHealHistory.map((s, i) => {
+                      const ts = s.at ? new Date(s.at) : null;
+                      const tsLabel = ts && !isNaN(ts.getTime()) ? ts.toLocaleTimeString() : "—";
+                      const goodOutcomes = ["ALREADY_HEALTHY", "REPAIRED_TO_HEALTHY"];
+                      const partialOutcomes = ["REPAIRED_TO_DEGRADED", "DRY_RUN"];
+                      const isGood = goodOutcomes.includes(s.outcome);
+                      const isPartial = partialOutcomes.includes(s.outcome);
+                      return (
+                        <li
+                          key={`${s.at}-${i}`}
+                          className="flex items-center justify-between text-xs py-1.5 px-2 rounded bg-gray-50 dark:bg-gray-700/30"
+                          data-testid={`self-heal-history-${i}`}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                              isGood ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
+                              : isPartial ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300"
+                              : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300"
+                            }`}>
+                              {s.outcome}
+                            </span>
+                            <span className="text-gray-700 dark:text-gray-300 tabular-nums">
+                              {(s.before?.verdict || "?")} → {(s.after?.verdict || "?")}
+                            </span>
+                          </span>
+                          <span className="text-gray-500 dark:text-gray-400 tabular-nums">
+                            {s.durationMs ? `${s.durationMs}ms · ` : ""}{tsLabel}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+
               {/* Re-probe history (admin-triggered runs, last 10) */}
               {Array.isArray(deep?.probeHistory) && deep.probeHistory.length > 0 && (
                 <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4" data-testid="section-probe-history">
@@ -414,7 +490,11 @@ export default function HealthDashboard() {
                           </span>
                         </span>
                         <span className="text-gray-500 dark:text-gray-400 tabular-nums">
-                          {p.durationMs ? `${p.durationMs}ms · ` : ""}{new Date(p.at).toLocaleTimeString()}
+                          {(() => {
+                            const ts = p.at ? new Date(p.at) : null;
+                            const tsLabel = ts && !isNaN(ts.getTime()) ? ts.toLocaleTimeString() : "—";
+                            return `${p.durationMs ? `${p.durationMs}ms · ` : ""}${tsLabel}`;
+                          })()}
                         </span>
                       </li>
                     ))}

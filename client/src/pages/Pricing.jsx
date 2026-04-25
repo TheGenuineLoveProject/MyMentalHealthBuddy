@@ -8,6 +8,7 @@ import { TrustSignals, BeforeAfter } from "../components/benefits";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import "@/styles/glp-pane.css";
 
 const freeTier = {
   name: "Free",
@@ -241,7 +242,7 @@ export default function Pricing() {
               return (
                 <div 
                   key={tier.name} 
-                  className="rounded-3xl p-8 relative animate-fade-in-scale shadow-xl"
+                  className="glp-pane glp-pane--bare rounded-3xl p-8 relative animate-fade-in-scale shadow-xl"
                   style={{ 
                     animationDelay: `${index * 100}ms`, 
                     background: 'var(--glp-paper)', 

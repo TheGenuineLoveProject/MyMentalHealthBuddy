@@ -41,14 +41,20 @@ The platform includes a layered self-heal stack, each script independently runna
 - **`scripts/heal-cron.mjs`** — scheduled single-shot for cron/systemd. Single syslog-style line (`<ts> <host> mmhb-heal[<pid>]: <verdict> pass=N warn=N fail=N total=N`) + daily-rotating NDJSON at `docs/health-cron-YYYYMMDD.log` with `--retention=<days>` auto-prune (default 30). Nagios-style exit codes; flags `--silent` `--json`.
 - **`scripts/heal-self.mjs`** — fully autonomous closed-loop: probe → safe-only repair → re-probe → persist `docs/health-self-status.json`. Never invokes `--apply-destructive`. Outcomes: ALREADY_HEALTHY / REPAIRED_TO_HEALTHY / REPAIRED_TO_DEGRADED / STILL_NEEDS_REPAIR / REPAIR_FAILED / DRY_RUN.
 
-Admin Command Center surfaces this via two endpoints (admin-only):
-- `GET /api/admin/health-deep` — reads heal-360 + heal-watch reports server-side, returns `{ verdict, totals, categories, nonPass, watch, probeHistory }`. The `probeHistory` field is an in-memory ring buffer (last 10 admin-triggered re-probes with verdict, totals, durationMs, actorId).
-- `POST /api/admin/health-deep/run` — admin-triggered re-probe; spawns heal-360 with 30s timeout, 30s in-memory cooldown returning 429+`retryAfterMs`, appends to history.
+Admin Command Center surfaces this via three endpoints (admin-only, all gated by mount-level `adminLimiter → requireAuth → requireAdmin` chain in `server/app.mjs`):
+- `GET /api/admin/health-deep` — reads heal-360 + heal-watch + ring buffers server-side, returns `{ verdict, totals, categories, nonPass, watch, probeHistory, selfHealHistory }`. The two `*History` fields are in-memory ring buffers (last 10 entries each).
+- `POST /api/admin/health-deep/run` — admin-triggered re-probe; spawns heal-360 with 30s timeout, 30s in-memory cooldown returning 429+`retryAfterMs`, appends `{ at, verdict, exitCode, totals, durationMs, actorId }` to `_probeHistory`.
+- `POST /api/admin/health-deep/self-heal` — admin-triggered autonomous self-heal; spawns `heal-self.mjs --silent` with 90s timeout + 60s cooldown. Reads `docs/health-self-status.json` after completion. Appends `{ at, outcome, exitCode, before, after, durationMs, actorId }` to `_selfHealHistory`. Always safe-only (heal-self enforces no `--apply-destructive`).
 
-`client/src/pages/admin/HealthDashboard.jsx` consumes the GET via React Query (60s refetch) and renders the Deep Health panel with totals, per-category breakdown, non-pass items + repair hints, watch streak, recent admin re-probes, and a "Re-probe now" button (TanStack mutation + toast). Uses the `glp-pane` design token.
+`client/src/pages/admin/HealthDashboard.jsx` consumes the GET via React Query (60s refetch) and renders the Deep Health panel with totals, per-category breakdown, non-pass items + repair hints, watch streak, recent autonomous self-heals (color-coded outcome pills + before→after verdict + duration), and recent admin re-probes. Two action buttons in the panel header — "Re-probe now" (sage, RefreshCw icon) + "Self-heal now" (amber, Stethoscope icon) — are wired via TanStack mutations with toast feedback and mutually disable each other while one is pending. Uses the `glp-pane` design token.
 
 ### Design Tokens — `glp-pane`
-`client/src/styles/glp-pane.css` exports a reusable sanctuary-depth pane primitive. Apply `className="glp-pane"` to any container to inherit cream-gradient bg + inset highlight + animated tri-color top accent bar (gold → sage → gold) + soft hover lift + sage hover border. Modifiers: `glp-pane--accent` (permanent gold ring for "featured" panes, e.g. the popular pricing tier), `glp-pane--quiet` (no hover lift). Includes built-in dark-mode variant and `prefers-reduced-motion` gating. Currently applied to all four Deep Health Dashboard panels (Environment / Resources / Quick Actions / Deep Health) and to all Pricing tier cards.
+`client/src/styles/glp-pane.css` exports a reusable sanctuary-depth pane primitive. Apply `className="glp-pane"` to any container to inherit cream-gradient bg + inset highlight + animated tri-color top accent bar (gold → sage → gold) + soft hover lift + sage hover border. Modifiers:
+- `glp-pane--accent` — permanent gold ring (for "featured" panes).
+- `glp-pane--quiet` — disables hover lift (for non-interactive cards).
+- `glp-pane--bare` — disables `overflow:hidden` and the `::before` accent bar; lets the host element control its own visual chrome (used by Pricing tier cards which have inline 2px gold borders + absolutely-positioned popular badges that would otherwise be clipped).
+
+Border declarations on `.glp-pane` deliberately omit `!important` so inline `style="border:..."` can win on opt-in surfaces. Includes built-in dark-mode variant and `prefers-reduced-motion` gating. Currently applied to all four Deep Health Dashboard panels (Environment / Resources / Quick Actions / Deep Health) and to all 4 Pricing tier cards (with `--bare`).
 
 ## External Dependencies
 
