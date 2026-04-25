@@ -53,7 +53,11 @@ export default function BrandLogo({
 
   if (linkTo) {
     return (
-      <Link href={linkTo} className="group cursor-pointer">
+      <Link
+        href={linkTo}
+        className="brand-logo-link group cursor-pointer no-underline"
+        style={{ textDecoration: "none" }}
+      >
         {content}
       </Link>
     );

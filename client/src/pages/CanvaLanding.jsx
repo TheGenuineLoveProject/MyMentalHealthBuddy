@@ -328,7 +328,7 @@ export default function CanvaLanding() {
       <header className="sticky top-0 z-50 backdrop-blur-xl border-b" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-deep-12)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-[80px] sm:h-[92px] lg:h-[108px]">
-            <Link href="/">
+            <Link href="/" className="brand-logo-link no-underline" style={{ textDecoration: 'none' }}>
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
                 <div className="relative w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] lg:w-[56px] lg:h-[56px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 12px var(--glp-sage-deep-20)' }}>
                   <BuddyAvatar

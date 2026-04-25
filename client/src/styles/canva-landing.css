@@ -1608,6 +1608,17 @@
   text-underline-offset: 4px;
 }
 
+/* Brand logo link — never underline regardless of containing surface */
+.brand-logo-link,
+.brand-logo-link:hover,
+.brand-logo-link:focus,
+.brand-logo-link:visited,
+.brand-logo-link *,
+.brand-logo-link *:hover {
+  text-decoration: none !important;
+  text-underline-offset: 0;
+}
+
 .canva-landing .step-card-elite:hover {
   transform: translateY(-8px);
   border-color: var(--glp-sage-30);
