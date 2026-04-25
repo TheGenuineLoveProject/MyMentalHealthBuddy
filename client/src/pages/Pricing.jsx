@@ -168,8 +168,6 @@ export default function Pricing() {
 
   return (
   <WellnessPageShell
-    title="Pricing"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
@@ -264,12 +262,12 @@ export default function Pricing() {
                     <h2 className="text-2xl font-bold" style={{ color: 'var(--glp-sage-deep)' }}>{tier.name}</h2>
                   </div>
                   
-                  <div className="flex items-baseline gap-1 mb-2">
+                  <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-4xl font-bold" style={{ color: tier.popular ? 'var(--glp-gold)' : 'var(--glp-sage-deep)' }}>{tier.price}</span>
-                    <span className="text-sm" style={{ color: 'var(--glp-sage)' }}>{tier.period}</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--glp-sage-deep)', opacity: 0.78 }}>{tier.period}</span>
                   </div>
                   
-                  <p className="text-sm mb-6" style={{ color: 'var(--glp-sage)' }}>{tier.description}</p>
+                  <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--glp-sage-deep)', opacity: 0.82 }}>{tier.description}</p>
                   
                   <ul className="space-y-3 mb-8">
                     {tier.features.map((feature) => (
