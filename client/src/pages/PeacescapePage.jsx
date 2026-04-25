@@ -4,6 +4,8 @@ import { ArrowLeft, Sparkles, Map, Heart, Wand2 } from "lucide-react";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import ZenScape from "@/components/zen/ZenScape";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import CustomizerPanel from "@/components/peacescape/CustomizerPanel";
+import InteractiveBuddy from "@/components/peacescape/InteractiveBuddy";
 import { apiRequest } from "@/lib/queryClient";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -98,7 +100,12 @@ export default function PeacescapePage() {
         >
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-shrink-0">
-              <BuddyAvatar state="calm" size={140} ariaLabel={`Your Buddy in the ${stage.label}`} />
+              <InteractiveBuddy
+                initialState="calm"
+                size={160}
+                ariaLabel="Tap Buddy to see a different expression."
+                testId="sanctuary-buddy"
+              />
             </div>
             <div className="flex-1 text-center md:text-left">
               <div
@@ -154,6 +161,27 @@ export default function PeacescapePage() {
         {loading && (
           <div className="text-center text-sm mb-8" style={{ color: "var(--glp-ink)", opacity: 0.6 }} data-testid="status-loading">
             Tending the sanctuary…
+          </div>
+        )}
+
+        {/* Customizer — palette / accessory / theme. Optional, gentle, consent-based. */}
+        {!loading && (
+          <div className="mb-10">
+            <CustomizerPanel
+              authenticated={!!state?.authenticated}
+              initialPalette={scape.palette}
+              initialAccessory={scape.accessory}
+              initialTheme={scape.theme}
+              onChange={({ persisted, scape: newScape, stage: newStage }) => {
+                if (persisted && newScape) {
+                  setState((s) => ({
+                    ...(s || {}),
+                    scape: newScape,
+                    stage: newStage || s?.stage,
+                  }));
+                }
+              }}
+            />
           </div>
         )}
 

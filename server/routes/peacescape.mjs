@@ -58,6 +58,98 @@ async function safeQuery(label, fn, fallback) {
   }
 }
 
+// Allowlists for sanctuary customization. All values are visual-only labels —
+// no PII, no behavioral data. Persisted to user_avatars (one row per user).
+const ALLOWED_PALETTE  = new Set(["sage", "rose", "gold", "sky", "violet", "dawn"]);
+const ALLOWED_ACCESSORY = new Set(["none", "star", "heart", "leaf", "moon", "sun", "feather"]);
+const ALLOWED_THEME     = new Set(["meadow", "forest", "ocean", "dawn", "dusk", "cosmos"]);
+
+router.patch("/state", async (req, res) => {
+  const user = req.user || null;
+  if (!user || !user.id) {
+    return res.status(401).json({ ok: false, error: "auth_required",
+      message: "Sign in to save your sanctuary." });
+  }
+
+  const body = req.body || {};
+  const palette = typeof body.palette === "string" ? body.palette : null;
+  const accessory = typeof body.accessory === "string" ? body.accessory : null;
+  const theme = typeof body.theme === "string" ? body.theme : null;
+
+  if (palette && !ALLOWED_PALETTE.has(palette)) {
+    return res.status(400).json({ ok: false, error: "invalid_palette",
+      allowed: [...ALLOWED_PALETTE] });
+  }
+  if (accessory && !ALLOWED_ACCESSORY.has(accessory)) {
+    return res.status(400).json({ ok: false, error: "invalid_accessory",
+      allowed: [...ALLOWED_ACCESSORY] });
+  }
+  if (theme && !ALLOWED_THEME.has(theme)) {
+    return res.status(400).json({ ok: false, error: "invalid_theme",
+      allowed: [...ALLOWED_THEME] });
+  }
+  if (!palette && !accessory && !theme) {
+    return res.status(400).json({ ok: false, error: "no_fields",
+      message: "Provide palette, accessory, or theme." });
+  }
+
+  try {
+    const journalCount = await safeQuery(
+      "journals.count.patch",
+      async () => {
+        const r = await db.execute(
+          sql`SELECT COUNT(*)::int AS n FROM journals WHERE user_id = ${user.id}`
+        );
+        return Number(r?.rows?.[0]?.n ?? r?.[0]?.n ?? 0);
+      },
+      0,
+    );
+    const { current } = stageForCount(journalCount);
+
+    // Upsert: insert with defaults, then overlay only the provided fields.
+    await db.execute(sql`
+      INSERT INTO user_avatars (user_id, palette, accessory, peacescape_theme,
+                                evolution_stage, journal_count_at_unlock)
+      VALUES (${user.id},
+              ${palette || "sage"},
+              ${accessory || "none"},
+              ${theme || "meadow"},
+              ${current.stage},
+              ${journalCount})
+      ON CONFLICT (user_id) DO UPDATE SET
+        palette           = COALESCE(${palette}, user_avatars.palette),
+        accessory         = COALESCE(${accessory}, user_avatars.accessory),
+        peacescape_theme  = COALESCE(${theme}, user_avatars.peacescape_theme),
+        evolution_stage   = ${current.stage},
+        journal_count_at_unlock = ${journalCount},
+        updated_at        = NOW()
+    `);
+
+    const r = await db.execute(
+      sql`SELECT palette, accessory, peacescape_theme AS theme, evolution_stage
+          FROM user_avatars WHERE user_id = ${user.id} LIMIT 1`
+    );
+    const row = r?.rows?.[0] || r?.[0] || null;
+
+    return res.json({
+      ok: true,
+      authenticated: true,
+      scape: {
+        palette: String(row?.palette || "sage"),
+        accessory: String(row?.accessory || "none"),
+        theme: String(row?.theme || "meadow"),
+        customization: { unlocked: true, available: ["palette", "accessory", "theme"] },
+      },
+      stage: current,
+      saved: { palette, accessory, theme },
+    });
+  } catch (err) {
+    logger.warn(`[peacescape] PATCH /state failed: ${err?.message || err}`);
+    return res.status(500).json({ ok: false, error: "save_failed",
+      message: "Couldn't save your sanctuary right now. Please try again in a moment." });
+  }
+});
+
 router.get("/state", async (req, res) => {
   const user = req.user || null;
 
