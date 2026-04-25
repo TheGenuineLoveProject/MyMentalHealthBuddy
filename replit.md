@@ -33,7 +33,22 @@ Core features include AI-powered Chat Therapy, Wellness Tools (State Tracker, Jo
 Drizzle ORM is used with a Neon PostgreSQL database. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting. An observability layer provides health and system endpoints. A `Prompt-OS Execution Prompt Library` ensures canonical prompt modules validated against `promptspec.schema.json`. Production readiness features include a 503 readiness gate, health probes, telemetry parity, request tracing, and hardened administration access governed by a `CHANGE_GATE` protocol.
 
 ### Self-Healing Tooling (A→Z 360°)
-The platform includes a unified, non-destructive self-repair sweep accessible via `bash scripts/heal-all.sh`. This orchestrator runs three stages: comprehensive probing (`heal-360.mjs`), filesystem topology sanity (`autoheal-core.mjs`), and contract gate verification (`check-contract-routes.sh`), rolling up to a single verdict. Active repair, continuous observation, and unattended scheduled execution capabilities are also provided. The deep-health surface is wired into the Command Center via dedicated API endpoints and a React-based Health Dashboard.
+The platform includes a layered self-heal stack, each script independently runnable and producing structured output:
+- **`scripts/heal-all.sh`** — orchestrator: probe → topology sanity → contract gates → rolled-up verdict (manual sweep).
+- **`scripts/heal-360.mjs`** — read-only comprehensive probe; persists `docs/health-check-result.json`; exit 0/1/2/3 (HEALTHY/DEGRADED/NEEDS_REPAIR/INTERNAL_ERROR).
+- **`scripts/heal-repair.mjs`** — recipe-driven fix prescriber. DRY-RUN by default; safe fixes need `--apply`, destructive fixes need `--apply-destructive`. Locked surfaces (`/api/ai/chat`, `server/ai/*`, `BuddyAvatar.tsx`, `/start`) are excluded from the recipe registry.
+- **`scripts/heal-watch.mjs`** — continuous probe loop; persists rolling `docs/health-watch-status.json` (latest sample + 10-sample streak window + history). Read-only.
+- **`scripts/heal-cron.mjs`** — scheduled single-shot for cron/systemd. Single syslog-style line (`<ts> <host> mmhb-heal[<pid>]: <verdict> pass=N warn=N fail=N total=N`) + daily-rotating NDJSON at `docs/health-cron-YYYYMMDD.log` with `--retention=<days>` auto-prune (default 30). Nagios-style exit codes; flags `--silent` `--json`.
+- **`scripts/heal-self.mjs`** — fully autonomous closed-loop: probe → safe-only repair → re-probe → persist `docs/health-self-status.json`. Never invokes `--apply-destructive`. Outcomes: ALREADY_HEALTHY / REPAIRED_TO_HEALTHY / REPAIRED_TO_DEGRADED / STILL_NEEDS_REPAIR / REPAIR_FAILED / DRY_RUN.
+
+Admin Command Center surfaces this via two endpoints (admin-only):
+- `GET /api/admin/health-deep` — reads heal-360 + heal-watch reports server-side, returns `{ verdict, totals, categories, nonPass, watch, probeHistory }`. The `probeHistory` field is an in-memory ring buffer (last 10 admin-triggered re-probes with verdict, totals, durationMs, actorId).
+- `POST /api/admin/health-deep/run` — admin-triggered re-probe; spawns heal-360 with 30s timeout, 30s in-memory cooldown returning 429+`retryAfterMs`, appends to history.
+
+`client/src/pages/admin/HealthDashboard.jsx` consumes the GET via React Query (60s refetch) and renders the Deep Health panel with totals, per-category breakdown, non-pass items + repair hints, watch streak, recent admin re-probes, and a "Re-probe now" button (TanStack mutation + toast). Uses the `glp-pane` design token.
+
+### Design Tokens — `glp-pane`
+`client/src/styles/glp-pane.css` exports a reusable sanctuary-depth pane primitive. Apply `className="glp-pane"` to any container to inherit cream-gradient bg + inset highlight + animated tri-color top accent bar (gold → sage → gold) + soft hover lift + sage hover border. Modifiers: `glp-pane--accent` (permanent gold ring for "featured" panes, e.g. the popular pricing tier), `glp-pane--quiet` (no hover lift). Includes built-in dark-mode variant and `prefers-reduced-motion` gating. Currently applied to all four Deep Health Dashboard panels (Environment / Resources / Quick Actions / Deep Health) and to all Pricing tier cards.
 
 ## External Dependencies
 

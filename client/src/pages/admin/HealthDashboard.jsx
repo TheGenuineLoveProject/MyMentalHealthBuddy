@@ -194,7 +194,7 @@ export default function HealthDashboard() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700" data-testid="section-environment">
+          <div className="glp-pane rounded-xl p-6" data-testid="section-environment">
             <div className="flex items-center gap-2 mb-4">
               <Shield className="w-5 h-5 text-sage-600" />
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-environment">Environment Configuration</h2>
@@ -208,7 +208,7 @@ export default function HealthDashboard() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700" data-testid="section-resources">
+          <div className="glp-pane rounded-xl p-6" data-testid="section-resources">
             <div className="flex items-center gap-2 mb-4">
               <Cpu className="w-5 h-5 text-sage-600" />
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-resources">System Resources</h2>
@@ -245,7 +245,7 @@ export default function HealthDashboard() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700" data-testid="section-actions">
+        <div className="glp-pane rounded-xl p-6" data-testid="section-actions">
           <div className="flex items-center gap-2 mb-4">
             <Activity className="w-5 h-5 text-sage-600" />
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-actions">Quick Actions</h2>
@@ -387,6 +387,38 @@ export default function HealthDashboard() {
                       <span className="ml-2 opacity-60">· updated {new Date(deep.watch.updatedAt).toLocaleString()}</span>
                     )}
                   </div>
+                </div>
+              )}
+
+              {/* Re-probe history (admin-triggered runs, last 10) */}
+              {Array.isArray(deep?.probeHistory) && deep.probeHistory.length > 0 && (
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4" data-testid="section-probe-history">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Recent admin re-probes</h3>
+                  <ul className="space-y-1">
+                    {deep.probeHistory.map((p, i) => (
+                      <li
+                        key={`${p.at}-${i}`}
+                        className="flex items-center justify-between text-xs py-1.5 px-2 rounded bg-gray-50 dark:bg-gray-700/30"
+                        data-testid={`probe-history-${i}`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                            p.verdict === "HEALTHY" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
+                            : p.verdict === "DEGRADED" ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300"
+                            : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300"
+                          }`}>
+                            {p.verdict}
+                          </span>
+                          <span className="text-gray-700 dark:text-gray-300 tabular-nums">
+                            {p.totals?.pass ?? 0}p · {p.totals?.warn ?? 0}w · {p.totals?.fail ?? 0}f
+                          </span>
+                        </span>
+                        <span className="text-gray-500 dark:text-gray-400 tabular-nums">
+                          {p.durationMs ? `${p.durationMs}ms · ` : ""}{new Date(p.at).toLocaleTimeString()}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
 

@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-04-25T05:47:58.260Z",
+  "startedAt": "2026-04-25T05:47:56.581Z",
+  "host": "478c60cc6e1f",
+  "pid": 40783,
+  "mode": "dry",
+  "outcome": "DRY_RUN",
+  "repaired": false,
+  "before": {
+    "verdict": "DEGRADED",
+    "exit": 1,
+    "totals": {
+      "pass": 25,
+      "warn": 2,
+      "fail": 0
+    }
+  },
+  "after": {
+    "verdict": "DEGRADED",
+    "exit": 1,
+    "totals": {
+      "pass": 25,
+      "warn": 2,
+      "fail": 0
+    },
+    "report": {
+      "timestamp": "2026-04-25T05:47:58.127Z",
+      "totals": {
+        "pass": 25,
+        "warn": 2,
+        "fail": 0
+      }
+    }
+  },
+  "repair": {
+    "exit": 1,
+    "stdoutTail": "\u001b[2mSource report: docs/health-check-result.json (2026-04-25T05:47:58.127Z)\u001b[0m\n\u001b[2mNon-pass checks: 2\u001b[0m\n\n\u001b[36m\u001b[1m────────────────────────────────────────────────────────────────\u001b[0m\n\u001b[36m\u001b[1m  Repair Plan\u001b[0m\n\u001b[36m\u001b[1m────────────────────────────────────────────────────────────────\u001b[0m\n  \u001b[35m[manual]\u001b[0m VITE_GA_MEASUREMENT_ID: set for Google Analytics in client (optional)\n    \u001b[2maction: Set the secret in Replit Secrets (never commit values)\u001b[0m\n  \u001b[33m[destructive]\u001b[0m Bootstrap missing DB table from Drizzle schema (therapy_sessions)\n    \u001b[2mcommand: npm run db:push -- --force\u001b[0m\n    \u001b[33m→ skipped (DRY-RUN)\u001b[0m\n\n\u001b[36m\u001b[1m────────────────────────────────────────────────────────────────\u001b[0m\n\u001b[36m\u001b[1m  Summary\u001b[0m\n\u001b[36m\u001b[1m────────────────────────────────────────────────────────────────\u001b[0m\n\u001b[33mDRY-RUN complete.\u001b[0m 2 action(s) prescribed.\n\u001b[2mRun again with `--apply` to execute safe fixes,\u001b[0m\n\u001b[2mor `--apply --apply-destructive` to also execute destructive ones.\u001b[0m\n\n",
+    "stderrTail": ""
+  }
+}

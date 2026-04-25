@@ -216,6 +216,7 @@ router.get("/health-deep", async (_req, res) => {
         updatedAt: watch.updatedAt || null,
         sampleCount: Array.isArray(watch.samples) ? watch.samples.length : 0,
       } : null,
+      probeHistory: _probeHistory.slice(0, PROBE_HISTORY_MAX),
     });
   } catch (error) {
     logger.error("Admin health-deep error", { error: error?.message || error });
@@ -227,8 +228,16 @@ router.get("/health-deep", async (_req, res) => {
 // process; heal-360 is read-only, so this is safe to expose to admins.
 // Returns the verdict + totals after the probe completes (typically <2s).
 // A simple 30s in-memory cooldown prevents accidental rapid re-probes.
+//
+// Each successful run is appended to a small in-memory ring buffer
+// (`_probeHistory`, last 10 runs) so the admin dashboard can show recent
+// re-probe activity without persisting to the database.  History is
+// surfaced on the GET /api/admin/health-deep response under `probeHistory`.
 let _lastProbeAt = 0;
-router.post("/health-deep/run", async (_req, res) => {
+const _probeHistory = []; // [{ at, verdict, exitCode, totals, durationMs, actorId }]
+const PROBE_HISTORY_MAX = 10;
+
+router.post("/health-deep/run", async (req, res) => {
   const now = Date.now();
   const COOLDOWN_MS = 30_000;
   const since = now - _lastProbeAt;
@@ -246,6 +255,7 @@ router.post("/health-deep/run", async (_req, res) => {
     const fs = await import("node:fs");
     const REPORT_PATH = "docs/health-check-result.json";
 
+    const probeStartedAt = Date.now();
     const exitCode = await new Promise((resolve) => {
       const child = spawn("node", ["scripts/heal-360.mjs"], {
         stdio: ["ignore", "ignore", "ignore"],
@@ -257,6 +267,7 @@ router.post("/health-deep/run", async (_req, res) => {
       child.on("error", () => { clearTimeout(timer); resolve(3); });
       child.on("close", (code) => { clearTimeout(timer); resolve(code ?? 3); });
     });
+    const durationMs = Date.now() - probeStartedAt;
 
     let totals = null;
     let timestamp = null;
@@ -274,8 +285,19 @@ router.post("/health-deep/run", async (_req, res) => {
       exitCode === 2 ? "NEEDS_REPAIR" :
       exitCode === 124 ? "TIMEOUT" : "INTERNAL_ERROR";
 
-    logger.info("Admin re-probe completed", { verdict, exitCode, totals });
-    res.json({ ok: true, verdict, exitCode, totals, reportTimestamp: timestamp });
+    // Append to ring buffer (newest first)
+    _probeHistory.unshift({
+      at: new Date().toISOString(),
+      verdict,
+      exitCode,
+      totals,
+      durationMs,
+      actorId: req.user?.id || null,
+    });
+    while (_probeHistory.length > PROBE_HISTORY_MAX) _probeHistory.pop();
+
+    logger.info("Admin re-probe completed", { verdict, exitCode, totals, durationMs });
+    res.json({ ok: true, verdict, exitCode, totals, durationMs, reportTimestamp: timestamp });
   } catch (error) {
     logger.error("Admin re-probe error", { error: error?.message || error });
     res.status(500).json({ ok: false, error: "Re-probe failed" });
