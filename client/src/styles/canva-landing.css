@@ -1361,9 +1361,65 @@
 }
 
 .canva-landing .faq-item {
-  border-bottom: 1px solid var(--glp-sage-15);
-  padding: 28px 0;
-  transition: all 0.3s ease;
+  position: relative;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(252, 246, 234, 0.45) 100%);
+  border: 1px solid var(--glp-sage-15);
+  border-radius: 18px;
+  padding: 22px 26px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 1px 3px rgba(var(--glp-sage-deep-rgb), 0.04);
+}
+
+/* Left accent bar — slim default, expands on active/hover */
+.canva-landing .faq-item::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--glp-gold) 0%, var(--glp-sage) 100%);
+  opacity: 0;
+  transform: scaleY(0.4);
+  transform-origin: center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.canva-landing .faq-item:hover {
+  border-color: var(--glp-sage-25);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 6px 18px rgba(var(--glp-sage-deep-rgb), 0.07);
+}
+
+.canva-landing .faq-item:hover::before {
+  opacity: 0.55;
+  transform: scaleY(0.85);
+}
+
+.canva-landing .faq-item.active {
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(252, 246, 234, 0.65) 100%);
+  border-color: var(--glp-sage-30);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 8px 22px rgba(var(--glp-sage-deep-rgb), 0.08);
+}
+
+.canva-landing .faq-item.active::before {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .canva-landing .faq-question {
@@ -1371,15 +1427,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   font-weight: 600;
-  color: var(--deep-teal);
-  font-size: 18px;
+  color: var(--glp-sage-deep);
+  font-size: 17px;
+  line-height: 1.45;
   padding: 4px 0;
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
 }
 
 .canva-landing .faq-question:hover {
-  color: var(--glp-gold-dark, #c49a2d);
+  color: var(--glp-gold-dark, #b07c1c);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing .faq-item,
+  .canva-landing .faq-item::before,
+  .canva-landing .faq-question {
+    transition: none;
+  }
+  .canva-landing .faq-item:hover {
+    transform: none;
+  }
 }
 
 .canva-landing .btn-sacred-gold {
@@ -1713,39 +1782,85 @@
   transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* --- Testimonial Card — Enterprise Depth --- */
+/* --- Testimonial Card — Sanctuary Depth + Gold Quote --- */
 .canva-landing .testimonial-card-elite {
-  background: var(--glp-white);
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(252, 246, 234, 0.55) 100%);
   border-radius: 28px;
   padding: 2.5rem;
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--glp-sage-15);
+  border: 1px solid var(--glp-sage-20);
   transition: all 0.55s cubic-bezier(0.23, 1, 0.32, 1);
   box-shadow:
-    0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.04),
-    0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.05),
+    0 14px 32px rgba(var(--glp-sage-deep-rgb), 0.06);
 }
 
+/* Animated accent bar — appears on hover */
+.canva-landing .testimonial-card-elite::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--glp-gold) 25%,
+    var(--glp-sage) 50%,
+    var(--glp-gold) 75%,
+    transparent 100%);
+  opacity: 0.30;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+/* Decorative gold quote mark */
 .canva-landing .testimonial-card-elite::before {
   content: '"';
   position: absolute;
-  top: -8px;
+  top: 4px;
   left: 24px;
-  font-size: 100px;
+  font-size: 110px;
   font-family: 'Playfair Display', serif;
   line-height: 1;
-  opacity: 0.08;
-  color: var(--glp-sage);
+  opacity: 0.14;
+  color: var(--glp-gold);
   pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .canva-landing .testimonial-card-elite:hover {
   transform: translateY(-6px);
+  border-color: var(--glp-sage-30);
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
     0 8px 20px rgba(var(--glp-sage-deep-rgb), 0.06),
-    0 20px 48px rgba(var(--glp-sage-deep-rgb), 0.08);
-  border-color: var(--glp-sage-20);
+    0 24px 56px rgba(var(--glp-sage-deep-rgb), 0.10);
+}
+
+.canva-landing .testimonial-card-elite:hover::after {
+  opacity: 1;
+}
+
+.canva-landing .testimonial-card-elite:hover::before {
+  opacity: 0.22;
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing .testimonial-card-elite,
+  .canva-landing .testimonial-card-elite::after,
+  .canva-landing .testimonial-card-elite::before {
+    transition: none;
+  }
+  .canva-landing .testimonial-card-elite:hover {
+    transform: none;
+  }
 }
 
 /* --- Stats Section — Premium Floating Cards --- */
