@@ -252,15 +252,29 @@ export default function BuddyAvatar({
         {/* BODY — square white chassis with rounded corners; arm pads on
             the sides as chunky rounded buttons (matching the reference). */}
         <g className="buddy__body">
-          {/* Arm pads — short, chunky, more like side bumpers than long
-              arms (per reference photo). */}
-          <rect x="22" y="158" width="22" height="48" rx="11" fill="#dde3e0" stroke="#9aa39e" strokeWidth="1.2" className="buddy__arm buddy__arm--left" />
-          <rect x="156" y="158" width="22" height="48" rx="11" fill="#dde3e0" stroke="#9aa39e" strokeWidth="1.2" className="buddy__arm buddy__arm--right" />
-          {/* Pad highlights for dimensional read */}
-          <ellipse cx="29" cy="166" rx="4" ry="2.2" fill="#ffffff" opacity="0.7" />
-          <ellipse cx="171" cy="166" rx="4" ry="2.2" fill="#ffffff" opacity="0.7" />
-          <line x1="33" y1="180" x2="33" y2="194" stroke="#ffffff" strokeWidth="1.2" opacity="0.35" />
-          <line x1="167" y1="180" x2="167" y2="194" stroke="#ffffff" strokeWidth="1.2" opacity="0.35" />
+          {/* v1.16 — Arms wrapped as <g> groups so they can swing/wave from
+              the shoulder pivot per state. Each group contains the pad,
+              highlights, AND a rounded palm pip at the bottom. The
+              .buddy__arm class hook is preserved + extended with
+              --left / --right modifiers so per-side animation can offset
+              phase (one waves first, then the other) for celebrate. */}
+          <g className="buddy__arm buddy__arm--left">
+            <rect x="22" y="158" width="22" height="48" rx="11" fill="#dde3e0" stroke="#9aa39e" strokeWidth="1.2" />
+            {/* Pad highlights for dimensional read */}
+            <ellipse cx="29" cy="166" rx="4" ry="2.2" fill="#ffffff" opacity="0.7" />
+            <line x1="33" y1="180" x2="33" y2="194" stroke="#ffffff" strokeWidth="1.2" opacity="0.35" />
+            {/* Palm pip — small rounded "hand" at the bottom of the arm,
+                tinted with the heart color so it shifts with state. */}
+            <circle className="buddy__palm" cx="33" cy="210" r="6" fill="#eef2ef" stroke="#9aa39e" strokeWidth="1" />
+            <circle cx="33" cy="210" r="2.4" fill="var(--buddy-heart-color)" opacity="0.55" />
+          </g>
+          <g className="buddy__arm buddy__arm--right">
+            <rect x="156" y="158" width="22" height="48" rx="11" fill="#dde3e0" stroke="#9aa39e" strokeWidth="1.2" />
+            <ellipse cx="171" cy="166" rx="4" ry="2.2" fill="#ffffff" opacity="0.7" />
+            <line x1="167" y1="180" x2="167" y2="194" stroke="#ffffff" strokeWidth="1.2" opacity="0.35" />
+            <circle className="buddy__palm" cx="167" cy="210" r="6" fill="#eef2ef" stroke="#9aa39e" strokeWidth="1" />
+            <circle cx="167" cy="210" r="2.4" fill="var(--buddy-heart-color)" opacity="0.55" />
+          </g>
 
           {/* Body shell — square per reference (rx 22, was 36). */}
           <rect
@@ -415,6 +429,24 @@ export default function BuddyAvatar({
             <ellipse cx="80" cy="82" rx="3" ry="1.1" fill="#ffffff" opacity="0.7" />
             <ellipse cx="120" cy="82" rx="3" ry="1.1" fill="#ffffff" opacity="0.7" />
           </g>
+
+          {/* MOUTH — v1.16. A single soft "slit" path under the eyes.
+              Default `d` is the calm gentle relaxed line. State CSS rules
+              in BuddyAvatar.css override `d:` per state to morph the
+              expression (smile/frown/breath-line/joy-arc/grounded line).
+              Tinted with the eye color so it shifts naturally per state.
+              CRISIS rule keeps the mouth as a neutral grounded line —
+              never frowny, never smiley — to honor the safety contract. */}
+          <path
+            className="buddy__mouth"
+            d="M 86 100 Q 100 102 114 100"
+            fill="none"
+            stroke="var(--buddy-eye-color)"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            opacity="0.7"
+            aria-hidden="true"
+          />
         </g>
 
         {/* Floor glow — soft pool of state-tinted light beneath the disc. */}

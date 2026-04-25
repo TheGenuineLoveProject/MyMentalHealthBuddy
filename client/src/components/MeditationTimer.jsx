@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Play, Pause, RotateCcw, Volume2, VolumeX, Moon, Sun, Waves, CloudRain, Wind, Trees } from "lucide-react";
+import ZenScape from "./zen/ZenScape";
 
 const AMBIENT_SOUNDS = [
   { id: "silence", name: "Silence", icon: VolumeX, color: "from-slate-400 to-gray-500" },
@@ -95,6 +96,17 @@ export default function MeditationTimer({ onComplete }) {
   const SoundIcon = sound?.icon || VolumeX;
 
   return (
+    <ZenScape
+      buddyState={isActive ? "encouraged" : phase === "complete" ? "celebrate" : "calm"}
+      buddySize={150}
+      buddyLabel={
+        phase === "complete"
+          ? "We did it. Honor what you just gave yourself."
+          : isActive
+          ? "Sitting with you. Breath by breath."
+          : "Ready when you are. We'll go at your pace."
+      }
+    >
     <div className="card-elevated p-8 relative overflow-hidden" data-testid="meditation-timer">
       <div className={`absolute inset-0 bg-gradient-to-br ${sound?.color || "from-purple-400/10 to-indigo-500/10"} opacity-10`} />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 rounded-full blur-3xl -translate-y-1/2" />
@@ -280,5 +292,6 @@ export default function MeditationTimer({ onComplete }) {
         )}
       </div>
     </div>
+    </ZenScape>
   );
 }

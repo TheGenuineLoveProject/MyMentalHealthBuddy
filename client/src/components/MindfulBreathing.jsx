@@ -4,6 +4,7 @@ import {
   ChevronDown, Clock, Heart, Sparkles, Check
 } from "lucide-react";
 import { useGamification } from "../context/GamificationContext.jsx";
+import ZenScape from "./zen/ZenScape";
 
 const BREATHING_PATTERNS = [
   {
@@ -167,7 +168,18 @@ export default function MindfulBreathing() {
   };
 
   return (
-    <div 
+    <ZenScape
+      buddyState={phase === "complete" ? "celebrate" : isActive ? "anxious" : "calm"}
+      buddySize={150}
+      buddyLabel={
+        phase === "complete"
+          ? "Beautiful work. Your nervous system thanks you."
+          : isActive
+          ? "Breathing with you. In. And out."
+          : "Breathing together calms the body. Let's begin when you're ready."
+      }
+    >
+    <div
       className="card-elevated p-6"
       role="region"
       aria-label="Mindful Breathing Exercise"
@@ -370,5 +382,6 @@ export default function MindfulBreathing() {
         </div>
       </div>
     </div>
+    </ZenScape>
   );
 }

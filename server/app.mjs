@@ -254,6 +254,8 @@ const EXTENDED_ROUTES = [
   { mount: "/api/prompts",       file: "./routes/prompts.mjs",       auth: "optional" },
   // Forever-companion metacognition mirror — read-only aggregator
   { mount: "/api/growth",        file: "./routes/growth-journey.mjs",auth: "optional" },
+  // Peace Scape — Layer 2 foundation (read-only sanctuary state)
+  { mount: "/api/peacescape",    file: "./routes/peacescape.mjs",    auth: "optional" },
 ];
 
 const mountedExtended = [];

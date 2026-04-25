@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Volume2, VolumeX, Clock, Waves, Wind, CloudRain, Bird, Flame, Music, Heart, Moon } from "lucide-react";
+import ZenScape from "./zen/ZenScape";
 
 const SOUND_CATEGORIES = {
   nature: {
@@ -181,8 +182,13 @@ export default function SoundHealingPlayer() {
   const CategoryIcon = category.icon;
 
   return (
-    <div 
-      className="min-h-[500px] bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950/30 dark:via-purple-950/30 dark:to-pink-950/30 rounded-3xl p-6 relative overflow-hidden"
+    <ZenScape
+      buddyState={isPlaying ? "encouraged" : "calm"}
+      buddySize={150}
+      buddyLabel={isPlaying ? "Listening together — let the sound carry you." : "Pick a sound. We'll listen together."}
+    >
+    <div
+      className="min-h-[500px] bg-gradient-to-br from-indigo-50/40 via-purple-50/40 to-pink-50/40 dark:from-indigo-950/30 dark:via-purple-950/30 dark:to-pink-950/30 rounded-3xl p-6 relative overflow-hidden"
       data-testid="sound-healing-player"
     >
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 rounded-full blur-3xl" />
@@ -351,5 +357,6 @@ export default function SoundHealingPlayer() {
         </div>
       </div>
     </div>
+    </ZenScape>
   );
 }

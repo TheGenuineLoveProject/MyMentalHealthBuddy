@@ -10,6 +10,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
+import ZenScape from "@/components/zen/ZenScape";
 
 const CALMING_CLARITY = {
   what: "Immersive nature visualizations with guided breathing and affirmations for nervous system regulation.",
@@ -172,6 +173,19 @@ export default function CalmingScenesPage() {
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
+
+        <ZenScape
+          buddyState="calm"
+          buddySize={160}
+          buddyLabel="Close your eyes for a moment. We'll go somewhere peaceful together."
+          className="mb-10 py-8"
+        >
+          <div className="text-center px-4">
+            <h2 className="text-lg italic" style={{ color: 'var(--glp-sage-deep)', opacity: 0.85 }}>
+              Step into a quiet scene. Your nervous system will follow.
+            </h2>
+          </div>
+        </ZenScape>
 
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>

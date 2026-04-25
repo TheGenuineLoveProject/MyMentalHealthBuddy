@@ -98,6 +98,20 @@ const STATEMENTS = [
     ip_address VARCHAR(45),
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
   )`,
+
+  // Peace Scape — Layer 2 foundation. Idempotent. Matches shared/schema.mjs::userAvatars.
+  `CREATE TABLE IF NOT EXISTS user_avatars (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL UNIQUE,
+    palette VARCHAR(32) NOT NULL DEFAULT 'sage',
+    accessory VARCHAR(32) NOT NULL DEFAULT 'none',
+    peacescape_theme VARCHAR(32) NOT NULL DEFAULT 'meadow',
+    evolution_stage INTEGER NOT NULL DEFAULT 1,
+    journal_count_at_unlock INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_user_avatars_user_id ON user_avatars(user_id)`,
 ];
 
 let bootstrapped = false;

@@ -280,13 +280,165 @@
    states (see "Antenna outer halo ping" earlier in this file). Crisis
    stays motionless. */
 
-/* ---------- State-specific accents ---------- */
-.buddy--sad .buddy__mouth      { d: path("M 80 92 Q 100 84 120 92"); opacity: 0.6; }
-.buddy--anxious .buddy__mouth  { d: path("M 80 90 L 120 90"); opacity: 0.55; }
-.buddy--overwhelmed .buddy__mouth { d: path("M 80 92 Q 100 86 120 92"); opacity: 0.55; }
-.buddy--encouraged .buddy__mouth { d: path("M 78 86 Q 100 100 122 86"); opacity: 0.75; }
-.buddy--celebrate .buddy__mouth  { d: path("M 76 84 Q 100 104 124 84"); opacity: 0.85; }
-.buddy--crisis .buddy__mouth     { d: path("M 82 90 L 118 90"); opacity: 0.65; }
+/* ---------- Mouth — v1.16 expression vocabulary ----------
+   Default `d` is set in BuddyAvatar.tsx as a calm gentle line. State
+   rules below override `d:` to morph the expression. Geometry note:
+   eyes sit at y≈78–92, screen ends at y=112, so mouth lives at y≈96–110.
+   Crisis rule keeps the mouth a NEUTRAL grounded line — never frowny,
+   never smiley — to honor the crisis safety contract. Reduced-motion
+   branch below disables the smooth d-morph transition. */
+.buddy__mouth {
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: d 700ms ease, opacity 600ms ease, stroke 600ms ease;
+}
+.buddy--calm .buddy__mouth        { d: path("M 86 100 Q 100 102 114 100"); opacity: 0.70; }
+.buddy--sad .buddy__mouth         { d: path("M 84 96 Q 100 106 116 96");  opacity: 0.65; }
+.buddy--anxious .buddy__mouth     { d: path("M 84 100 L 116 100");         opacity: 0.60; }
+.buddy--overwhelmed .buddy__mouth { d: path("M 86 102 L 114 102");         opacity: 0.55; }
+.buddy--encouraged .buddy__mouth  { d: path("M 82 98 Q 100 108 118 98");  opacity: 0.85; }
+.buddy--celebrate .buddy__mouth   { d: path("M 78 96 Q 100 112 122 96");  opacity: 0.92; }
+.buddy--crisis .buddy__mouth      { d: path("M 84 100 L 116 100");         opacity: 0.70; }
+
+/* Anxious mouth softly breathes with the body so the slit visibly
+   inhales/exhales — coaches the user toward a slow breath. Crisis
+   exclusion is implicit (different state class). */
+.buddy--anxious .buddy__mouth {
+  animation: buddyMouthBreathe 4200ms ease-in-out infinite;
+}
+@keyframes buddyMouthBreathe {
+  0%, 100% { transform: scaleX(1.00); }
+  50%      { transform: scaleX(0.86); }
+}
+/* Celebrate mouth softly opens + closes like a giggle. */
+.buddy--celebrate .buddy__mouth {
+  animation: buddyMouthGiggle 1400ms ease-in-out infinite;
+}
+@keyframes buddyMouthGiggle {
+  0%, 100% { transform: scale(1, 1);   }
+  50%      { transform: scale(1.04, 1.18); }
+}
+
+/* ---------- Arms — v1.16 movable arms with palms ----------
+   Each arm is a <g> wrapping the pad + palm pip. Transform-origin is
+   set to the shoulder pivot (top center of each arm pad in user-space
+   coords) so they swing from the shoulder rather than spinning around
+   their own center. Motion is per-state and STRICTLY motionless under
+   crisis (steady) — same safety contract as body/head. */
+.buddy__arm {
+  transform-origin: 33px 158px;
+  transform-box: view-box;
+  transition: transform 600ms ease;
+}
+.buddy__arm--right {
+  transform-origin: 167px 158px;
+}
+.buddy__palm {
+  transition: fill 600ms ease, stroke 600ms ease;
+}
+
+/* idle (calm) — arms barely sway, like resting breath. */
+.buddy--motion-idle .buddy__arm--left {
+  animation: buddyArmIdleLeft 5200ms ease-in-out infinite;
+}
+.buddy--motion-idle .buddy__arm--right {
+  animation: buddyArmIdleRight 5200ms ease-in-out infinite;
+}
+@keyframes buddyArmIdleLeft {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-2deg); }
+}
+@keyframes buddyArmIdleRight {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+/* breathing (anxious) — arms gently press in toward the body on
+   the exhale, easing back out on the inhale. */
+.buddy--motion-breathing .buddy__arm--left {
+  animation: buddyArmBreatheLeft 4200ms ease-in-out infinite;
+}
+.buddy--motion-breathing .buddy__arm--right {
+  animation: buddyArmBreatheRight 4200ms ease-in-out infinite;
+}
+@keyframes buddyArmBreatheLeft {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  50%      { transform: rotate(-3deg) translateX(2px); }
+}
+@keyframes buddyArmBreatheRight {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  50%      { transform: rotate(3deg) translateX(-2px); }
+}
+
+/* slow_glow (sad) — arms hang slightly heavier, sway slowly. */
+.buddy--motion-slow_glow .buddy__arm--left {
+  animation: buddyArmSadLeft 5800ms ease-in-out infinite;
+}
+.buddy--motion-slow_glow .buddy__arm--right {
+  animation: buddyArmSadRight 5800ms ease-in-out infinite;
+}
+@keyframes buddyArmSadLeft {
+  0%, 100% { transform: rotate(2deg)  translateY(2px); }
+  50%      { transform: rotate(-1deg) translateY(0); }
+}
+@keyframes buddyArmSadRight {
+  0%, 100% { transform: rotate(-2deg) translateY(2px); }
+  50%      { transform: rotate(1deg)  translateY(0); }
+}
+
+/* grounding (overwhelmed) — arms barely move, settled. */
+.buddy--motion-grounding .buddy__arm--left,
+.buddy--motion-grounding .buddy__arm--right {
+  animation: buddyArmGround 3200ms ease-in-out infinite;
+}
+@keyframes buddyArmGround {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.012); }
+}
+
+/* warm_glow (encouraged) — arms reach forward + slightly up in a
+   compassionate "I see you" gesture. */
+.buddy--motion-warm_glow .buddy__arm--left {
+  animation: buddyArmWarmLeft 3600ms ease-in-out infinite;
+}
+.buddy--motion-warm_glow .buddy__arm--right {
+  animation: buddyArmWarmRight 3600ms ease-in-out infinite;
+}
+@keyframes buddyArmWarmLeft {
+  0%, 100% { transform: rotate(0deg)  translateY(0); }
+  50%      { transform: rotate(-6deg) translateY(-2px); }
+}
+@keyframes buddyArmWarmRight {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50%      { transform: rotate(6deg) translateY(-2px); }
+}
+
+/* sparkle (celebrate) — joyful asymmetric wave, arms swing up high. */
+.buddy--motion-sparkle .buddy__arm--left {
+  animation: buddyArmWaveLeft 1400ms cubic-bezier(.34,1.56,.64,1) infinite;
+}
+.buddy--motion-sparkle .buddy__arm--right {
+  animation: buddyArmWaveRight 1400ms cubic-bezier(.34,1.56,.64,1) infinite 250ms;
+}
+@keyframes buddyArmWaveLeft {
+  0%, 100% { transform: rotate(0deg)   translateY(0); }
+  35%      { transform: rotate(-22deg) translateY(-6px); }
+  65%      { transform: rotate(-8deg)  translateY(-2px); }
+}
+@keyframes buddyArmWaveRight {
+  0%, 100% { transform: rotate(0deg)  translateY(0); }
+  35%      { transform: rotate(22deg) translateY(-6px); }
+  65%      { transform: rotate(8deg)  translateY(-2px); }
+}
+
+/* steady (crisis) — arms are MOTIONLESS. Safety contract: crisis must
+   never animate. This rule explicitly overrides any inherited motion. */
+.buddy--motion-steady .buddy__arm,
+.buddy--motion-steady .buddy__arm--left,
+.buddy--motion-steady .buddy__arm--right {
+  animation: none !important;
+  transform: none !important;
+}
 
 /* v1.2 safety: crisis must NEVER pulse fast or use a red fallback.
    No animation-duration override here — cadence stays slow (5800ms) from
@@ -322,11 +474,17 @@
   .buddy *,
   .buddy {
     animation: none !important;
+    /* Also disable transitions so state-driven property animations
+       (e.g. mouth `d:` morph, arm transform swing) are instant — not
+       just the keyframed loops. Required for full WCAG SC 2.3.3
+       compliance on the new mouth + arm visuals. */
+    transition: none !important;
   }
   .buddy--motion-sparkle::before,
   .buddy--motion-sparkle::after {
     animation: none !important;
     opacity: 0 !important;
+    transition: none !important;
   }
   .buddy__heart-shape,
   .buddy__heart-glow {

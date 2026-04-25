@@ -720,6 +720,25 @@ export const analyticsEvents = pgTable("analytics_events", {
   index("idx_analytics_events_category").on(table.eventCategory),
 ]);
 
+/* ================= USER AVATARS (Peace Scape — Layer 2 foundation) =================
+ * Per-user avatar customization + Peace Scape evolution state.
+ * Read/write surface is intentionally narrow — see docs/PEACESCAPE_ROADMAP.md.
+ * Bootstrapped via ensureSchema() so brand-new databases work on first request.
+ */
+export const userAvatars = pgTable("user_avatars", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().unique(),
+  palette: varchar("palette", { length: 32 }).default("sage").notNull(),
+  accessory: varchar("accessory", { length: 32 }).default("none").notNull(),
+  peacescapeTheme: varchar("peacescape_theme", { length: 32 }).default("meadow").notNull(),
+  evolutionStage: integer("evolution_stage").default(1).notNull(),
+  journalCountAtUnlock: integer("journal_count_at_unlock").default(0).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_user_avatars_user_id").on(table.userId),
+]);
+
 /* ================= SESSIONS (Passport/Replit Auth) ================= */
 export const sessions = pgTable(
   "sessions",
