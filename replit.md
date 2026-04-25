@@ -32,6 +32,14 @@ Core features include AI-powered Chat Therapy, Wellness Tools (State Tracker, Jo
 ### System Design Choices
 Drizzle ORM is used with a Neon PostgreSQL database. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting. An observability layer provides health and system endpoints. A `Prompt-OS Execution Prompt Library` ensures canonical prompt modules validated against `promptspec.schema.json`. Production readiness features include a 503 readiness gate, health probes, telemetry parity, request tracing, and hardened administration access governed by a `CHANGE_GATE` protocol.
 
+### Self-Healing Tooling (A→Z 360°)
+The platform ships a unified, non-destructive self-repair sweep accessible via `bash scripts/heal-all.sh`. The orchestrator runs three stages and rolls them up to a single verdict (HEALTHY / DEGRADED / NEEDS_REPAIR with exit codes 0/1/2):
+- **Stage 1 — `scripts/heal-360.mjs`**: Comprehensive 5-category probe that emits PASS/WARN/FAIL with actionable repair hints per check. Categories: (1) Filesystem & Build assets, (2) Critical Env Coverage (presence-only — never values), (3) Database & Schema (live `SELECT 1` + `information_schema` table presence for `users`, `journals`, `moods`, `therapy_sessions`), (4) Runtime API (HTTP probes of `/api/health`, `/ready`, `/healthz`), (5) Contract Gates (re-runs `scripts/check-contract-routes.sh` and aggregates the 8 locked Buddy + route invariants).
+- **Stage 2 — `scripts/autoheal-core.mjs`**: Existing safe-mode `platformSnapshot()` for filesystem topology sanity.
+- **Stage 3 — `scripts/check-contract-routes.sh`**: Independent re-verification of the 8 contract gates.
+
+The unified report persists to `docs/health-check-result.json` in a backwards-compatible flat-checks format alongside new `categories` + `totals` blocks. All probes are read-only; secrets are never logged or persisted.
+
 ## External Dependencies
 
 -   **OpenAI API**: AI chat therapy.

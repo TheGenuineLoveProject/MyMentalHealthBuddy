@@ -1,58 +1,375 @@
 {
-  "timestamp": "2026-01-27T20:28:04.980Z",
-  "passed": 10,
-  "failed": 0,
+  "timestamp": "2026-04-25T05:28:12.823Z",
+  "tool": "heal-360",
+  "passed": 25,
+  "failed": 2,
   "checks": [
     {
-      "name": "Package.json exists",
+      "name": "filesystem/package.json",
       "status": "pass",
-      "message": "Found"
+      "message": "present",
+      "hint": null
     },
     {
-      "name": "Server entry exists",
+      "name": "filesystem/server entry (index.mjs)",
       "status": "pass",
-      "message": "Server files found"
+      "message": "present",
+      "hint": null
     },
     {
-      "name": "Client entry exists",
+      "name": "filesystem/server app (app.mjs)",
       "status": "pass",
-      "message": "Client app found"
+      "message": "present",
+      "hint": null
     },
     {
-      "name": "Database schema exists",
+      "name": "filesystem/client App.jsx",
       "status": "pass",
-      "message": "Schema found"
+      "message": "present",
+      "hint": null
     },
     {
-      "name": "Build directory exists",
+      "name": "filesystem/shared schema.mjs",
       "status": "pass",
-      "message": "Build output found"
+      "message": "present",
+      "hint": null
     },
     {
-      "name": "Node modules installed",
+      "name": "filesystem/ensureSchema bootstrap",
       "status": "pass",
-      "message": "Dependencies installed"
+      "message": "present",
+      "hint": null
     },
     {
-      "name": "Environment configured",
+      "name": "filesystem/contract gate runner",
       "status": "pass",
-      "message": "Database configured"
+      "message": "present",
+      "hint": null
     },
     {
-      "name": "Components directory",
+      "name": "filesystem/build output",
       "status": "pass",
-      "message": "284 components"
+      "message": "found",
+      "hint": null
     },
     {
-      "name": "Pages directory",
+      "name": "filesystem/client pages",
       "status": "pass",
-      "message": "372 pages"
+      "message": "416 pages",
+      "hint": null
     },
     {
-      "name": "API routes directory",
+      "name": "filesystem/server routes",
       "status": "pass",
-      "message": "104 route files"
+      "message": "135 route files",
+      "hint": null
+    },
+    {
+      "name": "env/DATABASE_URL",
+      "status": "pass",
+      "message": "present (value not displayed)",
+      "hint": null
+    },
+    {
+      "name": "env/JWT_SECRET",
+      "status": "pass",
+      "message": "present (value not displayed)",
+      "hint": null
+    },
+    {
+      "name": "env/OPENAI_API_KEY",
+      "status": "pass",
+      "message": "present",
+      "hint": null
+    },
+    {
+      "name": "env/ADMIN_TOKEN",
+      "status": "pass",
+      "message": "present",
+      "hint": null
+    },
+    {
+      "name": "env/PERPLEXITY_API_KEY",
+      "status": "pass",
+      "message": "present",
+      "hint": null
+    },
+    {
+      "name": "env/GITHUB_CLIENT_ID",
+      "status": "pass",
+      "message": "present",
+      "hint": null
+    },
+    {
+      "name": "env/GITHUB_CLIENT_SECRET",
+      "status": "pass",
+      "message": "present",
+      "hint": null
+    },
+    {
+      "name": "env/VITE_GA_MEASUREMENT_ID",
+      "status": "warn",
+      "message": "not set (optional)",
+      "hint": "set for Google Analytics in client (optional)"
+    },
+    {
+      "name": "database/live connection",
+      "status": "pass",
+      "message": "SELECT 1 succeeded",
+      "hint": null
+    },
+    {
+      "name": "database/table users",
+      "status": "pass",
+      "message": "exists",
+      "hint": null
+    },
+    {
+      "name": "database/table journals",
+      "status": "pass",
+      "message": "exists",
+      "hint": null
+    },
+    {
+      "name": "database/table moods",
+      "status": "pass",
+      "message": "exists",
+      "hint": null
+    },
+    {
+      "name": "database/table therapy_sessions",
+      "status": "warn",
+      "message": "missing",
+      "hint": "run server (ensureSchema bootstraps on boot) or `npm run db:push --force`"
+    },
+    {
+      "name": "runtime/GET /api/health",
+      "status": "pass",
+      "message": "HTTP 200",
+      "hint": null
+    },
+    {
+      "name": "runtime/GET /ready",
+      "status": "pass",
+      "message": "HTTP 200",
+      "hint": null
+    },
+    {
+      "name": "runtime/GET /healthz",
+      "status": "pass",
+      "message": "HTTP 200",
+      "hint": null
+    },
+    {
+      "name": "contracts/all 8 gates",
+      "status": "pass",
+      "message": "8/8 PASS",
+      "hint": null
     }
   ],
-  "overallStatus": "HEALTHY"
+  "overallStatus": "DEGRADED",
+  "categories": {
+    "filesystem": {
+      "checks": [
+        {
+          "name": "package.json",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "server entry (index.mjs)",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "server app (app.mjs)",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "client App.jsx",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "shared schema.mjs",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "ensureSchema bootstrap",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "contract gate runner",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "build output",
+          "status": "PASS",
+          "message": "found",
+          "hint": null
+        },
+        {
+          "name": "client pages",
+          "status": "PASS",
+          "message": "416 pages",
+          "hint": null
+        },
+        {
+          "name": "server routes",
+          "status": "PASS",
+          "message": "135 route files",
+          "hint": null
+        }
+      ],
+      "pass": 10,
+      "warn": 0,
+      "fail": 0
+    },
+    "env": {
+      "checks": [
+        {
+          "name": "DATABASE_URL",
+          "status": "PASS",
+          "message": "present (value not displayed)",
+          "hint": null
+        },
+        {
+          "name": "JWT_SECRET",
+          "status": "PASS",
+          "message": "present (value not displayed)",
+          "hint": null
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "ADMIN_TOKEN",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "PERPLEXITY_API_KEY",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "GITHUB_CLIENT_ID",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "GITHUB_CLIENT_SECRET",
+          "status": "PASS",
+          "message": "present",
+          "hint": null
+        },
+        {
+          "name": "VITE_GA_MEASUREMENT_ID",
+          "status": "WARN",
+          "message": "not set (optional)",
+          "hint": "set for Google Analytics in client (optional)"
+        }
+      ],
+      "pass": 7,
+      "warn": 1,
+      "fail": 0
+    },
+    "database": {
+      "checks": [
+        {
+          "name": "live connection",
+          "status": "PASS",
+          "message": "SELECT 1 succeeded",
+          "hint": null
+        },
+        {
+          "name": "table users",
+          "status": "PASS",
+          "message": "exists",
+          "hint": null
+        },
+        {
+          "name": "table journals",
+          "status": "PASS",
+          "message": "exists",
+          "hint": null
+        },
+        {
+          "name": "table moods",
+          "status": "PASS",
+          "message": "exists",
+          "hint": null
+        },
+        {
+          "name": "table therapy_sessions",
+          "status": "WARN",
+          "message": "missing",
+          "hint": "run server (ensureSchema bootstraps on boot) or `npm run db:push --force`"
+        }
+      ],
+      "pass": 4,
+      "warn": 1,
+      "fail": 0
+    },
+    "runtime": {
+      "checks": [
+        {
+          "name": "GET /api/health",
+          "status": "PASS",
+          "message": "HTTP 200",
+          "hint": null
+        },
+        {
+          "name": "GET /ready",
+          "status": "PASS",
+          "message": "HTTP 200",
+          "hint": null
+        },
+        {
+          "name": "GET /healthz",
+          "status": "PASS",
+          "message": "HTTP 200",
+          "hint": null
+        }
+      ],
+      "pass": 3,
+      "warn": 0,
+      "fail": 0
+    },
+    "contracts": {
+      "checks": [
+        {
+          "name": "all 8 gates",
+          "status": "PASS",
+          "message": "8/8 PASS",
+          "hint": null
+        }
+      ],
+      "pass": 1,
+      "warn": 0,
+      "fail": 0
+    }
+  },
+  "totals": {
+    "pass": 25,
+    "warn": 2,
+    "fail": 0
+  }
 }
