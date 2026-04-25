@@ -1757,15 +1757,15 @@ export default function App() {
               <Route path="/courses">{() => <CourseCatalog />}</Route>
               <Route path="/learn/courses">{() => <CourseCatalog />}</Route>
               <Route path="/practices">{() => <PracticeLibrary />}</Route>
-              <Route path="/admin/roles">{() => <ProtectedRoute><AdminGuard><RolesPermissions /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/feature-flags">{() => <ProtectedRoute><AdminGuard><FeatureFlags /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/alerts">{() => <ProtectedRoute><AdminGuard><SystemAlerts /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/feedback">{() => <ProtectedRoute><AdminGuard><FeedbackAggregator /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/narrative">{() => <ProtectedRoute><AdminGuard><NarrativeDrafts /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/engagement">{() => <ProtectedRoute><AdminGuard><EngagementDashboard /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/analytics">{() => <ProtectedRoute><AdminGuard><AnalyticsDashboard /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/users">{() => <ProtectedRoute><AdminGuard><AdminUsers /></AdminGuard></ProtectedRoute>}</Route>
-              <Route path="/admin/tools">{() => <ProtectedRoute><AdminGuard><AdminTools /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/roles">{() => <AdminGuard><RolesPermissions /></AdminGuard>}</Route>
+              <Route path="/admin/feature-flags">{() => <AdminGuard><FeatureFlags /></AdminGuard>}</Route>
+              <Route path="/admin/alerts">{() => <AdminGuard><SystemAlerts /></AdminGuard>}</Route>
+              <Route path="/admin/feedback">{() => <AdminGuard><FeedbackAggregator /></AdminGuard>}</Route>
+              <Route path="/admin/narrative">{() => <AdminGuard><NarrativeDrafts /></AdminGuard>}</Route>
+              <Route path="/admin/engagement">{() => <AdminGuard><EngagementDashboard /></AdminGuard>}</Route>
+              <Route path="/admin/analytics">{() => <AdminGuard><AnalyticsDashboard /></AdminGuard>}</Route>
+              <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
+              <Route path="/admin/tools">{() => <AdminGuard><AdminTools /></AdminGuard>}</Route>
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
               <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
               <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
