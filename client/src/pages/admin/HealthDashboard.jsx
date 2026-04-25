@@ -550,6 +550,38 @@ export default function HealthDashboard() {
                 </div>
               )}
 
+              {/* Verdict trend sparkline — colored squares oldest→newest from probeHistory ring buffer */}
+              {Array.isArray(deep?.probeHistory) && deep.probeHistory.length > 0 && (
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4" data-testid="section-verdict-sparkline">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Verdict trend</h3>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">last {deep.probeHistory.length} probe{deep.probeHistory.length === 1 ? "" : "s"}</span>
+                  </div>
+                  <div className="flex items-center gap-1" role="img" aria-label="Recent probe verdicts oldest to newest">
+                    {[...deep.probeHistory].reverse().map((p, i) => {
+                      const v = p?.verdict || "UNKNOWN";
+                      const color = v === "HEALTHY" ? "bg-green-500"
+                        : v === "DEGRADED" ? "bg-amber-500"
+                        : v === "NEEDS_REPAIR" ? "bg-red-500"
+                        : "bg-gray-400";
+                      const ts = p?.at ? new Date(p.at) : null;
+                      const tsLabel = ts && !isNaN(ts.getTime()) ? ts.toLocaleString() : "—";
+                      return (
+                        <div
+                          key={`${p?.at || i}-${i}`}
+                          className={`w-4 h-6 rounded-sm ${color} hover:scale-110 transition-transform motion-reduce:transition-none motion-reduce:hover:scale-100`}
+                          title={`${v} · ${tsLabel}${p?.totals ? ` · pass=${p.totals.pass} warn=${p.totals.warn} fail=${p.totals.fail}` : ""}`}
+                          data-testid={`sparkline-cell-${i}`}
+                        />
+                      );
+                    })}
+                    <span className="ml-2 text-[10px] text-gray-500 dark:text-gray-400 tabular-nums">
+                      ← older · newer →
+                    </span>
+                  </div>
+                </div>
+              )}
+
               {/* AI diagnosis (latest, with collapsed remediation steps) */}
               {Array.isArray(deep?.aiHistory) && deep.aiHistory.length > 0 && (() => {
                 const latest = deep.aiHistory[0];
@@ -573,8 +605,18 @@ export default function HealthDashboard() {
                       <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${sevColor}`} data-testid="ai-severity-pill">
                         {dx.overall_severity || "unknown"}
                       </span>
+                      {(latest.safetyFiltered || dx.safety_filtered) && (
+                        <span
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-200"
+                          title="Destructive-language filter modified one or more remediation steps. Review carefully."
+                          data-testid="ai-safety-filtered-pill"
+                        >
+                          <Shield className="w-3 h-3" />
+                          Filtered
+                        </span>
+                      )}
                       <span className="text-xs text-gray-500 dark:text-gray-400 ml-auto tabular-nums">
-                        {latest.model || "AI"} · {tsLabel}
+                        {latest.model || "AI"}{latest.promptVersion ? ` v${latest.promptVersion}` : ""} · {tsLabel}
                       </span>
                     </div>
                     {dx.summary && (

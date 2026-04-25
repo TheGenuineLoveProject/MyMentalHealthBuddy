@@ -11,6 +11,11 @@ const PERPLEXITY_URL = "https://api.perplexity.ai/chat/completions";
 const DEFAULT_MODEL = "sonar-pro";
 const DEFAULT_TIMEOUT_MS = 30_000;
 
+// Bump when the system prompt, response schema, or destructive-language
+// filter changes meaningfully.  Persisted with each AI history entry so we
+// can detect regressions and audit which version produced a given diagnosis.
+export const PROMPT_VERSION = "1.0.0";
+
 const SYSTEM_PROMPT = `You are an expert site-reliability engineer diagnosing a health-probe report from a Node.js + React mental-wellness platform (MMHB).
 
 Rules — follow strictly:

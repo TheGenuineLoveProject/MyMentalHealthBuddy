@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import crypto from "node:crypto";
 import { logger } from "../utils/logger.mjs";
 import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
-import { diagnoseHealthReport } from "../lib/healAI.mjs";
+import { diagnoseHealthReport, PROMPT_VERSION as AI_PROMPT_VERSION } from "../lib/healAI.mjs";
 import {
   getSchedulerState,
   resumeScheduler,
@@ -189,14 +189,21 @@ router.get("/health-deep", async (_req, res) => {
       try { watch = JSON.parse(fs.readFileSync(WATCH_PATH, "utf8")); } catch { /* ignore */ }
     }
 
-    // Summarize for UI without sending the entire raw report
+    // Summarize for UI without sending the entire raw report.  Verdict
+    // resolution mirrors GET /health-deep/metrics for cross-endpoint
+    // consistency: prefer the report's canonical `overallStatus`, fall back
+    // to legacy `verdict`, then a totals-derived computation.
     const totals = report?.totals || { pass: 0, warn: 0, fail: 0, total: 0 };
     const categories = report?.categories || null;
     const checks = Array.isArray(report?.checks) ? report.checks : [];
-    const verdict =
-      totals.fail > 0 ? "NEEDS_REPAIR" :
-      totals.warn > 0 ? "DEGRADED" :
-      totals.total > 0 ? "HEALTHY" : "UNKNOWN";
+    const _passN = Number(totals.pass) || 0;
+    const _warnN = Number(totals.warn) || 0;
+    const _failN = Number(totals.fail) || 0;
+    const _computedVerdict =
+      _failN > 0 ? "NEEDS_REPAIR" :
+      _warnN > 0 ? "DEGRADED" :
+      (_passN > 0 || Number(totals.total) > 0) ? "HEALTHY" : "UNKNOWN";
+    const verdict = report?.overallStatus || report?.verdict || _computedVerdict;
 
     const nonPass = checks
       .filter(c => c.status !== "pass")
@@ -453,6 +460,8 @@ router.post("/health-deep/ai-analyze", async (req, res) => {
       at: new Date().toISOString(),
       diagnosis: result.diagnosis,
       model: result.model,
+      promptVersion: AI_PROMPT_VERSION,
+      safetyFiltered: !!result.safetyFiltered,
       durationMs,
       reportVerdict: report?.verdict || null,
       actorId: req.user?.id || null,
@@ -491,6 +500,169 @@ router.post("/health-deep/scheduler/pause", (req, res) => {
   pauseScheduler(reason);
   logger.info("Admin paused heal-scheduler", { reason, actorId: req.user?.id || null });
   res.json({ ok: true, scheduler: getSchedulerState() });
+});
+
+// SLI / Prometheus-style metrics endpoint.  Admin-only (protected by the
+// mount-level chain).  Default format is Prometheus text v0.0.4; pass
+// `?format=json` for a structured payload.  Read-only, derives entirely
+// from in-memory ring buffers + the latest persisted probe/watch files.
+router.get("/health-deep/metrics", async (req, res) => {
+  try {
+    const fs = await import("node:fs");
+    const wantJson = String(req.query?.format || "").toLowerCase() === "json";
+
+    let report = null;
+    try {
+      if (fs.existsSync("docs/health-check-result.json")) {
+        report = JSON.parse(fs.readFileSync("docs/health-check-result.json", "utf8"));
+      }
+    } catch { /* ignore */ }
+
+    let watch = null;
+    try {
+      if (fs.existsSync("docs/health-watch-status.json")) {
+        watch = JSON.parse(fs.readFileSync("docs/health-watch-status.json", "utf8"));
+      }
+    } catch { /* ignore */ }
+
+    const sched = getSchedulerState();
+
+    // MTTR — mean duration of self-heal runs that actually repaired to healthy.
+    const successful = _selfHealHistory.filter(
+      (r) => r?.outcome === "REPAIRED_TO_HEALTHY" && Number.isFinite(r?.durationMs)
+    );
+    const mttrMs = successful.length > 0
+      ? Math.round(successful.reduce((sum, r) => sum + r.durationMs, 0) / successful.length)
+      : 0;
+
+    // Probe uptime% — share of admin-triggered probes in the ring buffer
+    // that returned HEALTHY.  Rough proxy; not a true SLO.
+    const probeUptimePct = _probeHistory.length > 0
+      ? Math.round((100 * _probeHistory.filter((p) => p?.verdict === "HEALTHY").length) / _probeHistory.length)
+      : 0;
+
+    // Watch streak shape: { window, healthy, degraded, needsRepair, internalError }
+    // `window` is the consecutive-sample length covered by the breakdown.
+    const watchStreak = watch?.streak || {};
+    const watchStreakLength = Number(watchStreak?.window) || 0;
+    const watchSamples = Array.isArray(watch?.samples) ? watch.samples.length : 0;
+    const lastHeal = _selfHealHistory[0];
+
+    // Verdict: prefer the report's canonical `overallStatus`; fall back to
+    // totals-derived resolution mirroring the GET /health-deep computation.
+    const totalsObj = report?.totals || { pass: 0, warn: 0, fail: 0 };
+    const passN = Number(totalsObj.pass) || 0;
+    const warnN = Number(totalsObj.warn) || 0;
+    const failN = Number(totalsObj.fail) || 0;
+    const computedVerdict =
+      failN > 0 ? "NEEDS_REPAIR" :
+      warnN > 0 ? "DEGRADED" :
+      passN > 0 ? "HEALTHY" : "UNKNOWN";
+    const rawVerdict = report?.overallStatus || report?.verdict || computedVerdict;
+    // Defensive: normalize + allowlist so an unexpected future enum value
+    // (e.g. "warning", "ok") doesn't produce an all-zero one-hot block.
+    const VERDICT_ALLOWED = new Set(["HEALTHY", "DEGRADED", "NEEDS_REPAIR", "INTERNAL_ERROR", "UNKNOWN"]);
+    const normalized = String(rawVerdict || "").toUpperCase();
+    const verdict = VERDICT_ALLOWED.has(normalized) ? normalized : "UNKNOWN";
+
+    const data = {
+      verdict,
+      pass: passN,
+      warn: warnN,
+      fail: failN,
+      uptimeSeconds: Math.round(process.uptime()),
+      probeUptimePct,
+      probeRunsTotal: _probeHistory.length,
+      selfHealRunsTotal: _selfHealHistory.length,
+      mttrMs,
+      lastHealOutcome: lastHeal?.outcome || "none",
+      aiDiagnosesTotal: _aiHistory.length,
+      aiSafetyFilteredTotal: _aiHistory.filter((a) => a?.safetyFiltered).length,
+      aiPromptVersion: AI_PROMPT_VERSION,
+      schedulerEnabled: sched.enabled ? 1 : 0,
+      schedulerPaused: sched.pausedReason ? 1 : 0,
+      schedulerRunsTotal: sched.totalRuns || 0,
+      schedulerConsecutiveFails: sched.consecutiveFails || 0,
+      watchStreakLength,
+      watchSamples,
+    };
+
+    if (wantJson) {
+      return res.json({ ok: true, ...data, generatedAt: new Date().toISOString() });
+    }
+
+    res.setHeader("Content-Type", "text/plain; version=0.0.4; charset=utf-8");
+    const lines = [];
+    const renderMetric = (name, help, type, samples) => {
+      lines.push(`# HELP mmhb_${name} ${help}`);
+      lines.push(`# TYPE mmhb_${name} ${type}`);
+      for (const s of samples) {
+        lines.push(`mmhb_${name}${s.labels || ""} ${s.value}`);
+      }
+    };
+
+    renderMetric("health_pass_total", "Number of passing checks in the latest probe", "gauge", [{ value: data.pass }]);
+    renderMetric("health_warn_total", "Number of warning checks in the latest probe", "gauge", [{ value: data.warn }]);
+    renderMetric("health_fail_total", "Number of failing checks in the latest probe", "gauge", [{ value: data.fail }]);
+
+    renderMetric(
+      "health_verdict",
+      "Current health verdict (one-hot)",
+      "gauge",
+      ["HEALTHY", "DEGRADED", "NEEDS_REPAIR", "INTERNAL_ERROR", "UNKNOWN"].map((v) => ({
+        labels: `{verdict="${v}"}`,
+        value: data.verdict === v ? 1 : 0,
+      }))
+    );
+
+    renderMetric("uptime_seconds", "Process uptime in seconds", "counter", [{ value: data.uptimeSeconds }]);
+    renderMetric("probe_uptime_percent", "Percent of recent admin-triggered probes returning HEALTHY", "gauge", [{ value: data.probeUptimePct }]);
+    renderMetric("probe_runs_total", "Number of admin-triggered probes in the ring buffer", "counter", [{ value: data.probeRunsTotal }]);
+    renderMetric("selfheal_runs_total", "Number of admin-triggered self-heal runs in the ring buffer", "counter", [{ value: data.selfHealRunsTotal }]);
+    renderMetric("selfheal_mttr_ms", "Mean time to repair across REPAIRED_TO_HEALTHY self-heals", "gauge", [{ value: data.mttrMs }]);
+    renderMetric(
+      "selfheal_last_outcome",
+      "Latest self-heal outcome (one-hot)",
+      "gauge",
+      [
+        "ALREADY_HEALTHY", "REPAIRED_TO_HEALTHY", "REPAIRED_TO_DEGRADED",
+        "STILL_NEEDS_REPAIR", "REPAIR_FAILED", "DRY_RUN", "STALE_STATUS",
+        "TIMEOUT", "INTERNAL_ERROR", "none",
+      ].map((o) => ({ labels: `{outcome="${o}"}`, value: data.lastHealOutcome === o ? 1 : 0 }))
+    );
+
+    renderMetric("ai_diagnoses_total", "Number of admin-triggered AI diagnoses in the ring buffer", "counter", [{ value: data.aiDiagnosesTotal }]);
+    renderMetric("ai_safety_filtered_total", "Number of AI diagnoses that triggered the destructive-language filter", "counter", [{ value: data.aiSafetyFilteredTotal }]);
+    renderMetric("ai_prompt_version_info", "AI diagnosis prompt version (label-only)", "gauge",
+      [{ labels: `{version="${data.aiPromptVersion}"}`, value: 1 }]);
+
+    renderMetric("scheduler_enabled", "Background heal scheduler is enabled (0/1)", "gauge", [{ value: data.schedulerEnabled }]);
+    renderMetric("scheduler_paused", "Background heal scheduler is paused (0/1)", "gauge", [{ value: data.schedulerPaused }]);
+    renderMetric("scheduler_runs_total", "Total background self-heal runs since process start", "counter", [{ value: data.schedulerRunsTotal }]);
+    renderMetric("scheduler_consecutive_fails", "Current consecutive failed-outcome count", "gauge", [{ value: data.schedulerConsecutiveFails }]);
+
+    renderMetric("watch_streak", "Current heal-watch streak window length (consecutive samples covered)", "gauge", [{ value: data.watchStreakLength }]);
+    renderMetric(
+      "watch_streak_kind",
+      "Heal-watch streak breakdown by verdict kind across the current window",
+      "gauge",
+      [
+        { labels: `{kind="healthy"}`,       value: Number(watchStreak?.healthy) || 0 },
+        { labels: `{kind="degraded"}`,      value: Number(watchStreak?.degraded) || 0 },
+        { labels: `{kind="needsRepair"}`,   value: Number(watchStreak?.needsRepair) || 0 },
+        { labels: `{kind="internalError"}`, value: Number(watchStreak?.internalError) || 0 },
+      ]
+    );
+    renderMetric("watch_samples", "Number of samples in the heal-watch ring buffer", "gauge", [{ value: data.watchSamples }]);
+
+    res.send(lines.join("\n") + "\n");
+  } catch (error) {
+    logger.error("Admin health-deep metrics error", { error: error?.message || error });
+    if (String(req.query?.format || "").toLowerCase() === "json") {
+      return res.status(500).json({ ok: false, error: "Metrics generation failed" });
+    }
+    res.status(500).set("Content-Type", "text/plain").send("# error generating metrics\n");
+  }
 });
 
 router.get("/diagnostics", async (_req, res) => {
