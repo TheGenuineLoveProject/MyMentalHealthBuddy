@@ -7,6 +7,7 @@ import { ExamplesAccordion } from "@/components/wellness/ExamplesAccordion";
 import { SafetyFooterStrip } from "@/components/safety/SafetyFooterStrip";
 import { CRISIS_PATH } from "@/lib/safety";
 import { Info, Heart, Lightbulb, ChevronDown, ChevronUp, Home, Sparkles, MessageCircle, BookOpen, Activity, LifeBuoy } from "lucide-react";
+import "@/styles/wellness-shell.css";
 
 const QUICK_NAV = [
   { href: "/", label: "Home", icon: Home, testId: "quicknav-home" },
@@ -35,7 +36,7 @@ export function WellnessPageShell({
   ];
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8">
+    <div className="wellness-shell mx-auto max-w-5xl px-4 py-8">
       <nav
         aria-label="Quick navigation"
         className="mb-6 -mx-1 flex flex-wrap items-center gap-1 sm:gap-2 overflow-x-auto"

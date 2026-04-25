@@ -38,7 +38,12 @@ The platform ships a unified, non-destructive self-repair sweep accessible via `
 - **Stage 2 — `scripts/autoheal-core.mjs`**: Existing safe-mode `platformSnapshot()` for filesystem topology sanity.
 - **Stage 3 — `scripts/check-contract-routes.sh`**: Independent re-verification of the 8 contract gates.
 
+For *active* repair (not just probing), `scripts/heal-repair.mjs` reads `docs/health-check-result.json` and prescribes — or with `--apply`, executes — safe fixes for known WARN/FAIL signatures. DRY-RUN by default; safe fixes (e.g. `npm run build` for missing build output) require `--apply`; destructive fixes (e.g. `npm run db:push --force` for missing tables) additionally require `--apply-destructive`. Manual-only items (env secrets, server restarts) are surfaced with action hints but never auto-executed. Recipe registry is extensible; each recipe declares `matches(check)`, `destructive`, and `command`.
+
 The unified report persists to `docs/health-check-result.json` in a backwards-compatible flat-checks format alongside new `categories` + `totals` blocks. All probes are read-only; secrets are never logged or persisted.
+
+### Inner Wellness Surfaces — Sanctuary Depth
+The shared `WellnessPageShell` (used by `/journal`, `/mood`, `/state`, `/chat`, `/ai-chat`) carries a `wellness-shell` root class that activates `client/src/styles/wellness-shell.css`. The stylesheet adds: a subtle gold/sage radial backdrop fixed behind the page (z-index −1), refined sanctuary depth on the main content section (gradient bg, animated tri-color top accent bar, hover lift), refined quicknav pill hover (sage tint + soft elevation), and a serif gradient on the page title. Effects are scoped to `.wellness-shell` (no leak to other surfaces) and fully gated by `prefers-reduced-motion`.
 
 ## External Dependencies
 
