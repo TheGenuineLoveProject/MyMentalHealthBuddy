@@ -6,7 +6,8 @@ import "@/styles/glp-pane.css";
 import { 
   Server, Database, Cpu, HardDrive, Activity, 
   CheckCircle, AlertTriangle, AlertCircle, RefreshCw,
-  Clock, Wifi, Shield, Zap, TrendingUp, ArrowLeft, Stethoscope
+  Clock, Wifi, Shield, Zap, TrendingUp, ArrowLeft, Stethoscope,
+  Sparkles, PauseCircle, PlayCircle, BotMessageSquare
 } from "lucide-react";
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
@@ -137,6 +138,61 @@ export default function HealthDashboard() {
         description: err?.message || "Try again in 60 seconds.",
         variant: "destructive",
       });
+    },
+  });
+
+  // AI-assisted diagnosis: asks Perplexity to analyze the latest probe
+  // report and return a prioritized remediation plan as structured JSON.
+  // 60s cooldown + 30s timeout.  Admin-only; never touches user-facing AI.
+  const aiAnalyze = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/admin/health-deep/ai-analyze");
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: `AI diagnosis: ${data?.diagnosis?.overall_severity || "unknown"} severity`,
+        description: data?.diagnosis?.summary
+          ? data.diagnosis.summary.slice(0, 120)
+          : `${data?.model || "AI"} · ${data?.durationMs || 0}ms`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+    },
+    onError: (err) => {
+      toast({
+        title: "AI diagnosis failed",
+        description: err?.message || "Try again in 60 seconds.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Scheduler control mutations (pause / resume).  Both invalidate the
+  // shared deep-health query so the UI pill updates immediately.
+  const schedulerResume = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/resume");
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({ title: "Auto-heal scheduler resumed" });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+    },
+    onError: (err) => {
+      toast({ title: "Resume failed", description: err?.message || "", variant: "destructive" });
+    },
+  });
+  const schedulerPause = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/pause");
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({ title: "Auto-heal scheduler paused" });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+    },
+    onError: (err) => {
+      toast({ title: "Pause failed", description: err?.message || "", variant: "destructive" });
     },
   });
 
@@ -314,7 +370,7 @@ export default function HealthDashboard() {
               )}
               <button
                 onClick={() => reprobe.mutate()}
-                disabled={reprobe.isPending || selfHeal.isPending}
+                disabled={reprobe.isPending || selfHeal.isPending || aiAnalyze.isPending}
                 className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-sage-600 text-white rounded-lg hover:bg-sage-700 disabled:opacity-60 disabled:cursor-not-allowed transition min-h-[36px]"
                 data-testid="btn-reprobe"
                 aria-label="Re-run deep health probe"
@@ -324,7 +380,7 @@ export default function HealthDashboard() {
               </button>
               <button
                 onClick={() => selfHeal.mutate()}
-                disabled={selfHeal.isPending || reprobe.isPending}
+                disabled={selfHeal.isPending || reprobe.isPending || aiAnalyze.isPending}
                 className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-60 disabled:cursor-not-allowed transition min-h-[36px]"
                 data-testid="btn-self-heal"
                 aria-label="Run autonomous self-heal (probe + safe-only repair + re-probe)"
@@ -333,8 +389,76 @@ export default function HealthDashboard() {
                 <Stethoscope className={`w-4 h-4 ${selfHeal.isPending ? "animate-pulse motion-reduce:animate-none" : ""}`} />
                 {selfHeal.isPending ? "Healing..." : "Self-heal now"}
               </button>
+              <button
+                onClick={() => aiAnalyze.mutate()}
+                disabled={aiAnalyze.isPending || reprobe.isPending || selfHeal.isPending}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-violet-600 text-white rounded-lg hover:bg-violet-700 disabled:opacity-60 disabled:cursor-not-allowed transition min-h-[36px]"
+                data-testid="btn-ai-analyze"
+                aria-label="Ask AI to diagnose the latest health probe report"
+                title="Sends the latest probe report to Perplexity (admin-only observability layer)"
+              >
+                <Sparkles className={`w-4 h-4 ${aiAnalyze.isPending ? "animate-pulse motion-reduce:animate-none" : ""}`} />
+                {aiAnalyze.isPending ? "Analyzing..." : "Ask AI"}
+              </button>
             </div>
           </div>
+
+          {/* Scheduler status pill — only renders when scheduler module reports state */}
+          {deep?.scheduler && (
+            <div className="flex flex-wrap items-center gap-2 mb-4 text-xs" data-testid="scheduler-status-pill">
+              {deep.scheduler.enabled ? (
+                deep.scheduler.pausedReason ? (
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-200 font-medium">
+                    <PauseCircle className="w-3.5 h-3.5" />
+                    Auto-heal paused
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200 font-medium">
+                    <PlayCircle className="w-3.5 h-3.5" />
+                    Auto-heal ON · every {Math.round(deep.scheduler.intervalMs / 60000)}m
+                  </span>
+                )
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 font-medium" title="Set HEAL_AUTO_ENABLED=true to enable">
+                  <PauseCircle className="w-3.5 h-3.5" />
+                  Auto-heal OFF
+                </span>
+              )}
+              {deep.scheduler.enabled && (
+                <>
+                  <span className="text-gray-500 dark:text-gray-400 tabular-nums">
+                    {deep.scheduler.totalRuns} run{deep.scheduler.totalRuns === 1 ? "" : "s"}
+                  </span>
+                  {deep.scheduler.consecutiveFails > 0 && (
+                    <span className="text-amber-700 dark:text-amber-300 tabular-nums">
+                      · {deep.scheduler.consecutiveFails} consecutive non-healthy
+                    </span>
+                  )}
+                  {deep.scheduler.pausedReason ? (
+                    <button
+                      onClick={() => schedulerResume.mutate()}
+                      disabled={schedulerResume.isPending}
+                      className="ml-auto inline-flex items-center gap-1 px-2 py-0.5 text-xs bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-60 transition"
+                      data-testid="btn-scheduler-resume"
+                    >
+                      <PlayCircle className="w-3 h-3" />
+                      {schedulerResume.isPending ? "..." : "Resume"}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => schedulerPause.mutate()}
+                      disabled={schedulerPause.isPending}
+                      className="ml-auto inline-flex items-center gap-1 px-2 py-0.5 text-xs bg-amber-600 text-white rounded hover:bg-amber-700 disabled:opacity-60 transition"
+                      data-testid="btn-scheduler-pause"
+                    >
+                      <PauseCircle className="w-3 h-3" />
+                      {schedulerPause.isPending ? "..." : "Pause"}
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          )}
 
           {deep?.reportError && !deep?.totals?.total ? (
             <div className="text-sm text-gray-600 dark:text-gray-400 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4" data-testid="text-deep-health-empty">
@@ -425,6 +549,72 @@ export default function HealthDashboard() {
                   </div>
                 </div>
               )}
+
+              {/* AI diagnosis (latest, with collapsed remediation steps) */}
+              {Array.isArray(deep?.aiHistory) && deep.aiHistory.length > 0 && (() => {
+                const latest = deep.aiHistory[0];
+                const dx = latest?.diagnosis;
+                if (!dx) return null;
+                const sevColor = dx.overall_severity === "critical"
+                  ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200"
+                  : dx.overall_severity === "high"
+                  ? "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-200"
+                  : dx.overall_severity === "medium"
+                  ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200"
+                  : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200";
+                const steps = Array.isArray(dx.remediation_steps) ? dx.remediation_steps.slice(0, 5) : [];
+                const ts = latest.at ? new Date(latest.at) : null;
+                const tsLabel = ts && !isNaN(ts.getTime()) ? ts.toLocaleString() : "—";
+                return (
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4" data-testid="section-ai-diagnosis">
+                    <div className="flex items-center gap-2 mb-2">
+                      <BotMessageSquare className="w-4 h-4 text-violet-600" />
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Latest AI diagnosis</h3>
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${sevColor}`} data-testid="ai-severity-pill">
+                        {dx.overall_severity || "unknown"}
+                      </span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-auto tabular-nums">
+                        {latest.model || "AI"} · {tsLabel}
+                      </span>
+                    </div>
+                    {dx.summary && (
+                      <p className="text-sm text-gray-700 dark:text-gray-300 mb-2 leading-relaxed" data-testid="text-ai-summary">
+                        {dx.summary}
+                      </p>
+                    )}
+                    {dx.next_action && (
+                      <div className="text-xs text-violet-800 dark:text-violet-200 bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800 rounded px-2 py-1.5 mb-2" data-testid="text-ai-next-action">
+                        <span className="font-semibold">Next:</span> {dx.next_action}
+                      </div>
+                    )}
+                    {steps.length > 0 && (
+                      <details className="text-xs">
+                        <summary className="cursor-pointer text-gray-700 dark:text-gray-300 font-medium hover:text-violet-700 dark:hover:text-violet-300">
+                          {steps.length} remediation step{steps.length === 1 ? "" : "s"}
+                        </summary>
+                        <ol className="mt-2 space-y-1.5 list-decimal list-inside">
+                          {steps.map((s, i) => (
+                            <li key={i} className="text-gray-700 dark:text-gray-300" data-testid={`ai-step-${i}`}>
+                              <span className="font-medium">{s.issue}</span>
+                              {" — "}
+                              <span className="text-gray-600 dark:text-gray-400">{s.suggested_fix}</span>
+                              {s.risk_level && (
+                                <span className={`ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wide ${
+                                  s.risk_level === "safe" ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-300"
+                                  : s.risk_level === "moderate" ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-300"
+                                  : "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-300"
+                                }`}>
+                                  {s.risk_level}
+                                </span>
+                              )}
+                            </li>
+                          ))}
+                        </ol>
+                      </details>
+                    )}
+                  </div>
+                );
+              })()}
 
               {/* Self-heal history (admin-triggered closed-loop runs, last 10) */}
               {Array.isArray(deep?.selfHealHistory) && deep.selfHealHistory.length > 0 && (

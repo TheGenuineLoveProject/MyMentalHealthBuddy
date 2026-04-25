@@ -4,6 +4,12 @@ import jwt from "jsonwebtoken";
 import crypto from "node:crypto";
 import { logger } from "../utils/logger.mjs";
 import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
+import { diagnoseHealthReport } from "../lib/healAI.mjs";
+import {
+  getSchedulerState,
+  resumeScheduler,
+  pauseScheduler,
+} from "../lib/healScheduler.mjs";
 
 const router = Router();
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
@@ -218,6 +224,8 @@ router.get("/health-deep", async (_req, res) => {
       } : null,
       probeHistory: _probeHistory.slice(0, PROBE_HISTORY_MAX),
       selfHealHistory: _selfHealHistory.slice(0, SELF_HEAL_HISTORY_MAX),
+      aiHistory: _aiHistory.slice(0, AI_HISTORY_MAX),
+      scheduler: getSchedulerState(),
     });
   } catch (error) {
     logger.error("Admin health-deep error", { error: error?.message || error });
@@ -349,13 +357,24 @@ router.post("/health-deep/self-heal", async (req, res) => {
     });
     const durationMs = Date.now() - startedAt;
 
+    // Freshness guard — only trust the status file if its timestamp is at
+    // or after our run start, otherwise we might surface a stale outcome
+    // from a crashed previous run (architect-recommended hardening).
     let status = null;
     if (fs.existsSync(STATUS_PATH)) {
-      try { status = JSON.parse(fs.readFileSync(STATUS_PATH, "utf8")); }
-      catch { /* unreadable */ }
+      try {
+        const parsed = JSON.parse(fs.readFileSync(STATUS_PATH, "utf8"));
+        const statusAt = parsed?.timestamp ? Date.parse(parsed.timestamp) : 0;
+        if (Number.isFinite(statusAt) && statusAt >= startedAt) {
+          status = parsed;
+        }
+      } catch { /* unreadable */ }
     }
 
-    const outcome = status?.outcome || (exitCode === 124 ? "TIMEOUT" : "INTERNAL_ERROR");
+    let outcome;
+    if (exitCode === 124) outcome = "TIMEOUT";
+    else if (status?.outcome) outcome = status.outcome;
+    else outcome = "STALE_STATUS";
 
     _selfHealHistory.unshift({
       at: new Date().toISOString(),
@@ -383,7 +402,97 @@ router.post("/health-deep/self-heal", async (req, res) => {
   }
 });
 
-// Admin diagnostics endpoint
+// AI-Assisted Health Diagnosis.  Reads the latest health-360 report from
+// docs/health-check-result.json, sends a slim digest to Perplexity, and
+// returns a structured remediation plan.  Admin-only, observability-layer.
+// 60s cooldown + 30s timeout.  Last 5 results retained in `_aiHistory`.
+let _lastAiAnalyzeAt = 0;
+const _aiHistory = [];
+const AI_HISTORY_MAX = 5;
+
+router.post("/health-deep/ai-analyze", async (req, res) => {
+  const now = Date.now();
+  const COOLDOWN_MS = 60_000;
+  const since = now - _lastAiAnalyzeAt;
+  if (since < COOLDOWN_MS) {
+    return res.status(429).json({
+      ok: false,
+      error: "AI analysis cooldown active",
+      retryAfterMs: COOLDOWN_MS - since,
+    });
+  }
+  _lastAiAnalyzeAt = now;
+
+  try {
+    const fs = await import("node:fs");
+    const REPORT_PATH = "docs/health-check-result.json";
+    if (!fs.existsSync(REPORT_PATH)) {
+      return res.status(409).json({
+        ok: false,
+        error: "No health probe report available. Trigger a re-probe first.",
+      });
+    }
+
+    let report = null;
+    try {
+      report = JSON.parse(fs.readFileSync(REPORT_PATH, "utf8"));
+    } catch {
+      return res.status(500).json({ ok: false, error: "Health report unreadable" });
+    }
+
+    const startedAt = Date.now();
+    const result = await diagnoseHealthReport(report, { timeoutMs: 30_000 });
+    const durationMs = Date.now() - startedAt;
+
+    if (!result.ok) {
+      logger.warn("Admin AI diagnosis failed", { error: result.error, durationMs });
+      return res.status(502).json({ ok: false, error: result.error });
+    }
+
+    _aiHistory.unshift({
+      at: new Date().toISOString(),
+      diagnosis: result.diagnosis,
+      model: result.model,
+      durationMs,
+      reportVerdict: report?.verdict || null,
+      actorId: req.user?.id || null,
+    });
+    while (_aiHistory.length > AI_HISTORY_MAX) _aiHistory.pop();
+
+    logger.info("Admin AI diagnosis completed", {
+      model: result.model,
+      durationMs,
+      severity: result.diagnosis?.overall_severity,
+    });
+    res.json({
+      ok: true,
+      diagnosis: result.diagnosis,
+      model: result.model,
+      durationMs,
+      usage: result.usage,
+    });
+  } catch (error) {
+    logger.error("Admin AI diagnosis error", { error: error?.message || error });
+    res.status(500).json({ ok: false, error: "AI analysis failed" });
+  }
+});
+
+// Scheduler control surface (admin-only).  Lets the operator resume an
+// auto-paused scheduler or manually pause it for maintenance.  Cannot
+// enable the scheduler from here — that's gated by HEAL_AUTO_ENABLED env.
+router.post("/health-deep/scheduler/resume", (req, res) => {
+  resumeScheduler();
+  logger.info("Admin resumed heal-scheduler", { actorId: req.user?.id || null });
+  res.json({ ok: true, scheduler: getSchedulerState() });
+});
+
+router.post("/health-deep/scheduler/pause", (req, res) => {
+  const reason = (req.body?.reason && String(req.body.reason).slice(0, 200)) || "Manually paused by admin";
+  pauseScheduler(reason);
+  logger.info("Admin paused heal-scheduler", { reason, actorId: req.user?.id || null });
+  res.json({ ok: true, scheduler: getSchedulerState() });
+});
+
 router.get("/diagnostics", async (_req, res) => {
   try {
     const db = (await import("../db/client.mjs")).default;

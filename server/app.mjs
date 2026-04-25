@@ -346,4 +346,18 @@ try {
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
+
+  // Opt-in background self-heal scheduler.  Off by default.  Enable with
+  // HEAL_AUTO_ENABLED=true (and optionally HEAL_AUTO_INTERVAL_MS=<ms>).
+  // Always safe-only (heal-self enforces no --apply-destructive).
+  import("./lib/healScheduler.mjs")
+    .then(({ startScheduler }) => {
+      const started = startScheduler();
+      if (started) {
+        console.log("[heal-scheduler] enabled");
+      }
+    })
+    .catch((err) => {
+      console.warn("[heal-scheduler] failed to load:", err?.message || err);
+    });
 });
