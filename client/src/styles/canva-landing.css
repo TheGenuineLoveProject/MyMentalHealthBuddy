@@ -1820,19 +1820,63 @@
   }
 }
 
-/* --- Step Card — Enterprise Depth with Connector --- */
+/* --- Step Card — Sanctuary Depth with Connector --- */
 .canva-landing .step-card-elite {
   position: relative;
-  background: var(--glp-white);
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(252, 246, 234, 0.50) 100%);
   border-radius: 28px;
   padding: 2.5rem 2rem;
   text-align: center;
-  border: 1px solid var(--glp-sage-15);
+  border: 1px solid var(--glp-sage-20);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   box-shadow:
-    0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.04),
-    0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.05),
+    0 14px 32px rgba(var(--glp-sage-deep-rgb), 0.05);
   text-decoration: none !important;
+}
+
+.canva-landing .step-card-elite::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--glp-gold) 25%,
+    var(--glp-sage) 50%,
+    var(--glp-gold) 75%,
+    transparent 100%);
+  opacity: 0.35;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.canva-landing .step-card-elite::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(190, 134, 34, 0.10) 0%,
+    transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.canva-landing .step-card-elite:hover::before {
+  opacity: 1;
+}
+
+.canva-landing .step-card-elite:hover::after {
+  opacity: 1;
 }
 .canva-landing .step-card-elite,
 .canva-landing .step-card-elite * {
