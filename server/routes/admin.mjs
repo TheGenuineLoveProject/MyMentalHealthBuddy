@@ -160,6 +160,69 @@ router.get("/health", async (_req, res) => {
   }
 });
 
+// Admin deep-health endpoint — surfaces the heal-360 report + heal-watch streak
+// for the Command Center health dashboard.  Read-only; never re-runs probes
+// (probes are run by `scripts/heal-360.mjs` or `scripts/heal-watch.mjs`).
+router.get("/health-deep", async (_req, res) => {
+  try {
+    const fs = await import("node:fs");
+    const REPORT_PATH = "docs/health-check-result.json";
+    const WATCH_PATH = "docs/health-watch-status.json";
+
+    let report = null;
+    let reportError = null;
+    if (fs.existsSync(REPORT_PATH)) {
+      try { report = JSON.parse(fs.readFileSync(REPORT_PATH, "utf8")); }
+      catch (e) { reportError = e?.message || String(e); }
+    } else {
+      reportError = "No heal-360 report yet — run `node scripts/heal-360.mjs` or `bash scripts/heal-all.sh`.";
+    }
+
+    let watch = null;
+    if (fs.existsSync(WATCH_PATH)) {
+      try { watch = JSON.parse(fs.readFileSync(WATCH_PATH, "utf8")); } catch { /* ignore */ }
+    }
+
+    // Summarize for UI without sending the entire raw report
+    const totals = report?.totals || { pass: 0, warn: 0, fail: 0, total: 0 };
+    const categories = report?.categories || null;
+    const checks = Array.isArray(report?.checks) ? report.checks : [];
+    const verdict =
+      totals.fail > 0 ? "NEEDS_REPAIR" :
+      totals.warn > 0 ? "DEGRADED" :
+      totals.total > 0 ? "HEALTHY" : "UNKNOWN";
+
+    const nonPass = checks
+      .filter(c => c.status !== "pass")
+      .map(c => ({
+        name: c.name,
+        status: c.status,
+        message: c.message || null,
+        hint: c.hint || null,
+      }));
+
+    res.json({
+      ok: true,
+      verdict,
+      totals,
+      categories,
+      reportTimestamp: report?.timestamp || null,
+      reportPath: REPORT_PATH,
+      reportError,
+      nonPass,
+      watch: watch ? {
+        latest: watch.latest || null,
+        streak: watch.streak || null,
+        updatedAt: watch.updatedAt || null,
+        sampleCount: Array.isArray(watch.samples) ? watch.samples.length : 0,
+      } : null,
+    });
+  } catch (error) {
+    logger.error("Admin health-deep error", { error: error?.message || error });
+    res.status(500).json({ ok: false, error: "Deep health probe failed" });
+  }
+});
+
 // Admin diagnostics endpoint
 router.get("/diagnostics", async (_req, res) => {
   try {

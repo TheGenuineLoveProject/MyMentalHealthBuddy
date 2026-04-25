@@ -8,6 +8,7 @@ import CustomizerPanel from "@/components/peacescape/CustomizerPanel";
 import InteractiveBuddy from "@/components/peacescape/InteractiveBuddy";
 import { apiRequest } from "@/lib/queryClient";
 import { useSEO } from "@/hooks/useSEO";
+import "@/styles/peacescape-shell.css";
 
 const ROADMAP_TEASERS = [
   { phase: "Phase 1", title: "Sanctuary foundation", body: "A quiet, breathing scape. Buddy beside you. Tenure-aware copy." },
@@ -68,7 +69,7 @@ export default function PeacescapePage() {
 
   return (
     <div
-      className="min-h-screen"
+      className="peacescape-shell min-h-screen"
       style={{ background: "linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-paper) 100%)" }}
       data-testid="page-peacescape"
     >

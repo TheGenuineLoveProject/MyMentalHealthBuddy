@@ -1,0 +1,51 @@
+{
+  "latest": {
+    "startedAt": "2026-04-25T05:39:51.198Z",
+    "finishedAt": "2026-04-25T05:39:52.659Z",
+    "status": "DEGRADED",
+    "exitCode": 1,
+    "totals": {
+      "pass": 25,
+      "warn": 2,
+      "fail": 0
+    },
+    "reportTimestamp": "2026-04-25T05:39:52.645Z",
+    "error": null
+  },
+  "streak": {
+    "window": 2,
+    "healthy": 0,
+    "degraded": 2,
+    "needsRepair": 0,
+    "internalError": 0
+  },
+  "samples": [
+    {
+      "startedAt": "2026-04-25T05:39:10.651Z",
+      "finishedAt": "2026-04-25T05:39:12.103Z",
+      "status": "DEGRADED",
+      "exitCode": 1,
+      "totals": {
+        "pass": 25,
+        "warn": 2,
+        "fail": 0
+      },
+      "reportTimestamp": "2026-04-25T05:39:12.091Z",
+      "error": null
+    },
+    {
+      "startedAt": "2026-04-25T05:39:51.198Z",
+      "finishedAt": "2026-04-25T05:39:52.659Z",
+      "status": "DEGRADED",
+      "exitCode": 1,
+      "totals": {
+        "pass": 25,
+        "warn": 2,
+        "fail": 0
+      },
+      "reportTimestamp": "2026-04-25T05:39:52.645Z",
+      "error": null
+    }
+  ],
+  "updatedAt": "2026-04-25T05:39:52.659Z"
+}
