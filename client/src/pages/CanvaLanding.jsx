@@ -734,8 +734,8 @@ export default function CanvaLanding() {
               <Link 
                 key={index} 
                 href={step.link}
-                className="step-card-elite stagger-child flex items-center gap-4 md:flex-col md:items-center md:text-center md:max-w-xs mx-auto group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" 
-                style={{ '--tw-ring-color': 'var(--glp-sage)' }}
+                className="step-card-elite stagger-child no-underline flex items-center gap-4 md:flex-col md:items-center md:text-center md:max-w-xs mx-auto group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" 
+                style={{ '--tw-ring-color': 'var(--glp-sage)', textDecoration: 'none' }}
                 data-testid={`step-card-${index}`}
                 aria-label={`${step.title} - ${step.description}`}
               >
@@ -885,7 +885,7 @@ export default function CanvaLanding() {
 
       <div className="gold-accent-line" aria-hidden="true"></div>
 
-      <section className="section-reveal cta-enterprise cta-enterprise--compact px-6 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
+      <section className="section-reveal cta-enterprise cta-enterprise--compact px-6 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep) 0%, #0d4a3d 100%)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
@@ -902,7 +902,7 @@ export default function CanvaLanding() {
             <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Are You?</span>
           </h2>
 
-          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-8 text-white/90 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.7' }}>
+          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-8 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.7', color: 'var(--glp-paper)' }}>
             Free to start. No credit card. No trial that expires. Your AI buddy — success coach, metacognitive guide, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. Real self-regulation. The person you're becoming is already inside you — let's meet them.
           </p>
 

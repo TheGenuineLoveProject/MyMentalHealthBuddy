@@ -61,20 +61,24 @@ export default function SafetyFooter({
         </div>
       )}
       
-      <div className={`flex flex-wrap gap-4 mt-3 text-xs ${variant === "compact" ? "justify-center" : ""}`}>
-        <Link href="/blog" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-blog">
+      <div className={`safety-footer__secondary mt-3 text-xs ${variant === "compact" ? "justify-center" : ""}`}>
+        <Link href="/blog" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-blog">
           Blog
         </Link>
-        <Link href="/newsletter" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-newsletter">
+        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+        <Link href="/newsletter" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-newsletter">
           Newsletter
         </Link>
-        <Link href="/disclaimer" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
+        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+        <Link href="/disclaimer" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
           Disclaimer
         </Link>
-        <Link href="/privacy" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
+        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+        <Link href="/privacy" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
           Privacy
         </Link>
-        <Link href="/crisis" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
+        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+        <Link href="/crisis" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
           Crisis Resources
         </Link>
       </div>

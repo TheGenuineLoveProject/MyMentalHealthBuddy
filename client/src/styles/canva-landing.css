@@ -1595,6 +1595,17 @@
   box-shadow:
     0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.04),
     0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06);
+  text-decoration: none !important;
+}
+.canva-landing .step-card-elite,
+.canva-landing .step-card-elite * {
+  text-decoration: none;
+}
+.canva-landing .step-card-elite:hover h3,
+.canva-landing .step-card-elite:focus-visible h3 {
+  text-decoration: underline;
+  text-decoration-color: var(--glp-sage);
+  text-underline-offset: 4px;
 }
 
 .canva-landing .step-card-elite:hover {
@@ -1907,4 +1918,26 @@
   .canva-landing .feature-card-elite:hover .feature-icon-wrap {
     transform: none;
   }
+}
+
+/* SafetyFooter secondary nav — bulletproof spacing with explicit separators.
+   Uses inline-block + horizontal padding so spacing survives even if
+   parent flex/gap utilities are stripped or overridden. */
+.safety-footer__secondary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  line-height: 1.7;
+}
+.safety-footer__secondary-link {
+  display: inline-block;
+  padding: 0 0.35rem;
+  white-space: nowrap;
+}
+.safety-footer__secondary-sep {
+  display: inline-block;
+  opacity: 0.55;
+  user-select: none;
+  font-weight: 600;
 }
