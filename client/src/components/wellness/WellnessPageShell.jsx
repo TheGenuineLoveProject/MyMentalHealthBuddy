@@ -1,11 +1,21 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { BenefitBlock } from "@/components/benefits/BenefitBlock";
 import { ConsentStrip } from "@/components/wellness/ConsentStrip";
 import { ClarityCard } from "@/components/wellness/ClarityCard";
 import { ExamplesAccordion } from "@/components/wellness/ExamplesAccordion";
 import { SafetyFooterStrip } from "@/components/safety/SafetyFooterStrip";
 import { CRISIS_PATH } from "@/lib/safety";
-import { Info, Heart, Lightbulb, ChevronDown, ChevronUp } from "lucide-react";
+import { Info, Heart, Lightbulb, ChevronDown, ChevronUp, Home, Sparkles, MessageCircle, BookOpen, Activity, LifeBuoy } from "lucide-react";
+
+const QUICK_NAV = [
+  { href: "/", label: "Home", icon: Home, testId: "quicknav-home" },
+  { href: "/start", label: "Start", icon: Sparkles, testId: "quicknav-start" },
+  { href: "/ai-chat", label: "Chat", icon: MessageCircle, testId: "quicknav-chat" },
+  { href: "/journal", label: "Journal", icon: BookOpen, testId: "quicknav-journal" },
+  { href: "/state", label: "Mood", icon: Activity, testId: "quicknav-mood" },
+  { href: CRISIS_PATH, label: "Crisis", icon: LifeBuoy, testId: "quicknav-crisis" },
+];
 
 export function WellnessPageShell({
   title,
@@ -26,6 +36,24 @@ export function WellnessPageShell({
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
+      <nav
+        aria-label="Quick navigation"
+        className="mb-6 -mx-1 flex flex-wrap items-center gap-1 sm:gap-2 overflow-x-auto"
+        data-testid="wellness-quicknav"
+      >
+        {QUICK_NAV.map(({ href, label, icon: Icon, testId }) => (
+          <Link
+            key={href}
+            href={href}
+            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-full border border-border bg-card text-sm text-foreground hover:bg-muted hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+            data-testid={testId}
+          >
+            <Icon className="w-4 h-4" aria-hidden="true" />
+            <span>{label}</span>
+          </Link>
+        ))}
+      </nav>
+
       {title ? (
         <header className="mb-6">
           <h1 className="text-3xl font-semibold text-foreground">{title}</h1>
