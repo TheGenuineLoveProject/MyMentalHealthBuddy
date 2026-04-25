@@ -504,12 +504,13 @@ export default function CanvaLanding() {
                 </Link>
               )}
               <Link href="/pricing">
-                <button 
-                  className="inline-flex items-center gap-2 md:gap-3 font-bold text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:-translate-y-1 hover:shadow-lg"
-                  style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)', boxShadow: '0 2px 8px var(--glp-sage-deep-12)' }}
+                <button
+                  className="btn-sacred-secondary group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                   data-testid="button-hero-explore"
                 >
+                  <Eye className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" aria-hidden="true" />
                   See What's Included
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </button>
               </Link>
             </div>

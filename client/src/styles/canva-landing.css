@@ -1406,6 +1406,65 @@
   box-shadow: 0 8px 32px var(--glp-gold-60), 0 0 0 4px var(--glp-gold-15);
 }
 
+/* Sacred Secondary — sage-deep sibling of btn-sacred-gold, same visual weight */
+.canva-landing .btn-sacred-secondary {
+  background:
+    linear-gradient(135deg,
+      rgba(252, 246, 234, 0.85) 0%,
+      rgba(252, 246, 234, 0.95) 100%);
+  color: var(--glp-sage-deep);
+  padding: 18px 44px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  border: 2px solid var(--glp-sage-deep);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 4px 20px rgba(6, 42, 42, 0.12),
+    0 0 0 0 rgba(6, 42, 42, 0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.canva-landing .btn-sacred-secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--glp-sage-deep), #0a3a3a);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 0;
+}
+
+.canva-landing .btn-sacred-secondary > * {
+  position: relative;
+  z-index: 1;
+}
+
+.canva-landing .btn-sacred-secondary:hover {
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 8px 32px rgba(6, 42, 42, 0.32),
+    0 0 0 4px rgba(6, 42, 42, 0.10);
+  border-color: var(--glp-sage-deep);
+}
+
+.canva-landing .btn-sacred-secondary:hover::before {
+  opacity: 1;
+}
+
+.canva-landing .btn-sacred-secondary:focus-visible {
+  outline: 3px solid var(--glp-gold);
+  outline-offset: 3px;
+}
+
 .canva-landing .icon-circle {
   width: 56px;
   height: 56px;
