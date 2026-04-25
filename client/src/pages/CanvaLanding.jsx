@@ -660,7 +660,7 @@ export default function CanvaLanding() {
           </div>
 
           <div className="manifesto-quote" data-testid="section-manifesto">
-            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-white text-center" style={{ opacity: 0.95, lineHeight: '1.7' }}>
+            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-center" style={{ color: 'var(--glp-paper)', opacity: 0.97, lineHeight: '1.7' }}>
               "We didn't build another app. We built a metacognitive mirror — one that reflects your mind back to itself with more clarity, more compassion, and more insight than you've ever experienced. Because the most powerful thing you'll ever do is learn to observe, understand, and consciously evolve the extraordinary mind you already have."
             </p>
             <p className="relative z-10 text-sm font-semibold text-center mt-4 shimmer-text">
@@ -885,37 +885,32 @@ export default function CanvaLanding() {
 
       <div className="gold-accent-line" aria-hidden="true"></div>
 
-      <section className="section-breathe section-reveal cta-enterprise px-6 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
+      <section className="section-reveal cta-enterprise cta-enterprise--compact px-6 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
-        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-4 md:py-8">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-8 md:py-4 rounded-full bg-white/10 backdrop-blur-sm mb-6 md:mb-10 border border-white/15">
+        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-7 md:py-3 rounded-full bg-white/10 backdrop-blur-sm mb-5 md:mb-7 border border-white/15">
             <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-[var(--glp-gold)]" />
-            <span className="text-sm sm:text-lg md:text-xl text-white/90 font-medium tracking-wide">Something brought you here today — trust that instinct</span>
+            <span className="text-sm sm:text-base md:text-lg text-white/95 font-medium tracking-wide">Something brought you here today — trust that instinct</span>
           </div>
-          
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-3 md:mb-5 text-white leading-tight text-center">
+
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-3 md:mb-4 text-white leading-tight text-center">
             Your Buddy Is Ready.
             <br />
             <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Are You?</span>
           </h2>
-          
-          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-10 text-white/85 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.75' }}>
+
+          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-8 text-white/90 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.7' }}>
             Free to start. No credit card. No trial that expires. Your AI buddy — success coach, metacognitive guide, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. Real self-regulation. The person you're becoming is already inside you — let's meet them.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-5">
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-5">
             {!isLoading && isAuthenticated() ? (
               <Link href="/dashboard">
                 <button
-                  className="group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                  style={{
-                    background: 'var(--glp-white)',
-                    color: 'var(--glp-gold-dark, #c49a2d)',
-                    boxShadow: '0 0 25px var(--glp-gold-30), 0 8px 32px rgba(0,0,0,0.2)'
-                  }}
+                  className="cta-btn-primary group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-[1.04] hover:shadow-2xl"
                   data-testid="button-final-dashboard"
                 >
                   <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
@@ -926,12 +921,7 @@ export default function CanvaLanding() {
             ) : (
               <Link href="/login">
                 <button
-                  className="group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                  style={{
-                    background: 'var(--glp-white)',
-                    color: 'var(--glp-gold-dark, #c49a2d)',
-                    boxShadow: '0 0 25px var(--glp-gold-30), 0 8px 32px rgba(0,0,0,0.2)'
-                  }}
+                  className="cta-btn-primary group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-[1.04] hover:shadow-2xl"
                   data-testid="button-final-cta"
                 >
                   <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
@@ -941,14 +931,8 @@ export default function CanvaLanding() {
               </Link>
             )}
             <Link href="/pricing">
-              <button 
-                className="group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-105 border-2"
-                style={{
-                  background: 'transparent',
-                  color: 'var(--glp-gold)',
-                  borderColor: 'var(--glp-gold-60)',
-                  boxShadow: '0 0 15px var(--glp-gold-15)'
-                }}
+              <button
+                className="cta-btn-secondary group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-[1.04]"
                 data-testid="button-view-pricing"
               >
                 View Pricing
