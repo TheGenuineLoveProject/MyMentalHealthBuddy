@@ -502,6 +502,181 @@ router.post("/health-deep/scheduler/pause", (req, res) => {
   res.json({ ok: true, scheduler: getSchedulerState() });
 });
 
+// =====================================================================
+// Declarative alert-rule registry.  Each rule is a pure function of a
+// snapshot.  Severity convention: critical pages, warning is investigative,
+// info is contextual.  Rules are evaluated by /alerts and surfaced as a
+// `mmhb_alert_firing{rule,severity}` gauge in /metrics for Prometheus
+// consumption.  `_alertSince` records the first observed firing per rule
+// so the dashboard can show an accurate "since" timestamp.
+// =====================================================================
+const ALERT_RULES = [
+  {
+    id: "scheduler.consecutive_fails",
+    name: "Scheduler consecutive failures",
+    severity: "critical",
+    description: "Background self-heal scheduler hit ≥3 consecutive failed outcomes (auto-paused).",
+    evaluate: (s) => {
+      const v = Number(s.scheduler?.consecutiveFails) || 0;
+      return { firing: v >= 3, value: v, threshold: 3, message: `consecutiveFails=${v}` };
+    },
+  },
+  {
+    id: "watch.needs_repair_present",
+    name: "Watch reports NEEDS_REPAIR samples",
+    severity: "critical",
+    description: "Recent heal-watch window contains one or more NEEDS_REPAIR samples.",
+    evaluate: (s) => {
+      const v = Number(s.watch?.streak?.needsRepair) || 0;
+      return { firing: v >= 1, value: v, threshold: 1, message: `needsRepair=${v}` };
+    },
+  },
+  {
+    id: "probe.has_failures",
+    name: "Latest probe has failing checks",
+    severity: "critical",
+    description: "The latest health probe shows totals.fail > 0.",
+    evaluate: (s) => {
+      const v = Number(s.probe?.totals?.fail) || 0;
+      return { firing: v > 0, value: v, threshold: 1, message: `fail=${v}` };
+    },
+  },
+  {
+    id: "watch.degraded_streak",
+    name: "Watch sustained DEGRADED streak",
+    severity: "warning",
+    description: "Recent heal-watch window contains ≥5 DEGRADED samples.",
+    evaluate: (s) => {
+      const v = Number(s.watch?.streak?.degraded) || 0;
+      return { firing: v >= 5, value: v, threshold: 5, message: `degraded=${v}` };
+    },
+  },
+  {
+    id: "selfheal.high_mttr",
+    name: "Self-heal MTTR exceeds budget",
+    severity: "warning",
+    description: "Mean time to repair (REPAIRED_TO_HEALTHY) exceeds 60 seconds.",
+    evaluate: (s) => {
+      const v = Number(s.selfheal?.mttrMs) || 0;
+      return { firing: v > 60000, value: v, threshold: 60000, message: `mttrMs=${v}` };
+    },
+  },
+  {
+    id: "probe.stale",
+    name: "Latest probe is stale",
+    severity: "warning",
+    description: "Latest health-check-result.json is older than 1 hour.",
+    evaluate: (s) => {
+      const ts = s.probe?.timestamp ? new Date(s.probe.timestamp).getTime() : null;
+      const ageMs = ts && Number.isFinite(ts) ? Date.now() - ts : null;
+      const limit = 60 * 60 * 1000;
+      const firing = ageMs !== null && ageMs > limit;
+      return {
+        firing,
+        value: ageMs ?? -1,
+        threshold: limit,
+        message: firing ? `age=${Math.round(ageMs / 60000)}m` : "fresh",
+      };
+    },
+  },
+  {
+    id: "ai.safety_filter_spike",
+    name: "AI diagnosis safety-filter spike",
+    severity: "info",
+    description: "More than 50% of recent AI diagnoses triggered the destructive-language post-filter (min 3 calls).",
+    evaluate: (s) => {
+      const arr = Array.isArray(s.aiHistory) ? s.aiHistory : [];
+      const total = arr.length;
+      const filtered = arr.filter((a) => a?.safetyFiltered).length;
+      const ratio = total > 0 ? filtered / total : 0;
+      const firing = total >= 3 && ratio > 0.5;
+      return { firing, value: filtered, threshold: total, message: `filtered=${filtered}/${total}` };
+    },
+  },
+  {
+    id: "process.recently_started",
+    name: "Process recently started",
+    severity: "info",
+    description: "Process uptime < 5 minutes — alert signals may not yet be representative.",
+    evaluate: () => {
+      const u = process.uptime();
+      const firing = u < 300;
+      return { firing, value: Math.round(u), threshold: 300, message: `uptime=${Math.round(u)}s` };
+    },
+  },
+];
+
+const _alertSince = new Map(); // ruleId -> ISO timestamp first observed firing
+
+function evaluateAlerts(state) {
+  const now = new Date().toISOString();
+  const alerts = ALERT_RULES.map((rule) => {
+    let result;
+    try {
+      result = rule.evaluate(state) || {};
+    } catch (e) {
+      result = { firing: false, value: -1, threshold: -1, message: `evalError:${e?.message || "unknown"}` };
+    }
+    if (result.firing) {
+      if (!_alertSince.has(rule.id)) _alertSince.set(rule.id, now);
+    } else {
+      _alertSince.delete(rule.id);
+    }
+    return {
+      id: rule.id,
+      name: rule.name,
+      severity: rule.severity,
+      description: rule.description,
+      firing: !!result.firing,
+      since: result.firing ? _alertSince.get(rule.id) : null,
+      value: result.value ?? null,
+      threshold: result.threshold ?? null,
+      message: result.message || "",
+    };
+  });
+  const firing = alerts.filter((a) => a.firing);
+  return {
+    evaluatedAt: now,
+    alerts,
+    summary: {
+      total: alerts.length,
+      firing: firing.length,
+      critical: firing.filter((a) => a.severity === "critical").length,
+      warning: firing.filter((a) => a.severity === "warning").length,
+      info: firing.filter((a) => a.severity === "info").length,
+    },
+  };
+}
+
+async function gatherAlertState() {
+  const fs = await import("node:fs");
+  let report = null;
+  try {
+    if (fs.existsSync("docs/health-check-result.json")) {
+      report = JSON.parse(fs.readFileSync("docs/health-check-result.json", "utf8"));
+    }
+  } catch { /* ignore */ }
+  let watch = null;
+  try {
+    if (fs.existsSync("docs/health-watch-status.json")) {
+      watch = JSON.parse(fs.readFileSync("docs/health-watch-status.json", "utf8"));
+    }
+  } catch { /* ignore */ }
+  const successful = _selfHealHistory.filter(
+    (r) => r?.outcome === "REPAIRED_TO_HEALTHY" && Number.isFinite(r?.durationMs)
+  );
+  const mttrMs = successful.length > 0
+    ? Math.round(successful.reduce((sum, r) => sum + r.durationMs, 0) / successful.length)
+    : 0;
+  return {
+    probe: report,
+    watch,
+    scheduler: getSchedulerState(),
+    selfheal: { mttrMs },
+    aiHistory: _aiHistory,
+  };
+}
+
 // SLI / Prometheus-style metrics endpoint.  Admin-only (protected by the
 // mount-level chain).  Default format is Prometheus text v0.0.4; pass
 // `?format=json` for a structured payload.  Read-only, derives entirely
@@ -587,8 +762,23 @@ router.get("/health-deep/metrics", async (req, res) => {
       watchSamples,
     };
 
+    // Evaluate alert rules once per scrape.  Both formats include alert
+    // signals so Prometheus + dashboard share a single source of truth.
+    const alertEval = evaluateAlerts({
+      probe: report,
+      watch,
+      scheduler: sched,
+      selfheal: { mttrMs },
+      aiHistory: _aiHistory,
+    });
+
     if (wantJson) {
-      return res.json({ ok: true, ...data, generatedAt: new Date().toISOString() });
+      return res.json({
+        ok: true,
+        ...data,
+        alerts: alertEval.summary,
+        generatedAt: new Date().toISOString(),
+      });
     }
 
     res.setHeader("Content-Type", "text/plain; version=0.0.4; charset=utf-8");
@@ -655,6 +845,26 @@ router.get("/health-deep/metrics", async (req, res) => {
     );
     renderMetric("watch_samples", "Number of samples in the heal-watch ring buffer", "gauge", [{ value: data.watchSamples }]);
 
+    // Alert rule firing state — one labeled sample per rule.  Always emits
+    // 0/1 explicitly so Prometheus has a stable label set even when no
+    // rule is firing.  Rule IDs come from a hardcoded registry so labels
+    // are safe (no injection).
+    renderMetric(
+      "alert_firing",
+      "Whether a declarative alert rule is currently firing (0/1)",
+      "gauge",
+      alertEval.alerts.map((a) => ({
+        labels: `{rule="${a.id}",severity="${a.severity}"}`,
+        value: a.firing ? 1 : 0,
+      }))
+    );
+    renderMetric(
+      "alerts_firing_total",
+      "Total alert rules currently firing across all severities",
+      "gauge",
+      [{ value: alertEval.summary.firing }]
+    );
+
     res.send(lines.join("\n") + "\n");
   } catch (error) {
     logger.error("Admin health-deep metrics error", { error: error?.message || error });
@@ -662,6 +872,97 @@ router.get("/health-deep/metrics", async (req, res) => {
       return res.status(500).json({ ok: false, error: "Metrics generation failed" });
     }
     res.status(500).set("Content-Type", "text/plain").send("# error generating metrics\n");
+  }
+});
+
+// Declarative alert evaluator surface.  Returns the full rule registry
+// with current firing state + a roll-up summary.  Read-only.
+router.get("/health-deep/alerts", async (_req, res) => {
+  try {
+    const state = await gatherAlertState();
+    const evaluated = evaluateAlerts(state);
+    res.json({ ok: true, ...evaluated });
+  } catch (error) {
+    logger.error("Admin health-deep alerts error", { error: error?.message || error });
+    res.status(500).json({ ok: false, error: "Alerts evaluation failed" });
+  }
+});
+
+// Diagnostic-bundle export.  Returns a single downloadable JSON document
+// containing the latest probe, watch, scheduler state, all in-memory ring
+// buffers, derived stats (MTTR), and current alert evaluation.  Useful for
+// offline analysis, support handoffs, and post-incident review.  Admin-only.
+router.get("/health-deep/export", async (req, res) => {
+  try {
+    const fs = await import("node:fs");
+
+    let report = null;
+    let reportError = null;
+    try {
+      if (fs.existsSync("docs/health-check-result.json")) {
+        report = JSON.parse(fs.readFileSync("docs/health-check-result.json", "utf8"));
+      }
+    } catch (e) {
+      reportError = e?.message || "parse error";
+    }
+
+    let watch = null;
+    let watchError = null;
+    try {
+      if (fs.existsSync("docs/health-watch-status.json")) {
+        watch = JSON.parse(fs.readFileSync("docs/health-watch-status.json", "utf8"));
+      }
+    } catch (e) {
+      watchError = e?.message || "parse error";
+    }
+
+    const successful = _selfHealHistory.filter(
+      (r) => r?.outcome === "REPAIRED_TO_HEALTHY" && Number.isFinite(r?.durationMs)
+    );
+    const mttrMs = successful.length > 0
+      ? Math.round(successful.reduce((sum, r) => sum + r.durationMs, 0) / successful.length)
+      : 0;
+
+    const sched = getSchedulerState();
+    const alertEval = evaluateAlerts({
+      probe: report,
+      watch,
+      scheduler: sched,
+      selfheal: { mttrMs },
+      aiHistory: _aiHistory,
+    });
+
+    const bundle = {
+      manifest: {
+        schemaVersion: "1",
+        bundleType: "mmhb-health-diagnostic",
+        generatedAt: new Date().toISOString(),
+        generatedBy: { actorRole: req.user?.role || null, ip: req.ip || null },
+        promptVersion: AI_PROMPT_VERSION,
+        nodeVersion: process.version,
+        uptimeSeconds: Math.round(process.uptime()),
+      },
+      probe: report,
+      probeError: reportError,
+      watch,
+      watchError,
+      scheduler: sched,
+      ringBuffers: {
+        probeHistory: _probeHistory.slice(),
+        selfHealHistory: _selfHealHistory.slice(),
+        aiHistory: _aiHistory.slice(),
+      },
+      derived: { mttrMs },
+      alerts: alertEval,
+    };
+
+    const ts = new Date().toISOString().replace(/[:.]/g, "-");
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.setHeader("Content-Disposition", `attachment; filename="mmhb-health-bundle-${ts}.json"`);
+    res.send(JSON.stringify(bundle, null, 2));
+  } catch (error) {
+    logger.error("Admin health-deep export error", { error: error?.message || error });
+    res.status(500).json({ ok: false, error: "Export failed" });
   }
 });
 

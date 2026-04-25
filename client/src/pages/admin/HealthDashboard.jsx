@@ -7,7 +7,7 @@ import {
   Server, Database, Cpu, HardDrive, Activity, 
   CheckCircle, AlertTriangle, AlertCircle, RefreshCw,
   Clock, Wifi, Shield, Zap, TrendingUp, ArrowLeft, Stethoscope,
-  Sparkles, PauseCircle, PlayCircle, BotMessageSquare
+  Sparkles, PauseCircle, PlayCircle, BotMessageSquare, Download, BellRing, BellOff
 } from "lucide-react";
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
@@ -89,6 +89,13 @@ export default function HealthDashboard() {
   // `node scripts/heal-360.mjs` / `node scripts/heal-watch.mjs`.
   const { data: deep } = useQuery({
     queryKey: ["/api/admin/health-deep", refreshKey],
+    refetchInterval: 60000,
+  });
+
+  // Declarative alert rules — read-only evaluation against current state.
+  // Same source of truth as the Prometheus `mmhb_alert_firing{rule}` gauge.
+  const { data: alertsData } = useQuery({
+    queryKey: ["/api/admin/health-deep/alerts", refreshKey],
     refetchInterval: 60000,
   });
 
@@ -195,6 +202,45 @@ export default function HealthDashboard() {
       toast({ title: "Pause failed", description: err?.message || "", variant: "destructive" });
     },
   });
+
+  // Export: downloads a single JSON diagnostic bundle (probe + watch +
+  // scheduler + ring buffers + alerts).  Uses fetch + blob + temp anchor
+  // so the browser's download UI handles it naturally.  Auth header is
+  // attached via the same Bearer-token pattern apiRequest uses.
+  const [exporting, setExporting] = useState(false);
+  const handleExport = async () => {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      const token = localStorage.getItem("adminSessionToken");
+      const res = await fetch("/api/admin/health-deep/export", {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!res.ok) {
+        throw new Error(`Export failed (${res.status})`);
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      const cd = res.headers.get("Content-Disposition") || "";
+      const m = cd.match(/filename="?([^"]+)"?/);
+      a.download = m?.[1] || `mmhb-health-bundle-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast({ title: "Diagnostic bundle downloaded", description: a.download });
+    } catch (e) {
+      toast({
+        title: "Export failed",
+        description: e?.message || "Could not download bundle.",
+        variant: "destructive",
+      });
+    } finally {
+      setExporting(false);
+    }
+  };
 
   const handleRefresh = () => {
     setRefreshKey(prev => prev + 1);
@@ -400,8 +446,88 @@ export default function HealthDashboard() {
                 <Sparkles className={`w-4 h-4 ${aiAnalyze.isPending ? "animate-pulse motion-reduce:animate-none" : ""}`} />
                 {aiAnalyze.isPending ? "Analyzing..." : "Ask AI"}
               </button>
+              <button
+                onClick={handleExport}
+                disabled={exporting}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-slate-700 text-white rounded-lg hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed transition min-h-[36px]"
+                data-testid="btn-export-bundle"
+                aria-label="Download a JSON diagnostic bundle (probe, watch, scheduler, ring buffers, alerts)"
+                title="Downloads a portable JSON snapshot for offline analysis and support handoff"
+              >
+                <Download className={`w-4 h-4 ${exporting ? "animate-pulse motion-reduce:animate-none" : ""}`} />
+                {exporting ? "Exporting..." : "Export"}
+              </button>
             </div>
           </div>
+
+          {/* Alerts panel — declarative rules surface firing operational signals.
+              Same source of truth as `mmhb_alert_firing` Prometheus gauge.  When
+              nothing is firing, shows a calm "All clear" state. */}
+          {alertsData?.alerts && (
+            <div
+              className="mb-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white/60 dark:bg-gray-900/40 p-3"
+              data-testid="panel-alerts"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  {alertsData.summary.firing > 0 ? (
+                    <BellRing
+                      className={`w-4 h-4 ${alertsData.summary.critical > 0 ? "text-red-600" : "text-amber-600"}`}
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <BellOff className="w-4 h-4 text-green-600" aria-hidden="true" />
+                  )}
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
+                    Alerts
+                  </h3>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 tabular-nums" data-testid="text-alerts-summary">
+                    {alertsData.summary.firing > 0
+                      ? `${alertsData.summary.firing} firing · ${alertsData.summary.critical}c / ${alertsData.summary.warning}w / ${alertsData.summary.info}i`
+                      : `All ${alertsData.summary.total} rules quiet`}
+                  </span>
+                </div>
+              </div>
+              {alertsData.summary.firing === 0 ? (
+                <p className="text-xs text-gray-500 dark:text-gray-400" data-testid="text-alerts-allclear">
+                  No alert rules are currently firing.
+                </p>
+              ) : (
+                <ul className="space-y-1.5">
+                  {alertsData.alerts
+                    .filter((a) => a.firing)
+                    .sort((a, b) => {
+                      const order = { critical: 0, warning: 1, info: 2 };
+                      return (order[a.severity] ?? 9) - (order[b.severity] ?? 9);
+                    })
+                    .map((a) => {
+                      const sevColor =
+                        a.severity === "critical" ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200" :
+                        a.severity === "warning" ? "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-200" :
+                        "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200";
+                      const sinceLabel = a.since
+                        ? new Date(a.since).toLocaleString()
+                        : "—";
+                      return (
+                        <li
+                          key={a.id}
+                          className="flex flex-wrap items-baseline gap-2 text-xs"
+                          data-testid={`alert-${a.id}`}
+                          title={a.description}
+                        >
+                          <span className={`inline-flex items-center px-1.5 py-0.5 rounded font-medium uppercase tracking-wide ${sevColor}`}>
+                            {a.severity}
+                          </span>
+                          <span className="font-medium text-gray-900 dark:text-white">{a.name}</span>
+                          <span className="text-gray-500 dark:text-gray-400 font-mono">{a.message}</span>
+                          <span className="text-gray-400 dark:text-gray-500 ml-auto">since {sinceLabel}</span>
+                        </li>
+                      );
+                    })}
+                </ul>
+              )}
+            </div>
+          )}
 
           {/* Scheduler status pill — only renders when scheduler module reports state */}
           {deep?.scheduler && (
