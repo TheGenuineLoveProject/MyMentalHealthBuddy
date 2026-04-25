@@ -223,6 +223,65 @@ router.get("/health-deep", async (_req, res) => {
   }
 });
 
+// Admin-triggered re-probe.  Spawns `node scripts/heal-360.mjs` as a child
+// process; heal-360 is read-only, so this is safe to expose to admins.
+// Returns the verdict + totals after the probe completes (typically <2s).
+// A simple 30s in-memory cooldown prevents accidental rapid re-probes.
+let _lastProbeAt = 0;
+router.post("/health-deep/run", async (_req, res) => {
+  const now = Date.now();
+  const COOLDOWN_MS = 30_000;
+  const since = now - _lastProbeAt;
+  if (since < COOLDOWN_MS) {
+    return res.status(429).json({
+      ok: false,
+      error: "Probe cooldown active",
+      retryAfterMs: COOLDOWN_MS - since,
+    });
+  }
+  _lastProbeAt = now;
+
+  try {
+    const { spawn } = await import("node:child_process");
+    const fs = await import("node:fs");
+    const REPORT_PATH = "docs/health-check-result.json";
+
+    const exitCode = await new Promise((resolve) => {
+      const child = spawn("node", ["scripts/heal-360.mjs"], {
+        stdio: ["ignore", "ignore", "ignore"],
+      });
+      const timer = setTimeout(() => {
+        try { child.kill("SIGTERM"); } catch { /* ignore */ }
+        resolve(124); // timeout
+      }, 30_000);
+      child.on("error", () => { clearTimeout(timer); resolve(3); });
+      child.on("close", (code) => { clearTimeout(timer); resolve(code ?? 3); });
+    });
+
+    let totals = null;
+    let timestamp = null;
+    if (fs.existsSync(REPORT_PATH)) {
+      try {
+        const j = JSON.parse(fs.readFileSync(REPORT_PATH, "utf8"));
+        totals = j.totals || null;
+        timestamp = j.timestamp || null;
+      } catch { /* report unreadable */ }
+    }
+
+    const verdict =
+      exitCode === 0 ? "HEALTHY" :
+      exitCode === 1 ? "DEGRADED" :
+      exitCode === 2 ? "NEEDS_REPAIR" :
+      exitCode === 124 ? "TIMEOUT" : "INTERNAL_ERROR";
+
+    logger.info("Admin re-probe completed", { verdict, exitCode, totals });
+    res.json({ ok: true, verdict, exitCode, totals, reportTimestamp: timestamp });
+  } catch (error) {
+    logger.error("Admin re-probe error", { error: error?.message || error });
+    res.status(500).json({ ok: false, error: "Re-probe failed" });
+  }
+});
+
 // Admin diagnostics endpoint
 router.get("/diagnostics", async (_req, res) => {
   try {

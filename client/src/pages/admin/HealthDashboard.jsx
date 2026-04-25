@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import "@/styles/glp-pane.css";
 import { 
   Server, Database, Cpu, HardDrive, Activity, 
   CheckCircle, AlertTriangle, AlertCircle, RefreshCw,
@@ -86,6 +89,30 @@ export default function HealthDashboard() {
   const { data: deep } = useQuery({
     queryKey: ["/api/admin/health-deep", refreshKey],
     refetchInterval: 60000,
+  });
+
+  const { toast } = useToast();
+  const reprobe = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/admin/health-deep/run");
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: `Re-probe complete: ${data?.verdict || "unknown"}`,
+        description: data?.totals
+          ? `${data.totals.pass || 0} pass · ${data.totals.warn || 0} warn · ${data.totals.fail || 0} fail`
+          : "Probe finished.",
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+    },
+    onError: (err) => {
+      toast({
+        title: "Re-probe failed",
+        description: err?.message || "Try again in 30 seconds.",
+        variant: "destructive",
+      });
+    },
   });
 
   const handleRefresh = () => {
@@ -244,21 +271,33 @@ export default function HealthDashboard() {
         </div>
 
         {/* Deep Health (heal-360 report) */}
-        <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700" data-testid="section-deep-health">
+        <div className="glp-pane mt-8 rounded-xl p-6" data-testid="section-deep-health">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Stethoscope className="w-5 h-5 text-sage-600" />
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-deep-health">Deep Health (heal-360)</h2>
             </div>
-            {deep?.verdict && (
-              <StatusIndicator
-                status={
-                  deep.verdict === "HEALTHY" ? "healthy" :
-                  deep.verdict === "DEGRADED" ? "warning" :
-                  deep.verdict === "NEEDS_REPAIR" ? "error" : "unknown"
-                }
-              />
-            )}
+            <div className="flex items-center gap-3">
+              {deep?.verdict && (
+                <StatusIndicator
+                  status={
+                    deep.verdict === "HEALTHY" ? "healthy" :
+                    deep.verdict === "DEGRADED" ? "warning" :
+                    deep.verdict === "NEEDS_REPAIR" ? "error" : "unknown"
+                  }
+                />
+              )}
+              <button
+                onClick={() => reprobe.mutate()}
+                disabled={reprobe.isPending}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-sage-600 text-white rounded-lg hover:bg-sage-700 disabled:opacity-60 disabled:cursor-not-allowed transition min-h-[36px]"
+                data-testid="btn-reprobe"
+                aria-label="Re-run deep health probe"
+              >
+                <RefreshCw className={`w-4 h-4 ${reprobe.isPending ? "animate-spin motion-reduce:animate-none" : ""}`} />
+                {reprobe.isPending ? "Probing..." : "Re-probe now"}
+              </button>
+            </div>
           </div>
 
           {deep?.reportError && !deep?.totals?.total ? (
