@@ -30,7 +30,7 @@ export default function PeacescapePage() {
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+    const fetchState = async () => {
       try {
         const res = await apiRequest("GET", "/api/peacescape/state");
         const data = await res.json();
@@ -40,8 +40,20 @@ export default function PeacescapePage() {
       } finally {
         if (!cancelled) setLoading(false);
       }
-    })();
-    return () => { cancelled = true; };
+    };
+    fetchState();
+    // Refetch when auth token changes (e.g. after login/registration in another tab
+    // or after the page becomes visible again) so the customizer leaves "guest" mode
+    // without requiring a manual reload.
+    const onStorage = (e) => { if (!e || e.key === "token" || e.key === null) fetchState(); };
+    const onFocus = () => fetchState();
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("focus", onFocus);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("focus", onFocus);
+    };
   }, []);
 
   const scape = state?.scape || { palette: "sage", theme: "meadow", accessory: "none" };
@@ -77,6 +89,9 @@ export default function PeacescapePage() {
           buddySize={200}
           buddyLabel="This is your space. We tend it together — one breath, one reflection at a time."
           className="mb-12 py-12"
+          palette={scape.palette}
+          theme={scape.theme}
+          accessory={scape.accessory}
         >
           <div className="text-center px-4 max-w-3xl mx-auto">
             <h1

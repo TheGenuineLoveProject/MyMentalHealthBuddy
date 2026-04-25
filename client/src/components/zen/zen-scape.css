@@ -141,3 +141,126 @@
     opacity: 0 !important;
   }
 }
+
+/* ============================================================
+   Palette + Theme + Accessory variants (Layer 4)
+   --------------------------------------------------------------
+   Defaults below match the original v1 visuals exactly, so every
+   existing surface using <ZenScape /> with no palette/theme prop
+   keeps its appearance. Variants override only the cool/warm/petal
+   tokens — geometry, motion, and a11y are unchanged.
+   ============================================================ */
+
+.zenscape {
+  --zen-cool:       #7FD8A8;
+  --zen-cool-deep:  #5DDB94;
+  --zen-warm:       #FFD75A;
+  --zen-cool-rgb:   127, 216, 168;
+  --zen-warm-rgb:   255, 215, 90;
+  --zen-petal-rgb:  127, 216, 168;
+  --zen-wash-tail-rgb: 143, 191, 159;
+}
+
+/* Re-bind wash + petal to use the variant tokens; values at default
+   sage/meadow are byte-identical to the previous hardcoded rgba. */
+.zenscape .zenscape__wash {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 30%, rgba(var(--zen-cool-rgb), 0.18) 0%, rgba(var(--zen-cool-rgb), 0) 70%),
+    radial-gradient(ellipse 70% 55% at 50% 80%, rgba(var(--zen-warm-rgb), 0.10) 0%, rgba(var(--zen-warm-rgb), 0) 75%),
+    linear-gradient(180deg, var(--glp-paper, #faf8f3) 0%, rgba(var(--zen-wash-tail-rgb), 0.06) 100%);
+}
+.zenscape .zenscape__petal {
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.85), rgba(var(--zen-petal-rgb), 0.55) 65%, rgba(var(--zen-petal-rgb), 0) 100%);
+  filter: drop-shadow(0 0 6px rgba(var(--zen-petal-rgb), 0.55));
+}
+
+/* ---- Palette variants (cool / warm hue family) ---- */
+.zenscape[data-zen-palette="rose"] {
+  --zen-cool:       #F4B6C2;
+  --zen-cool-deep:  #E08FA1;
+  --zen-warm:       #FFD7BA;
+  --zen-cool-rgb:   244, 182, 194;
+  --zen-warm-rgb:   255, 215, 186;
+}
+.zenscape[data-zen-palette="gold"] {
+  --zen-cool:       #FFE08A;
+  --zen-cool-deep:  #F0C46A;
+  --zen-warm:       #FFAA6E;
+  --zen-cool-rgb:   255, 224, 138;
+  --zen-warm-rgb:   255, 170, 110;
+}
+.zenscape[data-zen-palette="sky"] {
+  --zen-cool:       #9FD4F4;
+  --zen-cool-deep:  #7BB8E8;
+  --zen-warm:       #D4E8FA;
+  --zen-cool-rgb:   159, 212, 244;
+  --zen-warm-rgb:   212, 232, 250;
+}
+.zenscape[data-zen-palette="violet"] {
+  --zen-cool:       #C8B6F0;
+  --zen-cool-deep:  #A693DC;
+  --zen-warm:       #F0E0F8;
+  --zen-cool-rgb:   200, 182, 240;
+  --zen-warm-rgb:   240, 224, 248;
+}
+.zenscape[data-zen-palette="dawn"] {
+  --zen-cool:       #FFB89D;
+  --zen-cool-deep:  #F09A85;
+  --zen-warm:       #FFE2B5;
+  --zen-cool-rgb:   255, 184, 157;
+  --zen-warm-rgb:   255, 226, 181;
+}
+
+/* ---- Theme variants (petal color + wash tail mood) ---- */
+.zenscape[data-zen-theme="forest"] {
+  --zen-petal-rgb:      120, 180, 130;
+  --zen-wash-tail-rgb:  90, 140, 110;
+}
+.zenscape[data-zen-theme="ocean"] {
+  --zen-petal-rgb:      150, 210, 235;
+  --zen-wash-tail-rgb:  110, 165, 200;
+}
+.zenscape[data-zen-theme="dawn"] {
+  --zen-petal-rgb:      255, 200, 175;
+  --zen-wash-tail-rgb:  220, 175, 160;
+}
+.zenscape[data-zen-theme="dusk"] {
+  --zen-petal-rgb:      200, 175, 215;
+  --zen-wash-tail-rgb:  155, 140, 180;
+}
+.zenscape[data-zen-theme="cosmos"] {
+  --zen-petal-rgb:      215, 200, 255;
+  --zen-wash-tail-rgb:  120, 110, 175;
+}
+
+/* ---- Buddy stack (anchors accessory glyph above Buddy) ---- */
+.zenscape__buddy-stack {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.zenscape__accessory {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--zen-cool-deep, #5DDB94);
+  text-shadow: 0 0 10px rgba(var(--zen-cool-rgb), 0.5);
+  pointer-events: none;
+  user-select: none;
+  animation: zenAccessoryFloat 6000ms ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+@keyframes zenAccessoryFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0)   rotate(-2deg); opacity: 0.92; }
+  50%      { transform: translateX(-50%) translateY(-6px) rotate(2deg);  opacity: 1.00; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenscape__accessory { animation: none !important; }
+}
