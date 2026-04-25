@@ -92,6 +92,7 @@ export default function PeacescapePage() {
           palette={scape.palette}
           theme={scape.theme}
           accessory={scape.accessory}
+          stage={stage.stage}
         >
           <div className="text-center px-4 max-w-3xl mx-auto">
             <h1

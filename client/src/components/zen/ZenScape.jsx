@@ -43,14 +43,20 @@ export default function ZenScape({
   palette = "sage",
   theme = "meadow",
   accessory = "none",
+  stage,
 }) {
   const accessoryGlyph = ACCESSORY_GLYPH[accessory] || null;
+  const stageNum =
+    typeof stage === "number" && stage >= 1 && stage <= 6
+      ? Math.floor(stage)
+      : null;
 
   return (
     <div
       className={`zenscape ${className}`}
       data-zen-palette={palette}
       data-zen-theme={theme}
+      {...(stageNum ? { "data-zen-stage": String(stageNum) } : {})}
       data-testid="zenscape-root"
     >
       <div className="zenscape__bg" aria-hidden="true">
@@ -82,6 +88,11 @@ export default function ZenScape({
         <div className="zenscape__petals">
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <span key={i} className={`zenscape__petal zenscape__petal--${i}`} />
+          ))}
+        </div>
+        <div className="zenscape__sparkles">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <span key={i} className={`zenscape__sparkle zenscape__sparkle--${i}`} aria-hidden="true" />
           ))}
         </div>
       </div>

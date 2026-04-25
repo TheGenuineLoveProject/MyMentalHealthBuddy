@@ -264,3 +264,135 @@
 @media (prefers-reduced-motion: reduce) {
   .zenscape__accessory { animation: none !important; }
 }
+
+/* ============================================================
+   Sparkles + Stage variants (Layer 5)
+   --------------------------------------------------------------
+   Stage-driven visual intensity tied to evolution_stage 1..6.
+   When NO data-zen-stage attribute is present (ZenScape called
+   without the `stage` prop), nothing below applies and visuals
+   remain byte-identical to v1/Layer 4. Only when data-zen-stage
+   is set do the petals and sparkles gate themselves to express
+   the user's progress through the sanctuary.
+
+   Stages (server-aligned, server/routes/peacescape.mjs):
+     1 Seed Garden     — quietest: 2 petals, sparkles dormant
+     2 First Bloom     — 3 petals, sparkles dormant
+     3 Tended Grove    — 4 petals, first sparkle awakens
+     4 Mossy Sanctuary — 5 petals, 3 sparkles
+     5 Living Forest   — 6 petals, 4 sparkles
+     6 Inner Cathedral — 6 petals, all 5 sparkles + soft aura
+   ============================================================ */
+
+/* ---- Sparkles (always rendered; INVISIBLE & UN-ANIMATED unless a stage
+   selector explicitly attaches the twinkle animation). This is critical
+   for backward-compat: the 6 ZenScape callers that don't pass `stage`
+   have no data-zen-stage attribute, so none of the stage selectors below
+   match — sparkles stay opacity:0 and visuals remain byte-identical to
+   v1/Layer 4. ---- */
+.zenscape__sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.zenscape__sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95), rgba(var(--zen-cool-rgb), 0.65) 55%, rgba(var(--zen-cool-rgb), 0) 100%);
+  filter: drop-shadow(0 0 6px rgba(var(--zen-cool-rgb), 0.7));
+  opacity: 0;
+  /* No animation by default — animation is attached only via stage selectors below. */
+}
+.zenscape__sparkle--0 { top: 18%; left: 14%; }
+.zenscape__sparkle--1 { top: 28%; left: 82%; }
+.zenscape__sparkle--2 { top: 62%; left: 22%; }
+.zenscape__sparkle--3 { top: 72%; left: 78%; }
+.zenscape__sparkle--4 { top: 44%; left: 50%; }
+
+@keyframes zenSparkleTwinkle {
+  0%, 100% { opacity: 0;    transform: scale(0.6); }
+  45%      { opacity: 0.85; transform: scale(1.1); }
+  55%      { opacity: 0.9;  transform: scale(1.15); }
+}
+
+/* ---- Stage 1 — Seed Garden: quietest (2 petals, dim rings, no sparkles) ---- */
+.zenscape[data-zen-stage="1"] .zenscape__petal--1,
+.zenscape[data-zen-stage="1"] .zenscape__petal--2,
+.zenscape[data-zen-stage="1"] .zenscape__petal--4,
+.zenscape[data-zen-stage="1"] .zenscape__petal--5 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+.zenscape[data-zen-stage="1"] .zenscape__rings { opacity: 0.65; }
+
+/* ---- Stage 2 — First Bloom: 3 petals, no sparkles ---- */
+.zenscape[data-zen-stage="2"] .zenscape__petal--1,
+.zenscape[data-zen-stage="2"] .zenscape__petal--3,
+.zenscape[data-zen-stage="2"] .zenscape__petal--5 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+.zenscape[data-zen-stage="2"] .zenscape__rings { opacity: 0.78; }
+
+/* ---- Stage 3 — Tended Grove: 4 petals; sparkle-0 awakens ---- */
+.zenscape[data-zen-stage="3"] .zenscape__petal--2,
+.zenscape[data-zen-stage="3"] .zenscape__petal--5 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+.zenscape[data-zen-stage="3"] .zenscape__rings { opacity: 0.9; }
+
+/* ---- Stage 4 — Mossy Sanctuary: 5 petals; sparkles 0/1/2 ---- */
+.zenscape[data-zen-stage="4"] .zenscape__petal--2 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+/* ---- Sparkle reveal map (animation attached only at qualifying stages) ----
+   Sparkle 0: stages 3,4,5,6 | Sparkle 1: stages 4,5,6 | Sparkle 2: stages 4,5,6
+   Sparkle 3: stages 5,6     | Sparkle 4: stage 6 only */
+.zenscape[data-zen-stage="3"] .zenscape__sparkle--0,
+.zenscape[data-zen-stage="4"] .zenscape__sparkle--0,
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--0,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--0 {
+  animation: zenSparkleTwinkle 4200ms ease-in-out infinite 0ms;
+}
+.zenscape[data-zen-stage="4"] .zenscape__sparkle--1,
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--1,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--1 {
+  animation: zenSparkleTwinkle 5600ms ease-in-out infinite 900ms;
+}
+.zenscape[data-zen-stage="4"] .zenscape__sparkle--2,
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--2,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--2 {
+  animation: zenSparkleTwinkle 4800ms ease-in-out infinite 1700ms;
+}
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--3,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--3 {
+  animation: zenSparkleTwinkle 5200ms ease-in-out infinite 2400ms;
+}
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--4 {
+  animation: zenSparkleTwinkle 6000ms ease-in-out infinite 3100ms;
+}
+.zenscape[data-zen-stage="6"] .zenscape__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 75% 60% at 50% 45%, rgba(var(--zen-cool-rgb), 0.10) 0%, rgba(var(--zen-cool-rgb), 0) 65%);
+  mix-blend-mode: screen;
+  animation: zenAuraBreathe 9000ms ease-in-out infinite;
+}
+
+@keyframes zenAuraBreathe {
+  0%, 100% { opacity: 0.55; transform: scale(1.00); }
+  50%      { opacity: 1.00; transform: scale(1.04); }
+}
+
+/* Reduced motion: keep stage-revealed elements visible but stop animating */
+@media (prefers-reduced-motion: reduce) {
+  .zenscape__sparkle { animation: none !important; }
+  .zenscape[data-zen-stage="6"] .zenscape__bg::after { animation: none !important; }
+}

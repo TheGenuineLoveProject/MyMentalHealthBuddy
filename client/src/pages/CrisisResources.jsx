@@ -116,7 +116,7 @@ export default function CrisisResources() {
           <Link 
             href="/dashboard"
             className="inline-flex items-center gap-2 text-body-sm transition mb-6 hover:opacity-80"
-            style={{ color: 'var(--glp-sage)' }}
+            style={{ color: 'var(--glp-sage-deep)' }}
             data-testid="link-back-dashboard"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -133,7 +133,7 @@ export default function CrisisResources() {
               </div>
               <div>
                 <h2 className="text-heading-md mb-2" style={{ color: 'var(--glp-rose-dark)' }}>In immediate danger?</h2>
-                <p className="text-body-sm" style={{ color: 'var(--glp-rose)' }}>
+                <p className="text-body-sm" style={{ color: 'var(--glp-ink)' }}>
                   Call 911 or go to your nearest emergency room. Your safety is the priority.
                 </p>
               </div>
@@ -171,7 +171,7 @@ export default function CrisisResources() {
                         )}
                         {hotline.name}
                       </h3>
-                      <p className="text-sm mb-2" style={{ color: 'var(--glp-sage)' }}>{hotline.description}</p>
+                      <p className="text-sm mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{hotline.description}</p>
                       <p className="text-xs flex items-center gap-1.5" style={{ color: 'var(--glp-ink)' }}>
                         <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--glp-sage)' }}></span>
                         Available: {hotline.available}
@@ -183,7 +183,7 @@ export default function CrisisResources() {
                         <a
                           href={`tel:${hotline.phone.replace(/[^0-9]/g, "")}`}
                           className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all shadow-md hover:shadow-lg hover:opacity-90 focus:outline-none"
-                          style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+                          style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
                           data-testid={`link-call-${idx}`}
                         >
                           <Phone className="w-4 h-4" aria-hidden="true" />
@@ -193,7 +193,7 @@ export default function CrisisResources() {
                       {hotline.text && (
                         <span 
                           className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl shadow-md"
-                          style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', color: 'var(--glp-paper)' }}
+                          style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', color: 'var(--glp-sage-deep)' }}
                           aria-label={`Text support: ${hotline.text}`}
                         >
                           <MessageSquare className="w-4 h-4" aria-hidden="true" />
@@ -245,12 +245,12 @@ export default function CrisisResources() {
                   >
                     <div 
                       className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform"
-                      style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+                      style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
                     >
                       <Icon className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{tip.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-sage)' }}>{tip.description}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-sage-deep)' }}>{tip.description}</p>
                   </article>
                 );
               })}
@@ -264,12 +264,12 @@ export default function CrisisResources() {
           >
             <div 
               className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
-              style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+              style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
             >
               <Heart className="w-8 h-8" aria-hidden="true" />
             </div>
             <h2 id="reminder-heading" className="text-2xl font-display font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>You Are Not Alone</h2>
-            <p className="mb-6 max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--glp-sage)' }}>
+            <p className="mb-6 max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--glp-sage-deep)' }}>
               Whatever you're going through, there are people who care and want to help. 
               Reaching out is a sign of strength, not weakness. You matter, and your life has value.
             </p>
@@ -277,7 +277,7 @@ export default function CrisisResources() {
               <Link
                 href="/chat"
                 className="px-6 py-3 inline-flex items-center gap-2 font-medium rounded-xl transition-all hover:opacity-90 shadow-md"
-                style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+                style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
                 data-testid="link-chat"
               >
                 <MessageSquare className="w-5 h-5" aria-hidden="true" />
