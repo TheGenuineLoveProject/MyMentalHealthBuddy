@@ -1,6 +1,7 @@
 import adminPublishingRoutes from "./routes/admin-publishing.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
 import authRoutes from "./routes/auth.mjs";
+import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
 process.on('uncaughtException', (err) => {
   console.error('UNCAUGHT ERROR:', err);
 });
@@ -154,6 +155,13 @@ app.use("/api/ai/business", aiBusinessRoutes);
 
 // Auth routes (mount before AI routes so /api/auth/* works)
 app.use("/api/auth", authRoutes);
+
+// Replit-integrations auth (registers GET /api/auth/user — consumed by
+// client/src/context/AuthContext.jsx::fetchReplitUser to hydrate user/role
+// on page load. Without this, AuthContext gets a 404 and falls back to
+// localStorage-only state, which broke session persistence and admin
+// role-based routing on cold reloads.)
+registerAuthRoutes(app);
 
 // Admin login token verification — must be PUBLIC (chicken-and-egg: you can't
 // require admin auth on the very endpoint that grants it). Mounted BEFORE the

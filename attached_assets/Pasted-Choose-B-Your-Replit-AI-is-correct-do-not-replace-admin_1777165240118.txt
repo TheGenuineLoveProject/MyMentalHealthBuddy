@@ -1,0 +1,79 @@
+Choose B.
+
+Your Replit AI is correct: do not replace admin.mjs. The admin backend is already working. The real next issue is likely frontend session/auth token routing, especially because your screenshot shows client/src/lib/api.ts does not attach the saved token to API requests.
+
+Paste this into Replit AI:
+
+B. Debug the real admin login/session bug specifically. Do not replace server/routes/admin.mjs. Do not delete admin routes.
+Goal:
+Fix frontend session persistence and admin access without breaking existing backend admin endpoints.
+Evidence:
+client/src/lib/api.ts currently calls /api/ai/chat and /api/ai/history without Authorization headers. This same missing token pattern may be why admin UI redirects to login or fails admin access.
+Tasks in order:
+1. Audit frontend auth/session files:
+- client/src/lib/api.ts
+- client/src/context/AuthContext.*
+- client/src/pages/Login.*
+- client/src/pages/Admin*
+- client/src/components/*Admin*
+- any AdminGuard/ProtectedRoute files
+2. Create or update a single canonical API client:
+client/src/lib/api.ts
+Requirements:
+- read token from localStorage
+- attach Authorization: Bearer <token>
+- preserve Content-Type application/json
+- handle 401 by clearing token only when auth endpoint confirms invalid session
+- do not break existing aiChat and aiHistory functions
+3. Add these exports if missing:
+- apiFetch(path, options)
+- getAuthToken()
+- setAuthToken(token)
+- clearAuthToken()
+4. Update admin dashboard/API calls to use apiFetch.
+5. Verify /api/auth/me or equivalent user endpoint returns:
+{
+  ok: true,
+  user: {
+    id,
+    email,
+    role
+  }
+}
+6. If user.role === "admin", admin login must route to:
+ /admin/dashboard
+7. If user is not admin, route to:
+ /app
+8. Do not modify:
+- server/routes/admin.mjs
+- orchestrator
+- provider
+- memory
+- profile
+- crisis logic
+- /api/ai/chat behavior
+9. Verify:
+- normal login works
+- admin login works
+- refresh keeps user logged in
+- /admin/dashboard loads
+- /api/admin/dashboard returns 200 with token
+- /api/admin/dashboard returns 401/403 without proper token
+Return:
+- files changed
+- exact bug found
+- exact fix applied
+- verification results
+
+Then run:
+
+npm run dev
+
+After session/admin works, execute in this order:
+
+1. MAKE ADMIN DASHBOARD ELITE
+2. AI Emotional Intelligence Layer
+3. Avatar with real-time reactions
+4. User Personal Healing Space
+
+Do not build those until admin/session is stable.
