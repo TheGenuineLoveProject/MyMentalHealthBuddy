@@ -18,6 +18,7 @@ import { apiRequest } from "../lib/queryClient.js";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import OperationsPanel from "@/components/admin/OperationsPanel";
 
 export default function Admin() {
   const { user } = useAuth();
@@ -168,6 +169,7 @@ export default function Admin() {
     { id: "content", label: "Content", icon: FileText },
     { id: "system", label: "System", icon: Server },
     { id: "security", label: "Security", icon: Shield },
+    { id: "operations", label: "Operations", icon: Gauge },
   ];
 
   return (
@@ -328,6 +330,11 @@ export default function Admin() {
             {activeView === "security" && (
               <div role="tabpanel" id="panel-security" aria-labelledby="nav-security">
                 <SecuritySection stats={stats} />
+              </div>
+            )}
+            {activeView === "operations" && (
+              <div role="tabpanel" id="panel-operations" aria-labelledby="nav-operations">
+                <OperationsPanel />
               </div>
             )}
           </div>
