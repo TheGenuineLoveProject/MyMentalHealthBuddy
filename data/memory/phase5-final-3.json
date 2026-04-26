@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I am a failure"
+  },
+  {
+    "role": "assistant",
+    "content": "That feeling of failure is heavy. It's important to remember that everyone encounters setbacks and challenges. What’s one small step you can take today to move forward?"
+  }
+]

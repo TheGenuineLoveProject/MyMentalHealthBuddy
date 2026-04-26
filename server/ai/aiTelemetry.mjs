@@ -57,6 +57,29 @@ const ALLOWED_EVENT_TYPES = new Set([
         "buddy_share_shown",
         "buddy_share_clicked",
         "buddy_accessibility_ready",
+        // Phase 5 audit (v2.1) caught a pre-existing v1.5 omission:
+        // `buddy_tool_expression` has been emitted by Start.tsx since v1.5
+        // but was never added to this allowlist, so events were silently
+        // dropped server-side. Adding now so the v1.5 → v2.1 transition
+        // (where `buddyState` may now come from response text instead of
+        // tool id) can be analysed against `buddy_response_alignment` and
+        // `user_feedback` thumbs.
+        //   buddy_tool_expression  { toolId, buddyState }
+        //     fires once per unique active toolId (deduped via ref).
+        "buddy_tool_expression",
+        // Phase 1.4 recovery / soft-landing transitions (also pre-existing,
+        // also previously silently dropped — picked up during Phase 5 audit).
+        //   buddy_state_recovered            { from, to }
+        //   buddy_completion_soft_landing    { from, to }
+        "buddy_state_recovered",
+        "buddy_completion_soft_landing",
+        // Phase 1.4 grounding-helper visibility — fires when the helper
+        // copy below the avatar becomes visible during anxious/overwhelmed.
+        //   buddy_grounding_visible  { state }
+        "buddy_grounding_visible",
+        // Phase 1.6 memory-aware visual baseline application.
+        //   buddy_baseline_applied  { baseline, currentStreak, daysAway }
+        "buddy_baseline_applied",
         // ─────────────────────────────────────────────────────────────────
         // Phase 4.5 (v1.21) — soft-launch feedback signal per advisor's
         // STEP 4 brief ("Add Lightweight Logging — NO AI CHANGE").
@@ -73,6 +96,19 @@ const ALLOWED_EVENT_TYPES = new Set([
         // PII boundary: same as the buddy_* family — bucketed fields only,
         // no message text, no user IDs beyond the existing guestId envelope.
         "user_feedback",
+        // ─────────────────────────────────────────────────────────────────
+        // Phase 5 (v2.1) — Buddy Engine response-aligned reactions.
+        //
+        //   buddy_response_alignment  { state }
+        //     fires from Start.tsx master effect when the reply-tone parser
+        //     (mapResponseToBuddyState) yields a non-calm BuddyState; lets
+        //     us A/B whether response-aligned reactions correlate with
+        //     thumbs-up user_feedback over the soft-launch window.
+        //
+        // PII boundary: state is one of the canonical BuddyState enum
+        // values ("anxious" | "overwhelmed" | "sad" | "encouraged" |
+        // "crisis"). No reply text, no user message, no toolId.
+        "buddy_response_alignment",
 ]);
 
 export function logEvent({ type, guestId = null, metadata = {} } = {}) {

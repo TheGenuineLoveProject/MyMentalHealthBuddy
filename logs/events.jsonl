@@ -98,3 +98,13 @@
 {"type":"buddy_accessibility_ready","guestId":"g_mof67lqa_7w15ew","metadata":{},"ts":1777171811272}
 {"type":"user_feedback","guestId":"final-fb-yes","metadata":{"surface":"start","helpful":true,"toolId":"box_breath","buddyState":"calm","turnId":"box_breath"},"ts":1777171955553}
 {"type":"user_feedback","guestId":"final-fb-no","metadata":{"surface":"ai-chat","helpful":false,"turnId":5},"ts":1777171955590}
+{"type":"buddy_response_alignment","guestId":"phase5-tel","metadata":{"state":"anxious"},"ts":1777172282709}
+{"type":"buddy_response_alignment","guestId":"gate-p5-003","metadata":{"state":"anxious"},"ts":1777172429625}
+{"type":"user_feedback","guestId":"gate-p5-004","metadata":{"surface":"start","helpful":true},"ts":1777172429661}
+{"type":"buddy_tool_expression","guestId":"gate-tel-buddy_tool_expression","metadata":{"test":1},"ts":1777172579388}
+{"type":"buddy_state_recovered","guestId":"gate-tel-buddy_state_recovered","metadata":{"test":1},"ts":1777172579425}
+{"type":"buddy_completion_soft_landing","guestId":"gate-tel-buddy_completion_soft_landing","metadata":{"test":1},"ts":1777172579462}
+{"type":"buddy_grounding_visible","guestId":"gate-tel-buddy_grounding_visible","metadata":{"test":1},"ts":1777172579498}
+{"type":"buddy_baseline_applied","guestId":"gate-tel-buddy_baseline_applied","metadata":{"test":1},"ts":1777172579534}
+{"type":"buddy_response_alignment","guestId":"gate-tel-buddy_response_alignment","metadata":{"test":1},"ts":1777172579574}
+{"type":"user_feedback","guestId":"gate-tel-user_feedback","metadata":{"test":1},"ts":1777172579614}

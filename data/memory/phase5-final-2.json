@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I feel anxious"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you're experiencing some anxiety right now. Let's take a moment to ground ourselves with some box breathing together. \n\nInhale deeply for 4 seconds… 1, 2, 3, 4.  \nHold that breath for 4 seconds… 1, 2, 3, 4.  \nNow, exhale slowly for 4 seconds… 1, 2, 3, 4.  \nHold that breath for 4 seconds… 1, 2, 3, 4.  \n\nTake what serves you from this moment. You know yourself best."
+  }
+]

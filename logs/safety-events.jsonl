@@ -75,3 +75,8 @@
 {"id":"safe_1777171077029_mdivjn","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:37:57.029Z"}
 {"id":"safe_1777171687490_u5xs4d","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:48:07.490Z"}
 {"id":"safe_1777171805832_f94ykd","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:50:05.832Z"}
+{"id":"safe_1777172282668_4svb6r","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:58:02.668Z"}
+{"id":"safe_1777172297799_byfv24","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:58:17.799Z"}
+{"id":"safe_1777172393583_d10jt7","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:59:53.583Z"}
+{"id":"safe_1777172429587_3hrm0z","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T03:00:29.587Z"}
+{"id":"safe_1777172579349_zdbz91","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T03:02:59.349Z"}

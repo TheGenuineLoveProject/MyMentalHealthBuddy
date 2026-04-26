@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I feel anxious"
+  },
+  {
+    "role": "assistant",
+    "content": "It’s tough to feel that way. Let's try a breathing exercise to help ground you. \n\nInhale deeply for 4 seconds… 1, 2, 3, 4.  \nNow hold that breath for 4 seconds… 1, 2, 3, 4.  \nExhale slowly for 4 seconds… 1, 2, 3, 4.  \nHold that breath for another 4 seconds… 1, 2, 3, 4.  \n\nTake a moment to notice how you feel. You can repeat this as many times as you need. Take what serves you."
+  }
+]

@@ -291,6 +291,51 @@ function mapToBuddyState({
 }
 
 /**
+ * v2.1 — Phase 5: Response-Aligned Reactions.
+ *
+ * Map the AI reply text → BuddyState so Buddy's avatar reflects the
+ * EMOTIONAL TONE of the actual response, not just the tool/input.
+ *
+ * Spec is the advisor's regex set, IMPLEMENTED EXACTLY (per "don't be
+ * creative, be surgical" mandate). Order matches advisor's spec:
+ *   overwhelmed → anxious → sad → encouraged → crisis → calm
+ *
+ * KNOWN LIMITATIONS (call out for Phase 5.1 tuning, do not silently fix):
+ *   • "breathe" does NOT substring-match "breathing" (different last
+ *     letters). Phase 4 replies of the form "let's try a breathing
+ *     exercise" therefore return calm from this regex; the master
+ *     useEffect's v1.5 fallback then maps via toolId="box_breathing"
+ *     → anxious, so Buddy still lands on the right state for tool
+ *     turns. PURE-REPLY anxious turns (no tool returned) currently
+ *     fall through to calm — that's the case worth tuning in 5.1.
+ *   • "heavy" appears in many empathic acknowledgments (sad, defeated,
+ *     overwhelmed contexts), so a "I am a failure" reply that opens
+ *     with "That feels really heavy" maps to overwhelmed rather than
+ *     sad → encouraged. With no tool returned the v1.5 fallback also
+ *     yields calm, so overwhelmed is the final state.
+ *   • These limitations are EXPECTED to surface in user_feedback
+ *     thumbs-down events; tune the regex (or move to a tone classifier)
+ *     in Phase 5.1 once the soft-launch data tells us which mappings
+ *     feel off most often.
+ *
+ * Returns "calm" on no match — the master useEffect treats "calm" as
+ * no-signal and falls through to the existing v1.5 tool/module mapping
+ * (mapToBuddyState) so we never regress prior attribution.
+ *
+ * Pure function. No AI calls, no fetch, no side effects.
+ */
+function mapResponseToBuddyState(text = ""): BuddyState {
+  const t = String(text || "").toLowerCase();
+  if (!t) return "calm";
+  if (/(overwhelmed|too much|heavy)/.test(t)) return "overwhelmed";
+  if (/(anxious|breathe|slow down)/.test(t)) return "anxious";
+  if (/(sad|hurt|that feeling)/.test(t)) return "sad";
+  if (/(you can|small step|try this)/.test(t)) return "encouraged";
+  if (/(safe|not alone|reach out)/.test(t)) return "crisis";
+  return "calm";
+}
+
+/**
  * v1.5 — Tool-specific helper copy shown beneath BuddyAvatar.
  * Keys are the canonical toolIds returned by the AI / orchestrator.
  * Pure visual; no AI / route / response changes.
@@ -381,6 +426,13 @@ export default function Start() {
   // we don't re-fire on every Buddy state change while the same tool is
   // still showing.
   const buddyToolExpressionRef = useRef<string>("");
+  // v2.1 (Phase 5) — dedupe `buddy_response_alignment` telemetry per
+  // unique reply text. The master effect runs on every selectedToolId /
+  // result update, but the response-aligned state only changes when the
+  // reply text itself changes. Without this latch we'd re-fire the
+  // alignment event on baseline-decay re-runs and other unrelated
+  // re-renders, swamping the user_feedback correlation signal.
+  const buddyResponseAlignmentRef = useRef<string>("");
   // v1.6 — one-shot baseline application per signal-set. Without this,
   // v1.4 recovery (calm) and v1.6 baseline (non-calm) would ping-pong
   // forever every 20 seconds. The signals fingerprint resets the latch
@@ -527,20 +579,57 @@ export default function Start() {
       setBuddyState("encouraged");
       return;
     }
-    // Map from any signal we have: AI response (preferred) OR the
-    // entry-point button (immediate, available before AI responds).
+    // v2.1 dedupe-reset: when result transitions to a new value (or to
+    // null on reset), clear the response-alignment latch so the next
+    // turn can emit even if the model happens to return identical text.
+    // Without this, repeated identical replies across turns would be
+    // suppressed and we'd lose the per-turn correlation with
+    // user_feedback thumbs. The latch is then re-armed below.
+    if (!result?.response?.reply) {
+      buddyResponseAlignmentRef.current = "";
+    }
+    // v2.1 (Phase 5) — Response-Aligned Reactions.
+    // Try the response-tone parser FIRST. Only when it yields "calm"
+    // (no emotion-word match) do we fall through to the existing v1.5
+    // tool/module mapping. This preserves v1.5 attribution for tool
+    // turns that happen to lack the regex's vocabulary, while letting
+    // pure-reply turns (no tool returned) still drive Buddy.
+    //
+    // Priority order (advisor's spec):
+    //   1. crisis        (handled above — always wins)
+    //   2. responseState (this block, when reply text matches)
+    //   3. toolState     (existing mapToBuddyState — v1.5 fallback)
+    //   4. baseline      (separate effect, only when buddyState=calm)
     if (result?.response || selectedToolId) {
+      const replyText = String(result?.response?.reply || "");
+      const responseState = mapResponseToBuddyState(replyText);
       // v1.5: support both `tool.tool.id` (orchestrator double-nesting)
       // AND `tool.id` (flatter shape) so future server changes don't
       // silently drop tool-aware mapping.
       const responseToolId =
         result?.response?.tool?.tool?.id ?? result?.response?.tool?.id ?? "";
-      const nextState = mapToBuddyState({
+      const toolMappedState = mapToBuddyState({
         modules: result?.response?.modules,
         toolId: responseToolId,
         selectedToolId: selectedToolId ?? undefined,
       });
+      // responseState wins unless it's "calm" (no signal); then v1.5
+      // tool mapping takes over so we never regress attribution.
+      const nextState: BuddyState =
+        responseState !== "calm" ? responseState : toolMappedState;
       setBuddyState(nextState);
+      // v2.1 telemetry — emit once per unique reply text so we can A/B
+      // whether response-aligned states correlate with thumbs-up
+      // user_feedback. Only when responseState actually fired (i.e.
+      // !="calm") so the signal stays high-S/N.
+      if (
+        responseState !== "calm" &&
+        replyText &&
+        replyText !== buddyResponseAlignmentRef.current
+      ) {
+        buddyResponseAlignmentRef.current = replyText;
+        track("buddy_response_alignment", { state: responseState });
+      }
       // v1.5 telemetry — emit once per unique active toolId. Captures
       // the freshly-computed nextState (no stale closure). Additive
       // event only; no message text logged.
