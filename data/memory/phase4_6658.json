@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I feel overwhelmed"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you're carrying a lot right now. Where do you feel that overwhelm in your body?"
+  }
+]

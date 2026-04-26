@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "There is too much going on"
+  },
+  {
+    "role": "assistant",
+    "content": "That weight can feel heavy. Let's take a moment to check in with your emotions. \n\n1. What feeling comes up for you right now?  \n2. Where in your body do you feel that?  \n3. What does this feeling need from you?  \n\nTake your time with each question."
+  }
+]

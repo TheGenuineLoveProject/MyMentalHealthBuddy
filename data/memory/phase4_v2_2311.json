@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "There is too much going on"
+  },
+  {
+    "role": "assistant",
+    "content": "That feeling of overwhelm is heavy. \n\nLet's take a moment to check in with yourself. What is the feeling you're experiencing right now?"
+  }
+]

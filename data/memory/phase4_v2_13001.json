@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "I feel anxious"
+  },
+  {
+    "role": "assistant",
+    "content": "It's understandable to feel anxious right now. Let's take a moment to breathe together. \n\nInhale deeply for 4 counts... 1, 2, 3, 4.  \nHold that breath for 4 counts... 1, 2, 3, 4.  \nNow, exhale slowly for 4 counts... 1, 2, 3, 4.  \nHold the empty breath for 4 counts... 1, 2, 3, 4.  \n\nTake what serves you. You know yourself best."
+  }
+]

@@ -16,16 +16,34 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [], infe
         // Base defaults
         let tone = "warm, validating, non-clinical";
         let verbosity = tier === "high" ? "moderate" : "concise";
-        let structure = "reflect → validate → 1–2 options";
+        // Phase 4 (v1.20): explicit 3-part micro-structure enforced at the
+        // system-message layer. The model still has freedom of phrasing, but
+        // sequencing and length are now contractual rather than implied.
+        let structure = "validation (≤8 words, mirror feeling) → grounding or clarity (1 sentence) → one small step (1 sentence)";
         const constraints = [
                 "no diagnosis",
                 "no medical/legal advice",
                 "avoid absolute claims",
-                // Validation-line precision: emotional acknowledgment leads, brief.
-                "Open with a short emotional acknowledgment (max 6–8 words) that reflects feeling, not facts, before any guidance.",
+                // Phase 4 (v1.20): validation-line precision tightened from
+                // 6–8 → 4–8 words per advisor brief. Shorter openers feel
+                // more immediate ("That sounds heavy.") and less performative.
+                "Open with a short emotional acknowledgment (4–8 words) that reflects feeling, not facts, before any guidance.",
                 "Vary the phrasing of that opening across responses — never reuse the same sentence as a recent turn, and do not echo any phrase-bank hint verbatim.",
-                // Cognitive load cap when we're not actively walking through an exercise.
-                "Keep guidance to 1–2 concrete steps unless the user is mid-exercise.",
+                // Phase 4 (v1.20): tighten cognitive load — ONE concrete step
+                // per turn instead of 1–2. Mid-exercise (tool walking) still
+                // gets to expand because executeTool injects its own script.
+                "Limit guidance to ONE concrete next step per turn unless the user is mid-exercise.",
+                // Phase 4 (v1.20): cap total response length so replies stay
+                // human-scale. Crisis path overrides via its own structure.
+                "Keep the entire reply to 2–3 sentences total when not mid-exercise.",
+                // Phase 4 (v1.20): outlaw filler reassurance. The phrase
+                // "you are not alone" is intentionally allow-listed for the
+                // crisis branch (high-risk path injects its own resources).
+                "Avoid generic reassurance phrases such as \"I'm here for you\" or \"I understand how you feel\"; reserve \"you are not alone\" for crisis-routing replies only.",
+                // Phase 4 (v1.20): every reply must land somewhere — an
+                // action the user can actually take, or a perspective shift
+                // (reframe). Pure sentiment without traction is not allowed.
+                "Every reply must contain either a concrete action the user can take now OR a clear reframe — never sentiment alone.",
                 // Escalation guardrail.
                 "If emotional intensity rises within the message, slow the pace and prioritize grounding.",
         ];
@@ -81,12 +99,16 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [], infe
         // every active state still contributes its associated interventions. This
         // replaces the previous implicit last-write-wins ordering, which was
         // brittle to refactor and hard to reason about.
+        // Phase 4 (v1.20): state-specific tone strings sharpened per advisor
+        // brief. Each string now carries a directive cue the model can pattern
+        // against (e.g. "one small step" for overwhelm, "no praise inflation"
+        // for self_doubt) rather than abstract adjectives alone.
         const STATE_TONE_PRIORITY = [
-                ["overwhelm", "slow, grounding, simplifying"],
-                ["sadness", "tender, slow, validating"],
-                ["self_doubt", "reassuring, stabilizing"],
-                ["avoidance", "gentle, non-pressuring"],
-                ["anxiety", "calm, steadying"],
+                ["overwhelm", "slow, grounding, simplifying — emphasize one small step, reduce choices"],
+                ["sadness", "tender, slow, validating — no urgency, sit with the feeling"],
+                ["self_doubt", "neutral, reframing — no praise inflation, no judgment"],
+                ["avoidance", "gentle, non-pressuring — invite, do not push"],
+                ["anxiety", "calm, steadying, present-moment focused — slow language, grounding verbs"],
         ];
         // Module → state fallback: when inference returns nothing but a module
         // fired, derive a probable state so the tone branch still runs instead
@@ -160,12 +182,23 @@ export function buildResponsePolicy({ risk, profile, scoring, modules = [], infe
 export function renderPolicySystemMessage(policy) {
         if (!policy) return "";
         const { tone, verbosity, structure, interventions, constraints } = policy;
+        // Phase 4 (v1.20): render constraints as a numbered list rather than
+        // a single `;`-joined run-on sentence. The flat-sentence form was
+        // weakening per-constraint salience for the model — adherence to
+        // later items (length cap, action-or-reframe) was less consistent
+        // than to earlier ones. A numbered list keeps each rule as its own
+        // attended unit. Tone/verbosity/structure/interventions retain the
+        // single-line dash form because they're singular values, not lists.
+        const constraintLines = (constraints || [])
+                .map((c, i) => `  ${i + 1}. ${c}`)
+                .join("\n");
         return [
                 "Response policy (follow strictly):",
                 `- Tone: ${tone}`,
                 `- Verbosity: ${verbosity}`,
                 `- Structure: ${structure}`,
                 `- Interventions: ${(interventions || []).join(", ")}`,
-                `- Constraints: ${(constraints || []).join("; ")}`,
+                "- Constraints:",
+                constraintLines,
         ].join("\n");
 }
