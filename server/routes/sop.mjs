@@ -185,8 +185,21 @@ async function probe(check, baseUrl) {
       headers: { "x-sop-probe": "1", accept: "application/json,text/plain;q=0.5,*/*;q=0.1" },
     });
     const elapsedMs = Date.now() - started;
+    // Per architect review: rate-limit 429 on /api/admin/* paths is a
+    // legitimate auth-chain response (adminLimiter mounted BEFORE requireAuth)
+    // — but we surface it as an explicit WARN, NOT a silent PASS, so an
+    // operator can see when burst behaviour or limiter tuning is degrading
+    // the admin experience. The check still does not flap to FAIL.
+    const isAdminLimiterTrip = res.status === 429 && check.path.startsWith("/api/admin/");
     const inExpected = check.expect.includes(res.status);
-    let status = inExpected ? "pass" : (res.status >= 500 ? "fail" : "warn");
+    let status;
+    if (isAdminLimiterTrip) {
+      status = "warn";
+    } else if (inExpected) {
+      status = "pass";
+    } else {
+      status = res.status >= 500 ? "fail" : "warn";
+    }
 
     // Security guard: a "protected" route returning 2xx without an Authorization
     // header is a FAIL even if it's "expected" — proves the route exists but
@@ -203,13 +216,14 @@ async function probe(check, baseUrl) {
       status,
       message:
         status === "pass" ? `OK (${res.status})` :
+        isAdminLimiterTrip ? `Rate-limited (429) — admin limiter tripped during probe; tune limiter or stagger refresh` :
         status === "warn" ? `Unexpected status ${res.status} (expected ${check.expect.join("/")})` :
         check.protected && res.status < 400 ? `SECURITY: returned ${res.status} without auth — must be 401/403` :
         `Error status ${res.status}`,
       httpStatus: res.status,
       elapsedMs,
       expected: check.expect,
-      remediation: status === "pass" ? null : check.remediation,
+      remediation: status === "pass" ? null : (isAdminLimiterTrip ? "Tune adminLimiter window/max in server/app.mjs or reduce SOP refresh frequency" : check.remediation),
     };
   } catch (err) {
     const elapsedMs = Date.now() - started;

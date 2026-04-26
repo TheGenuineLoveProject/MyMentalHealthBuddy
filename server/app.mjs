@@ -293,7 +293,11 @@ const EXTENDED_ROUTES = [
   { mount: "/api/metrics",       file: "./routes/metrics.mjs" },
   { mount: "/api/analytics",     file: "./routes/analytics.mjs" },
   // ─── Round 2 (extended-routes): user-facing wellness + content surfaces ───
-  { mount: "/api/dashboard",     file: "./routes/dashboard.mjs",     auth: "optional" },
+  // Note: /api/dashboard uses auth:"optional" at the mount but ui-dashboard.mjs
+  // applies router.use(requireAuth) internally — net effect is strict auth (401
+  // when unauthenticated). Do NOT change to auth:"required" without first
+  // removing the inner requireAuth, or you'll double-run the middleware.
+  { mount: "/api/dashboard",     file: "./routes/ui-dashboard.mjs",  auth: "optional" },
   { mount: "/api/community",     file: "./routes/community.mjs",     auth: "optional" },
   { mount: "/api/email",         file: "./routes/email.mjs" },
   { mount: "/api/practices",     file: "./routes/practices.mjs" },
