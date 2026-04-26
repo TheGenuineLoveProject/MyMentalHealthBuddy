@@ -215,6 +215,7 @@ const ADMIN_SUB_ROUTERS = [
   { mount: "/api/admin/security",            file: "./routes/admin-security.mjs" },
   { mount: "/api/admin/audit-logs",          file: "./routes/audit-logs.mjs" },
   { mount: "/api/admin/soft-launch-metrics", file: "./routes/soft-launch-metrics.mjs" },
+  { mount: "/api/admin/sop",                 file: "./routes/sop.mjs" },
 ];
 
 const mountedAdminSub = [];

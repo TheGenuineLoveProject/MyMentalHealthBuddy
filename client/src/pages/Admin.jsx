@@ -11,7 +11,7 @@ import {
   UserPlus, UserCheck, UserX, Mail, CreditCard,
   Target, Award, Flame, BookOpen, Lightbulb,
   AlertCircle, Info, ChevronRight, ExternalLink,
-  LayoutDashboard, Layers, Gauge
+  LayoutDashboard, Layers, Gauge, ClipboardCheck
 } from "lucide-react";
 import SEO from "../components/SEO";
 import { apiRequest } from "../lib/queryClient.js";
@@ -19,6 +19,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 import OperationsPanel from "@/components/admin/OperationsPanel";
+import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
 
 async function fetchAdminMetric(url) {
   const userToken = (typeof localStorage !== "undefined" && localStorage.getItem("mmhb_token")) || null;
@@ -224,6 +225,7 @@ export default function Admin() {
     { id: "system", label: "System", icon: Server },
     { id: "security", label: "Security", icon: Shield },
     { id: "operations", label: "Operations", icon: Gauge },
+    { id: "sop-monitor", label: "SOP Monitor", icon: ClipboardCheck },
   ];
 
   return (
@@ -397,6 +399,11 @@ export default function Admin() {
             {activeView === "operations" && (
               <div role="tabpanel" id="panel-operations" aria-labelledby="nav-operations">
                 <OperationsPanel />
+              </div>
+            )}
+            {activeView === "sop-monitor" && (
+              <div role="tabpanel" id="panel-sop-monitor" aria-labelledby="nav-sop-monitor">
+                <SOPMonitorPanel />
               </div>
             )}
           </div>
