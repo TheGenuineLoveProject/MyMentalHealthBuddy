@@ -156,6 +156,19 @@ app.use("/api/ai/business", aiBusinessRoutes);
 // Auth routes (mount before AI routes so /api/auth/* works)
 app.use("/api/auth", authRoutes);
 
+// GitHub OAuth: file is complete, GITHUB_CLIENT_ID/_SECRET are configured.
+// Was previously orphaned (built but never mounted) → frontend's GitHub login
+// button silently 404'd. Mounted at /api/auth so /api/auth/github and
+// /api/auth/github/callback resolve correctly without colliding with the
+// /register, /login, /me routes already on authRoutes.
+try {
+  const { default: githubAuthRoutes } = await import("./routes/github-auth.mjs");
+  app.use("/api/auth", githubAuthRoutes);
+  console.log("[boot] github oauth routes mounted at /api/auth/github");
+} catch (err) {
+  console.warn("[boot] github oauth routes skipped:", err?.message || err);
+}
+
 // Replit-integrations auth (registers GET /api/auth/user — consumed by
 // client/src/context/AuthContext.jsx::fetchReplitUser to hydrate user/role
 // on page load. Without this, AuthContext gets a 404 and falls back to
