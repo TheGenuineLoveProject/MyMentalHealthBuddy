@@ -57,6 +57,22 @@ const ALLOWED_EVENT_TYPES = new Set([
         "buddy_share_shown",
         "buddy_share_clicked",
         "buddy_accessibility_ready",
+        // ─────────────────────────────────────────────────────────────────
+        // Phase 4.5 (v1.21) — soft-launch feedback signal per advisor's
+        // STEP 4 brief ("Add Lightweight Logging — NO AI CHANGE").
+        //
+        //   user_feedback  { surface, helpful, toolId?, buddyState?, turnId? }
+        //     fires from FeedbackPrompt on /start (after the AI reply panel)
+        //     and /ai-chat (after the most recent assistant message). Never
+        //     fires on impression — only on explicit thumb click.
+        //
+        // surface ∈ "start" | "ai-chat" | "chat" so we can A/B which
+        // surface is producing the most "missed-the-mark" signal during
+        // soft launch. helpful is a strict boolean (no nulls, no scales).
+        //
+        // PII boundary: same as the buddy_* family — bucketed fields only,
+        // no message text, no user IDs beyond the existing guestId envelope.
+        "user_feedback",
 ]);
 
 export function logEvent({ type, guestId = null, metadata = {} } = {}) {

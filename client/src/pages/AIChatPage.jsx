@@ -10,6 +10,7 @@ import { useAuth } from "@/context/AuthContext";
 import { FEATURE_ACCESS } from "@/config/featureAccess";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import FeedbackPrompt from "@/components/FeedbackPrompt";
 import "../styles/sacred-visuals.css";
 
 const INITIAL_MESSAGE = {
@@ -297,6 +298,18 @@ export default function AIChatPage() {
                 }`}
               >
                 <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                {/* Phase 4.5 (v1.21): inline feedback prompt on the most
+                    recent assistant message only — skip the initial greeting
+                    (idx === 0) and skip mid-history messages to keep the
+                    chat surface clean. Fires only on explicit click. */}
+                {message.role === "assistant" &&
+                  idx === messages.length - 1 &&
+                  idx > 0 &&
+                  !chatMutation.isPending && (
+                    <div className="mt-3 pt-3 border-t border-slate-200/60 dark:border-slate-700/60">
+                      <FeedbackPrompt surface="ai-chat" turnId={idx} />
+                    </div>
+                  )}
               </div>
               {message.role === "user" && (
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--primary)] to-purple-600 flex items-center justify-center flex-shrink-0 shadow-md" aria-hidden="true">

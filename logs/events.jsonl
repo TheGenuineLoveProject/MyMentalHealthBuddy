@@ -90,3 +90,11 @@
 {"type":"buddy_panel_viewed","guestId":"g_modileud_ydr8d3","metadata":{"surface":"start","state":"calm"},"ts":1777072091319}
 {"type":"start_page_click","guestId":"g_modileud_ydr8d3","metadata":{},"ts":1777072091320}
 {"type":"buddy_accessibility_ready","guestId":"g_modileud_ydr8d3","metadata":{},"ts":1777072091323}
+{"type":"user_feedback","guestId":"e2e-fb-yes","metadata":{"surface":"start","helpful":true,"toolId":"box-breath","buddyState":"calm","turnId":"box-breath"},"ts":1777171787886}
+{"type":"user_feedback","guestId":"e2e-fb-no","metadata":{"surface":"ai-chat","helpful":false,"turnId":3},"ts":1777171787925}
+{"type":"user_feedback","guestId":"gate-final-003","metadata":{"surface":"start","helpful":true},"ts":1777171805887}
+{"type":"buddy_panel_viewed","guestId":"g_mof67lqa_7w15ew","metadata":{"surface":"start","state":"calm"},"ts":1777171811269}
+{"type":"start_page_click","guestId":"g_mof67lqa_7w15ew","metadata":{},"ts":1777171811272}
+{"type":"buddy_accessibility_ready","guestId":"g_mof67lqa_7w15ew","metadata":{},"ts":1777171811272}
+{"type":"user_feedback","guestId":"final-fb-yes","metadata":{"surface":"start","helpful":true,"toolId":"box_breath","buddyState":"calm","turnId":"box_breath"},"ts":1777171955553}
+{"type":"user_feedback","guestId":"final-fb-no","metadata":{"surface":"ai-chat","helpful":false,"turnId":5},"ts":1777171955590}

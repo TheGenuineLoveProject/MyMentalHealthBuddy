@@ -73,3 +73,5 @@
 {"id":"safe_1777169790466_rpgwgn","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:16:30.466Z"}
 {"id":"safe_1777170859834_pg11gr","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:34:19.834Z"}
 {"id":"safe_1777171077029_mdivjn","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:37:57.029Z"}
+{"id":"safe_1777171687490_u5xs4d","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:48:07.490Z"}
+{"id":"safe_1777171805832_f94ykd","route":"/api/ai/chat","type":"crisis_short_circuit","category":"crisis","severity":"high","signal":"safety_guard_crisis","meta":{},"timestamp":"2026-04-26T02:50:05.832Z"}

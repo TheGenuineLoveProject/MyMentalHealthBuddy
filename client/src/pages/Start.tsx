@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
 import BuddyPanel from "@/components/avatar/BuddyPanel";
 import type { BuddyState } from "@/lib/avatarState";
+import FeedbackPrompt from "@/components/FeedbackPrompt";
 
 type ToolPayload = {
   tool: { id: string; title: string; type: string; durationMin: number };
@@ -839,6 +840,24 @@ export default function Start() {
                   {body}
                 </p>
               )}
+              {/* Phase 4.5 (v1.21): inline lightweight user_feedback signal.
+                  Placed at the bottom of the reply panel — visible without
+                  scrolling on most viewports, but never intercepts the user's
+                  flow with the tool/share affordances below. Fires only on
+                  explicit click, never on impression. */}
+              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/60">
+                <FeedbackPrompt
+                  surface="start"
+                  /* Prefer the CANONICAL server-resolved tool id (the actual
+                     intervention served) over the button id the user clicked,
+                     so attribution matches what was delivered, not what was
+                     requested. Falls back to button id, then "reply" when no
+                     tool was returned (pure-reply turns). */
+                  toolId={result?.response?.tool?.tool?.id ?? selectedToolId ?? "reply"}
+                  buddyState={buddyState}
+                  turnId={result?.response?.tool?.tool?.id ?? selectedToolId ?? "reply"}
+                />
+              </div>
             </section>
           );
         })()}
