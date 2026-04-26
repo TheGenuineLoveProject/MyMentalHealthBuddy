@@ -1,0 +1,62 @@
+# =============================================================================
+# Replit Deploy Ignore
+# Keeps deploy upload small. Without this, the repo is 4.7GB and the deploy
+# uploader times out before `npm install` can start. Excluding these folders
+# drops the upload to ~30MB of actual app code.
+#
+# IMPORTANT: This file does NOT delete anything from disk — it only tells the
+# Replit deploy uploader which paths to skip. Local backups, attached_assets,
+# and caches all stay where they are; they just aren't shipped to the build
+# container.
+# =============================================================================
+
+# ---- Local backups (huge, never needed in production) ----
+backups/
+.backups_deleting/
+.quarantine/
+_quarantine/
+
+# ---- Replit/local state (regenerated automatically) ----
+.local/
+.cache/
+.pythonlibs/
+
+# ---- Build outputs (the deploy build regenerates these) ----
+node_modules/
+dist/
+client/dist/
+
+# ---- Version control ----
+.git/
+.gitignore
+.replitignore
+
+# ---- Dev artifacts not needed at runtime ----
+logs/
+screenshots/
+static-export/
+reports/
+docs/
+data/
+
+# ---- User-uploaded reference images (path alias declared but no code imports) ----
+# Real brand/marketing assets live in public/brand/ and client/public/ and are NOT
+# excluded — those ship with the build.
+attached_assets/
+
+# ---- OS / IDE noise ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+*.temp
+*.log
+
+# ---- Secrets (set via Replit Secrets, never committed/shipped) ----
+.env
+.env.*
+publickey.asc
+gpg-batch
