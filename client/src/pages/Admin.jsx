@@ -20,6 +20,33 @@ import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 import OperationsPanel from "@/components/admin/OperationsPanel";
 
+async function fetchAdminMetric(url) {
+  const userToken = (typeof localStorage !== "undefined" && localStorage.getItem("mmhb_token")) || null;
+  const sessToken = (typeof sessionStorage !== "undefined" && sessionStorage.getItem("adminSessionToken")) || null;
+  // Build candidate token list in preference order, dedup, drop falsy.
+  // Tries the user JWT first; if it 401/403s (e.g. user role !== admin), falls
+  // back to the legacy admin session token. This preserves AdminGuard's dual-
+  // proof model (admin role OR verified admin session can both reach metrics).
+  const candidates = [userToken, sessToken].filter((t, i, a) => t && a.indexOf(t) === i);
+  if (candidates.length === 0) {
+    const res = await fetch(url, { credentials: "include" });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    return res.json();
+  }
+  let lastErr = null;
+  for (const token of candidates) {
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+      credentials: "include",
+    });
+    if (res.ok) return res.json();
+    lastErr = new Error(`${res.status} ${res.statusText}`);
+    // Only retry with the next candidate on auth-class failures.
+    if (res.status !== 401 && res.status !== 403) break;
+  }
+  throw lastErr;
+}
+
 export default function Admin() {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -29,11 +56,12 @@ export default function Admin() {
   const [activeView, setActiveView] = useState("overview");
   const [adminSessionValid, setAdminSessionValid] = useState(null); // null = checking, true = valid, false = invalid
   const [realtimeData, setRealtimeData] = useState({
-    activeUsers: 0,
-    requestsPerMin: 0,
-    avgResponseTime: 45,
-    errorRate: 0.02,
+    uptimeMin: null,
+    memoryMB: null,
+    dbLatencyMs: null,
+    errorRatePct: null,
   });
+  const [metricsError, setMetricsError] = useState(false);
 
   // Verify admin session token on mount
   useEffect(() => {
@@ -106,18 +134,44 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    if (adminSessionValid === true || user?.role === "admin") {
-      fetchStats();
+    if (adminSessionValid !== true && user?.role !== "admin") return;
+    fetchStats();
+
+    let cancelled = false;
+    async function loadLiveMetrics() {
+      try {
+        const [health, deep] = await Promise.all([
+          fetchAdminMetric("/api/admin/health"),
+          fetchAdminMetric("/api/admin/health-deep?format=json"),
+        ]);
+        if (cancelled) return;
+        const uptimeSec = health?.uptime?.seconds;
+        const memMB = health?.memory?.heapUsedMB;
+        const dbMs = health?.database?.latencyMs;
+        const totals = deep?.totals;
+        const probeTotal = totals
+          ? (totals.pass || 0) + (totals.warn || 0) + (totals.fail || 0)
+          : 0;
+        const errorPct = probeTotal > 0 ? (totals.fail / probeTotal) * 100 : null;
+        setRealtimeData({
+          uptimeMin: uptimeSec != null ? Math.floor(uptimeSec / 60) : null,
+          memoryMB: memMB != null ? Math.round(memMB) : null,
+          dbLatencyMs: dbMs != null ? dbMs : null,
+          errorRatePct: errorPct,
+        });
+        setMetricsError(false);
+      } catch (e) {
+        if (cancelled) return;
+        console.error("[Admin] Live metrics load failed:", e?.message || e);
+        setMetricsError(true);
+      }
     }
-    const interval = setInterval(() => {
-      setRealtimeData(prev => ({
-        activeUsers: Math.max(1, prev.activeUsers + Math.floor(Math.random() * 3) - 1),
-        requestsPerMin: Math.max(10, prev.requestsPerMin + Math.floor(Math.random() * 20) - 10),
-        avgResponseTime: Math.max(20, Math.min(100, prev.avgResponseTime + Math.floor(Math.random() * 10) - 5)),
-        errorRate: Math.max(0, Math.min(0.1, prev.errorRate + (Math.random() * 0.02) - 0.01)),
-      }));
-    }, 3000);
-    return () => clearInterval(interval);
+    loadLiveMetrics();
+    const interval = setInterval(loadLiveMetrics, 8000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
   }, [adminSessionValid, user]);
 
   // Show loading state while verifying session
@@ -222,9 +276,17 @@ export default function Admin() {
                     Live
                   </span>
                   <span style={{ color: 'var(--glp-sage-20)' }}>•</span>
-                  <span>{realtimeData.activeUsers} active users</span>
+                  <span>
+                    {realtimeData.uptimeMin != null
+                      ? `${realtimeData.uptimeMin} min uptime`
+                      : "uptime: —"}
+                  </span>
                   <span style={{ color: 'var(--glp-sage-20)' }}>•</span>
-                  <span>{realtimeData.requestsPerMin} req/min</span>
+                  <span>
+                    {realtimeData.dbLatencyMs != null
+                      ? `DB ${realtimeData.dbLatencyMs}ms`
+                      : "DB latency: —"}
+                  </span>
                 </p>
               </div>
             </div>
@@ -304,7 +366,7 @@ export default function Admin() {
           <div className="space-y-8">
             {activeView === "overview" && (
               <div role="tabpanel" id="panel-overview" aria-labelledby="nav-overview">
-                <OverviewSection stats={stats} realtimeData={realtimeData} />
+                <OverviewSection stats={stats} realtimeData={realtimeData} metricsError={metricsError} />
               </div>
             )}
             {activeView === "users" && (
@@ -398,7 +460,7 @@ function ErrorState({ error, onRetry }) {
   );
 }
 
-function OverviewSection({ stats, realtimeData }) {
+function OverviewSection({ stats, realtimeData, metricsError = false }) {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -452,11 +514,54 @@ function OverviewSection({ stats, realtimeData }) {
               <span style={{ color: 'var(--glp-sage)' }}>Live</span>
             </div>
           </div>
+          {metricsError && (
+            <div
+              className="mb-4 p-3 rounded-lg text-sm"
+              style={{ background: 'var(--glp-rose-15)', color: 'var(--glp-rose)' }}
+              data-testid="admin-metrics-error"
+            >
+              Unable to load system metrics.
+            </div>
+          )}
+          {!metricsError &&
+            realtimeData.uptimeMin == null &&
+            realtimeData.dbLatencyMs == null &&
+            realtimeData.memoryMB == null &&
+            realtimeData.errorRatePct == null && (
+              <div
+                className="mb-4 p-3 rounded-lg text-sm flex items-center gap-2"
+                style={{ background: 'var(--glp-sage-10)', color: 'var(--glp-sage)' }}
+                data-testid="admin-metrics-loading"
+              >
+                <RefreshCw className="w-4 h-4 animate-spin motion-reduce:animate-none" />
+                Loading system metrics...
+              </div>
+            )}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            <RealtimeMetric label="Active Users" value={realtimeData.activeUsers} icon={Users} color="teal" />
-            <RealtimeMetric label="Requests/min" value={realtimeData.requestsPerMin} icon={Zap} color="amber" />
-            <RealtimeMetric label="Avg Response" value={`${realtimeData.avgResponseTime}ms`} icon={Clock} color="violet" />
-            <RealtimeMetric label="Error Rate" value={`${(realtimeData.errorRate * 100).toFixed(2)}%`} icon={AlertCircle} color={realtimeData.errorRate > 0.05 ? "rose" : "emerald"} />
+            <RealtimeMetric
+              label="Uptime"
+              value={realtimeData.uptimeMin != null ? `${realtimeData.uptimeMin} min` : "Not available"}
+              icon={Clock}
+              color="teal"
+            />
+            <RealtimeMetric
+              label="Memory"
+              value={realtimeData.memoryMB != null ? `${realtimeData.memoryMB} MB` : "Not available"}
+              icon={MemoryStick}
+              color="amber"
+            />
+            <RealtimeMetric
+              label="DB Latency"
+              value={realtimeData.dbLatencyMs != null ? `${realtimeData.dbLatencyMs}ms` : "Not available"}
+              icon={Database}
+              color="violet"
+            />
+            <RealtimeMetric
+              label="Error Rate"
+              value={realtimeData.errorRatePct != null ? `${realtimeData.errorRatePct.toFixed(1)}%` : "Not available"}
+              icon={AlertCircle}
+              color={realtimeData.errorRatePct != null && realtimeData.errorRatePct > 5 ? "rose" : "emerald"}
+            />
           </div>
           
           <div className="mt-8 p-5 rounded-xl" style={{ background: 'var(--glp-sage-10)' }}>
@@ -741,7 +846,7 @@ function EngagementSection({ stats }) {
 
       <div className="rounded-2xl p-8" style={{ background: 'white', border: '1px solid var(--glp-sage-15)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
         <h3 className="text-xl font-semibold mb-6" style={{ color: 'var(--glp-charcoal)' }}>Engagement Heatmap (Weekly)</h3>
-        <div className="grid grid-cols-7 gap-3">
+        <div className="grid grid-cols-7 gap-3" aria-hidden="true">
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(day => (
             <div key={day} className="text-center">
               <div className="text-xs font-medium mb-2" style={{ color: 'var(--glp-sage)' }}>{day}</div>
@@ -759,6 +864,9 @@ function EngagementSection({ stats }) {
             </div>
           ))}
         </div>
+        <p className="text-xs mt-4 italic text-center" style={{ color: 'var(--glp-sage)' }} data-testid="text-heatmap-disclaimer">
+          This is a sample visualization (real-time hourly data not yet connected).
+        </p>
       </div>
     </>
   );
