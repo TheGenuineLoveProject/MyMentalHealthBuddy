@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Heart, Home, BookOpen, LayoutDashboard, Sparkles, LogOut } from "lucide-react";
+import { Menu, X, Heart, Home, BookOpen, LayoutDashboard, Sparkles, LogOut, Wrench, Newspaper, Crown } from "lucide-react";
 import { Button } from "@/components/ui/Button.jsx";
 import { useAuth } from "../context/AuthContext";
 
-const NAV_LINKS = [
+// Public navigation order, advisor-aligned: Home → Wellness → Tools →
+// Community → Blog → Pricing.  Auth-only items (Journal, Dashboard) are
+// appended below when a user is signed in.  Each link uses a distinct,
+// brand-aligned icon so the nav reads at a glance.
+const PUBLIC_NAV_LINKS = [
   { href: "/", label: "Home", icon: Home },
   { href: "/wellness", label: "Wellness", icon: Heart },
+  { href: "/tools", label: "Tools", icon: Wrench },
+  { href: "/affirmations", label: "Community", icon: Sparkles },
+  { href: "/blog", label: "Blog", icon: Newspaper },
+  { href: "/premium", label: "Pricing", icon: Crown },
+];
+
+const AUTH_NAV_LINKS = [
   { href: "/journal", label: "Journal", icon: BookOpen },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/affirmations", label: "Community", icon: Sparkles },
-  { href: "/tools", label: "Tools", icon: Sparkles }
 ];
 
 export default function SacredNav({ className = "" }) {
@@ -52,60 +61,58 @@ export default function SacredNav({ className = "" }) {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/">
-            <a className="flex items-center gap-2 group" data-testid="link-logo">
+          <Link href="/" className="flex items-center gap-2 group" data-testid="link-logo">
+            <div 
+              className="relative w-10 h-10 rounded-full flex items-center justify-center transition-all group-hover:scale-110 group-hover:rotate-3"
+              style={{
+                background: "linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%)",
+                boxShadow: "0 0 25px rgba(212, 175, 55, 0.5), 0 0 50px rgba(212, 175, 55, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3)"
+              }}
+            >
+              <Heart className="w-5 h-5 text-white drop-shadow-md" aria-hidden="true" />
               <div 
-                className="relative w-10 h-10 rounded-full flex items-center justify-center transition-all group-hover:scale-110 group-hover:rotate-3"
+                className="absolute inset-0 rounded-full animate-pulse"
                 style={{
-                  background: "linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%)",
-                  boxShadow: "0 0 25px rgba(212, 175, 55, 0.5), 0 0 50px rgba(212, 175, 55, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3)"
+                  background: "radial-gradient(circle, rgba(255, 215, 0, 0.7) 0%, rgba(212, 175, 55, 0.3) 40%, transparent 70%)",
+                  animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
                 }}
-              >
-                <Heart className="w-5 h-5 text-white drop-shadow-md" aria-hidden="true" />
-                <div 
-                  className="absolute inset-0 rounded-full animate-pulse"
-                  style={{
-                    background: "radial-gradient(circle, rgba(255, 215, 0, 0.7) 0%, rgba(212, 175, 55, 0.3) 40%, transparent 70%)",
-                    animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
-                  }}
-                  aria-hidden="true"
-                />
-                <div 
-                  className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    background: "radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%)",
-                    filter: "blur(4px)"
-                  }}
-                  aria-hidden="true"
-                />
-              </div>
-              <span className="font-serif text-lg font-semibold hidden sm:block">
-                <span className="text-[#2f5d5d] dark:text-[#8fbf9f]">Genuine</span>
-                <span className="text-[#d4af37]"> Love</span>
-              </span>
-            </a>
+                aria-hidden="true"
+              />
+              <div 
+                className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: "radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%)",
+                  filter: "blur(4px)"
+                }}
+                aria-hidden="true"
+              />
+            </div>
+            <span className="font-serif text-lg font-semibold hidden sm:block">
+              <span className="text-[#2f5d5d] dark:text-[#8fbf9f]">Genuine</span>
+              <span className="text-[#d4af37]"> Love</span>
+            </span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map(({ href, label, icon: Icon }) => {
+            {[...PUBLIC_NAV_LINKS, ...(user ? AUTH_NAV_LINKS : [])].map(({ href, label, icon: Icon }) => {
               const isActive = location === href || (href !== "/" && location.startsWith(href));
               
               return (
-                <Link key={href} href={href}>
-                  <a
-                    className={`
-                      flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37]
-                      ${isActive 
-                        ? 'bg-[#8fbf9f]/20 text-[#2f5d5d] dark:text-[#8fbf9f]' 
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                      }
-                    `}
-                    aria-current={isActive ? "page" : undefined}
-                    data-testid={`nav-${label.toLowerCase()}`}
-                  >
-                    <Icon className="w-4 h-4" aria-hidden="true" />
-                    {label}
-                  </a>
+                <Link
+                  key={href}
+                  href={href}
+                  className={`
+                    flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37]
+                    ${isActive 
+                      ? 'bg-[#8fbf9f]/20 text-[#2f5d5d] dark:text-[#8fbf9f]' 
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                    }
+                  `}
+                  aria-current={isActive ? "page" : undefined}
+                  data-testid={`nav-${label.toLowerCase()}`}
+                >
+                  <Icon className="w-4 h-4" aria-hidden="true" />
+                  {label}
                 </Link>
               );
             })}
@@ -159,25 +166,26 @@ export default function SacredNav({ className = "" }) {
             className="md:hidden py-4 border-t border-border/50 animate-in slide-in-from-top-2 duration-200"
           >
             <div className="flex flex-col gap-1">
-              {NAV_LINKS.map(({ href, label, icon: Icon }) => {
+              {[...PUBLIC_NAV_LINKS, ...(user ? AUTH_NAV_LINKS : [])].map(({ href, label, icon: Icon }) => {
                 const isActive = location === href || (href !== "/" && location.startsWith(href));
                 
                 return (
-                  <Link key={href} href={href}>
-                    <a
-                      onClick={() => setIsOpen(false)}
-                      className={`
-                        flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all
-                        ${isActive 
-                          ? 'bg-[#8fbf9f]/20 text-[#2f5d5d] dark:text-[#8fbf9f]' 
-                          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                        }
-                      `}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      <Icon className="w-5 h-5" aria-hidden="true" />
-                      {label}
-                    </a>
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setIsOpen(false)}
+                    className={`
+                      flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all
+                      ${isActive 
+                        ? 'bg-[#8fbf9f]/20 text-[#2f5d5d] dark:text-[#8fbf9f]' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                      }
+                    `}
+                    aria-current={isActive ? "page" : undefined}
+                    data-testid={`nav-mobile-${label.toLowerCase()}`}
+                  >
+                    <Icon className="w-5 h-5" aria-hidden="true" />
+                    {label}
                   </Link>
                 );
               })}

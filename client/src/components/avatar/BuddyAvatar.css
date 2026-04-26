@@ -55,11 +55,23 @@
 }
 
 /* ---------- Eyes ---------- */
+/* v1.14 — eye blink is now gated to NON-steady motion states.  Crisis
+   uses motion=steady, so crisis inherits a motionless, present gaze
+   (safety contract: "calm, unbroken presence" during distress).  All
+   other states blink gently every ~9s for living-presence feel.  Right
+   eye is staggered by 200ms so the two eyes feel like one organic
+   motion, not synchronized robotics.  Globally disabled by the
+   prefers-reduced-motion block at end of file. */
 .buddy__eye {
   transform-origin: center;
   transform-box: fill-box;
-  animation: buddyEyeBlink 9s ease-in-out infinite;
   filter: drop-shadow(0 0 4px var(--buddy-eye-color, #6FE3B0));
+}
+.buddy:not(.buddy--motion-steady) .buddy__eye {
+  animation: buddyEyeBlink 9s ease-in-out infinite;
+}
+.buddy:not(.buddy--motion-steady) .buddy__eye--right {
+  animation-delay: 200ms;
 }
 @keyframes buddyEyeBlink {
   0%, 92%, 100% { transform: scaleY(1); }

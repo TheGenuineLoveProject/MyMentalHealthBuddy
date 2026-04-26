@@ -4,6 +4,7 @@ import { Heart, Send, Sparkles, MessageCircle, RefreshCw } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "../lib/queryClient";
+import PageLayout from "@/components/layout/PageLayout.jsx";
 
 const AFFIRMATION_MAX_LENGTH = 280;
 
@@ -78,8 +79,11 @@ export default function AffirmationWall() {
   const displayAffirmations = affirmations;
 
   return (
-    <div className="min-h-screen py-8 px-4" style={{ background: 'linear-gradient(to bottom, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
-      <div className="max-w-4xl mx-auto">
+    <PageLayout
+      maxWidth="max-w-4xl"
+      style={{ background: 'linear-gradient(to bottom, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}
+    >
+      <div>
         <header className="text-center mb-12">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" 
                style={{ background: 'linear-gradient(135deg, var(--glp-gold-30), var(--glp-gold-50))' }}>
@@ -249,6 +253,6 @@ export default function AffirmationWall() {
           </div>
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }
