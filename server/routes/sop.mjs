@@ -56,6 +56,29 @@ const CHECKS = [
   { id: "admin-security",    name: "Security overview",          domain: "admin",    method: "GET", path: "/api/admin/security/overview", expect: [200, 401, 403], protected: true, remediation: "server/routes/admin-security.mjs (mount in app.mjs ADMIN_SUB_ROUTERS)" },
   { id: "admin-soft-launch", name: "Soft-launch metrics",        domain: "admin",    method: "GET", path: "/api/admin/soft-launch-metrics", expect: [200, 401, 403], protected: true, remediation: "server/routes/soft-launch-metrics.mjs (mount in app.mjs ADMIN_SUB_ROUTERS)" },
 
+  // Auth surface (Round 3 — Apr-26 unlock: refresh + logout added)
+  { id: "auth-refresh",      name: "Auth: token refresh",        domain: "platform", method: "POST", path: "/api/auth/refresh",  expect: [200, 401], protected: false, remediation: "server/routes/auth.mjs router.post('/refresh', requireAuth, ...)" },
+  { id: "auth-logout",       name: "Auth: logout",               domain: "platform", method: "POST", path: "/api/auth/logout",   expect: [200, 401], protected: false, remediation: "server/routes/auth.mjs router.post('/logout', requireAuth, ...)" },
+  // Note: fetch follows redirects by default, so a successful 302 → github.com chain lands on a 200.
+  // Accept 200 (chain completed), 302 (redirect intercepted), or 503 (creds missing / OAuth disabled).
+  { id: "auth-github",       name: "Auth: GitHub OAuth",         domain: "platform", method: "GET",  path: "/api/auth/github",   expect: [200, 302, 503], protected: false, remediation: "server/routes/github-auth.mjs (mounted in app.mjs alongside authRoutes; needs GITHUB_CLIENT_ID/_SECRET secrets)" },
+
+  // Round-3 mounted routers — sample coverage to verify they stay alive
+  { id: "wellness-tools",    name: "Wellness tools",             domain: "healing",  method: "GET",  path: "/api/wellness-tools", expect: [200, 401], protected: false, remediation: "server/routes/wellness-tools.mjs (extended-routes mount)" },
+  { id: "ai-dashboard",      name: "AI dashboard (gated)",       domain: "admin",    method: "GET",  path: "/api/ai-dashboard",   expect: [200, 401, 403], protected: true, remediation: "server/routes/ai-dashboard.mjs (extended-routes mount, auth: required)" },
+  // Architect-gated routes — must require auth (paid external API behind it)
+  { id: "perplexity-gate",   name: "Perplexity (auth required)", domain: "platform", method: "GET",  path: "/api/perplexity",     expect: [401, 403, 404], protected: true, remediation: "server/routes/perplexity.mjs — must stay behind requireAuth in app.mjs to prevent paid-API abuse" },
+
+  // Tracked debt — Canva OAuth router intentionally NOT mounted
+  {
+    id: "canva-oauth-deferred",
+    name: "Canva OAuth (deferred — token signature unverified)",
+    domain: "platform",
+    type: "static",
+    staticCheck: canvaDeferralCheck,
+    remediation: "server/routes/canva-oauth.mjs /verify-token only decodes JWT payload, does NOT verify signature. Add Canva JWKS verification before remounting in server/app.mjs EXTENDED_ROUTES.",
+  },
+
   // Business
   { id: "admin-publishing",  name: "Publishing today",           domain: "business", method: "GET", path: "/api/admin/publishing",      expect: [200, 401, 403], protected: true, remediation: "server/routes/admin-publishing.mjs" },
   { id: "admin-revenue",     name: "Revenue dashboard",          domain: "business", method: "GET", path: "/api/admin/revenue",         expect: [200, 401, 403], protected: true, remediation: "server/routes/admin.mjs revenue endpoint" },
@@ -86,6 +109,43 @@ const CHECKS = [
 // -----------------------------------------------------------------------------
 // Static check implementations
 // -----------------------------------------------------------------------------
+
+// Canva OAuth router was unmounted Apr-26 (architect review): /verify-token
+// only decoded JWT payloads without verifying signatures, so forged tokens
+// could be accepted as valid. We surface this as a tracked-debt WARN so the
+// next iteration knows to add Canva JWKS verification before remounting.
+async function canvaDeferralCheck() {
+  const appPath = path.resolve(process.cwd(), "server/app.mjs");
+  let src;
+  try {
+    src = await fs.readFile(appPath, "utf8");
+  } catch (err) {
+    return {
+      status: "warn",
+      message: `Could not read server/app.mjs: ${err?.message || String(err)}`,
+      endpoint: "static:server/app.mjs",
+    };
+  }
+  // Active mount = uncommented line containing the canva-oauth mount entry.
+  const stripped = src
+    .split("\n")
+    .filter((line) => !/^\s*\/\//.test(line))
+    .join("\n");
+  const activeMount = /mount:\s*"\/api\/canva-oauth"/.test(stripped);
+  if (activeMount) {
+    return {
+      status: "fail",
+      message: "Canva OAuth router is mounted but /verify-token still lacks JWT signature verification — security regression",
+      endpoint: "static:server/app.mjs",
+    };
+  }
+  return {
+    status: "warn",
+    message: "Canva OAuth intentionally unmounted (tracked debt) — add JWKS verification before remounting",
+    endpoint: "static:server/app.mjs",
+  };
+}
+
 async function csrfMountCheck() {
   const appPath = path.resolve(process.cwd(), "server/app.mjs");
   let src;

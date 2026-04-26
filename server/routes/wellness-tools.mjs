@@ -98,13 +98,15 @@ router.patch("/boundaries/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
-    
+
+    // SECURITY FIX (Apr-26 Round 3 architect review): also filter by userId so
+    // a caller can never modify another user's boundary script (IDOR fix).
     const [script] = await db
       .update(boundaryScripts)
       .set({ ...updates, updatedAt: new Date() })
-      .where(eq(boundaryScripts.id, id))
+      .where(and(eq(boundaryScripts.id, id), eq(boundaryScripts.userId, req.dbUserId)))
       .returning();
-    
+
     if (!script) {
       return badRequest(res, "Script not found", 404);
     }
@@ -118,7 +120,16 @@ router.patch("/boundaries/:id", requireAuth, async (req, res) => {
 router.delete("/boundaries/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    await db.delete(boundaryScripts).where(eq(boundaryScripts.id, id));
+    // SECURITY FIX (Apr-26 Round 3 architect review): also filter by userId so
+    // a caller can never delete another user's boundary script (IDOR fix).
+    // Use returning() so we can detect ownership-mismatch and return a clear 404.
+    const deleted = await db
+      .delete(boundaryScripts)
+      .where(and(eq(boundaryScripts.id, id), eq(boundaryScripts.userId, req.dbUserId)))
+      .returning({ id: boundaryScripts.id });
+    if (!deleted.length) {
+      return badRequest(res, "Script not found", 404);
+    }
     return success(res, { message: "Script deleted" });
   } catch (error) {
     logger.error("Failed to delete boundary script:", error);

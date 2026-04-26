@@ -327,6 +327,82 @@ const EXTENDED_ROUTES = [
   { mount: "/api/growth",        file: "./routes/growth-journey.mjs",auth: "optional" },
   // Peace Scape — Layer 2 foundation (read-only sanctuary state)
   { mount: "/api/peacescape",    file: "./routes/peacescape.mjs",    auth: "optional" },
+
+  // ─── Round 3 (Apr-26 gap-fix): orphan routers the frontend depends on ───
+  // These files existed in server/routes/ but were never mounted, causing
+  // 100+ silent 404s in the client. Each was dry-run-imported successfully
+  // before being added here. The try/catch loop below means any single
+  // mount failure is logged and skipped — boot is never crashed.
+  // The 4 conflict-suspect orphans (login, mfa, accountActions, system)
+  // are deliberately NOT in this list — they need separate review.
+  { mount: "/api/ai-dashboard",              file: "./routes/ai-dashboard.mjs",              auth: "required" },
+  { mount: "/api/analytics-events",          file: "./routes/analytics-events.mjs",          auth: "optional" },
+  // SECURITY (Apr-26 Round 3 architect review): canva-oauth /verify-token decodes Canva JWTs
+  // without verifying signatures — forged tokens could be accepted as valid. Intentionally
+  // NOT mounted until a proper JWKS-based verifier is added. Tracked in SOP as a static check.
+  // { mount: "/api/canva-oauth",               file: "./routes/canva-oauth.mjs",               auth: "optional" },
+  { mount: "/api/cognitive-enhancement",     file: "./routes/cognitive-enhancement.mjs",     auth: "optional" },
+  { mount: "/api/cognitive-lab",             file: "./routes/cognitive-lab.mjs",             auth: "optional" },
+  { mount: "/api/cognitive-mastery",         file: "./routes/cognitive-mastery.mjs",         auth: "optional" },
+  { mount: "/api/collective-intelligence",   file: "./routes/collective-intelligence.mjs",   auth: "optional" },
+  { mount: "/api/contemplative",             file: "./routes/contemplative.mjs",             auth: "optional" },
+  { mount: "/api/content-generator",         file: "./routes/content-generator.mjs",         auth: "optional" },
+  { mount: "/api/content-intelligence",      file: "./routes/content-intelligence.mjs",      auth: "optional" },
+  { mount: "/api/creativity",                file: "./routes/creativity.mjs",                auth: "optional" },
+  { mount: "/api/deep-learning",             file: "./routes/deep-learning.mjs",             auth: "optional" },
+  { mount: "/api/deployment-readiness",      file: "./routes/deploymentReadiness.mjs",       auth: "admin" },
+  { mount: "/api/dialectics",                file: "./routes/dialectics.mjs",                auth: "optional" },
+  { mount: "/api/embodiment",                file: "./routes/embodiment.mjs",                auth: "optional" },
+  { mount: "/api/emotional-mastery",         file: "./routes/emotional-mastery.mjs",         auth: "optional" },
+  { mount: "/api/emotional-resilience",      file: "./routes/emotional-resilience.mjs",      auth: "optional" },
+  { mount: "/api/ethical-reasoning",         file: "./routes/ethical-reasoning.mjs",         auth: "optional" },
+  { mount: "/api/existential",               file: "./routes/existential.mjs",               auth: "optional" },
+  { mount: "/api/feed",                      file: "./routes/feed.mjs",                      auth: "optional" },
+  { mount: "/api/figma",                     file: "./routes/figma.mjs",                     auth: "admin" },
+  { mount: "/api/foresight",                 file: "./routes/foresight.mjs",                 auth: "optional" },
+  { mount: "/api/healing-intelligence",      file: "./routes/healing-intelligence.mjs",      auth: "optional" },
+  { mount: "/api/healing-modalities",        file: "./routes/healing-modalities.mjs",        auth: "optional" },
+  { mount: "/api/holistic-healing",          file: "./routes/holistic-healing.mjs",          auth: "optional" },
+  { mount: "/api/human-potential",           file: "./routes/human-potential.mjs",           auth: "optional" },
+  { mount: "/api/invites",                   file: "./routes/invites.mjs",                   auth: "required" },
+  { mount: "/api/kernel",                    file: "./routes/kernel.mjs",                    auth: "admin" },
+  { mount: "/api/life-design",               file: "./routes/life-design.mjs",               auth: "optional" },
+  { mount: "/api/life-purpose",              file: "./routes/life-purpose.mjs",              auth: "optional" },
+  { mount: "/api/mastery-excellence",        file: "./routes/mastery-excellence.mjs",        auth: "optional" },
+  { mount: "/api/meaning",                   file: "./routes/meaning.mjs",                   auth: "optional" },
+  { mount: "/api/metacognition",             file: "./routes/metacognition.mjs",             auth: "optional" },
+  { mount: "/api/mirror",                    file: "./routes/mirror.mjs",                    auth: "optional" },
+  { mount: "/api/narrative",                 file: "./routes/narrative.mjs",                 auth: "optional" },
+  { mount: "/api/narrative-drafts",          file: "./routes/narrative-drafts.mjs",          auth: "required" },
+  { mount: "/api/neuro-integration",         file: "./routes/neuro-integration.mjs",         auth: "optional" },
+  { mount: "/api/peak-performance",          file: "./routes/peak-performance.mjs",          auth: "optional" },
+  // SECURITY (Apr-26 Round 3 architect review): perplexity proxies a paid external API.
+  // Public access is an abuse/cost vector even with rate limits. Gate to authenticated users only.
+  { mount: "/api/perplexity",                file: "./routes/perplexity.mjs",                auth: "required" },
+  { mount: "/api/personal-growth",           file: "./routes/personal-growth.mjs",           auth: "optional" },
+  { mount: "/api/philosophy",                file: "./routes/philosophy.mjs",                auth: "optional" },
+  { mount: "/api/post-trauma",               file: "./routes/post-trauma.mjs",               auth: "optional" },
+  { mount: "/api/praxis",                    file: "./routes/praxis.mjs",                    auth: "optional" },
+  { mount: "/api/products",                  file: "./routes/products.mjs",                  auth: "optional" },
+  { mount: "/api/psychological-safety",      file: "./routes/psychological-safety.mjs",      auth: "optional" },
+  { mount: "/api/purpose-compass",           file: "./routes/purpose-compass.mjs",           auth: "optional" },
+  { mount: "/api/relational",                file: "./routes/relational.mjs",                auth: "optional" },
+  { mount: "/api/relationship-dynamics",     file: "./routes/relationship-dynamics.mjs",     auth: "optional" },
+  { mount: "/api/resilience",                file: "./routes/resilience.mjs",                auth: "optional" },
+  { mount: "/api/self-mastery",              file: "./routes/self-mastery.mjs",              auth: "optional" },
+  { mount: "/api/self-mastery-intelligence", file: "./routes/self-mastery-intelligence.mjs", auth: "optional" },
+  { mount: "/api/social-intelligence",       file: "./routes/social-intelligence.mjs",       auth: "optional" },
+  { mount: "/api/socio-ecology",             file: "./routes/socio-ecology.mjs",             auth: "optional" },
+  { mount: "/api/spiritual-intelligence",    file: "./routes/spiritual-intelligence.mjs",    auth: "optional" },
+  { mount: "/api/systems-compassion",        file: "./routes/systems-compassion.mjs",        auth: "optional" },
+  { mount: "/api/universal-content",         file: "./routes/universal-content.mjs",         auth: "optional" },
+  { mount: "/api/user-settings",             file: "./routes/userSettings.mjs",              auth: "required" },
+  { mount: "/api/values",                    file: "./routes/values.mjs",                    auth: "optional" },
+  { mount: "/api/webhook",                   file: "./routes/webhook.mjs" },
+  { mount: "/api/wellness-tools",            file: "./routes/wellness-tools.mjs",            auth: "optional" },
+  { mount: "/api/wisdom-engine",             file: "./routes/wisdom-engine.mjs",             auth: "optional" },
+  { mount: "/api/wisdom-synthesis",          file: "./routes/wisdom-synthesis.mjs",          auth: "optional" },
+  { mount: "/api/wisdom-traditions",         file: "./routes/wisdom-traditions.mjs",         auth: "optional" },
 ];
 
 const mountedExtended = [];

@@ -82,6 +82,24 @@ curl -sS  https://thegenuineloveproject.replit.app/api/admin/sop/status | head -
 
 Routes that **MUST** be auth-gated (e.g. `/api/admin/*`) treat a `200` without credentials as a **fail** — that would mean security is bypassed.
 
+## Round 3 (Apr-26) — Gap-fix expansion
+
+The boot loop in `server/app.mjs` historically mounted ~38 extended routers. A frontend-vs-routers audit on Apr-26 surfaced **63 orphan router files that the client was actively calling** (silent 404s). All 63 were dry-run-imported, then appended to the `EXTENDED_ROUTES` config behind the same try/catch loop. Boot log now reads `extended routes mounted: 101/101`.
+
+Four additional orphans (`login.mjs`, `mfa.mjs`, `accountActions.mjs`, `system.mjs`) were intentionally **excluded** from the batch because their paths collide with already-mounted endpoints (e.g. `/api/auth/login` from `auth.mjs`). They need a separate review pass.
+
+Eleven dormant orphans (`api.mjs`, `consciousness-expansion.mjs`, `healing-tools.mjs`, `integrationHealth.mjs`, `meaning-future.mjs`, `metricsSummary.mjs`, `mind-body-integration.mjs`, `redirects.mjs`, `rss.mjs`, `transformation-engine.mjs`, `trauma-healing-protocols.mjs`) are not called by the current frontend and stay parked.
+
+New SOP CHECKS added for visibility:
+
+| ID | Domain | Surface |
+|---|---|---|
+| `auth-refresh` | platform | POST `/api/auth/refresh` (Round 3 unlock) |
+| `auth-logout` | platform | POST `/api/auth/logout` (Round 3 unlock) |
+| `auth-github` | platform | GET `/api/auth/github` (302 → GitHub OAuth) |
+| `wellness-tools` | healing | GET `/api/wellness-tools` (sample of newly-mounted) |
+| `ai-dashboard` | admin | GET `/api/ai-dashboard` (auth-gated; sample of newly-mounted) |
+
 ## Update rule
 
 When you add a new feature/route:
