@@ -17,6 +17,8 @@
 // internal token) so the dev workflow can smoke-test without a JWT.
 
 import express from "express";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 
 const router = express.Router();
@@ -60,11 +62,117 @@ const CHECKS = [
   { id: "admin-billing",     name: "Billing viewer",             domain: "business", method: "GET", path: "/api/admin/billing",         expect: [200, 401, 403, 404], protected: false, remediation: "server/routes/adminBilling.mjs" },
   { id: "admin-social",      name: "Social studio",              domain: "business", method: "GET", path: "/api/admin/social/drafts",   expect: [200, 401, 403, 404], protected: true, remediation: "server/routes/admin-social-studio.mjs" },
   { id: "admin-social-ent",  name: "Social enterprise",          domain: "business", method: "GET", path: "/api/admin/social/enterprise/campaigns", expect: [200, 401, 403, 404], protected: true, remediation: "server/routes/social-enterprise.mjs" },
+
+  // -----------------------------------------------------------------------------
+  // Static checks (no HTTP probe — inspect source / config state instead)
+  // -----------------------------------------------------------------------------
+  // Tracked technical debt — advisor instruction (Apr-26 v1.1): log this as a
+  // WARNING in SOP, do NOT fix yet. Bug: server/app.mjs:101 uses
+  // `app.use(csrfProtection)` (passing the factory itself as middleware) instead
+  // of `app.use(csrfProtection())` (invoking the factory). Result: CSRF middleware
+  // never enforces tokens. Tokens are still ISSUED (cookies set on safe methods),
+  // so client-side CSRF flow appears intact. Fix scheduled for a future SOP-driven
+  // release once the failure-list is clear.
+  {
+    id: "csrf-middleware-active",
+    name: "CSRF middleware actively enforcing (tracked debt)",
+    domain: "platform",
+    type: "static",
+    staticCheck: csrfMountCheck,
+    remediation: "Tracked debt (advisor: do NOT fix yet). server/app.mjs:101 — change `app.use(csrfProtection)` to `app.use(csrfProtection())`. Test order: (1) verify CSRF cookie issuance still works on GET, (2) verify state-changing requests now require x-csrf-token header, (3) update any client mutations to send the cookie value as the header.",
+  },
 ];
 
 // -----------------------------------------------------------------------------
-// Probe runner
+// Static check implementations
 // -----------------------------------------------------------------------------
+async function csrfMountCheck() {
+  const appPath = path.resolve(process.cwd(), "server/app.mjs");
+  let src;
+  try {
+    src = await fs.readFile(appPath, "utf8");
+  } catch (err) {
+    return {
+      status: "warn",
+      message: `Could not read server/app.mjs: ${err?.message || String(err)}`,
+      endpoint: "static:server/app.mjs",
+    };
+  }
+  // Strip line comments so we don't false-positive on commented-out code.
+  const stripped = src
+    .split("\n")
+    .filter((line) => !/^\s*\/\//.test(line))
+    .join("\n");
+
+  // Fixed pattern: factory invoked → `app.use(csrfProtection())`
+  const fixedPattern = /app\.use\(\s*csrfProtection\s*\(/;
+  // Buggy pattern: factory passed directly → `app.use(csrfProtection)`
+  const buggyPattern = /app\.use\(\s*csrfProtection\s*\)/;
+
+  if (fixedPattern.test(stripped)) {
+    return {
+      status: "pass",
+      message: "csrfProtection() is invoked correctly — middleware is active",
+      endpoint: "static:server/app.mjs",
+    };
+  }
+  if (buggyPattern.test(stripped)) {
+    return {
+      status: "warn",
+      message: "csrfProtection mounted as factory reference, not as middleware — token enforcement is a no-op (advisor: tracked, do not fix yet)",
+      endpoint: "static:server/app.mjs",
+    };
+  }
+  return {
+    status: "warn",
+    message: "Could not locate csrfProtection mount in server/app.mjs (manual review needed)",
+    endpoint: "static:server/app.mjs",
+  };
+}
+
+// -----------------------------------------------------------------------------
+// Runner — dispatches HTTP probes vs static (in-process) checks
+// -----------------------------------------------------------------------------
+async function runCheck(check, baseUrl) {
+  if (check.type === "static" && typeof check.staticCheck === "function") {
+    return runStaticCheck(check);
+  }
+  return probe(check, baseUrl);
+}
+
+async function runStaticCheck(check) {
+  const started = Date.now();
+  try {
+    const result = await check.staticCheck();
+    const status = result?.status || "warn";
+    return {
+      id: check.id,
+      name: check.name,
+      domain: check.domain,
+      endpoint: result?.endpoint || `static:${check.id}`,
+      status,
+      message: result?.message || "(no message)",
+      httpStatus: null,
+      elapsedMs: Date.now() - started,
+      expected: ["static"],
+      remediation: status === "pass" ? null : check.remediation,
+    };
+  } catch (err) {
+    return {
+      id: check.id,
+      name: check.name,
+      domain: check.domain,
+      endpoint: `static:${check.id}`,
+      status: "fail",
+      message: `Static check threw: ${err?.message || String(err)}`,
+      httpStatus: null,
+      elapsedMs: Date.now() - started,
+      expected: ["static"],
+      remediation: check.remediation,
+    };
+  }
+}
+
 async function probe(check, baseUrl) {
   const url = `${baseUrl}${check.path}`;
   const ctrl = new AbortController();
@@ -140,7 +248,7 @@ function baseUrlFromReq(_req) {
 router.get("/status", async (req, res) => {
   const baseUrl = baseUrlFromReq(req);
   const startedAt = Date.now();
-  const results = await Promise.all(CHECKS.map((c) => probe(c, baseUrl)));
+  const results = await Promise.all(CHECKS.map((c) => runCheck(c, baseUrl)));
   const passing = results.filter((r) => r.status === "pass").length;
   const warning = results.filter((r) => r.status === "warn").length;
   const failing = results.filter((r) => r.status === "fail").length;
@@ -190,8 +298,9 @@ router.get("/checks", (_req, res) => {
       id: c.id,
       name: c.name,
       domain: c.domain,
-      endpoint: `${c.method} ${c.path}`,
-      expected: c.expect,
+      type: c.type || "http",
+      endpoint: c.type === "static" ? `static:${c.id}` : `${c.method} ${c.path}`,
+      expected: c.expect || ["static"],
       protected: !!c.protected,
     })),
   });

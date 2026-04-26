@@ -89,3 +89,25 @@ When you add a new feature/route:
 2. Add a `CHECKS` entry in `server/routes/sop.mjs`.
 3. Restart the workflow and verify it appears in `/api/admin/sop/status`.
 4. Confirm the SOP Monitor panel renders it.
+
+## Static checks (v1.1, Apr-26)
+
+Some platform invariants can't be probed via HTTP — they need to inspect source code or runtime config. SOP Monitor supports these via `type: "static"` entries with a `staticCheck()` function. The runner dispatches HTTP probes vs static checks automatically; results land in the same panel with the same pass/warn/fail vocabulary.
+
+Currently tracked:
+
+| Check | Domain | Status target | Notes |
+|---|---|---|---|
+| `csrf-middleware-active` | platform | warn (tracked debt) | `server/app.mjs:101` calls `app.use(csrfProtection)` instead of `app.use(csrfProtection())` — middleware is a no-op. Per advisor, intentionally tracked as WARNING; do NOT fix until SOP-driven release plan addresses it. CSRF cookies are still issued correctly to clients, so the visible flow looks intact. |
+
+To add a new static check, append a `CHECKS` entry like:
+```js
+{
+  id: "my-check",
+  name: "Human-readable name",
+  domain: "platform",
+  type: "static",
+  staticCheck: async () => ({ status: "pass" | "warn" | "fail", message: "...", endpoint: "static:where" }),
+  remediation: "What to do if this fails",
+}
+```
