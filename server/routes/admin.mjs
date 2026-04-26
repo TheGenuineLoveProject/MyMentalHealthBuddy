@@ -10,6 +10,8 @@ import {
   resumeScheduler,
   pauseScheduler,
 } from "../lib/healScheduler.mjs";
+import { requireAuth as requireAuthCanonical } from "../middleware/requireAuth.mjs";
+import requireAdmin from "../middleware/requireAdmin.mjs";
 
 const router = Router();
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
@@ -1035,6 +1037,22 @@ router.get("/diagnostics", async (_req, res) => {
 // Health check endpoint for admin daily tools monitoring
 router.get("/", (req, res) => {
   res.json({ ok: true, module: "admin", status: "operational", timestamp: new Date().toISOString() });
+});
+
+// Canonical admin dashboard probe — uses the platform's standard auth chain:
+//   requireAuth (verifies JWT, attaches req.user) → requireAdmin (enforces role==="admin")
+// This is the curl-testable target for verifying role-based access end-to-end.
+router.get("/dashboard", requireAuthCanonical, requireAdmin, (req, res) => {
+  res.json({
+    ok: true,
+    message: "Admin dashboard access granted",
+    user: {
+      id: req.user?.id,
+      email: req.user?.email,
+      role: req.user?.role,
+    },
+    timestamp: new Date().toISOString(),
+  });
 });
 
 export default router;

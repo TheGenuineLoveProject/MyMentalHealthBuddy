@@ -7,8 +7,16 @@ import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
 import BuddyAvatar from "../components/avatar/BuddyAvatar";
 
+function landingPathFor(u) {
+  // Mirrors AdminGuard policy (client/src/components/AdminGuard.jsx):
+  // only role==="admin" passes the /admin guard. Staff and everyone else
+  // land on /dashboard to avoid an immediate guard-bounce loop.
+  if (u && u.role === "admin") return "/admin";
+  return "/dashboard";
+}
+
 export default function Login() {
-  const { isAuthenticated, isLoading, login } = useAuth();
+  const { isAuthenticated, isLoading, login, user } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [form, setForm] = useState({ email: "", password: "" });
@@ -16,8 +24,8 @@ export default function Login() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated()) setLocation("/dashboard");
-  }, [isLoading, isAuthenticated, setLocation]);
+    if (!isLoading && isAuthenticated()) setLocation(landingPathFor(user));
+  }, [isLoading, isAuthenticated, setLocation, user]);
 
   if (isLoading || (typeof isAuthenticated === "function" && isAuthenticated())) {
     return (
@@ -55,7 +63,7 @@ export default function Login() {
       }
       if (data?.token) login(data.token, data.user || null);
       toast({ title: "Welcome back", description: "You're signed in." });
-      setLocation("/dashboard");
+      setLocation(landingPathFor(data?.user));
     } catch (err) {
       const raw = err?.message || "";
       let msg = raw;
