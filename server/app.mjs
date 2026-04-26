@@ -193,6 +193,51 @@ app.use(
   adminPublishingRoutes
 );
 
+/* ===== ADMIN SUB-ROUTERS (SAFE-MOUNT) =====
+ * These admin sub-trees existed as router files in server/routes/ but were
+ * never mounted in app.mjs (the production entrypoint). The frontend admin
+ * pages (SecurityDashboard, SocialDashboard, AdminSocial, the audit-log
+ * explorer, the soft-launch metrics panel) were therefore reaching admin.mjs's
+ * generic /api/admin mount, finding no handler for /security/*, /social/*,
+ * /audit-logs, or /soft-launch-metrics, and 404'ing — which surfaced in the
+ * UI as "Unable to load…" / "Loading…" states that never resolved.
+ *
+ * Each mount is wrapped in a single try/catch so one broken router file can
+ * never crash boot (matching the EXTENDED_ROUTES safe-mount pattern below).
+ * /api/admin/social/enterprise MUST be mounted BEFORE /api/admin/social so
+ * Express's first-match-wins routing resolves the more-specific path first.
+ * The locked AI / auth / crisis / orchestrator / responsePolicy modules are
+ * not touched.
+ */
+const ADMIN_SUB_ROUTERS = [
+  { mount: "/api/admin/social/enterprise",   file: "./routes/social-enterprise.mjs" },
+  { mount: "/api/admin/social",              file: "./routes/admin-social-studio.mjs" },
+  { mount: "/api/admin/security",            file: "./routes/admin-security.mjs" },
+  { mount: "/api/admin/audit-logs",          file: "./routes/audit-logs.mjs" },
+  { mount: "/api/admin/soft-launch-metrics", file: "./routes/soft-launch-metrics.mjs" },
+];
+
+const mountedAdminSub = [];
+const failedAdminSub = [];
+for (const r of ADMIN_SUB_ROUTERS) {
+  try {
+    const mod = await import(r.file);
+    const handler = mod.default || mod.router || mod;
+    if (typeof handler !== "function" && (typeof handler !== "object" || !handler.use)) {
+      failedAdminSub.push(`${r.mount} (no default export)`);
+      continue;
+    }
+    app.use(r.mount, adminLimiter, requireAuth, requireAdmin, handler);
+    mountedAdminSub.push(r.mount);
+  } catch (e) {
+    failedAdminSub.push(`${r.mount} (${e?.message || e})`);
+  }
+}
+console.log(`[boot] admin sub-routers mounted: ${mountedAdminSub.length}/${ADMIN_SUB_ROUTERS.length}`);
+if (failedAdminSub.length) {
+  console.warn(`[boot] admin sub-routers skipped: ${failedAdminSub.join(", ")}`);
+}
+
 // AI routes (aiLimiter already mounted above on /api/ai before this handler)
 app.use("/api/ai", optionalAuth, aiRoutes);
 

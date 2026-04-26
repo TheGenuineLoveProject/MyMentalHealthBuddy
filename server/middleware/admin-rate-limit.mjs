@@ -1,7 +1,14 @@
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 
+// Per-admin key with safe IPv6 fallback. Authenticated admins are keyed by
+// stable identity (id → email); unauthenticated requests fall back to an IPv6-
+// normalised IP key via ipKeyGenerator (the express-rate-limit v7 helper that
+// collapses an IPv6 address to its /64 prefix so a malicious client cannot
+// rotate the last 64 bits to bypass per-IP limits — see ERR_ERL_KEY_GEN_IPV6).
 function keyByAdmin(req) {
-  return req.user?.id || req.user?.email || req.ip;
+  if (req.user?.id) return `admin:id:${req.user.id}`;
+  if (req.user?.email) return `admin:email:${req.user.email}`;
+  return `admin:ip:${ipKeyGenerator(req.ip)}`;
 }
 
 function jsonHandler(message) {
