@@ -32,6 +32,9 @@ Core features include AI-powered Chat Therapy, Wellness Tools (State Tracker, Jo
 ### System Design Choices
 Drizzle ORM is used with a Neon PostgreSQL database. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting. An observability layer provides health and system endpoints. A `Prompt-OS Execution Prompt Library` ensures canonical prompt modules validated against `promptspec.schema.json`. Production readiness features include a 503 readiness gate, health probes, telemetry parity, request tracing, and hardened administration access governed by a `CHANGE_GATE` protocol. The platform includes a layered self-healing stack for automated monitoring, diagnosis, and repair, accessible via admin endpoints and including AI-driven diagnosis. Direct-routed public pages use the `PageLayout` wrapper for consistent navigation and safety footers.
 
+### Deployment Hygiene
+- **Service worker cache version**: `client/public/serviceWorker.js` defines `CACHE_VERSION` (currently `'2.1.0'`). **Bump this string on every meaningful frontend release** — the SW cache key is built from it, and the activate handler only deletes caches with *different* names. If you ship new code without bumping, every existing user keeps the old cached HTML/JS forever (the v2.0 → v2.1 deploy hit this exact bug). Match the version to the release tag (v2.1 → `'2.1.0'`, v2.2 → `'2.2.0'`, etc.).
+
 ## External Dependencies
 
 -   **OpenAI API**: AI chat therapy.

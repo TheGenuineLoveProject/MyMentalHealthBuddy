@@ -1,4 +1,4 @@
-const CACHE_VERSION = '2.0.0';
+const CACHE_VERSION = '2.1.0';
 const CACHE_NAME = `genuine-love-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `genuine-love-runtime-${CACHE_VERSION}`;
 const OFFLINE_QUEUE_DB = 'genuine-love-offline-queue';
