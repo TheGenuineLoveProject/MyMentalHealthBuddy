@@ -459,12 +459,19 @@ export default function Start() {
     setSelectedToolId(buttonId);
     track("first_tool_selected", { tool: buttonId });
     try {
+      // Phase 3 identity fix (v1.19): attach the canonical user JWT when
+      // present so logged-in users hitting /start get their real userId on
+      // the backend (`req.dbUserId`) instead of being bucketed into guest
+      // memory. Guest mode preserved via the existing `x-guest-id` header.
+      let token: string | null = null;
+      try { token = localStorage.getItem("mmhb_token"); } catch { /* noop */ }
       const res = await fetch("/api/ai/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-guest-id": getOrCreateGuestId(),
           "x-age-confirmed": "true",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({ message }),
       });

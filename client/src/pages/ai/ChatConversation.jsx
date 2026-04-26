@@ -126,9 +126,21 @@ export default function ChatConversation() {
     setError(null);
 
     try {
+      // Phase 3 identity fix (v1.19): attach the canonical user JWT when
+      // present so /chat surface posts resolve to the real userId on the
+      // backend (req.dbUserId) instead of falling through to "anonymous".
+      // Guest fallback header retained for parity with /start surface.
+      let token = null;
+      let guestId = null;
+      try { token = localStorage.getItem("mmhb_token"); } catch { /* noop */ }
+      try { guestId = localStorage.getItem("mmhb_guest_id"); } catch { /* noop */ }
       const res = await fetch("/api/ai/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(guestId ? { "x-guest-id": guestId } : {}),
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         credentials: "include",
         body: JSON.stringify({ message: input })
       });

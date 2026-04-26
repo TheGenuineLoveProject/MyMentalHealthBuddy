@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "Hello, I am exploring this for the first time."
+  },
+  {
+    "role": "assistant",
+    "content": "It's great that you're here and exploring! This can feel both exciting and a bit overwhelming. Would you like to share what specifically you're exploring? That could help us find a good starting point together."
+  }
+]
