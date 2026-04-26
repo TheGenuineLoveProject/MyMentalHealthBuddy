@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "quick check"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you might be feeling a bit uncertain. That's completely okay. Would you like to share what’s on your mind, or would you prefer a short grounding exercise to help center yourself?"
+  }
+]
