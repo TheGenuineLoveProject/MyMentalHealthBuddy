@@ -16,10 +16,11 @@
  */
 
 import { Link } from "wouter";
-import { Heart, Mail, Sparkles } from "lucide-react";
+import { Heart, Youtube, Music2, Sparkles } from "lucide-react";
 import { Instagram, Twitter, Facebook } from "../lib/lucide-brands";
 import SacredGeometryBg from "./SacredGeometryBg";
 import NewsletterSignup from "./NewsletterSignup";
+import { SOCIAL_LINKS } from "../config/social";
 import "../styles/healing-animations.css";
 
 export default function SacredFooter() {
@@ -48,9 +49,11 @@ export default function SacredFooter() {
   };
 
   const socialLinks = [
-    { icon: Heart, href: "/community", label: "Community" },
-    { icon: Mail, href: "/contact", label: "Contact" },
-    { icon: Sparkles, href: "/affirmations", label: "Affirmations" },
+    { icon: Instagram, href: SOCIAL_LINKS.instagram, label: "Instagram" },
+    { icon: Youtube, href: SOCIAL_LINKS.youtube, label: "YouTube" },
+    { icon: Music2, href: SOCIAL_LINKS.tiktok, label: "TikTok" },
+    { icon: Twitter, href: SOCIAL_LINKS.x, label: "X" },
+    { icon: Facebook, href: SOCIAL_LINKS.facebook, label: "Facebook" },
   ];
 
   return (

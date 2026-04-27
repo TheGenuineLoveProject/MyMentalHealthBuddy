@@ -1,50 +1,8 @@
 import { Link } from "wouter";
-import { GraduationCap, ArrowLeft, BookOpen, Heart, Sparkles, Shield, Brain } from "lucide-react";
+import { GraduationCap, ArrowLeft, ArrowRight, BookOpen, Heart, Sparkles, Shield, Brain } from "lucide-react";
+import { GUIDES } from "@/content/learn";
 
-const guides = [
-  {
-    id: 1,
-    title: "Getting Started with Emotional Healing",
-    description: "A gentle introduction to beginning your healing journey with practical first steps.",
-    icon: Heart,
-    category: "Foundation"
-  },
-  {
-    id: 2,
-    title: "Understanding Your Nervous System",
-    description: "Learn how your nervous system responds to stress and discover ways to find calm.",
-    icon: Shield,
-    category: "Body-Mind"
-  },
-  {
-    id: 3,
-    title: "Building Daily Wellness Habits",
-    description: "Create sustainable routines that support your mental and emotional wellbeing.",
-    icon: Sparkles,
-    category: "Daily Practice"
-  },
-  {
-    id: 4,
-    title: "Processing Difficult Emotions",
-    description: "Healthy strategies for working through challenging feelings with self-compassion.",
-    icon: Brain,
-    category: "Emotional Work"
-  },
-  {
-    id: 5,
-    title: "Developing Self-Compassion",
-    description: "Practical exercises to cultivate kindness and understanding toward yourself.",
-    icon: Heart,
-    category: "Foundation"
-  },
-  {
-    id: 6,
-    title: "Creating Healthy Boundaries",
-    description: "Learn to set and maintain boundaries that protect your emotional wellbeing.",
-    icon: Shield,
-    category: "Relationships"
-  }
-];
+const ICON_MAP = { Heart, Shield, Sparkles, Brain, BookOpen };
 
 export default function LearnGuides() {
   return (
@@ -72,31 +30,37 @@ export default function LearnGuides() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {guides.map((guide) => {
-            const IconComponent = guide.icon;
+          {GUIDES.map((guide) => {
+            const IconComponent = ICON_MAP[guide.icon] || Heart;
             return (
-              <div
-                key={guide.id}
-                className="bg-card rounded-2xl p-6 border border-border/50 hover:border-primary/30 transition-all group"
+              <Link
+                key={guide.slug}
+                href={`/learn/guides/${guide.slug}`}
+                className="block bg-card rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-md transition-all group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 no-underline"
                 data-testid={`card-guide-${guide.id}`}
+                aria-label={`Read: ${guide.title}`}
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <IconComponent className="w-6 h-6 text-primary" />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <span className="text-xs uppercase tracking-wider text-muted-foreground">
                       {guide.category}
                     </span>
-                    <h2 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+                    <h2 className="text-lg font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
                       {guide.title}
                     </h2>
                     <p className="text-muted-foreground text-sm">
                       {guide.description}
                     </p>
+                    <span className="inline-flex items-center gap-1 mt-3 text-sm text-primary font-medium opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">
+                      Read guide
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

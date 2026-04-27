@@ -802,10 +802,10 @@ const categoryPresets = {
         subtitle: 'Find what speaks to you.',
         variant: 'plain',
         cards: [
-          { icon: 'BookOpen', title: 'Articles', text: 'In-depth explorations.' },
-          { icon: 'FileText', title: 'Guides', text: 'Step-by-step support.' },
-          { icon: 'Bookmark', title: 'Resources', text: 'Curated collections.' },
-          { icon: 'Search', title: 'Search', text: 'Find what you need.' }
+          { icon: 'BookOpen', title: 'Articles', text: 'In-depth explorations.', href: '/learn/articles' },
+          { icon: 'FileText', title: 'Guides', text: 'Step-by-step support.', href: '/learn/guides' },
+          { icon: 'Bookmark', title: 'Resources', text: 'Curated collections.', href: '/healing-library' },
+          { icon: 'Search', title: 'Search', text: 'Find what you need.', href: '/content' }
         ]
       }
     ]

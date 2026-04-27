@@ -188,14 +188,12 @@ function SacredCard({ card, index, readingLevel = 'intermediate' }) {
   const title = getVariant(card.title, readingLevel);
   const text = getVariant(card.text, readingLevel);
   const meta = card.meta ? getVariant(card.meta, readingLevel) : null;
-  
-  return (
-    <article
-      className={styles.card}
-      data-aos="fade-up"
-      data-aos-delay={100 + (index * 100)}
-      data-testid={`card-${typeof title === 'string' ? title.toLowerCase().replace(/\s+/g, '-') : index}`}
-    >
+  const href = card.href || card.link || card.path || card.to || null;
+  const isExternal = typeof href === 'string' && /^https?:\/\//.test(href);
+  const titleSlug = typeof title === 'string' ? title.toLowerCase().replace(/\s+/g, '-') : index;
+
+  const cardBody = (
+    <>
       <div className={styles.cardIconWrapper}>
         <IconComponent className={styles.cardIcon} />
       </div>
@@ -210,6 +208,45 @@ function SacredCard({ card, index, readingLevel = 'intermediate' }) {
           {meta}
         </span>
       )}
+    </>
+  );
+
+  const sharedProps = {
+    className: styles.card,
+    'data-aos': 'fade-up',
+    'data-aos-delay': 100 + (index * 100),
+    'data-testid': `card-${titleSlug}`
+  };
+
+  if (href && isExternal) {
+    return (
+      <a
+        {...sharedProps}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={typeof title === 'string' ? title : undefined}
+      >
+        {cardBody}
+      </a>
+    );
+  }
+
+  if (href) {
+    return (
+      <Link
+        {...sharedProps}
+        href={href}
+        aria-label={typeof title === 'string' ? title : undefined}
+      >
+        {cardBody}
+      </Link>
+    );
+  }
+
+  return (
+    <article {...sharedProps}>
+      {cardBody}
     </article>
   );
 }
