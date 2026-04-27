@@ -388,34 +388,39 @@ async function serviceWorkerNoStoreCheck() {
   }
 }
 
-// Trust-proxy SOP — required for express-rate-limit to see real client IPs
-// behind Replit autoscale; absence triggers a ValidationError in prod logs.
-async function trustProxyCheck() {
-  const appPath = path.resolve(process.cwd(), "server/app.mjs");
-  let src;
-  try {
-    src = await fs.readFile(appPath, "utf8");
-  } catch (err) {
+// Trust-proxy SOP — runtime introspection of the live Express setting.
+// Stricter than a source-file regex: catches the case where the line exists
+// but the branch never executed (e.g. wrapped in a `if (NODE_ENV)` guard).
+// Required for express-rate-limit to see real client IPs behind Replit
+// autoscale; absence triggers a ValidationError in prod logs.
+async function trustProxyCheck(ctx) {
+  const app = ctx?.app;
+  if (!app || typeof app.get !== "function") {
     return {
-      status: "fail",
-      message: `Could not read server/app.mjs: ${err?.message || String(err)}`,
-      endpoint: "static:server/app.mjs",
+      status: "warn",
+      message: "Could not introspect Express app — runtime context unavailable",
+      endpoint: "runtime:app.get('trust proxy')",
     };
   }
-  // Strip line-comments so commented-out code never produces a false PASS.
-  const stripped = src.split("\n").filter((line) => !/^\s*\/\//.test(line)).join("\n");
-  const setProxy = /app\.set\(\s*["']trust proxy["']\s*,\s*[^)]+\)/.test(stripped);
-  if (setProxy) {
+  const value = app.get("trust proxy");
+  // Express normalises `app.set("trust proxy", 1)` into a function internally,
+  // so we accept truthy values that aren't the literal default `false`.
+  const isEnabled = value === 1 || value === true ||
+    (typeof value === "string" && value.length > 0) ||
+    (typeof value === "function" && value !== false) ||
+    (Array.isArray(value) && value.length > 0) ||
+    (typeof value === "number" && value >= 1);
+  if (isEnabled) {
     return {
       status: "pass",
-      message: "app.set('trust proxy', ...) is configured",
-      endpoint: "static:server/app.mjs",
+      message: "Express trust proxy is enabled for production proxy-aware rate limiting.",
+      endpoint: "runtime:app.get('trust proxy')",
     };
   }
   return {
     status: "warn",
-    message: "Express trust proxy not set — express-rate-limit logs ValidationError in prod",
-    endpoint: "static:server/app.mjs",
+    message: `Express trust proxy is NOT enabled (runtime value: ${JSON.stringify(value)}). Set app.set('trust proxy', 1) in server/app.mjs.`,
+    endpoint: "runtime:app.get('trust proxy')",
   };
 }
 
@@ -463,17 +468,17 @@ async function blogCommentsSchemaCheck() {
 // -----------------------------------------------------------------------------
 // Runner — dispatches HTTP probes vs static (in-process) checks
 // -----------------------------------------------------------------------------
-async function runCheck(check, baseUrl) {
+async function runCheck(check, baseUrl, ctx) {
   if (check.type === "static" && typeof check.staticCheck === "function") {
-    return runStaticCheck(check);
+    return runStaticCheck(check, ctx);
   }
   return probe(check, baseUrl);
 }
 
-async function runStaticCheck(check) {
+async function runStaticCheck(check, ctx) {
   const started = Date.now();
   try {
-    const result = await check.staticCheck();
+    const result = await check.staticCheck(ctx);
     const status = result?.status || "warn";
     return {
       id: check.id,
@@ -592,7 +597,10 @@ function baseUrlFromReq(_req) {
 router.get("/status", async (req, res) => {
   const baseUrl = baseUrlFromReq(req);
   const startedAt = Date.now();
-  const results = await Promise.all(CHECKS.map((c) => runCheck(c, baseUrl)));
+  // ctx threads runtime references (e.g. req.app for runtime introspection
+   // checks like trust-proxy-active) to static checks without a global.
+   const ctx = { app: req.app };
+   const results = await Promise.all(CHECKS.map((c) => runCheck(c, baseUrl, ctx)));
   const passing = results.filter((r) => r.status === "pass").length;
   const warning = results.filter((r) => r.status === "warn").length;
   const failing = results.filter((r) => r.status === "fail").length;
