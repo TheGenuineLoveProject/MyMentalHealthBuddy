@@ -125,18 +125,6 @@ export default function SacredFooter() {
 
           {/* Newsletter */}
           <div className="lg:pl-12">
-            <h3 
-              className="font-serif text-lg font-semibold mb-3"
-              style={{ color: '#2f5d5d', fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              Stay Connected
-            </h3>
-            <p 
-              className="text-sm mb-4"
-              style={{ color: '#3a3a3a', opacity: 0.75 }}
-            >
-              Receive wellness reflections and gentle reminders. No spam, unsubscribe anytime.
-            </p>
             <NewsletterSignup variant="footer" source="sacred-footer" />
           </div>
         </div>

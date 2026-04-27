@@ -7295,7 +7295,7 @@ const rawRoutes = [
       title: 'Common',
       titleHighlight: 'questions.',
       subtitle: 'Find answers to frequently asked questions.',
-      primaryCta: { label: 'Browse FAQ', href: '#faq' },
+      primaryCta: { label: 'Browse FAQ', href: '/faq#faq-list' },
       secondaryCta: { label: 'Contact Support', href: '/support' }
     }
   },

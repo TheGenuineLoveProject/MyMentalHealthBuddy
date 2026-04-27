@@ -57,6 +57,7 @@ const Premium = lazy(() => import("./pages/Premium.jsx"));
 const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
+const FAQPage = lazy(() => import("./pages/FAQPage.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
 const Privacy = lazy(() => import("./pages/Privacy.jsx"));
 const Invite = lazy(() => import("./pages/Invite.jsx"));
@@ -1520,7 +1521,7 @@ export default function App() {
               <Route path="/professional-resources">{() => <ConfigRoute route="/professional-resources" />}</Route>
 
               {/* Support Pages - Config Driven */}
-              <Route path="/faq">{() => <ConfigRoute route="/faq" />}</Route>
+              <Route path="/faq">{() => <FAQPage />}</Route>
               <Route path="/support">{() => <ConfigRoute route="/support" />}</Route>
               <Route path="/resources">{() => <ConfigRoute route="/resources" />}</Route>
               <Route path="/contact"><Contact /></Route>

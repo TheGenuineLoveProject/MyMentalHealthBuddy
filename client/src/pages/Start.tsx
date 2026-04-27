@@ -207,6 +207,8 @@ const TOOL_BUTTONS = [
   {
     id: "calm",
     label: "Calm Me Down",
+    description: "A guided breath reset to settle your nervous system.",
+    duration: "~60 sec",
     icon: Heart,
     message: "I feel anxious right now and need to calm down",
     testId: "button-tool-calm",
@@ -214,6 +216,8 @@ const TOOL_BUTTONS = [
   {
     id: "think",
     label: "Help Me Think Clearly",
+    description: "Reframe a stuck thought with a gentle cognitive shift.",
+    duration: "~2 min",
     icon: Brain,
     message: "I'm stuck in negative thoughts and need help thinking clearly",
     testId: "button-tool-think",
@@ -221,6 +225,8 @@ const TOOL_BUTTONS = [
   {
     id: "feel",
     label: "Understand This Feeling",
+    description: "Name what's underneath — clarity without judgment.",
+    duration: "~2 min",
     icon: Eye,
     message: "I feel overwhelmed and want to understand what I'm feeling",
     testId: "button-tool-feel",
@@ -859,14 +865,24 @@ export default function Start() {
                 onClick={() => runTool(btn.id, btn.message)}
                 disabled={loading !== null}
                 data-testid={btn.testId}
-                className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-6 text-slate-900 dark:text-slate-50 shadow-sm hover:shadow-md hover:border-amber-400 dark:hover:border-amber-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="group flex flex-col items-start text-left gap-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-5 text-slate-900 dark:text-slate-50 shadow-sm hover:shadow-md hover:border-amber-400 dark:hover:border-amber-500 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
-                {isLoading ? (
-                  <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
-                ) : (
-                  <Icon className="w-6 h-6 text-amber-500 group-hover:scale-110 transition-transform" />
-                )}
-                <span className="text-sm font-medium">{btn.label}</span>
+                <div className="flex items-center justify-between w-full">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 flex items-center justify-center group-hover:scale-105 transition-transform">
+                    {isLoading ? (
+                      <Loader2 className="w-5 h-5 animate-spin text-amber-600 dark:text-amber-400" />
+                    ) : (
+                      <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                    )}
+                  </div>
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-700/50">
+                    {btn.duration}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-base font-semibold text-slate-900 dark:text-slate-50">{btn.label}</span>
+                  <span className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{btn.description}</span>
+                </div>
               </button>
             );
           })}
@@ -971,11 +987,11 @@ export default function Start() {
             <ol className="space-y-3 mb-4" data-testid="list-tool-steps">
               {tool.exercise.steps.map((step, i) => (
                 <Fragment key={i}>
-                  <li className="flex gap-3" data-testid={`step-tool-${i}`}>
-                    <span className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-200 dark:bg-amber-800 text-amber-900 dark:text-amber-100 font-semibold text-sm flex items-center justify-center">
+                  <li className="flex items-start gap-4" data-testid={`step-tool-${i}`}>
+                    <span className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 dark:from-amber-600 dark:to-amber-800 text-white font-semibold text-base flex items-center justify-center shadow-sm ring-1 ring-amber-400/40 dark:ring-amber-700/60">
                       {i + 1}
                     </span>
-                    <span className="text-slate-800 dark:text-slate-200 pt-0.5">{step}</span>
+                    <span className="text-slate-800 dark:text-slate-200 pt-1.5 leading-relaxed">{step}</span>
                   </li>
                   {i === 0 && tool.exercise.steps.length > 1 && (
                     <p

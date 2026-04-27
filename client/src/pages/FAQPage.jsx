@@ -1,10 +1,8 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, HelpCircle, ChevronDown, ChevronUp, MessageCircle, Shield, Heart, Sparkles } from "lucide-react";
+import { ArrowLeft, HelpCircle, ChevronDown, ChevronUp, MessageCircle } from "lucide-react";
 import { useSEO, createFAQSchema } from "../hooks/useSEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
-import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
-import { pickBenefits } from "@/lib/benefits";
+import PageLayout from "@/components/layout/PageLayout.jsx";
 
 const faqs = [
   {
@@ -150,34 +148,14 @@ const faqs = [
 
 function FAQItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
-  <WellnessPageShell
-    title="FAQPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="F A Q — MyMentalHealthBuddy" description="Explore f a q tools for your wellness journey." />
-
-
     <div className="border-b border-[var(--sage-200)] last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-4 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded-lg"
         data-testid={`button-faq-${question.slice(0, 20).replace(/\s+/g, '-').toLowerCase()}`}
+        aria-expanded={isOpen}
       >
         <span className="text-body-md font-medium pr-4">{question}</span>
         {isOpen ? (
@@ -213,12 +191,10 @@ export default function FAQPage() {
   });
 
   return (
-    <div className="min-h-screen hero-gradient">
-      <div className="content-wrapper py-8">
-        <div className="max-w-3xl mx-auto">
-          <header className="mb-8">
-            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+    <PageLayout maxWidth="max-w-3xl" className="hero-gradient">
+      <header className="mb-8">
+            <Link href="/" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+              <ArrowLeft className="h-4 w-4" /> Back to Home
             </Link>
             <div className="flex items-center gap-3">
               <div className="icon-container icon-xl icon-gradient-teal">
@@ -231,7 +207,7 @@ export default function FAQPage() {
             </div>
           </header>
 
-          <div className="space-y-8">
+          <div id="faq-list" className="space-y-8 scroll-mt-24">
             {faqs.map((section, idx) => (
               <section key={idx} className="card-bordered">
                 <h2 className="text-heading-md text-teal mb-4">{section.category}</h2>
@@ -263,11 +239,7 @@ export default function FAQPage() {
               </div>
             </section>
 
-            <SafetyFooter variant="default" />
-          </div>
-        </div>
       </div>
-    </div>
-  </WellnessPageShell>
+    </PageLayout>
   );
 }

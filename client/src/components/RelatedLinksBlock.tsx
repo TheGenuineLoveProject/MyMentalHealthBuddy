@@ -35,9 +35,9 @@ export function RelatedLinksBlock({
             className="block"
             data-testid={`link-related-${idx}`}
           >
-            <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 hover:bg-black/20 transition">
+            <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 hover:bg-black/20 transition flex items-center justify-between gap-3">
               <div className="text-sm font-medium">{l.label}</div>
-              <div className="text-xs opacity-70">{l.href}</div>
+              <span className="text-xs opacity-60" aria-hidden="true">→</span>
             </div>
           </Link>
         ))}
