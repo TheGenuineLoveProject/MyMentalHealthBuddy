@@ -62,6 +62,22 @@ const STATEMENTS = [
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
   )`,
 
+  // Companion table to blog_posts — production was throwing
+  // "Failed to fetch blog post" because every blog detail page joins comments.
+  // Kept here as a boot-time safety net even though shared/schema.mjs is the
+  // source of truth (npm run db:push handles the rest).
+  `CREATE TABLE IF NOT EXISTS blog_comments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    post_id UUID NOT NULL,
+    user_id UUID NOT NULL,
+    content TEXT NOT NULL,
+    parent_id UUID,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_blog_comments_post_id ON blog_comments(post_id)`,
+  `CREATE INDEX IF NOT EXISTS idx_blog_comments_parent_id ON blog_comments(parent_id)`,
+
   `CREATE TABLE IF NOT EXISTS newsletter_subscribers (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email VARCHAR(255) NOT NULL UNIQUE,

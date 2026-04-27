@@ -132,6 +132,29 @@ const CHECKS = [
     staticCheck: serviceWorkerNoStoreCheck,
     remediation: "server/app.mjs must serve /service-worker.js dynamically with Cache-Control: no-cache, no-store, must-revalidate AND inject a per-deploy BUILD_ID into the file body.",
   },
+
+  // Production hardening (Apr-27) — Express must trust the autoscale proxy
+  // hop so rate limiters see the real client IP instead of the proxy's IP.
+  {
+    id: "trust-proxy-active",
+    name: "Express trust proxy configured",
+    domain: "platform",
+    type: "static",
+    staticCheck: trustProxyCheck,
+    remediation: "server/app.mjs must call `app.set('trust proxy', 1)` shortly after `const app = express()`. Required for express-rate-limit to identify real client IPs behind the Replit autoscale proxy; otherwise rate-limit ValidationError surfaces in prod logs and limiters can be bypassed or over-triggered.",
+  },
+
+  // Schema drift guard — prod was logging "Failed to fetch blog post" because
+  // blog_comments was defined in shared/schema.mjs but missing from the live
+  // database. Surface schema gaps proactively as a SOP warning.
+  {
+    id: "blog-comments-schema",
+    name: "blog_comments table reachable",
+    domain: "content",
+    type: "static",
+    staticCheck: blogCommentsSchemaCheck,
+    remediation: "Run `npm run db:push --force` to sync shared/schema.mjs to the live database. server/db/ensureSchema.mjs also creates the table at boot as a safety net.",
+  },
 ];
 
 // -----------------------------------------------------------------------------
@@ -362,6 +385,78 @@ async function serviceWorkerNoStoreCheck() {
     };
   } finally {
     clearTimeout(timer);
+  }
+}
+
+// Trust-proxy SOP — required for express-rate-limit to see real client IPs
+// behind Replit autoscale; absence triggers a ValidationError in prod logs.
+async function trustProxyCheck() {
+  const appPath = path.resolve(process.cwd(), "server/app.mjs");
+  let src;
+  try {
+    src = await fs.readFile(appPath, "utf8");
+  } catch (err) {
+    return {
+      status: "fail",
+      message: `Could not read server/app.mjs: ${err?.message || String(err)}`,
+      endpoint: "static:server/app.mjs",
+    };
+  }
+  // Strip line-comments so commented-out code never produces a false PASS.
+  const stripped = src.split("\n").filter((line) => !/^\s*\/\//.test(line)).join("\n");
+  const setProxy = /app\.set\(\s*["']trust proxy["']\s*,\s*[^)]+\)/.test(stripped);
+  if (setProxy) {
+    return {
+      status: "pass",
+      message: "app.set('trust proxy', ...) is configured",
+      endpoint: "static:server/app.mjs",
+    };
+  }
+  return {
+    status: "warn",
+    message: "Express trust proxy not set — express-rate-limit logs ValidationError in prod",
+    endpoint: "static:server/app.mjs",
+  };
+}
+
+// Schema-drift guard — verify blog_comments table exists in the live DB so
+// blog detail pages don't 500. The query is a metadata lookup (information_schema)
+// so it returns instantly and never reads user data.
+async function blogCommentsSchemaCheck() {
+  try {
+    const dbModule = await import("../db/client.mjs");
+    const dbClient = dbModule.default || dbModule.db;
+    if (!dbClient || typeof dbClient.execute !== "function") {
+      return {
+        status: "warn",
+        message: "DB client unavailable — cannot verify blog_comments schema",
+        endpoint: "static:db/blog_comments",
+      };
+    }
+    const { sql } = await import("drizzle-orm");
+    const result = await dbClient.execute(
+      sql`SELECT 1 FROM information_schema.tables WHERE table_name = 'blog_comments' LIMIT 1`
+    );
+    const rows = result?.rows || result || [];
+    const exists = Array.isArray(rows) ? rows.length > 0 : !!rows;
+    if (exists) {
+      return {
+        status: "pass",
+        message: "blog_comments table present",
+        endpoint: "db:blog_comments",
+      };
+    }
+    return {
+      status: "fail",
+      message: "blog_comments table MISSING — blog detail pages will 500",
+      endpoint: "db:blog_comments",
+    };
+  } catch (err) {
+    return {
+      status: "warn",
+      message: `Could not query schema: ${err?.message || String(err)}`,
+      endpoint: "db:blog_comments",
+    };
   }
 }
 

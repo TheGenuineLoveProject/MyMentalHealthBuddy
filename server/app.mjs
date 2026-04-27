@@ -44,6 +44,14 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// Trust the immediate proxy (Replit autoscale / load balancer) so that
+// req.ip and X-Forwarded-For are honoured by express-rate-limit. Without
+// this, rate limiters can either silently misfire (counting all traffic
+// against the proxy IP) or trigger ValidationError in production logs.
+// Value `1` means trust ONE proxy hop — narrowest correct setting for
+// Replit autoscale; do NOT set to `true` (would trust spoofed headers).
+app.set("trust proxy", 1);
+
 // ===== MIDDLEWARE =====
 app.use(cors({
   origin: (origin, cb) => {
