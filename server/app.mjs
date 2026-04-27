@@ -479,6 +479,16 @@ const EXTENDED_ROUTES = [
   { mount: "/api/wisdom-engine",             file: "./routes/wisdom-engine.mjs",             auth: "optional" },
   { mount: "/api/wisdom-synthesis",          file: "./routes/wisdom-synthesis.mjs",          auth: "optional" },
   { mount: "/api/wisdom-traditions",         file: "./routes/wisdom-traditions.mjs",         auth: "optional" },
+
+  // ─── Round 4.4 (Apr-27): final orphan-router mount pass ───────────────────
+  // These four routers existed in server/routes/ with valid GET handlers but
+  // were never wired in EXTENDED_ROUTES, so the SOP monitor flagged them as
+  // 404. Each was dry-run-imported and probed before adding here. None overlap
+  // with any locked AI/admin contract above.
+  { mount: "/api/consciousness",     file: "./routes/consciousness-expansion.mjs",   auth: "optional" },
+  { mount: "/api/mind-body",         file: "./routes/mind-body-integration.mjs",     auth: "optional" },
+  { mount: "/api/transformation",    file: "./routes/transformation-engine.mjs",     auth: "optional" },
+  { mount: "/api/trauma-healing",    file: "./routes/trauma-healing-protocols.mjs",  auth: "optional" },
 ];
 
 const mountedExtended = [];

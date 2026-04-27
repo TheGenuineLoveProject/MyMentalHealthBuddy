@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import { Link } from "wouter";
-import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise } from "lucide-react";
+import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise, RefreshCw } from "lucide-react";
 import BuddyPanel from "@/components/avatar/BuddyPanel";
 import type { BuddyState } from "@/lib/avatarState";
 import FeedbackPrompt from "@/components/FeedbackPrompt";
@@ -417,6 +417,10 @@ export default function Start() {
   const [error, setError] = useState<string | null>(null);
   const [crisis, setCrisis] = useState(false);
   const [streak, setStreak] = useState<StreakResult>(null);
+  // v4.4 — capture last attempt so the error UI can offer a one-tap retry
+  // when the network blips (transient connection failures, cold-start, OpenAI
+  // upstream hiccup). Pure UX recovery — never affects AI/tool execution.
+  const lastAttemptRef = useRef<{ id: string; message: string } | null>(null);
   // Engagement signals — fire-once per /start session.
   const [toolClickCount, setToolClickCount] = useState(0);
   const [toolCompleted, setToolCompleted] = useState(false);
@@ -512,6 +516,8 @@ export default function Start() {
     setStreak(null);
     setToolCompleted(false);
     toolCompletedLatchRef.current = false;
+    // v4.4 — record the attempt before fetch so the error UI can replay it.
+    lastAttemptRef.current = { id: buttonId, message };
     // v1.3: capture the entry-point as a Buddy signal so the avatar can
     // react immediately (before the AI response arrives) and as a fallback
     // when the AI doesn't tag modules. See mapToBuddyState above.
@@ -895,7 +901,25 @@ export default function Start() {
             data-testid="alert-error"
           >
             <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-            <span>{error}</span>
+            <div className="flex-1 flex flex-col gap-2">
+              <span>{error}</span>
+              {lastAttemptRef.current && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const a = lastAttemptRef.current;
+                    if (a) void runTool(a.id, a.message);
+                  }}
+                  disabled={!!loading}
+                  className="self-start inline-flex items-center gap-1.5 rounded-lg border border-rose-300 dark:border-rose-700 bg-white dark:bg-rose-900/40 px-3 py-1.5 text-xs font-semibold text-rose-800 dark:text-rose-100 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  data-testid="button-retry-tool"
+                  aria-label="Try again"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
+                  {loading ? "Trying again…" : "Try again"}
+                </button>
+              )}
+            </div>
           </div>
         )}
 
