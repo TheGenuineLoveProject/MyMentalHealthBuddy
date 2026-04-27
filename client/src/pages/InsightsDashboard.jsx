@@ -109,18 +109,21 @@ export default function InsightsDashboard() {
           </div>
 
           {completionStats?.eligibleForCelebration && (
-            <Link href="/celebration">
-              <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-amber-400 to-rose-400 text-white cursor-pointer hover:shadow-lg transition-all group" data-testid="link-celebration-banner">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">🎉</span>
-                    <div>
-                      <p className="font-semibold">Celebration Unlocked!</p>
-                      <p className="text-sm opacity-90">You've reached a milestone. Claim your self-love ritual.</p>
-                    </div>
+            <Link
+              href="/celebration"
+              className="block mt-4 p-4 rounded-xl bg-gradient-to-r from-amber-400 to-rose-400 text-white cursor-pointer hover:shadow-lg transition-all group no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
+              data-testid="link-celebration-banner"
+              aria-label="Celebration unlocked — claim your self-love ritual"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl" aria-hidden="true">🎉</span>
+                  <div>
+                    <p className="font-semibold no-underline">Celebration Unlocked!</p>
+                    <p className="text-sm opacity-90 no-underline">You've reached a milestone. Claim your self-love ritual.</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>
           )}
@@ -178,15 +181,18 @@ export default function InsightsDashboard() {
                 <EmotionAuraRing size={180} />
               </div>
 
-              <Link href="/community">
-                <div className="p-4 rounded-xl bg-gradient-to-r from-violet-100 to-purple-100 dark:from-violet-900/30 dark:to-purple-900/30 cursor-pointer hover:shadow-md transition group" data-testid="link-community">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium text-violet-800 dark:text-violet-300">Community Circle</p>
-                      <p className="text-sm text-violet-600 dark:text-violet-400">Share and receive wisdom</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-violet-500 group-hover:translate-x-1 transition-transform" />
+              <Link
+                href="/community"
+                className="block p-4 rounded-xl bg-gradient-to-r from-violet-100 to-purple-100 dark:from-violet-900/30 dark:to-purple-900/30 cursor-pointer hover:shadow-md transition group no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2"
+                data-testid="link-community"
+                aria-label="Community Circle — share and receive wisdom"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium text-violet-800 dark:text-violet-300 no-underline">Community Circle</p>
+                    <p className="text-sm text-violet-600 dark:text-violet-400 no-underline">Share and receive wisdom</p>
                   </div>
+                  <ArrowRight className="w-5 h-5 text-violet-500 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             </div>

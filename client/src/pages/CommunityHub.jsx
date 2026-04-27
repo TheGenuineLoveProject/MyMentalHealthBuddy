@@ -45,20 +45,23 @@ export default function CommunityHub() {
 
           <div className="grid gap-6 md:grid-cols-2 mb-12">
 
-            <Link href="/affirmations" data-testid="link-affirmation-wall">
-              <div className="rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg cursor-pointer border"
-                   style={{ background: 'linear-gradient(135deg, var(--glp-gold-10), var(--glp-gold-20))', borderColor: 'var(--glp-gold-30)' }}>
-                <div className="flex items-center gap-3 mb-3">
-                  <Sparkles className="w-6 h-6" style={{ color: 'var(--glp-gold)' }} />
-                  <h2 className="text-xl font-serif" style={{ color: 'var(--glp-ink)' }}>Affirmation Wall</h2>
-                </div>
-                <p className="text-sm mb-4" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
-                  Share light and receive light. Post anonymous affirmations and send hearts to others.
-                </p>
-                <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--glp-gold-deep)' }}>
-                  Visit the Wall <ArrowRight className="w-4 h-4" />
-                </div>
+            <Link
+              href="/affirmations"
+              className="block rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg cursor-pointer border no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
+              style={{ background: 'linear-gradient(135deg, var(--glp-gold-10), var(--glp-gold-20))', borderColor: 'var(--glp-gold-30)' }}
+              data-testid="link-affirmation-wall"
+              aria-label="Visit the Affirmation Wall"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <Sparkles className="w-6 h-6" style={{ color: 'var(--glp-gold)' }} />
+                <h2 className="text-xl font-serif no-underline" style={{ color: 'var(--glp-ink)' }}>Affirmation Wall</h2>
               </div>
+              <p className="text-sm mb-4 no-underline" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
+                Share light and receive light. Post anonymous affirmations and send hearts to others.
+              </p>
+              <span className="flex items-center gap-2 text-sm font-medium no-underline" style={{ color: 'var(--glp-gold-deep)' }}>
+                Visit the Wall <ArrowRight className="w-4 h-4" />
+              </span>
             </Link>
 
             <div className="rounded-2xl p-6 border"

@@ -154,11 +154,13 @@ export default function CelebrationRitual() {
       </div>
 
       <div className="relative z-10 max-w-2xl mx-auto px-4 py-8">
-        <Link href="/insights">
-          <div className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition mb-8 cursor-pointer" data-testid="link-back-insights">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Insights
-          </div>
+        <Link
+          href="/insights"
+          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition mb-8 cursor-pointer no-underline"
+          data-testid="link-back-insights"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Insights
         </Link>
 
         {phase === "intro" && (
@@ -280,13 +282,12 @@ export default function CelebrationRitual() {
                 Download Certificate
               </button>
 
-              <Link href="/insights">
-                <button 
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-                  data-testid="button-return-dashboard"
-                >
-                  Return to Dashboard
-                </button>
+              <Link
+                href="/insights"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+                data-testid="button-return-dashboard"
+              >
+                Return to Dashboard
               </Link>
             </div>
           </div>

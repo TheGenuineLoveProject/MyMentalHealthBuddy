@@ -125,8 +125,22 @@ export default function NarrativeDrafts() {
 
   if (!token) {
     return (
-      <div className="p-6 max-w-3xl mx-auto text-center py-20" data-testid="text-auth-required">
-        <p className="text-muted-foreground">Admin access required.</p>
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }} data-testid="text-auth-required">
+        <div className="max-w-md w-full text-center p-10 rounded-3xl bg-white shadow-xl" style={{ border: '1px solid var(--glp-sage-15)' }}>
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md" style={{ background: 'linear-gradient(135deg, var(--glp-rose-15), var(--glp-paper))' }}>
+            <FileText className="w-8 h-8" style={{ color: 'var(--glp-rose)' }} />
+          </div>
+          <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>Admin Access Required</h2>
+          <p className="text-sm mb-6 text-muted-foreground">Sign in with an admin token to view and manage narrative drafts.</p>
+          <div className="flex flex-col gap-3">
+            <Link href="/admin" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-white font-medium transition-all hover:-translate-y-0.5 no-underline" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }} data-testid="link-admin-gate">
+              Go to Command Center
+            </Link>
+            <Link href="/" className="text-sm font-medium no-underline" style={{ color: 'var(--glp-sage)' }} data-testid="link-home-gate">
+              Or return Home
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
