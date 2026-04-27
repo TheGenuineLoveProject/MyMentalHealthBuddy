@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
+import OperationsPanel from "@/components/admin/OperationsPanel";
 import styles from "./CommandCenter.module.css";
 
 function StatusBadge({ status }) {
@@ -1598,6 +1600,19 @@ export default function AdminCommandCenter() {
         </div>
 
         <DailyOpsChecklist />
+
+        <div className="my-8 space-y-6" data-testid="section-platform-healing">
+          <div className="flex items-center gap-3">
+            <Shield className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} />
+            <h2 className="text-2xl font-serif" style={{ color: 'var(--glp-ink)' }}>Platform Healing &amp; Operations</h2>
+            <span className="text-xs uppercase tracking-wider px-2 py-1 rounded" style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}>Live</span>
+          </div>
+          <p className="text-sm text-muted-foreground" style={{ marginTop: '-0.25rem' }}>
+            Real-time SOP probes and self-heal controls. Safe, read-only diagnostics with explicit manual repair triggers.
+          </p>
+          <SOPMonitorPanel />
+          <OperationsPanel />
+        </div>
 
         <ToolsStatusWidget />
 

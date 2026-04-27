@@ -29,6 +29,15 @@ The project uses a monorepo structure with React 18 (TypeScript, Vite) for the c
 ### Feature Specifications
 Core features include AI-powered Chat Therapy, Wellness Tools (State Tracker, Journal Prompts), and specialized APIs. The platform supports a four-tier subscription model and includes security features like rate limiting, CSP, and input sanitization. Engagement tools comprise gamification and a Content Studio. User features offer daily healing reminders, voice affirmations, and an AI companion. Admin tools provide dashboards, and content is organized via a Learning Hub. The `/growth` page serves as a "Metacognition Mirror," displaying user tenure, mirror stats, dominant feelings from journal data, metacognitive invitations, and dynamic milestone cards. The "Peace Scape" surface (`/peacescape`) provides a sanctuary environment.
 
+### Round 5 — Platform Healing & Command Center Consolidation
+- A→Z 360° platform audit: TypeScript clean (exit 0), 1010 routes registered, 27 admin pages, 161 ConfigRoute teasers, 136 AdminTools registrations; all SPA route probes return 200; no TODO/FIXME/HACK markers; "thin" pages (LandingPage, AIChatPage, EthicsPage, reflection) confirmed legitimate wrappers, not stubs.
+- Security scan baseline: 2 moderate dev-only npm vulns (esbuild CORS, Vite stack); 2 SAST findings (`ai/core/policy.ts:35` properly-escaped RegExp, `ai/core/promptRunner.ts:20` controlled `path.join`) — both low-priority, not introduced this round.
+- Command Center upgrade: integrated two previously-orphaned admin panels into `/admin` (`AdminCommandCenter`):
+  - `SOPMonitorPanel` — live SOP probe runner querying `/api/admin/sop/status` (22 checks, dual-token JWT/session fetch).
+  - `OperationsPanel` — self-heal controls + AI diagnoses metrics (MTTR, safety-filtered count, self-heal runs).
+  - New "Platform Healing & Operations" section placed between `DailyOpsChecklist` and `ToolsStatusWidget`.
+- Locked files (`server/routes/ai.mjs`, `orchestrator.mjs`, `memory.mjs`, `profileStore.mjs`, crisis logic, `responsePolicy.mjs`, admin auth) untouched. Forbidden files (`package.json`, `vite.config.ts`, `drizzle.config.ts`) untouched.
+
 ### System Design Choices
 Drizzle ORM is used with a Neon PostgreSQL database. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting. An observability layer provides health and system endpoints. A `Prompt-OS Execution Prompt Library` ensures canonical prompt modules validated against `promptspec.schema.json`. Production readiness features include a 503 readiness gate, health probes, telemetry parity, request tracing, and hardened administration access governed by a `CHANGE_GATE` protocol. The platform includes a layered self-healing stack for automated monitoring, diagnosis, and repair, accessible via admin endpoints and including AI-driven diagnosis. Direct-routed public pages use the `PageLayout` wrapper for consistent navigation and safety footers.
 
