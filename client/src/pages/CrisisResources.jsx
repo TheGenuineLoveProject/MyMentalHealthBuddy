@@ -114,13 +114,13 @@ export default function CrisisResources() {
       <div className="relative">
         <div className="relative z-10">
           <Link 
-            href="/dashboard"
+            href="/"
             className="inline-flex items-center gap-2 text-body-sm transition mb-6 hover:opacity-80"
             style={{ color: 'var(--glp-sage-deep)' }}
-            data-testid="link-back-dashboard"
+            data-testid="link-back-home"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Dashboard
+            Back to Home
           </Link>
 
           <div className="rounded-2xl p-6 mb-8" style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-blush)' }}>

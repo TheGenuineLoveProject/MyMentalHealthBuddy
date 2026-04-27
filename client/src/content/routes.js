@@ -7660,7 +7660,7 @@ const rawRoutes = [
     }
   },
   {
-    route: '/account/settings',
+    route: '/account',
     category: 'account',
     pageLabel: 'Account Settings',
     title: 'Account Settings — The Genuine Love Project',
@@ -7688,7 +7688,7 @@ const rawRoutes = [
       titleHighlight: 'Sessions.',
       subtitle: 'View and manage devices signed into your account.',
       primaryCta: { label: 'View Sessions', href: '#sessions' },
-      secondaryCta: { label: 'Back to Settings', href: '/account/settings' }
+      secondaryCta: { label: 'Back to Settings', href: '/settings' }
     }
   },
   {
@@ -7705,7 +7705,7 @@ const rawRoutes = [
       titleHighlight: 'Account.',
       subtitle: 'This action is permanent and cannot be undone.',
       primaryCta: { label: 'Contact Support', href: '/support' },
-      secondaryCta: { label: 'Back to Settings', href: '/account/settings' }
+      secondaryCta: { label: 'Back to Settings', href: '/settings' }
     }
   },
   
