@@ -108,3 +108,13 @@
 {"type":"buddy_baseline_applied","guestId":"gate-tel-buddy_baseline_applied","metadata":{"test":1},"ts":1777172579534}
 {"type":"buddy_response_alignment","guestId":"gate-tel-buddy_response_alignment","metadata":{"test":1},"ts":1777172579574}
 {"type":"user_feedback","guestId":"gate-tel-user_feedback","metadata":{"test":1},"ts":1777172579614}
+{"type":"buddy_panel_viewed","guestId":"g_mogslyl7_ftmugn","metadata":{"surface":"start","state":"calm"},"ts":1777269898881}
+{"type":"start_page_click","guestId":"g_mogslyl7_ftmugn","metadata":{},"ts":1777269898883}
+{"type":"buddy_accessibility_ready","guestId":"g_mogslyl7_ftmugn","metadata":{},"ts":1777269898884}
+{"type":"first_tool_selected","guestId":"g_mogslyl7_ftmugn","metadata":{"tool":"calm"},"ts":1777269919622}
+{"type":"buddy_grounding_visible","guestId":"g_mogslyl7_ftmugn","metadata":{"state":"anxious"},"ts":1777269919624}
+{"type":"buddy_panel_viewed","guestId":"g_mogslyl7_ftmugn","metadata":{"surface":"start","state":"anxious"},"ts":1777269919624}
+{"type":"first_response_success","guestId":"g_mogslyl7_ftmugn","metadata":{"button":"calm","toolId":"box_breathing"},"ts":1777269922293}
+{"type":"buddy_response_alignment","guestId":"g_mogslyl7_ftmugn","metadata":{"state":"anxious"},"ts":1777269922304}
+{"type":"buddy_share_shown","guestId":"g_mogslyl7_ftmugn","metadata":{"toolId":"box_breathing","buddyState":"anxious"},"ts":1777269922309}
+{"type":"buddy_tool_expression","guestId":"g_mogslyl7_ftmugn","metadata":{"toolId":"box_breathing","buddyState":"anxious"},"ts":1777269922464}
