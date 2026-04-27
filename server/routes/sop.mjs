@@ -104,6 +104,34 @@ const CHECKS = [
     staticCheck: csrfMountCheck,
     remediation: "Tracked debt (advisor: do NOT fix yet). server/app.mjs:101 — change `app.use(csrfProtection)` to `app.use(csrfProtection())`. Test order: (1) verify CSRF cookie issuance still works on GET, (2) verify state-changing requests now require x-csrf-token header, (3) update any client mutations to send the cookie value as the header.",
   },
+
+  // PWA cache hygiene (Apr-27) — three checks that together prove every
+  // deploy actually reaches end users instead of being shadowed by stale
+  // service-worker caches or browser caches of index.html.
+  {
+    id: "sw-cache-versioned",
+    name: "Service worker uses per-deploy cache name",
+    domain: "platform",
+    type: "static",
+    staticCheck: swCacheVersionedCheck,
+    remediation: "client/public/service-worker.js must declare CACHE_NAME using the BUILD_ID template (e.g. `glp-cache-${BUILD_ID}`) so each deploy invalidates the prior cache.",
+  },
+  {
+    id: "index-html-no-store",
+    name: "index.html served with no-store",
+    domain: "platform",
+    type: "static",
+    staticCheck: indexHtmlNoStoreCheck,
+    remediation: "server/app.mjs spaCacheHeaders must set Cache-Control: no-cache, no-store, must-revalidate on index.html, and the SPA fallback (res.sendFile) must do the same.",
+  },
+  {
+    id: "sw-no-store",
+    name: "service-worker.js served with no-store + BUILD_ID",
+    domain: "platform",
+    type: "static",
+    staticCheck: serviceWorkerNoStoreCheck,
+    remediation: "server/app.mjs must serve /service-worker.js dynamically with Cache-Control: no-cache, no-store, must-revalidate AND inject a per-deploy BUILD_ID into the file body.",
+  },
 ];
 
 // -----------------------------------------------------------------------------
@@ -188,6 +216,153 @@ async function csrfMountCheck() {
     message: "Could not locate csrfProtection mount in server/app.mjs (manual review needed)",
     endpoint: "static:server/app.mjs",
   };
+}
+
+// PWA cache hygiene — verify the service worker uses a per-deploy cache name
+// derived from BUILD_ID, not a hardcoded "v1" that would never auto-purge.
+async function swCacheVersionedCheck() {
+  const swPath = path.resolve(process.cwd(), "client/public/service-worker.js");
+  let src;
+  try {
+    src = await fs.readFile(swPath, "utf8");
+  } catch (err) {
+    return {
+      status: "fail",
+      message: `Could not read client/public/service-worker.js: ${err?.message || String(err)}`,
+      endpoint: "static:client/public/service-worker.js",
+    };
+  }
+  const usesBuildId = /__BUILD_ID__/.test(src) && /CACHE_NAME\s*=\s*`?\$\{?CACHE_PREFIX\}?\$\{BUILD_ID\}/.test(src);
+  const purgesPrefix = /name\.startsWith\(CACHE_PREFIX\)/.test(src);
+  const staticV1 = /CACHE_NAME\s*=\s*["']glp-cache-v1["']/.test(src);
+  if (staticV1) {
+    return {
+      status: "fail",
+      message: "Service worker still uses hardcoded `glp-cache-v1` — every deploy reuses the same cache",
+      endpoint: "static:client/public/service-worker.js",
+    };
+  }
+  if (usesBuildId && purgesPrefix) {
+    return {
+      status: "pass",
+      message: "Service worker cache name is BUILD_ID-versioned and purges prior glp-cache-* entries on activate",
+      endpoint: "static:client/public/service-worker.js",
+    };
+  }
+  return {
+    status: "warn",
+    message: "Service worker present but cache versioning / purge pattern not detected",
+    endpoint: "static:client/public/service-worker.js",
+  };
+}
+
+// Probe the SPA shell and confirm Cache-Control is no-store. We probe in-process
+// (loopback) so this works in dev and prod identically.
+async function indexHtmlNoStoreCheck() {
+  const baseUrl = `http://127.0.0.1:${
+    Number.parseInt(String(process.env.PORT || 5000), 10) || 5000
+  }`;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 3000);
+  try {
+    const res = await fetch(`${baseUrl}/`, {
+      method: "GET",
+      signal: ctrl.signal,
+      headers: { accept: "text/html", "x-sop-probe": "1" },
+    });
+    const cc = (res.headers.get("cache-control") || "").toLowerCase();
+    if (!cc) {
+      return {
+        status: "warn",
+        message: `GET / returned ${res.status} but no Cache-Control header — relying on browser defaults`,
+        endpoint: "GET /",
+      };
+    }
+    const isNoStore = cc.includes("no-store") || cc.includes("no-cache");
+    if (isNoStore) {
+      return {
+        status: "pass",
+        message: `GET / Cache-Control: ${cc}`,
+        endpoint: "GET /",
+      };
+    }
+    return {
+      status: "warn",
+      message: `GET / Cache-Control is "${cc}" — browsers may cache stale index.html across deploys`,
+      endpoint: "GET /",
+    };
+  } catch (err) {
+    return {
+      status: "fail",
+      message: err?.name === "AbortError" ? "Timeout (>3s) probing /" : `Error: ${err?.message || String(err)}`,
+      endpoint: "GET /",
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function serviceWorkerNoStoreCheck() {
+  const baseUrl = `http://127.0.0.1:${
+    Number.parseInt(String(process.env.PORT || 5000), 10) || 5000
+  }`;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 3000);
+  try {
+    const res = await fetch(`${baseUrl}/service-worker.js`, {
+      method: "GET",
+      signal: ctrl.signal,
+      headers: { "x-sop-probe": "1" },
+    });
+    if (!res.ok) {
+      return {
+        status: "fail",
+        message: `GET /service-worker.js returned ${res.status}`,
+        endpoint: "GET /service-worker.js",
+      };
+    }
+    const cc = (res.headers.get("cache-control") || "").toLowerCase();
+    const buildIdHeader = res.headers.get("x-mmhb-build-id");
+    const body = await res.text();
+    const hasBuildIdInjected = buildIdHeader && body.includes(buildIdHeader);
+    const hasUnreplacedToken = body.includes("__BUILD_ID__");
+    const isNoStore = cc.includes("no-store") || cc.includes("no-cache");
+
+    if (hasUnreplacedToken) {
+      return {
+        status: "fail",
+        message: "service-worker.js still contains __BUILD_ID__ — server is not injecting build identifier",
+        endpoint: "GET /service-worker.js",
+      };
+    }
+    if (!isNoStore) {
+      return {
+        status: "warn",
+        message: `service-worker.js Cache-Control is "${cc || "(empty)"}" — should be no-store`,
+        endpoint: "GET /service-worker.js",
+      };
+    }
+    if (!hasBuildIdInjected) {
+      return {
+        status: "warn",
+        message: "Cache headers OK, but BUILD_ID header missing — check server/app.mjs SW handler",
+        endpoint: "GET /service-worker.js",
+      };
+    }
+    return {
+      status: "pass",
+      message: `Cache-Control: ${cc} | BUILD_ID injected (${buildIdHeader})`,
+      endpoint: "GET /service-worker.js",
+    };
+  } catch (err) {
+    return {
+      status: "fail",
+      message: err?.name === "AbortError" ? "Timeout (>3s) probing /service-worker.js" : `Error: ${err?.message || String(err)}`,
+      endpoint: "GET /service-worker.js",
+    };
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 // -----------------------------------------------------------------------------

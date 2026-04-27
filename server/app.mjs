@@ -123,6 +123,74 @@ const CLIENT_ROOT = path.join(__dirname, "..", "client");
 const CLIENT_DIST = path.join(CLIENT_ROOT, "dist");
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
 
+// ---------------------------------------------------------------------------
+// PWA cache-busting: per-deploy BUILD_ID injected into service-worker.js so
+// the SW's cache name (glp-cache-${BUILD_ID}) is unique on every deploy. The
+// activate handler then auto-purges all prior glp-cache-* entries.
+// Prefer Replit's deployment id when present; otherwise fall back to a per-
+// boot timestamp so dev sessions also get a fresh SW.
+// ---------------------------------------------------------------------------
+const BUILD_ID =
+  process.env.BUILD_ID ||
+  process.env.REPLIT_DEPLOYMENT_ID ||
+  process.env.REPL_ID ||
+  `boot-${Date.now()}`;
+globalThis.__MMHB_BUILD_ID__ = BUILD_ID;
+// Operator visibility: in production an unstable per-boot BUILD_ID would cause
+// SW cache thrash across autoscale containers. Warn loudly so the issue is
+// caught before it degrades UX, but keep the fallback so dev never breaks.
+if (!IS_DEV && BUILD_ID.startsWith("boot-")) {
+  console.warn(
+    "[boot] BUILD_ID falling back to boot timestamp in production — " +
+    "set REPLIT_DEPLOYMENT_ID/REPL_ID/BUILD_ID for stable PWA cache versioning"
+  );
+}
+
+const NO_STORE_HEADERS = "no-cache, no-store, must-revalidate";
+
+// Serve service-worker.js dynamically (BEFORE static middleware so we win).
+// Injects BUILD_ID and forces no-store so browsers always pick up new SW code.
+app.get(["/service-worker.js", "/serviceWorker.js"], async (_req, res, next) => {
+  try {
+    const fs = await import("node:fs/promises");
+    const swCandidates = [
+      path.join(CLIENT_ROOT, "public", "service-worker.js"), // dev (source)
+      path.join(CLIENT_DIST, "service-worker.js"),           // prod (built)
+    ];
+    let body = null;
+    for (const candidate of swCandidates) {
+      try {
+        body = await fs.readFile(candidate, "utf8");
+        break;
+      } catch (_) { /* try next */ }
+    }
+    if (!body) return next();
+    const hydrated = body.replace(/__BUILD_ID__/g, BUILD_ID);
+    res.setHeader("Content-Type", "application/javascript; charset=utf-8");
+    res.setHeader("Cache-Control", NO_STORE_HEADERS);
+    res.setHeader("Service-Worker-Allowed", "/");
+    res.setHeader("X-MMHB-Build-Id", BUILD_ID);
+    return res.send(hydrated);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// Cache-Control policy for SPA static files:
+//   • index.html       -> no-cache (always check for new build)
+//   • Vite-hashed asset -> immutable, 1 year (filename includes content hash)
+//   • everything else  -> default (express handles)
+const spaCacheHeaders = (res, filePath) => {
+  if (filePath.endsWith(`${path.sep}index.html`) || filePath.endsWith("/index.html")) {
+    res.setHeader("Cache-Control", NO_STORE_HEADERS);
+    return;
+  }
+  // Vite hashes look like /assets/Foo-AbCdEfGh.js (>=6 hash chars)
+  if (/[\\/]assets[\\/].+[-.][A-Za-z0-9_-]{6,}\.(js|css|png|jpg|jpeg|webp|svg|woff2?|ttf|ico)$/.test(filePath)) {
+    res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+  }
+};
+
 let viteDevServer = null;
 if (IS_DEV) {
   const { createServer: createViteServer } = await import("vite");
@@ -134,9 +202,9 @@ if (IS_DEV) {
   });
   app.use(viteDevServer.middlewares);
 } else {
-  app.use(express.static(CLIENT_DIST, { index: "index.html" }));
+  app.use(express.static(CLIENT_DIST, { index: "index.html", setHeaders: spaCacheHeaders }));
 }
-app.use(express.static(PUBLIC_DIR, { index: false }));
+app.use(express.static(PUBLIC_DIR, { index: false, setHeaders: spaCacheHeaders }));
 
 // ----------------------------
 // ROUTES
@@ -471,12 +539,16 @@ app.get("*", async (req, res, next) => {
       const indexPath = path.join(CLIENT_ROOT, "index.html");
       let html = await fs.readFile(indexPath, "utf-8");
       html = await viteDevServer.transformIndexHtml(req.originalUrl, html);
-      return res.status(200).set({ "Content-Type": "text/html" }).end(html);
+      return res
+        .status(200)
+        .set({ "Content-Type": "text/html", "Cache-Control": NO_STORE_HEADERS })
+        .end(html);
     } catch (e) {
       viteDevServer.ssrFixStacktrace(e);
       return next(e);
     }
   }
+  res.setHeader("Cache-Control", NO_STORE_HEADERS);
   return res.sendFile(path.join(CLIENT_DIST, "index.html"));
 });
 // ----------------------------
