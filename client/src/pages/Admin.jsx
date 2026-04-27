@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useAuth } from "../context/AuthContext.jsx";
 import { 
   Users, FileText, Activity, Shield, TrendingUp, Clock, 
@@ -643,6 +643,7 @@ function OverviewSection({ stats, realtimeData, metricsError = false }) {
 
 function UsersSection({ stats }) {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   const mockUsers = [
     { id: 1, name: "Sarah M.", email: "sarah@example.com", status: "active", plan: "premium", sessions: 24, joined: "2 days ago", avatar: "S" },
     { id: 2, name: "James K.", email: "james@example.com", status: "active", plan: "free", sessions: 8, joined: "1 week ago", avatar: "J" },
@@ -672,12 +673,13 @@ function UsersSection({ stats }) {
                   style={{ border: '2px solid var(--glp-sage-15)', background: 'white', color: 'var(--glp-charcoal)' }}
                 />
                 <button 
-                  onClick={() => toast({ title: "Add User", description: "User creation form coming soon" })}
+                  onClick={() => setLocation("/admin/users")}
                   className="px-5 py-3 rounded-xl text-white text-sm font-medium transition-all hover:-translate-y-0.5"
                   style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}
-                  data-testid="button-add-user"
+                  data-testid="button-manage-users"
+                  aria-label="Open user management"
                 >
-                  Add User
+                  Manage Users
                 </button>
               </div>
             </div>

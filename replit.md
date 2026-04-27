@@ -36,6 +36,7 @@ Core features include AI-powered Chat Therapy, Wellness Tools (State Tracker, Jo
   - `SOPMonitorPanel` — live SOP probe runner querying `/api/admin/sop/status` (22 checks, dual-token JWT/session fetch).
   - `OperationsPanel` — self-heal controls + AI diagnoses metrics (MTTR, safety-filtered count, self-heal runs).
   - New "Platform Healing & Operations" section placed between `DailyOpsChecklist` and `ToolsStatusWidget`.
+- Connectivity audit Phase 2: 0 broken Link targets (106 internal hrefs all resolve to registered routes), 0 dead onClick handlers (no empty `()=>{}`, no `noop`), 0 forms missing `onSubmit` (only intentional wireframe sample), all 4 `role="button"` interactions properly wired with `onClick`+`onKeyDown`+`tabIndex`. Discovered and fixed one placeholder: Admin.jsx UsersSection "Add User" button (was a stub showing "coming soon" toast) — wired to navigate to `/admin/users` via wouter `useLocation`, renamed to "Manage Users", `data-testid="button-manage-users"`, added `aria-label`.
 - Locked files (`server/routes/ai.mjs`, `orchestrator.mjs`, `memory.mjs`, `profileStore.mjs`, crisis logic, `responsePolicy.mjs`, admin auth) untouched. Forbidden files (`package.json`, `vite.config.ts`, `drizzle.config.ts`) untouched.
 
 ### System Design Choices
