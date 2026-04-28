@@ -126,3 +126,38 @@ OTEL_TRACES_SAMPLER_ARG=0.1
 2. Configure trace exporter for chosen backend
 3. Add custom spans for critical operations
 4. Set up trace-based alerts
+
+---
+
+## Implementation status — Week 2 Foundation Sprint (2026-04)
+
+The "Next Steps" above are now done in the additive `server/observability/` module. Summary:
+
+- **SDK installed**: `@opentelemetry/sdk-node` + `@opentelemetry/auto-instrumentations-node` are wired in `server/observability/tracing.mjs`.
+- **Loaded via `--import`**: the workflow and deployment `run` commands both inject `NODE_OPTIONS='--import ./server/observability/preload.mjs'`, which calls `startTracing()` before Express / pg / http load. This is required for auto-instrumentation patching.
+- **Exporter**: OTLP/HTTP exporter is configured if `OTEL_EXPORTER_OTLP_ENDPOINT` is set; otherwise the SDK runs with `OTEL_TRACES_EXPORTER=none` so no network traffic is generated. Spans are still created in-process so `traceparent` headers propagate to downstream services.
+- **Custom spans**: not yet added. Auto-instrumentations cover http/express/pg/fetch. To add a manual span use `import { trace } from "@opentelemetry/api"; const span = trace.getTracer("mmhb").startSpan("name"); ...; span.end();`.
+- **Trace-based alerts**: deferred to a backend of choice (Honeycomb / Tempo / Grafana Cloud). Wiring is endpoint-only; no SaaS lock-in.
+
+### Operator-visible state
+
+`GET /api/admin/observability/tracing` returns:
+
+```json
+{
+  "ok": true,
+  "tracing": {
+    "enabled": true,
+    "reason": "started",
+    "exporter": "none",
+    "endpoint": null,
+    "serviceName": "mymentalhealthbuddy",
+    "serviceVersion": "1.0.0",
+    "environment": "development",
+    "startedAt": "...",
+    "errors": []
+  }
+}
+```
+
+Set `OTEL_EXPORTER_OTLP_ENDPOINT=https://otlp.example.com` (and optionally `OTEL_EXPORTER_OTLP_HEADERS=authorization=Bearer XYZ`) to start exporting.

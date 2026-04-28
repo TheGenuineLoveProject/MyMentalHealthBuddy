@@ -189,3 +189,68 @@ All counters are in-memory, aggregated, and reset on server restart.
 4. **Transparent**: This document fully describes everything that is collected
 5. **Reversible**: Remove the `increment()` calls and the layer disappears completely
 6. **No frontend impact**: Zero additional API calls, scripts, or UI elements added
+
+---
+
+## Week 2 Foundation Sprint — OpenTelemetry + PagerDuty (additive, 2026-04)
+
+This section documents the Week 2 wiring layered on top of the existing in-process metrics and structured logging. Nothing prior was changed.
+
+### What landed
+
+| File | Purpose |
+|---|---|
+| `server/observability/preload.mjs` | `--import` entrypoint that calls `startTracing()` before any other module loads |
+| `server/observability/tracing.mjs` | OpenTelemetry NodeSDK with auto-instrumentations for http, express, pg, fetch |
+| `server/observability/alerter.mjs` | PagerDuty Events API v2 client with dedup, dry-run, and console-fallback |
+| `server/observability/safetyAlerts.mjs` | Typed wrappers (`alertCrisisPipelineFailure`, `alertWebhookSignatureFailure`, etc.) — call sites import these, never the raw alerter |
+| `server/routes/observability.mjs` | Admin-gated diagnostic surface mounted at `/api/admin/observability` |
+| `docs/runbooks/pagerduty.md` | On-call runbook for configuring + responding to alerts |
+
+### How tracing is loaded
+
+The workflow command and the deployment `run` command both inject:
+
+```
+NODE_OPTIONS='--import ./server/observability/preload.mjs'
+```
+
+This guarantees the OpenTelemetry SDK starts **before** Express, pg, or any HTTP client loads, which is required for auto-instrumentation patching to work correctly.
+
+### Behaviour matrix
+
+| Condition | Result |
+|---|---|
+| `OTEL_DISABLED=true` | SDK never starts (escape hatch) |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` set | Spans exported via OTLP/HTTP to that endpoint |
+| Neither set (default) | SDK starts with `OTEL_TRACES_EXPORTER=none` — spans are created in-process (so `req.spanContext` is populated and W3C `traceparent` headers propagate) but nothing is exported. **Critical:** this avoids the SDK's default `127.0.0.1:4318` target, which would spam `ECONNREFUSED` in environments without a local collector. |
+| `OTEL_LOG_LEVEL` (default `ERROR`) | Quiets the OTel internal diagnostic logger |
+
+Health probe URLs (`/health`, `/ready`, `/api/health`, `/__replco/*`) are filtered out of incoming HTTP spans to keep cardinality manageable. `instrumentation-fs` and `instrumentation-net` are disabled (extreme noise / low value).
+
+### PagerDuty alerter — gates
+
+The alerter is **always safe to call**. Behaviour is gated by env vars:
+
+| Condition | Result |
+|---|---|
+| `PAGERDUTY_ROUTING_KEY` unset | No-op + `logger.warn` (always-on console fallback) |
+| `ALERTS_ENABLED=false` | Dry-run + `logger.warn`, never pages |
+| `NODE_ENV !== "production"` | Dry-run + `logger.warn` (override with `ALERTS_FORCE=true`) |
+| All gates pass | Posts to `https://events.pagerduty.com/v2/enqueue` |
+
+Local dedup window is 5 minutes per `(severity, dedupKey)` pair to prevent alert storms during tight failure loops.
+
+### Admin diagnostic endpoints
+
+All gated by `requireAuth` + `requireAdmin` + `adminLimiter` via the parent `app.mjs` mount. Read-only except where noted.
+
+| Method + Path | Purpose |
+|---|---|
+| `GET  /api/admin/observability/` | Endpoint catalog |
+| `GET  /api/admin/observability/tracing` | Tracing SDK state, exporter, recent errors |
+| `GET  /api/admin/observability/alerter` | Alerter config, totals (sent/suppressed/failed), last error |
+| `GET  /api/admin/observability/health` | Combined health rollup of the observability stack itself |
+| `POST /api/admin/observability/alerter/test` | Fire one synthetic `info`-severity alert with a unique dedup key (validates wiring without faking a real failure) |
+
+See `docs/runbooks/pagerduty.md` for response procedures and configuration steps.

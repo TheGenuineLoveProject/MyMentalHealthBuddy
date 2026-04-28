@@ -5,19 +5,15 @@ modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 [deployment]
 deploymentTarget = "autoscale"
 build = ["sh", "-c", "npm install && npm run build"]
-run = ["sh", "-c", "NODE_ENV=production node server/app.mjs"]
+run = ["sh", "-c", "NODE_ENV=production NODE_OPTIONS='--import ./server/observability/preload.mjs' node server/app.mjs"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 5099
-externalPort = 3000
-
-[[ports]]
 localPort = 24678
-externalPort = 3002
+externalPort = 3000
 
 [agent]
 expertMode = true
@@ -38,13 +34,13 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node --import ./server/observability/preload.mjs server/app.mjs"
+waitForPort = 5000
 
 [nix]
 channel = "stable-25_05"
