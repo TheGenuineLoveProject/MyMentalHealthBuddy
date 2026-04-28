@@ -57,6 +57,9 @@ All motion respects `prefers-reduced-motion`. Nothing in the existing app import
 ### System Design Choices
 Drizzle ORM is used with a Neon PostgreSQL database. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting. An observability layer provides health and system endpoints. A `Prompt-OS Execution Prompt Library` ensures canonical prompt modules validated against `promptspec.schema.json`. Production readiness features include a 503 readiness gate, health probes, telemetry parity, request tracing, and hardened administration access governed by a `CHANGE_GATE` protocol. The platform includes a layered self-healing stack for automated monitoring, diagnosis, and repair, accessible via admin endpoints and including AI-driven diagnosis. Direct-routed public pages use the `PageLayout` wrapper for consistent navigation and safety footers.
 
+### Deployment Configuration
+Autoscale deployment with split build/run phases: build runs `npm install && npm run build` once at deploy time; the run command is `NODE_ENV=production node server/app.mjs` only — no install/build at container start. This eliminates the previous ~30-second cold-start penalty on autoscale scale-ups (build no longer runs per-container). Required asset `client/public/icons/flower-of-life.svg` (sacred-geometry pattern referenced by the Footer background) is committed in both `client/public/icons/` and `public/icons/`, removing the build-time "didn't resolve" warning and runtime 404.
+
 ## External Dependencies
 
 -   **OpenAI API**: AI chat therapy.
