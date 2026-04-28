@@ -53,6 +53,10 @@ export function csrfProtection(req, res, next) {
   if (req.path === "/api/leads") return next();
   if (req.path === "/api/contact") return next();
   if (req.path === "/api/feedback") return next();
+  // v2.0 Prompt 3.2 — public awareness scanning (optionalAuth, stateless,
+  // no DB writes unless severity threshold crossed). Authenticated /report
+  // and /progress routes pass through the Bearer-token check below.
+  if (req.path === "/api/awareness/detect") return next();
 
   const auth = req.headers?.authorization || "";
   if (auth.startsWith("Bearer ")) return next();

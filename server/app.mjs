@@ -226,6 +226,10 @@ app.use("/api/telemetry", telemetryRoutes);
 // Healing engine (gated by age verification; admin sub-routes self-gate)
 app.use("/api/ai/healing", requireAdult, aiHealingRoutes);
 
+// v2.0 Prompt 3.2 — Awareness detection pipeline (per-route auth inside)
+const { default: awarenessRoutes } = await import("./routes/awareness.mjs");
+app.use("/api/awareness", awarenessRoutes);
+
 // Business engine (staff/admin only; admin sub-routes self-gate)
 app.use("/api/ai/business", aiBusinessRoutes);
 
