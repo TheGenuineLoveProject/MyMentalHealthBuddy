@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import {
   Brain, Heart, Wind, Shield, Activity, Compass, ArrowRight,
-  AlertTriangle, ArrowLeft, BookOpen, Sparkles,
+  AlertTriangle, ArrowLeft, BookOpen, Sparkles, ShieldAlert, Moon,
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
@@ -62,6 +62,33 @@ const TOOLS = [
     color: "from-indigo-500 to-purple-500",
     testid: "tool-discernment",
   },
+  {
+    icon: ShieldAlert,
+    title: "Manipulation Detector",
+    body: "Paste a message or short exchange. We gently flag eight common tactics with reframes you can use.",
+    href: "/tools/manipulation-detector",
+    category: "Awareness",
+    color: "from-rose-500 to-amber-500",
+    testid: "tool-manipulation",
+  },
+  {
+    icon: Moon,
+    title: "Sleep Quality Self-Check",
+    body: "A 7-question sleep check inspired by PSQI. Get a band rating and CBT-I-style suggestions.",
+    href: "/tools/sleep-quality-calculator",
+    category: "Assessment",
+    color: "from-indigo-500 to-slate-500",
+    testid: "tool-sleep",
+  },
+  {
+    icon: Activity,
+    title: "Nervous System State Check",
+    body: "A polyvagal-informed self-check. Discover whether you are in safe, mobilized, or shut-down mode right now.",
+    href: "/tools/nervous-system-check",
+    category: "Somatic",
+    color: "from-teal-500 to-emerald-500",
+    testid: "tool-nervous-system",
+  },
 ];
 
 function ToolCard({ tool }) {
@@ -113,7 +140,7 @@ export default function WellnessToolsHub() {
             Take what you need. Leave the rest.
           </h1>
           <p className="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Six self-paced tools you can use right now, no signup needed. Educational only — never a diagnosis or
+            Nine self-paced tools you can use right now, no signup needed. Educational only — never a diagnosis or
             replacement for professional care.
           </p>
         </header>

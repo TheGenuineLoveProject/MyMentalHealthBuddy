@@ -79,6 +79,10 @@ const PHQ9Assessment = lazy(() => import("./pages/tools/PHQ9Assessment.jsx"));
 const CognitiveDistortionChecker = lazy(() => import("./pages/tools/CognitiveDistortionChecker.jsx"));
 const BreathPacer = lazy(() => import("./pages/tools/BreathPacer.jsx"));
 const BoundaryBuilderTool = lazy(() => import("./pages/tools/BoundaryBuilderTool.jsx"));
+const ManipulationDetector = lazy(() => import("./pages/tools/ManipulationDetector.jsx"));
+const SleepQualityCalculator = lazy(() => import("./pages/tools/SleepQualityCalculator.jsx"));
+const NervousSystemCheck = lazy(() => import("./pages/tools/NervousSystemCheck.jsx"));
+const ToolsIndex = lazy(() => import("./pages/tools/index.jsx"));
 const CommunityPage = lazy(() => import("./pages/CommunityFeed.jsx"));
 const CommunityHub = lazy(() => import("./pages/CommunityHub.jsx"));
 const CommunityCircle = lazy(() => import("./pages/CommunityCircle.jsx"));
@@ -489,6 +493,10 @@ export default function App() {
               <Route path="/tools/distortion-checker"><CognitiveDistortionChecker /></Route>
               <Route path="/tools/breath-pacer"><BreathPacer /></Route>
               <Route path="/tools/boundary-builder"><BoundaryBuilderTool /></Route>
+              <Route path="/tools/manipulation-detector"><ManipulationDetector /></Route>
+              <Route path="/tools/sleep-quality-calculator"><SleepQualityCalculator /></Route>
+              <Route path="/tools/nervous-system-check"><NervousSystemCheck /></Route>
+              <Route path="/tools/all"><ToolsIndex /></Route>
               <Route path="/affirmations">
                 <AffirmationWall />
               </Route>
