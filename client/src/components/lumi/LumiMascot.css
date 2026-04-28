@@ -148,3 +148,251 @@
   .lumi-mascot__head { animation: none !important; }
   .lumi-mascot__eyelid { transform: scaleY(0.05); opacity: 0; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+ * PNG MASCOT ANIMATIONS (additive)
+ *
+ * The brand owners replaced the original hand-built SVG mascot with a
+ * single canonical PNG, which collapsed the JSX to one <img> and made
+ * the body-part-targeting rules above (`.lumi-mascot__body`,
+ * `.lumi-mascot__head`, `.lumi-mascot__arm--left`, etc.) inert.
+ *
+ * The rules below restore visible motion by animating the wrapper +
+ * <img> + a chest-positioned ::after-style heart-glow span. Per-emotion
+ * variations adjust speed, rotation, scale, and the heart-glow tint so
+ * the same flat artwork still feels expressive across all 10 states.
+ *
+ * Compact instances (size ≤ 80px, e.g. logo badges in nav/footer) get
+ * smaller motion amplitudes so the breathing scale + float don't
+ * overflow tight overflow-hidden container clip regions.
+ *
+ * All motion respects prefers-reduced-motion at the bottom.
+ * ════════════════════════════════════════════════════════════════ */
+
+.lumi-mascot--png {
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+  animation: lumi-png-float 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.lumi-mascot--png[data-compact="true"] {
+  animation: lumi-png-float-compact 6.5s ease-in-out infinite;
+}
+
+.lumi-mascot--png .lumi-mascot__img {
+  display: block;
+  position: relative;
+  z-index: 0;
+  transform-origin: 50% 60%;
+  animation: lumi-png-breathe 4.2s ease-in-out infinite;
+  transition: filter 600ms ease-out, transform 600ms ease-out;
+  will-change: transform, filter;
+}
+
+.lumi-mascot--png[data-compact="true"] .lumi-mascot__img {
+  animation: lumi-png-breathe-compact 4.2s ease-in-out infinite;
+}
+
+/* Heart-glow halo pinned over the mascot's chest */
+.lumi-mascot__heart-glow {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 36%;
+  height: 36%;
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 170, 80, 0.55) 0%,
+    rgba(255, 170, 80, 0.20) 45%,
+    rgba(255, 170, 80, 0) 75%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 1;
+  animation: lumi-png-heart-pulse 3s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+/* Tiny logo badges hide the heart glow — too small to read as a heart */
+.lumi-mascot--png[data-compact="true"] .lumi-mascot__heart-glow {
+  display: none;
+}
+
+/* ── Base keyframes ─────────────────────────────────────────────── */
+@keyframes lumi-png-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes lumi-png-float-compact {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-2px); }
+}
+@keyframes lumi-png-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.035); }
+}
+@keyframes lumi-png-breathe-compact {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.02); }
+}
+@keyframes lumi-png-heart-pulse {
+  0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.92); }
+  50%      { opacity: 0.85; transform: translate(-50%, -50%) scale(1.10); }
+}
+
+/* ── Per-emotion overrides (img layer) ──────────────────────────── */
+.lumi-mascot--png[data-emotion="joy"] .lumi-mascot__img {
+  animation: lumi-png-joy 1.8s ease-in-out infinite;
+  filter: saturate(1.1) brightness(1.03);
+}
+@keyframes lumi-png-joy {
+  0%, 100% { transform: scale(1.02) rotate(-3deg); }
+  50%      { transform: scale(1.05) rotate(3deg); }
+}
+
+.lumi-mascot--png[data-emotion="celebration"] .lumi-mascot__img {
+  animation: lumi-png-celebrate 0.9s ease-in-out infinite;
+  filter: saturate(1.15) brightness(1.05);
+}
+@keyframes lumi-png-celebrate {
+  0%, 100% { transform: scale(1.04) rotate(-5deg) translateY(0); }
+  50%      { transform: scale(1.08) rotate(5deg) translateY(-4px); }
+}
+
+.lumi-mascot--png[data-emotion="empathy"] .lumi-mascot__img {
+  animation: lumi-png-empathy 5s ease-in-out infinite;
+}
+@keyframes lumi-png-empathy {
+  0%, 100% { transform: scale(1.01) rotate(-4deg); }
+  50%      { transform: scale(1.03) rotate(-2deg); }
+}
+
+.lumi-mascot--png[data-emotion="comfort"] .lumi-mascot__img {
+  animation: lumi-png-comfort 5.5s ease-in-out infinite;
+}
+@keyframes lumi-png-comfort {
+  0%, 100% { transform: scale(1) rotate(0); }
+  50%      { transform: scale(1.025) rotate(1deg); }
+}
+
+.lumi-mascot--png[data-emotion="reflection"] .lumi-mascot__img {
+  animation: lumi-png-reflect 5.5s ease-in-out infinite;
+}
+@keyframes lumi-png-reflect {
+  0%, 100% { transform: scale(1.01) rotate(3deg); }
+  50%      { transform: scale(1.025) rotate(5deg); }
+}
+
+.lumi-mascot--png[data-emotion="concern"] .lumi-mascot__img {
+  animation: lumi-png-concern 6s ease-in-out infinite;
+  filter: saturate(0.9);
+}
+@keyframes lumi-png-concern {
+  0%, 100% { transform: scale(0.99); }
+  50%      { transform: scale(1.015); }
+}
+
+.lumi-mascot--png[data-emotion="sleepy"] .lumi-mascot__img {
+  animation: lumi-png-sleepy 7s ease-in-out infinite;
+  filter: saturate(0.85) brightness(0.97);
+}
+@keyframes lumi-png-sleepy {
+  0%, 100% { transform: scale(1) rotate(2deg); }
+  50%      { transform: scale(1.012) rotate(4deg); }
+}
+
+.lumi-mascot--png[data-emotion="surprise"] .lumi-mascot__img {
+  animation: lumi-png-surprise 1.4s ease-in-out infinite;
+  filter: brightness(1.04);
+}
+@keyframes lumi-png-surprise {
+  0%, 100% { transform: scale(1.03) translateY(-2px); }
+  50%      { transform: scale(1.06) translateY(-4px); }
+}
+
+.lumi-mascot--png[data-emotion="listening"] .lumi-mascot__img {
+  animation: lumi-png-listen 4.2s ease-in-out infinite;
+}
+@keyframes lumi-png-listen {
+  0%, 100% { transform: scale(1.01) rotate(-1deg); }
+  50%      { transform: scale(1.025) rotate(1deg); }
+}
+
+/* ── Per-emotion heart-glow tint/intensity ──────────────────────── */
+.lumi-mascot--png[data-emotion="celebration"] .lumi-mascot__heart-glow {
+  animation-duration: 0.9s;
+  background: radial-gradient(
+    circle,
+    rgba(255, 180, 90, 0.85) 0%,
+    rgba(255, 180, 90, 0.30) 45%,
+    rgba(255, 180, 90, 0) 75%
+  );
+}
+.lumi-mascot--png[data-emotion="joy"] .lumi-mascot__heart-glow {
+  animation-duration: 1.6s;
+  opacity: 0.85;
+}
+.lumi-mascot--png[data-emotion="empathy"] .lumi-mascot__heart-glow,
+.lumi-mascot--png[data-emotion="comfort"] .lumi-mascot__heart-glow {
+  background: radial-gradient(
+    circle,
+    rgba(244, 114, 182, 0.55) 0%,
+    rgba(244, 114, 182, 0.18) 45%,
+    rgba(244, 114, 182, 0) 75%
+  );
+}
+.lumi-mascot--png[data-emotion="concern"] .lumi-mascot__heart-glow {
+  animation-duration: 5s;
+  opacity: 0.40;
+}
+.lumi-mascot--png[data-emotion="sleepy"] .lumi-mascot__heart-glow {
+  animation-duration: 6s;
+  opacity: 0.25;
+}
+
+/* ── Click flash (full-mascot pop) ─────────────────────────────── */
+.lumi-mascot--png[data-flash="true"] .lumi-mascot__img {
+  animation: lumi-png-flash 700ms ease-out 1;
+  filter: brightness(1.15) drop-shadow(0 0 20px rgba(255, 180, 90, 0.8));
+}
+.lumi-mascot--png[data-flash="true"] .lumi-mascot__heart-glow {
+  animation: lumi-png-heart-flash 700ms ease-out 1;
+}
+@keyframes lumi-png-flash {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@keyframes lumi-png-heart-flash {
+  0%   { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); }
+  40%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.6); }
+  100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ── Hover (interactive only) ───────────────────────────────────── */
+.lumi-mascot--png[role="button"] { cursor: pointer; }
+.lumi-mascot--png[role="button"]:hover .lumi-mascot__img {
+  filter: brightness(1.06);
+}
+.lumi-mascot--png[role="button"]:focus-visible {
+  outline: 2px solid var(--lumi-amber-500, #f59e0b);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+/* ── Reduced motion override ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .lumi-mascot--png,
+  .lumi-mascot--png .lumi-mascot__img,
+  .lumi-mascot--png .lumi-mascot__heart-glow {
+    animation: none !important;
+  }
+  .lumi-mascot--png .lumi-mascot__heart-glow {
+    opacity: 0.4;
+  }
+}

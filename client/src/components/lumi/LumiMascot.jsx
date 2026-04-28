@@ -55,12 +55,17 @@ export default function LumiMascot({
     [interactive, handleClick]
   );
 
+  // Compact instances (logo badges, ≤80px) get reduced motion amplitudes so
+  // the breathing scale + float don't overflow tight container clip regions.
+  const compact = size <= 80;
+
   return (
     <div
       className={`lumi-mascot lumi-mascot--png ${className}`.trim()}
       data-emotion={safeEmotion}
       data-flash={flash ? "true" : "false"}
-      style={{ width: size, height: size }}
+      data-compact={compact ? "true" : "false"}
+      style={{ width: size, height: size, "--lumi-size": `${size}px` }}
       role={interactive ? "button" : "img"}
       tabIndex={interactive ? 0 : -1}
       aria-label={ariaLabel}
@@ -81,6 +86,7 @@ export default function LumiMascot({
         className="lumi-mascot__img"
         style={{ width: "100%", height: "100%", objectFit: "contain" }}
       />
+      <span className="lumi-mascot__heart-glow" aria-hidden="true" />
     </div>
   );
 }
