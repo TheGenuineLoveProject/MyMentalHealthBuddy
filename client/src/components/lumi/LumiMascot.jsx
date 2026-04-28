@@ -17,7 +17,7 @@
  *   className     — extra classes appended to the wrapper.
  */
 import { useCallback, useState } from "react";
-import lumiArtworkUrl from "@assets/mmhb_buddy_interactive_fullbody_1777359278366.png";
+import lumiArtworkUrl from "@assets/mmhb_buddy_interactive_fullbody_1777360563617.png";
 import "./LumiMascot.css";
 
 const VALID_EMOTIONS = [
