@@ -88,11 +88,14 @@ export function startTracing() {
         headers: parseHeaders(process.env.OTEL_EXPORTER_OTLP_HEADERS),
       });
     } else {
-      // No endpoint configured — disable exporters entirely so the SDK doesn't
-      // try its default OTLP/HTTP target (127.0.0.1:4318) and spam ECONNREFUSED.
+      // No endpoint configured — disable ALL exporters (traces, metrics, logs)
+      // so the SDK doesn't try its default OTLP/HTTP target (127.0.0.1:4318)
+      // and spam ECONNREFUSED every 60s from the metrics PeriodicExportingMetricReader.
       // Spans are still created (req.spanContext is populated, headers propagate)
       // — they just aren't exported anywhere.
       process.env.OTEL_TRACES_EXPORTER = process.env.OTEL_TRACES_EXPORTER || "none";
+      process.env.OTEL_METRICS_EXPORTER = process.env.OTEL_METRICS_EXPORTER || "none";
+      process.env.OTEL_LOGS_EXPORTER = process.env.OTEL_LOGS_EXPORTER || "none";
       traceExporter = undefined;
     }
 
