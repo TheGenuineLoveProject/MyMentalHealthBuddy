@@ -21,10 +21,17 @@ _quarantine/
 .cache/
 .pythonlibs/
 
-# ---- Build outputs (the deploy build regenerates these) ----
+# ---- Build outputs ----
+# node_modules/ stays excluded — 4.7GB would time out the upload, build phase
+# regenerates via `npm ci`.
 node_modules/
 dist/
-client/dist/
+# NOTE: client/dist/ is intentionally NOT excluded. The autoscale runtime
+# container does not preserve build-phase artifacts reliably, so the prebuilt
+# Vite bundle (~17MB) ships with the source upload to guarantee the SPA
+# entry point exists at runtime. The .replit run command also has a safety
+# net (`if [ ! -f client/dist/index.html ]; then npm run build; fi`) as a
+# belt-and-suspenders backup if the bundle ever goes stale.
 
 # ---- Version control ----
 .git/
