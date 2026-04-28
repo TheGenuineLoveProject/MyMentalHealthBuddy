@@ -5,7 +5,7 @@ import SEO from "../components/SEO";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
 import { useAuth } from "../context/AuthContext.jsx";
-import BuddyAvatar from "../components/avatar/BuddyAvatar";
+import LumiMascot from "../components/lumi/LumiMascot.jsx";
 
 export default function Register() {
   const [, setLocation] = useLocation();
@@ -93,7 +93,7 @@ export default function Register() {
                 style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 16px var(--glp-sage-deep-20)' }}
                 data-testid="img-register-logo"
               >
-                <BuddyAvatar state="calm" size={56} className="w-full h-full" />
+                <LumiMascot emotion="joy" size={56} />
               </span>
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>

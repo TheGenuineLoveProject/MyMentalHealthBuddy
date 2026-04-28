@@ -7,7 +7,7 @@ import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, AlertCircle, Lock, Eye, EyeOff, Heart, Shield, ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import SEO from "../components/SEO";
-import BuddyAvatar from "../components/avatar/BuddyAvatar";
+import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -223,7 +223,7 @@ export default function ResetPassword() {
               className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden"
               style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 14px var(--glp-sage-deep-20)' }}
             >
-              <BuddyAvatar state="calm" size={48} className="w-full h-full" />
+              <LumiMascot emotion="comfort" size={48} />
             </span>
             <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
           </Link>

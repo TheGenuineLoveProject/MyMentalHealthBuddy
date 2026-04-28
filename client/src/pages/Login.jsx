@@ -5,7 +5,7 @@ import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
-import BuddyAvatar from "../components/avatar/BuddyAvatar";
+import LumiMascot from "../components/lumi/LumiMascot.jsx";
 
 function landingPathFor(u) {
   // Mirrors AdminGuard policy (client/src/components/AdminGuard.jsx):
@@ -105,7 +105,7 @@ export default function Login() {
                 style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 4px 20px var(--glp-sage-deep-20)' }}
                 data-testid="img-login-logo"
               >
-                <BuddyAvatar state="calm" size={80} className="w-full h-full" />
+                <LumiMascot emotion="neutral" size={80} />
               </span>
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>
