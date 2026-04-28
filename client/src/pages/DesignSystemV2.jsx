@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { Helmet } from "react-helmet-async";
 import LumiMascot, { VALID_EMOTIONS } from "@/components/lumi/LumiMascot.jsx";
+import LumiMascotImage from "@/components/lumi/LumiMascotImage.jsx";
 import LumiBrandLogo from "@/components/lumi/LumiBrandLogo.jsx";
+import LumiBrandLockupImage from "@/components/lumi/LumiBrandLockupImage.jsx";
 import TGLPMandala from "@/components/lumi/TGLPMandala.jsx";
+import TGLPMandalaImage from "@/components/lumi/TGLPMandalaImage.jsx";
 import useScrollReveal from "@/hooks/useScrollReveal.js";
 import useBuddyEmotion from "@/hooks/useBuddyEmotion.js";
 
@@ -312,6 +315,32 @@ export default function DesignSystemV2() {
               <div className="lumi-card" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 160, flexDirection: "column", gap: 12 }}>
                 <TGLPMandala size={120} />
                 <div className="font-display-lumi lumi-text-base" style={{ color: "var(--lumi-text)" }}>The Genuine Love Project</div>
+              </div>
+            </div>
+          </Section>
+
+          {/* Real PNG art assets */}
+          <Section id="real-assets" kicker="Painted Art" title="Real PNG brand assets">
+            <p className="font-body-lumi lumi-text-base" style={{ color: "var(--lumi-text-muted)", marginTop: -16, marginBottom: 24, maxWidth: 720 }}>
+              Painted illustrations for marketing surfaces, hero headers, and social cards.
+              The pure-SVG versions above remain the default for interactive cases (cursor-tracking eyes,
+              per-emotion morphs, crisp scaling). Use these PNG components when you want the finished, illustrated look.
+            </p>
+            <div className="lumi-grid lumi-grid--3" data-reveal-stagger>
+              <div className="lumi-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 360, gap: 12 }}>
+                <LumiMascotImage size={240} animation="float" ariaLabel="Lumi (full-color illustration)" />
+                <div className="font-display-lumi lumi-text-base" style={{ fontWeight: 600, color: "var(--lumi-text)" }}>Lumi — Full body</div>
+                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>&lt;LumiMascotImage /&gt;</code>
+              </div>
+              <div className="lumi-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 360, gap: 12 }}>
+                <LumiBrandLockupImage height={88} href={null} />
+                <div className="font-display-lumi lumi-text-base" style={{ fontWeight: 600, color: "var(--lumi-text)" }}>MMHB lockup</div>
+                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>&lt;LumiBrandLockupImage /&gt;</code>
+              </div>
+              <div className="lumi-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 360, gap: 12, background: "var(--lumi-stone-900)" }}>
+                <TGLPMandalaImage size={220} rounded />
+                <div className="font-display-lumi lumi-text-base" style={{ fontWeight: 600, color: "var(--lumi-stone-50)" }}>The Genuine Love Project</div>
+                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-stone-300)" }}>&lt;TGLPMandalaImage /&gt;</code>
               </div>
             </div>
           </Section>
