@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Sparkles, Map, Heart, Wand2 } from "lucide-react";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import ZenScape from "@/components/zen/ZenScape";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import CustomizerPanel from "@/components/peacescape/CustomizerPanel";

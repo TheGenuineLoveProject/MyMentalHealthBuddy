@@ -5,7 +5,7 @@ import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star,
 import "../styles/canva-landing.css";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
-import BuddyAvatar from "../components/avatar/BuddyAvatar";
+import LumiMascot from "../components/lumi/LumiMascot.jsx";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -331,11 +331,9 @@ export default function CanvaLanding() {
             <Link href="/" className="brand-logo-link no-underline" style={{ textDecoration: 'none' }}>
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
                 <div className="relative w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] lg:w-[56px] lg:h-[56px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 12px var(--glp-sage-deep-20)' }}>
-                  <BuddyAvatar
-                    state="calm"
+                  <LumiMascot
+                    emotion="joy"
                     size={56}
-                    className="w-full h-full"
-                    data-testid="header-buddy-avatar"
                   />
                 </div>
                 <div className="flex flex-col leading-snug">
@@ -987,11 +985,9 @@ export default function CanvaLanding() {
                 style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 1px 4px var(--glp-sage-deep-12)' }}
                 aria-hidden="true"
               >
-                <BuddyAvatar
-                  state="calm"
+                <LumiMascot
+                  emotion="neutral"
                   size={32}
-                  className="w-full h-full"
-                  data-testid="footer-buddy-avatar"
                 />
               </div>
               <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>
