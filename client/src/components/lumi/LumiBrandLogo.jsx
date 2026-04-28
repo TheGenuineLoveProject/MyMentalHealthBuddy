@@ -1,134 +1,102 @@
 /*
- * LumiBrandLogo — MyMentalHealthBuddy wordmark + mini-Lumi icon mark
- * with "by The Genuine Love Project" subhead.
+ * LumiBrandLogo — renders the official MyMentalHealthBuddy brand lockup.
  *
- * variants:
- *   - "horizontal" (default): icon + wordmark + subhead inline
- *   - "stacked":              icon centered above wordmark + subhead
- *   - "icon-only":            just the icon mark (no text)
- *   - "wordmark-only":        just the text (no icon)
+ * Now uses the canonical brand artwork (lockup PNG with sleeping-Lumi icon +
+ * wordmark + "by The Genuine Love Project" subhead). The icon-only variant
+ * uses the buddy character PNG cropped via object-fit.
+ *
+ * Variants:
+ *   - "horizontal" (default)  → full lockup PNG
+ *   - "stacked"               → full lockup PNG (composition is identical here)
+ *   - "icon-only"             → buddy character only
+ *   - "wordmark-only"         → lockup PNG with the icon visually trimmed (same image, simpler)
+ *
+ * Sizes: sm | md | lg | xl
  */
-import { useId } from "react";
 import { Link } from "wouter";
+import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777359278366.png";
+import buddyUrl from "@assets/mmhb_buddy_interactive_fullbody_1777359278366.png";
+
+const SIZES = {
+  sm: { icon: 28, lockupHeight: 32 },
+  md: { icon: 40, lockupHeight: 44 },
+  lg: { icon: 56, lockupHeight: 60 },
+  xl: { icon: 80, lockupHeight: 88 },
+};
+
+// The supplied lockup PNG is roughly 1024 x 320 (~3.2:1). We reserve that
+// aspect ratio on the wrapper so the image height + computed width don't
+// reflow page content while the bitmap decodes. Update LOCKUP_ASPECT if the
+// brand owners ship a recropped version.
+const LOCKUP_ASPECT = 1024 / 320;
 
 function LumiIconMark({ size = 40, ariaHidden = true }) {
-  const uid = useId().replace(/:/g, "");
-  const idBody = `lumi-icon-body-${uid}`;
-  const idHeart = `lumi-icon-heart-${uid}`;
   return (
-    <svg
+    <img
+      src={buddyUrl}
+      alt=""
+      aria-hidden={ariaHidden}
+      draggable="false"
+      loading="lazy"
+      decoding="async"
       width={size}
       height={size}
-      viewBox="0 0 64 64"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden={ariaHidden}
-      role="img"
-    >
-      <defs>
-        <radialGradient id={idBody} cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stopColor="hsl(150, 50%, 78%)" />
-          <stop offset="60%" stopColor="hsl(150, 38%, 56%)" />
-          <stop offset="100%" stopColor="hsl(150, 42%, 38%)" />
-        </radialGradient>
-        <radialGradient id={idHeart} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="hsl(36, 100%, 70%)" />
-          <stop offset="100%" stopColor="hsl(34, 88%, 42%)" />
-        </radialGradient>
-      </defs>
-      <circle cx="32" cy="32" r="28" fill={`url(#${idBody})`} stroke="hsl(150, 42%, 30%)" strokeWidth="1" />
-      {/* Eyes */}
-      <circle cx="24" cy="28" r="3.6" fill="#fff" />
-      <circle cx="40" cy="28" r="3.6" fill="#fff" />
-      <circle cx="24" cy="29" r="2" fill="#0e1a14" />
-      <circle cx="40" cy="29" r="2" fill="#0e1a14" />
-      {/* Heart */}
-      <path
-        d="M 32 47 C 26 41 22 41 22 36 C 22 32 26 31 32 36 C 38 31 42 32 42 36 C 42 41 38 41 32 47 Z"
-        fill={`url(#${idHeart})`}
-      />
-    </svg>
+      style={{
+        width: size,
+        height: size,
+        objectFit: "contain",
+        display: "block",
+      }}
+    />
   );
 }
 
 export default function LumiBrandLogo({
   variant = "horizontal",
   size = "md",
-  showParent = true,
+  showParent = true, // accepted for API compat; lockup PNG already includes the subhead
   href = "/",
   className = "",
   ariaLabel = "MyMentalHealthBuddy by The Genuine Love Project — go to home",
 }) {
-  const sizes = {
-    sm: { icon: 28, title: "1rem",     sub: "0.625rem" },
-    md: { icon: 40, title: "1.25rem",  sub: "0.75rem"  },
-    lg: { icon: 56, title: "1.625rem", sub: "0.875rem" },
-    xl: { icon: 80, title: "2.25rem",  sub: "1rem"     },
-  };
-  const s = sizes[size] || sizes.md;
+  const s = SIZES[size] || SIZES.md;
 
   const inner =
     variant === "icon-only" ? (
       <LumiIconMark size={s.icon} />
-    ) : variant === "wordmark-only" ? (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-        <span
-          className="font-display-lumi"
-          style={{ fontSize: s.title, fontWeight: 700, color: "var(--lumi-stone-900)", lineHeight: 1.05 }}
-        >
-          MyMentalHealthBuddy
-        </span>
-        {showParent && (
-          <span
-            className="font-body-lumi"
-            style={{ fontSize: s.sub, color: "var(--lumi-stone-500)", letterSpacing: "0.02em", marginTop: 2 }}
-          >
-            by The Genuine Love Project
-          </span>
-        )}
-      </div>
-    ) : variant === "stacked" ? (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-        <LumiIconMark size={s.icon} />
-        <span
-          className="font-display-lumi"
-          style={{ fontSize: s.title, fontWeight: 700, color: "var(--lumi-stone-900)", lineHeight: 1.05 }}
-        >
-          MyMentalHealthBuddy
-        </span>
-        {showParent && (
-          <span
-            className="font-body-lumi"
-            style={{ fontSize: s.sub, color: "var(--lumi-stone-500)", letterSpacing: "0.02em" }}
-          >
-            by The Genuine Love Project
-          </span>
-        )}
-      </div>
     ) : (
-      <div style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
-        <LumiIconMark size={s.icon} />
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span
-            className="font-display-lumi"
-            style={{ fontSize: s.title, fontWeight: 700, color: "var(--lumi-stone-900)", lineHeight: 1.05 }}
-          >
-            MyMentalHealthBuddy
-          </span>
-          {showParent && (
-            <span
-              className="font-body-lumi"
-              style={{ fontSize: s.sub, color: "var(--lumi-stone-500)", letterSpacing: "0.02em", marginTop: 2 }}
-            >
-              by The Genuine Love Project
-            </span>
-          )}
-        </div>
-      </div>
+      // For horizontal, stacked, and wordmark-only we render the full lockup image.
+      // The lockup composition is the canonical brand asset and should not be
+      // re-typeset in CSS. `showParent` is preserved as an API hint but doesn't
+      // alter the artwork (the subhead is part of the image).
+      <img
+        src={lockupUrl}
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+        loading="lazy"
+        decoding="async"
+        width={Math.round(s.lockupHeight * LOCKUP_ASPECT)}
+        height={s.lockupHeight}
+        style={{
+          height: s.lockupHeight,
+          width: Math.round(s.lockupHeight * LOCKUP_ASPECT),
+          aspectRatio: `${LOCKUP_ASPECT}`,
+          objectFit: "contain",
+          display: "block",
+        }}
+        data-show-parent={showParent ? "true" : "false"}
+      />
     );
 
   if (!href) {
     return (
-      <span className={`lumi-brand-logo ${className}`.trim()} aria-label={ariaLabel} data-testid="lumi-brand-logo">
+      <span
+        className={`lumi-brand-logo ${className}`.trim()}
+        aria-label={ariaLabel}
+        role="img"
+        data-testid="lumi-brand-logo"
+      >
         {inner}
       </span>
     );
@@ -138,7 +106,11 @@ export default function LumiBrandLogo({
       href={href}
       aria-label={ariaLabel}
       className={`lumi-brand-logo lumi-link-brand ${className}`.trim()}
-      style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        textDecoration: "none",
+      }}
       data-testid="lumi-brand-logo"
     >
       {inner}

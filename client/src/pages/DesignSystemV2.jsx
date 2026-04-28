@@ -146,7 +146,7 @@ export default function DesignSystemV2() {
           {/* Mascot gallery */}
           <Section id="mascot" kicker="Phase D1 + I1" title="Lumi — 10 emotion states">
             <p className="font-body-lumi lumi-text-base" style={{ color: "var(--lumi-text-muted)", marginTop: -16, marginBottom: 24, maxWidth: 720 }}>
-              Lumi breathes, blinks, and tracks your cursor. Each emotion drives head tilt, eye expression, arm position, hand gesture, heart-glow intensity, and body color tint. Click any Lumi to flash the heart.
+              The canonical Lumi artwork is the same in every state — emotion is reflected through context (page tone, copy, motion utilities), and the prop is preserved as a data attribute on the wrapper for future per-emotion artwork swaps. Click any Lumi to send a celebration pulse.
             </p>
             <div
               className="lumi-grid"
@@ -166,9 +166,9 @@ export default function DesignSystemV2() {
               ))}
             </div>
             <div className="lumi-card" style={{ marginTop: 28 }}>
-              <div className="font-display-lumi lumi-text-lg" style={{ fontWeight: 600, marginBottom: 8 }}>Live cursor-tracking demo</div>
+              <div className="font-display-lumi lumi-text-lg" style={{ fontWeight: 600, marginBottom: 8 }}>Click-to-celebrate demo</div>
               <p className="font-body-lumi lumi-text-sm" style={{ color: "var(--lumi-text-muted)", marginBottom: 16 }}>
-                Move your cursor anywhere on this page — Lumi’s pupils follow you. Currently rotating through: <strong style={{ color: "var(--lumi-sage-700)" }}>{galleryEmotion}</strong>
+                Click Lumi (or focus + Enter / Space) to fire a brief celebration pulse. Currently signalling: <strong style={{ color: "var(--lumi-sage-700)" }}>{galleryEmotion}</strong>
               </p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <LumiMascot emotion={galleryEmotion} size={260} />
@@ -322,9 +322,7 @@ export default function DesignSystemV2() {
           {/* Real PNG art assets */}
           <Section id="real-assets" kicker="Painted Art" title="Real PNG brand assets">
             <p className="font-body-lumi lumi-text-base" style={{ color: "var(--lumi-text-muted)", marginTop: -16, marginBottom: 24, maxWidth: 720 }}>
-              Painted illustrations for marketing surfaces, hero headers, and social cards.
-              The pure-SVG versions above remain the default for interactive cases (cursor-tracking eyes,
-              per-emotion morphs, crisp scaling). Use these PNG components when you want the finished, illustrated look.
+              The canonical brand artwork is shared across the system — the components above and the helpers below all render the same painted PNG assets supplied by the brand owners. Reach for these dedicated <code>*Image</code> helpers when you want a non-interactive surface (hero headers, marketing splashes, social cards) with a simpler API and no click handlers.
             </p>
             <div className="lumi-grid lumi-grid--3" data-reveal-stagger>
               <div className="lumi-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 360, gap: 12 }}>
