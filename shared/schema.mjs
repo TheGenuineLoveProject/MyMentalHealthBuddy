@@ -917,3 +917,62 @@ export const contentScores = pgTable("content_scores", {
   index("idx_content_scores_created").on(table.createdAt),
 ]);
 
+/* =====================================================================
+ * v2.0 PROMPT 3.4 — BIOMETRIC INGESTION PIPELINE
+ *
+ * Three additive tables for HRV / sleep / activity ingestion from
+ * wearables (Apple HealthKit webhook, Oura, Google Fit, Whoop) plus
+ * manual upload. OAuth tokens are encrypted at rest with AES-256-GCM
+ * (HKDF-derived key from JWT_SECRET). Educational only — not a
+ * diagnostic device. Nervous-system state is interpretive, never
+ * clinical, and always carries an educational-use disclaimer.
+ * ----------------------------------------------------------------- */
+
+export const biometricConnections = pgTable("biometric_connections", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  deviceSource: varchar("device_source", { length: 32 }).notNull(),
+  status: varchar("status", { length: 16 }).notNull().default("connected"),
+  encryptedAccessToken: text("encrypted_access_token"),
+  encryptedRefreshToken: text("encrypted_refresh_token"),
+  tokenExpiresAt: timestamp("token_expires_at"),
+  scopes: text("scopes").array().notNull().default([]),
+  externalAccountId: varchar("external_account_id", { length: 128 }),
+  lastSyncAt: timestamp("last_sync_at"),
+  lastSyncError: text("last_sync_error"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_biometric_connections_user").on(table.userId),
+  index("uniq_biometric_connections_user_source").on(table.userId, table.deviceSource),
+]);
+
+export const biometricReadings = pgTable("biometric_readings", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  deviceSource: varchar("device_source", { length: 32 }).notNull(),
+  metricType: varchar("metric_type", { length: 48 }).notNull(),
+  value: text("value").notNull(),
+  unit: varchar("unit", { length: 24 }).notNull(),
+  qualityScore: integer("quality_score").notNull().default(50),
+  recordedAt: timestamp("recorded_at").notNull(),
+  ingestedAt: timestamp("ingested_at").defaultNow().notNull(),
+  metadata: jsonb("metadata").default({}).notNull(),
+}, (table) => [
+  index("idx_biometric_readings_user_recorded").on(table.userId, table.recordedAt),
+  index("idx_biometric_readings_user_metric").on(table.userId, table.metricType, table.recordedAt),
+]);
+
+export const nervousSystemStates = pgTable("nervous_system_states", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  state: varchar("state", { length: 24 }).notNull(),
+  confidence: integer("confidence").notNull().default(0),
+  drivers: jsonb("drivers").notNull().default({}),
+  windowStart: timestamp("window_start").notNull(),
+  windowEnd: timestamp("window_end").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_nervous_system_states_user_created").on(table.userId, table.createdAt),
+]);
+

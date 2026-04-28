@@ -64,7 +64,11 @@ app.use(cors({
   },
   credentials: true,
 }));
-app.use(express.json());
+app.use(express.json({
+  // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks
+  // (HealthKit). Other handlers continue using req.body unchanged.
+  verify: (req, _res, buf) => { if (buf?.length) req.rawBody = buf; },
+}));
 
 // ===== SECURITY LAYER =====
 import helmet from "helmet";
@@ -235,6 +239,10 @@ app.use("/api/awareness", awarenessRoutes);
 // table is guaranteed to exist before the seeder tries to read from it.
 const { default: protocolsRoutes } = await import("./routes/protocols.mjs");
 app.use("/api/protocols", protocolsRoutes);
+
+// v2.0 Prompt 3.4 — Biometric Ingestion Pipeline (per-route auth inside).
+const { default: biometricsRoutes } = await import("./routes/biometrics.mjs");
+app.use("/api/biometrics", biometricsRoutes);
 
 // Business engine (staff/admin only; admin sub-routes self-gate)
 app.use("/api/ai/business", aiBusinessRoutes);
@@ -619,5 +627,13 @@ app.listen(PORT, "0.0.0.0", () => {
     })
     .catch((err) => {
       console.warn("[heal-scheduler] failed to load:", err?.message || err);
+    });
+
+  // v2.0 Prompt 3.4 — Opt-in 6-hour biometric polling. Off unless
+  // BIOMETRICS_SCHEDULER_ENABLED=true. Skips HealthKit + manual sources.
+  import("./biometrics/scheduler.mjs")
+    .then(({ startBiometricScheduler }) => startBiometricScheduler({}))
+    .catch((err) => {
+      console.warn("[biometrics-scheduler] failed to load:", err?.message || err);
     });
 });

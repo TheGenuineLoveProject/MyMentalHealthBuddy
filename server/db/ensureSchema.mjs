@@ -238,6 +238,53 @@ const STATEMENTS = [
   `CREATE INDEX IF NOT EXISTS idx_content_scores_source ON content_scores(content_source)`,
   `CREATE INDEX IF NOT EXISTS idx_content_scores_severity ON content_scores(severity)`,
   `CREATE INDEX IF NOT EXISTS idx_content_scores_created ON content_scores(created_at)`,
+
+  // ----- v2.0 Prompt 3.4 — Biometric Ingestion Pipeline -----
+  `CREATE TABLE IF NOT EXISTS biometric_connections (
+     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+     user_id uuid NOT NULL,
+     device_source varchar(32) NOT NULL,
+     status varchar(16) NOT NULL DEFAULT 'connected',
+     encrypted_access_token text,
+     encrypted_refresh_token text,
+     token_expires_at timestamp,
+     scopes text[] NOT NULL DEFAULT '{}',
+     external_account_id varchar(128),
+     last_sync_at timestamp,
+     last_sync_error text,
+     created_at timestamp NOT NULL DEFAULT now(),
+     updated_at timestamp NOT NULL DEFAULT now()
+   )`,
+  `CREATE INDEX IF NOT EXISTS idx_biometric_connections_user ON biometric_connections(user_id)`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS uniq_biometric_connections_user_source ON biometric_connections(user_id, device_source)`,
+
+  `CREATE TABLE IF NOT EXISTS biometric_readings (
+     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+     user_id uuid NOT NULL,
+     device_source varchar(32) NOT NULL,
+     metric_type varchar(48) NOT NULL,
+     value text NOT NULL,
+     unit varchar(24) NOT NULL,
+     quality_score integer NOT NULL DEFAULT 50,
+     recorded_at timestamp NOT NULL,
+     ingested_at timestamp NOT NULL DEFAULT now(),
+     metadata jsonb NOT NULL DEFAULT '{}'::jsonb
+   )`,
+  `CREATE INDEX IF NOT EXISTS idx_biometric_readings_user_recorded ON biometric_readings(user_id, recorded_at)`,
+  `CREATE INDEX IF NOT EXISTS idx_biometric_readings_user_metric ON biometric_readings(user_id, metric_type, recorded_at)`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS uniq_biometric_readings_user_source_metric_time ON biometric_readings(user_id, device_source, metric_type, recorded_at)`,
+
+  `CREATE TABLE IF NOT EXISTS nervous_system_states (
+     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+     user_id uuid NOT NULL,
+     state varchar(24) NOT NULL,
+     confidence integer NOT NULL DEFAULT 0,
+     drivers jsonb NOT NULL DEFAULT '{}'::jsonb,
+     window_start timestamp NOT NULL,
+     window_end timestamp NOT NULL,
+     created_at timestamp NOT NULL DEFAULT now()
+   )`,
+  `CREATE INDEX IF NOT EXISTS idx_nervous_system_states_user_created ON nervous_system_states(user_id, created_at)`,
 ];
 
 let bootstrapped = false;

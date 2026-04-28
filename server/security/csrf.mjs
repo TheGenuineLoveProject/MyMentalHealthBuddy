@@ -57,6 +57,10 @@ export function csrfProtection(req, res, next) {
   // no DB writes unless severity threshold crossed). Authenticated /report
   // and /progress routes pass through the Bearer-token check below.
   if (req.path === "/api/awareness/detect") return next();
+  // v2.0 Prompt 3.4 — biometric provider OAuth callback (3rd-party redirect,
+  // GET-only via the SAFE_METHODS check above) and HealthKit webhook
+  // (HMAC-signed, not browser-driven so no CSRF surface).
+  if (req.path === "/api/biometrics/healthkit/webhook") return next();
 
   const auth = req.headers?.authorization || "";
   if (auth.startsWith("Bearer ")) return next();
