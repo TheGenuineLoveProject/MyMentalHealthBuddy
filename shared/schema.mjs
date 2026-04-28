@@ -976,3 +976,50 @@ export const nervousSystemStates = pgTable("nervous_system_states", {
   index("idx_nervous_system_states_user_created").on(table.userId, table.createdAt),
 ]);
 
+// ===== v2.0 Prompt 3.5 — Discernment Tutor =====
+
+export const discernmentLessons = pgTable("discernment_lessons", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  belt: varchar("belt", { length: 16 }).notNull(),
+  sequence: integer("sequence").notNull(),
+  title: varchar("title", { length: 160 }).notNull(),
+  category: varchar("category", { length: 24 }).notNull(),
+  scenario: text("scenario").notNull(),
+  options: jsonb("options").notNull().default([]),
+  correctOptionId: varchar("correct_option_id", { length: 32 }).notNull(),
+  awarenessRuleId: varchar("awareness_rule_id", { length: 64 }),
+  teaching: text("teaching").notNull(),
+  learnMoreUrl: varchar("learn_more_url", { length: 256 }),
+  pointsAward: integer("points_award").notNull().default(10),
+  active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_discernment_lessons_belt_seq").on(table.belt, table.sequence),
+  index("uniq_discernment_lessons_belt_seq").on(table.belt, table.sequence),
+]);
+
+export const discernmentUserProgress = pgTable("discernment_user_progress", {
+  userId: uuid("user_id").primaryKey(),
+  currentBelt: varchar("current_belt", { length: 16 }).notNull().default("WHITE"),
+  pointsTotal: integer("points_total").notNull().default(0),
+  lessonsPassed: integer("lessons_passed").notNull().default(0),
+  realWorldDetections: integer("real_world_detections").notNull().default(0),
+  lastAdvancedAt: timestamp("last_advanced_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const discernmentAttempts = pgTable("discernment_attempts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  lessonId: uuid("lesson_id").notNull(),
+  selectedOptionId: varchar("selected_option_id", { length: 32 }).notNull(),
+  correct: boolean("correct").notNull(),
+  pointsEarned: integer("points_earned").notNull().default(0),
+  timeMs: integer("time_ms"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_discernment_attempts_user_created").on(table.userId, table.createdAt),
+  index("idx_discernment_attempts_user_lesson").on(table.userId, table.lessonId),
+]);
+

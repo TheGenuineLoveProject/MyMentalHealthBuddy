@@ -66,6 +66,18 @@ const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const Profile = lazy(() => import("./pages/Profile.jsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
+const DiscernmentDashboard = lazy(() => import("./pages/DiscernmentDashboard.jsx"));
+const ProtocolBrowser = lazy(() => import("./pages/ProtocolBrowser.jsx"));
+const ProtocolSession = lazy(() => import("./pages/ProtocolSession.jsx"));
+const BiometricDashboard = lazy(() => import("./pages/BiometricDashboard.jsx"));
+const AgentInteraction = lazy(() => import("./pages/AgentInteraction.jsx"));
+const LandingV2 = lazy(() => import("./pages/LandingV2.jsx"));
+const WellnessToolsHub = lazy(() => import("./pages/WellnessToolsHub.jsx"));
+const GAD7Assessment = lazy(() => import("./pages/tools/GAD7Assessment.jsx"));
+const PHQ9Assessment = lazy(() => import("./pages/tools/PHQ9Assessment.jsx"));
+const CognitiveDistortionChecker = lazy(() => import("./pages/tools/CognitiveDistortionChecker.jsx"));
+const BreathPacer = lazy(() => import("./pages/tools/BreathPacer.jsx"));
+const BoundaryBuilderTool = lazy(() => import("./pages/tools/BoundaryBuilderTool.jsx"));
 const CommunityPage = lazy(() => import("./pages/CommunityFeed.jsx"));
 const CommunityHub = lazy(() => import("./pages/CommunityHub.jsx"));
 const CommunityCircle = lazy(() => import("./pages/CommunityCircle.jsx"));
@@ -453,6 +465,28 @@ export default function App() {
               <Route path="/wellness">
                 <WellnessRoute><Wellness /></WellnessRoute>
               </Route>
+              <Route path="/discernment">
+                <ProtectedRoute><DiscernmentDashboard /></ProtectedRoute>
+              </Route>
+              <Route path="/protocols">
+                <ProtectedRoute><ProtocolBrowser /></ProtectedRoute>
+              </Route>
+              <Route path="/protocols/session/:id">
+                <ProtectedRoute><ProtocolSession /></ProtectedRoute>
+              </Route>
+              <Route path="/biometrics">
+                <ProtectedRoute><BiometricDashboard /></ProtectedRoute>
+              </Route>
+              <Route path="/admin/agents">
+                <ProtectedRoute><AgentInteraction /></ProtectedRoute>
+              </Route>
+              <Route path="/landing-v2"><LandingV2 /></Route>
+              <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
+              <Route path="/tools/gad7"><GAD7Assessment /></Route>
+              <Route path="/tools/phq9"><PHQ9Assessment /></Route>
+              <Route path="/tools/distortion-checker"><CognitiveDistortionChecker /></Route>
+              <Route path="/tools/breath-pacer"><BreathPacer /></Route>
+              <Route path="/tools/boundary-builder"><BoundaryBuilderTool /></Route>
               <Route path="/affirmations">
                 <AffirmationWall />
               </Route>

@@ -243,6 +243,8 @@ app.use("/api/protocols", protocolsRoutes);
 // v2.0 Prompt 3.4 — Biometric Ingestion Pipeline (per-route auth inside).
 const { default: biometricsRoutes } = await import("./routes/biometrics.mjs");
 app.use("/api/biometrics", biometricsRoutes);
+const { default: discernmentRoutes } = await import("./routes/discernment.mjs");
+app.use("/api/discernment", discernmentRoutes);
 
 // Business engine (staff/admin only; admin sub-routes self-gate)
 app.use("/api/ai/business", aiBusinessRoutes);

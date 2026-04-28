@@ -285,6 +285,55 @@ const STATEMENTS = [
      created_at timestamp NOT NULL DEFAULT now()
    )`,
   `CREATE INDEX IF NOT EXISTS idx_nervous_system_states_user_created ON nervous_system_states(user_id, created_at)`,
+
+  // ----- v2.0 Prompt 3.5 — Discernment Tutor -----
+  `CREATE TABLE IF NOT EXISTS discernment_lessons (
+     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+     belt varchar(16) NOT NULL,
+     sequence integer NOT NULL,
+     title varchar(160) NOT NULL,
+     category varchar(24) NOT NULL,
+     scenario text NOT NULL,
+     options jsonb NOT NULL DEFAULT '[]'::jsonb,
+     correct_option_id varchar(32) NOT NULL,
+     awareness_rule_id varchar(64),
+     teaching text NOT NULL,
+     learn_more_url varchar(256),
+     points_award integer NOT NULL DEFAULT 10,
+     active boolean NOT NULL DEFAULT true,
+     created_at timestamp NOT NULL DEFAULT now()
+   )`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS uniq_discernment_lessons_belt_seq ON discernment_lessons(belt, sequence)`,
+  `CREATE INDEX IF NOT EXISTS idx_discernment_lessons_belt ON discernment_lessons(belt)`,
+
+  `CREATE TABLE IF NOT EXISTS discernment_user_progress (
+     user_id uuid PRIMARY KEY,
+     current_belt varchar(16) NOT NULL DEFAULT 'WHITE',
+     points_total integer NOT NULL DEFAULT 0,
+     lessons_passed integer NOT NULL DEFAULT 0,
+     real_world_detections integer NOT NULL DEFAULT 0,
+     last_advanced_at timestamp,
+     created_at timestamp NOT NULL DEFAULT now(),
+     updated_at timestamp NOT NULL DEFAULT now()
+   )`,
+
+  `CREATE TABLE IF NOT EXISTS discernment_attempts (
+     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+     user_id uuid NOT NULL,
+     lesson_id uuid NOT NULL,
+     selected_option_id varchar(32) NOT NULL,
+     correct boolean NOT NULL,
+     points_earned integer NOT NULL DEFAULT 0,
+     time_ms integer,
+     created_at timestamp NOT NULL DEFAULT now()
+   )`,
+  `CREATE INDEX IF NOT EXISTS idx_discernment_attempts_user_created ON discernment_attempts(user_id, created_at)`,
+  `CREATE INDEX IF NOT EXISTS idx_discernment_attempts_user_lesson ON discernment_attempts(user_id, lesson_id)`,
+  // Anti-farming race-safety: at most one CORRECT attempt per (user, lesson)
+  // can carry pointsEarned > 0. The application checks for prior correct
+  // attempts before insert; this partial unique index closes the TOCTOU
+  // window between two concurrent submissions of the same lesson.
+  `CREATE UNIQUE INDEX IF NOT EXISTS uniq_discernment_first_correct ON discernment_attempts(user_id, lesson_id) WHERE correct = true AND points_earned > 0`,
 ];
 
 let bootstrapped = false;
