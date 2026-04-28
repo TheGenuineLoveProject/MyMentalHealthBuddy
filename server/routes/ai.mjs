@@ -24,6 +24,8 @@ import { normalizeAIResponse } from "../ai/normalizeResponse.mjs";
 // is later written by /api/awareness/detect; this middleware only enriches
 // observability for the chat surface.
 import { scanLayer1Middleware } from "../awareness/detection/pipeline.mjs";
+import { withCriticalSpan, setObservabilityBaggage } from "../observability/spans.mjs";
+import { alertCrisisPipelineFailure } from "../observability/safetyAlerts.mjs";
 
 const router = express.Router();
 const MAX_INPUT_LENGTH = 4000;
@@ -293,25 +295,67 @@ router.post("/coping-plan", optionalAuth, async (req, res) => {
     const energy = req.body?.energy;
 
     if (message) {
-      const guarded = safetyGuardInput(message);
-      if (guarded?.blocked && guarded?.crisis) {
+      // Crisis routing is the most safety-critical code path on this surface.
+      // Wrap in a critical OTel span so traces flag it; alert PagerDuty if the
+      // safety guard or detector throws. Stamp baggage so the child span gets
+      // user/session correlation after optionalAuth has run.
+      setObservabilityBaggage({
+        requestId: req.requestId,
+        userId: req.user?.id || req.dbUserId,
+        sessionId: req.sessionID,
+      });
+
+      let decision;
+      try {
+        decision = await withCriticalSpan(
+          "mmhb.crisis.route_check",
+          { route: "/api/ai/coping-plan" },
+          async (span) => {
+            const guarded = safetyGuardInput(message);
+            if (guarded?.blocked && guarded?.crisis) {
+              span.setAttribute("crisis.triggered", true);
+              span.setAttribute("crisis.source", "safety_guard");
+              return { kind: "safety_guard_crisis", guarded };
+            }
+            if (guarded?.blocked) {
+              return { kind: "blocked", guarded };
+            }
+            if (detectCrisis(guarded?.cleanText || message)) {
+              span.setAttribute("crisis.triggered", true);
+              span.setAttribute("crisis.source", "keyword_match");
+              return { kind: "keyword_match_crisis", guarded };
+            }
+            span.setAttribute("crisis.triggered", false);
+            return { kind: "safe", guarded };
+          },
+        );
+      } catch (err) {
+        void alertCrisisPipelineFailure({
+          stage: "coping-plan.crisis_route_check",
+          error: err,
+          requestId: req.requestId,
+        });
+        throw err;
+      }
+
+      if (decision.kind === "safety_guard_crisis") {
         return res.json({
           isCrisis: true,
-          reply: guarded.response?.reply || CRISIS_RESPONSE.reply,
-          resources: guarded.response?.resources || CRISIS_RESPONSE.resources,
+          reply: decision.guarded.response?.reply || CRISIS_RESPONSE.reply,
+          resources: decision.guarded.response?.resources || CRISIS_RESPONSE.resources,
           signals: ["safety_guard_crisis"],
           action: "escalate_immediately",
         });
       }
-      if (guarded?.blocked) {
+      if (decision.kind === "blocked") {
         return res.status(400).json({
           blocked: true,
           reply:
-            guarded.response?.reply ||
+            decision.guarded.response?.reply ||
             "I can't help with that, but I can support you with safer options.",
         });
       }
-      if (detectCrisis(guarded?.cleanText || message)) {
+      if (decision.kind === "keyword_match_crisis") {
         return res.json({
           isCrisis: true,
           reply: CRISIS_RESPONSE.reply,

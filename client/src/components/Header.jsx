@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { BRAND } from "@shared/brand.mjs";
 import { Home, LayoutDashboard, Settings, Heart } from "lucide-react";
-import BuddyAvatar from "./avatar/BuddyAvatar";
+import LumiMascot from "./lumi/LumiMascot.jsx";
 
 function NavLink({ href, children, className = "", active = false }) {
   return (
@@ -52,7 +52,7 @@ export default function Header() {
             className="h-10 w-10 rounded-xl flex items-center justify-center overflow-hidden"
             style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }}
           >
-            <BuddyAvatar state="calm" size={40} className="w-full h-full" />
+            <LumiMascot emotion="neutral" size={40} />
           </span>
           <span className="hidden sm:inline text-heading-sm text-brand tracking-tight">
             {BRAND?.name}

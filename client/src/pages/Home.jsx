@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SEO from '../components/SEO';
-import BuddyAvatar from '../components/avatar/BuddyAvatar';
+import LumiMascot from '../components/lumi/LumiMascot.jsx';
 import { 
   SacredLayout, 
   SacredSection, 
@@ -176,7 +176,7 @@ export default function Home() {
               style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 4px 16px var(--glp-sage-deep-20)' }}
               data-testid="img-home-logo"
             >
-              <BuddyAvatar state="calm" size={64} className="w-full h-full" />
+              <LumiMascot emotion="neutral" size={64} />
             </span>
             <span 
               className="sacred-heading text-xl hidden md:block"
@@ -213,7 +213,7 @@ export default function Home() {
               className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center overflow-hidden sacred-animate-rotate-glow"
               style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 8px 32px var(--glp-sage-deep-30)' }}
             >
-              <BuddyAvatar state="calm" size={96} className="w-full h-full" />
+              <LumiMascot emotion="joy" size={96} />
             </span>
           }
           badge={

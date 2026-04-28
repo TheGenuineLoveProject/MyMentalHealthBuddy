@@ -7,6 +7,7 @@ import { eq } from "drizzle-orm";
 import { logger } from "../utils/logger.mjs";
 import { increment } from "../utils/metrics.mjs";
 import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
+import { alertWebhookSignatureFailure } from "../observability/safetyAlerts.mjs";
 
 const router = Router();
 const stripe = process.env.STRIPE_SECRET_KEY
@@ -64,6 +65,11 @@ router.post(
       );
     } catch (err) {
       logger.error("Stripe webhook signature verification failed", { error: err.message });
+      void alertWebhookSignatureFailure({
+        provider: "stripe",
+        error: err,
+        sourceIp: req.ip || req.headers["x-forwarded-for"] || null,
+      });
       return res.status(400).send("Webhook signature verification failed");
     }
 

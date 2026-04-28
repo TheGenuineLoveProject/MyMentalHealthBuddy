@@ -1,6 +1,11 @@
 // server/awareness/detection/pipeline.mjs
 // MMHB CONSCIOUSNESS OS v2.0 — Prompt 3.2: Awareness Detection Pipeline
 //
+// (Custom OTel span wrapping is added at the public detect() entrypoint
+// via withSpan from ../../observability/spans.mjs — no behavioural change.)
+
+import { withSpan } from "../../observability/spans.mjs";
+//
 // Three-layer manipulation / distortion / fallacy detector.
 //
 //   LAYER 1 — RuleMatcher        (deterministic, target <50 ms)
@@ -376,12 +381,26 @@ export class AwarenessPipeline {
    * @param {boolean} [opts.runLayer3] - default false (async opt-in)
    * @param {boolean} [opts.persist]   - default true if flagged
    */
-  async detect({ text, contentSource = "chat", contentRef = null, userId = null, runLayer3 = false, persist = undefined } = {}) {
+  async detect(opts = {}) {
+    return withSpan(
+      "mmhb.awareness.detect",
+      {
+        "awareness.contentSource": String(opts?.contentSource || "chat"),
+        "awareness.runLayer3": !!opts?.runLayer3,
+        "safety.critical": false,
+      },
+      (span) => this._detectInner(opts, span),
+    );
+  }
+
+  async _detectInner({ text, contentSource = "chat", contentRef = null, userId = null, runLayer3 = false, persist = undefined } = {}, span) {
     const startedAt = Date.now();
     if (typeof text !== "string" || text.length === 0) {
+      try { span?.setAttribute("awareness.skipped", "empty_text"); } catch {}
       return { ok: false, reason: "empty_text" };
     }
     if (text.length > 4000) {
+      try { span?.setAttribute("awareness.skipped", "text_too_long"); } catch {}
       return { ok: false, reason: "text_too_long", maxChars: 4000 };
     }
 

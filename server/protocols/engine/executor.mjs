@@ -21,6 +21,8 @@ import { eq, and, sql } from "drizzle-orm";
 import { db, schema } from "../../db.mjs";
 import { detectCrisis, CRISIS_RESPONSE } from "../../ai/safety/crisis.mjs";
 import { logEvent } from "../../ai/aiTelemetry.mjs";
+import { withSpan } from "../../observability/spans.mjs";
+import { alertPHQ9EscalationFailure } from "../../observability/safetyAlerts.mjs";
 
 const { protocolRegistry, protocolSessions, outcomeMeasures } = schema;
 
@@ -186,7 +188,19 @@ export class ProtocolExecutor {
    * (e.g. ASSESSMENT scoring), and return the updated session state.
    * Does NOT advance the node — call progress() next.
    */
-  async respond({ sessionId, nodeId, response = {} }) {
+  async respond(opts) {
+    return withSpan(
+      "mmhb.protocol.respond",
+      {
+        "protocol.sessionId": String(opts?.sessionId || "").slice(0, 64),
+        "protocol.nodeId": String(opts?.nodeId || "").slice(0, 64),
+        "safety.critical": false,
+      },
+      () => this._respondInner(opts),
+    );
+  }
+
+  async _respondInner({ sessionId, nodeId, response = {} }) {
     const sess = await this.#load(sessionId);
     if (!sess) return { ok: false, reason: "session_not_found" };
     if (sess.status !== STATUS.ACTIVE) {
@@ -263,7 +277,22 @@ export class ProtocolExecutor {
       patch.status = STATUS.ESCALATED;
     }
 
-    await db.update(protocolSessions).set(patch).where(eq(protocolSessions.id, sessionId));
+    // Wrap the persistence step so PHQ-9 item-9 escalation failures trigger
+    // a PagerDuty critical page. The entire protocol exists for this moment
+    // — if we can't persist status=ESCALATED for a self-harm signal, we
+    // need an operator paged immediately.
+    try {
+      await db.update(protocolSessions).set(patch).where(eq(protocolSessions.id, sessionId));
+    } catch (err) {
+      if (crisisDetected && userVars._crisis?.severity === "phq9_item9") {
+        void alertPHQ9EscalationFailure({
+          sessionId,
+          userId: sess.userId,
+          error: err,
+        });
+      }
+      throw err;
+    }
 
     if (crisisDetected) {
       safeLog("ai_call_completed", { route: "protocol.escalate", reason: userVars._crisis?.severity });

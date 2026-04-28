@@ -4,10 +4,18 @@ import authRoutes from "./routes/auth.mjs";
 import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
 process.on('uncaughtException', (err) => {
   console.error('UNCAUGHT ERROR:', err);
+  // Fire-and-forget PagerDuty alert. Dynamic import avoids circular boot
+  // ordering and keeps the handler safe even if the alerter fails to load.
+  import('./observability/safetyAlerts.mjs')
+    .then(({ alertUncaught }) => alertUncaught({ kind: 'uncaughtException', error: err }))
+    .catch(() => {});
 });
 
 process.on('unhandledRejection', (err) => {
   console.error('UNHANDLED PROMISE:', err);
+  import('./observability/safetyAlerts.mjs')
+    .then(({ alertUncaught }) => alertUncaught({ kind: 'unhandledRejection', error: err }))
+    .catch(() => {});
 });
 import express from "express";
 import cors from "cors";
@@ -105,6 +113,18 @@ app.use(helmet({
       },
 }));
 app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
+
+// ===== OBSERVABILITY: requestId + OTel baggage =====
+// requestId stamps req.requestId (uuid) on every request. observabilityContext
+// then mirrors that into the active OpenTelemetry span as baggage so child
+// spans (custom orchestrator/awareness/protocol/crisis spans) inherit the
+// same correlation context. Both are no-op safe when OTel is disabled.
+{
+  const { requestId } = await import("./middleware/requestId.mjs");
+  const { observabilityContext } = await import("./middleware/observabilityContext.mjs");
+  app.use(requestId);
+  app.use(observabilityContext);
+}
 
 // ===== SESSION BOUNDARY FIRST (NO CSRF) =====
 app.use('/api/session-boundary', sessionBoundaryRoutes);
@@ -594,6 +614,15 @@ app.get("*", async (req, res, next) => {
   res.setHeader("Cache-Control", NO_STORE_HEADERS);
   return res.sendFile(path.join(CLIENT_DIST, "index.html"));
 });
+
+// ===== OBSERVABILITY: error handler (must be last middleware) =====
+// Stamps the active OTel span as ERROR, fires a fire-and-forget PagerDuty
+// alert for http-500 class, and returns the canonical 500 response.
+{
+  const { errorHandler } = await import("./middleware/errorHandler.mjs");
+  app.use(errorHandler);
+}
+
 // ----------------------------
 // START SERVER
 // ----------------------------
@@ -604,6 +633,11 @@ try {
   await ensureSchema();
 } catch (err) {
   console.warn("[boot] ensureSchema skipped:", err?.message || err);
+  // Schema/boot failure is critical — the app may run degraded. Fire-and-
+  // forget so we never block server startup on the alerter network call.
+  import("./observability/safetyAlerts.mjs")
+    .then(({ alertSchemaFailure }) => alertSchemaFailure({ stage: "ensureSchema", error: err }))
+    .catch(() => {});
 }
 
 // v2.0 Prompt 3.2 gap closure — seed awareness_rules from the in-code

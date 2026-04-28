@@ -58,6 +58,8 @@ import {
 import { evaluateEscalation, escalationConfig } from "./agentEscalation.mjs";
 import { runConstitutionalGate } from "./constitutionalGate.mjs";
 import { wmRead, wmWrite, workingMemoryStatus } from "./agentWorkingMemory.mjs";
+import { withSpan } from "../../observability/spans.mjs";
+import { alertConstitutionalViolation } from "../../observability/safetyAlerts.mjs";
 
 const { agentRegistry, agentDecisions } = schema;
 
@@ -174,7 +176,24 @@ async function selectAgent({ agentKey, intent }) {
 }
 
 /* ---------- main entrypoint ---------- */
-export async function invokeAgent({
+export async function invokeAgent(opts = {}) {
+  // Wrap the entire decision in a custom OTel span so the orchestrator's
+  // routing path is observable as a discrete unit (separate from the
+  // surrounding HTTP span). safety.critical=false because this surface is
+  // a routing/audit layer — the user-facing chat orchestrator is the
+  // safety-critical path and is wrapped at its own call site.
+  return withSpan(
+    "mmhb.agent.invoke",
+    {
+      "agent.intent": String(opts?.intent || "general").slice(0, 64),
+      "agent.key": opts?.agentKey || "auto",
+      "safety.critical": false,
+    },
+    () => _invokeAgentInner(opts),
+  );
+}
+
+async function _invokeAgentInner({
   agentKey = null,
   intent = "general",
   input = "",
@@ -361,6 +380,19 @@ export async function invokeAgent({
       violationCount: constitutional.violations.length,
       violations: constitutional.violations.slice(0, 5),
     });
+    // Fire-and-forget PagerDuty alert per violation (deduped by rule key
+    // in the alerter). One alert per rule keeps incidents focused and
+    // prevents alert storms during a regression touching many violations.
+    if (!constitutional.pass && Array.isArray(constitutional.violations)) {
+      for (const v of constitutional.violations.slice(0, 3)) {
+        void alertConstitutionalViolation({
+          rule: v.rule,
+          agentId: sel.chosen?.agentKey || "unknown",
+          requestId: null,
+          snippet: v.evidence,
+        });
+      }
+    }
   } catch (err) {
     trace.steps.push({ stage: "constitutional_gate", ok: false, error: err?.message || "gate_failed" });
   }
