@@ -16,7 +16,7 @@ import {
   context,
   propagation,
   SpanStatusCode,
-} from "@opentelemetry/api";
+} from "./otelApi.mjs";
 import { createHash } from "node:crypto";
 
 const TRACER_NAME = "mmhb";

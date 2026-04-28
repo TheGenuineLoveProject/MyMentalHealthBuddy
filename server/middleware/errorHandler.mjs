@@ -1,7 +1,7 @@
 import { failWithCode } from "../utils/response.mjs";
 import { logger } from "../utils/logger.mjs";
 import { alertUncaught } from "../observability/safetyAlerts.mjs";
-import { trace, SpanStatusCode } from "@opentelemetry/api";
+import { trace, SpanStatusCode } from "../observability/otelApi.mjs";
 
 export function notFoundHandler(_req, res) {
   return failWithCode(res, 404, "Not found", "NOT_FOUND");

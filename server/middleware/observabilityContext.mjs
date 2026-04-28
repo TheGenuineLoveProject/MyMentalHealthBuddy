@@ -18,7 +18,7 @@
 // Without this wrapping, the baggage is created but never propagated.
 // ---------------------------------------------------------------------------
 
-import { context as otelContext } from "@opentelemetry/api";
+import { context as otelContext } from "../observability/otelApi.mjs";
 import { setObservabilityBaggage } from "../observability/spans.mjs";
 
 export function observabilityContext(req, _res, next) {

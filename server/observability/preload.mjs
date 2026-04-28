@@ -9,12 +9,13 @@
 // be unit-tested without going through the preload path.
 // ---------------------------------------------------------------------------
 
-import { startTracing } from "./tracing.mjs";
-
 // Belt-and-suspenders: tracing.mjs has its own internal try/catch, but if even
-// the import itself fails (e.g. dynamic require of a missing peer dep) we must
-// NOT abort process boot. Observability is non-essential to user safety.
+// the import itself fails (e.g. missing @opentelemetry/* peer dep in a deploy
+// image) we must NOT abort process boot. Observability is non-essential to
+// user safety. We use a *dynamic* import wrapped in try/catch so a missing
+// module surfaces as a warning instead of an unrecoverable boot crash.
 try {
+  const { startTracing } = await import("./tracing.mjs");
   const result = startTracing();
   if (result && typeof result.then === "function") {
     result.catch((err) => {
@@ -22,5 +23,5 @@ try {
     });
   }
 } catch (err) {
-  console.warn("[otel] preload failed (continuing without tracing):", err?.message || err);
+  console.warn("[otel] preload skipped (continuing without tracing):", err?.message || err);
 }
