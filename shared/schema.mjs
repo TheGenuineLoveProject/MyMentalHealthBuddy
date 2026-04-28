@@ -1023,3 +1023,75 @@ export const discernmentAttempts = pgTable("discernment_attempts", {
   index("idx_discernment_attempts_user_lesson").on(table.userId, table.lessonId),
 ]);
 
+/* =====================================================================
+ * v2.0 PROMPT 3.2 — AWARENESS PIPELINE GAP CLOSURES
+ *
+ * Two additive tables that close the spec-vs-implementation gaps in the
+ * existing awareness pipeline (server/awareness/detection/pipeline.mjs):
+ *
+ *   awareness_rules       — DB-canonical rule registry (active flag,
+ *                            base confidence, severity). Regex execution
+ *                            still lives in server/awareness/rules.mjs;
+ *                            this table is the source-of-truth for which
+ *                            rules are ENABLED at runtime.
+ *
+ *   awareness_detections  — Per-detection event log. Lives ALONGSIDE the
+ *                            existing content_scores ledger; detections
+ *                            capture finer-grained per-event provenance
+ *                            while content_scores stays focused on the
+ *                            Mirror/Epistemic aggregate per content item.
+ *
+ * Both are educational instrumentation; never persist raw user text.
+ * ===================================================================== */
+
+export const awarenessRules = pgTable("awareness_rules", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  // Stable string key matching AWARENESS_RULES[].id in code (e.g. "manip-gaslight-001").
+  ruleKey: varchar("rule_key", { length: 64 }).notNull().unique(),
+  tactic: varchar("tactic", { length: 64 }).notNull(),
+  category: varchar("category", { length: 24 }).notNull(),
+  severity: varchar("severity", { length: 12 }).notNull().default("low"),
+  patternType: varchar("pattern_type", { length: 16 }).notNull(),
+  // Human-readable representation of the pattern (regex source / keyword /
+  // composite description). Code remains source-of-truth for execution —
+  // we never deserialize regex from this column.
+  patternSource: text("pattern_source").notNull(),
+  // Stored as int 0..100 to avoid float drift; pipeline divides by 100.
+  baseConfidenceX100: integer("base_confidence_x100").notNull(),
+  active: boolean("active").notNull().default(true),
+  teaching: text("teaching"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_awareness_rules_active").on(table.active),
+  index("idx_awareness_rules_category").on(table.category),
+]);
+
+export const awarenessDetections = pgTable("awareness_detections", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id"),
+  // chat | journal | api | report | inline
+  contentSource: varchar("content_source", { length: 32 }).notNull(),
+  contentRef: varchar("content_ref", { length: 80 }),
+  // Top-confidence rule from this detection (may be null on report-only events).
+  ruleKey: varchar("rule_key", { length: 64 }),
+  tactic: varchar("tactic", { length: 64 }),
+  category: varchar("category", { length: 24 }),
+  severity: varchar("severity", { length: 12 }).notNull().default("info"),
+  // Ensemble confidence in 0..100; flagged means crossed pipeline threshold.
+  ensembleConfidenceX100: integer("ensemble_confidence_x100").notNull().default(0),
+  flagged: boolean("flagged").notNull().default(false),
+  // Which detector layer attributed: rule | stat | llm | ensemble | self_report
+  detectorLayer: varchar("detector_layer", { length: 16 }).notNull().default("rule"),
+  // {layer1: [...], layer2: [...], layer3: {...}|null, latencyMs: {...}}
+  // PII hygiene: NEVER store the matched substring or original text.
+  layers: jsonb("layers").notNull().default({}),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_awareness_detections_user_created").on(table.userId, table.createdAt),
+  index("idx_awareness_detections_severity").on(table.severity),
+  index("idx_awareness_detections_rule").on(table.ruleKey),
+  index("idx_awareness_detections_flagged").on(table.flagged),
+]);
+

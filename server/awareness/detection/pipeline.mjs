@@ -25,7 +25,7 @@ import { openai } from "../../ai/openaiClient.mjs";
 import { logEvent } from "../../ai/aiTelemetry.mjs";
 import { AWARENESS_RULES, RULE_COUNT, ruleById } from "../rules.mjs";
 
-const { contentScores } = schema;
+const { contentScores, awarenessRules, awarenessDetections } = schema;
 
 const MIN_LAYER1_CONFIDENCE = 0.40;
 const ENSEMBLE_FLAG_THRESHOLD = 0.65;
@@ -37,7 +37,64 @@ const LAYER_WEIGHTS = Object.freeze({ layer1: 0.3, layer2: 0.4, layer3: 0.3 });
 export class RuleMatcher {
   /** @param {import('../rules.mjs').AwarenessRule[]} rules */
   constructor(rules = AWARENESS_RULES) {
+    // Code-defined rules are the executable source-of-truth (regex objects
+    // can't round-trip through JSONB safely). The DB-backed registry only
+    // controls which rules are ENABLED at runtime + their base confidence.
+    this._codeRules = rules;
     this.rules = rules;
+    this.refreshedAt = null;
+  }
+
+  /**
+   * Refresh the active rule set from the awareness_rules table.
+   *
+   * The DB row keyed by `rule_key` overrides the in-code `active` flag and
+   * `baseConfidence`. Anything in code but missing from the DB is left
+   * enabled (so a fresh deploy with an unseeded DB still works); anything
+   * in the DB with `active=false` is removed from the executable set.
+   *
+   * Designed to be safe to call repeatedly. Failures fall back to the
+   * in-code library — the pipeline must keep matching even if the DB
+   * disappears.
+   *
+   * @returns {Promise<{ ok: boolean, count: number, source: 'db' | 'code', error?: string }>}
+   */
+  async refreshFromDb() {
+    try {
+      const rows = await db.select().from(awarenessRules);
+      if (!Array.isArray(rows) || rows.length === 0) {
+        this.rules = this._codeRules;
+        this.refreshedAt = Date.now();
+        return { ok: true, count: this.rules.length, source: "code" };
+      }
+      const byKey = new Map(rows.map((r) => [r.ruleKey, r]));
+      const next = [];
+      for (const codeRule of this._codeRules) {
+        const dbRow = byKey.get(codeRule.id);
+        if (!dbRow) {
+          // Unseeded code rule — keep it enabled so first-boot works.
+          next.push(codeRule);
+          continue;
+        }
+        if (dbRow.active === false) continue;
+        const overrideConf = typeof dbRow.baseConfidenceX100 === "number"
+          ? Math.max(0, Math.min(1, dbRow.baseConfidenceX100 / 100))
+          : codeRule.baseConfidence;
+        next.push({
+          ...codeRule,
+          baseConfidence: overrideConf,
+          severity: dbRow.severity || codeRule.severity,
+        });
+      }
+      this.rules = next;
+      this.refreshedAt = Date.now();
+      return { ok: true, count: this.rules.length, source: "db" };
+    } catch (err) {
+      // DB unavailable — keep matching with the in-code library.
+      this.rules = this._codeRules;
+      this.refreshedAt = Date.now();
+      return { ok: false, count: this.rules.length, source: "code", error: err?.message || "db_load_failed" };
+    }
   }
 
   /**
@@ -352,6 +409,61 @@ export class AwarenessPipeline {
     const { ensemble, topConfidence, flagged } = this.scorer.combine(layer1, layer2, layer3);
     const severity = severityFor(topConfidence);
 
+    // v2.0 Prompt 3.2 gap closure: per-detection event logging is INDEPENDENT
+    // of the content_scores PII gate. awareness_detections only stores rule
+    // attribution + numeric confidence (never user text), so it's safe to
+    // log for every detect() invocation that produced any signal — including
+    // anonymous calls. We only skip writes when nothing matched at all.
+    const hasAnySignal =
+      (Array.isArray(layer1) && layer1.length > 0) ||
+      (Array.isArray(ensemble) && ensemble.length > 0) ||
+      (layer3 && Array.isArray(layer3.tactics) && layer3.tactics.length > 0);
+    if (hasAnySignal) {
+      try {
+        // Ensemble entries don't carry ruleId (the scorer collapses by
+        // category:tactic), so we attribute rule_key to the strongest
+        // matching Layer-1 hit for the top tactic. tactic/category come
+        // from the ensemble where possible, falling back to layer1[0].
+        const topEnsemble = Array.isArray(ensemble) && ensemble.length > 0 ? ensemble[0] : null;
+        const topLayer1 = layer1.length > 0
+          ? (topEnsemble
+              ? (layer1.find((h) => h.tactic === topEnsemble.tactic && h.category === topEnsemble.category) || layer1[0])
+              : layer1[0])
+          : null;
+        const tactic = topEnsemble?.tactic || topLayer1?.tactic || null;
+        const category = topEnsemble?.category || topLayer1?.category || null;
+        const ruleKey = topLayer1?.ruleId || null;
+        const layer2Real = this.mlClassifier.modelLoaded && Array.isArray(layer2) && layer2.length > 0;
+        const detectorLayerEvent = layer3
+          ? "ensemble"
+          : (layer2Real ? "stat" : "rule");
+        const layersPayload = {
+          layer1: layer1.map((h) => ({ ruleId: h.ruleId, confidence: h.confidence, severity: h.severity })),
+          layer2: Array.isArray(layer2) ? layer2.map((h) => ({ ruleId: h.ruleId, confidence: h.confidence })) : [],
+          layer3: layer3
+            ? { confidence: layer3.confidence, ran: true, tactics: Array.isArray(layer3.tactics) ? layer3.tactics.slice(0, 6) : [] }
+            : { ran: false },
+          latencyMs: { layer1: layer1Ms, layer2: layer2Ms, layer3: layer3Ms, total: Date.now() - startedAt },
+          ensembleSize: Array.isArray(ensemble) ? ensemble.length : 0,
+        };
+        await db.insert(awarenessDetections).values({
+          userId: userId || null,
+          contentSource,
+          contentRef: contentRef || `inline-${Date.now()}`,
+          ruleKey,
+          tactic,
+          category,
+          severity,
+          ensembleConfidenceX100: Math.max(0, Math.min(100, Math.round((Number(topConfidence) || 0) * 100))),
+          flagged: !!flagged,
+          detectorLayer: detectorLayerEvent,
+          layers: layersPayload,
+        });
+      } catch (err) {
+        logEvent({ type: "ai_call_completed", metadata: { route: "awareness.detection_event", error: err?.message?.slice(0, 80) || "detection_persist_failed" } });
+      }
+    }
+
     const shouldPersist = persist !== undefined ? !!persist : flagged;
     let scoreId = null;
     if (shouldPersist) {
@@ -390,6 +502,11 @@ export class AwarenessPipeline {
       } catch (err) {
         logEvent({ type: "ai_call_completed", metadata: { route: "awareness.persist", error: err?.message?.slice(0, 80) || "persist_failed" } });
       }
+      // NOTE: awareness_detections insert intentionally lives ABOVE this
+      // block (in the `if (hasAnySignal)` gate around line 415) so we
+      // capture every detection event regardless of whether the caller
+      // is authed for content_scores persistence. Do NOT add a second
+      // insert here or rows will be duplicated.
     }
 
     return {

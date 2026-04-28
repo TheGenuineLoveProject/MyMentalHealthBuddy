@@ -334,6 +334,50 @@ const STATEMENTS = [
   // attempts before insert; this partial unique index closes the TOCTOU
   // window between two concurrent submissions of the same lesson.
   `CREATE UNIQUE INDEX IF NOT EXISTS uniq_discernment_first_correct ON discernment_attempts(user_id, lesson_id) WHERE correct = true AND points_earned > 0`,
+
+  /* ===== MMHB CONSCIOUSNESS OS v2.0 — Prompt 3.2 gap closures ============
+   * Awareness rules (DB-canonical) + per-detection event log. Mirrors the
+   * Drizzle definitions in shared/schema.mjs. Additive only; safe to
+   * re-run. Regex execution remains in server/awareness/rules.mjs — this
+   * table is the source-of-truth for which rules are ENABLED at runtime.
+   * ====================================================================== */
+  `CREATE TABLE IF NOT EXISTS awareness_rules (
+     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+     rule_key varchar(64) NOT NULL UNIQUE,
+     tactic varchar(64) NOT NULL,
+     category varchar(24) NOT NULL,
+     severity varchar(12) NOT NULL DEFAULT 'low',
+     pattern_type varchar(16) NOT NULL,
+     pattern_source text NOT NULL,
+     base_confidence_x100 integer NOT NULL,
+     active boolean NOT NULL DEFAULT true,
+     teaching text,
+     notes text,
+     created_at timestamp NOT NULL DEFAULT now(),
+     updated_at timestamp NOT NULL DEFAULT now()
+   )`,
+  `CREATE INDEX IF NOT EXISTS idx_awareness_rules_active ON awareness_rules(active)`,
+  `CREATE INDEX IF NOT EXISTS idx_awareness_rules_category ON awareness_rules(category)`,
+
+  `CREATE TABLE IF NOT EXISTS awareness_detections (
+     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+     user_id uuid,
+     content_source varchar(32) NOT NULL,
+     content_ref varchar(80),
+     rule_key varchar(64),
+     tactic varchar(64),
+     category varchar(24),
+     severity varchar(12) NOT NULL DEFAULT 'info',
+     ensemble_confidence_x100 integer NOT NULL DEFAULT 0,
+     flagged boolean NOT NULL DEFAULT false,
+     detector_layer varchar(16) NOT NULL DEFAULT 'rule',
+     layers jsonb NOT NULL DEFAULT '{}'::jsonb,
+     created_at timestamp NOT NULL DEFAULT now()
+   )`,
+  `CREATE INDEX IF NOT EXISTS idx_awareness_detections_user_created ON awareness_detections(user_id, created_at)`,
+  `CREATE INDEX IF NOT EXISTS idx_awareness_detections_severity ON awareness_detections(severity)`,
+  `CREATE INDEX IF NOT EXISTS idx_awareness_detections_rule ON awareness_detections(rule_key)`,
+  `CREATE INDEX IF NOT EXISTS idx_awareness_detections_flagged ON awareness_detections(flagged)`,
 ];
 
 let bootstrapped = false;

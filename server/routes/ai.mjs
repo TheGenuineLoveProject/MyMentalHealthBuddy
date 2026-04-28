@@ -19,6 +19,11 @@ import { logger } from "../utils/logger.mjs";
 import { logAISuccess, logAIFailure, logAIFallback } from "../logging/aiLogger.mjs";
 import { orchestrateAIRequest } from "../ai/orchestrator.mjs";
 import { normalizeAIResponse } from "../ai/normalizeResponse.mjs";
+// v2.0 Prompt 3.2 gap closure: read-only Layer-1 awareness scan attached to req.
+// Never blocks the response path — purely instrumentation. The detection event
+// is later written by /api/awareness/detect; this middleware only enriches
+// observability for the chat surface.
+import { scanLayer1Middleware } from "../awareness/detection/pipeline.mjs";
 
 const router = express.Router();
 const MAX_INPUT_LENGTH = 4000;
@@ -147,7 +152,7 @@ router.get("/chat", (req, res) => {
   res.json({ status: "AI route is alive (use POST)" });
 });
 
-router.post("/chat", optionalAuth, async (req, res) => {
+router.post("/chat", optionalAuth, scanLayer1Middleware({ field: "message", attach: "awareness" }), async (req, res) => {
   try {
     const result = await orchestrateAIRequest({
       route: "/api/ai/chat",

@@ -20,6 +20,18 @@ import { db, schema } from "../db.mjs";
 import { eq, desc, and, gte } from "drizzle-orm";
 import { invokeAgent, orchestratorMemoryStats } from "../ai/v2/agentOrchestrator.mjs";
 import { recallWarm } from "../ai/v2/agentMemory.mjs";
+// v2.0 Prompt 3.1 extension surface — read-only diagnostics for the
+// state machine, escalation policy, constitutional gate, and Redis
+// working memory. Mounted under the same admin-gated /consciousness
+// router; these never expose user content.
+import {
+  getAgentState,
+  recentTransitions,
+  stateMachineSnapshot,
+} from "../ai/v2/agentState.mjs";
+import { escalationConfig } from "../ai/v2/agentEscalation.mjs";
+import { CONSTITUTIONAL_RULES, runConstitutionalGate } from "../ai/v2/constitutionalGate.mjs";
+import { workingMemoryStatus } from "../ai/v2/agentWorkingMemory.mjs";
 
 const router = express.Router();
 router.use(express.json({ limit: "32kb" }));
@@ -370,6 +382,80 @@ router.get("/orchestrator/memory/:agentId", async (req, res) => {
     return res.json({ ok: true, agentId, warm });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err?.message || "memory recall failed" });
+  }
+});
+
+/* =====================================================================
+ * v2.0 Prompt 3.1 extension — diagnostics
+ * ---------------------------------------------------------------------
+ * These endpoints expose the additive sibling modules so the Command
+ * Center can observe agent state, escalation config, constitutional
+ * rules, and working-memory backend health at runtime.
+ * ===================================================================== */
+
+router.get("/orchestrator/state", async (_req, res) => {
+  try {
+    return res.json({ ok: true, snapshot: stateMachineSnapshot() });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "state snapshot failed" });
+  }
+});
+
+router.get("/orchestrator/state/:agentId", async (req, res) => {
+  try {
+    const agentId = String(req.params.agentId || "").trim();
+    if (!/^[0-9a-fA-F-]{8,40}$/.test(agentId)) {
+      return res.status(400).json({ ok: false, error: "invalid agentId" });
+    }
+    const limit = Number.parseInt(String(req.query.limit || "10"), 10);
+    return res.json({
+      ok: true,
+      state: getAgentState(agentId),
+      transitions: recentTransitions(agentId, Number.isNaN(limit) ? 10 : limit),
+    });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "state lookup failed" });
+  }
+});
+
+router.get("/orchestrator/escalation/config", async (_req, res) => {
+  try {
+    return res.json({ ok: true, config: escalationConfig() });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "escalation config failed" });
+  }
+});
+
+router.get("/orchestrator/constitutional/rules", async (_req, res) => {
+  try {
+    return res.json({ ok: true, rules: CONSTITUTIONAL_RULES });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "constitutional rules failed" });
+  }
+});
+
+router.post("/orchestrator/constitutional/check", async (req, res) => {
+  try {
+    const body = req.body || {};
+    const input = typeof body.input === "string" ? body.input.slice(0, 4000) : "";
+    const intent = typeof body.intent === "string" ? body.intent.slice(0, 60) : "general";
+    const outcome = body.outcome && typeof body.outcome === "object" ? body.outcome : null;
+    if (!input) {
+      return res.status(400).json({ ok: false, error: "input is required" });
+    }
+    const verdict = runConstitutionalGate({ input, intent, outcome });
+    return res.json({ ok: true, verdict });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "constitutional check failed" });
+  }
+});
+
+router.get("/orchestrator/working-memory/status", async (_req, res) => {
+  try {
+    const status = await workingMemoryStatus();
+    return res.json({ ok: true, status });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "working memory status failed" });
   }
 });
 

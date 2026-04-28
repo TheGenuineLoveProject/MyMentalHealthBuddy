@@ -602,6 +602,22 @@ try {
   console.warn("[boot] ensureSchema skipped:", err?.message || err);
 }
 
+// v2.0 Prompt 3.2 gap closure — seed awareness_rules from the in-code
+// library and refresh the pipeline's RuleMatcher to honor active flags
+// from the DB. Best-effort; pipeline falls back to in-code rules on failure.
+try {
+  const { seedAwarenessRules } = await import("./awareness/seedRules.mjs");
+  const seedRes = await seedAwarenessRules();
+  if (seedRes.upserted > 0) {
+    console.log(`[boot] seeded ${seedRes.upserted}/${seedRes.total} awareness rules`);
+  }
+  const { getPipeline } = await import("./awareness/detection/pipeline.mjs");
+  const refresh = await getPipeline().ruleMatcher.refreshFromDb();
+  console.log(`[boot] awareness ruleMatcher refreshed: ${refresh.count} rules from ${refresh.source}`);
+} catch (err) {
+  console.warn("[boot] awareness rules seed/refresh skipped:", err?.message || err);
+}
+
 // v2.0 Prompt 3.3 — seed the protocol registry once tables exist.
 try {
   const { seedProtocolsIfEmpty } = await import("./protocols/seed/protocols.mjs");

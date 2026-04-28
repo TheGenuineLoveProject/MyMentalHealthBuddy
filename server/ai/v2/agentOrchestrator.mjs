@@ -44,6 +44,20 @@ import {
   recallCold,
   memoryStats,
 } from "./agentMemory.mjs";
+// v2.0 Prompt 3.1 extension — additive sibling modules. None of these
+// gate the response. They enrich the audit trace and surface decisions
+// that need human review. The orchestrator continues to return a valid
+// outcome even if any extension throws.
+import {
+  AGENT_STATES,
+  transitionAgentState,
+  getAgentState,
+  recentTransitions,
+  stateMachineSnapshot,
+} from "./agentState.mjs";
+import { evaluateEscalation, escalationConfig } from "./agentEscalation.mjs";
+import { runConstitutionalGate } from "./constitutionalGate.mjs";
+import { wmRead, wmWrite, workingMemoryStatus } from "./agentWorkingMemory.mjs";
 
 const { agentRegistry, agentDecisions } = schema;
 
@@ -277,6 +291,15 @@ export async function invokeAgent({
   }
   trace.steps.push({ stage: "kill_switch_check", killed: false });
 
+  // 5.5 state_transition (extension) — IDLE → ENGAGED. Best-effort; the
+  // state machine is observational and never blocks the response.
+  try {
+    const t = transitionAgentState(sel.chosen.id, AGENT_STATES.ENGAGED, `intent:${String(intent).slice(0, 40)}`);
+    trace.steps.push({ stage: "state_transition", ok: t.ok, from: t.from || null, to: t.to || null });
+  } catch (err) {
+    trace.steps.push({ stage: "state_transition", ok: false, error: err?.message || "transition_failed" });
+  }
+
   // 6. policy_gate (read-only consult to locked responsePolicy)
   let policySnapshot = null;
   try {
@@ -291,14 +314,25 @@ export async function invokeAgent({
     trace.steps.push({ stage: "policy_gate", ok: false, error: err?.message || "policy_unavailable" });
   }
 
-  // 7. memory_recall (warm tier)
+  // 7. memory_recall (warm tier + working-memory tier extension)
   const warm = await recallWarm(sel.chosen.id, 3);
   const hotItems = recallHot(sel.chosen.id, userId || guestId || "anon", 3);
+  let workingScratchpad = null;
+  try {
+    workingScratchpad = await wmRead(
+      sel.chosen.id,
+      userId || guestId || "anon",
+      "lastDecision"
+    );
+  } catch (err) {
+    trace.steps.push({ stage: "working_memory_recall", ok: false, error: err?.message || "wm_read_failed" });
+  }
   trace.steps.push({
     stage: "memory_recall",
     hotCount: hotItems.length,
     warmCount: warm.length,
     cold: recallCold(),
+    workingMemoryHit: !!workingScratchpad,
   });
 
   // 8. deliberation (deterministic — actual LLM deliberation is Prompt 3.2+)
@@ -312,11 +346,104 @@ export async function invokeAgent({
   };
   trace.steps.push({ stage: "deliberation", action: recommendation.action });
 
+  // 8.5 constitutional_gate (extension) — read-only check that surfaces
+  // platform-rule violations to the audit trail without blocking.
+  let constitutional = null;
+  try {
+    constitutional = runConstitutionalGate({
+      input,
+      intent,
+      outcome: recommendation,
+    });
+    trace.steps.push({
+      stage: "constitutional_gate",
+      pass: constitutional.pass,
+      violationCount: constitutional.violations.length,
+      violations: constitutional.violations.slice(0, 5),
+    });
+  } catch (err) {
+    trace.steps.push({ stage: "constitutional_gate", ok: false, error: err?.message || "gate_failed" });
+  }
+
+  // 8.6 escalation_check (extension) — per-division thresholds. May
+  // promote the decision to AWAITING_APPROVAL state.
+  let escalation = null;
+  try {
+    escalation = evaluateEscalation({
+      division: sel.chosen.division,
+      decisionType: "agent_routing",
+      confidence: 80,
+      priorityEscalated: !!trace.priorityEscalated,
+      constitutional,
+    });
+    trace.steps.push({
+      stage: "escalation_check",
+      escalate: escalation.escalate,
+      reasons: escalation.reasons,
+      suggestedReviewer: escalation.suggestedReviewer,
+    });
+    if (escalation.escalate) {
+      const t = transitionAgentState(
+        sel.chosen.id,
+        AGENT_STATES.AWAITING_APPROVAL,
+        `escalated:${escalation.reasons.slice(0, 2).join(",")}`
+      );
+      trace.steps.push({
+        stage: "state_transition",
+        ok: t.ok,
+        from: t.from || null,
+        to: t.to || null,
+        reason: "escalation",
+      });
+    } else {
+      // Decision completed without escalation; return to IDLE.
+      const t = transitionAgentState(sel.chosen.id, AGENT_STATES.IDLE, "completed");
+      trace.steps.push({
+        stage: "state_transition",
+        ok: t.ok,
+        from: t.from || null,
+        to: t.to || null,
+        reason: "completed",
+      });
+    }
+  } catch (err) {
+    trace.steps.push({ stage: "escalation_check", ok: false, error: err?.message || "escalation_failed" });
+  }
+
   rememberHot(sel.chosen.id, userId || guestId || "anon", {
     intent,
     inputHash: inputDigest.inputPreviewHash,
     outcomeAction: recommendation.action,
   });
+
+  // 8.7 working_memory_write (extension) — best-effort scratchpad
+  // for the next invocation in the same scope.
+  try {
+    await wmWrite(
+      sel.chosen.id,
+      userId || guestId || "anon",
+      "lastDecision",
+      {
+        intent,
+        inputHash: inputDigest.inputPreviewHash,
+        action: recommendation.action,
+        escalate: escalation?.escalate || false,
+        constitutionalPass: constitutional?.pass !== false,
+      },
+      30 * 60
+    );
+  } catch (err) {
+    trace.steps.push({ stage: "working_memory_write", ok: false, error: err?.message || "wm_write_failed" });
+  }
+
+  // Embed extension verdicts on the recommendation object so the
+  // finalize() audit row carries them downstream without changing the
+  // existing agent_decisions schema.
+  const enrichedOutcome = {
+    ...recommendation,
+    constitutional: constitutional || null,
+    escalation: escalation || null,
+  };
 
   return finalize({
     agentRow: sel.chosen,
@@ -324,7 +451,7 @@ export async function invokeAgent({
     startedAt,
     decisionType: "agent_routing",
     inputDigest,
-    outcome: recommendation,
+    outcome: enrichedOutcome,
     confidence: 80,
   });
 }
