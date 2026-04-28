@@ -1,0 +1,29 @@
+                     List of relations
+ Schema |           Name            | Type  |    Owner     
+--------+---------------------------+-------+--------------
+ public | agent_decisions           | table | neondb_owner
+ public | agent_registry            | table | neondb_owner
+ public | analytics_events          | table | neondb_owner
+ public | awareness_detections      | table | neondb_owner
+ public | awareness_rules           | table | neondb_owner
+ public | biometric_connections     | table | neondb_owner
+ public | biometric_readings        | table | neondb_owner
+ public | blog_comments             | table | neondb_owner
+ public | blog_posts                | table | neondb_owner
+ public | content_scores            | table | neondb_owner
+ public | discernment_attempts      | table | neondb_owner
+ public | discernment_lessons       | table | neondb_owner
+ public | discernment_user_progress | table | neondb_owner
+ public | gratitude_entries         | table | neondb_owner
+ public | journals                  | table | neondb_owner
+ public | leads                     | table | neondb_owner
+ public | moods                     | table | neondb_owner
+ public | nervous_system_states     | table | neondb_owner
+ public | newsletter_subscribers    | table | neondb_owner
+ public | outcome_measures          | table | neondb_owner
+ public | protocol_registry         | table | neondb_owner
+ public | protocol_sessions         | table | neondb_owner
+ public | user_avatars              | table | neondb_owner
+ public | users                     | table | neondb_owner
+(24 rows)
+
