@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import BuddyAvatar from "../avatar/BuddyAvatar";
+import LumiMascot from "../lumi/LumiMascot.jsx";
 
 const SIZES = {
   xs: { img: "w-8 h-8", radius: "rounded-lg", shadow: "0 1px 6px", px: 32 },
@@ -29,7 +29,7 @@ export default function BrandLogo({
           className={`brand-logo-img relative z-[1] w-full h-full ${s.radius} flex items-center justify-center overflow-hidden transition-transform duration-300`}
           style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: `${s.shadow} ${shadowColor}` }}
         >
-          <BuddyAvatar state="calm" size={s.px} className="w-full h-full" />
+          <LumiMascot emotion="neutral" size={s.px} />
         </span>
       </span>
       {showText && (

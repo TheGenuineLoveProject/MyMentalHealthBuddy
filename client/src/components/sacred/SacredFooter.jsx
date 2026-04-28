@@ -19,7 +19,7 @@ import { Link } from "wouter";
 import { Heart, Mail, Sparkles } from "lucide-react";
 import SacredGeometryBg from "@/components/SacredGeometryBg";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import LumiMascot from "@/components/lumi/LumiMascot.jsx";
 import "@/styles/healing-animations.css";
 
 export default function SacredFooter() {
@@ -87,7 +87,7 @@ export default function SacredFooter() {
                 className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden animate-breathing"
                 style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }}
               >
-                <BuddyAvatar state="calm" size={40} className="w-full h-full" />
+                <LumiMascot emotion="neutral" size={40} />
               </span>
               <span 
                 className="font-serif text-xl font-semibold"
