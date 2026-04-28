@@ -29,6 +29,22 @@ The project uses a monorepo structure with React 18 (TypeScript, Vite) for the c
 ### Feature Specifications
 Core features include AI-powered Chat Therapy, Wellness Tools (State Tracker, Journal Prompts), and specialized APIs. The platform supports a four-tier subscription model and includes security features like rate limiting, CSP, and input sanitization. Engagement tools comprise gamification and a Content Studio. User features offer daily healing reminders, voice affirmations, and an AI companion. Admin tools provide dashboards, and content is organized via a Learning Hub. The `/growth` page serves as a "Metacognition Mirror," displaying user tenure, mirror stats, dominant feelings from journal data, metacognitive invitations, and dynamic milestone cards. The "Peace Scape" surface (`/peacescape`) provides a sanctuary environment.
 
+### v2.0 Prompt 3.1 — Agent Orchestrator (state machine + 3-tier memory + safety gating)
+- Spec: MMHB CONSCIOUSNESS OS v2.0 Part II §2.5 (Synthetic Employee Registry), CAD-1 (Hard Safety Floor), CAD-3 (Compute-Tier Crisis Priority), CAD-4 (Radical Transparency).
+- New module `server/ai/v2/agentOrchestrator.mjs` — pure-JS deterministic state machine (no LangGraph dep yet; LangGraph remains a swappable backend for a later phase). Eight ordered steps: validate → crisis_check → agent_selection → lifecycle_check → kill_switch_check → policy_gate → memory_recall → deliberation. Records every invocation as an append-only row in `agent_decisions` (CAD-4). Auto-provisions a `system-orchestrator-sentinel` agent on first run for attribution when no domain agent matches.
+- New module `server/ai/v2/agentMemory.mjs` — three-tier memory abstraction. **Hot**: in-process Map with 10-minute TTL, 1000-entry cap, 20-item per-key cap (LRU eviction). **Warm**: read-only over `agent_decisions` (last N rows by agent). **Cold**: explicitly deferred to Phase 4 (lakehouse) with `available: false`.
+- Locked safety modules imported READ-ONLY: `detectCrisis()` + `CRISIS_RESPONSE` from `server/ai/safety/crisis.mjs` and `buildResponsePolicy()` from `server/ai/responsePolicy.mjs`. Locked v1 chat orchestrator (`server/ai/orchestrator.mjs`) is untouched and remains the sole producer of conversational user-facing replies.
+- Extended `server/routes/consciousness.mjs` with three new admin-gated endpoints: `POST /orchestrator/invoke`, `GET /orchestrator/memory`, `GET /orchestrator/memory/:agentId`. All wrapped by the existing `adminLimiter → requireAuth → requireAdmin` chain via `ADMIN_SUB_ROUTERS`. Input cap 4000 chars; only an FNV hash of input is recorded in `inputDigest` (no PII echoed).
+- New admin panel `client/src/components/admin/OrchestratorTestPanel.jsx` mounted in `CommandCenter.jsx` after `ConsciousnessRegistryPanel`. Renders intent + agent-key form with sample inputs, live 4-tile memory snapshot, full reasoning trace timeline (stage-by-stage), and outcome JSON. WCAG-friendly: ARIA labels, `data-testid` on every interactive/display element, `role="alert"` for errors.
+- Validation matrix (all branches confirmed via DB audit + direct invocation):
+  - empty input → 400 validation rejection (no audit row)
+  - no matching agent → `no_agent_available` / `fallback_safe` (sentinel-attributed)
+  - crisis text → `crisis_short_circuit` / `route_to_crisis` with `priority_escalated=true` (CAD-3)
+  - healthy routing → `agent_routing` / `agent_recommendation` (8 steps, ~32ms latency)
+  - kill-switch engaged → `kill_switch_engaged` / `blocked_by_kill_switch` (CAD-1 short-circuit at step 5)
+- 4 distinct `decision_type` values persisted to `agent_decisions` audit table during validation. TypeScript clean. Boot remains 7/7 admin sub-routers, 30/30 ensureSchema statements (no schema additions this prompt — Prompt 3.1 reuses Phase 0 tables).
+- Out of scope this prompt (deferred per spec ordering): LangGraph backend swap, NATS messaging, LLM-backed deliberation step (currently deterministic). The orchestrator produces routing/audit decisions only — actual conversational generation remains owned by the locked v1 chat orchestrator.
+
 ### v2.0 Phase 0 — Consciousness OS Foundation Primitives
 - Spec: MMHB CONSCIOUSNESS OS v2.0 (Part II §2.5 Synthetic Employee Registry, CAD-4 Radical Transparency, Part III §3.3/§3.6 Mirror & Epistemic scoring).
 - Additive Drizzle tables in `shared/schema.mjs`: `agent_registry`, `agent_decisions` (append-only audit), `content_scores` (append-only ledger of Mirror/Epistemic/manipulation signals — no content body stored).

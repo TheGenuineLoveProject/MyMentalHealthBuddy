@@ -18,6 +18,8 @@
 import express from "express";
 import { db, schema } from "../db.mjs";
 import { eq, desc, and, gte } from "drizzle-orm";
+import { invokeAgent, orchestratorMemoryStats } from "../ai/v2/agentOrchestrator.mjs";
+import { recallWarm } from "../ai/v2/agentMemory.mjs";
 
 const router = express.Router();
 router.use(express.json({ limit: "32kb" }));
@@ -313,6 +315,61 @@ router.get("/summary", async (_req, res) => {
     });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err?.message || "summary failed" });
+  }
+});
+
+/* =====================================================================
+ * v2.0 Prompt 3.1 — Agent orchestrator surface
+ * ---------------------------------------------------------------------
+ * Admin-only endpoints to invoke and inspect the additive v2 agent
+ * orchestrator (server/ai/v2/agentOrchestrator.mjs). This is intended
+ * for shadow-mode testing of registered synthetic employees from the
+ * Command Center; it does NOT replace the locked v1 chat orchestrator.
+ * Every invocation produces an append-only row in agent_decisions.
+ * ===================================================================== */
+
+router.post("/orchestrator/invoke", async (req, res) => {
+  try {
+    const body = req.body || {};
+    const intent = typeof body.intent === "string" ? body.intent : "general";
+    const input = typeof body.input === "string" ? body.input : "";
+    const agentKey = typeof body.agentKey === "string" && body.agentKey ? body.agentKey : null;
+    const userId = typeof body.userId === "string" ? body.userId : null;
+    const guestId = typeof body.guestId === "string" ? body.guestId : null;
+
+    if (!input || input.length === 0) {
+      return res.status(400).json({ ok: false, error: "input is required (non-empty string)" });
+    }
+    if (input.length > 4000) {
+      return res.status(413).json({ ok: false, error: "input too long (max 4000 chars)" });
+    }
+
+    const result = await invokeAgent({ agentKey, intent, input, userId, guestId });
+    return res.json({ ok: true, result });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "orchestrator invoke failed" });
+  }
+});
+
+router.get("/orchestrator/memory", async (_req, res) => {
+  try {
+    return res.json({ ok: true, stats: orchestratorMemoryStats() });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "memory stats failed" });
+  }
+});
+
+router.get("/orchestrator/memory/:agentId", async (req, res) => {
+  try {
+    const agentId = String(req.params.agentId || "").trim();
+    if (!/^[0-9a-fA-F-]{8,40}$/.test(agentId)) {
+      return res.status(400).json({ ok: false, error: "invalid agentId" });
+    }
+    const limit = Number.parseInt(String(req.query.limit || "10"), 10);
+    const warm = await recallWarm(agentId, Number.isNaN(limit) ? 10 : limit);
+    return res.json({ ok: true, agentId, warm });
+  } catch (err) {
+    return res.status(500).json({ ok: false, error: err?.message || "memory recall failed" });
   }
 });
 

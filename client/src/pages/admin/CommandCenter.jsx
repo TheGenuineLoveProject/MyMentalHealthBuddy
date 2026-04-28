@@ -31,6 +31,7 @@ import SafetyFooter from "../../components/ui/SafetyFooter";
 import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
 import OperationsPanel from "@/components/admin/OperationsPanel";
 import ConsciousnessRegistryPanel from "@/components/admin/ConsciousnessRegistryPanel";
+import OrchestratorTestPanel from "@/components/admin/OrchestratorTestPanel";
 import styles from "./CommandCenter.module.css";
 
 function StatusBadge({ status }) {
@@ -1614,6 +1615,7 @@ export default function AdminCommandCenter() {
           <SOPMonitorPanel />
           <OperationsPanel />
           <ConsciousnessRegistryPanel />
+          <OrchestratorTestPanel />
         </div>
 
         <ToolsStatusWidget />
