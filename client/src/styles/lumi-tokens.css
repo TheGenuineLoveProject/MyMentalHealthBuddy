@@ -1,0 +1,163 @@
+/*
+ * Lumi Design System v2.0 — Token Foundation
+ * ADDITIVE ONLY: All variables prefixed with --lumi- to avoid colliding
+ * with existing --glp-* and shadcn HSL semantic tokens.
+ * Imported additively from client/src/index.css (last in chain).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
+
+:root {
+  /* ── Sage scale (trust, growth, healing) ───────────────────────── */
+  --lumi-sage-50:  hsl(150, 30%, 96%);
+  --lumi-sage-100: hsl(150, 28%, 90%);
+  --lumi-sage-200: hsl(150, 26%, 80%);
+  --lumi-sage-300: hsl(150, 24%, 68%);
+  --lumi-sage-400: hsl(150, 26%, 55%);
+  --lumi-sage-500: hsl(150, 32%, 42%);
+  --lumi-sage-600: hsl(150, 36%, 34%);
+  --lumi-sage-700: hsl(150, 38%, 27%);
+  --lumi-sage-800: hsl(150, 40%, 20%);
+  --lumi-sage-900: hsl(150, 42%, 14%);
+  --lumi-sage-950: hsl(150, 44%, 9%);
+
+  /* ── Amber scale (warmth, energy, action / heart-glow) ─────────── */
+  --lumi-amber-50:  hsl(36, 92%, 96%);
+  --lumi-amber-100: hsl(36, 90%, 90%);
+  --lumi-amber-200: hsl(36, 88%, 80%);
+  --lumi-amber-300: hsl(36, 86%, 68%);
+  --lumi-amber-400: hsl(36, 88%, 56%);
+  --lumi-amber-500: hsl(36, 92%, 48%);
+  --lumi-amber-600: hsl(34, 90%, 42%);
+  --lumi-amber-700: hsl(32, 88%, 35%);
+  --lumi-amber-800: hsl(30, 84%, 28%);
+  --lumi-amber-900: hsl(28, 80%, 20%);
+
+  /* ── Stone scale (calm, readable, sophisticated text hierarchy) ── */
+  --lumi-stone-50:  hsl(36, 14%, 97%);
+  --lumi-stone-100: hsl(36, 12%, 92%);
+  --lumi-stone-200: hsl(34, 10%, 84%);
+  --lumi-stone-300: hsl(32, 9%, 72%);
+  --lumi-stone-400: hsl(30, 8%, 58%);
+  --lumi-stone-500: hsl(28, 8%, 44%);
+  --lumi-stone-600: hsl(28, 9%, 34%);
+  --lumi-stone-700: hsl(28, 10%, 25%);
+  --lumi-stone-800: hsl(28, 11%, 17%);
+  --lumi-stone-900: hsl(28, 12%, 11%);
+
+  /* ── Semantic emotion tokens ──────────────────────────────────── */
+  --lumi-calm:    var(--lumi-sage-400);   /* breath, grounding */
+  --lumi-growth:  var(--lumi-sage-600);   /* progress, mastery */
+  --lumi-love:    hsl(350, 70%, 62%);     /* compassion, care */
+  --lumi-insight: hsl(258, 60%, 64%);     /* wisdom, reflection */
+  --lumi-energy:  var(--lumi-amber-500);  /* action, motivation */
+  --lumi-rest:    hsl(218, 30%, 50%);     /* sleep, rest */
+
+  /* ── Gradients ────────────────────────────────────────────────── */
+  --lumi-grad-sage:  linear-gradient(135deg, var(--lumi-sage-300), var(--lumi-sage-600));
+  --lumi-grad-amber: linear-gradient(135deg, var(--lumi-amber-300), var(--lumi-amber-600));
+  --lumi-grad-hero:  linear-gradient(135deg, var(--lumi-sage-100) 0%, var(--lumi-amber-50) 50%, var(--lumi-sage-200) 100%);
+  --lumi-grad-cta:   linear-gradient(135deg, var(--lumi-amber-500), var(--lumi-amber-600));
+  --lumi-grad-card:  linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+  --lumi-grad-glow:  radial-gradient(circle at 50% 50%, var(--lumi-amber-400) 0%, transparent 65%);
+
+  /* ── Typography ───────────────────────────────────────────────── */
+  --lumi-font-display: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --lumi-font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --lumi-font-quote:   'Crimson Pro', 'Cormorant Garamond', Georgia, serif;
+
+  /* Fluid type scale — clamps for responsive sizing */
+  --lumi-text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --lumi-text-sm:   clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --lumi-text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --lumi-text-lg:   clamp(1.125rem, 1rem + 0.625vw, 1.375rem);
+  --lumi-text-xl:   clamp(1.375rem, 1.2rem + 0.875vw, 1.75rem);
+  --lumi-text-2xl:  clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+  --lumi-text-3xl:  clamp(2.25rem, 1.9rem + 1.75vw, 3.5rem);
+  --lumi-text-4xl:  clamp(2.75rem, 2.3rem + 2.25vw, 4.5rem);
+
+  --lumi-leading-body:    1.75;
+  --lumi-leading-heading: 1.2;
+  --lumi-leading-quote:   1.6;
+
+  /* ── Spacing (8px base, 12 steps) ─────────────────────────────── */
+  --lumi-space-1: 0.25rem;
+  --lumi-space-2: 0.5rem;
+  --lumi-space-3: 0.75rem;
+  --lumi-space-4: 1rem;
+  --lumi-space-5: 1.5rem;
+  --lumi-space-6: 2rem;
+  --lumi-space-7: 2.5rem;
+  --lumi-space-8: 3rem;
+  --lumi-space-9: 4rem;
+  --lumi-space-10: 5rem;
+  --lumi-space-11: 6rem;
+  --lumi-space-12: 8rem;
+
+  /* ── Radii / shadows ──────────────────────────────────────────── */
+  --lumi-radius-sm: 0.375rem;
+  --lumi-radius-md: 0.625rem;
+  --lumi-radius-lg: 1rem;
+  --lumi-radius-xl: 1.5rem;
+  --lumi-radius-pill: 999px;
+
+  --lumi-shadow-1: 0 1px 2px rgba(28, 30, 28, 0.06), 0 2px 6px rgba(28, 30, 28, 0.04);
+  --lumi-shadow-2: 0 4px 12px rgba(28, 30, 28, 0.08), 0 2px 4px rgba(28, 30, 28, 0.04);
+  --lumi-shadow-3: 0 12px 28px rgba(28, 30, 28, 0.10), 0 4px 10px rgba(28, 30, 28, 0.06);
+  --lumi-shadow-glow-amber: 0 0 24px rgba(243, 168, 49, 0.45);
+  --lumi-shadow-glow-sage:  0 0 24px rgba(94, 168, 134, 0.35);
+
+  /* ── Default surface mappings (light) ─────────────────────────── */
+  --lumi-bg:        var(--lumi-stone-50);
+  --lumi-bg-elev:   #ffffff;
+  --lumi-bg-muted:  var(--lumi-sage-50);
+  --lumi-text:      var(--lumi-stone-900);
+  --lumi-text-muted:var(--lumi-stone-600);
+  --lumi-border:    var(--lumi-stone-200);
+  --lumi-accent:    var(--lumi-sage-600);
+  --lumi-accent-fg: #ffffff;
+
+  /* ── Motion ───────────────────────────────────────────────────── */
+  --lumi-ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --lumi-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --lumi-dur-quick:   140ms;
+  --lumi-dur-normal:  240ms;
+  --lumi-dur-slow:    480ms;
+  --lumi-dur-breathe: 4s;
+}
+
+/* Dark-mode mappings — opt-in via [data-theme="dark"] OR .dark wrapper */
+.dark, [data-theme="dark"] {
+  --lumi-bg:        var(--lumi-stone-900);
+  --lumi-bg-elev:   var(--lumi-stone-800);
+  --lumi-bg-muted:  var(--lumi-sage-900);
+  --lumi-text:      var(--lumi-stone-50);
+  --lumi-text-muted:var(--lumi-stone-300);
+  --lumi-border:    var(--lumi-stone-700);
+  --lumi-accent:    var(--lumi-sage-300);
+  --lumi-accent-fg: var(--lumi-stone-900);
+  --lumi-grad-card: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+}
+
+/* Utility classes — opt-in only */
+.font-display-lumi { font-family: var(--lumi-font-display); line-height: var(--lumi-leading-heading); letter-spacing: -0.01em; }
+.font-quote-lumi   { font-family: var(--lumi-font-quote); line-height: var(--lumi-leading-quote); font-style: italic; }
+.font-body-lumi    { font-family: var(--lumi-font-body); line-height: var(--lumi-leading-body); }
+
+.lumi-text-xs   { font-size: var(--lumi-text-xs); }
+.lumi-text-sm   { font-size: var(--lumi-text-sm); }
+.lumi-text-base { font-size: var(--lumi-text-base); }
+.lumi-text-lg   { font-size: var(--lumi-text-lg); }
+.lumi-text-xl   { font-size: var(--lumi-text-xl); }
+.lumi-text-2xl  { font-size: var(--lumi-text-2xl); }
+.lumi-text-3xl  { font-size: var(--lumi-text-3xl); }
+.lumi-text-4xl  { font-size: var(--lumi-text-4xl); }
+
+.lumi-bg          { background: var(--lumi-bg); color: var(--lumi-text); }
+.lumi-bg-elev     { background: var(--lumi-bg-elev); color: var(--lumi-text); }
+.lumi-text-muted  { color: var(--lumi-text-muted); }
+.lumi-border      { border-color: var(--lumi-border); }
+.lumi-accent-bg   { background: var(--lumi-accent); color: var(--lumi-accent-fg); }
+.lumi-grad-hero-bg { background: var(--lumi-grad-hero); }
+.lumi-grad-amber-bg { background: var(--lumi-grad-amber); color: white; }
+.lumi-grad-sage-bg { background: var(--lumi-grad-sage); color: white; }

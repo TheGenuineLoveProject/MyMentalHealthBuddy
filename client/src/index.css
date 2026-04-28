@@ -4,6 +4,13 @@
 @import "./styles/sacred-typography.css";
 @import "./styles/emotion-effects.css";
 @import "./styles/sacred-visuals.css";
+/* Lumi Design System v2.0 — additive, opt-in via .lumi-* classes */
+@import "./styles/lumi-tokens.css";
+@import "./styles/lumi-buttons.css";
+@import "./styles/lumi-links.css";
+@import "./styles/lumi-layout.css";
+@import "./styles/lumi-motion.css";
+@import "./styles/lumi-a11y.css";
 
 @tailwind base;
 @tailwind components;

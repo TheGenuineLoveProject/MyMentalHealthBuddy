@@ -1,6 +1,6 @@
 entrypoint = "server/app.mjs"
 run = "npm run dev"
-modules = ["nodejs-20", "postgresql-16"]
+modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 
 [deployment]
 deploymentTarget = "autoscale"

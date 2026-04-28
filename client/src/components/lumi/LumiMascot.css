@@ -1,0 +1,150 @@
+/*
+ * LumiMascot — Body-part animations for the interactive Buddy.
+ * State-driven via [data-emotion] attribute on .lumi-mascot wrapper.
+ */
+
+.lumi-mascot {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  isolation: isolate;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lumi-mascot__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ── Body breathing & floating ─────────────────────────────────── */
+.lumi-mascot__body {
+  transform-origin: 50% 60%;
+  animation: lumi-mascot-breathe 4.2s ease-in-out infinite;
+  transition: filter 600ms var(--lumi-ease);
+}
+.lumi-mascot__floater {
+  animation: lumi-mascot-float 6.5s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes lumi-mascot-breathe {
+  0%, 100% { transform: scale(1.0); }
+  50%      { transform: scale(1.03); }
+}
+@keyframes lumi-mascot-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+/* ── Head tilt by emotion ──────────────────────────────────────── */
+.lumi-mascot__head {
+  transform-origin: 50% 100%;
+  transition: transform 700ms var(--lumi-ease-out);
+}
+.lumi-mascot[data-emotion="empathy"]     .lumi-mascot__head { transform: rotate(-5deg); }
+.lumi-mascot[data-emotion="reflection"]  .lumi-mascot__head { transform: rotate(4deg); }
+.lumi-mascot[data-emotion="surprise"]    .lumi-mascot__head { transform: rotate(-2deg) translateY(-2px); }
+.lumi-mascot[data-emotion="sleepy"]      .lumi-mascot__head { transform: rotate(8deg) translateY(2px); }
+.lumi-mascot[data-emotion="celebration"] .lumi-mascot__head { animation: lumi-head-bob 700ms ease-in-out infinite; }
+@keyframes lumi-head-bob {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+/* ── Eyes / pupils ─────────────────────────────────────────────── */
+.lumi-mascot__eyelid {
+  transform-origin: center;
+  animation: lumi-mascot-blink 5.5s infinite;
+}
+.lumi-mascot__eyelid--right { animation-delay: 30ms; }
+@keyframes lumi-mascot-blink {
+  0%, 92%, 100% { transform: scaleY(0.05); opacity: 0; }
+  94%, 96%      { transform: scaleY(1); opacity: 1; }
+}
+.lumi-mascot[data-emotion="sleepy"] .lumi-mascot__eyelid {
+  animation: none; transform: scaleY(0.85); opacity: 0.85;
+}
+.lumi-mascot[data-emotion="surprise"] .lumi-mascot__pupil {
+  r: 4.5;
+}
+
+.lumi-mascot__pupil {
+  transition: cx 240ms var(--lumi-ease), cy 240ms var(--lumi-ease), r 300ms var(--lumi-ease);
+}
+
+/* ── Arms ──────────────────────────────────────────────────────── */
+.lumi-mascot__arm--left  { transform-origin: 35% 0%; transition: transform 600ms var(--lumi-ease-out); }
+.lumi-mascot__arm--right { transform-origin: 65% 0%; transition: transform 600ms var(--lumi-ease-out); }
+
+.lumi-mascot[data-emotion="joy"]         .lumi-mascot__arm--left  { animation: lumi-wave 1.6s ease-in-out infinite; }
+.lumi-mascot[data-emotion="celebration"] .lumi-mascot__arm--left  { transform: rotate(-45deg) translateY(-8px); }
+.lumi-mascot[data-emotion="celebration"] .lumi-mascot__arm--right { transform: rotate(45deg)  translateY(-8px); }
+.lumi-mascot[data-emotion="comfort"]     .lumi-mascot__arm--left  { transform: rotate(-22deg) translateY(2px); }
+.lumi-mascot[data-emotion="comfort"]     .lumi-mascot__arm--right { transform: rotate(22deg)  translateY(2px); }
+.lumi-mascot[data-emotion="reflection"]  .lumi-mascot__arm--left  { transform: rotate(-12deg) translateY(-4px); }
+.lumi-mascot[data-emotion="reflection"]  .lumi-mascot__arm--right { transform: rotate(12deg)  translateY(-4px); }
+@keyframes lumi-wave {
+  0%, 100% { transform: rotate(-30deg); }
+  50%      { transform: rotate(-55deg); }
+}
+
+/* ── Heart glow ───────────────────────────────────────────────── */
+.lumi-mascot__heart {
+  transform-origin: center;
+  animation: lumi-heart-pulse 3s ease-in-out infinite;
+  transition: filter 400ms var(--lumi-ease);
+}
+.lumi-mascot[data-emotion="celebration"] .lumi-mascot__heart {
+  animation-duration: 0.9s;
+  filter: drop-shadow(0 0 18px var(--lumi-amber-500));
+}
+.lumi-mascot[data-emotion="empathy"] .lumi-mascot__heart,
+.lumi-mascot[data-emotion="comfort"] .lumi-mascot__heart {
+  filter: drop-shadow(0 0 12px hsl(350, 80%, 65%));
+}
+.lumi-mascot[data-emotion="concern"] .lumi-mascot__heart {
+  animation-duration: 5s;
+  filter: drop-shadow(0 0 6px var(--lumi-amber-300));
+}
+.lumi-mascot[data-emotion="sleepy"] .lumi-mascot__heart {
+  animation-duration: 6s;
+  filter: drop-shadow(0 0 4px hsl(218, 30%, 60%));
+}
+.lumi-mascot[data-flash="true"] .lumi-mascot__heart {
+  animation: lumi-heart-flash 600ms ease-out 1;
+}
+@keyframes lumi-heart-flash {
+  0%   { transform: scale(1); filter: drop-shadow(0 0 4px var(--lumi-amber-400)); }
+  40%  { transform: scale(1.4); filter: drop-shadow(0 0 28px var(--lumi-amber-500)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--lumi-amber-400)); }
+}
+
+/* ── Body color tint by emotion ───────────────────────────────── */
+.lumi-mascot[data-emotion="joy"]         .lumi-mascot__body { filter: hue-rotate(-12deg) saturate(1.1); }
+.lumi-mascot[data-emotion="celebration"] .lumi-mascot__body { filter: hue-rotate(-20deg) saturate(1.2) brightness(1.05); }
+.lumi-mascot[data-emotion="empathy"]     .lumi-mascot__body { filter: hue-rotate(8deg); }
+.lumi-mascot[data-emotion="comfort"]     .lumi-mascot__body { filter: hue-rotate(15deg); }
+.lumi-mascot[data-emotion="concern"]     .lumi-mascot__body { filter: saturate(0.85); }
+.lumi-mascot[data-emotion="sleepy"]      .lumi-mascot__body { filter: saturate(0.7) brightness(0.95); }
+
+/* ── Ambient glow halo ────────────────────────────────────────── */
+.lumi-mascot__halo {
+  opacity: 0.55;
+  transition: opacity 700ms var(--lumi-ease);
+}
+.lumi-mascot[data-emotion="celebration"] .lumi-mascot__halo { opacity: 0.95; }
+.lumi-mascot[data-emotion="sleepy"]      .lumi-mascot__halo { opacity: 0.25; }
+
+/* ── Reduced motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .lumi-mascot__body,
+  .lumi-mascot__floater,
+  .lumi-mascot__eyelid,
+  .lumi-mascot__heart,
+  .lumi-mascot__arm--left,
+  .lumi-mascot__arm--right,
+  .lumi-mascot__head { animation: none !important; }
+  .lumi-mascot__eyelid { transform: scaleY(0.05); opacity: 0; }
+}
