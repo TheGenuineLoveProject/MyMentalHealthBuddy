@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "qOaiWVLOMgiQ8FOV2bPSa"
+uri = "file://content/strategy/platform-z-transformation.md"
+type = "text"
+title = "MMHB Platform A → Z Transformation Blueprint"
