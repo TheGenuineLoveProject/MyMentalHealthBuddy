@@ -12,3 +12,9 @@ id = "ea9RSXI6Y8PNU5m6POvdd"
 uri = "file://docs/inventory/route-inventory.md"
 type = "text"
 title = "MMHB Express Route Inventory — Week 1 / Task 1A"
+
+[[outputs]]
+id = "XSF8lzIGPUuLRHi9cBLM4"
+uri = "file://docs/adr/0001-modular-monolith-to-strangler-fig.md"
+type = "text"
+title = "ADR-0001 — Modular Monolith → Strangler Fig Progressive Extraction"
