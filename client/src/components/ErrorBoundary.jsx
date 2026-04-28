@@ -1,6 +1,18 @@
 import React from "react";
 import { Heart, RefreshCw, Home } from "lucide-react";
 
+function shouldShowDiagnostics() {
+  try {
+    if (import.meta.env && import.meta.env.DEV) return true;
+  } catch {}
+  try {
+    if (typeof sessionStorage !== "undefined" && sessionStorage.getItem("adminSessionToken")) {
+      return true;
+    }
+  } catch {}
+  return false;
+}
+
 export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +23,7 @@ export class ErrorBoundary extends React.Component {
   }
   componentDidCatch(error, info) {
     console.error("UI error caught by ErrorBoundary:", error, info);
+    this.setState({ info });
   }
   render() {
     if (this.state.error) {
@@ -66,6 +79,49 @@ export class ErrorBoundary extends React.Component {
               This isn't your fault — sometimes technology needs a moment.
               You can try refreshing the page, or head back to the homepage.
             </p>
+
+            {this.state.error && shouldShowDiagnostics() ? (
+              <details
+                style={{
+                  textAlign: "left",
+                  marginBottom: "1.25rem",
+                  padding: "0.75rem 1rem",
+                  background: "rgba(239,68,68,0.04)",
+                  border: "1px solid rgba(239,68,68,0.18)",
+                  borderRadius: "0.6rem",
+                  fontSize: "0.78rem",
+                  color: "#7f1d1d",
+                }}
+                data-testid="details-error-info"
+              >
+                <summary style={{ cursor: "pointer", fontWeight: 600 }}>
+                  Technical details
+                </summary>
+                <p
+                  style={{ margin: "0.5rem 0 0", fontSize: "0.78rem", color: "#991b1b" }}
+                  data-testid="text-error-message"
+                >
+                  {(this.state.error && (this.state.error.message || String(this.state.error))) ||
+                    "Unknown error"}
+                </p>
+                {this.state.info?.componentStack ? (
+                  <pre
+                    style={{
+                      marginTop: "0.4rem",
+                      padding: "0.5rem",
+                      background: "rgba(255,255,255,0.6)",
+                      borderRadius: "6px",
+                      overflowX: "auto",
+                      fontSize: "0.7rem",
+                      whiteSpace: "pre-wrap",
+                      color: "#7f1d1d",
+                    }}
+                  >
+                    {this.state.info.componentStack.trim()}
+                  </pre>
+                ) : null}
+              </details>
+            ) : null}
 
             <div
               style={{

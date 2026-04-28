@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafeBoundary from "../../components/SafeBoundary";
 import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
 import OperationsPanel from "@/components/admin/OperationsPanel";
 import ConsciousnessRegistryPanel from "@/components/admin/ConsciousnessRegistryPanel";
@@ -1588,20 +1589,30 @@ export default function AdminCommandCenter() {
         </div>
 
         <div className={styles.mainGrid}>
-          <SystemHealthPanel 
-            health={healthData} 
-            onRefresh={refetchHealth} 
-            isRefreshing={isHealthRefetching} 
-          />
-          <RecentActivityPanel activities={stats.recentActivity} />
+          <SafeBoundary label="System Health">
+            <SystemHealthPanel 
+              health={healthData} 
+              onRefresh={refetchHealth} 
+              isRefreshing={isHealthRefetching} 
+            />
+          </SafeBoundary>
+          <SafeBoundary label="Recent Activity">
+            <RecentActivityPanel activities={stats.recentActivity} />
+          </SafeBoundary>
         </div>
 
         <div className={styles.mainGrid}>
-          <KernelStatusPanel />
-          <SystemTelemetryPanel />
+          <SafeBoundary label="Kernel Status">
+            <KernelStatusPanel />
+          </SafeBoundary>
+          <SafeBoundary label="System Telemetry">
+            <SystemTelemetryPanel />
+          </SafeBoundary>
         </div>
 
-        <DailyOpsChecklist />
+        <SafeBoundary label="Daily Ops Checklist">
+          <DailyOpsChecklist />
+        </SafeBoundary>
 
         <div className="my-8 space-y-6" data-testid="section-platform-healing">
           <div className="flex items-center gap-3">
@@ -1612,19 +1623,35 @@ export default function AdminCommandCenter() {
           <p className="text-sm text-muted-foreground" style={{ marginTop: '-0.25rem' }}>
             Real-time SOP probes and self-heal controls. Safe, read-only diagnostics with explicit manual repair triggers.
           </p>
-          <SOPMonitorPanel />
-          <OperationsPanel />
-          <ConsciousnessRegistryPanel />
-          <OrchestratorTestPanel />
+          <SafeBoundary label="SOP Monitor">
+            <SOPMonitorPanel />
+          </SafeBoundary>
+          <SafeBoundary label="Operations Panel">
+            <OperationsPanel />
+          </SafeBoundary>
+          <SafeBoundary label="Consciousness Registry">
+            <ConsciousnessRegistryPanel />
+          </SafeBoundary>
+          <SafeBoundary label="Orchestrator Test">
+            <OrchestratorTestPanel />
+          </SafeBoundary>
         </div>
 
-        <ToolsStatusWidget />
+        <SafeBoundary label="Tools Status">
+          <ToolsStatusWidget />
+        </SafeBoundary>
 
-        <AdminNavGrid />
+        <SafeBoundary label="Admin Nav Grid">
+          <AdminNavGrid />
+        </SafeBoundary>
 
-        <AIKnowledgeHub />
+        <SafeBoundary label="AI Knowledge Hub">
+          <AIKnowledgeHub />
+        </SafeBoundary>
 
-        <DailyToolsPanel />
+        <SafeBoundary label="Daily Tools">
+          <DailyToolsPanel />
+        </SafeBoundary>
         <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </div>

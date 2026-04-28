@@ -10,6 +10,17 @@ function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
 
+function getAdminSessionToken() {
+  if (typeof window === "undefined" || typeof sessionStorage === "undefined") {
+    return null;
+  }
+  try {
+    return sessionStorage.getItem("adminSessionToken");
+  } catch {
+    return null;
+  }
+}
+
 function hasAgeConsent() {
   if (typeof window === "undefined" || typeof localStorage === "undefined") {
     return false;
@@ -73,6 +84,32 @@ export const queryClient = new QueryClient({
 
         if (hasAgeConsent()) {
           headers["x-age-confirmed"] = "true";
+        }
+
+        if (typeof url === "string") {
+          let pathname = url;
+          let isSameOrigin = true;
+          try {
+            const parsed = new URL(
+              url,
+              typeof window !== "undefined" ? window.location.origin : "http://localhost"
+            );
+            pathname = parsed.pathname;
+            if (typeof window !== "undefined") {
+              isSameOrigin = parsed.origin === window.location.origin;
+            }
+          } catch {
+            isSameOrigin = url.startsWith("/");
+          }
+          if (
+            isSameOrigin &&
+            (pathname === "/api/admin" || pathname.startsWith("/api/admin/"))
+          ) {
+            const adminSession = getAdminSessionToken();
+            if (adminSession) {
+              headers["x-admin-session"] = adminSession;
+            }
+          }
         }
 
         const res = await fetch(url, {
