@@ -230,6 +230,12 @@ app.use("/api/ai/healing", requireAdult, aiHealingRoutes);
 const { default: awarenessRoutes } = await import("./routes/awareness.mjs");
 app.use("/api/awareness", awarenessRoutes);
 
+// v2.0 Prompt 3.3 — Protocol execution engine (per-route auth inside).
+// Registry is seeded after ensureSchema() runs (later in this file) so the
+// table is guaranteed to exist before the seeder tries to read from it.
+const { default: protocolsRoutes } = await import("./routes/protocols.mjs");
+app.use("/api/protocols", protocolsRoutes);
+
 // Business engine (staff/admin only; admin sub-routes self-gate)
 app.use("/api/ai/business", aiBusinessRoutes);
 
@@ -584,6 +590,18 @@ try {
   await ensureSchema();
 } catch (err) {
   console.warn("[boot] ensureSchema skipped:", err?.message || err);
+}
+
+// v2.0 Prompt 3.3 — seed the protocol registry once tables exist.
+try {
+  const { seedProtocolsIfEmpty } = await import("./protocols/seed/protocols.mjs");
+  const { db: _db, schema: _schema } = await import("./db.mjs");
+  const seedResult = await seedProtocolsIfEmpty(_db, _schema);
+  if (seedResult.seeded > 0) {
+    console.log(`[boot] seeded ${seedResult.seeded} protocols into protocol_registry`);
+  }
+} catch (err) {
+  console.warn("[boot] protocol seeding skipped:", err?.message || err);
 }
 
 app.listen(PORT, "0.0.0.0", () => {

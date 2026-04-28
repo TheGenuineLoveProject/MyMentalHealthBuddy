@@ -825,6 +825,70 @@ export const agentDecisions = pgTable("agent_decisions", {
  * is stored here — only the scoring metadata + a content reference. This
  * keeps PHI/PII in the original owning table where retention rules apply.
  * ----------------------------------------------------------------- */
+/* ---------- Protocol Registry (Part II §2.6 / Prompt 3.3) ----------
+ * Catalog of evidence-backed therapeutic protocols (CBT, DBT, ACT, IFS,
+ * SE, EMDR, MBSR, CFT, Behavioral Activation, Polyvagal Grounding).
+ * Each protocol carries a phases JSONB DAG of nodes that the
+ * ProtocolExecutor walks. EDUCATIONAL ONLY — not a substitute for
+ * licensed clinical care; see /crisis routing on every active session.
+ * ----------------------------------------------------------------- */
+export const protocolRegistry = pgTable("protocol_registry", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  code: varchar("code", { length: 64 }).notNull().unique(),
+  name: varchar("name", { length: 200 }).notNull(),
+  modality: varchar("modality", { length: 32 }).notNull(),
+  description: text("description").notNull().default(""),
+  targetSymptoms: text("target_symptoms").array().notNull().default([]),
+  evidenceLevel: varchar("evidence_level", { length: 16 }).notNull().default("moderate"),
+  durationWeeks: integer("duration_weeks").notNull().default(8),
+  sessionsPerWeek: integer("sessions_per_week").notNull().default(1),
+  humanRequired: boolean("human_required").notNull().default(false),
+  phases: jsonb("phases").notNull().default([]),
+  status: varchar("status", { length: 16 }).notNull().default("active"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_protocol_registry_modality").on(table.modality),
+  index("idx_protocol_registry_status").on(table.status),
+]);
+
+/* ---------- Protocol Sessions ---------- */
+export const protocolSessions = pgTable("protocol_sessions", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  protocolId: uuid("protocol_id").notNull(),
+  agentId: uuid("agent_id"),
+  status: varchar("status", { length: 16 }).notNull().default("active"),
+  currentNodeId: varchar("current_node_id", { length: 80 }),
+  visitedNodeIds: text("visited_node_ids").array().notNull().default([]),
+  nodeStates: jsonb("node_states").notNull().default({}),
+  userVariables: jsonb("user_variables").notNull().default({}),
+  responses: jsonb("responses").notNull().default([]),
+  startedAt: timestamp("started_at").defaultNow().notNull(),
+  lastActivityAt: timestamp("last_activity_at").defaultNow().notNull(),
+  completedAt: timestamp("completed_at"),
+}, (table) => [
+  index("idx_protocol_sessions_user").on(table.userId),
+  index("idx_protocol_sessions_protocol").on(table.protocolId),
+  index("idx_protocol_sessions_status").on(table.status),
+]);
+
+/* ---------- Outcome Measures (PHQ-9 / GAD-7 / etc.) ---------- */
+export const outcomeMeasures = pgTable("outcome_measures", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  sessionId: uuid("session_id"),
+  measureCode: varchar("measure_code", { length: 32 }).notNull(),
+  score: integer("score").notNull(),
+  subscores: jsonb("subscores").notNull().default({}),
+  severity: varchar("severity", { length: 16 }).notNull().default("info"),
+  flagItems: text("flag_items").array().notNull().default([]),
+  recordedAt: timestamp("recorded_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_outcome_measures_user").on(table.userId),
+  index("idx_outcome_measures_session").on(table.sessionId),
+  index("idx_outcome_measures_code").on(table.measureCode),
+]);
+
 export const contentScores = pgTable("content_scores", {
   id: uuid("id").defaultRandom().primaryKey(),
   // What was scored: "journal" | "chat" | "import" | "community_post"
