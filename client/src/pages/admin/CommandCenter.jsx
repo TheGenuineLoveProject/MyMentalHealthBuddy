@@ -30,6 +30,7 @@ import { useSEO } from "@/hooks/useSEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
 import OperationsPanel from "@/components/admin/OperationsPanel";
+import ConsciousnessRegistryPanel from "@/components/admin/ConsciousnessRegistryPanel";
 import styles from "./CommandCenter.module.css";
 
 function StatusBadge({ status }) {
@@ -1612,6 +1613,7 @@ export default function AdminCommandCenter() {
           </p>
           <SOPMonitorPanel />
           <OperationsPanel />
+          <ConsciousnessRegistryPanel />
         </div>
 
         <ToolsStatusWidget />

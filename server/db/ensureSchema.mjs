@@ -128,6 +128,66 @@ const STATEMENTS = [
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
   )`,
   `CREATE INDEX IF NOT EXISTS idx_user_avatars_user_id ON user_avatars(user_id)`,
+
+  /* ===== MMHB CONSCIOUSNESS OS v2.0 — Phase 0 ============================
+   * Synthetic Employee Registry (Part II §2.5), CAD-4 audit log,
+   * Mirror/Epistemic content scores (Part III §3.3 / §3.6).
+   * Mirrors the Drizzle definitions in shared/schema.mjs.
+   * Additive only; safe to re-run.
+   * ====================================================================== */
+  `CREATE TABLE IF NOT EXISTS agent_registry (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    agent_key VARCHAR(80) NOT NULL UNIQUE,
+    agent_role VARCHAR(120) NOT NULL,
+    division VARCHAR(40) NOT NULL,
+    persona_config JSONB NOT NULL DEFAULT '{}'::jsonb,
+    status VARCHAR(20) NOT NULL DEFAULT 'draft',
+    version INTEGER NOT NULL DEFAULT 1,
+    human_supervisor_id UUID,
+    budget_tokens_daily INTEGER NOT NULL DEFAULT 0,
+    kill_switch BOOLEAN NOT NULL DEFAULT false,
+    notes TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_agent_registry_division ON agent_registry(division)`,
+  `CREATE INDEX IF NOT EXISTS idx_agent_registry_status ON agent_registry(status)`,
+
+  `CREATE TABLE IF NOT EXISTS agent_decisions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    agent_id UUID NOT NULL,
+    decision_type VARCHAR(60) NOT NULL,
+    input_digest JSONB NOT NULL DEFAULT '{}'::jsonb,
+    reasoning JSONB NOT NULL DEFAULT '{}'::jsonb,
+    outcome JSONB NOT NULL DEFAULT '{}'::jsonb,
+    priority_escalated BOOLEAN NOT NULL DEFAULT false,
+    confidence INTEGER,
+    review_status VARCHAR(20) NOT NULL DEFAULT 'unreviewed',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_agent_decisions_agent ON agent_decisions(agent_id)`,
+  `CREATE INDEX IF NOT EXISTS idx_agent_decisions_created ON agent_decisions(created_at)`,
+  `CREATE INDEX IF NOT EXISTS idx_agent_decisions_review ON agent_decisions(review_status)`,
+
+  `CREATE TABLE IF NOT EXISTS content_scores (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    content_source VARCHAR(32) NOT NULL,
+    content_ref VARCHAR(80) NOT NULL,
+    user_id UUID,
+    compassion_index INTEGER,
+    truth_index INTEGER,
+    love_index INTEGER,
+    integration_score INTEGER,
+    epistemic_score INTEGER,
+    signals JSONB NOT NULL DEFAULT '{}'::jsonb,
+    detector_layer VARCHAR(16) NOT NULL DEFAULT 'rule',
+    severity VARCHAR(10) NOT NULL DEFAULT 'info',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_content_scores_user ON content_scores(user_id)`,
+  `CREATE INDEX IF NOT EXISTS idx_content_scores_source ON content_scores(content_source)`,
+  `CREATE INDEX IF NOT EXISTS idx_content_scores_severity ON content_scores(severity)`,
+  `CREATE INDEX IF NOT EXISTS idx_content_scores_created ON content_scores(created_at)`,
 ];
 
 let bootstrapped = false;

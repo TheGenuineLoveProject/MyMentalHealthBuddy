@@ -749,3 +749,107 @@ export const sessions = pgTable(
   },
   (table) => [index("IDX_session_expire").on(table.expire)]
 );
+
+/* =====================================================================
+ * MMHB CONSCIOUSNESS OS v2.0 — Phase 0 Foundation Primitives
+ * ---------------------------------------------------------------------
+ * Spec ref: Part II §2.5 (Synthetic Employee Registry), CAD-4 (Radical
+ * Transparency), Part III §3.6 (Mirror Score), §3.3 (Epistemic Hygiene).
+ *
+ * Design rules:
+ *   • Additive only — no existing column or table touched.
+ *   • UUID primary keys via gen_random_uuid (matches platform standard).
+ *   • Append-only audit semantics for agent_decisions + content_scores.
+ *   • Locked AI orchestrator never mutated; these tables are written by
+ *     a NEW admin-gated route surface (server/routes/consciousness.mjs)
+ *     and read by the Command Center "Consciousness Registry" panel.
+ *   • Every CAD principle is encoded as a structural constraint, not a
+ *     bolted-on filter (per CAD-1).
+ * ===================================================================== */
+
+/* ---------- Synthetic Employee Registry (Part II §2.5) ---------- */
+export const agentRegistry = pgTable("agent_registry", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  // Stable, human-readable handle (e.g. "crisis-response-v1")
+  agentKey: varchar("agent_key", { length: 80 }).notNull().unique(),
+  // Job description / role title
+  agentRole: varchar("agent_role", { length: 120 }).notNull(),
+  // Division: clinical | safety | operations | research
+  division: varchar("division", { length: 40 }).notNull(),
+  // Persona + capability config (tone, values, capability vectors stub)
+  personaConfig: jsonb("persona_config").default({}).notNull(),
+  // Lifecycle status: draft | shadow | active | paused | retired
+  status: varchar("status", { length: 20 }).default("draft").notNull(),
+  version: integer("version").default(1).notNull(),
+  // Governance: human supervisor + budget caps (tokens, latency)
+  humanSupervisorId: uuid("human_supervisor_id"),
+  budgetTokensDaily: integer("budget_tokens_daily").default(0).notNull(),
+  // CAD-1 kill-switch: when true, every invocation returns the safe fallback
+  killSwitch: boolean("kill_switch").default(false).notNull(),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_agent_registry_division").on(table.division),
+  index("idx_agent_registry_status").on(table.status),
+]);
+
+/* ---------- Agent Decision Audit Log (CAD-4 Radical Transparency) ---------- */
+export const agentDecisions = pgTable("agent_decisions", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  agentId: uuid("agent_id").notNull(),
+  // Free-form decision type ("recommend_protocol", "route_request", etc.)
+  decisionType: varchar("decision_type", { length: 60 }).notNull(),
+  // Sanitized inputs the agent saw (PII must be redacted upstream)
+  inputDigest: jsonb("input_digest").default({}).notNull(),
+  // Full reasoning chain — citations, scores, matching matrix
+  reasoning: jsonb("reasoning").default({}).notNull(),
+  // Final decision output (action + confidence)
+  outcome: jsonb("outcome").default({}).notNull(),
+  // CAD-3: was compute priority escalated for crisis/high-distress?
+  priorityEscalated: boolean("priority_escalated").default(false).notNull(),
+  // 0-100 confidence the agent self-reported
+  confidence: integer("confidence"),
+  // Human review status: unreviewed | approved | rejected | needs_review
+  reviewStatus: varchar("review_status", { length: 20 }).default("unreviewed").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_agent_decisions_agent").on(table.agentId),
+  index("idx_agent_decisions_created").on(table.createdAt),
+  index("idx_agent_decisions_review").on(table.reviewStatus),
+]);
+
+/* ---------- Content Scores (Part III §3.2/§3.3/§3.6) ----------
+ * Append-only ledger of awareness-engine scores attached to a piece of
+ * content (chat input, journal entry, imported article). NO content body
+ * is stored here — only the scoring metadata + a content reference. This
+ * keeps PHI/PII in the original owning table where retention rules apply.
+ * ----------------------------------------------------------------- */
+export const contentScores = pgTable("content_scores", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  // What was scored: "journal" | "chat" | "import" | "community_post"
+  contentSource: varchar("content_source", { length: 32 }).notNull(),
+  contentRef: varchar("content_ref", { length: 80 }).notNull(),
+  userId: uuid("user_id"),
+  // Mirror Score components — Part III §3.6
+  compassionIndex: integer("compassion_index"),
+  truthIndex: integer("truth_index"),
+  loveIndex: integer("love_index"),
+  integrationScore: integer("integration_score"),
+  // Epistemic Hygiene Score — Part III §3.3
+  epistemicScore: integer("epistemic_score"),
+  // Detected signals — manipulation tactics, distortions, fallacies
+  // Shape: { manipulation: [...], distortions: [...], fallacies: [...] }
+  signals: jsonb("signals").default({}).notNull(),
+  // Detector layer that produced this score: "rule" | "stat" | "llm" | "ensemble"
+  detectorLayer: varchar("detector_layer", { length: 16 }).default("rule").notNull(),
+  // Severity: info | low | medium | high — drives Discernment Tutor surfacing
+  severity: varchar("severity", { length: 10 }).default("info").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_content_scores_user").on(table.userId),
+  index("idx_content_scores_source").on(table.contentSource),
+  index("idx_content_scores_severity").on(table.severity),
+  index("idx_content_scores_created").on(table.createdAt),
+]);
+
