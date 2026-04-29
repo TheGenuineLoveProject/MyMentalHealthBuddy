@@ -1,21 +1,24 @@
-import { MASCOT_VARIANTS } from '../data/lumiAssets';
+import { MASCOT_ASSETS } from '../data/lumiAssets';
 
 /**
  * Preloads all mascot images into browser cache.
  * Call this once on app initialization.
+ *
+ * MASCOT_ASSETS is an object keyed by variant ({ default, blue, lavender, ... }).
+ * We dedupe URLs (some variants share the same artwork, e.g. sleeping reuses
+ * lavender) so we don't fire duplicate preload requests.
  */
 export function preloadMascots() {
   if (typeof window === 'undefined') return;
-  
-  const preloadLink = document.createElement('link');
-  preloadLink.rel = 'preload';
-  preloadLink.as = 'image';
-  
-  MASCOT_VARIANTS.forEach((src) => {
+
+  const seen = new Set();
+  Object.values(MASCOT_ASSETS).forEach((src) => {
+    if (!src || seen.has(src)) return;
+    seen.add(src);
+
     const img = new Image();
     img.src = src;
-    
-    // Also add link preload for critical path
+
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';

@@ -8,6 +8,7 @@ import ResponsiveWrapper from "./components/ResponsiveWrapper.jsx";
 import EmotionBackgroundProvider from "./components/EmotionBackgroundProvider.jsx";
 import GratitudePrompt from "./components/GratitudePrompt.jsx";
 import { ReadingLevelProvider } from "./context/ReadingLevelContext.jsx";
+import { ReducedMotionProvider } from "./components/a11y/ReducedMotionProvider.jsx";
 import { GamificationProvider } from "./context/GamificationContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
@@ -349,6 +350,7 @@ function PageViewTracker() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReducedMotionProvider>
       <AuthProvider>
         <FeatureFlagProvider>
         <GamificationProvider>
@@ -1858,6 +1860,7 @@ export default function App() {
         </GamificationProvider>
         </FeatureFlagProvider>
       </AuthProvider>
+      </ReducedMotionProvider>
     </QueryClientProvider>
   );
 }

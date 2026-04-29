@@ -121,3 +121,32 @@
 @media (prefers-reduced-motion: reduce) {
   .lumi-link-nav::after { transition: none; }
 }
+
+/* ----------------------------------------------------------------------------
+ * Universal :focus-visible — keyboard accessibility contract for ALL Lumi
+ * link variants. The crisis link keeps its higher-emphasis red ring above.
+ * Implemented as a single shared rule so every variant gets a consistent,
+ * AA-contrasting focus indicator regardless of background.
+ * -------------------------------------------------------------------------- */
+.lumi-link-text:focus-visible,
+.lumi-link-nav:focus-visible,
+.lumi-link-footer:focus-visible,
+.lumi-link-inline:focus-visible,
+.lumi-link-brand:focus-visible,
+.lumi-link-external:focus-visible,
+.lumi-link-subtle:focus-visible,
+.lumi-link-ghost:focus-visible {
+  outline: 2px solid var(--lumi-amber-600, hsl(38, 92%, 45%));
+  outline-offset: 3px;
+  border-radius: var(--lumi-radius-sm, 6px);
+}
+.dark .lumi-link-text:focus-visible,
+.dark .lumi-link-nav:focus-visible,
+.dark .lumi-link-footer:focus-visible,
+.dark .lumi-link-inline:focus-visible,
+.dark .lumi-link-brand:focus-visible,
+.dark .lumi-link-external:focus-visible,
+.dark .lumi-link-subtle:focus-visible,
+.dark .lumi-link-ghost:focus-visible {
+  outline-color: var(--lumi-amber-400, hsl(38, 92%, 65%));
+}

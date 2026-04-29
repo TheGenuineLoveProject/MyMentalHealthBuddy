@@ -41,7 +41,10 @@ export function LumiCompanion({
     actions,
   } = useLumiBehavior();
 
-  const px = SIZE_PX[size] || SIZE_PX.md;
+  const px =
+    typeof size === "number" && size > 0
+      ? size
+      : SIZE_PX[size] || SIZE_PX.md;
   const src = behavior.getImageSrc(theme.imageVariant);
 
   const [imageReady, setImageReady] = useState(false);

@@ -33,19 +33,27 @@ export class SafeBoundary extends React.Component {
       <div
         role="alert"
         data-testid={`safeboundary-${label.toLowerCase().replace(/\s+/g, "-")}`}
+        data-lumi-component="safe-boundary"
         style={{
-          margin: "0.75rem 0",
-          padding: "1rem 1.25rem",
-          borderRadius: "12px",
+          margin: "var(--lumi-space-3, 0.75rem) 0",
+          padding: "var(--lumi-space-4, 1rem) var(--lumi-space-5, 1.25rem)",
+          borderRadius: "var(--lumi-radius-lg, 12px)",
           border: "1px solid rgba(239,68,68,0.2)",
           background: "rgba(239,68,68,0.04)",
           color: "#7f1d1d",
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontFamily: "var(--lumi-font-body, system-ui, -apple-system, sans-serif)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.4rem" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "var(--lumi-space-2, 0.5rem)",
+            marginBottom: "var(--lumi-space-2, 0.4rem)",
+          }}
+        >
           <AlertTriangle size={16} aria-hidden="true" />
-          <strong style={{ fontSize: "0.92rem" }}>
+          <strong style={{ fontSize: "0.92rem", fontFamily: "var(--lumi-font-display, inherit)" }}>
             "{label}" failed to load
           </strong>
           <button
@@ -58,7 +66,7 @@ export class SafeBoundary extends React.Component {
               gap: "4px",
               fontSize: "0.72rem",
               padding: "3px 8px",
-              borderRadius: "6px",
+              borderRadius: "var(--lumi-radius-sm, 6px)",
               border: "1px solid rgba(127,29,29,0.25)",
               background: "white",
               color: "#7f1d1d",
@@ -74,14 +82,14 @@ export class SafeBoundary extends React.Component {
           {message}
         </p>
         {stack ? (
-          <details style={{ marginTop: "0.5rem", fontSize: "0.72rem", color: "#7f1d1d" }}>
+          <details style={{ marginTop: "var(--lumi-space-2, 0.5rem)", fontSize: "0.72rem", color: "#7f1d1d" }}>
             <summary style={{ cursor: "pointer" }}>Component trace</summary>
             <pre
               style={{
-                marginTop: "0.4rem",
-                padding: "0.5rem",
+                marginTop: "var(--lumi-space-2, 0.4rem)",
+                padding: "var(--lumi-space-2, 0.5rem)",
                 background: "rgba(255,255,255,0.6)",
-                borderRadius: "6px",
+                borderRadius: "var(--lumi-radius-sm, 6px)",
                 overflowX: "auto",
                 fontSize: "0.7rem",
                 whiteSpace: "pre-wrap",

@@ -9,6 +9,7 @@ import TGLPMandala from "@/components/lumi/TGLPMandala.jsx";
 import TGLPMandalaImage from "@/components/lumi/TGLPMandalaImage.jsx";
 import useScrollReveal from "@/hooks/useScrollReveal.js";
 import useBuddyEmotion from "@/hooks/useBuddyEmotion.js";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 function Section({ id, title, kicker, children }) {
   return (
@@ -425,6 +426,8 @@ export default function DesignSystemV2() {
               </div>
             </div>
           </footer>
+          {/* Canonical SafetyFooter — required on all wellness routes for crisis routing parity */}
+          <SafetyFooter />
         </main>
       </div>
     </>

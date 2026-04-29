@@ -6,6 +6,7 @@ import "../styles/canva-landing.css";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
+import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -460,10 +461,10 @@ export default function CanvaLanding() {
                   overflow: 'visible',
                 }}
               >
-                <LumiMascot
-                  emotion="joy"
+                <LumiCompanion
                   size={208}
-                  ariaLabel="Lumi, your gentle companion"
+                  interactive
+                  data-testid="lumi-hero-companion"
                 />
               </div>
             </div>

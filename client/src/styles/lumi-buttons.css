@@ -146,7 +146,9 @@
 .dark .lumi-btn-calm { --_btn-bg: var(--lumi-sage-800); --_btn-fg: var(--lumi-sage-100); --_btn-border: var(--lumi-sage-700); }
 
 .lumi-btn-love {
-  --_btn-bg: var(--lumi-love);
+  /* AA fix: --lumi-love token (hsl 350 70% 62%) on #fff = ~3.32:1, fails WCAG AA.
+     Use a darker shade locally so the token stays usable elsewhere. */
+  --_btn-bg: hsl(350, 72%, 42%);
   --_btn-fg: #ffffff;
 }
 .lumi-btn-love:hover { filter: brightness(0.94); }
