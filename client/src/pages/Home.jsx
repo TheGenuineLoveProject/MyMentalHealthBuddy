@@ -172,11 +172,15 @@ export default function Home() {
           <Link href="/" className="flex items-center gap-4 min-w-0">
             <span
               aria-hidden="true"
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0 sacred-animate-breathe"
-              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 4px 16px var(--glp-sage-deep-20)' }}
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center flex-shrink-0 sacred-animate-breathe"
+              style={{
+                background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
+                boxShadow: '0 4px 16px var(--glp-sage-deep-20)',
+                overflow: 'visible',
+              }}
               data-testid="img-home-logo"
             >
-              <LumiMascot emotion="neutral" size={64} />
+              <LumiMascot emotion="neutral" size={56} interactive={false} />
             </span>
             <span 
               className="sacred-heading text-xl hidden md:block"
@@ -210,10 +214,15 @@ export default function Home() {
           logo={
             <span
               aria-hidden="true"
-              className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center overflow-hidden sacred-animate-rotate-glow"
-              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 8px 32px var(--glp-sage-deep-30)' }}
+              className="w-48 h-48 md:w-56 md:h-56 rounded-3xl flex items-center justify-center sacred-animate-rotate-glow"
+              style={{
+                background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
+                boxShadow: '0 12px 40px var(--glp-sage-deep-30)',
+                overflow: 'visible',
+              }}
+              data-testid="img-hero-mascot"
             >
-              <LumiMascot emotion="joy" size={96} />
+              <LumiMascot emotion="joy" size={208} ariaLabel="Lumi, your gentle companion" />
             </span>
           }
           badge={

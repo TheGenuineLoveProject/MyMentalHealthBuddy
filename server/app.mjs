@@ -80,7 +80,7 @@ app.use(express.json({
 
 // ===== SECURITY LAYER =====
 import helmet from "helmet";
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
@@ -142,12 +142,50 @@ const aiLimiter = rateLimit({
 
 app.use("/api/ai", aiLimiter);
 
-// ===== ADMIN RATE LIMIT (stricter) =====
-const adminLimiter = rateLimit({
+// ===== ADMIN RATE LIMITS =====
+// Two limiters, intentionally split:
+//
+//   adminLoginLimiter — STRICT, IP-keyed, applied ONLY to /api/admin/verify-token
+//     (the one PUBLIC admin entrypoint where credentials are submitted).
+//     Keeps brute-force surface tight: 10 attempts / minute / IP.
+//
+//   adminLimiter      — RELAXED, identity-keyed, applied to the AUTHENTICATED
+//     admin dashboard mounts (which fan out to 8–12 panel queries on first
+//     paint and would otherwise trip 429s during a normal load). Identity
+//     keying (user.id → user.email) means two admins behind the same NAT
+//     do not share a single bucket. The auth middleware runs BEFORE this
+//     limiter on every protected mount, so req.user is reliably populated.
+const adminLoginLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 10,
   standardHeaders: true,
   legacyHeaders: false,
+  handler: (_req, res) =>
+    res.status(429).json({
+      ok: false,
+      error: "Too many admin login attempts. Please wait a moment and try again.",
+    }),
+});
+
+const adminLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) => {
+    if (req.user?.id) return `admin:id:${req.user.id}`;
+    if (req.user?.email) return `admin:email:${req.user.email}`;
+    try {
+      return `admin:ip:${ipKeyGenerator(req.ip)}`;
+    } catch {
+      return `admin:ip:${req.ip || "unknown"}`;
+    }
+  },
+  handler: (_req, res) =>
+    res.status(429).json({
+      ok: false,
+      error: "Admin rate limit reached. Try again in a moment.",
+    }),
 });
 
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
@@ -295,7 +333,7 @@ registerAuthRoutes(app);
 // Admin login token verification — must be PUBLIC (chicken-and-egg: you can't
 // require admin auth on the very endpoint that grants it). Mounted BEFORE the
 // protected /api/admin chain so Express resolves it first. Rate-limited only.
-app.post("/api/admin/verify-token", adminLimiter, (req, res, next) => {
+app.post("/api/admin/verify-token", adminLoginLimiter, (req, res, next) => {
   // Re-dispatch into adminRoutes so the original handler logic stays in admin.mjs
   req.url = "/verify-token";
   return adminRoutes(req, res, next);

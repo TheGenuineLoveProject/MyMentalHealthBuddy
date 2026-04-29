@@ -49,10 +49,15 @@ export default function Header() {
         >
           <span
             aria-hidden="true"
-            className="h-10 w-10 rounded-xl flex items-center justify-center overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }}
+            className="h-11 w-11 rounded-xl flex items-center justify-center"
+            style={{
+              background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
+              boxShadow: '0 2px 10px var(--glp-sage-deep-12)',
+              overflow: 'visible',
+            }}
+            data-testid="img-header-logo"
           >
-            <LumiMascot emotion="neutral" size={40} />
+            <LumiMascot emotion="neutral" size={40} interactive={false} />
           </span>
           <span className="hidden sm:inline text-heading-sm text-brand tracking-tight">
             {BRAND?.name}

@@ -330,10 +330,19 @@ export default function CanvaLanding() {
           <div className="flex items-center justify-between h-[80px] sm:h-[92px] lg:h-[108px]">
             <Link href="/" className="brand-logo-link no-underline" style={{ textDecoration: 'none' }}>
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] lg:w-[56px] lg:h-[56px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 12px var(--glp-sage-deep-20)' }}>
+                <div
+                  className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[60px] lg:h-[60px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl"
+                  style={{
+                    background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
+                    boxShadow: '0 2px 12px var(--glp-sage-deep-20)',
+                    overflow: 'visible',
+                  }}
+                  data-testid="img-canva-header-logo"
+                >
                   <LumiMascot
                     emotion="joy"
-                    size={56}
+                    size={48}
+                    interactive={false}
                   />
                 </div>
                 <div className="flex flex-col leading-snug">
@@ -438,6 +447,26 @@ export default function CanvaLanding() {
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center">
+            <div
+              className="flex justify-center mb-6 md:mb-8 animate-fade-in-up"
+              style={{ animationDelay: '0s' }}
+              data-testid="container-hero-mascot"
+            >
+              <div
+                className="relative flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64 rounded-3xl"
+                style={{
+                  background: 'radial-gradient(circle at 50% 45%, var(--glp-paper) 0%, var(--glp-sage-10) 70%, transparent 100%)',
+                  boxShadow: '0 16px 48px var(--glp-sage-deep-20)',
+                  overflow: 'visible',
+                }}
+              >
+                <LumiMascot
+                  emotion="joy"
+                  size={208}
+                  ariaLabel="Lumi, your gentle companion"
+                />
+              </div>
+            </div>
             <div
               className="hero-eyebrow inline-flex items-center gap-2.5 md:gap-3 px-5 py-2.5 md:px-7 md:py-3 rounded-full mb-6 md:mb-10 animate-fade-in-up"
             >
@@ -981,13 +1010,19 @@ export default function CanvaLanding() {
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
             <div className="flex items-center gap-3">
               <div
-                className="relative w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0"
-                style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 1px 4px var(--glp-sage-deep-12)' }}
+                className="relative w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                style={{
+                  background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
+                  boxShadow: '0 1px 4px var(--glp-sage-deep-12)',
+                  overflow: 'visible',
+                }}
                 aria-hidden="true"
+                data-testid="img-canva-footer-logo"
               >
                 <LumiMascot
                   emotion="neutral"
-                  size={32}
+                  size={28}
+                  interactive={false}
                 />
               </div>
               <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>

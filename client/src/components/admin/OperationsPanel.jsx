@@ -578,6 +578,128 @@ function SelfHealingPanel() {
   );
 }
 
+/* ---------------- Route Status ----------------
+ * Lightweight liveness probe for the small set of admin / public health
+ * endpoints we always care about. Each row pings its endpoint, classifies
+ * the response status (2xx ok, 4xx warn, 5xx/network fail) and renders a
+ * StatusDot row. This is intentionally additive — the existing readiness +
+ * health-deep panels stay untouched. */
+function RouteStatusPanel() {
+  const ROUTES = [
+    { label: "Public health", path: "/api/health" },
+    { label: "Admin health", path: "/api/admin/health" },
+    { label: "Auth (me)", path: "/api/auth/me" },
+    { label: "Kernel health", path: "/api/kernel/health" },
+    { label: "Email health", path: "/api/email/health" },
+  ];
+
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const probe = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Use raw fetch (NOT apiFetch) here on purpose: apiFetch throws on
+      // non-2xx, but a probe panel needs to SEE the actual status code to
+      // classify it. We *do* attach the same Authorization header apiFetch
+      // would, so admin-only endpoints don't false-warn with 401/403 just
+      // because the bearer token wasn't forwarded.
+      const token = (() => {
+        try {
+          return typeof localStorage !== "undefined"
+            ? localStorage.getItem("mmhb_token")
+            : null;
+        } catch {
+          return null;
+        }
+      })();
+      const baseHeaders = { Accept: "application/json" };
+      if (token) baseHeaders.Authorization = `Bearer ${token}`;
+
+      const results = await Promise.all(
+        ROUTES.map(async (r) => {
+          const t0 = (typeof performance !== "undefined" ? performance.now() : Date.now());
+          try {
+            const res = await fetch(r.path, {
+              credentials: "include",
+              headers: baseHeaders,
+            });
+            const dt = Math.round(
+              (typeof performance !== "undefined" ? performance.now() : Date.now()) - t0
+            );
+            let state = "ok";
+            if (res.status >= 500) state = "fail";
+            else if (res.status === 401 || res.status === 403) state = "warn";
+            else if (res.status >= 400) state = "warn";
+            return { ...r, status: res.status, ms: dt, state };
+          } catch (e) {
+            const dt = Math.round(
+              (typeof performance !== "undefined" ? performance.now() : Date.now()) - t0
+            );
+            return { ...r, status: 0, ms: dt, state: "fail", error: e?.message };
+          }
+        })
+      );
+      setRows(results);
+    } catch (e) {
+      setError(e?.message || "Failed to probe routes");
+    } finally {
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => { probe(); }, [probe]);
+
+  return (
+    <div className={panelChrome()} data-testid="panel-route-status">
+      <PanelHeader
+        icon={Network}
+        title="Route Status"
+        subtitle="Live probe of key admin + public endpoints"
+        onRefresh={probe}
+        refreshing={loading}
+      />
+      <PanelBodyState
+        loading={loading}
+        error={error}
+        empty={!error && !loading && rows.length === 0 ? "No routes to probe." : null}
+        onRetry={probe}
+      >
+        <ul className="space-y-2" data-testid="list-route-status">
+          {rows.map((row) => (
+            <li
+              key={row.path}
+              className="flex items-center gap-3 rounded-lg p-3"
+              style={{ background: "var(--glp-paper)", border: "1px solid var(--glp-sage-15)" }}
+              data-testid={`row-route-${row.path}`}
+            >
+              <StatusDot state={row.state} />
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-medium" style={{ color: "var(--glp-sage-deep)" }}>
+                  {row.label}
+                </div>
+                <div className="text-xs truncate" style={{ color: "var(--glp-sage)" }}>
+                  {row.path}
+                </div>
+              </div>
+              <div
+                className="text-xs font-mono shrink-0"
+                style={{ color: "var(--glp-sage)" }}
+                data-testid={`text-route-status-${row.path}`}
+              >
+                {row.status === 0 ? "—" : row.status} · {row.ms}ms
+              </div>
+            </li>
+          ))}
+        </ul>
+      </PanelBodyState>
+    </div>
+  );
+}
+
 /* ---------------- Default export ---------------- */
 export default function OperationsPanel() {
   return (
