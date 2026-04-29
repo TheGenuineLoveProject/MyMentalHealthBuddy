@@ -1,3 +1,17 @@
+-- =============================================================================
+-- SUPERSEDED — DO NOT RUN
+-- =============================================================================
+-- This migration was authored against a `user_profiles` table that does not
+-- exist in this project. The actual user-preferences table is `user_preferences`
+-- (Drizzle export: `userPreferences` in shared/schema.mjs). House rules also
+-- forbid hand-written SQL migrations — schema changes are applied via
+-- `npm run db:push`.
+--
+-- Per explicit user direction, Lumi theme persistence stays frontend-only
+-- (localStorage key `lumi-theme-v3`). No DB columns are added, no API routes
+-- are exposed. This file is retained only for historical reference.
+-- =============================================================================
+
 -- Migration: Add Lumi theme preferences to user_profiles
 -- Created: $(date)
 
