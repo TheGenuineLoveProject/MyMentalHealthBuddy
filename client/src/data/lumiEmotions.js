@@ -19,3 +19,32 @@ export const EMOTION_CONFIG = {
   surprise:  { image: 'default', animation: 'lumi-pop',          duration: 400 },
 };
 export const IDLE_ROTATION = ['idle', 'curiosity', 'rest'];
+
+/**
+ * MILESTONES — keyed by useLumiBehavior's stat-tracking thresholds.
+ * Each entry maps to a short celebration emotion that auto-reverts to idle
+ * via EMOTION_CONFIG[emotion].duration. Strings are intentionally gentle
+ * (trauma-informed, no shame-flavored "streak broken!" framing) and used
+ * by future toast/announcer surfaces.
+ */
+export const MILESTONES = {
+  FIRST_CHAT:  { emotion: 'celebrate', message: 'You took the first step.' },
+  STREAK_3:    { emotion: 'joy',       message: 'Three days of showing up.' },
+  STREAK_7:    { emotion: 'proud',     message: 'A full week. That is real care.' },
+  STREAK_30:   { emotion: 'celebrate', message: 'Thirty days. This is becoming who you are.' },
+  JOURNAL_10:  { emotion: 'insight',   message: 'Ten journal entries — your story is unfolding.' },
+  BREATHING_5: { emotion: 'calm',      message: 'Five breath sessions. Welcome back to your body.' },
+};
+
+/**
+ * TIME_STATES — wall-clock slots used by useLumiBehavior to pick the
+ * arrival greeting + initial emotion. `night` wraps midnight (21..5);
+ * the lookup helper handles the wrap explicitly so we don't need to
+ * normalize hours here.
+ */
+export const TIME_STATES = {
+  morning: { hourStart: 5,  hourEnd: 11, emotion: 'welcome', greeting: 'Good morning. How is your heart today?' },
+  midday:  { hourStart: 11, hourEnd: 17, emotion: 'idle',    greeting: 'Hi again. How is the day treating you?' },
+  evening: { hourStart: 17, hourEnd: 21, emotion: 'calm',    greeting: 'Welcome back. Soft landings into the evening.' },
+  night:   { hourStart: 21, hourEnd: 5,  emotion: 'rest',    greeting: 'Late evening. Rest is healing too.' },
+};
