@@ -44,6 +44,7 @@ waitForPort = 5000
 
 [nix]
 channel = "stable-25_05"
+packages = ["tree"]
 
 [postMerge]
 path = "scripts/post-merge.sh"
