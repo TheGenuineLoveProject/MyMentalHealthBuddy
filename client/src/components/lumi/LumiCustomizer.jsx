@@ -15,7 +15,7 @@ const PREVIEW_HERO = MASCOT_ASSETS.default;
  * Behaviour:
  *  - Backdrop click + Escape key close the modal.
  *  - Save persists via useLumiTheme().setThemeId, then briefly shows
- *    "Saved!" before auto-closing after 1.5s.
+ *    "Saved!" before auto-closing after 2s.
  *  - The currently-saved theme (or, while interacting, the candidate
  *    theme) gets the .active border highlight.
  *
@@ -70,10 +70,10 @@ export function LumiCustomizer({ open, onClose }) {
     setSavedFlash(true);
     if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-    flashTimerRef.current = setTimeout(() => setSavedFlash(false), 1500);
+    flashTimerRef.current = setTimeout(() => setSavedFlash(false), 2000);
     closeTimerRef.current = setTimeout(() => {
       onClose?.();
-    }, 1500);
+    }, 2000);
   }, [candidateId, setThemeId, onClose]);
 
   if (!open) return null;

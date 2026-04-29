@@ -42,7 +42,7 @@ export function LumiCustomizerTrigger({ className = "", size = 36 }) {
         }}
         data-testid="button-open-lumi-customizer"
       >
-        <Palette size={20} aria-hidden="true" />
+        <Palette size={24} aria-hidden="true" />
       </button>
       <LumiCustomizer open={open} onClose={() => setOpen(false)} />
     </>
