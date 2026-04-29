@@ -5,7 +5,7 @@
  * full-color sacred-geometry version (parent-brand splashes, footer credit
  * panels, social cards). For inline scaling at small sizes, prefer the SVG.
  */
-import mandalaPng from "@assets/thegenuineloveproject_logo_v2_1777349686685.png";
+import mandalaPng from "@assets/thegenuineloveproject_logo_v2_1777438293296.png";
 
 export default function TGLPMandalaImage({
   size = 200,

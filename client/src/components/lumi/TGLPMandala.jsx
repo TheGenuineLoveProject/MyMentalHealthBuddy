@@ -5,7 +5,7 @@
  * Now uses the canonical PNG provided by the brand owners. Component API is
  * preserved so existing call sites continue to work.
  */
-import mandalaUrl from "@assets/thegenuineloveproject_logo_v2_1777360563617.png";
+import mandalaUrl from "@assets/thegenuineloveproject_logo_v2_1777438293296.png";
 
 export default function TGLPMandala({
   size = 120,

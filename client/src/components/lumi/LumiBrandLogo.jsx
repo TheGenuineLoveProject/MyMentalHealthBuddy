@@ -14,8 +14,8 @@
  * Sizes: sm | md | lg | xl
  */
 import { Link } from "wouter";
-import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777360563617.png";
-import buddyUrl from "@assets/mmhb_buddy_interactive_fullbody_1777360563617.png";
+import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777438293296.png";
+import buddyUrl from "@assets/mmhb_buddy_interactive_fullbody_1777438293296.png";
 
 const SIZES = {
   sm: { icon: 28, lockupHeight: 32 },
