@@ -10,6 +10,7 @@
 @import "./styles/lumi-links.css";
 @import "./styles/lumi-layout.css";
 @import "./styles/lumi-motion.css";
+@import "./styles/lumi-mascot.css";
 @import "./styles/lumi-a11y.css";
 
 @tailwind base;

@@ -1,0 +1,49 @@
+/*
+ * Lumi Mascot — Performance & Reduced-Motion Hardening
+ * ADDITIVE ONLY. Keyframes themselves live in lumi-motion.css and
+ * LumiMascot.css; this file owns GPU-accel hints and the global
+ * reduced-motion fallback that opacity-cross-fades instead of animating.
+ */
+
+.lumi-mascot {
+  /* GPU-accel hint to keep the mascot on its own composite layer so
+     transform/filter animations don't repaint surrounding text. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Default to 'auto' — only promote will-change while a finite-duration
+     animation is actively running, so we don't permanently allocate a
+     compositor layer for every Lumi on the page. */
+  will-change: auto;
+}
+
+.lumi-mascot.animating {
+  will-change: transform, filter;
+}
+
+/* Avoid layout shift while the PNG is loading by reserving the box. */
+.lumi-mascot[data-loading="true"] {
+  background: transparent;
+}
+
+/* ── Reduced motion fallback ───────────────────────────────────────────────
+   Disables every keyframe animation on Lumi components and replaces them
+   with a soft opacity cross-fade on emotion change. The wrapper component
+   adds .lumi-reduced-motion when the OS-level setting is on; we also honor
+   the system media query directly so partial component coverage is safe. */
+.lumi-reduced-motion .lumi-mascot,
+.lumi-reduced-motion .lumi-mascot * {
+  animation: none !important;
+  transition: opacity 200ms ease-out !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumi-mascot,
+  .lumi-mascot * {
+    animation: none !important;
+    transition: opacity 200ms ease-out !important;
+  }
+  .lumi-mascot.animating {
+    will-change: opacity;
+  }
+}
