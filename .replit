@@ -11,6 +11,10 @@ run = ["sh", "-c", "if [ ! -d node_modules/express ]; then echo '[boot] node_mod
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 24678
+externalPort = 3000
+
 [agent]
 expertMode = true
 
