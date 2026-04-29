@@ -20,6 +20,7 @@ import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 import OperationsPanel from "@/components/admin/OperationsPanel";
 import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
+import { SafeBoundary } from "@/components/SafeBoundary";
 
 async function fetchAdminMetric(url) {
   const userToken = (typeof localStorage !== "undefined" && localStorage.getItem("mmhb_token")) || null;
@@ -398,12 +399,16 @@ export default function Admin() {
             )}
             {activeView === "operations" && (
               <div role="tabpanel" id="panel-operations" aria-labelledby="nav-operations">
-                <OperationsPanel />
+                <SafeBoundary label="Operations Panel">
+                  <OperationsPanel />
+                </SafeBoundary>
               </div>
             )}
             {activeView === "sop-monitor" && (
               <div role="tabpanel" id="panel-sop-monitor" aria-labelledby="nav-sop-monitor">
-                <SOPMonitorPanel />
+                <SafeBoundary label="SOP Monitor">
+                  <SOPMonitorPanel />
+                </SafeBoundary>
               </div>
             )}
           </div>
