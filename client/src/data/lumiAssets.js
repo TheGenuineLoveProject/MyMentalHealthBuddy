@@ -14,6 +14,10 @@ import lumiLavenderUrl  from "@assets/IMG_2177_1777438293296.png";
 import lumiCoralUrl     from "@assets/IMG_2176_1777438293296.png";
 import lumiGoldenUrl    from "@assets/IMG_2174_1777438293296.png";
 import lumiThinkingUrl  from "@assets/IMG_2173_1777438293296.png";
+// Dedicated sleeping pose: sage-green Lumi curled up with closed eyes and
+// "Zzz" overhead. Replaces the previous lavender-as-sleeping placeholder so
+// the sleep state matches the default sage palette of the canonical Lumi.
+import lumiSleepingUrl  from "@assets/IMG_2182_1777444916524.png";
 
 import { EMOTION_CONFIG } from "./lumiEmotions";
 import { LUMI_THEMES } from "./lumiThemes";
@@ -30,8 +34,10 @@ export const MASCOT_ASSETS = {
   golden:   lumiGoldenUrl,
   // Emotion-state overrides (EMOTION_CONFIG.image points here).
   thinking: lumiThinkingUrl,
-  // Sleeping shares the lavender (drowsy purple) artwork — closed-eye pose.
-  sleeping: lumiLavenderUrl,
+  // Dedicated sleeping artwork (curled-up sage Lumi with Zzz). EMOTION_CONFIG
+  // maps `sleep.image = 'sleeping'`; the lavender pose remains in use for
+  // the `rest` emotion via `lavender`.
+  sleeping: lumiSleepingUrl,
 };
 
 /**
