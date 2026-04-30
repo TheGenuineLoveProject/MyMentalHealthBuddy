@@ -1,6 +1,34 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Heart, Sparkles, Send, RefreshCw, Lightbulb } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
+
+// Routes where a "What are you grateful for?" widget would feel intrusive
+// or off-tone. The user reported it appearing on the Crisis page next to
+// 988 hotline numbers — that's the kind of UX miss that erodes trust.
+// Conservative denylist: anywhere a person needs urgent help, is mid-chat,
+// is being onboarded, or is in admin tooling.
+const GRATITUDE_BLOCKED_PATH_PREFIXES = [
+  "/crisis",
+  "/988",
+  "/chat",
+  "/ai-chat",
+  "/ai/companion",
+  "/onboarding",
+  "/pathways/onboarding",
+  "/register",
+  "/login",
+  "/admin",
+  "/admin-login",
+  "/checkout",
+];
+
+function isPathBlockedForGratitude(pathname) {
+  if (!pathname) return false;
+  return GRATITUDE_BLOCKED_PATH_PREFIXES.some((prefix) =>
+    pathname === prefix || pathname.startsWith(prefix + "/")
+  );
+}
 
 const GRATITUDE_PROMPTS = [
   "What made you smile today?",
@@ -27,6 +55,7 @@ const GRATITUDE_PROMPTS = [
 
 export default function GratitudePrompt({ onSave }) {
   const { isAuthenticated, isLoading } = useAuth();
+  const [pathname] = useLocation();
   const [currentPrompt, setCurrentPrompt] = useState(
     GRATITUDE_PROMPTS[Math.floor(Math.random() * GRATITUDE_PROMPTS.length)]
   );
@@ -74,6 +103,7 @@ export default function GratitudePrompt({ onSave }) {
   };
 
   if (isLoading || !isAuthenticated()) return null;
+  if (isPathBlockedForGratitude(pathname)) return null;
 
   return (
     <div className="card-elevated p-8 relative overflow-hidden" data-testid="gratitude-prompt">

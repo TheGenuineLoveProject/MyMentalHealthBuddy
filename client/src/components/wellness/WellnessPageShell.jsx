@@ -4,7 +4,6 @@ import { BenefitBlock } from "@/components/benefits/BenefitBlock";
 import { ConsentStrip } from "@/components/wellness/ConsentStrip";
 import { ClarityCard } from "@/components/wellness/ClarityCard";
 import { ExamplesAccordion } from "@/components/wellness/ExamplesAccordion";
-import { SafetyFooterStrip } from "@/components/safety/SafetyFooterStrip";
 import { CRISIS_PATH } from "@/lib/safety";
 import { Info, Heart, Lightbulb, ChevronDown, ChevronUp, Home, Sparkles, MessageCircle, BookOpen, Activity, LifeBuoy } from "lucide-react";
 import "@/styles/wellness-shell.css";
@@ -122,18 +121,23 @@ export function WellnessPageShell({
         </div>
       )}
 
+      {/*
+        Footer — single ConsentStrip only.
+        Previously rendered three near-duplicate safety blocks:
+          1. <ConsentStrip /> (the canonical one)
+          2. an inline "Need urgent help? Visit crisis resources" <a> link
+          3. <SafetyFooterStrip /> (educational disclaimer + crisis link AGAIN)
+        ConsentStrip already includes the educational disclaimer
+        (SAFETY_DISCLAIMER_SHORT), the pause/stop line (PAUSE_STOP_LINE),
+        and the crisis-resource link, so the other two were pure duplicates
+        producing the "wall of identical disclaimers" the user observed in
+        the page-text scrape (Reflective Journal, State Check-in, Crisis,
+        AI Companion all showed the same three blocks repeating). Keeping
+        the canonical ConsentStrip preserves every safety message and the
+        crisis path while collapsing the visual noise to one calm card.
+      */}
       <div className="space-y-4">
         <ConsentStrip />
-        <div className="text-sm">
-          <a 
-            className="text-primary hover:underline inline-flex items-center gap-1" 
-            href={CRISIS_PATH}
-            data-testid="link-crisis"
-          >
-            Need urgent help? Visit crisis resources
-          </a>
-        </div>
-        <SafetyFooterStrip />
       </div>
     </div>
   );

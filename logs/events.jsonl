@@ -138,3 +138,6 @@
 {"type":"buddy_panel_viewed","guestId":"g_mogupvyr_x1zi27","metadata":{"surface":"start","state":"calm"},"ts":1777273441302}
 {"type":"start_page_click","guestId":"g_mogupvyr_x1zi27","metadata":{},"ts":1777273441304}
 {"type":"buddy_accessibility_ready","guestId":"g_mogupvyr_x1zi27","metadata":{},"ts":1777273441304}
+{"type":"buddy_accessibility_ready","guestId":"guest_1777536126544_t79mlc3j","metadata":{},"ts":1777536373608}
+{"type":"buddy_panel_viewed","guestId":"guest_1777536126544_t79mlc3j","metadata":{"surface":"start","state":"calm"},"ts":1777536373610}
+{"type":"start_page_click","guestId":"guest_1777536126544_t79mlc3j","metadata":{},"ts":1777536373611}
