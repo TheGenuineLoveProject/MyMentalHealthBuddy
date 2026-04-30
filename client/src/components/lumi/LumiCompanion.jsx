@@ -97,15 +97,35 @@ export function LumiCompanion({
     lockImage && MASCOT_ASSETS[lockImage] ? MASCOT_ASSETS[lockImage] : null;
   const src = lockedSrc || behavior.getImageSrc(theme.imageVariant);
 
-  const [imageReady, setImageReady] = useState(false);
+  // Visibility gate: when `lockImage` is set (canonical-lock surfaces like
+  // the home hero), bypass the preload promise entirely and render at full
+  // opacity from the first paint. The lock branch always points at a
+  // bundled MASCOT_ASSETS bitmap, so there is no upside to gating its
+  // render on a network round-trip — and a hung/403'd preload promise
+  // would otherwise pin the hero invisible (the original bug).
+  //
+  // For non-locked surfaces we keep the soft fade-in for layout-shift
+  // protection, but add a 1500ms watchdog so even a never-firing
+  // onload/onerror (rare proxy/CSP edge) cannot strand opacity at 0.
+  const lockBypass = Boolean(lockedSrc);
+  const [imageReady, setImageReady] = useState(lockBypass);
   const [hovered, setHovered] = useState(false);
   const [timeKey, setTimeKey] = useState(() => currentTimeStateKey());
   const mountedRef = useRef(true);
 
-  // Preload to avoid layout shift on first paint.
+  // Preload to avoid layout shift on first paint (skipped when locked).
   useEffect(() => {
     mountedRef.current = true;
+    if (lockBypass) {
+      setImageReady(true);
+      return () => {
+        mountedRef.current = false;
+      };
+    }
     setImageReady(false);
+    const watchdog = setTimeout(() => {
+      if (mountedRef.current) setImageReady(true);
+    }, 1500);
     preloadImage(src)
       .then(() => {
         if (mountedRef.current) setImageReady(true);
@@ -115,8 +135,9 @@ export function LumiCompanion({
       });
     return () => {
       mountedRef.current = false;
+      clearTimeout(watchdog);
     };
-  }, [src]);
+  }, [src, lockBypass]);
 
   // Re-evaluate the time-of-day banner once a minute so a long-open tab
   // crosses morning→midday→evening→night boundaries without a reload.
