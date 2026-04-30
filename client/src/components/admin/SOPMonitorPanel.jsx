@@ -5,9 +5,21 @@
 import { useState, useCallback, useMemo } from "react";
 import {
   ClipboardCheck, RefreshCw, CheckCircle2, AlertTriangle, XCircle,
-  ShieldAlert, Wrench, Activity, ChevronRight, Clock,
+  ShieldAlert, Wrench, Activity, ChevronRight, Clock, Lock,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+
+/* True when the fetch error string starts with 401 or 403. The fetch
+ * helper above throws `${status} ${statusText}` (space-separated), so
+ * `\b` matches both that and the colon-separated apiFetch format. A
+ * 401/403 here is the SUCCESS condition for /api/admin/sop/status —
+ * the route is correctly demanding admin auth — so we render a calm
+ * sign-in placeholder rather than a red "unavailable" alert. */
+function isAuthRequiredError(err) {
+  if (!err) return false;
+  const msg = typeof err === "string" ? err : (err.message || String(err));
+  return /^(401|403)\b/.test(msg);
+}
 
 // Use the same dual-token fetch shape as Admin.jsx (user JWT first,
 // fall back to legacy admin session token).
@@ -105,6 +117,42 @@ export default function SOPMonitorPanel() {
           <h2 className="text-lg font-semibold" style={{ color: "var(--glp-ink)" }}>SOP Monitor</h2>
         </div>
         <p className="text-sm" style={{ color: "var(--glp-sage)" }}>Running platform health probes…</p>
+      </div>
+    );
+  }
+
+  // Auth-required state — the protected route is doing its job (401/403).
+  // Render a calm sign-in placeholder, NOT a red alert. This keeps the
+  // dashboard visually consistent with the SOP banner, which says 401/403
+  // on protected routes is the success condition.
+  if (error && isAuthRequiredError(error)) {
+    return (
+      <div
+        className="glass-premium rounded-2xl p-8"
+        role="status"
+        data-testid="state-sop-needs-auth"
+      >
+        <div className="flex items-start gap-3 mb-3">
+          <Lock className="w-5 h-5 mt-0.5" style={{ color: "var(--glp-sage)" }} aria-hidden="true" />
+          <div className="flex-1">
+            <h2 className="text-lg font-semibold mb-1" style={{ color: "var(--glp-ink)" }}>
+              SOP Monitor — sign in as admin to view
+            </h2>
+            <p className="text-sm mb-4" style={{ color: "var(--glp-sage)" }}>
+              The status endpoint correctly required authentication (401/403). This panel will populate once your admin session is active.
+            </p>
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium"
+              style={{ background: "var(--glp-sage-15)", color: "var(--glp-sage-deep)" }}
+              data-testid="button-retry-sop"
+            >
+              <RefreshCw className="w-4 h-4" aria-hidden="true" />
+              Retry after signing in
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

@@ -2,11 +2,23 @@ import { useState, useEffect, useCallback } from "react";
 import {
   Activity, Cpu, Network, Wrench, AlertCircle, CheckCircle2,
   RefreshCw, Pause, Play, Sparkles, ServerCog, ShieldAlert, Clock,
+  Lock, ShieldCheck,
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 
 function panelChrome(extra = "") {
   return `glass-premium rounded-2xl p-6 ${extra}`;
+}
+
+/* True when an apiFetch error message is a 401/403 — i.e. the route is
+ * doing its job (auth required) and the viewer simply isn't signed in as
+ * admin. We classify those as "needs sign-in" rather than as a red error,
+ * because per SOP_FEATURE_MAP a 401/403 on a protected route is the
+ * SUCCESS condition (a 200 there would be the failure). */
+function isAuthRequiredError(err) {
+  if (!err) return false;
+  const msg = typeof err === "string" ? err : (err.message || String(err));
+  return /^(401|403)\b/.test(msg);
 }
 
 function StatusDot({ state }) {
@@ -87,6 +99,42 @@ function PanelBodyState({ loading, error, empty, onRetry, children }) {
     );
   }
   if (error) {
+    // 401/403 = the viewer simply isn't signed in as admin. Render a calm,
+    // neutral "sign in" placeholder (NOT a red role="alert" panel). The
+    // protected route is doing its job — surfacing a scary failure here
+    // would visually contradict the SOP banner that says 401/403 on
+    // protected routes is the success condition.
+    if (isAuthRequiredError(error)) {
+      return (
+        <div
+          className="rounded-xl p-4 flex items-start gap-3"
+          style={{ background: "var(--glp-sage-10)", border: "1px solid var(--glp-sage-15)" }}
+          role="status"
+          data-testid="state-panel-needs-auth"
+        >
+          <Lock className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "var(--glp-sage)" }} aria-hidden="true" />
+          <div className="flex-1">
+            <p className="text-sm font-medium" style={{ color: "var(--glp-sage-deep)" }}>
+              Sign in as admin to view live data
+            </p>
+            <p className="text-xs mt-1" style={{ color: "var(--glp-sage)" }}>
+              The endpoint correctly required authentication (401/403). This panel will populate once you authenticate.
+            </p>
+            {onRetry && (
+              <button
+                type="button"
+                onClick={onRetry}
+                className="text-xs font-semibold mt-2 underline"
+                style={{ color: "var(--glp-sage-deep)" }}
+                data-testid="button-panel-retry"
+              >
+                Retry after signing in
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    }
     return (
       <div
         className="rounded-xl p-4 flex items-start gap-3"
@@ -585,12 +633,17 @@ function SelfHealingPanel() {
  * StatusDot row. This is intentionally additive — the existing readiness +
  * health-deep panels stay untouched. */
 function RouteStatusPanel() {
+  // `protected: true` flips the success semantics for that row:
+  //   protected + 401/403 → "ok"   (security boundary working as intended)
+  //   protected + 200     → "fail" (security LEAK — admin data served to anon)
+  // Public rows stay with the conventional 2xx-is-good classifier.
+  // Source of truth for which routes are protected: docs/SOP_FEATURE_MAP.md.
   const ROUTES = [
-    { label: "Public health", path: "/api/health" },
-    { label: "Admin health", path: "/api/admin/health" },
-    { label: "Auth (me)", path: "/api/auth/me" },
-    { label: "Kernel health", path: "/api/kernel/health" },
-    { label: "Email health", path: "/api/email/health" },
+    { label: "Public health", path: "/api/health",         protected: false },
+    { label: "Admin health",  path: "/api/admin/health",   protected: true  },
+    { label: "Auth (me)",     path: "/api/auth/me",        protected: true  },
+    { label: "Kernel health", path: "/api/kernel/health",  protected: true  },
+    { label: "Email health",  path: "/api/email/health",   protected: false },
   ];
 
   const [rows, setRows] = useState([]);
@@ -629,10 +682,27 @@ function RouteStatusPanel() {
             const dt = Math.round(
               (typeof performance !== "undefined" ? performance.now() : Date.now()) - t0
             );
+            // Two-axis classifier (status × protected flag):
+            //   PROTECTED route:
+            //     5xx          → fail (server problem)
+            //     401 / 403    → ok   (security boundary intact — the goal)
+            //     2xx          → fail (LEAK — admin route served without auth)
+            //     other 4xx    → warn
+            //   PUBLIC route:
+            //     5xx          → fail
+            //     2xx          → ok
+            //     4xx (incl. 401/403) → warn (public route shouldn't auth-fail)
             let state = "ok";
-            if (res.status >= 500) state = "fail";
-            else if (res.status === 401 || res.status === 403) state = "warn";
-            else if (res.status >= 400) state = "warn";
+            if (res.status >= 500) {
+              state = "fail";
+            } else if (r.protected) {
+              if (res.status === 401 || res.status === 403) state = "ok";
+              else if (res.status >= 200 && res.status < 300) state = "fail"; // security leak
+              else state = "warn";
+            } else {
+              if (res.status >= 200 && res.status < 300) state = "ok";
+              else state = "warn";
+            }
             return { ...r, status: res.status, ms: dt, state };
           } catch (e) {
             const dt = Math.round(
@@ -678,19 +748,45 @@ function RouteStatusPanel() {
             >
               <StatusDot state={row.state} />
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium" style={{ color: "var(--glp-sage-deep)" }}>
+                <div className="text-sm font-medium flex items-center gap-1.5" style={{ color: "var(--glp-sage-deep)" }}>
                   {row.label}
+                  {row.protected && (
+                    <span
+                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide"
+                      style={{
+                        background: "var(--glp-sage-15)",
+                        color: "var(--glp-sage-deep)",
+                      }}
+                      title="Protected route — 401/403 is the success condition"
+                      data-testid={`tag-route-protected-${row.path}`}
+                    >
+                      <Lock className="w-2.5 h-2.5" aria-hidden="true" />
+                      protected
+                    </span>
+                  )}
                 </div>
                 <div className="text-xs truncate" style={{ color: "var(--glp-sage)" }}>
                   {row.path}
                 </div>
               </div>
               <div
-                className="text-xs font-mono shrink-0"
+                className="text-xs font-mono shrink-0 text-right"
                 style={{ color: "var(--glp-sage)" }}
                 data-testid={`text-route-status-${row.path}`}
               >
-                {row.status === 0 ? "—" : row.status} · {row.ms}ms
+                <div>{row.status === 0 ? "—" : row.status} · {row.ms}ms</div>
+                {row.protected && row.state === "ok" && (
+                  <div className="flex items-center justify-end gap-1 mt-0.5 text-[10px]" style={{ color: "var(--glp-sage-deep)" }}>
+                    <ShieldCheck className="w-3 h-3" aria-hidden="true" />
+                    <span>secured</span>
+                  </div>
+                )}
+                {row.protected && row.state === "fail" && row.status >= 200 && row.status < 300 && (
+                  <div className="flex items-center justify-end gap-1 mt-0.5 text-[10px]" style={{ color: "var(--glp-rose-deep, #7a3041)" }}>
+                    <ShieldAlert className="w-3 h-3" aria-hidden="true" />
+                    <span>LEAK — auth bypassed</span>
+                  </div>
+                )}
               </div>
             </li>
           ))}
