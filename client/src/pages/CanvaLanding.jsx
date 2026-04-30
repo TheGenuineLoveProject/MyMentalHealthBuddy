@@ -464,6 +464,9 @@ export default function CanvaLanding() {
                 <LumiCompanion
                   size={208}
                   interactive
+                  lockImage="default"
+                  lockAnimationClass="lumi-breathe"
+                  ignoreThemeFilter
                   data-testid="lumi-hero-companion"
                 />
               </div>

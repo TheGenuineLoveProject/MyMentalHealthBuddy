@@ -4,6 +4,7 @@ import { LumiAccessibleWrapper } from "./LumiAccessibleWrapper";
 import { LumiCustomizerTrigger } from "./LumiCustomizerTrigger";
 import { preloadImage } from "../../utils/preloadMascots";
 import { TIME_STATES } from "../../data/lumiEmotions";
+import { MASCOT_ASSETS } from "../../data/lumiAssets";
 
 const SIZE_PX = { sm: 48, md: 160, lg: 320 };
 
@@ -43,6 +44,24 @@ function currentTimeStateKey(now = new Date()) {
  *   - showCustomizer  boolean              renders the palette trigger beside Lumi
  *   - onClick         function             optional click handler when interactive
  *   - className       string               passthrough on the outer wrapper
+ *   - lockImage          string   optional MASCOT_ASSETS key to pin the visible
+ *                                 artwork (e.g. 'default' for the canonical sage
+ *                                 hero). Pass undefined (the default) to use the
+ *                                 time/emotion-driven variant from useLumiBehavior.
+ *   - lockAnimationClass string   optional CSS class to pin the animation
+ *                                 (e.g. 'lumi-breathe'). Overrides the
+ *                                 behavior-driven class. Default: undefined =
+ *                                 follow the emotion state machine.
+ *   - ignoreThemeFilter  boolean  when true, the user's saved theme filter
+ *                                 (hue-rotate, saturate, etc.) is NOT applied
+ *                                 to the displayed image. Use for canonical
+ *                                 marketing surfaces that must always show the
+ *                                 brand-pure sage Lumi. Default false.
+ *
+ * Together, lockImage + lockAnimationClass + ignoreThemeFilter let a single
+ * call site (e.g. the home hero) guarantee "canonical sage, breathing"
+ * regardless of clock hour, sleep state, saved theme, or emotion changes,
+ * while every other consumer continues to use the full behavior pipeline.
  *
  * Works with or without auth — useLumiBehavior writes guest stats to
  * localStorage and reads them back on next mount.
@@ -53,6 +72,9 @@ export function LumiCompanion({
   showCustomizer = false,
   onClick,
   className = "",
+  lockImage,
+  lockAnimationClass,
+  ignoreThemeFilter = false,
 }) {
   const {
     behavior,
@@ -66,7 +88,14 @@ export function LumiCompanion({
     typeof size === "number" && size > 0
       ? size
       : SIZE_PX[size] || SIZE_PX.md;
-  const src = behavior.getImageSrc(theme.imageVariant);
+  // When `lockImage` is set, pin the displayed PNG to that MASCOT_ASSETS key
+  // (e.g. 'default' for the canonical sage hero). The emotion state machine,
+  // theme tinting, animation class, and banner greeting still operate from
+  // useLumiBehavior — only the bitmap is overridden. Falls back to the
+  // behavior-driven src when the key is unknown so a typo can't blank Lumi.
+  const lockedSrc =
+    lockImage && MASCOT_ASSETS[lockImage] ? MASCOT_ASSETS[lockImage] : null;
+  const src = lockedSrc || behavior.getImageSrc(theme.imageVariant);
 
   const [imageReady, setImageReady] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -115,16 +144,22 @@ export function LumiCompanion({
 
   // Compose CSS class string for the <img>: base mascot class + the active
   // animation + the theme color filter + the optional .animating marker.
+  // When `lockAnimationClass` is provided, it replaces the behavior-driven
+  // class (e.g. forcing 'lumi-breathe' on the marketing hero so a night-time
+  // 'lumi-dim' / 'lumi-snooze' transition can't override it).
+  const effectiveAnimationClass = lockAnimationClass || behavior.animationClass;
   const imageClassName = useMemo(() => {
     const classes = [
       "lumi-mascot",
       "lumi-mascot--png",
-      behavior.animationClass,
+      effectiveAnimationClass,
       `lumi-theme-${theme.id}`,
     ];
-    if (behavior.isAnimating) classes.push("animating");
+    // Suppress the .animating marker when an external class is locked so we
+    // don't accidentally promote a will-change layer for a static loop.
+    if (behavior.isAnimating && !lockAnimationClass) classes.push("animating");
     return classes.filter(Boolean).join(" ");
-  }, [behavior.animationClass, behavior.isAnimating, theme.id]);
+  }, [effectiveAnimationClass, behavior.isAnimating, theme.id, lockAnimationClass]);
 
   const containerStyle = {
     display: "inline-flex",
@@ -144,6 +179,24 @@ export function LumiCompanion({
     transition: "opacity 220ms ease-out",
   };
 
+  // Filter composition:
+  //   - Normally: theme.filter + optional hover drop-shadow.
+  //   - When ignoreThemeFilter: explicitly emit `none` (plus hover) so the
+  //     inline style defeats the body-level `body.lumi-theme-X .lumi-mascot`
+  //     CSS cascade. Without this, a saved non-sage theme would still
+  //     hue-shift the locked artwork via the body class on a marketing hero.
+  const hoverGlow = interactive && hovered
+    ? " drop-shadow(0 0 12px var(--lumi-amber-400, #f0a830))"
+    : "";
+  // `filter: none` is a single-keyword value and cannot be chained with
+  // filter functions like drop-shadow(). When ignoreThemeFilter is true and
+  // there is no hover glow, emit the bare `none` keyword; once a hover glow
+  // is added, omit the keyword and emit only the drop-shadow (which itself
+  // implies "no theme tint" because nothing else is being applied).
+  const composedFilter = ignoreThemeFilter
+    ? (hoverGlow.trim() || "none")
+    : ((theme.filter && theme.filter !== "none" ? theme.filter : "") + hoverGlow);
+
   const imgStyle = {
     width: "100%",
     height: "100%",
@@ -152,9 +205,7 @@ export function LumiCompanion({
     transform: "translateZ(0)",
     backfaceVisibility: "hidden",
     transition: "opacity 220ms ease-out, filter 220ms ease-out",
-    filter:
-      (theme.filter && theme.filter !== "none" ? theme.filter : "") +
-      (interactive && hovered ? " drop-shadow(0 0 12px var(--lumi-amber-400, #f0a830))" : ""),
+    filter: composedFilter,
   };
 
   // The mascot+customizer row ALWAYS uses containerStyle so its `gap`
