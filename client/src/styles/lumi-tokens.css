@@ -161,3 +161,172 @@
 .lumi-grad-hero-bg { background: var(--lumi-grad-hero); }
 .lumi-grad-amber-bg { background: var(--lumi-grad-amber); color: white; }
 .lumi-grad-sage-bg { background: var(--lumi-grad-sage); color: white; }
+
+/* ============================================
+ * SPEC-COMPATIBLE TOKEN ALIASES
+ * ----------------------------------------------
+ * The pasted v2.0 Aurora Token spec uses the un-namespaced `--color-*` /
+ * `--gradient-*` / `--text-*` / `--space-*` / `--btn-*` naming. Every
+ * existing MMHB consumer uses the namespaced `--lumi-*` form. To keep the
+ * project authoritative on `--lumi-*` while still letting drop-in spec
+ * snippets resolve, we publish thin alias variables here. Each alias is
+ * defined ONLY in terms of the underlying `--lumi-*` token, so changing a
+ * source value automatically flows through both names. If a token has no
+ * direct `--lumi-*` counterpart (e.g. the spec's `--color-warning` /
+ * `--color-crisis-light`), we materialize a literal value sourced from the
+ * spec verbatim so neither naming convention drifts.
+ * ============================================ */
+:root {
+  /* Sage scale — full ramp 50..950 */
+  --color-sage-50:  var(--lumi-sage-50);
+  --color-sage-100: var(--lumi-sage-100);
+  --color-sage-200: var(--lumi-sage-200);
+  --color-sage-300: var(--lumi-sage-300);
+  --color-sage-400: var(--lumi-sage-400);
+  --color-sage-500: var(--lumi-sage-500);
+  --color-sage-600: var(--lumi-sage-600);
+  --color-sage-700: var(--lumi-sage-700);
+  --color-sage-800: var(--lumi-sage-800);
+  --color-sage-900: var(--lumi-sage-900);
+  --color-sage-950: var(--lumi-sage-950);
+
+  /* Amber scale — 50..900 */
+  --color-amber-50:  var(--lumi-amber-50);
+  --color-amber-100: var(--lumi-amber-100);
+  --color-amber-200: var(--lumi-amber-200);
+  --color-amber-300: var(--lumi-amber-300);
+  --color-amber-400: var(--lumi-amber-400);
+  --color-amber-500: var(--lumi-amber-500);
+  --color-amber-600: var(--lumi-amber-600);
+  --color-amber-700: var(--lumi-amber-700);
+  --color-amber-800: var(--lumi-amber-800);
+  --color-amber-900: var(--lumi-amber-900);
+
+  /* Stone scale — 50..900 */
+  --color-stone-50:  var(--lumi-stone-50);
+  --color-stone-100: var(--lumi-stone-100);
+  --color-stone-200: var(--lumi-stone-200);
+  --color-stone-300: var(--lumi-stone-300);
+  --color-stone-400: var(--lumi-stone-400);
+  --color-stone-500: var(--lumi-stone-500);
+  --color-stone-600: var(--lumi-stone-600);
+  --color-stone-700: var(--lumi-stone-700);
+  --color-stone-800: var(--lumi-stone-800);
+  --color-stone-900: var(--lumi-stone-900);
+
+  /* Semantic colors — base + light surface variants. The base hue is the
+   * existing `--lumi-*` token; the `-light` companion is materialized from
+   * the spec since we did not previously expose a tinted surface for these. */
+  --color-calm:        var(--lumi-calm);
+  --color-calm-light:  #d4ede4;
+  --color-growth:      var(--lumi-growth);
+  --color-growth-light:#e1edd3;
+  --color-love:        var(--lumi-love);
+  --color-love-light:  #f5d4cc;
+  --color-insight:     var(--lumi-insight);
+  --color-insight-light:#d8e0f0;
+  --color-energy:      var(--lumi-energy);
+  --color-energy-light:#fcebc7;
+  --color-rest:        var(--lumi-rest);
+  --color-rest-light:  #e5deec;
+
+  /* Functional / interface colors — sourced from spec */
+  --color-white:         #ffffff;
+  --color-black:         #000000;
+  --color-crisis:        #c45b4a;
+  --color-crisis-light:  #f0d4d0;
+  --color-warning:       #d4943a;
+  --color-warning-light: #f5e5d0;
+
+  /* Gradient aliases */
+  --gradient-sage:  var(--lumi-grad-sage);
+  --gradient-amber: var(--lumi-grad-amber);
+  --gradient-hero:  var(--lumi-grad-hero);
+  --gradient-cta:   var(--lumi-grad-cta);
+  --gradient-card:  var(--lumi-grad-card);
+  --gradient-glow:  var(--lumi-grad-glow);
+
+  /* Type scale aliases — note spec adds md/5xl/6xl which extend the existing
+   * lumi range. md sits between sm and lg; 5xl/6xl extend the upper range. */
+  --text-xs:   var(--lumi-text-xs);
+  --text-sm:   var(--lumi-text-sm);
+  --text-base: var(--lumi-text-base);
+  --text-md:   clamp(1.0625rem, 1rem + 0.31vw, 1.125rem);
+  --text-lg:   var(--lumi-text-lg);
+  --text-xl:   var(--lumi-text-xl);
+  --text-2xl:  var(--lumi-text-2xl);
+  --text-3xl:  var(--lumi-text-3xl);
+  --text-4xl:  var(--lumi-text-4xl);
+  --text-5xl:  clamp(2.75rem, 2rem + 3.75vw, 4rem);
+  --text-6xl:  clamp(3.25rem, 2.2rem + 5.25vw, 5rem);
+
+  /* Line-height + tracking + weight aliases */
+  --leading-tight:   1.2;
+  --leading-snug:    1.35;
+  --leading-normal:  1.6;
+  --leading-relaxed: 1.75;
+  --leading-loose:   2;
+  --tracking-tight:   -0.02em;
+  --tracking-normal:   0;
+  --tracking-wide:     0.02em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Font-family aliases */
+  --font-display: var(--lumi-font-display);
+  --font-body:    var(--lumi-font-body);
+  --font-accent:  var(--lumi-font-quote);
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Button sizing tokens (spec-only — no prior --lumi-btn-* exposed) */
+  --btn-height-sm: 36px;
+  --btn-height-md: 44px;
+  --btn-height-lg: 56px;
+  --btn-height-xl: 64px;
+  --btn-padding-sm: 0 16px;
+  --btn-padding-md: 0 24px;
+  --btn-padding-lg: 0 32px;
+  --btn-padding-xl: 0 40px;
+  --btn-radius-sm:  8px;
+  --btn-radius-md:  12px;
+  --btn-radius-lg:  9999px;
+  --btn-shadow-rest:   0 1px 2px rgba(26, 25, 23, 0.05);
+  --btn-shadow-hover:  0 4px 12px rgba(26, 25, 23, 0.10);
+  --btn-shadow-active: 0 1px 2px rgba(26, 25, 23, 0.08) inset;
+  --btn-shadow-focus:  0 0 0 3px rgba(90, 138, 90, 0.30);
+
+  /* Spacing aliases — map to existing --lumi-space-N */
+  --space-1:  var(--lumi-space-1);
+  --space-2:  var(--lumi-space-2);
+  --space-3:  var(--lumi-space-3);
+  --space-4:  var(--lumi-space-4);
+  --space-5:  var(--lumi-space-5);
+  --space-6:  var(--lumi-space-6);
+  --space-8:  var(--lumi-space-8);
+  --space-10: var(--lumi-space-10);
+  --space-12: var(--lumi-space-12);
+  --space-16: 64px;
+  --space-20: 80px;
+}
+
+/* Spec uses [data-theme="dark"]; existing system uses .dark on <html>.
+ * Mirror the spec selector so either trigger surfaces dark tokens. */
+[data-theme="dark"] {
+  --color-bg-primary:    var(--lumi-sage-950);
+  --color-bg-secondary:  var(--lumi-sage-900);
+  --color-bg-card:       var(--lumi-sage-800);
+  --color-bg-elevated:   var(--lumi-sage-700);
+  --color-text-primary:   var(--lumi-stone-100);
+  --color-text-secondary: var(--lumi-stone-300);
+  --color-text-muted:     var(--lumi-stone-500);
+  --color-border:         var(--lumi-sage-700);
+  --color-border-subtle:  var(--lumi-sage-800);
+  --color-accent:         var(--lumi-amber-400);
+  --color-accent-hover:   var(--lumi-amber-300);
+  --gradient-hero:        linear-gradient(180deg, var(--lumi-sage-950) 0%, var(--lumi-sage-900) 100%);
+}
