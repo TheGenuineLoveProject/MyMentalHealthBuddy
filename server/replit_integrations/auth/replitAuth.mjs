@@ -141,7 +141,7 @@ export async function setupAuth(app) {
         req.session.userEmail = user.claims?.email;
         req.session.userData = user;
         
-        logger.debug("[ReplitAuth] Session established", { sessionId: req.session?.id, isAuthenticated: req.isAuthenticated() });
+        logger.debug("[ReplitAuth] Session established", { sessionId: req.session?.id, isAuthenticated: typeof req.isAuthenticated === "function" ? req.isAuthenticated() : "n/a (passport not mounted)" });
         
         req.session.save((saveErr) => {
           if (saveErr) {
@@ -200,7 +200,7 @@ export const isAuthenticated = async (req, res, next) => {
   }
 
   if (!user?.expires_at) {
-    logger.debug("[ReplitAuth] isAuthenticated failed", { hasUser: !!user, hasExpiresAt: !!user?.expires_at, isAuthenticated: req.isAuthenticated(), sessionKeys: Object.keys(req.session || {}) });
+    logger.debug("[ReplitAuth] isAuthenticated failed", { hasUser: !!user, hasExpiresAt: !!user?.expires_at, isAuthenticated: typeof req.isAuthenticated === "function" ? req.isAuthenticated() : "n/a (passport not mounted)", sessionKeys: Object.keys(req.session || {}) });
     return res.status(401).json({ message: "Unauthorized" });
   }
 

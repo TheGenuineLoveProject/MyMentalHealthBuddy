@@ -1,5 +1,12 @@
 import express from "express";
-import { isAuthenticated } from "../replit_integrations/auth/replitAuth.mjs";
+// Use the JWT auth middleware (sets req.dbUserId = decoded.id) instead of
+// the Replit-OAuth/Passport one — JWT-signup users have no Passport session,
+// so the Replit middleware crashed with "req.isAuthenticated is not a function"
+// and stranded the dashboard at "Loading…". The JWT middleware is what every
+// other authenticated route in this app already uses (ai.mjs, journal.mjs,
+// audit-logs.mjs, leads.mjs, etc.) and it sets exactly the req.dbUserId field
+// every handler in this file reads.
+import { requireAuth as isAuthenticated } from "../middleware/auth.mjs";
 import { db } from "../db/connection.mjs";
 import { journals, moods, aiMessages, therapySessions, dailyQuests, dailyReflections, communityAffirmations } from "../../shared/schema.mjs";
 import { eq, and, gte, desc, count, sql } from "drizzle-orm";

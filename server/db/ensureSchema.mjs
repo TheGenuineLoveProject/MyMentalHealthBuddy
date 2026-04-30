@@ -378,6 +378,121 @@ const STATEMENTS = [
   `CREATE INDEX IF NOT EXISTS idx_awareness_detections_severity ON awareness_detections(severity)`,
   `CREATE INDEX IF NOT EXISTS idx_awareness_detections_rule ON awareness_detections(rule_key)`,
   `CREATE INDEX IF NOT EXISTS idx_awareness_detections_flagged ON awareness_detections(flagged)`,
+
+  // ===== Dashboard data tables required by server/routes/user.mjs =====
+  // The dashboard hung at "Loading…" after signup because these five tables
+  // were declared in shared/schema.mjs but never present in the live DB
+  // (drizzle.config.ts points at empty stub files under database/schema/).
+  // Adding them here as idempotent CREATE-IF-NOT-EXISTS — matches the
+  // existing bootstrap pattern, never drops data, mirrors the Drizzle defs
+  // in shared/schema.mjs verbatim (including the daily_reflections.user_id
+  // TEXT quirk).
+
+  `CREATE TABLE IF NOT EXISTS ai_messages (
+    id TEXT PRIMARY KEY,
+    user_id UUID NOT NULL,
+    session_id TEXT,
+    role TEXT NOT NULL,
+    content TEXT NOT NULL,
+    flow_type TEXT,
+    is_crisis BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_ai_messages_user_id ON ai_messages(user_id)`,
+  `CREATE INDEX IF NOT EXISTS idx_ai_messages_user_created ON ai_messages(user_id, created_at)`,
+
+  `CREATE TABLE IF NOT EXISTS therapy_sessions (
+    id TEXT PRIMARY KEY,
+    user_id UUID NOT NULL,
+    flow_type TEXT NOT NULL DEFAULT 'general',
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_therapy_sessions_user ON therapy_sessions(user_id, created_at)`,
+
+  `CREATE TABLE IF NOT EXISTS daily_quests (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    quest_type VARCHAR(100) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    target_count INTEGER NOT NULL,
+    current_count INTEGER NOT NULL DEFAULT 0,
+    xp_reward INTEGER NOT NULL,
+    is_completed INTEGER NOT NULL DEFAULT 0,
+    expires_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_daily_quests_user_id ON daily_quests(user_id)`,
+  `CREATE INDEX IF NOT EXISTS idx_daily_quests_user_created ON daily_quests(user_id, created_at)`,
+
+  `CREATE TABLE IF NOT EXISTS daily_reflections (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id TEXT NOT NULL,
+    content TEXT NOT NULL,
+    mood TEXT,
+    gratitude TEXT,
+    intention TEXT,
+    shared_to_community BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS daily_reflections_user_id_idx ON daily_reflections(user_id)`,
+  `CREATE INDEX IF NOT EXISTS daily_reflections_created_at_idx ON daily_reflections(created_at)`,
+
+  `CREATE TABLE IF NOT EXISTS community_affirmations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID,
+    content TEXT NOT NULL,
+    is_anonymous BOOLEAN NOT NULL DEFAULT TRUE,
+    heart_count INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS community_affirmations_created_at_idx ON community_affirmations(created_at)`,
+
+  // ===== Gamification tables — fired immediately on Dashboard mount =====
+  // Same root cause as the block above: Drizzle defs exist but live DB
+  // never had them. Adding only the three the dashboard touches on first
+  // paint (server/routes/gamification.mjs + ai-dashboard.mjs). Other
+  // schema-vs-DB drift exists but is out of scope for the signup-bug fix.
+
+  `CREATE TABLE IF NOT EXISTS user_progress (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    total_xp INTEGER NOT NULL DEFAULT 0,
+    level INTEGER NOT NULL DEFAULT 1,
+    current_streak INTEGER NOT NULL DEFAULT 0,
+    longest_streak INTEGER NOT NULL DEFAULT 0,
+    last_activity_date TIMESTAMP,
+    tools_used_today INTEGER NOT NULL DEFAULT 0,
+    total_tools_used INTEGER NOT NULL DEFAULT 0,
+    total_session_minutes INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_user_progress_user_id ON user_progress(user_id)`,
+
+  `CREATE TABLE IF NOT EXISTS tool_sessions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    tool_name VARCHAR(100) NOT NULL,
+    duration_seconds INTEGER NOT NULL,
+    xp_earned INTEGER NOT NULL,
+    completed_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    metadata TEXT
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_tool_sessions_user_id ON tool_sessions(user_id)`,
+  `CREATE INDEX IF NOT EXISTS idx_tool_sessions_user_completed ON tool_sessions(user_id, completed_at)`,
+
+  // user_achievements is defined in shared/schema.mjs as a stub (id only),
+  // but routes select against it expecting a user_id column. Mirroring the
+  // canonical achievements join shape so SELECTs don't 500.
+  `CREATE TABLE IF NOT EXISTS user_achievements (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    achievement_id UUID,
+    earned_at TIMESTAMP NOT NULL DEFAULT NOW()
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_user_achievements_user_id ON user_achievements(user_id)`,
 ];
 
 let bootstrapped = false;
