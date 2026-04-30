@@ -8,16 +8,16 @@
  * directory — those URLs 404'd in production. Using @assets/ imports
  * guarantees the artwork ships with the bundle.
  */
-import lumiDefaultUrl   from "@assets/mmhb_buddy_interactive_fullbody_1777438293296.png";
-import lumiBlueUrl      from "@assets/IMG_2178_1777438293296.png";
-import lumiLavenderUrl  from "@assets/IMG_2177_1777438293296.png";
-import lumiCoralUrl     from "@assets/IMG_2176_1777438293296.png";
-import lumiGoldenUrl    from "@assets/IMG_2174_1777438293296.png";
-import lumiThinkingUrl  from "@assets/IMG_2173_1777438293296.png";
+import lumiDefaultUrl   from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import lumiBlueUrl      from "@assets/IMG_2178_1777538625498.png";
+import lumiLavenderUrl  from "@assets/IMG_2177_1777538625498.png";
+import lumiCoralUrl     from "@assets/IMG_2176_1777538625498.png";
+import lumiGoldenUrl    from "@assets/IMG_2174_1777538625498.png";
+import lumiThinkingUrl  from "@assets/IMG_2173_1777538625498.png";
 // Dedicated sleeping pose: sage-green Lumi curled up with closed eyes and
 // "Zzz" overhead. Replaces the previous lavender-as-sleeping placeholder so
 // the sleep state matches the default sage palette of the canonical Lumi.
-import lumiSleepingUrl  from "@assets/IMG_2182_1777444916524.png";
+import lumiSleepingUrl  from "@assets/IMG_2182_1777538625498.png";
 
 import { EMOTION_CONFIG } from "./lumiEmotions";
 import { LUMI_THEMES } from "./lumiThemes";

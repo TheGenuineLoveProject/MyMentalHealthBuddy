@@ -12,7 +12,7 @@
  *   - .lumi-anim-breathe gentle scale pulse
  * Both honor prefers-reduced-motion (defined in lumi-motion.css).
  */
-import lumiFullBodyPng from "@assets/mmhb_buddy_interactive_fullbody_1777438293296.png";
+import lumiFullBodyPng from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
 
 export default function LumiMascotImage({
   size = 280,
