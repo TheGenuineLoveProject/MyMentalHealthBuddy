@@ -141,3 +141,6 @@
 {"type":"buddy_accessibility_ready","guestId":"guest_1777536126544_t79mlc3j","metadata":{},"ts":1777536373608}
 {"type":"buddy_panel_viewed","guestId":"guest_1777536126544_t79mlc3j","metadata":{"surface":"start","state":"calm"},"ts":1777536373610}
 {"type":"start_page_click","guestId":"guest_1777536126544_t79mlc3j","metadata":{},"ts":1777536373611}
+{"type":"buddy_panel_viewed","guestId":"g_mol7p3na_gortj2","metadata":{"surface":"start","state":"calm"},"ts":1777537104317}
+{"type":"buddy_accessibility_ready","guestId":"g_mol7p3na_gortj2","metadata":{},"ts":1777537104328}
+{"type":"start_page_click","guestId":"g_mol7p3na_gortj2","metadata":{},"ts":1777537104330}
