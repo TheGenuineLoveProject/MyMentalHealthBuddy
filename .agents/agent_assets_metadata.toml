@@ -18,3 +18,9 @@ id = "XSF8lzIGPUuLRHi9cBLM4"
 uri = "file://docs/adr/0001-modular-monolith-to-strangler-fig.md"
 type = "text"
 title = "ADR-0001 — Modular Monolith → Strangler Fig Progressive Extraction"
+
+[[outputs]]
+id = "oxObgl3qXY2vBn4QPMeF4"
+uri = "file://screenshots/home-after-fix.jpg"
+type = "image"
+title = "Home page / — Lumi visible (843×956)"
