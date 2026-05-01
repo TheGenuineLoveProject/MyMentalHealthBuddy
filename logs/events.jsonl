@@ -144,3 +144,9 @@
 {"type":"buddy_panel_viewed","guestId":"g_mol7p3na_gortj2","metadata":{"surface":"start","state":"calm"},"ts":1777537104317}
 {"type":"buddy_accessibility_ready","guestId":"g_mol7p3na_gortj2","metadata":{},"ts":1777537104328}
 {"type":"start_page_click","guestId":"g_mol7p3na_gortj2","metadata":{},"ts":1777537104330}
+{"type":"buddy_panel_viewed","guestId":"g_momfg1c5_m8ygun","metadata":{"surface":"start","state":"calm"},"ts":1777610584596}
+{"type":"start_page_click","guestId":"g_momfg1c5_m8ygun","metadata":{},"ts":1777610584599}
+{"type":"buddy_accessibility_ready","guestId":"g_momfg1c5_m8ygun","metadata":{},"ts":1777610584600}
+{"type":"buddy_panel_viewed","guestId":"g_momfg1c5_m8ygun","metadata":{"surface":"start","state":"calm"},"ts":1777611150373}
+{"type":"start_page_click","guestId":"g_momfg1c5_m8ygun","metadata":{},"ts":1777611150510}
+{"type":"buddy_accessibility_ready","guestId":"g_momfg1c5_m8ygun","metadata":{},"ts":1777611150511}
