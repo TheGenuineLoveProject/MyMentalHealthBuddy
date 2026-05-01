@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { BookOpen, Clock, Star, Filter, Search, Lock, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+import { CardWrapper, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -179,35 +179,63 @@ export default function CourseCatalog() {
 
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none"
+              style={{ color: '#5a6a5a' }}
+              aria-hidden="true"
+            />
             <Input
               type="text"
               placeholder="Search courses..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 min-h-[44px]"
+              className="pl-10 min-h-[44px] placeholder:text-[#5a6a5a]"
+              style={{
+                background: '#f4f7f4',
+                color: '#1a1917',
+                border: '1px solid #c8d9c8',
+                borderRadius: '12px',
+              }}
               data-testid="input-search-courses"
             />
           </div>
           <div className="flex gap-2 overflow-x-auto pb-2">
-            {filters.map(filter => (
-              <Button
-                key={filter.id}
-                variant={activeFilter === filter.id ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveFilter(filter.id)}
-                className="min-h-[40px] px-4 rounded-lg whitespace-nowrap"
-                data-testid={`filter-${filter.id}`}
-              >
-                {filter.label}
-              </Button>
-            ))}
+            {filters.map(filter => {
+              const isActive = activeFilter === filter.id;
+              return (
+                <Button
+                  key={filter.id}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setActiveFilter(filter.id)}
+                  className="min-h-[40px] px-4 rounded-lg whitespace-nowrap font-semibold"
+                  style={
+                    isActive
+                      ? {
+                          background: 'linear-gradient(135deg, #ffb93d 0%, #f5a623 100%)',
+                          color: '#1a1917',
+                          border: '1px solid #f5a623',
+                          boxShadow: '0 2px 6px rgba(245,166,35,0.25)',
+                        }
+                      : {
+                          background: '#faf9f6',
+                          color: '#1a1917',
+                          border: '1px solid #c8d9c8',
+                        }
+                  }
+                  aria-pressed={isActive}
+                  data-testid={`filter-${filter.id}`}
+                >
+                  {filter.label}
+                </Button>
+              );
+            })}
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredCourses.map(course => (
-            <Card key={course.id} className="hover:shadow-lg transition-shadow">
+            <CardWrapper key={course.id} className="hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1">
@@ -273,7 +301,7 @@ export default function CourseCatalog() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </CardWrapper>
           ))}
         </div>
 
@@ -296,8 +324,21 @@ export default function CourseCatalog() {
             Pro members get access to all courses plus exclusive content and certificates.
           </p>
           <Link href="/pricing">
-            <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-upgrade">
+            <Button
+              size="lg"
+              className="min-h-[48px] font-semibold"
+              style={{
+                background: 'linear-gradient(135deg, #ffb93d 0%, #f5a623 100%)',
+                color: '#1a1917',
+                border: 'none',
+                padding: '12px 24px',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(245,166,35,0.3)',
+              }}
+              data-testid="button-upgrade"
+            >
               View Pro Plan
+              <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </Button>
           </Link>
         </section>
