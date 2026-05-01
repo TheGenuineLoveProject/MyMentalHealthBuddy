@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { MessageSquare, X, Send, Loader2, Bug, Lightbulb, HelpCircle, Heart } from "lucide-react";
+import { useState, useEffect } from "react";
+import { MessageSquare, X, Send, Loader2, Bug, Lightbulb, HelpCircle, Heart, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -10,14 +10,61 @@ const CATEGORIES = [
   { id: "praise", label: "Praise", icon: Heart, color: "text-green-500" },
 ];
 
+const SUPPRESSION_KEY = "mmhb-feedback-suppressed-until";
+const SUPPRESSION_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+function readSuppression() {
+  if (typeof window === "undefined") return false;
+  try {
+    const raw = window.localStorage.getItem(SUPPRESSION_KEY);
+    if (!raw) return false;
+    const until = Number(raw);
+    if (!Number.isFinite(until)) return false;
+    return Date.now() < until;
+  } catch {
+    return false;
+  }
+}
+
+function writeSuppression() {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(SUPPRESSION_KEY, String(Date.now() + SUPPRESSION_MS));
+  } catch {
+    // ignore quota / private-mode failures — widget will simply re-show
+  }
+}
+
 export default function FeedbackWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSuppressed, setIsSuppressed] = useState(() => readSuppression());
   const [step, setStep] = useState("category");
   const [category, setCategory] = useState(null);
   const [message, setMessage] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  // Re-check suppression once on mount in case localStorage was cleared in
+  // another tab; cheap, single read, no listener leak.
+  useEffect(() => {
+    setIsSuppressed(readSuppression());
+  }, []);
+
+  const handleHideForWeek = () => {
+    writeSuppression();
+    setIsSuppressed(true);
+    setIsOpen(false);
+    resetForm();
+    toast({
+      title: "Hidden for 7 days",
+      description: "Feedback will reappear after a week. Reset anytime via your browser data.",
+    });
+  };
+
+  if (isSuppressed && !isOpen) {
+    return null;
+  }
 
   const resetForm = () => {
     setStep("category");
@@ -78,17 +125,32 @@ export default function FeedbackWidget() {
       role="dialog"
       aria-label="Feedback form"
     >
-      <div className="flex items-center justify-between p-4 border-b bg-muted/50">
+      <div className="flex items-center justify-between p-4 border-b bg-muted/50 gap-2">
         <h3 className="font-semibold">Share Feedback</h3>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => { setIsOpen(false); resetForm(); }}
-          className="min-h-[44px] min-w-[44px] p-2 rounded-lg"
-          data-testid="button-close-feedback"
-        >
-          <X className="w-4 h-4" />
-        </Button>
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleHideForWeek}
+            className="min-h-[44px] px-2 rounded-lg text-xs gap-1"
+            title="Hide feedback for 7 days"
+            aria-label="Hide feedback for 7 days"
+            data-testid="button-hide-feedback-week"
+          >
+            <EyeOff className="w-3.5 h-3.5" aria-hidden="true" />
+            <span aria-hidden="true">7d</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => { setIsOpen(false); resetForm(); }}
+            className="min-h-[44px] min-w-[44px] p-2 rounded-lg"
+            aria-label="Close feedback"
+            data-testid="button-close-feedback"
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
       </div>
 
       <div className="p-4">

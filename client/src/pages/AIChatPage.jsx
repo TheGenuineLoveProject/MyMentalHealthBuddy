@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle, Sparkles, Heart, Lock, FileText, Copy, Check } from "lucide-react";
+import { ArrowLeft, Send, User, Loader2, Trash2, AlertTriangle, Sparkles, Heart, Lock, FileText, Copy, Check } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -11,6 +11,7 @@ import { FEATURE_ACCESS } from "@/config/featureAccess";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import FeedbackPrompt from "@/components/FeedbackPrompt";
+import lumiAvatarUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
 import "../styles/sacred-visuals.css";
 
 const INITIAL_MESSAGE = {
@@ -219,8 +220,17 @@ export default function AIChatPage() {
           </Link>
           
           <div className="flex items-center gap-3 flex-1">
-            <div className="icon-container icon-lg icon-gradient-teal" aria-hidden="true">
-              <Bot className="w-6 h-6" />
+            <div className="icon-container icon-lg icon-gradient-teal flex items-center justify-center overflow-visible" aria-hidden="true">
+              <img
+                src={lumiAvatarUrl}
+                alt=""
+                width={36}
+                height={36}
+                className="lumi-breathe"
+                style={{ width: 36, height: 36, objectFit: "contain", display: "block" }}
+                draggable="false"
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              />
             </div>
             <div>
               <h1 className="font-semibold flex items-center gap-2" data-testid="text-title">
@@ -286,8 +296,16 @@ export default function AIChatPage() {
               data-testid={`message-${idx}`}
             >
               {message.role === "assistant" && (
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md" aria-hidden="true">
-                  <Bot className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md overflow-visible" aria-hidden="true">
+                  <img
+                    src={lumiAvatarUrl}
+                    alt=""
+                    width={32}
+                    height={32}
+                    style={{ width: 32, height: 32, objectFit: "contain", display: "block" }}
+                    draggable="false"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
                 </div>
               )}
               <div
@@ -321,8 +339,17 @@ export default function AIChatPage() {
 
           {chatMutation.isPending && (
             <div className="flex gap-3 justify-start animate-fade-in-up" role="status" aria-live="polite">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md" aria-hidden="true">
-                <Bot className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md overflow-visible" aria-hidden="true">
+                <img
+                  src={lumiAvatarUrl}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="lumi-breathe"
+                  style={{ width: 32, height: 32, objectFit: "contain", display: "block" }}
+                  draggable="false"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
               </div>
               <div className="chat-bubble chat-bubble-assistant">
                 <div className="flex items-center gap-3">

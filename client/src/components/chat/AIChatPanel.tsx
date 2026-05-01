@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
+import lumiAvatarUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
 
 type Message = {
   role: "user" | "assistant";
@@ -83,22 +84,51 @@ export default function AIChatPanel() {
           {messages.map((m, i) => (
             <div
               key={`${m.role}-${i}`}
-              className={`rounded-xl p-3 ${
-                m.role === "user"
-                  ? "bg-blue-50 text-blue-900"
-                  : "bg-gray-50 text-gray-900"
-              }`}
+              className={`flex gap-3 ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
-              <div className="mb-1 text-xs font-semibold uppercase tracking-wide">
-                {m.role === "user" ? "You" : "Companion"}
+              {m.role === "assistant" && (
+                <img
+                  src={lumiAvatarUrl}
+                  alt=""
+                  width={32}
+                  height={32}
+                  aria-hidden="true"
+                  draggable={false}
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  style={{ width: 32, height: 32, objectFit: "contain", flexShrink: 0, alignSelf: "flex-start" }}
+                />
+              )}
+              <div
+                className={`rounded-xl p-3 max-w-[85%] ${
+                  m.role === "user"
+                    ? "bg-blue-50 text-blue-900"
+                    : "bg-gray-50 text-gray-900"
+                }`}
+              >
+                <div className="mb-1 text-xs font-semibold uppercase tracking-wide">
+                  {m.role === "user" ? "You" : "Companion"}
+                </div>
+                <div className="whitespace-pre-wrap">{m.content}</div>
               </div>
-              <div className="whitespace-pre-wrap">{m.content}</div>
             </div>
           ))}
 
           {loading && (
-            <div className="rounded-xl bg-gray-50 p-3 text-sm text-gray-500">
-              Companion is thinking...
+            <div className="flex gap-3 justify-start">
+              <img
+                src={lumiAvatarUrl}
+                alt=""
+                width={32}
+                height={32}
+                aria-hidden="true"
+                draggable={false}
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                className="lumi-breathe"
+                style={{ width: 32, height: 32, objectFit: "contain", flexShrink: 0, alignSelf: "flex-start" }}
+              />
+              <div className="rounded-xl bg-gray-50 p-3 text-sm text-gray-500">
+                Companion is thinking...
+              </div>
             </div>
           )}
         </div>
