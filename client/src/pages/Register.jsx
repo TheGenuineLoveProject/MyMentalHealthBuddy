@@ -89,8 +89,8 @@ export default function Register() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <span
                 aria-hidden="true"
-                className="w-14 h-14 rounded-xl flex items-center justify-center overflow-hidden transition-all group-hover:scale-105"
-                style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 16px var(--glp-sage-deep-20)' }}
+                className="w-20 h-20 flex items-center justify-center transition-all group-hover:scale-105"
+                style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
                 data-testid="img-register-logo"
               >
                 <LumiMascot emotion="joy" size={56} />

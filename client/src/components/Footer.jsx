@@ -18,8 +18,8 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <span
               aria-hidden="true"
-              className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 10px rgba(38,79,79,0.12)' }}
+              className="w-10 h-10 flex items-center justify-center"
+              style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)', overflow: 'visible' }}
             >
               <LumiMascot emotion="neutral" size={40} />
             </span>

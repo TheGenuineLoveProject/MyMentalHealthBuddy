@@ -63,6 +63,31 @@ export default function AIChatPanel() {
 
   return (
     <div className="mx-auto max-w-3xl p-6">
+      <nav
+        aria-label="Chat navigation"
+        className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm"
+        data-testid="nav-chat-breadcrumbs"
+      >
+        <a
+          href="/dashboard"
+          className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 font-medium text-emerald-800 hover:bg-emerald-50 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+          data-testid="link-back-dashboard"
+        >
+          <span aria-hidden="true">←</span>
+          <span>Back to Dashboard</span>
+        </a>
+        <span className="text-gray-300" aria-hidden="true">·</span>
+        <a href="/" className="text-gray-600 hover:underline" data-testid="link-chat-home">Home</a>
+        <a href="/journal" className="text-gray-600 hover:underline" data-testid="link-chat-journal">Journal</a>
+        <a href="/mood" className="text-gray-600 hover:underline" data-testid="link-chat-mood">Mood</a>
+        <a
+          href="/crisis"
+          className="ml-auto inline-flex items-center gap-1 rounded-md bg-rose-50 px-2 py-1 font-semibold text-rose-700 hover:bg-rose-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+          data-testid="link-chat-crisis"
+        >
+          Crisis Support
+        </a>
+      </nav>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-2xl font-semibold">AI Companion</h1>
         <button

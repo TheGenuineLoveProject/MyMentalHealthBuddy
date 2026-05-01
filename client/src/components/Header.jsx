@@ -49,10 +49,9 @@ export default function Header() {
         >
           <span
             aria-hidden="true"
-            className="h-11 w-11 rounded-xl flex items-center justify-center"
+            className="h-11 w-11 flex items-center justify-center"
             style={{
-              background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
-              boxShadow: '0 2px 10px var(--glp-sage-deep-12)',
+              background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)',
               overflow: 'visible',
             }}
             data-testid="img-header-logo"

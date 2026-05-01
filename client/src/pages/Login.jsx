@@ -101,8 +101,8 @@ export default function Login() {
             <Link href="/" className="inline-flex flex-col items-center gap-3 group">
               <span
                 aria-hidden="true"
-                className="w-20 h-20 rounded-2xl flex items-center justify-center overflow-hidden transition-all group-hover:scale-105"
-                style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 4px 20px var(--glp-sage-deep-20)' }}
+                className="w-24 h-24 flex items-center justify-center transition-all group-hover:scale-105"
+                style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
                 data-testid="img-login-logo"
               >
                 <LumiMascot emotion="neutral" size={80} />

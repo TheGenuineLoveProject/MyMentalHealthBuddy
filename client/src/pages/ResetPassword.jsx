@@ -220,8 +220,8 @@ export default function ResetPassword() {
           >
             <span
               aria-hidden="true"
-              className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 14px var(--glp-sage-deep-20)' }}
+              className="w-16 h-16 flex items-center justify-center"
+              style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)', overflow: 'visible' }}
             >
               <LumiMascot emotion="comfort" size={48} />
             </span>

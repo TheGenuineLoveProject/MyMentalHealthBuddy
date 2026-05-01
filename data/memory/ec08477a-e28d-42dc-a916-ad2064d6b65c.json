@@ -1,0 +1,26 @@
+[
+  {
+    "role": "user",
+    "content": "I am not feeling present"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you're feeling disconnected. Taking a moment to focus on your breath can help ground you. Try inhaling deeply for four counts, holding for four, and exhaling for four."
+  },
+  {
+    "role": "user",
+    "content": "what is wrong with me"
+  },
+  {
+    "role": "assistant",
+    "content": "It seems like you're feeling unsettled. It's natural to question ourselves during tough times. Consider jotting down your thoughts to explore what’s on your mind."
+  },
+  {
+    "role": "user",
+    "content": "why are you not responding"
+  },
+  {
+    "role": "assistant",
+    "content": "It feels frustrating when expectations aren’t met. Sometimes, technology can be unpredictable. Take a moment to breathe deeply and check in with your feelings."
+  }
+]
