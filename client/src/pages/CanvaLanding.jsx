@@ -317,7 +317,7 @@ export default function CanvaLanding() {
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                   <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Sign In</button>
                 </Link>
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
                   <button className="btn-secondary w-full" data-testid="button-mobile-getstarted">Get Started Free</button>
                 </Link>
               </>
@@ -396,7 +396,7 @@ export default function CanvaLanding() {
                       Sign In
                     </button>
                   </Link>
-                  <Link href="/login">
+                  <Link href="/register">
                     <button
                       className="header-cta-gold inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full text-white"
                       data-testid="button-getstarted"
@@ -526,7 +526,7 @@ export default function CanvaLanding() {
                   </button>
                 </Link>
               ) : (
-                <Link href="/login">
+                <Link href="/register">
                   <button
                     className="btn-sacred-gold group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                     data-testid="button-hero-begin"
@@ -954,7 +954,7 @@ export default function CanvaLanding() {
                 </button>
               </Link>
             ) : (
-              <Link href="/login">
+              <Link href="/register">
                 <button
                   className="cta-btn-primary group inline-flex items-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all duration-300 hover:scale-[1.04] hover:shadow-2xl"
                   data-testid="button-final-cta"

@@ -304,7 +304,7 @@ export default function Pricing() {
                     </button>
                   ) : (
                     <a 
-                      href="/login"
+                      href="/register"
                       className="block w-full py-3.5 px-6 text-center btn-secondary-premium"
                       data-testid="button-get-started"
                     >
