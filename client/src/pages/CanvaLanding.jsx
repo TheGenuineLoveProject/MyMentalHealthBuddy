@@ -332,10 +332,9 @@ export default function CanvaLanding() {
             <Link href="/" className="brand-logo-link no-underline" style={{ textDecoration: 'none' }}>
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
                 <div
-                  className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[60px] lg:h-[60px] flex items-center justify-center transition-all duration-300 group-hover:scale-105 rounded-xl"
+                  className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[60px] lg:h-[60px] flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
                   style={{
-                    background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
-                    boxShadow: '0 2px 12px var(--glp-sage-deep-20)',
+                    background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)',
                     overflow: 'visible',
                   }}
                   data-testid="img-canva-header-logo"
@@ -385,8 +384,13 @@ export default function CanvaLanding() {
                 <>
                   <Link href="/login">
                     <button 
-                      className="hidden md:inline-flex font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:shadow-md"
-                      style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
+                      className="hidden md:inline-flex font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                      style={{
+                        color: 'var(--glp-sage-deep)',
+                        background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
+                        boxShadow: '0 1px 3px var(--glp-sage-deep-12), inset 0 1px 0 rgba(255,255,255,0.6)',
+                        border: '1px solid var(--glp-sage-deep-12)',
+                      }}
                       data-testid="button-signin"
                     >
                       Sign In
@@ -407,12 +411,17 @@ export default function CanvaLanding() {
 
               <button 
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-2.5 rounded-xl transition-colors hover:bg-[var(--glp-sage-10)]"
-                style={{ color: 'var(--glp-sage-deep)' }}
+                className="lg:hidden inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full transition-all duration-200 hover:scale-105 active:scale-95"
+                style={{
+                  color: 'var(--glp-sage-deep)',
+                  background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
+                  boxShadow: '0 1px 3px var(--glp-sage-deep-12), inset 0 1px 0 rgba(255,255,255,0.6)',
+                  border: '1px solid var(--glp-sage-15)',
+                }}
                 data-testid="button-open-mobile-menu"
                 aria-label="Open mobile menu"
               >
-                <Menu className="w-6 h-6 sm:w-7 sm:h-7" />
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
           </div>
@@ -454,10 +463,9 @@ export default function CanvaLanding() {
               data-testid="container-hero-mascot"
             >
               <div
-                className="relative flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64 rounded-3xl"
+                className="relative flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64"
                 style={{
-                  background: 'radial-gradient(circle at 50% 45%, var(--glp-paper) 0%, var(--glp-sage-10) 70%, transparent 100%)',
-                  boxShadow: '0 16px 48px var(--glp-sage-deep-20)',
+                  background: 'radial-gradient(circle at 50% 50%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 70%)',
                   overflow: 'visible',
                 }}
               >
@@ -1016,10 +1024,9 @@ export default function CanvaLanding() {
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
             <div className="flex items-center gap-3">
               <div
-                className="relative w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                className="relative w-9 h-9 flex items-center justify-center shrink-0"
                 style={{
-                  background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)',
-                  boxShadow: '0 1px 4px var(--glp-sage-deep-12)',
+                  background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)',
                   overflow: 'visible',
                 }}
                 aria-hidden="true"
