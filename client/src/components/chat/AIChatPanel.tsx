@@ -38,12 +38,16 @@ export default function AIChatPanel() {
     try {
       const data = await sendAIMessage(text);
 
+      const reply =
+        data?.response?.reply ||
+        data?.reply ||
+        data?.message ||
+        data?.error ||
+        "I'm here, but I couldn't form a reply just now. Please try again, or visit /crisis if you need immediate support.";
+
       setMessages((prev) => [
         ...prev,
-        {
-          role: "assistant",
-          content: data?.reply || data?.error || "No response returned."
-        }
+        { role: "assistant", content: reply }
       ]);
     } catch (err: any) {
       setError(err?.message || "Failed to send message.");

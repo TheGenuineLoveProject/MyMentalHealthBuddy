@@ -143,9 +143,10 @@ export default function FeedbackWidget() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => { setIsOpen(false); resetForm(); }}
+            onClick={handleHideForWeek}
             className="min-h-[44px] min-w-[44px] p-2 rounded-lg"
-            aria-label="Close feedback"
+            aria-label="Close feedback (hidden for 7 days)"
+            title="Close — hides feedback for 7 days"
             data-testid="button-close-feedback"
           >
             <X className="w-4 h-4" />

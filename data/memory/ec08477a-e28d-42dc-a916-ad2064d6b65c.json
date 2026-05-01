@@ -30,5 +30,13 @@
   {
     "role": "assistant",
     "content": "It’s understandable to feel anxious at times like this. Let’s take a moment to practice some box breathing together. Inhale for 4 counts… 1, 2, 3, 4. Hold for 4… 1, 2, 3, 4. Exhale for 4… 1, 2, 3, 4. Hold for 4… 1, 2, 3, 4. \n\nTake what serves you. You know yourself best."
+  },
+  {
+    "role": "user",
+    "content": "I feel anxious right now and need to calm down"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you're in a tough moment. Let’s try a grounding technique. Look around you and identify five things you can see, four things you can touch, three things you can hear, two things you can smell, and one thing you can taste. This can help bring you back to the present."
   }
 ]

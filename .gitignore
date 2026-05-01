@@ -57,3 +57,12 @@ attached_assets/
 # Secrets
 publickey.asc
 gpg-batch
+
+# Runtime data artifacts (additive guard: prevents NEW runtime memory/usage
+# files from being tracked; does not retroactively untrack existing files).
+/data/memory/
+/data/memory-profile/
+/data/memory-summary/
+/data/usage/
+/data/usage-*.json
+*.jsonl
