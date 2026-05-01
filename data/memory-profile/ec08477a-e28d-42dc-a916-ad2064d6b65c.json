@@ -1,19 +1,33 @@
 {
   "emotional_patterns": [
     "feeling disconnected",
-    "questioning self"
+    "questioning self",
+    "feeling unsettled",
+    "feeling anxious"
   ],
-  "triggers": [],
+  "triggers": [
+    "technology issues",
+    "unmet expectations"
+  ],
   "relationship_themes": [],
   "coping_strategies": [
     "deep breathing",
-    "jotting down thoughts"
+    "jotting down thoughts",
+    "box breathing"
   ],
-  "support_needs": [],
-  "risk_flags": [],
+  "support_needs": [
+    "calming techniques",
+    "emotional validation"
+  ],
+  "risk_flags": [
+    "reports feeling anxious",
+    "reports feeling disconnected"
+  ],
   "core_beliefs": [
     "I'm not enough"
   ],
-  "behavior_loops": [],
+  "behavior_loops": [
+    "when anxious → seeks calming techniques"
+  ],
   "values": []
 }

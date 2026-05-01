@@ -22,5 +22,13 @@
   {
     "role": "assistant",
     "content": "It feels frustrating when expectations aren’t met. Sometimes, technology can be unpredictable. Take a moment to breathe deeply and check in with your feelings."
+  },
+  {
+    "role": "user",
+    "content": "I feel anxious right now and need to calm down"
+  },
+  {
+    "role": "assistant",
+    "content": "It’s understandable to feel anxious at times like this. Let’s take a moment to practice some box breathing together. Inhale for 4 counts… 1, 2, 3, 4. Hold for 4… 1, 2, 3, 4. Exhale for 4… 1, 2, 3, 4. Hold for 4… 1, 2, 3, 4. \n\nTake what serves you. You know yourself best."
   }
 ]
