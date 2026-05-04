@@ -30,3 +30,9 @@ id = "gxOVOEaOJRzHHOdMhL48b"
 uri = "file://.local/platform-analysis.md"
 type = "text"
 title = "MMHB A-to-Z 360° Platform Analysis"
+
+[[outputs]]
+id = "tvL7dvq8As6PpbZ4RKpLL"
+uri = "file://.local/platform-analysis-full.md"
+type = "text"
+title = "MMHB A-to-Z 360° Platform Analysis"
