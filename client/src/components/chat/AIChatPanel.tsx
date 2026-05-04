@@ -50,7 +50,9 @@ export default function AIChatPanel() {
         { role: "assistant", content: reply }
       ]);
     } catch (err: any) {
-      setError(err?.message || "Failed to send message.");
+      setError(
+        "I'm having trouble connecting right now. Please try again in a moment. For immediate support, call 988 or visit /crisis."
+      );
     } finally {
       setLoading(false);
     }

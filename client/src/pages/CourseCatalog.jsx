@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { BookOpen, Clock, Star, Filter, Search, Lock, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { CardWrapper, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -235,52 +234,87 @@ export default function CourseCatalog() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredCourses.map(course => (
-            <CardWrapper key={course.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="pb-3">
+            <div
+              key={course.id}
+              className="hover:shadow-lg transition-shadow"
+              style={{
+                background: '#ffffff',
+                borderRadius: '16px',
+                border: '1px solid #c8d9c8',
+                overflow: 'hidden',
+              }}
+              data-testid={`card-course-${course.id}`}
+            >
+              <div className="flex flex-col space-y-1.5 p-6 pb-3">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1">
-                    <CardTitle className="text-lg mb-1">{course.title}</CardTitle>
-                    <CardDescription>{course.description}</CardDescription>
+                    <h3
+                      className="text-lg font-semibold leading-tight mb-1"
+                      style={{ color: '#1a1917' }}
+                    >
+                      {course.title}
+                    </h3>
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{ color: '#4a4540' }}
+                    >
+                      {course.description}
+                    </p>
                   </div>
                   {!course.isFree && (
-                    <Lock className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                    <Lock className="w-4 h-4 flex-shrink-0" style={{ color: '#8a8278' }} />
                   )}
                 </div>
-              </CardHeader>
-              <CardContent>
+              </div>
+              <div className="p-6 pt-0">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-2 py-1 rounded-full text-xs bg-primary/10 text-primary">
+                  <span
+                    className="px-2 py-1 rounded-full text-xs font-medium"
+                    style={{ background: '#e8f0e8', color: '#2d5a3d' }}
+                  >
                     {course.level}
                   </span>
-                  <span className="px-2 py-1 rounded-full text-xs bg-muted text-muted-foreground">
+                  <span
+                    className="px-2 py-1 rounded-full text-xs"
+                    style={{ background: '#f4f2ee', color: '#5a5550' }}
+                  >
                     <Clock className="w-3 h-3 inline mr-1" />
                     {course.duration}
                   </span>
-                  <span className="px-2 py-1 rounded-full text-xs bg-muted text-muted-foreground">
+                  <span
+                    className="px-2 py-1 rounded-full text-xs"
+                    style={{ background: '#f4f2ee', color: '#5a5550' }}
+                  >
                     {course.lessons} lessons
                   </span>
                   {course.isFree && (
-                    <span className="px-2 py-1 rounded-full text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
+                    <span
+                      className="px-2 py-1 rounded-full text-xs font-medium"
+                      style={{ background: '#dcfce7', color: '#166534' }}
+                    >
                       Free
                     </span>
                   )}
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1 text-sm" style={{ color: '#5a5550' }}>
                     <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                     {course.rating}
                   </div>
                   <div className="flex gap-2">
                     {isEnrolled(course.id) ? (
-                      <span className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400">
+                      <span className="flex items-center gap-1 text-sm" style={{ color: '#166534' }}>
                         <CheckCircle className="w-4 h-4" />
                         Enrolled
                       </span>
                     ) : (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="min-h-[36px] px-3 rounded-lg"
+                      <button
+                        className="min-h-[36px] px-4 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                        style={{
+                          background: '#faf9f6',
+                          color: '#1a1917',
+                          border: '1px solid #c8d9c8',
+                        }}
                         onClick={() => handleEnroll(course.id, course.title)}
                         disabled={enrollMutation.isPending}
                         data-testid={`button-enroll-${course.id}`}
@@ -290,18 +324,26 @@ export default function CourseCatalog() {
                         ) : (
                           "Enroll"
                         )}
-                      </Button>
+                      </button>
                     )}
                     <Link href={`/courses/${course.id}`}>
-                      <Button size="sm" className="min-h-[36px] px-3 rounded-lg" data-testid={`button-view-${course.id}`}>
+                      <span
+                        className="inline-flex items-center min-h-[36px] px-4 py-1.5 rounded-lg text-sm font-medium cursor-pointer transition-colors"
+                        style={{
+                          background: '#2d5a3d',
+                          color: '#ffffff',
+                          border: 'none',
+                        }}
+                        data-testid={`button-view-${course.id}`}
+                      >
                         View Course
                         <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
+                      </span>
                     </Link>
                   </div>
                 </div>
-              </CardContent>
-            </CardWrapper>
+              </div>
+            </div>
           ))}
         </div>
 
