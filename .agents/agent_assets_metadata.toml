@@ -35,4 +35,10 @@ title = "MMHB A-to-Z 360° Platform Analysis"
 id = "tvL7dvq8As6PpbZ4RKpLL"
 uri = "file://.local/platform-analysis-full.md"
 type = "text"
-title = "MMHB A-to-Z 360° Platform Analysis"
+title = "MMHB A-to-Z 360° Platform Analysis (Companion)"
+
+[[outputs]]
+id = "1wvqPX8pyDNzpSECT65Lu"
+uri = "file://.local/platform-deep-dive-360.md"
+type = "text"
+title = "MMHB Deep Dive 360° — Content, Social, Marketing, Healing, Complete Inventory"
