@@ -1,7 +1,8 @@
 import { Link } from "wouter";
-import { Heart, Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle } from "lucide-react";
+import { Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle, Heart } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { BRAND } from "@shared/brand";
+import lumiIconUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
 
 const MODES = ["default", "low-stim", "reading"];
 
@@ -81,13 +82,19 @@ function Header() {
           <div 
             className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105"
             style={{ 
-              background: "var(--glp-logo-gradient)",
-              boxShadow: "var(--glp-logo-shadow)",
+              background: "radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)",
+              overflow: "visible",
             }}
           >
-            <Heart 
-              className="w-7 h-7 md:w-8 md:h-8 transition-transform text-[var(--glp-sage)]" 
-              fill="currentColor"
+            <img
+              src={lumiIconUrl}
+              alt="Lumi"
+              width={44}
+              height={44}
+              draggable={false}
+              style={{ width: 44, height: 44, objectFit: "contain" }}
+              data-testid="img-header-lumi"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">

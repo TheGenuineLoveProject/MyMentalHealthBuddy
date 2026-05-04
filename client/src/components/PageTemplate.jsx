@@ -14,6 +14,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import AOS from 'aos';
 import { gsap } from 'gsap';
+import lumiIconUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
 import { 
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,
   BookOpen, MessageCircle, Users, Zap, Target, Compass,
@@ -96,7 +97,7 @@ function HeroSection({ hero, readingLevel = 'intermediate' }) {
           data-aos="fade-down"
           data-aos-delay="100"
         >
-          <Heart className={styles.logoBadgeIcon} />
+          <img src={lumiIconUrl} alt="Lumi" width={28} height={28} style={{ width: 28, height: 28, objectFit: 'contain' }} draggable={false} data-testid="img-logo-badge-lumi" />
           <span className={styles.logoBadgeText}>Genuine Love</span>
         </div>
 
@@ -1003,8 +1004,8 @@ export default function PageTemplate({ config, children, routeKey }) {
           aria-label="Main navigation"
         >
           <Link href="/" className={styles.navLogo} data-testid="link-nav-logo">
-            <div className={styles.navLogoIcon}>
-              <Heart />
+            <div className={styles.navLogoIcon} style={{ overflow: 'visible', background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10, rgba(47,84,67,0.1)) 0%, transparent 72%)' }}>
+              <img src={lumiIconUrl} alt="Lumi" width={32} height={32} style={{ width: 32, height: 32, objectFit: 'contain' }} draggable={false} data-testid="img-nav-logo-lumi" />
             </div>
             <span className={styles.navLogoText}>
               Genuine Love
