@@ -24,3 +24,9 @@ id = "oxObgl3qXY2vBn4QPMeF4"
 uri = "file://screenshots/home-after-fix.jpg"
 type = "image"
 title = "Home page / — Lumi visible (843×956)"
+
+[[outputs]]
+id = "gxOVOEaOJRzHHOdMhL48b"
+uri = "file://.local/platform-analysis.md"
+type = "text"
+title = "MMHB A-to-Z 360° Platform Analysis"
