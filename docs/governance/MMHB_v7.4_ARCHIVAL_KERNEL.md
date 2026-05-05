@@ -149,6 +149,7 @@ Track all prompts to prevent duplication:
 | `mmhb-v7.4-archival-kernel` | Full reference (this doc) | Active |
 | `mmhb-v4.1-webpage-gap-fix` | Learning Library + nav fixes | Shipped |
 | `mmhb-bug-fix-3` | Search bar / CTA / filter triad | Shipped |
+| `inc-001-learning-library-loop` | First §9 Circuit Breaker engagement (Learning Library re-patch loop ×5) | Closed — see `docs/governance/incidents/INC-001_learning_library_loop.md` |
 
 **Rule:** Before creating a new prompt, check registry. If equivalent exists, reuse or extend — do not duplicate.
 
