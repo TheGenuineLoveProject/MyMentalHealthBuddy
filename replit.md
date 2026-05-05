@@ -18,6 +18,17 @@ MyMentalHealthBuddy (MMHB) is an AI-powered mental wellness platform by The Genu
 - Replit-safe execution only
 - If unsure, ask ONE clarifying question. Never guess.
 
+## Governance Kernel — MMHB v7.4 (Locked 2026-05-06)
+All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at `docs/governance/MMHB_v7.4_ARCHIVAL_KERNEL.md`. Key contracts:
+- **Primary Law:** Business logic never appears in healing flows; healing responses never contain pricing, conversion, or platform debugging.
+- **Domain routing:** Every request classified as HEALING / BUSINESS / PLATFORM before solutioning. Cross-domain contamination is a critical failure.
+- **Engine model:** Smallest valid engine wins (CSS fix > React patch > new component > new page > new service).
+- **BHCE:** Crisis escalation overrides all rules; explicit self-harm signal → 988 + Crisis Text 741741 + 911 + `/crisis`. Asymmetric risk: err toward resource provision.
+- **Execution discipline:** Diagnose with evidence → smallest patch → screenshot verify → build check → next blocker. Never skip verify, never multi-blocker, never proceed past a failed gate.
+- **Replit mode:** Shell for mechanical work, AI for logic only, adapter mode (preserve structure, thin wrappers, zero breaking changes).
+- **Output contract:** What changed (files+lines) / Before / After / Build status / Next step. No speculation, only verified fixes.
+- **Circuit breaker:** Same bug recurring 3× after fix → architectural review, not another patch.
+
 ## System Architecture
 
 ### UI/UX Decisions
