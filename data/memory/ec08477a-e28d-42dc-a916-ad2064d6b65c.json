@@ -1,42 +1,42 @@
 [
   {
     "role": "user",
-    "content": "I am not feeling present"
-  },
-  {
-    "role": "assistant",
-    "content": "It sounds like you're feeling disconnected. Taking a moment to focus on your breath can help ground you. Try inhaling deeply for four counts, holding for four, and exhaling for four."
-  },
-  {
-    "role": "user",
-    "content": "what is wrong with me"
-  },
-  {
-    "role": "assistant",
-    "content": "It seems like you're feeling unsettled. It's natural to question ourselves during tough times. Consider jotting down your thoughts to explore what’s on your mind."
-  },
-  {
-    "role": "user",
-    "content": "why are you not responding"
-  },
-  {
-    "role": "assistant",
-    "content": "It feels frustrating when expectations aren’t met. Sometimes, technology can be unpredictable. Take a moment to breathe deeply and check in with your feelings."
-  },
-  {
-    "role": "user",
-    "content": "I feel anxious right now and need to calm down"
-  },
-  {
-    "role": "assistant",
-    "content": "It’s understandable to feel anxious at times like this. Let’s take a moment to practice some box breathing together. Inhale for 4 counts… 1, 2, 3, 4. Hold for 4… 1, 2, 3, 4. Exhale for 4… 1, 2, 3, 4. Hold for 4… 1, 2, 3, 4. \n\nTake what serves you. You know yourself best."
-  },
-  {
-    "role": "user",
     "content": "I feel anxious right now and need to calm down"
   },
   {
     "role": "assistant",
     "content": "It sounds like you're in a tough moment. Let’s try a grounding technique. Look around you and identify five things you can see, four things you can touch, three things you can hear, two things you can smell, and one thing you can taste. This can help bring you back to the present."
+  },
+  {
+    "role": "user",
+    "content": "I feel anxious right now and need to calm down"
+  },
+  {
+    "role": "assistant",
+    "content": "I hear that you're feeling anxious. Let's try a quick deep breathing exercise. Inhale deeply through your nose for a count of four, hold for four, and then exhale slowly through your mouth for four. Repeat this a few times to help ease your mind."
+  },
+  {
+    "role": "user",
+    "content": "I'm stuck in negative thoughts and need help thinking clearly"
+  },
+  {
+    "role": "assistant",
+    "content": "It’s tough to feel stuck in those thoughts. Let’s try to break the cycle by jotting down what you’re feeling. Write down the negative thoughts and then challenge them by asking, “Is this thought true?” or “What evidence do I have for this?” This can help create some clarity."
+  },
+  {
+    "role": "user",
+    "content": "I feel anxious right now and need to calm down"
+  },
+  {
+    "role": "assistant",
+    "content": "It seems like the anxiety is quite strong for you. Let's focus on your breath again. Try box breathing: inhale for a count of four, hold for four, exhale for four, and then pause for four before inhaling again. Repeat this for a few cycles to help center yourself."
+  },
+  {
+    "role": "user",
+    "content": "I feel overwhelmed and want to understand what I'm feeling"
+  },
+  {
+    "role": "assistant",
+    "content": "Feeling overwhelmed can be really challenging. Let’s take a moment to identify what’s contributing to that feeling. Can you name one specific thought or situation that feels most overwhelming right now? This can help us understand and process it better."
   }
 ]
