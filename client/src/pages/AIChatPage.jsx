@@ -129,15 +129,28 @@ export default function AIChatPage() {
   const chatMutation = useMutation({
     mutationFn: (message) => apiRequest("POST", "/api/ai/chat", { message }),
     onSuccess: (data) => {
-      if (data?.reply) {
+      // Server canonical shape is { response: { reply, isCrisis, resources } }.
+      // Tolerate legacy/alternate shapes so server drift never surfaces a blank
+      // assistant turn to the user. Mirrors AIChatPanel.tsx fallback chain.
+      const reply =
+        data?.response?.reply ||
+        data?.reply ||
+        data?.message ||
+        data?.error ||
+        "";
+      if (reply) {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: data.reply },
+          { role: "assistant", content: reply },
         ]);
       } else {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: "I'm having trouble responding right now. Please try again in a moment." },
+          {
+            role: "assistant",
+            content:
+              "I'm having trouble responding right now. If you need immediate support, please call or text 988 (Suicide & Crisis Lifeline) or visit /crisis. Otherwise, please try again in a moment.",
+          },
         ]);
       }
       if (!xpAwarded) {
@@ -149,7 +162,11 @@ export default function AIChatPage() {
       setError(err.message || "Failed to send message");
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "I'm sorry, I couldn't process your message. Please try again." },
+        {
+          role: "assistant",
+          content:
+            "I'm sorry, I couldn't process your message. Please try again in a moment. For immediate support, call or text 988 (Suicide & Crisis Lifeline) or visit /crisis.",
+        },
       ]);
     },
   });
