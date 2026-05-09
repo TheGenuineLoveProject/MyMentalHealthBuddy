@@ -60,6 +60,22 @@ const app = express();
 // Replit autoscale; do NOT set to `true` (would trust spoofed headers).
 app.set("trust proxy", 1);
 
+// ===== FAST-PATH HEALTH CHECK =====
+// Mounted BEFORE any heavy middleware (CORS, helmet, body parser, session,
+// rate-limit, DB) so the deployment platform's port-open / liveness probe
+// receives a 200 within microseconds even if the rest of the boot chain is
+// still warming up. Belt-and-suspenders for cold-start health-check timeouts
+// on Autoscale; no-op overhead on Reserved VM. Do NOT add logic here — it
+// must stay synchronous and dependency-free to keep its purpose intact.
+app.get("/healthz", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).type("text/plain").send("ok");
+});
+app.head("/healthz", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).end();
+});
+
 // ===== MIDDLEWARE =====
 app.use(cors({
   origin: (origin, cb) => {
