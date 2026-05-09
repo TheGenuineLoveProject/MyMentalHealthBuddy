@@ -5,7 +5,7 @@ modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 [deployment]
 deploymentTarget = "vm"
 build = ["sh", "-c", "npm ci --no-audit --no-fund && npm run build"]
-run = ["sh", "-c", "NODE_ENV=production node --import ./server/observability/preload.mjs server/app.mjs"]
+run = ["sh", "-c", "if [ ! -d node_modules/express ]; then echo '[boot] node_modules missing — running npm ci'; npm ci --no-audit --no-fund; fi && NODE_ENV=production node --import ./server/observability/preload.mjs server/app.mjs"]
 
 [[ports]]
 localPort = 5000
