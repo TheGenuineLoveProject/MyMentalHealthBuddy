@@ -894,6 +894,28 @@ export default function Start() {
           })}
         </section>
 
+        {/* BROWSE FREE TOOLS — full-width amber CTA, additive to paywall */}
+        <section
+          className="mb-8"
+          aria-label="Browse all free wellness tools"
+          data-testid="section-browse-free-tools"
+        >
+          <Link
+            href="/tools"
+            onClick={() => track("browse_free_tools_clicked", { surface: "start" })}
+            className="lumi-btn lumi-btn-primary lumi-btn--lg"
+            style={{ width: "100%", whiteSpace: "normal", textAlign: "center" }}
+            data-testid="link-browse-free-tools"
+          >
+            <Sparkles className="w-5 h-5" aria-hidden="true" />
+            <span>Browse all free tools</span>
+            <ArrowRight className="w-5 h-5" aria-hidden="true" />
+          </Link>
+          <p className="mt-2 text-center text-xs text-slate-600 dark:text-slate-400">
+            Free, no signup needed. 8 evidence-informed exercises.
+          </p>
+        </section>
+
         {/* RESULT PANEL */}
         {error && (
           <div
