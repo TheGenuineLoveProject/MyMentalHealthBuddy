@@ -246,3 +246,6 @@
 {"type":"buddy_grounding_visible","guestId":"guest_1778007285054_785boppv","metadata":{"state":"overwhelmed"},"ts":1778007330644}
 {"type":"tool_completed","guestId":"guest_1778007285054_785boppv","metadata":{"toolId":"pattern_interrupt","toolType":"pattern_tool","stepCount":4},"ts":1778007344396}
 {"type":"buddy_panel_viewed","guestId":"guest_1778007285054_785boppv","metadata":{"surface":"start","state":"encouraged"},"ts":1778007344401}
+{"type":"buddy_panel_viewed","guestId":"guest_1778007285054_785boppv","metadata":{"surface":"start","state":"calm"},"ts":1778009162971}
+{"type":"buddy_accessibility_ready","guestId":"guest_1778007285054_785boppv","metadata":{},"ts":1778009162973}
+{"type":"start_page_click","guestId":"guest_1778007285054_785boppv","metadata":{},"ts":1778009162973}
