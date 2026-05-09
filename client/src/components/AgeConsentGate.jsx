@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
-import { Shield, Heart, AlertCircle, ExternalLink } from 'lucide-react';
+import { Shield, Heart, AlertCircle, ExternalLink, ArrowLeft } from 'lucide-react';
 
 const CONSENT_STORAGE_KEY = 'glp_age_confirmed';
 
@@ -111,6 +111,15 @@ export default function AgeConsentGate({ children, onConsent }) {
           >
             I Confirm & Continue
           </button>
+
+          <Link
+            href="/dashboard"
+            className="w-full py-3 px-6 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/40 text-emerald-800 dark:text-emerald-200 font-medium rounded-lg transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 border border-emerald-200 dark:border-emerald-800"
+            data-testid="link-back-to-dashboard"
+          >
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+            Back to Dashboard
+          </Link>
 
           <Link
             href="/"
