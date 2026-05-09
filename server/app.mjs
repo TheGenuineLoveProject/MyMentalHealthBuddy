@@ -641,6 +641,14 @@ app.get("/health", (_req, res) => {
 });
 
 app.get("/ready", (_req, res) => {
+  // During graceful shutdown, return 503 so the load balancer stops sending
+  // new traffic to this instance immediately. Process is still alive (so
+  // /healthz / liveness keeps returning 200) but is no longer ready.
+  if (typeof globalThis.__mmhbShuttingDown === "function" && globalThis.__mmhbShuttingDown()) {
+    res.set("Cache-Control", "no-store");
+    return res.status(503).json({ ok: false, draining: true });
+  }
+  res.set("Cache-Control", "no-store");
   res.status(200).json({ ok: true });
 });
 
@@ -722,7 +730,7 @@ try {
   console.warn("[boot] protocol seeding skipped:", err?.message || err);
 }
 
-app.listen(PORT, "0.0.0.0", () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
 
   // Opt-in background self-heal scheduler.  Off by default.  Enable with
@@ -747,3 +755,73 @@ app.listen(PORT, "0.0.0.0", () => {
       console.warn("[biometrics-scheduler] failed to load:", err?.message || err);
     });
 });
+
+// ===== TIMEOUT HARDENING =====
+// Replit's load balancer holds idle TCP connections for ~60s. Node's default
+// keep-alive is 5s, so the LB can hand a request to a connection the server
+// already closed → the user sees a 502/504. Setting keepAliveTimeout > LB
+// idle timeout fixes this. headersTimeout MUST be greater than
+// keepAliveTimeout (Node 18+ enforces this). Numbers from the Node docs +
+// AWS ALB / GCP LB hardening guides.
+server.keepAliveTimeout = 65_000;
+server.headersTimeout = 66_000;
+// Hard cap per request so a slow client can't pin a worker forever. Generous
+// enough for legitimate AI streaming responses (rare on this surface) but
+// tight enough to recycle stuck sockets.
+server.requestTimeout = 120_000;
+
+// ===== GRACEFUL SHUTDOWN =====
+// Reserved VM rolling deploys send SIGTERM before killing the container. Drain
+// in-flight requests so users mid-chat don't see a connection reset. We also
+// catch SIGINT for clean local Ctrl-C. The `shuttingDown` flag flips /ready to
+// 503 so the load balancer stops sending new traffic before we close sockets.
+let shuttingDown = false;
+globalThis.__mmhbShuttingDown = () => shuttingDown;
+
+function gracefulShutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log(`[shutdown] ${signal} received — failing /ready, draining connections (15s grace)`);
+
+  // Give the LB a moment to observe the failing /ready probe and stop routing
+  // new requests before we close the listener.
+  setTimeout(() => {
+    // Stop accepting new connections + finish in-flight requests.
+    server.close((err) => {
+      // Clear the hard-kill watchdog as soon as drain succeeds so we exit
+      // deterministically without a stray pending timer.
+      if (forceKillTimer) clearTimeout(forceKillTimer);
+      if (err) {
+        console.error("[shutdown] server.close error:", err);
+        return process.exit(1);
+      }
+      console.log("[shutdown] all connections drained — exiting cleanly");
+      process.exit(0);
+    });
+
+    // Node's HTTP server.close() waits indefinitely for idle keep-alive
+    // sockets. Since we just bumped keepAliveTimeout to 65s, those idle
+    // sockets would otherwise dominate our drain window. Release them
+    // immediately — they are by definition not serving any request.
+    if (typeof server.closeIdleConnections === "function") {
+      server.closeIdleConnections();
+    }
+
+    // Hard kill if drain exceeds 15s AFTER server.close() begins (so the
+    // configured grace window is what we advertise, not 15s minus the LB
+    // delay). Force-close any sockets still serving requests before exit so
+    // we don't leak fds. unref() so this timer never blocks a fast shutdown.
+    forceKillTimer = setTimeout(() => {
+      console.warn("[shutdown] drain exceeded 15s — force-closing remaining sockets");
+      if (typeof server.closeAllConnections === "function") {
+        server.closeAllConnections();
+      }
+      process.exit(1);
+    }, 15_000);
+    forceKillTimer.unref();
+  }, 1_500);
+}
+let forceKillTimer = null;
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
