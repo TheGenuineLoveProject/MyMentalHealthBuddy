@@ -1,9 +1,27 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "wouter";
+import DOMPurify from "dompurify";
 import { BookOpen, ArrowRight, Sparkles, Heart, PenTool, Clock, User, ChevronRight, Tag } from "lucide-react";
 import SEO from "@/components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+
+// Defense-in-depth: BLOG_ARTICLES.content is currently dev-authored static
+// HTML, but we sanitize at render time so any future CMS / API integration
+// (or accidental editorial paste of script-bearing HTML) cannot become an
+// XSS vector. ALLOWED_TAGS/ATTR list is intentionally narrow: the body of a
+// trauma-informed wellness article never needs <script>, <iframe>, <object>,
+// inline event handlers, or javascript: URLs.
+const SANITIZE_CONFIG = {
+  ALLOWED_TAGS: [
+    "p", "br", "strong", "em", "u", "s", "blockquote",
+    "ul", "ol", "li",
+    "h1", "h2", "h3", "h4", "h5", "h6",
+    "a", "code", "pre", "hr", "span", "div",
+  ],
+  ALLOWED_ATTR: ["href", "title", "target", "rel", "class"],
+  ALLOW_DATA_ATTR: false,
+};
 
 const BLOG_ARTICLES = [
   {
@@ -321,6 +339,10 @@ export default function Blog() {
   const [selectedArticle, setSelectedArticle] = useState(null);
 
   const article = BLOG_ARTICLES.find((a) => a.id === selectedArticle);
+  const safeArticleHtml = useMemo(
+    () => (article ? DOMPurify.sanitize(article.content, SANITIZE_CONFIG) : ""),
+    [article],
+  );
 
   if (article) {
     return (
@@ -390,7 +412,7 @@ export default function Blog() {
 
               <div 
                 className="article-content text-[var(--ink)] leading-relaxed space-y-4"
-                dangerouslySetInnerHTML={{ __html: article.content }}
+                dangerouslySetInnerHTML={{ __html: safeArticleHtml }}
                 data-testid="content-article-body"
               />
 
