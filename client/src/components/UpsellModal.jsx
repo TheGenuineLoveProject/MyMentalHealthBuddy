@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'wouter';
 
 const BENEFITS = [
@@ -12,14 +12,29 @@ const BENEFITS = [
 export default function UpsellModal({ isOpen, onClose, toolName }) {
   const [visible, setVisible] = useState(false);
   const [, navigate] = useLocation();
+  const dismissBtnRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => setVisible(true), 50);
+      // Move focus to the safest dismiss action so keyboard users can
+      // exit immediately without navigating to the upgrade CTA.
+      setTimeout(() => {
+        if (dismissBtnRef.current) dismissBtnRef.current.focus();
+      }, 60);
     } else {
       setVisible(false);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKey = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -32,6 +47,15 @@ export default function UpsellModal({ isOpen, onClose, toolName }) {
         WebkitBackdropFilter: 'blur(8px)'
       }}
       onClick={onClose}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClose();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label="Close upsell dialog"
     >
       <div
         onClick={e => e.stopPropagation()}
@@ -43,6 +67,9 @@ export default function UpsellModal({ isOpen, onClose, toolName }) {
           opacity: visible ? 1 : 0,
           transition: 'all 0.3s ease'
         }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="upsell-title"
       >
         {/* Header */}
         <div className="text-center mb-6">
@@ -54,7 +81,7 @@ export default function UpsellModal({ isOpen, onClose, toolName }) {
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
           </div>
-          <h2 className="font-serif text-2xl font-medium text-[#3a3a3a] mb-2">
+          <h2 id="upsell-title" className="font-serif text-2xl font-medium text-[#3a3a3a] mb-2">
             Unlock your full potential
           </h2>
           <p className="text-[#6B7B6E] text-sm">
@@ -93,6 +120,7 @@ export default function UpsellModal({ isOpen, onClose, toolName }) {
           Upgrade to Pro
         </button>
         <button
+          ref={dismissBtnRef}
           onClick={onClose}
           className="w-full py-3 rounded-lg text-sm text-[#6B7B6E] hover:text-[#3a3a3a] transition-colors"
         >
