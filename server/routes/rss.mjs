@@ -5,9 +5,7 @@ import { eq, desc } from 'drizzle-orm';
 import { logger } from '../utils/logger.mjs';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const router = Router();
 
 function escapeXml(str) {
@@ -41,7 +39,10 @@ router.get('/', async (req, res) => {
         tags: Array.isArray(p.tags) ? p.tags : (typeof p.tags === 'string' && p.tags ? p.tags.split(',').map(t => t.trim()).filter(Boolean) : []),
       }));
     } catch {
-      const indexPath = path.join(__dirname, '../../content/blog/index.json');
+      // Resolve from process.cwd() (workspace root) so this works in both
+      // dev mode (node server/app.mjs) and the bundled production build
+      // (node dist/server.mjs), both of which run from the workspace root.
+      const indexPath = path.join(process.cwd(), 'content/blog/index.json');
       if (fs.existsSync(indexPath)) {
         const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
         items = index.map(p => ({

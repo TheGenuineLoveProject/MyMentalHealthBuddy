@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { z } from 'zod';
 import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
 import { logger } from '../utils/logger.mjs';
@@ -9,8 +8,10 @@ import db from '../db/client.mjs';
 import { analyticsEvents, newsletterSubscribers, leads } from '../../shared/schema.mjs';
 import { desc, sql, count, gte, eq } from 'drizzle-orm';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '../..');
+// ROOT resolves from process.cwd() so it survives esbuild bundling
+// (where module-local __dirname is rebased to dist/). Production run
+// command stays at workspace root so cwd === workspace root.
+const ROOT = process.cwd();
 
 const router = Router();
 
