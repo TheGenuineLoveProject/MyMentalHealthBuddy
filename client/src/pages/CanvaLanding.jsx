@@ -729,17 +729,17 @@ export default function CanvaLanding() {
                 teal: 'linear-gradient(90deg, var(--glp-teal-400), var(--glp-sage-deep))'
               };
               return (
-                <div key={index} className="feature-card-elite stagger-child group" style={{ '--card-accent': accentGradients[feature.accent] || accentGradients.sage }}>
-                  <div className="mb-4 md:mb-5 feature-icon-wrap flex items-center justify-center rounded-xl" style={{ background: accent.bg, boxShadow: `0 4px 16px ${accent.shadow}`, width: '3rem', height: '3rem' }}>
+                <div key={index} className="feature-card-elite stagger-child group flex flex-col items-center text-center" style={{ '--card-accent': accentGradients[feature.accent] || accentGradients.sage }}>
+                  <div className="mb-4 md:mb-5 feature-icon-wrap flex items-center justify-center rounded-xl mx-auto" style={{ background: accent.bg, boxShadow: `0 4px 16px ${accent.shadow}`, width: '3rem', height: '3rem' }}>
                     <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2} aria-hidden="true" />
                   </div>
-                  <h3 className="text-base md:text-xl font-serif font-semibold mb-2 md:mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
+                  <h3 className="text-base md:text-xl font-serif font-semibold mb-2 md:mb-3 text-center" style={{ color: 'var(--glp-sage-deep)' }}>
                     {feature.title}
                   </h3>
-                  <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+                  <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4 text-center" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
                     {feature.description}
                   </p>
-                  <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
+                  <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center justify-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80 mx-auto mt-auto" style={{ color: 'var(--glp-gold)' }}>
                       Explore
                       <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
