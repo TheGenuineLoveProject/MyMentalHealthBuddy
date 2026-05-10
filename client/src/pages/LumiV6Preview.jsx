@@ -362,6 +362,9 @@ export default function LumiV6Preview() {
           </p>
         </section>
 
+        {/* ---------- V9 "Soul Capture" demo ---------- */}
+        <V9DemoSection />
+
         {/* ---------- V7 Toy Spec readout ---------- */}
         <ToySpecPanel />
       </div>
@@ -495,6 +498,104 @@ function ToySpecPanel() {
           </div>
         </SpecCard>
       </div>
+    </section>
+  );
+}
+
+function V9DemoSection() {
+  const [sentiment, setSentiment] = useState(null);
+  const [resetKey, setResetKey] = useState(0);
+  const fireSentiment = (s) => {
+    setSentiment(s);
+    // clear after the 1.5s mirror so a re-click of the same value re-fires
+    setTimeout(() => setSentiment(null), 1600);
+  };
+  const resetEntrance = () => {
+    try { sessionStorage.removeItem("lumi:v9:entered"); } catch { /* noop */ }
+    setResetKey((n) => n + 1);
+  };
+  return (
+    <section
+      className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-amber-200"
+      data-testid="section-lumiv9"
+    >
+      <h2 className="mb-2 text-2xl font-semibold text-slate-900">
+        LumiV9 — "Soul Capture"
+      </h2>
+      <p className="mb-4 max-w-3xl text-sm text-slate-600">
+        Additive layer over V8. <b>Entrance</b> plays once per session via
+        IntersectionObserver. <b>Attention capture</b> fires after 15s of no
+        Lumi-local interaction when the cursor enters a 200px radius.
+        <b> Escalation</b> tracks 1-3 click-zone activations within a 10s
+        window. <b>Mirroring</b> flashes a sentiment for 1.5s. <b>Goodbye</b>
+        fades on <code>beforeunload</code> or 5min idle. All gated by{" "}
+        <code>animated</code> so crisis surfaces stay still, and disabled by
+        <code className="ml-1">prefers-reduced-motion</code>.
+      </p>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Cell label="V8 baseline (no V9 props)" testId="cell-v9-off">
+          <LumiV6 emotion="greeting" size="xl" v8 />
+        </Cell>
+        <Cell label="V9 on (entrance + attention + goodbye)" testId="cell-v9-on">
+          <LumiV6
+            key={`v9-base-${resetKey}`}
+            emotion="greeting"
+            size="xl"
+            v8
+            v9
+            data-testid="lumi-v9-base"
+          />
+        </Cell>
+        <Cell
+          label="V9 + clickable + sentiment mirror"
+          testId="cell-v9-interactive"
+        >
+          <LumiV6
+            key={`v9-interactive-${resetKey}`}
+            emotion="greeting"
+            size="xl"
+            v8
+            v9
+            clickable
+            memoryKey="v9-playground"
+            detectedSentiment={sentiment}
+            data-testid="lumi-v9-interactive"
+          />
+        </Cell>
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-center gap-2">
+        <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          Mirror sentiment →
+        </span>
+        {["joy", "love", "empathy", "surprise", "calm"].map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => fireSentiment(s)}
+            className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900 ring-1 ring-amber-200 hover:bg-amber-100"
+            data-testid={`btn-mirror-${s}`}
+          >
+            {s}
+          </button>
+        ))}
+        <button
+          type="button"
+          onClick={resetEntrance}
+          className="ml-auto rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 ring-1 ring-slate-200 hover:bg-slate-200"
+          data-testid="btn-reset-entrance"
+        >
+          Replay entrance (clears session gate)
+        </button>
+      </div>
+
+      <p className="mt-3 text-xs text-slate-500">
+        Try: load the page (entrance plays once), click the rightmost Lumi's
+        head/heart/body 3+ times within 10s (escalation builds to celebration
+        sparkle), tap a sentiment chip (1.5s mirror flash), then leave the
+        cursor away for 15s and slowly approach (attention capture wobble).
+      </p>
     </section>
   );
 }

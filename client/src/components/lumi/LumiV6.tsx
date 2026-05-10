@@ -164,6 +164,16 @@ export interface LumiV6Props {
    *  parity values like 80px / 208px). When provided, takes precedence
    *  over the `size` enum. Use sparingly — prefer the size enum. */
   pixelSize?: number;
+  /** V9 master flag — turns on entrance animation, attention capture,
+   *  emotional escalation tracking, and goodbye sequence. All V9 features
+   *  are gated by `animated` so crisis surfaces (animated=false) stay
+   *  still. Default false. */
+  v9?: boolean;
+  /** V9 mirroring: when set to a sentiment that differs from `emotion`,
+   *  briefly (1.5s) overlays it as a "Lumi noticed your feeling" flash.
+   *  Pass null/undefined when no signal is available. Lower priority than
+   *  user click overrides. */
+  detectedSentiment?: LumiV6Emotion | null;
   className?: string;
   "data-testid"?: string;
 }
@@ -268,6 +278,8 @@ export default function LumiV6({
   clickable = false,
   memoryKey,
   pixelSize,
+  v9 = false,
+  detectedSentiment = null,
   className = "",
   "data-testid": testId = "lumi-v6",
 }: LumiV6Props) {
@@ -280,10 +292,16 @@ export default function LumiV6({
   const [headTilt, setHeadTilt]       = useState(false);
   const [bodyBounce, setBodyBounce]   = useState(false);
 
-  // The "effective" emotion drives every derivation/ARIA/className. When a
-  // click zone fires, the override holds for ~1.5-2s then releases back to
-  // the prop value.
-  const effectiveEmotion: LumiV6Emotion = triggeredEmotion ?? emotion;
+  // V9 mirroring overlay (sentiment-driven). Lower priority than a user
+  // click trigger so intentional touch always wins over passive sentiment.
+  const [v9MirrorEmotion, setV9MirrorEmotion] = useState<LumiV6Emotion | null>(null);
+
+  // The "effective" emotion drives every derivation/ARIA/className. Layering
+  // priority (highest → lowest): user click trigger > V9 sentiment mirror >
+  // base emotion prop. When a click zone fires, the override holds for
+  // ~1.5-2s then releases back to the prop value.
+  const effectiveEmotion: LumiV6Emotion =
+    triggeredEmotion ?? v9MirrorEmotion ?? emotion;
 
   const ariaLabel  = EMOTION_ARIA[effectiveEmotion];
   const bubbleText = message ?? EMOTION_MESSAGE[effectiveEmotion];
@@ -477,6 +495,157 @@ export default function LumiV6({
     try { sessionStorage.setItem(storageKey, emotion); } catch { /* noop */ }
   }, [memoryKey, emotion]);
 
+  // ============================================================
+  // V9 "Soul Capture" — entrance / attention / escalation / goodbye
+  // ============================================================
+
+  // ---------- V9: entrance animation (one-shot per session) ----------
+  // IntersectionObserver waits for Lumi to enter viewport; sessionStorage
+  // gate ensures the birth sequence plays exactly once per browser session
+  // even across multiple Lumi instances on different routes.
+  const [v9Entering, setV9Entering] = useState(false);
+  useEffect(() => {
+    if (!v9 || !animated) return;
+    const root = rootRef.current;
+    if (!root) return;
+    let seen = false;
+    try { seen = sessionStorage.getItem("lumi:v9:entered") === "1"; } catch { /* private mode */ }
+    if (seen) return;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          try { sessionStorage.setItem("lumi:v9:entered", "1"); } catch { /* noop */ }
+          setV9Entering(true);
+          timer = setTimeout(() => setV9Entering(false), 800);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    obs.observe(root);
+    return () => {
+      obs.disconnect();
+      if (timer) clearTimeout(timer);
+    };
+  }, [v9, animated]);
+
+  // ---------- V9: attention capture ("Lumi notices you") ----------
+  // After 15s of no Lumi-local interaction, when cursor enters 200px radius,
+  // play a brief wobble + hold cursor-locked gaze for 3 seconds. lastLumi
+  // InteractionRef is also bumped by fireOverride so click-zone touches
+  // reset the timer.
+  const lastLumiInteractionRef = useRef(Date.now());
+  const [v9AttentionCapture, setV9AttentionCapture] = useState(false);
+  const [v9GazeLock, setV9GazeLock] = useState(false);
+  useEffect(() => {
+    if (!v9 || !animated || !interactive) return;
+    const root = rootRef.current;
+    if (!root) return;
+    let captureTimer: ReturnType<typeof setTimeout> | null = null;
+    let gazeTimer: ReturnType<typeof setTimeout> | null = null;
+    let captureCooldown = false;
+    const onMove = (e: MouseEvent) => {
+      if (captureCooldown) return;
+      const rect = root.getBoundingClientRect();
+      if (rect.width === 0) return;
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+      const idleMs = Date.now() - lastLumiInteractionRef.current;
+      if (dist <= 200 && idleMs > 15000) {
+        captureCooldown = true;
+        lastLumiInteractionRef.current = Date.now();
+        setV9AttentionCapture(true);
+        setV9GazeLock(true);
+        captureTimer = setTimeout(() => setV9AttentionCapture(false), 600);
+        gazeTimer = setTimeout(() => {
+          setV9GazeLock(false);
+          captureCooldown = false;
+        }, 3600);
+      }
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (captureTimer) clearTimeout(captureTimer);
+      if (gazeTimer) clearTimeout(gazeTimer);
+    };
+  }, [v9, animated, interactive]);
+
+  // ---------- V9: emotional escalation (3+ clicks in 10s) ----------
+  // Rolling window of click-zone timestamps. recordEscalation() is invoked
+  // from fireOverride. Level 0/1/2/3 drives lumiv6--v9-escalation-{n}
+  // class hooks so CSS handles the visual stages.
+  const escalationClicksRef = useRef<number[]>([]);
+  const [v9EscalationLevel, setV9EscalationLevel] = useState(0);
+  const escalationDecayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const recordEscalation = () => {
+    const now = Date.now();
+    escalationClicksRef.current = [
+      ...escalationClicksRef.current.filter((t) => now - t < 10000),
+      now,
+    ];
+    const count = escalationClicksRef.current.length;
+    setV9EscalationLevel(count >= 3 ? 3 : count >= 2 ? 2 : count >= 1 ? 1 : 0);
+    if (escalationDecayTimerRef.current) clearTimeout(escalationDecayTimerRef.current);
+    escalationDecayTimerRef.current = setTimeout(() => {
+      const t = Date.now();
+      escalationClicksRef.current = escalationClicksRef.current.filter((ts) => t - ts < 10000);
+      const c = escalationClicksRef.current.length;
+      setV9EscalationLevel(c >= 3 ? 3 : c >= 2 ? 2 : c >= 1 ? 1 : 0);
+    }, 10500);
+  };
+  useEffect(() => {
+    return () => {
+      if (escalationDecayTimerRef.current) clearTimeout(escalationDecayTimerRef.current);
+    };
+  }, []);
+
+  // ---------- V9: mirroring micro-expression ----------
+  // When detectedSentiment differs from base emotion, flash it for 1.5s.
+  // Gated on `animated` so crisis surfaces (animated=false) suppress the
+  // mirror flash even if a sentiment signal arrives.
+  useEffect(() => {
+    if (!v9 || !animated || !detectedSentiment || detectedSentiment === emotion) return;
+    setV9MirrorEmotion(detectedSentiment);
+    const t = setTimeout(() => setV9MirrorEmotion(null), 1500);
+    return () => clearTimeout(t);
+  }, [v9, animated, detectedSentiment, emotion]);
+
+  // ---------- V9: goodbye sequence ----------
+  // Triggers on window beforeunload OR 5 minutes of global inactivity.
+  // CSS .lumiv6--v9-goodbye runs the wave + fade-out keyframe.
+  const [v9Goodbye, setV9Goodbye] = useState(false);
+  useEffect(() => {
+    if (!v9 || !animated) return;
+    let goodbyeTimer: ReturnType<typeof setTimeout> | null = null;
+    const FIVE_MIN = 5 * 60 * 1000;
+    const armGoodbye = () => {
+      if (goodbyeTimer) clearTimeout(goodbyeTimer);
+      goodbyeTimer = setTimeout(() => setV9Goodbye(true), FIVE_MIN);
+    };
+    const reset = () => {
+      // Any user activity cancels a pending goodbye AND clears an active
+      // one (page came back to life — Lumi greets you again).
+      setV9Goodbye((cur) => (cur ? false : cur));
+      armGoodbye();
+    };
+    const onBeforeUnload = () => setV9Goodbye(true);
+    window.addEventListener("beforeunload", onBeforeUnload);
+    window.addEventListener("mousemove", reset, { passive: true });
+    window.addEventListener("click", reset);
+    window.addEventListener("keydown", reset);
+    armGoodbye();
+    return () => {
+      window.removeEventListener("beforeunload", onBeforeUnload);
+      window.removeEventListener("mousemove", reset);
+      window.removeEventListener("click", reset);
+      window.removeEventListener("keydown", reset);
+      if (goodbyeTimer) clearTimeout(goodbyeTimer);
+    };
+  }, [v9, animated]);
+
   // ---------- V8: click-zone handlers ----------
   // Track the active override timer + a sequence id so that:
   //   1. Rapid re-clicks cancel the older release timer (no premature clear
@@ -509,6 +678,12 @@ export default function LumiV6({
     if (flag === "heart") setHeartBurst(true);
     if (flag === "head")  setHeadTilt(true);
     if (flag === "body")  setBodyBounce(true);
+    // V9: Lumi-local interaction — feeds attention-capture cool-down +
+    // escalation rolling window. Safe no-op when v9 is off (state setters
+    // exist but the consuming className/data hooks are gated on `v9`).
+    lastLumiInteractionRef.current = Date.now();
+    // Crisis-safe: escalation only tracks when animation is allowed.
+    if (v9 && animated) recordEscalation();
     overrideTimerRef.current = setTimeout(() => {
       overrideTimerRef.current = null;
       if (mySeq !== overrideSeqRef.current) return; // superseded — bail
@@ -554,6 +729,13 @@ export default function LumiV6({
         headTilt ? "lumiv6--head-tilt" : "",
         bodyBounce ? "lumiv6--body-bounce" : "",
         recognizing ? "lumiv6--recognizing" : "",
+        v9 ? "lumiv6--v9" : "",
+        v9 && v9Entering ? "lumiv6--v9-entering" : "",
+        v9 && v9AttentionCapture ? "lumiv6--v9-attention" : "",
+        v9 && v9GazeLock ? "lumiv6--v9-gaze-lock" : "",
+        v9 && v9EscalationLevel > 0 ? `lumiv6--v9-escalation-${v9EscalationLevel}` : "",
+        v9 && v9MirrorEmotion ? "lumiv6--v9-mirroring" : "",
+        v9 && v9Goodbye ? "lumiv6--v9-goodbye" : "",
         className,
       ].filter(Boolean).join(" ")}
       style={wrapperStyle}
