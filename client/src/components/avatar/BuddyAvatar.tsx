@@ -169,6 +169,15 @@ export interface BuddyAvatarProps {
    * best to obscure the PNG face beneath the new CSS face. Per user spec.
    */
   overlay?: boolean;
+  /**
+   * Crisis-stillness opt-out (defense-in-depth). When false, forces
+   * motion="steady" regardless of incoming state — every animation
+   * (breathe, blink, heart pulse, V6 layers) is suppressed. Use on
+   * crisis-adjacent surfaces (ErrorBoundary, crisis page) so even if
+   * state drift sends a non-crisis state, the avatar stays still.
+   * Default true (preserves existing behavior).
+   */
+  animated?: boolean;
   "data-testid"?: string;
 }
 
@@ -241,8 +250,13 @@ export default function BuddyAvatar({
   style: styleVariant = "default",
   pose = "default",
   overlay = false,
+  animated = true,
   "data-testid": testId = "buddy-avatar",
 }: BuddyAvatarProps) {
+  // Defense-in-depth: animated={false} hard-pins motion to "steady" so
+  // every animation gate (.buddy--motion-steady selectors + breathe class
+  // below) collapses to stillness regardless of the resolved state.
+  const effectiveMotion = animated ? undefined : "steady";
   const v = getBuddyVisualOutput(state);
   // Resolution priority: pose > style > colorMode. Falls through to the
   // canonical sage Lumi when nothing is overridden.
@@ -281,7 +295,7 @@ export default function BuddyAvatar({
 
   return (
     <div
-      className={`buddy buddy--${v.state} buddy--motion-${v.motion} buddy--expr-${v.expression} ${showV6Overlay ? "buddy--v6" : ""} ${className}`.trim()}
+      className={`buddy buddy--${v.state} buddy--motion-${effectiveMotion ?? v.motion} buddy--expr-${v.expression} ${showV6Overlay ? "buddy--v6" : ""} ${className}`.trim()}
       style={styleVars}
       role="img"
       aria-label={ariaLabel}
@@ -292,7 +306,7 @@ export default function BuddyAvatar({
       // the DOM, telemetry probe) can read the canonical contract without
       // re-deriving it from CSS classes or color values.
       data-safety-mode={v.safetyMode}
-      data-motion={v.motion}
+      data-motion={effectiveMotion ?? v.motion}
       data-expression={v.expression}
       data-eye-color={v.eyeColor}
       data-heart-color={v.heartColor}
@@ -315,7 +329,7 @@ export default function BuddyAvatar({
             img.src = FALLBACK_LUMI;
           }
         }}
-        className={`buddy__svg ${v.motion === 'steady' ? '' : 'lumi-breathe'}`.trim()}
+        className={`buddy__svg ${(effectiveMotion ?? v.motion) === 'steady' ? '' : 'lumi-breathe'}`.trim()}
         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
       />
 

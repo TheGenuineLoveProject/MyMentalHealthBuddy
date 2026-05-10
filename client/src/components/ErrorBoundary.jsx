@@ -61,6 +61,7 @@ export class ErrorBoundary extends React.Component {
                 state="crisis"
                 colorMode="purple"
                 size="lg"
+                animated={false}
                 data-testid="error-boundary-buddy"
               />
             </div>
