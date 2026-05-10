@@ -1,7 +1,7 @@
 /**
  * buddyTelemetry.ts — MMHB Buddy Engine telemetry helper (v2.0+).
  *
- * Typed, fire-and-forget emitter for the four `buddy_*` events the
+ * Typed, fire-and-forget emitter for the ten `buddy_*` events the
  * Buddy Engine produces from the client.
  *
  * Why a dedicated helper (and not `@/lib/track`):
@@ -105,6 +105,55 @@ export interface BuddyEventMap {
   };
   /** Fires once when /start completes its a11y readiness check. */
   buddy_accessibility_ready: Record<string, never>;
+  /**
+   * Fires once per unique active toolId (deduped via ref) when a tool
+   * drives a Buddy state change. Pre-existing v1.5 emitter that was
+   * silently dropped server-side until the Phase 5 audit added it to
+   * ALLOWED_EVENT_TYPES.
+   */
+  buddy_tool_expression: {
+    toolId: string;
+    buddyState: string;
+  };
+  /**
+   * v1.4 time-based recovery transition (non-soft-landing).
+   * `from` is the originating BuddyState; `to` is always "calm".
+   */
+  buddy_state_recovered: {
+    from: string;
+    to: "calm";
+  };
+  /**
+   * v1.4 12s soft-landing recovery after toolCompleted+encouraged.
+   * `from` is "encouraged"; `to` is always "calm".
+   */
+  buddy_completion_soft_landing: {
+    from: string;
+    to: "calm";
+  };
+  /**
+   * v1.4 grounding-helper visibility — fires on entry into anxious /
+   * overwhelmed when the helper copy below the avatar becomes visible.
+   */
+  buddy_grounding_visible: {
+    state: string;
+  };
+  /**
+   * v1.6 memory-aware visual baseline application. `baseline` is the
+   * resolved BuddyState; streak/days are bucketed numeric signals only.
+   */
+  buddy_baseline_applied: {
+    baseline: string;
+    currentStreak: number;
+    daysAway: number;
+  };
+  /**
+   * v2.1 (Phase 5) response-aligned reaction — fires when
+   * mapResponseToBuddyState yields a non-calm state from reply tone.
+   */
+  buddy_response_alignment: {
+    state: string;
+  };
 }
 
 export type BuddyEventName = keyof BuddyEventMap;
