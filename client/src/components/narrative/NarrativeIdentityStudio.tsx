@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BookOpen, Plus, ChevronRight, Edit2, Trash2 } from "lucide-react";
+import { BookOpen, Plus, Trash2 } from 'lucide-react';
 import {
   LifeChapter, LifeNarrative,
   NARRATIVE_PATTERNS, MCADAMS_PROMPTS,

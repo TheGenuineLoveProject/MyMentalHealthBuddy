@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "../context/AuthContext.jsx";
-import { 
-  Users, FileText, Activity, Shield, TrendingUp, Clock, 
-  Server, Database, AlertTriangle, Download, RefreshCw,
-  CheckCircle2, Zap, BarChart3, Settings, Sparkles,
-  Heart, Brain, MessageCircle, Calendar, Globe, Lock,
-  Eye, Bell, PieChart, ArrowUpRight, ArrowDownRight,
-  Wifi, WifiOff, HardDrive, Cpu, MemoryStick, 
-  UserPlus, UserCheck, UserX, Mail, CreditCard,
-  Target, Award, Flame, BookOpen, Lightbulb,
-  AlertCircle, Info, ChevronRight, ExternalLink,
-  LayoutDashboard, Layers, Gauge, ClipboardCheck
-} from "lucide-react";
+import { Users, FileText, Activity, Shield, Clock, Server, Database, AlertTriangle, Download, RefreshCw, CheckCircle2, BarChart3, Settings, Sparkles, Heart, Brain, MessageCircle, Lock, Eye, PieChart, ArrowUpRight, ArrowDownRight, HardDrive, Cpu, MemoryStick, UserPlus, UserCheck, UserX, Mail, Target, Award, Flame, BookOpen, Lightbulb, AlertCircle, Info, ChevronRight, ExternalLink, LayoutDashboard, Gauge, ClipboardCheck } from 'lucide-react';
 import SEO from "../components/SEO";
 import { apiRequest } from "../lib/queryClient.js";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

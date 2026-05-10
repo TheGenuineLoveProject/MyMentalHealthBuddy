@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen, 
-  MessageCircle, LogIn, ChevronDown, ChevronRight, Smartphone, Tablet, 
-  Monitor, Check, AlertCircle, Info, Sparkles, Menu, X, Bell, Settings,
-  Search, Plus, Filter, Star, Calendar, TrendingUp, Users, FileText,
-  PenLine, Smile, BarChart3, Shield, Lock, Clock, Zap, Eye, Edit, Trash, ExternalLink
-} from "lucide-react";
+import { Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen, MessageCircle, LogIn, ChevronRight, Smartphone, Tablet, Monitor, Check, Sparkles, Menu, Bell, Search, Filter, Star, TrendingUp, Users, FileText, PenLine, BarChart3, Shield, Eye, Edit, Trash, ExternalLink } from 'lucide-react';
 import "../styles/canva-landing.css";
 import FlowDiagram from "../components/FlowDiagram.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

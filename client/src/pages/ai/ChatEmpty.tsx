@@ -1,8 +1,5 @@
 import { Link } from "wouter";
-import { 
-  MessageCircle, ArrowLeft, Heart, Sparkles, Brain, 
-  Sun, Moon, Cloud, Leaf, ArrowRight
-} from "lucide-react";
+import { MessageCircle, ArrowLeft, Heart, Sparkles, Brain, Sun, Cloud, Leaf, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

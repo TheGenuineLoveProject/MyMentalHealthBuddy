@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import {
-  ArrowLeft, FileText, Mail, Calendar, Copy, Check,
-  ChevronDown, Loader2, BookOpen, Send, BarChart3,
-  GitPullRequest, Lightbulb, AlertTriangle, CheckCircle, XCircle,
-  TrendingUp, Users, Eye, PenLine, Plus, X, Share2, Filter, AlertCircle
-} from "lucide-react";
+import { ArrowLeft, FileText, Mail, Calendar, Copy, Check, Loader2, BarChart3, GitPullRequest, Lightbulb, AlertTriangle, CheckCircle, TrendingUp, Users, Eye, PenLine, Plus, X, Share2, Filter } from 'lucide-react';
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/SafetyFooter";

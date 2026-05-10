@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Share2, Download, FileText, Copy, Check, Sparkles, Calendar } from "lucide-react";
+import { ArrowLeft, Share2, Download, FileText, Copy, Check, Sparkles } from 'lucide-react';
 import { Instagram, Youtube, Linkedin } from "../lib/lucide-brands";
 import { SiPinterest, SiTiktok } from "react-icons/si";
 import SEO from "../components/SEO";

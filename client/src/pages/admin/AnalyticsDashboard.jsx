@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Eye, MousePointer, ShoppingCart, Mail, TrendingUp, Loader2, AlertCircle, ArrowLeft, RefreshCw } from "lucide-react";
+import { Eye, MousePointer, ShoppingCart, Mail, TrendingUp, Loader2, ArrowLeft, RefreshCw } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bell, Clock, Volume2, Check, X, ChevronDown } from "lucide-react";
+import { Bell, Clock, Volume2, Check, ChevronDown } from 'lucide-react';
 import { useAuth } from "../hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 

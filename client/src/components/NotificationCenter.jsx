@@ -1,9 +1,5 @@
 import { useState } from "react";
-import { 
-  Bell, Check, CheckCheck, Trash2, Settings, X,
-  Sparkles, Trophy, Heart, Moon, Target, Calendar,
-  Clock, ChevronRight, Filter, MoreVertical
-} from "lucide-react";
+import { Bell, Check, CheckCheck, Trash2, X, Sparkles, Trophy, Heart, Moon, Target, Clock, ChevronRight } from 'lucide-react';
 
 const MOCK_NOTIFICATIONS = [
   {

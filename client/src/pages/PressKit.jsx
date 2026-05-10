@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { FileText, Download, Image, Palette, Mail, ExternalLink } from "lucide-react";
+import { FileText, Download, Image, Palette, Mail } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import SEO from "../components/SEO";

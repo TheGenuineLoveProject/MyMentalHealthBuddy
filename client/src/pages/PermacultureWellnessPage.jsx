@@ -8,25 +8,7 @@ import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import { 
-  Leaf, 
-  Sun, 
-  Droplets, 
-  Wind,
-  Mountain,
-  Sprout,
-  TreeDeciduous,
-  Flower2,
-  CircleDot,
-  ArrowRight,
-  CheckCircle,
-  Heart,
-  Users,
-  Recycle,
-  Eye,
-  Clock,
-  Layers
-} from "lucide-react";
+import { Leaf, Sun, Mountain, Sprout, TreeDeciduous, Flower2, CircleDot, ArrowRight, CheckCircle, Heart, Users, Recycle, Eye, Clock, Layers } from 'lucide-react';
 import { SEO } from "@/components/SEO";
 
 const PERMACULTURE_ETHICS = [

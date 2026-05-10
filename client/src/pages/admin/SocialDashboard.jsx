@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { 
-  ArrowLeft, Plus, Calendar, FileText, CheckCircle, Clock, 
-  Send, LayoutGrid, ListFilter, Sparkles,
-  MessageCircle, AlertCircle,
-  ExternalLink, Settings, Wifi, WifiOff, TrendingUp, BarChart2,
-  Activity, PieChart
-} from "lucide-react";
+import { ArrowLeft, Plus, Calendar, FileText, CheckCircle, Clock, Send, LayoutGrid, ListFilter, Sparkles, MessageCircle, AlertCircle, ExternalLink, Settings, Wifi, WifiOff, BarChart2, Activity, PieChart } from 'lucide-react';
 import { SiInstagram, SiX, SiYoutube } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 const Instagram = SiInstagram;

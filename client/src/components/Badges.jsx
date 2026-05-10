@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
-import { Award, Flame, Heart, Star, Trophy, Sun, Moon, Sparkles, Zap, Crown, Shield, BookOpen, Calendar, Gift } from "lucide-react";
+import { Award, Flame, Heart, Star, Trophy, Sun, Moon, Sparkles, Zap, Crown, Shield, BookOpen, Gift } from 'lucide-react';
 
 const BADGE_DEFINITIONS = {
   "first-entry": {

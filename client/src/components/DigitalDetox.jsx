@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Smartphone, PowerOff, Play, Pause, Check, Clock, Trophy, Zap } from "lucide-react";
+import { PowerOff, Check, Clock, Trophy, Zap } from 'lucide-react';
 
 const DETOX_DURATIONS = [
   { minutes: 15, label: "Quick Break", points: 15 },

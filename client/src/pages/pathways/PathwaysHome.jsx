@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { 
-  ArrowRight, Heart, Brain, Sparkles, Target, Compass, 
-  Sun, Shield, Leaf, Star, BookOpen, TrendingUp 
-} from "lucide-react";
+import { ArrowRight, Heart, Brain, Sparkles, Target, Compass, Shield, BookOpen, TrendingUp } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";

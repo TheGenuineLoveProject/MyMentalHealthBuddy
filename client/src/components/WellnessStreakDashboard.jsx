@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Flame, Trophy, Star, Calendar, TrendingUp, Award, Target, Zap, Heart, Crown } from "lucide-react";
+import { Flame, Trophy, Star, TrendingUp, Award, Target, Zap, Heart, Crown } from 'lucide-react';
 
 const ACHIEVEMENTS = [
   { id: "first-step", name: "First Step", description: "Complete your first wellness activity", icon: Star, points: 10, requirement: 1 },

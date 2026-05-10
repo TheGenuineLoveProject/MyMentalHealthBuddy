@@ -1,8 +1,5 @@
 import { Link } from "wouter";
-import {
-  Heart, Brain, Compass, Sparkles, Shield, Activity, BookOpen,
-  ArrowRight, CheckCircle2, AlertTriangle, Cpu, Wind,
-} from "lucide-react";
+import { Heart, Brain, Sparkles, Shield, BookOpen, ArrowRight, CheckCircle2, AlertTriangle, Wind } from 'lucide-react';
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import NewsletterSignup from "@/components/NewsletterSignup";

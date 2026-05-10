@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { 
-  Layers, Check, AlertTriangle, Search,
-  FileText, Loader2, ArrowLeft, RefreshCw, Activity, AlertCircle
-} from "lucide-react";
+import { Layers, Check, AlertTriangle, Search, FileText, Loader2, ArrowLeft, Activity } from 'lucide-react';
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";

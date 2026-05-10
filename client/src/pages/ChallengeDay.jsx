@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useRoute, useLocation } from "wouter";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Heart, CheckCircle, Clock, ArrowRight, Share2, Loader2, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle, Clock, ArrowRight, Share2, Loader2, Sparkles } from 'lucide-react';
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { ReflectionCard } from "../components/share";

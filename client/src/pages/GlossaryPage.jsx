@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, BookOpen, Search, ChevronRight, Filter } from "lucide-react";
+import { ArrowLeft, BookOpen, Search, Filter } from 'lucide-react';
 import { useSEO } from "../hooks/useSEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

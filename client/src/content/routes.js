@@ -25,17 +25,7 @@
  * ============================================================================
  */
 import { getMicrocopyForRoute } from './microcopy.js';
-import { 
-  Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf, 
-  BookOpen, MessageCircle, Users, Zap, Target, Compass,
-  Activity, TrendingUp, Clock, Eye, Lightbulb, Award,
-  FileText, Settings, Lock, CreditCard, HelpCircle, Mail,
-  Scale, AlertTriangle, Bookmark, Palette, Layout, PenTool,
-  BarChart, Calendar, MapPin, Mic, Camera, Video,
-  Database, Code, Terminal, Cloud, Globe, Link, Home,
-  Feather, Layers, Search, Edit, CheckCircle, XCircle,
-  Grid, List, Quote, Keyboard
-} from 'lucide-react';
+import { Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf, BookOpen, MessageCircle, Users, Zap, Target, Compass, Activity, TrendingUp, Clock, Eye, Lightbulb, Award, FileText, Settings, Lock, HelpCircle, Mail, Scale, Bookmark, Layout, PenTool, BarChart, Calendar, MapPin, Video, Link, Home, Layers, Search, Edit, Grid, List, Quote, Keyboard } from 'lucide-react';
     // client/src/content/routes.js
 import { normalizePathname, routeKeyFromPathname } from "./routeKey";
 import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";

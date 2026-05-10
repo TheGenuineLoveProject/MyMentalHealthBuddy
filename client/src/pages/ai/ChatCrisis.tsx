@@ -1,8 +1,5 @@
 import { Link } from "wouter";
-import { 
-  Shield, Phone, Heart, ArrowLeft, AlertTriangle, 
-  MessageCircle, ExternalLink, Sparkles, HandHeart
-} from "lucide-react";
+import { Shield, Phone, Heart, ArrowLeft, AlertTriangle, MessageCircle, Sparkles, HandHeart } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

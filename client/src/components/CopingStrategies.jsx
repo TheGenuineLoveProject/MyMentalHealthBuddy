@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Brain, Heart, Zap, Users, Leaf, Music, Palette, BookOpen, ChevronDown, Star, Check } from "lucide-react";
+import { Brain, Heart, Zap, Users, Music, Palette, BookOpen, ChevronDown, Star, Check } from 'lucide-react';
 
 const STRATEGY_CATEGORIES = {
   cognitive: {

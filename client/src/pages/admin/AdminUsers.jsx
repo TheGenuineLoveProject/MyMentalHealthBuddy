@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { Users, ArrowLeft, RefreshCw, Shield, UserCheck, Search, Loader2, AlertCircle, Activity, TrendingUp, Clock, Mail } from "lucide-react";
+import { Users, ArrowLeft, RefreshCw, Shield, UserCheck, Search, Loader2, Activity, TrendingUp, Clock, Mail } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";

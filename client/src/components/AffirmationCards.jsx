@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, RefreshCw, Share2, Star, ChevronLeft, ChevronRight, Sparkles, Sun, Moon, Zap, Shield, Flower2 } from "lucide-react";
+import { Heart, RefreshCw, Share2, Star, ChevronLeft, ChevronRight, Sparkles, Sun, Zap, Shield, Flower2 } from 'lucide-react';
 
 const AFFIRMATION_CATEGORIES = {
   selfLove: {

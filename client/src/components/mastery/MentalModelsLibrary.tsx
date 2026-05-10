@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Brain, Star, ChevronRight, Plus, Save } from "lucide-react";
+import { Brain, Star, Save } from 'lucide-react';
 import {
   MentalModel, ModelLibrary, ModelApplication,
   MENTAL_MODELS_LIBRARY,

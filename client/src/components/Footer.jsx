@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Heart, Shield, ExternalLink, BookOpen, Mail } from "lucide-react";
+import { Shield, BookOpen, Mail } from 'lucide-react';
 import { Instagram, Youtube } from "../lib/lucide-brands";
 import LumiMascot from "./lumi/LumiMascot.jsx";
 

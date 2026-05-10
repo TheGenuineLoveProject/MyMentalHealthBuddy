@@ -11,11 +11,7 @@
  */
 
 import { useEffect, useState, useRef } from "react";
-import { 
-  Brain, Heart, Shield, Sparkles, 
-  MessageCircle, BarChart3, BookOpen, 
-  Clock, Lock, Smile, Zap, Target 
-} from "lucide-react";
+import { Brain, Heart, Shield, Sparkles, BookOpen, Clock, Target } from 'lucide-react';
 import GlowingCard from "./GlowingCard";
 import "../styles/healing-animations.css";
 

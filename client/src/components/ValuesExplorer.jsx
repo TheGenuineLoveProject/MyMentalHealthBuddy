@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Compass, Star, Check, ChevronRight, Heart, RefreshCw } from "lucide-react";
+import { Compass, Star, ChevronRight, Heart, RefreshCw } from 'lucide-react';
 
 const VALUES_LIST = [
   { id: "authenticity", name: "Authenticity", description: "Being true to yourself" },

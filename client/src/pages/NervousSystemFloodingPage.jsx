@@ -8,24 +8,7 @@ import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
-import { 
-  Brain, 
-  Heart, 
-  Shield, 
-  Sparkles,
-  CheckCircle,
-  ArrowRight,
-  Eye,
-  Activity,
-  Phone,
-  AlertTriangle,
-  Hand,
-  Volume2,
-  Wind,
-  Anchor,
-  Clock,
-  Zap
-} from "lucide-react";
+import { Brain, Heart, Shield, Sparkles, CheckCircle, ArrowRight, Activity, Phone, Hand, Volume2, Wind, Anchor, Zap } from 'lucide-react';
 import { SEO } from "@/components/SEO";
 
 const OVERWHELM_SIGNS = [

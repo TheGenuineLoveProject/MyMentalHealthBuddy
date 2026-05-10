@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Download, Search, RefreshCw, ChevronLeft, ChevronRight, ArrowLeft, AlertCircle } from "lucide-react";
+import { Download, Search, RefreshCw, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Link } from "wouter";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";

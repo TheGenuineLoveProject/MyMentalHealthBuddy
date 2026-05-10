@@ -15,11 +15,7 @@
  * ============================================================================
  */
 
-import { 
-  Calendar, Clock, Bell, TrendingUp, Target, Flame, Star, 
-  MessageCircle, BookOpen, Heart, ChevronRight, Plus, Check,
-  ArrowUp, ArrowDown
-} from "lucide-react";
+import { Calendar, Clock, Bell, Target, Flame, Star, MessageCircle, BookOpen, Heart, ChevronRight, Plus, Check, ArrowUp, ArrowDown } from 'lucide-react';
 
 export function StatsWidget({ stats = [], title = "Your Progress" }) {
   const defaultStats = [

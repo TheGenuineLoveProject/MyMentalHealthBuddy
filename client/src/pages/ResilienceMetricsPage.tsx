@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import {
-  TrendingUp, BarChart3, Calendar, Target, Award, Flame,
-  Brain, Heart, Lightbulb, Shield, Clock, ArrowRight,
-  ChevronRight, Sparkles, Activity, Zap
-} from "lucide-react";
+import { TrendingUp, BarChart3, Calendar, Target, Award, Flame, Brain, Heart, Lightbulb, Shield, Clock, ArrowRight, Sparkles, Activity, Zap } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

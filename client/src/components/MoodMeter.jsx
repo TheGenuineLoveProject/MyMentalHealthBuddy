@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Smile, Frown, Meh, Sun, Cloud, CloudRain, Zap, Heart } from "lucide-react";
+import { Smile, Meh, Sun, Cloud, CloudRain, Zap, Heart } from 'lucide-react';
 
 const MOOD_LEVELS = [
   { value: 1, label: "Very Low", icon: CloudRain, color: "from-slate-400 to-gray-500", emoji: "😢" },

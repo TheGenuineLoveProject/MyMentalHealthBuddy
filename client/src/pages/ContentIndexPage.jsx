@@ -1,12 +1,5 @@
 import { Link } from "wouter";
-import { 
-  Home, BookOpen, Heart, Brain, Sparkles, Leaf, Moon, 
-  Sun, Wind, Users, Shield, Clock, Target, Compass,
-  Lightbulb, Map, Star, Zap, ChevronRight, Search,
-  Play, Headphones, FileText, Bookmark, Share2, MessageCircle,
-  Activity, Eye, Layers, Award, TrendingUp, Settings,
-  Palette, BarChart3, Feather, Globe, ArrowLeft
-} from "lucide-react";
+import { Home, BookOpen, Heart, Brain, Sparkles, Leaf, Moon, Sun, Wind, Users, Shield, Clock, Target, Compass, Lightbulb, Map, Star, Zap, ChevronRight, Search, FileText, MessageCircle, Activity, Eye, Layers, Award, TrendingUp, Settings, Palette, BarChart3, Feather, Globe, ArrowLeft } from 'lucide-react';
 import { useState, useMemo } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

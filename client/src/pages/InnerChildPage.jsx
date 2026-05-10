@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Heart, Baby, Sparkles, Shield, Sun, MessageCircle, Gift, Home, Star, Brain, Eye, Feather, BookOpen, Flower2, Zap } from "lucide-react";
+import { ArrowLeft, Heart, Baby, Sparkles, Shield, Sun, MessageCircle, Gift, Home, Star, Brain, Eye } from 'lucide-react';
 import { useSEO } from "../hooks/useSEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";

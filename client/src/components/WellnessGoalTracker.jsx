@@ -1,9 +1,5 @@
 import { useState } from "react";
-import { 
-  Target, Plus, Check, ChevronRight, Flame, Calendar,
-  Trophy, Edit2, Trash2, Clock, TrendingUp, Sparkles,
-  Heart, Moon, Brain, Activity, RotateCcw
-} from "lucide-react";
+import { Target, Plus, Check, Flame, Trophy, Trash2, TrendingUp, Sparkles, Heart, Moon, Brain, Activity, RotateCcw } from 'lucide-react';
 import { useGamification } from "../context/GamificationContext.jsx";
 
 const GOAL_TEMPLATES = [

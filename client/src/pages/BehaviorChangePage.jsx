@@ -4,24 +4,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
-import { 
-  ArrowLeft, 
-  Target, 
-  Repeat,
-  Brain,
-  CheckCircle2,
-  Circle,
-  Zap,
-  Clock,
-  TrendingUp,
-  AlertCircle,
-  Lightbulb,
-  ArrowRight,
-  RefreshCw,
-  Award,
-  Calendar,
-  BarChart3
-} from "lucide-react";
+import { ArrowLeft, Target, Brain, CheckCircle2, Zap, TrendingUp, AlertCircle, Lightbulb, ArrowRight, RefreshCw, Award, Calendar, BarChart3 } from 'lucide-react';
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

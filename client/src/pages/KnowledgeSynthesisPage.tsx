@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import {
-  Brain, Lightbulb, BookOpen, Network, Sparkles, ArrowLeft,
-  Plus, Save, Trash2, ChevronRight, Tag, Link as LinkIcon,
-  Layers, Zap, Eye, Search, Filter
-} from "lucide-react";
+import { Brain, Lightbulb, BookOpen, Network, ArrowLeft, Plus, Save, Trash2, Search } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

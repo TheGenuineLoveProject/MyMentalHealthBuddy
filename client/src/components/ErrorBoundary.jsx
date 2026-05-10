@@ -1,5 +1,5 @@
 import React from "react";
-import { Heart, RefreshCw, Home } from "lucide-react";
+import { RefreshCw, Home } from 'lucide-react';
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 function shouldShowDiagnostics() {

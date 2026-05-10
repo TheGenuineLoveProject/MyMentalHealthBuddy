@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Heart, Share2, Download, Copy, Check } from "lucide-react";
+import { Heart, Copy, Check } from 'lucide-react';
 
 const CARD_THEMES = [
   { id: "sage", bg: "linear-gradient(135deg, #6B8E23 0%, #8FBC8F 100%)", text: "#fff" },

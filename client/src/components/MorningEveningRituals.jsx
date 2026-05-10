@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Sun, Moon, Coffee, Sparkles, CheckCircle, Clock, Flame, Trophy, Heart, Star, Wind, Smile } from "lucide-react";
+import { Sun, Moon, CheckCircle, Flame, Heart, Star, Wind } from 'lucide-react';
 
 const MORNING_RITUALS = [
   { id: "hydrate", icon: "💧", name: "Drink water", xp: 10, description: "Start with a glass of water to hydrate your body" },

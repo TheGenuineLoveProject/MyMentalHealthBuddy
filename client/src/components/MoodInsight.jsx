@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { 
-  Brain, Lightbulb, Calendar, Clock, TrendingUp, 
-  Sparkles, Volume2, VolumeX, RefreshCw, ChevronRight
-} from "lucide-react";
+import { Brain, Lightbulb, Calendar, Clock, TrendingUp, Sparkles, Volume2, VolumeX, ChevronRight } from 'lucide-react';
 import "@/styles/sacred-visuals.css";
 
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

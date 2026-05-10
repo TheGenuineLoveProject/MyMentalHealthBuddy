@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Focus, Clock, Plus, BarChart2, Target } from "lucide-react";
+import { Focus, Clock, BarChart2, Target } from 'lucide-react';
 import {
   DeepWorkSession, MasteryProfile,
   DEEP_WORK_PRINCIPLES,

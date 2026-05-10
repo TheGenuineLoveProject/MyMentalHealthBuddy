@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, RefreshCw, Calendar, Copy, Check, Loader2, Star, Send, Filter } from "lucide-react";
+import { ArrowLeft, RefreshCw, Copy, Check, Loader2, Star, Send } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";

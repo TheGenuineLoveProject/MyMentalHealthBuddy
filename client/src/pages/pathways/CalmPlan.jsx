@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Leaf, Download, Save, RefreshCw, Check, Clock, Sun, Moon, Coffee } from "lucide-react";
+import { Leaf, Save, RefreshCw, Check, Clock, Sun, Moon, Coffee } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";

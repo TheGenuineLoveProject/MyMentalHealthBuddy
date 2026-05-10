@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Heart, Star, Bookmark, Trash2, ArrowRight, Grid, List, Search, RefreshCw, AlertCircle } from "lucide-react";
+import { Heart, Bookmark, Trash2, ArrowRight, Grid, List, Search, RefreshCw, AlertCircle } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";

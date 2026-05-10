@@ -2,14 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import { 
-  Compass, Brain, Lightbulb, Target, Sparkles, ArrowRight,
-  BookOpen, Mic, Timer, HelpCircle, TrendingUp, Download,
-  Layers, Clock, Sunrise, Quote, Scale, Zap, Network,
-  GitBranch, Focus, Map, Crosshair, Eye, BarChart3,
-  Users, Heart, Compass as CompassIcon, Puzzle, Flame,
-  Trophy, Wrench, Library, ChevronRight, Star, Check
-} from "lucide-react";
+import { Compass, Brain, Lightbulb, Target, Sparkles, ArrowRight, BookOpen, Mic, Timer, HelpCircle, TrendingUp, Download, Layers, Clock, Sunrise, Scale, Zap, Network, GitBranch, Focus, Map, Eye, BarChart3, Users, Heart, Compass as CompassIcon, Puzzle, Flame, Trophy, Wrench, Library, ChevronRight, Star, Check } from 'lucide-react';
 
 interface ToolProgress {
   toolId: string;

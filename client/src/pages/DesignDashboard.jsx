@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Activity, BookOpen, Sparkles, Heart, TrendingUp, ArrowRight, Palette } from "lucide-react";
+import { Activity, BookOpen, Heart, TrendingUp, ArrowRight, Palette } from 'lucide-react';
 import SEO from "@/components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

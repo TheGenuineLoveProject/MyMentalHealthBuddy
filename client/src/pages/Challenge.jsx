@@ -1,9 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
-import { 
-  ArrowLeft, Heart, CheckCircle, Circle, Calendar, 
-  Sparkles, ArrowRight, ChevronRight, Loader2
-} from "lucide-react";
+import { ArrowLeft, CheckCircle, Sparkles, ChevronRight, Loader2 } from 'lucide-react';
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "../components/BenefitsBlock";

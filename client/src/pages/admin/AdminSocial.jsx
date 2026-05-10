@@ -1,13 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
-import {
-  Share2, Calendar, Hash, Zap, FileText, Check, Clock,
-  AlertTriangle, RefreshCw, Copy, Eye, Edit, TrendingUp,
-  Loader2, Plus, Send, Save, X, Sparkles, Target,
-  ArrowRight, ExternalLink, Link2, ChevronRight, ChevronDown,
-  Filter, Search, BarChart3, Clipboard, CheckCircle2,
-  XCircle, Globe, Shield, BookOpen, Mail, Megaphone
-} from "lucide-react";
+import { Calendar, Hash, Zap, FileText, Check, Clock, RefreshCw, Copy, Eye, Edit, TrendingUp, Loader2, Plus, Send, Save, X, Sparkles, Target, ArrowRight, Link2, ChevronRight, Filter, BarChart3, CheckCircle2, XCircle, Globe, Shield, BookOpen, Mail, Megaphone } from 'lucide-react';
 import { SiInstagram, SiX, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
 import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import SEO from "../../components/SEO";

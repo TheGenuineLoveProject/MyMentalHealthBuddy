@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Sparkles, Heart, Sun, Moon, Droplets, Utensils, Move, Users, Palette, BookOpen, Music, CheckCircle2, Phone, Shield } from "lucide-react";
+import { Sparkles, Heart, Sun, Droplets, Move, Users, Palette, BookOpen, Music, CheckCircle2, Phone, Shield } from 'lucide-react';
 import SafetyFooter from "../components/ui/SafetyFooter";
 import SEO from "@/components/SEO";
 import { Hero } from "@/components/ui";

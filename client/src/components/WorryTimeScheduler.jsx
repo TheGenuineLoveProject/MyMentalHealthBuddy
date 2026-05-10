@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Clock, Play, Pause, Check, AlertCircle, Trash2, Plus, Brain } from "lucide-react";
+import { Clock, Play, Check, AlertCircle, Trash2, Plus, Brain } from 'lucide-react';
 
 const WORRY_TIPS = [
   "Write down each worry completely - getting it out of your head helps",

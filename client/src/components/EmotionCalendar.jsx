@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Calendar, Filter, BarChart3 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import { Button } from "@/components/ui/Button.jsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 

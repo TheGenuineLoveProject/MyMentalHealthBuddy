@@ -13,7 +13,7 @@ import {
   type Prediction,
   type BeliefAudit
 } from "@/lib/epistemic/epistemicCalibration";
-import { Target, Plus, RefreshCw, Check, X } from "lucide-react";
+import { Target, RefreshCw, Check, X } from 'lucide-react';
 
 export default function EpistemicCalibration() {
   const [profile, setProfile] = useState<EpistemicProfile | null>(null);

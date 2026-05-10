@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap, Brain, Shield, Moon, Sun, Sparkles, BookOpen } from "lucide-react";
+import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap, Brain, Sparkles, BookOpen } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";

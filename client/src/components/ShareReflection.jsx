@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { 
-  X, Heart, Send, Sparkles, Eye, EyeOff, 
-  Loader2, Flower2, BookOpen 
-} from "lucide-react";
+import { X, Heart, Sparkles, Eye, EyeOff, Loader2, BookOpen } from 'lucide-react';
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import "@/styles/sacred-visuals.css";
 

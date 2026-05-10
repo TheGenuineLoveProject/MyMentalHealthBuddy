@@ -6,7 +6,7 @@
  */
 
 import { useState } from "react";
-import { Flame, Trophy, Share2, Copy, Check, Calendar, Sparkles } from "lucide-react";
+import { Flame, Trophy, Share2, Copy, Check, Sparkles } from 'lucide-react';
 
 const STREAK_MESSAGES = [
   { min: 1, max: 3, message: "Every journey starts with a single step", emoji: "\u{1F331}" },

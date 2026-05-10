@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Users, Heart, MessageCircle, Send, UserPlus, Clock, Sparkles, Star, ChevronRight } from "lucide-react";
+import { Users, Heart, MessageCircle, Send, Sparkles, Star, ChevronRight } from 'lucide-react';
 
 const CONNECTION_PROMPTS = [
   { id: 1, text: "Text someone you haven't talked to in a while", emoji: "💬", category: "reach-out" },

@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import {
-  Users, Heart, MessageCircle, Shield, Eye, EyeOff, Send,
-  Sparkles, Brain, Lightbulb, RefreshCw, Clock, ChevronRight,
-  Quote, ThumbsUp, Bookmark, Share2, ArrowLeft
-} from "lucide-react";
+import { Users, Heart, MessageCircle, Shield, Eye, EyeOff, Send, Sparkles, Brain, Lightbulb, RefreshCw, Quote, Bookmark } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

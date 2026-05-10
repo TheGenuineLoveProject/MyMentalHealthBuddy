@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Heart, Copy, Check, Gift, Users, ArrowRight } from "lucide-react";
+import { Heart, Copy, Check, Gift, ArrowRight } from 'lucide-react';
 import { useAuth } from "../../context/AuthContext";
 
 export default function ReferralInvite({ className = "" }) {

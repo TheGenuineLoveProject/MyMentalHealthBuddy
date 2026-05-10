@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { User, Camera, ChevronLeft, Settings, Bell, Shield, Save } from "lucide-react";
+import { User, Camera, ChevronLeft, Settings, Shield, Save } from 'lucide-react';
 import SEO from "@/components/SEO";
 import ObjectUploader from "@/components/ObjectUploader";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Scale, Plus, ChevronRight, Lightbulb } from "lucide-react";
+import { Scale, ChevronRight } from 'lucide-react';
 import {
   MoralDilemma, MoralFramework,
   MORAL_FRAMEWORKS, CLASSIC_DILEMMAS,

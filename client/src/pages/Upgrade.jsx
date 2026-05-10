@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Crown, Check, ArrowLeft, Sparkles, Zap, Shield, Star, ArrowRight, Loader2 } from "lucide-react";
+import { Crown, ArrowLeft, Sparkles, Zap, Shield, Star, ArrowRight, Loader2 } from 'lucide-react';
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

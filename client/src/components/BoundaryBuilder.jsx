@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Shield, Plus, Check, Trash2, Edit2, ChevronRight, Star } from "lucide-react";
+import { Shield, Plus, Check, Trash2 } from 'lucide-react';
 
 const BOUNDARY_TYPES = [
   { id: "emotional", name: "Emotional", icon: "💝", description: "Protecting your feelings and emotional energy" },

@@ -11,7 +11,7 @@ import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
-import { Heart, Star, Compass, Target, CheckCircle2, Plus, Trash2, Sparkles } from "lucide-react";
+import { Heart, Star, Compass, Target, CheckCircle2, Plus, Sparkles } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

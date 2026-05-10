@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Anchor, Eye, Hand, Ear, Heart, Footprints, Sparkles, CheckCircle2, Brain, Shield, Zap, BookOpen, AlertCircle } from "lucide-react";
+import { ArrowLeft, Anchor, Eye, Hand, Heart, Footprints, Sparkles, CheckCircle2, Brain, Shield, Zap, BookOpen, AlertCircle } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import ClarityCard from "@/components/content/ClarityCard";

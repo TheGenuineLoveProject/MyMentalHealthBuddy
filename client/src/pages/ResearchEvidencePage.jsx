@@ -2,22 +2,7 @@ import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import { 
-  ArrowLeft, 
-  BookOpen, 
-  Brain, 
-  Heart, 
-  Sparkles, 
-  ExternalLink,
-  FileText,
-  Microscope,
-  GraduationCap,
-  Activity,
-  Users,
-  Shield,
-  Lightbulb,
-  TrendingUp
-} from "lucide-react";
+import { ArrowLeft, BookOpen, Brain, Heart, Sparkles, FileText, Microscope, GraduationCap, Activity, Users, Shield, Lightbulb, TrendingUp } from 'lucide-react';
 import { SEO } from "@/components/SEO";
 
 const researchCategories = [

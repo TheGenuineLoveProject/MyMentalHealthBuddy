@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Volume2, VolumeX, Play, Pause, RefreshCw } from "lucide-react";
+import { Volume2, VolumeX, Play, Pause } from 'lucide-react';
 import { useAuth } from "../hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 

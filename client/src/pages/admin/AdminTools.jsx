@@ -1,24 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
-import { 
-  ArrowLeft, RefreshCw, CheckCircle, AlertTriangle, AlertCircle,
-  Search, Play, CheckSquare, ArrowRight, Wand2,
-  MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, 
-  FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain,
-  Sparkles, Mountain, Compass, Layers, Puzzle, Milestone, Trophy,
-  HeartHandshake, Flame, Target, Flower2, TreePine, CircleDot,
-  Shield, Feather, Gem, Award, Zap, TrendingUp, Star, Orbit,
-  Rocket, Footprints, Workflow, Globe, Network, Users, FileText,
-  Palette, Wand2 as WandIcon, BookOpen as BookIcon, Mail, Share2, 
-  Megaphone, PenTool, UserCheck, LayoutDashboard, CreditCard,
-  ShieldCheck, ClipboardList, BarChart3, Activity, PackageCheck,
-  DollarSign, Webhook, Contact, Key, Handshake, Upload, UserCog,
-  ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox,
-  Clock, Download, Timer, Filter, RotateCcw,
-  Wrench, ExternalLink, Stethoscope, Terminal, FileWarning, Cpu,
-  Clipboard, ScanLine, HardDrive, GitBranch,
-  XCircle, CheckCircle2, Loader2
-} from "lucide-react";
+import { ArrowLeft, RefreshCw, CheckCircle, AlertTriangle, AlertCircle, Search, Play, CheckSquare, ArrowRight, Wand2, MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain, Sparkles, Mountain, Compass, Layers, Puzzle, Milestone, Trophy, HeartHandshake, Flame, Target, Flower2, TreePine, CircleDot, Shield, Feather, Gem, Award, Zap, TrendingUp, Star, Orbit, Rocket, Footprints, Workflow, Globe, Network, Users, FileText, Palette, Mail, Share2, Megaphone, PenTool, UserCheck, LayoutDashboard, CreditCard, ShieldCheck, ClipboardList, BarChart3, Activity, PackageCheck, DollarSign, Webhook, Contact, Key, Handshake, Upload, UserCog, ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox, Clock, Download, Timer, Filter, RotateCcw, Wrench, ExternalLink, Stethoscope, Terminal, FileWarning, Cpu, Clipboard, ScanLine, HardDrive, GitBranch, XCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 

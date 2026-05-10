@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, MessageSquare } from "lucide-react";
+import { X } from 'lucide-react';
 import { Link } from "wouter";
 
 export default function SoftLaunchBanner() {

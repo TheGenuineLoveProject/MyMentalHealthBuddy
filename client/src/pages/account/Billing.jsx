@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { 
-  CreditCard, ArrowLeft, Check, Crown, Zap, Star,
-  Download, Calendar, Shield, Sparkles, ArrowRight, Loader2, ExternalLink
-} from "lucide-react";
+import { CreditCard, ArrowLeft, Check, Crown, Zap, Star, Download, Calendar, Shield, Sparkles, Loader2, ExternalLink } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

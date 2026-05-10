@@ -1,8 +1,5 @@
 import { Link } from "wouter";
-import { 
-  ArrowLeft, Lightbulb, ChevronDown, ChevronUp, 
-  Clock, Target, Star, CheckCircle2, ArrowRight
-} from "lucide-react";
+import { ArrowLeft, Lightbulb, ChevronDown, ChevronUp, Clock, Target, Star, CheckCircle2 } from 'lucide-react';
 import { useState } from "react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

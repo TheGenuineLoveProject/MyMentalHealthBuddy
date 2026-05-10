@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Mail, Bell, Clock, Check, Save, Loader2 } from "lucide-react";
+import { Mail, Clock, Check, Save, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";

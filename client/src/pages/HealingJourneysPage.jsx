@@ -1,26 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  ArrowLeft, 
-  MapPin, 
-  Calendar,
-  CheckCircle2,
-  Circle,
-  Heart,
-  Shield,
-  Sun,
-  Brain,
-  Sparkles,
-  Users,
-  Flower2,
-  Clock,
-  Star,
-  ChevronRight,
-  Lock,
-  BookOpen,
-  Zap,
-  Eye
-} from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, CheckCircle2, Circle, Heart, Shield, Sun, Brain, Sparkles, Users, Flower2, Star, ChevronRight, BookOpen } from 'lucide-react';
 import { useSEO } from "../hooks/useSEO";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import SafetyFooter from "../components/ui/SafetyFooter";

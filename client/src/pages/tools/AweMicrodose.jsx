@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Sparkles, ArrowLeft, Play, Pause, RotateCcw, Check } from "lucide-react";
+import { Sparkles, ArrowLeft, Play, Pause, RotateCcw } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent } from "@/components/ui/Card.jsx";

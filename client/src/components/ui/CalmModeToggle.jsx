@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Sparkles } from 'lucide-react';
+import { Moon, Sparkles } from 'lucide-react';
 
 export function CalmModeToggle({ className = '' }) {
   const [calmMode, setCalmMode] = useState(() => {

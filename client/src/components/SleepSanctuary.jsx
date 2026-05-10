@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Moon, Sun, Cloud, Wind, Volume2, VolumeX, Play, Pause, Clock, Star, Sparkles, CheckCircle, ChevronRight } from "lucide-react";
+import { Moon, Wind, Volume2, Play, Pause, Clock, Star, Sparkles, CheckCircle, ChevronRight } from 'lucide-react';
 
 const SLEEP_SOUNDS = [
   { id: "rain", name: "Gentle Rain", icon: "🌧️", color: "from-blue-500 to-cyan-500" },

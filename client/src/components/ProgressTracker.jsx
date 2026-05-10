@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { 
-  TrendingUp, Calendar, Flame, Star, Award, 
-  ChevronLeft, ChevronRight, Sparkles 
-} from "lucide-react";
+import { TrendingUp, Calendar, Flame, Star, Award, Sparkles } from 'lucide-react';
 import "@/styles/sacred-visuals.css";
 
 const MILESTONES = [

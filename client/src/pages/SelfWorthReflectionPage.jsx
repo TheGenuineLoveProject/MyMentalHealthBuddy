@@ -9,21 +9,7 @@ import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
-import { 
-  Brain, 
-  Heart, 
-  Shield, 
-  Sparkles,
-  MessageCircle,
-  CheckCircle,
-  ArrowRight,
-  Eye,
-  Lightbulb,
-  Activity,
-  Phone,
-  AlertCircle,
-  RefreshCw
-} from "lucide-react";
+import { Brain, Heart, Shield, Sparkles, MessageCircle, CheckCircle, ArrowRight, Eye, Lightbulb, Activity, Phone, RefreshCw } from 'lucide-react';
 import { SEO } from "@/components/SEO";
 
 const TRUTH_STATEMENTS = [

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { apiRequest } from "../lib/queryClient.js";
-import { CheckCircle, ArrowLeft, Mail, Send, Heart, Shield, Clock } from "lucide-react";
+import { CheckCircle, ArrowLeft, Mail, Send, Shield, Clock } from 'lucide-react';
 import SEO from "../components/SEO";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

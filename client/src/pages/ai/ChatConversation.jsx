@@ -1,10 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
-import { 
-  MessageCircle, ArrowLeft, Send, Heart, Sparkles, 
-  Bot, User, Loader2, MoreVertical, Lightbulb, AlertTriangle,
-  Settings, Trash2, Download, Volume2, VolumeX, Moon, Sun, X
-} from "lucide-react";
+import { MessageCircle, ArrowLeft, Send, Heart, Bot, User, Loader2, MoreVertical, Lightbulb, Settings, Trash2, Download, Volume2, VolumeX } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useSEO } from "@/hooks/useSEO";

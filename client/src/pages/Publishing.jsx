@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, FileText, Eye, Send, Plus, Edit3, Trash2, Calendar, CheckCircle, Clock, Save, X } from "lucide-react";
+import { ArrowLeft, FileText, Eye, Send, Plus, Edit3, Trash2, Calendar, Clock, Save, X } from 'lucide-react';
 import SEO from "../components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

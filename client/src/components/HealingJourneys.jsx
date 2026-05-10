@@ -1,9 +1,5 @@
 import { useState } from "react";
-import { 
-  Sparkles, Heart, Brain, Moon, Shield, Flame, 
-  ChevronRight, Check, Lock, Play, Star, Trophy,
-  Calendar, Clock, Target, ArrowRight, Zap
-} from "lucide-react";
+import { Sparkles, Heart, Moon, Shield, ChevronRight, Check, Lock, Play, Star, Trophy, Calendar, Target, Zap } from 'lucide-react';
 import { useGamification } from "../context/GamificationContext.jsx";
 
 const JOURNEYS = [

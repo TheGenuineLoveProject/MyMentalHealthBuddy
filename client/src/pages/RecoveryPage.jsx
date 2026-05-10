@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, Heart, Shield, Leaf, Sun, Moon, Waves, Brain, Sparkles, ChevronRight, BookOpen, Phone, Users, AlertCircle, Clock, Compass } from "lucide-react";
+import { ArrowLeft, Heart, Shield, Leaf, Waves, Brain, Sparkles, ChevronRight, Phone, Users, AlertCircle, Clock, Compass } from 'lucide-react';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { useSEO } from "../hooks/useSEO";
 import SafetyFooter from "../components/ui/SafetyFooter";

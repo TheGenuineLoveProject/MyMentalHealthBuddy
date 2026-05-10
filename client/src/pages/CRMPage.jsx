@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { 
-  Calendar, Bell, Users, TrendingUp, Heart, Clock, 
-  CheckCircle, Star, MessageCircle, Activity, Target,
-  ChevronRight, User, Settings, Home, BookOpen
-} from 'lucide-react';
+import { Calendar, Bell, Users, TrendingUp, Heart, Clock, Star, Activity, Target, ChevronRight, User, Settings, Home, BookOpen } from 'lucide-react';
 import SEO from '../components/SEO';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";

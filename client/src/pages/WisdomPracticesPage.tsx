@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import {
-  Sparkles, Sun, Heart, BookOpen, ArrowLeft, Play, Pause,
-  RefreshCw, Check, Clock, Calendar, ChevronRight, Quote
-} from "lucide-react";
+import { Sparkles, Sun, Heart, ArrowLeft, Play, Pause, RefreshCw, Check, Calendar, Quote } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

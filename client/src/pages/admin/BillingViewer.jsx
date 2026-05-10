@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'wouter';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/badge';
-import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft, RefreshCw } from 'lucide-react';
+import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft } from 'lucide-react';
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";

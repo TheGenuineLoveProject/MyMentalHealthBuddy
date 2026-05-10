@@ -1,4 +1,4 @@
-import { Shield, Accessibility, FileText, Heart, Phone, Lock } from "lucide-react";
+import { Shield, Accessibility, FileText, Heart, Lock } from 'lucide-react';
 
 const TRUST_SIGNALS = [
   {

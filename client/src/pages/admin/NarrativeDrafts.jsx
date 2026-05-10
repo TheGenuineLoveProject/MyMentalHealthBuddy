@@ -1,11 +1,7 @@
 import { useState, useCallback } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  FileText, Copy, Check, Loader2, Eye, Edit,
-  MessageSquare, Send, ChevronDown, ChevronUp,
-  Globe, Filter, ArrowLeft, RefreshCw
-} from "lucide-react";
+import { FileText, Copy, Check, Loader2, Edit, ChevronDown, ChevronUp, Globe, ArrowLeft, RefreshCw } from 'lucide-react';
 import { SiInstagram, SiX, SiTiktok, SiYoutube } from "react-icons/si";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";

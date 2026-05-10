@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Heart, Eye, Ear, Hand, Wind, Sparkles, RefreshCw, Check, AlertCircle } from "lucide-react";
+import { Heart, Eye, Ear, Hand, Wind, Sparkles, RefreshCw, Check } from 'lucide-react';
 
 const GROUNDING_TECHNIQUES = {
   "5-4-3-2-1": {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Compass, Plus, X, Check, ArrowRight, Save, Calendar } from "lucide-react";
+import { Compass, Plus, X, Check, Save, Calendar } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";

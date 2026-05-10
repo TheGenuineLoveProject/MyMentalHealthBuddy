@@ -1,13 +1,7 @@
 import { useState, useCallback } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import {
-  ArrowLeft, Plus, X, Loader2, Copy, Check, Filter,
-  FileText, Clock, CheckCircle, Send, Eye,
-  AlertTriangle, Shield, BarChart3, BookOpen,
-  Calendar, Target, Link2, ExternalLink, ChevronDown, ChevronRight,
-  Megaphone, Zap, TrendingUp, Clipboard, Search, RefreshCw, AlertCircle
-} from "lucide-react";
+import { ArrowLeft, Plus, X, Loader2, Copy, Check, Filter, FileText, Clock, CheckCircle, Send, Eye, Shield, BarChart3, BookOpen, Calendar, Target, Link2, ExternalLink, ChevronRight, Megaphone, Zap, TrendingUp, Clipboard } from 'lucide-react';
 import { SiInstagram, SiX, SiTiktok, SiYoutube, SiFacebook, SiPinterest } from "react-icons/si";
 import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import { queryClient, apiRequest } from "../../lib/queryClient";

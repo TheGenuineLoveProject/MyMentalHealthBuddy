@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, Plus, X, ChevronRight, BarChart } from "lucide-react";
+import { Heart, Plus, X, BarChart } from 'lucide-react';
 import { 
   PersonalValue, ValuesProfile, 
   VALUE_DOMAINS, CORE_VALUES_LIBRARY,

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Play, Pause, RotateCcw, Volume2, VolumeX, Moon, Sun, Waves, CloudRain, Wind, Trees } from "lucide-react";
+import { Play, Pause, RotateCcw, VolumeX, Moon, Sun, Waves, CloudRain, Wind, Trees } from 'lucide-react';
 import ZenScape from "./zen/ZenScape";
 
 const AMBIENT_SOUNDS = [

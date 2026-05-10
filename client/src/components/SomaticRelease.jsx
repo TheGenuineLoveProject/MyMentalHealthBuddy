@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Activity, Wind, Sparkles, Heart, Timer, Play, Pause, RotateCcw, CheckCircle, Volume2, VolumeX } from "lucide-react";
+import { Activity, Sparkles, Heart, Timer, Play, Pause, RotateCcw, CheckCircle, Volume2, VolumeX } from 'lucide-react';
 
 const SOMATIC_EXERCISES = [
   {

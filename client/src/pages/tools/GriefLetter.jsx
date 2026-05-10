@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useMutation } from "@tanstack/react-query";
-import { Feather, ArrowLeft, Save, Download, Trash2, AlertTriangle, Loader2, Check } from "lucide-react";
+import { Feather, ArrowLeft, Save, Trash2, AlertTriangle, Loader2, Check } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";

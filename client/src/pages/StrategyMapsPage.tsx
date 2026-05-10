@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import {
-  Map, ArrowRight, ChevronRight, Compass, Brain, Heart,
-  Target, Lightbulb, Shield, Flame, Clock, Check, Star,
-  BookOpen, Eye, Scale, Sparkles, Trophy, Zap, Users, ArrowLeft
-} from "lucide-react";
+import { Map, ArrowRight, ChevronRight, Compass, Brain, Heart, Target, Lightbulb, Clock, Check, Trophy } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

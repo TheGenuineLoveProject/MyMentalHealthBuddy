@@ -2,10 +2,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
-import {
-  ArrowLeft, Heart, Sparkles, ChevronRight, Send, Check,
-  Calendar, TrendingUp, RefreshCw
-} from "lucide-react";
+import { ArrowLeft, Heart, Sparkles, ChevronRight, Send, Check, RefreshCw } from 'lucide-react';
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 

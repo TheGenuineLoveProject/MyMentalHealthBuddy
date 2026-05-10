@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import DOMPurify from "dompurify";
-import { BookOpen, ArrowRight, Sparkles, Heart, PenTool, Clock, User, ChevronRight, Tag } from "lucide-react";
+import { BookOpen, ArrowRight, Sparkles, Heart, PenTool, Clock, User, ChevronRight } from 'lucide-react';
 import SEO from "@/components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

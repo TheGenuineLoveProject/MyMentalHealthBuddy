@@ -15,7 +15,7 @@ import {
   type LearningExperiment,
   type AutodidactPlan
 } from "@/lib/autodidact/autodidactForge";
-import { Flame, Plus, Trash2, Beaker, MessageSquare, ChevronRight, RefreshCw } from "lucide-react";
+import { Flame, Trash2, Beaker, RefreshCw } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 export default function AutodidactForge() {

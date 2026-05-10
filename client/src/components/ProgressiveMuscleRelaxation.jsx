@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Activity, Play, Pause, SkipForward, RotateCcw, Check, Volume2 } from "lucide-react";
+import { Activity, Play, Pause, SkipForward, RotateCcw, Check } from 'lucide-react';
 
 const MUSCLE_GROUPS = [
   { id: "hands", name: "Hands & Forearms", duration: 15, tenseDuration: 5, instruction: "Make tight fists with both hands. Squeeze hard for 5 seconds, then release completely.", visual: "✊" },

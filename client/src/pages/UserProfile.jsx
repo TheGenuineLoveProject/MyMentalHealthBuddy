@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { User, Award, Calendar, Heart, Shield, Share2 } from "lucide-react";
+import { User, Award, Calendar, Shield } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../components/SEO";

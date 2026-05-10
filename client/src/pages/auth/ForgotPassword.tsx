@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  KeyRound, Mail, ArrowLeft, Heart, Sparkles, 
-  Loader2, Check, ArrowRight
-} from "lucide-react";
+import { KeyRound, Mail, ArrowLeft, Sparkles, Loader2, Check, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { SEO } from "@/components/SEO";

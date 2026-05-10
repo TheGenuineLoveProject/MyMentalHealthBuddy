@@ -3,10 +3,7 @@
 // Read-only, additive. Mirrors OperationsPanel's glass-premium chrome.
 
 import { useState, useCallback, useMemo } from "react";
-import {
-  ClipboardCheck, RefreshCw, CheckCircle2, AlertTriangle, XCircle,
-  ShieldAlert, Wrench, Activity, ChevronRight, Clock, Lock,
-} from "lucide-react";
+import { ClipboardCheck, RefreshCw, CheckCircle2, AlertTriangle, XCircle, ShieldAlert, Wrench, Activity, Clock, Lock } from 'lucide-react';
 import { useQuery } from "@tanstack/react-query";
 
 /* True when the fetch error string starts with 401 or 403. The fetch

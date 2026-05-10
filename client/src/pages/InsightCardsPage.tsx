@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Lightbulb, Tag, Search, Trash2, Plus, Filter, Calendar, Star, Bookmark } from "lucide-react";
+import { ArrowLeft, Lightbulb, Tag, Search, Trash2, Plus, Calendar, Star, Bookmark } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

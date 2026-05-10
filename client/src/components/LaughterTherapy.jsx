@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Smile, Play, Pause, RotateCcw, Timer, Sparkles, Heart, Zap, Volume2 } from "lucide-react";
+import { Smile, Play, Pause, RotateCcw, Timer, Sparkles, Heart } from 'lucide-react';
 
 const LAUGHTER_EXERCISES = [
   {

@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Brain, Search, Star, BookOpen, Lightbulb, Target, Layers, Grid3X3, List } from "lucide-react";
+import { ArrowLeft, Brain, Search, Star, Lightbulb, Target, Layers, Grid3X3, List } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";

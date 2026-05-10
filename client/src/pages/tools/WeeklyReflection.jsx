@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Calendar, ChevronRight, Save, Sparkles, Loader2, Check, ArrowLeft } from "lucide-react";
+import { Calendar, ChevronRight, Save, Sparkles, Loader2, Check } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";

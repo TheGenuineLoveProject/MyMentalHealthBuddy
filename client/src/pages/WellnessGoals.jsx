@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Target, Plus, CheckCircle, Circle, Trash2, Edit2, Calendar, Loader2 } from "lucide-react";
+import { Target, Plus, CheckCircle, Circle, Trash2 } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";

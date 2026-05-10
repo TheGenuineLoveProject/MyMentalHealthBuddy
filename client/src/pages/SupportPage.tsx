@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Mail, Copy, Check, Heart, Phone, Shield, Sparkles } from "lucide-react";
+import { ArrowLeft, Mail, Copy, Check, Heart, Shield, Sparkles } from 'lucide-react';
 import EthicsSafetyBlock from "@/components/legal/EthicsSafetyBlock";
 import { SEO } from "@/components/SEO";
 

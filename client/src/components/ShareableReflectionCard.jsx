@@ -9,7 +9,7 @@
  */
 
 import { useState, useRef } from 'react';
-import { Share2, Download, Copy, Check, Heart, Sparkles } from 'lucide-react';
+import { Share2, Copy, Check, Heart, Sparkles } from 'lucide-react';
 
 const CARD_THEMES = {
   sage: {

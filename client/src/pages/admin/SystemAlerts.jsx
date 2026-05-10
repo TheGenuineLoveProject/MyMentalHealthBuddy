@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Loader2, ArrowLeft, Activity, RefreshCw, Shield, AlertCircle } from "lucide-react";
+import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Loader2, ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { useToast } from "@/hooks/use-toast";

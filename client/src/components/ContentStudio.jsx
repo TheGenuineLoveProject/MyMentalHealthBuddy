@@ -11,11 +11,7 @@
  */
 
 import { useState, useCallback } from 'react';
-import { 
-  Copy, Check, FileText, Layers, MessageSquare, Mail,
-  Heart, Leaf, BookOpen, Sparkles, Sun, Brain, Shield,
-  AlertCircle, RefreshCw
-} from 'lucide-react';
+import { Copy, Check, FileText, Layers, MessageSquare, Mail, Heart, Leaf, BookOpen, Sparkles, Sun, Brain, Shield, AlertCircle } from 'lucide-react';
 import styles from './ContentStudio.module.css';
 
 const CONTENT_TYPES = [

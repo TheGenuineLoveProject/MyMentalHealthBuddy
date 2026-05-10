@@ -1,9 +1,6 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { 
-  Sparkles, Heart, TrendingUp, Download, Volume2, VolumeX, 
-  Loader2, Calendar, BookOpen, Smile, RefreshCw 
-} from "lucide-react";
+import { Sparkles, Heart, TrendingUp, Download, Volume2, VolumeX, Loader2, BookOpen, Smile, RefreshCw } from 'lucide-react';
 import { apiRequest } from "@/lib/queryClient";
 
 const POETIC_TEMPLATES = {

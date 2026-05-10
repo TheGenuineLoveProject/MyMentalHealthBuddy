@@ -28,13 +28,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import {
-  Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen,
-  MessageCircle, LogIn, ChevronDown, ChevronRight, Sparkles, Menu, X, Bell,
-  Settings, Search, Plus, Filter, Star, Calendar, TrendingUp, Users, FileText,
-  Shield, Lock, Clock, Zap, Eye, Edit, Mail, Check, AlertCircle, Download,
-  Copy, Code, Smartphone, Tablet, Monitor
-} from "lucide-react";
+import { Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen, MessageCircle, LogIn, Sparkles, Menu, Settings, Search, Plus, Filter, TrendingUp, Users, FileText, Shield, Lock, Clock, Zap, Eye, Check, AlertCircle, Download, Copy, Code, Smartphone, Tablet, Monitor } from 'lucide-react';
 
 export default function WireframeTemplates() {
   const [activeTemplate, setActiveTemplate] = useState("landing");

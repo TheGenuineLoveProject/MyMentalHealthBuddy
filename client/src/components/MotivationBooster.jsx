@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Flame, RefreshCw, Heart, Share2, Bookmark, Sparkles, Target, Star } from "lucide-react";
+import { Flame, RefreshCw, Heart, Bookmark, Sparkles, Star } from 'lucide-react';
 
 const MOTIVATION_QUOTES = [
   { text: "The only way to do great work is to love what you do.", author: "Steve Jobs", category: "work" },

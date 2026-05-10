@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Eye, Clock, Plus, BarChart2 } from "lucide-react";
+import { Eye } from 'lucide-react';
 import {
   ATTENTION_CATEGORIES, ATTENTION_PRINCIPLES,
   loadAttentionProfile, saveAttentionProfile

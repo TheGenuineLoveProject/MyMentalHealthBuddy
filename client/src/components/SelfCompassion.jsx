@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, RefreshCw, Save, BookOpen, Star, Sparkles, Check } from "lucide-react";
+import { Heart, BookOpen, Star, Sparkles, Check } from 'lucide-react';
 
 const SELF_COMPASSION_EXERCISES = [
   {

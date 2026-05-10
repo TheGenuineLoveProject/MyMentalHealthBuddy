@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Sparkles, Check, RotateCcw, Trophy, Heart, Brain, Users, Dumbbell, Moon, Utensils } from "lucide-react";
+import { Sparkles, Check, RotateCcw, Trophy, Heart, Brain, Users, Dumbbell } from 'lucide-react';
 
 const SELF_CARE_CATEGORIES = {
   physical: {

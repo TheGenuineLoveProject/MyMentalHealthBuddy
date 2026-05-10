@@ -1,22 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  ArrowLeft, 
-  Brain,
-  RefreshCw,
-  AlertTriangle,
-  Lightbulb,
-  Scale,
-  MessageSquare,
-  Eye,
-  Target,
-  ArrowRight,
-  CheckCircle2,
-  XCircle,
-  HelpCircle,
-  Sparkles,
-  Shield
-} from "lucide-react";
+import { ArrowLeft, Brain, RefreshCw, AlertTriangle, Lightbulb, Scale, MessageSquare, Eye, Target, CheckCircle2, XCircle, HelpCircle, Shield } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";

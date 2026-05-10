@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import {
-  ArrowLeft, Mail, Users, FileText, Send, Loader2,
-  Calendar, Eye, AlertTriangle, CheckCircle, BarChart3, AlertCircle
-} from "lucide-react";
+import { ArrowLeft, Users, FileText, Send, Loader2, Calendar, Eye, AlertTriangle, CheckCircle, BarChart3, AlertCircle } from 'lucide-react';
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";

@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  Library, Heart, Brain, Leaf, Sun, Moon, Wind,
-  BookOpen, ArrowRight, Check, Sparkles, Shield,
-  Activity, Eye, Waves, Flame, Mountain
-} from "lucide-react";
+import { Library, Heart, Brain, Leaf, Sun, BookOpen, ArrowRight, Check, Sparkles, Shield, Activity, Eye, Waves, Flame, Mountain } from 'lucide-react';
 import { BRAND } from "@shared/brand";
 import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import StartHerePathways from "../components/StartHerePathways.jsx";

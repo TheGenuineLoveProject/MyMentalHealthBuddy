@@ -4,30 +4,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
-import { 
-  ArrowLeft, 
-  Sun,
-  Sunset,
-  Moon,
-  Clock,
-  CheckCircle2,
-  Circle,
-  Coffee,
-  Bed,
-  Activity,
-  Wind,
-  BookOpen,
-  Sparkles,
-  Brain,
-  Heart,
-  Droplets,
-  Leaf,
-  Music,
-  Phone,
-  Utensils,
-  Timer,
-  Star
-} from "lucide-react";
+import { ArrowLeft, Sun, Sunset, Moon, Clock, CheckCircle2, Circle, Bed, Activity, Wind, BookOpen, Sparkles, Brain, Heart, Droplets, Leaf, Music, Phone, Utensils, Timer, Star } from 'lucide-react';
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

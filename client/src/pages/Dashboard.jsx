@@ -1,10 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { 
-  BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, 
-  Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut, 
-  Brain, Compass, ChevronRight, Flame, BookOpen
-} from "lucide-react";
+import { BarChart3, Smile, Notebook, MessageCircle, Settings, Heart, Sparkles, Sun, Moon, Wind, Target, LogOut, Brain, Compass, ChevronRight, Flame, BookOpen } from 'lucide-react';
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO";
 import DailyAffirmations from "../components/DailyAffirmations.jsx";

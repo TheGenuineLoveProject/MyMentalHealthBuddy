@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useMutation } from "@tanstack/react-query";
-import { BookOpen, Clock, Star, Filter, Search, Lock, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { BookOpen, Clock, Star, Search, Lock, ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";

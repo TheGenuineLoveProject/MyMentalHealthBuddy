@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { 
-  Calendar, Plus, Check, Clock, Sun, Moon, Coffee, Sunset,
-  Target, Heart, Brain, Wind, Trash2, GripVertical, Sparkles
-} from "lucide-react";
+import { Calendar, Plus, Check, Clock, Sun, Moon, Coffee, Sunset, Target, Heart, Brain, Wind, Trash2, Sparkles } from 'lucide-react';
 import { useGamification } from "../context/GamificationContext.jsx";
 
 const TIME_BLOCKS = [

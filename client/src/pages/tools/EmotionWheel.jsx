@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Heart, ChevronRight, RotateCcw, BookOpen, ArrowLeft } from "lucide-react";
+import { Heart, ChevronRight, RotateCcw, BookOpen } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Sunrise, Moon, Heart, Brain, Sparkles, CheckCircle2, Clock, Target, Flame, Leaf, Shield, Wind, BookOpen, Waves, Sun } from "lucide-react";
+import { ArrowLeft, Sunrise, Moon, Heart, Sparkles, CheckCircle2, Clock, Target, Flame, Leaf, Shield, Wind, Waves, Sun } from 'lucide-react';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { useSEO } from "../hooks/useSEO";
 import SafetyFooter from "../components/ui/SafetyFooter";

@@ -1,16 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  Settings, Users, Database, Activity, Shield, Bell, BarChart3, ArrowLeft, Cog,
-  Server, Globe, Lock, Key, Palette, Mail, CreditCard, Zap, Download,
-  Upload, RefreshCw, CheckCircle2, AlertTriangle, Info, Eye, EyeOff,
-  Copy, ExternalLink, ChevronRight, Moon, Sun, Monitor, Smartphone,
-  HardDrive, Cpu, Cloud, Wifi, AlertCircle, Clock, Calendar,
-  FileText, Image, Video, Music, Archive, Trash2, Plus, Search,
-  ToggleLeft, ToggleRight, Sliders, Volume2, VolumeX, Languages,
-  MapPin, Building, Phone, MessageSquare, Heart, Star, Bookmark,
-  Code, Terminal, Bug, Wrench, Layers, Box, Package
-} from "lucide-react";
+import { Settings, Users, Database, Shield, Bell, ArrowLeft, Cog, Server, Globe, Lock, Key, Mail, CreditCard, Zap, Download, RefreshCw, CheckCircle2, AlertTriangle, Eye, Copy, ChevronRight, Moon, Clock, Calendar, FileText, Image, Video, Archive, Plus, MessageSquare, Star, Code, Terminal, Bug, Wrench } from 'lucide-react';
 import SEO from "../components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

@@ -1,9 +1,5 @@
 import { useState, useMemo } from "react";
-import { 
-  BarChart3, TrendingUp, Calendar, Clock, Target, Award,
-  Heart, Brain, Moon, Flame, ChevronLeft, ChevronRight,
-  Download, Share2, Sparkles, Zap, Activity
-} from "lucide-react";
+import { BarChart3, TrendingUp, Clock, Target, Award, Heart, Brain, Moon, Flame, Download, Share2, Sparkles, Activity } from 'lucide-react';
 import { useGamification } from "../context/GamificationContext.jsx";
 
 const MOCK_WEEKLY_DATA = [

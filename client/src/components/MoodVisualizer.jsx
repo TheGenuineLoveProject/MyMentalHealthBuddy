@@ -1,8 +1,5 @@
 import { useState, useMemo } from "react";
-import { 
-  Heart, TrendingUp, Calendar, ChevronLeft, ChevronRight,
-  Sun, Cloud, CloudRain, Zap, Moon, Sparkles, Filter
-} from "lucide-react";
+import { Heart, TrendingUp, ChevronLeft, ChevronRight, Sun, Cloud, CloudRain, Zap, Moon, Sparkles } from 'lucide-react';
 
 const MOCK_MOOD_DATA = [
   { date: "2025-12-01", score: 7, emotion: "content", note: "Good day at work" },

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Target, Timer, VolumeX, HelpCircle, TrendingUp, Download, Sparkles, Phone, Shield } from "lucide-react";
+import { ArrowLeft, Target, Timer, VolumeX, HelpCircle, TrendingUp, Download, Phone, Shield } from 'lucide-react';
 import BeliefMapper from "@/components/beliefs/BeliefMapper";
 import TimedSession from "@/components/flow/TimedSession";
 import SilenceMode from "@/components/consciousness/SilenceMode";

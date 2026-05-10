@@ -14,7 +14,7 @@ import {
   type ColliderBlend,
   type ColliderSession
 } from "@/lib/synthesis/synthesisCollider";
-import { Zap, Plus, Trash2, Shuffle, Sparkles, ChevronRight } from "lucide-react";
+import { Zap, Plus, Trash2, Shuffle, Sparkles } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 export default function SynthesisCollider() {

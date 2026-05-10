@@ -7,7 +7,7 @@
  */
 
 import { Link } from 'wouter';
-import { AlertCircle, Pause, Heart } from 'lucide-react';
+import { Pause, Heart } from 'lucide-react';
 
 export default function SafetyFooter({ className = '', variant = 'default' }) {
   const isCompact = variant === 'compact';

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, MessageCircle, Sparkles } from "lucide-react";
+import { Heart, Sparkles } from 'lucide-react';
 
 const MOOD_COLORS = {
   happy: { ring: "#f59e0b", bg: "rgba(245, 158, 11, 0.1)", icon: "😊" },

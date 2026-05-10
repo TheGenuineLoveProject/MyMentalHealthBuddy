@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { MessageCircle, X, Send, Sparkles, Heart, Loader2, Volume2, VolumeX } from "lucide-react";
+import { MessageCircle, X, Send, Sparkles, Heart, Volume2, VolumeX } from 'lucide-react';
 import { apiRequest } from "../lib/queryClient";
 import { LotusGuide } from "./sacred";
 import { useEmotion } from "@/context/EmotionContext";

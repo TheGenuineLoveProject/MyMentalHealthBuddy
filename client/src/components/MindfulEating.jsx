@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Apple, Play, Pause, Check, RefreshCw, Utensils, Clock, Star } from "lucide-react";
+import { Apple, Play, Pause, Check, RefreshCw, Utensils } from 'lucide-react';
 
 const MINDFUL_EATING_STEPS = [
   {

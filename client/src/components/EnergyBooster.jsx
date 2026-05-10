@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Zap, Play, Check, Clock, TrendingUp, Sparkles, RefreshCw, Star } from "lucide-react";
+import { Zap, Check, Sparkles, RefreshCw, Star } from 'lucide-react';
 
 const ENERGY_BOOSTERS = [
   {

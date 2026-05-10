@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Flame, Wind, ThermometerSun, Check, RefreshCw, AlertTriangle, Heart } from "lucide-react";
+import { Wind, ThermometerSun, Check, RefreshCw, AlertTriangle, Heart } from 'lucide-react';
 
 const ANGER_LEVELS = [
   { level: 1, name: "Calm", color: "bg-green-400", emoji: "😌" },

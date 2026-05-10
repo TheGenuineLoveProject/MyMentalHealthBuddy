@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { 
-  Sparkles, Heart, Flower2, BookOpen, TrendingUp, 
-  Calendar, Sun, Moon, ArrowRight, RefreshCw, AlertCircle
-} from "lucide-react";
+import { Sparkles, Heart, Flower2, BookOpen, Sun, Moon, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
 import { Link } from "wouter";
 import ReflectionInsights from "@/components/ReflectionInsights.jsx";
 import EmotionAuraRing from "@/components/EmotionAuraRing.jsx";

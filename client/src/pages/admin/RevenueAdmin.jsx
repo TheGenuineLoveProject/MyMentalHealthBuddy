@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { DollarSign, TrendingUp, Users, CreditCard, Calendar, RefreshCw, AlertCircle, ArrowLeft, BarChart3, PieChart } from "lucide-react";
+import { DollarSign, TrendingUp, Users, CreditCard, Calendar, RefreshCw, ArrowLeft, PieChart } from 'lucide-react';
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";

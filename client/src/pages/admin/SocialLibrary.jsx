@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, Sparkles, AlertCircle } from "lucide-react";
+import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, AlertCircle } from 'lucide-react';
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";

@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { 
-  Heart, Users, Filter, Sparkles, MessageCircle, 
-  Loader2, Flower2, Share2, RefreshCw 
-} from "lucide-react";
+import { Heart, Users, Sparkles, Loader2, Flower2, Share2, RefreshCw } from 'lucide-react';
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import ShareReflection from "@/components/ShareReflection.jsx";
 import "@/styles/sacred-visuals.css";

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Flame, Plus, Target, TrendingUp, X } from "lucide-react";
+import { Flame, Target, X } from 'lucide-react';
 import {
   SkillDomain, MasteryProfile, DeliberatePractice,
   SKILL_LEVELS, PRACTICE_METHODS,

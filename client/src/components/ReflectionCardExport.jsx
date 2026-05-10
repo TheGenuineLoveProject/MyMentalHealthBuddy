@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { X, Download, Edit3, Quote, Heart, Footprints, ExternalLink, CheckCircle } from "lucide-react";
+import { X, Download, Edit3, Quote, Heart, Footprints, ExternalLink } from 'lucide-react';
 
 const VALUES_SUGGESTIONS = [
   "Authenticity", "Compassion", "Courage", "Growth", "Gratitude",

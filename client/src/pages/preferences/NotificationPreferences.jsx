@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Bell, BellOff, Mail, Smartphone, Clock, Save, Check, Loader2 } from "lucide-react";
+import { Bell, Mail, Smartphone, Clock, Save, Check, Loader2 } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";

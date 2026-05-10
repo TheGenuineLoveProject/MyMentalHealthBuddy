@@ -15,11 +15,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { 
-  Heart, Sparkles, ArrowRight, Star, Leaf, 
-  Brain, Shield, Users, MessageCircle, BookOpen,
-  Zap, TrendingUp, Award, Check
-} from "lucide-react";
+import { Heart, Sparkles, ArrowRight, Brain, Shield, Users, BookOpen, Zap } from 'lucide-react';
 import HealingHero from "../components/HealingHero";
 import AboutSection from "../components/AboutSection";
 import BenefitsSection from "../components/BenefitsSection";

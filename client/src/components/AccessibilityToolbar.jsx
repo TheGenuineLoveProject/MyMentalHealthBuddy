@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Accessibility, Sun, Moon, Type, Eye, Zap, X, Check } from "lucide-react";
+import { Accessibility, Type, Eye, Zap, X } from 'lucide-react';
 
 const FONT_SIZES = [
   { id: "small", label: "Small", scale: 0.9 },

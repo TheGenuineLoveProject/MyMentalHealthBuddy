@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Target, CheckCircle, Clock, Sparkles, Trophy, ChevronRight, Flame, Zap } from "lucide-react";
+import { Target, CheckCircle, Clock, Sparkles, Trophy, Flame, Zap } from 'lucide-react';
 import { useGamification } from "../context/GamificationContext.jsx";
 import { useToast } from "@/hooks/use-toast";
 

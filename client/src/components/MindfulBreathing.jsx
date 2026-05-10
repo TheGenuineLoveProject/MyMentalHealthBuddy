@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { 
-  Wind, Play, Pause, RotateCcw, Settings, Volume2, VolumeX,
-  ChevronDown, Clock, Heart, Sparkles, Check
-} from "lucide-react";
+import { Wind, Play, Pause, RotateCcw, Volume2, VolumeX, ChevronDown, Clock, Heart, Sparkles, Check } from 'lucide-react';
 import { useGamification } from "../context/GamificationContext.jsx";
 import ZenScape from "./zen/ZenScape";
 

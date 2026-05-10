@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Trophy, Star, Target, Flame, Heart, Brain, Moon, Zap, Award, Lock, CheckCircle, Sparkles } from "lucide-react";
+import { Trophy, Star, Target, Flame, Heart, Brain, Zap, Award, Lock, CheckCircle, Sparkles } from 'lucide-react';
 import { useGamification } from "../context/GamificationContext.jsx";
 
 const ACHIEVEMENT_CATEGORIES = {

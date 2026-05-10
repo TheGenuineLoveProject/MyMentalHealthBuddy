@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Sun, Moon, Star, Sparkles, BookOpen, RefreshCw, Heart, Share2, Copy } from "lucide-react";
+import { ArrowLeft, Sun, Star, BookOpen, Heart, Copy } from 'lucide-react';
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";

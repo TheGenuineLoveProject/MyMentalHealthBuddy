@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Moon, Sun, Clock, TrendingUp, Zap, Cloud, Star, ChevronDown, ChevronUp } from "lucide-react";
+import { Moon, Sun, Clock, TrendingUp, ChevronDown, ChevronUp } from 'lucide-react';
 
 const SLEEP_FACTORS = [
   { id: "caffeine", label: "Had caffeine", icon: "☕", impact: -1 },

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Lightbulb, Shuffle, ChevronRight, Plus } from "lucide-react";
+import { Lightbulb, Shuffle, Plus } from 'lucide-react';
 import {
   CREATIVE_TECHNIQUES,
   loadCreativeProfile, saveCreativeProfile

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Activity, TrendingUp, TrendingDown, Minus, Plus, BarChart3, Clock, Zap } from "lucide-react";
+import { Activity, TrendingUp, TrendingDown, Minus, Plus, BarChart3, Zap } from 'lucide-react';
 
 const STRESS_LEVELS = [
   { level: 1, label: "Calm", color: "bg-emerald-400", emoji: "😌" },

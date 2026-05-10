@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Heart, Sparkles, Mail } from "lucide-react";
+import { Heart, Sparkles } from 'lucide-react';
 
 const SACRED_QUOTES = [
   "Use what helps. Leave the rest.",
