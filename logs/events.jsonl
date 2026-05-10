@@ -258,3 +258,6 @@
 {"type":"buddy_panel_viewed","guestId":"g_moyvd3o0_rkv70m","metadata":{"surface":"start","state":"calm"},"ts":1778363791596}
 {"type":"start_page_click","guestId":"g_moyvd3o0_rkv70m","metadata":{},"ts":1778363791599}
 {"type":"buddy_accessibility_ready","guestId":"g_moyvd3o0_rkv70m","metadata":{},"ts":1778363791599}
+{"type":"buddy_accessibility_ready","guestId":"g_moz8n144_qr1ato","metadata":{},"ts":1778385213832}
+{"type":"buddy_panel_viewed","guestId":"g_moz8n144_qr1ato","metadata":{"surface":"start","state":"calm"},"ts":1778385213834}
+{"type":"start_page_click","guestId":"g_moz8n144_qr1ato","metadata":{},"ts":1778385213836}
