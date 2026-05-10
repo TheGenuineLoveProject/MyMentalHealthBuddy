@@ -94,7 +94,7 @@ function Header() {
           >
             <BuddyAvatar
               state="calm"
-              size="sm"
+              size="md-header"
               colorMode="default"
               data-testid="img-header-lumi"
             />

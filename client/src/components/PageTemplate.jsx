@@ -14,7 +14,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import AOS from 'aos';
 import { gsap } from 'gsap';
-import lumiIconUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import { 
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,
   BookOpen, MessageCircle, Users, Zap, Target, Compass,
@@ -97,7 +97,7 @@ function HeroSection({ hero, readingLevel = 'intermediate' }) {
           data-aos="fade-down"
           data-aos-delay="100"
         >
-          <img src={lumiIconUrl} alt="Lumi" width={28} height={28} style={{ width: 28, height: 28, objectFit: 'contain' }} draggable={false} data-testid="img-logo-badge-lumi" />
+          <BuddyAvatar state="calm" colorMode="default" size="sm" data-testid="img-logo-badge-lumi" />
           <span className={styles.logoBadgeText}>Genuine Love</span>
         </div>
 

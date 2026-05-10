@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Smile, BookOpen, MessageCircle, BarChart3, Plus, ArrowRight, Heart } from "lucide-react";
 import { pickSlot } from "../content/microcopy/wellnessMicrocopy";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 const EMPTY_STATE_CONFIGS = {
   moods: {
@@ -88,8 +89,17 @@ export default function EmptyState({
 
   return (
     <div className="surface-card-elevated p-8 text-center animate-fade-in-up" data-testid={`empty-state-${type}`}>
-      <div className={`w-20 h-20 rounded-2xl ${iconContainerClass} mx-auto mb-6 shadow-lg`}>
-        <Icon className="w-10 h-10" aria-hidden="true" />
+      {/* Lumi (hugging pose, gentle purple) replaces the previous lucide-icon
+          slot per Avatar Uniformity v4.2 spec. The original Icon is kept
+          imported for EmptyStateInline below. */}
+      <div className="mx-auto mb-6 flex items-center justify-center" style={{ width: 128, height: 128 }}>
+        <BuddyAvatar
+          state="sad"
+          colorMode="purple"
+          pose="hugging"
+          size="lg"
+          data-testid={`empty-state-${type}-buddy`}
+        />
       </div>
       <h3 className="text-xl font-display font-semibold text-[var(--glp-primary)] mb-3">
         {title}

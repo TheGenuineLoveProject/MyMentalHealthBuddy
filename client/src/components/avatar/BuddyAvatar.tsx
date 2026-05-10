@@ -107,10 +107,11 @@ const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
  *   lg  → 128px (hero sections, onboarding)
  *   xl  → 208px (landing hero LumiCompanion)
  */
-export type BuddySizeToken = "sm" | "md" | "lg" | "xl";
+export type BuddySizeToken = "sm" | "md-header" | "md" | "lg" | "xl";
 
 const SIZE_TOKEN_PX: Record<BuddySizeToken, number> = {
   sm: 32,
+  "md-header": 44,
   md: 64,
   lg: 128,
   xl: 208,

@@ -11,7 +11,7 @@
 import { Link } from 'wouter';
 import { AlertTriangle, Phone, ExternalLink } from 'lucide-react';
 import styles from './SafetyDisclaimer.module.css';
-import lumiIconUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 export function SafetyDisclaimer({
   variant = 'default',
@@ -31,21 +31,19 @@ export function SafetyDisclaimer({
       role="complementary"
       aria-label="Important safety information"
     >
-      <div className={styles.iconWrapper} aria-hidden="true">
-        <img
-          src={lumiIconUrl}
-          alt=""
-          width={32}
-          height={32}
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: '50%',
-            objectFit: 'contain',
-            background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10, #e8efe8) 0%, transparent 72%)',
-            flexShrink: 0,
-          }}
-          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+      <div
+        className={styles.iconWrapper}
+        aria-hidden="true"
+        style={{
+          flexShrink: 0,
+          background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10, #e8efe8) 0%, transparent 72%)',
+          borderRadius: '50%',
+        }}
+      >
+        <BuddyAvatar
+          state="sad"
+          colorMode="purple"
+          size="sm"
           data-testid="img-disclaimer-lumi"
         />
       </div>

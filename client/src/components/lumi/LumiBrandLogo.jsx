@@ -15,7 +15,7 @@
  */
 import { Link } from "wouter";
 import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
-import buddyUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 const SIZES = {
   sm: { icon: 28, lockupHeight: 32 },
@@ -31,23 +31,16 @@ const SIZES = {
 const LOCKUP_ASPECT = 1024 / 320;
 
 function LumiIconMark({ size = 40, ariaHidden = true }) {
+  // ariaHidden retained for API compat — BuddyAvatar handles its own
+  // role/aria via the buddy state contract; the wrapper element below
+  // forwards aria-hidden when the icon should be purely decorative.
   return (
-    <img
-      src={buddyUrl}
-      alt=""
-      aria-hidden={ariaHidden}
-      draggable="false"
-      loading="lazy"
-      decoding="async"
-      width={size}
-      height={size}
-      style={{
-        width: size,
-        height: size,
-        objectFit: "contain",
-        display: "block",
-      }}
-    />
+    <span
+      style={{ width: size, height: size, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+      aria-hidden={ariaHidden ? "true" : undefined}
+    >
+      <BuddyAvatar state="calm" colorMode="default" size={size} data-testid="lumi-icon-mark" />
+    </span>
   );
 }
 

@@ -17,13 +17,32 @@
  *   className     — extra classes appended to the wrapper.
  */
 import { useCallback, useState } from "react";
-import lumiArtworkUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import "./LumiMascot.css";
 
 const VALID_EMOTIONS = [
   "neutral", "listening", "empathy", "joy", "concern",
   "reflection", "celebration", "sleepy", "surprise", "comfort",
 ];
+
+// LumiMascot's emotion vocabulary → BuddyAvatar's BuddyState vocabulary.
+// Falls back to "calm" for any unmapped value.
+const EMOTION_TO_STATE = {
+  neutral:     "calm",
+  listening:   "calm",
+  empathy:     "sad",
+  joy:         "celebrate",
+  concern:     "anxious",
+  reflection:  "calm",
+  celebration: "celebrate",
+  sleepy:      "calm",
+  surprise:    "encouraged",
+  comfort:     "calm",
+};
+// Sleepy gets the v4 sleep colorMode (curled-up Zzz pose) for visual continuity.
+const EMOTION_TO_COLOR_MODE = {
+  sleepy: "sleep",
+};
 
 export default function LumiMascot({
   emotion = "neutral",
@@ -74,18 +93,17 @@ export default function LumiMascot({
       onKeyDown={handleKey}
       data-testid="lumi-mascot"
     >
-      <img
-        src={lumiArtworkUrl}
-        alt=""
-        aria-hidden="true"
-        draggable="false"
-        loading="lazy"
-        decoding="async"
-        width={size}
-        height={size}
+      <div
         className="lumi-mascot__img"
-        style={{ width: "100%", height: "100%", objectFit: "contain" }}
-      />
+        style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <BuddyAvatar
+          state={EMOTION_TO_STATE[safeEmotion] || "calm"}
+          colorMode={EMOTION_TO_COLOR_MODE[safeEmotion] || "default"}
+          size={size}
+          data-testid="lumi-mascot-img"
+        />
+      </div>
       <span className="lumi-mascot__heart-glow" aria-hidden="true" />
     </div>
   );

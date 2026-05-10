@@ -11,7 +11,7 @@ import { FEATURE_ACCESS } from "@/config/featureAccess";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import FeedbackPrompt from "@/components/FeedbackPrompt";
-import lumiAvatarUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import "../styles/sacred-visuals.css";
 
 const INITIAL_MESSAGE = {
@@ -238,15 +238,11 @@ export default function AIChatPage() {
           
           <div className="flex items-center gap-3 flex-1">
             <div className="icon-container icon-lg icon-gradient-teal flex items-center justify-center overflow-visible" aria-hidden="true">
-              <img
-                src={lumiAvatarUrl}
-                alt=""
-                width={36}
-                height={36}
-                className="lumi-breathe"
-                style={{ width: 36, height: 36, objectFit: "contain", display: "block" }}
-                draggable="false"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              <BuddyAvatar
+                state="calm"
+                colorMode="default"
+                size={36}
+                data-testid="img-chatpage-header-lumi"
               />
             </div>
             <div>
@@ -314,14 +310,11 @@ export default function AIChatPage() {
             >
               {message.role === "assistant" && (
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md overflow-visible" aria-hidden="true">
-                  <img
-                    src={lumiAvatarUrl}
-                    alt=""
-                    width={32}
-                    height={32}
-                    style={{ width: 32, height: 32, objectFit: "contain", display: "block" }}
-                    draggable="false"
-                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  <BuddyAvatar
+                    state="calm"
+                    colorMode="default"
+                    size="sm"
+                    data-testid={`img-chatpage-assistant-${idx}`}
                   />
                 </div>
               )}
@@ -357,15 +350,13 @@ export default function AIChatPage() {
           {chatMutation.isPending && (
             <div className="flex gap-3 justify-start animate-fade-in-up" role="status" aria-live="polite">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md overflow-visible" aria-hidden="true">
-                <img
-                  src={lumiAvatarUrl}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="lumi-breathe"
-                  style={{ width: 32, height: 32, objectFit: "contain", display: "block" }}
-                  draggable="false"
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                {/* state="anxious" triggers the lumi-breathe motion via avatarState
+                    contract — preserves the typing-indicator breathe animation. */}
+                <BuddyAvatar
+                  state="anxious"
+                  colorMode="default"
+                  size="sm"
+                  data-testid="img-chatpage-assistant-typing"
                 />
               </div>
               <div className="chat-bubble chat-bubble-assistant">

@@ -12,6 +12,7 @@
 import { Link } from "wouter";
 import { Heart, Mail, Shield, FileText, HelpCircle, BookOpen, LifeBuoy, Newspaper, Library, Wind, Sparkles, Anchor, Brain } from "lucide-react";
 import { BRAND } from "@shared/brand";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,11 +22,12 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <Heart 
-                className="h-6 w-6" 
-                style={{ color: BRAND.colors.primary }}
-                fill={BRAND.colors.primary}
+            <div className="flex items-center gap-3 mb-4">
+              <BuddyAvatar
+                state="calm"
+                colorMode="default"
+                size="sm"
+                data-testid="img-footer-lumi"
               />
               <span className="font-serif text-xl font-semibold text-gray-900">
                 {BRAND.name}

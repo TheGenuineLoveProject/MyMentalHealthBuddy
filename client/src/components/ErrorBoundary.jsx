@@ -1,5 +1,6 @@
 import React from "react";
 import { Heart, RefreshCw, Home } from "lucide-react";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 function shouldShowDiagnostics() {
   try {
@@ -42,19 +43,26 @@ export class ErrorBoundary extends React.Component {
           role="alert"
         >
           <div style={{ maxWidth: 480, textAlign: "center" }}>
+            {/* CRITICAL SAFETY: state="crisis" is the only state with
+                guaranteed motion="steady" per avatarState.ts. Errors are
+                a crisis-adjacent moment; per the kernel "asymmetric risk:
+                err toward safety", non-flashing presence is mandatory. */}
             <div
               style={{
-                width: 64,
-                height: 64,
-                borderRadius: "50%",
-                background: "rgba(143,191,159,0.15)",
+                margin: "0 auto 1.5rem",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: "0 auto 1.5rem",
+                width: 128,
+                height: 128,
               }}
             >
-              <Heart size={28} color="#2f5d5d" />
+              <BuddyAvatar
+                state="crisis"
+                colorMode="purple"
+                size="lg"
+                data-testid="error-boundary-buddy"
+              />
             </div>
 
             <h1
