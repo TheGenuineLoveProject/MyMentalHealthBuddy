@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Heart, Brain, Eye, Loader2, Sparkles, ArrowRight, AlertCircle, Flame, Sunrise, RefreshCw } from "lucide-react";
 import BuddyPanel from "@/components/avatar/BuddyPanel";
 import type { BuddyState } from "@/lib/avatarState";
+import UpsellModal from '../components/UpsellModal';
 import FeedbackPrompt from "@/components/FeedbackPrompt";
 
 type ToolPayload = {
@@ -724,7 +725,7 @@ export default function Start() {
       hasCompletedTool,
       hasPaywall,
     });
-    if (baseline !== "calm" && baseline !== buddyState) {
+    if (baseline !== "calm") {
       baselineAppliedRef.current = true;
       setBuddyState(baseline);
       track("buddy_baseline_applied", {
