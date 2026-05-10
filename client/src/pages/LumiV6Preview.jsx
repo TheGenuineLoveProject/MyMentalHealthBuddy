@@ -8,10 +8,12 @@
  *
  * Public route, no auth — purely a design tool.
  */
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import LumiV6 from "@/components/lumi/LumiV6";
 import SEO from "@/components/SEO";
+import { LUMI_TOY_SPEC } from "@/data/lumiToySpec";
 
 const V6_EMOTIONS = ["joy", "love", "calm", "greeting", "empathy", "sleepy", "surprise"];
 const V6_POSES    = ["default", "waving", "meditating", "celebrating", "hugging", "thinking", "listening"];
@@ -25,6 +27,18 @@ const V7_POSTURES = ["upright", "curious", "leaning", "relaxed", "bouncy"];
 const STATES = ["calm", "encouraged", "celebrate", "sad", "anxious", "crisis"];
 const COLORS = ["default", "yellow", "pink", "blue", "purple", "orange", "sleep"];
 const POSES  = ["default", "meditating", "celebrating", "waving"];
+
+// V7 emotion → expression coordination table (mirrors EMOTION_DERIVATION
+// in LumiV6.tsx). Used by the playground's read-only visualization.
+const COORDINATION_TABLE = [
+  { emotion: "greeting", mouth: "greeting",  eye: "default", posture: "upright",  hz: 0.5   },
+  { emotion: "joy",      mouth: "excited",   eye: "happy",   posture: "bouncy",   hz: 1.0   },
+  { emotion: "love",     mouth: "loving",    eye: "soft",    posture: "relaxed",  hz: 0.5   },
+  { emotion: "calm",     mouth: "breathing", eye: "soft",    posture: "relaxed",  hz: 0.25  },
+  { emotion: "empathy",  mouth: "worried",   eye: "soft",    posture: "leaning",  hz: 0.35  },
+  { emotion: "sleepy",   mouth: "sleepy",    eye: "closed",  posture: "relaxed",  hz: 0.125 },
+  { emotion: "surprise", mouth: "surprise",  eye: "wide",    posture: "curious",  hz: 1.5   },
+];
 
 function Cell({ label, children, testId }) {
   return (
@@ -262,6 +276,47 @@ export default function LumiV6Preview() {
             ))}
           </div>
 
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Coordination table (resolved runtime)</h3>
+          <p className="mb-3 text-sm text-slate-600">
+            Shows the <em>resolved</em> output of <code>EMOTION_DERIVATION</code>
+            in <code className="mx-1">LumiV6.tsx</code> — i.e. after the
+            backward-compat overrides apply. Note the <code>sleepy</code> eye
+            row reads <code>closed</code> here (visible result) even though the
+            raw derivation map stores <code>soft</code>; the runtime hard-codes
+            the closed slit for sleepy to preserve the V6 silhouette.
+          </p>
+          <div className="overflow-x-auto rounded-lg ring-1 ring-amber-100" data-testid="table-v7-coordination">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-amber-50 text-slate-700">
+                <tr>
+                  <th className="px-3 py-2">Emotion</th>
+                  <th className="px-3 py-2">Mouth</th>
+                  <th className="px-3 py-2">Eye</th>
+                  <th className="px-3 py-2">Posture</th>
+                  <th className="px-3 py-2">Heart (Hz)</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {COORDINATION_TABLE.map((row) => (
+                  <tr key={row.emotion} className="border-t border-amber-50" data-testid={`row-coord-${row.emotion}`}>
+                    <td className="px-3 py-2 font-medium text-slate-900">{row.emotion}</td>
+                    <td className="px-3 py-2 text-slate-700">{row.mouth}</td>
+                    <td className="px-3 py-2 text-slate-700">{row.eye}</td>
+                    <td className="px-3 py-2 text-slate-700">{row.posture}</td>
+                    <td className="px-3 py-2 text-slate-700">{row.hz}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Live emotion cycle</h3>
+          <p className="mb-3 text-sm text-slate-600">
+            Watch the 600ms morph between emotions — eyes blink, mouth/eye
+            geometry crossfades, posture shifts, heart rate retunes.
+          </p>
+          <EmotionCycleDemo />
+
           <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Heart rate (Hz override)</h3>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
             {[0.125, 0.25, 0.5, 1.0, 1.5].map((hz) => (
@@ -272,12 +327,158 @@ export default function LumiV6Preview() {
           </div>
         </section>
 
-        <footer className="mt-12 rounded-xl bg-white/60 p-4 text-xs text-slate-500">
-          V6 formula: round body (V4 PNG) · CSS dot eyes · emotion-gated mouth ·
-          warm amber heart pulse · soft matte texture · transparent background.
-          Crisis state stays motionless — safety contract preserved.
-        </footer>
+        {/* ---------- V7 Toy Spec readout ---------- */}
+        <ToySpecPanel />
       </div>
     </div>
   );
 }
+
+/**
+ * EmotionCycleDemo — interactive button cycles the avatar through all 7
+ * emotions so reviewers can see the 600ms blink-and-morph beat live, plus
+ * an auto-cycle toggle for hands-free demoing.
+ */
+function EmotionCycleDemo() {
+  const order = ["greeting", "joy", "love", "calm", "empathy", "sleepy", "surprise"];
+  const [idx, setIdx] = useState(0);
+  const [auto, setAuto] = useState(false);
+  const current = order[idx];
+  const next = () => setIdx((i) => (i + 1) % order.length);
+
+  useEffect(() => {
+    if (!auto) return;
+    const t = setInterval(() => setIdx((i) => (i + 1) % order.length), 2200);
+    return () => clearInterval(t);
+  }, [auto, order.length]);
+
+  return (
+    <div
+      className="flex flex-col items-center gap-4 rounded-2xl bg-white p-6 ring-1 ring-amber-100"
+      data-testid="cell-v7-cycle"
+    >
+      <div className="flex h-44 w-44 items-center justify-center">
+        <LumiV6 emotion={current} size="lg" data-testid={`cycle-avatar-${current}`} />
+      </div>
+      <div className="text-sm text-slate-600">
+        Now showing: <span className="font-semibold text-slate-900" data-testid="text-cycle-emotion">{current}</span>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={next}
+          className="rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-700"
+          data-testid="button-cycle-next"
+        >
+          Next emotion →
+        </button>
+        <button
+          type="button"
+          onClick={() => setAuto((a) => !a)}
+          className={`rounded-md px-3 py-1.5 text-sm font-semibold ${auto ? "bg-rose-600 text-white hover:bg-rose-700" : "bg-amber-100 text-amber-900 hover:bg-amber-200"}`}
+          data-testid="button-cycle-auto"
+        >
+          {auto ? "Stop auto-cycle" : "Start auto-cycle"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * ToySpecPanel — readable display of LUMI_TOY_SPEC for product/manufacturing
+ * review. Pure presentation; no editing.
+ */
+function ToySpecPanel() {
+  const s = LUMI_TOY_SPEC;
+  return (
+    <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-emerald-100" data-testid="section-toy-spec">
+      <h2 className="mb-2 text-2xl font-semibold text-slate-900">Lumi Toy — Manufacturing Spec</h2>
+      <p className="mb-6 text-sm text-slate-600">
+        Canonical hardware contract for the physical AI companion. The on-screen
+        avatar's emotion → expression mapping mirrors this spec so the toy
+        firmware stays in lockstep with the React component.
+      </p>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <SpecCard title="Physical">
+          <SpecRow k="Dimensions" v={`${s.dimensions.width} × ${s.dimensions.height} × ${s.dimensions.depth} ${s.dimensions.unit}`} />
+          <SpecRow k="Weight" v={`${s.weight.value} ${s.weight.unit}`} />
+          <SpecRow k="Body" v={s.materials.body} />
+          <SpecRow k="Heart" v={s.materials.heart} />
+          <SpecRow k="Base" v={s.materials.base} />
+          <SpecRow k="Certifications" v={s.materials.certifications.join(", ")} />
+        </SpecCard>
+
+        <SpecCard title="Power & Sensors">
+          <SpecRow k="Battery" v={`${s.power.battery.type} ${s.power.battery.capacity} (${s.power.battery.lifeHours}h life)`} />
+          <SpecRow k="Charging" v={`${s.power.charging.type} (~${s.power.charging.timeHours}h)`} />
+          <SpecRow k="Standby" v={`${s.power.standby.days} days`} />
+          <SpecRow k="Touch" v={s.sensors.touch} />
+          <SpecRow k="Accelerometer" v={s.sensors.accelerometer} />
+          <SpecRow k="Microphone" v={s.sensors.microphone} />
+          <SpecRow k="Ambient light" v={s.sensors.ambientLight} />
+        </SpecCard>
+
+        <SpecCard title="LED Systems">
+          <SpecRow k="Eye L" v={`${s.leds.eyeLeft.type} ${s.leds.eyeLeft.size} ${s.leds.eyeLeft.color}`} />
+          <SpecRow k="Eye R" v={`${s.leds.eyeRight.type} ${s.leds.eyeRight.size} ${s.leds.eyeRight.color}`} />
+          <SpecRow k="Mouth" v={`${s.leds.mouth.count}-LED ${s.leds.mouth.arrangement} ${s.leds.mouth.type}`} />
+          <SpecRow k="Heart" v={`${s.leds.heart.type} (${s.leds.heart.feature}), default ${s.leds.heart.defaultColor}`} />
+          <SpecRow k="Body" v={`${s.leds.body.count} ${s.leds.body.type} (${s.leds.body.coverage})`} />
+          <SpecRow k="Eyebrows" v={`${s.leds.eyebrows.count}× ${s.leds.eyebrows.type} ${s.leds.eyebrows.range}`} />
+        </SpecCard>
+
+        <SpecCard title="Emotion States (firmware seed)">
+          <div className="overflow-x-auto" data-testid="table-toy-emotion-states">
+            <table className="w-full text-left text-xs">
+              <thead className="text-slate-600">
+                <tr>
+                  <th className="py-1 pr-3">Name</th>
+                  <th className="py-1 pr-3">Color</th>
+                  <th className="py-1 pr-3">Pattern</th>
+                  <th className="py-1">Hz</th>
+                </tr>
+              </thead>
+              <tbody>
+                {s.emotionStates.map((e) => (
+                  <tr key={e.name} className="border-t border-slate-100" data-testid={`row-toy-state-${e.name}`}>
+                    <td className="py-1 pr-3 font-medium text-slate-900">{e.name}</td>
+                    <td className="py-1 pr-3 text-slate-700">
+                      <span
+                        className="mr-2 inline-block h-3 w-3 rounded-full align-middle ring-1 ring-slate-200"
+                        style={{ background: e.color }}
+                      />
+                      {e.color}
+                    </td>
+                    <td className="py-1 pr-3 text-slate-700">{e.ledPattern}</td>
+                    <td className="py-1 text-slate-700">{e.heartRate}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </SpecCard>
+      </div>
+    </section>
+  );
+}
+
+function SpecCard({ title, children }) {
+  return (
+    <div className="rounded-xl bg-white p-4 ring-1 ring-slate-100">
+      <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">{title}</h3>
+      <dl className="space-y-1 text-sm">{children}</dl>
+    </div>
+  );
+}
+
+function SpecRow({ k, v }) {
+  return (
+    <div className="flex items-baseline gap-2">
+      <dt className="min-w-[110px] text-xs uppercase tracking-wide text-slate-500">{k}</dt>
+      <dd className="flex-1 text-slate-800">{v}</dd>
+    </div>
+  );
+}
+

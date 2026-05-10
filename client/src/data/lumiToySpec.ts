@@ -138,3 +138,117 @@ export const TOY_EMOTION_SEED: Record<string, ToyEmotionSeed> = {
   sleepy:   { eyePattern: "closed",  mouthPattern: "sleepy",    posture: "relaxed",  heartHz: 0.125 },
   surprise: { eyePattern: "wide",    mouthPattern: "surprise",  posture: "curious",  heartHz: 1.5   },
 } as const;
+
+/* =============================================================
+   LUMI_TOY_SPEC — V7 Master manufacturing spec.
+   Richer companion of TOY_LED_SPEC (kept above for back-compat).
+   This is the canonical contract handed to the firmware / BOM /
+   compliance teams. Pure data, no React, no DOM.
+   ============================================================= */
+
+export interface LumiToyMasterSpec {
+  dimensions: { width: number; height: number; depth: number; unit: "mm" };
+  weight:     { value: number; unit: "g" };
+  materials: {
+    body: string;
+    heart: string;
+    base: string;
+    certifications: ReadonlyArray<string>;
+  };
+  leds: {
+    eyeLeft:  { type: string; size: string; color: string };
+    eyeRight: { type: string; size: string; color: string };
+    mouth:    { type: string; count: number; arrangement: string };
+    heart:    { type: string; feature: string; defaultColor: string };
+    body:     { type: string; count: number; coverage: string };
+    eyebrows: { type: string; count: number; range: string };
+  };
+  power: {
+    battery:  { type: string; capacity: string; lifeHours: number };
+    charging: { type: string; timeHours: number };
+    standby:  { days: number };
+  };
+  sensors: {
+    touch: string;
+    accelerometer: string;
+    microphone: string;
+    ambientLight: string;
+  };
+  emotionStates: ReadonlyArray<{
+    name: string;
+    /** Hex body tint for the RGB-zones LED system. */
+    color: string;
+    /** Firmware-side LED pattern key (lookup table on the toy). */
+    ledPattern: string;
+    /** Heart-LED pulse frequency in Hz. Mirrors TOY_EMOTION_SEED. */
+    heartRate: number;
+  }>;
+}
+
+export const LUMI_TOY_SPEC: LumiToyMasterSpec = {
+  dimensions: { width: 85, height: 75, depth: 60, unit: "mm" },
+  weight:     { value: 90, unit: "g" },
+  materials: {
+    body:  "food-grade silicone, Shore A 5-10",
+    heart: "medical-grade TPU, translucent",
+    base:  "ABS plastic, matte finish",
+    certifications: ["CE", "FCC", "ASTM", "EN71", "CPSIA", "ISO 8124"],
+  },
+  leds: {
+    eyeLeft:  { type: "dot-matrix", size: "8x8", color: "warm-white" },
+    eyeRight: { type: "dot-matrix", size: "8x8", color: "warm-white" },
+    mouth:    { type: "strip", count: 12, arrangement: "curved" },
+    heart:    { type: "RGB", feature: "capacitive-touch", defaultColor: "#E8913A" },
+    body:     { type: "RGB-zones", count: 7, coverage: "full-surface" },
+    eyebrows: { type: "servo", count: 2, range: "\u00B115deg" },
+  },
+  power: {
+    battery:  { type: "Li-ion", capacity: "1200mAh", lifeHours: 8 },
+    charging: { type: "USB-C", timeHours: 2 },
+    standby:  { days: 30 },
+  },
+  sensors: {
+    touch:         "capacitive-full-body",
+    accelerometer: "3-axis",
+    microphone:    "MEMS, voice-activity-detection",
+    ambientLight:  "auto-brightness-adjustment",
+  },
+  emotionStates: [
+    { name: "greeting", color: "#A8C9A0", ledPattern: "gentle-pulse",       heartRate: 0.5   },
+    { name: "joy",      color: "#FFD93D", ledPattern: "bright-quick-pulse", heartRate: 1.0   },
+    { name: "love",     color: "#FF9A8B", ledPattern: "warm-pulse",         heartRate: 0.5   },
+    { name: "calm",     color: "#74C0FC", ledPattern: "slow-wave",          heartRate: 0.25  },
+    { name: "empathy",  color: "#C8B6FF", ledPattern: "soft-pulse",         heartRate: 0.35  },
+    { name: "sleepy",   color: "#A8D5BA", ledPattern: "dim-slow",           heartRate: 0.125 },
+    { name: "surprise", color: "#FFB88C", ledPattern: "quick-flash",        heartRate: 1.5   },
+  ],
+} as const;
+
+/* -------------------------------------------------------------
+   Dev-only parity assertion. Catches drift between the runtime
+   emotion derivation, the toy emotion seed, and the master spec's
+   emotionStates list early — before it becomes a firmware/UI bug.
+   No-op in production (NODE_ENV === 'production').
+   ------------------------------------------------------------- */
+if (typeof process !== "undefined" && process.env?.NODE_ENV !== "production") {
+  const seedKeys = Object.keys(TOY_EMOTION_SEED).sort().join(",");
+  const masterKeys = LUMI_TOY_SPEC.emotionStates.map((e) => e.name).sort().join(",");
+  if (seedKeys !== masterKeys) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      "[lumiToySpec] emotion-name drift:\n  TOY_EMOTION_SEED:        " +
+        seedKeys +
+        "\n  LUMI_TOY_SPEC.emotionStates: " +
+        masterKeys,
+    );
+  }
+  for (const state of LUMI_TOY_SPEC.emotionStates) {
+    const seed = TOY_EMOTION_SEED[state.name];
+    if (seed && seed.heartHz !== state.heartRate) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[lumiToySpec] heart-rate drift for "${state.name}": seed=${seed.heartHz}Hz, master=${state.heartRate}Hz`,
+      );
+    }
+  }
+}
