@@ -425,6 +425,7 @@ export default function Start() {
   // Engagement signals — fire-once per /start session.
   const [toolClickCount, setToolClickCount] = useState(0);
   const [toolCompleted, setToolCompleted] = useState(false);
+  const [showUpsell, setShowUpsell] = useState(false);
   // v1.3: tracks the entry-point button the user clicked. Read-only signal
   // for BuddyAvatar — never affects AI / tool execution / response logic.
   const [selectedToolId, setSelectedToolId] = useState<string | null>(null);
@@ -725,7 +726,7 @@ export default function Start() {
       hasCompletedTool,
       hasPaywall,
     });
-    if (baseline !== "calm") {
+    if (baseline !== "calm" && baseline !== buddyState) {
       baselineAppliedRef.current = true;
       setBuddyState(baseline);
       track("buddy_baseline_applied", {
@@ -1075,6 +1076,7 @@ export default function Start() {
                     toolType: tool.tool.type,
                     stepCount: tool.exercise.steps.length,
                   });
+                  setShowUpsell(true);
                 }}
                 className="inline-flex items-center gap-2 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-medium text-amber-800 dark:text-amber-200 hover:bg-amber-50 dark:hover:bg-amber-950/40 disabled:opacity-60 disabled:cursor-default transition-colors"
                 data-testid="button-tool-complete"
@@ -1223,6 +1225,11 @@ export default function Start() {
           <Link href="/" className="underline" data-testid="link-home">Back to homepage</Link>
         </footer>
       </main>
+      <UpsellModal
+        isOpen={showUpsell}
+        onClose={() => setShowUpsell(false)}
+        toolName={tool?.tool?.title || 'this exercise'}
+      />
     </div>
   );
 }
