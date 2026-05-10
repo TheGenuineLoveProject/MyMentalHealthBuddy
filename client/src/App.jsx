@@ -94,6 +94,7 @@ const ToolsPage = lazy(() => import("./pages/ToolsPage.jsx"));
 const BreathTool = lazy(() => import("./pages/tools/BreathTool.jsx"));
 const BreathingTool = lazy(() => import("./pages/tools/BreathingTool.jsx"));
 const CheckIn = lazy(() => import("./pages/CheckIn.jsx"));
+const CelebrationFlow = lazy(() => import("./pages/CelebrationFlow.jsx"));
 const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
 const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
 const AdvancedToolsPage = lazy(() => import("./pages/AdvancedToolsPage.tsx"));
@@ -1544,8 +1545,17 @@ export default function App() {
               <Route path="/insights">
                 <ProtectedRoute><InsightsDashboard /></ProtectedRoute>
               </Route>
+              {/* /celebration: 3-phase "I Did It!" flow per Avatar v4.2 Flow C.
+                  Public (no ProtectedRoute) so any tool completion can route
+                  here including unauthenticated demo flows. The richer
+                  CelebrationRitual lives at /celebration/ritual. */}
               <Route path="/celebration">
-                <ProtectedRoute><CelebrationRitual /></ProtectedRoute>
+                <CelebrationFlow />
+              </Route>
+              {/* Public so legacy inbound /celebration links (now moved to
+                  /celebration/ritual) keep working for unauthenticated demo. */}
+              <Route path="/celebration/ritual">
+                <CelebrationRitual />
               </Route>
               <Route path="/social">
                 <WellnessRoute><SocialHub /></WellnessRoute>

@@ -1,101 +1,98 @@
 /**
- * CheckIn — /checkin
+ * CheckIn — /checkin  (Avatar v4.2 Flow B spec)
  *
- * Lightweight 5-step emotional check-in. Lumi reflects the chosen
- * mood through dynamic colorMode + state via the buddyEmotion
- * single-source-of-truth mapping.
+ * Phases: select → intensity → note → complete.
  *
- * Replaces the prior `<Redirect to="/mood" />` stub. Storage is
- * intentionally in-memory + localStorage (no server write) — the
- * point is presence, not data collection.
+ * Avatar color transitions in real time as the user picks an emotion,
+ * routed through the buddyEmotion single-source-of-truth lookup. Note
+ * is optional. Storage is localStorage only — the point is presence,
+ * not data collection.
  */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
-import {
-  emotionToAvatar,
-  type BuddyEmotion,
-} from "@/lib/buddyEmotion";
+import { emotionToAvatar } from "@/lib/buddyEmotion";
 
-const PROMPTS = [
-  {
-    id: "feeling",
-    question: "What's most present right now?",
-    options: [
-      { label: "Calm",       emotion: "calm"       },
-      { label: "Anxious",    emotion: "anxiety"    },
-      { label: "Sad",        emotion: "sadness"    },
-      { label: "Tired",      emotion: "tiredness"  },
-      { label: "Frustrated", emotion: "frustration"},
-      { label: "Grateful",   emotion: "gratitude"  },
-      { label: "Hopeful",    emotion: "hope"       },
-      { label: "Joyful",     emotion: "joy"        },
-    ],
-  },
-  {
-    id: "body",
-    question: "How does your body feel?",
-    options: [
-      { label: "Settled",     emotion: "calm"      },
-      { label: "Buzzing",     emotion: "anxiety"   },
-      { label: "Heavy",       emotion: "sadness"   },
-      { label: "Drained",     emotion: "tiredness" },
-    ],
-  },
-  {
-    id: "need",
-    question: "What might help most?",
-    options: [
-      { label: "Some quiet",     emotion: "calm"      },
-      { label: "To breathe",     emotion: "calm"      },
-      { label: "To be heard",    emotion: "loneliness"},
-      { label: "To celebrate",   emotion: "joy"       },
-    ],
-  },
+const EMOTIONS = [
+  { label: "Calm",       emotion: "calm",       emoji: "🌿" },
+  { label: "Anxious",    emotion: "anxiety",    emoji: "🌊" },
+  { label: "Sad",        emotion: "sadness",    emoji: "💙" },
+  { label: "Tired",      emotion: "tiredness",  emoji: "😴" },
+  { label: "Frustrated", emotion: "frustration",emoji: "🔥" },
+  { label: "Grateful",   emotion: "gratitude",  emoji: "🌸" },
+];
+const INTENSITIES = [
+  { label: "Mild",     value: "mild",     dots: 1 },
+  { label: "Moderate", value: "moderate", dots: 2 },
+  { label: "Strong",   value: "strong",   dots: 3 },
 ];
 
 export default function CheckIn() {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [done, setDone] = useState(false);
+  const [phase, setPhase] = useState("select"); // select | intensity | note | complete
+  const [emotion, setEmotion] = useState(null);
+  const [intensity, setIntensity] = useState(null);
+  const [note, setNote] = useState("");
+  const [streak, setStreak] = useState(1);
 
-  const current = PROMPTS[step];
-  const lastEmotion = useMemo(() => {
-    const vals = Object.values(answers);
-    return (vals[vals.length - 1] || "calm");
-  }, [answers]);
+  // Compute streak from localStorage on mount.
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("mmhb-checkin-streak");
+      const parsed = raw ? JSON.parse(raw) : null;
+      const today = new Date().toISOString().slice(0, 10);
+      if (parsed?.date === today) {
+        setStreak(parsed.count || 1);
+      } else if (parsed?.date) {
+        const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+        setStreak(parsed.date === yesterday ? (parsed.count || 0) + 1 : 1);
+      }
+    } catch { /* private mode */ }
+  }, []);
 
-  const hint = emotionToAvatar(lastEmotion);
+  // Real-time avatar: greeting/default at start, then the picked emotion's
+  // hint, then a celebrate state on complete.
+  const avatar = useMemo(() => {
+    if (phase === "complete") return { state: "celebrate", colorMode: "yellow", pose: "celebrating" };
+    if (!emotion) return { state: "calm", colorMode: "default", pose: "waving" };
+    return emotionToAvatar(emotion);
+  }, [phase, emotion]);
 
-  function pick(emotion) {
-    const nextAnswers = { ...answers, [current.id]: emotion };
-    setAnswers(nextAnswers);
-    if (step + 1 >= PROMPTS.length) {
-      try {
-        window.localStorage.setItem(
-          "mmhb-last-checkin",
-          JSON.stringify({ at: Date.now(), answers: nextAnswers }),
-        );
-      } catch { /* private mode etc */ }
-      setDone(true);
-    } else {
-      setStep(step + 1);
-    }
+  function pickEmotion(e) {
+    setEmotion(e);
+    setPhase("intensity");
   }
-
+  function pickIntensity(v) {
+    setIntensity(v);
+    setPhase("note");
+  }
+  function finish() {
+    try {
+      const today = new Date().toISOString().slice(0, 10);
+      window.localStorage.setItem(
+        "mmhb-last-checkin",
+        JSON.stringify({ at: Date.now(), emotion, intensity, note }),
+      );
+      window.localStorage.setItem(
+        "mmhb-checkin-streak",
+        JSON.stringify({ date: today, count: streak }),
+      );
+    } catch { /* private mode */ }
+    setPhase("complete");
+  }
   function reset() {
-    setAnswers({});
-    setStep(0);
-    setDone(false);
+    setPhase("select");
+    setEmotion(null);
+    setIntensity(null);
+    setNote("");
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-emerald-50">
       <SEO
-        title="Check In — A Quick Emotional Pulse"
-        description="A 30-second guided emotional check-in with Lumi. Private, free, no signup."
+        title="Emotion Check-In with Lumi"
+        description="A gentle 4-step emotional pulse with Lumi. Private, free, no signup."
       />
       <div className="mx-auto max-w-2xl px-6 py-12">
         <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
@@ -117,8 +114,11 @@ export default function CheckIn() {
           <h1 className="text-3xl font-semibold text-slate-900" data-testid="text-title">
             A gentle check-in
           </h1>
-          <p className="mt-2 text-slate-600">
-            No right answers. Lumi reflects what you bring.
+          <p className="mt-2 text-slate-600" data-testid="text-phase-help">
+            {phase === "select"    && "What's most present right now?"}
+            {phase === "intensity" && "How strongly do you feel it?"}
+            {phase === "note"      && "Anything you'd like to note? (Optional)"}
+            {phase === "complete"  && "Thank you for showing up."}
           </p>
         </header>
 
@@ -128,76 +128,144 @@ export default function CheckIn() {
           data-testid="container-buddy"
         >
           <BuddyAvatar
-            state={hint.state}
-            colorMode={hint.colorMode}
-            pose={hint.pose}
-            size="lg"
-            data-testid="img-checkin-buddy"
+            state={avatar.state}
+            colorMode={avatar.colorMode}
+            pose={avatar.pose}
+            size={phase === "complete" ? "xl" : "xl"}
+            data-testid={`img-checkin-buddy-${phase}`}
           />
         </div>
 
-        {!done && (
-          <section
-            className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-emerald-100"
-            data-testid={`section-step-${step}`}
-          >
-            <p className="mb-4 text-sm font-medium uppercase tracking-wide text-emerald-700">
-              Step {step + 1} of {PROMPTS.length}
-            </p>
-            <h2 className="mb-5 text-xl font-medium text-slate-900" data-testid="text-question">
-              {current.question}
-            </h2>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3" role="group" aria-label={current.question}>
-              {current.options.map((opt) => (
+        <section
+          className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-emerald-100"
+          data-testid={`section-phase-${phase}`}
+        >
+          {phase === "select" && (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3" role="group" aria-label="Choose an emotion">
+              {EMOTIONS.map((opt) => (
                 <button
-                  key={opt.label}
-                  onClick={() => pick(opt.emotion)}
-                  className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm font-medium text-emerald-900 hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-                  data-testid={`button-option-${opt.emotion}`}
+                  key={opt.emotion}
+                  onClick={() => pickEmotion(opt.emotion)}
+                  className="flex flex-col items-center gap-1 rounded-xl border border-emerald-200 bg-white px-4 py-4 text-sm font-medium text-emerald-900 hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  data-testid={`button-emotion-${opt.emotion}`}
                   type="button"
                 >
-                  {opt.label}
+                  <span aria-hidden="true" className="text-2xl">{opt.emoji}</span>
+                  <span>{opt.label}</span>
                 </button>
               ))}
             </div>
-          </section>
-        )}
+          )}
 
-        {done && (
-          <section
-            className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-emerald-100 text-center"
-            data-testid="section-done"
-          >
-            <h2 className="mb-2 text-xl font-medium text-slate-900">Thank you for checking in.</h2>
-            <p className="text-slate-600">
-              Whatever you brought today, it belongs here.
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/tools/breathing"
-                className="rounded-xl bg-sky-600 px-5 py-2 text-white hover:bg-sky-700"
-                data-testid="link-breathing"
-              >
-                Breathe with Lumi
-              </Link>
-              <Link
-                href="/journal"
-                className="rounded-xl border border-emerald-300 bg-white px-5 py-2 text-emerald-800 hover:bg-emerald-50"
-                data-testid="link-journal"
-              >
-                Open journal
-              </Link>
+          {phase === "intensity" && (
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex gap-3" role="group" aria-label="Choose intensity">
+                {INTENSITIES.map((it) => (
+                  <button
+                    key={it.value}
+                    onClick={() => pickIntensity(it.value)}
+                    className="flex flex-col items-center gap-2 rounded-xl border border-emerald-200 bg-white px-6 py-4 text-sm font-medium text-emerald-900 hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                    data-testid={`button-intensity-${it.value}`}
+                    type="button"
+                  >
+                    <span className="flex gap-1" aria-hidden="true">
+                      {Array.from({ length: 3 }).map((_, i) => (
+                        <span
+                          key={i}
+                          className={`h-3 w-3 rounded-full ${i < it.dots ? "bg-emerald-500" : "bg-emerald-100"}`}
+                        />
+                      ))}
+                    </span>
+                    <span>{it.label}</span>
+                  </button>
+                ))}
+              </div>
               <button
-                onClick={reset}
-                className="rounded-xl border border-slate-200 bg-white px-5 py-2 text-slate-700 hover:bg-slate-50"
-                data-testid="button-restart"
+                onClick={() => setPhase("select")}
+                className="text-sm text-slate-500 underline"
+                data-testid="button-intensity-back"
                 type="button"
               >
-                Check in again
+                Back
               </button>
             </div>
-          </section>
-        )}
+          )}
+
+          {phase === "note" && (
+            <div className="flex flex-col gap-3">
+              <label htmlFor="checkin-note" className="text-sm text-slate-600">
+                Optional — a sentence or two for future-you.
+              </label>
+              <textarea
+                id="checkin-note"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="What's on your mind?"
+                rows={4}
+                className="w-full rounded-xl border border-slate-200 p-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+                data-testid="textarea-note"
+              />
+              <div className="flex justify-between">
+                <button
+                  onClick={() => setPhase("intensity")}
+                  className="text-sm text-slate-500 underline"
+                  data-testid="button-note-back"
+                  type="button"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={finish}
+                  className="rounded-xl bg-emerald-600 px-5 py-2 text-white hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  data-testid="button-finish"
+                  type="button"
+                >
+                  Finish check-in
+                </button>
+              </div>
+            </div>
+          )}
+
+          {phase === "complete" && (
+            <div className="text-center">
+              <h2 className="text-2xl font-medium text-slate-900">You showed up.</h2>
+              <p className="mt-2 text-slate-600">
+                Whatever you brought today, it belongs here.
+              </p>
+              <div
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-amber-800"
+                data-testid="badge-streak"
+              >
+                <span aria-hidden="true">🔥</span>
+                <span className="font-medium">{streak}-day streak</span>
+              </div>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/tools/breathing"
+                  className="rounded-xl bg-sky-600 px-5 py-2 text-white hover:bg-sky-700"
+                  data-testid="link-breathing"
+                >
+                  Breathe with Lumi
+                </Link>
+                <Link
+                  href="/celebration"
+                  className="rounded-xl border border-amber-300 bg-white px-5 py-2 text-amber-800 hover:bg-amber-50"
+                  data-testid="link-celebration"
+                >
+                  Celebrate
+                </Link>
+                <button
+                  onClick={reset}
+                  className="rounded-xl border border-slate-200 bg-white px-5 py-2 text-slate-700 hover:bg-slate-50"
+                  data-testid="button-restart"
+                  type="button"
+                >
+                  Check in again
+                </button>
+              </div>
+            </div>
+          )}
+        </section>
 
         <SafetyFooter />
       </div>

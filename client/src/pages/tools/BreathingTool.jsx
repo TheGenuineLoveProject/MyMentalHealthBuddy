@@ -1,79 +1,126 @@
 /**
- * BreathingTool — /tools/breathing
+ * BreathingTool — /tools/breathing  (Avatar v4.2 Flow A spec)
  *
- * Lumi-anchored 4-7-8 calming breath cycle. Replaces the prior
- * autopilot ConfigRoute stub with a real, deterministic exercise.
+ * Phases: intro → breathing (3 cycles of inhale 4s / hold 2s / exhale 4s)
+ *         → check-in → complete.
  *
- * Safety: every screen surfaces /crisis. Honors prefers-reduced-motion
- * (no scaling animation; phase still advances). Avatar stays in calm/blue
- * for the full cycle so the breath companion never alarms.
+ * Each phase swaps Lumi's state/colorMode/pose per the spec. The breath
+ * circle scale syncs to the active sub-phase. Honors prefers-reduced-motion:
+ * no scaling animation, no confetti — but the timer still advances so the
+ * user can complete the exercise.
+ *
+ * Safety: every phase exposes /crisis in the nav.
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 
-const PHASES = [
-  { key: "inhale", label: "Breathe in",      seconds: 4, scale: 1.18 },
-  { key: "hold",   label: "Hold",            seconds: 7, scale: 1.18 },
-  { key: "exhale", label: "Breathe out",     seconds: 8, scale: 0.92 },
-  { key: "rest",   label: "Rest",            seconds: 2, scale: 1.0  },
+const BREATH_PHASES = [
+  { key: "inhale", label: "Inhale",  seconds: 4, scale: 1.25 },
+  { key: "hold",   label: "Hold",    seconds: 2, scale: 1.25 },
+  { key: "exhale", label: "Exhale",  seconds: 4, scale: 0.85 },
 ];
-const TOTAL_CYCLES = 4;
+const TOTAL_BREATHS = 3;
+
+const CHECKIN_OPTIONS = [
+  { label: "Great", emoji: "🌟", value: "great" },
+  { label: "Good",  emoji: "🙂", value: "good"  },
+  { label: "Okay",  emoji: "😐", value: "okay"  },
+  { label: "Low",   emoji: "💙", value: "low"   },
+  { label: "Rough", emoji: "🌧️", value: "rough" },
+  { label: "Tired", emoji: "😴", value: "tired" },
+];
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(() => {
+    if (typeof window === "undefined") return false;
+    try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+    catch { return false; }
+  });
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handler = (e) => setReduced(e.matches);
+    if (mq.addEventListener) mq.addEventListener("change", handler);
+    else mq.addListener(handler);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", handler);
+      else mq.removeListener(handler);
+    };
+  }, []);
+  return reduced;
+}
 
 export default function BreathingTool() {
-  const [running, setRunning] = useState(false);
-  const [phaseIdx, setPhaseIdx] = useState(0);
-  const [cycle, setCycle] = useState(1);
-  const [secondsLeft, setSecondsLeft] = useState(PHASES[0].seconds);
-  const [completed, setCompleted] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
+  const [phase, setPhase] = useState("intro"); // intro | breathing | checkin | complete
+  const [breathIdx, setBreathIdx] = useState(0); // 0..2
+  const [subIdx, setSubIdx] = useState(0); // 0..2 (inhale/hold/exhale)
+  const [secondsLeft, setSecondsLeft] = useState(BREATH_PHASES[0].seconds);
+  const [checkin, setCheckin] = useState(null);
   const tickRef = useRef(null);
 
-  const phase = PHASES[phaseIdx];
-
+  // Tick during breathing only.
   useEffect(() => {
-    if (!running) return;
+    if (phase !== "breathing") return;
     tickRef.current = window.setInterval(() => {
       setSecondsLeft((s) => s - 1);
     }, 1000);
     return () => window.clearInterval(tickRef.current);
-  }, [running]);
+  }, [phase]);
 
+  // Advance sub-phase / breath / move to checkin.
   useEffect(() => {
-    if (!running) return;
+    if (phase !== "breathing") return;
     if (secondsLeft > 0) return;
-    const nextIdx = (phaseIdx + 1) % PHASES.length;
-    if (nextIdx === 0) {
-      const nextCycle = cycle + 1;
-      if (nextCycle > TOTAL_CYCLES) {
-        setRunning(false);
-        setCompleted(true);
+    const nextSub = (subIdx + 1) % BREATH_PHASES.length;
+    if (nextSub === 0) {
+      const nextBreath = breathIdx + 1;
+      if (nextBreath >= TOTAL_BREATHS) {
+        setPhase("checkin");
         return;
       }
-      setCycle(nextCycle);
+      setBreathIdx(nextBreath);
     }
-    setPhaseIdx(nextIdx);
-    setSecondsLeft(PHASES[nextIdx].seconds);
-  }, [secondsLeft, running, phaseIdx, cycle]);
+    setSubIdx(nextSub);
+    setSecondsLeft(BREATH_PHASES[nextSub].seconds);
+  }, [secondsLeft, phase, subIdx, breathIdx]);
 
-  function start() {
-    setCompleted(false);
-    setCycle(1);
-    setPhaseIdx(0);
-    setSecondsLeft(PHASES[0].seconds);
-    setRunning(true);
+  const sub = BREATH_PHASES[subIdx];
+
+  function startBreathing() {
+    setBreathIdx(0);
+    setSubIdx(0);
+    setSecondsLeft(BREATH_PHASES[0].seconds);
+    setPhase("breathing");
   }
-  function stop() {
-    setRunning(false);
-    window.clearInterval(tickRef.current);
+  function pickCheckin(v) {
+    setCheckin(v);
+    setPhase("complete");
   }
+  function reset() {
+    setPhase("intro");
+    setBreathIdx(0);
+    setSubIdx(0);
+    setSecondsLeft(BREATH_PHASES[0].seconds);
+    setCheckin(null);
+  }
+
+  // Per-phase avatar config per spec.
+  const avatar = useMemo(() => {
+    if (phase === "intro")     return { state: "calm",    colorMode: "blue",   pose: undefined,      size: "lg", aria: "Lumi calm and ready" };
+    if (phase === "breathing") return { state: "calm",    colorMode: "blue",   pose: "meditating",   size: "lg", aria: `Lumi meditating, ${sub.label.toLowerCase()}` };
+    if (phase === "checkin")   return { state: "sad",     colorMode: "purple", pose: undefined,      size: "lg", aria: "Lumi gently checking in with you" };
+    return                            { state: "celebrate", colorMode: "yellow", pose: "celebrating", size: "xl", aria: "Lumi celebrating with you" };
+  }, [phase, sub.label]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-sky-50">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-amber-50">
       <SEO
-        title="Breathing Exercise — 4-7-8 Calming Breath"
-        description="Lumi-guided 4-7-8 breath cycle for anxiety, sleep, and nervous-system regulation. Free, private, no signup."
+        title="Breathing Exercise — Breathe With Lumi"
+        description="A 4-2-4 paced breath exercise with Lumi. Free, private, no signup."
       />
       <div className="mx-auto max-w-2xl px-6 py-12">
         <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
@@ -93,10 +140,13 @@ export default function BreathingTool() {
 
         <header className="mb-8 text-center">
           <h1 className="text-3xl font-semibold text-slate-900" data-testid="text-title">
-            Breathing Companion
+            Breathe With Lumi
           </h1>
-          <p className="mt-2 text-slate-600">
-            A gentle 4-7-8 cycle — breathe with Lumi.
+          <p className="mt-2 text-slate-600" data-testid="text-phase-intro">
+            {phase === "intro"     && "Three gentle breaths. No pressure."}
+            {phase === "breathing" && `Breath ${breathIdx + 1} of ${TOTAL_BREATHS}`}
+            {phase === "checkin"   && "How are you feeling now?"}
+            {phase === "complete"  && "Beautiful work."}
           </p>
         </header>
 
@@ -104,66 +154,126 @@ export default function BreathingTool() {
           aria-live="polite"
           aria-atomic="true"
           className="mx-auto flex flex-col items-center justify-center rounded-3xl bg-white/80 p-10 shadow-sm ring-1 ring-sky-100"
-          data-testid="section-breathing"
+          data-testid={`section-phase-${phase}`}
         >
+          {/* Animated breath circle (decorative — wraps the avatar) */}
           <div
+            aria-hidden="true"
+            data-testid="breath-circle"
             style={{
-              transform: `scale(${running ? phase.scale : 1})`,
-              transition: "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
+              transform: `scale(${
+                phase === "breathing" && !reducedMotion ? sub.scale : 1
+              })`,
+              transition: reducedMotion ? "none" : "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
+              borderRadius: "50%",
+              padding: "1.25rem",
+              background:
+                phase === "breathing"
+                  ? "radial-gradient(circle, rgba(116,192,252,0.18) 0%, transparent 72%)"
+                  : phase === "checkin"
+                  ? "radial-gradient(circle, rgba(200,182,255,0.22) 0%, transparent 72%)"
+                  : "radial-gradient(circle, rgba(255,217,61,0.22) 0%, transparent 72%)",
             }}
-            data-testid="container-buddy"
           >
             <BuddyAvatar
-              state={running ? "calm" : "calm"}
-              colorMode="blue"
-              size="xl"
-              data-testid="img-breathing-buddy"
+              state={avatar.state}
+              colorMode={avatar.colorMode}
+              pose={avatar.pose}
+              size={avatar.size}
+              data-testid={`img-breathing-buddy-${phase}`}
             />
           </div>
 
-          <p
-            className="mt-6 text-2xl font-medium text-sky-900"
-            data-testid="text-phase-label"
-          >
-            {completed ? "Beautiful — cycle complete." : running ? phase.label : "Press start when you're ready."}
-          </p>
-          {running && (
-            <p className="mt-2 text-5xl font-light tabular-nums text-sky-700" data-testid="text-seconds">
-              {secondsLeft}
-            </p>
-          )}
-          {running && (
-            <p className="mt-4 text-sm text-slate-500" data-testid="text-cycle">
-              Cycle {cycle} of {TOTAL_CYCLES}
-            </p>
-          )}
-
-          <div className="mt-8 flex gap-3">
-            {!running && (
+          {phase === "intro" && (
+            <>
+              <p className="mt-6 max-w-md text-center text-lg text-slate-700">
+                Let's breathe together — 3 cycles, about 30 seconds.
+              </p>
               <button
-                onClick={start}
-                className="rounded-xl bg-sky-600 px-6 py-3 text-white shadow-sm hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                onClick={startBreathing}
+                className="mt-6 rounded-xl bg-sky-600 px-6 py-3 text-white shadow-sm hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                 data-testid="button-start-breathing"
                 type="button"
               >
-                {completed ? "Begin again" : "Start"}
+                Begin
               </button>
-            )}
-            {running && (
-              <button
-                onClick={stop}
-                className="rounded-xl border border-sky-300 bg-white px-6 py-3 text-sky-800 hover:bg-sky-50"
-                data-testid="button-stop-breathing"
-                type="button"
+            </>
+          )}
+
+          {phase === "breathing" && (
+            <>
+              <p className="mt-6 text-3xl font-medium text-sky-900" data-testid="text-sub-label">
+                {sub.label}
+              </p>
+              <p className="mt-2 text-5xl font-light tabular-nums text-sky-700" data-testid="text-seconds">
+                {secondsLeft}
+              </p>
+            </>
+          )}
+
+          {phase === "checkin" && (
+            <>
+              <p className="mt-6 text-lg text-slate-700">Pick whatever feels closest.</p>
+              <div
+                className="mt-5 grid grid-cols-3 gap-3"
+                role="group"
+                aria-label="Post-breathing emotion check-in"
               >
-                Pause
-              </button>
-            )}
-          </div>
+                {CHECKIN_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => pickCheckin(opt.value)}
+                    className="flex flex-col items-center gap-1 rounded-xl border border-purple-200 bg-white px-4 py-3 text-sm font-medium text-purple-900 hover:bg-purple-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                    data-testid={`button-checkin-${opt.value}`}
+                    type="button"
+                  >
+                    <span aria-hidden="true" className="text-2xl">{opt.emoji}</span>
+                    <span>{opt.label}</span>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {phase === "complete" && (
+            <>
+              <p className="mt-6 text-2xl font-medium text-amber-700" data-testid="text-complete">
+                You did it!
+              </p>
+              <p className="mt-2 max-w-md text-center text-slate-600">
+                {checkin ? `Noted: feeling ${checkin}.` : ""} Whatever came up,
+                it counts. Be gentle with yourself.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <button
+                  onClick={reset}
+                  className="rounded-xl bg-sky-600 px-5 py-2 text-white hover:bg-sky-700"
+                  data-testid="button-breathe-again"
+                  type="button"
+                >
+                  Breathe again
+                </button>
+                <Link
+                  href="/checkin"
+                  className="rounded-xl border border-emerald-300 bg-white px-5 py-2 text-emerald-800 hover:bg-emerald-50"
+                  data-testid="link-checkin"
+                >
+                  Open check-in
+                </Link>
+                <Link
+                  href="/celebration"
+                  className="rounded-xl border border-amber-300 bg-white px-5 py-2 text-amber-800 hover:bg-amber-50"
+                  data-testid="link-celebration"
+                >
+                  Celebrate
+                </Link>
+              </div>
+            </>
+          )}
 
           <style>{`
             @media (prefers-reduced-motion: reduce) {
-              [data-testid="container-buddy"] { transition: none !important; transform: scale(1) !important; }
+              [data-testid="breath-circle"] { transition: none !important; transform: scale(1) !important; }
             }
           `}</style>
         </section>
@@ -171,13 +281,10 @@ export default function BreathingTool() {
         <section className="mt-8 rounded-2xl bg-white/60 p-6 text-sm text-slate-600" data-testid="section-info">
           <h2 className="mb-2 font-semibold text-slate-800">About this exercise</h2>
           <p>
-            The 4-7-8 breath is a gentle pacing technique: inhale for 4, hold
-            for 7, exhale for 8. Many people find it helpful for anxiety
-            spikes and falling asleep. If you feel lightheaded, slow down or stop.
-          </p>
-          <p className="mt-3">
-            Educational tool only — not a substitute for medical or mental
-            health care. If you're in crisis, please visit{" "}
+            A gentle paced breath: inhale 4s, hold 2s, exhale 4s, three times.
+            If you feel lightheaded, slow down or pause. Educational only —
+            not a substitute for medical or mental health care. If you're in
+            crisis, please visit{" "}
             <Link href="/crisis" className="font-semibold text-rose-700 underline">our crisis page</Link>{" "}
             or call 988.
           </p>

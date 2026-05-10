@@ -146,3 +146,84 @@ export function classifyEmotion(text: string | null | undefined): BuddyEmotion {
 export function avatarForText(text: string | null | undefined): AvatarHint {
   return emotionToAvatar(classifyEmotion(text));
 }
+
+/**
+ * Legacy 18-emotion vocabulary used by older surfaces (chat panel,
+ * mood log). Maps each legacy name to the canonical BuddyEmotion so
+ * call-sites can keep their familiar names and still flow through the
+ * single-source-of-truth lookup.
+ */
+export type LegacyEmotion =
+  | "greeting" | "listening" | "thinking" | "happy" | "sad" | "anxious"
+  | "calm" | "surprised" | "confused" | "celebrating" | "curious"
+  | "compassionate" | "focused" | "sleepy" | "excited" | "grateful"
+  | "encouraging" | "mindful";
+
+export const LEGACY_TO_EMOTION: Record<LegacyEmotion, BuddyEmotion> = {
+  greeting:      "calm",       // first-meet, neutral default
+  listening:     "calm",       // active-listening posture (purple via avatar)
+  thinking:      "calm",       // AI processing — blue tone via override site
+  happy:         "joy",
+  sad:           "sadness",
+  anxious:       "anxiety",
+  calm:          "calm",
+  surprised:     "joy",        // closest valid; pose handles the surprise
+  confused:      "confusion",
+  celebrating:   "joy",
+  curious:       "hope",       // exploratory warmth
+  compassionate: "love",
+  focused:       "calm",       // grounded blue tone via override site
+  sleepy:        "tiredness",
+  excited:       "joy",
+  grateful:      "gratitude",
+  encouraging:   "hope",
+  mindful:       "calm",
+};
+
+export function legacyToAvatar(legacy: LegacyEmotion): AvatarHint {
+  return emotionToAvatar(LEGACY_TO_EMOTION[legacy] || "calm");
+}
+
+/**
+ * useChatSentiment-style helper (pure function, callable from hooks
+ * or render). Maps free text to {colorMode, pose} per the chat-panel
+ * sentiment spec. Crisis short-circuits via classifyEmotion → state="crisis".
+ */
+export interface ChatSentimentResult extends AvatarHint {
+  emotion: BuddyEmotion;
+}
+
+const POSITIVE_KW    = /\b(happy|great|thanks?|amazing|wonderful|love\s+it)\b/i;
+const CALMING_KW     = /\b(breathe|breath|calm|relax|okay|grounded|steady)\b/i;
+const CONCERNED_KW   = /\b(sad|worried|anxious|scared|afraid|nervous)\b/i;
+const GRATITUDE_KW   = /\b(grateful|thankful|appreciate|blessed)\b/i;
+const EXCITED_KW     = /\b(excited|wow|awesome|curious|incredible)\b/i;
+
+export function detectChatSentiment(text: string | null | undefined): ChatSentimentResult {
+  const emotion = classifyEmotion(text);
+  // Crisis short-circuits everything — preserve avatar safety.
+  if (emotion === "crisis") {
+    return { ...emotionToAvatar("crisis"), emotion };
+  }
+  if (!text) return { ...emotionToAvatar("calm"), emotion };
+  // Keyword-based colorMode override per Part 4 spec.
+  if (GRATITUDE_KW.test(text)) return { state: "encouraged", colorMode: "pink",   emotion };
+  if (POSITIVE_KW.test(text))  return { state: "celebrate",  colorMode: "yellow", emotion };
+  if (CONCERNED_KW.test(text)) return { state: "sad",        colorMode: "purple", emotion };
+  if (EXCITED_KW.test(text))   return { state: "encouraged", colorMode: "orange", emotion };
+  if (CALMING_KW.test(text))   return { state: "calm",       colorMode: "blue",   emotion };
+  return { ...emotionToAvatar(emotion), emotion };
+}
+
+/** AI conversational state → BuddyPose (Part 4 spec). */
+export type AIChatState = "typing" | "greeting" | "listening" | "celebrating" | "idle";
+
+export function aiStateToPose(s: AIChatState): import("@/components/avatar/BuddyAvatar").BuddyPose {
+  switch (s) {
+    case "typing":      return "thinking";
+    case "greeting":    return "waving";
+    case "listening":   return "listening";
+    case "celebrating": return "celebrating";
+    default:            return "default";
+  }
+}

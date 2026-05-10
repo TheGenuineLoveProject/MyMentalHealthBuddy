@@ -87,9 +87,21 @@ export type BuddyPose =
   | "waving"
   | "meditating"
   | "celebrating"
-  | "hugging";
+  | "hugging"
+  | "listening"
+  | "pointing"
+  | "presenting"
+  | "running"
+  | "sleeping"
+  | "thinking"
+  | "writing";
 
 // Pose source map — uses the canonical filename per asset (action vs body).
+// Poses without dedicated PNGs (listening, pointing, presenting, running,
+// sleeping, thinking, writing) point at the canonical fallback URL directly
+// so the network sees zero 404s. data-pose still surfaces the requested pose
+// for downstream observers / e2e tests / future asset rollouts.
+const FALLBACK_LUMI = "/brand/lumi-v4-ultimate.png";
 const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
   eating:      "/brand/lumi-action-eating.png",
   dancing:     "/brand/lumi-action-dancing.png",
@@ -97,6 +109,15 @@ const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
   meditating:  "/brand/lumi-body-meditating.png",
   celebrating: "/brand/lumi-body-celebrating.png",
   hugging:     "/brand/lumi-body-hugging.png",
+  // Below: declared in the union for type safety; PNGs ship later. Point at
+  // the canonical fallback now so we don't generate 404 noise.
+  listening:   FALLBACK_LUMI,
+  pointing:    FALLBACK_LUMI,
+  presenting:  FALLBACK_LUMI,
+  running:     FALLBACK_LUMI,
+  sleeping:    FALLBACK_LUMI,
+  thinking:    FALLBACK_LUMI,
+  writing:     FALLBACK_LUMI,
 };
 
 /**
@@ -263,8 +284,8 @@ export default function BuddyAvatar({
           // Graceful fallback if a v4 variant is missing — falls back to the
           // canonical sage Lumi so the avatar never renders as a broken image.
           const img = e.currentTarget;
-          if (img.src.indexOf("/brand/lumi-v4-ultimate.png") === -1) {
-            img.src = "/brand/lumi-v4-ultimate.png";
+          if (img.src.indexOf(FALLBACK_LUMI) === -1) {
+            img.src = FALLBACK_LUMI;
           }
         }}
         className={`buddy__svg ${v.motion === 'steady' ? '' : 'lumi-breathe'}`.trim()}

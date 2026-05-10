@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
-import { avatarForText } from "@/lib/buddyEmotion";
+import { detectChatSentiment, aiStateToPose } from "@/lib/buddyEmotion";
 
 type Message = {
   role: "user" | "assistant";
@@ -119,18 +119,24 @@ export default function AIChatPanel() {
               className={`flex gap-3 ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {m.role === "assistant" && (() => {
-                // Dynamic avatar: derive {state, colorMode, pose} from this
-                // assistant turn's text via the single-source-of-truth
-                // buddyEmotion classifier. Crisis short-circuit lives inside
-                // classifyEmotion (asymmetric-risk: stillness over sparkle).
-                const a = avatarForText(m.content);
+                // Part 4 spec: per-bubble sentiment → colorMode + state.
+                // Crisis short-circuits via detectChatSentiment.
+                const s = detectChatSentiment(m.content);
+                // First *assistant* turn (not first message — users often go
+                // first) = greeting → waving pose; subsequent assistant turns
+                // = listening pose (active-listener default for chat).
+                const assistantTurnIdx = messages
+                  .slice(0, i + 1)
+                  .filter((mm) => mm.role === "assistant").length - 1;
+                const aiState = assistantTurnIdx === 0 ? "greeting" : "listening";
+                const pose = s.pose ?? aiStateToPose(aiState);
                 return (
                   <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
                     <BuddyAvatar
-                      state={a.state}
+                      state={s.state}
                       size="sm"
-                      colorMode={a.colorMode}
-                      pose={a.pose}
+                      colorMode={s.colorMode}
+                      pose={pose}
                       data-testid={`img-chat-assistant-${i}`}
                     />
                   </div>
@@ -154,12 +160,13 @@ export default function AIChatPanel() {
           {loading && (
             <div className="flex gap-3 justify-start">
               <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
-                {/* "anxious" state triggers lumi-breathe motion via avatarState
-                    mapping — preserves the typing-indicator breathe animation. */}
+                {/* Part 4 spec: AI typing → pose="thinking". State stays
+                    "anxious" so lumi-breathe motion still plays during wait. */}
                 <BuddyAvatar
                   state="anxious"
                   size="sm"
-                  colorMode="default"
+                  colorMode="blue"
+                  pose={aiStateToPose("typing")}
                   data-testid="img-chat-assistant-typing"
                 />
               </div>
