@@ -265,7 +265,9 @@ export default function Pricing() {
                   
                   <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-4xl font-bold" style={{ color: tier.popular ? 'var(--glp-gold)' : 'var(--glp-sage-deep)' }}>{tier.price}</span>
-                    <span className="text-sm font-medium" style={{ color: 'var(--glp-sage-deep)', opacity: 0.78 }}>{tier.period}</span>
+                    <span className="text-sm font-medium ml-1" style={{ color: 'var(--glp-sage-deep)', opacity: 0.78 }}>
+                      {tier.period?.startsWith('/') ? tier.period : ` ${tier.period}`}
+                    </span>
                   </div>
                   
                   <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--glp-sage-deep)', opacity: 0.82 }}>{tier.description}</p>
@@ -299,7 +301,7 @@ export default function Pricing() {
                       ) : tier.interval === "one_time" ? (
                         `Get ${tier.name} — ${tier.price}`
                       ) : (
-                        `Subscribe to ${tier.name} — ${tier.price}${tier.period}`
+                        `Subscribe to ${tier.name} — ${tier.price}${tier.period?.startsWith('/') ? tier.period : ` ${tier.period}`}`
                       )}
                     </button>
                   ) : (
