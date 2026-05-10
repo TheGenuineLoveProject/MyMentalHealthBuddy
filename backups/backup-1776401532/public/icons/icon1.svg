@@ -1,5 +1,0 @@
-<!-- /public/icons/icon1.svg -->
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M32 10C22 10 14 18 14 28C14 42 32 54 32 54C32 54 50 42 50 28C50 18 42 10 32 10Z" stroke="#2F5D5D" stroke-width="2" stroke-opacity="0.7"/>
-  <path d="M24 30C26 26 30 24 32 24C34 24 38 26 40 30" stroke="#8FBF9F" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8"/>
-</svg>

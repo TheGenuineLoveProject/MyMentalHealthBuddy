@@ -156,6 +156,19 @@ export interface BuddyAvatarProps {
   style?: BuddyStyle;
   /** Pose variant (action/body). Highest priority — overrides style and colorMode. */
   pose?: BuddyPose;
+  /**
+   * V6 cuteness overlay. When true, renders the kawaii face system on top
+   * of the PNG: soft face-pad to mute existing PNG features, CSS dot eyes,
+   * emotion-gated mouth (no mouth in calm/default per the Hello Kitty
+   * "less face = more cute" principle), and warm amber heart pulse.
+   *
+   * Default false — strictly opt-in and backward compatible. When true,
+   * adds a `buddy--v6` root class so CSS can scope the overlay rules.
+   *
+   * Faceless V5 PNGs ship later. Until then, the soft face-pad does its
+   * best to obscure the PNG face beneath the new CSS face. Per user spec.
+   */
+  overlay?: boolean;
   "data-testid"?: string;
 }
 
@@ -227,6 +240,7 @@ export default function BuddyAvatar({
   colorMode = "default",
   style: styleVariant = "default",
   pose = "default",
+  overlay = false,
   "data-testid": testId = "buddy-avatar",
 }: BuddyAvatarProps) {
   const v = getBuddyVisualOutput(state);
@@ -253,9 +267,21 @@ export default function BuddyAvatar({
     "--buddy-heart-pulse": `${v.heartPulse}ms`,
   };
 
+  // V6 mouth is emotion-gated. Per the "Hello Kitty principle" (less face =
+  // more cute, user projects own emotion), no mouth on calm/default. We
+  // only render a mouth when the emotional content benefits from it.
+  const v6ShowMouth =
+    overlay && (v.state === "celebrate" || v.state === "encouraged" || v.state === "sad");
+  // Auto-disable overlay below ~48px — the kawaii dots / mouth / heart
+  // would render as sub-pixel smudges and degrade the cute factor. The
+  // PNG-only render at sm reads cleaner and is what chat bubble avatars
+  // were tuned for. Caller can still pass overlay=true; we just skip
+  // the layer at tiny sizes.
+  const showV6Overlay = overlay && sizePx >= 48;
+
   return (
     <div
-      className={`buddy buddy--${v.state} buddy--motion-${v.motion} buddy--expr-${v.expression} ${className}`}
+      className={`buddy buddy--${v.state} buddy--motion-${v.motion} buddy--expr-${v.expression} ${showV6Overlay ? "buddy--v6" : ""} ${className}`.trim()}
       style={styleVars}
       role="img"
       aria-label={ariaLabel}
@@ -274,6 +300,7 @@ export default function BuddyAvatar({
       data-color-mode={colorMode}
       data-style={styleVariant}
       data-pose={pose}
+      data-overlay={showV6Overlay ? "v6" : overlay ? "v6-suppressed" : "off"}
     >
       <img
         src={lumiArtworkUrl}
@@ -291,6 +318,41 @@ export default function BuddyAvatar({
         className={`buddy__svg ${v.motion === 'steady' ? '' : 'lumi-breathe'}`.trim()}
         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
       />
+
+      {/* V6 cuteness overlay — opt-in. Position % values are tuned to the
+          v4 PNG body region. Face pad sits over the upper-mid third to
+          mute the underlying PNG face; new CSS face draws on top.
+          Heart uses inline SVG (viewBox) so the shape scales correctly
+          at every size token instead of relying on a brittle CSS path(). */}
+      {showV6Overlay && (
+        <div className="buddy__v6" aria-hidden="true" data-testid={`${testId}-v6`}>
+          <div className="buddy__v6-face-pad" />
+          <div className="buddy__v6-eye buddy__v6-eye--left" />
+          <div className="buddy__v6-eye buddy__v6-eye--right" />
+          {v6ShowMouth && <div className="buddy__v6-mouth" />}
+          <div className="buddy__v6-heart">
+            <div className="buddy__v6-heart-glow" />
+            <svg
+              className="buddy__v6-heart-svg"
+              viewBox="0 0 100 90"
+              preserveAspectRatio="xMidYMid meet"
+              aria-hidden="true"
+            >
+              <defs>
+                <radialGradient id={`v6HeartGrad-${testId}`} cx="35%" cy="30%" r="75%">
+                  <stop offset="0%"   stopColor="#FFD27A" />
+                  <stop offset="55%"  stopColor="#FFB347" />
+                  <stop offset="100%" stopColor="#FF8C42" />
+                </radialGradient>
+              </defs>
+              <path
+                d="M50 86 C 22 64 4 44 4 24 C 4 11 14 2 26 2 C 36 2 45 9 50 19 C 55 9 64 2 74 2 C 86 2 96 11 96 24 C 96 44 78 64 50 86 Z"
+                fill={`url(#v6HeartGrad-${testId})`}
+              />
+            </svg>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

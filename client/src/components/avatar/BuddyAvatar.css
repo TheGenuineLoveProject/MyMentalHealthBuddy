@@ -477,6 +477,142 @@
   50%      { transform: scale(0.94, 1); opacity: 0.13; }
 }
 
+/* ---------- V6 cuteness overlay (opt-in via prop `overlay`) ----------
+   Layered DOM on top of the v4 PNG. Position values are %-based against
+   the .buddy wrapper square so the overlay scales correctly across the
+   sm / md-header / md / lg / xl size tokens.
+
+   Layer stack (bottom → top):
+     img.buddy__svg       (the PNG)
+     .buddy__v6-face-pad  (soft cream radial — mutes underlying PNG face)
+     .buddy__v6-eye(s)    (dark kawaii dots; gentle blink on non-steady)
+     .buddy__v6-mouth     (emotion-gated; no mouth in calm = Hello Kitty rule)
+     .buddy__v6-heart     (warm amber chest glow + slow pulse)
+
+   Crisis (.buddy--motion-steady) MUST NOT animate any V6 layer. Existing
+   safety contract preserved by selector gates. */
+
+.buddy__v6 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.buddy__v6-face-pad {
+  position: absolute;
+  /* Face region of the v4 PNG — upper-mid third, slightly off-center vertically. */
+  left: 22%;
+  top: 22%;
+  width: 56%;
+  height: 36%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 247, 232, 0.78) 0%,
+    rgba(255, 247, 232, 0.55) 45%,
+    rgba(255, 247, 232, 0.10) 78%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  /* Soften the edge so the pad doesn't read as a sticker. */
+  filter: blur(3px);
+}
+/* Kawaii dot eyes — small, dark warm brown for premium matte feel.
+   Positioned per the v4 PNG face geometry. */
+.buddy__v6-eye {
+  position: absolute;
+  width: 8.5%;
+  height: 11%;
+  background: #2d1810;
+  border-radius: 50%;
+  /* Subtle highlight on top — gives the dot a "wet" kawaii sparkle. */
+  box-shadow: inset 0.5px 1.5px 0 rgba(255, 255, 255, 0.55);
+  top: 32%;
+  transform-origin: center;
+}
+.buddy__v6-eye--left  { left: 33%; }
+.buddy__v6-eye--right { left: 58.5%; }
+.buddy:not(.buddy--motion-steady) .buddy__v6-eye {
+  animation: buddyV6EyeBlink 9s ease-in-out infinite;
+}
+.buddy:not(.buddy--motion-steady) .buddy__v6-eye--right {
+  animation-delay: 220ms;
+}
+@keyframes buddyV6EyeBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 96%      { transform: scaleY(0.08); }
+}
+/* Emotion-gated mouth. Geometry: small subtle curve under the eyes. */
+.buddy__v6-mouth {
+  position: absolute;
+  left: 42%;
+  top: 47%;
+  width: 16%;
+  height: 6%;
+  border-bottom: 2.5px solid #2d1810;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  opacity: 0.85;
+}
+.buddy--celebrate .buddy__v6-mouth {
+  /* Wider, deeper smile during joy. */
+  left: 38%;
+  width: 24%;
+  height: 9%;
+  border-bottom-width: 3px;
+}
+.buddy--sad .buddy__v6-mouth {
+  /* Inverted curve = gentle frown. */
+  border-bottom: none;
+  border-top: 2.5px solid #2d1810;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  top: 49%;
+}
+/* Warm amber heart on chest — soft glow pulse, signature element.
+   Shape comes from the inline <svg> child (viewBox-scaled) so geometry
+   stays crisp at every size token. The wrapper is just a positioning
+   box; pulse animation runs on the wrapper so glow + shape pulse together. */
+.buddy__v6-heart {
+  position: absolute;
+  left: 42%;
+  top: 60%;
+  width: 16%;
+  height: 14%;
+  transform-origin: center;
+}
+.buddy__v6-heart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(255, 140, 66, 0.45));
+}
+.buddy__v6-heart-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 178, 71, 0.55) 0%,
+    rgba(255, 140, 66, 0.25) 50%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  filter: blur(4px);
+}
+.buddy:not(.buddy--motion-steady) .buddy__v6-heart {
+  animation: buddyV6HeartPulse var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+}
+.buddy:not(.buddy--motion-steady) .buddy__v6-heart-glow {
+  animation: buddyV6HeartGlowPulse calc(var(--buddy-heart-pulse, 5200ms) * 1.05) ease-in-out infinite;
+}
+@keyframes buddyV6HeartPulse {
+  0%, 100% { transform: scale(1.00); }
+  35%      { transform: scale(1.10); }
+  55%      { transform: scale(0.96); }
+}
+@keyframes buddyV6HeartGlowPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1.00); }
+  50%      { opacity: 0.85; transform: scale(1.12); }
+}
+
 /* ---------- Reduced motion ----------
    v1.12: pseudo-elements (::before, ::after) are NOT selected by `*`
    in CSS, so they need their own explicit reset to fully respect the
@@ -501,5 +637,12 @@
   .buddy__heart-shape,
   .buddy__heart-glow {
     filter: drop-shadow(0 0 4px var(--buddy-heart-color, #7FD8A8));
+  }
+  /* V6 overlay also respects reduced motion. */
+  .buddy__v6-eye,
+  .buddy__v6-heart,
+  .buddy__v6-heart-glow {
+    animation: none !important;
+    transform: none !important;
   }
 }

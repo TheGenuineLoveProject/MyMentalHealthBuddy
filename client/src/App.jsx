@@ -95,6 +95,7 @@ const BreathTool = lazy(() => import("./pages/tools/BreathTool.jsx"));
 const BreathingTool = lazy(() => import("./pages/tools/BreathingTool.jsx"));
 const CheckIn = lazy(() => import("./pages/CheckIn.jsx"));
 const CelebrationFlow = lazy(() => import("./pages/CelebrationFlow.jsx"));
+const LumiV6Preview = lazy(() => import("./pages/LumiV6Preview.jsx"));
 const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
 const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
 const AdvancedToolsPage = lazy(() => import("./pages/AdvancedToolsPage.tsx"));
@@ -1551,6 +1552,11 @@ export default function App() {
                   CelebrationRitual lives at /celebration/ritual. */}
               <Route path="/celebration">
                 <CelebrationFlow />
+              </Route>
+              {/* V6 overlay preview — design-iteration sandbox. Public so
+                  designers can review without auth. */}
+              <Route path="/v6">
+                <LumiV6Preview />
               </Route>
               {/* Public so legacy inbound /celebration links (now moved to
                   /celebration/ritual) keep working for unauthenticated demo. */}
