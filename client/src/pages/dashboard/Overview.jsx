@@ -412,7 +412,7 @@ export default function DashboardOverview() {
                 </div>
               </div>
               <Link
-                href="/account/billing"
+                href="/account/subscription"
                 className="inline-flex items-center gap-1.5 transition-all hover:-translate-y-0.5"
                 style={{
                   padding: "8px 16px",

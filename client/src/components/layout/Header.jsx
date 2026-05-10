@@ -1,12 +1,15 @@
 import { Link } from "wouter";
-import { Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle, Heart } from "lucide-react";
+import { Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle, Heart, UserCircle } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { BRAND } from "@shared/brand";
+import { useAuth } from "@/context/AuthContext";
 import lumiIconUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
 
 const MODES = ["default", "low-stim", "reading"];
 
 function Header() {
+  const { isAuthenticated } = useAuth();
+  const isLoggedIn = typeof isAuthenticated === "function" ? isAuthenticated() : !!isAuthenticated;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mode, setMode] = useState(() => {
@@ -59,6 +62,9 @@ function Header() {
     { href: "/wellness", label: "Wellness", icon: Heart },
     { href: "/journal", label: "Journal", icon: BookOpen },
     { href: "/chat", label: "AI Chat", icon: MessageCircle },
+    ...(isLoggedIn
+      ? [{ href: "/account/subscription", label: "Account", icon: UserCircle }]
+      : []),
   ];
 
   return (
