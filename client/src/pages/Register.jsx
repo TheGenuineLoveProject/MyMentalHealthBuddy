@@ -6,6 +6,7 @@ import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
 import { useAuth } from "../context/AuthContext.jsx";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
+import LumiV6 from "../components/lumi/LumiV6";
 
 export default function Register() {
   const [, setLocation] = useLocation();
@@ -93,7 +94,12 @@ export default function Register() {
                 style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
                 data-testid="img-register-logo"
               >
-                <LumiMascot emotion="joy" size={56} />
+                <LumiV6
+                  size="md-header"
+                  colorMode="yellow"
+                  emotion="joy"
+                  data-testid="lumi-register"
+                />
               </span>
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>

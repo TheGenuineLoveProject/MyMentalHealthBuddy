@@ -136,6 +136,10 @@ export interface LumiV6Props {
    *  `lumi:memory:<memoryKey>` in sessionStorage; on remount with a
    *  different emotion plays a short "recognize" heart pulse. */
   memoryKey?: string;
+  /** Exact pixel override for non-canonical sizes (legacy LumiMascot
+   *  parity values like 80px / 208px). When provided, takes precedence
+   *  over the `size` enum. Use sparingly — prefer the size enum. */
+  pixelSize?: number;
   className?: string;
   "data-testid"?: string;
 }
@@ -239,10 +243,11 @@ export default function LumiV6({
   shadow,
   clickable = false,
   memoryKey,
+  pixelSize,
   className = "",
   "data-testid": testId = "lumi-v6",
 }: LumiV6Props) {
-  const px = SIZE_PX[size] ?? SIZE_PX.lg;
+  const px = pixelSize ?? SIZE_PX[size] ?? SIZE_PX.lg;
   const bodySrc = POSE_PNG[pose] || COLOR_PNG[colorMode] || FALLBACK_PNG;
 
   // ---------- V8 click-zone-driven momentary emotion override ----------

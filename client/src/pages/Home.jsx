@@ -5,6 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SEO from '../components/SEO';
 import LumiMascot from '../components/lumi/LumiMascot.jsx';
+import LumiV6 from '../components/lumi/LumiV6';
 import { 
   SacredLayout, 
   SacredSection, 
@@ -222,7 +223,16 @@ export default function Home() {
               }}
               data-testid="img-hero-mascot"
             >
-              <LumiMascot emotion="joy" size={208} ariaLabel="Lumi, your gentle companion" />
+              <LumiV6
+                size="xl"
+                pixelSize={208}
+                colorMode="yellow"
+                emotion="joy"
+                v8
+                clickable
+                memoryKey="home-hero"
+                data-testid="lumi-home-hero"
+              />
             </span>
           }
           badge={

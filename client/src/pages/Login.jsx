@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
+import LumiV6 from "../components/lumi/LumiV6";
 
 function landingPathFor(u) {
   // Mirrors AdminGuard policy (client/src/components/AdminGuard.jsx):
@@ -105,7 +106,14 @@ export default function Login() {
                 style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
                 data-testid="img-login-logo"
               >
-                <LumiMascot emotion="neutral" size={80} />
+                <LumiV6
+                  size="md"
+                  pixelSize={80}
+                  emotion="greeting"
+                  v8
+                  memoryKey="login"
+                  data-testid="lumi-login"
+                />
               </span>
               <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
             </Link>

@@ -7,6 +7,7 @@ import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, ArrowLeft, Mail, Send, Shield, Clock } from 'lucide-react';
 import SEO from "../components/SEO";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
+import LumiV6 from "../components/lumi/LumiV6";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -141,7 +142,17 @@ export default function ForgotPassword() {
               className="w-20 h-20 flex items-center justify-center transition-all group-hover:scale-105"
               style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
             >
-              <LumiMascot emotion="empathy" size={56} />
+              {/* Sensitive surface (account recovery): V7 expressive soul only —
+                  no V8 click zones (asymmetric risk: distressed users shouldn't
+                  be invited to interact with the mascot). Soft purple Lavender
+                  Buddy per canonical Cast Part 5. */}
+              <LumiV6
+                size="md-header"
+                colorMode="purple"
+                emotion="empathy"
+                interactive={false}
+                data-testid="lumi-forgot"
+              />
             </span>
             <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
           </Link>
