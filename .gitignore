@@ -65,3 +65,6 @@ gpg-batch
 /data/usage/
 /data/usage-*.json
 *.jsonl
+
+# Local archive of cleaned-up files (do not commit)
+.archive/

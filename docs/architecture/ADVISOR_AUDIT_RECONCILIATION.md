@@ -1,6 +1,6 @@
 # Advisor Audit Reconciliation
 
-> **Source:** External advisor message (`attached_assets/Pasted-You-re-asking-for-the-correct-move-at-the-highest-level_1776914847922.txt`)
+> **Source:** External advisor message (archived 2026-05-10: `.archive/attached_assets_2026-05-10/Pasted-You-re-asking-for-the-correct-move-at-the-highest-level_1776914847922.txt`)
 > **Date:** 2026-04-23
 > **Status:** Each advisor finding cross-checked against the actual file contents. Where the advisor's claim is grounded, action is recommended. Where it is not, the file evidence is recorded so we don't lose the reasoning.
 
