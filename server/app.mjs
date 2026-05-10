@@ -682,48 +682,69 @@ app.get("*", async (req, res, next) => {
 // ----------------------------
 const PORT = process.env.PORT || 5000;
 
-try {
-  const { ensureSchema } = await import("./db/ensureSchema.mjs");
-  await ensureSchema();
-} catch (err) {
-  console.warn("[boot] ensureSchema skipped:", err?.message || err);
-  // Schema/boot failure is critical — the app may run degraded. Fire-and-
-  // forget so we never block server startup on the alerter network call.
-  import("./observability/safetyAlerts.mjs")
-    .then(({ alertSchemaFailure }) => alertSchemaFailure({ stage: "ensureSchema", error: err }))
-    .catch(() => {});
+// Race a promise against a timeout so a hung DB call (e.g. unreachable
+// production Neon) can never block server startup. Returns the resolved
+// value on success, or throws "boot-timeout" after `ms` milliseconds.
+function withBootTimeout(promise, ms, label) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`${label}: boot-timeout after ${ms}ms`)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
-// v2.0 Prompt 3.2 gap closure — seed awareness_rules from the in-code
-// library and refresh the pipeline's RuleMatcher to honor active flags
-// from the DB. Best-effort; pipeline falls back to in-code rules on failure.
-try {
-  const { seedAwarenessRules } = await import("./awareness/seedRules.mjs");
-  const seedRes = await seedAwarenessRules();
-  if (seedRes.upserted > 0) {
-    console.log(`[boot] seeded ${seedRes.upserted}/${seedRes.total} awareness rules`);
+// Background boot sequence — runs AFTER app.listen() so a slow or hung
+// Neon connection can never prevent the platform health-check from
+// passing. Each step is independently best-effort with a 10s ceiling;
+// failures are logged but never crash or stall startup.
+async function runDeferredBoot() {
+  // ensureSchema — bootstraps tables that aren't covered by drizzle push.
+  try {
+    const { ensureSchema } = await import("./db/ensureSchema.mjs");
+    await withBootTimeout(ensureSchema(), 10000, "ensureSchema");
+  } catch (err) {
+    console.warn("[boot] ensureSchema skipped:", err?.message || err);
+    import("./observability/safetyAlerts.mjs")
+      .then(({ alertSchemaFailure }) => alertSchemaFailure({ stage: "ensureSchema", error: err }))
+      .catch(() => {});
   }
-  const { getPipeline } = await import("./awareness/detection/pipeline.mjs");
-  const refresh = await getPipeline().ruleMatcher.refreshFromDb();
-  console.log(`[boot] awareness ruleMatcher refreshed: ${refresh.count} rules from ${refresh.source}`);
-} catch (err) {
-  console.warn("[boot] awareness rules seed/refresh skipped:", err?.message || err);
-}
 
-// v2.0 Prompt 3.3 — seed the protocol registry once tables exist.
-try {
-  const { seedProtocolsIfEmpty } = await import("./protocols/seed/protocols.mjs");
-  const { db: _db, schema: _schema } = await import("./db.mjs");
-  const seedResult = await seedProtocolsIfEmpty(_db, _schema);
-  if (seedResult.seeded > 0) {
-    console.log(`[boot] seeded ${seedResult.seeded} protocols into protocol_registry`);
+  // v2.0 Prompt 3.2 — seed awareness_rules and refresh the in-memory matcher.
+  try {
+    const { seedAwarenessRules } = await import("./awareness/seedRules.mjs");
+    const seedRes = await withBootTimeout(seedAwarenessRules(), 10000, "seedAwarenessRules");
+    if (seedRes.upserted > 0) {
+      console.log(`[boot] seeded ${seedRes.upserted}/${seedRes.total} awareness rules`);
+    }
+    const { getPipeline } = await import("./awareness/detection/pipeline.mjs");
+    const refresh = await withBootTimeout(getPipeline().ruleMatcher.refreshFromDb(), 10000, "ruleMatcher.refreshFromDb");
+    console.log(`[boot] awareness ruleMatcher refreshed: ${refresh.count} rules from ${refresh.source}`);
+  } catch (err) {
+    console.warn("[boot] awareness rules seed/refresh skipped:", err?.message || err);
   }
-} catch (err) {
-  console.warn("[boot] protocol seeding skipped:", err?.message || err);
+
+  // v2.0 Prompt 3.3 — seed the protocol registry once tables exist.
+  try {
+    const { seedProtocolsIfEmpty } = await import("./protocols/seed/protocols.mjs");
+    const { db: _db, schema: _schema } = await import("./db.mjs");
+    const seedResult = await withBootTimeout(seedProtocolsIfEmpty(_db, _schema), 10000, "seedProtocolsIfEmpty");
+    if (seedResult.seeded > 0) {
+      console.log(`[boot] seeded ${seedResult.seeded} protocols into protocol_registry`);
+    }
+  } catch (err) {
+    console.warn("[boot] protocol seeding skipped:", err?.message || err);
+  }
 }
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
+
+  // Kick deferred boot AFTER listen so the platform sees an open port
+  // immediately. /healthz is already mounted before all middleware so
+  // the health-check passes even while DB seeding is in flight.
+  runDeferredBoot().catch((err) => {
+    console.warn("[boot] deferred boot encountered an error:", err?.message || err);
+  });
 
   // Opt-in background self-heal scheduler.  Off by default.  Enable with
   // HEAL_AUTO_ENABLED=true (and optionally HEAL_AUTO_INTERVAL_MS=<ms>).
