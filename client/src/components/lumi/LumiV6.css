@@ -271,6 +271,164 @@
   100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
 }
 
+/* =============================================================
+   V7 "EXPRESSIVE SOUL" — additive: 5 new mouth shapes, 2 new eye
+   variants, 5 body postures, smooth 600ms expression morphs, and
+   per-emotion heart rate (--lumiv6-heart-period CSS var driven
+   by JS). All scoped under .lumiv6 — zero collision risk with
+   .buddy* / .buddy__v6-* (BuddyAvatar overlay system).
+   ============================================================= */
+
+/* ----- Per-emotion heart rate (set inline by JS via --lumiv6-heart-period) */
+.lumiv6 {
+  --lumiv6-heart-period: 5200ms;
+}
+.lumiv6.lumiv6--animated .lumiv6__heart {
+  animation-duration: var(--lumiv6-heart-period);
+}
+.lumiv6.lumiv6--animated .lumiv6__heart-glow {
+  animation-duration: var(--lumiv6-heart-period);
+}
+
+/* ----- New mouth shapes (V7) -------------------------------------------- */
+/* Worried — empathy/concern. Inverted curve. */
+.lumiv6__mouth--worried {
+  border-bottom: none;
+  border-top: 3px solid #2d1810;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: transparent;
+  height: 6%;
+  width: 14%;
+  left: 43%;
+  top: 49%;
+  opacity: 0.85;
+}
+/* Excited wide smile — joy/celebration. Filled, with subtle tremble. */
+.lumiv6__mouth--excited {
+  background: #d4546a;
+  border: 2px solid #2d1810;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  height: 11%;
+  width: 20%;
+  left: 40%;
+  top: 47%;
+  opacity: 1;
+}
+.lumiv6.lumiv6--animated .lumiv6__mouth--excited {
+  animation: lumiv6MouthTremble 0.3s ease-in-out infinite alternate;
+}
+@keyframes lumiv6MouthTremble {
+  from { transform: translateX(0); }
+  to   { transform: translateX(0.6px); }
+}
+/* Loving — gentle warm crescent. */
+.lumiv6__mouth--loving {
+  border-bottom: 2px solid #2d1810;
+  border-top: none;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: transparent;
+  height: 7%;
+  width: 13%;
+  left: 43.5%;
+  top: 48%;
+  opacity: 0.85;
+}
+/* Focused — concentrated thin line. */
+.lumiv6__mouth--focused {
+  background: #2d1810;
+  border: none;
+  border-radius: 1px;
+  height: 1.2%;
+  width: 9%;
+  left: 45.5%;
+  top: 49.5%;
+  opacity: 0.9;
+}
+/* Breathing — gentle parting; subtle expand/contract. */
+.lumiv6__mouth--breathing {
+  background: #2d1810;
+  border: none;
+  border-radius: 50%;
+  height: 2%;
+  width: 7%;
+  left: 46.5%;
+  top: 49%;
+  opacity: 0.5;
+}
+.lumiv6.lumiv6--animated .lumiv6__mouth--breathing {
+  animation: lumiv6MouthBreathe 4s ease-in-out infinite;
+}
+@keyframes lumiv6MouthBreathe {
+  0%, 100% { height: 1.5%; opacity: 0.4; }
+  50%      { height: 3.2%; opacity: 0.65; }
+}
+
+/* ----- New eye expression variants (V7; --wide already exists) ---------- */
+.lumiv6__eye--soft {
+  width: 8%;
+  height: 11%;
+  opacity: 0.88;
+}
+.lumiv6__eye--happy {
+  width: 9.5%;
+  height: 7%;
+  border-radius: 50% 50% 45% 45%;
+  top: 33%;
+}
+/* Happy-eye pupils sit slightly higher (smiling crescent feel). */
+.lumiv6__eye--happy .lumiv6__pupil {
+  top: 8%;
+  height: 50%;
+}
+
+/* ----- Body posture wrapper (V7) ----------------------------------------
+   Posture transforms live on a dedicated wrapper between root and body img,
+   so they compose cleanly with the body's own breathing keyframes (which
+   set transform on the inner img). Posture transitions over 800ms ease-out
+   per spec section 2.3. */
+.lumiv6__posture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-origin: 50% 70%;
+  transition: transform 800ms ease-out;
+}
+.lumiv6--posture-upright  .lumiv6__posture { transform: rotate(0deg); }
+.lumiv6--posture-curious  .lumiv6__posture { transform: rotate(-3deg); }
+.lumiv6--posture-leaning  .lumiv6__posture { transform: rotate(2deg) scaleX(1.02); }
+.lumiv6--posture-relaxed  .lumiv6__posture { transform: scaleY(0.98); }
+.lumiv6.lumiv6--animated.lumiv6--posture-bouncy .lumiv6__posture {
+  animation: lumiv6PostureBounce 0.8s ease-in-out infinite;
+}
+@keyframes lumiv6PostureBounce {
+  0%, 100% { transform: translateY(0)    rotate(0deg); }
+  50%      { transform: translateY(-4px) rotate(-1deg); }
+}
+
+/* ----- 600ms emotion morph ----------------------------------------------
+   Mouth and eye-box geometry/colour transition over 600ms when the emotion
+   changes. Pupil keeps its 180ms tracking transition (don't slow that down
+   or mouse-follow feels laggy). */
+.lumiv6__mouth,
+.lumiv6__eye {
+  transition-property: width, height, top, left, border-radius, opacity, background-color, border-color, border-width;
+  transition-duration: 600ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* During the transitioning window eyes briefly close — gives the morph a
+   soft "blink-into-new-expression" beat per spec section 3.1. Implemented
+   as a keyframe animation (NOT a transition override) so the 600ms eye-box
+   geometry morph defined above runs unimpeded alongside the blink beat. */
+.lumiv6.lumiv6--animated.lumiv6--transitioning .lumiv6__eye {
+  animation: lumiv6BlinkBeat 600ms ease-in-out;
+}
+@keyframes lumiv6BlinkBeat {
+  0%   { transform: scaleY(1); }
+  16%  { transform: scaleY(0.1); }
+  33%  { transform: scaleY(1); }
+  100% { transform: scaleY(1); }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .lumiv6 *,

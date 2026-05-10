@@ -1,12 +1,28 @@
 /**
- * LumiV6 — "Living Lumi" multi-layer avatar (Section 1 of v6.0 upgrade).
+ * LumiV6 — "Living Lumi" multi-layer avatar (Section 1 of v6.0 upgrade,
+ * extended in V7 "Expressive Soul" — additive only).
  *
  * Composes four independent layers:
  *   1. BODY  — base PNG (color/pose-driven, with onError fallback)
  *   2. EYES  — CSS dot eyes (blink loop; mouse-tracking when interactive)
- *   3. MOUTH — emotion-driven shape (no mouth on calm — Hello Kitty rule)
+ *   3. MOUTH — emotion-driven shape (calm = no mouth — Hello Kitty rule
+ *              preserved unless mouthExpression overrides it)
  *   4. HEART — warm amber chest pulse (inline SVG via viewBox so geometry
- *              stays crisp at every size token)
+ *              stays crisp at every size token); pulse rate driven per
+ *              emotion via --lumiv6-heart-period CSS var
+ *
+ * V7 additions (all backward-compatible — every existing caller works
+ * unchanged):
+ *   - 5 new mouth shapes: worried · excited · loving · focused · breathing
+ *   - 2 new eye variants: soft · happy (wide already shipped in V6)
+ *   - 5 body postures: upright · curious · leaning · relaxed · bouncy
+ *     applied to a dedicated wrapper between root and body img so they
+ *     compose with the body's own breathing keyframes
+ *   - 600ms emotion-morph transitions (mouth/eye geometry crossfade) with
+ *     a 100ms eye-blink beat at the start of the morph (spec section 3.1)
+ *   - Per-emotion heart rate (Hz → ms period inline CSS var)
+ *   - mouthExpression / eyeExpression / posture / heartHz props, each
+ *     optional; when absent, derived from emotion via EMOTION_DERIVATION
  *
  * Standalone — does NOT replace BuddyAvatar. Renders on its own
  * `.lumiv6-*` class namespace so it cannot collide with the existing
@@ -15,10 +31,6 @@
  * Crisis safety: animations gated by the `animated` prop AND the
  * `prefers-reduced-motion` media query (handled in LumiV6.css). Pass
  * `animated={false}` for any crisis-adjacent surface.
- *
- * Asset note: spec referenced `lumi-v5-*.png` but v5 PNGs aren't in the
- * repo yet — this component reads `lumi-v4-*.png` as the body layer
- * (full-body, color-tinted). When v5 lands, swap the constants below.
  */
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import "./LumiV6.css";
@@ -52,6 +64,38 @@ export type LumiV6Pose =
 
 export type LumiV6Size = "sm" | "md" | "lg" | "xl" | "md-header";
 
+/**
+ * V7 expression / posture types. Each is independently overridable via
+ * the matching prop; left undefined, the value is derived from emotion
+ * via EMOTION_DERIVATION below.
+ */
+export type LumiV6MouthExpression =
+  | "joy"
+  | "love"
+  | "greeting"
+  | "empathy"
+  | "sleepy"
+  | "surprise"
+  | "worried"
+  | "excited"
+  | "loving"
+  | "focused"
+  | "breathing";
+
+export type LumiV6EyeExpression =
+  | "default"
+  | "wide"
+  | "soft"
+  | "happy"
+  | "closed";
+
+export type LumiV6Posture =
+  | "upright"
+  | "curious"
+  | "leaning"
+  | "relaxed"
+  | "bouncy";
+
 export interface LumiV6Props {
   colorMode?: LumiV6ColorMode;
   emotion?: LumiV6Emotion;
@@ -65,6 +109,14 @@ export interface LumiV6Props {
   showMessage?: boolean;
   /** Speech bubble text override. Defaults to a per-emotion line. */
   message?: string;
+  /** V7: explicit mouth shape. When undefined, derived from emotion. */
+  mouthExpression?: LumiV6MouthExpression;
+  /** V7: explicit eye variant. When undefined, derived from emotion. */
+  eyeExpression?: LumiV6EyeExpression;
+  /** V7: explicit body posture. When undefined, derived from emotion. */
+  posture?: LumiV6Posture;
+  /** V7: explicit heart-pulse frequency (Hz). When undefined, derived from emotion. */
+  heartHz?: number;
   className?: string;
   "data-testid"?: string;
 }
@@ -91,7 +143,6 @@ const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
 const FALLBACK_PNG = "/brand/lumi-v4-ultimate.png";
 
 // ---------- Default speech bubble copy ----------
-// Trauma-informed, non-clinical, supportive. Caller can override via `message`.
 const EMOTION_MESSAGE: Record<LumiV6Emotion, string> = {
   joy:      "Yay! That's wonderful.",
   love:     "I'm here for you.",
@@ -122,6 +173,32 @@ const SIZE_PX: Record<LumiV6Size, number> = {
   xl: 240,
 };
 
+/**
+ * V7 emotion → expression derivation table (spec section 2.2).
+ *
+ * Each emotion maps to a coordinated mouth + eye + posture + heart-rate
+ * triple. Caller-supplied props override individual fields. Mirrors
+ * `TOY_EMOTION_SEED` in `lumiToySpec.ts` so the screen avatar and the
+ * physical toy stay in lockstep.
+ */
+const EMOTION_DERIVATION: Record<
+  LumiV6Emotion,
+  {
+    mouth: LumiV6MouthExpression;
+    eye: LumiV6EyeExpression;
+    posture: LumiV6Posture;
+    heartHz: number;
+  }
+> = {
+  greeting: { mouth: "greeting",  eye: "default", posture: "upright",  heartHz: 0.5   },
+  joy:      { mouth: "excited",   eye: "happy",   posture: "bouncy",   heartHz: 1.0   },
+  love:     { mouth: "loving",    eye: "soft",    posture: "relaxed",  heartHz: 0.5   },
+  calm:     { mouth: "breathing", eye: "soft",    posture: "relaxed",  heartHz: 0.25  },
+  empathy:  { mouth: "worried",   eye: "soft",    posture: "leaning",  heartHz: 0.35  },
+  sleepy:   { mouth: "sleepy",    eye: "soft",    posture: "relaxed",  heartHz: 0.125 },
+  surprise: { mouth: "surprise",  eye: "wide",    posture: "curious",  heartHz: 1.5   },
+};
+
 export default function LumiV6({
   colorMode = "default",
   emotion = "calm",
@@ -131,6 +208,10 @@ export default function LumiV6({
   animated = true,
   showMessage = false,
   message,
+  mouthExpression,
+  eyeExpression,
+  posture,
+  heartHz,
   className = "",
   "data-testid": testId = "lumi-v6",
 }: LumiV6Props) {
@@ -139,18 +220,34 @@ export default function LumiV6({
   const ariaLabel = EMOTION_ARIA[emotion];
   const bubbleText = message ?? EMOTION_MESSAGE[emotion];
 
-  // Instance-unique SVG gradient ID. Using React useId() (sanitized for SVG
-  // selector safety) avoids cross-instance paint collisions when multiple
-  // LumiV6 share the same testId — see architect review notes.
+  // V7 derivation — explicit prop wins, otherwise look up emotion.
+  const derived = EMOTION_DERIVATION[emotion];
+  const resolvedMouth: LumiV6MouthExpression = mouthExpression ?? derived.mouth;
+  const resolvedEye: LumiV6EyeExpression = eyeExpression ?? derived.eye;
+  const resolvedPosture: LumiV6Posture = posture ?? derived.posture;
+  const resolvedHeartHz = heartHz ?? derived.heartHz;
+  // Convert Hz → ms period for the heart-pulse CSS var.
+  const heartPeriodMs = Math.max(120, Math.round(1000 / Math.max(0.05, resolvedHeartHz)));
+
+  // Sleepy stays a closed-eye special case for backward-compat visual fidelity:
+  // the old "sleepy = closed slit" reading is more recognisable than the new
+  // "soft" eye for that single emotion. Explicit eyeExpression still wins.
+  const finalEye: LumiV6EyeExpression =
+    eyeExpression ?? (emotion === "sleepy" ? "closed" : resolvedEye);
+
+  // Backward-compat: emotion="calm" with NO explicit mouthExpression keeps the
+  // legacy "Hello Kitty" no-mouth render. Setting mouthExpression="breathing"
+  // (or anything else) opts in to the V7 visible mouth.
+  const showMouth = mouthExpression !== undefined || emotion !== "calm";
+
+  // Instance-unique SVG gradient ID.
   const reactId = useId();
   const heartGradId = `lumiv6-heart-${reactId.replace(/:/g, "")}`;
 
-  // Below 64px, hide the CSS face overlay — kawaii dots/mouth/heart would
-  // become sub-pixel smudges. The PNG body still renders cleanly.
+  // Below 64px, hide the CSS face overlay.
   const showFace = px >= 64;
 
   // ---------- Mouse-tracking eye offsets (interactive only) ----------
-  // Stored as CSS vars on the root element so the CSS handles transform.
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [hovered, setHovered] = useState(false);
 
@@ -163,11 +260,9 @@ export default function LumiV6({
       const rect = root.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      // Normalize to ±1 within a reasonable radius (~3× avatar size).
       const radius = Math.max(rect.width, 200) * 1.5;
       const dx = Math.max(-1, Math.min(1, (e.clientX - cx) / radius));
       const dy = Math.max(-1, Math.min(1, (e.clientY - cy) / radius));
-      // Max ~12% pupil drift inside the eye dot.
       root.style.setProperty("--lumiv6-eye-x", `${dx * 12}%`);
       root.style.setProperty("--lumiv6-eye-y", `${dy * 12}%`);
     };
@@ -176,18 +271,31 @@ export default function LumiV6({
     return () => window.removeEventListener("mousemove", handler);
   }, [interactive, showFace]);
 
-  // Sleepy → closed eyes (a soft line instead of dots). Surprise → wider.
-  const eyeMod =
-    emotion === "sleepy" ? "lumiv6__eye--closed" :
-    emotion === "surprise" ? "lumiv6__eye--wide" : "";
+  // ---------- V7 emotion-morph transition window ----------
+  // When emotion / colorMode / mouth / eye / posture changes, briefly hold a
+  // `lumiv6--transitioning` class so CSS can run the 100ms eye-blink + 600ms
+  // geometry morph (spec section 3). Skip on first render — no need to morph
+  // into the initial state.
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const firstRenderRef = useRef(true);
+  useEffect(() => {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
+      return;
+    }
+    if (!animated) return;
+    setIsTransitioning(true);
+    const timer = setTimeout(() => setIsTransitioning(false), 600);
+    return () => clearTimeout(timer);
+  }, [emotion, colorMode, resolvedMouth, finalEye, resolvedPosture, animated]);
 
-  // Mouth shape per emotion. Calm has NO mouth (Hello Kitty rule).
-  const showMouth = emotion !== "calm";
-  const mouthMod = `lumiv6__mouth--${emotion}`;
+  const eyeMod = finalEye === "default" ? "" : `lumiv6__eye--${finalEye}`;
+  const mouthMod = `lumiv6__mouth--${resolvedMouth}`;
 
-  const wrapperStyle: CSSProperties = {
+  const wrapperStyle: CSSProperties & Record<`--${string}`, string> = {
     width: `${px}px`,
     height: `${px}px`,
+    "--lumiv6-heart-period": `${heartPeriodMs}ms`,
   };
 
   return (
@@ -198,9 +306,11 @@ export default function LumiV6({
         `lumiv6--size-${size}`,
         `lumiv6--emotion-${emotion}`,
         `lumiv6--pose-${pose}`,
+        `lumiv6--posture-${resolvedPosture}`,
         animated ? "lumiv6--animated" : "lumiv6--still",
         interactive ? "lumiv6--interactive" : "",
         hovered ? "lumiv6--hovered" : "",
+        isTransitioning ? "lumiv6--transitioning" : "",
         className,
       ].filter(Boolean).join(" ")}
       style={wrapperStyle}
@@ -213,21 +323,28 @@ export default function LumiV6({
       data-size={size}
       data-animated={animated}
       data-interactive={interactive}
+      data-mouth={resolvedMouth}
+      data-eye={finalEye}
+      data-posture={resolvedPosture}
+      data-heart-hz={resolvedHeartHz}
       onMouseEnter={interactive ? () => setHovered(true) : undefined}
       onMouseLeave={interactive ? () => setHovered(false) : undefined}
     >
-      {/* BODY layer (PNG) */}
-      <img
-        className="lumiv6__body"
-        src={bodySrc}
-        alt=""
-        aria-hidden="true"
-        draggable={false}
-        onError={(e) => {
-          const img = e.currentTarget;
-          if (!img.src.endsWith(FALLBACK_PNG)) img.src = FALLBACK_PNG;
-        }}
-      />
+      {/* POSTURE wrapper — body img lives inside so posture transforms
+          compose with the body's breathing keyframes without conflict. */}
+      <div className="lumiv6__posture" aria-hidden="true">
+        <img
+          className="lumiv6__body"
+          src={bodySrc}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (!img.src.endsWith(FALLBACK_PNG)) img.src = FALLBACK_PNG;
+          }}
+        />
+      </div>
 
       {showFace && (
         <>
@@ -243,12 +360,12 @@ export default function LumiV6({
             <span className="lumiv6__pupil" />
           </div>
 
-          {/* MOUTH layer (emotion-gated; no mouth on calm). */}
+          {/* MOUTH layer (emotion-gated; calm with no override stays mouth-less). */}
           {showMouth && (
             <div className={`lumiv6__mouth ${mouthMod}`} aria-hidden="true" />
           )}
 
-          {/* HEART layer (inline SVG so geometry scales crisp at every size). */}
+          {/* HEART layer — pulse period driven by --lumiv6-heart-period CSS var. */}
           <div className="lumiv6__heart" aria-hidden="true">
             <div className="lumiv6__heart-glow" />
             <svg

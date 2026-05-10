@@ -17,6 +17,11 @@ const V6_EMOTIONS = ["joy", "love", "calm", "greeting", "empathy", "sleepy", "su
 const V6_POSES    = ["default", "waving", "meditating", "celebrating", "hugging", "thinking", "listening"];
 const V6_COLORS   = ["default", "yellow", "pink", "blue", "purple", "sleep", "orange"];
 
+// V7 "Expressive Soul" — additive expression / posture controls.
+const V7_MOUTHS   = ["worried", "excited", "loving", "focused", "breathing", "joy", "love", "greeting", "empathy", "sleepy", "surprise"];
+const V7_EYES     = ["default", "wide", "soft", "happy", "closed"];
+const V7_POSTURES = ["upright", "curious", "leaning", "relaxed", "bouncy"];
+
 const STATES = ["calm", "encouraged", "celebrate", "sad", "anxious", "crisis"];
 const COLORS = ["default", "yellow", "pink", "blue", "purple", "orange", "sleep"];
 const POSES  = ["default", "meditating", "celebrating", "waving"];
@@ -200,6 +205,69 @@ export default function LumiV6Preview() {
                 <LumiV6 emotion={e} size="lg" animated={false} interactive={false} />
                 <span className="text-xs text-slate-600">{e}</span>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ---------- V7 "Expressive Soul" playground ---------- */}
+        <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-rose-100" data-testid="section-lumiv7">
+          <h2 className="mb-2 text-2xl font-semibold text-slate-900">LumiV7 — "Expressive Soul"</h2>
+          <p className="mb-6 text-sm text-slate-600">
+            Additive on top of V6: 5 new mouth shapes, 2 new eye variants, 5 body
+            postures, 600ms emotion-morph transitions, and per-emotion heart rate.
+            Every existing V6 prop still works. New props are independently
+            overridable — leave any of them undefined and the value is derived
+            from <code>emotion</code>.
+          </p>
+
+          <h3 className="mb-3 mt-2 text-lg font-semibold text-slate-800">
+            Emotion-derived (mouth · eye · posture · heart rate)
+          </h3>
+          <p className="mb-3 text-sm text-slate-600">
+            Each emotion auto-coordinates its mouth shape, eye variant, body
+            posture, and heart pulse rate. Hover the surface to see eye-tracking.
+          </p>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
+            {V6_EMOTIONS.map((e) => (
+              <Cell key={e} label={e} testId={`cell-v7-derived-${e}`}>
+                <LumiV6 emotion={e} size="lg" />
+              </Cell>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Mouth expressions (override)</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-6">
+            {V7_MOUTHS.map((m) => (
+              <Cell key={m} label={m} testId={`cell-v7-mouth-${m}`}>
+                <LumiV6 emotion="greeting" mouthExpression={m} size="lg" />
+              </Cell>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Eye expressions (override)</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+            {V7_EYES.map((eye) => (
+              <Cell key={eye} label={eye} testId={`cell-v7-eye-${eye}`}>
+                <LumiV6 emotion="greeting" eyeExpression={eye} size="lg" />
+              </Cell>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Body postures (override)</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+            {V7_POSTURES.map((p) => (
+              <Cell key={p} label={p} testId={`cell-v7-posture-${p}`}>
+                <LumiV6 emotion="greeting" posture={p} size="lg" />
+              </Cell>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Heart rate (Hz override)</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+            {[0.125, 0.25, 0.5, 1.0, 1.5].map((hz) => (
+              <Cell key={hz} label={`${hz} Hz`} testId={`cell-v7-hz-${hz}`}>
+                <LumiV6 emotion="calm" mouthExpression="breathing" heartHz={hz} size="lg" />
+              </Cell>
             ))}
           </div>
         </section>
