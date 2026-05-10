@@ -39,8 +39,32 @@
  * Calm now renders the gentle "breathing" mouth by default so Lumi reads
  * as alive even at rest. Explicit mouthExpression overrides still win.
  *
+ * V9 "Soul Capture" (additive, gated by individual props — every existing
+ * V6/V7/V8 caller renders identically when V9 props are unused):
+ *     - Entrance animation        (auto when v9 + animated): IntersectionObserver
+ *       triggers a one-shot scale/blur "birth" sequence (800ms) the first
+ *       time Lumi enters the viewport in a session. sessionStorage-gated so
+ *       it plays exactly once across all instances per browser session.
+ *     - Attention capture         (auto when v9 + animated + interactive):
+ *       After 15s of no Lumi-local interaction, when the cursor comes within
+ *       200px of Lumi, plays a brief "I noticed you" wobble (600ms) and
+ *       holds gaze on cursor for 3s.
+ *     - Emotional escalation      (auto when v9 + clickable): tracks click-
+ *       zone activations within a 10s rolling window. 1 click = level 1
+ *       (warm smile), 2 = level 2 (excited bounce + wider eyes), 3+ = level
+ *       3 (celebration sparkle + rapid heart pulse).
+ *     - Mirroring micro-expression (opt-in via detectedSentiment prop): when
+ *       a different sentiment than the current emotion arrives, briefly
+ *       (1.5s) overlays it as a "I see you" flash. Lower priority than a
+ *       click-zone trigger so user touch always wins.
+ *     - Goodbye sequence          (auto when v9 + animated): on
+ *       window.beforeunload OR 5 minutes of global inactivity, fades out
+ *       with a wave + 3 slow heart pulses (1s).
+ *
  * Standalone — does NOT replace BuddyAvatar. All classes scoped under
- * `.lumiv6` (cannot collide with `.buddy*`). CSS in LumiV6.css.
+ * `.lumiv6` (cannot collide with `.buddy*`). V9 modifiers use the
+ * `lumiv6--v9-*` convention so the global reduced-motion blanket and
+ * crisis-stillness contract automatically cover them. CSS in LumiV6.css.
  */
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import "./LumiV6.css";
