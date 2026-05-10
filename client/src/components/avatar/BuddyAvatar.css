@@ -497,18 +497,45 @@
   inset: 0;
   pointer-events: none;
 }
+/* Per the V6 spec: when the overlay is active, hide the PNG's painted face
+   region with a CSS mask so the new dot eyes / mouth / heart sit on a clean
+   surface (no double-face show-through). Mask is a radial ellipse over the
+   upper-mid third of the body — fully transparent (cuts out) at the face
+   center, fading to opaque (keeps PNG) by ~85% radius so the body silhouette
+   stays intact. The face-pad below provides a soft cream fill inside the cut
+   so the cutout doesn't read as a hole. */
+.buddy.buddy--v6 .buddy__svg {
+  -webkit-mask-image: radial-gradient(
+    ellipse 26% 17% at 50% 38%,
+    transparent 0%,
+    transparent 55%,
+    black 88%,
+    black 100%
+  );
+          mask-image: radial-gradient(
+    ellipse 26% 17% at 50% 38%,
+    transparent 0%,
+    transparent 55%,
+    black 88%,
+    black 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
 .buddy__v6-face-pad {
   position: absolute;
-  /* Face region of the v4 PNG — upper-mid third, slightly off-center vertically. */
+  /* Face region of the v4 PNG — upper-mid third, slightly off-center vertically.
+     With the mask above cutting the PNG, the pad now serves as a soft cream
+     fill so the eyes/mouth sit on warm skin tone, not a transparent hole. */
   left: 22%;
   top: 22%;
   width: 56%;
   height: 36%;
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 247, 232, 0.78) 0%,
-    rgba(255, 247, 232, 0.55) 45%,
-    rgba(255, 247, 232, 0.10) 78%,
+    rgba(255, 247, 232, 0.95) 0%,
+    rgba(255, 247, 232, 0.80) 45%,
+    rgba(255, 247, 232, 0.20) 78%,
     transparent 100%
   );
   border-radius: 50%;
@@ -611,6 +638,19 @@
 @keyframes buddyV6HeartGlowPulse {
   0%, 100% { opacity: 0.55; transform: scale(1.00); }
   50%      { opacity: 0.85; transform: scale(1.12); }
+}
+
+/* When V6 overlay is active, suppress legacy sparkle pseudo-element particles
+   (.buddy--motion-sparkle::before/::after). They predated V6 and now visually
+   clash with the V6 heart pulse — leaving stray green/yellow dots in the
+   upper-right corner on celebrate/encouraged states. The V6 heart already
+   carries the joy signal cleanly. */
+.buddy--v6.buddy--motion-sparkle::before,
+.buddy--v6.buddy--motion-sparkle::after,
+.buddy--v6.buddy--motion-warm_glow::before,
+.buddy--v6.buddy--motion-warm_glow::after {
+  content: none !important;
+  display: none !important;
 }
 
 /* ---------- Reduced motion ----------
