@@ -1,0 +1,281 @@
+/* LumiV6.css — Living Lumi multi-layer avatar.
+   Scoped under .lumiv6 so it cannot collide with .buddy* (BuddyAvatar). */
+
+.lumiv6 {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  /* CSS vars driven by JS for mouse-tracking pupil drift. */
+  --lumiv6-eye-x: 0%;
+  --lumiv6-eye-y: 0%;
+  /* Subtle dimensional float so Lumi reads off any background. */
+  filter:
+    drop-shadow(0 3px 5px rgba(20, 30, 25, 0.09))
+    drop-shadow(0 10px 22px rgba(20, 30, 25, 0.10));
+  transition: transform 280ms ease;
+}
+.lumiv6.lumiv6--interactive.lumiv6--hovered {
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* ---------- BODY ---------- */
+.lumiv6__body {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+.lumiv6.lumiv6--animated .lumiv6__body {
+  animation: lumiv6Breathe 5200ms ease-in-out infinite;
+  transform-origin: 50% 70%;
+}
+@keyframes lumiv6Breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-3px) scale(1.025); }
+}
+
+/* ---------- FACE PAD (mutes PNG face) ---------- */
+.lumiv6__face-pad {
+  position: absolute;
+  left: 22%;
+  top: 22%;
+  width: 56%;
+  height: 36%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 247, 232, 0.78) 0%,
+    rgba(255, 247, 232, 0.55) 45%,
+    rgba(255, 247, 232, 0.10) 78%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+/* ---------- EYES ---------- */
+.lumiv6__eye {
+  position: absolute;
+  width: 9.5%;
+  height: 12%;
+  background: #fff8ee;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(80, 50, 30, 0.18);
+  top: 31%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.lumiv6__eye--left  { left: 32.5%; }
+.lumiv6__eye--right { left: 58%; }
+.lumiv6__pupil {
+  position: absolute;
+  left: 18%;
+  top: 18%;
+  width: 64%;
+  height: 64%;
+  background: #2d1810;
+  border-radius: 50%;
+  /* Wet kawaii sparkle. */
+  box-shadow: inset 0.5px 1.5px 0 rgba(255, 255, 255, 0.55);
+  /* Eye-tracking: vars set by JS on mousemove (when interactive). */
+  transform: translate(var(--lumiv6-eye-x), var(--lumiv6-eye-y));
+  transition: transform 180ms ease-out;
+}
+/* Blink loop — only when animated. */
+.lumiv6.lumiv6--animated .lumiv6__eye {
+  animation: lumiv6EyeBlink 9s ease-in-out infinite;
+  transform-origin: center;
+}
+.lumiv6.lumiv6--animated .lumiv6__eye--right {
+  animation-delay: 220ms;
+}
+@keyframes lumiv6EyeBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 96%      { transform: scaleY(0.08); }
+}
+/* Sleepy → eyes are closed slits (override the round shape). */
+.lumiv6__eye--closed {
+  height: 2%;
+  top: 38%;
+  background: #2d1810;
+  border-radius: 2px;
+  box-shadow: none;
+}
+.lumiv6__eye--closed .lumiv6__pupil { display: none; }
+.lumiv6.lumiv6--animated .lumiv6__eye--closed { animation: none; }
+/* Surprise → wider eyes. */
+.lumiv6__eye--wide {
+  width: 11%;
+  height: 14%;
+  top: 30%;
+}
+
+/* ---------- MOUTH (emotion-gated) ----------
+   Default geometry sits just below the eyes. Each emotion modifier
+   tweaks shape/position. `calm` never renders (Hello Kitty rule). */
+.lumiv6__mouth {
+  position: absolute;
+  left: 42%;
+  top: 47%;
+  width: 16%;
+  height: 6%;
+  border-bottom: 2.5px solid #2d1810;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.lumiv6__mouth--joy {
+  /* Big open smile. */
+  left: 38%;
+  width: 24%;
+  height: 9%;
+  border-bottom-width: 3px;
+}
+.lumiv6__mouth--love {
+  /* Subtle warm smile. */
+  width: 14%;
+  left: 43%;
+}
+.lumiv6__mouth--greeting {
+  /* Friendly small smile. */
+  left: 41%;
+  width: 18%;
+}
+.lumiv6__mouth--empathy {
+  /* Neutral soft line. */
+  border-bottom: none;
+  border-top: 2px solid #2d1810;
+  border-radius: 0;
+  height: 2%;
+  top: 49%;
+  opacity: 0.7;
+}
+.lumiv6__mouth--sleepy {
+  /* Tiny "z"-line. */
+  border-bottom: none;
+  border-top: 1.5px solid #2d1810;
+  border-radius: 0;
+  height: 0;
+  width: 8%;
+  left: 46%;
+  top: 49%;
+  opacity: 0.6;
+}
+.lumiv6__mouth--surprise {
+  /* Small round "o". */
+  border: 2px solid #2d1810;
+  border-radius: 50%;
+  height: 8%;
+  width: 8%;
+  left: 46%;
+  top: 47%;
+}
+
+/* ---------- HEART ---------- */
+.lumiv6__heart {
+  position: absolute;
+  left: 42%;
+  top: 60%;
+  width: 16%;
+  height: 14%;
+  pointer-events: none;
+  transform-origin: center;
+}
+.lumiv6__heart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(255, 140, 66, 0.45));
+}
+.lumiv6__heart-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 178, 71, 0.55) 0%,
+    rgba(255, 140, 66, 0.25) 50%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  filter: blur(4px);
+}
+.lumiv6.lumiv6--animated .lumiv6__heart {
+  animation: lumiv6HeartPulse 5200ms ease-in-out infinite;
+}
+.lumiv6.lumiv6--animated .lumiv6__heart-glow {
+  animation: lumiv6HeartGlow 5460ms ease-in-out infinite;
+}
+@keyframes lumiv6HeartPulse {
+  0%, 100% { transform: scale(1.00); }
+  35%      { transform: scale(1.10); }
+  55%      { transform: scale(0.96); }
+}
+@keyframes lumiv6HeartGlow {
+  0%, 100% { opacity: 0.55; transform: scale(1.00); }
+  50%      { opacity: 0.85; transform: scale(1.12); }
+}
+
+/* ---------- POSE micro-tilts (no PNG for thinking/listening yet → CSS hint).
+   IMPORTANT: applied to the .lumiv6 wrapper, NOT .lumiv6__body, because the
+   body element runs the breathing keyframes which set `transform` themselves
+   and would otherwise overwrite the rotate. Wrapping the rotate on the
+   parent lets both transforms compose without conflict. */
+.lumiv6--pose-thinking  { transform: rotate(-4deg); }
+.lumiv6--pose-listening { transform: rotate(2deg); }
+/* Hover bounce should still apply on top of the pose tilt. */
+.lumiv6--pose-thinking.lumiv6--interactive.lumiv6--hovered  { transform: rotate(-4deg) translateY(-3px) scale(1.03); }
+.lumiv6--pose-listening.lumiv6--interactive.lumiv6--hovered { transform: rotate(2deg)  translateY(-3px) scale(1.03); }
+
+/* ---------- SPEECH BUBBLE ---------- */
+.lumiv6__bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  background: #fff;
+  color: #1a1917;
+  border: 1px solid #ead7b9;
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  max-width: 220px;
+  box-shadow: 0 4px 14px rgba(60, 40, 20, 0.10);
+  animation: lumiv6BubbleIn 320ms ease-out;
+  z-index: 5;
+}
+.lumiv6__bubble-text {
+  display: inline-block;
+  white-space: normal;
+  line-height: 1.35;
+}
+.lumiv6__bubble-tail {
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-right: 1px solid #ead7b9;
+  border-bottom: 1px solid #ead7b9;
+}
+@keyframes lumiv6BubbleIn {
+  0%   { opacity: 0; transform: translate(-50%, 6px) scale(0.92); }
+  100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .lumiv6 *,
+  .lumiv6 {
+    animation: none !important;
+    transition: none !important;
+  }
+}

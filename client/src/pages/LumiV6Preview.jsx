@@ -10,7 +10,12 @@
  */
 import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import LumiV6 from "@/components/lumi/LumiV6";
 import SEO from "@/components/SEO";
+
+const V6_EMOTIONS = ["joy", "love", "calm", "greeting", "empathy", "sleepy", "surprise"];
+const V6_POSES    = ["default", "waving", "meditating", "celebrating", "hugging", "thinking", "listening"];
+const V6_COLORS   = ["default", "yellow", "pink", "blue", "purple", "sleep", "orange"];
 
 const STATES = ["calm", "encouraged", "celebrate", "sad", "anxious", "crisis"];
 const COLORS = ["default", "yellow", "pink", "blue", "purple", "orange", "sleep"];
@@ -123,6 +128,77 @@ export default function LumiV6Preview() {
               <div key={sz} className="flex flex-col items-center gap-2">
                 <BuddyAvatar state="calm" colorMode="default" overlay={true} size={sz} />
                 <span className="text-xs text-slate-600">{sz}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ---------- Section 1: LumiV6 "Living Lumi" component ---------- */}
+        <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-amber-100" data-testid="section-lumiv6">
+          <h2 className="mb-2 text-2xl font-semibold text-slate-900">LumiV6 — "Living Lumi"</h2>
+          <p className="mb-6 text-sm text-slate-600">
+            New multi-layer component (separate from BuddyAvatar). Mouse-track,
+            blink, breathe, heart pulse — all opt-in via <code>animated</code> /
+            <code className="mx-1">interactive</code>. Hover any avatar below
+            to see eye-tracking + the gentle bounce.
+          </p>
+
+          <h3 className="mb-3 mt-6 text-lg font-semibold text-slate-800">Emotions</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
+            {V6_EMOTIONS.map((e) => (
+              <Cell key={e} label={e} testId={`cell-v6-emotion-${e}`}>
+                <LumiV6 emotion={e} size="lg" />
+              </Cell>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Poses</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
+            {V6_POSES.map((p) => (
+              <Cell key={p} label={p} testId={`cell-v6-pose-${p}`}>
+                <LumiV6 pose={p} emotion="greeting" size="lg" />
+              </Cell>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Color modes</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7">
+            {V6_COLORS.map((c) => (
+              <Cell key={c} label={c} testId={`cell-v6-color-${c}`}>
+                <LumiV6 colorMode={c} emotion="calm" size="lg" />
+              </Cell>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Speech bubbles</h3>
+          <div className="grid grid-cols-1 gap-6 pt-8 sm:grid-cols-3">
+            <div className="flex h-56 items-end justify-center">
+              <LumiV6 emotion="greeting" pose="waving" size="lg" showMessage />
+            </div>
+            <div className="flex h-56 items-end justify-center">
+              <LumiV6 emotion="empathy" size="lg" showMessage message="I'm right here. Take your time." />
+            </div>
+            <div className="flex h-56 items-end justify-center">
+              <LumiV6 emotion="joy" pose="celebrating" size="lg" showMessage />
+            </div>
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Sizes</h3>
+          <div className="flex flex-wrap items-end gap-6">
+            {["sm", "md-header", "md", "lg", "xl"].map((sz) => (
+              <div key={sz} className="flex flex-col items-center gap-2">
+                <LumiV6 emotion="greeting" size={sz} />
+                <span className="text-xs text-slate-600">{sz}</span>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">animated=false (crisis-safe)</h3>
+          <div className="flex flex-wrap items-end gap-6">
+            {V6_EMOTIONS.slice(0, 4).map((e) => (
+              <div key={e} className="flex flex-col items-center gap-2">
+                <LumiV6 emotion={e} size="lg" animated={false} interactive={false} />
+                <span className="text-xs text-slate-600">{e}</span>
               </div>
             ))}
           </div>
