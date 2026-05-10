@@ -6,10 +6,8 @@ import { eq } from "drizzle-orm";
 import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
 import { logger } from "../utils/logger.mjs";
 import { readFile } from "fs/promises";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
+import { resolve } from "path";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 const router = Router();
 
 const VALID_STATUSES = ["draft", "review", "approved", "posted"];

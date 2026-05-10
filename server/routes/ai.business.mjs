@@ -2,7 +2,6 @@ import { Router } from "express";
 import { z } from "zod";
 import { appendFileSync, existsSync, readFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 import { authGuard, requireStaff, requireAdmin } from "../middleware/auth.mjs";
 import { aiRateLimit } from "../middleware/rateLimit.mjs";
 import { promptShield } from "../middleware/promptshield.mjs";
@@ -21,7 +20,6 @@ import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
-const __dir = dirname(fileURLToPath(import.meta.url));
 const AUDIT_LOG_PATH = join(process.cwd(), "ai", "business", "_audit.log.jsonl");
 
 const BodySchema = z.object({
