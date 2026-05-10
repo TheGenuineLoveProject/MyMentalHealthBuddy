@@ -25,13 +25,26 @@ _quarantine/
 # node_modules/ stays excluded — 4.7GB would time out the upload, build phase
 # regenerates via `npm ci`.
 node_modules/
-dist/
 # NOTE: client/dist/ is intentionally NOT excluded. The autoscale runtime
 # container does not preserve build-phase artifacts reliably, so the prebuilt
 # Vite bundle (~17MB) ships with the source upload to guarantee the SPA
 # entry point exists at runtime. The .replit run command also has a safety
 # net (`if [ ! -f client/dist/index.html ]; then npm run build; fi`) as a
 # belt-and-suspenders backup if the bundle ever goes stale.
+#
+# dist/ is also intentionally NOT excluded — it holds the esbuild server
+# bundle (dist/server.mjs ~8MB) and a tiny pinned native-deps tree
+# (dist/node_modules ~3MB containing only bcrypt + argon2). Same reasoning
+# as client/dist/: the runtime image can't reliably see build-phase outputs,
+# so we ship the prebuilt artifacts directly. The build phase still rebuilds
+# them inside the container, so they're always fresh on every publish.
+!dist/
+!dist/**
+# Re-include the curated dist/node_modules (only bcrypt + argon2 + their tiny
+# dep tree, ~3MB). The blanket node_modules/ rule above would otherwise eat
+# this folder because gitignore-style patterns match at any depth.
+!dist/node_modules/
+!dist/node_modules/**
 
 # ---- Version control ----
 .git/
