@@ -175,6 +175,7 @@ export default function CelebrationRitual() {
                   colorMode="yellow"
                   pose="celebrating"
                   size="lg"
+                  overlay
                   data-testid="img-celebration-buddy"
                 />
               </div>

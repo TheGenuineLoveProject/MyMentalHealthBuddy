@@ -137,7 +137,6 @@ export default function AIChatPanel() {
                       size="sm"
                       colorMode={s.colorMode}
                       pose={pose}
-                      overlay
                       data-testid={`img-chat-assistant-${i}`}
                     />
                   </div>
@@ -168,7 +167,6 @@ export default function AIChatPanel() {
                   size="sm"
                   colorMode="blue"
                   pose={aiStateToPose("typing")}
-                  overlay
                   data-testid="img-chat-assistant-typing"
                 />
               </div>

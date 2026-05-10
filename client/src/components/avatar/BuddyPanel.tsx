@@ -124,6 +124,7 @@ export default function BuddyPanel({
       <BuddyAvatar
         state={state}
         size={size}
+        overlay
         data-testid={`${testId}-avatar`}
       />
 

@@ -76,6 +76,7 @@ export default function InteractiveBuddy({
         <BuddyAvatar
           state={state}
           size={size}
+          overlay
           ariaLabel={`Buddy is feeling ${state}.`}
         />
       </button>

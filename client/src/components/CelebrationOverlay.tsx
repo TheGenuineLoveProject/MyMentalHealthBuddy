@@ -127,6 +127,7 @@ export default function CelebrationOverlay({
         colorMode="yellow"
         pose="celebrating"
         size="xl"
+        overlay
         data-testid="celebration-overlay-buddy"
       />
 

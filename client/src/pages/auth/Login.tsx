@@ -60,7 +60,7 @@ export default function Login() {
               className="w-14 h-14 rounded-xl flex items-center justify-center overflow-hidden"
               style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 3px 16px rgba(38,79,79,0.2)' }}
             >
-              <BuddyAvatar state="calm" size={56} className="w-full h-full" />
+              <BuddyAvatar state="calm" size={56} overlay className="w-full h-full" />
             </span>
             <span className="text-heading-lg text-teal">MyMentalHealthBuddy</span>
           </Link>

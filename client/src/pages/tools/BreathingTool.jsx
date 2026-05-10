@@ -180,6 +180,7 @@ export default function BreathingTool() {
               colorMode={avatar.colorMode}
               pose={avatar.pose}
               size={avatar.size}
+              overlay
               data-testid={`img-breathing-buddy-${phase}`}
             />
           </div>

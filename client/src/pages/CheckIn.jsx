@@ -132,6 +132,7 @@ export default function CheckIn() {
             colorMode={avatar.colorMode}
             pose={avatar.pose}
             size={phase === "complete" ? "xl" : "xl"}
+            overlay
             data-testid={`img-checkin-buddy-${phase}`}
           />
         </div>

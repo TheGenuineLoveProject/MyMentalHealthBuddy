@@ -114,6 +114,7 @@ export default function ZenScape({
               <BuddyAvatar
                 state={buddyState}
                 size={buddySize}
+                overlay
                 data-testid="zenscape-buddy"
               />
             </div>

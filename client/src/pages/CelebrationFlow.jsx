@@ -149,6 +149,7 @@ export default function CelebrationFlow() {
                 state="celebrate"
                 colorMode="orange"
                 size="xl"
+                overlay
                 data-testid="img-celebration-phase-1"
               />
               <h1 className="mt-6 text-4xl font-semibold text-amber-700" data-testid="text-title-1">
@@ -165,6 +166,7 @@ export default function CelebrationFlow() {
                 colorMode="yellow"
                 pose="celebrating"
                 size="xl"
+                overlay
                 data-testid="img-celebration-phase-2"
               />
               <h2 className="mt-6 text-3xl font-semibold text-amber-700" data-testid="text-title-2">
@@ -181,6 +183,7 @@ export default function CelebrationFlow() {
                 colorMode="yellow"
                 pose="celebrating"
                 size="xl"
+                overlay
                 data-testid="img-celebration-phase-3"
               />
               <h2 className="mt-6 text-3xl font-semibold text-amber-700" data-testid="text-title-3">

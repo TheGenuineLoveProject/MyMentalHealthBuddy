@@ -98,6 +98,7 @@ export default function EmptyState({
           colorMode="purple"
           pose="hugging"
           size="lg"
+          overlay
           data-testid={`empty-state-${type}-buddy`}
         />
       </div>
