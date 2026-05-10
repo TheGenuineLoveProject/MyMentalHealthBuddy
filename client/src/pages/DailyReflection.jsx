@@ -107,7 +107,7 @@ export default function DailyReflection() {
       <div className="min-h-screen bg-[var(--glp-paper)] flex items-center justify-center">
         <div className="text-center space-y-3">
           <Loader2 className="w-8 h-8 animate-spin text-[var(--glp-sage-deep)] mx-auto" />
-          <p className="text-sm text-[var(--glp-ink)]/50">Preparing your reflection space...</p>
+          <p className="text-sm text-[var(--glp-ink)]/75">Preparing your reflection space...</p>
         </div>
       </div>
     );
@@ -124,7 +124,7 @@ export default function DailyReflection() {
         <nav className="mb-8">
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-2 text-sm text-[var(--glp-ink)]/50 hover:text-[var(--glp-ink)] transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-[var(--glp-ink)]/70 hover:text-[var(--glp-ink)] transition-colors"
             data-testid="link-back-dashboard"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -143,7 +143,7 @@ export default function DailyReflection() {
           >
             {todayLabel()}
           </h1>
-          <p className="text-sm text-[var(--glp-ink)]/50 leading-relaxed">
+          <p className="text-sm text-[var(--glp-ink)]/75 leading-relaxed">
             A quiet moment to check in with yourself. No right answers — just honest noticing.
           </p>
         </header>
@@ -192,7 +192,7 @@ export default function DailyReflection() {
               <span className="text-sm font-medium">Your reflection</span>
             </div>
             <div className="p-3 rounded-lg bg-[var(--glp-gold)]/10 border border-[var(--glp-gold)]/20">
-              <p className="text-sm text-[var(--glp-ink)]/60 italic" data-testid="text-daily-prompt">
+              <p className="text-sm text-[var(--glp-ink)]/80 italic" data-testid="text-daily-prompt">
                 {getDailyPrompt()}
               </p>
             </div>
@@ -203,27 +203,9 @@ export default function DailyReflection() {
                 setSaved(false);
               }}
               placeholder="Write here if it feels right..."
-              className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/10 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm resize-none focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/30"
+              className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/15 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm resize-none focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/55"
               rows={5}
               data-testid="textarea-reflection"
-            />
-          </section>
-
-          <section className="bg-white rounded-2xl border border-[var(--glp-ink)]/5 p-6 shadow-sm space-y-4">
-            <div className="flex items-center gap-2 text-[var(--glp-ink)]/70">
-              <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">One thing you're grateful for</span>
-            </div>
-            <input
-              type="text"
-              value={gratitude}
-              onChange={(e) => {
-                setGratitude(e.target.value);
-                setSaved(false);
-              }}
-              placeholder="Even something small counts..."
-              className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/10 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/30"
-              data-testid="input-gratitude"
             />
           </section>
 
@@ -240,7 +222,7 @@ export default function DailyReflection() {
                 setSaved(false);
               }}
               placeholder="I intend to..."
-              className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/10 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/30"
+              className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/15 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/55"
               data-testid="input-intention"
             />
           </section>
@@ -272,7 +254,7 @@ export default function DailyReflection() {
                 />
               </button>
             </div>
-            <p className="text-xs text-[var(--glp-ink)]/40 leading-relaxed">
+            <p className="text-xs text-[var(--glp-ink)]/65 leading-relaxed">
               {sharedToCommunity
                 ? "Your reflection will appear anonymously on the Community Affirmation Wall. Only the content is shared — your name and details stay private."
                 : "This reflection is completely private. You can choose to share it anonymously anytime."}
@@ -322,7 +304,7 @@ export default function DailyReflection() {
             </Link>
           </div>
 
-          <p className="text-xs text-center text-[var(--glp-ink)]/30 pt-2">
+          <p className="text-xs text-center text-[var(--glp-ink)]/55 pt-2">
             Reflection is a practice, not a performance. Every word is valid.
           </p>
         </div>

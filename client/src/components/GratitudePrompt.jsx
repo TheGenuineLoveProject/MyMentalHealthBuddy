@@ -24,6 +24,8 @@ const GRATITUDE_BLOCKED_PATH_PREFIXES = [
   "/admin",
   "/admin-login",
   "/checkout",
+  "/dashboard",
+  "/reflect",
 ];
 
 function isPathBlockedForGratitude(pathname) {

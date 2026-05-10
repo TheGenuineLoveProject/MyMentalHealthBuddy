@@ -413,10 +413,16 @@ export default function DashboardOverview() {
               </div>
               <Link
                 href="/account/billing"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:opacity-90"
+                className="inline-flex items-center gap-1.5 transition-all hover:-translate-y-0.5"
                 style={{
-                  border: "1px solid var(--glp-gold, #d4a843)",
-                  color: "var(--glp-gold-dark, #a07d2e)",
+                  padding: "8px 16px",
+                  borderRadius: "10px",
+                  border: "1.5px solid #c8d9c8",
+                  background: "#ffffff",
+                  color: "#5a8a5a",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
                 }}
                 data-testid="link-dashboard-upgrade"
               >

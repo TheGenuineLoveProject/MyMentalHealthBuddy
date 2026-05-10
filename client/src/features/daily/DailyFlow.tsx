@@ -34,7 +34,7 @@ export function DailyFlow() {
         <nav className="mb-8">
           <Link 
             href="/dashboard" 
-            className="inline-flex items-center gap-2 text-sm text-[var(--glp-ink)]/50 hover:text-[var(--glp-ink)] transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-[var(--glp-ink)]/70 hover:text-[var(--glp-ink)] transition-colors"
             data-testid="link-back-dashboard"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -52,7 +52,7 @@ export function DailyFlow() {
               >
                 Your Space Today
               </h1>
-              <p className="text-[var(--glp-ink)]/60 text-sm leading-relaxed">
+              <p className="text-[var(--glp-ink)]/75 text-sm leading-relaxed">
                 A place to pause, notice, and reflect — only if it feels supportive.
                 <br />
                 Nothing here is required. Take what serves you.
@@ -64,7 +64,7 @@ export function DailyFlow() {
 
             {/* Optional actions */}
             <div className="space-y-3">
-              <p className="text-xs uppercase tracking-wide text-[var(--glp-ink)]/40">
+              <p className="text-xs uppercase tracking-wide text-[var(--glp-ink)]/60">
                 If you'd like
               </p>
               
@@ -78,11 +78,11 @@ export function DailyFlow() {
                     <Activity className="w-5 h-5 text-[var(--glp-sage-deep)]" />
                   </div>
                   <div className="text-left">
-                    <div className="font-medium text-[var(--glp-ink)]/80">Notice your state</div>
-                    <div className="text-xs text-[var(--glp-ink)]/50">Observe without judgment</div>
+                    <div className="font-medium text-[var(--glp-ink)]/90">Notice your state</div>
+                    <div className="text-xs text-[var(--glp-ink)]/70">Observe without judgment</div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
+                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/55 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
               </button>
 
               <Link
@@ -95,11 +95,11 @@ export function DailyFlow() {
                     <PenLine className="w-5 h-5 text-[var(--glp-sage-deep)]" />
                   </div>
                   <div className="text-left">
-                    <div className="font-medium text-[var(--glp-ink)]/80">Daily reflection</div>
-                    <div className="text-xs text-[var(--glp-ink)]/50">Mood, gratitude & intention</div>
+                    <div className="font-medium text-[var(--glp-ink)]/90">Daily reflection</div>
+                    <div className="text-xs text-[var(--glp-ink)]/70">Mood, gratitude & intention</div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
+                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/55 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
               </Link>
 
               <button
@@ -112,11 +112,11 @@ export function DailyFlow() {
                     <PenLine className="w-5 h-5 text-[var(--glp-sage-deep)]" />
                   </div>
                   <div className="text-left">
-                    <div className="font-medium text-[var(--glp-ink)]/80">Today's reflection prompt</div>
-                    <div className="text-xs text-[var(--glp-ink)]/50">{categoryLabels[dailyPrompt.category]}</div>
+                    <div className="font-medium text-[var(--glp-ink)]/90">Today's reflection prompt</div>
+                    <div className="text-xs text-[var(--glp-ink)]/70">{categoryLabels[dailyPrompt.category]}</div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
+                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/55 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
               </button>
 
               <Link
@@ -129,16 +129,16 @@ export function DailyFlow() {
                     <Compass className="w-5 h-5 text-[var(--glp-sage-deep)]" />
                   </div>
                   <div className="text-left">
-                    <div className="font-medium text-[var(--glp-ink)]/80">Open journal</div>
-                    <div className="text-xs text-[var(--glp-ink)]/50">Write freely</div>
+                    <div className="font-medium text-[var(--glp-ink)]/90">Open journal</div>
+                    <div className="text-xs text-[var(--glp-ink)]/70">Write freely</div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
+                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/55 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
               </Link>
             </div>
 
             {/* Gentle footer */}
-            <p className="text-xs text-center text-[var(--glp-ink)]/30 pt-4">
+            <p className="text-xs text-center text-[var(--glp-ink)]/55 pt-4">
               Every experience is valid. Every pace is respected.
             </p>
           </div>
@@ -149,7 +149,7 @@ export function DailyFlow() {
           <div className="space-y-6">
             <button
               onClick={() => setStep("welcome")}
-              className="text-sm text-[var(--glp-ink)]/50 hover:text-[var(--glp-ink)] transition-colors"
+              className="text-sm text-[var(--glp-ink)]/70 hover:text-[var(--glp-ink)] transition-colors"
               data-testid="button-back-welcome"
             >
               ← Back
@@ -159,7 +159,7 @@ export function DailyFlow() {
               <StateTracker onComplete={() => setStep("welcome")} />
             </div>
 
-            <p className="text-xs text-center text-[var(--glp-ink)]/30">
+            <p className="text-xs text-center text-[var(--glp-ink)]/55">
               States fluctuate. This is normal.
             </p>
           </div>
@@ -170,7 +170,7 @@ export function DailyFlow() {
           <div className="space-y-6">
             <button
               onClick={() => setStep("welcome")}
-              className="text-sm text-[var(--glp-ink)]/50 hover:text-[var(--glp-ink)] transition-colors"
+              className="text-sm text-[var(--glp-ink)]/70 hover:text-[var(--glp-ink)] transition-colors"
               data-testid="button-back-welcome"
             >
               ← Back
@@ -191,12 +191,12 @@ export function DailyFlow() {
               </div>
 
               <div>
-                <label className="text-sm text-[var(--glp-ink)]/50 block mb-2">
+                <label className="text-sm text-[var(--glp-ink)]/70 block mb-2">
                   Your thoughts (optional)
                 </label>
                 <textarea
                   placeholder="Write here if it helps..."
-                  className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/10 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm resize-none focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/30"
+                  className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/10 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm resize-none focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/55"
                   rows={6}
                   data-testid="textarea-reflection"
                 />
@@ -220,7 +220,7 @@ export function DailyFlow() {
               </div>
             </div>
 
-            <p className="text-xs text-center text-[var(--glp-ink)]/30">
+            <p className="text-xs text-center text-[var(--glp-ink)]/55">
               Reflection is a practice, not a performance.
             </p>
           </div>
