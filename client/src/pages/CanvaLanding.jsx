@@ -7,6 +7,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
+import LumiV6 from "../components/lumi/LumiV6";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -469,12 +470,16 @@ export default function CanvaLanding() {
                   overflow: 'visible',
                 }}
               >
-                <LumiCompanion
-                  size={208}
-                  interactive
-                  lockImage="default"
-                  lockAnimationClass="lumi-breathe"
-                  ignoreThemeFilter
+                {/* V8 hero Lumi: living avatar with aura + shadow + click
+                    zones + emotional memory. The greeting emotion auto-
+                    coordinates upright posture, default eyes, gentle 0.5Hz
+                    heart pulse, and a sage aura halo. */}
+                <LumiV6
+                  size="xl"
+                  emotion="greeting"
+                  v8
+                  clickable
+                  memoryKey="hero"
                   data-testid="lumi-hero-companion"
                 />
               </div>

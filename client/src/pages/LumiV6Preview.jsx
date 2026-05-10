@@ -327,6 +327,41 @@ export default function LumiV6Preview() {
           </div>
         </section>
 
+        {/* ---------- V8 "Heart, Mind & Soul" demo ---------- */}
+        <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-purple-100" data-testid="section-lumiv8">
+          <h2 className="mb-2 text-2xl font-semibold text-slate-900">LumiV8 — "Heart, Mind & Soul"</h2>
+          <p className="mb-6 text-sm text-slate-600">
+            Procedural breathing (every 15s the cadence drifts), randomized
+            blink (2-6s with 15% double-blinks), idle drift after 10s of no
+            activity, smooth emotional gaze lerp, aura halo, ground shadow,
+            click zones, and session-memory recognition. Try clicking Lumi's
+            head, heart, or body on the demo at right.
+          </p>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Cell label="V7 baseline (no V8 props)" testId="cell-v8-off">
+              <LumiV6 emotion="greeting" size="xl" />
+            </Cell>
+            <Cell label="V8 on (aura + shadow + idle + lerp)" testId="cell-v8-on">
+              <LumiV6 emotion="greeting" size="xl" v8 />
+            </Cell>
+            <Cell label="V8 + clickable + memory (try clicking)" testId="cell-v8-interactive">
+              <LumiV6
+                emotion="greeting"
+                size="xl"
+                v8
+                clickable
+                memoryKey="v6-demo"
+                data-testid="lumi-v8-clickable"
+              />
+            </Cell>
+          </div>
+          <p className="mt-3 text-xs text-slate-500">
+            The middle and right Lumi share the same V8 subsystems — only the
+            right one accepts clicks. Click the head (greeting flourish),
+            heart (loving burst), or body (joy bounce) to see the override.
+          </p>
+        </section>
+
         {/* ---------- V7 Toy Spec readout ---------- */}
         <ToySpecPanel />
       </div>

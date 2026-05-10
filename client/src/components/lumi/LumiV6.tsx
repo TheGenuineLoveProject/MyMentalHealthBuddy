@@ -1,36 +1,46 @@
 /**
- * LumiV6 — "Living Lumi" multi-layer avatar (Section 1 of v6.0 upgrade,
- * extended in V7 "Expressive Soul" — additive only).
+ * LumiV6 — "Living Lumi" multi-layer avatar.
  *
- * Composes four independent layers:
- *   1. BODY  — base PNG (color/pose-driven, with onError fallback)
- *   2. EYES  — CSS dot eyes (blink loop; mouse-tracking when interactive)
- *   3. MOUTH — emotion-driven shape (calm = no mouth — Hello Kitty rule
- *              preserved unless mouthExpression overrides it)
- *   4. HEART — warm amber chest pulse (inline SVG via viewBox so geometry
- *              stays crisp at every size token); pulse rate driven per
- *              emotion via --lumiv6-heart-period CSS var
+ * V6 (Section 1): 4-layer composition (BODY PNG · CSS dot eyes · emotion
+ *   mouth · warm amber heart pulse).
  *
- * V7 additions (all backward-compatible — every existing caller works
- * unchanged):
- *   - 5 new mouth shapes: worried · excited · loving · focused · breathing
- *   - 2 new eye variants: soft · happy (wide already shipped in V6)
- *   - 5 body postures: upright · curious · leaning · relaxed · bouncy
- *     applied to a dedicated wrapper between root and body img so they
- *     compose with the body's own breathing keyframes
- *   - 600ms emotion-morph transitions (mouth/eye geometry crossfade) with
- *     a 100ms eye-blink beat at the start of the morph (spec section 3.1)
- *   - Per-emotion heart rate (Hz → ms period inline CSS var)
- *   - mouthExpression / eyeExpression / posture / heartHz props, each
- *     optional; when absent, derived from emotion via EMOTION_DERIVATION
+ * V7 "Expressive Soul" (additive): 5 new mouth shapes, 2 new eye variants,
+ *   5 body postures via .lumiv6__posture wrapper, 600ms morph transitions
+ *   with a 100ms blink-beat keyframe, per-emotion heart rate.
  *
- * Standalone — does NOT replace BuddyAvatar. Renders on its own
- * `.lumiv6-*` class namespace so it cannot collide with the existing
- * `.buddy*` system. Scoped CSS in LumiV6.css.
+ * V8 "Heart, Mind & Soul" (additive, gated by individual props — every
+ *   existing V6/V7 caller renders identically when the V8 props are
+ *   unused):
+ *     - Procedural breathing      (auto when v8 + animated): 15s interval
+ *       varies --lumiv6-breath-duration & --lumiv6-breath-depth so no two
+ *       moments breathe identically.
+ *     - Randomized blink timing   (auto when v8 + animated): replaces the
+ *       fixed CSS blink loop with JS-scheduled 2-6s intervals + 15% chance
+ *       of double-blink, fired via the .lumiv6--blink-once class.
+ *     - Idle behaviors            (auto when v8): after 10s of no global
+ *       mouse / click / key activity, .lumiv6--idle adds gentle pupil
+ *       drift + occasional weight shift.
+ *     - Smooth gaze depth         (auto when v8 + interactive): replaces
+ *       the V7 immediate eye-tracking with a requestAnimationFrame lerp
+ *       whose speed depends on emotion (sleepy slowest, joy fastest).
+ *     - Aura                      (opt-in via aura prop): radial halo
+ *       behind the body, color + opacity + period per emotion.
+ *     - Ground shadow             (opt-in via shadow prop): subtle posture-
+ *       aware ellipse below the body for depth.
+ *     - Click zones               (opt-in via clickable prop): three
+ *       overlapping accessible buttons (head / heart / body) that trigger
+ *       short-lived emotion overrides + visual flourishes.
+ *     - Emotional memory          (opt-in via memoryKey prop): persists
+ *       last-seen emotion in sessionStorage; on remount with a different
+ *       emotion fires a brief "recognize" heart pulse.
  *
- * Crisis safety: animations gated by the `animated` prop AND the
- * `prefers-reduced-motion` media query (handled in LumiV6.css). Pass
- * `animated={false}` for any crisis-adjacent surface.
+ * Calm-mouth default flip (V8): the V6/V7 backward-compat rule that hid
+ * the mouth entirely for emotion="calm" (Hello Kitty silence) is retired.
+ * Calm now renders the gentle "breathing" mouth by default so Lumi reads
+ * as alive even at rest. Explicit mouthExpression overrides still win.
+ *
+ * Standalone — does NOT replace BuddyAvatar. All classes scoped under
+ * `.lumiv6` (cannot collide with `.buddy*`). CSS in LumiV6.css.
  */
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import "./LumiV6.css";
@@ -64,11 +74,6 @@ export type LumiV6Pose =
 
 export type LumiV6Size = "sm" | "md" | "lg" | "xl" | "md-header";
 
-/**
- * V7 expression / posture types. Each is independently overridable via
- * the matching prop; left undefined, the value is derived from emotion
- * via EMOTION_DERIVATION below.
- */
 export type LumiV6MouthExpression =
   | "joy"
   | "love"
@@ -117,12 +122,25 @@ export interface LumiV6Props {
   posture?: LumiV6Posture;
   /** V7: explicit heart-pulse frequency (Hz). When undefined, derived from emotion. */
   heartHz?: number;
+  /** V8: master flag — turns on procedural breathing, randomized blink,
+   *  idle drift, and smooth emotional gaze lerp. Default false. */
+  v8?: boolean;
+  /** V8: render the aura halo (opt-in; auto-on when v8). */
+  aura?: boolean;
+  /** V8: render the ground shadow (opt-in; auto-on when v8). */
+  shadow?: boolean;
+  /** V8: render head/heart/body click zones (opt-in). When clicked the
+   *  avatar briefly switches emotion and plays a flourish. */
+  clickable?: boolean;
+  /** V8: when set, persists last-seen emotion under
+   *  `lumi:memory:<memoryKey>` in sessionStorage; on remount with a
+   *  different emotion plays a short "recognize" heart pulse. */
+  memoryKey?: string;
   className?: string;
   "data-testid"?: string;
 }
 
 // ---------- Asset map ----------
-// Pose has highest priority; falls through to colorMode.
 const COLOR_PNG: Record<LumiV6ColorMode, string> = {
   default: "/brand/lumi-v4-ultimate.png",
   yellow:  "/brand/lumi-v4-yellow.png",
@@ -137,12 +155,9 @@ const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
   meditating:  "/brand/lumi-body-meditating.png",
   celebrating: "/brand/lumi-body-celebrating.png",
   hugging:     "/brand/lumi-body-hugging.png",
-  // thinking + listening have no dedicated artwork yet — fall through
-  // to colorMode and let the emotion layer carry the affect.
 };
 const FALLBACK_PNG = "/brand/lumi-v4-ultimate.png";
 
-// ---------- Default speech bubble copy ----------
 const EMOTION_MESSAGE: Record<LumiV6Emotion, string> = {
   joy:      "Yay! That's wonderful.",
   love:     "I'm here for you.",
@@ -153,7 +168,6 @@ const EMOTION_MESSAGE: Record<LumiV6Emotion, string> = {
   surprise: "Oh! Tell me more.",
 };
 
-// ---------- Aria labels (a11y) ----------
 const EMOTION_ARIA: Record<LumiV6Emotion, string> = {
   joy:      "Lumi is feeling joyful.",
   love:     "Lumi is sending warmth.",
@@ -164,7 +178,6 @@ const EMOTION_ARIA: Record<LumiV6Emotion, string> = {
   surprise: "Lumi looks gently surprised.",
 };
 
-// ---------- Size token → pixel map ----------
 const SIZE_PX: Record<LumiV6Size, number> = {
   sm: 48,
   "md-header": 56,
@@ -173,22 +186,9 @@ const SIZE_PX: Record<LumiV6Size, number> = {
   xl: 240,
 };
 
-/**
- * V7 emotion → expression derivation table (spec section 2.2).
- *
- * Each emotion maps to a coordinated mouth + eye + posture + heart-rate
- * triple. Caller-supplied props override individual fields. Mirrors
- * `TOY_EMOTION_SEED` in `lumiToySpec.ts` so the screen avatar and the
- * physical toy stay in lockstep.
- */
 const EMOTION_DERIVATION: Record<
   LumiV6Emotion,
-  {
-    mouth: LumiV6MouthExpression;
-    eye: LumiV6EyeExpression;
-    posture: LumiV6Posture;
-    heartHz: number;
-  }
+  { mouth: LumiV6MouthExpression; eye: LumiV6EyeExpression; posture: LumiV6Posture; heartHz: number }
 > = {
   greeting: { mouth: "greeting",  eye: "default", posture: "upright",  heartHz: 0.5   },
   joy:      { mouth: "excited",   eye: "happy",   posture: "bouncy",   heartHz: 1.0   },
@@ -197,6 +197,28 @@ const EMOTION_DERIVATION: Record<
   empathy:  { mouth: "worried",   eye: "soft",    posture: "leaning",  heartHz: 0.35  },
   sleepy:   { mouth: "sleepy",    eye: "soft",    posture: "relaxed",  heartHz: 0.125 },
   surprise: { mouth: "surprise",  eye: "wide",    posture: "curious",  heartHz: 1.5   },
+};
+
+/** V8: per-emotion aura (color · opacity · pulse period). */
+const AURA_BY_EMOTION: Record<LumiV6Emotion, { color: string; opacity: number; periodMs: number }> = {
+  greeting: { color: "rgba(168, 201, 160, 0.18)", opacity: 0.60, periodMs: 4200 },
+  joy:      { color: "rgba(255, 217,  61, 0.22)", opacity: 0.85, periodMs: 2400 },
+  love:     { color: "rgba(255, 154, 139, 0.20)", opacity: 0.75, periodMs: 4000 },
+  calm:     { color: "rgba(116, 192, 252, 0.14)", opacity: 0.55, periodMs: 6000 },
+  empathy:  { color: "rgba(200, 182, 255, 0.18)", opacity: 0.65, periodMs: 5200 },
+  sleepy:   { color: "rgba(168, 213, 186, 0.12)", opacity: 0.45, periodMs: 8000 },
+  surprise: { color: "rgba(255, 184, 140, 0.22)", opacity: 0.85, periodMs: 1800 },
+};
+
+/** V8: per-emotion gaze lerp speed (higher = more responsive eyes). */
+const GAZE_LERP_BY_EMOTION: Record<LumiV6Emotion, number> = {
+  greeting: 0.12,
+  joy:      0.16,
+  love:     0.06,
+  calm:     0.05,
+  empathy:  0.07,
+  sleepy:   0.02,
+  surprise: 0.20,
 };
 
 export default function LumiV6({
@@ -212,70 +234,61 @@ export default function LumiV6({
   eyeExpression,
   posture,
   heartHz,
+  v8 = false,
+  aura,
+  shadow,
+  clickable = false,
+  memoryKey,
   className = "",
   "data-testid": testId = "lumi-v6",
 }: LumiV6Props) {
   const px = SIZE_PX[size] ?? SIZE_PX.lg;
   const bodySrc = POSE_PNG[pose] || COLOR_PNG[colorMode] || FALLBACK_PNG;
-  const ariaLabel = EMOTION_ARIA[emotion];
-  const bubbleText = message ?? EMOTION_MESSAGE[emotion];
 
-  // V7 derivation — explicit prop wins, otherwise look up emotion.
-  const derived = EMOTION_DERIVATION[emotion];
-  const resolvedMouth: LumiV6MouthExpression = mouthExpression ?? derived.mouth;
-  const resolvedEye: LumiV6EyeExpression = eyeExpression ?? derived.eye;
-  const resolvedPosture: LumiV6Posture = posture ?? derived.posture;
-  const resolvedHeartHz = heartHz ?? derived.heartHz;
-  // Convert Hz → ms period for the heart-pulse CSS var.
-  const heartPeriodMs = Math.max(120, Math.round(1000 / Math.max(0.05, resolvedHeartHz)));
+  // ---------- V8 click-zone-driven momentary emotion override ----------
+  const [triggeredEmotion, setTriggeredEmotion] = useState<LumiV6Emotion | null>(null);
+  const [heartBurst, setHeartBurst]   = useState(false);
+  const [headTilt, setHeadTilt]       = useState(false);
+  const [bodyBounce, setBodyBounce]   = useState(false);
 
-  // Sleepy stays a closed-eye special case for backward-compat visual fidelity:
-  // the old "sleepy = closed slit" reading is more recognisable than the new
-  // "soft" eye for that single emotion. Explicit eyeExpression still wins.
+  // The "effective" emotion drives every derivation/ARIA/className. When a
+  // click zone fires, the override holds for ~1.5-2s then releases back to
+  // the prop value.
+  const effectiveEmotion: LumiV6Emotion = triggeredEmotion ?? emotion;
+
+  const ariaLabel  = EMOTION_ARIA[effectiveEmotion];
+  const bubbleText = message ?? EMOTION_MESSAGE[effectiveEmotion];
+
+  const derived          = EMOTION_DERIVATION[effectiveEmotion];
+  const resolvedMouth    = mouthExpression ?? derived.mouth;
+  const resolvedEye      = eyeExpression  ?? derived.eye;
+  const resolvedPosture  = posture        ?? derived.posture;
+  const resolvedHeartHz  = heartHz        ?? derived.heartHz;
+  const heartPeriodMs    = Math.max(120, Math.round(1000 / Math.max(0.05, resolvedHeartHz)));
+
+  // V6/V7 visual-fidelity carryover: sleepy reads better with a closed slit
+  // than the derived "soft" eye. Explicit eyeExpression still overrides.
   const finalEye: LumiV6EyeExpression =
-    eyeExpression ?? (emotion === "sleepy" ? "closed" : resolvedEye);
+    eyeExpression ?? (effectiveEmotion === "sleepy" ? "closed" : resolvedEye);
 
-  // Backward-compat: emotion="calm" with NO explicit mouthExpression keeps the
-  // legacy "Hello Kitty" no-mouth render. Setting mouthExpression="breathing"
-  // (or anything else) opts in to the V7 visible mouth.
-  const showMouth = mouthExpression !== undefined || emotion !== "calm";
+  // V8: calm now ALWAYS renders a (breathing) mouth by default — Lumi reads
+  // as alive at rest. Pre-V8 callers using emotion="calm" silently gain the
+  // gentle breathing animation with no API change.
+  const showMouth = true;
 
-  // Instance-unique SVG gradient ID.
   const reactId = useId();
   const heartGradId = `lumiv6-heart-${reactId.replace(/:/g, "")}`;
-
-  // Below 64px, hide the CSS face overlay.
   const showFace = px >= 64;
 
-  // ---------- Mouse-tracking eye offsets (interactive only) ----------
+  // V8 effective on/off for each subsystem (aura/shadow auto-on with v8).
+  const auraOn   = aura ?? v8;
+  const shadowOn = shadow ?? v8;
+
+  // ---------- Refs / DOM hooks ----------
   const rootRef = useRef<HTMLDivElement | null>(null);
   const [hovered, setHovered] = useState(false);
 
-  useEffect(() => {
-    if (!interactive || !showFace) return;
-    const root = rootRef.current;
-    if (!root) return;
-
-    const handler = (e: MouseEvent) => {
-      const rect = root.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const radius = Math.max(rect.width, 200) * 1.5;
-      const dx = Math.max(-1, Math.min(1, (e.clientX - cx) / radius));
-      const dy = Math.max(-1, Math.min(1, (e.clientY - cy) / radius));
-      root.style.setProperty("--lumiv6-eye-x", `${dx * 12}%`);
-      root.style.setProperty("--lumiv6-eye-y", `${dy * 12}%`);
-    };
-
-    window.addEventListener("mousemove", handler, { passive: true });
-    return () => window.removeEventListener("mousemove", handler);
-  }, [interactive, showFace]);
-
   // ---------- V7 emotion-morph transition window ----------
-  // When emotion / colorMode / mouth / eye / posture changes, briefly hold a
-  // `lumiv6--transitioning` class so CSS can run the 100ms eye-blink + 600ms
-  // geometry morph (spec section 3). Skip on first render — no need to morph
-  // into the initial state.
   const [isTransitioning, setIsTransitioning] = useState(false);
   const firstRenderRef = useRef(true);
   useEffect(() => {
@@ -287,15 +300,209 @@ export default function LumiV6({
     setIsTransitioning(true);
     const timer = setTimeout(() => setIsTransitioning(false), 600);
     return () => clearTimeout(timer);
-  }, [emotion, colorMode, resolvedMouth, finalEye, resolvedPosture, animated]);
+  }, [effectiveEmotion, colorMode, resolvedMouth, finalEye, resolvedPosture, animated]);
+
+  // ---------- Eye-tracking (V7 immediate · V8 emotional lerp) ----------
+  useEffect(() => {
+    if (!interactive || !showFace) return;
+    const root = rootRef.current;
+    if (!root) return;
+
+    const target = { x: 0, y: 0 };
+    const computeTarget = (e: MouseEvent) => {
+      const rect = root.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const radius = Math.max(rect.width, 200) * 1.5;
+      target.x = Math.max(-1, Math.min(1, (e.clientX - cx) / radius)) * 12;
+      target.y = Math.max(-1, Math.min(1, (e.clientY - cy) / radius)) * 12;
+    };
+
+    if (v8) {
+      // V8: smooth lerp toward target. Speed varies per emotion — sleepy
+      // barely tracks, surprise almost snaps. Persists across mousemove
+      // gaps so the eyes settle naturally.
+      const current = { x: 0, y: 0 };
+      const lerp = GAZE_LERP_BY_EMOTION[effectiveEmotion] ?? 0.12;
+      let raf = 0;
+      const tick = () => {
+        current.x += (target.x - current.x) * lerp;
+        current.y += (target.y - current.y) * lerp;
+        root.style.setProperty("--lumiv6-eye-x", `${current.x.toFixed(2)}%`);
+        root.style.setProperty("--lumiv6-eye-y", `${current.y.toFixed(2)}%`);
+        raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+      window.addEventListener("mousemove", computeTarget, { passive: true });
+      return () => {
+        cancelAnimationFrame(raf);
+        window.removeEventListener("mousemove", computeTarget);
+      };
+    }
+
+    // V7 fallthrough: immediate write per mousemove.
+    const handler = (e: MouseEvent) => {
+      computeTarget(e);
+      root.style.setProperty("--lumiv6-eye-x", `${target.x.toFixed(2)}%`);
+      root.style.setProperty("--lumiv6-eye-y", `${target.y.toFixed(2)}%`);
+    };
+    window.addEventListener("mousemove", handler, { passive: true });
+    return () => window.removeEventListener("mousemove", handler);
+  }, [interactive, showFace, v8, effectiveEmotion]);
+
+  // ---------- V8: procedural breathing variation (every 15s) ----------
+  const [breathPattern, setBreathPattern] = useState({ durationMs: 5200, depth: 1.025 });
+  useEffect(() => {
+    if (!v8 || !animated || isTransitioning) return;
+    const vary = () => {
+      const baseMs = effectiveEmotion === "sleepy" ? 6500
+                   : effectiveEmotion === "calm"   ? 5200
+                   : effectiveEmotion === "joy"    ? 3200
+                   : 4400;
+      const jitterMs = (Math.random() - 0.5) * 600;     // ±300ms
+      const depth    = 1.018 + Math.random() * 0.020;   // 1.018 - 1.038
+      setBreathPattern({
+        durationMs: Math.round(baseMs + jitterMs),
+        depth: parseFloat(depth.toFixed(3)),
+      });
+    };
+    vary();
+    const interval = setInterval(vary, 15000);
+    return () => clearInterval(interval);
+  }, [v8, animated, isTransitioning, effectiveEmotion]);
+
+  // ---------- V8: randomized blink scheduler ----------
+  const [blinkPulse, setBlinkPulse] = useState(0);
+  useEffect(() => {
+    if (!v8 || !animated) return;
+    // Track BOTH the next-scheduled blink AND any in-flight double-blink so
+    // teardown cancels every pending callback (no orphaned setStates after
+    // unmount or v8/animated dep flip).
+    let nextTimer: ReturnType<typeof setTimeout> | null = null;
+    let doubleTimer: ReturnType<typeof setTimeout> | null = null;
+    const schedule = () => {
+      const interval = 2000 + Math.random() * 4000; // 2-6s natural blink rate
+      nextTimer = setTimeout(() => {
+        setBlinkPulse((n) => n + 1);
+        // 15% chance of double-blink for naturalism
+        if (Math.random() < 0.15) {
+          doubleTimer = setTimeout(() => setBlinkPulse((n) => n + 1), 220);
+        }
+        schedule();
+      }, interval);
+    };
+    schedule();
+    return () => {
+      if (nextTimer) clearTimeout(nextTimer);
+      if (doubleTimer) clearTimeout(doubleTimer);
+    };
+  }, [v8, animated]);
+  // Toggle .lumiv6--blink-once briefly each time blinkPulse increments.
+  const [blinkActive, setBlinkActive] = useState(false);
+  useEffect(() => {
+    if (!blinkPulse) return;
+    setBlinkActive(true);
+    const t = setTimeout(() => setBlinkActive(false), 220);
+    return () => clearTimeout(t);
+  }, [blinkPulse]);
+
+  // ---------- V8: idle detection (10s of no global activity) ----------
+  const [isIdle, setIsIdle] = useState(false);
+  const idleSecRef = useRef(0);
+  useEffect(() => {
+    if (!v8) return;
+    const reset = () => {
+      idleSecRef.current = 0;
+      setIsIdle((cur) => (cur ? false : cur));
+    };
+    window.addEventListener("mousemove", reset);
+    window.addEventListener("click", reset);
+    window.addEventListener("keydown", reset);
+    const interval = setInterval(() => {
+      idleSecRef.current += 1;
+      if (idleSecRef.current > 10) {
+        setIsIdle((cur) => (cur ? cur : true));
+      }
+    }, 1000);
+    return () => {
+      window.removeEventListener("mousemove", reset);
+      window.removeEventListener("click", reset);
+      window.removeEventListener("keydown", reset);
+      clearInterval(interval);
+    };
+  }, [v8]);
+
+  // ---------- V8: emotional memory + recognition micro-expression ----------
+  const [recognizing, setRecognizing] = useState(false);
+  useEffect(() => {
+    if (!memoryKey) return;
+    const storageKey = `lumi:memory:${memoryKey}`;
+    let prev: string | null = null;
+    try { prev = sessionStorage.getItem(storageKey); } catch { /* private mode */ }
+    if (prev && prev !== emotion) {
+      setRecognizing(true);
+      const t = setTimeout(() => setRecognizing(false), 800);
+      try { sessionStorage.setItem(storageKey, emotion); } catch { /* noop */ }
+      return () => clearTimeout(t);
+    }
+    try { sessionStorage.setItem(storageKey, emotion); } catch { /* noop */ }
+  }, [memoryKey, emotion]);
+
+  // ---------- V8: click-zone handlers ----------
+  // Track the active override timer + a sequence id so that:
+  //   1. Rapid re-clicks cancel the older release timer (no premature clear
+  //      of the newer override, no flicker back to base emotion mid-hold).
+  //   2. Component unmount cancels any in-flight release (no setState on
+  //      unmounted component).
+  // The sequence id is checked inside the release callback so a stale timer
+  // that somehow survived clear (defensive) cannot clobber a newer state.
+  const overrideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const overrideSeqRef = useRef(0);
+  useEffect(() => {
+    return () => {
+      if (overrideTimerRef.current) {
+        clearTimeout(overrideTimerRef.current);
+        overrideTimerRef.current = null;
+      }
+    };
+  }, []);
+  const fireOverride = (
+    next: LumiV6Emotion,
+    flag: "heart" | "head" | "body",
+    holdMs: number,
+  ) => {
+    if (overrideTimerRef.current) {
+      clearTimeout(overrideTimerRef.current);
+      overrideTimerRef.current = null;
+    }
+    const mySeq = ++overrideSeqRef.current;
+    setTriggeredEmotion(next);
+    if (flag === "heart") setHeartBurst(true);
+    if (flag === "head")  setHeadTilt(true);
+    if (flag === "body")  setBodyBounce(true);
+    overrideTimerRef.current = setTimeout(() => {
+      overrideTimerRef.current = null;
+      if (mySeq !== overrideSeqRef.current) return; // superseded — bail
+      setTriggeredEmotion(null);
+      if (flag === "heart") setHeartBurst(false);
+      if (flag === "head")  setHeadTilt(false);
+      if (flag === "body")  setBodyBounce(false);
+    }, holdMs);
+  };
 
   const eyeMod = finalEye === "default" ? "" : `lumiv6__eye--${finalEye}`;
   const mouthMod = `lumiv6__mouth--${resolvedMouth}`;
 
-  const wrapperStyle: CSSProperties & Record<`--${string}`, string> = {
+  const auraSpec = AURA_BY_EMOTION[effectiveEmotion];
+  const wrapperStyle: CSSProperties & Record<`--${string}`, string | number> = {
     width: `${px}px`,
     height: `${px}px`,
     "--lumiv6-heart-period": `${heartPeriodMs}ms`,
+    "--lumiv6-breath-duration": `${breathPattern.durationMs}ms`,
+    "--lumiv6-breath-depth": breathPattern.depth,
+    "--lumiv6-aura-color": auraSpec.color,
+    "--lumiv6-aura-opacity": auraSpec.opacity,
+    "--lumiv6-aura-period": `${auraSpec.periodMs}ms`,
   };
 
   return (
@@ -304,20 +511,28 @@ export default function LumiV6({
       className={[
         "lumiv6",
         `lumiv6--size-${size}`,
-        `lumiv6--emotion-${emotion}`,
+        `lumiv6--emotion-${effectiveEmotion}`,
         `lumiv6--pose-${pose}`,
         `lumiv6--posture-${resolvedPosture}`,
         animated ? "lumiv6--animated" : "lumiv6--still",
         interactive ? "lumiv6--interactive" : "",
         hovered ? "lumiv6--hovered" : "",
         isTransitioning ? "lumiv6--transitioning" : "",
+        v8 ? "lumiv6--v8" : "",
+        v8 && isIdle ? "lumiv6--idle" : "",
+        v8 && blinkActive ? "lumiv6--blink-once" : "",
+        heartBurst ? "lumiv6--heart-burst" : "",
+        headTilt ? "lumiv6--head-tilt" : "",
+        bodyBounce ? "lumiv6--body-bounce" : "",
+        recognizing ? "lumiv6--recognizing" : "",
         className,
       ].filter(Boolean).join(" ")}
       style={wrapperStyle}
       role="img"
       aria-label={ariaLabel}
       data-testid={testId}
-      data-emotion={emotion}
+      data-emotion={effectiveEmotion}
+      data-emotion-prop={emotion}
       data-pose={pose}
       data-color-mode={colorMode}
       data-size={size}
@@ -327,11 +542,14 @@ export default function LumiV6({
       data-eye={finalEye}
       data-posture={resolvedPosture}
       data-heart-hz={resolvedHeartHz}
+      data-v8={v8}
+      data-idle={isIdle}
       onMouseEnter={interactive ? () => setHovered(true) : undefined}
       onMouseLeave={interactive ? () => setHovered(false) : undefined}
     >
-      {/* POSTURE wrapper — body img lives inside so posture transforms
-          compose with the body's breathing keyframes without conflict. */}
+      {auraOn && <div className="lumiv6__aura" aria-hidden="true" />}
+      {shadowOn && <div className="lumiv6__shadow" aria-hidden="true" />}
+
       <div className="lumiv6__posture" aria-hidden="true">
         <img
           className="lumiv6__body"
@@ -348,24 +566,16 @@ export default function LumiV6({
 
       {showFace && (
         <>
-          {/* Soft face-pad — mutes the underlying PNG face until faceless
-              v5 PNGs ship. Cream radial blur, never reads as a sticker. */}
           <div className="lumiv6__face-pad" aria-hidden="true" />
-
-          {/* EYES layer (2 dots; pupils drift via CSS vars when interactive). */}
           <div className={`lumiv6__eye lumiv6__eye--left ${eyeMod}`} aria-hidden="true">
             <span className="lumiv6__pupil" />
           </div>
           <div className={`lumiv6__eye lumiv6__eye--right ${eyeMod}`} aria-hidden="true">
             <span className="lumiv6__pupil" />
           </div>
-
-          {/* MOUTH layer (emotion-gated; calm with no override stays mouth-less). */}
           {showMouth && (
             <div className={`lumiv6__mouth ${mouthMod}`} aria-hidden="true" />
           )}
-
-          {/* HEART layer — pulse period driven by --lumiv6-heart-period CSS var. */}
           <div className="lumiv6__heart" aria-hidden="true">
             <div className="lumiv6__heart-glow" />
             <svg
@@ -390,7 +600,32 @@ export default function LumiV6({
         </>
       )}
 
-      {/* Speech bubble — opt-in, sits above the avatar with a tail. */}
+      {clickable && showFace && (
+        <>
+          <button
+            type="button"
+            className="lumiv6__zone lumiv6__zone--head"
+            aria-label="Pat Lumi on the head"
+            data-testid={`${testId}-zone-head`}
+            onClick={() => fireOverride("greeting", "head", 1500)}
+          />
+          <button
+            type="button"
+            className="lumiv6__zone lumiv6__zone--heart"
+            aria-label="Touch Lumi's heart"
+            data-testid={`${testId}-zone-heart`}
+            onClick={() => fireOverride("love", "heart", 2000)}
+          />
+          <button
+            type="button"
+            className="lumiv6__zone lumiv6__zone--body"
+            aria-label="Tickle Lumi"
+            data-testid={`${testId}-zone-body`}
+            onClick={() => fireOverride("joy", "body", 2000)}
+          />
+        </>
+      )}
+
       {showMessage && (
         <div
           className="lumiv6__bubble"

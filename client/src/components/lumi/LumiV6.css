@@ -28,13 +28,16 @@
   object-fit: contain;
   pointer-events: none;
 }
+/* Breathe duration + depth driven by CSS vars so V8 can vary them at runtime
+   (procedural breathing — every 15s the pattern shifts a touch). The default
+   values reproduce the V6/V7 fixed cadence so existing callers don't change. */
 .lumiv6.lumiv6--animated .lumiv6__body {
-  animation: lumiv6Breathe 5200ms ease-in-out infinite;
+  animation: lumiv6Breathe var(--lumiv6-breath-duration, 5200ms) ease-in-out infinite;
   transform-origin: 50% 70%;
 }
 @keyframes lumiv6Breathe {
   0%, 100% { transform: translateY(0) scale(1); }
-  50%      { transform: translateY(-3px) scale(1.025); }
+  50%      { transform: translateY(-3px) scale(var(--lumiv6-breath-depth, 1.025)); }
 }
 
 /* ---------- FACE PAD (mutes PNG face) ---------- */
@@ -427,6 +430,177 @@
   16%  { transform: scaleY(0.1); }
   33%  { transform: scaleY(1); }
   100% { transform: scaleY(1); }
+}
+
+/* =============================================================
+   V8 "HEART, MIND & SOUL" — additive layer on top of V7. All
+   subsystems gated by additional class flags so V6/V7 callers
+   render identically when the V8 props are not used.
+
+   Gates:
+     .lumiv6--v8           umbrella (auto-applied when v8 prop set)
+     .lumiv6--idle         JS-set after 10s of no activity
+     .lumiv6--blink-once   JS-toggled briefly to fire one blink
+     .lumiv6--heart-burst  JS-toggled for ~800ms after heart click
+     .lumiv6--head-tilt    JS-toggled for ~1500ms after head click
+     .lumiv6--body-bounce  JS-toggled for ~2000ms after body click
+     .lumiv6--recognizing  JS-toggled for ~800ms on memory recall
+   ============================================================= */
+
+/* When V8 mode is on, suppress the V7 auto-blink CSS loop — JS schedules
+   blinks at natural irregular intervals via .lumiv6--blink-once. */
+.lumiv6.lumiv6--v8.lumiv6--animated .lumiv6__eye           { animation: none; }
+.lumiv6.lumiv6--v8.lumiv6--animated .lumiv6__eye--right    { animation-delay: 0; }
+.lumiv6.lumiv6--v8.lumiv6--animated.lumiv6--blink-once .lumiv6__eye {
+  animation: lumiv6BlinkOnce 220ms ease-in-out;
+}
+@keyframes lumiv6BlinkOnce {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.08); }
+}
+
+/* ----- Aura: soft radial halo behind the body, color per emotion --------- */
+.lumiv6__aura {
+  position: absolute;
+  inset: -22%;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse at 50% 55%,
+    var(--lumiv6-aura-color, rgba(168, 201, 160, 0.18)) 0%,
+    transparent 70%
+  );
+  opacity: var(--lumiv6-aura-opacity, 0.6);
+}
+.lumiv6.lumiv6--animated .lumiv6__aura {
+  animation: lumiv6AuraPulse var(--lumiv6-aura-period, 4200ms) ease-in-out infinite;
+}
+@keyframes lumiv6AuraPulse {
+  0%, 100% { transform: scale(1.00); }
+  50%      { transform: scale(1.08); }
+}
+
+/* ----- Ground shadow: subtle ellipse below the body, posture-aware ------- */
+.lumiv6__shadow {
+  position: absolute;
+  bottom: -8%;
+  left: 50%;
+  width: 58%;
+  height: 9%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.10) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: transform 800ms ease-out, opacity 800ms ease-out;
+  pointer-events: none;
+  z-index: 0;
+}
+.lumiv6--posture-leaning .lumiv6__shadow { transform: translateX(-44%); }
+.lumiv6--posture-curious .lumiv6__shadow { transform: translateX(-56%); }
+.lumiv6.lumiv6--animated.lumiv6--posture-bouncy .lumiv6__shadow {
+  animation: lumiv6ShadowBounce 800ms ease-in-out infinite;
+}
+@keyframes lumiv6ShadowBounce {
+  0%, 100% { transform: translateX(-50%) scale(1.00); opacity: 1; }
+  50%      { transform: translateX(-50%) scale(0.88); opacity: 0.7; }
+}
+
+/* ----- Click zones (only rendered when `clickable` prop is true) ---------
+   Sit above visual layers so clicks register, but pointer-events: none on the
+   wrapper child elements means the visual layers are passive (we set
+   pointer-events: auto only on the zones themselves). */
+.lumiv6__zone {
+  position: absolute;
+  cursor: pointer;
+  z-index: 30;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.lumiv6__zone:focus-visible {
+  outline: 2px dashed rgba(255, 178, 71, 0.9);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+.lumiv6__zone--head  { top: 12%; left: 32%; width: 36%; height: 28%; border-radius: 50%; }
+.lumiv6__zone--heart { top: 56%; left: 40%; width: 20%; height: 16%; border-radius: 50%; }
+.lumiv6__zone--body  { top: 38%; left: 25%; width: 50%; height: 42%; border-radius: 40%; z-index: 25; }
+
+/* ----- Heart burst (after heart-zone click) ----------------------------- */
+.lumiv6.lumiv6--heart-burst::after {
+  content: "";
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  width: 30%;
+  height: 24%;
+  transform: translate(-50%, 0) scale(0.4);
+  background: radial-gradient(ellipse, rgba(255, 178, 71, 0.65) 0%, rgba(255, 140, 66, 0.0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 4;
+  animation: lumiv6HeartBurst 800ms ease-out forwards;
+}
+@keyframes lumiv6HeartBurst {
+  0%   { transform: translate(-50%, 0) scale(0.4); opacity: 0.0; }
+  30%  { transform: translate(-50%, 0) scale(1.6); opacity: 1.0; }
+  100% { transform: translate(-50%, 0) scale(2.4); opacity: 0.0; }
+}
+
+/* ----- Head tilt (after head-zone click) -------------------------------- */
+.lumiv6--head-tilt .lumiv6__posture {
+  animation: lumiv6HeadTilt 1500ms ease-in-out;
+}
+@keyframes lumiv6HeadTilt {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(-6deg); }
+  60%  { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ----- Body bounce (after body-zone click) ------------------------------ */
+.lumiv6--body-bounce .lumiv6__posture {
+  animation: lumiv6BodyBounce 2000ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes lumiv6BodyBounce {
+  0%   { transform: translateY(0)     scale(1); }
+  20%  { transform: translateY(-12px) scale(1.03); }
+  40%  { transform: translateY(0)     scale(0.97); }
+  60%  { transform: translateY(-6px)  scale(1.01); }
+  100% { transform: translateY(0)     scale(1); }
+}
+
+/* ----- Recognition micro-expression (returning user) -------------------- */
+.lumiv6--recognizing .lumiv6__heart {
+  animation: lumiv6Recognize 800ms ease-out !important;
+}
+@keyframes lumiv6Recognize {
+  0%   { transform: scale(1.00); filter: brightness(1.0); }
+  30%  { transform: scale(1.18); filter: brightness(1.25); }
+  60%  { transform: scale(1.06); filter: brightness(1.10); }
+  100% { transform: scale(1.00); filter: brightness(1.0); }
+}
+
+/* ----- Idle behaviors: subtle gaze drift + occasional weight shift ------ */
+.lumiv6.lumiv6--v8.lumiv6--animated.lumiv6--idle .lumiv6__pupil {
+  animation: lumiv6IdleDrift 9s ease-in-out infinite;
+}
+@keyframes lumiv6IdleDrift {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(2px, -1px); }
+  50%      { transform: translate(-2px, 1px); }
+  75%      { transform: translate(1px, 2px); }
+}
+.lumiv6.lumiv6--v8.lumiv6--animated.lumiv6--idle .lumiv6__posture {
+  animation-name: lumiv6IdleShift;
+  animation-duration: 14s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+@keyframes lumiv6IdleShift {
+  0%, 88%, 100% { transform: rotate(0deg); }
+  92%           { transform: rotate(1.2deg); }
+  96%           { transform: rotate(-0.8deg); }
 }
 
 /* ---------- Reduced motion ---------- */
