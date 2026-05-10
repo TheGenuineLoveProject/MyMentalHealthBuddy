@@ -26,16 +26,47 @@
  */
 
 import "./BuddyAvatar.css";
-import lumiArtworkUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
 import {
   type BuddyState,
   getBuddyVisualOutput,
 } from "@/lib/avatarState";
 
+/**
+ * Lumi v4 color variants — public-served PNGs in /brand/.
+ * `default` is the canonical sage hero pose (lumi-v4-ultimate.png).
+ * Additional palette options let surfaces opt into a tinted Lumi
+ * (e.g. sleep slot uses the curled-up Zzz pose).
+ */
+export type BuddyColorMode =
+  | "default"
+  | "yellow"
+  | "pink"
+  | "blue"
+  | "purple"
+  | "sleep"
+  | "orange";
+
+const COLOR_MODE_SRC: Record<BuddyColorMode, string> = {
+  default: "/brand/lumi-v4-ultimate.png",
+  yellow:  "/brand/lumi-v4-yellow.png",
+  pink:    "/brand/lumi-v4-pink.png",
+  blue:    "/brand/lumi-v4-blue.png",
+  purple:  "/brand/lumi-v4-purple.png",
+  sleep:   "/brand/lumi-v4-sleep.png",
+  orange:  "/brand/lumi-v4-orange.png",
+};
+
 export interface BuddyAvatarProps {
   state?: BuddyState;
   size?: number;
   className?: string;
+  /**
+   * Color variant for Lumi artwork. Defaults to "default" (canonical
+   * sage hero pose). Palette options swap the rendered PNG only —
+   * the visual contract (state classes, data-attrs, eye/heart vars)
+   * remains driven by `state`.
+   */
+  colorMode?: BuddyColorMode;
   "data-testid"?: string;
 }
 
@@ -104,9 +135,11 @@ export default function BuddyAvatar({
   state = "calm",
   size = 160,
   className = "",
+  colorMode = "default",
   "data-testid": testId = "buddy-avatar",
 }: BuddyAvatarProps) {
   const v = getBuddyVisualOutput(state);
+  const lumiArtworkUrl = COLOR_MODE_SRC[colorMode] ?? COLOR_MODE_SRC.default;
   // v1.7 — fall back to v.label only if the state slips past the mapper
   // (e.g., a future state added in avatarState.ts before this map is
   // updated). Keeps screen readers from going silent.
@@ -138,12 +171,21 @@ export default function BuddyAvatar({
       data-eye-color={v.eyeColor}
       data-heart-color={v.heartColor}
       data-heart-pulse={v.heartPulse}
+      data-color-mode={colorMode}
     >
       <img
         src={lumiArtworkUrl}
         alt=""
         aria-hidden="true"
         draggable={false}
+        onError={(e) => {
+          // Graceful fallback if a v4 variant is missing — falls back to the
+          // canonical sage Lumi so the avatar never renders as a broken image.
+          const img = e.currentTarget;
+          if (img.src.indexOf("/brand/lumi-v4-ultimate.png") === -1) {
+            img.src = "/brand/lumi-v4-ultimate.png";
+          }
+        }}
         className={`buddy__svg ${v.motion === 'steady' ? '' : 'lumi-breathe'}`.trim()}
         style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
       />
