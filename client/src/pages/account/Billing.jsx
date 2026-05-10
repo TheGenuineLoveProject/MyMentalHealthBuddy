@@ -17,8 +17,8 @@ import { getProFeatures, getFreeFeatures } from "@/config/featureAccess";
 const PRO_PLAN = {
   id: "pro",
   name: "Pro",
-  monthly: { price: "$12", period: "/month", savings: null },
-  yearly: { price: "$99", period: "/year", savings: "Save $45" },
+  monthly: { price: "$12.99", period: "/month", savings: null },
+  yearly: { price: "$109", period: "/year", savings: "Save $47/year" },
   icon: Zap,
   features: [
     "Unlimited AI chat sessions",

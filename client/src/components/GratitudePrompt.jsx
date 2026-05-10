@@ -26,6 +26,10 @@ const GRATITUDE_BLOCKED_PATH_PREFIXES = [
   "/checkout",
   "/dashboard",
   "/reflect",
+  "/billing",
+  "/pricing",
+  "/settings",
+  "/account",
 ];
 
 function isPathBlockedForGratitude(pathname) {
