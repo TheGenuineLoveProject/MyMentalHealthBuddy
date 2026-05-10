@@ -56,17 +56,84 @@ const COLOR_MODE_SRC: Record<BuddyColorMode, string> = {
   orange:  "/brand/lumi-v4-orange.png",
 };
 
+/**
+ * Style variants — sanrio/squishmallow-inspired alt artwork. When set
+ * (and not "default"), overrides colorMode artwork.
+ */
+export type BuddyStyle =
+  | "default"
+  | "pompompurin"
+  | "cinnamoroll"
+  | "chiikawa"
+  | "jellycat"
+  | "squishmallow";
+
+const STYLE_SRC: Record<Exclude<BuddyStyle, "default">, string> = {
+  pompompurin:  "/brand/lumi-style-pompompurin.png",
+  cinnamoroll:  "/brand/lumi-style-cinnamoroll.png",
+  chiikawa:     "/brand/lumi-style-chiikawa.png",
+  jellycat:     "/brand/lumi-style-jellycat.png",
+  squishmallow: "/brand/lumi-style-squishmallow.png",
+};
+
+/**
+ * Pose variants — action/body artwork. When set (and not "default"),
+ * overrides both style and colorMode. Pose has highest priority.
+ */
+export type BuddyPose =
+  | "default"
+  | "eating"
+  | "dancing"
+  | "waving"
+  | "meditating"
+  | "celebrating"
+  | "hugging";
+
+// Pose source map — uses the canonical filename per asset (action vs body).
+const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
+  eating:      "/brand/lumi-action-eating.png",
+  dancing:     "/brand/lumi-action-dancing.png",
+  waving:      "/brand/lumi-action-waving.png",
+  meditating:  "/brand/lumi-body-meditating.png",
+  celebrating: "/brand/lumi-body-celebrating.png",
+  hugging:     "/brand/lumi-body-hugging.png",
+};
+
+/**
+ * Size token shorthand. Numeric `size` still accepted for fine-grained
+ * control. Tokens map to common UI scales used across the platform:
+ *   sm  →  32px (header logos, chat bubble avatars)
+ *   md  →  64px (cards, modals)
+ *   lg  → 128px (hero sections, onboarding)
+ *   xl  → 208px (landing hero LumiCompanion)
+ */
+export type BuddySizeToken = "sm" | "md" | "lg" | "xl";
+
+const SIZE_TOKEN_PX: Record<BuddySizeToken, number> = {
+  sm: 32,
+  md: 64,
+  lg: 128,
+  xl: 208,
+};
+
 export interface BuddyAvatarProps {
   state?: BuddyState;
-  size?: number;
+  /** Numeric pixel size OR a size token ("sm" | "md" | "lg" | "xl"). */
+  size?: number | BuddySizeToken;
   className?: string;
   /**
    * Color variant for Lumi artwork. Defaults to "default" (canonical
    * sage hero pose). Palette options swap the rendered PNG only —
    * the visual contract (state classes, data-attrs, eye/heart vars)
    * remains driven by `state`.
+   *
+   * Resolution priority: pose > style > colorMode.
    */
   colorMode?: BuddyColorMode;
+  /** Style variant (sanrio/squishmallow). Overrides colorMode when not "default". */
+  style?: BuddyStyle;
+  /** Pose variant (action/body). Highest priority — overrides style and colorMode. */
+  pose?: BuddyPose;
   "data-testid"?: string;
 }
 
@@ -136,18 +203,29 @@ export default function BuddyAvatar({
   size = 160,
   className = "",
   colorMode = "default",
+  style: styleVariant = "default",
+  pose = "default",
   "data-testid": testId = "buddy-avatar",
 }: BuddyAvatarProps) {
   const v = getBuddyVisualOutput(state);
-  const lumiArtworkUrl = COLOR_MODE_SRC[colorMode] ?? COLOR_MODE_SRC.default;
+  // Resolution priority: pose > style > colorMode. Falls through to the
+  // canonical sage Lumi when nothing is overridden.
+  const lumiArtworkUrl =
+    (pose !== "default" && POSE_SRC[pose]) ||
+    (styleVariant !== "default" && STYLE_SRC[styleVariant]) ||
+    COLOR_MODE_SRC[colorMode] ||
+    COLOR_MODE_SRC.default;
+  // Resolve size token → px (numeric size passes through unchanged).
+  const sizePx =
+    typeof size === "number" ? size : (SIZE_TOKEN_PX[size] ?? 160);
   // v1.7 — fall back to v.label only if the state slips past the mapper
   // (e.g., a future state added in avatarState.ts before this map is
   // updated). Keeps screen readers from going silent.
   const ariaLabel = BUDDY_ARIA_LABEL[v.state] ?? `MMHB Buddy: ${v.label}`;
 
   const styleVars: React.CSSProperties & Record<`--${string}`, string> = {
-    width: `${size}px`,
-    height: `${size}px`,
+    width: `${sizePx}px`,
+    height: `${sizePx}px`,
     "--buddy-eye-color": v.eyeColor,
     "--buddy-heart-color": v.heartColor,
     "--buddy-heart-pulse": `${v.heartPulse}ms`,
@@ -172,6 +250,8 @@ export default function BuddyAvatar({
       data-heart-color={v.heartColor}
       data-heart-pulse={v.heartPulse}
       data-color-mode={colorMode}
+      data-style={styleVariant}
+      data-pose={pose}
     >
       <img
         src={lumiArtworkUrl}

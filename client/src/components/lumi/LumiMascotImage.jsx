@@ -12,7 +12,11 @@
  *   - .lumi-anim-breathe gentle scale pulse
  * Both honor prefers-reduced-motion (defined in lumi-motion.css).
  */
-import lumiFullBodyPng from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+// v4 canonical PNG served from /public — see BuddyAvatar.tsx for the
+// full color-mode/style/pose registry. This component preserves its
+// own static-image contract (size/animation/aria/onClick passthrough);
+// the swap is import-source only.
+const lumiFullBodyPng = "/brand/lumi-v4-ultimate.png";
 
 export default function LumiMascotImage({
   size = 280,

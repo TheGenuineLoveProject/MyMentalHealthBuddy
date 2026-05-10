@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
-import lumiAvatarUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 type Message = {
   role: "user" | "assistant";
@@ -118,16 +118,17 @@ export default function AIChatPanel() {
               className={`flex gap-3 ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {m.role === "assistant" && (
-                <img
-                  src={lumiAvatarUrl}
-                  alt=""
-                  width={32}
-                  height={32}
-                  aria-hidden="true"
-                  draggable={false}
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                  style={{ width: 32, height: 32, objectFit: "contain", flexShrink: 0, alignSelf: "flex-start" }}
-                />
+                <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
+                  {/* TODO(buddy-emotion): wire dynamic colorMode from conversation
+                      emotion signal once the AIChatPanel exposes a mood state.
+                      Currently defaults to canonical sage for all assistant turns. */}
+                  <BuddyAvatar
+                    state="calm"
+                    size="sm"
+                    colorMode="default"
+                    data-testid={`img-chat-assistant-${i}`}
+                  />
+                </div>
               )}
               <div
                 className={`rounded-xl p-3 max-w-[85%] ${
@@ -146,17 +147,16 @@ export default function AIChatPanel() {
 
           {loading && (
             <div className="flex gap-3 justify-start">
-              <img
-                src={lumiAvatarUrl}
-                alt=""
-                width={32}
-                height={32}
-                aria-hidden="true"
-                draggable={false}
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                className="lumi-breathe"
-                style={{ width: 32, height: 32, objectFit: "contain", flexShrink: 0, alignSelf: "flex-start" }}
-              />
+              <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
+                {/* "anxious" state triggers lumi-breathe motion via avatarState
+                    mapping — preserves the typing-indicator breathe animation. */}
+                <BuddyAvatar
+                  state="anxious"
+                  size="sm"
+                  colorMode="default"
+                  data-testid="img-chat-assistant-typing"
+                />
+              </div>
               <div className="rounded-xl bg-gray-50 p-3 text-sm text-gray-500">
                 Companion is thinking...
               </div>

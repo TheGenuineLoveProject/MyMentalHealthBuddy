@@ -3,7 +3,7 @@ import { Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle,
 import { useState, useEffect, useRef } from "react";
 import { BRAND } from "@shared/brand";
 import { useAuth } from "@/context/AuthContext";
-import lumiIconUrl from "@assets/mmhb_buddy_interactive_fullbody_1777538625498.png";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 const MODES = ["default", "low-stim", "reading"];
 
@@ -92,15 +92,11 @@ function Header() {
               overflow: "visible",
             }}
           >
-            <img
-              src={lumiIconUrl}
-              alt="Lumi"
-              width={44}
-              height={44}
-              draggable={false}
-              style={{ width: 44, height: 44, objectFit: "contain" }}
+            <BuddyAvatar
+              state="calm"
+              size="sm"
+              colorMode="default"
               data-testid="img-header-lumi"
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
