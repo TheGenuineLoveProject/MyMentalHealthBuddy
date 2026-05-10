@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import confetti from "canvas-confetti";
+import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import "@/styles/sacred-visuals.css";
 
 const AFFIRMATION_TEMPLATES = {
@@ -167,7 +168,15 @@ export default function CelebrationRitual() {
           <div className="text-center animate-fadeIn">
             <div className="relative inline-block mb-8">
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-amber-400 via-rose-400 to-pink-400 flex items-center justify-center shadow-2xl animate-pulse">
-                <Crown className="w-16 h-16 text-white" />
+                {/* Lumi (joy/yellow/celebrating) anchors the celebration intro
+                    per Avatar v4.2; preserves Crown import for downstream phases. */}
+                <BuddyAvatar
+                  state="celebrate"
+                  colorMode="yellow"
+                  pose="celebrating"
+                  size="lg"
+                  data-testid="img-celebration-buddy"
+                />
               </div>
               <div className="absolute -inset-4 rounded-full border-2 border-amber-300/50 animate-ping" style={{ animationDuration: "2s" }} />
             </div>

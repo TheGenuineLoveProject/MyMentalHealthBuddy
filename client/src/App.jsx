@@ -92,6 +92,8 @@ const CelebrationRitual = lazy(() => import("./pages/CelebrationRitual.jsx"));
 const DiscussionPage = lazy(() => import("./features/community/DiscussionPage.jsx"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage.jsx"));
 const BreathTool = lazy(() => import("./pages/tools/BreathTool.jsx"));
+const BreathingTool = lazy(() => import("./pages/tools/BreathingTool.jsx"));
+const CheckIn = lazy(() => import("./pages/CheckIn.jsx"));
 const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
 const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
 const AdvancedToolsPage = lazy(() => import("./pages/AdvancedToolsPage.tsx"));
@@ -682,7 +684,7 @@ export default function App() {
               {/* Tools Route Aliases */}
               <Route path="/tools/journal"><WellnessRoute><JournalPage /></WellnessRoute></Route>
               <Route path="/tools/mood"><WellnessRoute><MoodPage /></WellnessRoute></Route>
-              <Route path="/tools/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/tools/breathing"><BreathingTool /></Route>
               <Route path="/tools/affirmations"><AffirmationWall /></Route>
               <Route path="/tools/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/tools/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
@@ -941,8 +943,8 @@ export default function App() {
               <Route path="/index">{() => <Redirect to="/" />}</Route>
               <Route path="/main">{() => <Redirect to="/" />}</Route>
               <Route path="/intro">{() => <Redirect to="/onboarding" />}</Route>
-              <Route path="/checkin">{() => <Redirect to="/mood" />}</Route>
-              <Route path="/check-in">{() => <Redirect to="/mood" />}</Route>
+              <Route path="/checkin"><CheckIn /></Route>
+              <Route path="/check-in">{() => <Redirect to="/checkin" />}</Route>
               <Route path="/workbooks">{() => <Redirect to="/practices" />}</Route>
               <Route path="/templates">{() => <Redirect to="/practices" />}</Route>
               <Route path="/notifications">{() => <Redirect to="/dashboard" />}</Route>

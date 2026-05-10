@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { avatarForText } from "@/lib/buddyEmotion";
 
 type Message = {
   role: "user" | "assistant";
@@ -117,19 +118,24 @@ export default function AIChatPanel() {
               key={`${m.role}-${i}`}
               className={`flex gap-3 ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
-              {m.role === "assistant" && (
-                <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
-                  {/* TODO(buddy-emotion): wire dynamic colorMode from conversation
-                      emotion signal once the AIChatPanel exposes a mood state.
-                      Currently defaults to canonical sage for all assistant turns. */}
-                  <BuddyAvatar
-                    state="calm"
-                    size="sm"
-                    colorMode="default"
-                    data-testid={`img-chat-assistant-${i}`}
-                  />
-                </div>
-              )}
+              {m.role === "assistant" && (() => {
+                // Dynamic avatar: derive {state, colorMode, pose} from this
+                // assistant turn's text via the single-source-of-truth
+                // buddyEmotion classifier. Crisis short-circuit lives inside
+                // classifyEmotion (asymmetric-risk: stillness over sparkle).
+                const a = avatarForText(m.content);
+                return (
+                  <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
+                    <BuddyAvatar
+                      state={a.state}
+                      size="sm"
+                      colorMode={a.colorMode}
+                      pose={a.pose}
+                      data-testid={`img-chat-assistant-${i}`}
+                    />
+                  </div>
+                );
+              })()}
               <div
                 className={`rounded-xl p-3 max-w-[85%] ${
                   m.role === "user"

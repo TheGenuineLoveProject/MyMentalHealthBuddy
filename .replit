@@ -53,3 +53,7 @@ packages = ["tree"]
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+# Build cache optimization
+[build]
+cache = ["node_modules", "dist", ".cache"]
