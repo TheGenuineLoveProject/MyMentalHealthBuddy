@@ -1,10 +1,11 @@
 import { readFileSync, existsSync, writeFileSync, renameSync } from "fs";
 import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 import { createHash } from "crypto";
 
-const __dir = dirname(fileURLToPath(import.meta.url));
-const AI_ROOT = join(__dir, "..", "..", "ai");
+// AI_ROOT resolves from process.cwd() so it survives esbuild bundling
+// (where module-local __dirname is rebased to dist/). Production run
+// command stays at workspace root so cwd === workspace root.
+const AI_ROOT = join(process.cwd(), "ai");
 
 const VALID_PROMPT_ID = /^[a-z]\d{2}_[a-z0-9_]+$/;
 

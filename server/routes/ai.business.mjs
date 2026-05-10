@@ -22,7 +22,7 @@ import { logger } from "../utils/logger.mjs";
 const router = Router();
 
 const __dir = dirname(fileURLToPath(import.meta.url));
-const AUDIT_LOG_PATH = join(__dir, "..", "..", "ai", "business", "_audit.log.jsonl");
+const AUDIT_LOG_PATH = join(process.cwd(), "ai", "business", "_audit.log.jsonl");
 
 const BodySchema = z.object({
   userText:   z.string().min(1).max(4000),

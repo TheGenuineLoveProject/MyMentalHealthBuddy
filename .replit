@@ -4,8 +4,8 @@ modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 
 [deployment]
 deploymentTarget = "vm"
-build = ["sh", "-c", "npm ci --no-audit --no-fund && npm run build"]
-run = ["sh", "-c", "set -e; if ! node -e \"require.resolve('express/package.json')\" 2>/dev/null; then echo '[boot] runtime deps missing — installing prod deps'; npm ci --omit=dev --no-audit --no-fund; fi; NODE_ENV=production exec node --import ./server/observability/preload.mjs server/app.mjs"]
+build = ["sh", "-c", "npm ci --no-audit --no-fund && npm run build && node scripts/build-server.mjs"]
+run = ["sh", "-c", "NODE_ENV=production exec node dist/server.mjs"]
 
 [[ports]]
 localPort = 5000

@@ -29,7 +29,7 @@ function requireAdmin(req, res, next) {
 
 router.get("/", requireAdmin, async (_req, res) => {
   try {
-    const filePath = resolve(__dirname, "../../content/narrative/social_posts.json");
+    const filePath = resolve(process.cwd(), "content/narrative/social_posts.json");
     const raw = await readFile(filePath, "utf-8");
     const posts = JSON.parse(raw);
 
