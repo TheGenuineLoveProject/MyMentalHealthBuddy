@@ -181,7 +181,7 @@ export interface LumiV6Props {
 
 // ---------- Asset map ----------
 const COLOR_PNG: Record<LumiV6ColorMode, string> = {
-  default: "/brand/v17/avatar-floating.png",
+  default: "/brand/v17/avatar-floating-nobg.png",
   yellow:  "/brand/lumi-v4-yellow.png",
   pink:    "/brand/lumi-v4-pink.png",
   blue:    "/brand/lumi-v4-blue.png",
@@ -190,12 +190,12 @@ const COLOR_PNG: Record<LumiV6ColorMode, string> = {
   orange:  "/brand/lumi-v4-orange.png",
 };
 const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
-  waving:      "/brand/v17/avatar-floating.png",
-  meditating:  "/brand/v17/avatar-breathing.png",
-  celebrating: "/brand/v17/avatar-heart.png",
-  hugging:     "/brand/v17/avatar-heart.png",
+  waving:      "/brand/v17/avatar-floating-nobg.png",
+  meditating:  "/brand/v17/avatar-breathing-nobg.png",
+  celebrating: "/brand/v17/avatar-heart-nobg.png",
+  hugging:     "/brand/v17/avatar-heart-nobg.png",
 };
-const FALLBACK_PNG = "/brand/v17/avatar-floating.png";
+const FALLBACK_PNG = "/brand/v17/avatar-floating-nobg.png";
 
 const EMOTION_MESSAGE: Record<LumiV6Emotion, string> = {
   joy:      "Yay! That's wonderful.",

@@ -8,7 +8,7 @@
  * directory — those URLs 404'd in production. Using @assets/ imports
  * guarantees the artwork ships with the bundle.
  */
-const lumiDefaultUrl = "/brand/v17/avatar-floating.png";
+const lumiDefaultUrl = "/brand/v17/avatar-floating-nobg.png";
 import lumiBlueUrl      from "@assets/IMG_2178_1777538625498.png";
 import lumiLavenderUrl  from "@assets/IMG_2177_1777538625498.png";
 import lumiCoralUrl     from "@assets/IMG_2176_1777538625498.png";
