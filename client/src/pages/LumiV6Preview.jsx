@@ -630,7 +630,7 @@ function LumiAudioPanel() {
         <em>pop</em>, a synced <em>heartbeat</em>, and an interaction{" "}
         <em>chime</em>. Programmatic tones only (no audio files), capped at
         ≈ -22 dBFS per the prime directive. Default <strong>OFF</strong>, stored
-        in <code>localStorage</code> as <code>mmhb-lumi-audio-enabled</code>.
+        in <code>localStorage</code> as <code>lumi:audio:enabled</code>.
         Respects <code>prefers-reduced-motion</code>: when set, the toggle
         appears but every play is a silent no-op.
       </p>

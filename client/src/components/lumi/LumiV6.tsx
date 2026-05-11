@@ -67,6 +67,7 @@
  * crisis-stillness contract automatically cover them. CSS in LumiV6.css.
  */
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import { useLumiAudio } from "@/hooks/useLumiAudio.js";
 import "./LumiV6.css";
 
 export type LumiV6ColorMode =
@@ -285,6 +286,14 @@ export default function LumiV6({
 }: LumiV6Props) {
   const px = pixelSize ?? SIZE_PX[size] ?? SIZE_PX.lg;
   const bodySrc = POSE_PNG[pose] || COLOR_PNG[colorMode] || FALLBACK_PNG;
+
+  // ---------- V14 Voice + Expression Sync ----------
+  // Hook is always called (rules-of-hooks); when audio is disabled OR
+  // reduced-motion is on OR Web Audio is unavailable, every play() is a
+  // silent no-op so we can wire the call sites unconditionally.
+  const lumiAudio = useLumiAudio();
+  // Per-instance debounce for the interaction chime (≥ 2s between plays).
+  const lastChimeAtRef = useRef(0);
 
   // ---------- V8 click-zone-driven momentary emotion override ----------
   const [triggeredEmotion, setTriggeredEmotion] = useState<LumiV6Emotion | null>(null);
@@ -518,6 +527,18 @@ export default function LumiV6({
           try { sessionStorage.setItem("lumi:v9:entered", "1"); } catch { /* noop */ }
           setV9Entering(true);
           timer = setTimeout(() => setV9Entering(false), 800);
+          // V14: gentle entrance pop, once per browser session even across
+          // multiple Lumi instances. Independent gate from the V9 visual
+          // entrance so the audio toggle can be flipped mid-session and
+          // still fire exactly once after the flip.
+          let popped = false;
+          try { popped = sessionStorage.getItem("lumi:audio:popped") === "1"; } catch { /* noop */ }
+          if (!popped) {
+            const fired = lumiAudio.pop();
+            if (fired) {
+              try { sessionStorage.setItem("lumi:audio:popped", "1"); } catch { /* noop */ }
+            }
+          }
           obs.disconnect();
         }
       },
@@ -528,7 +549,27 @@ export default function LumiV6({
       obs.disconnect();
       if (timer) clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [v9, animated]);
+
+  // ---------- V14: heartbeat sync ----------
+  // Soft heartbeat tone scheduled on the same period as the visual heart
+  // pulse. Gated on `animated` so crisis surfaces stay silent. The hook's
+  // `effective` flag is the master kill-switch (audio off OR reduced-motion
+  // OR Web Audio unavailable) — when false the interval still runs but every
+  // play() is a no-op, which keeps the dependency array minimal.
+  useEffect(() => {
+    if (!animated) return;
+    if (!lumiAudio.effective) return;
+    // Period from the existing heart-pulse derivation. The fastest emotion
+    // ("surprise") is 1.5 Hz → 666 ms period, well below the 3 Hz safety
+    // threshold required by V14.
+    const periodMs = Math.max(340, heartPeriodMs);
+    const id = window.setInterval(() => {
+      lumiAudio.heartbeat();
+    }, periodMs);
+    return () => window.clearInterval(id);
+  }, [animated, lumiAudio.effective, heartPeriodMs, lumiAudio]);
 
   // ---------- V9: attention capture ("Lumi notices you") ----------
   // After 15s of no Lumi-local interaction, when cursor enters 200px radius,
@@ -715,6 +756,15 @@ export default function LumiV6({
     lastLumiInteractionRef.current = Date.now();
     // Crisis-safe: escalation only tracks when animation is allowed.
     if (v9 && animated) recordEscalation();
+    // V14: whisper chime on click-zone interaction, debounced to ≥ 2s
+    // between plays per the prime directive. Gated on `animated` so crisis
+    // surfaces stay silent; the hook's effective flag is the master mute.
+    if (animated) {
+      const now = Date.now();
+      if (now - lastChimeAtRef.current >= 2000) {
+        if (lumiAudio.chime()) lastChimeAtRef.current = now;
+      }
+    }
     overrideTimerRef.current = setTimeout(() => {
       overrideTimerRef.current = null;
       if (mySeq !== overrideSeqRef.current) return; // superseded — bail

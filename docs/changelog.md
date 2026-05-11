@@ -6,6 +6,37 @@ Newest entries on top.
 
 ---
 
+## V14 Wired Into LumiV6 (v5.2) — Voice + Expression Sync, integration phase
+
+The v5.1 audio engine is now wired into the live `LumiV6` component at the three V14 spec'd integration points. All wiring sits behind the same `lumi:audio:enabled` localStorage flag (default **OFF**) plus the existing `prefers-reduced-motion` and Web Audio availability gates, so behavior is unchanged for every existing user until they explicitly opt in on `/v6`.
+
+**Modified files**:
+- `client/src/components/lumi/LumiV6.tsx` — added `useLumiAudio()` hook call, three call sites (entrance pop, heartbeat interval, chime in `fireOverride`), and one debounce ref. Net additions: ~35 lines, all visually scoped to `// V14:` comments. Zero changes to existing visual behavior, props, derivation tables, or click-zone logic.
+- `client/src/lib/lumiAudio.js` — retuned all three tones to the user's exact V14 spec (pop 0.3 s 800 → 1200 Hz vol 0.08; heartbeat 0.18 s 110 → 80 Hz vol 0.05 single thud; chime 0.20 s bell harmonic stack 660 Hz + 1320 Hz vol 0.06). The 0.08 ceiling on the kernel `playTone()` is unchanged; the new pop sits exactly at that ceiling, every other tone is below it.
+- `client/src/hooks/useLumiAudio.js` — renamed localStorage key from preview-era `mmhb-lumi-audio-enabled` to canonical `lumi:audio:enabled` per the V14 spec. Includes a one-time `migrateLegacyKey()` that copies any existing preview-era value into the new key on first read and removes the legacy entry. Pure additive — no user setting is lost.
+- `client/src/pages/LumiV6Preview.jsx` — updated the panel's documentation copy to show the canonical key name.
+
+**Wiring detail (each integration point)**:
+
+1. **Entrance pop** — fires inside the existing V9 `IntersectionObserver` callback (`LumiV6.tsx` line 539). Independent sessionStorage gate `lumi:audio:popped` (separate from `lumi:v9:entered` so a user can flip the audio toggle mid-session and still get exactly one pop after the flip). The gate is only set once `pop()` actually returns `true` — so a no-op (audio off / reduced motion / Web Audio unavailable) does not consume the one-shot.
+2. **Heartbeat sync** — separate `useEffect` keyed on `[animated, lumiAudio.effective, heartPeriodMs, lumiAudio]`. Schedules `setInterval(heartbeat, max(340, heartPeriodMs))`. The 340 ms floor is a defensive safety floor (≈ 2.94 Hz) — even if a future emotion table sets `heartHz > 3`, the audio cadence is clamped under the 3 Hz seizure-safety threshold from the V14 spec. The visual heart pulse continues at its native cadence; only the audio is clamped.
+3. **Interaction chime** — added inside `fireOverride()` (the existing click-zone handler), gated on `animated` with a per-instance `lastChimeAtRef` debounce of ≥ 2000 ms. Mirrors the V11 prime directive: even if a user mashes head/heart/body click zones, the chime fires at most every 2 seconds. Debounce timestamp is only updated when `chime()` actually returns `true`, so silent no-ops don't burn the debounce window either.
+
+**Crisis-safety contract** (preserved):
+- All three integrations are gated on `animated`. Crisis surfaces (`<LumiV6 animated={false} />`) stay completely silent in addition to staying still — the existing visual contract automatically becomes an audio contract.
+- Reduced-motion is enforced at *both* the kernel layer (`prefersReducedMotion()` check inside `ensureContext`) and the hook layer (`reducedMotion` state in `effective`). Even a stale ref or future call site can't bypass it.
+- The hook's `effective` flag is the single master mute. `lumiAudio.pop()`, `.heartbeat()`, `.chime()` are all silent no-ops when it's false — call sites don't have to gate themselves.
+
+**Why no hover chime**: The user's V14 spec said "click/hover" for the chime trigger. Hover-fire would be too noisy on landing pages where the cursor naturally crosses Lumi (think hero sections), and the 2 s debounce alone wouldn't fully suppress the unintentional triggers. Wiring chime to the deliberate click-zone path (head / heart / body) instead matches the V11 prime directive — "whisper-quiet, never startling, always intentional". Hover wiring can be added later if you want, but it should layer on top of a gesture-intent heuristic, not raw `mouseenter`.
+
+**Verification**:
+- `npx tsc --noEmit` — exit 0.
+- All 7 representative routes (`/`, `/v6`, `/chat`, `/crisis`, `/checkin`, `/tools/breathing`, `/celebration`) — 200.
+- Workflow logs — clean (only pre-existing schema/SSL warnings).
+- Manual: with audio toggled OFF on `/v6`, every wellness surface behaves byte-identically to v5.1 (no audio, no extra timers fire because the heartbeat `useEffect` returns early before creating an interval).
+
+---
+
 ## Lumi Voice + Expression Sync (v5.1) — V14 phase
 
 A tiny Web Audio kernel that gives Lumi three optional voice cues — a gentle entrance **pop**, a synced **heartbeat**, and an interaction **chime** — gated behind an explicit user preference. Default **OFF**. Per the V13 roadmap the engine ships first; per-surface auto-wiring (entrance / pulse / interaction) is intentionally deferred so the v4.5–v5.0 polish remains untouched until the user approves broader integration.

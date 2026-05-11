@@ -85,81 +85,70 @@ function playTone({ type = "sine", from, to, duration, peakGain = 0.06, attack =
 }
 
 /**
- * Gentle entrance pop — sine pluck, 220 → 440 Hz over 180ms.
- * Plays when Lumi appears or "wakes up".
+ * Gentle entrance pop — sine sweep, 800 → 1200 Hz over 300ms, vol 0.08.
+ * Plays when Lumi appears (once per session via sessionStorage gate at the
+ * call site, so this kernel stays stateless). Per V14 spec.
  */
 export function playLumiPop() {
   return playTone({
     type: "sine",
-    from: 220,
-    to: 440,
-    duration: 0.18,
-    peakGain: 0.05,
-    attack: 0.01,
-    release: 0.14,
+    from: 800,
+    to: 1200,
+    duration: 0.30,
+    peakGain: 0.08,
+    attack: 0.012,
+    release: 0.16,
   });
 }
 
 /**
- * Soft heartbeat — two-beat lub-dub at 110 Hz, ~440ms total.
- * Synced to the existing heart pulse cadence (period prop on LumiV6).
+ * Soft heartbeat — single sine thud at 110 Hz, ~180ms, vol 0.05. Per V14
+ * spec the cadence is driven by the call site (LumiV6 schedules a play()
+ * on its existing heart-pulse period), so this kernel just plays one beat
+ * per call. Total envelope ~280ms — well under the 3 Hz seizure-safety
+ * threshold even at the fastest emotion ("surprise" = 1.5 Hz pulse).
  */
 export function playLumiHeartbeat() {
-  const lub = playTone({
+  return playTone({
     type: "sine",
     from: 110,
-    to: 90,
-    duration: 0.10,
-    peakGain: 0.045,
-    attack: 0.008,
+    to: 80,
+    duration: 0.18,
+    peakGain: 0.05,
+    attack: 0.010,
     release: 0.10,
   });
-  // Schedule the dub via setTimeout — not relying on AudioContext scheduling
-  // here keeps the API symmetric (each tone is one playTone call).
-  if (lub) {
-    setTimeout(() => {
-      playTone({
-        type: "sine",
-        from: 95,
-        to: 75,
-        duration: 0.12,
-        peakGain: 0.04,
-        attack: 0.008,
-        release: 0.12,
-      });
-    }, 180);
-  }
-  return lub;
 }
 
 /**
- * Whisper-quiet chime — triangle at 660 Hz with a 880 Hz overtone.
- * Plays on interaction acknowledgement (e.g. Lumi tap, emotion select).
+ * Whisper chime — bell-like harmonic stack (660 Hz fundamental + 1320 Hz
+ * second harmonic) over 200ms, vol 0.06. Per V14 spec. The second harmonic
+ * is fired from the same call so the bell character lands in one event;
+ * call sites debounce to ≥2s between chimes.
  */
 export function playLumiChime() {
-  const a = playTone({
+  const fundamental = playTone({
     type: "triangle",
     from: 660,
     to: 660,
-    duration: 0.18,
-    peakGain: 0.045,
-    attack: 0.012,
-    release: 0.18,
+    duration: 0.20,
+    peakGain: 0.06,
+    attack: 0.010,
+    release: 0.22,
   });
-  if (a) {
-    setTimeout(() => {
-      playTone({
-        type: "triangle",
-        from: 880,
-        to: 880,
-        duration: 0.16,
-        peakGain: 0.035,
-        attack: 0.012,
-        release: 0.20,
-      });
-    }, 60);
+  if (fundamental) {
+    // Second harmonic stacked at the same instant for a soft bell timbre.
+    playTone({
+      type: "sine",
+      from: 1320,
+      to: 1320,
+      duration: 0.20,
+      peakGain: 0.025,
+      attack: 0.010,
+      release: 0.22,
+    });
   }
-  return a;
+  return fundamental;
 }
 
 /**

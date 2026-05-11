@@ -17,10 +17,26 @@ import {
   closeLumiAudio,
 } from "../lib/lumiAudio.js";
 
-const STORAGE_KEY = "mmhb-lumi-audio-enabled";
+const STORAGE_KEY = "lumi:audio:enabled";
+
+// One-time migration from the v5.1 preview key to the canonical V14 key.
+// Safe no-op once migrated; fires only on first read after upgrade.
+function migrateLegacyKey() {
+  if (typeof window === "undefined") return;
+  try {
+    const legacy = window.localStorage.getItem("mmhb-lumi-audio-enabled");
+    if (legacy != null && window.localStorage.getItem(STORAGE_KEY) == null) {
+      window.localStorage.setItem(STORAGE_KEY, legacy);
+    }
+    if (legacy != null) window.localStorage.removeItem("mmhb-lumi-audio-enabled");
+  } catch {
+    /* noop */
+  }
+}
 
 function readEnabled() {
   if (typeof window === "undefined") return false;
+  migrateLegacyKey();
   try {
     return window.localStorage.getItem(STORAGE_KEY) === "true";
   } catch {
