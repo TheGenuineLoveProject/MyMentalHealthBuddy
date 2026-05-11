@@ -23,9 +23,32 @@ export default function AdminLogin() {
 
   useEffect(() => {
     document.title = "Admin Login — MyMentalHealthBuddy Command Center";
+
+    // SEO v5.7.2 parity — admin entry points self-declare noindex so
+    // Lighthouse audits see the intent at the page level (complementing
+    // the robots.txt /admin Disallow). Cleaned up on unmount so other
+    // routes can keep their own robots policy.
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    const createdHere = !robotsMeta;
+    if (!robotsMeta) {
+      robotsMeta = document.createElement("meta");
+      robotsMeta.setAttribute("name", "robots");
+      document.head.appendChild(robotsMeta);
+    }
+    const previousContent = robotsMeta.getAttribute("content");
+    robotsMeta.setAttribute("content", "noindex, nofollow");
+
     if (sessionStorage.getItem("adminVerified") === "true") {
       setLocation("/admin");
     }
+
+    return () => {
+      if (createdHere) {
+        robotsMeta?.remove();
+      } else if (previousContent !== null) {
+        robotsMeta?.setAttribute("content", previousContent);
+      }
+    };
   }, [setLocation]);
 
   const handleSubmit = async (e) => {

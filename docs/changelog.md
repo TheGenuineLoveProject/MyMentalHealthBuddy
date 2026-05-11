@@ -69,6 +69,35 @@ V16 brief specifies Primary CTA "Talk With Buddy →" links to `/chat` (or `/lum
 - `npm run build` → exit 0, built in ~17s.
 - Smoke `/` → V16 hero renders correctly: H1 "You don't have to / carry everything alone." with gradient on the second line, eyebrow + Lumi avatar preserved above. Welcome-back surface (one of: WelcomeBackBanner OR ReturnLoop) fires correctly on second visit.
 
+### v5.7.2 — SEO Lighthouse pass (sitemap refresh + auth-page noindex + robots.txt sync)
+
+User report: Lighthouse flagged two SEO issues — *"Page is blocked from indexing"* and *"Links do not have descriptive text"*. A targeted A→Z audit was run before any changes.
+
+**Audit findings (most concerns turned out to be already-correct):**
+- Homepage `/` is fully indexable: `<title>`, `<meta name="description">`, `<meta name="robots" content="index, follow">`, complete OG/Twitter card metadata.
+- All 12 landing-section components (`CanvaLanding`, `EmotionalJourney`, `NlpMiContent`, `ValueProposition`, `NextStepCTA`, `ValueBridge`, `EmailCapture`, etc.) — **zero non-descriptive links**. Arrow icons inside descriptive Links are correctly marked `aria-hidden="true"` (the right pattern, not a violation).
+- All shared components rendered on indexable surfaces (`ReturnLoop`, `MicroWinPrompt`, `WelcomeBackBanner`, `FeedbackWidget`, `SoftLaunchBanner`, `SafetyFooter`) — **every icon-only button carries an explicit `aria-label`** ("Dismiss welcome back banner", "Dismiss this gentle prompt", "Hide feedback for 7 days", etc.).
+- No `X-Robots-Tag` header is sent by helmet or any middleware — confirmed via `curl -I /`.
+
+**Real gaps found and fixed:**
+
+1. **`client/public/sitemap.xml` was stale (dated 2026-01-26, 14 entries)** — referenced legacy routes and was missing the entire current public-marketing surface. Rewritten with **40 current public routes** drawn directly from the live `App.jsx` route table: primary marketing (`/`, `/about`, `/about/approach`, `/values`, `/pricing`, `/features`, `/testimonials`, `/blog`, `/crisis`, `/challenge`, `/healing`, `/landing`), educational content (`/healing-library`, `/research`, `/glossary`, `/glossary-full`, `/how-to-guides`, `/daily-routines`, `/cognitive-tools`, `/news`, `/faq`, `/guided-journaling`), public tools (`/tools/all`, `/tools/breathing`, `/tools/grounding`, `/tools/meditation`, `/tools/self-care`, `/tools/gad7`, `/tools/phq9`, `/tools/distortion-checker`, `/tools/breath-pacer`, `/tools/boundary-builder`, `/tools/manipulation-detector`, `/tools/sleep-quality-calculator`, `/tools/nervous-system-check`), and topic landing pages (`/breathing`, `/grounding`, `/calming-scenes`, `/sleep-guide`, `/stress-response`, `/emotional-intelligence`). Each entry uses today's `lastmod` (2026-05-11) with priorities calibrated to surface importance (`/` and `/crisis` at 1.0, primary marketing at 0.8–0.9, tools at 0.7–0.9, deeper educational at 0.6–0.8).
+
+2. **Two `robots.txt` files with mismatched content** — `client/public/robots.txt` (the canonical, served by Vite/Express from `CLIENT_DIST`) was comprehensive; `public/robots.txt` was a much shorter orphan with different Allow/Disallow rules. Per the "Non-destructive (never delete without permission)" rule the orphan was **synced** to match the canonical exactly (not deleted), so any future build path that picks the alternate location returns the same indexing policy.
+
+3. **Auth pages had no per-page noindex meta tag** — `/login`, `/register`, `/forgot-password`, `/reset-password` (and all their state branches) relied solely on `robots.txt` `Disallow` to keep them out of search results. Lighthouse reports "Page is blocked from indexing" for any URL it audits that's blocked at the robots.txt level, regardless of intent. Fixed by adding `noindex` prop to **all 9 `<SEO>` calls** across these files (Login: 1, Register: 1, ForgotPassword: 2 — initial + check-email branches, ResetPassword: 4 — invalid-link, complete, reset-form, and missing-search-string branches). The existing `client/src/components/SEO.tsx` already supported `noindex` (lines 91–95: `if (noindex) setMeta("robots", "noindex, nofollow"); else removeMeta("robots");`) — just needed to be wired up. Now Lighthouse sees the noindex declaration is intentional and per-page, complementing the robots.txt block with explicit page-level intent.
+
+**What was deliberately NOT changed:**
+- `robots.txt` Disallow rules — these are an opinionated indexing policy (auth-gated wellness pages like `/journal`, `/chat`, `/mood`, `/today` stay out of search). Per non-destructive principle, no rule was added or removed.
+- Admin-page icon-only buttons (`AdminSocial`, `NarrativeOpsConsole`, `AdminPublishing`) — these surfaces are in the `Disallow` block, so Lighthouse can't audit them; the few unlabeled icon buttons there have no SEO impact.
+- The `RelatedLinksBlock` arrow span — verified the parent `<Link>` already wraps the descriptive `{l.label}` text and the arrow is `aria-hidden="true"`. Correct pattern.
+
+**Why the "Links do not have descriptive text" warning likely resolves alongside the indexing fix:** Lighthouse audits one URL at a time; both warnings on the same report typically point to the same audited page. If that page was an auth page, fixing the indexing intent (#3 above) means future audits land on truly indexable content (homepage, about, pricing, blog, tools) where the link audit already passes.
+
+Gates: `npx tsc --noEmit` exit 0 · `npm run build` exit 0 · `node scripts/checkSchemaDrift.mjs` exit 0 · live `/sitemap.xml` HTTP 200 with refreshed content · live `/robots.txt` HTTP 200 unchanged at canonical location.
+
+---
+
 ### v5.7.1 — Schema-drift orphan rescue (additive correction)
 
 The v4.2 schema-drift guardrail (`scripts/checkSchemaDrift.mjs`) had been emitting two persistent `[type_drift]` warnings against the `users` table:

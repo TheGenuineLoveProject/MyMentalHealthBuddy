@@ -29,7 +29,7 @@ export default function ResetPassword() {
   const token = useMemo(() => {
     if (!searchString) return (
     <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Reset Password — MyMentalHealthBuddy" description="Explore reset password tools for your wellness journey." />
+      <SEO title="Reset Password — MyMentalHealthBuddy" description="Explore reset password tools for your wellness journey." noindex />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Reset Password</h1>
         <p className="text-muted-foreground mb-8">
@@ -102,6 +102,7 @@ export default function ResetPassword() {
         <SEO 
           title="Invalid Reset Link"
           description="This password reset link is invalid or has expired."
+          noindex
         />
         <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
           <div className="decorative-orb decorative-orb-blush w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
@@ -156,6 +157,7 @@ export default function ResetPassword() {
         <SEO 
           title="Password Reset Complete"
           description="Your password has been successfully reset."
+          noindex
         />
         <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
           <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
@@ -209,6 +211,7 @@ export default function ResetPassword() {
       <SEO 
         title="Reset Password"
         description="Create a new password for your MyMentalHealthBuddy account."
+        noindex
       />
       <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
         <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />

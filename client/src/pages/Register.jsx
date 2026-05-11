@@ -79,6 +79,7 @@ export default function Register() {
       <SEO
         title="Create Account - MyMentalHealthBuddy"
         description="Create your free account. Mood tracking, journaling, reflection prompts, and AI chat — no credit card required."
+        noindex
       />
       <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-8" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />

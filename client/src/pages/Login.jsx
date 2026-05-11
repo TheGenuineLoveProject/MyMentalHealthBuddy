@@ -91,6 +91,7 @@ export default function Login() {
       <SEO
         title="Sign In - MyMentalHealthBuddy"
         description="Sign in to your MyMentalHealthBuddy account to access your wellness tools."
+        noindex
       />
       <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-12" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
