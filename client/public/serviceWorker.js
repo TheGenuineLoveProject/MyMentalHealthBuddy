@@ -1,4 +1,4 @@
-const CACHE_VERSION = '2.1.0';
+const CACHE_VERSION = '2.2.0';
 const CACHE_NAME = `genuine-love-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `genuine-love-runtime-${CACHE_VERSION}`;
 const OFFLINE_QUEUE_DB = 'genuine-love-offline-queue';
@@ -20,28 +20,15 @@ const STATIC_ASSETS = [
   '/sacred-pattern.svg'
 ];
 
-const FONT_CSS_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap';
+// v5.7.8: Google Fonts prefetch removed — fonts are now self-hosted (see client/index.html @font-face block).
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    Promise.all([
-      caches.open(CACHE_NAME).then((cache) => {
-        return cache.addAll(STATIC_ASSETS).catch((err) => {
-          console.warn('Some static assets failed to cache:', err);
-        });
-      }),
-      caches.open(RUNTIME_CACHE).then((cache) => {
-        return fetch(FONT_CSS_URL)
-          .then((response) => {
-            if (response.ok) {
-              cache.put(FONT_CSS_URL, response);
-            }
-          })
-          .catch((err) => {
-            console.warn('Font CSS failed to cache:', err);
-          });
-      })
-    ])
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(STATIC_ASSETS).catch((err) => {
+        console.warn('Some static assets failed to cache:', err);
+      });
+    })
   );
   self.skipWaiting();
 });
@@ -75,10 +62,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
-    event.respondWith(cacheFirst(request, RUNTIME_CACHE));
-    return;
-  }
+  // v5.7.8: Google Fonts hostname routing removed — local /fonts/*.woff2 caught by the font-destination branch below.
 
   if (
     request.destination === 'image' ||

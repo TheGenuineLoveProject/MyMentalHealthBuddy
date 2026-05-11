@@ -6,8 +6,7 @@
  * Scale: Title 56, Subtitle 36, Heading 32, Subheading 28, Section 24, Body 18, Quote 20 italic, Caption 14
  */
 
-/* Font imports - Playfair Display + Inter */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Fonts self-hosted via @font-face in client/index.html (v5.7.8) */
 
 /* Sacred font families */
 .font-sacred,

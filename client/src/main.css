@@ -2,8 +2,7 @@
 
 @import "./styles/brand-tokens.css";
 
-/* Optional: load fonts via CSS import (works fast enough for now) */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap");
+/* Fonts self-hosted via @font-face in client/index.html (v5.7.8) */
 
 * { box-sizing: border-box; }
 body { margin: 0; }
