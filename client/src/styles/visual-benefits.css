@@ -1,0 +1,311 @@
+/**
+ * Visual Benefits Polish — v5.8.0 (V17)
+ *
+ * Scoped under .visual-benefits-polish so it cannot leak into other surfaces.
+ * Brand palette only. Reduced-motion blanket pins everything to end state.
+ */
+
+.visual-benefits-polish {
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(56px, 8vw, 96px);
+  background: linear-gradient(
+    180deg,
+    var(--glp-paper, #fdfcf9) 0%,
+    rgba(168, 201, 160, 0.04) 50%,
+    var(--glp-paper, #fdfcf9) 100%
+  );
+}
+
+.visual-benefits-polish .vb-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 900px) {
+  .visual-benefits-polish .vb-row {
+    grid-template-columns: 1.05fr 1fr;
+  }
+  .visual-benefits-polish .vb-row-reversed .vb-image-wrap {
+    order: 2;
+  }
+  .visual-benefits-polish .vb-row-reversed .vb-text-wrap {
+    order: 1;
+  }
+}
+
+.visual-benefits-polish .vb-row.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Image side ───────────────────────────────────────────────────────── */
+.visual-benefits-polish .vb-image-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.visual-benefits-polish .vb-image-frame {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--vb-tint);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 24px 60px -24px rgba(74, 126, 114, 0.35),
+    0 0 0 1px rgba(168, 201, 160, 0.10);
+  transition: box-shadow 360ms ease, transform 360ms ease;
+  aspect-ratio: 16 / 9;
+}
+
+.visual-benefits-polish .vb-image-frame::after {
+  /* soft accent halo bloom inside the frame */
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle at 30% 30%, var(--vb-halo), transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+
+.visual-benefits-polish .vb-image {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.visual-benefits-polish .vb-image-wrap:hover .vb-image-frame {
+  box-shadow:
+    0 30px 70px -22px var(--vb-halo),
+    0 0 0 1.5px var(--vb-accent);
+  transform: translateY(-3px);
+}
+
+.visual-benefits-polish .vb-image-wrap:hover .vb-image {
+  transform: scale(1.025);
+}
+
+/* Floating avatar overlay (1:1) */
+.visual-benefits-polish .vb-avatar-overlay {
+  position: absolute;
+  bottom: -22px;
+  right: -14px;
+  width: clamp(78px, 14vw, 132px);
+  height: clamp(78px, 14vw, 132px);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--vb-halo) 0%, transparent 70%);
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  animation: vb-float 6s ease-in-out infinite;
+}
+
+.visual-benefits-polish .vb-row-reversed .vb-avatar-overlay {
+  right: auto;
+  left: -14px;
+}
+
+.visual-benefits-polish .vb-avatar-img {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(74, 126, 114, 0.30));
+}
+
+@keyframes vb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ── Text side ────────────────────────────────────────────────────────── */
+.visual-benefits-polish .vb-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.visual-benefits-polish .vb-icon-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--vb-tint);
+  color: var(--vb-accent);
+  border: 1px solid color-mix(in srgb, var(--vb-accent) 30%, transparent);
+  box-shadow: 0 4px 14px -6px var(--vb-halo);
+}
+
+.visual-benefits-polish .vb-title {
+  color: var(--glp-sage-deep, #4A7E72);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.visual-benefits-polish .vb-description {
+  color: var(--glp-ink, #2d3a35);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 56ch;
+}
+
+/* ── CTA link ─────────────────────────────────────────────────────────── */
+.visual-benefits-polish .vb-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.975rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #4A7E72 0%, var(--vb-accent) 100%);
+  border: 1px solid color-mix(in srgb, var(--vb-accent) 40%, transparent);
+  text-decoration: none;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 220ms ease,
+              background-position 360ms ease;
+  background-size: 180% 180%;
+  background-position: 0% 50%;
+  box-shadow: 0 6px 18px -8px rgba(74, 126, 114, 0.55);
+}
+
+.visual-benefits-polish .vb-cta:hover {
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+  box-shadow:
+    0 12px 30px -10px var(--vb-halo),
+    0 0 0 1px color-mix(in srgb, var(--vb-accent) 50%, transparent);
+}
+
+.visual-benefits-polish .vb-cta:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px -6px rgba(74, 126, 114, 0.45);
+  transition-duration: 90ms;
+}
+
+.visual-benefits-polish .vb-cta:focus-visible {
+  outline: 3px solid var(--vb-accent);
+  outline-offset: 3px;
+}
+
+.visual-benefits-polish .vb-cta-arrow {
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.visual-benefits-polish .vb-cta:hover .vb-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ── btn-sacred-gold (global utility introduced with V17) ─────────────── */
+.btn-sacred-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #4A7E72 0%, #F4B942 100%);
+  background-size: 180% 180%;
+  background-position: 0% 50%;
+  border: 1px solid rgba(244, 185, 66, 0.45);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 22px -10px rgba(74, 126, 114, 0.55);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 220ms ease,
+              background-position 360ms ease;
+}
+
+.btn-sacred-gold:hover {
+  transform: translateY(-1px);
+  background-position: 100% 50%;
+  box-shadow:
+    0 14px 34px -10px rgba(244, 185, 66, 0.55),
+    0 0 0 1px rgba(244, 185, 66, 0.55);
+}
+
+.btn-sacred-gold:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px -6px rgba(74, 126, 114, 0.45);
+  transition-duration: 90ms;
+}
+
+.btn-sacred-gold:focus-visible {
+  outline: 3px solid #F4B942;
+  outline-offset: 3px;
+}
+
+/* ── Universal button micro-interaction (additive, palette-safe) ─────── */
+button:not([disabled]):not(.no-mi),
+.btn-mi {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 220ms ease;
+}
+
+button:not([disabled]):not(.no-mi):hover,
+.btn-mi:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px -10px rgba(74, 126, 114, 0.35);
+}
+
+button:not([disabled]):not(.no-mi):active,
+.btn-mi:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 8px -5px rgba(74, 126, 114, 0.30);
+  transition-duration: 90ms;
+}
+
+/* ── Reduced motion blanket (everything pinned to end state) ──────────── */
+@media (prefers-reduced-motion: reduce) {
+  .visual-benefits-polish .vb-row,
+  .visual-benefits-polish .vb-row.revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .visual-benefits-polish .vb-image,
+  .visual-benefits-polish .vb-image-frame,
+  .visual-benefits-polish .vb-cta,
+  .visual-benefits-polish .vb-cta-arrow,
+  .visual-benefits-polish .vb-avatar-overlay {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .visual-benefits-polish .vb-image-wrap:hover .vb-image,
+  .visual-benefits-polish .vb-image-wrap:hover .vb-image-frame,
+  .visual-benefits-polish .vb-cta:hover,
+  .visual-benefits-polish .vb-cta:hover .vb-cta-arrow {
+    transform: none !important;
+  }
+
+  .btn-sacred-gold,
+  button:not([disabled]):not(.no-mi),
+  .btn-mi {
+    transition: none !important;
+  }
+  .btn-sacred-gold:hover,
+  .btn-sacred-gold:active,
+  button:not([disabled]):not(.no-mi):hover,
+  button:not([disabled]):not(.no-mi):active,
+  .btn-mi:hover,
+  .btn-mi:active {
+    transform: none !important;
+  }
+}

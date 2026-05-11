@@ -10,6 +10,7 @@ import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
 import LumiV6 from "../components/lumi/LumiV6";
 import EmotionalJourney from "../sections/EmotionalJourney.jsx";
 import NlpMiContent from "../sections/NlpMiContent.jsx";
+import VisualBenefits from "../sections/VisualBenefits.jsx";
 import ValueProposition from "../sections/ValueProposition.jsx";
 import NextStepCTA from "../sections/NextStepCTA.jsx";
 import ValueBridge from "../sections/ValueBridge.jsx";
@@ -716,6 +717,11 @@ export default function CanvaLanding() {
 
       {/* v5.7 — NLP + Motivational Interviewing content layer (V18 port) */}
       <NlpMiContent path="/" />
+
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
+
+      {/* v5.8.0 — V17 Visual Emotional Storytelling (alternating image/text rows) */}
+      <VisualBenefits />
 
       <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
