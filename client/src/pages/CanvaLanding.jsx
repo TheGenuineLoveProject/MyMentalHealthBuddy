@@ -588,12 +588,11 @@ export default function CanvaLanding() {
             <div className="flex justify-center mb-8 md:mb-10 animate-fade-in-up" style={{ animationDelay: '0.45s' }}>
               <a
                 href="#features"
-                className="inline-flex items-center gap-1.5 text-sm md:text-base font-medium underline underline-offset-4 hover:opacity-80 transition-opacity"
-                style={{ color: 'var(--glp-sage-deep, #2F5443)', textDecorationThickness: '1.5px' }}
+                className="btn-sacred-tertiary"
                 data-testid="link-hero-explore-safely"
               >
                 Explore Safely
-                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                <ArrowRight className="w-3.5 h-3.5 arrow" aria-hidden="true" />
               </a>
             </div>
           </div>

@@ -1654,6 +1654,157 @@
   }
 }
 
+/* =====================================================================
+   v5.6 — Hero & Top CTA Polish (Option 2)
+   Scope: btn-sacred-gold, btn-sacred-secondary, btn-sacred-tertiary
+   Refinements:
+     - Gentler hover lift (translateY -1px, no scale)
+     - Press state (translateY +1px on :active)
+     - Soft shadow growth on hover, shrink on active
+     - Palette-tinted focus-visible (gold for warm, sage for calm)
+   These rules sit AFTER the base definitions above, so they win on
+   cascade order and override the older translateY(-4px) scale(1.02).
+   prefers-reduced-motion blanket at the bottom kills every transform.
+   ===================================================================== */
+
+.canva-landing .btn-sacred-gold {
+  /* Reuse the base transition timing but explicitly include shadow + transform
+     for buttery cross-property easing. */
+  transition:
+    transform 280ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    box-shadow 280ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    background-position 4s ease-in-out;
+  will-change: transform, box-shadow;
+}
+
+.canva-landing .btn-sacred-gold:hover {
+  /* Override the older -4px / 1.02 scale with a gentler lift. */
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 28px var(--glp-gold-60, rgba(212, 175, 55, 0.36)),
+    0 0 0 4px var(--glp-gold-15, rgba(212, 175, 55, 0.12));
+}
+
+.canva-landing .btn-sacred-gold:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 2px 10px var(--glp-gold-30, rgba(212, 175, 55, 0.22)),
+    0 0 0 2px var(--glp-gold-15, rgba(212, 175, 55, 0.10));
+  transition-duration: 90ms;
+}
+
+.canva-landing .btn-sacred-gold:focus-visible {
+  /* Warm CTA → gold focus ring, palette-tinted. */
+  outline: 3px solid var(--glp-gold, #D4AF37);
+  outline-offset: 3px;
+}
+
+.canva-landing .btn-sacred-secondary {
+  transition:
+    transform 280ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    box-shadow 280ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    color 280ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    border-color 280ms cubic-bezier(0.22, 0.9, 0.32, 1);
+  will-change: transform, box-shadow;
+}
+
+.canva-landing .btn-sacred-secondary:hover {
+  /* Override the older -4px / 1.02 scale; keep the dark fill via ::before. */
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 10px 28px rgba(6, 42, 42, 0.26),
+    0 0 0 4px rgba(6, 42, 42, 0.08);
+}
+
+.canva-landing .btn-sacred-secondary:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 2px 10px rgba(6, 42, 42, 0.18),
+    0 0 0 2px rgba(6, 42, 42, 0.06);
+  transition-duration: 90ms;
+}
+
+.canva-landing .btn-sacred-secondary:focus-visible {
+  /* Calm CTA → sage focus ring, palette-tinted. Overrides the gold ring above. */
+  outline: 3px solid var(--glp-sage-deep, #2F5443);
+  outline-offset: 3px;
+}
+
+/* Tertiary — text-link CTA used by V16 "Explore Safely". */
+.canva-landing .btn-sacred-tertiary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--glp-sage-deep, #2F5443);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  transition:
+    transform 220ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    background-color 220ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    text-underline-offset 220ms cubic-bezier(0.22, 0.9, 0.32, 1);
+  will-change: transform, background-color;
+}
+
+.canva-landing .btn-sacred-tertiary:hover {
+  transform: translateY(-1px);
+  background-color: rgba(168, 201, 160, 0.10);
+  text-underline-offset: 6px;
+}
+
+.canva-landing .btn-sacred-tertiary:active {
+  transform: translateY(1px);
+  background-color: rgba(168, 201, 160, 0.16);
+  transition-duration: 90ms;
+}
+
+.canva-landing .btn-sacred-tertiary:focus-visible {
+  outline: 3px solid var(--glp-sage-deep, #2F5443);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.canva-landing .btn-sacred-tertiary .arrow,
+.canva-landing .btn-sacred-tertiary svg {
+  transition: transform 220ms cubic-bezier(0.22, 0.9, 0.32, 1);
+}
+
+.canva-landing .btn-sacred-tertiary:hover .arrow,
+.canva-landing .btn-sacred-tertiary:hover svg {
+  transform: translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing .btn-sacred-gold,
+  .canva-landing .btn-sacred-secondary,
+  .canva-landing .btn-sacred-tertiary {
+    transition: none !important;
+    will-change: auto !important;
+  }
+  .canva-landing .btn-sacred-gold:hover,
+  .canva-landing .btn-sacred-gold:active,
+  .canva-landing .btn-sacred-secondary:hover,
+  .canva-landing .btn-sacred-secondary:active,
+  .canva-landing .btn-sacred-tertiary:hover,
+  .canva-landing .btn-sacred-tertiary:active {
+    transform: none !important;
+  }
+  .canva-landing .btn-sacred-tertiary:hover {
+    text-underline-offset: 4px !important;
+  }
+  .canva-landing .btn-sacred-tertiary:hover .arrow,
+  .canva-landing .btn-sacred-tertiary:hover svg {
+    transform: none !important;
+  }
+}
+
 /* ===== ENTERPRISE ELITE II — ADVANCED DESIGN SYSTEM ===== */
 
 /* --- Scroll-Triggered Reveal System --- */

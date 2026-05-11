@@ -69,6 +69,30 @@ V16 brief specifies Primary CTA "Talk With Buddy →" links to `/chat` (or `/lum
 - `npm run build` → exit 0, built in ~17s.
 - Smoke `/` → V16 hero renders correctly: H1 "You don't have to / carry everything alone." with gradient on the second line, eyebrow + Lumi avatar preserved above. Welcome-back surface (one of: WelcomeBackBanner OR ReturnLoop) fires correctly on second visit.
 
+### v5.6 follow-up — Hero & Top CTA polish (additive only)
+
+User asked for "polish all buttons" → scoped to **Option 2: Hero & top CTA polish only** (V16 hero + Pricing tier buttons). Header and Footer have no CTA buttons (nav-only `<Link>`s) so they were not in scope. Tool cards, form buttons, modal buttons, and the `/v6` control panel were explicitly excluded by the user.
+
+**`client/src/styles/canva-landing.css`** — appended a v5.6 polish block AFTER the original `.btn-sacred-gold` / `.btn-sacred-secondary` definitions so cascade order makes the new rules win:
+- **Gentler hover** — replaced `translateY(-4px) scale(1.02)` with `translateY(-1px)` (no scale) on both gold and secondary
+- **Press state** — new `:active` rule with `translateY(1px)`, shrunk shadow, and a fast 90ms transition for a tactile click feel
+- **Soft shadow transitions** — explicit `transition: transform 280ms, box-shadow 280ms cubic-bezier(0.22, 0.9, 0.32, 1)` so shadow growth/shrink is buttery
+- **Palette-tinted focus rings** — gold `#D4AF37` outline for warm CTAs (btn-sacred-gold), sage-deep `#2F5443` for calm CTAs (btn-sacred-secondary)
+- **NEW class `.btn-sacred-tertiary`** — text-link CTA system used by V16's "Explore Safely". Underlined sage-deep text, hover lifts -1px + grows underline offset 4→6px + tints background sage 10%, active +1px, sage focus ring. Arrow icon (`.arrow` or any nested `svg`) translates +2px on hover for the subtle directional cue.
+- **`@media (prefers-reduced-motion: reduce)`** blanket — kills every transform, transition, and underline-offset shift across all three classes; end states preserved.
+
+**`client/src/styles/brand.css`** — Pricing tier buttons (`.btn-premium` / `.btn-secondary-premium`):
+- Added `:active` press state on both (translateY +1px, shrunk shadow, 90ms transition)
+- Bumped focus-visible ring from 2px to 3px and switched to palette tints (gold for premium, primary for secondary)
+- Added a hover lift to `.btn-secondary-premium` (was background-only) for parity with the gold sibling
+- Added `prefers-reduced-motion` blanket on both
+
+**`client/src/pages/CanvaLanding.jsx`** — V16 tertiary "Explore Safely" link migrated from inline-styled `<a>` to `className="btn-sacred-tertiary"`. The arrow icon now carries the `.arrow` class so the new tertiary hover-translate rule can target it cleanly.
+
+Untouched (per user): tool cards, form buttons, modal buttons, `/v6` control panel.
+
+Gates re-verified: `npx tsc --noEmit` → exit 0; `npm run build` → exit 0.
+
 ---
 
 ## Subscription Elicitation Layer (v5.5) — 7 additive surfaces for sign-up & conversion
