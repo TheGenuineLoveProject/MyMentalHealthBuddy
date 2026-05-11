@@ -31,6 +31,7 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 
 ## Polish & Feature History
 Detailed implementation notes for completed feature evolutions live in **`docs/changelog.md`**. That file is the source of truth for the deep technical contracts (z-index, reduced-motion, keyframe timing, cascade order, etc.) of:
+- v5.1 — Lumi Voice + Expression Sync (V14 — gentle Web Audio cues, default OFF, gated behind localStorage preference, surfaced on `/v6`)
 - v5.0 — Emotional Journey Section (V13 port — 6-phase visual timeline on landing page)
 - v4.9 — /v6 Control Panel Polish
 - v4.8 — Celebration Polish

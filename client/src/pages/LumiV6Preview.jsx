@@ -14,6 +14,7 @@ import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import LumiV6 from "@/components/lumi/LumiV6";
 import SEO from "@/components/SEO";
 import { LUMI_TOY_SPEC } from "@/data/lumiToySpec";
+import { useLumiAudio } from "@/hooks/useLumiAudio.js";
 import "@/styles/v6-preview.css";
 
 const V6_EMOTIONS = ["joy", "love", "calm", "greeting", "empathy", "sleepy", "surprise"];
@@ -369,6 +370,8 @@ export default function LumiV6Preview() {
         <V9DemoSection />
 
         {/* ---------- V7 Toy Spec readout ---------- */}
+        <LumiAudioPanel />
+
         <ToySpecPanel />
       </div>
     </div>
@@ -598,6 +601,109 @@ function V9DemoSection() {
         head/heart/body 3+ times within 10s (escalation builds to celebration
         sparkle), tap a sentiment chip (1.5s mirror flash), then leave the
         cursor away for 15s and slowly approach (attention capture wobble).
+      </p>
+    </section>
+  );
+}
+
+/**
+ * V14 Voice + Expression Sync — Lumi audio preview & preference toggle.
+ *
+ * Three programmatic Web Audio cues (pop / heartbeat / chime), default OFF,
+ * gated behind a localStorage preference. Per-surface auto-wiring is deferred
+ * so this control panel is the only place that *plays* sound until the user
+ * approves wider integration.
+ */
+function LumiAudioPanel() {
+  const { enabled, effective, available, reducedMotion, setEnabled, pop, heartbeat, chime } = useLumiAudio();
+  return (
+    <section
+      className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-sky-100"
+      data-testid="section-lumi-audio"
+      aria-labelledby="lumi-audio-title"
+    >
+      <h2 id="lumi-audio-title" className="mb-2 text-xl font-semibold text-slate-800">
+        V14 — Voice + Expression Sync
+      </h2>
+      <p className="mb-4 max-w-2xl text-sm text-slate-600">
+        Three whisper-quiet Web Audio cues for Lumi: a soft entrance{" "}
+        <em>pop</em>, a synced <em>heartbeat</em>, and an interaction{" "}
+        <em>chime</em>. Programmatic tones only (no audio files), capped at
+        ≈ -22 dBFS per the prime directive. Default <strong>OFF</strong>, stored
+        in <code>localStorage</code> as <code>mmhb-lumi-audio-enabled</code>.
+        Respects <code>prefers-reduced-motion</code>: when set, the toggle
+        appears but every play is a silent no-op.
+      </p>
+
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <label
+          className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-sm font-medium text-sky-900 ring-1 ring-sky-200 hover:bg-sky-100"
+          data-testid="label-toggle-lumi-audio"
+        >
+          <input
+            type="checkbox"
+            checked={enabled}
+            onChange={(e) => setEnabled(e.target.checked)}
+            className="h-4 w-4 accent-sky-600"
+            disabled={!available}
+            data-testid="toggle-lumi-audio"
+            aria-describedby="lumi-audio-status"
+          />
+          <span>Enable Lumi sound cues</span>
+        </label>
+        <span
+          id="lumi-audio-status"
+          className="text-xs text-slate-500"
+          data-testid="text-lumi-audio-status"
+        >
+          {!available
+            ? "Audio not available in this browser."
+            : reducedMotion
+              ? "Reduced-motion is on — sound is suppressed even when enabled."
+              : effective
+                ? "Sound is ON. Click a cue below to preview."
+                : "Sound is OFF. Toggle to preview."}
+        </span>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          onClick={pop}
+          disabled={!effective}
+          className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900 ring-1 ring-amber-200 hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-50"
+          data-testid="btn-lumi-audio-pop"
+          aria-label="Preview Lumi entrance pop"
+        >
+          ▶ Pop (entrance)
+        </button>
+        <button
+          type="button"
+          onClick={heartbeat}
+          disabled={!effective}
+          className="rounded-full bg-rose-50 px-3 py-1 text-xs font-medium text-rose-900 ring-1 ring-rose-200 hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-50"
+          data-testid="btn-lumi-audio-heartbeat"
+          aria-label="Preview Lumi heartbeat"
+        >
+          ♥ Heartbeat
+        </button>
+        <button
+          type="button"
+          onClick={chime}
+          disabled={!effective}
+          className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-900 ring-1 ring-emerald-200 hover:bg-emerald-100 disabled:cursor-not-allowed disabled:opacity-50"
+          data-testid="btn-lumi-audio-chime"
+          aria-label="Preview Lumi interaction chime"
+        >
+          ✶ Chime (interaction)
+        </button>
+      </div>
+
+      <p className="mt-3 text-xs text-slate-500">
+        Per-surface auto-wiring (entrance pop on Lumi mount, heartbeat synced to
+        the heart pulse, chime on interaction) is deferred — the control panel
+        is the only place that plays sound until you approve broader
+        integration.
       </p>
     </section>
   );

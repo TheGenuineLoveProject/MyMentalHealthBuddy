@@ -6,6 +6,42 @@ Newest entries on top.
 
 ---
 
+## Lumi Voice + Expression Sync (v5.1) — V14 phase
+
+A tiny Web Audio kernel that gives Lumi three optional voice cues — a gentle entrance **pop**, a synced **heartbeat**, and an interaction **chime** — gated behind an explicit user preference. Default **OFF**. Per the V13 roadmap the engine ships first; per-surface auto-wiring (entrance / pulse / interaction) is intentionally deferred so the v4.5–v5.0 polish remains untouched until the user approves broader integration.
+
+**New files**:
+- `client/src/lib/lumiAudio.js` — programmatic Web Audio synth. No audio files (zero asset weight, no CSP/MIME issues). Three exported play functions plus `unlockLumiAudio()`, `isLumiAudioAvailable()`, `closeLumiAudio()`. Lazy `AudioContext` (created on first call so the browser's user-gesture rule is honored). Reduced-motion guard built into the kernel — every `play()` is a silent no-op when the OS pref is set.
+- `client/src/hooks/useLumiAudio.js` — React hook backing the `mmhb-lumi-audio-enabled` localStorage flag. Listens to `storage` events for cross-tab sync and to `(prefers-reduced-motion: reduce)` `MediaQueryList` changes for live OS-pref tracking. Exposes `enabled`, `effective`, `available`, `reducedMotion`, `setEnabled`, and the three safe play methods (`pop`, `heartbeat`, `chime`) — callers don't have to gate.
+
+**Modified file**:
+- `client/src/pages/LumiV6Preview.jsx` — added `LumiAudioPanel` sub-component rendered just above `ToySpecPanel` on `/v6`. Toggle + status text + three preview buttons (pop / heartbeat / chime), each with `data-testid` and `aria-label`.
+
+**Sound design** (matches V11 prime directive — "whisper-quiet, never startling"):
+- **Pop** — sine wave, 220 → 440 Hz exponential ramp, 180 ms, peak gain 0.05.
+- **Heartbeat** — two-beat lub-dub. Lub: sine 110 → 90 Hz, 100 ms, gain 0.045. Dub (180 ms later via `setTimeout`): sine 95 → 75 Hz, 120 ms, gain 0.04. Total envelope ~440 ms, well under the 3 Hz seizure-safety threshold.
+- **Chime** — triangle 660 Hz fundamental + 880 Hz overtone (60 ms apart), each 180 ms, peak gain 0.045 / 0.035.
+- All gains hard-capped at 0.08 (≈ -22 dBFS) inside `playTone()` — even a coding mistake can't exceed the whisper-quiet ceiling.
+- All envelopes use exponential ramps to avoid click artifacts on attack/release.
+
+**Universal contract honor on this surface**:
+- ✅ Default **OFF** — `localStorage.getItem('mmhb-lumi-audio-enabled')` returns `null` on a fresh install, parsed as `false`.
+- ✅ Reduced-motion blanket — both the kernel (`prefersReducedMotion()` guard at the top of every play) and the hook (`reducedMotion` state) treat `prefers-reduced-motion: reduce` as a hard mute even when the user enabled audio. Status text in the panel makes this explicit to the user.
+- ✅ Brand palette — toggle uses sky-50/200/600 (a neutral UI-affordance color in the existing `/v6` panel idiom), and each preview button uses an existing brand-aligned ring (amber for pop, rose for heartbeat, emerald for chime) drawn from the `/v6` palette already in use elsewhere on the page. No new accent colors introduced.
+- ✅ Crisis routing preserved — `/v6` still renders the rose Crisis Support nav link in its top bar.
+- ✅ Accessibility — toggle is a real `<input type="checkbox">` inside a `<label>` (full keyboard reachability, screen-reader-friendly), `aria-describedby` ties the toggle to its live status text, every preview button has an `aria-label`, the section is `aria-labelledby` to the heading.
+- ✅ Cross-tab sync — `storage` event listener flips the toggle in real time if the user changes the pref in another tab.
+- ✅ Resource hygiene — `useEffect` calls `closeLumiAudio()` when the user disables audio, releasing the underlying `AudioContext` device handle.
+
+**Deferred (intentional per V13 phasing)**:
+- Auto-play on Lumi entrance (would need wiring into `BuddyAvatar` mount).
+- Sync to the LumiV6 heart pulse cadence (would need to call `heartbeat()` on the same period as the existing CSS `lumi-heart-pulse` animation).
+- Chime on interaction (tap, sentiment-mirror, celebration trigger).
+
+These are single-line additions once the user approves the engine. Documented as the next V14 follow-up rather than shipped this turn — keeps the polished v4.5–v5.0 surfaces unchanged and preserves the user's right to preview the cues in isolation before they appear unsolicited.
+
+---
+
 ## Emotional Journey Section (v5.0) — V13 port from kimi.page deployment
 
 A new full-width section between the landing page's tools section and the philosophy section, surfacing the **6-phase emotional flow** (CALM → ORIENT → CONNECT → SUPPORT → REWARD → CONTINUE) as a vertical timeline so users can see the gentle path before they walk it. Replaces nothing — purely additive insert.
