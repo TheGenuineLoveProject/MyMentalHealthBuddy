@@ -2,7 +2,7 @@
   "name": "The Genuine Love Project",
   "version": "1.0.0",
   "exportType": "webflow",
-  "description": "Webflow-ready component schema for TheGenuineLoveProject.com",
+  "description": "Webflow-ready component schema for mymentalhealthbuddy.com",
   "styles": {
     "colors": {
       "Sage": "#8fbf9f",

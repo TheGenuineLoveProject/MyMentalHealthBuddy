@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { BRAND } from "@shared/brand.mjs";
 
-export const SITE_URL = "https://thegenuineloveproject.com";
+export const SITE_URL = "https://mymentalhealthbuddy.com";
 
 interface SEOProps {
   title?: string;

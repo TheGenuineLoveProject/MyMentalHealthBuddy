@@ -121,7 +121,7 @@ export function createWebSiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: SITE_NAME,
-    url: BASE_URL || "https://thegenuineloveproject.com",
+    url: BASE_URL || "https://mymentalhealthbuddy.com",
     description: "AI-powered mental wellness platform for self-love, healing, and emotional growth",
     potentialAction: {
       "@type": "SearchAction",

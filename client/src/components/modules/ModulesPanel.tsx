@@ -68,7 +68,7 @@ export function ModulesPanel({ routeKey }: { routeKey: string }) {
     `Page: ${meta.title}\n` +
     `Tiny step: ${data.tinyStep || "I will take one small step today."}\n` +
     `Importance: ${data.importance}/10 • Confidence: ${data.confidence}/10\n\n` +
-    `TheGenuineLoveProject.com`;
+    `mymentalhealthbuddy.com`;
 
   return (
     <section 

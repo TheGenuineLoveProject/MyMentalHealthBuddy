@@ -112,11 +112,11 @@ export default function ReflectionCardExport({
     ctx.font = "20px Arial, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText("Educational wellness tools only. Not medical advice.", width / 2, height - 120);
-    ctx.fillText("If in crisis: TheGenuineLoveProject.com/crisis", width / 2, height - 90);
+    ctx.fillText("If in crisis: mymentalhealthbuddy.com/crisis", width / 2, height - 90);
 
     ctx.fillStyle = "#6b9080";
     ctx.font = "bold 22px Arial, sans-serif";
-    ctx.fillText("TheGenuineLoveProject.com", width / 2, height - 50);
+    ctx.fillText("mymentalhealthbuddy.com", width / 2, height - 50);
 
     ctx.save();
     ctx.globalAlpha = 0.04;
@@ -125,7 +125,7 @@ export default function ReflectionCardExport({
     ctx.rotate(-Math.PI / 6);
     for (let y = -height; y < height * 2; y += 80) {
       for (let x = -width; x < width * 2; x += 280) {
-        ctx.fillText("TheGenuineLoveProject.com", x, y);
+        ctx.fillText("mymentalhealthbuddy.com", x, y);
       }
     }
     ctx.restore();

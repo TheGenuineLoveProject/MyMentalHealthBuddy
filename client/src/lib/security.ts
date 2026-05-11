@@ -45,7 +45,7 @@ export function disableContextMenu(element: HTMLElement): () => void {
  */
 export function addCanvasWatermark(
   canvas: HTMLCanvasElement,
-  watermarkText: string = 'TheGenuineLoveProject.com',
+  watermarkText: string = 'mymentalhealthbuddy.com',
   options: {
     fontSize?: number;
     fontFamily?: string;

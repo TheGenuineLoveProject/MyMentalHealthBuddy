@@ -54,7 +54,7 @@ function main() {
     .filter((p) => !p.startsWith("/api"))
     .sort();
 
-  const base = process.env.SITE_ORIGIN || "https://TheGenuineLoveProject.com";
+  const base = process.env.SITE_ORIGIN || "https://mymentalhealthbuddy.com";
 
   const urls = allPaths
     .map((p) => `  <url><loc>${base}${p}</loc></url>`)

@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const DOMAIN = 'https://thegenuineloveproject.com';
+const DOMAIN = 'https://mymentalhealthbuddy.com';
 const OUTPUT_PATH = join(__dirname, '..', 'client', 'public', 'sitemap.xml');
 
 const PUBLIC_ROUTES = [

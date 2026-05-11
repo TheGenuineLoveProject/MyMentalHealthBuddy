@@ -3,7 +3,7 @@
  * THE GENUINE LOVE PROJECT - WIREFRAME TEMPLATES
  * ============================================================================
  * 
- * Developer-ready wireframe system for TheGenuineLoveProject.com
+ * Developer-ready wireframe system for mymentalhealthbuddy.com
  * 
  * BRAND PALETTE:
  * - Sage: #8fbf9f (Primary accents, success states)

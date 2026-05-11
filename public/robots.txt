@@ -54,7 +54,7 @@ Disallow: /account
 Disallow: /billing
 
 # Sitemap location
-Sitemap: https://thegenuineloveproject.com/sitemap.xml
+Sitemap: https://mymentalhealthbuddy.com/sitemap.xml
 
 # Crawl delay (be nice to the server)
 Crawl-delay: 1

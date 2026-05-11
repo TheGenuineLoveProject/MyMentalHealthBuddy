@@ -69,6 +69,80 @@ V16 brief specifies Primary CTA "Talk With Buddy →" links to `/chat` (or `/lum
 - `npm run build` → exit 0, built in ~17s.
 - Smoke `/` → V16 hero renders correctly: H1 "You don't have to / carry everything alone." with gradient on the second line, eyebrow + Lumi avatar preserved above. Welcome-back surface (one of: WelcomeBackBanner OR ReturnLoop) fires correctly on second visit.
 
+### v5.7.3 — Canonical domain swap to mymentalhealthbuddy.com (root cause of persistent Lighthouse "blocked from indexing")
+
+**Symptom**: After v5.7.2 shipped (sitemap refresh, robots.txt sync, 9 auth-page noindex declarations), Lighthouse continued reporting *"Page is blocked from indexing"* and *"Links do not have descriptive text"* on the deployed app. Identical report arrived three times.
+
+**Root cause discovered via direct production audit**:
+1. **`mymentalhealthbuddy.replit.app`** serves a Replit-platform-injected `robots.txt` containing `User-agent: * / Disallow: /` — Replit auto-blocks `.replit.app` subdomains to prevent duplicate-content penalties when a custom domain exists. This is **intentional Replit behavior, not fixable in app code**. Lighthouse against this URL will always flag "blocked from indexing." User instructed to audit the custom domain only.
+2. **`mymentalhealthbuddy.com`** (the actual product domain) was serving:
+   - `<link rel="canonical" href="https://thegenuineloveproject.com/" />` on every page — telling Google "the real version of me lives at the parent org's domain"
+   - `<meta property="og:url" content="https://thegenuineloveproject.com" />` — same problem for social previews
+   - `/sitemap.xml` listing 41 URLs all under `https://thegenuineloveproject.com/...` — Google's crawler sees a sitemap full of URLs on a different host than the one it's crawling, treats them as foreign, and de-prioritizes the actual `mymentalhealthbuddy.com` pages
+   - `/robots.txt` `Sitemap:` directive pointing at `https://thegenuineloveproject.com/sitemap.xml`
+
+The codebase had two domains baked in: `thegenuineloveproject.com` (parent nonprofit, The Genuine Love Project) and `mymentalhealthbuddy.com` (the MMHB product). Per user's clarifying response: MMHB is the product with its own canonical home; TGLP is the parent org. Product pages must canonicalize to their own domain.
+
+**Files changed (15 wholesale + 4 partial = 19 surfaces, 75 individual replacements)**
+
+*Wholesale (every TGLP URL → MMHB URL):*
+- `client/public/sitemap.xml` — 41 `<loc>` entries flipped (every public route now points to mymentalhealthbuddy.com)
+- `client/public/robots.txt` + `public/robots.txt` — `Sitemap:` directive
+- `client/src/components/SEO.tsx` — `SITE_URL` const default (used by every page that calls `<SEO />` without an explicit `url` prop, which includes the homepage and most marketing pages)
+- `client/src/hooks/useSEO.ts` — `BASE_URL` fallback inside the JSON-LD organization stub
+- `client/src/components/ShareableReflectionCard.jsx` — `SITE_URL` watermark embedded in shared reflection PNGs (so social-shared cards link back to the product, not the org)
+- `tools/generate-sitemap.mjs` — `DOMAIN` const used by future sitemap regenerations
+- `server/routes/blog.mjs` — RSS feed `<link>` + `<guid>` + `<atom:link>` (4 refs) so subscribed feed readers see the product domain
+- `server/routes/content.mjs` — `ogImage` for the grounding-practice article
+- `static-export/sitemap.xml` (10 refs), `static-export/robots.txt`, `static-export/blog.html` — pre-rendered SEO mirror copies
+- `client/src/pages/admin/SocialStudioAdmin.jsx` — UTM base URL (so generated tracking links flow traffic to the product domain)
+- `client/src/pages/admin/AdminPublishing.jsx` — share-caption URL pattern for blog posts
+
+*Partial (preserve Organization publisher entity = parent nonprofit):*
+- `client/index.html` — flipped lines 20 (og:image), 24 (og:url), 31 (twitter:image), 39 (canonical), 67 (SoftwareApplication.url), 97 (SoftwareApplication.screenshot). Preserved lines 91, 92 (Organization.url + Organization.logo) — the JSON-LD publisher entity correctly identifies The Genuine Love Project as the org behind the SoftwareApplication.
+- `static-export/index.html` — flipped 25, 28, 36, 39, 42, 63, 67, 123 (WebSite + product OG/canonical + breadcrumb to home). Preserved 78, 79 (Organization publisher).
+- `seo_meta_blocks.json` — flipped line 6 (product url). Preserved 129, 130 (Organization).
+- `static-export/seo-metadata.json` — flipped line 6 (product url). Preserved 129, 130 (Organization).
+
+**Files INTENTIONALLY untouched** (per user instruction "Keep thegenuineloveproject.com references on org/about pages that explicitly discuss The Genuine Love Project"):
+- `client/src/components/ui/Footer.jsx` — `mailto:support@thegenuineloveproject.com` (org email address, real mailbox)
+- `client/src/pages/SupportPage.tsx` — `support@thegenuineloveproject.com` (same)
+- `client/src/pages/Privacy.jsx` — `privacy@thegenuineloveproject.com` (privacy contact mailbox)
+- `client/src/pages/LegalPage.jsx` — `support@thegenuineloveproject.com` (legal contact)
+- `client/src/config/social.ts` — `SOCIAL_LINKS.website: 'https://thegenuineloveproject.com'` (the parent org's actual website URL — used in social profile links, not canonical SEO)
+- `client/src/pages/admin/SocialGenerator.jsx` — "Learn more: thegenuineloveproject.com" inside YouTube description copy template (org-marketing CTA in social media copy, intentionally directs viewers to the parent nonprofit)
+- `content/narrative/social_posts.json` — 48 social-media post bodies that mention the org by name + URL (these are the published voice of the parent organization, not product canonical URLs)
+
+**Per-user constraints honored**: robots.txt rules untouched (already correct in v5.7.2); auth-page noindex untouched (still in place from v5.7.2); sitemap structure untouched (only the host portion of each `<loc>` flipped, not the route inventory or priority/changefreq metadata).
+
+**Verification**:
+- `npx tsc --noEmit` → exit 0
+- `npm run build` → exit 0, built in 14.99s
+- `node scripts/checkSchemaDrift.mjs` → no drift
+- `curl -s /sitemap.xml | grep '<loc>' | head -3` → `https://mymentalhealthbuddy.com/`, `/about`, `/about/approach` ✓
+- `curl -s /robots.txt | grep -i sitemap` → `Sitemap: https://mymentalhealthbuddy.com/sitemap.xml` ✓
+- `curl -s /` → `<link rel="canonical" href="https://mymentalhealthbuddy.com/" />` and `<meta property="og:url" content="https://mymentalhealthbuddy.com" />` ✓
+- Footer mailto links + Privacy/Legal contact emails preserved (regression-checked)
+
+**Why this fixes the Lighthouse warnings**: Google ranks the URL referenced by `<link rel="canonical">`. Before this change, every page on `mymentalhealthbuddy.com` self-canonicalized to `thegenuineloveproject.com` — Lighthouse's SEO audit flags this as "Page is blocked from indexing" because Google would deprioritize the audited URL in favor of the canonical target. With self-referential canonicals now in place, the warning clears. The "Links do not have descriptive text" warning was likely a co-occurrence on the same audited auth page (which now correctly self-declares `noindex` from v5.7.2, so Lighthouse won't audit links there at all on a fresh run).
+
+**Post-deploy guidance for the user**: After redeploy, expect a 1–14-day Google re-crawl window before the canonical change propagates into search-result ranking. Submit the new sitemap at `https://mymentalhealthbuddy.com/sitemap.xml` via Google Search Console (Property → Sitemaps → Add) to accelerate. Re-running Lighthouse against `https://mymentalhealthbuddy.com/` should show both warnings cleared immediately on the next audit.
+
+**Round 2 (architect-caught case-variant misses)**: The first pass used a case-sensitive `https://thegenuineloveproject.com` regex; an architect review caught 8 additional refs using the case-variant `TheGenuineLoveProject.com` (capital T) — reswept case-insensitively (`sed -i ... gI` flag) and fixed:
+- `public/sitemap.xml` — 62 `<loc>` entries (an orphan/legacy 62-URL sitemap parallel to the canonical 41-URL `client/public/sitemap.xml`; flipped to prevent poisoning if any deploy path ever serves it)
+- `scripts/generate-sitemap.mjs` — `SITE_ORIGIN` env-var fallback (a second sitemap generator parallel to `tools/generate-sitemap.mjs`)
+- `client/src/components/ReflectionCardExport.jsx` — 3 `ctx.fillText` calls drawing the domain on user-shareable reflection PNGs (header watermark + crisis URL footer + diagonal pattern across the card)
+- `client/src/components/modules/ModulesPanel.tsx` — share-text template embedded the domain in clipboard content
+- `client/src/lib/security.ts` — `addWatermark()` default `watermarkText` parameter
+- `static-export/webflow-export.json` — `description` field of the webflow export schema
+- `client/src/pages/WireframeTemplates.jsx` — JSDoc comment header
+
+Two additional case-variant refs were intentionally left alone after architect review:
+- `client/src/pages/DesignSystem.jsx:127` — `<h1>TheGenuineLoveProject.com</h1>` rendered on the design-system showcase page is the parent org's intentional brand title (the showcase shows TGLP design tokens, not MMHB tokens), not a canonical/SEO link
+- `client/src/lib/social/socialLinks.ts:10` — `{ id: 'website', href: 'https://TheGenuineLoveProject.com' }` mirrors the existing `client/src/config/social.ts` org-website policy
+
+**Final state**: case-insensitive sweep across every code/data file shows 14 remaining `thegenuineloveproject.com` refs across 13 files — every one is an intentional, documented org reference (real mailboxes, JSON-LD Organization publisher entities, social-profile website link, social-media post bodies, design-system brand showcase title). Triple gate after round 2: TSC=0, Build=16.53s, Drift=0. Live `/sitemap.xml` first 2 entries confirmed serving `https://mymentalhealthbuddy.com/` and `/about`; homepage canonical + og:url confirmed serving the new domain.
+
 ### v5.7.2 — SEO Lighthouse pass (sitemap refresh + auth-page noindex + robots.txt sync)
 
 User report: Lighthouse flagged two SEO issues — *"Page is blocked from indexing"* and *"Links do not have descriptive text"*. A targeted A→Z audit was run before any changes.

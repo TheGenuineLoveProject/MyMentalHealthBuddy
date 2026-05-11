@@ -39,7 +39,7 @@ const CARD_THEMES = {
 };
 
 const WATERMARK_CTA = 'Try a 60-second reset';
-const SITE_URL = 'thegenuineloveproject.com';
+const SITE_URL = 'mymentalhealthbuddy.com';
 
 export default function ShareableReflectionCard({
   reflection = '',

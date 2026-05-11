@@ -214,7 +214,7 @@ router.post("/seed-demo", (_req, res) => {
       ogTitle: "Grounding practice for nervous system regulation",
       ogDescription:
         "A calm, educational guide to one grounding practice that supports self-awareness, reflection, and gentle nervous system regulation.",
-      ogImage: "https://thegenuineloveproject.com/images/grounding-practice.png",
+      ogImage: "https://mymentalhealthbuddy.com/images/grounding-practice.png",
       robots: "index, follow",
       schemaType: "Article",
     },

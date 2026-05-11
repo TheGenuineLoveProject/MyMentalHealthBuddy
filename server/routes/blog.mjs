@@ -236,8 +236,8 @@ router.get("/rss", async (_req, res) => {
     const items = posts.map(p => `
       <item>
         <title><![CDATA[${p.title}]]></title>
-        <link>https://thegenuineloveproject.com/blog/${p.slug}</link>
-        <guid isPermaLink="true">https://thegenuineloveproject.com/blog/${p.slug}</guid>
+        <link>https://mymentalhealthbuddy.com/blog/${p.slug}</link>
+        <guid isPermaLink="true">https://mymentalhealthbuddy.com/blog/${p.slug}</guid>
         <pubDate>${new Date(p.publishedAt).toUTCString()}</pubDate>
         <description><![CDATA[${p.excerpt || ""}]]></description>
       </item>
@@ -247,8 +247,8 @@ router.get("/rss", async (_req, res) => {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>The Genuine Love Project Blog</title>
-    <link>https://thegenuineloveproject.com/blog</link>
-    <atom:link href="https://thegenuineloveproject.com/api/blog/rss" rel="self" type="application/rss+xml" />
+    <link>https://mymentalhealthbuddy.com/blog</link>
+    <atom:link href="https://mymentalhealthbuddy.com/api/blog/rss" rel="self" type="application/rss+xml" />
     <description>Gentle reflections on mental wellness, self-love, and personal growth from The Genuine Love Project.</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

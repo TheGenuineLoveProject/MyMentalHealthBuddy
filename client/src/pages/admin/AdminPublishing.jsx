@@ -42,7 +42,7 @@ const SHARE_TEMPLATES = {
 };
 
 function ShareCaptions({ title, slug }) {
-  const url = `https://thegenuineloveproject.com/blog/${slug}`;
+  const url = `https://mymentalhealthbuddy.com/blog/${slug}`;
   const [open, setOpen] = useState(false);
   if (!open) {
     return (

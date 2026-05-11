@@ -199,7 +199,7 @@ export default function SocialStudioAdmin() {
   };
 
   const generateUTM = () => {
-    const base = "https://thegenuineloveproject.com";
+    const base = "https://mymentalhealthbuddy.com";
     const params = new URLSearchParams();
     if (utmParams.source) params.set("utm_source", utmParams.source);
     if (utmParams.medium) params.set("utm_medium", utmParams.medium);
