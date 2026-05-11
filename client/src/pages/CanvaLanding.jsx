@@ -596,6 +596,7 @@ export default function CanvaLanding() {
                 href="#features"
                 className="btn-sacred-tertiary"
                 data-testid="link-hero-explore-safely"
+                aria-label="Explore wellness features safely"
               >
                 Explore Safely
                 <ArrowRight className="w-3.5 h-3.5 arrow" aria-hidden="true" />
@@ -808,8 +809,8 @@ export default function CanvaLanding() {
                   <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4 text-center" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
                     {feature.description}
                   </p>
-                  <Link href="/login" data-testid={`link-feature-${index}`} className="inline-flex items-center justify-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80 mx-auto mt-auto" style={{ color: 'var(--glp-gold)' }}>
-                      Explore
+                  <Link href="/login" data-testid={`link-feature-${index}`} aria-label={`Explore ${feature.title}`} className="inline-flex items-center justify-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80 mx-auto mt-auto" style={{ color: 'var(--glp-gold)' }}>
+                      Explore {feature.title}
                       <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
                 </div>

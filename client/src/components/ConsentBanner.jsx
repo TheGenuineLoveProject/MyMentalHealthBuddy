@@ -52,7 +52,7 @@ export default function ConsentBanner() {
                 <p className="text-sm text-foreground">
                   We use cookies to improve your experience and analyze site usage. 
                   Essential cookies are always active.{" "}
-                  <a href="/privacy" className="text-primary hover:underline">Learn more</a>
+                  <a href="/privacy" className="text-primary hover:underline" aria-label="Learn more about our privacy and cookie practices">Learn more about our privacy practices</a>
                 </p>
               </div>
             </div>

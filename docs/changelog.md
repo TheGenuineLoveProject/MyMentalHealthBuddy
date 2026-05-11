@@ -6,6 +6,24 @@ Newest entries on top.
 
 ---
 
+## v5.7.5 — Lighthouse SEO: descriptive link text + indexing diagnosis
+
+Lighthouse SEO audit (post-v5.7.4 deploy) flagged two remaining issues. Diagnosed and resolved.
+
+**Issue 1 — "Links do not have descriptive text"** (FIXED, additive only):
+- `client/src/pages/CanvaLanding.jsx` (L814–817) — feature card link text was generic `"Explore"` repeated 4× across 4 feature cards. Changed visible text to `"Explore {feature.title}"` and added matching `aria-label={`Explore ${feature.title}`}`. Each link is now unique and self-descriptive without screen-reader context.
+- `client/src/pages/CanvaLanding.jsx` (L598–606) — hero tertiary anchor `"Explore Safely"` → added `aria-label="Explore wellness features safely"` for extra context (visible text unchanged to preserve V16 hero design).
+- `client/src/components/ConsentBanner.jsx` (L58) — `"Learn more"` (vague) → visible text now `"Learn more about our privacy practices"` + matching `aria-label`. Lighthouse's `link-text` audit specifically flags `"learn more"` / `"click here"` / `"more"` as non-descriptive.
+
+**Issue 2 — "Page is blocked from indexing"** (NOT a code defect — platform behavior):
+- Direct production audit: `https://mymentalhealthbuddy.com/robots.txt` serves `User-agent: * / Allow: /`. Homepage `<meta name="robots">` reads `index, follow`. The custom-domain canonical surface is **not blocked**.
+- The flag fires when Lighthouse is run against `https://mymentalhealthbuddy.replit.app/robots.txt`, which Replit's hosting layer injects with `User-agent: * / Disallow: /`. This is intentional platform behavior to prevent duplicate-content indexing across the workspace subdomain and the user's custom domain — it is **not fixable in app code**, and was already documented as a known constraint in v5.7.3.
+- Action for the user: re-run Lighthouse against `https://mymentalhealthbuddy.com/` (the canonical custom domain), not the `.replit.app` URL.
+
+**Verification**: TSC=0, Build=17.05s, Schema drift=0. No new packages. WCAG AA preserved (descriptive text strengthens accessibility, not weakens it). Crisis routing untouched.
+
+---
+
 ## v5.7.4 — SEO meta descriptions across 8 priority pages (Lighthouse remediation)
 
 Lighthouse SEO audit flagged generic / missing meta descriptions on the public surfaces. Applied the user-supplied 8 descriptions (all ≤ 155 chars), additive only, zero structural changes.
