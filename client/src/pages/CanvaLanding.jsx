@@ -408,7 +408,7 @@ export default function CanvaLanding() {
                       Sign In
                     </button>
                   </Link>
-                  <Link href="/register">
+                  <Link href="/register" aria-label="Start your free MyMentalHealthBuddy account">
                     <button
                       className="header-cta-gold inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full text-white"
                       data-testid="button-getstarted"
