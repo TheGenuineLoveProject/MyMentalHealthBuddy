@@ -14,6 +14,7 @@ import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import LumiV6 from "@/components/lumi/LumiV6";
 import SEO from "@/components/SEO";
 import { LUMI_TOY_SPEC } from "@/data/lumiToySpec";
+import "@/styles/v6-preview.css";
 
 const V6_EMOTIONS = ["joy", "love", "calm", "greeting", "empathy", "sleepy", "surprise"];
 const V6_POSES    = ["default", "waving", "meditating", "celebrating", "hugging", "thinking", "listening"];
@@ -43,7 +44,7 @@ const COORDINATION_TABLE = [
 function Cell({ label, children, testId }) {
   return (
     <div
-      className="flex flex-col items-center gap-2 rounded-2xl border border-amber-100 bg-white p-4 shadow-sm"
+      className="v6-preview-cell-hoverable flex flex-col items-center gap-2 rounded-2xl border border-amber-100 bg-white p-4 shadow-sm"
       data-testid={testId}
     >
       <div className="flex h-40 w-40 items-center justify-center">
@@ -56,12 +57,14 @@ function Cell({ label, children, testId }) {
 
 export default function LumiV6Preview() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-rose-50">
+    <div className="v6-preview-polish min-h-screen bg-gradient-to-b from-amber-50 via-white to-rose-50">
+      {/* Workspace ambient wash — V10 §3.5 control-panel feel. */}
+      <div className="v6-preview-wash" aria-hidden="true" />
       <SEO
         title="Lumi V6 Overlay Preview"
         description="Internal preview of the V6 CSS overlay system."
       />
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="v6-preview-content relative z-10 mx-auto max-w-6xl px-6 py-10">
         <nav className="mb-6 flex items-center justify-between text-sm">
           <Link href="/dashboard" className="text-emerald-800 hover:underline" data-testid="link-back-dashboard">
             ← Back to Dashboard
@@ -76,7 +79,7 @@ export default function LumiV6Preview() {
         </nav>
 
         <header className="mb-8">
-          <h1 className="text-3xl font-semibold text-slate-900" data-testid="text-title">
+          <h1 className="v6-preview-section-header text-3xl font-semibold text-slate-900" data-testid="text-title">
             Lumi V6 Overlay — Preview
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-slate-600">

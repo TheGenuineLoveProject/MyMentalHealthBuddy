@@ -113,9 +113,10 @@ export default function CelebrationFlow() {
         </div>
       )}
 
-      {/* Confetti backdrop — hidden under reduced motion */}
+      {/* Confetti backdrop — hidden under reduced motion. z-index 2 sits
+          above the wash (0) and sparkle layer (1), below content (z-10). */}
       {!reducedMotion && phase < 3 && (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden" data-testid="confetti">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 2 }} data-testid="confetti">
           {confetti.map((c, i) => (
             <span
               key={i}

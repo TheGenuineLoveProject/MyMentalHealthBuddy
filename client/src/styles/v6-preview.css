@@ -44,11 +44,16 @@
    leave. Skipped under reduced motion. */
 .v6-preview-polish .v6-preview-cell-hoverable {
   transition: transform 200ms ease, box-shadow 300ms ease;
-  will-change: transform;
 }
-.v6-preview-polish .v6-preview-cell-hoverable:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(255, 217, 61, 0.18), 0 2px 6px rgba(0, 0, 0, 0.04);
+/* Scope `will-change` to hover-capable devices and only during the
+   interaction itself, so the dense /v6 grid (30+ cells) doesn't pay
+   compositor/GPU memory overhead at rest. */
+@media (hover: hover) {
+  .v6-preview-polish .v6-preview-cell-hoverable:hover {
+    will-change: transform;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 217, 61, 0.18), 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
 }
 
 /* 4. Section header accent — adds a soft amber underline glow to any
