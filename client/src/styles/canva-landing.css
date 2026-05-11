@@ -2489,3 +2489,13 @@
     filter: none;
   }
 }
+
+/* 5. Z-index normalization (architect-fixed, v4.5.1) — make the hero
+   stacking deterministic to match the universal "decorative 0/1/2 →
+   content z-10" contract used on every other polish surface. The
+   pre-existing `.hero-depth-layer` and the two `.decorative-orb`s in
+   the hero markup previously relied on source order; this block
+   assigns explicit tiers within the hero polish scope only (no leak
+   to other landing sections). */
+.canva-landing-hero-polish .hero-depth-layer { z-index: 0; }
+.canva-landing-hero-polish .decorative-orb   { z-index: 2; }

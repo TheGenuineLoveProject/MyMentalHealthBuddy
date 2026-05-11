@@ -44,10 +44,10 @@ Detailed implementation notes for completed feature evolutions live in **`docs/c
 
 **Universal contracts** that every polish layer above honors (and any new layer must honor):
 - Scoped under a unique `.{name}-polish` wrapper class — zero leak risk.
-- Only the canonical 7 brand hex values (sage `#A8C9A0`, sunshine `#FFD93D`, blush `#FF9A8B`, calm-blue `#74C0FC`, empathy-purple `#C8B6FF`, mint `#A8D5BA`, warmth-orange `#FFB88C`, plus heart-amber `#E8913A`).
+- All accent / aura / particle / glow color values are drawn from the canonical 8-hex brand palette (sage `#A8C9A0`, sunshine `#FFD93D`, blush `#FF9A8B`, calm-blue `#74C0FC`, empathy-purple `#C8B6FF`, mint `#A8D5BA`, warmth-orange `#FFB88C`, heart-amber `#E8913A`). Neutral base RGBAs (cream / white / black with low alpha) are permitted only for ambient overlays, drop-shadows, and ring-on-white outlines, never as a brand accent.
 - `prefers-reduced-motion: reduce` blanket: particles `display:none`, animations/transitions killed, transforms pinned.
-- Z-index contract: decorative layers 0/1/2 → content `relative z-10`.
-- Pure visual additions: phase logic, localStorage math, ARIA wiring, BuddyAvatar/LumiV6 integration untouched on every surface.
+- Z-index contract: decorative layers 0/1/2 → content `relative z-10`. (v4.5.1 normalization added explicit tiers to the hero `.hero-depth-layer` and `.decorative-orb` so the hero matches every other surface.)
+- Visual-first additions: phase logic, localStorage math, ARIA wiring, and BuddyAvatar/LumiV6 integration are preserved on every surface. Two intentional UX exceptions are documented in the changelog: (a) Check-In v4.7 defers the emotion-card → intensity-phase transition by 350ms (skipped under reduced motion) so users perceive the selection pulse before the grid unmounts; (b) Celebration v4.8 forces a `<section>` remount per phase via `key={phase}` so the entrance animation replays — neither alters end-state behavior.
 - Crisis routing (`/crisis`, 988, 741741) preserved on every wellness surface.
 
 ## System Architecture
