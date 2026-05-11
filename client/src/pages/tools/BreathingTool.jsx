@@ -16,6 +16,7 @@ import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import "@/styles/breathing-tool.css";
 
 const BREATH_PHASES = [
   { key: "inhale", label: "Inhale",  seconds: 4, scale: 1.25 },
@@ -117,12 +118,27 @@ export default function BreathingTool() {
   }, [phase, sub.label]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-amber-50">
+    <div
+      className="breathing-tool-polish min-h-screen bg-gradient-to-b from-sky-50 via-white to-amber-50"
+      data-phase={phase}
+      data-breath-sub={phase === "breathing" ? sub.key : undefined}
+    >
+      {/* Breath-synced background tint — drives subtle hue shift per phase. */}
+      <div className="breathing-bg-tint" aria-hidden="true" />
+      {/* Floating calm-blue particles — 5 very subtle dots, hidden under
+          reduced motion. Sits behind content, never blocks interaction. */}
+      <div className="breathing-particle-layer" aria-hidden="true">
+        <span className="breathing-particle"></span>
+        <span className="breathing-particle"></span>
+        <span className="breathing-particle"></span>
+        <span className="breathing-particle"></span>
+        <span className="breathing-particle"></span>
+      </div>
       <SEO
         title="Breathing Exercise — Breathe With Lumi"
         description="A 4-2-4 paced breath exercise with Lumi. Free, private, no signup."
       />
-      <div className="mx-auto max-w-2xl px-6 py-12">
+      <div className="relative z-10 mx-auto max-w-2xl px-6 py-12">
         <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
           <Link href="/dashboard" className="text-emerald-800 hover:underline" data-testid="link-back-dashboard">
             ← Back to Dashboard
@@ -156,33 +172,42 @@ export default function BreathingTool() {
           className="mx-auto flex flex-col items-center justify-center rounded-3xl bg-white/80 p-10 shadow-sm ring-1 ring-sky-100"
           data-testid={`section-phase-${phase}`}
         >
-          {/* Animated breath circle (decorative — wraps the avatar) */}
+          {/* Concentric breath rings — decorative, sit behind avatar.
+              Active during breathing phase, hidden otherwise. */}
           <div
+            className={`breath-rings-wrapper${phase === "breathing" ? " breath-rings-wrapper--active" : ""}`}
             aria-hidden="true"
-            data-testid="breath-circle"
-            style={{
-              transform: `scale(${
-                phase === "breathing" && !reducedMotion ? sub.scale : 1
-              })`,
-              transition: reducedMotion ? "none" : "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
-              borderRadius: "50%",
-              padding: "1.25rem",
-              background:
-                phase === "breathing"
-                  ? "radial-gradient(circle, rgba(116,192,252,0.18) 0%, transparent 72%)"
-                  : phase === "checkin"
-                  ? "radial-gradient(circle, rgba(200,182,255,0.22) 0%, transparent 72%)"
-                  : "radial-gradient(circle, rgba(255,217,61,0.22) 0%, transparent 72%)",
-            }}
           >
-            <BuddyAvatar
-              state={avatar.state}
-              colorMode={avatar.colorMode}
-              pose={avatar.pose}
-              size={avatar.size}
-              overlay
-              data-testid={`img-breathing-buddy-${phase}`}
-            />
+            <span className="breath-ring breath-ring--inner" />
+            <span className="breath-ring breath-ring--outer" />
+            {/* Animated breath circle (decorative — wraps the avatar) */}
+            <div
+              aria-hidden="true"
+              data-testid="breath-circle"
+              style={{
+                transform: `scale(${
+                  phase === "breathing" && !reducedMotion ? sub.scale : 1
+                })`,
+                transition: reducedMotion ? "none" : "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
+                borderRadius: "50%",
+                padding: "1.25rem",
+                background:
+                  phase === "breathing"
+                    ? "radial-gradient(circle, rgba(116,192,252,0.18) 0%, transparent 72%)"
+                    : phase === "checkin"
+                    ? "radial-gradient(circle, rgba(200,182,255,0.22) 0%, transparent 72%)"
+                    : "radial-gradient(circle, rgba(255,217,61,0.22) 0%, transparent 72%)",
+              }}
+            >
+              <BuddyAvatar
+                state={avatar.state}
+                colorMode={avatar.colorMode}
+                pose={avatar.pose}
+                size={avatar.size}
+                overlay
+                data-testid={`img-breathing-buddy-${phase}`}
+              />
+            </div>
           </div>
 
           {phase === "intro" && (
@@ -209,6 +234,30 @@ export default function BreathingTool() {
               <p className="mt-2 text-5xl font-light tabular-nums text-sky-700" data-testid="text-seconds">
                 {secondsLeft}
               </p>
+              {/* Breath-cycle progress ring — 3 segments filled L-to-R as
+                  breathIdx advances. Visual companion to the existing
+                  "Breath X of 3" header text (kept for screen readers). */}
+              <div
+                className="breath-progress"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={TOTAL_BREATHS}
+                aria-valuenow={breathIdx + 1}
+                aria-label={`Breath ${breathIdx + 1} of ${TOTAL_BREATHS}`}
+                data-testid="breath-progress"
+              >
+                {Array.from({ length: TOTAL_BREATHS }).map((_, i) => {
+                  const state = i < breathIdx ? "done" : i === breathIdx ? "active" : "pending";
+                  return (
+                    <span
+                      key={i}
+                      className="breath-progress-segment"
+                      data-state={state}
+                      data-testid={`breath-progress-segment-${i}`}
+                    />
+                  );
+                })}
+              </div>
             </>
           )}
 
