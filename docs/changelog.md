@@ -69,6 +69,55 @@ V16 brief specifies Primary CTA "Talk With Buddy →" links to `/chat` (or `/lum
 - `npm run build` → exit 0, built in ~17s.
 - Smoke `/` → V16 hero renders correctly: H1 "You don't have to / carry everything alone." with gradient on the second line, eyebrow + Lumi avatar preserved above. Welcome-back surface (one of: WelcomeBackBanner OR ReturnLoop) fires correctly on second visit.
 
+### v5.7 — NLP + Motivational Interviewing Content Engine (V18 port)
+
+User-elected scope from a 6-doc V10→V18 batch: V13–V16 already shipped, V17 (image storytelling) deferred, V18 only. Two additive files + one CanvaLanding wiring edit.
+
+**`client/src/data/nlpMiContent.js`** (~165 lines) — single source of truth for emotionally calibrated copy across 5 canonical surfaces. Each page object follows the same shape:
+- `headline` / `subline` / `trustLine` — emotional-first messaging
+- `affirmation` — strength-based reflection of effort already shown
+- `openQuestion` — invites reflection without demanding an answer
+- `reflection` — mirrors feeling so the user feels heard
+- `presupposition` — assumes the positive outcome the user wants
+- `embeddedCommand` — soft CTA hidden inside a calm sentence
+- `ctaPrimary` / `ctaSecondary` — paired action labels + hrefs
+- `sections[]` (home only) — 4 benefit cards with `icon` + `title` + `content` + `sensoryWords[]` (each tagged `visual` / `auditory` / `kinesthetic`)
+
+The 5 pages: `/` (Home), `/tools/breathing`, `/checkin`, `/celebration`, `/chat`. Headlines per V18 spec ("You don't have to figure this out alone." / "Take a moment to breathe." / "How is your heart feeling right now?" / "You showed up today." / "Hi. I am Lumi."). The non-home pages carry the same 7 fields but no benefit cards — the renderer only draws the cards block when `sections.length > 0`, so a future drop-in on a sub-page is one prop swap.
+
+**Governance contract baked into the module header**: framework technique names (anchors / presuppositions / embedded commands / etc.) live in JSDoc only — the user never sees them. This honors the existing Therapeutic Framework Reference Library hard rule against framework-name leakage.
+
+**`client/src/sections/NlpMiContent.jsx`** (~290 lines) — pure CSS + IntersectionObserver renderer (NO framer-motion — preserves the v5.6 contract; v5.6 changelog explicitly notes "framer-motion intentionally NOT used (not a dep)"). Default export takes `path = '/'` so it can be mounted on any of the 5 surfaces. Renders 7 stacked blocks in this order:
+
+1. **Affirmation banner** — italic serif quote on sage-tinted wash, `rgba(168, 201, 160, 0.10)` bg, `#2F5443` text
+2. **Open question card** — white card with calm-blue border + soft shadow, "A Gentle Question" eyebrow in calm-blue
+3. **Reflection box** — lavender wash with empathy-purple border, "Lumi Reflects" eyebrow + Heart icon
+4. **Embedded command** — single italic centered line, muted color (`#6B7B6E`)
+5. **Benefit cards** — 2-col grid (1-col mobile) of 4 cards, each with icon-on-sage-circle, title, body. Body text passes through `highlightSensory()` which wraps every sensory word in a `<span className="nlp-mi-sensory">` tinted by kind (visual=`#74C0FC`, auditory=`#C8B6FF`, kinesthetic=`#A8C9A0`). Cards reveal with staggered `transitionDelay: ${i * 60}ms`.
+6. **Presupposition box** — gold-tinted wash with heart-amber border, "What Awaits You" eyebrow + Sparkles icon
+7. **Final CTAs** — gold-gradient primary pill (heart-amber → warmth-orange) + outlined sage secondary, both with the v5.6 polish pattern (`translateY(-1px)` hover, `translateY(1px)` 90ms active, palette focus rings: gold `#D4AF37` for primary, sage-deep `#2F5443` for secondary)
+
+Reveal pattern matches `EmotionalJourney.jsx` exactly — `IntersectionObserver` at threshold 0.15 adds `.revealed` to the section root, which fades + lifts every `.nlp-mi-reveal` child. Reduced-motion / no-IO branch immediately adds `.revealed` so end-state is preserved.
+
+`highlightSensory()` is regex-based with sorted-by-length to avoid prefix collisions, properly escapes regex metachars, and word-boundary anchored. Returns either the raw string (no matches) or an array of strings + `<span>` nodes.
+
+**`client/src/pages/CanvaLanding.jsx`** — two edits:
+- Imported `NlpMiContent` alongside the existing `EmotionalJourney` import
+- Mounted `<NlpMiContent path="/" />` between `<EmotionalJourney />` and the `#philosophy` section, with the existing `consciousness-divider` pattern preserved on both sides for visual consistency
+
+Per the V18 spec: "Place between VisualBenefits/Journey section and ToolCategories." VisualBenefits doesn't exist (V17 was deliberately deferred this turn), so the closest canonical position is right after the Journey timeline.
+
+**Forbidden additions intentionally avoided**:
+- No new npm packages (framer-motion was tempting but explicitly out per project contract)
+- No new image assets (V17 deferred)
+- No business logic (this is healing-domain content per MMHB v7.4)
+- No crisis short-circuit (page-level SafetyFooter + /crisis links already cover the surface)
+- No off-palette accents — every color drawn from the canonical 8-hex set or muted grays for ambient text
+
+Gates: `npx tsc --noEmit` and `npm run build` (verified after wiring + restart).
+
+---
+
 ### v5.6 follow-up — Hero & Top CTA polish (additive only)
 
 User asked for "polish all buttons" → scoped to **Option 2: Hero & top CTA polish only** (V16 hero + Pricing tier buttons). Header and Footer have no CTA buttons (nav-only `<Link>`s) so they were not in scope. Tool cards, form buttons, modal buttons, and the `/v6` control panel were explicitly excluded by the user.
