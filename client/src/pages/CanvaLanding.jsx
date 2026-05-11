@@ -9,6 +9,8 @@ import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
 import LumiV6 from "../components/lumi/LumiV6";
 import EmotionalJourney from "../sections/EmotionalJourney.jsx";
+import ValueProposition from "../sections/ValueProposition.jsx";
+import NextStepCTA from "../sections/NextStepCTA.jsx";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -904,6 +906,10 @@ export default function CanvaLanding() {
 
       <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
+      <ValueProposition variant="full" />
+
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
+
       <section 
         id="faq" 
         className="section-breathe section-reveal px-6"
@@ -1005,6 +1011,8 @@ export default function CanvaLanding() {
           </div>
         </div>
       </section>
+
+      <NextStepCTA context="general" />
 
       <footer className="py-10 px-6" style={{ background: 'var(--glp-paper)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-[1100px] mx-auto px-4 md:px-8">

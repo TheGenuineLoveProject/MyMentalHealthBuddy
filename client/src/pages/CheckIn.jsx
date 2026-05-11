@@ -13,6 +13,7 @@ import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import { emotionToAvatar } from "@/lib/buddyEmotion";
 import "@/styles/checkin.css";
 
@@ -305,6 +306,8 @@ export default function CheckIn() {
             </div>
           )}
         </section>
+
+        <NextStepCTA context="after-checkin" />
 
         <SafetyFooter />
       </div>

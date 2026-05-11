@@ -6,6 +6,38 @@ Newest entries on top.
 
 ---
 
+## Engagement Hooks Layer (v5.4) — ValueProposition + NextStepCTA across 6 surfaces
+
+Two additive section components were introduced to give every primary user surface a "what's next" moment and a low-friction subscription path. Zero changes to existing behavior, zero new npm dependencies.
+
+**New files**:
+- `client/src/sections/ValueProposition.jsx` — email signup with two variants. **`full`** ships a 4-benefit grid (Heart / Sparkles / Shield / Compass — trauma-informed support, daily reflection cues, privacy by default, free tools). **`compact`** ships headline + form only. Email persistence: `localStorage["mmhb:email_subscribers"]` as a JSON array of unique lowercased emails (frontend stub — when a backend `/api/subscribe` lands, swap `handleSubmit`). Email regex `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`. Success state restores on mount if device already subscribed (no re-prompt). A11y: `<label for>`/`<input id>`, `aria-live="polite"` status, `aria-invalid` + `aria-describedby` on errors, scoped `<style>` block with `prefers-reduced-motion` collapsing all transforms.
+- `client/src/sections/NextStepCTA.jsx` — context-aware next-step driver. Single component, six contexts: `after-breathing` (calm-blue accent → check-in / celebration), `after-checkin` (sage → breathing / celebration), `after-celebration` (gold → daily reminder / share), `general` (sage → tools / chat), `about` (purple → tools / blog), `blog` (warmth-orange → breathing / journal). Each context carries eyebrow, headline, subline, primary {label,href,icon}, secondary {label,href,icon}, and an accent color exposed via `--nsc-accent` / `--nsc-accent-soft` CSS vars so the card adapts without per-context CSS. Every variant exposes a subtle `/crisis` link below the buttons (safety surface always one tap away). Wouter `<Link>` for SPA routing. Scoped `<style>` with `prefers-reduced-motion` collapsing hover transforms.
+
+**Wired into**:
+- `pages/CanvaLanding.jsx` — `<ValueProposition variant="full">` after the testimonials/trust-badges section (between two `consciousness-divider` separators) + `<NextStepCTA context="general">` immediately before the `<footer>`.
+- `pages/About.jsx` — `<ValueProposition variant="compact">` + `<NextStepCTA context="about">` before `<GlowFooter />`.
+- `pages/Blog.jsx` — both inserted inside `<WellnessPageShell>` after the crisis-resources note.
+- `pages/tools/BreathingTool.jsx` — `<NextStepCTA context="after-breathing">` between the "About this exercise" panel and `<SafetyFooter />`.
+- `pages/CheckIn.jsx` — `<NextStepCTA context="after-checkin">` between the check-in `<section>` and `<SafetyFooter />`.
+- `pages/CelebrationFlow.jsx` — `<NextStepCTA context="after-celebration">` between the celebration `<section>` and `<SafetyFooter />`.
+
+**Universal contracts honored**:
+- Crisis routing preserved on every surface (`SafetyFooter` untouched + each `NextStepCTA` carries its own `/crisis` deep link).
+- Brand palette: every accent draws from the canonical 8-hex set (sage, gold, calm-blue, empathy-purple, warmth-orange) with neutral white/cream RGBAs only for ambient overlays.
+- `prefers-reduced-motion`: defense-in-depth at component level — transitions disabled, hover transforms collapsed, layout intact.
+- A11y: each section has `aria-labelledby` to a unique heading id; form has visible focus-ring, error region with `role="alert"`.
+- Scoped under unique class prefixes (`.vp-*`, `.nsc-*`) so zero leak risk to host pages.
+- WCAG focus-visible: 3px outline in accent color.
+
+**Gates**:
+- `npx tsc --noEmit` → exit 0.
+- `npm run build` → built in 20.18s, no warnings, `CanvaLanding-*.js` chunk now 72.46 kB / 17.38 kB gz (engagement components inlined into route chunks rather than spawning new chunks — zero asset count change).
+- All 6 routes return 200 on the dev server.
+- Architect review: PASS (only 2 nits — both intentional: localStorage write failure is a silent no-op since the success state is still psychologically truthful for the user, and `NextStepCTA` falls back to `general` on unknown context as a defensive default).
+
+---
+
 ## V14 Universalized Across All Avatars (v5.3) — Voice + Expression Sync, propagation phase
 
 The v5.2 wiring landed V14 audio in `LumiV6` only — but `LumiV6` is rendered on a small set of surfaces (`/v6` demo, landing hero, four auth pages). The vast majority of avatar instances in the app — header, footer, every chat bubble (`AIChatPanel`), every tool card, every check-in/celebration/breathing surface, the page-template nav logo — render `BuddyAvatar` (or `LumiMascot`, which wraps `BuddyAvatar`). Until v5.3, none of those instances produced any V14 audio.

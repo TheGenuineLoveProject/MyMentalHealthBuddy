@@ -16,6 +16,7 @@ import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import "@/styles/breathing-tool.css";
 
 const BREATH_PHASES = [
@@ -339,6 +340,8 @@ export default function BreathingTool() {
             or call 988.
           </p>
         </section>
+
+        <NextStepCTA context="after-breathing" />
 
         <SafetyFooter />
       </div>

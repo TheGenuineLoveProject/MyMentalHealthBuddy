@@ -2,6 +2,8 @@ import { Link } from "wouter";
 import { ArrowLeft, Heart, Shield, Sparkles, Users, Flower2 } from "lucide-react";
 import EmotionBackground from "@/components/sacred/EmotionBackground";
 import GlowFooter from "@/components/GlowFooter";
+import ValueProposition from "@/sections/ValueProposition.jsx";
+import NextStepCTA from "@/sections/NextStepCTA.jsx";
 
 export default function About() {
   return (
@@ -94,6 +96,9 @@ export default function About() {
             </Link>
           </div>
         </div>
+
+        <ValueProposition variant="compact" />
+        <NextStepCTA context="about" />
       </main>
 
       <GlowFooter />

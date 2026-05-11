@@ -5,6 +5,8 @@ import { BookOpen, ArrowRight, Sparkles, Heart, PenTool, Clock, User, ChevronRig
 import SEO from "@/components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import ValueProposition from "@/sections/ValueProposition.jsx";
+import NextStepCTA from "@/sections/NextStepCTA.jsx";
 
 // Defense-in-depth: BLOG_ARTICLES.content is currently dev-authored static
 // HTML, but we sanitize at render time so any future CMS / API integration
@@ -552,6 +554,9 @@ export default function Blog() {
               </Link>.
             </p>
           </div>
+
+          <ValueProposition variant="compact" className="mt-10" />
+          <NextStepCTA context="blog" />
         </div>
       </div>
     </>

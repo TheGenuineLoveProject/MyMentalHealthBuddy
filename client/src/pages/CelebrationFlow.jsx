@@ -15,6 +15,7 @@ import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import "@/styles/celebration.css";
 
 const PHASE_1_MS = 3000;
@@ -233,6 +234,8 @@ export default function CelebrationFlow() {
             </>
           )}
         </section>
+
+        <NextStepCTA context="after-celebration" />
 
         <SafetyFooter />
       </div>
