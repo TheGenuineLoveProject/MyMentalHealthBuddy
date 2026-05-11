@@ -256,7 +256,7 @@ export default function DesignSystemV2() {
               </nav>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <Link href="/" className="lumi-link-brand" data-testid="lk-brand">MyMentalHealthBuddy</Link>
-                <a href="#" className="lumi-link-footer" data-testid="lk-footer">Footer link</a>
+                <a href="#footer-style-demo" className="lumi-link-footer" data-testid="lk-footer" aria-label="Footer link style example">Footer link</a>
                 <Link href="/crisis" className="lumi-link-crisis" data-testid="lk-crisis">Crisis Support</Link>
               </div>
             </div>
