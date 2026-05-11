@@ -16,6 +16,17 @@
   );
 }
 
+.visual-benefits-polish .vb-header {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.visual-benefits-polish .vb-header.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .visual-benefits-polish .vb-row {
   display: grid;
   grid-template-columns: 1fr;
@@ -161,6 +172,26 @@
   max-width: 56ch;
 }
 
+/* Sensory-word pill tags (V17 spec) */
+.visual-benefits-polish .vb-sensory-tags {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.visual-benefits-polish .vb-sensory-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--vb-accent) 10%, transparent);
+  color: color-mix(in srgb, var(--vb-accent) 70%, #2d3a35);
+  border: 1px solid color-mix(in srgb, var(--vb-accent) 22%, transparent);
+}
+
 /* ── CTA link ─────────────────────────────────────────────────────────── */
 .visual-benefits-polish .vb-cta {
   display: inline-flex;
@@ -273,6 +304,8 @@ button:not([disabled]):not(.no-mi):active,
 
 /* ── Reduced motion blanket (everything pinned to end state) ──────────── */
 @media (prefers-reduced-motion: reduce) {
+  .visual-benefits-polish .vb-header,
+  .visual-benefits-polish .vb-header.revealed,
   .visual-benefits-polish .vb-row,
   .visual-benefits-polish .vb-row.revealed {
     opacity: 1 !important;
