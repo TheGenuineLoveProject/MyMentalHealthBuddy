@@ -8,12 +8,13 @@
  * is optional. Storage is localStorage only — the point is presence,
  * not data collection.
  */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import { emotionToAvatar } from "@/lib/buddyEmotion";
+import "@/styles/checkin.css";
 
 const EMOTIONS = [
   { label: "Calm",       emotion: "calm",       emoji: "🌿" },
@@ -35,6 +36,13 @@ export default function CheckIn() {
   const [intensity, setIntensity] = useState(null);
   const [note, setNote] = useState("");
   const [streak, setStreak] = useState(1);
+  // Track the deferred phase-transition timer so we can cancel it on
+  // unmount or rapid re-clicks — prevents stale setState warnings and
+  // stacked callbacks.
+  const phaseTimerRef = useRef(null);
+  useEffect(() => () => {
+    if (phaseTimerRef.current) window.clearTimeout(phaseTimerRef.current);
+  }, []);
 
   // Compute streak from localStorage on mount.
   useEffect(() => {
@@ -61,7 +69,21 @@ export default function CheckIn() {
 
   function pickEmotion(e) {
     setEmotion(e);
-    setPhase("intensity");
+    // Brief delay so users perceive the selected-state glow + one-shot
+    // pulse on the chosen card before the grid unmounts. Honors reduced
+    // motion via the user-agent flag — no delay needed when motion is off.
+    const reduced = typeof window !== "undefined"
+      && window.matchMedia
+      && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (phaseTimerRef.current) window.clearTimeout(phaseTimerRef.current);
+    if (reduced) {
+      setPhase("intensity");
+    } else {
+      phaseTimerRef.current = window.setTimeout(() => {
+        phaseTimerRef.current = null;
+        setPhase("intensity");
+      }, 350);
+    }
   }
   function pickIntensity(v) {
     setIntensity(v);
@@ -89,12 +111,26 @@ export default function CheckIn() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-emerald-50">
+    <div
+      className="checkin-polish min-h-screen bg-gradient-to-b from-emerald-50 via-white to-emerald-50"
+      data-phase={phase}
+    >
+      {/* Soft purple wash over the emerald gradient — V10 §3.3 spec. */}
+      <div className="checkin-wash" aria-hidden="true" />
+      {/* Floating soft-purple particles — 5 subtle dots, hidden under
+          reduced motion. */}
+      <div className="checkin-particle-layer" aria-hidden="true">
+        <span className="checkin-particle"></span>
+        <span className="checkin-particle"></span>
+        <span className="checkin-particle"></span>
+        <span className="checkin-particle"></span>
+        <span className="checkin-particle"></span>
+      </div>
       <SEO
         title="Emotion Check-In with Lumi"
         description="A gentle 4-step emotional pulse with Lumi. Private, free, no signup."
       />
-      <div className="mx-auto max-w-2xl px-6 py-12">
+      <div className="relative z-10 mx-auto max-w-2xl px-6 py-12">
         <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
           <Link href="/dashboard" className="text-emerald-800 hover:underline" data-testid="link-back-dashboard">
             ← Back to Dashboard
@@ -110,7 +146,7 @@ export default function CheckIn() {
           </Link>
         </nav>
 
-        <header className="mb-6 text-center">
+        <header className="checkin-greeting mb-6 text-center" key={phase}>
           <h1 className="text-3xl font-semibold text-slate-900" data-testid="text-title">
             A gentle check-in
           </h1>
@@ -147,8 +183,10 @@ export default function CheckIn() {
                 <button
                   key={opt.emotion}
                   onClick={() => pickEmotion(opt.emotion)}
-                  className="flex flex-col items-center gap-1 rounded-xl border border-emerald-200 bg-white px-4 py-4 text-sm font-medium text-emerald-900 hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  className="checkin-emotion-card flex flex-col items-center gap-1 rounded-xl border border-emerald-200 bg-white px-4 py-4 text-sm font-medium text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                   data-testid={`button-emotion-${opt.emotion}`}
+                  data-emotion-accent={opt.emotion}
+                  data-selected={emotion === opt.emotion ? "true" : "false"}
                   type="button"
                 >
                   <span aria-hidden="true" className="text-2xl">{opt.emoji}</span>
