@@ -49,7 +49,7 @@ export type BuddyColorMode =
   | "orange";
 
 const COLOR_MODE_SRC: Record<BuddyColorMode, string> = {
-  default: "/brand/lumi-v4-ultimate.png",
+  default: "/brand/v17/avatar-floating.png",
   yellow:  "/brand/lumi-v4-yellow.png",
   pink:    "/brand/lumi-v4-pink.png",
   blue:    "/brand/lumi-v4-blue.png",
@@ -103,14 +103,14 @@ export type BuddyPose =
 // sleeping, thinking, writing) point at the canonical fallback URL directly
 // so the network sees zero 404s. data-pose still surfaces the requested pose
 // for downstream observers / e2e tests / future asset rollouts.
-const FALLBACK_LUMI = "/brand/lumi-v4-ultimate.png";
+const FALLBACK_LUMI = "/brand/v17/avatar-floating.png";
 const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
-  eating:      "/brand/lumi-action-eating.png",
-  dancing:     "/brand/lumi-action-dancing.png",
-  waving:      "/brand/lumi-action-waving.png",
-  meditating:  "/brand/lumi-body-meditating.png",
-  celebrating: "/brand/lumi-body-celebrating.png",
-  hugging:     "/brand/lumi-body-hugging.png",
+  eating:      "/brand/v17/avatar-floating.png",
+  dancing:     "/brand/v17/avatar-floating.png",
+  waving:      "/brand/v17/avatar-floating.png",
+  meditating:  "/brand/v17/avatar-breathing.png",
+  celebrating: "/brand/v17/avatar-heart.png",
+  hugging:     "/brand/v17/avatar-heart.png",
   // Below: declared in the union for type safety; PNGs ship later. Point at
   // the canonical fallback now so we don't generate 404 noise.
   listening:   FALLBACK_LUMI,
