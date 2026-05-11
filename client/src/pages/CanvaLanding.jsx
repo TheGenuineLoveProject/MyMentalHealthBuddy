@@ -429,7 +429,23 @@ export default function CanvaLanding() {
         </div>
       </header>
 
-      <section id="home" className="relative py-16 md:py-20 lg:py-28 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
+      <section id="home" className="canva-landing-hero-polish relative py-16 md:py-20 lg:py-28 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
+        {/* Warm cream overlay — additive layer above the sage→teal gradient
+            so the hero reads warmer without losing the brand tones. */}
+        <div className="hero-cream-overlay" aria-hidden="true"></div>
+        {/* Soft sage particles — 8 very subtle (0.02-0.05 opacity) drifting
+            dots, distinct from the larger decorative-orb layer below.
+            CSS-only, hidden under prefers-reduced-motion. */}
+        <div className="hero-particle-layer" aria-hidden="true">
+          <span className="hero-particle"></span>
+          <span className="hero-particle"></span>
+          <span className="hero-particle"></span>
+          <span className="hero-particle"></span>
+          <span className="hero-particle"></span>
+          <span className="hero-particle"></span>
+          <span className="hero-particle"></span>
+          <span className="hero-particle"></span>
+        </div>
         <div className="hero-depth-layer" aria-hidden="true"></div>
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div 
@@ -464,7 +480,7 @@ export default function CanvaLanding() {
               data-testid="container-hero-mascot"
             >
               <div
-                className="relative flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64"
+                className="hero-lumi-wrapper relative flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64"
                 style={{
                   background: 'radial-gradient(circle at 50% 50%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 70%)',
                   overflow: 'visible',
@@ -473,7 +489,9 @@ export default function CanvaLanding() {
                 {/* V8 hero Lumi: living avatar with aura + shadow + click
                     zones + emotional memory. The greeting emotion auto-
                     coordinates upright posture, default eyes, gentle 0.5Hz
-                    heart pulse, and a sage aura halo. */}
+                    heart pulse, and a sage aura halo. The hero-lumi-wrapper
+                    parent class drives the 800ms scale-in entrance + hover
+                    lift; LumiV6's internal animations are untouched. */}
                 <LumiV6
                   size="xl"
                   emotion="greeting"

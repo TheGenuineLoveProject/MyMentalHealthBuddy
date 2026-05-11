@@ -2392,3 +2392,100 @@
   user-select: none;
   font-weight: 600;
 }
+
+/* ==========================================================================
+   Hero polish (additive) — sage→cream warm overlay, soft sage particles,
+   Lumi scale-in entrance, gentle hover lift. All scoped under
+   `.canva-landing-hero-polish` so the rest of the landing page is unaffected.
+   Reduced-motion safety: every animation is disabled and particles hide.
+   ========================================================================== */
+
+/* 1. Warm cream overlay — sits above the existing sage→teal hero gradient
+   and adds a centered cream wash so the background reads warmer/cozier
+   without losing the sage→teal brand tones at the edges. */
+.canva-landing-hero-polish .hero-cream-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(249, 247, 244, 0.55) 0%, rgba(240, 237, 230, 0.25) 35%, transparent 65%),
+    linear-gradient(180deg, rgba(249, 247, 244, 0.35) 0%, transparent 30%, rgba(232, 228, 222, 0.2) 100%);
+  z-index: 0;
+}
+
+/* 2. Soft sage particles — 8 small floating dots, very subtle (0.02-0.05
+   opacity), 40-70s upward drift cycles. Positioned absolutely inside the
+   hero section. Distinct from the existing decorative-orb layer. */
+.canva-landing-hero-polish .hero-particle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.canva-landing-hero-polish .hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #A8C9A0 0%, transparent 70%);
+  animation: hero-particle-drift linear infinite;
+}
+/* Per-particle --p-opacity drives the keyframe's mid-cycle opacity stop so
+   each particle keeps its intended subtle variance (0.03 / 0.04 / 0.05)
+   instead of all normalizing to the keyframe fallback. */
+.canva-landing-hero-polish .hero-particle:nth-child(1) { left:  8%; bottom: -40px; width: 14px; height: 14px; --p-opacity: 0.05; animation-duration: 58s; animation-delay:   0s; }
+.canva-landing-hero-polish .hero-particle:nth-child(2) { left: 22%; bottom: -60px; width: 10px; height: 10px; --p-opacity: 0.04; animation-duration: 64s; animation-delay:  -8s; }
+.canva-landing-hero-polish .hero-particle:nth-child(3) { left: 38%; bottom: -50px; width: 18px; height: 18px; --p-opacity: 0.03; animation-duration: 70s; animation-delay: -22s; }
+.canva-landing-hero-polish .hero-particle:nth-child(4) { left: 52%; bottom: -30px; width:  8px; height:  8px; --p-opacity: 0.05; animation-duration: 46s; animation-delay: -14s; }
+.canva-landing-hero-polish .hero-particle:nth-child(5) { left: 66%; bottom: -55px; width: 12px; height: 12px; --p-opacity: 0.04; animation-duration: 52s; animation-delay:  -4s; }
+.canva-landing-hero-polish .hero-particle:nth-child(6) { left: 78%; bottom: -45px; width: 16px; height: 16px; --p-opacity: 0.03; animation-duration: 62s; animation-delay: -30s; }
+.canva-landing-hero-polish .hero-particle:nth-child(7) { left: 88%; bottom: -35px; width:  9px; height:  9px; --p-opacity: 0.05; animation-duration: 48s; animation-delay: -18s; }
+.canva-landing-hero-polish .hero-particle:nth-child(8) { left: 14%; bottom: -25px; width: 11px; height: 11px; --p-opacity: 0.04; animation-duration: 56s; animation-delay: -36s; }
+
+@keyframes hero-particle-drift {
+  0%   { transform: translateY(0)        translateX(0);    opacity: 0; }
+  10%  {                                                   opacity: var(--p-opacity, 0.04); }
+  50%  { transform: translateY(-40vh)    translateX(20px); }
+  90%  {                                                   opacity: var(--p-opacity, 0.04); }
+  100% { transform: translateY(-90vh)    translateX(-15px); opacity: 0; }
+}
+
+/* 3. Lumi entrance — scale 0.8 → 1 over 800ms with gentle fade. Wrapped
+   around the existing Lumi container so the inner LumiV6 component (with
+   its own V8/V9 animations) remains untouched. Uses `forwards` so the
+   final state is locked even after the keyframe completes. */
+.canva-landing-hero-polish .hero-lumi-wrapper {
+  display: inline-block;
+  animation: hero-lumi-entrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: center center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.canva-landing-hero-polish .hero-lumi-wrapper:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 8px 24px rgba(168, 201, 160, 0.35));
+}
+@keyframes hero-lumi-entrance {
+  0%   { opacity: 0; transform: scale(0.8); }
+  60%  { opacity: 1; transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* 4. Reduced motion — kill every hero-polish animation + hide particles
+   entirely. The Lumi wrapper still appears (final scale 1, opacity 1)
+   because `animation: none` resolves it to its un-animated state, which
+   is the wrapper's natural rendering (scale 1 by default). */
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing-hero-polish .hero-particle-layer,
+  .canva-landing-hero-polish .hero-particle {
+    display: none !important;
+  }
+  .canva-landing-hero-polish .hero-lumi-wrapper {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  .canva-landing-hero-polish .hero-lumi-wrapper:hover {
+    transform: none;
+    filter: none;
+  }
+}
