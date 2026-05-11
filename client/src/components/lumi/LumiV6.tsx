@@ -175,6 +175,15 @@ export interface LumiV6Props {
    *  Pass null/undefined when no signal is available. Lower priority than
    *  user click overrides. */
   detectedSentiment?: LumiV6Emotion | null;
+  /**
+   * Image loading strategy. Defaults to "lazy" (safe for the many
+   * off-screen LumiV6 instances). Set to "eager" at above-the-fold
+   * call sites (login/register/forgot/reset hero lockups) to avoid
+   * delaying LCP. "auto" leaves it up to the browser.
+   */
+  imageLoading?: "lazy" | "eager" | "auto";
+  /** Above-the-fold hint for the browser fetch scheduler. */
+  fetchPriority?: "high" | "low" | "auto";
   className?: string;
   "data-testid"?: string;
 }
@@ -196,6 +205,16 @@ const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
   hugging:     "/brand/v17/avatar-heart-nobg.png",
 };
 const FALLBACK_PNG = "/brand/v17/avatar-floating-nobg.png";
+
+// V17 PNGs ship a same-name `.webp` sibling (~14–22 KB vs 263–365 KB).
+// v4 themes don't, so we only emit a <source> when we know the webp exists.
+const V17_WEBP_PREFIX = "/brand/v17/";
+function pickWebp(pngUrl: string): string | null {
+  if (pngUrl.startsWith(V17_WEBP_PREFIX) && pngUrl.endsWith(".png")) {
+    return pngUrl.slice(0, -4) + ".webp";
+  }
+  return null;
+}
 
 const EMOTION_MESSAGE: Record<LumiV6Emotion, string> = {
   joy:      "Yay! That's wonderful.",
@@ -281,6 +300,8 @@ export default function LumiV6({
   pixelSize,
   v9 = false,
   detectedSentiment = null,
+  imageLoading = "lazy",
+  fetchPriority = "auto",
   className = "",
   "data-testid": testId = "lumi-v6",
 }: LumiV6Props) {
@@ -825,17 +846,25 @@ export default function LumiV6({
       {shadowOn && <div className="lumiv6__shadow" aria-hidden="true" />}
 
       <div className="lumiv6__posture" aria-hidden="true">
-        <img
-          className="lumiv6__body"
-          src={bodySrc}
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          onError={(e) => {
-            const img = e.currentTarget;
-            if (!img.src.endsWith(FALLBACK_PNG)) img.src = FALLBACK_PNG;
-          }}
-        />
+        <picture>
+          {pickWebp(bodySrc) && (
+            <source srcSet={pickWebp(bodySrc) as string} type="image/webp" />
+          )}
+          <img
+            className="lumiv6__body"
+            src={bodySrc}
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            decoding="async"
+            loading={imageLoading === "auto" ? undefined : imageLoading}
+            {...(fetchPriority !== "auto" ? { fetchPriority } as any : {})}
+            onError={(e) => {
+              const img = e.currentTarget;
+              if (!img.src.endsWith(FALLBACK_PNG)) img.src = FALLBACK_PNG;
+            }}
+          />
+        </picture>
       </div>
 
       {showFace && (

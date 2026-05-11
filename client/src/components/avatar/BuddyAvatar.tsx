@@ -104,6 +104,16 @@ export type BuddyPose =
 // so the network sees zero 404s. data-pose still surfaces the requested pose
 // for downstream observers / e2e tests / future asset rollouts.
 const FALLBACK_LUMI = "/brand/v17/avatar-floating-nobg.png";
+
+// V17 PNGs ship a same-name `.webp` sibling (~14–22 KB vs 263–365 KB).
+// v4 themes don't, so we only emit a <source> when we know the webp exists.
+const V17_WEBP_PREFIX = "/brand/v17/";
+function pickWebp(pngUrl: string): string | null {
+  if (pngUrl.startsWith(V17_WEBP_PREFIX) && pngUrl.endsWith(".png")) {
+    return pngUrl.slice(0, -4) + ".webp";
+  }
+  return null;
+}
 const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
   eating:      "/brand/v17/avatar-floating-nobg.png",
   dancing:     "/brand/v17/avatar-floating-nobg.png",
@@ -180,6 +190,15 @@ export interface BuddyAvatarProps {
    * Default true (preserves existing behavior).
    */
   animated?: boolean;
+  /**
+   * Image loading strategy. Defaults to "lazy" (safe for the dozens of
+   * off-screen avatar instances across the app). Set to "eager" at
+   * above-the-fold call sites (header logo, login/register hero) to avoid
+   * delaying LCP. "auto" leaves it up to the browser.
+   */
+  imageLoading?: "lazy" | "eager" | "auto";
+  /** Above-the-fold hint for the browser fetch scheduler. */
+  fetchPriority?: "high" | "low" | "auto";
   "data-testid"?: string;
 }
 
@@ -253,6 +272,8 @@ export default function BuddyAvatar({
   pose = "default",
   overlay = false,
   animated = true,
+  imageLoading = "lazy",
+  fetchPriority = "auto",
   "data-testid": testId = "buddy-avatar",
 }: BuddyAvatarProps) {
   // Defense-in-depth: animated={false} hard-pins motion to "steady" so
@@ -377,22 +398,30 @@ export default function BuddyAvatar({
       data-pose={pose}
       data-overlay={showV6Overlay ? "v6" : overlay ? "v6-suppressed" : "off"}
     >
-      <img
-        src={lumiArtworkUrl}
-        alt=""
-        aria-hidden="true"
-        draggable={false}
-        onError={(e) => {
-          // Graceful fallback if a v4 variant is missing — falls back to the
-          // canonical sage Lumi so the avatar never renders as a broken image.
-          const img = e.currentTarget;
-          if (img.src.indexOf(FALLBACK_LUMI) === -1) {
-            img.src = FALLBACK_LUMI;
-          }
-        }}
-        className={`buddy__svg ${(effectiveMotion ?? v.motion) === 'steady' ? '' : 'lumi-breathe'}`.trim()}
-        style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-      />
+      <picture style={{ width: '100%', height: '100%', display: 'block' }}>
+        {pickWebp(lumiArtworkUrl) && (
+          <source srcSet={pickWebp(lumiArtworkUrl) as string} type="image/webp" />
+        )}
+        <img
+          src={lumiArtworkUrl}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          decoding="async"
+          loading={imageLoading === "auto" ? undefined : imageLoading}
+          {...(fetchPriority !== "auto" ? { fetchPriority } as any : {})}
+          onError={(e) => {
+            // Graceful fallback if a v4 variant is missing — falls back to the
+            // canonical sage Lumi so the avatar never renders as a broken image.
+            const img = e.currentTarget;
+            if (img.src.indexOf(FALLBACK_LUMI) === -1) {
+              img.src = FALLBACK_LUMI;
+            }
+          }}
+          className={`buddy__svg ${(effectiveMotion ?? v.motion) === 'steady' ? '' : 'lumi-breathe'}`.trim()}
+          style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+        />
+      </picture>
 
       {/* V6 cuteness overlay — opt-in. Position % values are tuned to the
           v4 PNG body region. Face pad sits over the upper-mid third to

@@ -113,6 +113,8 @@ export default function Login() {
                   emotion="greeting"
                   v8
                   memoryKey="login"
+                  imageLoading="eager"
+                  fetchPriority="high"
                   data-testid="lumi-login"
                 />
               </span>

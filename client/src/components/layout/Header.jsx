@@ -96,6 +96,8 @@ function Header() {
               state="calm"
               size="md-header"
               colorMode="default"
+              imageLoading="eager"
+              fetchPriority="high"
               data-testid="img-header-lumi"
             />
           </div>

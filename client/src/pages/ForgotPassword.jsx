@@ -153,6 +153,8 @@ export default function ForgotPassword() {
                 colorMode="purple"
                 emotion="empathy"
                 interactive={false}
+                imageLoading="eager"
+                fetchPriority="high"
                 data-testid="lumi-forgot"
               />
             </span>

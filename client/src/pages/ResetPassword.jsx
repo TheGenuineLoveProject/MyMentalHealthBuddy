@@ -236,6 +236,8 @@ export default function ResetPassword() {
                 colorMode="pink"
                 emotion="love"
                 interactive={false}
+                imageLoading="eager"
+                fetchPriority="high"
                 data-testid="lumi-reset"
               />
             </span>

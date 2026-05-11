@@ -99,6 +99,8 @@ export default function Register() {
                   size="md-header"
                   colorMode="yellow"
                   emotion="joy"
+                  imageLoading="eager"
+                  fetchPriority="high"
                   data-testid="lumi-register"
                 />
               </span>
