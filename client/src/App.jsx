@@ -20,6 +20,8 @@ import { routeKeyFromRoute } from "./utils/routeKey.js";
 import ConsentBanner from "./components/ConsentBanner.jsx";
 import FeedbackWidget from "./components/FeedbackWidget.jsx";
 import WelcomeBackBanner from "./components/WelcomeBackBanner.jsx";
+import ReturnLoop from "./components/ReturnLoop.jsx";
+import MicroWinPrompt from "./components/MicroWinPrompt.jsx";
 import { FeatureFlagProvider } from "./contexts/FeatureFlagContext.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
 import AnalyticsDashboard from "./pages/admin/AnalyticsDashboard.jsx";
@@ -366,6 +368,8 @@ export default function App() {
           <ErrorBoundary>
             <PageViewTracker />
             <SkipToContent />
+            <ReturnLoop />
+            <MicroWinPrompt />
             <main id="main-content">
             <WelcomeBackBanner />
             <Suspense fallback={<LoadingFallback />}>

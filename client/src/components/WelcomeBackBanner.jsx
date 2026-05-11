@@ -26,6 +26,9 @@ import { Heart, X, ArrowRight } from "lucide-react";
 const VISITOR_KEY = "mmhb:returning_visitor";
 const DISMISS_KEY = "mmhb:welcome_dismissed";
 const AUTH_TOKEN_KEY = "mmhb_token";
+// v5.6 V16: yield to ReturnLoop when the cross-session counter has fired so
+// the user never sees two stacked welcome-back strips.
+const VISIT_COUNT_KEY = "mmhb_visit_count";
 
 function readSession(key) {
   if (typeof window === "undefined") return null;
@@ -47,6 +50,13 @@ export default function WelcomeBackBanner() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (readSession(DISMISS_KEY) === "true") return;
+
+    // v5.6 V16: if the cross-session ReturnLoop will fire (visit count >= 2),
+    // suppress this within-session banner so the two never stack.
+    try {
+      const count = parseInt(window.localStorage.getItem(VISIT_COUNT_KEY) || "0", 10) || 0;
+      if (count >= 2) return;
+    } catch { /* noop */ }
 
     const seen = readSession(VISITOR_KEY);
     if (!seen) {

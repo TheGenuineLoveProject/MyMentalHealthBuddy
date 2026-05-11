@@ -517,17 +517,39 @@ export default function CanvaLanding() {
               <Star className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" aria-hidden="true" />
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.06] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
-              Your Coach. Your Mentor.
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 md:mb-6 leading-[1.06] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }} data-testid="hero-headline-v16">
+              You don't have to
               <br />
               <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep) 0%, var(--glp-gold-dark) 55%, var(--glp-sage-deep) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                Your Wisest Friend.
+                carry everything alone.
               </span>
             </h1>
 
-            <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
-              The emotionally intelligent AI buddy that helps you master stress, build genuine confidence, develop self-regulation skills, and evolve your mind to its fullest potential
+            <p className="text-base sm:text-xl md:text-2xl font-serif mb-4 md:mb-6 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }} data-testid="hero-subheadline-v16">
+              A calm companion for gentle check-ins, emotional support, and quiet moments when you need someone there.
             </p>
+
+            {/* V16 trust strip — 4 sage-tinted pills, separated visually by spacing */}
+            <div
+              className="hero-trust-strip flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-5 md:mb-7 animate-fade-in-up"
+              style={{ animationDelay: '0.25s' }}
+              data-testid="hero-trust-strip-v16"
+              aria-label="Why this is a safe space"
+            >
+              {['Private', 'No judgment', 'Emotionally safe', 'Designed for calm'].map((label) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center px-3 py-1 rounded-full text-xs md:text-sm font-medium"
+                  style={{
+                    background: 'rgba(168, 201, 160, 0.12)',
+                    color: 'var(--glp-sage-deep, #2F5443)',
+                    border: '1px solid rgba(143, 191, 159, 0.28)',
+                  }}
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
 
             <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s', lineHeight: '1.75' }}>
               500+ evidence-based tools for mastering everyday stressors from A to Z, building genuine confidence, deepening self-worth, and developing the metacognitive skills to understand and evolve your own mind — guided by an AI buddy that truly listens, remembers what matters to you, and coaches you with the intelligence of a behavioral strategist, the wisdom of a mentor, and the warmth of a best friend. Whether you're managing ADHD, navigating overwhelm, or seeking your highest potential — this is the support that changes how you relate to your own mind.
@@ -541,40 +563,38 @@ export default function CanvaLanding() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-8 md:mb-10 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              {!isLoading && isAuthenticated() ? (
-                <Link href="/dashboard">
-                  <button
-                    className="btn-sacred-gold group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
-                    data-testid="button-hero-dashboard"
-                  >
-                    <Sparkles className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-                    Go to My Dashboard
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                  </button>
-                </Link>
-              ) : (
-                <Link href="/register">
-                  <button
-                    className="btn-sacred-gold group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
-                    data-testid="button-hero-begin"
-                  >
-                    <Sparkles className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-                    Start Your Journey — Free
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                  </button>
-                </Link>
-              )}
-              <Link href="/pricing">
+            {/* V16 3-tier CTA hierarchy: Talk With Buddy (primary, gold) → Take a Calm Check-In (secondary, outline) → Explore Safely (tertiary, text) */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-3 md:mb-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <Link href={!isLoading && isAuthenticated() ? "/chat" : "/register"}>
                 <button
-                  className="btn-sacred-secondary group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
-                  data-testid="button-hero-explore"
+                  className="btn-sacred-gold group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
+                  data-testid="button-hero-talk-buddy"
                 >
-                  <Eye className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" aria-hidden="true" />
-                  See What's Included
+                  <Sparkles className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
+                  Talk With Buddy
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </button>
               </Link>
+              <Link href="/checkin">
+                <button
+                  className="btn-sacred-secondary group inline-flex items-center gap-2 md:gap-3 font-bold text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
+                  data-testid="button-hero-checkin"
+                >
+                  <Eye className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" aria-hidden="true" />
+                  Take a Calm Check-In
+                </button>
+              </Link>
+            </div>
+            <div className="flex justify-center mb-8 md:mb-10 animate-fade-in-up" style={{ animationDelay: '0.45s' }}>
+              <a
+                href="#features"
+                className="inline-flex items-center gap-1.5 text-sm md:text-base font-medium underline underline-offset-4 hover:opacity-80 transition-opacity"
+                style={{ color: 'var(--glp-sage-deep, #2F5443)', textDecorationThickness: '1.5px' }}
+                data-testid="link-hero-explore-safely"
+              >
+                Explore Safely
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+              </a>
             </div>
           </div>
 

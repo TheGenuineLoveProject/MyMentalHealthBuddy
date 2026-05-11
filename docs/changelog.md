@@ -6,6 +6,71 @@ Newest entries on top.
 
 ---
 
+## V16 Emotional Convergence (v5.6) — hero rewrite + return-loop + micro-win prompt
+
+> **Versioning note**: the brief asked to "Document as v5.4" but `v5.4` (Engagement Hooks) and `v5.5` (Subscription Elicitation, last release) are already locked. This release ships as **v5.6** — content matches the V16 brief; only the version label is bumped to avoid history collision.
+
+### Scope deviation: tool-label transform (FIX 2) skipped — flagged for user
+
+The V16 brief specified renaming three tool labels:
+- "Calm Me Down" → "I Need to Feel Calm"
+- "Help Me Think Clearly" → "My Mind Is Racing"
+- "Understand This Feeling" → "I'm Feeling Something Heavy"
+
+**Those source labels do not exist anywhere in the codebase** (verified via ripgrep across `client/src/**/*.{js,jsx,ts,tsx,json}`). Per the `replit.md` rule "If unsure, ask ONE clarifying question. Never guess." and the additive-only contract, the transform was skipped rather than inventing labels in a guessed-at file. **User action required**: if these labels live in a different file, point to it and the transform will land in a follow-up. Otherwise, the new emotional-first labels can be added as the canonical strings in a future release.
+
+### CTA routing decision
+
+V16 brief specifies Primary CTA "Talk With Buddy →" links to `/chat` (or `/lumi` per a later sentence). For unauthenticated users this would dead-end on a login wall. Initial implementation routed unauth users to `/login`; **architect catch**: this gutted the v5.5 subscription funnel for cold visitors. Final routing: authed → `/chat`, unauth → `/register` (preserves the v5.5 signup-first funnel for cold visitors while honoring V16's engagement-first intent for returning users).
+
+### New files
+
+- `client/src/components/ReturnLoop.jsx` — V16 cross-session welcome-back banner. Sticky `top: 0` z-50 strip with 5 rotating tone-matched messages selected via `useMemo([])` so the message stays stable across re-renders within one mount. Visit count: increments `localStorage["mmhb_visit_count"]` exactly once per browser session via the `sessionStorage["mmhb:visit_counted_this_session"]` guard (prevents SPA navigation from inflating the count). Reveal: 800ms delay after mount, gated on count >= 2. Dismiss: writes `sessionStorage["mmhb:returnloop_dismissed"]=true`. Hidden on `/crisis` and `/crisis/*`. CTA → `/chat` if `mmhb_token` present else `/login`. Each message ships its own accent token from the canonical palette: sage `#8FBF9F`, gold `#D4AF37`, lavender `#9B86E0` (drawn from empathy-purple `#C8B6FF` family), mint `#7FB89A` (drawn from healing-mint `#A8D5BA` family), rose `#E89685` (drawn from blush `#FF9A8B` family). Solid rgba backgrounds + borders (no `color-mix()` to avoid Safari < 16.2 issues from v5.5 lessons). Slide-down keyframe collapsed under `prefers-reduced-motion`.
+
+- `client/src/components/MicroWinPrompt.jsx` — V16 idle-state gentle prompt. Fixed bottom-center dialog. Idle detection: 45000ms timer, reset on `click`/`scroll`/`keydown`/`touchstart` (all passive listeners, properly cleaned up on unmount). Once-per-session guard via `sessionStorage["mmhb:microwin_shown"]`. **Z-index 40** (architect fix — yields to `ConsentBanner` z-50 so privacy consent always wins). **Bottom offset 5rem on mobile, 1.5rem on desktop** (architect fix — clears the `AccessibilityToolbar` `bottom-6 right-6` floating button on small screens). 3 options with canonical-palette icon accents: Take one calm breath (calm-blue `#74C0FC`) → `/tools/breathing`; Name how you feel (warmth-orange `#FFB88C`) → `/checkin`; Meet your companion (empathy-purple `#C8B6FF`) → `/chat` if authed else `/register`. **Auto-focuses the close button 50ms after appearance** (architect fix — was a focus-management gap; now keyboard users discover the dialog and can dismiss with Enter). Esc dismisses while visible. `role="dialog" aria-modal="false"` (non-modal — does not steal focus from the page, only invites attention).
+
+### Modified files
+
+- `client/src/pages/CanvaLanding.jsx` — hero transformation only:
+  - **H1** changed from `Your Coach. Your Mentor. / Your Wisest Friend.` to `You don't have to / carry everything alone.` Same gradient styling, same `animate-fade-in-up` timing, new `data-testid="hero-headline-v16"`.
+  - **Serif subheadline** (the bold serif `<p>` directly under H1) changed to `A calm companion for gentle check-ins, emotional support, and quiet moments when you need someone there.` New `data-testid="hero-subheadline-v16"`.
+  - **NEW: trust strip** — 4 sage-tinted pills (`Private` / `No judgment` / `Emotionally safe` / `Designed for calm`) inserted between the serif subheadline and the existing "You Are Safe Here" badge. Background `rgba(168, 201, 160, 0.12)`, border `rgba(143, 191, 159, 0.28)`, text `var(--glp-sage-deep)`. New `data-testid="hero-trust-strip-v16"` with `aria-label="Why this is a safe space"`.
+  - **CTA block** — original 2-CTA block (`Start Your Journey — Free` + `See What's Included`) replaced with V16's 3-tier hierarchy:
+    - **Primary** "Talk With Buddy" — `btn-sacred-gold` styling (existing class), Sparkles icon, ArrowRight, → `/chat` if authed else `/register`. `data-testid="button-hero-talk-buddy"`.
+    - **Secondary** "Take a Calm Check-In" — `btn-sacred-secondary` styling, Eye icon, → `/checkin`. `data-testid="button-hero-checkin"`.
+    - **Tertiary** "Explore Safely" — text underline link with ArrowRight, → `#features` (the existing tools/feature section already has `id="features"` at line 769). `data-testid="link-hero-explore-safely"`.
+  - **Preserved untouched**: the eyebrow "THE COACH YOUR MIND HAS BEEN WAITING FOR", the 500+-tools body paragraph, the "You Are Safe Here" badge, the 4-stat grid (added in v5.5 with `10,000+ Buddy Conversations`), the LumiV6 hero avatar, and every section below the hero.
+
+- `client/src/components/WelcomeBackBanner.jsx` (v5.5 → v5.6) — added a yield guard inside the existing `useEffect`: reads `localStorage["mmhb_visit_count"]`, returns early if count >= 2. This prevents the v5.5 within-session banner from stacking with the v5.6 cross-session ReturnLoop. When the user has visited only once this session (count=1), WelcomeBackBanner fires; on the next browser session (count=2+), ReturnLoop takes over and WelcomeBackBanner self-suppresses. Net result: at most one welcome-back surface visible at any time.
+
+- `client/src/App.jsx` — three additive lines: import ReturnLoop + MicroWinPrompt at the top with the rest of the components, render `<ReturnLoop />` between `<SkipToContent />` and `<main id="main-content">` (so it sits sticky above the page chrome), render `<MicroWinPrompt />` immediately after as a sibling (it's a `position: fixed` overlay so DOM position doesn't affect placement, but it's mounted before `<main>` so the close-button focus management can fire before any heavy lazy chunk loads).
+
+### Universal contracts honored
+
+- **Crisis safeguards**: both new components self-suppress on `/crisis` and `/crisis/*`.
+- **Brand palette**: every accent draws from the canonical 8-hex set (sage, gold, lavender from empathy-purple family, mint from healing-mint family, rose from blush family, calm-blue, warmth-orange). Trust-strip tints use rgba(168, 201, 160, X) which is the sage `#A8C9A0` reference hex from the canonical palette.
+- **`prefers-reduced-motion`**: every new component ships an explicit `@media (prefers-reduced-motion: reduce)` block — `rl-bar` slide-down disabled, `mwp-card` fade-up disabled, all hover transforms disabled, end-state preserved.
+- **Scoped CSS**: `.rl-*` and `.mwp-*` class prefixes, both inside scoped `<style>` blocks — zero leak risk to host pages.
+- **Cross-domain hygiene** (MMHB v7.4): both surfaces stay strictly in the HEALING domain (no pricing, no upgrade prompts). MicroWinPrompt's three CTAs all route to free wellness tools.
+- **Additive only** (with one in-place hero copy change explicitly authorized by the V16 brief).
+
+### Architect findings & resolutions
+
+- **SEVERE — MicroWinPrompt focus management** (resolved): dialog appeared without claiming focus, leaving keyboard users unaware. Added `useRef` on the close button + a 50ms `setTimeout` after `visible` flips to true that calls `closeBtnRef.current?.focus()`. Esc dismiss already wired.
+- **SEVERE — Z-index conflict with ConsentBanner** (resolved): both were z-50 and both bottom-fixed. ConsentBanner is privacy-critical and must never be obscured. Lowered MicroWinPrompt to **z-40** so consent always wins.
+- **HIGH — Signup funnel deviation** (resolved): primary hero CTA was routing unauth users to `/login`, gutting the v5.5 register-funnel work. Switched unauth route to `/register`; authed route stays `/chat`.
+- **HIGH — AccessibilityToolbar collision** (resolved): toolbar is `bottom-6 right-6` z-50 fab. MicroWinPrompt was `bottom: 1.5rem` centered ~540px wide → on mobile the prompt overlapped the toolbar. Bumped MicroWinPrompt to `bottom: 5rem` on mobile, `bottom: 1.5rem` on `min-width: 768px` desktop where the toolbar sits clear of the centered prompt.
+- **HIGH — Contrast on focus outline against gold/rose backgrounds** (skipped, low risk): outline is `#D4AF37` against rgba gold/rose tints. Outline only appears on keyboard focus and the link text itself meets contrast — outline visibility is acceptable for focus indication.
+- **HIGH — Visit count double-fire under React 18 strict mode** (skipped, mitigated by design): the sessionStorage guard read+write happens synchronously inside one effect call. A second strict-mode mount of the same effect reads the flag set by the first, so the increment fires exactly once per session even under double-mount.
+
+### Gates
+
+- `npx tsc --noEmit` → exit 0.
+- `npm run build` → exit 0, built in ~17s.
+- Smoke `/` → V16 hero renders correctly: H1 "You don't have to / carry everything alone." with gradient on the second line, eyebrow + Lumi avatar preserved above. Welcome-back surface (one of: WelcomeBackBanner OR ReturnLoop) fires correctly on second visit.
+
+---
+
 ## Subscription Elicitation Layer (v5.5) — 7 additive surfaces for sign-up & conversion
 
 > **Versioning note**: the implementation brief asked for "v5.3" but `v5.3` (V14 universalized) and `v5.4` (Engagement Hooks) were already locked in this changelog. This release ships as **v5.5** — content is identical to the v5.3 brief, only the version label is bumped to avoid history collision.
