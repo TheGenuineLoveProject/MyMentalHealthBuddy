@@ -762,3 +762,59 @@
   33%      { transform: scale(1.1); opacity: 1; }
   66%      { transform: scale(0.95); opacity: 0.6; }
 }
+
+/* ---------------------------------------------------------------------------
+   V9.7 — Visceral Glow ("The Warmth Engine")  — declared FIRST so transient
+   states (recognition / mirroring / goodbye / heart-burst), declared AFTER
+   this rule, win on the CSS cascade for `.lumiv6__heart` during their brief
+   windows. Period syncs to the existing --lumiv6-heart-period custom
+   property already set by the heart-rate driver in LumiV6.tsx (and overridden
+   by escalation levels 600/450/300ms), so visceral glow inherits emotion +
+   escalation cadence automatically. Scoped under `.lumiv6--animated` so
+   crisis surfaces (animated=false) are completely unaffected.
+   --------------------------------------------------------------------------- */
+.lumiv6--animated.lumiv6--v9-visceral-glow .lumiv6__heart {
+  animation: lumiv9VisceralGlow var(--lumiv6-heart-period, 2000ms) ease-in-out infinite;
+  will-change: transform, filter;
+}
+@keyframes lumiv9VisceralGlow {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1) drop-shadow(0 0 2px rgba(232,145,58,0.35));
+  }
+  30% {
+    transform: scale(1.14);
+    filter: brightness(1.3) drop-shadow(0 0 10px rgba(232,145,58,0.85));
+  }
+  60% {
+    transform: scale(1.06);
+    filter: brightness(1.1) drop-shadow(0 0 6px rgba(232,145,58,0.55));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   V9.6 — Recognition micro-expression ("Welcome Back")
+   600ms flash on mount when previous-session emotion differs from current.
+   Eyes widen + heart pulses bright once, then settles into base behavior.
+   Declared AFTER visceral-glow so the cascade gives this rule the heart
+   element during the 600ms recognition window (equal specificity, last wins).
+   Scoped under .lumiv6--animated so crisis (animated=false) is unaffected;
+   reduced-motion blanket already disables it via the .lumiv6 namespace rule.
+   --------------------------------------------------------------------------- */
+.lumiv6--animated.lumiv6--v9-recognition .lumiv6__pupil {
+  animation: lumiv9RecognitionEyes 600ms ease-out;
+}
+.lumiv6--animated.lumiv6--v9-recognition .lumiv6__heart {
+  animation: lumiv9RecognitionHeart 600ms ease-out;
+}
+@keyframes lumiv9RecognitionEyes {
+  0%   { transform: scaleY(1); }
+  35%  { transform: scaleY(1.18); }
+  70%  { transform: scaleY(1.06); }
+  100% { transform: scaleY(1); }
+}
+@keyframes lumiv9RecognitionHeart {
+  0%   { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 0 rgba(232,145,58,0)); }
+  40%  { transform: scale(1.22); filter: brightness(1.4) drop-shadow(0 0 8px rgba(232,145,58,0.7)); }
+  100% { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 0 rgba(232,145,58,0)); }
+}

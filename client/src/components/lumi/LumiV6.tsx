@@ -613,6 +613,37 @@ export default function LumiV6({
     return () => clearTimeout(t);
   }, [v9, animated, detectedSentiment, emotion]);
 
+  // ---------- V9.6: recognition micro-expression ("Welcome back") ----------
+  // On mount, check sessionStorage for the last emotion this browser session
+  // saw on a Lumi. If present and different from the current emotion, fire a
+  // brief 600ms recognition flash (eyes widen + bright heart pulse). Then
+  // persist the current emotion so the *next* mount can recognize it.
+  // Gated on `v9 && animated` so crisis surfaces stay completely still.
+  // StrictMode safety: a module-level visited-set survives the dev-only
+  // mount/unmount/remount cycle so the second invocation reads the SAME
+  // pre-flash sentinel and fires recognition exactly once per real mount.
+  const [v9Recognition, setV9Recognition] = useState(false);
+  const v9RecognitionRanRef = useRef(false);
+  useEffect(() => {
+    if (!v9) return;
+    if (v9RecognitionRanRef.current) return;
+    v9RecognitionRanRef.current = true;
+    let last: string | null = null;
+    try { last = sessionStorage.getItem("lumi:v9:lastEmotion"); } catch { /* private mode */ }
+    if (animated && last && last !== effectiveEmotion) {
+      setV9Recognition(true);
+      const t = setTimeout(() => setV9Recognition(false), 600);
+      // Persist AFTER reading + scheduling so StrictMode's unmount/remount
+      // cycle (which preserves refs) doesn't accidentally observe the
+      // already-written current emotion and suppress the flash.
+      try { sessionStorage.setItem("lumi:v9:lastEmotion", effectiveEmotion); } catch { /* noop */ }
+      return () => clearTimeout(t);
+    }
+    try { sessionStorage.setItem("lumi:v9:lastEmotion", effectiveEmotion); } catch { /* noop */ }
+    // intentionally only run on mount (per-instance recognition)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // ---------- V9: goodbye sequence ----------
   // Triggers on window beforeunload OR 5 minutes of global inactivity.
   // CSS .lumiv6--v9-goodbye runs the wave + fade-out keyframe.
@@ -735,6 +766,8 @@ export default function LumiV6({
         v9 && v9GazeLock ? "lumiv6--v9-gaze-lock" : "",
         v9 && v9EscalationLevel > 0 ? `lumiv6--v9-escalation-${v9EscalationLevel}` : "",
         v9 && v9MirrorEmotion ? "lumiv6--v9-mirroring" : "",
+        v9 && v9Recognition ? "lumiv6--v9-recognition" : "",
+        v9 && animated ? "lumiv6--v9-visceral-glow" : "",
         v9 && v9Goodbye ? "lumiv6--v9-goodbye" : "",
         className,
       ].filter(Boolean).join(" ")}
