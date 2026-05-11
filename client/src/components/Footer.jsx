@@ -29,33 +29,33 @@ export default function Footer() {
           </div>
 
           <nav className="flex flex-wrap gap-6 text-sm font-medium" aria-label="Footer navigation">
-            <Link href="/" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-home">
+            <Link href="/" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-home">
               Home
             </Link>
-            <Link href="/about" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-about">
+            <Link href="/about" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-about">
               About
             </Link>
-            <Link href="/tools" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-tools">
+            <Link href="/tools" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-tools">
               Wellness Tools
             </Link>
-            <Link href="/journal" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-journal">
+            <Link href="/journal" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-journal">
               Journal
             </Link>
-            <Link href="/wisdom" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-wisdom">
+            <Link href="/wisdom" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-wisdom">
               Wisdom
             </Link>
-            <Link href="/blog" className="hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-blog">
+            <Link href="/blog" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-blog">
               <BookOpen className="w-4 h-4" aria-hidden="true" />
               Blog
             </Link>
-            <Link href="/newsletter" className="hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-newsletter">
+            <Link href="/newsletter" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-newsletter">
               <Mail className="w-4 h-4" aria-hidden="true" />
               Newsletter
             </Link>
-            <Link href="/disclaimer" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-disclaimer">
+            <Link href="/disclaimer" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-disclaimer">
               Disclaimer
             </Link>
-            <Link href="/crisis" className="hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-crisis">
+            <Link href="/crisis" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-crisis">
               <Shield className="w-4 h-4" aria-hidden="true" />
               Crisis Support
             </Link>

@@ -191,6 +191,104 @@ body {
   .btn-secondary-premium:hover, .btn-secondary-premium:active { transform: none !important; }
 }
 
+/* =====================================================================
+   v5.6 follow-up — Header & Footer CTA polish (Option 2 extension)
+   Scope: TglpNavbar (Get Started / Dashboard / Sign In) + Footer nav links.
+   Composes additively with existing Tailwind utility classes — only adds
+   transform + box-shadow + outline transitions; never overrides color,
+   padding, or radius (those stay owned by the JSX).
+   prefers-reduced-motion blanket at the bottom kills every transform.
+   ===================================================================== */
+
+/* Primary header CTA — the gold pill ("Get Started" / "Start" / "Dashboard"). */
+.btn-header-cta {
+  transition:
+    transform 240ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    box-shadow 240ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    opacity 200ms ease;
+  will-change: transform, box-shadow;
+}
+
+.btn-header-cta:hover {
+  transform: translateY(-1px);
+  /* !important required to override the inline `style={{ boxShadow: var(--glp-gold-shadow) }}`
+     on TglpNavbar's gold pills (inline style normally beats stylesheet specificity). */
+  box-shadow:
+    0 8px 22px rgba(212, 175, 55, 0.32),
+    0 0 0 4px rgba(212, 175, 55, 0.10) !important;
+}
+
+.btn-header-cta:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 2px 8px rgba(212, 175, 55, 0.22),
+    0 0 0 2px rgba(212, 175, 55, 0.08) !important;
+  transition-duration: 90ms;
+}
+
+.btn-header-cta:focus-visible {
+  /* Warm CTA → canonical MMHB gold focus ring (token --glp-gold currently
+     resolves to #be8622; use literal #D4AF37 to honor the v5.6 palette spec). */
+  outline: 3px solid #D4AF37;
+  outline-offset: 3px;
+}
+
+/* Secondary header CTA — the text-link "Sign In" / "Log Out" sibling. */
+.btn-header-secondary {
+  transition:
+    background-color 200ms cubic-bezier(0.22, 0.9, 0.32, 1),
+    transform 200ms cubic-bezier(0.22, 0.9, 0.32, 1);
+  will-change: transform, background-color;
+}
+
+.btn-header-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-header-secondary:active {
+  transform: translateY(1px);
+  transition-duration: 90ms;
+}
+
+.btn-header-secondary:focus-visible {
+  /* Calm CTA → canonical MMHB sage-deep focus ring (token --glp-sage-deep
+     currently resolves to #062a2a; use literal #2F5443 per v5.6 palette spec). */
+  outline: 3px solid #2F5443;
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* Footer nav links — no hover lift (dense rows feel jumpy), but consistent
+   palette-tinted focus ring + subtle underline thickening on focus/hover. */
+.footer-nav-link {
+  position: relative;
+  transition:
+    color 200ms ease,
+    background-color 200ms ease;
+}
+
+.footer-nav-link:focus-visible {
+  /* Canonical MMHB sage-deep — see note on .btn-header-secondary above. */
+  outline: 3px solid #2F5443;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-header-cta,
+  .btn-header-secondary,
+  .footer-nav-link {
+    transition: none !important;
+    will-change: auto !important;
+  }
+  .btn-header-cta:hover,
+  .btn-header-cta:active,
+  .btn-header-secondary:hover,
+  .btn-header-secondary:active {
+    transform: none !important;
+  }
+}
+
 .btn-secondary-premium.btn-sm {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;

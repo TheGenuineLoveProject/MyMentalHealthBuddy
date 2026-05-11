@@ -93,6 +93,45 @@ Untouched (per user): tool cards, form buttons, modal buttons, `/v6` control pan
 
 Gates re-verified: `npx tsc --noEmit` → exit 0; `npm run build` → exit 0.
 
+#### v5.6 follow-up — Header & Footer extension (same wave)
+
+User re-issued the brief calling out "header nav, footer" explicitly. The visible top navbar is `TglpNavbar.jsx` (not `Header.jsx` — `Header.jsx` is unused on the marketing surface). Three header CTAs + nine footer links polished by appending new classes that compose additively with their existing Tailwind utilities.
+
+**`client/src/styles/brand.css`** — three new additive classes appended after the v5.6 Pricing block:
+
+- **`.btn-header-cta`** (warm — gold pill) — applied to TglpNavbar's "Get Started" / "Start" / "Dashboard" gold pills:
+  - Hover: `translateY(-1px)` + soft gold-tinted shadow growth (`0 8px 22px rgba(212,175,55,.32)` + 4px gold glow ring)
+  - Active: `translateY(1px)` + shrunk shadow on a 90ms transition
+  - Focus-visible: 3px gold (`#D4AF37`) outline at 3px offset
+  - 240ms cubic-bezier transitions on transform + box-shadow only — does NOT override the inline `background: var(--glp-gold-gradient)` or `boxShadow: var(--glp-gold-shadow)` set in JSX (composes cleanly)
+- **`.btn-header-secondary`** (calm — text link) — applied to TglpNavbar's "Sign In" link:
+  - Hover: `translateY(-1px)` (no shadow — already has `hover:bg-[var(--glp-sage)]/10`)
+  - Active: `translateY(1px)` 90ms
+  - Focus-visible: 3px sage-deep (`#2F5443`) outline, rounded 0.5rem to match the link's `rounded-lg`
+- **`.footer-nav-link`** — applied to all 9 footer nav links (Home, About, Wellness Tools, Journal, Wisdom, Blog, Newsletter, Disclaimer, Crisis Support):
+  - **No** hover lift (a 9-link dense row of bouncing links would feel jumpy)
+  - Focus-visible: 3px sage-deep outline at 3px offset, rounded 4px — matches the calm CTA family
+  - Color/background transitions kept at 200ms ease so the existing `hover:text-[var(--glp-teal)]` stays smooth
+
+**`client/src/components/TglpNavbar.jsx`** — three className edits:
+- Line 153: prepend `btn-header-cta` to the authed Dashboard pill
+- Line 169: prepend `btn-header-secondary` to the Sign In `<a>`
+- Line 176: prepend `btn-header-cta` to the unauth "Get Started" / "Start" pill
+
+Each edit also drops the now-redundant `transition-all hover:shadow-lg focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2` Tailwind utilities to avoid double-shadow / double-ring stacking with the new class. The original inline `background: var(--glp-gold-gradient)` and `boxShadow: var(--glp-gold-shadow)` style props are preserved as the resting-state look.
+
+**`client/src/components/Footer.jsx`** — added `footer-nav-link` to all 9 nav `<Link>` className strings (additive — kept the existing `hover:text-[var(--glp-teal)] transition` and the `flex items-center gap-1` modifiers untouched).
+
+**Reduced-motion blanket** in the same brand.css block kills every transform on `.btn-header-cta`, `.btn-header-secondary`, and `.footer-nav-link` under `@media (prefers-reduced-motion: reduce)`. Focus rings (which are accessibility-critical) are preserved.
+
+**Architect-driven fixes (post-review)**:
+1. `.btn-header-cta:hover` and `:active` `box-shadow` declarations gained `!important` — without it, the inline `style={{ boxShadow: "var(--glp-gold-shadow)" }}` on the TglpNavbar gold pills would have outranked the stylesheet (inline style beats normal cascade specificity), and the hover/active shadow growth/shrink would have silently no-op'd.
+2. Focus-ring colors switched from `var(--glp-gold, #D4AF37)` / `var(--glp-sage-deep, #2F5443)` to literal `#D4AF37` / `#2F5443`. The CSS-var fallback never fires when the variable is defined — and `brand-tokens.css` defines `--glp-gold: #be8622` and `--glp-sage-deep: #062a2a`, which would have rendered the focus rings in the wrong shade. The literal hex values lock in the canonical v5.6 palette spec.
+
+**Why `Header.jsx` was still skipped**: a follow-up `rg` confirmed it's not the visible navbar — the marketing surface mounts `TglpNavbar.jsx` from `App.tsx`. `Header.jsx` is a dormant alternate component with only nav `<Link>`s and would have been a no-op edit.
+
+Gates re-verified after the extension: `npx tsc --noEmit` → exit 0; `npm run build` → exit 0 in 15.75s.
+
 ---
 
 ## Subscription Elicitation Layer (v5.5) — 7 additive surfaces for sign-up & conversion
