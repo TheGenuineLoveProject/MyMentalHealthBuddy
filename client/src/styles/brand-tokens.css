@@ -322,9 +322,9 @@
   /* ------------------------------------------------------------
     Premium Typography System
   ------------------------------------------------------------ */
-  --glp-font-display: 'Playfair Display', Georgia, serif;
-  --glp-font-heading: 'Inter', system-ui, -apple-system, sans-serif;
-  --glp-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --glp-font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --glp-font-heading: 'Inter', 'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --glp-font-body: 'Inter', 'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --glp-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Type Scale (fluid, clamp-based for responsive) */

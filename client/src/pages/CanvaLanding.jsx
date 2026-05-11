@@ -412,10 +412,11 @@ export default function CanvaLanding() {
                     <button
                       className="header-cta-gold inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full text-white"
                       data-testid="button-getstarted"
+                      aria-label="Start your free MyMentalHealthBuddy account"
                     >
                       <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" aria-hidden="true" />
-                      <span className="hidden sm:inline">Start Free</span>
-                      <span className="sm:hidden">Start</span>
+                      <span className="hidden sm:inline">Start Your Free Account</span>
+                      <span className="sm:hidden">Start Free</span>
                     </button>
                   </Link>
                 </>
