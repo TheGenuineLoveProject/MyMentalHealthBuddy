@@ -129,7 +129,7 @@ export default function CheckIn() {
       </div>
       <SEO
         title="Emotion Check-In with Lumi"
-        description="A gentle 4-step emotional pulse with Lumi. Private, free, no signup."
+        description="Gently name how you feel. Lumi responds with warmth and compassion. No wrong answers. No judgment."
       />
       <div className="relative z-10 mx-auto max-w-2xl px-6 py-12">
         <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">

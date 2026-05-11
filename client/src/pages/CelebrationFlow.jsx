@@ -97,7 +97,7 @@ export default function CelebrationFlow() {
     >
       <SEO
         title="You Did It! — A Moment of Celebration"
-        description="A gentle celebration ritual after completing a wellness tool."
+        description="You showed up today. Acknowledge your emotional wellness journey. Small steps, sacred progress."
       />
 
       {/* Sunshine radiance wash — V10 §3.4 spec. */}

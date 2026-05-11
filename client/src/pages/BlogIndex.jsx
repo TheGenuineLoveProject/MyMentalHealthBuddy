@@ -104,8 +104,8 @@ export default function BlogIndex() {
   return (
     <div className="min-h-screen hero-premium relative overflow-hidden">
       <SEO
-        title="Blog | The Genuine Love Project"
-        description="Explore articles on mental wellness, self-love, and personal growth from The Genuine Love Project community."
+        title="Blog | MyMentalHealthBuddy"
+        description="Wellness resources, emotional health insights, and gentle guidance from MyMentalHealthBuddy."
       />
       <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-32 -left-32 absolute" aria-hidden="true" />

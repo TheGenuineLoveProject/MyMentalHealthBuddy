@@ -14,6 +14,7 @@ import ValueProposition from "../sections/ValueProposition.jsx";
 import NextStepCTA from "../sections/NextStepCTA.jsx";
 import ValueBridge from "../sections/ValueBridge.jsx";
 import EmailCapture from "../sections/EmailCapture.jsx";
+import SEO from "@/components/SEO";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -283,6 +284,10 @@ export default function CanvaLanding() {
 
   return (
     <div className="canva-landing min-h-screen">
+      <SEO
+        title="MyMentalHealthBuddy — Free Emotional Wellness Companion"
+        description="Free emotional wellness companion. Gentle check-ins, breathing exercises, and a warm AI companion. Private. No judgment. Always free."
+      />
       <SoftLaunchBanner />
       <div 
         className={`mobile-overlay ${mobileMenuOpen ? 'active' : ''}`}

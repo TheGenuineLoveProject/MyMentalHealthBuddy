@@ -4,10 +4,15 @@ import EmotionBackground from "@/components/sacred/EmotionBackground";
 import GlowFooter from "@/components/GlowFooter";
 import ValueProposition from "@/sections/ValueProposition.jsx";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
+import SEO from "@/components/SEO";
 
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="About — MyMentalHealthBuddy by The Genuine Love Project"
+        description="MyMentalHealthBuddy by The Genuine Love Project. Free emotional wellness tools. Evidence-informed. Always private."
+      />
       <EmotionBackground emotion="calm" intensity={0.2} />
       
       <main className="flex-1 relative z-10">

@@ -189,7 +189,7 @@ export default function Pricing() {
     <div className="min-h-screen overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 50%, var(--glp-paper) 100%)' }}>
       <SEO 
         title="Pricing - MyMentalHealthBuddy"
-        description="Four plans — Free, Starter ($9.99 one-time), Pro ($12.99/mo), Elite ($29.99/mo). No lock-in, cancel anytime."
+        description="Free emotional wellness companion. Optional Starter, Pro, and Elite plans. Cancel anytime."
       />
       
       <div className="absolute -top-48 -right-48 w-[600px] h-[600px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />

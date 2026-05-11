@@ -137,7 +137,7 @@ export default function BreathingTool() {
       </div>
       <SEO
         title="Breathing Exercise — Breathe With Lumi"
-        description="A 4-2-4 paced breath exercise with Lumi. Free, private, no signup."
+        description="60-second breathing exercise with your companion. Reset your nervous system. Feel calmer. No signup needed."
       />
       <div className="relative z-10 mx-auto max-w-2xl px-6 py-12">
         <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
