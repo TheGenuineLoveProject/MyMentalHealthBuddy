@@ -11,6 +11,8 @@ import LumiV6 from "../components/lumi/LumiV6";
 import EmotionalJourney from "../sections/EmotionalJourney.jsx";
 import ValueProposition from "../sections/ValueProposition.jsx";
 import NextStepCTA from "../sections/NextStepCTA.jsx";
+import ValueBridge from "../sections/ValueBridge.jsx";
+import EmailCapture from "../sections/EmailCapture.jsx";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -576,23 +578,29 @@ export default function CanvaLanding() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
-            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 max-w-5xl mx-auto">
+            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }} data-testid="stat-free-forever">
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>$0</div>
               <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
                 Free Forever. No Catch.
               </p>
             </div>
-            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }}>
+            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }} data-testid="stat-tools">
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
               <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
                 Evidence-Based Tools
               </p>
             </div>
-            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }}>
+            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }} data-testid="stat-availability">
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
               <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
                 Your AI Buddy
+              </p>
+            </div>
+            <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-sage-20)' }} data-testid="stat-conversations">
+              <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, #E8913A, var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>10,000+</div>
+              <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
+                Buddy Conversations
               </p>
             </div>
           </div>
@@ -906,6 +914,10 @@ export default function CanvaLanding() {
 
       <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 
+      <ValueBridge />
+
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
+
       <ValueProposition variant="full" />
 
       <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
@@ -952,6 +964,8 @@ export default function CanvaLanding() {
           </div>
         </div>
       </section>
+
+      <EmailCapture />
 
       <div className="gold-accent-line" aria-hidden="true"></div>
 

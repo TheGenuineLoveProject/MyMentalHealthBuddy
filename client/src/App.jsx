@@ -19,6 +19,7 @@ import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
 import ConsentBanner from "./components/ConsentBanner.jsx";
 import FeedbackWidget from "./components/FeedbackWidget.jsx";
+import WelcomeBackBanner from "./components/WelcomeBackBanner.jsx";
 import { FeatureFlagProvider } from "./contexts/FeatureFlagContext.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
 import AnalyticsDashboard from "./pages/admin/AnalyticsDashboard.jsx";
@@ -366,6 +367,7 @@ export default function App() {
             <PageViewTracker />
             <SkipToContent />
             <main id="main-content">
+            <WelcomeBackBanner />
             <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Landing & Public Pages */}

@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { Check, Star, Crown, Zap, Gem, ArrowLeft, Loader2 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import PricingFAQ from "../sections/PricingFAQ.jsx";
 import { TrustSignals, BeforeAfter } from "../components/benefits";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -251,8 +252,12 @@ export default function Pricing() {
                   data-testid={`card-pricing-${tier.name.toLowerCase()}`}
                 >
                   {tier.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-white text-xs font-semibold rounded-full shadow-md" style={{ background: 'linear-gradient(90deg, var(--glp-gold), var(--glp-gold-dark))' }}>
-                      Full Access
+                    <div
+                      className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg"
+                      style={{ background: '#E8913A', boxShadow: '0 6px 18px rgba(232, 145, 58, 0.42)' }}
+                      data-testid="badge-most-popular"
+                    >
+                      Most Popular
                     </div>
                   )}
                   
@@ -313,12 +318,33 @@ export default function Pricing() {
                       Get Started Free
                     </a>
                   )}
+
+                  {tier.planId === "pro" && (
+                    <p
+                      className="mt-3 text-xs text-center leading-relaxed"
+                      style={{ color: '#6B7B6E' }}
+                      data-testid={`text-money-back-${tier.name.toLowerCase()}`}
+                    >
+                      30-day money-back guarantee. No questions asked.
+                    </p>
+                  )}
+                  {tier.planId === "elite" && (
+                    <p
+                      className="mt-3 text-xs text-center leading-relaxed"
+                      style={{ color: '#6B7B6E' }}
+                      data-testid={`text-money-back-${tier.name.toLowerCase()}`}
+                    >
+                      Cancel anytime. Full refund within 30 days.
+                    </p>
+                  )}
                 </div>
               );
             })}
           </div>
 
           <TrustSignals variant="banner" className="mt-12" />
+
+          <PricingFAQ className="mt-8" />
 
           <div className="mt-16 text-center">
             <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>

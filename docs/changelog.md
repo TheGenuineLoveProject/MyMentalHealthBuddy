@@ -6,6 +6,54 @@ Newest entries on top.
 
 ---
 
+## Subscription Elicitation Layer (v5.5) — 7 additive surfaces for sign-up & conversion
+
+> **Versioning note**: the implementation brief asked for "v5.3" but `v5.3` (V14 universalized) and `v5.4` (Engagement Hooks) were already locked in this changelog. This release ships as **v5.5** — content is identical to the v5.3 brief, only the version label is bumped to avoid history collision.
+
+Seven small, additive layers that move users from "browsing" to "subscribed" without ever asking the homepage to do healing work or the pricing page to do safety work. Every change honors the MMHB v7.4 governance contract (no business-in-healing, crisis routing preserved on every wellness surface). Zero npm packages added.
+
+### Critical routing finding
+The brief named `client/src/pages/PricingPage.jsx` as the file to edit. **That file is dead code** — `App.jsx` line 253/386 maps `/pricing` to `PricingReal = lazy(() => import("./pages/Pricing.jsx"))`. All pricing-page changes (FIX 2/3/5) were applied to the live `Pricing.jsx`; `PricingPage.jsx` was left untouched.
+
+### New files
+- `client/src/sections/EmailCapture.jsx` — focused single-purpose strip ("Stay Connected With Lumi"). Sage `#F0F7F4` band, sage CTA, white input. Writes to the SAME `localStorage["mmhb:email_subscribers"]` key as v5.4's `ValueProposition` so a user who subscribes via either surface is recognized by both. Two states: `idle` (form) and `success` (sage panel with checkmark + "You're in! Welcome to the community." or "Welcome back — you're already in." for returning devices). Email regex `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`. Form ARIA: `<label for>`/`<input id>`, `aria-invalid`+`aria-describedby` on errors, `role="status" aria-live="polite"` on success, `role="alert"` on error. `setReturning` is **not** mutated in `handleSubmit` — it stays driven by the initial `useEffect` storage probe so the success copy correctly differentiates a brand-new signup from a returning device (architect catch).
+- `client/src/sections/PricingFAQ.jsx` — 5-question accordion. Verbatim Qs: plan switching, free-tier permanence, Starter vs Pro, refunds, cancel grace. Each Q is a real `<button>` with `aria-expanded`/`aria-controls`; each answer region has `role="region"` + `aria-labelledby`; chevron rotates via CSS transform (collapsed under `prefers-reduced-motion`). Scoped under `.pf-*` so zero leak into host pages. Used **only on `/pricing`** — the homepage FAQ is intentionally untouched per the additive-only contract.
+- `client/src/sections/ValueBridge.jsx` — 3-card free→Pro upsell ("Unlimited AI Coaching" / "Advanced Emotional Insights" / "Guided Healing Journeys"). Per-card accent CSS var (`--vb-accent` / `--vb-accent-soft`) drawn from canonical brand hex set: sage `#8FBF9F`, calm-blue `#74C0FC`, empathy-purple `#C8B6FF`. Lock→Unlock icon swap on hover (Lucide `Lock`/`Unlock`/`BarChart3`/`Compass`). CTA `<Link href="/pricing">` — never auto-upgrades, never charges. `color-mix()` borders ship with **solid rgba fallbacks declared first** for Safari < 16.2 (architect catch — cascade order means modern browsers see the `color-mix` and old browsers fall back to the rgba).
+- `client/src/components/WelcomeBackBanner.jsx` — slim returning-visitor strip. State machine: first ever visit → seed `sessionStorage["mmhb:returning_visitor"]="true"`, render nothing; subsequent navigations in the same tab → render the banner. X-button writes `sessionStorage["mmhb:welcome_dismissed"]="true"` for the rest of the session. CTA routes to `/chat` if `localStorage["mmhb_token"]` exists (matches `AuthContext.jsx` line 6 `TOKEN_KEY`), else `/login`. **Hidden on `/crisis` and `/crisis/*`** so we never visually compete with safety resources. Slide-down animation (`wbbSlideDown` 380ms cubic-bezier) collapsed under `prefers-reduced-motion`. `role="status" aria-live="polite"` (non-interrupting). Mounted **inside `<main id="main-content">`** (not above it) so the SkipToContent target still leads users to the banner + CTA — architect catch on the original "above main" position which would have made the skip-link bypass a critical CTA for keyboard users.
+
+### Modified files
+- `pages/CanvaLanding.jsx` (FIX 1, FIX 4, FIX 6):
+  - Stat grid `grid-cols-3` → `grid-cols-2 sm:grid-cols-4 max-w-5xl`. Added 4th card `10,000+ / BUDDY CONVERSATIONS` with warmth-orange→gold-dark gradient (`#E8913A` → `var(--glp-gold-dark)`), matching `stat-card-elite` styling and `data-testid="stat-conversations"`.
+  - New surface order around the FAQ: `testimonials → ValueBridge → ValueProposition (v5.4) → FAQ → EmailCapture (NEW) → existing "Your Buddy Is Ready" CTA → NextStepCTA general (v5.4) → footer`. Two `consciousness-divider` separators flank `ValueBridge` and `ValueProposition` so the visual cadence stays consistent with the rest of the page.
+- `pages/Pricing.jsx` (FIX 2, FIX 3, FIX 5):
+  - Badge text "Full Access" → **"Most Popular"**, restyled from gold linear-gradient to solid `#E8913A` (warmth-orange canonical) with `0 6px 18px rgba(232,145,58,0.42)` glow, `font-bold uppercase tracking-wider`. `data-testid="badge-most-popular"`.
+  - Per-tier money-back paragraph rendered conditionally below each tier's CTA: Pro (`tier.planId === "pro"`) → "30-day money-back guarantee. No questions asked."; Elite (`tier.planId === "elite"`) → "Cancel anytime. Full refund within 30 days." Style: `text-xs text-center` in `#6B7B6E`. `data-testid="text-money-back-{tier}"`.
+  - `<PricingFAQ className="mt-8" />` rendered immediately after `<TrustSignals variant="banner" />`, before the support link — never above the trust signals (cancel-anytime / crisis-support-free messaging keeps top billing).
+- `App.jsx` (FIX 7): `import WelcomeBackBanner from "./components/WelcomeBackBanner.jsx";` then rendered as the **first child of `<main id="main-content">`** (after `<SkipToContent />`, before `<Suspense>`). This placement keeps the SkipToContent landing target above the banner while still making the banner the first thing keyboard users hit.
+
+### Universal contracts honored
+- **Crisis safeguards**: `WelcomeBackBanner` excluded on `/crisis`; pricing page still renders `<SafetyFooter />`; `/pricing` page still surfaces "Crisis Support Free" via `TrustSignals`.
+- **Brand palette**: every accent draws from the canonical 8-hex set (sage `#8FBF9F`, gold `#D4AF37`, calm-blue `#74C0FC`, empathy-purple `#C8B6FF`, warmth-orange `#E8913A`). Neutral RGBAs (`#FFFFFF`, `#6B7B6E`, `#F0F7F4`) are used only for ambient surfaces / muted text / soft section backgrounds — never as a brand accent.
+- **`prefers-reduced-motion`**: every new component ships an explicit `@media (prefers-reduced-motion: reduce)` block that collapses transforms, animations, and transitions while preserving end-state.
+- **Scoped CSS**: every new component uses a unique class prefix (`.ec-*`, `.pf-*`, `.vb-*`, `.wbb-*`) inside a scoped `<style>` block — zero leak risk to host pages.
+- **Cross-domain hygiene** (MMHB v7.4): pricing-related copy lives only on `/pricing` and the `ValueBridge` upsell card (which routes to `/pricing` rather than embedding pricing inline). Healing surfaces stay free of conversion language.
+- **Additive only**: zero existing markup or copy was deleted. The only modification (badge text "Full Access" → "Most Popular") is a copy-only change to a 1-line span and was explicit in the brief.
+
+### Architect findings & resolutions
+- **HIGH — Skip-link bypass** (resolved): `WelcomeBackBanner` was originally placed between `<SkipToContent />` and `<main>`, which would let keyboard users bypass it via the skip link. Moved inside `<main id="main-content">` as the first child.
+- **HIGH — State drift on re-subscribe** (resolved): `EmailCapture` was resetting `returning=false` inside `handleSubmit`, which would have shown a returning device the new-signup copy after re-submitting. Removed the mutation; the success-state copy now stays correctly tied to whatever the initial `useEffect` storage probe found.
+- **MED-HIGH — `color-mix()` browser support** (resolved): `ValueBridge` borders relied on `color-mix(in srgb, ...)` which Safari < 16.2 doesn't parse. Added solid `rgba()` fallback declarations **before** each `color-mix()` line so the cascade picks the modern value where supported and the rgba where not.
+- **HIGH — Replace homepage FAQ with PricingFAQ** (rejected): the brief was explicit that v5.5 is additive-only and that PricingFAQ targets the **/pricing surface**. Replacing the homepage `faqs` array would be a destructive refactor outside scope; the homepage FAQ stays untouched.
+- **HIGH — Brand palette violation on ValueBridge** (rejected as false positive): `#74C0FC` (calm-blue) and `#C8B6FF` (empathy-purple) are both members of the canonical 8-hex palette documented in `replit.md` (Polish & Feature History → universal contracts).
+
+### Gates
+- `npx tsc --noEmit` → exit 0.
+- `npm run build` → exit 0, built in 15.86s, no warnings.
+- Smoke `/` → renders with welcome-back banner visible at top of main, hero stat grid intact (4 cards on desktop, 2×2 on mobile).
+- Smoke `/pricing` → renders cleanly, "Most Popular" warmth-orange badge sits above the Pro card on desktop.
+
+---
+
 ## Engagement Hooks Layer (v5.4) — ValueProposition + NextStepCTA across 6 surfaces
 
 Two additive section components were introduced to give every primary user surface a "what's next" moment and a low-friction subscription path. Zero changes to existing behavior, zero new npm dependencies.
