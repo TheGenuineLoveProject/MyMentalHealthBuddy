@@ -32,7 +32,7 @@ import SacredSection from './sacred/SacredSection.jsx';
 // Canonical Lumi brand PNG (matches LumiV6.tsx + BuddyAvatar.tsx). Restored
 // after the "Remove unused icon imports" commit accidentally deleted the
 // declaration while leaving the JSX reference at line ~1008 intact.
-const lumiIconUrl = "/brand/lumi-v4-ultimate.png";
+const lumiIconUrl = "/brand/v17/avatar-floating-nobg.png";
 import SEO, { SITE_URL } from './SEO.tsx';
 import ContentLevelToggle, { useContentLevel, ContentLevelContent } from './ContentLevelToggle.jsx';
 import ReadingLevelToggle from './ReadingLevelToggle.jsx';

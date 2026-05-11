@@ -16,7 +16,7 @@
 // full color-mode/style/pose registry. This component preserves its
 // own static-image contract (size/animation/aria/onClick passthrough);
 // the swap is import-source only.
-const lumiFullBodyPng = "/brand/lumi-v4-ultimate.png";
+const lumiFullBodyPng = "/brand/v17/avatar-floating-nobg.png";
 
 export default function LumiMascotImage({
   size = 280,
