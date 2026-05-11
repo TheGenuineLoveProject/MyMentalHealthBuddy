@@ -160,3 +160,41 @@ export const NLP_MI_PAGES = {
 export function getPageContent(path) {
   return NLP_MI_PAGES[path] || NLP_MI_PAGES['/'];
 }
+
+/**
+ * Returns one affirmation drawn from across all 5 page objects.
+ * Deterministic if a `seed` (0..1) is supplied, random otherwise — useful
+ * for SSR-safe rendering or for "affirmation of the day" surfaces driven
+ * by a date-derived seed.
+ */
+export function getRandomAffirmation(seed) {
+  const pool = Object.values(NLP_MI_PAGES)
+    .map((p) => p.affirmation)
+    .filter(Boolean);
+  if (pool.length === 0) return '';
+  const r = typeof seed === 'number' ? Math.abs(seed) % 1 : Math.random();
+  return pool[Math.floor(r * pool.length)];
+}
+
+/**
+ * Maps a coarse emotion label to a compassionate, MI-style reflection.
+ * Falls back to the home-page reflection when the emotion is unknown so
+ * the surface never renders an empty string.
+ */
+const EMOTION_REFLECTIONS = {
+  calm: 'Settling in like this — that takes practice. You are practicing.',
+  joy: 'Letting joy land is its own kind of courage. You are letting it land.',
+  love: 'Noticing love — for yourself or someone else — is a gentle, brave thing.',
+  sad: 'Sadness is information, not a verdict. Whatever you feel is welcome here.',
+  anxious: 'Anxiety often means you care deeply. Let your shoulders drop on the next exhale.',
+  tired: "Tired is a message, not a flaw. Rest is part of the work.",
+  overwhelmed: "When everything feels like a lot, even pausing here counts. You paused.",
+  numb: "Numbness is the heart's way of catching its breath. There's no rush.",
+  hopeful: 'Hope is a quiet kind of strength. You are carrying it.',
+};
+
+export function getReflection(emotion) {
+  if (!emotion) return NLP_MI_PAGES['/'].reflection;
+  const key = String(emotion).toLowerCase().trim();
+  return EMOTION_REFLECTIONS[key] || NLP_MI_PAGES['/'].reflection;
+}
