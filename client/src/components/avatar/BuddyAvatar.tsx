@@ -25,11 +25,13 @@
  *     .buddy__eye class hooks preserved (CSS animations target them)
  */
 
+import { useEffect, useRef } from "react";
 import "./BuddyAvatar.css";
 import {
   type BuddyState,
   getBuddyVisualOutput,
 } from "@/lib/avatarState";
+import { useLumiAudio } from "@/hooks/useLumiAudio.js";
 
 /**
  * Lumi v4 color variants — public-served PNGs in /brand/.
@@ -293,8 +295,67 @@ export default function BuddyAvatar({
   // the layer at tiny sizes.
   const showV6Overlay = overlay && sizePx >= 48;
 
+  // ---------- V14: universal Voice + Expression Sync ----------
+  // Wire the same three audio cues that LumiV6 has (entrance pop, heartbeat,
+  // chime) into BuddyAvatar so EVERY avatar surface in the app — header,
+  // footer, chat bubbles, tool cards, celebration overlays — shares the
+  // same gentle voice. All gating is done by the hook + module coordinator:
+  //   - Default OFF (lumi:audio:enabled localStorage)
+  //   - prefers-reduced-motion → silent no-op at hook + kernel
+  //   - animated=false (crisis surfaces) → no audio path executes
+  //   - tryPop() is sessionStorage-gated app-wide (one pop per session
+  //     across header + hero + footer + chat + tools)
+  //   - claimHeart() is single-owner (only one heartbeat plays even when
+  //     N avatars mount; first claim wins, releases on unmount)
+  //   - tryChime() shares a 2s module-scoped debounce window
+  // Tiny avatars (<48px — chat bubble badges, footer logos) skip the
+  // heartbeat claim so they don't grab ownership from the visible hero.
+  const rootRef = useRef<HTMLDivElement>(null);
+  const lumiAudio = useLumiAudio();
+
+  // 1) Entrance pop on first viewport intersection (any avatar can fire it;
+  //    sessionStorage gate ensures it happens at most once per session).
+  useEffect(() => {
+    if (!animated || !lumiAudio.effective) return;
+    const root = rootRef.current;
+    if (!root) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          lumiAudio.tryPop();
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    obs.observe(root);
+    return () => obs.disconnect();
+  }, [animated, lumiAudio.effective, lumiAudio]);
+
+  // 2) Heartbeat — only avatars rendered at >=96px try to claim ownership.
+  //    This keeps tiny header / chat-bubble / footer avatars silent while
+  //    the visible hero / tool / celebration Lumi drives the cadence.
+  useEffect(() => {
+    if (!animated || !lumiAudio.effective) return;
+    if (sizePx < 96) return;
+    const token = lumiAudio.claimHeart(v.heartPulse);
+    if (!token) return; // another avatar already owns the beat
+    return () => lumiAudio.releaseHeart(token);
+  }, [animated, lumiAudio.effective, sizePx, v.heartPulse, lumiAudio]);
+
+  // 3) Whisper chime on pointer-down. Module-scoped 2s debounce in the lib
+  //    means rapid taps across multiple avatars still yield at most one
+  //    chime per 2 seconds. Hover is intentionally NOT wired (too noisy
+  //    on landing pages where the cursor naturally crosses Lumi).
+  const handleAudioPointerDown = () => {
+    if (!animated || !lumiAudio.effective) return;
+    lumiAudio.tryChime();
+  };
+
   return (
     <div
+      ref={rootRef}
+      onPointerDown={handleAudioPointerDown}
       className={`buddy buddy--${v.state} buddy--motion-${effectiveMotion ?? v.motion} buddy--expr-${v.expression} ${showV6Overlay ? "buddy--v6" : ""} ${className}`.trim()}
       style={styleVars}
       role="img"

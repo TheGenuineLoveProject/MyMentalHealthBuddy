@@ -31,6 +31,7 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 
 ## Polish & Feature History
 Detailed implementation notes for completed feature evolutions live in **`docs/changelog.md`**. That file is the source of truth for the deep technical contracts (z-index, reduced-motion, keyframe timing, cascade order, etc.) of:
+- v5.3 — V14 universalized via shared audio coordinator (BuddyAvatar/LumiMascot now ship the same pop/heartbeat/chime as LumiV6; module-scoped one-shot pop, single-owner heartbeat, app-wide 2s chime debounce; PageTemplate nav logo migrated off raw `<img>` onto BuddyAvatar)
 - v5.2 — V14 wired into LumiV6 (entrance pop / heartbeat sync / interaction chime — all gated by the v5.1 audio toggle, default OFF)
 - v5.1 — Lumi Voice + Expression Sync (V14 engine — gentle Web Audio cues, default OFF, gated behind localStorage preference `lumi:audio:enabled`, surfaced on `/v6`)
 - v5.0 — Emotional Journey Section (V13 port — 6-phase visual timeline on landing page)

@@ -288,12 +288,12 @@ export default function LumiV6({
   const bodySrc = POSE_PNG[pose] || COLOR_PNG[colorMode] || FALLBACK_PNG;
 
   // ---------- V14 Voice + Expression Sync ----------
-  // Hook is always called (rules-of-hooks); when audio is disabled OR
-  // reduced-motion is on OR Web Audio is unavailable, every play() is a
-  // silent no-op so we can wire the call sites unconditionally.
+  // Hook is always called (rules-of-hooks). All audio is routed through the
+  // module-scoped coordinator (tryPop / tryChime / claimHeart) so LumiV6 and
+  // BuddyAvatar cooperate when both are mounted on the same page (e.g. /v6
+  // demo + header/footer Lumi). One pop per session, one heartbeat owner at
+  // a time, one shared 2s chime debounce window — all enforced in the lib.
   const lumiAudio = useLumiAudio();
-  // Per-instance debounce for the interaction chime (≥ 2s between plays).
-  const lastChimeAtRef = useRef(0);
 
   // ---------- V8 click-zone-driven momentary emotion override ----------
   const [triggeredEmotion, setTriggeredEmotion] = useState<LumiV6Emotion | null>(null);
@@ -527,18 +527,10 @@ export default function LumiV6({
           try { sessionStorage.setItem("lumi:v9:entered", "1"); } catch { /* noop */ }
           setV9Entering(true);
           timer = setTimeout(() => setV9Entering(false), 800);
-          // V14: gentle entrance pop, once per browser session even across
-          // multiple Lumi instances. Independent gate from the V9 visual
-          // entrance so the audio toggle can be flipped mid-session and
-          // still fire exactly once after the flip.
-          let popped = false;
-          try { popped = sessionStorage.getItem("lumi:audio:popped") === "1"; } catch { /* noop */ }
-          if (!popped) {
-            const fired = lumiAudio.pop();
-            if (fired) {
-              try { sessionStorage.setItem("lumi:audio:popped", "1"); } catch { /* noop */ }
-            }
-          }
+          // V14: gentle entrance pop via the module coordinator (sessionStorage
+          // gate is enforced inside tryPop, shared with BuddyAvatar so the
+          // first Lumi-of-any-kind to enter the viewport gets the pop).
+          lumiAudio.tryPop();
           obs.disconnect();
         }
       },
@@ -552,23 +544,16 @@ export default function LumiV6({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [v9, animated]);
 
-  // ---------- V14: heartbeat sync ----------
-  // Soft heartbeat tone scheduled on the same period as the visual heart
-  // pulse. Gated on `animated` so crisis surfaces stay silent. The hook's
-  // `effective` flag is the master kill-switch (audio off OR reduced-motion
-  // OR Web Audio unavailable) — when false the interval still runs but every
-  // play() is a no-op, which keeps the dependency array minimal.
+  // ---------- V14: heartbeat sync (single-owner via coordinator) ----------
+  // Claims the global heartbeat slot. If another Lumi (BuddyAvatar / sibling
+  // LumiV6) already owns it, claimHeart returns null and we stay silent for
+  // this instance — the user still hears one synchronized heartbeat. The 340 ms
+  // floor is enforced inside the lib (≈ 2.94 Hz < 3 Hz seizure-safety bar).
   useEffect(() => {
-    if (!animated) return;
-    if (!lumiAudio.effective) return;
-    // Period from the existing heart-pulse derivation. The fastest emotion
-    // ("surprise") is 1.5 Hz → 666 ms period, well below the 3 Hz safety
-    // threshold required by V14.
-    const periodMs = Math.max(340, heartPeriodMs);
-    const id = window.setInterval(() => {
-      lumiAudio.heartbeat();
-    }, periodMs);
-    return () => window.clearInterval(id);
+    if (!animated || !lumiAudio.effective) return;
+    const token = lumiAudio.claimHeart(heartPeriodMs);
+    if (!token) return;
+    return () => lumiAudio.releaseHeart(token);
   }, [animated, lumiAudio.effective, heartPeriodMs, lumiAudio]);
 
   // ---------- V9: attention capture ("Lumi notices you") ----------
@@ -756,15 +741,10 @@ export default function LumiV6({
     lastLumiInteractionRef.current = Date.now();
     // Crisis-safe: escalation only tracks when animation is allowed.
     if (v9 && animated) recordEscalation();
-    // V14: whisper chime on click-zone interaction, debounced to ≥ 2s
-    // between plays per the prime directive. Gated on `animated` so crisis
-    // surfaces stay silent; the hook's effective flag is the master mute.
-    if (animated) {
-      const now = Date.now();
-      if (now - lastChimeAtRef.current >= 2000) {
-        if (lumiAudio.chime()) lastChimeAtRef.current = now;
-      }
-    }
+    // V14: whisper chime via the module coordinator. The 2 s debounce is
+    // shared app-wide so mashing click zones across multiple Lumi instances
+    // still yields ≤ 1 chime / 2 s. Gated on `animated` for crisis safety.
+    if (animated) lumiAudio.tryChime();
     overrideTimerRef.current = setTimeout(() => {
       overrideTimerRef.current = null;
       if (mySeq !== overrideSeqRef.current) return; // superseded — bail

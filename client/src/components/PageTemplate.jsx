@@ -1010,7 +1010,7 @@ export default function PageTemplate({ config, children, routeKey }) {
         >
           <Link href="/" className={styles.navLogo} data-testid="link-nav-logo">
             <div className={styles.navLogoIcon} style={{ overflow: 'visible', background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10, rgba(47,84,67,0.1)) 0%, transparent 72%)' }}>
-              <img src={lumiIconUrl} alt="Lumi" width={32} height={32} style={{ width: 32, height: 32, objectFit: 'contain' }} draggable={false} data-testid="img-nav-logo-lumi" />
+              <BuddyAvatar size={32} animated={true} data-testid="img-nav-logo-lumi" />
             </div>
             <span className={styles.navLogoText}>
               Genuine Love

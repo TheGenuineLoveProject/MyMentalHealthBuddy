@@ -15,6 +15,10 @@ import {
   isLumiAudioAvailable,
   unlockLumiAudio,
   closeLumiAudio,
+  tryPlayPop,
+  tryPlayChime,
+  claimHeartbeat,
+  releaseHeartbeat,
 } from "../lib/lumiAudio.js";
 
 const STORAGE_KEY = "lumi:audio:enabled";
@@ -119,6 +123,30 @@ export function useLumiAudio() {
     return playLumiChime();
   }, [effective]);
 
+  // ---- V14 coordinator wrappers (module-scoped, app-wide cooperation) ----
+  // Every Lumi avatar in the app shares one pop, one chime debounce window,
+  // and one active heartbeat owner. These wrappers pre-gate on `effective`
+  // so the lib never has to know about React state.
+
+  const tryPop = useCallback(() => {
+    if (!effective) return false;
+    return tryPlayPop();
+  }, [effective]);
+
+  const tryChime = useCallback((minGapMs = 2000) => {
+    if (!effective) return false;
+    return tryPlayChime(minGapMs);
+  }, [effective]);
+
+  const claimHeart = useCallback((periodMs) => {
+    if (!effective) return null;
+    return claimHeartbeat(periodMs);
+  }, [effective]);
+
+  const releaseHeart = useCallback((token) => {
+    releaseHeartbeat(token);
+  }, []);
+
   return {
     enabled,
     effective,
@@ -128,5 +156,9 @@ export function useLumiAudio() {
     pop,
     heartbeat,
     chime,
+    tryPop,
+    tryChime,
+    claimHeart,
+    releaseHeart,
   };
 }

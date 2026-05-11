@@ -176,4 +176,102 @@ export function closeLumiAudio() {
   }
   ctx = null;
   masterGain = null;
+  // Drop the heartbeat ownership so the next mount can re-claim cleanly.
+  if (_heartTimer) {
+    try { clearInterval(_heartTimer); } catch { /* noop */ }
+  }
+  _heartTimer = null;
+  _heartOwner = null;
+  _heartPeriod = 0;
+}
+
+// =============================================================================
+// V14 Coordinator — module-scoped state so every Lumi avatar in the app
+// cooperates. Without this, N BuddyAvatars on a page would each fire N
+// overlapping heartbeats and the chime would un-debounce across instances.
+// =============================================================================
+
+let _chimeAt = 0;
+let _heartOwner = null;
+let _heartTimer = null;
+let _heartPeriod = 0;
+let _poppedThisSession = false;
+
+/**
+ * One-shot entrance pop, gated by sessionStorage so multiple Lumi instances
+ * (header / hero / chat / footer) all share a single "first pop per session".
+ * Returns true if a sound actually fired, false on no-op (already popped,
+ * audio off, reduced-motion, Web Audio unavailable).
+ */
+export function tryPlayPop() {
+  if (_poppedThisSession) return false;
+  try {
+    if (typeof sessionStorage !== "undefined" &&
+        sessionStorage.getItem("lumi:audio:popped") === "1") {
+      _poppedThisSession = true;
+      return false;
+    }
+  } catch { /* noop */ }
+  const fired = playLumiPop();
+  if (fired) {
+    _poppedThisSession = true;
+    try { sessionStorage.setItem("lumi:audio:popped", "1"); } catch { /* noop */ }
+  }
+  return fired;
+}
+
+/**
+ * Whisper chime with a module-scoped debounce window. Default 2000 ms per
+ * the V14 prime directive. Multiple avatars sharing a debounce window means
+ * mashing different avatars (header logo + chat bubble + tool card) still
+ * yields at most one chime every 2 s.
+ */
+export function tryPlayChime(minGapMs = 2000) {
+  const now = Date.now();
+  if (now - _chimeAt < minGapMs) return false;
+  const fired = playLumiChime();
+  if (fired) _chimeAt = now;
+  return fired;
+}
+
+/**
+ * Single-owner heartbeat coordinator. The first avatar to call `claimHeartbeat`
+ * starts the interval and receives a token; subsequent callers get null and
+ * stay silent. The owner must call `releaseHeartbeat(token)` on unmount.
+ *
+ * `periodMs` is clamped at 340 ms (≈2.94 Hz) per the V14 seizure-safety floor
+ * — even if a future caller passes a faster period, the audio cadence is
+ * pinned under 3 Hz. Visual heart pulse is independent and unclamped.
+ */
+export function claimHeartbeat(periodMs) {
+  if (_heartOwner) return null;
+  const safePeriod = Math.max(340, Math.round(periodMs || 800));
+  const token = { id: Symbol("lumi-heartbeat") };
+  _heartOwner = token;
+  _heartPeriod = safePeriod;
+  _heartTimer = setInterval(() => {
+    playLumiHeartbeat();
+  }, safePeriod);
+  return token;
+}
+
+/**
+ * Release the heartbeat ownership. Safe to call with a stale token (no-op).
+ */
+export function releaseHeartbeat(token) {
+  if (!token || token !== _heartOwner) return;
+  if (_heartTimer) {
+    try { clearInterval(_heartTimer); } catch { /* noop */ }
+  }
+  _heartTimer = null;
+  _heartOwner = null;
+  _heartPeriod = 0;
+}
+
+/**
+ * Read the current heartbeat period (for tests / introspection). 0 means
+ * no active claim.
+ */
+export function getHeartbeatPeriod() {
+  return _heartPeriod;
 }

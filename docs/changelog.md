@@ -6,6 +6,47 @@ Newest entries on top.
 
 ---
 
+## V14 Universalized Across All Avatars (v5.3) — Voice + Expression Sync, propagation phase
+
+The v5.2 wiring landed V14 audio in `LumiV6` only — but `LumiV6` is rendered on a small set of surfaces (`/v6` demo, landing hero, four auth pages). The vast majority of avatar instances in the app — header, footer, every chat bubble (`AIChatPanel`), every tool card, every check-in/celebration/breathing surface, the page-template nav logo — render `BuddyAvatar` (or `LumiMascot`, which wraps `BuddyAvatar`). Until v5.3, none of those instances produced any V14 audio.
+
+This release universalizes the V14 voice through a **shared audio coordinator** in the lib so every avatar in the app cooperates and the user perceives one Lumi voice no matter how many avatar instances are mounted.
+
+**Modified files**:
+- `client/src/lib/lumiAudio.js` — added module-scoped coordinator: `tryPlayPop()` (sessionStorage one-shot, idempotent across avatar instances), `tryPlayChime(minGapMs=2000)` (single shared debounce window), `claimHeartbeat(periodMs)` / `releaseHeartbeat(token)` (single-owner interval coordinator with 340 ms safety floor enforced inside the lib). `closeLumiAudio()` now also drops any active heartbeat ownership so a re-enable can re-claim cleanly.
+- `client/src/hooks/useLumiAudio.js` — re-exports the coordinator as `tryPop` / `tryChime` / `claimHeart` / `releaseHeart`, each pre-gated on `effective` so call sites never have to gate themselves.
+- `client/src/components/avatar/BuddyAvatar.tsx` — wired the same three V14 integration points (entrance pop via `IntersectionObserver` → `tryPop`, heartbeat via `claimHeart`/`releaseHeart` keyed on `v.heartPulse`, chime via `onPointerDown` → `tryChime`). All three gated on the existing `animated` prop so crisis surfaces (`<BuddyAvatar animated={false} />` — used by `ErrorBoundary` and `/crisis`) stay completely silent. Heartbeat ownership is restricted to avatars rendered at ≥ 96 px so a tiny 32 px header logo doesn't grab the slot from the visible hero / tool / chat avatar.
+- `client/src/components/lumi/LumiV6.tsx` — refactored the v5.2 per-instance debounce ref + per-instance `setInterval` to use the shared coordinator (`tryPop` / `claimHeart` / `tryChime`). When both `LumiV6` and a `BuddyAvatar` mount on the same page (e.g. /v6 demo + header logo), one heartbeat plays — not two overlapping — and the chime debounce is shared.
+- `client/src/components/PageTemplate.jsx` — replaced the raw `<img src="/brand/lumi-v4-ultimate.png">` nav-logo straggler with `<BuddyAvatar size={32} />` so it inherits V14 audio + the canonical visual treatment with no one-off code.
+
+**Coordinator contract** (the lib is the single source of truth — call sites stay thin):
+
+| Cue | Coordinator | App-wide guarantee |
+|---|---|---|
+| Pop | `tryPlayPop()` | Exactly one entrance pop per browser session, regardless of how many avatars (header / hero / chat / footer) mount across page navigations. SessionStorage gate `lumi:audio:popped`. |
+| Heartbeat | `claimHeartbeat(periodMs)` / `releaseHeartbeat(token)` | At most one heartbeat interval running at a time. First avatar to claim wins; subsequent claims return `null` and stay silent. Period clamped at 340 ms (≈ 2.94 Hz < 3 Hz seizure-safety floor) inside the lib. |
+| Chime | `tryPlayChime(minGapMs=2000)` | At most one chime every 2 s across the whole app, even when the user mashes click on multiple avatars or interacts with `/v6` click-zones plus a chat bubble at the same time. |
+
+**Crisis-safety contract** (preserved everywhere — no new escape hatches):
+- All three integrations in `BuddyAvatar` are gated on the existing `animated` prop. `<BuddyAvatar animated={false} />` (used by `ErrorBoundary` + the `/crisis` route via `BuddyAvatar` directly) bypasses the audio paths *before* hitting the coordinator. The `useLumiAudio` hook is still called unconditionally per rules-of-hooks, but the effects return early.
+- Reduced-motion is enforced at hook + kernel layer; either alone is sufficient. The heartbeat `useEffect` returns before calling `claimHeart` when `effective` is false, so no interval is created in the first place.
+- Web Audio unavailable → `effective` is false → identical no-op path.
+
+**Why pointer-down (not hover)**: hover firing was specced but unsafe — landing pages have hero Lumi at cursor-natural positions, so `mouseenter` would fire constantly. Pointer-down captures real intent and is what the existing `LumiV6` click-zones use, so the behavior is consistent across `LumiV6` and `BuddyAvatar`. Hover wiring can be layered on later behind a gesture-intent heuristic if you want.
+
+**Why heartbeat ≥ 96 px gate on `BuddyAvatar`**: a single page often renders many avatars (header logo 32 px, footer logo 40 px, chat bubble 32 px, hero 160 px, tool card 64 px). Whichever mounts first wins the claim — and we want that to be the visible hero, not a corner logo. The 96 px gate naturally restricts ownership to "feature" avatars (`md` token = 64 px does NOT claim, `lg` = 128 px and `xl` = 208 px DO claim). When a user lands on a page with no large avatar (e.g. a list view), no heartbeat plays — which is the right answer audibly.
+
+**Verification**:
+- `npx tsc --noEmit` — exit 0.
+- All representative routes (`/`, `/v6`, `/chat`, `/crisis`, `/checkin`, `/tools/breathing`, `/celebration`, `/about`) — 200.
+- Workflow logs — clean.
+- Manual: with audio toggled OFF on `/v6`, every surface behaves byte-identically to v5.2 (no audio, no extra timers because each `useEffect` returns before scheduling work).
+- Default OFF preserved — `readEnabled()` still returns false when localStorage is empty.
+
+**Scope note (V9 Soul Capture propagation)**: Pop + heartbeat + chime now reach every avatar surface. The remaining V9 features (sentiment-driven mirroring, recognition memory, escalation tracking) require per-surface signal plumbing (chat sentiment, journal sentiment, etc.) and are not universalizable through the avatar layer alone — they need to be opted into per-surface by passing a `detectedSentiment` prop, which is how `LumiV6` already exposes it. This is a separate phase; not landed in v5.3.
+
+---
+
 ## V14 Wired Into LumiV6 (v5.2) — Voice + Expression Sync, integration phase
 
 The v5.1 audio engine is now wired into the live `LumiV6` component at the three V14 spec'd integration points. All wiring sits behind the same `lumi:audio:enabled` localStorage flag (default **OFF**) plus the existing `prefers-reduced-motion` and Web Audio availability gates, so behavior is unchanged for every existing user until they explicitly opt in on `/v6`.
