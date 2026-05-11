@@ -7,7 +7,6 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
-import LumiV6 from "../components/lumi/LumiV6";
 import EmotionalJourney from "../sections/EmotionalJourney.jsx";
 import NlpMiContent from "../sections/NlpMiContent.jsx";
 import VisualBenefits from "../sections/VisualBenefits.jsx";
@@ -499,20 +498,28 @@ export default function CanvaLanding() {
                   overflow: 'visible',
                 }}
               >
-                {/* V8 hero Lumi: living avatar with aura + shadow + click
-                    zones + emotional memory. The greeting emotion auto-
-                    coordinates upright posture, default eyes, gentle 0.5Hz
-                    heart pulse, and a sage aura halo. The hero-lumi-wrapper
-                    parent class drives the 800ms scale-in entrance + hover
-                    lift; LumiV6's internal animations are untouched. */}
-                <LumiV6
-                  size="xl"
-                  emotion="greeting"
-                  v8
-                  clickable
-                  memoryKey="hero"
-                  data-testid="lumi-hero-companion"
-                />
+                {/* v5.8.2: hero Lumi swapped from LumiV6 (smooth round
+                    avatar) to the V17 plush hooded Lumi so the hero matches
+                    the VisualBenefits illustrations below. Uses the same
+                    avatar-floating asset that anchors the Growth row, with
+                    WebP-first <picture> for ~10KB transfer (vs ~230KB PNG).
+                    The hero-lumi-wrapper parent still drives the 800ms
+                    scale-in entrance, sage radial halo, hover lift, and
+                    `lumi-breathe` gentle float (kept under reduced-motion
+                    blanket from index.css). LumiV6 is untouched and still
+                    used everywhere else (header, footer, chat). */}
+                <picture>
+                  <source srcSet="/brand/v17/avatar-floating.webp" type="image/webp" />
+                  <img
+                    src="/brand/v17/avatar-floating.png"
+                    alt="Lumi, your gentle wellness companion"
+                    className="hero-lumi-img w-full h-full object-contain lumi-breathe"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                    data-testid="lumi-hero-companion"
+                  />
+                </picture>
               </div>
             </div>
             <div
