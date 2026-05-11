@@ -7,7 +7,7 @@
 
 import { openai } from '../server/services/openai.mjs';
 import { db } from '../server/db/index.mjs';
-import { blogPosts } from '../shared/schema.ts';
+import { blogPosts } from '../shared/schema.mjs';
 
 const KEYWORD_TEMPLATES = [
   {

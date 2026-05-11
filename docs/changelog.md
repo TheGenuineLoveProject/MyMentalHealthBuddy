@@ -69,6 +69,31 @@ V16 brief specifies Primary CTA "Talk With Buddy →" links to `/chat` (or `/lum
 - `npm run build` → exit 0, built in ~17s.
 - Smoke `/` → V16 hero renders correctly: H1 "You don't have to / carry everything alone." with gradient on the second line, eyebrow + Lumi avatar preserved above. Welcome-back surface (one of: WelcomeBackBanner OR ReturnLoop) fires correctly on second visit.
 
+### v5.7.1 — Schema-drift orphan rescue (additive correction)
+
+The v4.2 schema-drift guardrail (`scripts/checkSchemaDrift.mjs`) had been emitting two persistent `[type_drift]` warnings against the `users` table:
+
+1. **`server/db/schema/users.js`** — declared `email: text` (canonical: `varchar(255)`), missing 14 columns
+2. **`db/schema.ts`** — declared `id: serial` (canonical: `uuid`), `email: text` (canonical: `varchar(255)`), missing 14 columns
+
+A full importer audit (`rg` across all `.ts/.tsx/.js/.jsx/.mjs/.cjs` in `client`, `server`, `shared`) confirmed both files have **zero static importers**. Every live import resolves to `shared/schema.mjs`, `server/db/schema.mjs`, or `server/db/schema/index.mjs` — never to the `.js` / `.ts` siblings. They were forgotten copies that drifted as the canonical schema grew.
+
+Per the user-preferences "Non-destructive (never delete without permission)" rule, **the files were not removed**. Instead each was rewritten as a single-line re-export of the canonical `users` table from `shared/schema.mjs`:
+
+- `server/db/schema/users.js` → `export { users } from "../../../shared/schema.mjs";`
+- `db/schema.ts` → `export { users } from "../shared/schema.mjs";`
+
+This achieves three goals simultaneously:
+- The guardrail goes silent because neither file declares its own `pgTable` anymore (drift detector compares column types per file)
+- Any unseen dynamic import (e.g. via runtime `import()` with a templated path) now gets the truthful schema instead of a 16-column-short stale shape
+- The file paths are preserved, so no downstream breakage even if a build tool was statically expecting them
+
+Each file carries a JSDoc header explaining the rescue so future maintainers don't accidentally re-add a hand-rolled `pgTable` and re-introduce the drift.
+
+Gates: `npx tsc --noEmit` exit 0 · `npm run build` exit 0 · `node scripts/checkSchemaDrift.mjs` now reports zero drift issues.
+
+---
+
 ### v5.7 — NLP + Motivational Interviewing Content Engine (V18 port)
 
 User-elected scope from a 6-doc V10→V18 batch: V13–V16 already shipped, V17 (image storytelling) deferred, V18 only. Two additive files + one CanvaLanding wiring edit.
