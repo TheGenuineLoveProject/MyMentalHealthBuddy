@@ -200,6 +200,9 @@ export default function BreathingTool() {
                     : "radial-gradient(circle, rgba(255,217,61,0.22) 0%, transparent 72%)",
               }}
             >
+              {/* Soft glow halo behind the avatar — pulses synced to the
+                  10s breath cycle, color drifts with sub-phase via CSS. */}
+              <span className="breath-glow" aria-hidden="true" />
               <BuddyAvatar
                 state={avatar.state}
                 colorMode={avatar.colorMode}
@@ -245,17 +248,38 @@ export default function BreathingTool() {
                 aria-valuemax={TOTAL_BREATHS}
                 aria-valuenow={breathIdx + 1}
                 aria-label={`Breath ${breathIdx + 1} of ${TOTAL_BREATHS}`}
+                aria-valuetext={`Breath ${breathIdx + 1} of ${TOTAL_BREATHS}, ${sub.label.toLowerCase()}`}
                 data-testid="breath-progress"
               >
                 {Array.from({ length: TOTAL_BREATHS }).map((_, i) => {
                   const state = i < breathIdx ? "done" : i === breathIdx ? "active" : "pending";
+                  // SVG rings are decorative — the parent progressbar with
+                  // aria-valuetext is the single semantic surface assistive
+                  // tech reads. Per-ring role/label would be ignored by
+                  // most screen readers (progressbar descendants are
+                  // typically presentational), so we mark them aria-hidden.
                   return (
-                    <span
+                    <svg
                       key={i}
-                      className="breath-progress-segment"
+                      className="breath-progress-ring"
                       data-state={state}
                       data-testid={`breath-progress-segment-${i}`}
-                    />
+                      viewBox="0 0 28 28"
+                      width="28"
+                      height="28"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <circle className="breath-progress-ring__track" cx="14" cy="14" r="11" />
+                      <circle className="breath-progress-ring__fill"  cx="14" cy="14" r="11" />
+                      {state === "done" && (
+                        <path
+                          className="breath-progress-ring__check"
+                          d="M9 14.5 l3.2 3.2 L19 11"
+                          fill="none"
+                        />
+                      )}
+                    </svg>
                   );
                 })}
               </div>

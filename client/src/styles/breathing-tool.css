@@ -103,6 +103,52 @@
   animation-delay: 150ms;
 }
 
+/* Per-sub-phase ring color drift — blue inhale, purple hold, sage exhale.
+   Same ~10s cycle as the existing pulse; only the border-color shifts. */
+.breathing-tool-polish[data-breath-sub="inhale"] .breath-ring--inner { border-color: rgba(116, 192, 252, 0.45); }
+.breathing-tool-polish[data-breath-sub="inhale"] .breath-ring--outer { border-color: rgba(116, 192, 252, 0.30); }
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-ring--inner { border-color: rgba(200, 182, 255, 0.50); }
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-ring--outer { border-color: rgba(200, 182, 255, 0.32); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-ring--inner { border-color: rgba(168, 201, 160, 0.45); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-ring--outer { border-color: rgba(168, 201, 160, 0.30); }
+.breathing-tool-polish .breath-ring { transition: border-color 1.6s ease, opacity 600ms ease; }
+
+/* Soft glow halo — sits behind avatar (z-index -2, below rings),
+   matches breath ring scale, color drifts with sub-phase. Visible only
+   during the active breathing phase. */
+.breathing-tool-polish .breath-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  transition: opacity 600ms ease, box-shadow 1.6s ease;
+  z-index: -2;
+  box-shadow: 0 0 60px 12px rgba(116, 192, 252, 0.18);
+}
+.breathing-tool-polish .breath-rings-wrapper--active .breath-glow {
+  opacity: 1;
+  animation: breath-glow-pulse 10s ease-in-out infinite;
+}
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-glow { box-shadow: 0 0 70px 14px rgba(200, 182, 255, 0.22); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-glow { box-shadow: 0 0 50px 10px rgba(168, 201, 160, 0.18); }
+
+@keyframes breath-glow-pulse {
+  0%   { transform: translate(-50%, -50%) scale(0.85); }
+  40%  { transform: translate(-50%, -50%) scale(1.20); }
+  60%  { transform: translate(-50%, -50%) scale(1.20); }
+  100% { transform: translate(-50%, -50%) scale(0.85); }
+}
+
+/* Per-sub-phase particle color drift — same opacity envelope, hue only. */
+.breathing-tool-polish[data-breath-sub="hold"]   .breathing-particle { background: radial-gradient(circle, #C8B6FF 0%, transparent 70%); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breathing-particle { background: radial-gradient(circle, #A8C9A0 0%, transparent 70%); }
+.breathing-tool-polish .breathing-particle { transition: background 1.6s ease; }
+
 @keyframes breath-ring-pulse {
   0%   { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; } /* exhale start (low) */
   40%  { transform: translate(-50%, -50%) scale(1.18); opacity: 1.0; } /* inhale peak (4s in) */
@@ -116,28 +162,62 @@
    removing the existing text. Sits below the seconds display. */
 .breathing-tool-polish .breath-progress {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   margin-top: 1.25rem;
   align-items: center;
   justify-content: center;
 }
-.breathing-tool-polish .breath-progress-segment {
-  width: 36px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(116, 192, 252, 0.20);
-  transition: background 600ms ease, box-shadow 600ms ease;
+
+/* SVG ring progress — circumference 2πr (r=11) ≈ 69.12.
+   Track is the soft background ring; fill draws over it as breath
+   progresses. Done shows full fill + checkmark; active shows pulsing
+   in-progress draw; pending shows track only. */
+.breathing-tool-polish .breath-progress-ring {
+  display: block;
+  overflow: visible;
 }
-.breathing-tool-polish .breath-progress-segment[data-state="done"]    { background: rgba(116, 192, 252, 0.85); }
-.breathing-tool-polish .breath-progress-segment[data-state="active"]  {
-  background: rgba(116, 192, 252, 0.65);
-  box-shadow: 0 0 0 3px rgba(116, 192, 252, 0.15);
-  animation: breath-progress-pulse 2.5s ease-in-out infinite;
+.breathing-tool-polish .breath-progress-ring__track {
+  fill: none;
+  stroke: rgba(116, 192, 252, 0.20);
+  stroke-width: 2.5;
+}
+.breathing-tool-polish .breath-progress-ring__fill {
+  fill: none;
+  stroke: rgba(116, 192, 252, 0.95);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 69.12;
+  stroke-dashoffset: 69.12;
+  transform: rotate(-90deg);
+  transform-origin: 14px 14px;
+  transition: stroke-dashoffset 1s ease, stroke 1.6s ease;
+}
+.breathing-tool-polish .breath-progress-ring[data-state="done"]   .breath-progress-ring__fill {
+  stroke-dashoffset: 0;
+}
+.breathing-tool-polish .breath-progress-ring[data-state="active"] .breath-progress-ring__fill {
+  stroke-dashoffset: 17.28; /* 75% drawn — gives the active ring a clear in-progress feel */
+  animation: breath-progress-ring-pulse 2.5s ease-in-out infinite;
+}
+.breathing-tool-polish .breath-progress-ring[data-state="pending"] .breath-progress-ring__fill {
+  stroke-dashoffset: 69.12;
+}
+.breathing-tool-polish .breath-progress-ring__check {
+  stroke: rgba(116, 192, 252, 0.95);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-@keyframes breath-progress-pulse {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(116, 192, 252, 0.10); }
-  50%      { box-shadow: 0 0 0 5px rgba(116, 192, 252, 0.22); }
+/* Sub-phase color drift on the active ring + checkmark only. Done/pending
+   stay calm-blue so the strip reads as a stable progress bar even as the
+   active ring re-tints with the breath. */
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-progress-ring[data-state="active"] .breath-progress-ring__fill { stroke: rgba(200, 182, 255, 0.95); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-progress-ring[data-state="active"] .breath-progress-ring__fill { stroke: rgba(168, 201, 160, 0.95); }
+
+@keyframes breath-progress-ring-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0   rgba(116, 192, 252, 0.00)); }
+  50%      { filter: drop-shadow(0 0 4px rgba(116, 192, 252, 0.45)); }
 }
 
 /* 5. Reduced-motion contract — hide all decorative motion, keep static
@@ -157,11 +237,18 @@
     transition: none !important;
     transform: translate(-50%, -50%) scale(1);
   }
-  .breathing-tool-polish .breath-progress-segment,
-  .breathing-tool-polish .breath-progress-segment[data-state="active"] {
+  .breathing-tool-polish .breath-progress-ring,
+  .breathing-tool-polish .breath-progress-ring__fill,
+  .breathing-tool-polish .breath-progress-ring[data-state="active"] .breath-progress-ring__fill {
     animation: none !important;
     transition: none !important;
-    box-shadow: none !important;
+    filter: none !important;
+  }
+  .breathing-tool-polish .breath-glow,
+  .breathing-tool-polish .breath-rings-wrapper--active .breath-glow {
+    animation: none !important;
+    transition: none !important;
+    transform: translate(-50%, -50%) scale(1) !important;
   }
   .breathing-tool-polish .breathing-bg-tint {
     transition: none !important;
