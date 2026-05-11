@@ -105,7 +105,6 @@
   "devDependencies": {
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "nodemon": "^3.1.14",
-    "sharp": "^0.34.5"
+    "nodemon": "^3.1.14"
   }
 }
