@@ -15,6 +15,7 @@ import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import "@/styles/celebration.css";
 
 const PHASE_1_MS = 3000;
 const PHASE_2_MS = 3000;
@@ -89,13 +90,28 @@ export default function CelebrationFlow() {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-b from-amber-50 via-rose-50 to-amber-50 relative overflow-hidden"
+      className="celebration-polish min-h-screen bg-gradient-to-b from-amber-50 via-rose-50 to-amber-50 relative overflow-hidden"
+      data-phase={phase}
       data-testid="page-celebration"
     >
       <SEO
         title="You Did It! — A Moment of Celebration"
         description="A gentle celebration ritual after completing a wellness tool."
       />
+
+      {/* Sunshine radiance wash — V10 §3.4 spec. */}
+      <div className="celebration-wash" aria-hidden="true" />
+      {/* Ambient gold sparkles — sustained warmth across all 3 phases. */}
+      {!reducedMotion && (
+        <div className="celebration-sparkle-layer" aria-hidden="true">
+          <span className="celebration-sparkle"></span>
+          <span className="celebration-sparkle"></span>
+          <span className="celebration-sparkle"></span>
+          <span className="celebration-sparkle"></span>
+          <span className="celebration-sparkle"></span>
+          <span className="celebration-sparkle"></span>
+        </div>
+      )}
 
       {/* Confetti backdrop — hidden under reduced motion */}
       {!reducedMotion && phase < 3 && (
@@ -140,7 +156,8 @@ export default function CelebrationFlow() {
         <section
           aria-live="polite"
           aria-atomic="true"
-          className="flex flex-col items-center text-center"
+          key={phase}
+          className="celebration-phase-enter flex flex-col items-center text-center"
           data-testid={`section-phase-${phase}`}
         >
           {phase === 1 && (
@@ -170,7 +187,7 @@ export default function CelebrationFlow() {
                 data-testid="img-celebration-phase-2"
               />
               <h2 className="mt-6 text-3xl font-semibold text-amber-700" data-testid="text-title-2">
-                That's {streak} {streak === 1 ? "moment" : "moments"} of care today.
+                That's <span className="celebration-streak-badge">{streak} {streak === 1 ? "moment" : "moments"}</span> of care today.
               </h2>
               <p className="mt-2 text-slate-700">Every one counts.</p>
             </>
