@@ -8,6 +8,7 @@ import SoftLaunchBanner from "../components/SoftLaunchBanner";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
 import LumiV6 from "../components/lumi/LumiV6";
+import EmotionalJourney from "../sections/EmotionalJourney.jsx";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -668,6 +669,11 @@ export default function CanvaLanding() {
           </div>
         </div>
       </section>
+
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
+
+      {/* v5.0 — Emotional Journey (V13 port from kimi.page deployment) */}
+      <EmotionalJourney />
 
       <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
 

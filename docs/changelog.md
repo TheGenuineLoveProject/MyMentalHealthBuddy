@@ -6,6 +6,38 @@ Newest entries on top.
 
 ---
 
+## Emotional Journey Section (v5.0) — V13 port from kimi.page deployment
+
+A new full-width section between the landing page's tools section and the philosophy section, surfacing the **6-phase emotional flow** (CALM → ORIENT → CONNECT → SUPPORT → REWARD → CONTINUE) as a vertical timeline so users can see the gentle path before they walk it. Replaces nothing — purely additive insert.
+
+**New files**:
+- `client/src/data/emotionalJourney.js` — 6-entry array `[{ phase, path, color, label, description }]`. Colors are drawn from the canonical 8-hex brand palette (sage `#A8C9A0`, calm-blue `#74C0FC`, empathy-purple `#C8B6FF`, sunshine `#FFD93D`, blush `#FF9A8B`, sage `#A8C9A0` for Return — five of the eight; mint, warmth-orange, and heart-amber are unused on this surface). Routes (`/`, `/tools/breathing`, `/checkin`, `/celebration`, `/chat`, `/`) match existing application paths — V13's spec called for `/lumi` for the REWARD phase, but no `/lumi` route exists in MMHB's `App.jsx`; `/chat` is the canonical AI-companion surface in this codebase, so the REWARD phase points there to avoid a dead link.
+- `client/src/sections/EmotionalJourney.jsx` — accessible `<section>` with `aria-labelledby`, semantic `<ol>` of phase cards. Each card is a `wouter` `<Link>` (SPA navigation, not `<a href>`) with per-phase `data-testid="link-journey-{phase}"`. Lucide icons (`Wind`, `Sparkles`, `Heart`, `Shield`, `Sparkles`, `RotateCcw`) selected to evoke the phase's emotional tone. Section ends with a `/crisis` referral line so the universal crisis-routing contract is honored on this surface too.
+
+**New CSS** (`client/src/styles/canva-landing.css` lines 2506-2628, scoped under `.emotional-journey-polish`):
+- **Vertical timeline**: absolutely positioned 2px line behind the dot column with a top-to-bottom gradient through every phase color at `33` alpha. Lives in a sibling `<div className="relative">` *next to* the `<ol>` (not inside it) so the `<ol>` stays semantically clean — only `<li>` children, no decorative span polluting the list. The line's `left` offset (`2rem` mobile, `2.25rem` ≥640px) plus a `-1px` margin is the exact mathematical center of the dot column (card pad `0.5rem` + half-dot `1.5rem`/`1.75rem`).
+- **Per-phase entrance**: each `<li>` starts at `opacity: 0; translateY(12px)`, then animates in via `emotional-journey-reveal` (0.6s `cubic-bezier(0.4, 0, 0.2, 1)`) with a staggered `--journey-delay: ${index * 90}ms` CSS custom property set inline — phases cascade smoothly down the column.
+- **Scroll-trigger**: `IntersectionObserver` with `threshold: 0.15, rootMargin: '0px 0px -10% 0px'` toggles `.revealed` on the section, gating the keyframes — the section doesn't animate until it scrolls into view (matches the existing `.section-reveal` pattern). Observer self-unsubscribes after first reveal.
+- **Hover/focus**: card lifts via `translateX(2px)` + cream background (`rgba(255,255,255,0.6)`) + soft sage glow box-shadow; dot scales 1.08× with a 6px white ring. Both hover and `:focus-visible` are wired so keyboard users get the same affordance.
+- **Reduced-motion contract**: `@media (prefers-reduced-motion: reduce)` forces `opacity: 1; transform: none` on every item, kills the entrance animation, kills card/dot transitions, and pins hover/focus transforms — the section appears fully revealed and static. Additionally, the JS guard reads `prefers-reduced-motion` at mount and immediately applies `.revealed` (skipping the IntersectionObserver entirely) so the static fallback works even when the section is below the fold.
+- **Z-index**: gradient line `z-index: 0`, items `z-index: 1` — content always above the connecting line.
+
+**No new dependencies**: framer-motion is *not* installed in this codebase, so the V13 prompt's `framer-motion` recommendation was substituted with CSS keyframes + a small `IntersectionObserver` hook, matching the existing `.section-reveal` pattern used everywhere else on `CanvaLanding.jsx`. Lucide icons and `wouter` were already in the import graph.
+
+**Insertion** (`client/src/pages/CanvaLanding.jsx`): single `<EmotionalJourney />` component dropped between the existing `consciousness-divider` after the tools section and the `#philosophy` section, with a matching divider below it. The landing page's section order is now: hero → tools → **emotional journey** → philosophy → features → … (zero changes to any other section).
+
+**Color contract**: all six phase colors are canonical brand hex with low-alpha derivatives (`${color}1A` for dot fill, `${color}66` for dot border, `${color}33` for the gradient line). Background uses the existing `--glp-paper` token. No new colors introduced.
+
+**Universal contracts honored**:
+- ✅ Scoped under unique `.emotional-journey-polish` wrapper class — zero leak risk
+- ✅ Only canonical brand hex (sage / calm / empathy / sunshine / blush) — no new colors
+- ✅ `prefers-reduced-motion` blanket: reveals immediately, no entrance, no hover transforms
+- ✅ Z-index contract: decorative line (0) → content (1)
+- ✅ Visual-first additive: zero changes to routing, state, or any other component
+- ✅ Crisis routing preserved (`/crisis` referral at section bottom)
+
+---
+
 ## /v6 Control Panel Polish (v4.9)
 The `/v6` Lumi preview page (`client/src/pages/LumiV6Preview.jsx`) gains four additive "control panel feel" layers per V10 §3.5, all scoped under `.v6-preview-polish`. New CSS in `client/src/styles/v6-preview.css` (~70 lines, 1 keyframe — `v6-preview-entrance`).
 
