@@ -14,9 +14,10 @@ import "@/styles/glp-pane.css";
 const freeTier = {
   name: "Your Safe Space",
   legacyName: "Free",
+  cta: "Start Free",
   price: "$0",
   period: "forever",
-  description: "Core wellness tools with no credit card and no expiration",
+  description: "Unlimited emotional support, always free",
   features: [
     "Mood tracking & journaling",
     "5 AI chat sessions per day",
@@ -33,9 +34,10 @@ const freeTier = {
 const starterTier = {
   name: "Your Personal Guide",
   legacyName: "Starter",
+  cta: "Begin Your Journey",
   price: "$9.99",
   period: "one-time",
-  description: "A gentle step up — unlock deeper tools with a single payment, yours to keep",
+  description: "Deeper exploration, personal insights",
   features: [
     "Everything in Your Safe Space",
     "25 AI chat sessions per day",
@@ -51,9 +53,10 @@ const starterTier = {
 const proMonthly = {
   name: "Your Full Companion",
   legacyName: "Pro",
+  cta: "Get Full Companion",
   price: "$12.99",
   period: "/month",
-  description: "Unlimited AI sessions and the full wellness toolkit — cancel anytime",
+  description: "Complete companion journey, maximum support",
   planId: "pro",
   interval: "monthly",
   icon: Crown,
@@ -63,9 +66,10 @@ const proMonthly = {
 const proYearly = {
   name: "Your Full Companion",
   legacyName: "Pro",
+  cta: "Get Full Companion",
   price: "$109",
   period: "/year",
-  description: "Save 30% — everything in Your Full Companion, billed annually",
+  description: "Save 30% — complete companion journey, billed annually",
   planId: "pro",
   interval: "yearly",
   icon: Crown,
@@ -86,9 +90,10 @@ const proFeatures = [
 const eliteMonthly = {
   name: "Your Transformation Partner",
   legacyName: "Elite",
+  cta: "Get Maximum Support",
   price: "$29.99",
   period: "/month",
-  description: "The complete experience — premium tools, early access, and personal onboarding",
+  description: "Everything in Pro + human coaching support",
   planId: "elite",
   interval: "monthly",
   icon: Gem,
@@ -98,9 +103,10 @@ const eliteMonthly = {
 const eliteYearly = {
   name: "Your Transformation Partner",
   legacyName: "Elite",
+  cta: "Get Maximum Support",
   price: "$249",
   period: "/year",
-  description: "Save 31% — full Transformation Partner access, billed annually",
+  description: "Save 31% — everything in Pro + human coaching, billed annually",
   planId: "elite",
   interval: "yearly",
   icon: Gem,
@@ -233,7 +239,7 @@ export default function Pricing() {
           {/* Hero */}
           <div className="text-center mb-12 animate-fade-in-up">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-pricing-title">
-              Choose What Feels <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Right</span>
+              Continue Your Journey <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>With Lumi</span>
             </h1>
             <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--glp-sage)' }}>
               Core tools are free, always. Step up at your own pace — from a one-time unlock to unlimited
@@ -365,10 +371,13 @@ export default function Pricing() {
                     >
                       {checkingOut ? (
                         <span className="flex items-center justify-center gap-2"><Loader2 className="w-4 h-4 animate-spin" />Redirecting…</span>
-                      ) : tier.interval === "one_time" ? (
-                        `Get it — ${tier.price}`
                       ) : (
-                        `Begin — ${tier.price}${tier.period}`
+                        <span className="flex flex-col items-center gap-0.5">
+                          <span>{tier.cta || "Continue Your Journey"}</span>
+                          <span className="text-xs font-medium text-white">
+                            {tier.interval === "one_time" ? tier.price : `${tier.price}${tier.period}`}
+                          </span>
+                        </span>
                       )}
                     </button>
                   ) : (

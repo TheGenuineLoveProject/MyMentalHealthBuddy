@@ -6,6 +6,31 @@ Newest entries on top.
 
 ---
 
+## v5.8.24 — V30 phase-locked copy alignment (Pricing hero + tier subtitles + per-tier CTAs)
+
+V30 audit pass against all 7 conversion elements found everything mounted (homepage `EmailCapture`, `ValueBridge`, `ReturnLoop`, plus pricing-page social proof / Most Popular / money-back / FAQ / value bridge table / email capture / return-loop banner from v5.8.23). Only V30 prompt copy alignment remained:
+
+**Pricing hero rename:** `"Choose What Feels Right"` → `"Continue Your Journey With Lumi"` (sage→gold gradient retained on "With Lumi" span). Aligns with V30 spec: "emotional framing, not 'Choose a Plan'".
+
+**Tier description rewrite (5 tier objects, monthly + yearly variants):** Replaced feature-leading microcopy with V30 emotion-first subtitles:
+- Free: `"Core wellness tools with no credit card and no expiration"` → `"Unlimited emotional support, always free"`
+- Starter: `"A gentle step up — unlock deeper tools with a single payment, yours to keep"` → `"Deeper exploration, personal insights"`
+- Pro monthly: `"Unlimited AI sessions and the full wellness toolkit — cancel anytime"` → `"Complete companion journey, maximum support"`
+- Pro yearly: `"Save 30% — everything in Your Full Companion, billed annually"` → `"Save 30% — complete companion journey, billed annually"`
+- Elite monthly: `"The complete experience — premium tools, early access, and personal onboarding"` → `"Everything in Pro + human coaching support"`
+- Elite yearly: `"Save 31% — full Transformation Partner access, billed annually"` → `"Save 31% — everything in Pro + human coaching, billed annually"`
+
+**Per-tier CTA copy (new `cta` field on tier objects):** Generic `"Begin — $9.99"` / `"Get it — $9.99"` button text replaced with per-tier emotion-first copy + price as secondary label below. Spec mapping:
+- Free → `"Start Free"` (rendered via existing `/register` Link, unchanged surface)
+- Starter (monthly + one-time variants) → `"Begin Your Journey"`
+- Pro (monthly + yearly) → `"Get Full Companion"`
+- Elite (monthly + yearly) → `"Get Maximum Support"`
+- Render contract: button now stacks `tier.cta` (semibold primary line) + price (`text-xs font-normal`, opacity 0.85) so the CTA leads with emotional value while pricing remains visible. Falls back to `"Continue Your Journey"` if `tier.cta` is missing on any future tier object. Loading state (`Redirecting…` w/ spinner) preserved as-is.
+
+**Stability contracts:** Paid-tier `data-testid="button-choose-{starter|pro|elite}"` selectors derived from `legacyName` — unchanged. Free-tier surface is a `<Link href="/register">` retaining its canonical `data-testid="button-get-started"` (intentionally distinct from checkout buttons; same convention since pre-v5.8). All Stripe `planId` values (`starter` / `pro` / `elite`) untouched — checkout path unaffected. Money-back guarantee on every paid tier (v5.8.23) still renders below CTA via `tier.planId` truthy check. WCAG: secondary price line bumped from `opacity: 0.85` to full-opacity white `text-xs font-medium` to keep AA contrast on the sage→sage-deep gradient at both ends. Triple gate: TSC=0, Build=15.77s.
+
+---
+
 ## v5.8.23 — V28 aesthetic + V30 conversion audit (Pricing / CheckIn / BreathingTool / About / Disclaimer)
 
 **P1 — Pricing.jsx (full rewrite, ~470 lines):** Emotion-first tier rename across all 4 tiers — `Free→"Your Safe Space"`, `Starter→"Your Personal Guide"`, `Pro→"Your Full Companion"` (Most Popular), `Elite→"Your Transformation Partner"`. Each tier object keeps a `legacyName` field used to anchor `data-testid` (`card-pricing-{free|starter|pro|elite}`, `button-choose-{...}`, `text-money-back-{...}`) so automation, billing analytics, and the Stripe `planId` mapping (`starter|pro|elite`, unchanged) all stay green despite user-facing rename. **V28 surface:** root `bg` collapsed from triple-stop sage/teal/paper gradient + 3 absolute decorative orbs → flat `var(--glp-paper, #F7F4EE)`; tier cards `var(--glp-paper)→#FFFFFF` with two-tier soft shadow (popular tier gets gold-tinted lift); icon containers `w-10 h-10 rounded-xl→w-14 h-14 rounded-full` with sage gradient (gold for popular); billing toggle pills filled w/ sage gradient when active; Save 31% sub-pill restyled. All paid-tier CTAs converted to true sage-gradient pill buttons (`rounded-full`, `linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))`, soft sage-shadow, `hover:scale-[1.02]`); Pro keeps gold gradient. **V30 — 4 missing conversion elements added:** (1) hero social-proof row — 3 white pills under subtitle (`10,000+ gentle check-ins` / `4.8 average rating` / `Private by default`) w/ `data-testid="text-stat-{users|rating|privacy}"`; (2) Value Bridge table — 7-row Free vs Paid comparison (mood, AI sessions, crisis, journal insights, healing journeys, voice affirmations, priority support) w/ canonical sage/gold checkmark circles, `data-testid="table-value-bridge"` + per-row testids; (3) email capture section — sage circle icon + `<form>` w/ email validation + localStorage persist (`mmhb-pricing-lead`) + toast on success + success-state pill; (4) Return Loop banner — sage-20→gold-30 gradient bg, `"Your healing isn't a race"` headline, twin CTAs (sage pill `/checkin` + outline `/tools`). **V30 — money-back guarantee broadened:** previously Pro/Elite-only; now renders on every paid tier (any truthy `planId`), Shield icon prepended for visual reinforcement. PricingFAQ + TrustSignals retained (V30 ✓ already shipped).
