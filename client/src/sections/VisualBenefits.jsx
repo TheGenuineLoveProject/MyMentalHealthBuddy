@@ -95,9 +95,10 @@ const BENEFITS = [
     title: 'Grow at your own pace.',
     description:
       'Emotional wellness is not a race — it is a garden. Your buddy walks beside you with infinite patience, honoring the rhythm that belongs to you, one honest step at a time.',
-    // v5.8.15 — user-provided OFFICIAL canonical avatar (sprout body floating in sparkles)
-    image: '/brand/v17/lumi-official-floating-sparkles.png',
-    imageWebp: '/brand/v17/lumi-official-floating-sparkles.webp',
+    // v5.8.16 — user-provided OFFICIAL Growth avatar (sprout walking on grass path at sunrise);
+    // floating-sparkles asset removed — it duplicated the hero (avatar-floating.png on CanvaLanding)
+    image: '/brand/v17/lumi-official-walking-path.png',
+    imageWebp: '/brand/v17/lumi-official-walking-path.webp',
     avatar: '/brand/v17/avatar-floating.png',
     avatarWebp: '/brand/v17/avatar-floating.webp',
     icon: Sparkles,

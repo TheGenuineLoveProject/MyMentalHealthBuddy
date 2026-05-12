@@ -6,6 +6,14 @@ Newest entries on top.
 
 ---
 
+## v5.8.16 — Growth avatar correction (walking-path replaces duplicate floating-sparkles)
+
+User-flagged regression on v5.8.15: Growth section was using `lumi-official-floating-sparkles` which visually duplicated the homepage hero (CanvaLanding line 514, `avatar-floating.png` — same sprout-floating-with-sparkles pose). Per user reference IMG_2359 (photographed directly under the Companionship "Say Hello to Lumi" CTA, confirming positional context), Growth's canonical avatar is the **sprout-Lumi walking on a cream-stone path through sage-green grass at sunrise**.
+
+Net change in `client/src/sections/VisualBenefits.jsx`: Growth `image`/`imageWebp` swapped from `lumi-official-floating-sparkles.{png,webp}` → `lumi-official-walking-path.{png,webp}`. Overlay (`avatar-floating`) untouched — it provides intentional motion contrast against the static walking pose. New asset honors V24 §2 Design B: cream `#F5F0E8` body, sage `#A8C9A0` belly, two-leaf sage sprout, glossy black dot eyes, simple smile, soft pink `#F5A3A3` blush, no fingers/teeth/eyebrows. PNG 1.6MB → WebP 60 KB at q85 (96% transfer reduction). Now-orphan `lumi-official-floating-sparkles.{png,webp}` deleted same commit. Triple gate: TSC=0.
+
+---
+
 ## v5.8.15 — VisualBenefits canonical avatar swap (user-provided official designs)
 
 User provided 4 canonical avatar PNGs/JPEGs as the locked-official MyMentalHealthBuddy mascot designs, photographed in-context alongside their target section titles. These supersede the v5.8.14 hooded regenerations (which had unintended cat-ear hood points violating V26 "no visible ears" + one image with eyebrow lines violating V24 §2). New mapping in `client/src/sections/VisualBenefits.jsx`:
