@@ -1,3 +1,47 @@
+## v5.8.31 — V28 Tier 3 Sweep (Tool Pages + Auth/Account/Conversion Surfaces)
+
+User asked to continue Tier 3 V28 propagation. 100+ files in the audit; this batch hits the 21 highest-traffic surfaces (skipping 30+ admin/* internal dashboards for a later pass). Strategy: introduced 2 shared utility classes in `index.css` (`.v28-paper-bg`, `.v28-card`) so every Tier 3 surface can adopt the V28 contract via a single class swap rather than 100+ inline-style edits. Both utilities use literal hex (not CSS vars) to defeat any token override and stay byte-stable.
+
+**New utilities (`client/src/index.css` lines ~7080-7095):**
+```css
+.v28-paper-bg { background: #F7F4EE; }
+.v28-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(168, 201, 160, 0.55);
+  box-shadow: 0 1px 3px rgba(20,38,38,0.06), 0 1px 2px rgba(20,38,38,0.04);
+}
+```
+
+**Files touched (21):**
+- **9 individual tool pages** (`tools/GAD7Assessment.jsx`, `tools/PHQ9Assessment.jsx`, `tools/BreathPacer.jsx`, `tools/BoundaryBuilderTool.jsx`, `tools/CognitiveDistortionChecker.jsx`, `tools/ManipulationDetector.jsx`, `tools/NervousSystemCheck.jsx`, `tools/SleepQualityCalculator.jsx`, `tools/index.jsx`) — every one had the identical off-palette `min-h-screen bg-gradient-to-br from-[hue]-50 via-white to-[hue]-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900` pattern (per-tool tinted gradient + dark-slate leak) and `border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900` cards. Bulk regex-swapped to `min-h-screen v28-paper-bg` body bg + `v28-card` cards. All `data-testid`, hidden inputs, ARIA semantics preserved (sed only touched the className strings).
+- **`LandingV2.jsx`** — same indigo→white→purple body gradient + slate cards as old WellnessToolsHub. Bulk-swapped to `v28-paper-bg` + `v28-card` to match the canonical homepage exemplar.
+- **`Premium.jsx`** — `hero-gradient` → `v28-paper-bg`.
+- **`Settings.jsx`** — `hero-gradient` → `v28-paper-bg`.
+- **`Profile.jsx`** — `hero-gradient` → `v28-paper-bg`.
+- **`Onboarding.tsx`** — `hero-gradient` → `v28-paper-bg` (auth-gated coaching flow, separate from `/welcome` public flow).
+- **`Wellness.jsx`** — `hero-gradient` → `v28-paper-bg`.
+- **`ResourcesPage.jsx`** — `hero-gradient` → `v28-paper-bg`.
+- **`GlossaryPage.jsx`** — `hero-gradient` → `v28-paper-bg`.
+- **`Privacy.tsx`** — TS-variant of the Privacy route — `hero-gradient` → `v28-paper-bg`.
+- **`Newsletter.jsx`** — `hero-premium` → `v28-paper-bg`.
+- **`FAQPage.jsx`** — uses `<PageLayout className="hero-gradient">`; flipped className prop to `v28-paper-bg`.
+- **`Upgrade.jsx`** — `hero-gradient` → `v28-paper-bg` + `glass-premium` card → `v28-card`.
+- **`NotFound.jsx`** — `hero-gradient` → `v28-paper-bg` + `glass-premium` card → `v28-card`.
+- **`ForgotPassword.jsx`** — caught one stale `glass-premium` card from earlier sweep → `v28-card`.
+- **`About.jsx`** — removed `EmotionBackground` import + usage (off-palette decorative layer; user removed similar from Privacy.jsx in v5.8.29).
+
+**What was deliberately deferred to a later sweep (out of this batch's scope):**
+- ~30 `admin/*` internal dashboards (HealthDashboard, NarrativeOpsConsole, SecurityDashboard, Social* family) — internal-only, low user-visible-impact, will batch separately.
+- ~30 niche/specialty pages (KnowledgeSynthesis, MetaLearning, Atlas, Mirror, ProtocolBrowser, etc.) — auth-gated and lower traffic.
+- Inline tile gradients on `Wellness.jsx` lines 503/513/523 (amber-orange/emerald-teal/purple-indigo Lucide-icon stat tiles), `WellnessDashboard.jsx` teal/amber stat tiles, and `Start.tsx` amber-300/500 numbered list bullets — these are scoped per-card decorative gradients, not page-level chrome; canonical-palette re-mapping warranted but lower priority than the 21 page-chrome flips done here.
+
+**Universal contracts honored:**
+- All `data-testid` preserved (sed regex only touched className/style strings, not attributes).
+- `/crisis` routing untouched on every wellness surface.
+- `prefers-reduced-motion`: no new motion introduced; existing guards untouched.
+- Canonical palette: `.v28-card` border uses canonical sage `rgba(168,201,160,0.55)`; shadow uses canonical ink-deep at low alpha for ambient lift only.
+- Build green: `✓ built in 17.21s`.
+
 ## v5.8.30 — V28 Public Surfaces Sweep (Tier 2)
 
 User attached the homepage "There's More to Explore" + "Healing, in your inbox" reference screenshot and asked: "ensure entire web pages are consistent, ensure same formatting in screenshot is used." That screenshot is `CanvaLanding.jsx` — the V28 reference. This sweep propagates the same paper-bg + white-card + canonical-pastel-tile pattern to the next-tier public surfaces.

@@ -46,7 +46,7 @@ export default function Profile() {
         description="Manage your profile and preferences"
       />
       
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <div className="max-w-2xl mx-auto px-4 py-12">
           <Link href="/dashboard" className="inline-flex items-center gap-2 text-[var(--teal-600)] hover:text-[var(--teal-700)] mb-8 transition-colors" data-testid="link-back-dashboard">
             <ChevronLeft className="w-4 h-4" />

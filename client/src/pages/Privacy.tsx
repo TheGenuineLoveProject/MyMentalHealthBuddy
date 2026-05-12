@@ -30,7 +30,7 @@ export default function Privacy() {
         title="Privacy Policy - The Genuine Love Project"
         description="Privacy Policy for The Genuine Love Project mental wellness platform."
       />
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <div className="content-wrapper py-8">
           <div className="max-w-3xl mx-auto">
             <header className="mb-8">

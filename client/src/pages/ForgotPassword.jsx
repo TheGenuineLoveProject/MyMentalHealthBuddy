@@ -71,7 +71,7 @@ export default function ForgotPassword() {
           <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md glass-premium rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
+          <div className="w-full max-w-md v28-card rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
             <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
               <CheckCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>

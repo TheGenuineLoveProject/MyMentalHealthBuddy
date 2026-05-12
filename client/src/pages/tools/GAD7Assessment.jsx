@@ -48,7 +48,7 @@ export default function GAD7Assessment() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO title="GAD-7 Anxiety Check-in | MyMentalHealthBuddy" description="Free 7-question screening to notice anxiety symptoms over the past two weeks. Educational only." />
       <div className="mx-auto max-w-2xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
@@ -82,7 +82,7 @@ export default function GAD7Assessment() {
             {QUESTIONS.map((q, i) => (
               <fieldset
                 key={i}
-                className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4"
+                className="rounded-2xl v28-card p-4"
                 data-testid={`question-gad7-${i + 1}`}
               >
                 <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100 px-1">

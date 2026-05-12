@@ -131,7 +131,7 @@ export default function ManipulationDetector() {
   const findings = useMemo(() => detect(text), [text]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="Manipulation Detector | MyMentalHealthBuddy"
         description="Paste a message or conversation. Spot common manipulation tactics (gaslighting, love-bombing, DARVO) with gentle reframes. Educational only."

@@ -136,7 +136,7 @@ export default function SleepQualityCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="Sleep Quality Self-Check | MyMentalHealthBuddy"
         description="A short, gentle self-check on your sleep quality over the last week. Get evidence-informed CBT-I-style recommendations. Educational only."
@@ -185,7 +185,7 @@ export default function SleepQualityCalculator() {
             {QUESTIONS.map((q, idx) => (
               <fieldset
                 key={q.id}
-                className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4"
+                className="rounded-2xl v28-card p-4"
                 data-testid={`question-sleep-${q.id}`}
               >
                 <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100 px-1">
@@ -240,7 +240,7 @@ export default function SleepQualityCalculator() {
               </p>
             </div>
 
-            <div className="mt-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4">
+            <div className="mt-4 rounded-2xl v28-card p-4">
               <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
                 Gentle, evidence-informed next steps
               </h2>

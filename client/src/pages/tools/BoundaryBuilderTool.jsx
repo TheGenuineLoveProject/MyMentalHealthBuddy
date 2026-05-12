@@ -77,7 +77,7 @@ export default function BoundaryBuilderTool() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="Boundary Builder | MyMentalHealthBuddy"
         description="Draft a clear, kind boundary statement using values-first language. Free, educational tool. Practice before you speak it."
@@ -110,7 +110,7 @@ export default function BoundaryBuilderTool() {
           {STEPS.map((s, idx) => (
             <div
               key={s.id}
-              className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4"
+              className="rounded-2xl v28-card p-4"
               data-testid={`step-${s.id}`}
             >
               <label htmlFor={s.id} className="block text-sm font-semibold text-slate-900 dark:text-slate-100">

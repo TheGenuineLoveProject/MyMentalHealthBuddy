@@ -147,7 +147,7 @@ export default function NervousSystemCheck() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-cyan-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="Nervous System State Check | MyMentalHealthBuddy"
         description="A polyvagal-informed self-check of your current nervous system state — safe / mobilized / shut-down — with gentle next-step suggestions. Educational only."
@@ -196,7 +196,7 @@ export default function NervousSystemCheck() {
             {QUESTIONS.map((q, idx) => (
               <fieldset
                 key={q.id}
-                className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4"
+                className="rounded-2xl v28-card p-4"
                 data-testid={`question-ns-${q.id}`}
               >
                 <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100 px-1">
@@ -246,7 +246,7 @@ export default function NervousSystemCheck() {
               <p className="mt-2 text-sm">{state.summary}</p>
             </div>
 
-            <div className="mt-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4">
+            <div className="mt-4 rounded-2xl v28-card p-4">
               <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
                 Gentle suggestions for right now
               </h2>

@@ -191,7 +191,7 @@ export default function FAQPage() {
   });
 
   return (
-    <PageLayout maxWidth="max-w-3xl" className="hero-gradient">
+    <PageLayout maxWidth="max-w-3xl" className="v28-paper-bg">
       <header className="mb-8">
             <Link href="/" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
               <ArrowLeft className="h-4 w-4" /> Back to Home

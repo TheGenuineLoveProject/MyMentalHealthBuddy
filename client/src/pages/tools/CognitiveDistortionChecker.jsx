@@ -75,7 +75,7 @@ export default function CognitiveDistortionChecker() {
   const findings = useMemo(() => detect(text), [text]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="Cognitive Distortion Checker | MyMentalHealthBuddy"
         description="Spot common thinking patterns (all-or-nothing, catastrophizing, mind-reading) and reframe gently. Free, educational only."

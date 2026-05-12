@@ -39,7 +39,7 @@ export default function NotFound() {
         title="Taking a Different Path"
         description="This page isn't here, but you are. Let's find what you're looking for together."
       />
-      <div className="min-h-screen hero-gradient overflow-hidden relative flex items-center justify-center p-6">
+      <div className="min-h-screen v28-paper-bg overflow-hidden relative flex items-center justify-center p-6">
         <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] top-1/4 -left-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-1/4 -right-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-gold w-[200px] h-[200px] top-10 right-1/4 absolute" aria-hidden="true" />
@@ -56,7 +56,7 @@ export default function NotFound() {
             <span className="font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
           </Link>
           
-          <div className="glass-premium rounded-2xl p-8 md:p-12">
+          <div className="v28-card rounded-2xl p-8 md:p-12">
             <div className="mb-10">
               <div className="text-6xl md:text-7xl font-display font-bold bg-gradient-to-r from-[var(--glp-primary)] via-[var(--glp-sage)] to-[var(--glp-gold)] bg-clip-text text-transparent mb-6 leading-none">
                 Hmm...

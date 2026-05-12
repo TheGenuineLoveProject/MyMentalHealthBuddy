@@ -48,7 +48,7 @@ const PROMISES = [
 
 export default function LandingV2() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="MyMentalHealthBuddy — A gentle AI companion for healing"
         description="Trauma-informed mental wellness platform. Discernment training, evidence-informed protocols, body-signal tracking, and free wellness tools. Educational only."
@@ -122,7 +122,7 @@ export default function LandingV2() {
               <Link
                 key={p.title}
                 href={p.href}
-                className="group rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-lg transition-shadow"
+                className="group rounded-3xl v28-card p-6 shadow-sm hover:shadow-lg transition-shadow"
                 data-testid={p.testid}
               >
                 <div className="flex items-start gap-4">
@@ -151,7 +151,7 @@ export default function LandingV2() {
           {PROMISES.map((p, i) => (
             <li
               key={i}
-              className="flex items-start gap-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4"
+              className="flex items-start gap-3 rounded-2xl v28-card p-4"
               data-testid={`promise-${i}`}
             >
               <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-300 mt-0.5" aria-hidden />

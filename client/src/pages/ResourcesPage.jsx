@@ -123,7 +123,7 @@ export default function ResourcesPage() {
       <SEO title="Resources — The Genuine Love Project" description="Helpful resources for your wellness journey." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-5xl mx-auto">
           <header className="mb-8">

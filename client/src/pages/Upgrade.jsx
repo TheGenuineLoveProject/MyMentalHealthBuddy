@@ -74,7 +74,7 @@ export default function Upgrade() {
         title="Upgrade to Pro - The Genuine Love Project"
         description="Pro adds unlimited AI sessions, deeper insights, and additional wellness tools. Cancel anytime."
       />
-      <div className="min-h-screen safe-padding hero-gradient overflow-hidden relative">
+      <div className="min-h-screen safe-padding v28-paper-bg overflow-hidden relative">
         <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-sage w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
 
@@ -101,7 +101,7 @@ export default function Upgrade() {
               </div>
             </header>
 
-            <div className="glass-premium rounded-2xl p-8 mb-8">
+            <div className="v28-card rounded-2xl p-8 mb-8">
               <div className="flex items-baseline justify-center gap-2 mb-6">
                 <span className="text-display-xl text-gold font-bold">$12</span>
                 <span className="text-body-lg text-[var(--teal-500)]">/month</span>

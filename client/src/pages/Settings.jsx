@@ -212,7 +212,7 @@ export default function Settings() {
         title="Settings - The Genuine Love Project"
         description="Manage your account settings, preferences, and notifications."
       />
-      <div data-testid="page-settings" className="min-h-screen hero-gradient">
+      <div data-testid="page-settings" className="min-h-screen v28-paper-bg">
         <div className="content-wrapper py-8">
           <div className="max-w-xl mx-auto">
             {loading ? (

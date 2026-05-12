@@ -330,7 +330,7 @@ export default function Wellness() {
         description="Access comprehensive wellness tools including breathing exercises, meditation, anxiety relief, emotion tracking, habit building, and self-care resources to support your mental health journey."
       />
 
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-20 -right-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-gold w-[200px] h-[200px] top-1/2 right-1/4 absolute" aria-hidden="true" />

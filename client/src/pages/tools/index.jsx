@@ -110,7 +110,7 @@ function ToolCard({ tool }) {
   return (
     <Link
       href={tool.href}
-      className="group rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm hover:shadow-lg transition-shadow"
+      className="group rounded-3xl v28-card p-5 shadow-sm hover:shadow-lg transition-shadow"
       data-testid={tool.testid}
     >
       <div className="flex items-start justify-between mb-3">
@@ -137,7 +137,7 @@ function ToolCard({ tool }) {
 
 export default function ToolsIndex() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="All Free Wellness Tools"
         description="Eight free, self-paced wellness tools — anxiety and depression check-ins, distortion checker, manipulation detector, breath pacer, boundary builder, sleep self-check, and nervous-system check. Educational only, no signup."
@@ -183,7 +183,7 @@ export default function ToolsIndex() {
         </div>
 
         <section
-          className="mt-10 rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6"
+          className="mt-10 rounded-3xl v28-card p-6"
           aria-label="Educational disclaimer"
         >
           <div className="flex items-start gap-3">

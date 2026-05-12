@@ -169,7 +169,7 @@ export default function Premium() {
         description="Pro tools including guided programs, mood analytics, daily planner, and AI-powered suggestions. Cancel anytime."
       />
 
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-sage w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[200px] h-[200px] top-1/2 left-1/4 absolute" aria-hidden="true" />

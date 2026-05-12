@@ -183,7 +183,7 @@ export default function Onboarding() {
     ]}
   >
 
-    <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
+    <div className="min-h-screen v28-paper-bg flex items-center justify-center p-4">
       <div className="w-full max-w-2xl card-bordered" data-testid="card-onboarding">
         {/* Intro Carousel */}
         {STEPS[currentStep] === "intro" && (

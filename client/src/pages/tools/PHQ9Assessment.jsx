@@ -57,7 +57,7 @@ export default function PHQ9Assessment() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-pink-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO title="PHQ-9 Mood Check-in | MyMentalHealthBuddy" description="Free 9-question screening to notice depression symptoms over the past two weeks. Educational only." />
       <div className="mx-auto max-w-2xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
@@ -122,8 +122,8 @@ export default function PHQ9Assessment() {
             {QUESTIONS.map((q, i) => (
               <fieldset
                 key={i}
-                className={`rounded-2xl border bg-white dark:bg-slate-900 p-4 ${
-                  i === 8 ? "border-rose-300 dark:border-rose-700" : "border-slate-200 dark:border-slate-700"
+                className={`rounded-2xl p-4 ${
+                  i === 8 ? "v28-card border-rose-300" : "v28-card"
                 }`}
                 data-testid={`question-phq9-${i + 1}`}
               >

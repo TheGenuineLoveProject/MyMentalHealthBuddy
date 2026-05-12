@@ -7,7 +7,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 
 export default function Newsletter() {
   return (
-    <div className="min-h-screen hero-premium relative overflow-hidden">
+    <div className="min-h-screen v28-paper-bg relative overflow-hidden">
       <SEO
         title="Newsletter | MyMentalHealthBuddy"
         description="Receive gentle wellness tips, new articles, and healing resources in your inbox. No spam, no pressure — unsubscribe anytime."

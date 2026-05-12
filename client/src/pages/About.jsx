@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Shield, Sparkles, Users, Flower2 } from "lucide-react";
-import EmotionBackground from "@/components/sacred/EmotionBackground";
 import GlowFooter from "@/components/GlowFooter";
 import ValueProposition from "@/sections/ValueProposition.jsx";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
@@ -13,7 +12,6 @@ export default function About() {
         title="About — MyMentalHealthBuddy by The Genuine Love Project"
         description="MyMentalHealthBuddy by The Genuine Love Project. Free emotional wellness tools. Evidence-informed. Always private."
       />
-      <EmotionBackground emotion="calm" intensity={0.1} />
       
       <main className="flex-1 relative z-10">
         <div className="container mx-auto px-4 py-8 max-w-4xl">

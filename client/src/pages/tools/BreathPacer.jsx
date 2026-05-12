@@ -93,7 +93,7 @@ export default function BreathPacer() {
   const scale = isInhale ? 1 : isExhale ? 0.55 : 0.78;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-cyan-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO title="Breath Pacer | MyMentalHealthBuddy" description="Free guided breathing — 4-7-8, box, and coherence patterns. Calm your nervous system in two minutes. Educational only." />
       <div className="mx-auto max-w-2xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
@@ -136,7 +136,7 @@ export default function BreathPacer() {
         </div>
         <p className="text-center text-sm text-slate-600 dark:text-slate-300 mb-6">{pattern.description}</p>
 
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-8 shadow-sm" data-testid="section-pacer">
+        <div className="rounded-3xl v28-card p-8 shadow-sm" data-testid="section-pacer">
           <div className="relative mx-auto h-64 w-64 flex items-center justify-center" aria-live="polite">
             <div
               className="absolute inset-0 rounded-full bg-gradient-to-br from-teal-400 via-cyan-400 to-sky-400 transition-transform ease-in-out"
