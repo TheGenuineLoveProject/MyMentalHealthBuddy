@@ -30,7 +30,7 @@ const STATES = ["calm", "encouraged", "celebrate", "sad", "anxious", "crisis"];
 const COLORS = ["default", "yellow", "pink", "blue", "purple", "orange", "sleep"];
 const POSES  = ["default", "meditating", "celebrating", "waving"];
 
-// V7 emotion → expression coordination table (mirrors EMOTION_DERIVATION
+// V7 emotion → expression coordination table (mirrors getLumiV6Derivation()
 // in LumiV6.tsx). Used by the playground's read-only visualization.
 const COORDINATION_TABLE = [
   { emotion: "greeting", mouth: "greeting",  eye: "default", posture: "upright",  hz: 0.5   },
@@ -282,7 +282,7 @@ export default function LumiV6Preview() {
 
           <h3 className="mb-3 mt-8 text-lg font-semibold text-slate-800">Coordination table (resolved runtime)</h3>
           <p className="mb-3 text-sm text-slate-600">
-            Shows the <em>resolved</em> output of <code>EMOTION_DERIVATION</code>
+            Shows the <em>resolved</em> output of <code>getLumiV6Derivation()</code>
             in <code className="mx-1">LumiV6.tsx</code> — i.e. after the
             backward-compat overrides apply. Note the <code>sleepy</code> eye
             row reads <code>closed</code> here (visible result) even though the

@@ -68,6 +68,7 @@
  */
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { useLumiAudio } from "@/hooks/useLumiAudio.js";
+import { getLumiV6Derivation } from "@/data/lumiEmotionMap";
 import "./LumiV6.css";
 
 export type LumiV6ColorMode =
@@ -288,18 +289,12 @@ const SIZE_PX: Record<LumiV6Size, number> = {
   xl: 240,
 };
 
-const EMOTION_DERIVATION: Record<
-  LumiV6Emotion,
-  { mouth: LumiV6MouthExpression; eye: LumiV6EyeExpression; posture: LumiV6Posture; heartHz: number }
-> = {
-  greeting: { mouth: "greeting",  eye: "default", posture: "upright",  heartHz: 0.5   },
-  joy:      { mouth: "excited",   eye: "happy",   posture: "bouncy",   heartHz: 1.0   },
-  love:     { mouth: "loving",    eye: "soft",    posture: "relaxed",  heartHz: 0.5   },
-  calm:     { mouth: "breathing", eye: "soft",    posture: "relaxed",  heartHz: 0.25  },
-  empathy:  { mouth: "worried",   eye: "soft",    posture: "leaning",  heartHz: 0.35  },
-  sleepy:   { mouth: "sleepy",    eye: "soft",    posture: "relaxed",  heartHz: 0.125 },
-  surprise: { mouth: "surprise",  eye: "wide",    posture: "curious",  heartHz: 1.5   },
-};
+/* v5.8.12 — EMOTION_DERIVATION removed in favor of canonical V24 source.
+ * The legacy table is now derived from `EMOTION_STATES` + `V6_OVERRIDES`
+ * via `getLumiV6Derivation()` (see client/src/data/lumiEmotionMap.ts).
+ * Output is byte-identical to the previous local table for all 7 V6
+ * emotions; future consumers using V24 directly get the full state
+ * machine (arms/legs/blush/glow/breathSpeed). */
 
 /** V8: per-emotion aura (color · opacity · pulse period). */
 const AURA_BY_EMOTION: Record<LumiV6Emotion, { color: string; opacity: number; periodMs: number }> = {
@@ -386,10 +381,13 @@ export default function LumiV6({
   const ariaLabel  = EMOTION_ARIA[effectiveEmotion];
   const bubbleText = message ?? EMOTION_MESSAGE[effectiveEmotion];
 
-  const derived          = EMOTION_DERIVATION[effectiveEmotion];
-  const resolvedMouth    = mouthExpression ?? derived.mouth;
-  const resolvedEye      = eyeExpression  ?? derived.eye;
-  const resolvedPosture  = posture        ?? derived.posture;
+  // v5.8.12 — derivation now flows through canonical V24 EMOTION_STATES
+  // via the getLumiV6Derivation() adapter (see lumiEmotionMap.ts §10).
+  // Output is byte-identical to the legacy local table for all 7 V6 emotions.
+  const derived          = getLumiV6Derivation(effectiveEmotion);
+  const resolvedMouth    = mouthExpression ?? (derived.mouth as LumiV6MouthExpression);
+  const resolvedEye      = eyeExpression  ?? (derived.eye as LumiV6EyeExpression);
+  const resolvedPosture  = posture        ?? (derived.posture as LumiV6Posture);
   const resolvedHeartHz  = heartHz        ?? derived.heartHz;
   const heartPeriodMs    = Math.max(120, Math.round(1000 / Math.max(0.05, resolvedHeartHz)));
 

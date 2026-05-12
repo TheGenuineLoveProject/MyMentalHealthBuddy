@@ -147,3 +147,65 @@ export function regulateNervousSystem(userAnxietyLevel: number): Partial<LumiEmo
     bodyPosture:    a > 0.8 ? "relaxed"  : "upright",
   };
 }
+
+/* ======================================================================
+ * V24 §10 — LumiV6 Adapter (single source of truth bridge)
+ *
+ * LumiV6.tsx historically owned its own EMOTION_DERIVATION table. v5.8.12
+ * routes that derivation through the canonical V24 EMOTION_STATES map
+ * (eye + posture sourced from V24) plus a small V6_OVERRIDES table for
+ * legacy-only deltas. Net result: V6 emits BYTE-IDENTICAL visuals while
+ * the data flows through the V24 single source of truth, unblocking any
+ * future consumer that needs the canonical state machine.
+ *
+ * Why overrides exist (every entry justified, no silent drift):
+ *   - greeting → mouth "greeting": V6 ships a dedicated greeting mouth
+ *     shape that predates V24's "happy" mouth vocabulary. Visual parity
+ *     requires keeping it.
+ *   - calm → mouth "breathing": V6 uses the breathing mouth as its calm
+ *     resting shape (V24 added a separate "calm" mouth in v5.8.10).
+ *   - love → full override: V24 splits this concept into "support"
+ *     (active heart-hold) and a calmer warm-presence variant. V6's
+ *     "love" is the calmer one (eye=soft, posture=relaxed) and aliasing
+ *     to V24 "support" would shift posture+eye. Keep V6's love distinct.
+ *   - heartHz: V6 uses cadence (Hz); V24 uses breathSpeed (multiplier).
+ *     Different concepts, both valid. V6 cadence stays V6-owned.
+ * ==================================================================== */
+
+const V6_OVERRIDES: Record<string, Partial<{
+  mouth: string;
+  eye: LumiEyeType;
+  posture: LumiBodyPose;
+  heartHz: number;
+}>> = {
+  greeting: { mouth: "greeting",  heartHz: 0.5   },
+  joy:      {                     heartHz: 1.0   },
+  love:     { mouth: "loving", eye: "soft", posture: "relaxed", heartHz: 0.5 },
+  calm:     { mouth: "breathing", heartHz: 0.25  },
+  empathy:  {                     heartHz: 0.35  },
+  sleepy:   {                     heartHz: 0.125 },
+  surprise: {                     heartHz: 1.5   },
+};
+
+export interface LumiV6Derivation {
+  /** Caller casts to its local LumiV6MouthExpression union. */
+  mouth: string;
+  eye: LumiEyeType;
+  posture: LumiBodyPose;
+  heartHz: number;
+}
+
+export function getLumiV6Derivation(emotion: string): LumiV6Derivation {
+  const key = (emotion || "calm").toLowerCase().trim();
+  const v24 = EMOTION_STATES[key];
+  const ov  = V6_OVERRIDES[key] || {};
+  // Fallback uses V6-vocabulary literals ("breathing" is V6's calm-resting
+  // mouth; V24's "calm" mouth is not in V6's LumiV6MouthExpression union)
+  // so an unexpected runtime emotion string never emits an unknown CSS class.
+  return {
+    mouth:   ov.mouth   ?? v24?.mouthType   ?? "breathing",
+    eye:     ov.eye     ?? v24?.eyeType     ?? "default",
+    posture: ov.posture ?? v24?.bodyPosture ?? "upright",
+    heartHz: ov.heartHz ?? 0.5,
+  };
+}

@@ -123,7 +123,7 @@ export interface ToyEmotionSeed {
 }
 
 /**
- * Mirrors `EMOTION_DERIVATION` in `client/src/components/lumi/LumiV6.tsx`
+ * Mirrors `getLumiV6Derivation()` in `client/src/data/lumiEmotionMap.ts`
  * (including the runtime backward-compat overrides: sleepy → closed eye,
  * calm with no override → no mouth at all on screen, which the firmware
  * represents as the "breathing" pattern at minimum brightness). Update
