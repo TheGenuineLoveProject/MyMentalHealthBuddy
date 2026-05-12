@@ -6,6 +6,80 @@ Newest entries on top.
 
 ---
 
+## v5.8.28 — V32 Gap C: Avatar Evolution Engine (LumiV7 coordination layer)
+
+The largest V32 gap, shipped per spec. Net-new self-contained mascot engine with the full coordination contract — eyes/mouth/arm/leg gain life while body appearance stays FROZEN per V22/V24/V27. Does NOT replace any of the existing avatar components (`LumiV6.tsx`, `LumiMascot.jsx`, `BuddyAvatar.tsx`, `LumiBrandLockupImage.jsx`); LumiV7 lives alongside them and is opt-in by import.
+
+**Files added:**
+- `client/src/components/lumi/LumiV7.css` — 200-line scoped stylesheet, every selector under `.lumi-v7` so it cannot leak.
+- `client/src/components/lumi/LumiV7.jsx` — pure-SVG mascot, viewBox 0 0 400 400, with refs + RAF-driven pupil tracking + randomized blink scheduler.
+- `client/src/pages/AvatarLab.jsx` — public QA surface at `/avatar-lab` exposing all coordination states (4 eye chips × 10 mouth chips × 6 arm chips × 5 leg chips + crisis override checkbox + mouse-tracking gaze playground + mouth gallery + eye gallery).
+
+**Coordination spec — V32 verbatim implementation:**
+
+*Eye layer (4 types):* `.lumi-eye--default` (baseline 9×11 rx/ry), `.lumi-eye--wide` (scale 1.4, 1.5), `.lumi-eye--soft` (scale 1.0, 0.55, opacity 0.85), `.lumi-eye--happy` (scale 1.1, 0.45). Pupil tracking lerped per-frame via `requestAnimationFrame` toward a normalized `gaze: {x, y}` prop, clamped to ±10px horizontal / ±6px vertical per spec. Lerp speed = 0.05 for `soft` eye state, 0.12 default — V32 verbatim. Blink scheduler: setTimeout cascade with `2000 + Math.random() * 4000` ms cadence, 150ms duration, `Math.random() < 0.15` probability of double-blink (120ms gap between).
+
+*Mouth layer (10 expressions):* `.lumi-mouth--{happy|calm|surprise|sleepy|open|worried|excited|loving|focused|breathing}` paired with inline SVG path `d` attributes for shape morphing. Transition: 600ms `cubic-bezier(0.4, 0, 0.2, 1)` with 100ms `transition-delay` so eyes lead and mouth follows — V32 verbatim. `loving` mouth uses blush fill+stroke for the tender variant.
+
+*Arm layer (6 movements):* `.lumi-arm--{rest|wave|hug|point|present|heart}` toggled on the wrapper, cascading down to two `.lumi-v7-arm--{left,right}` SVG groups. Max rotation ±30° per spec. 800ms ease-in-out transition. `wave` adds a 1.4s perpetual `lumi-v7-wave` keyframe; `hug`/`heart` translate inward + rotate; `present` mirrors outward.
+
+*Leg layer (5 movements):* `.lumi-leg--{rest|sit|walk|bounce|tuck}`. `walk` runs paired alternating 0.9s keyframes; `bounce` shared 0.6s vertical keyframe; `sit` static rotation+translate; `tuck` pulls inward.
+
+*Crisis override (BHCE primary law):* `crisis` prop adds `is-crisis` class which forces `animation: none !important; transition: none !important;` on every animated layer + pins eyes to soft (scale 1.0, 0.7, opacity 0.9) + zeros all arm/leg transforms. Asymmetric-risk safety contract — instant calm, no exception.
+
+*Reduced-motion contract:* dedicated `@media (prefers-reduced-motion: reduce)` block kills every animation/transition under `.lumi-v7` and pins pupil transforms to none. RAF + setTimeout schedulers also short-circuit when `reduced` matches.
+
+**Body FROZEN inventory (no animation, no class binding):** `.lumi-v7-body` (cream ellipse rx 130 ry 135), `.lumi-v7-belly` (sage radial gradient ellipse rx 80 ry 65), `.lumi-v7-head` (cream ellipse rx 118 ry 115), `.lumi-v7-sprout` (two-leaf paths + stem rect), `.lumi-v7-blush` (two soft pink radial-gradient ellipses on cheeks). Heart glow (pulsing blush `lumi-v7-heart-pulse` 2.4s) preserved per V8 contract; disabled under crisis + reduced-motion.
+
+**Public route:** `/avatar-lab` registered in `App.jsx` (lazy-imported, no auth). `data-testid` coverage: `page-avatar-lab`, `lumi-playground`, `lab-eye-{type}`, `lab-mouth-{type}`, `lab-arm-{type}`, `lab-leg-{type}`, `checkbox-crisis-override`, `gallery-mouth-{type}`, `gallery-eye-{type}`, `lumi-v7-eye-left`, `lumi-v7-eye-right`, `lumi-v7-mouth`. Wrapper exposes `data-eye / data-mouth / data-arm / data-leg / data-crisis` for E2E.
+
+**ARIA:** wrapper is `role="img"` with `aria-label` switching to "Lumi in calm safety mode" under crisis vs. "Lumi feeling {mouth}" otherwise. Eye/mouth elements carry `data-testid` only (decorative SVG sub-paths are intentionally not focusable).
+
+**What this does NOT change:** existing canonical PNG avatars in `client/public/brand/v17/` remain the visual source of truth across `Header.jsx`, `Footer.jsx`, `CanvaLanding.jsx`, login surfaces, etc. LumiV7 is a vector mascot purpose-built for *animation surfaces* (chat thinking states, breathing tools, future onboarding evolutions) where the PNG cannot animate eyes/mouth without a full per-emotion render pipeline.
+
+Triple gate: Build=15.65s.
+
+---
+
+## v5.8.27 — V32 Gap D: 6-screen emotional welcome flow at `/welcome`
+
+Net-new public route `/welcome` (no auth required) housing a 6-screen V32-spec onboarding flow. Built as a single-file `pages/OnboardingFlow.jsx` (lazy-imported in `App.jsx` line 73, registered as `<Route path="/welcome">` line 678) so it does NOT collide with the existing auth-gated `/onboarding` coaching-tier flow (which keeps its 454-line scope untouched).
+
+**Screens (V32 spec, sequenced):**
+1. **Welcome** — Lumi sage-radial-halo orb (canonical avatar PNG `avatar-breathing-nobg.png` w/ graceful `onError` hide), "WELCOME" eyebrow, serif H1 "I'm here with you.", MI-affirmation supporting copy, single sage-gradient pill CTA "Begin gently".
+2. **Goal** — "What feels hardest lately?" open question + 7 emotion chips (Anxiety / Stress / Loneliness / Burnout / Focus / Sleep / Overwhelm) with selectable state, optional skip.
+3. **Micro Relief** — Auto-running 3-round 4-2-5 breathing pacer (inhale 4s → hold 2s → exhale 5s) w/ scaling glow orb tinted by user's chosen glow color. `prefers-reduced-motion` swap → static "Take a slow breath, in your own pace." text + no animation.
+4. **Personalize** — Glow color (5 canonical-palette swatches: sage / calm / blush / sunshine / empathy) + voice tone (soft / warm / calm). Selections persist to `localStorage` under `mmhb-welcome-flow-v1`.
+5. **Progress** — Reframe screen "Growth is gentle. Healing is non-linear." + "You showed up today. That's already something beautiful." MI affirmation.
+6. **Return** — "Your companion will be here whenever you need a softer moment." + sage-gradient "Enter your space" CTA → `/dashboard` + sibling crisis link.
+
+**Universal contracts honored:** V28 paper bg (`var(--glp-paper)`) + white card (`var(--glp-white)` + sage-15 border + soft sage-deep shadow); sage-gradient pill CTAs (#4A7E72→#A8C9A0); canonical-palette glow swatches; `data-testid` on every interactive (button-welcome-continue, button-goal-{id}, button-relief-continue, button-glow-{id}, button-voice-{id}, button-personalize-continue, button-progress-continue, button-finish-onboarding, link-onboarding-skip, link-onboarding-crisis, link-onboarding-crisis-footer); ARIA `role=progressbar` on dot indicator; `aria-pressed` on toggle chips; `prefers-reduced-motion: reduce` blanket on the breathing animation + lumi-breathe scoped keyframe; `/crisis` routing on every screen (sticky footer line + screen 6 sibling link). Smooth scroll-to-top on each step transition for a calm reading position. State resumes if user reloads mid-flow.
+
+Triple gate: Build=16.35s. TS warnings are pre-existing tsconfig artifacts (shared/validators rootDir + baseUrl deprecation), unrelated to this change.
+
+---
+
+## v5.8.26 — V32 quick-win sweep (Gaps A + B + E): emotion-validation cards + evidence-informed copy + cost ops
+
+V32 OMEGA INFINITY audit confirmed 12 of 17 conversion elements already shipped (v5.8.23–v5.8.25 work). User selected ALL 5 remaining gaps to be implemented across multiple checkpointed releases. v5.8.26 lands the three small/quick wins:
+
+**Gap A — Section 2 Emotional Validation cards (`CanvaLanding.jsx` lines 651-732):** New `<section id="emotional-validation">` inserted between hero stats and the "Not Another Wellness App" about section, gated by its own `consciousness-divider`. Eyebrow "You're not the only one" + serif H2 "Whatever you're feeling — it makes sense." + supporting MI-empathy line "Being a human is hard — and that doesn't mean you are broken." Five emotion-led cards in a 1/2/5-col responsive grid, each leading with the V32-mandated phrase + body copy + click-through:
+- "When your thoughts race." → `/tools/breathing` (calm dot, anxiety)
+- "When life feels heavy." → `/check-in` (blush dot, burnout)
+- "When your mind won't slow down." → `/tools/grounding` (warmth dot, ADHD overwhelm)
+- "When you need support." → `/chat` (empathy dot, loneliness)
+- "When you want to become stronger." → `/growth` (sage dot, growth)
+
+Each card is a `<Link>` (full clickthrough, ARIA-labeled), V28-correct (white bg, sage-15 border, soft sage-deep shadow, circle accent dot from the canonical 8-hex palette), with `data-testid="card-validation-{anxiety|burnout|adhd|loneliness|growth}"` + `link-validation-crisis` for the trailing `/crisis` routing line. Reduced-motion: `stagger-child` is already covered by the universal reduced-motion contract; hover lift uses transform only.
+
+**Gap B — "Evidence-informed wellness principles" copy (`CanvaLanding.jsx` 3 sites):** V32 spec: transparency line must read "evidence-informed", not "evidence-based". Changed (a) hero stat-card label `"Evidence-Based Tools"` → `"Evidence-Informed Tools"`; (b) hero supporting paragraph `"500+ evidence-based tools"` → `"500+ evidence-informed tools"`; (c) about-section paragraph + injected new transparency phrase `"Built using evidence-informed wellness principles"` directly into the about narrative so the V32 trust-sequence "Transparency (3-10s)" stage has its anchor copy on-page. The FAQ answer (line ~253) intentionally retains "evidence-based" because that copy describes the underlying tool methodology to a question-asker, not a hero/trust-strip claim — semantically distinct.
+
+**Gap E — Phase 0 cost optimization (shell ops):** `npm cache clean --force` (recommended-protections warning is benign + expected); old `mmhb-backup-*.tar.gz` files >7 days purged (0 found, no-op); `client/node_modules/.cache` removed; workspace size logged at 3.6G. Per V32 spec these recur monthly and save ~$1-2/mo on disk + faster cold builds. Always-On / Deployments toggles are Replit-UI level and require user action — flagged for them in the V32 Phase 0 checklist; not a code change.
+
+**Stability contracts:** No existing `data-testid` selectors mutated. New section uses unique `id="emotional-validation"` so anchor scrolls / nav links don't collide. Crisis-routing line preserved per universal-contract requirement on every wellness surface. Triple gate: TSC=0, Build=17.30s.
+
+---
+
 ## v5.8.25 — V28 full sweep on `CanvaLanding.jsx` (feature-grid band, FAQ band, manifesto-quote hardening)
 
 User reported 9 of 14 reference screenshots showed sections still rendering with mint/sage tinted gradient bands and a residual dark teal "Genuine Love Project" manifesto block — not matching the clean paper-bg + white-card V28 aesthetic established in v5.8.22 / v5.8.23. Investigation confirmed: source `.manifesto-quote` was already V28-white but was visually competing with surrounding sage gradient bands; cache or earlier dark-band cascade could still surface. Three coordinated edits land the full V28 sweep on the homepage:

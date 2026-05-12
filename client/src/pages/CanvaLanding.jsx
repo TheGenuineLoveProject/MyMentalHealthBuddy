@@ -568,7 +568,7 @@ export default function CanvaLanding() {
             </div>
 
             <p className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s', lineHeight: '1.75' }}>
-              500+ evidence-based tools for mastering everyday stressors from A to Z, building genuine confidence, deepening self-worth, and developing the metacognitive skills to understand and evolve your own mind — guided by an AI buddy that truly listens, remembers what matters to you, and coaches you with the intelligence of a behavioral strategist, the wisdom of a mentor, and the warmth of a best friend. Whether you're managing ADHD, navigating overwhelm, or seeking your highest potential — this is the support that changes how you relate to your own mind.
+              500+ evidence-informed tools for mastering everyday stressors from A to Z, building genuine confidence, deepening self-worth, and developing the metacognitive skills to understand and evolve your own mind — guided by an AI buddy that truly listens, remembers what matters to you, and coaches you with the intelligence of a behavioral strategist, the wisdom of a mentor, and the warmth of a best friend. Whether you're managing ADHD, navigating overwhelm, or seeking your highest potential — this is the support that changes how you relate to your own mind.
             </p>
 
             <div className="safe-space-box max-w-md mx-auto mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
@@ -624,7 +624,7 @@ export default function CanvaLanding() {
             <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-gold-20)' }} data-testid="stat-tools">
               <div className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2 font-serif" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>500+</div>
               <p className="stat-card-label text-xs sm:text-sm md:text-[15px] font-semibold uppercase tracking-[0.14em]" style={{ color: 'var(--glp-sage-deep)' }}>
-                Evidence-Based Tools
+                Evidence-Informed Tools
               </p>
             </div>
             <div className="stat-card-elite rounded-2xl sm:rounded-3xl" style={{ background: 'var(--glp-white)', border: '1px solid var(--glp-rose-20)' }} data-testid="stat-availability">
@@ -640,6 +640,85 @@ export default function CanvaLanding() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <div className="consciousness-divider" aria-hidden="true"><div className="consciousness-divider-dot"></div></div>
+
+      {/* v5.8.26 — V32 Section 2: Emotional Validation cards.
+          One emotion per card, lead with feeling, no features. Click routes to a relevant tool. */}
+      <section
+        id="emotional-validation"
+        className="section-breathe section-reveal px-4 md:px-6"
+        style={{ background: 'var(--glp-paper)' }}
+        aria-labelledby="emotional-validation-heading"
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-xs md:text-sm font-semibold uppercase tracking-[0.18em] mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+              You're not the only one
+            </p>
+            <h2 id="emotional-validation-heading" className="text-3xl md:text-5xl font-serif font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
+              Whatever you're feeling —
+              <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                it makes sense.
+              </span>
+            </h2>
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
+              Being a human is hard — and that doesn't mean you are broken. Find the moment that meets you where you are.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
+            {[
+              { headline: "When your thoughts race.", body: "Anxiety doesn't have to win the moment. Breathe with your buddy.", to: "/tools/breathing", accent: "calm", testid: "card-validation-anxiety" },
+              { headline: "When life feels heavy.", body: "Burnout is your mind asking for softer days. Let's start with one breath.", to: "/check-in", accent: "blush", testid: "card-validation-burnout" },
+              { headline: "When your mind won't slow down.", body: "ADHD overwhelm is real. Your buddy meets your pace, not the other way around.", to: "/tools/grounding", accent: "warmth", testid: "card-validation-adhd" },
+              { headline: "When you need support.", body: "Loneliness lifts when someone shows up — patient, present, never weary.", to: "/chat", accent: "empathy", testid: "card-validation-loneliness" },
+              { headline: "When you want to become stronger.", body: "Growth is gentle. Healing is non-linear. There's no wrong way to begin.", to: "/growth", accent: "sage", testid: "card-validation-growth" }
+            ].map((card) => {
+              const accentTokens = {
+                calm: { bg: 'rgba(var(--glp-calm-rgb, 116, 192, 252), 0.10)', dot: 'var(--glp-calm, #74C0FC)' },
+                blush: { bg: 'rgba(var(--glp-blush-rgb, 255, 154, 139), 0.10)', dot: 'var(--glp-blush-500, #FF9A8B)' },
+                warmth: { bg: 'rgba(var(--glp-warmth-rgb, 255, 184, 140), 0.12)', dot: 'var(--glp-warmth, #FFB88C)' },
+                empathy: { bg: 'rgba(var(--glp-empathy-rgb, 200, 182, 255), 0.10)', dot: 'var(--glp-empathy, #C8B6FF)' },
+                sage: { bg: 'rgba(var(--glp-sage-rgb), 0.12)', dot: 'var(--glp-sage)' }
+              };
+              const tokens = accentTokens[card.accent] || accentTokens.sage;
+              return (
+                <Link
+                  key={card.testid}
+                  href={card.to}
+                  data-testid={card.testid}
+                  className="stagger-child group flex flex-col items-start text-left p-5 md:p-6 rounded-2xl transition-transform hover:-translate-y-1"
+                  style={{
+                    background: 'var(--glp-white)',
+                    border: '1px solid var(--glp-sage-15)',
+                    boxShadow: '0 1px 3px rgba(var(--glp-sage-deep-rgb), 0.04), 0 8px 20px rgba(var(--glp-sage-deep-rgb), 0.05)'
+                  }}
+                  aria-label={`${card.headline} ${card.body}`}
+                >
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center mb-4" style={{ background: tokens.bg }}>
+                    <span className="w-3 h-3 rounded-full" style={{ background: tokens.dot }} aria-hidden="true" />
+                  </div>
+                  <h3 className="font-serif text-base md:text-lg font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                    {card.headline}
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-3 flex-1" style={{ color: 'var(--glp-ink)', lineHeight: '1.65' }}>
+                    {card.body}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold mt-auto transition-transform group-hover:translate-x-0.5" style={{ color: 'var(--glp-sage-deep)' }}>
+                    Find this moment
+                    <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
+          <p className="text-xs md:text-sm text-center mt-8 md:mt-10 italic" style={{ color: 'var(--glp-sage-deep)', opacity: 0.8 }}>
+            If you're in crisis, please visit <Link href="/crisis" className="underline font-semibold" data-testid="link-validation-crisis">/crisis</Link> for immediate support.
+          </p>
         </div>
       </section>
 
@@ -667,7 +746,7 @@ export default function CanvaLanding() {
             className="text-sm md:text-lg leading-relaxed max-w-3xl mx-auto mb-4"
             style={{ color: 'var(--glp-ink)', lineHeight: '1.75' }}
           >
-            Most wellness apps are engineered to maximize your screen time. We built this to maximize your potential. Your AI buddy combines the strategic intelligence of a success coach, the patient wisdom of a mentor, the behavioral insight of a metacognitive guide, and the unconditional warmth of a genuine friend — alongside 500+ evidence-based tools for mastering every stressor from A to Z, building genuine confidence, developing self-regulation skills, and understanding the cognitive patterns you've carried for years. Whether you're navigating ADHD, managing overwhelm, building emotional resilience, or seeking your fullest potential — this is the relationship with yourself you've been searching for.
+            Most wellness apps are engineered to maximize your screen time. We built this to maximize your potential. Built using evidence-informed wellness principles, your AI buddy combines the strategic intelligence of a success coach, the patient wisdom of a mentor, the behavioral insight of a metacognitive guide, and the unconditional warmth of a genuine friend — alongside 500+ evidence-informed tools for mastering every stressor from A to Z, building genuine confidence, developing self-regulation skills, and understanding the cognitive patterns you've carried for years. Whether you're navigating ADHD, managing overwhelm, building emotional resilience, or seeking your fullest potential — this is the relationship with yourself you've been searching for.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">

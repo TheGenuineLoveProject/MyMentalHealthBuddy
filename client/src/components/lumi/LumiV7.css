@@ -1,0 +1,220 @@
+/*
+ * LumiV7 — Avatar Evolution Engine (V32 spec)
+ *
+ * Body appearance is FROZEN per V22/V24/V27/V32. Only eye, mouth,
+ * arm, and leg layers gain coordination. Crisis signal forces
+ * instant calm and disables all motion.
+ *
+ * EVERY selector is scoped under `.lumi-v7` so styles cannot leak
+ * if other components ever happen to reuse a shared class name.
+ *
+ * Spec reference: V32 OMEGA INFINITY § Avatar Evolution
+ *   - Eye: 4 types, lerp 0.05/0.12, blink 2-6s, 150ms, double-blink 15%
+ *   - Mouth: 10 expressions, 600ms cubic-bezier(0.4,0,0.2,1), 100ms after eyes
+ *   - Arm: 6 movements, ±30°, 800ms ease-in-out
+ *   - Leg: 5 movements
+ */
+
+.lumi-v7 {
+  --lumi-cream: #F5F0E8;
+  --lumi-sage: #A8C9A0;
+  --lumi-sage-deep: #4A7E72;
+  --lumi-blush: #F5A3A3;
+  --lumi-eye: #1A1A1A;
+  --lumi-mouth: #2A2A2A;
+  --lumi-shadow: rgba(74, 126, 114, 0.18);
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+}
+
+.lumi-v7 svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ---------------- Body (FROZEN — never animate) ---------------- */
+.lumi-v7 .lumi-v7-body,
+.lumi-v7 .lumi-v7-belly,
+.lumi-v7 .lumi-v7-head,
+.lumi-v7 .lumi-v7-blush,
+.lumi-v7 .lumi-v7-sprout {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ---------------- Eye coordination (4 types) ---------------- */
+.lumi-v7 .lumi-v7-eye {
+  fill: var(--lumi-eye);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: rx 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              ry 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 200ms ease-out,
+              transform 150ms ease-out;
+}
+.lumi-v7 .lumi-v7-eye-highlight { fill: #FFFFFF; pointer-events: none; }
+.lumi-v7 .lumi-v7-pupil {
+  fill: var(--lumi-eye);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lumi-v7 .lumi-v7-eye.lumi-eye--default { /* baseline rx/ry set in SVG */ }
+.lumi-v7 .lumi-v7-eye.lumi-eye--wide   { transform: scale(1.4, 1.5); }
+.lumi-v7 .lumi-v7-eye.lumi-eye--soft   { transform: scale(1.0, 0.55); opacity: 0.85; }
+.lumi-v7 .lumi-v7-eye.lumi-eye--happy  { transform: scale(1.1, 0.45); }
+
+/* Blink — driven by JS toggling .is-blinking on each .lumi-v7-eye */
+.lumi-v7 .lumi-v7-eye.is-blinking { transform: scale(1.0, 0.05); opacity: 1; }
+
+/* ---------------- Mouth coordination (10 expressions) ---------------- */
+.lumi-v7 .lumi-v7-mouth {
+  fill: none;
+  stroke: var(--lumi-mouth);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: d 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-width 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              fill 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 600ms ease-out;
+  transition-delay: 100ms; /* eyes lead, mouth follows */
+}
+
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--happy     { stroke-width: 4;   fill: none; }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--calm      { stroke-width: 3;   fill: none; }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--surprise  { stroke-width: 3.5; fill: var(--lumi-mouth); }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--sleepy    { stroke-width: 2.5; fill: none; opacity: 0.85; }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--open      { stroke-width: 3;   fill: var(--lumi-mouth); }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--worried   { stroke-width: 3;   fill: none; }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--excited   { stroke-width: 4.5; fill: var(--lumi-mouth); }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--loving    { stroke-width: 4;   fill: var(--lumi-blush); stroke: var(--lumi-blush); }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--focused   { stroke-width: 3;   fill: none; }
+.lumi-v7 .lumi-v7-mouth.lumi-mouth--breathing { stroke-width: 3;   fill: var(--lumi-mouth); opacity: 0.9; }
+
+/* ---------------- Arm coordination (6 movements) ---------------- */
+.lumi-v7 .lumi-v7-arm {
+  transform-box: fill-box;
+  transform-origin: top center;
+  transition: transform 800ms ease-in-out;
+  will-change: transform;
+}
+.lumi-v7 .lumi-v7-arm--left  { transform-origin: 100% 0%; }
+.lumi-v7 .lumi-v7-arm--right { transform-origin: 0% 0%; }
+
+.lumi-v7.lumi-arm--rest    .lumi-v7-arm--left  { transform: rotate(0deg); }
+.lumi-v7.lumi-arm--rest    .lumi-v7-arm--right { transform: rotate(0deg); }
+
+.lumi-v7.lumi-arm--wave    .lumi-v7-arm--right {
+  transform: rotate(-30deg);
+  animation: lumi-v7-wave 1.4s ease-in-out infinite;
+}
+
+.lumi-v7.lumi-arm--hug     .lumi-v7-arm--left  { transform: rotate(28deg) translate(8px, 4px); }
+.lumi-v7.lumi-arm--hug     .lumi-v7-arm--right { transform: rotate(-28deg) translate(-8px, 4px); }
+
+.lumi-v7.lumi-arm--point   .lumi-v7-arm--right { transform: rotate(-22deg); }
+
+.lumi-v7.lumi-arm--present .lumi-v7-arm--left  { transform: rotate(22deg); }
+.lumi-v7.lumi-arm--present .lumi-v7-arm--right { transform: rotate(-22deg); }
+
+.lumi-v7.lumi-arm--heart   .lumi-v7-arm--left  { transform: rotate(20deg) translate(10px, 8px); }
+.lumi-v7.lumi-arm--heart   .lumi-v7-arm--right { transform: rotate(-20deg) translate(-10px, 8px); }
+
+@keyframes lumi-v7-wave {
+  0%, 100% { transform: rotate(-30deg); }
+  50%      { transform: rotate(-12deg); }
+}
+
+/* ---------------- Leg coordination (5 movements) ---------------- */
+.lumi-v7 .lumi-v7-leg {
+  transform-box: fill-box;
+  transform-origin: top center;
+  transition: transform 800ms ease-in-out;
+  will-change: transform;
+}
+.lumi-v7 .lumi-v7-leg--left  { transform-origin: 50% 0%; }
+.lumi-v7 .lumi-v7-leg--right { transform-origin: 50% 0%; }
+
+.lumi-v7.lumi-leg--rest   .lumi-v7-leg { transform: translateY(0) rotate(0); }
+
+.lumi-v7.lumi-leg--sit    .lumi-v7-leg--left  { transform: translateY(-6px) translateX(4px) rotate(-12deg); }
+.lumi-v7.lumi-leg--sit    .lumi-v7-leg--right { transform: translateY(-6px) translateX(-4px) rotate(12deg); }
+
+.lumi-v7.lumi-leg--walk   .lumi-v7-leg--left  { animation: lumi-v7-walk-l 0.9s ease-in-out infinite; }
+.lumi-v7.lumi-leg--walk   .lumi-v7-leg--right { animation: lumi-v7-walk-r 0.9s ease-in-out infinite; }
+
+.lumi-v7.lumi-leg--bounce .lumi-v7-leg--left,
+.lumi-v7.lumi-leg--bounce .lumi-v7-leg--right { animation: lumi-v7-bounce 0.6s ease-in-out infinite; }
+
+.lumi-v7.lumi-leg--tuck   .lumi-v7-leg--left  { transform: translateY(-10px) translateX(8px); }
+.lumi-v7.lumi-leg--tuck   .lumi-v7-leg--right { transform: translateY(-10px) translateX(-8px); }
+
+@keyframes lumi-v7-walk-l {
+  0%, 100% { transform: rotate(-12deg); }
+  50%      { transform: rotate(12deg); }
+}
+@keyframes lumi-v7-walk-r {
+  0%, 100% { transform: rotate(12deg); }
+  50%      { transform: rotate(-12deg); }
+}
+@keyframes lumi-v7-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+/* ---------------- Heart glow (V8 contract) ---------------- */
+.lumi-v7 .lumi-v7-heart-glow {
+  fill: var(--lumi-blush);
+  opacity: 0.6;
+  transform-origin: center;
+  animation: lumi-v7-heart-pulse 2.4s ease-in-out infinite;
+}
+@keyframes lumi-v7-heart-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%      { opacity: 0.75; transform: scale(1.06); }
+}
+
+/* ---------------- Crisis override → instant calm, no motion ----------------
+ * BHCE asymmetric-risk safety contract. Must beat blink + every keyframe class.
+ * `!important` is intentional and required here. */
+.lumi-v7.is-crisis .lumi-v7-eye,
+.lumi-v7.is-crisis .lumi-v7-pupil,
+.lumi-v7.is-crisis .lumi-v7-mouth,
+.lumi-v7.is-crisis .lumi-v7-arm,
+.lumi-v7.is-crisis .lumi-v7-leg,
+.lumi-v7.is-crisis .lumi-v7-heart-glow {
+  animation: none !important;
+  transition: none !important;
+}
+.lumi-v7.is-crisis .lumi-v7-eye,
+.lumi-v7.is-crisis .lumi-v7-eye.is-blinking,
+.lumi-v7.is-crisis .lumi-v7-eye.lumi-eye--default,
+.lumi-v7.is-crisis .lumi-v7-eye.lumi-eye--wide,
+.lumi-v7.is-crisis .lumi-v7-eye.lumi-eye--soft,
+.lumi-v7.is-crisis .lumi-v7-eye.lumi-eye--happy {
+  transform: scale(1.0, 0.7) !important;
+  opacity: 0.9 !important;
+}
+.lumi-v7.is-crisis .lumi-v7-arm--left,
+.lumi-v7.is-crisis .lumi-v7-arm--right {
+  transform: rotate(0deg) !important;
+}
+.lumi-v7.is-crisis .lumi-v7-leg--left,
+.lumi-v7.is-crisis .lumi-v7-leg--right {
+  transform: rotate(0deg) translateY(0) !important;
+}
+
+/* ---------------- Reduced-motion contract ---------------- */
+@media (prefers-reduced-motion: reduce) {
+  .lumi-v7 *,
+  .lumi-v7 *::before,
+  .lumi-v7 *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .lumi-v7 .lumi-v7-pupil { transform: none !important; }
+}
