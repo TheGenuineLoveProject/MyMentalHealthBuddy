@@ -22,5 +22,13 @@
   {
     "role": "assistant",
     "content": "It’s tough when negative thoughts take over. Let's interrupt that pattern. What’s one specific negative thought you're having right now? Once you identify it, we can work on reframing or challenging it together."
+  },
+  {
+    "role": "user",
+    "content": "I feel overwhelmed and want to understand what I'm feeling"
+  },
+  {
+    "role": "assistant",
+    "content": "Feeling overwhelmed can be heavy to carry. Let’s take a moment to explore this. What specific thoughts or emotions are surfacing for you right now? Identifying them can help you gain clarity and a better understanding of what you’re experiencing."
   }
 ]

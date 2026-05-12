@@ -6,7 +6,9 @@
     "feeling anxious",
     "frustration with expectations",
     "anxiety",
-    "feeling overwhelmed"
+    "feeling overwhelmed",
+    "experiencing anxiety",
+    "stuck in negative thoughts"
   ],
   "triggers": [
     "technology issues",
@@ -23,14 +25,16 @@
     "grounding techniques",
     "deep breathing exercises",
     "writing down thoughts",
-    "jotting down feelings"
+    "jotting down feelings",
+    "challenging negative thoughts"
   ],
   "support_needs": [
     "calming techniques",
     "emotional validation",
     "help with anxiety",
     "clarity in thoughts",
-    "understanding feelings"
+    "understanding feelings",
+    "help with clarity"
   ],
   "risk_flags": [
     "reports feeling anxious",

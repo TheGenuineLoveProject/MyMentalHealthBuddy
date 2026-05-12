@@ -1,4 +1,4 @@
-import { FileText } from "lucide-react";
+import { FileText, Stethoscope, AlertTriangle, Bot } from "lucide-react";
 import SEO from "@/components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -41,36 +41,51 @@ export default function Disclaimer() {
             <h1 className="text-display-md text-teal">Disclaimer</h1>
           </div>
 
-          <div className="card-premium p-8 space-y-6">
+          <div className="card-premium p-8 space-y-8">
             <p className="text-body-md">
               The Genuine Love Project ("TGLP") provides self-reflection tools, journaling features,
               mood tracking, and supportive, non-clinical guidance. It is intended for informational
               and educational purposes only.
             </p>
 
-            <div>
-              <h2 className="text-heading-sm text-teal mb-2">Not Medical Advice</h2>
-              <p className="text-body-sm">
-                TGLP does not provide medical advice, diagnosis, or treatment. Your use of the app does
-                not create a therapist-client, doctor-patient, or other professional relationship.
-              </p>
+            <div className="flex items-start gap-4">
+              <div className="icon-container icon-lg icon-gradient-sage flex-shrink-0">
+                <Stethoscope className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div>
+                <h2 className="text-heading-sm text-teal mb-2">Not Medical Advice</h2>
+                <p className="text-body-sm">
+                  TGLP does not provide medical advice, diagnosis, or treatment. Your use of the app does
+                  not create a therapist-client, doctor-patient, or other professional relationship.
+                </p>
+              </div>
             </div>
 
-            <div>
-              <h2 className="text-heading-sm text-teal mb-2">Crisis & Emergency</h2>
-              <p className="text-body-sm">
-                If you are in immediate danger, call your local emergency number right now.
-                If you are thinking about self-harm, seek immediate help from emergency services or a
-                crisis hotline in your country.
-              </p>
+            <div className="flex items-start gap-4">
+              <div className="icon-container icon-lg icon-gradient-blush flex-shrink-0">
+                <AlertTriangle className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div>
+                <h2 className="text-heading-sm text-teal mb-2">Crisis & Emergency</h2>
+                <p className="text-body-sm">
+                  If you are in immediate danger, call your local emergency number right now.
+                  If you are thinking about self-harm, seek immediate help from emergency services or a
+                  crisis hotline in your country.
+                </p>
+              </div>
             </div>
 
-            <div>
-              <h2 className="text-heading-sm text-teal mb-2">AI Limitations</h2>
-              <p className="text-body-sm">
-                AI-generated responses may be inaccurate, incomplete, or inappropriate for your situation.
-                Do not rely on AI outputs for urgent, medical, legal, or safety-critical decisions.
-              </p>
+            <div className="flex items-start gap-4">
+              <div className="icon-container icon-lg icon-gradient-gold flex-shrink-0">
+                <Bot className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div>
+                <h2 className="text-heading-sm text-teal mb-2">AI Limitations</h2>
+                <p className="text-body-sm">
+                  AI-generated responses may be inaccurate, incomplete, or inappropriate for your situation.
+                  Do not rely on AI outputs for urgent, medical, legal, or safety-critical decisions.
+                </p>
+              </div>
             </div>
 
             <p className="text-caption pt-4 border-t border-[var(--glp-border)]">

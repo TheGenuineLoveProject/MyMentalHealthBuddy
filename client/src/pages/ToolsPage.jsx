@@ -191,7 +191,11 @@ export default function ToolsPage() {
         title="Reflection Tools - The Genuine Love Project" 
         description="A gentle toolkit for self-discovery including belief mapping, timed writing, and growth tracking." 
       />
-      <div className="min-h-screen bg-[var(--glp-paper)]">
+      <div className="min-h-screen hero-premium relative overflow-hidden">
+        <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-gold w-[350px] h-[350px] top-1/3 -left-32 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[300px] h-[300px] bottom-20 right-10 absolute" aria-hidden="true" />
+        <div className="relative z-10">
         <Hero
           eyebrow="Reflection Toolkit"
           title={heroCopy.title}
@@ -223,18 +227,20 @@ export default function ToolsPage() {
               <Microcopy slot="consent" seed="tools-page" as="span" />
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
-              {TOOLS.map((tool) => {
+              {TOOLS.map((tool, idx) => {
                 const Icon = tool.icon;
+                const gradients = ['icon-gradient-sage', 'icon-gradient-gold', 'icon-gradient-blush', 'icon-gradient-teal'];
+                const gradientClass = gradients[idx % gradients.length];
                 return (
                   <button
                     key={tool.id}
                     onClick={() => setActiveTool(tool.id)}
-                    className="bg-white rounded-xl p-6 text-left shadow-sm border border-[var(--glp-sage-10)] hover:shadow-md hover:border-[var(--glp-sage-30)] transition-all group"
+                    className="card-premium p-6 text-left transition-all group"
                     data-testid={`button-tool-${tool.id}`}
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-[var(--glp-sage-10)] flex items-center justify-center group-hover:bg-[var(--glp-sage-20)] transition-colors">
-                        <Icon className="w-5 h-5 text-[var(--glp-sage-deep)]" />
+                      <div className={`icon-container icon-lg ${gradientClass} group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-5 h-5" aria-hidden="true" />
                       </div>
                       <div className="flex-1">
                         <div className="font-medium text-[var(--glp-sage-deep)]">{tool.name}</div>
@@ -272,6 +278,7 @@ export default function ToolsPage() {
               These tools are for reflection and self-discovery, not therapy. You know yourself best.
             </p>
           </div>
+        </div>
         </div>
       </div>
       <SafetyFooter />

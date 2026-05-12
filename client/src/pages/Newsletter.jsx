@@ -44,24 +44,30 @@ export default function Newsletter() {
         </section>
 
         <section className="grid gap-6 md:grid-cols-3 mb-10">
-          <div className="card-glass p-6 text-center" data-testid="card-what-expect-1">
-            <Heart className="w-8 h-8 mx-auto text-[var(--glp-sage-deep)] mb-3" />
+          <div className="card-premium p-6 text-center" data-testid="card-what-expect-1">
+            <div className="icon-container icon-lg icon-gradient-sage mx-auto mb-4">
+              <Heart className="w-5 h-5" aria-hidden="true" />
+            </div>
             <h3 className="font-semibold text-[var(--glp-sage-deep)] mb-2">Warm, Not Loud</h3>
             <p className="text-sm text-[var(--glp-ink)]/70">
               We send when we have something meaningful to share — not on a rigid schedule.
               Expect low-frequency, high-value messages.
             </p>
           </div>
-          <div className="card-glass p-6 text-center" data-testid="card-what-expect-2">
-            <Shield className="w-8 h-8 mx-auto text-[var(--glp-sage-deep)] mb-3" />
+          <div className="card-premium p-6 text-center" data-testid="card-what-expect-2">
+            <div className="icon-container icon-lg icon-gradient-blush mx-auto mb-4">
+              <Shield className="w-5 h-5" aria-hidden="true" />
+            </div>
             <h3 className="font-semibold text-[var(--glp-sage-deep)] mb-2">Your Privacy Matters</h3>
             <p className="text-sm text-[var(--glp-ink)]/70">
               We never sell your data, never share your email, and never use manipulative tactics.
               Unsubscribe anytime with one click.
             </p>
           </div>
-          <div className="card-glass p-6 text-center" data-testid="card-what-expect-3">
-            <Clock className="w-8 h-8 mx-auto text-[var(--glp-sage-deep)] mb-3" />
+          <div className="card-premium p-6 text-center" data-testid="card-what-expect-3">
+            <div className="icon-container icon-lg icon-gradient-gold mx-auto mb-4">
+              <Clock className="w-5 h-5" aria-hidden="true" />
+            </div>
             <h3 className="font-semibold text-[var(--glp-sage-deep)] mb-2">At Your Own Pace</h3>
             <p className="text-sm text-[var(--glp-ink)]/70">
               Our content is written to support you wherever you are —
