@@ -818,3 +818,110 @@
   40%  { transform: scale(1.22); filter: brightness(1.4) drop-shadow(0 0 8px rgba(232,145,58,0.7)); }
   100% { transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 0 rgba(232,145,58,0)); }
 }
+
+/* ======================================================================
+   V20 — Visual effects (sparkles · floating particles · 3-level blush)
+   Additive, gated by .lumiv6--v20. JSX never renders these when
+   animated=false (crisis), and the existing .lumiv6 reduced-motion
+   blanket already kills their keyframes; the rules below add
+   display:none for sparkles/particles under reduced-motion so we don't
+   leave a frozen sparkle stuck mid-cycle. PNG/WebP image is untouched.
+   ====================================================================== */
+
+/* ----- Sparkles (joy · escalation level 3) ---------------------------- */
+.lumiv6__sparkle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 22;
+}
+.lumiv6__sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #FFD93D 0%, #FFC857 100%);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  opacity: 0;
+  transform: scale(0) rotate(0deg);
+  filter: drop-shadow(0 0 4px rgba(255, 217, 61, 0.6));
+}
+.lumiv6--v20.lumiv6--animated .lumiv6__sparkle {
+  animation: lumiv20Sparkle 2s ease-in-out infinite;
+}
+.lumiv6__sparkle--1 { top: 10%;  left: 80%;  animation-delay: 0s !important; }
+.lumiv6__sparkle--2 { top: 20%;  right: 15%; animation-delay: 0.5s !important; }
+.lumiv6__sparkle--3 { top: 5%;   left: 60%;  animation-delay: 1s !important; }
+@keyframes lumiv20Sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50%      { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* ----- Floating particles (calm · sleepy · empathy) ------------------- */
+.lumiv6__particle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.lumiv6__particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  bottom: 20%;
+  border-radius: 50%;
+  background: rgba(168, 201, 160, 0.6);
+  opacity: 0;
+}
+.lumiv6--v20.lumiv6--animated .lumiv6__particle {
+  animation: lumiv20FloatParticle 4s ease-in-out infinite;
+}
+.lumiv6__particle--1 { left: 20%; animation-delay: 0s !important;  animation-duration: 3.5s !important; }
+.lumiv6__particle--2 { left: 50%; animation-delay: 1s !important;  animation-duration: 4.2s !important; }
+.lumiv6__particle--3 { left: 70%; animation-delay: 2s !important;  animation-duration: 5s !important; }
+.lumiv6--emotion-calm    .lumiv6__particle { background: rgba(116, 192, 252, 0.55); }
+.lumiv6--emotion-empathy .lumiv6__particle { background: rgba(200, 182, 255, 0.55); }
+.lumiv6--emotion-sleepy  .lumiv6__particle { background: rgba(168, 213, 186, 0.5); }
+@keyframes lumiv20FloatParticle {
+  0%   { transform: translate(0, 0);        opacity: 0; }
+  20%  {                                    opacity: 0.6; }
+  80%  {                                    opacity: 0.4; }
+  100% { transform: translate(10px, -40px); opacity: 0; }
+}
+
+/* ----- Blush (3 escalation levels, interaction-driven only) ----------
+   The V17 plush PNGs already ship with subtle baked-in cheek blush, so
+   the V20 overlay layers an additional radial wash on top — only when
+   the user has actively interacted with click zones (V9 escalation
+   level >= 1). Never auto-derived from emotion alone. */
+.lumiv6__blush {
+  position: absolute;
+  width: 18%;
+  height: 10%;
+  top: 45%;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 14;
+  transition: opacity 400ms ease-in-out, background 400ms ease-in-out;
+  background: radial-gradient(ellipse at center, rgba(255, 154, 139, 0.5) 0%, rgba(255, 154, 139, 0) 70%);
+}
+.lumiv6__blush--left  { left:  15%; }
+.lumiv6__blush--right { right: 15%; }
+.lumiv6--blush-level-1 .lumiv6__blush { opacity: 0.2; }
+.lumiv6--blush-level-2 .lumiv6__blush { opacity: 0.4; }
+.lumiv6--blush-level-3 .lumiv6__blush { opacity: 0.6; }
+.lumiv6--emotion-joy     .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(255, 217, 61, 0.5) 0%,  rgba(255, 217, 61, 0)  70%); }
+.lumiv6--emotion-love    .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(255, 154, 139, 0.55) 0%, rgba(255, 154, 139, 0) 70%); }
+.lumiv6--emotion-empathy .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(200, 182, 255, 0.5) 0%,  rgba(200, 182, 255, 0) 70%); }
+.lumiv6--emotion-calm    .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(168, 201, 160, 0.45) 0%, rgba(168, 201, 160, 0) 70%); }
+
+/* ----- Crisis stillness (animated=false) — belt-and-braces ----------- */
+.lumiv6--still .lumiv6__sparkle,
+.lumiv6--still .lumiv6__particle { display: none; }
+
+/* ----- Reduced motion: hide moving effects, freeze blush ------------- */
+@media (prefers-reduced-motion: reduce) {
+  .lumiv6 .lumiv6__sparkle,
+  .lumiv6 .lumiv6__particle { display: none; }
+  .lumiv6 .lumiv6__blush    { transition: none !important; }
+}

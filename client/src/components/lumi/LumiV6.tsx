@@ -126,6 +126,9 @@ export type LumiV6Posture =
   | "relaxed"
   | "bouncy";
 
+/** V20: 3-level interaction-driven blush escalation. 0 = none. */
+export type LumiV6BlushLevel = 0 | 1 | 2 | 3;
+
 export interface LumiV6Props {
   colorMode?: LumiV6ColorMode;
   emotion?: LumiV6Emotion;
@@ -184,6 +187,33 @@ export interface LumiV6Props {
   imageLoading?: "lazy" | "eager" | "auto";
   /** Above-the-fold hint for the browser fetch scheduler. */
   fetchPriority?: "high" | "low" | "auto";
+  /**
+   * V20 master flag — turns on the additive visual-effects layer
+   * (sparkles, floating particles, interaction-driven blush). All V20
+   * effects are also gated by `animated` so crisis surfaces stay
+   * completely still. The underlying PNG/WebP image is byte-identical
+   * untouched (V21 3D-preservation contract). Default false.
+   */
+  v20?: boolean;
+  /**
+   * V20: explicit override for the joyful sparkle layer. When undefined
+   * and `v20=true`, auto-on for `emotion="joy"` OR V9 escalation level
+   * ≥ 3. Pass `false` to suppress on a v20 surface.
+   */
+  sparkles?: boolean;
+  /**
+   * V20: explicit override for the floating particle layer. When
+   * undefined and `v20=true`, auto-on for calm/sleepy/empathy. Pass
+   * `false` to suppress on a v20 surface.
+   */
+  particles?: boolean;
+  /**
+   * V20: explicit override for the cheek blush level (0–3). When
+   * undefined and `v20=true`, auto-derived from V9 escalation level
+   * ONLY (never from emotion alone — the V17 PNG already ships with
+   * baked-in blush, so emotion-derived overlay would oversaturate).
+   */
+  blushLevel?: LumiV6BlushLevel;
   className?: string;
   "data-testid"?: string;
 }
@@ -302,6 +332,10 @@ export default function LumiV6({
   detectedSentiment = null,
   imageLoading = "lazy",
   fetchPriority = "auto",
+  v20 = false,
+  sparkles,
+  particles,
+  blushLevel,
   className = "",
   "data-testid": testId = "lumi-v6",
 }: LumiV6Props) {
@@ -779,6 +813,24 @@ export default function LumiV6({
   const eyeMod = finalEye === "default" ? "" : `lumiv6__eye--${finalEye}`;
   const mouthMod = `lumiv6__mouth--${resolvedMouth}`;
 
+  // ---------- V20: visual-effects derivation ----------
+  // All V20 effects are gated on `v20 && animated` so crisis surfaces
+  // (animated=false) emit zero V20 DOM. Explicit props always override.
+  // Sparkles auto-on for joy emotion OR escalation level >= 3.
+  // Particles auto-on for calm/sleepy/empathy.
+  // Blush is interaction-driven only (V9 escalation level) — never auto
+  // from emotion alone, since the V17 PNG already has baked-in blush.
+  const v20Active = v20 && animated;
+  const showSparkles = v20Active &&
+    (sparkles ?? (effectiveEmotion === "joy" || v9EscalationLevel >= 3));
+  const showParticles = v20Active &&
+    (particles ?? (effectiveEmotion === "calm" ||
+                   effectiveEmotion === "sleepy" ||
+                   effectiveEmotion === "empathy"));
+  const resolvedBlushLevel: LumiV6BlushLevel = v20Active
+    ? (blushLevel ?? (Math.min(3, v9EscalationLevel) as LumiV6BlushLevel))
+    : 0;
+
   const auraSpec = AURA_BY_EMOTION[effectiveEmotion];
   const wrapperStyle: CSSProperties & Record<`--${string}`, string | number> = {
     width: `${px}px`,
@@ -820,6 +872,8 @@ export default function LumiV6({
         v9 && v9Recognition ? "lumiv6--v9-recognition" : "",
         v9 && animated ? "lumiv6--v9-visceral-glow" : "",
         v9 && v9Goodbye ? "lumiv6--v9-goodbye" : "",
+        v20 ? "lumiv6--v20" : "",
+        resolvedBlushLevel > 0 ? `lumiv6--blush-level-${resolvedBlushLevel}` : "",
         className,
       ].filter(Boolean).join(" ")}
       style={wrapperStyle}
@@ -844,6 +898,23 @@ export default function LumiV6({
     >
       {auraOn && <div className="lumiv6__aura" aria-hidden="true" />}
       {shadowOn && <div className="lumiv6__shadow" aria-hidden="true" />}
+
+      {/* V20: floating particles (z-index 2 — between body and face) */}
+      {showParticles && (
+        <div className="lumiv6__particle-layer" aria-hidden="true">
+          <span className="lumiv6__particle lumiv6__particle--1" />
+          <span className="lumiv6__particle lumiv6__particle--2" />
+          <span className="lumiv6__particle lumiv6__particle--3" />
+        </div>
+      )}
+
+      {/* V20: cheek blush (z-index 14 — above body, below face) */}
+      {resolvedBlushLevel > 0 && (
+        <>
+          <span className="lumiv6__blush lumiv6__blush--left"  aria-hidden="true" />
+          <span className="lumiv6__blush lumiv6__blush--right" aria-hidden="true" />
+        </>
+      )}
 
       <div className="lumiv6__posture" aria-hidden="true">
         <picture>
@@ -927,6 +998,15 @@ export default function LumiV6({
             onClick={() => fireOverride("joy", "body", 2000)}
           />
         </>
+      )}
+
+      {/* V20: sparkles (z-index 22 — above face, joy + escalation 3+) */}
+      {showSparkles && (
+        <div className="lumiv6__sparkle-layer" aria-hidden="true">
+          <span className="lumiv6__sparkle lumiv6__sparkle--1" />
+          <span className="lumiv6__sparkle lumiv6__sparkle--2" />
+          <span className="lumiv6__sparkle lumiv6__sparkle--3" />
+        </div>
       )}
 
       {showMessage && (

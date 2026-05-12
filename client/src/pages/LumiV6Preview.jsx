@@ -369,6 +369,8 @@ export default function LumiV6Preview() {
         {/* ---------- V9 "Soul Capture" demo ---------- */}
         <V9DemoSection />
 
+        <V20EffectsSection />
+
         {/* ---------- V7 Toy Spec readout ---------- */}
         <LumiAudioPanel />
 
@@ -601,6 +603,70 @@ function V9DemoSection() {
         head/heart/body 3+ times within 10s (escalation builds to celebration
         sparkle), tap a sentiment chip (1.5s mirror flash), then leave the
         cursor away for 15s and slowly approach (attention capture wobble).
+      </p>
+    </section>
+  );
+}
+
+function V20EffectsSection() {
+  return (
+    <section
+      className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-yellow-200"
+      data-testid="section-lumiv20"
+    >
+      <h2 className="mb-2 text-2xl font-semibold text-slate-900">
+        LumiV20 — Visual Effects (Phase 1)
+      </h2>
+      <p className="mb-4 max-w-3xl text-sm text-slate-600">
+        Additive overlay layer. <b>Sparkles</b> auto-on for joy or click
+        escalation level 3. <b>Floating particles</b> auto-on for calm /
+        sleepy / empathy (per-emotion tint). <b>Blush</b> escalates with
+        click-zone interactions only (1, 2, 3 clicks within 10s). The PNG
+        image itself is byte-identical untouched. All effects suppressed
+        when <code>animated=false</code> (crisis) and when{" "}
+        <code>prefers-reduced-motion: reduce</code>.
+      </p>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Cell label="V20 + greeting + explicit sparkles" testId="cell-v20-sparkles">
+          <LumiV6
+            emotion="greeting"
+            size="xl"
+            v8
+            v20
+            sparkles
+            data-testid="lumi-v20-sparkles"
+          />
+        </Cell>
+        <Cell label="V20 + calm (auto particles)" testId="cell-v20-particles">
+          <LumiV6
+            emotion="calm"
+            size="xl"
+            v8
+            v20
+            data-testid="lumi-v20-particles"
+          />
+        </Cell>
+        <Cell
+          label="V20 + clickable (click for blush escalation 1→2→3)"
+          testId="cell-v20-blush-interactive"
+        >
+          <LumiV6
+            emotion="love"
+            size="xl"
+            v8
+            v9
+            v20
+            clickable
+            data-testid="lumi-v20-blush-interactive"
+          />
+        </Cell>
+      </div>
+
+      <p className="mt-3 text-xs text-slate-500">
+        Try: click the third Lumi's heart 3+ times — cheek blush deepens
+        through level 1 → 2 → 3, and at level 3 the joy sparkles fire on
+        top. Decays after 10s of no clicks.
       </p>
     </section>
   );
