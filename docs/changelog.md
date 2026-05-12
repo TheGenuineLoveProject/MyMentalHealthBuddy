@@ -6,6 +6,21 @@ Newest entries on top.
 
 ---
 
+## v5.8.15 — VisualBenefits canonical avatar swap (user-provided official designs)
+
+User provided 4 canonical avatar PNGs/JPEGs as the locked-official MyMentalHealthBuddy mascot designs, photographed in-context alongside their target section titles. These supersede the v5.8.14 hooded regenerations (which had unintended cat-ear hood points violating V26 "no visible ears" + one image with eyebrow lines violating V24 §2). New mapping in `client/src/sections/VisualBenefits.jsx`:
+
+| Section | Asset | Visual |
+|---|---|---|
+| Relief — "Breathe. Settle. Release." | `lumi-official-meditating.{png,webp}` | sage hooded panda-style, eyes closed, blue calm-swirl ribbons orbiting torso |
+| Understanding — "Name it. Move through it." | `lumi-official-emotion-orbs.{png,webp}` | white hooded body cradling a cluster of 4 emotion orbs (sad/sad/happy/sad faces in canonical palette) |
+| Companionship — "You are not alone." | `lumi-official-heart-holding.{png,webp}` | sage-hooded body holding a glowing sunshine `#FFD93D` heart at chest |
+| Growth — "Grow at your own pace." | `lumi-official-floating-sparkles.{png,webp}` | sprout-headed Lumi (V24 §2 Design B) floating in a cloud of sage `#A8C9A0` sparkles |
+
+Overlays untouched (avatar-breathing, avatar-heart, lumi-pose-halo-prayer, avatar-floating). Text/layout/CSS/ResponsiveImage component all preserved per user's "don't change copy/layout" instruction. WebP ratios: 56-72KB at q=85 (95-97% transfer reduction vs. 1.9-2.6MB source PNGs — matches v5.8.7 sharp-removal optimization profile). 8 orphan v5.8.14 cat-ear assets (`lumi-hooded-{meditating-aura,emotion-orbs,halo-prayer,walking-path}.{png,webp}`) deleted in same commit. Triple gate: TSC=0, Build=15.61s.
+
+---
+
 ## v5.8.6 → v5.8.10 — Polish layer batch (relocated from replit.md on v5.8.13)
 
 These entries were rolled down from `replit.md` to keep the active project README under ~30 KB. No content was lost — every line is preserved verbatim below. Universal contracts (palette, reduced-motion, z-index, crisis routing) noted at the bottom of `replit.md` apply to all entries below.
