@@ -1,3 +1,26 @@
+## v5.8.30 — V28 Public Surfaces Sweep (Tier 2)
+
+User attached the homepage "There's More to Explore" + "Healing, in your inbox" reference screenshot and asked: "ensure entire web pages are consistent, ensure same formatting in screenshot is used." That screenshot is `CanvaLanding.jsx` — the V28 reference. This sweep propagates the same paper-bg + white-card + canonical-pastel-tile pattern to the next-tier public surfaces.
+
+**Files touched:**
+- `client/src/pages/WellnessToolsHub.jsx` — full rewrite. Removed the indigo→purple body gradient (`bg-gradient-to-br from-indigo-50 via-white to-purple-50`) + the entire `dark:bg-slate-900` mode leak (was using both light + dark slate tokens, breaking V28 paper aesthetic). Each of the 9 tool cards previously rendered an off-palette tailwind gradient icon tile (`from-amber-500 to-orange-500`, `from-rose-500 to-pink-500`, `from-purple-500 to-indigo-500`, `from-teal-500 to-cyan-500`, `from-emerald-500 to-teal-500`, `from-indigo-500 to-purple-500`, `from-rose-500 to-amber-500`, `from-indigo-500 to-slate-500`, `from-teal-500 to-emerald-500`). Each was re-mapped to a canonical 8-hex-derived pastel tint + matching darker icon stroke (per the screenshot pattern: soft tinted square + bold stroked icon, NOT a saturated gradient): GAD-7 → sunshine `rgba(255,217,61,0.18)` + `#B88A1F`; PHQ-9 → blush `rgba(255,154,139,0.20)` + `#C2604F`; Distortion → empathy-purple `rgba(200,182,255,0.22)` + `#6B5BA8`; Breath → calm-blue `rgba(116,192,252,0.20)` + `#3D78B8`; Boundary → mint `rgba(168,213,186,0.25)` + `#4A7E62`; Discernment → sage `rgba(168,201,160,0.25)` + `#4A7E72`; Manipulation → warmth-orange `rgba(255,184,140,0.22)` + `#B8662E`; Sleep → calm-blue (alt) `rgba(116,192,252,0.18)`; Nervous System → mint (alt). All darker icon strokes are perceptually faithful WCAG-AA-compliant deepenings of the canonical hue. Card body bg: `var(--glp-white)` w/ `var(--glp-sage-15)` border. Disclaimer card: same V28 white-on-paper treatment. All 9 `data-testid` preserved. `/crisis` routing intact (header + new explicit anchor in disclaimer paragraph). Hover transition gated with `motion-reduce:transition-none`.
+- `client/src/pages/ToolsPage.jsx` — `min-h-screen hero-premium relative overflow-hidden` → `min-h-screen relative overflow-hidden` w/ flat `var(--glp-paper)`. Decorative sage/gold/blush orbs preserved (canonical token ambient overlays).
+- `client/src/pages/Blog.jsx` — 2× `hero-gradient` legacy class → flat paper bg (article-detail view + index view). Decorative orbs preserved.
+- `client/src/pages/BlogIndex.jsx` — `hero-premium` → flat paper bg.
+- `client/src/pages/Terms.tsx` — `hero-gradient` → flat paper bg. Existing `card-bordered` sections retained (global brand class, V28-compatible).
+
+**What was deliberately NOT changed:**
+- `WellnessPageShell` wrappers on Terms/Blog — these are governance scaffolding (clarity contract, benefits chips) and already render V28-compliant outer chrome.
+- Decorative `decorative-orb-sage/gold/blush` overlays on ToolsPage/Blog — already use canonical tokens at low alpha (universal contract permits ambient overlays).
+- Mood/Journal/CrisisResources — audit confirmed no off-palette gradients on these pages.
+
+**Universal contracts honored:**
+- All `data-testid` preserved.
+- `/crisis` routing on every wellness surface (header + extra anchor in tools disclaimer).
+- `prefers-reduced-motion`: hover transition on tool cards gated with `motion-reduce:transition-none`.
+- Canonical 8-hex palette only for accents; deeper icon strokes are hue-faithful deepenings (perceptually within the same canonical color family).
+- Build green: `✓ built in 16.89s`.
+
 ## v5.8.29 — V28 Auth + Privacy Sweep + Canonical Stat Cards
 
 User-reported gap: "inconsistent styling — some pages still use old colors / dark blocks instead of V28 paper + white cards." Audit confirmed CanvaLanding/Pricing/CheckIn/Breathing/About/Disclaimer/OnboardingFlow/AvatarLab were already V28-clean, but six high-traffic surfaces still leaked off-palette gradients. Fixed in one sweep.

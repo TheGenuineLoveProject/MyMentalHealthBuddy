@@ -102,7 +102,7 @@ export default function BlogIndex() {
   });
 
   return (
-    <div className="min-h-screen hero-premium relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
       <SEO
         title="Blog | MyMentalHealthBuddy"
         description="Wellness resources, emotional health insights, and gentle guidance from MyMentalHealthBuddy."

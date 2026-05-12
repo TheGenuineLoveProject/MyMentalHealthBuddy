@@ -30,7 +30,7 @@ export default function Terms() {
         title="Terms of Use - The Genuine Love Project"
         description="Terms of Use for The Genuine Love Project mental wellness platform."
       />
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen" style={{ background: 'var(--glp-paper)' }}>
         <div className="content-wrapper py-8">
           <div className="max-w-3xl mx-auto">
             <header className="mb-8">

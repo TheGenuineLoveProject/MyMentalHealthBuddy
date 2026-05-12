@@ -373,7 +373,7 @@ export default function Blog() {
           description={article.excerpt}
         />
         
-        <div className="min-h-screen hero-gradient overflow-hidden relative">
+        <div className="min-h-screen overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
           <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-blush w-[300px] h-[300px] bottom-20 -left-20 absolute" aria-hidden="true" />
           
@@ -465,7 +465,7 @@ export default function Blog() {
         description="Healing articles, wellness resources, and insights for your journey to genuine love and emotional well-being."
       />
       
-      <div className="min-h-screen hero-gradient overflow-hidden relative">
+      <div className="min-h-screen overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
         <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[300px] h-[300px] bottom-20 -left-20 absolute" aria-hidden="true" />
         

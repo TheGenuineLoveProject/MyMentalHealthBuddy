@@ -191,7 +191,7 @@ export default function ToolsPage() {
         title="Reflection Tools - The Genuine Love Project" 
         description="A gentle toolkit for self-discovery including belief mapping, timed writing, and growth tracking." 
       />
-      <div className="min-h-screen hero-premium relative overflow-hidden">
+      <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
         <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-gold w-[350px] h-[350px] top-1/3 -left-32 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[300px] h-[300px] bottom-20 right-10 absolute" aria-hidden="true" />
