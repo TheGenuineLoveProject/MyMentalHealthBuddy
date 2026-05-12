@@ -7,8 +7,7 @@ import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, AlertCircle, Lock, Eye, EyeOff, Shield, ArrowRight } from 'lucide-react';
 import { useMemo, useState } from "react";
 import SEO from "../components/SEO";
-import LumiMascot from "../components/lumi/LumiMascot.jsx";
-import LumiV6 from "../components/lumi/LumiV6";
+import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
 import SafetyFooter from "../components/SafetyFooter.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -228,16 +227,12 @@ export default function ResetPassword() {
               className="w-16 h-16 flex items-center justify-center"
               style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)', overflow: 'visible' }}
             >
-              {/* "comfort" was not a valid LumiV6 emotion — mapped to "love"
-                  (Blush Pink Buddy) per canonical Cast Part 5. V7 expressive
-                  soul only; no V8 click zones on a recovery surface. */}
-              <LumiV6
-                size="sm"
-                colorMode="pink"
-                emotion="love"
-                interactive={false}
-                imageLoading="eager"
-                fetchPriority="high"
+              {/* Recovery surface: static official PNG only, no interaction.
+                  Renders the canonical avatar-floating PNG from /brand/v17. */}
+              <LumiMascotImage
+                size={56}
+                animation="breathe"
+                decorative
                 data-testid="lumi-reset"
               />
             </span>

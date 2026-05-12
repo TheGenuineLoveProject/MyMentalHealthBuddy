@@ -5,12 +5,15 @@
     "feeling unsettled",
     "feeling anxious",
     "frustration with expectations",
-    "anxiety"
+    "anxiety",
+    "feeling overwhelmed"
   ],
   "triggers": [
     "technology issues",
     "unmet expectations",
-    "unsettled feelings"
+    "unsettled feelings",
+    "negative thoughts",
+    "intense anxiety"
   ],
   "relationship_themes": [],
   "coping_strategies": [
@@ -19,18 +22,21 @@
     "box breathing",
     "grounding techniques",
     "deep breathing exercises",
-    "writing down thoughts"
+    "writing down thoughts",
+    "jotting down feelings"
   ],
   "support_needs": [
     "calming techniques",
     "emotional validation",
     "help with anxiety",
-    "clarity in thoughts"
+    "clarity in thoughts",
+    "understanding feelings"
   ],
   "risk_flags": [
     "reports feeling anxious",
     "reports feeling disconnected",
-    "reports persistent anxiety"
+    "reports persistent anxiety",
+    "reports feeling overwhelmed"
   ],
   "core_beliefs": [
     "I'm not enough"

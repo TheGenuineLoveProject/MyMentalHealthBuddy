@@ -5,8 +5,7 @@ import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
-import LumiMascot from "../components/lumi/LumiMascot.jsx";
-import LumiV6 from "../components/lumi/LumiV6";
+import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
 
 function landingPathFor(u) {
   // Mirrors AdminGuard policy (client/src/components/AdminGuard.jsx):
@@ -107,14 +106,10 @@ export default function Login() {
                 style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
                 data-testid="img-login-logo"
               >
-                <LumiV6
-                  size="md"
-                  pixelSize={80}
-                  emotion="greeting"
-                  v8
-                  memoryKey="login"
-                  imageLoading="eager"
-                  fetchPriority="high"
+                <LumiMascotImage
+                  size={80}
+                  animation="breathe"
+                  decorative
                   data-testid="lumi-login"
                 />
               </span>

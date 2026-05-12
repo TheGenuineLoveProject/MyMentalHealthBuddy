@@ -6,8 +6,7 @@ import { z } from "zod";
 import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, ArrowLeft, Mail, Send, Shield, Clock } from 'lucide-react';
 import SEO from "../components/SEO";
-import LumiMascot from "../components/lumi/LumiMascot.jsx";
-import LumiV6 from "../components/lumi/LumiV6";
+import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -144,17 +143,14 @@ export default function ForgotPassword() {
               className="w-20 h-20 flex items-center justify-center transition-all group-hover:scale-105"
               style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
             >
-              {/* Sensitive surface (account recovery): V7 expressive soul only —
-                  no V8 click zones (asymmetric risk: distressed users shouldn't
-                  be invited to interact with the mascot). Soft purple Lavender
-                  Buddy per canonical Cast Part 5. */}
-              <LumiV6
-                size="md-header"
-                colorMode="purple"
-                emotion="empathy"
-                interactive={false}
-                imageLoading="eager"
-                fetchPriority="high"
+              {/* Sensitive surface (account recovery): static official PNG only,
+                  no interaction (asymmetric risk: distressed users shouldn't be
+                  invited to interact with the mascot). Renders the canonical
+                  avatar-floating PNG from /brand/v17. */}
+              <LumiMascotImage
+                size={72}
+                animation="breathe"
+                decorative
                 data-testid="lumi-forgot"
               />
             </span>

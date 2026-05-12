@@ -183,7 +183,7 @@ export default function CrisisResources() {
                         <a
                           href={`tel:${hotline.phone.replace(/[^0-9]/g, "")}`}
                           className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all shadow-md hover:shadow-lg hover:opacity-90 focus:outline-none"
-                          style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
+                          style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
                           data-testid={`link-call-${idx}`}
                         >
                           <Phone className="w-4 h-4" aria-hidden="true" />
@@ -245,7 +245,7 @@ export default function CrisisResources() {
                   >
                     <div 
                       className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform"
-                      style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
+                      style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
                     >
                       <Icon className="w-6 h-6" aria-hidden="true" />
                     </div>
@@ -264,7 +264,7 @@ export default function CrisisResources() {
           >
             <div 
               className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
-              style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
+              style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
             >
               <Heart className="w-8 h-8" aria-hidden="true" />
             </div>
@@ -277,7 +277,7 @@ export default function CrisisResources() {
               <Link
                 href="/chat"
                 className="px-6 py-3 inline-flex items-center gap-2 font-medium rounded-xl transition-all hover:opacity-90 shadow-md"
-                style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))', color: 'var(--glp-paper)' }}
+                style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
                 data-testid="link-chat"
               >
                 <MessageSquare className="w-5 h-5" aria-hidden="true" />

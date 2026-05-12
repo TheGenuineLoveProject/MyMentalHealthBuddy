@@ -1,11 +1,11 @@
 [
   {
     "role": "user",
-    "content": "I feel anxious right now and need to calm down"
+    "content": "I feel overwhelmed and want to understand what I'm feeling"
   },
   {
     "role": "assistant",
-    "content": "It sounds like you're in a tough moment. Let’s try a grounding technique. Look around you and identify five things you can see, four things you can touch, three things you can hear, two things you can smell, and one thing you can taste. This can help bring you back to the present."
+    "content": "Feeling overwhelmed can be really challenging. Let’s take a moment to identify what’s contributing to that feeling. Can you name one specific thought or situation that feels most overwhelming right now? This can help us understand and process it better."
   },
   {
     "role": "user",
@@ -13,7 +13,7 @@
   },
   {
     "role": "assistant",
-    "content": "I hear that you're feeling anxious. Let's try a quick deep breathing exercise. Inhale deeply through your nose for a count of four, hold for four, and then exhale slowly through your mouth for four. Repeat this a few times to help ease your mind."
+    "content": "It sounds like your anxiety is quite intense. Let’s try a grounding technique called the 5-4-3-2-1 exercise. Identify five things you can see, four things you can touch, three things you can hear, two things you can smell, and one thing you can taste. Take your time with this, focusing on each sense to bring yourself back to the present moment."
   },
   {
     "role": "user",
@@ -21,22 +21,6 @@
   },
   {
     "role": "assistant",
-    "content": "It’s tough to feel stuck in those thoughts. Let’s try to break the cycle by jotting down what you’re feeling. Write down the negative thoughts and then challenge them by asking, “Is this thought true?” or “What evidence do I have for this?” This can help create some clarity."
-  },
-  {
-    "role": "user",
-    "content": "I feel anxious right now and need to calm down"
-  },
-  {
-    "role": "assistant",
-    "content": "It seems like the anxiety is quite strong for you. Let's focus on your breath again. Try box breathing: inhale for a count of four, hold for four, exhale for four, and then pause for four before inhaling again. Repeat this for a few cycles to help center yourself."
-  },
-  {
-    "role": "user",
-    "content": "I feel overwhelmed and want to understand what I'm feeling"
-  },
-  {
-    "role": "assistant",
-    "content": "Feeling overwhelmed can be really challenging. Let’s take a moment to identify what’s contributing to that feeling. Can you name one specific thought or situation that feels most overwhelming right now? This can help us understand and process it better."
+    "content": "It’s tough when negative thoughts take over. Let's interrupt that pattern. What’s one specific negative thought you're having right now? Once you identify it, we can work on reframing or challenging it together."
   }
 ]

@@ -32,8 +32,8 @@
   --glp-sage-deep: #062a2a;     /* Abyssal Wisdom — hypnotic depth, infinite grounding */
   --glp-paper: #fcf6ea;         /* Sacred Pearl — golden sanctuary warmth, coming home */
   --glp-ink: #142626;           /* Wisdom Ink — quiet genius, intelligent stillness */
-  --glp-gold: #be8622;          /* Liquid Amber — molten confidence, radiant inner power */
-  --glp-gold-dark: #9e7018;     /* Deep Amber — rich grounded wisdom */
+  --glp-gold: #E8913A;          /* Heart Amber — warm radiant gold, canonical palette */
+  --glp-gold-dark: #C9701F;     /* Deep Heart Amber — grounded warm wisdom */
   --glp-violet: #6c58b8;        /* Consciousness Violet — expanded perception, awakened seeing */
   --glp-violet-dark: #5c4aa0;   /* Deep Violet — profound intuition */
 
@@ -47,11 +47,11 @@
   --glp-rose-15: rgba(208, 134, 114, 0.15);
   --glp-rose-20: rgba(208, 134, 114, 0.2);
   --glp-rose-30: rgba(208, 134, 114, 0.3);
-  --glp-gold-10: rgba(190, 134, 34, 0.1);
-  --glp-gold-15: rgba(190, 134, 34, 0.15);
-  --glp-gold-20: rgba(190, 134, 34, 0.2);
-  --glp-gold-30: rgba(190, 134, 34, 0.3);
-  --glp-gold-60: rgba(190, 134, 34, 0.6);
+  --glp-gold-10: rgba(232, 145, 58, 0.1);
+  --glp-gold-15: rgba(232, 145, 58, 0.15);
+  --glp-gold-20: rgba(232, 145, 58, 0.2);
+  --glp-gold-30: rgba(232, 145, 58, 0.3);
+  --glp-gold-60: rgba(232, 145, 58, 0.6);
   --glp-violet-10: rgba(108, 88, 184, 0.1);
   --glp-violet-20: rgba(108, 88, 184, 0.2);
   --glp-violet-30: rgba(108, 88, 184, 0.3);
@@ -113,17 +113,17 @@
   --glp-teal-800: #041e1e;
   --glp-teal-900: #021414;
 
-  /* Extended gold palette — Liquid Amber spectrum */
-  --glp-gold-50: #f9f3e4;
-  --glp-gold-100: #efdeb6;
-  --glp-gold-200: #e2c584;
-  --glp-gold-300: #d4aa52;
-  --glp-gold-400: #be8622;
-  --glp-gold-500: #9e7018;
-  --glp-gold-600: #825c14;
-  --glp-gold-700: #644810;
-  --glp-gold-800: #48340c;
-  --glp-gold-900: #2c2206;
+  /* Extended gold palette — Heart Amber spectrum (canonical warm gold) */
+  --glp-gold-50: #fdf2e8;
+  --glp-gold-100: #fbe0c5;
+  --glp-gold-200: #f6c388;
+  --glp-gold-300: #f0a55a;
+  --glp-gold-400: #E8913A;
+  --glp-gold-500: #C9701F;
+  --glp-gold-600: #a55a14;
+  --glp-gold-700: #82480f;
+  --glp-gold-800: #5e340a;
+  --glp-gold-900: #3a2106;
 
   /* Extended sage palette — Luminous Sage spectrum */
   --glp-sage-50: #e0f9f0;
@@ -200,7 +200,7 @@
   --glp-blush-rgb: 208, 134, 114;     /* #d08672 */
   --glp-paper-rgb: 252, 246, 234;     /* #fcf6ea */
   --glp-ink-rgb: 20, 38, 38;          /* #142626 */
-  --glp-gold-rgb: 190, 134, 34;       /* #be8622 */
+  --glp-gold-rgb: 232, 145, 58;       /* #E8913A — Heart Amber */
   --glp-violet-rgb: 108, 88, 184;     /* #6c58b8 */
 
   /* ------------------------------------------------------------

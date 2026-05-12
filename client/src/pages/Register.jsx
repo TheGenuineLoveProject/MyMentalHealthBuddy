@@ -5,8 +5,7 @@ import SEO from "../components/SEO";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
 import { useAuth } from "../context/AuthContext.jsx";
-import LumiMascot from "../components/lumi/LumiMascot.jsx";
-import LumiV6 from "../components/lumi/LumiV6";
+import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
 
 export default function Register() {
   const [, setLocation] = useLocation();
@@ -95,12 +94,10 @@ export default function Register() {
                 style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-15) 0%, var(--glp-sage-10) 38%, transparent 72%)', overflow: 'visible' }}
                 data-testid="img-register-logo"
               >
-                <LumiV6
-                  size="md-header"
-                  colorMode="yellow"
-                  emotion="joy"
-                  imageLoading="eager"
-                  fetchPriority="high"
+                <LumiMascotImage
+                  size={72}
+                  animation="float"
+                  decorative
                   data-testid="lumi-register"
                 />
               </span>

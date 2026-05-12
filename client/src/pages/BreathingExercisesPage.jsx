@@ -146,7 +146,7 @@ function BreathingTimer({ exercise, onComplete }) {
   const getPhaseGradient = () => {
     switch (currentPhase) {
       case 0: return 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))';
-      case 1: return 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))';
+      case 1: return 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))';
       case 2: return 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))';
       case 3: return 'linear-gradient(135deg, var(--glp-blush), var(--glp-rose))';
       default: return 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))';
