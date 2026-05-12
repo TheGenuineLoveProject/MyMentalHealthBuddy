@@ -257,7 +257,8 @@ export default function Dashboard() {
 
           <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10" aria-label="Wellness statistics">
             <article 
-              className="relative overflow-hidden bg-gradient-to-br from-sky-500 to-blue-600 rounded-2xl p-6 text-white shadow-xl shadow-blue-500/20"
+              className="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl"
+              style={{ background: 'linear-gradient(135deg, #74C0FC 0%, #4A90D9 100%)', boxShadow: '0 20px 25px -5px rgba(116, 192, 252, 0.25), 0 8px 10px -6px rgba(116, 192, 252, 0.2)' }}
               data-testid="card-mood-score"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -288,7 +289,8 @@ export default function Dashboard() {
             </article>
 
             <article 
-              className="relative overflow-hidden bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-6 text-white shadow-xl shadow-purple-500/20"
+              className="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl"
+              style={{ background: 'linear-gradient(135deg, #C8B6FF 0%, #9B85DB 100%)', boxShadow: '0 20px 25px -5px rgba(200, 182, 255, 0.25), 0 8px 10px -6px rgba(200, 182, 255, 0.2)' }}
               data-testid="card-journal"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />

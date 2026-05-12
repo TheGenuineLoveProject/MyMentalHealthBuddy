@@ -29,7 +29,7 @@ export default function Login() {
 
   if (isLoading || (typeof isAuthenticated === "function" && isAuthenticated())) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--glp-paper)' }}>
         <div className="text-center">
           <div className="w-10 h-10 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4" style={{ borderColor: 'var(--glp-sage-deep)', borderTopColor: 'transparent' }} />
           <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{isLoading ? 'Checking your session…' : 'Taking you to your dashboard…'}</p>
@@ -92,7 +92,7 @@ export default function Login() {
         description="Sign in to your MyMentalHealthBuddy account to access your wellness tools."
         noindex
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-12" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-12" style={{ background: 'var(--glp-paper)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
@@ -121,7 +121,7 @@ export default function Login() {
             onSubmit={onSubmit}
             noValidate
             className="rounded-3xl p-8 shadow-2xl"
-            style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}
+            style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}
             data-testid="form-login"
           >
             <div className="text-center mb-6">

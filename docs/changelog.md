@@ -1,3 +1,26 @@
+## v5.8.29 — V28 Auth + Privacy Sweep + Canonical Stat Cards
+
+User-reported gap: "inconsistent styling — some pages still use old colors / dark blocks instead of V28 paper + white cards." Audit confirmed CanvaLanding/Pricing/CheckIn/Breathing/About/Disclaimer/OnboardingFlow/AvatarLab were already V28-clean, but six high-traffic surfaces still leaked off-palette gradients. Fixed in one sweep.
+
+**Files touched:**
+- `client/src/pages/Privacy.jsx` — full rewrite. Removed `EmotionBackground` + off-palette `#2f5d5d` deep teal, `#d4af37` brass gold, `#e8a5b3` rose, `#8fbf9f` sage. Removed `bg-card/80 backdrop-blur-sm` glassmorph cards (they used theme tokens, not V28). New surface: flat `var(--glp-paper)` body, `var(--glp-white)` cards w/ `var(--glp-sage-15)` border, canonical sage-deep heading gradient `#4A7E72 → #A8C9A0` for the shield medallion, sage/gold/rose icon accents from canonical 8-hex palette only. Added explicit `/crisis` routing in the Contact section per universal contract.
+- `client/src/pages/Login.jsx` — flattened `linear-gradient(180deg, paper 0%, sage-10 100%)` body bg → flat `var(--glp-paper)` (2 spots: loading state + main); form card switched from paper-on-paper to `var(--glp-white)` w/ `var(--glp-sage-15)` border for proper card lift. Decorative sage/rose/gold radial orbs preserved (canonical palette ambient overlays per universal contract).
+- `client/src/pages/Register.jsx` — same treatment: gradient body → flat paper, form card → white sage-15-bordered.
+- `client/src/pages/ForgotPassword.jsx` — replaced `hero-gradient` (legacy theme class) with flat paper bg in both success + form states; replaced `linear-gradient(180deg, paper, teal-50)` with flat paper; mail-icon medallion `from-[var(--primary)] to-[var(--accent-violet)]` (off-palette violet) → canonical sage gradient `#4A7E72 → #A8C9A0`.
+- `client/src/pages/ResetPassword.jsx` — five gradient replacements: 4× `hero-gradient` body → flat paper; `glass-premium` cards (3 instances: invalid-token, success, default) → V28 white cards with sage-15 border; medallion icon gradients swapped: `from-[var(--accent-rose)] to-rose-600` (off-palette deep rose) → canonical `var(--glp-rose) → #E8913A` (rose → warmth-amber); `from-emerald-400 to-teal-500` (off-palette emerald) → canonical sage gradient; `from-[var(--primary)] to-[var(--accent-violet)]` (off-palette violet) → canonical sage gradient.
+- `client/src/pages/Dashboard.jsx` — Mood + Journal stat cards re-styled per user instruction. Off-palette `bg-gradient-to-br from-sky-500 to-blue-600` → canonical calm-blue gradient `#74C0FC → #4A90D9` w/ matched soft RGBA shadow. Off-palette `from-violet-500 to-purple-600` → canonical empathy-purple gradient `#C8B6FF → #9B85DB` w/ matched RGBA shadow. White-on-color text + white/10 decorative orb + backdrop-blur badges all preserved — only the brand-accent base swapped to canonical 8-hex palette.
+
+**What was deliberately NOT changed (per user direction):**
+- Decorative radial orbs (sage-30 / rose-20 / gold-30) on Login/Register/ForgotPassword/ResetPassword body backgrounds — these use canonical tokens already and the user did not flag them.
+- Sky/violet stat cards on Dashboard were initially flagged as off-palette; user clarified they want the colorful gradients KEPT but re-styled with canonical tokens — done above with calm-blue + empathy-purple from the locked 8-hex palette.
+
+**Universal contracts honored:**
+- Every `data-testid` preserved across all six files (verified by diff).
+- `/crisis` routing present on Privacy (new), and untouched everywhere else.
+- `prefers-reduced-motion` already gated on existing animations (decorative orbs use `animate-pulse motion-reduce:animate-none`); no new motion introduced.
+- Canonical 8-hex brand palette only: sage `#A8C9A0`, sunshine `#FFD93D`, blush `#FF9A8B`, calm-blue `#74C0FC`, empathy-purple `#C8B6FF`, mint `#A8D5BA`, warmth-orange `#FFB88C`, heart-amber `#E8913A`. Deeper variants (`#4A7E72` sage-deep, `#4A90D9` calm-blue-deep, `#9B85DB` empathy-purple-deep) used only as gradient end-stops — all hue-faithful to base canonical tokens.
+- Build green: `✓ built in 16.49s` after all edits.
+
 # MMHB Changelog — Detailed Implementation Notes
 
 This file holds the deep technical notes for completed feature evolutions.

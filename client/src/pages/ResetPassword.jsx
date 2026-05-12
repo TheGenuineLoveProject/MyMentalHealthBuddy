@@ -27,7 +27,7 @@ export default function ResetPassword() {
   
   const token = useMemo(() => {
     if (!searchString) return (
-    <div className="min-h-screen safe-padding hero-gradient">
+    <div className="min-h-screen safe-padding" style={{ background: 'var(--glp-paper)' }}>
       <SEO title="Reset Password — MyMentalHealthBuddy" description="Explore reset password tools for your wellness journey." noindex />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Reset Password</h1>
@@ -103,12 +103,12 @@ export default function ResetPassword() {
           description="This password reset link is invalid or has expired."
           noindex
         />
-        <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+        <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
           <div className="decorative-orb decorative-orb-blush w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-sage w-[300px] h-[300px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md glass-premium rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
-            <div className="w-20 h-20 bg-gradient-to-br from-[var(--accent-rose)] to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+          <div className="w-full max-w-md rounded-2xl p-8 text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-rose) 0%, #E8913A 100%)' }}>
               <AlertCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
             <h1 className="text-2xl font-display font-bold mb-3 text-[var(--text)]" data-testid="text-error-title">
@@ -158,12 +158,12 @@ export default function ResetPassword() {
           description="Your password has been successfully reset."
           noindex
         />
-        <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+        <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
           <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md glass-premium rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
-            <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+          <div className="w-full max-w-md rounded-2xl p-8 text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)' }}>
               <CheckCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
             <h1 className="text-2xl font-display font-bold mb-3 text-[var(--text)]" data-testid="text-success-title">
@@ -212,7 +212,7 @@ export default function ResetPassword() {
         description="Create a new password for your MyMentalHealthBuddy account."
         noindex
       />
-      <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+      <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
         <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -right-20 absolute" aria-hidden="true" />
         
@@ -239,9 +239,9 @@ export default function ResetPassword() {
             <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
           </Link>
           
-          <div className="card-elevated p-8">
+          <div className="rounded-3xl p-8 shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--accent-violet)] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)' }}>
                 <Lock className="w-8 h-8 text-white" aria-hidden="true" />
               </div>
               <h1 className="text-2xl font-display font-bold mb-2 text-[var(--text)]" data-testid="text-reset-password-title">

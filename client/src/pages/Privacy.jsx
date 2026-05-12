@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ArrowLeft, Shield, Lock, Eye, Database, Trash2, Mail, Flower2 } from "lucide-react";
+import SEO from "../components/SEO";
 import GlowFooter from "@/components/GlowFooter";
 
 export default function Privacy() {
@@ -11,6 +12,10 @@ export default function Privacy() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--glp-paper, #F7F4EE)" }}>
+      <SEO
+        title="Privacy Policy — MyMentalHealthBuddy"
+        description="How MyMentalHealthBuddy collects, uses, and protects your wellness data. Your healing journey is sacred."
+      />
       <main className="flex-1 relative">
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           <Link

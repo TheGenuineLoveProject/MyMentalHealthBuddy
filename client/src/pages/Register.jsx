@@ -80,7 +80,7 @@ export default function Register() {
         description="Create your free account. Mood tracking, journaling, reflection prompts, and AI chat — no credit card required."
         noindex
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-8" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-8" style={{ background: 'var(--glp-paper)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
@@ -109,7 +109,7 @@ export default function Register() {
             onSubmit={onSubmit}
             noValidate
             className="rounded-3xl p-6 shadow-2xl"
-            style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}
+            style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}
             data-testid="form-register"
           >
             <div className="text-center mb-4">

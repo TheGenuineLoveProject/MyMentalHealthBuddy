@@ -67,7 +67,7 @@ export default function ForgotPassword() {
           description="Password reset instructions have been sent to your email address."
           noindex
         />
-        <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+        <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
           <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
@@ -128,7 +128,7 @@ export default function ForgotPassword() {
           description="Reset your MyMentalHealthBuddy password. We'll send you a secure link to create a new password."
           noindex
         />
-      <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
+      <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse motion-reduce:animate-none" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse motion-reduce:animate-none" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         
@@ -159,7 +159,7 @@ export default function ForgotPassword() {
           
           <div className="card-elevated p-8">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--accent-violet)] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)' }}>
                 <Mail className="w-8 h-8 text-white" aria-hidden="true" />
               </div>
               <h1 className="text-2xl font-display font-bold mb-2 text-[var(--text)]" data-testid="text-forgot-password-title">
