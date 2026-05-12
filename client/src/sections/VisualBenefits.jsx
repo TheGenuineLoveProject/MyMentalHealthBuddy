@@ -41,8 +41,9 @@ const BENEFITS = [
     title: 'Breathe. Settle. Release.',
     description:
       'When your chest tightens and your mind races, your buddy breathes with you — slow, steady, present — until the tension softens and your shoulders finally drop.',
-    image: '/brand/v17/avatar-breathing.png',
-    imageWebp: '/brand/v17/avatar-breathing.webp',
+    // v5.8.11 — official pose: meditating (blue aura rings TBD by new art)
+    image: '/brand/lumi-body-meditating.png',
+    imageWebp: '/brand/lumi-body-meditating.webp',
     avatar: '/brand/v17/avatar-breathing.png',
     avatarWebp: '/brand/v17/avatar-breathing.webp',
     icon: Wind,
@@ -75,10 +76,12 @@ const BENEFITS = [
     title: 'You are not alone.',
     description:
       'At 2 AM when anxiety whispers. When you need to celebrate a quiet win. When you just need someone to sit beside you. Your buddy stays — present, patient, and never weary.',
-    image: '/brand/v17/avatar-heart.png',
-    imageWebp: '/brand/v17/avatar-heart.webp',
-    avatar: '/brand/v17/avatar-heart.png',
-    avatarWebp: '/brand/v17/avatar-heart.webp',
+    // v5.8.11 — official pose: halo prayer (closest available is breathing/peaceful;
+    // dedicated halo-prayer-with-glowing-ring asset TBD by new art)
+    image: '/brand/v17/avatar-breathing.png',
+    imageWebp: '/brand/v17/avatar-breathing.webp',
+    avatar: '/brand/v17/avatar-breathing.png',
+    avatarWebp: '/brand/v17/avatar-breathing.webp',
     icon: Users,
     iconLabel: 'Warm presence',
     cta: { label: 'Say Hello to Lumi', href: '/chat' },
@@ -92,8 +95,10 @@ const BENEFITS = [
     title: 'Grow at your own pace.',
     description:
       'Emotional wellness is not a race — it is a garden. Your buddy walks beside you with infinite patience, honoring the rhythm that belongs to you, one honest step at a time.',
-    image: '/brand/v17/avatar-floating.png',
-    imageWebp: '/brand/v17/avatar-floating.webp',
+    // v5.8.11 — official poses: hero=walking (closest available is action-waving;
+    // dedicated walking-on-sunrise-path asset TBD by new art) + overlay=floating
+    image: '/brand/lumi-action-waving.png',
+    imageWebp: '/brand/lumi-action-waving.webp',
     avatar: '/brand/v17/avatar-floating.png',
     avatarWebp: '/brand/v17/avatar-floating.webp',
     icon: Sparkles,
