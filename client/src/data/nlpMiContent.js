@@ -198,3 +198,56 @@ export function getReflection(emotion) {
   const key = String(emotion).toLowerCase().trim();
   return EMOTION_REFLECTIONS[key] || NLP_MI_PAGES['/'].reflection;
 }
+
+/* ======================================================================
+ * V20 — Motivational Interviewing enhancements (Phase 2 content layer)
+ *
+ * Three additional MI technique families layered onto the v5.7 base:
+ *   - rollingWithResistance: honor user dismissals without pressure or guilt
+ *   - developingDiscrepancy: gently surface the gap between caring for
+ *     others vs. caring for self (used sparingly — never on first visit)
+ *   - advancedAffirmations: deeper strength-based reflections used in
+ *     ReturnLoop rotation for visit count >= 2
+ *
+ * Hard rule (per MMHB v7.4 Therapeutic Framework Reference Library):
+ * framework names ("Motivational Interviewing", "MI", "rolling with
+ * resistance", "developing discrepancy") NEVER leak to the user — these
+ * keys exist only in source code.
+ * ==================================================================== */
+export const miEnhancements = {
+  rollingWithResistance: [
+    "No pressure at all. You'll know when you're ready.",
+    "It's okay to take your time. There's no rush here.",
+    "Some days are harder than others. That's completely normal.",
+    "You don't have to have all the answers right now.",
+  ],
+  developingDiscrepancy: [
+    "You give so much to others. What would it feel like to give a little to yourself?",
+    "You show up everywhere else. What if you showed up here too?",
+    "Your heart works so hard for everyone. When does it get to rest?",
+  ],
+  advancedAffirmations: [
+    "You have a wisdom inside you that knows exactly what you need.",
+    "The fact that you're here tells me you haven't given up on yourself.",
+    "You've survived every hard day so far. That is not small.",
+    "Your willingness to feel — that IS courage.",
+    "You don't have to be perfect to be worthy of care.",
+  ],
+  advancedOpenQuestions: [
+    "If your heart could speak right now, what would it say?",
+    "What does 'feeling better' actually look like for you?",
+    "When was the last time you truly felt at peace?",
+    "What would you tell a friend who felt exactly how you feel?",
+    "What tiny step feels possible right now — not perfect, just possible?",
+  ],
+};
+
+/**
+ * Returns one rolling-with-resistance message. Intended for surfaces
+ * that honor a user dismissal (e.g. MicroWinPrompt close, modal X).
+ */
+export function getResistanceMessage(seed) {
+  const pool = miEnhancements.rollingWithResistance;
+  const r = typeof seed === 'number' ? Math.abs(seed) % 1 : Math.random();
+  return pool[Math.floor(r * pool.length)];
+}

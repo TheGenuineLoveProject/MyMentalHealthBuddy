@@ -925,3 +925,78 @@
   .lumiv6 .lumiv6__particle { display: none; }
   .lumiv6 .lumiv6__blush    { transition: none !important; }
 }
+
+/* ======================================================================
+   V20 Phase 2 — coordination transitions · bounce physics · tear-drop
+   Additive on top of v5.8.8. All effects gated by .lumiv6--v20 +
+   .lumiv6--animated; PNG/WebP image untouched. Ear wiggle from the
+   blueprint is intentionally NOT implemented — the V17 plush PNG has
+   no separate ear sprites (V21 3D-preservation rule).
+   ====================================================================== */
+
+/* ----- Coordination transitions (eyes lead, mouth +100ms, posture +50ms) */
+.lumiv6--v20.lumiv6--animated .lumiv6__eye {
+  transition: top 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              left 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              width 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              height 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lumiv6--v20.lumiv6--animated .lumiv6__mouth {
+  transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms,
+              height 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms,
+              border-radius 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms,
+              background-color 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms,
+              opacity 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
+}
+.lumiv6--v20.lumiv6--animated .lumiv6__posture {
+  transition: transform 800ms cubic-bezier(0.4, 0, 0.2, 1) 50ms;
+}
+
+/* ----- Bounce physics (one-shot celebration animation) ---------------- */
+@keyframes lumiv20BouncePhysics {
+  0%   { transform: translateY(0)     scale(1, 1); }
+  10%  { transform: translateY(-12px) scale(0.95, 1.05); }
+  25%  { transform: translateY(-16px) scale(0.92, 1.08); }
+  40%  { transform: translateY(-8px)  scale(0.97, 1.03); }
+  55%  { transform: translateY(-14px) scale(0.94, 1.06); }
+  70%  { transform: translateY(-4px)  scale(0.98, 1.02); }
+  85%  { transform: translateY(-6px)  scale(0.97, 1.03); }
+  100% { transform: translateY(0)     scale(1, 1); }
+}
+.lumiv6--v20.lumiv6--animated.lumiv6--celebrating .lumiv6__posture {
+  animation: lumiv20BouncePhysics 1.2s ease-in-out;
+}
+
+/* ----- Tear drops (deep empathy — never crisis, gated render) -------- */
+.lumiv6__tear {
+  position: absolute;
+  top: 55%;
+  width: 4px;
+  height: 6px;
+  background: linear-gradient(to bottom, rgba(116, 192, 252, 0.5), rgba(116, 192, 252, 0.1));
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+}
+.lumiv6__tear--left  { left:  22%; }
+.lumiv6__tear--right { right: 22%; }
+@keyframes lumiv20TearDrop {
+  0%   { transform: translateY(0)    scaleY(1);   opacity: 0.6; }
+  50%  { transform: translateY(8px)  scaleY(0.8); opacity: 0.4; }
+  100% { transform: translateY(16px) scaleY(0.6); opacity: 0; }
+}
+.lumiv6--v20.lumiv6--animated.lumiv6--tearful .lumiv6__tear {
+  animation: lumiv20TearDrop 3s ease-in infinite;
+  animation-delay: 2s;
+}
+
+/* ----- Reduced motion · belt-and-braces ------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .lumiv6 .lumiv6__tear { display: none; }
+  .lumiv6.lumiv6--celebrating .lumiv6__posture { animation: none !important; }
+  .lumiv6--v20.lumiv6--animated .lumiv6__eye,
+  .lumiv6--v20.lumiv6--animated .lumiv6__mouth,
+  .lumiv6--v20.lumiv6--animated .lumiv6__posture { transition: none !important; }
+}

@@ -33,6 +33,11 @@ coverage/
 # Quarantine
 .quarantine/
 _quarantine/
+.backups_deleting/
+
+# V20 cost optimization — orphan artifacts
+audit-report.json
+blog_templates.txt
 
 # Local state
 .local/

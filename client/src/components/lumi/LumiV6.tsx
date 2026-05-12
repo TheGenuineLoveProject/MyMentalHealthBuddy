@@ -214,6 +214,20 @@ export interface LumiV6Props {
    * baked-in blush, so emotion-derived overlay would oversaturate).
    */
   blushLevel?: LumiV6BlushLevel;
+  /**
+   * V20 Phase 2: explicit override for the tear-drop empathy layer.
+   * When undefined and `v20=true`, auto-on for `effectiveEmotion ===
+   * "empathy"` AND `v9EscalationLevel >= 2` (interaction-confirmed deep
+   * empathy only — never on first paint, never in crisis since `animated`
+   * gates the entire V20 layer).
+   */
+  tears?: boolean;
+  /**
+   * V20 Phase 2: when true, fires the one-shot bounce-physics animation
+   * on the body posture (1.2s squash-stretch curve). Single-shot — to
+   * replay, change React `key` or toggle the flag. No auto-derivation.
+   */
+  celebrate?: boolean;
   className?: string;
   "data-testid"?: string;
 }
@@ -336,6 +350,8 @@ export default function LumiV6({
   sparkles,
   particles,
   blushLevel,
+  tears,
+  celebrate = false,
   className = "",
   "data-testid": testId = "lumi-v6",
 }: LumiV6Props) {
@@ -830,6 +846,11 @@ export default function LumiV6({
   const resolvedBlushLevel: LumiV6BlushLevel = v20Active
     ? (blushLevel ?? (Math.min(3, v9EscalationLevel) as LumiV6BlushLevel))
     : 0;
+  // V20 Phase 2: tears auto-on for confirmed deep empathy (emotion +
+  // interaction signal). Bounce physics is explicit-only (one-shot anim).
+  const showTears = v20Active &&
+    (tears ?? (effectiveEmotion === "empathy" && v9EscalationLevel >= 2));
+  const showBouncePhysics = v20Active && Boolean(celebrate);
 
   const auraSpec = AURA_BY_EMOTION[effectiveEmotion];
   const wrapperStyle: CSSProperties & Record<`--${string}`, string | number> = {
@@ -874,6 +895,8 @@ export default function LumiV6({
         v9 && v9Goodbye ? "lumiv6--v9-goodbye" : "",
         v20 ? "lumiv6--v20" : "",
         resolvedBlushLevel > 0 ? `lumiv6--blush-level-${resolvedBlushLevel}` : "",
+        showTears ? "lumiv6--tearful" : "",
+        showBouncePhysics ? "lumiv6--celebrating" : "",
         className,
       ].filter(Boolean).join(" ")}
       style={wrapperStyle}
@@ -913,6 +936,14 @@ export default function LumiV6({
         <>
           <span className="lumiv6__blush lumiv6__blush--left"  aria-hidden="true" />
           <span className="lumiv6__blush lumiv6__blush--right" aria-hidden="true" />
+        </>
+      )}
+
+      {/* V20 Phase 2: tear drops (z-index 20 — deep empathy, never crisis) */}
+      {showTears && (
+        <>
+          <span className="lumiv6__tear lumiv6__tear--left"  aria-hidden="true" />
+          <span className="lumiv6__tear lumiv6__tear--right" aria-hidden="true" />
         </>
       )}
 

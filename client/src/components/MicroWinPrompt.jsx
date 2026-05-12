@@ -16,13 +16,17 @@
  *   - Esc key dismisses
  *   - prefers-reduced-motion: fade-up replaced with instant appearance
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Wind, Sparkles, Heart, X } from "lucide-react";
+import { getResistanceMessage } from "../data/nlpMiContent.js";
 
 const SHOWN_KEY = "mmhb:microwin_shown";
 const IDLE_MS = 45000;
 const AUTH_TOKEN_KEY = "mmhb_token";
+// v5.8.9 — V20: how long to display the rolling-with-resistance message
+// after dismiss before fully unmounting the prompt.
+const RESISTANCE_HOLD_MS = 2200;
 
 function readSession(key) {
   if (typeof window === "undefined") return null;
@@ -39,8 +43,32 @@ function isAuthed() {
 
 export default function MicroWinPrompt() {
   const [visible, setVisible] = useState(false);
+  // v5.8.9 — V20: when true, the dismiss flow is mid-animation and the
+  // card body swaps in a soft, no-pressure resistance message before the
+  // full unmount completes 2.2s later. Honors user choice without guilt.
+  const [resistanceShown, setResistanceShown] = useState(false);
+  const resistanceMsg = useMemo(() => getResistanceMessage(), []);
   const [location] = useLocation();
   const closeBtnRef = useRef(null);
+  // v5.8.9 architect hardening — track the dismiss hold timer so a fast
+  // unmount (e.g., route change) cancels the pending setVisible call and
+  // avoids a stale state update on an unmounted component.
+  const dismissTimerRef = useRef(null);
+
+  // Centralized dismiss → show resistance message, then unmount.
+  const dismiss = () => {
+    if (resistanceShown) return;
+    setResistanceShown(true);
+    dismissTimerRef.current = window.setTimeout(
+      () => setVisible(false),
+      RESISTANCE_HOLD_MS
+    );
+  };
+
+  // Clear any pending dismiss timer on unmount.
+  useEffect(() => () => {
+    if (dismissTimerRef.current) window.clearTimeout(dismissTimerRef.current);
+  }, []);
 
   // When the prompt becomes visible, move keyboard focus to the close button
   // so users discover the dialog and can immediately dismiss with Enter.
@@ -85,7 +113,7 @@ export default function MicroWinPrompt() {
   // Esc dismisses while visible.
   useEffect(() => {
     if (!visible) return;
-    const onKey = (e) => { if (e.key === "Escape") setVisible(false); };
+    const onKey = (e) => { if (e.key === "Escape") dismiss(); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [visible]);
@@ -113,34 +141,47 @@ export default function MicroWinPrompt() {
         <button
           type="button"
           ref={closeBtnRef}
-          onClick={() => setVisible(false)}
+          onClick={dismiss}
           className="mwp-close"
           aria-label="Dismiss this gentle prompt"
           data-testid="button-micro-win-dismiss"
         >
           <X className="w-4 h-4" aria-hidden="true" />
         </button>
-        <p className="mwp-msg">
-          You don't have to figure everything out right now. Would you like a
-          moment of calm?
-        </p>
-        <div className="mwp-options">
-          {options.map(({ label, href, Icon, accent }) => (
-            <Link
-              key={href}
-              href={href}
-              className="mwp-opt"
-              data-testid={`link-micro-win-${href.replace(/\//g, "-").slice(1) || "home"}`}
-              onClick={() => setVisible(false)}
-              style={{ "--mwp-accent": accent }}
-            >
-              <span className="mwp-opt__icon" aria-hidden="true">
-                <Icon className="w-4 h-4" />
-              </span>
-              <span>{label}</span>
-            </Link>
-          ))}
-        </div>
+        {resistanceShown ? (
+          <p
+            className="mwp-msg mwp-msg--resistance"
+            role="status"
+            aria-live="polite"
+            data-testid="text-micro-win-resistance"
+          >
+            {resistanceMsg}
+          </p>
+        ) : (
+          <>
+            <p className="mwp-msg">
+              You don't have to figure everything out right now. Would you like a
+              moment of calm?
+            </p>
+            <div className="mwp-options">
+              {options.map(({ label, href, Icon, accent }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="mwp-opt"
+                  data-testid={`link-micro-win-${href.replace(/\//g, "-").slice(1) || "home"}`}
+                  onClick={() => setVisible(false)}
+                  style={{ "--mwp-accent": accent }}
+                >
+                  <span className="mwp-opt__icon" aria-hidden="true">
+                    <Icon className="w-4 h-4" />
+                  </span>
+                  <span>{label}</span>
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       <style>{`
@@ -203,6 +244,13 @@ export default function MicroWinPrompt() {
           color: #2F5443;
           font-weight: 500;
         }
+        /* v5.8.9 — V20 rolling-with-resistance message styling */
+        .mwp-msg--resistance {
+          margin: 0.4rem 1.85rem 0.4rem 0;
+          font-style: italic;
+          color: #5C4A1A;
+          animation: mwpFadeUp 280ms cubic-bezier(0.22, 0.9, 0.32, 1) both;
+        }
         .mwp-options {
           display: grid;
           grid-template-columns: 1fr;
@@ -251,6 +299,8 @@ export default function MicroWinPrompt() {
         }
         @media (prefers-reduced-motion: reduce) {
           .mwp-card { animation: none !important; }
+          /* v5.8.9 architect fix — kill the resistance message fade-up too */
+          .mwp-msg--resistance { animation: none !important; }
           .mwp-opt, .mwp-close { transition: none !important; }
           .mwp-opt:hover, .mwp-opt:focus-visible { transform: none !important; }
         }

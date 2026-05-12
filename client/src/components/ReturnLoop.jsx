@@ -35,11 +35,20 @@ const DISMISS_KEY = "mmhb:returnloop_dismissed";
 const AUTH_TOKEN_KEY = "mmhb_token";
 
 const MESSAGES = [
+  // v5.6 base rotation (5 messages)
   { text: "Welcome back. How has your heart been feeling today?", accent: "sage" },
   { text: "I'm glad you came back today.", accent: "gold" },
   { text: "Let's take this one moment at a time.", accent: "lavender" },
   { text: "Your buddy missed you. Ready to check in?", accent: "mint" },
   { text: "However you're feeling right now — it's okay. We're here.", accent: "rose" },
+  // v5.8.9 — V20 advanced affirmations (deeper strength-based reflections,
+  // sourced from miEnhancements.advancedAffirmations, accent-rotated across
+  // the canonical palette so the banner always feels visually fresh).
+  { text: "You have a wisdom inside you that knows exactly what you need.", accent: "lavender" },
+  { text: "The fact that you're here tells me you haven't given up on yourself.", accent: "sage" },
+  { text: "You've survived every hard day so far. That is not small.", accent: "gold" },
+  { text: "Your willingness to feel — that IS courage.", accent: "rose" },
+  { text: "You don't have to be perfect to be worthy of care.", accent: "mint" },
 ];
 
 // Canonical 8-hex brand palette (per replit.md universal contracts).
