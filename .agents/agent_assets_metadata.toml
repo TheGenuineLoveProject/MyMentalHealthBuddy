@@ -66,6 +66,24 @@ uri = "file://attached_assets/generated_images/benefit-companionship-v3.png"
 type = "image"
 title = "lumi waving v3 retry"
 
+[[generated]]
+id = "owgHksKshpZqciQ0JMBFB"
+uri = "file://client/public/brand/v17/lumi-pose-meditating-aura.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "VMBHzdkSEcZP9nHnzBrab"
+uri = "file://client/public/brand/v17/lumi-pose-halo-prayer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "IGypU5_rCdTE522Qqp6nQ"
+uri = "file://client/public/brand/v17/lumi-pose-walking-sunrise.png"
+type = "image"
+title = "generated_image"
+
 [[outputs]]
 id = "qOaiWVLOMgiQ8FOV2bPSa"
 uri = "file://content/strategy/platform-z-transformation.md"
