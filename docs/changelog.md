@@ -1,3 +1,30 @@
+## v5.8.34 — V28 Polish System + IMG_4320 Reference Alignment
+
+User-attached homepage screenshot (IMG_4320) showed the canonical content-card grammar — white surface with thin top color-accent stripe, soft pastel rounded-lg icon tile, bold serif title, gentle gray body, sage gradient pill CTA — and complained about cavernous vertical gaps between sections. Diagnosis: `.section-breathe` (in `canva-landing.css`) was 5/7/8rem on BOTH sides = up to 256px gaps on desktop. Plus ValueBridge + ValueProposition (the actual screenshot subjects) used off-palette `#8FBF9F` (sage) / `#D4AF37` (gold) instead of canonical `#A8C9A0` / `#FFD93D`.
+
+**Phase A — new utilities in `client/src/index.css` (~line 7100):**
+- `.polish-card` — definitive V28 content card: white #FFFFFF, sage-30 hairline border, 18px radius, 1.75rem padding, gentle shadow + hover lift, `::before` 2px top accent stripe parameterized via `--card-accent` CSS var.
+- `.polish-card-icon` — 2.75rem rounded-12 icon tile, bg = 14% mix of accent, color = solid accent.
+- `.polish-card-title` / `.polish-card-body` — locked typography (serif 1.125rem bold ink-deep / sans 0.9rem ink-soft).
+- `.section-rhythm` — calm 4/5/6rem padding (vs the old cavernous 5/7/8).
+- `.polish-grid-3` / `.polish-grid-4` — standardized responsive grids per the screenshot (3-up Pro tiers, 4-up newsletter benefits).
+- `.polish-cta` — canonical `linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)` sage pill with proper shadow + focus ring + reduced-motion guard.
+
+**Phase B — accent-top-border applied to screenshot subjects:**
+- `client/src/sections/ValueBridge.jsx` (Pro upsell, "There's More to Explore"): off-palette `#8FBF9F` swept to canonical `#A8C9A0`; radial-gradient body bg flattened to flat paper `#F7F4EE`; `::before` simplified from gradient-to-transparent to solid 2px accent at 0.85 opacity; CTA gradient swapped to canonical `#4A7E72 → #A8C9A0` recipe; focus outline `#D4AF37` → `#4A7E72`; Safari rgba border fallback `(143, 191, 159)` → `(168, 201, 160)`.
+- `client/src/sections/ValueProposition.jsx` (newsletter, "Healing in your inbox"): all 4 benefit accents canonicalized (`#A8C9A0` sage / `#E8913A` heart-amber / `#74C0FC` calm-blue / `#C8B6FF` empathy-purple); flat paper bg; new `::before` 2px top stripe via `--vp-accent` CSS var; icon tile 2.6rem→2.75rem with strokeWidth=2 to match screenshot weight; form input focus + success check + submit button all canonicalized; focus outlines moved from `#D4AF37` to `#4A7E72`.
+
+**Phase C — repo-wide gap fix (smallest valid engine):**
+- `client/src/styles/canva-landing.css` `.canva-landing .section-breathe` tightened from 5/7/8rem to 4/5/6rem. **Zero file churn for the 8 sections that already use this class** (philosophy, features, manifesto, hero-band, etc) — they all auto-benefit. Section gaps reduced 64→128px → 64→96px on desktop = ~25% denser without feeling cramped.
+
+**Universal contracts honored:**
+- All `data-testid` selectors preserved (architect-verified): `card-value-bridge-{slug}`, `link-value-bridge-pricing`, `benefit-{slug}`, `form-email-subscribe`, `input-email-subscribe`, `button-email-subscribe`, `status-email-success`, `text-email-error`, `text-trust-line`.
+- `prefers-reduced-motion: reduce` guards: existing block in both sections retained + new global guard added in `index.css` for `.polish-card` + `.polish-cta` (no transform, no transition).
+- Canonical 8-hex palette only — zero off-palette residuals in either file (`#8FBF9F`, `#D4AF37`, `(143,191,159)` all swept).
+- `/crisis` routing untouched (CTA goes to `/pricing`; SafetyFooter on host page handles crisis).
+- `.polish-card` is parameterizable via `--card-accent` so any of the 6 canonical accent slots (sage/calm-blue/empathy-purple/sunshine/warmth-orange/blush) can mark a section's purpose.
+- Build green: `✓ built in 15.49s`.
+
 ## v5.8.33 — Homepage NlpMiContent Reformatted to V17 VisualBenefits Style
 
 User feedback: the IMG_4302 stacked-row "soft place to land / companion who listens / Tools that feel kind / Safety that stays close" section on the homepage didn't match the colors or formatting of IMG_4303/4304 (the VisualBenefits "What You Will Feel" mascot+content card pattern). Wanted the avatar-matched halo colors and the same alternating mascot+content row formatting.

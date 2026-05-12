@@ -28,25 +28,25 @@ const BENEFITS = [
     icon: Heart,
     title: "Trauma-informed support",
     body: "Gentle, consent-based prompts designed with mental wellness best practices — never clinical, never alarmist.",
-    accent: "var(--glp-sage, #8FBF9F)",
+    accent: "#A8C9A0",
   },
   {
     icon: Sparkles,
     title: "Daily reflection cues",
     body: "A small, kind nudge to pause, breathe, and notice. Your inbox stays calm — one short note a week, not a flood.",
-    accent: "var(--glp-gold, #D4AF37)",
+    accent: "#E8913A",
   },
   {
     icon: Shield,
     title: "Privacy by default",
     body: "Your email is stored locally on this device until you confirm. No cross-site trackers, no data brokers, ever.",
-    accent: "var(--glp-blue, #74C0FC)",
+    accent: "#74C0FC",
   },
   {
     icon: Compass,
     title: "Tools you can use today",
     body: "Free breathing, check-in, journaling, and celebration tools — no signup required to use them, ever.",
-    accent: "var(--glp-purple, #C8B6FF)",
+    accent: "#C8B6FF",
   },
 ];
 
@@ -200,13 +200,14 @@ export default function ValueProposition({ variant = "full", className = "" }) {
                   key={b.title}
                   className="vp-benefit"
                   data-testid={`benefit-${b.title.toLowerCase().replace(/\s+/g, "-")}`}
+                  style={{ "--vp-accent": b.accent }}
                 >
                   <span
                     className="vp-benefit__icon"
                     aria-hidden="true"
-                    style={{ background: `color-mix(in srgb, ${b.accent} 18%, transparent)`, color: b.accent }}
+                    style={{ background: `color-mix(in srgb, ${b.accent} 14%, transparent)`, color: b.accent }}
                   >
-                    <Icon className="w-6 h-6" />
+                    <Icon className="w-5 h-5" strokeWidth={2} />
                   </span>
                   <h3 className="vp-benefit__title">{b.title}</h3>
                   <p className="vp-benefit__body">{b.body}</p>
@@ -226,11 +227,8 @@ export default function ValueProposition({ variant = "full", className = "" }) {
 
       <style>{`
         .vp-section {
-          padding: clamp(2.5rem, 6vw, 4.5rem) 1.25rem;
-          background:
-            radial-gradient(circle at 20% 10%, rgba(168,201,160,0.08), transparent 55%),
-            radial-gradient(circle at 90% 80%, rgba(255,217,61,0.06), transparent 55%),
-            var(--glp-paper, #FAFAF7);
+          padding: clamp(3rem, 6vw, 5rem) 1.25rem;
+          background: #F7F4EE;
           position: relative;
           overflow: hidden;
         }
@@ -272,27 +270,36 @@ export default function ValueProposition({ variant = "full", className = "" }) {
           gap: clamp(0.85rem, 1.6vw, 1.2rem);
         }
         .vp-benefit {
-          background: rgba(255, 255, 255, 0.78);
-          border: 1px solid rgba(168, 201, 160, 0.22);
+          position: relative;
+          background: #FFFFFF;
+          border: 1px solid rgba(168, 201, 160, 0.30);
           border-radius: 18px;
-          padding: 1.2rem 1.1rem;
-          backdrop-filter: blur(4px);
+          padding: 1.5rem 1.25rem;
           transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
-          box-shadow: 0 1px 2px rgba(47, 84, 67, 0.04);
+          box-shadow: 0 1px 3px rgba(45, 55, 50, 0.04), 0 1px 2px rgba(45, 55, 50, 0.03);
+          overflow: hidden;
+        }
+        .vp-benefit::before {
+          content: "";
+          position: absolute;
+          inset: 0 0 auto 0;
+          height: 2px;
+          background: var(--vp-accent, #A8C9A0);
+          opacity: 0.85;
         }
         .vp-benefit:hover, .vp-benefit:focus-within {
           transform: translateY(-2px);
-          border-color: rgba(168, 201, 160, 0.45);
-          box-shadow: 0 8px 22px rgba(47, 84, 67, 0.10);
+          border-color: rgba(168, 201, 160, 0.55);
+          box-shadow: 0 10px 24px rgba(45, 55, 50, 0.08), 0 2px 6px rgba(45, 55, 50, 0.04);
         }
         .vp-benefit__icon {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 2.6rem;
-          height: 2.6rem;
+          width: 2.75rem;
+          height: 2.75rem;
           border-radius: 12px;
-          margin-bottom: 0.7rem;
+          margin-bottom: 0.85rem;
         }
         .vp-benefit__title {
           font-family: var(--font-serif, ui-serif, Georgia, serif);
@@ -341,7 +348,7 @@ export default function ValueProposition({ variant = "full", className = "" }) {
           left: 0.85rem;
           width: 1.05rem;
           height: 1.05rem;
-          color: var(--glp-sage, #8FBF9F);
+          color: #A8C9A0;
           pointer-events: none;
         }
         .vp-form__input {
@@ -360,7 +367,7 @@ export default function ValueProposition({ variant = "full", className = "" }) {
         }
         .vp-form__input:focus {
           outline: none;
-          border-color: var(--glp-sage, #8FBF9F);
+          border-color: #A8C9A0;
           box-shadow: 0 0 0 4px rgba(168, 201, 160, 0.18);
         }
         .vp-form__input[aria-invalid="true"] {
@@ -372,18 +379,18 @@ export default function ValueProposition({ variant = "full", className = "" }) {
           font-size: 0.95rem;
           font-weight: 600;
           color: white;
-          background: linear-gradient(135deg, var(--glp-sage, #8FBF9F), var(--glp-sage-deep, #2F5443));
+          background: linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%);
           border: none;
           border-radius: 12px;
           cursor: pointer;
           transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
-          box-shadow: 0 4px 14px rgba(47, 84, 67, 0.18);
+          box-shadow: 0 4px 14px rgba(74, 126, 114, 0.22);
           white-space: nowrap;
         }
         .vp-form__submit:hover { transform: translateY(-1px); filter: brightness(1.04); }
         .vp-form__submit:active { transform: translateY(0); }
         .vp-form__submit:focus-visible {
-          outline: 3px solid var(--glp-gold, #D4AF37);
+          outline: 3px solid #4A7E72;
           outline-offset: 2px;
         }
         .vp-form__error {
@@ -403,7 +410,7 @@ export default function ValueProposition({ variant = "full", className = "" }) {
           gap: 0.7rem;
           padding: 0.95rem 1.1rem;
           background: rgba(168, 201, 160, 0.16);
-          border: 1.5px solid rgba(143, 191, 159, 0.5);
+          border: 1.5px solid rgba(168, 201, 160, 0.5);
           border-radius: 12px;
           color: var(--glp-sage-deep, #2F5443);
           font-size: 0.95rem;
@@ -416,7 +423,7 @@ export default function ValueProposition({ variant = "full", className = "" }) {
           width: 1.9rem;
           height: 1.9rem;
           border-radius: 50%;
-          background: var(--glp-sage, #8FBF9F);
+          background: #A8C9A0;
           color: white;
           flex-shrink: 0;
         }

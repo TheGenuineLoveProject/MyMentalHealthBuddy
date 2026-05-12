@@ -20,8 +20,8 @@ const FEATURES = [
     iconUnlocked: Unlock,
     title: "Unlimited AI Coaching",
     body: "No session limits. Deep conversations whenever you need them.",
-    accent: "#8FBF9F",
-    accentSoft: "rgba(143, 191, 159, 0.18)",
+    accent: "#A8C9A0",
+    accentSoft: "rgba(168, 201, 160, 0.16)",
   },
   {
     iconLocked: BarChart3,
@@ -29,7 +29,7 @@ const FEATURES = [
     title: "Advanced Emotional Insights",
     body: "Pattern recognition across your moods, behaviors, and growth over time.",
     accent: "#74C0FC",
-    accentSoft: "rgba(116, 192, 252, 0.18)",
+    accentSoft: "rgba(116, 192, 252, 0.16)",
   },
   {
     iconLocked: Compass,
@@ -37,7 +37,7 @@ const FEATURES = [
     title: "Guided Healing Journeys",
     body: "Structured programs for specific challenges — anxiety, confidence, focus, and more.",
     accent: "#C8B6FF",
-    accentSoft: "rgba(200, 182, 255, 0.22)",
+    accentSoft: "rgba(200, 182, 255, 0.18)",
   },
 ];
 
@@ -90,11 +90,8 @@ export default function ValueBridge({ className = "" }) {
 
       <style>{`
         .vb-section {
-          padding: clamp(2.5rem, 5vw, 4rem) 1.25rem;
-          background:
-            radial-gradient(circle at 80% 20%, rgba(255, 217, 61, 0.06), transparent 55%),
-            radial-gradient(circle at 15% 85%, rgba(168, 201, 160, 0.07), transparent 55%),
-            var(--glp-paper, #FAFAF7);
+          padding: clamp(3rem, 6vw, 5rem) 1.25rem;
+          background: #F7F4EE;
         }
         .vb-inner {
           max-width: 1080px;
@@ -129,7 +126,7 @@ export default function ValueBridge({ className = "" }) {
         .vb-card {
           background: #FFFFFF;
           /* Solid rgba fallback for Safari < 16.2 / older WebKit */
-          border: 1.5px solid rgba(143, 191, 159, 0.28);
+          border: 1.5px solid rgba(168, 201, 160, 0.28);
           border: 1.5px solid color-mix(in srgb, var(--vb-accent) 28%, transparent);
           border-radius: 18px;
           padding: 1.4rem 1.25rem;
@@ -142,13 +139,14 @@ export default function ValueBridge({ className = "" }) {
           content: "";
           position: absolute;
           inset: 0 0 auto 0;
-          height: 3px;
-          background: linear-gradient(90deg, var(--vb-accent), transparent);
+          height: 2px;
+          background: var(--vb-accent);
+          opacity: 0.85;
         }
         .vb-card:hover, .vb-card:focus-within {
           transform: translateY(-3px);
           /* Solid rgba fallback for Safari < 16.2 / older WebKit */
-          border-color: rgba(143, 191, 159, 0.55);
+          border-color: rgba(168, 201, 160, 0.55);
           border-color: color-mix(in srgb, var(--vb-accent) 55%, transparent);
           box-shadow: 0 12px 28px rgba(47, 84, 67, 0.10);
         }
@@ -198,10 +196,10 @@ export default function ValueBridge({ className = "" }) {
           font-size: 1rem;
           font-weight: 600;
           color: white;
-          background: linear-gradient(135deg, var(--glp-sage, #8FBF9F), var(--glp-sage-deep, #2F5443));
+          background: linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%);
           border-radius: 999px;
           text-decoration: none;
-          box-shadow: 0 8px 22px rgba(47, 84, 67, 0.18);
+          box-shadow: 0 8px 22px rgba(74, 126, 114, 0.22);
           transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
         }
         .vb-cta:hover {
@@ -210,7 +208,7 @@ export default function ValueBridge({ className = "" }) {
         }
         .vb-cta:hover .vb-cta__arrow { transform: translateX(3px); }
         .vb-cta:focus-visible {
-          outline: 3px solid var(--glp-gold, #D4AF37);
+          outline: 3px solid #4A7E72;
           outline-offset: 3px;
         }
         .vb-cta__arrow { transition: transform 200ms ease; }

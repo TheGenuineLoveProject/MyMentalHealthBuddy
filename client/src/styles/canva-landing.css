@@ -2218,23 +2218,28 @@
   color: var(--glp-gold-dark);
 }
 
-/* --- Section Spacing & Breathing Room --- */
+/* --- Section Spacing & Breathing Room ---
+ * v5.8.34: V28 rhythm calibration — tightened from 5/7/8rem to 4/5/6rem to
+ * eliminate the cavernous vertical gaps between content blocks (especially
+ * visible on the Pro upsell + newsletter band per IMG_4320 reference).
+ * Old contract was 80/112/128px symmetric padding = 256px gaps on desktop;
+ * new contract is 64/80/96px = 192px max — still calm, no longer cavernous. */
 .canva-landing .section-breathe {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 @media (min-width: 768px) {
   .canva-landing .section-breathe {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .canva-landing .section-breathe {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }
 
