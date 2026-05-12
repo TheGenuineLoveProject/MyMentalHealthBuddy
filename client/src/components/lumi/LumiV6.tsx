@@ -234,14 +234,17 @@ export interface LumiV6Props {
 }
 
 // ---------- Asset map ----------
+// v5.8.19 — All non-default color tints redirected to the official V17 set.
+// Mirrors BuddyAvatar.COLOR_MODE_SRC. Legacy lumi-v4-* tinted PNGs deleted
+// from disk; colorMode prop preserved for backward compat.
 const COLOR_PNG: Record<LumiV6ColorMode, string> = {
   default: "/brand/v17/avatar-floating-nobg.png",
-  yellow:  "/brand/lumi-v4-yellow.png",
-  pink:    "/brand/lumi-v4-pink.png",
-  blue:    "/brand/lumi-v4-blue.png",
-  purple:  "/brand/lumi-v4-purple.png",
-  sleep:   "/brand/lumi-v4-sleep.png",
-  orange:  "/brand/lumi-v4-orange.png",
+  yellow:  "/brand/v17/avatar-floating-nobg.png",
+  pink:    "/brand/v17/avatar-heart-nobg.png",
+  blue:    "/brand/v17/avatar-breathing-nobg.png",
+  purple:  "/brand/v17/avatar-floating-nobg.png",
+  sleep:   "/brand/v17/avatar-breathing-nobg.png",
+  orange:  "/brand/v17/avatar-floating-nobg.png",
 };
 const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
   waving:      "/brand/v17/avatar-floating-nobg.png",

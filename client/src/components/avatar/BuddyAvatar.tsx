@@ -35,7 +35,7 @@ import { useLumiAudio } from "@/hooks/useLumiAudio.js";
 
 /**
  * Lumi v4 color variants — public-served PNGs in /brand/.
- * `default` is the canonical sage hero pose (lumi-v4-ultimate.png).
+ * `default` is the canonical V17 official sage Lumi (avatar-floating-nobg.png).
  * Additional palette options let surfaces opt into a tinted Lumi
  * (e.g. sleep slot uses the curled-up Zzz pose).
  */
@@ -48,14 +48,21 @@ export type BuddyColorMode =
   | "sleep"
   | "orange";
 
+// v5.8.19 — All non-default color tints redirected to the canonical official
+// V17 sage Lumi (avatar-floating-nobg). The legacy lumi-v4-* tinted PNGs were
+// off-brand (purple/pink/yellow/orange/blue palettes that broke the V17
+// visual contract) and have been deleted from disk. The colorMode prop API
+// is preserved for backward compat with 20+ call sites; resolution now
+// always lands on the official artwork. `sleep` maps to avatar-breathing
+// (the official "rest" pose).
 const COLOR_MODE_SRC: Record<BuddyColorMode, string> = {
   default: "/brand/v17/avatar-floating-nobg.png",
-  yellow:  "/brand/lumi-v4-yellow.png",
-  pink:    "/brand/lumi-v4-pink.png",
-  blue:    "/brand/lumi-v4-blue.png",
-  purple:  "/brand/lumi-v4-purple.png",
-  sleep:   "/brand/lumi-v4-sleep.png",
-  orange:  "/brand/lumi-v4-orange.png",
+  yellow:  "/brand/v17/avatar-floating-nobg.png",
+  pink:    "/brand/v17/avatar-heart-nobg.png",
+  blue:    "/brand/v17/avatar-breathing-nobg.png",
+  purple:  "/brand/v17/avatar-floating-nobg.png",
+  sleep:   "/brand/v17/avatar-breathing-nobg.png",
+  orange:  "/brand/v17/avatar-floating-nobg.png",
 };
 
 /**
@@ -70,12 +77,17 @@ export type BuddyStyle =
   | "jellycat"
   | "squishmallow";
 
+// v5.8.19 — All sanrio/squishmallow style variants redirected to the official
+// V17 sage Lumi. The legacy lumi-style-* alt-character PNGs were off-brand
+// (third-party-character-inspired artwork that diluted the canonical Lumi
+// identity) and have been deleted from disk. The style prop API is preserved
+// for backward compat; all values now resolve to the official artwork.
 const STYLE_SRC: Record<Exclude<BuddyStyle, "default">, string> = {
-  pompompurin:  "/brand/lumi-style-pompompurin.png",
-  cinnamoroll:  "/brand/lumi-style-cinnamoroll.png",
-  chiikawa:     "/brand/lumi-style-chiikawa.png",
-  jellycat:     "/brand/lumi-style-jellycat.png",
-  squishmallow: "/brand/lumi-style-squishmallow.png",
+  pompompurin:  "/brand/v17/avatar-floating-nobg.png",
+  cinnamoroll:  "/brand/v17/avatar-floating-nobg.png",
+  chiikawa:     "/brand/v17/avatar-floating-nobg.png",
+  jellycat:     "/brand/v17/avatar-floating-nobg.png",
+  squishmallow: "/brand/v17/avatar-floating-nobg.png",
 };
 
 /**

@@ -12,9 +12,9 @@
  * + glowColor + glowIntensity + breathSpeed. The render layer chooses
  * which fields to honor — LumiV6 (single PNG body, FROZEN per V21) honors
  * eye/mouth/posture/blush/glow only; arm/leg pose intent is reserved for
- * surfaces that swap pose PNGs (`/brand/lumi-body-{celebrating,hugging,
- * meditating}.png`) or render the multi-sprite LumiMascot arm/leg classes
- * (.lumi-mascot__arm--*).
+ * surfaces that swap pose PNGs (`/brand/v17/avatar-{floating,heart,
+ * breathing}-nobg.png`) or render the multi-sprite LumiMascot arm/leg
+ * classes (.lumi-mascot__arm--*).
  *
  * Source of truth for color modes is `LumiV6ColorMode` in
  * `client/src/components/lumi/LumiV6.tsx`. Importing the type here keeps

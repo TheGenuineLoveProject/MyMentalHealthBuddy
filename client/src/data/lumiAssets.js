@@ -1,43 +1,37 @@
 /*
  * Lumi mascot asset registry.
  *
- * The eight canonical PNGs are imported through Vite's @assets/ alias so the
- * build resolves them to hashed, cache-busting URLs and the dev server can
- * serve them directly. Earlier revisions of this file referenced
- * `/assets/mascot/*.png` paths that were never placed in the public/
- * directory — those URLs 404'd in production. Using @assets/ imports
- * guarantees the artwork ships with the bundle.
+ * v5.8.19 — All variant slots redirected to the canonical V17 official set
+ * (`/brand/v17/avatar-{floating,heart,breathing}-nobg.png`). The legacy
+ * `@assets/IMG_217*.png` Lumi color/expression sheet PNGs were off-brand
+ * (pre-V17 artwork that did not match the official mascot lock) and have
+ * been removed. The MASCOT_ASSETS key shape is preserved so every
+ * downstream consumer (`useLumiEmotion`, `LumiCompanion`, `LumiCustomizer`,
+ * `preloadMascots`) keeps working without API changes — they all now
+ * resolve to the official artwork.
  */
-const lumiDefaultUrl = "/brand/v17/avatar-floating-nobg.png";
-import lumiBlueUrl      from "@assets/IMG_2178_1777538625498.png";
-import lumiLavenderUrl  from "@assets/IMG_2177_1777538625498.png";
-import lumiCoralUrl     from "@assets/IMG_2176_1777538625498.png";
-import lumiGoldenUrl    from "@assets/IMG_2174_1777538625498.png";
-import lumiThinkingUrl  from "@assets/IMG_2173_1777538625498.png";
-// Dedicated sleeping pose: sage-green Lumi curled up with closed eyes and
-// "Zzz" overhead. Replaces the previous lavender-as-sleeping placeholder so
-// the sleep state matches the default sage palette of the canonical Lumi.
-import lumiSleepingUrl  from "@assets/IMG_2182_1777538625498.png";
+const lumiDefaultUrl   = "/brand/v17/avatar-floating-nobg.png";
+const lumiBreathingUrl = "/brand/v17/avatar-breathing-nobg.png";
+const lumiHeartUrl     = "/brand/v17/avatar-heart-nobg.png";
 
 import { EMOTION_CONFIG } from "./lumiEmotions";
 import { LUMI_THEMES } from "./lumiThemes";
 
 export const MASCOT_ASSETS = {
-  // Sage / default — green standing full-body Lumi (canonical hero pose).
+  // Sage / default — official floating Lumi (canonical hero pose).
   default:  lumiDefaultUrl,
   // Header / favicon scale — same artwork, shrinks cleanly to 32px.
   icon:     lumiDefaultUrl,
-  // Theme-tinted variants used when LUMI_THEMES.imageVariant matches.
-  blue:     lumiBlueUrl,
-  lavender: lumiLavenderUrl,
-  coral:    lumiCoralUrl,
-  golden:   lumiGoldenUrl,
+  // Theme-tinted variants — all collapse to the official sage Lumi
+  // (V17 visual contract: one canonical mascot, no off-brand tints).
+  blue:     lumiBreathingUrl,
+  lavender: lumiDefaultUrl,
+  coral:    lumiHeartUrl,
+  golden:   lumiDefaultUrl,
   // Emotion-state overrides (EMOTION_CONFIG.image points here).
-  thinking: lumiThinkingUrl,
-  // Dedicated sleeping artwork (curled-up sage Lumi with Zzz). EMOTION_CONFIG
-  // maps `sleep.image = 'sleeping'`; the lavender pose remains in use for
-  // the `rest` emotion via `lavender`.
-  sleeping: lumiSleepingUrl,
+  thinking: lumiDefaultUrl,
+  // Sleeping → official breathing pose (closest "rest" semantic).
+  sleeping: lumiBreathingUrl,
 };
 
 /**
