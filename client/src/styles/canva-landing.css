@@ -1178,13 +1178,16 @@
 }
 
 .canva-landing .philosophy-card {
-  background: linear-gradient(145deg, var(--glp-white) 0%, rgba(250, 248, 244, 0.95) 100%);
-  border: 1px solid var(--glp-sage-20);
+  background: var(--glp-white); /* V28 — pure white, no tint */
+  border: 1px solid var(--glp-sage-15);
   border-radius: 24px;
   padding: 2rem 2.5rem;
   position: relative;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    0 1px 3px rgba(var(--glp-sage-deep-rgb), 0.04),
+    0 4px 12px rgba(var(--glp-sage-deep-rgb), 0.06);
 }
 
 .canva-landing .philosophy-card::before {
@@ -1196,28 +1199,32 @@
   height: 3px;
   background: linear-gradient(90deg, var(--glp-sage), var(--glp-gold), var(--glp-blush));
   border-radius: 24px 24px 0 0;
-  opacity: 0;
+  opacity: 1; /* V28 — top accent always visible */
   transition: opacity 0.4s ease;
 }
 
-.canva-landing .philosophy-card:hover::before {
-  opacity: 1;
-}
-
+/* V28 — light sage wrapper + white inner card + sage top accent (no dark blocks) */
 .canva-landing .manifesto-quote {
   position: relative;
   padding: 2.5rem 3rem;
-  background: linear-gradient(135deg, var(--glp-sage-deep), #1a4a4a);
+  background: var(--glp-white);
   border-radius: 28px;
   overflow: hidden;
+  border: 1px solid var(--glp-sage-15);
+  box-shadow:
+    0 1px 3px rgba(var(--glp-sage-deep-rgb), 0.04),
+    0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06);
 }
 
 .canva-landing .manifesto-quote::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(30, 200, 144, 0.12), transparent 60%),
-              radial-gradient(ellipse at 70% 80%, rgba(108, 88, 184, 0.08), transparent 50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--glp-sage), var(--glp-gold), var(--glp-blush));
+  border-radius: 28px 28px 0 0;
   pointer-events: none;
 }
 
@@ -1892,7 +1899,7 @@
   right: 0;
   height: 3px;
   background: var(--card-accent, linear-gradient(90deg, var(--glp-sage), var(--glp-gold)));
-  opacity: 0;
+  opacity: 1; /* V28 — top accent always visible */
   transition: opacity 0.45s ease;
 }
 
@@ -2464,9 +2471,17 @@
   }
 }
 
-/* --- Manifesto Section — Enhanced Consciousness --- */
-.canva-landing .manifesto-quote {
-  border: 1px solid rgba(var(--glp-sage-rgb), 0.15);
+/* --- Manifesto Section — V28 light treatment retained (border in primary def) --- */
+
+/* V28 — reduced-motion guard for new feature-card "Explore" pill button */
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing .feature-card-elite a[data-testid^="link-feature-"] {
+    transition: none !important;
+    transform: none !important;
+  }
+  .canva-landing .feature-card-elite a[data-testid^="link-feature-"]:hover {
+    transform: none !important;
+  }
 }
 
 /* --- Gold Accent Line Between Sections --- */

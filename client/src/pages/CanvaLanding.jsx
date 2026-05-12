@@ -672,7 +672,7 @@ export default function CanvaLanding() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10">
             <div className="about-card-elite stagger-child flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 sm:text-center">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))' }}>
+              <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))' }}>
                 <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
@@ -686,7 +686,7 @@ export default function CanvaLanding() {
             </div>
 
             <div className="about-card-elite stagger-child flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 sm:text-center">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+              <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
                 <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
@@ -700,7 +700,7 @@ export default function CanvaLanding() {
             </div>
 
             <div className="about-card-elite stagger-child flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 sm:text-center">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-blush-400), var(--glp-blush-600))' }}>
+              <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full sm:mx-auto sm:mb-4 flex items-center justify-center feature-icon-wrap" style={{ background: 'linear-gradient(135deg, var(--glp-blush-400), var(--glp-blush-600))' }}>
                 <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
               <div>
@@ -760,7 +760,7 @@ export default function CanvaLanding() {
                 <div key={index} className="philosophy-card stagger-child" data-testid={`card-philosophy-${index}`}>
                   <div className="flex items-start gap-4">
                     <div 
-                      className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+                      className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
                       style={{ background: accent.bg }}
                     >
                       <pillar.icon className="w-5 h-5 text-white" strokeWidth={2} aria-hidden="true" />
@@ -780,7 +780,7 @@ export default function CanvaLanding() {
           </div>
 
           <div className="manifesto-quote" data-testid="section-manifesto">
-            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-center" style={{ color: 'var(--glp-paper)', opacity: 0.97, lineHeight: '1.7' }}>
+            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-center" style={{ color: 'var(--glp-sage-deep)', lineHeight: '1.7' }}>
               "We didn't build another app. We built a metacognitive mirror — one that reflects your mind back to itself with more clarity, more compassion, and more insight than you've ever experienced. Because the most powerful thing you'll ever do is learn to observe, understand, and consciously evolve the extraordinary mind you already have."
             </p>
             <p className="relative z-10 text-sm font-semibold text-center mt-4 shimmer-text">
@@ -815,7 +815,7 @@ export default function CanvaLanding() {
               };
               return (
                 <div key={index} className="feature-card-elite stagger-child group flex flex-col items-center text-center" style={{ '--card-accent': accentGradients[feature.accent] || accentGradients.sage }}>
-                  <div className="mb-4 md:mb-5 feature-icon-wrap flex items-center justify-center rounded-xl mx-auto" style={{ background: accent.bg, boxShadow: `0 4px 16px ${accent.shadow}`, width: '3rem', height: '3rem' }}>
+                  <div className="mb-4 md:mb-5 feature-icon-wrap flex items-center justify-center rounded-full mx-auto" style={{ background: accent.bg, boxShadow: `0 4px 16px ${accent.shadow}`, width: '3.25rem', height: '3.25rem' }}>
                     <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2} aria-hidden="true" />
                   </div>
                   <h3 className="text-base md:text-xl font-serif font-semibold mb-2 md:mb-3 text-center" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -824,9 +824,9 @@ export default function CanvaLanding() {
                   <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4 text-center" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
                     {feature.description}
                   </p>
-                  <Link href="/login" data-testid={`link-feature-${index}`} aria-label={`Explore ${feature.title}`} className="inline-flex items-center justify-center text-xs md:text-sm font-semibold cursor-pointer transition-colors hover:opacity-80 mx-auto mt-auto" style={{ color: 'var(--glp-gold)' }}>
+                  <Link href="/login" data-testid={`link-feature-${index}`} aria-label={`Explore ${feature.title}`} className="inline-flex items-center justify-center gap-1.5 text-xs md:text-sm font-semibold cursor-pointer mx-auto mt-auto px-4 py-2 rounded-full text-white transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.2)' }}>
                       Explore {feature.title}
-                      <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                      <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
                 </div>
               );
@@ -1015,24 +1015,24 @@ export default function CanvaLanding() {
 
       <div className="gold-accent-line" aria-hidden="true"></div>
 
-      <section className="section-reveal cta-enterprise cta-enterprise--compact px-6 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep) 0%, #0d4a3d 100%)' }}>
+      <section className="section-reveal cta-enterprise cta-enterprise--compact px-6 text-center" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full blur-3xl" style={{ background: 'rgba(var(--glp-sage-rgb), 0.10)' }} />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(var(--glp-gold-rgb), 0.08)' }} />
         </div>
         <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-7 md:py-3 rounded-full bg-white/10 backdrop-blur-sm mb-5 md:mb-7 border border-white/15">
-            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-[var(--glp-gold)]" />
-            <span className="text-sm sm:text-base md:text-lg text-white/95 font-medium tracking-wide">Something brought you here today — trust that instinct</span>
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-7 md:py-3 rounded-full backdrop-blur-sm mb-5 md:mb-7" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
+            <Sparkles className="w-4 h-4 md:w-5 md:h-5" style={{ color: 'var(--glp-gold-dark)' }} />
+            <span className="text-sm sm:text-base md:text-lg font-medium tracking-wide" style={{ color: 'var(--glp-sage-deep)' }}>Something brought you here today — trust that instinct</span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-3 md:mb-4 text-white leading-tight text-center">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-3 md:mb-4 leading-tight text-center" style={{ color: 'var(--glp-sage-deep)' }}>
             Your Buddy Is Ready.
             <br />
-            <span className="text-[var(--glp-gold)]" style={{ textShadow: '0 2px 20px var(--glp-gold-30)' }}>Are You?</span>
+            <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Are You?</span>
           </h2>
 
-          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-8 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.7', color: 'var(--glp-paper)' }}>
+          <p className="text-base sm:text-lg md:text-xl mt-1 mb-6 md:mb-8 max-w-3xl mx-auto font-light leading-relaxed text-center" style={{ lineHeight: '1.7', color: 'var(--glp-ink)' }}>
             Free to start. No credit card. No trial that expires. Your AI buddy — success coach, metacognitive guide, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. Real self-regulation. The person you're becoming is already inside you — let's meet them.
           </p>
 
@@ -1149,13 +1149,13 @@ export default function CanvaLanding() {
         </div>
       </footer>
 
-      <section className="py-4 px-6" style={{ background: 'var(--glp-teal-800)' }}>
+      <section className="py-4 px-6" style={{ background: 'var(--glp-paper)' }}>
         <div className="max-w-md mx-auto text-center">
           {!showAdminLogin ? (
             <button
               onClick={() => setShowAdminLogin(true)}
-              className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-lg transition-all opacity-40 hover:opacity-100"
-              style={{ color: 'var(--glp-teal-200)', background: 'var(--glp-teal-700)' }}
+              className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full transition-all opacity-50 hover:opacity-100"
+              style={{ color: 'var(--glp-sage-deep)', background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}
               data-testid="button-admin-toggle"
             >
               <Settings className="w-3 h-3" />
@@ -1165,21 +1165,21 @@ export default function CanvaLanding() {
             <div 
               className="p-6 rounded-2xl animate-fade-in-up"
               style={{ 
-                background: 'linear-gradient(135deg, var(--glp-teal-700), var(--glp-sage-deep))',
-                border: '1px solid var(--glp-teal-500)',
-                boxShadow: '0 12px 40px rgba(0,0,0,0.3)'
+                background: 'var(--glp-white)',
+                border: '1px solid var(--glp-sage-15)',
+                boxShadow: '0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06)'
               }}
             >
               <div className="flex items-center justify-center gap-3 mb-5">
                 <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  className="w-12 h-12 rounded-full flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}
                 >
                   <KeyRound className="w-6 h-6 text-white" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-bold text-lg text-white">Admin Portal</h4>
-                  <p className="text-xs" style={{ color: 'var(--glp-teal-200)' }}>Platform management access</p>
+                  <h4 className="font-bold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Admin Portal</h4>
+                  <p className="text-xs" style={{ color: 'var(--glp-ink)' }}>Platform management access</p>
                 </div>
               </div>
               
@@ -1192,19 +1192,18 @@ export default function CanvaLanding() {
                     placeholder="Enter admin token"
                     className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2"
                     style={{ 
-                      background: 'var(--glp-teal-600)',
-                      color: 'white',
-                      border: '1px solid var(--glp-teal-500)',
-                      boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'
+                      background: 'var(--glp-paper)',
+                      color: 'var(--glp-sage-deep)',
+                      border: '1px solid var(--glp-sage-20)'
                     }}
                     data-testid="input-admin-token"
                     autoComplete="off"
                   />
-                  <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--glp-teal-300)' }} />
+                  <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--glp-sage)' }} />
                 </div>
                 
                 {adminError && (
-                  <p className="text-sm font-medium px-3 py-2 rounded-lg" style={{ background: 'rgba(244,199,195,0.2)', color: 'var(--glp-blush)' }}>
+                  <p className="text-sm font-medium px-3 py-2 rounded-lg" style={{ background: 'rgba(var(--glp-blush-rgb), 0.15)', color: 'var(--glp-blush-600)' }}>
                     {adminError}
                   </p>
                 )}
@@ -1213,9 +1212,9 @@ export default function CanvaLanding() {
                   <button
                     type="submit"
                     disabled={adminLoading || !adminToken}
-                    className="flex-1 inline-flex items-center justify-center gap-2 font-semibold py-3 rounded-xl transition-all disabled:opacity-50"
+                    className="flex-1 inline-flex items-center justify-center gap-2 font-semibold py-3 rounded-full transition-all disabled:opacity-50"
                     style={{ 
-                      background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))',
+                      background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))',
                       color: 'white',
                       boxShadow: '0 4px 16px var(--glp-sage-30)'
                     }}
@@ -1240,8 +1239,8 @@ export default function CanvaLanding() {
                       setAdminToken("");
                       setAdminError("");
                     }}
-                    className="px-4 py-3 rounded-xl transition-all hover:bg-[var(--glp-teal-600)]"
-                    style={{ color: 'var(--glp-teal-200)' }}
+                    className="px-4 py-3 rounded-full transition-all hover:bg-[var(--glp-sage-10)]"
+                    style={{ color: 'var(--glp-sage-deep)' }}
                     data-testid="button-admin-cancel"
                     aria-label="Cancel admin login"
                   >
@@ -1250,7 +1249,7 @@ export default function CanvaLanding() {
                 </div>
               </form>
               
-              <p className="text-xs mt-4" style={{ color: 'var(--glp-teal-300)' }}>
+              <p className="text-xs mt-4" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
                 For authorized personnel only. All access attempts are logged.
               </p>
             </div>
