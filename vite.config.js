@@ -26,7 +26,9 @@ export default defineConfig({
           if (id.includes('/react-dom/') || id.includes('/react/')) return 'vendor-react';
           if (id.includes('/lucide-react/')) return 'vendor-lucide';
           if (id.includes('/react-icons/')) return 'vendor-icons';
-          if (id.includes('/chart.js/') || id.includes('/react-chartjs-2/')) return 'vendor-charts';
+          if (id.includes('/chart.js/') || id.includes('/react-chartjs-2/') || id.includes('/recharts/') || id.includes('/d3-')) return 'vendor-charts';
+          if (id.includes('/framer-motion/')) return 'vendor-motion';
+          if (id.includes('/date-fns/') || id.includes('/dayjs/')) return 'vendor-date';
           if (id.includes('/canvas-confetti/')) return 'vendor-confetti';
           if (id.includes('/react-helmet-async/') || id.includes('/wouter/')) return 'vendor-router';
           if (id.includes('/zod/') || id.includes('/react-hook-form/') || id.includes('/@hookform/')) return 'vendor-forms';

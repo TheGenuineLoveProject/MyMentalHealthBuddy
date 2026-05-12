@@ -1,4 +1,12 @@
-import * as LucideIcons from 'lucide-react';
+/**
+ * Card primitives (shadcn-style) + legacy Card wrapper.
+ *
+ * v5.8.35 perf: removed `import * as LucideIcons from 'lucide-react'` which was
+ * pulling the entire lucide library (~624 KB / 165 KB gzip) into the main
+ * bundle even though the legacy `icon` prop was never used in this codebase.
+ * The `icon` prop is now accepted as a React element (not a string lookup) so
+ * callers that opt in own their own icon import — keeps tree-shaking honest.
+ */
 
 // Composable card primitives (shadcn-style)
 export function CardHeader({ children, className = '' }) {
@@ -50,7 +58,9 @@ export function CardWrapper({ children, className = '' }) {
   );
 }
 
-// Legacy Card component with icon/title/text props
+// Legacy Card component with icon/title/text props.
+// `icon` may be a React element (e.g. <Heart />) — callers own their import.
+// Strings are silently ignored to keep backward compatibility safe.
 export function Card({
   icon,
   title,
@@ -58,15 +68,15 @@ export function Card({
   href,
   className = '',
 }) {
-  const IconComponent = icon && LucideIcons[icon] ? LucideIcons[icon] : null;
+  const iconNode = icon && typeof icon !== 'string' ? icon : null;
 
   const content = (
     <div
       className={`group relative p-6 rounded-2xl bg-white border border-[var(--glp-sage-20)] shadow-sm hover:shadow-md hover:border-[var(--glp-sage-40)] focus-within:ring-2 focus-within:ring-[var(--glp-gold)] focus-within:ring-offset-2 transition-all motion-safe:transition-transform motion-safe:hover:-translate-y-1 ${className}`}
     >
-      {IconComponent && (
-        <div className="w-12 h-12 rounded-xl bg-[var(--glp-sage-10)] flex items-center justify-center mb-4">
-          <IconComponent className="w-6 h-6 text-[var(--glp-sage-deep)]" aria-hidden="true" />
+      {iconNode && (
+        <div className="w-12 h-12 rounded-xl bg-[var(--glp-sage-10)] flex items-center justify-center mb-4 text-[var(--glp-sage-deep)]">
+          {iconNode}
         </div>
       )}
       {title && (

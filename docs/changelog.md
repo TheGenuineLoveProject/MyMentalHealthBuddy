@@ -1,3 +1,32 @@
+## v5.8.35 — A→Z 360° Performance Sweep
+
+User asked for end-to-end perf optimization. Diagnostic audit found 4 categories of bloat; all 4 fixed in one pass.
+
+**Phase A — Lucide tree-shake (biggest single win)**
+`client/src/components/ui/Card.jsx` had `import * as LucideIcons from 'lucide-react'` to support a legacy `icon="Heart"` string-lookup pattern that turned out to be **completely unused** in the codebase (0 callers found via ripgrep). That single line was pulling the entire ~1000-icon lucide library into `vendor-lucide.js`. Removed the barrel; refactored the `icon` prop to accept a React element (e.g. `<Heart />`) so any future caller owns its own tree-shakeable import. **Result: vendor-lucide chunk 624 KB → 66.59 KB (gzip 165 KB → 22 KB) = 143 KB gzip saved on every page load.**
+
+**Phase B — Image WebP conversion**
+12 PNG files >200 KB in `client/public/brand/` (4 hero benefit illustrations at ~700 KB each, 5 avatar PNGs, 3 footer/inspirational graphics) were served as raw PNG. Used the system `cwebp` CLI to generate WebP siblings at quality 82 with method 6 compression. `VisualBenefits.jsx` already had `imageWebp` paths in its data — the `<picture>` plumbing existed but the WebPs themselves had never been generated. **Result: 5.0 MB PNG → 212 KB WebP = 4.8 MB / 96% smaller on first home-page visit.** All original PNGs kept as fallback (`<picture><source type="image/webp">…<img src=".png">`).
+
+**Phase C — Eager component lazy-load**
+`client/src/App.jsx` was eagerly importing 8 heavy non-critical components: `GratitudePrompt` (194 lines), `ConsentBanner` (165), `FeedbackWidget` (249), `WelcomeBackBanner` (201), `ReturnLoop` (250), `MicroWinPrompt` (310), `AICompanion` (393), `AccessibilityToolbar` (208), plus `AnalyticsDashboard` admin page (admin-only, never needed eagerly). All converted to `React.lazy()` and the global widget cluster wrapped in a `<Suspense fallback={null}>` so they hydrate quietly post-LCP without blocking first paint. **Result: index.js main chunk 819 KB → 750 KB (gzip 196 KB → 178 KB) = 18 KB gzip saved.**
+
+**Phase D — Vite manualChunks tightening**
+`vite.config.js` `manualChunks` extended to also split `recharts`, `d3-*`, `framer-motion`, and `date-fns`/`dayjs` into dedicated vendor chunks if/when they show up — preventive future-proofing so a single chart import can't bloat the main bundle. Existing `vendor-react`, `vendor-lucide`, `vendor-charts`, `vendor-router`, `vendor-forms` rules untouched.
+
+**Cumulative impact on first visit**
+- JS gzipped wire: **−161 KB** (≈22% smaller initial JS payload)
+- Image wire: **−4.8 MB** (≈96% smaller hero imagery)
+- Server gzip + immutable cache headers (already correct from prior work) untouched
+- Build time: 17.72s → 19.83s (+2s, acceptable for the chunk-splitting wins)
+
+**Universal contracts honored**
+- All `data-testid` selectors preserved (Card.jsx primitives unchanged; only the unused string-lookup branch removed)
+- `/crisis` routing untouched
+- Reduced-motion guards untouched
+- No design changes — purely under-the-hood
+- Non-destructive: every PNG kept as `<picture>` fallback, no image deleted
+
 ## v5.8.34 — V28 Polish System + IMG_4320 Reference Alignment
 
 User-attached homepage screenshot (IMG_4320) showed the canonical content-card grammar — white surface with thin top color-accent stripe, soft pastel rounded-lg icon tile, bold serif title, gentle gray body, sage gradient pill CTA — and complained about cavernous vertical gaps between sections. Diagnosis: `.section-breathe` (in `canva-landing.css`) was 5/7/8rem on BOTH sides = up to 256px gaps on desktop. Plus ValueBridge + ValueProposition (the actual screenshot subjects) used off-palette `#8FBF9F` (sage) / `#D4AF37` (gold) instead of canonical `#A8C9A0` / `#FFD93D`.

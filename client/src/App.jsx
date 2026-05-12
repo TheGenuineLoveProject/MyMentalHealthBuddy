@@ -6,7 +6,9 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { EmotionProvider } from "./context/EmotionContext.jsx";
 import ResponsiveWrapper from "./components/ResponsiveWrapper.jsx";
 import EmotionBackgroundProvider from "./components/EmotionBackgroundProvider.jsx";
-import GratitudePrompt from "./components/GratitudePrompt.jsx";
+// v5.8.35 perf: GratitudePrompt lazy — global widget, mounts on every page but
+// rarely used; no need to block initial render.
+const GratitudePrompt = lazy(() => import("./components/GratitudePrompt.jsx"));
 import { ReadingLevelProvider } from "./context/ReadingLevelContext.jsx";
 import { ReducedMotionProvider } from "./components/a11y/ReducedMotionProvider.jsx";
 import { GamificationProvider } from "./context/GamificationContext.jsx";
@@ -17,17 +19,20 @@ import { AutopilotPage } from "./pages/_autopilot.jsx";
 import AgeConsentGate from "./components/AgeConsentGate.jsx";
 import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
-import ConsentBanner from "./components/ConsentBanner.jsx";
-import FeedbackWidget from "./components/FeedbackWidget.jsx";
-import WelcomeBackBanner from "./components/WelcomeBackBanner.jsx";
-import ReturnLoop from "./components/ReturnLoop.jsx";
-import MicroWinPrompt from "./components/MicroWinPrompt.jsx";
+// v5.8.35 perf: defer heavy global widgets — none are needed for first paint.
+const ConsentBanner = lazy(() => import("./components/ConsentBanner.jsx"));
+const FeedbackWidget = lazy(() => import("./components/FeedbackWidget.jsx"));
+const WelcomeBackBanner = lazy(() => import("./components/WelcomeBackBanner.jsx"));
+const ReturnLoop = lazy(() => import("./components/ReturnLoop.jsx"));
+const MicroWinPrompt = lazy(() => import("./components/MicroWinPrompt.jsx"));
 import { FeatureFlagProvider } from "./contexts/FeatureFlagContext.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
-import AnalyticsDashboard from "./pages/admin/AnalyticsDashboard.jsx";
+// v5.8.35 perf: AnalyticsDashboard is admin-only — never needed eagerly.
+const AnalyticsDashboard = lazy(() => import("./pages/admin/AnalyticsDashboard.jsx"));
 import { usePageViewTracker } from "./hooks/useAnalytics.mjs";
-import AICompanion from "./components/AICompanion.jsx";
-import AccessibilityToolbar from "./components/AccessibilityToolbar.jsx";
+// v5.8.35 perf: AICompanion (393 lines) + AccessibilityToolbar (208) deferred.
+const AICompanion = lazy(() => import("./components/AICompanion.jsx"));
+const AccessibilityToolbar = lazy(() => import("./components/AccessibilityToolbar.jsx"));
 import './index.css'; // Your Tailwind import
 const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 
@@ -370,10 +375,17 @@ export default function App() {
           <ErrorBoundary>
             <PageViewTracker />
             <SkipToContent />
-            <ReturnLoop />
-            <MicroWinPrompt />
+            {/* v5.8.35 perf: ReturnLoop/MicroWinPrompt/WelcomeBackBanner are
+                lazy now — wrap in Suspense so React doesn't throw "suspended
+                outside of a Suspense boundary" on first hydration. */}
+            <Suspense fallback={null}>
+              <ReturnLoop />
+              <MicroWinPrompt />
+            </Suspense>
             <main id="main-content">
-            <WelcomeBackBanner />
+            <Suspense fallback={null}>
+              <WelcomeBackBanner />
+            </Suspense>
             <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Landing & Public Pages */}
@@ -1875,11 +1887,15 @@ export default function App() {
             </Switch>
           </Suspense>
           </main>
-          <ConsentBanner />
-          <FeedbackWidget />
-          <AICompanion />
-          <AccessibilityToolbar />
-          <GratitudePrompt frequency="weekly" />
+          {/* v5.8.35 perf: lazy global widgets — Suspense fallback is null
+              because none are above-the-fold; they hydrate quietly post-LCP. */}
+          <Suspense fallback={null}>
+            <ConsentBanner />
+            <FeedbackWidget />
+            <AICompanion />
+            <AccessibilityToolbar />
+            <GratitudePrompt frequency="weekly" />
+          </Suspense>
           </ErrorBoundary>
         </ReadingLevelProvider>
         </ResponsiveWrapper>
