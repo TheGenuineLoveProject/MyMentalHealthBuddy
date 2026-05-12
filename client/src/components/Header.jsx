@@ -1,12 +1,13 @@
 import { Link, useLocation } from "wouter";
 import { BRAND } from "@shared/brand.mjs";
-import { Home, LayoutDashboard, Settings, Heart } from "lucide-react";
+import { Home, Sparkles, ClipboardCheck, MessageCircle, BookOpen } from "lucide-react";
 import LumiMascot from "./lumi/LumiMascot.jsx";
 
-function NavLink({ href, children, className = "", active = false }) {
+function NavLink({ href, children, className = "", active = false, ...props }) {
   return (
     <Link
       href={href}
+      {...props}
       className={[
         "inline-flex items-center gap-2 rounded-lg px-3 py-2",
         "text-sm font-medium transition-all",
@@ -27,9 +28,10 @@ export default function Header() {
 
   const navItems = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/wellness", label: "Wellness", icon: Heart },
-    { href: "/settings", label: "Settings", icon: Settings },
+    { href: "/tools", label: "Tools", icon: Sparkles },
+    { href: "/checkin", label: "Check-In", icon: ClipboardCheck },
+    { href: "/companion", label: "Companion", icon: MessageCircle },
+    { href: "/journal", label: "Journal", icon: BookOpen },
   ];
 
   return (
@@ -69,12 +71,27 @@ export default function Header() {
               key={href} 
               href={href} 
               active={location === href}
-              data-testid={`nav-${label.toLowerCase()}`}
+              data-testid={`nav-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
             >
               <Icon className="icon-sm" aria-hidden="true" />
               <span className="hidden md:inline">{label}</span>
             </NavLink>
           ))}
+          <Link
+            href="/login"
+            className="ml-2 inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium text-secondary hover:text-brand hover:bg-[var(--surface-hover)] focus-ring transition-all"
+            data-testid="nav-login"
+          >
+            Login
+          </Link>
+          <Link
+            href="/register"
+            className="ml-1 inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold text-white focus-ring transition-transform hover:scale-105"
+            style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.2)' }}
+            data-testid="nav-get-started"
+          >
+            Get Started
+          </Link>
         </nav>
       </div>
     </header>

@@ -86,7 +86,7 @@ const BENEFITS = [
     avatarWebp: '/brand/v17/avatar-heart.webp',
     icon: Users,
     iconLabel: 'Warm presence',
-    cta: { label: 'Say Hello to Lumi', href: '/chat' },
+    cta: { label: 'Say Hello to Lumi', href: '/companion' },
     sensoryWords: ['warm', 'quiet', 'here', 'whisper', 'sit'],
     accent: '#FF9A8B', // canonical blush
     tint: 'rgba(255, 154, 139, 0.12)',
@@ -104,7 +104,7 @@ const BENEFITS = [
     avatarWebp: '/brand/v17/avatar-floating.webp',
     icon: Sparkles,
     iconLabel: 'Personal growth',
-    cta: { label: 'Meet Your Companion', href: '/chat' },
+    cta: { label: 'Meet Your Companion', href: '/celebration' },
     sensoryWords: ['garden', 'bloom', 'walk', 'grow', 'unfold'],
     accent: '#FFD93D', // canonical sunshine
     tint: 'rgba(255, 217, 61, 0.10)',
