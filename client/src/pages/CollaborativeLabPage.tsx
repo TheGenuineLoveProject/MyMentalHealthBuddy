@@ -214,7 +214,7 @@ export default function CollaborativeLabPage() {
       <SEO title="Collaborative Lab — MyMentalHealthBuddy" description="Explore wellness tools in a collaborative environment." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-4xl mx-auto">
         <header className="text-center mb-8">

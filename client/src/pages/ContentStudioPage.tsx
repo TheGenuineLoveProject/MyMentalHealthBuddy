@@ -180,7 +180,7 @@ export default function ContentStudioPage() {
   };
 
   return (
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-4 mb-8">

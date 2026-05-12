@@ -34,7 +34,7 @@ export default function DesignDashboard() {
         description="Your wellness design hub - mood tracking, journaling, healing tools, and progress visualization."
       />
       
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <header className="sticky top-0 z-10 bg-[var(--glp-paper)]/85 backdrop-blur-md border-b border-[var(--sage-200)]">
           <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
             <div>

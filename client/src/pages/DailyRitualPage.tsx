@@ -224,7 +224,7 @@ export default function DailyRitualPage() {
       <SEO title="Daily Ritual — The Genuine Love Project" description="Build meaningful daily routines for self-care." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="mx-auto max-w-2xl">
         <header className="mb-8 text-center">

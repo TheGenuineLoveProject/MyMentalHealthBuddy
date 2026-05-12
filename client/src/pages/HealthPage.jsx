@@ -36,7 +36,7 @@ export default function HealthPage() {
         title="Health Check - The Genuine Love Project"
         description="System health status and diagnostics."
       />
-      <div className="min-h-screen hero-gradient p-6">
+      <div className="min-h-screen v28-paper-bg p-6">
         <div className="max-w-lg mx-auto">
           <header className="mb-8">
             <Link 

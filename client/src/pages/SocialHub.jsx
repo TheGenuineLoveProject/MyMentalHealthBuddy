@@ -118,7 +118,7 @@ export default function SocialHub() {
         title="Social Hub - The Genuine Love Project"
         description="Templates, captions, hashtags, and scheduling exports for social media."
       />
-      <div className="min-h-screen hero-gradient p-8">
+      <div className="min-h-screen v28-paper-bg p-8">
         <div className="max-w-4xl mx-auto">
           <header className="mb-8">
             <Link 

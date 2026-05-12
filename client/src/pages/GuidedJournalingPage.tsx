@@ -207,7 +207,7 @@ export default function GuidedJournalingPage() {
       <SEO title="Guided Journaling — MyMentalHealthBuddy" description="Prompts and guidance for reflective writing." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-4xl mx-auto">
         <header className="mb-8">

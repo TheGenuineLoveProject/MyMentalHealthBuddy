@@ -77,7 +77,7 @@ export default function SubscriberBenefitsPage() {
           { label: "Advanced", examples: ["Use all 12 Practices", "Master the advanced tools"] }
         ]}
       >
-        <div className="min-h-screen hero-gradient py-8">
+        <div className="min-h-screen v28-paper-bg py-8">
           <div className="content-wrapper">
             <div className="max-w-5xl mx-auto space-y-12">
 

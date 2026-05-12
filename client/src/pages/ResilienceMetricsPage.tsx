@@ -169,7 +169,7 @@ export default function ResilienceMetricsPage() {
       <SEO title="Resilience Metrics — The Genuine Love Project" description="Track and build your resilience over time." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-5xl mx-auto">
         <header className="text-center mb-10">

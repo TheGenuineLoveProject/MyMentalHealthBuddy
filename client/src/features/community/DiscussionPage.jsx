@@ -136,7 +136,7 @@ export default function DiscussionPage() {
 
   if (!post) {
     return (
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <div className="mx-auto max-w-3xl px-6 py-10">
           <Link 
             href="/community" 
@@ -162,7 +162,7 @@ export default function DiscussionPage() {
         title={`${post.question} - Community Discussion`}
         description={`Join the discussion: ${post.question}`}
       />
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <div className="mx-auto max-w-3xl px-6 py-10">
           <Link 
             href="/community" 

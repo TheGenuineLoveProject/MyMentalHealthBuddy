@@ -7,7 +7,7 @@ import {
 import { apiFetch } from "@/lib/api";
 
 function panelChrome(extra = "") {
-  return `glass-premium rounded-2xl p-6 ${extra}`;
+  return `v28-card rounded-2xl p-6 ${extra}`;
 }
 
 /* True when an apiFetch error message is a 401/403 — i.e. the route is

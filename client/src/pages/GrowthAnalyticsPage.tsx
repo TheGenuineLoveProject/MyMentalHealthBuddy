@@ -187,7 +187,7 @@ export default function GrowthAnalyticsPage() {
       <SEO title="Growth Analytics — MyMentalHealthBuddy" description="Track your wellness journey and growth patterns." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-5xl mx-auto">
         <header className="mb-8">

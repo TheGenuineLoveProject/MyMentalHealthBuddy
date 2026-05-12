@@ -38,7 +38,7 @@ function ConnectionRow({ source, connection, onSync, isSyncing }) {
   const connected = !!connection?.id;
   return (
     <div
-      className="flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2"
+      className="flex items-center justify-between rounded-xl v28-card px-3 py-2"
       data-testid={`row-connection-${source}`}
     >
       <div className="flex items-center gap-2">
@@ -101,7 +101,7 @@ function ManualUploadCard({ metricsCatalog, sources }) {
   return (
     <form
       onSubmit={submit}
-      className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 space-y-3"
+      className="rounded-2xl v28-card p-4 space-y-3"
       data-testid="form-manual-upload"
     >
       <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
@@ -205,7 +205,7 @@ export default function BiometricDashboard() {
   const stateClass = STATE_COLOR[computedState?.state] || STATE_COLOR.unknown;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO title="Biometric Dashboard | MyMentalHealthBuddy" description="Opt-in nervous system telemetry. Educational only." />
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
@@ -239,7 +239,7 @@ export default function BiometricDashboard() {
           <div className="grid gap-6 lg:grid-cols-3">
             <section
               aria-label="Nervous system state"
-              className="lg:col-span-2 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm overflow-hidden"
+              className="lg:col-span-2 rounded-2xl v28-card shadow-sm overflow-hidden"
               data-testid="section-state"
             >
               <div className={`h-2 w-full bg-gradient-to-r ${stateClass}`} aria-hidden />
@@ -314,7 +314,7 @@ export default function BiometricDashboard() {
             <aside className="space-y-4">
               <section
                 aria-label="Devices"
-                className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 space-y-2"
+                className="rounded-2xl v28-card p-4 space-y-2"
                 data-testid="section-connections"
               >
                 <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-100">Devices</h3>

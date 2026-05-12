@@ -22,7 +22,7 @@ function StatusDot({ status }) {
 
 function AgentRow({ agent, expanded, onToggle, onInvoke, isInvoking }) {
   return (
-    <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 overflow-hidden" data-testid={`row-agent-${agent.agentKey}`}>
+    <div className="rounded-2xl v28-card overflow-hidden" data-testid={`row-agent-${agent.agentKey}`}>
       <button
         type="button"
         onClick={() => onToggle(agent.id)}
@@ -110,7 +110,7 @@ function InvocationConsole({ selectedAgent, onClear }) {
   return (
     <section
       aria-label="Invocation console"
-      className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm"
+      className="rounded-2xl v28-card p-5 shadow-sm"
       data-testid="section-invocation-console"
     >
       <header className="flex items-center justify-between mb-3">
@@ -234,7 +234,7 @@ export default function AgentInteraction() {
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+      <div className="min-h-screen v28-paper-bg">
         <div className="mx-auto max-w-2xl px-4 py-16 text-center">
           <Lock className="h-10 w-10 text-rose-500 mx-auto mb-3" aria-hidden />
           <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100" data-testid="text-not-authorized">
@@ -252,7 +252,7 @@ export default function AgentInteraction() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO title="Agent Console | MyMentalHealthBuddy Admin" description="Orchestrator invocation console (admin only)." />
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
@@ -322,7 +322,7 @@ export default function AgentInteraction() {
 
               <section
                 aria-label="Memory stats"
-                className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4"
+                className="rounded-2xl v28-card p-4"
                 data-testid="section-memory"
               >
                 <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-1.5 mb-2">

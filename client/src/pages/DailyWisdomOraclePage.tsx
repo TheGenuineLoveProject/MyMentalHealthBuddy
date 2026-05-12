@@ -207,7 +207,7 @@ export default function DailyWisdomOraclePage() {
       <SEO title="Daily Wisdom Oracle — The Genuine Love Project" description="Receive daily insights and reflective guidance." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <header className="mb-8">
           <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">

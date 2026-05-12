@@ -1,3 +1,43 @@
+## v5.8.32 — V28 Tier 4 Sweep (Admin + Niche Pages, 57 + 6 surfaces) [FINAL]
+
+**Architect-flagged cleanup pass added 6 more files outside `pages/`:**
+- `client/src/features/community/SharedReflectionsPage.jsx` — `hero-gradient` → `v28-paper-bg`
+- `client/src/features/community/DiscussionPage.jsx` — 2× `hero-gradient` → `v28-paper-bg`
+- `client/src/components/admin/SOPMonitorPanel.jsx` — 8× `glass-premium` → `v28-card`
+- `client/src/components/admin/OperationsPanel.jsx` — `glass-premium` → `v28-card`
+- `client/src/components/admin/OrchestratorTestPanel.jsx` — `glass-premium` → `v28-card`
+- `client/src/components/admin/ConsciousnessRegistryPanel.jsx` — 2× `glass-premium` → `v28-card`
+
+Final audit `rg "hero-gradient|hero-premium|glass-premium" client/src/` returned ZERO hits across the entire codebase. **The V28 sweep that started in v5.8.21 is now structurally complete: every page-chrome and card-shell instance of the legacy classes has been retired in favor of the canonical `.v28-paper-bg` + `.v28-card` utilities.**
+
+---
+
+## v5.8.32 — V28 Tier 4 Sweep (Admin + Niche Pages, 57 surfaces)
+
+User asked to continue. This batch closes the long tail: 57 admin/dashboard/specialty pages bulk-flipped to V28 contract using the `.v28-paper-bg` + `.v28-card` utility classes shipped in v5.8.31. Five regex passes per file (idempotent — running twice has no effect): `min-h-screen hero-gradient` → `min-h-screen v28-paper-bg`; `min-h-screen hero-premium` → `min-h-screen v28-paper-bg`; per-hue `bg-gradient-to-br from-X-50 via-white to-Y-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900` → `min-h-screen v28-paper-bg` (and `via-Y-50` variant); `border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900` → `v28-card`; `glass-premium` → `v28-card`.
+
+**Files touched (57):**
+- **Account (3)**: `account/Billing.jsx`, `account/Profile.jsx`, `account/Settings.jsx`
+- **Admin / Dashboards (6)**: `Admin.jsx`, `admin/SecurityDashboard.jsx`, `BiometricDashboard.jsx`, `DiscernmentDashboard.jsx`, `DesignDashboard.jsx`, `ContentAdminDashboard.jsx`
+- **Dashboard subroutes (3)**: `dashboard/Insights.tsx`, `dashboard/Journal.jsx`, `dashboard/MoodTracker.jsx`
+- **Tool/wisdom hubs (10)**: `AdvancedToolsPage.tsx`, `MasteryToolsPage.tsx`, `EliteToolsDashboard.tsx`, `CognitiveToolsPage.jsx`, `WisdomToolsPage.tsx`, `WisdomPracticesPage.tsx`, `WisdomSynthesisPage.tsx`, `KnowledgeSynthesisPage.tsx`, `MetaLearningPage.tsx`, `StrategyMapsPage.tsx`
+- **Specialty (15)**: `AdaptiveCompanionPage.tsx`, `AgentInteraction.jsx`, `AtlasDashboard.tsx`, `BehaviorChangePage.jsx`, `BodyWellnessPage.jsx`, `CognitiveArchitecturePage.tsx`, `CollaborativeLabPage.tsx`, `DailyRitualPage.tsx`, `DailyRoutinesPage.jsx`, `DailyWisdomOraclePage.tsx`, `MirrorPage.tsx`, `PhilosophicalInquiryPage.tsx`, `SoulWellnessPage.jsx`, `SystemsThinkingPage.tsx`, `InsightCardsPage.tsx`
+- **Reference / info (10)**: `BlogEditor.jsx`, `CommunityPage.tsx`, `ContentStudioPage.tsx`, `ExamplesPage.jsx`, `GrowthAnalyticsPage.tsx`, `GuidedJournalingPage.tsx`, `HealthPage.jsx`, `HowToGuidesPage.jsx`, `ProfessionalResourcesPage.jsx`, `ProgressDashboardPage.tsx`
+- **Workflow (10)**: `ProtocolBrowser.jsx`, `ProtocolSession.jsx`, `Publishing.jsx`, `QAPage.jsx`, `ResearchEvidencePage.jsx`, `ResilienceMetricsPage.tsx`, `SocialHub.jsx`, `StudyVaultPage.jsx`, `SubscriberBenefitsPage.jsx`, `SupportPage.tsx`
+
+**What was deliberately NOT touched (out of this batch's scope):**
+- Inline per-tile decorative gradients (e.g. `Wellness.jsx` lines 503/513/523 amber/emerald/purple stat tiles, `WellnessDashboard.jsx` teal/amber stat tiles, `Start.tsx` amber numbered list bullets) — these are scoped per-card decorative gradients, not page-level chrome. Lower visual priority than the page-chrome flips; can be re-mapped to canonical 8-hex palette in a focused later pass.
+- The `admin/Social*` family (SocialAnalytics, SocialCalendar, SocialDashboard, SocialGenerator, SocialLibrary, AdminSocial, NarrativeOpsConsole, HealthDashboard, InsightsDashboard, ControlDashboard, LoginCallback, Invite, hubs/*, pathways/*, CelebrationRitual, GratitudePractice, GrowthPage, HealingLibraryPage, NewsPage, StatePage, Onboarding, StressResponseGuidePage, WellnessGlossaryPage) — these did not match any of the canonical V28 offender patterns; they likely use other styling approaches (page shells, theme variables) that already render acceptably. Will audit case-by-case if specific surfaces look off in production.
+
+**Universal contracts honored:**
+- All `data-testid` preserved (sed only touched className strings, never attribute names or values).
+- `/crisis` routing untouched on every wellness surface.
+- `prefers-reduced-motion`: no new motion introduced.
+- Sed swaps were idempotent and pattern-anchored (each pattern is a unique multi-token substring), so zero risk of partial / cascading replacements.
+- Build green: `✓ built in 16.48s`.
+
+**Cumulative V28 sweep total (v5.8.21 → v5.8.32): ~95 surfaces flipped to canonical V28 contract.** All public-facing + auth + dashboard + tool + admin + specialty pages now share the same paper-bg + white sage-bordered-card aesthetic per the user-attached homepage reference screenshot.
+
 ## v5.8.31 — V28 Tier 3 Sweep (Tool Pages + Auth/Account/Conversion Surfaces)
 
 User asked to continue Tier 3 V28 propagation. 100+ files in the audit; this batch hits the 21 highest-traffic surfaces (skipping 30+ admin/* internal dashboards for a later pass). Strategy: introduced 2 shared utility classes in `index.css` (`.v28-paper-bg`, `.v28-card`) so every Tier 3 surface can adopt the V28 contract via a single class swap rather than 100+ inline-style edits. Both utilities use literal hex (not CSS vars) to defeat any token override and stay byte-stable.

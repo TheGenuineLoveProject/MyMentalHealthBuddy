@@ -368,7 +368,7 @@ export default function StudyVaultPage() {
       <SEO title="Study Vault — The Genuine Love Project" description="Research and evidence supporting our approach." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center gap-4 mb-8">

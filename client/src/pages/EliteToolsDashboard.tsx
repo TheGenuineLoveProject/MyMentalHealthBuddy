@@ -229,7 +229,7 @@ export default function EliteToolsDashboard() {
         description="Access 700+ world-class intellectual instruments for MIT-level minds: healing modalities, cognitive frameworks, and wisdom synthesis."
       />
       
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen v28-paper-bg">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--sage-100)] border border-[var(--sage-200)] text-[var(--teal-700)] text-sm font-medium mb-4">

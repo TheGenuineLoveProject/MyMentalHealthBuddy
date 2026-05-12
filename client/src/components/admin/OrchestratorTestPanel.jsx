@@ -111,7 +111,7 @@ export default function OrchestratorTestPanel() {
 
   return (
     <section
-      className="glass-premium rounded-2xl p-6 mb-6"
+      className="v28-card rounded-2xl p-6 mb-6"
       aria-labelledby="orchestrator-test-heading"
       data-testid="panel-orchestrator-test"
       style={{ border: "1px solid var(--glp-border-soft)" }}

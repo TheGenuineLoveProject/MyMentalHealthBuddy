@@ -55,7 +55,7 @@ export default function SecurityDashboard() {
 
   if (overviewLoading) {
     return (
-      <div className="min-h-screen hero-gradient flex items-center justify-center" data-testid="loading-security">
+      <div className="min-h-screen v28-paper-bg flex items-center justify-center" data-testid="loading-security">
         <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-primary" />
         <span className="ml-3 text-muted-foreground">Loading security dashboard...</span>
       </div>
@@ -67,7 +67,7 @@ export default function SecurityDashboard() {
   }
 
   return (
-    <div className="min-h-screen hero-gradient" data-testid="page-security-dashboard">
+    <div className="min-h-screen v28-paper-bg" data-testid="page-security-dashboard">
       <SEO title="Security Dashboard — Admin" noindex />
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">

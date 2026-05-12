@@ -86,7 +86,7 @@ export default function BlogEditor() {
     ]}
   >
 
-      <div className="min-h-screen hero-premium relative overflow-hidden">
+      <div className="min-h-screen v28-paper-bg relative overflow-hidden">
         <TglpNavbar />
         <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
@@ -126,7 +126,7 @@ export default function BlogEditor() {
         { label: "Advanced", examples: ["Write a comprehensive guide.", "Analyze a pattern you've noticed."] }
       ]}
     >
-    <div className="min-h-screen hero-premium relative overflow-hidden">
+    <div className="min-h-screen v28-paper-bg relative overflow-hidden">
       <SEO title="Write a Post | The Genuine Love Project Blog" />
       <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-20 -left-20 absolute" aria-hidden="true" />

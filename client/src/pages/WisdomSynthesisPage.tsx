@@ -195,7 +195,7 @@ export default function WisdomSynthesisPage() {
       <SEO title="Wisdom Synthesis — The Genuine Love Project" description="Integrate wisdom from multiple traditions." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-5xl mx-auto">
         <header className="mb-8">

@@ -190,7 +190,7 @@ export default function QAPage() {
         { label: "Advanced", examples: ["Can I heal without therapy?", "How do patterns form?"] }
       ]}
     >
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-4xl mx-auto">
           <header className="mb-8">

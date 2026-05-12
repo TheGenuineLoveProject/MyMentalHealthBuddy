@@ -61,7 +61,7 @@ function ProgressBar({ value, max, label }) {
 function LessonCard({ lesson, onStart, locked }) {
   return (
     <article
-      className={`group relative rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm hover:shadow-md transition-shadow ${locked ? "opacity-60" : ""}`}
+      className={`group relative rounded-2xl v28-card p-5 shadow-sm hover:shadow-md transition-shadow ${locked ? "opacity-60" : ""}`}
       data-testid={`card-lesson-${lesson.id}`}
     >
       <div className="flex items-start justify-between gap-3 mb-3">
@@ -286,7 +286,7 @@ function RealWorldDetector() {
   return (
     <section
       aria-label="Real-world detector"
-      className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm"
+      className="rounded-2xl v28-card p-5 shadow-sm"
       data-testid="section-real-world"
     >
       <header className="flex items-center gap-2 mb-3">
@@ -380,7 +380,7 @@ function RecentAttempts() {
       {items.slice(0, 8).map((a) => (
         <li
           key={a.id}
-          className="flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2"
+          className="flex items-center justify-between rounded-xl v28-card px-3 py-2"
           data-testid={`row-attempt-${a.id}`}
         >
           <div className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
@@ -430,7 +430,7 @@ export default function DiscernmentDashboard() {
   const loadError = beltsQuery.error || progressQuery.error || lessonsQuery.error;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="Discernment Tutor | MyMentalHealthBuddy"
         description="Train your awareness — practice spotting manipulation, distortions, and fallacies in safe, scenario-based lessons. Educational only."
@@ -502,7 +502,7 @@ export default function DiscernmentDashboard() {
           <div className="grid gap-6 lg:grid-cols-3">
             <section
               aria-label="Your progress"
-              className="lg:col-span-1 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-4"
+              className="lg:col-span-1 rounded-2xl v28-card p-5 shadow-sm space-y-4"
               data-testid="section-progress"
             >
               <div className="flex items-center justify-between">
@@ -552,7 +552,7 @@ export default function DiscernmentDashboard() {
 
               <section
                 aria-label="Available lessons"
-                className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm"
+                className="rounded-2xl v28-card p-5 shadow-sm"
                 data-testid="section-lessons"
               >
                 <div className="flex items-center justify-between mb-4">

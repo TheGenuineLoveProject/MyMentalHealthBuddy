@@ -344,7 +344,7 @@ export default function BodyWellnessPage() {
       <SEO title="Body Wellness — The Genuine Love Project" description="Tools for connecting with and caring for your physical wellbeing." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">

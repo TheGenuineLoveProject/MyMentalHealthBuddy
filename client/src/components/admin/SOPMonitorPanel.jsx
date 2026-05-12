@@ -1,6 +1,6 @@
 // client/src/components/admin/SOPMonitorPanel.jsx
 // Platform SOP Monitor v1 — admin panel that surfaces /api/admin/sop/status.
-// Read-only, additive. Mirrors OperationsPanel's glass-premium chrome.
+// Read-only, additive. Mirrors OperationsPanel's v28-card chrome.
 
 import { useState, useCallback, useMemo } from "react";
 import { ClipboardCheck, RefreshCw, CheckCircle2, AlertTriangle, XCircle, ShieldAlert, Wrench, Activity, Clock, Lock } from 'lucide-react';
@@ -66,7 +66,7 @@ function StatusBadge({ status }) {
 function SummaryCard({ icon: Icon, label, value, sub, accent }) {
   return (
     <div
-      className="glass-premium rounded-2xl p-5 flex items-start gap-4"
+      className="v28-card rounded-2xl p-5 flex items-start gap-4"
       data-testid={`card-summary-${label.toLowerCase().replace(/\s+/g, "-")}`}
     >
       <div
@@ -108,7 +108,7 @@ export default function SOPMonitorPanel() {
   // Empty / loading skeleton
   if (isLoading) {
     return (
-      <div className="glass-premium rounded-2xl p-8" data-testid="state-sop-loading">
+      <div className="v28-card rounded-2xl p-8" data-testid="state-sop-loading">
         <div className="flex items-center gap-3 mb-4">
           <ClipboardCheck className="w-5 h-5" style={{ color: "var(--glp-sage)" }} aria-hidden="true" />
           <h2 className="text-lg font-semibold" style={{ color: "var(--glp-ink)" }}>SOP Monitor</h2>
@@ -125,7 +125,7 @@ export default function SOPMonitorPanel() {
   if (error && isAuthRequiredError(error)) {
     return (
       <div
-        className="glass-premium rounded-2xl p-8"
+        className="v28-card rounded-2xl p-8"
         role="status"
         data-testid="state-sop-needs-auth"
       >
@@ -157,7 +157,7 @@ export default function SOPMonitorPanel() {
   // Error state — explicit, not infinite spinner
   if (error) {
     return (
-      <div className="glass-premium rounded-2xl p-8" data-testid="state-sop-error">
+      <div className="v28-card rounded-2xl p-8" data-testid="state-sop-error">
         <div className="flex items-start gap-3 mb-3">
           <XCircle className="w-5 h-5 mt-0.5" style={{ color: "var(--glp-rose)" }} aria-hidden="true" />
           <div className="flex-1">
@@ -191,7 +191,7 @@ export default function SOPMonitorPanel() {
   return (
     <div className="space-y-6" data-testid="panel-sop-monitor">
       {/* Header */}
-      <div className="glass-premium rounded-2xl p-6">
+      <div className="v28-card rounded-2xl p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-3">
             <div
@@ -253,7 +253,7 @@ export default function SOPMonitorPanel() {
       {/* What to fix next */}
       {nextFix ? (
         <div
-          className="glass-premium rounded-2xl p-5 border-l-4"
+          className="v28-card rounded-2xl p-5 border-l-4"
           style={{ borderLeftColor: failing ? "var(--glp-rose)" : "var(--glp-gold, #d9a441)" }}
           data-testid="card-next-fix"
         >
@@ -276,7 +276,7 @@ export default function SOPMonitorPanel() {
           </div>
         </div>
       ) : (
-        <div className="glass-premium rounded-2xl p-5 border-l-4" style={{ borderLeftColor: "var(--glp-sage)" }} data-testid="card-all-passing">
+        <div className="v28-card rounded-2xl p-5 border-l-4" style={{ borderLeftColor: "var(--glp-sage)" }} data-testid="card-all-passing">
           <div className="flex items-start gap-3">
             <CheckCircle2 className="w-5 h-5 mt-0.5 shrink-0" style={{ color: "var(--glp-sage-deep)" }} aria-hidden="true" />
             <div>
@@ -289,7 +289,7 @@ export default function SOPMonitorPanel() {
 
       {/* Checks table grouped by domain */}
       {Object.entries(grouped).map(([domain, items]) => (
-        <div key={domain} className="glass-premium rounded-2xl p-5" data-testid={`group-domain-${domain}`}>
+        <div key={domain} className="v28-card rounded-2xl p-5" data-testid={`group-domain-${domain}`}>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold uppercase tracking-wide" style={{ color: "var(--glp-sage-deep)" }}>
               {domain}

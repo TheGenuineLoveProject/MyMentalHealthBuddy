@@ -1,7 +1,7 @@
 // client/src/components/admin/ConsciousnessRegistryPanel.jsx
 // MMHB CONSCIOUSNESS OS v2.0 — Phase 0 admin surface.
 // Read/write registry of synthetic AI employees + audit summary.
-// Mirrors SOPMonitorPanel chrome (glass-premium card + dual-token fetch).
+// Mirrors SOPMonitorPanel chrome (v28-card card + dual-token fetch).
 
 import { useState, useCallback, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -79,7 +79,7 @@ function SummaryTile({ icon: Icon, label, value, sub, accent = "sage" }) {
     teal: { bg: "rgba(45,212,191,0.18)", fg: "#0f766e" },
   }[accent];
   return (
-    <div className="glass-premium rounded-2xl p-4 flex items-start gap-3" data-testid={`tile-summary-${label.toLowerCase().replace(/\s+/g, "-")}`}>
+    <div className="v28-card rounded-2xl p-4 flex items-start gap-3" data-testid={`tile-summary-${label.toLowerCase().replace(/\s+/g, "-")}`}>
       <div className="rounded-xl p-2.5" style={{ background: accentMap.bg, color: accentMap.fg }}>
         <Icon className="w-5 h-5" aria-hidden="true" />
       </div>
@@ -156,7 +156,7 @@ export default function ConsciousnessRegistryPanel() {
 
   return (
     <section
-      className="glass-premium rounded-3xl p-6 space-y-6"
+      className="v28-card rounded-3xl p-6 space-y-6"
       data-testid="panel-consciousness-registry"
       aria-labelledby="consciousness-heading"
     >

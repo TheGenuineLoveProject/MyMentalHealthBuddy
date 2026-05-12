@@ -187,7 +187,7 @@ export default function ProtocolSession() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO title="Protocol Session | MyMentalHealthBuddy" description="Active protocol session. Educational only." />
       <div className="mx-auto max-w-3xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
@@ -225,7 +225,7 @@ export default function ProtocolSession() {
             </Link>
           </div>
         ) : (
-          <article className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <article className="rounded-2xl v28-card shadow-sm p-6">
             <header className="flex items-center justify-between mb-4">
               <div className="space-y-1">
                 {node?.type && <NodeBadge type={node.type} />}

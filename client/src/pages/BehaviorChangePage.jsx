@@ -294,7 +294,7 @@ export default function BehaviorChangePage() {
       <SEO title="Behavior Change — The Genuine Love Project" description="Explore gentle approaches to building healthier habits." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">

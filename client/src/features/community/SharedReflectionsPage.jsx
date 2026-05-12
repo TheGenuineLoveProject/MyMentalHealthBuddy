@@ -138,7 +138,7 @@ export default function SharedReflectionsPage() {
   };
 
   return (
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="mx-auto max-w-4xl px-6 py-10">
         {/* Header */}
         <header className="text-center mb-12">

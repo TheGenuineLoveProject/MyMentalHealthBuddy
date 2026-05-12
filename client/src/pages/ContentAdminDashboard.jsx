@@ -540,7 +540,7 @@ export default function ContentAdminDashboard() {
         description="Manage blog posts, social media, and digital products from one dashboard."
       />
       
-      <div className="min-h-screen hero-gradient p-6 md:p-8">
+      <div className="min-h-screen v28-paper-bg p-6 md:p-8">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">
             <Link 

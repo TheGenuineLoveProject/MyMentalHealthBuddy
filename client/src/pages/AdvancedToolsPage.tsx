@@ -114,7 +114,7 @@ export default function AdvancedToolsPage() {
         title="Advanced Exploration Tools - The Genuine Love Project" 
         description="Thoughtful tools for gentle self-discovery. Explore logic, ethics, identity, and meaning at your own pace with compassionate guidance." 
       />
-      <div className="min-h-screen hero-gradient px-4 py-10">
+      <div className="min-h-screen v28-paper-bg px-4 py-10">
         <div className="mx-auto w-full max-w-6xl">
           <header className="mb-8">
             <Link 

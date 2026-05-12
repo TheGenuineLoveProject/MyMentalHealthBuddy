@@ -237,7 +237,7 @@ export default function CognitiveToolsPage() {
       <SEO title="Cognitive Tools — MyMentalHealthBuddy" description="Practical tools for clearer thinking and decision-making." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">

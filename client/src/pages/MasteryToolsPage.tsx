@@ -60,7 +60,7 @@ export default function MasteryToolsPage() {
         title="Mastery Tools - The Genuine Love Project" 
         description="Deep work tracking, deliberate practice, and mental models for becoming excellent at what matters." 
       />
-      <div className="min-h-screen hero-gradient px-4 py-10">
+      <div className="min-h-screen v28-paper-bg px-4 py-10">
         <div className="mx-auto w-full max-w-4xl">
           <header className="mb-8">
             <Link 

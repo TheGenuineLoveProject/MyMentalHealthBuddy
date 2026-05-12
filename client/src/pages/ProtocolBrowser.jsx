@@ -18,7 +18,7 @@ const EVIDENCE_LABEL = {
 function ProtocolCard({ protocol, onStart, isStarting }) {
   return (
     <article
-      className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-5 shadow-sm hover:shadow-md transition-shadow"
+      className="rounded-2xl v28-card p-5 shadow-sm hover:shadow-md transition-shadow"
       data-testid={`card-protocol-${protocol.code}`}
     >
       <div className="flex items-start justify-between gap-3 mb-2">
@@ -122,7 +122,7 @@ export default function ProtocolBrowser() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+    <div className="min-h-screen v28-paper-bg">
       <SEO
         title="Therapeutic Protocols | MyMentalHealthBuddy"
         description="Browse evidence-informed therapeutic protocols. Educational only — not a substitute for licensed care."
@@ -151,7 +151,7 @@ export default function ProtocolBrowser() {
           </p>
         </header>
 
-        <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-3">
+        <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl v28-card p-3">
           <Filter className="h-4 w-4 text-slate-500 dark:text-slate-400" aria-hidden />
           <label className="text-sm text-slate-700 dark:text-slate-200">
             Modality

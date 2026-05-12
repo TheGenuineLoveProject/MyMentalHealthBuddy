@@ -168,9 +168,9 @@ export default function Admin() {
   // Show loading state while verifying session
   if (adminSessionValid === null && user?.role !== "admin") {
     return (
-      <div className="min-h-screen hero-gradient flex items-center justify-center p-6">
+      <div className="min-h-screen v28-paper-bg flex items-center justify-center p-6">
         <SEO title="Verifying Access" description="Checking admin credentials" />
-        <div className="glass-premium max-w-md text-center p-10 rounded-3xl animate-fade-in-up">
+        <div className="v28-card max-w-md text-center p-10 rounded-3xl animate-fade-in-up">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
             <div className="w-8 h-8 border-3 border-white/30 border-t-white rounded-full animate-spin motion-reduce:animate-none" />
           </div>
@@ -186,9 +186,9 @@ export default function Admin() {
 
   if (!hasAdminAccess) {
     return (
-      <div className="min-h-screen hero-gradient flex items-center justify-center p-6">
+      <div className="min-h-screen v28-paper-bg flex items-center justify-center p-6">
         <SEO title="Access Denied" description="Admin access required" />
-        <div className="glass-premium max-w-md text-center p-10 rounded-3xl animate-fade-in-up">
+        <div className="v28-card max-w-md text-center p-10 rounded-3xl animate-fade-in-up">
           <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-rose-15), var(--glp-paper))' }}>
             <Shield className="w-10 h-10" style={{ color: 'var(--glp-rose)' }} />
           </div>

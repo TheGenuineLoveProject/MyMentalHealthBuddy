@@ -132,7 +132,7 @@ export default function MirrorPage() {
       <SEO title="Mirror — MyMentalHealthBuddy" description="Reflective tools for self-discovery." />
 
 
-    <main className="min-h-screen hero-gradient">
+    <main className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="mx-auto w-full max-w-4xl space-y-8">
       <header className="text-center space-y-2">

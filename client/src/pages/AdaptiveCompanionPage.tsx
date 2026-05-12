@@ -139,7 +139,7 @@ export default function AdaptiveCompanionPage() {
       <SEO title="Adaptive Companion — The Genuine Love Project" description="Your personalized wellness guide that adapts to your needs." />
 
 
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-3xl mx-auto">
         <header className="text-center mb-10">
