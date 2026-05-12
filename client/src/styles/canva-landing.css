@@ -1203,17 +1203,24 @@
   transition: opacity 0.4s ease;
 }
 
-/* V28 — light sage wrapper + white inner card + sage top accent (no dark blocks) */
+/* V28 — light sage wrapper + white inner card + sage top accent (no dark blocks)
+ * v5.8.25: hardened with explicit !important on background + color to defeat any
+ * lingering dark-band cascade or browser cache from earlier .manifesto-quote variants. */
 .canva-landing .manifesto-quote {
   position: relative;
   padding: 2.5rem 3rem;
-  background: var(--glp-white);
+  background: #FFFFFF !important;
+  background-image: none !important;
   border-radius: 28px;
   overflow: hidden;
   border: 1px solid var(--glp-sage-15);
   box-shadow:
     0 1px 3px rgba(var(--glp-sage-deep-rgb), 0.04),
     0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.06);
+}
+
+.canva-landing .manifesto-quote > p {
+  color: var(--glp-sage-deep) !important;
 }
 
 .canva-landing .manifesto-quote::before {
@@ -1848,24 +1855,16 @@
 .canva-landing .stagger-child:nth-child(7) { transition-delay: 0.56s; }
 .canva-landing .stagger-child:nth-child(8) { transition-delay: 0.64s; }
 
-/* --- Philosophical Section Transitions --- */
+/* --- Philosophical Section Transitions ---
+ * v5.8.25: V28 sweep — flattened sage/teal gradient bands to flat paper so feature
+ * grid + adjacent surfaces match the white-card-on-paper aesthetic of the rest of the page.
+ * Decorative orb layers inside each section continue to provide gentle visual depth. */
 .canva-landing .section-flow-sage {
-  background: linear-gradient(180deg,
-    var(--glp-paper) 0%,
-    var(--glp-sage-10) 30%,
-    var(--glp-teal-50) 70%,
-    var(--glp-paper) 100%
-  );
+  background: var(--glp-paper);
 }
 
 .canva-landing .section-flow-warm {
-  background: linear-gradient(180deg,
-    var(--glp-paper) 0%,
-    rgba(var(--glp-gold-rgb), 0.06) 25%,
-    rgba(var(--glp-paper-rgb), 0.95) 50%,
-    rgba(var(--glp-rose-rgb), 0.04) 75%,
-    var(--glp-paper) 100%
-  );
+  background: var(--glp-paper);
 }
 
 .canva-landing .section-flow-deep {

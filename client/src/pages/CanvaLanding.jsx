@@ -971,7 +971,7 @@ export default function CanvaLanding() {
       <section 
         id="faq" 
         className="section-breathe section-reveal px-6"
-        style={{ background: 'linear-gradient(180deg, var(--glp-sage-10), var(--glp-paper))' }}
+        style={{ background: 'var(--glp-paper)' }}
       >
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8 md:mb-12">
@@ -1015,7 +1015,7 @@ export default function CanvaLanding() {
 
       <div className="gold-accent-line" aria-hidden="true"></div>
 
-      <section className="section-reveal cta-enterprise cta-enterprise--compact px-6 text-center" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
+      <section className="section-reveal cta-enterprise cta-enterprise--compact px-6 text-center" style={{ background: 'var(--glp-paper)' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full blur-3xl" style={{ background: 'rgba(var(--glp-sage-rgb), 0.10)' }} />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(var(--glp-gold-rgb), 0.08)' }} />

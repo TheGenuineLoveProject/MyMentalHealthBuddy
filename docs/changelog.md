@@ -6,6 +6,20 @@ Newest entries on top.
 
 ---
 
+## v5.8.25 — V28 full sweep on `CanvaLanding.jsx` (feature-grid band, FAQ band, manifesto-quote hardening)
+
+User reported 9 of 14 reference screenshots showed sections still rendering with mint/sage tinted gradient bands and a residual dark teal "Genuine Love Project" manifesto block — not matching the clean paper-bg + white-card V28 aesthetic established in v5.8.22 / v5.8.23. Investigation confirmed: source `.manifesto-quote` was already V28-white but was visually competing with surrounding sage gradient bands; cache or earlier dark-band cascade could still surface. Three coordinated edits land the full V28 sweep on the homepage:
+
+**1. Section-band flatten (`canva-landing.css` lines 1854-1864):** `.section-flow-sage` (wraps the 8-card "Everything You Need to Understand, Regulate & Evolve Your Mind" feature grid) and `.section-flow-warm` (wraps "Three Steps to Meeting Yourself For Real") rewritten from multi-stop `linear-gradient(180deg, paper → sage-10 → teal-50 → paper)` / warm-rose equivalents to flat `var(--glp-paper)`. Decorative orb layers inside each section continue providing gentle ambient depth — the band itself no longer competes with the white feature cards.
+
+**2. Manifesto-quote hardening (`canva-landing.css` lines 1209-1227):** `.canva-landing .manifesto-quote` already specified `background: var(--glp-white)` since v5.8.22, but the user's iPad render showed a dark forest-green block — strong indicator of either browser cache or a deeper cascade (the section's prior sage gradient flowing through). Hardened with `background: #FFFFFF !important` + `background-image: none !important` + new `.canva-landing .manifesto-quote > p { color: var(--glp-sage-deep) !important; }` rule to defeat any lingering pre-v5.8.22 dark-block variant regardless of cache state.
+
+**3. FAQ + final-CTA section bg flatten (`CanvaLanding.jsx` lines 977 + 1021):** `id="faq"` ("Questions That Deserve Honest Answers") inline `style={{ background: 'linear-gradient(180deg, var(--glp-sage-10), var(--glp-paper))' }}` → `'var(--glp-paper)'`. Same flatten on the final `.cta-enterprise--compact` "Your Buddy Is Ready. Are You?" section (was `linear-gradient(180deg, paper, sage-10)` → flat paper). The FAQ accordion items + final CTA pill remain white-on-paper exactly per IMG_4315 + IMG_4304 reference.
+
+**Stability contracts:** `.section-flow-deep` (used elsewhere for intentionally dark surfaces) untouched. Manifesto `::before` 3px sage→gold→blush top accent preserved. All `data-testid` selectors (`section-manifesto`, `faq-item-${index}`, `button-faq-toggle-${index}`, `button-final-cta` / `button-final-dashboard`) unchanged. Decorative orbs + `consciousness-divider` between sections preserved. Hero gradient (line 444 — `linear-gradient(180deg, paper → sage-10 → teal-50)`) intentionally kept since it's the page's only gradient signature surface and matches IMG_4304 reference. Reduced-motion contracts unchanged. Triple gate: TSC=0, Build=15.36s.
+
+---
+
 ## v5.8.24 — V30 phase-locked copy alignment (Pricing hero + tier subtitles + per-tier CTAs)
 
 V30 audit pass against all 7 conversion elements found everything mounted (homepage `EmailCapture`, `ValueBridge`, `ReturnLoop`, plus pricing-page social proof / Most Popular / money-back / FAQ / value bridge table / email capture / return-loop banner from v5.8.23). Only V30 prompt copy alignment remained:
