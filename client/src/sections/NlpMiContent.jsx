@@ -187,41 +187,88 @@ export default function NlpMiContent({ path = '/' }) {
           {content.embeddedCommand}
         </p>
 
-        {/* 5. Benefit cards */}
+        {/* 5. Benefit rows — alternating mascot + content (V17 VisualBenefits formatting) */}
         {content.sections && content.sections.length > 0 && (
-          <div className="grid sm:grid-cols-2 gap-4 mb-12">
+          <div className="space-y-10 sm:space-y-14 mb-12">
             {content.sections.map((s, i) => {
               const Icon = ICONS[s.icon] || Sparkles;
+              const reversed = i % 2 === 1;
+              const accent = s.accent || '#A8C9A0';
+              const tint = s.tint || 'rgba(168, 201, 160, 0.12)';
+              const halo = s.halo || 'rgba(168, 213, 186, 0.35)';
               return (
-                <div
+                <article
                   key={i}
-                  className="nlp-mi-reveal nlp-mi-benefit rounded-2xl px-5 py-6"
+                  className={`nlp-mi-reveal nlp-mi-row ${reversed ? 'nlp-mi-row-reversed' : ''}`}
                   style={{
-                    background: '#FFFFFF',
-                    border: '1px solid rgba(168, 201, 160, 0.20)',
                     transitionDelay: `${i * 60}ms`,
+                    '--row-accent': accent,
+                    '--row-tint': tint,
+                    '--row-halo': halo,
                   }}
                   data-testid={`card-nlp-mi-benefit-${i}`}
                 >
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center mb-3"
-                    style={{ background: 'rgba(168, 201, 160, 0.15)' }}
-                  >
-                    <Icon className="w-5 h-5" style={{ color: '#2F5443' }} aria-hidden="true" />
+                  {s.avatar && (
+                    <div className="nlp-mi-row-image" aria-hidden="true">
+                      <div className="nlp-mi-row-halo" />
+                      <picture>
+                        {s.avatarWebp && <source srcSet={s.avatarWebp} type="image/webp" />}
+                        <img
+                          src={s.avatar}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className="nlp-mi-row-avatar"
+                        />
+                      </picture>
+                    </div>
+                  )}
+                  <div className="nlp-mi-row-text">
+                    <div
+                      className="nlp-mi-row-icon"
+                      style={{ background: tint, color: accent }}
+                      aria-label={s.title}
+                    >
+                      <Icon className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
+                    </div>
+                    <h3
+                      className="text-xl sm:text-2xl font-serif font-bold mb-2"
+                      style={{ color: '#2F5443' }}
+                    >
+                      {s.title}
+                    </h3>
+                    <p
+                      className="text-base sm:text-lg mb-4"
+                      style={{ color: '#5C6B62', lineHeight: 1.65 }}
+                    >
+                      {highlightSensory(s.content, s.sensoryWords)}
+                    </p>
+                    {s.sensoryWords && s.sensoryWords.length > 0 && (
+                      <ul className="nlp-mi-row-tags" aria-label="Sensory tones in this section">
+                        {s.sensoryWords.map((sw) => (
+                          <li
+                            key={sw.word}
+                            className="nlp-mi-row-tag"
+                            data-testid={`tag-nlp-mi-${i}-${sw.word}`}
+                          >
+                            {sw.word}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {s.cta && (
+                      <Link
+                        href={s.cta.href}
+                        className="nlp-mi-row-cta"
+                        data-testid={`link-nlp-mi-row-${i}`}
+                        aria-label={`${s.cta.label} — ${s.title}`}
+                      >
+                        <span>{s.cta.label}</span>
+                        <ArrowRight className="w-4 h-4" strokeWidth={2.25} aria-hidden="true" />
+                      </Link>
+                    )}
                   </div>
-                  <h3
-                    className="text-base font-semibold mb-1.5"
-                    style={{ color: '#2F5443' }}
-                  >
-                    {s.title}
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{ color: '#5C6B62', lineHeight: 1.55 }}
-                  >
-                    {highlightSensory(s.content, s.sensoryWords)}
-                  </p>
-                </div>
+                </article>
               );
             })}
           </div>
@@ -296,6 +343,98 @@ export default function NlpMiContent({ path = '/' }) {
         .nlp-mi-polish .nlp-mi-sensory {
           font-weight: 500;
         }
+        .nlp-mi-polish .nlp-mi-row {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+          align-items: center;
+        }
+        @media (min-width: 768px) {
+          .nlp-mi-polish .nlp-mi-row {
+            grid-template-columns: 1fr 1.1fr;
+            gap: 2.5rem;
+          }
+          .nlp-mi-polish .nlp-mi-row-reversed .nlp-mi-row-image { order: 2; }
+          .nlp-mi-polish .nlp-mi-row-reversed .nlp-mi-row-text { order: 1; }
+        }
+        .nlp-mi-polish .nlp-mi-row-image {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          aspect-ratio: 4 / 3;
+          border-radius: 24px;
+          overflow: hidden;
+          background: var(--row-tint, rgba(168, 201, 160, 0.12));
+        }
+        .nlp-mi-polish .nlp-mi-row-halo {
+          position: absolute;
+          width: 80%;
+          height: 80%;
+          border-radius: 50%;
+          background: radial-gradient(circle, var(--row-halo, rgba(168, 213, 186, 0.35)) 0%, transparent 70%);
+          filter: blur(12px);
+        }
+        .nlp-mi-polish .nlp-mi-row-avatar {
+          position: relative;
+          z-index: 1;
+          max-width: 65%;
+          max-height: 80%;
+          object-fit: contain;
+        }
+        .nlp-mi-polish .nlp-mi-row-text {
+          padding: 0.5rem 0;
+        }
+        .nlp-mi-polish .nlp-mi-row-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1rem;
+          border: 1px solid var(--row-accent, #A8C9A0);
+        }
+        .nlp-mi-polish .nlp-mi-row-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          list-style: none;
+          padding: 0;
+          margin: 0 0 1.25rem 0;
+        }
+        .nlp-mi-polish .nlp-mi-row-tag {
+          padding: 0.35rem 0.85rem;
+          border-radius: 999px;
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: #5C6B62;
+          background: var(--row-tint, rgba(168, 201, 160, 0.12));
+          border: 1px solid var(--row-halo, rgba(168, 213, 186, 0.35));
+        }
+        .nlp-mi-polish .nlp-mi-row-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.625rem 1.25rem;
+          border-radius: 999px;
+          font-size: 0.9375rem;
+          font-weight: 600;
+          color: #FFFFFF;
+          background: linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%);
+          box-shadow: 0 4px 14px rgba(74, 126, 114, 0.22);
+          transition: transform 240ms cubic-bezier(0.22, 0.9, 0.32, 1),
+                      box-shadow 240ms cubic-bezier(0.22, 0.9, 0.32, 1);
+          text-decoration: none;
+        }
+        .nlp-mi-polish .nlp-mi-row-cta:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 8px 22px rgba(74, 126, 114, 0.30);
+        }
+        .nlp-mi-polish .nlp-mi-row-cta:focus-visible {
+          outline: 3px solid #4A7E72;
+          outline-offset: 3px;
+        }
         .nlp-mi-polish .nlp-mi-cta-primary {
           background: linear-gradient(135deg, #E8913A 0%, #FFB88C 100%);
           color: #FFFFFF;
@@ -352,8 +491,12 @@ export default function NlpMiContent({ path = '/' }) {
           .nlp-mi-polish .nlp-mi-cta-primary:hover,
           .nlp-mi-polish .nlp-mi-cta-primary:active,
           .nlp-mi-polish .nlp-mi-cta-secondary:hover,
-          .nlp-mi-polish .nlp-mi-cta-secondary:active {
+          .nlp-mi-polish .nlp-mi-cta-secondary:active,
+          .nlp-mi-polish .nlp-mi-row-cta:hover {
             transform: none !important;
+          }
+          .nlp-mi-polish .nlp-mi-row-cta {
+            transition: none !important;
           }
         }
       `}</style>

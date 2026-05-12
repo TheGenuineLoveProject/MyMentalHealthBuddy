@@ -1,3 +1,28 @@
+## v5.8.33 — Homepage NlpMiContent Reformatted to V17 VisualBenefits Style
+
+User feedback: the IMG_4302 stacked-row "soft place to land / companion who listens / Tools that feel kind / Safety that stays close" section on the homepage didn't match the colors or formatting of IMG_4303/4304 (the VisualBenefits "What You Will Feel" mascot+content card pattern). Wanted the avatar-matched halo colors and the same alternating mascot+content row formatting.
+
+**Files touched:**
+- `client/src/data/nlpMiContent.js` — `HOME.sections[]` enriched per row with: `accent` (canonical 8-hex hue), `tint` (12-14% alpha), `halo` (35-40% alpha radial), `avatar` PNG path, `avatarWebp` path, `cta` {label, href}.
+- `client/src/sections/NlpMiContent.jsx` — benefit-cards block rewritten from a static 2-col icon+text grid into 4 alternating mascot+content rows mirroring the `VisualBenefits.jsx` pattern. New CSS classes scoped under `.nlp-mi-polish`: `.nlp-mi-row`, `.nlp-mi-row-reversed`, `.nlp-mi-row-image`, `.nlp-mi-row-halo` (radial blurred avatar halo), `.nlp-mi-row-avatar`, `.nlp-mi-row-text`, `.nlp-mi-row-icon` (circular badge with per-row tint+accent border), `.nlp-mi-row-tags`, `.nlp-mi-row-tag` (pill chips using row tint+halo), `.nlp-mi-row-cta` (canonical sage-deep → sage gradient pill matching v28 contract).
+
+**4 rows mapped to canonical avatar palette:**
+1. **A soft place to land** — sage `#A8C9A0` halo + `avatar-breathing.png` + "Take a Calm Breath" → `/tools/breathing`
+2. **A companion who listens** — empathy-purple `#C8B6FF` halo + `avatar-heart.png` + "Talk With Lumi" → `/chat`
+3. **Tools that feel kind** — sunshine `#FFD93D`/heart-amber halo + `avatar-floating.png` + "Explore Gentle Tools" → `/tools`
+4. **Safety that stays close** — blush `#FF9A8B`/warmth-orange halo + `avatar-heart.png` + "Crisis Support" → `/crisis`
+
+**Universal contracts honored:**
+- Existing `data-testid="card-nlp-mi-benefit-{i}"` preserved on the `<article>` wrapper for backward compat with any selectors that depended on it.
+- New per-row testids: `tag-nlp-mi-{i}-{word}` for sensory tag chips, `link-nlp-mi-row-{i}` for CTAs.
+- `prefers-reduced-motion: reduce` block extended to disable `.nlp-mi-row-cta` transition + hover transform.
+- All canonical 8-hex palette only (no off-palette accents). Sage-pill CTA uses the same `linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)` recipe as VisualBenefits.
+- Crisis routing on the row-4 CTA points directly at `/crisis` per BHCE contract.
+- Sensory-word inline highlighting (`highlightSensory()`) preserved inside the description paragraph.
+- `<picture>` with WebP source + lazy + async decoding matches VisualBenefits image pattern.
+- Avatar PNGs sourced from the v5.8.18 user-supplied OFFICIAL `/brand/v17/` set — never regenerated.
+- Build green: `✓ built in 17.92s`.
+
 ## v5.8.32 — V28 Tier 4 Sweep (Admin + Niche Pages, 57 + 6 surfaces) [FINAL]
 
 **Architect-flagged cleanup pass added 6 more files outside `pages/`:**
