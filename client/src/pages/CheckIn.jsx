@@ -113,7 +113,8 @@ export default function CheckIn() {
 
   return (
     <div
-      className="checkin-polish min-h-screen bg-gradient-to-b from-emerald-50 via-white to-emerald-50"
+      className="checkin-polish min-h-screen"
+      style={{ background: 'var(--glp-paper, #F7F4EE)' }}
       data-phase={phase}
     >
       {/* Soft purple wash over the emerald gradient — V10 §3.3 spec. */}
@@ -175,7 +176,8 @@ export default function CheckIn() {
         </div>
 
         <section
-          className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-emerald-100"
+          className="rounded-3xl bg-white p-6 shadow-sm"
+          style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }}
           data-testid={`section-phase-${phase}`}
         >
           {phase === "select" && (
@@ -256,7 +258,8 @@ export default function CheckIn() {
                 </button>
                 <button
                   onClick={finish}
-                  className="rounded-xl bg-emerald-600 px-5 py-2 text-white hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  className="rounded-full px-6 py-2.5 text-white text-sm font-semibold transition-all hover:scale-[1.02] hover:shadow-lg focus:outline-none focus-visible:ring-2"
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)' }}
                   data-testid="button-finish"
                   type="button"
                 >
@@ -268,35 +271,47 @@ export default function CheckIn() {
 
           {phase === "complete" && (
             <div className="text-center">
-              <h2 className="text-2xl font-medium text-slate-900">You showed up.</h2>
-              <p className="mt-2 text-slate-600">
+              <h2 className="text-2xl font-bold" style={{ color: 'var(--glp-sage-deep)' }}>You showed up.</h2>
+              <p className="mt-2" style={{ color: 'var(--glp-sage-deep)', opacity: 0.82 }}>
                 Whatever you brought today, it belongs here.
               </p>
+              {/* V30 Return Loop — streak banner */}
               <div
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-amber-800"
+                className="mt-5 inline-flex items-center gap-2 rounded-full px-5 py-2.5 shadow-sm"
+                style={{ background: 'linear-gradient(135deg, var(--glp-gold-30), var(--glp-sage-20))', border: '1px solid var(--glp-sage-20)' }}
                 data-testid="badge-streak"
               >
-                <span aria-hidden="true">🔥</span>
-                <span className="font-medium">{streak}-day streak</span>
+                <span aria-hidden="true">🌱</span>
+                <span className="font-semibold text-sm" style={{ color: 'var(--glp-sage-deep)' }}>{streak}-day streak — keep coming back</span>
+              </div>
+              {/* V30 — Gentle "go deeper" suggestion */}
+              <div className="mt-6 max-w-md mx-auto rounded-2xl bg-white p-4" style={{ border: '1px solid var(--glp-sage-20)' }} data-testid="card-go-deeper">
+                <p className="text-xs uppercase tracking-wider font-bold mb-2" style={{ color: 'var(--glp-sage-deep)', opacity: 0.7 }}>If it feels right</p>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-sage-deep)' }}>
+                  Want to go a little deeper? A short breathing reset can help your body catch up with your awareness.
+                </p>
               </div>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <Link
                   href="/tools/breathing"
-                  className="rounded-xl bg-sky-600 px-5 py-2 text-white hover:bg-sky-700"
+                  className="rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-all hover:scale-[1.02] hover:shadow-lg"
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)' }}
                   data-testid="link-breathing"
                 >
                   Breathe with Lumi
                 </Link>
                 <Link
                   href="/celebration"
-                  className="rounded-xl border border-amber-300 bg-white px-5 py-2 text-amber-800 hover:bg-amber-50"
+                  className="rounded-full px-5 py-2.5 text-sm font-semibold bg-white transition-all hover:scale-[1.02]"
+                  style={{ color: 'var(--glp-sage-deep)', border: '1px solid var(--glp-sage-20)' }}
                   data-testid="link-celebration"
                 >
                   Celebrate
                 </Link>
                 <button
                   onClick={reset}
-                  className="rounded-xl border border-slate-200 bg-white px-5 py-2 text-slate-700 hover:bg-slate-50"
+                  className="rounded-full px-5 py-2.5 text-sm font-semibold bg-white transition-all hover:scale-[1.02]"
+                  style={{ color: 'var(--glp-sage-deep)', opacity: 0.7, border: '1px solid var(--glp-sage-20)' }}
                   data-testid="button-restart"
                   type="button"
                 >

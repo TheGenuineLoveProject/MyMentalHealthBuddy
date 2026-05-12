@@ -120,7 +120,8 @@ export default function BreathingTool() {
 
   return (
     <div
-      className="breathing-tool-polish min-h-screen bg-gradient-to-b from-sky-50 via-white to-amber-50"
+      className="breathing-tool-polish min-h-screen"
+      style={{ background: 'var(--glp-paper, #F7F4EE)' }}
       data-phase={phase}
       data-breath-sub={phase === "breathing" ? sub.key : undefined}
     >
@@ -170,7 +171,8 @@ export default function BreathingTool() {
         <section
           aria-live="polite"
           aria-atomic="true"
-          className="mx-auto flex flex-col items-center justify-center rounded-3xl bg-white/80 p-10 shadow-sm ring-1 ring-sky-100"
+          className="mx-auto flex flex-col items-center justify-center rounded-3xl bg-white p-10"
+          style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }}
           data-testid={`section-phase-${phase}`}
         >
           {/* Concentric breath rings — decorative, sit behind avatar.
@@ -221,7 +223,8 @@ export default function BreathingTool() {
               </p>
               <button
                 onClick={startBreathing}
-                className="mt-6 rounded-xl bg-sky-600 px-6 py-3 text-white shadow-sm hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                className="mt-6 rounded-full px-7 py-3 text-white font-semibold transition-all hover:scale-[1.02] hover:shadow-lg focus:outline-none focus-visible:ring-2"
+                style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)' }}
                 data-testid="button-start-breathing"
                 type="button"
               >
@@ -312,17 +315,25 @@ export default function BreathingTool() {
 
           {phase === "complete" && (
             <>
-              <p className="mt-6 text-2xl font-medium text-amber-700" data-testid="text-complete">
+              <p className="mt-6 text-2xl font-bold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-complete">
                 You did it!
               </p>
-              <p className="mt-2 max-w-md text-center text-slate-600">
+              <p className="mt-2 max-w-md text-center" style={{ color: 'var(--glp-sage-deep)', opacity: 0.82 }}>
                 {checkin ? `Noted: feeling ${checkin}.` : ""} Whatever came up,
                 it counts. Be gentle with yourself.
               </p>
+              {/* V30 — Gentle "go deeper" post-tool suggestion */}
+              <div className="mt-6 max-w-md mx-auto rounded-2xl p-4" style={{ background: 'var(--glp-paper, #F7F4EE)', border: '1px solid var(--glp-sage-20)' }} data-testid="card-go-deeper">
+                <p className="text-xs uppercase tracking-wider font-bold mb-2" style={{ color: 'var(--glp-sage-deep)', opacity: 0.7 }}>If it feels right</p>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-sage-deep)' }}>
+                  Now that your body has settled, this can be a great moment to name what's underneath. A 1-minute check-in keeps the door open.
+                </p>
+              </div>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <button
                   onClick={reset}
-                  className="rounded-xl bg-sky-600 px-5 py-2 text-white hover:bg-sky-700"
+                  className="rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-all hover:scale-[1.02] hover:shadow-lg"
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)' }}
                   data-testid="button-breathe-again"
                   type="button"
                 >
@@ -330,14 +341,16 @@ export default function BreathingTool() {
                 </button>
                 <Link
                   href="/checkin"
-                  className="rounded-xl border border-emerald-300 bg-white px-5 py-2 text-emerald-800 hover:bg-emerald-50"
+                  className="rounded-full px-5 py-2.5 text-sm font-semibold bg-white transition-all hover:scale-[1.02]"
+                  style={{ color: 'var(--glp-sage-deep)', border: '1px solid var(--glp-sage-20)' }}
                   data-testid="link-checkin"
                 >
                   Open check-in
                 </Link>
                 <Link
                   href="/celebration"
-                  className="rounded-xl border border-amber-300 bg-white px-5 py-2 text-amber-800 hover:bg-amber-50"
+                  className="rounded-full px-5 py-2.5 text-sm font-semibold bg-white transition-all hover:scale-[1.02]"
+                  style={{ color: 'var(--glp-gold-dark)', border: '1px solid var(--glp-gold-30)' }}
                   data-testid="link-celebration"
                 >
                   Celebrate
