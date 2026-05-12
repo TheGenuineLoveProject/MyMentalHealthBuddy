@@ -498,10 +498,11 @@ export default function CanvaLanding() {
                   overflow: 'visible',
                 }}
               >
-                {/* v5.8.2: hero Lumi swapped from LumiV6 (smooth round
-                    avatar) to the V17 plush hooded Lumi so the hero matches
-                    the VisualBenefits illustrations below. Uses the same
-                    avatar-floating asset that anchors the Growth row, with
+                {/* v5.8.2 / v5.8.17: hero Lumi swapped from LumiV6 (smooth round
+                    avatar) to the V17 plush sprout-Lumi (V27-compliant: small sage
+                    two-leaf sprout on top center of round cream head, cream body +
+                    sage belly) so the hero matches the VisualBenefits illustrations
+                    below. Uses the avatar-floating asset, with
                     WebP-first <picture> for ~10KB transfer (vs ~230KB PNG).
                     The hero-lumi-wrapper parent still drives the 800ms
                     scale-in entrance, sage radial halo, hover lift, and
