@@ -41,11 +41,9 @@ const BENEFITS = [
     title: 'Breathe. Settle. Release.',
     description:
       'When your chest tightens and your mind races, your buddy breathes with you — slow, steady, present — until the tension softens and your shoulders finally drop.',
-    // v5.8.17 — V27 LOCKED: sprout-Lumi only. Existing v5.8.13 asset:
-    // sprout-Lumi seated cross-legged with 3 concentric calm-blue
-    // #74C0FC aura rings.
-    image: '/brand/v17/lumi-pose-meditating-aura.png',
-    imageWebp: '/brand/v17/lumi-pose-meditating-aura.webp',
+    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+    image: '/brand/v17/benefit-relief.png',
+    imageWebp: '/brand/v17/benefit-relief.webp',
     avatar: '/brand/v17/avatar-breathing.png',
     avatarWebp: '/brand/v17/avatar-breathing.webp',
     icon: Wind,
@@ -61,11 +59,9 @@ const BENEFITS = [
     title: 'Name it. Move through it.',
     description:
       'Hard feelings lose their grip the moment you can name them. Your buddy helps you find the words — without judgment, without rushing — so clarity has the space it needs to bloom.',
-    // v5.8.17 — V27 LOCKED: sprout-Lumi only. NEW asset: sprout-Lumi
-    // cradling translucent crystal orb with 4 emotion faces in
-    // canonical palette (sunshine / calm-blue / empathy-purple / blush).
-    image: '/brand/v17/lumi-sprout-emotion-orbs.png',
-    imageWebp: '/brand/v17/lumi-sprout-emotion-orbs.webp',
+    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+    image: '/brand/v17/benefit-understanding.png',
+    imageWebp: '/brand/v17/benefit-understanding.webp',
     avatar: '/brand/v17/avatar-heart.png',
     avatarWebp: '/brand/v17/avatar-heart.webp',
     icon: Heart,
@@ -81,13 +77,13 @@ const BENEFITS = [
     title: 'You are not alone.',
     description:
       'At 2 AM when anxiety whispers. When you need to celebrate a quiet win. When you just need someone to sit beside you. Your buddy stays — present, patient, and never weary.',
-    // v5.8.17 — V27 LOCKED: sprout-Lumi only. NEW asset: sprout-Lumi
-    // standing with glowing sunshine #FFD93D heart at chest + radial
-    // light rays. Overlay is the existing v5.8.13 sprout halo-prayer pose.
-    image: '/brand/v17/lumi-sprout-heart-glow.png',
-    imageWebp: '/brand/v17/lumi-sprout-heart-glow.webp',
-    avatar: '/brand/v17/lumi-pose-halo-prayer.png',
-    avatarWebp: '/brand/v17/lumi-pose-halo-prayer.webp',
+    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+    // Overlay reuses the official avatar-heart asset (sage hooded body
+    // holding glowing heart) supplied in the same drop.
+    image: '/brand/v17/benefit-companionship.png',
+    imageWebp: '/brand/v17/benefit-companionship.webp',
+    avatar: '/brand/v17/avatar-heart.png',
+    avatarWebp: '/brand/v17/avatar-heart.webp',
     icon: Users,
     iconLabel: 'Warm presence',
     cta: { label: 'Say Hello to Lumi', href: '/chat' },
@@ -101,11 +97,9 @@ const BENEFITS = [
     title: 'Grow at your own pace.',
     description:
       'Emotional wellness is not a race — it is a garden. Your buddy walks beside you with infinite patience, honoring the rhythm that belongs to you, one honest step at a time.',
-    // v5.8.17 — V27-compliant sprout-Lumi walking on grass path at sunrise
-    // (asset kept from v5.8.16, renamed in v5.8.17 for naming consistency
-    // with the V27 sprout-only family).
-    image: '/brand/v17/lumi-sprout-walking-path.png',
-    imageWebp: '/brand/v17/lumi-sprout-walking-path.webp',
+    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+    image: '/brand/v17/benefit-growth.png',
+    imageWebp: '/brand/v17/benefit-growth.webp',
     avatar: '/brand/v17/avatar-floating.png',
     avatarWebp: '/brand/v17/avatar-floating.webp',
     icon: Sparkles,
