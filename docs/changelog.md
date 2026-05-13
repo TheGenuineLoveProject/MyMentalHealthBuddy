@@ -1,3 +1,55 @@
+## v5.8.50 — Phase 12 Wave 1 reconciliation: legacyMap.ts bridge (opt-in, zero page edits)
+
+User confirmed Option 1 (Phase 12 infrastructure-only) was correct in v5.8.49 and asked for the next file. Per the Phase 12 audit (v5.8.49 → `docs/governance/PHASE12_DRIFT_AUDIT.md`), the recommended Wave 1 next step is reconciliation between the legacy v17 `--glp-*` brand-token namespace (defined in `client/src/index.css` + `client/src/styles/brand-tokens.css`, ~80 tokens) and the Phase 12 canonical 6-palette + 20-semantic + 4-aura system. Without a bridge registry, future migration PRs would have to either (a) hand-resolve every legacy token call site or (b) leave legacy and Phase 12 as two parallel namespaces forever.
+
+**New file:** `client/src/design-system/tokens/legacyMap.ts`.
+
+### What it ships
+
+- **`legacyMap`** — a typed `Record<string, LegacyMapEntry>` covering 40 structurally-important legacy tokens (palette + surface + text + status + aurora + off-palette deprecations). Each entry exposes `{ value, source, note? }` where `source` traces back to either `palette.X` / `semantic.X` / `aura.X` from `colors.ts`, or one of two governance flags: `"decorative-only"` (intentionally not promoted to Phase 12 — e.g. aurora gradients) or `"unmapped"` (off-palette legacies like teal/violet that need warm-up to sage in migration).
+- **`legacyMapTypography`** — separate registry for the 4 `--glp-font-*` family tokens. Both heading variants → `Cormorant Garamond`, body → `DM Sans` (Inter explicitly removed from fallback per v5.8.49 architect fix), monospace flagged as outside Phase 12 brand pair.
+- **3 helpers** — `isLegacyToken(name)`, `isDeprecatedLegacyToken(name)` (returns true only for `unmapped` entries — useful for ESLint/codemod warnings), `resolveLegacyToken(name)` (returns the Phase 12 value or undefined).
+- **Barrel re-export** — added one line to `client/src/design-system/tokens/index.ts` (`export * from "./legacyMap"`); top-level `@/design-system` import surface unchanged.
+
+### Notable governance decisions encoded
+
+- `--glp-white` → `semantic.bgCard` (`rgba(255,255,255,0.78)`) with note flagging that Phase 12 forbids pure white in cards. Future `bg-white` → bridge swap is a one-token replacement.
+- `--glp-error` → `softBlush` (warm) instead of red, preserving healing-flow tone.
+- `--glp-text-disabled` → `fgMuted` with note: "Phase 12 disabled state uses blur(2px), not color desaturation" — points consumers at `MMHBButton`'s disabled treatment instead of redefining the token.
+- Aurora 1-4 + conic/glow/linear → `decorative-only` source — explicit "do not promote, keep CSS var" guidance so the ambient layer isn't swept into Phase 12 by accident.
+- Teal scale (50/500/900) + violet → `unmapped` with closest-Phase-12 fallback values; `isDeprecatedLegacyToken()` returns `true` so future linting can flag.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| `tsc --noEmit` | PASS (zero errors) |
+| `vite build` | PASS — 15.84s clean |
+| Existing files modified | only `tokens/index.ts` (added 1 export line) |
+| Shipped UI surfaces touched | **ZERO** |
+| New deps installed | **ZERO** |
+| `index.css` / `brand-tokens.css` modified | **ZERO** (legacy stylesheets ship as-is) |
+| Production import (`@/design-system/tokens`) | PRESERVED — additive only |
+
+### Coverage scope
+
+This bridge intentionally covers **structural color + typography family** tokens — the ones that would block any future `--glp-*` → Phase 12 migration PR. Out-of-scope (separate registries when needed): spacing scale (`--glp-space-*`), z-index (`--glp-z-*`), font sizes (`--glp-text-{xs,sm,...}`), letter spacing (`--glp-tracking-*`), font weights (`--glp-weight-*`). These are dimensional/numeric tokens that don't drift the way colors do; they can be reconciled in follow-up PRs only when a specific surface migration needs them.
+
+### What this enables next (still deferred)
+
+Future migration PRs can now:
+
+1. Codemod `var(--glp-sage)` → `var(--glp-sage)` (no-op for now) AND log to `legacyMap` for QA dashboard.
+2. Replace direct hex literals (`#7BA483`) in TSX with `palette.primarySage` import — type-checked path.
+3. Add an ESLint rule: warn if a NEW PR introduces a token in `legacyMapTypography` or one with `source: "unmapped"`.
+
+Still **NOT** done — gated on user greenlight per v5.8.49 audit:
+- Surface migrations (Wave 2/3/4 in audit)
+- ESLint rule installation
+- V34 OMEGA SUPREME full-doc read
+
+---
+
 ## v5.8.49 — Phase 12: Platform Safety Architecture v1 — design system foundation (opt-in, zero page edits)
 
 User attached the Phase 12 spec ("Platform Safety Architecture v1 — MyMentalHealthBuddy Design System — Visual Governance") and chose Option 1: port the token + component infrastructure as a standalone, opt-in module. Zero edits to any existing page; zero edits to any shipped surface. Future PRs migrate surfaces onto these tokens.

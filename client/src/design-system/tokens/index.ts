@@ -11,6 +11,7 @@ export * from "./typography";
 export * from "./radius";
 export * from "./shadows";
 export * from "./motion";
+export * from "./legacyMap";
 
 export { colors } from "./colors";
 export { spacing, section, card, responsive, baseUnit } from "./spacing";
