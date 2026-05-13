@@ -1,3 +1,36 @@
+## v5.8.40 — P0 partial avatar purge: 2-of-5 v17 SSOT slots swapped to canonical sprout-on-head (V34 §3.5 strict)
+
+User uploaded the V34 OMEGA SUPREME master prompt (983 lines) + MMHB_FLOAT_IDLE_UNIT_v1 canonicalization manifest, asked "implement". Per kernel "smallest valid engine wins" + DRY-RUN-FIRST, scoped to one slice via single clarifying question — user chose **resume the deferred P0 avatar purge** from v5.8.39.
+
+**Audit: only 2 of 8 candidate PNGs in `attached_assets/` met V34 §3.5 strict ("NEVER hooded characters, NEVER long ears, NEVER bunny features").** Read all 8 in parallel and categorized:
+- ✅ V34-compliant sprout-on-cream-head: `25F728DB...` (peaceful floating, eyes-closed, sparkles, arms-out — matches FLOAT IDLE pose from manifest), `FA65B1F0...` (standing upright, sprout visible, alert eyes).
+- ⚠️ Borderline (sprout visible BUT green head-dome): `57FC35F4...` (sitting hugging green orb — sprout pokes from green dome).
+- ❌ V34-forbidden (hooded/bear-ears/non-sprout-head): `7E57D1CF` (bear ears + green hood + meditation rings), `0205D190` + `4628C03A` (hooded with halo, near-duplicates), `5BA94D4E` (hooded with glowing heart), `AFEC27DF` (tear-shape head w/ cowlick + emoji crystal ball).
+
+User picked **strict 2-slot only**, zero borderline. Heart/relief/understanding deferred until user uploads sprout-version source images.
+
+**Fix — 2 v17 SSOT files replaced (`client/public/brand/v17/`)**
+- `avatar-breathing.png` (was: green BEAR with blue meditation rings — V34-forbidden bear ears + hood) → **`25F728DB...png`** (peaceful floating sprout, eyes-closed serene smile). Semantic fit: floating-meditation = breathing tool & calm-state mascot.
+- `benefit-companionship.png` (was: hooded with halo above — V34-forbidden hood) → **`FA65B1F0...png`** (standing-present sprout, alert eyes, ready posture). Semantic fit: standing-present = "stays beside you" companionship card.
+
+**Pipeline:**
+1. **Backed up originals** to `client/public/brand/v17/.archive-pre-v5.8.40/` (4 files: 2 PNG + 2 WebP) per non-destructive rule. Rollback = `cp .archive-pre-v5.8.40/*.bak ../`.
+2. **Copied source PNGs** from `attached_assets/` over the v17 SSOT files.
+3. **Regenerated WebP siblings** via `cwebp -q 82 -m 6` per v5.8.35 perf contract — `avatar-breathing.webp` 19KB→88KB, `benefit-companionship.webp` 21KB→128KB. (New WebPs are larger because the source PNGs are 1024×1024 with rich gradients/sparkles vs the previous heavily-compressed sources; both still ~94% smaller than their PNG counterparts at 1.5MB and 2.2MB, well within the v5.8.35 budget for hero imagery.)
+
+**Deferred (3 of 5 slots, awaiting user-supplied sprout-on-head source images):**
+- `avatar-heart.png` — still hooded with glowing heart. Closest available candidate (`5BA94D4E`) has the perfect heart-hold pose but is hooded → V34-forbidden.
+- `benefit-relief.png` — still hooded with energy spiral. Borderline `57FC35F4` was rejected by user for strict compliance.
+- `benefit-understanding.png` — still hooded with crystal ball. Closest available candidate (`AFEC27DF`) has the perfect crystal-ball clarity pose but its head is a tear-shape with cowlick (not a 2-leaf sprout) → V34-forbidden.
+
+Once user uploads sprout-on-head versions of (heart-hold) and (clarity-pose), v5.8.41 will close out the remaining 3 in one clean pass.
+
+**Critical follow-up — `-nobg` sibling propagation:** Architect review surfaced that 4 major consumers (`client/src/components/lumi/LumiV6.tsx`, `client/src/components/avatar/BuddyAvatar.tsx`, `client/src/pages/OnboardingFlow.jsx`, `client/src/data/lumiAssets.js`) reference **`avatar-breathing-nobg.png`** (the background-removed sibling), NOT `avatar-breathing.png`. The v17 PNG swap alone would have left the chat avatar, onboarding flow, and BuddyAvatar still rendering the V34-forbidden bear. Fixed by: (a) backing up the original `-nobg` to `.archive-pre-v5.8.40/avatar-breathing-nobg.png.bak`, (b) running `remove_image_background_tool` on `25F728DB...png` to produce a clean transparent PNG with proper edge antialiasing, (c) overwriting `client/public/brand/v17/avatar-breathing-nobg.png`. `/welcome` screenshot verified — canonical sprout-Lumi renders on the onboarding hero with clean transparent edges, no halo. (No equivalent `benefit-companionship-nobg` file exists, so no second-pass needed for that slot.)
+
+**Verification:** `tsc --noEmit` zero errors. `npm run build` clean in 19.66s. Live homepage hero screenshot confirms canonical sprout-on-head Lumi renders (floating-peaceful pose, eyes-closed serene smile, sparkles, sage belly with cream body — matches V34 §3.4 visual reference exactly). Browser console clean except a single 403 on a non-blocking resource (pre-existing, unrelated to this swap). Zero `data-testid` drift (no JSX touched, only binary file replacement). Zero palette drift (file-level swap). Zero `/crisis` change. Zero motion change.
+
+---
+
 ## v5.8.39 — P1 plain-language rewrite + name standardization + P2 universal trust strip
 
 User flagged three priorities from live-site review: (P0) avatar purge, (P1) jargon-heavy descriptions on 4 sections + descriptive "your buddy" should become the actual mascot name "Lumi", (P2) trust-promise strip on every page footer. Per user prefs (DRY-RUN FIRST + ONE clarifying question), audited first and asked two scoping questions before any destructive change. User chose: **skip P0** (the v17 SSOT was locked in v5.8.18 and remapping the 5 hooded/bear avatars needs explicit filename mapping the user will provide separately) and **preserve brand-name uses** of "Buddy" — only replace bare descriptive "your buddy" / "Your buddy".
