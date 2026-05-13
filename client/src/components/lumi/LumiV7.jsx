@@ -22,7 +22,17 @@
  *   leg:    "rest" | "sit" | "walk" | "bounce" | "tuck"
  *   gaze:   { x: -1..1, y: -1..1 }  (optional; null = center)
  *   crisis: boolean — instant calm override
+ *   interactions: number — V34 Phase 2 blush escalation counter
+ *                 (0 baseline 0.15 → 1-2 lvl1 0.2 → 3-4 lvl2 0.4 → 5+ lvl3 0.6)
  *   size:   number (px, default 240)
+ *
+ * V34 Phase 2 additions (on top of v5.8.28 V32 base):
+ *   - Pupil dilation by emotion: excited 1.15, loving 0.95,
+ *     calm/sleepy/breathing 0.85, neutral 1.0 — CSS-driven via
+ *     [data-mouth] attribute, composes with RAF gaze transform
+ *     using the modern `scale` individual transform property.
+ *   - Blush escalation: opacity tracks `interactions` prop,
+ *     transitions 600ms ease-out, pinned under crisis/reduced-motion.
  *
  * Usage:
  *   <LumiV7 eye="happy" mouth="happy" arm="wave" leg="bounce" />
@@ -48,6 +58,16 @@ const MOUTH_PATHS = {
 function clamp(v, min, max) { return v < min ? min : v > max ? max : v; }
 function lerp(a, b, t) { return a + (b - a) * t; }
 
+// V34 Phase 2: blush opacity by interaction level
+function blushOpacityFor(interactions, crisis) {
+  if (crisis) return 0.15;
+  const n = Math.max(0, Math.floor(Number(interactions) || 0));
+  if (n >= 5) return 0.6;
+  if (n >= 3) return 0.4;
+  if (n >= 1) return 0.2;
+  return 0.15;
+}
+
 export default function LumiV7({
   eye = "default",
   mouth = "happy",
@@ -55,6 +75,7 @@ export default function LumiV7({
   leg = "rest",
   gaze = null,
   crisis = false,
+  interactions = 0,
   size = 240,
   className = "",
   "data-testid": dataTestid = "lumi-v7"
@@ -125,6 +146,11 @@ export default function LumiV7({
   const armClass = `lumi-arm--${arm}`;
   const legClass = `lumi-leg--${leg}`;
 
+  // V34 Phase 2: blush escalation level (used as data attr + style hook)
+  const blushOpacity = blushOpacityFor(interactions, crisis);
+  const interactionCount = Math.max(0, Math.floor(Number(interactions) || 0));
+  const blushLevel = interactionCount >= 5 ? 3 : interactionCount >= 3 ? 2 : interactionCount >= 1 ? 1 : 0;
+
   const wrapperClass = `lumi-v7 ${armClass} ${legClass} ${crisis ? "is-crisis" : ""} ${className}`.trim();
 
   const mouthD = MOUTH_PATHS[mouth] || MOUTH_PATHS.happy;
@@ -139,6 +165,8 @@ export default function LumiV7({
       data-arm={arm}
       data-leg={leg}
       data-crisis={crisis ? "true" : "false"}
+      data-blush-level={blushLevel}
+      data-interactions={interactionCount}
       role="img"
       aria-label={crisis ? "Lumi in calm safety mode" : `Lumi feeling ${mouth}`}
     >
@@ -200,9 +228,24 @@ export default function LumiV7({
           <rect x="197" y="58" width="6" height="10" rx="3" fill="#6B9866" />
         </g>
 
-        {/* Blush cheeks (FROZEN, soft pink gradient) */}
-        <ellipse className="lumi-v7-blush" cx="128" cy="195" rx="22" ry="14" fill="url(#lumi-v7-blush-grad)" />
-        <ellipse className="lumi-v7-blush" cx="272" cy="195" rx="22" ry="14" fill="url(#lumi-v7-blush-grad)" />
+        {/* Blush cheeks — V34 Phase 2 escalation by interaction count.
+            Position/shape FROZEN; only opacity escalates. */}
+        <ellipse
+          className="lumi-v7-blush"
+          cx="128" cy="195" rx="22" ry="14"
+          fill="url(#lumi-v7-blush-grad)"
+          style={{ opacity: blushOpacity }}
+          data-testid="lumi-v7-blush-left"
+          data-blush-level={blushLevel}
+        />
+        <ellipse
+          className="lumi-v7-blush"
+          cx="272" cy="195" rx="22" ry="14"
+          fill="url(#lumi-v7-blush-grad)"
+          style={{ opacity: blushOpacity }}
+          data-testid="lumi-v7-blush-right"
+          data-blush-level={blushLevel}
+        />
 
         {/* Eyes — animatable */}
         <g>

@@ -1,3 +1,42 @@
+## v5.8.37 — V34 Phase 2: Pupil Dilation + Blush Escalation (LumiV7 surgical extension)
+
+User requested V34 Phase 2 Eye & Mouth Coordination System. Audit of `client/src/components/lumi/LumiV7.{jsx,css}` showed v5.8.28 had already shipped **6 of 8 requested features**: 4 eye types (`.lumi-eye--default/wide/soft/happy`), mouse tracking with emotional lerp (0.05 soft / 0.12 default), blink 2-6s + 150ms + 15% double-blink, 10 mouth expressions, 600ms cubic-bezier transitions with 100ms eyes-lead delay, and crisis override → instant calm. Re-touching those would risk `data-testid` drift and violate the FROZEN body contract. Two genuine gaps closed surgically.
+
+**Fix 1 — Pupil dilation by emotion (`LumiV7.jsx` + `LumiV7.css`)**
+- Spec: neutral 1.0 / excited 1.15 / loving 0.95 / calm + sleepy + breathing 0.85.
+- Implementation: pure-CSS via the modern `scale` individual transform property keyed on the wrapper's existing `[data-mouth]` attribute — zero new JS, zero new prop wiring.
+- Composition: `scale` and `transform` are distinct properties per CSS Transforms Level 2, so the new dilation composes cleanly with the existing RAF-driven `transform: translate(${x}px, ${y}px)` on `.lumi-v7-pupil` (JSX line ~105). No conflict, no flicker.
+- Transition: `scale 600ms cubic-bezier(0.4, 0, 0.2, 1)` matches the mouth transition curve.
+- Browser support: Chrome 104+ / Firefox 103+ / Safari 16+ — acceptable per modern-audience target. Older browsers gracefully fall back to `scale: 1` (the baseline), no broken render.
+
+**Fix 2 — Blush escalation by interaction count (`LumiV7.jsx` + `LumiV7.css`)**
+- Spec: Level 1 (1-2 interactions) opacity 0.2 / Level 2 (3-4) opacity 0.4 / Level 3 (5+) opacity 0.6, with a baseline 0.15 at 0 interactions so the FROZEN gradient reads correctly when no interactions have occurred.
+- New prop `interactions` (default 0). Helper `blushOpacityFor(interactions, crisis)` maps the count → opacity. Body FROZEN contract preserved — only opacity is dynamic; `cx`, `cy`, `rx`, `ry` of both blush ellipses remain hardcoded.
+- New CSS transition `.lumi-v7-blush { transition: opacity 600ms ease-out }` for smooth escalation.
+- New `data-testid="lumi-v7-blush-left"` + `lumi-v7-blush-right`, plus `data-blush-level` (0-3) on both ellipses and `data-interactions` + `data-blush-level` on the wrapper for analytics/QA.
+
+**BHCE crisis override extended**
+- `.lumi-v7.is-crisis .lumi-v7-blush` added to the crisis selector group → `transition: none !important` + `animation: none !important`.
+- `.lumi-v7.is-crisis .lumi-v7-pupil { scale: 1 !important }` pins dilation under crisis.
+- `blushOpacityFor()` returns `0.15` baseline when `crisis === true`, regardless of `interactions`.
+
+**Reduced-motion contract extended**
+- `.lumi-v7 .lumi-v7-pupil { transform: none !important; scale: 1 !important }` now pins both translate and scale.
+- Blush opacity transitions disabled via the existing `.lumi-v7 *` blanket rule.
+
+**Preserved (NOT touched per pref "never re-touch already-compliant surfaces")**
+- 4 eye types, blink cadence, 10 mouth paths, 600ms transitions, 100ms eyes-lead delay, RAF gaze tracking, crisis instant-calm, all v5.8.28 `data-testid` anchors (`lumi-v7`, `lumi-v7-eye-left`, `lumi-v7-eye-right`, `lumi-v7-mouth`).
+
+**Validation**
+- `npx tsc --noEmit` → clean (no output).
+- `npm run build` → green, 16.35s, no chunk-size regression.
+- `/avatar-lab` visual: baseline state renders correctly, blush at level-0 0.15 opacity, pupils at scale 1.
+- Architect code review: validated. Only flag was Safari 16+ requirement for `scale` property — accepted as graceful-degrade-to-baseline.
+
+**Files changed**
+- `client/src/components/lumi/LumiV7.jsx` (+30 / -3 lines): docstring, `blushOpacityFor` helper, `interactions` prop, `blushOpacity`/`blushLevel` derived state, wrapper `data-blush-level` + `data-interactions`, blush ellipses get inline `style.opacity` + testids + `data-blush-level`.
+- `client/src/components/lumi/LumiV7.css` (+22 / -2 lines): pupil `scale: 1` baseline + `scale 600ms` transition, four `[data-mouth=…]` dilation rules, blush opacity transition, crisis blush guard, crisis pupil-scale pin, reduced-motion pupil-scale pin.
+
 ## v5.8.36 — V28 + V30 Audit Polish (Pricing contrast + BreathingTool Return Loop)
 
 User asked for a fresh V28 + V30 sweep across Pricing / BreathingTool / CheckIn / About / Disclaimer. Audit showed prior work (v5.8.23, v5.8.24, v5.8.31) had already shipped 95-100% of the contract — re-running sed across already-V28 files would only risk drifting `data-testid` analytics anchors. Two genuine gaps confirmed via grep audit + visual screenshot pass; both fixed surgically.
