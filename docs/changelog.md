@@ -1,3 +1,75 @@
+## v5.8.49 — Phase 12: Platform Safety Architecture v1 — design system foundation (opt-in, zero page edits)
+
+User attached the Phase 12 spec ("Platform Safety Architecture v1 — MyMentalHealthBuddy Design System — Visual Governance") and chose Option 1: port the token + component infrastructure as a standalone, opt-in module. Zero edits to any existing page; zero edits to any shipped surface. Future PRs migrate surfaces onto these tokens.
+
+**New module:** `client/src/design-system/` (10 files in 2 subdirs).
+
+### Files created
+
+**Tokens (7 files at `client/src/design-system/tokens/`)**
+
+1. **`colors.ts`** — 6-color canonical palette (`primarySage #7BA483`, `deepForest #163A36`, `warmCream #F6F1E8`, `eternalGold #D4B06A`, `softBlush #E5B8AE`, `mist #F8F8F4`) + 20 semantic mappings (`bgPage`, `bgCard rgba(255,255,255,0.78)` per spec, `fgHeading`, `accentPrimary`, `borderSubtle`, focus + status tokens) + 4 aura colors for avatar emotional glow. Rule encoded: components must consume from semantic layer, never raw palette names.
+
+2. **`spacing.ts`** — 8px base unit, 9-step scale (`xxs 4` → `xxxxl 128`), `section { paddingX:48, paddingY:96, gap:64 }` and `card { padding:48, gap:32 }` matching the spec. 3 responsive sets (mobile/tablet/desktop) preserving the rule "section padding Y MUST exceed gap" at every breakpoint.
+
+3. **`typography.ts`** — `fonts.heading = Cormorant Garamond` + `fonts.body = DM Sans` with proper system fallbacks. 5 heading sizes (`display 64` → `h4 22`) and 4 body sizes (`lg 18` → `xs 12`), each with size/lineHeight/weight/letterSpacing. Forbidden combinations documented in file header.
+
+4. **`radius.ts`** — 7 values (`none/xs/sm/md/lg/xl/pill`) + `radiusFor` component map (`button: md (8px)`, `card: xl (16px)`, `modal: xl`, `pill/avatar: pill`).
+
+5. **`shadows.ts`** — 9 presets (`none/xs/sm/md/lg/xl/hover/focusRing/inset`), all using `rgba(22,58,54,…)` deep-forest base for cohesion. `shadowFor` maps to button/card states + 3px sage focus ring per spec.
+
+6. **`motion.ts`** — 8 durations (`instant/xfast 120/fast 200/medium 500/gentle 800/slow 1200/breath 3000/ambient 7100`) + 8 easings (`standard/emphasized/decelerate/accelerate/gentleIn/Out/InOut/linear`) + 9 curated transition presets (`hover/press/appear/cardLift/colorWash/focusRing/panelOpen/modalEnter/ambientGlow`).
+
+7. **`index.ts`** — token barrel; supports `import { colors, spacing, typography, radius, shadows, motion } from '@/design-system/tokens'`.
+
+**Components (3 files at `client/src/design-system/components/`)**
+
+8. **`MMHBButton.tsx`** — `variant: primary | secondary | tertiary` × `size: sm | md | lg`. Defaults: `48px` min-height (md), `radius.md`, `shadowFor.buttonResting → buttonHover` on hover, 200ms standard ease via `transition.hover`. Disabled state: `filter: blur(2px) saturate(0.85)` + `opacity 0.85` — never grayscale, per spec. Visible 3px sage focus ring on focus. `iconLeft`/`iconRight`/`fullWidth` props. Forwards refs. `data-mmhb-button-variant` / `data-mmhb-button-size` data attributes for QA. Hover/focus handlers self-clean — no global listeners.
+
+9. **`MMHBCard.tsx`** — `elevation: resting | elevated | floating` + `interactive` lift prop + `flush` zero-padding override. `radius.xl (16px)`, `background: rgba(255,255,255,0.78)` via `semantic.bgCard` (never pure white per spec), `floating` uses elevated bg variant. `transition.cardLift` 500ms gentle for shadow + transform; `interactive` adds `translateY(-2px)` on hover (skipped for floating). `data-mmhb-card-elevation` / `data-mmhb-card-interactive` for QA.
+
+10. **`components/index.ts`** — component barrel.
+
+**Top-level barrel + governance**
+
+11. **`design-system/index.ts`** — top-level barrel. Production import is `import { MMHBButton, MMHBCard, colors, spacing, typography, radius, shadows, motion } from '@/design-system'`. Module documented as opt-in; no surface migrations performed.
+
+12. **`docs/governance/PLATFORMSAFETYARCHITECTURE.md`** — full Phase 12 governance document. 8 sections: locked palette/typography/spacing tables, 7-token inventory, component governance with usage code samples (Button/Card/Avatar via `@/avatar-life`), competing-visual-systems strategy, accessibility matrix, ethical governance principles, zero-danger zones, and an Implementation Status checklist that splits **Phase 12 in-scope (this PR — all `[x]`)** from **deferred (separate PRs gated on stability)** so the audit/replace work doesn't get implicitly merged into this contract.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| `tsc --noEmit` | PASS (zero errors) |
+| `vite build` | PASS — 20.64s clean |
+| Existing files modified | **ZERO** |
+| Shipped surfaces touched | **ZERO** |
+| New deps installed | **ZERO** (uses only React + native CSS values) |
+| `@/design-system` resolves via existing Vite alias | YES (alias `@` → `client/src` already configured) |
+
+### Architecture rules verified
+
+| Rule | Implementation |
+|---|---|
+| Every color from tokens, no hex literals in components | `MMHBButton` + `MMHBCard` both consume `palette.*` / `semantic.*` only |
+| Section padding Y > gap | `section.paddingY=96 > section.gap=64` ✓; same at every responsive breakpoint |
+| One serif + one sans-serif | `fonts.heading = Cormorant Garamond` / `fonts.body = DM Sans` (no overlap) |
+| Button 48px min-height + 8px radius | `heightFor.md = "48px"`, `radiusFor.button = radius.md` |
+| Card 16px radius + rgba(255,255,255,0.78) bg | `radiusFor.card = radius.xl`, `semantic.bgCard` |
+| Disabled = blur, never gray | `filter: blur(2px) saturate(0.85)` (no `desaturate(0)` / `grayscale`) |
+| Tertiary button: text-only, sage | Per-variant override removes shadow/padding/min-height; underline 4px offset |
+| Avatar governance | Doc references `MMHBFloatAvatar` from `@/avatar-life` (Phase 11 productionized in v5.8.48) |
+| Opt-in, zero page edits | App.tsx untouched; no production import of `@/design-system` exists yet |
+
+### Deferred (intentional — separate PRs)
+
+- Surface audit + non-canonical color replacement
+- Button + card migration across v5.8.21+ surfaces (would re-touch shipped polish — forbidden by user pref)
+- Accessibility verification on migrated pages
+- V34 OMEGA SUPREME full-doc read (sections 5–22, ~765 unread lines) — separate session
+
+---
+
 ## v5.8.48 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 11: 2D Runtime Productionization (standalone module)
 
 User uploaded the Phase 11 verification report (2026-05-13, ALL PASS) documenting the productionization plan: convert 10 phases of HTML/JSON prototypes into a deployable React/Vite module — the bridge from sandbox to live site. Built the complete 11-file production module at `client/src/avatar-life/` per the attached spec. Module is **fully standalone and opt-in**: zero existing files modified, zero production wiring, hero stays on v5.8.46 FloatIdleAnimated through its 24h watch.
