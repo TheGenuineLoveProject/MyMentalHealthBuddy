@@ -51,6 +51,14 @@
  *   sparkleOpacity number  0 .. 1 (default 1)
  *   crisis         boolean — BHCE override: pins ALL transforms to
  *                          identity, asymmetric-risk safety contract
+ *   animated       boolean — sets `data-animated="true"` on container
+ *                          so FloatIdleAnimated.css @keyframes engage
+ *                          for Phase 4-6 motion systems. Defaults to
+ *                          false. When true, the wrapper component
+ *                          (FloatIdleAnimated) drives the visuals via
+ *                          CSS animations on individual transform
+ *                          properties (scale/translate) which compose
+ *                          with any inline `transform` set by props.
  *   ariaLabel      string  default "Lumi, peacefully floating"
  *
  * Imperative anchors (for downstream prototypes via ref):
@@ -136,6 +144,7 @@ const FloatIdleRig = forwardRef(function FloatIdleRig(
     floatY = 0,
     sparkleOpacity = 1,
     crisis = false,
+    animated = false,
     ariaLabel = "Lumi, peacefully floating",
     className = "",
     style = {},
@@ -222,6 +231,7 @@ const FloatIdleRig = forwardRef(function FloatIdleRig(
       data-rig-version="MMHB_FLOAT_IDLE_UNIT_v1"
       data-rig-phase="3"
       data-crisis={crisis ? "true" : "false"}
+      data-animated={animated && !crisis ? "true" : "false"}
       data-mouth={mouthShape}
       role="img"
       aria-label={ariaLabel}

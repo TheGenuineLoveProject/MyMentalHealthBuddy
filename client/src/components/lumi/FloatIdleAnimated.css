@@ -1,0 +1,142 @@
+/*
+ * FloatIdleAnimated styles — MMHB_FLOAT_IDLE_UNIT_v1 Phase 4-6 motion.
+ *
+ * All keyframes use INDIVIDUAL transform properties (scale, translate)
+ * per CSS Transforms Level 2 so they compose with each other and with
+ * any inline `transform` set on the rig layers. This is the same
+ * pattern LumiV7 uses for pupil dilation + RAF gaze tracking.
+ *
+ * Composition rules:
+ *   - Body container: translate (floating)
+ *   - Torso:          scale (breathing)
+ *   - Eyes:           translate (settling) + scale (blink, JS-toggled)
+ *   - Mouth:          scale (softness, breath-synced)
+ *   - Shadow:         opacity + filter:blur + scale (synced with float)
+ *
+ * Crisis + reduced-motion blanket: animations paused. Shadow pinned.
+ */
+
+/* ─── Phase 4: Breathing (torso scale 1.0→1.02 over 7.1s) ─── */
+/* Inhale 0-39.4% (2.8s rise), Hold 39.4-44.9% (~0.4s), Exhale 44.9-100% (3.9s decay) */
+@keyframes float-idle-breathing {
+  0%    { scale: 1; }
+  39.4% { scale: 1.02; }
+  44.9% { scale: 1.02; }
+  100%  { scale: 1; }
+}
+
+/* ─── Phase 4: Floating (body translateY 0→-10px over 9.3s, ease) ─── */
+@keyframes float-idle-floating {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -10px; }
+}
+
+/* ─── Phase 4: Shadow (synced with floating, 9.3s) ─── */
+/* When body is UP (peak), shadow expands + blurs + fades.
+   When body is DOWN (rest), shadow contracts + sharpens + darkens. */
+@keyframes float-idle-shadow {
+  0%, 100% {
+    opacity: 0.55;
+    filter: blur(3px);
+    scale: 1;
+  }
+  50% {
+    opacity: 0.28;
+    filter: blur(7px);
+    scale: 1.15;
+  }
+}
+
+/* ─── Phase 5: Eye settling (translate ±0.5-1.5px over 8.7s) ─── */
+/* Asymmetric waypoints so the wander feels organic, not metronomic */
+@keyframes float-idle-eye-settling {
+  0%   { translate: 0 0; }
+  25%  { translate: 1px 0.5px; }
+  50%  { translate: -0.5px 1.5px; }
+  75%  { translate: -1px -0.5px; }
+  100% { translate: 0 0; }
+}
+
+/* ─── Phase 5: Blink (JS-toggled .float-idle-blinking class) ─── */
+/* Subtle eye-soften compression — NOT a full eyelid close (manifest's
+   full 0.1 blink is reserved for the controlled rig's blinkScaleY prop).
+ *
+ * Implementation note: instead of layering a second @keyframes onto the
+ * same animation list (which would reset eye-settling's timeline every
+ * time the class toggled), we drive blink purely via the `scale`
+ * individual transform property + a CSS transition. Eye-settling
+ * (which uses `translate`) keeps running on its own infinite loop with
+ * zero restart. Both compose per CSS Transforms Level 2.
+ */
+
+/* ─── Phase 6: Mouth softness (synced with breathing 7.1s) ─── */
+/* Max 0.6% vertical, 0.4% horizontal — sub-pixel. Mouth NEVER speaks. */
+@keyframes float-idle-mouth-softness {
+  0%    { scale: 1 1; }
+  39.4% { scale: 1.004 1.006; }
+  44.9% { scale: 1.004 1.006; }
+  100%  { scale: 1 1; }
+}
+
+/* ─── Activation: only when wrapper is animating ─── */
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] {
+  animation: float-idle-floating 9.3s ease-in-out infinite;
+  will-change: translate;
+}
+
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="torso"] {
+  animation: float-idle-breathing 7.1s ease-in-out infinite;
+  will-change: scale;
+}
+
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="eyes"] {
+  animation: float-idle-eye-settling 8.7s ease-in-out infinite;
+  /* Override controlled-rig's transform-only transition so `scale`
+     gets its own ease for the JS-driven blink (translate stays on the
+     8.7s settling animation, untouched). */
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              scale 100ms ease-in-out;
+  will-change: translate, scale;
+}
+
+/* Blink: pure `scale` override + transition — does NOT touch the
+ * `animation` list, so eye-settling never restarts its timeline. */
+.float-idle-animated.is-animating
+  .float-idle-rig[data-animated="true"]
+  [data-rig-zone="eyes"].float-idle-blinking {
+  scale: 1 0.92;
+}
+
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="mouth"] {
+  animation: float-idle-mouth-softness 7.1s ease-in-out infinite;
+  will-change: scale;
+}
+
+.float-idle-animated.is-animating .float-idle-animated__shadow {
+  animation: float-idle-shadow 9.3s ease-in-out infinite;
+  transform-origin: center 86%; /* shadow ellipse y=860/1024 ≈ 86% */
+  will-change: opacity, filter, scale;
+}
+
+/* ─── Crisis override: pin shadow to rest, kill all animations ─── */
+.float-idle-animated[data-crisis="true"] .float-idle-animated__shadow,
+.float-idle-animated[data-crisis="true"].is-animating .float-idle-animated__shadow {
+  animation: none !important;
+  opacity: 0.55;
+  filter: blur(3px);
+  scale: 1;
+}
+
+/* ─── Reduced-motion blanket ─── */
+@media (prefers-reduced-motion: reduce) {
+  .float-idle-animated .float-idle-rig,
+  .float-idle-animated .float-idle-rig [data-rig-zone],
+  .float-idle-animated .float-idle-animated__shadow {
+    animation: none !important;
+  }
+  .float-idle-animated .float-idle-animated__shadow {
+    opacity: 0.55;
+    filter: blur(3px);
+    scale: 1;
+  }
+}

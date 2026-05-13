@@ -1,3 +1,68 @@
+## v5.8.43 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 4-6 motion engine (FloatIdleAnimated + /motion-lab)
+
+User uploaded the Phase 6 verification report from their external prototyping pipeline (2026-05-13, ALL PASS) documenting all six idle motion systems (Phases 4-6) as working HTML/JSON prototypes ready to port. Per the work-style contract, ported the spec values literally onto the v5.8.42 FloatIdleRig anchor surface — no guessing.
+
+**Files (3 new + 2 modified):**
+- NEW `client/src/components/lumi/FloatIdleAnimated.jsx` — wrapper component: shadow image layer + FloatIdleRig with `animated=true` + JS-driven random blink scheduler with full cleanup
+- NEW `client/src/components/lumi/FloatIdleAnimated.css` — 6 @keyframes blocks + activation selectors + crisis/reduced-motion overrides
+- NEW `client/src/pages/MotionLab.jsx` — `/motion-lab` QA surface: live preview + size buttons (256/320/420/512/640) + crisis toggle + active-systems table
+- MODIFIED `client/src/components/lumi/FloatIdleRig.jsx` — added `animated` prop (default false). When true (and not crisis), sets `data-animated="true"` on container so the wrapper's CSS keyframes engage. Zero behavior change when `animated=false` (the default). Phase 3 controlled rig at `/rig-lab` unaffected.
+- MODIFIED `client/src/App.jsx` — lazy import + `/motion-lab` route registered next to `/rig-lab` (lines 81, 696)
+
+**Six motion systems (literal values from Phase 6 verification report):**
+| Phase | System | Property animated | Range | Cycle |
+|---|---|---|---|---|
+| 4 | Breathing | torso scale | 1.0 → 1.02 | 7.1s, inhale 0-39.4% / hold 39.4-44.9% / exhale 44.9-100% |
+| 4 | Floating | body translateY | 0 → -10px | 9.3s sin-eased symmetric |
+| 4 | Shadow | opacity / filter:blur / scale | 0.55→0.28 / 3→7px / 1.0→1.15 | 9.3s synced with floating |
+| 5 | Blink | eyes scaleY (JS class toggle) | 1.0 → 0.92 | random 3-8s interval, 200ms duration |
+| 5 | Eye settling | eyes translate X/Y | ±0.5-1.5px asymmetric waypoints | 8.7s wandering |
+| 6 | Mouth softness | mouth scale X/Y | 1.0 → 1.004 / 1.006 | 7.1s **synced with breathing** |
+
+All sub-pixel or near-sub-pixel. All CSS transform-only. Mouth never exceeds 0.6% vertical change — never looks like speech (Phase 6 contract).
+
+**Composition strategy (CSS Transforms Level 2):**
+Every keyframe uses INDIVIDUAL transform properties (`scale`, `translate`) instead of the legacy `transform` shorthand. Per spec, individual transform properties compose multiplicatively: final visual = `transform * (translate * rotate * scale)`. So:
+- Eyes get BOTH `translate` (from eye-settling animation) AND `scale` (from blink animation when `.float-idle-blinking` class is added) — they target different individual properties so the browser composes them without overriding either.
+- Inline `transform: ...` set by FloatIdleRig from controlled-mode props (when used) doesn't conflict with `scale`/`translate` keyframes — they live in different cascade layers and compose at render time.
+- Same pattern LumiV7 uses for pupil dilation + RAF gaze tracking.
+
+**Random blink scheduler (JS, Phase 5):**
+React `useEffect` with nested `setTimeout`s — first picks a random 3-8s wait, then on fire adds `.float-idle-blinking` class to the eyes layer (queried via `rigRef.current.getContainer().querySelector('[data-rig-zone="eyes"]')`), then after 200ms removes class and reschedules. Cleanup: clears both timers + strips class on unmount. Short-circuits when `crisis || reducedMotion` so no scheduling work happens during BHCE or accessibility mode. The class-toggle pattern uses CSS `animation` shorthand combined with the persistent eye-settling animation so each blink is a one-shot keyframe sequence that automatically yields back to the wander cycle.
+
+**Crisis (BHCE) + reduced-motion blanket (asymmetric-risk safety):**
+- `data-crisis="true"` on FloatIdleAnimated wrapper → CSS pins shadow to rest values (opacity 0.55, blur 3px, scale 1) with `animation: none !important`. FloatIdleRig already pins everything else from v5.8.42.
+- JS blink scheduler short-circuits when `crisis || reducedMotion`.
+- `prefers-reduced-motion: reduce` media query: pauses every animation on rig + layers + shadow via `!important`, pins shadow to rest. The hook (`usePrefersReducedMotion`) listens to `matchMedia` change events so toggling system preferences updates live.
+
+**Performance:**
+- All animations are CSS `@keyframes` on transform/opacity/filter — GPU-compositable, no layout thrash, no React re-renders.
+- `will-change` hints declared per layer (translate / scale / opacity+filter+scale on shadow).
+- Single React state-free animation engine; the only JS work is the blink scheduler firing every 3-8s for ~200ms (negligible).
+- Shadow PNG is 1024×1024 (3 KB compressed — synthesized ellipse with mostly transparent pixels, tiny filesize despite full canvas).
+- No bundle weight added beyond the new components/page (~3 KB JS minified estimate, lazy-loaded via the `/motion-lab` route — zero impact on production surfaces).
+
+**Identity preservation (verification report checks honored):**
+- Silhouette unchanged ✓ — body geometry FROZEN, only sub-pixel scale/translate
+- Expression unchanged at rest ✓ — mouth/eyes return to identity at every cycle's 0% and 100% keyframes
+- Mouth NEVER speaks ✓ — max 0.6% vertical, breath-synced to inhale/hold/exhale
+- Eye identity preserved ✓ — settling is sub-pixel, blink compresses (not closes)
+- Blush/colors/proportions unchanged ✓ — no opacity or color animations on those layers
+- Source assets untouched ✓ — `avatar-core/` SSOT 100% read-only
+
+**Verification:**
+- `npx tsc --noEmit` — zero errors
+- Screenshot at `/motion-lab` confirms: canonical sprout floats above its soft synthesized shadow, all six systems active simultaneously, no visible seams or paint artifacts at 420px size
+- `/rig-lab` (Phase 3 controlled rig) verified untouched — `animated` prop defaults to false, existing slider workflow unchanged
+- Browser `prefers-reduced-motion: reduce` test: all keyframes pause, shadow pinned to rest, JS blink stops scheduling
+- `data-crisis="true"` test: every animation halts, shadow pinned, blink stops
+
+**Out of scope (deferred):**
+- Phase 7 — Arm + Leg Settling (next per the verification report's "NEXT SAFE STEP")
+- Production wiring of FloatIdleAnimated into LumiV6/LumiV7/BuddyAvatar — explicitly NOT done; lab is QA-only until the user signs off on Phase 7+
+- WebP region variants for production parity (Phase 4 perf guardrail flagged in v5.8.42 architect review)
+- Independent L/R blink — current eyes region is combined L+R bbox per Phase 2 manifest spec
+
 ## v5.8.42 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 3 rig scaffolding (FloatIdleRig + /rig-lab)
 
 User chose option C (keep 1024×1024 v5.8.41 artifacts as canonical, proceed to Phase 3 rig hookup) after I flagged that the manifest's expected file sizes (raw 289 KB, transparent 272 KB, etc.) and IoU 0.9633 didn't match our actual artifacts (raw 1.5 MB, transparent 1.4 MB, alpha-coverage 1.0023). Their reasoning: manifest is documentation of the NON-DRIFT contract and methodology; tooling difference (PIL vs ImageMagick) explains the size delta; both pipelines preserved silhouette/expression/colors/shadow-separation/NON-DRIFT. They have working motion prototypes for Phases 4-6 (breathing/floating/shadow, blink/eye softness, mouth micro-motion) ready to port to my rig anchors.
