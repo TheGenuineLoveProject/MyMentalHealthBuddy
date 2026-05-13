@@ -1,3 +1,102 @@
+## v5.8.51 — Phase 14: Calm Check-In Entry Flow (standalone opt-in module)
+
+User attached the Phase 14 spec — a 4-step trust-first guided check-in where Lumi delivers genuine emotional relief BEFORE any subscription messaging appears. Implemented as a standalone, opt-in module mirroring the Phase 11 (`avatar-life`) and Phase 12 (`design-system`) shipping pattern: zero production wiring by default, additive imports only, governance-rule-tested.
+
+### What it ships — `client/src/checkin-flow/` (12 files)
+
+| Path | Lines | Purpose |
+|---|---|---|
+| `types/checkInFlowTypes.ts` | 65 | Flow types, mood/shift/breathing-phase enums |
+| `copy/microCopy.ts` | 105 | OARS-infused copy + forbidden/required phrase lists |
+| `state/useCheckInFlowStore.ts` | 95 | Zustand store + hard governance constant + selector |
+| `governance/checkInFlowRules.ts` | 175 | 14 rules (6 blocking · 8 warning) + `auditFlow()` |
+| `components/MMHBCheckInFlow.tsx` | 65 | Step orchestrator |
+| `components/FlowStepWelcome.tsx` | 165 | Greeting + 6 mood options + crisis link |
+| `components/FlowStepBreathing.tsx` | 175 | 4-7-8 × 4 cycles + reduced-motion text fallback |
+| `components/FlowStepCheckout.tsx` | 130 | 4 shift outcomes + warm reflective response |
+| `components/FlowStepOffer.tsx` | 125 | Soft, render-guarded subscription invitation |
+| `components/FlowStepComplete.tsx` | 95 | Branching terminal step (complete / declined) |
+| `__tests/checkInFlowGovernance.test.ts` | 295 | 26 vitest assertions (22 governance + 4 architect-hardening) |
+| `__tests/PHASE14_VERIFICATION.md` | 80 | Verification report + integration snippet |
+| `index.ts` | 50 | Barrel export |
+
+### Trust-first contract (3-layer enforcement)
+
+```
+Welcome  →  Breathing  →  Checkout  →  Offer  →  Complete / Declined
+  NO         NO            NO          YES         N/A
+```
+
+`subscriptionMentioned` is hard-locked `false` until **all** of: (1) breathing completed, (2) shift selected, (3) explicit `goToOffer()` transition. Verified at:
+
+1. **Reducer layer** — `goToOffer()` rejects with console warning when breathing is incomplete; state never transitions.
+2. **Selector layer** — `isSubscriptionMessagingAllowed(state)` returns `false` unless all 3 conditions are met.
+3. **Render layer** — `FlowStepOffer` returns `null` if the selector is `false` (defense-in-depth, should be unreachable).
+
+### Governance rules
+
+14 rules in `governance/checkInFlowRules.ts`. Highlights:
+
+- **CF-R001 (blocking)** — subscription messaging never appears before breathing completes
+- **CF-R008 (blocking)** — no FOMO / scarcity tactics in any copy (`limited time`, `act now`, `last chance`, etc.)
+- **CF-R012 (blocking)** — no diagnosis / clinical-treatment language (`diagnose`, `disorder`, `cure`, `patient`)
+- **CF-R013 (blocking)** — `/crisis` routing string preserved
+- **CF-R014 (blocking)** — pre-offer copy carries no payment/subscription terms
+
+`auditFlow(state)` returns failing rules; happy-path completed state returns `[]`.
+
+### NLP + Motivational-Interviewing copy
+
+OARS technique throughout — Open questions, Affirmations, Reflections, Summaries.
+- 6 mood options each pair with a non-clinical reflection (e.g. "tired" → "Tiredness is honest information. Let's give your nervous system a soft pause.")
+- 4 shift outcomes each pair with a warm reflective response
+- Offer copy includes required MI tone phrases (`you choose`, `your own pace`, `if and when`)
+- Forbidden phrases (`you should`, `you must`, `sign up now`, `limited time`, `act now`, `last chance`, `hurry`) scanned by CF-R006/CF-R008
+
+### Crisis safety
+
+Every step renders `/crisis` link with `data-testid="link-crisis-{step}"`. Welcome copy includes the explicit crisis line as a separate paragraph.
+
+### Reduced motion
+
+`FlowStepBreathing` uses `usePrefersReducedMotion()` (SSR-safe matchMedia + live `change` listener). When reduced: circle is static, `transition` removed, "Following text cues — no movement." appended to subtitle. Cue progression continues via `setTimeout` (text-only).
+
+### Design system integration
+
+All visuals consume Phase 12 tokens (`palette`, `semantic`, `aura`, `typography.fonts`) and the `MMHBButton` / `MMHBCard` primitives shipped in v5.8.49. Zero hex literals introduced in component files.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| `tsc --noEmit` | PASS (zero errors) |
+| `vite build` | PASS — 15.47s clean |
+| `vitest run` (isolated config) | **26/26 PASS** in 1.44s |
+
+### Architect-driven hardening (P14.1 / P14.2 / P14.3)
+
+Initial architect review flagged 3 governance loopholes in the first cut; all 3 closed before final ship:
+
+- **P14.1** — `setBreathingCompleted()` was reachable from any step. Now hard-gated to `step === "breathing"`; refuses with console warn from welcome / checkout / offer / complete / declined. Test: "setBreathingCompleted() is rejected when not on the breathing step".
+- **P14.2** — Barrel `index.ts` re-exported the raw Zustand store, exposing `.setState()` for governance bypass. Now exports only `useCheckInFlowState` (read-only selector hook) + `useCheckInFlowActions` (bound actions, no setState). Raw `useCheckInFlowStore` retained in `state/useCheckInFlowStore.ts` for module-internal components/tests only. Backed by a CI-enforceable boundary test that walks `client/src/`, regex-scans every `.ts/.tsx/.js/.jsx/.mjs` file outside the module, and throws with offender paths if any direct path import is found. Tests: "barrel does NOT export raw store" + "module boundary: no file outside checkin-flow/ imports the raw store".
+- **P14.3** — `CF-R004` and `CF-R011` were placeholder `() => true` — auditing nothing. Both now invoke `getStoreApiSurface()` and verify `reset` / `declineOffer` actions exist by structural probe; descriptions updated to reflect the real predicate. Test: "CF-R004 and CF-R011 are no longer placeholder true-returns".
+| Files outside `client/src/checkin-flow/` modified | **ZERO** |
+| Production imports added | **ZERO** (opt-in via `import { MMHBCheckInFlow } from '@/checkin-flow'`) |
+| New deps installed | **ZERO** (zustand from v5.8.48, vitest from v5.8.48) |
+
+### Notes on test infrastructure
+
+The repo's global `vitest.setup.mjs` boots the Express app for integration tests, which conflicts with the running dev server (port 5000). Added a tiny isolated `client/src/checkin-flow/__tests/vitest.config.mjs` (no `setupFiles`) so the standalone governance tests can run alongside the live workflow. Run command: `npx vitest run --config client/src/checkin-flow/__tests/vitest.config.mjs --root client/src/checkin-flow`. Project-level vitest config untouched.
+
+### Out of scope (deferred to Phase 15)
+
+- Wiring into `/checkin` route or homepage hero
+- Analytics pipeline integration
+- A/B testing infrastructure (any variant must pass `auditFlow()` first)
+- Persistent state (intentionally session-only — privacy contract)
+
+---
+
 ## v5.8.50 — Phase 12 Wave 1 reconciliation: legacyMap.ts bridge (opt-in, zero page edits)
 
 User confirmed Option 1 (Phase 12 infrastructure-only) was correct in v5.8.49 and asked for the next file. Per the Phase 12 audit (v5.8.49 → `docs/governance/PHASE12_DRIFT_AUDIT.md`), the recommended Wave 1 next step is reconciliation between the legacy v17 `--glp-*` brand-token namespace (defined in `client/src/index.css` + `client/src/styles/brand-tokens.css`, ~80 tokens) and the Phase 12 canonical 6-palette + 20-semantic + 4-aura system. Without a bridge registry, future migration PRs would have to either (a) hand-resolve every legacy token call site or (b) leave legacy and Phase 12 as two parallel namespaces forever.
