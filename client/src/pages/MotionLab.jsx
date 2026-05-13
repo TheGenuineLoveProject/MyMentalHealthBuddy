@@ -19,6 +19,8 @@ const MOTION_SYSTEMS = [
   { phase: 5, name: "Blink",          property: "eyes scaleY",     range: "1.0 → 0.92",     cycle: "random 3-8s, 200ms" },
   { phase: 5, name: "Eye settling",   property: "eyes translate",  range: "±0.5-1.5px",     cycle: "8.7s" },
   { phase: 6, name: "Mouth softness", property: "mouth scale",     range: "1.0 → 1.004/1.006", cycle: "7.1s breath-sync" },
+  { phase: 7, name: "Arm settling",   property: "arm-l/r rotate",  range: "±2° asymmetric",   cycle: "10.3s / 10.7s desynced" },
+  { phase: 7, name: "Leg settling",   property: "leg-l/r translateY", range: "±3px inertia",  cycle: "9.7s / 10.1s desynced" },
 ];
 
 export default function MotionLab() {
@@ -48,7 +50,7 @@ export default function MotionLab() {
           MMHB_FLOAT_IDLE_UNIT_v1 — Motion Lab
         </h1>
         <p style={{ margin: 0, opacity: 0.7, fontSize: "0.95rem" }}>
-          Phase 4-6 idle motion systems running live. Body FROZEN per NON-DRIFT contract — only sub-pixel transforms.
+          Phase 4-7 idle motion systems running live. Body FROZEN per NON-DRIFT contract — only sub-pixel transforms.
         </p>
         <p style={{ margin: "0.5rem 0 0", fontSize: "0.85rem" }}>
           Crisis support: <a href="/crisis" style={{ color: "#E8913A" }}>/crisis</a> · 988 · 741741 · Sister: <Link href="/rig-lab" style={{ color: "#142626", opacity: 0.7 }}>/rig-lab</Link>

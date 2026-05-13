@@ -1,3 +1,50 @@
+## v5.8.44 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 7 (arm + leg settling)
+
+User chose to ship Phase 7 — the documented "NEXT SAFE STEP" from the Phase 6 verification report. Same identity-safe pattern as v5.8.43.
+
+**Files (1 modified, 1 modified):**
+- MODIFIED `client/src/components/lumi/FloatIdleAnimated.css` — added 4 @keyframes blocks + 4 activation selectors
+- MODIFIED `client/src/pages/MotionLab.jsx` — added 2 systems-table rows
+
+**Two motion systems added:**
+| Phase | System | Property | Range | Cycle |
+|---|---|---|---|---|
+| 7 | Arm settling | arm-l/arm-r `rotate` | ±2° asymmetric waypoints | 10.3s / 10.7s desynced L/R |
+| 7 | Leg settling | leg-l/leg-r `translate` Y | ±3px inertia waypoints | 9.7s / 10.1s desynced L/R |
+
+**Asymmetric design choices:**
+- Each arm/leg uses 4-waypoint keyframes with non-uniform values (e.g. arm-l: 0° → 1.5° → -1° → 2° → 0° at 0/30/55/80/100%) so motion looks organic, never metronomic
+- L/R cycles are slightly different periods (10.3 vs 10.7s for arms, 9.7 vs 10.1 for legs) so the two sides never lock into visual sync — the avatar appears to drift in real water, not perform symmetric calisthenics
+- Periods also offset from body floating (9.3s) and breathing (7.1s) so arms/legs add a third independent rhythm layer
+
+**Pivots:**
+- Arms rotate from shoulder anchor points already set by FloatIdleRig.css (`transform-origin: 24.9% 50.3%` for arm-l, `74.7% 50.3%` for arm-r) per the Phase 2 manifest rig-zone bbox centers
+- Legs translate Y only (no rotation) so they trail the body float vertically without changing footprint
+
+**Composition correctness:**
+- Arms use `rotate` individual transform property; legs use `translate` individual transform property — both compose with FloatIdleRig's inline `transform` shorthand (which is `rotate(0deg)` and `translate(0, 0px)` respectively when controlled-mode props default to 0). Per CSS Transforms Level 2 spec, individual transform properties multiply with the `transform` shorthand at render time.
+- Arms/legs are NOT targeted by any other Phase 4-6 animation — zero conflict
+
+**Crisis + reduced-motion blanket (auto-covered):**
+- Existing `[data-rig-zone]` blanket selector in the reduced-motion media query catches all 4 new zones — no new safety wiring needed
+- FloatIdleRig.css `[data-crisis="true"]` rule pins all transforms across all zones — when crisis=true, FloatIdleAnimated already sets `data-animated="false"` on the rig (see v5.8.43), so the new keyframe selectors don't even match
+- Belt + suspenders: motion stops two ways
+
+**Identity safety:**
+- Sub-degree (max 2°) and sub-pixel-cluster (max 3px) — silhouette unchanged, no flailing, no pose break
+- Expression unchanged (face/eyes/mouth not touched by Phase 7)
+- Body geometry FROZEN — only sub-degree rotation + sub-3px translate
+- Source assets in `avatar-core/` untouched
+
+**Verification:**
+- `npx tsc --noEmit` zero errors
+- Screenshot at `/motion-lab` shows sprout in mid-cycle with arms in subtle drift, legs in inertial trail — visible motion is sub-pixel/sub-degree, identity preserved
+- Active motion systems summary now shows 8 total: P4 breathing/floating/shadow + P5 blink/eye-settling + P6 mouth-softness + P7 arm-settling/leg-settling
+
+**Out of scope (deferred):**
+- WebP region variants for production parity (still flagged from v5.8.42 architect review — lab is QA-only)
+- Production wiring (LumiV6/V7/BuddyAvatar still untouched per user's NO-PRODUCTION-WIRING contract until full Phase 7 verification report is uploaded)
+
 ## v5.8.43 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 4-6 motion engine (FloatIdleAnimated + /motion-lab)
 
 User uploaded the Phase 6 verification report from their external prototyping pipeline (2026-05-13, ALL PASS) documenting all six idle motion systems (Phases 4-6) as working HTML/JSON prototypes ready to port. Per the work-style contract, ported the spec values literally onto the v5.8.42 FloatIdleRig anchor surface — no guessing.

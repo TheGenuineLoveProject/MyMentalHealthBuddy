@@ -69,6 +69,46 @@
  * zero restart. Both compose per CSS Transforms Level 2.
  */
 
+/* ─── Phase 7: Arm settling (rotate ±2°, water-float feel) ─── */
+/* Asymmetric waypoints so each arm wanders independently. Slightly
+ * different cycle period from the other arm (10.3s vs 10.7s) so the
+ * two arms never lock into visual sync — feels organic, not mirror.
+ * Pivots are set by FloatIdleRig.css per-zone transform-origin
+ * (arm-l 24.9%/50.3%, arm-r 74.7%/50.3% — shoulder anchor points). */
+@keyframes float-idle-arm-l-settling {
+  0%   { rotate: 0deg; }
+  30%  { rotate: 1.5deg; }
+  55%  { rotate: -1deg; }
+  80%  { rotate: 2deg; }
+  100% { rotate: 0deg; }
+}
+
+@keyframes float-idle-arm-r-settling {
+  0%   { rotate: 0deg; }
+  25%  { rotate: -1.8deg; }
+  50%  { rotate: 1.2deg; }
+  75%  { rotate: -0.5deg; }
+  100% { rotate: 0deg; }
+}
+
+/* ─── Phase 7: Leg settling (translateY ±3px, inertia support) ─── */
+/* Legs drift slightly out of sync with each other AND with the body
+ * floating cycle (9.3s) so the inertia feels like soft trailing
+ * motion, not a tight follow. Different periods (9.7s, 10.1s). */
+@keyframes float-idle-leg-l-settling {
+  0%   { translate: 0 0; }
+  35%  { translate: 0 2px; }
+  65%  { translate: 0 -3px; }
+  100% { translate: 0 0; }
+}
+
+@keyframes float-idle-leg-r-settling {
+  0%   { translate: 0 0; }
+  40%  { translate: 0 -2.5px; }
+  70%  { translate: 0 2px; }
+  100% { translate: 0 0; }
+}
+
 /* ─── Phase 6: Mouth softness (synced with breathing 7.1s) ─── */
 /* Max 0.6% vertical, 0.4% horizontal — sub-pixel. Mouth NEVER speaks. */
 @keyframes float-idle-mouth-softness {
@@ -110,6 +150,30 @@
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="mouth"] {
   animation: float-idle-mouth-softness 7.1s ease-in-out infinite;
   will-change: scale;
+}
+
+/* Phase 7: arm + leg settling. Composes with FloatIdleRig's inline
+ * `transform` (controlled mode props default to 0 so transform is
+ * identity here) because we use individual `rotate`/`translate`
+ * properties per CSS Transforms Level 2. */
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="arm-l"] {
+  animation: float-idle-arm-l-settling 10.3s ease-in-out infinite;
+  will-change: rotate;
+}
+
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="arm-r"] {
+  animation: float-idle-arm-r-settling 10.7s ease-in-out infinite;
+  will-change: rotate;
+}
+
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="leg-l"] {
+  animation: float-idle-leg-l-settling 9.7s ease-in-out infinite;
+  will-change: translate;
+}
+
+.float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="leg-r"] {
+  animation: float-idle-leg-r-settling 10.1s ease-in-out infinite;
+  will-change: translate;
 }
 
 .float-idle-animated.is-animating .float-idle-animated__shadow {
