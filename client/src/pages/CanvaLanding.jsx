@@ -7,6 +7,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
+import FloatIdleAnimated from "../components/lumi/FloatIdleAnimated.jsx";
 import EmotionalJourney from "../sections/EmotionalJourney.jsx";
 import NlpMiContent from "../sections/NlpMiContent.jsx";
 import VisualBenefits from "../sections/VisualBenefits.jsx";
@@ -498,29 +499,29 @@ export default function CanvaLanding() {
                   overflow: 'visible',
                 }}
               >
-                {/* v5.8.2 / v5.8.17: hero Lumi swapped from LumiV6 (smooth round
-                    avatar) to the V17 plush sprout-Lumi (V27-compliant: small sage
-                    two-leaf sprout on top center of round cream head, cream body +
-                    sage belly) so the hero matches the VisualBenefits illustrations
-                    below. Uses the avatar-floating asset, with
-                    WebP-first <picture> for ~10KB transfer (vs ~230KB PNG).
-                    The hero-lumi-wrapper parent still drives the 800ms
-                    scale-in entrance, sage radial halo, hover lift, and
-                    `lumi-breathe` gentle float (kept under reduced-motion
-                    blanket from index.css). LumiV6 is untouched and still
-                    used everywhere else (header, footer, chat). */}
-                <picture>
-                  <source srcSet="/brand/v17/avatar-floating.webp" type="image/webp" />
-                  <img
-                    src="/brand/v17/avatar-floating.png"
-                    alt="Lumi, your gentle wellness companion"
-                    className="hero-lumi-img w-full h-full object-contain lumi-breathe"
-                    loading="eager"
-                    decoding="async"
-                    fetchPriority="high"
-                    data-testid="lumi-hero-companion"
-                  />
-                </picture>
+                {/* v5.8.46 — Hero Lumi swapped from static <picture> to
+                    FloatIdleAnimated (MMHB_FLOAT_IDLE_UNIT_v1 P3-P8 engine).
+                    Replaces the single 230KB PNG (or 10KB WebP) with the
+                    11-region rig + animated shadow + glow halo, totalling
+                    ~123KB WebP transfer for a fully animated mascot
+                    (breathing 7.1s, floating 9.3s, asymmetric arm/leg
+                    settling, random blink, eye settling, breath-synced
+                    mouth softness, sage emotional glow). state="calmIdle"
+                    is the peaceful default per signed-off per-surface
+                    contract. The hero-lumi-wrapper parent still drives the
+                    800ms scale-in entrance and sage radial halo; the rig
+                    handles its own breathing/floating internally so the
+                    legacy `lumi-breathe` keyframe is intentionally removed
+                    here (would double-stack with the rig's float). Reduced
+                    motion + crisis safety inherited from FloatIdleAnimated. */}
+                <FloatIdleAnimated
+                  state="calmIdle"
+                  size={256}
+                  ariaLabel="Lumi, your gentle wellness companion"
+                  className="hero-lumi-img"
+                  style={{ width: "100%", height: "100%" }}
+                  data-testid="lumi-hero-companion"
+                />
               </div>
             </div>
             <div

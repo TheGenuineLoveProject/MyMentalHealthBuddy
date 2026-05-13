@@ -247,17 +247,27 @@ const FloatIdleRig = forwardRef(function FloatIdleRig(
           transform: tx,
           opacity: isSparkles ? v.sparkleOpacity : 1,
         };
+        // v5.8.46 — WebP-first <picture> with PNG fallback. WebP siblings
+        // generated via cwebp q82 m6: 14MB total PNGs → 117KB total WebP
+        // (~99% smaller). Picture wrapper inherits absolute positioning
+        // from float-idle-rig__layer scoping in CSS so layout is unchanged.
+        const base = `${REGION_BASE}/${FILE_PREFIX}${zone}`;
         return (
-          <img
+          <picture
             key={zone}
             className="float-idle-rig__layer"
             data-rig-zone={zone}
             data-testid={`rig-region-${zone}`}
             style={layerStyle}
-            src={`${REGION_BASE}/${FILE_PREFIX}${zone}.png`}
-            alt=""
-            draggable={false}
-          />
+          >
+            <source srcSet={`${base}.webp`} type="image/webp" />
+            <img
+              src={`${base}.png`}
+              alt=""
+              draggable={false}
+              decoding="async"
+            />
+          </picture>
         );
       })}
     </div>

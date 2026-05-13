@@ -1,3 +1,31 @@
+## v5.8.46 — MMHB_FLOAT_IDLE_UNIT_v1 Production Wiring (Hero, Phase A: WebP + CanvaLanding)
+
+User signed off on surgical 3-step rollout: hero only first, watch 24h, then chat (LumiV6), then BuddyAvatar. Per-surface defaults locked: hero=calmIdle, chat=comforting, BuddyAvatar=peacefulJoy. Performance non-negotiable: WebP siblings generated FIRST.
+
+**Phase A.1 — WebP region pipeline.** Ran `cwebp -q 82 -m 6` over all 11 region PNGs in `client/public/avatar-core/regions/` plus the synthesized shadow in `client/public/avatar-core/shadow/`. Total bytes: regions 14 MB PNG → **117 KB WebP (99.2% smaller)**, shadow 90 KB → **5.5 KB (94% smaller)**. Per-file: arm-l 1.3MB→6.3KB, arm-r 1.3MB→6.6KB, body-residual 1.3MB→13KB, eyes 1.3MB→5.6KB, face 1.3MB→11KB, leg-l 1.3MB→7.2KB, leg-r 1.3MB→6.9KB, mouth 1.3MB→4.4KB, sparkles 1.3MB→33KB (highest, justified — full-canvas micro-particles), top-leaf 1.3MB→6.8KB, torso 1.3MB→16KB. PNGs preserved as `<picture>` fallback for older browsers (Safari <14, IE).
+
+**Phase A.2 — `<picture>` refactor inside the rig.** `FloatIdleRig.jsx` `<img>` per layer swapped to `<picture><source webp/><img png/></picture>`; the `picture` element now carries the `float-idle-rig__layer` class + `data-rig-zone` + `data-testid` (existing testids unchanged: `rig-region-{zone}` × 11). Inner `<img>` is unstyled markup; new CSS rule `.float-idle-rig__layer > img { display: block; width: 100%; height: 100%; pointer-events: none; }` ensures the source fills the layer regardless of which `<source>` matches. Same pattern applied to `FloatIdleAnimated.jsx` shadow PNG. Existing positioning/transform/transition cascades untouched (the picture replaces the img one-for-one as the layer node).
+
+**Phase A.3 — testid override prop.** `FloatIdleAnimated` previously hardcoded `data-testid="float-idle-animated"` on its wrapper div. Added `"data-testid": dataTestId = "float-idle-animated"` destructured prop so production surfaces can preserve their existing analytics anchors (e.g. `lumi-hero-companion`) without losing the QA default at `/motion-lab`. Zero drift on `/motion-lab` (default kept), zero drift on hero (passes through `lumi-hero-companion`).
+
+**Phase A.4 — Hero swap on `CanvaLanding.jsx`.** New `import FloatIdleAnimated from "../components/lumi/FloatIdleAnimated.jsx"`. The hero `<picture>` block at lines 512-523 (using `/brand/v17/avatar-floating.{webp,png}`) replaced with `<FloatIdleAnimated state="calmIdle" size={256} ariaLabel="Lumi, your gentle wellness companion" className="hero-lumi-img" style={{ width: "100%", height: "100%" }} data-testid="lumi-hero-companion" />`. Stale v5.8.2/v5.8.17 comment block removed; new v5.8.46 block documents (a) source-of-truth swap, (b) byte budget, (c) why `lumi-breathe` keyframe is intentionally NOT applied here (the rig drives its own breathing — double-stacking would double-bob), (d) reduced-motion + crisis safety inheritance.
+
+**Crisis + reduced-motion preserved.** `state="calmIdle"` is the safest hero default (matches the previous static look at rest); FloatIdleAnimated's existing BHCE override pins all motion + glow to baseline if `crisis={true}`; reduced-motion blanket from FloatIdleRig.css + FloatIdleAnimated.css already pauses every keyframe + short-circuits the JS blink scheduler. Hero never hits crisis/RM-by-prop here, but the safety nets are intact.
+
+**Identity preserved.** Hero visual at rest is pixel-identical to the static avatar-floating PNG (the rig's 11-region recompose is lossless per v5.8.41 alpha-coverage 1.0023). At motion: 7.1s breathing, 9.3s float, asymmetric arm/leg settling (10.3-10.7s arms, 9.7-10.1s legs), random 3-8s blink with 200ms close, 8.7s eye settling, breath-synced mouth softness (max 0.6%), sage glow halo at 0.15 opacity. All sub-pixel or near-sub-pixel — no pose break.
+
+**Surfaces NOT touched (locked for next sprint).** LumiV6 (chat), BuddyAvatar (persistent companion), OnboardingFlow, lumiAssets — all still on the static `/brand/v17/avatar-*-nobg.png` set. v5.8.47 will wire LumiV6 to `state="comforting"` after 24h hero stability watch.
+
+**Pending user input (non-blocking for hero):** the 2 missing emotional states `gentleConcern` and `welcoming` (names confirmed, parameter values — glow color/opacity, breath/float cycles, amplitude — still pending from user). Hero uses calmIdle so production is unaffected; states 7-8 will land in the same PR as those specs.
+
+**Byte budget vs prior hero.** Old hero: 1 × `avatar-floating.webp` (~10 KB). New hero: 11 region WebP (117 KB) + shadow WebP (5.5 KB) = **~123 KB**. Net +113 KB on first paint for a fully animated, emotionally-aware mascot vs a static image. Per user perf contract this is acceptable because regions are cached after first paint and serve the rest of the page lifetime; LumiV6/BuddyAvatar wiring later will add zero additional transfer (same regions reused).
+
+**Verification:** `tsc --noEmit` clean, screenshot at `/` shows canonical sprout-Lumi rendering at the correct hero position behind the headline (existing layered design preserved), workflow restarted clean, no console errors related to the swap. Architect review queued.
+
+**Files touched:** `client/src/components/lumi/FloatIdleRig.jsx` (+12/-9), `client/src/components/lumi/FloatIdleRig.css` (+10), `client/src/components/lumi/FloatIdleAnimated.jsx` (+18/-13), `client/src/pages/CanvaLanding.jsx` (+22/-22), 12 new WebP files in `client/public/avatar-core/{regions,shadow}/`.
+
+---
+
 ## v5.8.45 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 8 (emotional state orchestration, 6 of 8 states)
 
 User uploaded the Phase 8 verification report (ALL PASS, 8 emotional states verified). Report was truncated mid-state-table — 6 of 8 states fully visible (calmIdle, grounding, reflective, sleepy, comforting, peacefulJoy), 2 truncated (state 7 starts with "g…", state 8 unknown). Per "if unsure ask ONE clarifying question" rule, shipped infra + 6 verified states; deferred 2 truncated states with explicit ask to user.

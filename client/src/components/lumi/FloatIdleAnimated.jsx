@@ -67,7 +67,8 @@ import { useEffect, useRef, useState } from "react";
 import FloatIdleRig from "./FloatIdleRig.jsx";
 import "./FloatIdleAnimated.css";
 
-const SHADOW_SRC = "/avatar-core/shadow/MMHB_FLOAT_IDLE_UNIT_v1_shadow.png";
+// v5.8.46 — WebP-first shadow with PNG fallback. cwebp q82 m6: 90KB → 5.5KB (94% smaller).
+const SHADOW_BASE = "/avatar-core/shadow/MMHB_FLOAT_IDLE_UNIT_v1_shadow";
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(() => {
@@ -95,6 +96,11 @@ export default function FloatIdleAnimated({
   ariaLabel = "Lumi, peacefully floating",
   className = "",
   style = {},
+  // v5.8.46 — Allow callers to override the wrapper testid so production
+  // surfaces can preserve their existing analytics anchors (e.g. the
+  // homepage hero's `lumi-hero-companion` testid). Defaults to the
+  // canonical `float-idle-animated` for QA surfaces like /motion-lab.
+  "data-testid": dataTestId = "float-idle-animated",
 }) {
   const rigRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
@@ -149,7 +155,7 @@ export default function FloatIdleAnimated({
       }`}
       data-crisis={crisis ? "true" : "false"}
       data-state={effectiveState}
-      data-testid="float-idle-animated"
+      data-testid={dataTestId}
       style={{
         width: size,
         height: size,
@@ -163,10 +169,7 @@ export default function FloatIdleAnimated({
         data-testid="float-idle-glow"
         aria-hidden="true"
       />
-      <img
-        src={SHADOW_SRC}
-        alt=""
-        draggable={false}
+      <picture
         className="float-idle-animated__shadow"
         data-testid="float-idle-shadow"
         style={{
@@ -176,14 +179,30 @@ export default function FloatIdleAnimated({
           height: "100%",
           pointerEvents: "none",
         }}
-      />
+      >
+        <source srcSet={`${SHADOW_BASE}.webp`} type="image/webp" />
+        <img
+          src={`${SHADOW_BASE}.png`}
+          alt=""
+          draggable={false}
+          decoding="async"
+          style={{ display: "block", width: "100%", height: "100%" }}
+        />
+      </picture>
       <FloatIdleRig
         ref={rigRef}
         size={size}
         animated={animationsOn}
         crisis={crisis}
         ariaLabel={ariaLabel}
-        style={{ position: "absolute", inset: 0 }}
+        /* v5.8.46 — width/height:100% lets the rig stretch when the wrapper
+         * is given a responsive size (e.g. hero w-44/sm:w-52/md:w-60/lg:w-64
+         * with style {width:100%,height:100%}). Without these, the rig's
+         * inline `width: size` (px) wins over `inset:0` and the rig overflows
+         * smaller breakpoints. The `size` prop still drives JS unit math
+         * (legLY/legRY/floatY 1024-space → px conversion); only the rendered
+         * box is forced to fill. Pivots are %-based so they stay exact. */
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />
     </div>
   );
