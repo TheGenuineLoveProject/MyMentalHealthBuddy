@@ -1,3 +1,84 @@
+## v5.8.53 — Phase 14 (spec-aligned variant): Calm Check-In Entry Flow
+
+User attached the official Phase 14 spec, which differs in six material ways from the v5.8.51 `checkin-flow/` build that was shipped first. Rather than mutate the previously-shipped surface (which would violate the v7.4 "never re-touch shipped surfaces" rule), this is a parallel spec-faithful implementation at `client/src/calm-checkin/` using the same standalone opt-in shipping pattern. Both modules now coexist; future product wiring chooses which one is preferred.
+
+### Spec deltas vs v5.8.51 `checkin-flow/`
+
+| # | v5.8.51 (`checkin-flow/`) | Spec / v5.8.53 (`calm-checkin/`) |
+|---|---|---|
+| 1 | 4-7-8 breathing × 4 forced cycles | **4s inhale / 2s hold / 6s exhale** × **one** cycle, optional repeat |
+| 2 | Single entry path (breathing only) | **Three** entry options — Breath / Grounding / Reflection |
+| 3 | `checkin-flow/`, `MMHBCheckInFlow` naming | Spec naming — `calm-checkin/`, `CalmCheckinEntry`, `CalmBreathGuide`, etc. |
+| 4 | Step indicator dots + breathing cycle counter | **No progress bars/dots anywhere** (forbidden by spec) |
+| 5 | Explicit subscription offer step | **"Continue gently"** state with 4 soft options (Continue calmly / Explore tools / Breathe again / Optional signup later) |
+| 6 | "Take a breath with me" copy | Spec phrases — "Let's take one slower breath together" / "Begin One Breath" / "Take one breath" / "Continue gently" |
+
+### What ships — `client/src/calm-checkin/` (15 files)
+
+| Path | Purpose |
+|---|---|
+| `state/calmCheckinState.ts` | Zustand store · 6 states (idle, breathing, grounding, reflecting, complete, continue) |
+| `content/calmCheckinContent.ts` | All copy + 14 FORBIDDEN_PHRASES + 3 REQUIRED tone phrases + crisis line |
+| `motion/calmCheckinMotion.ts` | Calm-only motion tokens (no bounce, no spring, no dopamine loops) |
+| `accessibility/useReducedCalmMotion.ts` | SSR-safe `prefers-reduced-motion` hook with live MQ listener |
+| `governance/calmCheckinRules.ts` | 14 rules (6 blocking · 8 warning) + `auditCalmFlow()` + direct `auditCalmContent()` |
+| `components/CalmCheckinCard.tsx` | Soft card container with ambient aura glow |
+| `components/CalmBreathGuide.tsx` | ONE breath cycle (4-2-6), optional repeat, reduced-motion text-only fallback |
+| `components/CalmGroundingOption.tsx` | "Notice one thing around you that feels safe or familiar" |
+| `components/CalmReflectionPrompt.tsx` | Optional reflection · ephemeral · 600-char cap · "isn't saved or shared" helper |
+| `components/CalmContinueOptions.tsx` | 4 soft options · render-layer signup gate (returns null on bypass) |
+| `components/CalmCheckinEntry.tsx` | Main orchestrator wiring all six steps + crisis line |
+| `__tests/calmCheckinGovernance.test.ts` | 23 vitest assertions (content + state + signup gate + audit + module boundary) |
+| `__tests/vitest.config.mjs` | Isolated config (no global Express setup) |
+| `index.ts` | Public barrel · only `CalmCheckinEntry` + read-only helpers exposed |
+| `verification/phase14-checklist.md` | Spec-conformance map |
+
+### Signup-gate architecture (CC-R001)
+
+Three independent layers — any one of which would block accidental exposure of optional-signup messaging:
+
+1. **Reducer guard** — `goToContinue()` rejects unless `step === "complete"` AND `exerciseCompleted === true`. Module-level constant `REQUIRE_EXERCISE_BEFORE_CONTINUE = true` is itself audited (CC-R002).
+2. **Selector** — `isOptionalSignupAllowed(state)` returns true only when both conditions plus the constant hold.
+3. **Render layer** — `<CalmContinueOptions allowSignup={...} />` returns `null` + console-warns if `allowSignup` is false even if reached.
+
+### 14 governance rules
+
+| ID | Severity | Topic |
+|---|---|---|
+| CC-R001 | blocking | Optional-signup messaging only when continue + completed |
+| CC-R002 | blocking | `REQUIRE_EXERCISE_BEFORE_CONTINUE` locked true |
+| CC-R003 | blocking | No content string contains a forbidden phrase |
+| CC-R004 | blocking | All 3 required tone phrases present in content tree |
+| CC-R005 | blocking | Crisis line present, references `/crisis` |
+| CC-R006 | blocking | Breathing timing exactly 4s / 2s / 6s |
+| CC-R007 | warning | Idle exposes exactly 3 exercise options |
+| CC-R008 | warning | Continue exposes exactly 4 soft options including signup-later |
+| CC-R009 | warning | Reflection helper text states ephemerality |
+| CC-R010 | warning | Idle subheading carries a required tone phrase |
+| CC-R011 | warning | Reflection text respects 600-char soft cap |
+| CC-R012 | warning | Continue only reachable after exerciseCompleted |
+| CC-R013 | warning | Step is one of the 6 documented values |
+| CC-R014 | warning | Forbidden-phrase list ≥ 10 entries |
+
+### Verification
+
+| Check | Result |
+|---|---|
+| `tsc --noEmit` | PASS (zero errors) |
+| `vite build` | PASS — 16.15s clean |
+| `vitest run` (isolated config) | **23/23 PASS** in 2.14s |
+| Files outside `client/src/calm-checkin/` modified | **ZERO** |
+| Production imports added | **ZERO** (opt-in via `import { CalmCheckinEntry } from '@/calm-checkin'`) |
+| New deps installed | **ZERO** (zustand already from v5.8.48) |
+
+### Out of scope
+
+- Choice between `checkin-flow/` and `calm-checkin/` for production wiring (deferred to product decision; both modules remain available).
+- Wiring into `/checkin` route or homepage hero (intentional — opt-in module).
+- Persistence of any kind (reflection text is intentionally ephemeral per spec).
+
+---
+
 ## v5.8.52 — Phase 15: Gentle Companion Conversation Layer (standalone opt-in module)
 
 User attached the Phase 15 spec — Lumi gains a "voice" for tiny, emotionally safe reflections, calm supportive language, and lightweight conversational presence WITHOUT pretending to be human, simulating licensed therapy, designing emotional dependency, or running manipulative attachment loops. Implemented as a standalone, opt-in module mirroring the Phase 14 (`checkin-flow`) shipping pattern: zero production wiring by default, additive imports only, governance-rule-tested.
