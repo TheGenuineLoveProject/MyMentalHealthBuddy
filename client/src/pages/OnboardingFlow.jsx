@@ -419,7 +419,7 @@ function ScreenReturn({ onFinish, glowHex }) {
           Your companion will be here whenever you need a softer moment.
         </h2>
         <p className="text-base leading-relaxed max-w-md mx-auto mb-8" style={{ color: "var(--glp-ink)" }}>
-          No pressure, no streaks to break. Come back when life feels heavy — or when you simply want company. Your buddy will be right here.
+          No pressure, no streaks to break. Come back when life feels heavy — or when you simply want company. Lumi will be right here.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <PrimaryButton onClick={onFinish} dataTestid="button-finish-onboarding">

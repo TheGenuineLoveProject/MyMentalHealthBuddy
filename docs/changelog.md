@@ -1,3 +1,37 @@
+## v5.8.39 — P1 plain-language rewrite + name standardization + P2 universal trust strip
+
+User flagged three priorities from live-site review: (P0) avatar purge, (P1) jargon-heavy descriptions on 4 sections + descriptive "your buddy" should become the actual mascot name "Lumi", (P2) trust-promise strip on every page footer. Per user prefs (DRY-RUN FIRST + ONE clarifying question), audited first and asked two scoping questions before any destructive change. User chose: **skip P0** (the v17 SSOT was locked in v5.8.18 and remapping the 5 hooded/bear avatars needs explicit filename mapping the user will provide separately) and **preserve brand-name uses** of "Buddy" — only replace bare descriptive "your buddy" / "Your buddy".
+
+**Fix 1 — 4 philosophy/feature descriptions rewritten in plain, 12-year-old-readable language (`client/src/pages/CanvaLanding.jsx`)**
+- Line 165 "Attunement Over Advice": stripped jargon ("metacognitive conditions", "emotional intelligence", "cognitive patterns") → "The best coaches don't tell you what to think — they ask the right questions, then truly listen. … Lumi pays close attention to how you feel, how you think, and what makes you, you. … We sit beside you — never above you."
+- Line 171 "Your Mind Is One of a Kind": stripped "spirals/bursts/deep dives/rapid connections", "specific emotional language, attention patterns, behavioral rhythms, cognitive style that makes you irreplaceable" → "Some think in loops, some in bursts, some go deep, some jump fast. Your AI buddy learns how YOU feel, how you focus, and how you move through your day…" Brand-name phrase "Your AI buddy" preserved per user direction.
+- Line 192 "AI Buddy: Coach, Mentor & Guide": stripped "metacognitive coaching, emotional intelligence, active listening", "regulate your own mind", "evolve into your fullest potential" → "Part coach who roots for you to grow. Part mentor who shares the right thought at the right time. … Trained in real listening, gentle coaching, and emotional smarts — Lumi helps you handle stress, build real confidence, calm your own mind, and become more of who you already are."
+- Line 204 "Journaling That Evolves Your Thinking": stripped "Psychologically crafted prompts designed by behavioral science principles", "deeper cognitive layers", "metacognitive muscle", "self-worth and emotional clarity that no external validation can replace" → "Gentle, well-designed prompts that help you move past your first thought and into what's really going on underneath. Each entry builds a quiet skill: noticing your own thinking, then choosing what to do with it. … because it comes from within."
+
+**Fix 2 — Descriptive "your buddy" → "Lumi" across 6 files (~18 instances)**
+- `client/src/sections/VisualBenefits.jsx` (4 of 4 benefit cards: relief/understanding/companionship/growth)
+- `client/src/components/ReturnLoop.jsx` (rotating banner message #4)
+- `client/src/components/WelcomeBackBanner.jsx` (returning-user line)
+- `client/src/pages/OnboardingFlow.jsx` (final screen reassurance)
+- `client/src/pages/CanvaLanding.jsx` (~11 instances across philosophy pillars, feature cards, FAQ answers, validation cards, manifesto, peace-of-mind copy)
+- **PRESERVED per user direction** (zero touched): brand-name headline "Your Buddy Is Ready. Are You?" (CanvaLanding line 1109), all "Your AI buddy" / "your AI buddy" product-name phrases (5 instances on CanvaLanding lines 116, 168, 253, 749, 1115), and PeacescapePage's intentional "your Buddy's palette" / "your Buddy" capitalized brand uses (4 instances). Used precise `replace_all` with case-sensitive matching ("your buddy" lowercase → "Lumi", "Your buddy" sentence-start → "Lumi"); the lowercase 'b' guard means "Your Buddy" with capital B and "your AI buddy" with " AI " infix never matched.
+
+**Fix 3 — Universal trust-promise strip on homepage footer (`client/src/pages/CanvaLanding.jsx` line 1230)**
+- New `<div data-testid="strip-trust-promises" aria-label="Our promises to you">` rendered between footer copyright row and the existing `<SafetyFooter variant="compact">`, separated by `border-top: 1px solid var(--glp-sage-15)` for visual rhythm.
+- Bullet-separated trust line: **Private · No judgment · Emotionally safe · Designed for calm**.
+- Styled in canonical sage-deep ink (`var(--glp-sage-deep)`), `text-xs font-medium`, separator dots at 0.5 opacity with `aria-hidden="true"` so screen readers hear "Private, No judgment, Emotionally safe, Designed for calm" cleanly.
+- `flex flex-wrap items-center justify-center gap-x-3 gap-y-1` so the strip wraps gracefully on narrow widths and never overlaps the safety footer below.
+- Scoped to homepage footer for now; extending to the global `SafetyFooter` component would touch 7 variant files and is deferred until user confirms canonical target.
+
+**Verification:** zero `data-testid` drift (every existing testid intact across all 6 files); zero palette drift (only canonical 8-hex via CSS vars); zero `/crisis` routing change; zero motion change (no transitions added/removed). `tsc --noEmit` clean. `npm run build` clean in 15.13s. Live preview shows canonical sprout-on-head Lumi (`avatar-floating.png`) on homepage hero — confirming the 2-of-7 already-correct v17 assets render fine; the 5 problematic ones (breathing/heart/relief/understanding/companionship) appear lower on the page and remain untouched per user direction (will be remapped in a future drop with explicit user filename mapping).
+
+**Audit residuals (intentional, preserved):**
+- "Your Buddy Is Ready" — final hero CTA brand line
+- "Your AI buddy" / "your AI buddy" — 5 instances, product-name phrasing
+- PeacescapePage "your Buddy" — 4 instances, intentional capitalized brand use
+
+---
+
 ## v5.8.38 — Live-site homepage polish: 3 surgical fixes from screenshot review
 
 User reviewed live published site (mymentalhealthbuddy.replit.app) and attached 15 homepage screenshots (IMG_4330–IMG_4344). Three distinct bugs identified and fixed surgically without re-touching already-compliant surfaces.

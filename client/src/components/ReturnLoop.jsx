@@ -39,7 +39,7 @@ const MESSAGES = [
   { text: "Welcome back. How has your heart been feeling today?", accent: "sage" },
   { text: "I'm glad you came back today.", accent: "gold" },
   { text: "Let's take this one moment at a time.", accent: "lavender" },
-  { text: "Your buddy missed you. Ready to check in?", accent: "mint" },
+  { text: "Lumi missed you. Ready to check in?", accent: "mint" },
   { text: "However you're feeling right now — it's okay. We're here.", accent: "rose" },
   // v5.8.9 — V20 advanced affirmations (deeper strength-based reflections,
   // sourced from miEnhancements.advancedAffirmations, accent-rotated across

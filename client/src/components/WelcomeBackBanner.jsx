@@ -89,7 +89,7 @@ export default function WelcomeBackBanner() {
           <Heart className="w-3.5 h-3.5" />
         </span>
         <p className="wbb-msg">
-          <span>Welcome back. Your buddy missed you. </span>
+          <span>Welcome back. Lumi missed you. </span>
           <Link
             href={ctaHref}
             className="wbb-link"

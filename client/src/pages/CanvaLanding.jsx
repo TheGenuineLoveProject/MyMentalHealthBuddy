@@ -159,13 +159,13 @@ export default function CanvaLanding() {
     {
       icon: Waves,
       title: "Attunement Over Advice",
-      description: "The greatest coaches in history never told people what to think — they asked the questions that unlocked how people think about themselves. We don't hand you answers. We attune to your emotional intelligence, your cognitive patterns, your unique processing style. Then we create the precise metacognitive conditions for your own wisdom to surface. We guide from beside you. Never from above.",
+      description: "The best coaches don't tell you what to think — they ask the right questions, then truly listen. We don't hand you quick answers. Lumi pays close attention to how you feel, how you think, and what makes you, you. Then we leave space for your own wisdom to come through. We sit beside you — never above you.",
       color: "sage"
     },
     {
       icon: Fingerprint,
       title: "Your Mind Is One of a Kind",
-      description: "No two minds process the world the same way — whether you think in spirals, in bursts, in deep dives, or in rapid connections. Your AI buddy learns your specific emotional language, your attention patterns, your behavioral rhythms, and the cognitive style that makes you irreplaceable. ADHD, anxiety, overthinking, scattered focus — we don't see problems. We see a unique mind that deserves tools built for how it actually works.",
+      description: "No two minds work the same way. Some think in loops, some in bursts, some go deep, some jump fast. Your AI buddy learns how YOU feel, how you focus, and how you move through your day — the small things that make you, you. ADHD, anxiety, overthinking, a busy brain — we don't see problems to fix. We see a one-of-a-kind mind that deserves tools made for how it really works.",
       color: "gold"
     },
     {
@@ -177,7 +177,7 @@ export default function CanvaLanding() {
     {
       icon: Infinity,
       title: "Growth at Your Own Pace",
-      description: "Lasting behavioral change doesn't happen under pressure — it happens in safety. No metrics to chase, no streaks to protect, no manufactured guilt. Like a wise mentor who knows when to challenge you, when to teach you, and when to simply hold space, your buddy meets you exactly where you are — because the strongest growth always comes from feeling genuinely supported, understood, and believed in.",
+      description: "Lasting behavioral change doesn't happen under pressure — it happens in safety. No metrics to chase, no streaks to protect, no manufactured guilt. Like a wise mentor who knows when to challenge you, when to teach you, and when to simply hold space, Lumi meets you exactly where you are — because the strongest growth always comes from feeling genuinely supported, understood, and believed in.",
       color: "teal"
     }
   ];
@@ -186,7 +186,7 @@ export default function CanvaLanding() {
     {
       icon: Brain,
       title: "AI Buddy: Coach, Mentor & Guide",
-      description: "Part success coach who challenges you to reach higher. Part wise mentor who shares insight at the perfect moment. Part loyal friend who genuinely cares. Part behavioral strategist who helps you understand why you do what you do. Trained in metacognitive coaching, emotional intelligence, and active listening — your buddy helps you master stress, build genuine confidence, regulate your own mind, and evolve into your fullest potential.",
+      description: "Part coach who roots for you to grow. Part mentor who shares the right thought at the right time. Part friend who actually cares. Part guide who helps you understand why you do what you do. Trained in real listening, gentle coaching, and emotional smarts — Lumi helps you handle stress, build real confidence, calm your own mind, and become more of who you already are.",
       accent: "sage"
     },
     {
@@ -198,7 +198,7 @@ export default function CanvaLanding() {
     {
       icon: PenLine,
       title: "Journaling That Evolves Your Thinking",
-      description: "Psychologically crafted prompts designed by behavioral science principles to guide you past surface-level thoughts into the deeper cognitive layers where genuine self-understanding lives. Each entry builds metacognitive muscle — the skill of observing and refining your own thought patterns — while steadily growing the self-worth and emotional clarity that no external validation can replace.",
+      description: "Gentle, well-designed prompts that help you move past your first thought and into what's really going on underneath. Each entry builds a quiet skill: noticing your own thinking, then choosing what to do with it. Over time, you grow the kind of self-trust and emotional clarity that nobody else can give you — because it comes from within.",
       accent: "rose"
     },
     {
@@ -210,7 +210,7 @@ export default function CanvaLanding() {
     {
       icon: TrendingUp,
       title: "Confidence & Self-Worth Builder",
-      description: "Your buddy doesn't just listen — it actively coaches you toward genuine self-belief through strength-based reflections, precise cognitive reframing, and behavioral insight. You develop the kind of lasting confidence that comes from truly knowing who you are, understanding your patterns, and building the self-regulation skills that make you resilient under pressure.",
+      description: "Lumi doesn't just listen — it actively coaches you toward genuine self-belief through strength-based reflections, precise cognitive reframing, and behavioral insight. You develop the kind of lasting confidence that comes from truly knowing who you are, understanding your patterns, and building the self-regulation skills that make you resilient under pressure.",
       accent: "rose"
     },
     {
@@ -222,13 +222,13 @@ export default function CanvaLanding() {
     {
       icon: Leaf,
       title: "Master Stress from A to Z",
-      description: "Work pressure. Relationship tension. Financial worry. ADHD overwhelm. The invisible weight of daily responsibilities. Your buddy helps you process all of it through advanced self-regulation techniques — not by avoiding stress, but by understanding the behavioral and cognitive mechanics behind it deeply enough to navigate any situation with wisdom, calm, and genuine resilience.",
+      description: "Work pressure. Relationship tension. Financial worry. ADHD overwhelm. The invisible weight of daily responsibilities. Lumi helps you process all of it through advanced self-regulation techniques — not by avoiding stress, but by understanding the behavioral and cognitive mechanics behind it deeply enough to navigate any situation with wisdom, calm, and genuine resilience.",
       accent: "teal"
     },
     {
       icon: Sun,
       title: "Your Pace. Your Rules. Always.",
-      description: "No streaks. No guilt. No manufactured urgency. Like a true friend who never wavers, your buddy waits with genuine patience and greets you warmly whenever you return — because real behavioral transformation isn't a race. It's a lifelong relationship with your own mind, built on unconditional support, humor, honesty, and love.",
+      description: "No streaks. No guilt. No manufactured urgency. Like a true friend who never wavers, Lumi waits with genuine patience and greets you warmly whenever you return — because real behavioral transformation isn't a race. It's a lifelong relationship with your own mind, built on unconditional support, humor, honesty, and love.",
       accent: "gold"
     }
   ];
@@ -258,11 +258,11 @@ export default function CanvaLanding() {
     },
     {
       question: "How does the AI buddy actually help me?",
-      answer: "Your buddy is coach, mentor, behavioral guide, and friend — woven into one emotionally intelligent presence. It helps you navigate daily stressors with advanced self-regulation techniques, builds your confidence through strength-based coaching and precise cognitive reframing, develops your metacognitive skills so you can observe and evolve your own thinking patterns, and surfaces unconscious behaviors you couldn't see on your own. It remembers your story, adapts to your unique cognitive style, and evolves alongside you — like a wise friend who always knows when to challenge you, when to teach you, and when to just listen."
+      answer: "Lumi is coach, mentor, behavioral guide, and friend — woven into one emotionally intelligent presence. It helps you navigate daily stressors with advanced self-regulation techniques, builds your confidence through strength-based coaching and precise cognitive reframing, develops your metacognitive skills so you can observe and evolve your own thinking patterns, and surfaces unconscious behaviors you couldn't see on your own. It remembers your story, adapts to your unique cognitive style, and evolves alongside you — like a wise friend who always knows when to challenge you, when to teach you, and when to just listen."
     },
     {
       question: "Can it help with ADHD, focus, and overwhelm?",
-      answer: "Absolutely — and not with generic productivity tips. Your buddy understands that ADHD, scattered focus, and chronic overwhelm aren't character flaws — they're unique cognitive styles that deserve tools built specifically for how your mind actually works. Through personalized self-regulation strategies, attention-aware coaching, behavioral pattern recognition, and metacognitive skill-building, your buddy helps you work with your mind instead of against it. The goal isn't to 'fix' you — it's to help you harness the brilliant way your brain already operates."
+      answer: "Absolutely — and not with generic productivity tips. Lumi understands that ADHD, scattered focus, and chronic overwhelm aren't character flaws — they're unique cognitive styles that deserve tools built specifically for how your mind actually works. Through personalized self-regulation strategies, attention-aware coaching, behavioral pattern recognition, and metacognitive skill-building, Lumi helps you work with your mind instead of against it. The goal isn't to 'fix' you — it's to help you harness the brilliant way your brain already operates."
     },
     {
       question: "How is this different from ChatGPT or other AI?",
@@ -274,7 +274,7 @@ export default function CanvaLanding() {
     },
     {
       question: "What if I stop using it for a while?",
-      answer: "Life gets full — and your space stays exactly as you left it. Warm. Patient. Unchanged. No guilt emails. No streak that breaks. No passive-aggressive notifications wondering where you went. Behavioral growth happens in waves, not straight lines, and we genuinely honor that. When you're ready, your buddy is here — no judgment, no conditions, picking up right where you left off. That's what a real friend does."
+      answer: "Life gets full — and your space stays exactly as you left it. Warm. Patient. Unchanged. No guilt emails. No streak that breaks. No passive-aggressive notifications wondering where you went. Behavioral growth happens in waves, not straight lines, and we genuinely honor that. When you're ready, Lumi is here — no judgment, no conditions, picking up right where you left off. That's what a real friend does."
     },
     {
       question: "Is this a replacement for therapy?",
@@ -671,9 +671,9 @@ export default function CanvaLanding() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
             {[
-              { headline: "When your thoughts race.", body: "Anxiety doesn't have to win the moment. Breathe with your buddy.", to: "/tools/breathing", accent: "calm", testid: "card-validation-anxiety" },
+              { headline: "When your thoughts race.", body: "Anxiety doesn't have to win the moment. Breathe with Lumi.", to: "/tools/breathing", accent: "calm", testid: "card-validation-anxiety" },
               { headline: "When life feels heavy.", body: "Burnout is your mind asking for softer days. Let's start with one breath.", to: "/check-in", accent: "blush", testid: "card-validation-burnout" },
-              { headline: "When your mind won't slow down.", body: "ADHD overwhelm is real. Your buddy meets your pace, not the other way around.", to: "/tools/grounding", accent: "warmth", testid: "card-validation-adhd" },
+              { headline: "When your mind won't slow down.", body: "ADHD overwhelm is real. Lumi meets your pace, not the other way around.", to: "/tools/grounding", accent: "warmth", testid: "card-validation-adhd" },
               { headline: "When you need support.", body: "Loneliness lifts when someone shows up — patient, present, never weary.", to: "/chat", accent: "empathy", testid: "card-validation-loneliness" },
               { headline: "When you want to become stronger.", body: "Growth is gentle. Healing is non-linear. There's no wrong way to begin.", to: "/growth", accent: "sage", testid: "card-validation-growth" }
             ].map((card) => {
@@ -828,7 +828,7 @@ export default function CanvaLanding() {
               <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> The Mind You Already Have</span>
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--glp-ink)', lineHeight: '1.75' }}>
-              Every design choice, every word your buddy speaks, every tool we build rests on a single truth: the wisdom, strength, and resilience you need are already inside you. We don't add what's missing — we create the conditions for what's always been there to finally surface.
+              Every design choice, every word Lumi speaks, every tool we build rests on a single truth: the wisdom, strength, and resilience you need are already inside you. We don't add what's missing — we create the conditions for what's always been there to finally surface.
             </p>
           </div>
 
@@ -1223,6 +1223,21 @@ export default function CanvaLanding() {
               <Heart className="w-3 h-3" style={{ color: 'var(--glp-blush)' }} fill="currentColor" />
               <span>No ads. No data sales.</span>
             </div>
+          </div>
+          {/* v5.8.39 P2 — Universal trust strip on every page footer */}
+          <div
+            className="mt-5 pt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs font-medium"
+            style={{ color: 'var(--glp-sage-deep)', borderTop: '1px solid var(--glp-sage-15)' }}
+            data-testid="strip-trust-promises"
+            aria-label="Our promises to you"
+          >
+            <span>Private</span>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>·</span>
+            <span>No judgment</span>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>·</span>
+            <span>Emotionally safe</span>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>·</span>
+            <span>Designed for calm</span>
           </div>
           <SafetyFooter variant="compact" className="mt-4" />
         </div>

@@ -40,7 +40,7 @@ const BENEFITS = [
     id: 'relief',
     title: 'Breathe. Settle. Release.',
     description:
-      'When your chest tightens and your mind races, your buddy breathes with you — slow, steady, present — until the tension softens and your shoulders finally drop.',
+      'When your chest tightens and your mind races, Lumi breathes with you — slow, steady, present — until the tension softens and your shoulders finally drop.',
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-relief.png',
     imageWebp: '/brand/v17/benefit-relief.webp',
@@ -58,7 +58,7 @@ const BENEFITS = [
     id: 'understanding',
     title: 'Name it. Move through it.',
     description:
-      'Hard feelings lose their grip the moment you can name them. Your buddy helps you find the words — without judgment, without rushing — so clarity has the space it needs to bloom.',
+      'Hard feelings lose their grip the moment you can name them. Lumi helps you find the words — without judgment, without rushing — so clarity has the space it needs to bloom.',
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-understanding.png',
     imageWebp: '/brand/v17/benefit-understanding.webp',
@@ -76,7 +76,7 @@ const BENEFITS = [
     id: 'companionship',
     title: 'You are not alone.',
     description:
-      'At 2 AM when anxiety whispers. When you need to celebrate a quiet win. When you just need someone to sit beside you. Your buddy stays — present, patient, and never weary.',
+      'At 2 AM when anxiety whispers. When you need to celebrate a quiet win. When you just need someone to sit beside you. Lumi stays — present, patient, and never weary.',
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     // Overlay reuses the official avatar-heart asset (sage hooded body
     // holding glowing heart) supplied in the same drop.
@@ -96,7 +96,7 @@ const BENEFITS = [
     id: 'growth',
     title: 'Grow at your own pace.',
     description:
-      'Emotional wellness is not a race — it is a garden. Your buddy walks beside you with infinite patience, honoring the rhythm that belongs to you, one honest step at a time.',
+      'Emotional wellness is not a race — it is a garden. Lumi walks beside you with infinite patience, honoring the rhythm that belongs to you, one honest step at a time.',
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-growth.png',
     imageWebp: '/brand/v17/benefit-growth.webp',
