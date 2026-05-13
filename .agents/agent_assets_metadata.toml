@@ -167,3 +167,21 @@ id = "gZr7OzDuGBpyOUwQ828En"
 uri = "file://.local/platform-architecture-360.md"
 type = "text"
 title = "MMHB Architecture Deep-Dive 360° — Routes, Components, Services, Data Flow"
+
+[[outputs]]
+id = "eTQOPjm0uB-GWrx8pYbqj"
+uri = "file://avatar-core/verification/MMHB_FLOAT_IDLE_UNIT_v1_master_vs_composite_diff.png"
+type = "image"
+title = "Recompose verification: master | recomposed-from-regions | difference"
+
+[[outputs]]
+id = "gOWj8nGkMGOA_gEaMmEmz"
+uri = "file://avatar-core/rig-reference/MMHB_FLOAT_IDLE_UNIT_v1_rig_reference.png"
+type = "image"
+title = "Phase 1 rig-reference: master with all 8 rig zones overlaid"
+
+[[outputs]]
+id = "nm5TfiSPv3fAPehAv5rbu"
+uri = "file://avatar-core/verification/MMHB_FLOAT_IDLE_UNIT_v1_on_checker.png"
+type = "image"
+title = "Phase 1 verification: edge cleanliness on gray-checker bg"
