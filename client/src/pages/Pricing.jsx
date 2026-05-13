@@ -241,7 +241,7 @@ export default function Pricing() {
             <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-pricing-title">
               Continue Your Journey <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>With Lumi</span>
             </h1>
-            <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--glp-sage)' }}>
+            <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--glp-ink)', opacity: 0.78 }} data-testid="text-pricing-subtitle">
               Core tools are free, always. Step up at your own pace — from a one-time unlock to unlimited
               support or the full transformation experience. Cancel anytime, no questions asked.
             </p>

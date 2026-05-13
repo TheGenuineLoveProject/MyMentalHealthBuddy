@@ -55,6 +55,39 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
+// v5.8.36 — Return Loop: read prior practice count from localStorage so the
+// intro phase can show a gentle "Day N of your gentle practice" streak pill.
+// We never write here — the increment happens at completion time (existing
+// telemetry already records sessions; we just count them).
+function useGentlePracticeStreak() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = window.localStorage.getItem("mmhb-breathing-streak-v1");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed.count === "number") setCount(parsed.count);
+      }
+    } catch { /* ignore */ }
+  }, []);
+  return count;
+}
+
+function bumpGentlePracticeStreak() {
+  if (typeof window === "undefined") return 0;
+  try {
+    const raw = window.localStorage.getItem("mmhb-breathing-streak-v1");
+    const prev = raw ? (JSON.parse(raw)?.count || 0) : 0;
+    const next = prev + 1;
+    window.localStorage.setItem(
+      "mmhb-breathing-streak-v1",
+      JSON.stringify({ count: next, lastAt: Date.now() })
+    );
+    return next;
+  } catch { return 0; }
+}
+
 export default function BreathingTool() {
   const reducedMotion = usePrefersReducedMotion();
   const [phase, setPhase] = useState("intro"); // intro | breathing | checkin | complete
@@ -63,6 +96,7 @@ export default function BreathingTool() {
   const [secondsLeft, setSecondsLeft] = useState(BREATH_PHASES[0].seconds);
   const [checkin, setCheckin] = useState(null);
   const tickRef = useRef(null);
+  const streakCount = useGentlePracticeStreak();
 
   // Tick during breathing only.
   useEffect(() => {
@@ -100,6 +134,8 @@ export default function BreathingTool() {
   }
   function pickCheckin(v) {
     setCheckin(v);
+    // v5.8.36 — bump Return Loop streak only on actual completion (not skips).
+    bumpGentlePracticeStreak();
     setPhase("complete");
   }
   function reset() {
@@ -218,6 +254,23 @@ export default function BreathingTool() {
 
           {phase === "intro" && (
             <>
+              {/* v5.8.36 — Return Loop streak pill (only renders if user has
+                  practiced at least once; sage→gold gradient honors palette). */}
+              {streakCount > 0 && (
+                <div
+                  className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(168,201,160,0.18), rgba(232,145,58,0.14))',
+                    border: '1px solid var(--glp-sage-30, rgba(168,201,160,0.45))',
+                    color: 'var(--glp-sage-deep)',
+                  }}
+                  data-testid="pill-breathing-streak"
+                  aria-label={`Day ${streakCount + 1} of your gentle practice`}
+                >
+                  <span aria-hidden="true">🌿</span>
+                  Day {streakCount + 1} of your gentle practice
+                </div>
+              )}
               <p className="mt-6 max-w-md text-center text-lg text-slate-700">
                 Let's breathe together — 3 cycles, about 30 seconds.
               </p>

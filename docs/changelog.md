@@ -1,3 +1,24 @@
+## v5.8.36 — V28 + V30 Audit Polish (Pricing contrast + BreathingTool Return Loop)
+
+User asked for a fresh V28 + V30 sweep across Pricing / BreathingTool / CheckIn / About / Disclaimer. Audit showed prior work (v5.8.23, v5.8.24, v5.8.31) had already shipped 95-100% of the contract — re-running sed across already-V28 files would only risk drifting `data-testid` analytics anchors. Two genuine gaps confirmed via grep audit + visual screenshot pass; both fixed surgically.
+
+**Fix 1 — Pricing hero subtitle WCAG AA contrast (`client/src/pages/Pricing.jsx`)**
+The hero `<p>` under "Continue Your Journey With Lumi" was rendering with `style={{ color: 'var(--glp-sage)' }}` — `#1ec890` bright sage on `#fcf6ea` cream paper measured ~3.5:1, failing WCAG AA for body text. Swapped to `style={{ color: 'var(--glp-ink)', opacity: 0.78 }}` — `#142626` deep ink at 78% opacity on the same cream measures well over 10:1 contrast. Added `data-testid="text-pricing-subtitle"` for analytics. Hero title (`var(--glp-sage-deep)`) and gradient "With Lumi" span unchanged. Verified in fresh screenshot — subtitle now reads sharply.
+
+**Fix 2 — BreathingTool Return Loop streak pill (`client/src/pages/tools/BreathingTool.jsx`)**
+The audit grep found 0 `return loop`/`streak` references in BreathingTool — the only V30 element missing across all 4 surfaces. Added: (a) `useGentlePracticeStreak()` hook that reads `localStorage['mmhb-breathing-streak-v1']` (JSON shape `{ count, lastAt }`) with try-catch + type-checked fallback to 0; (b) `bumpGentlePracticeStreak()` helper that increments on completion, called inside `pickCheckin(v)` so the bump only fires on actual completion, never on skip/reset; (c) a sage→gold gradient pill rendered in the intro phase only when `streakCount > 0`, reads "🌿 Day {N+1} of your gentle practice", uses canonical-palette `rgba(168,201,160,0.18)` → `rgba(232,145,58,0.14)` background with sage-30 border + sage-deep text, `data-testid="pill-breathing-streak"`, full `aria-label`. localStorage key is unique to BreathingTool (architect-verified — no collisions with other readers/writers).
+
+**What was NOT touched (already V28+V30 from prior work)**
+- Pricing tier names: emotion-first "Your Safe Space / Your Personal Guide / Your Full Companion / Your Transformation Partner" with `legacyName` Free/Starter/Pro/Elite testid anchors + Stripe planIds preserved (v5.8.23/24)
+- Pricing 7 V30 elements all present: social proof row (10,000+ check-ins / 4.8 rating / Private by default), Most Popular badge, money-back guarantee, email capture, 5-question FAQ, Value Bridge, Return Loop banner
+- CheckIn streak pill / Return Loop already shipped (v5.8.23)
+- About + Disclaimer V28 (paper bg, white cards, sage circle icons, sage CTAs, no `hero-gradient`/`glass-premium`/`dark:bg-slate` residuals) verified clean
+
+**TypeScript:** `npx tsc --noEmit` returned zero errors.
+**BHCE:** `/crisis` link in BreathingTool's header nav + info-section block + CheckIn nav all preserved.
+**Reduced-motion:** existing `motion-reduce` guards untouched.
+**data-testid:** all existing anchors preserved; 2 new IDs added (`text-pricing-subtitle`, `pill-breathing-streak`).
+
 ## v5.8.35 — A→Z 360° Performance Sweep
 
 User asked for end-to-end perf optimization. Diagnostic audit found 4 categories of bloat; all 4 fixed in one pass.
