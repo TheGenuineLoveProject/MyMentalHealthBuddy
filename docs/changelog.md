@@ -1,3 +1,92 @@
+## v5.8.52 — Phase 15: Gentle Companion Conversation Layer (standalone opt-in module)
+
+User attached the Phase 15 spec — Lumi gains a "voice" for tiny, emotionally safe reflections, calm supportive language, and lightweight conversational presence WITHOUT pretending to be human, simulating licensed therapy, designing emotional dependency, or running manipulative attachment loops. Implemented as a standalone, opt-in module mirroring the Phase 14 (`checkin-flow`) shipping pattern: zero production wiring by default, additive imports only, governance-rule-tested.
+
+### What it ships — `client/src/companion-voice/` (11 files)
+
+| Path | Purpose |
+|---|---|
+| `types/companionVoiceTypes.ts` | EmotionCategory, OARS, ResponseIntent, CompanionInput/Response types |
+| `copy/responseBank.ts` | 11-category curated bank + FORBIDDEN_PHRASES (24) + PERMISSION_PHRASES (7) + crisis copy |
+| `engine/crisisDetector.ts` | 30+ explicit signals — asymmetric risk (false positives over false negatives) |
+| `engine/categoryDetector.ts` | Pure keyword-scoring inference (not ML) → EmotionCategory |
+| `engine/companionEngine.ts` | Pure `generateResponse()` — crisis gate runs first, sanitizer + permission tone enforcer |
+| `governance/companionRules.ts` | 16 rules (8 blocking · 8 warning) + `auditResponse()` + `auditBank()` |
+| `components/MMHBCompanion.tsx` | Orchestrator (input + most-recent response only — no history by design) |
+| `components/MMHBCompanionMessage.tsx` | Renders one response or the crisis card with 988/741741/911/`/crisis` |
+| `components/MMHBCompanionInput.tsx` | Opt-out-friendly textarea with no autofocus |
+| `__tests/companionGovernance.test.ts` | 21 vitest assertions |
+| `__tests/vitest.config.mjs` | Isolated config (skips global Express setup) |
+| `index.ts` | Barrel — public surface only |
+
+### Safety architecture
+
+**1. Immutable crisis-first ordering.** `generateResponse()` calls `detectCrisis()` BEFORE category detection, BEFORE bank lookup, BEFORE anything else. If any of 30+ signals match (`kill myself`, `want to die`, `suicide`, `hurt myself`, `overdose`, `no reason to live`, etc.), it returns the crisis card with `intent: "crisis"`, `technique: null`, `isCrisis: true`, the safety message, and 4 routing links (988 / Crisis Text 741741 / 911 / `/crisis`). Conversation NEVER continues into the bank.
+
+**2. Asymmetric-risk detector.** Signal list intentionally broad and human-auditable — prefers false positives over false negatives. `CRISIS_SIGNAL_COUNT >= 20` is itself a governance rule (CV-R014) so accidental deletion fails CI.
+
+**3. Anti-anthropomorphism contract.** 24 FORBIDDEN_PHRASES sanitized at the engine boundary: no "I feel", "I love", "I miss", "I'll always be here", "you need me", "always here for you", "talk to me", "diagnose", "cure", "treat you", "calm down", "everything will be fine", etc. Every line in the curated bank pre-audited; sanitizer is defense-in-depth and falls back to a safe reflection if any line ever drifts.
+
+**4. Anti-attachment-loop contract.** Conversation history is INTENTIONALLY ephemeral (orchestrator stores only the most-recent response). No "we talked yesterday" callbacks, no streaks, no progress to lose. Opt-out line on every response: *"You can pause this conversation any time. There's no streak to keep, no progress to lose."*
+
+**5. Permission-tone enforcement.** All non-reflective responses (affirm / invite) MUST contain at least one of 7 PERMISSION_PHRASES (`if you want`, `when you're ready`, `you choose`, `no pressure`, `at your own pace`, `whenever feels right`, `if it helps`). Engine appends `(No pressure.)` if a curated line ever drifts past the audit.
+
+**6. Length cap.** `MAX_MESSAGE_LENGTH = 220` chars. Truncated with ellipsis if exceeded. Keeps Lumi's voice "tiny" per spec.
+
+**7. Deterministic intent rotation.** `pickIntent(turnIndex)` cycles `reflect → affirm → invite` so consecutive turns never hammer the same tone (anti-monotony).
+
+### 16 governance rules
+
+| ID | Severity | Topic |
+|---|---|---|
+| CV-R001 | blocking | Crisis input → crisis intent (always) |
+| CV-R002 | blocking | Every response includes `/crisis` line |
+| CV-R003 | blocking | Every response includes opt-out line |
+| CV-R004 | blocking | No forbidden anthropomorphism / attachment phrases |
+| CV-R005 | blocking | Message ≤ MAX_MESSAGE_LENGTH |
+| CV-R006 | blocking | Affirm/invite carry permission phrase |
+| CV-R007 | blocking | Crisis responses carry NO OARS technique |
+| CV-R008 | blocking | Crisis safety line references `/crisis` |
+| CV-R009-R016 | warning | Category/technique/intent enum integrity, empty-input handling, message non-empty, ≥20 crisis signals, opt-out copy mentions streak/progress, crisis short-line preserved |
+
+`auditResponse(r, input)` returns failing rules. `auditBank()` runs every curated line through the engine; happy state returns `[]`.
+
+### Module boundary
+
+Same CI-enforced scanner pattern as Phase 14 P14.2: a vitest test walks `client/src/`, regex-scans every `.ts/.tsx/.js/.jsx/.mjs` file outside `companion-voice/` for direct imports of `companion-voice/{engine,governance,copy,state}/` paths, throws with offender list if any found. External consumers must use the barrel: `import { MMHBCompanion, generateResponse } from "@/companion-voice"`.
+
+### Verification
+
+| Check | Result |
+|---|---|
+| `tsc --noEmit` | PASS (zero errors) |
+| `vite build` | PASS — 17.23s clean |
+| `vitest run` (isolated config) | **28/28 PASS** in 1.43s (21 base + 7 architect-hardening) |
+
+### Architect-driven hardening (P15.1 / P15.2 / P15.3 / P15.4 / P15.5 / P15.6 / P15.7)
+
+Two architect review rounds. Round 1 flagged 4 governance loopholes (P15.1–P15.5); the new direct audit then caught a real bank drift (P15.7); round 2 returned PASS with one optional crisis-normalization hardening (P15.6). All closed before final ship:
+
+- **P15.1** — `FORBIDDEN_PHRASES` expanded 24→32 to block real-world attachment-loop drift: added `i'm here for you` (3 variants), `i'll never leave` (3 variants), `you can depend on me`, `you can rely on me`, `trust me`, `i understand exactly`, `i know exactly how you feel`, `i know how you feel`.
+- **P15.2** — `CRISIS_SIGNALS` expanded 35→44 covering slang/coded variants (`unalive`, `unalive myself`, `off myself`, `kms`, `ksm`) + explicit means (`hang myself`, `shoot myself`, `jump off`, `drown myself`) + `end it all`.
+- **P15.3** — `ensurePermissionTone()` hardened: if ` (No pressure.)` append would overflow `MAX_MESSAGE_LENGTH`, the function now trims the original message (with ellipsis) so the permission tag still lands. CV-R006 can no longer silently fail. Test: "permission-tone fallback never silently fails when append would overflow".
+- **P15.4** — New `normalizeForMatch()` exported from `companionEngine`: flattens curly apostrophes (U+2018/2019/02BC/201B → `'`), curly quotes, collapses whitespace. Used by `sanitize()`, CV-R004 check, and CV-R006 check so curly-quote / spacing variants cannot evade either guard. Test: "curly apostrophe / spacing variants of forbidden phrases are also blocked".
+- **P15.5** — `auditBank()` rewritten as DIRECT per-line iteration instead of indirect engine sampling. Constructs a synthetic `CompanionResponse` per intent (reflect/affirm/invite) per line and runs `auditResponse()` against each. Tests: "auditBank actually catches an injected bad line" + "ambivalent routing".
+- **P15.6** — Crisis detector now applies the same `normalize()` pre-pass (curly apostrophe + whitespace flattening) before signal matching, so phrasings like `I can\u2019t go on` (curly apostrophe) or `I  want   to die` (extra whitespace) route to crisis just like their canonical forms. Test: "crisis detection survives curly apostrophes / spacing".
+- **P15.7** — The new direct audit caught real drift: bank affirmations were missing native permission tone and depending on the engine fallback. All 17 affirmations rewritten to carry `no pressure` / `at your own pace` / `whenever feels right` / `if you want` inline. Engine fallback is now true defense-in-depth, not the primary mechanism.
+| Files outside `client/src/companion-voice/` modified | **ZERO** |
+| Production imports added | **ZERO** (opt-in via `import { MMHBCompanion } from '@/companion-voice'`) |
+| New deps installed | **ZERO** |
+
+### Out of scope (deferred to Phase 16+)
+
+- Wiring into `/checkin`, `/buddy`, or hero
+- Backend persistence (intentionally session-only — privacy contract)
+- Multi-turn memory / threading (would violate anti-attachment-loop contract — any future addition must pass a new governance rule)
+- LLM augmentation (current bank is curated-only — any LLM layer must run output through `auditResponse()` before display)
+
+---
+
 ## v5.8.51 — Phase 14: Calm Check-In Entry Flow (standalone opt-in module)
 
 User attached the Phase 14 spec — a 4-step trust-first guided check-in where Lumi delivers genuine emotional relief BEFORE any subscription messaging appears. Implemented as a standalone, opt-in module mirroring the Phase 11 (`avatar-life`) and Phase 12 (`design-system`) shipping pattern: zero production wiring by default, additive imports only, governance-rule-tested.
