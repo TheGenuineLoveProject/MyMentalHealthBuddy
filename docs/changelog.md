@@ -1,3 +1,70 @@
+## v5.8.48 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 11: 2D Runtime Productionization (standalone module)
+
+User uploaded the Phase 11 verification report (2026-05-13, ALL PASS) documenting the productionization plan: convert 10 phases of HTML/JSON prototypes into a deployable React/Vite module — the bridge from sandbox to live site. Built the complete 11-file production module at `client/src/avatar-life/` per the attached spec. Module is **fully standalone and opt-in**: zero existing files modified, zero production wiring, hero stays on v5.8.46 FloatIdleAnimated through its 24h watch.
+
+**Why a parallel architecture instead of upgrading FloatIdleAnimated?** v5.8.47's CSS-multiplier-var engine is production-grade for what it does (single-instance, declarative motion, browser-handled interpolation). Phase 11's productionization adds a different shape: shared Zustand state across surfaces, telemetry, governance auditing, surface-context defaults, and a typed bridge for dashboards / a11y badges to read avatar runtime state without coupling to internals. The two engines coexist — `FloatIdleAnimated` powers the v5.8.46 hero now; `MMHBFloatAvatar` becomes the migration target for v5.8.49+ once the architecture proves out at `/motion-lab` and contract tests stay green for a release cycle.
+
+**11 files in 8 directories:**
+
+1. **`types/avatarLifeTypes.ts`** — All TypeScript types + 8 emotional states + canonical motion constants. `EMOTION_MULTIPLIERS` is the STATIC preset table (6 verified Phase 8 values + 2 TENTATIVE for `gentleConcern`/`welcoming` interpolated within envelope, marked in comments). `INTERACTION_LIMITS` carries Phase 9 caps verbatim. `AvatarTelemetryEvent` discriminated union with 14 events. Sub-pixel/sub-percent ceilings exposed as named constants (`SUB_PIXEL_FLOAT_CEILING_PX = 12`, `SUB_PERCENT_BREATH_CEILING = 0.03`, `GLOW_OPACITY_CEILING = 0.18`).
+
+2. **`state/useAvatarLifeStore.ts`** — Zustand store: ONE store, ONE state object. Reducers enforce contracts at write time: `setState` validates against `EMOTIONAL_STATES` set; `setHover`/`setProximity`/`setClicked` short-circuit when `crisis` is true (asymmetric-risk principle baked into the store, not just the renderer); `setCrisis(true)` clears all interaction flags atomically; `setFps` clamps negatives + rounds floats. `selectInteractionIntensity` derives 0..1 stack value. `selectReactBridge` exposes EXACTLY the 4 React-bridge fields per architecture rule.
+
+3. **`governance/nonDriftRules.ts`** — 17 motion ceilings + 7 identity rules as named constants. `auditMultiplier(state, m)` validates a preset against breath/float/amplitude/glow ranges + canonical 8-hex palette membership. `auditInteractionLimits()` validates Phase 9 caps. `auditAll()` sweeps everything — returns `[]` for the locked v5.8.47 envelope. Violations are reported via telemetry, never thrown (production fallback: clamp to calmIdle baseline). 17 limits include float displacement ceiling (12px), breath scale range (3%), interaction glow boost ceiling (0.07), proximity radius ceiling (240px), click pulse duration ceiling (800ms).
+
+4. **`observability/avatarRuntimeTelemetry.ts`** — Type-safe event emitter over the 14-event discriminated union. ZERO PII (no pointer coordinates, no journal/mood content, no user IDs). Listener errors swallowed (`try/catch` per listener). `fps_sample` throttled to ≤1/5s at the emitter level so chat surfaces with rAF samplers never flood. `__resetAvatarTelemetry` for tests.
+
+5. **`hooks/useReducedMotionSafe.ts`** — SSR-safe (returns false on server). Live `matchMedia('(prefers-reduced-motion: reduce)')` listener for OS-level mid-session toggling. Safari ≤14 fallback via `addListener`/`removeListener`. Mirrors v5.8.43 contract.
+
+6. **`hooks/useAvatarPresenceRuntime.ts`** — Full lifecycle hook called once per surface from the provider. Emits `mount` (with initial state audit), syncs reduced-motion into store + emits change events, subscribes to store for state-change + crisis-engage/release telemetry, optional 1Hz rAF FPS sampler with proper cancel on unmount. Initial-state audit catches contract violations the moment a surface mounts (TENTATIVE presets get flagged if their final values drift outside the envelope).
+
+7. **`components/MMHBFloatAvatar.tsx`** — Framer Motion avatar. `useMotionValue` for `y` + `scale`, `useAnimationFrame` drives both as cosine waves so the float oscillates from 0 down to `-ceiling` and back without ever overshooting `SUB_PIXEL_FLOAT_CEILING_PX`. Glow halo is a sibling div with radial-gradient + opacity transition (3s under interactive, 1.2s baseline — same scoping pattern v5.8.47 used). Phase 9 listeners (hover/proximity/click) attach only when `interactionsOn = interactive && !crisis && !reducedMotion`. Proximity uses rAF-throttled (50ms sample window) `document.pointermove` distance check with 4s build timer — **no setInterval heartbeat** per ethics contract. Crisis flip clears all local interaction state via separate `useEffect` (defense-in-depth: store rejects + component clears + animation frame returns identity values). All transform writes go through Framer Motion's compositor, never through React re-renders.
+
+8. **`components/MMHBAvatarRuntimeProvider.tsx`** — React Context provider that initializes the runtime once per surface. Reads `surfaceContext` + optional `defaultState` (defaults from `SURFACE_DEFAULT_STATE` map: hero→calmIdle, chat→comforting, buddy→peacefulJoy, onboarding→welcoming, lab→calmIdle). Mounts `useAvatarPresenceRuntime` so children inherit shared store state. `useAvatarRuntimeContext` hook for child consumers.
+
+9. **`components/AvatarWithReactState.tsx`** — Render-prop bridge exposing EXACTLY the 4 React-bridge values (`reducedMotion`, `currentState`, `fps`, `interactionIntensity`). Internal motion never flows through React. Use case: a11y badge that says "Avatar in calmIdle • 60fps • interaction 0.7" or admin telemetry panel.
+
+10. **`index.ts`** — Single barrel export. Production import is `import { MMHBFloatAvatar, MMHBAvatarRuntimeProvider } from '@/avatar-life'`.
+
+11. **`__tests__/avatarLifeContract.test.ts`** — 5 suites · **23 assertions · ALL PASS** (vitest, isolated config to bypass the global Express server setup):
+    - Suite 1 (5): emotional state catalog has 8 unique entries with multiplier presets including pending states; calmIdle carries v5.8.45 verified baseline.
+    - Suite 2 (4): `auditAll()` returns `[]`; over-ceiling glow opacity flagged; sub-pixel envelope honored; off-palette glow color flagged.
+    - Suite 3 (5): `setState` rejects unknown literals; crisis engage clears interaction flags; `setHover` rejected during crisis; `resetForSurface` assigns surface defaults; `setFps` clamps + rounds.
+    - Suite 4 (5): listeners receive events; unsubscribe detaches; `fps_sample` throttled to 1/5s per-listener (3 emits → 2 received); `fps_sample` throttling is PER SURFACE (hero + chat emitted in same window both delivered); listener errors don't break the chain.
+    - Suite 5 (4): hero/chat/buddy default-state mapping correct; proximity radius + click pulse + interaction glow boosts all under their governance ceilings.
+
+**Architect review — 2-pass PASS:**
+
+Pass 1 flagged 3 critical findings: (a) ONE-store contract violated by component-local React state mirroring Zustand; (b) singleton store cross-contaminates if multiple surfaces mount; (c) float math snap on first frame because phase-shifted formula yielded `-A` at `t=0`. All 3 fixed: (a) removed all `useState` for hover/proximity/clicked from `MMHBFloatAvatar` — selectors read from store + handlers dispatch via `api.getState().setX()`; (b) refactored to per-provider store via `createAvatarLifeStore()` factory + `AvatarStoreProvider` context — each surface gets isolated state; (c) replaced cosine formula with `(1 - cos(2π·sec/period)) / 2 ∈ [0,1]` so `t=0` → 0 displacement, plus `startTsRef` resets phase from 0 after every crisis-clear.
+
+Pass 2 flagged 1 medium finding: `fps_sample` throttling used a single module-level `lastFpsEmitTs`, suppressing concurrent surfaces. Fixed: `Map<surface, ts>` keyed by surface so hero + chat throttle independently. Added Suite 4 assertion proving cross-surface independence (3 emits across 2 surfaces in same 5s window → both delivered).
+
+Pass 3: PASS, no further findings.
+
+**Architecture rules verified:**
+
+| Rule | Implementation |
+|---|---|
+| ONE store, ONE state object PER SURFACE | `createAvatarLifeStore()` factory + `AvatarStoreProvider` context — each provider isolates its own store |
+| Emotional state as prop | `state?: EmotionalState` on `MMHBFloatAvatar` (overrides store when set) |
+| Motion multipliers STATIC | `EMOTION_MULTIPLIERS` is `Readonly<Record<...>>`, never computed |
+| Reduced motion carries state | Animation frame returns identity; store flag pinned by hook |
+| Only 4 React values exposed | `selectReactBridge` returns exactly `{reducedMotion, currentState, fps, interactionIntensity}` |
+| Zero PII telemetry | Event union has no pointer coordinates, no IDs, no free-form strings beyond rule/detail |
+| Asymmetric-risk crisis safety | 3 layers (store reducer + component effect + animation frame) all pin to identity |
+
+**New dependencies:** `zustand` + `framer-motion` (added via `installLanguagePackages`). Bundle impact: vendor-react chunk grew to 58KB gzip (+~38KB gzip for framer-motion). No other chunks affected. Build 16.22s.
+
+**Asset reference:** Production caller passes `imageSrc="/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png"` — the canonical sprout from v5.8.41 that the v5.8.46 hero already serves via region recompose. WebP optimization deferred to migration phase (PNG fallback works today).
+
+**testids added:** `mmhb-float-avatar` (configurable via prop), `mmhb-float-avatar-glow`, `mmhb-float-avatar-img`. All v5.8.43-v5.8.47 testids untouched (no drift). Full data attributes mirror v5.8.47 pattern: `data-state`, `data-crisis`, `data-interactive`, `data-hover`, `data-proximity`, `data-clicked`.
+
+**Test infrastructure:** Created `client/src/avatar-life/__tests__/vitest.config.mjs` — isolated vitest config (no setupFiles) so contract tests don't try to bind port 5000 from the global Express setup. Run with `npx vitest run --config client/src/avatar-life/__tests__/vitest.config.mjs`.
+
+**Migration plan (locked but not yet executed):** v5.8.49 will wire LumiV6 chat (`MMHBAvatarRuntimeProvider surfaceContext="chat"` + `MMHBFloatAvatar state="comforting" interactive`) once the v5.8.46 hero clears its watch window. v5.8.50 = BuddyAvatar (`peacefulJoy`). v5.8.51 = hero migration off FloatIdleAnimated onto MMHBFloatAvatar (gated on contract tests + 7-day field stability of chat surface). FloatIdleAnimated is preserved indefinitely as the lower-overhead pure-CSS path for surfaces that don't need the shared store.
+
+⸻
+
 ## v5.8.47 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 9: Interaction Systems (standalone, opt-in)
 
 User uploaded the Phase 9 verification report (2026-05-13, ALL PASS) documenting 5 interaction systems as working HTML/JSON prototypes; ported the spec values literally onto the v5.8.45 motion stack as a non-breaking opt-in layer. Per the locked rollout plan + 24h hero-watch contract, Phase 9 ships as a sandbox-only addition: new `interactive` prop on `FloatIdleAnimated` defaults to **false**, exposed at `/motion-lab` for QA only. Hero (v5.8.46), LumiV6 chat, BuddyAvatar — all pristine. Zero production wiring, zero existing testid drift.
