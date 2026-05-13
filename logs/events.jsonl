@@ -311,3 +311,9 @@
 {"type":"buddy_accessibility_ready","guestId":"guest_1778575428904_w4wy0q9m","metadata":{},"ts":1778576180732}
 {"type":"start_page_click","guestId":"guest_1778575428904_w4wy0q9m","metadata":{},"ts":1778576180732}
 {"type":"buddy_panel_viewed","guestId":"guest_1778575428904_w4wy0q9m","metadata":{"surface":"start","state":"calm"},"ts":1778576180733}
+{"type":"buddy_panel_viewed","guestId":"g_mp3kofqr_awh94h","metadata":{"surface":"start","state":"calm"},"ts":1778647299554}
+{"type":"buddy_accessibility_ready","guestId":"g_mp3kofqr_awh94h","metadata":{},"ts":1778647299556}
+{"type":"start_page_click","guestId":"g_mp3kofqr_awh94h","metadata":{},"ts":1778647299557}
+{"type":"buddy_panel_viewed","guestId":"g_mp3kofqr_awh94h","metadata":{"surface":"start","state":"calm"},"ts":1778647333687}
+{"type":"start_page_click","guestId":"g_mp3kofqr_awh94h","metadata":{},"ts":1778647333687}
+{"type":"buddy_accessibility_ready","guestId":"g_mp3kofqr_awh94h","metadata":{},"ts":1778647333688}
