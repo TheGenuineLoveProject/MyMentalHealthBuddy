@@ -126,10 +126,12 @@ export default function ReturnLoop() {
       aria-live="polite"
       data-testid="banner-return-loop"
       style={{
-        // Solid rgba fallback first (Safari < 16.2), modern browsers see the var.
-        background: accent.bg,
+        // v5.8.38: layer translucent accent over solid paper so content
+        // scrolling under the sticky bar doesn't bleed through (was 18% alpha).
+        background: `linear-gradient(${accent.bg}, ${accent.bg}), #FBF8F1`,
         borderBottom: `1px solid ${accent.border}`,
         color: accent.text,
+        boxShadow: '0 2px 12px rgba(20, 38, 38, 0.08)',
       }}
     >
       <div className="rl-inner">

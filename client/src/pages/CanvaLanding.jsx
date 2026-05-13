@@ -903,8 +903,8 @@ export default function CanvaLanding() {
                   <p className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4 text-center" style={{ color: 'var(--glp-ink)', lineHeight: '1.7' }}>
                     {feature.description}
                   </p>
-                  <Link href="/login" data-testid={`link-feature-${index}`} aria-label={`Explore ${feature.title}`} className="inline-flex items-center justify-center gap-1.5 text-xs md:text-sm font-semibold cursor-pointer mx-auto mt-auto px-4 py-2 rounded-full text-white transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.2)' }}>
-                      Explore {feature.title}
+                  <Link href="/login" data-testid={`link-feature-${index}`} aria-label={`Explore ${feature.title}`} className="inline-flex items-center justify-center gap-1.5 text-xs md:text-sm font-semibold cursor-pointer mx-auto mt-auto px-5 py-2 rounded-full text-white transition-transform hover:scale-105 max-w-full" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.2)' }}>
+                      Explore
                       <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
                 </div>
@@ -1115,7 +1115,7 @@ export default function CanvaLanding() {
             Free to start. No credit card. No trial that expires. Your AI buddy — success coach, metacognitive guide, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. Real self-regulation. The person you're becoming is already inside you — let's meet them.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-5">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-6 sm:gap-5 md:gap-6">
             {!isLoading && isAuthenticated() ? (
               <Link href="/dashboard">
                 <button
