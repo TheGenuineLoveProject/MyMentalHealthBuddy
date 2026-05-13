@@ -28,7 +28,8 @@
 /* ─── Phase 4: Floating (body translateY 0→-10px over 9.3s, ease) ─── */
 @keyframes float-idle-floating {
   0%, 100% { translate: 0 0; }
-  50%      { translate: 0 -10px; }
+  /* Amplitude scales with state (--float-amplitude: 0.4-1.2) */
+  50%      { translate: 0 calc(-10px * var(--float-amplitude, 1)); }
 }
 
 /* ─── Phase 4: Shadow (synced with floating, 9.3s) ─── */
@@ -118,14 +119,104 @@
   100%  { scale: 1 1; }
 }
 
+/* ─── Phase 8: Emotional state orchestration ─── */
+/* Each state shifts cycle durations + float amplitude + glow color/opacity
+ * via CSS custom properties consumed by the keyframes/halo below.
+ * The avatar itself never changes — only its emotional weather does. */
+.float-idle-animated {
+  --breath-cycle: 7.1s;
+  --float-cycle: 9.3s;
+  --float-amplitude: 1;
+  --glow-color: 168, 201, 160;
+  --glow-opacity: 0.15;
+  /* NOTE: cycle vars are not @property-registered, so they snap rather
+   * than interpolate on state change. Visible as a brief retime jump
+   * mid-cycle; acceptable for QA lab. Pre-production wiring should
+   * register them via @property (or interpolate via JS) for smoothness. */
+}
+
+.float-idle-animated[data-state="grounding"] {
+  --breath-cycle: 9.94s;
+  --float-cycle: 12.09s;
+  --float-amplitude: 0.6;
+  --glow-color: 116, 192, 252;
+  --glow-opacity: 0.12;
+}
+.float-idle-animated[data-state="reflective"] {
+  --breath-cycle: 8.52s;
+  --float-cycle: 13.02s;
+  --float-amplitude: 0.7;
+  --glow-color: 200, 182, 255;
+  --glow-opacity: 0.10;
+}
+.float-idle-animated[data-state="sleepy"] {
+  --breath-cycle: 11.36s;
+  --float-cycle: 16.74s;
+  --float-amplitude: 0.4;
+  --glow-color: 168, 213, 186;
+  --glow-opacity: 0.08;
+}
+.float-idle-animated[data-state="comforting"] {
+  --breath-cycle: 7.81s;
+  --float-cycle: 11.16s;
+  --float-amplitude: 0.8;
+  --glow-color: 255, 154, 139;
+  --glow-opacity: 0.18;
+}
+.float-idle-animated[data-state="peacefulJoy"] {
+  --breath-cycle: 6.39s;
+  --float-cycle: 7.91s;
+  --float-amplitude: 1.2;
+  --glow-color: 255, 217, 61;
+  --glow-opacity: 0.14;
+}
+
+/* Crisis pins glow + cycles to calmIdle baseline regardless of state */
+.float-idle-animated[data-crisis="true"] {
+  --breath-cycle: 7.1s;
+  --float-cycle: 9.3s;
+  --float-amplitude: 1;
+  --glow-color: 168, 201, 160;
+  --glow-opacity: 0.15;
+}
+
+/* ─── Glow halo (Phase 8) ─── */
+/* Rendered as a sibling div behind shadow + rig. Radial gradient fades
+ * from state-tinted RGBA at center to transparent at the edge.
+ * Static (no pulse) so it reads as ambient atmosphere, not animation. */
+.float-idle-animated__glow {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 60%,
+    rgba(var(--glow-color), var(--glow-opacity)) 0%,
+    rgba(var(--glow-color), 0) 65%
+  );
+  /* NOTE: gradient interpolation is engine-dependent and may step
+   * rather than cross-fade on some browsers. Acceptable for QA lab;
+   * pre-production wiring should refactor to a 2-layer opacity
+   * cross-fade (render previous + current glow, fade between them). */
+  transition: background 1.2s ease-in-out;
+}
+
+/* Phase 8: explicit z-index contract so stacking is deterministic
+ * regardless of browser default paint order. */
+.float-idle-animated__shadow { z-index: 1; }
+.float-idle-animated .float-idle-rig { z-index: 2; }
+
 /* ─── Activation: only when wrapper is animating ─── */
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] {
-  animation: float-idle-floating 9.3s ease-in-out infinite;
+  animation: float-idle-floating var(--float-cycle, 9.3s) ease-in-out infinite;
   will-change: translate;
 }
 
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="torso"] {
-  animation: float-idle-breathing 7.1s ease-in-out infinite;
+  animation: float-idle-breathing var(--breath-cycle, 7.1s) ease-in-out infinite;
   will-change: scale;
 }
 
@@ -148,7 +239,8 @@
 }
 
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="mouth"] {
-  animation: float-idle-mouth-softness 7.1s ease-in-out infinite;
+  /* Mouth softness stays breath-synced: same var as torso breathing */
+  animation: float-idle-mouth-softness var(--breath-cycle, 7.1s) ease-in-out infinite;
   will-change: scale;
 }
 
@@ -177,7 +269,8 @@
 }
 
 .float-idle-animated.is-animating .float-idle-animated__shadow {
-  animation: float-idle-shadow 9.3s ease-in-out infinite;
+  /* Shadow stays float-synced: same var as body floating */
+  animation: float-idle-shadow var(--float-cycle, 9.3s) ease-in-out infinite;
   transform-origin: center 86%; /* shadow ellipse y=860/1024 ≈ 86% */
   will-change: opacity, filter, scale;
 }

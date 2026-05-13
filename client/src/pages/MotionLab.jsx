@@ -12,6 +12,15 @@ import { useState } from "react";
 import { Link } from "wouter";
 import FloatIdleAnimated from "@/components/lumi/FloatIdleAnimated.jsx";
 
+const EMOTIONAL_STATES = [
+  { id: "calmIdle",    label: "Calm Idle",     glow: "Sage 0.15",      breath: "7.1s",   float: "9.3s × 1.0",   feeling: "Peacefully present" },
+  { id: "grounding",   label: "Grounding",     glow: "Calm-blue 0.12", breath: "9.94s",  float: "12.09s × 0.6", feeling: "Steady and centered" },
+  { id: "reflective",  label: "Reflective",    glow: "Purple 0.10",    breath: "8.52s",  float: "13.02s × 0.7", feeling: "Thoughtful and inward" },
+  { id: "sleepy",      label: "Sleepy",        glow: "Mint 0.08",      breath: "11.36s", float: "16.74s × 0.4", feeling: "Drowsy and resting" },
+  { id: "comforting",  label: "Comforting",    glow: "Blush 0.18",     breath: "7.81s",  float: "11.16s × 0.8", feeling: "Warm and reassuring" },
+  { id: "peacefulJoy", label: "Peaceful Joy",  glow: "Sunshine 0.14",  breath: "6.39s",  float: "7.91s × 1.2",  feeling: "Quietly happy" },
+];
+
 const MOTION_SYSTEMS = [
   { phase: 4, name: "Breathing",      property: "torso scale",     range: "1.0 → 1.02",     cycle: "7.1s" },
   { phase: 4, name: "Floating",       property: "body translateY", range: "0 → -10px",       cycle: "9.3s" },
@@ -26,6 +35,7 @@ const MOTION_SYSTEMS = [
 export default function MotionLab() {
   const [size, setSize] = useState(420);
   const [crisis, setCrisis] = useState(false);
+  const [state, setState] = useState("calmIdle");
 
   return (
     <main
@@ -50,7 +60,7 @@ export default function MotionLab() {
           MMHB_FLOAT_IDLE_UNIT_v1 — Motion Lab
         </h1>
         <p style={{ margin: 0, opacity: 0.7, fontSize: "0.95rem" }}>
-          Phase 4-7 idle motion systems running live. Body FROZEN per NON-DRIFT contract — only sub-pixel transforms.
+          Phase 4-8 idle motion systems running live. Body FROZEN per NON-DRIFT contract — only sub-pixel transforms. Phase 8 adds emotional state orchestration (6 of 8 states wired; 2 awaiting spec).
         </p>
         <p style={{ margin: "0.5rem 0 0", fontSize: "0.85rem" }}>
           Crisis support: <a href="/crisis" style={{ color: "#E8913A" }}>/crisis</a> · 988 · 741741 · Sister: <Link href="/rig-lab" style={{ color: "#142626", opacity: 0.7 }}>/rig-lab</Link>
@@ -81,7 +91,34 @@ export default function MotionLab() {
           }}
           data-testid="section-motion-preview"
         >
-          <FloatIdleAnimated size={size} crisis={crisis} />
+          <FloatIdleAnimated size={size} state={state} crisis={crisis} />
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", width: "100%", maxWidth: 420 }}>
+            <label htmlFor="motion-state" style={{ fontSize: "0.78rem", opacity: 0.7, fontWeight: 500 }}>
+              Emotional state {crisis ? "(pinned to calmIdle by crisis)" : ""}
+            </label>
+            <select
+              id="motion-state"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              disabled={crisis}
+              data-testid="select-motion-state"
+              style={{
+                padding: "0.5rem 0.7rem",
+                borderRadius: "0.5rem",
+                border: "1px solid rgba(168,201,160,0.5)",
+                background: crisis ? "rgba(168,201,160,0.08)" : "#fff",
+                color: "#142626",
+                fontSize: "0.9rem",
+                cursor: crisis ? "not-allowed" : "pointer",
+              }}
+            >
+              {EMOTIONAL_STATES.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.label} — {s.feeling}
+                </option>
+              ))}
+            </select>
+          </div>
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "center" }}>
             {[256, 320, 420, 512, 640].map((s) => (
               <button

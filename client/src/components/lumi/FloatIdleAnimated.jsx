@@ -25,17 +25,43 @@
  *   - crisis prop → FloatIdleRig pins everything; this wrapper also
  *     skips JS blink scheduling and freezes shadow at rest values.
  *
+ * Phase 8 — Emotional state orchestration:
+ *   The avatar has 8 verified emotional states (6 shipped + 2 pending
+ *   spec) that shift cycle durations + float amplitude + glow color
+ *   without changing the avatar's appearance. Each state is the same
+ *   floating, breathing being — only its emotional weather changes.
+ *   States drive CSS custom properties consumed by the keyframes:
+ *
+ *     calmIdle    — sage 0.15      / breath 7.1s  / float 9.3s  amp 1.0
+ *     grounding   — calm-blue 0.12 / breath 9.94s / float 12.09s amp 0.6
+ *     reflective  — purple 0.10    / breath 8.52s / float 13.02s amp 0.7
+ *     sleepy      — mint 0.08      / breath 11.36s/ float 16.74s amp 0.4
+ *     comforting  — blush 0.18     / breath 7.81s / float 11.16s amp 0.8
+ *     peacefulJoy — sunshine 0.14  / breath 6.39s / float 7.91s  amp 1.2
+ *
  * Usage:
  *   <FloatIdleAnimated size={420} />
+ *   <FloatIdleAnimated size={512} state="comforting" />
  *   <FloatIdleAnimated size={512} crisis={someCrisisFlag} />
  *
  * Props:
  *   size       number   px (default 420)
+ *   state      string   emotional state (default "calmIdle"). Crisis
+ *                       pins to "calmIdle" baseline regardless.
  *   crisis     boolean  BHCE override (default false)
  *   ariaLabel  string   default "Lumi, peacefully floating"
  *   className  string   appended to wrapper
  *   style      object   merged onto wrapper
  */
+
+const VALID_STATES = new Set([
+  "calmIdle",
+  "grounding",
+  "reflective",
+  "sleepy",
+  "comforting",
+  "peacefulJoy",
+]);
 
 import { useEffect, useRef, useState } from "react";
 import FloatIdleRig from "./FloatIdleRig.jsx";
@@ -64,6 +90,7 @@ function usePrefersReducedMotion() {
 
 export default function FloatIdleAnimated({
   size = 420,
+  state = "calmIdle",
   crisis = false,
   ariaLabel = "Lumi, peacefully floating",
   className = "",
@@ -72,6 +99,13 @@ export default function FloatIdleAnimated({
   const rigRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
   const animationsOn = !crisis && !reducedMotion;
+  // Crisis pins to calmIdle baseline (asymmetric-risk safety: never
+  // surface elevated/comforting states during a crisis routing path).
+  const effectiveState = crisis
+    ? "calmIdle"
+    : VALID_STATES.has(state)
+      ? state
+      : "calmIdle";
 
   // Random blink scheduler per Phase 5 spec: 3-8s random interval,
   // 200ms duration, scaleY compression. JS-driven because the timing
@@ -114,6 +148,7 @@ export default function FloatIdleAnimated({
         className ? " " + className : ""
       }`}
       data-crisis={crisis ? "true" : "false"}
+      data-state={effectiveState}
       data-testid="float-idle-animated"
       style={{
         width: size,
@@ -123,6 +158,11 @@ export default function FloatIdleAnimated({
         ...style,
       }}
     >
+      <div
+        className="float-idle-animated__glow"
+        data-testid="float-idle-glow"
+        aria-hidden="true"
+      />
       <img
         src={SHADOW_SRC}
         alt=""

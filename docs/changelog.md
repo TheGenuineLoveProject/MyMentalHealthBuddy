@@ -1,3 +1,63 @@
+## v5.8.45 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 8 (emotional state orchestration, 6 of 8 states)
+
+User uploaded the Phase 8 verification report (ALL PASS, 8 emotional states verified). Report was truncated mid-state-table — 6 of 8 states fully visible (calmIdle, grounding, reflective, sleepy, comforting, peacefulJoy), 2 truncated (state 7 starts with "g…", state 8 unknown). Per "if unsure ask ONE clarifying question" rule, shipped infra + 6 verified states; deferred 2 truncated states with explicit ask to user.
+
+**Architecture (state orchestration, NOT new motion):**
+- Phase 8 is pure orchestration of existing P4-P7 motion systems. Avatar geometry never changes; only emotional weather changes via cycle durations + float amplitude + glow color/opacity.
+- 5 CSS custom properties drive everything: `--breath-cycle`, `--float-cycle`, `--float-amplitude`, `--glow-color`, `--glow-opacity`.
+- Existing keyframes refactored to consume vars: `var(--float-cycle, 9.3s)` for body floating + shadow, `var(--breath-cycle, 7.1s)` for torso breathing + mouth softness, `calc(-10px * var(--float-amplitude, 1))` inside `@keyframes float-idle-floating` for amplitude scaling.
+- New `__glow` halo div (sibling to shadow + rig, z-index 0, 120% inset -10%) renders state-tinted radial-gradient: `rgba(var(--glow-color), var(--glow-opacity)) 0% → rgba(...,0) 65%`. Static (no pulse) so it reads as ambient atmosphere, not animation.
+- 1.2s `transition: background` on the halo so state changes cross-fade smoothly.
+
+**6 states wired (all canonical 8-hex palette):**
+| State | RGB | Opacity | Breath | Float | Amp | Feeling |
+|---|---|---|---|---|---|---|
+| calmIdle | 168,201,160 (sage) | 0.15 | 7.1s | 9.3s | 1.0 | Peacefully present |
+| grounding | 116,192,252 (calm-blue) | 0.12 | 9.94s | 12.09s | 0.6 | Steady and centered |
+| reflective | 200,182,255 (empathy-purple) | 0.10 | 8.52s | 13.02s | 0.7 | Thoughtful and inward |
+| sleepy | 168,213,186 (mint) | 0.08 | 11.36s | 16.74s | 0.4 | Drowsy and resting |
+| comforting | 255,154,139 (blush) | 0.18 | 7.81s | 11.16s | 0.8 | Warm and reassuring |
+| peacefulJoy | 255,217,61 (sunshine) | 0.14 | 6.39s | 7.91s | 1.2 | Quietly happy |
+
+All RGB values map exactly to the canonical 8-hex brand palette. No new colors introduced.
+
+**Files:**
+- MODIFIED `client/src/components/lumi/FloatIdleAnimated.css` — added `:root`-style state vars on `.float-idle-animated`, added `[data-state="..."]` override blocks for all 5 non-default states, added crisis pin-to-baseline block, added `.float-idle-animated__glow` halo, refactored 3 animation declarations to use vars, refactored `@keyframes float-idle-floating` to use `calc(... * var(--float-amplitude))`.
+- MODIFIED `client/src/components/lumi/FloatIdleAnimated.jsx` — added `state` prop (default "calmIdle"), added `VALID_STATES` Set guard, added `effectiveState` computed value (crisis → calmIdle), added `data-state={effectiveState}` attribute on wrapper, added `<div className="float-idle-animated__glow">` as first child (renders behind shadow + rig per stack order), expanded JSDoc with all 6 state specs.
+- MODIFIED `client/src/pages/MotionLab.jsx` — added EMOTIONAL_STATES constant (6 entries), added `state` useState, added `<select id="motion-state">` with state options + feeling labels (disabled when crisis is on, with "(pinned to calmIdle by crisis)" label), passed `state={state}` to FloatIdleAnimated, updated header copy to "Phase 4-8 ... 6 of 8 states wired; 2 awaiting spec".
+
+**Crisis safety (asymmetric-risk):**
+- Crisis pins `data-state` to "calmIdle" at the JSX layer (`effectiveState = crisis ? "calmIdle" : state`) — never surfaces elevated/comforting states during crisis routing.
+- Crisis ALSO pins all CSS vars to calmIdle baseline at the CSS layer via `[data-crisis="true"]` block — belt + suspenders.
+- Crisis ALSO sets `data-animated="false"` on the rig (existing P4-7 contract) so animation selectors don't match.
+- Three independent layers of crisis safety; any one alone would suffice.
+
+**Reduced-motion safety:**
+- Existing reduced-motion blanket (Phase 4-6) already pins all `[data-rig-zone]` transforms to identity. Glow halo is static (no `@keyframes`) so it stays ambient under reduced-motion as designed.
+
+**Identity preservation (verification report's strict checklist):**
+- Silhouette unchanged ✓ (no geometry touched)
+- Pose unchanged ✓
+- Expression unchanged ✓
+- Eye/mouth/blush identity preserved ✓
+- Colors unchanged ✓ (glow uses canonical palette only, all sub-0.20 opacity so it never overwhelms the avatar)
+- Proportions unchanged ✓
+- Source assets in `avatar-core/` untouched ✓
+
+**State quality (per Phase 8 report's qualitative checks):**
+- States feel emotionally distinct: ✓ (cycle ratios are 0.4x to 1.2x apart — sleepy at 16.74s float reads dramatically slower than peacefulJoy at 7.91s)
+- States feel restrained, never hyperactive/clinical/manipulative/uncanny: ✓ (max amp 1.2x is still sub-pixel-cluster motion; max glow opacity 0.18 is ambient haze, not bright halo)
+
+**Verification:**
+- `npx tsc --noEmit` zero errors
+- Screenshot at `/motion-lab` shows sprout with state selector — switching states visibly shifts breath/float pace and tints the surrounding glow
+
+**Out of scope (deferred until user supplies):**
+- 2 emotional states truncated from the report ("g…" + final state). Asked user explicitly for the missing specs.
+- WebP region variants (still flagged from v5.8.42 architect — lab is QA-only)
+- Production wiring (LumiV6/V7/BuddyAvatar still untouched per NO-PRODUCTION-WIRING contract)
+- Phase 9 (interaction systems: hover/click/gaze) — documented next safe step
+
 ## v5.8.44 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 7 (arm + leg settling)
 
 User chose to ship Phase 7 — the documented "NEXT SAFE STEP" from the Phase 6 verification report. Same identity-safe pattern as v5.8.43.
