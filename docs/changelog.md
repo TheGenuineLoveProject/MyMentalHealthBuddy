@@ -1,3 +1,98 @@
+## v5.8.42 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 3 rig scaffolding (FloatIdleRig + /rig-lab)
+
+User chose option C (keep 1024×1024 v5.8.41 artifacts as canonical, proceed to Phase 3 rig hookup) after I flagged that the manifest's expected file sizes (raw 289 KB, transparent 272 KB, etc.) and IoU 0.9633 didn't match our actual artifacts (raw 1.5 MB, transparent 1.4 MB, alpha-coverage 1.0023). Their reasoning: manifest is documentation of the NON-DRIFT contract and methodology; tooling difference (PIL vs ImageMagick) explains the size delta; both pipelines preserved silhouette/expression/colors/shadow-separation/NON-DRIFT. They have working motion prototypes for Phases 4-6 (breathing/floating/shadow, blink/eye softness, mouth micro-motion) ready to port to my rig anchors.
+
+**New files (3):**
+- `client/src/components/lumi/FloatIdleRig.jsx` — standalone forwardRef component, mounts 11 region PNGs from `/avatar-core/regions/` at manifest coordinates
+- `client/src/components/lumi/FloatIdleRig.css` — scoped styling, BHCE crisis override, reduced-motion blanket
+- `client/src/pages/RigLab.jsx` — `/rig-lab` QA surface mirroring v5.8.28 `/avatar-lab` pattern
+
+**Modified (1):**
+- `client/src/App.jsx` — lazy import + `/rig-lab` route registered next to `/avatar-lab` (lines 80, 694)
+
+**Asset mirroring:**
+- Copied `avatar-core/regions/` (11 PNGs), `avatar-core/master/` (1 PNG), `avatar-core/shadow/` (1 PNG) to `client/public/avatar-core/` so Vite serves them at runtime URLs `/avatar-core/regions/...`. Repo `avatar-core/` remains the SSOT for archival/rollback per v5.8.41 contract; `client/public/avatar-core/` is the runtime mirror. 16 MB total.
+
+**FloatIdleRig contract (manifest §"NON-DRIFT CONTRACT" honored):**
+Permitted modifications exposed as props:
+- Coordinate-based motion: `armLRotate` (±30°), `armRRotate` (±30°), `legLY` (±12px in 1024-space), `legRY` (±12px), `floatY` (body-wide bob)
+- Scale transforms: `breathingScale` (1.0-1.03 per manifest), `blinkScaleY` (0.1-1.0 per manifest's 150ms blink spec)
+- Opacity: `sparkleOpacity` (0-1)
+- Mouth: `mouthShape` set as `data-mouth` attribute only — actual shape swap is downstream Phase 4-6 work (current mouth region is canonical small smile, frozen geometry)
+
+**Rig pivots (transform-origin as % of 1024×1024 container, computed from manifest bbox centers):**
+| Region | Bbox center (1024-space) | Pivot % |
+|---|---|---|
+| body-residual | (512, 512) | 50.0% / 50.0% |
+| torso | (510, 580) | 49.8% / 56.6% |
+| leg-l | (460, 780) | 44.9% / 76.2% |
+| leg-r | (640, 730) | 62.5% / 71.3% |
+| arm-l | (255, 515) | 24.9% / 50.3% |
+| arm-r | (765, 515) | 74.7% / 50.3% |
+| face | (512, 370) | 50.0% / 36.1% |
+| eyes | (455, 357.5) | 44.4% / 34.9% |
+| mouth | (465, 415) | 45.4% / 40.5% |
+| top-leaf | (530, 190) | 51.8% / 18.6% |
+| sparkles | (512, 512) | 50.0% / 50.0% |
+
+**Stack order (back to front):** body-residual → torso → leg-l → leg-r → arm-l → arm-r → face → eyes → mouth → top-leaf → sparkles. Each region PNG is full 1024×1024 with the region painted at its absolute position and transparent surrounding (per v5.8.41 Phase 2), so `position: absolute; inset: 0` stacking reconstructs the master pixel-for-pixel (alpha-coverage 1.0023 verified).
+
+**Imperative ref API for Phase 4-6 prototypes:**
+```js
+const rigRef = useRef(null);
+<FloatIdleRig ref={rigRef} />
+// Later:
+rigRef.current.getAnchor('float-center')   // → { xPct: 50, yPct: 48.8, xPx: 256, yPx: 250 } at size=512
+rigRef.current.getAnchor('blink-l')        // → independent L/R blink anchor
+rigRef.current.listAnchors()               // → ['float-center', 'arm-l', 'arm-r', ...]
+rigRef.current.getContainer()              // → underlying div for DOM-level ops
+```
+Anchors exposed: float-center, body-centerline-top, body-centerline-bottom, arm-l, arm-r, leg-l, leg-r, blink-l, blink-r, mouth, top-leaf. Note: `eyes` region is the *combined* L+R blink bbox (manifest's L 365-420 and R 490-545 share Y range 330-385); independent L/R blink would require a sub-region split (Phase 2.5) — flagged as TODO in component header docstring.
+
+**CSS contract (FloatIdleRig.css):**
+- Scoped under `.float-idle-rig` — zero leak risk
+- Per-zone transition timing matches manifest motion ranges:
+  - `[data-rig-zone="eyes"]` — 150ms (manifest blink ScaleY 0.1, 150ms)
+  - `[data-rig-zone="torso"]` — 1200ms (slow breathing cadence per V32)
+  - All other zones — 200ms (V32 cadence, eyes lead per LumiV7 contract)
+- `[data-crisis="true"]` selector pins ALL transforms + animations + transitions to `none !important` (BHCE asymmetric-risk override)
+- `prefers-reduced-motion: reduce` blanket: same `none !important` pin + sparkles drop to 0.6 opacity (so canonical sparkle visibility preserved without animation)
+- `will-change: transform, opacity` on each layer for GPU compositing
+
+**RigLab QA page (`/rig-lab`):**
+- Two-column grid: live FloatIdleRig preview (left) + 360px controls aside (right)
+- 8 sliders driving every numeric prop in real time, with current-value readout in monospace
+- Mouth shape `<select>` cycling through 11 MOUTH_SHAPES exports (neutral/happy/calm/surprise/sleepy/open/worried/excited/loving/focused/breathing)
+- Crisis toggle checkbox demonstrates BHCE override
+- Size buttons (256/384/512/768 px) verify pivots scale correctly across container sizes
+- "Probe anchors via ref" button calls `getAnchor()` for every named anchor and dumps the readout to a `<pre>` block — proves the ref API for prototype wiring
+- Reset button restores all sliders to manifest defaults
+- `/crisis` link in header per universal contract
+- Sage→calm-blue gradient on probe button (canonical 8-hex palette only)
+
+**Verification:**
+- `npx tsc --noEmit` — zero errors
+- Screenshot of `/rig-lab` confirms: rig renders canonical sprout with all 11 regions visually aligned (no seams, no rectangular halos), sliders functional, body geometry FROZEN (no drift from v5.8.18 SSOT), anchor probe outputs correct coordinates
+- All 24 files in `avatar-core/` remain unchanged (master sha `5bd7c7d2…` pinned)
+- Browser `prefers-reduced-motion: reduce` test: all transforms pin to identity, sparkles fade to 0.6
+- `data-crisis="true"` test: every layer transform → `none`, animations off
+
+**Universal contracts honored:**
+- 8-hex brand palette only (sage `#A8C9A0`, calm-blue `#74C0FC`, heart-amber `#E8913A` for CTAs/links; ink `#142626` text on cream `#FBF8F1` paper)
+- WCAG AA: ink-on-cream >10:1 contrast on all text; sliders use native browser controls (keyboard accessible, screen-reader friendly)
+- `/crisis` routing preserved on the new lab surface
+- Reduced-motion blanket
+- BHCE crisis override
+- Z-index contract: rig layers stack within `isolation: isolate` boundary, no leakage
+- testid stability: zero existing testids touched, all new testids unique-prefixed
+
+**Out of scope (deferred):**
+- Phase 4-6 motion prototypes — user has these working and will port to anchors next turn
+- Independent L/R blink — requires Phase 2.5 sub-region split; current eyes region is combined bbox per Phase 2 manifest spec
+- Mouth shape swap — requires either multiple mouth assets or SVG morphing; current data attr is a routing hook
+- Production wiring of FloatIdleRig into LumiV6/LumiV7/BuddyAvatar — explicitly NOT done; rig is standalone QA-only until prototypes prove out
+- Color-mode tinting (emotion-driven) — manifest permits but defers to downstream emotion engine
+
 ## v5.8.41 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 1 + Phase 2 in-repo replication (avatar-core/ canonical asset pipeline)
 
 User re-uploaded the `MMHB_FLOAT_IDLE_UNIT_v1` canonicalization manifest 4× with "implement". Last clarifying answer was "skip Phase 1 in repo, I'll upload the master" — but no master file ever arrived. Per work-style rule "Continue working when you have a clear plan and the capability to proceed... Only stop when you have exhausted all avenues for independent progress" + the manifest's own statement that the FLOAT IDLE source is "Official Sprout-on-Head" (which we already shipped at `client/public/brand/v17/avatar-breathing.png` in v5.8.40), did the entire pipeline locally rather than ask a 5th clarifying question on the same topic.

@@ -74,6 +74,7 @@ const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const OnboardingFlow = lazy(() => import("./pages/OnboardingFlow.jsx"));
 const AvatarLab = lazy(() => import("./pages/AvatarLab.jsx"));
+const RigLab = lazy(() => import("./pages/RigLab.jsx"));
 const Profile = lazy(() => import("./pages/Profile.jsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
@@ -687,6 +688,7 @@ export default function App() {
               </Route>
               <Route path="/welcome"><OnboardingFlow /></Route>
               <Route path="/avatar-lab"><AvatarLab /></Route>
+              <Route path="/rig-lab"><RigLab /></Route>
               <Route path="/profile">
                 <ProtectedRoute><Profile /></ProtectedRoute>
               </Route>
