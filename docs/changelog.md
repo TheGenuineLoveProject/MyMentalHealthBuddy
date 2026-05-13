@@ -1,3 +1,40 @@
+## v5.8.47 — MMHB_FLOAT_IDLE_UNIT_v1 Phase 9: Interaction Systems (standalone, opt-in)
+
+User uploaded the Phase 9 verification report (2026-05-13, ALL PASS) documenting 5 interaction systems as working HTML/JSON prototypes; ported the spec values literally onto the v5.8.45 motion stack as a non-breaking opt-in layer. Per the locked rollout plan + 24h hero-watch contract, Phase 9 ships as a sandbox-only addition: new `interactive` prop on `FloatIdleAnimated` defaults to **false**, exposed at `/motion-lab` for QA only. Hero (v5.8.46), LumiV6 chat, BuddyAvatar — all pristine. Zero production wiring, zero existing testid drift.
+
+**Five interaction systems** (all sub-pixel, never attention-seeking, layered on top of any Phase 8 emotional state via CSS multiplier vars):
+
+1. **Hover awareness** — pointerenter on wrapper bbox → `--interaction-breath-mult: 0.93` (-7% ≈ -0.5s shift on 7.1s baseline), `--interaction-amplitude-mult: 0.95` (≈0.5px float settle on 10px), `--interaction-eye-settle-mult: 1.25` (20% slower = "eye soften"), `--interaction-glow-boost: 0.012` (8% of 0.15 baseline). 3s ease transition.
+
+2. **Proximity response** — pointer within 200px of wrapper center for ≥4 seconds → `--interaction-float-mult: 1.25` (drift -25%, longer cycles = calmer), `--interaction-breath-mult: 0.85` (+40% sync feel via shorter cycle), `--interaction-amplitude-mult: 0.85`, `--interaction-glow-boost: 0.006` (4%). Implementation: rAF-throttled distance check on `document.pointermove`, **no setInterval heartbeat** (no idle "look at me" attention bait). Build timer starts on first in-range, clears immediately on out-of-range.
+
+3. **Presence settle** — sustained proximity layered with hover. CSS combinator `[data-hover="true"][data-proximity="true"]` keeps the stronger glow boost (hover's 0.012 wins over proximity's 0.006) while proximity's deeper cycle multipliers take precedence (later in source). Net effect: when user hovers AND has lingered nearby, the avatar feels both deeply settled AND warmly noticed.
+
+4. **Idle return** — pointer leaves all zones → all data attributes clear → CSS multiplier vars revert to base (1 / 0) → CSS `transition: background 3s cubic-bezier(0.4, 0, 0.2, 1)` on the glow gradient handles the gentle cross-fade. Cycle changes snap (existing v5.8.45 limitation, documented). Under reduced motion: glow transition pinned to `none` so idle return is instant per spec.
+
+5. **Click acknowledgment** — pointerdown on wrapper → `data-clicked="true"` for 600ms (JS setTimeout) → `--interaction-glow-boost: 0.05` brief pulse → CSS transition decays it over 3s after attribute clears. Layered combinators (`[data-clicked="true"][data-hover="true"]` = 0.062, `[data-clicked="true"][data-proximity="true"]` = 0.056) so the click pulse stacks correctly on top of any active interaction. **No body motion change** — this is acknowledgment, not button feedback.
+
+**Architecture (zero JS-driven transforms):** All visual work in CSS via three new boolean data attributes on the wrapper (`data-hover`, `data-proximity`, `data-clicked`). JS hook only toggles attributes — no inline styles, no per-frame DOM writes, no rAF loops touching styles. Existing v5.8.45 keyframes/animation rules refactored to consume `calc(var(--cycle) * var(--interaction-X-mult, 1))` so multipliers default to identity (1) and Phase 8 behavior is byte-for-byte preserved when `interactive={false}`. Float keyframe extends to `calc(-10px * var(--float-amplitude, 1) * var(--interaction-amplitude-mult, 1))`. Glow gradient consumes `calc(var(--glow-opacity) + var(--interaction-glow-boost, 0))` so all four boost layers (hover/proximity/clicked/combinations) cleanly stack.
+
+**Crisis safety (BHCE asymmetric-risk):** 3 independent layers — (a) JSX `interactionsOn = interactive && !crisis` so listeners NEVER attach during crisis, (b) JSX clears all interaction state on crisis flip (`setHovered(false); setProximate(false); setClicked(false)`), (c) CSS `[data-crisis="true"]` block pins all 5 multipliers + glow boost to baseline with `!important`. Any one suffices; belt-and-suspenders per V34 BHCE contract.
+
+**Reduced-motion safety:** Per Phase 9 spec — hover/proximity → static glow only (no cycle/amplitude shifts), click → static glow pulse, idle return → instant. Implementation: `@media (prefers-reduced-motion: reduce)` block pins the 4 cycle/amplitude multipliers to `1 !important` while leaving `--interaction-glow-boost` free to respond, AND sets `transition: none` on the glow so idle return snaps instead of cross-fading. Listeners stay attached so the static glow can react (per spec — gentle awareness is preserved even when motion is suppressed).
+
+**Ethics contract verified** (per Phase 9 verification report): no tracking, no analytics, no logging of pointer position, no setInterval heartbeat (zero idle attention bait), all effects sub-pixel or sub-percent, click pulse decays in 600ms (no sustained attention pull), idle return is gentle (no abandonment signal). User always in control.
+
+**Files touched:**
+- `client/src/components/lumi/FloatIdleAnimated.jsx` — new `interactive` prop (default false), `wrapperRef`, `useEffect` hook for pointerenter/leave + pointerdown + rAF-throttled document pointermove with 4s build timer, 4 new data attributes, `interactionsOn` derived flag.
+- `client/src/components/lumi/FloatIdleAnimated.css` — 5 new interaction multiplier vars at base, refactored 5 animation rules (floating, breathing, eye-settling, mouth, shadow) to consume multipliers via calc(), refactored floating @keyframes amplitude calc, refactored glow gradient opacity calc, 6 new interaction state blocks (hover, proximity, hover+proximity, clicked, clicked+hover, clicked+proximity), extended `[data-crisis="true"]` to pin all multipliers, extended reduced-motion @media block to pin cycle/amplitude multipliers + clear glow transition.
+- `client/src/pages/MotionLab.jsx` — new `interactive` state + checkbox (disabled when crisis), inline hint paragraph when active, new `INTERACTION_SYSTEMS` table with 5 rows + ethics callout. Existing checkbox/state management untouched.
+
+**testids added:** `checkbox-motion-interactive`, `row-interaction-hover-awareness`, `row-interaction-proximity-response`, `row-interaction-presence-settle`, `row-interaction-idle-return`, `row-interaction-click-ack`, `data-interactive`, `data-hover`, `data-proximity`, `data-clicked`. v5.8.45/v5.8.46 testids untouched (no drift).
+
+tsc clean. Build clean. `/motion-lab` screenshot verified — Phase 4-8 motion still running identically with `interactive={false}` (default); flipping checkbox attaches listeners + activates hover/proximity/click responses with all five systems live. Hero on `/` (v5.8.46) **completely untouched** — `interactive` prop omitted in the hero render, defaults to false, hero behaves exactly as it did during the 24h watch.
+
+**Phase A → B handoff still pending:** After hero stabilizes, v5.8.48 will wire LumiV6 chat avatar to `state="comforting"` (and may opt into `interactive={true}` for the chat surface where pointer presence is meaningful). Phase B → C is BuddyAvatar with `state="peacefulJoy"` after chat stabilizes.
+
+⸻
+
 ## v5.8.46 — MMHB_FLOAT_IDLE_UNIT_v1 Production Wiring (Hero, Phase A: WebP + CanvaLanding)
 
 User signed off on surgical 3-step rollout: hero only first, watch 24h, then chat (LumiV6), then BuddyAvatar. Per-surface defaults locked: hero=calmIdle, chat=comforting, BuddyAvatar=peacefulJoy. Performance non-negotiable: WebP siblings generated FIRST.

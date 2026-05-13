@@ -32,10 +32,22 @@ const MOTION_SYSTEMS = [
   { phase: 7, name: "Leg settling",   property: "leg-l/r translateY", range: "±3px inertia",  cycle: "9.7s / 10.1s desynced" },
 ];
 
+// Phase 9 — Interaction systems. Only active when `interactive` prop is on.
+// Each row = one of the 5 living awareness behaviors per the verification
+// report. Ethics: never attention-seeking, no tracking, sub-pixel only.
+const INTERACTION_SYSTEMS = [
+  { name: "Hover awareness",    trigger: "pointerenter on bbox",      effect: "breath -7%, amplitude -5%, eye soften 20%, glow +8%", transition: "3s ease" },
+  { name: "Proximity response", trigger: "within 200px for ≥4s",      effect: "float drift -25%, breath sync +40%, amplitude -15%, glow +4%", transition: "4s build → 3s ease" },
+  { name: "Presence settle",    trigger: "sustained proximity",       effect: "deeper sync (combined with hover for max calm)", transition: "layered" },
+  { name: "Idle return",        trigger: "pointer leaves all zones",  effect: "all multipliers → 1, glow → state baseline", transition: "3s ease (instant under reduced-motion)" },
+  { name: "Click ack",          trigger: "pointerdown on avatar",     effect: "glow pulse +0.05, decays over 600ms", transition: "3s ease" },
+];
+
 export default function MotionLab() {
   const [size, setSize] = useState(420);
   const [crisis, setCrisis] = useState(false);
   const [state, setState] = useState("calmIdle");
+  const [interactive, setInteractive] = useState(false);
 
   return (
     <main
@@ -91,7 +103,7 @@ export default function MotionLab() {
           }}
           data-testid="section-motion-preview"
         >
-          <FloatIdleAnimated size={size} state={state} crisis={crisis} />
+          <FloatIdleAnimated size={size} state={state} crisis={crisis} interactive={interactive} />
           <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", width: "100%", maxWidth: 420 }}>
             <label htmlFor="motion-state" style={{ fontSize: "0.78rem", opacity: 0.7, fontWeight: 500 }}>
               Emotional state {crisis ? "(pinned to calmIdle by crisis)" : ""}
@@ -150,6 +162,23 @@ export default function MotionLab() {
             />
             <span>Crisis override (BHCE — pin all motion to identity)</span>
           </label>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.9rem" }}>
+            <input
+              type="checkbox"
+              checked={interactive}
+              onChange={(e) => setInteractive(e.target.checked)}
+              disabled={crisis}
+              data-testid="checkbox-motion-interactive"
+            />
+            <span>
+              Phase 9 interactive {crisis ? "(disabled by crisis)" : "(hover · proximity · click)"}
+            </span>
+          </label>
+          {interactive && !crisis && (
+            <p style={{ margin: 0, fontSize: "0.78rem", opacity: 0.7, textAlign: "center", maxWidth: 420 }}>
+              Move cursor near the avatar to see proximity build (4s). Hover for soft awareness. Click for a gentle glow pulse. Move away — Lumi gently returns to baseline.
+            </p>
+          )}
         </section>
 
         {/* Active motion table */}
@@ -215,6 +244,64 @@ export default function MotionLab() {
             }}
           >
             <strong>Identity preserved:</strong> silhouette unchanged, expression unchanged at rest, mouth never opens, no redesign or recolor. Reduced-motion + crisis both pause the entire motion stack.
+          </div>
+
+          {/* Phase 9 — Interaction systems table (only meaningful when toggled on) */}
+          <h2 style={{ margin: "1.25rem 0 0.5rem", fontSize: "1.05rem" }}>
+            Phase 9 — Interaction systems {interactive ? "(active)" : "(off)"}
+          </h2>
+          <p style={{ margin: "0 0 0.75rem", fontSize: "0.78rem", opacity: 0.7 }}>
+            Gentle environmental awareness. Layered ON TOP of the active emotional state via CSS multiplier vars — never replaces base motion, only modulates it. No tracking, no analytics, no attention loops.
+          </p>
+          <table
+            style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.76rem" }}
+          >
+            <thead>
+              <tr style={{ borderBottom: "1px solid rgba(168,201,160,0.3)" }}>
+                <th style={{ textAlign: "left", padding: "0.4rem 0.3rem", fontWeight: 600 }}>System</th>
+                <th style={{ textAlign: "left", padding: "0.4rem 0.3rem", fontWeight: 600 }}>Trigger</th>
+                <th style={{ textAlign: "left", padding: "0.4rem 0.3rem", fontWeight: 600 }}>Effect / Transition</th>
+              </tr>
+            </thead>
+            <tbody>
+              {INTERACTION_SYSTEMS.map((m, i) => (
+                <tr
+                  key={m.name}
+                  style={{
+                    borderBottom: i === INTERACTION_SYSTEMS.length - 1 ? "none" : "1px solid rgba(168,201,160,0.15)",
+                    opacity: interactive ? 1 : 0.5,
+                  }}
+                  data-testid={`row-interaction-${m.name.toLowerCase().replace(/\s+/g, "-")}`}
+                >
+                  <td style={{ padding: "0.5rem 0.3rem", verticalAlign: "top" }}>
+                    <code style={{ background: "rgba(232,145,58,0.18)", padding: "0.1rem 0.4rem", borderRadius: "0.25rem" }}>P9</code>
+                    <div style={{ marginTop: "0.25rem" }}>
+                      <strong style={{ fontWeight: 500 }}>{m.name}</strong>
+                    </div>
+                  </td>
+                  <td style={{ padding: "0.5rem 0.3rem", verticalAlign: "top", fontSize: "0.72rem", opacity: 0.85 }}>
+                    {m.trigger}
+                  </td>
+                  <td style={{ padding: "0.5rem 0.3rem", verticalAlign: "top", fontFamily: "monospace", opacity: 0.85, fontSize: "0.7rem" }}>
+                    {m.effect}
+                    <div style={{ opacity: 0.6, fontSize: "0.68rem", marginTop: "0.15rem" }}>{m.transition}</div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div
+            style={{
+              marginTop: "0.75rem",
+              padding: "0.6rem 0.75rem",
+              borderRadius: "0.5rem",
+              background: "rgba(232,145,58,0.08)",
+              fontSize: "0.72rem",
+              lineHeight: 1.5,
+              border: "1px solid rgba(232,145,58,0.2)",
+            }}
+          >
+            <strong>Ethics contract:</strong> Never attention-seeking · Never abandonment-signaling · No eye tracking · No surveillance · Sub-pixel only · User always in control · Crisis disables all interactions.
           </div>
         </aside>
       </div>

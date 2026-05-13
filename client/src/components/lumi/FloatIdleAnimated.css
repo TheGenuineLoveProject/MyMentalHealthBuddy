@@ -28,8 +28,10 @@
 /* ─── Phase 4: Floating (body translateY 0→-10px over 9.3s, ease) ─── */
 @keyframes float-idle-floating {
   0%, 100% { translate: 0 0; }
-  /* Amplitude scales with state (--float-amplitude: 0.4-1.2) */
-  50%      { translate: 0 calc(-10px * var(--float-amplitude, 1)); }
+  /* Amplitude scales with state (--float-amplitude: 0.4-1.2) AND with
+   * Phase 9 interaction multiplier (--interaction-amplitude-mult: 0.85-1)
+   * so hover/proximity gently settle the bob without changing its shape. */
+  50%      { translate: 0 calc(-10px * var(--float-amplitude, 1) * var(--interaction-amplitude-mult, 1)); }
 }
 
 /* ─── Phase 4: Shadow (synced with floating, 9.3s) ─── */
@@ -133,6 +135,18 @@
    * than interpolate on state change. Visible as a brief retime jump
    * mid-cycle; acceptable for QA lab. Pre-production wiring should
    * register them via @property (or interpolate via JS) for smoothness. */
+
+  /* Phase 9 — Interaction multipliers. Default to identity (1 / 0) so
+   * the avatar at rest behaves exactly like Phase 8 did. Interaction
+   * state blocks below override these to gently shift cycles, amplitude,
+   * and glow when the pointer hovers, lingers nearby, or clicks.
+   * Each multiplier is a SCALAR layered on top of the state-supplied
+   * base values, so emotional state and interaction state compose. */
+  --interaction-breath-mult: 1;
+  --interaction-float-mult: 1;
+  --interaction-amplitude-mult: 1;
+  --interaction-eye-settle-mult: 1;
+  --interaction-glow-boost: 0;
 }
 
 .float-idle-animated[data-state="grounding"] {
@@ -194,14 +208,25 @@
   border-radius: 50%;
   background: radial-gradient(
     circle at 50% 60%,
-    rgba(var(--glow-color), var(--glow-opacity)) 0%,
+    rgba(var(--glow-color), calc(var(--glow-opacity) + var(--interaction-glow-boost, 0))) 0%,
     rgba(var(--glow-color), 0) 65%
   );
   /* NOTE: gradient interpolation is engine-dependent and may step
    * rather than cross-fade on some browsers. Acceptable for QA lab;
    * pre-production wiring should refactor to a 2-layer opacity
-   * cross-fade (render previous + current glow, fade between them). */
+   * cross-fade (render previous + current glow, fade between them).
+   *
+   * Phase 8 baseline transition is 1.2s (v5.8.45 contract); Phase 9
+   * extends to 3s ONLY when interactive is on (data-interactive="true"
+   * on wrapper) so non-interactive surfaces — including the v5.8.46
+   * hero — keep their original feel. Click pulse decays via the same
+   * 3s ease under interactive mode so it feels like a soft
+   * acknowledgment, not a button press. */
   transition: background 1.2s ease-in-out;
+}
+
+.float-idle-animated[data-interactive="true"] .float-idle-animated__glow {
+  transition: background 3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Phase 8: explicit z-index contract so stacking is deterministic
@@ -210,21 +235,24 @@
 .float-idle-animated .float-idle-rig { z-index: 2; }
 
 /* ─── Activation: only when wrapper is animating ─── */
+/* Phase 9 — All cycle durations multiplied by interaction multipliers
+ * (default 1 = identity). Hover/proximity gently shift these to
+ * change the felt rhythm without changing motion shape. */
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] {
-  animation: float-idle-floating var(--float-cycle, 9.3s) ease-in-out infinite;
+  animation: float-idle-floating calc(var(--float-cycle, 9.3s) * var(--interaction-float-mult, 1)) ease-in-out infinite;
   will-change: translate;
 }
 
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="torso"] {
-  animation: float-idle-breathing var(--breath-cycle, 7.1s) ease-in-out infinite;
+  animation: float-idle-breathing calc(var(--breath-cycle, 7.1s) * var(--interaction-breath-mult, 1)) ease-in-out infinite;
   will-change: scale;
 }
 
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="eyes"] {
-  animation: float-idle-eye-settling 8.7s ease-in-out infinite;
+  animation: float-idle-eye-settling calc(8.7s * var(--interaction-eye-settle-mult, 1)) ease-in-out infinite;
   /* Override controlled-rig's transform-only transition so `scale`
      gets its own ease for the JS-driven blink (translate stays on the
-     8.7s settling animation, untouched). */
+     settling animation, untouched). */
   transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
               scale 100ms ease-in-out;
   will-change: translate, scale;
@@ -239,8 +267,8 @@
 }
 
 .float-idle-animated.is-animating .float-idle-rig[data-animated="true"] [data-rig-zone="mouth"] {
-  /* Mouth softness stays breath-synced: same var as torso breathing */
-  animation: float-idle-mouth-softness var(--breath-cycle, 7.1s) ease-in-out infinite;
+  /* Mouth softness stays breath-synced: same combined var as torso breathing */
+  animation: float-idle-mouth-softness calc(var(--breath-cycle, 7.1s) * var(--interaction-breath-mult, 1)) ease-in-out infinite;
   will-change: scale;
 }
 
@@ -269,13 +297,86 @@
 }
 
 .float-idle-animated.is-animating .float-idle-animated__shadow {
-  /* Shadow stays float-synced: same var as body floating */
-  animation: float-idle-shadow var(--float-cycle, 9.3s) ease-in-out infinite;
+  /* Shadow stays float-synced: same combined var as body floating */
+  animation: float-idle-shadow calc(var(--float-cycle, 9.3s) * var(--interaction-float-mult, 1)) ease-in-out infinite;
   transform-origin: center 86%; /* shadow ellipse y=860/1024 ≈ 86% */
   will-change: opacity, filter, scale;
 }
 
-/* ─── Crisis override: pin shadow to rest, kill all animations ─── */
+/* ─── Phase 9 — Interaction state blocks ─── */
+/* Each block layers ON TOP of the active emotional state by overriding
+ * the multiplier vars only. Order matters: hover < proximity < clicked.
+ * When multiple are active simultaneously, the deeper interaction
+ * (proximity > hover) wins for shared multipliers, and clicked stacks
+ * its glow boost on top of whichever is current.
+ *
+ * Spec values from MMHB_FLOAT_IDLE_UNIT_v1 Phase 9 verification report:
+ *   Hover     — float settle 0.5px (≈5% of 10px), breath -0.5s on 7.1s
+ *               (≈-7% = 0.93×), eye soften 20% (1.25× duration), glow
+ *               +8% intensity (0.012 boost on baseline 0.15).
+ *   Proximity — float drift -25% (1.25× duration so each oscillation is
+ *               longer/calmer), breathing +40% rhythmic sync (deepen
+ *               cycle to 0.85× = faster sync), amplitude -15%, glow
+ *               +4% intensity (0.006 boost).
+ *   Clicked   — gentle glow pulse +0.05 boost decaying via 3s ease.
+ *               Sub-percent body motion intentionally NOT changed —
+ *               no "button press" feel; this is acknowledgment, not
+ *               feedback. */
+.float-idle-animated[data-hover="true"] {
+  --interaction-breath-mult: 0.93;
+  --interaction-amplitude-mult: 0.95;
+  --interaction-eye-settle-mult: 1.25;
+  --interaction-glow-boost: 0.012;
+}
+
+.float-idle-animated[data-proximity="true"] {
+  --interaction-breath-mult: 0.85;
+  --interaction-float-mult: 1.25;
+  --interaction-amplitude-mult: 0.85;
+  --interaction-eye-settle-mult: 1.25;
+  --interaction-glow-boost: 0.006;
+}
+
+/* When BOTH hover AND proximity are true, proximity already wins above
+ * for shared multipliers (later in source). For glow we want the
+ * stronger of the two — proximity's 0.006 < hover's 0.012, so use
+ * a combined block to keep hover's glow when proximity adds depth. */
+.float-idle-animated[data-hover="true"][data-proximity="true"] {
+  --interaction-glow-boost: 0.012;
+}
+
+/* Click acknowledgment: brief +0.05 glow pulse over 600ms. Stacks on
+ * top of whichever interaction state is active by overriding the boost
+ * with the hover/proximity boost PLUS the pulse. */
+.float-idle-animated[data-clicked="true"] {
+  --interaction-glow-boost: 0.05;
+}
+.float-idle-animated[data-clicked="true"][data-hover="true"] {
+  --interaction-glow-boost: 0.062;
+}
+.float-idle-animated[data-clicked="true"][data-proximity="true"] {
+  --interaction-glow-boost: 0.056;
+}
+/* Triple combinator — when clicked AND both hover+proximity are active,
+ * use hover's stronger base (0.012) + click pulse (0.05) = 0.062 so the
+ * "presence settle" glow precedence (hover wins) carries through to the
+ * click pulse layer. Without this rule, source order would let
+ * [data-clicked][data-proximity]=0.056 win over [data-clicked][data-hover]=0.062. */
+.float-idle-animated[data-clicked="true"][data-hover="true"][data-proximity="true"] {
+  --interaction-glow-boost: 0.062;
+}
+
+/* ─── Crisis override: pin shadow to rest, kill all animations,
+ *     and force all interaction multipliers back to identity so
+ *     hover/proximity/click cannot color or destabilize the avatar
+ *     during a crisis routing path (asymmetric-risk safety). ─── */
+.float-idle-animated[data-crisis="true"] {
+  --interaction-breath-mult: 1 !important;
+  --interaction-float-mult: 1 !important;
+  --interaction-amplitude-mult: 1 !important;
+  --interaction-eye-settle-mult: 1 !important;
+  --interaction-glow-boost: 0 !important;
+}
 .float-idle-animated[data-crisis="true"] .float-idle-animated__shadow,
 .float-idle-animated[data-crisis="true"].is-animating .float-idle-animated__shadow {
   animation: none !important;
@@ -285,6 +386,11 @@
 }
 
 /* ─── Reduced-motion blanket ─── */
+/* Per Phase 9 spec: hover/proximity → static glow only (no cycle/
+ * amplitude shifts); click → static glow pulse; idle return → instant.
+ * Implementation: pin all cycle + amplitude multipliers to 1 so the
+ * paused base motion stays paused, but ALLOW --interaction-glow-boost
+ * to keep responding so the static glow can soften/warm/pulse. */
 @media (prefers-reduced-motion: reduce) {
   .float-idle-animated .float-idle-rig,
   .float-idle-animated .float-idle-rig [data-rig-zone],
@@ -295,5 +401,21 @@
     opacity: 0.55;
     filter: blur(3px);
     scale: 1;
+  }
+  /* Pin cycle/amplitude multipliers; let glow boost still respond. */
+  .float-idle-animated[data-hover="true"],
+  .float-idle-animated[data-proximity="true"],
+  .float-idle-animated[data-clicked="true"] {
+    --interaction-breath-mult: 1 !important;
+    --interaction-float-mult: 1 !important;
+    --interaction-amplitude-mult: 1 !important;
+    --interaction-eye-settle-mult: 1 !important;
+  }
+  /* Idle return = instant under reduced motion (per spec). Scoped to
+   * interactive surfaces only so the v5.8.45 baseline 1.2s glow
+   * cross-fade for state changes is preserved on non-interactive
+   * surfaces (e.g. the v5.8.46 hero). */
+  .float-idle-animated[data-interactive="true"] .float-idle-animated__glow {
+    transition: none;
   }
 }

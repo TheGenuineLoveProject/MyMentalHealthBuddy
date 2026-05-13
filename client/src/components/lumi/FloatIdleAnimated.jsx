@@ -93,6 +93,14 @@ export default function FloatIdleAnimated({
   size = 420,
   state = "calmIdle",
   crisis = false,
+  // v5.8.47 — Phase 9 interaction systems. When true, the avatar gently
+  // notices pointer presence: hover awareness, proximity response (within
+  // 200px sustained 4s), click acknowledgment (600ms glow pulse), and
+  // automatic idle return when the pointer leaves. Default false so
+  // the homepage hero (v5.8.46) and other production surfaces stay
+  // exactly as they are during the 24h hero-stability watch. Crisis
+  // overrides → all listeners disabled, baseline pinned.
+  interactive = false,
   ariaLabel = "Lumi, peacefully floating",
   className = "",
   style = {},
@@ -103,8 +111,10 @@ export default function FloatIdleAnimated({
   "data-testid": dataTestId = "float-idle-animated",
 }) {
   const rigRef = useRef(null);
+  const wrapperRef = useRef(null);
   const reducedMotion = usePrefersReducedMotion();
   const animationsOn = !crisis && !reducedMotion;
+  const interactionsOn = interactive && !crisis;
   // Crisis pins to calmIdle baseline (asymmetric-risk safety: never
   // surface elevated/comforting states during a crisis routing path).
   const effectiveState = crisis
@@ -112,6 +122,113 @@ export default function FloatIdleAnimated({
     : VALID_STATES.has(state)
       ? state
       : "calmIdle";
+
+  // ──────────────────────────────────────────────────────────────────
+  // Phase 9 — Interaction systems (hover / proximity / click / idle return)
+  //
+  // Five gently-aware behaviors, all opt-in via `interactive` prop. The
+  // CSS does ALL the visual work via three data attributes on the
+  // wrapper (`data-hover`, `data-proximity`, `data-clicked`); JS only
+  // toggles those attributes. This keeps the motion contract: no JS-
+  // driven transforms, no per-frame DOM writes, no rAF loops touching
+  // styles directly. Reduced-motion is intentionally NOT short-circuited
+  // here — listeners still attach so the static glow can react; the CSS
+  // @media (prefers-reduced-motion) block filters out cycle/amplitude
+  // changes and only allows glow opacity to respond.
+  //
+  // Ethics contract (per Phase 9 verification report):
+  //   - No tracking, no analytics, no logging of pointer position
+  //   - No interval-based heartbeat (no idle "look at me" attention bait)
+  //   - All effects sub-pixel or sub-percent
+  //   - Click pulse decays in 600ms (no sustained attention pull)
+  //   - Idle return is gentle (CSS transition handles it, no JS state)
+  // ──────────────────────────────────────────────────────────────────
+  const [hovered, setHovered] = useState(false);
+  const [proximate, setProximate] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    if (!interactionsOn) {
+      setHovered(false);
+      setProximate(false);
+      setClicked(false);
+      return undefined;
+    }
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return undefined;
+
+    // Hover: pointerenter/leave on wrapper bounding box
+    const onEnter = () => setHovered(true);
+    const onLeave = () => setHovered(false);
+    wrapper.addEventListener("pointerenter", onEnter);
+    wrapper.addEventListener("pointerleave", onLeave);
+
+    // Click acknowledgment: 600ms data-clicked window (CSS handles the
+    // gentle glow pulse inside that window; under reduced-motion the
+    // pulse becomes a static opacity bump per spec).
+    let clickClearTimer = null;
+    const onPointerDown = () => {
+      setClicked(true);
+      if (clickClearTimer) clearTimeout(clickClearTimer);
+      clickClearTimer = setTimeout(() => setClicked(false), 600);
+    };
+    wrapper.addEventListener("pointerdown", onPointerDown);
+
+    // Proximity: pointer within 200px of wrapper center for ≥4 seconds.
+    // Implementation: rAF-throttled distance check on document
+    // pointermove. Build timer (4000ms) starts when first within range,
+    // clears immediately on out-of-range. No setInterval heartbeat —
+    // we only react to actual cursor activity (no attention-seeking).
+    let rafId = null;
+    let buildTimer = null;
+    let lastInRange = false;
+    const PROX_RADIUS = 200;
+    const BUILD_MS = 4000;
+
+    const checkDistance = (x, y) => {
+      const node = wrapperRef.current;
+      if (!node) return;
+      const r = node.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = x - cx;
+      const dy = y - cy;
+      const inRange = (dx * dx + dy * dy) <= (PROX_RADIUS * PROX_RADIUS);
+      if (inRange === lastInRange) return;
+      lastInRange = inRange;
+      if (inRange) {
+        if (buildTimer) clearTimeout(buildTimer);
+        buildTimer = setTimeout(() => setProximate(true), BUILD_MS);
+      } else {
+        if (buildTimer) {
+          clearTimeout(buildTimer);
+          buildTimer = null;
+        }
+        setProximate(false);
+      }
+    };
+
+    const onPointerMove = (e) => {
+      if (rafId) return; // already scheduled
+      const x = e.clientX;
+      const y = e.clientY;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        checkDistance(x, y);
+      });
+    };
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    return () => {
+      wrapper.removeEventListener("pointerenter", onEnter);
+      wrapper.removeEventListener("pointerleave", onLeave);
+      wrapper.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointermove", onPointerMove);
+      if (clickClearTimer) clearTimeout(clickClearTimer);
+      if (buildTimer) clearTimeout(buildTimer);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [interactionsOn]);
 
   // Random blink scheduler per Phase 5 spec: 3-8s random interval,
   // 200ms duration, scaleY compression. JS-driven because the timing
@@ -150,11 +267,16 @@ export default function FloatIdleAnimated({
 
   return (
     <div
+      ref={wrapperRef}
       className={`float-idle-animated${animationsOn ? " is-animating" : ""}${
-        className ? " " + className : ""
-      }`}
+        interactionsOn ? " is-interactive" : ""
+      }${className ? " " + className : ""}`}
       data-crisis={crisis ? "true" : "false"}
       data-state={effectiveState}
+      data-interactive={interactionsOn ? "true" : "false"}
+      data-hover={interactionsOn && hovered ? "true" : "false"}
+      data-proximity={interactionsOn && proximate ? "true" : "false"}
+      data-clicked={interactionsOn && clicked ? "true" : "false"}
       data-testid={dataTestId}
       style={{
         width: size,
