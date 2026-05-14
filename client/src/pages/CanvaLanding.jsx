@@ -677,11 +677,11 @@ export default function CanvaLanding() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
             {[
-              { headline: "When your thoughts race.", body: "Anxiety doesn't have to win the moment. Breathe with Lumi.", to: "/tools/breathing", accent: "calm", testid: "card-validation-anxiety" },
-              { headline: "When life feels heavy.", body: "Burnout is your mind asking for softer days. Let's start with one breath.", to: "/check-in", accent: "blush", testid: "card-validation-burnout" },
-              { headline: "When your mind won't slow down.", body: "ADHD overwhelm is real. Lumi meets your pace, not the other way around.", to: "/tools/grounding", accent: "warmth", testid: "card-validation-adhd" },
+              { headline: "When your thoughts race.", body: "Anxiety doesn't have to win the moment. Breathe with Lumi.", to: "/breathe", accent: "calm", testid: "card-validation-anxiety" },
+              { headline: "When life feels heavy.", body: "Burnout is your mind asking for softer days. Let's start with one breath.", to: "/checkin", accent: "blush", testid: "card-validation-burnout" },
+              { headline: "When your mind won't slow down.", body: "ADHD overwhelm is real. Lumi meets your pace, not the other way around.", to: "/breathe", accent: "warmth", testid: "card-validation-adhd" },
               { headline: "When you need support.", body: "Loneliness lifts when someone shows up — patient, present, never weary.", to: "/chat", accent: "empathy", testid: "card-validation-loneliness" },
-              { headline: "When you want to become stronger.", body: "Growth is gentle. Healing is non-linear. There's no wrong way to begin.", to: "/growth", accent: "sage", testid: "card-validation-growth" }
+              { headline: "When you want to become stronger.", body: "Growth is gentle. Healing is non-linear. There's no wrong way to begin.", to: "/journal", accent: "sage", testid: "card-validation-growth" }
             ].map((card) => {
               const accentTokens = {
                 calm: { bg: 'rgba(var(--glp-calm-rgb, 116, 192, 252), 0.10)', dot: 'var(--glp-calm, #74C0FC)' },
@@ -1158,6 +1158,35 @@ export default function CanvaLanding() {
       </section>
 
       <NextStepCTA context="general" />
+
+      {/* v5.8.66 — Sticky bottom "Talk to Lumi" CTA bar (adapter mode landing fix).
+          Sage→teal gradient matches existing brand tokens. Crisis link preserved
+          via SafetyFooter + footer block below; this bar is additive only. */}
+      <div
+        className="sticky bottom-0 z-[110] backdrop-blur-md py-3 pl-5 pr-16 md:pr-20 flex items-center justify-between"
+        style={{
+          background: 'rgba(255,255,255,0.92)',
+          borderTop: '1px solid var(--glp-sage-15)'
+        }}
+        data-testid="sticky-cta-talk-to-lumi"
+      >
+        <div>
+          <p className="font-serif text-sm font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
+            Need a moment?
+          </p>
+          <p className="text-[11px]" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
+            Lumi is here to listen
+          </p>
+        </div>
+        <Link
+          href="/chat"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg whitespace-nowrap"
+          style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+          data-testid="link-sticky-cta-chat"
+        >
+          <MessageCircle size={14} aria-hidden="true" /> Talk to Lumi
+        </Link>
+      </div>
 
       <footer className="py-10 px-6" style={{ background: 'var(--glp-paper)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-[1100px] mx-auto px-4 md:px-8">
