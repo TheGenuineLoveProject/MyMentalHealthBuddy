@@ -25,6 +25,7 @@ import {
   FORBIDDEN_EFFECTS,
   auditPreset,
   containsForbiddenEffect,
+  sanitizeAudioForPlayback,
 } from "../governance/presetSafetyRules";
 
 const STATE_TO_NAME: Record<SceneState, string> = {
@@ -162,6 +163,102 @@ describe("resolvePreset", () => {
   });
 });
 
+// ─── Architect-driven hardening tests ───────────────────────────────────────
+// Closes the 3 severe findings from the Phase 19 review:
+//   1. Runtime mutability bypass of SCENE_REGISTRY (TS readonly only)
+//   2. Audio sink lacked runtime guards (only audit-time)
+//   3. Crossfade was effectively a teleport (previous layer painted at 0)
+// (The crossfade fix lives in useScenePreset and is verified by the
+//  presence of the new `previousFading` field exposed by the hook.)
+
+describe("Architect hardening — runtime immutability", () => {
+  it("SCENE_REGISTRY is frozen at runtime (mutation no-ops)", () => {
+    expect(Object.isFrozen(SCENE_REGISTRY)).toBe(true);
+    // Try to swap a preset reference — frozen registry must reject silently
+    // (non-strict) or throw (strict). Either way, the original must persist.
+    const original = SCENE_REGISTRY.calm;
+    try {
+      // @ts-expect-error — runtime mutation attempt
+      SCENE_REGISTRY.calm = SCENE_REGISTRY.sleepy;
+    } catch {
+      /* strict-mode TypeError is acceptable */
+    }
+    expect(SCENE_REGISTRY.calm).toBe(original);
+    expect(resolvePreset("calm").internalName).toBe("Still Meadow");
+  });
+
+  it("each preset is deep-frozen (nested mutation rejected)", () => {
+    for (const p of listPresets()) {
+      expect(Object.isFrozen(p)).toBe(true);
+      expect(Object.isFrozen(p.particles)).toBe(true);
+      expect(Object.isFrozen(p.fog)).toBe(true);
+      expect(Object.isFrozen(p.background)).toBe(true);
+      // Attempt to mutate a numeric ceiling field.
+      const before = p.lighting;
+      try {
+        // @ts-expect-error — runtime mutation attempt
+        p.lighting = 0.99;
+      } catch {
+        /* strict-mode TypeError is acceptable */
+      }
+      expect(p.lighting).toBe(before);
+    }
+  });
+});
+
+describe("Architect hardening — audio sink safety", () => {
+  it("sanitizeAudioForPlayback returns null for null audio", () => {
+    expect(sanitizeAudioForPlayback(null)).toBeNull();
+    expect(sanitizeAudioForPlayback(undefined)).toBeNull();
+  });
+  it("clamps over-ceiling volume down to MAX_AUDIO_VOLUME", () => {
+    const out = sanitizeAudioForPlayback({
+      description: "x",
+      src: "/audio/ok.mp3",
+      volume: 0.95,
+      loop: true,
+    });
+    expect(out?.volume).toBe(MAX_AUDIO_VOLUME);
+    expect(out?.src).toBe("/audio/ok.mp3");
+  });
+  it("clamps NaN / negative volume to 0", () => {
+    expect(
+      sanitizeAudioForPlayback({
+        description: "x",
+        src: "/audio/ok.mp3",
+        volume: -1,
+        loop: false,
+      })?.volume,
+    ).toBe(0);
+    expect(
+      sanitizeAudioForPlayback({
+        description: "x",
+        src: "/audio/ok.mp3",
+        volume: Number.NaN,
+        loop: false,
+      })?.volume,
+    ).toBe(0);
+  });
+  it("nulls out src referencing a forbidden effect", () => {
+    const out = sanitizeAudioForPlayback({
+      description: "x",
+      src: "/audio/dopamine-loop.mp3",
+      volume: 0.05,
+      loop: true,
+    });
+    expect(out?.src).toBeNull();
+  });
+  it("preserves benign src/volume/loop", () => {
+    const out = sanitizeAudioForPlayback({
+      description: "soft piano",
+      src: "/audio/piano.mp3",
+      volume: 0.07,
+      loop: true,
+    });
+    expect(out).toEqual({ src: "/audio/piano.mp3", volume: 0.07, loop: true });
+  });
+});
+
 describe("Public barrel surface", () => {
   it("exposes the documented API and does NOT leak internal mutators", async () => {
     const barrel = await import("../index");
@@ -184,6 +281,7 @@ describe("Public barrel surface", () => {
       "auditPreset",
       "assertPresetCompliant",
       "containsForbiddenEffect",
+      "sanitizeAudioForPlayback",
     ]) {
       expect(exposed).toContain(name);
     }

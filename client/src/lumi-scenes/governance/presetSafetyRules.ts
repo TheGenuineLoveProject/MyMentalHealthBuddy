@@ -160,6 +160,35 @@ export function auditPreset(p: ScenePreset): AuditFinding[] {
   return findings;
 }
 
+/**
+ * Sink-time audio sanitizer. Used by `ScenePresetAudio` at playback time
+ * (not just at audit time) so that even if a host swaps in an unaudited
+ * preset, the audio sink fails closed:
+ *
+ *  - `null` audio → `null` (silence).
+ *  - Volume above ceiling → clamped down to MAX_AUDIO_VOLUME.
+ *  - Volume below 0 / NaN → 0 (silence).
+ *  - `src` referencing a forbidden effect → `null` src (silence).
+ *  - Non-string `src` → `null` src.
+ *
+ * Returns a NEW object — never mutates input (which may be frozen).
+ */
+export function sanitizeAudioForPlayback(
+  audio: ScenePreset["audio"] | null | undefined,
+): { src: string | null; volume: number; loop: boolean } | null {
+  if (!audio) return null;
+  // Clamp volume.
+  let volume = typeof audio.volume === "number" ? audio.volume : 0;
+  if (Number.isNaN(volume) || volume < 0) volume = 0;
+  if (volume > MAX_AUDIO_VOLUME) volume = MAX_AUDIO_VOLUME;
+  // Validate src.
+  let src: string | null = null;
+  if (typeof audio.src === "string" && audio.src.length > 0) {
+    src = containsForbiddenEffect(audio.src) ? null : audio.src;
+  }
+  return { src, volume, loop: !!audio.loop };
+}
+
 /** Convenience: throws if the preset has any audit findings. */
 export function assertPresetCompliant(p: ScenePreset): void {
   const findings = auditPreset(p);

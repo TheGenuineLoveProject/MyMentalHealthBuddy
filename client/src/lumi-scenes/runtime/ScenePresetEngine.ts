@@ -89,15 +89,31 @@ import { softHorizon } from "../presets/softHorizon";
 import { tinyBloom } from "../presets/tinyBloom";
 import { holdingSpace } from "../presets/holdingSpace";
 
-export const SCENE_REGISTRY: Readonly<Record<SceneState, ScenePreset>> = {
-  calm: stillMeadow,
-  comforting: gentleLantern,
-  reflective: quietOrbit,
-  sleepy: cloudRest,
-  grounding: softHorizon,
-  joySoft: tinyBloom,
-  concernSoft: holdingSpace,
+// Deep-freeze every preset (and the registry) at module load so that
+// host code cannot mutate `SCENE_REGISTRY[state]` post-import to bypass
+// the module-load audit. TypeScript `Readonly` is compile-time only;
+// `Object.freeze` is the runtime contract.
+function deepFreeze<T>(obj: T): T {
+  if (obj === null || typeof obj !== "object" || Object.isFrozen(obj)) return obj;
+  for (const key of Object.keys(obj as object)) {
+    const value = (obj as Record<string, unknown>)[key];
+    if (value && typeof value === "object") deepFreeze(value);
+  }
+  return Object.freeze(obj);
+}
+
+const _registry: Record<SceneState, ScenePreset> = {
+  calm: deepFreeze(stillMeadow),
+  comforting: deepFreeze(gentleLantern),
+  reflective: deepFreeze(quietOrbit),
+  sleepy: deepFreeze(cloudRest),
+  grounding: deepFreeze(softHorizon),
+  joySoft: deepFreeze(tinyBloom),
+  concernSoft: deepFreeze(holdingSpace),
 };
+
+export const SCENE_REGISTRY: Readonly<Record<SceneState, ScenePreset>> =
+  Object.freeze(_registry);
 
 // Module-load guards: registry shape and state↔preset coherence.
 if (Object.keys(SCENE_REGISTRY).length !== 7) {

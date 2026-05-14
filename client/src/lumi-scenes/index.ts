@@ -57,5 +57,6 @@ export {
   containsForbiddenEffect,
   auditPreset,
   assertPresetCompliant,
+  sanitizeAudioForPlayback,
 } from "./governance/presetSafetyRules";
 export type { AuditFinding } from "./governance/presetSafetyRules";

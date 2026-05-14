@@ -26,6 +26,7 @@ import {
 import { useScenePreset } from "../runtime/useScenePreset";
 import {
   MIN_TRANSITION_MS,
+  sanitizeAudioForPlayback,
 } from "../governance/presetSafetyRules";
 import type { SceneState, ScenePreset } from "../runtime/ScenePresetEngine";
 
@@ -57,7 +58,7 @@ export function SceneTransitionController({
   style,
   disableAudio = true, // Phase 19 ships with audio gated off by default
 }: SceneTransitionControllerProps) {
-  const { currentPreset, previousPreset, isTransitioning, setSceneState } =
+  const { currentPreset, previousPreset, isTransitioning, previousFading, setSceneState } =
     useScenePreset(initialState);
 
   // Sync external `state` prop into the internal hook.
@@ -98,13 +99,25 @@ export function SceneTransitionController({
       {previousPreset ? (
         <SceneLayer
           preset={previousPreset}
-          opacity={isTransitioning ? 0 : 1}
+          // First paint: opacity 1. After requestAnimationFrame fires inside
+          // useScenePreset, previousFading flips true → CSS transitions 1→0
+          // over MIN_TRANSITION_MS. Without this two-phase flip, the layer
+          // would paint at 0 from frame 1 (effectively a teleport swap).
+          opacity={previousFading ? 0 : 1}
           transitionStyle={transitionStyle}
           zBase={5}
           keyId={`prev-${previousPreset.state}`}
           ariaHidden
         />
       ) : null}
+      {/* isTransitioning is consumed via data-attribute for QA visibility. */}
+      <span
+        data-testid="scene-transition-flag"
+        data-transitioning={isTransitioning ? "true" : "false"}
+        style={{ display: "none" }}
+        aria-hidden
+      />
+
       {!disableAudio && currentPreset.audio?.src ? (
         <ScenePresetAudio audio={currentPreset.audio} />
       ) : null}
@@ -212,11 +225,15 @@ function SceneLayer({
 
 function ScenePresetAudio({ audio }: { audio: NonNullable<ScenePreset["audio"]> }) {
   const ref = useRef<HTMLAudioElement | null>(null);
+  // Sink-time sanitization: even if a host swaps in an unaudited preset
+  // post-import, the audio sink fails closed (volume clamped to ceiling,
+  // forbidden src nulled out → silence).
+  const safe = useMemo(() => sanitizeAudioForPlayback(audio), [audio]);
   useEffect(() => {
     const el = ref.current;
-    if (!el || !audio.src) return;
-    el.volume = audio.volume;
-    el.loop = audio.loop;
+    if (!el || !safe || !safe.src) return;
+    el.volume = safe.volume;
+    el.loop = safe.loop;
     const p = el.play();
     if (p && typeof p.catch === "function") {
       p.catch(() => {/* autoplay restrictions — silent */});
@@ -224,11 +241,12 @@ function ScenePresetAudio({ audio }: { audio: NonNullable<ScenePreset["audio"]> 
     return () => {
       el.pause();
     };
-  }, [audio]);
+  }, [safe]);
+  if (!safe || !safe.src) return null;
   return (
     <audio
       ref={ref}
-      src={audio.src ?? undefined}
+      src={safe.src}
       data-testid="scene-audio"
       aria-hidden
     />
