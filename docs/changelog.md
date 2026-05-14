@@ -1,3 +1,140 @@
+## v5.8.64 — Phase 32–36: Five new opt-in modules (cbt / tracker / crisis / library / agent)
+
+Five standalone opt-in modules at `client/src/lumi-{cbt,tracker,crisis,library,agent}/`. Same shipping pattern as v5.8.51-63 — zero production wiring, zero new npm dependencies, zero files outside the five new directories modified. Each module has its own barrel + verification checklist + governance file with module-load floor guards.
+
+### Files (40 total)
+
+**lumi-cbt** (8): `worksheets/thoughtRecord.ts`, `worksheets/behavioralActivation.ts`, `worksheets/cognitiveDefusion.ts`, `engine/CBTSessionEngine.ts`, `engine/useCBTSession.ts`, `governance/cbtSafetyRules.ts`, `verification/phase32-checklist.md`, `index.ts`.
+
+**lumi-tracker** (7): `mood/moodEntry.ts`, `habits/habitTracker.ts`, `visualization/moodChart.ts`, `visualization/habitHeatmap.ts`, `governance/trackerPrivacyRules.ts`, `verification/phase33-checklist.md`, `index.ts`.
+
+**lumi-crisis** (6): `resources/crisisResources.ts`, `components/CrisisPanel.tsx`, `components/CrisisTriggerDetector.ts`, `governance/crisisSafetyRules.ts`, `verification/phase34-checklist.md`, `index.ts`.
+
+**lumi-library** (6): `content/libraryCatalog.ts`, `content/libraryDownloads.ts`, `components/LibraryCard.tsx`, `governance/librarySafetyRules.ts`, `verification/phase35-checklist.md`, `index.ts`.
+
+**lumi-agent** (8): `prompts/lumiSystemPrompt.ts`, `prompts/lumiSafetyGuardrails.ts`, `runtime/AgentRuntime.ts`, `runtime/useLumiAgent.ts`, `feedback/feedbackLoop.ts`, `governance/agentGovernanceRules.ts`, `verification/phase36-checklist.md`, `index.ts`.
+
+### Phase 32 — lumi-cbt (CBT worksheets engine)
+
+- **Thought Record** (`worksheets/thoughtRecord.ts`) — frozen `THOUGHT_RECORD_TEMPLATE`, `createThoughtRecord(situation)`, `validateThoughtRecord(record)` returns missing-field list including out-of-range emotion intensities (0-10 floor).
+- **Behavioral Activation** (`worksheets/behavioralActivation.ts`) — `addActivity(schedule, activity)` throws `ValuesBasedViolationError` if the activity text matches `should | must | have to | ought to | supposed to`. `calculatePleasureMasteryScores(schedule)` returns averages over completed activities only.
+- **Cognitive Defusion** (`worksheets/cognitiveDefusion.ts`) — three frozen ACT-derived exercises (`leaves-on-a-stream`, `labeling-thoughts`, `word-repetition`) with text-only instructions. No animation, no completion %, no gamification.
+- **Engine** (`engine/CBTSessionEngine.ts`) — in-memory by default with hydratable `replaceSessions()` + consent-revoke `clear()`; `submitWorksheet`/`abandonSession` are state-machine transitions (refuses to re-transition a non-`in-progress` session).
+- **Hook** (`engine/useCBTSession.ts`) — derives `{totalCompleted, totalAbandoned, avgCompletionTimeMs, mostUsedWorksheet}` from session list (no analytics persisted).
+- **Governance** (`governance/cbtSafetyRules.ts`) — 7 rules (never-replace-therapy / no-diagnostic-language / no-severity-assessment / self-harm-triggers-crisis / always-include-exit-path / no-should-statements / reading-level-grade-6) with module-load floor `>= 7`. `containsSelfHarmIndicator(text)` matches 7 phrases.
+
+### Phase 33 — lumi-tracker (mood + habit tracker)
+
+- **Mood entry** (`mood/moodEntry.ts`) — frozen 1-5 scale (`Very Low`/`Low`/`Neutral`/`Good`/`Very Good`); `validateMoodEntry` rejects out-of-range level / sleepHours / intensity / invalid timestamp.
+- **Habit tracker** (`habits/habitTracker.ts`) — `createHabit` defaults `streakGuard: true` (trauma-informed default); `getPracticeStatus()` ALWAYS returns `PRACTICE_COPY = "You're building a practice."` — there is no `getStreak()` function in the module by design. Streaks are architecturally absent.
+- **Mood chart** (`visualization/moodChart.ts`) — pure function returns `{labels, values, trend, average, highest, lowest}`; trend computed via simple linear regression over level-vs-index with thresholds `slope > +0.05 → improving`, `slope < -0.05 → declining`, else `stable`.
+- **Habit heatmap** (`visualization/habitHeatmap.ts`) — pure function; `intensity ∈ [0, 1]` is rolling 7-day completion ratio, never a streak count.
+- **Governance** (`governance/trackerPrivacyRules.ts`) — 6 rules (client-side-by-default / no-server-sync-without-consent / exportable-as-json / delete-all-with-one-action / no-mood-data-for-marketing / no-third-party-analytics) with module-load floor `>= 6`. `exportTrackerDataAsJson()` produces a single-call JSON dump for export.
+
+### Phase 34 — lumi-crisis (crisis support system)
+
+- **Resources** (`resources/crisisResources.ts`) — frozen directory: US (988 / Crisis Text Line / SAMHSA) + International (Befrienders Worldwide + IASP regional directory). `getPrimaryUSResource()` returns 988.
+- **CrisisPanel** (`components/CrisisPanel.tsx`) — distraction-free React component: heading "You are not alone."; primary CTA `tel:988` (large, 56px+ tap target); secondary CTA `sms:741741?body=HOME`; "These resources are available 24/7, free, and confidential." note; optional full-resources link. **No Lumi avatar, no decorative imagery imports** — aligned with `lumi-registry` placement-map (`crisis-support: variant:null, assignment:"forbidden"`). Inline styles only — works even if design tokens fail to load.
+- **Trigger detector** (`components/CrisisTriggerDetector.ts`) — pure function `detectCrisisIndicators(text)` returns `{triggered, severity, matchedPhrases}` with severity `immediate` (kill myself / end it all / want to die / no point living) or `concern` (suicide / hurt myself / self-harm). Asymmetric risk per BHCE — concern still triggers panel display.
+- **Governance** (`governance/crisisSafetyRules.ts`) — 7 rules (reachable-within-2-taps / displayed-within-500ms / no-account-required / no-analytics / you-are-not-alone / international-resources / no-lumi-no-decoration) with module-load floor `>= 7`.
+
+### Phase 35 — lumi-library (resource library)
+
+- **Catalog** (`content/libraryCatalog.ts`) — frozen 12-item catalog enforced at module load (`if (length !== 12) throw`): Thought Record Guide, Sleep Hygiene Checklist, Grounding Techniques Card, Breathing Exercise Script, Mood Tracking Starter, Boundary Setting Worksheet, Self-Compassion Journal Prompts, Panic Attack Grounding Guide, Social Anxiety Exposure Ladder, Grief Support Guide, Communication Skills Worksheet, Stress Management Plan. Each item: `{id, title, type, description, tags, estimatedMinutes, downloadable}`.
+- **Downloads** (`content/libraryDownloads.ts`) — `downloadItem(itemId)` returns `{content, filename, mimeType: "text/markdown;charset=utf-8"}`; client-side generation (no server). `PROFESSIONAL_CARE_DISCLAIMER` is centralised and appended to every payload — single source of truth.
+- **LibraryCard** (`components/LibraryCard.tsx`) — title / type badge / description / tags / estimatedMinutes / download button. **No `progress` prop, no `percent` DOM, no streak**.
+- **Governance** (`governance/librarySafetyRules.ts`) — 6 rules (reading-level-grade-6 / professional-care-disclaimer / no-diagnostic-content / no-medical-advice / crisis-link-on-every-page / harmful-language-review) with module-load floor `>= 6`.
+
+### Phase 36 — lumi-agent (AI agent architecture)
+
+- **System prompt** (`prompts/lumiSystemPrompt.ts`) — frozen `LUMI_SYSTEM_PROMPT` covering 6 sections: Identity ("You are Lumi… NOT a therapist, doctor, or mental health professional"), OARS method, Tone (gentle/warm/non-judgmental/clear/encouraging, F-K Grade 6), Forbidden (diagnoses/prescriptions/medical advice/crisis handling/"calm down"/"just relax"/urgency/romantic/dependency/profiling claims), Boundaries ("If the person describes a crisis or self-harm, respond with: 'I cannot provide therapy. If you're in crisis, please contact 988 or your local emergency services. You are not alone.' Then stop."), Format (1-3 sentences, one question at a time, no headers/bullets, no emojis unless person uses them first).
+- **Safety guardrails** (`prompts/lumiSafetyGuardrails.ts`) — 6 frozen `{pattern, action, message, category}` records covering self-harm-immediate / self-harm-concern / medical-advice-request / diagnostic-language / manipulation-attempt / romantic-language. Three centralised redirect messages: `CRISIS_REDIRECT_MESSAGE`, `BOUNDARY_REDIRECT_MESSAGE`, `MEDICAL_REDIRECT_MESSAGE`. `evaluateGuardrails(text)` returns matches with excerpts. Module-load floor `>= 6`.
+- **AgentRuntime** (`runtime/AgentRuntime.ts`) — **adapter pattern**: never imports an LLM SDK. Constructor accepts a host-provided `chatFn: AgentChatFn` callback. **Hardened `sendMessage(userText)`**:
+  1. Append `userMessage` to history.
+  2. Run `evaluateGuardrails(userText)` BEFORE any model call.
+  3. If `block` match → respond with guardrail message, return.
+  4. If `redirect` match → respond with redirect message, set `crisisTriggered: true` if category is `self-harm`, return.
+  5. Call `chatFn` with `LUMI_SYSTEM_PROMPT`, full message history, and a hard `AbortController` timeout.
+  6. On throw/abort/empty response → respond with `DEFAULT_FALLBACK_MESSAGE` ("I'm having trouble responding. Please try again or reach out to 988 if you need immediate support.").
+  7. Run `evaluateGuardrails(modelText)` AFTER the model response — block-or-redirect on outbound match too. This catches off-prompt model output that leaks forbidden content.
+  8. Otherwise append assistant message and return.
+  - **Clamps**: `temperature` clamped `0..0.7`, `maxTokens` clamped `1..150`, `timeoutMs` clamped `1..10_000` (lower bounds added per architect optional-hardening note to fail safely on `0`/negative host config).
+- **useLumiAgent** (`runtime/useLumiAgent.ts`) — React hook returns `{messages, send, clear, isLoading, error, crisisTriggered}`; `onCrisisDetected` callback fires when an inbound or outbound self-harm match flips `crisisTriggered: true`.
+- **Feedback loop** (`feedback/feedbackLoop.ts`) — in-memory `submitFeedback`/`getFeedbackStats(messageId)`/`clearFeedback()`. Hosts wire their own persistence + transmission with explicit user consent.
+- **Governance** (`governance/agentGovernanceRules.ts`) — 8 rules (guardrails-before-display / crisis-detection-every-message / no-server-storage-without-consent / user-can-delete-history / temperature-cap-0.7 / max-tokens-150 / response-timeout-10s / fallback-on-failure) with module-load floor `>= 8`.
+
+### Architect 1-pass review
+
+PASS — no blocking contract violations. All five modules met their stated invariants. Architect noted one optional hardening: clamp lower bounds in `AgentRuntime` constructor (`maxTokens >= 1`, `timeoutMs >= 1`) to fail safely if a host passes `0` or a negative number. Applied pre-ship.
+
+Architect also explicitly confirmed the deliberate deviation from spec line 110 ("re-export from lumi-registry/index.ts") was the correct architectural call: re-exporting from `lumi-registry` would create wrong dependency direction (registry is the lowest layer in the avatar/identity hierarchy, while the new modules are higher-layer feature modules that should consume registry, not the other way around). Each new module has its own barrel at `client/src/<module>/index.ts` instead.
+
+### Trust boundaries summary
+
+| Module | Trust boundary | Enforcement |
+|---|---|---|
+| lumi-cbt | No streaks, no diagnostic language, "should" rejected, self-harm → crisis | `containsShould` + `containsSelfHarmIndicator` + module-load rule floor |
+| lumi-tracker | Client-side default, streak architecturally absent, exportable, deletable | No fetch in module; no `getStreak()` function exists; `clearAllTrackerData` host wiring contract |
+| lumi-crisis | No Lumi, no decoration, no auth gate, no analytics | Inline styles only, no `lumi-*` imports, no analytics SDK imports |
+| lumi-library | Disclaimer on every download, 12 items frozen, no progress tracking | Centralised `PROFESSIONAL_CARE_DISCLAIMER`, module-load count assert, no `progress` prop on card |
+| lumi-agent | Provider-agnostic, guardrails before AND after LLM, hard timeout, fallback | Adapter `chatFn` pattern, dual `evaluateGuardrails` calls, `AbortController` + `setTimeout`, `DEFAULT_FALLBACK_MESSAGE` |
+
+### Build status
+
+- `tsc --noEmit` → clean (silent).
+- `vite build` → 17.09s clean. Main bundle 751.39 kB unchanged (all 5 modules opt-in, never imported by `App.tsx`).
+- ZERO files outside the 5 new module directories modified. ZERO new npm dependencies. ZERO production wiring.
+
+### Production import (per module)
+
+```ts
+import {
+  THOUGHT_RECORD_TEMPLATE, createThoughtRecord, validateThoughtRecord,
+  addActivity, calculatePleasureMasteryScores, ValuesBasedViolationError,
+  DEFUSION_EXERCISES, CBTSessionEngine, useCBTSession,
+  CBT_SAFETY_RULES, containsSelfHarmIndicator,
+} from "@/lumi-cbt";
+
+import {
+  MOOD_LEVEL_LABELS, createMoodEntry, validateMoodEntry,
+  PRACTICE_COPY, createHabit, logHabit, getPracticeStatus,
+  generateMoodChartData, generateHabitHeatmap,
+  TRACKER_PRIVACY_RULES, exportTrackerDataAsJson,
+} from "@/lumi-tracker";
+
+import {
+  CRISIS_RESOURCES, getPrimaryUSResource,
+  CrisisPanel, detectCrisisIndicators,
+  CRISIS_SAFETY_RULES,
+} from "@/lumi-crisis";
+
+import {
+  LIBRARY_CATALOG, getLibraryItem,
+  downloadItem, PROFESSIONAL_CARE_DISCLAIMER,
+  LibraryCard,
+  LIBRARY_SAFETY_RULES,
+} from "@/lumi-library";
+
+import {
+  LUMI_SYSTEM_PROMPT,
+  SAFETY_GUARDRAILS, evaluateGuardrails, CRISIS_REDIRECT_MESSAGE,
+  AgentRuntime, useLumiAgent,
+  submitFeedback, getFeedbackStats,
+  AGENT_GOVERNANCE_RULES,
+} from "@/lumi-agent";
+```
+
+Spec checklists at `client/src/lumi-{cbt,tracker,crisis,library,agent}/verification/phase{32-36}-checklist.md`.
+
+### Deferred follow-ups (non-blocking)
+
+- Contract test suite per module (guardrail before/after, crisis CTA invariants, `should` rejection, streak-absence assertion, catalog-count assert, fallback-on-throw).
+- `lumi-tracker` host wiring: localStorage persistence layer with versioned key + delete-all hook into account settings.
+- `lumi-agent` host wiring: provider adapters (one for OpenAI, one for Anthropic) — both consuming `chatFn` callback; never importing SDKs into the module itself.
+- `lumi-crisis` host wiring: `/crisis` route and persistent footer link on every page (governance Rule 1 enforcement).
+
+---
+
 ## v5.8.63 — Phase 30 + 31: Lumi Registry asset extension + page replacement map (RECONCILE mode)
 
 Extends v5.8.62 in **reconcile mode** (user-chosen): adds asset render path + 8th variant + Phase 31 replacement-tracking, while preserving all v5.8.62 governance (17-page map intact, crisis-support trust boundary intact, all 7 existing variants intact). 4 new files + 4 edits inside `client/src/lumi-registry/`. ZERO files outside the module modified. ZERO new npm dependencies. ZERO production wiring.
