@@ -298,6 +298,7 @@ const EmailDigest = lazy(() => import("./pages/settings/EmailDigest.jsx"));
 // Batch 17 - Content, Engagement, AI, A11y, Performance (P501-P550)
 const AIPersonality = lazy(() => import("./pages/settings/AIPersonality.jsx"));
 const WeeklyReflection = lazy(() => import("./pages/tools/WeeklyReflection.jsx"));
+const Presence = lazy(() => import("./pages/Presence.jsx"));
 
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
@@ -513,6 +514,7 @@ export default function App() {
               <Route path="/admin/agents">
                 <ProtectedRoute><AgentInteraction /></ProtectedRoute>
               </Route>
+              <Route path="/presence"><Presence /></Route>
               <Route path="/landing-v2"><LandingV2 /></Route>
               <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
               <Route path="/lumi-design-system"><DesignSystemV2 /></Route>

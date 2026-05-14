@@ -1,3 +1,24 @@
+## v5.8.59 — Presence page wiring (4 opt-in modules)
+
+First production wiring of the four opt-in companion modules (`lumi-circadian`, `lumi-memory`, `lumi-rituals`, `lumi-scenes`) onto a single `/presence` page, plus the `calm-checkin` entry on the landing page and `MMHBFloatAvatar` (calmIdle) as the visual anchor. **Two layers of gating** per spec:
+
+1. **Feature flag** (build/admin toggle) — 6 new public flags in `shared/featureFlags.mjs`, all `status: "wip"` (admin-only by default until an intentional deploy flips status to "ready"): `presencePage`, `presenceCircadian`, `presenceMemory`, `presenceRituals`, `presenceScenes`, `landingCalmCheckin`. Non-admin production visitors see no change.
+2. **Per-section in-page consent** — each section requires intentional toggle ON; no batch-enable. The existing module surfaces (`OptInPrompt` for circadian, `MemorySettingsPanel` for memory, ritual launch button, scene toggle) provide the consent affordance.
+
+**Route guard.** The page redirects to `/` if (a) `presencePage` flag is off OR (b) the visitor has not completed their first Calm Check-in. First-checkin state is persisted via a versioned localStorage key (`mmhb:first_checkin_completed:v1`) through three SSR-safe helpers (`hasCompletedFirstCheckin`/`markFirstCheckinComplete`/`clearFirstCheckinFlag`) at `client/src/lib/firstCheckinFlag.ts`. The flag is set when the visitor selects any continue option from the landing-page `CalmCheckinEntry` (`onContinueOption` callback in `LandingCalmCheckinSlot`).
+
+**Files (1 new + 1 helper, 4 edited).** New: `client/src/lib/firstCheckinFlag.ts` (versioned localStorage helper, SSR-safe), `client/src/pages/Presence.jsx` (guarded page with avatar header + 4 sections + crisis footer). Edited: `shared/featureFlags.mjs` (+6 flags), `client/src/App.jsx` (lazy import + Route `/presence`), `client/src/components/layout/Header.jsx` (conditional Presence nav link gated on flag AND first-checkin), `client/src/pages/CanvaLanding.jsx` (inline `LandingCalmCheckinSlot` after `<SoftLaunchBanner />`).
+
+**Page anatomy.** `MMHBAvatarRuntimeProvider` with `surfaceContext="presence"` + `defaultState="calmIdle"` wraps the whole page. The header renders `MMHBFloatAvatar` at `imageSrc="/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png"`, `state="calmIdle"`, `size={180}`. Each of the four sections renders only when its per-section feature flag is enabled. The scenes section additionally has an in-page user toggle (`scenesActive`) that defaults OFF — `SceneTransitionController` only wraps the inner content when BOTH the flag AND the user toggle are true. Crisis footer with `/crisis` link is unconditional (never disappears, per Primary Law).
+
+**Architect 1-pass review caught 1 medium issue — fixed pre-ship:**
+
+- **Route guard first-render flash.** The original pattern `useState(true)` + `useEffect` to read `hasCompletedFirstCheckin()` allowed a one-frame flash of Presence content for admins (whose `presencePage` flag returns true under `wip`) before the effect resolved the gate. **Fix:** initialize from the SSR-safe helper directly via lazy initializer `useState(() => hasCompletedFirstCheckin())`. The helper returns `false` when `window` is absent, so server-rendered output stays redirect-safe; client hydration matches because the helper reads the same localStorage key on both passes. Removed now-unused `useEffect` and `useMemo` imports.
+
+**Verification.** `tsc --noEmit` clean. `vite build` 15.93s clean. Dev workflow restarted cleanly on port 5000.
+
+**Production rollout.** To enable for end users, an admin deploy flips the desired flags from `status: "wip"` to `status: "ready"` + `enabled: true` in `shared/featureFlags.mjs`. Each section is independently toggleable; an admin can enable `presencePage` + only `presenceCircadian`, for example, to ship one module at a time.
+
 ## v5.8.58 — Phase 22: Presence Scheduler & Circadian Calm
 
 Standalone opt-in module at `client/src/lumi-circadian/` (10 files: 7 spec + barrel + isolated vitest config + tests + checklist). Same shipping pattern as v5.8.51-57 — zero production wiring, design-system tokens only, single hardened public surface.

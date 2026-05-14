@@ -4,12 +4,19 @@ import { useState, useEffect, useRef } from "react";
 import { BRAND } from "@shared/brand";
 import { useAuth } from "@/context/AuthContext";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { useFeatureFlags } from "@/contexts/FeatureFlagContext";
+import { hasCompletedFirstCheckin } from "@/lib/firstCheckinFlag";
 
 const MODES = ["default", "low-stim", "reading"];
 
 function Header() {
   const { isAuthenticated } = useAuth();
   const isLoggedIn = typeof isAuthenticated === "function" ? isAuthenticated() : !!isAuthenticated;
+  const featureFlags = useFeatureFlags();
+  const [presenceCheckinReady, setPresenceCheckinReady] = useState(false);
+  useEffect(() => {
+    setPresenceCheckinReady(hasCompletedFirstCheckin());
+  }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mode, setMode] = useState(() => {
@@ -56,12 +63,21 @@ function Header() {
     reading: "Reading",
   };
 
+  // v5.8.59 — Presence link is feature-flag gated (`presencePage`, default
+  // wip → admin-only) and only surfaces after first Calm Check-in.
+  const presenceFlag = featureFlags?.isEnabled?.("presencePage") ?? false;
+  const showPresenceLink =
+    presenceFlag && presenceCheckinReady;
+
   const navLinks = [
     { href: "/", label: "Home", icon: Home },
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/wellness", label: "Wellness", icon: Heart },
     { href: "/journal", label: "Journal", icon: BookOpen },
     { href: "/chat", label: "AI Chat", icon: MessageCircle },
+    ...(showPresenceLink
+      ? [{ href: "/presence", label: "Presence", icon: Sparkles }]
+      : []),
     ...(isLoggedIn
       ? [{ href: "/account/subscription", label: "Account", icon: UserCircle }]
       : []),

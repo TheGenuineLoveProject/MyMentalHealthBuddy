@@ -16,6 +16,9 @@ import NextStepCTA from "../sections/NextStepCTA.jsx";
 import ValueBridge from "../sections/ValueBridge.jsx";
 import EmailCapture from "../sections/EmailCapture.jsx";
 import SEO from "@/components/SEO";
+import { CalmCheckinEntry } from "@/calm-checkin";
+import { useFeatureFlags } from "@/contexts/FeatureFlagContext";
+import { markFirstCheckinComplete } from "@/lib/firstCheckinFlag";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -290,6 +293,8 @@ export default function CanvaLanding() {
         description="Free emotional wellness companion. Gentle check-ins, breathing exercises, and a warm AI companion. Private. No judgment. Always free."
       />
       <SoftLaunchBanner />
+      <LandingCalmCheckinSlot />
+
       <div 
         className={`mobile-overlay ${mobileMenuOpen ? 'active' : ''}`}
         onClick={() => setMobileMenuOpen(false)}
@@ -1361,5 +1366,32 @@ export default function CanvaLanding() {
         <ArrowUp className="w-6 h-6" />
       </button>
     </div>
+  );
+}
+
+/**
+ * v5.8.59 — Calm Check-in entry slot on the landing page.
+ *
+ * Feature-flag gated (`landingCalmCheckin`, defaults wip → admin-only).
+ * When a visitor selects any continue option, marks the first-check-in
+ * complete so the /presence route guard opens. Non-destructive — visitors
+ * who don't engage see no change; flag off → component never renders.
+ */
+function LandingCalmCheckinSlot() {
+  const { isEnabled } = useFeatureFlags();
+  const [, setLocation] = useLocation();
+  if (!isEnabled("landingCalmCheckin")) return null;
+  return (
+    <section
+      className="mx-auto w-full max-w-3xl px-5 py-8"
+      data-testid="section-landing-calm-checkin"
+    >
+      <CalmCheckinEntry
+        onContinueOption={() => {
+          markFirstCheckinComplete();
+        }}
+        onReturnHome={() => setLocation("/")}
+      />
+    </section>
   );
 }

@@ -17,6 +17,16 @@ export const FEATURE_FLAGS = {
     atlas: { enabled: false, status: "wip", label: "Intellectual Atlas", routes: ["/atlas"] },
     strategyMaps: { enabled: false, status: "wip", label: "Strategy Maps", routes: ["/strategy-maps"] },
     collaborativeLab: { enabled: false, status: "wip", label: "Collaborative Lab", routes: ["/collaborative-lab"] },
+    // Presence page (v5.8.59) — wires the four opt-in companion modules onto
+    // a single /presence route. status:"wip" so non-admins don't see it until
+    // a deploy intentionally flips status:"ready". Each per-section flag is
+    // independently toggleable (no batch-enable) and defaults wip.
+    presencePage: { enabled: false, status: "wip", label: "Presence Page", routes: ["/presence"] },
+    presenceCircadian: { enabled: false, status: "wip", label: "Presence — Gentle Reminders" },
+    presenceMemory: { enabled: false, status: "wip", label: "Presence — Soft Memory" },
+    presenceRituals: { enabled: false, status: "wip", label: "Presence — Rituals" },
+    presenceScenes: { enabled: false, status: "wip", label: "Presence — Ambient Scenes" },
+    landingCalmCheckin: { enabled: false, status: "wip", label: "Landing — Calm Check-in Entry" },
   },
   admin: {
     socialPublishing: { enabled: true, status: "ready", label: "Social Publishing" },
