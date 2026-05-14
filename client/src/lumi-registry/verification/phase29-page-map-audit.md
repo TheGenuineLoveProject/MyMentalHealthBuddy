@@ -4,15 +4,16 @@
 
 | Path | Purpose | Status |
 |---|---|---|
-| `registry/lumiPagePlacementMap.ts` | 17 page → variant placements + audit | ✅ |
+| `registry/lumiPagePlacementMap.ts` | 18 page → variant placements + audit | ✅ |
 | `index.ts` | Public barrel including page-map exports | ✅ |
 | `verification/phase29-page-map-audit.md` | This file | ✅ |
 
-## 17 page placements
+## 18 page placements
 
 | Page | Variant | Assignment | Position | Max width |
 |---|---|---|---|---|
 | home-hero | LUMI_SOFT_PRESENCE | required | hero | 320 |
+| landing-canva | LUMI_SOFT_PRESENCE | optional | hero | 320 |
 | home-first-gentle-step | LUMI_PATH | required | inline | 140 |
 | calm-check-in | LUMI_MEDITATION | required | hero | 280 |
 | breath-space | LUMI_MEDITATION | required | hero | 300 |
@@ -30,7 +31,7 @@
 | loading-state | LUMI_CALM_FLOAT | optional | inline | 90 |
 | error-state | LUMI_HEART | optional | inline | 100 |
 
-**Counts:** 9 required · 7 optional · 1 forbidden · 17 total.
+**Counts:** 9 required · 8 optional · 1 forbidden · 18 total.
 
 ## Variant coverage (every canonical variant used at least once)
 
@@ -42,7 +43,7 @@
 | LUMI_COMPANION | journal-sanctuary |
 | LUMI_PATH | home-first-gentle-step, growth-journey |
 | LUMI_EMOTION_ORB | mood-space |
-| LUMI_SOFT_PRESENCE | home-hero, research-evidence, email-stay-connected |
+| LUMI_SOFT_PRESENCE | home-hero, landing-canva, research-evidence, email-stay-connected |
 
 ## Special rules summary
 
@@ -73,9 +74,9 @@ import bear from "./hero-bear.svg";                // deprecated bear
 import { runPageMapAudit } from "@/lumi-registry";
 
 const audit = runPageMapAudit();
-console.log(audit.totalPages);        // 17
+console.log(audit.totalPages);        // 18
 console.log(audit.requiredCount);     // 9
-console.log(audit.optionalCount);     // 7
+console.log(audit.optionalCount);     // 8
 console.log(audit.forbiddenCount);    // 1
 console.log(audit.variantCoverage);   // every variant ≥ 1
 console.log(audit.issues);            // []
@@ -85,7 +86,7 @@ console.log(audit.issues);            // []
 
 | Criterion | Result |
 |---|---|
-| `totalPages === 17` | ✅ |
+| `totalPages === 18` | ✅ |
 | All 7 variants used at least once | ✅ |
 | No duplicate `pageId` | ✅ |
 | `crisis-support.variant === null` | ✅ |
@@ -94,7 +95,7 @@ console.log(audit.issues);            // []
 
 ## Architecture verification
 
-- [x] `PAGE_PLACEMENT_MAP.length === 17` enforced via module-load floor guard.
+- [x] `PAGE_PLACEMENT_MAP.length === 18` enforced via module-load floor guard.
 - [x] All entries `Object.freeze`d.
 - [x] `verifyImportPath()` rejects 5 forbidden patterns + any direct image extension.
 - [x] `runPageMapAudit()` is pure — no I/O, no React.

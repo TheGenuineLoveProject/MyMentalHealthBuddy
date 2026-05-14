@@ -37,6 +37,17 @@ export const PAGE_PLACEMENT_MAP: ReadonlyArray<PagePlacement> = Object.freeze([
     specialRules: Object.freeze(["NO heading text beside Lumi", "NO CTA crowding within 2rem", "Background: warm cream"]),
   },
   {
+    pageId: "landing-canva",
+    pageName: "Landing (Canva) — route /",
+    variant: "LUMI_SOFT_PRESENCE",
+    assignment: "optional",
+    position: "hero",
+    maxWidthPx: 320,
+    tone: "Ambient calm, opt-in floating presence",
+    reasoning: "CanvaLanding.jsx mounted at /; opt-in entry unblocks OfficialLumi migration from legacy LumiMascot without forcing render. Position 'hero' chosen as closest legal value to user-requested 'floating' (PagePosition type does not include 'floating').",
+    specialRules: Object.freeze(["NO heading text beside Lumi", "NO CTA crowding within 2rem", "Default: opt-in only — CanvaLanding renders OfficialLumi when ready", "Crisis routing (/crisis + 988 + 741741) must remain in footer regardless"]),
+  },
+  {
     pageId: "home-first-gentle-step",
     pageName: "Home First Gentle Step",
     variant: "LUMI_PATH",
@@ -183,8 +194,8 @@ export const PAGE_PLACEMENT_MAP: ReadonlyArray<PagePlacement> = Object.freeze([
   },
 ] as const);
 
-if (PAGE_PLACEMENT_MAP.length !== 17) {
-  throw new Error(`[lumi-registry] PAGE_PLACEMENT_MAP floor violated: expected 17 pages, got ${PAGE_PLACEMENT_MAP.length}.`);
+if (PAGE_PLACEMENT_MAP.length !== 18) {
+  throw new Error(`[lumi-registry] PAGE_PLACEMENT_MAP floor violated: expected 18 pages, got ${PAGE_PLACEMENT_MAP.length}.`);
 }
 
 export function getPagePlacement(pageId: string): PagePlacement | undefined {
