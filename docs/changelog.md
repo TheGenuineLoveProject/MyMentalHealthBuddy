@@ -1,3 +1,81 @@
+## v5.8.61 — Section 8.3: Cross-module integration smoke test
+
+Closes the HIGH-priority gap from the 360° platform analysis (Section 8.3 · "No integration smoke test"). Same shipping discipline as the prior phase modules: tests-only, isolated vitest config, zero production wiring, zero new npm dependencies.
+
+### Scope reality check (vs the analysis doc's "barrel exports" item)
+- `lumi-environment/` — does not exist in this codebase. Nothing to barrel.
+- `lumi-bridge/` — directory exists but contains only empty subdirectories (`governance/`, `mappings/`, `runtime/`, `transitions/`, `verification/`). No symbols to re-export. Documented as the future home for the cross-module mapping tables (currently held in the test file).
+- `lumi-circadian/index.ts` — already shipped in v5.8.58 (full public barrel). Verified present.
+
+So the only actionable 8.3 item against this codebase is the integration smoke test.
+
+### `client/src/lumi-integration/` (3 files)
+- `tests/vitest.config.mjs` — isolated vitest config with the established `@` / `@/design-system` aliases. Bypasses the project-level vitest setup (which would spin up Express on port 5000 and conflict with the running dev workflow).
+- `tests/crossModule.test.ts` — 21 contract assertions across `avatar-life` · `lumi-scenes` · `lumi-rituals` · `lumi-voice` · `lumi-boundaries` · `lumi-consistency`.
+- `verification/integration-smoke-checklist.md` — coverage map + run instructions.
+
+### Test surface (23 tests, 4 suites — 21 spec + 2 architect-driven)
+
+**Type-surface alignment (8)**
+- `EMOTIONAL_STATES` (avatar) = 8 entries.
+- `SCENE_STATES` = 7 entries.
+- `LUMI_EMOTIONAL_STATES` count matches avatar count.
+- `LUMI_INTERACTION_PATTERNS` = 8 patterns.
+- Every avatar `EmotionalState` maps to a valid `SceneState` via the test-file frozen `AVATAR_TO_SCENE` table (`calmIdle→calm`, `peacefulJoy→joySoft`, `gentleConcern→concernSoft`, `welcoming→calm`).
+- Every ritual key maps to a valid `SceneState` via frozen `RITUAL_TO_SCENE`.
+- Every ritual key maps to a valid avatar `EmotionalState` via frozen `RITUAL_TO_AVATAR`.
+- **(architect-driven)** Every `LumiEmotionalState` semantically maps to a valid avatar `EmotionalState` via the test-file frozen `LUMI_TO_AVATAR` table (`joySoft↔peacefulJoy`, `concernSoft↔gentleConcern`, `alert↔welcoming` — closes a real gap: count parity alone wouldn't catch a renamed state).
+
+**Cross-module governance (8)**
+- Every shipped ritual preset passes `auditPreset` from `lumi-rituals/governance`.
+- Every shipped scene preset passes `auditPreset` from `lumi-scenes/governance`.
+- No ritual `invitationText`/`closing` contains a voice forbidden phrase (`lumi-voice` scanner).
+- No ritual step `copy`/`microCopy` contains a voice forbidden phrase.
+- No ritual step copy trips the rituals' own forbidden-phrase scanner.
+- No positive boundary copy line (name/description/`does`) contains a forbidden boundary phrase. **NOTE**: `doesNot` entries are intentionally excluded — they quote forbidden phrases as cautionary examples (e.g. `"Say 'I love you' or use romantic language."`), which is correct content; the scan is for production-language drift, not for the cautionary corpus.
+- Voice `FORBIDDEN_PHRASES` ≥ 23 (architect-driven floor from v5.8.60 carried forward).
+- **(architect-driven)** No ritual text (invitation/closing/step copy/microCopy) contains a forbidden boundary phrase — belt-and-braces against intimacy/dependency drift slipping past the rituals' own scanner because the boundary scanner has a different word list (`trust me`/`only i can help`/`i love you`/etc.).
+
+**lumi-consistency verification (4)**
+- `runIdentityVerification` with truthful platform data passes 7/7 (`complianceScore === 100`).
+- `runIdentityVerification` fails closed when identity name/role drift (`Buddy`/`friend`).
+- `runEnforcementValidation` reports `criticalFailures === 0` and `passed === true` with a clean platform report.
+- `runEnforcementValidation` flags missing captions as a critical failure.
+
+**End-to-end ritual flow (3)**
+- Every ritual reaches a terminal status via `start + advance × N` through the pure reducer (with iteration cap as infinite-loop guard).
+- Terminal ritual maps to a resolvable scene preset via `RITUAL_TO_SCENE`, and that preset passes audit.
+- Terminal ritual maps to a valid avatar `EmotionalState` via `RITUAL_TO_AVATAR`, and the avatar state's scene equivalent (via `AVATAR_TO_SCENE`) also passes audit.
+
+### Cross-module mapping tables
+Three frozen `Object.freeze`d tables live in the test file:
+- `AVATAR_TO_SCENE: Record<EmotionalState, SceneState>`
+- `RITUAL_TO_SCENE: Record<RitualKey, SceneState>`
+- `RITUAL_TO_AVATAR: Record<RitualKey, EmotionalState>`
+
+When the empty `client/src/lumi-bridge/` module is implemented, these tables move out of the test file into the production module, and the integration test imports them from there. The names `AVATAR_TO_SCENE`/`RITUAL_TO_SCENE`/`RITUAL_TO_AVATAR` are deliberate — they're the contract surface a future `lumi-bridge` would expose.
+
+### Reducer signature discovery (mid-implementation correction)
+First test run surfaced that `ritualReducer(state, action, preset)` takes the preset as a 3rd argument (not closed-over). Fixed `playToTerminal` helper to pass it. The reducer remains pure — preset is read for `steps.length` only.
+
+### Architect 1-pass review
+Caught 2 real gaps (both fixed pre-ship): (1) **Count parity is not semantic alignment** — `LUMI_EMOTIONAL_STATES` count matched avatar count but contained `joySoft`/`concernSoft`/`alert` while avatar uses `peacefulJoy`/`gentleConcern`/`welcoming`; a rename on either side would silently pass → fix: added frozen `LUMI_TO_AVATAR` mapping table + per-key existence assertion. (2) **Cross-governance gap** — header comments implied ritual text was scanned against boundary phrases but only boundary copy was scanned → fix: added explicit ritual-text-vs-boundary-phrases assertion across invitation/closing/step copy/microCopy. Architect also confirmed: scope reality check correct, mapping tables placement correct, `doesNot` exclusion justified, end-to-end ritual reducer path is genuinely exercised, isolated vitest config appropriate.
+
+### Build status
+- `npx vitest run --config client/src/lumi-integration/tests/vitest.config.mjs` → 23/23 passed in 1.23s.
+- `npx tsc --noEmit` → clean.
+- `npx vite build` → 16.43s clean (751.39 kB main bundle, gzip 178.64 kB — unchanged vs prior shipped baseline since zero production code touched).
+- ZERO files outside `client/src/lumi-integration/` modified.
+- ZERO new npm dependencies.
+- ZERO production wiring.
+
+### Run
+```sh
+npx vitest run --config client/src/lumi-integration/tests/vitest.config.mjs
+```
+
+---
+
 ## v5.8.60 — Phases 23, 24, 25: Voice / Boundaries / Cross-Platform Consistency
 
 Three new standalone opt-in modules — same shipping pattern as v5.8.51-58: zero production wiring, zero new npm dependencies, design-system tokens only, single hardened public barrel per module.
