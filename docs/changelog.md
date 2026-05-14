@@ -1,3 +1,55 @@
+## v5.8.60 — Phases 23, 24, 25: Voice / Boundaries / Cross-Platform Consistency
+
+Three new standalone opt-in modules — same shipping pattern as v5.8.51-58: zero production wiring, zero new npm dependencies, design-system tokens only, single hardened public barrel per module.
+
+### Phase 23 — `client/src/lumi-voice/` (14 spec files + barrel)
+
+- **FROZEN 7.1s breath cycle** in `runtime/BreathPacingEngine.ts`: inhale 2800ms · hold 400ms · exhale 3600ms · rest 300ms. Module-load assertion that durations sum to `BREATH_CYCLE_MS`. Pure `getCurrentBreathPhase(elapsedMs)` returns phase + per-phase progress + cycle progress; SSR-safe.
+- **Web Speech API wrapper** (`runtime/VoicePlaybackController.ts`): hard volume cap `MAX_VOICE_VOLUME=0.4` enforced AT SINK (not just config-time); rate clamped `[0.5, 1.5]`; pitch clamped `[0, 2]`; refuses utterance with typed error reasons `not-opted-in` / `empty-text` / `forbidden-phrase` / `manipulative-language` / `ssr-no-speech-api`. Never autoplays.
+- **3 frozen voice profiles**: `softNeutral` (rate 0.9 / pitch 1.0 / volume 0.3), `warmCalm` (0.8 / 0.95 / 0.3), `sleepyQuiet` (0.7 / 0.9 / 0.2). Every profile validated at module load via `validateProfile()` — fails closed.
+- **SSR-safe React hook** (`runtime/useVoicePresence.ts`): exposes `{ enabled, profile, profileKey, isSpeaking, captions, reducedAudio, setEnabled, setProfile, speak, stop, clearCaptions }`. `prefers-reduced-motion` live `MediaQueryList` listener with Safari fallback. All caption timers cleared on unmount. Speech is stopped on unmount.
+- **Captions universal** (`accessibility/captionsMode.ts`): `CAPTION_LINGER_MS=1500`. Captions emit on EVERY `speak()` call — even when voice is disabled or reduced-audio is on. Caption is the universal accessible surface.
+- **Reduced-audio mode** (`accessibility/reducedAudioMode.ts`): honors `prefers-reduced-motion: reduce` automatically; user can override; `shouldSuppressVoice(enabled)` returns true if voice is disabled OR reduced-audio is preferred.
+- **Governance** (`governance/voiceSafetyRules.ts`): hardened forbidden-phrase list (5 categories: invalidation, coercion, urgency, commercial-upsell, gamification), 8 forbidden audio effects with floor guards. **Architect-driven hardening:** expanded forbidden phrases from 15 → 23 to cover coercion / urgency / commercial-upsell categories that the original list missed (`you must`, `you have to`, `this is required`, `limited time`, `act now`, `subscribe now`, `upgrade now`, `premium only`).
+- **Anti-manipulation** (`governance/antiManipulationRules.ts`): 4 categories with regex detectors — `romantic_language`, `possessive_framing`, `fake_empathy`, `dependency_creation`. `containsManipulativeLanguage(text)` runs at sink in `VoicePlaybackController.speak()`.
+- **Components**: `VoiceToggle.tsx` is OFF by default with a confirmation step before enabling ("Enable Lumi's voice?" → "Yes, gently" / "Not now"); never auto-enables. `VoiceCaptionOverlay.tsx` renders fixed bottom-center, `role="status" aria-live="polite"`.
+- **Trust boundary**: `speak`/`stop`/`setOptIn` from `VoicePlaybackController` are intentionally NOT re-exported from the public barrel — public dispatch surface is `useVoicePresence` only.
+
+### Phase 24 — `client/src/lumi-boundaries/` (7 spec files + barrel)
+
+- **4 boundary types** (`runtime/BoundaryEngine.ts`): `emotional` · `cognitive` · `identity` · `therapeutic`. Each spec has `allowed[]` (plain text) and `notAllowed[]` (regex). Module-load assertion of exactly 4. `checkBoundaries(text)` returns `BoundaryViolation[]` with type, displayName, pattern source, and excerpt.
+- **Hook** (`runtime/useBoundaryState.ts`): exposes `{ boundaries, violations, check, reset }`.
+- **Transparent copy cards** (`content/boundaryCopy.ts`): 4 frozen cards. Each: `name` / `description` / `does[]` / `doesNot[]`. Static — no runtime rewriting.
+- **Components**: `BoundaryCard.tsx` (single card with expand/collapse) and `TransparencyDrawer.tsx` (slide-out drawer, Escape-closeable, backdrop dismiss, `/crisis` link in footer per Primary Law).
+- **Governance** (`governance/boundaryEnforcementRules.ts`): exactly 12 `DISPLAY_RULES` (always-accessible, plain-language, does-and-does-not, no-marketing, crisis-anchor, consent-respected, wcag-aa, non-coercive-tone, consistent-naming, no-anthropomorphism, static-copy, version-locked) and exactly 10 `FORBIDDEN_BOUNDARY_PHRASES` (`trust me`, `only i can help`, `i love you`, `you're mine`, `i remember everything`, `i am alive`, `subscribe to unlock`, `premium boundaries`, `you must accept`, `this is required`). Both with floor guards.
+
+### Phase 25 — `client/src/lumi-consistency/` (8 spec files + barrel)
+
+- **8 FROZEN token groups** (`tokens/lumiConsistencyTokens.ts`): `LUMI_IDENTITY` (name=Lumi, role=companion, isHuman=false), `LUMI_VISUAL_RGB` (6 brand colors as RGB triples), `LUMI_VOICE_CAPS` (maxVolume 0.4, autoplayAllowed false), `LUMI_TIMING` (breath 7100ms / scene 1500ms / caption 1500ms / nudge spacing 300_000ms), `LUMI_TONE_MARKERS` (12 phrases), `LUMI_ACCESSIBILITY` (WCAG AA, honorReducedMotion true), `LUMI_EMOTIONAL_STATES` (8: calmIdle/comforting/reflective/sleepy/grounding/joySoft/concernSoft/alert), `LUMI_INTERACTION_PATTERNS` (8: calmCheckIn/quietNudge/guidedRitual/transparencyDisclosure/boundaryReminder/crisisRouting/sceneTransition/voiceUtterance). Module-load assertions: 8 token groups, 8 emotional states, 8 patterns.
+- **4 companion principles** (`identity/sharedCompanionPrinciples.ts`): `emotional-safety`, `consistent-identity`, `transparent-boundaries`, `accessibility-for-all`. Each carries regex `violationPatterns` + `validate(text)` returning matched pattern sources. `validateAllPrinciples(text)` returns per-principle pass/fail.
+- **10 enforcement rules** (`governance/crossPlatformEnforcementRules.ts`): module-load assertion of exactly 6 `critical` (identity-name, identity-role, no-autoplay, volume-cap, captions-available, crisis-route) + exactly 4 `warning` (honors-reduced-motion, all-emotional-states, all-interaction-patterns, tone-marker-coverage). `runEnforcementValidation(report)` returns per-rule results, critical/warning failure counts, and overall `passed === (criticalFailures === 0)`.
+- **7 adaptation boundaries** (`governance/crossPlatformAdaptationBoundaries.ts`): `size`, `animation`, `voice`, `input`, `display`, `haptic`, `battery`. Each carries per-platform (web/mobile) hard limits. **Voice cap = 0.4 / autoplay = false on BOTH platforms** (architect-confirmed); haptic disallowed on web; battery drain ceiling 0% web / 2%/hr mobile.
+- **8 preserved interaction patterns** (`runtime/preservedInteractionPatterns.ts`): each pattern carries `timing` (min/max ms) + `states[]` + `transitions[]`. `checkPatternTiming(key, durationMs)` returns whether duration fits the spec.
+- **7-check identity verification** (`runtime/identityVerificationSystem.ts`): name, role, volume-cap, no-autoplay, breath-cycle, emotional-states, interaction-patterns. Module-load assertion total === 7. `complianceScore = round((passed / 7) * 100)` — bounded 0..100 by construction. `passed === true` only when all 7 pass.
+- **Hook** (`runtime/useConsistencyState.ts`): exposes `validateEnforcement` / `checkTiming` / `verifyIdentity` / `checkAdaptation` plus the registries.
+
+### Architect 1-pass review caught 2 medium issues — both fixed pre-ship
+
+1. **Voice governance gap.** Original `FORBIDDEN_PHRASES` list (15 entries) only covered emotional invalidation; coercion / urgency / commercial-upsell utterances could pass sink-time checks. **Fix:** expanded to 23 phrases across 5 categories; floor guard raised from `< 15` → `< 23`. `VoicePlaybackController.speak()` already runs `containsForbiddenPhrase(text)` before utterance creation, so the new entries take effect immediately with no additional wiring.
+2. **Caption timing mismatch.** `useVoicePresence.speak()` originally scheduled caption dismissal via `setTimeout` keyed off creation time (`caption.lingerUntilMs - Date.now() + CAPTION_LINGER_MS` — effectively 3000ms from caption creation), violating the contract "captions linger 1500ms after audio ends" — for longer utterances captions could disappear BEFORE audio ended. **Fix:** dismissal is now scheduled inside the `onEnd`/`onError` callbacks of the speech utterance, with `dismissedByTerminal` guard against double-fire. When voice is disabled, reduced-audio is on, or `speakRaw` refuses (no utterance created), dismissal is scheduled immediately. All timers cleared on unmount.
+
+### Verification
+
+- `tsc --noEmit` clean.
+- `vite build` 16.54s clean.
+- Dev workflow already running — no Route, Header link, or page edits added.
+
+### Production posture
+
+- ZERO files outside the three new module directories modified.
+- ZERO new npm dependencies.
+- ZERO production wiring. Modules are imported from `@/lumi-voice`, `@/lumi-boundaries`, `@/lumi-consistency` when a host page chooses to opt in.
+
 ## v5.8.59 — Presence page wiring (4 opt-in modules)
 
 First production wiring of the four opt-in companion modules (`lumi-circadian`, `lumi-memory`, `lumi-rituals`, `lumi-scenes`) onto a single `/presence` page, plus the `calm-checkin` entry on the landing page and `MMHBFloatAvatar` (calmIdle) as the visual anchor. **Two layers of gating** per spec:
