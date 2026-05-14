@@ -1,0 +1,76 @@
+./.local/skills/artifacts/artifacts/automation/files/src/mastra/index.ts:118:const serverPort = Number(process.env.PORT ?? "5000");
+./.local/skills/artifacts/artifacts/automation/files/src/mastra/index.ts:141:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/automation/files/src/mastra/inngest/index.ts:30:const localMastraBaseUrl = `http://localhost:${process.env.PORT ?? "5000"}`;
+./.local/skills/artifacts/artifacts/automation/files/tests/testCronAutomation.ts:27:const AUTOMATION_PORT = process.env.PORT ?? "5000";
+./.local/skills/artifacts/artifacts/automation/files/tests/testWebhookAutomation.ts:30:const AUTOMATION_PORT = process.env.PORT ?? "5000";
+./.local/skills/artifacts/artifacts/expo/files/server/serve.js:132:const port = parseInt(process.env.PORT || "3000", 10);
+./.local/skills/artifacts/artifacts/expo/files/server/serve.js:133:server.listen(port, "0.0.0.0", () => {
+./.local/skills/artifacts/artifacts/mockup-sandbox/files/mockupPreviewPlugin.ts:178:        const requestUrl = new URL(req.url ?? "/", "http://127.0.0.1");
+./.local/skills/artifacts/artifacts/mockup-sandbox/files/vite.config.ts:8:const rawPort = process.env.PORT;
+./.local/skills/artifacts/artifacts/mockup-sandbox/files/vite.config.ts:61:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/mockup-sandbox/files/vite.config.ts:69:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/react-vite/files/vite.config.ts:7:const rawPort = process.env.PORT;
+./.local/skills/artifacts/artifacts/react-vite/files/vite.config.ts:64:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/react-vite/files/vite.config.ts:72:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/slides/files/vite.config.ts:7:const rawPort = process.env.PORT;
+./.local/skills/artifacts/artifacts/slides/files/vite.config.ts:63:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/slides/files/vite.config.ts:71:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/video-js/files/vite.config.ts:7:const rawPort = process.env.PORT;
+./.local/skills/artifacts/artifacts/video-js/files/vite.config.ts:68:    host: "0.0.0.0",
+./.local/skills/artifacts/artifacts/video-js/files/vite.config.ts:76:    host: "0.0.0.0",
+./client/src/lumi-backend/config/apiConfig.ts:18:  host: "0.0.0.0",
+./server/routes/health.mjs:463:            const url = `http://0.0.0.0:${process.env.PORT || 5000}${target}`;
+./server/routes/health.mjs:643:            await fetch(`http://0.0.0.0:${process.env.PORT || 5000}${p}`, { signal: AbortSignal.timeout(5000) }).catch(() => {});
+./server/routes/object-storage.mjs:7:const REPLIT_SIDECAR_ENDPOINT = "http://127.0.0.1:1106";
+./server/routes/sop.mjs:285:  const baseUrl = `http://127.0.0.1:${
+./server/routes/sop.mjs:286:    Number.parseInt(String(process.env.PORT || 5000), 10) || 5000
+./server/routes/sop.mjs:329:  const baseUrl = `http://127.0.0.1:${
+./server/routes/sop.mjs:330:    Number.parseInt(String(process.env.PORT || 5000), 10) || 5000
+./server/routes/sop.mjs:587:  // probes off-box (defense in depth alongside the hardcoded 127.0.0.1 host).
+./server/routes/sop.mjs:588:  const raw = process.env.PORT;
+./server/routes/sop.mjs:591:  return `http://127.0.0.1:${port}`;
+./server/dev.mjs:634:  const preferredPort = parseInt(process.env.PORT, 10) || 5000;
+./server/dev.mjs:639:      const server = app.listen(port, "0.0.0.0");
+./server/dev.mjs:734:  logger.info("Dev server listening", { url: `http://0.0.0.0:${boundPort}`, port: boundPort });
+./server/replit_integrations/object_storage/objectStorage.ts:12:const REPLIT_SIDECAR_ENDPOINT = "http://127.0.0.1:1106";
+./server/tests/vitest.setup.mjs:4:const PORT = process.env.PORT || "5000";
+./server/tests/vitest.setup.mjs:5:const BASE_URL = process.env.BASE_URL || `http://127.0.0.1:${PORT}`;
+./server/tests/vitest.setup.mjs:38:  process.env.PORT = PORT;
+./server/index.mjs:202:const PORT = process.env.PORT || 5000;
+./server/index.mjs:220:const server = app.listen(PORT, "0.0.0.0", () => {
+./server/index.mjs:221:  console.log(`Server listening on http://0.0.0.0:${PORT}`);
+./server/index.mjs:222:  logger.info("Server listening", { url: `http://0.0.0.0:${PORT}`, port: PORT });
+./server/observability/otelApi.mjs:9:// could call app.listen() — turning observability (a non-essential feature)
+./server/observability/tracing.mjs:92:      // so the SDK doesn't try its default OTLP/HTTP target (127.0.0.1:4318)
+./server/app.mjs:683:const PORT = process.env.PORT || 5000;
+./server/app.mjs:696:// Background boot sequence — runs AFTER app.listen() so a slow or hung
+./server/app.mjs:739:app.listen(PORT, "0.0.0.0", () => {
+./.archive/runtime-violations/server/replit_integrations/object_storage/objectStorage.ts:12:const REPLIT_SIDECAR_ENDPOINT = "http://127.0.0.1:1106";
+./_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_server_lib/productionOptimizations.js:183:    // Bind to 0.0.0.0 for Cloud Run
+./_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_server_lib/productionOptimizations.js:184:    host: '0.0.0.0',
+./_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_server_lib/productionOptimizations.js:186:    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 5000,
+./_quarantine/archive_DO_NOT_DELETE/automation/dev-server.mjs:28:    HOST: '0.0.0.0'
+./scripts/dev.mjs:10:const PORT = process.env.PORT || "5000";
+./scripts/dev.mjs:11:process.env.PORT = PORT;
+./scripts/dev.mjs:12:process.env.HOST = "0.0.0.0";
+./scripts/endpointContractTest.mjs:21:const PORT = process.env.PORT || 5000;
+./scripts/guardrails.mjs:75:  check('Server binds to 0.0.0.0', serverCode.includes('0.0.0.0'));
+./scripts/guardrails.mjs:76:  check('Server uses process.env.PORT', serverCode.includes('process.env.PORT') || serverCode.includes('PORT'));
+./scripts/kill-port.mjs:5:const port = Number(process.env.PORT || 5000);
+./scripts/report.mjs:43:    { name: 'Port binding configured', done: checkContains('server/index.mjs', '0.0.0.0') }
+./scripts/scan.mjs:74:if (!portBindings.includes('0.0.0.0')) {
+./scripts/scan.mjs:75:  addIssue(ISSUE_TYPES.WARNING, 'Server', 'Server may not bind to 0.0.0.0');
+./scripts/scripts/free-port.mjs:4:const port = Number(process.argv[2] || process.env.PORT || 5000);
+./scripts/scripts/kill-port.mjs:3:const port = process.argv[2] || process.env.PORT || "5000";
+./scripts/smoke-test.mjs:4:const BASE_HOST = "127.0.0.1";
+./scripts/smoke-test.mjs:5:const PORT = process.env.PORT || 5000;
+./scripts/smoke.mjs:22:const BASE_URL = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:5000';
+./scripts/smokeTest.mjs:29:const PORT = process.env.PORT || 5000;
+./scripts/verify-integrations.mjs:77:    const port = process.env.PORT || 5000;
+./scripts/heal-360.mjs:229:    const req = http.get({ host: "127.0.0.1", port, path: pathStr, timeout: timeoutMs }, (res) => {
+./scripts/heal-360.mjs:242:  const port = process.env.PORT || 5000;
+./tests/api.test.mjs:5:const BASE_URL = process.env.TEST_URL || "http://127.0.0.1:5000";
+./tests/content-crud.test.mjs:3:const BASE_URL = process.env.TEST_URL || "http://127.0.0.1:5000";
+./tests/vitest.setup.mjs:15:    server = app.listen(0, "127.0.0.1", resolve);
+./tests/vitest.setup.mjs:21:  baseUrl = `http://127.0.0.1:${port}`;
+./vite.config.js:53:    host: '0.0.0.0',
