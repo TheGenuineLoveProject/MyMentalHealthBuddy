@@ -63,9 +63,31 @@ Five standalone opt-in modules at `client/src/lumi-{cbt,tracker,crisis,library,a
 - **Feedback loop** (`feedback/feedbackLoop.ts`) — in-memory `submitFeedback`/`getFeedbackStats(messageId)`/`clearFeedback()`. Hosts wire their own persistence + transmission with explicit user consent.
 - **Governance** (`governance/agentGovernanceRules.ts`) — 8 rules (guardrails-before-display / crisis-detection-every-message / no-server-storage-without-consent / user-can-delete-history / temperature-cap-0.7 / max-tokens-150 / response-timeout-10s / fallback-on-failure) with module-load floor `>= 8`.
 
-### Architect 1-pass review
+### Phase 30b — OfficialLumi `<img>`-only delta (literal-spec follow-up on top of v5.8.63 reconcile)
+
+User chose the literal-spec interpretation for the avatar render path on top of the v5.8.63 reconcile: flip `OfficialLumi` to `<img>`-only rendering (drop the SVG default branch) **while keeping all 17 page-placement entries intact** (crisis-support / loading-state / error-state / etc. preserved). The runtime `canRenderLumi` policy gate is the single enforcement of the page map and is unchanged.
+
+Files: `client/src/lumi-registry/components/OfficialLumi.tsx` (rewritten — SVG branch removed; `AssetLumiBody` is now the only render path; `renderMode` prop preserved at the type level for source compatibility but is a runtime no-op; the `BODY_COLOR`/`BELLY_COLOR`/`SPROUT_COLOR`/`EYE_COLOR`/`SMILE_COLOR` constants and the inline `<svg>` block are gone).
+
+Preserved (no change): `lumiPagePlacementMap.ts` (all 17 entries), `canRenderLumi`, `validateVariantPlacement`, `getMaxSizeForContext`, `OfficialLumiPosition` / `OfficialLumiRenderMode` / `OfficialLumiMotion` type exports, `OfficialLumiProps` shape, page-policy trust boundary (forbidden surfaces still render the hidden `<div data-policy-blocked="true">`), the unknown-variant fallback `<div>`, the validation-issue effect (always logs + notifies, regardless of environment).
+
+Behavior change: any production caller that did NOT pass `renderMode="asset"` previously got the inline canonical SVG; they now get the canonical PNG via `variant.src` (`/lumi/official/*.png`). Since the PNG assets at `/lumi/official/*.png` have not yet been dropped (per v5.8.63 follow-up), every render now hits the `<img>` 404 path → `AssetLumiBody`'s `useState`-driven fallback replaces the broken image with a same-size invisible container (no broken-image chrome). This is the documented graceful-degradation path. The `onError` callback still fires on each failure so hosts can swap back to a custom render if desired. Once the PNG drop ships, every `OfficialLumi` instance will render the canonical asset with no caller change required.
+
+Verification: `npx tsc --noEmit` clean, `npx vite build` 20.43s clean (`index-*.js` 751.39 kB main bundle unchanged — the SVG branch removal offset by tighter `<img>` path, no net size change). Zero files outside `client/src/lumi-registry/components/OfficialLumi.tsx` modified for this delta.
+
+### Architect 1-pass review (5 new modules)
 
 PASS — no blocking contract violations. All five modules met their stated invariants. Architect noted one optional hardening: clamp lower bounds in `AgentRuntime` constructor (`maxTokens >= 1`, `timeoutMs >= 1`) to fail safely if a host passes `0` or a negative number. Applied pre-ship.
+
+### Architect 1-pass review (Phase 30b OfficialLumi flip + agent runtime)
+
+Architect reviewed the `<img>`-only flip and the agent runtime in a follow-up pass. Trust boundary (canRenderLumi + 17-page map) confirmed intact. Two real findings — both fixed pre-ship, build re-verified (16.07s, no size delta):
+
+1. **`renderMode` no-op silent footgun** — `OfficialLumi` accepted `renderMode="svg"` but rendered the asset path; a caller relying on the inline SVG would silently get the asset 404 fallback. Fix: added `@deprecated` JSDoc on the `renderMode` prop documenting the no-op semantics + dev-only `console.warn` (gated through the existing `isDev()` check) emitted from a `useEffect` when `renderMode === "svg"` is supplied, naming the variant + scene of the call site so it's actionable. The prop is still accepted at the type level so existing call sites continue to compile.
+
+2. **Cooperative-only timeout in `AgentRuntime`** — `AbortController` was the sole timeout enforcement; a non-cooperative host `chatFn` that ignored `AbortSignal` could exceed `timeoutMs`. Fix: wrapped the `chatFn` call in `Promise.race` against an explicit timer-reject path (`new Promise<never>` that rejects with `[lumi-agent] chatFn exceeded ${timeoutMs}ms` and aborts the controller). The `setTimeout` handle is captured in a closed-over `timer` variable and cleared in the existing `finally` block to prevent leak. Behavior on timeout: race rejects → existing `catch` returns `DEFAULT_FALLBACK_MESSAGE` exactly as before, no behavioral change for cooperative providers.
+
+Architect also flagged "block rollout if `OfficialLumi` is rendered anywhere in production" — moot here. The `lumi-registry` module is opt-in and not imported by `App.jsx` (per v5.8.62/63 shipping pattern); zero current production callers exist for `OfficialLumi`. The PNG drop into `client/public/lumi/official/` remains the documented follow-up before any host wires `OfficialLumi` to a production surface.
 
 Architect also explicitly confirmed the deliberate deviation from spec line 110 ("re-export from lumi-registry/index.ts") was the correct architectural call: re-exporting from `lumi-registry` would create wrong dependency direction (registry is the lowest layer in the avatar/identity hierarchy, while the new modules are higher-layer feature modules that should consume registry, not the other way around). Each new module has its own barrel at `client/src/<module>/index.ts` instead.
 

@@ -5,6 +5,13 @@
  * placement against the canonical registry, enforces size limits,
  * shows a dev-only warning overlay on placement violations, and
  * never throws — UI must never crash on a misconfigured Lumi.
+ *
+ * v5.8.64 — flipped to `<img>`-only rendering (literal-spec delta on top
+ * of v5.8.63). The SVG render branch and `renderMode="svg"` default are
+ * removed. The `renderMode` prop is preserved at the type level for
+ * backward source compatibility but is functionally a no-op — every render
+ * goes through `AssetLumiBody`. The page-policy gate (`canRenderLumi`) is
+ * unchanged and still enforces the crisis-support trust boundary.
  */
 
 import * as React from "react";
@@ -22,10 +29,13 @@ import { isDevEnvironment } from "../internal/devGate";
 
 export type OfficialLumiPosition = "hero" | "card" | "inline" | "background";
 
-/** Phase 30 — render mode. `svg` keeps v5.8.62 behavior (default, no break). `asset` switches to the canonical PNG via `/lumi/official/`. */
+/**
+ * v5.8.64 — `renderMode` is preserved as a type for source compatibility but
+ * the SVG branch has been removed. Both values resolve to `<img>`-only render.
+ */
 export type OfficialLumiRenderMode = "svg" | "asset";
 
-/** Phase 30 — motion intensity for asset render mode. */
+/** Phase 30 — motion intensity. */
 export type OfficialLumiMotion = "soft" | "reduced" | "none";
 
 export interface OfficialLumiProps {
@@ -43,11 +53,17 @@ export interface OfficialLumiProps {
   readonly onClick?: () => void;
   /** Fired (in any environment) when placement / size validation reports issues. */
   readonly onValidationIssue?: (issues: ReadonlyArray<string>) => void;
-  /** Phase 30 — render mode. Defaults to `svg` to preserve v5.8.62 behavior. */
+  /**
+   * @deprecated v5.8.64 — `renderMode` is accepted for source compatibility
+   * but is a runtime no-op. Every render now goes through the `<img>` path.
+   * Passing `"svg"` will emit a dev-only console warning and resolve to the
+   * asset path. Remove this prop from call sites; it will be deleted in a
+   * future release.
+   */
   readonly renderMode?: OfficialLumiRenderMode;
-  /** Phase 30 — motion intensity (asset mode only). Default `soft`. */
+  /** Motion intensity. Default `soft`. */
   readonly motion?: OfficialLumiMotion;
-  /** Phase 30 — invoked if the asset image fails to load (asset mode only). */
+  /** Invoked if the asset image fails to load. */
   readonly onError?: (src: string) => void;
   readonly "data-testid"?: string;
 }
@@ -55,21 +71,20 @@ export interface OfficialLumiProps {
 const isDev = isDevEnvironment;
 
 /**
- * Phase 30 — asset render body. Owns the `<img>` 404-fallback state
- * (must live in its own component so the conditional `useState` call is
- * unconditional — the parent `OfficialLumi` may bail out before the
- * asset branch is reached).
+ * Asset render body. Owns the `<img>` 404-fallback state (lives in its
+ * own component so the conditional `useState` call is unconditional —
+ * the parent `OfficialLumi` may bail out before this body is reached).
  *
  * On image load failure: the broken `<img>` is replaced by an empty,
  * still-sized container so layout doesn't jump and no broken-image UI
  * is shown. Optional `onError` callback fires with the failed src so
- * hosts can surface a fallback (e.g. swap to `renderMode="svg"`).
+ * hosts can surface a fallback path.
  */
 const AssetLumiBody: React.FC<{
   variantData: ReturnType<typeof getVariant>;
   finalSize: number;
   heightPx?: number;
-  ariaLabel: string;
+  ariaLabel: string | undefined;
   decorative: boolean;
   dataTestId: string;
   variant: LumiVariantId;
@@ -99,7 +114,7 @@ const AssetLumiBody: React.FC<{
   onError,
 }) => {
   const [errored, setErrored] = useState(false);
-  // Phase 30 — reset 404 fallback when src changes so the new asset gets a fresh load attempt.
+  // Reset 404 fallback when src changes so the new asset gets a fresh load attempt.
   useEffect(() => {
     setErrored(false);
   }, [variantData.src]);
@@ -151,12 +166,6 @@ const AssetLumiBody: React.FC<{
   );
 };
 
-const BODY_COLOR = "#FFF5F0";
-const BELLY_COLOR = "#B0D0B3";
-const SPROUT_COLOR = "#81C784";
-const EYE_COLOR = "#5C6B5D";
-const SMILE_COLOR = "#5C6B5D";
-
 export const OfficialLumi: React.FC<OfficialLumiProps> = ({
   variant,
   scene,
@@ -170,7 +179,8 @@ export const OfficialLumi: React.FC<OfficialLumiProps> = ({
   className,
   onClick,
   onValidationIssue,
-  renderMode = "svg",
+  // renderMode prop accepted for source compatibility, ignored at runtime (v5.8.64 — img-only).
+  renderMode,
   motion = "soft",
   onError,
   "data-testid": dataTestId,
@@ -204,8 +214,7 @@ export const OfficialLumi: React.FC<OfficialLumiProps> = ({
     return { valid: issues.length === 0, issues };
   }, [variant, scene, sizeViolated, requested, cap, variantCap, finalSize, policyDecision]);
 
-  // Always log + notify on validation issues, regardless of environment —
-  // dev-only logging swallowed real problems silently (architect finding #5).
+  // Always log + notify on validation issues, regardless of environment.
   React.useEffect(() => {
     if (validation.issues.length === 0) return;
     if (isDev()) {
@@ -216,7 +225,8 @@ export const OfficialLumi: React.FC<OfficialLumiProps> = ({
   }, [validation.issues, variant, scene, onValidationIssue]);
 
   // Trust boundary: page policy gate refuses render on forbidden surfaces
-  // (crisis-support, etc.) regardless of host intent (architect finding #2).
+  // (crisis-support, etc.) regardless of host intent. All 17 page entries
+  // remain authoritative — gate is the runtime enforcement of that map.
   if (!policyDecision.allowed) {
     return (
       <div
@@ -247,125 +257,38 @@ export const OfficialLumi: React.FC<OfficialLumiProps> = ({
     );
   }
 
+  // v5.8.64 — dev-only warning when a caller passes the deprecated `renderMode="svg"`
+  // so the no-op semantics don't silently surprise anyone who expected the inline SVG.
+  React.useEffect(() => {
+    if (renderMode === "svg" && isDev()) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[OfficialLumi] renderMode="svg" is deprecated and a runtime no-op since v5.8.64; the canonical PNG asset is rendered instead. Remove the prop from this call site (variant="${variant}", scene="${scene}").`,
+      );
+    }
+  }, [renderMode, variant, scene]);
+
   const ariaLabel = decorative ? undefined : variantData.name;
-
-  const containerStyle: React.CSSProperties = {
-    width: finalSize,
-    height: finalSize,
-    display: "inline-block",
-    position: "relative",
-    cursor: onClick ? "pointer" : undefined,
-  };
-
-  const glowStyle: React.CSSProperties = {
-    position: "absolute",
-    inset: -finalSize * 0.15,
-    borderRadius: "50%",
-    background: `radial-gradient(circle, ${variantData.glowColor} 0%, transparent 70%)`,
-    pointerEvents: "none",
-  };
-
-  const showDevWarning = isDev() && (!validation.valid || sizeViolated);
-
-  // Phase 30 — asset render path. Renders the canonical PNG from
-  // `variant.src` with CSS-driven motion classes. SSR-safe (no DOM
-  // measurement). Glow is suppressed in asset mode — drop-shadow on
-  // `.hero-lumi` covers the intended visual treatment.
-  if (renderMode === "asset") {
-    const effectiveMotion: OfficialLumiMotion = reducedMotion ? "reduced" : motion;
-    const interactive = typeof onClick === "function";
-    return (
-      <AssetLumiBody
-        variantData={variantData}
-        finalSize={finalSize}
-        heightPx={heightPx}
-        ariaLabel={ariaLabel}
-        decorative={decorative}
-        dataTestId={dataTestId ?? `lumi-${variant.toLowerCase()}`}
-        variant={variant}
-        scene={scene}
-        position={position}
-        reducedMotion={reducedMotion}
-        effectiveMotion={effectiveMotion}
-        className={className}
-        interactive={interactive}
-        onClick={onClick}
-        onError={onError}
-      />
-    );
-  }
+  const effectiveMotion: OfficialLumiMotion = reducedMotion ? "reduced" : motion;
+  const interactive = typeof onClick === "function";
 
   return (
-    <div
-      role="img"
-      aria-hidden={decorative}
-      aria-label={ariaLabel}
-      data-testid={dataTestId ?? `lumi-${variant.toLowerCase()}`}
-      data-variant={variant}
-      data-scene={scene}
-      data-position={position}
-      data-lumi-protected="true"
-      data-render-mode="svg"
-      data-reduced-motion={reducedMotion ? "true" : undefined}
+    <AssetLumiBody
+      variantData={variantData}
+      finalSize={finalSize}
+      heightPx={heightPx}
+      ariaLabel={ariaLabel}
+      decorative={decorative}
+      dataTestId={dataTestId ?? `lumi-${variant.toLowerCase()}`}
+      variant={variant}
+      scene={scene}
+      position={position}
+      reducedMotion={reducedMotion}
+      effectiveMotion={effectiveMotion}
       className={className}
-      style={containerStyle}
+      interactive={interactive}
       onClick={onClick}
-    >
-      <div aria-hidden="true" style={glowStyle} />
-      <svg
-        viewBox="0 0 100 110"
-        width={finalSize}
-        height={finalSize}
-        style={{ display: "block", position: "relative", zIndex: 1 }}
-        aria-hidden="true"
-      >
-        {/* Sprout — required identity feature */}
-        <ellipse cx="50" cy="14" rx="3" ry="6" fill={SPROUT_COLOR} />
-        <ellipse cx="46" cy="11" rx="3.5" ry="2.5" fill={SPROUT_COLOR} transform="rotate(-30 46 11)" />
-        <ellipse cx="54" cy="11" rx="3.5" ry="2.5" fill={SPROUT_COLOR} transform="rotate(30 54 11)" />
-        {/* Body — egg / bean silhouette */}
-        <ellipse cx="50" cy="62" rx="32" ry="38" fill={BODY_COLOR} />
-        {/* Belly */}
-        <ellipse cx="50" cy="74" rx="20" ry="22" fill={BELLY_COLOR} opacity={0.85} />
-        {/* Eyes */}
-        <ellipse cx="40" cy="56" rx="2.4" ry="3" fill={EYE_COLOR} />
-        <ellipse cx="60" cy="56" rx="2.4" ry="3" fill={EYE_COLOR} />
-        {/* Subtle smile */}
-        <path d="M 43 68 Q 50 72 57 68" stroke={SMILE_COLOR} strokeWidth="1.3" fill="none" strokeLinecap="round" />
-      </svg>
-      {showDevWarning && (
-        <div
-          style={{
-            position: "absolute",
-            top: -4,
-            left: -4,
-            right: -4,
-            bottom: -4,
-            border: "2px dashed rgba(220, 38, 38, 0.85)",
-            borderRadius: 8,
-            pointerEvents: "none",
-            zIndex: 2,
-          }}
-          data-testid="lumi-dev-warning"
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: -22,
-              left: 0,
-              fontSize: 10,
-              padding: "2px 6px",
-              background: "rgba(220, 38, 38, 0.9)",
-              color: "white",
-              borderRadius: 4,
-              whiteSpace: "nowrap",
-              fontFamily: "system-ui, sans-serif",
-            }}
-          >
-            Lumi placement violation — see console
-          </div>
-        </div>
-      )}
-    </div>
+      onError={onError}
+    />
   );
 };

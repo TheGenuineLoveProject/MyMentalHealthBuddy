@@ -113,25 +113,38 @@ export class AgentRuntime {
       return { userMessage, assistantMessage, crisisTriggered, redirectedBy: redirecting.guardrail };
     }
 
-    // Call host-provided LLM with hard timeout.
+    // Call host-provided LLM with hard timeout. AbortController signals
+    // cooperative cancellation to providers that honor it; the additional
+    // Promise.race against an explicit timer-reject enforces a wall-clock
+    // ceiling even when the host `chatFn` ignores `AbortSignal`
+    // (architect-flagged in v5.8.64 review).
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => {
+        controller.abort();
+        reject(new Error(`[lumi-agent] chatFn exceeded ${this.timeoutMs}ms`));
+      }, this.timeoutMs);
+    });
     let modelText: string;
     try {
-      modelText = await this.chatFn({
-        systemPrompt: LUMI_SYSTEM_PROMPT,
-        messages: this.messages,
-        temperature: this.temperature,
-        maxTokens: this.maxTokens,
-        timeoutMs: this.timeoutMs,
-        signal: controller.signal,
-      });
+      modelText = await Promise.race([
+        this.chatFn({
+          systemPrompt: LUMI_SYSTEM_PROMPT,
+          messages: this.messages,
+          temperature: this.temperature,
+          maxTokens: this.maxTokens,
+          timeoutMs: this.timeoutMs,
+          signal: controller.signal,
+        }),
+        timeoutPromise,
+      ]);
     } catch {
       const assistantMessage = makeMessage("assistant", this.fallbackMessage);
       this.messages = [...this.messages, assistantMessage];
       return { userMessage, assistantMessage, crisisTriggered: false };
     } finally {
-      clearTimeout(timer);
+      if (timer !== null) clearTimeout(timer);
     }
 
     if (!modelText || !modelText.trim()) {
