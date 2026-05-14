@@ -4,7 +4,9 @@ import { gsap } from 'gsap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SEO from '../components/SEO';
-import LumiMascot from '../components/lumi/LumiMascot.jsx';
+// Iter 2d (2026-05-15): removed legacy LumiMascot import — sole usage at L184
+// swapped to canonical OfficialLumi.
+import { OfficialLumi } from '../lumi-registry';
 import LumiV6 from '../components/lumi/LumiV6';
 import { 
   SacredLayout, 
@@ -181,7 +183,25 @@ export default function Home() {
               }}
               data-testid="img-home-logo"
             >
-              <LumiMascot emotion="neutral" size={56} interactive={false} />
+              {/* Iter 2d (2026-05-15): swapped legacy LumiMascot (56px,
+                  emotion="neutral") → canonical OfficialLumi gated by
+                  pageId="home-hero". Variant LUMI_SOFT_PRESENCE matches the
+                  registered placement. position="inline" used (NOT "hero")
+                  because brand heading "MyMentalHealthBuddy" renders
+                  immediately beside this logo at L186-191; the home-hero
+                  placement specialRule "NO heading text beside Lumi" applies
+                  only to the hero position. Inline cap is 95px so widthPx=80
+                  is in-bounds. Slight upsize from 56→80 per Iter-2d brief. */}
+              <OfficialLumi
+                variant="LUMI_SOFT_PRESENCE"
+                scene="home-header-logo"
+                position="inline"
+                pageId="home-hero"
+                widthPx={80}
+                heightPx={80}
+                decorative={true}
+                data-testid="lumi-home-header-logo"
+              />
             </span>
             <span 
               className="sacred-heading text-xl hidden md:block"
