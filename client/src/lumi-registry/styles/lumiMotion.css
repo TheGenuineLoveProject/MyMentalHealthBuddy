@@ -1,0 +1,80 @@
+/**
+ * Phase 30 — Lumi motion CSS (CSS-only, no JS animation libraries).
+ *
+ * Breath cycle locked to 7100ms (matches v5.8.60 voice + v5.8.62
+ * motion governance). Reduced-motion is honored at the @media level —
+ * any class that would animate falls back to `animation: none`.
+ *
+ * This file is opt-in; importing it from `client/src/lumi-registry/index.ts`
+ * means hosts that import any registry symbol pick up the keyframes.
+ */
+
+.lumi-official {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  position: relative;
+}
+
+/* Phase 30 fix — opt-in interactivity for clickable Lumi instances. */
+.lumi-official.lumi-interactive {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.lumi-official img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+}
+
+.lumi-motion-soft img {
+  animation: lumi-soft-breathe 7.1s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.lumi-motion-reduced img {
+  animation: lumi-soft-breathe 10s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.lumi-motion-none img {
+  animation: none;
+}
+
+@keyframes lumi-soft-breathe {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  39% {
+    transform: translateY(-3px) scale(1.012);
+  }
+  45% {
+    transform: translateY(-3px) scale(1.012);
+  }
+  96% {
+    transform: translateY(0px) scale(1);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumi-motion-soft img,
+  .lumi-motion-reduced img,
+  .lumi-motion-none img {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+.hero-lumi {
+  width: min(42vw, 340px);
+  margin-inline: auto;
+  filter: drop-shadow(0 18px 30px rgba(126, 144, 110, 0.16));
+}

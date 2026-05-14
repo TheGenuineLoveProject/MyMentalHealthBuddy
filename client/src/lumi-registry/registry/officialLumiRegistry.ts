@@ -17,13 +17,39 @@ export type LumiVariantId =
   | "LUMI_COMPANION"
   | "LUMI_PATH"
   | "LUMI_EMOTION_ORB"
-  | "LUMI_SOFT_PRESENCE";
+  | "LUMI_SOFT_PRESENCE"
+  | "LUMI_FLOAT_IDLE";
+
+/**
+ * MMHB avatar runtime state ids that map onto each variant. These match
+ * the existing `MMHBAvatarRuntimeProvider` state machine (calmIdle,
+ * peacefulJoy, gentleConcern, welcoming, comforting, grounding,
+ * reflective, growthPath, sleepy).
+ */
+export type LumiAssetRole =
+  | "calmIdle"
+  | "welcoming"
+  | "comforting"
+  | "grounding"
+  | "reflective"
+  | "growthPath"
+  | "sleepy";
 
 export interface OfficialLumiVariant {
   readonly id: LumiVariantId;
   readonly name: string;
+  /** Phase 30 short label (used by `<OfficialLumi renderMode="asset">`). */
+  readonly label: string;
   readonly description: string;
   readonly emotionalRole: string;
+  /** Phase 30 — runtime state id this variant fulfils. */
+  readonly assetRole: LumiAssetRole;
+  /** Phase 30 — canonical PNG path under `/lumi/official/`. */
+  readonly src: string;
+  /** Phase 30 — accessible label for asset render mode. */
+  readonly alt: string;
+  /** Phase 30 — non-negotiable protected-identity flag (always true). */
+  readonly protectedIdentity: true;
   readonly useWhen: ReadonlyArray<string>;
   readonly neverUseWhen: ReadonlyArray<string>;
   readonly motionProfile: string;
@@ -37,8 +63,13 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
   LUMI_CALM_FLOAT: Object.freeze({
     id: "LUMI_CALM_FLOAT",
     name: "Calm Float Lumi",
+    label: "Calm floating Lumi",
     description: "Floating egg-shaped Lumi",
     emotionalRole: "Ambient calm, grounding, idle presence",
+    assetRole: "sleepy",
+    src: "/lumi/official/lumi-calm-float.png",
+    alt: "Lumi floating peacefully",
+    protectedIdentity: true,
     useWhen: Object.freeze(["idle empty states", "ambient background", "loading"]),
     neverUseWhen: Object.freeze(["high-energy", "celebration", "urgent"]),
     motionProfile: "float+breathe+sparkle",
@@ -50,8 +81,13 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
   LUMI_HEART: Object.freeze({
     id: "LUMI_HEART",
     name: "Heart Lumi",
+    label: "Heart Lumi",
     description: "Lumi with gentle heart glow",
     emotionalRole: "Reassurance, compassion, warmth",
+    assetRole: "comforting",
+    src: "/lumi/official/lumi-heart.png",
+    alt: "Lumi holding a gentle glowing heart",
+    protectedIdentity: true,
     useWhen: Object.freeze(["privacy", "welcome", "success", "encouragement"]),
     neverUseWhen: Object.freeze(["error", "clinical", "urgent", "celebration"]),
     motionProfile: "heart-glow-pulse+breathe",
@@ -63,8 +99,13 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
   LUMI_MEDITATION: Object.freeze({
     id: "LUMI_MEDITATION",
     name: "Meditation Lumi",
+    label: "Meditation Lumi",
     description: "Seated orbit Lumi",
     emotionalRole: "Breathing, mindfulness, rituals",
+    assetRole: "grounding",
+    src: "/lumi/official/lumi-meditation.png",
+    alt: "Lumi calmly guiding a grounding moment",
+    protectedIdentity: true,
     useWhen: Object.freeze(["breathing exercises", "rituals", "grounding"]),
     neverUseWhen: Object.freeze(["high-energy", "urgent", "onboarding"]),
     motionProfile: "aura-ring+slow-breathe+stillness",
@@ -76,8 +117,13 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
   LUMI_COMPANION: Object.freeze({
     id: "LUMI_COMPANION",
     name: "Companion Lumi",
+    label: "Companion Lumi",
     description: "Seated halo Lumi",
     emotionalRole: "Listening, reflection, companionship",
+    assetRole: "welcoming",
+    src: "/lumi/official/lumi-companion.png",
+    alt: "Lumi sitting calmly as a gentle companion",
+    protectedIdentity: true,
     useWhen: Object.freeze(["journal", "check-in", "emotional support"]),
     neverUseWhen: Object.freeze(["playful", "gamification", "urgent"]),
     motionProfile: "halo-glow+minimal-breathe+stillness",
@@ -89,8 +135,13 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
   LUMI_PATH: Object.freeze({
     id: "LUMI_PATH",
     name: "Path Lumi",
+    label: "Path Lumi",
     description: "Walking-path Lumi",
     emotionalRole: "Onboarding, journey, forward movement",
+    assetRole: "growthPath",
+    src: "/lumi/official/lumi-path.png",
+    alt: "Lumi standing gently on a calm path",
+    protectedIdentity: true,
     useWhen: Object.freeze(["onboarding", "progress", "next steps"]),
     neverUseWhen: Object.freeze(["static content", "error", "crisis"]),
     motionProfile: "walking+breathe+path-sparkle",
@@ -102,8 +153,13 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
   LUMI_EMOTION_ORB: Object.freeze({
     id: "LUMI_EMOTION_ORB",
     name: "Emotion Orb Lumi",
+    label: "Emotion orb Lumi",
     description: "Lumi holding emotion orb",
     emotionalRole: "Emotional awareness, literacy",
+    assetRole: "reflective",
+    src: "/lumi/official/lumi-emotion-orb.png",
+    alt: "Lumi holding a soft emotional reflection orb",
+    protectedIdentity: true,
     useWhen: Object.freeze(["emotional education", "mood check-ins"]),
     neverUseWhen: Object.freeze(["clinical", "crisis"]),
     motionProfile: "slow-orb-glow+hold-pose",
@@ -115,8 +171,13 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
   LUMI_SOFT_PRESENCE: Object.freeze({
     id: "LUMI_SOFT_PRESENCE",
     name: "Soft Presence Lumi",
+    label: "Soft presence Lumi",
     description: "Folded-hands Lumi",
     emotionalRole: "Ambient support, silent companionship",
+    assetRole: "welcoming",
+    src: "/lumi/official/lumi-soft-presence.png",
+    alt: "Lumi softly present and welcoming",
+    protectedIdentity: true,
     useWhen: Object.freeze(["homepage hero", "empty states", "quiet waiting"]),
     neverUseWhen: Object.freeze(["active conversation", "ritual guidance"]),
     motionProfile: "ultra-minimal-breathe+soft-glow",
@@ -124,6 +185,24 @@ export const OFFICIAL_LUMI_REGISTRY: Readonly<Record<LumiVariantId, OfficialLumi
     maxVisualDominance: 35,
     glowColor: "rgba(168,184,154,0.12)",
     priority: 7,
+  }),
+  LUMI_FLOAT_IDLE: Object.freeze({
+    id: "LUMI_FLOAT_IDLE",
+    name: "Float Idle Lumi",
+    label: "Floating calm Lumi",
+    description: "Floating idle Lumi with closed eyes — the runtime calmIdle anchor",
+    emotionalRole: "Default ambient idle presence",
+    assetRole: "calmIdle",
+    src: "/lumi/official/lumi-float-idle.png",
+    alt: "Lumi floating calmly with closed eyes",
+    protectedIdentity: true,
+    useWhen: Object.freeze(["default idle", "calm anchor", "header float"]),
+    neverUseWhen: Object.freeze(["high-energy", "celebration", "urgent", "crisis"]),
+    motionProfile: "soft-breathe-7100ms",
+    sizeLimits: Object.freeze({ hero: 280, card: 140, inline: 90 }),
+    maxVisualDominance: 30,
+    glowColor: "rgba(168,184,154,0.12)",
+    priority: 8,
   }),
 } as const);
 
@@ -135,10 +214,42 @@ export const ALL_VARIANT_IDS: ReadonlyArray<LumiVariantId> = Object.freeze([
   "LUMI_PATH",
   "LUMI_EMOTION_ORB",
   "LUMI_SOFT_PRESENCE",
+  "LUMI_FLOAT_IDLE",
 ] as const);
 
-if (ALL_VARIANT_IDS.length !== 7) {
-  throw new Error(`[lumi-registry] ALL_VARIANT_IDS floor violated: expected 7, got ${ALL_VARIANT_IDS.length}.`);
+if (ALL_VARIANT_IDS.length !== 8) {
+  throw new Error(`[lumi-registry] ALL_VARIANT_IDS floor violated: expected 8, got ${ALL_VARIANT_IDS.length}.`);
+}
+
+/** Phase 30 — assert every variant carries `protectedIdentity: true`. */
+for (const id of ALL_VARIANT_IDS) {
+  const v = OFFICIAL_LUMI_REGISTRY[id];
+  if (v.protectedIdentity !== true) {
+    throw new Error(`[lumi-registry] protectedIdentity floor violated for "${id}".`);
+  }
+  if (!v.src.startsWith("/lumi/official/")) {
+    throw new Error(`[lumi-registry] non-canonical asset path for "${id}": ${v.src}`);
+  }
+}
+
+/** Phase 30 helper — return all variants whose `assetRole` matches the given runtime state. */
+export function getVariantsByRole(role: LumiAssetRole): ReadonlyArray<LumiVariantId> {
+  return ALL_VARIANT_IDS.filter((id) => OFFICIAL_LUMI_REGISTRY[id].assetRole === role);
+}
+
+/** Phase 30 helper — return true iff the given import path is a canonical asset src. */
+export function isCanonicalAssetPath(src: string): boolean {
+  if (!src) return false;
+  for (const id of ALL_VARIANT_IDS) {
+    if (OFFICIAL_LUMI_REGISTRY[id].src === src) return true;
+  }
+  return false;
+}
+
+/** Phase 30 helper — return the asset record for a given variant id. */
+export function getOfficialAsset(id: LumiVariantId): { readonly src: string; readonly alt: string; readonly label: string; readonly protectedIdentity: true } {
+  const v = getVariant(id);
+  return Object.freeze({ src: v.src, alt: v.alt, label: v.label, protectedIdentity: true as const });
 }
 
 export function getVariant(id: LumiVariantId): OfficialLumiVariant {

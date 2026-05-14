@@ -1,3 +1,106 @@
+## v5.8.63 — Phase 30 + 31: Lumi Registry asset extension + page replacement map (RECONCILE mode)
+
+Extends v5.8.62 in **reconcile mode** (user-chosen): adds asset render path + 8th variant + Phase 31 replacement-tracking, while preserving all v5.8.62 governance (17-page map intact, crisis-support trust boundary intact, all 7 existing variants intact). 4 new files + 4 edits inside `client/src/lumi-registry/`. ZERO files outside the module modified. ZERO new npm dependencies. ZERO production wiring.
+
+### Scope
+
+- **8th canonical variant** — `LUMI_FLOAT_IDLE` (assetRole `calmIdle`, priority 8) added; `ALL_VARIANT_IDS` floor bumped 7 → 8; runtime-only (no page-map placement, by design — see audit hardening below).
+- **Asset fields on every variant** — `label`, `src` (`/lumi/official/<name>.png`), `alt`, `protectedIdentity: true`, `assetRole` added onto all 8 variants. Existing fields (`description`, `useWhen`, `neverUseWhen`, `motionProfile`, `sizeLimits`, `glowColor`, `priority`) preserved unchanged. `OfficialLumiVariant` interface extended; module-load asserts every variant has `protectedIdentity === true` and `src.startsWith("/lumi/official/")`.
+- **Asset render mode in `OfficialLumi`** — new opt-in prop `renderMode?: "svg" | "asset"` (default `"svg"` — preserves v5.8.62 behavior). When `"asset"`, renders `<img>` from `variant.src` with CSS-driven motion classes; the new `AssetLumiBody` sub-component owns `useState` for the 404 fallback so the conditional branch in the parent doesn't violate hooks rules.
+- **Phase 31 replacement-tracking** — separate file at `registry/lumiPageReplacementMap.ts` with 11 frozen entries covering legacy raw-PNG references that need migrating to `OfficialLumi`. In-memory status map with `markReplacementDone`/`markReplacementStatus` mutators; `runReplacementAudit()` returns `{total,done,pending,blocked,inProgress,progress,percent,nextUp}`. `OLD_AVATAR_GREP_PATTERNS` (16 entries: 11 legacy filenames + 5 forbidden tokens from Phase 28) + `getGrepCommand()` helper that prints a ready-to-run ripgrep invocation.
+
+### Why reconcile mode
+
+The original spec called for a destructive overhaul: rewrite `officialLumiRegistry` to a new schema (dropping `useWhen`/`motionProfile`/`sizeLimits`/`glowColor`/`priority`), shrink the page map from 17 → 11 (dropping `crisis-support`, `error-state`, `loading-state`, `email-stay-connected`, `research-evidence`, `home-first-gentle-step`), delete the SVG render path. The crisis-support drop violates the Primary Law trust boundary. User explicitly chose **option C — Reconcile**: extend the existing system, add asset capability alongside SVG, keep all 17 page entries, ADD Phase 31 entries as a separate file, zero deletions.
+
+### Files
+
+- `registry/officialLumiRegistry.ts` — EDITED. Added 8th variant + asset fields + `LumiAssetRole` type + module-load floor guards (protectedIdentity + canonical-path) + helpers `getOfficialAsset`/`getVariantsByRole`/`isCanonicalAssetPath`.
+- `registry/lumiPagePlacementMap.ts` — EDITED. Added `RUNTIME_ONLY_VARIANTS = new Set(["LUMI_FLOAT_IDLE"])`; `runPageMapAudit()` skips the unused-coverage check for runtime-only variants so the 8th variant doesn't introduce audit noise. The 17 entries are otherwise unchanged.
+- `components/OfficialLumi.tsx` — EDITED. Added props `renderMode?` / `motion?` / `heightPx?` / `onError?`; extracted `AssetLumiBody` sub-component for the asset path; added `data-render-mode`/`data-lumi-protected`/`data-asset-errored` test attributes; `lumi-interactive` class added only when `onClick` is a function so default `pointer-events: none` doesn't deadhand clicks.
+- `index.ts` — EDITED. `import "./styles/lumiMotion.css"` side-effect; new public exports for Phase 30 (`getVariantsByRole`, `isCanonicalAssetPath`, `getOfficialAsset`, `LumiAssetRole`, `OfficialLumiRenderMode`, `OfficialLumiMotion`, `LumiMotionIntensity`) and all Phase 31 surfaces.
+- `types/lumiTypes.ts` — NEW. Central type re-export module. Re-exports existing types from registry files plus new `LumiMotionIntensity` / `ReplacementStatus` / `ReplacementEntry`.
+- `styles/lumiMotion.css` — NEW. `.lumi-official` (default `pointer-events: none`), `.lumi-official.lumi-interactive` (opt-in `pointer-events: auto`), `.lumi-motion-{soft|reduced|none}` motion classes, `@keyframes lumi-soft-breathe` (7.1s cycle: 0% rest → 39% lift to `translateY(-3px) scale(1.012)` → 45% hold → 96% return → 100% rest), `@media (prefers-reduced-motion: reduce)` overrides ALL motion classes to `animation: none !important; transform: none !important;`, `.hero-lumi` (`width: min(42vw, 340px); margin-inline: auto; filter: drop-shadow(0 18px 30px rgba(126,144,110,0.16))`).
+- `registry/lumiPageReplacementMap.ts` — NEW. 11 frozen `ReplacementEntry` entries + helpers + `OLD_AVATAR_GREP_PATTERNS`.
+- `verification/phase31-replacement-audit.md` — NEW. 11-entry table, CSS rules, color tokens, grep usage, audit usage, pass criteria.
+
+### Trust boundaries (preserved + extended)
+
+1. **Crisis-support trust boundary intact** — `lumiPagePlacementMap.ts` still has `crisis-support` as `variant: null` + `assignment: "forbidden"`; `runPageMapAudit()` still asserts this; `canRenderLumi({pageId: "crisis-support", ...})` still refuses. The reconcile mode was specifically chosen to preserve this.
+2. **Asset render mode is opt-in** — `renderMode` defaults to `"svg"` so v5.8.62 hosts see no behavior change; asset mode requires explicit `renderMode="asset"` per call site.
+3. **404 fallback fail-safe** — `AssetLumiBody` `useState`s an `errored` flag; on `<img onError>` the broken image is replaced by a same-size invisible container so layout doesn't jump and no broken-image chrome leaks. `data-asset-errored="true"` exposed for test/diagnostic. `useEffect` resets the flag when `variantData.src` changes so future asset retries work.
+4. **Click handler reachability** — `lumiMotion.css` keeps `.lumi-official { pointer-events: none }` as the default (correct for decorative imagery), and only adds `pointer-events: auto` on `.lumi-official.lumi-interactive`. Component adds the `lumi-interactive` class only when `typeof onClick === "function"`.
+5. **Runtime-only variant whitelist** — `RUNTIME_ONLY_VARIANTS` is the explicit allow-list for variants that intentionally have no page-map placement (driven by the MMHB runtime avatar provider). Adding any future runtime-only variant is a one-line set addition.
+6. **Floor guards** — `ALL_VARIANT_IDS.length === 8`, `REPLACEMENT_ENTRIES.length === 11`, every variant `protectedIdentity === true`, every variant `src` starts with `/lumi/official/`. Module load throws on any violation.
+
+### Architect 2-pass review
+
+**1st pass** caught 3 real issues — all fixed pre-ship: (1) **Click handlers dead in asset mode** — `.lumi-official { pointer-events: none }` blocked all clicks; fix: opt-in `.lumi-interactive` class added by component when `onClick` is a function. (2) **404 fallback incomplete** — `<img onError>` only logged; broken image chrome remained visible; fix: extracted `AssetLumiBody` sub-component owning `useState`-driven `errored` flag, broken `<img>` replaced by same-size invisible container, optional `onError(src)` callback for hosts to swap to `renderMode="svg"`. (3) **Audit regression for `LUMI_FLOAT_IDLE`** — `runPageMapAudit()` flagged the 8th variant as "not used in any page placement"; fix: added `RUNTIME_ONLY_VARIANTS` whitelist and updated the audit to skip those.
+
+**2nd pass** confirmed all 3 fixes correct and caught 1 non-blocking gap: `AssetLumiBody.errored` wasn't reset on `variantData.src` change → if one asset errored and the same component instance was reused with a new variant, it'd stick on placeholder forever. Fix shipped: added `useEffect(() => setErrored(false), [variantData.src])`.
+
+The architect also noted (deferred follow-ups, not blocking): (a) unit test covering 404 → placeholder → src-change → retry, (b) keyboard-accessibility (tabIndex / Enter / Space) for clickable Lumi instances. Asset mode is opt-in and not yet wired anywhere in production — both are best added when the first production wiring lands.
+
+### Build status
+
+- `tsc --noEmit` → clean (silent).
+- `vite build` → 17.32s clean. Main bundle 751.39 kB unchanged (registry stays opt-in, never imported by `App.tsx`).
+- ZERO files outside `client/src/lumi-registry/` modified. ZERO new npm dependencies. ZERO production wiring.
+
+### Asset-availability note (intentional)
+
+The PNG assets at `/lumi/official/lumi-{calm-float,heart,meditation,companion,path,emotion-orb,soft-presence,float-idle}.png` are **not yet present in `client/public/`**. This is intentional and safe because:
+
+1. Asset mode is opt-in (default `"svg"`), so no shipped surface depends on the PNGs.
+2. The new 404 fallback turns missing assets into a same-size invisible container instead of broken-image chrome.
+3. Phase 31's `runReplacementAudit()` is a planning tool that doesn't depend on asset existence.
+
+Adding the PNGs is itself a follow-up phase — when they land, they go under `client/public/lumi/official/` and the registry continues to work without code changes.
+
+### Production import (additions)
+
+```ts
+import {
+  // Phase 30 — asset extensions
+  getOfficialAsset,
+  getVariantsByRole,
+  isCanonicalAssetPath,
+  type LumiAssetRole,
+  type OfficialLumiRenderMode,
+  type OfficialLumiMotion,
+  type LumiMotionIntensity,
+
+  // Phase 31 — replacement tracking
+  lumiPageReplacements,
+  markReplacementDone,
+  markReplacementStatus,
+  getReplacementStatus,
+  getPendingReplacements,
+  getDoneReplacements,
+  getNextReplacement,
+  runReplacementAudit,
+  OLD_AVATAR_GREP_PATTERNS,
+  getGrepCommand,
+  type ReplacementStatus,
+  type ReplacementEntry,
+} from "@/lumi-registry";
+
+// Asset render mode usage:
+<OfficialLumi
+  variant="LUMI_SOFT_PRESENCE"
+  scene="homepage-hero"
+  position="hero"
+  renderMode="asset"
+  motion="soft"
+  widthPx={320}
+  className="hero-lumi"
+/>
+```
+
+Spec checklist at `client/src/lumi-registry/verification/phase31-replacement-audit.md`.
+
+---
+
 ## v5.8.62 — Phase 28 + 29: Lumi Registry (canonical variants + page placement map)
 
 New standalone opt-in module at `client/src/lumi-registry/` (14 files: 6 registry TS + 2 React components + 1 internal dev gate + 4 markdown docs + 1 barrel). Same shipping discipline as v5.8.51-61: zero production wiring, zero new npm dependencies, zero files outside the new directory modified.

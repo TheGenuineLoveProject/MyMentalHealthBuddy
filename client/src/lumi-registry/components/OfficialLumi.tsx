@@ -8,7 +8,7 @@
  */
 
 import * as React from "react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   type LumiVariantId,
@@ -22,6 +22,12 @@ import { isDevEnvironment } from "../internal/devGate";
 
 export type OfficialLumiPosition = "hero" | "card" | "inline" | "background";
 
+/** Phase 30 — render mode. `svg` keeps v5.8.62 behavior (default, no break). `asset` switches to the canonical PNG via `/lumi/official/`. */
+export type OfficialLumiRenderMode = "svg" | "asset";
+
+/** Phase 30 — motion intensity for asset render mode. */
+export type OfficialLumiMotion = "soft" | "reduced" | "none";
+
 export interface OfficialLumiProps {
   readonly variant: LumiVariantId;
   readonly scene: string;
@@ -29,6 +35,7 @@ export interface OfficialLumiProps {
   /** When provided, the page-placement policy gate enforces forbidden surfaces (e.g. crisis-support). */
   readonly pageId?: string;
   readonly widthPx?: number;
+  readonly heightPx?: number;
   readonly isMobile?: boolean;
   readonly reducedMotion?: boolean;
   readonly decorative?: boolean;
@@ -36,10 +43,113 @@ export interface OfficialLumiProps {
   readonly onClick?: () => void;
   /** Fired (in any environment) when placement / size validation reports issues. */
   readonly onValidationIssue?: (issues: ReadonlyArray<string>) => void;
+  /** Phase 30 — render mode. Defaults to `svg` to preserve v5.8.62 behavior. */
+  readonly renderMode?: OfficialLumiRenderMode;
+  /** Phase 30 — motion intensity (asset mode only). Default `soft`. */
+  readonly motion?: OfficialLumiMotion;
+  /** Phase 30 — invoked if the asset image fails to load (asset mode only). */
+  readonly onError?: (src: string) => void;
   readonly "data-testid"?: string;
 }
 
 const isDev = isDevEnvironment;
+
+/**
+ * Phase 30 — asset render body. Owns the `<img>` 404-fallback state
+ * (must live in its own component so the conditional `useState` call is
+ * unconditional — the parent `OfficialLumi` may bail out before the
+ * asset branch is reached).
+ *
+ * On image load failure: the broken `<img>` is replaced by an empty,
+ * still-sized container so layout doesn't jump and no broken-image UI
+ * is shown. Optional `onError` callback fires with the failed src so
+ * hosts can surface a fallback (e.g. swap to `renderMode="svg"`).
+ */
+const AssetLumiBody: React.FC<{
+  variantData: ReturnType<typeof getVariant>;
+  finalSize: number;
+  heightPx?: number;
+  ariaLabel: string;
+  decorative: boolean;
+  dataTestId: string;
+  variant: LumiVariantId;
+  scene: string;
+  position: OfficialLumiPosition;
+  reducedMotion: boolean;
+  effectiveMotion: OfficialLumiMotion;
+  className?: string;
+  interactive: boolean;
+  onClick?: () => void;
+  onError?: (src: string) => void;
+}> = ({
+  variantData,
+  finalSize,
+  heightPx,
+  ariaLabel,
+  decorative,
+  dataTestId,
+  variant,
+  scene,
+  position,
+  reducedMotion,
+  effectiveMotion,
+  className,
+  interactive,
+  onClick,
+  onError,
+}) => {
+  const [errored, setErrored] = useState(false);
+  // Phase 30 — reset 404 fallback when src changes so the new asset gets a fresh load attempt.
+  useEffect(() => {
+    setErrored(false);
+  }, [variantData.src]);
+  const classes = ["lumi-official", `lumi-motion-${effectiveMotion}`, interactive ? "lumi-interactive" : null, className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <div
+      role="img"
+      aria-hidden={decorative}
+      aria-label={ariaLabel}
+      data-testid={dataTestId}
+      data-variant={variant}
+      data-scene={scene}
+      data-position={position}
+      data-lumi-protected="true"
+      data-render-mode="asset"
+      data-asset-errored={errored ? "true" : undefined}
+      data-reduced-motion={reducedMotion ? "true" : undefined}
+      className={classes}
+      style={{ width: finalSize, height: heightPx, cursor: interactive ? "pointer" : undefined }}
+      onClick={onClick}
+    >
+      {!errored ? (
+        <img
+          src={variantData.src}
+          alt={ariaLabel ?? variantData.alt}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          width={finalSize}
+          height={heightPx}
+          onError={() => {
+            setErrored(true);
+            if (isDev()) {
+              // eslint-disable-next-line no-console
+              console.warn(`[OfficialLumi] asset failed to load: ${variantData.src}`);
+            }
+            if (onError) onError(variantData.src);
+          }}
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          style={{ width: finalSize, height: heightPx ?? finalSize, display: "block" }}
+        />
+      )}
+    </div>
+  );
+};
 
 const BODY_COLOR = "#FFF5F0";
 const BELLY_COLOR = "#B0D0B3";
@@ -53,12 +163,16 @@ export const OfficialLumi: React.FC<OfficialLumiProps> = ({
   position,
   pageId,
   widthPx,
+  heightPx,
   isMobile = false,
   reducedMotion = false,
   decorative = true,
   className,
   onClick,
   onValidationIssue,
+  renderMode = "svg",
+  motion = "soft",
+  onError,
   "data-testid": dataTestId,
 }) => {
   const variantData = useMemo(() => {
@@ -153,6 +267,34 @@ export const OfficialLumi: React.FC<OfficialLumiProps> = ({
 
   const showDevWarning = isDev() && (!validation.valid || sizeViolated);
 
+  // Phase 30 — asset render path. Renders the canonical PNG from
+  // `variant.src` with CSS-driven motion classes. SSR-safe (no DOM
+  // measurement). Glow is suppressed in asset mode — drop-shadow on
+  // `.hero-lumi` covers the intended visual treatment.
+  if (renderMode === "asset") {
+    const effectiveMotion: OfficialLumiMotion = reducedMotion ? "reduced" : motion;
+    const interactive = typeof onClick === "function";
+    return (
+      <AssetLumiBody
+        variantData={variantData}
+        finalSize={finalSize}
+        heightPx={heightPx}
+        ariaLabel={ariaLabel}
+        decorative={decorative}
+        dataTestId={dataTestId ?? `lumi-${variant.toLowerCase()}`}
+        variant={variant}
+        scene={scene}
+        position={position}
+        reducedMotion={reducedMotion}
+        effectiveMotion={effectiveMotion}
+        className={className}
+        interactive={interactive}
+        onClick={onClick}
+        onError={onError}
+      />
+    );
+  }
+
   return (
     <div
       role="img"
@@ -162,6 +304,8 @@ export const OfficialLumi: React.FC<OfficialLumiProps> = ({
       data-variant={variant}
       data-scene={scene}
       data-position={position}
+      data-lumi-protected="true"
+      data-render-mode="svg"
       data-reduced-motion={reducedMotion ? "true" : undefined}
       className={className}
       style={containerStyle}

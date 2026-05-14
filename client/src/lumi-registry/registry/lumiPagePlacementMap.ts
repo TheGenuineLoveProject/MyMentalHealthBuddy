@@ -294,6 +294,16 @@ export function verifyImportPath(importPath: string): ImportPathValidation {
   return { valid: true };
 }
 
+/**
+ * Phase 30 — variants that intentionally have no page-placement entry
+ * because they're driven by the MMHB runtime avatar provider (header
+ * float, ambient calm anchor, etc.) rather than placed on a specific
+ * page surface. The audit doesn't flag missing coverage for these.
+ */
+export const RUNTIME_ONLY_VARIANTS: ReadonlySet<LumiVariantId> = new Set<LumiVariantId>([
+  "LUMI_FLOAT_IDLE",
+]);
+
 export interface PageMapAuditResult {
   readonly totalPages: number;
   readonly requiredCount: number;
@@ -315,7 +325,12 @@ export function runPageMapAudit(): PageMapAuditResult {
     return acc;
   }, {} as Record<LumiVariantId, number>);
   for (const id of ALL_VARIANT_IDS) {
-    if (variantCoverage[id] === 0) issues.push(`variant "${id}" is not used in any page placement`);
+    // Phase 30 — `RUNTIME_ONLY_VARIANTS` are intentionally absent from the
+    // page-placement map (they're driven by the runtime avatar provider,
+    // not page-level placement). Don't flag them as audit issues.
+    if (variantCoverage[id] === 0 && !RUNTIME_ONLY_VARIANTS.has(id)) {
+      issues.push(`variant "${id}" is not used in any page placement`);
+    }
   }
   const crisis = getPagePlacement("crisis-support");
   if (!crisis) issues.push("crisis-support page is missing from PAGE_PLACEMENT_MAP");

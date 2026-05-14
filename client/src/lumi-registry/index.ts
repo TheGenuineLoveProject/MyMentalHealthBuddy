@@ -14,13 +14,22 @@
  * Governance markdown is intentionally NOT exported.
  */
 
+// Phase 30 — opt-in CSS for asset render mode. Importing any registry
+// symbol pulls these keyframes in. Vite handles the .css side-effect.
+import "./styles/lumiMotion.css";
+
 // Components
 export { OfficialLumi } from "./components/OfficialLumi";
-export type { OfficialLumiProps, OfficialLumiPosition } from "./components/OfficialLumi";
+export type {
+  OfficialLumiProps,
+  OfficialLumiPosition,
+  OfficialLumiRenderMode,
+  OfficialLumiMotion,
+} from "./components/OfficialLumi";
 export { LumiSceneRenderer } from "./components/LumiSceneRenderer";
 export type { LumiSceneRendererProps } from "./components/LumiSceneRenderer";
 
-// Registry — official variants
+// Registry — official variants (Phase 28 + Phase 30 asset extensions)
 export {
   OFFICIAL_LUMI_REGISTRY,
   ALL_VARIANT_IDS,
@@ -28,12 +37,34 @@ export {
   isCanonicalVariant,
   validateVariantPlacement,
   findVariantForContext,
+  getVariantsByRole,
+  isCanonicalAssetPath,
+  getOfficialAsset,
 } from "./registry/officialLumiRegistry";
 export type {
   LumiVariantId,
+  LumiAssetRole,
   OfficialLumiVariant,
   PlacementValidation as VariantPlacementValidation,
 } from "./registry/officialLumiRegistry";
+
+// Phase 30 — central type re-exports
+export type { LumiMotionIntensity, ReplacementStatus, ReplacementEntry } from "./types/lumiTypes";
+
+// Phase 31 — page replacement rollout map
+export {
+  lumiPageReplacements,
+  markReplacementDone,
+  markReplacementStatus,
+  getReplacementStatus,
+  getPendingReplacements,
+  getDoneReplacements,
+  getNextReplacement,
+  runReplacementAudit,
+  OLD_AVATAR_GREP_PATTERNS,
+  getGrepCommand,
+} from "./registry/lumiPageReplacementMap";
+export type { ReplacementAuditResult } from "./registry/lumiPageReplacementMap";
 
 // Registry — emotional roles
 export {
