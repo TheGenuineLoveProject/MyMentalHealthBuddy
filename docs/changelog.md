@@ -1,3 +1,63 @@
+## v5.8.65 — Phase 37–43: Seven new opt-in modules (backend / notifications / rbac / audit / tokens / language / disclaimer)
+
+Seven standalone opt-in spec modules at `client/src/lumi-{backend,notifications,rbac,audit,tokens,language,disclaimer}/`. Same shipping pattern as v5.8.51–64 — zero production wiring, zero new npm dependencies, zero files outside the seven new directories modified. 25 files total transcribed literally from the two attached spec prompts (1559 + 514 lines). Each module owns its own barrel; floor guards added where applicable.
+
+### Files (25 total)
+
+**lumi-backend** (5 files): `config/apiConfig.ts` (API_CONFIG / AUTH_CONFIG / RATE_LIMIT_CONFIG / DB_CONFIG / REDIS_CONFIG / HIPAA_CONFIG / HEALTH_CONFIG / CORS_CONFIG / UPLOAD_CONFIG — `as const` everywhere); `routes/apiRoutes.ts` (8 route groups + `HEALTH_ROUTE` + `ALL_ROUTES` + `getRouteStats()` returning `{total, authRequired, public, hipaaProtected}` — route-array literals deliberately mutable so `: ApiRoute[]` typechecks against `...spread` into `ALL_ROUTES`); `middleware/middlewareSpec.ts` (JWT / RateLimit / HIPAA / ErrorHandler / Validation / Logging / CORS / Upload specs — pure config interfaces); `health/healthCheck.ts` (4 stub component checks for database/redis/disk/memory + `runHealthCheck()` aggregator + `isSystemReady()` — SSR-safe `typeof process !== "undefined"` guards on `memoryUsage()` / `uptime()` so spec module type-checks in browser-targeted tsconfig despite never being imported by App.jsx); `index.ts` (barrel).
+
+**lumi-notifications** (3 files): `push/notificationService.ts` (`Notification` / `NotificationPreferences` / `DEFAULT_PREFERENCES` with all 3 channels OFF by default + `quietHours: [22,7]` + 4 `NOTIFICATION_TEMPLATES` + `isInQuietHours()` handles wrap-around midnight + `isNotificationAllowed()` consults channel-enabled, type-allowed AND quiet-hours); `governance/notificationRules.ts` (16 `NOTIFICATION_RULES` + 10 `FORBIDDEN_NOTIFICATION_CONTENT` with module-load floor guards `>=16` and `>=10`); `index.ts`.
+
+**lumi-rbac** (3 files): `roles/roleDefinitions.ts` (4 `DomainRole` union — user/therapist/family/admin; 41-entry `Permission` union; `ROLE_PERMISSIONS` mapping; `hasPermission`/`getRolePermissions`/`canAccess` + `ALL_ROLES` + `ROLE_LABELS`); `middleware/rbacMiddleware.ts` (`RBAC_SPEC` with `failClosed:true`+`logDenials:true`+`genericDenialMessage:"Access denied"`; `checkPermission()` returns `{allowed, role, permission, reason}`; 13-entry `PROTECTED_ROUTES` map + `getRoutePermission(path, method)` exact-match lookup); `index.ts`.
+
+**lumi-audit** (3 files): `logger/auditLogger.ts` (24-variant `AuditEventType` union; `AuditEvent` interface; `RETENTION_POLICIES` 7-year for auth/data/crisis/permission, 1-year system, 90-day ai; `createAuditEvent()` derives retention from event-type prefix; `logAuditEvent()` SSR-safe `typeof process !== "undefined"` guard, redacts `actor.ip` to `"[REDACTED]"`; `getRetentionDate`/`isRetentionExpired`/`filterExpiredEvents`); `governance/auditGovernanceRules.ts` (12 `AUDIT_GOVERNANCE_RULES` with floor `>=12` + `AUDIT_DATA_CLASSIFICATIONS` map); `index.ts`.
+
+**lumi-tokens** (6 files): `colors/colorTokens.ts` (10 frozen `COLORS` — serenitySage `#8FBF9F`/primarySage/deepTeal/deepForest/eternalGold/warmCream/ivoryLight/softBlush/mist/charcoalDeep; `SEMANTIC_COLORS` aliases; `LUMI_COLORS` mapping (body=#FFF5F0, belly=serenitySage, sprout=primarySage); 4 `GRADIENTS`; 6-step `OPACITY` scale; 9-entry `FORBIDDEN_COLORS` blacklist; `isForbiddenColor`/`getColor`/`alpha(hex, opacity)` helpers); `spacing/spacingTokens.ts` (8px-base scale xs-5xl + `PX` string mirror + `SECTION`/`CARD`/`GRID` layout constants + `toPixels`/`toRem`); `typography/typographyTokens.ts` (`FONTS` Cormorant Garamond heading + DM Sans body + SF Mono; 8-step `TYPE_SCALE`; 8 `FORBIDDEN_TYPOGRAPHY` rules; `READABILITY` Flesch≥65 + maxWords≤15 + maxSentences≤4; `CONTRAST` 4.5/3/7; `FONT_LOADING` swap+preload); `shadows/shadowTokens.ts` (6 `SHADOWS` + 3 `GLOWS` + 6-step `Z_INDEX` with `crisis: 9999` ceiling); `components/componentTokens.ts` (CARD/BUTTON/INPUT/MOTION/CONTAINER/DIVIDER token bundles consuming color+shadow primitives); `index.ts` (re-exports all 6 surfaces).
+
+**lumi-language** (3 files): `translationTable.ts` (38-entry `TRANSLATION_TABLE` mapping negation phrases to direction phrases — covers don't/dont variants; 13-pattern `FORBIDDEN_PATTERNS` regex array; `translateNegation()` returns `{translated, changed, replacements, severity:"critical"|"warning"|"safe"}` with crisis-pattern short-circuit BEFORE translation pass; `containsNegation`/`batchTranslate`); `coreVocabulary.ts` (5 frozen vocabulary lists — 25 DIRECTION + 10 SAFETY + 10 BODY_REGULATION + 15 ABUNDANCE + 16 SCARCITY; `scoreVocabulary()` per-word tokenizer returning per-category counts plus aggregate score `direction+safety+regulation+abundance - scarcity*3`; `isVocabularySafe`); `index.ts`.
+
+**lumi-disclaimer** (2 files): `disclaimer.ts` (`REQUIRED_DISCLAIMER = "Journaling support only — not medical advice."`; 16-entry `REQUIRED_LOCATIONS` array; `FULL_DISCLAIMER` multi-line with 988+licensed-professional language; `SHORT_DISCLAIMER`/`INLINE_DISCLAIMER`/`API_DISCLAIMER` shape variants; `hasDisclaimer`/`enforceDisclaimer` (idempotent — appends only when missing) /`validateDisclaimers`/`getDisclaimerForContext` switch on context returning the right variant); `index.ts`.
+
+### Architect 1-pass review
+
+**5 findings, 1 fix applied pre-ship**:
+
+1. **APPLIED** — Crisis-pattern regexes in `translateNegation()` lacked the `i` flag so `"Suicide"`/`"I WANT TO DIE"`/etc would not trigger critical severity → fixed: all 4 crisis regexes now `/kill myself/i`, `/end it all/i`, `/suicide/i`, `/want to die/i`. This is a one-character change per regex preserving literal-spec intent and aligning with the governance kernel's BHCE rule (asymmetric risk → err toward resource provision).
+
+2. **DELIBERATE LITERAL-SPEC** — `canAccess()` in `lumi-rbac/roles/roleDefinitions.ts` returns `true` for `role==="user"` when `resourceOwnerId`/`currentUserId` are absent. Architect flagged as fail-open path. Spec text matches byte-for-byte; module is opt-in spec only with zero production wiring; no Express middleware consumes it; zero actual exposure. Documented as deliberate spec deviation per the same pattern used in v5.8.64 (literal-spec ships unchanged unless it breaks build or violates BHCE).
+
+3. **DELIBERATE LITERAL-SPEC** — `AUTH_CONFIG.jwtSecret` falls back to `"development-secret-change-in-prod"` if `JWT_SECRET` env var unset. Architect flagged as crypto misconfiguration risk. Spec text matches byte-for-byte; this is a config object (no auth performed against it) consumed by no runtime code; zero actual exposure. Real Express implementation that wires this up will need to throw on missing `JWT_SECRET` — that hardening belongs to the wiring phase, not the spec.
+
+4. **DELIBERATE LITERAL-SPEC** — `healthCheck.ts` component checks for database/redis/disk are unconditional success stubs (no real DB ping). Spec text matches byte-for-byte; module explicitly described as spec for actual middleware to implement; SSR-safe `process` guards added per #5 below.
+
+5. **DELIBERATE LITERAL-SPEC** — `scoreVocabulary()` single-word tokenizer never matches multi-word `SCARCITY_WORDS` entries (`"less than"`, `"missing out"`, `"left behind"`). Spec text matches byte-for-byte; phrase-level matching is a real follow-up if/when this scorer ever wires into product surfaces.
+
+**Minor SSR-safety hardening applied beyond literal spec** (matches v5.8.51-64 pattern): `healthCheck.ts` `memoryUsage()` and `uptime()` calls wrapped in `typeof process !== "undefined" && typeof process.X === "function"` guards; `auditLogger.ts` `process.env.NODE_ENV` check wrapped in `typeof process !== "undefined" && process.env?.NODE_ENV` guard; floor guards added in `notificationRules.ts` (`>=16` rules, `>=10` forbidden) and `auditGovernanceRules.ts` (`>=12` rules) to fail-fast on accidental shrinkage. None of these change spec semantics.
+
+### Verification
+
+`npx tsc --noEmit` clean, `npx vite build` 16.10s clean (`index-*.js` 751.39 kB main bundle unchanged — new modules are opt-in, never imported by `App.tsx`). ZERO files outside the seven new module directories modified, ZERO new npm deps, ZERO production wiring.
+
+Spec verification commands: `getRouteStats()` returns `{total: 40, authRequired: 32, public: 8, hipaaProtected: 17}` (auth/HIPAA counts depend on which routes carry which flags in the literal spec); `getColor("serenitySage") === "#8FBF9F"`; `alpha("#8FBF9F", 0.5) === "rgba(143, 191, 159, 0.5)"`; `translateNegation("Don't panic")` → `{severity:"warning", changed:true, translated:"Slow your breathing"}`; `translateNegation("I want to die")` → `{severity:"critical"}` (now case-insensitive after fix #1); `enforceDisclaimer("Hello")` appends required text + double-newline separator; `getDisclaimerForContext("onboarding")` returns multi-line `FULL_DISCLAIMER`.
+
+### Production imports
+
+```ts
+import { API_CONFIG, ALL_ROUTES, getRouteStats, runHealthCheck, type ApiRoute } from "@/lumi-backend";
+import { DEFAULT_PREFERENCES, isNotificationAllowed, NOTIFICATION_RULES, type Notification } from "@/lumi-notifications";
+import { hasPermission, canAccess, PROTECTED_ROUTES, type DomainRole, type Permission } from "@/lumi-rbac";
+import { createAuditEvent, logAuditEvent, RETENTION_POLICIES, type AuditEvent } from "@/lumi-audit";
+import { COLORS, SEMANTIC_COLORS, LUMI_COLORS, alpha, getColor, BUTTON_TOKENS } from "@/lumi-tokens";
+import { translateNegation, scoreVocabulary, isVocabularySafe } from "@/lumi-language";
+import { REQUIRED_DISCLAIMER, enforceDisclaimer, getDisclaimerForContext } from "@/lumi-disclaimer";
+```
+
+### Follow-ups (not blocking)
+
+(a) Express-middleware wiring phase must throw on missing `JWT_SECRET` rather than fall through to the spec's dev fallback string; (b) RBAC ownership-protected permissions/routes need explicit owner-required gate when wired into actual middleware (deny on missing context, not pass-through); (c) implement real DB/Redis health pings if/when these specs become runtime sinks; (d) phrase-level scarcity-vocab matcher when/if `scoreVocabulary` wires onto a copy-review surface; (e) per-module unit tests covering governance floors, ownership branches, crisis-pattern coverage, and disclaimer idempotence.
+
+---
+
 ## v5.8.64 — Phase 32–36: Five new opt-in modules (cbt / tracker / crisis / library / agent)
 
 Five standalone opt-in modules at `client/src/lumi-{cbt,tracker,crisis,library,agent}/`. Same shipping pattern as v5.8.51-63 — zero production wiring, zero new npm dependencies, zero files outside the five new directories modified. Each module has its own barrel + verification checklist + governance file with module-load floor guards.
