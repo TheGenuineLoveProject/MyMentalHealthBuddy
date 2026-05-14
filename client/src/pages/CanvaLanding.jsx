@@ -8,6 +8,10 @@ import SoftLaunchBanner from "../components/SoftLaunchBanner";
 import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
 import FloatIdleAnimated from "../components/lumi/FloatIdleAnimated.jsx";
+// Iter 2c (2026-05-15): canonical Lumi for header-logo swap. Other 2 legacy
+// instances (L1246 hero, L522 FloatIdleAnimated) intentionally untouched until
+// this first swap is screenshot-verified.
+import { OfficialLumi } from "@/lumi-registry";
 import EmotionalJourney from "../sections/EmotionalJourney.jsx";
 import NlpMiContent from "../sections/NlpMiContent.jsx";
 import VisualBenefits from "../sections/VisualBenefits.jsx";
@@ -357,10 +361,22 @@ export default function CanvaLanding() {
                   }}
                   data-testid="img-canva-header-logo"
                 >
-                  <LumiMascot
-                    emotion="joy"
-                    size={48}
-                    interactive={false}
+                  {/* Iter 2c (2026-05-15): swapped legacy LumiMascot →
+                      canonical OfficialLumi with pageId="landing-canva"
+                      placement gate. Variant LUMI_SOFT_PRESENCE matches the
+                      registered placement (assignment: optional). Position
+                      "inline" caps at 95px so 48px header size is in-bounds.
+                      Other 2 legacy instances on this page intentionally
+                      retained pending screenshot verification. */}
+                  <OfficialLumi
+                    variant="LUMI_SOFT_PRESENCE"
+                    scene="header-logo"
+                    position="inline"
+                    pageId="landing-canva"
+                    widthPx={48}
+                    heightPx={48}
+                    decorative={true}
+                    data-testid="lumi-canva-header-logo"
                   />
                 </div>
                 <div className="flex flex-col leading-snug">
