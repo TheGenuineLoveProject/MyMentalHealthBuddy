@@ -84,7 +84,6 @@ const ProtocolBrowser = lazy(() => import("./pages/ProtocolBrowser.jsx"));
 const ProtocolSession = lazy(() => import("./pages/ProtocolSession.jsx"));
 const BiometricDashboard = lazy(() => import("./pages/BiometricDashboard.jsx"));
 const AgentInteraction = lazy(() => import("./pages/AgentInteraction.jsx"));
-const LandingV2 = lazy(() => import("./pages/LandingV2.jsx"));
 const WellnessToolsHub = lazy(() => import("./pages/WellnessToolsHub.jsx"));
 const DesignSystemV2 = lazy(() => import("./pages/DesignSystemV2.jsx"));
 const GAD7Assessment = lazy(() => import("./pages/tools/GAD7Assessment.jsx"));
@@ -515,7 +514,6 @@ export default function App() {
                 <ProtectedRoute><AgentInteraction /></ProtectedRoute>
               </Route>
               <Route path="/presence"><Presence /></Route>
-              <Route path="/landing-v2"><LandingV2 /></Route>
               <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
               <Route path="/lumi-design-system"><DesignSystemV2 /></Route>
               <Route path="/tools/gad7"><GAD7Assessment /></Route>

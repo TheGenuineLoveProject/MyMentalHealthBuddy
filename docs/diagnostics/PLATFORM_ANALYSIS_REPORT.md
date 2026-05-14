@@ -2,7 +2,11 @@
 
 **Generated:** 2026-05-15
 **Layer:** HX-OS vNEXT ∞ Current Platform Analysis
-**Source diagnostics:** `docs/diagnostics/*.txt` (refresh via `prompt-os/current-platform-analysis-layer.md` § Diagnostic Commands)
+**Source diagnostics:** `docs/diagnostics/*.txt` (refresh via `prompt-os-kernel/governance/current-platform-analysis-layer.md` § Diagnostic Commands)
+
+---
+
+> ⚠️ **HISTORICAL SNAPSHOT — DO NOT TREAT AS LIVE STATE.** This report captures the platform exactly as it stood on 2026-05-15 *before* Iter 2c–2f remediation. It is preserved for audit-trail purposes (what was found, what was decided). For current canonical/legacy status, always read `docs/CANONICAL.md` first. Specific items below resolved after this snapshot was taken: `prompt-os/` directory removed (Iter 2f); `LandingV2.jsx` route removed + file quarantined (Iter 2f); `Home.jsx` and `HealingLandingPage.jsx` quarantined (Iter 2e); first canonical `<OfficialLumi>` swap landed on `CanvaLanding.jsx` header (Iter 2c); 8 canonical Lumi PNGs bridged into `/lumi/official/` (Iter 2c-bridge). Stale assertions retained verbatim below as the historical record.
 
 ---
 
@@ -38,8 +42,8 @@ Single canonical entrypoint. `.replit` ↔ `package.json` aligned. Production bu
 | `server/` | ACTIVE / canonical | Express 5, 317 `.mjs` files |
 | `shared/` | ACTIVE | Drizzle schema |
 | `db/`, `drizzle/`, `migrations/` | ACTIVE | Neon Postgres |
-| `prompt-os/` | NEW (1 file) | Just installed `current-platform-analysis-layer.md` |
-| `prompt-os-kernel/` | ACTIVE / **unclear** | Contains `contracts/ engines/ governance/ prompts/ install.sh` — appears more canonical |
+| ~~`prompt-os/`~~ | REMOVED 2026-05-15 (Iter 2f) | Sole file moved to `prompt-os-kernel/governance/`; empty dir deleted |
+| `prompt-os-kernel/` | ACTIVE / canonical | Contains `contracts/ engines/ governance/ (now 7 files incl. current-platform-analysis-layer.md) prompts/ install.sh` |
 | `agents/` | ACTIVE | 6 markdown specs (content/growth/layout/mcp/safety/seo) |
 | `automation/` | ACTIVE | Background scripts |
 | `pages/` (root) | **LEGACY DRIFT** | 21 files alongside `client/src/pages/` |
@@ -104,7 +108,7 @@ Single canonical entrypoint. `.replit` ↔ `package.json` aligned. Production bu
 
 - 3 AI route engines mounted (`ai`, `ai.business`, `ai.healing`) — domain separation correct.
 - `agents/` holds 6 markdown specs (content / growth / layout / mcp / safety / seo).
-- **`prompt-os-kernel/` appears to be the real prompt registry** with `contracts engines governance prompts` subdirs. The newly installed `prompt-os/current-platform-analysis-layer.md` may belong inside it. **Confirm before adding more files to `prompt-os/`.**
+- **`prompt-os-kernel/` appears to be the real prompt registry** with `contracts engines governance prompts` subdirs. The newly installed `prompt-os-kernel/governance/current-platform-analysis-layer.md` may belong inside it. **Confirm before adding more files to `prompt-os/`.**
 
 ## 12. Business / Healing Firewall Findings
 
@@ -199,7 +203,7 @@ git --no-optional-locks log --oneline -10
 # (Destructive — delegate to a Project Task per Replit policy)
 ```
 
-For this turn specifically, rollback = delete `prompt-os/current-platform-analysis-layer.md`, `docs/diagnostics/PLATFORM_ANALYSIS_REPORT.md`, and the 6 `docs/diagnostics/*.txt` scan files. No source code was modified.
+For this turn specifically, rollback = delete `prompt-os-kernel/governance/current-platform-analysis-layer.md`, `docs/diagnostics/PLATFORM_ANALYSIS_REPORT.md`, and the 6 `docs/diagnostics/*.txt` scan files. No source code was modified.
 
 ## 23. Next Safe Step
 

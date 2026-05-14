@@ -1,6 +1,6 @@
 # HX-OS vNEXT ∞ — Current Platform Analysis Layer
 
-**Path:** `prompt-os/current-platform-analysis-layer.md`
+**Path:** `prompt-os-kernel/governance/current-platform-analysis-layer.md` (moved from `prompt-os/` 2026-05-15, Iter 2f)
 **Owners:** The Genuine Love Project + MyMentalHealthBuddy
 **Status:** ACTIVE GOVERNANCE — must run before any platform changes
 **Integrated:** 2026-05-15
