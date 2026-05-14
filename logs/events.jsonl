@@ -323,3 +323,6 @@
 {"type":"buddy_panel_viewed","guestId":"guest_1778731518556_6on8ghcm","metadata":{"surface":"start","state":"calm"},"ts":1778732682698}
 {"type":"buddy_accessibility_ready","guestId":"guest_1778731518556_6on8ghcm","metadata":{},"ts":1778732682699}
 {"type":"start_page_click","guestId":"guest_1778731518556_6on8ghcm","metadata":{},"ts":1778732682701}
+{"type":"buddy_panel_viewed","guestId":"guest_1778731518556_6on8ghcm","metadata":{"surface":"start","state":"calm"},"ts":1778734543900}
+{"type":"buddy_accessibility_ready","guestId":"guest_1778731518556_6on8ghcm","metadata":{},"ts":1778734543901}
+{"type":"start_page_click","guestId":"guest_1778731518556_6on8ghcm","metadata":{},"ts":1778734543902}

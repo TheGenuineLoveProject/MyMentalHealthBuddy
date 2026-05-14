@@ -1,3 +1,65 @@
+## v5.8.62 — Phase 28 + 29: Lumi Registry (canonical variants + page placement map)
+
+New standalone opt-in module at `client/src/lumi-registry/` (14 files: 6 registry TS + 2 React components + 1 internal dev gate + 4 markdown docs + 1 barrel). Same shipping discipline as v5.8.51-61: zero production wiring, zero new npm dependencies, zero files outside the new directory modified.
+
+### Scope
+- **Phase 28** — 7 canonical Lumi variants (`LUMI_CALM_FLOAT`, `LUMI_HEART`, `LUMI_MEDITATION`, `LUMI_COMPANION`, `LUMI_PATH`, `LUMI_EMOTION_ORB`, `LUMI_SOFT_PRESENCE`), 25 emotional roles, 18 scene assignments, placement governance, usage rules (motion/a11y/emotional/cohesion/tone), `OfficialLumi` + `LumiSceneRenderer` components.
+- **Phase 29** — 17-page authoritative placement map with `runPageMapAudit()` and `verifyImportPath()` enforcement helpers. Crisis-support is `variant: null` + `assignment: "forbidden"`.
+
+### Files
+- `registry/officialLumiRegistry.ts` — 7 canonical variants, frozen, with `useWhen`/`neverUseWhen`/`sizeLimits`/`glowColor`. Floor-guarded `ALL_VARIANT_IDS.length === 7`.
+- `registry/lumiEmotionalRoles.ts` — 25 context → variant mappings.
+- `registry/lumiSceneAssignments.ts` — 18 scenes. Floor-guarded `SCENE_ASSIGNMENTS.length === 18`.
+- `registry/lumiPlacementRules.ts` — 7 forbidden + 5 required placement rules + `SIZE_GOVERNANCE` + `validatePlacement()` + `getMaxSizeForContext()`.
+- `registry/lumiUsageRules.ts` — 13 motion + 7 a11y + 10 emotional + 10 cohesion + 10 tone rules + `validateUsage()`.
+- `registry/lumiPagePlacementMap.ts` — 17 pages. Floor-guarded `PAGE_PLACEMENT_MAP.length === 17`. Includes `runPageMapAudit()`, `verifyImportPath()`, and `canRenderLumi()` (the runtime trust boundary).
+- `components/OfficialLumi.tsx` — canonical render component with policy gate, dev warnings, size clamping, sprout-on-head SVG.
+- `components/LumiSceneRenderer.tsx` — scene-driven auto-resolver enforcing scene authority on `variantOverride`.
+- `internal/devGate.ts` — Vite + SSR-safe `isDevEnvironment()` checking both `import.meta.env.DEV` and `process.env.NODE_ENV`.
+- `governance/phase28-avatar-governance.md` — variant selection rules + motion governance + accessibility + enforcement mechanism.
+- `governance/deprecated-avatar-list.md` — 13 deprecated variants + replacement guide + 7-step removal checklist + forbidden import-path tokens.
+- `verification/phase28-avatar-audit.md` — 10-file inventory + variant + scene + rules + component features tables.
+- `verification/phase29-page-map-audit.md` — 17-page table + variant coverage + special rules + import enforcement examples + 6-criterion pass table.
+- `index.ts` — public barrel (no governance markdown re-exports).
+
+### Trust boundary architecture
+1. `OFFICIAL_LUMI_REGISTRY` is the source of truth — host code must never construct a variant inline.
+2. Scene authority — `LumiSceneRenderer` only accepts `variantOverride` when it equals `assignment.variant` or `assignment.fallback`. Arbitrary canonical variants are rejected and surfaced via `onValidationError`.
+3. Page policy gate — when `pageId` is supplied to `OfficialLumi` (or forwarded via `LumiSceneRenderer`), `canRenderLumi({pageId, variant})` is consulted. Forbidden surfaces (e.g. `crisis-support`) render a hidden `<div style={display:none} data-policy-blocked="true">`.
+4. **Fail-closed on unknown pageId** — if a host opts into the policy gate by passing `pageId`, an unknown pageId refuses render rather than silently allowing it. A typo in `pageId="crisis-support"` (e.g. `"crisis_support"`) blocks render instead of slipping through.
+5. Size clamping — `min(requested, getMaxSizeForContext(position, isMobile), variant.sizeLimits[position])`. Mobile reduces caps by 15%. Never throws.
+6. Inline error states — unknown variants render zero-size placeholders; unassigned scenes render a dev-only red error pill. UI never crashes on a misconfigured Lumi.
+7. Diagnostic surface — `OfficialLumi` always fires `onValidationIssue(issues)` callback when present (any environment), and additionally `console.warn`s in dev. Validations no longer silently swallowed.
+
+### Architect 2-pass review
+**1st pass** caught 5 real issues — all fixed pre-ship: (1) **Scene trust-boundary bypass** — `LumiSceneRenderer` accepted any canonical `variantOverride` → fix: only accept `assignment.variant` or `assignment.fallback`; (2) **Crisis governance not enforceable** — `OfficialLumi` had no page-policy gate → fix: added `canRenderLumi({pageId, variant})` runtime trust boundary; (3) **Optional placement semantics** — `isPlacementValid` returned false for `null` on optional pages → fix: null is now valid for optional, default-NO-Lumi behavior preserved; (4) **Dev gate unreliable in Vite** — `process.env.NODE_ENV` check often fails in Vite browser runtime → fix: extracted `internal/devGate.ts` checking `import.meta.env.DEV` first then falling back to `process.env`; (5) **Diagnostic gap** — overlay said "see console" but nothing was logged → fix: `useEffect`-driven `console.warn` (dev) + `onValidationIssue` callback (any env). **2nd pass** confirmed 4/5 resolved and caught the remaining gap: **policy gate was fail-open on unknown `pageId`** — fixed: when a host opts into the gate by passing `pageId`, an unknown pageId now fails closed (a typo on `"crisis-support"` no longer slips through).
+
+### Build status
+- `tsc --noEmit` → clean.
+- `vite build` → 15.68s clean (751.39 kB main bundle unchanged — registry is opt-in, never imported by App.tsx).
+- ZERO files outside `client/src/lumi-registry/` modified.
+- ZERO new npm dependencies.
+- ZERO production wiring (no App.tsx, main.tsx, or route changes).
+
+### Production import
+```ts
+import {
+  OfficialLumi,
+  LumiSceneRenderer,
+  getVariant,
+  getSceneAssignment,
+  getPagePlacement,
+  canRenderLumi,
+  runPageMapAudit,
+  verifyImportPath,
+} from "@/lumi-registry";
+```
+
+### Follow-up (not blocking)
+The 2nd-pass architect noted unit tests for the policy gate (forbidden / unknown / omitted `pageId`) would be valuable. Deferred — they belong in a follow-up phase since the spec was components + governance, not tests. Recommended placement: alongside the v5.8.61 integration smoke test infrastructure at `client/src/lumi-integration/tests/`.
+
+---
+
 ## v5.8.61 — Section 8.3: Cross-module integration smoke test
 
 Closes the HIGH-priority gap from the 360° platform analysis (Section 8.3 · "No integration smoke test"). Same shipping discipline as the prior phase modules: tests-only, isolated vitest config, zero production wiring, zero new npm dependencies.
