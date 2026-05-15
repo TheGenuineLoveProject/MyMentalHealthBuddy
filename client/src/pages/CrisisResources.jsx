@@ -164,14 +164,16 @@ export default function CrisisResources() {
                 >
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-1 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                      <div className="flex items-center gap-2 mb-1">
                         {hotline.priority && (
                           <span className="px-2 py-0.5 text-xs font-medium rounded-full flex-shrink-0" style={{ background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }}>
                             Priority
                           </span>
                         )}
-                        <span>{hotline.name}</span>
-                      </h3>
+                        <h3 className="text-lg font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
+                          {hotline.name}
+                        </h3>
+                      </div>
                       <p className="text-sm mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{hotline.description}</p>
                       <p className="text-xs flex items-center gap-1.5" style={{ color: 'var(--glp-ink)' }}>
                         <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--glp-sage)' }}></span>
