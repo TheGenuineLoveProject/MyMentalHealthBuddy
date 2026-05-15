@@ -207,7 +207,7 @@ export default function JournalPage() {
 
       {/* v5.8.72 — canonical Lumi (LUMI_SOFT_PRESENCE) at top of journal area */}
       <div className="flex items-center gap-3 mb-4">
-        <OfficialLumi variant="LUMI_SOFT_PRESENCE" scene="page-header" position="card" widthPx={100} decorative />
+        <OfficialLumi variant="LUMI_SOFT_PRESENCE" scene="page-header" position="card" pageId="journal" widthPx={100} decorative />
         <p className="text-sm text-foreground/70">A quiet space to write — Lumi is here.</p>
       </div>
 

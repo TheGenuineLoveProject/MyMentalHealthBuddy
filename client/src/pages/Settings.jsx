@@ -245,7 +245,7 @@ export default function Settings() {
                 </div>
               </div>
               {/* v5.8.72 — small canonical Lumi (LUMI_COMPANION) beside title */}
-              <OfficialLumi variant="LUMI_COMPANION" scene="page-header" position="inline" widthPx={60} decorative />
+              <OfficialLumi variant="LUMI_COMPANION" scene="page-header" position="inline" pageId="settings" widthPx={60} decorative />
             </header>
 
             {message && (

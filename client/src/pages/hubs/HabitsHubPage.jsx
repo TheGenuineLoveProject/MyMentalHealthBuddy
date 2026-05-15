@@ -60,7 +60,7 @@ export default function HabitsHubPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* v5.8.72 — canonical Lumi (LUMI_PATH) at top of habits list */}
         <div className="flex items-center gap-3 mb-6">
-          <OfficialLumi variant="LUMI_PATH" scene="page-header" position="card" widthPx={100} decorative />
+          <OfficialLumi variant="LUMI_PATH" scene="page-header" position="card" pageId="habits-hub" widthPx={100} decorative />
           <p className="text-sm text-gray-700 dark:text-gray-300">One small step at a time — Lumi walks alongside.</p>
         </div>
         <div className="grid gap-4 md:grid-cols-2 mb-8">

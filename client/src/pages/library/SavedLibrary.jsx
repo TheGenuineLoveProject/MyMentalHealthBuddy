@@ -33,7 +33,7 @@ export default function SavedLibrary() {
     >
       {/* v5.8.72 — canonical Lumi (LUMI_EMOTION_ORB) at top of library content */}
       <div className="flex items-center gap-3 mt-4 mb-2">
-        <OfficialLumi variant="LUMI_EMOTION_ORB" scene="page-header" position="card" widthPx={100} decorative />
+        <OfficialLumi variant="LUMI_EMOTION_ORB" scene="page-header" position="card" pageId="saved-library" widthPx={100} decorative />
         <p className="text-sm text-gray-700 dark:text-white/80">Your favorite tools, gently kept.</p>
       </div>
       <section className="mt-4 rounded-2xl border border-sage-200 dark:border-white/10 bg-sage-50 dark:bg-white/5 p-4" data-testid="section-saved-list">

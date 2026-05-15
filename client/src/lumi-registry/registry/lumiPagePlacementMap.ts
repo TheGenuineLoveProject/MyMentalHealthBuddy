@@ -192,10 +192,73 @@ export const PAGE_PLACEMENT_MAP: ReadonlyArray<PagePlacement> = Object.freeze([
     maxWidthPx: 100,
     specialRules: Object.freeze(["NO sad/crying Lumi", "Clear recovery action"]),
   },
+  // v5.8.73 — enroll the 6 pages introduced by the v5.8.72 OfficialLumi
+  // rollout into the strict policy gate. Brief proposed `route` / `notes` /
+  // `secondaryVariant` fields; the actual `PagePlacement` interface has none
+  // of those, so each entry maps `required: false` → `assignment: "optional"`,
+  // drops route (not in schema), and folds the brief's notes into `reasoning`.
+  // CanvaLanding's footer LUMI_FLOAT_IDLE is intentionally NOT enrolled as a
+  // secondary variant — `LUMI_FLOAT_IDLE` lives in `RUNTIME_ONLY_VARIANTS`
+  // (L314-316), the canonical exemption path for runtime float anchors. The
+  // footer call site keeps `pageId` omitted (silent gate).
+  {
+    pageId: "breathing-exercises",
+    pageName: "Breathing Exercises — route /breathe",
+    variant: "LUMI_MEDITATION",
+    assignment: "optional",
+    position: "card",
+    maxWidthPx: 120,
+    reasoning: "v5.8.72 — canonical Lumi rollout. Decorative meditation Lumi above H1.",
+  },
+  {
+    pageId: "journal",
+    pageName: "Journal — route /journal",
+    variant: "LUMI_SOFT_PRESENCE",
+    assignment: "optional",
+    position: "card",
+    maxWidthPx: 100,
+    reasoning: "v5.8.72 — canonical Lumi rollout. Quiet presence in journal header row.",
+  },
+  {
+    pageId: "habits-hub",
+    pageName: "Habits Hub — route /habits",
+    variant: "LUMI_PATH",
+    assignment: "optional",
+    position: "card",
+    maxWidthPx: 100,
+    reasoning: "v5.8.72 — canonical Lumi rollout. Walking-path Lumi above resource grid.",
+  },
+  {
+    pageId: "saved-library",
+    pageName: "Saved Library — route /library",
+    variant: "LUMI_EMOTION_ORB",
+    assignment: "optional",
+    position: "card",
+    maxWidthPx: 100,
+    reasoning: "v5.8.72 — canonical Lumi rollout. Emotion-orb Lumi above saved-list.",
+  },
+  {
+    pageId: "settings",
+    pageName: "Settings — route /settings",
+    variant: "LUMI_COMPANION",
+    assignment: "optional",
+    position: "inline",
+    maxWidthPx: 60,
+    reasoning: "v5.8.72 — canonical Lumi rollout. Small companion accent in header.",
+  },
+  {
+    pageId: "ai-chat",
+    pageName: "AI Chat — route /chat",
+    variant: "LUMI_HEART",
+    assignment: "optional",
+    position: "inline",
+    maxWidthPx: 48,
+    reasoning: "v5.8.72 — canonical Lumi rollout. Small heart-glow header above chat panel.",
+  },
 ] as const);
 
-if (PAGE_PLACEMENT_MAP.length !== 18) {
-  throw new Error(`[lumi-registry] PAGE_PLACEMENT_MAP floor violated: expected 18 pages, got ${PAGE_PLACEMENT_MAP.length}.`);
+if (PAGE_PLACEMENT_MAP.length !== 24) {
+  throw new Error(`[lumi-registry] PAGE_PLACEMENT_MAP floor violated: expected 24 pages, got ${PAGE_PLACEMENT_MAP.length}.`);
 }
 
 export function getPagePlacement(pageId: string): PagePlacement | undefined {
