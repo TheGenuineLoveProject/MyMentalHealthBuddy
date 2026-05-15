@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
-import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText, Gift, Loader2 } from "lucide-react";
+import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText, Gift, Loader2, Brain } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import SEO from "../components/SEO";
 import { ReferralInvite } from "../components/referral";
@@ -8,6 +8,11 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 import { OfficialLumi } from "@/lumi-registry";
+// Phase 16 Reflective Memory Layer — first /settings host (v5.8.82).
+// Mounting unlocks the consent grant button which in turn activates the
+// v5.8.80 P6 ReturnLoop tier-aware welcome (writes silently no-op until
+// consent.state === "granted").
+import { MemorySettingsPanel, MemoryTransparencyView } from "@/lumi-memory";
 
 const VISUAL_MODES = [
   { id: "", label: "Default", icon: Sun, description: "Standard brand palette with Deep Teal primary + Gold accent" },
@@ -522,6 +527,25 @@ export default function Settings() {
                     Your export includes: profile info, mood entries, journal entries, and AI chat history in JSON format.
                   </p>
                 </div>
+              </div>
+            </section>
+
+            <section data-testid="section-memory" className="card-bordered mb-6" aria-labelledby="memory-heading">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="icon-container icon-md icon-soft-sage">
+                  <Brain className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <h2 id="memory-heading" className="text-heading-md text-teal">Memory</h2>
+              </div>
+
+              <p className="text-body-sm mb-4">
+                Lumi can gently remember a few preferences (greeting tone, pacing, last visit) so welcome-back messages feel less repetitive. Memory is opt-in, editable, and never stores feelings, vulnerabilities, or crisis history.
+              </p>
+
+              <MemorySettingsPanel />
+
+              <div className="mt-6">
+                <MemoryTransparencyView />
               </div>
             </section>
 

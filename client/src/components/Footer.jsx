@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Shield, BookOpen, Mail } from 'lucide-react';
+import { Shield, BookOpen, Mail, Settings as SettingsIcon } from 'lucide-react';
 import { Instagram, Youtube } from "../lib/lucide-brands";
 import LumiMascot from "./lumi/LumiMascot.jsx";
 
@@ -51,6 +51,10 @@ export default function Footer() {
             <Link href="/newsletter" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-newsletter">
               <Mail className="w-4 h-4" aria-hidden="true" />
               Newsletter
+            </Link>
+            <Link href="/settings" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-settings">
+              <SettingsIcon className="w-4 h-4" aria-hidden="true" />
+              Settings
             </Link>
             <Link href="/disclaimer" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-disclaimer">
               Disclaimer

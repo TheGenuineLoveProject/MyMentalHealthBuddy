@@ -1,3 +1,77 @@
+# v5.8.82 — P6 activation surface (Settings panel mount + nav exposure)
+
+Date: 2026-05-15
+Cycle: V34 GOVERNED EXECUTION — P6 follow-up #1 (mount_settings, user-confirmed)
+Files changed: 5 (`client/src/lumi-memory/components/MemorySettingsPanel.tsx`, `client/src/pages/Settings.jsx`, `client/src/components/Footer.jsx`, `client/src/pages/CanvaLanding.jsx`, `replit.md`)
+
+## Hard truth uncovered during INSPECT
+
+The v5.8.80 P6 Path B wiring (ReturnLoop ↔ lumi-memory) was logically complete but functionally inert: `INITIAL_CONSENT.state = "unset"` defaults caused every `writeMemory("lastSessionAt", iso)` call to silently no-op. The only switch that flips consent → `"granted"` (and thus activates the entire tier-aware welcome system) lives inside `MemorySettingsPanel`, which had **never been mounted on any route in production**. P6 was effectively a dead feature for 100% of users.
+
+Worse: INSPECT also found `MemorySettingsPanel.tsx` (L34-35) referenced `useMemoryStore(selectConsent)` and `useMemoryStore(selectLiveEntries)` directly — but none of those three identifiers were imported in the file. The file imports the **correct** public hooks `useMemoryConsent` + `useMemoryLiveEntries` (L12-13) but never calls them. This is a pre-existing compile-blocker that was hiding because no host had ever attempted to render the panel. Mounting it without the fix would have produced an immediate `ReferenceError` at runtime.
+
+## Patch (smallest valid engine — 4 source files + replit.md)
+
+### 1. `client/src/lumi-memory/components/MemorySettingsPanel.tsx` — hook fix (compile-blocker)
+
+```diff
+-  const consent = useMemoryStore(selectConsent);
+-  const entries = useMemoryStore(selectLiveEntries);
++  const consent = useMemoryConsent();
++  const entries = useMemoryLiveEntries();
+```
+
+The barrel + `runtime/memoryHooks.ts` contract is explicit: *"the raw Zustand store (which carries internal mutators) is intentionally NOT re-exported from the barrel; this file is the ONLY public read surface."* The previous direct-store reference broke that contract AND wouldn't compile. The two public hooks already imported at the top of the file are the correct read surface — switching to them satisfies both the contract and TS.
+
+### 2. `client/src/pages/Settings.jsx` — mount the panel
+
+- New import: `import { MemorySettingsPanel, MemoryTransparencyView } from "@/lumi-memory";`
+- New lucide icon: `Brain` (added to existing import list)
+- New `<section data-testid="section-memory">` block inserted between the Privacy and Referral sections (~17 lines). Contains:
+  - Brain icon + "Memory" h2 in soft-sage matching existing section pattern
+  - Opt-in copy: *"Lumi can gently remember a few preferences (greeting tone, pacing, last visit) so welcome-back messages feel less repetitive. Memory is opt-in, editable, and never stores feelings, vulnerabilities, or crisis history."*
+  - `<MemorySettingsPanel />` (consent grant/decline/revoke, greeting tone selector, pacing selector, reset button)
+  - `<MemoryTransparencyView />` below — full audit log + every live entry + retention countdown
+
+### 3. `client/src/components/Footer.jsx` — public footer link
+
+Added Settings cog link between Newsletter and Disclaimer in the footer nav. No auth gate at the link level — `/settings` is a `<ProtectedRoute>` so unauthed users redirect to `/login` automatically. Uses existing `footer-nav-link` class + lucide `Settings` icon (aliased `SettingsIcon` to avoid name collision).
+
+### 4. `client/src/pages/CanvaLanding.jsx` — mobile hamburger (Account section, authed only)
+
+Added Settings link inside the existing `isAuthenticated()` branch of the mobile menu's Account section, beneath "My Dashboard". Wrapped the existing Dashboard `<Link>` in a fragment so both buttons render. Per user spec: mobile hamburger + footer only — desktop header (which only carries Blog/Crisis/Pricing in tighter spacing) was deliberately NOT touched.
+
+## Why this activates v5.8.80 P6 for real users
+
+```
+User opens /settings → clicks "Allow gentle memory"
+  → setConsent("granted") → store.consent.state = "granted"
+  → persist middleware (added in v5.8.80 architect-fix) writes to localStorage
+  → next time ReturnLoop renders:
+    - readMemory("lastSessionAt") returns prior ISO (or undefined first time)
+    - writeMemory("lastSessionAt", new Date().toISOString()) now succeeds (consent gate passes)
+    - days-since-last computed → tier picked (<1d short / <7d medium / 7+d long)
+    - Welcome message no longer random across all 10
+```
+
+Without v5.8.82, none of the writeMemory calls in v5.8.80 ever succeed. With v5.8.82, any user who taps one button gets the full Phase 16 tier-aware experience.
+
+## Verify
+
+- TSC_GATE: `npx tsc --noEmit` → 0 errors
+- BUILD_GATE: `npm run build` → ✓ built in 19.81s
+- HEALTH_GATE: `/health` ok
+- ROUTE_GATE: `/`, `/settings`, `/chat`, `/crisis` → HTTP 200
+- ROLLBACK_GATE: 4-file revert; pre-existing `MemorySettingsPanel` bug returns to its dormant state, panel disappears from /settings, nav links disappear; ReturnLoop falls back to v5.6 random pool (consent stays unset)
+- DUPLICATION_GATE: zero new components, zero new modules, zero new routes — only mounts and a hook-import fix
+
+## Open follow-ups
+
+1. **P7 — Avatar Life System Phase 3 (Arm & Leg Movement)** — queued by user as next blocker.
+2. **MemorySettingsPanel a11y polish** — buttons currently lack `aria-pressed` on the active tone/pace selection (consent buttons don't show selected state visually). Low severity, deferred.
+3. **Optional: surface tier in transparency view** — would let opt-in users see "you're currently in the long-absence tier" for diagnostic clarity. Defer until users ask.
+
+
 # v5.8.80 — P6 Path B: Emotional Continuity (ReturnLoop ↔ Phase 16 lumi-memory wiring)
 
 Date: 2026-05-15

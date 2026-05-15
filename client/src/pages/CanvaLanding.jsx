@@ -344,9 +344,16 @@ export default function CanvaLanding() {
           <div className="pt-4 mt-2 border-t" style={{ borderColor: 'var(--glp-sage-30)' }}>
             <p className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--glp-sage)' }}>Account</p>
             {!isLoading && isAuthenticated() ? (
-              <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                <button className="btn-primary w-full" data-testid="button-mobile-dashboard">My Dashboard</button>
-              </Link>
+              <>
+                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                  <button className="btn-primary w-full mb-3" data-testid="button-mobile-dashboard">My Dashboard</button>
+                </Link>
+                {/* v5.8.82: Settings exposed in mobile menu so signed-in
+                    users can reach Memory consent panel (P6 activation). */}
+                <Link href="/settings" onClick={() => setMobileMenuOpen(false)} className="block text-base font-serif font-semibold text-center py-2" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-settings">
+                  Settings
+                </Link>
+              </>
             ) : (
               <>
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>

@@ -31,8 +31,13 @@ const TONE_OPTIONS: ReadonlyArray<"warm" | "neutral" | "minimal"> = ["warm", "ne
 const PACE_OPTIONS: ReadonlyArray<"slow" | "medium" | "flexible"> = ["slow", "medium", "flexible"];
 
 export function MemorySettingsPanel({ onChange }: MemorySettingsPanelProps) {
-  const consent = useMemoryStore(selectConsent);
-  const entries = useMemoryStore(selectLiveEntries);
+  // Public read hooks (raw store + internal selectors are intentionally
+  // not exported from the barrel — see runtime/memoryHooks.ts contract).
+  // The panel previously referenced `useMemoryStore`/`selectConsent`/
+  // `selectLiveEntries` directly which were never imported — pre-existing
+  // compile-blocker uncovered when v5.8.82 mounted this on /settings.
+  const consent = useMemoryConsent();
+  const entries = useMemoryLiveEntries();
 
   const styles = useMemo(() => ({
     section: { padding: spacing.md, fontFamily: typography.fonts.body, color: colors.semantic.fgBody } as const,
