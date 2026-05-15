@@ -1,125 +1,591 @@
-client/src/pages/admin/AdminPublishingToday.jsx:60:    queryKey: ['/api/admin/publishing/draft-packs'],
-client/src/pages/admin/AdminPublishingToday.jsx:62:      const res = await fetch("/api/admin/publishing/draft-packs", { credentials: "include" });
-client/src/pages/admin/AdminPublishingToday.jsx:71:    queryKey: ['/api/admin/publishing/featured'],
-client/src/pages/admin/AdminPublishingToday.jsx:73:      const res = await fetch("/api/admin/publishing/featured", { credentials: "include" });
-client/src/pages/admin/AdminPublishingToday.jsx:83:      const res = await fetch("/api/admin/publishing/featured", {
-client/src/pages/admin/AdminPublishingToday.jsx:102:      const res = await fetch(`/api/admin/publishing/mark-posted/${id}`, {
-client/src/pages/admin/AdminUsers.jsx:14:    queryKey: ['/api/admin/dashboard-stats'],
-client/src/pages/admin/AdminUsers.jsx:23:    queryKey: ['/api/health'],
-client/src/pages/admin/AdminUsers.jsx:90:              onClick={() => refetch()}
-client/src/pages/admin/AnalyticsDashboard.jsx:14:    queryKey: ['/api/analytics/admin/summary'],
-client/src/pages/admin/AnalyticsDashboard.jsx:48:            <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
-client/src/pages/admin/AuditLogExplorer.jsx:25:    queryKey: ["/api/admin/audit-logs", { page, action, search }],
-client/src/pages/admin/AuditLogExplorer.jsx:30:      const res = await fetch(`/api/admin/audit-logs?${params}`, { credentials: "include" });
-client/src/pages/admin/AuditLogExplorer.jsx:37:    queryKey: ["/api/admin/audit-logs/actions"],
-client/src/pages/admin/AuditLogExplorer.jsx:39:      const res = await fetch("/api/admin/audit-logs/actions", { credentials: "include" });
-client/src/pages/admin/AuditLogExplorer.jsx:46:    queryKey: ["/api/admin/audit-logs/stats"],
-client/src/pages/admin/AuditLogExplorer.jsx:48:      const res = await fetch("/api/admin/audit-logs/stats", { credentials: "include" });
-client/src/pages/admin/AuditLogExplorer.jsx:62:    window.open(`/api/admin/audit-logs/export?${params}`, "_blank");
-client/src/pages/admin/AuditLogExplorer.jsx:86:          <Button variant="outline" size="sm" onClick={() => refetch()} data-testid="button-refresh">
-client/src/pages/admin/BillingViewer.jsx:60:    queryKey: ['/api/admin/billing/overview'],
-client/src/pages/admin/BillingViewer.jsx:64:    queryKey: ['/api/admin/billing/subscriptions'],
-client/src/pages/admin/ContentStudioAdmin.jsx:34:    queryKey: ['/api/health'],
-client/src/pages/admin/EngagementDashboard.jsx:12:    queryKey: ['/api/admin/dashboard-stats'],
-client/src/pages/admin/EngagementDashboard.jsx:21:    queryKey: ['/api/health'],
-client/src/pages/admin/EngagementDashboard.jsx:42:    { name: "AI Chat Therapy", endpoint: "/api/ai", percentage: 85 },
-client/src/pages/admin/EngagementDashboard.jsx:43:    { name: "Journal System", endpoint: "/api/journal", percentage: 65 },
-client/src/pages/admin/EngagementDashboard.jsx:44:    { name: "Mood Tracker", endpoint: "/api/mood", percentage: 55 },
-client/src/pages/admin/EngagementDashboard.jsx:45:    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
-client/src/pages/admin/EngagementDashboard.jsx:46:    { name: "Daily Wisdom", endpoint: "/api/wisdom", percentage: 38 },
-client/src/pages/admin/EngagementDashboard.jsx:47:    { name: "Reflection Tools", endpoint: "/api/reflection", percentage: 32 },
-client/src/pages/admin/EngagementDashboard.jsx:48:    { name: "Gratitude Prompts", endpoint: "/api/gratitude", percentage: 28 },
-client/src/pages/admin/EngagementDashboard.jsx:49:    { name: "Mirror Reflection", endpoint: "/api/mirror", percentage: 22 },
-client/src/pages/admin/EngagementDashboard.jsx:93:              onClick={() => refetch()}
-client/src/pages/admin/FeedbackAggregator.jsx:25:    queryKey: ['/api/feedback'],
-client/src/pages/admin/FeedbackAggregator.jsx:100:              onClick={() => refetch()}
-client/src/pages/admin/NewsletterAdmin.jsx:14:    queryKey: ["/api/blog/admin/stats"],
-client/src/pages/admin/NewsletterAdmin.jsx:19:      const res = await apiRequest("POST", "/api/blog/admin/test-send", { draftId });
-client/src/pages/admin/NewsletterAdmin.jsx:58:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/replit_integrations/audio/useVoiceStream.ts:33:      const response = await fetch(url, {
+client/analytics/index.html:34: const m = await fetch("./metrics.json",{cache:"no-store"}).then(r=>r.json());
+client/analytics/index.html:42:  const s=await fetch(`./summaries/daily-${today}.json?nocache=${Date.now()}`).then(r=>r.json());
+client/replit_integrations/audio/index.ts:23: *       await stream.streamVoiceResponse("/api/voice-conversations/1/messages", blob);
+client/analytics/healing-analytics.html:21:  const s=await fetch(`./summaries/daily-${d}-${lang}.json`).then(r=>r.json());
+client/analytics/healing-analytics.html:27: const cmp=await fetch("./charts/comparison.json").then(r=>r.json());
+client/analytics/healing-analytics.html:28: let pred={};try{pred=await fetch("./predictions/tomorrow.json").then(r=>r.json());}catch{}
+client/public/robots.txt:30:Disallow: /api/
+client/public/robots.txt:64:Disallow: /api/
+client/public/robots.txt:71:Disallow: /api/
+client/public/service-worker.js:68:  if (url.pathname.startsWith("/api/")) {
+client/public/service-worker.js:112:    const response = await fetch(request);
+client/public/service-worker.js:126:    const response = await fetch(request);
+client/public/service-worker.js:147:    const response = await fetch(request);
+client/public/service-worker.js:159:  if (url.pathname.startsWith("/api/")) return false;
+client/public/me-test.html:55:          const res = await fetch("/me", {
+client/public/auth-test.html:187:          const res = await fetch("/auth/register", {
+client/public/auth-test.html:204:          const res = await fetch("/auth/login", {
+client/public/auth-test.html:232:          const res = await fetch(path, {
+client/public/serviceWorker.js:60:  if (url.pathname.startsWith('/api/')) {
+client/public/serviceWorker.js:95:    const response = await fetch(request);
+client/public/serviceWorker.js:108:    const response = await fetch(request);
+client/public/serviceWorker.js:124:    const response = await fetch(request);
+client/public/serviceWorker.js:150:  const fetchPromise = fetch(request).then((response) => {
+client/public/serviceWorker.js:442:      const response = await fetch(entry.url, {
+client/src/utils/trackSignalEvent.js:35:    fetch('/api/analytics/event', {
+client/src/features/mirror/JournalMirror.tsx:59:      const res = await fetch("/api/mirror", {
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:74:  { path: "/api/v1/mood", method: "POST", requiredPermission: "mood:create" },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:75:  { path: "/api/v1/mood", method: "GET", requiredPermission: "mood:read", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:76:  { path: "/api/v1/mood/:id", method: "DELETE", requiredPermission: "mood:delete", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:77:  { path: "/api/v1/therapy/journal", method: "POST", requiredPermission: "journal:create" },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:78:  { path: "/api/v1/therapy/journal", method: "GET", requiredPermission: "journal:read", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:79:  { path: "/api/v1/therapy/cbt/thought-record", method: "POST", requiredPermission: "cbt:create" },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:80:  { path: "/api/v1/therapy/cbt/thought-records", method: "GET", requiredPermission: "cbt:read", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:81:  { path: "/api/v1/ai/chat", method: "POST", requiredPermission: "ai:chat" },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:82:  { path: "/api/v1/ai/chat/history", method: "GET", requiredPermission: "ai:history:read", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:83:  { path: "/api/v1/ai/chat/history", method: "DELETE", requiredPermission: "ai:history:delete", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:84:  { path: "/api/v1/user/profile", method: "GET", requiredPermission: "profile:read", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:85:  { path: "/api/v1/user/profile", method: "PUT", requiredPermission: "profile:update", requiresOwnership: true },
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:86:  { path: "/api/v1/user/account", method: "DELETE", requiredPermission: "profile:delete", requiresOwnership: true },
+client/src/features/community/Community.tsx:32:    queryKey: ["/api/community/question"],
+client/src/features/community/Community.tsx:36:    queryKey: ["/api/community/reflections"],
+client/src/features/community/Community.tsx:40:    mutationFn: (content: string) => apiRequest("POST", "/api/community/reflect", { content }),
+client/src/features/community/Community.tsx:44:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
+client/src/utils/LocalSync.js:110:      mood: "/api/moods",
+client/src/utils/LocalSync.js:111:      journal: "/api/journal"
+client/src/utils/LocalSync.js:119:    const response = await fetch(endpoint, {
+client/src/context/GamificationContext.jsx:62:      const data = await apiRequest("GET", "/api/gamification/progress");
+client/src/context/GamificationContext.jsx:74:      const data = await apiRequest("GET", "/api/gamification/quests");
+client/src/context/GamificationContext.jsx:111:      const result = await apiRequest("POST", "/api/gamification/record-session", {
+client/src/context/GamificationContext.jsx:140:      await apiRequest("POST", "/api/gamification/complete-quest", { questId });
+client/src/context/AuthContext.jsx:16:  const response = await fetch("/api/auth/user", {
+client/src/context/AuthContext.jsx:87:    queryKey: ["/api/auth/user"],
+client/src/context/AuthContext.jsx:128:    queryClient.setQueryData(["/api/auth/user"], null);
+client/src/context/AuthContext.jsx:134:      window.location.href = "/api/logout";
+client/src/context/AuthContext.jsx:143:      const response = await fetch("/api/auth/refresh", {
+client/src/lumi-backend/config/apiConfig.ts:16:  basePath: "/api/v1",
+client/src/services/billingClient.js:13:    const res = await fetch('/api/billing/checkout', {
+client/src/services/billingClient.js:40:    const res = await fetch('/api/billing/portal', {
+client/src/lib/buddyTelemetry.ts:177:    void fetch("/api/telemetry/event", {
+client/src/lib/queryClient.js:52:  const res = await fetch(url, {
+client/src/lib/queryClient.js:106:            (pathname === "/api/admin" || pathname.startsWith("/api/admin/"))
+client/src/lib/queryClient.js:115:        const res = await fetch(url, {
+client/src/lib/aiChat.ts:39:  const res = await fetch("/api/ai/chat", {
+client/src/lib/aiChat.ts:52:  const res = await fetch("/api/ai/history", {
+client/src/lib/aiChat.ts:60:  const res = await fetch("/api/ai/history", {
+client/src/lib/api.ts:96:  const res = await fetch(url, init);
+client/src/lib/api.ts:117:  return apiFetch("/api/ai/chat", {
+client/src/lib/api.ts:124:  return apiFetch(`/api/ai/history/${encodeURIComponent(userId)}`, {
+client/src/components/FeedbackWidget.jsx:81:      const res = await fetch("/api/feedback", {
+client/src/components/NewsletterSignup.jsx:55:      const response = await fetch("/api/leads", {
+client/src/components/FeedbackPrompt.tsx:8:// Backend: posts to the existing /api/telemetry/event sink (server/routes/
+client/src/components/FeedbackPrompt.tsx:66:    void fetch("/api/telemetry/event", {
+client/src/components/SacredNav.jsx:127:                <a href="/api/logout">
+client/src/components/SacredNav.jsx:194:                <a href="/api/logout" className="mt-2 pt-2 border-t border-border/50">
+client/src/components/AdminGuard.jsx:9: *   1) Token-based admin session: ADMIN_TOKEN → /api/admin/verify-token
+client/src/components/AdminGuard.jsx:12: *      /api/admin/verify-session.
+client/src/components/AdminGuard.jsx:36:            const res = await fetch("/api/admin/verify-session", {
+client/src/components/peacescape/CustomizerPanel.jsx:36: * - Optimistic local update + PATCH /api/peacescape/state.
+client/src/components/peacescape/CustomizerPanel.jsx:64:      const res = await apiRequest("PATCH", "/api/peacescape/state", { [field]: value });
+client/src/components/zen/ZenScape.jsx:16: * against allowlists in /api/peacescape/state). Defaults are sage/meadow/none
+client/src/components/zen/BuddyBubble.jsx:18: *     /api/ai/chat handlers.
+client/src/components/wellness/WeatherMoodSync.jsx:111:      const res = await fetch(
+client/src/components/wellness/WeatherMoodSync.jsx:148:      const res = await fetch(
+client/src/components/wellness/MoodCalendar.jsx:74:    queryKey: ["/api/mood"],
+client/src/components/wellness/JournalAI.jsx:86:    mutationFn: (message) => apiRequest("POST", "/api/ai/chat", { message }),
+client/src/components/wellness/HealingGraph.jsx:85:    queryKey: ["/api/mood"],
+client/src/hooks/useBuddy.ts:7: * Talks ONLY to POST /api/buddy. Server is canonical for `state`.
+client/src/hooks/useBuddy.ts:77:        const res = await fetch("/api/buddy", {
+client/src/hooks/useUserStats.js:6:    queryKey: ["/api/moods"],
+client/src/hooks/useUserStats.js:11:    queryKey: ["/api/journals"],
+client/src/components/wellness/EmotionLog.jsx:42:    queryKey: ["/api/mood"],
+client/src/components/wellness/EmotionLog.jsx:47:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
+client/src/components/wellness/EmotionLog.jsx:49:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/components/wellness/EmotionLog.jsx:50:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/components/wellness/EmotionLog.jsx:63:    mutationFn: (id) => apiRequest("DELETE", `/api/mood/${id}`),
+client/src/components/wellness/EmotionLog.jsx:65:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/hooks/useAuth.js:9:  const response = await fetch("/api/auth/user", {
+client/src/hooks/useAuth.js:25:  window.location.href = "/api/logout";
+client/src/hooks/useAuth.js:31:    queryKey: ["/api/auth/user"],
+client/src/hooks/useAuth.js:40:      queryClient.setQueryData(["/api/auth/user"], null);
+client/src/hooks/useAnalytics.mjs:23:    await fetch("/api/analytics/event", {
+client/src/hooks/use-upload.ts:65:      const response = await fetch("/api/uploads/request-url", {
+client/src/hooks/use-upload.ts:92:      const response = await fetch(uploadURL, {
+client/src/hooks/use-upload.ts:165:      const response = await fetch("/api/uploads/request-url", {
+client/src/components/state/StateTracker.tsx:91:    mutationFn: (data: Record<string, string>) => apiRequest("POST", "/api/states", data),
+client/src/components/state/StateTracker.tsx:93:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
+client/src/components/state/StateTracker.tsx:94:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/components/publishing/NewsletterInvite.jsx:18:      const res = await fetch("/api/newsletter/subscribe", {
+client/src/components/marketing/EmailCapture.jsx:25:      const res = await fetch("/api/leads", {
+client/src/components/AchievementBadge.jsx:225:    queryKey: ["/api/progress/achievements"],
+client/src/components/Badges.jsx:194:    queryKey: ["/api/badges"],
+client/src/components/AffirmationDeck.jsx:40:    queryKey: ["/api/favorites", "affirmation"],
+client/src/components/AffirmationDeck.jsx:46:      return apiRequest("POST", "/api/favorites", {
+client/src/components/AffirmationDeck.jsx:52:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+client/src/api/fetchWithAuth.js:21:  const res = await fetch(url, {
+client/src/api/fetchWithAuth.js:34:  const refreshRes = await fetch("/api/auth/refresh", {
+client/src/api/fetchWithAuth.js:47:  const retry = await fetch(url, {
+client/src/components/AICompanion.jsx:110:        const response = await apiRequest("POST", "/api/ai/chat", { 
+client/src/components/AIChat.jsx:2:import axios from "axios";
+client/src/components/AIChat.jsx:13:    const res = await axios.post(
+client/src/components/AIChat.jsx:14:      "/api/ai/chat",
+client/src/components/AIChat.jsx:22:    const res = await axios.post("/api/ai/chat", {
+client/src/pages/CanvaLanding.jsx:52:      const response = await fetch("/api/admin/verify-token", {
+client/src/components/insights/TodaysInsight.jsx:6:    queryKey: ["/api/insights/daily"],
+client/src/pages/Settings.jsx:51:        const res = await fetch("/api/user-settings", { credentials: "include" });
+client/src/pages/Settings.jsx:110:      const res = await fetch("/api/user-settings", {
+client/src/pages/Settings.jsx:160:      const response = await fetch("/api/account/export", {
+client/src/pages/JournalPage.jsx:101:    queryKey: ["/api/journal"],
+client/src/pages/JournalPage.jsx:111:    queryKey: ["/api/mood"],
+client/src/pages/JournalPage.jsx:120:    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
+client/src/pages/JournalPage.jsx:122:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+client/src/pages/JournalPage.jsx:123:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/pages/JournalPage.jsx:136:    mutationFn: (id) => apiRequest("DELETE", `/api/journal/${id}`),
+client/src/pages/JournalPage.jsx:138:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+client/src/pages/JournalPage.jsx:139:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/components/EmotionPieChart.jsx:44:    queryKey: ["/api/moods"],
+client/src/pages/Pricing.jsx:145:    fetch("/api/billing/pricing-view", { method: "POST", credentials: "include" }).catch(() => {});
+client/src/pages/Pricing.jsx:165:      const res = await fetch("/api/billing/checkout", {
+client/src/components/EmotionAuraRing.jsx:26:    queryKey: ["/api/moods"],
+client/src/pages/InsightsDashboard.jsx:17:    queryKey: ["/api/gratitude/weekly-summary"],
+client/src/pages/InsightsDashboard.jsx:22:    queryKey: ["/api/community/completion-stats"],
+client/src/components/DataExportButton.jsx:19:    queryKey: ["/api/moods"],
+client/src/components/DataExportButton.jsx:24:    queryKey: ["/api/journal"],
+client/src/components/DailyInsight.jsx:5:    queryKey: ["/api/insights/daily"],
+client/src/pages/ProtocolSession.jsx:132:  const queryKey = ["/api/protocols/session", sessionId];
+client/src/pages/ProtocolSession.jsx:142:      apiRequest("POST", `/api/protocols/session/${sessionId}/respond`, payload),
+client/src/pages/ProtocolSession.jsx:151:      apiRequest("POST", `/api/protocols/session/${sessionId}/progress`, {}),
+client/src/pages/ProtocolSession.jsx:159:      apiRequest("POST", `/api/protocols/session/${sessionId}/pause`, {}),
+client/src/pages/ProtocolSession.jsx:209:            Could not load session. <button type="button" onClick={() => refetch()} className="underline">Retry</button>
+client/src/pages/ProtocolBrowser.jsx:92:  const { data, isLoading, error } = useQuery({ queryKey: ["/api/protocols"] });
+client/src/pages/ProtocolBrowser.jsx:109:    mutationFn: async (protocolId) => apiRequest("POST", "/api/protocols/start", { protocolId }),
+client/src/pages/ProtocolBrowser.jsx:111:      queryClient.invalidateQueries({ queryKey: ["/api/protocols"] });
+client/src/pages/MirrorPage.tsx:65:      const res = await apiRequest("POST", "/api/mirror", { text, mode });
+client/src/pages/HealthPage.jsx:11:    queryKey: ["/api/health"],
+client/src/components/ChatWidget.tsx:27:      const response = await apiRequest("POST", "/api/ai/chat", {
+client/src/pages/EliteToolsDashboard.tsx:47:    queryKey: ["/api/healing-intelligence/modalities"]
+client/src/pages/EliteToolsDashboard.tsx:51:    queryKey: ["/api/cognitive-mastery/frameworks"]
+client/src/pages/EliteToolsDashboard.tsx:55:    queryKey: ["/api/wisdom-engine/patterns"]
+client/src/pages/EliteToolsDashboard.tsx:59:    queryKey: ["/api/wisdom-engine/daily"]
+client/src/pages/DiscernmentDashboard.jsx:95:      return apiRequest("POST", "/api/discernment/attempts", {
+client/src/pages/DiscernmentDashboard.jsx:103:      queryClient.invalidateQueries({ queryKey: ["/api/discernment/progress"] });
+client/src/pages/DiscernmentDashboard.jsx:104:      queryClient.invalidateQueries({ queryKey: ["/api/discernment/attempts/recent"] });
+client/src/pages/DiscernmentDashboard.jsx:272:    mutationFn: async (payload) => apiRequest("POST", "/api/discernment/real-world", payload),
+client/src/pages/DiscernmentDashboard.jsx:275:      queryClient.invalidateQueries({ queryKey: ["/api/discernment/progress"] });
+client/src/pages/DiscernmentDashboard.jsx:369:  const { data, isLoading } = useQuery({ queryKey: ["/api/discernment/attempts/recent"] });
+client/src/pages/DiscernmentDashboard.jsx:405:  const beltsQuery = useQuery({ queryKey: ["/api/discernment/belts"] });
+client/src/pages/DiscernmentDashboard.jsx:406:  const progressQuery = useQuery({ queryKey: ["/api/discernment/progress"] });
+client/src/pages/DiscernmentDashboard.jsx:407:  const lessonsQuery = useQuery({ queryKey: ["/api/discernment/lessons"] });
+client/src/pages/DiscernmentDashboard.jsx:486:                beltsQuery.refetch();
+client/src/pages/DiscernmentDashboard.jsx:487:                progressQuery.refetch();
+client/src/pages/DiscernmentDashboard.jsx:488:                lessonsQuery.refetch();
+client/src/pages/DiscernmentDashboard.jsx:602:            queryClient.invalidateQueries({ queryKey: ["/api/discernment/progress"] });
+client/src/pages/DiscernmentDashboard.jsx:603:            queryClient.invalidateQueries({ queryKey: ["/api/discernment/attempts/recent"] });
+client/src/components/MoodInsight.jsx:26:    queryKey: ["/api/insights/mood"],
+client/src/components/MoodHistoryChart.jsx:22:    queryKey: ["/api/mood/stats"],
+client/src/pages/ContentStudioPage.tsx:39:    queryKey: ["/api/content/formats"],
+client/src/pages/ContentStudioPage.tsx:44:      const data = await apiRequest("POST", "/api/content/generate", {
+client/src/pages/ContentStudioPage.tsx:62:      const data = await apiRequest("POST", "/api/content/drafts", {
+client/src/pages/ContentStudioPage.tsx:71:      queryClient.invalidateQueries({ queryKey: ["/api/content/drafts"] });
+client/src/pages/ContentAdminDashboard.jsx:77:    queryKey: ["/api/blog/admin"],
+client/src/pages/ContentAdminDashboard.jsx:155:    queryKey: ["/api/social/posts"],
+client/src/pages/ContentAdminDashboard.jsx:167:      return await apiRequest("POST", "/api/social/posts", postData);
+client/src/pages/ContentAdminDashboard.jsx:171:      queryClient.invalidateQueries({ queryKey: ["/api/social/posts"] });
+client/src/pages/ContentAdminDashboard.jsx:320:    queryKey: ["/api/products"],
+client/src/pages/ContentAdminDashboard.jsx:334:      return await apiRequest("POST", "/api/products", productData);
+client/src/pages/ContentAdminDashboard.jsx:338:      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
+client/src/pages/ContentAdminDashboard.jsx:510:    queryKey: ["/api/content/stats"],
+client/src/pages/BlogEditor.jsx:26:      fetch("/api/blog", {
+client/src/pages/BlogEditor.jsx:35:      queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
+client/src/components/JournalInsights.jsx:93:    queryKey: ["/api/journals"],
+client/src/pages/BiometricDashboard.jsx:79:    mutationFn: async (payload) => apiRequest("POST", "/api/biometrics/upload", payload),
+client/src/pages/BiometricDashboard.jsx:83:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/latest"] });
+client/src/pages/BiometricDashboard.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] });
+client/src/pages/BiometricDashboard.jsx:172:  const metaQuery = useQuery({ queryKey: ["/api/biometrics/meta"] });
+client/src/pages/BiometricDashboard.jsx:173:  const connectionsQuery = useQuery({ queryKey: ["/api/biometrics/connections"] });
+client/src/pages/BiometricDashboard.jsx:174:  const latestQuery = useQuery({ queryKey: ["/api/biometrics/latest"] });
+client/src/pages/BiometricDashboard.jsx:175:  const stateQuery = useQuery({ queryKey: ["/api/biometrics/state"] });
+client/src/pages/BiometricDashboard.jsx:190:    mutationFn: async (source) => apiRequest("POST", `/api/biometrics/sync/${source}`, {}),
+client/src/pages/BiometricDashboard.jsx:194:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/latest"] });
+client/src/pages/BiometricDashboard.jsx:195:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] });
+client/src/pages/BiometricDashboard.jsx:200:    mutationFn: async () => apiRequest("POST", "/api/biometrics/state/compute", {}),
+client/src/pages/BiometricDashboard.jsx:201:    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] }),
+client/src/pages/AgentInteraction.jsx:95:      apiRequest("POST", "/api/admin/consciousness/orchestrator/invoke", {
+client/src/pages/AgentInteraction.jsx:197:  const { data, isLoading } = useQuery({ queryKey: ["/api/admin/consciousness/orchestrator/memory"] });
+client/src/pages/AgentInteraction.jsx:221:    queryKey: ["/api/admin/consciousness/agents"],
+client/src/pages/Admin.jsx:23:    const res = await fetch(url, { credentials: "include" });
+client/src/pages/Admin.jsx:29:    const res = await fetch(url, {
+client/src/pages/Admin.jsx:76:        const response = await fetch("/api/admin/verify-session", {
+client/src/pages/Admin.jsx:113:      const response = await fetch("/api/admin/stats", { headers });
+client/src/pages/Admin.jsx:135:          fetchAdminMetric("/api/admin/health"),
+client/src/pages/Admin.jsx:136:          fetchAdminMetric("/api/admin/health-deep?format=json"),
+client/src/pages/Admin.jsx:982:                { endpoint: "/api/chat", method: "POST", status: 200, duration: "234ms", time: "Just now" },
+client/src/pages/Admin.jsx:983:                { endpoint: "/api/journal", method: "GET", status: 200, duration: "45ms", time: "1 min ago" },
+client/src/pages/Admin.jsx:984:                { endpoint: "/api/mood", method: "POST", status: 201, duration: "67ms", time: "2 min ago" },
+client/src/pages/Admin.jsx:985:                { endpoint: "/api/user/profile", method: "GET", status: 200, duration: "23ms", time: "3 min ago" },
+client/src/components/JournalAI.jsx:76:        const response = await apiRequest("/api/ai/analyze-journal", {
+client/src/components/ReflectionInsights.jsx:73:    queryKey: ["/api/gratitude/weekly-summary"],
+client/src/components/ReflectionInsights.jsx:86:        const response = await apiRequest("POST", "/api/ai/weekly-reflection", {
+client/src/components/ReflectionInsights.jsx:235:              onClick={() => refetch()}
+client/src/pages/ForgotPassword.jsx:31:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/request", data),
+client/src/pages/Upgrade.jsx:25:      const res = await fetch("/api/billing/checkout", {
+client/src/pages/Onboarding.tsx:69:    queryKey: ["/api/auth/user"],
+client/src/pages/Onboarding.tsx:108:      return apiRequest("POST", "/api/onboarding/complete", {
+client/src/pages/Onboarding.tsx:117:      queryClient.invalidateQueries({ queryKey: ["/api/onboarding/status"] });
+client/src/pages/BlogIndex.jsx:89:    queryKey: ["/api/blog"],
+client/src/components/ProgressTracker.jsx:29:    queryKey: ["/api/progress/stats"],
+client/src/components/ProgressTracker.jsx:34:    queryKey: ["/api/progress/achievements"],
+client/src/pages/Dashboard.jsx:31:    queryKey: ["/api/dashboard"],
+client/src/pages/Dashboard.jsx:108:            onClick={() => refetch()}
+client/src/pages/ResetPassword.jsx:59:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/confirm", {
+client/src/pages/Register.jsx:40:      const data = await apiRequest("POST", "/api/auth/register", {
+client/src/pages/Login.jsx:54:      const data = await apiRequest("POST", "/api/auth/login", {
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:13:const API_BASE = "/api/admin/consciousness";
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:24:    const res = await fetch(url, { credentials: "include", ...init });
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:30:    const res = await fetch(url, {
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:141:    summaryQ.refetch();
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:142:    agentsQ.refetch();
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:216:            <code className="mx-1 px-1.5 py-0.5 rounded bg-white/40">/api/admin/consciousness</code>
+client/src/components/admin/OrchestratorTestPanel.jsx:12: *     any locked v1 surface; it speaks only to /api/admin/consciousness/*.
+client/src/components/admin/OrchestratorTestPanel.jsx:60:      const r = await fetch("/api/admin/consciousness/orchestrator/memory", {
+client/src/components/admin/OrchestratorTestPanel.jsx:85:      const r = await fetch("/api/admin/consciousness/orchestrator/invoke", {
+client/src/components/admin/OperationsPanel.jsx:186:      const json = await apiFetch("/api/admin/health-deep/metrics?format=json");
+client/src/components/admin/OperationsPanel.jsx:273:      // /api/admin/health-deep returns the structured probe report:
+client/src/components/admin/OperationsPanel.jsx:275:      const json = await apiFetch("/api/admin/health-deep");
+client/src/components/admin/OperationsPanel.jsx:384:        fetch("/health/ready", { credentials: "include" }),
+client/src/components/admin/OperationsPanel.jsx:385:        fetch("/health/detailed", { credentials: "include" }),
+client/src/components/admin/OperationsPanel.jsx:472:      const json = await apiFetch("/api/admin/health-deep");
+client/src/components/admin/OperationsPanel.jsx:488:      const json = await apiFetch("/api/admin/health-deep/self-heal", { method: "POST" });
+client/src/components/admin/OperationsPanel.jsx:501:      await apiFetch(`/api/admin/health-deep/scheduler/${action}`, { method: "POST" });
+client/src/components/admin/OperationsPanel.jsx:642:    { label: "Public health", path: "/api/health",         protected: false },
+client/src/components/admin/OperationsPanel.jsx:643:    { label: "Admin health",  path: "/api/admin/health",   protected: true  },
+client/src/components/admin/OperationsPanel.jsx:644:    { label: "Auth (me)",     path: "/api/auth/me",        protected: true  },
+client/src/components/admin/OperationsPanel.jsx:645:    { label: "Kernel health", path: "/api/kernel/health",  protected: true  },
+client/src/components/admin/OperationsPanel.jsx:646:    { label: "Email health",  path: "/api/email/health",   protected: false },
+client/src/components/admin/OperationsPanel.jsx:678:            const res = await fetch(r.path, {
+client/src/pages/AdminLogin.jsx:11: * Posts the ADMIN_TOKEN to /api/admin/verify-token; on success stores the
+client/src/pages/AdminLogin.jsx:64:      const res = await fetch("/api/admin/verify-token", {
+client/src/components/admin/SOPMonitorPanel.jsx:2:// Platform SOP Monitor v1 — admin panel that surfaces /api/admin/sop/status.
+client/src/components/admin/SOPMonitorPanel.jsx:12: * 401/403 here is the SUCCESS condition for /api/admin/sop/status —
+client/src/components/admin/SOPMonitorPanel.jsx:27:  const url = "/api/admin/sop/status";
+client/src/components/admin/SOPMonitorPanel.jsx:29:    const res = await fetch(url, { credentials: "include" });
+client/src/components/admin/SOPMonitorPanel.jsx:35:    const res = await fetch(url, {
+client/src/components/admin/SOPMonitorPanel.jsx:90:    queryKey: ["/api/admin/sop/status"],
+client/src/components/admin/SOPMonitorPanel.jsx:98:  const handleRetry = useCallback(() => { refetch(); }, [refetch]);
+client/src/pages/CelebrationRitual.jsx:28:    queryKey: ["/api/community/completion-stats"],
+client/src/pages/Start.tsx:402:    void fetch("/api/telemetry/event", {
+client/src/pages/Start.tsx:464:        const res = await fetch("/api/streaks/me", {
+client/src/pages/Start.tsx:485:      const res = await fetch("/api/streaks/checkin", {
+client/src/pages/Start.tsx:535:      const res = await fetch("/api/ai/chat", {
+client/src/pages/Start.tsx:573:  //   - Does NOT call /api/buddy, does NOT touch /api/ai/chat, does NOT
+client/src/pages/DailyReflection.jsx:62:    queryKey: ["/api/user/reflection/today"],
+client/src/pages/DailyReflection.jsx:82:      const res = await apiRequest("POST", "/api/user/reflection", {
+client/src/pages/DailyReflection.jsx:93:      queryClient.invalidateQueries({ queryKey: ["/api/user/reflection/today"] });
+client/src/pages/DailyReflection.jsx:94:      queryClient.invalidateQueries({ queryKey: ["/api/user/reflections"] });
+client/src/pages/DailyReflection.jsx:95:      queryClient.invalidateQueries({ queryKey: ["/api/user/stats"] });
+client/src/pages/DailyReflection.jsx:97:        queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
+client/src/components/ObjectUploader.jsx:57:      const presignRes = await fetch('/api/uploads/request-url', {
+client/src/components/ObjectUploader.jsx:74:      const uploadRes = await fetch(uploadURL, {
+client/src/pages/CourseCatalog.jsx:31:      return apiRequest("POST", "/api/gamification/record-session", {
+client/src/pages/CourseCatalog.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+client/src/pages/PeacescapePage.jsx:35:        const res = await apiRequest("GET", "/api/peacescape/state");
+client/src/pages/CommunityHub.jsx:12:    queryKey: ["/api/community/affirmations"],
+client/src/pages/CommunityHub.jsx:17:    queryKey: ["/api/community/question"],
+client/src/pages/AffirmationWall.jsx:34:    queryKey: ["/api/community/affirmations"],
+client/src/pages/AffirmationWall.jsx:40:      return apiRequest("POST", "/api/community/affirmations", {
+client/src/pages/AffirmationWall.jsx:49:      queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
+client/src/pages/AffirmationWall.jsx:58:      return apiRequest("POST", `/api/community/affirmations/${id}/like`);
+client/src/pages/AffirmationWall.jsx:61:      queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
+client/src/pages/AffirmationWall.jsx:111:            onClick={() => refetch()}
+client/src/components/VoiceSettings.jsx:55:        const response = await fetch("/api/user/settings");
+client/src/components/VoiceSettings.jsx:73:        await fetch("/api/user/settings", {
+client/src/pages/GrowthPage.jsx:131:  const res = await fetch("/api/growth/journey", {
+client/src/pages/GrowthPage.jsx:445:    queryKey: ["/api/growth/journey", token ? "auth" : "guest"],
+client/src/components/SacredForm.jsx:34:      const response = await fetch('/api/subscribe', {
+client/src/components/ShareReflection.jsx:24:    queryKey: ["/api/journal"],
+client/src/components/ShareReflection.jsx:30:      return apiRequest("POST", "/api/community/reflections", {
+client/src/components/ShareReflection.jsx:40:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
+client/src/components/SessionTimeout.jsx:59:      await fetch("/api/session/extend", { method: "POST", credentials: "include" });
+client/src/components/SessionTimeout.jsx:103:            onClick={() => (window.location.href = "/api/logout")}
+client/src/components/StateTracker.jsx:68:    mutationFn: (data) => apiRequest("POST", "/api/states", data),
+client/src/components/StateTracker.jsx:70:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
+client/src/components/StateTracker.jsx:71:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/pages/tools/WeeklyReflection.jsx:52:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/weekly-reflection", data),
+client/src/components/SoftLaunchBanner.jsx:15:    fetch("/api/health")
+client/src/components/ReminderSettings.jsx:36:    queryKey: ["/api/user/settings"],
+client/src/components/ReminderSettings.jsx:51:      return apiRequest("PATCH", "/api/user/settings", { reminders: newSettings });
+client/src/components/ReminderSettings.jsx:59:      queryClient.invalidateQueries({ queryKey: ["/api/user/settings"] });
+client/src/pages/tools/MeaningMap.jsx:34:        const res = await fetch("/api/wellness-tools/meaning-map/latest", { credentials: "include" });
+client/src/pages/tools/MeaningMap.jsx:79:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/meaning-map", data),
+client/src/pages/tools/GriefLetter.jsx:42:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/grief-letter", data),
+client/src/components/ReminderScheduler.jsx:43:        const response = await fetch("/api/user/settings");
+client/src/components/ReminderScheduler.jsx:62:        await fetch("/api/user/settings", {
+client/src/pages/Invite.jsx:24:      return apiRequest("POST", "/api/invites", { email: inviteEmail });
+client/src/pages/Invite.jsx:33:      queryClient.invalidateQueries({ queryKey: ["/api/invites"] });
+client/src/pages/Invite.jsx:34:      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
+client/src/pages/tools/CommunityCheckin.jsx:39:        const res = await fetch("/api/community/reflections", { credentials: "include" });
+client/src/pages/tools/CommunityCheckin.jsx:61:    mutationFn: (data) => apiRequest("POST", "/api/community/reflect", data),
+client/src/pages/tools/CommunityCheckin.jsx:66:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
+client/src/pages/CommunityCircle.jsx:23:    queryKey: ["/api/community/reflections", emotionFilter],
+client/src/pages/CommunityCircle.jsx:26:      const response = await fetch(`/api/community/reflections${params}`);
+client/src/pages/CommunityCircle.jsx:35:      return apiRequest("POST", `/api/community/reflections/${reflectionId}/heart`);
+client/src/pages/CommunityCircle.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
+client/src/pages/CommunityCircle.jsx:46:    refetch();
+client/src/pages/CommunityCircle.jsx:94:              onClick={() => refetch()}
+client/src/pages/settings/EmailDigest.jsx:29:        const res = await fetch("/api/user-settings", { credentials: "include" });
+client/src/pages/settings/EmailDigest.jsx:57:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+client/src/pages/Reflection.jsx:123:    queryKey: ["/api/reflection/entries"],
+client/src/pages/Reflection.jsx:125:      const res = await apiRequest("GET", "/api/reflection/entries?limit=50");
+client/src/pages/Reflection.jsx:159:      return apiRequest("POST", "/api/reflection/entries", { text: reflectionText });
+client/src/pages/Reflection.jsx:162:      queryClient.invalidateQueries({ queryKey: ["/api/reflection/entries"] });
+client/src/pages/Reflection.jsx:203:      await apiRequest("POST", "/api/journal", {
+client/src/pages/Reflection.jsx:208:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+client/src/pages/Reflection.jsx:209:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/pages/Reflection.jsx:222:      const res = await apiRequest("POST", "/api/reflection/prompt", {
+client/src/pages/settings/AIPersonality.jsx:68:        const res = await fetch("/api/user-settings", { credentials: "include" });
+client/src/pages/settings/AIPersonality.jsx:86:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+client/src/pages/GratitudePractice.jsx:49:    queryKey: ["/api/gratitude", "today"],
+client/src/pages/GratitudePractice.jsx:50:    queryFn: () => apiRequest("GET", "/api/gratitude/today"),
+client/src/pages/GratitudePractice.jsx:56:    queryKey: ["/api/gratitude"],
+client/src/pages/GratitudePractice.jsx:57:    queryFn: () => apiRequest("GET", "/api/gratitude"),
+client/src/pages/GratitudePractice.jsx:63:    queryKey: ["/api/gratitude", "weekly-summary"],
+client/src/pages/GratitudePractice.jsx:64:    queryFn: () => apiRequest("GET", "/api/gratitude/weekly-summary"),
+client/src/pages/GratitudePractice.jsx:72:    mutationFn: (data) => apiRequest("POST", "/api/gratitude", data),
+client/src/pages/GratitudePractice.jsx:74:      queryClient.invalidateQueries({ queryKey: ["/api/gratitude"] });
+client/src/pages/GratitudePractice.jsx:75:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/pages/CoherenceLadderPage.jsx:99:    queryKey: ["/api/wellness-tools/coherence"],
+client/src/pages/CoherenceLadderPage.jsx:103:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/coherence", data),
+client/src/pages/CoherenceLadderPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
+client/src/pages/preferences/SafetyPreferences.jsx:69:        const res = await fetch("/api/user-settings", { credentials: "include" });
+client/src/pages/preferences/SafetyPreferences.jsx:95:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+client/src/pages/ChallengeDay.jsx:41:    queryKey: ["/api/gamification/progress"],
+client/src/pages/ChallengeDay.jsx:67:      return apiRequest("POST", "/api/gamification/record-session", {
+client/src/pages/ChallengeDay.jsx:83:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+client/src/pages/ChallengeDay.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
+client/src/pages/preferences/NotificationPreferences.jsx:65:        const res = await fetch("/api/user-settings", { credentials: "include" });
+client/src/pages/preferences/NotificationPreferences.jsx:88:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+client/src/pages/PracticeLibrary.jsx:33:      return apiRequest("POST", "/api/favorites", { 
+client/src/pages/PracticeLibrary.jsx:40:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+client/src/pages/pathways/ReflectionHistory.jsx:40:    queryKey: ["/api/journal"],
+client/src/pages/pathways/ReflectionHistory.jsx:44:    queryKey: ["/api/mood"],
+client/src/pages/pathways/ReflectionHistory.jsx:48:    queryKey: ["/api/gratitude"],
+client/src/pages/pathways/ReflectionHistory.jsx:52:    queryKey: ["/api/user/reflections"],
+client/src/pages/Challenge.jsx:74:        const res = await fetch("/api/wellness-tools/challenge-progress", { credentials: "include" });
+client/src/pages/Challenge.jsx:100:      const res = await fetch("/api/wellness-tools/challenge-progress", {
+client/src/pages/MovementSnacksPage.jsx:79:    queryKey: ["/api/wellness-tools/movement"],
+client/src/pages/MovementSnacksPage.jsx:83:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/movement", data),
+client/src/pages/MovementSnacksPage.jsx:85:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/movement"] });
+client/src/pages/pathways/ProgressStreaks.jsx:23:    queryKey: ["/api/progress/stats"],
+client/src/pages/pathways/ProgressStreaks.jsx:59:          <Button onClick={() => refetch()} data-testid="button-retry">
+client/src/pages/MoodPage.jsx:186:    queryKey: ["/api/mood"],
+client/src/pages/MoodPage.jsx:199:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
+client/src/pages/MoodPage.jsx:201:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/pages/MoodPage.jsx:202:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/pages/MoodPage.jsx:203:      queryClient.invalidateQueries({ queryKey: ["/api/analytics"] });
+client/src/pages/Contact.jsx:27:    mutationFn: (data) => apiRequest("POST", "/api/contact", data),
+client/src/pages/pathways/PathwaysHome.jsx:77:    queryKey: ["/api/pathways/progress"],
+client/src/pages/BoundariesPage.jsx:85:    queryKey: ["/api/wellness-tools/boundaries"],
+client/src/pages/BoundariesPage.jsx:89:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/boundaries", data),
+client/src/pages/BoundariesPage.jsx:91:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
+client/src/pages/BoundariesPage.jsx:103:    mutationFn: (id) => apiRequest("DELETE", `/api/wellness-tools/boundaries/${id}`),
+client/src/pages/BoundariesPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
+client/src/pages/WellnessGoals.jsx:62:      return apiRequest("POST", "/api/gamification/record-session", {
+client/src/pages/WellnessGoals.jsx:69:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+client/src/pages/pathways/Favorites.jsx:17:    queryKey: ["/api/favorites"],
+client/src/pages/pathways/Favorites.jsx:22:    mutationFn: (id) => apiRequest("DELETE", `/api/favorites/${id}`),
+client/src/pages/pathways/Favorites.jsx:24:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+client/src/pages/pathways/Favorites.jsx:64:          <Button onClick={() => refetch()} data-testid="button-retry">
+client/src/pages/CommunityFeed.jsx:15:    queryKey: ["/api/community/reflections"],
+client/src/pages/CommunityFeed.jsx:79:                onClick={() => refetch()}
+client/src/pages/WellnessDashboard.jsx:87:      const response = await fetch("/api/mood", {
+client/src/pages/WellnessDashboard.jsx:102:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/pages/WellnessDashboard.jsx:312:    queryKey: ["/api/mood"],
+client/src/pages/WellnessDashboard.jsx:324:    queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/pages/ValuesFinderPage.jsx:76:    queryKey: ["/api/wellness-tools/values"],
+client/src/pages/ValuesFinderPage.jsx:80:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/values", data),
+client/src/pages/ValuesFinderPage.jsx:82:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/values"] });
+client/src/pages/Analytics.jsx:10:    queryKey: ["/api/analytics"],
+client/src/pages/Analytics.jsx:74:            onClick={() => refetch()}
+client/src/pages/admin/SecurityDashboard.jsx:15:    queryKey: ['/api/admin/security/overview'],
+client/src/pages/admin/SecurityDashboard.jsx:17:      const res = await fetch("/api/admin/security/overview", { credentials: "include" });
+client/src/pages/admin/SecurityDashboard.jsx:28:    queryKey: ['/api/admin/security/rate-limits'],
+client/src/pages/admin/SecurityDashboard.jsx:30:      const res = await fetch("/api/admin/security/rate-limits?limit=50&blockedOnly=false", { credentials: "include" });
+client/src/pages/admin/SecurityDashboard.jsx:41:    queryKey: ['/api/health'],
+client/src/pages/BlogPost.jsx:20:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
+client/src/pages/BlogPost.jsx:22:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
+client/src/pages/BlogPost.jsx:82:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
+client/src/pages/BlogPost.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
+client/src/pages/BlogPost.jsx:163:    queryKey: ["/api/blog", slug],
+client/src/pages/BlogPost.jsx:165:      const res = await fetch(`/api/blog/${slug}`);
+client/src/pages/BlogDraftViewer.jsx:14:    fetch(`/api/admin/publishing/draft-packs/${encodeURIComponent(id)}`, {
+client/src/pages/admin/AdminPublishing.jsx:86:  const { data: registryData, isLoading: regLoading, error: publishError, refetch: refetchRegistry } = useQuery({ queryKey: ["/api/admin/publishing/registry"] });
+client/src/pages/admin/AdminPublishing.jsx:87:  const { data: draftsData, isLoading: draftsLoading } = useQuery({ queryKey: ["/api/admin/publishing/drafts"] });
+client/src/pages/admin/AdminPublishing.jsx:88:  const { data: calendarData, isLoading: calLoading } = useQuery({ queryKey: ["/api/admin/publishing/calendar"] });
+client/src/pages/admin/AdminPublishing.jsx:89:  const { data: signalsData, isLoading: sigLoading } = useQuery({ queryKey: ["/api/admin/publishing/signals/summary"] });
+client/src/pages/admin/AdminPublishing.jsx:91:    queryKey: ["/api/blog/admin/stats"],
+client/src/pages/admin/AdminPublishing.jsx:95:    queryKey: ["/api/admin/publishing/recommendations"],
+client/src/pages/admin/AdminPublishing.jsx:101:      const res = await apiRequest("PATCH", `/api/admin/publishing/registry/${id}`, { status });
+client/src/pages/admin/AdminPublishing.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/admin/publishing/registry"] });
+client/src/pages/admin/AdminPublishing.jsx:114:        return await apiRequest("POST", `/api/blog/admin/${id}/${action}`);
+client/src/pages/admin/AdminPublishing.jsx:133:      queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
+client/src/pages/admin/AdminPublishing.jsx:152:        ? await apiRequest("PUT", `/api/blog/admin/${editingPost.id}`, formData)
+client/src/pages/admin/AdminPublishing.jsx:153:        : await apiRequest("POST", "/api/blog/admin/create", formData);
+client/src/pages/admin/AdminPublishing.jsx:157:      queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
+client/src/pages/account/Settings.jsx:37:        const res = await fetch("/api/user/settings", { credentials: "include" });
+client/src/pages/account/Settings.jsx:60:    mutationFn: (data) => apiRequest("PATCH", "/api/user/settings", data),
+client/src/pages/admin/CommandCenter.jsx:145:    queryKey: ['/api/kernel/version'],
+client/src/pages/admin/CommandCenter.jsx:176:    queryKey: ['/api/system'],
+client/src/pages/admin/CommandCenter.jsx:330:        { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai", icon: MessageSquare, desc: "AI conversation engine" },
+client/src/pages/admin/CommandCenter.jsx:331:        { id: "therapy", label: "Therapy Engine", endpoint: "/api/therapy", icon: Headphones, desc: "Guided therapy sessions" },
+client/src/pages/admin/CommandCenter.jsx:332:        { id: "mood-tracker", label: "Mood Tracker", endpoint: "/api/mood", icon: Heart, desc: "User mood tracking" },
+client/src/pages/admin/CommandCenter.jsx:333:        { id: "journal", label: "Journal System", endpoint: "/api/journal", icon: BookOpen, desc: "Journaling engine" },
+client/src/pages/admin/CommandCenter.jsx:334:        { id: "gratitude", label: "Gratitude Prompts", endpoint: "/api/gratitude", icon: Sun, desc: "Daily gratitude system" },
+client/src/pages/admin/CommandCenter.jsx:335:        { id: "reflection", label: "Reflection Tools", endpoint: "/api/reflection", icon: Moon, desc: "Self-reflection engine" },
+client/src/pages/admin/CommandCenter.jsx:336:        { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/admin/CommandCenter.jsx:337:        { id: "mirror", label: "Mirror Reflection", endpoint: "/api/mirror", icon: Eye, desc: "Self-awareness mirror" },
+client/src/pages/admin/CommandCenter.jsx:338:        { id: "prompts", label: "Prompt Engine", endpoint: "/api/prompts", icon: FileQuestion, desc: "Guided prompt system" },
+client/src/pages/admin/CommandCenter.jsx:339:        { id: "states", label: "Emotional States", endpoint: "/api/states", icon: Gauge, desc: "State tracking system" },
+client/src/pages/admin/CommandCenter.jsx:345:        { id: "wisdom", label: "Wisdom Engine", endpoint: "/api/wisdom", icon: Lightbulb, desc: "Daily wisdom delivery" },
+client/src/pages/admin/CommandCenter.jsx:346:        { id: "wisdom-engine", label: "Wisdom Engine (Advanced)", endpoint: "/api/wisdom-engine", icon: Landmark, desc: "Deep wisdom system" },
+client/src/pages/admin/CommandCenter.jsx:347:        { id: "philosophy", label: "Philosophy Lab", endpoint: "/api/philosophy", icon: GraduationCap, desc: "Philosophical inquiry" },
+client/src/pages/admin/CommandCenter.jsx:348:        { id: "metacognition", label: "Metacognition", endpoint: "/api/metacognition", icon: Brain, desc: "Thinking about thinking" },
+client/src/pages/admin/CommandCenter.jsx:349:        { id: "creativity", label: "Creativity Engine", endpoint: "/api/creativity", icon: Sparkles, desc: "Creative exploration" },
+client/src/pages/admin/CommandCenter.jsx:350:        { id: "resilience", label: "Resilience Builder", endpoint: "/api/resilience", icon: Mountain, desc: "Resilience tools" },
+client/src/pages/admin/CommandCenter.jsx:351:        { id: "foresight", label: "Foresight Lab", endpoint: "/api/foresight", icon: Compass, desc: "Future planning" },
+client/src/pages/admin/CommandCenter.jsx:352:        { id: "knowledge", label: "Knowledge Synthesis", endpoint: "/api/knowledge", icon: BookOpen, desc: "Knowledge integration" },
+client/src/pages/admin/CommandCenter.jsx:353:        { id: "cognitive-lab", label: "Cognitive Lab", endpoint: "/api/cognitive-lab", icon: Brain, desc: "Cognitive exercises" },
+client/src/pages/admin/CommandCenter.jsx:354:        { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/cognitive-mastery", icon: Trophy, desc: "Cognitive excellence" },
+client/src/pages/admin/CommandCenter.jsx:355:        { id: "canva-integration", label: "Canva AI", endpoint: "/api/canva-oauth", icon: Palette, desc: "Canva design integration" },
+client/src/pages/admin/CommandCenter.jsx:356:        { id: "deep-learning", label: "Deep Learning", endpoint: "/api/deep-learning", icon: Layers, desc: "Deep learning tools" },
+client/src/pages/admin/CommandCenter.jsx:357:        { id: "dialectics", label: "Dialectics Engine", endpoint: "/api/dialectics", icon: Puzzle, desc: "Dialectical reasoning" },
+client/src/pages/admin/CommandCenter.jsx:358:        { id: "practices", label: "Practices Library", endpoint: "/api/practices", icon: Milestone, desc: "Guided practices" },
+client/src/pages/admin/CommandCenter.jsx:359:        { id: "insights", label: "Insights Engine", endpoint: "/api/insights", icon: Lightbulb, desc: "Personal insights" },
+client/src/pages/admin/CommandCenter.jsx:365:        { id: "trauma-healing", label: "Trauma Healing", endpoint: "/api/trauma-healing", icon: HeartHandshake, desc: "Trauma-informed protocols" },
+client/src/pages/admin/CommandCenter.jsx:366:        { id: "emotional-resilience", label: "Emotional Resilience", endpoint: "/api/emotional-resilience", icon: Flame, desc: "Emotional strength" },
+client/src/pages/admin/CommandCenter.jsx:367:        { id: "emotional-mastery", label: "Emotional Mastery", endpoint: "/api/emotional-mastery", icon: Target, desc: "Emotion regulation" },
+client/src/pages/admin/CommandCenter.jsx:368:        { id: "healing-modalities", label: "Healing Modalities", endpoint: "/api/healing-modalities", icon: Flower2, desc: "Healing approaches" },
+client/src/pages/admin/CommandCenter.jsx:369:        { id: "holistic-healing", label: "Holistic Healing", endpoint: "/api/holistic-healing", icon: TreePine, desc: "Whole-person wellness" },
+client/src/pages/admin/CommandCenter.jsx:370:        { id: "healing-tools", label: "Healing Tools", endpoint: "/api/healing", icon: Heart, desc: "Core healing toolkit" },
+client/src/pages/admin/CommandCenter.jsx:371:        { id: "healing-core", label: "Healing Core", endpoint: "/api/healing-core", icon: Leaf, desc: "Core healing engine" },
+client/src/pages/admin/CommandCenter.jsx:372:        { id: "healing-intelligence", label: "Healing Intelligence", endpoint: "/api/healing-intelligence", icon: Sparkles, desc: "AI-guided healing" },
+client/src/pages/admin/CommandCenter.jsx:373:        { id: "post-trauma", label: "Post-Trauma Growth", endpoint: "/api/post-trauma", icon: Feather, desc: "Post-traumatic growth" },
+client/src/pages/admin/CommandCenter.jsx:374:        { id: "mind-body", label: "Mind-Body Integration", endpoint: "/api/mind-body", icon: CircleDot, desc: "Mind-body connection" },
+client/src/pages/admin/CommandCenter.jsx:375:        { id: "psychological-safety", label: "Psychological Safety", endpoint: "/api/psychological-safety", icon: Shield, desc: "Safety frameworks" },
+client/src/pages/admin/CommandCenter.jsx:381:        { id: "self-mastery-intelligence", label: "Self-Mastery Intelligence", endpoint: "/api/self-mastery-intelligence", icon: Gem, desc: "Self-mastery path" },
+client/src/pages/admin/CommandCenter.jsx:382:        { id: "self-mastery", label: "Self-Mastery Core", endpoint: "/api/self-mastery", icon: Award, desc: "Core mastery system" },
+client/src/pages/admin/CommandCenter.jsx:383:        { id: "peak-performance", label: "Peak Performance", endpoint: "/api/peak-performance", icon: Zap, desc: "Performance optimization" },
+client/src/pages/admin/CommandCenter.jsx:384:        { id: "personal-growth", label: "Personal Growth", endpoint: "/api/personal-growth", icon: TrendingUp, desc: "Growth pathways" },
+client/src/pages/admin/CommandCenter.jsx:385:        { id: "life-purpose", label: "Life Purpose", endpoint: "/api/life-purpose", icon: Target, desc: "Purpose discovery" },
+client/src/pages/admin/CommandCenter.jsx:386:        { id: "life-design", label: "Life Design", endpoint: "/api/life-design", icon: Compass, desc: "Life architecture" },
+client/src/pages/admin/CommandCenter.jsx:387:        { id: "purpose-compass", label: "Purpose Compass", endpoint: "/api/purpose-compass", icon: Compass, desc: "Purpose navigation" },
+client/src/pages/admin/CommandCenter.jsx:388:        { id: "mastery-excellence", label: "Mastery Excellence", endpoint: "/api/mastery-excellence", icon: Star, desc: "Excellence framework" },
+client/src/pages/admin/CommandCenter.jsx:389:        { id: "meaning", label: "Meaning & Future", endpoint: "/api/meaning", icon: Rocket, desc: "Meaning creation" },
+client/src/pages/admin/CommandCenter.jsx:390:        { id: "meaning-core", label: "Meaning Core", endpoint: "/api/meaning-core", icon: Star, desc: "Core meaning system" },
+client/src/pages/admin/CommandCenter.jsx:391:        { id: "transformation", label: "Transformation Engine", endpoint: "/api/transformation", icon: Orbit, desc: "Deep transformation" },
+client/src/pages/admin/CommandCenter.jsx:392:        { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
+client/src/pages/admin/CommandCenter.jsx:393:        { id: "praxis", label: "Praxis Lab", endpoint: "/api/praxis", icon: Workflow, desc: "Theory to practice" },
+client/src/pages/admin/CommandCenter.jsx:399:        { id: "consciousness", label: "Consciousness Expansion", endpoint: "/api/consciousness", icon: Sun, desc: "Awareness tools" },
+client/src/pages/admin/CommandCenter.jsx:400:        { id: "human-potential", label: "Human Potential", endpoint: "/api/human-potential", icon: Sparkles, desc: "Potential unlocking" },
+client/src/pages/admin/CommandCenter.jsx:401:        { id: "spiritual-intelligence", label: "Spiritual Intelligence", endpoint: "/api/spiritual-intelligence", icon: Flower2, desc: "Spiritual growth" },
+client/src/pages/admin/CommandCenter.jsx:402:        { id: "wisdom-traditions", label: "Wisdom Traditions", endpoint: "/api/wisdom-traditions", icon: BookOpen, desc: "Ancient wisdom" },
+client/src/pages/admin/CommandCenter.jsx:403:        { id: "wisdom-synthesis", label: "Wisdom Synthesis", endpoint: "/api/wisdom-synthesis", icon: Lightbulb, desc: "Wisdom integration" },
+client/src/pages/admin/CommandCenter.jsx:404:        { id: "contemplative", label: "Contemplative Tools", endpoint: "/api/contemplative", icon: Moon, desc: "Contemplation guides" },
+client/src/pages/admin/CommandCenter.jsx:405:        { id: "ethical-reasoning", label: "Ethical Reasoning", endpoint: "/api/ethical-reasoning", icon: Shield, desc: "Ethics framework" },
+client/src/pages/admin/CommandCenter.jsx:406:        { id: "existential", label: "Existential Inquiry", endpoint: "/api/existential", icon: Globe, desc: "Existential exploration" },
+client/src/pages/admin/CommandCenter.jsx:407:        { id: "neuro-integration", label: "Neuro-Integration", endpoint: "/api/neuro-integration", icon: Network, desc: "Neural integration" },
+client/src/pages/admin/CommandCenter.jsx:408:        { id: "socio-ecology", label: "Socio-Ecology", endpoint: "/api/socio-ecology", icon: Globe, desc: "Social ecosystems" },
+client/src/pages/admin/CommandCenter.jsx:409:        { id: "cognitive-enhancement", label: "Cognitive Enhancement", endpoint: "/api/cognitive-enhancement", icon: Brain, desc: "Mental sharpness" },
+client/src/pages/admin/CommandCenter.jsx:415:        { id: "relationship-dynamics", label: "Relationship Dynamics", endpoint: "/api/relationship-dynamics", icon: HeartHandshake, desc: "Relationship patterns" },
+client/src/pages/admin/CommandCenter.jsx:416:        { id: "social-intelligence", label: "Social Intelligence", endpoint: "/api/social-intelligence", icon: Users, desc: "Social skills" },
+client/src/pages/admin/CommandCenter.jsx:417:        { id: "relational", label: "Relational Tools", endpoint: "/api/relational", icon: Heart, desc: "Connection building" },
+client/src/pages/admin/CommandCenter.jsx:418:        { id: "collective-intelligence", label: "Collective Intelligence", endpoint: "/api/collective-intelligence", icon: Users, desc: "Group wisdom" },
+client/src/pages/admin/CommandCenter.jsx:419:        { id: "systems-compassion", label: "Systems Compassion", endpoint: "/api/systems-compassion", icon: Globe, desc: "Systemic empathy" },
+client/src/pages/admin/CommandCenter.jsx:420:        { id: "embodiment", label: "Embodiment Tools", endpoint: "/api/embodiment", icon: Footprints, desc: "Body awareness" },
+client/src/pages/admin/CommandCenter.jsx:421:        { id: "narrative", label: "Narrative Tools", endpoint: "/api/narrative", icon: FileText, desc: "Story & meaning" },
+client/src/pages/admin/CommandCenter.jsx:422:        { id: "community", label: "Community Engine", endpoint: "/api/community", icon: Users, desc: "Community features" },
+client/src/pages/admin/CommandCenter.jsx:428:        { id: "content-studio", label: "Content Studio", endpoint: "/api/content-studio", icon: Palette, desc: "Content creation" },
+client/src/pages/admin/CommandCenter.jsx:429:        { id: "content-intelligence", label: "Content Intelligence", endpoint: "/api/content-intelligence", icon: Sparkles, desc: "Smart content" },
+client/src/pages/admin/CommandCenter.jsx:430:        { id: "content-api", label: "Content API", endpoint: "/api/content", icon: Wand2, desc: "Content management" },
+client/src/pages/admin/CommandCenter.jsx:431:        { id: "content-generator", label: "Content Generator", endpoint: "/api/content-generator", icon: FileText, desc: "Blog-to-social generation" },
+client/src/pages/admin/CommandCenter.jsx:432:        { id: "universal-content", label: "Universal Content", endpoint: "/api/universal-content", icon: Globe, desc: "Cross-platform content" },
+client/src/pages/admin/CommandCenter.jsx:433:        { id: "blog-api", label: "Blog Engine", endpoint: "/api/blog", icon: BookOpen, desc: "Blog system" },
+client/src/pages/admin/CommandCenter.jsx:434:        { id: "newsletter-api", label: "Newsletter Engine", endpoint: "/api/newsletter", icon: Mail, desc: "Newsletter system" },
+client/src/pages/admin/CommandCenter.jsx:435:        { id: "social-posts", label: "Social Posts API", endpoint: "/api/social-posts", icon: Share2, desc: "Social post management" },
+client/src/pages/admin/CommandCenter.jsx:436:        { id: "social-posting", label: "Social Posting", endpoint: "/api/social-posting", icon: Megaphone, desc: "Post distribution" },
+client/src/pages/admin/CommandCenter.jsx:437:        { id: "narrative-drafts", label: "Narrative Drafts", endpoint: "/api/narrative-drafts", icon: PenTool, desc: "Draft management" },
+client/src/pages/admin/CommandCenter.jsx:438:        { id: "perplexity", label: "Perplexity AI (Factual)", endpoint: "/api/perplexity", icon: Search, desc: "Factual research AI" },
+client/src/pages/admin/CommandCenter.jsx:444:        { id: "account", label: "Account System", endpoint: "/api/account", icon: UserCheck, desc: "User accounts" },
+client/src/pages/admin/CommandCenter.jsx:445:        { id: "onboarding", label: "Onboarding Flow", endpoint: "/api/onboarding", icon: Rocket, desc: "New user experience" },
+client/src/pages/admin/CommandCenter.jsx:446:        { id: "gamification", label: "Gamification Engine", endpoint: "/api/gamification", icon: Star, desc: "XP, streaks, quests" },
+client/src/pages/admin/CommandCenter.jsx:447:        { id: "progress", label: "Progress Tracker", endpoint: "/api/progress", icon: TrendingUp, desc: "User progress data" },
+client/src/pages/admin/CommandCenter.jsx:448:        { id: "badges", label: "Badges System", endpoint: "/api/badges", icon: Award, desc: "Achievement badges" },
+client/src/pages/admin/CommandCenter.jsx:449:        { id: "favorites", label: "Favorites Engine", endpoint: "/api/favorites", icon: Heart, desc: "User favorites" },
+client/src/pages/admin/CommandCenter.jsx:450:        { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
+client/src/pages/admin/CommandCenter.jsx:451:        { id: "pro-features", label: "Pro Features", endpoint: "/api/pro-features", icon: Gem, desc: "Premium feature gates" },
+client/src/pages/admin/CommandCenter.jsx:452:        { id: "leads", label: "Leads Engine", endpoint: "/api/leads", icon: Inbox, desc: "Lead collection" },
+client/src/pages/admin/CommandCenter.jsx:453:        { id: "feedback", label: "Feedback System", endpoint: "/api/feedback", icon: MessageSquare, desc: "User feedback" },
+client/src/pages/admin/CommandCenter.jsx:454:        { id: "account-actions", label: "Account Actions", endpoint: "/api/account-actions", icon: UserCheck, desc: "Account management" },
+client/src/pages/admin/CommandCenter.jsx:455:        { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
+client/src/pages/admin/CommandCenter.jsx:461:        { id: "admin-core", label: "Admin Core", endpoint: "/api/admin", icon: Shield, desc: "Admin authentication" },
+client/src/pages/admin/CommandCenter.jsx:462:        { id: "admin-security", label: "Security Engine", endpoint: "/api/admin/security", icon: ShieldCheck, desc: "Security monitoring" },
+client/src/pages/admin/CommandCenter.jsx:463:        { id: "admin-audit", label: "Audit Logs", endpoint: "/api/admin/audit-logs", icon: ClipboardList, desc: "System audit trail" },
+client/src/pages/admin/CommandCenter.jsx:464:        { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/pages/admin/CommandCenter.jsx:465:        { id: "admin-publishing", label: "Admin Publishing", endpoint: "/api/admin/publishing", icon: BookOpen, desc: "Publishing pipeline" },
+client/src/pages/admin/CommandCenter.jsx:466:        { id: "admin-social", label: "Admin Social Studio", endpoint: "/api/admin/social", icon: Palette, desc: "Social management" },
+client/src/pages/admin/CommandCenter.jsx:467:        { id: "admin-enterprise", label: "Enterprise Social", endpoint: "/api/admin/social/enterprise", icon: Globe, desc: "Enterprise social ops" },
+client/src/pages/admin/CommandCenter.jsx:468:        { id: "analytics", label: "Analytics Engine", endpoint: "/api/analytics", icon: BarChart3, desc: "Platform analytics" },
+client/src/pages/admin/CommandCenter.jsx:469:        { id: "metrics", label: "Metrics System", endpoint: "/api/metrics", icon: Gauge, desc: "System metrics" },
+client/src/pages/admin/CommandCenter.jsx:470:        { id: "soft-launch", label: "Soft Launch Metrics", endpoint: "/api/admin/soft-launch-metrics", icon: Rocket, desc: "Launch tracking" },
+client/src/pages/admin/CommandCenter.jsx:471:        { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
+client/src/pages/admin/CommandCenter.jsx:472:        { id: "deployment", label: "Deployment Readiness", endpoint: "/api/deployment-readiness", icon: PackageCheck, desc: "Deploy checks" },
+client/src/pages/admin/CommandCenter.jsx:473:        { id: "integrations", label: "Integration Health", endpoint: "/api/integrations", icon: Puzzle, desc: "Service integrations" },
+client/src/pages/admin/CommandCenter.jsx:479:        { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: DollarSign, desc: "Stripe billing" },
+client/src/pages/admin/CommandCenter.jsx:480:        { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
+client/src/pages/admin/CommandCenter.jsx:481:        { id: "email", label: "Email Service", endpoint: "/api/email", icon: Mail, desc: "Resend email" },
+client/src/pages/admin/CommandCenter.jsx:482:        { id: "contact", label: "Contact System", endpoint: "/api/contact", icon: Contact, desc: "Contact forms" },
+client/src/pages/admin/CommandCenter.jsx:483:        { id: "auth-github", label: "GitHub Auth", endpoint: "/api/auth/github", icon: Key, desc: "GitHub OAuth" },
+client/src/pages/admin/CommandCenter.jsx:484:        { id: "products", label: "Products API", endpoint: "/api/products", icon: PackageCheck, desc: "Product catalog" },
+client/src/pages/admin/CommandCenter.jsx:485:        { id: "invites", label: "Invite System", endpoint: "/api/invites", icon: Handshake, desc: "User invitations" },
+client/src/pages/admin/CommandCenter.jsx:486:        { id: "feed", label: "Feed Generator", endpoint: "/api/feed", icon: Share2, desc: "Content feed generation" },
+client/src/pages/admin/CommandCenter.jsx:487:        { id: "figma-api", label: "Figma Integration", endpoint: "/api/figma", icon: Palette, desc: "Figma design tools" },
+client/src/pages/admin/CommandCenter.jsx:488:        { id: "login", label: "Login System", endpoint: "/api/login", icon: LogIn, desc: "User login endpoint" },
+client/src/pages/admin/CommandCenter.jsx:489:        { id: "user-mgmt", label: "User Management", endpoint: "/api/user", icon: Users, desc: "User data management" },
+client/src/pages/admin/CommandCenter.jsx:490:        { id: "user-settings", label: "User Settings", endpoint: "/api/user-settings", icon: UserCog, desc: "User preferences" },
+client/src/pages/admin/CommandCenter.jsx:491:        { id: "uploads", label: "File Uploads", endpoint: "/api/uploads", icon: Upload, desc: "Object storage uploads" },
+client/src/pages/admin/CommandCenter.jsx:492:        { id: "metrics-summary", label: "Metrics Summary", endpoint: "/api/metrics/summary", icon: ListOrdered, desc: "Aggregated metrics" },
+client/src/pages/admin/CommandCenter.jsx:493:        { id: "social-posts-alt", label: "Social Posts Feed", endpoint: "/api/social/posts", icon: Radio, desc: "Social post feed" },
+client/src/pages/admin/CommandCenter.jsx:494:        { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
+client/src/pages/admin/CommandCenter.jsx:495:        { id: "mfa-auth", label: "MFA Security", endpoint: "/api/mfa", icon: Fingerprint, desc: "Multi-factor auth" },
+client/src/pages/admin/CommandCenter.jsx:496:        { id: "canva-oauth", label: "Canva OAuth", endpoint: "/api/canva-oauth", icon: FolderKanban, desc: "Canva integration" },
+client/src/pages/admin/CommandCenter.jsx:498:        { id: "auth-core", label: "Auth System", endpoint: "/api/auth/user", icon: Shield, desc: "Authentication service" },
+client/src/pages/admin/CommandCenter.jsx:509:      let res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
+client/src/pages/admin/CommandCenter.jsx:514:        res = await fetch(tool.endpoint, { method: 'HEAD', credentials: 'include', signal: c2.signal });
+client/src/pages/admin/CommandCenter.jsx:1055:    { id: 'openai', label: 'OpenAI Chat Engine', desc: 'AI-powered wellness conversations with trauma-informed responses', endpoint: '/api/ai/history', icon: MessageSquare, color: '#10a37f', capability: 'Conversation AI, emotional guidance, crisis detection' },
+client/src/pages/admin/CommandCenter.jsx:1056:    { id: 'perplexity', label: 'Perplexity AI (Factual)', desc: 'Evidence-based factual research for content validation', endpoint: '/api/perplexity', icon: Search, color: '#1da1f2', capability: 'Fact-checking, research synthesis, content validation' },
+client/src/pages/admin/CommandCenter.jsx:1057:    { id: 'canva', label: 'Canva AI Design', desc: 'Visual content creation and brand-aligned design tools', endpoint: '/api/canva-oauth', icon: Palette, color: '#7d2ae8', capability: 'Brand templates, social graphics, visual identity' },
+client/src/pages/admin/CommandCenter.jsx:1058:    { id: 'codex', label: 'Codex Knowledge Base', desc: 'Platform intelligence, self-repair diagnostics, and optimization engine', endpoint: '/api/integrations', icon: Brain, color: '#f59e0b', capability: 'Health diagnostics, route validation, remediation' },
+client/src/pages/admin/CommandCenter.jsx:1082:        const res = await fetch(sys.endpoint, { credentials: 'include' });
+client/src/pages/admin/CommandCenter.jsx:1270:    { id: 'health', label: 'System Health', endpoint: '/api/health' },
+client/src/pages/admin/CommandCenter.jsx:1271:    { id: 'auth', label: 'Auth Service', endpoint: '/api/auth/user' },
+client/src/pages/admin/CommandCenter.jsx:1272:    { id: 'blog', label: 'Blog Engine', endpoint: '/api/blog' },
+client/src/pages/admin/CommandCenter.jsx:1273:    { id: 'billing', label: 'Billing API', endpoint: '/api/billing' },
+client/src/pages/admin/CommandCenter.jsx:1274:    { id: 'email', label: 'Email Service', endpoint: '/api/email' },
+client/src/pages/admin/CommandCenter.jsx:1275:    { id: 'perplexity', label: 'Perplexity AI', endpoint: '/api/perplexity' },
+client/src/pages/admin/CommandCenter.jsx:1276:    { id: 'canva', label: 'Canva AI', endpoint: '/api/canva-oauth' },
+client/src/pages/admin/CommandCenter.jsx:1277:    { id: 'ai-engine', label: 'AI Engine', endpoint: '/api/ai/history' },
+client/src/pages/admin/CommandCenter.jsx:1288:        let res = await fetch(ep.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
+client/src/pages/admin/CommandCenter.jsx:1293:          res = await fetch(ep.endpoint, { method: 'HEAD', credentials: 'include', signal: c2.signal });
+client/src/pages/admin/CommandCenter.jsx:1470:    queryKey: ['/api/health'],
+client/src/pages/admin/CommandCenter.jsx:1478:    queryKey: ['/api/admin/dashboard-stats'],
+client/src/pages/account/Profile.jsx:49:    mutationFn: (data) => apiRequest("PUT", "/api/account/profile", data),
+client/src/pages/admin/NarrativeDrafts.jsx:44:    queryKey: ['/api/narrative-drafts'],
+client/src/pages/admin/NarrativeDrafts.jsx:47:      const res = await fetch("/api/narrative-drafts", {
+client/src/pages/admin/NarrativeDrafts.jsx:62:      const res = await fetch(`/api/narrative-drafts/${postId}`, {
+client/src/pages/admin/NarrativeDrafts.jsx:74:      queryClient.invalidateQueries({ queryKey: ['/api/narrative-drafts'] });
+client/src/pages/admin/NarrativeDrafts.jsx:84:      const res = await fetch(`/api/narrative-drafts/${postId}`, {
+client/src/pages/admin/NarrativeDrafts.jsx:100:      queryClient.invalidateQueries({ queryKey: ['/api/narrative-drafts'] });
+client/src/pages/admin/NarrativeDrafts.jsx:166:          <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
+client/src/pages/admin/NarrativeDrafts.jsx:213:              <Button variant="outline" onClick={() => refetch()} data-testid="button-retry">
+client/src/pages/account/Billing.jsx:75:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Billing.jsx:79:    queryKey: ["/api/billing/invoices"],
+client/src/pages/account/Billing.jsx:98:    mutationFn: (interval) => apiRequest("POST", "/api/billing/checkout", { plan: "pro", interval: interval || billingInterval }),
+client/src/pages/account/Billing.jsx:115:    mutationFn: () => apiRequest("POST", "/api/billing/portal"),
 client/src/pages/admin/RevenueAdmin.jsx:15:    queryKey: ["/api/admin/billing/overview"],
 client/src/pages/admin/RevenueAdmin.jsx:22:    queryKey: ["/api/admin/billing/plan-distribution"],
 client/src/pages/admin/RevenueAdmin.jsx:93:              onClick={() => refetch()}
-client/src/pages/admin/SocialAnalytics.jsx:121:    queryKey: ["/api/admin/social/analytics"],
-client/src/pages/admin/SocialAnalytics.jsx:125:    queryKey: ["/api/admin/social/drafts"],
-client/src/pages/admin/SocialAnalytics.jsx:225:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-client/src/pages/admin/SocialCalendar.jsx:54:    queryKey: ["/api/admin/social/calendar"],
-client/src/pages/admin/SocialCalendar.jsx:58:    queryKey: ["/api/admin/social/drafts"],
-client/src/pages/admin/SocialCalendar.jsx:64:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/calendar/${id}`),
-client/src/pages/admin/SocialCalendar.jsx:66:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
-client/src/pages/admin/SocialCalendar.jsx:71:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/calendar", data),
-client/src/pages/admin/SocialCalendar.jsx:73:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
-client/src/pages/admin/SocialCalendar.jsx:150:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-client/src/pages/admin/SocialGenerator.jsx:78:    queryKey: ["/api/admin/social/platforms/specs"],
-client/src/pages/admin/SocialGenerator.jsx:82:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/drafts", data),
-client/src/pages/admin/SocialGenerator.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-client/src/pages/admin/SocialGenerator.jsx:90:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate", data),
-client/src/pages/admin/SocialGenerator.jsx:107:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/check", data),
-client/src/pages/admin/SocialGenerator.jsx:112:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/rewrite", data),
-client/src/pages/admin/SocialGenerator.jsx:125:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate/image", data),
-client/src/pages/admin/SocialGenerator.jsx:131:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/enhance", data),
-client/src/pages/admin/SocialLibrary.jsx:32:    queryKey: ["/api/admin/social/templates"],
-client/src/pages/admin/SocialLibrary.jsx:36:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/templates", data),
-client/src/pages/admin/SocialLibrary.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
-client/src/pages/admin/SocialLibrary.jsx:45:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/templates/${id}`),
-client/src/pages/admin/SocialLibrary.jsx:47:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
-client/src/pages/admin/SocialLibrary.jsx:52:    mutationFn: () => apiRequest("POST", "/api/admin/social/templates/seed"),
-client/src/pages/admin/SocialLibrary.jsx:54:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
-client/src/pages/admin/SocialLibrary.jsx:218:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-client/src/pages/admin/SystemAlerts.jsx:28:    queryKey: ['/api/health'],
-client/src/pages/admin/SocialDashboard.jsx:164:    queryKey: ["/api/social-posting/platforms/status"],
-client/src/pages/admin/SocialDashboard.jsx:283:    queryKey: ["/api/admin/social/analytics"],
-client/src/pages/admin/SocialDashboard.jsx:425:    queryKey: ["/api/admin/social/drafts"],
-client/src/pages/admin/SocialDashboard.jsx:429:    mutationFn: (id) => apiRequest("POST", `/api/admin/social/drafts/${id}/approve`),
-client/src/pages/admin/SocialDashboard.jsx:431:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-client/src/pages/admin/SocialDashboard.jsx:436:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/drafts/${id}`),
-client/src/pages/admin/SocialDashboard.jsx:438:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-client/src/pages/admin/SocialDashboard.jsx:443:    mutationFn: (ids) => apiRequest("POST", "/api/admin/social/drafts/bulk/approve", { ids }),
-client/src/pages/admin/SocialDashboard.jsx:445:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-client/src/pages/admin/SocialDashboard.jsx:452:    mutationFn: (ids) => apiRequest("POST", "/api/admin/social/drafts/bulk/delete", { ids }),
-client/src/pages/admin/SocialDashboard.jsx:454:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-client/src/pages/admin/SocialDashboard.jsx:461:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/publish/batch", data),
-client/src/pages/admin/SocialDashboard.jsx:463:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-client/src/pages/admin/SocialDashboard.jsx:643:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-client/src/pages/admin/NarrativeOpsConsole.jsx:13:const API_BASE = "/api/admin/social/enterprise";
-client/src/pages/admin/NarrativeOpsConsole.jsx:145:      const res = await fetch(buildQueryUrl(), { credentials: "include" });
-client/src/pages/admin/NarrativeOpsConsole.jsx:153:      const res = await fetch(`${API_BASE}/campaigns`, { credentials: "include" });
-client/src/pages/admin/NarrativeOpsConsole.jsx:161:      const res = await fetch(`${API_BASE}/weekly-queue`, { credentials: "include" });
-client/src/pages/admin/NarrativeOpsConsole.jsx:170:      const res = await fetch(`${API_BASE}/signals`, { credentials: "include" });
-client/src/pages/admin/NarrativeOpsConsole.jsx:179:      const res = await fetch(`${API_BASE}/click-stats`, { credentials: "include" });
-client/src/pages/admin/NarrativeOpsConsole.jsx:188:      const res = await fetch(`${API_BASE}/audit`, { credentials: "include" });
-client/src/pages/admin/NarrativeOpsConsole.jsx:195:    queryKey: ["/api/blog"],
-client/src/pages/admin/NarrativeOpsConsole.jsx:197:      const res = await fetch("/api/blog?limit=20", { credentials: "include" });
-client/src/pages/admin/AdminSocial.jsx:9:const API_BASE = "/api/admin/social/enterprise";
-client/src/pages/admin/AdminSocial.jsx:113:        fetch(`${API_BASE}/posts?${params}`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
-client/src/pages/admin/AdminSocial.jsx:114:        fetch(`${API_BASE}/weekly-queue`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
-client/src/pages/admin/AdminSocial.jsx:115:        fetch(`${API_BASE}/campaigns`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
-client/src/pages/admin/AdminSocial.jsx:116:        fetch(`/r/list`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
-client/src/pages/admin/AdminSocial.jsx:117:        fetch(`${API_BASE}/click-stats`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
-client/src/pages/admin/AdminSocial.jsx:118:        fetch(`/api/blog/posts?limit=20`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
-client/src/pages/admin/AdminSocial.jsx:119:        fetch(`${API_BASE}/signals`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: {} })),
-client/src/pages/admin/AdminSocial.jsx:120:        fetch(`${API_BASE}/audit?limit=50`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
-client/src/pages/admin/AdminSocial.jsx:139:      await fetch(`${API_BASE}/post/${id}/${action}`, {
-client/src/pages/admin/AdminSocial.jsx:474:      const res = await fetch(`${API_BASE}/build-utm`, {
-client/src/pages/admin/AdminSocial.jsx:489:      const res = await fetch(`/r/create`, {
-client/src/pages/admin/AdminSocial.jsx:519:      await fetch(url, { method, credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-client/src/pages/admin/AdminSocial.jsx:855:      const res = await fetch(`${API_BASE}/generate-from-blog`, {
-client/src/pages/admin/AdminSocial.jsx:923:      await fetch(`${API_BASE}/campaigns`, {
-client/src/pages/admin/HealthDashboard.jsx:73:    queryKey: ["/api/admin/health", refreshKey],
-client/src/pages/admin/HealthDashboard.jsx:78:    queryKey: ["/api/admin/diagnostics", refreshKey],
-client/src/pages/admin/HealthDashboard.jsx:86:    queryKey: ["/api/admin/health-deep", refreshKey],
-client/src/pages/admin/HealthDashboard.jsx:93:    queryKey: ["/api/admin/health-deep/alerts", refreshKey],
-client/src/pages/admin/HealthDashboard.jsx:100:      const res = await apiRequest("POST", "/api/admin/health-deep/run");
-client/src/pages/admin/HealthDashboard.jsx:110:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
-client/src/pages/admin/HealthDashboard.jsx:125:      const res = await apiRequest("POST", "/api/admin/health-deep/self-heal");
-client/src/pages/admin/HealthDashboard.jsx:135:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
-client/src/pages/admin/HealthDashboard.jsx:151:      const res = await apiRequest("POST", "/api/admin/health-deep/ai-analyze");
-client/src/pages/admin/HealthDashboard.jsx:161:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
-client/src/pages/admin/HealthDashboard.jsx:176:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/resume");
-client/src/pages/admin/HealthDashboard.jsx:181:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
-client/src/pages/admin/HealthDashboard.jsx:189:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/pause");
-client/src/pages/admin/HealthDashboard.jsx:194:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
-client/src/pages/admin/HealthDashboard.jsx:211:      const res = await fetch("/api/admin/health-deep/export", {
-client/src/pages/admin/HealthDashboard.jsx:242:    refetch();
+client/src/pages/account/Subscription.jsx:24:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Subscription.jsx:30:      const res = await apiRequest("/api/billing/portal", { method: "POST" });
 client/src/pages/admin/AdminTools.jsx:140:  "canva-token-expired": { suggestion: "Canva OAuth token has expired. Canva KB: OAuth tokens have limited TTL. Implement token refresh flow using the stored refresh_token. Check /api/canva-oauth/status.", action: "Refresh Canva OAuth token", knowledgeBase: "Canva", autoFixable: true, fixCommand: "restart-service" },
 client/src/pages/admin/AdminTools.jsx:239:  "load-balancer-health": { suggestion: "Load balancer health check may be failing. Canva KB: Ensure /api/health endpoint responds within 5 seconds with 200 status. Check timeout and retry settings.", action: "Verify health endpoint", knowledgeBase: "Canva", autoFixable: true, fixCommand: "warm-all" },
 client/src/pages/admin/AdminTools.jsx:288:      { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai/history", icon: MessageSquare, desc: "AI conversation engine" },
@@ -308,258 +774,28 @@ client/src/pages/admin/AdminTools.jsx:2579:                  <button onClick={()
 client/src/pages/admin/AdminTools.jsx:2582:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
 client/src/pages/admin/AdminTools.jsx:2691:      let res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
 client/src/pages/admin/AdminTools.jsx:2696:        res = await fetch(tool.endpoint, { method: 'HEAD', credentials: 'include', signal: controller2.signal });
-client/src/pages/admin/NarrativeDrafts.jsx:44:    queryKey: ['/api/narrative-drafts'],
-client/src/pages/admin/NarrativeDrafts.jsx:47:      const res = await fetch("/api/narrative-drafts", {
-client/src/pages/admin/NarrativeDrafts.jsx:62:      const res = await fetch(`/api/narrative-drafts/${postId}`, {
-client/src/pages/admin/NarrativeDrafts.jsx:74:      queryClient.invalidateQueries({ queryKey: ['/api/narrative-drafts'] });
-client/src/pages/admin/NarrativeDrafts.jsx:84:      const res = await fetch(`/api/narrative-drafts/${postId}`, {
-client/src/pages/admin/NarrativeDrafts.jsx:100:      queryClient.invalidateQueries({ queryKey: ['/api/narrative-drafts'] });
-client/src/pages/admin/NarrativeDrafts.jsx:166:          <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
-client/src/pages/admin/NarrativeDrafts.jsx:213:              <Button variant="outline" onClick={() => refetch()} data-testid="button-retry">
-client/src/pages/admin/CommandCenter.jsx:145:    queryKey: ['/api/kernel/version'],
-client/src/pages/admin/CommandCenter.jsx:176:    queryKey: ['/api/system'],
-client/src/pages/admin/CommandCenter.jsx:330:        { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai", icon: MessageSquare, desc: "AI conversation engine" },
-client/src/pages/admin/CommandCenter.jsx:331:        { id: "therapy", label: "Therapy Engine", endpoint: "/api/therapy", icon: Headphones, desc: "Guided therapy sessions" },
-client/src/pages/admin/CommandCenter.jsx:332:        { id: "mood-tracker", label: "Mood Tracker", endpoint: "/api/mood", icon: Heart, desc: "User mood tracking" },
-client/src/pages/admin/CommandCenter.jsx:333:        { id: "journal", label: "Journal System", endpoint: "/api/journal", icon: BookOpen, desc: "Journaling engine" },
-client/src/pages/admin/CommandCenter.jsx:334:        { id: "gratitude", label: "Gratitude Prompts", endpoint: "/api/gratitude", icon: Sun, desc: "Daily gratitude system" },
-client/src/pages/admin/CommandCenter.jsx:335:        { id: "reflection", label: "Reflection Tools", endpoint: "/api/reflection", icon: Moon, desc: "Self-reflection engine" },
-client/src/pages/admin/CommandCenter.jsx:336:        { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
-client/src/pages/admin/CommandCenter.jsx:337:        { id: "mirror", label: "Mirror Reflection", endpoint: "/api/mirror", icon: Eye, desc: "Self-awareness mirror" },
-client/src/pages/admin/CommandCenter.jsx:338:        { id: "prompts", label: "Prompt Engine", endpoint: "/api/prompts", icon: FileQuestion, desc: "Guided prompt system" },
-client/src/pages/admin/CommandCenter.jsx:339:        { id: "states", label: "Emotional States", endpoint: "/api/states", icon: Gauge, desc: "State tracking system" },
-client/src/pages/admin/CommandCenter.jsx:345:        { id: "wisdom", label: "Wisdom Engine", endpoint: "/api/wisdom", icon: Lightbulb, desc: "Daily wisdom delivery" },
-client/src/pages/admin/CommandCenter.jsx:346:        { id: "wisdom-engine", label: "Wisdom Engine (Advanced)", endpoint: "/api/wisdom-engine", icon: Landmark, desc: "Deep wisdom system" },
-client/src/pages/admin/CommandCenter.jsx:347:        { id: "philosophy", label: "Philosophy Lab", endpoint: "/api/philosophy", icon: GraduationCap, desc: "Philosophical inquiry" },
-client/src/pages/admin/CommandCenter.jsx:348:        { id: "metacognition", label: "Metacognition", endpoint: "/api/metacognition", icon: Brain, desc: "Thinking about thinking" },
-client/src/pages/admin/CommandCenter.jsx:349:        { id: "creativity", label: "Creativity Engine", endpoint: "/api/creativity", icon: Sparkles, desc: "Creative exploration" },
-client/src/pages/admin/CommandCenter.jsx:350:        { id: "resilience", label: "Resilience Builder", endpoint: "/api/resilience", icon: Mountain, desc: "Resilience tools" },
-client/src/pages/admin/CommandCenter.jsx:351:        { id: "foresight", label: "Foresight Lab", endpoint: "/api/foresight", icon: Compass, desc: "Future planning" },
-client/src/pages/admin/CommandCenter.jsx:352:        { id: "knowledge", label: "Knowledge Synthesis", endpoint: "/api/knowledge", icon: BookOpen, desc: "Knowledge integration" },
-client/src/pages/admin/CommandCenter.jsx:353:        { id: "cognitive-lab", label: "Cognitive Lab", endpoint: "/api/cognitive-lab", icon: Brain, desc: "Cognitive exercises" },
-client/src/pages/admin/CommandCenter.jsx:354:        { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/cognitive-mastery", icon: Trophy, desc: "Cognitive excellence" },
-client/src/pages/admin/CommandCenter.jsx:355:        { id: "canva-integration", label: "Canva AI", endpoint: "/api/canva-oauth", icon: Palette, desc: "Canva design integration" },
-client/src/pages/admin/CommandCenter.jsx:356:        { id: "deep-learning", label: "Deep Learning", endpoint: "/api/deep-learning", icon: Layers, desc: "Deep learning tools" },
-client/src/pages/admin/CommandCenter.jsx:357:        { id: "dialectics", label: "Dialectics Engine", endpoint: "/api/dialectics", icon: Puzzle, desc: "Dialectical reasoning" },
-client/src/pages/admin/CommandCenter.jsx:358:        { id: "practices", label: "Practices Library", endpoint: "/api/practices", icon: Milestone, desc: "Guided practices" },
-client/src/pages/admin/CommandCenter.jsx:359:        { id: "insights", label: "Insights Engine", endpoint: "/api/insights", icon: Lightbulb, desc: "Personal insights" },
-client/src/pages/admin/CommandCenter.jsx:365:        { id: "trauma-healing", label: "Trauma Healing", endpoint: "/api/trauma-healing", icon: HeartHandshake, desc: "Trauma-informed protocols" },
-client/src/pages/admin/CommandCenter.jsx:366:        { id: "emotional-resilience", label: "Emotional Resilience", endpoint: "/api/emotional-resilience", icon: Flame, desc: "Emotional strength" },
-client/src/pages/admin/CommandCenter.jsx:367:        { id: "emotional-mastery", label: "Emotional Mastery", endpoint: "/api/emotional-mastery", icon: Target, desc: "Emotion regulation" },
-client/src/pages/admin/CommandCenter.jsx:368:        { id: "healing-modalities", label: "Healing Modalities", endpoint: "/api/healing-modalities", icon: Flower2, desc: "Healing approaches" },
-client/src/pages/admin/CommandCenter.jsx:369:        { id: "holistic-healing", label: "Holistic Healing", endpoint: "/api/holistic-healing", icon: TreePine, desc: "Whole-person wellness" },
-client/src/pages/admin/CommandCenter.jsx:370:        { id: "healing-tools", label: "Healing Tools", endpoint: "/api/healing", icon: Heart, desc: "Core healing toolkit" },
-client/src/pages/admin/CommandCenter.jsx:371:        { id: "healing-core", label: "Healing Core", endpoint: "/api/healing-core", icon: Leaf, desc: "Core healing engine" },
-client/src/pages/admin/CommandCenter.jsx:372:        { id: "healing-intelligence", label: "Healing Intelligence", endpoint: "/api/healing-intelligence", icon: Sparkles, desc: "AI-guided healing" },
-client/src/pages/admin/CommandCenter.jsx:373:        { id: "post-trauma", label: "Post-Trauma Growth", endpoint: "/api/post-trauma", icon: Feather, desc: "Post-traumatic growth" },
-client/src/pages/admin/CommandCenter.jsx:374:        { id: "mind-body", label: "Mind-Body Integration", endpoint: "/api/mind-body", icon: CircleDot, desc: "Mind-body connection" },
-client/src/pages/admin/CommandCenter.jsx:375:        { id: "psychological-safety", label: "Psychological Safety", endpoint: "/api/psychological-safety", icon: Shield, desc: "Safety frameworks" },
-client/src/pages/admin/CommandCenter.jsx:381:        { id: "self-mastery-intelligence", label: "Self-Mastery Intelligence", endpoint: "/api/self-mastery-intelligence", icon: Gem, desc: "Self-mastery path" },
-client/src/pages/admin/CommandCenter.jsx:382:        { id: "self-mastery", label: "Self-Mastery Core", endpoint: "/api/self-mastery", icon: Award, desc: "Core mastery system" },
-client/src/pages/admin/CommandCenter.jsx:383:        { id: "peak-performance", label: "Peak Performance", endpoint: "/api/peak-performance", icon: Zap, desc: "Performance optimization" },
-client/src/pages/admin/CommandCenter.jsx:384:        { id: "personal-growth", label: "Personal Growth", endpoint: "/api/personal-growth", icon: TrendingUp, desc: "Growth pathways" },
-client/src/pages/admin/CommandCenter.jsx:385:        { id: "life-purpose", label: "Life Purpose", endpoint: "/api/life-purpose", icon: Target, desc: "Purpose discovery" },
-client/src/pages/admin/CommandCenter.jsx:386:        { id: "life-design", label: "Life Design", endpoint: "/api/life-design", icon: Compass, desc: "Life architecture" },
-client/src/pages/admin/CommandCenter.jsx:387:        { id: "purpose-compass", label: "Purpose Compass", endpoint: "/api/purpose-compass", icon: Compass, desc: "Purpose navigation" },
-client/src/pages/admin/CommandCenter.jsx:388:        { id: "mastery-excellence", label: "Mastery Excellence", endpoint: "/api/mastery-excellence", icon: Star, desc: "Excellence framework" },
-client/src/pages/admin/CommandCenter.jsx:389:        { id: "meaning", label: "Meaning & Future", endpoint: "/api/meaning", icon: Rocket, desc: "Meaning creation" },
-client/src/pages/admin/CommandCenter.jsx:390:        { id: "meaning-core", label: "Meaning Core", endpoint: "/api/meaning-core", icon: Star, desc: "Core meaning system" },
-client/src/pages/admin/CommandCenter.jsx:391:        { id: "transformation", label: "Transformation Engine", endpoint: "/api/transformation", icon: Orbit, desc: "Deep transformation" },
-client/src/pages/admin/CommandCenter.jsx:392:        { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
-client/src/pages/admin/CommandCenter.jsx:393:        { id: "praxis", label: "Praxis Lab", endpoint: "/api/praxis", icon: Workflow, desc: "Theory to practice" },
-client/src/pages/admin/CommandCenter.jsx:399:        { id: "consciousness", label: "Consciousness Expansion", endpoint: "/api/consciousness", icon: Sun, desc: "Awareness tools" },
-client/src/pages/admin/CommandCenter.jsx:400:        { id: "human-potential", label: "Human Potential", endpoint: "/api/human-potential", icon: Sparkles, desc: "Potential unlocking" },
-client/src/pages/admin/CommandCenter.jsx:401:        { id: "spiritual-intelligence", label: "Spiritual Intelligence", endpoint: "/api/spiritual-intelligence", icon: Flower2, desc: "Spiritual growth" },
-client/src/pages/admin/CommandCenter.jsx:402:        { id: "wisdom-traditions", label: "Wisdom Traditions", endpoint: "/api/wisdom-traditions", icon: BookOpen, desc: "Ancient wisdom" },
-client/src/pages/admin/CommandCenter.jsx:403:        { id: "wisdom-synthesis", label: "Wisdom Synthesis", endpoint: "/api/wisdom-synthesis", icon: Lightbulb, desc: "Wisdom integration" },
-client/src/pages/admin/CommandCenter.jsx:404:        { id: "contemplative", label: "Contemplative Tools", endpoint: "/api/contemplative", icon: Moon, desc: "Contemplation guides" },
-client/src/pages/admin/CommandCenter.jsx:405:        { id: "ethical-reasoning", label: "Ethical Reasoning", endpoint: "/api/ethical-reasoning", icon: Shield, desc: "Ethics framework" },
-client/src/pages/admin/CommandCenter.jsx:406:        { id: "existential", label: "Existential Inquiry", endpoint: "/api/existential", icon: Globe, desc: "Existential exploration" },
-client/src/pages/admin/CommandCenter.jsx:407:        { id: "neuro-integration", label: "Neuro-Integration", endpoint: "/api/neuro-integration", icon: Network, desc: "Neural integration" },
-client/src/pages/admin/CommandCenter.jsx:408:        { id: "socio-ecology", label: "Socio-Ecology", endpoint: "/api/socio-ecology", icon: Globe, desc: "Social ecosystems" },
-client/src/pages/admin/CommandCenter.jsx:409:        { id: "cognitive-enhancement", label: "Cognitive Enhancement", endpoint: "/api/cognitive-enhancement", icon: Brain, desc: "Mental sharpness" },
-client/src/pages/admin/CommandCenter.jsx:415:        { id: "relationship-dynamics", label: "Relationship Dynamics", endpoint: "/api/relationship-dynamics", icon: HeartHandshake, desc: "Relationship patterns" },
-client/src/pages/admin/CommandCenter.jsx:416:        { id: "social-intelligence", label: "Social Intelligence", endpoint: "/api/social-intelligence", icon: Users, desc: "Social skills" },
-client/src/pages/admin/CommandCenter.jsx:417:        { id: "relational", label: "Relational Tools", endpoint: "/api/relational", icon: Heart, desc: "Connection building" },
-client/src/pages/admin/CommandCenter.jsx:418:        { id: "collective-intelligence", label: "Collective Intelligence", endpoint: "/api/collective-intelligence", icon: Users, desc: "Group wisdom" },
-client/src/pages/admin/CommandCenter.jsx:419:        { id: "systems-compassion", label: "Systems Compassion", endpoint: "/api/systems-compassion", icon: Globe, desc: "Systemic empathy" },
-client/src/pages/admin/CommandCenter.jsx:420:        { id: "embodiment", label: "Embodiment Tools", endpoint: "/api/embodiment", icon: Footprints, desc: "Body awareness" },
-client/src/pages/admin/CommandCenter.jsx:421:        { id: "narrative", label: "Narrative Tools", endpoint: "/api/narrative", icon: FileText, desc: "Story & meaning" },
-client/src/pages/admin/CommandCenter.jsx:422:        { id: "community", label: "Community Engine", endpoint: "/api/community", icon: Users, desc: "Community features" },
-client/src/pages/admin/CommandCenter.jsx:428:        { id: "content-studio", label: "Content Studio", endpoint: "/api/content-studio", icon: Palette, desc: "Content creation" },
-client/src/pages/admin/CommandCenter.jsx:429:        { id: "content-intelligence", label: "Content Intelligence", endpoint: "/api/content-intelligence", icon: Sparkles, desc: "Smart content" },
-client/src/pages/admin/CommandCenter.jsx:430:        { id: "content-api", label: "Content API", endpoint: "/api/content", icon: Wand2, desc: "Content management" },
-client/src/pages/admin/CommandCenter.jsx:431:        { id: "content-generator", label: "Content Generator", endpoint: "/api/content-generator", icon: FileText, desc: "Blog-to-social generation" },
-client/src/pages/admin/CommandCenter.jsx:432:        { id: "universal-content", label: "Universal Content", endpoint: "/api/universal-content", icon: Globe, desc: "Cross-platform content" },
-client/src/pages/admin/CommandCenter.jsx:433:        { id: "blog-api", label: "Blog Engine", endpoint: "/api/blog", icon: BookOpen, desc: "Blog system" },
-client/src/pages/admin/CommandCenter.jsx:434:        { id: "newsletter-api", label: "Newsletter Engine", endpoint: "/api/newsletter", icon: Mail, desc: "Newsletter system" },
-client/src/pages/admin/CommandCenter.jsx:435:        { id: "social-posts", label: "Social Posts API", endpoint: "/api/social-posts", icon: Share2, desc: "Social post management" },
-client/src/pages/admin/CommandCenter.jsx:436:        { id: "social-posting", label: "Social Posting", endpoint: "/api/social-posting", icon: Megaphone, desc: "Post distribution" },
-client/src/pages/admin/CommandCenter.jsx:437:        { id: "narrative-drafts", label: "Narrative Drafts", endpoint: "/api/narrative-drafts", icon: PenTool, desc: "Draft management" },
-client/src/pages/admin/CommandCenter.jsx:438:        { id: "perplexity", label: "Perplexity AI (Factual)", endpoint: "/api/perplexity", icon: Search, desc: "Factual research AI" },
-client/src/pages/admin/CommandCenter.jsx:444:        { id: "account", label: "Account System", endpoint: "/api/account", icon: UserCheck, desc: "User accounts" },
-client/src/pages/admin/CommandCenter.jsx:445:        { id: "onboarding", label: "Onboarding Flow", endpoint: "/api/onboarding", icon: Rocket, desc: "New user experience" },
-client/src/pages/admin/CommandCenter.jsx:446:        { id: "gamification", label: "Gamification Engine", endpoint: "/api/gamification", icon: Star, desc: "XP, streaks, quests" },
-client/src/pages/admin/CommandCenter.jsx:447:        { id: "progress", label: "Progress Tracker", endpoint: "/api/progress", icon: TrendingUp, desc: "User progress data" },
-client/src/pages/admin/CommandCenter.jsx:448:        { id: "badges", label: "Badges System", endpoint: "/api/badges", icon: Award, desc: "Achievement badges" },
-client/src/pages/admin/CommandCenter.jsx:449:        { id: "favorites", label: "Favorites Engine", endpoint: "/api/favorites", icon: Heart, desc: "User favorites" },
-client/src/pages/admin/CommandCenter.jsx:450:        { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
-client/src/pages/admin/CommandCenter.jsx:451:        { id: "pro-features", label: "Pro Features", endpoint: "/api/pro-features", icon: Gem, desc: "Premium feature gates" },
-client/src/pages/admin/CommandCenter.jsx:452:        { id: "leads", label: "Leads Engine", endpoint: "/api/leads", icon: Inbox, desc: "Lead collection" },
-client/src/pages/admin/CommandCenter.jsx:453:        { id: "feedback", label: "Feedback System", endpoint: "/api/feedback", icon: MessageSquare, desc: "User feedback" },
-client/src/pages/admin/CommandCenter.jsx:454:        { id: "account-actions", label: "Account Actions", endpoint: "/api/account-actions", icon: UserCheck, desc: "Account management" },
-client/src/pages/admin/CommandCenter.jsx:455:        { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
-client/src/pages/admin/CommandCenter.jsx:461:        { id: "admin-core", label: "Admin Core", endpoint: "/api/admin", icon: Shield, desc: "Admin authentication" },
-client/src/pages/admin/CommandCenter.jsx:462:        { id: "admin-security", label: "Security Engine", endpoint: "/api/admin/security", icon: ShieldCheck, desc: "Security monitoring" },
-client/src/pages/admin/CommandCenter.jsx:463:        { id: "admin-audit", label: "Audit Logs", endpoint: "/api/admin/audit-logs", icon: ClipboardList, desc: "System audit trail" },
-client/src/pages/admin/CommandCenter.jsx:464:        { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
-client/src/pages/admin/CommandCenter.jsx:465:        { id: "admin-publishing", label: "Admin Publishing", endpoint: "/api/admin/publishing", icon: BookOpen, desc: "Publishing pipeline" },
-client/src/pages/admin/CommandCenter.jsx:466:        { id: "admin-social", label: "Admin Social Studio", endpoint: "/api/admin/social", icon: Palette, desc: "Social management" },
-client/src/pages/admin/CommandCenter.jsx:467:        { id: "admin-enterprise", label: "Enterprise Social", endpoint: "/api/admin/social/enterprise", icon: Globe, desc: "Enterprise social ops" },
-client/src/pages/admin/CommandCenter.jsx:468:        { id: "analytics", label: "Analytics Engine", endpoint: "/api/analytics", icon: BarChart3, desc: "Platform analytics" },
-client/src/pages/admin/CommandCenter.jsx:469:        { id: "metrics", label: "Metrics System", endpoint: "/api/metrics", icon: Gauge, desc: "System metrics" },
-client/src/pages/admin/CommandCenter.jsx:470:        { id: "soft-launch", label: "Soft Launch Metrics", endpoint: "/api/admin/soft-launch-metrics", icon: Rocket, desc: "Launch tracking" },
-client/src/pages/admin/CommandCenter.jsx:471:        { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
-client/src/pages/admin/CommandCenter.jsx:472:        { id: "deployment", label: "Deployment Readiness", endpoint: "/api/deployment-readiness", icon: PackageCheck, desc: "Deploy checks" },
-client/src/pages/admin/CommandCenter.jsx:473:        { id: "integrations", label: "Integration Health", endpoint: "/api/integrations", icon: Puzzle, desc: "Service integrations" },
-client/src/pages/admin/CommandCenter.jsx:479:        { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: DollarSign, desc: "Stripe billing" },
-client/src/pages/admin/CommandCenter.jsx:480:        { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
-client/src/pages/admin/CommandCenter.jsx:481:        { id: "email", label: "Email Service", endpoint: "/api/email", icon: Mail, desc: "Resend email" },
-client/src/pages/admin/CommandCenter.jsx:482:        { id: "contact", label: "Contact System", endpoint: "/api/contact", icon: Contact, desc: "Contact forms" },
-client/src/pages/admin/CommandCenter.jsx:483:        { id: "auth-github", label: "GitHub Auth", endpoint: "/api/auth/github", icon: Key, desc: "GitHub OAuth" },
-client/src/pages/admin/CommandCenter.jsx:484:        { id: "products", label: "Products API", endpoint: "/api/products", icon: PackageCheck, desc: "Product catalog" },
-client/src/pages/admin/CommandCenter.jsx:485:        { id: "invites", label: "Invite System", endpoint: "/api/invites", icon: Handshake, desc: "User invitations" },
-client/src/pages/admin/CommandCenter.jsx:486:        { id: "feed", label: "Feed Generator", endpoint: "/api/feed", icon: Share2, desc: "Content feed generation" },
-client/src/pages/admin/CommandCenter.jsx:487:        { id: "figma-api", label: "Figma Integration", endpoint: "/api/figma", icon: Palette, desc: "Figma design tools" },
-client/src/pages/admin/CommandCenter.jsx:488:        { id: "login", label: "Login System", endpoint: "/api/login", icon: LogIn, desc: "User login endpoint" },
-client/src/pages/admin/CommandCenter.jsx:489:        { id: "user-mgmt", label: "User Management", endpoint: "/api/user", icon: Users, desc: "User data management" },
-client/src/pages/admin/CommandCenter.jsx:490:        { id: "user-settings", label: "User Settings", endpoint: "/api/user-settings", icon: UserCog, desc: "User preferences" },
-client/src/pages/admin/CommandCenter.jsx:491:        { id: "uploads", label: "File Uploads", endpoint: "/api/uploads", icon: Upload, desc: "Object storage uploads" },
-client/src/pages/admin/CommandCenter.jsx:492:        { id: "metrics-summary", label: "Metrics Summary", endpoint: "/api/metrics/summary", icon: ListOrdered, desc: "Aggregated metrics" },
-client/src/pages/admin/CommandCenter.jsx:493:        { id: "social-posts-alt", label: "Social Posts Feed", endpoint: "/api/social/posts", icon: Radio, desc: "Social post feed" },
-client/src/pages/admin/CommandCenter.jsx:494:        { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
-client/src/pages/admin/CommandCenter.jsx:495:        { id: "mfa-auth", label: "MFA Security", endpoint: "/api/mfa", icon: Fingerprint, desc: "Multi-factor auth" },
-client/src/pages/admin/CommandCenter.jsx:496:        { id: "canva-oauth", label: "Canva OAuth", endpoint: "/api/canva-oauth", icon: FolderKanban, desc: "Canva integration" },
-client/src/pages/admin/CommandCenter.jsx:498:        { id: "auth-core", label: "Auth System", endpoint: "/api/auth/user", icon: Shield, desc: "Authentication service" },
-client/src/pages/admin/CommandCenter.jsx:509:      let res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
-client/src/pages/admin/CommandCenter.jsx:514:        res = await fetch(tool.endpoint, { method: 'HEAD', credentials: 'include', signal: c2.signal });
-client/src/pages/admin/CommandCenter.jsx:1055:    { id: 'openai', label: 'OpenAI Chat Engine', desc: 'AI-powered wellness conversations with trauma-informed responses', endpoint: '/api/ai/history', icon: MessageSquare, color: '#10a37f', capability: 'Conversation AI, emotional guidance, crisis detection' },
-client/src/pages/admin/CommandCenter.jsx:1056:    { id: 'perplexity', label: 'Perplexity AI (Factual)', desc: 'Evidence-based factual research for content validation', endpoint: '/api/perplexity', icon: Search, color: '#1da1f2', capability: 'Fact-checking, research synthesis, content validation' },
-client/src/pages/admin/CommandCenter.jsx:1057:    { id: 'canva', label: 'Canva AI Design', desc: 'Visual content creation and brand-aligned design tools', endpoint: '/api/canva-oauth', icon: Palette, color: '#7d2ae8', capability: 'Brand templates, social graphics, visual identity' },
-client/src/pages/admin/CommandCenter.jsx:1058:    { id: 'codex', label: 'Codex Knowledge Base', desc: 'Platform intelligence, self-repair diagnostics, and optimization engine', endpoint: '/api/integrations', icon: Brain, color: '#f59e0b', capability: 'Health diagnostics, route validation, remediation' },
-client/src/pages/admin/CommandCenter.jsx:1082:        const res = await fetch(sys.endpoint, { credentials: 'include' });
-client/src/pages/admin/CommandCenter.jsx:1270:    { id: 'health', label: 'System Health', endpoint: '/api/health' },
-client/src/pages/admin/CommandCenter.jsx:1271:    { id: 'auth', label: 'Auth Service', endpoint: '/api/auth/user' },
-client/src/pages/admin/CommandCenter.jsx:1272:    { id: 'blog', label: 'Blog Engine', endpoint: '/api/blog' },
-client/src/pages/admin/CommandCenter.jsx:1273:    { id: 'billing', label: 'Billing API', endpoint: '/api/billing' },
-client/src/pages/admin/CommandCenter.jsx:1274:    { id: 'email', label: 'Email Service', endpoint: '/api/email' },
-client/src/pages/admin/CommandCenter.jsx:1275:    { id: 'perplexity', label: 'Perplexity AI', endpoint: '/api/perplexity' },
-client/src/pages/admin/CommandCenter.jsx:1276:    { id: 'canva', label: 'Canva AI', endpoint: '/api/canva-oauth' },
-client/src/pages/admin/CommandCenter.jsx:1277:    { id: 'ai-engine', label: 'AI Engine', endpoint: '/api/ai/history' },
-client/src/pages/admin/CommandCenter.jsx:1288:        let res = await fetch(ep.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
-client/src/pages/admin/CommandCenter.jsx:1293:          res = await fetch(ep.endpoint, { method: 'HEAD', credentials: 'include', signal: c2.signal });
-client/src/pages/admin/CommandCenter.jsx:1470:    queryKey: ['/api/health'],
-client/src/pages/admin/CommandCenter.jsx:1478:    queryKey: ['/api/admin/dashboard-stats'],
-client/src/pages/admin/AdminPublishing.jsx:86:  const { data: registryData, isLoading: regLoading, error: publishError, refetch: refetchRegistry } = useQuery({ queryKey: ["/api/admin/publishing/registry"] });
-client/src/pages/admin/AdminPublishing.jsx:87:  const { data: draftsData, isLoading: draftsLoading } = useQuery({ queryKey: ["/api/admin/publishing/drafts"] });
-client/src/pages/admin/AdminPublishing.jsx:88:  const { data: calendarData, isLoading: calLoading } = useQuery({ queryKey: ["/api/admin/publishing/calendar"] });
-client/src/pages/admin/AdminPublishing.jsx:89:  const { data: signalsData, isLoading: sigLoading } = useQuery({ queryKey: ["/api/admin/publishing/signals/summary"] });
-client/src/pages/admin/AdminPublishing.jsx:91:    queryKey: ["/api/blog/admin/stats"],
-client/src/pages/admin/AdminPublishing.jsx:95:    queryKey: ["/api/admin/publishing/recommendations"],
-client/src/pages/admin/AdminPublishing.jsx:101:      const res = await apiRequest("PATCH", `/api/admin/publishing/registry/${id}`, { status });
-client/src/pages/admin/AdminPublishing.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/admin/publishing/registry"] });
-client/src/pages/admin/AdminPublishing.jsx:114:        return await apiRequest("POST", `/api/blog/admin/${id}/${action}`);
-client/src/pages/admin/AdminPublishing.jsx:133:      queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
-client/src/pages/admin/AdminPublishing.jsx:152:        ? await apiRequest("PUT", `/api/blog/admin/${editingPost.id}`, formData)
-client/src/pages/admin/AdminPublishing.jsx:153:        : await apiRequest("POST", "/api/blog/admin/create", formData);
-client/src/pages/admin/AdminPublishing.jsx:157:      queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
-client/src/pages/admin/SecurityDashboard.jsx:15:    queryKey: ['/api/admin/security/overview'],
-client/src/pages/admin/SecurityDashboard.jsx:17:      const res = await fetch("/api/admin/security/overview", { credentials: "include" });
-client/src/pages/admin/SecurityDashboard.jsx:28:    queryKey: ['/api/admin/security/rate-limits'],
-client/src/pages/admin/SecurityDashboard.jsx:30:      const res = await fetch("/api/admin/security/rate-limits?limit=50&blockedOnly=false", { credentials: "include" });
-client/src/pages/admin/SecurityDashboard.jsx:41:    queryKey: ['/api/health'],
-client/src/pages/Analytics.jsx:10:    queryKey: ["/api/analytics"],
-client/src/pages/Analytics.jsx:74:            onClick={() => refetch()}
-client/src/pages/BlogDraftViewer.jsx:14:    fetch(`/api/admin/publishing/draft-packs/${encodeURIComponent(id)}`, {
-client/src/pages/BlogPost.jsx:20:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
-client/src/pages/BlogPost.jsx:22:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
-client/src/pages/BlogPost.jsx:82:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
-client/src/pages/BlogPost.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
-client/src/pages/BlogPost.jsx:163:    queryKey: ["/api/blog", slug],
-client/src/pages/BlogPost.jsx:165:      const res = await fetch(`/api/blog/${slug}`);
-client/src/pages/BoundariesPage.jsx:85:    queryKey: ["/api/wellness-tools/boundaries"],
-client/src/pages/BoundariesPage.jsx:89:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/boundaries", data),
-client/src/pages/BoundariesPage.jsx:91:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
-client/src/pages/BoundariesPage.jsx:103:    mutationFn: (id) => apiRequest("DELETE", `/api/wellness-tools/boundaries/${id}`),
-client/src/pages/BoundariesPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
-client/src/pages/Challenge.jsx:74:        const res = await fetch("/api/wellness-tools/challenge-progress", { credentials: "include" });
-client/src/pages/Challenge.jsx:100:      const res = await fetch("/api/wellness-tools/challenge-progress", {
-client/src/pages/ChallengeDay.jsx:41:    queryKey: ["/api/gamification/progress"],
-client/src/pages/ChallengeDay.jsx:67:      return apiRequest("POST", "/api/gamification/record-session", {
-client/src/pages/ChallengeDay.jsx:83:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
-client/src/pages/ChallengeDay.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
-client/src/pages/CoherenceLadderPage.jsx:99:    queryKey: ["/api/wellness-tools/coherence"],
-client/src/pages/CoherenceLadderPage.jsx:103:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/coherence", data),
-client/src/pages/CoherenceLadderPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
-client/src/pages/CommunityCircle.jsx:23:    queryKey: ["/api/community/reflections", emotionFilter],
-client/src/pages/CommunityCircle.jsx:26:      const response = await fetch(`/api/community/reflections${params}`);
-client/src/pages/CommunityCircle.jsx:35:      return apiRequest("POST", `/api/community/reflections/${reflectionId}/heart`);
-client/src/pages/CommunityCircle.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
-client/src/pages/CommunityCircle.jsx:46:    refetch();
-client/src/pages/CommunityCircle.jsx:94:              onClick={() => refetch()}
-client/src/pages/CommunityFeed.jsx:15:    queryKey: ["/api/community/reflections"],
-client/src/pages/CommunityFeed.jsx:79:                onClick={() => refetch()}
-client/src/pages/Contact.jsx:27:    mutationFn: (data) => apiRequest("POST", "/api/contact", data),
-client/src/pages/GratitudePractice.jsx:49:    queryKey: ["/api/gratitude", "today"],
-client/src/pages/GratitudePractice.jsx:50:    queryFn: () => apiRequest("GET", "/api/gratitude/today"),
-client/src/pages/GratitudePractice.jsx:56:    queryKey: ["/api/gratitude"],
-client/src/pages/GratitudePractice.jsx:57:    queryFn: () => apiRequest("GET", "/api/gratitude"),
-client/src/pages/GratitudePractice.jsx:63:    queryKey: ["/api/gratitude", "weekly-summary"],
-client/src/pages/GratitudePractice.jsx:64:    queryFn: () => apiRequest("GET", "/api/gratitude/weekly-summary"),
-client/src/pages/GratitudePractice.jsx:72:    mutationFn: (data) => apiRequest("POST", "/api/gratitude", data),
-client/src/pages/GratitudePractice.jsx:74:      queryClient.invalidateQueries({ queryKey: ["/api/gratitude"] });
-client/src/pages/GratitudePractice.jsx:75:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/pages/Invite.jsx:24:      return apiRequest("POST", "/api/invites", { email: inviteEmail });
-client/src/pages/Invite.jsx:33:      queryClient.invalidateQueries({ queryKey: ["/api/invites"] });
-client/src/pages/Invite.jsx:34:      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
-client/src/pages/JournalPage.jsx:100:    queryKey: ["/api/journal"],
-client/src/pages/JournalPage.jsx:110:    queryKey: ["/api/mood"],
-client/src/pages/JournalPage.jsx:119:    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
-client/src/pages/JournalPage.jsx:121:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
-client/src/pages/JournalPage.jsx:122:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/pages/JournalPage.jsx:135:    mutationFn: (id) => apiRequest("DELETE", `/api/journal/${id}`),
-client/src/pages/JournalPage.jsx:137:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
-client/src/pages/JournalPage.jsx:138:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/pages/MoodPage.jsx:186:    queryKey: ["/api/mood"],
-client/src/pages/MoodPage.jsx:199:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
-client/src/pages/MoodPage.jsx:201:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/pages/MoodPage.jsx:202:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/pages/MoodPage.jsx:203:      queryClient.invalidateQueries({ queryKey: ["/api/analytics"] });
-client/src/pages/MovementSnacksPage.jsx:79:    queryKey: ["/api/wellness-tools/movement"],
-client/src/pages/MovementSnacksPage.jsx:83:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/movement", data),
-client/src/pages/MovementSnacksPage.jsx:85:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/movement"] });
-client/src/pages/PracticeLibrary.jsx:33:      return apiRequest("POST", "/api/favorites", { 
-client/src/pages/PracticeLibrary.jsx:40:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
-client/src/pages/Reflection.jsx:123:    queryKey: ["/api/reflection/entries"],
-client/src/pages/Reflection.jsx:125:      const res = await apiRequest("GET", "/api/reflection/entries?limit=50");
-client/src/pages/Reflection.jsx:159:      return apiRequest("POST", "/api/reflection/entries", { text: reflectionText });
-client/src/pages/Reflection.jsx:162:      queryClient.invalidateQueries({ queryKey: ["/api/reflection/entries"] });
-client/src/pages/Reflection.jsx:203:      await apiRequest("POST", "/api/journal", {
-client/src/pages/Reflection.jsx:208:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
-client/src/pages/Reflection.jsx:209:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/pages/Reflection.jsx:222:      const res = await apiRequest("POST", "/api/reflection/prompt", {
-client/src/pages/ValuesFinderPage.jsx:76:    queryKey: ["/api/wellness-tools/values"],
-client/src/pages/ValuesFinderPage.jsx:80:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/values", data),
-client/src/pages/ValuesFinderPage.jsx:82:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/values"] });
-client/src/pages/WellnessDashboard.jsx:87:      const response = await fetch("/api/mood", {
-client/src/pages/WellnessDashboard.jsx:102:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/pages/WellnessDashboard.jsx:312:    queryKey: ["/api/mood"],
-client/src/pages/WellnessDashboard.jsx:324:    queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/pages/WellnessGoals.jsx:62:      return apiRequest("POST", "/api/gamification/record-session", {
-client/src/pages/WellnessGoals.jsx:69:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
-client/src/pages/account/DeleteAccount.jsx:22:      return apiRequest('/api/account/delete-request', {
-client/src/pages/account/OrderHistory.jsx:10:    queryKey: ["/api/billing/invoices"],
-client/src/pages/account/OrderHistory.jsx:60:            <Button onClick={() => refetch()} variant="outline" data-testid="button-retry">
+client/src/pages/admin/NewsletterAdmin.jsx:14:    queryKey: ["/api/blog/admin/stats"],
+client/src/pages/admin/NewsletterAdmin.jsx:19:      const res = await apiRequest("POST", "/api/blog/admin/test-send", { draftId });
+client/src/pages/admin/NewsletterAdmin.jsx:58:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/account/Sessions.jsx:38:    queryKey: ['/api/account/sessions'],
+client/src/pages/account/Sessions.jsx:42:    mutationFn: (sessionId) => apiRequest("DELETE", `/api/account/sessions/${sessionId}`),
+client/src/pages/account/Sessions.jsx:44:      queryClient.invalidateQueries({ queryKey: ['/api/account/sessions'] });
+client/src/pages/admin/HealthDashboard.jsx:73:    queryKey: ["/api/admin/health", refreshKey],
+client/src/pages/admin/HealthDashboard.jsx:78:    queryKey: ["/api/admin/diagnostics", refreshKey],
+client/src/pages/admin/HealthDashboard.jsx:86:    queryKey: ["/api/admin/health-deep", refreshKey],
+client/src/pages/admin/HealthDashboard.jsx:93:    queryKey: ["/api/admin/health-deep/alerts", refreshKey],
+client/src/pages/admin/HealthDashboard.jsx:100:      const res = await apiRequest("POST", "/api/admin/health-deep/run");
+client/src/pages/admin/HealthDashboard.jsx:110:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:125:      const res = await apiRequest("POST", "/api/admin/health-deep/self-heal");
+client/src/pages/admin/HealthDashboard.jsx:135:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:151:      const res = await apiRequest("POST", "/api/admin/health-deep/ai-analyze");
+client/src/pages/admin/HealthDashboard.jsx:161:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:176:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/resume");
+client/src/pages/admin/HealthDashboard.jsx:181:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:189:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/pause");
+client/src/pages/admin/HealthDashboard.jsx:194:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:211:      const res = await fetch("/api/admin/health-deep/export", {
+client/src/pages/admin/HealthDashboard.jsx:242:    refetch();
 client/src/pages/account/Security.jsx:40:    queryKey: ["/api/account/security"],
 client/src/pages/account/Security.jsx:49:      return apiRequest("/api/account/2fa/setup", { method: "POST" });
 client/src/pages/account/Security.jsx:69:      return apiRequest("/api/account/2fa/verify", {
@@ -567,18 +803,63 @@ client/src/pages/account/Security.jsx:82:      queryClient.invalidateQueries({ q
 client/src/pages/account/Security.jsx:95:      return apiRequest("/api/account/2fa/disable", { method: "POST" });
 client/src/pages/account/Security.jsx:102:      queryClient.invalidateQueries({ queryKey: ["/api/account/security"] });
 client/src/pages/account/Security.jsx:140:      return apiRequest("/api/account/password", {
-client/src/pages/account/Sessions.jsx:38:    queryKey: ['/api/account/sessions'],
-client/src/pages/account/Sessions.jsx:42:    mutationFn: (sessionId) => apiRequest("DELETE", `/api/account/sessions/${sessionId}`),
-client/src/pages/account/Sessions.jsx:44:      queryClient.invalidateQueries({ queryKey: ['/api/account/sessions'] });
-client/src/pages/account/Subscription.jsx:24:    queryKey: ["/api/billing/subscription-status"],
-client/src/pages/account/Subscription.jsx:30:      const res = await apiRequest("/api/billing/portal", { method: "POST" });
-client/src/pages/account/Billing.jsx:75:    queryKey: ["/api/billing/subscription-status"],
-client/src/pages/account/Billing.jsx:79:    queryKey: ["/api/billing/invoices"],
-client/src/pages/account/Billing.jsx:98:    mutationFn: (interval) => apiRequest("POST", "/api/billing/checkout", { plan: "pro", interval: interval || billingInterval }),
-client/src/pages/account/Billing.jsx:115:    mutationFn: () => apiRequest("POST", "/api/billing/portal"),
-client/src/pages/account/Profile.jsx:49:    mutationFn: (data) => apiRequest("PUT", "/api/account/profile", data),
-client/src/pages/account/Settings.jsx:37:        const res = await fetch("/api/user/settings", { credentials: "include" });
-client/src/pages/account/Settings.jsx:60:    mutationFn: (data) => apiRequest("PATCH", "/api/user/settings", data),
+client/src/pages/dashboard/MoodTracker.jsx:47:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
+client/src/pages/dashboard/MoodTracker.jsx:50:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/pages/admin/AdminSocial.jsx:9:const API_BASE = "/api/admin/social/enterprise";
+client/src/pages/admin/AdminSocial.jsx:113:        fetch(`${API_BASE}/posts?${params}`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+client/src/pages/admin/AdminSocial.jsx:114:        fetch(`${API_BASE}/weekly-queue`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+client/src/pages/admin/AdminSocial.jsx:115:        fetch(`${API_BASE}/campaigns`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+client/src/pages/admin/AdminSocial.jsx:116:        fetch(`/r/list`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+client/src/pages/admin/AdminSocial.jsx:117:        fetch(`${API_BASE}/click-stats`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+client/src/pages/admin/AdminSocial.jsx:118:        fetch(`/api/blog/posts?limit=20`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+client/src/pages/admin/AdminSocial.jsx:119:        fetch(`${API_BASE}/signals`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: {} })),
+client/src/pages/admin/AdminSocial.jsx:120:        fetch(`${API_BASE}/audit?limit=50`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
+client/src/pages/admin/AdminSocial.jsx:139:      await fetch(`${API_BASE}/post/${id}/${action}`, {
+client/src/pages/admin/AdminSocial.jsx:474:      const res = await fetch(`${API_BASE}/build-utm`, {
+client/src/pages/admin/AdminSocial.jsx:489:      const res = await fetch(`/r/create`, {
+client/src/pages/admin/AdminSocial.jsx:519:      await fetch(url, { method, credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+client/src/pages/admin/AdminSocial.jsx:855:      const res = await fetch(`${API_BASE}/generate-from-blog`, {
+client/src/pages/admin/AdminSocial.jsx:923:      await fetch(`${API_BASE}/campaigns`, {
+client/src/pages/account/OrderHistory.jsx:10:    queryKey: ["/api/billing/invoices"],
+client/src/pages/account/OrderHistory.jsx:60:            <Button onClick={() => refetch()} variant="outline" data-testid="button-retry">
+client/src/pages/admin/FeedbackAggregator.jsx:25:    queryKey: ['/api/feedback'],
+client/src/pages/admin/FeedbackAggregator.jsx:100:              onClick={() => refetch()}
+client/src/pages/admin/NarrativeOpsConsole.jsx:13:const API_BASE = "/api/admin/social/enterprise";
+client/src/pages/admin/NarrativeOpsConsole.jsx:145:      const res = await fetch(buildQueryUrl(), { credentials: "include" });
+client/src/pages/admin/NarrativeOpsConsole.jsx:153:      const res = await fetch(`${API_BASE}/campaigns`, { credentials: "include" });
+client/src/pages/admin/NarrativeOpsConsole.jsx:161:      const res = await fetch(`${API_BASE}/weekly-queue`, { credentials: "include" });
+client/src/pages/admin/NarrativeOpsConsole.jsx:170:      const res = await fetch(`${API_BASE}/signals`, { credentials: "include" });
+client/src/pages/admin/NarrativeOpsConsole.jsx:179:      const res = await fetch(`${API_BASE}/click-stats`, { credentials: "include" });
+client/src/pages/admin/NarrativeOpsConsole.jsx:188:      const res = await fetch(`${API_BASE}/audit`, { credentials: "include" });
+client/src/pages/admin/NarrativeOpsConsole.jsx:195:    queryKey: ["/api/blog"],
+client/src/pages/admin/NarrativeOpsConsole.jsx:197:      const res = await fetch("/api/blog?limit=20", { credentials: "include" });
+client/src/pages/admin/EngagementDashboard.jsx:12:    queryKey: ['/api/admin/dashboard-stats'],
+client/src/pages/admin/EngagementDashboard.jsx:21:    queryKey: ['/api/health'],
+client/src/pages/admin/EngagementDashboard.jsx:42:    { name: "AI Chat Therapy", endpoint: "/api/ai", percentage: 85 },
+client/src/pages/admin/EngagementDashboard.jsx:43:    { name: "Journal System", endpoint: "/api/journal", percentage: 65 },
+client/src/pages/admin/EngagementDashboard.jsx:44:    { name: "Mood Tracker", endpoint: "/api/mood", percentage: 55 },
+client/src/pages/admin/EngagementDashboard.jsx:45:    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
+client/src/pages/admin/EngagementDashboard.jsx:46:    { name: "Daily Wisdom", endpoint: "/api/wisdom", percentage: 38 },
+client/src/pages/admin/EngagementDashboard.jsx:47:    { name: "Reflection Tools", endpoint: "/api/reflection", percentage: 32 },
+client/src/pages/admin/EngagementDashboard.jsx:48:    { name: "Gratitude Prompts", endpoint: "/api/gratitude", percentage: 28 },
+client/src/pages/admin/EngagementDashboard.jsx:49:    { name: "Mirror Reflection", endpoint: "/api/mirror", percentage: 22 },
+client/src/pages/admin/EngagementDashboard.jsx:93:              onClick={() => refetch()}
+client/src/pages/account/DeleteAccount.jsx:22:      return apiRequest('/api/account/delete-request', {
+client/src/pages/admin/ContentStudioAdmin.jsx:34:    queryKey: ['/api/health'],
+client/src/pages/admin/SocialDashboard.jsx:164:    queryKey: ["/api/social-posting/platforms/status"],
+client/src/pages/admin/SocialDashboard.jsx:283:    queryKey: ["/api/admin/social/analytics"],
+client/src/pages/admin/SocialDashboard.jsx:425:    queryKey: ["/api/admin/social/drafts"],
+client/src/pages/admin/SocialDashboard.jsx:429:    mutationFn: (id) => apiRequest("POST", `/api/admin/social/drafts/${id}/approve`),
+client/src/pages/admin/SocialDashboard.jsx:431:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+client/src/pages/admin/SocialDashboard.jsx:436:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/drafts/${id}`),
+client/src/pages/admin/SocialDashboard.jsx:438:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+client/src/pages/admin/SocialDashboard.jsx:443:    mutationFn: (ids) => apiRequest("POST", "/api/admin/social/drafts/bulk/approve", { ids }),
+client/src/pages/admin/SocialDashboard.jsx:445:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+client/src/pages/admin/SocialDashboard.jsx:452:    mutationFn: (ids) => apiRequest("POST", "/api/admin/social/drafts/bulk/delete", { ids }),
+client/src/pages/admin/SocialDashboard.jsx:454:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+client/src/pages/admin/SocialDashboard.jsx:461:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/publish/batch", data),
+client/src/pages/admin/SocialDashboard.jsx:463:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+client/src/pages/admin/SocialDashboard.jsx:643:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
 client/src/pages/dashboard/Overview.jsx:172:      queryClient.invalidateQueries({ queryKey: ["/api/billing/subscription-status"] });
 client/src/pages/dashboard/Overview.jsx:183:    queryKey: ['/api/user/stats'],
 client/src/pages/dashboard/Overview.jsx:189:    queryKey: ['/api/user/activity'],
@@ -591,306 +872,51 @@ client/src/pages/dashboard/Overview.jsx:308:                onClick={() => refet
 client/src/pages/dashboard/Journal.jsx:85:    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
 client/src/pages/dashboard/Journal.jsx:87:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
 client/src/pages/dashboard/Journal.jsx:171:    queryKey: ["/api/journal"],
-client/src/pages/dashboard/MoodTracker.jsx:47:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
-client/src/pages/dashboard/MoodTracker.jsx:50:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/pages/pathways/Favorites.jsx:17:    queryKey: ["/api/favorites"],
-client/src/pages/pathways/Favorites.jsx:22:    mutationFn: (id) => apiRequest("DELETE", `/api/favorites/${id}`),
-client/src/pages/pathways/Favorites.jsx:24:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
-client/src/pages/pathways/Favorites.jsx:64:          <Button onClick={() => refetch()} data-testid="button-retry">
-client/src/pages/pathways/PathwaysHome.jsx:77:    queryKey: ["/api/pathways/progress"],
-client/src/pages/pathways/ProgressStreaks.jsx:23:    queryKey: ["/api/progress/stats"],
-client/src/pages/pathways/ProgressStreaks.jsx:59:          <Button onClick={() => refetch()} data-testid="button-retry">
-client/src/pages/pathways/ReflectionHistory.jsx:40:    queryKey: ["/api/journal"],
-client/src/pages/pathways/ReflectionHistory.jsx:44:    queryKey: ["/api/mood"],
-client/src/pages/pathways/ReflectionHistory.jsx:48:    queryKey: ["/api/gratitude"],
-client/src/pages/pathways/ReflectionHistory.jsx:52:    queryKey: ["/api/user/reflections"],
-client/src/pages/preferences/NotificationPreferences.jsx:65:        const res = await fetch("/api/user-settings", { credentials: "include" });
-client/src/pages/preferences/NotificationPreferences.jsx:88:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
-client/src/pages/preferences/SafetyPreferences.jsx:69:        const res = await fetch("/api/user-settings", { credentials: "include" });
-client/src/pages/preferences/SafetyPreferences.jsx:95:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
-client/src/pages/settings/AIPersonality.jsx:68:        const res = await fetch("/api/user-settings", { credentials: "include" });
-client/src/pages/settings/AIPersonality.jsx:86:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
-client/src/pages/settings/EmailDigest.jsx:29:        const res = await fetch("/api/user-settings", { credentials: "include" });
-client/src/pages/settings/EmailDigest.jsx:57:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
-client/src/pages/tools/CommunityCheckin.jsx:39:        const res = await fetch("/api/community/reflections", { credentials: "include" });
-client/src/pages/tools/CommunityCheckin.jsx:61:    mutationFn: (data) => apiRequest("POST", "/api/community/reflect", data),
-client/src/pages/tools/CommunityCheckin.jsx:66:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
-client/src/pages/tools/GriefLetter.jsx:42:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/grief-letter", data),
-client/src/pages/tools/MeaningMap.jsx:34:        const res = await fetch("/api/wellness-tools/meaning-map/latest", { credentials: "include" });
-client/src/pages/tools/MeaningMap.jsx:79:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/meaning-map", data),
-client/src/pages/tools/WeeklyReflection.jsx:52:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/weekly-reflection", data),
-client/src/pages/GrowthPage.jsx:131:  const res = await fetch("/api/growth/journey", {
-client/src/pages/GrowthPage.jsx:445:    queryKey: ["/api/growth/journey", token ? "auth" : "guest"],
-client/src/pages/AffirmationWall.jsx:34:    queryKey: ["/api/community/affirmations"],
-client/src/pages/AffirmationWall.jsx:40:      return apiRequest("POST", "/api/community/affirmations", {
-client/src/pages/AffirmationWall.jsx:49:      queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
-client/src/pages/AffirmationWall.jsx:58:      return apiRequest("POST", `/api/community/affirmations/${id}/like`);
-client/src/pages/AffirmationWall.jsx:61:      queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
-client/src/pages/AffirmationWall.jsx:111:            onClick={() => refetch()}
-client/src/pages/CommunityHub.jsx:12:    queryKey: ["/api/community/affirmations"],
-client/src/pages/CommunityHub.jsx:17:    queryKey: ["/api/community/question"],
-client/src/pages/PeacescapePage.jsx:35:        const res = await apiRequest("GET", "/api/peacescape/state");
-client/src/pages/CourseCatalog.jsx:31:      return apiRequest("POST", "/api/gamification/record-session", {
-client/src/pages/CourseCatalog.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
-client/src/pages/DailyReflection.jsx:62:    queryKey: ["/api/user/reflection/today"],
-client/src/pages/DailyReflection.jsx:82:      const res = await apiRequest("POST", "/api/user/reflection", {
-client/src/pages/DailyReflection.jsx:93:      queryClient.invalidateQueries({ queryKey: ["/api/user/reflection/today"] });
-client/src/pages/DailyReflection.jsx:94:      queryClient.invalidateQueries({ queryKey: ["/api/user/reflections"] });
-client/src/pages/DailyReflection.jsx:95:      queryClient.invalidateQueries({ queryKey: ["/api/user/stats"] });
-client/src/pages/DailyReflection.jsx:97:        queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
-client/src/pages/Start.tsx:402:    void fetch("/api/telemetry/event", {
-client/src/pages/Start.tsx:464:        const res = await fetch("/api/streaks/me", {
-client/src/pages/Start.tsx:485:      const res = await fetch("/api/streaks/checkin", {
-client/src/pages/Start.tsx:535:      const res = await fetch("/api/ai/chat", {
-client/src/pages/Start.tsx:573:  //   - Does NOT call /api/buddy, does NOT touch /api/ai/chat, does NOT
-client/src/pages/CelebrationRitual.jsx:28:    queryKey: ["/api/community/completion-stats"],
-client/src/pages/AdminLogin.jsx:11: * Posts the ADMIN_TOKEN to /api/admin/verify-token; on success stores the
-client/src/pages/AdminLogin.jsx:64:      const res = await fetch("/api/admin/verify-token", {
-client/src/pages/Login.jsx:54:      const data = await apiRequest("POST", "/api/auth/login", {
-client/src/pages/Register.jsx:40:      const data = await apiRequest("POST", "/api/auth/register", {
-client/src/pages/ResetPassword.jsx:59:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/confirm", {
-client/src/pages/Dashboard.jsx:31:    queryKey: ["/api/dashboard"],
-client/src/pages/Dashboard.jsx:108:            onClick={() => refetch()}
-client/src/pages/BlogIndex.jsx:89:    queryKey: ["/api/blog"],
-client/src/pages/Settings.jsx:50:        const res = await fetch("/api/user-settings", { credentials: "include" });
-client/src/pages/Settings.jsx:109:      const res = await fetch("/api/user-settings", {
-client/src/pages/Settings.jsx:159:      const response = await fetch("/api/account/export", {
-client/src/pages/Onboarding.tsx:69:    queryKey: ["/api/auth/user"],
-client/src/pages/Onboarding.tsx:108:      return apiRequest("POST", "/api/onboarding/complete", {
-client/src/pages/Onboarding.tsx:117:      queryClient.invalidateQueries({ queryKey: ["/api/onboarding/status"] });
-client/src/pages/Upgrade.jsx:25:      const res = await fetch("/api/billing/checkout", {
-client/src/pages/ForgotPassword.jsx:31:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/request", data),
-client/src/pages/Admin.jsx:23:    const res = await fetch(url, { credentials: "include" });
-client/src/pages/Admin.jsx:29:    const res = await fetch(url, {
-client/src/pages/Admin.jsx:76:        const response = await fetch("/api/admin/verify-session", {
-client/src/pages/Admin.jsx:113:      const response = await fetch("/api/admin/stats", { headers });
-client/src/pages/Admin.jsx:135:          fetchAdminMetric("/api/admin/health"),
-client/src/pages/Admin.jsx:136:          fetchAdminMetric("/api/admin/health-deep?format=json"),
-client/src/pages/Admin.jsx:982:                { endpoint: "/api/chat", method: "POST", status: 200, duration: "234ms", time: "Just now" },
-client/src/pages/Admin.jsx:983:                { endpoint: "/api/journal", method: "GET", status: 200, duration: "45ms", time: "1 min ago" },
-client/src/pages/Admin.jsx:984:                { endpoint: "/api/mood", method: "POST", status: 201, duration: "67ms", time: "2 min ago" },
-client/src/pages/Admin.jsx:985:                { endpoint: "/api/user/profile", method: "GET", status: 200, duration: "23ms", time: "3 min ago" },
-client/src/pages/AgentInteraction.jsx:95:      apiRequest("POST", "/api/admin/consciousness/orchestrator/invoke", {
-client/src/pages/AgentInteraction.jsx:197:  const { data, isLoading } = useQuery({ queryKey: ["/api/admin/consciousness/orchestrator/memory"] });
-client/src/pages/AgentInteraction.jsx:221:    queryKey: ["/api/admin/consciousness/agents"],
-client/src/pages/BiometricDashboard.jsx:79:    mutationFn: async (payload) => apiRequest("POST", "/api/biometrics/upload", payload),
-client/src/pages/BiometricDashboard.jsx:83:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/latest"] });
-client/src/pages/BiometricDashboard.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] });
-client/src/pages/BiometricDashboard.jsx:172:  const metaQuery = useQuery({ queryKey: ["/api/biometrics/meta"] });
-client/src/pages/BiometricDashboard.jsx:173:  const connectionsQuery = useQuery({ queryKey: ["/api/biometrics/connections"] });
-client/src/pages/BiometricDashboard.jsx:174:  const latestQuery = useQuery({ queryKey: ["/api/biometrics/latest"] });
-client/src/pages/BiometricDashboard.jsx:175:  const stateQuery = useQuery({ queryKey: ["/api/biometrics/state"] });
-client/src/pages/BiometricDashboard.jsx:190:    mutationFn: async (source) => apiRequest("POST", `/api/biometrics/sync/${source}`, {}),
-client/src/pages/BiometricDashboard.jsx:194:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/latest"] });
-client/src/pages/BiometricDashboard.jsx:195:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] });
-client/src/pages/BiometricDashboard.jsx:200:    mutationFn: async () => apiRequest("POST", "/api/biometrics/state/compute", {}),
-client/src/pages/BiometricDashboard.jsx:201:    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] }),
-client/src/pages/BlogEditor.jsx:26:      fetch("/api/blog", {
-client/src/pages/BlogEditor.jsx:35:      queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
-client/src/pages/ContentAdminDashboard.jsx:77:    queryKey: ["/api/blog/admin"],
-client/src/pages/ContentAdminDashboard.jsx:155:    queryKey: ["/api/social/posts"],
-client/src/pages/ContentAdminDashboard.jsx:167:      return await apiRequest("POST", "/api/social/posts", postData);
-client/src/pages/ContentAdminDashboard.jsx:171:      queryClient.invalidateQueries({ queryKey: ["/api/social/posts"] });
-client/src/pages/ContentAdminDashboard.jsx:320:    queryKey: ["/api/products"],
-client/src/pages/ContentAdminDashboard.jsx:334:      return await apiRequest("POST", "/api/products", productData);
-client/src/pages/ContentAdminDashboard.jsx:338:      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
-client/src/pages/ContentAdminDashboard.jsx:510:    queryKey: ["/api/content/stats"],
-client/src/pages/ContentStudioPage.tsx:39:    queryKey: ["/api/content/formats"],
-client/src/pages/ContentStudioPage.tsx:44:      const data = await apiRequest("POST", "/api/content/generate", {
-client/src/pages/ContentStudioPage.tsx:62:      const data = await apiRequest("POST", "/api/content/drafts", {
-client/src/pages/ContentStudioPage.tsx:71:      queryClient.invalidateQueries({ queryKey: ["/api/content/drafts"] });
-client/src/pages/DiscernmentDashboard.jsx:95:      return apiRequest("POST", "/api/discernment/attempts", {
-client/src/pages/DiscernmentDashboard.jsx:103:      queryClient.invalidateQueries({ queryKey: ["/api/discernment/progress"] });
-client/src/pages/DiscernmentDashboard.jsx:104:      queryClient.invalidateQueries({ queryKey: ["/api/discernment/attempts/recent"] });
-client/src/pages/DiscernmentDashboard.jsx:272:    mutationFn: async (payload) => apiRequest("POST", "/api/discernment/real-world", payload),
-client/src/pages/DiscernmentDashboard.jsx:275:      queryClient.invalidateQueries({ queryKey: ["/api/discernment/progress"] });
-client/src/pages/DiscernmentDashboard.jsx:369:  const { data, isLoading } = useQuery({ queryKey: ["/api/discernment/attempts/recent"] });
-client/src/pages/DiscernmentDashboard.jsx:405:  const beltsQuery = useQuery({ queryKey: ["/api/discernment/belts"] });
-client/src/pages/DiscernmentDashboard.jsx:406:  const progressQuery = useQuery({ queryKey: ["/api/discernment/progress"] });
-client/src/pages/DiscernmentDashboard.jsx:407:  const lessonsQuery = useQuery({ queryKey: ["/api/discernment/lessons"] });
-client/src/pages/DiscernmentDashboard.jsx:486:                beltsQuery.refetch();
-client/src/pages/DiscernmentDashboard.jsx:487:                progressQuery.refetch();
-client/src/pages/DiscernmentDashboard.jsx:488:                lessonsQuery.refetch();
-client/src/pages/DiscernmentDashboard.jsx:602:            queryClient.invalidateQueries({ queryKey: ["/api/discernment/progress"] });
-client/src/pages/DiscernmentDashboard.jsx:603:            queryClient.invalidateQueries({ queryKey: ["/api/discernment/attempts/recent"] });
-client/src/pages/EliteToolsDashboard.tsx:47:    queryKey: ["/api/healing-intelligence/modalities"]
-client/src/pages/EliteToolsDashboard.tsx:51:    queryKey: ["/api/cognitive-mastery/frameworks"]
-client/src/pages/EliteToolsDashboard.tsx:55:    queryKey: ["/api/wisdom-engine/patterns"]
-client/src/pages/EliteToolsDashboard.tsx:59:    queryKey: ["/api/wisdom-engine/daily"]
-client/src/pages/HealthPage.jsx:11:    queryKey: ["/api/health"],
-client/src/pages/MirrorPage.tsx:65:      const res = await apiRequest("POST", "/api/mirror", { text, mode });
-client/src/pages/ProtocolBrowser.jsx:92:  const { data, isLoading, error } = useQuery({ queryKey: ["/api/protocols"] });
-client/src/pages/ProtocolBrowser.jsx:109:    mutationFn: async (protocolId) => apiRequest("POST", "/api/protocols/start", { protocolId }),
-client/src/pages/ProtocolBrowser.jsx:111:      queryClient.invalidateQueries({ queryKey: ["/api/protocols"] });
-client/src/pages/ProtocolSession.jsx:132:  const queryKey = ["/api/protocols/session", sessionId];
-client/src/pages/ProtocolSession.jsx:142:      apiRequest("POST", `/api/protocols/session/${sessionId}/respond`, payload),
-client/src/pages/ProtocolSession.jsx:151:      apiRequest("POST", `/api/protocols/session/${sessionId}/progress`, {}),
-client/src/pages/ProtocolSession.jsx:159:      apiRequest("POST", `/api/protocols/session/${sessionId}/pause`, {}),
-client/src/pages/ProtocolSession.jsx:209:            Could not load session. <button type="button" onClick={() => refetch()} className="underline">Retry</button>
-client/src/pages/InsightsDashboard.jsx:17:    queryKey: ["/api/gratitude/weekly-summary"],
-client/src/pages/InsightsDashboard.jsx:22:    queryKey: ["/api/community/completion-stats"],
-client/src/pages/Pricing.jsx:145:    fetch("/api/billing/pricing-view", { method: "POST", credentials: "include" }).catch(() => {});
-client/src/pages/Pricing.jsx:165:      const res = await fetch("/api/billing/checkout", {
-client/src/pages/CanvaLanding.jsx:49:      const response = await fetch("/api/admin/verify-token", {
-client/src/api/fetchWithAuth.js:21:  const res = await fetch(url, {
-client/src/api/fetchWithAuth.js:34:  const refreshRes = await fetch("/api/auth/refresh", {
-client/src/api/fetchWithAuth.js:47:  const retry = await fetch(url, {
-client/src/components/AIChat.jsx:2:import axios from "axios";
-client/src/components/AIChat.jsx:13:    const res = await axios.post(
-client/src/components/AIChat.jsx:14:      "/api/ai/chat",
-client/src/components/AIChat.jsx:22:    const res = await axios.post("/api/ai/chat", {
-client/src/components/AICompanion.jsx:110:        const response = await apiRequest("POST", "/api/ai/chat", { 
-client/src/components/AchievementBadge.jsx:225:    queryKey: ["/api/progress/achievements"],
-client/src/components/AffirmationDeck.jsx:40:    queryKey: ["/api/favorites", "affirmation"],
-client/src/components/AffirmationDeck.jsx:46:      return apiRequest("POST", "/api/favorites", {
-client/src/components/AffirmationDeck.jsx:52:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
-client/src/components/Badges.jsx:194:    queryKey: ["/api/badges"],
-client/src/components/ChatWidget.tsx:27:      const response = await apiRequest("POST", "/api/ai/chat", {
-client/src/components/DailyInsight.jsx:5:    queryKey: ["/api/insights/daily"],
-client/src/components/DataExportButton.jsx:19:    queryKey: ["/api/moods"],
-client/src/components/DataExportButton.jsx:24:    queryKey: ["/api/journal"],
-client/src/components/EmotionAuraRing.jsx:26:    queryKey: ["/api/moods"],
-client/src/components/EmotionPieChart.jsx:44:    queryKey: ["/api/moods"],
-client/src/components/JournalAI.jsx:76:        const response = await apiRequest("/api/ai/analyze-journal", {
-client/src/components/JournalInsights.jsx:93:    queryKey: ["/api/journals"],
-client/src/components/MoodHistoryChart.jsx:22:    queryKey: ["/api/mood/stats"],
-client/src/components/MoodInsight.jsx:26:    queryKey: ["/api/insights/mood"],
-client/src/components/ObjectUploader.jsx:57:      const presignRes = await fetch('/api/uploads/request-url', {
-client/src/components/ObjectUploader.jsx:74:      const uploadRes = await fetch(uploadURL, {
-client/src/components/ProgressTracker.jsx:29:    queryKey: ["/api/progress/stats"],
-client/src/components/ProgressTracker.jsx:34:    queryKey: ["/api/progress/achievements"],
-client/src/components/ReflectionInsights.jsx:73:    queryKey: ["/api/gratitude/weekly-summary"],
-client/src/components/ReflectionInsights.jsx:86:        const response = await apiRequest("POST", "/api/ai/weekly-reflection", {
-client/src/components/ReflectionInsights.jsx:235:              onClick={() => refetch()}
-client/src/components/ReminderScheduler.jsx:43:        const response = await fetch("/api/user/settings");
-client/src/components/ReminderScheduler.jsx:62:        await fetch("/api/user/settings", {
-client/src/components/ReminderSettings.jsx:36:    queryKey: ["/api/user/settings"],
-client/src/components/ReminderSettings.jsx:51:      return apiRequest("PATCH", "/api/user/settings", { reminders: newSettings });
-client/src/components/ReminderSettings.jsx:59:      queryClient.invalidateQueries({ queryKey: ["/api/user/settings"] });
-client/src/components/SacredForm.jsx:34:      const response = await fetch('/api/subscribe', {
-client/src/components/SessionTimeout.jsx:59:      await fetch("/api/session/extend", { method: "POST", credentials: "include" });
-client/src/components/SessionTimeout.jsx:103:            onClick={() => (window.location.href = "/api/logout")}
-client/src/components/ShareReflection.jsx:24:    queryKey: ["/api/journal"],
-client/src/components/ShareReflection.jsx:30:      return apiRequest("POST", "/api/community/reflections", {
-client/src/components/ShareReflection.jsx:40:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
-client/src/components/SoftLaunchBanner.jsx:15:    fetch("/api/health")
-client/src/components/StateTracker.jsx:68:    mutationFn: (data) => apiRequest("POST", "/api/states", data),
-client/src/components/StateTracker.jsx:70:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
-client/src/components/StateTracker.jsx:71:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/components/VoiceSettings.jsx:55:        const response = await fetch("/api/user/settings");
-client/src/components/VoiceSettings.jsx:73:        await fetch("/api/user/settings", {
-client/src/components/admin/SOPMonitorPanel.jsx:2:// Platform SOP Monitor v1 — admin panel that surfaces /api/admin/sop/status.
-client/src/components/admin/SOPMonitorPanel.jsx:12: * 401/403 here is the SUCCESS condition for /api/admin/sop/status —
-client/src/components/admin/SOPMonitorPanel.jsx:27:  const url = "/api/admin/sop/status";
-client/src/components/admin/SOPMonitorPanel.jsx:29:    const res = await fetch(url, { credentials: "include" });
-client/src/components/admin/SOPMonitorPanel.jsx:35:    const res = await fetch(url, {
-client/src/components/admin/SOPMonitorPanel.jsx:90:    queryKey: ["/api/admin/sop/status"],
-client/src/components/admin/SOPMonitorPanel.jsx:98:  const handleRetry = useCallback(() => { refetch(); }, [refetch]);
-client/src/components/admin/OperationsPanel.jsx:186:      const json = await apiFetch("/api/admin/health-deep/metrics?format=json");
-client/src/components/admin/OperationsPanel.jsx:273:      // /api/admin/health-deep returns the structured probe report:
-client/src/components/admin/OperationsPanel.jsx:275:      const json = await apiFetch("/api/admin/health-deep");
-client/src/components/admin/OperationsPanel.jsx:384:        fetch("/health/ready", { credentials: "include" }),
-client/src/components/admin/OperationsPanel.jsx:385:        fetch("/health/detailed", { credentials: "include" }),
-client/src/components/admin/OperationsPanel.jsx:472:      const json = await apiFetch("/api/admin/health-deep");
-client/src/components/admin/OperationsPanel.jsx:488:      const json = await apiFetch("/api/admin/health-deep/self-heal", { method: "POST" });
-client/src/components/admin/OperationsPanel.jsx:501:      await apiFetch(`/api/admin/health-deep/scheduler/${action}`, { method: "POST" });
-client/src/components/admin/OperationsPanel.jsx:642:    { label: "Public health", path: "/api/health",         protected: false },
-client/src/components/admin/OperationsPanel.jsx:643:    { label: "Admin health",  path: "/api/admin/health",   protected: true  },
-client/src/components/admin/OperationsPanel.jsx:644:    { label: "Auth (me)",     path: "/api/auth/me",        protected: true  },
-client/src/components/admin/OperationsPanel.jsx:645:    { label: "Kernel health", path: "/api/kernel/health",  protected: true  },
-client/src/components/admin/OperationsPanel.jsx:646:    { label: "Email health",  path: "/api/email/health",   protected: false },
-client/src/components/admin/OperationsPanel.jsx:678:            const res = await fetch(r.path, {
-client/src/components/admin/OrchestratorTestPanel.jsx:12: *     any locked v1 surface; it speaks only to /api/admin/consciousness/*.
-client/src/components/admin/OrchestratorTestPanel.jsx:60:      const r = await fetch("/api/admin/consciousness/orchestrator/memory", {
-client/src/components/admin/OrchestratorTestPanel.jsx:85:      const r = await fetch("/api/admin/consciousness/orchestrator/invoke", {
-client/src/components/admin/ConsciousnessRegistryPanel.jsx:13:const API_BASE = "/api/admin/consciousness";
-client/src/components/admin/ConsciousnessRegistryPanel.jsx:24:    const res = await fetch(url, { credentials: "include", ...init });
-client/src/components/admin/ConsciousnessRegistryPanel.jsx:30:    const res = await fetch(url, {
-client/src/components/admin/ConsciousnessRegistryPanel.jsx:141:    summaryQ.refetch();
-client/src/components/admin/ConsciousnessRegistryPanel.jsx:142:    agentsQ.refetch();
-client/src/components/admin/ConsciousnessRegistryPanel.jsx:216:            <code className="mx-1 px-1.5 py-0.5 rounded bg-white/40">/api/admin/consciousness</code>
-client/src/components/insights/TodaysInsight.jsx:6:    queryKey: ["/api/insights/daily"],
-client/src/components/marketing/EmailCapture.jsx:25:      const res = await fetch("/api/leads", {
-client/src/components/publishing/NewsletterInvite.jsx:18:      const res = await fetch("/api/newsletter/subscribe", {
-client/src/components/state/StateTracker.tsx:91:    mutationFn: (data: Record<string, string>) => apiRequest("POST", "/api/states", data),
-client/src/components/state/StateTracker.tsx:93:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
-client/src/components/state/StateTracker.tsx:94:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/components/wellness/EmotionLog.jsx:42:    queryKey: ["/api/mood"],
-client/src/components/wellness/EmotionLog.jsx:47:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
-client/src/components/wellness/EmotionLog.jsx:49:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/components/wellness/EmotionLog.jsx:50:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/components/wellness/EmotionLog.jsx:63:    mutationFn: (id) => apiRequest("DELETE", `/api/mood/${id}`),
-client/src/components/wellness/EmotionLog.jsx:65:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/components/wellness/HealingGraph.jsx:85:    queryKey: ["/api/mood"],
-client/src/components/wellness/JournalAI.jsx:86:    mutationFn: (message) => apiRequest("POST", "/api/ai/chat", { message }),
-client/src/components/wellness/MoodCalendar.jsx:74:    queryKey: ["/api/mood"],
-client/src/components/wellness/WeatherMoodSync.jsx:111:      const res = await fetch(
-client/src/components/wellness/WeatherMoodSync.jsx:148:      const res = await fetch(
-client/src/components/zen/BuddyBubble.jsx:18: *     /api/ai/chat handlers.
-client/src/components/zen/ZenScape.jsx:16: * against allowlists in /api/peacescape/state). Defaults are sage/meadow/none
-client/src/components/peacescape/CustomizerPanel.jsx:36: * - Optimistic local update + PATCH /api/peacescape/state.
-client/src/components/peacescape/CustomizerPanel.jsx:64:      const res = await apiRequest("PATCH", "/api/peacescape/state", { [field]: value });
-client/src/components/AdminGuard.jsx:9: *   1) Token-based admin session: ADMIN_TOKEN → /api/admin/verify-token
-client/src/components/AdminGuard.jsx:12: *      /api/admin/verify-session.
-client/src/components/AdminGuard.jsx:36:            const res = await fetch("/api/admin/verify-session", {
-client/src/components/SacredNav.jsx:127:                <a href="/api/logout">
-client/src/components/SacredNav.jsx:194:                <a href="/api/logout" className="mt-2 pt-2 border-t border-border/50">
-client/src/components/FeedbackPrompt.tsx:8:// Backend: posts to the existing /api/telemetry/event sink (server/routes/
-client/src/components/FeedbackPrompt.tsx:66:    void fetch("/api/telemetry/event", {
-client/src/components/NewsletterSignup.jsx:55:      const response = await fetch("/api/leads", {
-client/src/components/FeedbackWidget.jsx:81:      const res = await fetch("/api/feedback", {
-client/src/context/AuthContext.jsx:16:  const response = await fetch("/api/auth/user", {
-client/src/context/AuthContext.jsx:87:    queryKey: ["/api/auth/user"],
-client/src/context/AuthContext.jsx:128:    queryClient.setQueryData(["/api/auth/user"], null);
-client/src/context/AuthContext.jsx:134:      window.location.href = "/api/logout";
-client/src/context/AuthContext.jsx:143:      const response = await fetch("/api/auth/refresh", {
-client/src/context/GamificationContext.jsx:62:      const data = await apiRequest("GET", "/api/gamification/progress");
-client/src/context/GamificationContext.jsx:74:      const data = await apiRequest("GET", "/api/gamification/quests");
-client/src/context/GamificationContext.jsx:111:      const result = await apiRequest("POST", "/api/gamification/record-session", {
-client/src/context/GamificationContext.jsx:140:      await apiRequest("POST", "/api/gamification/complete-quest", { questId });
-client/src/features/community/Community.tsx:32:    queryKey: ["/api/community/question"],
-client/src/features/community/Community.tsx:36:    queryKey: ["/api/community/reflections"],
-client/src/features/community/Community.tsx:40:    mutationFn: (content: string) => apiRequest("POST", "/api/community/reflect", { content }),
-client/src/features/community/Community.tsx:44:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
-client/src/features/mirror/JournalMirror.tsx:59:      const res = await fetch("/api/mirror", {
-client/src/hooks/use-upload.ts:65:      const response = await fetch("/api/uploads/request-url", {
-client/src/hooks/use-upload.ts:92:      const response = await fetch(uploadURL, {
-client/src/hooks/use-upload.ts:165:      const response = await fetch("/api/uploads/request-url", {
-client/src/hooks/useAuth.js:9:  const response = await fetch("/api/auth/user", {
-client/src/hooks/useAuth.js:25:  window.location.href = "/api/logout";
-client/src/hooks/useAuth.js:31:    queryKey: ["/api/auth/user"],
-client/src/hooks/useAuth.js:40:      queryClient.setQueryData(["/api/auth/user"], null);
-client/src/hooks/useUserStats.js:6:    queryKey: ["/api/moods"],
-client/src/hooks/useUserStats.js:11:    queryKey: ["/api/journals"],
-client/src/hooks/useBuddy.ts:7: * Talks ONLY to POST /api/buddy. Server is canonical for `state`.
-client/src/hooks/useBuddy.ts:77:        const res = await fetch("/api/buddy", {
-client/src/lib/api.ts:96:  const res = await fetch(url, init);
-client/src/lib/api.ts:117:  return apiFetch("/api/ai/chat", {
-client/src/lib/api.ts:124:  return apiFetch(`/api/ai/history/${encodeURIComponent(userId)}`, {
-client/src/lib/aiChat.ts:39:  const res = await fetch("/api/ai/chat", {
-client/src/lib/aiChat.ts:52:  const res = await fetch("/api/ai/history", {
-client/src/lib/aiChat.ts:60:  const res = await fetch("/api/ai/history", {
-client/src/lib/queryClient.js:52:  const res = await fetch(url, {
-client/src/lib/queryClient.js:106:            (pathname === "/api/admin" || pathname.startsWith("/api/admin/"))
-client/src/lib/queryClient.js:115:        const res = await fetch(url, {
-client/src/lib/buddyTelemetry.ts:177:    void fetch("/api/telemetry/event", {
-client/src/services/billingClient.js:13:    const res = await fetch('/api/billing/checkout', {
-client/src/services/billingClient.js:40:    const res = await fetch('/api/billing/portal', {
-client/src/utils/LocalSync.js:110:      mood: "/api/moods",
-client/src/utils/LocalSync.js:111:      journal: "/api/journal"
-client/src/utils/LocalSync.js:119:    const response = await fetch(endpoint, {
-client/src/utils/trackSignalEvent.js:35:    fetch('/api/analytics/event', {
-client/src/lumi-backend/config/apiConfig.ts:16:  basePath: "/api/v1",
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:74:  { path: "/api/v1/mood", method: "POST", requiredPermission: "mood:create" },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:75:  { path: "/api/v1/mood", method: "GET", requiredPermission: "mood:read", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:76:  { path: "/api/v1/mood/:id", method: "DELETE", requiredPermission: "mood:delete", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:77:  { path: "/api/v1/therapy/journal", method: "POST", requiredPermission: "journal:create" },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:78:  { path: "/api/v1/therapy/journal", method: "GET", requiredPermission: "journal:read", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:79:  { path: "/api/v1/therapy/cbt/thought-record", method: "POST", requiredPermission: "cbt:create" },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:80:  { path: "/api/v1/therapy/cbt/thought-records", method: "GET", requiredPermission: "cbt:read", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:81:  { path: "/api/v1/ai/chat", method: "POST", requiredPermission: "ai:chat" },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:82:  { path: "/api/v1/ai/chat/history", method: "GET", requiredPermission: "ai:history:read", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:83:  { path: "/api/v1/ai/chat/history", method: "DELETE", requiredPermission: "ai:history:delete", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:84:  { path: "/api/v1/user/profile", method: "GET", requiredPermission: "profile:read", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:85:  { path: "/api/v1/user/profile", method: "PUT", requiredPermission: "profile:update", requiresOwnership: true },
-client/src/lumi-rbac/middleware/rbacMiddleware.ts:86:  { path: "/api/v1/user/account", method: "DELETE", requiredPermission: "profile:delete", requiresOwnership: true },
+client/src/pages/admin/BillingViewer.jsx:60:    queryKey: ['/api/admin/billing/overview'],
+client/src/pages/admin/BillingViewer.jsx:64:    queryKey: ['/api/admin/billing/subscriptions'],
+client/src/pages/admin/SystemAlerts.jsx:28:    queryKey: ['/api/health'],
+client/src/pages/admin/AdminUsers.jsx:14:    queryKey: ['/api/admin/dashboard-stats'],
+client/src/pages/admin/AdminUsers.jsx:23:    queryKey: ['/api/health'],
+client/src/pages/admin/AdminUsers.jsx:90:              onClick={() => refetch()}
+client/src/pages/admin/SocialLibrary.jsx:32:    queryKey: ["/api/admin/social/templates"],
+client/src/pages/admin/SocialLibrary.jsx:36:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/templates", data),
+client/src/pages/admin/SocialLibrary.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
+client/src/pages/admin/SocialLibrary.jsx:45:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/templates/${id}`),
+client/src/pages/admin/SocialLibrary.jsx:47:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
+client/src/pages/admin/SocialLibrary.jsx:52:    mutationFn: () => apiRequest("POST", "/api/admin/social/templates/seed"),
+client/src/pages/admin/SocialLibrary.jsx:54:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
+client/src/pages/admin/SocialLibrary.jsx:218:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/admin/AuditLogExplorer.jsx:25:    queryKey: ["/api/admin/audit-logs", { page, action, search }],
+client/src/pages/admin/AuditLogExplorer.jsx:30:      const res = await fetch(`/api/admin/audit-logs?${params}`, { credentials: "include" });
+client/src/pages/admin/AuditLogExplorer.jsx:37:    queryKey: ["/api/admin/audit-logs/actions"],
+client/src/pages/admin/AuditLogExplorer.jsx:39:      const res = await fetch("/api/admin/audit-logs/actions", { credentials: "include" });
+client/src/pages/admin/AuditLogExplorer.jsx:46:    queryKey: ["/api/admin/audit-logs/stats"],
+client/src/pages/admin/AuditLogExplorer.jsx:48:      const res = await fetch("/api/admin/audit-logs/stats", { credentials: "include" });
+client/src/pages/admin/AuditLogExplorer.jsx:62:    window.open(`/api/admin/audit-logs/export?${params}`, "_blank");
+client/src/pages/admin/AuditLogExplorer.jsx:86:          <Button variant="outline" size="sm" onClick={() => refetch()} data-testid="button-refresh">
+client/src/pages/admin/AdminPublishingToday.jsx:60:    queryKey: ['/api/admin/publishing/draft-packs'],
+client/src/pages/admin/AdminPublishingToday.jsx:62:      const res = await fetch("/api/admin/publishing/draft-packs", { credentials: "include" });
+client/src/pages/admin/AdminPublishingToday.jsx:71:    queryKey: ['/api/admin/publishing/featured'],
+client/src/pages/admin/AdminPublishingToday.jsx:73:      const res = await fetch("/api/admin/publishing/featured", { credentials: "include" });
+client/src/pages/admin/AdminPublishingToday.jsx:83:      const res = await fetch("/api/admin/publishing/featured", {
+client/src/pages/admin/AdminPublishingToday.jsx:102:      const res = await fetch(`/api/admin/publishing/mark-posted/${id}`, {
+client/src/pages/admin/SocialGenerator.jsx:78:    queryKey: ["/api/admin/social/platforms/specs"],
+client/src/pages/admin/SocialGenerator.jsx:82:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/drafts", data),
+client/src/pages/admin/SocialGenerator.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+client/src/pages/admin/SocialGenerator.jsx:90:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate", data),
+client/src/pages/admin/SocialGenerator.jsx:107:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/check", data),
+client/src/pages/admin/SocialGenerator.jsx:112:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/rewrite", data),
+client/src/pages/admin/SocialGenerator.jsx:125:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate/image", data),
+client/src/pages/admin/SocialGenerator.jsx:131:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/enhance", data),
+client/src/pages/admin/SocialAnalytics.jsx:121:    queryKey: ["/api/admin/social/analytics"],
+client/src/pages/admin/SocialAnalytics.jsx:125:    queryKey: ["/api/admin/social/drafts"],
+client/src/pages/admin/SocialAnalytics.jsx:225:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/admin/AnalyticsDashboard.jsx:14:    queryKey: ['/api/analytics/admin/summary'],
+client/src/pages/admin/AnalyticsDashboard.jsx:48:            <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
+client/src/pages/admin/SocialCalendar.jsx:54:    queryKey: ["/api/admin/social/calendar"],
+client/src/pages/admin/SocialCalendar.jsx:58:    queryKey: ["/api/admin/social/drafts"],
+client/src/pages/admin/SocialCalendar.jsx:64:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/calendar/${id}`),
+client/src/pages/admin/SocialCalendar.jsx:66:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
+client/src/pages/admin/SocialCalendar.jsx:71:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/calendar", data),
+client/src/pages/admin/SocialCalendar.jsx:73:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
+client/src/pages/admin/SocialCalendar.jsx:150:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
