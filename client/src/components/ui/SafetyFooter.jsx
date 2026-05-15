@@ -61,7 +61,7 @@ export default function SafetyFooter({
         </div>
       )}
       
-      <div className={`safety-footer__secondary mt-3 text-xs ${variant === "compact" ? "justify-center" : ""}`}>
+      <div className={`safety-footer__secondary mt-3 text-xs flex flex-wrap items-center gap-2 ${variant === "compact" ? "justify-center" : ""}`}>
         <Link href="/blog" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-blog">
           Blog
         </Link>
