@@ -1,30 +1,11 @@
 client/replit_integrations/audio/useVoiceStream.ts:33:      const response = await fetch(url, {
+client/replit_integrations/audio/index.ts:23: *       await stream.streamVoiceResponse("/api/voice-conversations/1/messages", blob);
+client/src/utils/trackSignalEvent.js:35:    fetch('/api/analytics/event', {
+client/src/utils/LocalSync.js:110:      mood: "/api/moods",
+client/src/utils/LocalSync.js:111:      journal: "/api/journal"
+client/src/utils/LocalSync.js:119:    const response = await fetch(endpoint, {
 client/analytics/index.html:34: const m = await fetch("./metrics.json",{cache:"no-store"}).then(r=>r.json());
 client/analytics/index.html:42:  const s=await fetch(`./summaries/daily-${today}.json?nocache=${Date.now()}`).then(r=>r.json());
-client/replit_integrations/audio/index.ts:23: *       await stream.streamVoiceResponse("/api/voice-conversations/1/messages", blob);
-client/analytics/healing-analytics.html:21:  const s=await fetch(`./summaries/daily-${d}-${lang}.json`).then(r=>r.json());
-client/analytics/healing-analytics.html:27: const cmp=await fetch("./charts/comparison.json").then(r=>r.json());
-client/analytics/healing-analytics.html:28: let pred={};try{pred=await fetch("./predictions/tomorrow.json").then(r=>r.json());}catch{}
-client/public/robots.txt:30:Disallow: /api/
-client/public/robots.txt:64:Disallow: /api/
-client/public/robots.txt:71:Disallow: /api/
-client/public/service-worker.js:68:  if (url.pathname.startsWith("/api/")) {
-client/public/service-worker.js:112:    const response = await fetch(request);
-client/public/service-worker.js:126:    const response = await fetch(request);
-client/public/service-worker.js:147:    const response = await fetch(request);
-client/public/service-worker.js:159:  if (url.pathname.startsWith("/api/")) return false;
-client/public/me-test.html:55:          const res = await fetch("/me", {
-client/public/auth-test.html:187:          const res = await fetch("/auth/register", {
-client/public/auth-test.html:204:          const res = await fetch("/auth/login", {
-client/public/auth-test.html:232:          const res = await fetch(path, {
-client/public/serviceWorker.js:60:  if (url.pathname.startsWith('/api/')) {
-client/public/serviceWorker.js:95:    const response = await fetch(request);
-client/public/serviceWorker.js:108:    const response = await fetch(request);
-client/public/serviceWorker.js:124:    const response = await fetch(request);
-client/public/serviceWorker.js:150:  const fetchPromise = fetch(request).then((response) => {
-client/public/serviceWorker.js:442:      const response = await fetch(entry.url, {
-client/src/utils/trackSignalEvent.js:35:    fetch('/api/analytics/event', {
-client/src/features/mirror/JournalMirror.tsx:59:      const res = await fetch("/api/mirror", {
 client/src/lumi-rbac/middleware/rbacMiddleware.ts:74:  { path: "/api/v1/mood", method: "POST", requiredPermission: "mood:create" },
 client/src/lumi-rbac/middleware/rbacMiddleware.ts:75:  { path: "/api/v1/mood", method: "GET", requiredPermission: "mood:read", requiresOwnership: true },
 client/src/lumi-rbac/middleware/rbacMiddleware.ts:76:  { path: "/api/v1/mood/:id", method: "DELETE", requiredPermission: "mood:delete", requiresOwnership: true },
@@ -38,36 +19,58 @@ client/src/lumi-rbac/middleware/rbacMiddleware.ts:83:  { path: "/api/v1/ai/chat/
 client/src/lumi-rbac/middleware/rbacMiddleware.ts:84:  { path: "/api/v1/user/profile", method: "GET", requiredPermission: "profile:read", requiresOwnership: true },
 client/src/lumi-rbac/middleware/rbacMiddleware.ts:85:  { path: "/api/v1/user/profile", method: "PUT", requiredPermission: "profile:update", requiresOwnership: true },
 client/src/lumi-rbac/middleware/rbacMiddleware.ts:86:  { path: "/api/v1/user/account", method: "DELETE", requiredPermission: "profile:delete", requiresOwnership: true },
-client/src/features/community/Community.tsx:32:    queryKey: ["/api/community/question"],
-client/src/features/community/Community.tsx:36:    queryKey: ["/api/community/reflections"],
-client/src/features/community/Community.tsx:40:    mutationFn: (content: string) => apiRequest("POST", "/api/community/reflect", { content }),
-client/src/features/community/Community.tsx:44:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
-client/src/utils/LocalSync.js:110:      mood: "/api/moods",
-client/src/utils/LocalSync.js:111:      journal: "/api/journal"
-client/src/utils/LocalSync.js:119:    const response = await fetch(endpoint, {
-client/src/context/GamificationContext.jsx:62:      const data = await apiRequest("GET", "/api/gamification/progress");
-client/src/context/GamificationContext.jsx:74:      const data = await apiRequest("GET", "/api/gamification/quests");
-client/src/context/GamificationContext.jsx:111:      const result = await apiRequest("POST", "/api/gamification/record-session", {
-client/src/context/GamificationContext.jsx:140:      await apiRequest("POST", "/api/gamification/complete-quest", { questId });
-client/src/context/AuthContext.jsx:16:  const response = await fetch("/api/auth/user", {
-client/src/context/AuthContext.jsx:87:    queryKey: ["/api/auth/user"],
-client/src/context/AuthContext.jsx:128:    queryClient.setQueryData(["/api/auth/user"], null);
-client/src/context/AuthContext.jsx:134:      window.location.href = "/api/logout";
-client/src/context/AuthContext.jsx:143:      const response = await fetch("/api/auth/refresh", {
-client/src/lumi-backend/config/apiConfig.ts:16:  basePath: "/api/v1",
+client/public/serviceWorker.js:60:  if (url.pathname.startsWith('/api/')) {
+client/public/serviceWorker.js:95:    const response = await fetch(request);
+client/public/serviceWorker.js:108:    const response = await fetch(request);
+client/public/serviceWorker.js:124:    const response = await fetch(request);
+client/public/serviceWorker.js:150:  const fetchPromise = fetch(request).then((response) => {
+client/public/serviceWorker.js:442:      const response = await fetch(entry.url, {
 client/src/services/billingClient.js:13:    const res = await fetch('/api/billing/checkout', {
 client/src/services/billingClient.js:40:    const res = await fetch('/api/billing/portal', {
+client/src/lumi-backend/config/apiConfig.ts:16:  basePath: "/api/v1",
+client/public/robots.txt:30:Disallow: /api/
+client/public/robots.txt:64:Disallow: /api/
+client/public/robots.txt:71:Disallow: /api/
 client/src/lib/buddyTelemetry.ts:177:    void fetch("/api/telemetry/event", {
+client/public/service-worker.js:68:  if (url.pathname.startsWith("/api/")) {
+client/public/service-worker.js:112:    const response = await fetch(request);
+client/public/service-worker.js:126:    const response = await fetch(request);
+client/public/service-worker.js:147:    const response = await fetch(request);
+client/public/service-worker.js:159:  if (url.pathname.startsWith("/api/")) return false;
 client/src/lib/queryClient.js:52:  const res = await fetch(url, {
 client/src/lib/queryClient.js:106:            (pathname === "/api/admin" || pathname.startsWith("/api/admin/"))
 client/src/lib/queryClient.js:115:        const res = await fetch(url, {
 client/src/lib/aiChat.ts:39:  const res = await fetch("/api/ai/chat", {
 client/src/lib/aiChat.ts:52:  const res = await fetch("/api/ai/history", {
 client/src/lib/aiChat.ts:60:  const res = await fetch("/api/ai/history", {
+client/public/me-test.html:55:          const res = await fetch("/me", {
 client/src/lib/api.ts:96:  const res = await fetch(url, init);
 client/src/lib/api.ts:117:  return apiFetch("/api/ai/chat", {
 client/src/lib/api.ts:124:  return apiFetch(`/api/ai/history/${encodeURIComponent(userId)}`, {
+client/analytics/healing-analytics.html:21:  const s=await fetch(`./summaries/daily-${d}-${lang}.json`).then(r=>r.json());
+client/analytics/healing-analytics.html:27: const cmp=await fetch("./charts/comparison.json").then(r=>r.json());
+client/analytics/healing-analytics.html:28: let pred={};try{pred=await fetch("./predictions/tomorrow.json").then(r=>r.json());}catch{}
+client/public/auth-test.html:187:          const res = await fetch("/auth/register", {
+client/public/auth-test.html:204:          const res = await fetch("/auth/login", {
+client/public/auth-test.html:232:          const res = await fetch(path, {
+client/src/hooks/useAnalytics.mjs:23:    await fetch("/api/analytics/event", {
+client/src/hooks/use-upload.ts:65:      const response = await fetch("/api/uploads/request-url", {
+client/src/hooks/use-upload.ts:92:      const response = await fetch(uploadURL, {
+client/src/hooks/use-upload.ts:165:      const response = await fetch("/api/uploads/request-url", {
+client/src/hooks/useBuddy.ts:7: * Talks ONLY to POST /api/buddy. Server is canonical for `state`.
+client/src/hooks/useBuddy.ts:77:        const res = await fetch("/api/buddy", {
+client/src/hooks/useUserStats.js:6:    queryKey: ["/api/moods"],
+client/src/hooks/useUserStats.js:11:    queryKey: ["/api/journals"],
+client/src/hooks/useAuth.js:9:  const response = await fetch("/api/auth/user", {
+client/src/hooks/useAuth.js:25:  window.location.href = "/api/logout";
+client/src/hooks/useAuth.js:31:    queryKey: ["/api/auth/user"],
+client/src/hooks/useAuth.js:40:      queryClient.setQueryData(["/api/auth/user"], null);
+client/src/features/mirror/JournalMirror.tsx:59:      const res = await fetch("/api/mirror", {
 client/src/components/FeedbackWidget.jsx:81:      const res = await fetch("/api/feedback", {
+client/src/features/community/Community.tsx:32:    queryKey: ["/api/community/question"],
+client/src/features/community/Community.tsx:36:    queryKey: ["/api/community/reflections"],
+client/src/features/community/Community.tsx:40:    mutationFn: (content: string) => apiRequest("POST", "/api/community/reflect", { content }),
+client/src/features/community/Community.tsx:44:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
 client/src/components/NewsletterSignup.jsx:55:      const response = await fetch("/api/leads", {
 client/src/components/FeedbackPrompt.tsx:8:// Backend: posts to the existing /api/telemetry/event sink (server/routes/
 client/src/components/FeedbackPrompt.tsx:66:    void fetch("/api/telemetry/event", {
@@ -78,54 +81,42 @@ client/src/components/AdminGuard.jsx:12: *      /api/admin/verify-session.
 client/src/components/AdminGuard.jsx:36:            const res = await fetch("/api/admin/verify-session", {
 client/src/components/peacescape/CustomizerPanel.jsx:36: * - Optimistic local update + PATCH /api/peacescape/state.
 client/src/components/peacescape/CustomizerPanel.jsx:64:      const res = await apiRequest("PATCH", "/api/peacescape/state", { [field]: value });
+client/src/components/Badges.jsx:194:    queryKey: ["/api/badges"],
 client/src/components/zen/ZenScape.jsx:16: * against allowlists in /api/peacescape/state). Defaults are sage/meadow/none
 client/src/components/zen/BuddyBubble.jsx:18: *     /api/ai/chat handlers.
+client/src/components/AffirmationDeck.jsx:40:    queryKey: ["/api/favorites", "affirmation"],
+client/src/components/AffirmationDeck.jsx:46:      return apiRequest("POST", "/api/favorites", {
+client/src/components/AffirmationDeck.jsx:52:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+client/src/components/AICompanion.jsx:110:        const response = await apiRequest("POST", "/api/ai/chat", { 
+client/src/components/AIChat.jsx:2:import axios from "axios";
+client/src/components/AIChat.jsx:13:    const res = await axios.post(
+client/src/components/AIChat.jsx:14:      "/api/ai/chat",
+client/src/components/AIChat.jsx:22:    const res = await axios.post("/api/ai/chat", {
+client/src/components/AchievementBadge.jsx:225:    queryKey: ["/api/progress/achievements"],
 client/src/components/wellness/WeatherMoodSync.jsx:111:      const res = await fetch(
 client/src/components/wellness/WeatherMoodSync.jsx:148:      const res = await fetch(
 client/src/components/wellness/MoodCalendar.jsx:74:    queryKey: ["/api/mood"],
+client/src/components/EmotionPieChart.jsx:44:    queryKey: ["/api/moods"],
 client/src/components/wellness/JournalAI.jsx:86:    mutationFn: (message) => apiRequest("POST", "/api/ai/chat", { message }),
 client/src/components/wellness/HealingGraph.jsx:85:    queryKey: ["/api/mood"],
-client/src/hooks/useBuddy.ts:7: * Talks ONLY to POST /api/buddy. Server is canonical for `state`.
-client/src/hooks/useBuddy.ts:77:        const res = await fetch("/api/buddy", {
-client/src/hooks/useUserStats.js:6:    queryKey: ["/api/moods"],
-client/src/hooks/useUserStats.js:11:    queryKey: ["/api/journals"],
+client/src/api/fetchWithAuth.js:21:  const res = await fetch(url, {
+client/src/api/fetchWithAuth.js:34:  const refreshRes = await fetch("/api/auth/refresh", {
+client/src/api/fetchWithAuth.js:47:  const retry = await fetch(url, {
+client/src/components/EmotionAuraRing.jsx:26:    queryKey: ["/api/moods"],
 client/src/components/wellness/EmotionLog.jsx:42:    queryKey: ["/api/mood"],
 client/src/components/wellness/EmotionLog.jsx:47:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
 client/src/components/wellness/EmotionLog.jsx:49:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
 client/src/components/wellness/EmotionLog.jsx:50:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
 client/src/components/wellness/EmotionLog.jsx:63:    mutationFn: (id) => apiRequest("DELETE", `/api/mood/${id}`),
 client/src/components/wellness/EmotionLog.jsx:65:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/hooks/useAuth.js:9:  const response = await fetch("/api/auth/user", {
-client/src/hooks/useAuth.js:25:  window.location.href = "/api/logout";
-client/src/hooks/useAuth.js:31:    queryKey: ["/api/auth/user"],
-client/src/hooks/useAuth.js:40:      queryClient.setQueryData(["/api/auth/user"], null);
-client/src/hooks/useAnalytics.mjs:23:    await fetch("/api/analytics/event", {
-client/src/hooks/use-upload.ts:65:      const response = await fetch("/api/uploads/request-url", {
-client/src/hooks/use-upload.ts:92:      const response = await fetch(uploadURL, {
-client/src/hooks/use-upload.ts:165:      const response = await fetch("/api/uploads/request-url", {
-client/src/components/state/StateTracker.tsx:91:    mutationFn: (data: Record<string, string>) => apiRequest("POST", "/api/states", data),
-client/src/components/state/StateTracker.tsx:93:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
-client/src/components/state/StateTracker.tsx:94:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/components/publishing/NewsletterInvite.jsx:18:      const res = await fetch("/api/newsletter/subscribe", {
-client/src/components/marketing/EmailCapture.jsx:25:      const res = await fetch("/api/leads", {
-client/src/components/AchievementBadge.jsx:225:    queryKey: ["/api/progress/achievements"],
-client/src/components/Badges.jsx:194:    queryKey: ["/api/badges"],
-client/src/components/AffirmationDeck.jsx:40:    queryKey: ["/api/favorites", "affirmation"],
-client/src/components/AffirmationDeck.jsx:46:      return apiRequest("POST", "/api/favorites", {
-client/src/components/AffirmationDeck.jsx:52:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
-client/src/api/fetchWithAuth.js:21:  const res = await fetch(url, {
-client/src/api/fetchWithAuth.js:34:  const refreshRes = await fetch("/api/auth/refresh", {
-client/src/api/fetchWithAuth.js:47:  const retry = await fetch(url, {
-client/src/components/AICompanion.jsx:110:        const response = await apiRequest("POST", "/api/ai/chat", { 
-client/src/components/AIChat.jsx:2:import axios from "axios";
-client/src/components/AIChat.jsx:13:    const res = await axios.post(
-client/src/components/AIChat.jsx:14:      "/api/ai/chat",
-client/src/components/AIChat.jsx:22:    const res = await axios.post("/api/ai/chat", {
+client/src/components/DataExportButton.jsx:19:    queryKey: ["/api/moods"],
+client/src/components/DataExportButton.jsx:24:    queryKey: ["/api/journal"],
+client/src/components/DailyInsight.jsx:5:    queryKey: ["/api/insights/daily"],
 client/src/pages/CanvaLanding.jsx:52:      const response = await fetch("/api/admin/verify-token", {
-client/src/components/insights/TodaysInsight.jsx:6:    queryKey: ["/api/insights/daily"],
 client/src/pages/Settings.jsx:51:        const res = await fetch("/api/user-settings", { credentials: "include" });
 client/src/pages/Settings.jsx:110:      const res = await fetch("/api/user-settings", {
 client/src/pages/Settings.jsx:160:      const response = await fetch("/api/account/export", {
+client/src/components/ChatWidget.tsx:27:      const response = await apiRequest("POST", "/api/ai/chat", {
 client/src/pages/JournalPage.jsx:101:    queryKey: ["/api/journal"],
 client/src/pages/JournalPage.jsx:111:    queryKey: ["/api/mood"],
 client/src/pages/JournalPage.jsx:120:    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
@@ -134,26 +125,36 @@ client/src/pages/JournalPage.jsx:123:      queryClient.invalidateQueries({ query
 client/src/pages/JournalPage.jsx:136:    mutationFn: (id) => apiRequest("DELETE", `/api/journal/${id}`),
 client/src/pages/JournalPage.jsx:138:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
 client/src/pages/JournalPage.jsx:139:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/components/EmotionPieChart.jsx:44:    queryKey: ["/api/moods"],
+client/src/components/MoodInsight.jsx:26:    queryKey: ["/api/insights/mood"],
+client/src/components/MoodHistoryChart.jsx:22:    queryKey: ["/api/mood/stats"],
 client/src/pages/Pricing.jsx:145:    fetch("/api/billing/pricing-view", { method: "POST", credentials: "include" }).catch(() => {});
 client/src/pages/Pricing.jsx:165:      const res = await fetch("/api/billing/checkout", {
-client/src/components/EmotionAuraRing.jsx:26:    queryKey: ["/api/moods"],
 client/src/pages/InsightsDashboard.jsx:17:    queryKey: ["/api/gratitude/weekly-summary"],
 client/src/pages/InsightsDashboard.jsx:22:    queryKey: ["/api/community/completion-stats"],
-client/src/components/DataExportButton.jsx:19:    queryKey: ["/api/moods"],
-client/src/components/DataExportButton.jsx:24:    queryKey: ["/api/journal"],
-client/src/components/DailyInsight.jsx:5:    queryKey: ["/api/insights/daily"],
+client/src/components/JournalInsights.jsx:93:    queryKey: ["/api/journals"],
+client/src/components/JournalAI.jsx:76:        const response = await apiRequest("/api/ai/analyze-journal", {
 client/src/pages/ProtocolSession.jsx:132:  const queryKey = ["/api/protocols/session", sessionId];
 client/src/pages/ProtocolSession.jsx:142:      apiRequest("POST", `/api/protocols/session/${sessionId}/respond`, payload),
 client/src/pages/ProtocolSession.jsx:151:      apiRequest("POST", `/api/protocols/session/${sessionId}/progress`, {}),
 client/src/pages/ProtocolSession.jsx:159:      apiRequest("POST", `/api/protocols/session/${sessionId}/pause`, {}),
 client/src/pages/ProtocolSession.jsx:209:            Could not load session. <button type="button" onClick={() => refetch()} className="underline">Retry</button>
+client/src/context/GamificationContext.jsx:62:      const data = await apiRequest("GET", "/api/gamification/progress");
+client/src/context/GamificationContext.jsx:74:      const data = await apiRequest("GET", "/api/gamification/quests");
+client/src/context/GamificationContext.jsx:111:      const result = await apiRequest("POST", "/api/gamification/record-session", {
+client/src/context/GamificationContext.jsx:140:      await apiRequest("POST", "/api/gamification/complete-quest", { questId });
+client/src/components/ReflectionInsights.jsx:73:    queryKey: ["/api/gratitude/weekly-summary"],
+client/src/components/ReflectionInsights.jsx:86:        const response = await apiRequest("POST", "/api/ai/weekly-reflection", {
+client/src/components/ReflectionInsights.jsx:235:              onClick={() => refetch()}
 client/src/pages/ProtocolBrowser.jsx:92:  const { data, isLoading, error } = useQuery({ queryKey: ["/api/protocols"] });
 client/src/pages/ProtocolBrowser.jsx:109:    mutationFn: async (protocolId) => apiRequest("POST", "/api/protocols/start", { protocolId }),
 client/src/pages/ProtocolBrowser.jsx:111:      queryClient.invalidateQueries({ queryKey: ["/api/protocols"] });
 client/src/pages/MirrorPage.tsx:65:      const res = await apiRequest("POST", "/api/mirror", { text, mode });
+client/src/components/ProgressTracker.jsx:29:    queryKey: ["/api/progress/stats"],
+client/src/components/ProgressTracker.jsx:34:    queryKey: ["/api/progress/achievements"],
+client/src/components/state/StateTracker.tsx:91:    mutationFn: (data: Record<string, string>) => apiRequest("POST", "/api/states", data),
+client/src/components/state/StateTracker.tsx:93:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
+client/src/components/state/StateTracker.tsx:94:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
 client/src/pages/HealthPage.jsx:11:    queryKey: ["/api/health"],
-client/src/components/ChatWidget.tsx:27:      const response = await apiRequest("POST", "/api/ai/chat", {
 client/src/pages/EliteToolsDashboard.tsx:47:    queryKey: ["/api/healing-intelligence/modalities"]
 client/src/pages/EliteToolsDashboard.tsx:51:    queryKey: ["/api/cognitive-mastery/frameworks"]
 client/src/pages/EliteToolsDashboard.tsx:55:    queryKey: ["/api/wisdom-engine/patterns"]
@@ -172,12 +173,17 @@ client/src/pages/DiscernmentDashboard.jsx:487:                progressQuery.refe
 client/src/pages/DiscernmentDashboard.jsx:488:                lessonsQuery.refetch();
 client/src/pages/DiscernmentDashboard.jsx:602:            queryClient.invalidateQueries({ queryKey: ["/api/discernment/progress"] });
 client/src/pages/DiscernmentDashboard.jsx:603:            queryClient.invalidateQueries({ queryKey: ["/api/discernment/attempts/recent"] });
-client/src/components/MoodInsight.jsx:26:    queryKey: ["/api/insights/mood"],
-client/src/components/MoodHistoryChart.jsx:22:    queryKey: ["/api/mood/stats"],
+client/src/components/ObjectUploader.jsx:57:      const presignRes = await fetch('/api/uploads/request-url', {
+client/src/components/ObjectUploader.jsx:74:      const uploadRes = await fetch(uploadURL, {
 client/src/pages/ContentStudioPage.tsx:39:    queryKey: ["/api/content/formats"],
 client/src/pages/ContentStudioPage.tsx:44:      const data = await apiRequest("POST", "/api/content/generate", {
 client/src/pages/ContentStudioPage.tsx:62:      const data = await apiRequest("POST", "/api/content/drafts", {
 client/src/pages/ContentStudioPage.tsx:71:      queryClient.invalidateQueries({ queryKey: ["/api/content/drafts"] });
+client/src/context/AuthContext.jsx:16:  const response = await fetch("/api/auth/user", {
+client/src/context/AuthContext.jsx:87:    queryKey: ["/api/auth/user"],
+client/src/context/AuthContext.jsx:128:    queryClient.setQueryData(["/api/auth/user"], null);
+client/src/context/AuthContext.jsx:134:      window.location.href = "/api/logout";
+client/src/context/AuthContext.jsx:143:      const response = await fetch("/api/auth/refresh", {
 client/src/pages/ContentAdminDashboard.jsx:77:    queryKey: ["/api/blog/admin"],
 client/src/pages/ContentAdminDashboard.jsx:155:    queryKey: ["/api/social/posts"],
 client/src/pages/ContentAdminDashboard.jsx:167:      return await apiRequest("POST", "/api/social/posts", postData);
@@ -186,9 +192,12 @@ client/src/pages/ContentAdminDashboard.jsx:320:    queryKey: ["/api/products"],
 client/src/pages/ContentAdminDashboard.jsx:334:      return await apiRequest("POST", "/api/products", productData);
 client/src/pages/ContentAdminDashboard.jsx:338:      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
 client/src/pages/ContentAdminDashboard.jsx:510:    queryKey: ["/api/content/stats"],
+client/src/components/SoftLaunchBanner.jsx:15:    fetch("/api/health")
 client/src/pages/BlogEditor.jsx:26:      fetch("/api/blog", {
 client/src/pages/BlogEditor.jsx:35:      queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
-client/src/components/JournalInsights.jsx:93:    queryKey: ["/api/journals"],
+client/src/components/ShareReflection.jsx:24:    queryKey: ["/api/journal"],
+client/src/components/ShareReflection.jsx:30:      return apiRequest("POST", "/api/community/reflections", {
+client/src/components/ShareReflection.jsx:40:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
 client/src/pages/BiometricDashboard.jsx:79:    mutationFn: async (payload) => apiRequest("POST", "/api/biometrics/upload", payload),
 client/src/pages/BiometricDashboard.jsx:83:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/latest"] });
 client/src/pages/BiometricDashboard.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] });
@@ -201,6 +210,8 @@ client/src/pages/BiometricDashboard.jsx:194:      queryClient.invalidateQueries(
 client/src/pages/BiometricDashboard.jsx:195:      queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] });
 client/src/pages/BiometricDashboard.jsx:200:    mutationFn: async () => apiRequest("POST", "/api/biometrics/state/compute", {}),
 client/src/pages/BiometricDashboard.jsx:201:    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/biometrics/state"] }),
+client/src/components/SessionTimeout.jsx:59:      await fetch("/api/session/extend", { method: "POST", credentials: "include" });
+client/src/components/SessionTimeout.jsx:103:            onClick={() => (window.location.href = "/api/logout")}
 client/src/pages/AgentInteraction.jsx:95:      apiRequest("POST", "/api/admin/consciousness/orchestrator/invoke", {
 client/src/pages/AgentInteraction.jsx:197:  const { data, isLoading } = useQuery({ queryKey: ["/api/admin/consciousness/orchestrator/memory"] });
 client/src/pages/AgentInteraction.jsx:221:    queryKey: ["/api/admin/consciousness/agents"],
@@ -214,18 +225,19 @@ client/src/pages/Admin.jsx:982:                { endpoint: "/api/chat", method: 
 client/src/pages/Admin.jsx:983:                { endpoint: "/api/journal", method: "GET", status: 200, duration: "45ms", time: "1 min ago" },
 client/src/pages/Admin.jsx:984:                { endpoint: "/api/mood", method: "POST", status: 201, duration: "67ms", time: "2 min ago" },
 client/src/pages/Admin.jsx:985:                { endpoint: "/api/user/profile", method: "GET", status: 200, duration: "23ms", time: "3 min ago" },
-client/src/components/JournalAI.jsx:76:        const response = await apiRequest("/api/ai/analyze-journal", {
-client/src/components/ReflectionInsights.jsx:73:    queryKey: ["/api/gratitude/weekly-summary"],
-client/src/components/ReflectionInsights.jsx:86:        const response = await apiRequest("POST", "/api/ai/weekly-reflection", {
-client/src/components/ReflectionInsights.jsx:235:              onClick={() => refetch()}
+client/src/components/SacredForm.jsx:34:      const response = await fetch('/api/subscribe', {
+client/src/components/publishing/NewsletterInvite.jsx:18:      const res = await fetch("/api/newsletter/subscribe", {
 client/src/pages/ForgotPassword.jsx:31:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/request", data),
+client/src/components/ReminderSettings.jsx:36:    queryKey: ["/api/user/settings"],
+client/src/components/ReminderSettings.jsx:51:      return apiRequest("PATCH", "/api/user/settings", { reminders: newSettings });
+client/src/components/ReminderSettings.jsx:59:      queryClient.invalidateQueries({ queryKey: ["/api/user/settings"] });
 client/src/pages/Upgrade.jsx:25:      const res = await fetch("/api/billing/checkout", {
+client/src/components/ReminderScheduler.jsx:43:        const response = await fetch("/api/user/settings");
+client/src/components/ReminderScheduler.jsx:62:        await fetch("/api/user/settings", {
 client/src/pages/Onboarding.tsx:69:    queryKey: ["/api/auth/user"],
 client/src/pages/Onboarding.tsx:108:      return apiRequest("POST", "/api/onboarding/complete", {
 client/src/pages/Onboarding.tsx:117:      queryClient.invalidateQueries({ queryKey: ["/api/onboarding/status"] });
 client/src/pages/BlogIndex.jsx:89:    queryKey: ["/api/blog"],
-client/src/components/ProgressTracker.jsx:29:    queryKey: ["/api/progress/stats"],
-client/src/components/ProgressTracker.jsx:34:    queryKey: ["/api/progress/achievements"],
 client/src/pages/Dashboard.jsx:31:    queryKey: ["/api/dashboard"],
 client/src/pages/Dashboard.jsx:108:            onClick={() => refetch()}
 client/src/pages/ResetPassword.jsx:59:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/confirm", {
@@ -237,6 +249,7 @@ client/src/components/admin/ConsciousnessRegistryPanel.jsx:30:    const res = aw
 client/src/components/admin/ConsciousnessRegistryPanel.jsx:141:    summaryQ.refetch();
 client/src/components/admin/ConsciousnessRegistryPanel.jsx:142:    agentsQ.refetch();
 client/src/components/admin/ConsciousnessRegistryPanel.jsx:216:            <code className="mx-1 px-1.5 py-0.5 rounded bg-white/40">/api/admin/consciousness</code>
+client/src/components/marketing/EmailCapture.jsx:25:      const res = await fetch("/api/leads", {
 client/src/components/admin/OrchestratorTestPanel.jsx:12: *     any locked v1 surface; it speaks only to /api/admin/consciousness/*.
 client/src/components/admin/OrchestratorTestPanel.jsx:60:      const r = await fetch("/api/admin/consciousness/orchestrator/memory", {
 client/src/components/admin/OrchestratorTestPanel.jsx:85:      const r = await fetch("/api/admin/consciousness/orchestrator/invoke", {
@@ -254,8 +267,6 @@ client/src/components/admin/OperationsPanel.jsx:644:    { label: "Auth (me)",   
 client/src/components/admin/OperationsPanel.jsx:645:    { label: "Kernel health", path: "/api/kernel/health",  protected: true  },
 client/src/components/admin/OperationsPanel.jsx:646:    { label: "Email health",  path: "/api/email/health",   protected: false },
 client/src/components/admin/OperationsPanel.jsx:678:            const res = await fetch(r.path, {
-client/src/pages/AdminLogin.jsx:11: * Posts the ADMIN_TOKEN to /api/admin/verify-token; on success stores the
-client/src/pages/AdminLogin.jsx:64:      const res = await fetch("/api/admin/verify-token", {
 client/src/components/admin/SOPMonitorPanel.jsx:2:// Platform SOP Monitor v1 — admin panel that surfaces /api/admin/sop/status.
 client/src/components/admin/SOPMonitorPanel.jsx:12: * 401/403 here is the SUCCESS condition for /api/admin/sop/status —
 client/src/components/admin/SOPMonitorPanel.jsx:27:  const url = "/api/admin/sop/status";
@@ -263,6 +274,8 @@ client/src/components/admin/SOPMonitorPanel.jsx:29:    const res = await fetch(u
 client/src/components/admin/SOPMonitorPanel.jsx:35:    const res = await fetch(url, {
 client/src/components/admin/SOPMonitorPanel.jsx:90:    queryKey: ["/api/admin/sop/status"],
 client/src/components/admin/SOPMonitorPanel.jsx:98:  const handleRetry = useCallback(() => { refetch(); }, [refetch]);
+client/src/pages/AdminLogin.jsx:11: * Posts the ADMIN_TOKEN to /api/admin/verify-token; on success stores the
+client/src/pages/AdminLogin.jsx:64:      const res = await fetch("/api/admin/verify-token", {
 client/src/pages/CelebrationRitual.jsx:28:    queryKey: ["/api/community/completion-stats"],
 client/src/pages/Start.tsx:402:    void fetch("/api/telemetry/event", {
 client/src/pages/Start.tsx:464:        const res = await fetch("/api/streaks/me", {
@@ -275,66 +288,50 @@ client/src/pages/DailyReflection.jsx:93:      queryClient.invalidateQueries({ qu
 client/src/pages/DailyReflection.jsx:94:      queryClient.invalidateQueries({ queryKey: ["/api/user/reflections"] });
 client/src/pages/DailyReflection.jsx:95:      queryClient.invalidateQueries({ queryKey: ["/api/user/stats"] });
 client/src/pages/DailyReflection.jsx:97:        queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
-client/src/components/ObjectUploader.jsx:57:      const presignRes = await fetch('/api/uploads/request-url', {
-client/src/components/ObjectUploader.jsx:74:      const uploadRes = await fetch(uploadURL, {
+client/src/components/VoiceSettings.jsx:55:        const response = await fetch("/api/user/settings");
+client/src/components/VoiceSettings.jsx:73:        await fetch("/api/user/settings", {
 client/src/pages/CourseCatalog.jsx:31:      return apiRequest("POST", "/api/gamification/record-session", {
 client/src/pages/CourseCatalog.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+client/src/components/insights/TodaysInsight.jsx:6:    queryKey: ["/api/insights/daily"],
 client/src/pages/PeacescapePage.jsx:35:        const res = await apiRequest("GET", "/api/peacescape/state");
 client/src/pages/CommunityHub.jsx:12:    queryKey: ["/api/community/affirmations"],
 client/src/pages/CommunityHub.jsx:17:    queryKey: ["/api/community/question"],
+client/src/components/StateTracker.jsx:68:    mutationFn: (data) => apiRequest("POST", "/api/states", data),
+client/src/components/StateTracker.jsx:70:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
+client/src/components/StateTracker.jsx:71:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
 client/src/pages/AffirmationWall.jsx:34:    queryKey: ["/api/community/affirmations"],
 client/src/pages/AffirmationWall.jsx:40:      return apiRequest("POST", "/api/community/affirmations", {
 client/src/pages/AffirmationWall.jsx:49:      queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
 client/src/pages/AffirmationWall.jsx:58:      return apiRequest("POST", `/api/community/affirmations/${id}/like`);
 client/src/pages/AffirmationWall.jsx:61:      queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
 client/src/pages/AffirmationWall.jsx:111:            onClick={() => refetch()}
-client/src/components/VoiceSettings.jsx:55:        const response = await fetch("/api/user/settings");
-client/src/components/VoiceSettings.jsx:73:        await fetch("/api/user/settings", {
 client/src/pages/GrowthPage.jsx:131:  const res = await fetch("/api/growth/journey", {
 client/src/pages/GrowthPage.jsx:445:    queryKey: ["/api/growth/journey", token ? "auth" : "guest"],
-client/src/components/SacredForm.jsx:34:      const response = await fetch('/api/subscribe', {
-client/src/components/ShareReflection.jsx:24:    queryKey: ["/api/journal"],
-client/src/components/ShareReflection.jsx:30:      return apiRequest("POST", "/api/community/reflections", {
-client/src/components/ShareReflection.jsx:40:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
-client/src/components/SessionTimeout.jsx:59:      await fetch("/api/session/extend", { method: "POST", credentials: "include" });
-client/src/components/SessionTimeout.jsx:103:            onClick={() => (window.location.href = "/api/logout")}
-client/src/components/StateTracker.jsx:68:    mutationFn: (data) => apiRequest("POST", "/api/states", data),
-client/src/components/StateTracker.jsx:70:      queryClient.invalidateQueries({ queryKey: ["/api/states"] });
-client/src/components/StateTracker.jsx:71:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
 client/src/pages/tools/WeeklyReflection.jsx:52:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/weekly-reflection", data),
-client/src/components/SoftLaunchBanner.jsx:15:    fetch("/api/health")
-client/src/components/ReminderSettings.jsx:36:    queryKey: ["/api/user/settings"],
-client/src/components/ReminderSettings.jsx:51:      return apiRequest("PATCH", "/api/user/settings", { reminders: newSettings });
-client/src/components/ReminderSettings.jsx:59:      queryClient.invalidateQueries({ queryKey: ["/api/user/settings"] });
 client/src/pages/tools/MeaningMap.jsx:34:        const res = await fetch("/api/wellness-tools/meaning-map/latest", { credentials: "include" });
 client/src/pages/tools/MeaningMap.jsx:79:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/meaning-map", data),
 client/src/pages/tools/GriefLetter.jsx:42:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/grief-letter", data),
-client/src/components/ReminderScheduler.jsx:43:        const response = await fetch("/api/user/settings");
-client/src/components/ReminderScheduler.jsx:62:        await fetch("/api/user/settings", {
-client/src/pages/Invite.jsx:24:      return apiRequest("POST", "/api/invites", { email: inviteEmail });
-client/src/pages/Invite.jsx:33:      queryClient.invalidateQueries({ queryKey: ["/api/invites"] });
-client/src/pages/Invite.jsx:34:      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
 client/src/pages/tools/CommunityCheckin.jsx:39:        const res = await fetch("/api/community/reflections", { credentials: "include" });
 client/src/pages/tools/CommunityCheckin.jsx:61:    mutationFn: (data) => apiRequest("POST", "/api/community/reflect", data),
 client/src/pages/tools/CommunityCheckin.jsx:66:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
+client/src/pages/Invite.jsx:24:      return apiRequest("POST", "/api/invites", { email: inviteEmail });
+client/src/pages/Invite.jsx:33:      queryClient.invalidateQueries({ queryKey: ["/api/invites"] });
+client/src/pages/Invite.jsx:34:      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
+client/src/pages/CommunityFeed.jsx:15:    queryKey: ["/api/community/reflections"],
+client/src/pages/CommunityFeed.jsx:79:                onClick={() => refetch()}
+client/src/pages/settings/EmailDigest.jsx:29:        const res = await fetch("/api/user-settings", { credentials: "include" });
+client/src/pages/settings/EmailDigest.jsx:57:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
 client/src/pages/CommunityCircle.jsx:23:    queryKey: ["/api/community/reflections", emotionFilter],
 client/src/pages/CommunityCircle.jsx:26:      const response = await fetch(`/api/community/reflections${params}`);
 client/src/pages/CommunityCircle.jsx:35:      return apiRequest("POST", `/api/community/reflections/${reflectionId}/heart`);
 client/src/pages/CommunityCircle.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
 client/src/pages/CommunityCircle.jsx:46:    refetch();
 client/src/pages/CommunityCircle.jsx:94:              onClick={() => refetch()}
-client/src/pages/settings/EmailDigest.jsx:29:        const res = await fetch("/api/user-settings", { credentials: "include" });
-client/src/pages/settings/EmailDigest.jsx:57:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
-client/src/pages/Reflection.jsx:123:    queryKey: ["/api/reflection/entries"],
-client/src/pages/Reflection.jsx:125:      const res = await apiRequest("GET", "/api/reflection/entries?limit=50");
-client/src/pages/Reflection.jsx:159:      return apiRequest("POST", "/api/reflection/entries", { text: reflectionText });
-client/src/pages/Reflection.jsx:162:      queryClient.invalidateQueries({ queryKey: ["/api/reflection/entries"] });
-client/src/pages/Reflection.jsx:203:      await apiRequest("POST", "/api/journal", {
-client/src/pages/Reflection.jsx:208:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
-client/src/pages/Reflection.jsx:209:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/pages/Reflection.jsx:222:      const res = await apiRequest("POST", "/api/reflection/prompt", {
 client/src/pages/settings/AIPersonality.jsx:68:        const res = await fetch("/api/user-settings", { credentials: "include" });
 client/src/pages/settings/AIPersonality.jsx:86:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+client/src/pages/CoherenceLadderPage.jsx:99:    queryKey: ["/api/wellness-tools/coherence"],
+client/src/pages/CoherenceLadderPage.jsx:103:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/coherence", data),
+client/src/pages/CoherenceLadderPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
 client/src/pages/GratitudePractice.jsx:49:    queryKey: ["/api/gratitude", "today"],
 client/src/pages/GratitudePractice.jsx:50:    queryFn: () => apiRequest("GET", "/api/gratitude/today"),
 client/src/pages/GratitudePractice.jsx:56:    queryKey: ["/api/gratitude"],
@@ -344,25 +341,37 @@ client/src/pages/GratitudePractice.jsx:64:    queryFn: () => apiRequest("GET", "
 client/src/pages/GratitudePractice.jsx:72:    mutationFn: (data) => apiRequest("POST", "/api/gratitude", data),
 client/src/pages/GratitudePractice.jsx:74:      queryClient.invalidateQueries({ queryKey: ["/api/gratitude"] });
 client/src/pages/GratitudePractice.jsx:75:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-client/src/pages/CoherenceLadderPage.jsx:99:    queryKey: ["/api/wellness-tools/coherence"],
-client/src/pages/CoherenceLadderPage.jsx:103:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/coherence", data),
-client/src/pages/CoherenceLadderPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
-client/src/pages/preferences/SafetyPreferences.jsx:69:        const res = await fetch("/api/user-settings", { credentials: "include" });
-client/src/pages/preferences/SafetyPreferences.jsx:95:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
 client/src/pages/ChallengeDay.jsx:41:    queryKey: ["/api/gamification/progress"],
 client/src/pages/ChallengeDay.jsx:67:      return apiRequest("POST", "/api/gamification/record-session", {
 client/src/pages/ChallengeDay.jsx:83:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
 client/src/pages/ChallengeDay.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
+client/src/pages/Challenge.jsx:74:        const res = await fetch("/api/wellness-tools/challenge-progress", { credentials: "include" });
+client/src/pages/Challenge.jsx:100:      const res = await fetch("/api/wellness-tools/challenge-progress", {
+client/src/pages/preferences/SafetyPreferences.jsx:69:        const res = await fetch("/api/user-settings", { credentials: "include" });
+client/src/pages/preferences/SafetyPreferences.jsx:95:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+client/src/pages/BoundariesPage.jsx:85:    queryKey: ["/api/wellness-tools/boundaries"],
+client/src/pages/BoundariesPage.jsx:89:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/boundaries", data),
+client/src/pages/BoundariesPage.jsx:91:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
+client/src/pages/BoundariesPage.jsx:103:    mutationFn: (id) => apiRequest("DELETE", `/api/wellness-tools/boundaries/${id}`),
+client/src/pages/BoundariesPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
 client/src/pages/preferences/NotificationPreferences.jsx:65:        const res = await fetch("/api/user-settings", { credentials: "include" });
 client/src/pages/preferences/NotificationPreferences.jsx:88:    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+client/src/pages/BlogPost.jsx:20:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
+client/src/pages/BlogPost.jsx:22:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
+client/src/pages/BlogPost.jsx:82:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
+client/src/pages/BlogPost.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
+client/src/pages/BlogPost.jsx:163:    queryKey: ["/api/blog", slug],
+client/src/pages/BlogPost.jsx:165:      const res = await fetch(`/api/blog/${slug}`);
+client/src/pages/Contact.jsx:27:    mutationFn: (data) => apiRequest("POST", "/api/contact", data),
+client/src/pages/BlogDraftViewer.jsx:14:    fetch(`/api/admin/publishing/draft-packs/${encodeURIComponent(id)}`, {
 client/src/pages/PracticeLibrary.jsx:33:      return apiRequest("POST", "/api/favorites", { 
 client/src/pages/PracticeLibrary.jsx:40:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+client/src/pages/Analytics.jsx:10:    queryKey: ["/api/analytics"],
+client/src/pages/Analytics.jsx:74:            onClick={() => refetch()}
 client/src/pages/pathways/ReflectionHistory.jsx:40:    queryKey: ["/api/journal"],
 client/src/pages/pathways/ReflectionHistory.jsx:44:    queryKey: ["/api/mood"],
 client/src/pages/pathways/ReflectionHistory.jsx:48:    queryKey: ["/api/gratitude"],
 client/src/pages/pathways/ReflectionHistory.jsx:52:    queryKey: ["/api/user/reflections"],
-client/src/pages/Challenge.jsx:74:        const res = await fetch("/api/wellness-tools/challenge-progress", { credentials: "include" });
-client/src/pages/Challenge.jsx:100:      const res = await fetch("/api/wellness-tools/challenge-progress", {
 client/src/pages/MovementSnacksPage.jsx:79:    queryKey: ["/api/wellness-tools/movement"],
 client/src/pages/MovementSnacksPage.jsx:83:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/movement", data),
 client/src/pages/MovementSnacksPage.jsx:85:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/movement"] });
@@ -373,42 +382,20 @@ client/src/pages/MoodPage.jsx:199:    mutationFn: (data) => apiRequest("POST", "
 client/src/pages/MoodPage.jsx:201:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
 client/src/pages/MoodPage.jsx:202:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
 client/src/pages/MoodPage.jsx:203:      queryClient.invalidateQueries({ queryKey: ["/api/analytics"] });
-client/src/pages/Contact.jsx:27:    mutationFn: (data) => apiRequest("POST", "/api/contact", data),
-client/src/pages/pathways/PathwaysHome.jsx:77:    queryKey: ["/api/pathways/progress"],
-client/src/pages/BoundariesPage.jsx:85:    queryKey: ["/api/wellness-tools/boundaries"],
-client/src/pages/BoundariesPage.jsx:89:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/boundaries", data),
-client/src/pages/BoundariesPage.jsx:91:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
-client/src/pages/BoundariesPage.jsx:103:    mutationFn: (id) => apiRequest("DELETE", `/api/wellness-tools/boundaries/${id}`),
-client/src/pages/BoundariesPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
-client/src/pages/WellnessGoals.jsx:62:      return apiRequest("POST", "/api/gamification/record-session", {
-client/src/pages/WellnessGoals.jsx:69:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
-client/src/pages/pathways/Favorites.jsx:17:    queryKey: ["/api/favorites"],
-client/src/pages/pathways/Favorites.jsx:22:    mutationFn: (id) => apiRequest("DELETE", `/api/favorites/${id}`),
-client/src/pages/pathways/Favorites.jsx:24:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
-client/src/pages/pathways/Favorites.jsx:64:          <Button onClick={() => refetch()} data-testid="button-retry">
-client/src/pages/CommunityFeed.jsx:15:    queryKey: ["/api/community/reflections"],
-client/src/pages/CommunityFeed.jsx:79:                onClick={() => refetch()}
-client/src/pages/WellnessDashboard.jsx:87:      const response = await fetch("/api/mood", {
-client/src/pages/WellnessDashboard.jsx:102:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/pages/WellnessDashboard.jsx:312:    queryKey: ["/api/mood"],
-client/src/pages/WellnessDashboard.jsx:324:    queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
-client/src/pages/ValuesFinderPage.jsx:76:    queryKey: ["/api/wellness-tools/values"],
-client/src/pages/ValuesFinderPage.jsx:80:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/values", data),
-client/src/pages/ValuesFinderPage.jsx:82:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/values"] });
-client/src/pages/Analytics.jsx:10:    queryKey: ["/api/analytics"],
-client/src/pages/Analytics.jsx:74:            onClick={() => refetch()}
 client/src/pages/admin/SecurityDashboard.jsx:15:    queryKey: ['/api/admin/security/overview'],
 client/src/pages/admin/SecurityDashboard.jsx:17:      const res = await fetch("/api/admin/security/overview", { credentials: "include" });
 client/src/pages/admin/SecurityDashboard.jsx:28:    queryKey: ['/api/admin/security/rate-limits'],
 client/src/pages/admin/SecurityDashboard.jsx:30:      const res = await fetch("/api/admin/security/rate-limits?limit=50&blockedOnly=false", { credentials: "include" });
 client/src/pages/admin/SecurityDashboard.jsx:41:    queryKey: ['/api/health'],
-client/src/pages/BlogPost.jsx:20:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
-client/src/pages/BlogPost.jsx:22:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
-client/src/pages/BlogPost.jsx:82:    mutationFn: (data) => apiRequest("POST", `/api/blog/${postId}/comments`, data),
-client/src/pages/BlogPost.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/blog", slug] });
-client/src/pages/BlogPost.jsx:163:    queryKey: ["/api/blog", slug],
-client/src/pages/BlogPost.jsx:165:      const res = await fetch(`/api/blog/${slug}`);
-client/src/pages/BlogDraftViewer.jsx:14:    fetch(`/api/admin/publishing/draft-packs/${encodeURIComponent(id)}`, {
+client/src/pages/Reflection.jsx:123:    queryKey: ["/api/reflection/entries"],
+client/src/pages/Reflection.jsx:125:      const res = await apiRequest("GET", "/api/reflection/entries?limit=50");
+client/src/pages/Reflection.jsx:159:      return apiRequest("POST", "/api/reflection/entries", { text: reflectionText });
+client/src/pages/Reflection.jsx:162:      queryClient.invalidateQueries({ queryKey: ["/api/reflection/entries"] });
+client/src/pages/Reflection.jsx:203:      await apiRequest("POST", "/api/journal", {
+client/src/pages/Reflection.jsx:208:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+client/src/pages/Reflection.jsx:209:      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+client/src/pages/Reflection.jsx:222:      const res = await apiRequest("POST", "/api/reflection/prompt", {
+client/src/pages/pathways/PathwaysHome.jsx:77:    queryKey: ["/api/pathways/progress"],
 client/src/pages/admin/AdminPublishing.jsx:86:  const { data: registryData, isLoading: regLoading, error: publishError, refetch: refetchRegistry } = useQuery({ queryKey: ["/api/admin/publishing/registry"] });
 client/src/pages/admin/AdminPublishing.jsx:87:  const { data: draftsData, isLoading: draftsLoading } = useQuery({ queryKey: ["/api/admin/publishing/drafts"] });
 client/src/pages/admin/AdminPublishing.jsx:88:  const { data: calendarData, isLoading: calLoading } = useQuery({ queryKey: ["/api/admin/publishing/calendar"] });
@@ -422,8 +409,10 @@ client/src/pages/admin/AdminPublishing.jsx:133:      queryClient.invalidateQueri
 client/src/pages/admin/AdminPublishing.jsx:152:        ? await apiRequest("PUT", `/api/blog/admin/${editingPost.id}`, formData)
 client/src/pages/admin/AdminPublishing.jsx:153:        : await apiRequest("POST", "/api/blog/admin/create", formData);
 client/src/pages/admin/AdminPublishing.jsx:157:      queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
-client/src/pages/account/Settings.jsx:37:        const res = await fetch("/api/user/settings", { credentials: "include" });
-client/src/pages/account/Settings.jsx:60:    mutationFn: (data) => apiRequest("PATCH", "/api/user/settings", data),
+client/src/pages/pathways/Favorites.jsx:17:    queryKey: ["/api/favorites"],
+client/src/pages/pathways/Favorites.jsx:22:    mutationFn: (id) => apiRequest("DELETE", `/api/favorites/${id}`),
+client/src/pages/pathways/Favorites.jsx:24:      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+client/src/pages/pathways/Favorites.jsx:64:          <Button onClick={() => refetch()} data-testid="button-retry">
 client/src/pages/admin/CommandCenter.jsx:145:    queryKey: ['/api/kernel/version'],
 client/src/pages/admin/CommandCenter.jsx:176:    queryKey: ['/api/system'],
 client/src/pages/admin/CommandCenter.jsx:330:        { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai", icon: MessageSquare, desc: "AI conversation engine" },
@@ -568,7 +557,10 @@ client/src/pages/admin/CommandCenter.jsx:1288:        let res = await fetch(ep.e
 client/src/pages/admin/CommandCenter.jsx:1293:          res = await fetch(ep.endpoint, { method: 'HEAD', credentials: 'include', signal: c2.signal });
 client/src/pages/admin/CommandCenter.jsx:1470:    queryKey: ['/api/health'],
 client/src/pages/admin/CommandCenter.jsx:1478:    queryKey: ['/api/admin/dashboard-stats'],
-client/src/pages/account/Profile.jsx:49:    mutationFn: (data) => apiRequest("PUT", "/api/account/profile", data),
+client/src/pages/WellnessDashboard.jsx:87:      const response = await fetch("/api/mood", {
+client/src/pages/WellnessDashboard.jsx:102:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/pages/WellnessDashboard.jsx:312:    queryKey: ["/api/mood"],
+client/src/pages/WellnessDashboard.jsx:324:    queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
 client/src/pages/admin/NarrativeDrafts.jsx:44:    queryKey: ['/api/narrative-drafts'],
 client/src/pages/admin/NarrativeDrafts.jsx:47:      const res = await fetch("/api/narrative-drafts", {
 client/src/pages/admin/NarrativeDrafts.jsx:62:      const res = await fetch(`/api/narrative-drafts/${postId}`, {
@@ -577,15 +569,9 @@ client/src/pages/admin/NarrativeDrafts.jsx:84:      const res = await fetch(`/ap
 client/src/pages/admin/NarrativeDrafts.jsx:100:      queryClient.invalidateQueries({ queryKey: ['/api/narrative-drafts'] });
 client/src/pages/admin/NarrativeDrafts.jsx:166:          <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
 client/src/pages/admin/NarrativeDrafts.jsx:213:              <Button variant="outline" onClick={() => refetch()} data-testid="button-retry">
-client/src/pages/account/Billing.jsx:75:    queryKey: ["/api/billing/subscription-status"],
-client/src/pages/account/Billing.jsx:79:    queryKey: ["/api/billing/invoices"],
-client/src/pages/account/Billing.jsx:98:    mutationFn: (interval) => apiRequest("POST", "/api/billing/checkout", { plan: "pro", interval: interval || billingInterval }),
-client/src/pages/account/Billing.jsx:115:    mutationFn: () => apiRequest("POST", "/api/billing/portal"),
-client/src/pages/admin/RevenueAdmin.jsx:15:    queryKey: ["/api/admin/billing/overview"],
-client/src/pages/admin/RevenueAdmin.jsx:22:    queryKey: ["/api/admin/billing/plan-distribution"],
-client/src/pages/admin/RevenueAdmin.jsx:93:              onClick={() => refetch()}
-client/src/pages/account/Subscription.jsx:24:    queryKey: ["/api/billing/subscription-status"],
-client/src/pages/account/Subscription.jsx:30:      const res = await apiRequest("/api/billing/portal", { method: "POST" });
+client/src/pages/ValuesFinderPage.jsx:76:    queryKey: ["/api/wellness-tools/values"],
+client/src/pages/ValuesFinderPage.jsx:80:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/values", data),
+client/src/pages/ValuesFinderPage.jsx:82:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/values"] });
 client/src/pages/admin/AdminTools.jsx:140:  "canva-token-expired": { suggestion: "Canva OAuth token has expired. Canva KB: OAuth tokens have limited TTL. Implement token refresh flow using the stored refresh_token. Check /api/canva-oauth/status.", action: "Refresh Canva OAuth token", knowledgeBase: "Canva", autoFixable: true, fixCommand: "restart-service" },
 client/src/pages/admin/AdminTools.jsx:239:  "load-balancer-health": { suggestion: "Load balancer health check may be failing. Canva KB: Ensure /api/health endpoint responds within 5 seconds with 200 status. Check timeout and retry settings.", action: "Verify health endpoint", knowledgeBase: "Canva", autoFixable: true, fixCommand: "warm-all" },
 client/src/pages/admin/AdminTools.jsx:288:      { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai/history", icon: MessageSquare, desc: "AI conversation engine" },
@@ -774,12 +760,6 @@ client/src/pages/admin/AdminTools.jsx:2579:                  <button onClick={()
 client/src/pages/admin/AdminTools.jsx:2582:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
 client/src/pages/admin/AdminTools.jsx:2691:      let res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
 client/src/pages/admin/AdminTools.jsx:2696:        res = await fetch(tool.endpoint, { method: 'HEAD', credentials: 'include', signal: controller2.signal });
-client/src/pages/admin/NewsletterAdmin.jsx:14:    queryKey: ["/api/blog/admin/stats"],
-client/src/pages/admin/NewsletterAdmin.jsx:19:      const res = await apiRequest("POST", "/api/blog/admin/test-send", { draftId });
-client/src/pages/admin/NewsletterAdmin.jsx:58:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-client/src/pages/account/Sessions.jsx:38:    queryKey: ['/api/account/sessions'],
-client/src/pages/account/Sessions.jsx:42:    mutationFn: (sessionId) => apiRequest("DELETE", `/api/account/sessions/${sessionId}`),
-client/src/pages/account/Sessions.jsx:44:      queryClient.invalidateQueries({ queryKey: ['/api/account/sessions'] });
 client/src/pages/admin/HealthDashboard.jsx:73:    queryKey: ["/api/admin/health", refreshKey],
 client/src/pages/admin/HealthDashboard.jsx:78:    queryKey: ["/api/admin/diagnostics", refreshKey],
 client/src/pages/admin/HealthDashboard.jsx:86:    queryKey: ["/api/admin/health-deep", refreshKey],
@@ -796,15 +776,6 @@ client/src/pages/admin/HealthDashboard.jsx:189:      const res = await apiReques
 client/src/pages/admin/HealthDashboard.jsx:194:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
 client/src/pages/admin/HealthDashboard.jsx:211:      const res = await fetch("/api/admin/health-deep/export", {
 client/src/pages/admin/HealthDashboard.jsx:242:    refetch();
-client/src/pages/account/Security.jsx:40:    queryKey: ["/api/account/security"],
-client/src/pages/account/Security.jsx:49:      return apiRequest("/api/account/2fa/setup", { method: "POST" });
-client/src/pages/account/Security.jsx:69:      return apiRequest("/api/account/2fa/verify", {
-client/src/pages/account/Security.jsx:82:      queryClient.invalidateQueries({ queryKey: ["/api/account/security"] });
-client/src/pages/account/Security.jsx:95:      return apiRequest("/api/account/2fa/disable", { method: "POST" });
-client/src/pages/account/Security.jsx:102:      queryClient.invalidateQueries({ queryKey: ["/api/account/security"] });
-client/src/pages/account/Security.jsx:140:      return apiRequest("/api/account/password", {
-client/src/pages/dashboard/MoodTracker.jsx:47:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
-client/src/pages/dashboard/MoodTracker.jsx:50:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
 client/src/pages/admin/AdminSocial.jsx:9:const API_BASE = "/api/admin/social/enterprise";
 client/src/pages/admin/AdminSocial.jsx:113:        fetch(`${API_BASE}/posts?${params}`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
 client/src/pages/admin/AdminSocial.jsx:114:        fetch(`${API_BASE}/weekly-queue`, { credentials: "include" }).then(r => r.json()).catch(() => ({ data: [] })),
@@ -820,10 +791,6 @@ client/src/pages/admin/AdminSocial.jsx:489:      const res = await fetch(`/r/cre
 client/src/pages/admin/AdminSocial.jsx:519:      await fetch(url, { method, credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
 client/src/pages/admin/AdminSocial.jsx:855:      const res = await fetch(`${API_BASE}/generate-from-blog`, {
 client/src/pages/admin/AdminSocial.jsx:923:      await fetch(`${API_BASE}/campaigns`, {
-client/src/pages/account/OrderHistory.jsx:10:    queryKey: ["/api/billing/invoices"],
-client/src/pages/account/OrderHistory.jsx:60:            <Button onClick={() => refetch()} variant="outline" data-testid="button-retry">
-client/src/pages/admin/FeedbackAggregator.jsx:25:    queryKey: ['/api/feedback'],
-client/src/pages/admin/FeedbackAggregator.jsx:100:              onClick={() => refetch()}
 client/src/pages/admin/NarrativeOpsConsole.jsx:13:const API_BASE = "/api/admin/social/enterprise";
 client/src/pages/admin/NarrativeOpsConsole.jsx:145:      const res = await fetch(buildQueryUrl(), { credentials: "include" });
 client/src/pages/admin/NarrativeOpsConsole.jsx:153:      const res = await fetch(`${API_BASE}/campaigns`, { credentials: "include" });
@@ -833,19 +800,6 @@ client/src/pages/admin/NarrativeOpsConsole.jsx:179:      const res = await fetch
 client/src/pages/admin/NarrativeOpsConsole.jsx:188:      const res = await fetch(`${API_BASE}/audit`, { credentials: "include" });
 client/src/pages/admin/NarrativeOpsConsole.jsx:195:    queryKey: ["/api/blog"],
 client/src/pages/admin/NarrativeOpsConsole.jsx:197:      const res = await fetch("/api/blog?limit=20", { credentials: "include" });
-client/src/pages/admin/EngagementDashboard.jsx:12:    queryKey: ['/api/admin/dashboard-stats'],
-client/src/pages/admin/EngagementDashboard.jsx:21:    queryKey: ['/api/health'],
-client/src/pages/admin/EngagementDashboard.jsx:42:    { name: "AI Chat Therapy", endpoint: "/api/ai", percentage: 85 },
-client/src/pages/admin/EngagementDashboard.jsx:43:    { name: "Journal System", endpoint: "/api/journal", percentage: 65 },
-client/src/pages/admin/EngagementDashboard.jsx:44:    { name: "Mood Tracker", endpoint: "/api/mood", percentage: 55 },
-client/src/pages/admin/EngagementDashboard.jsx:45:    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
-client/src/pages/admin/EngagementDashboard.jsx:46:    { name: "Daily Wisdom", endpoint: "/api/wisdom", percentage: 38 },
-client/src/pages/admin/EngagementDashboard.jsx:47:    { name: "Reflection Tools", endpoint: "/api/reflection", percentage: 32 },
-client/src/pages/admin/EngagementDashboard.jsx:48:    { name: "Gratitude Prompts", endpoint: "/api/gratitude", percentage: 28 },
-client/src/pages/admin/EngagementDashboard.jsx:49:    { name: "Mirror Reflection", endpoint: "/api/mirror", percentage: 22 },
-client/src/pages/admin/EngagementDashboard.jsx:93:              onClick={() => refetch()}
-client/src/pages/account/DeleteAccount.jsx:22:      return apiRequest('/api/account/delete-request', {
-client/src/pages/admin/ContentStudioAdmin.jsx:34:    queryKey: ['/api/health'],
 client/src/pages/admin/SocialDashboard.jsx:164:    queryKey: ["/api/social-posting/platforms/status"],
 client/src/pages/admin/SocialDashboard.jsx:283:    queryKey: ["/api/admin/social/analytics"],
 client/src/pages/admin/SocialDashboard.jsx:425:    queryKey: ["/api/admin/social/drafts"],
@@ -860,6 +814,72 @@ client/src/pages/admin/SocialDashboard.jsx:454:      queryClient.invalidateQueri
 client/src/pages/admin/SocialDashboard.jsx:461:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/publish/batch", data),
 client/src/pages/admin/SocialDashboard.jsx:463:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
 client/src/pages/admin/SocialDashboard.jsx:643:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/WellnessGoals.jsx:62:      return apiRequest("POST", "/api/gamification/record-session", {
+client/src/pages/WellnessGoals.jsx:69:      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+client/src/pages/admin/SystemAlerts.jsx:28:    queryKey: ['/api/health'],
+client/src/pages/admin/SocialLibrary.jsx:32:    queryKey: ["/api/admin/social/templates"],
+client/src/pages/admin/SocialLibrary.jsx:36:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/templates", data),
+client/src/pages/admin/SocialLibrary.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
+client/src/pages/admin/SocialLibrary.jsx:45:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/templates/${id}`),
+client/src/pages/admin/SocialLibrary.jsx:47:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
+client/src/pages/admin/SocialLibrary.jsx:52:    mutationFn: () => apiRequest("POST", "/api/admin/social/templates/seed"),
+client/src/pages/admin/SocialLibrary.jsx:54:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
+client/src/pages/admin/SocialLibrary.jsx:218:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/admin/SocialGenerator.jsx:78:    queryKey: ["/api/admin/social/platforms/specs"],
+client/src/pages/admin/SocialGenerator.jsx:82:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/drafts", data),
+client/src/pages/admin/SocialGenerator.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+client/src/pages/admin/SocialGenerator.jsx:90:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate", data),
+client/src/pages/admin/SocialGenerator.jsx:107:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/check", data),
+client/src/pages/admin/SocialGenerator.jsx:112:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/rewrite", data),
+client/src/pages/admin/SocialGenerator.jsx:125:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate/image", data),
+client/src/pages/admin/SocialGenerator.jsx:131:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/enhance", data),
+client/src/pages/admin/SocialCalendar.jsx:54:    queryKey: ["/api/admin/social/calendar"],
+client/src/pages/admin/SocialCalendar.jsx:58:    queryKey: ["/api/admin/social/drafts"],
+client/src/pages/admin/SocialCalendar.jsx:64:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/calendar/${id}`),
+client/src/pages/admin/SocialCalendar.jsx:66:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
+client/src/pages/admin/SocialCalendar.jsx:71:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/calendar", data),
+client/src/pages/admin/SocialCalendar.jsx:73:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
+client/src/pages/admin/SocialCalendar.jsx:150:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/admin/SocialAnalytics.jsx:121:    queryKey: ["/api/admin/social/analytics"],
+client/src/pages/admin/SocialAnalytics.jsx:125:    queryKey: ["/api/admin/social/drafts"],
+client/src/pages/admin/SocialAnalytics.jsx:225:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/admin/ContentStudioAdmin.jsx:34:    queryKey: ['/api/health'],
+client/src/pages/admin/RevenueAdmin.jsx:15:    queryKey: ["/api/admin/billing/overview"],
+client/src/pages/admin/RevenueAdmin.jsx:22:    queryKey: ["/api/admin/billing/plan-distribution"],
+client/src/pages/admin/RevenueAdmin.jsx:93:              onClick={() => refetch()}
+client/src/pages/admin/BillingViewer.jsx:60:    queryKey: ['/api/admin/billing/overview'],
+client/src/pages/admin/BillingViewer.jsx:64:    queryKey: ['/api/admin/billing/subscriptions'],
+client/src/pages/admin/NewsletterAdmin.jsx:14:    queryKey: ["/api/blog/admin/stats"],
+client/src/pages/admin/NewsletterAdmin.jsx:19:      const res = await apiRequest("POST", "/api/blog/admin/test-send", { draftId });
+client/src/pages/admin/NewsletterAdmin.jsx:58:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/admin/FeedbackAggregator.jsx:25:    queryKey: ['/api/feedback'],
+client/src/pages/admin/FeedbackAggregator.jsx:100:              onClick={() => refetch()}
+client/src/pages/admin/AuditLogExplorer.jsx:25:    queryKey: ["/api/admin/audit-logs", { page, action, search }],
+client/src/pages/admin/AuditLogExplorer.jsx:30:      const res = await fetch(`/api/admin/audit-logs?${params}`, { credentials: "include" });
+client/src/pages/admin/AuditLogExplorer.jsx:37:    queryKey: ["/api/admin/audit-logs/actions"],
+client/src/pages/admin/AuditLogExplorer.jsx:39:      const res = await fetch("/api/admin/audit-logs/actions", { credentials: "include" });
+client/src/pages/admin/AuditLogExplorer.jsx:46:    queryKey: ["/api/admin/audit-logs/stats"],
+client/src/pages/admin/AuditLogExplorer.jsx:48:      const res = await fetch("/api/admin/audit-logs/stats", { credentials: "include" });
+client/src/pages/admin/AuditLogExplorer.jsx:62:    window.open(`/api/admin/audit-logs/export?${params}`, "_blank");
+client/src/pages/admin/AuditLogExplorer.jsx:86:          <Button variant="outline" size="sm" onClick={() => refetch()} data-testid="button-refresh">
+client/src/pages/dashboard/MoodTracker.jsx:47:    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
+client/src/pages/dashboard/MoodTracker.jsx:50:      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+client/src/pages/admin/EngagementDashboard.jsx:12:    queryKey: ['/api/admin/dashboard-stats'],
+client/src/pages/admin/EngagementDashboard.jsx:21:    queryKey: ['/api/health'],
+client/src/pages/admin/EngagementDashboard.jsx:42:    { name: "AI Chat Therapy", endpoint: "/api/ai", percentage: 85 },
+client/src/pages/admin/EngagementDashboard.jsx:43:    { name: "Journal System", endpoint: "/api/journal", percentage: 65 },
+client/src/pages/admin/EngagementDashboard.jsx:44:    { name: "Mood Tracker", endpoint: "/api/mood", percentage: 55 },
+client/src/pages/admin/EngagementDashboard.jsx:45:    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
+client/src/pages/admin/EngagementDashboard.jsx:46:    { name: "Daily Wisdom", endpoint: "/api/wisdom", percentage: 38 },
+client/src/pages/admin/EngagementDashboard.jsx:47:    { name: "Reflection Tools", endpoint: "/api/reflection", percentage: 32 },
+client/src/pages/admin/EngagementDashboard.jsx:48:    { name: "Gratitude Prompts", endpoint: "/api/gratitude", percentage: 28 },
+client/src/pages/admin/EngagementDashboard.jsx:49:    { name: "Mirror Reflection", endpoint: "/api/mirror", percentage: 22 },
+client/src/pages/admin/EngagementDashboard.jsx:93:              onClick={() => refetch()}
+client/src/pages/dashboard/Journal.jsx:85:    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
+client/src/pages/dashboard/Journal.jsx:87:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+client/src/pages/dashboard/Journal.jsx:171:    queryKey: ["/api/journal"],
+client/src/pages/admin/AnalyticsDashboard.jsx:14:    queryKey: ['/api/analytics/admin/summary'],
+client/src/pages/admin/AnalyticsDashboard.jsx:48:            <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
 client/src/pages/dashboard/Overview.jsx:172:      queryClient.invalidateQueries({ queryKey: ["/api/billing/subscription-status"] });
 client/src/pages/dashboard/Overview.jsx:183:    queryKey: ['/api/user/stats'],
 client/src/pages/dashboard/Overview.jsx:189:    queryKey: ['/api/user/activity'],
@@ -869,54 +889,34 @@ client/src/pages/dashboard/Overview.jsx:210:      queryClient.invalidateQueries(
 client/src/pages/dashboard/Overview.jsx:211:      queryClient.invalidateQueries({ queryKey: ['/api/user/stats'] });
 client/src/pages/dashboard/Overview.jsx:243:        <button className={styles.retryButton} onClick={() => refetch()} data-testid="button-retry">
 client/src/pages/dashboard/Overview.jsx:308:                onClick={() => refetch()} 
-client/src/pages/dashboard/Journal.jsx:85:    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
-client/src/pages/dashboard/Journal.jsx:87:      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
-client/src/pages/dashboard/Journal.jsx:171:    queryKey: ["/api/journal"],
-client/src/pages/admin/BillingViewer.jsx:60:    queryKey: ['/api/admin/billing/overview'],
-client/src/pages/admin/BillingViewer.jsx:64:    queryKey: ['/api/admin/billing/subscriptions'],
-client/src/pages/admin/SystemAlerts.jsx:28:    queryKey: ['/api/health'],
 client/src/pages/admin/AdminUsers.jsx:14:    queryKey: ['/api/admin/dashboard-stats'],
 client/src/pages/admin/AdminUsers.jsx:23:    queryKey: ['/api/health'],
 client/src/pages/admin/AdminUsers.jsx:90:              onClick={() => refetch()}
-client/src/pages/admin/SocialLibrary.jsx:32:    queryKey: ["/api/admin/social/templates"],
-client/src/pages/admin/SocialLibrary.jsx:36:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/templates", data),
-client/src/pages/admin/SocialLibrary.jsx:38:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
-client/src/pages/admin/SocialLibrary.jsx:45:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/templates/${id}`),
-client/src/pages/admin/SocialLibrary.jsx:47:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
-client/src/pages/admin/SocialLibrary.jsx:52:    mutationFn: () => apiRequest("POST", "/api/admin/social/templates/seed"),
-client/src/pages/admin/SocialLibrary.jsx:54:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
-client/src/pages/admin/SocialLibrary.jsx:218:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-client/src/pages/admin/AuditLogExplorer.jsx:25:    queryKey: ["/api/admin/audit-logs", { page, action, search }],
-client/src/pages/admin/AuditLogExplorer.jsx:30:      const res = await fetch(`/api/admin/audit-logs?${params}`, { credentials: "include" });
-client/src/pages/admin/AuditLogExplorer.jsx:37:    queryKey: ["/api/admin/audit-logs/actions"],
-client/src/pages/admin/AuditLogExplorer.jsx:39:      const res = await fetch("/api/admin/audit-logs/actions", { credentials: "include" });
-client/src/pages/admin/AuditLogExplorer.jsx:46:    queryKey: ["/api/admin/audit-logs/stats"],
-client/src/pages/admin/AuditLogExplorer.jsx:48:      const res = await fetch("/api/admin/audit-logs/stats", { credentials: "include" });
-client/src/pages/admin/AuditLogExplorer.jsx:62:    window.open(`/api/admin/audit-logs/export?${params}`, "_blank");
-client/src/pages/admin/AuditLogExplorer.jsx:86:          <Button variant="outline" size="sm" onClick={() => refetch()} data-testid="button-refresh">
+client/src/pages/account/Settings.jsx:37:        const res = await fetch("/api/user/settings", { credentials: "include" });
+client/src/pages/account/Settings.jsx:60:    mutationFn: (data) => apiRequest("PATCH", "/api/user/settings", data),
 client/src/pages/admin/AdminPublishingToday.jsx:60:    queryKey: ['/api/admin/publishing/draft-packs'],
 client/src/pages/admin/AdminPublishingToday.jsx:62:      const res = await fetch("/api/admin/publishing/draft-packs", { credentials: "include" });
 client/src/pages/admin/AdminPublishingToday.jsx:71:    queryKey: ['/api/admin/publishing/featured'],
 client/src/pages/admin/AdminPublishingToday.jsx:73:      const res = await fetch("/api/admin/publishing/featured", { credentials: "include" });
 client/src/pages/admin/AdminPublishingToday.jsx:83:      const res = await fetch("/api/admin/publishing/featured", {
 client/src/pages/admin/AdminPublishingToday.jsx:102:      const res = await fetch(`/api/admin/publishing/mark-posted/${id}`, {
-client/src/pages/admin/SocialGenerator.jsx:78:    queryKey: ["/api/admin/social/platforms/specs"],
-client/src/pages/admin/SocialGenerator.jsx:82:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/drafts", data),
-client/src/pages/admin/SocialGenerator.jsx:84:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-client/src/pages/admin/SocialGenerator.jsx:90:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate", data),
-client/src/pages/admin/SocialGenerator.jsx:107:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/check", data),
-client/src/pages/admin/SocialGenerator.jsx:112:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/compliance/rewrite", data),
-client/src/pages/admin/SocialGenerator.jsx:125:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate/image", data),
-client/src/pages/admin/SocialGenerator.jsx:131:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/enhance", data),
-client/src/pages/admin/SocialAnalytics.jsx:121:    queryKey: ["/api/admin/social/analytics"],
-client/src/pages/admin/SocialAnalytics.jsx:125:    queryKey: ["/api/admin/social/drafts"],
-client/src/pages/admin/SocialAnalytics.jsx:225:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-client/src/pages/admin/AnalyticsDashboard.jsx:14:    queryKey: ['/api/analytics/admin/summary'],
-client/src/pages/admin/AnalyticsDashboard.jsx:48:            <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
-client/src/pages/admin/SocialCalendar.jsx:54:    queryKey: ["/api/admin/social/calendar"],
-client/src/pages/admin/SocialCalendar.jsx:58:    queryKey: ["/api/admin/social/drafts"],
-client/src/pages/admin/SocialCalendar.jsx:64:    mutationFn: (id) => apiRequest("DELETE", `/api/admin/social/calendar/${id}`),
-client/src/pages/admin/SocialCalendar.jsx:66:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
-client/src/pages/admin/SocialCalendar.jsx:71:    mutationFn: (data) => apiRequest("POST", "/api/admin/social/calendar", data),
-client/src/pages/admin/SocialCalendar.jsx:73:      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/calendar"] });
-client/src/pages/admin/SocialCalendar.jsx:150:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/account/Profile.jsx:49:    mutationFn: (data) => apiRequest("PUT", "/api/account/profile", data),
+client/src/pages/account/Sessions.jsx:38:    queryKey: ['/api/account/sessions'],
+client/src/pages/account/Sessions.jsx:42:    mutationFn: (sessionId) => apiRequest("DELETE", `/api/account/sessions/${sessionId}`),
+client/src/pages/account/Sessions.jsx:44:      queryClient.invalidateQueries({ queryKey: ['/api/account/sessions'] });
+client/src/pages/account/OrderHistory.jsx:10:    queryKey: ["/api/billing/invoices"],
+client/src/pages/account/OrderHistory.jsx:60:            <Button onClick={() => refetch()} variant="outline" data-testid="button-retry">
+client/src/pages/account/Billing.jsx:75:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Billing.jsx:79:    queryKey: ["/api/billing/invoices"],
+client/src/pages/account/Billing.jsx:98:    mutationFn: (interval) => apiRequest("POST", "/api/billing/checkout", { plan: "pro", interval: interval || billingInterval }),
+client/src/pages/account/Billing.jsx:115:    mutationFn: () => apiRequest("POST", "/api/billing/portal"),
+client/src/pages/account/DeleteAccount.jsx:22:      return apiRequest('/api/account/delete-request', {
+client/src/pages/account/Security.jsx:40:    queryKey: ["/api/account/security"],
+client/src/pages/account/Security.jsx:49:      return apiRequest("/api/account/2fa/setup", { method: "POST" });
+client/src/pages/account/Security.jsx:69:      return apiRequest("/api/account/2fa/verify", {
+client/src/pages/account/Security.jsx:82:      queryClient.invalidateQueries({ queryKey: ["/api/account/security"] });
+client/src/pages/account/Security.jsx:95:      return apiRequest("/api/account/2fa/disable", { method: "POST" });
+client/src/pages/account/Security.jsx:102:      queryClient.invalidateQueries({ queryKey: ["/api/account/security"] });
+client/src/pages/account/Security.jsx:140:      return apiRequest("/api/account/password", {
+client/src/pages/account/Subscription.jsx:24:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Subscription.jsx:30:      const res = await apiRequest("/api/billing/portal", { method: "POST" });

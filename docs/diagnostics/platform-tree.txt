@@ -1297,9 +1297,11 @@
 ./attached_assets/Pasted-V33-OMEGA-FINAL-MASTER-PROMPT-INFINITY-ENGINE-MyMentalH_1778643984883.txt
 ./attached_assets/Pasted-V33-OMEGA-TRANSCENDENCE-PROMPT-HEART-MIND-SOUL-UNITY-My_1778643935055.txt
 ./attached_assets/Pasted-V33-OMEGA-TRANSCENDENCE-PROMPT-HEART-MIND-SOUL-UNITY-My_1778823862873.txt
+./attached_assets/Pasted-V34-GOVERNED-EXECUTION-PROMPT-MyMentalHealthBuddy-Finit_1778830765754.txt
 ./attached_assets/Pasted-V34-OMEGA-SUPREME-MASTER-PROMPT-MyMentalHealthBuddy-MMH_1778643994311.txt
 ./attached_assets/Pasted-V34-OMEGA-SUPREME-MASTER-PROMPT-MyMentalHealthBuddy-MMH_1778651169291.txt
 ./attached_assets/Pasted-V34-OMEGA-SUPREME-MASTER-PROMPT-MyMentalHealthBuddy-MMH_1778698807520.txt
+./attached_assets/Pasted-V35-ALL-REPLIT-PROMPTS-Complete-Collection-MyMentalHeal_1778831257791.txt
 ./attached_assets/Pasted-v5-8-72-Review-EXCELLENT-All-7-Pages-Now-Render-Canonic_1778823116973.txt
 ./attached_assets/Pasted-VISUAL-SYSTEM-UNIFICATION-HX-OS-vNEXT-CSS-TOKENS-ON-ALL_1778815353483.txt
 ./attached_assets/Pasted-VISUAL-SYSTEM-UNIFICATION-HX-OS-vNEXT-TOKENS-ACROSS-ALL_1778804685701.txt
@@ -1918,6 +1920,7 @@
 ./docs/DEVELOPER_GUIDE_v5.1.md
 ./docs/diagnostics
 ./docs/diagnostics/code-files.txt
+./docs/diagnostics/domain-scan.txt
 ./docs/diagnostics/frontend-api-scan.txt
 ./docs/diagnostics/package.json.txt
 ./docs/diagnostics/PLATFORM_ANALYSIS_REPORT.md
@@ -1925,6 +1928,7 @@
 ./docs/diagnostics/replit-nix.txt
 ./docs/diagnostics/replit.txt
 ./docs/diagnostics/runtime-scan.txt
+./docs/diagnostics/SUMMARY.txt
 ./docs/DRIFT_SCAN.md
 ./docs/DRY-RUN-AUDIT-REPORT.md
 ./docs/DUPLICATE_PREVENTION.md
@@ -2351,6 +2355,7 @@
 ./prompt-os-kernel/schemas/promptspec.schema.json
 ./prompt-os-kernel/scripts
 ./prompt-os-kernel/scripts/verify-platform-kernel.mjs
+./prompt-os/v34-governed-execution.md
 ./public
 ./public/ai-chat.html
 ./public/analytics.json
