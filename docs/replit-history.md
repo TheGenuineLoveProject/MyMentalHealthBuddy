@@ -4,6 +4,23 @@ This file holds the one-line index entries for releases **older than v5.8.65**, 
 
 For the active index of recent releases (v5.8.65 → current), see `replit.md` → "Polish & Feature History".
 
+### v5.8.86 – v5.8.99 (archived from replit.md by v5.8.110)
+
+- **v5.8.99** (2026-05-15) — `components/Badges.jsx` (V47 iter 5): 1-line gradient hex swap — legacy `#8fbf9f`→`#A8C9A0`, `#d4af37`→`#FFD93D` (canonical sage + sunshine).
+- **v5.8.98** (2026-05-15) — `pages/Pricing.jsx` (V47 iter 4): 1-line wrapper fix — prepended `hxos-vnext` token-scope class + corrected fallback hex to canonical `#F7F1E8`.
+- **v5.8.97** (2026-05-15) — `replit.md` (V47 iter 3): audit-only EXIT — wider/deeper sweep CONFIRMED EXHAUSTION, 12/12 routes 200, V47 mission COMPLETE.
+- **v5.8.96** (2026-05-15) — `components/NewsletterSignup.jsx` + `content/routes.js` (V47 iter 2): 2-line href fix — 2 dead `/blog/welcome-to-genuine-love` refs redirected to `/about` and `/blog`.
+- **v5.8.95** (2026-05-15) — `components/BrandShell.jsx` (V47 iter 1): 1-char href swap — Mood button `/checkin`→`/mood` (copy-paste bug from v5.8.75).
+- **v5.8.94** (2026-05-15) — `replit.md` + `docs/replit-history.md` (V45 ACTION 2): row archival — collapsed 5 rows v5.8.80–v5.8.85 to 1-line summaries; replit.md 75L → ~71L.
+- **v5.8.93** (2026-05-15) — `replit.md` + `docs/architecture.md` (V45 C1c): Quick Reference extraction — 20L block → architecture.md appendix; 1-line dual-pointer in trailer; 94L → 75L.
+- **v5.8.92** (2026-05-15) — `.archive/avatar-core/source/` + V44 governance ratified: mass-archived remaining root SOURCE tree (9 subdirs, 22 files, ~22M) in 1 op.
+- **v5.8.91** (2026-05-15) — `.archive/avatar-core/source/raw/` + `./avatar-core/raw/`: V43 C2 iter #1 — archived largest source file `MMHB_FLOAT_IDLE_UNIT_v1_raw.png` (1.5M); active mirror untouched.
+- **v5.8.90** (2026-05-15) — `replit.md` (V41 C1 iter) + `docs/changelog.md` (+62L): v5.8.86 cell-trim (~2528 chars → 1-sentence). Honest finding: V41's "30-40 lines saved per iter" structurally impossible.
+- **v5.8.89** (2026-05-15) — `replit.md` + `docs/architecture.md` (NEW) (V38 C1 iter #3): System Architecture extraction — 50L narrative → architecture.md; 137L → 91L (−46).
+- **v5.8.88** (2026-05-15) — `replit.md` + `docs/replit-history.md` (V38 Cycle 1 iter #2): row archival — 15 rows v5.8.65–v5.8.79 archived; 151L → 136L (−15).
+- **v5.8.87** (2026-05-15) — `replit.md` + `docs/changelog.md` + `.local/zombies/` (V38 Tier C trim): v5.8.84 detail (2437 chars) → changelog; v5.8.86 archives moved to `.local/zombies/`.
+- **v5.8.86** (2026-05-15) — `server/` (zombie boot scaffold archive — 3 mv + 1 rm): archived `server/{index,dev}.mjs` + deleted 0-byte `server/app.ts` + orphan `server/tests/vitest.setup.mjs`. Single canonical entrypoint `server/app.mjs`.
+
 ## Index entries v5.8.65 – v5.8.79 (archived from replit.md on 2026-05-15 in v5.8.88)
 
 | Version | Date | Modules | Key Change |
