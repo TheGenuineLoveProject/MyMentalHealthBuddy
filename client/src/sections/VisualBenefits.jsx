@@ -44,8 +44,10 @@ const BENEFITS = [
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-relief.png',
     imageWebp: '/brand/v17/benefit-relief.webp',
-    avatar: '/brand/v17/avatar-breathing.png',
-    avatarWebp: '/brand/v17/avatar-breathing.webp',
+    // v5.8.71 — avatar overlay swapped to canonical LUMI_MEDITATION
+    // (seated meditating Lumi with aura rings) per V25 pose mapping.
+    avatar: '/lumi/official/lumi-meditation.png',
+    avatarWebp: undefined,
     icon: Wind,
     iconLabel: 'Calm breath',
     cta: { label: 'Breathe With Lumi', href: '/tools/breathing' },
@@ -62,8 +64,10 @@ const BENEFITS = [
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-understanding.png',
     imageWebp: '/brand/v17/benefit-understanding.webp',
-    avatar: '/brand/v17/avatar-heart.png',
-    avatarWebp: '/brand/v17/avatar-heart.webp',
+    // v5.8.71 — avatar overlay swapped to canonical LUMI_HEART
+    // (standing Lumi with glowing heart) per V25 pose mapping.
+    avatar: '/lumi/official/lumi-heart.png',
+    avatarWebp: undefined,
     icon: Heart,
     iconLabel: 'Self awareness',
     cta: { label: 'Check In Gently', href: '/checkin' },
@@ -82,8 +86,11 @@ const BENEFITS = [
     // holding glowing heart) supplied in the same drop.
     image: '/brand/v17/benefit-companionship.png',
     imageWebp: '/brand/v17/benefit-companionship.webp',
-    avatar: '/brand/v17/avatar-heart.png',
-    avatarWebp: '/brand/v17/avatar-heart.webp',
+    // v5.8.71 — avatar overlay swapped to canonical LUMI_COMPANION
+    // (seated halo Lumi — registry desc exact match for POSE A Halo Prayer)
+    // per V25 pose mapping.
+    avatar: '/lumi/official/lumi-companion.png',
+    avatarWebp: undefined,
     icon: Users,
     iconLabel: 'Warm presence',
     cta: { label: 'Say Hello to Lumi', href: '/companion' },
@@ -100,8 +107,10 @@ const BENEFITS = [
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-growth.png',
     imageWebp: '/brand/v17/benefit-growth.webp',
-    avatar: '/brand/v17/avatar-floating.png',
-    avatarWebp: '/brand/v17/avatar-floating.webp',
+    // v5.8.71 — avatar overlay swapped to canonical LUMI_PATH
+    // (walking-path Lumi) per V25 pose mapping POSE F.
+    avatar: '/lumi/official/lumi-path.png',
+    avatarWebp: undefined,
     icon: Sparkles,
     iconLabel: 'Personal growth',
     cta: { label: 'Meet Your Companion', href: '/celebration' },
