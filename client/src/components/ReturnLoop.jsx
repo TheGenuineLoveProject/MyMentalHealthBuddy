@@ -25,9 +25,15 @@
  *   - Dismiss button has explicit aria-label
  *   - prefers-reduced-motion: slide-down replaced with instant appearance
  */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Heart, X, ArrowRight } from "lucide-react";
+// P6 Path B (v5.8.80): first production consumer of the Phase 16 Reflective
+// Memory Layer. Hardened router; writes are silently rejected when consent
+// state is "unset" / "declined" / "revoked" — that's intentional. Pre-opt-in
+// users keep the v5.6 random-pick behavior; opt-in users get tier-aware
+// welcome based on time since their last visit.
+import { readMemory, writeMemory } from "@/lumi-memory";
 
 const VISIT_COUNT_KEY = "mmhb_visit_count";
 const COUNTED_THIS_SESSION_KEY = "mmhb:visit_counted_this_session";
@@ -50,6 +56,28 @@ const MESSAGES = [
   { text: "Your willingness to feel — that IS courage.", accent: "rose" },
   { text: "You don't have to be perfect to be worthy of care.", accent: "mint" },
 ];
+
+// P6 Path B (v5.8.80): tier-pool indices into MESSAGES — preserves all 10
+// messages, none orphaned. Mapping reflects emotional cadence:
+//   <1d  (same-day)  → light/casual rotation
+//   1-7d (weekly)    → belonging + worthiness
+//   7+d  (after gap) → held-through-absence, no guilt
+const TIER_SHORT  = [0, 2, 3];        // sage / lavender / mint
+const TIER_MEDIUM = [1, 5, 9];        // gold / lavender / mint
+const TIER_LONG   = [4, 6, 7, 8];     // rose / sage / gold / rose
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function pickFromTier(tier) {
+  return MESSAGES[tier[Math.floor(Math.random() * tier.length)]];
+}
+function pickByDays(days) {
+  // Tier boundaries: <1d short, <7d medium, >=7d long.
+  // Spec literal "7+ days" => day-7 routes to long (architect-flagged
+  // disjoint-bucket clarity in v5.8.80 review).
+  if (days < 1) return pickFromTier(TIER_SHORT);
+  if (days < 7) return pickFromTier(TIER_MEDIUM);
+  return pickFromTier(TIER_LONG);
+}
 
 // Canonical 8-hex brand palette (per replit.md universal contracts).
 const ACCENT_TOKENS = {
@@ -84,10 +112,12 @@ export default function ReturnLoop() {
   const [visible, setVisible] = useState(false);
   const [location] = useLocation();
 
-  // Pick a stable random message for the lifetime of the component.
-  const message = useMemo(
-    () => MESSAGES[Math.floor(Math.random() * MESSAGES.length)],
-    []
+  // P6 Path B (v5.8.80): message starts random; if Phase 16 memory yields a
+  // prior `lastSessionAt`, the effect below replaces it with a tier-aware
+  // pick. When consent is unset/declined the random fallback is what ships
+  // (identical to v5.6 — no UX regression for non-opt-in users).
+  const [message, setMessage] = useState(
+    () => MESSAGES[Math.floor(Math.random() * MESSAGES.length)]
   );
 
   useEffect(() => {
@@ -103,6 +133,26 @@ export default function ReturnLoop() {
 
     const count = parseInt(readLocal(VISIT_COUNT_KEY) || "0", 10) || 0;
     if (count < 2) return;
+
+    // P6 Path B (v5.8.80): tier-aware welcome via Phase 16 lumi-memory.
+    // Order matters — read PRIOR `lastSessionAt` first so days-since-last
+    // reflects the previous visit, THEN write fresh timestamp. writeMemory
+    // is silently rejected without consent (no throw, audit-logged) — that
+    // path is intentional; consent gate is owned by MemorySettingsPanel.
+    try {
+      const memory = readMemory();
+      const lastIso = memory.lastSessionAt;
+      if (lastIso) {
+        const last = Date.parse(lastIso);
+        if (!Number.isNaN(last)) {
+          const days = Math.floor((Date.now() - last) / DAY_MS);
+          if (days >= 0) setMessage(pickByDays(days));
+        }
+      }
+      writeMemory("lastSessionAt", new Date().toISOString());
+    } catch {
+      /* lumi-memory unavailable — keep random fallback (v5.6 behavior) */
+    }
 
     const t = window.setTimeout(() => setVisible(true), 800);
     return () => window.clearTimeout(t);

@@ -7,6 +7,7 @@
  */
 
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 import {
   ALLOWED_MEMORY_FIELDS,
   type AllowedMemoryField,
@@ -96,7 +97,15 @@ export function makeAuditEntry(kind: AuditEntry["kind"], opts: { field?: string;
   };
 }
 
-export const useMemoryStore = create<MemoryState & MemoryActions>((set) => ({
+// v5.8.80: persist consent + entries (NOT audit — audit is ephemeral
+// diagnostic, would grow unbounded across reloads and bloat localStorage).
+// Without this, `lastSessionAt` evaporates on every reload and the entire
+// continuity contract (30-day retention, welcome-back tiering, consent
+// durability) is meaningless. Architect-flagged primary functional gap
+// in P6 Path B v5.8.80 review.
+export const useMemoryStore = create<MemoryState & MemoryActions>()(
+  persist(
+    (set) => ({
   ...initialState,
 
   _setConsent(next) {
@@ -155,7 +164,19 @@ export const useMemoryStore = create<MemoryState & MemoryActions>((set) => ({
   reset() {
     set(() => ({ ...initialState, audit: [makeAuditEntry("reset")] }));
   },
-}));
+}),
+    {
+      name: "mmhb-lumi-memory-v1",
+      storage: createJSONStorage(() => localStorage),
+      // Persist consent + entries only. Audit stays in-memory: it's
+      // diagnostic, capped at MAX_AUDIT_ENTRIES per session, and persisting
+      // it would (a) bloat localStorage and (b) leak rejection metadata
+      // (e.g. forbidden-pattern category hints) across reloads.
+      partialize: (s) => ({ consent: s.consent, entries: s.entries }),
+      version: 1,
+    },
+  ),
+);
 
 // ─── Selectors (INTERNAL — module-private) ──────────────────────────────────
 // External callers MUST use the read-only hooks exported from

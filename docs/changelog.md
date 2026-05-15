@@ -1,3 +1,108 @@
+# v5.8.80 — P6 Path B: Emotional Continuity (ReturnLoop ↔ Phase 16 lumi-memory wiring)
+
+Date: 2026-05-15
+Cycle: V34 GOVERNED EXECUTION — V35 P6 (Emotional Continuity System)
+Files changed: 3 (`client/src/components/ReturnLoop.jsx`, `client/src/lumi-memory/state/memoryStore.ts`, `replit.md`)
+
+## Architect-driven follow-up (post-review hardening, same cycle)
+
+Architect review of the initial wiring caught one severity-medium primary functional gap and one minor spec-clarity issue. Both fixed in-cycle before STOP:
+
+1. **Persistence (severity: medium-high).** `client/src/lumi-memory/state/memoryStore.ts` used Zustand 5 `create()` with NO persist middleware. Result: `lastSessionAt` (and consent) would have evaporated on every page reload — making the entire P6 wiring effectively dead in production despite the contract claims of 30-day retention + durable consent. Fixed by wrapping `create<T>()(persist(...))` with `createJSONStorage(() => localStorage)`, name `mmhb-lumi-memory-v1`, version 1, and a `partialize` selector that persists only `consent` + `entries` (audit stays in-memory: it's diagnostic, capped at MAX_AUDIT_ENTRIES per session, and persisting it would (a) bloat localStorage and (b) leak rejection metadata e.g. forbidden-pattern category hints across reloads).
+2. **Tier boundary disjointness (minor).** Initial implementation: `<1` short / `<=7` medium / else long. Spec literal "7+ days" → day-7 should land in long, not medium. Tightened to `<1` / `<7` / else so buckets are disjoint and match spec wording.
+
+Architect also confirmed: read-before-write ordering correct, try/catch breadth appropriate for non-critical enhancement, days-calc safe against future-clock skew (`if (days >= 0)` guards it), no privacy/consent bypass, no need for explicit 30-day cap (auto-prune handles it), useMemo→useState change appropriate, DUPLICATION_GATE correctly honored.
+
+## Hard truth uncovered during INSPECT
+
+V35 P6 spec asked for: emotion memory store + return detection + tiered welcome responses + journey tracking. INSPECT discovered the **entire Phase 16 Reflective Memory Layer** at `client/src/lumi-memory/` is fully built — hardened router with consent gate / retention enforcement (30 days for `lastSessionAt`) / forbidden-pattern scan / audit trail / type-checked allowed-fields surface (`preferredTools`, `preferredPacing`, `preferredGreetingTone`, `lastSessionAt`, `ephemeralSessionHint`) / `continuityEngine.ts` with `buildGreeting`/`pickPacing`/`buildHints` already deriving `daysSinceLast` for a `welcome-back` hint kind / `MemorySettingsPanel` + `MemoryTransparencyView` + `MemoryResetButton` components. **Zero production callers.** Every public API (`writeMemory`, `readMemory`, `setConsent`, `resetMemory`, `buildGreeting`, `buildHints`, `pickPacing`) had only test-suite call sites. Phase 16 was finished but never plugged in.
+
+P6 was therefore not a build cycle — it was a wiring cycle. ReturnLoop (the only live continuity surface, mounted `App.jsx` L385) was visit-count based with random message picks from a flat 10-item pool, with no awareness of time-since-last-visit.
+
+## Gap (one sentence)
+
+ReturnLoop picks the same flat pool of welcome-back messages whether you have been gone 5 minutes or 30 days, because nothing writes a `lastSessionAt` timestamp anywhere in the live execution path.
+
+## Smallest valid engine
+
+Path B (chosen by user over Path A=local-only / Path C=both / stop): wire ReturnLoop through the dormant Phase 16 router. 1 file. ~50 net lines. No new modules (DUPLICATION_GATE compliance — declined to create the user-suggested `emotionMemory.ts` since `lumi-memory` already covers the surface).
+
+## Edits
+
+### ReturnLoop.jsx — import surface
+
+- Removed unused `useMemo` from `react` import
+- Added `import { readMemory, writeMemory } from "@/lumi-memory"` with 5-line comment documenting consent semantics (writes silently rejected when consent unset/declined — that is the intended path; pre-opt-in users keep v5.6 random behavior)
+
+### ReturnLoop.jsx — tier pools (module scope)
+
+Three index arrays mapping into the existing 10-message `MESSAGES` array. No new copy. All 10 messages remain reachable across tiers:
+
+| Tier | Trigger | Indices | Tone | Messages |
+|---|---|---|---|---|
+| `TIER_SHORT`  | `<1d` (same-day)  | `[0, 2, 3]`    | sage / lavender / mint | "How has your heart been feeling today?" / "One moment at a time." / "Lumi missed you." |
+| `TIER_MEDIUM` | `1-7d` (weekly)   | `[1, 5, 9]`    | gold / lavender / mint | "I am glad you came back today." / "Wisdom inside you." / "You do not have to be perfect." |
+| `TIER_LONG`   | `7+d` (after gap) | `[4, 6, 7, 8]` | rose / sage / gold / rose | "However you are feeling — it is okay." / "You have not given up on yourself." / "You have survived every hard day." / "Willingness to feel — that IS courage." |
+
+Helpers: `pickFromTier(tier)` → `MESSAGES[tier[Math.floor(Math.random() * tier.length)]]`. `pickByDays(days)` → routes `<1` / `<=7` / else. `DAY_MS = 24*60*60*1000`.
+
+### ReturnLoop.jsx — message state
+
+- Was: `useMemo(() => MESSAGES[Math.floor(Math.random() * MESSAGES.length)], [])`
+- Now: `useState(() => MESSAGES[Math.floor(Math.random() * MESSAGES.length)])` so the effect can replace it after reading prior `lastSessionAt`. Initial value preserves v5.6 behavior for SSR / pre-effect render / no-consent users.
+
+### ReturnLoop.jsx — useEffect (visit-count gate path)
+
+After the existing `count >= 2` gate, before the visibility `setTimeout`:
+
+```js
+try {
+  const memory = readMemory();
+  const lastIso = memory.lastSessionAt;
+  if (lastIso) {
+    const last = Date.parse(lastIso);
+    if (!Number.isNaN(last)) {
+      const days = Math.floor((Date.now() - last) / DAY_MS);
+      if (days >= 0) setMessage(pickByDays(days));
+    }
+  }
+  writeMemory("lastSessionAt", new Date().toISOString());
+} catch {
+  /* lumi-memory unavailable — keep random fallback (v5.6 behavior) */
+}
+```
+
+Critical ordering: `readMemory()` BEFORE `writeMemory()` so days-since-last reflects the previous visit, not now. `try/catch` guards against router import failure / store crash; falls back cleanly to the random initial state.
+
+## Verify gates (all green)
+
+- BUILD_GATE: `npm run build` → `✓ built in 19.06s`
+- TSC_GATE: `npx tsc --noEmit` → 0 errors
+- HEALTH_GATE: `/health` → `{"ok":true,"service":"mymmentalhealthbuddy"}` ; `/ready` → `{"ok":true}`
+- ROUTE_GATE: `/`, `/chat`, `/crisis` → HTTP 200
+- ROLLBACK_GATE: single-file revert reverts cleanly since Phase 16 lumi-memory layer was already idle and remains idle without ReturnLoop reading it
+- DUPLICATION_GATE: zero new modules; declined user-suggested `emotionMemory.ts` since `lumi-memory` covers the field shape
+
+## Privacy / consent posture
+
+- All writes flow through hardened router → consent gate → field allow-list → forbidden-pattern scan → audit log
+- `INITIAL_CONSENT.state === "unset"` → writes blocked by router until user opts in via `MemorySettingsPanel` (which is built but not yet mounted on a public route — that is a separate cycle)
+- Pre-opt-in users: `readMemory()` returns `{}`, `setMessage` never called, random fallback ships → identical to v5.6 UX
+- Post-opt-in users: tier-aware welcome activates on next visit (first opt-in visit still random because `lastSessionAt` is undefined on first read)
+- 30-day retention auto-prunes `lastSessionAt` → users gone >30 days re-enter the random pool, never see "gone X days" framing past that horizon
+- No streak data persisted, no guilt copy, no reference to absence beyond the warm long-tier message bank — V35 P6 constraint satisfied
+
+## What was deferred
+
+- Mounting `MemorySettingsPanel` on a settings route to expose the consent flow (separate cycle, requires UX placement decision)
+- Emotional journey progress tracking + visualization (V35 P6 T4 — would duplicate existing `EmotionalJourney.jsx` section + `GrowthTimeline` + `progressStore.ts`; per user "DO NOT build everything")
+- New `emotionMemory.ts` file (would create 3rd memory layer counting ReturnLoop legacy + lumi-memory; DUPLICATION_GATE declined)
+- `lumiEmotionMap.ts` integration with continuity (P6 T4 mentioned this; lumi-emotion is render-state, not persistence — separate concern)
+- LumiV7 emotion-pilot on /chat (deferred from v5.8.79)
+- V35 P3, P7, P8, P9, P10 + LUMI_PATH sprout walking-path commission
+
+---
+
 ## v5.8.79 — LumiV7 P4 T4 emotion wiring (Avatar Life System Phase 1 — emotion-derived eye/mouth)
 
   **Context:** V35 Prompt 4 ("Avatar Life System Phase 1 — Eye Coordination") asked for 4 eye CSS classes + tracking + blinking + emotion wiring on `LumiV6.tsx`. V34 Phase 0 INSPECT found the V35 spec was outdated against the codebase: T1-T3 already shipped in `LumiV7.jsx` against the same V32 spec. Only T4 (emotion wiring) was genuinely missing.
