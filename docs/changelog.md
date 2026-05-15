@@ -1,3 +1,117 @@
+# v5.8.83 — P7 Avatar Life System Phase 3: Arm & Leg Movement (emotion derivation completion)
+
+Date: 2026-05-15
+Cycle: V34 GOVERNED EXECUTION — V35 Prompt 7
+Files changed: 2 (`client/src/components/lumi/LumiV7.jsx`, `replit.md`)
+
+## Hard truth uncovered during INSPECT
+
+P7 — per V35 Prompt 7 spec — calls for "6 arm poses, 5 leg poses, ±30° rotation, 800ms transition, 5 body postures, CSS-only, prefers-reduced-motion + crisis stillness, target LumiV6.tsx." Direct file read of `client/src/components/lumi/LumiV7.css` lines 116-241 found:
+
+- ✅ All 6 arm pose classes shipped (`.lumi-arm--rest|wave|hug|point|present|heart`)
+- ✅ All 5 leg pose classes shipped (`.lumi-leg--rest|sit|walk|bounce|tuck`)
+- ✅ ±28-30° rotation, 800ms ease-in-out (lines 117-122, 134-148)
+- ✅ Wave + walk-l + walk-r + bounce keyframes (lines 145-185)
+- ✅ Crisis pin to neutral pose with `!important` (lines 223-230)
+- ✅ `prefers-reduced-motion: reduce` blanket kill (lines 233-241)
+
+`client/src/data/lumiEmotionMap.ts` (canonical V24 EMOTION_STATES) has carried `armPose` + `legPose` fields for all 7 emotions since v5.8.10:
+
+```
+greeting: armPose="rest",        legPose="tuck",   bodyPosture="upright"
+calm:     armPose="rest",        legPose="sit",    bodyPosture="relaxed"
+empathy:  armPose="hug",         legPose="sit",    bodyPosture="leaning"
+support:  armPose="heart-hold",  legPose="sit",    bodyPosture="upright"
+joy:      armPose="present",     legPose="bounce", bodyPosture="bouncy"
+surprise: armPose="rest",        legPose="rest",   bodyPosture="curious"
+sleepy:   armPose="rest",        legPose="sit",    bodyPosture="relaxed"
+```
+
+The actual gap was a 3-line oversight: `LumiV7.jsx` v5.8.79 P4 emotion-derivation block consumed `derived.eyeType` + `derived.mouthType` but ignored `derived.armPose` + `derived.legPose` sitting right next to them in the same return value. Calling `<LumiV7 emotion="joy" />` produced happy eyes + excited mouth, but **silent rest+rest arms+legs** because the derivation never reached those fields.
+
+V35 spec literal said "target LumiV6.tsx" — INSPECT rejected this. LumiV6 is the legacy PNG-based preview avatar (single image swap per emotion, no SVG body parts to animate). LumiV7 is the active multi-part SVG mascot where P4 (T1-T4 eye coordination + emotion wiring) shipped in v5.8.79. Implementing P7 in LumiV6 would have triggered DUPLICATION_GATE failure (no JSX `<g>` arm/leg subtrees exist there to animate; would require a from-scratch rebuild).
+
+## Patch (smallest valid engine — 1 source file)
+
+### `client/src/components/lumi/LumiV7.jsx`
+
+**Edit 1 — JSDoc precedence note for arm/leg (L24-25):**
+
+```diff
+- *   arm:    "rest" | "wave" | "hug" | "point" | "present" | "heart"
+- *   leg:    "rest" | "sit" | "walk" | "bounce" | "tuck"
++ *   arm:    "rest" | "wave" | "hug" | "point" | "present" | "heart"  (overrides emotion-derived)
++ *   leg:    "rest" | "sit" | "walk" | "bounce" | "tuck"               (overrides emotion-derived)
+```
+
+**Edit 2 — JSDoc emotion-prop scope expanded (L30-35):**
+
+```diff
+- *   emotion: V24 emotion key from lumiEmotionMap EMOTION_STATES — when set,
+- *            derives eye + mouth from the canonical state map (e.g. calm→soft,
+- *            joy→happy, surprise→wide). Explicit eye/mouth props win.
++ *   emotion: V24 emotion key from lumiEmotionMap EMOTION_STATES — when set,
++ *            derives eye + mouth + arm + leg from the canonical state map
++ *            (e.g. calm→soft+calm+rest+sit, joy→happy+excited+present+bounce,
++ *            empathy→soft+worried+hug+sit). Explicit eye/mouth/arm/leg props
++ *            always win. Parents owning a useLumiEmotion() hook should pass
++ *            its `emotion` field through to this prop.
+```
+
+**Edit 3 — destructuring rename (L84-85, mirrors eye/mouth pattern at L82-83):**
+
+```diff
+-  arm = "rest",
+-  leg = "rest",
++  arm: armProp = null,
++  leg: legProp = null,
+```
+
+**Edit 4 — derivation block (after eye/mouth at L107):**
+
+```js
+// P7 (v5.8.83) — Avatar Life System Phase 3: Arm & Leg Movement.
+// EMOTION_STATES has carried armPose+legPose for all 7 emotions since
+// v5.8.10, but LumiV7 previously ignored them. Same precedence chain as
+// eye/mouth: explicit prop wins → crisis pins to "rest" (neutral, matched
+// by .lumi-v7.is-crisis CSS L223-230) → derived from V24 EMOTION_STATES →
+// literal "rest" default. Bridge: V24 LumiArmPose union uses "heart-hold"
+// for the support emotion, but LumiV7's CSS class is `.lumi-arm--heart`
+// (and the prop union accepts "heart"); translate the one collision so the
+// canonical map can stay typed and the class selector keeps its short name.
+const armRaw = armProp ?? (crisis ? "rest" : derived?.armPose ?? "rest");
+const arm = armRaw === "heart-hold" ? "heart" : armRaw;
+const leg = legProp ?? (crisis ? "rest" : derived?.legPose ?? "rest");
+```
+
+The downstream `armClass` / `legClass` / `wrapperClass` / `data-arm` / `data-leg` references at L168-191 already consume `arm` and `leg` — zero downstream changes needed.
+
+## Why backward-compat is preserved
+
+`AvatarLab.jsx` calls `<LumiV7 ... arm="rest" leg="rest" ...>` in 2 of its 3 mounts (gallery rows for mouth + eye isolation tests). With the rename, those become `armProp="rest"` + `legProp="rest"` → first branch of the nullish-coalescing chain wins → `arm="rest"` + `leg="rest"` → identical CSS class output. Zero pixel diff in AvatarLab. The third mount (the main animated mount at L105) doesn't pass `emotion` either — same neutral output.
+
+The new behavior **only** activates when a parent passes `emotion` without explicit arm/leg props, which happens nowhere in the current codebase. v5.8.83 ships the wire so future surfaces (chat companion, AIChatPanel, ReturnLoop welcome scenes) can adopt single-prop emotion control. Existing surfaces unchanged.
+
+## Why "heart-hold" → "heart" bridge is correct
+
+V24 type `LumiArmPose` (lumiEmotionMap.ts L67) names the support emotion's arm pose `"heart-hold"` — a clear semantic label for the typed map. LumiV7.css class `.lumi-arm--heart` (L142-143) names the CSS state. The two were authored by different layers and intentionally kept independent (changing the map would force every consumer to rewrite; changing the CSS class would force every CSS file with `--heart` to rewrite). The 1-line bridge in the derivation `armRaw === "heart-hold" ? "heart" : armRaw` resolves the collision at the only point that crosses the boundary, with no impact on either side.
+
+## Verify
+
+- TSC_GATE: `npx tsc --noEmit` → 0 errors
+- BUILD_GATE: `npm run build` → ✓ built in 18.39s
+- HEALTH_GATE: `/health` ok (uptime 407s — same workflow restart)
+- ROUTE_GATE: `/`, `/settings`, `/chat`, `/crisis` → HTTP 200
+- ROLLBACK_GATE: 1-file revert restores literal `"rest"` defaults; AvatarLab unaffected (explicit props), all other surfaces unaffected (none pass `emotion` to LumiV7 yet)
+- DUPLICATION_GATE: zero new components, zero new modules, zero new CSS classes — patches existing `LumiV7.jsx` only; LumiV6 deliberately not touched (preview-only PNG component, would have required from-scratch SVG rebuild = duplication failure)
+
+## Open follow-ups
+
+1. **Live consumer adoption** — surface a `<LumiV7 emotion={detectedEmotion} />` in `AIChatPage.jsx` typing-indicator or `ReturnLoop.jsx` welcome to actually exercise the new derivation in production (currently latent — pixel-correct on intent but invisible to users until a caller starts passing `emotion` without arm/leg).
+2. **bodyPosture wiring** — V24 EMOTION_STATES also carries `bodyPosture` (5 values: upright/curious/leaning/relaxed/bouncy). LumiV7 has no body posture CSS classes yet; would be P7-extension or P-future.
+3. **P5 mouth coordination audit** — V35 Prompt 5 spec lists 10 mouth expressions with eyes-lead-100ms-delay rule. INSPECT confirms LumiV7.css L91-114 already ships all 10 + 100ms delay (L102) — P5 is silently complete via the v5.8.79 P4 cycle. No-op cycle could close the spec row formally.
+
+
 # v5.8.82 — P6 activation surface (Settings panel mount + nav exposure)
 
 Date: 2026-05-15

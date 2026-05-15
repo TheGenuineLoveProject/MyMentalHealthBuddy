@@ -18,17 +18,18 @@
  * Props:
  *   eye:    "default" | "wide" | "soft" | "happy"  (overrides emotion-derived)
  *   mouth:  one of 10 V32 expressions               (overrides emotion-derived)
- *   arm:    "rest" | "wave" | "hug" | "point" | "present" | "heart"
- *   leg:    "rest" | "sit" | "walk" | "bounce" | "tuck"
+ *   arm:    "rest" | "wave" | "hug" | "point" | "present" | "heart"  (overrides emotion-derived)
+ *   leg:    "rest" | "sit" | "walk" | "bounce" | "tuck"               (overrides emotion-derived)
  *   gaze:   { x: -1..1, y: -1..1 }  (optional; null = center)
  *   crisis: boolean — instant calm override
  *   interactions: number — V34 Phase 2 blush escalation counter
  *                 (0 baseline 0.15 → 1-2 lvl1 0.2 → 3-4 lvl2 0.4 → 5+ lvl3 0.6)
  *   emotion: V24 emotion key from lumiEmotionMap EMOTION_STATES — when set,
- *            derives eye + mouth from the canonical state map (e.g. calm→soft,
- *            joy→happy, surprise→wide). Explicit eye/mouth props win.
- *            Parents owning a useLumiEmotion() hook should pass its
- *            `emotion` field through to this prop.
+ *            derives eye + mouth + arm + leg from the canonical state map
+ *            (e.g. calm→soft+calm+rest+sit, joy→happy+excited+present+bounce,
+ *            empathy→soft+worried+hug+sit). Explicit eye/mouth/arm/leg props
+ *            always win. Parents owning a useLumiEmotion() hook should pass
+ *            its `emotion` field through to this prop.
  *   size:   number (px, default 240)
  *
  * V34 Phase 2 additions (on top of v5.8.28 V32 base):
@@ -77,8 +78,8 @@ function blushOpacityFor(interactions, crisis) {
 export default function LumiV7({
   eye: eyeProp,
   mouth: mouthProp,
-  arm = "rest",
-  leg = "rest",
+  arm: armProp = null,
+  leg: legProp = null,
   gaze = null,
   crisis = false,
   interactions = 0,
@@ -101,6 +102,18 @@ export default function LumiV7({
   const derived = emotion ? getEmotionState(emotion) : null;
   const eye   = eyeProp   ?? (crisis ? "soft" : derived?.eyeType   ?? "default");
   const mouth = mouthProp ?? (crisis ? "calm" : derived?.mouthType ?? "happy");
+  // P7 (v5.8.83) — Avatar Life System Phase 3: Arm & Leg Movement.
+  // EMOTION_STATES has carried armPose+legPose for all 7 emotions since
+  // v5.8.10, but LumiV7 previously ignored them. Same precedence chain as
+  // eye/mouth: explicit prop wins → crisis pins to "rest" (neutral, matched
+  // by .lumi-v7.is-crisis CSS L223-230) → derived from V24 EMOTION_STATES →
+  // literal "rest" default. Bridge: V24 LumiArmPose union uses "heart-hold"
+  // for the support emotion, but LumiV7's CSS class is `.lumi-arm--heart`
+  // (and the prop union accepts "heart"); translate the one collision so the
+  // canonical map can stay typed and the class selector keeps its short name.
+  const armRaw = armProp ?? (crisis ? "rest" : derived?.armPose ?? "rest");
+  const arm = armRaw === "heart-hold" ? "heart" : armRaw;
+  const leg = legProp ?? (crisis ? "rest" : derived?.legPose ?? "rest");
 
   const reduced = useMemo(
     () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches,
