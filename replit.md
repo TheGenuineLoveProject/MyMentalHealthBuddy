@@ -33,10 +33,12 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 
 **Archive notice:** Entries older than v5.8.50 removed to keep this file lightweight. Entries v4.1.1 → v5.8.39 archived to `docs/replit-history.md`. Full deep-technical detail for every release lives in `docs/changelog.md`.
 
-### Index (v5.8.50 – v5.8.65)
+### Index (v5.8.50 – v5.8.67)
 
 | Version | Date | Modules | Key Change |
 |---|---|---|---|
+| v5.8.67 | 2026-05-15 | canva-landing.css (HX-OS vNEXT scoped tokens) | **Iter 2g Phase 1.** Visual unification on `/`. 14 `--glp-*` tokens redefined inside `.canva-landing` only (warm-cream `#F6F1E8` paper, ink-teal `rgb(22,58,54)`, deep-teal `rgb(47,93,93)` sage-deep, soft-sage `rgb(143,191,159)`, dusty-rose `#C4787A` + 9 alpha derivatives). Global `brand-tokens.css` untouched — other 78 `var(--glp-*)` consumers unchanged. Canonical brand accents (gold/violet/aurora) preserved per Universal Contracts. **Approved governance exception:** CanvaLanding's local sage/rose accent values diverge from the locked 8-hex palette under explicit Iter 2g scope; exception is page-scoped, documented inline in `canva-landing.css` L34-48, and does NOT extend to other surfaces without a Phase 2-5 brief. tsc + vite build clean (14.83s). |
+| v5.8.66 | 2026-05-14 | CanvaLanding header (Iter 2c canonical Lumi swap) | First legacy `<LumiMascot>` swapped to `<OfficialLumi pageId="landing-canva">` on `/` header (L360, 48px). 8 canonical PNGs bridged to `/lumi/official/` with provenance manifest. |
 | v5.8.65 | 2026-05-14 | lumi-backend, lumi-notifications, lumi-rbac, lumi-audit, lumi-tokens, lumi-language, lumi-disclaimer | 7 backend + HX-OS vNEXT integration modules, 25 files. Crisis regex `i`-flag fix. `tsc` + vite build clean. |
 | v5.8.64 | 2026-05-14 | lumi-cbt, lumi-tracker, lumi-crisis, lumi-library, lumi-agent + Phase 30b OfficialLumi flip | 5 clinical modules, 40 files. CBT thought-record + ACT defusion, mood/habit tracker (`streakGuard`), 988 crisis resources, AI agent adapter with 8 guardrails. `OfficialLumi` flipped to `<img>`-only. |
 | v5.8.63 | 2026-05-14 | lumi-registry (Phase 30 + 31 reconcile) | Reconcile-mode delta: 8th canonical variant `LUMI_FLOAT_IDLE`, asset fields on all variants, `lumiMotion.css` (locked 7.1s breath), opt-in `renderMode`/`motion` props, `RUNTIME_ONLY_VARIANTS` whitelist, 11-entry replacement audit. |

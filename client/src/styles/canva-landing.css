@@ -28,6 +28,53 @@
   color: var(--glp-ink);
 }
 
+/* ──────────────────────────────────────────────────────────────────────
+ * HX-OS vNEXT Palette Override — Iter 2g (2026-05-15)
+ * Per "VISUAL SYSTEM UNIFICATION" brief: warm-cream + deep-teal token set
+ * applied as a SCOPED override only beneath `.canva-landing`. Brand
+ * accents (gold, violet, aurora) stay at canonical palette per replit.md
+ * Universal Contracts. Other 78 consumers of `var(--glp-*)` are NOT
+ * re-themed by this block — they continue to read brand-tokens.css.
+ *
+ * Color mapping (brief → token):
+ *   #F6F1E8 (warm cream)      → --glp-paper, --glp-paper-98
+ *   rgb(22,58,54) (ink-teal)  → --glp-ink (page text + headings)
+ *   rgb(47,93,93) (deep teal) → --glp-sage-deep (primary CTA, nav)
+ *   rgb(143,191,159) (sage)   → --glp-sage (icons, secondary accents)
+ *   #C4787A (dusty rose)      → --glp-rose, --glp-blush (crisis accent)
+ * ────────────────────────────────────────────────────────────────────── */
+.canva-landing {
+  /* Surface */
+  --glp-paper: #F6F1E8;
+  --glp-paper-98: #F6F1E8;
+  --glp-ink: rgb(22, 58, 54);
+
+  /* Brand line — shifted to HX-OS vNEXT */
+  --glp-sage: rgb(143, 191, 159);
+  --glp-sage-deep: rgb(47, 93, 93);
+  --glp-rose: #C4787A;
+  --glp-blush: #C4787A;
+
+  /* Alpha derivatives — recomputed from new sage rgb(143,191,159) */
+  --glp-sage-10: rgba(143, 191, 159, 0.10);
+  --glp-sage-15: rgba(143, 191, 159, 0.15);
+  --glp-sage-20: rgba(143, 191, 159, 0.20);
+  --glp-sage-30: rgba(143, 191, 159, 0.30);
+  --glp-sage-40: rgba(143, 191, 159, 0.40);
+
+  /* Alpha derivatives — recomputed from new sage-deep rgb(47,93,93) */
+  --glp-sage-deep-12: rgba(47, 93, 93, 0.12);
+  --glp-sage-deep-20: rgba(47, 93, 93, 0.20);
+  --glp-sage-deep-30: rgba(47, 93, 93, 0.30);
+  --glp-sage-deep-40: rgba(47, 93, 93, 0.40);
+
+  /* Alpha derivatives — recomputed from new rose #C4787A → rgb(196,120,122) */
+  --glp-rose-10: rgba(196, 120, 122, 0.10);
+  --glp-rose-15: rgba(196, 120, 122, 0.15);
+  --glp-rose-20: rgba(196, 120, 122, 0.20);
+  --glp-rose-30: rgba(196, 120, 122, 0.30);
+}
+
 .canva-landing .font-serif {
   font-family: 'Playfair Display', Georgia, serif;
 }
