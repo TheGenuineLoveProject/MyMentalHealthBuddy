@@ -61,7 +61,7 @@ function BlogCard({ post }) {
           {(Array.isArray(post.tags) ? post.tags : String(post.tags).split(",")).map((tag, i) => (
             <span
               key={i}
-              className="px-2 py-1 text-xs rounded-full bg-[rgba(var(--glp-sage-rgb), 0.15)] text-[var(--glp-sage-deep)]"
+              className="px-2 py-1 text-xs rounded-full bg-[rgba(var(--glp-sage-rgb),0.15)] text-[var(--glp-sage-deep)] border border-[var(--glp-sage-20)]"
               data-testid={`tag-${post.id}-${i}`}
             >
               {String(tag).trim()}
