@@ -1,3 +1,68 @@
+# v5.8.84 — Canonical avatar reinstall (8 PNGs) + attached_assets aggressive cleanup
+
+Date: 2026-05-15
+Cycle: V34 GOVERNED EXECUTION — User-driven asset reinstall
+Files changed: client/public/lumi/official/ (8 PNGs) + MANIFEST.md + attached_assets/ (33 files removed) + officialLumiRegistry.ts + replit.md + changelog
+
+## User trigger
+
+"INTEGRATE THE FOLLOWING OFFICIAL BRAND AVATARS... REMOVE ALL THE REST AS OUR CURRENT DEPLOYED PLATFORM STILL SHOWS WRONG AVATARS."
+
+## INSPECT findings
+
+4 of 6 supplied UUID PNGs already byte-matched current canonical:
+- 25F728DB → calm-float
+- 57FC35F4 → soft-presence
+- AFEC27DF → emotion-orb
+- FA65B1F0 → float-idle (from v5.8.74)
+
+Visual ID of 7 IMG_434* batch via thumbnails:
+- 4345 = floating-idle
+- 4346 = heart-glow
+- 4347 = bear-meditation (off-style flag — has ears)
+- 4348 = halo-companion
+- 4349 = sprout-walking-path (CLOSES 6-month gap!)
+- 4350 = emotion-orb-multi-face
+- 4351 = meditation-breath-wisps
+
+## ONE clarifying question batched per kernel "if unsure ask ONE"
+
+User picked `use_bear` (IMG_4347 → lumi-meditation despite ears) + aggressive cleanup.
+
+## Patch sequence
+
+- Backup-first: `cp -a current /lumi/official/ → .local/backups/lumi-official-pre-v5.8.84/` (8 files)
+- Install: 7 cp commands → canonical paths (lumi-calm-float kept from v5.8.74)
+- Cleanup: rm 33 files from attached_assets/ (avatar-{breathing,floating,heart}*.png + IMG_{2367,2369,2370,2473}*.jpeg + 6×UUID*.png duplicates)
+- No archive folder existed (already swept v5.8.74-76)
+- File-type check confirmed no noisy-bg UUID leak in /lumi/official/ — clean
+
+## Architect catch (same-cycle fix)
+
+Post-install code review uncovered `officialLumiRegistry.ts` L142 still pointed `LUMI_PATH.src` at `lumi-float-idle.png` — the documented v5.8.74 hooded-exception fallback. Without this fix, every `LUMI_PATH` consumer would have continued rendering float-idle and the new sprout walking-path PNG would have been served-but-never-shown, defeating the user's stated objective ("our deployed platform still shows wrong avatars"). Patched L142 src + L143 alt text in same cycle.
+
+## Final scope
+
+1 src file (registry) + 8 public PNGs + MANIFEST.md + replit.md + changelog.
+
+## MANIFEST correction
+
+Reversal section corrected to honestly state backup is 7 PNGs not 8 (pre-v5.8.84 had no `lumi-path.png` standalone — was a fallback alias) + added cross-env rollback note (`.local/` is gitignored, use Replit checkpoint `023ae002` instead).
+
+## Verification
+
+- tsc 0 errors
+- vite 17.49s
+- /+/chat+/crisis 200
+- All 8 /lumi/official/*.png served HTTP 200 with correct byte sizes
+- md5sum-verified IMG_4345→float-idle + IMG_4349→path byte-perfect
+
+## Closure
+
+v5.8.74 LUMI_PATH "EXCEPTION — still hooded" flag CLOSED in this cycle.
+
+---
+
 # v5.8.83 — P7 Avatar Life System Phase 3: Arm & Leg Movement (emotion derivation completion)
 
 Date: 2026-05-15
