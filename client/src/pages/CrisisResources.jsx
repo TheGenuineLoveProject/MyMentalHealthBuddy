@@ -166,11 +166,11 @@ export default function CrisisResources() {
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold mb-1 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
                         {hotline.priority && (
-                          <span className="px-2 py-0.5 text-xs font-medium rounded-full" style={{ background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }}>
+                          <span className="px-2 py-0.5 text-xs font-medium rounded-full flex-shrink-0" style={{ background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }}>
                             Priority
                           </span>
                         )}
-                        {hotline.name}
+                        <span>{hotline.name}</span>
                       </h3>
                       <p className="text-sm mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{hotline.description}</p>
                       <p className="text-xs flex items-center gap-1.5" style={{ color: 'var(--glp-ink)' }}>
