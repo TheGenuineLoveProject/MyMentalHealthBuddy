@@ -20,6 +20,7 @@ export default function SavedLibrary() {
     .filter(Boolean);
 
   return (
+    <div className="hxos-vnext">
     <PageScaffold
       title="Your saved library"
       description="Your favorite tools and pages—saved by routeKey and resolved from the registry."
@@ -49,5 +50,6 @@ export default function SavedLibrary() {
         )}
       </section>
     </PageScaffold>
+    </div>
   );
 }

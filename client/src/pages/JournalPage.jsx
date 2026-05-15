@@ -180,6 +180,7 @@ export default function JournalPage() {
   }
 
   return (
+    <div className="hxos-vnext">
     <WellnessPageShell
       title="Reflective Journal"
       subtitle="Write freely, at your own pace. There's no right way to do this."
@@ -456,5 +457,6 @@ export default function JournalPage() {
         source="journal"
       />
   </WellnessPageShell>
+  </div>
   );
 }

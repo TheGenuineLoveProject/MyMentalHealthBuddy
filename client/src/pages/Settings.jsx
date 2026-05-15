@@ -188,6 +188,7 @@ export default function Settings() {
   ];
 
   return (
+  <div className="hxos-vnext">
   <WellnessPageShell
     title=""
     subtitle=""
@@ -563,5 +564,6 @@ export default function Settings() {
       </div>
     </>
   </WellnessPageShell>
+  </div>
   );
 }

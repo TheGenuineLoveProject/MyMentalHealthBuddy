@@ -41,7 +41,7 @@ const HABITS_RESOURCES = [
 
 export default function HabitsHubPage() {
   return (
-    <>
+    <div className="hxos-vnext">
     <SEO 
       title="Healthy Habits Hub | The Genuine Love Project"
       description="Build sustainable healthy habits. Learn the science of behavior change, create daily routines, and track your progress."
@@ -97,6 +97,6 @@ export default function HabitsHubPage() {
         <SafetyFooter />
       </div>
     </WellnessPageShell>
-    </>
+    </div>
   );
 }

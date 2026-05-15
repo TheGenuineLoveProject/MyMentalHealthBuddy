@@ -87,6 +87,7 @@ const SELF_CARE_TIPS = [
 
 export default function CrisisResources() {
   return (
+  <div className="hxos-vnext-crisis">
   <WellnessPageShell
     title=""
     subtitle=""
@@ -299,5 +300,6 @@ export default function CrisisResources() {
       </div>
     </>
   </WellnessPageShell>
+  </div>
   );
 }

@@ -1,0 +1,74 @@
+/* ──────────────────────────────────────────────────────────────────────
+ * HX-OS vNEXT — Shared Visual Unification Tokens (Iter 2g Phases 2-5)
+ * Created: 2026-05-15
+ *
+ * Engine pattern (architect-approved in Phase 1):
+ *   Pages opt-in by adding `hxos-vnext` (or `hxos-vnext-crisis`) to their
+ *   outermost JSX wrapper. The class redefines 14 `--glp-*` CSS variables
+ *   only beneath that subtree. Global `brand-tokens.css` is NEVER touched,
+ *   so non-opted-in pages remain on canonical palette.
+ *
+ * Coexist contract (per replit.md Universal Contracts):
+ *   - Brand accents (gold #E8913A, violet #6c58b8, aurora) → preserved
+ *     (these tokens are NOT redefined here).
+ *   - Page chrome (paper, ink, sage, sage-deep, rose) → vNEXT palette.
+ *   - Approved governance exception: local sage/rose values diverge from
+ *     the locked 8-hex palette under explicit Iter 2g scope.
+ *
+ * Pages currently opted-in (Iter 2g):
+ *   Phase 1 — CanvaLanding (via canva-landing.css scoped block; equiv. tokens)
+ *   Phase 2 — CheckIn, BreathingExercisesPage
+ *   Phase 3 — JournalPage, AIChatPage
+ *   Phase 4 — HabitsHubPage, SavedLibrary
+ *   Phase 5 — Settings, CrisisResources (rose-only via .hxos-vnext-crisis)
+ * ────────────────────────────────────────────────────────────────────── */
+
+.hxos-vnext {
+  /* Surface */
+  --glp-paper: #F6F1E8;
+  --glp-paper-98: #F6F1E8;
+  --glp-ink: rgb(22, 58, 54);
+
+  /* Brand line — shifted to HX-OS vNEXT */
+  --glp-sage: rgb(143, 191, 159);
+  --glp-sage-deep: rgb(47, 93, 93);
+  --glp-rose: #C4787A;
+  --glp-blush: #C4787A;
+
+  /* Alpha derivatives — recomputed from new sage rgb(143,191,159) */
+  --glp-sage-10: rgba(143, 191, 159, 0.10);
+  --glp-sage-15: rgba(143, 191, 159, 0.15);
+  --glp-sage-20: rgba(143, 191, 159, 0.20);
+  --glp-sage-30: rgba(143, 191, 159, 0.30);
+  --glp-sage-40: rgba(143, 191, 159, 0.40);
+
+  /* Alpha derivatives — recomputed from new sage-deep rgb(47,93,93) */
+  --glp-sage-deep-12: rgba(47, 93, 93, 0.12);
+  --glp-sage-deep-20: rgba(47, 93, 93, 0.20);
+  --glp-sage-deep-30: rgba(47, 93, 93, 0.30);
+  --glp-sage-deep-40: rgba(47, 93, 93, 0.40);
+
+  /* Alpha derivatives — recomputed from new rose #C4787A → rgb(196,120,122) */
+  --glp-rose-10: rgba(196, 120, 122, 0.10);
+  --glp-rose-15: rgba(196, 120, 122, 0.15);
+  --glp-rose-20: rgba(196, 120, 122, 0.20);
+  --glp-rose-30: rgba(196, 120, 122, 0.30);
+
+  /* Apply warm-cream surface tint to the wrapper itself so pages whose
+     children don't read --glp-paper still receive the cream backdrop. */
+  background-color: var(--glp-paper);
+  color: var(--glp-ink);
+  min-height: 100vh;
+}
+
+/* Phase 5 exception — CrisisResources keeps its own urgent surface; only
+   re-tone --glp-rose so the dusty-rose accent unifies with the system.
+   Do NOT redefine paper/ink/sage on the crisis page. */
+.hxos-vnext-crisis {
+  --glp-rose: #C4787A;
+  --glp-blush: #C4787A;
+  --glp-rose-10: rgba(196, 120, 122, 0.10);
+  --glp-rose-15: rgba(196, 120, 122, 0.15);
+  --glp-rose-20: rgba(196, 120, 122, 0.20);
+  --glp-rose-30: rgba(196, 120, 122, 0.30);
+}

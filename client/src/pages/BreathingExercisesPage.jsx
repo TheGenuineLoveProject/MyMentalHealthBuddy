@@ -209,6 +209,7 @@ function BreathingTimer({ exercise, onComplete }) {
     }, 1000);
 
     return (
+  <div className="hxos-vnext">
   <WellnessPageShell
     title="BreathingExercisesPage"
     subtitle="Educational reflection tools. Choose what feels safe and supportive."
@@ -506,5 +507,6 @@ export default function BreathingExercisesPage() {
       </div>
     </div>
   </WellnessPageShell>
+  </div>
   );
 }

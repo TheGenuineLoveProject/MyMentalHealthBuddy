@@ -113,7 +113,7 @@ export default function CheckIn() {
 
   return (
     <div
-      className="checkin-polish min-h-screen"
+      className="hxos-vnext checkin-polish min-h-screen"
       style={{ background: 'var(--glp-paper, #F7F4EE)' }}
       data-phase={phase}
     >
