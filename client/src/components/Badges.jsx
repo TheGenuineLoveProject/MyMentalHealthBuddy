@@ -248,7 +248,7 @@ export default function Badges({ className = "", compact = false }) {
         <div className="flex items-center gap-2">
           <div className="h-2 w-32 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-[#8fbf9f] to-[#d4af37] transition-all duration-500"
+              className="h-full bg-gradient-to-r from-[#A8C9A0] to-[#FFD93D] transition-all duration-500"
               style={{ width: `${(earnedCount / totalCount) * 100}%` }}
             />
           </div>
