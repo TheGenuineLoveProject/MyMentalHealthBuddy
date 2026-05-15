@@ -58,6 +58,13 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 | v5.8.51 | 2026-05-10 | checkin-flow | Phase 14 first-pass: 4-7-8 × 4 breathing flow, gentle UI, opt-in. |
 | v5.8.50 | 2026-05-10 | legacyMap.ts | Phase 12 Wave 1 reconciliation bridge — opt-in, zero page edits, maps legacy avatar/asset references onto canonical registry slots. |
 
+### Part B — Portal Token Audit (CLOSED)
+
+- **Status:** NO-OP — deferred caveat moot
+- **Finding:** Zero portal mounts in codebase (0 `createPortal`, 0 Radix UI, 0 Dialog/Toaster/Tooltip)
+- All modals/dropdowns render inline in React tree — already inherit `.hxos-vnext` tokens via Phase 2-5 page wraps
+- Architect deferred caveat closed by audit — no edits needed
+
 ### Universal contracts
 
 Every polish layer above honors these (and any new layer must too):
