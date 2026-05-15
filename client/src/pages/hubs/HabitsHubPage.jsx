@@ -11,6 +11,7 @@ import { pickBenefits } from "@/lib/benefits";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import { InfinityHeartCard } from "@/components/share/InfinityHeartCard";
 import SEO from "@/components/SEO";
+import { OfficialLumi } from "@/lumi-registry";
 
 const HABITS_RESOURCES = [
   {
@@ -57,6 +58,11 @@ export default function HabitsHubPage() {
       }}
     >
       <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* v5.8.72 — canonical Lumi (LUMI_PATH) at top of habits list */}
+        <div className="flex items-center gap-3 mb-6">
+          <OfficialLumi variant="LUMI_PATH" scene="page-header" position="card" widthPx={100} decorative />
+          <p className="text-sm text-gray-700 dark:text-gray-300">One small step at a time — Lumi walks alongside.</p>
+        </div>
         <div className="grid gap-4 md:grid-cols-2 mb-8">
           {HABITS_RESOURCES.map((resource) => {
             const Icon = resource.icon;

@@ -1,6 +1,7 @@
 import React from "react";
 import AIChatPanel from "../components/chat/AIChatPanel";
 import SEO from "@/components/SEO";
+import { OfficialLumi } from "@/lumi-registry";
 
 export default function AIChatPage() {
   return (
@@ -9,6 +10,13 @@ export default function AIChatPage() {
         title="Chat with Lumi — Your Emotional Wellness Companion"
         description="Talk with Lumi — your gentle emotional wellness companion. Private, compassionate support. Always here."
       />
+      {/* v5.8.72 — small canonical Lumi (LUMI_HEART) header above chat panel.
+          AIChatPanel itself does not render OfficialLumi (uses BuddyAvatar);
+          this header anchor surfaces the canonical Lumi at the page level. */}
+      <div className="flex items-center gap-3 px-4 pt-4 max-w-3xl mx-auto">
+        <OfficialLumi variant="LUMI_HEART" scene="page-header" position="inline" widthPx={48} decorative />
+        <p className="text-sm text-foreground/80">Lumi is here. Take your time.</p>
+      </div>
       <AIChatPanel />
     </div>
   );

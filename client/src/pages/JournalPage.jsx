@@ -11,6 +11,7 @@ import { pickBenefits } from "@/lib/benefits";
 import { useAuth } from "../context/AuthContext";
 import JournalAI from "../components/JournalAI";
 import DataExportButton from "../components/DataExportButton";
+import { OfficialLumi } from "@/lumi-registry";
 
 const JOURNAL_PROMPTS = [
   { category: "Gratitude", prompt: "What's one small thing that brought you comfort today?" },
@@ -203,6 +204,12 @@ export default function JournalPage() {
         title="Reflective Journal — The Genuine Love Project"
         description="A safe, private space to process thoughts, honor feelings, and witness your growth."
       />
+
+      {/* v5.8.72 — canonical Lumi (LUMI_SOFT_PRESENCE) at top of journal area */}
+      <div className="flex items-center gap-3 mb-4">
+        <OfficialLumi variant="LUMI_SOFT_PRESENCE" scene="page-header" position="card" widthPx={100} decorative />
+        <p className="text-sm text-foreground/70">A quiet space to write — Lumi is here.</p>
+      </div>
 
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <DataExportButton dataType="journals" />

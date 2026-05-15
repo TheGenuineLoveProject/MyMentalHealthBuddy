@@ -5,7 +5,6 @@ import { Heart, Lightbulb, Users, Zap, BarChart3, Shield, Star, ChevronDown, Men
 import "../styles/canva-landing.css";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
-import LumiMascot from "../components/lumi/LumiMascot.jsx";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
 import FloatIdleAnimated from "../components/lumi/FloatIdleAnimated.jsx";
 // Iter 2c (2026-05-15): canonical Lumi for header-logo swap. Other 2 legacy
@@ -1259,10 +1258,16 @@ export default function CanvaLanding() {
                 aria-hidden="true"
                 data-testid="img-canva-footer-logo"
               >
-                <LumiMascot
-                  emotion="neutral"
-                  size={28}
-                  interactive={false}
+                {/* v5.8.72 — legacy LumiMascot swapped to canonical OfficialLumi
+                    (LUMI_FLOAT_IDLE — calm-anchor idle variant). widthPx kept at 28
+                    to preserve the existing 36px (w-9 h-9) footer container layout;
+                    brief's widthPx={200} would have exploded the copyright row. */}
+                <OfficialLumi
+                  variant="LUMI_FLOAT_IDLE"
+                  scene="footer-logo"
+                  position="inline"
+                  widthPx={28}
+                  decorative
                 />
               </div>
               <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>

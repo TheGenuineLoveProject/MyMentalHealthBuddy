@@ -7,6 +7,7 @@ import { ReferralInvite } from "../components/referral";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import { OfficialLumi } from "@/lumi-registry";
 
 const VISUAL_MODES = [
   { id: "", label: "Default", icon: Sun, description: "Standard brand palette with Deep Teal primary + Gold accent" },
@@ -243,6 +244,8 @@ export default function Settings() {
                   <p className="text-body-sm">Manage your preferences</p>
                 </div>
               </div>
+              {/* v5.8.72 — small canonical Lumi (LUMI_COMPANION) beside title */}
+              <OfficialLumi variant="LUMI_COMPANION" scene="page-header" position="inline" widthPx={60} decorative />
             </header>
 
             {message && (

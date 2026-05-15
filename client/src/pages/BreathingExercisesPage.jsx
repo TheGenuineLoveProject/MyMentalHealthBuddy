@@ -11,6 +11,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import ZenScape from "@/components/zen/ZenScape";
+import { OfficialLumi } from "@/lumi-registry";
 
 const BREATHING_CLARITY = {
   what: "Evidence-based breathing techniques grounded in polyvagal theory for stress relief, anxiety reduction, and nervous system regulation.",
@@ -331,6 +332,10 @@ export default function BreathingExercisesPage() {
         </ZenScape>
 
         <div className="text-center mb-12">
+          {/* v5.8.72 — canonical Lumi (LUMI_MEDITATION) above the H1 */}
+          <div className="flex justify-center mb-4">
+            <OfficialLumi variant="LUMI_MEDITATION" scene="page-header" position="card" widthPx={120} decorative />
+          </div>
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
             <Wind className="h-8 w-8" />
           </div>

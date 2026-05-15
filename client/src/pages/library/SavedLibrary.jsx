@@ -2,6 +2,7 @@ import PageScaffold from "../../components/layout/PageScaffold";
 import { listSaves } from "../../content/saves/savesStore";
 import { getRouteMeta, resolveRoutePath } from "../../content/meta/routeMetaRegistry";
 import { Link } from "wouter";
+import { OfficialLumi } from "@/lumi-registry";
 
 export default function SavedLibrary() {
   const saved = (() => {
@@ -30,6 +31,11 @@ export default function SavedLibrary() {
         "No clutter—just your personal collection.",
       ]}
     >
+      {/* v5.8.72 — canonical Lumi (LUMI_EMOTION_ORB) at top of library content */}
+      <div className="flex items-center gap-3 mt-4 mb-2">
+        <OfficialLumi variant="LUMI_EMOTION_ORB" scene="page-header" position="card" widthPx={100} decorative />
+        <p className="text-sm text-gray-700 dark:text-white/80">Your favorite tools, gently kept.</p>
+      </div>
       <section className="mt-4 rounded-2xl border border-sage-200 dark:border-white/10 bg-sage-50 dark:bg-white/5 p-4" data-testid="section-saved-list">
         {items.length === 0 ? (
           <div className="text-sm text-gray-600 dark:text-white/80">
