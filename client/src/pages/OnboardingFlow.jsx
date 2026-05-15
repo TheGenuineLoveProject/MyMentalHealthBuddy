@@ -119,7 +119,7 @@ function LumiOrb({ size = 160, glow = "#A8C9A0" }) {
       aria-hidden="true"
     >
       <img
-        src="/brand/v17/avatar-breathing-nobg.png"
+        src="/lumi/official/lumi-meditation.png"
         alt=""
         className="absolute inset-0 m-auto onboarding-lumi-breathe"
         style={{ width: "75%", height: "75%", objectFit: "contain" }}

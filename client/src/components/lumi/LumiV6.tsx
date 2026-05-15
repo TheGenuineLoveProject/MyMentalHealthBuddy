@@ -237,22 +237,24 @@ export interface LumiV6Props {
 // v5.8.19 — All non-default color tints redirected to the official V17 set.
 // Mirrors BuddyAvatar.COLOR_MODE_SRC. Legacy lumi-v4-* tinted PNGs deleted
 // from disk; colorMode prop preserved for backward compat.
+// v5.8.76 — Repointed to canonical sprout-only set at /lumi/official/.
+// Legacy /brand/v17/avatar-* (cream-blob, non-sprout) deleted per V26.
 const COLOR_PNG: Record<LumiV6ColorMode, string> = {
-  default: "/brand/v17/avatar-floating-nobg.png",
-  yellow:  "/brand/v17/avatar-floating-nobg.png",
-  pink:    "/brand/v17/avatar-heart-nobg.png",
-  blue:    "/brand/v17/avatar-breathing-nobg.png",
-  purple:  "/brand/v17/avatar-floating-nobg.png",
-  sleep:   "/brand/v17/avatar-breathing-nobg.png",
-  orange:  "/brand/v17/avatar-floating-nobg.png",
+  default: "/lumi/official/lumi-float-idle.png",
+  yellow:  "/lumi/official/lumi-float-idle.png",
+  pink:    "/lumi/official/lumi-heart.png",
+  blue:    "/lumi/official/lumi-meditation.png",
+  purple:  "/lumi/official/lumi-float-idle.png",
+  sleep:   "/lumi/official/lumi-meditation.png",
+  orange:  "/lumi/official/lumi-float-idle.png",
 };
 const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
-  waving:      "/brand/v17/avatar-floating-nobg.png",
-  meditating:  "/brand/v17/avatar-breathing-nobg.png",
-  celebrating: "/brand/v17/avatar-heart-nobg.png",
-  hugging:     "/brand/v17/avatar-heart-nobg.png",
+  waving:      "/lumi/official/lumi-float-idle.png",
+  meditating:  "/lumi/official/lumi-meditation.png",
+  celebrating: "/lumi/official/lumi-heart.png",
+  hugging:     "/lumi/official/lumi-heart.png",
 };
-const FALLBACK_PNG = "/brand/v17/avatar-floating-nobg.png";
+const FALLBACK_PNG = "/lumi/official/lumi-float-idle.png";
 
 // V17 PNGs ship a same-name `.webp` sibling (~14–22 KB vs 263–365 KB).
 // v4 themes don't, so we only emit a <source> when we know the webp exists.

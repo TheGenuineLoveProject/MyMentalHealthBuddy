@@ -107,9 +107,10 @@ const BENEFITS = [
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-growth.png',
     imageWebp: '/brand/v17/benefit-growth.webp',
-    // v5.8.71 — avatar overlay swapped to canonical LUMI_PATH
-    // (walking-path Lumi) per V25 pose mapping POSE F.
-    avatar: '/lumi/official/lumi-path.png',
+    // v5.8.76 — LUMI_PATH source missing on disk (no sprout walking-path
+    // render commissioned yet). Substituted closest sprout: standing
+    // float-idle. Replace with sprout walking-path when commissioned.
+    avatar: '/lumi/official/lumi-float-idle.png',
     avatarWebp: undefined,
     icon: Sparkles,
     iconLabel: 'Personal growth',

@@ -1,18 +1,18 @@
 /*
  * Lumi mascot asset registry.
  *
- * v5.8.19 — All variant slots redirected to the canonical V17 official set
- * (`/brand/v17/avatar-{floating,heart,breathing}-nobg.png`). The legacy
- * `@assets/IMG_217*.png` Lumi color/expression sheet PNGs were off-brand
- * (pre-V17 artwork that did not match the official mascot lock) and have
- * been removed. The MASCOT_ASSETS key shape is preserved so every
- * downstream consumer (`useLumiEmotion`, `LumiCompanion`, `LumiCustomizer`,
- * `preloadMascots`) keeps working without API changes — they all now
- * resolve to the official artwork.
+ * v5.8.76 — All variant slots redirected to the canonical SPROUT-ONLY set
+ * at `/lumi/official/lumi-{float-idle,meditation,heart}.png`. Legacy
+ * `/brand/v17/avatar-{floating,heart,breathing}-nobg.png` (cream-blob,
+ * non-sprout) deleted per V26 brand mandate. MASCOT_ASSETS key shape
+ * preserved — every downstream consumer (`useLumiEmotion`, `LumiCompanion`,
+ * `LumiCustomizer`, `preloadMascots`) keeps working.
+ *
+ * v5.8.19 — Prior consolidation onto V17 official set; superseded by v5.8.76.
  */
-const lumiDefaultUrl   = "/brand/v17/avatar-floating-nobg.png";
-const lumiBreathingUrl = "/brand/v17/avatar-breathing-nobg.png";
-const lumiHeartUrl     = "/brand/v17/avatar-heart-nobg.png";
+const lumiDefaultUrl   = "/lumi/official/lumi-float-idle.png";
+const lumiBreathingUrl = "/lumi/official/lumi-meditation.png";
+const lumiHeartUrl     = "/lumi/official/lumi-heart.png";
 
 import { EMOTION_CONFIG } from "./lumiEmotions";
 import { LUMI_THEMES } from "./lumiThemes";

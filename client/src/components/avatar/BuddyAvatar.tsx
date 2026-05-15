@@ -56,13 +56,13 @@ export type BuddyColorMode =
 // always lands on the official artwork. `sleep` maps to avatar-breathing
 // (the official "rest" pose).
 const COLOR_MODE_SRC: Record<BuddyColorMode, string> = {
-  default: "/brand/v17/avatar-floating-nobg.png",
-  yellow:  "/brand/v17/avatar-floating-nobg.png",
-  pink:    "/brand/v17/avatar-heart-nobg.png",
-  blue:    "/brand/v17/avatar-breathing-nobg.png",
-  purple:  "/brand/v17/avatar-floating-nobg.png",
-  sleep:   "/brand/v17/avatar-breathing-nobg.png",
-  orange:  "/brand/v17/avatar-floating-nobg.png",
+  default: "/lumi/official/lumi-float-idle.png",
+  yellow:  "/lumi/official/lumi-float-idle.png",
+  pink:    "/lumi/official/lumi-heart.png",
+  blue:    "/lumi/official/lumi-meditation.png",
+  purple:  "/lumi/official/lumi-float-idle.png",
+  sleep:   "/lumi/official/lumi-meditation.png",
+  orange:  "/lumi/official/lumi-float-idle.png",
 };
 
 /**
@@ -83,11 +83,11 @@ export type BuddyStyle =
 // identity) and have been deleted from disk. The style prop API is preserved
 // for backward compat; all values now resolve to the official artwork.
 const STYLE_SRC: Record<Exclude<BuddyStyle, "default">, string> = {
-  pompompurin:  "/brand/v17/avatar-floating-nobg.png",
-  cinnamoroll:  "/brand/v17/avatar-floating-nobg.png",
-  chiikawa:     "/brand/v17/avatar-floating-nobg.png",
-  jellycat:     "/brand/v17/avatar-floating-nobg.png",
-  squishmallow: "/brand/v17/avatar-floating-nobg.png",
+  pompompurin:  "/lumi/official/lumi-float-idle.png",
+  cinnamoroll:  "/lumi/official/lumi-float-idle.png",
+  chiikawa:     "/lumi/official/lumi-float-idle.png",
+  jellycat:     "/lumi/official/lumi-float-idle.png",
+  squishmallow: "/lumi/official/lumi-float-idle.png",
 };
 
 /**
@@ -115,7 +115,7 @@ export type BuddyPose =
 // sleeping, thinking, writing) point at the canonical fallback URL directly
 // so the network sees zero 404s. data-pose still surfaces the requested pose
 // for downstream observers / e2e tests / future asset rollouts.
-const FALLBACK_LUMI = "/brand/v17/avatar-floating-nobg.png";
+const FALLBACK_LUMI = "/lumi/official/lumi-float-idle.png";
 
 // V17 PNGs ship a same-name `.webp` sibling (~14–22 KB vs 263–365 KB).
 // v4 themes don't, so we only emit a <source> when we know the webp exists.
@@ -127,12 +127,12 @@ function pickWebp(pngUrl: string): string | null {
   return null;
 }
 const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
-  eating:      "/brand/v17/avatar-floating-nobg.png",
-  dancing:     "/brand/v17/avatar-floating-nobg.png",
-  waving:      "/brand/v17/avatar-floating-nobg.png",
-  meditating:  "/brand/v17/avatar-breathing-nobg.png",
-  celebrating: "/brand/v17/avatar-heart-nobg.png",
-  hugging:     "/brand/v17/avatar-heart-nobg.png",
+  eating:      "/lumi/official/lumi-float-idle.png",
+  dancing:     "/lumi/official/lumi-float-idle.png",
+  waving:      "/lumi/official/lumi-float-idle.png",
+  meditating:  "/lumi/official/lumi-meditation.png",
+  celebrating: "/lumi/official/lumi-heart.png",
+  hugging:     "/lumi/official/lumi-heart.png",
   // Below: declared in the union for type safety; PNGs ship later. Point at
   // the canonical fallback now so we don't generate 404 noise.
   listening:   FALLBACK_LUMI,
