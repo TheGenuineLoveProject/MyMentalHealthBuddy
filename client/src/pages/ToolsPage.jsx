@@ -239,7 +239,10 @@ export default function ToolsPage() {
                     data-testid={`button-tool-${tool.id}`}
                   >
                     <div className="flex items-start gap-4">
-                      <div className={`icon-container icon-lg ${gradientClass} group-hover:scale-110 transition-transform`}>
+                      <div
+                        className={`icon-container icon-lg ${gradientClass} group-hover:scale-110 transition-transform`}
+                        style={{ borderRadius: "9999px", width: 48, height: 48, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+                      >
                         <Icon className="w-5 h-5" aria-hidden="true" />
                       </div>
                       <div className="flex-1">
