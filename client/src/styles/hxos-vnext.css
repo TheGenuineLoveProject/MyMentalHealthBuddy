@@ -54,6 +54,15 @@
   --glp-rose-20: rgba(196, 120, 122, 0.20);
   --glp-rose-30: rgba(196, 120, 122, 0.30);
 
+  /* v5.8.70 — utility tokens (warm-white surface tier, light-gray subtle fill,
+     ink-derived border + shadow). Brand accents (--glp-violet, --glp-gold)
+     intentionally NOT overridden here: canonical brand palette preserved per
+     Universal Contracts. */
+  --glp-warm-white: #FAFAF7;
+  --glp-light-gray: #F0EDE6;
+  --glp-border: rgba(22, 58, 54, 0.08);
+  --glp-shadow: rgba(22, 58, 54, 0.06);
+
   /* Apply warm-cream surface tint to the wrapper itself so pages whose
      children don't read --glp-paper still receive the cream backdrop. */
   background-color: var(--glp-paper);
