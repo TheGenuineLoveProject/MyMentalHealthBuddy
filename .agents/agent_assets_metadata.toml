@@ -43,24 +43,6 @@ type = "image"
 title = "generated_image"
 
 [[generated]]
-id = "IYMGVNYR6Rjye5FZRhFS5"
-uri = "file://attached_assets/generated_images/benefit-relief-v3.png"
-type = "image"
-title = "lumi breathing v3 retry"
-
-[[generated]]
-id = "wHbfe9zjgyTxgAGU0UC-Q"
-uri = "file://attached_assets/generated_images/benefit-understanding-v3.png"
-type = "image"
-title = "lumi heart v3"
-
-[[generated]]
-id = "CnJ_tgAgaYMCMltJ5Fypv"
-uri = "file://attached_assets/generated_images/benefit-growth-v3.png"
-type = "image"
-title = "lumi sparkles v3"
-
-[[generated]]
 id = "rQ5wbobx8J5MIH7uUaobT"
 uri = "file://attached_assets/generated_images/benefit-companionship-v3.png"
 type = "image"
