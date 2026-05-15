@@ -164,7 +164,7 @@ export default function CrisisResources() {
                 >
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-3 mb-1">
                         {hotline.priority && (
                           <span className="px-2 py-0.5 text-xs font-medium rounded-full flex-shrink-0" style={{ background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }}>
                             Priority
