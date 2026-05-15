@@ -16,14 +16,19 @@
  *     arms/legs, no animation. Asymmetric-risk safety override.
  *
  * Props:
- *   eye:    "default" | "wide" | "soft" | "happy"
- *   mouth:  one of 10 V32 expressions
+ *   eye:    "default" | "wide" | "soft" | "happy"  (overrides emotion-derived)
+ *   mouth:  one of 10 V32 expressions               (overrides emotion-derived)
  *   arm:    "rest" | "wave" | "hug" | "point" | "present" | "heart"
  *   leg:    "rest" | "sit" | "walk" | "bounce" | "tuck"
  *   gaze:   { x: -1..1, y: -1..1 }  (optional; null = center)
  *   crisis: boolean — instant calm override
  *   interactions: number — V34 Phase 2 blush escalation counter
  *                 (0 baseline 0.15 → 1-2 lvl1 0.2 → 3-4 lvl2 0.4 → 5+ lvl3 0.6)
+ *   emotion: V24 emotion key from lumiEmotionMap EMOTION_STATES — when set,
+ *            derives eye + mouth from the canonical state map (e.g. calm→soft,
+ *            joy→happy, surprise→wide). Explicit eye/mouth props win.
+ *            Parents owning a useLumiEmotion() hook should pass its
+ *            `emotion` field through to this prop.
  *   size:   number (px, default 240)
  *
  * V34 Phase 2 additions (on top of v5.8.28 V32 base):
@@ -39,6 +44,7 @@
  */
 
 import { useEffect, useRef, useState, useMemo } from "react";
+import { getEmotionState } from "@/data/lumiEmotionMap";
 import "./LumiV7.css";
 
 const MOUTH_PATHS = {
@@ -69,17 +75,33 @@ function blushOpacityFor(interactions, crisis) {
 }
 
 export default function LumiV7({
-  eye = "default",
-  mouth = "happy",
+  eye: eyeProp,
+  mouth: mouthProp,
   arm = "rest",
   leg = "rest",
   gaze = null,
   crisis = false,
   interactions = 0,
   size = 240,
+  emotion = null,
   className = "",
   "data-testid": dataTestid = "lumi-v7"
 }) {
+  // P4 T4 emotion wiring (v5.8.79): when `emotion` is set, derive eye/mouth
+  // from the canonical V24 EMOTION_STATES map (lumiEmotionMap.ts).
+  // Resolution precedence (highest → lowest):
+  //   1. Explicit `eye` / `mouth` props (preserves AvatarLab gallery's
+  //      per-variant isolation tests)
+  //   2. `crisis={true}` fallback → soft + calm (only when no explicit
+  //      eye/mouth are passed — explicit props still override crisis here;
+  //      visual stillness/motion-suppression is enforced separately by
+  //      `.is-crisis` CSS L202-214 + the RAF/blink effect early-returns)
+  //   3. emotion-derived from EMOTION_STATES[emotion]
+  //   4. defaults: `default` eye + `happy` mouth
+  const derived = emotion ? getEmotionState(emotion) : null;
+  const eye   = eyeProp   ?? (crisis ? "soft" : derived?.eyeType   ?? "default");
+  const mouth = mouthProp ?? (crisis ? "calm" : derived?.mouthType ?? "happy");
+
   const reduced = useMemo(
     () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches,
     []

@@ -1,3 +1,70 @@
+## v5.8.79 — LumiV7 P4 T4 emotion wiring (Avatar Life System Phase 1 — emotion-derived eye/mouth)
+
+  **Context:** V35 Prompt 4 ("Avatar Life System Phase 1 — Eye Coordination") asked for 4 eye CSS classes + tracking + blinking + emotion wiring on `LumiV6.tsx`. V34 Phase 0 INSPECT found the V35 spec was outdated against the codebase: T1-T3 already shipped in `LumiV7.jsx` against the same V32 spec. Only T4 (emotion wiring) was genuinely missing.
+
+  **Pre-patch evidence (V34 PROMPT GOVERNANCE STACK — SEARCH/CLASSIFY/VERIFY):**
+  - LumiV7.css L82-85: 4 eye CSS classes (`.lumi-eye--default|wide|soft|happy`) ✅
+  - LumiV7.jsx L93-111: pupil tracking, lerp 0.05 (soft) / 0.12 (other), clamp ±10 H / ±6 V per V32 spec ✅
+  - LumiV7.jsx L115-142: randomized blink 2000-6000ms cadence, 150ms each, 15% double-blink branch ✅
+  - LumiV7.css L233: `@media (prefers-reduced-motion: reduce)` blanket ✅
+  - LumiV7.css L202-214: `.is-crisis` stillness pin (eyes/pupil/mouth/arm/leg/heart-glow/blush) ✅
+  - LumiV7.jsx zero `useLumiEmotion` references ❌ (the actual gap)
+  - Production rendering: LumiV7 only rendered in `/avatar-lab` (preview); LumiV6 only rendered in `/lumi-v6-preview` (preview). User-facing pages render `OfficialLumi` (PNG-only, no CSS-targetable eyes).
+
+  **Decision:** Per V34 `DUPLICATION_GATE` + "smallest valid engine wins" — patched LumiV7 (which already had 97% of P4 done) instead of duplicating into LumiV6 (PNG-based preview surface). User confirmed via clarifying Q (option `wire_v7`).
+
+  **Patch (3 surgical edits, 1 file, +12 net lines):**
+  1. **Import** `getEmotionState` from `@/data/lumiEmotionMap`.
+  2. **Props block** — renamed destructured `eye`/`mouth` to `eyeProp`/`mouthProp`; added new optional `emotion = null` prop. Removed default values on the renamed props (now resolved at body top).
+  3. **Resolution lines** at body top:
+     ```js
+     const derived = emotion ? getEmotionState(emotion) : null;
+     const eye   = eyeProp   ?? (crisis ? "soft" : derived?.eyeType   ?? "default");
+     const mouth = mouthProp ?? (crisis ? "calm" : derived?.mouthType ?? "happy");
+     ```
+  4. **JSDoc Props block** updated — documents `emotion` prop, notes "Explicit eye/mouth props win", and points parents owning `useLumiEmotion()` to pass its `emotion` field through.
+
+  **Resolution precedence (highest → lowest):**
+  1. Explicit `eye` / `mouth` props (preserves AvatarLab gallery's per-variant isolation testing — `AvatarLab.jsx` L152 + L172 pass explicit `eye={e}` / `mouth={m}` to render every variant cell)
+  2. `crisis={true}` fallback → `soft` + `calm` (only fires when explicit `eye`/`mouth` props are absent — explicit props still override crisis at this layer. Visual stillness + motion suppression are enforced separately and unconditionally by the existing `.is-crisis` CSS contract at LumiV7.css L202-214 plus the RAF/blink effect early-returns at LumiV7.jsx L96 and L116, which are not bypassable by props)
+  3. `emotion="…"` → derived from `EMOTION_STATES[emotion]` via `getEmotionState()`
+  4. Defaults: `default` eye + `happy` mouth
+
+  **Emotion → eye/mouth mapping** (sourced from canonical V24 `EMOTION_STATES` in `lumiEmotionMap.ts`):
+  - `greeting` → eye `default`, mouth `happy`
+  - `calm` → eye `soft`, mouth `calm`
+  - `empathy` → eye `soft`, mouth `worried`
+  - `support` → eye `default`, mouth `loving`
+  - `joy` → eye `happy`, mouth `excited`
+  - `surprise` → eye `wide`, mouth `surprise`
+  - `sleepy` → eye `soft`, mouth `sleepy`
+
+  All 7 V24 mouth types (`happy/calm/surprise/sleepy/worried/excited/loving`) are subsets of LumiV7's 10 V32 mouth types (`MOUTH_PATHS` keys); all 4 V24 eye types match the 4 V32 CSS eye classes 1:1. Zero unknown class risk.
+
+  **Backward compatibility verified:** `AvatarLab.jsx` L152 (`<LumiV7 eye="default" mouth={m} arm="rest" leg="rest" size={120} />`) and L172 (`<LumiV7 eye={e} mouth="happy" ... />`) both pass explicit `eye`/`mouth` props that take precedence over `emotion` derivation. Both gallery rows render unchanged.
+
+  **Verify gates:**
+  - `npx tsc --noEmit` → 0 errors (`.jsx` allowJs picks up the new import + prop)
+  - `npm run build` → ✓ built in 26.66s, main bundle 753.79 kB (vs 751.39 kB pre-patch, +2.4 kB for emotion derivation logic)
+  - `Start application` workflow → running, server on port 5000 healthy
+  - Browser console → no new errors (pre-existing `ResponsiveWrapper`/`ReadingLevelProvider` ErrorBoundary log unrelated, predates this edit)
+
+  **What this unlocks:** Any parent surface can now pass live emotion through to LumiV7 without owning eye/mouth state. Pattern:
+  ```js
+  const { emotion } = useLumiEmotion('idle');
+  return <LumiV7 emotion={emotion} arm="rest" leg="rest" size={200} />;
+  ```
+  Sets up the Phase 5 work (replacing static `OfficialLumi` PNG with animated `LumiV7` on production user-facing pages) without further LumiV7 changes.
+
+  **Scope discipline (not done, intentional):**
+  - LumiV6/V8 archive — deferred per user "future cycle"
+  - Production page swap from `OfficialLumi` → `LumiV7` — deferred per user "Do NOT pilot on production page yet (that comes after full verification)"
+  - P2 (sprout walking-path render for `LUMI_PATH`) — skipped per user; current `lumi-float-idle.png` substitute working
+
+  **Files touched:** `client/src/components/lumi/LumiV7.jsx` (3 edits, +12 net lines).
+
+---
+
 ## v5.8.72 — OfficialLumi page integration (Path A — 8 canonical variants) + CanvaLanding L1262 swap
 
   **Canonical Lumi rendered on 7 pages.** OfficialLumi prop signature verified: `variant: LumiVariantId` (req), `widthPx?: number`, `pageId?: string` (silent gate when omitted), `decorative?: boolean`.
