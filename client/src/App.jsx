@@ -33,6 +33,7 @@ import { usePageViewTracker } from "./hooks/useAnalytics.mjs";
 // v5.8.35 perf: AICompanion (393 lines) + AccessibilityToolbar (208) deferred.
 const AICompanion = lazy(() => import("./components/AICompanion.jsx"));
 const AccessibilityToolbar = lazy(() => import("./components/AccessibilityToolbar.jsx"));
+import ToastContainer from "./components/ui/toast-container";
 import './index.css'; // Your Tailwind import
 const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 
@@ -1900,6 +1901,7 @@ export default function App() {
             <AccessibilityToolbar />
             <GratitudePrompt frequency="weekly" />
           </Suspense>
+          <ToastContainer />
           </ErrorBoundary>
         </ReadingLevelProvider>
         </ResponsiveWrapper>
