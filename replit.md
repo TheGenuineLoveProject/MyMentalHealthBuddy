@@ -33,10 +33,11 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 
 **Archive notice:** Entries older than v5.8.80 removed to keep this file lightweight. Entries v4.1.1 → v5.8.79 archived to `docs/replit-history.md`. Full deep-technical detail for every release lives in `docs/changelog.md`.
 
-### Index (v5.8.80 – v5.8.90)
+### Index (v5.8.80 – v5.8.91)
 
 | Version | Date | Modules | Key Change |
 |---|---|---|---|
+| v5.8.91 | 2026-05-15 | .archive/avatar-core/source/raw/ (NEW) + ./avatar-core/raw/ (emptied) | V43 C2 iter #1 — avatar-core/ orphan audit. CLASSIFY: client/public/avatar-core/* (16M, 24 files) ACTIVE per FloatIdleRig.jsx:76 + FloatIdleAnimated.jsx:71 + Presence.jsx:117 + avatar-life/index.ts:9; root ./avatar-core/* (24M, 23 files) SOURCE per FloatIdleRig.jsx:5-6 comment ("SSOT mirrored from repo avatar-core/"). ONE blocker: largest source file `MMHB_FLOAT_IDLE_UNIT_v1_raw.png` (1.5M) → `.archive/avatar-core/source/raw/`. Gates: tsc 0, /+/health 200, master/regions/shadow + lumi-path all 200 (active mirror untouched), 0 code refs to archived path. .archive/avatar-core/ now 1.5M / 1 file; root avatar-core/ 24M→22M. |
 | v5.8.90 | 2026-05-15 | replit.md (V41 C1 iter — v5.8.86 cell trim) + docs/changelog.md (+62L) | Per V41 PHASE 2 literal: most-verbose remaining row = v5.8.86 (~2528 chars). Full detail prepended to `docs/changelog.md` as `# v5.8.86` heading; row collapsed to 1-sentence summary. Net replit.md line count: 91→92 (cell-trim is char-saving not line-saving; new row +1L). Honest result: V41's "30-40 lines saved per iter" is structurally impossible — table rows are single lines regardless of cell width. |
 | v5.8.89 | 2026-05-15 | replit.md (V38 C1 iter #3 — System Architecture extraction) + docs/architecture.md (NEW) | Per maturity-first rule (Phase 1 must exit clean before C2): extracted 50L narrative (System Architecture sub-sections + External Dependencies manifest) → new `docs/architecture.md`; replaced with 3-line pointer in replit.md. Result: 137L → 91L (−46). Architecture narrative preserved verbatim. Closes V38 Cycle 1. |
 | v5.8.88 | 2026-05-15 | replit.md (V38 Cycle 1 iter #2 — row archival) + docs/replit-history.md | Archived 15 rows v5.8.65–v5.8.79 from active Index → `docs/replit-history.md` (same pattern as v5.8.78 for v4.1.1–v5.8.64). Cell-trim alone capped at ~150L; row archival is the only path to <80L. Result: replit.md 151L → 136L (−15). Active Index now v5.8.80–v5.8.88. |
