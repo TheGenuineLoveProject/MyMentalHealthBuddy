@@ -1,3 +1,23 @@
+# v5.8.104 — V49 Fix J1 (REAL bug = malformed Tailwind arbitrary value, not missing gap)
+
+**Files:** `client/src/pages/BlogIndex.jsx:67` + `client/src/pages/BlogPost.jsx:293`
+
+**Context:** Per V49 P1 fix order; user pushed back on prior J1 audit-CLEAN finding (v5.8.103). Re-investigated with fresh eyes.
+
+**Investigation:** Live-render screenshot of /blog showed "Loading articles…" (API 403); could not visually confirm. Code re-read revealed the REAL root cause hiding in plain sight: tag pill className was `bg-[rgba(var(--glp-sage-rgb), 0.15)]` with a **literal space between `,` and `0.15` inside the Tailwind arbitrary-value brackets**. Tailwind JIT silently rejects arbitrary values containing spaces (no class generated, ZERO background applied) — so the pills rendered with no fill, looking like touching plain text matching the V49 audit screenshots EXACTLY (the gap-2 was correct all along; the pills just had no visual boundary).
+
+**Patch (smallest valid engine):** Removed the space → `bg-[rgba(var(--glp-sage-rgb),0.15)]` (now JIT-valid) and added defensive `border border-[var(--glp-sage-20)]` so even browsers/configs where the rgba reference fails to resolve still get a visible pill outline. Same identical fix in both BlogIndex.jsx:67 (listing) and BlogPost.jsx:293 (detail) — same bug, same root cause, copy-paste origin.
+
+**Recurrence-grep:** `bg-\[rgba\(.*, ` across all client/src .jsx/.tsx → 0 other occurrences (no further blast radius).
+
+**Constraints honored:** NO !important, NO new CSS, NO touch to client/src/styles/, no container/structure change.
+
+**Self-correction lesson:** Prior "audit-CLEAN" reading checked ONLY the gap on the container, missed that the individual pill background utility was malformed. Audit-CLEAN claims should also probe individual element styling, not just container layout.
+
+**Gates:** tsc 0, 4/4 routes 200 (/blog, /journal, /, /crisis), patch confirmed both files.
+
+---
+
 # v5.8.101 — V49 Targeted Fix 1/8 (nav gap) + EMERGENCY index.css restoration
 
 Two-part cycle:
