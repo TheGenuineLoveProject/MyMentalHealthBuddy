@@ -68,7 +68,7 @@ export default function SelfCareHubPage() {
                 data-testid={`link-hub-${resource.title.toLowerCase().replace(/\s+/g, '-')}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-primary/10 text-primary">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
