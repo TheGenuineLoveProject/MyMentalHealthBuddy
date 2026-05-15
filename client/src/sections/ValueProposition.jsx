@@ -298,7 +298,7 @@ export default function ValueProposition({ variant = "full", className = "" }) {
           justify-content: center;
           width: 2.75rem;
           height: 2.75rem;
-          border-radius: 12px;
+          border-radius: 50%;
           margin-bottom: 0.85rem;
         }
         .vp-benefit__title {
