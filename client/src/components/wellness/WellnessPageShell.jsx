@@ -38,7 +38,7 @@ export function WellnessPageShell({
     <div className="wellness-shell mx-auto max-w-5xl px-4 py-8">
       <nav
         aria-label="Quick navigation"
-        className="mb-6 -mx-1 flex flex-wrap items-center gap-1 sm:gap-2 overflow-x-auto"
+        className="mb-6 -mx-1 flex flex-wrap items-center gap-3 overflow-x-auto"
         data-testid="wellness-quicknav"
       >
         {QUICK_NAV.map(({ href, label, icon: Icon, testId }) => (
