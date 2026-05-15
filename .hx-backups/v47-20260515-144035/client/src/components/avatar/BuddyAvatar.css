@@ -1,0 +1,688 @@
+/* BuddyAvatar.css — visual-only styles. State + motion classes drive feel.
+   v1.1: motion vocabulary aligned with healing-domain semantics.
+   All animations gated by prefers-reduced-motion. */
+
+.buddy {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  user-select: none;
+}
+.buddy__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  /* v1.13 visible-presence — soft dimensional drop-shadow so Buddy reads
+     as "floating" on any page background. Without this, the body fills
+     blend into near-white surfaces and the figure feels flat. The shadow
+     is layered: a tight contact shadow + a soft cast shadow. Keeps Buddy
+     visible against light AND dark surfaces.
+     v1.13.1 — softened cast shadow (12/.14 → 10/.10) so smaller companion
+     renders (~80px on Journal/Mood/Onboarding panels per BUDDY_PANEL_COPY)
+     don't get a "cloudy" haze beneath them at tiny sizes. */
+  filter:
+    drop-shadow(0 3px 5px rgba(20, 30, 25, 0.09))
+    drop-shadow(0 10px 22px rgba(20, 30, 25, 0.10));
+}
+
+/* ---------- Heart pulse (cadence varies via --buddy-heart-pulse) ---------- */
+.buddy__heart-shape,
+.buddy__heart-glow {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyHeartBeat var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+  filter: drop-shadow(0 0 6px var(--buddy-heart-color, #7FD8A8));
+}
+.buddy__heart-glow {
+  animation-duration: calc(var(--buddy-heart-pulse, 5200ms) * 1.05);
+  opacity: 0.7;
+}
+.buddy__heart-core {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyHeartCore var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+}
+
+@keyframes buddyHeartBeat {
+  0%, 100% { transform: scale(1.00); }
+  35%      { transform: scale(1.08); }
+  55%      { transform: scale(0.97); }
+}
+@keyframes buddyHeartCore {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%      { opacity: 1.00; transform: scale(1.15); }
+}
+
+/* ---------- Eyes ---------- */
+/* v1.14 — eye blink is now gated to NON-steady motion states.  Crisis
+   uses motion=steady, so crisis inherits a motionless, present gaze
+   (safety contract: "calm, unbroken presence" during distress).  All
+   other states blink gently every ~9s for living-presence feel.  Right
+   eye is staggered by 200ms so the two eyes feel like one organic
+   motion, not synchronized robotics.  Globally disabled by the
+   prefers-reduced-motion block at end of file. */
+.buddy__eye {
+  transform-origin: center;
+  transform-box: fill-box;
+  filter: drop-shadow(0 0 4px var(--buddy-eye-color, #6FE3B0));
+}
+.buddy:not(.buddy--motion-steady) .buddy__eye {
+  animation: buddyEyeBlink 9s ease-in-out infinite;
+}
+.buddy:not(.buddy--motion-steady) .buddy__eye--right {
+  animation-delay: 200ms;
+}
+@keyframes buddyEyeBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 96%      { transform: scaleY(0.1); }
+}
+
+/* ---------- Body micro-motion (motion class driven, v1.1 vocab) ---------- */
+.buddy__body, .buddy__head {
+  transform-origin: center bottom;
+  transform-box: fill-box;
+}
+
+/* idle — gentle baseline breath (calm).
+   v1.14: amplitude bumped from 1.5px → 4px and scale 1.015 → 1.025 so
+   Buddy visibly "breathes" instead of looking static. v1.13's micro-motion
+   was too subtle on light page surfaces — users read it as plain/flat.
+   The cadence (5200ms) is still well within calm-presence range and is
+   gentler than the anxious-state breathing animation (4200ms / -3px). */
+.buddy--motion-idle .buddy__body,
+.buddy--motion-idle .buddy__head {
+  animation: buddyIdle 5200ms ease-in-out infinite;
+}
+@keyframes buddyIdle {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-4px) scale(1.025); }
+}
+
+/* v1.14 — Aura breathing pulse. Decorative outer halo softly expands +
+   contracts with a slower cadence than the body so the two motions
+   layer instead of locking. Gated to NON-steady states so crisis
+   stays motionless (safety contract preserved). */
+.buddy:not(.buddy--motion-steady) .buddy__aura {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyAuraBreathe 6400ms ease-in-out infinite;
+}
+@keyframes buddyAuraBreathe {
+  0%, 100% { transform: scale(1);    opacity: 0.55; }
+  50%      { transform: scale(1.04); opacity: 0.72; }
+}
+
+/* v1.14 — Floor glow gentle pulse. Synced with aura so the "halo" and
+   the "floor pool" feel like one breathing system. Crisis: motionless. */
+.buddy:not(.buddy--motion-steady) .buddy__floor {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyFloorBreathe 6400ms ease-in-out infinite;
+}
+@keyframes buddyFloorBreathe {
+  0%, 100% { transform: scaleX(1);    opacity: 0.65; }
+  50%      { transform: scaleX(1.06); opacity: 0.85; }
+}
+
+/* v1.14 — Antenna outer halo "ping". The first <circle> in
+   .buddy__antenna is the outer fuzzy halo (r=14, see BuddyAvatar.tsx
+   v1.13 comment). It gently expands + fades on a 2.6s cadence so
+   Buddy's antenna feels like an alive sensor, not a static prop.
+   Gated to NON-steady states. */
+.buddy:not(.buddy--motion-steady) .buddy__antenna circle:nth-of-type(1) {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: buddyAntennaPing 2600ms ease-out infinite;
+}
+@keyframes buddyAntennaPing {
+  0%       { transform: scale(0.85); opacity: 0.85; }
+  70%      { transform: scale(1.35); opacity: 0.20; }
+  100%     { transform: scale(1.55); opacity: 0;    }
+}
+
+/* slow_glow — gentle sway with deepened heart glow (sad) */
+.buddy--motion-slow_glow .buddy__head {
+  animation: buddySlowSway 5800ms ease-in-out infinite;
+}
+.buddy--motion-slow_glow .buddy__heart-shape,
+.buddy--motion-slow_glow .buddy__heart-glow {
+  filter: drop-shadow(0 0 12px var(--buddy-heart-color, #5DA3C9));
+}
+@keyframes buddySlowSway {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+/* breathing — pronounced slow inhale/exhale (anxious) */
+.buddy--motion-breathing .buddy__body,
+.buddy--motion-breathing .buddy__head {
+  animation: buddyBreathing 4200ms ease-in-out infinite;
+}
+@keyframes buddyBreathing {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-3px) scale(1.025); }
+}
+
+/* grounding — long, deliberate pulse (overwhelmed) */
+.buddy--motion-grounding .buddy__body,
+.buddy--motion-grounding .buddy__head {
+  animation: buddyGrounding 3200ms ease-in-out infinite;
+}
+@keyframes buddyGrounding {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.022); }
+}
+
+/* warm_glow — subtle rise + warm halo + gentle head tilt (encouraged).
+   The head tilts a couple degrees while the body rises — reads as a
+   compassionate, listening posture. */
+.buddy--motion-warm_glow .buddy__body {
+  animation: buddyWarmRise 3600ms ease-in-out infinite;
+}
+.buddy--motion-warm_glow .buddy__head {
+  animation: buddyWarmTilt 3600ms ease-in-out infinite;
+}
+.buddy--motion-warm_glow .buddy__heart-shape {
+  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #5DDB94))
+          drop-shadow(0 0 4px #FFD75A);
+}
+@keyframes buddyWarmRise {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+@keyframes buddyWarmTilt {
+  0%, 100% { transform: translateY(0) rotate(-1.4deg); }
+  50%      { transform: translateY(-3px) rotate(1.4deg); }
+}
+
+/* steady — motionless presence (crisis) */
+.buddy--motion-steady .buddy__body,
+.buddy--motion-steady .buddy__head {
+  animation: none;
+}
+
+/* sparkle — joyful bounce + shimmer + floating particles (celebrate) */
+.buddy--motion-sparkle .buddy__body,
+.buddy--motion-sparkle .buddy__head {
+  animation: buddySparkleBounce 1400ms cubic-bezier(.34,1.56,.64,1) infinite;
+}
+.buddy--motion-sparkle .buddy__heart-shape {
+  filter: drop-shadow(0 0 14px var(--buddy-heart-color, #FFD75A))
+          drop-shadow(0 0 6px #A78BFA);
+}
+@keyframes buddySparkleBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  35%      { transform: translateY(-7px) rotate(-1.5deg); }
+  65%      { transform: translateY(-2px) rotate(1.5deg); }
+}
+
+/* v1.12 sparkle particles — two soft floating dots that orbit upward
+   during celebration. Pure CSS pseudo-elements so they cost zero DOM. */
+.buddy--motion-sparkle::before,
+.buddy--motion-sparkle::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--buddy-heart-color, #FFD75A);
+  box-shadow: 0 0 10px var(--buddy-heart-color, #FFD75A);
+  pointer-events: none;
+  opacity: 0.85;
+}
+.buddy--motion-sparkle::before {
+  top: 8%;
+  left: 6%;
+  animation: buddySparkleFloatA 1900ms ease-in-out infinite;
+}
+.buddy--motion-sparkle::after {
+  top: 14%;
+  right: 6%;
+  animation: buddySparkleFloatB 1900ms ease-in-out infinite 650ms;
+}
+@keyframes buddySparkleFloatA {
+  0%, 100% { transform: translateY(2px) scale(0.85); opacity: 0.40; }
+  50%      { transform: translateY(-12px) scale(1.25); opacity: 0.95; }
+}
+@keyframes buddySparkleFloatB {
+  0%, 100% { transform: translateY(2px) scale(0.85); opacity: 0.40; }
+  50%      { transform: translateY(-15px) scale(1.20); opacity: 0.95; }
+}
+
+/* v1.14 — gentle warm-glow sparkles for the encouraged state. Softer
+   than celebrate (smaller dots, slower float, lower opacity ceiling)
+   so encouragement reads as supportive warmth rather than a party.
+   Crisis (.buddy--motion-steady) is excluded by selector. */
+.buddy--motion-warm_glow::before,
+.buddy--motion-warm_glow::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--buddy-heart-color, #5DDB94);
+  box-shadow: 0 0 8px var(--buddy-heart-color, #5DDB94);
+  pointer-events: none;
+  opacity: 0.55;
+}
+.buddy--motion-warm_glow::before {
+  top: 12%;
+  left: 8%;
+  animation: buddyWarmSparkleA 3200ms ease-in-out infinite;
+}
+.buddy--motion-warm_glow::after {
+  top: 18%;
+  right: 8%;
+  animation: buddyWarmSparkleB 3200ms ease-in-out infinite 1100ms;
+}
+@keyframes buddyWarmSparkleA {
+  0%, 100% { transform: translateY(2px) scale(0.7);  opacity: 0.20; }
+  50%      { transform: translateY(-10px) scale(1.05); opacity: 0.70; }
+}
+@keyframes buddyWarmSparkleB {
+  0%, 100% { transform: translateY(2px) scale(0.7);  opacity: 0.20; }
+  50%      { transform: translateY(-12px) scale(1.05); opacity: 0.70; }
+}
+
+/* v1.14 — antenna ping replaces the v1.12 buddyAntennaPulse rule that
+   was state-agnostic and would have animated the antenna in crisis
+   (motion: steady) too — a subtle but real safety-contract violation
+   on a mental-health surface. The replacement is gated to non-steady
+   states (see "Antenna outer halo ping" earlier in this file). Crisis
+   stays motionless. */
+
+/* ---------- Mouth — v1.16 expression vocabulary ----------
+   Default `d` is set in BuddyAvatar.tsx as a calm gentle line. State
+   rules below override `d:` to morph the expression. Geometry note:
+   eyes sit at y≈78–92, screen ends at y=112, so mouth lives at y≈96–110.
+   Crisis rule keeps the mouth a NEUTRAL grounded line — never frowny,
+   never smiley — to honor the crisis safety contract. Reduced-motion
+   branch below disables the smooth d-morph transition. */
+.buddy__mouth {
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: d 700ms ease, opacity 600ms ease, stroke 600ms ease;
+}
+.buddy--calm .buddy__mouth        { d: path("M 86 100 Q 100 102 114 100"); opacity: 0.70; }
+.buddy--sad .buddy__mouth         { d: path("M 84 96 Q 100 106 116 96");  opacity: 0.65; }
+.buddy--anxious .buddy__mouth     { d: path("M 84 100 L 116 100");         opacity: 0.60; }
+.buddy--overwhelmed .buddy__mouth { d: path("M 86 102 L 114 102");         opacity: 0.55; }
+.buddy--encouraged .buddy__mouth  { d: path("M 82 98 Q 100 108 118 98");  opacity: 0.85; }
+.buddy--celebrate .buddy__mouth   { d: path("M 78 96 Q 100 112 122 96");  opacity: 0.92; }
+.buddy--crisis .buddy__mouth      { d: path("M 84 100 L 116 100");         opacity: 0.70; }
+
+/* Anxious mouth softly breathes with the body so the slit visibly
+   inhales/exhales — coaches the user toward a slow breath. Crisis
+   exclusion is implicit (different state class). */
+.buddy--anxious .buddy__mouth {
+  animation: buddyMouthBreathe 4200ms ease-in-out infinite;
+}
+@keyframes buddyMouthBreathe {
+  0%, 100% { transform: scaleX(1.00); }
+  50%      { transform: scaleX(0.86); }
+}
+/* Celebrate mouth softly opens + closes like a giggle. */
+.buddy--celebrate .buddy__mouth {
+  animation: buddyMouthGiggle 1400ms ease-in-out infinite;
+}
+@keyframes buddyMouthGiggle {
+  0%, 100% { transform: scale(1, 1);   }
+  50%      { transform: scale(1.04, 1.18); }
+}
+
+/* ---------- Arms — v1.16 movable arms with palms ----------
+   Each arm is a <g> wrapping the pad + palm pip. Transform-origin is
+   set to the shoulder pivot (top center of each arm pad in user-space
+   coords) so they swing from the shoulder rather than spinning around
+   their own center. Motion is per-state and STRICTLY motionless under
+   crisis (steady) — same safety contract as body/head. */
+.buddy__arm {
+  transform-origin: 33px 158px;
+  transform-box: view-box;
+  transition: transform 600ms ease;
+}
+.buddy__arm--right {
+  transform-origin: 167px 158px;
+}
+.buddy__palm {
+  transition: fill 600ms ease, stroke 600ms ease;
+}
+
+/* idle (calm) — arms barely sway, like resting breath. */
+.buddy--motion-idle .buddy__arm--left {
+  animation: buddyArmIdleLeft 5200ms ease-in-out infinite;
+}
+.buddy--motion-idle .buddy__arm--right {
+  animation: buddyArmIdleRight 5200ms ease-in-out infinite;
+}
+@keyframes buddyArmIdleLeft {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-2deg); }
+}
+@keyframes buddyArmIdleRight {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+/* breathing (anxious) — arms gently press in toward the body on
+   the exhale, easing back out on the inhale. */
+.buddy--motion-breathing .buddy__arm--left {
+  animation: buddyArmBreatheLeft 4200ms ease-in-out infinite;
+}
+.buddy--motion-breathing .buddy__arm--right {
+  animation: buddyArmBreatheRight 4200ms ease-in-out infinite;
+}
+@keyframes buddyArmBreatheLeft {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  50%      { transform: rotate(-3deg) translateX(2px); }
+}
+@keyframes buddyArmBreatheRight {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  50%      { transform: rotate(3deg) translateX(-2px); }
+}
+
+/* slow_glow (sad) — arms hang slightly heavier, sway slowly. */
+.buddy--motion-slow_glow .buddy__arm--left {
+  animation: buddyArmSadLeft 5800ms ease-in-out infinite;
+}
+.buddy--motion-slow_glow .buddy__arm--right {
+  animation: buddyArmSadRight 5800ms ease-in-out infinite;
+}
+@keyframes buddyArmSadLeft {
+  0%, 100% { transform: rotate(2deg)  translateY(2px); }
+  50%      { transform: rotate(-1deg) translateY(0); }
+}
+@keyframes buddyArmSadRight {
+  0%, 100% { transform: rotate(-2deg) translateY(2px); }
+  50%      { transform: rotate(1deg)  translateY(0); }
+}
+
+/* grounding (overwhelmed) — arms barely move, settled. */
+.buddy--motion-grounding .buddy__arm--left,
+.buddy--motion-grounding .buddy__arm--right {
+  animation: buddyArmGround 3200ms ease-in-out infinite;
+}
+@keyframes buddyArmGround {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.012); }
+}
+
+/* warm_glow (encouraged) — arms reach forward + slightly up in a
+   compassionate "I see you" gesture. */
+.buddy--motion-warm_glow .buddy__arm--left {
+  animation: buddyArmWarmLeft 3600ms ease-in-out infinite;
+}
+.buddy--motion-warm_glow .buddy__arm--right {
+  animation: buddyArmWarmRight 3600ms ease-in-out infinite;
+}
+@keyframes buddyArmWarmLeft {
+  0%, 100% { transform: rotate(0deg)  translateY(0); }
+  50%      { transform: rotate(-6deg) translateY(-2px); }
+}
+@keyframes buddyArmWarmRight {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50%      { transform: rotate(6deg) translateY(-2px); }
+}
+
+/* sparkle (celebrate) — joyful asymmetric wave, arms swing up high. */
+.buddy--motion-sparkle .buddy__arm--left {
+  animation: buddyArmWaveLeft 1400ms cubic-bezier(.34,1.56,.64,1) infinite;
+}
+.buddy--motion-sparkle .buddy__arm--right {
+  animation: buddyArmWaveRight 1400ms cubic-bezier(.34,1.56,.64,1) infinite 250ms;
+}
+@keyframes buddyArmWaveLeft {
+  0%, 100% { transform: rotate(0deg)   translateY(0); }
+  35%      { transform: rotate(-22deg) translateY(-6px); }
+  65%      { transform: rotate(-8deg)  translateY(-2px); }
+}
+@keyframes buddyArmWaveRight {
+  0%, 100% { transform: rotate(0deg)  translateY(0); }
+  35%      { transform: rotate(22deg) translateY(-6px); }
+  65%      { transform: rotate(8deg)  translateY(-2px); }
+}
+
+/* steady (crisis) — arms are MOTIONLESS. Safety contract: crisis must
+   never animate. This rule explicitly overrides any inherited motion. */
+.buddy--motion-steady .buddy__arm,
+.buddy--motion-steady .buddy__arm--left,
+.buddy--motion-steady .buddy__arm--right {
+  animation: none !important;
+  transform: none !important;
+}
+
+/* v1.2 safety: crisis must NEVER pulse fast or use a red fallback.
+   No animation-duration override here — cadence stays slow (5800ms) from
+   VISUAL_MAP. Fallback color is green, not red. Steady, grounded presence. */
+.buddy--crisis .buddy__heart-shape,
+.buddy--crisis .buddy__heart-glow {
+  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #7FD8A8));
+}
+
+/* v1.3 transition polish: smooth color shift between buddy states.
+   Only `fill` transitions (filter is keyframe-driven, leave it alone).
+   Disabled under prefers-reduced-motion below. */
+.buddy__eye,
+.buddy__heart-shape,
+.buddy__heart-glow {
+  transition: fill 600ms ease;
+}
+
+.buddy__shadow {
+  animation: buddyShadow var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+}
+@keyframes buddyShadow {
+  0%, 100% { transform: scale(1, 1); opacity: 0.10; }
+  50%      { transform: scale(0.94, 1); opacity: 0.13; }
+}
+
+/* ---------- V6 cuteness overlay (opt-in via prop `overlay`) ----------
+   Layered DOM on top of the v4 PNG. Position values are %-based against
+   the .buddy wrapper square so the overlay scales correctly across the
+   sm / md-header / md / lg / xl size tokens.
+
+   Layer stack (bottom → top):
+     img.buddy__svg       (the PNG)
+     .buddy__v6-face-pad  (soft cream radial — mutes underlying PNG face)
+     .buddy__v6-eye(s)    (dark kawaii dots; gentle blink on non-steady)
+     .buddy__v6-mouth     (emotion-gated; no mouth in calm = Hello Kitty rule)
+     .buddy__v6-heart     (warm amber chest glow + slow pulse)
+
+   Crisis (.buddy--motion-steady) MUST NOT animate any V6 layer. Existing
+   safety contract preserved by selector gates. */
+
+.buddy__v6 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* Per the V6 spec: when the overlay is active, hide the PNG's painted face
+   region with a CSS mask so the new dot eyes / mouth / heart sit on a clean
+   surface (no double-face show-through). Mask is a radial ellipse over the
+   upper-mid third of the body — fully transparent (cuts out) at the face
+   center, fading to opaque (keeps PNG) by ~85% radius so the body silhouette
+   stays intact. The face-pad below provides a soft cream fill inside the cut
+   so the cutout doesn't read as a hole. */
+.buddy.buddy--v6 .buddy__svg {
+  -webkit-mask-image: radial-gradient(
+    ellipse 26% 17% at 50% 38%,
+    transparent 0%,
+    transparent 55%,
+    black 88%,
+    black 100%
+  );
+          mask-image: radial-gradient(
+    ellipse 26% 17% at 50% 38%,
+    transparent 0%,
+    transparent 55%,
+    black 88%,
+    black 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+.buddy__v6-face-pad {
+  position: absolute;
+  /* Face region of the v4 PNG — upper-mid third, slightly off-center vertically.
+     With the mask above cutting the PNG, the pad now serves as a soft cream
+     fill so the eyes/mouth sit on warm skin tone, not a transparent hole. */
+  left: 22%;
+  top: 22%;
+  width: 56%;
+  height: 36%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 247, 232, 0.95) 0%,
+    rgba(255, 247, 232, 0.80) 45%,
+    rgba(255, 247, 232, 0.20) 78%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  /* Soften the edge so the pad doesn't read as a sticker. */
+  filter: blur(3px);
+}
+/* Kawaii dot eyes — small, dark warm brown for premium matte feel.
+   Positioned per the v4 PNG face geometry. */
+.buddy__v6-eye {
+  position: absolute;
+  width: 8.5%;
+  height: 11%;
+  background: #2d1810;
+  border-radius: 50%;
+  /* Subtle highlight on top — gives the dot a "wet" kawaii sparkle. */
+  box-shadow: inset 0.5px 1.5px 0 rgba(255, 255, 255, 0.55);
+  top: 32%;
+  transform-origin: center;
+}
+.buddy__v6-eye--left  { left: 33%; }
+.buddy__v6-eye--right { left: 58.5%; }
+.buddy:not(.buddy--motion-steady) .buddy__v6-eye {
+  animation: buddyV6EyeBlink 9s ease-in-out infinite;
+}
+.buddy:not(.buddy--motion-steady) .buddy__v6-eye--right {
+  animation-delay: 220ms;
+}
+@keyframes buddyV6EyeBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 96%      { transform: scaleY(0.08); }
+}
+/* Emotion-gated mouth. Geometry: small subtle curve under the eyes. */
+.buddy__v6-mouth {
+  position: absolute;
+  left: 42%;
+  top: 47%;
+  width: 16%;
+  height: 6%;
+  border-bottom: 2.5px solid #2d1810;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  opacity: 0.85;
+}
+.buddy--celebrate .buddy__v6-mouth {
+  /* Wider, deeper smile during joy. */
+  left: 38%;
+  width: 24%;
+  height: 9%;
+  border-bottom-width: 3px;
+}
+.buddy--sad .buddy__v6-mouth {
+  /* Inverted curve = gentle frown. */
+  border-bottom: none;
+  border-top: 2.5px solid #2d1810;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  top: 49%;
+}
+/* Warm amber heart on chest — soft glow pulse, signature element.
+   Shape comes from the inline <svg> child (viewBox-scaled) so geometry
+   stays crisp at every size token. The wrapper is just a positioning
+   box; pulse animation runs on the wrapper so glow + shape pulse together. */
+.buddy__v6-heart {
+  position: absolute;
+  left: 42%;
+  top: 60%;
+  width: 16%;
+  height: 14%;
+  transform-origin: center;
+}
+.buddy__v6-heart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(255, 140, 66, 0.45));
+}
+.buddy__v6-heart-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 178, 71, 0.55) 0%,
+    rgba(255, 140, 66, 0.25) 50%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  filter: blur(4px);
+}
+.buddy:not(.buddy--motion-steady) .buddy__v6-heart {
+  animation: buddyV6HeartPulse var(--buddy-heart-pulse, 5200ms) ease-in-out infinite;
+}
+.buddy:not(.buddy--motion-steady) .buddy__v6-heart-glow {
+  animation: buddyV6HeartGlowPulse calc(var(--buddy-heart-pulse, 5200ms) * 1.05) ease-in-out infinite;
+}
+@keyframes buddyV6HeartPulse {
+  0%, 100% { transform: scale(1.00); }
+  35%      { transform: scale(1.10); }
+  55%      { transform: scale(0.96); }
+}
+@keyframes buddyV6HeartGlowPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1.00); }
+  50%      { opacity: 0.85; transform: scale(1.12); }
+}
+
+/* When V6 overlay is active, suppress legacy sparkle pseudo-element particles
+   (.buddy--motion-sparkle::before/::after). They predated V6 and now visually
+   clash with the V6 heart pulse — leaving stray green/yellow dots in the
+   upper-right corner on celebrate/encouraged states. The V6 heart already
+   carries the joy signal cleanly. */
+.buddy--v6.buddy--motion-sparkle::before,
+.buddy--v6.buddy--motion-sparkle::after,
+.buddy--v6.buddy--motion-warm_glow::before,
+.buddy--v6.buddy--motion-warm_glow::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ---------- Reduced motion ----------
+   v1.12: pseudo-elements (::before, ::after) are NOT selected by `*`
+   in CSS, so they need their own explicit reset to fully respect the
+   user's motion preference. Sparkle particles also fade to invisible
+   under reduced-motion (they're decorative joy, not info). */
+@media (prefers-reduced-motion: reduce) {
+  .buddy *,
+  .buddy {
+    animation: none !important;
+    /* Also disable transitions so state-driven property animations
+       (e.g. mouth `d:` morph, arm transform swing) are instant — not
+       just the keyframed loops. Required for full WCAG SC 2.3.3
+       compliance on the new mouth + arm visuals. */
+    transition: none !important;
+  }
+  .buddy--motion-sparkle::before,
+  .buddy--motion-sparkle::after {
+    animation: none !important;
+    opacity: 0 !important;
+    transition: none !important;
+  }
+  .buddy__heart-shape,
+  .buddy__heart-glow {
+    filter: drop-shadow(0 0 4px var(--buddy-heart-color, #7FD8A8));
+  }
+  /* V6 overlay also respects reduced motion. */
+  .buddy__v6-eye,
+  .buddy__v6-heart,
+  .buddy__v6-heart-glow {
+    animation: none !important;
+    transform: none !important;
+  }
+}

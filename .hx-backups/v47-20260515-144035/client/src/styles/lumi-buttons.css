@@ -1,0 +1,169 @@
+/*
+ * Lumi v2.0 — Button library (D4)
+ * 8 variants × 6 states. Pure CSS classes; opt-in.
+ */
+
+.lumi-btn {
+  --_btn-bg: var(--lumi-sage-600);
+  --_btn-fg: #ffffff;
+  --_btn-border: transparent;
+  --_btn-shadow: var(--lumi-shadow-1);
+  --_btn-hover-lift: -1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lumi-space-2);
+  padding: 0.625rem 1.25rem;
+  min-height: 44px; /* WCAG touch target */
+  font-family: var(--lumi-font-body);
+  font-weight: 600;
+  font-size: var(--lumi-text-sm);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  border-radius: var(--lumi-radius-md);
+  border: 1.5px solid var(--_btn-border);
+  background: var(--_btn-bg);
+  color: var(--_btn-fg);
+  box-shadow: var(--_btn-shadow);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--lumi-dur-quick) var(--lumi-ease),
+    box-shadow var(--lumi-dur-quick) var(--lumi-ease),
+    background var(--lumi-dur-quick) var(--lumi-ease),
+    color var(--lumi-dur-quick) var(--lumi-ease),
+    border-color var(--lumi-dur-quick) var(--lumi-ease);
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.lumi-btn:hover  { transform: translateY(var(--_btn-hover-lift)); box-shadow: var(--lumi-shadow-2); }
+.lumi-btn:active { transform: translateY(0); box-shadow: var(--lumi-shadow-1); }
+.lumi-btn:focus-visible {
+  outline: 3px solid var(--lumi-sage-300);
+  outline-offset: 3px;
+}
+.lumi-btn[disabled],
+.lumi-btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: var(--lumi-shadow-1) !important;
+}
+.lumi-btn[data-loading="true"] {
+  cursor: wait;
+  pointer-events: none;
+}
+.lumi-btn[data-loading="true"]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  margin-right: var(--lumi-space-2);
+  animation: lumi-spin 720ms linear infinite;
+}
+@keyframes lumi-spin { to { transform: rotate(360deg); } }
+
+/* Sizes */
+.lumi-btn--sm { padding: 0.4rem 0.875rem; font-size: var(--lumi-text-xs); min-height: 36px; }
+.lumi-btn--lg { padding: 0.875rem 1.75rem; font-size: var(--lumi-text-base); min-height: 52px; }
+
+/* ── Variants ──────────────────────────────────────────────────── */
+
+.lumi-btn-primary {
+  --_btn-bg: var(--lumi-amber-500);
+  --_btn-fg: #1a1308;
+  --_btn-border: transparent;
+}
+.lumi-btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  pointer-events: none;
+  transition: background-position var(--lumi-dur-slow) var(--lumi-ease-out);
+  border-radius: inherit;
+}
+.lumi-btn-primary:hover::after { background-position: 200% 0; }
+.lumi-btn-primary:hover { background: var(--lumi-amber-600); }
+
+.lumi-btn-secondary {
+  --_btn-bg: var(--lumi-sage-600);
+  --_btn-fg: #ffffff;
+}
+.lumi-btn-secondary:hover { background: var(--lumi-sage-700); }
+
+.lumi-btn-tertiary {
+  --_btn-bg: transparent;
+  --_btn-fg: var(--lumi-sage-700);
+  --_btn-border: var(--lumi-sage-400);
+  --_btn-shadow: none;
+}
+.lumi-btn-tertiary:hover { background: var(--lumi-sage-50); border-color: var(--lumi-sage-600); }
+.dark .lumi-btn-tertiary { --_btn-fg: var(--lumi-sage-200); --_btn-border: var(--lumi-sage-500); }
+.dark .lumi-btn-tertiary:hover { background: rgba(255,255,255,0.04); }
+
+.lumi-btn-ghost {
+  --_btn-bg: transparent;
+  --_btn-fg: var(--lumi-stone-700);
+  --_btn-border: transparent;
+  --_btn-shadow: none;
+}
+.lumi-btn-ghost:hover { background: var(--lumi-stone-100); }
+.dark .lumi-btn-ghost { --_btn-fg: var(--lumi-stone-200); }
+.dark .lumi-btn-ghost:hover { background: rgba(255,255,255,0.05); }
+
+.lumi-btn-text {
+  --_btn-bg: transparent;
+  --_btn-fg: var(--lumi-sage-700);
+  --_btn-border: transparent;
+  --_btn-shadow: none;
+  padding-left: 0; padding-right: 0; min-height: auto;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--lumi-dur-quick) var(--lumi-ease);
+}
+.lumi-btn-text:hover { text-decoration-color: currentColor; transform: none; box-shadow: none; }
+.dark .lumi-btn-text { --_btn-fg: var(--lumi-sage-300); }
+
+.lumi-btn-calm {
+  --_btn-bg: var(--lumi-sage-100);
+  --_btn-fg: var(--lumi-sage-800);
+  --_btn-border: var(--lumi-sage-200);
+}
+.lumi-btn-calm:hover { background: var(--lumi-sage-200); }
+.dark .lumi-btn-calm { --_btn-bg: var(--lumi-sage-800); --_btn-fg: var(--lumi-sage-100); --_btn-border: var(--lumi-sage-700); }
+
+.lumi-btn-love {
+  /* AA fix: --lumi-love token (hsl 350 70% 62%) on #fff = ~3.32:1, fails WCAG AA.
+     Use a darker shade locally so the token stays usable elsewhere. */
+  --_btn-bg: hsl(350, 72%, 42%);
+  --_btn-fg: #ffffff;
+}
+.lumi-btn-love:hover { filter: brightness(0.94); }
+
+.lumi-btn-crisis {
+  --_btn-bg: hsl(0, 72%, 48%);
+  --_btn-fg: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.lumi-btn-crisis:hover { background: hsl(0, 72%, 42%); }
+.lumi-btn-crisis:focus-visible { outline-color: hsl(0, 72%, 60%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lumi-btn,
+  .lumi-btn-primary::after { transition: none !important; animation: none !important; }
+  .lumi-btn:hover { transform: none !important; }
+}

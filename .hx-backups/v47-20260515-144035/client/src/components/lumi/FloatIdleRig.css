@@ -1,0 +1,75 @@
+/*
+ * FloatIdleRig styles — MMHB_FLOAT_IDLE_UNIT_v1 Phase 3.
+ *
+ * Scoped under .float-idle-rig — zero leak risk per universal contract.
+ * Layers stack absolutely, each filling the full container so the
+ * regions self-position via their internal pixel placement.
+ */
+
+.float-idle-rig {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Smooth body-wide float bob */
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.float-idle-rig__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Smooth rig transitions per V32 cadence (eyes lead, others follow) */
+  transition:
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 600ms ease-out;
+  will-change: transform, opacity;
+  /* Keep alpha edges crisp; avoid blurring from subpixel rounding */
+  image-rendering: auto;
+}
+
+/* v5.8.46 — <picture> wrapper carries the layer class; the inner <img>
+ * must fill its parent so the WebP/PNG source covers the full container.
+ * Block display avoids the inline-image baseline gap. */
+.float-idle-rig__layer > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Eye blink is faster per manifest (150ms ScaleY 0.1) */
+.float-idle-rig__layer[data-rig-zone="eyes"] {
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Breathing scale uses the slower V32 cadence */
+.float-idle-rig__layer[data-rig-zone="torso"] {
+  transition: transform 1200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* BHCE crisis override — pin every layer + the container to identity.
+ * Asymmetric risk: under crisis, no motion of any kind. */
+.float-idle-rig[data-crisis="true"],
+.float-idle-rig[data-crisis="true"] .float-idle-rig__layer {
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Reduced-motion blanket — universal contract from polish history */
+@media (prefers-reduced-motion: reduce) {
+  .float-idle-rig,
+  .float-idle-rig .float-idle-rig__layer {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .float-idle-rig .float-idle-rig__layer[data-rig-zone="sparkles"] {
+    opacity: 0.6 !important;
+  }
+}

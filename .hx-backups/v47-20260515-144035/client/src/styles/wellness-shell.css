@@ -1,0 +1,135 @@
+/* ────────────────────────────────────────────────────────────────────────
+   wellness-shell.css — Sanctuary Depth for Inner Wellness Surfaces
+   Applies to JournalPage, MoodPage, AIChatPage, StatePage and any other
+   surface wrapped in <WellnessPageShell>.  All effects are SCOPED to
+   `.wellness-shell` so they never leak to other pages.
+
+   Honors prefers-reduced-motion.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── Root container — soft sanctuary backdrop ──────────────────────────── */
+.wellness-shell {
+  position: relative;
+}
+
+.wellness-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%,
+      rgba(190, 134, 34, 0.04) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 100%,
+      rgba(30, 200, 144, 0.045) 0%,
+      transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Quick-nav pills — refined hover with sage tint ─────────────────────── */
+.wellness-shell [data-testid='wellness-quicknav'] a {
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(252, 246, 234, 0.40) 100%);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 1px 2px rgba(6, 42, 42, 0.04);
+}
+
+.wellness-shell [data-testid='wellness-quicknav'] a:hover {
+  transform: translateY(-1px);
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(252, 246, 234, 0.65) 100%);
+  border-color: rgba(30, 200, 144, 0.40);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 4px 10px rgba(6, 42, 42, 0.06),
+    0 0 0 1px rgba(190, 134, 34, 0.12);
+}
+
+/* ── Main content section — sanctuary card ─────────────────────────────── */
+.wellness-shell > section {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(252, 246, 234, 0.30) 100%) !important;
+  border-color: rgba(30, 200, 144, 0.20) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 2px 8px rgba(6, 42, 42, 0.04),
+    0 14px 32px rgba(6, 42, 42, 0.05);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Animated top accent bar */
+.wellness-shell > section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(190, 134, 34, 0.5) 25%,
+    rgba(30, 200, 144, 0.6) 50%,
+    rgba(190, 134, 34, 0.5) 75%,
+    transparent 100%);
+  opacity: 0.55;
+  transition: opacity 0.5s ease;
+}
+
+.wellness-shell > section:hover {
+  border-color: rgba(30, 200, 144, 0.30) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 14px rgba(6, 42, 42, 0.06),
+    0 22px 48px rgba(6, 42, 42, 0.08);
+}
+
+.wellness-shell > section:hover::before {
+  opacity: 0.95;
+}
+
+/* ── Info accordion (Learn more about this tool) — match sanctuary ────── */
+.wellness-shell > div[class*='border-border'][class*='bg-card'] {
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(252, 246, 234, 0.25) 100%) !important;
+  border-color: rgba(30, 200, 144, 0.18) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 1px 3px rgba(6, 42, 42, 0.03);
+}
+
+/* ── Title heading — soft serif emphasis ───────────────────────────────── */
+.wellness-shell > header h1 {
+  background: linear-gradient(135deg,
+    var(--glp-sage-deep, #062a2a) 0%,
+    #0d4a3d 50%,
+    var(--glp-sage-deep, #062a2a) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.01em;
+}
+
+/* ── Reduced-motion compliance ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .wellness-shell [data-testid='wellness-quicknav'] a,
+  .wellness-shell [data-testid='wellness-quicknav'] a:hover,
+  .wellness-shell > section,
+  .wellness-shell > section::before,
+  .wellness-shell > section:hover {
+    transition: none;
+    transform: none;
+  }
+}

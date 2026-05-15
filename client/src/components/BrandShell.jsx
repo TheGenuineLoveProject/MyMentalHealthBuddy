@@ -60,7 +60,7 @@ export default function BrandShell({ children, logoSrc = "/logo.png" }) {
             <Link href="/journal" data-testid="link-journal">
               <a className="btn-glass">Journal</a>
             </Link>
-            <Link href="/checkin" data-testid="link-mood">
+            <Link href="/mood" data-testid="link-mood">
               <a className="btn-glass">Mood</a>
             </Link>
             <Link href="/checkin" data-testid="link-checkin">

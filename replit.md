@@ -33,10 +33,11 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 
 **Archive notice:** Entries older than v5.8.86 removed to keep this file lightweight. Entries v4.1.1 → v5.8.85 archived to `docs/replit-history.md`. Full deep-technical detail for every release lives in `docs/changelog.md`.
 
-### Index (v5.8.86 – v5.8.94)
+### Index (v5.8.86 – v5.8.95)
 
 | Version | Date | Modules | Key Change |
 |---|---|---|---|
+| v5.8.95 | 2026-05-15 | components/BrandShell.jsx (V47 iter 1 — 1-line href fix) | V47 frontend bug audit — iter 1. INSPECT pass: AVATARS=CLEAN (sprout-only enforced, 0 banned patterns), COLORS=CLEAN (0 dark hex, 0 dark Tailwind bg), BUTTONS=1 CRITICAL (Mood mislinked), CONSISTENCY=deferred. ONE blocker: `BrandShell.jsx:63` Mood button `href="/checkin"` (copy-paste bug from v5.8.75 V29 Phase 1 Link-wrap migration) — same destination as adjacent "Start a Check-In" CTA, leaving global header with no path to `/mood` despite route being registered + serving 200. Smallest valid engine: 1-char-class swap (`/checkin`→`/mood`). Gates: tsc 0, /+/health+/mood+/checkin+/journal+/chat+/crisis all 200, recurrence-grep clean. Bug fix during 7-day Step 2 watch (V44 ALLOWED — patch existing runtime). |
 | v5.8.94 | 2026-05-15 | replit.md (V45 ACTION 2 — row archival) + docs/replit-history.md (+7L) | V45 ACTION 1 already shipped in v5.8.93 (Quick Reference extraction, replit.md 94→75L). This cycle ships ACTION 2: archived 5 rows v5.8.80–v5.8.85 to `docs/replit-history.md` as 1-line summaries; bumped archive-notice cutoff (v5.8.80→v5.8.86) and Index range (v5.8.80–v5.8.93→v5.8.86–v5.8.94). Result: replit.md 75L → ~71L. Combined V45 (C1c+C1d) closes Phase 1 trim work. |
 | v5.8.93 | 2026-05-15 | replit.md (V45 C1c — Quick Reference extraction) + docs/architecture.md (+22L appendix) | V45 GO-SIGNAL: extracted Quick Reference block (heading + 2 code blocks + changelog pointer = 20L) → `docs/architecture.md` Quick Reference appendix. Replaced with 1-line dual-pointer in Universal Contracts trailer. Per v5.8.89 honest-deficit analysis: this was the last significant extractable block. Result: replit.md 94L → 75L (−19, sub-80L target met ✅). Phase 1 EXIT-CLEAN under all V44 metrics. |
 | v5.8.92 | 2026-05-15 | .archive/avatar-core/source/ (NEW 9 subdirs) + ./avatar-core/ (DELETED) + V44 governance ratified | V44 GO-SIGNAL: ratified V44 Integrated Governance V2 (ONE Authority Principle + Patch Rules ALLOWED/FORBIDDEN list) — already compliant per v5.8.86 audit (single runtime entrypoint server/app.mjs; otelApi.mjs `app.listen` reference is a code-comment, not boot path). Executed C2 iter #2 Path B per V34 SMALLEST_VALID_ENGINE: mass-archived remaining root SOURCE tree (alpha/edge-cleanup/masks/master/regions/rig-reference/shadow/transparent/verification = 9 subdirs, 22 files, ~22M) → `.archive/avatar-core/source/` in 1 op (vs 22 ops at 1-file/cycle); rmdir'd empty avatar-core/raw + avatar-core/ root. Gates: tsc 0, /+/chat+/crisis+/health+/ready 200, master+regions+shadow+lumi-path all 200 (active mirror at client/public/avatar-core/ untouched), 0 relative-import refs to archived paths. .archive/avatar-core/ now 24M / 23 files (full SSOT preserved); root tree size 22M→0M; root avatar-core/ no longer exists. C2 CLOSED. |
@@ -69,3 +70,12 @@ For complete per-version detail → `docs/changelog.md`. For Quick Reference (bu
 ## System Architecture & Dependencies
 
 For the full architecture narrative (UI/UX, technical implementations, feature specs, system design choices) and external-dependency manifest, see `docs/architecture.md`.
+
+## v5.8.95 — V47 Frontend Bug Fix Iteration 1
+- Scope: Patch existing runtime only.
+- Fixed: [REPLIT AI FILLS BUG CATEGORY]
+- File changed: [REPLIT AI FILLS FILE]
+- What was wrong: [REPLIT AI FILLS ROOT CAUSE]
+- What was done: [REPLIT AI FILLS PATCH]
+- Gates: TSC=[PASS/FAIL], BUILD=[PASS/FAIL], ROUTE=[PASS/FAIL], VISUAL=[PASS/FAIL]
+- Rule followed: one blocker, one patch, verify, stop.

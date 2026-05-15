@@ -1,0 +1,398 @@
+/* ZenScape — decorative zen-filled backdrop for sound / meditation /
+   affirmations / calming-scene surfaces. Pure visual; never blocks
+   interactivity (pointer-events:none on backdrop). All animations gated
+   by prefers-reduced-motion at the bottom. */
+
+.zenscape {
+  position: relative;
+  isolation: isolate; /* contain z-index stacking */
+  width: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.zenscape__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.zenscape__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 30%, rgba(127, 216, 168, 0.18) 0%, rgba(127, 216, 168, 0) 70%),
+    radial-gradient(ellipse 70% 55% at 50% 80%, rgba(255, 215, 90, 0.10) 0%, rgba(255, 215, 90, 0) 75%),
+    linear-gradient(180deg, var(--glp-paper, #faf8f3) 0%, rgba(143, 191, 159, 0.06) 100%);
+}
+
+.zenscape__rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.zenscape__ring {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.zenscape__ring--a { animation: zenRingBreatheA 9000ms ease-in-out infinite; }
+.zenscape__ring--b { animation: zenRingBreatheB 11000ms ease-in-out infinite 1500ms; }
+.zenscape__ring--c { animation: zenRingBreatheC 7000ms ease-in-out infinite 800ms; }
+
+@keyframes zenRingBreatheA {
+  0%, 100% { transform: scale(1.00); opacity: 1.00; }
+  50%      { transform: scale(1.08); opacity: 0.55; }
+}
+@keyframes zenRingBreatheB {
+  0%, 100% { transform: scale(1.00); opacity: 0.90; }
+  50%      { transform: scale(1.10); opacity: 0.50; }
+}
+@keyframes zenRingBreatheC {
+  0%, 100% { transform: scale(1.00); opacity: 1.00; }
+  50%      { transform: scale(1.06); opacity: 0.65; }
+}
+
+/* Floating zen "petals" — tiny soft sage circles drifting upward.
+   Pure CSS, six staggered phases. */
+.zenscape__petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.zenscape__petal {
+  position: absolute;
+  bottom: -10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.85), rgba(127, 216, 168, 0.55) 65%, rgba(127, 216, 168, 0) 100%);
+  filter: drop-shadow(0 0 6px rgba(127, 216, 168, 0.55));
+  opacity: 0;
+}
+.zenscape__petal--0 { left:  8%; animation: zenPetalRise 14s ease-in-out infinite      0s; }
+.zenscape__petal--1 { left: 22%; animation: zenPetalRise 18s ease-in-out infinite   2.4s; }
+.zenscape__petal--2 { left: 38%; animation: zenPetalRise 16s ease-in-out infinite   5.0s; }
+.zenscape__petal--3 { left: 56%; animation: zenPetalRise 19s ease-in-out infinite   1.2s; }
+.zenscape__petal--4 { left: 74%; animation: zenPetalRise 15s ease-in-out infinite   3.6s; }
+.zenscape__petal--5 { left: 88%; animation: zenPetalRise 17s ease-in-out infinite   6.4s; }
+
+@keyframes zenPetalRise {
+  0%   { transform: translateY(0) translateX(0)   scale(0.6); opacity: 0;    }
+  10%  { opacity: 0.85; }
+  50%  { transform: translateY(-50vh) translateX(14px) scale(1.0); opacity: 0.7; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-95vh) translateX(-6px) scale(0.7); opacity: 0; }
+}
+
+.zenscape__hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0 18px;
+}
+
+.zenscape__hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 18px;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .zenscape__hero-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+.zenscape__hero-label {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--glp-sage-deep, #264f4f);
+  text-align: center;
+  font-style: italic;
+  opacity: 0.85;
+  max-width: 360px;
+}
+
+.zenscape__content {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenscape__ring,
+  .zenscape__petal {
+    animation: none !important;
+  }
+  .zenscape__petal {
+    opacity: 0 !important;
+  }
+}
+
+/* ============================================================
+   Palette + Theme + Accessory variants (Layer 4)
+   --------------------------------------------------------------
+   Defaults below match the original v1 visuals exactly, so every
+   existing surface using <ZenScape /> with no palette/theme prop
+   keeps its appearance. Variants override only the cool/warm/petal
+   tokens — geometry, motion, and a11y are unchanged.
+   ============================================================ */
+
+.zenscape {
+  --zen-cool:       #7FD8A8;
+  --zen-cool-deep:  #5DDB94;
+  --zen-warm:       #FFD75A;
+  --zen-cool-rgb:   127, 216, 168;
+  --zen-warm-rgb:   255, 215, 90;
+  --zen-petal-rgb:  127, 216, 168;
+  --zen-wash-tail-rgb: 143, 191, 159;
+}
+
+/* Re-bind wash + petal to use the variant tokens; values at default
+   sage/meadow are byte-identical to the previous hardcoded rgba. */
+.zenscape .zenscape__wash {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 30%, rgba(var(--zen-cool-rgb), 0.18) 0%, rgba(var(--zen-cool-rgb), 0) 70%),
+    radial-gradient(ellipse 70% 55% at 50% 80%, rgba(var(--zen-warm-rgb), 0.10) 0%, rgba(var(--zen-warm-rgb), 0) 75%),
+    linear-gradient(180deg, var(--glp-paper, #faf8f3) 0%, rgba(var(--zen-wash-tail-rgb), 0.06) 100%);
+}
+.zenscape .zenscape__petal {
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.85), rgba(var(--zen-petal-rgb), 0.55) 65%, rgba(var(--zen-petal-rgb), 0) 100%);
+  filter: drop-shadow(0 0 6px rgba(var(--zen-petal-rgb), 0.55));
+}
+
+/* ---- Palette variants (cool / warm hue family) ---- */
+.zenscape[data-zen-palette="rose"] {
+  --zen-cool:       #F4B6C2;
+  --zen-cool-deep:  #E08FA1;
+  --zen-warm:       #FFD7BA;
+  --zen-cool-rgb:   244, 182, 194;
+  --zen-warm-rgb:   255, 215, 186;
+}
+.zenscape[data-zen-palette="gold"] {
+  --zen-cool:       #FFE08A;
+  --zen-cool-deep:  #F0C46A;
+  --zen-warm:       #FFAA6E;
+  --zen-cool-rgb:   255, 224, 138;
+  --zen-warm-rgb:   255, 170, 110;
+}
+.zenscape[data-zen-palette="sky"] {
+  --zen-cool:       #9FD4F4;
+  --zen-cool-deep:  #7BB8E8;
+  --zen-warm:       #D4E8FA;
+  --zen-cool-rgb:   159, 212, 244;
+  --zen-warm-rgb:   212, 232, 250;
+}
+.zenscape[data-zen-palette="violet"] {
+  --zen-cool:       #C8B6F0;
+  --zen-cool-deep:  #A693DC;
+  --zen-warm:       #F0E0F8;
+  --zen-cool-rgb:   200, 182, 240;
+  --zen-warm-rgb:   240, 224, 248;
+}
+.zenscape[data-zen-palette="dawn"] {
+  --zen-cool:       #FFB89D;
+  --zen-cool-deep:  #F09A85;
+  --zen-warm:       #FFE2B5;
+  --zen-cool-rgb:   255, 184, 157;
+  --zen-warm-rgb:   255, 226, 181;
+}
+
+/* ---- Theme variants (petal color + wash tail mood) ---- */
+.zenscape[data-zen-theme="forest"] {
+  --zen-petal-rgb:      120, 180, 130;
+  --zen-wash-tail-rgb:  90, 140, 110;
+}
+.zenscape[data-zen-theme="ocean"] {
+  --zen-petal-rgb:      150, 210, 235;
+  --zen-wash-tail-rgb:  110, 165, 200;
+}
+.zenscape[data-zen-theme="dawn"] {
+  --zen-petal-rgb:      255, 200, 175;
+  --zen-wash-tail-rgb:  220, 175, 160;
+}
+.zenscape[data-zen-theme="dusk"] {
+  --zen-petal-rgb:      200, 175, 215;
+  --zen-wash-tail-rgb:  155, 140, 180;
+}
+.zenscape[data-zen-theme="cosmos"] {
+  --zen-petal-rgb:      215, 200, 255;
+  --zen-wash-tail-rgb:  120, 110, 175;
+}
+
+/* ---- Buddy stack (anchors accessory glyph above Buddy) ---- */
+.zenscape__buddy-stack {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.zenscape__accessory {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--zen-cool-deep, #5DDB94);
+  text-shadow: 0 0 10px rgba(var(--zen-cool-rgb), 0.5);
+  pointer-events: none;
+  user-select: none;
+  animation: zenAccessoryFloat 6000ms ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+}
+
+@keyframes zenAccessoryFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0)   rotate(-2deg); opacity: 0.92; }
+  50%      { transform: translateX(-50%) translateY(-6px) rotate(2deg);  opacity: 1.00; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenscape__accessory { animation: none !important; }
+}
+
+/* ============================================================
+   Sparkles + Stage variants (Layer 5)
+   --------------------------------------------------------------
+   Stage-driven visual intensity tied to evolution_stage 1..6.
+   When NO data-zen-stage attribute is present (ZenScape called
+   without the `stage` prop), nothing below applies and visuals
+   remain byte-identical to v1/Layer 4. Only when data-zen-stage
+   is set do the petals and sparkles gate themselves to express
+   the user's progress through the sanctuary.
+
+   Stages (server-aligned, server/routes/peacescape.mjs):
+     1 Seed Garden     — quietest: 2 petals, sparkles dormant
+     2 First Bloom     — 3 petals, sparkles dormant
+     3 Tended Grove    — 4 petals, first sparkle awakens
+     4 Mossy Sanctuary — 5 petals, 3 sparkles
+     5 Living Forest   — 6 petals, 4 sparkles
+     6 Inner Cathedral — 6 petals, all 5 sparkles + soft aura
+   ============================================================ */
+
+/* ---- Sparkles (always rendered; INVISIBLE & UN-ANIMATED unless a stage
+   selector explicitly attaches the twinkle animation). This is critical
+   for backward-compat: the 6 ZenScape callers that don't pass `stage`
+   have no data-zen-stage attribute, so none of the stage selectors below
+   match — sparkles stay opacity:0 and visuals remain byte-identical to
+   v1/Layer 4. ---- */
+.zenscape__sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.zenscape__sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95), rgba(var(--zen-cool-rgb), 0.65) 55%, rgba(var(--zen-cool-rgb), 0) 100%);
+  filter: drop-shadow(0 0 6px rgba(var(--zen-cool-rgb), 0.7));
+  opacity: 0;
+  /* No animation by default — animation is attached only via stage selectors below. */
+}
+.zenscape__sparkle--0 { top: 18%; left: 14%; }
+.zenscape__sparkle--1 { top: 28%; left: 82%; }
+.zenscape__sparkle--2 { top: 62%; left: 22%; }
+.zenscape__sparkle--3 { top: 72%; left: 78%; }
+.zenscape__sparkle--4 { top: 44%; left: 50%; }
+
+@keyframes zenSparkleTwinkle {
+  0%, 100% { opacity: 0;    transform: scale(0.6); }
+  45%      { opacity: 0.85; transform: scale(1.1); }
+  55%      { opacity: 0.9;  transform: scale(1.15); }
+}
+
+/* ---- Stage 1 — Seed Garden: quietest (2 petals, dim rings, no sparkles) ---- */
+.zenscape[data-zen-stage="1"] .zenscape__petal--1,
+.zenscape[data-zen-stage="1"] .zenscape__petal--2,
+.zenscape[data-zen-stage="1"] .zenscape__petal--4,
+.zenscape[data-zen-stage="1"] .zenscape__petal--5 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+.zenscape[data-zen-stage="1"] .zenscape__rings { opacity: 0.65; }
+
+/* ---- Stage 2 — First Bloom: 3 petals, no sparkles ---- */
+.zenscape[data-zen-stage="2"] .zenscape__petal--1,
+.zenscape[data-zen-stage="2"] .zenscape__petal--3,
+.zenscape[data-zen-stage="2"] .zenscape__petal--5 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+.zenscape[data-zen-stage="2"] .zenscape__rings { opacity: 0.78; }
+
+/* ---- Stage 3 — Tended Grove: 4 petals; sparkle-0 awakens ---- */
+.zenscape[data-zen-stage="3"] .zenscape__petal--2,
+.zenscape[data-zen-stage="3"] .zenscape__petal--5 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+.zenscape[data-zen-stage="3"] .zenscape__rings { opacity: 0.9; }
+
+/* ---- Stage 4 — Mossy Sanctuary: 5 petals; sparkles 0/1/2 ---- */
+.zenscape[data-zen-stage="4"] .zenscape__petal--2 {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+/* ---- Sparkle reveal map (animation attached only at qualifying stages) ----
+   Sparkle 0: stages 3,4,5,6 | Sparkle 1: stages 4,5,6 | Sparkle 2: stages 4,5,6
+   Sparkle 3: stages 5,6     | Sparkle 4: stage 6 only */
+.zenscape[data-zen-stage="3"] .zenscape__sparkle--0,
+.zenscape[data-zen-stage="4"] .zenscape__sparkle--0,
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--0,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--0 {
+  animation: zenSparkleTwinkle 4200ms ease-in-out infinite 0ms;
+}
+.zenscape[data-zen-stage="4"] .zenscape__sparkle--1,
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--1,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--1 {
+  animation: zenSparkleTwinkle 5600ms ease-in-out infinite 900ms;
+}
+.zenscape[data-zen-stage="4"] .zenscape__sparkle--2,
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--2,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--2 {
+  animation: zenSparkleTwinkle 4800ms ease-in-out infinite 1700ms;
+}
+.zenscape[data-zen-stage="5"] .zenscape__sparkle--3,
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--3 {
+  animation: zenSparkleTwinkle 5200ms ease-in-out infinite 2400ms;
+}
+.zenscape[data-zen-stage="6"] .zenscape__sparkle--4 {
+  animation: zenSparkleTwinkle 6000ms ease-in-out infinite 3100ms;
+}
+.zenscape[data-zen-stage="6"] .zenscape__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 75% 60% at 50% 45%, rgba(var(--zen-cool-rgb), 0.10) 0%, rgba(var(--zen-cool-rgb), 0) 65%);
+  mix-blend-mode: screen;
+  animation: zenAuraBreathe 9000ms ease-in-out infinite;
+}
+
+@keyframes zenAuraBreathe {
+  0%, 100% { opacity: 0.55; transform: scale(1.00); }
+  50%      { opacity: 1.00; transform: scale(1.04); }
+}
+
+/* Reduced motion: keep stage-revealed elements visible but stop animating */
+@media (prefers-reduced-motion: reduce) {
+  .zenscape__sparkle { animation: none !important; }
+  .zenscape[data-zen-stage="6"] .zenscape__bg::after { animation: none !important; }
+}

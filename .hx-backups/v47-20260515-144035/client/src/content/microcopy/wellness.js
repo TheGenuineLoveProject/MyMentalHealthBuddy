@@ -1,0 +1,84 @@
+// @generated
+// /content/microcopy/wellness.js
+export const wellnessMicrocopy = {
+  permissionLines: [
+    "Try what fits today - you can stop anytime.",
+    "No pressure. Small steps count.",
+    "You're in charge of the pace.",
+    "If this doesn't feel right, choose a different option.",
+    "You can keep this gentle and simple."
+  ],
+
+  whatToExpect: [
+    "You might notice a little more space inside your chest or belly.",
+    "You may feel steadier, or you may just feel 'a bit more here.' Either is okay.",
+    "If your mind wanders, that's normal - just come back once.",
+    "This is practice, not perfection.",
+    "We're aiming for 'slightly better,' not 'fixed.'"
+  ],
+
+  stopPause: [
+    "If anything feels too intense, pause, soften your gaze, or stop.",
+    "If you feel overwhelmed, return to the 10-second option or take a break.",
+    "Stop if you feel dizzy or activated - try a shorter version later.",
+    "You can switch practices at any time.",
+    "It's okay to step away and come back when you're ready."
+  ],
+
+  tierLabels: {
+    quick10s: ["10 seconds", "10-second reset", "10-second grounding"],
+    short1to3: ["1-3 minutes", "2-minute practice", "short practice"],
+    long3to10: ["3-10 minutes", "5-minute practice", "longer practice"]
+  },
+
+  tierCtas: {
+    quick10s: ["Start 10 seconds", "Do the quick reset", "Try the 10-second version"],
+    short1to3: ["Start the short practice", "Try 1-3 minutes", "Do the 2-minute version"],
+    long3to10: ["Start the longer practice", "Try 3-10 minutes", "Do the full version"]
+  },
+
+  breathCues: [
+    "Inhale gently. Exhale a little longer.",
+    "Let the exhale be soft - like fog on glass.",
+    "Breathe like you're warming your hands.",
+    "If counting helps: in 4, out 6.",
+    "Breathe low and easy, without forcing."
+  ],
+
+  groundingCues: [
+    "Feel your feet. Notice the floor holding you.",
+    "Name 3 things you can see - slowly.",
+    "Press your thumb to each fingertip, one by one.",
+    "Let your shoulders drop 1%.",
+    "Turn your head slightly and look around: 'I'm here, now.'"
+  ],
+
+  bodyCues: [
+    "Unclench your jaw. Soften your tongue.",
+    "Relax your belly - even a little.",
+    "Place a hand on your chest or belly if that feels safe.",
+    "Let your eyes rest on one point.",
+    "Shake out your hands for a moment."
+  ],
+
+  reflectionPrompts: [
+    "What do I need most right now: comfort, clarity, or courage?",
+    "What's one tiny kindness I can offer myself today?",
+    "What changed - even 1% - after this practice?",
+    "If a friend felt this way, what would I say to them?",
+    "What's one next step that feels doable?"
+  ],
+
+  closers: [
+    "When you're ready, take one small next step.",
+    "That's enough for now. You did the practice.",
+    "Carry the calm forward gently.",
+    "You can return anytime - even for 10 seconds.",
+    "Thank you for showing up for yourself."
+  ],
+
+  disclaimers: {
+    short: "Educational support only - not medical advice.",
+    long: "This content is for educational support and self-reflection, not medical or mental health treatment. If you feel at risk or in crisis, visit Crisis Resources."
+  }
+};

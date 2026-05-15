@@ -1,0 +1,16 @@
+import { getRouteMeta } from "../content/meta/routeMetaRegistry";
+import { RelatedLinksBlock } from "./RelatedLinksBlock";
+
+export default function PageTemplate({ config, routeKey }) {
+  const meta = getRouteMeta(routeKey);
+
+  return (
+    <>
+      {/* ...your existing layout... */}
+
+      <RelatedLinksBlock links={meta.internalLinks} />
+
+      {/* ...rest of page... */}
+    </>
+  );
+}
