@@ -42,48 +42,6 @@ uri = "file://client/public/brand/v17/avatar-floating.png"
 type = "image"
 title = "generated_image"
 
-[[generated]]
-id = "rQ5wbobx8J5MIH7uUaobT"
-uri = "file://attached_assets/generated_images/benefit-companionship-v3.png"
-type = "image"
-title = "lumi waving v3 retry"
-
-[[generated]]
-id = "-MC3_P72x4Jl4smFtJHPp"
-uri = "file://attached_assets/generated_images/lumi-hooded-meditating-aura.png"
-type = "image"
-title = "generated_image"
-
-[[generated]]
-id = "49JGuyzd5ToJfWnMADruy"
-uri = "file://attached_assets/generated_images/lumi-hooded-emotion-orbs.png"
-type = "image"
-title = "generated_image"
-
-[[generated]]
-id = "17shV_c20IunZ7nB9BMbo"
-uri = "file://attached_assets/generated_images/lumi-hooded-halo-prayer.png"
-type = "image"
-title = "generated_image"
-
-[[generated]]
-id = "CB5fW4WrxEkI6bl0-8xMS"
-uri = "file://attached_assets/generated_images/lumi-hooded-walking-path.png"
-type = "image"
-title = "generated_image"
-
-[[generated]]
-id = "QtPe92UY_0D5cWd4nlK4O"
-uri = "file://attached_assets/generated_images/lumi-sprout-heart-glow.png"
-type = "image"
-title = "generated_image"
-
-[[generated]]
-id = "G5UuXrB_10CcRMKcaLev7"
-uri = "file://attached_assets/generated_images/lumi-sprout-emotion-orbs.png"
-type = "image"
-title = "generated_image"
-
 [[outputs]]
 id = "qOaiWVLOMgiQ8FOV2bPSa"
 uri = "file://content/strategy/platform-z-transformation.md"
