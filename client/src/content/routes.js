@@ -7012,7 +7012,7 @@ const rawRoutes = [
       title: 'Stories of',
       titleHighlight: 'healing.',
       subtitle: 'Articles, essays, and insights to support your journey.',
-      primaryCta: { label: 'Read Latest', href: '/blog/welcome-to-genuine-love' },
+      primaryCta: { label: 'Read Latest', href: '/blog' },
       secondaryCta: { label: 'All Articles', href: '#main-content' }
     }
   },

@@ -111,7 +111,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
         <p className="text-sm text-[var(--text-2)] mb-3">
           Wellness tips and new features delivered to your inbox. No spam, unsubscribe anytime.
           {" "}
-          <a href="/blog/welcome-to-genuine-love" className="underline text-[var(--glp-primary)] hover:text-[var(--glp-sage-deep)]" data-testid="link-newsletter-trust">
+          <a href="/about" className="underline text-[var(--glp-primary)] hover:text-[var(--glp-sage-deep)]" data-testid="link-newsletter-trust">
             Learn more about us
           </a>.
         </p>
