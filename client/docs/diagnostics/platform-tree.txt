@@ -22,10 +22,15 @@
 ./dist
 ./docs
 ./docs/diagnostics
+./docs/diagnostics/domain-firewall-scan.txt
+./docs/diagnostics/entrypoint-candidates.txt
+./docs/diagnostics/health-route-scan.txt
+./docs/diagnostics/listen-port-scan.txt
 ./docs/diagnostics/node-version.txt
 ./docs/diagnostics/npm-version.txt
 ./docs/diagnostics/package.snapshot.json
 ./docs/diagnostics/platform-tree.txt
+./docs/diagnostics/prompt-files.txt
 ./docs/diagnostics/pwd.txt
 ./docs/diagnostics/replit-nix.snapshot.txt
 ./docs/diagnostics/replit.snapshot.txt

@@ -191,6 +191,8 @@
 ./analysis.html:    black: 0x000000,
 ./docs/governance/HX_OS_REPLIT_EXECUTION_KERNEL.md:- Server must use process.env.PORT || 5000
 ./docs/governance/HX_OS_REPLIT_EXECUTION_KERNEL.md:- Server must listen on 0.0.0.0
+./docs/diagnostics/health-route-scan.txt:./docs/diagnostics/listen-port-scan.txt:./scripts/hx-verify.sh:for path in /health /ready /api/health; do echo "Testing $path" && curl -s -o /tmp/health.out -w "HTTP:%{http_code} TIME:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}$path" || true && cat /tmp/health.out || true && echo ""; done
+./docs/diagnostics/health-route-scan.txt:./scripts/hx-verify.sh:for path in /health /ready /api/health; do echo "Testing $path" && curl -s -o /tmp/health.out -w "HTTP:%{http_code} TIME:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}$path" || true && cat /tmp/health.out || true && echo ""; done
 ./scripts/hx-diagnose.sh:grep -R "app.listen\|server.listen\|process.env.PORT\|0.0.0.0\|localhost\|127.0.0.1" . --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=build --exclude-dir=backups --exclude-dir=quarantine --exclude-dir=rescue --exclude-dir=.git > docs/diagnostics/listen-port-scan.txt || true
 ./scripts/hx-verify.sh:for path in /health /ready /api/health; do echo "Testing $path" && curl -s -o /tmp/health.out -w "HTTP:%{http_code} TIME:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}$path" || true && cat /tmp/health.out || true && echo ""; done
 ./scripts/hx-verify.sh:echo "=== ROOT CHECK ===" && curl -s -o /tmp/root.out -w "ROOT HTTP:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}/" || true && head -40 /tmp/root.out || true
