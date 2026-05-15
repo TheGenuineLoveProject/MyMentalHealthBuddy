@@ -1,4 +1,80 @@
-## v5.8.77 — Tier B archive folder removal + replit.md trim
+## v5.8.72 — OfficialLumi page integration (Path A — 8 canonical variants) + CanvaLanding L1262 swap
+
+  **Canonical Lumi rendered on 7 pages.** OfficialLumi prop signature verified: `variant: LumiVariantId` (req), `widthPx?: number`, `pageId?: string` (silent gate when omitted), `decorative?: boolean`.
+
+  **Step 1 — CanvaLanding L1262:** Last legacy `<LumiMascot>` swapped to `<OfficialLumi variant="LUMI_FLOAT_IDLE" widthPx={28} decorative />`; `LumiMascot` import removed (zero remaining usages). `widthPx` kept at 28 (not brief's 200) because the surrounding container is `w-9 h-9` (36px) — 200 would have exploded the footer copyright row.
+
+  **Step 2 — 5 no-avatar pages got OfficialLumi:** BreathingExercisesPage → `LUMI_MEDITATION` 120px above H1; JournalPage → `LUMI_SOFT_PRESENCE` 100px in journal header row with caption "A quiet space to write — Lumi is here."; HabitsHubPage → `LUMI_PATH` 100px above resource grid with caption "One small step at a time — Lumi walks alongside."; SavedLibrary → `LUMI_EMOTION_ORB` 100px above saved-list with caption "Your favorite tools, gently kept."; Settings → `LUMI_COMPANION` 60px in header beside title (no caption — small accent).
+
+  **Step 3 — AIChatPage:** AIChatPanel grep confirmed no OfficialLumi/LumiMascot (uses BuddyAvatar at L135/L165); added small `LUMI_HEART` 48px header div above panel with caption "Lumi is here. Take your time." All inserts use `decorative` (aria-hidden) since they are visual companions to existing accessible headings.
+
+  **Architect 1st-pass catch:** original drafts omitted `scene` + `position` (both required per `OfficialLumiProps`); `.jsx` files masked the type error since they aren't TS-checked. Fixed by adding explicit `scene="page-header"` / `scene="footer-logo"` and `position="inline"` (≤90px sites: footer/Settings/AIChat) or `position="card"` (100-120px sites: Breathing/Journal/Habits/SavedLibrary). Card cap is 130-150px across all 8 variants — 100/120 fit cleanly without silent clamping.
+
+  **Path A substitution rationale:** brief's variant IDs (`LUMI_SPROUT_*`, `LUMI_BEAR_MEDITATE_RINGS`, etc.) are from the pending 14-avatar registry expansion not yet on Replit's filesystem — mapped each onto the closest of the 8 frozen canonical variants per registry semantics (e.g. `LUMI_COMPANION` registry desc "seated halo Lumi" cleanly absorbs `LUMI_SPROUT_STANDING_DEFAULT` intent for Settings; `LUMI_HEART` heart-glow-pulse covers `LUMI_SPROUT_HEART_GLOW`). `pageId` intentionally omitted — `canRenderLumi` returns `{ allowed: true }` silently when no pageId, avoiding fail-closed PAGE_PLACEMENT_MAP enrollment requirement (out of scope for this brief; can be added in a follow-up to enroll the 5 new pages into strict policy enforcement).
+
+  **Skipped per brief rules:** CrisisResources (BHCE protocol) and CheckIn (BuddyAvatar separate system, kept). `tsc` + `vite build` clean.
+
+  ---
+
+  ## v5.8.71 — sections/VisualBenefits.jsx (V25 avatar pose mapping)
+
+  **V25 avatar pose-to-section fix.** Live homepage was showing generic Lumi poses in the 4 V17 benefit rows because the avatar overlays pointed at `/brand/v17/avatar-*.png` (legacy user-supplied set), bypassing the canonical 8-variant registry at `/lumi/official/`.
+
+  Smallest valid engine: swapped the 4 `avatar`/`avatarWebp` fields in the BENEFITS array to canonical paths — **(1)** "Breathe. Settle. Release." → `lumi-meditation.png` (`LUMI_MEDITATION`, seated meditating + aura rings, POSE D), **(2)** "Name it. Move through it." → `lumi-heart.png` (`LUMI_HEART`, standing + heart glow, POSE B), **(3)** "You are not alone." → `lumi-companion.png` (`LUMI_COMPANION`, seated halo Lumi — registry description is exact match for POSE A Halo Prayer), **(4)** "Grow at your own pace." → `lumi-path.png` (`LUMI_PATH`, walking-path Lumi, POSE F).
+
+  `avatarWebp` set to `undefined` since canonical assets are PNG-only (no webp variants exist under `/lumi/official/`); `<ResponsiveImage>` already conditionally renders the `<source>` only when `srcWebp` is truthy, so the picture element falls back to the PNG cleanly.
+
+  **Hero 16:9 background scenes (`b.image` at `/brand/v17/benefit-*.png`) intentionally untouched** — brief said "do NOT change layout" and these are composed scene illustrations, not Lumi avatars; if those backgrounds also need swapping, that's a separate decision.
+
+  Zero text/CTA/sensory-word/accent-color/href changes. `tsc` + `vite build` clean.
+
+  ---
+
+  ## v5.8.70 — hxos-vnext.css (utility token expansion)
+
+  **Iter 2g token-map expansion (Option C, non-destructive).** Appended 4 utility tokens to existing shared `.hxos-vnext` block: `--glp-warm-white: #FAFAF7`, `--glp-light-gray: #F0EDE6`, `--glp-border: rgba(22,58,54,0.08)`, `--glp-shadow: rgba(22,58,54,0.06)`.
+
+  Brand accents `--glp-violet` (#6c58b8) and `--glp-gold` (#E8913A) intentionally **NOT** overridden — canonical brand palette preserved per Universal Contracts and the brief's own "Brand accents stay untouched" rule. Zero `!important` flags used (scope already enforced by `.hxos-vnext` selector specificity; `!important` only needed when fighting inline styles, which these tokens don't conflict with).
+
+  All 9 routes pick up new tokens automatically since they already carry the wrapper from v5.8.68. No page edits, no per-page CSS files, no file deletions. `tsc` + `vite build` clean.
+
+  ---
+
+  ## v5.8.69 — Iter 2g Part B closeout (portal audit) + toast UI sink
+
+  **Phase 5 deferred caveat closed.** Audit confirmed zero portal surface in `client/src/`: no `createPortal`, no `@radix-ui` imports, no `<Toaster>`/`<Sonner>` mount, and `SacredModal` / `AgeConfirmationModal` / `dropdown-menu` / `popover` / `select` all render inline within the React tree. No portal escape exists on the 9 HX-OS vNEXT routes — caveat resolved as no-op.
+
+  **Bonus fix (orphan toast bug):** added `client/src/components/ui/toast-container.tsx` (96 lines, custom, zero deps — subscribes to existing `useToast` memoryState, fixed bottom-right, max-w 320px, z-50, auto-dismiss 3s, opacity+translateY enter/exit transitions, X close button, role=status/alert by variant). Mounted once in `App.jsx` L1907 inside `ErrorBoundary` (sibling of lazy-widgets `<Suspense>`).
+
+  Toast colors hardcoded to HX-OS vNEXT values inline (warm-cream paper / ink-teal text / sage-or-rose accent border per variant) — **no `.hxos-vnext` class on container**, since that class also applies `min-height:100vh` + `background-color` and would create a full-viewport invisible block at the bottom-right corner (architect catch). Container offset to `bottom-24` and lifted to `z-index:60` to clear AccessibilityToolbar (`bottom-6 right-6 z-50`) and other fixed widgets in the same corner cluster.
+
+  Resolves silent toast calls in `Settings.jsx` L117/121/126 (previously dispatched into memoryState with no UI sink). `useToast` hook API untouched. `tsc` + `vite build` clean (17.25s).
+
+  ---
+
+  ## v5.8.68 — hxos-vnext.css + 8 page wrappers
+
+  CheckIn, BreathingExercisesPage, JournalPage, AIChatPage, HabitsHubPage, SavedLibrary, Settings, CrisisResources.
+
+  **Iter 2g Phases 2-5.** Visual unification across 8 live routes via shared opt-in CSS file `client/src/styles/hxos-vnext.css` (1 import in `index.css`, 14-token override on `.hxos-vnext`, rose-only override on `.hxos-vnext-crisis` per Phase 5 brief exception).
+
+  Each page got class added to its outermost JSX wrapper (CheckIn: appended to existing className; AIChatPage + HabitsHubPage: fragment→div swap; 5 others: wrapped existing shell). `brand-tokens.css` untouched — 70 non-opted-in pages unaffected. CrisisResources urgent styling preserved (no cream bg override, only rose accent unified).
+
+  Architect PASS. **Deferred caveat:** portal-rendered UI (toasts/modals/dialogs mounted to `document.body`) escapes the `.hxos-vnext` subtree and won't inherit the new tokens — needs follow-up audit if portal theming is in scope. (Closed in v5.8.69 — zero portals exist.) `vite build` clean (18.47s).
+
+  ---
+
+  ## v5.8.67 — canva-landing.css (HX-OS vNEXT scoped tokens)
+
+  **Iter 2g Phase 1.** Visual unification on `/`. 14 `--glp-*` tokens redefined inside `.canva-landing` only (warm-cream `#F6F1E8` paper, ink-teal `rgb(22,58,54)`, deep-teal `rgb(47,93,93)` sage-deep, soft-sage `rgb(143,191,159)`, dusty-rose `#C4787A` + 9 alpha derivatives).
+
+  Global `brand-tokens.css` untouched — other 78 `var(--glp-*)` consumers unchanged. Canonical brand accents (gold/violet/aurora) preserved per Universal Contracts.
+
+  **Approved governance exception:** CanvaLanding's local sage/rose accent values diverge from the locked 8-hex palette under explicit Iter 2g scope; exception is page-scoped, documented inline in `canva-landing.css` L34-48, and does NOT extend to other surfaces without a Phase 2-5 brief. `tsc` + `vite build` clean (14.83s).
+
+  ---
+
+  ## v5.8.77 — Tier B archive folder removal + replit.md trim
 
   Follow-up cleanup after v5.8.76 ship had no rollback requests. Deleted `client/public/brand/v17/.archive-v5.8.76/` (12 files, 4.1 MB — all zero refs in `client/src/`, verified via per-file ripgrep audit). Single revert path is now `git checkout HEAD~N -- client/public/brand/v17/` rather than the local `mv`. Combined with v5.8.76 Tier A this is ~8.8 MB freed total from the public bundle.
 
