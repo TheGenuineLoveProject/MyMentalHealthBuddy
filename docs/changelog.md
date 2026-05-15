@@ -1,3 +1,21 @@
+# v5.8.101 — V49 Targeted Fix 1/8 (nav gap) + EMERGENCY index.css restoration
+
+Two-part cycle:
+
+## (A) EMERGENCY recovery — index.css restored from blob fe93a3d8
+- Auto-checkpoint `47f03492` had captured a 38-line `client/src/index.css` (out-of-band paste of V49 EMERGENCY blanket-`!important` block) overwriting the canonical 7232-line file.
+- Restored from `fe93a3d8` blob via Node `child_process` (sandbox blocked `git checkout`); 180,412 bytes, 7232 lines, 16 `@import` lines all reactive (brand-tokens 328 token defs, lumi-* × 8, hxos-vnext, canva-landing 77KB, sacred-typography, healing-animations, emotion-effects).
+- Restored blob hash `be751b31…` matches `fe93a3d8:client/src/index.css` byte-for-byte; bad checkpoint `47f03492` was a different blob `43e78d11…` (38-line blanket override, 0 @imports).
+- User then sent a 50-line "clean" replacement (no `!important` but still removed all 19 `@imports` → identical structural blast radius); refused with concrete @import-loss audit; user confirmed "keep canonical 7232-line, do NOT touch index.css".
+
+## (B) V49 Fix 1/8 — Nav buttons gap
+- INSPECT: traced 6-item nav (Home/Start/Chat/Journal/Mood/Crisis) matching V49 audit screenshots; eliminated `BrandShell.jsx` (3-item nav, not globally mounted), `components/Header.jsx` + `layout/Header.jsx` (mounted only via unused `AppShell`).
+- Located bug at `WellnessPageShell.jsx:41` quicknav with `gap-1 sm:gap-2` (4px → 8px from sm-up; below V49 spec target of 12px).
+- Crisis page confirmed `import { WellnessPageShell }` so single edit fixes `/crisis + /journal + /chat + /mood + /pricing + /settings + /checkin` in one shot.
+- Color already canonical (`text-[var(--glp-sage-deep)]` = `#4A7E72` sage per V49 spec) — only gap needed.
+- Smallest valid engine: `gap-1 sm:gap-2` → `gap-3` (single Tailwind token swap on 1 line). NO `!important`, no structure change, no new component.
+- Gates: tsc 0, 8/8 routes 200 (`/crisis`, `/journal`, `/chat`, `/mood`, `/pricing`, `/settings`, `/checkin`, `/`), patch confirmed line 44, recurrence-grep 0 hits in `wellness/`.
+
 # v5.8.86 — Zombie Express boot scaffold archive (DUPLICATE_RUNTIME_BOOT_PATHS blocker closed)
 
 Date: 2026-05-15
