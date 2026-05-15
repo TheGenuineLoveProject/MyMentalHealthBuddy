@@ -1,4 +1,61 @@
-## v5.8.65 — Phase 37–43: Seven new opt-in modules (backend / notifications / rbac / audit / tokens / language / disclaimer)
+## v5.8.77 — Tier B archive folder removal + replit.md trim
+
+  Follow-up cleanup after v5.8.76 ship had no rollback requests. Deleted `client/public/brand/v17/.archive-v5.8.76/` (12 files, 4.1 MB — all zero refs in `client/src/`, verified via per-file ripgrep audit). Single revert path is now `git checkout HEAD~N -- client/public/brand/v17/` rather than the local `mv`. Combined with v5.8.76 Tier A this is ~8.8 MB freed total from the public bundle.
+
+  `replit.md`: rolled v5.8.74 / v5.8.75 / v5.8.76 verbose entries (1.2k+ chars each) into one-liners; full deep detail now lives in `docs/changelog.md` per the existing "Polish & Feature History" archive convention. File now ~135 lines (was 141 with three multi-paragraph rows).
+
+  `tsc` clean. `vite build` clean.
+
+  ---
+
+  ## v5.8.76 — Unofficial avatar removal (sprout-only enforcement)
+
+  **All-sprout enforcement complete.** Repointed 14 live refs across 8 source files to canonical sprout-only paths and removed/archived 19 PNG/WebP files (~8.8 MB freed from public bundle).
+
+  **Tier A — `rm` (zero refs):**
+  - 4× `/lumi/official/*.placeholder-bak.png` (3.3 MB rollback safety placeholders)
+  - 5× `/brand/v17/.archive-pre-v5.8.40/*.bak` (1.4 MB pre-archived)
+
+  **Tier B — `mv` to `client/public/brand/v17/.archive-v5.8.76/` (refs migrated first):**
+  - 12× legacy cream-blob `/brand/v17/avatar-{floating,heart,breathing}{,-nobg}.{png,webp}` (4.1 MB) — subsequently removed in v5.8.77 after no rollback requests.
+
+  **Source files repointed (8):** `lumiAssets.js` (3 vars), `nlpMiContent.js` (4 cards × avatar+webp), `PageTemplate.jsx` (`lumiIconUrl`), `LumiV6.tsx` (7 `COLOR_PNG` + 4 `POSE_PNG` + `FALLBACK_PNG`), `BuddyAvatar.tsx` (7 `COLOR_MODE_SRC` + 5 character-pack + `FALLBACK_LUMI` + 6 `POSE_SRC`), `LumiMascotImage.jsx` (`lumiFullBodyPng`), `OnboardingFlow.jsx` (1 inline `<img src>`).
+
+  **Mapping rule:** `floating*` → `lumi-float-idle.png`, `heart*` → `lumi-heart.png`, `breathing*` → `lumi-meditation.png` (closest sprout per V26 sprout-only mandate). All `avatarWebp` set to `undefined` since canonical assets are PNG-only — `<source>` element conditionally renders only when truthy (verified pattern in `NlpMiContent.jsx` L215).
+
+  **Audit caught 3 missed files in initial pass:** `BuddyAvatar.tsx` (multi-ref color/pose maps + character pack), `LumiMascotImage.jsx`, `LumiV6.FALLBACK_PNG` — all would have rendered as broken images on first page load. Bulk-fixed via `sed` in 3 files, then `OnboardingFlow.jsx` straggler.
+
+  **Pre-existing issue surfaced:** `lumi-path.png` was already missing from disk (removed in earlier user checkpoint `2e4cd3d`); 2 refs (`officialLumiRegistry.LUMI_PATH.src` + `VisualBenefits.jsx` "Grow at your own pace" card) repointed to `lumi-float-idle.png` as closest sprout substitute. `LUMI_PATH` registry alt updated from "standing gently on a calm path" → "standing gently, ready for the next step" (semantic preserved, walking-path no longer claimed).
+
+  **Final state:** `/lumi/official/` = 7 sprout PNGs + MANIFEST; `/brand/v17/` = 4 benefit-scene PNG/WebP pairs only (avatars gone). Final live-ref audit: zero `/brand/v17/avatar-*` matches in code (only 3 historical comments remain, intentional). `tsc` clean. `vite build` clean (18.88s).
+
+  ---
+
+  ## v5.8.75 — V29 Phase 1 hybrid nav
+
+  **Action-first nav restructure.** CanvaLanding desktop center strip rewritten to 8 action-priority links: Home · Tools · Check-In · Companion · Journal · Blog · Crisis · Pricing (About/Features/Community/Learn removed from desktop, kept in mobile menu + footer). Login/Get Started remain as right-side CTAs. Crisis link uses rose accent (`var(--glp-rose, #C4787A)`) for safety affordance. Mobile menu reorganized into 4 grouped sections: Core Actions, Discover, Trust, Account. Tightened center-nav padding `gap-2 xl:gap-3` → `gap-1 xl:gap-2` and `px-4` → `px-3` to fit 8 links cleanly.
+
+  **BrandShell.jsx broken-button fix:** 3 inert `<button type="button">` (Journal/Mood/Start a Check-In) had no `onClick` handlers — clicks were no-ops. Replaced with wouter `<Link>` wrappers: Journal → `/journal`, Mood → `/checkin`, Start a Check-In → `/checkin`. Added `import { Link } from "wouter"`.
+
+  Verification: tasks 1-2 already correct (quote block on `var(--glp-paper)` light cream + dark text since v5.8.68; all 4 benefit CTAs match V29 spec — `/tools/breathing`, `/checkin`, `/companion`, `/celebration`). `tsc` clean. `vite build` clean (18.62s).
+
+  ---
+
+  ## v5.8.74 — Canonical Lumi sprout-only replacement
+
+  **All-sprout canonical mandate.** Per user authority, every rendered Lumi must be sprout-on-head; hooded designs archive-only; long-eared forbidden (V26). Replaced 7 of 8 canonical bridged placeholders with user-supplied sprout artwork: **(1)** `LUMI_SOFT_PRESENCE` ← `57FC35F4` (sprout hugging green orb, 2.2 MB); **(2)** `LUMI_HEART` ← cropped from 6-pose grid `2B638A20` cell (1024,0,512,512); **(3)** `LUMI_CALM_FLOAT` ← `25F728DB` (sprout floating + glow, 1.5 MB); **(4)** `LUMI_MEDITATION` ← cropped grid cell (0,512,512,512); **(5)** `LUMI_COMPANION` ← cropped grid cell (512,0,512,512) — closest-sprout substitution per V26 rule; **(6)** `LUMI_EMOTION_ORB` ← `AFEC27DF` (sprout emotion-orb, 2.3 MB); **(7)** `LUMI_FLOAT_IDLE` ← `FA65B1F0` (sprout standing, 2.2 MB) — **resolves architect-flagged identity-drift** (prior sourced from sparkles region artifact).
+
+  **One documented exception:** `LUMI_PATH` kept on prior hooded source — no sprout walking-path render exists in user batch yet; flagged in MANIFEST for follow-up commission. (Superseded by v5.8.76 after the hooded source was confirmed missing from disk.)
+
+  **Scene replacement:** `client/public/brand/v17/benefit-companionship.png` swapped from prior 2.2 MB hooded scene → user-supplied 708 KB sprout halo (rose/peach 16:9). Other 3 benefit scenes byte-identical — no-op.
+
+  **Cropping tool:** ImageMagick `magick convert -crop 512x512+X+Y +repage` (3 cells from 1536×1024 master grid).
+
+  **Non-destructive safety:** all 8 prior placeholders preserved as `*.placeholder-bak.png` siblings (removed in v5.8.76 Tier A). MANIFEST.md rewritten — new provenance table, new "Brand rule (v5.8.74)" section, reversal + forward-path docs. Zero code changes (registry path constants unchanged; all 7 enrolled pages auto-pick up new sprout artwork on next render). `tsc` clean. `vite build` clean.
+
+  ---
+
+  ## v5.8.65 — Phase 37–43: Seven new opt-in modules (backend / notifications / rbac / audit / tokens / language / disclaimer)
 
 Seven standalone opt-in spec modules at `client/src/lumi-{backend,notifications,rbac,audit,tokens,language,disclaimer}/`. Same shipping pattern as v5.8.51–64 — zero production wiring, zero new npm dependencies, zero files outside the seven new directories modified. 25 files total transcribed literally from the two attached spec prompts (1559 + 514 lines). Each module owns its own barrel; floor guards added where applicable.
 
