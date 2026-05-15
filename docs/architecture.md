@@ -54,3 +54,27 @@ Drizzle ORM is used with a Neon PostgreSQL database. Production security include
 - **Whoop**: Biometric data integration.
 - **Apple HealthKit**: Biometric data integration (via webhook).
 - **PagerDuty**: Alerting and incident management.
+
+---
+
+## Quick Reference
+
+```bash
+# Build verification
+npm run build                  # vite ~16s clean
+
+# Type check
+npx tsc --noEmit               # clean across all 16 opt-in modules
+
+# Bundle size
+# 751.39 kB main (modules tree-shaken; zero production wiring)
+```
+
+```ts
+// To import a module: opt-in — import what you need, nothing more
+import { COLORS, alpha } from "@/lumi-tokens";
+import { translateNegation } from "@/lumi-language";
+import { REQUIRED_DISCLAIMER, enforceDisclaimer } from "@/lumi-disclaimer";
+```
+
+For complete per-version detail, file breakdowns, and architect reviews → see `docs/changelog.md`.

@@ -33,10 +33,11 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 
 **Archive notice:** Entries older than v5.8.80 removed to keep this file lightweight. Entries v4.1.1 → v5.8.79 archived to `docs/replit-history.md`. Full deep-technical detail for every release lives in `docs/changelog.md`.
 
-### Index (v5.8.80 – v5.8.92)
+### Index (v5.8.80 – v5.8.93)
 
 | Version | Date | Modules | Key Change |
 |---|---|---|---|
+| v5.8.93 | 2026-05-15 | replit.md (V45 C1c — Quick Reference extraction) + docs/architecture.md (+22L appendix) | V45 GO-SIGNAL: extracted Quick Reference block (heading + 2 code blocks + changelog pointer = 20L) → `docs/architecture.md` Quick Reference appendix. Replaced with 1-line dual-pointer in Universal Contracts trailer. Per v5.8.89 honest-deficit analysis: this was the last significant extractable block. Result: replit.md 94L → 75L (−19, sub-80L target met ✅). Phase 1 EXIT-CLEAN under all V44 metrics. |
 | v5.8.92 | 2026-05-15 | .archive/avatar-core/source/ (NEW 9 subdirs) + ./avatar-core/ (DELETED) + V44 governance ratified | V44 GO-SIGNAL: ratified V44 Integrated Governance V2 (ONE Authority Principle + Patch Rules ALLOWED/FORBIDDEN list) — already compliant per v5.8.86 audit (single runtime entrypoint server/app.mjs; otelApi.mjs `app.listen` reference is a code-comment, not boot path). Executed C2 iter #2 Path B per V34 SMALLEST_VALID_ENGINE: mass-archived remaining root SOURCE tree (alpha/edge-cleanup/masks/master/regions/rig-reference/shadow/transparent/verification = 9 subdirs, 22 files, ~22M) → `.archive/avatar-core/source/` in 1 op (vs 22 ops at 1-file/cycle); rmdir'd empty avatar-core/raw + avatar-core/ root. Gates: tsc 0, /+/chat+/crisis+/health+/ready 200, master+regions+shadow+lumi-path all 200 (active mirror at client/public/avatar-core/ untouched), 0 relative-import refs to archived paths. .archive/avatar-core/ now 24M / 23 files (full SSOT preserved); root tree size 22M→0M; root avatar-core/ no longer exists. C2 CLOSED. |
 | v5.8.91 | 2026-05-15 | .archive/avatar-core/source/raw/ (NEW) + ./avatar-core/raw/ (emptied) | V43 C2 iter #1 — avatar-core/ orphan audit. CLASSIFY: client/public/avatar-core/* (16M, 24 files) ACTIVE per FloatIdleRig.jsx:76 + FloatIdleAnimated.jsx:71 + Presence.jsx:117 + avatar-life/index.ts:9; root ./avatar-core/* (24M, 23 files) SOURCE per FloatIdleRig.jsx:5-6 comment ("SSOT mirrored from repo avatar-core/"). ONE blocker: largest source file `MMHB_FLOAT_IDLE_UNIT_v1_raw.png` (1.5M) → `.archive/avatar-core/source/raw/`. Gates: tsc 0, /+/health 200, master/regions/shadow + lumi-path all 200 (active mirror untouched), 0 code refs to archived path. .archive/avatar-core/ now 1.5M / 1 file; root avatar-core/ 24M→22M. |
 | v5.8.90 | 2026-05-15 | replit.md (V41 C1 iter — v5.8.86 cell trim) + docs/changelog.md (+62L) | Per V41 PHASE 2 literal: most-verbose remaining row = v5.8.86 (~2528 chars). Full detail prepended to `docs/changelog.md` as `# v5.8.86` heading; row collapsed to 1-sentence summary. Net replit.md line count: 91→92 (cell-trim is char-saving not line-saving; new row +1L). Honest result: V41's "30-40 lines saved per iter" is structurally impossible — table rows are single lines regardless of cell width. |
@@ -67,27 +68,7 @@ Every polish layer above honors these (and any new layer must too):
 - Z-index contract: decorative layers 0/1/2 → content `relative z-10`.
 - Crisis routing (`/crisis`, 988, 741741) preserved on every wellness surface.
 
-### Quick Reference
-
-```bash
-# Build verification
-npm run build                  # vite ~16s clean
-
-# Type check
-npx tsc --noEmit               # clean across all 16 opt-in modules
-
-# Bundle size
-# 751.39 kB main (modules tree-shaken; zero production wiring)
-```
-
-```ts
-// To import a module: opt-in — import what you need, nothing more
-import { COLORS, alpha } from "@/lumi-tokens";
-import { translateNegation } from "@/lumi-language";
-import { REQUIRED_DISCLAIMER, enforceDisclaimer } from "@/lumi-disclaimer";
-```
-
-For complete per-version detail, file breakdowns, and architect reviews → see `docs/changelog.md`.
+For complete per-version detail → `docs/changelog.md`. For Quick Reference (build/tsc/bundle commands + opt-in module import patterns) → `docs/architecture.md` (Quick Reference appendix).
 
 ## System Architecture & Dependencies
 
