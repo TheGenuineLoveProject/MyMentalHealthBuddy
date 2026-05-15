@@ -1,3 +1,63 @@
+# v5.8.86 — Zombie Express boot scaffold archive (DUPLICATE_RUNTIME_BOOT_PATHS blocker closed)
+
+Date: 2026-05-15
+Cycle: V37 GO-SIGNAL — HX-OS QUANTUM ∞ Phase 3-6
+Files changed: 3 mv (server/index.mjs, server/dev.mjs, server/tests/vitest.setup.mjs) + 1 rm (server/app.ts)
+
+## INSPECT findings
+
+`server/` held 3 full Express boot scaffolds:
+- `app.mjs` 40KB ACTIVE
+- `index.mjs` 33KB ZOMBIE
+- `dev.mjs` 33KB ZOMBIE
+
+Each with own `express()` + `PORT=5000` + `listen("0.0.0.0")`. Plus `app.ts` (0-byte stale placeholder).
+
+Importer scan proved zero callers of the zombies anywhere in src/tests/scripts (only `tests/{vitest.setup,auth.test}.mjs` import canonical `app.mjs`).
+
+## V34 DUPLICATION_GATE violation
+
+Three indistinguishable boot files in same dir confuse agents/humans even when dormant; future `node server/index.mjs` would bypass `--import preload.mjs` observability silently.
+
+## Patch (smallest valid engine)
+
+- 2 in-place renames: `server/index.mjs` → `server/index.mjs.archived-v5.8.86`, same for `dev.mjs`
+- 1 `rm server/app.ts` (no content to preserve)
+- Used `mv` not `git mv` per Replit sandbox guidelines (auto-commit handles VC)
+
+Post-patch grep confirms only canonical `app.mjs:739 app.listen(...)` remains in non-archived server/.
+
+## Reversal
+
+Rename `.archived-v5.8.86` suffix off (or use Replit checkpoint `cc222e7a`).
+
+## Architect catch (same-cycle fix)
+
+Post-patch review flagged `server/tests/vitest.setup.mjs` still spawned `node server/index.mjs` — would break if run. Verified via `vitest.config.mjs:8` that the wired setup is the ROOT `tests/vitest.setup.mjs` (already imports canonical `app.mjs`); the server-tree harness was orphan dead code with zero importers. Same-pattern archive applied (`server/tests/vitest.setup.mjs` → `.archived-v5.8.86`).
+
+Final scope: 3 mv + 1 rm.
+
+## Verification
+
+- tsc 0 errors
+- vite 28.55s
+- /+/chat+/crisis+/health+/ready 200
+- /lumi/official/lumi-path.png 200/682KB regression-sanity
+
+## Tech debt logged (NOT fixed this cycle per SMALLEST_VALID_ENGINE)
+
+15+ scripts in scripts/ + tools/ still reference `server/index.mjs`/`server/dev.mjs` for existence checks (heal-360, validateRoutes, scan, runHealthCheck, restart-dev, report, proofOfWorkV2, prevent-duplicates, perf, guardrails, platformAnalysis, analyze-project) — all use permissive `existsSync(a) || existsSync(b)` patterns that fall through gracefully; will over-report "missing" but won't crash. Queue v5.8.87 follow-up to repoint these to `server/app.mjs`.
+
+## Note
+
+New diagnostic files mentioned in checkpoint description (listening-ports/health-routes/domain-firewall) were NOT actually added — checkpoint message mislabeled; docs/diagnostics/ unchanged from May 15 07:54Z snapshot.
+
+## Reconciliation (v5.8.87)
+
+Archives subsequently moved from in-place `server/*.archived-v5.8.86` to V37-spec `.local/zombies/server-{index,dev,tests-vitest-setup}.mjs.archived-v5.8.86` so the published rollback `cp` commands work as-is.
+
+---
+
 # v5.8.84 — Canonical avatar reinstall (8 PNGs) + attached_assets aggressive cleanup
 
 Date: 2026-05-15
