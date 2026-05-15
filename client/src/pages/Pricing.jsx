@@ -218,7 +218,7 @@ export default function Pricing() {
     ]}
   >
 
-    <div className="min-h-screen relative" style={{ background: 'var(--glp-paper, #F7F4EE)' }}>
+    <div className="hxos-vnext min-h-screen relative" style={{ background: 'var(--glp-paper, #F7F1E8)' }}>
       <SEO
         title="Pricing - MyMentalHealthBuddy"
         description="Free emotional wellness companion. Optional Personal Guide, Full Companion, and Transformation Partner plans. Cancel anytime."
