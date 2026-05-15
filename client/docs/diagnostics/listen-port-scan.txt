@@ -1,0 +1,196 @@
+./src/pages/admin/CommandCenter.module.css:  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+./src/pages/admin/CommandCenter.jsx:        <div style={{ padding: '0.5rem 1rem', borderTop: '1px solid rgba(0,0,0,0.06)' }} data-testid="panel-platform-stats">
+./src/pages/admin/CommandCenter.jsx:        <div style={{ padding: '0.5rem 1rem', borderTop: '1px solid rgba(0,0,0,0.06)' }} data-testid="panel-integrations">
+./src/pages/admin/CommandCenter.jsx:              border: '1px solid rgba(0,0,0,0.12)', borderRadius: '6px',
+./src/pages/admin/CommandCenter.jsx:              background: 'rgba(0,0,0,0.02)', outline: 'none'
+./src/pages/admin/CommandCenter.jsx:        <button onClick={expandAll} style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer' }} data-testid="button-expand-all">
+./src/pages/admin/CommandCenter.jsx:        <button onClick={collapseAll} style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer' }} data-testid="button-collapse-all">
+./src/pages/admin/CommandCenter.jsx:                          background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px',
+./src/pages/admin/CommandCenter.jsx:            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '3px' }}
+./src/pages/admin/CommandCenter.jsx:            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer' }}
+./src/pages/admin/CommandCenter.jsx:                  border: isChecked ? '2px solid #22c55e' : '2px solid rgba(0,0,0,0.2)',
+./src/pages/admin/CommandCenter.jsx:          <button onClick={checkAISystems} disabled={checking} style={{ fontSize: '0.7rem', padding: '4px 10px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.1)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }} data-testid="button-check-ai-systems">
+./src/pages/admin/CommandCenter.jsx:                border: `1px solid ${st?.status === 'issue' ? '#fbbf2433' : st?.status === 'offline' ? '#ef444433' : 'rgba(0,0,0,0.08)'}`,
+./src/pages/admin/CommandCenter.jsx:                background: 'rgba(0,0,0,0.015)'
+./src/pages/admin/CommandCenter.jsx:              border: '1px solid rgba(0,0,0,0.06)', background: 'hsl(var(--muted))',
+./src/pages/DesignSystem.jsx:                        <code className="text-sm px-2 py-1 rounded" style={{ background: 'rgba(0,0,0,0.05)' }}>
+./src/pages/DesignSystem.jsx:                    <div className="mt-4 p-3 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                    <div className="mt-4 p-3 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                  <div className="p-4 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                  <div className="p-4 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                  <div className="p-4 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                  <div className="p-4 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                  <div className="p-4 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                <div className="mt-4 p-4 rounded-lg text-xs" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                <div className="p-4 rounded-lg font-mono text-sm" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                    <div key={i} className="p-4 rounded-2xl bg-white border text-center" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+./src/pages/DesignSystem.jsx:                <div className="p-4 rounded-lg font-mono text-sm overflow-x-auto" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                <div className="p-4 rounded-lg font-mono text-sm overflow-x-auto" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/DesignSystem.jsx:                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg" style={{ background: 'rgba(0,0,0,0.03)' }}>
+./src/pages/GratitudePractice.jsx:                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+./src/pages/GratitudePractice.jsx:            boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
+./src/pages/InnerChildPage.jsx:        ? { background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))', color: 'var(--glp-paper)', boxShadow: '0 10px 25px -3px rgba(0,0,0,0.15)', transform: 'scale(1.05)' }
+./src/pages/MeditationGuidePage.jsx:                  ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)', boxShadow: '0 10px 25px -3px rgba(0,0,0,0.15)' }
+./src/pages/Reflection.jsx:        boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+./src/pages/dashboard/Overview.jsx:                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+./src/pages/tools/BreathingTool.jsx:          style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }}
+./src/pages/Disclaimer.tsx:          <div className="bg-white rounded-3xl p-8 space-y-8" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }}>
+./src/pages/About.jsx:          <div className="bg-white rounded-3xl p-8 md:p-12 mb-12" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }} data-testid="card-mission">
+./src/pages/About.jsx:            <div className="bg-white rounded-2xl p-6 text-center" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 8px 24px -8px rgba(0,0,0,0.06)' }} data-testid="card-feature-safe">
+./src/pages/About.jsx:            <div className="bg-white rounded-2xl p-6 text-center" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 8px 24px -8px rgba(0,0,0,0.06)' }} data-testid="card-feature-ai">
+./src/pages/About.jsx:            <div className="bg-white rounded-2xl p-6 text-center" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 8px 24px -8px rgba(0,0,0,0.06)' }} data-testid="card-feature-community">
+./src/pages/About.jsx:          <div className="bg-white rounded-3xl p-8 md:p-12 text-center" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)', borderTop: '4px solid var(--glp-sage)' }} data-testid="card-quote">
+./src/pages/Pricing.jsx:                      ? '0 20px 50px -12px rgba(232, 145, 58, 0.25), 0 4px 12px rgba(0,0,0,0.04)'
+./src/pages/Pricing.jsx:                      : '0 12px 32px -10px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.03)'
+./src/pages/Pricing.jsx:          <section className="mt-16 rounded-3xl p-8 md:p-10 bg-white" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }} data-testid="section-value-bridge">
+./src/pages/Pricing.jsx:          <section className="mt-12 rounded-3xl p-8 md:p-10 bg-white text-center" style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }} data-testid="section-email-capture">
+./src/pages/CheckIn.jsx:          style={{ border: '1px solid var(--glp-sage-20)', boxShadow: '0 12px 32px -10px rgba(0,0,0,0.08)' }}
+./src/components/EmotionAuraRing.jsx:          stroke="rgba(0,0,0,0.05)"
+./src/components/EmotionPieChart.jsx:            backgroundColor: "rgba(0,0,0,0.8)",
+./src/components/FloatingLotusGuide.jsx:          0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+./src/components/ProgressRing.jsx:            : 'rgba(0,0,0,0.05)',
+./src/components/admin/OrchestratorTestPanel.jsx:              style={{ background: "rgba(0,0,0,0.04)" }}
+./src/components/admin/OrchestratorTestPanel.jsx:                  style={{ background: "rgba(0,0,0,0.02)" }}
+./src/components/modules/ModulesPanel.tsx:      className="mt-8 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.18)] p-5"
+./src/components/modules/ModulesPanel.tsx:        <pre className="mt-3 whitespace-pre-wrap rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(0,0,0,0.22)] p-3 text-sm">
+./src/components/ui/ResourceTiles.jsx:              style={{ background: 'rgba(0,0,0,0.3)' }}
+./src/components/peacescape/CustomizerPanel.jsx:                  style={{ background: p.swatch, boxShadow: "inset 0 -4px 12px rgba(0,0,0,0.10)" }}
+./src/components/lumi/LumiAccessibleWrapper.jsx:          clip: "rect(0,0,0,0)",
+./src/components/lumi/LumiCustomizer.jsx:          boxShadow: "0 24px 80px rgba(0,0,0,0.35)",
+./src/components/CelebrationOverlay.tsx:          textShadow: "0 1px 4px rgba(0,0,0,0.45)",
+./src/lib/queryClient.js:              typeof window !== "undefined" ? window.location.origin : "http://localhost"
+./src/main.jsx:  banner.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#5A8A6E;color:#fff;padding:14px 24px;border-radius:12px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.18);font-family:Inter,sans-serif;font-size:14px;max-width:440px;width:calc(100% - 32px);animation:slideUp 0.3s ease-out';
+./src/styles/healing-animations.css:    box-shadow: 0 0 0 0 rgba(143, 191, 159, 0.4);
+./src/styles/checkin.css:  0%   { box-shadow: 0 0 0 0 rgba(var(--emotion-accent), 0.55), 0 4px 20px rgba(var(--emotion-accent), 0.30); }
+./src/styles/brand.css:  0% { box-shadow: 0 0 0 0 rgba(var(--glp-gold-rgb), 0.4); }
+./src/styles/brand.css:  100% { box-shadow: 0 0 0 0 rgba(var(--glp-gold-rgb), 0); }
+./src/styles/brand.css:    box-shadow: 0 0 0 0 rgba(var(--glp-sage-deep-rgb), 0.4);
+./src/styles/brand.css:    box-shadow: 0 0 0 0 rgba(var(--glp-sage-deep-rgb), 0);
+./src/styles/sacred.css:    box-shadow: 0 0 0 0 rgba(143, 191, 159, 0.4);
+./src/styles/brand-tokens.css:  --glp-shadow-1: 0 2px 8px rgba(0,0,0,0.04);
+./src/styles/brand-tokens.css:  --glp-shadow-2: 0 4px 16px rgba(0,0,0,0.06);
+./src/styles/canva-landing.css:    box-shadow: 0 0 0 0 rgba(30, 200, 144, 0.25), 0 0 0 0 rgba(108, 88, 184, 0.15);
+./src/styles/canva-landing.css:  box-shadow: 0 4px 20px var(--glp-gold-30), 0 0 0 0 var(--glp-gold-10);
+./src/styles/canva-landing.css:  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+./src/styles/canva-landing.css:    0 0 0 0 rgba(6, 42, 42, 0.08);
+./src/styles/canva-landing.css:    0 0 0 0 rgba(190, 134, 34, 0.12);
+./src/index.css.backup.1777434482:    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+./src/index.css.backup.1777434482:    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 20px rgba(42, 84, 84, 0.35), 0 2px 6px rgba(0,0,0,0.08);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4), 0 2px 6px rgba(0,0,0,0.06);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 20px rgba(90, 138, 110, 0.35), 0 2px 6px rgba(0,0,0,0.08);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 20px rgba(232, 155, 149, 0.35), 0 2px 6px rgba(0,0,0,0.06);
+./src/index.css.backup.1777434482:    0 1px 3px rgba(0,0,0,0.03),
+./src/index.css.backup.1777434482:    0 4px 12px rgba(0,0,0,0.05),
+./src/index.css.backup.1777434482:    0 1px 3px rgba(0,0,0,0.02),
+./src/index.css.backup.1777434482:    0 4px 12px rgba(0,0,0,0.04),
+./src/index.css.backup.1777434482:    0 1px 3px rgba(0,0,0,0.02),
+./src/index.css.backup.1777434482:    0 4px 12px rgba(0,0,0,0.04),
+./src/index.css.backup.1777434482:  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+./src/index.css.backup.1777434482:  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 4px 16px rgba(var(--glp-sage-deep-rgb), 0.05);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 16px rgba(0,0,0,0.05), 0 12px 40px rgba(var(--glp-sage-deep-rgb), 0.08);
+./src/index.css.backup.1777434482:  box-shadow: 0 8px 24px rgba(0,0,0,0.06), 0 24px 64px rgba(var(--glp-sage-deep-rgb), 0.12);
+./src/index.css.backup.1777434482:    box-shadow: 0 0 0 0 rgba(42, 84, 84, 0);
+./src/index.css.backup.1777434482:  box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 8px 32px rgba(0,0,0,0.25);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 20px 56px rgba(0,0,0,0.35);
+./src/index.css.backup.1777434482:  box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.15);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 16px rgba(0,0,0,0.25), 0 12px 40px rgba(0,0,0,0.2);
+./src/index.css.backup.1777434482:  box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 24px 64px rgba(0,0,0,0.25);
+./src/index.css.backup.1777434482:  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+./src/index.css.backup.1777434482:  box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 0 0 3px var(--glp-gold);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 16px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.03);
+./src/index.css.backup.1777434482:  box-shadow: 0 8px 24px rgba(0,0,0,0.06), 0 24px 60px rgba(0,0,0,0.05);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 12px 40px rgba(0,0,0,0.2);
+./src/index.css.backup.1777434482:  box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 24px 60px rgba(0,0,0,0.3);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+./src/index.css.backup.1777434482:  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+./src/index.css.backup.1777434482:    0 4px 6px rgba(0,0,0,0.02),
+./src/index.css.backup.1777434482:    0 8px 16px rgba(0,0,0,0.04),
+./src/index.css.backup.1777434482:    0 4px 6px rgba(0,0,0,0.15),
+./src/index.css.backup.1777434482:    0 12px 32px rgba(0,0,0,0.25),
+./src/index.css.backup.1777434482:    0 8px 16px rgba(0,0,0,0.2),
+./src/index.css.backup.1777434482:    0 24px 48px rgba(0,0,0,0.3),
+./src/index.css.backup.1777434482:  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+./src/index.css.backup.1777434482:  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+./src/index.css.backup.1777434482:  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+./src/index.css.backup.1777434482:.dark .surface-card-elevated { background: rgba(30, 40, 45, 0.95); border-color: rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+./src/index.css.backup.1777434482:    0 2px 4px rgba(0,0,0,0.02),
+./src/index.css.backup.1777434482:    0 4px 8px rgba(0,0,0,0.03),
+./src/index.css.backup.1777434482:    0 2px 4px rgba(0,0,0,0.15),
+./src/index.css.backup.1777434482:    0 8px 24px rgba(0,0,0,0.25);
+./src/index.css.backup.1777434482:    0 4px 8px rgba(0,0,0,0.2),
+./src/index.css.backup.1777434482:    0 16px 40px rgba(0,0,0,0.35);
+./src/index.css.backup.1777434482:  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--glp-gold-rgb), 0.4); }
+./src/index.css.backup.1777434482:      0 0 0 0 rgba(212, 168, 75, 0);
+./src/index.css.backup.1777434482:    linear-gradient(#000 0 0) content-box,
+./src/index.css.backup.1777434482:    linear-gradient(#000 0 0);
+./src/index.css.backup.1777434482:    linear-gradient(#000 0 0) content-box,
+./src/index.css.backup.1777434482:    linear-gradient(#000 0 0);
+./src/index.css.backup.1777434482:    0 4px 12px rgba(0,0,0,0.05),
+./src/sections/EmailCapture.jsx:          overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+./src/sections/ValueProposition.jsx:          clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+./src/lumi-backend/config/apiConfig.ts:  host: "0.0.0.0",
+./src/lumi-backend/config/apiConfig.ts:  host: process.env.REDIS_HOST || "localhost",
+./src/lumi-backend/config/apiConfig.ts:    "http://localhost:5173",
+./src/lumi-backend/config/apiConfig.ts:    "http://localhost:3000",
+./src/index.css:    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+./src/index.css:    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+./src/index.css:  box-shadow: 0 4px 20px rgba(42, 84, 84, 0.35), 0 2px 6px rgba(0,0,0,0.08);
+./src/index.css:  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4), 0 2px 6px rgba(0,0,0,0.06);
+./src/index.css:  box-shadow: 0 4px 20px rgba(90, 138, 110, 0.35), 0 2px 6px rgba(0,0,0,0.08);
+./src/index.css:  box-shadow: 0 4px 20px rgba(232, 155, 149, 0.35), 0 2px 6px rgba(0,0,0,0.06);
+./src/index.css:    0 1px 3px rgba(0,0,0,0.03),
+./src/index.css:    0 4px 12px rgba(0,0,0,0.05),
+./src/index.css:    0 1px 3px rgba(0,0,0,0.02),
+./src/index.css:    0 4px 12px rgba(0,0,0,0.04),
+./src/index.css:    0 1px 3px rgba(0,0,0,0.02),
+./src/index.css:    0 4px 12px rgba(0,0,0,0.04),
+./src/index.css:  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+./src/index.css:  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 4px 16px rgba(var(--glp-sage-deep-rgb), 0.05);
+./src/index.css:  box-shadow: 0 4px 16px rgba(0,0,0,0.05), 0 12px 40px rgba(var(--glp-sage-deep-rgb), 0.08);
+./src/index.css:  box-shadow: 0 8px 24px rgba(0,0,0,0.06), 0 24px 64px rgba(var(--glp-sage-deep-rgb), 0.12);
+./src/index.css:    box-shadow: 0 0 0 0 rgba(42, 84, 84, 0);
+./src/index.css:  box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 8px 32px rgba(0,0,0,0.25);
+./src/index.css:  box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 20px 56px rgba(0,0,0,0.35);
+./src/index.css:  box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.15);
+./src/index.css:  box-shadow: 0 4px 16px rgba(0,0,0,0.25), 0 12px 40px rgba(0,0,0,0.2);
+./src/index.css:  box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 24px 64px rgba(0,0,0,0.25);
+./src/index.css:  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+./src/index.css:  box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 0 0 3px var(--glp-gold);
+./src/index.css:  box-shadow: 0 4px 16px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.03);
+./src/index.css:  box-shadow: 0 8px 24px rgba(0,0,0,0.06), 0 24px 60px rgba(0,0,0,0.05);
+./src/index.css:  box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 12px 40px rgba(0,0,0,0.2);
+./src/index.css:  box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 24px 60px rgba(0,0,0,0.3);
+./src/index.css:  box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+./src/index.css:  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+./src/index.css:    0 4px 6px rgba(0,0,0,0.02),
+./src/index.css:    0 8px 16px rgba(0,0,0,0.04),
+./src/index.css:    0 4px 6px rgba(0,0,0,0.15),
+./src/index.css:    0 12px 32px rgba(0,0,0,0.25),
+./src/index.css:    0 8px 16px rgba(0,0,0,0.2),
+./src/index.css:    0 24px 48px rgba(0,0,0,0.3),
+./src/index.css:  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+./src/index.css:  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+./src/index.css:  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+./src/index.css:  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+./src/index.css:.dark .surface-card-elevated { background: rgba(30, 40, 45, 0.95); border-color: rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+./src/index.css:    0 2px 4px rgba(0,0,0,0.02),
+./src/index.css:    0 4px 8px rgba(0,0,0,0.03),
+./src/index.css:    0 2px 4px rgba(0,0,0,0.15),
+./src/index.css:    0 8px 24px rgba(0,0,0,0.25);
+./src/index.css:    0 4px 8px rgba(0,0,0,0.2),
+./src/index.css:    0 16px 40px rgba(0,0,0,0.35);
+./src/index.css:  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--glp-gold-rgb), 0.4); }
+./src/index.css:      0 0 0 0 rgba(212, 168, 75, 0);
+./src/index.css:    linear-gradient(#000 0 0) content-box,
+./src/index.css:    linear-gradient(#000 0 0);
+./src/index.css:    linear-gradient(#000 0 0) content-box,
+./src/index.css:    linear-gradient(#000 0 0);
+./src/index.css:    0 4px 12px rgba(0,0,0,0.05),
+./analysis.html:    black: 0x000000,
+./docs/governance/HX_OS_REPLIT_EXECUTION_KERNEL.md:- Server must use process.env.PORT || 5000
+./docs/governance/HX_OS_REPLIT_EXECUTION_KERNEL.md:- Server must listen on 0.0.0.0
+./scripts/hx-diagnose.sh:grep -R "app.listen\|server.listen\|process.env.PORT\|0.0.0.0\|localhost\|127.0.0.1" . --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=build --exclude-dir=backups --exclude-dir=quarantine --exclude-dir=rescue --exclude-dir=.git > docs/diagnostics/listen-port-scan.txt || true
+./scripts/hx-verify.sh:for path in /health /ready /api/health; do echo "Testing $path" && curl -s -o /tmp/health.out -w "HTTP:%{http_code} TIME:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}$path" || true && cat /tmp/health.out || true && echo ""; done
+./scripts/hx-verify.sh:echo "=== ROOT CHECK ===" && curl -s -o /tmp/root.out -w "ROOT HTTP:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}/" || true && head -40 /tmp/root.out || true

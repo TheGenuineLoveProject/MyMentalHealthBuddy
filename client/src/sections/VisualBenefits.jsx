@@ -107,10 +107,11 @@ const BENEFITS = [
     // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
     image: '/brand/v17/benefit-growth.png',
     imageWebp: '/brand/v17/benefit-growth.webp',
-    // v5.8.76 — LUMI_PATH source missing on disk (no sprout walking-path
-    // render commissioned yet). Substituted closest sprout: standing
-    // float-idle. Replace with sprout walking-path when commissioned.
-    avatar: '/lumi/official/lumi-float-idle.png',
+    // v5.8.85 (V25 fix) — LUMI_PATH sprout walking-path now commissioned
+    // (IMG_4349 installed v5.8.84). Switched from float-idle substitute to
+    // canonical lumi-path. Closes V25 mapping requirement: "Grow at your
+    // own pace." section → POSE F (Walking Path #8).
+    avatar: '/lumi/official/lumi-path.png',
     avatarWebp: undefined,
     icon: Sparkles,
     iconLabel: 'Personal growth',

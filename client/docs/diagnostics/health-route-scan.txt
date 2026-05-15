@@ -1,0 +1,1102 @@
+./src/pages/admin/AdminPublishingToday.jsx:  const readyDrafts = drafts.filter((d) => d.status === "draft" || d.status === "approved");
+./src/pages/admin/AdminPublishingToday.jsx:  const filtered = filter === "all" ? readyDrafts : readyDrafts.filter((d) => d.type === filter);
+./src/pages/admin/AdminPublishingToday.jsx:            {today} &middot; {readyDrafts.length} drafts ready &middot; {postedDrafts.length} posted
+./src/pages/admin/AdminPublishingToday.jsx:            <p className="text-2xl font-bold text-amber-600" data-testid="stat-ready">{readyDrafts.length}</p>
+./src/pages/admin/AdminPublishingToday.jsx:            {f === "all" ? readyDrafts.length : readyDrafts.filter((d) => d.type === f).length})
+./src/pages/admin/AdminUsers.jsx:  const { data: healthData } = useQuery({
+./src/pages/admin/AdminUsers.jsx:    queryKey: ['/api/health'],
+./src/pages/admin/AdminUsers.jsx:    { label: "Platform Uptime", value: healthData?.uptimeFormatted || "—", icon: Clock, desc: "Current server uptime", color: "text-purple-600" },
+./src/pages/admin/AdminUsers.jsx:                    {healthData?.status === 'healthy' ? 'All systems operational' : 'Checking status...'}
+./src/pages/admin/AdminUsers.jsx:                    {healthData?.database?.connected ? 'Connected' : 'Checking...'}
+./src/pages/admin/ContentStudioAdmin.jsx:  const { data: healthData, error, refetch } = useQuery({
+./src/pages/admin/ContentStudioAdmin.jsx:    queryKey: ['/api/health'],
+./src/pages/admin/ContentStudioAdmin.jsx:  if (!healthData && !error) {
+./src/pages/admin/ContentStudioAdmin.jsx:            {healthData?.status && (
+./src/pages/admin/ContentStudioAdmin.jsx:                Server: {healthData.status}
+./src/pages/admin/EngagementDashboard.jsx:  const { data: health } = useQuery({
+./src/pages/admin/EngagementDashboard.jsx:    queryKey: ['/api/health'],
+./src/pages/admin/EngagementDashboard.jsx:  const uptimeSeconds = stats?.uptimeSeconds || health?.uptime || 0;
+./src/pages/admin/EngagementDashboard.jsx:  const uptimeFormatted = health?.uptimeFormatted || (uptimeSeconds > 0 ? `${Math.floor(uptimeSeconds / 60)}m` : "—");
+./src/pages/admin/EngagementDashboard.jsx:    { label: "Platform Tools", value: health?.platform?.totalTools || 123 },
+./src/pages/admin/EngagementDashboard.jsx:    { label: "API Routes", value: health?.platform?.totalRoutes || 123 },
+./src/pages/admin/EngagementDashboard.jsx:    { label: "Admin Pages", value: health?.platform?.adminPages || 26 },
+./src/pages/admin/EngagementDashboard.jsx:              {health?.services && (
+./src/pages/admin/EngagementDashboard.jsx:                      { name: 'Stripe', active: health.services.stripe },
+./src/pages/admin/EngagementDashboard.jsx:                      { name: 'Resend', active: health.services.resend },
+./src/pages/admin/EngagementDashboard.jsx:                      { name: 'Perplexity', active: health.services.perplexity },
+./src/pages/admin/EngagementDashboard.jsx:                      { name: 'Sentry', active: health.services.sentry },
+./src/pages/admin/FeatureFlags.jsx:        description: "A flag with this ID already exists.",
+./src/pages/admin/NewsletterAdmin.jsx:          Internal view of newsletter health. No bulk sends — human trigger only.
+./src/pages/admin/SocialAnalytics.jsx:            testId="metric-ready-to-publish"
+./src/pages/admin/SocialGenerator.jsx:  "This content is for educational purposes only and not a substitute for professional mental health support.",
+./src/pages/admin/SocialGenerator.jsx:                        placeholder="#mentalhealth #healing #wellness"
+./src/pages/admin/SystemAlerts.jsx:  const { data: healthData, error, refetch } = useQuery({
+./src/pages/admin/SystemAlerts.jsx:    queryKey: ['/api/health'],
+./src/pages/admin/SystemAlerts.jsx:  if (!healthData && !error) {
+./src/pages/admin/SystemAlerts.jsx:              <p className="text-muted-foreground">Monitor system health notifications</p>
+./src/pages/admin/SystemAlerts.jsx:              {healthData?.status === 'healthy' ? 'OK' : '—'}
+./src/pages/admin/SystemAlerts.jsx:              {healthData?.memory?.heapUsedMB || '—'}MB
+./src/pages/admin/SystemAlerts.jsx:          <span>Server uptime: {healthData?.uptimeFormatted || '—'}</span>
+./src/pages/admin/SocialDashboard.jsx:        <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg" data-testid="metric-ready-to-publish">
+./src/pages/admin/SocialDashboard.jsx:          <p className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">{contentHealth?.readyToPublish || 0}</p>
+./src/pages/admin/HealthDashboard.jsx:    healthy: { color: "text-green-600 bg-green-100", icon: CheckCircle, label: "Healthy" },
+./src/pages/admin/HealthDashboard.jsx:    description: "Monitor system health, database status, and environment configuration"
+./src/pages/admin/HealthDashboard.jsx:  const { data: health, isLoading, error, refetch } = useQuery({
+./src/pages/admin/HealthDashboard.jsx:    queryKey: ["/api/admin/health", refreshKey],
+./src/pages/admin/HealthDashboard.jsx:  // Deep health surfaces the heal-360 report + heal-watch streak.
+./src/pages/admin/HealthDashboard.jsx:    queryKey: ["/api/admin/health-deep", refreshKey],
+./src/pages/admin/HealthDashboard.jsx:    queryKey: ["/api/admin/health-deep/alerts", refreshKey],
+./src/pages/admin/HealthDashboard.jsx:      const res = await apiRequest("POST", "/api/admin/health-deep/run");
+./src/pages/admin/HealthDashboard.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+./src/pages/admin/HealthDashboard.jsx:      const res = await apiRequest("POST", "/api/admin/health-deep/self-heal");
+./src/pages/admin/HealthDashboard.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+./src/pages/admin/HealthDashboard.jsx:      const res = await apiRequest("POST", "/api/admin/health-deep/ai-analyze");
+./src/pages/admin/HealthDashboard.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+./src/pages/admin/HealthDashboard.jsx:  // shared deep-health query so the UI pill updates immediately.
+./src/pages/admin/HealthDashboard.jsx:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/resume");
+./src/pages/admin/HealthDashboard.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+./src/pages/admin/HealthDashboard.jsx:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/pause");
+./src/pages/admin/HealthDashboard.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+./src/pages/admin/HealthDashboard.jsx:      const res = await fetch("/api/admin/health-deep/export", {
+./src/pages/admin/HealthDashboard.jsx:      a.download = m?.[1] || `mmhb-health-bundle-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
+./src/pages/admin/HealthDashboard.jsx:          <span className="text-gray-600 dark:text-gray-400">Loading health data...</span>
+./src/pages/admin/HealthDashboard.jsx:    return <AdminErrorBanner title="Unable to load health data" onRetry={refetch} />;
+./src/pages/admin/HealthDashboard.jsx:  const dbStatus = health?.database?.status || "unknown";
+./src/pages/admin/HealthDashboard.jsx:  const envConfig = health?.environment || {};
+./src/pages/admin/HealthDashboard.jsx:  const systemInfo = health?.system || diagnostics?.diagnostics?.server || {};
+./src/pages/admin/HealthDashboard.jsx:            aria-label="Refresh health data"
+./src/pages/admin/HealthDashboard.jsx:            value={health?.status || "Unknown"}
+./src/pages/admin/HealthDashboard.jsx:            subtitle={`Build: ${health?.buildVersion || "dev"}`}
+./src/pages/admin/HealthDashboard.jsx:            status={health?.ok ? "healthy" : "error"}
+./src/pages/admin/HealthDashboard.jsx:            value={health?.uptime || "N/A"}
+./src/pages/admin/HealthDashboard.jsx:            subtitle={`${health?.uptimeSeconds || 0} seconds`}
+./src/pages/admin/HealthDashboard.jsx:            value={`${health?.database?.latencyMs || 0}ms`}
+./src/pages/admin/HealthDashboard.jsx:                  <span className="font-medium text-gray-900 dark:text-white">{memoryInfo.heapUsed || health?.system?.heapUsed || "N/A"}</span>
+./src/pages/admin/HealthDashboard.jsx:                  <span className="font-medium text-gray-900 dark:text-white">{memoryInfo.heapTotal || health?.system?.heapTotal || "N/A"}</span>
+./src/pages/admin/HealthDashboard.jsx:                  <span className="font-medium text-gray-900 dark:text-white">{memoryInfo.systemFree || health?.system?.freeMemory || "N/A"}</span>
+./src/pages/admin/HealthDashboard.jsx:                  <span className="font-medium text-gray-900 dark:text-white">{systemInfo?.cpuCount || health?.system?.cpuCount || "N/A"}</span>
+./src/pages/admin/HealthDashboard.jsx:        <div className="glp-pane mt-8 rounded-xl p-6" data-testid="section-deep-health">
+./src/pages/admin/HealthDashboard.jsx:              <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-deep-health">Deep Health (heal-360)</h2>
+./src/pages/admin/HealthDashboard.jsx:                    deep.verdict === "HEALTHY" ? "healthy" :
+./src/pages/admin/HealthDashboard.jsx:                aria-label="Re-run deep health probe"
+./src/pages/admin/HealthDashboard.jsx:                aria-label="Ask AI to diagnose the latest health probe report"
+./src/pages/admin/HealthDashboard.jsx:                      · {deep.scheduler.consecutiveFails} consecutive non-healthy
+./src/pages/admin/HealthDashboard.jsx:            <div className="text-sm text-gray-600 dark:text-gray-400 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4" data-testid="text-deep-health-empty">
+./src/pages/admin/HealthDashboard.jsx:                    <span className="ml-2 text-green-600 dark:text-green-400">✓ {deep.watch.streak.healthy} healthy</span>
+./src/pages/admin/HealthDashboard.jsx:                Source: {deep?.reportPath || "docs/health-check-result.json"}
+./src/pages/admin/HealthDashboard.jsx:          Last updated: {health?.timestamp ? new Date(health.timestamp).toLocaleString() : "N/A"}
+./src/pages/admin/AdminTools.jsx:  "ai-chat": "/chat", "therapy": "/admin/tools", "mood-tracker": "/admin/health", "journal": "/admin/health",
+./src/pages/admin/AdminTools.jsx:  "mirror": "/admin/tools", "prompts": "/admin/engagement", "states": "/admin/health",
+./src/pages/admin/AdminTools.jsx:  "dashboard-api": "/admin/health", "pro-features": "/admin/revenue", "leads": "/admin/revenue",
+./src/pages/admin/AdminTools.jsx:  "feedback": "/admin/feedback", "account-actions": "/admin/users", "ai-dashboard": "/admin/health",
+./src/pages/admin/AdminTools.jsx:  "moods-alt": "/admin/health",
+./src/pages/admin/AdminTools.jsx:  "analytics": "/admin/analytics", "metrics": "/admin/analytics", "soft-launch": "/admin/health",
+./src/pages/admin/AdminTools.jsx:  "health-api": "/admin/health", "deployment": "/admin/tools", "integrations": "/admin/tools",
+./src/pages/admin/AdminTools.jsx:  "object-storage": "/admin/tools", "api-core": "/admin/health",
+./src/pages/admin/AdminTools.jsx:  "health-api": "critical", "ai-chat": "critical", "auth-core": "critical",
+./src/pages/admin/AdminTools.jsx:  "deep-scan-needed": { suggestion: "Platform integrity deep scan recommended. Codex KB: Comprehensive audit of DB schema, route mounts, env vars, and service health provides full system visibility.", action: "Run deep platform scan", knowledgeBase: "Codex", autoFixable: true, fixCommand: "health-deep-scan" },
+./src/pages/admin/AdminTools.jsx:  "worker-thread-hang": { suggestion: "Worker thread appears unresponsive. Perplexity KB: Background tasks may be stuck in infinite loops or deadlocked. Check async operation chains for unresolved promises.", action: "Review background task health", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+./src/pages/admin/AdminTools.jsx:  "integrity-mismatch": { suggestion: "Platform integrity score below threshold. Codex KB: Multiple subsystems reporting issues. Run a comprehensive deep scan to identify root causes across DB, env, and services.", action: "Run platform integrity scan", knowledgeBase: "Codex", autoFixable: true, fixCommand: "health-deep-scan" },
+./src/pages/admin/AdminTools.jsx:  "route-health-degraded": { suggestion: "One or more API routes returning unexpected status codes. Codex KB: Verify all route files export valid Express routers and are mounted in server/app.mjs.", action: "Audit route health", knowledgeBase: "Codex", autoFixable: true, fixCommand: "check-routes" },
+./src/pages/admin/AdminTools.jsx:  "backup-stale": { suggestion: "Database backup is overdue or stale. Perplexity KB: Neon PostgreSQL handles automatic backups but verify backup health on the Neon dashboard. Point-in-time recovery should be enabled.", action: "Verify backup status", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+./src/pages/admin/AdminTools.jsx:  "load-balancer-health": { suggestion: "Load balancer health check may be failing. Canva KB: Ensure /api/health endpoint responds within 5 seconds with 200 status. Check timeout and retry settings.", action: "Verify health endpoint", knowledgeBase: "Canva", autoFixable: true, fixCommand: "warm-all" },
+./src/pages/admin/AdminTools.jsx:  "table-bloat": { suggestion: "Database tables have significant dead tuple bloat. Perplexity KB: Tables with >20% dead tuples need VACUUM. Bloated tables cause slower sequential scans and increased storage.", action: "Run table health check", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "table-health" },
+./src/pages/admin/AdminTools.jsx:  "index-unused": { suggestion: "Unused database indexes detected. Codex KB: Indexes with zero scans consume write overhead without query benefit. Review and consider removing unused indexes.", action: "Audit index usage", knowledgeBase: "Codex", autoFixable: true, fixCommand: "index-health" },
+./src/pages/admin/AdminTools.jsx:  "index-missing": { suggestion: "High sequential scan count suggests missing indexes. Perplexity KB: Tables with frequent seq scans may benefit from targeted indexes on commonly queried columns.", action: "Review sequential scan hotspots", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "index-health" },
+./src/pages/admin/AdminTools.jsx:  "seq-scan-hotspot": { suggestion: "Sequential scan hotspot detected on frequently queried table. Codex KB: Add targeted index on the WHERE clause columns to convert seq scans to index scans.", action: "Create targeted index", knowledgeBase: "Codex", autoFixable: true, fixCommand: "index-health" },
+./src/pages/admin/AdminTools.jsx:  "full-optimization-overdue": { suggestion: "Last full optimization was more than 24 hours ago. Perplexity KB: Regular optimization passes keep DB healthy, caches warm, and response times low.", action: "Run optimize-all command", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "optimize-all" },
+./src/pages/admin/AdminTools.jsx:      { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
+./src/pages/admin/AdminTools.jsx:      { id: "integrations", label: "Integration Health", endpoint: "/api/health", icon: Puzzle, desc: "Service integrations" },
+./src/pages/admin/AdminTools.jsx:      { id: "api-core", label: "Core API", endpoint: "/api/health", icon: Terminal, desc: "Base API health endpoint" },
+./src/pages/admin/AdminTools.jsx:  { id: "health-api", label: "System Health", endpoint: "/api/health", icon: Activity, desc: "Server & DB status" },
+./src/pages/admin/AdminTools.jsx:  const critHealthy = CRITICAL_CHECKS.filter(c => toolResults[c.id]?.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:                result?.status === 'healthy' ? 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20' :
+./src/pages/admin/AdminTools.jsx:                result.status === 'healthy' ? <CheckCircle size={14} className="text-green-600 flex-shrink-0" /> :
+./src/pages/admin/AdminTools.jsx:    healthy: cat.tools.filter(t => toolResults[t.id]?.status === 'healthy').length,
+./src/pages/admin/AdminTools.jsx:                    <span className="text-green-600 font-medium">{cat.healthy}/{cat.total}</span>
+./src/pages/admin/AdminTools.jsx:                    <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${cat.total > 0 ? (cat.healthy / cat.total) * 100 : 0}%` }} />
+./src/pages/admin/AdminTools.jsx:                    {result?.status === 'healthy' ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : result?.status === 'error' ? <AlertCircle size={10} className="text-red-500 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
+./src/pages/admin/AdminTools.jsx:                  { label: 'Platform', tools: allTools.filter(t => t.id.includes('health') || t.id.includes('api-core') || t.id.includes('deployment') || t.id.includes('integration') || t.id.includes('object') || t.id === 'analytics' || t.id === 'metrics' || t.id === 'soft-launch'), color: 'text-emerald-600' },
+./src/pages/admin/AdminTools.jsx:                  const groupHealthy = group.tools.filter(t => toolResults[t.id]?.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:                      <div className="text-[9px] text-muted-foreground">{groupHealthy}/{group.tools.length} healthy{groupErrors > 0 ? ` · ${groupErrors} err` : ''}</div>
+./src/pages/admin/AdminTools.jsx:                const tierHealthy = t.tools.filter(tool => toolResults[tool.id]?.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:                    <div className="text-[10px] text-muted-foreground">{tierHealthy}/{tierChecked > 0 ? tierChecked : t.tools.length} healthy</div>
+./src/pages/admin/AdminTools.jsx:    return r && r.status === 'healthy' && r.ms > 2000;
+./src/pages/admin/AdminTools.jsx:          await fetch('/api/health', { credentials: 'include' });
+./src/pages/admin/AdminTools.jsx:          await fetch('/api/health', { credentials: 'include' });
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health', { credentials: 'include', cache: 'no-store' }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health', { credentials: 'include', headers: { 'Cache-Control': 'no-cache' } }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'prune-logs' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:      } else if (rem.fixCommand === 'health-deep-scan') {
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'health-deep-scan' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-queries' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-routes' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-sessions' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'audit-middleware' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-disk' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'vacuum-db' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:      } else if (rem.fixCommand === 'table-health') {
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'table-health' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:      } else if (rem.fixCommand === 'index-health') {
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'index-health' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'dependency-audit' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'security-headers-audit' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }); } catch {}
+./src/pages/admin/AdminTools.jsx:      const wasFixed = !newResult || newResult.status === 'healthy';
+./src/pages/admin/AdminTools.jsx:  const healthyTools = checkedTools.filter(t => toolResults[t.id]?.status === 'healthy');
+./src/pages/admin/AdminTools.jsx:  if (errorTools.length > 3) advisories.push({ priority: 'critical', category: 'Reliability', text: `${errorTools.length} endpoints failing — indicates potential systemic issue. Check database connection and server health first.`, action: 'Run Quick Diagnostics', kb: 'Codex' });
+./src/pages/admin/AdminTools.jsx:  if (authGated.length > 0 && authGated.length === checkedTools.length) advisories.push({ priority: 'medium', category: 'Security', text: 'All endpoints require authentication — verify public-facing routes are accessible for unauthenticated users (crisis, health).', action: 'Check public route configuration', kb: 'Codex' });
+./src/pages/admin/AdminTools.jsx:  if (perfectGroups.length > 0 && perfectGroups.length < groupHealth.length) advisories.push({ priority: 'success', category: 'Component Groups', text: `${perfectGroups.length} of ${groupHealth.length} category groups are fully healthy: ${perfectGroups.slice(0, 3).map(g => g.title).join(', ')}${perfectGroups.length > 3 ? '...' : ''}.`, action: 'Maintain current configuration', kb: 'Codex' });
+./src/pages/admin/AdminTools.jsx:  if (healthyTools.length === allTools.length) advisories.push({ priority: 'success', category: 'Overall', text: 'All systems healthy — platform is operating at peak performance. No optimization needed.', action: 'Export health report for records', kb: 'Codex' });
+./src/pages/admin/AdminTools.jsx:    try { const s = localStorage.getItem('glp_health_pipeline_history'); return s ? JSON.parse(s) : []; } catch { return []; }
+./src/pages/admin/AdminTools.jsx:    const finalHealthy = allTools.filter(t => freshResults4[t.id]?.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:      healthy: finalHealthy,
+./src/pages/admin/AdminTools.jsx:    try { localStorage.setItem('glp_health_pipeline_history', JSON.stringify(newHistory)); } catch {}
+./src/pages/admin/AdminTools.jsx:    <div className="mb-6 p-4 rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/30 dark:bg-violet-950/20" data-testid="panel-ai-health-pipeline">
+./src/pages/admin/AdminTools.jsx:                  <span className="text-green-600">{run.healthy} healthy</span>
+./src/pages/admin/AdminTools.jsx:          No pipeline runs yet. Click "Run Deep Pipeline" to start your first comprehensive health sweep.
+./src/pages/admin/AdminTools.jsx:  const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:    healthy: cat.tools.filter(t => toolResults[t.id]?.status === 'healthy').length,
+./src/pages/admin/AdminTools.jsx:                    <span className="text-green-600" title="Healthy">{cat.healthy} healthy</span>
+./src/pages/admin/AdminTools.jsx:                <div className="text-xl font-bold text-green-600">{healthyCount}</div>
+./src/pages/admin/AdminTools.jsx:      const resp = await fetch('/api/health/repair', {
+./src/pages/admin/AdminTools.jsx:      const resp = await fetch('/api/health/git-status', { credentials: 'include' });
+./src/pages/admin/AdminTools.jsx:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) });
+./src/pages/admin/AdminTools.jsx:            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${gitData.status === 'healthy' ? 'bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200' : 'bg-amber-100 dark:bg-amber-800 text-amber-700 dark:text-amber-200'}`}>
+./src/pages/admin/AdminTools.jsx:      const resp = await fetch('/api/health/platform-integrity', { credentials: 'include' });
+./src/pages/admin/AdminTools.jsx:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) });
+./src/pages/admin/AdminTools.jsx:  const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:    if (!r || r.status === 'healthy') return false;
+./src/pages/admin/AdminTools.jsx:    { id: 'deep-scan', label: 'Platform Deep Scan', done: checkedCount === totalTools && healthyCount >= totalTools * 0.9, icon: Stethoscope, category: 'integrity' },
+./src/pages/admin/AdminTools.jsx:    { id: 'integrity', label: 'Platform Integrity Validation', done: checkedCount === totalTools && healthyCount === totalTools, icon: ShieldCheck, category: 'finalize' },
+./src/pages/admin/AdminTools.jsx:    { id: 'warm-endpoints', label: 'Pre-warm Critical Paths', done: CRITICAL_CHECKS.every(c => toolResults[c.id]?.status === 'healthy' && toolResults[c.id]?.ms < 1000), icon: Flame, category: 'finalize' },
+./src/pages/admin/AdminTools.jsx:    try { await fetch('/api/health/git-status', { credentials: 'include' }); } catch {}
+./src/pages/admin/AdminTools.jsx:    try { await fetch('/api/health/platform-integrity', { credentials: 'include' }); } catch {}
+./src/pages/admin/AdminTools.jsx:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }).catch(() => {}),
+./src/pages/admin/AdminTools.jsx:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }).catch(() => {}),
+./src/pages/admin/AdminTools.jsx:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }).catch(() => {}),
+./src/pages/admin/AdminTools.jsx:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {}); } catch {}
+./src/pages/admin/AdminTools.jsx:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {}); } catch {}
+./src/pages/admin/AdminTools.jsx:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {}); } catch {}
+./src/pages/admin/AdminTools.jsx:    const finalHealthy = allTools.filter(t => freshResults[t.id]?.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:      healthy: finalHealthy,
+./src/pages/admin/AdminTools.jsx:                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-violet-500 text-white hover:bg-violet-600 transition-colors" data-testid="button-runbook-git">Scan</button>
+./src/pages/admin/AdminTools.jsx:                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-teal-500 text-white hover:bg-teal-600 transition-colors" data-testid="button-runbook-deep-scan">Scan</button>
+./src/pages/admin/AdminTools.jsx:                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
+./src/pages/admin/AdminTools.jsx:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-testid="button-runbook-warm">Warm</button>
+./src/pages/admin/AdminTools.jsx:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
+./src/pages/admin/AdminTools.jsx:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
+./src/pages/admin/AdminTools.jsx:                    <span className="text-green-600">{run.healthy} ok</span>
+./src/pages/admin/AdminTools.jsx:const STATUS_FILTERS = ['all', 'healthy', 'warning', 'error', 'unchecked'];
+./src/pages/admin/AdminTools.jsx:      let status = 'healthy';
+./src/pages/admin/AdminTools.jsx:      if (res.ok) status = 'healthy';
+./src/pages/admin/AdminTools.jsx:      else if (res.status === 401 || res.status === 403) status = 'healthy';
+./src/pages/admin/AdminTools.jsx:      else if (res.status === 405) status = 'healthy';
+./src/pages/admin/AdminTools.jsx:  const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:          total: totalTools, checked: checkedCount, healthy: healthyCount, warnings: warningCount, errors: errorCount,
+./src/pages/admin/AdminTools.jsx:          healthScore: totalTools > 0 ? Math.round((healthyCount / Math.max(checkedCount, 1)) * 100) : 0,
+./src/pages/admin/AdminTools.jsx:      a.download = `glp-health-report-${now.toISOString().split('T')[0]}.json`;
+./src/pages/admin/AdminTools.jsx:      a.download = `glp-health-report-${now.toISOString().split('T')[0]}.csv`;
+./src/pages/admin/AdminTools.jsx:    const healthScore = totalTools > 0 ? Math.round((healthyCount / Math.max(checkedCount, 1)) * 100) : 0;
+./src/pages/admin/AdminTools.jsx:      `HEALTH SCORE: ${healthScore}%`,
+./src/pages/admin/AdminTools.jsx:      `Total: ${totalTools} | Checked: ${checkedCount} | Healthy: ${healthyCount} | Warnings: ${warningCount} | Errors: ${errorCount}`,
+./src/pages/admin/AdminTools.jsx:          const rem = r && (r.status !== 'healthy') ? getRemediation(r.label, r.ms) : null;
+./src/pages/admin/AdminTools.jsx:          return r ? `  [${r.status === 'healthy' ? 'OK  ' : r.status === 'warning' ? 'WARN' : 'ERR '}] ${t.label.padEnd(28)} ${String(r.ms).padStart(5)}ms  ${sev.padEnd(8)} ${r.label !== 'ok' ? `(${r.label})` : ''}${rem ? ` → ${rem.action}` : ''}` : `  [    ] ${t.label.padEnd(28)}         ${sev.padEnd(8)} not checked`;
+./src/pages/admin/AdminTools.jsx:    a.download = `glp-health-report-${now.toISOString().split('T')[0]}.txt`;
+./src/pages/admin/AdminTools.jsx:      <SEO title={`Platform Tools (${totalTools}) — Admin`} description={`All ${totalTools} platform tools with AI-powered health monitoring, diagnostics, and repair`} noindex />
+./src/pages/admin/AdminTools.jsx:                <p className="text-muted-foreground text-sm">AI-powered health monitor with Codex, Perplexity & Canva knowledge base</p>
+./src/pages/admin/AdminTools.jsx:                  <span className="flex items-center gap-1 text-green-600"><CheckCircle size={14} /> {healthyCount}</span>
+./src/pages/admin/AdminTools.jsx:          const healthScore = totalTools > 0 ? Math.round((healthyCount / totalTools) * 100) : 0;
+./src/pages/admin/AdminTools.jsx:          const scoreColor = healthScore >= 90 ? 'text-green-600' : healthScore >= 70 ? 'text-amber-500' : 'text-red-500';
+./src/pages/admin/AdminTools.jsx:          const scoreBg = healthScore >= 90 ? 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800' : healthScore >= 70 ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800' : 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800';
+./src/pages/admin/AdminTools.jsx:                  <div className={`text-4xl font-bold ${scoreColor}`} data-testid="text-health-score">{healthScore}%</div>
+./src/pages/admin/AdminTools.jsx:                  <div className="text-2xl font-bold text-green-600" data-testid="text-healthy-count">{healthyCount}</div>
+./src/pages/admin/AdminTools.jsx:            const catHealthy = category.tools.filter(t => toolResults[t.id]?.status === 'healthy').length;
+./src/pages/admin/AdminTools.jsx:                                {result.status === 'healthy' ? (
+./src/pages/admin/CommandCenter.jsx:  const safeStatus = typeof status === 'string' ? status : 'healthy';
+./src/pages/admin/CommandCenter.jsx:    healthy: styles.statusHealthy,
+./src/pages/admin/CommandCenter.jsx:    healthy: CheckCircle,
+./src/pages/admin/CommandCenter.jsx:function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
+./src/pages/admin/CommandCenter.jsx:  const dbStatus = health?.database?.connected ? 'healthy' : (health?.database ? 'warning' : 'unknown');
+./src/pages/admin/CommandCenter.jsx:  const aiStatus = health?.ai?.available ? 'healthy' : (health?.ai ? 'warning' : 'unknown');
+./src/pages/admin/CommandCenter.jsx:  const apiStatus = health?.status === 'healthy' ? 'healthy' : (health ? 'warning' : 'error');
+./src/pages/admin/CommandCenter.jsx:  const uptimeStr = health?.uptimeFormatted || (health?.uptime ? `${Math.floor(health.uptime / 60)}m` : '—');
+./src/pages/admin/CommandCenter.jsx:  const memMB = health?.memory?.heapUsedMB ? `${health.memory.heapUsedMB}MB` : '—';
+./src/pages/admin/CommandCenter.jsx:  const memPercent = health?.memory?.heapUsedMB && health?.memory?.heapTotalMB ? Math.round((health.memory.heapUsedMB / health.memory.heapTotalMB) * 100) : 0;
+./src/pages/admin/CommandCenter.jsx:    { name: 'Database', status: dbStatus, icon: Database, latency: health?.database?.connected ? 'connected' : 'offline' },
+./src/pages/admin/CommandCenter.jsx:    { name: 'Auth Service', status: health?.softLaunch !== undefined ? 'healthy' : 'unknown', icon: Lock, latency: 'active' },
+./src/pages/admin/CommandCenter.jsx:    { name: 'AI/Chat', status: aiStatus, icon: MessageSquare, latency: health?.ai?.available ? 'ready' : 'offline' },
+./src/pages/admin/CommandCenter.jsx:    { name: 'Memory', status: health?.memory?.heapUsedMB < 500 ? 'healthy' : 'warning', icon: HardDrive, latency: `${memMB} (${memPercent}%)` }
+./src/pages/admin/CommandCenter.jsx:  const integrations = health?.services ? [
+./src/pages/admin/CommandCenter.jsx:    { name: 'Stripe', active: health.services.stripe },
+./src/pages/admin/CommandCenter.jsx:    { name: 'Resend', active: health.services.resend },
+./src/pages/admin/CommandCenter.jsx:    { name: 'Perplexity', active: health.services.perplexity },
+./src/pages/admin/CommandCenter.jsx:    { name: 'Sentry', active: health.services.sentry },
+./src/pages/admin/CommandCenter.jsx:          data-testid="button-refresh-health"
+./src/pages/admin/CommandCenter.jsx:      {health?.platform && (
+./src/pages/admin/CommandCenter.jsx:            <span data-testid="text-tool-count">{health.platform.totalTools} Tools</span>
+./src/pages/admin/CommandCenter.jsx:            <span data-testid="text-route-count">{health.platform.totalRoutes} Routes</span>
+./src/pages/admin/CommandCenter.jsx:            <span data-testid="text-admin-page-count">{health.platform.adminPages} Admin Pages</span>
+./src/pages/admin/CommandCenter.jsx:            {health.node && <span>Node {health.node}</span>}
+./src/pages/admin/CommandCenter.jsx:            {health.startedAt && <span>Started: {new Date(health.startedAt).toLocaleTimeString()}</span>}
+./src/pages/admin/CommandCenter.jsx:        <StatusBadge status="healthy" />
+./src/pages/admin/CommandCenter.jsx:        { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
+./src/pages/admin/CommandCenter.jsx:      let status = 'healthy';
+./src/pages/admin/CommandCenter.jsx:      if (res.ok) status = 'healthy';
+./src/pages/admin/CommandCenter.jsx:      else if (res.status === 401 || res.status === 403) status = 'healthy';
+./src/pages/admin/CommandCenter.jsx:      else if (res.status === 405) status = 'healthy';
+./src/pages/admin/CommandCenter.jsx:  const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
+./src/pages/admin/CommandCenter.jsx:                <CheckCircle size={12} /> {healthyCount}
+./src/pages/admin/CommandCenter.jsx:            title="Run health check on all platform tools"
+./src/pages/admin/CommandCenter.jsx:        const healthScore = totalTools > 0 ? Math.round((healthyCount / totalTools) * 100) : 0;
+./src/pages/admin/CommandCenter.jsx:        const scoreColor = healthScore >= 90 ? '#22c55e' : healthScore >= 70 ? '#f59e0b' : '#ef4444';
+./src/pages/admin/CommandCenter.jsx:        const scoreBg = healthScore >= 90 ? 'rgba(34,197,94,0.06)' : healthScore >= 70 ? 'rgba(245,158,11,0.06)' : 'rgba(239,68,68,0.06)';
+./src/pages/admin/CommandCenter.jsx:        const scoreBorder = healthScore >= 90 ? 'rgba(34,197,94,0.15)' : healthScore >= 70 ? 'rgba(245,158,11,0.15)' : 'rgba(239,68,68,0.15)';
+./src/pages/admin/CommandCenter.jsx:                <div style={{ fontSize: '2rem', fontWeight: 700, color: scoreColor }} data-testid="text-health-score">{healthScore}%</div>
+./src/pages/admin/CommandCenter.jsx:                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#22c55e' }} data-testid="text-healthy-count">{healthyCount}</div>
+./src/pages/admin/CommandCenter.jsx:          const catHealthy = category.tools.filter(t => toolResults[t.id]?.status === 'healthy').length;
+./src/pages/admin/CommandCenter.jsx:                          {result.status === 'healthy' ? (
+./src/pages/admin/CommandCenter.jsx:    { id: 'health-check', label: 'Run Platform Health Check', desc: 'Verify all 123 tools are operational', icon: Activity, href: '/admin/tools', category: 'monitoring', priority: 'high' },
+./src/pages/admin/CommandCenter.jsx:    { id: 'revenue-check', label: 'Revenue Dashboard', desc: 'Review MRR, subscriptions, and financial health', icon: TrendingUp, href: '/admin/revenue', category: 'revenue', priority: 'low' },
+./src/pages/admin/CommandCenter.jsx:        { label: "System Health", icon: Activity, href: "/admin/health", desc: "Server, DB & service status" },
+./src/pages/admin/CommandCenter.jsx:    { id: 'health', label: 'System Health', endpoint: '/api/health' },
+./src/pages/admin/CommandCenter.jsx:            <p style={{ fontSize: '0.85rem', color: '#888', marginBottom: '0.75rem', textAlign: 'center' }}>No recent full health check. Run a quick check or go to Platform Tools for a full scan.</p>
+./src/pages/admin/CommandCenter.jsx:  const healthy = results.filter(r => r.status === 'healthy').length;
+./src/pages/admin/CommandCenter.jsx:  const healthPercent = total > 0 ? Math.round((healthy / total) * 100) : 0;
+./src/pages/admin/CommandCenter.jsx:  const scoreColor = healthPercent >= 90 ? '#22c55e' : healthPercent >= 70 ? '#f59e0b' : '#ef4444';
+./src/pages/admin/CommandCenter.jsx:          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: scoreColor }} data-testid="text-tools-health-pct">{healthPercent}%</div>
+./src/pages/admin/CommandCenter.jsx:          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#22c55e' }} data-testid="text-tools-healthy">{healthy}</div>
+./src/pages/admin/CommandCenter.jsx:            width: `${healthPercent}%`,
+./src/pages/admin/CommandCenter.jsx:  const { data: healthData, refetch: refetchHealth, isRefetching: isHealthRefetching, isLoading: isHealthLoading, error: healthError } = useQuery({
+./src/pages/admin/CommandCenter.jsx:    queryKey: ['/api/health'],
+./src/pages/admin/CommandCenter.jsx:    if (healthData || statsData) {
+./src/pages/admin/CommandCenter.jsx:  }, [healthData, statsData]);
+./src/pages/admin/CommandCenter.jsx:  if (healthError && !statsData) {
+./src/pages/admin/CommandCenter.jsx:          <p className={styles.leadText}>Monitor system health, manage content, and track platform performance.</p>
+./src/pages/admin/CommandCenter.jsx:              health={healthData} 
+./src/pages/admin/SocialStudioAdmin.jsx:  mental_health: ["#MentalHealthMatters", "#TraumaHealing", "#SelfCare", "#InnerPeace", "#HealingJourney"],
+./src/pages/admin/SocialStudioAdmin.jsx:    "5 signs you're ready for {topic}:",
+./src/pages/admin/SocialStudioAdmin.jsx:    toast({ title: "Hooks Generated", description: `${hooks.length} trauma-informed hooks ready` });
+./src/pages/admin/SocialStudioAdmin.jsx:    toast({ title: "Content Generated", description: "AI-generated trauma-informed content ready for review" });
+./src/pages/admin/SocialStudioAdmin.jsx:    const base = "https://mymentalhealthbuddy.com";
+./src/pages/admin/AdminPublishing.jsx:  tiktok: (title) => `${title} \u2014 link in bio \u2764\uFE0F #genuineloveproject #mentalhealth #healing #selfcare`,
+./src/pages/admin/AdminPublishing.jsx:  const url = `https://mymentalhealthbuddy.com/blog/${slug}`;
+./src/pages/admin/AdminPublishing.jsx:                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Based on most-visited pages — write about what your audience is already exploring.</p>
+./src/pages/admin/SecurityDashboard.jsx:  const { data: healthData } = useQuery({
+./src/pages/admin/SecurityDashboard.jsx:    queryKey: ['/api/health'],
+./src/pages/admin/SecurityDashboard.jsx:                {healthData?.uptimeFormatted && (
+./src/pages/admin/SecurityDashboard.jsx:                    <span className="text-sm font-bold text-blue-600" data-testid="text-uptime">{healthData.uptimeFormatted}</span>
+./src/pages/AboutApproachPage.jsx:              what's already working in your life rather than focusing solely on problems.
+./src/pages/AboutApproachPage.jsx:              mental health treatment. If you're experiencing a mental health crisis, please seek professional help.
+./src/pages/BoundariesPage.jsx:  who: "Anyone who wants to set healthier limits but struggles with the words to use.",
+./src/pages/BoundariesPage.jsx:  whereLinkText: "Learn about healthy boundaries",
+./src/pages/BoundariesPage.jsx:    result: "You have clear words ready, which reduces anxiety about the conversation."
+./src/pages/BoundariesPage.jsx:  { context: "Needing space", script: "I need some time to myself right now. I'll reach out when I'm ready to connect again." },
+./src/pages/BoundariesPage.jsx:      <SEO title="Boundaries — The Genuine Love Project" description="Learn to set and maintain healthy personal boundaries." />
+./src/pages/BoundariesPage.jsx:                  Boundaries help protect your energy, time, and wellbeing. Having ready-made phrases can make it easier 
+./src/pages/ChallengeDay.jsx:            If this doesn't feel supportive, pause or stop. You can switch to something gentler. Come back whenever you're ready—there's no deadline.
+./src/pages/ComingSoon.jsx:              Explore what is ready for you
+./src/pages/ComingSoon.jsx:            Your pace is the right pace. We will be here when this is ready.
+./src/pages/CommunityGuidelines.jsx:                  Everyone moves at their own pace. Respect when others aren't ready to share 
+./src/pages/DailyPracticePage.jsx:    description: "Build consistent wellness habits with morning, midday, and evening practices designed to support your emotional health throughout the day."
+./src/pages/DesignSystem.jsx:                  Reusable components with states, variants, and Figma-ready specifications.
+./src/pages/EmotionalIntelligencePage.jsx:  why: "Emotional intelligence is the foundation of healthy relationships and personal wellbeing—and it can be developed at any age.",
+./src/pages/EmotionalIntelligencePage.jsx:            Emotional intelligence is the foundation of healthy relationships and personal wellbeing.
+./src/pages/GratitudePractice.jsx:              You've already expressed gratitude today
+./src/pages/GroundingTechniquesPage.jsx:            <li>• For persistent distress, dissociation, or trauma symptoms, please reach out to a trauma-informed mental health professional.</li>
+./src/pages/GroundingTechniquesPage.jsx:            <li>• These tools are not a substitute for professional care if you're experiencing a mental health crisis.</li>
+./src/pages/HealingJourneysPage.jsx:    subtitle: "Healing attachment patterns for healthier relationships",
+./src/pages/HealingJourneysPage.jsx:    description: "Understand your attachment style and learn to create healthier relationship patterns. Whether you tend toward anxious (fear of abandonment), avoidant (fear of intimacy), or disorganized (both) attachment, this journey helps you move toward earned secure attachment—the capacity for healthy interdependence.",
+./src/pages/HealingJourneysPage.jsx:      "Become your own secure base while connecting healthily with others"
+./src/pages/HealingJourneysPage.jsx:        theme: "Building the capacity for healthy love",
+./src/pages/HealingLibraryPage.jsx:    research: "Pennebaker's research shows expressive writing improves physical and mental health outcomes.",
+./src/pages/HealingLibraryPage.jsx:    research: "Viktor Frankl's logotherapy and modern research show meaning is central to psychological health.",
+./src/pages/InnerChildPage.jsx:            <li>• This content is <strong>not therapy</strong> and is not a substitute for professional mental health care.</li>
+./src/pages/InnerChildPage.jsx:            <li>• If you're in crisis, please contact a crisis line or mental health professional immediately.</li>
+./src/pages/MeditationGuidePage.jsx:      "When ready, gently wiggle your fingers and toes. Take a deeper breath.",
+./src/pages/MeditationGuidePage.jsx:      "Silently repeat: 'May I be happy. May I be healthy. May I be safe. May I live with ease.'",
+./src/pages/MeditationGuidePage.jsx:      "Direct loving-kindness toward them: 'May you be happy. May you be healthy. May you be safe. May you live with ease.'",
+./src/pages/MeditationGuidePage.jsx:      "Now, if you feel ready: think of someone you find difficult. Start with someone mildly challenging.",
+./src/pages/MeditationGuidePage.jsx:      "'May all beings be happy. May all beings be healthy. May all beings be safe. May all beings live with ease.'",
+./src/pages/MeditationGuidePage.jsx:      "Open your eyes when ready, carrying this compassion into your day."
+./src/pages/MeditationGuidePage.jsx:      "When ready, take a slightly deeper breath to transition.",
+./src/pages/MeditationGuidePage.jsx:      "Open your eyes, ready for your day."
+./src/pages/MeditationGuidePage.jsx:      "Drift gently toward sleep whenever your body is ready."
+./src/pages/MovementSnacksPage.jsx:        how: "Choose a movement, follow the guide, stop when ready."
+./src/pages/NewsPage.jsx:    description: "Latest wellness tips, research insights, and platform updates from MyMentalHealthBuddy. Stay informed about mental health and healing practices.",
+./src/pages/PerceptionRefinementPage.jsx:                  You don't need sharper insight or to see more. You already have too much signal coming in. 
+./src/pages/PerceptionRefinementPage.jsx:              We keep this healthy by staying in: psychology, nervous system regulation, and choice and agency. Not destiny. Not burden. Not moral mission.
+./src/pages/PermacultureWellnessPage.jsx:    insight: "Just as healthy soil is the foundation of a thriving ecosystem, your physical and emotional wellbeing is the foundation of a thriving life.",
+./src/pages/PermacultureWellnessPage.jsx:    insight: "A healthy ecosystem doesn't give until it's empty — it gives from abundance. You cannot pour from an empty cup.",
+./src/pages/PermacultureWellnessPage.jsx:    wisdom: "Summer is for expansion and visibility. What you've cultivated internally is ready to be shared.",
+./src/pages/PermacultureWellnessPage.jsx:    question: "Where am I ready to shine more fully?"
+./src/pages/PermacultureWellnessPage.jsx:    wisdom: "Trees release leaves not from scarcity but from wisdom. What are you ready to let go of?",
+./src/pages/PricingPage.jsx:          It is not a substitute for professional mental health care.
+./src/pages/RecoveryPage.jsx:      { name: "Boundary Setting", href: "/boundaries", description: "Learning healthy limits" },
+./src/pages/RecoveryPage.jsx:                please reach out to a mental health professional.{" "}
+./src/pages/Reflection.jsx:  if (streak >= 1) return "Your space is here when you're ready.";
+./src/pages/Reflection.jsx:                Saved. You're done whenever you feel ready.
+./src/pages/SafetyCenter.jsx:                      professional mental health care.
+./src/pages/SafetyCenter.jsx:                      clinical care. For mental health concerns, please consult a qualified professional.
+./src/pages/SafetyPage.jsx:                      The Genuine Love Project is a wellness and personal growth platform. It is <strong>not</strong> a substitute for professional medical, mental health, or therapeutic care.
+./src/pages/SafetyPage.jsx:                        We do not diagnose or treat mental health conditions
+./src/pages/SelfCareToolkitPage.jsx:      { name: "Set healthy relationship boundaries", time: "Varies", benefit: "Helps protect your energy" }
+./src/pages/SelfCareToolkitPage.jsx:    description: "Stimulate and rest your mind in healthy ways",
+./src/pages/SelfCareToolkitPage.jsx:      { name: "Enjoy a favorite healthy snack mindfully", time: "10 min", benefit: "Supports grounding in pleasure" },
+./src/pages/SelfCareToolkitPage.jsx:              These are self-care practices for general wellness, not medical treatment. Consult a healthcare provider for health concerns.
+./src/pages/SelfLovePage.jsx:              Self-love isn't selfish—it's the foundation for all healthy relationships. 
+./src/pages/SelfWorthReflectionPage.jsx:                    ready to receive a different story about yourself.
+./src/pages/SleepGuidePage.jsx:            Quality sleep is the foundation of mental and physical health.
+./src/pages/StressResponseGuidePage.jsx:    healthyExpressions: [
+./src/pages/StressResponseGuidePage.jsx:    healthyExpressions: [
+./src/pages/StressResponseGuidePage.jsx:      "Creating healthy distance"
+./src/pages/StressResponseGuidePage.jsx:    healthyExpressions: [
+./src/pages/StressResponseGuidePage.jsx:    healthyExpressions: [
+./src/pages/StressResponseGuidePage.jsx:            {response.healthyExpressions.map((expression, idx) => (
+./src/pages/SystemMapPage.jsx:          whereLinkText="You're already here"
+./src/pages/TalkTopics.jsx:      { question: "What does healthy conflict look like to you?", depth: 'intermediate' },
+./src/pages/TalkTopics.jsx:      { question: "What routines support your mental health?", depth: 'intermediate' },
+./src/pages/TalkTopics.jsx:                    there's no pressure to share anything they're not ready to discuss.
+./src/pages/TalkTopics.jsx:                    It's okay to say "I'm not ready to talk about that." Honor your own and others' limits.
+./src/pages/TwelvePracticesPage.jsx:          when: "Whenever you're ready. Start with today's practice or explore all 12.",
+./src/pages/TwelveStepsPage.tsx:    practice: "Name one strength you already have that can help you grow.",
+./src/pages/TwelveStepsPage.tsx:    description: "Become ready to release old patterns. Embrace discomfort as part of growth.",
+./src/pages/TwelveStepsPage.tsx:    affirmation: "I am ready for something new."
+./src/pages/ValuesPage.jsx:            for all healthy relationships and emotional well-being. When you live in genuine love, 
+./src/pages/WellnessGlossaryPage.jsx:    explanation: "Anxiety is your body's built-in alarm system. It helped our ancestors survive by alerting them to danger. In modern life, this same system can activate in response to everyday stressors like work deadlines, social situations, or health concerns.",
+./src/pages/WellnessGlossaryPage.jsx:    explanation: "Boundaries are like invisible fences that define where you end and others begin. They communicate what you will and won't accept, and they protect your energy, time, and emotional health. Healthy boundaries are essential for self-respect and maintaining balanced relationships.",
+./src/pages/WellnessGlossaryPage.jsx:    definition: "The ability to manage and respond to emotional experiences in healthy, adaptive ways.",
+./src/pages/WellnessGlossaryPage.jsx:      "Choosing healthy outlets for difficult feelings"
+./src/pages/WellnessGlossaryPage.jsx:    copingStrategies: ["Practice naming emotions specifically", "Use the STOP technique (Stop, Take a breath, Observe, Proceed)", "Build a toolkit of healthy coping strategies", "Track emotional patterns in a journal"],
+./src/pages/WellnessGlossaryPage.jsx:    explanation: "Gaslighting is a subtle but harmful form of emotional abuse. The manipulator denies your experience of reality to gain power and control. Over time, this can seriously damage your self-trust and mental health.",
+./src/pages/WellnessGlossaryPage.jsx:            Clear definitions, examples, and coping strategies for essential mental health and wellness concepts.
+./src/pages/account/Billing.jsx:        description: "No worries — you can upgrade whenever you're ready.",
+./src/pages/dashboard/Overview.jsx:                <p className={styles.emptyText} data-testid="text-no-activity">Nothing here yet — and that's okay. Whenever you're ready, your journal and mood tracker are good places to start.</p>
+./src/pages/hubs/BoundariesHubPage.jsx:    description: "Learn to set healthy limits with care",
+./src/pages/hubs/BoundariesHubPage.jsx:      description="Educational tools for setting healthy boundaries and protecting your energy. Learn to establish limits with care and communicate needs clearly."
+./src/pages/hubs/BoundariesHubPage.jsx:      subtitle="Tools for setting healthy limits and protecting your energy"
+./src/pages/hubs/BoundariesHubPage.jsx:        why: "To support healthy relationship patterns through gentle practices",
+./src/pages/hubs/CommunicationHubPage.jsx: * Topic hub for healthy communication skills
+./src/pages/hubs/CommunicationHubPage.jsx:      description="Develop healthy communication skills. Learn to express yourself clearly, set boundaries, and build authentic connections."
+./src/pages/hubs/CommunicationHubPage.jsx:        what: "Resources for developing healthier communication patterns.",
+./src/pages/hubs/CopingSkillsHubPage.jsx: * Topic hub for healthy coping strategies and skills
+./src/pages/hubs/CopingSkillsHubPage.jsx:        what: "A toolkit of healthy coping strategies for challenging times.",
+./src/pages/hubs/CreativityHubPage.jsx:        how: "Start creating before you're ready. Perfection is not the goal."
+./src/pages/hubs/EnergyManagementHubPage.jsx:      description="Tools for managing your personal energy. Prevent burnout, set boundaries, and maintain sustainable energy through healthy practices."
+./src/pages/hubs/ForgivenessHubPage.jsx:            to heal. These tools are for when you're ready to explore, on your own terms.
+./src/pages/hubs/HubsIndexPage.jsx:    description: "Build healthy connections",
+./src/pages/hubs/InnerWorkHubPage.jsx:          quote="The answers you seek are already within you."
+./src/pages/hubs/InnerWorkHubPage.jsx:          microTool="Ask yourself: What am I ready to understand about myself today?"
+./src/pages/hubs/MindfulnessHubPage.jsx:          quote="This moment is the only one that exists. You are already here."
+./src/pages/hubs/PersonalGrowthHubPage.jsx:          quote="You are already enough. Growth is about becoming more of who you are."
+./src/pages/hubs/PresenceHubPage.jsx:        how: "Notice you're reading this. That's presence. You're already doing it."
+./src/pages/hubs/RelationshipsHubPage.jsx: * Topic hub for healthy relationship tools and resources
+./src/pages/hubs/RelationshipsHubPage.jsx:      description="Educational tools for building healthy relationships, setting boundaries, and developing authentic connection. Learn at your own pace."
+./src/pages/hubs/SelfWorthHubPage.jsx:      description="Gentle wellness tools for building self-compassion and inherent value. Educational resources for developing a healthy self-image through supportive practices."
+./src/pages/hubs/SelfWorthHubPage.jsx:        why: "To support healthy self-image through gentle practices",
+./src/pages/hubs/SleepHubPage.jsx:      description="Gentle wellness tools for peaceful nights and restful sleep. Educational resources for building healthy sleep habits through calming practices."
+./src/pages/hubs/SleepHubPage.jsx:        why: "To support healthy sleep habits through gentle practices",
+./src/pages/hubs/HabitsHubPage.jsx: * Topic hub for building healthy habits and behavior change
+./src/pages/hubs/HabitsHubPage.jsx:      description="Build sustainable healthy habits. Learn the science of behavior change, create daily routines, and track your progress."
+./src/pages/hubs/HabitsHubPage.jsx:        what: "Resources for building and maintaining healthy habits.",
+./src/pages/tools/BodyScan.jsx:  { text: "When you're ready, gently wiggle your fingers and toes", area: "return", duration: 8 }
+./src/pages/tools/BreathTool.jsx:        description="A gentle breathing practice to help you reset and find calm. Choose your pace and begin when you're ready."
+./src/pages/tools/GriefLetter.jsx:                placeholder="Begin when you're ready..."
+./src/pages/tools/BoundaryBuilderTool.jsx:  const ready = statement.length > 0;
+./src/pages/tools/BoundaryBuilderTool.jsx:              ready
+./src/pages/tools/BoundaryBuilderTool.jsx:              className={`mt-2 text-base ${ready ? "text-slate-900 dark:text-slate-100" : "italic text-slate-500 dark:text-slate-400"}`}
+./src/pages/tools/BoundaryBuilderTool.jsx:              {ready ? statement : "Fill in all five prompts above to compose your draft."}
+./src/pages/tools/BoundaryBuilderTool.jsx:                disabled={!ready}
+./src/pages/tools/ManipulationDetector.jsx:      "A short, named pause is healthy ('I need an hour'). Indefinite silence used to punish is a control tactic.",
+./src/pages/tools/BreathingTool.jsx:// telemetry already records sessions; we just count them).
+./src/pages/tools/BreathingTool.jsx:    if (phase === "intro")     return { state: "calm",    colorMode: "blue",   pose: undefined,      size: "lg", aria: "Lumi calm and ready" };
+./src/pages/tools/BreathingTool.jsx:            not a substitute for medical or mental health care. If you're in
+./src/pages/GrowthPage.jsx:  { id: "emotional-health", name: "Emotional Health", icon: Heart,   color: "rose",
+./src/pages/AffirmationsPage.jsx:    researchNote: "Dr. Kristin Neff's research shows self-compassion is more strongly associated with mental health than self-esteem, without the downsides of narcissism.",
+./src/pages/AffirmationsPage.jsx:      "Every trigger is an invitation to heal something that's ready.",
+./src/pages/AffirmationsPage.jsx:    description: "Recognize and honor the strength you've already demonstrated",
+./src/pages/AffirmationsPage.jsx:      "I am both a work in progress and already complete.",
+./src/pages/AffirmationsPage.jsx:    researchNote: "Research shows that healthy boundaries are associated with lower anxiety, depression, and burnout, and higher relationship satisfaction.",
+./src/pages/AffirmationsPage.jsx:      "Worthiness is not something I become—it's something I already am.",
+./src/pages/LearnDetail.jsx:                  Reading helps. Practising helps more. Tap below to open the matching tool whenever you are ready.
+./src/pages/CommunityHub.jsx:                Read anonymous reflections from others walking a similar path. Share your own when you are ready.
+./src/pages/PeacescapePage.jsx:        if (!cancelled) setState({ ok: false, scape: { palette: "sage", theme: "meadow", accessory: "none" }, stage: { stage: 1, label: "Seed Garden", description: "A quiet patch of meadow." }, journalCount: 0, starter: true, tagline: "Your sanctuary is ready." });
+./src/pages/CRMPage.jsx:    { id: 4, text: 'Weekly progress report is ready', time: '2d ago', read: true },
+./src/pages/Start.tsx:    "Buddy helped me reset for one minute. Try MyMentalHealthBuddy: https://mymentalhealthbuddy.com/start";
+./src/pages/Start.tsx:  // soft-landing) for the same underlying tool. Parent gating already
+./src/pages/Start.tsx:        : "You're starting to build real patterns. Unlock deeper tools, longer memory, and more personalized support when you're ready.";
+./src/pages/Start.tsx:    track("buddy_accessibility_ready");
+./src/pages/Start.tsx:        return "Buddy can help you go deeper when you\u2019re ready.";
+./src/pages/Start.tsx:      // The panel heading already says this on first load — duplicating it in
+./src/pages/Start.tsx:            Not another mental health app.
+./src/pages/AdminLogin.jsx: * Already-verified visitors are redirected immediately.
+./src/pages/WireframeTemplates.jsx: * Developer-ready wireframe system for mymentalhealthbuddy.com
+./src/pages/WireframeTemplates.jsx:            Developer-ready wireframe with accessibility and SEO best practices
+./src/pages/WireframeTemplates.jsx: * CRM: User engagement, community health
+./src/pages/Register.jsx:      toast({ title: "Welcome to MyMentalHealthBuddy", description: "Your account is ready. Let's begin." });
+./src/pages/Register.jsx:                Already have an account?{" "}
+./src/pages/Dashboard.jsx:        description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with The Genuine Love Project."
+./src/pages/Dashboard.jsx:                description="Build healthy routines"
+./src/pages/Blog.jsx:      <p>Welcome to The Genuine Love Project. If you've found your way here, something in you is ready for change—and that takes courage.</p>
+./src/pages/Blog.jsx:      <p>Before your thinking brain can process, your body already knows when something feels safe or threatening. We honor this wisdom by creating experiences that help regulate your nervous system—not just challenge your thoughts.</p>
+./src/pages/Blog.jsx:      <p>You've already taken the hardest step: beginning.</p>
+./src/pages/Blog.jsx:        <li><strong>Self-indulgence:</strong> Self-compassion actually leads to healthier behaviors because it reduces shame.</li>
+./src/pages/Blog.jsx:      <p>For decades, research has shown that expressive writing can significantly improve both mental and physical health. But not all journaling is created equal. Here's what the science tells us about writing for healing.</p>
+./src/pages/Blog.jsx:      <p>There's no wrong way to journal. The most important thing is that you show up for yourself, pen in hand, ready to listen.</p>
+./src/pages/Blog.jsx:    excerpt: "Discover how setting healthy boundaries protects your energy, strengthens relationships, and honors your inherent worth.",
+./src/pages/Blog.jsx:                    <strong>Disclaimer:</strong> This content is for educational purposes only and is not a substitute for professional mental health care. If you're in crisis, please contact the 988 Suicide & Crisis Lifeline or text HOME to 741741.
+./src/pages/BlogIndex.jsx:        description="Wellness resources, emotional health insights, and gentle guidance from MyMentalHealthBuddy."
+./src/pages/Onboarding.tsx:                  This app provides wellness support and is not a substitute for professional mental health care.
+./src/pages/Onboarding.tsx:                  If you're experiencing a mental health crisis, please contact emergency services or a crisis hotline.
+./src/pages/Onboarding.tsx:                  mental health services. I agree to the{" "}
+./src/pages/Wellness.jsx:        description="Access comprehensive wellness tools including breathing exercises, meditation, anxiety relief, emotion tracking, habit building, and self-care resources to support your mental health journey."
+./src/pages/ResourcesPage.jsx:    description: "Treatment referral service for mental health and substance use",
+./src/pages/ResourcesPage.jsx:      { name: "NAMI Support Groups", description: "Peer-led groups for mental health conditions", url: "https://nami.org/support-education" },
+./src/pages/ResourcesPage.jsx:      { name: "Mind (UK)", description: "Mental health information and support", url: "https://mind.org.uk" }
+./src/pages/ResourcesPage.jsx:      { name: "UCLA Mindful Awareness", description: "Free guided meditations", url: "https://uclahealth.org/marc/mindful-meditations" },
+./src/pages/ResourcesPage.jsx:  { name: "Veterans Crisis Line", description: "Mental health support for veterans", icon: Shield, phone: "988, Press 1" }
+./src/pages/ResourcesPage.jsx:                <p className="text-lead">Curated directory of mental health support and professional services</p>
+./src/pages/ResourcesPage.jsx:                    Many communities offer local resources including community mental health centers, 
+./src/pages/ResourcesPage.jsx:                    peer support groups, and sliding-scale therapy options. Contact your local health 
+./src/pages/ResourcesPage.jsx:                    Your primary care doctor can also provide referrals to mental health specialists 
+./src/pages/GlossaryPage.jsx:  { term: "Emotional Regulation", category: "Skills", definition: "The ability to manage and respond to emotional experiences in healthy ways. Includes awareness, acceptance, and appropriate expression of emotions.", example: "Using deep breathing to calm anxiety before an important presentation." },
+./src/pages/GlossaryPage.jsx:  { term: "Gratitude Practice", category: "Practice", definition: "Intentionally focusing on and appreciating positive aspects of life. Research shows it improves mood, relationships, and physical health.", example: "Writing three things you're grateful for each morning, with specific details about why." },
+./src/pages/GlossaryPage.jsx:  { term: "Loving-Kindness Meditation", category: "Practice", definition: "A meditation practice that cultivates feelings of warmth and goodwill toward self and others. Also called Metta meditation.", example: "Repeating phrases like 'May I be happy, may I be healthy, may I live with ease' then extending to others." },
+./src/pages/GlossaryPage.jsx:    description: "Comprehensive glossary of mental health, psychology, and wellness terms. Learn about therapy concepts, neuroscience, emotional regulation, and healing practices.",
+./src/pages/Newsletter.jsx:              No pressure, no hype — just gentle reflections delivered to your inbox when they're ready.
+./src/pages/Newsletter.jsx:              no urgency, no guilt if you skip one. It'll be here when you're ready.
+./src/pages/FAQPage.jsx:        a: "No. Our platform is a supportive wellness tool, not a substitute for professional mental health care. We always encourage seeking professional help when needed and provide crisis resources for emergencies."
+./src/pages/FAQPage.jsx:        a: "Emotional regulation is the ability to manage and respond to emotions in healthy ways. It involves recognizing emotions, understanding their messages, and choosing how to express them constructively. This skill can be developed through mindfulness, breathing techniques, and cognitive reframing."
+./src/pages/FAQPage.jsx:        q: "What should I do in a mental health crisis?",
+./src/pages/About.jsx:              <strong>Important:</strong> MyMentalHealthBuddy by The Genuine Love Project is an educational wellness platform and is not a substitute for professional mental health treatment. If you're in crisis, please reach out to a qualified professional or call your local emergency services.
+./src/pages/Admin.jsx:        const [health, deep] = await Promise.all([
+./src/pages/Admin.jsx:          fetchAdminMetric("/api/admin/health"),
+./src/pages/Admin.jsx:          fetchAdminMetric("/api/admin/health-deep?format=json"),
+./src/pages/Admin.jsx:        const uptimeSec = health?.uptime?.seconds;
+./src/pages/Admin.jsx:        const memMB = health?.memory?.heapUsedMB;
+./src/pages/Admin.jsx:        const dbMs = health?.database?.latencyMs;
+./src/pages/BehaviorChangePage.jsx:    situation: "You keep buying junk food despite wanting to eat healthier.",
+./src/pages/BehaviorChangePage.jsx:    action: "Redesign your environment: don't keep junk food at home, prep healthy snacks on Sunday, put fruit visible on counter.",
+./src/pages/BehaviorChangePage.jsx:    result: "Good choices become automatic because you've removed friction from healthy options and added it to unhealthy ones."
+./src/pages/BehaviorChangePage.jsx:          example: "Cue: Feeling stressed. Routine: Scroll social media. Reward: Temporary distraction. To change this, keep the cue and reward but change the routine to something healthier like deep breathing."
+./src/pages/BehaviorChangePage.jsx:          example: "Don't keep junk food in the house (environment design) rather than trying to resist it each time (willpower). Make the healthy choice the easy choice."
+./src/pages/BehaviorChangePage.jsx:          description: "Attach new behaviors to habits you already do reliably. After I [existing habit], I will [tiny new habit].",
+./src/pages/BehaviorChangePage.jsx:          description: "Habits fill a need. Instead of trying to eliminate a behavior, replace it with a healthier one that meets the same need.",
+./src/pages/BehaviorChangePage.jsx:          example: "If you stress-eat for comfort, replace with: calling a friend, taking a walk, or doing breathing exercises. The need for comfort remains—just find a healthier way to meet it."
+./src/pages/BehaviorChangePage.jsx:        "Find a healthier behavior that meets the same need",
+./src/pages/BehaviorChangePage.jsx:  { step: 3, title: "Anchor It", description: "Attach the new behavior to something you already do reliably. This leverages existing neural pathways." },
+./src/pages/BehaviorChangePage.jsx:    description: "Science-backed tools for building healthy habits, breaking patterns, and sustainable behavior change for your wellness journey.",
+./src/pages/BehaviorChangePage.jsx:      <SEO title="Behavior Change — The Genuine Love Project" description="Explore gentle approaches to building healthier habits." />
+./src/pages/BlogEditor.jsx:        how: "Write, preview, and publish when ready."
+./src/pages/BodyWellnessPage.jsx:    description: "Food choices that support mental health and energy",
+./src/pages/BodyWellnessPage.jsx:        description: "Certain foods contain nutrients that directly support brain health and mood regulation.",
+./src/pages/BodyWellnessPage.jsx:                  Research in neuroscience confirms: the body is not separate from mental health—it's central to it.
+./src/pages/CognitiveArchitecturePage.tsx:  { id: "via-negativa", name: "Via Negativa", category: "Philosophy", description: "Improvement often comes from subtraction, not addition. Remove the bad rather than add the good.", example: "Better health often comes from stopping bad habits rather than adding supplements.", application: "Before adding solutions, ask: What can I remove? What's causing harm that I can eliminate?", tags: ["simplicity", "improvement", "philosophy"] },
+./src/pages/CollaborativeLabPage.tsx:  "What belief about yourself are you ready to release?",
+./src/pages/DailyRoutinesPage.jsx:  who: "Anyone wanting to create structure, build healthy habits, or support their mental health through daily rhythms.",
+./src/pages/DailyRoutinesPage.jsx:  why: "Consistent routines create predictability that calms your nervous system and builds automatic healthy behaviors.",
+./src/pages/DailyWisdomOraclePage.tsx:          control="Return whenever you're ready — no commitment required"
+./src/pages/ExamplesPage.jsx:      { step: "Return Gently", detail: "When ready, refocus on the present conversation without judgment" }
+./src/pages/ExamplesPage.jsx:      { step: "Anchor It", detail: "Attach your new habit to something you already do: 'After I turn off my alarm, I will...'" },
+./src/pages/ExamplesPage.jsx:    outcome: "Shame transforms into healthy accountability without the toxic self-attack that prevents growth.",
+./src/pages/ExamplesPage.jsx:    scenario: "A colleague asks you to take on extra work (again). You're already stretched thin, but you're afraid of conflict or being seen as unhelpful.",
+./src/pages/ExamplesPage.jsx:              If you're struggling, please reach out to a mental health professional.
+./src/pages/GuidedJournalingPage.tsx:    description: "Exploring healthy connection while honoring your own needs",
+./src/pages/GuidedJournalingPage.tsx:      "What does a healthy relationship look like to you? Describe its qualities.",
+./src/pages/GuidedJournalingPage.tsx:            It is not a substitute for professional mental health support. If you're in crisis, please reach out 
+./src/pages/GuidedJournalingPage.tsx:            to a crisis helpline or mental health professional.
+./src/pages/HealthPage.jsx:    queryKey: ["/api/health"],
+./src/pages/HealthPage.jsx:        description="System health status and diagnostics."
+./src/pages/HealthPage.jsx:          <div className="card-bordered" data-testid="section-health">
+./src/pages/HealthPage.jsx:                <p className="text-body-sm">Checking system health...</p>
+./src/pages/HealthPage.jsx:                  <pre className="text-caption font-mono overflow-x-auto" data-testid="text-health-data">
+./src/pages/HowToGuidesPage.jsx:    overview: "Self-care is intentionally meeting your needs to maintain physical, emotional, and mental health. It's not selfish—it's essential for sustainable wellbeing.",
+./src/pages/MasteryToolsPage.tsx:    description: "Discover thinking frameworks when you're ready—tools to support clarity, not add pressure",
+./src/pages/ProfessionalResourcesPage.jsx:        description: "Free mental health resources and referrals",
+./src/pages/ProfessionalResourcesPage.jsx:        description: "Research-based mental health information",
+./src/pages/ProfessionalResourcesPage.jsx:                  The Genuine Love Project is a supportive wellness tool, not a replacement for professional mental health care. 
+./src/pages/ProfessionalResourcesPage.jsx:                  If you're experiencing a mental health crisis, please contact one of the crisis hotlines below or call 911.
+./src/pages/QAPage.jsx:  { id: "mental-health", label: "Mental Health", icon: Brain },
+./src/pages/QAPage.jsx:    answer: "Self-guided healing can support your journey significantly. However, for trauma, persistent mental health challenges, or severe symptoms, professional support is recommended. Think of our tools as complementary to professional care, not a replacement. We provide resources to help you find affordable therapy options."
+./src/pages/QAPage.jsx:    category: "mental-health",
+./src/pages/QAPage.jsx:    category: "mental-health",
+./src/pages/QAPage.jsx:    answer: "Sadness is a normal emotion that passes. Depression involves persistent low mood (2+ weeks), loss of interest in things you used to enjoy, changes in sleep/appetite, difficulty concentrating, and sometimes hopelessness. If you're experiencing these symptoms, please reach out to a mental health professional."
+./src/pages/QAPage.jsx:    category: "mental-health",
+./src/pages/QAPage.jsx:    category: "mental-health",
+./src/pages/QAPage.jsx:    answer: "Options include: Open Path Collective ($30-80 sessions), community mental health centers (sliding scale), university training clinics (low-cost), peer support groups (often free), and some apps offer free basic features. Our Professional Resources page has links to affordable care directories."
+./src/pages/QAPage.jsx:              please consult with a qualified mental health professional.
+./src/pages/ResearchEvidencePage.jsx:        implications: "This means healing is always possible—your brain can literally change structure and function through consistent practices like mindfulness, therapy, and healthy habits.",
+./src/pages/ResearchEvidencePage.jsx:        summary: "Adverse Childhood Experiences (ACEs) increase health risks, but protective factors and healing relationships can mitigate these effects.",
+./src/pages/ResearchEvidencePage.jsx:        implications: "While early adversity has real impacts, resilience can be built at any age through supportive relationships and healthy practices.",
+./src/pages/ResearchEvidencePage.jsx:        implications: "Being kind to yourself isn't weak—it's a research-backed path to resilience and emotional health.",
+./src/pages/ResearchEvidencePage.jsx:        implications: "Prioritizing relationships is not optional—it's as important as exercise and nutrition for physical health.",
+./src/pages/ResearchEvidencePage.jsx:        implications: "Your attachment style isn't fixed. Therapy and healthy relationships can help you develop secure attachment patterns.",
+./src/pages/ResearchEvidencePage.jsx:                  <strong>Mindfulness and self-compassion</strong> are validated by rigorous research as effective mental health interventions.
+./src/pages/SocialHub.jsx:    template: "Today's affirmation: {content}\n\n#selfcare #mentalhealth #wellness #healing #genuinelove",
+./src/pages/SocialHub.jsx:    template: '"{quote}" - {author}\n\nWhat does this mean to you?\n\n#inspiration #motivation #mentalhealth #selfgrowth',
+./src/pages/SocialHub.jsx:    template: "Wellness Tip: {tip}\n\nTry this today and let us know how it goes!\n\n#wellnesstips #mentalhealth #selfcare #healing",
+./src/pages/SocialHub.jsx:    template: "Today's reflection: {prompt}\n\nTake a moment to journal or share your thoughts.\n\n#journaling #reflection #mentalhealth #mindfulness",
+./src/pages/SoulWellnessPage.jsx:        exercise: "Repeat silently: 'May I be happy. May I be healthy. May I be safe. May I live with ease.' Then extend to loved ones, acquaintances, difficult people, and all beings."
+./src/pages/StudyVaultPage.jsx:      "Secure attachment provides a foundation for healthy relationships",
+./src/pages/StudyVaultPage.jsx:      "Continuing bonds theory suggests ongoing connection is healthy",
+./src/pages/StudyVaultPage.jsx:    summary: "Boundaries are limits that protect your well-being. They're essential for healthy relationships and self-respect.",
+./src/pages/StudyVaultPage.jsx:    why: "We're a wellness resource, not a replacement for professional mental health care. When in crisis, please seek professional support.",
+./src/pages/WisdomPracticesPage.tsx:  "What belief about myself is ready to be released?",
+./src/pages/Pricing.jsx:    toast({ title: "You're on the list", description: "We'll send a gentle nudge when you're ready." });
+./src/pages/Pricing.jsx:              Not ready yet? That's okay.
+./src/pages/_quarantine/legacy-landing/Home.jsx:              We understand that emotional work isn't linear. Some days you'll feel ready to dive deep. Other days, you might just need a breathing exercise. This platform meets you wherever you are.
+./src/pages/_quarantine/legacy-landing/Home.jsx:                <strong>Important:</strong> This is an educational wellness platform, not a replacement for professional mental health care. If you're in crisis, please reach out to a crisis line or mental health professional.
+./src/pages/CrisisResources.jsx:    description: "Support, education, and advocacy for mental health",
+./src/pages/CrisisResources.jsx:        description="24/7 crisis support hotlines and mental health resources. Find immediate help, emergency contacts, and self-care tips when you need them most."
+./src/pages/BreathingExercisesPage.jsx:    description: "5-second rhythm scientifically shown to optimize heart rate variability (HRV), the gold standard measure of nervous system health.",
+./src/pages/BreathingExercisesPage.jsx:    bestFor: "Daily practice, emotional regulation, building long-term resilience, baseline nervous system health",
+./src/pages/BreathingExercisesPage.jsx:    polyvagalNote: "Shorter exhales maintain mild sympathetic activation—the 'ready for action' state without tipping into fight-or-flight."
+./src/pages/JournalPage.jsx:  { category: "Release", prompt: "What are you ready to let go of?" },
+./src/pages/JournalPage.jsx:          <p className="text-sm text-muted-foreground mb-5">Whenever you're ready, this space is here for you. No rush.</p>
+./src/pages/OnboardingFlow.jsx:          Take a breath. There's nothing to do, nothing to prove. This is your softer space — a calm corner of the day, ready whenever you are.
+./src/pages/OnboardingFlow.jsx:          You showed up today. That's already something beautiful.
+./src/pages/CanvaLanding.jsx:      title: "Become Who You Already Are",
+./src/pages/CanvaLanding.jsx:      description: "Part coach who roots for you to grow. Part mentor who shares the right thought at the right time. Part friend who actually cares. Part guide who helps you understand why you do what you do. Trained in real listening, gentle coaching, and emotional smarts — Lumi helps you handle stress, build real confidence, calm your own mind, and become more of who you already are.",
+./src/pages/CanvaLanding.jsx:      answer: "Absolutely — and not with generic productivity tips. Lumi understands that ADHD, scattered focus, and chronic overwhelm aren't character flaws — they're unique cognitive styles that deserve tools built specifically for how your mind actually works. Through personalized self-regulation strategies, attention-aware coaching, behavioral pattern recognition, and metacognitive skill-building, Lumi helps you work with your mind instead of against it. The goal isn't to 'fix' you — it's to help you harness the brilliant way your brain already operates."
+./src/pages/CanvaLanding.jsx:      answer: "Life gets full — and your space stays exactly as you left it. Warm. Patient. Unchanged. No guilt emails. No streak that breaks. No passive-aggressive notifications wondering where you went. Behavioral growth happens in waves, not straight lines, and we genuinely honor that. When you're ready, Lumi is here — no judgment, no conditions, picking up right where you left off. That's what a real friend does."
+./src/pages/CanvaLanding.jsx:      answer: "No — and we'll always be transparent about that, because integrity isn't optional. This is an educational wellness companion: a metacognitive coach and behavioral guide for deepening self-awareness, mastering stress, building emotional resilience, developing self-regulation skills, growing genuine confidence, and discovering the strength you already carry. If you're in crisis, we connect you directly to professional help. If you have a therapist, this complements their work beautifully. If you're not there yet, this is a gentle, empowering, judgment-free first step toward genuinely understanding and evolving your own mind."
+./src/pages/CanvaLanding.jsx:              <span className="block" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}> The Mind You Already Have</span>
+./src/pages/CanvaLanding.jsx:              Every design choice, every word Lumi speaks, every tool we build rests on a single truth: the wisdom, strength, and resilience you need are already inside you. We don't add what's missing — we create the conditions for what's always been there to finally surface.
+./src/pages/CanvaLanding.jsx:              "We didn't build another app. We built a metacognitive mirror — one that reflects your mind back to itself with more clarity, more compassion, and more insight than you've ever experienced. Because the most powerful thing you'll ever do is learn to observe, understand, and consciously evolve the extraordinary mind you already have."
+./src/pages/CanvaLanding.jsx:            Free to start. No credit card. No trial that expires. Your AI buddy — success coach, metacognitive guide, wise mentor, and genuine friend — is here, patient and deeply invested in your evolution. Less stress. More confidence. Deeper self-worth. Real self-regulation. The person you're becoming is already inside you — let's meet them.
+./src/blog/BlogPage.tsx:			<p>Evidence-based mental health insights.</p>
+./src/components/AffirmationCards.jsx:      "I honor my needs and set healthy boundaries",
+./src/components/AffirmationDeck.jsx:          title={isFavorited ? "Already saved" : "Save to favorites"}
+./src/components/AnxietyRelief.jsx:  const [breathPhase, setBreathPhase] = useState("ready");
+./src/components/AnxietyRelief.jsx:    setBreathPhase("ready");
+./src/components/App.tsx:            Everything you need to understand, track, and improve your mental health in one beautiful app.
+./src/components/BenefitsSection.jsx:      description: "Prompts designed by mental health professionals to unlock self-discovery and emotional clarity.",
+./src/components/BoundaryBuilder.jsx:              <p className="text-sm text-[var(--text-secondary)]">Set healthy limits</p>
+./src/components/BreathingExercise.jsx:  const [phase, setPhase] = useState("ready");
+./src/components/BreathingExercise.jsx:    setPhase("ready");
+./src/components/BreathingExercise.jsx:    if (!isActive || phase === "ready" || phase === "complete") return;
+./src/components/BreathingExercise.jsx:              {phase === "ready" || phase === "complete" ? "" : timeLeft}
+./src/components/BreathingExercise.jsx:        {phase === "ready" && (
+./src/components/BreathingExercise.jsx:        {(phase !== "ready" && phase !== "complete") && (
+./src/components/ContentStudio.jsx:  { id: 'newsletter', label: 'Newsletter Snippet', icon: Mail, desc: 'Email-ready content block' }
+./src/components/ContentStudio.jsx:        disclaimer: "This is supportive information, not medical advice. If anxiety is significantly impacting your life, please reach out to a mental health professional.",
+./src/components/ContentStudio.jsx:        hashtags: "#mentalhealth #anxiety #breathwork #selfcare #wellness",
+./src/components/ContentStudio.jsx:        disclaimer: "These practices complement, but don't replace, professional mental health support when needed.",
+./src/components/ContentStudio.jsx:        hashtags: "#polyvagaltheory #traumainformed #nervousystemhealing #mentalhealth #healing",
+./src/components/ContentStudio.jsx:        disclaimer: "This is a supportive tool. If you're experiencing ongoing distress, please reach out to a mental health professional.",
+./src/components/ContentStudio.jsx:        hashtags: "#grounding #mindfulness #anxiety #mentalhealth #selfcare",
+./src/components/ContentStudio.jsx:        hashtags: "#journaling #selfawareness #mentalhealth #selfcare #wellness",
+./src/components/ContentStudio.jsx:        hashtags: "#selfcompassion #selflove #mentalhealth #kindness #wellness",
+./src/components/ContentStudio.jsx:        hashtags: "#morningroutine #wellness #selfcare #simpleliving #mentalhealth",
+./src/components/ContentStudio.jsx:        disclaimer: "Routines are tools, not rules. Flexibility is healthy. Seek support if rigid routines are causing distress.",
+./src/components/ContentStudio.jsx:        hashtags: "#habitbuilding #routines #wellness #consistency #mentalhealth",
+./src/components/ContentStudio.jsx:        hashtags: "#emotionalawareness #feelings #mentalhealth #selfawareness #wellness",
+./src/components/ContentStudio.jsx:        hashtags: "#resilience #mentalhealth #selfcare #growth #wellness",
+./src/components/ContentStudio.jsx:        disclaimer: "This is supportive information, not medical advice. If anxiety is significantly impacting your life, please reach out to a mental health professional.",
+./src/components/ContentStudio.jsx:        disclaimer: "These practices complement professional support. If anxiety is persistent, please reach out to a mental health provider.",
+./src/components/ContentStudio.jsx:        disclaimer: "These practices complement professional support. If anxiety is persistent, please reach out to a mental health provider.",
+./src/components/ContentStudio.jsx:        disclaimer: "This is supportive information, not medical advice. If anxiety is significantly impacting your life, please reach out to a mental health professional. You deserve support.",
+./src/components/ContentStudio.jsx:        disclaimer: "These practices complement, but don't replace, professional mental health support when needed. If anxiety is persistent, please reach out.",
+./src/components/ContentStudio.jsx:    disclaimer: "This is supportive information, not medical advice. If you're struggling, please reach out to a mental health professional.",
+./src/components/ContentStudio.jsx:    hashtags: "#mentalhealth #wellness #selfcare #healing",
+./src/components/CopingStrategies.jsx:          "Share when ready, listen always",
+./src/components/CopingStrategies.jsx:        example: "Join an online mental health community or local support group.",
+./src/components/EnergyBooster.jsx:    steps: ["Get cold water ready", "Take a deep breath", "Splash face or hold ice", "Feel the instant wake-up"]
+./src/components/GoalProgress.jsx:  { name: "Sleep 8 hours nightly", category: "health", milestones: [7, 14, 30, 60, 90] },
+./src/components/GoalProgress.jsx:  health: "from-green-400 to-emerald-500",
+./src/components/GoalProgress.jsx:        const alreadyDone = g.completedDays.includes(today);
+./src/components/GoalProgress.jsx:        const newCompleted = alreadyDone 
+./src/components/GoalProgress.jsx:                <option value="health">Health</option>
+./src/components/HealingChat.tsx:        AI-powered healing companion ready to support your journey.
+./src/components/HealingJourneys.jsx:    description: "Restore healthy sleep patterns with science-backed techniques",
+./src/components/LaughterTherapy.jsx:  { icon: "❤️", text: "Improves heart health" },
+./src/components/LaughterTherapy.jsx:            Did you know? Even fake laughter triggers real health benefits!
+./src/components/LotusGuide.jsx:    "Your tools are here whenever you're ready."
+./src/components/MoodInsight.jsx:  most_active: (day) => `${day}s show the most emotional variety. You're processing more on these days - that's healthy self-awareness.`,
+./src/components/MorningEveningRituals.jsx:              <p className="text-slate-400 text-sm">Build healthy daily habits</p>
+./src/components/MotivationBooster.jsx:  { text: "Be yourself; everyone else is already taken.", author: "Oscar Wilde", category: "authenticity" },
+./src/components/MotivationalQuote.jsx:  { text: "Happiness is not something ready-made. It comes from your own actions.", author: "Dalai Lama" },
+./src/components/MotivationalQuote.jsx:  { text: "Mental health problems don't define who you are. They are something you experience.", author: "Matt Haig" },
+./src/components/MotivationalQuote.jsx:  { text: "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.", author: "Unknown" },
+./src/components/NotificationCenter.jsx:    message: "Day 3 of your Anxiety Relief Journey is ready. Continue your healing path.",
+./src/components/OnboardingFlow.jsx:  { title: "Begin", message: "You're ready to begin your healing journey 🌸" }
+./src/components/PersistentDisclaimer.jsx:        This is educational wellness support for adults 18+, not medical or mental health treatment. 
+./src/components/PersistentDisclaimer.jsx:            If you're experiencing a mental health crisis, please reach out:
+./src/components/PlanGate.jsx:                  Already have an account? Sign in
+./src/components/PositiveVisualization.jsx:      { text: "Take a deep breath... and when you're ready, open your eyes.", duration: 20 },
+./src/components/QuestPanel.jsx:                    description: "We'll let you know when personalized quests are ready for you."
+./src/components/QuestPanel.jsx:                Notify me when ready
+./src/components/ReminderScheduler.jsx:      navigator.serviceWorker.ready.then(registration => {
+./src/components/SelfCareBingo.jsx:  { id: 8, text: "Eat a healthy meal", category: "physical", points: 15 },
+./src/components/SelfCareChecklist.jsx:      { id: "healthy-meal", text: "Eat a nutritious meal", points: 10 },
+./src/components/SelfCareChecklist.jsx:      { id: "boundaries", text: "Set a healthy boundary", points: 20 },
+./src/components/SelfCompassion.jsx:      "May I be healthy and strong",
+./src/components/SoftLaunchBanner.jsx:    fetch("/api/health")
+./src/components/StressMonitor.jsx:  low: ["Great job maintaining calm!", "Keep up your healthy habits", "Share your calm energy with others"],
+./src/components/ValuesExplorer.jsx:  { id: "health", name: "Health", description: "Physical and mental wellness" },
+./src/components/admin/SOPMonitorPanel.jsx:        <p className="text-sm" style={{ color: "var(--glp-sage)" }}>Running platform health probes…</p>
+./src/components/admin/SOPMonitorPanel.jsx:        <SummaryCard icon={Activity} label="Coverage" value={`${coveragePct}%`} sub={`${passing}/${totalChecks} healthy`} />
+./src/components/admin/OperationsPanel.jsx:      const json = await apiFetch("/api/admin/health-deep/metrics?format=json");
+./src/components/admin/OperationsPanel.jsx:      // /api/admin/health-deep returns the structured probe report:
+./src/components/admin/OperationsPanel.jsx:      const json = await apiFetch("/api/admin/health-deep");
+./src/components/admin/OperationsPanel.jsx:      setError(e.message || "Failed to load health checks");
+./src/components/admin/OperationsPanel.jsx:    <div className={panelChrome()} data-testid="panel-health-checks">
+./src/components/admin/OperationsPanel.jsx:            data-testid="list-health-checks"
+./src/components/admin/OperationsPanel.jsx:  const [ready, setReady] = useState(null);
+./src/components/admin/OperationsPanel.jsx:      const [readyRes, detailRes] = await Promise.allSettled([
+./src/components/admin/OperationsPanel.jsx:        fetch("/health/ready", { credentials: "include" }),
+./src/components/admin/OperationsPanel.jsx:        fetch("/health/detailed", { credentials: "include" }),
+./src/components/admin/OperationsPanel.jsx:      if (readyRes.status === "fulfilled") {
+./src/components/admin/OperationsPanel.jsx:        const ok = readyRes.value.ok;
+./src/components/admin/OperationsPanel.jsx:        try { body = await readyRes.value.json(); } catch { /* tolerate non-json */ }
+./src/components/admin/OperationsPanel.jsx:        setReady({ ok, status: readyRes.value.status, body });
+./src/components/admin/OperationsPanel.jsx:        {ready && (
+./src/components/admin/OperationsPanel.jsx:              background: ready.ok ? "var(--glp-sage-10)" : "var(--glp-rose-15)",
+./src/components/admin/OperationsPanel.jsx:              border: `1px solid ${ready.ok ? "var(--glp-sage-30)" : "var(--glp-rose-30)"}`,
+./src/components/admin/OperationsPanel.jsx:            {ready.ok
+./src/components/admin/OperationsPanel.jsx:              <p className="font-semibold" data-testid="text-readiness-status" style={{ color: ready.ok ? "var(--glp-sage-deep)" : "var(--glp-rose-deep, #7a3041)" }}>
+./src/components/admin/OperationsPanel.jsx:                {ready.ok ? "Ready to serve" : "Not ready"}
+./src/components/admin/OperationsPanel.jsx:                <span className="ml-2 text-xs font-normal opacity-75">HTTP {ready.status}</span>
+./src/components/admin/OperationsPanel.jsx:              {ready.body?.checks && (
+./src/components/admin/OperationsPanel.jsx:                  {Object.keys(ready.body.checks).length} probe(s) reported
+./src/components/admin/OperationsPanel.jsx:      const json = await apiFetch("/api/admin/health-deep");
+./src/components/admin/OperationsPanel.jsx:      const json = await apiFetch("/api/admin/health-deep/self-heal", { method: "POST" });
+./src/components/admin/OperationsPanel.jsx:      await apiFetch(`/api/admin/health-deep/scheduler/${action}`, { method: "POST" });
+./src/components/admin/OperationsPanel.jsx: * Lightweight liveness probe for the small set of admin / public health
+./src/components/admin/OperationsPanel.jsx: * health-deep panels stay untouched. */
+./src/components/admin/OperationsPanel.jsx:    { label: "Public health", path: "/api/health",         protected: false },
+./src/components/admin/OperationsPanel.jsx:    { label: "Admin health",  path: "/api/admin/health",   protected: true  },
+./src/components/admin/OperationsPanel.jsx:    { label: "Kernel health", path: "/api/kernel/health",  protected: true  },
+./src/components/admin/OperationsPanel.jsx:    { label: "Email health",  path: "/api/email/health",   protected: false },
+./src/components/attention/AttentionEcology.jsx:                  aria-label={`${cat.name} - ${cat.type} activity${isAdded ? ' (already added)' : ''}`}
+./src/components/content/GlossaryTerm.jsx:    detailed: "Healthy boundaries define what you're comfortable with and how you allow others to treat you. They're essential for maintaining emotional health and respectful relationships."
+./src/components/epistemic/EpistemicCalibration.tsx:                  <option value="health">Health</option>
+./src/components/layout/PageLayout.jsx: * Use this for any page that doesn't already go through PageTemplate /
+./src/components/layout/PageLayout.jsx: * SacredLayout / WellnessPageShell.  Pages that already have one of those
+./src/components/layout/PageLayout.jsx: *   App.jsx already provides the semantic <main id="main-content">.
+./src/components/layout/Footer.tsx:              This platform provides supportive tools for emotional wellness but is not a substitute for professional mental health care.
+./src/components/methods/StrengthsPIETile.jsx:          Building on what's already working in you and your world.
+./src/components/methods/StrengthsPIETile.jsx:        We focus on what's already working—your existing strengths—while
+./src/components/mi/MITools.tsx:  "What strengths do you already have that could help?"
+./src/components/mi/ReadinessScale.tsx:  question = "How ready are you to take one small step?",
+./src/components/mi/ReadinessScale.tsx:        <span>Not at all ready</span>
+./src/components/mi/ReadinessScale.tsx:        <span>Completely ready</span>
+./src/components/modules/ModulesPanel.tsx:  { type: "Affirm", prompt: "What strength have you already shown?" },
+./src/components/modules/ModulesPanel.tsx:    `mymentalhealthbuddy.com`;
+./src/components/patterns/PatternInsights.tsx:          Patterns emerge when they're ready.
+./src/components/ui/QuoteBlock.jsx:    text: "The love you seek is already within you, waiting to be discovered.", 
+./src/components/ui/SafetyFooter.jsx:  prominent: "Important: MyMentalHealthBuddy by The Genuine Love Project provides educational and reflective tools only. We do not diagnose, treat, or provide therapy. You are in control — skip any step that doesn't feel right, and pause or stop at any time. If you are experiencing a mental health crisis, please contact a professional or crisis service immediately."
+./src/components/wellness/WeatherMoodSync.jsx:    suggestion: "What are you ready to release today?",
+./src/components/wellness/WeatherMoodSync.jsx:        description: "Weather sync is ready",
+./src/components/wellness/WellnessPageShell.jsx:        ConsentStrip already includes the educational disclaimer
+./src/components/avatar/BuddyAvatar.css:   on a mental-health surface. The replacement is gated to non-steady
+./src/components/avatar/BuddyAvatar.css:   upper-right corner on celebrate/encouraged states. The V6 heart already
+./src/components/avatar/BuddyPanel.tsx:   * placements where the host page already owns its primary `<h1>` so the
+./src/components/avatar/BuddyAvatar.tsx:    if (!token) return; // another avatar already owns the beat
+./src/components/zen/BuddyBubble.jsx:  { category: "encourage", emoji: "🌱", text: "Showing up here is already self-respect in action." },
+./src/components/zen/BuddyBubble.jsx:  { category: "mi", emoji: "🌊", text: "On a scale of 1–10, how ready do you feel to try one small thing today? What makes it that number and not lower?" },
+./src/components/zen/BuddyBubble.jsx:  { category: "evolve", emoji: "🌳", text: "Every reflection plants a root. The forest is already becoming." },
+./src/components/zen/BuddyBubble.jsx:  { category: "evolve", emoji: "🪶", text: "What part of you is ready to be welcomed back today?" },
+./src/components/zen/BuddyBubble.jsx:  { category: "evolve", emoji: "🌌", text: "The version of you that is becoming is already inside the version that is here." },
+./src/components/zen/BuddyBubble.jsx:  { category: "powerful", emoji: "💫", text: "When you're ready — and you will be — you'll know which step is yours." },
+./src/components/zen/BuddyBubble.jsx:  { category: "powerful", emoji: "🌠", text: "The moment you choose yourself, you've already changed the timeline." },
+./src/components/zen/BuddyBubble.jsx:  { category: "powerful", emoji: "🫧", text: "Every breath out is a small act of letting go. You've already done it thousands of times today." },
+./src/components/MindfulBreathing.jsx:  const [phase, setPhase] = useState("ready");
+./src/components/MindfulBreathing.jsx:    setPhase("ready");
+./src/components/MindfulBreathing.jsx:          : "Breathing together calms the body. Let's begin when you're ready."
+./src/components/MindfulBreathing.jsx:              {phase === "ready" && (
+./src/components/FeedbackPrompt.tsx:// schema change — slots into the same events.jsonl pipeline that already
+./src/components/lumi/LumiAccessibleWrapper.jsx:  // Compose the announcement: "Lumi is [state]. Your [color] mental health
+./src/components/lumi/LumiAccessibleWrapper.jsx:  // companion." The label in EMOTION_CONFIG already starts with "Lumi is",
+./src/components/lumi/LumiAccessibleWrapper.jsx:    return `Lumi is ${stateText}. Your ${theme.name} mental health companion.`;
+./src/components/lumi/LumiCompanion.jsx:  midday:  "Hello. Lumi is ready when you are.",
+./src/components/lumi/LumiBrandLogo.jsx:  showParent = true, // accepted for API compat; lockup PNG already includes the subhead
+./src/components/lumi/LumiV6.css:/* ----- New eye expression variants (V7; --wide already exists) ---------- */
+./src/components/lumi/LumiV6.css:   user feels Lumi looking back. The actual eye tracking is already handled
+./src/components/lumi/LumiV6.css:   property already set by the heart-rate driver in LumiV6.tsx (and overridden
+./src/components/lumi/LumiV6.css:   reduced-motion blanket already disables it via the .lumiv6 namespace rule.
+./src/components/lumi/LumiV6.css:   blanket already kills their keyframes; the rules below add
+./src/components/lumi/LumiV6.css:   The V17 plush PNGs already ship with subtle baked-in cheek blush, so
+./src/components/lumi/FloatIdleAnimated.jsx:      if (rafId) return; // already scheduled
+./src/components/lumi/FloatIdleAnimated.css:/* When BOTH hover AND proximity are true, proximity already wins above
+./src/components/lumi/LumiV6.tsx:   * ONLY (never from emotion alone — the V17 PNG already ships with
+./src/components/lumi/LumiV6.tsx:  // LumiV6) already owns it, claimHeart returns null and we stay silent for
+./src/components/lumi/LumiV6.tsx:      // already-written current emotion and suppress the flash.
+./src/components/lumi/LumiV6.tsx:  // from emotion alone, since the V17 PNG already has baked-in blush.
+./src/components/lumi/LumiV7.jsx:        {/* Heart glow (already-shipped V8 contract) */}
+./src/components/AgeConsentGate.jsx:                health treatment. It is not a substitute for professional care.
+./src/components/UpsellModal.jsx:          100% of proceeds support free mental health access.
+./src/components/EmptyState.jsx:    description: "This is where your content will appear. You can start whenever you're ready.",
+./src/components/SafetyDisclaimer.jsx:    default: "This content is for educational and supportive purposes only, not medical advice. If you're experiencing a mental health crisis, please seek professional help.",
+./src/components/SafetyDisclaimer.jsx:    content: "This information is educational and may not apply to everyone. Consider consulting a healthcare provider for personalized guidance."
+./src/components/SEO.tsx:export const SITE_URL = "https://mymentalhealthbuddy.com";
+./src/components/ShareableReflectionCard.jsx:const SITE_URL = 'mymentalhealthbuddy.com';
+./src/components/ReflectionCardExport.jsx:    ctx.fillText("If in crisis: mymentalhealthbuddy.com/crisis", width / 2, height - 90);
+./src/components/ReflectionCardExport.jsx:    ctx.fillText("mymentalhealthbuddy.com", width / 2, height - 50);
+./src/components/ReflectionCardExport.jsx:        ctx.fillText("mymentalhealthbuddy.com", x, y);
+./src/config/leadMagnets.ts:      subject: 'Your free tool is ready',
+./src/config/leadMagnets.ts:  { id: 'relationships', label: 'Interested in relationship health' },
+./src/config/navConfig.js:  "/health",
+./src/config/seo.ts:    description: 'Building and maintaining healthy connections',
+./src/config/seo.ts:    description: 'Supporting healthy sleep and restoration',
+./src/content/allRoutes.json:  "/admin/health",
+./src/content/allRoutes.json:  "/health",
+./src/content/benefits/benefitsBank.ts:  { text: "Develop healthy coping strategies for daily life", level: "beginner", category: "general" },
+./src/content/benefits/benefitsBank.ts:  { text: "Identify what healthy boundaries look like", level: "beginner", category: "boundaries" },
+./src/content/frameworks/motivationalInterviewing.ts:    "What's already working that you want more of?",
+./src/content/frameworks/motivationalInterviewing.ts:    "On a scale of 1–10, how ready do you feel to try a small step?",
+./src/content/frameworks/motivationalInterviewing.ts:    "If 10 is 'totally ready,' where are you right now?",
+./src/content/frameworks/motivationalInterviewing.ts:    "What strength do you already have that could help here?",
+./src/content/frameworks/motivationalInterviewing.ts:    "What are you already doing well?",
+./src/content/frameworks/motivationalInterviewing.ts:    "Unlock more when you're ready—completely at your pace."
+./src/content/frameworks/motivationalInterviewing.ts:    "What resources do you already have access to?"
+./src/content/frameworks/motivationalInterviewing.ts:    "What's already working that you could build on?",
+./src/content/frameworks/motivationalInterviewing.ts:      "What have you already tried that helped even a little?",
+./src/content/frameworks/twelvePhaseAlignment.js:    example: "I'm not ready to change everything, but I'm curious about trying one small thing.",
+./src/content/frameworks/twelvePhaseAlignment.js:    reflection: "What are you ready to release, even partially?",
+./src/content/frameworks/twelvePhaseAlignment.js:    tinyAction: "Write: 'I'm ready to release...' (one thing only).",
+./src/content/frameworks/twelvePhaseAlignment.js:  disclaimer: "This is an educational wellness tool, not medical or mental health treatment. Pause or stop anytime. If you're in crisis, please visit /crisis for immediate support resources.",
+./src/content/frameworks/wellnessMicrocopy.js:    "On a 1–10 scale, how ready do you feel to try a small step?",
+./src/content/frameworks/wellnessMicrocopy.js:    "What's already working that you could build on?",
+./src/content/healingConcepts.js:    prompt: "Am I ready to release this for my own wellbeing?",
+./src/content/healingConcepts.js:    prompt: "May I be safe. May I be healthy. May I be at ease.",
+./src/content/healingConcepts.js:  "These tools are for educational purposes only and do not constitute therapy, diagnosis, or treatment. They are informed by evidence-based approaches but should not replace professional mental health care.";
+./src/content/healingFrameworks.ts:    "Every trigger is an invitation to heal something that's ready.",
+./src/content/healingFrameworks.ts:    "Worthiness is not something I become - it's something I already am.",
+./src/content/healingFrameworks.ts:    research: "Dr. Kristin Neff's research shows self-compassion is more strongly associated with mental health than self-esteem, without the downsides of narcissism or contingent self-worth. Self-compassionate people show lower cortisol levels and greater emotional resilience.",
+./src/content/healingFrameworks.ts:    research: "The Harvard Study of Adult Development (80+ years) found that close relationships are the strongest predictor of lifelong happiness and health. Loneliness has health impacts equivalent to smoking 15 cigarettes daily.",
+./src/content/healingFrameworks.ts:  general: "This content is designed to support your wellbeing but is not a replacement for professional mental health care. If you're in crisis, please reach out to a crisis line or mental health professional.",
+./src/content/healingFrameworks.ts:  innerChild: "Inner child work can surface powerful emotions. Be gentle with yourself. If you feel overwhelmed, pause and ground yourself. You can return when you feel ready.",
+./src/content/journalPrompts.js:    "What decision am I pretending I haven't already made?",
+./src/content/journalPrompts.js:      { question: "On a scale of 1–10, how ready do you feel to explore this area?", followUp: "What would move you one number higher?" },
+./src/content/journalPrompts.js:    description: "Recognizing what's already working in your life",
+./src/content/journalPrompts.js:      { question: "What are you already doing well, even if imperfectly?", followUp: "What would it mean to do a little more of that?" },
+./src/content/journalPrompts.js:      { question: "What resources—internal or external—do you already have?", followUp: "Which one feels most accessible right now?" },
+./src/content/journalPrompts.js:      { question: "What are you not ready to change—and is that okay for now?", followUp: "What support would help when you are ready?" },
+./src/content/journalPrompts.js:      { question: "Who do you want to become, and how does this fit?", followUp: "What's one quality of that future self you already have?" },
+./src/content/legal/disclaimer.ts:    "AI-generated content may be imperfect. Use what helps, skip what doesn’t, and consult professionals for health decisions.",
+./src/content/meta/integrationRegistry.ts:    routeKeysTouched: ['admin', 'admin_health', 'admin_social'],
+./src/content/meta/integrationRegistry.ts:    integrationKey: 'observability_health_endpoint',
+./src/content/meta/integrationRegistry.ts:    canonicalFiles: ['server/routes/health.mjs'],
+./src/content/meta/integrationRegistry.ts:    routeKeysTouched: ['health'],
+./src/content/meta/platformProcessRegistry.ts:    title: "Route health scanner",
+./src/content/meta/routeMeta.autogen.ts:  "health": {
+./src/content/meta/routeMeta.autogen.ts:    "canonicalPath": "/health",
+./src/content/meta/routeMetaRegistry.ts:    description: "Learn to set and maintain healthy boundaries with compassion.",
+./src/content/meta/routeMetaRegistry.ts:      "Identify healthy vs. unhealthy coping patterns.",
+./src/content/meta/routeMetaRegistry.ts:    description: "Build healthier connections with yourself and others.",
+./src/content/meta/routeMetaRegistry.ts: * For UI blocks that want ready-to-use hrefs.
+./src/content/meta/routeMetaRegistry.ts:        { id: "readiness", label: "Readiness", hint: "How ready you feel to take one step today?" },
+./src/content/microcopy/errorMicrocopy.ts:    tip: "Take a gentle breath. When you're ready, try again."
+./src/content/microcopy/errorMicrocopy.ts:    title: "This space isn't quite ready",
+./src/content/microcopy/rotationSeed.ts:    'Begin when you\'re ready',
+./src/content/microcopy/rotationSeed.ts:  'Something didn\'t work. Try again when you\'re ready.',
+./src/content/microcopy/rotationSeed.ts:  'Only proceed when you feel ready.',
+./src/content/microcopy/wellness.js:    "It's okay to step away and come back when you're ready."
+./src/content/microcopy/wellness.js:    "When you're ready, take one small next step.",
+./src/content/microcopy/wellness.js:    long: "This content is for educational support and self-reflection, not medical or mental health treatment. If you feel at risk or in crisis, visit Crisis Resources."
+./src/content/microcopy/wellnessMicrocopy.ts: * - Replace "must" with "you can / if you'd like / when you're ready"
+./src/content/microcopy/wellnessMicrocopy.ts:      'Return to this whenever you\'re ready.',
+./src/content/microcopy/wellnessMicrocopy.ts:      'When you\'re ready.'
+./src/content/microcopy/wellnessMicrocopy.ts:      'This will be here when you\'re ready.',
+./src/content/microcopy/wellnessMicrocopy.ts:      'Clear boundaries support healthy connection.',
+./src/content/microcopy/wellnessMicrocopy.ts:    'Continue when ready',
+./src/content/microcopy/wellnessMicrocopy.ts:    'I\'m ready to begin',
+./src/content/microcopy/wellnessMicrocopy.ts:    'Your space is ready',
+./src/content/microcopy/wellnessMicrocopy.ts:    "Nothing here yet. Start when you're ready.",
+./src/content/microcopy/wellnessMicrocopy.ts: *   - makes the strings searchable / unit-testable / i18n-ready.
+./src/content/paths/twelvePractices.ts:    reflectionPrompt: "What am I curious about? What edge am I ready to explore? How do I want to keep growing?",
+./src/content/paths/twelvePractices.ts:    journalingTemplate: "Something I'm curious about is ___. An edge I'm ready to explore is ___. I want to keep growing by ___.",
+./src/content/prompts/staticPrompts.ts:  "Begin when you're ready",
+./src/content/searchIndex.ts:    description: "Learn how stress shows up and explore healthy ways to respond.",
+./src/content/social/socialTemplates.ts:    hashtags: ["mentalhealth", "selfcare", "healing", "affirmation", "wellness"],
+./src/content/social/socialTemplates.ts:    hashtags: ["reflection", "mentalhealth", "innerwork", "selfawareness"],
+./src/content/social/socialTemplates.ts:    hashtags: ["mentalhealtheducation", "healingjourney", "selfcaretips", "traumainformed", "anxietyrelief", "emotionalwellness", "innerwork", "personalgrowth"],
+./src/content/social/socialTemplates.ts:    hashtags: ["affirmation", "selfcompassion", "healingquotes", "mentalhealthmatters", "youmatter"],
+./src/content/social/socialTemplates.ts:    hashtags: ["wellnessatwork", "leadership", "mentalhealthmatters", "professionaldevelopment", "burnoutprevention"],
+./src/content/social/socialTemplates.ts:    hashtags: ["mentalhealth", "therapy", "selfcare", "healingtiktok", "anxietytips"],
+./src/content/social/socialTemplates.ts:    hashtags: ["selfcare", "mentalhealth", "wellness", "personalgrowth", "mindfulness"],
+./src/content/social/socialTemplates.ts:  core: ["mentalhealth", "selfcare", "healing", "wellness", "mindfulness"],
+./src/content/wellness/additional-practices.json:              "Open your eyes when you're ready. Great job listening to your body!"
+./src/content/wellness/additional-practices.json:      "safetyDisclaimer": "Body scanning is an educational awareness practice, not medical treatment. It may be supportive for some people but is not appropriate for everyone, particularly those with certain trauma histories or dissociative conditions. Please consult a mental health professional if body-focused practices cause distress.",
+./src/content/wellness/additional-practices.json:          "Try a longer written gratitude letter (when ready)"
+./src/content/wellness/core-practices.json:              "When you're ready, open your eyes and look around.",
+./src/content/wellness/core-practices.json:      "safetyDisclaimer": "This practice is educational and supportive, not medical treatment. It may help some people feel more present, but it is not a substitute for professional mental health care. If you are experiencing a mental health crisis, please reach out to a qualified professional or crisis service.",
+./src/content/wellness/core-practices.json:              "When you're ready, open your eyes.",
+./src/content/wellness/core-practices.json:      "safetyDisclaimer": "Self-compassion practices are educational tools for emotional support, not clinical interventions. They may complement professional care but do not replace it. If you are experiencing severe depression, trauma responses, or suicidal thoughts, please seek support from a qualified mental health professional.",
+./src/content/wellness/core-practices.json:          "scenario": "Amara needed to tell her roommate something uncomfortable. Her chest felt tight and her heart was racing. She stepped into the bathroom, placed her hands on the sink, and took three slow breaths—breathing in for 4 counts and out for 6. By the third breath, her heart had slowed a bit. She still felt nervous, but she felt more ready.",
+./src/content/wellness/core-practices.json:              "When you're ready, take a big stretch.",
+./src/content/wellness/core-practices.json:      "safetyDisclaimer": "Breathing practices are educational self-care tools. They are not medical treatments and do not replace professional care for respiratory conditions, anxiety disorders, or other health concerns. If you have a respiratory condition, consult a healthcare provider before practicing breath exercises.",
+./src/content/learn.js:    slug: "creating-healthy-boundaries",
+./src/content/learn.js:    slug: "sleep-and-mental-health",
+./src/content/learn.js:    excerpt: "Evidence-based benefits of expressive writing for mental health and emotional clarity.",
+./src/content/routes.js:  // Allow already-a-path as fallback safety (optional).
+./src/content/routes.js:        standard: 'Your next step is ready when you are.',
+./src/content/routes.js:            'Open your eyes when ready.'
+./src/content/routes.js:            'When ready, slowly open your eyes.'
+./src/content/routes.js:      closerLine: 'When you\'re ready, take one small next step.'
+./src/content/routes.js:      subtitle: 'Sophisticated tools for those ready to go deeper.',
+./src/content/routes.js:        subtitle: 'Practical exercises for when you\'re ready to explore a bit more.',
+./src/content/routes.js:      primaryCta: { label: 'Begin when you\'re ready', href: '/register' },
+./src/content/routes.js:        subtitle: 'There is no rush. Each step unfolds naturally when you are ready.',
+./src/content/routes.js:          { icon: 'User', title: 'Step 1: Create Your Space', text: 'Sign up in moments. Your private sanctuary is ready—no credit card, no commitments.' },
+./src/content/routes.js:        subtitle: 'No pressure. No judgment. Just resources waiting when you\'re ready.',
+./src/content/routes.js:          { icon: 'Shield', title: 'Safety First', text: 'Nothing here will push you faster than you are ready for.' },
+./src/content/routes.js:        subtitle: 'Practical exercises you can try when you\'re ready.',
+./src/content/routes.js:          { icon: 'RefreshCw', title: 'Step 4: Return and Repeat', text: 'Healing unfolds over time. Come back whenever you feel ready.' }
+./src/content/routes.js:          'Nothing here will push you faster than your nervous system is ready for',
+./src/content/routes.js:          'Your one next step: Create your free account when you\'re ready'
+./src/content/routes.js:      { icon: 'Star', title: 'Expand when ready', description: 'Unlock unlimited AI companion and deeper healing journeys.' },
+./src/content/routes.js:          { icon: 'Heart', title: 'Upgrade if you wish', text: 'Premium unlocks more when you are ready. No rush.' }
+./src/content/routes.js:      eyebrow: 'For those ready to begin',
+./src/content/routes.js:        subtitle: 'Your space is ready for you.',
+./src/content/routes.js:          'Upgrade path available when you\'re ready for deeper work',
+./src/content/routes.js:      secondaryCta: { label: 'Already have an account?', href: '/login' }
+./src/content/routes.js:          'Your one next step: Answer the first question when you\'re ready'
+./src/content/routes.js:          'Uses relationship science to help you maintain healthy attachment patterns.',
+./src/content/routes.js:      pauseMicrocopy: 'You can pause anytime and come back when you\'re ready.'
+./src/content/routes.js:      pauseMicrocopy: 'Your draft is saved. Take a break and return when you\'re ready.'
+./src/content/routes.js:          'Open your eyes when you feel ready.'
+./src/content/routes.js:          'When ready, slowly open your eyes.'
+./src/content/routes.js:          'Close the page when ready.'
+./src/content/routes.js:        'You may notice certain topics resonate when you are ready for them.',
+./src/content/routes.js:          'When ready, gently look away.'
+./src/content/routes.js:          'Gently return when ready.'
+./src/content/routes.js:          'Extend to 4-7-8 pattern if ready.',
+./src/content/routes.js:      text: 'These practices are supportive tools, not medical treatment. If you feel dizzy or uncomfortable, stop and breathe normally. For persistent breathing difficulties, please consult a healthcare provider.'
+./src/content/routes.js:      text: 'Grounding is a supportive skill, not therapy. If you experience persistent dissociation, flashbacks, or distress, please reach out to a mental health professional.'
+./src/content/routes.js:          'Return gently when ready.'
+./src/content/routes.js:      subtitle: 'Meditation does not require emptying your mind. It is simply noticing what is already here. Research shows even brief daily practice can reduce stress and improve focus over time.',
+./src/content/routes.js:      text: 'Self-care supports wellbeing but does not replace professional care. If you are struggling with your mental health, please reach out to a qualified provider.'
+./src/content/routes.js:          'Meeting basic needs (sleep, food, water, movement) is foundational to mental health.',
+./src/content/routes.js:      text: 'Emotional awareness is a skill that develops over time. If exploring emotions brings up significant distress, please work with a mental health professional.'
+./src/content/routes.js:      stopPause: 'If sleep struggles persist, consider speaking with a healthcare provider.',
+./src/content/routes.js:      { icon: 'Zap', title: 'Fight or Flight', description: 'Mobilization for action—heart racing, muscles tense, ready to move.' },
+./src/content/routes.js:          'When ready, thank them and slowly open your eyes.'
+./src/content/routes.js:      stopPause: 'If a journey feels too intense, pause and return when ready.',
+./src/content/routes.js:          'Attach it to something you already do.',
+./src/content/routes.js:          'Attach it to something you already do (after breakfast).',
+./src/content/routes.js:      subtitle: 'Advanced resources for those ready to go deeper.',
+./src/content/routes.js:      subtitle: 'For those ready to explore deeper dimensions.',
+./src/content/routes.js:    description: 'Resources for mental health professionals.',
+./src/content/routes.js:      subtitle: 'Tools and information for mental health professionals.',
+./src/content/routes.js:      secondaryCta: { label: 'System Status', href: '/health' }
+./src/content/routes.js:    route: '/health',
+./src/content/routes.js:    description: 'Platform health and status.',
+./src/content/routes.js:      subtitle: 'Current platform status and health metrics.',
+./src/content/routes.js:      stopPause: 'If sleep difficulties persist, consider speaking with a healthcare provider.',
+./src/content/routes.js:      subtitle: 'Develop a healthy relationship with food and nourishment.',
+./src/content/routes.js:        subtitle: 'The gut microbiome influences mood and mental health (Mayer, 2016).',
+./src/content/routes.js:          'Anti-inflammatory foods may support trauma recovery and nervous system health.',
+./src/content/routes.js:        subtitle: 'Regular nature exposure supports mental and physical health.',
+./src/data/journalPrompts.ts:    "What decision am I pretending I haven't already made?",
+./src/data/nlpMiContent.js: *  - Affirmations     : strength-based reflections of effort already shown
+./src/data/nlpMiContent.js: * Crisis routing is preserved at page level (CanvaLanding already mounts
+./src/data/nlpMiContent.js:    "You're here. That already means something beautiful.",
+./src/data/nlpMiContent.js:  affirmation: 'Choosing to breathe is already a small act of self-kindness.',
+./src/data/nlpMiContent.js:    "No pressure at all. You'll know when you're ready.",
+./src/hooks/useLumiBehavior.js: * counts that are already past the threshold (only on the exact crossing).
+./src/hooks/useLumiBehavior.js: *     (welcome / idle / calm / rest) — only if the user hasn't already been
+./src/hooks/useSEO.ts:    url: BASE_URL || "https://mymentalhealthbuddy.com",
+./src/lib/atlas/philosophicalAtlas.ts:      "How is nature already solving this problem?",
+./src/lib/benefits.ts:  consistency: { title: "Build healthy habits", body: "Tiny routines that actually stick - without pressure or shame." },
+./src/lib/bias/biasBlindSpots.ts:    debiasing: "Ask: Would I start this today if I hadn't already invested?"
+./src/lib/epistemic/epistemicCalibration.ts:  domain: "personal" | "professional" | "world" | "relationships" | "health" | "learning";
+./src/lib/insights/insightEngine.ts:      "“Tomorrow, I will practice ______ for 2 minutes, even if I don’t feel ready.”",
+./src/lib/miPatterns.ts:    template: "On a scale of 0–10, how ready are you to take one small step?",
+./src/lib/miPatterns.ts:  0: { level: "low", prompt: "What would need to change for you to feel ready?", followUp: "That's okay. Sometimes rest is the next step." },
+./src/lib/miPatterns.ts:  7: { level: "high", prompt: "You're ready. What's your next move?", followUp: "Trust your readiness." },
+./src/lib/miPatterns.ts:  10: { level: "high", prompt: "You're fully ready. Go for it!", followUp: "Take action with confidence." }
+./src/lib/microcopy.ts:    "On a scale of 1–10, how ready do you feel to take one small step?",
+./src/lib/reflectionModes.ts:    description: "Notice what's already here — without forcing positivity.",
+./src/lib/safety.ts:  "This platform provides educational wellness tools only. It is not a substitute for professional therapy, medical advice, diagnosis, or treatment. If you are experiencing a mental health crisis, please contact a licensed professional or local emergency services immediately.";
+./src/lib/twelveSteps.ts:    example: "You want to skip the gym but remember that health is a core value, so you go anyway.",
+./src/lib/wellness/ensureWellnessCompliance.ts:  "mental health",
+./src/lib/wellnessMethodKits.ts:    "On a scale of 0–10, how ready do you feel to take one small step?",
+./src/lib/buddyTelemetry.ts: *   buddy_accessibility_ready. Start.tsx is in the project's strict-
+./src/lib/buddyTelemetry.ts:  buddy_accessibility_ready: Record<string, never>;
+./src/lib/lumiAudio.js: * Returns true if a sound actually fired, false on no-op (already popped,
+./src/lib/security.ts:  watermarkText: string = 'mymentalhealthbuddy.com',
+./src/main.jsx:        navigator.serviceWorker.ready.then(registration => {
+./src/policy/platformPolicy.ts:  "mental health treatment"
+./src/safety/toneRules.ts:    "when you're ready",
+./src/safety/toneRules.ts:    "that's not healthy",
+./src/styles/peacescape-shell.css:   The hero ZenScape already provides ambient depth, so this file focuses
+./src/styles/glp-pane.css:/* Modifier: bare — for surfaces that already have their own border + clipping
+./src/styles/lumi-admin.css: * / lumi-mascot.css. Only ships classes that were NOT already present in the
+./src/styles/lumi-admin.css: * already styled (lumi-card, lumi-section, lumi-btn-primary/secondary/etc.,
+./src/styles/lumi-admin.css:/* Un-scoped .trust-badge — canva-landing.css already publishes a scoped
+./src/styles/celebration.css:   confetti (already z-index auto, no z) and content (relative z-10). */
+./src/styles/celebration.css:   confetti is already gated by the JSX `!reducedMotion && phase < 3`
+./src/styles/breathing-tool.css:   <style> block in BreathingTool.jsx already pins the breath-circle
+./src/index.css.backup.1777434482:   Cascades to every <Loader2 /> already in the codebase via Lucide's
+./src/index.css.backup.1777434482:   Opt-out class `.scrollbar-hide` (already defined ~line 4635) is preserved
+./src/sections/EmailCapture.jsx:    // distinguishes brand-new signups vs. devices that were already in.
+./src/sections/EmailCapture.jsx:                {returning ? "Welcome back — you're already in." : "You're in! Welcome to the community."}
+./src/sections/NlpMiContent.jsx: *   - Lucide icons only (already a dep)
+./src/sections/ValueBridge.jsx: * Three feature cards highlighting what Pro unlocks beyond the (already
+./src/sections/ValueProposition.jsx:  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+./src/sections/ValueProposition.jsx:  // On mount, restore success state if this device already subscribed —
+./src/sections/ValueProposition.jsx:      setAlreadySubscribed(true);
+./src/sections/ValueProposition.jsx:    setAlreadySubscribed(true);
+./src/sections/ValueProposition.jsx:            {alreadySubscribed && !email
+./src/sections/ValueProposition.jsx:              ? "You're already on the list. Welcome back."
+./src/sections/VisualBenefits.jsx: *   - Lucide icons only (already a dep)
+./src/sections/.VisualBenefits.jsx.5AAstwa6tZ5hxdNfT3G2k~: *   - Lucide icons only (already a dep)
+./src/avatar-life/components/MMHBFloatAvatar.tsx:  // Crisis flip → clear pulse timers (store already cleared interaction flags).
+./src/checkin-flow/copy/microCopy.ts:  { id: "anxious", label: "Anxious",            reflection: "Anxious moments are real. You came here, which already takes courage." },
+./src/checkin-flow/copy/microCopy.ts:  { id: "lifted",  label: "Already feeling lifted", reflection: "Beautiful. A short reset can protect that feeling for the rest of your day." },
+./src/checkin-flow/governance/checkInFlowRules.ts:/** Returns failing rules. Empty array = healthy. */
+./src/checkin-flow/__tests/PHASE14_VERIFICATION.md:- ZERO new dependencies installed (zustand already present from Phase 11)
+./src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    // Both should evaluate to true on a healthy store…
+./src/companion-voice/copy/responseBank.ts: *  - Always permission-first ("if you want", "when you're ready", "you choose").
+./src/companion-voice/copy/responseBank.ts:  "when you're ready",
+./src/companion-voice/copy/responseBank.ts:      "When you're ready, a slow breath together might help.",
+./src/companion-voice/copy/responseBank.ts:      "When you're ready, we can name what felt unfair, without judgement.",
+./src/companion-voice/engine/companionEngine.ts:        "Whenever you're ready — a word, a phrase, anything. There's no right way to start.",
+./src/companion-voice/engine/crisisDetector.ts:  "ready to die",
+./src/companion-voice/__tests/companionGovernance.test.ts:  it("auditResponse returns no failures on a healthy non-crisis sample", () => {
+./src/calm-checkin/state/calmCheckinState.ts: * Built on Zustand (already in deps from v5.8.48).
+./src/lumi-conversation/state/conversationState.ts: * Built on Zustand (already in deps from v5.8.48).
+./src/lumi-conversation/state/conversationState.ts:  /** Whether Lumi has already surfaced a pause suggestion in this conversation. */
+./src/lumi-conversation/content/calmResponses.ts:    "Anxiety can feel loud. If a slower breath helps, you can take one whenever you're ready.",
+./src/lumi-conversation/safety/emotionalBoundaryRules.ts:    description: `Pause suggestion — at depth ≥ ${PAUSE_SUGGESTION_DEPTH}, a pause must be offered (or already have been).`,
+./src/lumi-conversation/runtime/conversationRouter.ts:  // only appending if base is short enough; else the base reflects already.
+./src/lumi-conversation/runtime/conversationRouter.ts:  // already been forbidden-scanned + boundary-audited (blocking-only).
+./src/lumi-conversation/motion/calmCheckinMotion.ts: * gentle ease-in-out fades and the slow ambient aura already established
+./src/lumi-conversation/components/LumiConversationPanel.tsx: * opacity transitions only and the design-system motion tokens already
+./src/lumi-circadian/runtime/circadianStateMachine.ts:  /** Gentle copy (already audited at preset-import time). */
+./src/lumi-circadian/runtime/circadianStateMachine.ts:    return { allowed: false, reason: "nudge-already-pending" };
+./src/lumi-circadian/tests/circadianSafety.test.ts:  it("refuses when a nudge is already pending", () => {
+./src/lumi-circadian/tests/circadianSafety.test.ts:    expect(r).toEqual({ allowed: false, reason: "nudge-already-pending" });
+./src/lumi-voice/runtime/useVoicePresence.ts:        // not opted in, SSR). Caption already showed; dismiss after linger.
+./src/lumi-registry/registry/lumiPageReplacementMap.ts: * a ready-to-run ripgrep invocation.
+./src/lumi-registry/registry/lumiPagePlacementMap.ts:    specialRules: Object.freeze(["NO heading text beside Lumi", "NO CTA crowding within 2rem", "Default: opt-in only — CanvaLanding renders OfficialLumi when ready", "Crisis routing (/crisis + 988 + 741741) must remain in footer regardless"]),
+./src/lumi-registry/registry/lumiPagePlacementMap.ts:    tone: "Grounded, calm, ritual-ready",
+./src/lumi-cbt/worksheets/cognitiveDefusion.ts:      "Stop when ready.",
+./src/lumi-cbt/engine/CBTSessionEngine.ts:      throw new Error(`session ${sessionId} is already ${current.status}`);
+./src/lumi-cbt/governance/cbtSafetyRules.ts:  "This is a self-help tool, not a replacement for professional mental health care.";
+./src/lumi-tracker/visualization/moodChart.ts: * Pure function. Returns plotting-ready data only — no DOM, no chart
+./src/lumi-library/content/libraryDownloads.ts:  "This material is for educational and self-help purposes only. It is not a replacement for professional mental health care. If you are in crisis, please reach 988 (US) or your local emergency services.";
+./src/lumi-agent/prompts/lumiSystemPrompt.ts:  "You are NOT a therapist, doctor, or mental health professional.",
+./src/lumi-backend/config/apiConfig.ts:  endpoint: "/health",
+./src/lumi-backend/routes/apiRoutes.ts:  path: "/health",
+./src/lumi-backend/health/healthCheck.ts: * @module lumi-backend/health
+./src/lumi-backend/health/healthCheck.ts: * Returns 200 OK only when all dependencies are healthy.
+./src/lumi-backend/health/healthCheck.ts:export type HealthStatus = "healthy" | "degraded" | "unhealthy";
+./src/lumi-backend/health/healthCheck.ts:export const healthChecks: Record<string, HealthCheckFn> = {
+./src/lumi-backend/health/healthCheck.ts:        status: "healthy",
+./src/lumi-backend/health/healthCheck.ts:        status: "unhealthy",
+./src/lumi-backend/health/healthCheck.ts:        status: "healthy",
+./src/lumi-backend/health/healthCheck.ts:        status: "unhealthy",
+./src/lumi-backend/health/healthCheck.ts:        status: "healthy",
+./src/lumi-backend/health/healthCheck.ts:    const status: HealthStatus = rssMB > 2048 ? "degraded" : "healthy";
+./src/lumi-backend/health/healthCheck.ts:      const fn = healthChecks[name];
+./src/lumi-backend/health/healthCheck.ts:          status: "unhealthy",
+./src/lumi-backend/health/healthCheck.ts:          status: "unhealthy",
+./src/lumi-backend/health/healthCheck.ts:  const allHealthy = components.every((c) => c.status === "healthy");
+./src/lumi-backend/health/healthCheck.ts:  const anyUnhealthy = components.some((c) => c.status === "unhealthy");
+./src/lumi-backend/health/healthCheck.ts:  const status: HealthStatus = anyUnhealthy
+./src/lumi-backend/health/healthCheck.ts:    ? "unhealthy"
+./src/lumi-backend/health/healthCheck.ts:      ? "healthy"
+./src/lumi-backend/health/healthCheck.ts:/** --- Check if system is ready --- */
+./src/lumi-backend/health/healthCheck.ts:  return report.status !== "unhealthy";
+./src/lumi-backend/index.ts:  healthChecks,
+./src/lumi-backend/index.ts:} from "./health/healthCheck";
+./src/lumi-notifications/push/notificationService.ts:    body: "A short breathing exercise is ready when you are.",
+./src/lumi-rbac/roles/roleDefinitions.ts:  | "system:config" | "system:health"
+./src/lumi-rbac/roles/roleDefinitions.ts:    "system:config", "system:health",
+./src/lumi-audit/logger/auditLogger.ts:  | "system.health" | "system.config" | "system.error"
+./src/lumi-disclaimer/disclaimer.ts:export const FULL_DISCLAIMER = `${REQUIRED_DISCLAIMER}\n\nIf you're in crisis, call or text 988 (Suicide & Crisis Lifeline) — 24/7.\nFor medical advice, consult a licensed healthcare professional.` as const;
+./src/index.css:   Cascades to every <Loader2 /> already in the codebase via Lucide's
+./src/index.css:   Opt-out class `.scrollbar-hide` (already defined ~line 4635) is preserved
+./src/App.jsx:              <Route path="/mental-health"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+./src/App.jsx:              <Route path="/emotional-health"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+./src/App.jsx:              <Route path="/mentalhealth">{() => <Redirect to="/mental-health" />}</Route>
+./src/App.jsx:              <Route path="/mental-health-support">{() => <ConfigRoute route="/healing" />}</Route>
+./src/App.jsx:              <Route path="/admin/health">
+./src/App.jsx:              <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
+./analytics/metrics.csv:"date","health","compliance_ok","note"
+./analytics/metrics.json:      "health": 100
+./analytics/predictions/tomorrow.json:Based on the provided data, we only have a single data point showing a health score of 100 on October 30, 2025. With no additional historical data for previous days or any trends, it's difficult to predict tomorrow's trend accurately.
+./analytics/predictions/tomorrow.json:However, if we assume that a health score of 100 indicates an optimal state, we could hypothesize that the trends for mood, compliance, and AI sentiment might remain high. Here’s a possible prediction based on the single data point:
+./analytics/predictions/tomorrow.json:- **Mood**: Likely to remain positive, sustaining a healthy and satisfied state.
+./analytics/predictions/tomorrow.json:- **AI Sentiment**: Expected to be positive as well, reflecting the high health score.
+./analytics/index.html:<canvas id="healthChart" height="120"></canvas>
+./analytics/index.html: const vals=(m.series||[]).map(x=>x.health);
+./analytics/index.html: new Chart(document.getElementById("healthChart"),{type:"line",
+./public/manifest.json:  "categories": ["health", "lifestyle", "wellness", "mental health"],
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/about</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/about/approach</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/values</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/pricing</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/features</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/testimonials</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/blog</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/crisis</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/challenge</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/healing</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/landing</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/healing-library</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/research</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/glossary</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/glossary-full</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/how-to-guides</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/daily-routines</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/cognitive-tools</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/news</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/faq</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/all</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/breathing</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/grounding</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/meditation</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/self-care</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/gad7</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/phq9</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/distortion-checker</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/breath-pacer</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/boundary-builder</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/manipulation-detector</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/sleep-quality-calculator</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/tools/nervous-system-check</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/breathing</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/grounding</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/calming-scenes</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/sleep-guide</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/stress-response</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/emotional-intelligence</loc>
+./public/sitemap.xml:    <loc>https://mymentalhealthbuddy.com/guided-journaling</loc>
+./public/robots.txt:Sitemap: https://mymentalhealthbuddy.com/sitemap.xml
+./replit_integrations/audio/useAudioPlayback.ts:  /** Add chunk with sequence number, returns chunks ready to play in order */
+./replit_integrations/audio/useAudioPlayback.ts:    // Drain consecutive ready sequences
+./replit_integrations/audio/useAudioPlayback.ts:    const ready: string[] = [];
+./replit_integrations/audio/useAudioPlayback.ts:      ready.push(...this.pending.get(this.nextSeq)!);
+./replit_integrations/audio/useAudioPlayback.ts:    return ready;
+./replit_integrations/audio/useAudioPlayback.ts:  const readyRef = useRef(false);
+./replit_integrations/audio/useAudioPlayback.ts:    if (readyRef.current) return;
+./replit_integrations/audio/useAudioPlayback.ts:    readyRef.current = true;
+./replit_integrations/audio/useAudioPlayback.ts:    const readyChunks = seqBufferRef.current.push(seq, base64Audio);
+./replit_integrations/audio/useAudioPlayback.ts:    for (const chunk of readyChunks) {
+./replit_integrations/audio/useAudioPlayback.ts:    if (readyChunks.length > 0) {
+./index.html:    <meta property="og:image" content="https://mymentalhealthbuddy.com/brand/og-image.png" />
+./index.html:    <meta property="og:url" content="https://mymentalhealthbuddy.com" />
+./index.html:    <meta name="twitter:image" content="https://mymentalhealthbuddy.com/brand/og-image.png" />
+./index.html:    <link rel="canonical" href="https://mymentalhealthbuddy.com/" />
+./index.html:      "url": "https://mymentalhealthbuddy.com",
+./index.html:      "screenshot": "https://mymentalhealthbuddy.com/brand/og-image.png",
+./docs/diagnostics/platform-tree.txt:./src/lumi-backend/health
+./docs/diagnostics/listen-port-scan.txt:./scripts/hx-verify.sh:for path in /health /ready /api/health; do echo "Testing $path" && curl -s -o /tmp/health.out -w "HTTP:%{http_code} TIME:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}$path" || true && cat /tmp/health.out || true && echo ""; done
+./scripts/hx-diagnose.sh:grep -R "health\|ready\|/api/health\|/health\|/ready" . --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=build --exclude-dir=backups --exclude-dir=quarantine --exclude-dir=rescue --exclude-dir=.git > docs/diagnostics/health-route-scan.txt || true
+./scripts/hx-diagnose.sh:echo "" && echo "Health scan (last 40 lines):" && tail -40 docs/diagnostics/health-route-scan.txt || true
+./scripts/hx-verify.sh:for path in /health /ready /api/health; do echo "Testing $path" && curl -s -o /tmp/health.out -w "HTTP:%{http_code} TIME:%{time_total}\n" "http://127.0.0.1:${PORT:-5000}$path" || true && cat /tmp/health.out || true && echo ""; done
