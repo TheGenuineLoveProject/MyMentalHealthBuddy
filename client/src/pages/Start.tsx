@@ -896,7 +896,7 @@ export default function Start() {
           })}
         </section>
 
-        {/* BROWSE FREE TOOLS — full-width amber CTA, additive to paywall */}
+        {/* BROWSE FREE TOOLS — full-width sage CTA (v5.8.102 V49 Fix H1), additive to paywall */}
         <section
           className="mb-8"
           aria-label="Browse all free wellness tools"
@@ -906,7 +906,14 @@ export default function Start() {
             href="/tools"
             onClick={() => track("browse_free_tools_clicked", { surface: "start" })}
             className="lumi-btn lumi-btn-primary lumi-btn--lg"
-            style={{ width: "100%", whiteSpace: "normal", textAlign: "center" }}
+            style={{
+              width: "100%",
+              whiteSpace: "normal",
+              textAlign: "center",
+              background: "linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))",
+              color: "var(--glp-paper)",
+              border: "none",
+            }}
             data-testid="link-browse-free-tools"
           >
             <Sparkles className="w-5 h-5" aria-hidden="true" />
