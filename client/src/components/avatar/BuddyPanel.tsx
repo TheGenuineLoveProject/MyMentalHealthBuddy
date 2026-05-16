@@ -21,11 +21,20 @@
  * system-defined enums chosen by the parent.
  */
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import BuddyAvatar from "./BuddyAvatar";
 import type { BuddyState } from "@/lib/avatarState";
 import { emitBuddyEvent } from "@/lib/buddyTelemetry";
 import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+
+// HX-OS Interaction Governance — emotional-state buckets that gate business actions.
+// Per MMHB v7.4 Primary Law: monetization is prohibited inside regulated healing flows,
+// and any crisis/vulnerable/escalation signal must hard-suspend it.
+const CRISIS_STATES: readonly BuddyState[] = ["crisis"];
+const VULNERABLE_STATES: readonly BuddyState[] = ["sad", "anxious", "overwhelmed", "crisis"];
+const DYSREGULATED_STATES: readonly BuddyState[] = ["overwhelmed", "crisis"];
 
 /**
  * v1.15 active-listener reflection rotator.
@@ -115,11 +124,57 @@ export default function BuddyPanel({
     return () => window.clearInterval(id);
   }, [reflection, surface]);
 
+  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.120, BuddyPanel iter 2).
+  // Deterministic, memoized gates derived from the bucketed `state` + `surface` props.
+  // No fetch, no AI, no new behavior — pure logic + observable data-* attrs.
+  const crisisDetected = useMemo(
+    () => CRISIS_STATES.includes(state),
+    [state],
+  );
+  const isVulnerable = useMemo(
+    () => VULNERABLE_STATES.includes(state),
+    [state],
+  );
+  const dysregulated = useMemo(
+    () => DYSREGULATED_STATES.includes(state),
+    [state],
+  );
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: dysregulated,
+      }),
+    [crisisDetected, dysregulated],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: `/${surface}`,
+        action: "any-business-action",
+        emotionalState: {
+          crisisDetected,
+          isVulnerable,
+          dysregulated,
+        },
+      }),
+    [surface, crisisDetected, isVulnerable, dysregulated],
+  );
+
   return (
     <section
       className={`flex flex-col items-center text-center ${className}`}
       data-testid={testId}
       data-surface={surface}
+      data-crisis-active={crisisDetected ? "true" : "false"}
+      data-vulnerable={isVulnerable ? "true" : "false"}
+      data-dysregulated={dysregulated ? "true" : "false"}
+      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
     >
       <BuddyAvatar
         state={state}
