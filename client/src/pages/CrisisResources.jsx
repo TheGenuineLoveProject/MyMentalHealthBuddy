@@ -247,7 +247,7 @@ export default function CrisisResources() {
                     data-testid={`card-tip-${idx}`}
                   >
                     <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform"
+                      className="w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform"
                       style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
                     >
                       <Icon className="w-6 h-6" aria-hidden="true" />
