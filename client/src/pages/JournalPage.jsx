@@ -1,5 +1,19 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
+
+// HX-OS Interaction Governance — passive crisis-language detection.
+// Pure read-only regex; no fetch, no AI, no behavior modification.
+const CRISIS_LANGUAGE_PATTERN =
+  /\b(suicide|suicidal|kill myself|killing myself|end it all|end my life|self[\s-]?harm|hurt myself|hurting myself|i want to die|no reason to live|don'?t want to be here|988|crisis hotline)\b/i;
+
+// Per HealingFlowProtectionRules.protectedHealingFlows — "journaling" is one of
+// the 8 protected healing flows. Pinned constant so any future split-route
+// retains the contract without depending on prop-drilling.
+const JOURNAL_IS_HEALING_FLOW =
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("journaling");
 import { Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw, Share2 } from "lucide-react";
 import ReflectionCardExport from "../components/ReflectionCardExport";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
@@ -164,6 +178,45 @@ export default function JournalPage() {
     deleteMutation.mutate(id);
   }
 
+  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.122, Journal iter 4).
+  // Passive observation only. No fetch, no AI, no UI mutation, no behavior change.
+  // Scans the active draft (title+content) plus the last 5 saved entries for
+  // crisis language and derives suspension state via CrisisOverrideEngine +
+  // MonetizationBoundaryValidator. /journal is a regulated HEALING_DOMAIN route
+  // per AtlasRoutingGovernance, so monetizationGate.allowed is always false here
+  // (defense-in-depth even without a crisis signal).
+  const crisisDetected = useMemo(() => {
+    const recent = Array.isArray(entries) ? entries.slice(0, 5) : [];
+    const haystack = [
+      title,
+      content,
+      ...recent.map((e) => `${e?.title ?? ""} ${e?.content ?? ""}`),
+    ].join(" ");
+    return CRISIS_LANGUAGE_PATTERN.test(haystack);
+  }, [title, content, entries]);
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: JOURNAL_IS_HEALING_FLOW,
+      }),
+    [crisisDetected],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: "/journal",
+        action: "any-business-action",
+        emotionalState: {
+          crisisDetected,
+          isVulnerable: crisisDetected,
+        },
+      }),
+    [crisisDetected],
+  );
+
   if (isLoading) {
     return (
       <div className="mx-auto max-w-5xl px-4 py-8">
@@ -181,7 +234,19 @@ export default function JournalPage() {
   }
 
   return (
-    <div className="hxos-vnext">
+    <div
+      className="hxos-vnext"
+      data-testid="journal-page-root"
+      data-journal-governed="true"
+      data-healing-flow={JOURNAL_IS_HEALING_FLOW ? "true" : "false"}
+      data-crisis-active={crisisDetected ? "true" : "false"}
+      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
+      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+    >
     <WellnessPageShell
       title="Reflective Journal"
       subtitle="Write freely, at your own pace. There's no right way to do this."
