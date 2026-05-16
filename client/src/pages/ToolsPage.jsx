@@ -252,7 +252,7 @@ export default function ToolsPage() {
                           <span className="text-xs text-[var(--glp-sage)] bg-[var(--glp-sage-10)] px-2 py-0.5 rounded-full">
                             {tool.effort}
                           </span>
-                          <span className="text-xs text-[var(--glp-ink)]/50 capitalize">
+                          <span className="text-xs text-[var(--glp-ink)]/60 bg-[var(--glp-ink)]/5 px-2 py-0.5 rounded-full capitalize">
                             {tool.level}
                           </span>
                         </div>
