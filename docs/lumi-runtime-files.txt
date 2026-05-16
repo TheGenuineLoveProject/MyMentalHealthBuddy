@@ -1,0 +1,13 @@
+client/src/lumi-registry/components/LumiSceneRenderer.tsx
+client/src/lumi-registry/components/OfficialLumi.tsx
+client/src/lumi-registry/index.ts
+client/src/lumi-registry/internal/devGate.ts
+client/src/lumi-registry/registry/lumiEmotionalRoles.ts
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts
+client/src/lumi-registry/registry/lumiPlacementRules.ts
+client/src/lumi-registry/registry/lumiSceneAssignments.ts
+client/src/lumi-registry/registry/lumiUsageRules.ts
+client/src/lumi-registry/registry/officialLumiRegistry.ts
+client/src/lumi-registry/styles/lumiMotion.css
+client/src/lumi-registry/types/lumiTypes.ts
