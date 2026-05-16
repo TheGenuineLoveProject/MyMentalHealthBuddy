@@ -1,7 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import {
+  isRegulatedAtlasRoute,
+  ATLAS_ROUTE_GOVERNANCE,
+} from "@/governance/interactions/AtlasRoutingGovernance";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+
+// HX-OS Interaction Governance — Atlas-aware healing-flow surface allowlist.
+// Routes here are treated as regulated cognitive/healing flows where Atlas
+// MUST suppress monetization, conversion prompts, and paywalls — independent of
+// whether they appear in ATLAS_ROUTE_GOVERNANCE (defense in depth).
+const ATLAS_HEALING_FLOW_PREFIXES: readonly string[] = [
+  "/journal",
+  "/mood",
+  "/ritual",
+  "/wisdom-practices",
+  "/meditation",
+  "/breathing",
+  "/healing",
+  "/reflection",
+  "/crisis",
+  "/checkin",
+];
 import { Compass, Brain, Lightbulb, Target, Sparkles, ArrowRight, BookOpen, Mic, Timer, HelpCircle, TrendingUp, Download, Layers, Clock, Sunrise, Scale, Zap, Network, GitBranch, Focus, Map, Eye, BarChart3, Users, Heart, Compass as CompassIcon, Puzzle, Flame, Trophy, Wrench, Library, ChevronRight, Star, Check } from 'lucide-react';
 
 interface ToolProgress {
@@ -192,6 +215,74 @@ export default function AtlasDashboard() {
 
   const currentPath = LEARNING_PATHS.find(p => p.id === profile.currentPath);
 
+  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.121, Atlas iter 3).
+  // Deterministic, memoized cognitive-routing governance. Atlas reads its own
+  // route + every category-link destination through AtlasRoutingGovernance,
+  // MonetizationBoundaryValidator, and CrisisOverrideEngine. Pure logic +
+  // observable data-* attrs — no recommendation changes, no reranking, no
+  // behavioral adaptation, no UI mutation.
+  const currentRoute = "/atlas";
+
+  const routeRegulated = useMemo(
+    () => isRegulatedAtlasRoute(currentRoute),
+    [],
+  );
+
+  const healingFlow = useMemo(
+    () =>
+      ATLAS_HEALING_FLOW_PREFIXES.some((p) =>
+        currentRoute === p || currentRoute.startsWith(`${p}/`),
+      ),
+    [],
+  );
+
+  // Atlas itself receives no live crisis input signal (no chat input on this
+  // surface). Crisis suspension is still wired so any upstream signal (e.g.
+  // future global emotional-state context) flows through unchanged.
+  const crisisDetected = false;
+  const isVulnerable = false;
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: healingFlow,
+      }),
+    [healingFlow],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: currentRoute,
+        action: "any-business-action",
+        emotionalState: { crisisDetected, isVulnerable },
+      }),
+    [],
+  );
+
+  // Per-category route governance map — passive enforcement metadata so any
+  // future business action attached to a category link knows up-front whether
+  // its destination is regulated. No effect on rendering or link behavior.
+  const categoryGovernance = useMemo(
+    () =>
+      TOOL_CATEGORIES.map((c) => ({
+        id: c.id,
+        route: c.route,
+        regulated: isRegulatedAtlasRoute(c.route),
+        domain:
+          ATLAS_ROUTE_GOVERNANCE.find((r) => r.route === c.route)?.domain ??
+          "UNREGISTERED",
+        monetizationAllowed: MonetizationBoundaryValidator.validate({
+          route: c.route,
+          action: "category-link",
+          emotionalState: { crisisDetected, isVulnerable },
+        }).allowed,
+      })),
+    [],
+  );
+  const categoriesRegulatedCount = categoryGovernance.filter((c) => c.regulated).length;
+
   return (
   <WellnessPageShell
     title="AtlasDashboard"
@@ -212,7 +303,22 @@ export default function AtlasDashboard() {
     ]}
   >
 
-    <div className="min-h-screen v28-paper-bg">
+    <div
+      className="min-h-screen v28-paper-bg"
+      data-testid="atlas-dashboard-root"
+      data-atlas-route={currentRoute}
+      data-atlas-route-regulated={routeRegulated ? "true" : "false"}
+      data-atlas-healing-flow={healingFlow ? "true" : "false"}
+      data-crisis-active={crisisDetected ? "true" : "false"}
+      data-vulnerable={isVulnerable ? "true" : "false"}
+      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
+      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+      data-atlas-categories-regulated={`${categoriesRegulatedCount}/${categoryGovernance.length}`}
+    >
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto">
         <header className="text-center mb-12">
