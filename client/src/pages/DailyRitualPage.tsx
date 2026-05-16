@@ -3,6 +3,21 @@ import { reflectionModes, getRandomQuestion } from "@/lib/reflectionModes";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
+
+// HX-OS Interaction Governance — passive crisis-language detection.
+// Pure read-only regex; no fetch, no AI, no behavior modification.
+const CRISIS_LANGUAGE_PATTERN =
+  /\b(suicide|suicidal|kill myself|killing myself|end it all|end my life|self[\s-]?harm|hurt myself|hurting myself|i want to die|no reason to live|don'?t want to be here|988|crisis hotline)\b/i;
+
+// Per HealingFlowProtectionRules.protectedHealingFlows — "ritual" + "meditation"
+// are both in the 8-flow protected list. /ritual is also CROSS_DOMAIN regulated
+// per AtlasRoutingGovernance. Pinned constant.
+const RITUAL_IS_HEALING_FLOW =
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("ritual") ||
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("meditation");
 
 const RITUAL_CLARITY = {
   what: "A daily check-in practice to assess your inner state across six dimensions: energy, clarity, openness, regulation, presence, and pace.",
@@ -202,6 +217,38 @@ export default function DailyRitualPage() {
   const mode = reflectionModes.find((m) => m.id === selectedMode);
   const ModeIcon = mode ? iconMap[mode.icon] || Sparkles : Sparkles;
 
+  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.123, Ritual iter 5).
+  // Passive observation only. No fetch, no AI, no UI mutation, no behavior change,
+  // no animation/timing/breathing/sequencing modification. /ritual is a regulated
+  // HEALING_DOMAIN route per AtlasRoutingGovernance, so monetizationGate.allowed
+  // is always false here (defense-in-depth, even without a crisis signal).
+  const crisisDetected = useMemo(
+    () => CRISIS_LANGUAGE_PATTERN.test(reflectionText ?? ""),
+    [reflectionText],
+  );
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: RITUAL_IS_HEALING_FLOW,
+      }),
+    [crisisDetected],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: "/ritual",
+        action: "any-business-action",
+        emotionalState: {
+          crisisDetected,
+          isVulnerable: crisisDetected,
+        },
+      }),
+    [crisisDetected],
+  );
+
   return (
   <WellnessPageShell
     title="DailyRitualPage"
@@ -224,7 +271,19 @@ export default function DailyRitualPage() {
       <SEO title="Daily Ritual — The Genuine Love Project" description="Build meaningful daily routines for self-care." />
 
 
-    <div className="min-h-screen v28-paper-bg">
+    <div
+      className="min-h-screen v28-paper-bg"
+      data-testid="ritual-page-root"
+      data-ritual-governed="true"
+      data-healing-flow={RITUAL_IS_HEALING_FLOW ? "true" : "false"}
+      data-crisis-active={crisisDetected ? "true" : "false"}
+      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
+      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+    >
       <div className="content-wrapper py-8">
         <div className="mx-auto max-w-2xl">
         <header className="mb-8 text-center">
