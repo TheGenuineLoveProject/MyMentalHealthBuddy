@@ -113,10 +113,3 @@ For the full architecture narrative (UI/UX, technical implementations, feature s
 - Rule followed:
   one blocker → one patch → verify → stop
 
-
-## Interaction Runtime Governance — Iteration 1
-- Scope: AIChatPanel runtime enforcement only.
-- Added: MonetizationBoundaryValidator + CrisisOverrideEngine usage.
-- Rule: business actions blocked inside healing/crisis-sensitive flows.
-- Gates: BUILD=[fill], TSC=[fill], HEALTH=[fill].
-- Next: BuddyPanel enforcement, one file only.

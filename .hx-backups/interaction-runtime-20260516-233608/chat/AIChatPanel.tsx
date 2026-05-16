@@ -1,12 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import { detectChatSentiment, aiStateToPose } from "@/lib/buddyEmotion";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
-
-const CRISIS_LANGUAGE_PATTERN =
-  /\b(suicide|suicidal|kill myself|killing myself|end it all|end my life|self[\s-]?harm|hurt myself|hurting myself|i want to die|no reason to live|don'?t want to be here|988|crisis hotline)\b/i;
 
 type Message = {
   role: "user" | "assistant";
@@ -73,48 +68,8 @@ export default function AIChatPanel() {
     }
   }
 
-  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.119)
-  // Per MMHB v7.4 Primary Law: monetization/business actions are prohibited
-  // inside regulated healing flows; crisis state must hard-suspend them.
-  const crisisDetected = useMemo(() => {
-    const haystack = [
-      input,
-      ...messages
-        .filter((m) => m.role === "user")
-        .slice(-5)
-        .map((m) => m.content),
-    ].join(" ");
-    return CRISIS_LANGUAGE_PATTERN.test(haystack);
-  }, [input, messages]);
-
-  const overrideState = useMemo(
-    () => CrisisOverrideEngine.getOverrideState({ crisisDetected }),
-    [crisisDetected],
-  );
-
-  const monetizationGate = useMemo(
-    () =>
-      MonetizationBoundaryValidator.validate({
-        route: "/chat",
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable: crisisDetected,
-        },
-      }),
-    [crisisDetected],
-  );
-
   return (
-    <div
-      className="mx-auto max-w-3xl p-6"
-      data-testid="ai-chat-panel"
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
-    >
+    <div className="mx-auto max-w-3xl p-6">
       <nav
         aria-label="Chat navigation"
         className="mb-4 flex flex-wrap items-center gap-3 text-sm"
