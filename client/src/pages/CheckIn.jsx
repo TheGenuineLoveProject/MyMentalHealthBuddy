@@ -15,7 +15,32 @@ import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import { emotionToAvatar } from "@/lib/buddyEmotion";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 import "@/styles/checkin.css";
+
+// HX-OS Interaction Governance — passive crisis-language detection.
+// Pure read-only regex; no fetch, no AI, no behavior modification.
+const CRISIS_LANGUAGE_PATTERN =
+  /\b(suicide|suicidal|kill myself|killing myself|end it all|end my life|self[\s-]?harm|hurt myself|hurting myself|i want to die|no reason to live|don'?t want to be here|988|crisis hotline)\b/i;
+
+// Emotion-selection buckets that indicate vulnerability per MMHB v7.4 BHCE.
+// Pure enum lookup over the existing EMOTIONS list — no rewrite of emotional
+// state selection, no rerank, no UI mutation.
+const VULNERABLE_EMOTIONS = new Set([
+  "sadness",
+  "anxiety",
+  "frustration",
+  "tiredness",
+]);
+
+// Per HealingFlowProtectionRules.protectedHealingFlows — emotional check-in is
+// a "mood_tracking" + "companion_support" surface (both in the 8-flow protected
+// list). Pinned constant.
+const CHECKIN_IS_HEALING_FLOW =
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("mood_tracking") ||
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("companion_support");
 
 const EMOTIONS = [
   { label: "Calm",       emotion: "calm",       emoji: "🌿" },
@@ -111,11 +136,60 @@ export default function CheckIn() {
     setNote("");
   }
 
+  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.124, Check-In iter 6).
+  // Passive observation only. No fetch, no AI, no UI mutation, no behavior change,
+  // no animation/timing change, no emotional-state-selection or onboarding-flow
+  // change, no recommendation/rerank change. /checkin is a regulated HEALING_DOMAIN
+  // surface — monetizationGate.allowed always derives from validator, never gated UI.
+  const crisisDetected = useMemo(
+    () => CRISIS_LANGUAGE_PATTERN.test(note ?? ""),
+    [note],
+  );
+
+  const vulnerableState = useMemo(
+    () =>
+      (emotion != null && VULNERABLE_EMOTIONS.has(emotion)) ||
+      intensity === "strong",
+    [emotion, intensity],
+  );
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: CHECKIN_IS_HEALING_FLOW || vulnerableState,
+      }),
+    [crisisDetected, vulnerableState],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: "/checkin",
+        action: "any-business-action",
+        emotionalState: {
+          crisisDetected,
+          isVulnerable: crisisDetected || vulnerableState,
+        },
+      }),
+    [crisisDetected, vulnerableState],
+  );
+
   return (
     <div
       className="hxos-vnext checkin-polish min-h-screen"
       style={{ background: 'var(--glp-paper, #F7F4EE)' }}
       data-phase={phase}
+      data-checkin-governed="true"
+      data-healing-flow={CHECKIN_IS_HEALING_FLOW ? "true" : "false"}
+      data-crisis-active={crisisDetected ? "true" : "false"}
+      data-vulnerable={vulnerableState ? "true" : "false"}
+      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
+      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
     >
       {/* Soft purple wash over the emerald gradient — V10 §3.3 spec. */}
       <div className="checkin-wash" aria-hidden="true" />
