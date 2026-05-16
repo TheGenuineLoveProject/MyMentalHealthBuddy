@@ -14,7 +14,9 @@ export default function AIChatPage() {
           AIChatPanel itself does not render OfficialLumi (uses BuddyAvatar);
           this header anchor surfaces the canonical Lumi at the page level. */}
       <div className="flex items-center gap-3 px-4 pt-4 max-w-3xl mx-auto">
-        <OfficialLumi variant="LUMI_HEART" scene="page-header" position="inline" pageId="ai-chat" widthPx={48} decorative />
+        <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--glp-sage-15)] border border-[var(--glp-sage-20)] flex-shrink-0" data-testid="lumi-header-circle">
+          <OfficialLumi variant="LUMI_HEART" scene="page-header" position="inline" pageId="ai-chat" widthPx={40} decorative />
+        </span>
         <p className="text-sm text-foreground/80">Lumi is here. Take your time.</p>
       </div>
       <AIChatPanel />
