@@ -1,0 +1,5 @@
+./docs/diagnostics/prompt-files.txt
+./src/content/prompts/staticPrompts.ts
+./src/lumi-agent/prompts/lumiSafetyGuardrails.ts
+./src/lumi-agent/prompts/lumiSystemPrompt.ts
+./src/lumi-conversation/prompts/lumiSystemPrompt.ts

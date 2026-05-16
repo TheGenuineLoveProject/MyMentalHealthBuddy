@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Breathing tool polish (additive) — concentric breath rings, floating
+   particles, progress ring, breath-synced background tint.
+   All scoped under `.breathing-tool-polish` so nothing leaks. Every effect
+   is gated through `prefers-reduced-motion: reduce` for nervous-system safety.
+   The existing BreathingTool behavior, timing, and accessibility wiring are
+   completely untouched — this file only adds visual layers.
+   ========================================================================== */
+
+.breathing-tool-polish {
+  position: relative;
+  isolation: isolate;
+}
+
+/* 1. Breath-synced background tint — sits below all content (z-index 0)
+   and shifts hue subtly per phase via data-phase on the root container.
+   Default state is the existing sky→white→amber Tailwind gradient (kept);
+   this layer adds a soft radial wash that warms during exhale and cools
+   during inhale. */
+.breathing-tool-polish .breathing-bg-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 1.6s ease-in-out;
+  background: radial-gradient(ellipse at 50% 35%, rgba(116, 192, 252, 0.12) 0%, transparent 60%);
+}
+.breathing-tool-polish[data-breath-sub="hold"]   .breathing-bg-tint {
+  background: radial-gradient(ellipse at 50% 35%, rgba(168, 213, 186, 0.14) 0%, transparent 60%);
+}
+.breathing-tool-polish[data-breath-sub="exhale"] .breathing-bg-tint {
+  background: radial-gradient(ellipse at 50% 35%, rgba(255, 184, 140, 0.10) 0%, transparent 60%);
+}
+.breathing-tool-polish[data-phase="checkin"]  .breathing-bg-tint {
+  background: radial-gradient(ellipse at 50% 35%, rgba(200, 182, 255, 0.14) 0%, transparent 60%);
+}
+.breathing-tool-polish[data-phase="complete"] .breathing-bg-tint {
+  background: radial-gradient(ellipse at 50% 35%, rgba(255, 217, 61, 0.14) 0%, transparent 60%);
+}
+
+/* 2. Floating particles — 5 very subtle (0.05-0.10 opacity) calm-blue dots
+   that drift upward over 38-58s. Hidden under reduced motion. */
+.breathing-tool-polish .breathing-particle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.breathing-tool-polish .breathing-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #74C0FC 0%, transparent 70%);
+  animation: breathing-particle-drift linear infinite;
+}
+.breathing-tool-polish .breathing-particle:nth-child(1) { left: 12%; bottom: -30px; width: 12px; height: 12px; --bp-opacity: 0.08; animation-duration: 48s; animation-delay:   0s; }
+.breathing-tool-polish .breathing-particle:nth-child(2) { left: 32%; bottom: -45px; width:  9px; height:  9px; --bp-opacity: 0.06; animation-duration: 56s; animation-delay: -12s; }
+.breathing-tool-polish .breathing-particle:nth-child(3) { left: 58%; bottom: -25px; width: 14px; height: 14px; --bp-opacity: 0.05; animation-duration: 52s; animation-delay: -28s; }
+.breathing-tool-polish .breathing-particle:nth-child(4) { left: 76%; bottom: -40px; width: 10px; height: 10px; --bp-opacity: 0.07; animation-duration: 44s; animation-delay:  -6s; }
+.breathing-tool-polish .breathing-particle:nth-child(5) { left: 88%; bottom: -35px; width:  8px; height:  8px; --bp-opacity: 0.08; animation-duration: 38s; animation-delay: -20s; }
+
+@keyframes breathing-particle-drift {
+  0%   { transform: translateY(0)      translateX(0);    opacity: 0; }
+  10%  {                                                 opacity: var(--bp-opacity, 0.06); }
+  50%  { transform: translateY(-50vh)  translateX(15px); }
+  90%  {                                                 opacity: var(--bp-opacity, 0.06); }
+  100% { transform: translateY(-95vh)  translateX(-10px); opacity: 0; }
+}
+
+/* 3. Concentric breath rings — 2 decorative rings sit BEHIND the avatar
+   (z-index -1 inside .breath-rings-wrapper) and scale on a 4-2-4 cycle
+   that mirrors the breathing pattern. The outer ring trails the inner
+   one by ~150ms so the rings feel like a wave instead of a single pop.
+   These do NOT replace the existing inline-styled radial gradient that
+   wraps the avatar — they sit in front of it, around the avatar, as
+   additional visual depth. Only visible during the breathing phase via
+   the `.breath-rings-wrapper--active` class. */
+.breathing-tool-polish .breath-rings-wrapper {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+.breathing-tool-polish .breath-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 2px solid rgba(116, 192, 252, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 600ms ease;
+  z-index: -1;
+}
+.breathing-tool-polish .breath-ring--inner { width: 130%; height: 130%; }
+.breathing-tool-polish .breath-ring--outer { width: 165%; height: 165%; border-color: rgba(168, 213, 186, 0.30); }
+
+.breathing-tool-polish .breath-rings-wrapper--active .breath-ring {
+  opacity: 1;
+  animation: breath-ring-pulse 10s ease-in-out infinite;
+}
+.breathing-tool-polish .breath-rings-wrapper--active .breath-ring--outer {
+  animation-delay: 150ms;
+}
+
+/* Per-sub-phase ring color drift — blue inhale, purple hold, sage exhale.
+   Same ~10s cycle as the existing pulse; only the border-color shifts. */
+.breathing-tool-polish[data-breath-sub="inhale"] .breath-ring--inner { border-color: rgba(116, 192, 252, 0.45); }
+.breathing-tool-polish[data-breath-sub="inhale"] .breath-ring--outer { border-color: rgba(116, 192, 252, 0.30); }
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-ring--inner { border-color: rgba(200, 182, 255, 0.50); }
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-ring--outer { border-color: rgba(200, 182, 255, 0.32); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-ring--inner { border-color: rgba(168, 201, 160, 0.45); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-ring--outer { border-color: rgba(168, 201, 160, 0.30); }
+.breathing-tool-polish .breath-ring { transition: border-color 1.6s ease, opacity 600ms ease; }
+
+/* Soft glow halo — sits behind avatar (z-index -2, below rings),
+   matches breath ring scale, color drifts with sub-phase. Visible only
+   during the active breathing phase. */
+.breathing-tool-polish .breath-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  transition: opacity 600ms ease, box-shadow 1.6s ease;
+  z-index: -2;
+  box-shadow: 0 0 60px 12px rgba(116, 192, 252, 0.18);
+}
+.breathing-tool-polish .breath-rings-wrapper--active .breath-glow {
+  opacity: 1;
+  animation: breath-glow-pulse 10s ease-in-out infinite;
+}
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-glow { box-shadow: 0 0 70px 14px rgba(200, 182, 255, 0.22); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-glow { box-shadow: 0 0 50px 10px rgba(168, 201, 160, 0.18); }
+
+@keyframes breath-glow-pulse {
+  0%   { transform: translate(-50%, -50%) scale(0.85); }
+  40%  { transform: translate(-50%, -50%) scale(1.20); }
+  60%  { transform: translate(-50%, -50%) scale(1.20); }
+  100% { transform: translate(-50%, -50%) scale(0.85); }
+}
+
+/* Per-sub-phase particle color drift — same opacity envelope, hue only. */
+.breathing-tool-polish[data-breath-sub="hold"]   .breathing-particle { background: radial-gradient(circle, #C8B6FF 0%, transparent 70%); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breathing-particle { background: radial-gradient(circle, #A8C9A0 0%, transparent 70%); }
+.breathing-tool-polish .breathing-particle { transition: background 1.6s ease; }
+
+@keyframes breath-ring-pulse {
+  0%   { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; } /* exhale start (low) */
+  40%  { transform: translate(-50%, -50%) scale(1.18); opacity: 1.0; } /* inhale peak (4s in) */
+  60%  { transform: translate(-50%, -50%) scale(1.18); opacity: 0.9; } /* hold (2s)            */
+  100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; } /* exhale (4s out)      */
+}
+
+/* 4. Breath-cycle progress ring — a small horizontal track of 3 segments
+   filled left-to-right as breathIdx advances (0 → 1 → 2). Replaces the
+   plain "Breath X of 3" affordance with a glanceable visual without
+   removing the existing text. Sits below the seconds display. */
+.breathing-tool-polish .breath-progress {
+  display: flex;
+  gap: 12px;
+  margin-top: 1.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG ring progress — circumference 2πr (r=11) ≈ 69.12.
+   Track is the soft background ring; fill draws over it as breath
+   progresses. Done shows full fill + checkmark; active shows pulsing
+   in-progress draw; pending shows track only. */
+.breathing-tool-polish .breath-progress-ring {
+  display: block;
+  overflow: visible;
+}
+.breathing-tool-polish .breath-progress-ring__track {
+  fill: none;
+  stroke: rgba(116, 192, 252, 0.20);
+  stroke-width: 2.5;
+}
+.breathing-tool-polish .breath-progress-ring__fill {
+  fill: none;
+  stroke: rgba(116, 192, 252, 0.95);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 69.12;
+  stroke-dashoffset: 69.12;
+  transform: rotate(-90deg);
+  transform-origin: 14px 14px;
+  transition: stroke-dashoffset 1s ease, stroke 1.6s ease;
+}
+.breathing-tool-polish .breath-progress-ring[data-state="done"]   .breath-progress-ring__fill {
+  stroke-dashoffset: 0;
+}
+.breathing-tool-polish .breath-progress-ring[data-state="active"] .breath-progress-ring__fill {
+  stroke-dashoffset: 17.28; /* 75% drawn — gives the active ring a clear in-progress feel */
+  animation: breath-progress-ring-pulse 2.5s ease-in-out infinite;
+}
+.breathing-tool-polish .breath-progress-ring[data-state="pending"] .breath-progress-ring__fill {
+  stroke-dashoffset: 69.12;
+}
+.breathing-tool-polish .breath-progress-ring__check {
+  stroke: rgba(116, 192, 252, 0.95);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Sub-phase color drift on the active ring + checkmark only. Done/pending
+   stay calm-blue so the strip reads as a stable progress bar even as the
+   active ring re-tints with the breath. */
+.breathing-tool-polish[data-breath-sub="hold"]   .breath-progress-ring[data-state="active"] .breath-progress-ring__fill { stroke: rgba(200, 182, 255, 0.95); }
+.breathing-tool-polish[data-breath-sub="exhale"] .breath-progress-ring[data-state="active"] .breath-progress-ring__fill { stroke: rgba(168, 201, 160, 0.95); }
+
+@keyframes breath-progress-ring-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0   rgba(116, 192, 252, 0.00)); }
+  50%      { filter: drop-shadow(0 0 4px rgba(116, 192, 252, 0.45)); }
+}
+
+/* 5. Reduced-motion contract — hide all decorative motion, keep static
+   final states so the UI remains visually complete. The existing inline
+   <style> block in BreathingTool.jsx already pins the breath-circle
+   transform to scale(1); these overrides extend the same contract to
+   every additive layer in this file. */
+@media (prefers-reduced-motion: reduce) {
+  .breathing-tool-polish .breathing-particle-layer,
+  .breathing-tool-polish .breathing-particle {
+    display: none !important;
+  }
+  .breathing-tool-polish .breath-ring,
+  .breathing-tool-polish .breath-rings-wrapper--active .breath-ring,
+  .breathing-tool-polish .breath-rings-wrapper--active .breath-ring--outer {
+    animation: none !important;
+    transition: none !important;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .breathing-tool-polish .breath-progress-ring,
+  .breathing-tool-polish .breath-progress-ring__fill,
+  .breathing-tool-polish .breath-progress-ring[data-state="active"] .breath-progress-ring__fill {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+  .breathing-tool-polish .breath-glow,
+  .breathing-tool-polish .breath-rings-wrapper--active .breath-glow {
+    animation: none !important;
+    transition: none !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+  .breathing-tool-polish .breathing-bg-tint {
+    transition: none !important;
+  }
+}

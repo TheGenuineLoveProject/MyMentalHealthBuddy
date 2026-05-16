@@ -1,0 +1,227 @@
+/* Hero.module.css - Sacred Hero CSS Module */
+/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 6rem 2rem;
+  }
+}
+
+.heroInner {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  box-shadow: 0 8px 32px rgba(143, 191, 159, 0.25);
+}
+
+.logoBadgeIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: white;
+  transform: scale(0.7);
+  flex-shrink: 0;
+}
+
+.logoBadgeText {
+  color: white;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sacred-teal, #2f5d5d);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Typography Scale - EXACT from Canva:
+   Title: 56px, Subtitle: 36px, Heading: 32px, 
+   Subheading: 28px, Section-Header: 24px, Body: 18px, Caption: 14px */
+.title {
+  font-family: var(--font-sacred, 'Playfair Display', serif);
+  font-size: 3.5rem; /* 56px - Title */
+  font-weight: 700;
+  color: var(--sacred-charcoal, #3a3a3a);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem; /* 40px on mobile */
+  }
+}
+
+.titleHighlight {
+  background: linear-gradient(135deg, var(--sacred-teal, #2f5d5d), var(--sacred-sage, #8fbf9f));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.125rem; /* 18px - Body */
+  font-weight: 400;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.92;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .subtitle {
+    font-size: 1rem; /* 16px on mobile */
+  }
+}
+
+.sectionTitle {
+  font-family: var(--font-sacred, 'Playfair Display', serif);
+  font-size: 2rem; /* 32px - Heading */
+  font-weight: 500;
+  color: var(--sacred-charcoal, #3a3a3a);
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 1.75rem; /* 28px on mobile */
+  }
+}
+
+.trustBadges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.7;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.trustBadgeIcon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--sacred-teal, #2f5d5d);
+  transform: scale(0.7);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(143, 191, 159, 0.3);
+}
+
+.primaryBtn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(143, 191, 159, 0.4);
+}
+
+.primaryBtn:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  background: transparent;
+  border: 2px solid var(--sacred-teal, #2f5d5d);
+  border-radius: 9999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background: var(--sacred-teal, #2f5d5d);
+  color: white;
+}
+
+.secondaryBtn:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+}
+
+.btnIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transform: scale(0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoBadge,
+  .title,
+  .subtitle,
+  .primaryBtn,
+  .secondaryBtn {
+    animation: none !important;
+    transition: none !important;
+  }
+}

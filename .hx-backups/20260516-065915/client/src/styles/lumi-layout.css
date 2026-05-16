@@ -1,0 +1,95 @@
+/*
+ * Lumi v2.0 — Layout, spacing, and card primitives (D6)
+ */
+
+.lumi-section {
+  padding-top: var(--lumi-space-9);
+  padding-bottom: var(--lumi-space-9);
+  padding-left: var(--lumi-space-5);
+  padding-right: var(--lumi-space-5);
+}
+@media (min-width: 768px) {
+  .lumi-section { padding-top: var(--lumi-space-11); padding-bottom: var(--lumi-space-11); }
+}
+
+.lumi-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.lumi-container--narrow { max-width: 760px; }
+.lumi-container--wide   { max-width: 1440px; }
+
+.lumi-stack { display: flex; flex-direction: column; gap: var(--lumi-space-4); }
+.lumi-stack--lg { gap: var(--lumi-space-6); }
+.lumi-stack--xl { gap: var(--lumi-space-8); }
+.lumi-row { display: flex; flex-direction: row; gap: var(--lumi-space-4); flex-wrap: wrap; align-items: center; }
+
+.lumi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--lumi-space-5);
+}
+.lumi-grid--3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* Card primitive — additive, doesn't conflict with shadcn .card */
+.lumi-card {
+  background: var(--lumi-bg-elev);
+  color: var(--lumi-text);
+  border: 1px solid var(--lumi-border);
+  border-radius: var(--lumi-radius-lg);
+  padding: var(--lumi-space-6);
+  box-shadow: var(--lumi-shadow-1);
+  transition:
+    transform var(--lumi-dur-normal) var(--lumi-ease),
+    box-shadow var(--lumi-dur-normal) var(--lumi-ease),
+    border-color var(--lumi-dur-normal) var(--lumi-ease);
+  position: relative;
+  overflow: hidden;
+}
+.lumi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--lumi-shadow-3);
+  border-color: var(--lumi-sage-300);
+}
+.lumi-card__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  border-radius: var(--lumi-radius-md);
+  background: var(--lumi-grad-sage);
+  color: white;
+  margin-bottom: var(--lumi-space-4);
+}
+.lumi-card__title {
+  font-family: var(--lumi-font-display);
+  font-size: var(--lumi-text-lg);
+  font-weight: 600;
+  line-height: var(--lumi-leading-heading);
+  margin: 0 0 var(--lumi-space-3);
+  color: var(--lumi-stone-900);
+}
+.dark .lumi-card__title { color: var(--lumi-stone-50); }
+.lumi-card__body {
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-sm);
+  line-height: var(--lumi-leading-body);
+  color: var(--lumi-text-muted);
+  margin: 0;
+}
+.lumi-card--glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: var(--lumi-grad-sage);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--lumi-dur-normal) var(--lumi-ease);
+}
+.lumi-card--glow:hover::before { opacity: 0.4; filter: blur(8px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lumi-card { transition: none; }
+  .lumi-card:hover { transform: none; }
+}

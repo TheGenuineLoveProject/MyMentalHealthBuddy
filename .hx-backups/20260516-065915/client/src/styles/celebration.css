@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Celebration polish (additive) — sunshine radiance wash, ambient gold
+   sparkle particles (separate from the falling confetti so the warmth
+   sustains across all 3 phases), per-phase content entrance, and a
+   badge-style entrance for the streak counter on phase 2. All scoped
+   under `.celebration-polish` so nothing leaks. Every effect honors
+   `prefers-reduced-motion: reduce`. The existing CelebrationFlow
+   confetti, 3-phase auto-advance, localStorage streak math, and ARIA
+   live region are completely untouched — this file only adds visual
+   layers on top.
+   ========================================================================== */
+
+.celebration-polish {
+  position: relative;
+  isolation: isolate;
+}
+
+/* 1. Sunshine radiance wash — sits above the existing amber→rose→amber
+   Tailwind gradient and adds warm radial glow per V10 §3.4. Two stacked
+   pseudo-element layers cross-fade between "early" (warmer orange,
+   phase 1-2) and "settled" (calmer gold, phase 3). Pointer-events
+   disabled so click targets aren't blocked. Z-index 0 keeps it behind
+   confetti (already z-index auto, no z) and content (relative z-10). */
+.celebration-polish .celebration-wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.celebration-polish .celebration-wash::before,
+.celebration-polish .celebration-wash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: opacity 800ms ease-in-out;
+}
+.celebration-polish .celebration-wash::before {
+  background:
+    radial-gradient(ellipse at 50% 25%, rgba(255, 217, 61, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(255, 184, 140, 0.15) 0%, transparent 60%);
+  opacity: 1;
+}
+.celebration-polish .celebration-wash::after {
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255, 217, 61, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 85%, rgba(168, 201, 160, 0.10) 0%, transparent 60%);
+  opacity: 0;
+}
+.celebration-polish[data-phase="3"] .celebration-wash::before { opacity: 0; }
+.celebration-polish[data-phase="3"] .celebration-wash::after  { opacity: 1; }
+
+/* 2. Ambient gold sparkle particles — 6 subtle (0.10-0.18 opacity)
+   sunshine dots that twinkle in place across all 3 phases. Distinct
+   from the falling confetti so warmth sustains after confetti stops
+   in phase 3. Per-particle --sp-opacity / --sp-delay vars. */
+.celebration-polish .celebration-sparkle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.celebration-polish .celebration-sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFD93D 0%, transparent 70%);
+  animation: celebration-sparkle-twinkle 3.6s ease-in-out infinite;
+}
+.celebration-polish .celebration-sparkle:nth-child(1) { top: 18%; left: 12%; --sp-opacity: 0.18; animation-delay:  0.0s; width: 8px;  height: 8px; }
+.celebration-polish .celebration-sparkle:nth-child(2) { top: 28%; left: 84%; --sp-opacity: 0.14; animation-delay:  0.6s; width: 5px;  height: 5px; }
+.celebration-polish .celebration-sparkle:nth-child(3) { top: 62%; left: 22%; --sp-opacity: 0.16; animation-delay:  1.2s; width: 7px;  height: 7px; }
+.celebration-polish .celebration-sparkle:nth-child(4) { top: 70%; left: 78%; --sp-opacity: 0.12; animation-delay:  1.8s; width: 6px;  height: 6px; }
+.celebration-polish .celebration-sparkle:nth-child(5) { top: 42%; left: 92%; --sp-opacity: 0.10; animation-delay:  2.4s; width: 4px;  height: 4px; }
+.celebration-polish .celebration-sparkle:nth-child(6) { top: 50%; left:  6%; --sp-opacity: 0.15; animation-delay:  3.0s; width: 6px;  height: 6px; }
+
+@keyframes celebration-sparkle-twinkle {
+  0%, 100% { opacity: 0;                                  transform: scale(0.6); }
+  50%      { opacity: var(--sp-opacity, 0.14);            transform: scale(1.0); }
+}
+
+/* 3. Per-phase content entrance — each phase's <section> content fades
+   in + scales up briefly when the phase changes. Uses `key={phase}` on
+   the <section> in the JSX to force remount and replay. */
+.celebration-polish .celebration-phase-enter {
+  animation: celebration-phase-entrance 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes celebration-phase-entrance {
+  0%   { opacity: 0; transform: translateY(12px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* 4. Streak badge entrance — the phase-2 streak counter gets a stronger
+   "burst in" entrance + a soft sustained gold ring pulse to draw the
+   eye to the achievement. Triggered by an additive class added to the
+   <h2> in phase 2 only. */
+.celebration-polish .celebration-streak-badge {
+  display: inline-block;
+  position: relative;
+  animation: celebration-streak-burst 800ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.celebration-polish .celebration-streak-badge::before {
+  content: "";
+  position: absolute;
+  inset: -8px -16px;
+  border-radius: 9999px;
+  background: radial-gradient(ellipse, rgba(255, 217, 61, 0.18) 0%, transparent 70%);
+  z-index: -1;
+  animation: celebration-streak-glow 2.4s ease-in-out infinite;
+}
+@keyframes celebration-streak-burst {
+  0%   { opacity: 0; transform: scale(0.7); }
+  60%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1);    }
+}
+@keyframes celebration-streak-glow {
+  0%, 100% { opacity: 0.7; transform: scale(1);    }
+  50%      { opacity: 1.0; transform: scale(1.05); }
+}
+
+/* 5. Reduced-motion contract — kill every additive animation, hide
+   sparkle particles entirely, pin static states. Existing component
+   confetti is already gated by the JSX `!reducedMotion && phase < 3`
+   check, so no double-coverage needed there. */
+@media (prefers-reduced-motion: reduce) {
+  .celebration-polish .celebration-sparkle-layer,
+  .celebration-polish .celebration-sparkle {
+    display: none !important;
+  }
+  .celebration-polish .celebration-phase-enter,
+  .celebration-polish .celebration-streak-badge,
+  .celebration-polish .celebration-streak-badge::before {
+    animation: none !important;
+    transform: none !important;
+  }
+  .celebration-polish .celebration-wash::before,
+  .celebration-polish .celebration-wash::after {
+    transition: none !important;
+  }
+}

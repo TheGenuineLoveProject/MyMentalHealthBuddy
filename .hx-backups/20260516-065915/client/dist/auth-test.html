@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Auth Test Page ✓</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 2rem;
+      }
+      h1 {
+        margin-top: 0;
+      }
+      .card {
+        background: #ffffff;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      }
+      label {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+      }
+      input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 0.9rem;
+      }
+      button {
+        display: inline-block;
+        padding: 0.5rem 0.9rem;
+        border-radius: 4px;
+        border: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+        margin-right: 0.5rem;
+      }
+      button.primary {
+        background: #2563eb;
+        color: #ffffff;
+      }
+      button.secondary {
+        background: #10b981;
+        color: #ffffff;
+      }
+      button.outline {
+        background: #ffffff;
+        border: 1px solid #2563eb;
+        color: #2563eb;
+      }
+      pre {
+        background: #111827;
+        color: #d1d5db;
+        padding: 1rem;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 0.8rem;
+      }
+      .tokenBox {
+        font-size: 0.75rem;
+        word-break: break-all;
+        background: #f9fafb;
+        border-radius: 4px;
+        padding: 0.5rem;
+        border: 1px dashed #d1d5db;
+        margin-top: 0.5rem;
+      }
+      .small {
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Auth Test Page ✓</h1>
+
+    <!-- REGISTER -->
+    <div class="card">
+      <h2>Register</h2>
+      <label for="regEmail">Email</label>
+      <input id="regEmail" type="email" value="test@example.com" />
+
+      <label for="regPassword">Password</label>
+      <input id="regPassword" type="password" value="password123" />
+
+      <button class="primary" onclick="register()">Register</button>
+      <p class="small">
+        Uses <code>POST /auth/register</code> (in-memory demo DB for now).
+      </p>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="card">
+      <h2>Log in</h2>
+      <label for="logEmail">Email</label>
+      <input id="logEmail" type="email" value="test@example.com" />
+
+      <label for="logPassword">Password</label>
+      <input id="logPassword" type="password" value="password123" />
+
+      <button class="primary" onclick="login()">Log in</button>
+      <button class="outline" onclick="clearToken()">Clear token</button>
+
+      <div class="tokenBox" id="tokenBox">
+        <span class="small">Token:</span>
+        <div id="tokenValue">(none yet)</div>
+      </div>
+
+      <p class="small">
+        On success, this calls <code>POST /auth/login</code> and stores the JWT
+        in <code>localStorage.jwt</code>.
+      </p>
+    </div>
+
+    <!-- PROTECTED CALLS -->
+    <div class="card">
+      <h2>Protected API Tests</h2>
+      <p class="small">
+        These calls include <code>Authorization: Bearer &lt;token&gt;</code>
+        using the value from the login step.
+      </p>
+      <button class="secondary" onclick="callDashboard()">
+        Test /dashboard
+      </button>
+      <button class="secondary" onclick="callAnalytics()">
+        Test /analytics
+      </button>
+      <button class="secondary" onclick="callContent()">Test /content</button>
+    </div>
+
+    <!-- RAW RESPONSE -->
+    <div class="card">
+      <h2>Response</h2>
+      <pre id="responseBox">Waiting for request…</pre>
+    </div>
+
+    <script>
+      const tokenKey = "jwt";
+
+      function setResponse(data) {
+        const box = document.getElementById("responseBox");
+        try {
+          box.textContent =
+            typeof data === "string"
+              ? data
+              : JSON.stringify(data, null, 2);
+        } catch (e) {
+          box.textContent = String(data);
+        }
+      }
+
+      function setToken(token) {
+        if (token) {
+          localStorage.setItem(tokenKey, token);
+          document.getElementById("tokenValue").textContent = token;
+        } else {
+          localStorage.removeItem(tokenKey);
+          document.getElementById("tokenValue").textContent = "(none yet)";
+        }
+      }
+
+      function getToken() {
+        return localStorage.getItem(tokenKey);
+      }
+
+      // Load token on page load
+      (function init() {
+        const t = getToken();
+        if (t) {
+          document.getElementById("tokenValue").textContent = t;
+        }
+      })();
+
+      async function register() {
+        const email = document.getElementById("regEmail").value;
+        const password = document.getElementById("regPassword").value;
+
+        try {
+          const res = await fetch("/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+          setResponse({ status: res.status, path: "/auth/register", data });
+        } catch (err) {
+          setResponse({ error: String(err) });
+        }
+      }
+
+      async function login() {
+        const email = document.getElementById("logEmail").value;
+        const password = document.getElementById("logPassword").value;
+
+        try {
+          const res = await fetch("/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+          if (data && data.token) {
+            setToken(data.token);
+          }
+          setResponse({ status: res.status, path: "/auth/login", data });
+        } catch (err) {
+          setResponse({ error: String(err) });
+        }
+      }
+
+      function clearToken() {
+        setToken(null);
+        setResponse("Token cleared.");
+      }
+
+      async function callProtected(path) {
+        const token = getToken();
+        if (!token) {
+          setResponse("No token set. Please log in first.");
+          return;
+        }
+
+        try {
+          const res = await fetch(path, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          });
+          const data = await res.json();
+          setResponse({ status: res.status, path, data });
+        } catch (err) {
+          setResponse({ error: String(err), path });
+        }
+      }
+
+      function callDashboard() {
+        callProtected("/dashboard");
+      }
+
+      function callAnalytics() {
+        callProtected("/analytics");
+      }
+
+      function callContent() {
+        callProtected("/content");
+      }
+    </script>
+  </body>
+</html>

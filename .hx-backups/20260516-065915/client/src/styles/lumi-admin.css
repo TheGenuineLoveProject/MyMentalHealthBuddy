@@ -1,0 +1,362 @@
+/* ============================================
+ * MMHB v2.0 — ADMIN COMPONENT SYSTEM
+ * lumi-admin.css
+ * ----------------------------------------------
+ * Additive companion to lumi-buttons.css / lumi-links.css / lumi-layout.css
+ * / lumi-mascot.css. Only ships classes that were NOT already present in the
+ * existing Lumi stack so we never override a load-bearing rule. Anything
+ * already styled (lumi-card, lumi-section, lumi-btn-primary/secondary/etc.,
+ * lumi-link-text/inline/etc.) is intentionally absent here.
+ *
+ * Newly published surfaces:
+ *   - .lumi-table + th/td/hover                                (data tables)
+ *   - .lumi-status-{success|warning|error|info|neutral}        (state badges)
+ *   - .admin-page-title / .admin-section-title / .admin-body
+ *     / .admin-metric-value / .admin-metric-label / .admin-caption (admin typography)
+ *   - .header-brand / .header-wordmark / .header-subhead       (header utility set)
+ *   - .lumi-section-alt / .footer-grid / .hero-cta-group       (layout helpers)
+ *   - .trust-badges + un-scoped .trust-badge                   (trust strip)
+ *   - .hero-mascot                                             (full-width hero artwork)
+ *   - .mascot-container                                        (compact 48px mascot wrapper)
+ *   - .lumi-btn-sm / -lg / -icon / -loading / -dark             (size + state aliases)
+ *   - .lumi-link-dark                                           (dark-surface link)
+ *   - .lumi-error-boundary                                      (SafeBoundary fallback)
+ * ============================================ */
+
+/* ============================================
+   TABLES
+   ============================================ */
+.lumi-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-sm);
+}
+.lumi-table th {
+  background: var(--lumi-sage-50);
+  color: var(--lumi-sage-800);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--lumi-sage-200);
+  font-size: var(--lumi-text-xs);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.lumi-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--lumi-stone-200);
+  color: var(--lumi-stone-700);
+  vertical-align: middle;
+}
+.lumi-table tr:hover td {
+  background: var(--lumi-sage-50);
+}
+.lumi-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================
+   STATUS BADGES
+   ============================================ */
+.lumi-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: var(--lumi-text-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  font-family: var(--lumi-font-body);
+}
+.lumi-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.lumi-status-success { background: #d4ede4; color: #2d6a4f; }
+.lumi-status-success::before { background: #2d6a4f; }
+.lumi-status-warning { background: #fcebc7; color: #8a5a00; }
+.lumi-status-warning::before { background: #d4943a; }
+.lumi-status-error   { background: #f0d4d0; color: #8a3a2a; }
+.lumi-status-error::before { background: #c45b4a; }
+.lumi-status-info    { background: #d8e0f0; color: #3a5a8a; }
+.lumi-status-info::before { background: #5a8ad4; }
+.lumi-status-neutral { background: var(--lumi-stone-200); color: var(--lumi-stone-700); }
+.lumi-status-neutral::before { background: var(--lumi-stone-500); }
+
+/* ============================================
+   ADMIN TYPOGRAPHY
+   ============================================ */
+.admin-page-title {
+  font-family: var(--lumi-font-display);
+  font-size: var(--lumi-text-2xl);
+  font-weight: 500;
+  color: var(--lumi-stone-800);
+  line-height: 1.35;
+  margin: 0 0 var(--lumi-space-4) 0;
+}
+.admin-section-title {
+  font-family: var(--lumi-font-display);
+  font-size: var(--lumi-text-xl);
+  font-weight: 500;
+  color: var(--lumi-stone-700);
+  line-height: 1.35;
+  margin: 0 0 var(--lumi-space-3) 0;
+}
+.admin-body {
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-sm);
+  color: var(--lumi-stone-600);
+  line-height: 1.6;
+  margin: 0;
+}
+.admin-metric-value {
+  font-family: var(--lumi-font-display);
+  font-size: var(--lumi-text-3xl);
+  font-weight: 500;
+  color: var(--lumi-sage-700);
+  line-height: 1.2;
+  margin: 0;
+}
+.admin-metric-label {
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--lumi-stone-500);
+  text-transform: uppercase;
+  margin: var(--lumi-space-1) 0 0 0;
+}
+.admin-caption {
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-xs);
+  color: var(--lumi-stone-500);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   HEADER UTILITY CLASSES
+   ============================================ */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--lumi-space-3);
+  min-width: fit-content;
+}
+.header-wordmark {
+  font-family: var(--lumi-font-display);
+  font-size: var(--lumi-text-lg);
+  font-weight: 500;
+  color: var(--lumi-stone-800);
+  text-decoration: none;
+  line-height: 1.2;
+}
+.header-subhead {
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--lumi-sage-600);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ============================================
+   LAYOUT HELPERS
+   ============================================ */
+.lumi-section-alt {
+  background: var(--lumi-sage-50);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--lumi-space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-cta-group {
+  display: flex;
+  gap: var(--lumi-space-4);
+  margin-top: var(--lumi-space-6);
+  flex-wrap: wrap;
+}
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--lumi-space-8);
+  flex-wrap: wrap;
+  margin-top: var(--lumi-space-8);
+}
+/* Un-scoped .trust-badge — canva-landing.css already publishes a scoped
+ * `.canva-landing .trust-badge`. This class is the spec's bare form for
+ * surfaces outside CanvaLanding (e.g. blog post heroes, admin dashboards).
+ * Kept low-specificity so the existing scoped variant continues to win. */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lumi-space-2);
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-sm);
+  font-weight: 500;
+  color: var(--lumi-stone-600);
+  background: #ffffff;
+  padding: var(--lumi-space-2) var(--lumi-space-4);
+  border-radius: 9999px;
+  border: 1px solid var(--lumi-sage-200);
+  box-shadow: 0 1px 2px rgba(26, 25, 23, 0.05);
+}
+
+/* ============================================
+   MASCOT WRAPPERS (admin / hero forms)
+   ============================================ */
+/* Hero-form mascot rules per spec. CURRENT consumer status: CanvaLanding.jsx
+ * and Home.jsx reference `hero-mascot` only via data-testid attributes, NOT
+ * via className, so these rules are presently dormant on the live pages —
+ * the existing hero sizing comes from inline styles + LumiCompanion props.
+ * Published here so any future surface that opts in via className gets the
+ * spec defaults (60vw cap with 400px ceiling + sage drop-shadow). */
+.hero-mascot {
+  width: min(400px, 60vw);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(90, 138, 90, 0.15));
+}
+.hero-mascot:hover {
+  filter: drop-shadow(0 8px 24px rgba(245, 166, 35, 0.25));
+  transition: filter 0.4s ease;
+}
+
+/* Compact 48px mascot wrapper for header logos / nav avatars. */
+.mascot-container {
+  width: 48px;
+  height: 48px;
+  overflow: visible;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mascot-container img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+/* ============================================
+   BUTTON SIZE / STATE ALIASES
+   ----------------------------------------------
+ * The existing lumi-buttons.css publishes BEM-style sizes (.lumi-btn--sm /
+ * .lumi-btn--lg) and a [data-loading="true"] state. These dash-style spec
+ * aliases let templates and pasted snippets use the alternate naming
+ * without hand-mapping. Both forms now resolve to the same visuals.
+ * ============================================ */
+.lumi-btn-sm {
+  height: 36px;
+  padding: 0 16px;
+  font-size: var(--lumi-text-xs);
+}
+.lumi-btn-lg {
+  height: 56px;
+  padding: 0 32px;
+  font-size: var(--lumi-text-base);
+  border-radius: 9999px;
+}
+.lumi-btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Loading state: hide button text via text-indent + overflow rather than
+ * collapsing currentColor (the previous transparent-color approach broke the
+ * spinner because its border inherited currentColor). The spinner border
+ * uses an explicit sage-700 token so it remains visible regardless of the
+ * host button variant; --lumi-on-* could be substituted by callers if needed. */
+.lumi-btn-loading {
+  position: relative;
+  text-indent: -9999px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.lumi-btn-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid var(--lumi-sage-700);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: lumi-admin-spin 0.8s linear infinite;
+  text-indent: 0;
+}
+@keyframes lumi-admin-spin {
+  to { transform: rotate(360deg); }
+}
+.lumi-btn-dark {
+  background: var(--lumi-grad-cta);
+  color: var(--lumi-stone-100);
+  border: none;
+}
+.lumi-btn-dark:hover {
+  filter: brightness(1.1);
+}
+
+/* ============================================
+   LINK — DARK SURFACE VARIANT
+   ============================================ */
+.lumi-link-dark {
+  color: var(--lumi-sage-300);
+  text-decoration: none;
+  font-family: var(--lumi-font-body);
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+.lumi-link-dark:hover {
+  color: var(--lumi-amber-400);
+  text-decoration: underline;
+}
+
+/* ============================================
+   SAFE BOUNDARY ERROR STYLES
+   ============================================ */
+.lumi-error-boundary {
+  background: #f0d4d0;
+  border: 1px solid #c45b4a;
+  border-radius: 12px;
+  padding: var(--lumi-space-6);
+  color: #5a2a20;
+  font-family: var(--lumi-font-body);
+  font-size: var(--lumi-text-sm);
+  line-height: 1.6;
+}
+.lumi-error-boundary h3 {
+  font-family: var(--lumi-font-display);
+  font-size: var(--lumi-text-lg);
+  font-weight: 600;
+  color: #8a3a2a;
+  margin: 0 0 var(--lumi-space-2) 0;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .lumi-btn-loading::after { animation: none !important; }
+  .hero-mascot:hover { transition: none !important; }
+}

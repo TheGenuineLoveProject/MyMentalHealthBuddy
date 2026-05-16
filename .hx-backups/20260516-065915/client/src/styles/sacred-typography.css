@@ -1,0 +1,156 @@
+/**
+ * Sacred Typography - Type Scale Utilities
+ * The Genuine Love Project
+ * 
+ * Typography: Playfair Display (headings), Inter (body/UI)
+ * Scale: Title 56, Subtitle 36, Heading 32, Subheading 28, Section 24, Body 18, Quote 20 italic, Caption 14
+ */
+
+/* Fonts self-hosted via @font-face in client/index.html (v5.7.8) */
+
+/* Sacred font families */
+.font-sacred,
+.font-display {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-body {
+  font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+}
+
+/* ============================================
+   TYPE SCALE UTILITIES (Sacred-Grade)
+   ============================================ */
+
+/* Title - 56px / 3.5rem */
+.type-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--sacred-charcoal, #3a3a3a);
+}
+
+/* Subtitle - 36px / 2.25rem */
+.type-subtitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--sacred-charcoal, #3a3a3a);
+}
+
+/* Heading - 32px / 2rem */
+.type-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--sacred-charcoal, #3a3a3a);
+}
+
+/* Subheading - 28px / 1.75rem */
+.type-subheading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--sacred-charcoal, #3a3a3a);
+}
+
+/* Section - 24px / 1.5rem */
+.type-section {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--sacred-charcoal, #3a3a3a);
+}
+
+/* Body - 18px / 1.125rem */
+.type-body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--sacred-charcoal, #3a3a3a);
+}
+
+/* Quote - 20px italic / 1.25rem */
+.type-quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--sacred-teal, #2f5d5d);
+}
+
+/* Caption - 14px light / 0.875rem */
+.type-caption {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.8;
+}
+
+/* ============================================
+   RESPONSIVE TYPE SCALE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .type-title {
+    font-size: 2.5rem;
+  }
+  
+  .type-subtitle {
+    font-size: 1.75rem;
+  }
+  
+  .type-heading {
+    font-size: 1.5rem;
+  }
+  
+  .type-subheading {
+    font-size: 1.375rem;
+  }
+  
+  .type-section {
+    font-size: 1.25rem;
+  }
+  
+  .type-body {
+    font-size: 1rem;
+  }
+  
+  .type-quote {
+    font-size: 1.125rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY: Focus States
+   ============================================ */
+
+.focus-visible-ring:focus-visible {
+  outline: 2px solid var(--sacred-sage, #8fbf9f);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

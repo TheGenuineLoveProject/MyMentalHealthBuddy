@@ -1,0 +1,115 @@
+/* PlatformComponent.module.css - Platform Card CSS Module */
+/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+
+.card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--sacred-white, #faf9f7);
+  border: 1px solid rgba(143, 191, 159, 0.2);
+  box-shadow: 0 4px 20px rgba(47, 93, 93, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(143, 191, 159, 0.3);
+  box-shadow: 0 12px 40px rgba(47, 93, 93, 0.15);
+}
+
+.iconWrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  background: rgba(143, 191, 159, 0.1);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--sacred-teal, #2f5d5d);
+  transform: scale(0.7);
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Typography Scale - EXACT from Canva */
+.title {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.5rem; /* 24px - Section Header */
+  font-weight: 700;
+  color: var(--sacred-teal, #2f5d5d);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.description {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* Variant styles */
+.variantSage {
+  background: rgba(143, 191, 159, 0.08);
+  border-color: rgba(143, 191, 159, 0.25);
+}
+
+.variantRose {
+  background: rgba(244, 199, 195, 0.08);
+  border-color: rgba(244, 199, 195, 0.25);
+}
+
+.variantTeal {
+  background: rgba(47, 93, 93, 0.05);
+  border-color: rgba(47, 93, 93, 0.2);
+}
+
+/* Glow effect on hover */
+.cardGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem;
+  opacity: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(143, 191, 159, 0.15) 0%,
+    transparent 70%
+  );
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover .cardGlow {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  .cardGlow {
+    transition: none;
+  }
+}

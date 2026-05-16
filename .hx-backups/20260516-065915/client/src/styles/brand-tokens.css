@@ -1,0 +1,483 @@
+/* client/src/styles/brand-tokens.css */
+/* MyMentalHealthBuddy by The Genuine Love Project — Design Tokens */
+/* SINGLE SOURCE OF TRUTH for all brand colors and semantic tokens */
+/* Color Psychology: Empathic Intelligence — calming, empowering, mesmerizing, safe, loving */
+
+:root{
+  /* Safe area insets for mobile devices */
+  --glp-safe-top: env(safe-area-inset-top, 0px);
+  --glp-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --glp-safe-left: env(safe-area-inset-left, 0px);
+  --glp-safe-right: env(safe-area-inset-right, 0px);
+  /* ------------------------------------------------------------
+    Core palette — Transcendent Intelligence Color System
+    Each color is precision-tuned for maximum psychological depth,
+    sensory magnetism, and emotional resonance. The palette weaves
+    safety, wisdom, warmth, and quiet power into a mesmerizing
+    visual language that draws the visitor inward and holds them
+    in a state of calm, empowered awareness.
+
+    Color Psychology Map (Evolved — Enterprise Elite II):
+    • Luminous Sage (#1ec890) — Magnetic vitality, alive growth, sensory calm that draws you inward
+    • Abyssal Wisdom (#062a2a) — Hypnotic depth, infinite grounding, mystery that feels like safety
+    • Sacred Pearl (#fcf6ea) — Golden sanctuary warmth, luminous embrace, the feeling of coming home
+    • Wisdom Ink (#142626) — Quiet genius, deep knowing, the intelligence behind stillness
+    • Liquid Amber (#be8622) — Molten confidence, warm inner power, radiance that inspires trust
+    • Heart Rose (#d08672) — Tender compassion, unconditional loving kindness, warmth without limit
+    • Consciousness Violet (#6c58b8) — Expanded perception, awakened intuition, deeper seeing
+  ------------------------------------------------------------ */
+  --glp-sage: #1ec890;          /* Luminous Sage — magnetic vitality, alive growth */
+  --glp-blush: #d08672;         /* Heart Rose — tender compassion, unconditional warmth */
+  --glp-rose: #d08672;          /* Alias for blush */
+  --glp-sage-deep: #062a2a;     /* Abyssal Wisdom — hypnotic depth, infinite grounding */
+  --glp-paper: #fcf6ea;         /* Sacred Pearl — golden sanctuary warmth, coming home */
+  --glp-ink: #142626;           /* Wisdom Ink — quiet genius, intelligent stillness */
+  --glp-gold: #E8913A;          /* Heart Amber — warm radiant gold, canonical palette */
+  --glp-gold-dark: #C9701F;     /* Deep Heart Amber — grounded warm wisdom */
+  --glp-violet: #6c58b8;        /* Consciousness Violet — expanded perception, awakened seeing */
+  --glp-violet-dark: #5c4aa0;   /* Deep Violet — profound intuition */
+
+  /* Opacity variants for UI components */
+  --glp-sage-10: rgba(30, 200, 144, 0.1);
+  --glp-sage-15: rgba(30, 200, 144, 0.15);
+  --glp-sage-20: rgba(30, 200, 144, 0.2);
+  --glp-sage-30: rgba(30, 200, 144, 0.3);
+  --glp-sage-40: rgba(30, 200, 144, 0.4);
+  --glp-rose-10: rgba(208, 134, 114, 0.1);
+  --glp-rose-15: rgba(208, 134, 114, 0.15);
+  --glp-rose-20: rgba(208, 134, 114, 0.2);
+  --glp-rose-30: rgba(208, 134, 114, 0.3);
+  --glp-gold-10: rgba(232, 145, 58, 0.1);
+  --glp-gold-15: rgba(232, 145, 58, 0.15);
+  --glp-gold-20: rgba(232, 145, 58, 0.2);
+  --glp-gold-30: rgba(232, 145, 58, 0.3);
+  --glp-gold-60: rgba(232, 145, 58, 0.6);
+  --glp-violet-10: rgba(108, 88, 184, 0.1);
+  --glp-violet-20: rgba(108, 88, 184, 0.2);
+  --glp-violet-30: rgba(108, 88, 184, 0.3);
+  --glp-sage-deep-12: rgba(6, 42, 42, 0.12);
+  --glp-sage-deep-20: rgba(6, 42, 42, 0.2);
+  --glp-sage-deep-30: rgba(6, 42, 42, 0.3);
+  --glp-sage-deep-40: rgba(6, 42, 42, 0.4);
+  --glp-paper-70: rgba(252, 246, 234, 0.7);
+  --glp-paper-95: rgba(252, 246, 234, 0.95);
+  --glp-paper-98: rgba(252, 246, 234, 0.98);
+  --glp-overlay-50: rgba(0, 0, 0, 0.5);
+  --glp-white-40: rgba(255, 255, 255, 0.4);
+  --glp-white-80: rgba(255, 255, 255, 0.8);
+  --glp-white: #ffffff;
+
+  /* Logo gradient and shadow */
+  --glp-logo-gradient: linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15));
+  --glp-logo-shadow: 0 2px 8px var(--glp-sage-15);
+  --glp-gold-gradient: linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark));
+  --glp-gold-shadow: 0 4px 16px var(--glp-gold-30);
+
+  /* ----------------------------------------------------------------
+     Aurora system — sage→gold→violet→rose triad used by halos,
+     button sheen, premium card rings, and ambient glows. Composed
+     so any surface can opt-in with a single var().
+     ---------------------------------------------------------------- */
+  --glp-aurora-1: rgba(30, 200, 144, 0.55);   /* Luminous Sage */
+  --glp-aurora-2: rgba(190, 134, 34, 0.50);   /* Liquid Amber */
+  --glp-aurora-3: rgba(108, 88, 184, 0.45);   /* Consciousness Violet */
+  --glp-aurora-4: rgba(208, 134, 114, 0.45);  /* Heart Rose */
+  --glp-aurora-conic: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--glp-aurora-1) 18%,
+    var(--glp-aurora-2) 42%,
+    var(--glp-aurora-3) 66%,
+    var(--glp-aurora-4) 86%,
+    transparent 100%
+  );
+  --glp-aurora-linear: linear-gradient(
+    115deg,
+    var(--glp-aurora-1) 0%,
+    var(--glp-aurora-2) 38%,
+    var(--glp-aurora-3) 72%,
+    var(--glp-aurora-4) 100%
+  );
+  --glp-aurora-glow: 0 0 32px rgba(30, 200, 144, 0.18),
+                     0 0 64px rgba(108, 88, 184, 0.12);
+
+  /* Extended teal palette — Abyssal Wisdom spectrum */
+  --glp-teal-50: #dff1ee;
+  --glp-teal-100: #aedcd6;
+  --glp-teal-200: #74beb6;
+  --glp-teal-300: #3e9c94;
+  --glp-teal-400: #1c6e6c;
+  --glp-teal-500: #0e4e4e;
+  --glp-teal-600: #0b4040;
+  --glp-teal-700: #062a2a;
+  --glp-teal-800: #041e1e;
+  --glp-teal-900: #021414;
+
+  /* Extended gold palette — Heart Amber spectrum (canonical warm gold) */
+  --glp-gold-50: #fdf2e8;
+  --glp-gold-100: #fbe0c5;
+  --glp-gold-200: #f6c388;
+  --glp-gold-300: #f0a55a;
+  --glp-gold-400: #E8913A;
+  --glp-gold-500: #C9701F;
+  --glp-gold-600: #a55a14;
+  --glp-gold-700: #82480f;
+  --glp-gold-800: #5e340a;
+  --glp-gold-900: #3a2106;
+
+  /* Extended sage palette — Luminous Sage spectrum */
+  --glp-sage-50: #e0f9f0;
+  --glp-sage-100: #b2f0d6;
+  --glp-sage-200: #7ee5ba;
+  --glp-sage-300: #4cd8a0;
+  --glp-sage-400: #1ec890;
+  --glp-sage-500: #18a876;
+  --glp-sage-600: #148a60;
+  --glp-sage-700: #0e6c4a;
+  --glp-sage-800: #094e34;
+  --glp-sage-900: #04301e;
+
+  /* Extended blush palette — Heart Rose spectrum */
+  --glp-blush-50: #f8ede8;
+  --glp-blush-100: #efd4ca;
+  --glp-blush-200: #e2b2a4;
+  --glp-blush-300: #d08672;
+  --glp-blush-400: #c07060;
+  --glp-blush-500: #ae584c;
+  --glp-blush-600: #984840;
+  --glp-blush-700: #7e3832;
+  --glp-blush-800: #642c26;
+  --glp-blush-900: #4a1e1a;
+
+  /* Shorthand aliases for utilities (teal/gold/sage/blush) */
+  --teal-50: var(--glp-teal-50);
+  --teal-100: var(--glp-teal-100);
+  --teal-200: var(--glp-teal-200);
+  --teal-300: var(--glp-teal-300);
+  --teal-400: var(--glp-teal-400);
+  --teal-500: var(--glp-teal-500);
+  --teal-600: var(--glp-teal-600);
+  --teal-700: var(--glp-teal-700);
+  --teal-800: var(--glp-teal-800);
+  --teal-900: var(--glp-teal-900);
+
+  --gold-50: var(--glp-gold-50);
+  --gold-100: var(--glp-gold-100);
+  --gold-200: var(--glp-gold-200);
+  --gold-300: var(--glp-gold-300);
+  --gold-400: var(--glp-gold-400);
+  --gold-500: var(--glp-gold-500);
+  --gold-600: var(--glp-gold-600);
+  --gold-700: var(--glp-gold-700);
+  --gold-800: var(--glp-gold-800);
+  --gold-900: var(--glp-gold-900);
+
+  --sage-50: var(--glp-sage-50);
+  --sage-100: var(--glp-sage-100);
+  --sage-200: var(--glp-sage-200);
+  --sage-300: var(--glp-sage-300);
+  --sage-400: var(--glp-sage-400);
+  --sage-500: var(--glp-sage-500);
+  --sage-600: var(--glp-sage-600);
+  --sage-700: var(--glp-sage-700);
+  --sage-800: var(--glp-sage-800);
+  --sage-900: var(--glp-sage-900);
+
+  --blush-50: var(--glp-blush-50);
+  --blush-100: var(--glp-blush-100);
+  --blush-200: var(--glp-blush-200);
+  --blush-300: var(--glp-blush-300);
+  --blush-400: var(--glp-blush-400);
+  --blush-500: var(--glp-blush-500);
+  --blush-600: var(--glp-blush-600);
+  --blush-700: var(--glp-blush-700);
+  --blush-800: var(--glp-blush-800);
+  --blush-900: var(--glp-blush-900);
+
+  /* RGB helpers (for rgba(var(--x-rgb), a)) — synced to Enterprise Elite II palette */
+  --glp-sage-rgb: 30, 200, 144;       /* #1ec890 */
+  --glp-sage-deep-rgb: 6, 42, 42;     /* #062a2a */
+  --glp-blush-rgb: 208, 134, 114;     /* #d08672 */
+  --glp-paper-rgb: 252, 246, 234;     /* #fcf6ea */
+  --glp-ink-rgb: 20, 38, 38;          /* #142626 */
+  --glp-gold-rgb: 232, 145, 58;       /* #E8913A — Heart Amber */
+  --glp-violet-rgb: 108, 88, 184;     /* #6c58b8 */
+
+  /* ------------------------------------------------------------
+    Semantic tokens (use these everywhere in new code)
+  ------------------------------------------------------------ */
+  --glp-bg: var(--glp-paper);
+  --glp-surface: #FFFFFF;
+  --glp-surface-2: #F5F2EE;
+
+  --glp-text: var(--glp-ink);
+  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.72);
+
+  --glp-primary: var(--glp-sage-deep);
+  --glp-primary-foreground: var(--glp-paper);
+
+  --glp-accent: var(--glp-gold);
+  --glp-accent-foreground: #1A1A1A;
+
+  --glp-border: rgba(var(--glp-ink-rgb), 0.10);
+  --glp-ring: var(--glp-gold);
+
+  /* Shorthand semantic aliases */
+  --bg: var(--glp-paper);
+  --text-1: var(--glp-ink);
+  --text-2: rgba(var(--glp-ink-rgb), 0.72);
+  --surface-1: #FFFFFF;
+  --surface-2: rgba(var(--glp-paper-rgb), 0.70);
+  --primary: var(--glp-sage-deep);
+  --primary-contrast: var(--glp-paper);
+  --accent: var(--glp-gold);
+  --ring: var(--glp-gold);
+  --border: rgba(var(--glp-ink-rgb), 0.12);
+
+  /* Radius tokens */
+  --glp-radius-1: 12px;
+  --glp-radius-2: 16px;
+  --glp-radius-sm: 12px;
+  --glp-radius-md: 16px;
+
+  /* Shadow tokens — deeper, more dimensional */
+  --glp-shadow-1: 0 6px 24px rgba(22, 61, 61, 0.06);
+  --glp-shadow-2: 0 10px 36px rgba(22, 61, 61, 0.08);
+
+  /* Motion tokens */
+  --glp-motion-fast: 140ms;
+  --glp-motion-med: 220ms;
+  --glp-ease: cubic-bezier(.2,.8,.2,1);
+
+  /* ------------------------------------------------------------
+    Functional colors (for UI states, charts, and visualizations)
+  ------------------------------------------------------------ */
+  --glp-success: #10b981;
+  --glp-success-light: #34d399;
+  --glp-success-dark: #059669;
+  --glp-success-rgb: 16, 185, 129;
+
+  --glp-warning: #f59e0b;
+  --glp-warning-light: #fbbf24;
+  --glp-warning-dark: #d97706;
+  --glp-warning-rgb: 245, 158, 11;
+
+  --glp-error: #ef4444;
+  --glp-error-light: #f87171;
+  --glp-error-dark: #dc2626;
+  --glp-error-rgb: 239, 68, 68;
+
+  --glp-info: #3b82f6;
+  --glp-info-light: #60a5fa;
+  --glp-info-dark: #2563eb;
+  --glp-info-rgb: 59, 130, 246;
+
+  --glp-cyan: #06b6d4;
+  --glp-cyan-light: #22d3ee;
+  --glp-cyan-rgb: 6, 182, 212;
+
+  --glp-purple: #8b5cf6;
+  --glp-purple-light: #a78bfa;
+  --glp-purple-dark: #7c3aed;
+  --glp-purple-rgb: 139, 92, 246;
+
+  --glp-indigo: #6366f1;
+  --glp-indigo-light: #818cf8;
+  --glp-indigo-rgb: 99, 102, 241;
+
+  --glp-status-rose: #f43f5e;
+  --glp-status-rose-light: #fb7185;
+  --glp-status-rose-dark: #e11d48;
+  --glp-status-rose-rgb: 244, 63, 94;
+  --glp-rose-light: var(--glp-status-rose-light);
+  --glp-rose-dark: var(--glp-status-rose-dark);
+  --glp-rose-rgb: 244, 63, 94;
+
+  --glp-orange: #f97316;
+  --glp-orange-light: #fb923c;
+  --glp-orange-rgb: 249, 115, 22;
+
+  --glp-lime: #84cc16;
+  --glp-lime-rgb: 132, 204, 22;
+
+  --glp-teal-light: #14b8a6;
+  --glp-teal-rgb: 20, 184, 166;
+
+  --glp-pink: #ec4899;
+  --glp-pink-light: #f472b6;
+  --glp-pink-rgb: 236, 72, 153;
+
+  /* Gray scale for neutral elements */
+  --glp-gray-50: #f9fafb;
+  --glp-gray-100: #f3f4f6;
+  --glp-gray-200: #e5e7eb;
+  --glp-gray-300: #d1d5db;
+  --glp-gray-400: #9ca3af;
+  --glp-gray-500: #6b7280;
+  --glp-gray-600: #4b5563;
+  --glp-gray-700: #374151;
+  --glp-gray-800: #1f2937;
+  --glp-gray-900: #111827;
+
+  /* ------------------------------------------------------------
+    Premium Typography System
+  ------------------------------------------------------------ */
+  --glp-font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --glp-font-heading: 'Inter', 'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --glp-font-body: 'Inter', 'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --glp-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Type Scale (fluid, clamp-based for responsive) */
+  --glp-text-xs: clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem);
+  --glp-text-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  --glp-text-base: clamp(0.9375rem, 0.9rem + 0.18vw, 1rem);
+  --glp-text-lg: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --glp-text-xl: clamp(1.1875rem, 1.1rem + 0.4vw, 1.25rem);
+  --glp-text-2xl: clamp(1.375rem, 1.2rem + 0.6vw, 1.5rem);
+  --glp-text-3xl: clamp(1.625rem, 1.4rem + 0.9vw, 1.875rem);
+  --glp-text-4xl: clamp(2rem, 1.7rem + 1.2vw, 2.25rem);
+  --glp-text-5xl: clamp(2.5rem, 2rem + 2vw, 3rem);
+  --glp-text-6xl: clamp(3rem, 2.4rem + 2.5vw, 3.75rem);
+
+  /* Font weights */
+  --glp-weight-light: 300;
+  --glp-weight-normal: 400;
+  --glp-weight-medium: 500;
+  --glp-weight-semibold: 600;
+  --glp-weight-bold: 700;
+  --glp-weight-extrabold: 800;
+
+  /* Letter spacing */
+  --glp-tracking-tighter: -0.05em;
+  --glp-tracking-tight: -0.025em;
+  --glp-tracking-normal: 0;
+  --glp-tracking-wide: 0.025em;
+  --glp-tracking-wider: 0.05em;
+  --glp-tracking-widest: 0.1em;
+
+  /* Line heights */
+  --glp-leading-none: 1;
+  --glp-leading-tight: 1.2;
+  --glp-leading-snug: 1.35;
+  --glp-leading-normal: 1.5;
+  --glp-leading-relaxed: 1.65;
+  --glp-leading-loose: 2;
+
+  /* ------------------------------------------------------------
+    Enhanced Semantic Text Colors
+  ------------------------------------------------------------ */
+  --glp-text-primary: var(--glp-ink);
+  --glp-text-secondary: rgba(var(--glp-ink-rgb), 0.72);
+  --glp-text-tertiary: rgba(var(--glp-ink-rgb), 0.52);
+  --glp-text-disabled: rgba(var(--glp-ink-rgb), 0.36);
+  --glp-text-inverse: var(--glp-paper);
+  --glp-text-brand: var(--glp-sage-deep);
+  --glp-text-accent: var(--glp-gold);
+
+  /* ------------------------------------------------------------
+    Enhanced Shadow System — teal-tinted for brand cohesion
+  ------------------------------------------------------------ */
+  --glp-shadow-xs: 0 1px 3px rgba(22, 61, 61, 0.04);
+  --glp-shadow-sm: 0 2px 6px rgba(22, 61, 61, 0.05);
+  --glp-shadow-md: 0 4px 14px rgba(22, 61, 61, 0.07);
+  --glp-shadow-lg: 0 8px 28px rgba(22, 61, 61, 0.09);
+  --glp-shadow-xl: 0 16px 48px rgba(22, 61, 61, 0.11);
+  --glp-shadow-2xl: 0 24px 64px rgba(22, 61, 61, 0.14);
+  --glp-shadow-inner: inset 0 2px 4px rgba(22, 61, 61, 0.06);
+  --glp-shadow-glow-sage: 0 0 28px rgba(var(--glp-sage-rgb), 0.35);
+  --glp-shadow-glow-gold: 0 0 28px rgba(var(--glp-gold-rgb), 0.40);
+  --glp-shadow-glow-teal: 0 0 28px rgba(var(--glp-sage-deep-rgb), 0.30);
+
+  /* ------------------------------------------------------------
+    Premium Gradient Presets — layered, dimensional, mesmerizing
+  ------------------------------------------------------------ */
+  --glp-gradient-hero: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(var(--glp-sage-rgb), 0.20), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(var(--glp-blush-rgb), 0.12), transparent),
+    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(var(--glp-gold-rgb), 0.08), transparent),
+    linear-gradient(180deg, var(--glp-bg), var(--glp-surface));
+  
+  --glp-gradient-card: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.72));
+  --glp-gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0.06));
+  --glp-gradient-shimmer: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  --glp-gradient-sage: linear-gradient(135deg, var(--glp-sage), var(--glp-primary));
+  --glp-gradient-gold: linear-gradient(135deg, var(--glp-gold), var(--glp-warning-dark));
+  --glp-gradient-premium: linear-gradient(135deg, var(--glp-primary), var(--glp-sage), var(--glp-gold));
+
+  /* ------------------------------------------------------------
+    Animation Timing Functions
+  ------------------------------------------------------------ */
+  --glp-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --glp-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --glp-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --glp-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --glp-ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --glp-motion-slow: 400ms;
+
+  /* ------------------------------------------------------------
+    Z-Index Scale
+  ------------------------------------------------------------ */
+  --glp-z-base: 0;
+  --glp-z-dropdown: 100;
+  --glp-z-sticky: 200;
+  --glp-z-modal: 300;
+  --glp-z-popover: 400;
+  --glp-z-tooltip: 500;
+  --glp-z-toast: 600;
+}
+
+/* ------------------------------------------------------------
+  MODE 1: Low-Stim (reduced saturation + minimal decoration)
+  Apply by setting: <html data-mode="low-stim">
+------------------------------------------------------------ */
+html[data-mode="low-stim"]{
+  --glp-gold: #D9B43A;
+  --glp-gold-rgb: 217, 180, 58;
+
+  --glp-surface-2: #F4F2EE;
+  --glp-border: rgba(var(--glp-ink-rgb), 0.08);
+  --glp-shadow-1: none;
+  --glp-shadow-2: none;
+
+  --glp-primary: var(--glp-sage-deep);
+  --glp-accent: var(--glp-gold);
+  --glp-ring: var(--glp-gold);
+
+  --accent: var(--glp-gold);
+  --ring: var(--glp-gold);
+  --border: rgba(28, 43, 43, 0.08);
+  --surface-2: rgba(245, 243, 240, 0.70);
+}
+
+/* ------------------------------------------------------------
+  MODE 2: Reading (max legibility, no gradients, neutral surfaces)
+  Apply by setting: <html data-mode="reading">
+------------------------------------------------------------ */
+html[data-mode="reading"]{
+  --glp-bg: #FFFFFF;
+  --glp-paper: #FFFFFF;
+  --glp-paper-rgb: 255, 255, 255;
+
+  --glp-surface: #FFFFFF;
+  --glp-surface-2: #FAFAFA;
+
+  --glp-text: #2A2A2A;
+  --glp-ink: #2A2A2A;
+  --glp-ink-rgb: 42, 42, 42;
+  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.68);
+
+  --glp-border: rgba(var(--glp-ink-rgb), 0.14);
+  --glp-shadow-1: 0 2px 8px rgba(0,0,0,0.04);
+  --glp-shadow-2: 0 4px 16px rgba(0,0,0,0.06);
+
+  --glp-ring: var(--glp-gold);
+
+  --bg: #FFFFFF;
+  --text-1: #2A2A2A;
+  --text-2: rgba(42, 42, 42, 0.68);
+  --surface-1: #FFFFFF;
+  --surface-2: rgba(250, 250, 250, 0.85);
+  --primary-contrast: #FFFFFF;
+  --ring: var(--glp-gold);
+  --border: rgba(42, 42, 42, 0.14);
+}

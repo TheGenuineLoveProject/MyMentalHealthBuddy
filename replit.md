@@ -83,3 +83,18 @@ For the full architecture narrative (UI/UX, technical implementations, feature s
 - What was done: [REPLIT AI FILLS PATCH]
 - Gates: TSC=[PASS/FAIL], BUILD=[PASS/FAIL], ROUTE=[PASS/FAIL], VISUAL=[PASS/FAIL]
 - Rule followed: one blocker, one patch, verify, stop.
+
+## v5.8.95 — V47 Frontend Bug Fix Iteration 1
+- Scope: Patch existing runtime only
+- Fixed: [BUG CATEGORY]
+- File changed: [FILE]
+- Root cause: [ROOT CAUSE]
+- Patch: [SMALLEST SAFE FIX]
+- Gates:
+  - TSC=[PASS/FAIL]
+  - BUILD=[PASS/FAIL]
+  - ROUTE=[PASS/FAIL]
+  - VISUAL=[PASS/FAIL]
+- Rule followed:
+  one blocker → one patch → verify → stop
+

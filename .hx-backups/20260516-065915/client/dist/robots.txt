@@ -1,0 +1,81 @@
+# TheGenuineLoveProject - Robots.txt
+# Optimized for search engine crawling and indexing
+
+User-agent: *
+Allow: /
+Allow: /home
+Allow: /news
+Allow: /faq
+Allow: /healing-library
+Allow: /glossary
+Allow: /glossary-full
+Allow: /research
+Allow: /how-to-guides
+Allow: /daily-routines
+Allow: /cognitive-tools
+Allow: /breathing
+Allow: /grounding
+Allow: /calming-scenes
+Allow: /stress-response
+Allow: /sleep-guide
+Allow: /guided-journaling
+Allow: /tools
+Allow: /support
+Allow: /crisis
+Allow: /blog
+Allow: /pricing
+Allow: /about
+
+# Protected routes - do not index
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /today
+Disallow: /mood
+Disallow: /state
+Disallow: /journal
+Disallow: /chat
+Disallow: /analytics
+Disallow: /wellness
+Disallow: /premium
+Disallow: /settings
+Disallow: /upgrade
+Disallow: /admin
+Disallow: /content-admin
+Disallow: /onboarding
+Disallow: /control
+Disallow: /write
+Disallow: /social
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /account
+Disallow: /billing
+
+# Sitemap location
+Sitemap: https://mymentalhealthbuddy.com/sitemap.xml
+
+# Crawl delay (be nice to the server)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /settings
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /settings
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
