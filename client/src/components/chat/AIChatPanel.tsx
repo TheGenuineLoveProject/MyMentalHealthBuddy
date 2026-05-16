@@ -72,7 +72,7 @@ export default function AIChatPanel() {
     <div className="mx-auto max-w-3xl p-6">
       <nav
         aria-label="Chat navigation"
-        className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm"
+        className="mb-4 flex flex-wrap items-center gap-3 text-sm"
         data-testid="nav-chat-breadcrumbs"
       >
         <a
@@ -83,7 +83,7 @@ export default function AIChatPanel() {
           <span aria-hidden="true">←</span>
           <span>Back to Dashboard</span>
         </a>
-        <span className="text-gray-300" aria-hidden="true">·</span>
+        <span className="mx-1 text-gray-300" aria-hidden="true">·</span>
         <a href="/" className="text-gray-600 hover:underline" data-testid="link-chat-home">Home</a>
         <a href="/journal" className="text-gray-600 hover:underline" data-testid="link-chat-journal">Journal</a>
         <a href="/mood" className="text-gray-600 hover:underline" data-testid="link-chat-mood">Mood</a>
