@@ -6,8 +6,7 @@ import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/Healing
 
 // HX-OS Interaction Governance — passive crisis-language detection.
 // Pure read-only regex; no fetch, no AI, no behavior modification.
-const CRISIS_LANGUAGE_PATTERN =
-  /\b(suicide|suicidal|kill myself|killing myself|end it all|end my life|self[\s-]?harm|hurt myself|hurting myself|i want to die|no reason to live|don'?t want to be here|988|crisis hotline)\b/i;
+import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguagePattern";
 
 // Per HealingFlowProtectionRules.protectedHealingFlows — "journaling" is one of
 // the 8 protected healing flows. Pinned constant so any future split-route

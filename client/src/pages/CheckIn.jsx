@@ -22,8 +22,7 @@ import "@/styles/checkin.css";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
 // Pure read-only regex; no fetch, no AI, no behavior modification.
-const CRISIS_LANGUAGE_PATTERN =
-  /\b(suicide|suicidal|kill myself|killing myself|end it all|end my life|self[\s-]?harm|hurt myself|hurting myself|i want to die|no reason to live|don'?t want to be here|988|crisis hotline)\b/i;
+import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguagePattern";
 
 // Emotion-selection buckets that indicate vulnerability per MMHB v7.4 BHCE.
 // Pure enum lookup over the existing EMOTIONS list — no rewrite of emotional
