@@ -1,8 +1,21 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Clock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
+
+// HX-OS Interaction Governance — Runtime Enforcement (v5.8.127, Meditation iter 9).
+// Compile-time pin: "meditation" is a registered protected healing flow.
+const MEDITATION_IS_HEALING_FLOW =
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("meditation");
+
+// Categories that signal an emotional-regulation vulnerable state on this surface.
+// "Stress" and "Sleep" sessions are reached most often when the user is dysregulated;
+// observability only — does NOT branch UI, pacing, or recommendation behavior.
+const VULNERABLE_MEDITATION_CATEGORIES = new Set(["Stress", "Sleep"]);
 
 export default function MeditationPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -54,8 +67,56 @@ export default function MeditationPlayer() {
 
   const progress = (currentTime / duration) * 100;
 
+  // HX-OS Interaction Governance — passive derivations.
+  // No text input exists on this surface → crisisDetected is always-false by
+  // construction (same pattern as AtlasDashboard iter 3). Vulnerable signal
+  // derives from selected meditation category only. Observability only — does
+  // NOT branch pacing, audio, timing, recommendations, or any UI.
+  const crisisDetected = false;
+
+  const vulnerableState = useMemo(
+    () =>
+      selectedMeditation !== null &&
+      VULNERABLE_MEDITATION_CATEGORIES.has(selectedMeditation.category),
+    [selectedMeditation],
+  );
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: MEDITATION_IS_HEALING_FLOW || vulnerableState,
+      }),
+    [vulnerableState],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: "/tools/meditation",
+        action: "any-business-action",
+        emotionalState: {
+          crisisDetected,
+          isVulnerable: vulnerableState,
+        },
+      }),
+    [vulnerableState],
+  );
+
   return (
-    <div className="min-h-screen bg-background">
+    <div
+      className="min-h-screen bg-background"
+      data-meditation-governed="true"
+      data-healing-flow={MEDITATION_IS_HEALING_FLOW ? "true" : "false"}
+      data-crisis-active={crisisDetected ? "true" : "false"}
+      data-vulnerable={vulnerableState ? "true" : "false"}
+      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
+      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+    >
       <SEO title="Guided Meditation — The Genuine Love Project" />
 
       <main className="container mx-auto px-4 py-12 max-w-4xl">
