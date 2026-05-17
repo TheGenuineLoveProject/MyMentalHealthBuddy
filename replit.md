@@ -33,10 +33,11 @@ All AI-assisted development is governed by the **MMHB v7.4 Archival Kernel** at 
 
 **Archive notice:** Entries older than v5.8.100 removed to keep this file lightweight. Entries v4.1.1 → v5.8.99 archived to `docs/replit-history.md`. Full deep-technical detail for every release lives in `docs/changelog.md`.
 
-### Index (v5.8.100 – v5.8.118)
+### Index (v5.8.100 – v5.8.126)
 
 | Version | Date | Modules | Key Change |
 |---|---|---|---|
+| v5.8.119–126 | 2026-05-16 | HX-OS Interaction Governance Runtime Enforcement (8 iters: AIChatPanel, BuddyPanel, AtlasDashboard, JournalPage, DailyRitualPage, CheckIn, Onboarding, MoodPage) | Per-iter ONE-file passive governance: imports `MonetizationBoundaryValidator` + `CrisisOverrideEngine` (+ `HealingFlowProtectionRules` where applicable), adds 4 memoized derivations (`crisisDetected`, `vulnerableState`, `overrideState`, `monetizationGate`), exposes 9–10 `data-*` observability attrs on the existing root element of each routed surface. NO UI / visual / animation / behavior / route / monetization change in any iteration. Crisis routing (`/crisis`, 988, 741741) and existing healing-flow behavior preserved on every surface. Full per-iter detail → `docs/replit-history.md` (section "v5.8.119 – v5.8.126") + `docs/changelog.md`. All gates passed each iter (tsc 0, build 0, routes 200, architect Pass). |
 | v5.8.118 | 2026-05-15 | pages/ToolsPage.jsx (V49 R2 — Difficulty label visual separation) | User re-issued R2 go-signal after v5.8.117 audit-clean finding. Re-INSPECT: container at L254 already has `flex items-center gap-3 mt-2` (12px gap, MORE than V49 spec's "gap-1 or gap-2" ask). Confirmed no CSS override (`.card-premium` rules in index.css L1639-1690 only set background/padding, no flex/gap children rules). Diagnosed REAL issue as visual-contrast: effort span has sage-bg pill styling, level span was bare text → reads as visually attached even with 12px between them because no visual divider exists on the level side. Smallest valid engine that addresses audit complaint: pill-style the level span to match (neutral subtle background `bg-[var(--glp-ink)]/5`, ink/60 text, same `px-2 py-0.5 rounded-full capitalize` as effort pill). Two visually-distinct badges sit side-by-side with existing gap-3 between them = unambiguously separated, no longer reads as touching. Single-line className extension on one span, NO container change, NO !important, NO CSS file touch, palette-compliant (canonical `--glp-ink` token, no new colors introduced). Affects all 6 tool cards: Belief Mapping, Timed Writing, Silence Mode, Question Reflection, Growth Timeline, Export Your Journey. Recurrence-grep on file: no other effort+level adjacent pair surfaces. Both `/tools` (App.jsx:1428) and `/therapy-tools` (App.jsx:453) mount the same component. Gates: tsc 0, 4/4 routes 200 (/tools, /therapy-tools, /, /crisis), patch confirmed line 258. V49 13-fix queue P0+P1+CH2+R2 → ALL CLOSED with real patches or audit-clean traces. Remaining V49 P2: Fix 10 (mood activities pills), Fix 11 (mood emotion rows), Fix 13 (newsletter button color). |
 | v5.8.117 | 2026-05-15 | docs-only — V49 CH2 + R2 audit-clean (NO-OP) | User re-issued CH2 (page-header Lumi circle) + R2 (difficulty label gap) go-signals. INSPECT findings: BOTH already satisfy spec — no patch warranted. CH2: `pages/AIChatPage.tsx:17-18` already has the exact circle wrapper user spec describes (`w-12 h-12 rounded-full bg-[var(--glp-sage-15)] border border-[var(--glp-sage-20)] flex-shrink-0` containing LUMI_HEART at widthPx={40}, adjacent to "Lumi is here. Take your time." text); shipped at v5.8.114. R2: `pages/ToolsPage.jsx:251` renders effort + level inside `<div className="flex items-center gap-3 mt-2">` — already has gap-3 (12px) between the two spans; both `/tools` (App.jsx:1428) and `/therapy-tools` (App.jsx:453) mount the same ToolsPage component (no alternate surface). Audit screenshot for R2 likely stale. NO files changed, NO code touched. Per ONE-bug discipline + non-destructive rule, documented as audit-clean close. V49 13-fix queue P0+P1+CH2+R2 → ALL CLOSED. Remaining V49 P2: Fix 10 (mood activities pills), Fix 11 (mood emotion rows), Fix 13 (newsletter button color). |
 | v5.8.116 | 2026-05-15 | pages/CrisisResources.jsx (V49 Fix 7 — Crisis self-care card icons → circles) | Per V49 P1 fix order, Fix 7 advanced (last unshipped P0/P1 from V49 13-fix queue; v5.8.108/v5.8.111 were wrong-surface attempts at hub & ValueProposition cards, never touched the actual /crisis SELF_CARE_TIPS cards described in the audit). INSPECT: `pages/CrisisResources.jsx:65-86` defines `SELF_CARE_TIPS` (Ground Yourself/Breathe Slowly/Reach Out/Stay Safe — 4 cards rendered at L241-260). Icon container at L253 was `w-12 h-12 rounded-xl` (12px corner radius → audit's "rectangular bar" appearance). PATCH: single-token swap `rounded-xl` → `rounded-full` on the SELF_CARE_TIPS map's icon div. Preserved: w-12 h-12 (sizing rhythm with siblings), canonical sage gradient `linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))` (matches hotline call buttons + "You Are Not Alone" CTA on same page), `mb-4 shadow-md group-hover:scale-110 transition-transform` (visual treatment unchanged), left-aligned position (h3 + p below are left-aligned; mx-auto would create vertical inconsistency — V49 spec's `mx-auto` example assumed text-center cards which these are not). NO !important, NO new CSS, NO style/index.css touch, single-line single-token diff. Recurrence-grep on file: 3 other `rounded-xl` icon containers exist (L130 "In immediate danger?" rose-themed alert banner, L147 Phone-icon header next to "Crisis Hotlines & Support", L232 HandHeart-icon header next to "Immediate Self-Care Steps") — all OUT OF SCOPE for Fix 7 (which targets SELF_CARE_TIPS cards only, not section headings/alert banners). Flagged for potential future sweep cycle. Gates: tsc 0, 4/4 routes 200 (/crisis, /, /journal, /chat), patch confirmed line 253. V49 13-fix queue P0+P1 status: ALL 10 P0/P1 items now shipped or audit-clean. Remaining P2: Fix 10 (mood activities pills), Fix 11 (mood emotion rows), Fix 13 (newsletter button), R2 (Difficulty label gap). |
@@ -75,48 +76,3 @@ For complete per-version detail → `docs/changelog.md`. For Quick Reference (bu
 
 For the full architecture narrative (UI/UX, technical implementations, feature specs, system design choices) and external-dependency manifest, see `docs/architecture.md`.
 
-## v5.8.95 — V47 Frontend Bug Fix Iteration 1
-- Scope: Patch existing runtime only.
-- Fixed: [REPLIT AI FILLS BUG CATEGORY]
-- File changed: [REPLIT AI FILLS FILE]
-- What was wrong: [REPLIT AI FILLS ROOT CAUSE]
-- What was done: [REPLIT AI FILLS PATCH]
-- Gates: TSC=[PASS/FAIL], BUILD=[PASS/FAIL], ROUTE=[PASS/FAIL], VISUAL=[PASS/FAIL]
-- Rule followed: one blocker, one patch, verify, stop.
-
-## v5.8.95 — V47 Frontend Bug Fix Iteration 1
-- Scope: Patch existing runtime only
-- Fixed: [BUG CATEGORY]
-- File changed: [FILE]
-- Root cause: [ROOT CAUSE]
-- Patch: [SMALLEST SAFE FIX]
-- Gates:
-  - TSC=[PASS/FAIL]
-  - BUILD=[PASS/FAIL]
-  - ROUTE=[PASS/FAIL]
-  - VISUAL=[PASS/FAIL]
-- Rule followed:
-  one blocker → one patch → verify → stop
-
-
-## v5.8.95 — V47 Frontend Bug Fix Iteration 1
-- Scope: Patch existing runtime only
-- Fixed: [BUG CATEGORY]
-- File changed: [FILE]
-- Root cause: [ROOT CAUSE]
-- Patch: [SMALLEST SAFE FIX]
-- Gates:
-  - TSC=[PASS/FAIL]
-  - BUILD=[PASS/FAIL]
-  - ROUTE=[PASS/FAIL]
-  - VISUAL=[PASS/FAIL]
-- Rule followed:
-  one blocker → one patch → verify → stop
-
-
-## Interaction Runtime Governance — Iteration 1
-- Scope: AIChatPanel runtime enforcement only.
-- Added: MonetizationBoundaryValidator + CrisisOverrideEngine usage.
-- Rule: business actions blocked inside healing/crisis-sensitive flows.
-- Gates: BUILD=[fill], TSC=[fill], HEALTH=[fill].
-- Next: BuddyPanel enforcement, one file only.

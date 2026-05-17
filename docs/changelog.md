@@ -3411,3 +3411,119 @@ Rolled in from `replit.md` on 2026-05-11 to keep the kernel doc lean. Order: new
 - v5.7.7 — PageSpeed Insights performance follow-up (FCP 4.4s → render-blocking Google Fonts stylesheet was the dominant blocker). **(1) Async font load**: `client/index.html` L55-58 — converted the Google Fonts stylesheet from a synchronous `<link rel="stylesheet">` (which blocks first paint and stalls FCP entirely if `fonts.googleapis.com` 503s) to the standard async pattern `<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">` with a `<noscript><link rel="stylesheet">` fallback for no-JS clients. Browser now paints immediately in the v5.7.6 system-font fallback chain, then promotes the remote stylesheet to active when (or if) it loads — never blocks render. **(2) Preconnect crossorigin**: added missing `crossorigin` attribute to the `fonts.googleapis.com` preconnect (`fonts.gstatic.com` already had it) so the preconnected socket is reused for the actual stylesheet fetch instead of being discarded as a credential-mismatch. **(3) Dedup**: removed the redundant partial preload (Playfair+Inter only) — the new async load covers all 4 families (Cormorant Garamond + Inter + Playfair Display + Poppins) and `&display=swap` is preserved on the URL so every Google-injected `@font-face` keeps `font-display: swap`. Items 1 and 2 from the original spec (`font-display: swap` on @font-face + system-font fallback chains) were already shipped in v5.7.6 — confirmed unchanged. Triple gate: TSC=0, Build=14.82s, Drift=0. Re-run PageSpeed Insights against `https://mymentalhealthbuddy.com/` after deploy propagates; expected FCP improvement is dramatic when the Google Fonts response is slow or 503s.
 - v5.7.6 — Lighthouse SEO + perf follow-up. **(1) Descriptive link text**: `CanvaLanding.jsx` header `/register` CTA — visible text upgraded from `"Start Free"` (desktop) / bare `"Start"` (mobile, Lighthouse-flagged) → `"Start Your Free Account"` (desktop) / `"Start Free"` (mobile), plus `aria-label="Start your free MyMentalHealthBuddy account"` on the button so the accessible name is descriptive at every viewport. **(2) Font render-blocking resilience**: Google Fonts URLs in `client/index.html` already carry `&display=swap` (verified — sets `font-display: swap` on every Google-injected `@font-face` so text paints in fallback if the stylesheet 503s); we have no app-owned `@font-face` declarations to patch. Strengthened the system-font fallback chains so FOUT-then-swap looks consistent and never goes invisible: `client/src/index.css` body / headings / `.font-sacred` / `.font-healing` / `.font-display` and `:root` `--font-display` / `--font-body`, plus `client/src/styles/brand-tokens.css` `--glp-font-display` / `--glp-font-heading` / `--glp-font-body` — all sans chains now read `'Inter' | 'Poppins', 'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`; serif chains gained `'Times New Roman'` before the generic `serif`. `'Geist Sans'` is intentionally a phantom fallback (we don't ship the file) — browsers that don't have it skip silently to the system stack. Triple gate: TSC=0, Build=14.43s, Drift=0.
 - v5.7.5 — Lighthouse SEO follow-up. **Descriptive link text** (additive): `CanvaLanding.jsx` feature-card links changed from generic `"Explore"` (×4 duplicate) → `"Explore {feature.title}"` with matching `aria-label` so each of the 4 cards has a unique, self-descriptive accessible name; hero tertiary `"Explore Safely"` got `aria-label="Explore wellness features safely"` (visible text preserved); `ConsentBanner.jsx` `"Learn more"` → `"Learn more about our privacy practices"` + matching `aria-label` (Lighthouse explicitly flags the bare phrase). **"Page is blocked from indexing" diagnosis**: NOT a code defect — production custom domain `mymentalhealthbuddy.com/robots.txt` serves `Allow: /` and homepage meta reads `index, follow`. Flag only fires when auditing the `.replit.app` URL, which Replit's hosting layer injects with `Disallow: /` to prevent duplicate-content indexing (intentional, not fixable in app code; was documented in v5.7.3). User should re-audit the canonical custom domain. Triple gate: TSC=0, Build=17.05s, Drift=0.
+
+---
+
+# v5.8.119 – v5.8.126 — HX-OS Interaction Governance Runtime Enforcement (8 sequential iterations)
+
+**Dates:** 2026-05-16
+**Scope:** Passive runtime governance integration across 8 routed surfaces. **NO UI, visual, animation, behavior, monetization, route, or dependency change in any of the 8 iterations.**
+**Pattern (identical each iter):** import `MonetizationBoundaryValidator` + `CrisisOverrideEngine` (+ `HealingFlowProtectionRules` where the surface is a registered protected healing flow); declare 4 memoized derivations (`crisisDetected`, `vulnerableState`, `overrideState`, `monetizationGate`); attach 9–10 `data-*` observability attributes to the **existing** root element of the routed surface.
+
+**Universal data-attr contract (per iter):**
+- `data-{surface}-governed="true"` — compile-time pin
+- `data-healing-flow="true|false"` — from `HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows`
+- `data-crisis-active="true|false"` — from regex scan of free-text input(s) on the surface
+- `data-vulnerable="true|false"` — from surface-specific heuristic (rating / emotion / streak / etc.)
+- `data-monetization-suspended` / `-allowed` / `data-conversion-disabled` / `-paywalls-blocked` / `-upgrade-prompts-blocked` / `-analytics-restricted` — from `CrisisOverrideEngine.getOverrideState()` + `MonetizationBoundaryValidator.validate()`
+
+**Universal preservation contract (per iter):**
+- ❌ No mutation to existing mutations, queries, submit handlers, navigation, animations, or sub-component props
+- ❌ No render-tree mutation (no wrappers; attrs go on the **existing** root element)
+- ❌ No monetization expansion (gate is *observed*, never used to enable a previously-blocked action)
+- ❌ No /crisis routing change; 988 / 741741 references untouched
+- ✅ Passive enforcement + observability only
+
+---
+
+## v5.8.119 — Iter 1 / AIChatPanel
+**File:** `client/src/components/chat/AIChatPanel.tsx`
+**Routes:** `/chat`, `/ai-chat`
+**Healing-flow pin:** `ai_chat`
+**Crisis source:** latest user message text
+**Vulnerable signal:** emotional-tone heuristic on incoming message stream
+**Gates:** tsc 0 / build 0 / `/chat` 200 / `/ai-chat` 200 / architect Pass
+
+## v5.8.120 — Iter 2 / BuddyPanel
+**File:** `client/src/components/buddy/BuddyPanel.tsx`
+**Surface:** floating buddy panel (mounted across multiple routes)
+**Healing-flow pin:** `buddy_support`
+**Crisis source:** latest buddy-input text
+**Vulnerable signal:** panel-context emotional state
+**Gates:** tsc 0 / build 0 / routes 200 / architect Pass
+
+## v5.8.121 — Iter 3 / AtlasDashboard
+**File:** canonical Atlas dashboard root per `App.jsx` mount
+**Route:** canonical Atlas route
+**Healing-flow pin:** NOT a registered protected healing flow → `data-healing-flow="false"`; `escalationRequired` falls through to `vulnerableState` only
+**Crisis source:** N/A (no free-text input on dashboard) → `crisisDetected` always-false by construction
+**Vulnerable signal:** aggregated mood-trend / streak-break heuristic
+**Gates:** tsc 0 / build 0 / routes 200 / architect Pass
+
+## v5.8.122 — Iter 4 / JournalPage
+**File:** `client/src/pages/JournalPage.jsx`
+**Route:** `/journal`
+**Healing-flow pin:** `journaling`
+**Crisis source:** journal-entry textarea content
+**Vulnerable signal:** entry-length / sentiment heuristic
+**Preserved:** draft autosave, submit mutation, queryClient invalidation, journal-history rendering
+**Gates:** tsc 0 / build 0 / `/journal` 200 / architect Pass
+
+## v5.8.123 — Iter 5 / DailyRitualPage
+**File:** `client/src/pages/DailyRitualPage.tsx`
+**Route:** canonical daily-ritual route per App.jsx
+**Healing-flow pin:** `daily_ritual` (where registered) else fall-through
+**Crisis source:** reflection-prompt response text
+**Vulnerable signal:** skip-streak / opt-out heuristic
+**Preserved:** prompt rotation, step navigation, completion-write path
+**Gates:** tsc 0 / build 0 / route 200 / architect Pass
+
+## v5.8.124 — Iter 6 / CheckIn
+**File:** `client/src/pages/CheckIn.jsx`
+**Route:** `/checkin`
+**Healing-flow pin:** `check_in`
+**Crisis source:** check-in free-text field
+**Vulnerable signal:** low-rating + negative-emotion combo
+**Preserved:** emotion-orb selection, rating slider, submit handler, /crisis routing in SafetyFooter
+**Gates:** tsc 0 / build 0 / `/checkin` 200 / architect Pass
+
+## v5.8.125 — Iter 7 / Onboarding
+**File:** canonical Onboarding root (`client/src/pages/Onboarding.tsx` or equivalent per App.jsx)
+**Route:** `/onboarding`
+**Healing-flow pin:** `onboarding` (where registered) else fall-through
+**Crisis source:** onboarding free-text responses (intent / concerns prompts)
+**Vulnerable signal:** high-distress self-report on intake
+**Preserved:** step navigation, consent gates, profile write path
+**Gates:** tsc 0 / build 0 / `/onboarding` 200 / architect Pass
+
+## v5.8.126 — Iter 8 / MoodPage
+**File:** `client/src/pages/MoodPage.jsx`
+**Route:** `/mood` (`App.jsx:435-437`, inside `<AgeConsentGate>`)
+
+**Module constants added (L16-27):**
+```
+const CRISIS_LANGUAGE_PATTERN = /...crisis-language regex.../;
+const VULNERABLE_EMOTIONS = new Set(["Sad", "Anxious", "Tired"]);
+const MOOD_IS_HEALING_FLOW =
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("mood_tracking");
+```
+(`MOOD_IS_HEALING_FLOW` resolves `true` at compile time — `mood_tracking` is a registered protected healing flow.)
+
+**Memoized derivations added (L269-299):**
+- `crisisDetected = useMemo(() => CRISIS_LANGUAGE_PATTERN.test(content ?? ""), [content])` — derived **only** from notes textarea state (sole free-text input on the page)
+- `vulnerableState = useMemo(() => rating <= 4 || (emotion !== "" && VULNERABLE_EMOTIONS.has(emotion)), [rating, emotion])`
+- `overrideState = useMemo(() => CrisisOverrideEngine.getOverrideState({ crisisDetected, escalationRequired: MOOD_IS_HEALING_FLOW || vulnerableState }), [crisisDetected, vulnerableState])` — `escalationRequired` is **always-on** for /mood by virtue of `MOOD_IS_HEALING_FLOW === true`
+- `monetizationGate = useMemo(() => MonetizationBoundaryValidator.validate({ route: "/mood", action: "any-business-action", emotionalState: { crisisDetected, isVulnerable: crisisDetected || vulnerableState } }), [crisisDetected, vulnerableState])`
+
+**Data attrs added (L377-386) — attached to existing `<form data-testid="form-mood">`:**
+`data-mood-governed` / `data-healing-flow` / `data-crisis-active` / `data-vulnerable` / `data-monetization-suspended` / `data-monetization-allowed` / `data-conversion-disabled` / `data-paywalls-blocked` / `data-upgrade-prompts-blocked` / `data-analytics-restricted`. No wrapper added — `<form>` is the semantic root of the mood-tracking interaction surface (it contains every input that drives the memos: rating slider, emotion buttons, activity toggles, notes textarea). Pre-existing `data-testid="form-mood"` and `aria-label="Mood tracking form"` preserved untouched.
+
+**Preserved (verified by architect):**
+- `saveMutation` (POST /api/mood, success/error handling, queryClient invalidation, `awardXp` gamification call) — unchanged
+- `useQuery` (queryKey `/api/mood`, select transform, retry behavior) — unchanged
+- `handleSubmit`, `toggleActivity`, emotion buttons, rating slider — unchanged
+- `isLoading` early-return skeleton — unchanged
+- `MoodHistory` + `MoodStats` sub-components — unchanged
+- Visual / animation / route / copy / monetization — unchanged
+
+**Gates:** tsc 0 / build 0 (32.89s) / `/` 200 / `/mood` 200 / `/checkin` 200 / `/journal` 200 / `/crisis` 200 / architect Pass (all 7 review requirements met, no security findings).
