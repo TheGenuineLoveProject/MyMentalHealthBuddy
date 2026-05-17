@@ -209,10 +209,8 @@ const CLIENT_ROOT = path.join(__dirname, "..", "client");
 
 
 
-
-
 /* =========================================================
-   FINAL VERIFIED SPA FALLBACK
+   FINAL CANONICAL SPA SYSTEM
 ========================================================= */
 
 const CLIENT_DIST = path.join(process.cwd(), "client/dist");
@@ -234,21 +232,8 @@ app.get("*", (req, res, next) => {
   const indexFile = path.join(CLIENT_DIST, "index.html");
 
   console.log("[SPA ROUTE]", req.path);
-  console.log("[SPA INDEX]", indexFile);
 
   return res.sendFile(indexFile);
 
-});
-
-
-/* =========================================================
-   FINAL CANONICAL SERVER BOOT
-========================================================= */
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`[SERVER] Listening on port ${PORT}`);
-  console.log(`[SERVER] http://0.0.0.0:${PORT}`);
 });
 
