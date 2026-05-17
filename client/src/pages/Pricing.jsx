@@ -9,6 +9,7 @@ import { TrustSignals } from "../components/benefits";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import { getAuthToken } from "@/lib/api";
 import "@/styles/glp-pane.css";
 
 const freeTier = {
@@ -142,7 +143,12 @@ export default function Pricing() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   useEffect(() => {
-    fetch("/api/billing/pricing-view", { method: "POST", credentials: "include" }).catch(() => {});
+    const pricingViewToken = getAuthToken();
+    fetch("/api/billing/pricing-view", {
+      method: "POST",
+      credentials: "include",
+      headers: pricingViewToken ? { Authorization: `Bearer ${pricingViewToken}` } : {},
+    }).catch(() => {});
   }, []);
 
   const proTier = interval === "yearly" ? proYearly : proMonthly;
@@ -162,9 +168,13 @@ export default function Pricing() {
 
     setCheckingOut(true);
     try {
+      const checkoutToken = getAuthToken();
       const res = await fetch("/api/billing/checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(checkoutToken ? { Authorization: `Bearer ${checkoutToken}` } : {}),
+        },
         credentials: "include",
         body: JSON.stringify({ plan, interval: billingInterval }),
       });

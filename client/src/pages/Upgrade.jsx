@@ -6,6 +6,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import { getAuthToken } from "@/lib/api";
 
 const PRO_FEATURES = [
   { name: "Advanced analytics", description: "Deep insights into your wellness patterns", icon: Sparkles },
@@ -22,9 +23,13 @@ export default function Upgrade() {
   const handleUpgrade = async () => {
     setUpgrading(true);
     try {
+      const upgradeToken = getAuthToken();
       const res = await fetch("/api/billing/checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(upgradeToken ? { Authorization: `Bearer ${upgradeToken}` } : {}),
+        },
         credentials: "include",
         body: JSON.stringify({ plan: "pro", interval: "monthly" }),
       });

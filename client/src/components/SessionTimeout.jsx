@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Clock, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { getAuthToken } from "@/lib/api";
 
 const TIMEOUT_WARNING = 5 * 60 * 1000;
 const SESSION_TIMEOUT = 30 * 60 * 1000;
@@ -56,7 +57,12 @@ export default function SessionTimeout() {
 
   const handleExtend = async () => {
     try {
-      await fetch("/api/session/extend", { method: "POST", credentials: "include" });
+      const extendToken = getAuthToken();
+      await fetch("/api/session/extend", {
+        method: "POST",
+        credentials: "include",
+        headers: extendToken ? { Authorization: `Bearer ${extendToken}` } : {},
+      });
       resetTimer();
     } catch {
       resetTimer();

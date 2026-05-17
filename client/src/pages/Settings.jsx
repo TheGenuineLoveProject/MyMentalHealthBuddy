@@ -7,6 +7,7 @@ import { ReferralInvite } from "../components/referral";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import { getAuthToken } from "@/lib/api";
 import { OfficialLumi } from "@/lumi-registry";
 // Phase 16 Reflective Memory Layer — first /settings host (v5.8.82).
 // Mounting unlocks the consent grant button which in turn activates the
@@ -53,7 +54,11 @@ export default function Settings() {
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        const res = await fetch("/api/user-settings", { credentials: "include" });
+        const loadSettingsToken = getAuthToken();
+        const res = await fetch("/api/user-settings", {
+          credentials: "include",
+          headers: loadSettingsToken ? { Authorization: `Bearer ${loadSettingsToken}` } : {},
+        });
         if (res.ok) {
           const data = await res.json();
           if (data.preferences?.general) {
@@ -112,9 +117,13 @@ export default function Settings() {
     };
     
     try {
+      const savePrefsToken = getAuthToken();
       const res = await fetch("/api/user-settings", {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(savePrefsToken ? { Authorization: `Bearer ${savePrefsToken}` } : {}),
+        },
         credentials: "include",
         body: JSON.stringify({ preferences: { general: preferences } })
       });
@@ -162,8 +171,10 @@ export default function Settings() {
   async function handleExportData() {
     setIsExporting(true);
     try {
+      const exportToken = getAuthToken();
       const response = await fetch("/api/account/export", {
         credentials: "include",
+        headers: exportToken ? { Authorization: `Bearer ${exportToken}` } : {},
       });
       if (!response.ok) throw new Error("Export failed");
       
