@@ -148,10 +148,11 @@ app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
 // spans (custom orchestrator/awareness/protocol/crisis spans) inherit the
 // same correlation context. Both are no-op safe when OTel is disabled.
 {
-  const { requestId } = await import("./middleware/requestId.mjs");
+  const { requestId, requestLogger } = await import("./middleware/requestId.mjs");
   const { observabilityContext } = await import("./middleware/observabilityContext.mjs");
   app.use(requestId);
   app.use(observabilityContext);
+  app.use(requestLogger);
 }
 
 // ===== SESSION BOUNDARY FIRST (NO CSRF) =====
