@@ -5,11 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
-import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
-
-// HX-OS Interaction Governance — Runtime Enforcement (v5.8.127, Meditation iter 9).
-// Compile-time pin: "meditation" is a registered protected healing flow.
-  HEALING_FLOW_PROTECTION_RULES.isProtected("meditation");
 
 // Categories that signal an emotional-regulation vulnerable state on this surface.
 // "Stress" and "Sleep" sessions are reached most often when the user is dysregulated;

@@ -17,7 +17,6 @@ import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import { emotionToAvatar } from "@/lib/buddyEmotion";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
-import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 import "@/styles/checkin.css";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
@@ -33,12 +32,6 @@ const VULNERABLE_EMOTIONS = new Set([
   "frustration",
   "tiredness",
 ]);
-
-// Per HealingFlowProtectionRules.protectedHealingFlows — emotional check-in is
-// a "mood_tracking" + "companion_support" surface (both in the 8-flow protected
-// list). Pinned constant.
-  HEALING_FLOW_PROTECTION_RULES.isProtected("mood_tracking") ||
-  HEALING_FLOW_PROTECTION_RULES.isProtected("companion_support");
 
 const EMOTIONS = [
   { label: "Calm",       emotion: "calm",       emoji: "🌿" },

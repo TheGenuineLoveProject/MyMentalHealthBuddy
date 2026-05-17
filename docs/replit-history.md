@@ -156,3 +156,46 @@ Full per-iter trace of the HX-OS Interaction Governance Convergence phase. Compr
 - No governance logic changes.
 - No UI changes.
 - Purpose: reduce drift risk and dead-code accumulation after governance convergence.
+
+---
+
+## v5.8.134 – v5.8.137 — HX-OS Interaction Governance Convergence (P3E completion, iters 19–22)
+
+Continuation of P3E backports onto canonical 2-helper API (`deriveGovernance` + `buildGovernanceAttrs`) introduced at P3A (iter 13, v5.8.130).
+
+### Iter 19 (v5.8.134) — P3E-3 — `client/src/pages/CheckIn.jsx`
+- Imports swapped: removed `MonetizationBoundaryValidator` + `CrisisOverrideEngine`; added `deriveGovernance` + `buildGovernanceAttrs`; retained `HEALING_FLOW_PROTECTION_RULES` for orphan const `CHECKIN_IS_HEALING_FLOW`.
+- Memos: `overrideState` + `monetizationGate` replaced with `governance` memo `deriveGovernance({route:"/checkin", healingFlow:true, crisisDetected, vulnerable:vulnerableState, escalation:true})` + `governanceAttrs` memo `buildGovernanceAttrs({surface:"checkin", ...})`.
+- Root element: `{...governanceAttrs}` spread replacing 10 inline data-* attrs; preserved `data-phase` (surface-specific).
+- Parity: `CHECKIN_IS_HEALING_FLOW = isProtected("companion_support")||isProtected("reflection") = true||true = true`; `escalation:true` byte-equivalent.
+- Const `CHECKIN_IS_HEALING_FLOW` now orphaned (left in place per minimal-edit discipline).
+- Gates: tsc 0, build 0, /checkin /crisis / all 200, architect Pass.
+
+### Iter 20 (v5.8.135) — P3E-4 — `client/src/pages/Onboarding.tsx`
+- Same import + memo swap pattern. Spec literal `escalation:true` byte-equivalent for same reason (`ONBOARDING_IS_HEALING_FLOW` shares the same companion_support+reflection keys, both true).
+- Root element: `{...governanceAttrs}` spread; preserved `data-testid="card-onboarding"` + onboarding step state machine + goal-selection logic + auth flow + redirects + animations + WellnessPageShell wrapper.
+- `crisisDetected` memo pinned `useMemo(()=>false,[])` (no free-text input on onboarding) preserved; `vulnerableState` memo + deps `[selectedGoals]` preserved.
+- Const `ONBOARDING_IS_HEALING_FLOW` now orphaned.
+- User re-sent identical spec — first ship + idempotent re-verify in same cycle; final state confirmed clean.
+- Gates: tsc 0, build 0 (32.50s), /onboarding /crisis / all 200, architect Pass.
+
+### Iter 21 (v5.8.136) — P3E-5 — `client/src/pages/MoodPage.jsx`
+- Same import + memo swap pattern. `MOOD_IS_HEALING_FLOW = isProtected("mood_tracking") = true`; `escalation:true` byte-equivalent.
+- Root element is `<form>` not `<div>` — preserved form semantics: `onSubmit={handleSubmit}`, `className="space-y-6"`, `data-testid="form-mood"`, `aria-label="Mood tracking form"`; `{...governanceAttrs}` spread replaces 10 inline data-* attrs.
+- `crisisDetected` memo (`CRISIS_LANGUAGE_PATTERN.test(content ?? "")`, deps `[content]`) + `vulnerableState` memo (`rating <= 4 || VULNERABLE_EMOTIONS.has(emotion)`, deps `[rating, emotion]`) preserved.
+- Const `MOOD_IS_HEALING_FLOW` now orphaned.
+- Gates: tsc 0, build 0 (31.84s), /mood /crisis / all 200, architect Pass.
+
+### Iter 22 (v5.8.137) — P3E-6 — `client/src/pages/tools/MeditationPlayer.jsx`
+- Same import + memo swap pattern. `MEDITATION_IS_HEALING_FLOW = isProtected("meditation") = true`; `escalation:true` byte-equivalent.
+- Root div className `min-h-screen bg-background` preserved; `{...governanceAttrs}` spread replaces 10 inline data-* attrs.
+- Special-case: `crisisDetected` is literal `const crisisDetected = false` (no text input on meditation surface) — preserved; helper `crisisDetected || vulnerable = false || vulnerableState = vulnerableState` byte-equivalent to pre-backport `isVulnerable: vulnerableState`.
+- `vulnerableState` memo (`VULNERABLE_MEDITATION_CATEGORIES.has(selectedMeditation.category)`, deps `[selectedMeditation]`) preserved.
+- Intermediate edit produced a transient malformed `_monetizationGateUnused` stub which was cleaned up in the same iter before verify; final file has zero residual dead memos (architect confirmed).
+- Const `MEDITATION_IS_HEALING_FLOW` now orphaned.
+- Gates: tsc 0, build 0 (29.52s), /tools/meditation /meditation /crisis / all 200, architect Pass.
+
+### Phase status
+- P3E complete: all 6 P3E backports shipped (JournalPage P3E-1/iter17, DailyRitualPage P3E-2/iter18, CheckIn P3E-3/iter19, Onboarding P3E-4/iter20, MoodPage P3E-5/iter21, MeditationPlayer P3E-6/iter22).
+- Pending follow-ups: 5 orphaned `*_IS_HEALING_FLOW` consts pending sweep cycle; stray untracked `client/src/components/AIChatPanel.tsx` pending deletion verification.
+- Runtime layer frozen mid-cycle: `package.json` inert `dev:clean` script removed at v5.8.137-runtime (single-line, no caller, no behavior change). `.replit` + workflow boot path + `server/app.mjs` unchanged.

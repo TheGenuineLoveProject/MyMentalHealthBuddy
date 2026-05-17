@@ -9,7 +9,6 @@ import { pickBenefits } from "@/lib/benefits";
 import DataExportButton from "../components/DataExportButton";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
-import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 import "../styles/sacred-visuals.css";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
@@ -20,10 +19,6 @@ import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguag
 // per MMHB v7.4 BHCE. Pure enum lookup — no rewrite of mood selection logic,
 // no rerank, no UI mutation.
 const VULNERABLE_EMOTIONS = new Set(["Sad", "Anxious", "Tired"]);
-
-// Per HealingFlowProtectionRules.protectedHealingFlows — /mood is the literal
-// "mood_tracking" surface in the 8-flow protected list. Pinned constant.
-  HEALING_FLOW_PROTECTION_RULES.isProtected("mood_tracking");
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "#f59e0b", bgColor: "#fef3c7", tw: "border-amber-400 bg-amber-50 dark:bg-amber-950/40" },

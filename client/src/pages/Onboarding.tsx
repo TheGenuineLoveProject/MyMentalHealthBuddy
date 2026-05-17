@@ -9,7 +9,6 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
-import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 
 // HX-OS Interaction Governance — onboarding goal-selections that correlate
 // with vulnerability per MMHB v7.4 BHCE. Pure enum lookup over the existing
@@ -20,12 +19,6 @@ const VULNERABLE_GOAL_IDS = new Set<string>([
   "emotional_healing",
   "stress_management",
 ]);
-
-// Per HealingFlowProtectionRules.protectedHealingFlows — onboarding configures
-// "companion_support" + "reflection" surfaces (both in the 8-flow protected
-// list). Pinned constant.
-  HEALING_FLOW_PROTECTION_RULES.isProtected("companion_support") ||
-  HEALING_FLOW_PROTECTION_RULES.isProtected("reflection");
 
 const STEPS = ["intro", "goals", "support", "reminders", "disclaimer"];
 

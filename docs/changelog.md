@@ -1,3 +1,54 @@
+# v5.8.134 – v5.8.137 — HX-OS Interaction Governance Convergence (P3E completion, 4 iters)
+
+**Phase summary:** Completion of P3E backports onto canonical 2-helper API (`deriveGovernance` + `buildGovernanceAttrs`). 4 iters, zero runtime behavior change, byte-equivalent parity per iter. P3E phase now complete (all 6 P3E-1..P3E-6 surfaces shipped).
+
+## Iter-by-iter trace
+
+### Iter 19 / v5.8.134 / P3E-3 — `client/src/pages/CheckIn.jsx`
+- **Imports (L?-?):** removed `MonetizationBoundaryValidator` + `CrisisOverrideEngine` direct imports; added `deriveGovernance` + `buildGovernanceAttrs`; retained `HEALING_FLOW_PROTECTION_RULES` import for `CHECKIN_IS_HEALING_FLOW` const.
+- **Memo migration:** `overrideState` + `monetizationGate` (2 memos) → `governance` + `governanceAttrs` (2 memos).
+  - `governance = useMemo(() => deriveGovernance({route:"/checkin", healingFlow:true, crisisDetected, vulnerable:vulnerableState, escalation:true}), [crisisDetected, vulnerableState])`
+  - `governanceAttrs = useMemo(() => buildGovernanceAttrs({surface:"checkin", healingFlow:true, crisisDetected, vulnerable:vulnerableState, overrideState:governance.overrideState, monetizationGate:governance.monetizationGate}), [crisisDetected, vulnerableState, governance])`
+- **Root JSX:** `{...governanceAttrs}` spread replaces 10 inline `data-*` attrs; `data-phase` (surface-specific) preserved on root.
+- **Parity proof:** `CHECKIN_IS_HEALING_FLOW = isProtected("companion_support") || isProtected("reflection") = true || true = true` → escalation always true → spec literal `escalation:true` byte-equivalent.
+- **Const status:** `CHECKIN_IS_HEALING_FLOW` now orphaned (no remaining readers). Left in place per minimal-edit discipline.
+- **Gates:** tsc 0; build 0; grep zero; routes /checkin /crisis / → 200; architect Pass.
+
+### Iter 20 / v5.8.135 / P3E-4 — `client/src/pages/Onboarding.tsx`
+- Identical pattern. `ONBOARDING_IS_HEALING_FLOW` same companion_support+reflection composition → escalation always true → `escalation:true` byte-equivalent.
+- **`crisisDetected` memo** pinned `useMemo(() => false, [])` (no free-text input on onboarding) preserved.
+- **`vulnerableState` memo** `selectedGoals.some(g => VULNERABLE_GOAL_IDS.has(g))` + deps `[selectedGoals]` preserved.
+- **Root JSX:** `{...governanceAttrs}` spread; preserved `data-testid="card-onboarding"` + STEPS state machine + goal selection + auth flow + redirects + animations + WellnessPageShell wrapper.
+- **Const status:** `ONBOARDING_IS_HEALING_FLOW` orphaned.
+- **Special note:** user re-sent the identical spec mid-cycle. First ship + idempotent re-verify done in the same session — final state confirmed clean both times.
+- **Gates:** tsc 0; build 0 (32.50s); grep zero; routes /onboarding /crisis / → 200; architect Pass.
+
+### Iter 21 / v5.8.136 / P3E-5 — `client/src/pages/MoodPage.jsx`
+- Identical pattern. `MOOD_IS_HEALING_FLOW = isProtected("mood_tracking") = true` → `escalation:true` byte-equivalent.
+- **Form root:** `<form onSubmit={handleSubmit} className="space-y-6" data-testid="form-mood" aria-label="Mood tracking form" {...governanceAttrs}>` — form semantics + aria-label + testid all preserved alongside spread.
+- **`crisisDetected` memo** `CRISIS_LANGUAGE_PATTERN.test(content ?? "")` + deps `[content]` preserved.
+- **`vulnerableState` memo** `rating <= 4 || (emotion !== "" && VULNERABLE_EMOTIONS.has(emotion))` + deps `[rating, emotion]` preserved.
+- **Const status:** `MOOD_IS_HEALING_FLOW` orphaned.
+- **Gates:** tsc 0; build 0 (31.84s); grep zero; routes /mood /crisis / → 200; architect Pass.
+
+### Iter 22 / v5.8.137 / P3E-6 — `client/src/pages/tools/MeditationPlayer.jsx`
+- Identical pattern. `MEDITATION_IS_HEALING_FLOW = isProtected("meditation") = true` → `escalation:true` byte-equivalent.
+- **Special case:** `crisisDetected` is literal `const crisisDetected = false` (no text-input surface) — preserved unchanged. Pre-backport monetization input was `isVulnerable: vulnerableState`; helper computes `crisisDetected || vulnerable = false || vulnerableState = vulnerableState` → byte-equivalent.
+- **`vulnerableState` memo** `VULNERABLE_MEDITATION_CATEGORIES.has(selectedMeditation.category)` + deps `[selectedMeditation]` preserved.
+- **Root JSX:** `<div className="min-h-screen bg-background" {...governanceAttrs}>` — className preserved, 10 inline data-* attrs removed in favor of spread.
+- **Intermediate edit quality issue (caught + recovered same iter):** first edit transition produced a malformed `_monetizationGateUnused` useMemo stub from a mis-targeted old_string boundary. Detected by structural re-read, cleaned up via second edit removing the stub + the residual 10 inline data-* attrs together. Final file (verified by grep + architect) contains zero `_monetizationGateUnused`, zero residual dead memos, zero `overrideState.` or `monetizationGate.` references outside the canonical helper return values.
+- **Const status:** `MEDITATION_IS_HEALING_FLOW` orphaned.
+- **Gates:** tsc 0; build 0 (29.52s); grep zero; routes /tools/meditation /meditation /crisis / → 200; architect Pass.
+
+## Phase wrap
+
+- **P3E status:** complete. All 6 P3E backports shipped across iters 17–22 (JournalPage, DailyRitualPage, CheckIn, Onboarding, MoodPage, MeditationPlayer).
+- **Orphan consts pending sweep cycle:** `RITUAL_IS_HEALING_FLOW` (DailyRitualPage), `CHECKIN_IS_HEALING_FLOW`, `ONBOARDING_IS_HEALING_FLOW`, `MOOD_IS_HEALING_FLOW`, `MEDITATION_IS_HEALING_FLOW` — 5 total.
+- **Stray file pending verification + deletion:** untracked `client/src/components/AIChatPanel.tsx`.
+- **Runtime hygiene side-quest (same session):** removed inert `"dev:clean"` script from `package.json` (single line, no caller anywhere in `.replit` / workflow / scripts / docs, contained `pkill -f "node server/app.mjs"` pattern). Zero behavior change. Workflow boot path `node --import ./server/observability/preload.mjs server/app.mjs` unchanged. `server/app.mjs` not touched. Runtime layer now frozen for this work cycle.
+
+---
+
 # v5.8.127 – v5.8.133 — HX-OS Interaction Governance Convergence (10 iters, Phases P1/P2/P3A–P3E)
 
 **Phase summary:** Convergence of per-surface inline governance (shipped v5.8.119–127) onto a canonical 2-helper API: `deriveGovernance` + `buildGovernanceAttrs`. Zero runtime behavior change across all 10 iters; byte-equivalent parity proven per iter.

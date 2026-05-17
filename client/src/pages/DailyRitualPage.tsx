@@ -5,17 +5,10 @@ import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
-import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
 // Pure read-only regex; no fetch, no AI, no behavior modification.
 import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguagePattern";
-
-// Per HealingFlowProtectionRules.protectedHealingFlows — "ritual" + "meditation"
-// are both in the 8-flow protected list. /ritual is also CROSS_DOMAIN regulated
-// per AtlasRoutingGovernance. Pinned constant.
-  HEALING_FLOW_PROTECTION_RULES.isProtected("ritual") ||
-  HEALING_FLOW_PROTECTION_RULES.isProtected("meditation");
 
 const RITUAL_CLARITY = {
   what: "A daily check-in practice to assess your inner state across six dimensions: energy, clarity, openness, regulation, presence, and pace.",
