@@ -144,6 +144,7 @@ app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
 
 // ===== SESSION BOUNDARY FIRST (NO CSRF) =====
 app.use('/api/session-boundary', sessionBoundaryRoutes);
+app.use("/api/health", healthRoutes);
 
 // ===== THEN APPLY CSRF GLOBALLY =====
 app.use(csrfProtection);
@@ -206,10 +207,6 @@ const adminLimiter = rateLimit({
 
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
 const CLIENT_ROOT = path.join(__dirname, "..", "client");
-
-
-
-
 
 /* =========================================================
    FINAL VERIFIED SPA FALLBACK
