@@ -3,6 +3,7 @@ import adminSecurityRoutes from "./routes/admin-security.mjs";
 import authRoutes from "./routes/auth.mjs";
 import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
 import billingRoutes from "./routes/billing.mjs";
+import webhookRoutes from "./routes/webhook.mjs";
 process.on('uncaughtException', (err) => {
   console.error('UNCAUGHT ERROR:', err);
   // Fire-and-forget PagerDuty alert. Dynamic import avoids circular boot
@@ -101,6 +102,10 @@ app.use(cors({
   },
   credentials: true,
 }));
+// ===== STRIPE WEBHOOK — MUST mount BEFORE express.json so the router's
+// route-level express.raw() can read the raw byte stream for HMAC
+// signature verification. Server-to-server only; no cookies/CSRF needed.
+app.use("/api/webhooks", webhookRoutes);
 app.use(express.json({
   // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks
   // (HealthKit). Other handlers continue using req.body unchanged.
