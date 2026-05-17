@@ -4,14 +4,18 @@ import { logger } from "./logger.mjs";
 const isProduction = process.env.NODE_ENV === "production";
 
 function getJwtSecret() {
-  if (process.env.JWT_SECRET || "dev_insecure_secret_change_me" || "dev_insecure_secret_change_me") {
-    return process.env.JWT_SECRET || "dev_insecure_secret_change_me" || "dev_insecure_secret_change_me";
+  const secret = process.env.JWT_SECRET;
+  if (secret && secret.length > 0) {
+    return secret;
   }
   if (isProduction) {
     logger.error("CRITICAL: JWT_SECRET must be set in production!");
     process.exit(1);
   }
-  return "dev-jwt-secret-genuine-love-project-2024";
+  console.warn(
+    "[utils/jwt] WARNING: JWT_SECRET is not set. Using insecure development fallback. DO NOT USE IN PRODUCTION."
+  );
+  return "dev_insecure_secret_change_me";
 }
 
 const JWT_SECRET = getJwtSecret();
