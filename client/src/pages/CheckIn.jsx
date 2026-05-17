@@ -15,8 +15,8 @@ import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import { emotionToAvatar } from "@/lib/buddyEmotion";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
 import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 import "@/styles/checkin.css";
 
@@ -152,26 +152,29 @@ export default function CheckIn() {
     [emotion, intensity],
   );
 
-  const overrideState = useMemo(
+  const governance = useMemo(
     () =>
-      CrisisOverrideEngine.getOverrideState({
+      deriveGovernance({
+        route: "/checkin",
+        healingFlow: true,
         crisisDetected,
-        escalationRequired: CHECKIN_IS_HEALING_FLOW || vulnerableState,
+        vulnerable: vulnerableState,
+        escalation: true,
       }),
     [crisisDetected, vulnerableState],
   );
 
-  const monetizationGate = useMemo(
+  const governanceAttrs = useMemo(
     () =>
-      MonetizationBoundaryValidator.validate({
-        route: "/checkin",
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable: crisisDetected || vulnerableState,
-        },
+      buildGovernanceAttrs({
+        surface: "checkin",
+        healingFlow: true,
+        crisisDetected,
+        vulnerable: vulnerableState,
+        overrideState: governance.overrideState,
+        monetizationGate: governance.monetizationGate,
       }),
-    [crisisDetected, vulnerableState],
+    [crisisDetected, vulnerableState, governance],
   );
 
   return (
@@ -179,16 +182,7 @@ export default function CheckIn() {
       className="hxos-vnext checkin-polish min-h-screen"
       style={{ background: 'var(--glp-paper, #F7F4EE)' }}
       data-phase={phase}
-      data-checkin-governed="true"
-      data-healing-flow={CHECKIN_IS_HEALING_FLOW ? "true" : "false"}
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-vulnerable={vulnerableState ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
-      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
-      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+      {...governanceAttrs}
     >
       {/* Soft purple wash over the emerald gradient — V10 §3.3 spec. */}
       <div className="checkin-wash" aria-hidden="true" />
