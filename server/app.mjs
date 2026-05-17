@@ -2,13 +2,14 @@ import adminPublishingRoutes from "./routes/admin-publishing.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
 import authRoutes from "./routes/auth.mjs";
 import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
+import billingRoutes from "./routes/billing.mjs";
 process.on('uncaughtException', (err) => {
   console.error('UNCAUGHT ERROR:', err);
   // Fire-and-forget PagerDuty alert. Dynamic import avoids circular boot
   // ordering and keeps the handler safe even if the alerter fails to load.
   import('./observability/safetyAlerts.mjs')
     .then(({ alertUncaught }) => alertUncaught({ kind: 'uncaughtException', error: err }))
-    .catch(() => {});
+    .catch(() => { });
   // Observability O3: after alert dispatch, force exit so the Replit supervisor
   // can restart cleanly rather than leaving Node in a corrupted state. Timer is
   // .unref()'d so it never holds the loop open on its own.
@@ -21,7 +22,7 @@ process.on('unhandledRejection', (err) => {
   console.error('UNHANDLED PROMISE:', err);
   import('./observability/safetyAlerts.mjs')
     .then(({ alertUncaught }) => alertUncaught({ kind: 'unhandledRejection', error: err }))
-    .catch(() => {});
+    .catch(() => { });
   // Observability O3: after alert dispatch, force exit so the Replit supervisor
   // can restart cleanly rather than leaving Node in a corrupted state. Timer is
   // .unref()'d so it never holds the loop open on its own.
@@ -116,29 +117,29 @@ console.log(`[boot] mode=${IS_DEV ? "development" : "production"} (NODE_ENV=${pr
 app.use(helmet({
   contentSecurityPolicy: IS_DEV
     ? {
-        useDefaults: true,
-        directives: {
-          "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-          "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-          "connect-src": ["'self'", "ws:", "wss:", "http:", "https:"],
-          "img-src": ["'self'", "data:", "blob:", "https:"],
-          "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
-        },
-      }
-    : {
-        useDefaults: true,
-        directives: {
-          // 'unsafe-inline' required for the inline theme-bootstrap IIFE in client/index.html
-          // (prevents FOUC / dark-mode flicker on a mental-wellness surface). External JS
-          // is still locked to 'self' + Stripe.
-          "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
-          "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-          "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
-          "img-src": ["'self'", "data:", "blob:", "https:"],
-          "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
-          "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
-        },
+      useDefaults: true,
+      directives: {
+        "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        "connect-src": ["'self'", "ws:", "wss:", "http:", "https:"],
+        "img-src": ["'self'", "data:", "blob:", "https:"],
+        "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
       },
+    }
+    : {
+      useDefaults: true,
+      directives: {
+        // 'unsafe-inline' required for the inline theme-bootstrap IIFE in client/index.html
+        // (prevents FOUC / dark-mode flicker on a mental-wellness surface). External JS
+        // is still locked to 'self' + Stripe.
+        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+        "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+        "img-src": ["'self'", "data:", "blob:", "https:"],
+        "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
+        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+      },
+    },
 }));
 app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
 
@@ -264,7 +265,7 @@ const streaksLimiter = rateLimit({
 });
 
 app.use("/api/streaks", streaksLimiter, optionalAuth, streaksRoutes);
-
+app.use("/api/billing", billingRoutes);
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
 const CLIENT_ROOT = path.join(__dirname, "..", "client");
 
@@ -351,5 +352,5 @@ function gracefulShutdown(signal) {
 }
 
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
-process.on("SIGINT",  () => gracefulShutdown("SIGINT"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 
