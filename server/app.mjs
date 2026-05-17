@@ -226,7 +226,7 @@ const adminLimiter = rateLimit({
 // /api/session-boundary and /api/health mounts.
 //
 // DEFERRED (not mounted in this cycle, pending separate audit):
-//   - adminSecurityRoutes  (no internal auth gating)
+//   - adminSecurityRoutes  (mounted P2.1.1 with external requireAuth+requireAdmin wrap)
 //   - aiBusinessRoutes     (apparent duplicate-content overlap)
 //   - buddyRoutes          (path-doubling /buddy/buddy; no auth)
 //   - streaksRoutes        (no auth on /me user-data endpoint)
@@ -242,6 +242,7 @@ app.use("/api/ai", aiRoutes);
 app.use("/api/ai/healing", aiHealingRoutes);
 app.use("/api/admin/billing", adminBillingRoutes);
 app.use("/api/admin/publishing", adminPublishingRoutes);
+app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/telemetry", telemetryRoutes);
 
