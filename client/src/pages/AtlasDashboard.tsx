@@ -6,8 +6,8 @@ import {
   isRegulatedAtlasRoute,
   ATLAS_ROUTE_GOVERNANCE,
 } from "@/governance/interactions/AtlasRoutingGovernance";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
 
 // HX-OS Interaction Governance — Atlas-aware healing-flow surface allowlist.
 // Routes here are treated as regulated cognitive/healing flows where Atlas
@@ -242,28 +242,36 @@ export default function AtlasDashboard() {
   const crisisDetected = false;
   const isVulnerable = false;
 
-  const overrideState = useMemo(
+  const governance = useMemo(
     () =>
-      CrisisOverrideEngine.getOverrideState({
+      deriveGovernance({
+        route: "/atlas",
+        healingFlow,
         crisisDetected,
-        escalationRequired: healingFlow,
+        vulnerable: isVulnerable,
+        escalation: healingFlow,
       }),
-    [healingFlow],
+    [healingFlow, crisisDetected, isVulnerable],
   );
 
-  const monetizationGate = useMemo(
+  const governanceAttrs = useMemo(
     () =>
-      MonetizationBoundaryValidator.validate({
-        route: currentRoute,
-        action: "any-business-action",
-        emotionalState: { crisisDetected, isVulnerable },
+      buildGovernanceAttrs({
+        surface: "atlas",
+        healingFlow,
+        crisisDetected,
+        vulnerable: isVulnerable,
+        overrideState: governance.overrideState,
+        monetizationGate: governance.monetizationGate,
       }),
-    [],
+    [healingFlow, crisisDetected, isVulnerable, governance],
   );
 
   // Per-category route governance map — passive enforcement metadata so any
   // future business action attached to a category link knows up-front whether
   // its destination is regulated. No effect on rendering or link behavior.
+  // (monetizationAllowed field dropped during iter 16/P3D backport — it was
+  // computed but never read; preserving the read-paths regulated/domain only.)
   const categoryGovernance = useMemo(
     () =>
       TOOL_CATEGORIES.map((c) => ({
@@ -273,11 +281,6 @@ export default function AtlasDashboard() {
         domain:
           ATLAS_ROUTE_GOVERNANCE.find((r) => r.route === c.route)?.domain ??
           "UNREGISTERED",
-        monetizationAllowed: MonetizationBoundaryValidator.validate({
-          route: c.route,
-          action: "category-link",
-          emotionalState: { crisisDetected, isVulnerable },
-        }).allowed,
       })),
     [],
   );
@@ -309,15 +312,8 @@ export default function AtlasDashboard() {
       data-atlas-route={currentRoute}
       data-atlas-route-regulated={routeRegulated ? "true" : "false"}
       data-atlas-healing-flow={healingFlow ? "true" : "false"}
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-vulnerable={isVulnerable ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
-      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
-      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
       data-atlas-categories-regulated={`${categoriesRegulatedCount}/${categoryGovernance.length}`}
+      {...governanceAttrs}
     >
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto">
