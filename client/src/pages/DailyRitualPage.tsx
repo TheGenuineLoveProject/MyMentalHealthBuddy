@@ -3,8 +3,8 @@ import { reflectionModes, getRandomQuestion } from "@/lib/reflectionModes";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
 import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
@@ -226,26 +226,29 @@ export default function DailyRitualPage() {
     [reflectionText],
   );
 
-  const overrideState = useMemo(
+  const governance = useMemo(
     () =>
-      CrisisOverrideEngine.getOverrideState({
+      deriveGovernance({
+        route: "/ritual",
+        healingFlow: true,
         crisisDetected,
-        escalationRequired: RITUAL_IS_HEALING_FLOW,
+        vulnerable: crisisDetected,
+        escalation: true,
       }),
     [crisisDetected],
   );
 
-  const monetizationGate = useMemo(
+  const governanceAttrs = useMemo(
     () =>
-      MonetizationBoundaryValidator.validate({
-        route: "/ritual",
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable: crisisDetected,
-        },
+      buildGovernanceAttrs({
+        surface: "ritual",
+        healingFlow: true,
+        crisisDetected,
+        vulnerable: crisisDetected,
+        overrideState: governance.overrideState,
+        monetizationGate: governance.monetizationGate,
       }),
-    [crisisDetected],
+    [crisisDetected, governance],
   );
 
   return (
@@ -273,15 +276,7 @@ export default function DailyRitualPage() {
     <div
       className="min-h-screen v28-paper-bg"
       data-testid="ritual-page-root"
-      data-ritual-governed="true"
-      data-healing-flow={RITUAL_IS_HEALING_FLOW ? "true" : "false"}
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
-      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
-      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+      {...governanceAttrs}
     >
       <div className="content-wrapper py-8">
         <div className="mx-auto max-w-2xl">
