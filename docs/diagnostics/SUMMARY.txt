@@ -1,8 +1,0 @@
-# HX-OS Platform Analysis Snapshot
-# Generated: 2026-05-15T07:54:15Z
-
-platform-tree.txt              3421 lines
-code-files.txt                 7378 lines
-runtime-scan.txt                180 lines
-frontend-api-scan.txt           922 lines
-domain-scan.txt                1302 lines
