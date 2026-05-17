@@ -229,7 +229,7 @@ const adminLimiter = rateLimit({
 //   - adminSecurityRoutes  (mounted P2.1.1 with external requireAuth+requireAdmin wrap)
 //   - aiBusinessRoutes     (mounted P2.2.1 — internally gated BUSINESS-domain sibling of aiHealingRoutes)
 //   - buddyRoutes          (mounted P2.3.1 at /api prefix; canonical POST /api/buddy; anonymous-by-design BHCE flow)
-//   - streaksRoutes        (no auth on /me user-data endpoint)
+//   - streaksRoutes        (mounted P2.4.2 at /api/streaks with optionalAuth wrap; PLATFORM-domain engagement counter; GET /me anon-safe, POST /checkin internal 401)
 //
 // Limiter scoping for admin:
 //   adminLoginLimiter → ONLY /api/admin/verify-token (strict brute-force)
@@ -255,6 +255,15 @@ const buddyLimiter = rateLimit({
 
 app.use("/api/buddy", buddyLimiter);
 app.use("/api", buddyRoutes);
+
+// Streaks engagement counter — optionalAuth populates req.user for the
+// router's hand-rolled identity read; POST /checkin self-gates with 401.
+const streaksLimiter = rateLimit({
+  windowMs: 60_000,
+  max: 60,
+});
+
+app.use("/api/streaks", streaksLimiter, optionalAuth, streaksRoutes);
 
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
 const CLIENT_ROOT = path.join(__dirname, "..", "client");

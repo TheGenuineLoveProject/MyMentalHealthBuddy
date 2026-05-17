@@ -5,6 +5,7 @@ import BuddyPanel from "@/components/avatar/BuddyPanel";
 import type { BuddyState } from "@/lib/avatarState";
 import UpsellModal from '../components/UpsellModal';
 import FeedbackPrompt from "@/components/FeedbackPrompt";
+import { getAuthToken } from "@/lib/api";
 
 type ToolPayload = {
   tool: { id: string; title: string; type: string; durationMin: number };
@@ -461,8 +462,12 @@ export default function Start() {
     track("buddy_accessibility_ready");
     void (async () => {
       try {
+        const streakToken = getAuthToken();
         const res = await fetch("/api/streaks/me", {
-          headers: { "x-guest-id": getOrCreateGuestId() },
+          headers: {
+            "x-guest-id": getOrCreateGuestId(),
+            ...(streakToken ? { Authorization: `Bearer ${streakToken}` } : {}),
+          },
         });
         if (res.ok) {
           const data = await res.json();
@@ -482,11 +487,13 @@ export default function Start() {
 
   async function recordStreak(toolId: string) {
     try {
+      const checkinToken = getAuthToken();
       const res = await fetch("/api/streaks/checkin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-guest-id": getOrCreateGuestId(),
+          ...(checkinToken ? { Authorization: `Bearer ${checkinToken}` } : {}),
         },
         body: JSON.stringify({ toolId }),
       });
