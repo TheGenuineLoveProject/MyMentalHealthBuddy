@@ -2,10 +2,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import { detectChatSentiment, aiStateToPose } from "@/lib/buddyEmotion";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
-
 import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguagePattern";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
+
+// HX-OS Interaction Governance — chat surface is NOT on
+// HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows; pinned false to preserve
+// historical behavior (escalationRequired stayed false here pre-backport).
+const CHAT_IS_HEALING_FLOW = false;
 
 type Message = {
   role: "user" | "assistant";
@@ -86,33 +90,39 @@ export default function AIChatPanel() {
     return CRISIS_LANGUAGE_PATTERN.test(haystack);
   }, [input, messages]);
 
-  const overrideState = useMemo(
-    () => CrisisOverrideEngine.getOverrideState({ crisisDetected }),
+  // Vulnerable signal on chat surface = crisisDetected only (no independent
+  // emotional-state input on this surface). Passing `vulnerable: false` keeps
+  // deriveGovernance's `isVulnerable: crisisDetected || vulnerable` equal to
+  // the pre-backport `isVulnerable: crisisDetected`.
+  const { overrideState, monetizationGate } = useMemo(
+    () =>
+      deriveGovernance({
+        route: "/chat",
+        healingFlow: CHAT_IS_HEALING_FLOW,
+        crisisDetected,
+        vulnerable: false,
+      }),
     [crisisDetected],
   );
 
-  const monetizationGate = useMemo(
+  const governanceAttrs = useMemo(
     () =>
-      MonetizationBoundaryValidator.validate({
-        route: "/chat",
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable: crisisDetected,
-        },
+      buildGovernanceAttrs({
+        surface: "chat",
+        healingFlow: CHAT_IS_HEALING_FLOW,
+        crisisDetected,
+        vulnerable: false,
+        overrideState,
+        monetizationGate,
       }),
-    [crisisDetected],
+    [crisisDetected, overrideState, monetizationGate],
   );
 
   return (
     <div
       className="mx-auto max-w-3xl p-6"
       data-testid="ai-chat-panel"
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      {...governanceAttrs}
     >
       <nav
         aria-label="Chat navigation"
