@@ -4,8 +4,8 @@ modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 
 [deployment]
 deploymentTarget = "vm"
-build = ["sh", "-c", "npm ci --no-audit --no-fund && npm run build && node scripts/build-server.mjs"]
-run = ["sh", "-c", "NODE_ENV=production exec node dist/server.mjs"]
+build = ["sh", "-c", "npm ci --no-audit --no-fund && npm run build"]
+run = ["sh", "-c", "NODE_ENV=production exec node --import ./server/observability/preload.mjs server/app.mjs"]
 
 [[ports]]
 localPort = 5000
