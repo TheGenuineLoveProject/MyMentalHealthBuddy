@@ -10,7 +10,7 @@ import {
   resumeScheduler,
   pauseScheduler,
 } from "../lib/healScheduler.mjs";
-import { requireAuth as requireAuthCanonical } from "../middleware/requireAuth.mjs";
+import { requireAuth as requireAuthCanonical } from "../middleware/auth.mjs";
 import requireAdmin from "../middleware/requireAdmin.mjs";
 
 const router = Router();
