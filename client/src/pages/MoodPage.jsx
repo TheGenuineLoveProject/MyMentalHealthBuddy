@@ -7,8 +7,8 @@ import { useGamification } from "../context/GamificationContext.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import DataExportButton from "../components/DataExportButton";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
 import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 import "../styles/sacred-visuals.css";
 
@@ -275,26 +275,29 @@ export default function MoodPage() {
     [rating, emotion],
   );
 
-  const overrideState = useMemo(
+  const governance = useMemo(
     () =>
-      CrisisOverrideEngine.getOverrideState({
+      deriveGovernance({
+        route: "/mood",
+        healingFlow: true,
         crisisDetected,
-        escalationRequired: MOOD_IS_HEALING_FLOW || vulnerableState,
+        vulnerable: vulnerableState,
+        escalation: true,
       }),
     [crisisDetected, vulnerableState],
   );
 
-  const monetizationGate = useMemo(
+  const governanceAttrs = useMemo(
     () =>
-      MonetizationBoundaryValidator.validate({
-        route: "/mood",
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable: crisisDetected || vulnerableState,
-        },
+      buildGovernanceAttrs({
+        surface: "mood",
+        healingFlow: true,
+        crisisDetected,
+        vulnerable: vulnerableState,
+        overrideState: governance.overrideState,
+        monetizationGate: governance.monetizationGate,
       }),
-    [crisisDetected, vulnerableState],
+    [crisisDetected, vulnerableState, governance],
   );
 
   if (isLoading) {
@@ -373,16 +376,7 @@ export default function MoodPage() {
         className="space-y-6"
         data-testid="form-mood"
         aria-label="Mood tracking form"
-        data-mood-governed="true"
-        data-healing-flow={MOOD_IS_HEALING_FLOW ? "true" : "false"}
-        data-crisis-active={crisisDetected ? "true" : "false"}
-        data-vulnerable={vulnerableState ? "true" : "false"}
-        data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-        data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-        data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-        data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
-        data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
-        data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+        {...governanceAttrs}
       >
         <fieldset className="p-5 rounded-xl border border-border bg-card">
           <legend className="text-base font-semibold mb-4 flex items-center gap-2 text-foreground">
