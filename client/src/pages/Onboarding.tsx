@@ -25,8 +25,8 @@ const VULNERABLE_GOAL_IDS = new Set<string>([
 // "companion_support" + "reflection" surfaces (both in the 8-flow protected
 // list). Pinned constant.
 const ONBOARDING_IS_HEALING_FLOW =
-  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("companion_support") ||
-  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("reflection");
+  HEALING_FLOW_PROTECTION_RULES.isProtected("companion_support") ||
+  HEALING_FLOW_PROTECTION_RULES.isProtected("reflection");
 
 const STEPS = ["intro", "goals", "support", "reminders", "disclaimer"];
 

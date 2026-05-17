@@ -12,7 +12,7 @@ import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguag
 // the 8 protected healing flows. Pinned constant so any future split-route
 // retains the contract without depending on prop-drilling.
 const JOURNAL_IS_HEALING_FLOW =
-  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("journaling");
+  HEALING_FLOW_PROTECTION_RULES.isProtected("journaling");
 import { Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw, Share2 } from "lucide-react";
 import ReflectionCardExport from "../components/ReflectionCardExport";
 import { apiRequest, queryClient } from "../lib/queryClient.js";

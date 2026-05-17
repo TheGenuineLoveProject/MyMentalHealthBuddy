@@ -10,7 +10,7 @@ import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/Healing
 // HX-OS Interaction Governance — Runtime Enforcement (v5.8.127, Meditation iter 9).
 // Compile-time pin: "meditation" is a registered protected healing flow.
 const MEDITATION_IS_HEALING_FLOW =
-  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("meditation");
+  HEALING_FLOW_PROTECTION_RULES.isProtected("meditation");
 
 // Categories that signal an emotional-regulation vulnerable state on this surface.
 // "Stress" and "Sleep" sessions are reached most often when the user is dysregulated;
