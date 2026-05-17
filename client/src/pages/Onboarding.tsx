@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/Button";
@@ -7,6 +7,26 @@ import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Heart, Sparkles, Shield, Brain, Wind, Target, ChevronRight, ChevronLeft, Check, Sun, Moon, Leaf, Flower2, Users } from 'lucide-react';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
+
+// HX-OS Interaction Governance — onboarding goal-selections that correlate
+// with vulnerability per MMHB v7.4 BHCE. Pure enum lookup over the existing
+// GOAL_OPTIONS list — no rewrite of onboarding step/copy/visuals.
+const VULNERABLE_GOAL_IDS = new Set<string>([
+  "grief_support",
+  "anxiety_relief",
+  "emotional_healing",
+  "stress_management",
+]);
+
+// Per HealingFlowProtectionRules.protectedHealingFlows — onboarding configures
+// "companion_support" + "reflection" surfaces (both in the 8-flow protected
+// list). Pinned constant.
+const ONBOARDING_IS_HEALING_FLOW =
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("companion_support") ||
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("reflection");
 
 const STEPS = ["intro", "goals", "support", "reminders", "disclaimer"];
 
@@ -163,6 +183,40 @@ export default function Onboarding() {
     );
   };
 
+  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.125, Onboarding iter 7).
+  // Passive observation only. No fetch, no AI, no UI mutation, no behavior change,
+  // no step/copy/animation/route change. /onboarding has no free-text input — the
+  // crisisDetected memo is pinned `false` for attr-contract uniformity. Vulnerability
+  // is derived from goal selections (read-only lookup over existing GOAL_OPTIONS).
+  const crisisDetected = useMemo(() => false, []);
+
+  const vulnerableState = useMemo(
+    () => selectedGoals.some((g) => VULNERABLE_GOAL_IDS.has(g)),
+    [selectedGoals],
+  );
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: ONBOARDING_IS_HEALING_FLOW || vulnerableState,
+      }),
+    [crisisDetected, vulnerableState],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: "/onboarding",
+        action: "any-business-action",
+        emotionalState: {
+          crisisDetected,
+          isVulnerable: crisisDetected || vulnerableState,
+        },
+      }),
+    [crisisDetected, vulnerableState],
+  );
+
   return (
   <WellnessPageShell
     title="Onboarding"
@@ -183,7 +237,19 @@ export default function Onboarding() {
     ]}
   >
 
-    <div className="min-h-screen v28-paper-bg flex items-center justify-center p-4">
+    <div
+      className="min-h-screen v28-paper-bg flex items-center justify-center p-4"
+      data-onboarding-governed="true"
+      data-healing-flow={ONBOARDING_IS_HEALING_FLOW ? "true" : "false"}
+      data-crisis-active={crisisDetected ? "true" : "false"}
+      data-vulnerable={vulnerableState ? "true" : "false"}
+      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
+      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+    >
       <div className="w-full max-w-2xl card-bordered" data-testid="card-onboarding">
         {/* Intro Carousel */}
         {STEPS[currentStep] === "intro" && (
