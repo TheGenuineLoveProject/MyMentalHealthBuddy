@@ -139,3 +139,20 @@ Full per-iter trace of the HX-OS Interaction Governance Convergence phase. Compr
 **Cross-cutting invariants held across all 10 iters:** ONE-file-per-iter discipline; zero UI/visual/animation/route/monetization/copy/`data-testid`/wrapper/provider changes; canonical sage palette untouched; crisis routing (`/crisis`, 988, 741741) preserved; all gates passed before STOP each iter; full architect review each iter.
 
 **Pending follow-ups carried into next cycle:** orphan `RITUAL_IS_HEALING_FLOW` const cleanup in DailyRitualPage; stray untracked `client/src/components/AIChatPanel.tsx` deletion; remaining surfaces to backport per P3E sequence (CheckIn / Onboarding / MoodPage and any further governed surfaces).
+
+### v5.8.134 — HX-OS Governance Convergence Cleanup
+- Completed P3E migration stabilization.
+- Removed 5 confirmed orphan *_IS_HEALING_FLOW constants:
+  - RITUAL_IS_HEALING_FLOW
+  - CHECKIN_IS_HEALING_FLOW
+  - ONBOARDING_IS_HEALING_FLOW
+  - MOOD_IS_HEALING_FLOW
+  - MEDITATION_IS_HEALING_FLOW
+- Removed stray orphan file:
+  - client/src/components/AIChatPanel.tsx
+- No runtime behavior changes.
+- No JSX changes.
+- No route changes.
+- No governance logic changes.
+- No UI changes.
+- Purpose: reduce drift risk and dead-code accumulation after governance convergence.

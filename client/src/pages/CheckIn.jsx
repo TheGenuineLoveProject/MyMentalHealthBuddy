@@ -37,7 +37,6 @@ const VULNERABLE_EMOTIONS = new Set([
 // Per HealingFlowProtectionRules.protectedHealingFlows — emotional check-in is
 // a "mood_tracking" + "companion_support" surface (both in the 8-flow protected
 // list). Pinned constant.
-const CHECKIN_IS_HEALING_FLOW =
   HEALING_FLOW_PROTECTION_RULES.isProtected("mood_tracking") ||
   HEALING_FLOW_PROTECTION_RULES.isProtected("companion_support");
 

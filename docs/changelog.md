@@ -3561,3 +3561,9 @@ const MOOD_IS_HEALING_FLOW =
 - Visual / animation / route / copy / monetization — unchanged
 
 **Gates:** tsc 0 / build 0 (32.89s) / `/` 200 / `/mood` 200 / `/checkin` 200 / `/journal` 200 / `/crisis` 200 / architect Pass (all 7 review requirements met, no security findings).
+
+## v5.8.134 — Governance Cleanup Sweep
+- Removed confirmed unused governance constants.
+- Removed orphan AIChatPanel.tsx file.
+- Preserved all runtime governance behavior.
+- Zero user-facing changes.

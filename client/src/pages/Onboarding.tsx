@@ -24,7 +24,6 @@ const VULNERABLE_GOAL_IDS = new Set<string>([
 // Per HealingFlowProtectionRules.protectedHealingFlows — onboarding configures
 // "companion_support" + "reflection" surfaces (both in the 8-flow protected
 // list). Pinned constant.
-const ONBOARDING_IS_HEALING_FLOW =
   HEALING_FLOW_PROTECTION_RULES.isProtected("companion_support") ||
   HEALING_FLOW_PROTECTION_RULES.isProtected("reflection");
 

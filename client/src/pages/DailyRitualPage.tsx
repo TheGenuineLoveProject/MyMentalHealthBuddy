@@ -14,7 +14,6 @@ import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguag
 // Per HealingFlowProtectionRules.protectedHealingFlows — "ritual" + "meditation"
 // are both in the 8-flow protected list. /ritual is also CROSS_DOMAIN regulated
 // per AtlasRoutingGovernance. Pinned constant.
-const RITUAL_IS_HEALING_FLOW =
   HEALING_FLOW_PROTECTION_RULES.isProtected("ritual") ||
   HEALING_FLOW_PROTECTION_RULES.isProtected("meditation");
 

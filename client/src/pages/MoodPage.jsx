@@ -23,7 +23,6 @@ const VULNERABLE_EMOTIONS = new Set(["Sad", "Anxious", "Tired"]);
 
 // Per HealingFlowProtectionRules.protectedHealingFlows — /mood is the literal
 // "mood_tracking" surface in the 8-flow protected list. Pinned constant.
-const MOOD_IS_HEALING_FLOW =
   HEALING_FLOW_PROTECTION_RULES.isProtected("mood_tracking");
 
 const EMOTIONS = [
