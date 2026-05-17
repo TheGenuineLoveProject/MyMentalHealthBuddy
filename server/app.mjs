@@ -228,7 +228,7 @@ const adminLimiter = rateLimit({
 // DEFERRED (not mounted in this cycle, pending separate audit):
 //   - adminSecurityRoutes  (mounted P2.1.1 with external requireAuth+requireAdmin wrap)
 //   - aiBusinessRoutes     (mounted P2.2.1 — internally gated BUSINESS-domain sibling of aiHealingRoutes)
-//   - buddyRoutes          (path-doubling /buddy/buddy; no auth)
+//   - buddyRoutes          (mounted P2.3.1 at /api prefix; canonical POST /api/buddy; anonymous-by-design BHCE flow)
 //   - streaksRoutes        (no auth on /me user-data endpoint)
 //
 // Limiter scoping for admin:
@@ -246,6 +246,15 @@ app.use("/api/admin/publishing", adminPublishingRoutes);
 app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/telemetry", telemetryRoutes);
+
+// Buddy anonymous healing flow limiter
+const buddyLimiter = rateLimit({
+  windowMs: 60_000,
+  max: 30,
+});
+
+app.use("/api/buddy", buddyLimiter);
+app.use("/api", buddyRoutes);
 
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
 const CLIENT_ROOT = path.join(__dirname, "..", "client");
