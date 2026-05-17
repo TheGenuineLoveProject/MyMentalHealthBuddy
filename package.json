@@ -5,7 +5,6 @@
   "main": "server/app.mjs",
   "scripts": {
     "dev": "node server/app.mjs",
-    "dev:clean": "sh -c 'pkill -f \"node server/app.mjs\" || true; sleep 1; node server/app.mjs'",
     "start": "node server/app.mjs",
     "build": "vite build",
     "verify": "bash scripts/verify.sh",
