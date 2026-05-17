@@ -218,6 +218,33 @@ const adminLimiter = rateLimit({
     }),
 });
 
+// ===== ROUTE MOUNTS (P1-B3.1 restoration cycle) =====
+// Mounts 7 verified-safe route modules that were imported at file top
+// but never registered with app.use. Each module has been audited for
+// internal auth gating, CSRF compatibility (CSRF middleware is already
+// global above), and mount-path uniqueness against the existing
+// /api/session-boundary and /api/health mounts.
+//
+// DEFERRED (not mounted in this cycle, pending separate audit):
+//   - adminSecurityRoutes  (no internal auth gating)
+//   - aiBusinessRoutes     (apparent duplicate-content overlap)
+//   - buddyRoutes          (path-doubling /buddy/buddy; no auth)
+//   - streaksRoutes        (no auth on /me user-data endpoint)
+//
+// Limiter scoping for admin:
+//   adminLoginLimiter → ONLY /api/admin/verify-token (strict brute-force)
+//   adminLimiter      → all other authenticated admin surfaces
+app.use("/api/admin/verify-token", adminLoginLimiter);
+app.use("/api/admin", adminLimiter);
+
+app.use("/api/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/ai/healing", aiHealingRoutes);
+app.use("/api/admin/billing", adminBillingRoutes);
+app.use("/api/admin/publishing", adminPublishingRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/telemetry", telemetryRoutes);
+
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
 const CLIENT_ROOT = path.join(__dirname, "..", "client");
 
