@@ -244,8 +244,33 @@ app.get("*", (req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, "0.0.0.0", () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`[SERVER] Listening on port ${PORT}`);
   console.log(`[SERVER] http://0.0.0.0:${PORT}`);
 });
+
+// ===== GRACEFUL SHUTDOWN (Observability O1) =====
+// SIGTERM (deploy/redeploy/orchestrator) and SIGINT (Ctrl-C) → drain in-flight
+// requests via server.close, then exit 0. If close hangs past 10s (stuck
+// keep-alive sockets, runaway handler), force exit 1 so the supervisor can
+// restart cleanly. .unref() on the force timer prevents it from itself
+// holding the event loop open during a clean shutdown.
+function gracefulShutdown(signal) {
+  console.log(`[SERVER] ${signal} received — initiating graceful shutdown`);
+  server.close((err) => {
+    if (err) {
+      console.error(`[SERVER] server.close error during ${signal}:`, err);
+      process.exit(1);
+    }
+    console.log(`[SERVER] graceful shutdown complete (${signal})`);
+    process.exit(0);
+  });
+  setTimeout(() => {
+    console.error(`[SERVER] graceful shutdown timed out after 10s (${signal}) — forcing exit`);
+    process.exit(1);
+  }, 10_000).unref();
+}
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT",  () => gracefulShutdown("SIGINT"));
 
