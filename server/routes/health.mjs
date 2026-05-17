@@ -7,6 +7,16 @@ import { logger } from "../utils/logger.mjs";
 const router = express.Router();
 const startTime = Date.now();
 
+// ===== READINESS DB-PING TIMEOUT (Observability O2) =====
+// Bounds the latency of /api/health/ready so a hung DB cannot block the
+// readiness probe past this many milliseconds. Configurable via env; default
+// 1500ms is safe for healthy production Postgres and aggressive enough to
+// catch network partitions / lock contention quickly.
+const READINESS_DB_TIMEOUT_MS = parseInt(
+  process.env.READINESS_DB_TIMEOUT_MS || "1500",
+  10,
+);
+
 function requireAdminForRepair(req, res, next) {
   const adminToken = process.env.ADMIN_TOKEN;
   if (!adminToken) return next();
@@ -77,7 +87,19 @@ router.get("/", async (_req, res) => {
 router.get("/ready", async (_req, res) => {
   try {
     if (process.env.DATABASE_URL) {
-      await db.execute(sql`SELECT 1`);
+      let timeoutHandle;
+      const timeoutPromise = new Promise((_resolve, reject) => {
+        timeoutHandle = setTimeout(
+          () => reject(new Error(`readiness DB ping exceeded ${READINESS_DB_TIMEOUT_MS}ms`)),
+          READINESS_DB_TIMEOUT_MS,
+        );
+        timeoutHandle.unref?.();
+      });
+      try {
+        await Promise.race([db.execute(sql`SELECT 1`), timeoutPromise]);
+      } finally {
+        clearTimeout(timeoutHandle);
+      }
     }
     res.json({ status: "ready" });
   } catch (readyErr) {
