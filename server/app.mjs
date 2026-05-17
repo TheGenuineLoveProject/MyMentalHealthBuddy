@@ -229,6 +229,25 @@ const CLIENT_DIST = path.join(process.cwd(), "client/dist");
 
 console.log("[SPA] CLIENT_DIST =", CLIENT_DIST);
 
+// ===== OBSERVABILITY O5: BARE HEALTH-PATH GUARD =====
+// Prevents the SPA fallback below from returning 200 + index.html for the
+// bare /health, /ready, /live, /metrics paths. Canonical endpoints are
+// /healthz and /api/health/* — these guards return 404 + JSON pointing to
+// the correct canonical path. Additive only; does not affect SPA routing
+// for any other path, does not touch express.static, does not touch the
+// canonical health endpoints.
+const BARE_HEALTH_CANONICALS = {
+  "/health": "/api/health",
+  "/ready": "/api/health/ready",
+  "/live": "/api/health/live",
+  "/metrics": "/api/health/metrics",
+};
+for (const [barePath, canonical] of Object.entries(BARE_HEALTH_CANONICALS)) {
+  app.get(barePath, (_req, res) => {
+    res.status(404).json({ error: "Not Found", canonical });
+  });
+}
+
 app.use(express.static(CLIENT_DIST));
 
 app.get("*", (req, res, next) => {
