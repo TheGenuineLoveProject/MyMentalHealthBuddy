@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Smile, Frown, Meh, Sun, Moon, Zap, Check, Sparkles, Calendar, TrendingUp, ChevronDown, ChevronUp, X } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
@@ -7,7 +7,25 @@ import { useGamification } from "../context/GamificationContext.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import DataExportButton from "../components/DataExportButton";
+import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
+import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 import "../styles/sacred-visuals.css";
+
+// HX-OS Interaction Governance — passive crisis-language detection.
+// Pure read-only regex; no fetch, no AI, no behavior modification.
+const CRISIS_LANGUAGE_PATTERN =
+  /\b(suicide|suicidal|kill myself|killing myself|end it all|end my life|self[\s-]?harm|hurt myself|hurting myself|i want to die|no reason to live|don'?t want to be here|988|crisis hotline)\b/i;
+
+// Emotion selections from existing EMOTIONS list that indicate distress
+// per MMHB v7.4 BHCE. Pure enum lookup — no rewrite of mood selection logic,
+// no rerank, no UI mutation.
+const VULNERABLE_EMOTIONS = new Set(["Sad", "Anxious", "Tired"]);
+
+// Per HealingFlowProtectionRules.protectedHealingFlows — /mood is the literal
+// "mood_tracking" surface in the 8-flow protected list. Pinned constant.
+const MOOD_IS_HEALING_FLOW =
+  HEALING_FLOW_PROTECTION_RULES.protectedHealingFlows.includes("mood_tracking");
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "#f59e0b", bgColor: "#fef3c7", tw: "border-amber-400 bg-amber-50 dark:bg-amber-950/40" },
@@ -243,6 +261,43 @@ export default function MoodPage() {
     return "#f59e0b";
   }
 
+  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.126, Mood iter 8).
+  // Passive observation only. No fetch, no AI, no UI mutation, no behavior change,
+  // no mood-selection logic / analytics / monetization additions. /mood is the
+  // literal "mood_tracking" protected healing flow — monetizationGate.allowed
+  // always derives from validator, never gates UI.
+  const crisisDetected = useMemo(
+    () => CRISIS_LANGUAGE_PATTERN.test(content ?? ""),
+    [content],
+  );
+
+  const vulnerableState = useMemo(
+    () => rating <= 4 || (emotion !== "" && VULNERABLE_EMOTIONS.has(emotion)),
+    [rating, emotion],
+  );
+
+  const overrideState = useMemo(
+    () =>
+      CrisisOverrideEngine.getOverrideState({
+        crisisDetected,
+        escalationRequired: MOOD_IS_HEALING_FLOW || vulnerableState,
+      }),
+    [crisisDetected, vulnerableState],
+  );
+
+  const monetizationGate = useMemo(
+    () =>
+      MonetizationBoundaryValidator.validate({
+        route: "/mood",
+        action: "any-business-action",
+        emotionalState: {
+          crisisDetected,
+          isVulnerable: crisisDetected || vulnerableState,
+        },
+      }),
+    [crisisDetected, vulnerableState],
+  );
+
   if (isLoading) {
     return (
       <div className="mx-auto max-w-5xl px-4 py-8">
@@ -314,7 +369,22 @@ export default function MoodPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6" data-testid="form-mood" aria-label="Mood tracking form">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6"
+        data-testid="form-mood"
+        aria-label="Mood tracking form"
+        data-mood-governed="true"
+        data-healing-flow={MOOD_IS_HEALING_FLOW ? "true" : "false"}
+        data-crisis-active={crisisDetected ? "true" : "false"}
+        data-vulnerable={vulnerableState ? "true" : "false"}
+        data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
+        data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
+        data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
+        data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+        data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
+        data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+      >
         <fieldset className="p-5 rounded-xl border border-border bg-card">
           <legend className="text-base font-semibold mb-4 flex items-center gap-2 text-foreground">
             <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
