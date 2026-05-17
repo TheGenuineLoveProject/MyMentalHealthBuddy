@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
 import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
@@ -194,26 +194,29 @@ export default function JournalPage() {
     return CRISIS_LANGUAGE_PATTERN.test(haystack);
   }, [title, content, entries]);
 
-  const overrideState = useMemo(
+  const governance = useMemo(
     () =>
-      CrisisOverrideEngine.getOverrideState({
+      deriveGovernance({
+        route: "/journal",
+        healingFlow: JOURNAL_IS_HEALING_FLOW,
         crisisDetected,
-        escalationRequired: JOURNAL_IS_HEALING_FLOW,
+        vulnerable: crisisDetected,
+        escalation: JOURNAL_IS_HEALING_FLOW,
       }),
     [crisisDetected],
   );
 
-  const monetizationGate = useMemo(
+  const governanceAttrs = useMemo(
     () =>
-      MonetizationBoundaryValidator.validate({
-        route: "/journal",
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable: crisisDetected,
-        },
+      buildGovernanceAttrs({
+        surface: "journal",
+        healingFlow: JOURNAL_IS_HEALING_FLOW,
+        crisisDetected,
+        vulnerable: crisisDetected,
+        overrideState: governance.overrideState,
+        monetizationGate: governance.monetizationGate,
       }),
-    [crisisDetected],
+    [crisisDetected, governance],
   );
 
   if (isLoading) {
@@ -236,15 +239,7 @@ export default function JournalPage() {
     <div
       className="hxos-vnext"
       data-testid="journal-page-root"
-      data-journal-governed="true"
-      data-healing-flow={JOURNAL_IS_HEALING_FLOW ? "true" : "false"}
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
-      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
-      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+      {...governanceAttrs}
     >
     <WellnessPageShell
       title="Reflective Journal"
