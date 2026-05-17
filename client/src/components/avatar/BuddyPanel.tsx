@@ -26,8 +26,14 @@ import BuddyAvatar from "./BuddyAvatar";
 import type { BuddyState } from "@/lib/avatarState";
 import { emitBuddyEvent } from "@/lib/buddyTelemetry";
 import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
+
+// HX-OS Interaction Governance — BuddyPanel is a presentational companion
+// surface (no fetch, no AI, no monetization), so healingFlow is pinned false;
+// the route literal is `/${surface}` to preserve the v2.0 monetization-gate
+// route parity established when BuddyPanel first wired runtime enforcement.
+const BUDDY_IS_HEALING_FLOW = false;
 
 // HX-OS Interaction Governance — emotional-state buckets that gate business actions.
 // Per MMHB v7.4 Primary Law: monetization is prohibited inside regulated healing flows,
@@ -140,27 +146,37 @@ export default function BuddyPanel({
     [state],
   );
 
-  const overrideState = useMemo(
+  // BuddyPanel has two INDEPENDENT emotional dimensions per v7.4 governance:
+  //   • vulnerable (VULNERABLE_STATES) → drives data-vulnerable + monetization
+  //     isVulnerable input
+  //   • escalation (DYSREGULATED_STATES) → drives override engine's
+  //     escalationRequired (suspended/conversion-disabled/paywalls-blocked/
+  //     upgrade-prompts-blocked/analytics-restricted)
+  // The canonical deriveGovernance helper (v5.8.129) accepts both separately
+  // so byte-equivalent parity is preserved.
+  const { overrideState, monetizationGate } = useMemo(
     () =>
-      CrisisOverrideEngine.getOverrideState({
-        crisisDetected,
-        escalationRequired: dysregulated,
-      }),
-    [crisisDetected, dysregulated],
-  );
-
-  const monetizationGate = useMemo(
-    () =>
-      MonetizationBoundaryValidator.validate({
+      deriveGovernance({
         route: `/${surface}`,
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable,
-          dysregulated,
-        },
+        healingFlow: BUDDY_IS_HEALING_FLOW,
+        crisisDetected,
+        vulnerable: isVulnerable,
+        escalation: dysregulated,
       }),
     [surface, crisisDetected, isVulnerable, dysregulated],
+  );
+
+  const governanceAttrs = useMemo(
+    () =>
+      buildGovernanceAttrs({
+        surface: "buddy",
+        healingFlow: BUDDY_IS_HEALING_FLOW,
+        crisisDetected,
+        vulnerable: isVulnerable,
+        overrideState,
+        monetizationGate,
+      }),
+    [crisisDetected, isVulnerable, overrideState, monetizationGate],
   );
 
   return (
@@ -168,13 +184,8 @@ export default function BuddyPanel({
       className={`flex flex-col items-center text-center ${className}`}
       data-testid={testId}
       data-surface={surface}
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-vulnerable={isVulnerable ? "true" : "false"}
       data-dysregulated={dysregulated ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
+      {...governanceAttrs}
     >
       <BuddyAvatar
         state={state}
