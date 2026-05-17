@@ -9,6 +9,12 @@ process.on('uncaughtException', (err) => {
   import('./observability/safetyAlerts.mjs')
     .then(({ alertUncaught }) => alertUncaught({ kind: 'uncaughtException', error: err }))
     .catch(() => {});
+  // Observability O3: after alert dispatch, force exit so the Replit supervisor
+  // can restart cleanly rather than leaving Node in a corrupted state. Timer is
+  // .unref()'d so it never holds the loop open on its own.
+  setTimeout(() => {
+    process.exit(1);
+  }, 1000).unref();
 });
 
 process.on('unhandledRejection', (err) => {
@@ -16,6 +22,12 @@ process.on('unhandledRejection', (err) => {
   import('./observability/safetyAlerts.mjs')
     .then(({ alertUncaught }) => alertUncaught({ kind: 'unhandledRejection', error: err }))
     .catch(() => {});
+  // Observability O3: after alert dispatch, force exit so the Replit supervisor
+  // can restart cleanly rather than leaving Node in a corrupted state. Timer is
+  // .unref()'d so it never holds the loop open on its own.
+  setTimeout(() => {
+    process.exit(1);
+  }, 1000).unref();
 });
 import express from "express";
 import cors from "cors";
