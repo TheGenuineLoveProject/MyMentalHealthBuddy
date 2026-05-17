@@ -7,8 +7,8 @@ import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Heart, Sparkles, Shield, Brain, Wind, Target, ChevronRight, ChevronLeft, Check, Sun, Moon, Leaf, Flower2, Users } from 'lucide-react';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import { MonetizationBoundaryValidator } from "@/governance/interactions/MonetizationBoundaryValidator";
-import { CrisisOverrideEngine } from "@/governance/interactions/CrisisOverrideEngine";
+import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
+import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
 import { HEALING_FLOW_PROTECTION_RULES } from "@/governance/interactions/HealingFlowProtectionRules";
 
 // HX-OS Interaction Governance — onboarding goal-selections that correlate
@@ -195,26 +195,29 @@ export default function Onboarding() {
     [selectedGoals],
   );
 
-  const overrideState = useMemo(
+  const governance = useMemo(
     () =>
-      CrisisOverrideEngine.getOverrideState({
+      deriveGovernance({
+        route: "/onboarding",
+        healingFlow: true,
         crisisDetected,
-        escalationRequired: ONBOARDING_IS_HEALING_FLOW || vulnerableState,
+        vulnerable: vulnerableState,
+        escalation: true,
       }),
     [crisisDetected, vulnerableState],
   );
 
-  const monetizationGate = useMemo(
+  const governanceAttrs = useMemo(
     () =>
-      MonetizationBoundaryValidator.validate({
-        route: "/onboarding",
-        action: "any-business-action",
-        emotionalState: {
-          crisisDetected,
-          isVulnerable: crisisDetected || vulnerableState,
-        },
+      buildGovernanceAttrs({
+        surface: "onboarding",
+        healingFlow: true,
+        crisisDetected,
+        vulnerable: vulnerableState,
+        overrideState: governance.overrideState,
+        monetizationGate: governance.monetizationGate,
       }),
-    [crisisDetected, vulnerableState],
+    [crisisDetected, vulnerableState, governance],
   );
 
   return (
@@ -239,16 +242,7 @@ export default function Onboarding() {
 
     <div
       className="min-h-screen v28-paper-bg flex items-center justify-center p-4"
-      data-onboarding-governed="true"
-      data-healing-flow={ONBOARDING_IS_HEALING_FLOW ? "true" : "false"}
-      data-crisis-active={crisisDetected ? "true" : "false"}
-      data-vulnerable={vulnerableState ? "true" : "false"}
-      data-monetization-suspended={overrideState.monetizationSuspended ? "true" : "false"}
-      data-monetization-allowed={monetizationGate.allowed ? "true" : "false"}
-      data-conversion-disabled={overrideState.conversionDisabled ? "true" : "false"}
-      data-paywalls-blocked={overrideState.paywallsBlocked ? "true" : "false"}
-      data-upgrade-prompts-blocked={overrideState.upgradePromptsBlocked ? "true" : "false"}
-      data-analytics-restricted={overrideState.analyticsRestricted ? "true" : "false"}
+      {...governanceAttrs}
     >
       <div className="w-full max-w-2xl card-bordered" data-testid="card-onboarding">
         {/* Intro Carousel */}
