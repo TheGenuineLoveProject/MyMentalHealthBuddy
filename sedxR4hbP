@@ -1,0 +1,59 @@
+entrypoint = "server/app.mjs"
+run = "npm run dev"
+modules = ["nodejs-20", "postgresql-16", "python-3.11"]
+
+[deployment]
+deploymentTarget = "vm"
+build = ["sh", "-c", "rm -rf node_modules && npm ci --no-audit --no-fund && npm run build"]
+run = ["sh", "-c", "if [ ! -d node_modules/express ]; then echo '[boot] node_modules missing — npm ci only'; npm ci --no-audit --no-fund --omit=dev; fi; if [ ! -f client/dist/index.html ]; then echo '[boot] dist missing despite git — emergency vite build'; npm run build; fi; NODE_ENV=production exec node --import ./server/observability/preload.mjs server/app.mjs"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 5099
+externalPort = 3001
+
+[[ports]]
+localPort = 24678
+externalPort = 3000
+
+[agent]
+expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node --import ./server/observability/preload.mjs server/app.mjs"
+waitForPort = 5000
+
+[nix]
+channel = "stable-25_05"
+packages = ["tree", "libwebp", "lsof", "nano"]
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
+
+# Build cache optimization
+[build]
+cache = ["dist", ".cache"]
