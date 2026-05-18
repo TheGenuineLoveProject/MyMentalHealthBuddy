@@ -4,8 +4,8 @@ modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 
 [deployment]
 deploymentTarget = "vm"
-build = ["sh", "-c", "rm -rf node_modules && npm ci --no-audit --no-fund && npm run build"]
-run = ["sh", "-c", "if [ ! -d node_modules/express ]; then echo '[boot] node_modules missing — npm ci only'; npm ci --no-audit --no-fund --omit=dev; fi; if [ ! -f client/dist/index.html ]; then echo '[boot] dist missing despite git — emergency vite build'; npm run build; fi; NODE_ENV=production exec node --import ./server/observability/preload.mjs server/app.mjs"]
+build = ["sh", "-c", "rm -rf node_modules && npm ci --no-audit --no-fund && npm run build && echo '[build] tarring node_modules…' && tar czf nm.tgz node_modules && ls -la nm.tgz"]
+run = ["sh", "-c", "if [ ! -d node_modules/express ]; then if [ -f nm.tgz ]; then echo '[boot] node_modules missing — restoring from nm.tgz tarball'; tar xzf nm.tgz && echo '[boot] tarball restored'; else echo '[boot] node_modules AND nm.tgz both missing — falling back to npm ci'; npm ci --no-audit --no-fund --omit=dev; fi; fi; if [ ! -f client/dist/index.html ]; then echo '[boot] dist missing despite git — emergency vite build'; npm run build; fi; NODE_ENV=production exec node --import ./server/observability/preload.mjs server/app.mjs"]
 
 [[ports]]
 localPort = 5000
