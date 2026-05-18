@@ -154,7 +154,9 @@ router.get("/me", requireAuth, async (req, res) => {
     user: req.user
   });
 });
-
+router.get("/user", requireAuth, async (req, res) => {
+  res.json(req.user);
+});
 // ─────────────────────────────────────────────────────────────────────────────
 // Round 3 (Apr-26 user-approved unlock): /refresh + /logout
 //
