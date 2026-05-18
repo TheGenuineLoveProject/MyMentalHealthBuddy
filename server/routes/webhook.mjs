@@ -8,6 +8,12 @@ import { logger } from "../utils/logger.mjs";
 import { increment } from "../utils/metrics.mjs";
 import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
 import { alertWebhookSignatureFailure } from "../observability/safetyAlerts.mjs";
+import {
+  mapSubscriptionToPlan,
+  mapInvoiceToPlan,
+  resolvePlanFromCheckoutSession,
+  diagnosePlanResolution,
+} from "../utils/planMapping.mjs";
 
 const router = Router();
 const stripe = process.env.STRIPE_SECRET_KEY
@@ -92,11 +98,48 @@ router.post(
             logger.warn("checkout.session.completed missing customer_email — cannot match user", { customer: session.customer });
             break;
           }
+          // Re-fetch session with line items expanded — webhook payload
+          // does not include line_items by default. The line item price ID
+          // is the AUTHORITATIVE source for plan tier (what Stripe charged).
+          // SECURITY: if retrieve fails, FAIL CLOSED — throw so the outer
+          // catch returns 500 without markProcessed, letting Stripe retry.
+          // Never grant entitlement from client-supplied metadata alone when
+          // we cannot independently verify the charged price ID.
+          let authoritativeSession;
+          try {
+            authoritativeSession = await stripe.checkout.sessions.retrieve(session.id, {
+              expand: ["line_items"],
+            });
+          } catch (expandErr) {
+            logger.error("checkout.session.completed: line_items retrieve FAILED — refusing entitlement, deferring to Stripe retry", {
+              error: expandErr.message,
+              sessionId: session.id,
+            });
+            increment("subscription_mapping_unknown", { source: "checkout_retrieve_failed" });
+            throw expandErr; // outer catch → 500 → no markProcessed → Stripe retries
+          }
+          const checkoutPlan = resolvePlanFromCheckoutSession(authoritativeSession);
+          if (!checkoutPlan) {
+            const diag = diagnosePlanResolution(authoritativeSession);
+            const alertSource = diag.mismatch ? "checkout_mismatch" : "checkout";
+            logger.error(
+              diag.mismatch
+                ? "checkout.session.completed: SECURITY metadata.plan != price-derived plan — refusing entitlement"
+                : "checkout.session.completed: unknown plan — refusing to default",
+              {
+                sessionId: session.id,
+                email: session.customer_email,
+                ...diag,
+              }
+            );
+            increment("subscription_mapping_unknown", { source: alertSource });
+            break;
+          }
           const checkoutResult = await db
             .update(users)
             .set({
               stripeCustomerId: session.customer,
-              subscriptionStatus: "pro",
+              subscriptionStatus: checkoutPlan,
               updatedAt: new Date(),
             })
             .where(eq(users.email, session.customer_email));
@@ -104,8 +147,8 @@ router.post(
           if (checkoutRowsAffected === 0) {
             logger.warn("checkout.session.completed: no user matched by email", { email: session.customer_email, customer: session.customer });
           } else {
-            logger.info("Subscription activated via checkout", { customer: session.customer, status: "pro" });
-            increment("subscription_transition", { plan: "free_to_pro" });
+            logger.info("Subscription activated via checkout", { customer: session.customer, status: checkoutPlan });
+            increment("subscription_transition", { plan: `free_to_${checkoutPlan}` });
           }
           sendUpgradeConfirmation(session.customer_email, session.customer_details?.name || "").catch(err => {
             logger.warn("Failed to send upgrade email", { error: err.message });
@@ -121,7 +164,22 @@ router.post(
             break;
           }
           const isActive = ["active", "trialing"].includes(subscription.status);
-          const canonicalStatus = isActive ? "pro" : "free";
+          let canonicalStatus;
+          if (isActive) {
+            const mappedPlan = mapSubscriptionToPlan(subscription);
+            if (!mappedPlan) {
+              logger.error(`${event.type}: unknown price id — refusing to default to pro`, {
+                subscriptionId: subscription.id,
+                priceId: subscription?.items?.data?.[0]?.price?.id ?? null,
+                customer: subscription.customer,
+              });
+              increment("subscription_mapping_unknown", { source: "subscription" });
+              break;
+            }
+            canonicalStatus = mappedPlan;
+          } else {
+            canonicalStatus = "free";
+          }
           const syncResult = await db
             .update(users)
             .set({
@@ -186,10 +244,20 @@ router.post(
             logger.warn("invoice.paid missing customer field", { invoiceId: invoice.id });
             break;
           }
+          const invoicePlan = mapInvoiceToPlan(invoice);
+          if (!invoicePlan) {
+            logger.error("invoice.paid: unknown price id — refusing to default to pro", {
+              invoiceId: invoice.id,
+              priceId: invoice?.lines?.data?.[0]?.price?.id ?? null,
+              customer: invoice.customer,
+            });
+            increment("subscription_mapping_unknown", { source: "invoice_paid" });
+            break;
+          }
           const paidResult = await db
             .update(users)
             .set({
-              subscriptionStatus: "pro",
+              subscriptionStatus: invoicePlan,
               updatedAt: new Date(),
             })
             .where(eq(users.stripeCustomerId, invoice.customer));
@@ -197,7 +265,7 @@ router.post(
           if (paidRows === 0) {
             logger.warn("invoice.paid: no user found for stripeCustomerId", { customer: invoice.customer });
           } else {
-            logger.info("Invoice paid, confirmed pro", { customer: invoice.customer });
+            logger.info("Invoice paid, plan confirmed", { customer: invoice.customer, plan: invoicePlan });
           }
           break;
         }
