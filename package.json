@@ -107,6 +107,6 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "nodemon": "^3.1.14",
-    "vite-bundle-visualizer": "^1.2.1"
+    "rollup-plugin-visualizer": "^6.0.11"
   }
 }

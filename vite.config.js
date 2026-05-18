@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { visualizer } from "vite-bundle-visualizer";
+import { visualizer } from "rollup-plugin-visualizer";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,9 +11,11 @@ export default defineConfig({
   plugins: [
     react({ jsxRuntime: 'automatic' }),
     visualizer({
-      filename: "./bundle-report.html",
-      open: false,
+      filename: './bundle-report.html',
+      template: 'treemap',
       gzipSize: true,
+      brotliSize: true,
+      open: false,
     }),
   ],
   root: resolve(__dirname, 'client'),
