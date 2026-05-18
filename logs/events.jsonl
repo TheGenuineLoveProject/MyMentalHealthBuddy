@@ -332,3 +332,12 @@
 {"type":"buddy_panel_viewed","guestId":"g_mp57ubn6_kxbvql","metadata":{"surface":"start","state":"calm"},"ts":1778746671577}
 {"type":"buddy_accessibility_ready","guestId":"g_mp57ubn6_kxbvql","metadata":{},"ts":1778746671578}
 {"type":"start_page_click","guestId":"g_mp57ubn6_kxbvql","metadata":{},"ts":1778746671579}
+{"type":"buddy_panel_viewed","guestId":"guest_1779089768177_z9ndbe07","metadata":{"surface":"start","state":"calm"},"ts":1779090075667}
+{"type":"buddy_accessibility_ready","guestId":"guest_1779089768177_z9ndbe07","metadata":{},"ts":1779090075669}
+{"type":"start_page_click","guestId":"guest_1779089768177_z9ndbe07","metadata":{},"ts":1779090075670}
+{"type":"buddy_panel_viewed","guestId":"guest_1779089768177_z9ndbe07","metadata":{"surface":"start","state":"overwhelmed"},"ts":1779090076622}
+{"type":"buddy_grounding_visible","guestId":"guest_1779089768177_z9ndbe07","metadata":{"state":"overwhelmed"},"ts":1779090076624}
+{"type":"return_user_detected","guestId":"guest_1779089768177_z9ndbe07","metadata":{"daysAway":17,"currentStreak":1},"ts":1779090076627}
+{"type":"buddy_baseline_applied","guestId":"guest_1779089768177_z9ndbe07","metadata":{"baseline":"overwhelmed","currentStreak":1,"daysAway":17},"ts":1779090076628}
+{"type":"buddy_state_recovered","guestId":"guest_1779089768177_z9ndbe07","metadata":{"from":"overwhelmed","to":"calm"},"ts":1779090096641}
+{"type":"buddy_panel_viewed","guestId":"guest_1779089768177_z9ndbe07","metadata":{"surface":"start","state":"calm"},"ts":1779090097642}
