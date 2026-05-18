@@ -2,7 +2,13 @@
 node_modules/
 
 # Build output
-client/dist/
+# NOTE: client/dist/ and dist/ are intentionally tracked. Replit's deploy
+# checkpoint snapshots the git tree into the build container; without these
+# tracked, the runtime VM boots with no SPA bundle and the GET / health
+# probe 404s before the boot-time rebuild can finish. See .replitignore
+# header for the full rationale.
+# client/dist/
+# dist/
 
 # Environment
 .env
