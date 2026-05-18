@@ -11,14 +11,6 @@ run = ["sh", "-c", "if [ ! -d node_modules/express ]; then echo '[boot] node_mod
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 5099
-externalPort = 3001
-
-[[ports]]
-localPort = 24678
-externalPort = 3000
-
 [agent]
 expertMode = true
 
@@ -56,4 +48,4 @@ timeoutMs = 20000
 
 # Build cache optimization
 [build]
-cache = ["node_modules", "dist", ".cache"]
+cache = ["dist", ".cache"]
