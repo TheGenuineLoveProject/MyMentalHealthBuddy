@@ -322,6 +322,8 @@ app.get("*", (req, res, next) => {
 
   return res.sendFile(path.resolve(indexFile));
 
+});
+
 
 /* =========================================================
    FINAL CANONICAL SERVER BOOT
