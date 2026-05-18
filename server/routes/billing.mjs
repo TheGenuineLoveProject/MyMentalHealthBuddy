@@ -113,6 +113,33 @@ router.post("/checkout", async (req, res) => {
     }
 
     let resolvedPriceId = directPriceId;
+
+    const canonicalPriceId =
+      plan === "pro"
+        ? PRO_INTERVAL_PRICES[interval]
+        : plan === "elite"
+        ? ELITE_INTERVAL_PRICES[interval]
+        : planConfig?.priceId;
+
+    if (
+      directPriceId &&
+      canonicalPriceId &&
+      directPriceId !== canonicalPriceId
+    ) {
+      logger.warn("checkout blocked: price/plan mismatch", {
+        plan,
+        interval,
+        directPriceId,
+        canonicalPriceId,
+      });
+
+      increment("checkout_priceid_plan_mismatch", {
+        plan,
+        interval,
+      });
+
+      return badRequest(res, "Price/plan mismatch");
+    }
     if (!resolvedPriceId) {
       if (plan === "pro" && PRO_INTERVAL_PRICES[interval]) {
         resolvedPriceId = PRO_INTERVAL_PRICES[interval];
