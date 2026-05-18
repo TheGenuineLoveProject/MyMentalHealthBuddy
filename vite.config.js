@@ -2,15 +2,19 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { visualizer } from "vite-bundle-visualizer";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [
-    react({
-      jsxRuntime: 'automatic'
-    })
+    react({ jsxRuntime: 'automatic' }),
+    visualizer({
+      filename: "./bundle-report.html",
+      open: false,
+      gzipSize: true,
+    }),
   ],
   root: resolve(__dirname, 'client'),
   build: {
