@@ -301,7 +301,9 @@ for (const [barePath, canonical] of Object.entries(BARE_HEALTH_CANONICALS)) {
   });
 }
 
-app.use(express.static(CLIENT_DIST));
+app.use(express.static(CLIENT_DIST, {
+  index: "index.html"
+}));
 
 app.get("*", (req, res, next) => {
 
@@ -318,9 +320,7 @@ app.get("*", (req, res, next) => {
   console.log("[SPA ROUTE]", req.path);
   console.log("[SPA INDEX]", indexFile);
 
-  return res.sendFile(indexFile);
-
-});
+  return res.sendFile(path.resolve(indexFile));
 
 
 /* =========================================================
@@ -358,4 +358,3 @@ function gracefulShutdown(signal) {
 
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
 process.on("SIGINT", () => gracefulShutdown("SIGINT"));
-
