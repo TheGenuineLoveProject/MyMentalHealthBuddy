@@ -87,6 +87,26 @@ router.post("/checkout", async (req, res) => {
 
     const { plan = "pro", interval = "monthly", priceId: directPriceId } = req.body;
 
+    // P2.9C: allow-list client-supplied directPriceId against known
+    // STRIPE_PRICE_* env vars. Prevents arbitrary Stripe price IDs from
+    // being charged via the checkout endpoint.
+    if (directPriceId !== undefined && directPriceId !== null && directPriceId !== "") {
+      const allowedPriceIds = new Set([
+        process.env.STRIPE_PRICE_STARTER,
+        process.env.STRIPE_PRICE_PRO,
+        process.env.STRIPE_PRICE_PRO_MONTHLY,
+        process.env.STRIPE_PRICE_PRO_YEARLY,
+        process.env.STRIPE_PRICE_ELITE,
+        process.env.STRIPE_PRICE_ELITE_MONTHLY,
+        process.env.STRIPE_PRICE_ELITE_YEARLY,
+      ].filter(Boolean));
+      if (typeof directPriceId !== "string" || !allowedPriceIds.has(directPriceId)) {
+        logger.warn("Checkout rejected: directPriceId not in allow-list", { userId: req.dbUserId, plan, interval });
+        increment("checkout_priceid_rejected", { plan });
+        return badRequest(res, "Invalid priceId");
+      }
+    }
+
     const planConfig = PLANS[plan];
     if (!planConfig) {
       return badRequest(res, `Unknown plan: ${plan}`);
