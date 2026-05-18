@@ -321,9 +321,7 @@ app.get("*", (req, res, next) => {
   console.log("[SPA INDEX]", indexFile);
 
   return res.sendFile(path.resolve(indexFile));
-
 });
-
 
 /* =========================================================
    FINAL CANONICAL SERVER BOOT
