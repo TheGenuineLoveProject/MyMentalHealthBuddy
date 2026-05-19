@@ -1,6 +1,6 @@
 import { WellnessPageShell } from "../components/wellness/WellnessPageShell";
 import { useSEO } from "../hooks/useSEO";
-import SafetyFooter from "../components/SafetyFooter";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 import { Heart, Sparkles, Shield, Star, Sun, Flower2 } from "lucide-react";
 import { useState } from "react";
 
