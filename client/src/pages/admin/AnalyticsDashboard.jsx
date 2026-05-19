@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Eye, MousePointer, ShoppingCart, Mail, TrendingUp, Loader2, ArrowLeft, RefreshCw } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import SEO from "../../components/SEO";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function AnalyticsDashboard() {

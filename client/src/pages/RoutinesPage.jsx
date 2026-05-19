@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Sparkles, Heart, Brain, Moon, Sun, Repeat, Flame, Leaf, Shield, Star } from 'lucide-react';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { useSEO } from "../hooks/useSEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 
 const ROUTINE_TEMPLATES = [
   {

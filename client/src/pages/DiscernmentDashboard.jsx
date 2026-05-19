@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 const BELT_COLOR = {
   WHITE:  "bg-slate-100 text-slate-700 ring-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-600",

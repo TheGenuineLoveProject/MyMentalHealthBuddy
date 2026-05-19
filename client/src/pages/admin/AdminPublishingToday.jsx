@@ -4,7 +4,7 @@ import { ArrowLeft, RefreshCw, Copy, Check, Loader2, Star, Send } from 'lucide-r
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 import { useToast } from "@/hooks/use-toast";

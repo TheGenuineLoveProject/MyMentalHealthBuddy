@@ -1,5 +1,5 @@
 import SacredNav from "@/components/SacredNav.jsx";
-import SafetyFooter from "@/components/safety/SafetyFooter";
+import SafetyFooter from "@/components/safety/LegalFooter";
 
 /**
  * PageLayout — canonical wrapper for direct-routed public pages.

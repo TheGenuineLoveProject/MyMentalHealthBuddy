@@ -5,7 +5,7 @@ import { Button } from "@/components/ui";
 import { CardWrapper, CardContent } from "@/components/ui/Card";
 import { Switch } from "@/components/ui/Switch";
 import SEO from "@/components/SEO";
-import { SafetyFooter } from "@/components/safety/SafetyFooter";
+import { SafetyFooter } from "@/components/safety/LegalFooter";
 import { useReadingLevel } from "@/context/ReadingLevelContext";
 import { pickSlot } from "@/content/microcopy/wellnessMicrocopy";
 

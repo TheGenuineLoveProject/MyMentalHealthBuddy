@@ -13,7 +13,7 @@
 import { useEffect, useState } from "react";
 import "../styles/healing-animations.css";
 import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 export default function SacredGeometryBg({ 
   variant = "flowerOfLife", 

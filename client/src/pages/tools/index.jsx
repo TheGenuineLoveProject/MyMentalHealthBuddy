@@ -4,7 +4,7 @@ import {
   Brain, Heart, Compass, Wind, Shield, ShieldAlert, Moon, Activity,
 } from "lucide-react";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 export const TOOLS = [
   {

@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { Users, ArrowLeft, RefreshCw, Shield, UserCheck, Search, Loader2, Activity, TrendingUp, Clock, Mail } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function AdminUsers() {

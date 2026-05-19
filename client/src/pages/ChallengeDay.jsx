@@ -3,7 +3,7 @@ import { Link, useRoute, useLocation } from "wouter";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ArrowLeft, CheckCircle, Clock, ArrowRight, Share2, Loader2, Sparkles } from 'lucide-react';
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { ReflectionCard } from "../components/share";
 import ShareModal from "../components/share/ShareModal";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

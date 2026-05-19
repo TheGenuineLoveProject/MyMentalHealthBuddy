@@ -6,7 +6,7 @@ import { SiInstagram, SiX, SiTiktok, SiYoutube, SiFacebook, SiPinterest } from "
 import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 

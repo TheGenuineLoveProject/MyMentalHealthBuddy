@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const STATUS_CONFIG = {

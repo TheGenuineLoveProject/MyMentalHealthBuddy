@@ -4,7 +4,7 @@ import {
   AlertTriangle, ArrowLeft, BookOpen, Sparkles, ShieldAlert, Moon,
 } from "lucide-react";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
 const TOOLS = [

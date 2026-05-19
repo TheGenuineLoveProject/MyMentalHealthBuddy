@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, AlertCircle } from 'lucide-react';
 import { queryClient, apiRequest } from "../../lib/queryClient";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 

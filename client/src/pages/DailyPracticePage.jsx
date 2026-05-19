@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Sunrise, Moon, Heart, Sparkles, CheckCircle2, Clock, Target, Flame, Leaf, Shield, Wind, Waves, Sun } from 'lucide-react';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { useSEO } from "../hooks/useSEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 
 const MORNING_PRACTICES = [
   { id: "gratitude", name: "Gratitude Moment", duration: "2 min", icon: Heart, description: "Start your day by acknowledging three things you appreciate", href: "/journal" },

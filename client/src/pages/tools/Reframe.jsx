@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { RefreshCw, ArrowLeft, ArrowRight, Lightbulb, Check, Sparkles } from "lucide-react";
 import SEO from "../../components/SEO";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Textarea } from "@/components/ui/textarea";

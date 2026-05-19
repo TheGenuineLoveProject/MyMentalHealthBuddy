@@ -5,7 +5,7 @@ import { BookOpen, Clock, Star, Search, Lock, ArrowRight, CheckCircle, Loader2 }
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/context/AuthContext";

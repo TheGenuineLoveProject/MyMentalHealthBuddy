@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, MapPin, Calendar, CheckCircle2, Circle, Heart, Shield, Sun, Brain, Sparkles, Users, Flower2, Star, ChevronRight, BookOpen } from 'lucide-react';
 import { useSEO } from "../hooks/useSEO";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 

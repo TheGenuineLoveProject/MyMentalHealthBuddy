@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight, BookOpen } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 const LEVEL_LABELS = {
   beginner: { label: "Beginner", color: "sage" },

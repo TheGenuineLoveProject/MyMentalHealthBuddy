@@ -9,7 +9,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Heart, Brain, Sun, Zap, ChevronRight, Sparkles, BookOpen } from "lucide-react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import SEO from "@/components/SEO";
 import { TWELVE_PRACTICES, PRACTICE_DOMAINS, getDailyPractice } from "@/content/paths/twelvePractices";
 

@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft, AlertTriangle, Phone, Heart, Shield, ExternalLink, BookOpen, Users } from "lucide-react";
 import SEO from "../components/SEO";
 import TglpNavbar from "../components/TglpNavbar";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 

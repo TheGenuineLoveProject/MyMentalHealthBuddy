@@ -10,7 +10,7 @@ const Youtube = SiYoutube;
 const Linkedin = FaLinkedin;
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { SEO } from "@/components/SEO";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const PLATFORMS = [

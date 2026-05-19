@@ -8,7 +8,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { useSEO } from "../hooks/useSEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /*  Static wisdom — paths and pillars that are NOT user-specific.            */

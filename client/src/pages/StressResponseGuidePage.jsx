@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Zap, Snowflake, Heart, Shield, Brain, Activity, ArrowRight, CheckCircle2 } from "lucide-react";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

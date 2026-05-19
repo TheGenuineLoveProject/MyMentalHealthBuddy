@@ -4,7 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, FileText, Mail, Calendar, Copy, Check, Loader2, BarChart3, GitPullRequest, Lightbulb, AlertTriangle, CheckCircle, TrendingUp, Users, Eye, PenLine, Plus, X, Share2, Filter } from 'lucide-react';
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 

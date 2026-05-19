@@ -14,7 +14,7 @@ import MoodPieChart from "../components/charts/MoodPieChart";
 import EmotionAdaptiveBackground, { LotusDivider, SacredGlow } from "../components/EmotionAdaptiveBackground";
 import TimeOfDayBackground, { useTimeOfDay } from "../components/TimeOfDayBackground";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { useAuth } from "../context/AuthContext";
 
 function WelcomeHeader({ user }) {

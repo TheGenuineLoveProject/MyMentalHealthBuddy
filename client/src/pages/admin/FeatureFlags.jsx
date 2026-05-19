@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../../components/SEO";
 import { useToast } from "@/hooks/use-toast";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 
 const DEFAULT_FLAGS = [
   { id: "new_onboarding", name: "New Onboarding Flow", enabled: true, percentage: 100, description: "Redesigned onboarding experience" },

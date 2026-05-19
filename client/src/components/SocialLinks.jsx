@@ -8,7 +8,7 @@ import { MessageCircle } from "lucide-react";
 import { Youtube, Instagram, Twitter, Facebook } from "../lib/lucide-brands";
 import { VERIFIED_CHANNELS } from '../config/social';
 import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 const PLATFORM_ICONS = {
   youtube: Youtube,

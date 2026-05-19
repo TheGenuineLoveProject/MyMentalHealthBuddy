@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Moon, Sun, Cloud, Leaf, Heart, Brain, Clock, Play, Pause, Sparkles, BookOpen, Eye, Anchor } from 'lucide-react';
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";

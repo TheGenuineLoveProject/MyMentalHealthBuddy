@@ -8,7 +8,7 @@ import QuestionReflection from "@/components/consciousness/QuestionReflection";
 import GrowthTimeline from "@/components/growth/GrowthTimeline";
 import ExportPanel from "@/components/export/ExportPanel";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { useReadingLevel } from "@/context/ReadingLevelContext";
 import { Hero } from "@/components/ui";

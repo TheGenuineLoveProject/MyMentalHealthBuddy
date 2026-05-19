@@ -5,7 +5,7 @@ import { BRAND } from "@shared/brand";
 import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import StartHerePathways from "../components/StartHerePathways.jsx";
 import { useSEO, createWebSiteSchema } from "../hooks/useSEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 

@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useLocation } from "wouter";
 import { Heart, Lightbulb, Users, Zap, BarChart3, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Brain, KeyRound, Settings, Eye, Compass, Sun, Feather, Waves, Fingerprint, HeartHandshake, Infinity } from 'lucide-react';
 import "../styles/canva-landing.css";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import SoftLaunchBanner from "../components/SoftLaunchBanner";
 import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
 import FloatIdleAnimated from "../components/lumi/FloatIdleAnimated.jsx";

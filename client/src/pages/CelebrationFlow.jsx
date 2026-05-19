@@ -14,7 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import "@/styles/celebration.css";
 

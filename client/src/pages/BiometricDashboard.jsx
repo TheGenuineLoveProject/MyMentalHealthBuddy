@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 const STATE_COLOR = {
   ventral:     "from-emerald-400 via-teal-400 to-cyan-400",

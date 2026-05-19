@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Info } from "lucide-react";
 import SEO from "../components/SEO";
 import { StateTracker } from "../components/state/StateTracker.tsx";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import BenefitsBlock from "../components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

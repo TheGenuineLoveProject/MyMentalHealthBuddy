@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Scale, FileText, Shield, ArrowLeft } from "lucide-react";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 

@@ -8,7 +8,7 @@ import { BRAND } from "@shared/brand";
 import { useSEO, createArticleSchema } from "../hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 const NEWS_CATEGORIES = [
   { id: "all", label: "All Updates", icon: Newspaper },

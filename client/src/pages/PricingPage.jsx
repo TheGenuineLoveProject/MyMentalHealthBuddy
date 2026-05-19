@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Check, Sparkles, Shield, Heart, Zap, HelpCircle } from "lucide-react";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import NewsletterSignup from "../components/NewsletterSignup";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";

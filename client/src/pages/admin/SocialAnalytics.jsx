@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { 
   ArrowLeft, TrendingUp, BarChart2, Users, Eye, Heart, MessageCircle, Share2, Calendar, Activity, Target, AlertCircle } from "lucide-react";
 import { Instagram, Twitter, Youtube } from "../../lib/lucide-brands";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 

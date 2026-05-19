@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useLocation } from "wouter";
 import { SEO } from "@/components/seo/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import { BenefitsBlock } from "@/components/marketing/BenefitsBlock";
 import { buildPageContext } from "@/content/context/buildPageContext";
 import { getBenefitsForRoute } from "@/content/benefits/benefitsBank";

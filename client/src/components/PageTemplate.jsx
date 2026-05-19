@@ -41,7 +41,7 @@ import { getVariant, getBulletVariant } from '../content/readingLevels.js';
 import { NotMedicalAdvice, CrisisNotice } from './SafetyDisclaimer.jsx';
 import SocialShare from './SocialShare.jsx';
 import styles from './PageTemplate.module.css';
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import PageScaffold from "./layout/PageScaffold.tsx";
 import { ModulesPanel } from "./modules/ModulesPanel";
 import { getRouteMeta, resolveInternalLinks } from "../content/meta/routeMetaRegistry";

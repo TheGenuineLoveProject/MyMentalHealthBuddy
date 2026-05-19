@@ -7,7 +7,7 @@ import { Server, Database, Cpu, Activity, CheckCircle, AlertTriangle, AlertCircl
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
 import Top50ProcessTracker from "@/components/admin/Top50ProcessTracker";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 function StatusIndicator({ status }) {

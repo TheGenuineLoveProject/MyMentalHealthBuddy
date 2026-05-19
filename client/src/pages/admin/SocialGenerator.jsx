@@ -5,7 +5,7 @@ import {
   ArrowLeft, Sparkles, MessageCircle, Save, Wand2, AlertCircle, CheckCircle, Loader2, RefreshCw, Shield, Zap, Clock, Hash } from "lucide-react";
 import { Instagram, Twitter, Youtube, Linkedin } from "../../lib/lucide-brands";
 import { queryClient, apiRequest } from "../../lib/queryClient";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 

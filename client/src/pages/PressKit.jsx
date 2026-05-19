@@ -3,7 +3,7 @@ import { FileText, Download, Image, Palette, Mail } from 'lucide-react';
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 
 export default function PressKit() {
   const brandColors = [

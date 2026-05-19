@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { ArrowLeft, BookOpen, ChevronRight, ChevronDown, Wind, Anchor, Heart, Brain, Sparkles, CheckCircle2, Clock, Target, Lightbulb, Play } from 'lucide-react';

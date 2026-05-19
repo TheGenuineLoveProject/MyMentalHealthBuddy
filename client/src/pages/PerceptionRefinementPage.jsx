@@ -4,7 +4,7 @@ import { Hero } from "@/components/ui/Hero";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

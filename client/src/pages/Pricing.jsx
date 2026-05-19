@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "wouter";
 import { Check, Star, Crown, Zap, Gem, ArrowLeft, Loader2, Heart, Shield, Sparkles, Users, Mail, ArrowRight } from "lucide-react";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import PricingFAQ from "../sections/PricingFAQ.jsx";
 import { TrustSignals } from "../components/benefits";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

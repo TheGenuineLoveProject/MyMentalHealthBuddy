@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Sparkles, Heart, Sun, Droplets, Move, Users, Palette, BookOpen, Music, CheckCircle2, Phone, Shield } from 'lucide-react';
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import SEO from "@/components/SEO";
 import { Hero } from "@/components/ui";
 import { useReadingLevel } from "@/context/ReadingLevelContext";

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner, AdminLoadingState } from "../../components/admin/AdminQueryStates";
 
 const CONTENT_TIERS = ["beginner", "intermediate", "advanced"];

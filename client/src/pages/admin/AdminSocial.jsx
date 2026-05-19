@@ -4,7 +4,7 @@ import { Calendar, Hash, Zap, FileText, Check, Clock, RefreshCw, Copy, Eye, Edit
 import { SiInstagram, SiX, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
 import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import SEO from "../../components/SEO";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 
 const API_BASE = "/api/admin/social/enterprise";
 

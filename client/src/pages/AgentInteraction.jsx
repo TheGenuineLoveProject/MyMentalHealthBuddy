@@ -8,7 +8,7 @@ import {
 import { apiRequest } from "@/lib/queryClient";
 import { useAuth } from "@/context/AuthContext.jsx";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 function StatusDot({ status }) {
   const map = {

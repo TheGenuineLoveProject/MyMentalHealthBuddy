@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Moon, Sun, Clock, Coffee, Smartphone, Wind, ThermometerSun, Bed, CheckCircle2, XCircle, Sparkles } from "lucide-react";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";

@@ -5,7 +5,7 @@ import { DollarSign, TrendingUp, Users, CreditCard, Calendar, RefreshCw, ArrowLe
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function RevenueAdmin() {

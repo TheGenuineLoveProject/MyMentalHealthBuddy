@@ -5,7 +5,7 @@ import {
   ArrowLeft, Calendar, ChevronLeft, ChevronRight, MessageCircle, Trash2, Plus, X, Loader2, Clock, Send, AlertCircle } from "lucide-react";
 import { Instagram, Twitter, Youtube } from "../../lib/lucide-brands";
 import { queryClient, apiRequest } from "../../lib/queryClient";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 

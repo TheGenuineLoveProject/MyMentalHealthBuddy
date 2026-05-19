@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/Label.jsx";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/Switch";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 
 const PLATFORMS = [
   { id: "instagram", name: "Instagram", icon: SiInstagram, color: "bg-gradient-to-r from-purple-500 to-pink-500", charLimit: 2200, textColor: "text-white" },

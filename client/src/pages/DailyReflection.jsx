@@ -7,7 +7,7 @@ import {
   Loader2, Check, PenLine, BookOpen, Users
 } from "lucide-react";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { useGamification } from "../context/GamificationContext.jsx";
 
 const MOOD_OPTIONS = [

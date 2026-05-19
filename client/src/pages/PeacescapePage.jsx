@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Sparkles, Map, Heart, Wand2 } from "lucide-react";
 import ZenScape from "@/components/zen/ZenScape";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import CustomizerPanel from "@/components/peacescape/CustomizerPanel";
 import InteractiveBuddy from "@/components/peacescape/InteractiveBuddy";
 import { apiRequest } from "@/lib/queryClient";

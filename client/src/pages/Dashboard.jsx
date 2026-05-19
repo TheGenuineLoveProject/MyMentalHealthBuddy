@@ -10,7 +10,7 @@ import "../styles/brand.css";
 import "../styles/sacred-visuals.css";
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import NewsletterSignup from "../components/NewsletterSignup";
 import MoodHistoryChart from "../components/MoodHistoryChart.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

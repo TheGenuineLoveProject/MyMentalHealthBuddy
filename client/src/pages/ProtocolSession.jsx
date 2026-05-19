@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 const NODE_BADGE = {
   PSYCHOED:     { label: "Psychoeducation", color: "bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-200" },

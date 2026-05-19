@@ -7,7 +7,7 @@ import {
 import { SEO } from "@/components/SEO";
 import PageTemplate from "@/components/PageTemplate";
 import BenefitsBlock from "@/components/BenefitsBlock";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { CrisisNotice } from "@/components/PersistentDisclaimer";

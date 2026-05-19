@@ -8,7 +8,7 @@ import { Link } from "wouter";
 import { Eye, Heart, Brain, Feather, ArrowRight } from "lucide-react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 import { InfinityHeartCard } from "@/components/share/InfinityHeartCard";
 import SEO from "@/components/SEO";
 

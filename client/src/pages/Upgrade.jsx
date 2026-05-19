@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Crown, ArrowLeft, Sparkles, Zap, Shield, Star, ArrowRight, Loader2 } from 'lucide-react';
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";

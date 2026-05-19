@@ -6,7 +6,7 @@ import {
   Lightbulb, Compass, Sun, Moon, Feather, Target
 } from 'lucide-react';
 import TglpNavbar from '../components/TglpNavbar';
-import SafetyFooter from '../components/ui/SafetyFooter';
+import SafetyFooter from '../components/ui/ReflectionFooter';
 
 const TOPIC_CATEGORIES = [
   {

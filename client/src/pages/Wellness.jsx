@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import SEO from "../components/SEO";
 import { useGamification } from "../context/GamificationContext.jsx";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 

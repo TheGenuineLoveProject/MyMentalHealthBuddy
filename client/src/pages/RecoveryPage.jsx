@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Heart, Shield, Leaf, Waves, Brain, Sparkles, ChevronRight, Phone, Users, AlertCircle, Clock, Compass } from 'lucide-react';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { useSEO } from "../hooks/useSEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 
 const RECOVERY_AREAS = [
   {

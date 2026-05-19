@@ -2,7 +2,7 @@
  * @deprecated DUPLICATE COMPONENT
  * 
  * Canonical Footer: import { Footer } from '@/components/ui'
- * Safety Footer: import SafetyFooter from '@/components/ui/SafetyFooter'
+ * Safety Footer: import SafetyFooter from '@/components/ui/ReflectionFooter'
  * 
  * This file is kept for backwards compatibility but should not be used
  * for new development. Please migrate to the canonical version.

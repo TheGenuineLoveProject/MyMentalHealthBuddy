@@ -9,7 +9,7 @@ import TGLPMandala from "@/components/lumi/TGLPMandala.jsx";
 import TGLPMandalaImage from "@/components/lumi/TGLPMandalaImage.jsx";
 import useScrollReveal from "@/hooks/useScrollReveal.js";
 import useBuddyEmotion from "@/hooks/useBuddyEmotion.js";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 function Section({ id, title, kicker, children }) {
   return (

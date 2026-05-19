@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, AlertTriangle, Brain, RotateCcw, ShieldAlert } from "lucide-react";
 import SEO from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 const QUESTIONS = [
   "Feeling nervous, anxious, or on edge",

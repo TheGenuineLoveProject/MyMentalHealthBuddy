@@ -6,7 +6,7 @@
  * @deprecated SPECIALIZED COMPONENT - Use sparingly
  * 
  * Canonical Footer: import { Footer } from '@/components/ui'
- * Safety Footer: import SafetyFooter from '@/components/ui/SafetyFooter'
+ * Safety Footer: import SafetyFooter from '@/components/ui/ReflectionFooter'
  * 
  * This elaborate footer is for marketing/landing pages only.
  * For tool pages, use SafetyFooter instead.

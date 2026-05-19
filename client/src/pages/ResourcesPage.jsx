@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { ArrowLeft, ExternalLink, Phone, MessageSquare, Globe, Heart, Shield, Users, BookOpen, Headphones, Sparkles, AlertTriangle, Clock, MapPin } from 'lucide-react';

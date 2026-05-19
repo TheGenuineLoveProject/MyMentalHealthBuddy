@@ -4,7 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import { ArrowLeft, Heart, Sparkles, ChevronRight, Send, Check, RefreshCw } from 'lucide-react';
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 
 const PROMPTS = [
   "What small moment brought you comfort today?",

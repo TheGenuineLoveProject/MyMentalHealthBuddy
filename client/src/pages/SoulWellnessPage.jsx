@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { ArrowLeft, Sparkles, Heart, Sun, Moon, Star, Compass, Feather, Flame, Eye, Book, Lightbulb, Users, Clock } from 'lucide-react';
 import { Button } from "@/components/ui/Button";

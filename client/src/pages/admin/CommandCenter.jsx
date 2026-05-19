@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Shield, Activity, Users, Database, Server, Globe, AlertTriangle, CheckCircle, Clock, RefreshCw, BarChart3, Zap, FileText, Settings, ArrowRight, TrendingUp, Eye, Lock, HardDrive, AlertCircle, BookOpen, MessageSquare, Heart, Calendar, Megaphone, Mail, Flag, Palette, Search, LayoutDashboard, PenTool, Layers, LineChart, ShieldCheck, ToggleLeft, Star, ClipboardList, Sparkles, Brain, Compass, Flame, Leaf, Sun, Moon, Lightbulb, Target, DollarSign, Wand2, GraduationCap, Headphones, HeartHandshake, Flower2, TreePine, CircleDot, Footprints, Gem, Mountain, Feather, CheckSquare, Play, UserCheck, CreditCard, Key, Workflow, Network, Gauge, Trophy, Award, Landmark, Orbit, Rocket, Puzzle, FileQuestion, Webhook, Share2, Contact, Inbox, LogIn, PackageCheck, Milestone, Handshake, Upload, UserCog, ListOrdered, Radio, Fingerprint, FolderKanban, Rss } from 'lucide-react';
 import { useSEO } from "@/hooks/useSEO";
-import SafetyFooter from "../../components/ui/SafetyFooter";
+import SafetyFooter from "../../components/ui/ReflectionFooter";
 import SafeBoundary from "../../components/SafeBoundary";
 import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
 import OperationsPanel from "@/components/admin/OperationsPanel";

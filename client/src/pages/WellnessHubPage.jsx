@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, HelpCircle, LifeBuoy, Palette, Activity, Microscope, MapPin, Target, Clock, RefreshCw, FileText, Lightbulb, MessageCircle, Compass } from 'lucide-react';
-import SafetyFooter from "../components/ui/SafetyFooter";
+import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
