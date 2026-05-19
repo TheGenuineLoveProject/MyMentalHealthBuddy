@@ -10,53 +10,9 @@ import OperationsPanel from "@/components/admin/OperationsPanel";
 import ConsciousnessRegistryPanel from "@/components/admin/ConsciousnessRegistryPanel";
 import OrchestratorTestPanel from "@/components/admin/OrchestratorTestPanel";
 import RecentActivityPanel from "@/components/admin/RecentActivityPanel";
+import MetricCard from "@/components/admin/MetricCard";
+import StatusBadge from "@/components/admin/StatusBadge";
 import styles from "./CommandCenter.module.css";
-
-function StatusBadge({ status }) {
-  const safeStatus = typeof status === 'string' ? status : 'healthy';
-  const statusStyles = {
-    healthy: styles.statusHealthy,
-    warning: styles.statusWarning,
-    error: styles.statusError,
-    unknown: styles.statusWarning
-  };
-  const icons = {
-    healthy: CheckCircle,
-    warning: AlertTriangle,
-    error: AlertCircle,
-    unknown: Clock
-  };
-  const Icon = icons[safeStatus] || CheckCircle;
-  
-  return (
-    <span className={`${styles.statusBadge} ${statusStyles[safeStatus] || styles.statusHealthy}`}>
-      <Icon className={styles.statusIcon} />
-      {safeStatus.charAt(0).toUpperCase() + safeStatus.slice(1)}
-    </span>
-  );
-}
-
-function MetricCard({ title, value, subtitle, icon: Icon, color = "sage" }) {
-  const iconClass = {
-    sage: styles.metricIconSage,
-    gold: styles.metricIconGold,
-    blush: styles.metricIconBlush,
-    teal: styles.metricIconTeal
-  }[color] || styles.metricIconSage;
-  
-  return (
-    <div className={styles.metricCard} data-testid={`metric-${title.toLowerCase().replace(/\s+/g, '-')}`}>
-      <div className={styles.metricHeader}>
-        <div className={`${styles.metricIconContainer} ${iconClass}`}>
-          <Icon className={styles.metricIcon} />
-        </div>
-      </div>
-      <p className={styles.metricValue} data-testid={`metric-value-${title.toLowerCase().replace(/\s+/g, '-')}`}>{value}</p>
-      <p className={styles.metricLabel} data-testid={`metric-label-${title.toLowerCase().replace(/\s+/g, '-')}`}>{title}</p>
-      {subtitle && <p className={styles.metricSubtitle} data-testid={`metric-subtitle-${title.toLowerCase().replace(/\s+/g, '-')}`}>{subtitle}</p>}
-    </div>
-  );
-}
 
 function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
   const dbStatus = health?.database?.connected ? 'healthy' : (health?.database ? 'warning' : 'unknown');
