@@ -19,7 +19,6 @@ import DailyToolsPanel from "@/components/admin/DailyToolsPanel";
 import SystemTelemetryPanel from "@/components/admin/SystemTelemetryPanel";
 import DailyOpsChecklist from "@/components/admin/DailyOpsChecklist";
 import AIKnowledgeHub from "@/components/admin/AIKnowledgeHub";
-import { toolCategories } from "@/config/toolCategories";
 import styles from "./CommandCenter.module.css";
 
 function formatUptime(seconds) {
