@@ -8,7 +8,8 @@
  * Note: BuddyAvatar's `motion` is derived from `state`, not a prop —
  * the gentle pulse motion comes from the calm-state contract.
  */
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 export interface LoadingSpinnerProps {
   text?: string;
