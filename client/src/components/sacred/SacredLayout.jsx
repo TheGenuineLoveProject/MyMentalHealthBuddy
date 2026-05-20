@@ -51,14 +51,6 @@ export default function SacredLayout({
 
   return (
     <>
-      <a 
-        href={skipLinkTarget} 
-        className={styles.skipLink}
-        data-testid="skip-link"
-      >
-        Skip to main content
-      </a>
-      
       <div 
         ref={layoutRef}
         className={`${styles.layout} ${className}`}
