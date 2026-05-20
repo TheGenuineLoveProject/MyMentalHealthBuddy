@@ -11,7 +11,8 @@
 import { Link } from 'wouter';
 import { AlertTriangle, Phone, ExternalLink } from 'lucide-react';
 import styles from './SafetyDisclaimer.module.css';
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 export function SafetyDisclaimer({
   variant = 'default',
@@ -40,10 +41,10 @@ export function SafetyDisclaimer({
           borderRadius: '50%',
         }}
       >
-        <BuddyAvatar
-          state="sad"
-          colorMode="purple"
-          size="sm"
+        <MMHBFloatAvatar
+          imageSrc={getOfficialLumi("supportive")}
+          size={32}
+          alt="Lumi offering gentle support"
           data-testid="img-disclaimer-lumi"
         />
       </div>
