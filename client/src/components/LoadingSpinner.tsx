@@ -47,11 +47,10 @@ export default function LoadingSpinner({
           animation: "loadingSpinnerRotate 2.6s linear infinite",
         }}
       >
-        <BuddyAvatar
-          state="calm"
-          colorMode="blue"
-          pose="waving"
-          size="sm"
+        <MMHBFloatAvatar
+          imageSrc={getOfficialLumi("calm")}
+          size={48}
+          alt="Lumi loading companion"
           data-testid="loading-spinner-buddy"
         />
       </div>

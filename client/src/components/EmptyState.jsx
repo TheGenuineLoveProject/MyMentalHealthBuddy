@@ -1,7 +1,8 @@
 import { Link } from "wouter";
 import { Smile, BookOpen, MessageCircle, BarChart3, Plus, ArrowRight, Heart } from "lucide-react";
 import { pickSlot } from "../content/microcopy/wellnessMicrocopy";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 const EMPTY_STATE_CONFIGS = {
   moods: {
@@ -93,12 +94,10 @@ export default function EmptyState({
           slot per Avatar Uniformity v4.2 spec. The original Icon is kept
           imported for EmptyStateInline below. */}
       <div className="mx-auto mb-6 flex items-center justify-center" style={{ width: 128, height: 128 }}>
-        <BuddyAvatar
-          state="sad"
-          colorMode="purple"
-          pose="hugging"
-          size="lg"
-          overlay
+        <MMHBFloatAvatar
+          imageSrc={getOfficialLumi("supportive")}
+          size={128}
+          alt="Lumi offering gentle support"
           data-testid={`empty-state-${type}-buddy`}
         />
       </div>
