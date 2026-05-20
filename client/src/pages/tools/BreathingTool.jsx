@@ -13,12 +13,12 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import "@/styles/breathing-tool.css";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 const BREATH_PHASES = [
   { key: "inhale", label: "Inhale",  seconds: 4, scale: 1.25 },
@@ -243,10 +243,12 @@ export default function BreathingTool() {
                   10s breath cycle, color drifts with sub-phase via CSS. */}
               <span className="breath-glow" aria-hidden="true" />
               <MMHBFloatAvatar
-                imageSrc={getOfficialLumi(avatar.lumi)}
-                size={avatar.size}
-                alt={avatar.aria}
-                data-testid={`img-breathing-buddy-${phase}`}
+                imageSrc={getOfficialLumi("breathe")}
+                emotion="calm"
+                size="lg"
+                animated
+                breathing
+                data-testid="breathingtool-lumi"
               />
             </div>
           </div>
