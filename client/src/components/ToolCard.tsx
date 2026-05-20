@@ -7,10 +7,12 @@
  * wouter so client navigation stays intact.
  */
 import { Link } from "wouter";
-import BuddyAvatar, {
-  type BuddyColorMode,
-  type BuddyState,
+import type {
+  BuddyColorMode,
+  BuddyState,
 } from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 export type ToolCategory =
   | "anxiety"
@@ -108,10 +110,10 @@ export default function ToolCard({
       }}
     >
       <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
-        <BuddyAvatar
-          state={resolvedState}
-          colorMode={resolvedColor}
-          size="sm"
+        <MMHBFloatAvatar
+          imageSrc={getOfficialLumi("calm")}
+          size={32}
+          alt="Lumi tool helper"
           data-testid={`${slug}-avatar`}
         />
       </div>
