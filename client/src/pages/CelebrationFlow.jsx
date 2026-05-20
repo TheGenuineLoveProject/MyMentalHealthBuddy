@@ -12,11 +12,12 @@
  */
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import "@/styles/celebration.css";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 const PHASE_1_MS = 3000;
 const PHASE_2_MS = 3000;
@@ -164,11 +165,10 @@ export default function CelebrationFlow() {
         >
           {phase === 1 && (
             <>
-              <BuddyAvatar
-                state="celebrate"
-                colorMode="orange"
-                size="xl"
-                overlay
+              <MMHBFloatAvatar
+                imageSrc={getOfficialLumi("encouraging")}
+                size={160}
+                alt="Lumi celebrating progress"
                 data-testid="img-celebration-phase-1"
               />
               <h1 className="mt-6 text-4xl font-semibold text-amber-700" data-testid="text-title-1">
@@ -180,12 +180,10 @@ export default function CelebrationFlow() {
 
           {phase === 2 && (
             <>
-              <BuddyAvatar
-                state="celebrate"
-                colorMode="yellow"
-                pose="celebrating"
-                size="xl"
-                overlay
+              <MMHBFloatAvatar
+                imageSrc={getOfficialLumi("encouraging")}
+                size={160}
+                alt="Lumi celebrating progress"
                 data-testid="img-celebration-phase-2"
               />
               <h2 className="mt-6 text-3xl font-semibold text-amber-700" data-testid="text-title-2">
@@ -197,12 +195,10 @@ export default function CelebrationFlow() {
 
           {phase === 3 && (
             <>
-              <BuddyAvatar
-                state="celebrate"
-                colorMode="yellow"
-                pose="celebrating"
-                size="xl"
-                overlay
+              <MMHBFloatAvatar
+                imageSrc={getOfficialLumi("encouraging")}
+                size={160}
+                alt="Lumi celebrating progress"
                 data-testid="img-celebration-phase-3"
               />
               <h2 className="mt-6 text-3xl font-semibold text-amber-700" data-testid="text-title-3">
