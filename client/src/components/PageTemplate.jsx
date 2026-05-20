@@ -1036,7 +1036,7 @@ export default function PageTemplate({ config, children, routeKey }) {
         </nav>
       </header>
 
-      <main id="main-content" className={toneClass}>
+        <div className={toneClass}>
         {config.stimulationProfile === 'quiet' ? (
           <QuietProfileWrapper quietProfile={config.quietProfile}>
             <HeroSection hero={config.hero} readingLevel={readingLevel} />
@@ -1156,7 +1156,7 @@ export default function PageTemplate({ config, children, routeKey }) {
             {children}
           </>
         )}
-      </main>
+      </div>
 
       <SacredFooter />
     </SacredLayout>
