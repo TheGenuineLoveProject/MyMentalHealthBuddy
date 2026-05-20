@@ -10,7 +10,8 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
@@ -224,12 +225,10 @@ export default function CheckIn() {
           aria-live="polite"
           data-testid="container-buddy"
         >
-          <BuddyAvatar
-            state={avatar.state}
-            colorMode={avatar.colorMode}
-            pose={avatar.pose}
-            size={phase === "complete" ? "xl" : "xl"}
-            overlay
+          <MMHBFloatAvatar
+            imageSrc={getOfficialLumi("supportive")}
+            size={128}
+            alt="Lumi gently checking in with you"
             data-testid={`img-checkin-buddy-${phase}`}
           />
         </div>
