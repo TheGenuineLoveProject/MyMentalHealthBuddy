@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 import { detectChatSentiment, aiStateToPose } from "@/lib/buddyEmotion";
 import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguagePattern";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
@@ -186,11 +187,10 @@ export default function AIChatPanel() {
                 const pose = s.pose ?? aiStateToPose(aiState);
                 return (
                   <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
-                    <BuddyAvatar
-                      state={s.state}
-                      size="sm"
-                      colorMode={s.colorMode}
-                      pose={pose}
+                    <MMHBFloatAvatar
+                      imageSrc={getOfficialLumi("supportive")}
+                      size={32}
+                      alt="Lumi listening"
                       data-testid={`img-chat-assistant-${i}`}
                     />
                   </div>
@@ -216,11 +216,10 @@ export default function AIChatPanel() {
               <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
                 {/* Part 4 spec: AI typing → pose="thinking". State stays
                     "anxious" so lumi-breathe motion still plays during wait. */}
-                <BuddyAvatar
-                  state="anxious"
-                  size="sm"
-                  colorMode="blue"
-                  pose={aiStateToPose("typing")}
+                <MMHBFloatAvatar
+                  imageSrc={getOfficialLumi("supportive")}
+                  size={32}
+                  alt="Lumi listening"
                   data-testid="img-chat-assistant-typing"
                 />
               </div>
