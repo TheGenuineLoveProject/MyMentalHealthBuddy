@@ -7,6 +7,8 @@ import BenefitsBlock from "../components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 const CHALLENGE_DAYS = [
   {
@@ -125,163 +127,212 @@ export default function Challenge() {
 
   const completedCount = Object.keys(progress).filter(k => progress[k]).length;
   const percentComplete = Math.round((completedCount / 7) * 100);
-
   return (
-  <WellnessPageShell
-    title="Challenge"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
-    <div className="min-h-screen bg-gradient-to-b from-[var(--glp-sage-10)] to-white dark:from-slate-900 dark:to-slate-800">
-      <SEO 
-        title="7-Day Gentle Challenge | MyMentalHealthBuddy"
-        description="A gentle 7-day self-reflection practice. Skip anytime. You're always welcome."
-      />
-      
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/" className="p-2 rounded-lg hover:bg-white/50 dark:hover:bg-slate-800 transition-colors">
-            <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-              7-Day Gentle Challenge
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400">
-              Small daily practices. Skip anytime. You're still welcome here.
-            </p>
-          </div>
-        </div>
-        
-        <BenefitsBlock
-          benefit="Daily self-reflection, emotional awareness, and gentle growth"
-          duration="60 seconds – 3 minutes per day"
-          control="Skip any day, return anytime — no streak pressure"
-          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
-          variant="minimal"
-          className="mb-6"
+    <WellnessPageShell
+      title="Challenge"
+      subtitle="Educational reflection tools. Choose what feels safe and supportive."
+      benefits={pickBenefits(
+        ["agency", "calm", "clarity", "selfRespect", "meaning"],
+        5
+      )}
+      clarity={{
+        what: "A self-paced reflection tool you control.",
+        why: "To support clarity, values alignment, and gentle next steps.",
+        who: "For adults (18+) who want educational wellness tools (not medical care).",
+        when: "Anytime you want a small reset or a thoughtful pause.",
+        where: "Anywhere you can breathe and write for 1–5 minutes.",
+        how: "Pick one prompt, answer briefly, stop whenever you want.",
+      }}
+      examples={[
+        {
+          label: "Beginner",
+          examples: [
+            "Write one honest sentence about how you feel.",
+            "Name one value you want to protect today.",
+          ],
+        },
+        {
+          label: "Intermediate",
+          examples: [
+            "Describe the situation + the need underneath it.",
+            "Write a boundary you could try in one sentence.",
+          ],
+        },
+        {
+          label: "Advanced",
+          examples: [
+            "Identify a pattern and the smallest experiment to change it.",
+            "Write a compassionate reframe and one measurable step.",
+          ],
+        },
+      ]}
+    >
+      <div className="min-h-screen bg-gradient-to-b from-[var(--glp-sage-10)] to-white dark:from-slate-900 dark:to-slate-800">
+        <SEO
+          title="7-Day Gentle Challenge | MyMentalHealthBuddy"
+          description="A gentle 7-day self-reflection practice. Skip anytime. You're always welcome."
         />
-        
-        {loading ? (
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-12 mb-8 flex flex-col items-center justify-center">
-            <Loader2 className="w-8 h-8 animate-spin text-[var(--glp-sage)] mb-4" />
-            <p className="text-slate-600 dark:text-slate-400">Loading your progress...</p>
-          </div>
-        ) : (
-        <>
-        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-6 mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[var(--glp-sage-10)] flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-[var(--glp-sage)]" />
-              </div>
-              <div>
-                <p className="font-semibold text-slate-900 dark:text-white">
-                  {completedCount} of 7 days
-                </p>
-                <p className="text-sm text-slate-500">completed</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-2xl font-bold text-[var(--glp-sage)]">{percentComplete}%</p>
+
+        <div className="max-w-3xl mx-auto px-4 py-8">
+          <div className="flex items-center gap-4 mb-8">
+            <Link
+              href="/"
+              className="p-2 rounded-lg hover:bg-white/50 dark:hover:bg-slate-800 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+            </Link>
+
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+                7-Day Gentle Challenge
+              </h1>
+
+              <p className="text-slate-600 dark:text-slate-400">
+                Small daily practices. Skip anytime. You're still welcome here.
+              </p>
             </div>
           </div>
-          
-          <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2">
-            <div 
-              className="bg-[var(--glp-sage)] h-2 rounded-full transition-all duration-500"
-              style={{ width: `${percentComplete}%` }}
+
+          <div className="mt-6 flex justify-center">
+            <MMHBFloatAvatar
+              imageSrc={getOfficialLumi("encouraging")}
+              size={128}
+              alt="Lumi encouraging your challenge"
+              data-testid="img-challenge-lumi"
             />
           </div>
-          
-          <p className="text-xs text-slate-500 mt-3 text-center">
-            No pressure to complete. Your pace is perfect.
-          </p>
-        </div>
-        
-        <div className="space-y-4">
-          {CHALLENGE_DAYS.map((day) => {
-            const isCompleted = progress[day.day];
-            
-            return (
-              <Link
-                key={day.day}
-                href={`/challenge/day/${day.day}`}
-                className={`block bg-white dark:bg-slate-800 rounded-xl shadow-sm p-5 border-2 transition-all hover:shadow-md ${
-                  isCompleted 
-                    ? "border-[var(--glp-sage)]" 
-                    : "border-transparent hover:border-slate-200 dark:hover:border-slate-700"
-                }`}
-                data-testid={`challenge-day-${day.day}`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    isCompleted 
-                      ? "bg-[var(--glp-sage)]" 
-                      : "bg-slate-100 dark:bg-slate-700"
-                  }`}>
-                    {isCompleted ? (
-                      <CheckCircle className="w-5 h-5 text-white" />
-                    ) : (
-                      <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">
-                        {day.day}
-                      </span>
-                    )}
+
+          <BenefitsBlock
+            benefit="Daily self-reflection, emotional awareness, and gentle growth"
+            duration="60 seconds – 3 minutes per day"
+            control="Skip any day, return anytime — no streak pressure"
+            disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+            variant="minimal"
+            className="mb-6"
+          />
+
+          {loading ? (
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-12 mb-8 flex flex-col items-center justify-center">
+              <Loader2 className="w-8 h-8 animate-spin text-[var(--glp-sage)] mb-4" />
+
+              <p className="text-slate-600 dark:text-slate-400">
+                Loading your progress...
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-6 mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-[var(--glp-sage-10)] flex items-center justify-center">
+                      <Sparkles className="w-6 h-6 text-[var(--glp-sage)]" />
+                    </div>
+
+                    <div>
+                      <p className="font-semibold text-slate-900 dark:text-white">
+                        {completedCount} of 7 days
+                      </p>
+
+                      <p className="text-sm text-slate-500">completed</p>
+                    </div>
                   </div>
-                  
-                  <div className="flex-1">
-                    <h3 className="font-medium text-slate-900 dark:text-white">
-                      {day.title}
-                    </h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      {day.duration} • {day.description}
+
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-[var(--glp-sage)]">
+                      {percentComplete}%
                     </p>
                   </div>
-                  
-                  <ChevronRight className="w-5 h-5 text-slate-400" />
                 </div>
-              </Link>
-            );
-          })}
-        </div>
-        
-        <div className="mt-8 p-4 bg-[var(--glp-rose-15)] dark:bg-rose-900/20 rounded-xl text-center">
-          <p className="text-sm text-slate-700 dark:text-slate-300">
-            <strong>Skip today. You're still welcome here.</strong><br />
-            This isn't about perfection. It's about small moments of showing up for yourself.
-          </p>
-        </div>
-        
-        <div className="mt-6 text-center">
-          <Link 
-            href="/crisis"
-            className="text-sm text-[var(--glp-sage)] hover:underline"
-          >
-            Need urgent support? Visit our crisis page →
-          </Link>
-        </div>
-        </>
-        )}
-        
-        <SafetyFooter variant="compact" className="mt-12" />
-      </div>
-    </div>
-  </WellnessPageShell>
-  );
-}
 
-export { CHALLENGE_DAYS };
+                <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2">
+                  <div
+                    className="bg-[var(--glp-sage)] h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${percentComplete}%` }}
+                  />
+                </div>
+
+                <p className="text-xs text-slate-500 mt-3 text-center">
+                  No pressure to complete. Your pace is perfect.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {CHALLENGE_DAYS.map((day) => {
+                  const isCompleted = progress[day.day];
+
+                  return (
+                    <Link
+                      key={day.day}
+                      href={`/challenge/day/${day.day}`}
+                      className={`block bg-white dark:bg-slate-800 rounded-xl shadow-sm p-5 border-2 transition-all hover:shadow-md ${
+                        isCompleted
+                          ? "border-[var(--glp-sage)]"
+                          : "border-transparent hover:border-slate-200 dark:hover:border-slate-700"
+                      }`}
+                      data-testid={`challenge-day-${day.day}`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                            isCompleted
+                              ? "bg-[var(--glp-sage)]"
+                              : "bg-slate-100 dark:bg-slate-700"
+                          }`}
+                        >
+                          {isCompleted ? (
+                            <CheckCircle className="w-5 h-5 text-white" />
+                          ) : (
+                            <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+                              {day.day}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex-1">
+                          <h3 className="font-medium text-slate-900 dark:text-white">
+                            {day.title}
+                          </h3>
+
+                          <p className="text-sm text-slate-500 dark:text-slate-400">
+                            {day.duration} • {day.description}
+                          </p>
+                        </div>
+
+                        <ChevronRight className="w-5 h-5 text-slate-400" />
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 p-4 bg-[var(--glp-rose-15)] dark:bg-rose-900/20 rounded-xl text-center">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
+                  <strong>Skip today. You're still welcome here.</strong>
+                  <br />
+                  This isn't about perfection. It's about small moments of
+                  showing up for yourself.
+                </p>
+              </div>
+
+              <div className="mt-6 text-center">
+                <Link
+                  href="/crisis"
+                  className="text-sm text-[var(--glp-sage)] hover:underline"
+                >
+                  Need urgent support? Visit our crisis page →
+                </Link>
+              </div>
+            </>
+          )}
+
+          <SafetyFooter
+            variant="compact"
+            className="mt-12"
+          />
+        </div>
+      </div>
+    </WellnessPageShell>
+  );
+  }
+
+  export { CHALLENGE_DAYS };
