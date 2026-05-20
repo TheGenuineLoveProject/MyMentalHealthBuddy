@@ -71,8 +71,7 @@ export default function BrandShell({ children, logoSrc = "/logo.png" }) {
 
         <main
           className="section-container-sm"
-          id="brand-shell-content"
-          data-testid="main-content"
+          data-testid="brand-shell-content"
         >
           {children}
         </main>
