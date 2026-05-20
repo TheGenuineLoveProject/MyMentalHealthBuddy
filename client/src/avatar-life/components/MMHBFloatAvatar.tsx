@@ -221,7 +221,6 @@ export function MMHBFloatAvatar({
       api.getState().setClicked(false);
     };
   }, [interactionsOn, api]);
-
   return (
     <div
       ref={wrapperRef}
@@ -231,6 +230,7 @@ export function MMHBFloatAvatar({
         width: size,
         height: size,
         display: "inline-block",
+        overflow: "visible",
       }}
       data-testid={testId}
       data-state={effectiveState}
@@ -243,12 +243,16 @@ export function MMHBFloatAvatar({
       <div
         aria-hidden="true"
         style={{
-          position: "absolute",
-          inset: "-12%",
-          borderRadius: "50%",
+          position: "relative",
+          zIndex: 1,
+          y,
+          scale,
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+          userSelect: "none",
           pointerEvents: "none",
-          zIndex: 0,
-          ...glowStyle,
+          willChange: crisis || reducedMotion ? "auto" : "transform",
         }}
         data-testid={`${testId}-glow`}
       />

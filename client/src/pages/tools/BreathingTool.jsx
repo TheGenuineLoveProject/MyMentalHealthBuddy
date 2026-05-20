@@ -13,7 +13,8 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
@@ -148,10 +149,10 @@ export default function BreathingTool() {
 
   // Per-phase avatar config per spec.
   const avatar = useMemo(() => {
-    if (phase === "intro")     return { state: "calm",    colorMode: "blue",   pose: undefined,      size: "lg", aria: "Lumi calm and ready" };
-    if (phase === "breathing") return { state: "calm",    colorMode: "blue",   pose: "meditating",   size: "lg", aria: `Lumi meditating, ${sub.label.toLowerCase()}` };
-    if (phase === "checkin")   return { state: "sad",     colorMode: "purple", pose: undefined,      size: "lg", aria: "Lumi gently checking in with you" };
-    return                            { state: "celebrate", colorMode: "yellow", pose: "celebrating", size: "xl", aria: "Lumi celebrating with you" };
+    if (phase === "intro")     return { lumi: "calm",        size: 192, aria: "Lumi calm and ready" };
+    if (phase === "breathing") return { lumi: "breathe",     size: 192, aria: `Lumi meditating, ${sub.label.toLowerCase()}` };
+    if (phase === "checkin")   return { lumi: "reflective",  size: 192, aria: "Lumi gently checking in with you" };
+    return                            { lumi: "encouraging", size: 224, aria: "Lumi celebrating with you" };
   }, [phase, sub.label]);
 
   return (
@@ -241,12 +242,10 @@ export default function BreathingTool() {
               {/* Soft glow halo behind the avatar — pulses synced to the
                   10s breath cycle, color drifts with sub-phase via CSS. */}
               <span className="breath-glow" aria-hidden="true" />
-              <BuddyAvatar
-                state={avatar.state}
-                colorMode={avatar.colorMode}
-                pose={avatar.pose}
+              <MMHBFloatAvatar
+                imageSrc={getOfficialLumi(avatar.lumi)}
                 size={avatar.size}
-                overlay
+                alt={avatar.aria}
                 data-testid={`img-breathing-buddy-${phase}`}
               />
             </div>

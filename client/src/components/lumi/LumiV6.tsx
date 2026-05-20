@@ -66,6 +66,27 @@
  * `lumiv6--v9-*` convention so the global reduced-motion blanket and
  * crisis-stillness contract automatically cover them. CSS in LumiV6.css.
  */
+/**
+ * @deprecated
+ * TRANSITIONAL AVATAR SYSTEM
+ *
+ * STATUS:
+ * Transitional compatibility layer.
+ *
+ * DO NOT create new usages.
+ *
+ * Canonical runtime:
+ * client/src/avatar-life
+ *
+ * Migration strategy:
+ * page-by-page replacement only.
+ *
+ * DO NOT DELETE until:
+ * - all BuddyAvatar references removed
+ * - all LumiMascot references removed
+ * - all adapter dependencies removed
+ * - all onboarding/tool surfaces migrated
+ */
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { useLumiAudio } from "@/hooks/useLumiAudio.js";
 import { getLumiV6Derivation } from "@/data/lumiEmotionMap";

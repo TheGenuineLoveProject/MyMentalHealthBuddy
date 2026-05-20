@@ -17,7 +17,7 @@ import { SceneTransitionController } from "@/lumi-scenes";
 import { useFeatureFlags } from "@/contexts/FeatureFlagContext";
 import { hasCompletedFirstCheckin } from "@/lib/firstCheckinFlag";
 import SEO from "@/components/SEO";
-
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 /**
  * /presence — gentle gathering of all four opt-in modules.
  *
@@ -114,7 +114,7 @@ function PresenceHeader() {
       data-testid="section-presence-header"
     >
       <MMHBFloatAvatar
-        imageSrc="/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png"
+        imageSrc={getOfficialLumi("calm")}
         state="calmIdle"
         size={180}
         alt="Lumi, your gentle wellness companion"

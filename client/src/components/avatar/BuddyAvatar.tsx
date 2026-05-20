@@ -24,6 +24,18 @@
  *   - .buddy__heart-shape, .buddy__heart-glow, .buddy__heart-core,
  *     .buddy__eye class hooks preserved (CSS animations target them)
  */
+/**
+ * @deprecated
+ * LEGACY AVATAR WRAPPER
+ *
+ * Replaced by:
+ * MMHBFloatAvatar
+ *
+ * Runtime owner:
+ * client/src/avatar-life
+ *
+ * DO NOT add new imports.
+ */
 
 import { useEffect, useRef } from "react";
 import "./BuddyAvatar.css";

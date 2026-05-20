@@ -16,6 +16,15 @@
  *   ariaLabel     — accessible label.
  *   className     — extra classes appended to the wrapper.
  */
+/**
+ * @deprecated
+ * LEGACY MASCOT SYSTEM
+ *
+ * Scheduled for quarantine.
+ *
+ * Canonical avatar runtime:
+ * client/src/avatar-life
+ */
 import { useCallback, useState } from "react";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 import "./LumiMascot.css";

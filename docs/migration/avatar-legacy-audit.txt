@@ -1,0 +1,585 @@
+client/src/pages/tools/BreathingTool.jsx:16:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/pages/tools/BreathingTool.jsx:244:              <BuddyAvatar
+client/src/pages/tools/BreathingTool.jsx:246:                colorMode={avatar.colorMode}
+client/src/pages/tools/BreathingTool.jsx:247:                pose={avatar.pose}
+client/src/pages/CRMPage.jsx:6:import LumiMascot from "../components/lumi/LumiMascot.jsx";
+client/src/pages/CRMPage.jsx:75:                    <LumiMascot emotion="neutral" size={40} />
+client/src/pages/CelebrationRitual.jsx:9:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/pages/CelebrationRitual.jsx:173:                <BuddyAvatar
+client/src/pages/CelebrationRitual.jsx:175:                  colorMode="yellow"
+client/src/pages/CelebrationRitual.jsx:176:                  pose="celebrating"
+client/src/pages/LumiV6Preview.jsx:2: * LumiV6Preview — /v6
+client/src/pages/LumiV6Preview.jsx:4: * Side-by-side preview of overlay={false} (current PNG-only) vs
+client/src/pages/LumiV6Preview.jsx:5: * overlay={true} (V6 CSS face system). Iterate on positioning,
+client/src/pages/LumiV6Preview.jsx:13:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/pages/LumiV6Preview.jsx:14:import LumiV6 from "@/components/lumi/LumiV6";
+client/src/pages/LumiV6Preview.jsx:33:// V7 emotion → expression coordination table (mirrors getLumiV6Derivation()
+client/src/pages/LumiV6Preview.jsx:34:// in LumiV6.tsx). Used by the playground's read-only visualization.
+client/src/pages/LumiV6Preview.jsx:59:export default function LumiV6Preview() {
+client/src/pages/LumiV6Preview.jsx:87:            Each row compares <code>overlay=false</code> (current PNG) with
+client/src/pages/LumiV6Preview.jsx:88:            <code className="mx-1">overlay=true</code> (CSS face system on top).
+client/src/pages/LumiV6Preview.jsx:95:          <h2 className="mb-4 text-xl font-semibold text-slate-800">States · overlay=true</h2>
+client/src/pages/LumiV6Preview.jsx:103:                <BuddyAvatar state={s} colorMode="default" overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:110:          <h2 className="mb-4 text-xl font-semibold text-slate-800">Color modes · overlay=true · state=calm</h2>
+client/src/pages/LumiV6Preview.jsx:114:                <BuddyAvatar state="calm" colorMode={c} overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:121:          <h2 className="mb-4 text-xl font-semibold text-slate-800">Poses · overlay=true · state=encouraged</h2>
+client/src/pages/LumiV6Preview.jsx:125:                <BuddyAvatar state="encouraged" colorMode="pink" pose={p} overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:137:                  <BuddyAvatar state={s} colorMode="default" overlay={false} size={140} />
+client/src/pages/LumiV6Preview.jsx:140:                  <BuddyAvatar state={s} colorMode="default" overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:148:          <h2 className="mb-4 text-xl font-semibold text-slate-800">Sizes · overlay=true</h2>
+client/src/pages/LumiV6Preview.jsx:152:                <BuddyAvatar state="calm" colorMode="default" overlay={true} size={sz} />
+client/src/pages/LumiV6Preview.jsx:159:        {/* ---------- Section 1: LumiV6 "Living Lumi" component ---------- */}
+client/src/pages/LumiV6Preview.jsx:160:        <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-amber-100" data-testid="section-lumiv6">
+client/src/pages/LumiV6Preview.jsx:161:          <h2 className="mb-2 text-2xl font-semibold text-slate-900">LumiV6 — "Living Lumi"</h2>
+client/src/pages/LumiV6Preview.jsx:163:            New multi-layer component (separate from BuddyAvatar). Mouse-track,
+client/src/pages/LumiV6Preview.jsx:173:                <LumiV6 emotion={e} size="lg" />
+client/src/pages/LumiV6Preview.jsx:182:                <LumiV6 pose={p} emotion="greeting" size="lg" />
+client/src/pages/LumiV6Preview.jsx:191:                <LumiV6 colorMode={c} emotion="calm" size="lg" />
+client/src/pages/LumiV6Preview.jsx:199:              <LumiV6 emotion="greeting" pose="waving" size="lg" showMessage />
+client/src/pages/LumiV6Preview.jsx:202:              <LumiV6 emotion="empathy" size="lg" showMessage message="I'm right here. Take your time." />
+client/src/pages/LumiV6Preview.jsx:205:              <LumiV6 emotion="joy" pose="celebrating" size="lg" showMessage />
+client/src/pages/LumiV6Preview.jsx:213:                <LumiV6 emotion="greeting" size={sz} />
+client/src/pages/LumiV6Preview.jsx:223:                <LumiV6 emotion={e} size="lg" animated={false} interactive={false} />
+client/src/pages/LumiV6Preview.jsx:251:                <LumiV6 emotion={e} size="lg" />
+client/src/pages/LumiV6Preview.jsx:260:                <LumiV6 emotion="greeting" mouthExpression={m} size="lg" />
+client/src/pages/LumiV6Preview.jsx:269:                <LumiV6 emotion="greeting" eyeExpression={eye} size="lg" />
+client/src/pages/LumiV6Preview.jsx:278:                <LumiV6 emotion="greeting" posture={p} size="lg" />
+client/src/pages/LumiV6Preview.jsx:285:            Shows the <em>resolved</em> output of <code>getLumiV6Derivation()</code>
+client/src/pages/LumiV6Preview.jsx:286:            in <code className="mx-1">LumiV6.tsx</code> — i.e. after the
+client/src/pages/LumiV6Preview.jsx:328:                <LumiV6 emotion="calm" mouthExpression="breathing" heartHz={hz} size="lg" />
+client/src/pages/LumiV6Preview.jsx:346:              <LumiV6 emotion="greeting" size="xl" />
+client/src/pages/LumiV6Preview.jsx:349:              <LumiV6 emotion="greeting" size="xl" v8 />
+client/src/pages/LumiV6Preview.jsx:352:              <LumiV6
+client/src/pages/LumiV6Preview.jsx:407:        <LumiV6 emotion={current} size="lg" data-testid={`cycle-avatar-${current}`} />
+client/src/pages/LumiV6Preview.jsx:546:          <LumiV6 emotion="greeting" size="xl" v8 />
+client/src/pages/LumiV6Preview.jsx:549:          <LumiV6
+client/src/pages/LumiV6Preview.jsx:562:          <LumiV6
+client/src/pages/LumiV6Preview.jsx:632:          <LumiV6
+client/src/pages/LumiV6Preview.jsx:642:          <LumiV6
+client/src/pages/LumiV6Preview.jsx:654:          <LumiV6
+client/src/pages/Login.jsx:8:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/Login.jsx:109:                <LumiMascotImage
+client/src/pages/Register.jsx:8:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/Register.jsx:97:                <LumiMascotImage
+client/src/pages/ResetPassword.jsx:10:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/ResetPassword.jsx:232:              <LumiMascotImage
+client/src/pages/ForgotPassword.jsx:9:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/ForgotPassword.jsx:150:              <LumiMascotImage
+client/src/pages/RigLab.jsx:6: * a known-good rig before being wired into LumiV6 / LumiV7 / production
+client/src/pages/_quarantine/legacy-landing/Home.jsx:7:// Iter 2d (2026-05-15): removed legacy LumiMascot import — sole usage at L184
+client/src/pages/_quarantine/legacy-landing/Home.jsx:10:import LumiV6 from '../../../components/lumi/LumiV6';
+client/src/pages/_quarantine/legacy-landing/Home.jsx:186:              {/* Iter 2d (2026-05-15): swapped legacy LumiMascot (56px,
+client/src/pages/_quarantine/legacy-landing/Home.jsx:246:              <LumiV6
+client/src/pages/_quarantine/legacy-landing/Home.jsx:249:                colorMode="yellow"
+client/src/pages/AIChatPage.tsx:14:          AIChatPanel itself does not render OfficialLumi (uses BuddyAvatar);
+client/src/pages/Start.tsx:347: * v1.5 — Tool-specific helper copy shown beneath BuddyAvatar.
+client/src/pages/Start.tsx:431:  // for BuddyAvatar — never affects AI / tool execution / response logic.
+client/src/pages/CheckIn.jsx:13:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/pages/CheckIn.jsx:227:          <BuddyAvatar
+client/src/pages/CheckIn.jsx:229:            colorMode={avatar.colorMode}
+client/src/pages/CheckIn.jsx:230:            pose={avatar.pose}
+client/src/pages/CanvaLanding.jsx:384:                  {/* Iter 2c (2026-05-15): swapped legacy LumiMascot →
+client/src/pages/CanvaLanding.jsx:1284:                {/* v5.8.72 — legacy LumiMascot swapped to canonical OfficialLumi
+client/src/pages/CelebrationFlow.jsx:15:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/pages/CelebrationFlow.jsx:167:              <BuddyAvatar
+client/src/pages/CelebrationFlow.jsx:169:                colorMode="orange"
+client/src/pages/CelebrationFlow.jsx:183:              <BuddyAvatar
+client/src/pages/CelebrationFlow.jsx:185:                colorMode="yellow"
+client/src/pages/CelebrationFlow.jsx:186:                pose="celebrating"
+client/src/pages/CelebrationFlow.jsx:200:              <BuddyAvatar
+client/src/pages/CelebrationFlow.jsx:202:                colorMode="yellow"
+client/src/pages/CelebrationFlow.jsx:203:                pose="celebrating"
+client/src/pages/DesignSystemV2.jsx:4:import LumiMascot, { VALID_EMOTIONS } from "@/components/lumi/LumiMascot.jsx";
+client/src/pages/DesignSystemV2.jsx:5:import LumiMascotImage from "@/components/lumi/LumiMascotImage.jsx";
+client/src/pages/DesignSystemV2.jsx:143:              <LumiMascot emotion="joy" size={300} ariaLabel="Lumi waving hello" />
+client/src/pages/DesignSystemV2.jsx:161:                    <LumiMascot emotion={em} size={150} trackCursor={false} ariaLabel={`Lumi expressing ${em}`} />
+client/src/pages/DesignSystemV2.jsx:175:                <LumiMascot emotion={galleryEmotion} size={260} />
+client/src/pages/DesignSystemV2.jsx:330:                <LumiMascotImage size={240} animation="float" ariaLabel="Lumi (full-color illustration)" />
+client/src/pages/DesignSystemV2.jsx:332:                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>&lt;LumiMascotImage /&gt;</code>
+client/src/pages/DesignSystemV2.jsx:371:                <LumiMascot emotion={emotion} size={240} onEmote={() => celebrate("celebration", 1500)} />
+client/src/components/brand/BrandLogo.jsx:2:import LumiMascot from "../lumi/LumiMascot.jsx";
+client/src/components/brand/BrandLogo.jsx:32:          <LumiMascot emotion="neutral" size={s.px} />
+client/src/components/chat/AIChatPanel.tsx:3:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/chat/AIChatPanel.tsx:189:                    <BuddyAvatar
+client/src/components/chat/AIChatPanel.tsx:192:                      colorMode={s.colorMode}
+client/src/components/chat/AIChatPanel.tsx:193:                      pose={pose}
+client/src/components/chat/AIChatPanel.tsx:217:                {/* Part 4 spec: AI typing → pose="thinking". State stays
+client/src/components/chat/AIChatPanel.tsx:219:                <BuddyAvatar
+client/src/components/chat/AIChatPanel.tsx:222:                  colorMode="blue"
+client/src/components/chat/AIChatPanel.tsx:223:                  pose={aiStateToPose("typing")}
+client/src/components/layout/Header.jsx:6:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/layout/Header.jsx:111:            <BuddyAvatar
+client/src/components/layout/Header.jsx:114:              colorMode="default"
+client/src/components/layout/Footer.tsx:15:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/layout/Footer.tsx:26:              <BuddyAvatar
+client/src/components/layout/Footer.tsx:28:                colorMode="default"
+client/src/components/sacred/SacredFooter.jsx:22:import LumiMascot from "@/components/lumi/LumiMascot.jsx";
+client/src/components/sacred/SacredFooter.jsx:90:                <LumiMascot emotion="neutral" size={40} />
+client/src/components/avatar/BuddyAvatar.css:1:/* BuddyAvatar.css — visual-only styles. State + motion classes drive feel.
+client/src/components/avatar/BuddyAvatar.css:129:   .buddy__antenna is the outer fuzzy halo (r=14, see BuddyAvatar.tsx
+client/src/components/avatar/BuddyAvatar.css:296:   Default `d` is set in BuddyAvatar.tsx as a calm gentle line. State
+client/src/components/avatar/BuddyAvatar.tsx:2: * BuddyAvatar.tsx — MMHB Buddy Engine visual.
+client/src/components/avatar/BuddyAvatar.tsx:13: * Style still lives in BuddyAvatar.css (sibling) — keyframes are state-
+client/src/components/avatar/BuddyAvatar.tsx:29:import "./BuddyAvatar.css";
+client/src/components/avatar/BuddyAvatar.tsx:165:export interface BuddyAvatarProps {
+client/src/components/avatar/BuddyAvatar.tsx:278:export default function BuddyAvatar({
+client/src/components/avatar/BuddyAvatar.tsx:290:}: BuddyAvatarProps) {
+client/src/components/avatar/BuddyAvatar.tsx:327:  // were tuned for. Caller can still pass overlay=true; we just skip
+client/src/components/avatar/BuddyAvatar.tsx:332:  // Wire the same three audio cues that LumiV6 has (entrance pop, heartbeat,
+client/src/components/avatar/BuddyAvatar.tsx:333:  // chime) into BuddyAvatar so EVERY avatar surface in the app — header,
+client/src/components/avatar/BuddyAvatar.tsx:410:      data-pose={pose}
+client/src/components/avatar/BuddyAvatar.tsx:411:      data-overlay={showV6Overlay ? "v6" : overlay ? "v6-suppressed" : "off"}
+client/src/components/avatar/BuddyPanel.tsx:7: *   - imports BuddyAvatar
+client/src/components/avatar/BuddyPanel.tsx:25:import BuddyAvatar from "./BuddyAvatar";
+client/src/components/avatar/BuddyPanel.tsx:190:      <BuddyAvatar
+client/src/components/zen/BuddyBubble.jsx:6: * BuddyBubble — a small speech bubble next to BuddyAvatar that softly
+client/src/components/zen/buddy-bubble.css:1:/* BuddyBubble — gentle speech bubble next to BuddyAvatar.
+client/src/components/zen/ZenScape.jsx:1:import BuddyAvatar from "../avatar/BuddyAvatar";
+client/src/components/zen/ZenScape.jsx:12: *   - an optional BuddyAvatar hero (state="calm", default size 140) + bubble
+client/src/components/zen/ZenScape.jsx:114:              <BuddyAvatar
+client/src/components/peacescape/InteractiveBuddy.jsx:2:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/peacescape/InteractiveBuddy.jsx:12: *   - The wrapper does not modify BuddyAvatar source — it only swaps the
+client/src/components/peacescape/InteractiveBuddy.jsx:76:        <BuddyAvatar
+client/src/components/lumi/LumiMascot.css:2: * LumiMascot — Body-part animations for the interactive Buddy.
+client/src/components/lumi/LumiCustomizerTrigger.jsx:9: * Designed to sit beside <LumiMascot /> in the header or chat.
+client/src/components/lumi/LumiCustomizerTrigger.jsx:55:// <LumiCustomizerTrigger /> placed next to <LumiMascot />
+client/src/components/lumi/LumiMascot.jsx:2: * LumiMascot — renders the official MMHB Lumi character artwork.
+client/src/components/lumi/LumiMascot.jsx:20:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/lumi/LumiMascot.jsx:21:import "./LumiMascot.css";
+client/src/components/lumi/LumiMascot.jsx:28:// LumiMascot's emotion vocabulary → BuddyAvatar's BuddyState vocabulary.
+client/src/components/lumi/LumiMascot.jsx:47:export default function LumiMascot({
+client/src/components/lumi/LumiMascot.jsx:100:        <BuddyAvatar
+client/src/components/lumi/LumiMascot.jsx:102:          colorMode={EMOTION_TO_COLOR_MODE[safeEmotion] || "default"}
+client/src/components/lumi/LumiBrandLogo.jsx:18:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/lumi/LumiBrandLogo.jsx:34:  // ariaHidden retained for API compat — BuddyAvatar handles its own
+client/src/components/lumi/LumiBrandLogo.jsx:42:      <BuddyAvatar state="calm" colorMode="default" size={size} data-testid="lumi-icon-mark" />
+client/src/components/lumi/LumiV6.css:1:/* LumiV6.css — Living Lumi multi-layer avatar.
+client/src/components/lumi/LumiV6.css:2:   Scoped under .lumiv6 so it cannot collide with .buddy* (BuddyAvatar). */
+client/src/components/lumi/LumiV6.css:4:.lumiv6 {
+client/src/components/lumi/LumiV6.css:9:  --lumiv6-eye-x: 0%;
+client/src/components/lumi/LumiV6.css:10:  --lumiv6-eye-y: 0%;
+client/src/components/lumi/LumiV6.css:17:.lumiv6.lumiv6--interactive.lumiv6--hovered {
+client/src/components/lumi/LumiV6.css:22:.lumiv6__body {
+client/src/components/lumi/LumiV6.css:34:.lumiv6.lumiv6--animated .lumiv6__body {
+client/src/components/lumi/LumiV6.css:35:  animation: lumiv6Breathe var(--lumiv6-breath-duration, 5200ms) ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:38:@keyframes lumiv6Breathe {
+client/src/components/lumi/LumiV6.css:40:  50%      { transform: translateY(-3px) scale(var(--lumiv6-breath-depth, 1.025)); }
+client/src/components/lumi/LumiV6.css:44:.lumiv6__face-pad {
+client/src/components/lumi/LumiV6.css:63:.lumiv6__eye {
+client/src/components/lumi/LumiV6.css:74:.lumiv6__eye--left  { left: 32.5%; }
+client/src/components/lumi/LumiV6.css:75:.lumiv6__eye--right { left: 58%; }
+client/src/components/lumi/LumiV6.css:76:.lumiv6__pupil {
+client/src/components/lumi/LumiV6.css:87:  transform: translate(var(--lumiv6-eye-x), var(--lumiv6-eye-y));
+client/src/components/lumi/LumiV6.css:91:.lumiv6.lumiv6--animated .lumiv6__eye {
+client/src/components/lumi/LumiV6.css:92:  animation: lumiv6EyeBlink 9s ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:95:.lumiv6.lumiv6--animated .lumiv6__eye--right {
+client/src/components/lumi/LumiV6.css:98:@keyframes lumiv6EyeBlink {
+client/src/components/lumi/LumiV6.css:103:.lumiv6__eye--closed {
+client/src/components/lumi/LumiV6.css:110:.lumiv6__eye--closed .lumiv6__pupil { display: none; }
+client/src/components/lumi/LumiV6.css:111:.lumiv6.lumiv6--animated .lumiv6__eye--closed { animation: none; }
+client/src/components/lumi/LumiV6.css:113:.lumiv6__eye--wide {
+client/src/components/lumi/LumiV6.css:122:.lumiv6__mouth {
+client/src/components/lumi/LumiV6.css:133:.lumiv6__mouth--joy {
+client/src/components/lumi/LumiV6.css:140:.lumiv6__mouth--love {
+client/src/components/lumi/LumiV6.css:145:.lumiv6__mouth--greeting {
+client/src/components/lumi/LumiV6.css:150:.lumiv6__mouth--empathy {
+client/src/components/lumi/LumiV6.css:159:.lumiv6__mouth--sleepy {
+client/src/components/lumi/LumiV6.css:170:.lumiv6__mouth--surprise {
+client/src/components/lumi/LumiV6.css:181:.lumiv6__heart {
+client/src/components/lumi/LumiV6.css:190:.lumiv6__heart-svg {
+client/src/components/lumi/LumiV6.css:198:.lumiv6__heart-glow {
+client/src/components/lumi/LumiV6.css:210:.lumiv6.lumiv6--animated .lumiv6__heart {
+client/src/components/lumi/LumiV6.css:211:  animation: lumiv6HeartPulse 5200ms ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:213:.lumiv6.lumiv6--animated .lumiv6__heart-glow {
+client/src/components/lumi/LumiV6.css:214:  animation: lumiv6HeartGlow 5460ms ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:216:@keyframes lumiv6HeartPulse {
+client/src/components/lumi/LumiV6.css:221:@keyframes lumiv6HeartGlow {
+client/src/components/lumi/LumiV6.css:227:   IMPORTANT: applied to the .lumiv6 wrapper, NOT .lumiv6__body, because the
+client/src/components/lumi/LumiV6.css:231:.lumiv6--pose-thinking  { transform: rotate(-4deg); }
+client/src/components/lumi/LumiV6.css:232:.lumiv6--pose-listening { transform: rotate(2deg); }
+client/src/components/lumi/LumiV6.css:234:.lumiv6--pose-thinking.lumiv6--interactive.lumiv6--hovered  { transform: rotate(-4deg) translateY(-3px) scale(1.03); }
+client/src/components/lumi/LumiV6.css:235:.lumiv6--pose-listening.lumiv6--interactive.lumiv6--hovered { transform: rotate(2deg)  translateY(-3px) scale(1.03); }
+client/src/components/lumi/LumiV6.css:238:.lumiv6__bubble {
+client/src/components/lumi/LumiV6.css:253:  animation: lumiv6BubbleIn 320ms ease-out;
+client/src/components/lumi/LumiV6.css:256:.lumiv6__bubble-text {
+client/src/components/lumi/LumiV6.css:261:.lumiv6__bubble-tail {
+client/src/components/lumi/LumiV6.css:272:@keyframes lumiv6BubbleIn {
+client/src/components/lumi/LumiV6.css:280:   per-emotion heart rate (--lumiv6-heart-period CSS var driven
+client/src/components/lumi/LumiV6.css:281:   by JS). All scoped under .lumiv6 — zero collision risk with
+client/src/components/lumi/LumiV6.css:282:   .buddy* / .buddy__v6-* (BuddyAvatar overlay system).
+client/src/components/lumi/LumiV6.css:285:/* ----- Per-emotion heart rate (set inline by JS via --lumiv6-heart-period) */
+client/src/components/lumi/LumiV6.css:286:.lumiv6 {
+client/src/components/lumi/LumiV6.css:287:  --lumiv6-heart-period: 5200ms;
+client/src/components/lumi/LumiV6.css:289:.lumiv6.lumiv6--animated .lumiv6__heart {
+client/src/components/lumi/LumiV6.css:290:  animation-duration: var(--lumiv6-heart-period);
+client/src/components/lumi/LumiV6.css:292:.lumiv6.lumiv6--animated .lumiv6__heart-glow {
+client/src/components/lumi/LumiV6.css:293:  animation-duration: var(--lumiv6-heart-period);
+client/src/components/lumi/LumiV6.css:298:.lumiv6__mouth--worried {
+client/src/components/lumi/LumiV6.css:310:.lumiv6__mouth--excited {
+client/src/components/lumi/LumiV6.css:320:.lumiv6.lumiv6--animated .lumiv6__mouth--excited {
+client/src/components/lumi/LumiV6.css:321:  animation: lumiv6MouthTremble 0.3s ease-in-out infinite alternate;
+client/src/components/lumi/LumiV6.css:323:@keyframes lumiv6MouthTremble {
+client/src/components/lumi/LumiV6.css:328:.lumiv6__mouth--loving {
+client/src/components/lumi/LumiV6.css:340:.lumiv6__mouth--focused {
+client/src/components/lumi/LumiV6.css:351:.lumiv6__mouth--breathing {
+client/src/components/lumi/LumiV6.css:361:.lumiv6.lumiv6--animated .lumiv6__mouth--breathing {
+client/src/components/lumi/LumiV6.css:362:  animation: lumiv6MouthBreathe 4s ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:364:@keyframes lumiv6MouthBreathe {
+client/src/components/lumi/LumiV6.css:370:.lumiv6__eye--soft {
+client/src/components/lumi/LumiV6.css:375:.lumiv6__eye--happy {
+client/src/components/lumi/LumiV6.css:382:.lumiv6__eye--happy .lumiv6__pupil {
+client/src/components/lumi/LumiV6.css:392:.lumiv6__posture {
+client/src/components/lumi/LumiV6.css:399:.lumiv6--posture-upright  .lumiv6__posture { transform: rotate(0deg); }
+client/src/components/lumi/LumiV6.css:400:.lumiv6--posture-curious  .lumiv6__posture { transform: rotate(-3deg); }
+client/src/components/lumi/LumiV6.css:401:.lumiv6--posture-leaning  .lumiv6__posture { transform: rotate(2deg) scaleX(1.02); }
+client/src/components/lumi/LumiV6.css:402:.lumiv6--posture-relaxed  .lumiv6__posture { transform: scaleY(0.98); }
+client/src/components/lumi/LumiV6.css:403:.lumiv6.lumiv6--animated.lumiv6--posture-bouncy .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:404:  animation: lumiv6PostureBounce 0.8s ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:406:@keyframes lumiv6PostureBounce {
+client/src/components/lumi/LumiV6.css:415:.lumiv6__mouth,
+client/src/components/lumi/LumiV6.css:416:.lumiv6__eye {
+client/src/components/lumi/LumiV6.css:425:.lumiv6.lumiv6--animated.lumiv6--transitioning .lumiv6__eye {
+client/src/components/lumi/LumiV6.css:426:  animation: lumiv6BlinkBeat 600ms ease-in-out;
+client/src/components/lumi/LumiV6.css:428:@keyframes lumiv6BlinkBeat {
+client/src/components/lumi/LumiV6.css:441:     .lumiv6--v8           umbrella (auto-applied when v8 prop set)
+client/src/components/lumi/LumiV6.css:442:     .lumiv6--idle         JS-set after 10s of no activity
+client/src/components/lumi/LumiV6.css:443:     .lumiv6--blink-once   JS-toggled briefly to fire one blink
+client/src/components/lumi/LumiV6.css:444:     .lumiv6--heart-burst  JS-toggled for ~800ms after heart click
+client/src/components/lumi/LumiV6.css:445:     .lumiv6--head-tilt    JS-toggled for ~1500ms after head click
+client/src/components/lumi/LumiV6.css:446:     .lumiv6--body-bounce  JS-toggled for ~2000ms after body click
+client/src/components/lumi/LumiV6.css:447:     .lumiv6--recognizing  JS-toggled for ~800ms on memory recall
+client/src/components/lumi/LumiV6.css:451:   blinks at natural irregular intervals via .lumiv6--blink-once. */
+client/src/components/lumi/LumiV6.css:452:.lumiv6.lumiv6--v8.lumiv6--animated .lumiv6__eye           { animation: none; }
+client/src/components/lumi/LumiV6.css:453:.lumiv6.lumiv6--v8.lumiv6--animated .lumiv6__eye--right    { animation-delay: 0; }
+client/src/components/lumi/LumiV6.css:454:.lumiv6.lumiv6--v8.lumiv6--animated.lumiv6--blink-once .lumiv6__eye {
+client/src/components/lumi/LumiV6.css:455:  animation: lumiv6BlinkOnce 220ms ease-in-out;
+client/src/components/lumi/LumiV6.css:457:@keyframes lumiv6BlinkOnce {
+client/src/components/lumi/LumiV6.css:463:.lumiv6__aura {
+client/src/components/lumi/LumiV6.css:471:    var(--lumiv6-aura-color, rgba(168, 201, 160, 0.18)) 0%,
+client/src/components/lumi/LumiV6.css:474:  opacity: var(--lumiv6-aura-opacity, 0.6);
+client/src/components/lumi/LumiV6.css:476:.lumiv6.lumiv6--animated .lumiv6__aura {
+client/src/components/lumi/LumiV6.css:477:  animation: lumiv6AuraPulse var(--lumiv6-aura-period, 4200ms) ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:479:@keyframes lumiv6AuraPulse {
+client/src/components/lumi/LumiV6.css:485:.lumiv6__shadow {
+client/src/components/lumi/LumiV6.css:498:.lumiv6--posture-leaning .lumiv6__shadow { transform: translateX(-44%); }
+client/src/components/lumi/LumiV6.css:499:.lumiv6--posture-curious .lumiv6__shadow { transform: translateX(-56%); }
+client/src/components/lumi/LumiV6.css:500:.lumiv6.lumiv6--animated.lumiv6--posture-bouncy .lumiv6__shadow {
+client/src/components/lumi/LumiV6.css:501:  animation: lumiv6ShadowBounce 800ms ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:503:@keyframes lumiv6ShadowBounce {
+client/src/components/lumi/LumiV6.css:512:.lumiv6__zone {
+client/src/components/lumi/LumiV6.css:520:.lumiv6__zone:focus-visible {
+client/src/components/lumi/LumiV6.css:525:.lumiv6__zone--head  { top: 12%; left: 32%; width: 36%; height: 28%; border-radius: 50%; }
+client/src/components/lumi/LumiV6.css:526:.lumiv6__zone--heart { top: 56%; left: 40%; width: 20%; height: 16%; border-radius: 50%; }
+client/src/components/lumi/LumiV6.css:527:.lumiv6__zone--body  { top: 38%; left: 25%; width: 50%; height: 42%; border-radius: 40%; z-index: 25; }
+client/src/components/lumi/LumiV6.css:530:.lumiv6.lumiv6--heart-burst::after {
+client/src/components/lumi/LumiV6.css:542:  animation: lumiv6HeartBurst 800ms ease-out forwards;
+client/src/components/lumi/LumiV6.css:544:@keyframes lumiv6HeartBurst {
+client/src/components/lumi/LumiV6.css:551:.lumiv6--head-tilt .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:552:  animation: lumiv6HeadTilt 1500ms ease-in-out;
+client/src/components/lumi/LumiV6.css:554:@keyframes lumiv6HeadTilt {
+client/src/components/lumi/LumiV6.css:562:.lumiv6--body-bounce .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:563:  animation: lumiv6BodyBounce 2000ms cubic-bezier(0.34, 1.56, 0.64, 1);
+client/src/components/lumi/LumiV6.css:565:@keyframes lumiv6BodyBounce {
+client/src/components/lumi/LumiV6.css:574:.lumiv6--recognizing .lumiv6__heart {
+client/src/components/lumi/LumiV6.css:575:  animation: lumiv6Recognize 800ms ease-out !important;
+client/src/components/lumi/LumiV6.css:577:@keyframes lumiv6Recognize {
+client/src/components/lumi/LumiV6.css:585:.lumiv6.lumiv6--v8.lumiv6--animated.lumiv6--idle .lumiv6__pupil {
+client/src/components/lumi/LumiV6.css:586:  animation: lumiv6IdleDrift 9s ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:588:@keyframes lumiv6IdleDrift {
+client/src/components/lumi/LumiV6.css:594:.lumiv6.lumiv6--v8.lumiv6--animated.lumiv6--idle .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:595:  animation-name: lumiv6IdleShift;
+client/src/components/lumi/LumiV6.css:600:@keyframes lumiv6IdleShift {
+client/src/components/lumi/LumiV6.css:608:  .lumiv6 *,
+client/src/components/lumi/LumiV6.css:609:  .lumiv6,
+client/src/components/lumi/LumiV6.css:610:  .lumiv6::before,
+client/src/components/lumi/LumiV6.css:611:  .lumiv6::after,
+client/src/components/lumi/LumiV6.css:612:  .lumiv6 *::before,
+client/src/components/lumi/LumiV6.css:613:  .lumiv6 *::after {
+client/src/components/lumi/LumiV6.css:621:   All V9 modifiers use the lumiv6--v9-* convention so the existing
+client/src/components/lumi/LumiV6.css:622:   reduced-motion blanket (.lumiv6 *) AND any animated=false crisis
+client/src/components/lumi/LumiV6.css:627:.lumiv6--animated.lumiv6--v9-entering .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:655:.lumiv6--animated.lumiv6--v9-attention .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:669:.lumiv6--animated.lumiv6--v9-gaze-lock .lumiv6__aura {
+client/src/components/lumi/LumiV6.css:670:  opacity: calc(var(--lumiv6-aura-opacity, 0.6) * 1.4);
+client/src/components/lumi/LumiV6.css:676:.lumiv6--v9-escalation-1 {
+client/src/components/lumi/LumiV6.css:677:  --lumiv6-heart-period: 600ms;
+client/src/components/lumi/LumiV6.css:679:.lumiv6--v9-escalation-1 .lumiv6__aura {
+client/src/components/lumi/LumiV6.css:680:  opacity: calc(var(--lumiv6-aura-opacity, 0.6) * 1.2);
+client/src/components/lumi/LumiV6.css:683:.lumiv6--v9-escalation-2 {
+client/src/components/lumi/LumiV6.css:684:  --lumiv6-heart-period: 450ms;
+client/src/components/lumi/LumiV6.css:686:.lumiv6--animated.lumiv6--v9-escalation-2 .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:689:.lumiv6--animated.lumiv6--v9-escalation-2 .lumiv6__pupil {
+client/src/components/lumi/LumiV6.css:698:.lumiv6--v9-escalation-3 {
+client/src/components/lumi/LumiV6.css:699:  --lumiv6-heart-period: 300ms;
+client/src/components/lumi/LumiV6.css:701:.lumiv6--animated.lumiv6--v9-escalation-3 .lumiv6__pupil {
+client/src/components/lumi/LumiV6.css:705:.lumiv6--animated.lumiv6--v9-escalation-3::before {
+client/src/components/lumi/LumiV6.css:727:.lumiv6--animated.lumiv6--v9-mirroring .lumiv6__heart {
+client/src/components/lumi/LumiV6.css:738:.lumiv6--animated.lumiv6--v9-goodbye .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:741:.lumiv6--animated.lumiv6--v9-goodbye {
+client/src/components/lumi/LumiV6.css:744:.lumiv6--animated.lumiv6--v9-goodbye .lumiv6__heart {
+client/src/components/lumi/LumiV6.css:769:   this rule, win on the CSS cascade for `.lumiv6__heart` during their brief
+client/src/components/lumi/LumiV6.css:770:   windows. Period syncs to the existing --lumiv6-heart-period custom
+client/src/components/lumi/LumiV6.css:771:   property already set by the heart-rate driver in LumiV6.tsx (and overridden
+client/src/components/lumi/LumiV6.css:773:   escalation cadence automatically. Scoped under `.lumiv6--animated` so
+client/src/components/lumi/LumiV6.css:776:.lumiv6--animated.lumiv6--v9-visceral-glow .lumiv6__heart {
+client/src/components/lumi/LumiV6.css:777:  animation: lumiv9VisceralGlow var(--lumiv6-heart-period, 2000ms) ease-in-out infinite;
+client/src/components/lumi/LumiV6.css:801:   Scoped under .lumiv6--animated so crisis (animated=false) is unaffected;
+client/src/components/lumi/LumiV6.css:802:   reduced-motion blanket already disables it via the .lumiv6 namespace rule.
+client/src/components/lumi/LumiV6.css:804:.lumiv6--animated.lumiv6--v9-recognition .lumiv6__pupil {
+client/src/components/lumi/LumiV6.css:807:.lumiv6--animated.lumiv6--v9-recognition .lumiv6__heart {
+client/src/components/lumi/LumiV6.css:824:   Additive, gated by .lumiv6--v20. JSX never renders these when
+client/src/components/lumi/LumiV6.css:825:   animated=false (crisis), and the existing .lumiv6 reduced-motion
+client/src/components/lumi/LumiV6.css:832:.lumiv6__sparkle-layer {
+client/src/components/lumi/LumiV6.css:838:.lumiv6__sparkle {
+client/src/components/lumi/LumiV6.css:848:.lumiv6--v20.lumiv6--animated .lumiv6__sparkle {
+client/src/components/lumi/LumiV6.css:851:.lumiv6__sparkle--1 { top: 10%;  left: 80%;  animation-delay: 0s !important; }
+client/src/components/lumi/LumiV6.css:852:.lumiv6__sparkle--2 { top: 20%;  right: 15%; animation-delay: 0.5s !important; }
+client/src/components/lumi/LumiV6.css:853:.lumiv6__sparkle--3 { top: 5%;   left: 60%;  animation-delay: 1s !important; }
+client/src/components/lumi/LumiV6.css:860:.lumiv6__particle-layer {
+client/src/components/lumi/LumiV6.css:866:.lumiv6__particle {
+client/src/components/lumi/LumiV6.css:875:.lumiv6--v20.lumiv6--animated .lumiv6__particle {
+client/src/components/lumi/LumiV6.css:878:.lumiv6__particle--1 { left: 20%; animation-delay: 0s !important;  animation-duration: 3.5s !important; }
+client/src/components/lumi/LumiV6.css:879:.lumiv6__particle--2 { left: 50%; animation-delay: 1s !important;  animation-duration: 4.2s !important; }
+client/src/components/lumi/LumiV6.css:880:.lumiv6__particle--3 { left: 70%; animation-delay: 2s !important;  animation-duration: 5s !important; }
+client/src/components/lumi/LumiV6.css:881:.lumiv6--emotion-calm    .lumiv6__particle { background: rgba(116, 192, 252, 0.55); }
+client/src/components/lumi/LumiV6.css:882:.lumiv6--emotion-empathy .lumiv6__particle { background: rgba(200, 182, 255, 0.55); }
+client/src/components/lumi/LumiV6.css:883:.lumiv6--emotion-sleepy  .lumiv6__particle { background: rgba(168, 213, 186, 0.5); }
+client/src/components/lumi/LumiV6.css:896:.lumiv6__blush {
+client/src/components/lumi/LumiV6.css:908:.lumiv6__blush--left  { left:  15%; }
+client/src/components/lumi/LumiV6.css:909:.lumiv6__blush--right { right: 15%; }
+client/src/components/lumi/LumiV6.css:910:.lumiv6--blush-level-1 .lumiv6__blush { opacity: 0.2; }
+client/src/components/lumi/LumiV6.css:911:.lumiv6--blush-level-2 .lumiv6__blush { opacity: 0.4; }
+client/src/components/lumi/LumiV6.css:912:.lumiv6--blush-level-3 .lumiv6__blush { opacity: 0.6; }
+client/src/components/lumi/LumiV6.css:913:.lumiv6--emotion-joy     .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(255, 217, 61, 0.5) 0%,  rgba(255, 217, 61, 0)  70%); }
+client/src/components/lumi/LumiV6.css:914:.lumiv6--emotion-love    .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(255, 154, 139, 0.55) 0%, rgba(255, 154, 139, 0) 70%); }
+client/src/components/lumi/LumiV6.css:915:.lumiv6--emotion-empathy .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(200, 182, 255, 0.5) 0%,  rgba(200, 182, 255, 0) 70%); }
+client/src/components/lumi/LumiV6.css:916:.lumiv6--emotion-calm    .lumiv6__blush { background: radial-gradient(ellipse at center, rgba(168, 201, 160, 0.45) 0%, rgba(168, 201, 160, 0) 70%); }
+client/src/components/lumi/LumiV6.css:919:.lumiv6--still .lumiv6__sparkle,
+client/src/components/lumi/LumiV6.css:920:.lumiv6--still .lumiv6__particle { display: none; }
+client/src/components/lumi/LumiV6.css:924:  .lumiv6 .lumiv6__sparkle,
+client/src/components/lumi/LumiV6.css:925:  .lumiv6 .lumiv6__particle { display: none; }
+client/src/components/lumi/LumiV6.css:926:  .lumiv6 .lumiv6__blush    { transition: none !important; }
+client/src/components/lumi/LumiV6.css:931:   Additive on top of v5.8.8. All effects gated by .lumiv6--v20 +
+client/src/components/lumi/LumiV6.css:932:   .lumiv6--animated; PNG/WebP image untouched. Ear wiggle from the
+client/src/components/lumi/LumiV6.css:938:.lumiv6--v20.lumiv6--animated .lumiv6__eye {
+client/src/components/lumi/LumiV6.css:945:.lumiv6--v20.lumiv6--animated .lumiv6__mouth {
+client/src/components/lumi/LumiV6.css:952:.lumiv6--v20.lumiv6--animated .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:967:.lumiv6--v20.lumiv6--animated.lumiv6--celebrating .lumiv6__posture {
+client/src/components/lumi/LumiV6.css:972:.lumiv6__tear {
+client/src/components/lumi/LumiV6.css:983:.lumiv6__tear--left  { left:  22%; }
+client/src/components/lumi/LumiV6.css:984:.lumiv6__tear--right { right: 22%; }
+client/src/components/lumi/LumiV6.css:990:.lumiv6--v20.lumiv6--animated.lumiv6--tearful .lumiv6__tear {
+client/src/components/lumi/LumiV6.css:997:  .lumiv6 .lumiv6__tear { display: none; }
+client/src/components/lumi/LumiV6.css:998:  .lumiv6.lumiv6--celebrating .lumiv6__posture { animation: none !important; }
+client/src/components/lumi/LumiV6.css:999:  .lumiv6--v20.lumiv6--animated .lumiv6__eye,
+client/src/components/lumi/LumiV6.css:1000:  .lumiv6--v20.lumiv6--animated .lumiv6__mouth,
+client/src/components/lumi/LumiV6.css:1001:  .lumiv6--v20.lumiv6--animated .lumiv6__posture { transition: none !important; }
+client/src/components/lumi/FloatIdleRig.jsx:4: * Standalone — does NOT replace LumiV6 / LumiV7 / BuddyAvatar / LumiMascot.
+client/src/components/lumi/LumiMascotImage.jsx:2: * LumiMascotImage — Full-color PNG of Lumi (the real illustrated mascot).
+client/src/components/lumi/LumiMascotImage.jsx:4: * This is the *static art* counterpart to LumiMascot.jsx. Use this when you
+client/src/components/lumi/LumiMascotImage.jsx:8: * keep using <LumiMascot/> instead.
+client/src/components/lumi/LumiMascotImage.jsx:15:// v4 canonical PNG served from /public — see BuddyAvatar.tsx for the
+client/src/components/lumi/LumiMascotImage.jsx:21:export default function LumiMascotImage({
+client/src/components/lumi/LumiV6.tsx:2: * LumiV6 — "Living Lumi" multi-layer avatar.
+client/src/components/lumi/LumiV6.tsx:8: *   5 body postures via .lumiv6__posture wrapper, 600ms morph transitions
+client/src/components/lumi/LumiV6.tsx:15: *       varies --lumiv6-breath-duration & --lumiv6-breath-depth so no two
+client/src/components/lumi/LumiV6.tsx:19: *       of double-blink, fired via the .lumiv6--blink-once class.
+client/src/components/lumi/LumiV6.tsx:21: *       mouse / click / key activity, .lumiv6--idle adds gentle pupil
+client/src/components/lumi/LumiV6.tsx:64: * Standalone — does NOT replace BuddyAvatar. All classes scoped under
+client/src/components/lumi/LumiV6.tsx:65: * `.lumiv6` (cannot collide with `.buddy*`). V9 modifiers use the
+client/src/components/lumi/LumiV6.tsx:66: * `lumiv6--v9-*` convention so the global reduced-motion blanket and
+client/src/components/lumi/LumiV6.tsx:67: * crisis-stillness contract automatically cover them. CSS in LumiV6.css.
+client/src/components/lumi/LumiV6.tsx:71:import { getLumiV6Derivation } from "@/data/lumiEmotionMap";
+client/src/components/lumi/LumiV6.tsx:72:import "./LumiV6.css";
+client/src/components/lumi/LumiV6.tsx:74:export type LumiV6ColorMode =
+client/src/components/lumi/LumiV6.tsx:83:export type LumiV6Emotion =
+client/src/components/lumi/LumiV6.tsx:92:export type LumiV6Pose =
+client/src/components/lumi/LumiV6.tsx:101:export type LumiV6Size = "sm" | "md" | "lg" | "xl" | "md-header";
+client/src/components/lumi/LumiV6.tsx:103:export type LumiV6MouthExpression =
+client/src/components/lumi/LumiV6.tsx:116:export type LumiV6EyeExpression =
+client/src/components/lumi/LumiV6.tsx:123:export type LumiV6Posture =
+client/src/components/lumi/LumiV6.tsx:131:export type LumiV6BlushLevel = 0 | 1 | 2 | 3;
+client/src/components/lumi/LumiV6.tsx:133:export interface LumiV6Props {
+client/src/components/lumi/LumiV6.tsx:134:  colorMode?: LumiV6ColorMode;
+client/src/components/lumi/LumiV6.tsx:135:  emotion?: LumiV6Emotion;
+client/src/components/lumi/LumiV6.tsx:136:  pose?: LumiV6Pose;
+client/src/components/lumi/LumiV6.tsx:137:  size?: LumiV6Size;
+client/src/components/lumi/LumiV6.tsx:147:  mouthExpression?: LumiV6MouthExpression;
+client/src/components/lumi/LumiV6.tsx:149:  eyeExpression?: LumiV6EyeExpression;
+client/src/components/lumi/LumiV6.tsx:151:  posture?: LumiV6Posture;
+client/src/components/lumi/LumiV6.tsx:168:  /** Exact pixel override for non-canonical sizes (legacy LumiMascot
+client/src/components/lumi/LumiV6.tsx:181:  detectedSentiment?: LumiV6Emotion | null;
+client/src/components/lumi/LumiV6.tsx:184:   * off-screen LumiV6 instances). Set to "eager" at above-the-fold
+client/src/components/lumi/LumiV6.tsx:217:  blushLevel?: LumiV6BlushLevel;
+client/src/components/lumi/LumiV6.tsx:238:// Mirrors BuddyAvatar.COLOR_MODE_SRC. Legacy lumi-v4-* tinted PNGs deleted
+client/src/components/lumi/LumiV6.tsx:242:const COLOR_PNG: Record<LumiV6ColorMode, string> = {
+client/src/components/lumi/LumiV6.tsx:251:const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
+client/src/components/lumi/LumiV6.tsx:269:const EMOTION_MESSAGE: Record<LumiV6Emotion, string> = {
+client/src/components/lumi/LumiV6.tsx:279:const EMOTION_ARIA: Record<LumiV6Emotion, string> = {
+client/src/components/lumi/LumiV6.tsx:289:const SIZE_PX: Record<LumiV6Size, number> = {
+client/src/components/lumi/LumiV6.tsx:299: * via `getLumiV6Derivation()` (see client/src/data/lumiEmotionMap.ts).
+client/src/components/lumi/LumiV6.tsx:305:const AURA_BY_EMOTION: Record<LumiV6Emotion, { color: string; opacity: number; periodMs: number }> = {
+client/src/components/lumi/LumiV6.tsx:316:const GAZE_LERP_BY_EMOTION: Record<LumiV6Emotion, number> = {
+client/src/components/lumi/LumiV6.tsx:326:export default function LumiV6({
+client/src/components/lumi/LumiV6.tsx:357:}: LumiV6Props) {
+client/src/components/lumi/LumiV6.tsx:363:  // module-scoped coordinator (tryPop / tryChime / claimHeart) so LumiV6 and
+client/src/components/lumi/LumiV6.tsx:364:  // BuddyAvatar cooperate when both are mounted on the same page (e.g. /v6
+client/src/components/lumi/LumiV6.tsx:370:  const [triggeredEmotion, setTriggeredEmotion] = useState<LumiV6Emotion | null>(null);
+client/src/components/lumi/LumiV6.tsx:377:  const [v9MirrorEmotion, setV9MirrorEmotion] = useState<LumiV6Emotion | null>(null);
+client/src/components/lumi/LumiV6.tsx:383:  const effectiveEmotion: LumiV6Emotion =
+client/src/components/lumi/LumiV6.tsx:390:  // via the getLumiV6Derivation() adapter (see lumiEmotionMap.ts §10).
+client/src/components/lumi/LumiV6.tsx:392:  const derived          = getLumiV6Derivation(effectiveEmotion);
+client/src/components/lumi/LumiV6.tsx:393:  const resolvedMouth    = mouthExpression ?? (derived.mouth as LumiV6MouthExpression);
+client/src/components/lumi/LumiV6.tsx:394:  const resolvedEye      = eyeExpression  ?? (derived.eye as LumiV6EyeExpression);
+client/src/components/lumi/LumiV6.tsx:395:  const resolvedPosture  = posture        ?? (derived.posture as LumiV6Posture);
+client/src/components/lumi/LumiV6.tsx:401:  const finalEye: LumiV6EyeExpression =
+client/src/components/lumi/LumiV6.tsx:410:  const heartGradId = `lumiv6-heart-${reactId.replace(/:/g, "")}`;
+client/src/components/lumi/LumiV6.tsx:461:        root.style.setProperty("--lumiv6-eye-x", `${current.x.toFixed(2)}%`);
+client/src/components/lumi/LumiV6.tsx:462:        root.style.setProperty("--lumiv6-eye-y", `${current.y.toFixed(2)}%`);
+client/src/components/lumi/LumiV6.tsx:476:      root.style.setProperty("--lumiv6-eye-x", `${target.x.toFixed(2)}%`);
+client/src/components/lumi/LumiV6.tsx:477:      root.style.setProperty("--lumiv6-eye-y", `${target.y.toFixed(2)}%`);
+client/src/components/lumi/LumiV6.tsx:530:  // Toggle .lumiv6--blink-once briefly each time blinkPulse increments.
+client/src/components/lumi/LumiV6.tsx:605:          // gate is enforced inside tryPop, shared with BuddyAvatar so the
+client/src/components/lumi/LumiV6.tsx:622:  // Claims the global heartbeat slot. If another Lumi (BuddyAvatar / sibling
+client/src/components/lumi/LumiV6.tsx:623:  // LumiV6) already owns it, claimHeart returns null and we stay silent for
+client/src/components/lumi/LumiV6.tsx:678:  // from fireOverride. Level 0/1/2/3 drives lumiv6--v9-escalation-{n}
+client/src/components/lumi/LumiV6.tsx:749:  // CSS .lumiv6--v9-goodbye runs the wave + fade-out keyframe.
+client/src/components/lumi/LumiV6.tsx:799:    next: LumiV6Emotion,
+client/src/components/lumi/LumiV6.tsx:832:  const eyeMod = finalEye === "default" ? "" : `lumiv6__eye--${finalEye}`;
+client/src/components/lumi/LumiV6.tsx:833:  const mouthMod = `lumiv6__mouth--${resolvedMouth}`;
+client/src/components/lumi/LumiV6.tsx:849:  const resolvedBlushLevel: LumiV6BlushLevel = v20Active
+client/src/components/lumi/LumiV6.tsx:850:    ? (blushLevel ?? (Math.min(3, v9EscalationLevel) as LumiV6BlushLevel))
+client/src/components/lumi/LumiV6.tsx:862:    "--lumiv6-heart-period": `${heartPeriodMs}ms`,
+client/src/components/lumi/LumiV6.tsx:863:    "--lumiv6-breath-duration": `${breathPattern.durationMs}ms`,
+client/src/components/lumi/LumiV6.tsx:864:    "--lumiv6-breath-depth": breathPattern.depth,
+client/src/components/lumi/LumiV6.tsx:865:    "--lumiv6-aura-color": auraSpec.color,
+client/src/components/lumi/LumiV6.tsx:866:    "--lumiv6-aura-opacity": auraSpec.opacity,
+client/src/components/lumi/LumiV6.tsx:867:    "--lumiv6-aura-period": `${auraSpec.periodMs}ms`,
+client/src/components/lumi/LumiV6.tsx:874:        "lumiv6",
+client/src/components/lumi/LumiV6.tsx:875:        `lumiv6--size-${size}`,
+client/src/components/lumi/LumiV6.tsx:876:        `lumiv6--emotion-${effectiveEmotion}`,
+client/src/components/lumi/LumiV6.tsx:877:        `lumiv6--pose-${pose}`,
+client/src/components/lumi/LumiV6.tsx:878:        `lumiv6--posture-${resolvedPosture}`,
+client/src/components/lumi/LumiV6.tsx:879:        animated ? "lumiv6--animated" : "lumiv6--still",
+client/src/components/lumi/LumiV6.tsx:880:        interactive ? "lumiv6--interactive" : "",
+client/src/components/lumi/LumiV6.tsx:881:        hovered ? "lumiv6--hovered" : "",
+client/src/components/lumi/LumiV6.tsx:882:        isTransitioning ? "lumiv6--transitioning" : "",
+client/src/components/lumi/LumiV6.tsx:883:        v8 ? "lumiv6--v8" : "",
+client/src/components/lumi/LumiV6.tsx:884:        v8 && isIdle ? "lumiv6--idle" : "",
+client/src/components/lumi/LumiV6.tsx:885:        v8 && blinkActive ? "lumiv6--blink-once" : "",
+client/src/components/lumi/LumiV6.tsx:886:        heartBurst ? "lumiv6--heart-burst" : "",
+client/src/components/lumi/LumiV6.tsx:887:        headTilt ? "lumiv6--head-tilt" : "",
+client/src/components/lumi/LumiV6.tsx:888:        bodyBounce ? "lumiv6--body-bounce" : "",
+client/src/components/lumi/LumiV6.tsx:889:        recognizing ? "lumiv6--recognizing" : "",
+client/src/components/lumi/LumiV6.tsx:890:        v9 ? "lumiv6--v9" : "",
+client/src/components/lumi/LumiV6.tsx:891:        v9 && v9Entering ? "lumiv6--v9-entering" : "",
+client/src/components/lumi/LumiV6.tsx:892:        v9 && v9AttentionCapture ? "lumiv6--v9-attention" : "",
+client/src/components/lumi/LumiV6.tsx:893:        v9 && v9GazeLock ? "lumiv6--v9-gaze-lock" : "",
+client/src/components/lumi/LumiV6.tsx:894:        v9 && v9EscalationLevel > 0 ? `lumiv6--v9-escalation-${v9EscalationLevel}` : "",
+client/src/components/lumi/LumiV6.tsx:895:        v9 && v9MirrorEmotion ? "lumiv6--v9-mirroring" : "",
+client/src/components/lumi/LumiV6.tsx:896:        v9 && v9Recognition ? "lumiv6--v9-recognition" : "",
+client/src/components/lumi/LumiV6.tsx:897:        v9 && animated ? "lumiv6--v9-visceral-glow" : "",
+client/src/components/lumi/LumiV6.tsx:898:        v9 && v9Goodbye ? "lumiv6--v9-goodbye" : "",
+client/src/components/lumi/LumiV6.tsx:899:        v20 ? "lumiv6--v20" : "",
+client/src/components/lumi/LumiV6.tsx:900:        resolvedBlushLevel > 0 ? `lumiv6--blush-level-${resolvedBlushLevel}` : "",
+client/src/components/lumi/LumiV6.tsx:901:        showTears ? "lumiv6--tearful" : "",
+client/src/components/lumi/LumiV6.tsx:902:        showBouncePhysics ? "lumiv6--celebrating" : "",
+client/src/components/lumi/LumiV6.tsx:911:      data-pose={pose}
+client/src/components/lumi/LumiV6.tsx:925:      {auraOn && <div className="lumiv6__aura" aria-hidden="true" />}
+client/src/components/lumi/LumiV6.tsx:926:      {shadowOn && <div className="lumiv6__shadow" aria-hidden="true" />}
+client/src/components/lumi/LumiV6.tsx:930:        <div className="lumiv6__particle-layer" aria-hidden="true">
+client/src/components/lumi/LumiV6.tsx:931:          <span className="lumiv6__particle lumiv6__particle--1" />
+client/src/components/lumi/LumiV6.tsx:932:          <span className="lumiv6__particle lumiv6__particle--2" />
+client/src/components/lumi/LumiV6.tsx:933:          <span className="lumiv6__particle lumiv6__particle--3" />
+client/src/components/lumi/LumiV6.tsx:940:          <span className="lumiv6__blush lumiv6__blush--left"  aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:941:          <span className="lumiv6__blush lumiv6__blush--right" aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:948:          <span className="lumiv6__tear lumiv6__tear--left"  aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:949:          <span className="lumiv6__tear lumiv6__tear--right" aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:953:      <div className="lumiv6__posture" aria-hidden="true">
+client/src/components/lumi/LumiV6.tsx:959:            className="lumiv6__body"
+client/src/components/lumi/LumiV6.tsx:977:          <div className="lumiv6__face-pad" aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:978:          <div className={`lumiv6__eye lumiv6__eye--left ${eyeMod}`} aria-hidden="true">
+client/src/components/lumi/LumiV6.tsx:979:            <span className="lumiv6__pupil" />
+client/src/components/lumi/LumiV6.tsx:981:          <div className={`lumiv6__eye lumiv6__eye--right ${eyeMod}`} aria-hidden="true">
+client/src/components/lumi/LumiV6.tsx:982:            <span className="lumiv6__pupil" />
+client/src/components/lumi/LumiV6.tsx:985:            <div className={`lumiv6__mouth ${mouthMod}`} aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:987:          <div className="lumiv6__heart" aria-hidden="true">
+client/src/components/lumi/LumiV6.tsx:988:            <div className="lumiv6__heart-glow" />
+client/src/components/lumi/LumiV6.tsx:990:              className="lumiv6__heart-svg"
+client/src/components/lumi/LumiV6.tsx:1015:            className="lumiv6__zone lumiv6__zone--head"
+client/src/components/lumi/LumiV6.tsx:1022:            className="lumiv6__zone lumiv6__zone--heart"
+client/src/components/lumi/LumiV6.tsx:1029:            className="lumiv6__zone lumiv6__zone--body"
+client/src/components/lumi/LumiV6.tsx:1039:        <div className="lumiv6__sparkle-layer" aria-hidden="true">
+client/src/components/lumi/LumiV6.tsx:1040:          <span className="lumiv6__sparkle lumiv6__sparkle--1" />
+client/src/components/lumi/LumiV6.tsx:1041:          <span className="lumiv6__sparkle lumiv6__sparkle--2" />
+client/src/components/lumi/LumiV6.tsx:1042:          <span className="lumiv6__sparkle lumiv6__sparkle--3" />
+client/src/components/lumi/LumiV6.tsx:1048:          className="lumiv6__bubble"
+client/src/components/lumi/LumiV6.tsx:1053:          <span className="lumiv6__bubble-text">{bubbleText}</span>
+client/src/components/lumi/LumiV6.tsx:1054:          <span className="lumiv6__bubble-tail" aria-hidden="true" />
+client/src/components/lumi/LumiV7.jsx:4: * Standalone — does NOT replace LumiV6 / BuddyAvatar / LumiMascot.
+client/src/components/LoadingSpinner.tsx:8: * Note: BuddyAvatar's `motion` is derived from `state`, not a prop —
+client/src/components/LoadingSpinner.tsx:11:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/LoadingSpinner.tsx:50:        <BuddyAvatar
+client/src/components/LoadingSpinner.tsx:52:          colorMode="blue"
+client/src/components/LoadingSpinner.tsx:53:          pose="waving"
+client/src/components/ToolCard.tsx:10:import BuddyAvatar, {
+client/src/components/ToolCard.tsx:13:} from "@/components/avatar/BuddyAvatar";
+client/src/components/ToolCard.tsx:111:        <BuddyAvatar
+client/src/components/ToolCard.tsx:113:          colorMode={resolvedColor}
+client/src/components/EmptyState.jsx:4:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/EmptyState.jsx:96:        <BuddyAvatar
+client/src/components/EmptyState.jsx:98:          colorMode="purple"
+client/src/components/EmptyState.jsx:99:          pose="hugging"
+client/src/components/CelebrationOverlay.tsx:12:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/CelebrationOverlay.tsx:125:      <BuddyAvatar
+client/src/components/CelebrationOverlay.tsx:127:        colorMode="yellow"
+client/src/components/CelebrationOverlay.tsx:128:        pose="celebrating"
+client/src/components/SafetyDisclaimer.jsx:14:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/SafetyDisclaimer.jsx:43:        <BuddyAvatar
+client/src/components/SafetyDisclaimer.jsx:45:          colorMode="purple"
+client/src/components/ErrorBoundary.jsx:3:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/ErrorBoundary.jsx:60:              <BuddyAvatar
+client/src/components/ErrorBoundary.jsx:62:                colorMode="purple"
+client/src/components/TglpNavbar.jsx:7:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/TglpNavbar.jsx:81:            <LumiMascot
+client/src/components/Header.jsx:4:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/Header.jsx:61:            <LumiMascot emotion="neutral" size={40} interactive={false} />
+client/src/components/Footer.jsx:4:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/Footer.jsx:24:              <LumiMascot emotion="neutral" size={40} />
+client/src/components/PageTemplate.jsx:17:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/PageTemplate.jsx:32:// Canonical Lumi brand PNG (matches LumiV6.tsx + BuddyAvatar.tsx). Restored
+client/src/components/PageTemplate.jsx:105:          <BuddyAvatar state="calm" colorMode="default" size="sm" data-testid="img-logo-badge-lumi" />
+client/src/components/PageTemplate.jsx:1013:              <BuddyAvatar size={32} animated={true} data-testid="img-nav-logo-lumi" />
+client/src/data/lumiToySpec.ts:94: * Per-emotion firmware seed. Mirrors the on-screen LumiV6 V7 derivation
+client/src/data/lumiToySpec.ts:105:   *  LumiV6.tsx so the firmware lookup table stays 1:1 with the avatar. */
+client/src/data/lumiToySpec.ts:126: * Mirrors `getLumiV6Derivation()` in `client/src/data/lumiEmotionMap.ts`
+client/src/data/lumiEmotionMap.ts:5: *   1. EMOTION_TO_COLOR        — emotion → LumiV6 color theme   (legacy, used today)
+client/src/data/lumiEmotionMap.ts:13: * which fields to honor — LumiV6 (single PNG body, FROZEN per V21) honors
+client/src/data/lumiEmotionMap.ts:16: * breathing}-nobg.png`) or render the multi-sprite LumiMascot arm/leg
+client/src/data/lumiEmotionMap.ts:19: * Source of truth for color modes is `LumiV6ColorMode` in
+client/src/data/lumiEmotionMap.ts:20: * `client/src/components/lumi/LumiV6.tsx`. Importing the type here keeps
+client/src/data/lumiEmotionMap.ts:24:import type { LumiV6ColorMode } from "@/components/lumi/LumiV6";
+client/src/data/lumiEmotionMap.ts:26:export const EMOTION_TO_COLOR: Record<string, LumiV6ColorMode> = {
+client/src/data/lumiEmotionMap.ts:47:export function getColorMode(emotion: string): LumiV6ColorMode {
+client/src/data/lumiEmotionMap.ts:61: * stillness contract in LumiV6.tsx).
+client/src/data/lumiEmotionMap.ts:152: * V24 §10 — LumiV6 Adapter (single source of truth bridge)
+client/src/data/lumiEmotionMap.ts:154: * LumiV6.tsx historically owned its own EMOTION_DERIVATION table. v5.8.12
+client/src/data/lumiEmotionMap.ts:190:export interface LumiV6Derivation {
+client/src/data/lumiEmotionMap.ts:191:  /** Caller casts to its local LumiV6MouthExpression union. */
+client/src/data/lumiEmotionMap.ts:198:export function getLumiV6Derivation(emotion: string): LumiV6Derivation {
+client/src/data/lumiEmotionMap.ts:203:  // mouth; V24's "calm" mouth is not in V6's LumiV6MouthExpression union)
+client/src/hooks/useBuddyEmotion.js:5: * Lumi's 10 emotion states. Designed to compose with <LumiMascot/> via:
+client/src/hooks/useBuddyEmotion.js:8: *   <LumiMascot emotion={emotion} onEmote={celebrate} />
+client/src/hooks/useBuddyEmotion.js:50:   * snaps back to derived. Wires up nicely as <LumiMascot onEmote={celebrate}/>.
+client/src/lib/avatarState.ts:5: * Drives <BuddyAvatar /> visuals from server-resolved emotional state.
+client/src/lib/buddyEmotion.ts:3: * signals to BuddyAvatar visual state.
+client/src/lib/buddyEmotion.ts:21:} from "@/components/avatar/BuddyAvatar";
+client/src/lib/buddyEmotion.ts:221:export function aiStateToPose(s: AIChatState): import("@/components/avatar/BuddyAvatar").BuddyPose {
+client/src/lib/lumiAudio.js:106: * spec the cadence is driven by the call site (LumiV6 schedules a play()
+client/src/lib/lumiAudio.js:190:// cooperates. Without this, N BuddyAvatars on a page would each fire N
+client/src/styles/lumi-mascot.css:4: * LumiMascot.css; this file owns GPU-accel hints and the global
+client/src/styles/lumi-mascot.css:77: * LumiMascot.css. Use these when you want to apply a one-shot or looping
+client/src/styles/canva-landing.css:2670:   around the existing Lumi container so the inner LumiV6 component (with
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:47:    reasoning: "CanvaLanding.jsx mounted at /; opt-in entry unblocks OfficialLumi migration from legacy LumiMascot without forcing render. Position 'hero' chosen as closest legal value to user-requested 'floating' (PagePosition type does not include 'floating').",
+client/src/App.jsx:110:const LumiV6Preview = lazy(() => import("./pages/LumiV6Preview.jsx"));
+client/src/App.jsx:1586:                <LumiV6Preview />
