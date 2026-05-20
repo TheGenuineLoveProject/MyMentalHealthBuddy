@@ -1,6 +1,7 @@
 import React from "react";
 import { RefreshCw, Home } from 'lucide-react';
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 function shouldShowDiagnostics() {
   try {
@@ -57,11 +58,10 @@ export class ErrorBoundary extends React.Component {
                 height: 128,
               }}
             >
-              <BuddyAvatar
-                state="crisis"
-                colorMode="purple"
-                size="lg"
-                animated={false}
+              <MMHBFloatAvatar
+                imageSrc={getOfficialLumi("supportive")}
+                size={128}
+                alt="Lumi offering gentle support"
                 data-testid="error-boundary-buddy"
               />
             </div>
