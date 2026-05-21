@@ -42,12 +42,18 @@ export default defineConfig({
 
           if (id.includes('/react-icons/')) return 'vendor-icons';
 
-          if (
-            id.includes('/chart.js/') ||
-            id.includes('/react-chartjs-2/') ||
-            id.includes('/recharts/') ||
-            id.includes('/d3-')
-          ) return 'vendor-charts';
+          // DISABLED:
+          // Chart libraries should stay attached to lazy chart consumers.
+          // Forcing vendor-charts created eager modulepreload behavior.
+          //
+          // if (
+          //   id.includes('/chart.js/') ||
+          //   id.includes('/react-chartjs-2/') ||
+          //   id.includes('/recharts/') ||
+          //   id.includes('/d3-')
+          // ) {
+          //   return 'vendor-charts';
+          // }
 
           if (id.includes('/framer-motion/')) return 'vendor-motion';
 

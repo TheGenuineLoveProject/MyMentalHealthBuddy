@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 
 export default function AIChat({ userId }) {
   const [messages, setMessages] = useState([]);
@@ -8,26 +7,50 @@ export default function AIChat({ userId }) {
   async function sendMessage(e) {
     e.preventDefault();
 
-    const token = localStorage.getItem("token"); // your JWT
+    const trimmed = text.trim();
+    if (!trimmed) return;
 
-    const res = await axios.post(
-      "/api/ai/chat",
-      { userId, message: text },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-    const userMsg = { role: "user", content: text };
+    const userMsg = { role: "user", content: trimmed };
     setMessages((m) => [...m, userMsg]);
-
-    const res = await axios.post("/api/ai/chat", {
-      userId,
-      message: text,
-    });
-
-    const botMsg = { role: "assistant", content: res.data.reply };
-    setMessages((m) => [...m, botMsg]);
-
     setText("");
+
+    try {
+      const res = await fetch("/api/ai/chat", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId,
+          message: trimmed,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`AI chat request failed: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      const botMsg = {
+        role: "assistant",
+        content: data.reply || data.message || "I’m here with you.",
+      };
+
+      setMessages((m) => [...m, botMsg]);
+    } catch (error) {
+      console.error("[AIChat] send failed", error);
+
+      setMessages((m) => [
+        ...m,
+        {
+          role: "assistant",
+          content:
+            "I’m having trouble connecting right now. Please try again in a moment.",
+        },
+      ]);
+    }
   }
 
   return (

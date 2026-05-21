@@ -1,5 +1,5 @@
 import express from "express";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { signUserToken, requireAuth } from "../middleware/auth.mjs";
