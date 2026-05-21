@@ -10,7 +10,6 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
 import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
@@ -225,10 +224,12 @@ export default function CheckIn() {
           aria-live="polite"
           data-testid="container-buddy"
         >
-          <MMHBFloatAvatar
-            imageSrc={getOfficialLumi("supportive")}
-            size={128}
+          <img
+            src={getOfficialLumi("supportive")}
             alt="Lumi gently checking in with you"
+            width={128}
+            height={128}
+            className="object-contain rounded-full"
             data-testid={`img-checkin-buddy-${phase}`}
           />
         </div>

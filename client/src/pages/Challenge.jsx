@@ -321,7 +321,7 @@ export default function Challenge() {
           />
         </div>
       </div>
-    </>
+    </WellnessPageShell>
   );
   }
 

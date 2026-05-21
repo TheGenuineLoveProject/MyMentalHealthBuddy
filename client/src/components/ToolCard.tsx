@@ -11,7 +11,6 @@ import type {
   BuddyColorMode,
   BuddyState,
 } from "@/components/avatar/BuddyAvatar";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
 import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 export type ToolCategory =
@@ -110,10 +109,12 @@ export default function ToolCard({
       }}
     >
       <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
-        <MMHBFloatAvatar
-          imageSrc={getOfficialLumi("calm")}
-          size={32}
+        <img
+          src={getOfficialLumi("calm")}
           alt="Lumi tool helper"
+          width={32}
+          height={32}
+          className="object-contain rounded-full"
           data-testid={`${slug}-avatar`}
         />
       </div>
