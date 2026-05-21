@@ -291,17 +291,40 @@ console.log("[SPA] CLIENT_DIST =", CLIENT_DIST);
 // the correct canonical path. Additive only; does not affect SPA routing
 // for any other path, does not touch express.static, does not touch the
 // canonical health endpoints.
+// /health and /live remain 404 canonical-guards (point clients at /api/health/*).
+// /ready and /metrics are exposed as bare 200 aliases per Phase 9A spec, while
+// the canonical /api/health/ready and /api/health/metrics continue to serve
+// their richer payloads unchanged.
 const BARE_HEALTH_CANONICALS = {
   "/health": "/api/health",
-  "/ready": "/api/health/ready",
   "/live": "/api/health/live",
-  "/metrics": "/api/health/metrics",
 };
 for (const [barePath, canonical] of Object.entries(BARE_HEALTH_CANONICALS)) {
   app.get(barePath, (_req, res) => {
     res.status(404).json({ error: "Not Found", canonical });
   });
 }
+
+app.get("/ready", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({ status: "ready", timestamp: new Date().toISOString() });
+});
+
+app.get("/metrics", (_req, res) => {
+  const mem = process.memoryUsage();
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({
+    uptime: Math.floor(process.uptime()),
+    memory: {
+      heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
+      heapTotalMB: Math.round(mem.heapTotal / 1024 / 1024),
+      rssMB: Math.round(mem.rss / 1024 / 1024),
+    },
+    node_version: process.version,
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+  });
+});
 
 app.use(express.static(CLIENT_DIST, {
   index: "index.html"
@@ -331,9 +354,41 @@ app.get("*", (req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
+// ===== PHASE 9A: CENTRALIZED ERROR HANDLER =====
+// Mounted last so any throw from earlier middleware/routes funnels through
+// the central logger (req.requestId-stamped) and returns a safe 500 JSON
+// envelope without leaking stacks to the client. Existing route responses
+// are preserved — this only catches unhandled throws.
+{
+  const { errorHandler } = await import("./middleware/errorHandler.mjs");
+  app.use(errorHandler);
+}
+
+// ===== PHASE 9A: ROUTE REGISTRATION SUMMARY =====
+// Counts top-level routers/middlewares registered on the app stack for the
+// startup diagnostic line. Read-only inspection of express internals; safe
+// fallback to 0 if the shape ever changes.
+function countRegisteredRoutes() {
+  try {
+    const stack = app?._router?.stack || [];
+    return {
+      total: stack.length,
+      routes: stack.filter((l) => l.route).length,
+      routers: stack.filter((l) => l.name === "router").length,
+    };
+  } catch {
+    return { total: 0, routes: 0, routers: 0 };
+  }
+}
+
+const SERVER_START_ISO = new Date().toISOString();
 const server = app.listen(PORT, "0.0.0.0", () => {
+  const r = countRegisteredRoutes();
   console.log(`[SERVER] Listening on port ${PORT}`);
   console.log(`[SERVER] http://0.0.0.0:${PORT}`);
+  console.log(`[SERVER] NODE_ENV=${process.env.NODE_ENV || "development"}`);
+  console.log(`[SERVER] started_at=${SERVER_START_ISO} uptime=${process.uptime().toFixed(3)}s`);
+  console.log(`[SERVER] routes registered: ${r.total} (direct=${r.routes}, routers=${r.routers})`);
 });
 
 // ===== GRACEFUL SHUTDOWN (Observability O1) =====
