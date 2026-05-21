@@ -7,7 +7,6 @@ import BenefitsBlock from "../components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
 import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 const CHALLENGE_DAYS = [
@@ -194,22 +193,13 @@ export default function Challenge() {
           </div>
 
           <div className="mt-6 flex justify-center">
-            <MMHBFloatAvatar
-              imageSrc={getOfficialLumi("encouraging")}
-              size={128}
+            <img
+              src={getOfficialLumi("encouraging")}
               alt="Lumi encouraging your challenge"
+              className="w-32 h-32 object-contain rounded-full"
               data-testid="img-challenge-lumi"
             />
           </div>
-
-          <BenefitsBlock
-            benefit="Daily self-reflection, emotional awareness, and gentle growth"
-            duration="60 seconds – 3 minutes per day"
-            control="Skip any day, return anytime — no streak pressure"
-            disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
-            variant="minimal"
-            className="mb-6"
-          />
 
           {loading ? (
             <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-12 mb-8 flex flex-col items-center justify-center">
@@ -331,7 +321,7 @@ export default function Challenge() {
           />
         </div>
       </div>
-    </WellnessPageShell>
+    </>
   );
   }
 
