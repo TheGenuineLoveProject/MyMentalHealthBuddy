@@ -14,6 +14,7 @@ import { ReducedMotionProvider } from "./components/a11y/ReducedMotionProvider.j
 import { GamificationProvider } from "./context/GamificationContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
+import { SafeBoundary } from "./components/SafeBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
 const AutopilotPage = lazy(() =>
   import("./pages/_autopilot.jsx").then((m) => ({
@@ -392,6 +393,7 @@ export default function App() {
             <Suspense fallback={null}>
               <WelcomeBackBanner />
             </Suspense>
+            <SafeBoundary label="Route">
             <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Landing & Public Pages */}
@@ -1894,6 +1896,7 @@ export default function App() {
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>
             </Switch>
           </Suspense>
+          </SafeBoundary>
           </main>
           {/* v5.8.35 perf: lazy global widgets — Suspense fallback is null
               because none are above-the-fold; they hydrate quietly post-LCP. */}
