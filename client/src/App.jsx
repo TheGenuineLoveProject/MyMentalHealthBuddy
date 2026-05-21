@@ -48,7 +48,6 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.jsx"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex.jsx"));
-const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
 const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
 const StatePage = lazy(() => import("./pages/StatePage.jsx"));
 const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
