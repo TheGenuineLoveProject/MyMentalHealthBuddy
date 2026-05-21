@@ -7,6 +7,7 @@ import BenefitsBlock from "../components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
+import { queryClient } from "@/lib/queryClient";
 import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 
 const CHALLENGE_DAYS = [
@@ -107,6 +108,8 @@ export default function Challenge() {
       
       if (res.ok) {
         toast({ title: "Progress saved", description: "Your challenge progress is synced." });
+        queryClient.invalidateQueries({ queryKey: ['/api/user/stats'] });
+        queryClient.invalidateQueries({ queryKey: ['/api/user/activity'] });
       } else {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
       }

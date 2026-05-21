@@ -82,6 +82,9 @@ export default function ChallengeDay() {
       setXpEarned(data?.xpEarned || 25);
       queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
       queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/user/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/user/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/user/activity"] });
       
       toast({
         title: "Day Complete!",
