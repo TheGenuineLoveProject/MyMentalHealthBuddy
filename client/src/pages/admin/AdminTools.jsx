@@ -8,6 +8,7 @@ import SystemOptimizationAdvisor from "../../components/admin/SystemOptimization
 import AIHealthPipeline from "../../components/admin/AIHealthPipeline";
 import GroupedHealthOverview from "../../components/admin/GroupedHealthOverview";
 import { TOOL_ADMIN_LINKS, TOOL_SEVERITY, AI_REMEDIATION, getRemediation, toolCategories, CRITICAL_CHECKS } from "./_adminToolsShared";
+import { LazyAdminPanel } from "../../components/system/AdminErrorBoundary";
 const AIRepairCenter = lazy(() => import("./_adminTools/AIRepairCenter"));
 const DailyOpsRunbook = lazy(() => import("./_adminTools/DailyOpsRunbook"));
 const PlatformIntegrityScanner = lazy(() => import("./_adminTools/PlatformIntegrityScanner"));
@@ -355,7 +356,7 @@ export default function AdminTools() {
           </div>
         </header>
 
-        <Suspense fallback={null}><QuickDiagnostics toolResults={toolResults} runHealthCheck={runHealthCheck} runningTools={runningTools} /></Suspense>
+        <LazyAdminPanel name="QuickDiagnostics"><QuickDiagnostics toolResults={toolResults} runHealthCheck={runHealthCheck} runningTools={runningTools} /></LazyAdminPanel>
 
         <AIKnowledgeBaseSummary
           toolResults={toolResults}
@@ -366,7 +367,7 @@ export default function AdminTools() {
           TOOL_SEVERITY={TOOL_SEVERITY}
         />
 
-        <Suspense fallback={null}><AIRepairCenter toolResults={toolResults} runHealthCheck={runHealthCheck} runAllChecks={runAllChecks} /></Suspense>
+        <LazyAdminPanel name="AIRepairCenter"><AIRepairCenter toolResults={toolResults} runHealthCheck={runHealthCheck} runAllChecks={runAllChecks} /></LazyAdminPanel>
 
         <AIHealthPipeline
           toolResults={toolResults}
@@ -385,17 +386,17 @@ export default function AdminTools() {
           TOOL_SEVERITY={TOOL_SEVERITY}
         />
 
-        <Suspense fallback={null}><PlatformCoverageReport toolResults={toolResults} /></Suspense>
+        <LazyAdminPanel name="PlatformCoverageReport"><PlatformCoverageReport toolResults={toolResults} /></LazyAdminPanel>
 
-        <Suspense fallback={null}><DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} /></Suspense>
+        <LazyAdminPanel name="DailyOpsRunbook"><DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} /></LazyAdminPanel>
 
-        <Suspense fallback={null}><GitIntegrityScanner /></Suspense>
+        <LazyAdminPanel name="GitIntegrityScanner"><GitIntegrityScanner /></LazyAdminPanel>
 
-        <Suspense fallback={null}><PlatformIntegrityDeepScan /></Suspense>
+        <LazyAdminPanel name="PlatformIntegrityDeepScan"><PlatformIntegrityDeepScan /></LazyAdminPanel>
 
-        <Suspense fallback={null}><AIDiagnosticsPanel toolResults={toolResults} runHealthCheck={runHealthCheck} /></Suspense>
+        <LazyAdminPanel name="AIDiagnosticsPanel"><AIDiagnosticsPanel toolResults={toolResults} runHealthCheck={runHealthCheck} /></LazyAdminPanel>
 
-        <Suspense fallback={null}><PlatformIntegrityScanner toolResults={toolResults} /></Suspense>
+        <LazyAdminPanel name="PlatformIntegrityScanner"><PlatformIntegrityScanner toolResults={toolResults} /></LazyAdminPanel>
 
         {checkedCount > 0 && (
           <div className="mb-4">
