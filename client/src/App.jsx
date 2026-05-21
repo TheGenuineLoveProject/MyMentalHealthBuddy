@@ -15,7 +15,11 @@ import { GamificationProvider } from "./context/GamificationContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
-import { AutopilotPage } from "./pages/_autopilot.jsx";
+const AutopilotPage = lazy(() =>
+  import("./pages/_autopilot.jsx").then((m) => ({
+    default: m.AutopilotPage || m.default,
+  }))
+);
 import AgeConsentGate from "./components/AgeConsentGate.jsx";
 import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
