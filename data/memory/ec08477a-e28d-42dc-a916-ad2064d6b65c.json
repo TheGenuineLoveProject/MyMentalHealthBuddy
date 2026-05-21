@@ -30,5 +30,13 @@
   {
     "role": "assistant",
     "content": "Feeling overwhelmed can be heavy to carry. Let’s take a moment to explore this. What specific thoughts or emotions are surfacing for you right now? Identifying them can help you gain clarity and a better understanding of what you’re experiencing."
+  },
+  {
+    "role": "user",
+    "content": "I feel anxious right now and need to calm down"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you're experiencing a lot of tension. Let's try a deep breathing technique. Inhale deeply through your nose for a count of four, hold for a count of four, and exhale slowly through your mouth for a count of four. Repeat this a few times to help bring your body back to a calmer state."
   }
 ]

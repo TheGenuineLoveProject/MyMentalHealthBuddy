@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/ReflectionFooter";
+import { SafeBoundary } from "../components/SafeBoundary.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -280,9 +281,11 @@ export default function Premium() {
               </div>
 
               <div className="lg:col-span-3">
-                <Suspense fallback={<PremiumLoadingFallback />}>
-                  {ActiveComponent && <ActiveComponent />}
-                </Suspense>
+                <SafeBoundary label="PremiumTool">
+                  <Suspense fallback={<PremiumLoadingFallback />}>
+                    {ActiveComponent && <ActiveComponent />}
+                  </Suspense>
+                </SafeBoundary>
               </div>
             </div>
           )}

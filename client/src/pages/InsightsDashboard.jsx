@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Sparkles, Heart, Flower2, BookOpen, Sun, Moon, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
 import { Link } from "wouter";
 import ReflectionInsights from "@/components/ReflectionInsights.jsx";
+import { SafeBoundary } from "@/components/SafeBoundary.jsx";
 import EmotionAuraRing from "@/components/EmotionAuraRing.jsx";
 // v5.8.35 perf: GratitudePrompt is heavy + below-the-fold here, lazy it.
 const GratitudePrompt = lazy(() => import("@/components/GratitudePrompt.jsx"));
@@ -199,7 +200,9 @@ export default function InsightsDashboard() {
 
         {activeTab === "gratitude" && (
           <div className="max-w-2xl mx-auto">
-            <Suspense fallback={null}><GratitudePrompt expanded /></Suspense>
+            <SafeBoundary label="GratitudePrompt">
+              <Suspense fallback={null}><GratitudePrompt expanded /></Suspense>
+            </SafeBoundary>
           </div>
         )}
 

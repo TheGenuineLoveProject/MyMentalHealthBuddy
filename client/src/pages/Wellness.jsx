@@ -12,6 +12,7 @@ import {
 import SEO from "../components/SEO";
 import { useGamification } from "../context/GamificationContext.jsx";
 import SafetyFooter from "../components/ui/ReflectionFooter";
+import { SafeBoundary } from "../components/SafeBoundary.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -457,13 +458,15 @@ export default function Wellness() {
 
                 {expandedSections.progress && (
                   <div className="space-y-3 animate-fade-in-up">
-                    <Suspense fallback={<ToolLoadingFallback />}>
-                      <WellnessScore 
-                        score={75} 
-                        showDetails={false}
-                      />
-                      <AchievementBadges compact />
-                    </Suspense>
+                    <SafeBoundary label="WellnessProgress">
+                      <Suspense fallback={<ToolLoadingFallback />}>
+                        <WellnessScore 
+                          score={75} 
+                          showDetails={false}
+                        />
+                        <AchievementBadges compact />
+                      </Suspense>
+                    </SafeBoundary>
                   </div>
                 )}
               </div>
@@ -489,9 +492,11 @@ export default function Wellness() {
               </div>
 
               <div className="animate-fade-in-up" data-testid="tool-container">
-                <Suspense fallback={<ToolLoadingFallback />}>
-                  {renderActiveTool()}
-                </Suspense>
+                <SafeBoundary label="WellnessTool">
+                  <Suspense fallback={<ToolLoadingFallback />}>
+                    {renderActiveTool()}
+                  </Suspense>
+                </SafeBoundary>
               </div>
 
               <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
