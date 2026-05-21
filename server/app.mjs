@@ -47,6 +47,7 @@ import healthRoutes from "./routes/health.mjs";
 import streaksRoutes from "./routes/streaks.mjs";
 import telemetryRoutes from "./routes/telemetry.mjs";
 import buddyRoutes from "./routes/buddy.mjs";
+import userRoutes from "./routes/user.mjs";
 
 // ✅ OPTIONAL AUTH (FIXES authMiddleware error)
 import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
@@ -271,6 +272,7 @@ const streaksLimiter = rateLimit({
 
 app.use("/api/streaks", streaksLimiter, optionalAuth, streaksRoutes);
 app.use("/api/billing", billingRoutes);
+app.use("/api/user", userRoutes);
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
 const CLIENT_ROOT = path.join(__dirname, "..", "client");
 
