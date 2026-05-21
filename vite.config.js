@@ -42,20 +42,12 @@ export default defineConfig({
 
           if (id.includes('/react-icons/')) return 'vendor-icons';
 
-          // v5.8.x perf: vendor-charts rule disabled — was misclassifying a
-          // CJS-wrapped utility used by entry (QueryClient/AuthContext bootstrap)
-          // into a chart-named chunk, forcing a 213KB modulepreload on first paint
-          // for code that contains zero chart.js markers. Letting chart libs
-          // co-locate with their (already lazy) consumer chunks keeps charts
-          // off the critical path. Source-level chart importers (MoodPieChart,
-          // MoodTrendsChartJS, EmotionPieChart, sacred/EmotionCharts) remain
-          // lazy via WellnessDashboard (lazy) — no eager source coupling exists.
-          // if (
-          //   id.includes('/chart.js/') ||
-          //   id.includes('/react-chartjs-2/') ||
-          //   id.includes('/recharts/') ||
-          //   id.includes('/d3-')
-          // ) return 'vendor-charts';
+          if (
+            id.includes('/chart.js/') ||
+            id.includes('/react-chartjs-2/') ||
+            id.includes('/recharts/') ||
+            id.includes('/d3-')
+          ) return 'vendor-charts';
 
           if (id.includes('/framer-motion/')) return 'vendor-motion';
 
