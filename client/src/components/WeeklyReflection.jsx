@@ -124,7 +124,7 @@ export default function WeeklyReflection() {
       },
     };
     setReflections(updated);
-    localStorage.setItem("weekly_reflections", JSON.stringify(updated));
+    try { localStorage.setItem("weekly_reflections", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

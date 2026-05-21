@@ -112,5 +112,5 @@ export function loadExistentialProfile(): ExistentialProfile {
 }
 
 export function saveExistentialProfile(profile: ExistentialProfile): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }

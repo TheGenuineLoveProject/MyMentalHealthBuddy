@@ -105,7 +105,7 @@ export function getRandomThirdHorizonPrompt(): string {
 
 export function saveParadoxSession(session: ParadoxSession): void {
   const key = "glp_paradox_maps";
-  const existing: ParadoxSession[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: ParadoxSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(s => s.id === session.id);
   const updated = { ...session, updatedAt: new Date().toISOString() };
   if (idx >= 0) {
@@ -113,15 +113,15 @@ export function saveParadoxSession(session: ParadoxSession): void {
   } else {
     existing.unshift(updated);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 25)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 25))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getParadoxSessions(): ParadoxSession[] {
-  return JSON.parse(localStorage.getItem("glp_paradox_maps") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_paradox_maps") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteParadoxSession(id: string): void {
   const key = "glp_paradox_maps";
-  const existing: ParadoxSession[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: ParadoxSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(s => s.id !== id)));
 }

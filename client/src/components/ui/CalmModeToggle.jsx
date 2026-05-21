@@ -23,7 +23,7 @@ export function CalmModeToggle({ className = '' }) {
       document.documentElement.classList.remove('calm-mode');
       document.documentElement.style.removeProperty('--animation-duration');
     }
-    localStorage.setItem('glp-calm-mode', calmMode.toString());
+    try { localStorage.setItem('glp-calm-mode', calmMode.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [calmMode]);
 
   return (

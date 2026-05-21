@@ -17,7 +17,7 @@ export default function AgeConsentGate({ children, onConsent }) {
   }, []);
 
   const handleConsent = () => {
-    localStorage.setItem(CONSENT_STORAGE_KEY, 'true');
+    try { localStorage.setItem(CONSENT_STORAGE_KEY, 'true'); } catch (err) { console.warn("[storage-safe-write]", err); }
     setHasConsented(true);
     onConsent?.();
   };
@@ -167,5 +167,5 @@ export function useHasConsented() {
 }
 
 export function clearConsent() {
-  localStorage.removeItem(CONSENT_STORAGE_KEY);
+  try { localStorage.removeItem(CONSENT_STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
 }

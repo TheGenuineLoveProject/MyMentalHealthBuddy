@@ -54,7 +54,7 @@ export default function ValuesToActions() {
 
   const handleSave = () => {
     const plan = { selectedValues, weeklyActions, savedAt: new Date().toISOString() };
-    localStorage.setItem("glp_values_plan", JSON.stringify(plan));
+    try { localStorage.setItem("glp_values_plan", JSON.stringify(plan)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
   };
 

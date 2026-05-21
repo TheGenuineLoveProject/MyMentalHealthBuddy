@@ -56,7 +56,7 @@ function saveSession(pace, completed) {
       timestamp: new Date().toISOString()
     });
     if (history.length > 100) history.shift();
-    localStorage.setItem(getStorageKey(), JSON.stringify(history));
+    try { localStorage.setItem(getStorageKey(), JSON.stringify(history)); } catch (err) { console.warn("[storage-safe-write]", err); }
   } catch (e) {
     console.warn("Could not save breath session:", e);
   }

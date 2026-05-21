@@ -56,7 +56,7 @@ function getOrCreateGuestId(): string {
     const existing = localStorage.getItem(GUEST_ID_KEY);
     if (existing) return existing;
     const fresh = `g_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
-    localStorage.setItem(GUEST_ID_KEY, fresh);
+    try { localStorage.setItem(GUEST_ID_KEY, fresh); } catch (err) { console.warn("[storage-safe-write]", err); }
     return fresh;
   } catch {
     /* localStorage unavailable — proceed without guest header */

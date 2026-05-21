@@ -86,11 +86,13 @@ export default function DigitalDetox() {
     setSessionsCompleted(newSessions);
     setTotalPoints(newPoints);
     
-    localStorage.setItem("digital_detox_data", JSON.stringify({
-      totalMinutes: newMinutes,
-      sessions: newSessions,
-      points: newPoints,
-    }));
+    try {
+      localStorage.setItem("digital_detox_data", JSON.stringify({
+        totalMinutes: newMinutes,
+        sessions: newSessions,
+        points: newPoints,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const endEarly = () => {
@@ -109,11 +111,13 @@ export default function DigitalDetox() {
     setSessionsCompleted(newSessions);
     setTotalPoints(newPoints);
     
-    localStorage.setItem("digital_detox_data", JSON.stringify({
-      totalMinutes: newMinutes,
-      sessions: newSessions,
-      points: newPoints,
-    }));
+    try {
+      localStorage.setItem("digital_detox_data", JSON.stringify({
+        totalMinutes: newMinutes,
+        sessions: newSessions,
+        points: newPoints,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const reset = () => {

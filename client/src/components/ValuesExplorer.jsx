@@ -88,10 +88,12 @@ export default function ValuesExplorer() {
     setStep("reflect");
     setReflectionIndex(0);
     
-    localStorage.setItem("values_explorer_data", JSON.stringify({
-      topValues: top5,
-      reflections: reflections,
-    }));
+    try {
+      localStorage.setItem("values_explorer_data", JSON.stringify({
+        topValues: top5,
+        reflections: reflections,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const saveReflection = () => {
@@ -109,10 +111,12 @@ export default function ValuesExplorer() {
       setReflectionIndex((i) => i + 1);
     } else {
       setStep("review");
-      localStorage.setItem("values_explorer_data", JSON.stringify({
-        topValues,
-        reflections: newReflections,
-      }));
+      try {
+        localStorage.setItem("values_explorer_data", JSON.stringify({
+          topValues,
+          reflections: newReflections,
+        }));
+      } catch (err) { console.warn("[storage-safe-write]", err); }
     }
   };
 
@@ -122,7 +126,7 @@ export default function ValuesExplorer() {
     setTopValues([]);
     setReflections({});
     setCurrentReflection("");
-    localStorage.removeItem("values_explorer_data");
+    try { localStorage.removeItem("values_explorer_data"); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const getValue = (id) => VALUES_LIST.find((v) => v.id === id);

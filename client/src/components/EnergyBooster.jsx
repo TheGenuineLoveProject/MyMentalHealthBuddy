@@ -113,11 +113,13 @@ export default function EnergyBooster() {
     setTodayBoosters(newBoosters);
     setTotalEnergy(newEnergy);
     
-    localStorage.setItem("energy_booster_data", JSON.stringify({
-      date: today,
-      boosters: newBoosters,
-      energy: newEnergy
-    }));
+    try {
+      localStorage.setItem("energy_booster_data", JSON.stringify({
+        date: today,
+        boosters: newBoosters,
+        energy: newEnergy
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const reset = () => {

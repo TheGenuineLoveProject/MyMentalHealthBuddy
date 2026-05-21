@@ -67,7 +67,7 @@ export default function AffirmationWall() {
     
     const newLiked = new Set([...likedIds, id]);
     setLikedIds(newLiked);
-    localStorage.setItem("glp-liked-affirmations", JSON.stringify([...newLiked]));
+    try { localStorage.setItem("glp-liked-affirmations", JSON.stringify([...newLiked])); } catch (err) { console.warn("[storage-safe-write]", err); }
     likeMutation.mutate(id);
   };
 

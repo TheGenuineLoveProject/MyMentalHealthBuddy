@@ -27,7 +27,7 @@ export default function HabitTracker() {
       setHabits(JSON.parse(savedHabits));
     } else {
       setHabits(DEFAULT_HABITS);
-      localStorage.setItem("wellness_habits", JSON.stringify(DEFAULT_HABITS));
+      try { localStorage.setItem("wellness_habits", JSON.stringify(DEFAULT_HABITS)); } catch (err) { console.warn("[storage-safe-write]", err); }
     }
 
     if (savedStreaks) {
@@ -37,7 +37,7 @@ export default function HabitTracker() {
     if (lastDate === today && savedCompleted) {
       setCompletedToday(JSON.parse(savedCompleted));
     } else {
-      localStorage.setItem("habits_last_date", today);
+      try { localStorage.setItem("habits_last_date", today); } catch (err) { console.warn("[storage-safe-write]", err); }
       localStorage.setItem("habits_completed_today", JSON.stringify({}));
     }
   }, []);
@@ -49,7 +49,7 @@ export default function HabitTracker() {
       [habitId]: !wasCompleted,
     };
     setCompletedToday(updated);
-    localStorage.setItem("habits_completed_today", JSON.stringify(updated));
+    try { localStorage.setItem("habits_completed_today", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
 
     const newStreaks = { ...streaks };
     if (!wasCompleted) {
@@ -58,7 +58,7 @@ export default function HabitTracker() {
       newStreaks[habitId] = Math.max(0, (newStreaks[habitId] || 0) - 1);
     }
     setStreaks(newStreaks);
-    localStorage.setItem("habit_streaks", JSON.stringify(newStreaks));
+    try { localStorage.setItem("habit_streaks", JSON.stringify(newStreaks)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const addHabit = () => {
@@ -73,7 +73,7 @@ export default function HabitTracker() {
 
     const updated = [...habits, habit];
     setHabits(updated);
-    localStorage.setItem("wellness_habits", JSON.stringify(updated));
+    try { localStorage.setItem("wellness_habits", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setNewHabit({ name: "", icon: "✨" });
     setShowAddForm(false);
   };
@@ -81,12 +81,12 @@ export default function HabitTracker() {
   const removeHabit = (habitId) => {
     const updated = habits.filter((h) => h.id !== habitId);
     setHabits(updated);
-    localStorage.setItem("wellness_habits", JSON.stringify(updated));
+    try { localStorage.setItem("wellness_habits", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
 
     const updatedCompleted = { ...completedToday };
     delete updatedCompleted[habitId];
     setCompletedToday(updatedCompleted);
-    localStorage.setItem("habits_completed_today", JSON.stringify(updatedCompleted));
+    try { localStorage.setItem("habits_completed_today", JSON.stringify(updatedCompleted)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const completedCount = Object.values(completedToday).filter(Boolean).length;

@@ -163,7 +163,7 @@ export default function LaughterTherapy({ onComplete, onXpEarned }) {
       const ex = LAUGHTER_EXERCISES.find(e => e.id === selectedExercise);
       const newMinutes = totalLaughMinutes + Math.ceil(ex.duration / 60);
       setTotalLaughMinutes(newMinutes);
-      localStorage.setItem("laughterMinutes", newMinutes.toString());
+      try { localStorage.setItem("laughterMinutes", newMinutes.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
     }
     const duration = startTime ? Math.floor((Date.now() - startTime) / 1000) : 30;
     if (onXpEarned) onXpEarned("Laughter Therapy", duration);

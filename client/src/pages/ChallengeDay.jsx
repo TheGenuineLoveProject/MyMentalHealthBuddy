@@ -75,7 +75,7 @@ export default function ChallengeDay() {
         const saved = localStorage.getItem("glp-challenge-progress");
         const progress = saved ? JSON.parse(saved) : {};
         progress[dayNum] = true;
-        localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
+        try { localStorage.setItem("glp-challenge-progress", JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
       } catch {}
       
       setCompleted(true);
@@ -96,7 +96,7 @@ export default function ChallengeDay() {
         const saved = localStorage.getItem("glp-challenge-progress");
         const progress = saved ? JSON.parse(saved) : {};
         progress[dayNum] = true;
-        localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
+        try { localStorage.setItem("glp-challenge-progress", JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
       } catch {}
       setCompleted(true);
       toast({
@@ -114,7 +114,7 @@ export default function ChallengeDay() {
         const saved = localStorage.getItem("glp-challenge-progress");
         const progress = saved ? JSON.parse(saved) : {};
         progress[dayNum] = true;
-        localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
+        try { localStorage.setItem("glp-challenge-progress", JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
       } catch {}
       setCompleted(true);
       toast({
@@ -135,7 +135,7 @@ export default function ChallengeDay() {
         day: dayNum,
         date: new Date().toISOString(),
       });
-      localStorage.setItem("glp-reflection-cards", JSON.stringify(cards));
+      try { localStorage.setItem("glp-reflection-cards", JSON.stringify(cards)); } catch (err) { console.warn("[storage-safe-write]", err); }
       toast({
         title: "Card Saved",
         description: "Your reflection card has been saved.",

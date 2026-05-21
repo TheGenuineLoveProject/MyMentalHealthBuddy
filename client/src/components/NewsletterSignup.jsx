@@ -23,7 +23,7 @@ function storeUtmParams() {
   
   if (Object.keys(utmData).length > 0) {
     utmData.timestamp = Date.now();
-    localStorage.setItem("glp_utm", JSON.stringify(utmData));
+    try { localStorage.setItem("glp_utm", JSON.stringify(utmData)); } catch (err) { console.warn("[storage-safe-write]", err); }
   }
 }
 

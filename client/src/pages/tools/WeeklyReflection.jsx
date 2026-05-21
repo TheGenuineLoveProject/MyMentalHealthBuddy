@@ -55,7 +55,7 @@ export default function WeeklyReflection() {
       toast({ title: "Reflection saved", description: "Your weekly reflection is safely stored." });
     },
     onError: () => {
-      localStorage.setItem(`glp_weekly_${Date.now()}`, JSON.stringify({ answers, weekRange: getWeekRange() }));
+      try { localStorage.setItem(`glp_weekly_${Date.now()}`, JSON.stringify({ answers, weekRange: getWeekRange() })); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Your reflection is saved on this device." });
     }

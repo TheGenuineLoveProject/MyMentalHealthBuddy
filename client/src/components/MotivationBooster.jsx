@@ -112,7 +112,7 @@ export default function MotivationBooster() {
   };
 
   const saveData = (data) => {
-    localStorage.setItem("motivation_booster_data", JSON.stringify(data));
+    try { localStorage.setItem("motivation_booster_data", JSON.stringify(data)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const isFavorite = currentQuote && favorites.some((f) => f.text === currentQuote.text);

@@ -98,7 +98,7 @@ if ('serviceWorker' in navigator) {
   const reminderChannel = new BroadcastChannel('reminder-channel');
   reminderChannel.addEventListener('message', (event) => {
     if (event.data.type === 'STORE_REMINDER') {
-      localStorage.setItem('glp-scheduled-reminder', JSON.stringify(event.data.data));
+      try { localStorage.setItem('glp-scheduled-reminder', JSON.stringify(event.data.data)); } catch (err) { console.warn("[storage-safe-write]", err); }
     }
     if (event.data.type === 'CLEAR_REMINDER') {
       localStorage.removeItem('glp-scheduled-reminder');
@@ -128,10 +128,12 @@ if ('serviceWorker' in navigator) {
           
           const nextReminder = new Date(scheduledTime);
           nextReminder.setDate(nextReminder.getDate() + 1);
-          localStorage.setItem('glp-scheduled-reminder', JSON.stringify({
-            scheduledTime: nextReminder.getTime(),
-            settings
-          }));
+          try {
+            localStorage.setItem('glp-scheduled-reminder', JSON.stringify({
+              scheduledTime: nextReminder.getTime(),
+              settings
+            }));
+          } catch (err) { console.warn("[storage-safe-write]", err); }
         });
       }
     } catch (e) {

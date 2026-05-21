@@ -177,7 +177,7 @@ function loadProfile(): AtlasProfile {
 }
 
 function saveProfile(profile: AtlasProfile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export default function AtlasDashboard() {

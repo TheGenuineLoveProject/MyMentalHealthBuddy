@@ -55,7 +55,7 @@ export default function WellnessStreakDashboard() {
   }, []);
 
   const saveStats = (newStats) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newStats));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(newStats)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setStats(newStats);
   };
 

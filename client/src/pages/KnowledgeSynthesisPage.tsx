@@ -63,10 +63,12 @@ function loadProfile(): SynthesisProfile {
 }
 
 function saveProfile(profile: SynthesisProfile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({
-    ...profile,
-    lastUpdated: new Date().toISOString()
-  }));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      ...profile,
+      lastUpdated: new Date().toISOString()
+    }));
+  } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export default function KnowledgeSynthesisPage() {

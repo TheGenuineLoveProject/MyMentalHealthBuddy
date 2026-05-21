@@ -50,7 +50,7 @@ function loadProfile(): Profile {
 }
 
 function saveProfile(p: Profile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export default function SystemsThinkingPage() {

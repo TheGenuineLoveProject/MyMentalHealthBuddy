@@ -120,5 +120,5 @@ export function loadCreativeProfile(): CreativeProfile {
 }
 
 export function saveCreativeProfile(profile: CreativeProfile): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }

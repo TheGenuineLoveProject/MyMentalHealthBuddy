@@ -53,7 +53,7 @@ export default function GratitudeJar() {
     
     const updated = [gratitude, ...gratitudes];
     setGratitudes(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setNewGratitude("");
     setShowForm(false);
   };
@@ -61,7 +61,7 @@ export default function GratitudeJar() {
   const deleteGratitude = (id) => {
     const updated = gratitudes.filter((g) => g.id !== id);
     setGratitudes(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSelectedGratitude(null);
   };
 

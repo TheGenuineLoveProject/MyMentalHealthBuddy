@@ -232,7 +232,7 @@ export default function AlignmentPath() {
       : [...completedPhases, phaseNumber];
     
     setCompletedPhases(updated);
-    localStorage.setItem('glp_alignment_progress', JSON.stringify(updated));
+    try { localStorage.setItem('glp_alignment_progress', JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   return (

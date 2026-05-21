@@ -171,7 +171,7 @@ export function createBiasAwarenessProfile(): BiasAwarenessProfile {
 export function saveBiasAwarenessProfile(profile: BiasAwarenessProfile): void {
   const key = "glp_bias_profile";
   const updated = { ...profile, updatedAt: new Date().toISOString() };
-  localStorage.setItem(key, JSON.stringify(updated));
+  try { localStorage.setItem(key, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getBiasAwarenessProfile(): BiasAwarenessProfile | null {

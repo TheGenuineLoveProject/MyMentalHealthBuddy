@@ -43,7 +43,7 @@ function Header() {
     } else {
       document.documentElement.dataset.mode = mode;
     }
-    localStorage.setItem("glp-mode", mode);
+    try { localStorage.setItem("glp-mode", mode); } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [mode]);
 
   useEffect(() => {

@@ -98,7 +98,7 @@ export default function SafetyPreferences() {
       toast({ title: "Safety preferences saved", description: "Your comfort settings are updated." });
     },
     onError: () => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
     }

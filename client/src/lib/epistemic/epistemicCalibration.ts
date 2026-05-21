@@ -96,7 +96,7 @@ export function createEpistemicProfile(): EpistemicProfile {
 export function saveEpistemicProfile(profile: EpistemicProfile): void {
   const key = "glp_epistemic_profile";
   const updated = { ...profile, updatedAt: new Date().toISOString() };
-  localStorage.setItem(key, JSON.stringify(updated));
+  try { localStorage.setItem(key, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getEpistemicProfile(): EpistemicProfile | null {

@@ -168,10 +168,10 @@ export function getRandomBiases(count: number = 3): CognitiveBias[] {
 
 export function saveMetaCognitionSession(session: MetaCognitionSession): void {
   const key = "glp_metacognition_sessions";
-  const existing = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify([session, ...existing].slice(0, 30)));
 }
 
 export function getMetaCognitionSessions(): MetaCognitionSession[] {
-  return JSON.parse(localStorage.getItem("glp_metacognition_sessions") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_metacognition_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }

@@ -12,13 +12,13 @@ export default function SilenceMode({ onSave }: Props) {
     if (!text.trim()) return;
 
     const key = "glp_silence_entries";
-    const existing = JSON.parse(localStorage.getItem(key) || "[]");
+    const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     const entry = {
       id: Date.now().toString(),
       text: text.trim(),
       createdAt: new Date().toISOString(),
     };
-    localStorage.setItem(key, JSON.stringify([entry, ...existing].slice(0, 100)));
+    try { localStorage.setItem(key, JSON.stringify([entry, ...existing].slice(0, 100))); } catch (err) { console.warn("[storage-safe-write]", err); }
 
     setSaved(true);
     onSave?.(text.trim());

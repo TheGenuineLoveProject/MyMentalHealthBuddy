@@ -31,7 +31,7 @@ export function ThemeProvider({ children }) {
     const root = document.documentElement;
 
     root.dataset.theme = theme;
-    localStorage.setItem("theme", theme);
+    try { localStorage.setItem("theme", theme); } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [theme]);
 
   const value = { theme, setTheme };

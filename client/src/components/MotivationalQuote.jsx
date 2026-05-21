@@ -39,11 +39,11 @@ export default function MotivationalQuote({ variant = "default" }) {
     } else {
       const randomIndex = Math.floor(Math.random() * QUOTES.length);
       setCurrentIndex(randomIndex);
-      localStorage.setItem("quote_date", today);
+      try { localStorage.setItem("quote_date", today); } catch (err) { console.warn("[storage-safe-write]", err); }
       localStorage.setItem("quote_index", randomIndex.toString());
     }
 
-    const likedQuotes = JSON.parse(localStorage.getItem("liked_quotes") || "[]");
+    const likedQuotes = ((()=>{try{return JSON.parse(localStorage.getItem("liked_quotes") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     setLiked(likedQuotes.includes(currentIndex));
   }, [currentIndex]);
 
@@ -63,13 +63,13 @@ export default function MotivationalQuote({ variant = "default" }) {
   };
 
   const toggleLike = () => {
-    const likedQuotes = JSON.parse(localStorage.getItem("liked_quotes") || "[]");
+    const likedQuotes = ((()=>{try{return JSON.parse(localStorage.getItem("liked_quotes") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     if (liked) {
       const filtered = likedQuotes.filter((i) => i !== currentIndex);
       localStorage.setItem("liked_quotes", JSON.stringify(filtered));
     } else {
       likedQuotes.push(currentIndex);
-      localStorage.setItem("liked_quotes", JSON.stringify(likedQuotes));
+      try { localStorage.setItem("liked_quotes", JSON.stringify(likedQuotes)); } catch (err) { console.warn("[storage-safe-write]", err); }
     }
     setLiked(!liked);
   };

@@ -18,7 +18,7 @@ function loadAllEntries(): TimelineEntry[] {
   const entries: TimelineEntry[] = [];
 
   try {
-    const reflections = JSON.parse(localStorage.getItem(STORAGE_KEYS.reflections) || "[]");
+    const reflections = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEYS.reflections) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     for (const r of reflections) {
       entries.push({
         id: `r-${r.createdAt}`,
@@ -29,7 +29,7 @@ function loadAllEntries(): TimelineEntry[] {
       });
     }
 
-    const beliefs = JSON.parse(localStorage.getItem(STORAGE_KEYS.beliefs) || "[]");
+    const beliefs = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEYS.beliefs) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     for (const b of beliefs) {
       entries.push({
         id: `b-${b.id}`,
@@ -39,7 +39,7 @@ function loadAllEntries(): TimelineEntry[] {
       });
     }
 
-    const silence = JSON.parse(localStorage.getItem(STORAGE_KEYS.silence) || "[]");
+    const silence = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEYS.silence) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     for (const s of silence) {
       entries.push({
         id: `s-${s.id}`,

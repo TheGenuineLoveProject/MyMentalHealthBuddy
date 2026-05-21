@@ -116,7 +116,7 @@ const loadProfile = (): JournalingProfile => {
 };
 
 const saveProfile = (profile: JournalingProfile) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 };
 
 export default function GuidedJournalingPage() {

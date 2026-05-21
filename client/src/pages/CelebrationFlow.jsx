@@ -62,10 +62,12 @@ export default function CelebrationFlow() {
         const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
         count = parsed.date === yesterday ? (parsed.count || 0) + 1 : 1;
       }
-      window.localStorage.setItem(
-        "mmhb-completion-streak",
-        JSON.stringify({ date: today, count }),
-      );
+      try {
+        window.localStorage.setItem(
+          "mmhb-completion-streak",
+          JSON.stringify({ date: today, count }),
+        );
+      } catch (err) { console.warn("[storage-safe-write]", err); }
       setStreak(count);
     } catch { setStreak(1); }
   }, []);

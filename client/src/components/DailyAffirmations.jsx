@@ -84,7 +84,7 @@ export default function DailyAffirmations({ compact = false }) {
     if (lastDate !== today) {
       const randomIndex = Math.floor(Math.random() * AFFIRMATIONS.length);
       setCurrentIndex(randomIndex);
-      localStorage.setItem("affirmationDate", today);
+      try { localStorage.setItem("affirmationDate", today); } catch (err) { console.warn("[storage-safe-write]", err); }
       localStorage.setItem("dailyAffirmationIndex", randomIndex.toString());
     } else {
       const savedIndex = localStorage.getItem("dailyAffirmationIndex");
@@ -119,7 +119,7 @@ export default function DailyAffirmations({ compact = false }) {
       newSaved = [...saved, affirmationText];
     }
     setSaved(newSaved);
-    localStorage.setItem("savedAffirmations", JSON.stringify(newSaved));
+    try { localStorage.setItem("savedAffirmations", JSON.stringify(newSaved)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const shareAffirmation = async () => {

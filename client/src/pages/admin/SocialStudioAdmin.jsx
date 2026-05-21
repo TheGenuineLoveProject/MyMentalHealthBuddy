@@ -144,7 +144,7 @@ export default function SocialStudioAdmin() {
   };
 
   const saveDrafts = (newDrafts) => {
-    localStorage.setItem("social_drafts_v2", JSON.stringify(newDrafts));
+    try { localStorage.setItem("social_drafts_v2", JSON.stringify(newDrafts)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setDrafts(newDrafts);
   };
 

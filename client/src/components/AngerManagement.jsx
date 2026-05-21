@@ -128,7 +128,7 @@ export default function AngerManagement() {
     
     const newSessions = sessionsCompleted + 1;
     setSessionsCompleted(newSessions);
-    localStorage.setItem("anger_management_data", JSON.stringify({ sessions: newSessions }));
+    try { localStorage.setItem("anger_management_data", JSON.stringify({ sessions: newSessions })); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const reset = () => {

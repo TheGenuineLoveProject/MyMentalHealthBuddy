@@ -60,10 +60,12 @@ export default function MorningEveningRituals({ onXpEarned }) {
 
   useEffect(() => {
     const key = activeTab === "morning" ? "morningRituals" : "eveningRituals";
-    localStorage.setItem(key, JSON.stringify({
-      date: new Date().toDateString(),
-      completed,
-    }));
+    try {
+      localStorage.setItem(key, JSON.stringify({
+        date: new Date().toDateString(),
+        completed,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [completed, activeTab]);
 
   useEffect(() => {
@@ -82,7 +84,7 @@ export default function MorningEveningRituals({ onXpEarned }) {
           lastDate: today,
         };
         setStreak(newStreak);
-        localStorage.setItem("ritualStreak", JSON.stringify(newStreak));
+        try { localStorage.setItem("ritualStreak", JSON.stringify(newStreak)); } catch (err) { console.warn("[storage-safe-write]", err); }
         setShowCelebration(true);
         setTimeout(() => setShowCelebration(false), 4000);
       }

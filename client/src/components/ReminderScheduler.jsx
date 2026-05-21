@@ -99,10 +99,12 @@ export default function ReminderScheduler() {
       });
     }
     
-    localStorage.setItem("glp-scheduled-reminder", JSON.stringify({
-      scheduledTime: getNextReminderTime(settings.time),
-      settings
-    }));
+    try {
+      localStorage.setItem("glp-scheduled-reminder", JSON.stringify({
+        scheduledTime: getNextReminderTime(settings.time),
+        settings
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
   
   const getNextReminderTime = (timeStr) => {

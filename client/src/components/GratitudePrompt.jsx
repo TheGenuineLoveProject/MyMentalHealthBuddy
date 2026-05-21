@@ -97,7 +97,7 @@ export default function GratitudePrompt({ onSave }) {
       });
     }
 
-    const existing = JSON.parse(localStorage.getItem("gratitudeEntries") || "[]");
+    const existing = ((()=>{try{return JSON.parse(localStorage.getItem("gratitudeEntries") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     const updated = [
       {
         prompt: currentPrompt,
@@ -106,7 +106,7 @@ export default function GratitudePrompt({ onSave }) {
       },
       ...existing,
     ].slice(0, 100);
-    localStorage.setItem("gratitudeEntries", JSON.stringify(updated));
+    try { localStorage.setItem("gratitudeEntries", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
 
     setIsSaved(true);
   };

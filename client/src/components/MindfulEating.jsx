@@ -123,7 +123,7 @@ export default function MindfulEating() {
   const completeMeal = () => {
     const newCount = mealsLogged + 1;
     setMealsLogged(newCount);
-    localStorage.setItem("mindful_eating_data", JSON.stringify({ meals: newCount }));
+    try { localStorage.setItem("mindful_eating_data", JSON.stringify({ meals: newCount })); } catch (err) { console.warn("[storage-safe-write]", err); }
     setMode("complete");
   };
 

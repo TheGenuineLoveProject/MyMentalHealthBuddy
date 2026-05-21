@@ -36,7 +36,7 @@ export default function GoalProgress() {
 
   const saveGoals = (updatedGoals) => {
     setGoals(updatedGoals);
-    localStorage.setItem("wellness_goals", JSON.stringify(updatedGoals));
+    try { localStorage.setItem("wellness_goals", JSON.stringify(updatedGoals)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const addGoal = () => {

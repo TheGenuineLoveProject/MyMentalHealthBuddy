@@ -77,7 +77,7 @@ export default function WellnessScore({ moodData, journalCount, habitCompletion,
         setTrend("stable");
       }
     }
-    localStorage.setItem("last_wellness_score", Math.round(totalScore).toString());
+    try { localStorage.setItem("last_wellness_score", Math.round(totalScore).toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [moodData, journalCount, habitCompletion, meditationMinutes]);
 
   const getScoreColor = (s) => {

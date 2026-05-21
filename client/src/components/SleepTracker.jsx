@@ -94,7 +94,7 @@ export default function SleepTracker() {
     
     const updatedHistory = [entry, ...history].slice(0, 30);
     setHistory(updatedHistory);
-    localStorage.setItem("sleep_history", JSON.stringify(updatedHistory));
+    try { localStorage.setItem("sleep_history", JSON.stringify(updatedHistory)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };

@@ -48,7 +48,7 @@ export default function WorryTimeScheduler() {
   }, [isWorryTime, timer]);
 
   const saveData = (data) => {
-    localStorage.setItem("worry_time_data", JSON.stringify(data));
+    try { localStorage.setItem("worry_time_data", JSON.stringify(data)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const addWorry = () => {

@@ -106,7 +106,7 @@ export default function EmotionalIntelligenceQuiz() {
     };
     
     const updatedResults = [result, ...previousResults].slice(0, 10);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedResults));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedResults)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setPreviousResults(updatedResults);
     
     setResults(result);

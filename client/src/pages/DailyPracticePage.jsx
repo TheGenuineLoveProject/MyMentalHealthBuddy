@@ -166,10 +166,12 @@ export default function DailyPracticePage() {
   const togglePractice = (id) => {
     setCompletedPractices(prev => {
       const next = prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id];
-      localStorage.setItem("dailyPractices", JSON.stringify({
-        date: new Date().toDateString(),
-        completed: next
-      }));
+      try {
+        localStorage.setItem("dailyPractices", JSON.stringify({
+          date: new Date().toDateString(),
+          completed: next
+        }));
+      } catch (err) { console.warn("[storage-safe-write]", err); }
       return next;
     });
   };

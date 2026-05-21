@@ -93,10 +93,12 @@ export default function PowerNap() {
     
     const newCount = napCount + 1;
     setNapCount(newCount);
-    localStorage.setItem("nap_count", JSON.stringify({
-      date: new Date().toDateString(),
-      count: newCount,
-    }));
+    try {
+      localStorage.setItem("nap_count", JSON.stringify({
+        date: new Date().toDateString(),
+        count: newCount,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
 
     await recordSession("power_nap", selectedPreset.duration * 60, {
       preset: selectedPreset.name,

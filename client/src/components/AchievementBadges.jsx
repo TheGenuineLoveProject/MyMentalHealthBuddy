@@ -141,7 +141,7 @@ export default function AchievementBadges({ progress = {}, compact = false }) {
 
     if (changed) {
       setAchievements(updated);
-      localStorage.setItem("achievements_unlocked", JSON.stringify(updated));
+      try { localStorage.setItem("achievements_unlocked", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
     }
   }, [progress, achievements]);
 

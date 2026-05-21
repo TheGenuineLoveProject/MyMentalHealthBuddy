@@ -117,22 +117,22 @@ export function createCustomJourney(name: string, description: string): JourneyF
 
 export function saveJourneyFlow(flow: JourneyFlow): void {
   const key = "glp_journey_flows";
-  const existing: JourneyFlow[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: JourneyFlow[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(f => f.id === flow.id);
   if (idx >= 0) {
     existing[idx] = { ...flow, lastAccessedAt: new Date().toISOString() };
   } else {
     existing.unshift(flow);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 30)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 30))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getJourneyFlows(): JourneyFlow[] {
-  return JSON.parse(localStorage.getItem("glp_journey_flows") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_journey_flows") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteJourneyFlow(id: string): void {
   const key = "glp_journey_flows";
-  const existing: JourneyFlow[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: JourneyFlow[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(f => f.id !== id)));
 }

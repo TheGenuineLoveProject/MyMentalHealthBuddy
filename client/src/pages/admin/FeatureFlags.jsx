@@ -44,7 +44,7 @@ export default function FeatureFlags() {
         }
       } else {
         setFlags(DEFAULT_FLAGS);
-        localStorage.setItem("glp_admin_feature_flags", JSON.stringify(DEFAULT_FLAGS));
+        try { localStorage.setItem("glp_admin_feature_flags", JSON.stringify(DEFAULT_FLAGS)); } catch (err) { console.warn("[storage-safe-write]", err); }
       }
     } catch {
       setFlags(DEFAULT_FLAGS);

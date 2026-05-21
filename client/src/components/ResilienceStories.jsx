@@ -39,7 +39,7 @@ export default function ResilienceStories({ onXpEarned }) {
   );
 
   useEffect(() => {
-    localStorage.setItem("resilienceStories", JSON.stringify(stories));
+    try { localStorage.setItem("resilienceStories", JSON.stringify(stories)); } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [stories]);
 
   const startNewStory = () => {

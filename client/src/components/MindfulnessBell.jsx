@@ -66,11 +66,13 @@ export default function MindfulnessBell() {
   }, []);
 
   const saveSettings = () => {
-    localStorage.setItem("mindfulness_bell_settings", JSON.stringify({
-      interval: interval,
-      volume,
-      soundId: sound.id,
-    }));
+    try {
+      localStorage.setItem("mindfulness_bell_settings", JSON.stringify({
+        interval: interval,
+        volume,
+        soundId: sound.id,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   useEffect(() => {
@@ -114,10 +116,12 @@ export default function MindfulnessBell() {
 
     const newCount = bellCount + 1;
     setBellCount(newCount);
-    localStorage.setItem("mindfulness_bell_count", JSON.stringify({
-      date: new Date().toDateString(),
-      count: newCount,
-    }));
+    try {
+      localStorage.setItem("mindfulness_bell_count", JSON.stringify({
+        date: new Date().toDateString(),
+        count: newCount,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
 
     setTimeout(() => setShowPrompt(false), 10000);
   };

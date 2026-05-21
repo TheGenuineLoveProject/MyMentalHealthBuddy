@@ -37,7 +37,7 @@ export default function WellnessGoals() {
         setGoals(JSON.parse(saved));
       } else {
         setGoals(DEFAULT_GOALS);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_GOALS));
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_GOALS)); } catch (err) { console.warn("[storage-safe-write]", err); }
       }
     } catch {
       setGoals(DEFAULT_GOALS);

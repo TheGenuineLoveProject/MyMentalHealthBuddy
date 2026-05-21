@@ -19,14 +19,14 @@ const STORAGE_KEY = "glp_beliefs";
 
 function loadBeliefs(): Belief[] {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   } catch {
     return [];
   }
 }
 
 function saveBeliefs(beliefs: Belief[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(beliefs));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(beliefs)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export default function BeliefMapper() {

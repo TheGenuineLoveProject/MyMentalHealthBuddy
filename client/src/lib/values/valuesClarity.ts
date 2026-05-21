@@ -69,7 +69,7 @@ export function loadValuesProfile(): ValuesProfile {
 }
 
 export function saveValuesProfile(profile: ValuesProfile): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function calculateAlignmentGap(profile: ValuesProfile): { value: PersonalValue; gap: number }[] {

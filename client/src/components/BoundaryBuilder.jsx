@@ -51,9 +51,11 @@ export default function BoundaryBuilder() {
   }, []);
 
   const saveData = (newBoundaries) => {
-    localStorage.setItem("boundary_builder_data", JSON.stringify({
-      boundaries: newBoundaries,
-    }));
+    try {
+      localStorage.setItem("boundary_builder_data", JSON.stringify({
+        boundaries: newBoundaries,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const addBoundary = () => {

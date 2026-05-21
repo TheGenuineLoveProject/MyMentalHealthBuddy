@@ -103,7 +103,7 @@ function mirrorToLocalStorage(entries) {
 
 function getLocalEntries() {
   try {
-    return JSON.parse(localStorage.getItem("glp_reflections") || "[]");
+    return ((()=>{try{return JSON.parse(localStorage.getItem("glp_reflections") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   } catch { return []; }
 }
 
@@ -148,7 +148,7 @@ export default function Reflection() {
 
   useEffect(() => {
     if (text) {
-      localStorage.setItem("glp_reflection_draft", text);
+      try { localStorage.setItem("glp_reflection_draft", text); } catch (err) { console.warn("[storage-safe-write]", err); }
     } else {
       localStorage.removeItem("glp_reflection_draft");
     }
@@ -168,14 +168,14 @@ export default function Reflection() {
     const trimmed = text.trim();
     const wc = trimmed.split(/\s+/).length;
 
-    localStorage.removeItem("glp_reflection_draft");
+    try { localStorage.removeItem("glp_reflection_draft"); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
 
     const localEntries = getLocalEntries();
     localEntries.unshift({ text: trimmed, date: new Date().toISOString() });
     if (localEntries.length > 50) localEntries.length = 50;
-    localStorage.setItem("glp_reflections", JSON.stringify(localEntries));
+    try { localStorage.setItem("glp_reflections", JSON.stringify(localEntries)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setLocalFallbackEntries([...localEntries]);
 
     try {
@@ -188,7 +188,7 @@ export default function Reflection() {
     setTimeout(() => setXpAwarded(null), 3500);
     const newTotal = totalXp + xp;
     setTotalXp(newTotal);
-    localStorage.setItem("glp_reflection_xp", String(newTotal));
+    try { localStorage.setItem("glp_reflection_xp", String(newTotal)); } catch (err) { console.warn("[storage-safe-write]", err); }
 
     if (addToJournal) {
       await syncToJournal(trimmed);

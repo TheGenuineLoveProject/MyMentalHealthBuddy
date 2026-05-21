@@ -117,7 +117,7 @@ export function createMetacognitiveProfile(): MetacognitiveProfile {
 export function saveMetacognitiveProfile(profile: MetacognitiveProfile): void {
   const key = "glp_metacognitive_profile";
   const updated = { ...profile, updatedAt: new Date().toISOString() };
-  localStorage.setItem(key, JSON.stringify(updated));
+  try { localStorage.setItem(key, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getMetacognitiveProfile(): MetacognitiveProfile | null {

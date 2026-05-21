@@ -76,11 +76,13 @@ export default function SocialConnection() {
     setConnectionStreak(newStreak);
     setSaved(true);
     
-    localStorage.setItem("social_connection_data", JSON.stringify({
-      completed: newCompleted,
-      streak: newStreak,
-      lastDate: today,
-    }));
+    try {
+      localStorage.setItem("social_connection_data", JSON.stringify({
+        completed: newCompleted,
+        streak: newStreak,
+        lastDate: today,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
     
     setTimeout(() => setSaved(false), 2000);
   };

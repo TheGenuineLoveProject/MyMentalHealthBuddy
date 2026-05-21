@@ -132,7 +132,7 @@ export function createAutodidactPlan(identityStatement: string): AutodidactPlan 
 
 export function saveAutodidactPlan(plan: AutodidactPlan): void {
   const key = "glp_autodidact_plans";
-  const existing: AutodidactPlan[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: AutodidactPlan[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(p => p.id === plan.id);
   const updated = { ...plan, updatedAt: new Date().toISOString() };
   if (idx >= 0) {
@@ -140,16 +140,16 @@ export function saveAutodidactPlan(plan: AutodidactPlan): void {
   } else {
     existing.unshift(updated);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 10)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 10))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getAutodidactPlans(): AutodidactPlan[] {
-  return JSON.parse(localStorage.getItem("glp_autodidact_plans") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_autodidact_plans") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteAutodidactPlan(id: string): void {
   const key = "glp_autodidact_plans";
-  const existing: AutodidactPlan[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: AutodidactPlan[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(p => p.id !== id)));
 }
 

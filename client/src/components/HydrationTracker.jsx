@@ -52,12 +52,14 @@ export default function HydrationTracker() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("hydration_data", JSON.stringify({
-      date: new Date().toDateString(),
-      intake: currentIntake,
-      history,
-      achievements: earnedAchievements,
-    }));
+    try {
+      localStorage.setItem("hydration_data", JSON.stringify({
+        date: new Date().toDateString(),
+        intake: currentIntake,
+        history,
+        achievements: earnedAchievements,
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [currentIntake, history, earnedAchievements]);
 
   const addWater = (ml) => {

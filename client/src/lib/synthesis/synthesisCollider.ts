@@ -90,7 +90,7 @@ export function createColliderSession(intent: string): ColliderSession {
 
 export function saveColliderSession(session: ColliderSession): void {
   const key = "glp_synthesis_sessions";
-  const existing: ColliderSession[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: ColliderSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(s => s.id === session.id);
   const updated = { ...session, updatedAt: new Date().toISOString() };
   if (idx >= 0) {
@@ -98,16 +98,16 @@ export function saveColliderSession(session: ColliderSession): void {
   } else {
     existing.unshift(updated);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 20)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 20))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getColliderSessions(): ColliderSession[] {
-  return JSON.parse(localStorage.getItem("glp_synthesis_sessions") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_synthesis_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteColliderSession(id: string): void {
   const key = "glp_synthesis_sessions";
-  const existing: ColliderSession[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: ColliderSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(s => s.id !== id)));
 }
 

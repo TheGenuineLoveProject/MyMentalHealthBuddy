@@ -51,7 +51,7 @@ export default function CBTThoughtDiary() {
     
     const updated = [newEntry, ...entries];
     setEntries(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
     
     setCurrentEntry({
       situation: "",
@@ -70,7 +70,7 @@ export default function CBTThoughtDiary() {
   const deleteEntry = (id) => {
     const updated = entries.filter(e => e.id !== id);
     setEntries(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const toggleDistortion = (distortionId) => {

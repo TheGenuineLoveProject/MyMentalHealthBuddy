@@ -120,7 +120,7 @@ export default function AchievementSystem() {
     if (newEarned.length > 0) {
       const updated = [...earnedAchievements, ...newEarned];
       setEarnedAchievements(updated);
-      localStorage.setItem("earned_achievements", JSON.stringify(updated));
+      try { localStorage.setItem("earned_achievements", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
       
       const lastUnlocked = ALL_ACHIEVEMENTS.find(a => a.id === newEarned[newEarned.length - 1]);
       setRecentlyUnlocked(lastUnlocked);

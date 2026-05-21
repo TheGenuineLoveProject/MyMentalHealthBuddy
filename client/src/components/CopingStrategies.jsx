@@ -244,7 +244,7 @@ export default function CopingStrategies() {
       ? favorites.filter(f => f !== strategyId)
       : [...favorites, strategyId];
     setFavorites(newFavorites);
-    localStorage.setItem("favorite_strategies", JSON.stringify(newFavorites));
+    try { localStorage.setItem("favorite_strategies", JSON.stringify(newFavorites)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const category = selectedCategory ? STRATEGY_CATEGORIES[selectedCategory] : null;

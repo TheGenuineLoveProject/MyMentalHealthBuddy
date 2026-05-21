@@ -41,7 +41,7 @@ export default function BodyScanMeditation() {
               setIsPlaying(false);
               const newCount = sessionsCompleted + 1;
               setSessionsCompleted(newCount);
-              localStorage.setItem("body_scan_sessions", newCount.toString());
+              try { localStorage.setItem("body_scan_sessions", newCount.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
               return 0;
             }
           }

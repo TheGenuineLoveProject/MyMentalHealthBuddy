@@ -42,11 +42,11 @@ export default function GriefLetter() {
     mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/grief-letter", data),
     onSuccess: () => {
       setSavedLocally(true);
-      localStorage.removeItem(STORAGE_KEY);
+      try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
       toast({ title: "Letter saved", description: "Your words are safely stored." });
     },
     onError: () => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() }));
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() })); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSavedLocally(true);
       toast({ title: "Saved locally", description: "Your letter is saved on this device." });
     }
@@ -65,7 +65,7 @@ export default function GriefLetter() {
       setRecipient("");
       setLetterContent("");
       setSavedLocally(false);
-      localStorage.removeItem(STORAGE_KEY);
+      try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
     }
   };
 

@@ -391,7 +391,7 @@ function getOrCreateGuestId(): string {
     const existing = localStorage.getItem("mmhb_guest_id");
     if (existing) return existing;
     const id = `g_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
-    localStorage.setItem("mmhb_guest_id", id);
+    try { localStorage.setItem("mmhb_guest_id", id); } catch (err) { console.warn("[storage-safe-write]", err); }
     return id;
   } catch {
     return `g_${Date.now().toString(36)}`;

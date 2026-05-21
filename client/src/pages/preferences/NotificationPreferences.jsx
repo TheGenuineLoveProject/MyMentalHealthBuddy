@@ -91,7 +91,7 @@ export default function NotificationPreferences() {
       toast({ title: "Preferences saved", description: "Your notification settings are updated." });
     },
     onError: () => {
-      localStorage.setItem("glp_notification_prefs", JSON.stringify(settings));
+      try { localStorage.setItem("glp_notification_prefs", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Your preferences are saved on this device." });
     }

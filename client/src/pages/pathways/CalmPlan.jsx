@@ -43,7 +43,7 @@ export default function CalmPlan() {
 
   const handleSave = () => {
     const plan = { selections, notes, savedAt: new Date().toISOString() };
-    localStorage.setItem("glp_calm_plan", JSON.stringify(plan));
+    try { localStorage.setItem("glp_calm_plan", JSON.stringify(plan)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
   };
 

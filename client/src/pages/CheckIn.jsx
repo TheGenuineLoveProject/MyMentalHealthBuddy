@@ -113,10 +113,12 @@ export default function CheckIn() {
         "mmhb-last-checkin",
         JSON.stringify({ at: Date.now(), emotion, intensity, note }),
       );
-      window.localStorage.setItem(
-        "mmhb-checkin-streak",
-        JSON.stringify({ date: today, count: streak }),
-      );
+      try {
+        window.localStorage.setItem(
+          "mmhb-checkin-streak",
+          JSON.stringify({ date: today, count: streak }),
+        );
+      } catch (err) { console.warn("[storage-safe-write]", err); }
     } catch { /* private mode */ }
     setPhase("complete");
   }

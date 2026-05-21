@@ -161,7 +161,7 @@ export default function PositiveVisualization() {
       ? favorites.filter(f => f !== vizId)
       : [...favorites, vizId];
     setFavorites(newFavorites);
-    localStorage.setItem("viz_favorites", JSON.stringify(newFavorites));
+    try { localStorage.setItem("viz_favorites", JSON.stringify(newFavorites)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   return (

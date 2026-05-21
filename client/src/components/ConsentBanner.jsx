@@ -31,7 +31,7 @@ export default function ConsentBanner() {
         ? { essential: true, analytics: false, marketing: false }
         : preferences
     };
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(consentData));
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(consentData)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setVisible(false);
   };
 

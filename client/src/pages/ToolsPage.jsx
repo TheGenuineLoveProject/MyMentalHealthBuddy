@@ -94,14 +94,14 @@ export default function ToolsPage() {
 
   function handleTimedComplete(text, duration) {
     const key = "glp_timed_sessions";
-    const existing = JSON.parse(localStorage.getItem(key) || "[]");
+    const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     const entry = {
       id: Date.now().toString(),
       text,
       duration,
       createdAt: new Date().toISOString(),
     };
-    localStorage.setItem(key, JSON.stringify([entry, ...existing].slice(0, 50)));
+    try { localStorage.setItem(key, JSON.stringify([entry, ...existing].slice(0, 50))); } catch (err) { console.warn("[storage-safe-write]", err); }
     setActiveTool(null);
   }
 

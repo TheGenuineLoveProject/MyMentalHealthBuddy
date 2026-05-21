@@ -111,7 +111,7 @@ export default function Challenge() {
         queryClient.invalidateQueries({ queryKey: ['/api/user/stats'] });
         queryClient.invalidateQueries({ queryKey: ['/api/user/activity'] });
       } else {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress)); } catch (err) { console.warn("[storage-safe-write]", err); }
       }
     } catch {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));

@@ -9,7 +9,7 @@ const STORAGE_KEY = "glp_saved_reflections";
 
 function loadReflections(): SavedReflection[] {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   } catch {
     return [];
   }
@@ -113,6 +113,6 @@ export function getReflectionCount(): number {
 
 export function clearAllReflections(): void {
   if (confirm("This will permanently delete all saved reflections. Continue?")) {
-    localStorage.removeItem(STORAGE_KEY);
+    try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
   }
 }

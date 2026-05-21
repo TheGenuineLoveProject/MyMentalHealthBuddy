@@ -47,7 +47,7 @@ export default function EmotionLog({
       onJournalSave(entry);
     }
     
-    localStorage.setItem(`glp_emotion_${new Date().toISOString().split('T')[0]}`, JSON.stringify(entry));
+    try { localStorage.setItem(`glp_emotion_${new Date().toISOString().split('T')[0]}`, JSON.stringify(entry)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
   };
 

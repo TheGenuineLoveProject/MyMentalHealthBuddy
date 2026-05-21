@@ -36,7 +36,7 @@ export function AgeConfirmationModal({ onConfirm }: AgeConfirmationModalProps) {
   }, [isOpen]);
 
   const handleConfirm = () => {
-    localStorage.setItem(STORAGE_KEY, "true");
+    try { localStorage.setItem(STORAGE_KEY, "true"); } catch (err) { console.warn("[storage-safe-write]", err); }
     setIsVisible(false);
     setTimeout(() => {
       setIsOpen(false);

@@ -78,19 +78,19 @@ export default function SelfCareChecklist() {
         if (prevCount >= 5) {
           const newStreak = streak + 1;
           setStreak(newStreak);
-          localStorage.setItem("selfcare_streak", newStreak.toString());
+          try { localStorage.setItem("selfcare_streak", newStreak.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
         } else {
           setStreak(0);
           localStorage.setItem("selfcare_streak", "0");
         }
       } else {
         setStreak(0);
-        localStorage.setItem("selfcare_streak", "0");
+        try { localStorage.setItem("selfcare_streak", "0"); } catch (err) { console.warn("[storage-safe-write]", err); }
       }
       localStorage.setItem("selfcare_date", today);
       localStorage.setItem("selfcare_completed", JSON.stringify({}));
     } else {
-      localStorage.setItem("selfcare_date", today);
+      try { localStorage.setItem("selfcare_date", today); } catch (err) { console.warn("[storage-safe-write]", err); }
     }
   }, []);
 
@@ -98,17 +98,17 @@ export default function SelfCareChecklist() {
     const wasCompleted = completed[itemId];
     const updated = { ...completed, [itemId]: !wasCompleted };
     setCompleted(updated);
-    localStorage.setItem("selfcare_completed", JSON.stringify(updated));
+    try { localStorage.setItem("selfcare_completed", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
 
     const pointChange = wasCompleted ? -points : points;
     const newTotal = totalPoints + pointChange;
     setTotalPoints(newTotal);
-    localStorage.setItem("selfcare_total_points", newTotal.toString());
+    try { localStorage.setItem("selfcare_total_points", newTotal.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const resetToday = () => {
     setCompleted({});
-    localStorage.setItem("selfcare_completed", JSON.stringify({}));
+    try { localStorage.setItem("selfcare_completed", JSON.stringify({})); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const completedCount = Object.values(completed).filter(Boolean).length;

@@ -81,10 +81,12 @@ function bumpGentlePracticeStreak() {
     const raw = window.localStorage.getItem("mmhb-breathing-streak-v1");
     const prev = raw ? (JSON.parse(raw)?.count || 0) : 0;
     const next = prev + 1;
-    window.localStorage.setItem(
-      "mmhb-breathing-streak-v1",
-      JSON.stringify({ count: next, lastAt: Date.now() })
-    );
+    try {
+      window.localStorage.setItem(
+        "mmhb-breathing-streak-v1",
+        JSON.stringify({ count: next, lastAt: Date.now() })
+      );
+    } catch (err) { console.warn("[storage-safe-write]", err); }
     return next;
   } catch { return 0; }
 }

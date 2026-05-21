@@ -90,7 +90,7 @@ export default function AIPersonality() {
       setTimeout(() => setSaved(false), 3000);
     },
     onError: () => {
-      localStorage.setItem("glp_ai_personality", JSON.stringify(settings));
+      try { localStorage.setItem("glp_ai_personality", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
       setTimeout(() => setSaved(false), 3000);

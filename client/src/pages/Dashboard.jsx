@@ -608,7 +608,7 @@ function ExploreCard({ href, icon: Icon, title, description, color, testId }) {
 
 function getReflectionStreak() {
   try {
-    const entries = JSON.parse(localStorage.getItem("glp_reflections") || "[]");
+    const entries = ((()=>{try{return JSON.parse(localStorage.getItem("glp_reflections") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     if (!entries.length) return { current: 0, reflectedToday: false, totalEntries: 0 };
     const ONE_DAY = 86400000;
     const toDay = (s) => { const d = new Date(s); return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime(); };

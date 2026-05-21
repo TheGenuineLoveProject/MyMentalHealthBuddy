@@ -98,5 +98,5 @@ export function loadMoralDilemmas(): MoralDilemma[] {
 }
 
 export function saveMoralDilemmas(dilemmas: MoralDilemma[]): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(dilemmas));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(dilemmas)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }

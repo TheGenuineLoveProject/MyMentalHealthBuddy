@@ -122,7 +122,7 @@ export function createSystemModel(focus: string): SystemModel {
 
 export function saveSystemModel(model: SystemModel): void {
   const key = "glp_system_models";
-  const existing: SystemModel[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: SystemModel[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(m => m.id === model.id);
   const updated = { ...model, updatedAt: new Date().toISOString() };
   if (idx >= 0) {
@@ -130,16 +130,16 @@ export function saveSystemModel(model: SystemModel): void {
   } else {
     existing.unshift(updated);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 20)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 20))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getSystemModels(): SystemModel[] {
-  return JSON.parse(localStorage.getItem("glp_system_models") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_system_models") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteSystemModel(id: string): void {
   const key = "glp_system_models";
-  const existing: SystemModel[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: SystemModel[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(m => m.id !== id)));
 }
 

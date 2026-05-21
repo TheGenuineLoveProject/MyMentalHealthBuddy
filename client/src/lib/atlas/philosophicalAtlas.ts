@@ -228,18 +228,18 @@ export function getDailyTradition(): WisdomTradition {
 
 export function saveAtlasPath(path: AtlasPath): void {
   const key = "glp_atlas_paths";
-  const existing: AtlasPath[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: AtlasPath[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(p => p.id === path.id);
   if (idx >= 0) {
     existing[idx] = path;
   } else {
     existing.unshift(path);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 50)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 50))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getAtlasPaths(): AtlasPath[] {
-  return JSON.parse(localStorage.getItem("glp_atlas_paths") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_atlas_paths") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function createAtlasPath(traditionId: string): AtlasPath {

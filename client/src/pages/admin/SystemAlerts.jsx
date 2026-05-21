@@ -43,7 +43,7 @@ export default function SystemAlerts() {
         }
       } else {
         setAlerts(DEFAULT_ALERTS);
-        localStorage.setItem("glp_admin_alerts", JSON.stringify(DEFAULT_ALERTS));
+        try { localStorage.setItem("glp_admin_alerts", JSON.stringify(DEFAULT_ALERTS)); } catch (err) { console.warn("[storage-safe-write]", err); }
       }
     } catch {
       setAlerts(DEFAULT_ALERTS);

@@ -195,7 +195,7 @@ export default function DailyRitualPage() {
       insightTags: insightOutput?.tags || [],
       savedAt: new Date().toISOString(),
     };
-    const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const existing = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
     existing.push(ritual);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
   };

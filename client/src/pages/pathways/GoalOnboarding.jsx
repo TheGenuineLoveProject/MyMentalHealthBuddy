@@ -52,7 +52,7 @@ export default function GoalOnboarding() {
 
   const handleComplete = () => {
     const preferences = { selectedGoals, experience, timePreference };
-    localStorage.setItem("glp_onboarding_preferences", JSON.stringify(preferences));
+    try { localStorage.setItem("glp_onboarding_preferences", JSON.stringify(preferences)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setLocation("/pathways");
   };
 

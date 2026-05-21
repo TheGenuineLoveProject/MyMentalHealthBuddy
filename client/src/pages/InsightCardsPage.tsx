@@ -54,7 +54,7 @@ const loadLibrary = (): InsightLibrary => {
 };
 
 const saveLibrary = (library: InsightLibrary) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(library));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(library)); } catch (err) { console.warn("[storage-safe-write]", err); }
 };
 
 export default function InsightCardsPage() {

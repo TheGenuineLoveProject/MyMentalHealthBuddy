@@ -298,7 +298,7 @@ function loadProgress(): UserProgress {
 }
 
 function saveProgress(progress: UserProgress) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export default function StrategyMapsPage() {

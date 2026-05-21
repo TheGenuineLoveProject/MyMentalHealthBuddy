@@ -22,7 +22,7 @@ export default function ModeToggle() {
   const handleModeChange = (modeId) => {
     setCurrentMode(modeId);
     document.documentElement.dataset.mode = modeId;
-    localStorage.setItem(STORAGE_KEY, modeId);
+    try { localStorage.setItem(STORAGE_KEY, modeId); } catch (err) { console.warn("[storage-safe-write]", err); }
     setIsOpen(false);
   };
 

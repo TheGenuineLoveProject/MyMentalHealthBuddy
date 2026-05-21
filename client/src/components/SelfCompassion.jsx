@@ -149,7 +149,7 @@ export default function SelfCompassion() {
       setSavedLetters(newLetters);
     }
     
-    localStorage.setItem("self_compassion_data", JSON.stringify(data));
+    try { localStorage.setItem("self_compassion_data", JSON.stringify(data)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
     setTimeout(() => {
       setSaved(false);

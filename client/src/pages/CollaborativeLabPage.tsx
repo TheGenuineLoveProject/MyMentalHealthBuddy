@@ -110,7 +110,7 @@ function loadProfile(): LabProfile {
 }
 
 function saveProfile(profile: LabProfile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 function formatTimeAgo(timestamp: string): string {

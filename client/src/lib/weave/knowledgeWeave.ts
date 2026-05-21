@@ -103,7 +103,7 @@ export function createKnowledgeWeave(focus: string): KnowledgeWeave {
 
 export function saveKnowledgeWeave(weave: KnowledgeWeave): void {
   const key = "glp_knowledge_weaves";
-  const existing: KnowledgeWeave[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: KnowledgeWeave[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(w => w.id === weave.id);
   const updated = { ...weave, updatedAt: new Date().toISOString() };
   if (idx >= 0) {
@@ -111,16 +111,16 @@ export function saveKnowledgeWeave(weave: KnowledgeWeave): void {
   } else {
     existing.unshift(updated);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 15)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 15))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getKnowledgeWeaves(): KnowledgeWeave[] {
-  return JSON.parse(localStorage.getItem("glp_knowledge_weaves") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_knowledge_weaves") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteKnowledgeWeave(id: string): void {
   const key = "glp_knowledge_weaves";
-  const existing: KnowledgeWeave[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: KnowledgeWeave[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(w => w.id !== id)));
 }
 

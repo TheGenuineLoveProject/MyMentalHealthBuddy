@@ -146,23 +146,23 @@ export function createExperimentSession(experimentId: string): ExperimentSession
 
 export function saveExperimentSession(session: ExperimentSession): void {
   const key = "glp_thought_sessions";
-  const existing: ExperimentSession[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: ExperimentSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(s => s.id === session.id);
   if (idx >= 0) {
     existing[idx] = session;
   } else {
     existing.unshift(session);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 50)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 50))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getExperimentSessions(): ExperimentSession[] {
-  return JSON.parse(localStorage.getItem("glp_thought_sessions") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_thought_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteExperimentSession(id: string): void {
   const key = "glp_thought_sessions";
-  const existing: ExperimentSession[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: ExperimentSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(s => s.id !== id)));
 }
 

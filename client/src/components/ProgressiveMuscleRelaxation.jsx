@@ -53,7 +53,7 @@ export default function ProgressiveMuscleRelaxation() {
                 setIsPlaying(false);
                 const newCount = sessionsCompleted + 1;
                 setSessionsCompleted(newCount);
-                localStorage.setItem("pmr_sessions", newCount.toString());
+                try { localStorage.setItem("pmr_sessions", newCount.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
                 return 0;
               }
             }

@@ -110,7 +110,7 @@ export function createDecisionFrame(question: string): DecisionFrame {
 
 export function saveDecisionFrame(frame: DecisionFrame): void {
   const key = "glp_decision_frames";
-  const existing: DecisionFrame[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: DecisionFrame[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(f => f.id === frame.id);
   const updated = { ...frame, updatedAt: new Date().toISOString() };
   if (idx >= 0) {
@@ -118,16 +118,16 @@ export function saveDecisionFrame(frame: DecisionFrame): void {
   } else {
     existing.unshift(updated);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 25)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 25))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getDecisionFrames(): DecisionFrame[] {
-  return JSON.parse(localStorage.getItem("glp_decision_frames") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_decision_frames") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteDecisionFrame(id: string): void {
   const key = "glp_decision_frames";
-  const existing: DecisionFrame[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: DecisionFrame[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(f => f.id !== id)));
 }
 

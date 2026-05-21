@@ -48,7 +48,7 @@ export default function ContentStudioAdmin() {
         }
       } else {
         setContentList(DEFAULT_CONTENT);
-        localStorage.setItem("glp_admin_content", JSON.stringify(DEFAULT_CONTENT));
+        try { localStorage.setItem("glp_admin_content", JSON.stringify(DEFAULT_CONTENT)); } catch (err) { console.warn("[storage-safe-write]", err); }
       }
     } catch {
       setContentList(DEFAULT_CONTENT);
@@ -88,7 +88,7 @@ export default function ContentStudioAdmin() {
             ? { ...c, hasTiers: allTiersFilled, status: allTiersFilled ? "complete" : "needs-tiers" }
             : c
         );
-        localStorage.setItem("glp_admin_content", JSON.stringify(updated));
+        try { localStorage.setItem("glp_admin_content", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
         return updated;
       });
       

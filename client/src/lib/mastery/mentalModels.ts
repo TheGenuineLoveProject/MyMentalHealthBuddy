@@ -146,5 +146,5 @@ export function loadModelLibrary(): ModelLibrary {
 }
 
 export function saveModelLibrary(library: ModelLibrary): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(library));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(library)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }

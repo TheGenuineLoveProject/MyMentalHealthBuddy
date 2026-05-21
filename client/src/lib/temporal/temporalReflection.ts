@@ -95,11 +95,11 @@ export function getIntegrationPrompt(): string {
 
 export function saveTemporalIntegration(integration: TemporalIntegration): void {
   const key = "glp_temporal_integrations";
-  const existing = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify([integration, ...existing].slice(0, 30)));
 }
 
 export function getTemporalIntegrations(): TemporalIntegration[] {
   const key = "glp_temporal_integrations";
-  return JSON.parse(localStorage.getItem(key) || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }

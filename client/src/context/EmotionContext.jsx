@@ -193,7 +193,7 @@ export function EmotionProvider({ children }) {
 
   const clearHistory = useCallback(() => {
     setEmotionHistory([]);
-    localStorage.removeItem(STORAGE_KEY);
+    try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
   }, []);
 
   const value = {

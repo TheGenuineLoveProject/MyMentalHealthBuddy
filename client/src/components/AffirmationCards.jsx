@@ -144,7 +144,7 @@ export default function AffirmationCards() {
     }
     
     setFavorites(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const shareAffirmation = async () => {

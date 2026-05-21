@@ -47,12 +47,14 @@ export default function MindfulnessChallenges() {
   }, []);
 
   const saveProgress = (completed, points, streak) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      completed,
-      totalPoints: points,
-      streak,
-      lastActive: new Date().toISOString(),
-    }));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        completed,
+        totalPoints: points,
+        streak,
+        lastActive: new Date().toISOString(),
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const toggleChallenge = (challenge) => {

@@ -74,7 +74,7 @@ function loadProfile(): WisdomProfile {
 }
 
 function saveProfile(profile: WisdomProfile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 function getTodayStr() {

@@ -67,13 +67,13 @@ export default function AccessibilityToolbar() {
   const updateSetting = (key, value) => {
     const newSettings = { ...settings, [key]: value };
     setSettings(newSettings);
-    localStorage.setItem("glp-a11y-settings", JSON.stringify(newSettings));
+    try { localStorage.setItem("glp-a11y-settings", JSON.stringify(newSettings)); } catch (err) { console.warn("[storage-safe-write]", err); }
     applySettings(newSettings);
   };
 
   const resetSettings = () => {
     setSettings(DEFAULT_A11Y_SETTINGS);
-    localStorage.setItem("glp-a11y-settings", JSON.stringify(DEFAULT_A11Y_SETTINGS));
+    try { localStorage.setItem("glp-a11y-settings", JSON.stringify(DEFAULT_A11Y_SETTINGS)); } catch (err) { console.warn("[storage-safe-write]", err); }
     applySettings(DEFAULT_A11Y_SETTINGS);
   };
 

@@ -116,11 +116,11 @@ export function getRandomInquiryPrompt(domainId?: string): string {
 
 export function saveDialecticalSession(session: DialecticalSession): void {
   const key = "glp_dialectical_sessions";
-  const existing = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify([session, ...existing].slice(0, 30)));
 }
 
 export function getDialecticalSessions(): DialecticalSession[] {
   const key = "glp_dialectical_sessions";
-  return JSON.parse(localStorage.getItem(key) || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }

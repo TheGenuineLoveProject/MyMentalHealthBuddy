@@ -20,7 +20,7 @@ const DEFAULTS: Record<FlagKey, boolean> = {
 function read(): Record<string, boolean> {
   try {
     if (typeof window === 'undefined') return {};
-    return JSON.parse(localStorage.getItem(KEY) || "{}");
+    return ((()=>{try{return JSON.parse(localStorage.getItem(KEY) || "{}");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("{}");}})());
   } catch {
     return {};
   }

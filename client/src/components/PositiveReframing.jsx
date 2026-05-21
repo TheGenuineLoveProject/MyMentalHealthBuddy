@@ -79,7 +79,7 @@ export default function PositiveReframing() {
     
     const newHistory = [entry, ...history].slice(0, 50);
     setHistory(newHistory);
-    localStorage.setItem("reframing_history", JSON.stringify(newHistory));
+    try { localStorage.setItem("reframing_history", JSON.stringify(newHistory)); } catch (err) { console.warn("[storage-safe-write]", err); }
     
     setSaved(true);
     setTimeout(() => {

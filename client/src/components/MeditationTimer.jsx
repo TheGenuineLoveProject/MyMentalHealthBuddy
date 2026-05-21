@@ -51,7 +51,7 @@ export default function MeditationTimer({ onComplete }) {
             setPhase("complete");
             const newCount = sessionsCompleted + 1;
             setSessionsCompleted(newCount);
-            localStorage.setItem("meditation_sessions", newCount.toString());
+            try { localStorage.setItem("meditation_sessions", newCount.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
             if (onComplete) onComplete(duration);
             return 0;
           }

@@ -148,7 +148,7 @@ export default function QuestPanel({ compact = false }) {
             ) : (
               <button
                 onClick={() => {
-                  localStorage.setItem('glp_quest_interest', 'true');
+                  try { localStorage.setItem('glp_quest_interest', 'true'); } catch (err) { console.warn("[storage-safe-write]", err); }
                   setSavedInterest(true);
                   toast({
                     title: "Interest Saved",

@@ -129,7 +129,7 @@ export default function MindfulWalking() {
     
     const newTotal = totalSessions + 1;
     setTotalSessions(newTotal);
-    localStorage.setItem("mindful_walking_sessions", newTotal.toString());
+    try { localStorage.setItem("mindful_walking_sessions", newTotal.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
 
     await recordSession("mindful_walking", elapsedTime, {
       meditation: selectedMeditation.name,

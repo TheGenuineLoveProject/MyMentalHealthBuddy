@@ -95,7 +95,7 @@ function loadProfile(): ResilienceProfile {
 }
 
 function saveProfile(profile: ResilienceProfile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 function formatTimeAgo(timestamp: string): string {

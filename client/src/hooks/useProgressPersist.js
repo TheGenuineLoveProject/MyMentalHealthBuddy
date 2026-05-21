@@ -11,7 +11,7 @@ export function useProgressPersist(key, initialValue = null) {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.expiry && Date.now() > parsed.expiry) {
-          localStorage.removeItem(storageKey);
+          try { localStorage.removeItem(storageKey); } catch (err) { console.warn("[storage-safe-write]", err); }
           return initialValue;
         }
         return parsed.value;

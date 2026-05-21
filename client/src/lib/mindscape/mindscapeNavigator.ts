@@ -106,5 +106,5 @@ export function loadMindscapeMap(): MindscapeMap {
 }
 
 export function saveMindscapeMap(map: MindscapeMap): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(map)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }

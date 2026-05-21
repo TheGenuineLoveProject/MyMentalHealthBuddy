@@ -82,7 +82,7 @@ export default function MeaningMap() {
       toast({ title: "Meaning map saved", description: "Your reflections are safely stored." });
     },
     onError: () => {
-      localStorage.setItem("glp_meaning_map", JSON.stringify({ answers, coreValues, meaningStatement }));
+      try { localStorage.setItem("glp_meaning_map", JSON.stringify({ answers, coreValues, meaningStatement })); } catch (err) { console.warn("[storage-safe-write]", err); }
       toast({ title: "Saved locally", description: "Your work is saved on this device." });
       setSaved(true);
     }

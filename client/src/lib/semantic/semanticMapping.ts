@@ -95,7 +95,7 @@ export function createSemanticMap(focus: string): SemanticMap {
 
 export function saveSemanticMap(map: SemanticMap): void {
   const key = "glp_semantic_maps";
-  const existing: SemanticMap[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: SemanticMap[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   const idx = existing.findIndex(m => m.id === map.id);
   const updated = { ...map, updatedAt: new Date().toISOString() };
   if (idx >= 0) {
@@ -103,16 +103,16 @@ export function saveSemanticMap(map: SemanticMap): void {
   } else {
     existing.unshift(updated);
   }
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 20)));
+  try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 20))); } catch (err) { console.warn("[storage-safe-write]", err); }
 }
 
 export function getSemanticMaps(): SemanticMap[] {
-  return JSON.parse(localStorage.getItem("glp_semantic_maps") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_semantic_maps") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }
 
 export function deleteSemanticMap(id: string): void {
   const key = "glp_semantic_maps";
-  const existing: SemanticMap[] = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing: SemanticMap[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify(existing.filter(m => m.id !== id)));
 }
 

@@ -170,10 +170,10 @@ export function getRandomExperiment(): typeof PATTERN_EXPERIMENTS[0] {
 
 export function savePatternLabSession(session: PatternLabSession): void {
   const key = "glp_pattern_lab_sessions";
-  const existing = JSON.parse(localStorage.getItem(key) || "[]");
+  const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
   localStorage.setItem(key, JSON.stringify([session, ...existing].slice(0, 20)));
 }
 
 export function getPatternLabSessions(): PatternLabSession[] {
-  return JSON.parse(localStorage.getItem("glp_pattern_lab_sessions") || "[]");
+  return ((()=>{try{return JSON.parse(localStorage.getItem("glp_pattern_lab_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
 }

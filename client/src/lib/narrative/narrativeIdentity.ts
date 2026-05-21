@@ -91,5 +91,5 @@ export function loadNarrative(): LifeNarrative {
 }
 
 export function saveNarrative(narrative: LifeNarrative): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(narrative));
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(narrative)); } catch (err) { console.warn("[storage-safe-write]", err); }
 }

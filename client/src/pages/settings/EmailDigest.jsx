@@ -61,7 +61,7 @@ export default function EmailDigest() {
       setTimeout(() => setSaved(false), 3000);
     },
     onError: () => {
-      localStorage.setItem("glp_email_digest", JSON.stringify(settings));
+      try { localStorage.setItem("glp_email_digest", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
       setTimeout(() => setSaved(false), 3000);

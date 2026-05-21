@@ -94,12 +94,14 @@ export default function SelfCareBingo() {
   }, [completed]);
 
   const saveProgress = (newCompleted, points) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      completed: Array.from(newCompleted),
-      totalPoints: points,
-      streak,
-      lastPlayed: new Date().toDateString(),
-    }));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        completed: Array.from(newCompleted),
+        totalPoints: points,
+        streak,
+        lastPlayed: new Date().toDateString(),
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const toggleCell = (index) => {
@@ -130,12 +132,14 @@ export default function SelfCareBingo() {
     const newStreak = streak + 1;
     setStreak(newStreak);
     
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      completed: [12],
-      totalPoints: 0,
-      streak: newStreak,
-      lastPlayed: new Date().toDateString(),
-    }));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        completed: [12],
+        totalPoints: 0,
+        streak: newStreak,
+        lastPlayed: new Date().toDateString(),
+      }));
+    } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const isInWinningPattern = (index) => {

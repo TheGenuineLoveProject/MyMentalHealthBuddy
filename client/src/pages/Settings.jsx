@@ -101,7 +101,7 @@ export default function Settings() {
   function handleVisualModeChange(modeId) {
     setVisualMode(modeId);
     document.documentElement.dataset.mode = modeId;
-    localStorage.setItem(VISUAL_MODE_KEY, modeId);
+    try { localStorage.setItem(VISUAL_MODE_KEY, modeId); } catch (err) { console.warn("[storage-safe-write]", err); }
   }
 
   async function handleSavePreferences() {
@@ -147,11 +147,11 @@ export default function Settings() {
   }
   
   function saveToLocalStorage() {
-    localStorage.setItem("theme", theme);
+    try { localStorage.setItem("theme", theme); } catch (err) { console.warn("[storage-safe-write]", err); }
     localStorage.setItem("notifications", String(notifications));
     localStorage.setItem("glp-affirmation-tone", affirmationTone);
     localStorage.setItem("glp-voice-enabled", String(voiceEnabled));
-    localStorage.setItem("glp-mood-background", moodBackground);
+    try { localStorage.setItem("glp-mood-background", moodBackground); } catch (err) { console.warn("[storage-safe-write]", err); }
   }
 
   function handleLogout() {

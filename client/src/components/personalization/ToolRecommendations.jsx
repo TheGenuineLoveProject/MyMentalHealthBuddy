@@ -29,7 +29,7 @@ const GOAL_TO_TAGS = {
 export function ToolRecommendations({ maxItems = 4, showHeader = true }) {
   const recommendations = useMemo(() => {
     try {
-      const prefs = JSON.parse(localStorage.getItem("glp_onboarding_preferences") || "{}");
+      const prefs = ((()=>{try{return JSON.parse(localStorage.getItem("glp_onboarding_preferences") || "{}");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("{}");}})());
       const userGoals = prefs.selectedGoals || [];
       const timePreference = prefs.timePreference || "moderate";
       
