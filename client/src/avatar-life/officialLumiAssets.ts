@@ -28,20 +28,20 @@
  * Scheduled for migration + quarantine.
  */
 export const OFFICIAL_LUMI = {
-	calm: "/assets/lumi/official/lumi-calm.png",
-	breathe: "/assets/lumi/official/lumi-breathe.png",
-	heartGlow: "/assets/lumi/official/lumi-heart-glow.png",
-	reflective: "/assets/lumi/official/lumi-reflective.png",
-	supportive: "/assets/lumi/official/lumi-supportive.png",
-	sleepy: "/assets/lumi/official/lumi-sleepy.png",
-	encouraging: "/assets/lumi/official/lumi-encouraging.png",
-	grounded: "/assets/lumi/official/lumi-grounded.png",
+        calm: "/lumi/official/lumi-calm-float.png",
+        breathe: "/lumi/official/lumi-meditation.png",
+        heartGlow: "/lumi/official/lumi-heart.png",
+        reflective: "/lumi/official/lumi-soft-presence.png",
+        supportive: "/lumi/official/lumi-companion.png",
+        sleepy: "/lumi/official/lumi-soft-presence.png",
+        encouraging: "/lumi/official/lumi-emotion-orb.png",
+        grounded: "/lumi/official/lumi-path.png",
 } as const;
 
 export type OfficialLumiState = keyof typeof OFFICIAL_LUMI;
 
 export function getOfficialLumi(
-	state: OfficialLumiState = "calm",
+        state: OfficialLumiState = "calm",
 ): string {
-	return OFFICIAL_LUMI[state];
+        return OFFICIAL_LUMI[state];
 }
