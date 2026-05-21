@@ -1,1 +1,0 @@
-var e="mmhb:first_checkin_completed:v1";function t(){try{return typeof window>"u"?!1:window.localStorage.getItem(e)==="true"}catch{return!1}}function n(){try{if(typeof window>"u")return;window.localStorage.setItem(e,"true")}catch{}}export{n,t};
