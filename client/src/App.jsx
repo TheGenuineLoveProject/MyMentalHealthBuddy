@@ -385,14 +385,22 @@ export default function App() {
             {/* v5.8.35 perf: ReturnLoop/MicroWinPrompt/WelcomeBackBanner are
                 lazy now — wrap in Suspense so React doesn't throw "suspended
                 outside of a Suspense boundary" on first hydration. */}
-            <Suspense fallback={null}>
-              <ReturnLoop />
-              <MicroWinPrompt />
-            </Suspense>
+            <SafeBoundary label="ReturnLoop">
+              <Suspense fallback={null}>
+                <ReturnLoop />
+              </Suspense>
+            </SafeBoundary>
+            <SafeBoundary label="MicroWinPrompt">
+              <Suspense fallback={null}>
+                <MicroWinPrompt />
+              </Suspense>
+            </SafeBoundary>
             <main id="main-content">
-            <Suspense fallback={null}>
-              <WelcomeBackBanner />
-            </Suspense>
+            <SafeBoundary label="WelcomeBackBanner">
+              <Suspense fallback={null}>
+                <WelcomeBackBanner />
+              </Suspense>
+            </SafeBoundary>
             <SafeBoundary label="Route">
             <Suspense fallback={<LoadingFallback />}>
             <Switch>
@@ -1900,13 +1908,31 @@ export default function App() {
           </main>
           {/* v5.8.35 perf: lazy global widgets — Suspense fallback is null
               because none are above-the-fold; they hydrate quietly post-LCP. */}
-          <Suspense fallback={null}>
-            <ConsentBanner />
-            <FeedbackWidget />
-            <AICompanion />
-            <AccessibilityToolbar />
-            <GratitudePrompt frequency="weekly" />
-          </Suspense>
+          <SafeBoundary label="ConsentBanner">
+            <Suspense fallback={null}>
+              <ConsentBanner />
+            </Suspense>
+          </SafeBoundary>
+          <SafeBoundary label="FeedbackWidget">
+            <Suspense fallback={null}>
+              <FeedbackWidget />
+            </Suspense>
+          </SafeBoundary>
+          <SafeBoundary label="AICompanion">
+            <Suspense fallback={null}>
+              <AICompanion />
+            </Suspense>
+          </SafeBoundary>
+          <SafeBoundary label="AccessibilityToolbar">
+            <Suspense fallback={null}>
+              <AccessibilityToolbar />
+            </Suspense>
+          </SafeBoundary>
+          <SafeBoundary label="GratitudePrompt">
+            <Suspense fallback={null}>
+              <GratitudePrompt frequency="weekly" />
+            </Suspense>
+          </SafeBoundary>
           <ToastContainer />
           </ErrorBoundary>
         </ReadingLevelProvider>
