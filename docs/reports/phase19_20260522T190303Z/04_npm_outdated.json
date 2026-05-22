@@ -1,0 +1,219 @@
+{
+  "@hookform/resolvers": {
+    "current": "5.2.2",
+    "wanted": "5.4.0",
+    "latest": "5.4.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@hookform/resolvers"
+  },
+  "@langchain/openai": {
+    "current": "1.4.5",
+    "wanted": "1.4.7",
+    "latest": "1.4.7",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@langchain/openai"
+  },
+  "@opentelemetry/exporter-trace-otlp-http": {
+    "current": "0.215.0",
+    "wanted": "0.215.0",
+    "latest": "0.218.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@opentelemetry/exporter-trace-otlp-http"
+  },
+  "@opentelemetry/resources": {
+    "current": "2.7.0",
+    "wanted": "2.7.1",
+    "latest": "2.7.1",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@opentelemetry/resources"
+  },
+  "@opentelemetry/semantic-conventions": {
+    "current": "1.40.0",
+    "wanted": "1.41.1",
+    "latest": "1.41.1",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@opentelemetry/semantic-conventions"
+  },
+  "@playwright/test": {
+    "current": "1.59.1",
+    "wanted": "1.60.0",
+    "latest": "1.60.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@playwright/test"
+  },
+  "@tailwindcss/postcss": {
+    "current": "4.2.4",
+    "wanted": "4.3.0",
+    "latest": "4.3.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@tailwindcss/postcss"
+  },
+  "@tanstack/react-query": {
+    "current": "5.100.1",
+    "wanted": "5.100.12",
+    "latest": "5.100.12",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@tanstack/react-query"
+  },
+  "@types/node": {
+    "current": "25.6.0",
+    "wanted": "25.9.1",
+    "latest": "25.9.1",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@types/node"
+  },
+  "@types/react": {
+    "current": "19.2.14",
+    "wanted": "19.2.15",
+    "latest": "19.2.15",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@types/react"
+  },
+  "@vitejs/plugin-react": {
+    "current": "6.0.1",
+    "wanted": "6.0.2",
+    "latest": "6.0.2",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/@vitejs/plugin-react"
+  },
+  "date-fns": {
+    "current": "4.1.0",
+    "wanted": "4.2.1",
+    "latest": "4.2.1",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/date-fns"
+  },
+  "dompurify": {
+    "current": "3.4.2",
+    "wanted": "3.4.5",
+    "latest": "3.4.5",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/dompurify"
+  },
+  "express": {
+    "current": "4.22.2",
+    "wanted": "4.22.2",
+    "latest": "5.2.1",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/express"
+  },
+  "framer-motion": {
+    "current": "12.38.0",
+    "wanted": "12.40.0",
+    "latest": "12.40.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/framer-motion"
+  },
+  "globals": {
+    "current": "17.5.0",
+    "wanted": "17.6.0",
+    "latest": "17.6.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/globals"
+  },
+  "helmet": {
+    "current": "8.1.0",
+    "wanted": "8.2.0",
+    "latest": "8.2.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/helmet"
+  },
+  "lucide-react": {
+    "current": "1.9.0",
+    "wanted": "1.16.0",
+    "latest": "1.16.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/lucide-react"
+  },
+  "openai": {
+    "current": "6.34.0",
+    "wanted": "6.39.0",
+    "latest": "6.39.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/openai"
+  },
+  "openid-client": {
+    "current": "6.8.3",
+    "wanted": "6.8.4",
+    "latest": "6.8.4",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/openid-client"
+  },
+  "pg": {
+    "current": "8.20.0",
+    "wanted": "8.21.0",
+    "latest": "8.21.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/pg"
+  },
+  "react": {
+    "current": "19.2.5",
+    "wanted": "19.2.6",
+    "latest": "19.2.6",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/react"
+  },
+  "react-dom": {
+    "current": "19.2.5",
+    "wanted": "19.2.6",
+    "latest": "19.2.6",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/react-dom"
+  },
+  "react-hook-form": {
+    "current": "7.73.1",
+    "wanted": "7.76.0",
+    "latest": "7.76.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/react-hook-form"
+  },
+  "stripe": {
+    "current": "22.0.2",
+    "wanted": "22.1.1",
+    "latest": "22.1.1",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/stripe"
+  },
+  "tailwind-merge": {
+    "current": "3.5.0",
+    "wanted": "3.6.0",
+    "latest": "3.6.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/tailwind-merge"
+  },
+  "tailwindcss": {
+    "current": "4.2.4",
+    "wanted": "4.3.0",
+    "latest": "4.3.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/tailwindcss"
+  },
+  "vite": {
+    "current": "8.0.10",
+    "wanted": "8.0.14",
+    "latest": "8.0.14",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/vite"
+  },
+  "wouter": {
+    "current": "3.9.0",
+    "wanted": "3.10.0",
+    "latest": "3.10.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/wouter"
+  },
+  "ws": {
+    "current": "8.20.1",
+    "wanted": "8.21.0",
+    "latest": "8.21.0",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/ws"
+  },
+  "zod": {
+    "current": "4.3.6",
+    "wanted": "4.4.3",
+    "latest": "4.4.3",
+    "dependent": "workspace",
+    "location": "/home/runner/workspace/node_modules/zod"
+  }
+}
