@@ -1,0 +1,9 @@
+client/src/components/ui/lotus-guide.svg
+client/public/assets/tglp-logo.svg
+client/public/brand/sacred-pattern.svg
+client/public/icons/icon1.svg
+client/public/icons/icon2.svg
+client/public/icons/icon3.svg
+client/public/icons/flower-of-life.svg
+client/public/logo.svg
+client/public/sacred-pattern.svg

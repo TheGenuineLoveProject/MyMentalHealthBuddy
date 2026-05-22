@@ -1,0 +1,11 @@
+client/dist/fonts/cormorant-400.woff2
+client/dist/fonts/cormorant-600.woff2
+client/dist/fonts/inter-400.woff2
+client/dist/fonts/inter-500.woff2
+client/dist/fonts/inter-600.woff2
+client/dist/fonts/playfair-400.woff2
+client/dist/fonts/playfair-600.woff2
+client/dist/fonts/playfair-700.woff2
+client/dist/fonts/poppins-400.woff2
+client/dist/fonts/poppins-500.woff2
+client/dist/fonts/poppins-600.woff2
