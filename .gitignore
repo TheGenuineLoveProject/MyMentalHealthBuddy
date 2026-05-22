@@ -85,3 +85,4 @@ audit-report.json
 /*.html
 /*.txt
 !/README.md
+reports/auth-guest-history-final.txt
