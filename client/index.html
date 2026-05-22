@@ -125,6 +125,48 @@
       })();
     </script>
     <div id="root"></div>
+    <!--
+      F-33.6 crisis-resource resilience fallback (Phase 37).
+      Visible whenever the React app has not mounted content into #root
+      (JS disabled, bundle failed to load, parse error, network drop,
+      blocking extension). Auto-hidden via pure-CSS sibling selector once
+      React renders into #root. No JS, no dependency, no route coupling.
+      Resources mirror client/src/lumi-crisis/resources/crisisResources.ts.
+      Educational only — not clinical, not diagnostic, not a substitute
+      for professional or emergency care.
+    -->
+    <style>
+      #root:not(:empty) ~ .crisis-fallback { display: none; }
+      .crisis-fallback {
+        font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+        max-width: 36rem;
+        margin: 2rem auto;
+        padding: 1.5rem 1.25rem;
+        border: 1px solid #cfd8d4;
+        border-radius: 12px;
+        background: #f7faf8;
+        color: #1f2a25;
+        line-height: 1.5;
+      }
+      .crisis-fallback h1 { font-size: 1.25rem; margin: 0 0 .5rem; }
+      .crisis-fallback ul { padding-left: 1.25rem; margin: .75rem 0; }
+      .crisis-fallback li { margin: .35rem 0; }
+      .crisis-fallback a { color: #1d6f4a; text-decoration: underline; }
+      .crisis-fallback p.note { font-size: .9rem; color: #4a5a53; margin-top: 1rem; }
+    </style>
+    <noscript>
+      <style>.crisis-fallback { display: block !important; }</style>
+    </noscript>
+    <aside class="crisis-fallback" role="complementary" aria-label="Crisis resources">
+      <h1>If you are in crisis right now, you are not alone.</h1>
+      <p>Free, confidential support is available 24/7. You do not need an account.</p>
+      <ul>
+        <li><strong>Call or text <a href="tel:988">988</a></strong> — Suicide &amp; Crisis Lifeline (US, 24/7)</li>
+        <li><strong>Text HOME to <a href="sms:741741&amp;body=HOME">741741</a></strong> — Crisis Text Line (US, 24/7)</li>
+        <li><strong>Dial <a href="tel:911">911</a></strong> — for an immediate emergency in the US</li>
+      </ul>
+      <p class="note">MyMentalHealthBuddy is an educational wellness companion. It does not diagnose, assess suicidality, or replace emergency services. If you are in danger, please contact the resources above.</p>
+    </aside>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
