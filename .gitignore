@@ -89,3 +89,13 @@ reports/auth-guest-history-final.txt
 client/dist/
 .env
 .env.*
+
+# Local production backups - never commit
+production-backups/
+backups/
+*.tar.gz
+
+# Local-only backups
+production-backups/
+backups/
+*.tar.gz
