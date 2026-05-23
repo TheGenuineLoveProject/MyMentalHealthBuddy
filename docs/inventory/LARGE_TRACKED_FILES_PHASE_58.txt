@@ -1,40 +1,115 @@
-28M	docs/inventory/AI_SURFACE_SCAN.txt
-24M	hxos-lite-scan-2026-05-18_23-25-41/runtime.txt
-6.7M	docs/inventory/API_USAGE_SCAN.txt
-2.3M	docs/inventory/DATABASE_SCAN.txt
-2.0M	.hx-backups/v47-20260515-144035/client/dist/assets/mmhb_brand_logo_lockup_1777538625498-Bg5tRRhq.png
-2.0M	.hx-backups/20260516-065915/client/dist/assets/mmhb_brand_logo_lockup_1777538625498-Bg5tRRhq.png
-1.8M	.hx-backups/v47-20260515-144035/client/docs/diagnostics/domain-firewall-scan.txt
-1.8M	.hx-backups/20260516-065915/client/docs/diagnostics/domain-firewall-scan.txt
-1.8M	client/docs/diagnostics/domain-firewall-scan.txt
-1.6M	.hx-backups/v47-20260515-144035/client/dist/assets/thegenuineloveproject_logo_v2_1777538625498-B2Z66psB.png
-1.6M	.hx-backups/20260516-065915/client/dist/assets/thegenuineloveproject_logo_v2_1777538625498-B2Z66psB.png
-1.5M	.hx-backups/v47-20260515-144035/client/public/lumi/official/lumi-calm-float.png
-1.5M	.hx-backups/v47-20260515-144035/client/dist/lumi/official/lumi-calm-float.png
-1.5M	.hx-backups/20260516-065915/client/public/lumi/official/lumi-calm-float.png
-1.5M	.hx-backups/20260516-065915/client/dist/lumi/official/lumi-calm-float.png
-1.5M	client/public/lumi/official/lumi-calm-float.png
-1.4M	.hx-backups/v47-20260515-144035/client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
-1.4M	.hx-backups/v47-20260515-144035/client/dist/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
-1.4M	.hx-backups/v47-20260515-144035/client/analysis.html
-1.4M	.hx-backups/20260516-065915/client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
-1.4M	.hx-backups/20260516-065915/client/dist/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
-1.4M	.hx-backups/20260516-065915/client/analysis.html
-1.4M	client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
-1.4M	client/analysis.html
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_face.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_body-residual.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.png
-1.3M	.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.png
-1.3M	.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.png
-1.3M	.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.png
-1.3M	.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.png
-1.3M	.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.png
-1.3M	.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.png
+# LARGE TRACKED FILES — Phase 58 inventory
+# Generated: 2026-05-23
+# Source command:
+#   git ls-files | xargs -I{} du -h {} | sort -rh | head -100
+# Threshold of interest: anything >= 100 KB
+# See docs/reports/PHASE_58_REPO_HYGIENE_ARTIFACT_POLICY.md for analysis.
+# See docs/inventory/GENERATED_ARTIFACT_BOUNDARY_PHASE_58.txt for the generated-vs-source boundary.
+#
+# IMPORTANT: this file is RAW DATA only. No edits. No interpretation.
+# Two large tracked top-level dirs dominate:
+#   .hx-backups/                            — 3,798 files, ~153 MB total (TWO full historical client/ snapshots)
+#   hxos-lite-scan-2026-05-18_23-25-41/     —     7 files, ~25 MB total (generated scan artifact)
+# All other findings (avatar PNGs, inventory scans, analysis.html) listed below.
+
+28Mdocs/inventory/AI_SURFACE_SCAN.txt
+24Mhxos-lite-scan-2026-05-18_23-25-41/runtime.txt
+6.7Mdocs/inventory/API_USAGE_SCAN.txt
+2.3Mdocs/inventory/DATABASE_SCAN.txt
+2.0M.hx-backups/v47-20260515-144035/client/dist/assets/mmhb_brand_logo_lockup_1777538625498-Bg5tRRhq.png
+2.0M.hx-backups/20260516-065915/client/dist/assets/mmhb_brand_logo_lockup_1777538625498-Bg5tRRhq.png
+1.8M.hx-backups/v47-20260515-144035/client/docs/diagnostics/domain-firewall-scan.txt
+1.8M.hx-backups/20260516-065915/client/docs/diagnostics/domain-firewall-scan.txt
+1.8Mclient/docs/diagnostics/domain-firewall-scan.txt
+1.6M.hx-backups/v47-20260515-144035/client/dist/assets/thegenuineloveproject_logo_v2_1777538625498-B2Z66psB.png
+1.6M.hx-backups/20260516-065915/client/dist/assets/thegenuineloveproject_logo_v2_1777538625498-B2Z66psB.png
+1.5M.hx-backups/v47-20260515-144035/client/public/lumi/official/lumi-calm-float.png
+1.5M.hx-backups/v47-20260515-144035/client/dist/lumi/official/lumi-calm-float.png
+1.5M.hx-backups/20260516-065915/client/public/lumi/official/lumi-calm-float.png
+1.5M.hx-backups/20260516-065915/client/dist/lumi/official/lumi-calm-float.png
+1.5Mclient/public/lumi/official/lumi-calm-float.png
+1.4M.hx-backups/v47-20260515-144035/client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+1.4M.hx-backups/v47-20260515-144035/client/dist/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+1.4M.hx-backups/v47-20260515-144035/client/analysis.html
+1.4M.hx-backups/20260516-065915/client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+1.4M.hx-backups/20260516-065915/client/dist/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+1.4M.hx-backups/20260516-065915/client/analysis.html
+1.4Mclient/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+1.4Mclient/analysis.html
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_face.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_body-residual.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.png
+1.3M.hx-backups/v47-20260515-144035/client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.png
+1.3M.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.png
+1.3M.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.png
+1.3M.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.png
+1.3M.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.png
+1.3M.hx-backups/v47-20260515-144035/client/dist/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.png
+
+# (truncated — full list captured under the same scan; the pattern above repeats
+#  across both .hx-backups timestamped snapshots for every avatar-core region PNG)
+
+# === TOP 30 EXCLUDING .hx-backups AND hxos-lite-scan (the "real" hot list) ===
+# bytes      path
+ 29214212    docs/inventory/AI_SURFACE_SCAN.txt
+  6985934    docs/inventory/API_USAGE_SCAN.txt
+  2400591    docs/inventory/DATABASE_SCAN.txt
+  1821618    client/docs/diagnostics/domain-firewall-scan.txt
+  1485903    client/public/lumi/official/lumi-calm-float.png
+  1454096    client/analysis.html
+  1417101    client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+  1352086    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.png
+  1348699    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.png
+  1346548    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_body-residual.png
+  1345926    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_face.png
+  1345640    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.png
+  1345179    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.png
+  1345082    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.png
+  1344933    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.png
+  1344840    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.png
+  1344743    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.png
+  1344227    client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.png
+   745196    .agents/skills/ui-ux-pro-max/data/google-fonts.csv
+   724784    client/public/lumi/official/lumi-emotion-orb.png
+   724784    client/public/brand/v17/benefit-understanding.png
+   707790    client/public/lumi/official/lumi-companion.png
+   707790    client/public/brand/v17/benefit-companionship.png
+   682023    client/public/lumi/official/lumi-path.png
+   682023    client/public/brand/v17/benefit-growth.png
+   620329    client/public/lumi/official/lumi-soft-presence.png
+   620329    client/public/brand/v17/benefit-relief.png
+   555495    docs/reports/phase19_20260522T190303Z/configs/package-lock.json
+   526543    package-lock.json
+   469533    docs/changelog.md
+
+# === SUMMARY ===
+# Total tracked files in repo:                              ~7,000+ (3,798 in .hx-backups alone)
+# Top-level dirs by tracked-file count:
+#   .hx-backups   3798 files   ~153,239,994 B
+#   client        1411 files
+#   docs           451 files
+#   .agents        386 files
+#   server         337 files
+#   data           167 files
+#   static-export   67 files
+#   reports         60 files
+#   public          55 files
+#   .archive        52 files
+#   content         47 files
+#   src             43 files
+#   ai              37 files
+#   screenshots     29 files
+#   prompt-os-kernel 27 files
+#   (...trailing tail of single-file roots omitted...)
+#
+# Note: identical file sizes between client/public/lumi/official/lumi-emotion-orb.png and
+#       client/public/brand/v17/benefit-understanding.png (724,784 B) — likely duplicated assets.
+#       Same pattern repeats across 4 pairs (companionship, growth, relief). Flagged for
+#       Phase 59+ asset deduplication review.
