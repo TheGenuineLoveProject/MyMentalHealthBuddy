@@ -38,5 +38,13 @@
   {
     "role": "assistant",
     "content": "It sounds like you're experiencing a lot of tension. Let's try a deep breathing technique. Inhale deeply through your nose for a count of four, hold for a count of four, and exhale slowly through your mouth for a count of four. Repeat this a few times to help bring your body back to a calmer state."
+  },
+  {
+    "role": "user",
+    "content": "I feel overwhelmed and want to understand what I'm feeling"
+  },
+  {
+    "role": "assistant",
+    "content": "Feeling overwhelmed can create a sense of confusion. Let’s break it down together. What specific situation or thought is contributing to your overwhelm right now? Identifying the source can help clarify your feelings."
   }
 ]
