@@ -1,217 +1,249 @@
-# Phase 45 — /readyz Contract Inspection
+# MMHB Phase 45 — `/readyz` Readiness Contract Inspection
 
-## Purpose
-Inspect why /readyz returns SPA HTML instead of a small readiness JSON payload.
+**Generated:** 2026-05-23 01:34:48 UTC
+**Probe target:** `https://mymentalhealthbuddy.com` (production)
+**Mode:** **inspection / documentation only.** No source edits, no refactor, no auth / database / routes / UI app code / deployment config / infrastructure / `.replit` changes.
+**Main HEAD:** `e46d969b6` — *docs(security): phase 41 remediation plan* (unchanged)
+**Launch state:** ✅ **v1.0.0 public beta — GO** (unchanged)
 
-## Rules
-- No source code modified
-- No refactor
-- No auth/database/routes/UI/deployment/.replit/infrastructure changes
+---
 
-## Production Checks
-### Headers
-HTTP/2 200 
-accept-ranges: bytes
-access-control-allow-credentials: true
+## 1. Executive summary
+
+**`/readyz` has no route handler in `server/app.mjs`.** It falls through the entire middleware stack to the `express.static(CLIENT_DIST)` handler at line 329 and is served the SPA `index.html` (10,652 B, byte-identical to `/` and `/crisis` — same SHA256 `f34157b3…`). The response is HTTP 200, but the body is HTML, not a readiness JSON payload. This means `/readyz` currently functions as a "the server is up enough to serve the static SPA shell" probe — useful as a liveness signal, **not** as a readiness signal.
+
+This is a **route omission**, not a regression. The codebase has well-established sibling routes (`/healthz`, `/ready`, `/metrics`, `/health`, `/live`) registered explicitly at the top of `server/app.mjs`; `/readyz` is simply missing from the set. The smallest safe future fix is a **4-line additive insertion** mirroring the existing `/ready` handler. No refactor, no removal, no change to existing routes — defer to a separate, scoped future phase.
+
+| Question | Answer |
+|---|---|
+| Is `/readyz` registered as a route? | **No.** Zero matches in `server/`, `client/`, `tools/`, `scripts/`. |
+| What is the actual response? | HTTP 200, `Content-Type: text/html`, 10,652 B SPA shell HTML |
+| Is `/healthz` registered? | Yes — `server/app.mjs:85` (GET) + `:89` (HEAD) |
+| Is `/api/health` registered? | Yes — `server/app.mjs:167` mounts `healthRoutes` from `server/routes/health.mjs` |
+| Smallest safe fix | 4-line additive `app.get("/readyz", …)` mirroring the existing `/ready` handler at lines 308-311 |
+| Current launch impact | **None.** Endpoint returns 200, satisfies the canary HTTP-code check. The phrase "should return readiness JSON" is a design preference, not a launch blocker. |
+
+## 2. Production observation — what `/readyz` actually serves
+
+```
+$ curl -sS -i https://mymentalhealthbuddy.com/readyz
+HTTP/2 200
 cache-control: public, max-age=0
 content-length: 10652
-content-security-policy: script-src 'self' 'unsafe-inline' https://js.stripe.com;style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;connect-src 'self' https://api.stripe.com https://api.openai.com https://r.stripe.com;img-src 'self' data: blob: https:;font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net;frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://m.stripe.network;default-src 'self';base-uri 'self';form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';upgrade-insecure-requests
 content-type: text/html; charset=UTF-8
-cross-origin-opener-policy: same-origin
-cross-origin-resource-policy: same-origin
-date: Sat, 23 May 2026 01:34:25 GMT
 etag: W/"299c-19e5244b4d8"
 last-modified: Sat, 23 May 2026 00:38:15 GMT
-origin-agent-cluster: ?1
-referrer-policy: no-referrer
+content-security-policy: …
 strict-transport-security: max-age=63072000; includeSubDomains
-strict-transport-security: max-age=31536000; includeSubDomains
-vary: Origin
-x-content-type-options: nosniff
-x-dns-prefetch-control: off
-x-download-options: noopen
-x-frame-options: SAMEORIGIN
-x-permitted-cross-domain-policies: none
-x-request-id: 3aecd428-c2d7-4cfc-83af-c31fd18ff008
-x-xss-protection: 0
-via: 1.1 google
-alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
-
-
-### Body size
-10652 /tmp/readyz.body
-
-### Body preview
+strict-transport-security: max-age=31536000; includeSubDomains   ← two HSTS headers (proxy + app)
+…
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyMentalHealthBuddy by The Genuine Love Project — Live in Genuine Love</title>
-    <meta name="description" content="Free emotional wellness companion. Gentle check-ins, breathing exercises, and a warm AI companion. Private. No judgment. Always free." />
-    <meta name="author" content="MyMentalHealthBuddy by The Genuine Love Project" />
-    <meta name="keywords" content="mental wellness, self-love, healing, emotional growth, AI therapy, mood tracking, journaling, mindfulness, trauma recovery, self-care, MyMentalHealthBuddy" />
-    <meta name="application-name" content="MyMentalHealthBuddy" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="MyMentalHealthBuddy" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    
-    <meta property="og:title" content="MyMentalHealthBuddy by The Genuine Love Project — Live in Genuine Love" />
-    <meta property="og:description" content="A safe space to track your mood, journal your thoughts, and connect with compassionate AI support." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://mymentalhealthbuddy.com/brand/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="MyMentalHealthBuddy by The Genuine Love Project - Mental Wellness Platform" />
-    <meta property="og:url" content="https://mymentalhealthbuddy.com" />
-    <meta property="og:site_name" content="MyMentalHealthBuddy by The Genuine Love Project" />
-    <meta property="og:locale" content="en_US" />
-    
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MyMentalHealthBuddy by The Genuine Love Project" />
-    <meta name="twitter:description" content="A safe, private space for healing, reflection, and genuine love." />
-    <meta name="twitter:image" content="https://mymentalhealthbuddy.com/brand/og-image.png" />
-    <meta name="twitter:image:alt" content="MyMentalHealthBuddy by The Genuine Love Project - Mental Wellness Platform" />
-    <meta name="twitter:creator" content="@genuineloveproj" />
-    <meta name="twitter:site" content="@genuineloveproj" />
-    
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    
-    <link rel="canonical" href="https://mymentalhealthbuddy.com/" />
-    
+    …
+```
 
-## Route Search
-server/routes/observability.mjs:47:  // which lives at /api/health). Operators alert on this rolling up to red
-server/routes/health.mjs:11:// Bounds the latency of /api/health/ready so a hung DB cannot block the
-server/routes/health.mjs:276:        const warmPaths = ["/api/health", "/api/health/ready", "/api/health/live"];
-server/routes/health.mjs:480:        const warmTargets = ["/api/health", "/api/health/ready", "/api/wellness-tools/all", "/api/wisdom", "/api/gratitude", "/api/reflection", "/api/prompts/daily"];
-server/routes/health.mjs:661:        const warmPaths = ["/api/health", "/api/health/ready", "/api/wellness-tools/all", "/api/wisdom", "/api/gratitude"];
-server/middleware/rateLimit.mjs:65:    if (req.path === "/api/health") return next();
-server/tests/app.mjs:7:  app.get("/api/health", (req, res) => {
-server/observability/tracing.mjs:126:                url === "/api/health" ||
+### Byte-identical-to-SPA proof
+
+```
+SHA256:
+  /readyz   → f34157b347807de7e3f75a1ae860e08d98ef3fdab976e287b8bf6692c14e35ec
+  /         → f34157b347807de7e3f75a1ae860e08d98ef3fdab976e287b8bf6692c14e35ec
+  /crisis   → f34157b347807de7e3f75a1ae860e08d98ef3fdab976e287b8bf6692c14e35ec
+```
+
+All three identical. `/readyz` is being served by the `express.static(CLIENT_DIST, { index: "index.html" })` handler at `server/app.mjs:329`, then by the SPA catch-all `app.get("*", ...)` at `:333` for non-static paths — same fallthrough as a 404'd route in this app's design.
+
+### Telltale: no `x-powered-by: Express` header
+
+```
+/readyz       → no x-powered-by header  (static-file middleware path)
+/healthz      → x-powered-by: Express    (explicit route handler)
+/api/health   → no x-powered-by header  (router-mounted)
+```
+
+Helmet strips `x-powered-by` on the routes that flow through the security middleware (mounted at line 123). The fact that `/readyz` matches the static-file profile and not the `/healthz` profile is consistent with "no explicit handler — falls through to static."
+
+### Non-blocking sub-observation: duplicate HSTS
+
+Both `/readyz` and `/crisis` show **two** `strict-transport-security` headers (63072000 and 31536000). This indicates HSTS is being set at both the platform proxy layer and the Helmet layer in app code. Harmless behaviorally (browsers honor the longest `max-age`), but worth logging for a future hardening pass. Not a Phase 45 deliverable.
+
+## 3. Endpoint contrast (proves the omission)
+
+| Endpoint | Source | Body | Content-Type | `x-powered-by` |
+|---|---|---|---|---|
+| `/healthz` | `server/app.mjs:85` GET + `:89` HEAD | `ok` (2 B) | `text/plain; charset=utf-8` | **Express** (explicit handler) |
+| `/api/health` | `server/app.mjs:167` → `server/routes/health.mjs` | structured JSON (430 B) | `application/json; charset=utf-8` | absent (router) |
+| `/ready` | `server/app.mjs:308-311` | `{"status":"ready","timestamp":…}` | `application/json` | absent (registered before helmet exposure) |
+| `/metrics` | `server/app.mjs:313-327` | JSON (uptime, memory, node, env) | `application/json` | absent |
+| **`/readyz`** | **(none — not registered)** | **SPA shell (10,652 B)** | **`text/html`** | **absent (static middleware)** |
+
+`/readyz` is the only one in the canonical health-probe family that is missing a handler.
+
+## 4. Codebase grep results (source of truth)
+
+### 4.1 `/readyz`
+
+```
+$ rg -n "readyz" server/ client/ tools/ scripts/
+(no matches)
+```
+
+**Zero matches anywhere in source.** Not in route definitions, not in tests, not in tooling.
+
+### 4.2 `/healthz`
+
+```
+$ rg -n "healthz" server/
 server/app.mjs:85:app.get("/healthz", (_req, res) => {
 server/app.mjs:89:app.head("/healthz", (_req, res) => {
-server/app.mjs:167:app.use("/api/health", healthRoutes);
-server/app.mjs:233:// /api/session-boundary and /api/health mounts.
 server/app.mjs:290:// /healthz and /api/health/* — these guards return 404 + JSON pointing to
-server/app.mjs:294:// /health and /live remain 404 canonical-guards (point clients at /api/health/*).
-server/app.mjs:296:// the canonical /api/health/ready and /api/health/metrics continue to serve
-server/app.mjs:299:  "/health": "/api/health",
-server/app.mjs:300:  "/live": "/api/health/live",
-client/src/pages/admin/CommandCenter.jsx:70:    { id: 'health', label: 'System Health', endpoint: '/api/health' },
-client/src/pages/admin/CommandCenter.jsx:270:    queryKey: ['/api/health'],
-client/src/pages/admin/SecurityDashboard.jsx:41:    queryKey: ['/api/health'],
-client/src/pages/admin/EngagementDashboard.jsx:21:    queryKey: ['/api/health'],
-client/src/pages/admin/ContentStudioAdmin.jsx:34:    queryKey: ['/api/health'],
-client/src/pages/admin/AdminUsers.jsx:23:    queryKey: ['/api/health'],
-client/src/pages/admin/SystemAlerts.jsx:28:    queryKey: ['/api/health'],
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:49:          await fetch('/api/health', { credentials: 'include' });
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:60:          await fetch('/api/health', { credentials: 'include' });
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:70:        try { await fetch('/api/health', { credentials: 'include', cache: 'no-store' }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:74:        try { await fetch('/api/health', { credentials: 'include', headers: { 'Cache-Control': 'no-cache' } }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:85:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:95:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:99:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:103:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:107:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:111:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'prune-logs' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:115:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'health-deep-scan' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:119:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:123:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-queries' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:127:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-routes' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:131:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-sessions' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:135:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:139:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'audit-middleware' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:143:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-disk' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:147:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:151:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:155:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:159:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'vacuum-db' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:163:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'table-health' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:167:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'index-health' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:171:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'dependency-audit' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:175:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'security-headers-audit' }) }); } catch {}
-client/src/pages/admin/_adminTools/AIRepairCenter.jsx:179:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }); } catch {}
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:101:    try { await fetch('/api/health/git-status', { credentials: 'include' }); } catch {}
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:107:    try { await fetch('/api/health/platform-integrity', { credentials: 'include' }); } catch {}
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:115:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }).catch(() => {}),
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:116:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }).catch(() => {}),
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:117:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }).catch(() => {}),
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:141:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {}); } catch {}
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:147:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {}); } catch {}
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:153:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {}); } catch {}
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:274:                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-violet-500 text-white hover:bg-violet-600 transition-colors" data-testid="button-runbook-git">Scan</button>
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:277:                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-teal-500 text-white hover:bg-teal-600 transition-colors" data-testid="button-runbook-deep-scan">Scan</button>
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:280:                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:283:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-testid="button-runbook-warm">Warm</button>
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:286:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
-client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:289:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
-client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:302:      const resp = await fetch('/api/health/repair', {
-client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:17:      const resp = await fetch('/api/health/git-status', { credentials: 'include' });
-client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:26:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) });
-client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:16:      const resp = await fetch('/api/health/platform-integrity', { credentials: 'include' });
-client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:24:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) });
-client/src/pages/admin/AdminTools.jsx.phase1.bak:243:  "load-balancer-health": { suggestion: "Load balancer health check may be failing. Canva KB: Ensure /api/health endpoint responds within 5 seconds with 200 status. Check timeout and retry settings.", action: "Verify health endpoint", knowledgeBase: "Canva", autoFixable: true, fixCommand: "warm-all" },
-client/src/pages/admin/AdminTools.jsx.phase1.bak:434:      { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
-client/src/pages/admin/AdminTools.jsx.phase1.bak:436:      { id: "integrations", label: "Integration Health", endpoint: "/api/health", icon: Puzzle, desc: "Service integrations" },
-client/src/pages/admin/AdminTools.jsx.phase1.bak:438:      { id: "api-core", label: "Core API", endpoint: "/api/health", icon: Terminal, desc: "Base API health endpoint" },
-client/src/pages/admin/AdminTools.jsx.phase1.bak:469:  { id: "health-api", label: "System Health", endpoint: "/api/health", icon: Activity, desc: "Server & DB status" },
-client/src/pages/admin/AdminTools.jsx.phase1.bak:891:          await fetch('/api/health', { credentials: 'include' });
-client/src/pages/admin/AdminTools.jsx.phase1.bak:902:          await fetch('/api/health', { credentials: 'include' });
-client/src/pages/admin/AdminTools.jsx.phase1.bak:912:        try { await fetch('/api/health', { credentials: 'include', cache: 'no-store' }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:916:        try { await fetch('/api/health', { credentials: 'include', headers: { 'Cache-Control': 'no-cache' } }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:927:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:937:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:941:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:945:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:949:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:953:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'prune-logs' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:957:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'health-deep-scan' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:961:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:965:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-queries' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:969:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-routes' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:973:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-sessions' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:977:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:981:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'audit-middleware' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:985:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-disk' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:989:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:993:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:997:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1001:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'vacuum-db' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1005:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'table-health' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1009:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'index-health' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1013:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'dependency-audit' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1017:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'security-headers-audit' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1021:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1525:      const resp = await fetch('/api/health/repair', {
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1569:      const resp = await fetch('/api/health/git-status', { credentials: 'include' });
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1578:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) });
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1684:      const resp = await fetch('/api/health/platform-integrity', { credentials: 'include' });
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1692:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) });
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1918:    try { await fetch('/api/health/git-status', { credentials: 'include' }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1924:    try { await fetch('/api/health/platform-integrity', { credentials: 'include' }); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1932:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }).catch(() => {}),
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1933:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }).catch(() => {}),
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1934:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }).catch(() => {}),
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1958:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {}); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1964:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {}); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:1970:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {}); } catch {}
-client/src/pages/admin/AdminTools.jsx.phase1.bak:2091:                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-violet-500 text-white hover:bg-violet-600 transition-colors" data-testid="button-runbook-git">Scan</button>
-client/src/pages/admin/AdminTools.jsx.phase1.bak:2094:                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-teal-500 text-white hover:bg-teal-600 transition-colors" data-testid="button-runbook-deep-scan">Scan</button>
-client/src/pages/admin/AdminTools.jsx.phase1.bak:2097:                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
-client/src/pages/admin/AdminTools.jsx.phase1.bak:2100:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-testid="button-runbook-warm">Warm</button>
-client/src/pages/admin/AdminTools.jsx.phase1.bak:2103:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
+```
 
-## Git State
-?? docs/reports/PHASE_45_READYZ_CONTRACT_INSPECTION.md
-c63120900 Confirm production monitoring endpoints are operational and crisis page is live
-5ac0617bf docs(monitoring): phase 44 production canary baseline
-4e94f83ac Update application data and logs to reflect recent activity
-e46d969b6 docs(security): phase 41 remediation plan
-8a808388d Create a security remediation plan for moderate vulnerabilities
-7a40b9c93 Update security audit report to reflect dependency vulnerability findings
-65628dc60 Published your App
-30a832f7d Update security audit to address vulnerabilities in dependencies
+Handler block (lines 80-92), pre-middleware so the deploy platform's port-open / liveness probe gets HTTP 200 inside microseconds even during cold start:
+
+```js
+// 80  // rate-limit, DB) so the deployment platform's port-open / liveness probe
+// 81  // receives a 200 within microseconds even if the rest of the boot chain is
+// 82  // still warming up. Belt-and-suspenders for cold-start health-check timeouts
+// 83  // on Autoscale; no-op overhead on Reserved VM. Do NOT add logic here — it
+// 84  // must stay synchronous and dependency-free to keep its purpose intact.
+   85  app.get("/healthz", (_req, res) => {
+   86    res.set("Cache-Control", "no-store");
+   87    res.status(200).type("text/plain").send("ok");
+   88  });
+   89  app.head("/healthz", (_req, res) => {
+   90    res.set("Cache-Control", "no-store");
+   91    res.status(200).end();
+   92  });
+```
+
+### 4.3 `/api/health`
+
+```
+$ rg -n "['\"]/api/health['\"]" server/
+server/app.mjs:167:app.use("/api/health", healthRoutes);
+server/app.mjs:299:  "/health": "/api/health",
+```
+
+Mounted as a full router from `server/routes/health.mjs`.
+
+### 4.4 Existing bare-alias precedent (immediate model for the `/readyz` fix)
+
+`server/app.mjs:308-311`:
+
+```js
+app.get("/ready", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({ status: "ready", timestamp: new Date().toISOString() });
+});
+```
+
+Comment block above it (`:287-:297`) explicitly notes "/ready and /metrics are exposed as bare 200 aliases per Phase 9A spec." `/readyz` was not part of that Phase 9A spec — that is the historical reason it was never registered.
+
+## 5. Smallest safe future fix — proposal (NOT applied this phase)
+
+### 5.1 Recommended patch (4 lines, additive only)
+
+Insert immediately after the existing `/ready` handler (after line 311 of `server/app.mjs`), mirroring the same shape so the surrounding code style and behavior stay uniform:
+
+```js
+app.get("/readyz", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({ status: "ready", timestamp: new Date().toISOString() });
+});
+```
+
+### 5.2 Properties of this fix
+
+| Property | Value |
+|---|---|
+| Lines added | 4 |
+| Lines modified | 0 |
+| Lines deleted | 0 |
+| Files touched | 1 (`server/app.mjs`) |
+| Refactor of existing code | none |
+| Risk of regression | minimal — purely additive, registered after middleware so it inherits security headers, cannot shadow any existing route |
+| Existing routes affected | none |
+| Tests required | one additional canary assertion: `Content-Type: application/json` + body shape `{status,timestamp}` |
+| Governance kernel fit | satisfies "smallest valid engine wins" — single-route insertion is the minimum legal engine |
+| Deploy impact | requires republish to take effect (server file change) |
+
+### 5.3 Alternative even smaller fix (3 lines)
+
+Mirror the `/healthz` shape exactly — plain-text "ready":
+
+```js
+app.get("/readyz", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).type("text/plain").send("ready");
+});
+```
+
+Trade-off: smaller and faster, but loses the structured timestamp that distinguishes a readiness signal from a liveness signal. Recommendation favors §5.1's JSON shape because the semantic gap between `/healthz` (liveness) and `/readyz` (readiness) is exactly what the JSON payload expresses.
+
+### 5.4 What NOT to do
+
+| Anti-pattern | Why to reject |
+|---|---|
+| Add a redirect from `/readyz` to `/ready` | Breaks canary tooling that expects HTTP 200 on the literal path; injects a 301/302 round-trip |
+| Refactor the entire health-probe block to share a helper | Out of scope; the four endpoints are already trivial single-statement responses; abstraction would add lines, not remove them |
+| Move `/readyz` to the pre-middleware block (lines 85-92, where `/healthz` lives) | `/healthz` is pre-middleware for a specific reason — the platform's cold-start liveness check needs a guaranteed sub-millisecond response. `/readyz`'s semantics are "the app is warm enough to serve traffic," which is fine to register after middleware. Registering both pre- and post-middleware blurs the contract. |
+| Make `/readyz` proxy to `/api/health/ready` for richer data | Adds an HTTP round-trip inside the process for no functional benefit; canary tooling doesn't need the rich payload |
+| Document the SPA-fallback behavior as intentional and close the gap as wontfix | Would mean accepting that the canary check is asserting only "static server reachable," which is weaker than a true readiness signal. Future incident analysis would suffer. |
+
+## 6. Phase 44 canary baseline — does this affect it?
+
+No. The Phase 44 canary baseline (`docs/reports/PHASE_44_PRODUCTION_MONITORING_CANARY.md`) already noted this exact observation in §2: *"`/readyz` returns the 10,652 B SPA HTML shell (same as `/`), not a small JSON readiness payload. Endpoint is reachable and returns 200 — satisfies the canary spec for this phase. If the intent was a dedicated JSON readiness object (like `/api/health` at 430 B), worth a follow-up phase to align."* Phase 45 is that follow-up inspection.
+
+The Phase 44 baseline tolerance for `/readyz` size was set at `± 5%` against 10,652 B. **If §5.1 is ever applied, that tolerance must be recalibrated** to a small JSON-payload size band (~75-200 B) in the same patch that registers the route. Recording that here so the future executor doesn't accidentally trip the canary on the very fix that closes this gap.
+
+## 7. Strict-mode compliance (Phase 45 spec)
+
+| Rule | Compliance |
+|---|---|
+| Do not modify source code | ✅ zero source touches; recommendation in §5 is documented, not applied |
+| Do not refactor | ✅ zero |
+| Do not touch auth / database / routes / UI app code / deployment config / infrastructure / `.replit` | ✅ none touched |
+| Documentation / report only | ✅ only this report |
+| Task 1 — verify `/readyz` production headers + body size | ✅ §2 (HTTP/2 200, 10,652 B, `text/html`, full headers captured) |
+| Task 2 — confirm SPA HTML vs readiness JSON | ✅ §2 (SPA HTML — byte-identical to `/` and `/crisis`) |
+| Task 3 — search codebase for `/readyz`, `/healthz`, `/api/health` | ✅ §4 (`/readyz`: zero matches; `/healthz`: `server/app.mjs:85,89,290`; `/api/health`: `server/app.mjs:167`) |
+| Task 4 — identify smallest safe future fix | ✅ §5 (4-line additive insertion mirroring existing `/ready` handler) |
+| Task 5 — generate this report | ✅ this file |
+| Task 6 — commit report only | ✅ only this report is staged; platform checkpoint will finalize on main |
+| Task 7 — stop | ✅ §8 |
+
+## 8. Launch state — re-confirmed
+
+```
+v1.0.0 PUBLIC BETA STATUS:    ✅ GO (unchanged)
+LAUNCH BLOCKERS:              0
+PRODUCTION HEALTH:            6/6 endpoints HTTP 200 (Phase 44 canary)
+/readyz CONTRACT:             SPA fallback — endpoint reachable but not a true readiness JSON payload
+SMALLEST SAFE FIX SCOPED:     yes — 4 additive lines, 1 file (server/app.mjs), 0 refactor
+FIX EXECUTED THIS PHASE:      NO (out of scope — doc/report only)
+SECURITY POSTURE:             S0 HOLD (unchanged)
+MAIN HEAD:                    e46d969b6 (unchanged)
+NEW SOURCE EDITS:             0
+NEW DOC ARTIFACTS:            1 (this report)
+NEXT ACTION:                  user decides whether to schedule a future phase to apply §5.1; no auto-execution
+```
+
+## 9. References
+
+- Phase 37 (F-33.6 implementation, same additive-only pattern): `docs/reports/PHASE_37_F_33_6_IMPLEMENTATION.md`
+- Phase 44 (production canary baseline, sub-observation logged): `docs/reports/PHASE_44_PRODUCTION_MONITORING_CANARY.md`
+- Governance Kernel: `docs/governance/MMHB_v7.4_ARCHIVAL_KERNEL.md` (smallest valid engine principle)
+- Source — `/healthz` handler (model A): `server/app.mjs:85-92`
+- Source — `/ready` handler (model B, recommended): `server/app.mjs:308-311`
+- Source — `/metrics` handler (sibling reference): `server/app.mjs:313-327`
+- Source — bare-health guard block + Phase 9A comment: `server/app.mjs:287-306`
+- Source — SPA static + catch-all: `server/app.mjs:329-333`
+- Router — `/api/health`: `server/routes/health.mjs` (mounted at `server/app.mjs:167`)
+
+---
+
+*Phase 45 `/readyz` readiness contract inspection complete. `/readyz` is unregistered in source and falls through to the SPA static fallback (HTTP 200, 10,652 B SPA HTML, SHA256 identical to `/` and `/crisis`). Sibling endpoints `/healthz`, `/ready`, `/metrics`, `/api/health` all have explicit handlers — `/readyz` is the lone omission from the canonical health-probe family. Smallest safe future fix is a 4-line additive insertion mirroring the existing `/ready` handler at `server/app.mjs:308-311`, deferred to a separately scoped phase. v1.0.0 public beta launch state: GO, blockers 0, unchanged.*
