@@ -1,6 +1,7 @@
 # MMHB Phase 55 — Platform Cohesion & Comprehension Audit
 
 **Generated:** 2026-05-23 20:01 UTC
+**Finalized:** 2026-05-23 20:01 UTC (this revision adds §15 Top-10 ranked risks + finalize stamp + safest phase order)
 **Mode:** **documentation + analysis only.** No source code, refactor, deps, auth, DB, routes, UI, deployment config, `.replit`, or infrastructure changes. No `npm audit fix`. No package updates.
 **Local HEAD:** `caaac72c6` *Update documentation to verify GitHub synchronization and system health* (Phase 54 checkpoint)
 **Production deployed commit:** `ed813afab` *Published your App*
@@ -329,7 +330,197 @@ NEXT PHASE (suggested):          doc-only Phase 56 — pick a single §11 item a
                                  BHCE-relevant, highest user-impact-per-risk
 ```
 
-## 15. References
+## 15. **FINALIZATION ADDENDUM** — Top 10 cohesion risks (ranked)
+
+The audit body (§§3-9) enumerates findings by category. This section ranks the **single most consequential 10** across all categories, with exact file paths and the **no-fix-yet recommendation** for each. Order is **risk × user-impact**, descending.
+
+### Risk #1 — Brand palette divergence between code and kernel doc
+
+- **Severity:** HIGH (visible to every user, every surface)
+- **Files:**
+  - `client/src/brand/tokens.ts` (lines 8-16: `serenitySage #8FBF9F`, `eternalGold #D4AF37`, `softBlush #E5B8AE`, `deepTeal #2F5D5D`)
+  - `client/src/lumi-tokens/colors/colorTokens.ts` (lines 10-21: duplicate token surface)
+  - `tailwind.config.js` (mirrors `tokens.ts`: `sageGreen #8fbf9f`, `metallicGold #d4af37`)
+  - `replit.md` (governance kernel section: canonical palette `#A8C9A0`, `#FFD93D`, `#FF9A8B`, `#74C0FC`, `#C8B6FF`, `#A8D5BA`, `#FFB88C`, `#E8913A`)
+- **No-fix-yet rationale:** the resolution is a **design + governance decision** (update kernel to match the richer "Sacred" implementation, OR migrate code to match the canonical pastel set). Both are deliberate phases requiring user sign-off. Touching either side in this audit would prejudge the decision.
+
+### Risk #2 — Four parallel chat surfaces with independent state
+
+- **Severity:** HIGH (largest single cohesion break; BHCE-adjacent because each surface must independently route through governance filters)
+- **Files:**
+  - `client/src/components/AIChat.jsx` (legacy)
+  - `client/src/components/chat/AIChatPanel.tsx`
+  - `client/src/lumi-conversation/components/LumiConversationPanel.tsx` (current Lumi-domain)
+  - `client/src/components/AICompanion.jsx` (floating widget; hardcoded `INITIAL_MESSAGES`)
+- **No-fix-yet rationale:** consolidation requires deciding the canonical surface, migrating routes that reference any of the others, and verifying the AI safety pipeline still gates the consolidated surface. Multi-file, multi-state-store, governance-relevant — needs a dedicated phase.
+
+### Risk #3 — Plan-feature labeling monetizes healing capability
+
+- **Severity:** HIGH (structural — Primary Law boundary)
+- **Files:**
+  - `server/routes/billing.mjs` (lines 19-22: plan feature list contains `crisis_support`, `healing_journeys`)
+- **No-fix-yet rationale:** renaming plan-feature strings would change the Stripe-facing plan metadata + customer-facing pricing copy in a single edit; needs explicit user approval and likely a Stripe-side mirror edit. Document non-gating explicitly as an alternative path. Either resolution is a deliberate phase.
+
+### Risk #4 — Footer fivelet with asymmetric `/crisis` link presence
+
+- **Severity:** MED-HIGH (BHCE-adjacent — the visible crisis CTA may be missing on pages that mount a non-canonical footer)
+- **Files:**
+  - `client/src/components/Footer.jsx`
+  - `client/src/components/SacredFooter.jsx`
+  - `client/src/components/GlowFooter.jsx`
+  - `client/src/components/ui/ReflectionFooter.jsx`
+  - `client/src/components/layout/Footer.tsx` (line 78: confirmed `/crisis` link)
+- **No-fix-yet rationale:** triage requires inspecting each non-canonical footer for `/crisis` link presence, then either adding the link or migrating its pages to `layout/Footer.tsx`. The `/crisis` route itself remains reachable via direct nav, so this is not a production regression — but it weakens the asymmetric-risk principle and should be the **first** subject of a planned phase.
+
+### Risk #5 — ~125 of 141 backend route files unmounted
+
+- **Severity:** MED (repo size, bisect noise, semantic drift in `/api/health.totalRoutes` reporter)
+- **Files (representative examples):**
+  - `server/routes/dialectics.mjs`
+  - `server/routes/creativity.mjs`
+  - `server/routes/wisdom.mjs`
+  - `server/routes/mood.mjs`
+  - `server/routes/social-posts.mjs` + `social-posting.mjs`
+  - `server/routes/adminBilling.mjs`
+  - `server/routes/healing.mjs` (vs mounted `ai.healing.mjs`)
+  - `server/routes/metricsSummary.mjs`
+  - `server/routes/onboarding.mjs`
+  - various `server/routes/*.bak`
+- **No-fix-yet rationale:** archive (not delete) each unmounted file to `server/routes/_archive/` after confirming no import references. Single sweeping edit; needs verification that nothing dynamic-imports any of them. Dedicated phase warranted.
+
+### Risk #6 — Two onboarding routes / two mood routes
+
+- **Severity:** MED (journey continuity break — user lands on different flows depending on entry path)
+- **Files:**
+  - `client/src/pages/Onboarding.tsx` (route registered)
+  - `client/src/pages/OnboardingFlow.jsx` (route registered)
+  - `client/src/pages/MoodPage.jsx` (`/mood`)
+  - `client/src/pages/dashboard/MoodTracker.jsx` (`/mood-tracker`)
+- **No-fix-yet rationale:** choosing a winner per pair requires UX research on which flow users actually complete + state-store unification. Two separate consolidation phases.
+
+### Risk #7 — `FlowStepCheckout` step name carries commerce connotation in a healing flow
+
+- **Severity:** MED (HEALING domain naming hygiene)
+- **Files:**
+  - `client/src/checkin-flow/components/FlowStepCheckout.tsx`
+- **No-fix-yet rationale:** rename across all imports + state-machine references. Small, mechanical, but touches multiple files. Naming-hygiene phase.
+
+### Risk #8 — `btn-secondary-premium` CSS class on Achievements panel (cross-domain hint)
+
+- **Severity:** MED (HEALING visual)
+- **Files:**
+  - `client/src/pages/dashboard/Insights.tsx` (line 180)
+- **No-fix-yet rationale:** rename the CSS class + audit any other usages. Trivial mechanically; deferred for batch hygiene phase alongside Risk #7.
+
+### Risk #9 — Twelve top-level shadow directories mirror `client/`+`server/`
+
+- **Severity:** MED (architecture cohesion + repo hygiene; some are imported, some are dead)
+- **Files / paths:**
+  - `agents/`, `ai/`, `api/`, `app/`, `auth/`, `automation/`, `brand/`, `components/`, `content/`, `data/`, `database/`, `db/`
+- **No-fix-yet rationale:** classifying each requires (a) full import graph analysis, (b) determining whether each predates or postdates `client/`+`server/`, (c) per-directory archive-or-keep decision. Largest scope of any cleanup; needs dedicated triage phase with a per-directory plan.
+
+### Risk #10 — `JSON.stringify` error path in chat route returns raw error to client
+
+- **Severity:** MED (PLATFORM debug contamination of HEALING surface, conditional on UI handling)
+- **Files:**
+  - `server/replit_integrations/chat/routes.ts` (line 110)
+- **No-fix-yet rationale:** depends on UI-side error rendering — if the chat UI surfaces raw JSON, that is a platform-debug leak into a healing surface. Verify UI handling first; if confirmed leak, wrap response in a user-safe shape. Single-file edit but needs UI verification first.
+
+### Summary table — Top 10 ranked risks
+
+| # | Risk | Severity | Primary path | Affected scores |
+|---|---|---|---|---|
+| 1 | Brand palette drift | HIGH | `client/src/brand/tokens.ts` + kernel doc | UX -15, Duplication -10 |
+| 2 | 4 chat surfaces | HIGH | `lumi-conversation/components/LumiConversationPanel.tsx` (canonical?) | UX -15, Duplication -15 |
+| 3 | Plan-feature labeling | HIGH | `server/routes/billing.mjs:19-22` | Governance -10 |
+| 4 | Footer fivelet | MED-HIGH | `client/src/components/layout/Footer.tsx` (canonical) | UX -5, BHCE-adjacent |
+| 5 | 125 unmounted route files | MED | `server/routes/*` | Architecture -10, Maintain -10 |
+| 6 | 2 onboarding / 2 mood routes | MED | `client/src/pages/{Onboarding,OnboardingFlow,MoodPage,dashboard/MoodTracker}.{tsx,jsx}` | UX -10 |
+| 7 | "Checkout" in breathing flow | MED | `client/src/checkin-flow/components/FlowStepCheckout.tsx` | UX -3 |
+| 8 | `premium` CSS class in healing | MED | `client/src/pages/dashboard/Insights.tsx:180` | Governance -2 |
+| 9 | 12 top-level shadow dirs | MED | `agents/`, `ai/`, `api/`, …, `db/` | Architecture -15 |
+| 10 | Raw error JSON in chat route | MED | `server/replit_integrations/chat/routes.ts:110` | Governance -3, AI-boundary risk |
+
+### Universal no-fix-yet position
+
+**No remediation is performed in this phase.** Every risk above is documented with its file path so a future phase can address it with the smallest valid engine. The MMHB v7.4 kernel rule applies: **CSS fix > React patch > new component > new page > new service**. Each risk should be matched to its smallest engine before any edit is proposed.
+
+### Safest future phase order
+
+The order below minimizes blast radius per step, frontloads BHCE-relevant items, and saves cross-cutting risks for last:
+
+| Step | Phase | Risk addressed | Engine size | Blast radius |
+|---:|---|---|---|---|
+| 1 | Phase 56 — Footer triage | #4 | small (CSS + component renames) | low — confirm `/crisis` link presence per footer |
+| 2 | Phase 57 — Plan-feature labeling | #3 | small (string edit + doc) | low if doc-route chosen; med if Stripe-route chosen |
+| 3 | Phase 58 — Naming hygiene batch | #7, #8 | small (rename) | low |
+| 4 | Phase 59 — Brand palette resolution | #1 | medium (cross-file color migration OR kernel doc edit) | high if code migration; low if kernel update |
+| 5 | Phase 60 — Chat surface consolidation | #2 | large (component + state + routes) | high — defer until step 4 done so colors stable |
+| 6 | Phase 61 — Onboarding + mood consolidation | #6 | medium | medium |
+| 7 | Phase 62 — Error-path verification + fix | #10 | small if UI confirmed safe; medium otherwise | low |
+| 8 | Phase 63 — Unmounted route archive | #5 | medium (single sweep) | low — files already unmounted |
+| 9 | Phase 64 — Shadow-tree triage | #9 | largest (12 directories, per-directory plans) | highest — last |
+
+**Rule:** never start a step if production health is anything other than ✅ GO. Apply the disaster recovery runbook §3 if a deploy fails after any step.
+
+### Final production health confirmation (Phase 55 finalize stamp)
+
+Probed 2026-05-23 20:01 UTC. Same deploy as Phase 53/54 throughout this audit.
+
+| Endpoint | HTTP | Verdict |
+|---|---:|---|
+| `/healthz` | 200 | ✅ |
+| `/readyz` | 200 | ✅ JSON contract live |
+| `/api/health` | 200 | ✅ 17/17 invariants pass |
+| `/crisis` | 200 | ✅ F-33.6 5/5 |
+
+- `version 2.0.0`, `environment production`, `database.connected true`
+- `startedAt 2026-05-23T19:32:26.510Z` — unchanged across Phases 53, 54, 55
+- `services.{stripe, resend, perplexity, sentry} = true × 4`
+- `softLaunch: false`
+
+### Final launch state summary (Phase 55 finalize stamp)
+
+```
+╔════════════════════════════════════════════════════════════════════════╗
+║  MMHB v1.0.0 PUBLIC BETA — PHASE 55 FINALIZATION STAMP                 ║
+║  2026-05-23 20:01 UTC                                                  ║
+╠════════════════════════════════════════════════════════════════════════╣
+║  Launch state:                  ✅ GO                                  ║
+║  Launch blockers:               0                                      ║
+║  GitHub sync:                   ✅ in sync (Phase 54 verified)         ║
+║  Deployed commit:               ed813afab                              ║
+║  Production health:             ✅ all 4 required endpoints PASS       ║
+║  F-33.6 on /crisis:             ✅ 5/5 (source + live)                 ║
+║  Same deploy throughout Phase:  ✅ startedAt 19:32:26.510Z stable      ║
+║                                                                        ║
+║  Platform cohesion (new):       62 / 100 mean                          ║
+║    - Architecture cohesion:     52 / 100                               ║
+║    - Duplication risk:          38 / 100                               ║
+║    - Governance integrity:      82 / 100                               ║
+║    - Emotional UX continuity:   68 / 100                               ║
+║    - Operational maintain.:     71 / 100                               ║
+║                                                                        ║
+║  Top-10 risks documented:       ✅ §15 of this report                  ║
+║  Affected file paths captured:  ✅ per risk                            ║
+║  No-fix-yet position:           ✅ adopted universally                 ║
+║  Safest future phase order:     ✅ Phase 56 → 64 sequenced             ║
+║                                                                        ║
+║  Source files modified:         0                                      ║
+║  Doc artifacts created:         9                                      ║
+║  Dep changes / npm audit fix:   none                                   ║
+║  Kernel-locked files touched:   none (.replit, vite.config.ts,         ║
+║                                  drizzle.config.ts, package.json,      ║
+║                                  package-lock.json, server/app.mjs)    ║
+║                                                                        ║
+║  Security posture:              S0 HOLD — 6 mod / 0 hi / 0 crit        ║
+║  Next phase (recommended):      Phase 56 — Footer triage               ║
+╚════════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 16. References
 
 - Companion docs (this phase): §2
 - Operations stack (Phases 48-52)
