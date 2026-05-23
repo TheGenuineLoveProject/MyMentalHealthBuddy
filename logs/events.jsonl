@@ -396,3 +396,6 @@
 {"type":"buddy_panel_viewed","guestId":"g_mpespeaf_lgdi1b","metadata":{"surface":"start","state":"overwhelmed"},"ts":1779498708540}
 {"type":"buddy_grounding_visible","guestId":"g_mpespeaf_lgdi1b","metadata":{"state":"overwhelmed"},"ts":1779498708550}
 {"type":"streak_incremented","guestId":"g_mpespeaf_lgdi1b","metadata":{"day":1},"ts":1779498708578}
+{"type":"buddy_accessibility_ready","guestId":"g_mpespeaf_lgdi1b","metadata":{},"ts":1779501448461}
+{"type":"buddy_panel_viewed","guestId":"g_mpespeaf_lgdi1b","metadata":{"surface":"start","state":"calm"},"ts":1779501448464}
+{"type":"start_page_click","guestId":"g_mpespeaf_lgdi1b","metadata":{},"ts":1779501448469}
