@@ -99,3 +99,27 @@ backups/
 production-backups/
 backups/
 *.tar.gz
+
+# ===== HX-OS GENERATED BACKUPS =====
+.hx-backups/
+backups/
+production-backups/
+
+# ===== GENERATED INVENTORY / SCANS =====
+docs/inventory/*.txt
+docs/inventory/**/*.txt
+
+# ===== RUNTIME / CACHE =====
+*.log
+*.tmp
+*.cache
+
+# ===== BUILD OUTPUTS =====
+dist/
+build/
+.tmp/
+
+# ===== LOCAL DATABASES =====
+*.sqlite
+*.db
+

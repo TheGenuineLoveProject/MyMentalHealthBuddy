@@ -1,1 +1,0 @@
-import{a as o}from"./rolldown-runtime-DVDPw_7t.js";import{h as i,m}from"./vendor-charts-ENHkH8XD.js";var s=o(i(),1),l=m(),d=(0,s.forwardRef)(({className:e="",children:r,...a},t)=>(0,l.jsx)("label",{ref:t,className:`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${e}`,...a,children:r}));d.displayName="Label";export{d as t};
