@@ -310,6 +310,11 @@ app.get("/ready", (_req, res) => {
   res.status(200).json({ status: "ready", timestamp: new Date().toISOString() });
 });
 
+app.get("/readyz", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({ status: "ready", timestamp: new Date().toISOString() });
+});
+
 app.get("/metrics", (_req, res) => {
   const mem = process.memoryUsage();
   res.set("Cache-Control", "no-store");
