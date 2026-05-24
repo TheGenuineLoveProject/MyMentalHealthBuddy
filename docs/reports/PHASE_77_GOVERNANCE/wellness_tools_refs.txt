@@ -1,0 +1,50 @@
+client/src/pages/admin/EngagementDashboard.jsx:    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/AdminTools.jsx.phase1.bak:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/admin/_adminToolsShared.js:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/_adminToolsShared.js:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/_adminToolsShared.js:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/AdminTools.jsx.phase2.bak:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/tools/WeeklyReflection.jsx:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/weekly-reflection", data),
+client/src/pages/tools/PHQ9Assessment.jsx:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/SleepQualityCalculator.jsx:            href="/wellness-tools-hub"
+client/src/pages/tools/NervousSystemCheck.jsx:            href="/wellness-tools-hub"
+client/src/pages/tools/ManipulationDetector.jsx:            href="/wellness-tools-hub"
+client/src/pages/tools/CognitiveDistortionChecker.jsx:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/BoundaryBuilderTool.jsx:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/BreathPacer.jsx:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/GAD7Assessment.jsx:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/MeaningMap.jsx:        const res = await fetch("/api/wellness-tools/meaning-map/latest", { credentials: "include" });
+client/src/pages/tools/MeaningMap.jsx:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/meaning-map", data),
+client/src/pages/tools/GriefLetter.jsx:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/grief-letter", data),
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:    href: "/wellness-tools-hub",
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:            href="/wellness-tools-hub"
+client/src/pages/WellnessToolsHub.jsx:          <NewsletterSignup variant="inline" source="wellness-tools-hub" />
+client/src/pages/DesignSystemV2.jsx:                    <Link href="/wellness-tools-hub" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-tools">Wellness Tools</Link>
+client/src/pages/MovementSnacksPage.jsx:    queryKey: ["/api/wellness-tools/movement"],
+client/src/pages/MovementSnacksPage.jsx:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/movement", data),
+client/src/pages/MovementSnacksPage.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/movement"] });
+client/src/pages/BoundariesPage.jsx:    queryKey: ["/api/wellness-tools/boundaries"],
+client/src/pages/BoundariesPage.jsx:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/boundaries", data),
+client/src/pages/BoundariesPage.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
+client/src/pages/BoundariesPage.jsx:    mutationFn: (id) => apiRequest("DELETE", `/api/wellness-tools/boundaries/${id}`),
+client/src/pages/BoundariesPage.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
+client/src/pages/CoherenceLadderPage.jsx:    queryKey: ["/api/wellness-tools/coherence"],
+client/src/pages/CoherenceLadderPage.jsx:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/coherence", data),
+client/src/pages/CoherenceLadderPage.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
+client/src/pages/ValuesFinderPage.jsx:    queryKey: ["/api/wellness-tools/values"],
+client/src/pages/ValuesFinderPage.jsx:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/values", data),
+client/src/pages/ValuesFinderPage.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/values"] });
+client/src/pages/Challenge.jsx:        const res = await fetch("/api/wellness-tools/challenge-progress", { credentials: "include" });
+client/src/pages/Challenge.jsx:      const res = await fetch("/api/wellness-tools/challenge-progress", {
+client/src/components/admin/GroupedHealthOverview.jsx:          { label: 'AI/Wellness', tools: allTools.filter(t => ['ai-chat','therapy','mood-tracker','journal','gratitude','reflection','wellness-tools','mirror','prompts','states'].includes(t.id)), color: 'text-purple-600' },
+client/src/config/toolCategories.js:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/_quarantine/orphans/SacredNavBar.jsx:            data-testid="nav-wellness-tools"
+client/src/App.jsx:              <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
+client/src/App.jsx:              <Route path="/wellness-tools">{() => <PracticeLibrary />}</Route>
+client/src/App.jsx:              <Route path="/explore">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:              <Route path="/discover">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:              <Route path="/toolkit">{() => <Redirect to="/wellness-tools" />}</Route>

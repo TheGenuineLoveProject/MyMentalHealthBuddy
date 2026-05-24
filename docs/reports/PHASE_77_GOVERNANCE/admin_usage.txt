@@ -1,0 +1,350 @@
+client/src/pages/admin/CommandCenter.jsx:import AdminNavGrid from "@/components/admin/AdminNavGrid";
+client/src/pages/admin/CommandCenter.jsx:export default function AdminCommandCenter() {
+client/src/pages/admin/CommandCenter.jsx:    title: "Admin Command Center - The Genuine Love Project",
+client/src/pages/admin/CommandCenter.jsx:        <SafeBoundary label="Admin Nav Grid">
+client/src/pages/admin/CommandCenter.jsx:          <AdminNavGrid />
+client/src/pages/admin/SecurityDashboard.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/SecurityDashboard.jsx:    return <AdminErrorBanner title="Unable to load security dashboard" onRetry={refetchOverview} />;
+client/src/pages/admin/SecurityDashboard.jsx:      <SEO title="Security Dashboard — Admin" noindex />
+client/src/pages/admin/AdminPublishing.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/AdminPublishing.jsx:export default function AdminPublishing() {
+client/src/pages/admin/AdminPublishing.jsx:    return <AdminErrorBanner title="Unable to load publishing data" onRetry={refetchRegistry} />;
+client/src/pages/admin/AdminPublishing.jsx:      <SEO title="Blog Publishing — Admin" noindex />
+client/src/pages/admin/SocialStudioAdmin.jsx:export default function SocialStudioAdmin() {
+client/src/pages/admin/SocialStudioAdmin.jsx:                <span className="text-sm font-medium">Admin Dashboard</span>
+client/src/pages/admin/NarrativeDrafts.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/NarrativeDrafts.jsx:          <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>Admin Access Required</h2>
+client/src/pages/admin/NarrativeDrafts.jsx:    return <AdminErrorBanner title="Unable to load narrative drafts" onRetry={refetch} />;
+client/src/pages/admin/NarrativeDrafts.jsx:      <SEO title="Narrative Drafts - Admin" />
+client/src/pages/admin/RevenueAdmin.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/RevenueAdmin.jsx:export default function RevenueAdmin() {
+client/src/pages/admin/RevenueAdmin.jsx:  if (hasError) return <AdminErrorBanner title="Unable to load revenue data" message="The billing service may be temporarily unavailable." onRetry={refetch} />;
+client/src/pages/admin/RevenueAdmin.jsx:        description="Admin revenue and subscription analytics."
+client/src/pages/admin/RevenueAdmin.jsx:                <span className="text-sm font-medium">Admin</span>
+client/src/pages/admin/NewsletterAdmin.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/NewsletterAdmin.jsx:export default function NewsletterAdmin() {
+client/src/pages/admin/NewsletterAdmin.jsx:  if (error) return <AdminErrorBanner title="Unable to load newsletter data" message="The newsletter service may be temporarily unavailable." onRetry={refetch} />;
+client/src/pages/admin/NewsletterAdmin.jsx:      <SEO title="Newsletter Admin — Admin" noindex />
+client/src/pages/admin/NewsletterAdmin.jsx:          Newsletter Admin
+client/src/pages/admin/FeedbackAggregator.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/FeedbackAggregator.jsx:  if (isError) return <AdminErrorBanner title="Unable to load feedback" message="The feedback service may be temporarily unavailable." onRetry={refetch} />;
+client/src/pages/admin/FeedbackAggregator.jsx:      <SEO title="Feedback — Admin" noindex />
+client/src/pages/admin/FeatureFlags.jsx:      <SEO title="Feature Flags — Admin" noindex />
+client/src/pages/admin/HealthDashboard.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/HealthDashboard.jsx:    title: "System Health | Admin",
+client/src/pages/admin/HealthDashboard.jsx:  // 60s cooldown + 30s timeout.  Admin-only; never touches user-facing AI.
+client/src/pages/admin/HealthDashboard.jsx:    return <AdminErrorBanner title="Unable to load health data" onRetry={refetch} />;
+client/src/pages/admin/EngagementDashboard.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/EngagementDashboard.jsx:    { label: "Admin Pages", value: health?.platform?.adminPages || 26 },
+client/src/pages/admin/EngagementDashboard.jsx:    return <AdminErrorBanner title="Unable to load engagement data" onRetry={refetch} />;
+client/src/pages/admin/EngagementDashboard.jsx:      <SEO title="Engagement Dashboard — Admin" noindex />
+client/src/pages/admin/ContentStudioAdmin.jsx:import { AdminErrorBanner, AdminLoadingState } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/ContentStudioAdmin.jsx:export default function ContentStudioAdmin() {
+client/src/pages/admin/ContentStudioAdmin.jsx:    return <AdminLoadingState label="Loading content studio..." />;
+client/src/pages/admin/ContentStudioAdmin.jsx:    return <AdminLoadingState label="Loading content studio..." />;
+client/src/pages/admin/ContentStudioAdmin.jsx:    return <AdminErrorBanner title="Unable to load content studio" onRetry={refetch} />;
+client/src/pages/admin/ContentStudioAdmin.jsx:        title="Content Studio Admin — The Genuine Love Project"
+client/src/pages/admin/ContentStudioAdmin.jsx:                <span className="text-sm font-medium">Admin</span>
+client/src/pages/admin/BillingViewer.jsx: * Admin Billing Viewer (P128)
+client/src/pages/admin/BillingViewer.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/BillingViewer.jsx:    return <AdminErrorBanner title="Unable to load billing data" onRetry={refetch} />;
+client/src/pages/admin/BillingViewer.jsx:      <SEO title="Billing Manager — Admin" noindex />
+client/src/pages/admin/AdminSocial.jsx:export default function AdminSocial() {
+client/src/pages/admin/AdminSocial.jsx:      <SEO title="Social Ops Console | Admin" description="Enterprise social media operations console" />
+client/src/pages/admin/AdminSocial.jsx:              <Link href="/admin" className="hover:text-indigo-500 transition-colors" data-testid="link-admin-home">Admin</Link>
+client/src/pages/admin/AuditLogExplorer.jsx:// Admin audit log explorer with search, filter, and export
+client/src/pages/admin/AuditLogExplorer.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/AuditLogExplorer.jsx:    return <AdminErrorBanner title="Unable to load audit logs" onRetry={refetch} />;
+client/src/pages/admin/AuditLogExplorer.jsx:      <SEO title="Audit Log Explorer — Admin" noindex />
+client/src/pages/admin/AnalyticsDashboard.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/AnalyticsDashboard.jsx:    return <AdminErrorBanner title="Unable to load analytics dashboard" onRetry={refetch} />;
+client/src/pages/admin/AnalyticsDashboard.jsx:      <SEO title="Analytics Dashboard | Admin" description="Product analytics overview" />
+client/src/pages/admin/AdminUsers.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/AdminUsers.jsx:export default function AdminUsers() {
+client/src/pages/admin/AdminUsers.jsx:    return <AdminErrorBanner title="Unable to load user data" onRetry={refetch} />;
+client/src/pages/admin/AdminUsers.jsx:    { label: "Admin Users", value: stats?.adminCount || 1, icon: Shield, desc: "Users with admin access", color: "text-red-600" },
+client/src/pages/admin/AdminUsers.jsx:      <SEO title="Admin Users — Admin" noindex />
+client/src/pages/admin/AdminUsers.jsx:                <h1 className="text-3xl font-bold" data-testid="text-page-title">Admin Users</h1>
+client/src/pages/admin/AdminUsers.jsx:              Admin Access Management
+client/src/pages/admin/AdminUsers.jsx:                <p>Admin access is managed through the ADMIN_TOKEN environment variable. Users authenticating with the admin token receive elevated privileges across all admin pages.</p>
+client/src/pages/admin/AdminPublishingToday.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/AdminPublishingToday.jsx:export default function AdminPublishingToday() {
+client/src/pages/admin/AdminPublishingToday.jsx:    return <AdminErrorBanner title="Unable to load publishing today" onRetry={refetchDrafts} />;
+client/src/pages/admin/AdminPublishingToday.jsx:      <SEO title="Publishing Today — Admin" noindex />
+client/src/pages/admin/NarrativeOpsConsole.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/NarrativeOpsConsole.jsx:    return <AdminErrorBanner title="Unable to load narrative ops console" onRetry={refetch} />;
+client/src/pages/admin/NarrativeOpsConsole.jsx:      <SEO title="Narrative Ops Console — Admin" noindex />
+client/src/pages/admin/SocialGenerator.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/SocialGenerator.jsx:      <SEO title="Social Generator — Admin" noindex />
+client/src/pages/admin/SocialCalendar.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/SocialCalendar.jsx:    return <AdminErrorBanner title="Unable to load social calendar" onRetry={refetch} />;
+client/src/pages/admin/SocialCalendar.jsx:      <SEO title="Social Calendar — Admin" noindex />
+client/src/pages/admin/SocialAnalytics.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/SocialAnalytics.jsx:    return <AdminErrorBanner title="Unable to load social analytics" onRetry={refetchAnalytics} />;
+client/src/pages/admin/SocialAnalytics.jsx:      <SEO title="Social Analytics — Admin" noindex />
+client/src/pages/admin/SocialDashboard.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/SocialDashboard.jsx:    return <AdminErrorBanner title="Unable to load social dashboard" onRetry={refetch} />;
+client/src/pages/admin/RolesPermissions.jsx:      name: "Administrator",
+client/src/pages/admin/RolesPermissions.jsx:        title="Roles & Permissions — Admin"
+client/src/pages/admin/RolesPermissions.jsx:                  Admin Users
+client/src/pages/admin/SocialLibrary.jsx:import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/SocialLibrary.jsx:    return <AdminErrorBanner title="Unable to load social library" onRetry={refetch} />;
+client/src/pages/admin/SocialLibrary.jsx:      <SEO title="Social Library — Admin" noindex />
+client/src/pages/admin/SystemAlerts.jsx:import { AdminErrorBanner, AdminLoadingState } from "../../components/admin/AdminQueryStates";
+client/src/pages/admin/SystemAlerts.jsx:    return <AdminLoadingState label="Loading system alerts..." />;
+client/src/pages/admin/SystemAlerts.jsx:    return <AdminLoadingState label="Loading system alerts..." />;
+client/src/pages/admin/SystemAlerts.jsx:    return <AdminErrorBanner title="Unable to load system alerts" onRetry={refetch} />;
+client/src/pages/admin/SystemAlerts.jsx:      <SEO title="System Alerts — Admin" noindex />
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 1
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 2
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 3
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:          <div className="text-[10px] text-muted-foreground">Admin-Linked</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:              <ExternalLink size={12} /> Admin Page Connectivity ({linkedTools.length} linked)
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 3
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:          <div className="text-[9px] text-muted-foreground">Admin Links</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:                    <span className="text-emerald-600" title="Admin-linked">{cat.linked}/{cat.total} linked</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:                <div className="text-muted-foreground mb-1">Admin Linking</div>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 4
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 4
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 5
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 5
+client/src/pages/admin/AdminTools.jsx.phase1.bak:  "admin-only": { suggestion: "Admin authorization required (403). Ensure ADMIN_TOKEN secret is configured. Codex KB: Check that admin middleware validates the x-admin-token header.", action: "Verify ADMIN_TOKEN secret", knowledgeBase: "Codex", autoFixable: true, fixCommand: "verify-admin-token" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:    title: "Admin & System Tools",
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "admin-core", label: "Admin Core", endpoint: "/api/admin", icon: Shield, desc: "Admin authentication" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "admin-publishing", label: "Admin Publishing", endpoint: "/api/admin/publishing", icon: BookOpen, desc: "Publishing pipeline" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "admin-social", label: "Admin Social Studio", endpoint: "/api/admin/social", icon: Palette, desc: "Social management" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:          <div className="text-[10px] text-muted-foreground">Admin-Linked</div>
+client/src/pages/admin/AdminTools.jsx.phase1.bak:              <ExternalLink size={12} /> Admin Page Connectivity ({linkedTools.length} linked)
+client/src/pages/admin/AdminTools.jsx.phase1.bak:          <div className="text-[9px] text-muted-foreground">Admin Links</div>
+client/src/pages/admin/AdminTools.jsx.phase1.bak:                    <span className="text-emerald-600" title="Admin-linked">{cat.linked}/{cat.total} linked</span>
+client/src/pages/admin/AdminTools.jsx.phase1.bak:                <div className="text-muted-foreground mb-1">Admin Linking</div>
+client/src/pages/admin/AdminTools.jsx.phase1.bak:export default function AdminTools() {
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      const csvLines = ['ID,Label,Endpoint,Status,Code,Response(ms),Severity,KB,AutoFix,AdminLink,Remediation'];
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      <SEO title={`Platform Tools (${totalTools}) — Admin`} description={`All ${totalTools} platform tools with AI-powered health monitoring, diagnostics, and repair`} noindex />
+client/src/pages/admin/_adminToolsShared.js:// Extracted from AdminTools.jsx — MMHB v7.4 Phase 1
+client/src/pages/admin/_adminToolsShared.js:  "admin-only": { suggestion: "Admin authorization required (403). Ensure ADMIN_TOKEN secret is configured. Codex KB: Check that admin middleware validates the x-admin-token header.", action: "Verify ADMIN_TOKEN secret", knowledgeBase: "Codex", autoFixable: true, fixCommand: "verify-admin-token" },
+client/src/pages/admin/_adminToolsShared.js:    title: "Admin & System Tools",
+client/src/pages/admin/_adminToolsShared.js:      { id: "admin-core", label: "Admin Core", endpoint: "/api/admin", icon: Shield, desc: "Admin authentication" },
+client/src/pages/admin/_adminToolsShared.js:      { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/pages/admin/_adminToolsShared.js:      { id: "admin-publishing", label: "Admin Publishing", endpoint: "/api/admin/publishing", icon: BookOpen, desc: "Publishing pipeline" },
+client/src/pages/admin/_adminToolsShared.js:      { id: "admin-social", label: "Admin Social Studio", endpoint: "/api/admin/social", icon: Palette, desc: "Social management" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:  "admin-only": { suggestion: "Admin authorization required (403). Ensure ADMIN_TOKEN secret is configured. Codex KB: Check that admin middleware validates the x-admin-token header.", action: "Verify ADMIN_TOKEN secret", knowledgeBase: "Codex", autoFixable: true, fixCommand: "verify-admin-token" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:    title: "Admin & System Tools",
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "admin-core", label: "Admin Core", endpoint: "/api/admin", icon: Shield, desc: "Admin authentication" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "admin-publishing", label: "Admin Publishing", endpoint: "/api/admin/publishing", icon: BookOpen, desc: "Publishing pipeline" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "admin-social", label: "Admin Social Studio", endpoint: "/api/admin/social", icon: Palette, desc: "Social management" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:          <div className="text-[10px] text-muted-foreground">Admin-Linked</div>
+client/src/pages/admin/AdminTools.jsx.phase2.bak:              <ExternalLink size={12} /> Admin Page Connectivity ({linkedTools.length} linked)
+client/src/pages/admin/AdminTools.jsx.phase2.bak:          <div className="text-[9px] text-muted-foreground">Admin Links</div>
+client/src/pages/admin/AdminTools.jsx.phase2.bak:                    <span className="text-emerald-600" title="Admin-linked">{cat.linked}/{cat.total} linked</span>
+client/src/pages/admin/AdminTools.jsx.phase2.bak:                <div className="text-muted-foreground mb-1">Admin Linking</div>
+client/src/pages/admin/AdminTools.jsx.phase2.bak:export default function AdminTools() {
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      const csvLines = ['ID,Label,Endpoint,Status,Code,Response(ms),Severity,KB,AutoFix,AdminLink,Remediation'];
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      <SEO title={`Platform Tools (${totalTools}) — Admin`} description={`All ${totalTools} platform tools with AI-powered health monitoring, diagnostics, and repair`} noindex />
+client/src/pages/admin/AdminTools.jsx:import { LazyAdminPanel } from "../../components/system/AdminErrorBoundary";
+client/src/pages/admin/AdminTools.jsx:export default function AdminTools() {
+client/src/pages/admin/AdminTools.jsx:      const csvLines = ['ID,Label,Endpoint,Status,Code,Response(ms),Severity,KB,AutoFix,AdminLink,Remediation'];
+client/src/pages/admin/AdminTools.jsx:      <SEO title={`Platform Tools (${totalTools}) — Admin`} description={`All ${totalTools} platform tools with AI-powered health monitoring, diagnostics, and repair`} noindex />
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="QuickDiagnostics"><QuickDiagnostics toolResults={toolResults} runHealthCheck={runHealthCheck} runningTools={runningTools} /></LazyAdminPanel>
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="AIRepairCenter"><AIRepairCenter toolResults={toolResults} runHealthCheck={runHealthCheck} runAllChecks={runAllChecks} /></LazyAdminPanel>
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="PlatformCoverageReport"><PlatformCoverageReport toolResults={toolResults} /></LazyAdminPanel>
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="DailyOpsRunbook"><DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} /></LazyAdminPanel>
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="GitIntegrityScanner"><GitIntegrityScanner /></LazyAdminPanel>
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="PlatformIntegrityDeepScan"><PlatformIntegrityDeepScan /></LazyAdminPanel>
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="AIDiagnosticsPanel"><AIDiagnosticsPanel toolResults={toolResults} runHealthCheck={runHealthCheck} /></LazyAdminPanel>
+client/src/pages/admin/AdminTools.jsx:        <LazyAdminPanel name="PlatformIntegrityScanner"><PlatformIntegrityScanner toolResults={toolResults} /></LazyAdminPanel>
+client/src/pages/BlogDraftViewer.jsx:        Admin Preview Only — This draft is not publicly visible.
+client/src/pages/ContentIndexPage.jsx:  { name: "Admin Dashboard", path: "/admin", description: "Platform administration", category: "System", icon: Settings, protected: true },
+client/src/pages/ControlDashboard.jsx:                <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Admin</p>
+client/src/pages/ControlDashboard.jsx:                Back to Admin
+client/src/pages/DesignSystem.jsx:                    • Admin-only delete/edit<br/>
+client/src/pages/DesignSystem.jsx:                    { file: "client/src/pages/Admin.jsx", desc: "CRM Dashboard with user metrics" },
+client/src/pages/account/Subscription.jsx:  team: ["Everything in Pro", "Team dashboard", "Admin controls", "Priority support"],
+client/src/pages/AdminLogin.jsx: * AdminLogin — dedicated entry point for Command Center access.
+client/src/pages/AdminLogin.jsx: * ("adminVerified", "adminSessionToken") consumed by Admin.jsx + AdminGuard,
+client/src/pages/AdminLogin.jsx:export default function AdminLogin() {
+client/src/pages/AdminLogin.jsx:    document.title = "Admin Login — MyMentalHealthBuddy Command Center";
+client/src/pages/AdminLogin.jsx:        setError("Admin access is not configured on the server. Please set the ADMIN_TOKEN secret.");
+client/src/pages/AdminLogin.jsx:      console.error("[AdminLogin]", err);
+client/src/pages/AdminLogin.jsx:                Administrator Token
+client/src/pages/WireframeTemplates.jsx: * SEO: Admin dashboard
+client/src/pages/Login.jsx:  // Mirrors AdminGuard policy (client/src/components/AdminGuard.jsx):
+client/src/pages/Admin.jsx:async function fetchAdminMetric(url) {
+client/src/pages/Admin.jsx:  // back to the legacy admin session token. This preserves AdminGuard's dual-
+client/src/pages/Admin.jsx:export default function Admin() {
+client/src/pages/Admin.jsx:  const [adminSessionValid, setAdminSessionValid] = useState(null); // null = checking, true = valid, false = invalid
+client/src/pages/Admin.jsx:    const verifyAdminSession = async () => {
+client/src/pages/Admin.jsx:        setAdminSessionValid(true);
+client/src/pages/Admin.jsx:        setAdminSessionValid(false);
+client/src/pages/Admin.jsx:          setAdminSessionValid(data.valid === true);
+client/src/pages/Admin.jsx:          setAdminSessionValid(false);
+client/src/pages/Admin.jsx:        console.error("[Admin] Session verification failed:", err);
+client/src/pages/Admin.jsx:        setAdminSessionValid(false);
+client/src/pages/Admin.jsx:    verifyAdminSession();
+client/src/pages/Admin.jsx:          fetchAdminMetric("/api/admin/health"),
+client/src/pages/Admin.jsx:          fetchAdminMetric("/api/admin/health-deep?format=json"),
+client/src/pages/Admin.jsx:        console.error("[Admin] Live metrics load failed:", e?.message || e);
+client/src/pages/Admin.jsx:  const hasAdminAccess = user?.role === "admin" || adminSessionValid === true;
+client/src/pages/Admin.jsx:  if (!hasAdminAccess) {
+client/src/pages/Admin.jsx:        <SEO title="Access Denied" description="Admin access required" />
+client/src/pages/Admin.jsx:              Or use Admin Access from homepage
+client/src/pages/Admin.jsx:      title="Admin Command Center"
+client/src/pages/Admin.jsx:        what: "Admin dashboard for platform management.",
+client/src/pages/Admin.jsx:      <SEO title="Admin Command Center" description="Advanced platform administration and real-time analytics" />
+client/src/pages/Admin.jsx:                    Admin Command Center
+client/src/pages/Admin.jsx:        <nav className="flex items-center gap-3 mb-10 overflow-x-auto pb-3 scrollbar-hide" role="tablist" aria-label="Admin navigation">
+client/src/pages/Admin.jsx:            <p>The Genuine Love Project • Admin Dashboard v2.0</p>
+client/src/pages/Admin.jsx:            <SecurityEvent type="info" message="Admin login successful" time="5 min ago" />
+client/src/pages/Admin.jsx:                { action: "Admin login", user: "admin@genuine.love", ip: "192.168.1.1", time: "5 min ago" },
+client/src/pages/ContentAdminDashboard.jsx:export default function ContentAdminDashboard() {
+client/src/pages/ContentAdminDashboard.jsx:      title="Content Admin"
+client/src/pages/ContentAdminDashboard.jsx:        title="Content Admin - The Genuine Love Project"
+client/src/pages/ContentAdminDashboard.jsx:              Back to Admin
+client/src/pages/ContentAdminDashboard.jsx:                <h1 className="text-display-lg text-teal">Content Admin</h1>
+client/src/pages/CanvaLanding.jsx:  const [showAdminLogin, setShowAdminLogin] = useState(false);
+client/src/pages/CanvaLanding.jsx:  const [adminToken, setAdminToken] = useState("");
+client/src/pages/CanvaLanding.jsx:  const [adminError, setAdminError] = useState("");
+client/src/pages/CanvaLanding.jsx:  const [adminLoading, setAdminLoading] = useState(false);
+client/src/pages/CanvaLanding.jsx:  const handleAdminLogin = async (e) => {
+client/src/pages/CanvaLanding.jsx:    setAdminError("");
+client/src/pages/CanvaLanding.jsx:    setAdminLoading(true);
+client/src/pages/CanvaLanding.jsx:      setAdminError("Please enter your admin token");
+client/src/pages/CanvaLanding.jsx:      setAdminLoading(false);
+client/src/pages/CanvaLanding.jsx:        setAdminError("Admin access not configured. Please set the ADMIN_TOKEN secret.");
+client/src/pages/CanvaLanding.jsx:        setAdminError(data.message || "Invalid admin token. Please check and try again.");
+client/src/pages/CanvaLanding.jsx:      console.error("[Admin Login]", err);
+client/src/pages/CanvaLanding.jsx:      setAdminError("Connection error. Please try again.");
+client/src/pages/CanvaLanding.jsx:      setAdminLoading(false);
+client/src/pages/CanvaLanding.jsx:          {!showAdminLogin ? (
+client/src/pages/CanvaLanding.jsx:              onClick={() => setShowAdminLogin(true)}
+client/src/pages/CanvaLanding.jsx:              Admin Access
+client/src/pages/CanvaLanding.jsx:                  <h4 className="font-bold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Admin Portal</h4>
+client/src/pages/CanvaLanding.jsx:              <form onSubmit={handleAdminLogin} className="space-y-4">
+client/src/pages/CanvaLanding.jsx:                    onChange={(e) => setAdminToken(e.target.value)}
+client/src/pages/CanvaLanding.jsx:                      setShowAdminLogin(false);
+client/src/pages/CanvaLanding.jsx:                      setAdminToken("");
+client/src/pages/CanvaLanding.jsx:                      setAdminError("");
+client/src/pages/AgentInteraction.jsx:            Admin-only orchestrator invocation. All decisions are audit-logged.
+client/src/pages/AgentInteraction.jsx:  const isAdmin = user?.role === "admin" || user?.role === "owner" || user?.is_admin === true;
+client/src/pages/AgentInteraction.jsx:    enabled: isAdmin,
+client/src/pages/AgentInteraction.jsx:  if (!isAdmin) {
+client/src/pages/AgentInteraction.jsx:            Admin access required.
+client/src/pages/AgentInteraction.jsx:      <SEO title="Agent Console | MyMentalHealthBuddy Admin" description="Orchestrator invocation console (admin only)." />
+client/src/_registry/components.json:      "AdminNavGrid",
+client/src/components/admin/AdminQueryStates.jsx:export function AdminErrorBanner({ title = "Unable to load data", message = "Authentication may be required or the service is temporarily unavailable.", onRetry, testId = "error-state" }) {
+client/src/components/admin/AdminQueryStates.jsx:export function AdminLoadingState({ label = "Loading...", testId = "loading-state" }) {
+client/src/components/admin/AdminQueryStates.jsx:export function AdminInlineError({ message = "Failed to load this section", onRetry, testId = "inline-error" }) {
+client/src/components/admin/Top50ProcessTracker.jsx: * Top50ProcessTracker - Admin dashboard component
+client/src/components/admin/SOPMonitorPanel.jsx:// Use the same dual-token fetch shape as Admin.jsx (user JWT first,
+client/src/components/admin/OperationsPanel.jsx:    { label: "Admin health",  path: "/api/admin/health",   protected: true  },
+client/src/components/admin/AIKnowledgeBaseSummary.jsx:              <div className="text-[10px] text-muted-foreground">Admin-Linked Tools</div>
+client/src/components/admin/SystemHealthPanel.jsx:            <span data-testid="text-admin-page-count">{health.platform.adminPages} Admin Pages</span>
+client/src/components/admin/AdminNavGrid.jsx:export default function AdminNavGrid() {
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Content Admin", icon: Settings, href: "/content-admin", desc: "Content management tools" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Newsletter Admin", icon: Mail, href: "/admin/newsletter", desc: "Subscriber & send management" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Admin Users", icon: UserCheck, href: "/admin/users", desc: "Admin user management" },
+client/src/components/admin/AIKnowledgeHub.jsx:    { label: 'Admin Systems', count: 15, href: '/admin/tools', icon: Shield, desc: 'Security, audit, analytics, storage' },
+client/src/components/AdminGuard.jsx: * AdminGuard — protects /admin/* routes.
+client/src/components/AdminGuard.jsx:export default function AdminGuard({ children }) {
+client/src/components/system/AdminErrorBoundary.jsx:export class AdminErrorBoundary extends React.Component {
+client/src/components/system/AdminErrorBoundary.jsx:    console.error(`[AdminErrorBoundary:${name}]`, error, info);
+client/src/components/system/AdminErrorBoundary.jsx:export function AdminPanelSkeleton({ name }) {
+client/src/components/system/AdminErrorBoundary.jsx:export function LazyAdminPanel({ name, children, fallback }) {
+client/src/components/system/AdminErrorBoundary.jsx:    <AdminErrorBoundary name={name}>
+client/src/components/system/AdminErrorBoundary.jsx:      <Suspense fallback={fallback ?? <AdminPanelSkeleton name={name} />}>
+client/src/components/system/AdminErrorBoundary.jsx:    </AdminErrorBoundary>
+client/src/components/system/AdminErrorBoundary.jsx:export default AdminErrorBoundary;
+client/src/config/toolCategories.js:    title: "Admin & System Tools",
+client/src/config/toolCategories.js:      { id: "admin-core", label: "Admin Core", endpoint: "/api/admin", icon: Shield, desc: "Admin authentication" },
+client/src/config/toolCategories.js:      { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/config/toolCategories.js:      { id: "admin-publishing", label: "Admin Publishing", endpoint: "/api/admin/publishing", icon: BookOpen, desc: "Publishing pipeline" },
+client/src/config/toolCategories.js:      { id: "admin-social", label: "Admin Social Studio", endpoint: "/api/admin/social", icon: Palette, desc: "Social management" },
+client/src/content/meta/integrationRegistry.ts:    canonicalFiles: ['client/src/components/AdminGuard.jsx', 'server/middleware/adminAuth.mjs'],
+client/src/content/meta/integrationRegistry.ts:    notes: 'Admin role-based access control',
+client/src/content/meta/integrationRegistry.ts:    notes: 'Admin action audit logging',
+client/src/content/meta/integrationRegistry.ts:    notes: 'P128 - Admin billing viewer (read-only)',
+client/src/content/meta/platformProcessRegistry.ts:    title: "Admin operations",
+client/src/content/meta/routeMeta.autogen.ts:    "title": "Admin",
+client/src/content/meta/routeMeta.autogen.ts:    "title": "Admin - Social",
+client/src/content/meta/routeMeta.autogen.ts:    "title": "Admin - Social - Analytics",
+client/src/content/meta/routeMeta.autogen.ts:    "title": "Admin - Social - Calendar",
+client/src/content/meta/routeMeta.autogen.ts:    "title": "Admin - Social - Generate",
+client/src/content/meta/routeMeta.autogen.ts:    "title": "Admin - Social - Library",
+client/src/content/processes/top50ProcessMap.ts:  { id: 17, name: 'Admin access control', category: 'B', status: 'done', description: 'RBAC middleware' },
+client/src/content/processes/top50ProcessMap.ts:  { id: 18, name: 'Audit log', category: 'B', status: 'done', description: 'Admin actions logged' },
+client/src/content/processes/top50ProcessMap.ts:  { id: 33, name: 'Admin dashboard', category: 'D', status: 'done', description: 'Usage + completion metrics' },
+client/src/content/searchIndex.ts:  { id: "platform-admin", title: "Admin", description: "Administrative dashboard (restricted).", path: "/admin", type: "Platform", tags: ["admin", "restricted"], protected: true },
+client/src/content/searchIndex.ts:  { id: "platform-content-admin", title: "Content Admin", description: "Content administration dashboard (restricted).", path: "/content-admin", type: "Platform", tags: ["admin", "content"], protected: true },
+client/src/content/routes.js:  admin: 'Admin',
+client/src/content/routes.js:      eyebrow: 'Administration',
+client/src/content/routes.js:    pageLabel: 'Admin Dashboard',
+client/src/content/routes.js:    title: 'Admin — The Genuine Love Project',
+client/src/content/routes.js:      eyebrow: 'Administration',
+client/src/content/routes.js:      title: 'Admin',
+client/src/content/routes.js:    pageLabel: 'Content Admin',
+client/src/content/routes.js:    title: 'Content Admin — The Genuine Love Project',
+client/src/content/routes.js:      titleHighlight: 'Admin.',
+client/src/content/routes.js:    title: 'Billing Overview — Admin — The Genuine Love Project',
+client/src/content/routes.js:      eyebrow: 'Administration',
+client/src/content/routes.js:      secondaryCta: { label: 'Back to Admin', href: '/admin' }
+client/src/content/routes.js:export function isAdminRoute(path) {
+client/src/contexts/FeatureFlagContext.jsx:    const isAdmin = user?.isAdmin || false;
+client/src/contexts/FeatureFlagContext.jsx:    const userContext = { isAdmin };
+client/src/contexts/FeatureFlagContext.jsx:  }, [user?.isAdmin]);
+client/src/lib/attention/attentionEcology.ts:  { name: "Admin Tasks", type: "necessary", description: "Life maintenance activities" },
+client/src/lib/queryClient.js:function getAdminSessionToken() {
+client/src/lib/queryClient.js:            const adminSession = getAdminSessionToken();
+client/src/lumi-rbac/roles/roleDefinitions.ts: * 4 domains: User, Therapist, Family, Admin.
+client/src/lumi-rbac/roles/roleDefinitions.ts:  admin: "Administrator",
+client/src/App.jsx:import AdminGuard from "./components/AdminGuard.jsx";
+client/src/App.jsx:const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
+client/src/App.jsx:const Admin = lazy(() => import("./pages/Admin.jsx"));
+client/src/App.jsx:const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.jsx"));
+client/src/App.jsx:const AdminCommandCenter = lazy(() => import("./pages/admin/CommandCenter.jsx"));
+client/src/App.jsx:const AdminHealthDashboard = lazy(() => import("./pages/admin/HealthDashboard.jsx"));
+client/src/App.jsx:const AdminSocial = lazy(() => import("./pages/admin/AdminSocial.jsx"));
+client/src/App.jsx:// Batch 11 - Admin & Content (P221-P240)
+client/src/App.jsx:const ContentStudioAdmin = lazy(() => import("./pages/admin/ContentStudioAdmin.jsx"));
+client/src/App.jsx:const SocialStudioAdmin = lazy(() => import("./pages/admin/SocialStudioAdmin.jsx"));
+client/src/App.jsx:const NewsletterAdmin = lazy(() => import("./pages/admin/NewsletterAdmin.jsx"));
+client/src/App.jsx:const AdminPublishing = lazy(() => import("./pages/admin/AdminPublishing.jsx"));
+client/src/App.jsx:const AdminPublishingToday = lazy(() => import("./pages/admin/AdminPublishingToday.jsx"));
+client/src/App.jsx:const RevenueAdmin = lazy(() => import("./pages/admin/RevenueAdmin.jsx"));
+client/src/App.jsx:// Batch 15 - Optimization + Admin Tools (P401-P450)
+client/src/App.jsx:const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.jsx"));
+client/src/App.jsx:const AdminTools = lazy(() => import("./pages/admin/AdminTools.jsx"));
+client/src/App.jsx:              <Route path="/admin-login" component={AdminLogin} />
+client/src/App.jsx:              <Route path="/admin/login" component={AdminLogin} />
+client/src/App.jsx:              {/* Admin Routes (require admin role) */}
+client/src/App.jsx:                <AdminGuard><AdminCommandCenter /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><AdminHealthDashboard /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><AdminSocial /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><AdminSocial /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><SocialGenerator /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><SocialLibrary /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><SocialCalendar /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><SocialAnalytics /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><BillingViewer /></AdminGuard>
+client/src/App.jsx:              {/* Batch 11 - Admin Routes (P231-P240, P250) */}
+client/src/App.jsx:                <AdminGuard><ContentStudioAdmin /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><SocialStudioAdmin /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><NewsletterAdmin /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><AdminPublishingToday /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><AdminPublishing /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><BlogDraftViewer /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><RevenueAdmin /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><SecurityDashboard /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><AuditLogExplorer /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><ContentAdminDashboard /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><CRMPage /></AdminGuard>
+client/src/App.jsx:              <Route path="/admin/roles">{() => <AdminGuard><RolesPermissions /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/feature-flags">{() => <AdminGuard><FeatureFlags /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/alerts">{() => <AdminGuard><SystemAlerts /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/feedback">{() => <AdminGuard><FeedbackAggregator /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/narrative">{() => <AdminGuard><NarrativeDrafts /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/engagement">{() => <AdminGuard><EngagementDashboard /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/analytics">{() => <AdminGuard><AnalyticsDashboard /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/tools">{() => <AdminGuard><AdminTools /></AdminGuard>}</Route>

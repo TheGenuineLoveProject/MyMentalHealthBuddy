@@ -1,0 +1,93 @@
+client/src/pages/admin/AdminPublishing.jsx:            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Analytics-driven insights from the last 7 days. No PII collected. All suggestions are manual — you decide what to act on.</p>
+client/src/pages/admin/AnalyticsDashboard.jsx:export default function AnalyticsDashboard() {
+client/src/pages/admin/AnalyticsDashboard.jsx:      <SEO title="Analytics Dashboard | Admin" description="Product analytics overview" />
+client/src/pages/admin/AnalyticsDashboard.jsx:              Analytics Dashboard
+client/src/pages/admin/SocialAnalytics.jsx:export default function SocialAnalytics() {
+client/src/pages/admin/SocialAnalytics.jsx:  const { data: analytics = {}, isLoading: analyticsLoading, error: analyticsError, refetch: refetchAnalytics } = useQuery({
+client/src/pages/admin/SocialAnalytics.jsx:  const refetch = () => { refetchAnalytics(); refetchDrafts(); };
+client/src/pages/admin/SocialAnalytics.jsx:    return <AdminErrorBanner title="Unable to load social analytics" onRetry={refetchAnalytics} />;
+client/src/pages/admin/SocialAnalytics.jsx:      <SEO title="Social Analytics — Admin" noindex />
+client/src/pages/admin/SocialAnalytics.jsx:              Content Analytics
+client/src/pages/admin/SocialDashboard.jsx:function ContentAnalytics() {
+client/src/pages/admin/SocialDashboard.jsx:        <h3 className="font-semibold text-slate-900 dark:text-white">Content Analytics</h3>
+client/src/pages/admin/SocialDashboard.jsx:        <ContentAnalytics />
+client/src/pages/admin/SocialDashboard.jsx:              Analytics
+client/src/pages/admin/AdminTools.jsx.phase1.bak:  "analytics-gap": { suggestion: "Analytics tracking has gaps in data collection. Perplexity KB: Check Google Analytics integration, event tracking code, and consent-gated analytics initialization.", action: "Audit analytics coverage", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "analytics", label: "Analytics Engine", endpoint: "/api/analytics", icon: BarChart3, desc: "Platform analytics" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
+client/src/pages/admin/_adminToolsShared.js:  "analytics-gap": { suggestion: "Analytics tracking has gaps in data collection. Perplexity KB: Check Google Analytics integration, event tracking code, and consent-gated analytics initialization.", action: "Audit analytics coverage", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:      { id: "analytics", label: "Analytics Engine", endpoint: "/api/analytics", icon: BarChart3, desc: "Platform analytics" },
+client/src/pages/admin/_adminToolsShared.js:      { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:  "analytics-gap": { suggestion: "Analytics tracking has gaps in data collection. Perplexity KB: Check Google Analytics integration, event tracking code, and consent-gated analytics initialization.", action: "Audit analytics coverage", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "analytics", label: "Analytics Engine", endpoint: "/api/analytics", icon: BarChart3, desc: "Platform analytics" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
+client/src/pages/Analytics.jsx:export default function Analytics() {
+client/src/pages/Analytics.jsx:        <SEO title="Analytics - Loading" description="Loading your wellness analytics" />
+client/src/pages/Analytics.jsx:        <SEO title="Analytics - Error" description="Unable to load analytics" />
+client/src/pages/Analytics.jsx:      title="Analytics"
+client/src/pages/Analytics.jsx:        title="Analytics - The Genuine Love Project"
+client/src/pages/Analytics.jsx:                  <h1 className="text-heading-xl text-teal" data-testid="text-title">Analytics</h1>
+client/src/pages/Analytics.jsx:            <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" aria-label="Analytics overview">
+client/src/pages/ContentIndexPage.jsx:  { name: "Analytics", path: "/analytics", description: "Track your mood and reflection patterns", category: "Dashboard", icon: BarChart3, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Growth Analytics", path: "/growth-analytics", description: "Personal development metrics", category: "Analytics", icon: TrendingUp, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Progress Dashboard", path: "/progress", description: "Track your growth journey", category: "Analytics", icon: TrendingUp, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Resilience Metrics", path: "/resilience", description: "Measure emotional resilience", category: "Analytics", icon: Activity, protected: true },
+client/src/pages/ContentIndexPage.jsx:  "Analytics": "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+client/src/pages/ControlDashboard.jsx:    { name: "Google Analytics", description: "Website analytics", status: "available", icon: "📊" },
+client/src/pages/Admin.jsx:          title="Analytics" 
+client/src/pages/GrowthAnalyticsPage.tsx:export default function GrowthAnalyticsPage() {
+client/src/pages/GrowthAnalyticsPage.tsx:    title="GrowthAnalyticsPage"
+client/src/pages/GrowthAnalyticsPage.tsx:      <SEO title="Growth Analytics — MyMentalHealthBuddy" description="Track your wellness journey and growth patterns." />
+client/src/pages/GrowthAnalyticsPage.tsx:              Growth Analytics
+client/src/pages/BlogIndex.jsx:import { trackEvent, trackPageView } from "../hooks/useAnalytics.mjs";
+client/src/pages/BlogPost.jsx:import { trackEvent, trackPageView } from "../hooks/useAnalytics.mjs";
+client/src/pages/SubscriberBenefitsPage.jsx:  { name: "Growth Analytics", path: "/growth-analytics", icon: TrendingUp, description: "Personal development metrics" },
+client/src/pages/Dashboard.jsx:                View Full Analytics →
+client/src/pages/Dashboard.jsx:                label="Analytics" 
+client/src/pages/Dashboard.jsx:                title="Growth Analytics" 
+client/src/pages/DataRetention.jsx:      category: "Usage Analytics",
+client/src/pages/Premium.jsx:const ProgressAnalytics = lazy(() => import("../components/ProgressAnalytics.jsx"));
+client/src/pages/Premium.jsx:    name: "Progress Analytics",
+client/src/pages/Premium.jsx:    component: ProgressAnalytics
+client/src/_registry/components.json:      "AnalyticsPanel",
+client/src/components/ProgressAnalytics.jsx:export default function ProgressAnalytics() {
+client/src/components/ProgressAnalytics.jsx:      aria-label="Progress Analytics Dashboard"
+client/src/components/ProgressAnalytics.jsx:            <h2 className="text-xl font-bold text-[var(--text)]">Progress Analytics</h2>
+client/src/components/admin/AdminNavGrid.jsx:      title: "Analytics & Revenue (8)",
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Analytics Dashboard", icon: BarChart3, href: "/admin/analytics", desc: "Platform analytics & metrics" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Social Analytics", icon: LineChart, href: "/admin/social/analytics", desc: "Social performance data" },
+client/src/components/admin/DailyOpsChecklist.jsx:    { id: 'check-analytics', label: 'Check Analytics', desc: 'Review daily engagement and traffic metrics', icon: BarChart3, href: '/admin/analytics', category: 'analytics', priority: 'medium' },
+client/src/components/analytics/WritingStats.tsx:import { analyzeWriting, getWritingInsight, type WritingMetrics } from "@/lib/analytics/writingAnalytics";
+client/src/components/ConsentBanner.jsx:                  <span className="font-medium">Analytics</span>
+client/src/components/NewsletterSignup.jsx:import { trackEvent } from "../hooks/useAnalytics.mjs";
+client/src/config/featureAccess.js:  progressAnalytics: {
+client/src/config/featureAccess.js:    label: "Progress Analytics",
+client/src/config/toolCategories.js:      { id: "analytics", label: "Analytics Engine", endpoint: "/api/analytics", icon: BarChart3, desc: "Platform analytics" },
+client/src/config/toolCategories.js:      { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
+client/src/content/meta/integrationRegistry.ts:    notes: 'Google Analytics integration',
+client/src/content/meta/platformProcessRegistry.ts:    title: "Analytics (minimal + consent)",
+client/src/content/meta/routeMeta.autogen.ts:    "title": "Admin - Social - Analytics",
+client/src/content/searchIndex.ts:  { id: "platform-analytics", title: "Analytics", description: "Insights and growth tracking.", path: "/analytics", type: "Platform", tags: ["analytics", "progress"], protected: true },
+client/src/content/searchIndex.ts:  { id: "platform-growth-analytics", title: "Growth Analytics", description: "Measure and reflect on growth signals.", path: "/growth-analytics", type: "Platform", tags: ["growth", "analytics"], protected: true },
+client/src/content/routes.js:          deep: 'Analytics'
+client/src/content/routes.js:    pageLabel: 'Analytics',
+client/src/content/routes.js:    title: 'Analytics — The Genuine Love Project',
+client/src/content/routes.js:      primaryCta: { label: 'View Analytics', href: '#analytics' },
+client/src/content/routes.js:    pageLabel: 'Growth Analytics',
+client/src/content/routes.js:    title: 'Growth Analytics — The Genuine Love Project',
+client/src/hooks/use-analytics.tsx:export const useAnalytics = (): void => {
+client/src/hooks/useAnalytics.mjs:export function useAnalytics() {
+client/src/lib/analytics.ts:// Google Analytics Integration for The Genuine Love Project
+client/src/lib/analytics.ts:    console.warn('Missing required Google Analytics key: VITE_GA_MEASUREMENT_ID');
+client/src/lib/track.ts:    console.log(`[Analytics] ${message}`, data || '');
+client/src/App.jsx:// v5.8.35 perf: AnalyticsDashboard is admin-only — never needed eagerly.
+client/src/App.jsx:const AnalyticsDashboard = lazy(() => import("./pages/admin/AnalyticsDashboard.jsx"));
+client/src/App.jsx:import { usePageViewTracker } from "./hooks/useAnalytics.mjs";
+client/src/App.jsx:const Analytics = lazy(() => import("./pages/Analytics.jsx"));
+client/src/App.jsx:const GrowthAnalyticsPage = lazy(() => import("./pages/GrowthAnalyticsPage.tsx"));
+client/src/App.jsx:const SocialAnalytics = lazy(() => import("./pages/admin/SocialAnalytics.jsx"));
+client/src/App.jsx:// Batch 16 - Analytics, Community, Personalization, Wellness (P451-P500)
+client/src/App.jsx:                <ProtectedRoute><Analytics /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><GrowthAnalyticsPage /></ProtectedRoute>
+client/src/App.jsx:                <AdminGuard><SocialAnalytics /></AdminGuard>
+client/src/App.jsx:              <Route path="/admin/analytics">{() => <AdminGuard><AnalyticsDashboard /></AdminGuard>}</Route>

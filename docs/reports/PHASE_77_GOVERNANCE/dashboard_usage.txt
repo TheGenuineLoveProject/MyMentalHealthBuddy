@@ -1,0 +1,273 @@
+client/src/pages/admin/CommandCenter.jsx:import { Shield, Activity, Users, Database, Server, Globe, AlertTriangle, CheckCircle, Clock, RefreshCw, BarChart3, Zap, FileText, Settings, ArrowRight, TrendingUp, Eye, Lock, HardDrive, AlertCircle, BookOpen, MessageSquare, Heart, Calendar, Megaphone, Mail, Flag, Palette, Search, LayoutDashboard, PenTool, Layers, LineChart, ShieldCheck, ToggleLeft, Star, ClipboardList, Sparkles, Brain, Compass, Flame, Leaf, Sun, Moon, Lightbulb, Target, DollarSign, Wand2, GraduationCap, Headphones, HeartHandshake, Flower2, TreePine, CircleDot, Footprints, Gem, Mountain, Feather, CheckSquare, Play, UserCheck, CreditCard, Key, Workflow, Network, Gauge, Trophy, Award, Landmark, Orbit, Rocket, Puzzle, FileQuestion, Webhook, Share2, Contact, Inbox, LogIn, PackageCheck, Milestone, Handshake, Upload, UserCog, ListOrdered, Radio, Fingerprint, FolderKanban, Rss } from 'lucide-react';
+client/src/pages/admin/SecurityDashboard.jsx:export default function SecurityDashboard() {
+client/src/pages/admin/SecurityDashboard.jsx:      <SEO title="Security Dashboard — Admin" noindex />
+client/src/pages/admin/SecurityDashboard.jsx:              Security Dashboard
+client/src/pages/admin/SocialStudioAdmin.jsx:                <span className="text-sm font-medium">Admin Dashboard</span>
+client/src/pages/admin/RevenueAdmin.jsx:        title="Revenue Dashboard — The Genuine Love Project"
+client/src/pages/admin/RevenueAdmin.jsx:                Revenue Dashboard
+client/src/pages/admin/HealthDashboard.jsx:export default function HealthDashboard() {
+client/src/pages/admin/EngagementDashboard.jsx:export default function EngagementDashboard() {
+client/src/pages/admin/EngagementDashboard.jsx:      <SEO title="Engagement Dashboard — Admin" noindex />
+client/src/pages/admin/EngagementDashboard.jsx:                <h1 className="text-3xl font-bold" data-testid="text-page-title">Engagement Dashboard</h1>
+client/src/pages/admin/AnalyticsDashboard.jsx:export default function AnalyticsDashboard() {
+client/src/pages/admin/AnalyticsDashboard.jsx:      <SEO title="Analytics Dashboard | Admin" description="Product analytics overview" />
+client/src/pages/admin/AnalyticsDashboard.jsx:              Analytics Dashboard
+client/src/pages/admin/AdminUsers.jsx:    { label: "Security Dashboard", href: "/admin/security", icon: Shield, testId: "link-security-dashboard" },
+client/src/pages/admin/NarrativeOpsConsole.jsx:  { label: "Dashboard", path: "/dashboard" },
+client/src/pages/admin/SocialDashboard.jsx:      <SEO title="Social Dashboard — The Genuine Love Project" description="Explore social dashboard tools for your wellness journey." />
+client/src/pages/admin/SocialDashboard.jsx:        <h1 className="text-3xl font-bold mb-4">Social Dashboard</h1>
+client/src/pages/admin/SocialDashboard.jsx:export default function SocialDashboard() {
+client/src/pages/admin/SystemAlerts.jsx:            Security Dashboard
+client/src/pages/admin/AdminTools.jsx.phase1.bak:import { ArrowLeft, RefreshCw, CheckCircle, AlertTriangle, AlertCircle, Search, Play, CheckSquare, ArrowRight, Wand2, MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain, Sparkles, Mountain, Compass, Layers, Puzzle, Milestone, Trophy, HeartHandshake, Flame, Target, Flower2, TreePine, CircleDot, Shield, Feather, Gem, Award, Zap, TrendingUp, Star, Orbit, Rocket, Footprints, Workflow, Globe, Network, Users, FileText, Palette, Mail, Share2, Megaphone, PenTool, UserCheck, LayoutDashboard, CreditCard, ShieldCheck, ClipboardList, BarChart3, Activity, PackageCheck, DollarSign, Webhook, Contact, Key, Handshake, Upload, UserCog, ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox, Clock, Download, Timer, Filter, RotateCcw, Wrench, ExternalLink, Stethoscope, Terminal, FileWarning, Cpu, Clipboard, ScanLine, HardDrive, GitBranch, XCircle, CheckCircle2, Loader2 } from 'lucide-react';
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:      { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
+client/src/pages/admin/_adminToolsShared.js:import { MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain, Sparkles, Mountain, Compass, Trophy, Layers, Puzzle, Milestone, HeartHandshake, Flame, Target, Flower2, TreePine, Feather, CircleDot, Shield, Gem, Award, Zap, TrendingUp, Star, Rocket, Orbit, Footprints, Workflow, Globe, Network, Users, FileText, Palette, Mail, Share2, Megaphone, PenTool, Search, Rss, UserCheck, LayoutDashboard, Inbox, Wand2, ShieldCheck, ClipboardList, CreditCard, BarChart3, Activity, PackageCheck, HardDrive, Terminal, DollarSign, Webhook, Contact, Key, Handshake, LogIn, UserCog, Upload, ListOrdered, Radio, Fingerprint, FolderKanban } from 'lucide-react';
+client/src/pages/admin/_adminToolsShared.js:      { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
+client/src/pages/admin/_adminToolsShared.js:      { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:import { ArrowLeft, RefreshCw, CheckCircle, AlertTriangle, AlertCircle, Search, Play, CheckSquare, ArrowRight, Wand2, MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain, Sparkles, Mountain, Compass, Layers, Puzzle, Milestone, Trophy, HeartHandshake, Flame, Target, Flower2, TreePine, CircleDot, Shield, Feather, Gem, Award, Zap, TrendingUp, Star, Orbit, Rocket, Footprints, Workflow, Globe, Network, Users, FileText, Palette, Mail, Share2, Megaphone, PenTool, UserCheck, LayoutDashboard, CreditCard, ShieldCheck, ClipboardList, BarChart3, Activity, PackageCheck, DollarSign, Webhook, Contact, Key, Handshake, Upload, UserCog, ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox, Clock, Download, Timer, Filter, RotateCcw, Wrench, ExternalLink, Stethoscope, Terminal, FileWarning, Cpu, Clipboard, ScanLine, HardDrive, GitBranch, XCircle, CheckCircle2, Loader2 } from 'lucide-react';
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:      { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
+client/src/pages/admin/AdminTools.jsx:import { ArrowLeft, RefreshCw, CheckCircle, AlertTriangle, AlertCircle, Search, Play, CheckSquare, ArrowRight, Wand2, MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain, Sparkles, Mountain, Compass, Layers, Puzzle, Milestone, Trophy, HeartHandshake, Flame, Target, Flower2, TreePine, CircleDot, Shield, Feather, Gem, Award, Zap, TrendingUp, Star, Orbit, Rocket, Footprints, Workflow, Globe, Network, Users, FileText, Palette, Mail, Share2, Megaphone, PenTool, UserCheck, LayoutDashboard, CreditCard, ShieldCheck, ClipboardList, BarChart3, Activity, PackageCheck, DollarSign, Webhook, Contact, Key, Handshake, Upload, UserCog, ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox, Clock, Download, Timer, Filter, RotateCcw, Wrench, ExternalLink, Stethoscope, Terminal, FileWarning, Cpu, Clipboard, ScanLine, HardDrive, GitBranch, XCircle, CheckCircle2, Loader2 } from 'lucide-react';
+client/src/pages/Analytics.jsx:                Back to Dashboard
+client/src/pages/ContentIndexPage.jsx:  { name: "Admin Dashboard", path: "/admin", description: "Platform administration", category: "System", icon: Settings, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Analytics", path: "/analytics", description: "Track your mood and reflection patterns", category: "Dashboard", icon: BarChart3, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Atlas Dashboard", path: "/atlas", description: "Intellectual navigation center", category: "Advanced Tools", icon: Globe, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Dashboard", path: "/dashboard", description: "Your personal wellness hub", category: "Dashboard", icon: Home, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Progress Dashboard", path: "/progress", description: "Track your growth journey", category: "Analytics", icon: TrendingUp, protected: true },
+client/src/pages/ContentIndexPage.jsx:  { name: "Today", path: "/today", description: "Daily wellness flow", category: "Dashboard", icon: Sun, protected: true },
+client/src/pages/ContentIndexPage.jsx:  "Dashboard": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+client/src/pages/ContentIndexPage.jsx:            <span className="text-sm font-medium" style={{ color: 'var(--glp-charcoal)' }}>Dashboard</span>
+client/src/pages/ControlDashboard.jsx:export default function ControlDashboard() {
+client/src/pages/ControlDashboard.jsx:    title="ControlDashboard"
+client/src/pages/DesignSystem.jsx:import { Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen, MessageCircle, LogIn, ChevronRight, Smartphone, Tablet, Monitor, Check, Sparkles, Menu, Bell, Search, Filter, Star, TrendingUp, Users, FileText, PenLine, BarChart3, Shield, Eye, Edit, Trash, ExternalLink } from 'lucide-react';
+client/src/pages/DesignSystem.jsx:    { id: "homepage", name: "Homepage (Logged In)", icon: LayoutDashboard, status: "spec" },
+client/src/pages/DesignSystem.jsx:    { id: "crm", name: "CRM Dashboard", icon: Users, status: "spec" },
+client/src/pages/DesignSystem.jsx:                      { icon: Home, label: "Dashboard", active: true },
+client/src/pages/DesignSystem.jsx:                      { step: 4, title: "Ready", desc: "Dashboard intro" }
+client/src/pages/DesignSystem.jsx:                    <LayoutDashboard className="w-5 h-5 text-white" />
+client/src/pages/DesignSystem.jsx:              {/* CRM Dashboard */}
+client/src/pages/DesignSystem.jsx:                    <h3 className="font-serif font-bold text-xl" style={{ color: 'var(--deep-teal)' }}>CRM Dashboard</h3>
+client/src/pages/DesignSystem.jsx:                      "Arrive at Dashboard",
+client/src/pages/DesignSystem.jsx:                      "Dashboard Welcome Back",
+client/src/pages/DesignSystem.jsx:                  Dashboard component that displays an inspirational focus message with gradient styling.
+client/src/pages/DesignSystem.jsx:                  <strong>Usage:</strong> Dashboard.jsx - Appears at top of logged-in homepage
+client/src/pages/DesignSystem.jsx:                    { name: "CRM", class: "icon-wellness icon-wellness-lg icon-crm", desc: "Dashboard" },
+client/src/pages/DesignSystem.jsx:                    { name: "Homepage", icon: LayoutDashboard },
+client/src/pages/DesignSystem.jsx:                    { file: "client/src/pages/Dashboard.jsx", desc: "Logged-in homepage with wellness widgets" },
+client/src/pages/DesignSystem.jsx:                    { file: "client/src/pages/Admin.jsx", desc: "CRM Dashboard with user metrics" },
+client/src/pages/Invite.jsx:            <span>Back to Dashboard</span>
+client/src/pages/account/Billing.jsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/account/Profile.jsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/account/Settings.jsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/dashboard/ProgressDashboard.jsx:export default function ProgressDashboard() {
+client/src/pages/dashboard/Overview.jsx:export default function DashboardOverview() {
+client/src/pages/dashboard/Overview.jsx:    title: "Your Dashboard - The Genuine Love Project",
+client/src/pages/dashboard/Overview.jsx:      title="Dashboard Overview"
+client/src/pages/dashboard/Overview.jsx:                  <h1 className={styles.pageTitle} data-testid="text-page-title">Your Wellness Dashboard</h1>
+client/src/pages/dashboard/Insights.tsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/dashboard/Journal.jsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/dashboard/MoodTracker.jsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/hubs/PersonalGrowthHubPage.jsx:    title: "Progress Dashboard",
+client/src/pages/tools/MeditationPlayer.jsx:  // construction (same pattern as AtlasDashboard iter 3). Vulnerable signal
+client/src/pages/tools/BreathingTool.jsx:            ← Back to Dashboard
+client/src/pages/CRMPage.jsx:        title="Wellness Dashboard - The Genuine Love Project"
+client/src/pages/CRMPage.jsx:                  <span className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Dashboard</span>
+client/src/pages/WireframeTemplates.jsx:import { Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen, MessageCircle, LogIn, Sparkles, Menu, Settings, Search, Plus, Filter, TrendingUp, Users, FileText, Shield, Lock, Clock, Zap, Eye, Check, AlertCircle, Download, Copy, Code, Smartphone, Tablet, Monitor } from 'lucide-react';
+client/src/pages/WireframeTemplates.jsx:    { id: "homepage", name: "3. Homepage", icon: LayoutDashboard },
+client/src/pages/WireframeTemplates.jsx:    { id: "crm", name: "4. CRM Dashboard", icon: Users },
+client/src/pages/WireframeTemplates.jsx:            {activeTemplate === "crm" && "CRM Dashboard Wireframe"}
+client/src/pages/WireframeTemplates.jsx: * SEO: Dashboard, user home
+client/src/pages/WireframeTemplates.jsx:          <h1 className="text-2xl font-serif font-bold" style={{ color: '#2f5d5d' }}>CRM Dashboard</h1>
+client/src/pages/WireframeTemplates.jsx:    homepage: "User Dashboard - Stats cards, activity feed, quick actions",
+client/src/pages/WireframeTemplates.jsx:    crm: "CRM Dashboard - Contact list, pipeline view, analytics charts",
+client/src/pages/LumiV6Preview.jsx:            ← Back to Dashboard
+client/src/pages/Profile.jsx:            Back to Dashboard
+client/src/pages/NotFound.jsx:  { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
+client/src/pages/Admin.jsx:import { Users, FileText, Activity, Shield, Clock, Server, Database, AlertTriangle, Download, RefreshCw, CheckCircle2, BarChart3, Settings, Sparkles, Heart, Brain, MessageCircle, Lock, Eye, PieChart, ArrowUpRight, ArrowDownRight, HardDrive, Cpu, MemoryStick, UserPlus, UserCheck, UserX, Mail, Target, Award, Flame, BookOpen, Lightbulb, AlertCircle, Info, ChevronRight, ExternalLink, LayoutDashboard, Gauge, ClipboardCheck } from 'lucide-react';
+client/src/pages/Admin.jsx:              Return to Dashboard
+client/src/pages/Admin.jsx:    { id: "overview", label: "Overview", icon: LayoutDashboard },
+client/src/pages/Admin.jsx:            <p>The Genuine Love Project • Admin Dashboard v2.0</p>
+client/src/pages/AdvancedToolsPage.tsx:import MetacognitionDashboard from "@/components/metacognition/MetacognitionDashboard";
+client/src/pages/AdvancedToolsPage.tsx:              Back to Dashboard
+client/src/pages/AdvancedToolsPage.tsx:            {activeTool === "metacognition" && <MetacognitionDashboard />}
+client/src/pages/CommunityPage.tsx:                Back to Dashboard
+client/src/pages/ContentAdminDashboard.jsx:export default function ContentAdminDashboard() {
+client/src/pages/DesignDashboard.jsx:export default function DesignDashboard() {
+client/src/pages/DesignDashboard.jsx:    title="DesignDashboard"
+client/src/pages/DesignDashboard.jsx:        title="Design Dashboard - The Genuine Love Project"
+client/src/pages/DesignDashboard.jsx:              <h1 className="text-heading-lg text-teal">Design Dashboard</h1>
+client/src/pages/DesignDashboard.jsx:                Dashboard
+client/src/pages/DesignDashboard.jsx:            <DashboardCard 
+client/src/pages/DesignDashboard.jsx:            </DashboardCard>
+client/src/pages/DesignDashboard.jsx:            <DashboardCard 
+client/src/pages/DesignDashboard.jsx:            </DashboardCard>
+client/src/pages/DesignDashboard.jsx:            <DashboardCard 
+client/src/pages/DesignDashboard.jsx:            </DashboardCard>
+client/src/pages/DesignDashboard.jsx:            <DashboardCard 
+client/src/pages/DesignDashboard.jsx:            </DashboardCard>
+client/src/pages/DesignDashboard.jsx:function DashboardCard({ title, subtitle, icon: Icon, iconVariant = "sage", children }) {
+client/src/pages/EliteToolsDashboard.tsx:export default function EliteToolsDashboard() {
+client/src/pages/EliteToolsDashboard.tsx:              Return to Dashboard
+client/src/pages/MasteryToolsPage.tsx:              Back to Dashboard
+client/src/pages/MetaLearningPage.tsx:              Meta-Learning Dashboard
+client/src/pages/ProgressDashboardPage.tsx:export default function ProgressDashboardPage() {
+client/src/pages/ProgressDashboardPage.tsx:    title="ProgressDashboardPage"
+client/src/pages/ProgressDashboardPage.tsx:      <SEO title="Progress Dashboard — The Genuine Love Project" description="View your mood and reflection patterns over time." />
+client/src/pages/ProgressDashboardPage.tsx:            <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/Publishing.jsx:              Back to Dashboard
+client/src/pages/SocialHub.jsx:              Back to Dashboard
+client/src/pages/SupportPage.tsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/WisdomToolsPage.tsx:              Back to Dashboard
+client/src/pages/AtlasDashboard.tsx:      { id: "metacognition", name: "Metacognition Dashboard", icon: Eye, description: "Track thinking patterns" },
+client/src/pages/AtlasDashboard.tsx:export default function AtlasDashboard() {
+client/src/pages/AtlasDashboard.tsx:    title="AtlasDashboard"
+client/src/pages/Upgrade.jsx:                Back to Dashboard
+client/src/pages/CanvaLanding.jsx:                  <button className="btn-primary w-full mb-3" data-testid="button-mobile-dashboard">My Dashboard</button>
+client/src/pages/CanvaLanding.jsx:                    <span className="hidden sm:inline">My Dashboard</span>
+client/src/pages/CanvaLanding.jsx:                    <span className="sm:hidden">Dashboard</span>
+client/src/pages/CanvaLanding.jsx:                  My Dashboard
+client/src/pages/CanvaLanding.jsx:                <Link href="/crm" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-dashboard">Dashboard</Link>
+client/src/pages/CanvaLanding.jsx:                        Access Dashboard
+client/src/pages/SubscriberBenefitsPage.jsx:  { name: "Mastery Dashboard", path: "/mastery", icon: Award, description: "Peak performance and growth tools" },
+client/src/pages/ProfessionalResourcesPage.jsx:              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
+client/src/pages/DiscernmentDashboard.jsx:export default function DiscernmentDashboard() {
+client/src/pages/BiometricDashboard.jsx:export default function BiometricDashboard() {
+client/src/pages/BiometricDashboard.jsx:      <SEO title="Biometric Dashboard | MyMentalHealthBuddy" description="Opt-in nervous system telemetry. Educational only." />
+client/src/pages/Dashboard.jsx:export default function Dashboard() {
+client/src/pages/Dashboard.jsx:    title="Dashboard"
+client/src/pages/Dashboard.jsx:        title="Dashboard Error"
+client/src/pages/Dashboard.jsx:        title="Dashboard"
+client/src/pages/DailyReflection.jsx:            Dashboard
+client/src/pages/GrowthPage.jsx:              Back to Dashboard
+client/src/pages/CommunityFeed.jsx:              Back to Dashboard
+client/src/pages/GratitudePractice.jsx:            Dashboard
+client/src/pages/DailyPracticePage.jsx:              Back to Dashboard
+client/src/pages/WellnessDashboard.jsx:export default function WellnessDashboard() {
+client/src/pages/WellnessDashboard.jsx:        title="Wellness Dashboard | The Genuine Love Project"
+client/src/pages/RoutinesPage.jsx:              Back to Dashboard
+client/src/pages/RecoveryPage.jsx:              Back to Dashboard
+client/src/pages/StatePage.jsx:            Back to Dashboard
+client/src/pages/CelebrationFlow.jsx:            ← Back to Dashboard
+client/src/pages/CelebrationRitual.jsx:                Return to Dashboard
+client/src/pages/CheckIn.jsx:            ← Back to Dashboard
+client/src/pages/Wellness.jsx:const WellnessStreakDashboard = lazy(() => import("../components/WellnessStreakDashboard.jsx"));
+client/src/pages/Wellness.jsx:        return <WellnessStreakDashboard />;
+client/src/pages/Wellness.jsx:              Back to Dashboard
+client/src/pages/Premium.jsx:              Back to Dashboard
+client/src/pages/InsightsDashboard.jsx:export default function InsightsDashboard() {
+client/src/pages/InsightsDashboard.jsx:                Insights Dashboard
+client/src/components/DashboardCard.jsx:export default function DashboardCard({ 
+client/src/components/DashboardCard.jsx:export function DashboardCardGrid({ children, columns = 2 }) {
+client/src/components/DashboardCard.jsx:export function DashboardCardSkeleton({ hasIcon = true }) {
+client/src/components/FlowDiagram.jsx:  Home, Sparkles, LayoutDashboard, Users, BookOpen, MessageCircle, LogIn 
+client/src/components/FlowDiagram.jsx:    { id: "homepage", name: "Homepage", icon: LayoutDashboard, color: "#2f5d5d" },
+client/src/components/ObjectUploaderUppy.tsx:import DashboardModal from "@uppy/react/dashboard-modal";
+client/src/components/ObjectUploaderUppy.tsx:      <DashboardModal
+client/src/components/PageTemplate.module.css:/* Structured tone (Dashboard pages) - organized, clear next step */
+client/src/components/PageTemplate.module.css:   STRUCTURED PROFILE STYLES (Dashboard pages)
+client/src/components/ProgressAnalytics.jsx:      aria-label="Progress Analytics Dashboard"
+client/src/components/Skeleton.jsx:export function DashboardSkeleton() {
+client/src/components/WellnessStreakDashboard.jsx:export default function WellnessStreakDashboard() {
+client/src/components/admin/AdminNavGrid.jsx:import { LayoutDashboard, Globe, Wand2, BookOpen, Calendar, Palette, Layers, PenTool, BarChart3, LineChart, Heart, DollarSign, CreditCard, Activity, Settings, Shield, Mail, Users, ShieldCheck, ToggleLeft, ClipboardList, MessageSquare, AlertTriangle, UserCheck, Zap, ArrowRight } from 'lucide-react';
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Narrative Ops Console", icon: LayoutDashboard, href: "/admin/social/ops", desc: "Pipeline, campaigns, UTM, scheduling" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Social Dashboard", icon: Globe, href: "/admin/social", desc: "Social posts overview & management" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Analytics Dashboard", icon: BarChart3, href: "/admin/analytics", desc: "Platform analytics & metrics" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Engagement Dashboard", icon: Heart, href: "/admin/engagement", desc: "User engagement metrics" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Revenue Dashboard", icon: DollarSign, href: "/admin/revenue", desc: "Revenue & MRR tracking" },
+client/src/components/admin/AdminNavGrid.jsx:        { label: "Security Dashboard", icon: ShieldCheck, href: "/admin/security", desc: "Security & rate limit monitoring" },
+client/src/components/admin/DailyOpsChecklist.jsx:    { id: 'security-review', label: 'Security Dashboard', desc: 'Check for vulnerabilities and rate limit violations', icon: ShieldCheck, href: '/admin/security', category: 'security', priority: 'high' },
+client/src/components/admin/DailyOpsChecklist.jsx:    { id: 'revenue-check', label: 'Revenue Dashboard', desc: 'Review MRR, subscriptions, and financial health', icon: TrendingUp, href: '/admin/revenue', category: 'revenue', priority: 'low' },
+client/src/components/chat/AIChatPanel.tsx:          <span>Back to Dashboard</span>
+client/src/components/layout/Header.jsx:import { Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle, Heart, UserCircle } from "lucide-react";
+client/src/components/layout/Header.jsx:    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+client/src/components/metacognition/MetacognitionDashboard.tsx:} from "@/lib/metacognition/metacognitionDashboard";
+client/src/components/metacognition/MetacognitionDashboard.tsx:export default function MetacognitionDashboard() {
+client/src/components/metacognition/MetacognitionDashboard.tsx:        <h2 className="text-xl font-semibold">Metacognition Dashboard</h2>
+client/src/components/ui/CRMWidgets.jsx: * Dashboard widgets for private user hub
+client/src/components/SacredNav.jsx:import { Menu, X, Heart, Home, BookOpen, LayoutDashboard, Sparkles, LogOut, Wrench, Newspaper, Crown } from "lucide-react";
+client/src/components/SacredNav.jsx:// Community → Blog → Pricing.  Auth-only items (Journal, Dashboard) are
+client/src/components/SacredNav.jsx:  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+client/src/components/AgeConsentGate.jsx:            Back to Dashboard
+client/src/components/TglpNavbar.jsx:import { Sparkles, BookOpen, LayoutDashboard, Heart, Menu, X, Home, MessageCircle, Search, Crown } from "lucide-react";
+client/src/components/TglpNavbar.jsx:    { href: "/crm", label: "Dashboard", icon: LayoutDashboard },
+client/src/components/TglpNavbar.jsx:                <span className="hidden sm:inline">Dashboard</span>
+client/src/components/TglpNavbar.jsx:                  Go to Dashboard
+client/src/config/navConfig.js:    { path: "/dashboard", label: "Dashboard", icon: BarChart3 },
+client/src/config/toolCategories.js:import { MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain, Sparkles, Mountain, Compass, Trophy, Palette, Layers, Puzzle, Milestone, HeartHandshake, Flame, Target, Flower2, TreePine, Feather, CircleDot, Shield, Gem, Award, Zap, TrendingUp, Star, Rocket, Orbit, Footprints, Workflow, Globe, Network, Users, FileText, Mail, Share2, Megaphone, PenTool, Search, UserCheck, LayoutDashboard, Inbox, ShieldCheck, ClipboardList, CreditCard, BarChart3, PackageCheck, Activity, DollarSign, Webhook, Contact, Key, Handshake, LogIn, UserCog, Upload, ListOrdered, Radio, Fingerprint, FolderKanban, Rss, Wand2 } from 'lucide-react';
+client/src/config/toolCategories.js:      { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
+client/src/config/toolCategories.js:      { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
+client/src/content/context/buildPageContext.ts:    title: "Dashboard — The Genuine Love Project",
+client/src/content/flags/featureFlags.ts:  | "showProgressDashboard"
+client/src/content/flags/featureFlags.ts:  showProgressDashboard: true,
+client/src/content/frameworks/benefitPillars.js: * Use these consistently across Home, Pricing, Onboarding, Dashboard, Tools, Share Cards
+client/src/content/meta/routeMetaRegistry.ts:    title: "Your Dashboard",
+client/src/content/searchIndex.ts:    title: "Dashboard",
+client/src/content/searchIndex.ts:    title: "Dashboard",
+client/src/content/routes.js:  core: 'Dashboard & Core',
+client/src/content/routes.js:        deep: 'Personal Dashboard'
+client/src/content/routes.js:      primaryCta: { label: 'View Dashboard', href: '#dashboard' },
+client/src/content/routes.js:      primaryCta: { label: 'Go to Dashboard', href: '/dashboard' },
+client/src/content/routes.js:      secondaryCta: { label: 'Explore Dashboard', href: '/dashboard' }
+client/src/content/routes.js:      primaryCta: { label: 'Go to Dashboard', href: '/dashboard' },
+client/src/content/routes.js:    pageLabel: 'Dashboard',
+client/src/content/routes.js:    title: 'Dashboard — The Genuine Love Project',
+client/src/content/routes.js:        title: 'Your Daily Dashboard',
+client/src/content/routes.js:          'Dashboard design follows habit-loop psychology: cue → routine → reward.',
+client/src/content/routes.js:      primaryCta: { label: 'Go to Dashboard', href: '/dashboard' },
+client/src/content/routes.js:    pageLabel: 'Admin Dashboard',
+client/src/content/routes.js:      titleHighlight: 'Dashboard.',
+client/src/content/routes.js:    pageLabel: 'Design Dashboard',
+client/src/content/routes.js:    title: 'Design Dashboard — The Genuine Love Project',
+client/src/content/routes.js:      titleHighlight: 'Dashboard.',
+client/src/declarations.d.ts:declare module "./pages/Dashboard" {
+client/src/features/daily/DailyFlow.tsx:            Dashboard
+client/src/figma/frames.ts:    "Dashboard – Overview",
+client/src/figma/frames.ts:    "Dashboard – Mood Tracker",
+client/src/figma/frames.ts:    "Dashboard – Journal",
+client/src/figma/frames.ts:    "Dashboard – Insights"
+client/src/figma/mapping.ts:  "Dashboard – Overview": "pages/dashboard/Overview.tsx",
+client/src/figma/mapping.ts:  "Dashboard – Mood Tracker": "pages/dashboard/Mood.tsx",
+client/src/figma/mapping.ts:  "Dashboard – Journal": "pages/dashboard/Journal.jsx",
+client/src/figma/mapping.ts:  "Dashboard – Insights": "pages/dashboard/Insights.tsx",
+client/src/styles/brand.css:   Scope: TglpNavbar (Get Started / Dashboard / Sign In) + Footer nav links.
+client/src/styles/brand.css:/* Primary header CTA — the gold pill ("Get Started" / "Start" / "Dashboard"). */
+client/src/index.css.backup.1777434482:/* ===== Dashboard v2 Layout + Motion ===== */
+client/src/index.css:/* ===== Dashboard v2 Layout + Motion ===== */
+client/src/App.jsx:// v5.8.35 perf: AnalyticsDashboard is admin-only — never needed eagerly.
+client/src/App.jsx:const AnalyticsDashboard = lazy(() => import("./pages/admin/AnalyticsDashboard.jsx"));
+client/src/App.jsx:const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
+client/src/App.jsx:const DiscernmentDashboard = lazy(() => import("./pages/DiscernmentDashboard.jsx"));
+client/src/App.jsx:const BiometricDashboard = lazy(() => import("./pages/BiometricDashboard.jsx"));
+client/src/App.jsx:const InsightsDashboard = lazy(() => import("./pages/InsightsDashboard.jsx"));
+client/src/App.jsx:const AtlasDashboard = lazy(() => import("./pages/AtlasDashboard.tsx"));
+client/src/App.jsx:const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
+client/src/App.jsx:const EliteToolsDashboard = lazy(() => import("./pages/EliteToolsDashboard.tsx"));
+client/src/App.jsx:const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.jsx"));
+client/src/App.jsx:const DashboardOverview = lazy(() => import("./pages/dashboard/Overview.jsx"));
+client/src/App.jsx:const AdminHealthDashboard = lazy(() => import("./pages/admin/HealthDashboard.jsx"));
+client/src/App.jsx:const SocialDashboard = lazy(() => import("./pages/admin/SocialDashboard.jsx"));
+client/src/App.jsx:const GentleProgressDashboard = lazy(() => import("./pages/dashboard/ProgressDashboard.jsx"));
+client/src/App.jsx:const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard.jsx"));
+client/src/App.jsx:const EngagementDashboard = lazy(() => import("./pages/admin/EngagementDashboard.jsx"));
+client/src/App.jsx:                <ProtectedRoute><DashboardOverview /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><GentleProgressDashboard /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><DiscernmentDashboard /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><BiometricDashboard /></ProtectedRoute>
+client/src/App.jsx:                <WellnessRoute><WellnessDashboard /></WellnessRoute>
+client/src/App.jsx:                <ProtectedRoute><AtlasDashboard /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><EliteToolsDashboard /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:                <ProtectedRoute><InsightsDashboard /></ProtectedRoute>
+client/src/App.jsx:                <AdminGuard><AdminHealthDashboard /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><SecurityDashboard /></AdminGuard>
+client/src/App.jsx:                <AdminGuard><ContentAdminDashboard /></AdminGuard>
+client/src/App.jsx:              <Route path="/admin/engagement">{() => <AdminGuard><EngagementDashboard /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/analytics">{() => <AdminGuard><AnalyticsDashboard /></AdminGuard>}</Route>
