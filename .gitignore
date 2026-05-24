@@ -129,3 +129,4 @@ docs/inventory/AI_SURFACE_SCAN.txt
 docs/inventory/API_USAGE_SCAN.txt
 docs/inventory/DATABASE_SCAN.txt
 hxos-lite-scan-*/
+server/routes/*.bak
