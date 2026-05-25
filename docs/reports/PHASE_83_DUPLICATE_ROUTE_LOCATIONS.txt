@@ -1,0 +1,62 @@
+
+===== /privacy =====
+client/src/App.jsx:1635:              <Route path="/privacy"><Privacy /></Route>
+client/src/App.jsx:1849:              <Route path="/privacy">{() => <ConfigRoute route="/privacy" />}</Route>
+client/src/App.jsx:1635:              <Route path="/privacy"><Privacy /></Route>
+client/src/App.jsx:1849:              <Route path="/privacy">{() => <ConfigRoute route="/privacy" />}</Route>
+
+===== /about =====
+client/src/App.jsx:415:              <Route path="/about">{() => <ConfigRoute route="/about" />}</Route>
+client/src/App.jsx:1634:              <Route path="/about"><About /></Route>
+client/src/App.jsx:415:              <Route path="/about">{() => <ConfigRoute route="/about" />}</Route>
+client/src/App.jsx:1634:              <Route path="/about"><About /></Route>
+
+===== /therapy =====
+client/src/App.jsx:463:              <Route path="/therapy">
+client/src/App.jsx:1052:              <Route path="/therapy">{() => <Redirect to="/support" />}</Route>
+client/src/App.jsx:463:              <Route path="/therapy">
+client/src/App.jsx:1052:              <Route path="/therapy">{() => <Redirect to="/support" />}</Route>
+
+===== /presence =====
+client/src/App.jsx:530:              <Route path="/presence"><Presence /></Route>
+client/src/App.jsx:813:              <Route path="/presence"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+client/src/App.jsx:530:              <Route path="/presence"><Presence /></Route>
+client/src/App.jsx:813:              <Route path="/presence"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+
+===== /affirmations =====
+client/src/App.jsx:542:              <Route path="/affirmations">
+client/src/App.jsx:719:              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
+client/src/App.jsx:542:              <Route path="/affirmations">
+client/src/App.jsx:719:              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
+
+===== /tools/meditation =====
+client/src/App.jsx:731:              <Route path="/tools/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:1877:              <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
+client/src/App.jsx:731:              <Route path="/tools/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:1877:              <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
+
+===== /sleep =====
+client/src/App.jsx:759:              <Route path="/sleep">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+client/src/App.jsx:835:              <Route path="/sleep">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:759:              <Route path="/sleep">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+client/src/App.jsx:835:              <Route path="/sleep">{() => <ConfigRoute route="/healing" />}</Route>
+
+===== /recovery =====
+client/src/App.jsx:744:              <Route path="/recovery"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:1051:              <Route path="/recovery">{() => <Redirect to="/healing-journey" />}</Route>
+client/src/App.jsx:744:              <Route path="/recovery"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:1051:              <Route path="/recovery">{() => <Redirect to="/healing-journey" />}</Route>
+
+===== /program =====
+client/src/App.jsx:903:              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:937:              <Route path="/program">{() => <Redirect to="/programs" />}</Route>
+client/src/App.jsx:1019:              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:903:              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:937:              <Route path="/program">{() => <Redirect to="/programs" />}</Route>
+client/src/App.jsx:1019:              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
+
+===== /subscribe =====
+client/src/App.jsx:907:              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:971:              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:907:              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:971:              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
