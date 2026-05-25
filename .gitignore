@@ -148,3 +148,8 @@ runtime-state/events/*
 !runtime-state/memory/.gitkeep
 !runtime-state/usage/.gitkeep
 !runtime-state/events/.gitkeep
+
+# Existing generated runtime outputs
+data/memory/*.json
+data/usage/*.json
+logs/*.jsonl
