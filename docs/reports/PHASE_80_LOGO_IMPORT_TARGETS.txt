@@ -1,0 +1,108 @@
+client/src/pages/admin/SocialStudioAdmin.jsx:4:import { Instagram, Twitter, Linkedin, Youtube, Facebook } from "../../lib/lucide-brands";
+client/src/pages/admin/SocialGenerator.jsx:6:import { Instagram, Twitter, Youtube, Linkedin } from "../../lib/lucide-brands";
+client/src/pages/admin/SocialCalendar.jsx:6:import { Instagram, Twitter, Youtube } from "../../lib/lucide-brands";
+client/src/pages/admin/SocialAnalytics.jsx:5:import { Instagram, Twitter, Youtube } from "../../lib/lucide-brands";
+client/src/pages/tools/BreathingTool.jsx:20:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/AdminLogin.jsx:4:import BrandLogo from "@/components/brand/BrandLogo";
+client/src/pages/AdminLogin.jsx:5:import BrandGlow from "@/components/BrandGlow";
+client/src/pages/ContentAdminDashboard.jsx:5:import { Instagram, Linkedin, Youtube } from "../lib/lucide-brands";
+client/src/pages/SocialHub.jsx:4:import { Instagram, Youtube, Linkedin } from "../lib/lucide-brands";
+client/src/pages/Settings.jsx:3:import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText, Gift, Loader2, Brain } from "lucide-react";
+client/src/pages/Dashboard.jsx:3:import { BarChart3, Smile, Notebook, MessageCircle, Settings, Heart, Sparkles, Sun, Moon, Wind, Target, LogOut, Brain, Compass, ChevronRight, Flame, BookOpen } from 'lucide-react';
+client/src/pages/Dashboard.jsx:9:import "../styles/brand.css";
+client/src/pages/DesignSystemV2.jsx:6:import LumiBrandLogo from "@/components/lumi/LumiBrandLogo.jsx";
+client/src/pages/DesignSystemV2.jsx:7:import LumiBrandLockupImage from "@/components/lumi/LumiBrandLockupImage.jsx";
+client/src/pages/HealingLibraryPage.jsx:4:import { BRAND } from "@shared/brand";
+client/src/pages/NewsPage.jsx:7:import { BRAND } from "@shared/brand";
+client/src/pages/Presence.jsx:3:import { MMHBFloatAvatar, MMHBAvatarRuntimeProvider } from "@/avatar-life";
+client/src/pages/Presence.jsx:4:import { MMHBCard, MMHBButton } from "@/design-system";
+client/src/pages/CelebrationFlow.jsx:19:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/CelebrationRitual.jsx:9:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/App.tsx:1:import BrandHero from "./BrandHero";
+client/src/components/BrandHero.tsx:2:import { brand } from "../brand/tokens";
+client/src/components/BrandHero.tsx:10:            src={brand.assets.logoMark}
+client/src/components/BrandLogo.tsx:2:import { brand } from "../brand/tokens";
+client/src/components/BrandLogo.tsx:10:            src={brand.assets.logoMark}
+client/src/components/landing/Hero.tsx:1:import { tokens } from "@/brand/tokens";
+client/src/components/landing/Hero.tsx:2:import { brandCopy } from "@/brand/copy";
+client/src/components/layout/Header.jsx:4:import { BRAND } from "@shared/brand";
+client/src/components/layout/Header.jsx:6:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/layout/Footer.tsx:14:import { BRAND } from "@shared/brand";
+client/src/components/layout/Footer.tsx:15:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/sacred/Hero.jsx:69:                src={logo} 
+client/src/components/sacred/SacredHero.jsx:49:            <img src={logo} alt="Logo" className="w-full h-auto" />
+client/src/components/share/ShareModal.jsx:3:import { Twitter, Facebook, Linkedin } from "../../lib/lucide-brands";
+client/src/components/BrandGlow.tsx:24:          .brand-glow-blob { animation: none !important; }
+client/src/components/SacredNav.jsx:3:import { Menu, X, Heart, Home, BookOpen, LayoutDashboard, Sparkles, LogOut, Wrench, Newspaper, Crown } from "lucide-react";
+client/src/components/lumi/LumiBrandLockupImage.jsx:10:import lockupPng from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/lumi/LumiBrandLockupImage.jsx:22:      src={lockupPng}
+client/src/components/lumi/TGLPMandala.jsx:8:import mandalaUrl from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/TGLPMandalaImage.jsx:8:import mandalaPng from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/LumiBrandLogo.jsx:17:import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/lumi/LumiBrandLogo.jsx:66:        src={lockupUrl}
+client/src/components/SEO.tsx:2:import { BRAND } from "@shared/brand.mjs";
+client/src/components/Header.jsx:2:import { BRAND } from "@shared/brand.mjs";
+client/src/components/Footer.jsx:3:import { Instagram, Youtube } from "../lib/lucide-brands";
+client/src/components/SacredFooter.jsx:20:import { Instagram, Twitter, Facebook } from "../lib/lucide-brands";
+client/src/components/SocialLinks.jsx:8:import { Youtube, Instagram, Twitter, Facebook } from "../lib/lucide-brands";
+client/src/components/BrandShell.jsx:4:export default function BrandShell({ children, logoSrc = "/logo.png" }) {
+client/src/components/BrandShell.jsx:25:                src={logoSrc}
+client/src/components/EmptyState.jsx:4:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/LoadingSpinner.tsx:11:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/CelebrationOverlay.tsx:12:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/PageTemplate.jsx:17:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/PageTemplate.jsx:106:          <MMHBFloatAvatar imageSrc={getOfficialLumi("calm")} size={32} alt="Lumi mark" data-testid="img-logo-badge-lumi" />
+client/src/components/PageTemplate.jsx:1014:              <MMHBFloatAvatar imageSrc={getOfficialLumi("calm")} size={32} alt="Lumi mark" data-testid="img-nav-logo-lumi" />
+client/src/components/SafetyDisclaimer.jsx:14:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/ErrorBoundary.jsx:4:  import("@/avatar-life/components/MMHBFloatAvatar").then((m) => ({
+client/src/context/BrandContext.jsx:2:import { BRAND } from "@shared/brand.mjs";
+client/src/data/lumiAssets.js:6: * `/brand/v17/avatar-{floating,heart,breathing}-nobg.png` (cream-blob,
+client/src/lib/brand.ts:1:import { BRAND } from "@shared/brand.mjs";
+client/src/main.jsx:3:import { applyBrand } from "./lib/brand";
+client/src/main.jsx:6:import "./styles/brand.css";
+client/src/index.css.backup.1777434482:1:@import "./styles/brand-tokens.css";
+client/src/index.css.backup.1777434482:6690:  .brand-spinner { animation: none !important; opacity: 1 !important; transform: none !important; }
+client/src/sections/VisualBenefits.jsx:45:    image: '/brand/v17/benefit-relief.png',
+client/src/sections/VisualBenefits.jsx:65:    image: '/brand/v17/benefit-understanding.png',
+client/src/sections/VisualBenefits.jsx:87:    image: '/brand/v17/benefit-companionship.png',
+client/src/sections/VisualBenefits.jsx:108:    image: '/brand/v17/benefit-growth.png',
+client/src/main.css:3:@import "./styles/brand-tokens.css";
+client/src/avatar-life/index.ts:5: *   import { MMHBFloatAvatar, MMHBAvatarRuntimeProvider } from "@/avatar-life";
+client/src/avatar-life/index.ts:9: *       imageSrc="/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png"
+client/src/design-system/components/index.ts:4: * Usage: import { MMHBButton, MMHBCard } from '@/design-system/components';
+client/src/design-system/index.ts:6: *   import { MMHBButton, MMHBCard, colors, spacing } from '@/design-system';
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:8: *   import { MMHBCheckInFlow } from "@/checkin-flow";
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:13:import { MMHBCard } from "../../design-system/components/MMHBCard";
+client/src/checkin-flow/components/FlowStepWelcome.tsx:7:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/checkin-flow/components/FlowStepBreathing.tsx:8:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/checkin-flow/components/FlowStepCheckout.tsx:6:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/checkin-flow/components/FlowStepOffer.tsx:7:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/checkin-flow/components/FlowStepComplete.tsx:7:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/companion-voice/components/MMHBCompanionMessage.tsx:8:import { MMHBCard } from "../../design-system/components/MMHBCard";
+client/src/companion-voice/components/MMHBCompanionInput.tsx:10:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/companion-voice/components/MMHBCompanion.tsx:12:import { MMHBCompanionInput } from "./MMHBCompanionInput";
+client/src/companion-voice/components/MMHBCompanion.tsx:13:import { MMHBCompanionMessage } from "./MMHBCompanionMessage";
+client/src/companion-voice/__tests/companionGovernance.test.ts:371:        `Phase 15 governance bypass — files outside companion-voice/ import internals:\n  ${offenders.join("\n  ")}\n\nUse the barrel: \`import { MMHBCompanion, generateResponse } from "@/companion-voice"\`.`,
+client/src/calm-checkin/components/CalmBreathGuide.tsx:13:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/calm-checkin/components/CalmCheckinCard.tsx:7:import { MMHBCard } from "../../design-system/components/MMHBCard";
+client/src/calm-checkin/components/CalmCheckinEntry.tsx:8:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/calm-checkin/components/CalmContinueOptions.tsx:13:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/calm-checkin/components/CalmGroundingOption.tsx:9:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/calm-checkin/components/CalmReflectionPrompt.tsx:10:import { MMHBButton } from "../../design-system/components/MMHBButton";
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:20:import { MMHBCard, MMHBButton } from "@/design-system";
+client/src/lumi-conversation/components/LumiGroundingResponse.tsx:5:import { MMHBCard, MMHBButton } from "@/design-system";
+client/src/lumi-conversation/components/LumiInputBar.tsx:17:import { MMHBButton } from "@/design-system";
+client/src/lumi-conversation/components/LumiMessageBubble.tsx:9:import { MMHBCard } from "@/design-system";
+client/src/lumi-conversation/components/LumiReflectionCard.tsx:9:import { MMHBCard, MMHBButton } from "@/design-system";
+client/src/lumi-memory/components/MemoryResetButton.tsx:9:import { MMHBButton } from "@/design-system";
+client/src/lumi-memory/components/MemoryTransparencyView.tsx:9:import { MMHBCard, colors, spacing, typography, radius } from "@/design-system";
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:10:import { MMHBCard, MMHBButton, colors, spacing, typography, radius } from "@/design-system";
+client/src/lumi-rituals/components/RitualStepCard.tsx:14:import { MMHBCard } from "@/design-system";
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:16:import { MMHBButton, MMHBCard } from "@/design-system";
+client/src/lumi-circadian/components/OptInPrompt.tsx:17:import { MMHBButton, MMHBCard } from "@/design-system";
+client/src/lumi-circadian/components/QuietNudge.tsx:16:import { MMHBButton, MMHBCard } from "@/design-system";
+client/src/lumi-voice/components/VoiceToggle.tsx:9:import { MMHBCard, MMHBButton, colors, spacing, typography } from "@/design-system";
+client/src/lumi-boundaries/components/BoundaryCard.tsx:8:import { MMHBCard, MMHBButton, colors, spacing, typography } from "@/design-system";
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:9:import { MMHBButton, colors, spacing, typography, radius } from "@/design-system";
+client/src/index.css:1:@import "./styles/brand-tokens.css";
+client/src/index.css:6696:  .brand-spinner { animation: none !important; opacity: 1 !important; transform: none !important; }
