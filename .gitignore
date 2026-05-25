@@ -130,3 +130,9 @@ docs/inventory/API_USAGE_SCAN.txt
 docs/inventory/DATABASE_SCAN.txt
 hxos-lite-scan-*/
 server/routes/*.bak
+
+# Runtime-generated state and telemetry
+data/aiMemory/*.json
+data/usage/*.json
+logs/*.jsonl
+logs/*.log
