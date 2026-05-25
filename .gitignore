@@ -136,3 +136,15 @@ data/aiMemory/*.json
 data/usage/*.json
 logs/*.jsonl
 logs/*.log
+
+# Runtime isolation
+runtime-state/logs/*
+runtime-state/memory/*
+runtime-state/usage/*
+runtime-state/events/*
+
+# Preserve structure
+!runtime-state/logs/.gitkeep
+!runtime-state/memory/.gitkeep
+!runtime-state/usage/.gitkeep
+!runtime-state/events/.gitkeep
