@@ -1,0 +1,5690 @@
+{
+  "generatedAt": "2026-05-25T19:04:32.655Z",
+  "routes": [
+    {
+      "file": "client/src/App.jsx",
+      "name": "App.jsx"
+    },
+    {
+      "file": "client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx",
+      "name": "ReadingLevelSwitcher.jsx"
+    },
+    {
+      "file": "client/src/_quarantine/orphans/SacredNavBar.jsx",
+      "name": "SacredNavBar.jsx"
+    },
+    {
+      "file": "client/src/_quarantine/orphans/useEmotionBackground.js",
+      "name": "useEmotionBackground.js"
+    },
+    {
+      "file": "client/src/api/fetchWithAuth.js",
+      "name": "fetchWithAuth.js"
+    },
+    {
+      "file": "client/src/avatar-life/__tests__/avatarLifeContract.test.ts",
+      "name": "avatarLifeContract.test.ts"
+    },
+    {
+      "file": "client/src/avatar-life/components/AvatarWithReactState.tsx",
+      "name": "AvatarWithReactState.tsx"
+    },
+    {
+      "file": "client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx",
+      "name": "MMHBAvatarRuntimeProvider.tsx"
+    },
+    {
+      "file": "client/src/avatar-life/components/MMHBFloatAvatar.tsx",
+      "name": "MMHBFloatAvatar.tsx"
+    },
+    {
+      "file": "client/src/avatar-life/governance/nonDriftRules.ts",
+      "name": "nonDriftRules.ts"
+    },
+    {
+      "file": "client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts",
+      "name": "useAvatarPresenceRuntime.ts"
+    },
+    {
+      "file": "client/src/avatar-life/hooks/useReducedMotionSafe.ts",
+      "name": "useReducedMotionSafe.ts"
+    },
+    {
+      "file": "client/src/avatar-life/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/avatar-life/observability/avatarRuntimeTelemetry.ts",
+      "name": "avatarRuntimeTelemetry.ts"
+    },
+    {
+      "file": "client/src/avatar-life/officialLumiAssets.ts",
+      "name": "officialLumiAssets.ts"
+    },
+    {
+      "file": "client/src/avatar-life/state/useAvatarLifeStore.tsx",
+      "name": "useAvatarLifeStore.tsx"
+    },
+    {
+      "file": "client/src/avatar-life/types/avatarLifeTypes.ts",
+      "name": "avatarLifeTypes.ts"
+    },
+    {
+      "file": "client/src/blog/BlogPage.tsx",
+      "name": "BlogPage.tsx"
+    },
+    {
+      "file": "client/src/brand/brand.ts",
+      "name": "brand.ts"
+    },
+    {
+      "file": "client/src/brand/copy.ts",
+      "name": "copy.ts"
+    },
+    {
+      "file": "client/src/brand/tokens.ts",
+      "name": "tokens.ts"
+    },
+    {
+      "file": "client/src/brand/voice.ts",
+      "name": "voice.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/__tests/calmCheckinGovernance.test.ts",
+      "name": "calmCheckinGovernance.test.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/accessibility/useReducedCalmMotion.ts",
+      "name": "useReducedCalmMotion.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmBreathGuide.tsx",
+      "name": "CalmBreathGuide.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmCheckinCard.tsx",
+      "name": "CalmCheckinCard.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmCheckinEntry.tsx",
+      "name": "CalmCheckinEntry.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmContinueOptions.tsx",
+      "name": "CalmContinueOptions.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmGroundingOption.tsx",
+      "name": "CalmGroundingOption.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmReflectionPrompt.tsx",
+      "name": "CalmReflectionPrompt.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/content/calmCheckinContent.ts",
+      "name": "calmCheckinContent.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/governance/calmCheckinRules.ts",
+      "name": "calmCheckinRules.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/motion/calmCheckinMotion.ts",
+      "name": "calmCheckinMotion.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/state/calmCheckinState.ts",
+      "name": "calmCheckinState.ts"
+    },
+    {
+      "file": "client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts",
+      "name": "checkInFlowGovernance.test.ts"
+    },
+    {
+      "file": "client/src/checkin-flow/components/FlowStepBreathing.tsx",
+      "name": "FlowStepBreathing.tsx"
+    },
+    {
+      "file": "client/src/checkin-flow/components/FlowStepCheckout.tsx",
+      "name": "FlowStepCheckout.tsx"
+    },
+    {
+      "file": "client/src/checkin-flow/components/FlowStepComplete.tsx",
+      "name": "FlowStepComplete.tsx"
+    },
+    {
+      "file": "client/src/checkin-flow/components/FlowStepOffer.tsx",
+      "name": "FlowStepOffer.tsx"
+    },
+    {
+      "file": "client/src/checkin-flow/components/FlowStepWelcome.tsx",
+      "name": "FlowStepWelcome.tsx"
+    },
+    {
+      "file": "client/src/checkin-flow/components/MMHBCheckInFlow.tsx",
+      "name": "MMHBCheckInFlow.tsx"
+    },
+    {
+      "file": "client/src/checkin-flow/copy/microCopy.ts",
+      "name": "microCopy.ts"
+    },
+    {
+      "file": "client/src/checkin-flow/governance/checkInFlowRules.ts",
+      "name": "checkInFlowRules.ts"
+    },
+    {
+      "file": "client/src/checkin-flow/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/checkin-flow/state/useCheckInFlowStore.ts",
+      "name": "useCheckInFlowStore.ts"
+    },
+    {
+      "file": "client/src/checkin-flow/types/checkInFlowTypes.ts",
+      "name": "checkInFlowTypes.ts"
+    },
+    {
+      "file": "client/src/companion-voice/__tests/companionGovernance.test.ts",
+      "name": "companionGovernance.test.ts"
+    },
+    {
+      "file": "client/src/companion-voice/components/MMHBCompanion.tsx",
+      "name": "MMHBCompanion.tsx"
+    },
+    {
+      "file": "client/src/companion-voice/components/MMHBCompanionInput.tsx",
+      "name": "MMHBCompanionInput.tsx"
+    },
+    {
+      "file": "client/src/companion-voice/components/MMHBCompanionMessage.tsx",
+      "name": "MMHBCompanionMessage.tsx"
+    },
+    {
+      "file": "client/src/companion-voice/copy/responseBank.ts",
+      "name": "responseBank.ts"
+    },
+    {
+      "file": "client/src/companion-voice/engine/categoryDetector.ts",
+      "name": "categoryDetector.ts"
+    },
+    {
+      "file": "client/src/companion-voice/engine/companionEngine.ts",
+      "name": "companionEngine.ts"
+    },
+    {
+      "file": "client/src/companion-voice/engine/crisisDetector.ts",
+      "name": "crisisDetector.ts"
+    },
+    {
+      "file": "client/src/companion-voice/governance/companionRules.ts",
+      "name": "companionRules.ts"
+    },
+    {
+      "file": "client/src/companion-voice/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/companion-voice/types/companionVoiceTypes.ts",
+      "name": "companionVoiceTypes.ts"
+    },
+    {
+      "file": "client/src/components/AIChat.jsx",
+      "name": "AIChat.jsx"
+    },
+    {
+      "file": "client/src/components/AICompanion.jsx",
+      "name": "AICompanion.jsx"
+    },
+    {
+      "file": "client/src/components/AIWellnessConcierge.jsx",
+      "name": "AIWellnessConcierge.jsx"
+    },
+    {
+      "file": "client/src/components/AboutSection.jsx",
+      "name": "AboutSection.jsx"
+    },
+    {
+      "file": "client/src/components/AccessibilityAudit.jsx",
+      "name": "AccessibilityAudit.jsx"
+    },
+    {
+      "file": "client/src/components/AccessibilityToolbar.jsx",
+      "name": "AccessibilityToolbar.jsx"
+    },
+    {
+      "file": "client/src/components/AchievementBadge.jsx",
+      "name": "AchievementBadge.jsx"
+    },
+    {
+      "file": "client/src/components/AchievementBadges.jsx",
+      "name": "AchievementBadges.jsx"
+    },
+    {
+      "file": "client/src/components/AchievementSystem.jsx",
+      "name": "AchievementSystem.jsx"
+    },
+    {
+      "file": "client/src/components/AdminGuard.jsx",
+      "name": "AdminGuard.jsx"
+    },
+    {
+      "file": "client/src/components/AdvisorySection.jsx",
+      "name": "AdvisorySection.jsx"
+    },
+    {
+      "file": "client/src/components/AffirmationCards.jsx",
+      "name": "AffirmationCards.jsx"
+    },
+    {
+      "file": "client/src/components/AffirmationDeck.jsx",
+      "name": "AffirmationDeck.jsx"
+    },
+    {
+      "file": "client/src/components/AgeConfirmationModal.tsx",
+      "name": "AgeConfirmationModal.tsx"
+    },
+    {
+      "file": "client/src/components/AgeConsentGate.jsx",
+      "name": "AgeConsentGate.jsx"
+    },
+    {
+      "file": "client/src/components/AngerManagement.jsx",
+      "name": "AngerManagement.jsx"
+    },
+    {
+      "file": "client/src/components/AnimatedPageTransition.jsx",
+      "name": "AnimatedPageTransition.jsx"
+    },
+    {
+      "file": "client/src/components/AnxietyRelief.jsx",
+      "name": "AnxietyRelief.jsx"
+    },
+    {
+      "file": "client/src/components/App.tsx",
+      "name": "App.tsx"
+    },
+    {
+      "file": "client/src/components/Badges.jsx",
+      "name": "Badges.jsx"
+    },
+    {
+      "file": "client/src/components/BenefitStrip.tsx",
+      "name": "BenefitStrip.tsx"
+    },
+    {
+      "file": "client/src/components/BenefitsBlock.d.ts",
+      "name": "BenefitsBlock.d.ts"
+    },
+    {
+      "file": "client/src/components/BenefitsBlock.jsx",
+      "name": "BenefitsBlock.jsx"
+    },
+    {
+      "file": "client/src/components/BenefitsSection.jsx",
+      "name": "BenefitsSection.jsx"
+    },
+    {
+      "file": "client/src/components/BodyScanMeditation.jsx",
+      "name": "BodyScanMeditation.jsx"
+    },
+    {
+      "file": "client/src/components/BoundaryBuilder.jsx",
+      "name": "BoundaryBuilder.jsx"
+    },
+    {
+      "file": "client/src/components/BrandGlow.tsx",
+      "name": "BrandGlow.tsx"
+    },
+    {
+      "file": "client/src/components/BrandHero.tsx",
+      "name": "BrandHero.tsx"
+    },
+    {
+      "file": "client/src/components/BrandLogo.tsx",
+      "name": "BrandLogo.tsx"
+    },
+    {
+      "file": "client/src/components/BrandShell.jsx",
+      "name": "BrandShell.jsx"
+    },
+    {
+      "file": "client/src/components/Breadcrumbs.jsx",
+      "name": "Breadcrumbs.jsx"
+    },
+    {
+      "file": "client/src/components/BreathingExercise.jsx",
+      "name": "BreathingExercise.jsx"
+    },
+    {
+      "file": "client/src/components/CBTThoughtDiary.jsx",
+      "name": "CBTThoughtDiary.jsx"
+    },
+    {
+      "file": "client/src/components/CanvaPanel.jsx",
+      "name": "CanvaPanel.jsx"
+    },
+    {
+      "file": "client/src/components/CelebrationOverlay.tsx",
+      "name": "CelebrationOverlay.tsx"
+    },
+    {
+      "file": "client/src/components/ChatWidget.tsx",
+      "name": "ChatWidget.tsx"
+    },
+    {
+      "file": "client/src/components/CodeCopilotPanel.tsx",
+      "name": "CodeCopilotPanel.tsx"
+    },
+    {
+      "file": "client/src/components/ConsentBanner.jsx",
+      "name": "ConsentBanner.jsx"
+    },
+    {
+      "file": "client/src/components/ContentLevelToggle.jsx",
+      "name": "ContentLevelToggle.jsx"
+    },
+    {
+      "file": "client/src/components/ContentStudio.jsx",
+      "name": "ContentStudio.jsx"
+    },
+    {
+      "file": "client/src/components/CopingStrategies.jsx",
+      "name": "CopingStrategies.jsx"
+    },
+    {
+      "file": "client/src/components/CreativeExpression.jsx",
+      "name": "CreativeExpression.jsx"
+    },
+    {
+      "file": "client/src/components/CrisisStabilizer.jsx",
+      "name": "CrisisStabilizer.jsx"
+    },
+    {
+      "file": "client/src/components/DailyAffirmations.jsx",
+      "name": "DailyAffirmations.jsx"
+    },
+    {
+      "file": "client/src/components/DailyInsight.jsx",
+      "name": "DailyInsight.jsx"
+    },
+    {
+      "file": "client/src/components/DailyWellnessPlanner.jsx",
+      "name": "DailyWellnessPlanner.jsx"
+    },
+    {
+      "file": "client/src/components/DashboardCard.jsx",
+      "name": "DashboardCard.jsx"
+    },
+    {
+      "file": "client/src/components/DataExportButton.jsx",
+      "name": "DataExportButton.jsx"
+    },
+    {
+      "file": "client/src/components/DigitalDetox.jsx",
+      "name": "DigitalDetox.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionAdaptiveBackground.jsx",
+      "name": "EmotionAdaptiveBackground.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionAuraRing.jsx",
+      "name": "EmotionAuraRing.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionBackgroundProvider.jsx",
+      "name": "EmotionBackgroundProvider.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionCalendar.jsx",
+      "name": "EmotionCalendar.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionLog.jsx",
+      "name": "EmotionLog.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionPieChart.jsx",
+      "name": "EmotionPieChart.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionWheel.jsx",
+      "name": "EmotionWheel.jsx"
+    },
+    {
+      "file": "client/src/components/EmotionalIntelligenceQuiz.jsx",
+      "name": "EmotionalIntelligenceQuiz.jsx"
+    },
+    {
+      "file": "client/src/components/EmptyState.jsx",
+      "name": "EmptyState.jsx"
+    },
+    {
+      "file": "client/src/components/EnergyBooster.jsx",
+      "name": "EnergyBooster.jsx"
+    },
+    {
+      "file": "client/src/components/ErrorBoundary.jsx",
+      "name": "ErrorBoundary.jsx"
+    },
+    {
+      "file": "client/src/components/FeedbackPrompt.tsx",
+      "name": "FeedbackPrompt.tsx"
+    },
+    {
+      "file": "client/src/components/FeedbackWidget.jsx",
+      "name": "FeedbackWidget.jsx"
+    },
+    {
+      "file": "client/src/components/FloatingLotusGuide.jsx",
+      "name": "FloatingLotusGuide.jsx"
+    },
+    {
+      "file": "client/src/components/FlowDiagram.jsx",
+      "name": "FlowDiagram.jsx"
+    },
+    {
+      "file": "client/src/components/FocusTimer.jsx",
+      "name": "FocusTimer.jsx"
+    },
+    {
+      "file": "client/src/components/Footer.jsx",
+      "name": "Footer.jsx"
+    },
+    {
+      "file": "client/src/components/GlobalSearch.jsx",
+      "name": "GlobalSearch.jsx"
+    },
+    {
+      "file": "client/src/components/GlowFooter.jsx",
+      "name": "GlowFooter.jsx"
+    },
+    {
+      "file": "client/src/components/GlowingCard.jsx",
+      "name": "GlowingCard.jsx"
+    },
+    {
+      "file": "client/src/components/GoalProgress.jsx",
+      "name": "GoalProgress.jsx"
+    },
+    {
+      "file": "client/src/components/GratitudeJar.jsx",
+      "name": "GratitudeJar.jsx"
+    },
+    {
+      "file": "client/src/components/GratitudePrompt.jsx",
+      "name": "GratitudePrompt.jsx"
+    },
+    {
+      "file": "client/src/components/GrowthCTA.tsx",
+      "name": "GrowthCTA.tsx"
+    },
+    {
+      "file": "client/src/components/GuardianHeartPanel.tsx",
+      "name": "GuardianHeartPanel.tsx"
+    },
+    {
+      "file": "client/src/components/HabitTracker.jsx",
+      "name": "HabitTracker.jsx"
+    },
+    {
+      "file": "client/src/components/Header.jsx",
+      "name": "Header.jsx"
+    },
+    {
+      "file": "client/src/components/HealingChat.tsx",
+      "name": "HealingChat.tsx"
+    },
+    {
+      "file": "client/src/components/HealingHero.jsx",
+      "name": "HealingHero.jsx"
+    },
+    {
+      "file": "client/src/components/HealingJourneys.jsx",
+      "name": "HealingJourneys.jsx"
+    },
+    {
+      "file": "client/src/components/HeroSection.jsx",
+      "name": "HeroSection.jsx"
+    },
+    {
+      "file": "client/src/components/HydrationTracker.jsx",
+      "name": "HydrationTracker.jsx"
+    },
+    {
+      "file": "client/src/components/JoinSection.jsx",
+      "name": "JoinSection.jsx"
+    },
+    {
+      "file": "client/src/components/JournalAI.jsx",
+      "name": "JournalAI.jsx"
+    },
+    {
+      "file": "client/src/components/JournalInsights.jsx",
+      "name": "JournalInsights.jsx"
+    },
+    {
+      "file": "client/src/components/KeyboardShortcuts.jsx",
+      "name": "KeyboardShortcuts.jsx"
+    },
+    {
+      "file": "client/src/components/KnowledgeBase.jsx",
+      "name": "KnowledgeBase.jsx"
+    },
+    {
+      "file": "client/src/components/LaughterTherapy.jsx",
+      "name": "LaughterTherapy.jsx"
+    },
+    {
+      "file": "client/src/components/LazyImage.jsx",
+      "name": "LazyImage.jsx"
+    },
+    {
+      "file": "client/src/components/LevelUpModal.jsx",
+      "name": "LevelUpModal.jsx"
+    },
+    {
+      "file": "client/src/components/LiveRegion.jsx",
+      "name": "LiveRegion.jsx"
+    },
+    {
+      "file": "client/src/components/LoadingSpinner.tsx",
+      "name": "LoadingSpinner.tsx"
+    },
+    {
+      "file": "client/src/components/LotusGuide.jsx",
+      "name": "LotusGuide.jsx"
+    },
+    {
+      "file": "client/src/components/MIQuickPrompt.tsx",
+      "name": "MIQuickPrompt.tsx"
+    },
+    {
+      "file": "client/src/components/MeditationTimer.jsx",
+      "name": "MeditationTimer.jsx"
+    },
+    {
+      "file": "client/src/components/MicroWinPrompt.jsx",
+      "name": "MicroWinPrompt.jsx"
+    },
+    {
+      "file": "client/src/components/Microcopy.jsx",
+      "name": "Microcopy.jsx"
+    },
+    {
+      "file": "client/src/components/MilestoneTracker.jsx",
+      "name": "MilestoneTracker.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulBreathing.jsx",
+      "name": "MindfulBreathing.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulEating.jsx",
+      "name": "MindfulEating.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulWalking.jsx",
+      "name": "MindfulWalking.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulnessBell.jsx",
+      "name": "MindfulnessBell.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulnessChallenges.jsx",
+      "name": "MindfulnessChallenges.jsx"
+    },
+    {
+      "file": "client/src/components/ModeToggle.jsx",
+      "name": "ModeToggle.jsx"
+    },
+    {
+      "file": "client/src/components/MoodHistoryChart.jsx",
+      "name": "MoodHistoryChart.jsx"
+    },
+    {
+      "file": "client/src/components/MoodInsight.jsx",
+      "name": "MoodInsight.jsx"
+    },
+    {
+      "file": "client/src/components/MoodMeter.jsx",
+      "name": "MoodMeter.jsx"
+    },
+    {
+      "file": "client/src/components/MoodResponder.jsx",
+      "name": "MoodResponder.jsx"
+    },
+    {
+      "file": "client/src/components/MoodTrendsChart.jsx",
+      "name": "MoodTrendsChart.jsx"
+    },
+    {
+      "file": "client/src/components/MoodVisualizer.jsx",
+      "name": "MoodVisualizer.jsx"
+    },
+    {
+      "file": "client/src/components/MorningEveningRituals.jsx",
+      "name": "MorningEveningRituals.jsx"
+    },
+    {
+      "file": "client/src/components/MotivationBooster.jsx",
+      "name": "MotivationBooster.jsx"
+    },
+    {
+      "file": "client/src/components/MotivationalQuote.jsx",
+      "name": "MotivationalQuote.jsx"
+    },
+    {
+      "file": "client/src/components/NewsletterSignup.jsx",
+      "name": "NewsletterSignup.jsx"
+    },
+    {
+      "file": "client/src/components/NotificationCenter.jsx",
+      "name": "NotificationCenter.jsx"
+    },
+    {
+      "file": "client/src/components/ObjectUploader.jsx",
+      "name": "ObjectUploader.jsx"
+    },
+    {
+      "file": "client/src/components/ObjectUploaderUppy.tsx",
+      "name": "ObjectUploaderUppy.tsx"
+    },
+    {
+      "file": "client/src/components/OfflineIndicator.jsx",
+      "name": "OfflineIndicator.jsx"
+    },
+    {
+      "file": "client/src/components/OnboardingFlow.jsx",
+      "name": "OnboardingFlow.jsx"
+    },
+    {
+      "file": "client/src/components/PageScaffold.d.ts",
+      "name": "PageScaffold.d.ts"
+    },
+    {
+      "file": "client/src/components/PageScaffold.jsx",
+      "name": "PageScaffold.jsx"
+    },
+    {
+      "file": "client/src/components/PageTemplate.jsx",
+      "name": "PageTemplate.jsx"
+    },
+    {
+      "file": "client/src/components/PageTransition.jsx",
+      "name": "PageTransition.jsx"
+    },
+    {
+      "file": "client/src/components/PersistentDisclaimer.jsx",
+      "name": "PersistentDisclaimer.jsx"
+    },
+    {
+      "file": "client/src/components/PlanGate.jsx",
+      "name": "PlanGate.jsx"
+    },
+    {
+      "file": "client/src/components/PositiveReframing.jsx",
+      "name": "PositiveReframing.jsx"
+    },
+    {
+      "file": "client/src/components/PositiveVisualization.jsx",
+      "name": "PositiveVisualization.jsx"
+    },
+    {
+      "file": "client/src/components/PowerNap.jsx",
+      "name": "PowerNap.jsx"
+    },
+    {
+      "file": "client/src/components/ProgressAnalytics.jsx",
+      "name": "ProgressAnalytics.jsx"
+    },
+    {
+      "file": "client/src/components/ProgressRing.jsx",
+      "name": "ProgressRing.jsx"
+    },
+    {
+      "file": "client/src/components/ProgressTracker.jsx",
+      "name": "ProgressTracker.jsx"
+    },
+    {
+      "file": "client/src/components/ProgressiveMuscleRelaxation.jsx",
+      "name": "ProgressiveMuscleRelaxation.jsx"
+    },
+    {
+      "file": "client/src/components/PromptCard.tsx",
+      "name": "PromptCard.tsx"
+    },
+    {
+      "file": "client/src/components/ProtectedRoute.jsx",
+      "name": "ProtectedRoute.jsx"
+    },
+    {
+      "file": "client/src/components/QuestPanel.jsx",
+      "name": "QuestPanel.jsx"
+    },
+    {
+      "file": "client/src/components/QuickActions.jsx",
+      "name": "QuickActions.jsx"
+    },
+    {
+      "file": "client/src/components/ReadingLevelToggle.jsx",
+      "name": "ReadingLevelToggle.jsx"
+    },
+    {
+      "file": "client/src/components/ReflectionCardExport.jsx",
+      "name": "ReflectionCardExport.jsx"
+    },
+    {
+      "file": "client/src/components/ReflectionInsights.jsx",
+      "name": "ReflectionInsights.jsx"
+    },
+    {
+      "file": "client/src/components/RelatedLinksBlock.tsx",
+      "name": "RelatedLinksBlock.tsx"
+    },
+    {
+      "file": "client/src/components/RelatedNextSteps.jsx",
+      "name": "RelatedNextSteps.jsx"
+    },
+    {
+      "file": "client/src/components/ReminderScheduler.jsx",
+      "name": "ReminderScheduler.jsx"
+    },
+    {
+      "file": "client/src/components/ReminderSettings.jsx",
+      "name": "ReminderSettings.jsx"
+    },
+    {
+      "file": "client/src/components/ResilienceStories.jsx",
+      "name": "ResilienceStories.jsx"
+    },
+    {
+      "file": "client/src/components/ResponsiveWrapper.jsx",
+      "name": "ResponsiveWrapper.jsx"
+    },
+    {
+      "file": "client/src/components/ReturnLoop.jsx",
+      "name": "ReturnLoop.jsx"
+    },
+    {
+      "file": "client/src/components/RouteGuard.jsx",
+      "name": "RouteGuard.jsx"
+    },
+    {
+      "file": "client/src/components/SEO.tsx",
+      "name": "SEO.tsx"
+    },
+    {
+      "file": "client/src/components/SacredBackground.jsx",
+      "name": "SacredBackground.jsx"
+    },
+    {
+      "file": "client/src/components/SacredFooter.jsx",
+      "name": "SacredFooter.jsx"
+    },
+    {
+      "file": "client/src/components/SacredForm.jsx",
+      "name": "SacredForm.jsx"
+    },
+    {
+      "file": "client/src/components/SacredGeometryBg.jsx",
+      "name": "SacredGeometryBg.jsx"
+    },
+    {
+      "file": "client/src/components/SacredNav.jsx",
+      "name": "SacredNav.jsx"
+    },
+    {
+      "file": "client/src/components/SacredPattern.jsx",
+      "name": "SacredPattern.jsx"
+    },
+    {
+      "file": "client/src/components/SacredQuote.jsx",
+      "name": "SacredQuote.jsx"
+    },
+    {
+      "file": "client/src/components/SafeBoundary.jsx",
+      "name": "SafeBoundary.jsx"
+    },
+    {
+      "file": "client/src/components/SafetyDisclaimer.jsx",
+      "name": "SafetyDisclaimer.jsx"
+    },
+    {
+      "file": "client/src/components/SafetyFooter.d.ts",
+      "name": "SafetyFooter.d.ts"
+    },
+    {
+      "file": "client/src/components/SafetyFooter.jsx",
+      "name": "SafetyFooter.jsx"
+    },
+    {
+      "file": "client/src/components/SelfCareBingo.jsx",
+      "name": "SelfCareBingo.jsx"
+    },
+    {
+      "file": "client/src/components/SelfCareChecklist.jsx",
+      "name": "SelfCareChecklist.jsx"
+    },
+    {
+      "file": "client/src/components/SelfCompassion.jsx",
+      "name": "SelfCompassion.jsx"
+    },
+    {
+      "file": "client/src/components/SessionTimeout.jsx",
+      "name": "SessionTimeout.jsx"
+    },
+    {
+      "file": "client/src/components/ShareReflection.jsx",
+      "name": "ShareReflection.jsx"
+    },
+    {
+      "file": "client/src/components/ShareableReflectionCard.jsx",
+      "name": "ShareableReflectionCard.jsx"
+    },
+    {
+      "file": "client/src/components/SharedEntryCard.jsx",
+      "name": "SharedEntryCard.jsx"
+    },
+    {
+      "file": "client/src/components/Skeleton.jsx",
+      "name": "Skeleton.jsx"
+    },
+    {
+      "file": "client/src/components/SkipToContent.jsx",
+      "name": "SkipToContent.jsx"
+    },
+    {
+      "file": "client/src/components/SleepSanctuary.jsx",
+      "name": "SleepSanctuary.jsx"
+    },
+    {
+      "file": "client/src/components/SleepTracker.jsx",
+      "name": "SleepTracker.jsx"
+    },
+    {
+      "file": "client/src/components/SocialConnection.jsx",
+      "name": "SocialConnection.jsx"
+    },
+    {
+      "file": "client/src/components/SocialLinks.jsx",
+      "name": "SocialLinks.jsx"
+    },
+    {
+      "file": "client/src/components/SocialShare.jsx",
+      "name": "SocialShare.jsx"
+    },
+    {
+      "file": "client/src/components/SoftLaunchBanner.jsx",
+      "name": "SoftLaunchBanner.jsx"
+    },
+    {
+      "file": "client/src/components/SomaticRelease.jsx",
+      "name": "SomaticRelease.jsx"
+    },
+    {
+      "file": "client/src/components/SoundHealingPlayer.jsx",
+      "name": "SoundHealingPlayer.jsx"
+    },
+    {
+      "file": "client/src/components/Sparkline.jsx",
+      "name": "Sparkline.jsx"
+    },
+    {
+      "file": "client/src/components/StartHerePathways.jsx",
+      "name": "StartHerePathways.jsx"
+    },
+    {
+      "file": "client/src/components/StateTracker.jsx",
+      "name": "StateTracker.jsx"
+    },
+    {
+      "file": "client/src/components/StateTracker.tsx",
+      "name": "StateTracker.tsx"
+    },
+    {
+      "file": "client/src/components/StreakCelebration.jsx",
+      "name": "StreakCelebration.jsx"
+    },
+    {
+      "file": "client/src/components/StreakCounter.jsx",
+      "name": "StreakCounter.jsx"
+    },
+    {
+      "file": "client/src/components/StressMonitor.jsx",
+      "name": "StressMonitor.jsx"
+    },
+    {
+      "file": "client/src/components/TestimonialCarousel.jsx",
+      "name": "TestimonialCarousel.jsx"
+    },
+    {
+      "file": "client/src/components/TglpNavbar.jsx",
+      "name": "TglpNavbar.jsx"
+    },
+    {
+      "file": "client/src/components/ThemeProvider.jsx",
+      "name": "ThemeProvider.jsx"
+    },
+    {
+      "file": "client/src/components/TimeOfDayBackground.jsx",
+      "name": "TimeOfDayBackground.jsx"
+    },
+    {
+      "file": "client/src/components/ToolCard.tsx",
+      "name": "ToolCard.tsx"
+    },
+    {
+      "file": "client/src/components/UpsellModal.jsx",
+      "name": "UpsellModal.jsx"
+    },
+    {
+      "file": "client/src/components/ValuesExplorer.jsx",
+      "name": "ValuesExplorer.jsx"
+    },
+    {
+      "file": "client/src/components/VirtualList.jsx",
+      "name": "VirtualList.jsx"
+    },
+    {
+      "file": "client/src/components/VoiceAffirmation.jsx",
+      "name": "VoiceAffirmation.jsx"
+    },
+    {
+      "file": "client/src/components/VoiceSettings.jsx",
+      "name": "VoiceSettings.jsx"
+    },
+    {
+      "file": "client/src/components/WeeklyRecap.jsx",
+      "name": "WeeklyRecap.jsx"
+    },
+    {
+      "file": "client/src/components/WeeklyReflection.jsx",
+      "name": "WeeklyReflection.jsx"
+    },
+    {
+      "file": "client/src/components/WelcomeBackBanner.jsx",
+      "name": "WelcomeBackBanner.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessGoalTracker.jsx",
+      "name": "WellnessGoalTracker.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessScore.jsx",
+      "name": "WellnessScore.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessStreakDashboard.jsx",
+      "name": "WellnessStreakDashboard.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessTimer.jsx",
+      "name": "WellnessTimer.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessToolkit.jsx",
+      "name": "WellnessToolkit.jsx"
+    },
+    {
+      "file": "client/src/components/WorryTimeScheduler.jsx",
+      "name": "WorryTimeScheduler.jsx"
+    },
+    {
+      "file": "client/src/components/XPProgressBar.jsx",
+      "name": "XPProgressBar.jsx"
+    },
+    {
+      "file": "client/src/components/a11y/ReducedMotionProvider.jsx",
+      "name": "ReducedMotionProvider.jsx"
+    },
+    {
+      "file": "client/src/components/a11y/SkipToContent.tsx",
+      "name": "SkipToContent.tsx"
+    },
+    {
+      "file": "client/src/components/admin/AIHealthPipeline.jsx",
+      "name": "AIHealthPipeline.jsx"
+    },
+    {
+      "file": "client/src/components/admin/AIKnowledgeBaseSummary.jsx",
+      "name": "AIKnowledgeBaseSummary.jsx"
+    },
+    {
+      "file": "client/src/components/admin/AIKnowledgeHub.jsx",
+      "name": "AIKnowledgeHub.jsx"
+    },
+    {
+      "file": "client/src/components/admin/AdminNavGrid.jsx",
+      "name": "AdminNavGrid.jsx"
+    },
+    {
+      "file": "client/src/components/admin/AdminQueryStates.jsx",
+      "name": "AdminQueryStates.jsx"
+    },
+    {
+      "file": "client/src/components/admin/ConsciousnessRegistryPanel.jsx",
+      "name": "ConsciousnessRegistryPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/DailyOpsChecklist.jsx",
+      "name": "DailyOpsChecklist.jsx"
+    },
+    {
+      "file": "client/src/components/admin/DailyToolsPanel.jsx",
+      "name": "DailyToolsPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/GroupedHealthOverview.jsx",
+      "name": "GroupedHealthOverview.jsx"
+    },
+    {
+      "file": "client/src/components/admin/KernelStatusPanel.jsx",
+      "name": "KernelStatusPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/MetricCard.jsx",
+      "name": "MetricCard.jsx"
+    },
+    {
+      "file": "client/src/components/admin/OperationsPanel.jsx",
+      "name": "OperationsPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/OrchestratorTestPanel.jsx",
+      "name": "OrchestratorTestPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/RecentActivityPanel.jsx",
+      "name": "RecentActivityPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/SOPMonitorPanel.jsx",
+      "name": "SOPMonitorPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/StatusBadge.jsx",
+      "name": "StatusBadge.jsx"
+    },
+    {
+      "file": "client/src/components/admin/SystemHealthPanel.jsx",
+      "name": "SystemHealthPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/SystemOptimizationAdvisor.jsx",
+      "name": "SystemOptimizationAdvisor.jsx"
+    },
+    {
+      "file": "client/src/components/admin/SystemTelemetryPanel.jsx",
+      "name": "SystemTelemetryPanel.jsx"
+    },
+    {
+      "file": "client/src/components/admin/Top50ProcessTracker.jsx",
+      "name": "Top50ProcessTracker.jsx"
+    },
+    {
+      "file": "client/src/components/analytics/WritingStats.tsx",
+      "name": "WritingStats.tsx"
+    },
+    {
+      "file": "client/src/components/atlas/PhilosophicalAtlas.d.ts",
+      "name": "PhilosophicalAtlas.d.ts"
+    },
+    {
+      "file": "client/src/components/atlas/PhilosophicalAtlas.jsx",
+      "name": "PhilosophicalAtlas.jsx"
+    },
+    {
+      "file": "client/src/components/attention/AttentionEcology.d.ts",
+      "name": "AttentionEcology.d.ts"
+    },
+    {
+      "file": "client/src/components/attention/AttentionEcology.jsx",
+      "name": "AttentionEcology.jsx"
+    },
+    {
+      "file": "client/src/components/autodidact/AutodidactForge.tsx",
+      "name": "AutodidactForge.tsx"
+    },
+    {
+      "file": "client/src/components/avatar/BuddyAvatar.tsx",
+      "name": "BuddyAvatar.tsx"
+    },
+    {
+      "file": "client/src/components/avatar/BuddyPanel.tsx",
+      "name": "BuddyPanel.tsx"
+    },
+    {
+      "file": "client/src/components/beliefs/BeliefMapper.tsx",
+      "name": "BeliefMapper.tsx"
+    },
+    {
+      "file": "client/src/components/benefits/BeforeAfter.jsx",
+      "name": "BeforeAfter.jsx"
+    },
+    {
+      "file": "client/src/components/benefits/BenefitBlock.tsx",
+      "name": "BenefitBlock.tsx"
+    },
+    {
+      "file": "client/src/components/benefits/BenefitsStrip.jsx",
+      "name": "BenefitsStrip.jsx"
+    },
+    {
+      "file": "client/src/components/benefits/TrustSignals.jsx",
+      "name": "TrustSignals.jsx"
+    },
+    {
+      "file": "client/src/components/benefits/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/components/bias/BiasBlindSpots.tsx",
+      "name": "BiasBlindSpots.tsx"
+    },
+    {
+      "file": "client/src/components/brand/BrandLogo.jsx",
+      "name": "BrandLogo.jsx"
+    },
+    {
+      "file": "client/src/components/charts/MoodPieChart.jsx",
+      "name": "MoodPieChart.jsx"
+    },
+    {
+      "file": "client/src/components/charts/MoodTrendsChartJS.jsx",
+      "name": "MoodTrendsChartJS.jsx"
+    },
+    {
+      "file": "client/src/components/chat/AIChatPanel.tsx",
+      "name": "AIChatPanel.tsx"
+    },
+    {
+      "file": "client/src/components/community/CommunityBoundary.tsx",
+      "name": "CommunityBoundary.tsx"
+    },
+    {
+      "file": "client/src/components/community/SharedReflections.tsx",
+      "name": "SharedReflections.tsx"
+    },
+    {
+      "file": "client/src/components/consciousness/QuestionReflection.tsx",
+      "name": "QuestionReflection.tsx"
+    },
+    {
+      "file": "client/src/components/consciousness/SilenceMode.tsx",
+      "name": "SilenceMode.tsx"
+    },
+    {
+      "file": "client/src/components/content/ClarityCard.d.ts",
+      "name": "ClarityCard.d.ts"
+    },
+    {
+      "file": "client/src/components/content/ClarityCard.jsx",
+      "name": "ClarityCard.jsx"
+    },
+    {
+      "file": "client/src/components/content/ContentTierCompiler.jsx",
+      "name": "ContentTierCompiler.jsx"
+    },
+    {
+      "file": "client/src/components/content/ExamplesAccordion.d.ts",
+      "name": "ExamplesAccordion.d.ts"
+    },
+    {
+      "file": "client/src/components/content/ExamplesAccordion.jsx",
+      "name": "ExamplesAccordion.jsx"
+    },
+    {
+      "file": "client/src/components/content/GlossaryTerm.jsx",
+      "name": "GlossaryTerm.jsx"
+    },
+    {
+      "file": "client/src/components/content/WhatNextRecommender.jsx",
+      "name": "WhatNextRecommender.jsx"
+    },
+    {
+      "file": "client/src/components/creative/CreativeProblemSolver.d.ts",
+      "name": "CreativeProblemSolver.d.ts"
+    },
+    {
+      "file": "client/src/components/creative/CreativeProblemSolver.jsx",
+      "name": "CreativeProblemSolver.jsx"
+    },
+    {
+      "file": "client/src/components/dashboard/WeeklyRecap.jsx",
+      "name": "WeeklyRecap.jsx"
+    },
+    {
+      "file": "client/src/components/decision/DecisionArchitecture.d.ts",
+      "name": "DecisionArchitecture.d.ts"
+    },
+    {
+      "file": "client/src/components/decision/DecisionArchitecture.jsx",
+      "name": "DecisionArchitecture.jsx"
+    },
+    {
+      "file": "client/src/components/disclaimers/PlatformDisclaimer.tsx",
+      "name": "PlatformDisclaimer.tsx"
+    },
+    {
+      "file": "client/src/components/discovery/ToolCard.jsx",
+      "name": "ToolCard.jsx"
+    },
+    {
+      "file": "client/src/components/discovery/getRelatedTools.js",
+      "name": "getRelatedTools.js"
+    },
+    {
+      "file": "client/src/components/epistemic/EpistemicCalibration.tsx",
+      "name": "EpistemicCalibration.tsx"
+    },
+    {
+      "file": "client/src/components/existential/ExistentialInquiry.tsx",
+      "name": "ExistentialInquiry.tsx"
+    },
+    {
+      "file": "client/src/components/export/ExportPanel.tsx",
+      "name": "ExportPanel.tsx"
+    },
+    {
+      "file": "client/src/components/figma/FigmaPanel.tsx",
+      "name": "FigmaPanel.tsx"
+    },
+    {
+      "file": "client/src/components/flow/TimedSession.tsx",
+      "name": "TimedSession.tsx"
+    },
+    {
+      "file": "client/src/components/frameworks/FrameworkExplorer.tsx",
+      "name": "FrameworkExplorer.tsx"
+    },
+    {
+      "file": "client/src/components/growth/GrowthTimeline.tsx",
+      "name": "GrowthTimeline.tsx"
+    },
+    {
+      "file": "client/src/components/guards/FeatureGuard.jsx",
+      "name": "FeatureGuard.jsx"
+    },
+    {
+      "file": "client/src/components/inquiry/DialecticalInquiry.tsx",
+      "name": "DialecticalInquiry.tsx"
+    },
+    {
+      "file": "client/src/components/insights/InsightCards.tsx",
+      "name": "InsightCards.tsx"
+    },
+    {
+      "file": "client/src/components/insights/TodaysInsight.jsx",
+      "name": "TodaysInsight.jsx"
+    },
+    {
+      "file": "client/src/components/journey/JourneyComposer.tsx",
+      "name": "JourneyComposer.tsx"
+    },
+    {
+      "file": "client/src/components/landing/Hero.tsx",
+      "name": "Hero.tsx"
+    },
+    {
+      "file": "client/src/components/layout/AppShell.tsx",
+      "name": "AppShell.tsx"
+    },
+    {
+      "file": "client/src/components/layout/Footer.tsx",
+      "name": "Footer.tsx"
+    },
+    {
+      "file": "client/src/components/layout/Header.jsx",
+      "name": "Header.jsx"
+    },
+    {
+      "file": "client/src/components/layout/PageLayout.jsx",
+      "name": "PageLayout.jsx"
+    },
+    {
+      "file": "client/src/components/layout/PageScaffold.tsx",
+      "name": "PageScaffold.tsx"
+    },
+    {
+      "file": "client/src/components/legal/EthicsSafetyBlock.tsx",
+      "name": "EthicsSafetyBlock.tsx"
+    },
+    {
+      "file": "client/src/components/logic/LogicLatticeLab.tsx",
+      "name": "LogicLatticeLab.tsx"
+    },
+    {
+      "file": "client/src/components/lumi/FloatIdleAnimated.jsx",
+      "name": "FloatIdleAnimated.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/FloatIdleRig.jsx",
+      "name": "FloatIdleRig.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiAccessibleWrapper.jsx",
+      "name": "LumiAccessibleWrapper.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiBrandLockupImage.jsx",
+      "name": "LumiBrandLockupImage.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiBrandLogo.jsx",
+      "name": "LumiBrandLogo.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiCompanion.jsx",
+      "name": "LumiCompanion.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiCustomizer.jsx",
+      "name": "LumiCustomizer.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiCustomizerTrigger.jsx",
+      "name": "LumiCustomizerTrigger.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiMascot.jsx",
+      "name": "LumiMascot.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiMascotImage.jsx",
+      "name": "LumiMascotImage.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiV6.tsx",
+      "name": "LumiV6.tsx"
+    },
+    {
+      "file": "client/src/components/lumi/LumiV7.jsx",
+      "name": "LumiV7.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/TGLPMandala.jsx",
+      "name": "TGLPMandala.jsx"
+    },
+    {
+      "file": "client/src/components/lumi/TGLPMandalaImage.jsx",
+      "name": "TGLPMandalaImage.jsx"
+    },
+    {
+      "file": "client/src/components/marketing/BenefitsBlock.tsx",
+      "name": "BenefitsBlock.tsx"
+    },
+    {
+      "file": "client/src/components/marketing/EmailCapture.jsx",
+      "name": "EmailCapture.jsx"
+    },
+    {
+      "file": "client/src/components/mastery/DeepWorkTracker.tsx",
+      "name": "DeepWorkTracker.tsx"
+    },
+    {
+      "file": "client/src/components/mastery/MentalModelsLibrary.tsx",
+      "name": "MentalModelsLibrary.tsx"
+    },
+    {
+      "file": "client/src/components/mastery/SkillForge.tsx",
+      "name": "SkillForge.tsx"
+    },
+    {
+      "file": "client/src/components/metacognition/MetaCognitionStudio.tsx",
+      "name": "MetaCognitionStudio.tsx"
+    },
+    {
+      "file": "client/src/components/metacognition/MetacognitionDashboard.tsx",
+      "name": "MetacognitionDashboard.tsx"
+    },
+    {
+      "file": "client/src/components/methods/MITile.jsx",
+      "name": "MITile.jsx"
+    },
+    {
+      "file": "client/src/components/methods/NLPTile.jsx",
+      "name": "NLPTile.jsx"
+    },
+    {
+      "file": "client/src/components/methods/StrengthsPIETile.jsx",
+      "name": "StrengthsPIETile.jsx"
+    },
+    {
+      "file": "client/src/components/methods/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/components/mi/MIPromptCard.tsx",
+      "name": "MIPromptCard.tsx"
+    },
+    {
+      "file": "client/src/components/mi/MITools.tsx",
+      "name": "MITools.tsx"
+    },
+    {
+      "file": "client/src/components/mi/MicroCommitmentEngine.tsx",
+      "name": "MicroCommitmentEngine.tsx"
+    },
+    {
+      "file": "client/src/components/mi/ReadinessScale.tsx",
+      "name": "ReadinessScale.tsx"
+    },
+    {
+      "file": "client/src/components/mi/ReframingToolkit.tsx",
+      "name": "ReframingToolkit.tsx"
+    },
+    {
+      "file": "client/src/components/mi/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/components/mindscape/MindscapeNavigator.tsx",
+      "name": "MindscapeNavigator.tsx"
+    },
+    {
+      "file": "client/src/components/modules/ModulesPanel.tsx",
+      "name": "ModulesPanel.tsx"
+    },
+    {
+      "file": "client/src/components/moral/MoralReasoningLab.tsx",
+      "name": "MoralReasoningLab.tsx"
+    },
+    {
+      "file": "client/src/components/narrative/NarrativeIdentityStudio.tsx",
+      "name": "NarrativeIdentityStudio.tsx"
+    },
+    {
+      "file": "client/src/components/paradox/ParadoxCartographer.tsx",
+      "name": "ParadoxCartographer.tsx"
+    },
+    {
+      "file": "client/src/components/patterns/InsightPatternLab.tsx",
+      "name": "InsightPatternLab.tsx"
+    },
+    {
+      "file": "client/src/components/patterns/PatternInsights.tsx",
+      "name": "PatternInsights.tsx"
+    },
+    {
+      "file": "client/src/components/peacescape/CustomizerPanel.jsx",
+      "name": "CustomizerPanel.jsx"
+    },
+    {
+      "file": "client/src/components/peacescape/InteractiveBuddy.jsx",
+      "name": "InteractiveBuddy.jsx"
+    },
+    {
+      "file": "client/src/components/personalization/ToolRecommendations.jsx",
+      "name": "ToolRecommendations.jsx"
+    },
+    {
+      "file": "client/src/components/progress/TinyStepPanel.jsx",
+      "name": "TinyStepPanel.jsx"
+    },
+    {
+      "file": "client/src/components/publishing/NewsletterInvite.jsx",
+      "name": "NewsletterInvite.jsx"
+    },
+    {
+      "file": "client/src/components/publishing/PublishingCtaBar.jsx",
+      "name": "PublishingCtaBar.jsx"
+    },
+    {
+      "file": "client/src/components/publishing/SoftUpgradeCTA.jsx",
+      "name": "SoftUpgradeCTA.jsx"
+    },
+    {
+      "file": "client/src/components/referral/ReferralInvite.jsx",
+      "name": "ReferralInvite.jsx"
+    },
+    {
+      "file": "client/src/components/referral/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/components/sacred/EmotionBackground.jsx",
+      "name": "EmotionBackground.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/EmotionCharts.jsx",
+      "name": "EmotionCharts.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/Hero.jsx",
+      "name": "Hero.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/LotusGuide.jsx",
+      "name": "LotusGuide.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/PlatformComponent.jsx",
+      "name": "PlatformComponent.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/ProgressTracker.jsx",
+      "name": "ProgressTracker.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/SacredBackground.jsx",
+      "name": "SacredBackground.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/SacredButton.jsx",
+      "name": "SacredButton.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/SacredFooter.jsx",
+      "name": "SacredFooter.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/SacredHero.jsx",
+      "name": "SacredHero.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/SacredLayout.jsx",
+      "name": "SacredLayout.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/SacredSection.jsx",
+      "name": "SacredSection.jsx"
+    },
+    {
+      "file": "client/src/components/sacred/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/components/safety/LegalFooter.tsx",
+      "name": "LegalFooter.tsx"
+    },
+    {
+      "file": "client/src/components/safety/SafetyFooterStrip.tsx",
+      "name": "SafetyFooterStrip.tsx"
+    },
+    {
+      "file": "client/src/components/saves/SaveButton.jsx",
+      "name": "SaveButton.jsx"
+    },
+    {
+      "file": "client/src/components/search/RouteSearchBox.jsx",
+      "name": "RouteSearchBox.jsx"
+    },
+    {
+      "file": "client/src/components/semantic/SemanticMapping.tsx",
+      "name": "SemanticMapping.tsx"
+    },
+    {
+      "file": "client/src/components/seo/SEO.tsx",
+      "name": "SEO.tsx"
+    },
+    {
+      "file": "client/src/components/share/IdentityMirror.jsx",
+      "name": "IdentityMirror.jsx"
+    },
+    {
+      "file": "client/src/components/share/InfinityHeartCard.jsx",
+      "name": "InfinityHeartCard.jsx"
+    },
+    {
+      "file": "client/src/components/share/ReflectionCard.jsx",
+      "name": "ReflectionCard.jsx"
+    },
+    {
+      "file": "client/src/components/share/ShareCardPrompt.tsx",
+      "name": "ShareCardPrompt.tsx"
+    },
+    {
+      "file": "client/src/components/share/ShareModal.jsx",
+      "name": "ShareModal.jsx"
+    },
+    {
+      "file": "client/src/components/share/StreakShare.jsx",
+      "name": "StreakShare.jsx"
+    },
+    {
+      "file": "client/src/components/share/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/components/stance/PhilosophicalStanceMapper.tsx",
+      "name": "PhilosophicalStanceMapper.tsx"
+    },
+    {
+      "file": "client/src/components/state/StateTracker.tsx",
+      "name": "StateTracker.tsx"
+    },
+    {
+      "file": "client/src/components/state/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/components/synthesis/SynthesisCollider.tsx",
+      "name": "SynthesisCollider.tsx"
+    },
+    {
+      "file": "client/src/components/system/AdminErrorBoundary.jsx",
+      "name": "AdminErrorBoundary.jsx"
+    },
+    {
+      "file": "client/src/components/systems/SystemsResonance.tsx",
+      "name": "SystemsResonance.tsx"
+    },
+    {
+      "file": "client/src/components/temporal/TemporalReflection.tsx",
+      "name": "TemporalReflection.tsx"
+    },
+    {
+      "file": "client/src/components/theme.ts",
+      "name": "theme.ts"
+    },
+    {
+      "file": "client/src/components/thought/ThoughtExperimentsLab.tsx",
+      "name": "ThoughtExperimentsLab.tsx"
+    },
+    {
+      "file": "client/src/components/ui/BrandSpinner.jsx",
+      "name": "BrandSpinner.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Button.jsx",
+      "name": "Button.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Button.tsx",
+      "name": "Button.tsx"
+    },
+    {
+      "file": "client/src/components/ui/CRMWidgets.jsx",
+      "name": "CRMWidgets.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Callout.jsx",
+      "name": "Callout.jsx"
+    },
+    {
+      "file": "client/src/components/ui/CalmModeToggle.jsx",
+      "name": "CalmModeToggle.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Card.jsx",
+      "name": "Card.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Card.tsx",
+      "name": "Card.tsx"
+    },
+    {
+      "file": "client/src/components/ui/EmptyState.jsx",
+      "name": "EmptyState.jsx"
+    },
+    {
+      "file": "client/src/components/ui/EvidenceNote.jsx",
+      "name": "EvidenceNote.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Footer.jsx",
+      "name": "Footer.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Hero.d.ts",
+      "name": "Hero.d.ts"
+    },
+    {
+      "file": "client/src/components/ui/Hero.jsx",
+      "name": "Hero.jsx"
+    },
+    {
+      "file": "client/src/components/ui/HeroSection.jsx",
+      "name": "HeroSection.jsx"
+    },
+    {
+      "file": "client/src/components/ui/IconBadge.jsx",
+      "name": "IconBadge.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Input.tsx",
+      "name": "Input.tsx"
+    },
+    {
+      "file": "client/src/components/ui/Label.jsx",
+      "name": "Label.jsx"
+    },
+    {
+      "file": "client/src/components/ui/LayoutWrapper.d.ts",
+      "name": "LayoutWrapper.d.ts"
+    },
+    {
+      "file": "client/src/components/ui/LayoutWrapper.jsx",
+      "name": "LayoutWrapper.jsx"
+    },
+    {
+      "file": "client/src/components/ui/LazyImage.jsx",
+      "name": "LazyImage.jsx"
+    },
+    {
+      "file": "client/src/components/ui/LotusLoader.jsx",
+      "name": "LotusLoader.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Quote.jsx",
+      "name": "Quote.jsx"
+    },
+    {
+      "file": "client/src/components/ui/QuoteBlock.jsx",
+      "name": "QuoteBlock.jsx"
+    },
+    {
+      "file": "client/src/components/ui/ReflectionFooter.jsx",
+      "name": "ReflectionFooter.jsx"
+    },
+    {
+      "file": "client/src/components/ui/ResourceTiles.jsx",
+      "name": "ResourceTiles.jsx"
+    },
+    {
+      "file": "client/src/components/ui/SacredBackground.jsx",
+      "name": "SacredBackground.jsx"
+    },
+    {
+      "file": "client/src/components/ui/SacredModal.jsx",
+      "name": "SacredModal.jsx"
+    },
+    {
+      "file": "client/src/components/ui/SafetyFooter.d.ts",
+      "name": "SafetyFooter.d.ts"
+    },
+    {
+      "file": "client/src/components/ui/SafetyNotice.jsx",
+      "name": "SafetyNotice.jsx"
+    },
+    {
+      "file": "client/src/components/ui/SectionContainer.d.ts",
+      "name": "SectionContainer.d.ts"
+    },
+    {
+      "file": "client/src/components/ui/SectionContainer.jsx",
+      "name": "SectionContainer.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Skeleton.jsx",
+      "name": "Skeleton.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Steps.jsx",
+      "name": "Steps.jsx"
+    },
+    {
+      "file": "client/src/components/ui/Switch.tsx",
+      "name": "Switch.tsx"
+    },
+    {
+      "file": "client/src/components/ui/WellnessToolkit.jsx",
+      "name": "WellnessToolkit.jsx"
+    },
+    {
+      "file": "client/src/components/ui/badge.tsx",
+      "name": "badge.tsx"
+    },
+    {
+      "file": "client/src/components/ui/button.tsx",
+      "name": "button.tsx"
+    },
+    {
+      "file": "client/src/components/ui/card.tsx",
+      "name": "card.tsx"
+    },
+    {
+      "file": "client/src/components/ui/dropdown-menu.tsx",
+      "name": "dropdown-menu.tsx"
+    },
+    {
+      "file": "client/src/components/ui/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/components/ui/input.tsx",
+      "name": "input.tsx"
+    },
+    {
+      "file": "client/src/components/ui/label.tsx",
+      "name": "label.tsx"
+    },
+    {
+      "file": "client/src/components/ui/popover.tsx",
+      "name": "popover.tsx"
+    },
+    {
+      "file": "client/src/components/ui/select.tsx",
+      "name": "select.tsx"
+    },
+    {
+      "file": "client/src/components/ui/table.tsx",
+      "name": "table.tsx"
+    },
+    {
+      "file": "client/src/components/ui/tabs.tsx",
+      "name": "tabs.tsx"
+    },
+    {
+      "file": "client/src/components/ui/textarea.tsx",
+      "name": "textarea.tsx"
+    },
+    {
+      "file": "client/src/components/ui/theme-provider.jsx",
+      "name": "theme-provider.jsx"
+    },
+    {
+      "file": "client/src/components/ui/theme.js",
+      "name": "theme.js"
+    },
+    {
+      "file": "client/src/components/ui/toast-container.tsx",
+      "name": "toast-container.tsx"
+    },
+    {
+      "file": "client/src/components/ui/wellnessToolsData.js",
+      "name": "wellnessToolsData.js"
+    },
+    {
+      "file": "client/src/components/values/ValuesClarification.tsx",
+      "name": "ValuesClarification.tsx"
+    },
+    {
+      "file": "client/src/components/weave/KnowledgeWeaveMap.tsx",
+      "name": "KnowledgeWeaveMap.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/BenefitsBlock.tsx",
+      "name": "BenefitsBlock.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/ClarityCard.tsx",
+      "name": "ClarityCard.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/ConsentRibbon.tsx",
+      "name": "ConsentRibbon.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/ConsentStrip.tsx",
+      "name": "ConsentStrip.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/EmotionLog.jsx",
+      "name": "EmotionLog.jsx"
+    },
+    {
+      "file": "client/src/components/wellness/ExamplesAccordion.tsx",
+      "name": "ExamplesAccordion.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/HealingGraph.jsx",
+      "name": "HealingGraph.jsx"
+    },
+    {
+      "file": "client/src/components/wellness/JournalAI.jsx",
+      "name": "JournalAI.jsx"
+    },
+    {
+      "file": "client/src/components/wellness/MoodCalendar.jsx",
+      "name": "MoodCalendar.jsx"
+    },
+    {
+      "file": "client/src/components/wellness/ReflectionPrompt.tsx",
+      "name": "ReflectionPrompt.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/SafetyFooter.tsx",
+      "name": "SafetyFooter.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/SofterVersionToggle.jsx",
+      "name": "SofterVersionToggle.jsx"
+    },
+    {
+      "file": "client/src/components/wellness/WeatherMoodSync.jsx",
+      "name": "WeatherMoodSync.jsx"
+    },
+    {
+      "file": "client/src/components/wellness/WellnessPageShell.d.ts",
+      "name": "WellnessPageShell.d.ts"
+    },
+    {
+      "file": "client/src/components/wellness/WellnessPageShell.jsx",
+      "name": "WellnessPageShell.jsx"
+    },
+    {
+      "file": "client/src/components/wellnessToolsData.js",
+      "name": "wellnessToolsData.js"
+    },
+    {
+      "file": "client/src/components/wisdom/WisdomCard.tsx",
+      "name": "WisdomCard.tsx"
+    },
+    {
+      "file": "client/src/components/zen/BuddyBubble.jsx",
+      "name": "BuddyBubble.jsx"
+    },
+    {
+      "file": "client/src/components/zen/ZenScape.jsx",
+      "name": "ZenScape.jsx"
+    },
+    {
+      "file": "client/src/config/featureAccess.js",
+      "name": "featureAccess.js"
+    },
+    {
+      "file": "client/src/config/leadMagnets.ts",
+      "name": "leadMagnets.ts"
+    },
+    {
+      "file": "client/src/config/navConfig.js",
+      "name": "navConfig.js"
+    },
+    {
+      "file": "client/src/config/seo.ts",
+      "name": "seo.ts"
+    },
+    {
+      "file": "client/src/config/social.ts",
+      "name": "social.ts"
+    },
+    {
+      "file": "client/src/config/toolCategories.js",
+      "name": "toolCategories.js"
+    },
+    {
+      "file": "client/src/content/analytics/eventSchema.ts",
+      "name": "eventSchema.ts"
+    },
+    {
+      "file": "client/src/content/benefits/benefitsBank.ts",
+      "name": "benefitsBank.ts"
+    },
+    {
+      "file": "client/src/content/context/buildPageContext.ts",
+      "name": "buildPageContext.ts"
+    },
+    {
+      "file": "client/src/content/flags/featureFlags.ts",
+      "name": "featureFlags.ts"
+    },
+    {
+      "file": "client/src/content/frameworks/benefitPillars.js",
+      "name": "benefitPillars.js"
+    },
+    {
+      "file": "client/src/content/frameworks/benefitTokens.js",
+      "name": "benefitTokens.js"
+    },
+    {
+      "file": "client/src/content/frameworks/genuineLove12.ts",
+      "name": "genuineLove12.ts"
+    },
+    {
+      "file": "client/src/content/frameworks/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/content/frameworks/motivationalInterviewing.ts",
+      "name": "motivationalInterviewing.ts"
+    },
+    {
+      "file": "client/src/content/frameworks/nlpPatterns.js",
+      "name": "nlpPatterns.js"
+    },
+    {
+      "file": "client/src/content/frameworks/nlpSafe.ts",
+      "name": "nlpSafe.ts"
+    },
+    {
+      "file": "client/src/content/frameworks/twelvePhaseAlignment.js",
+      "name": "twelvePhaseAlignment.js"
+    },
+    {
+      "file": "client/src/content/frameworks/wellnessMicrocopy.js",
+      "name": "wellnessMicrocopy.js"
+    },
+    {
+      "file": "client/src/content/healingConcepts.js",
+      "name": "healingConcepts.js"
+    },
+    {
+      "file": "client/src/content/healingFrameworks.ts",
+      "name": "healingFrameworks.ts"
+    },
+    {
+      "file": "client/src/content/healingPrompts.ts",
+      "name": "healingPrompts.ts"
+    },
+    {
+      "file": "client/src/content/hubs/hubGraph.ts",
+      "name": "hubGraph.ts"
+    },
+    {
+      "file": "client/src/content/hubs/topicHubs.ts",
+      "name": "topicHubs.ts"
+    },
+    {
+      "file": "client/src/content/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/content/journalPrompts.js",
+      "name": "journalPrompts.js"
+    },
+    {
+      "file": "client/src/content/learn.js",
+      "name": "learn.js"
+    },
+    {
+      "file": "client/src/content/legal/disclaimer.ts",
+      "name": "disclaimer.ts"
+    },
+    {
+      "file": "client/src/content/marketingCopy.ts",
+      "name": "marketingCopy.ts"
+    },
+    {
+      "file": "client/src/content/meta/integrationRegistry.ts",
+      "name": "integrationRegistry.ts"
+    },
+    {
+      "file": "client/src/content/meta/platformProcessRegistry.ts",
+      "name": "platformProcessRegistry.ts"
+    },
+    {
+      "file": "client/src/content/meta/recommendations.ts",
+      "name": "recommendations.ts"
+    },
+    {
+      "file": "client/src/content/meta/routeMeta.autogen.ts",
+      "name": "routeMeta.autogen.ts"
+    },
+    {
+      "file": "client/src/content/meta/routeMetaRegistry.ts",
+      "name": "routeMetaRegistry.ts"
+    },
+    {
+      "file": "client/src/content/meta/routeSearchIndex.ts",
+      "name": "routeSearchIndex.ts"
+    },
+    {
+      "file": "client/src/content/microcopy/errorMicrocopy.ts",
+      "name": "errorMicrocopy.ts"
+    },
+    {
+      "file": "client/src/content/microcopy/index.js",
+      "name": "index.js"
+    },
+    {
+      "file": "client/src/content/microcopy/pick.js",
+      "name": "pick.js"
+    },
+    {
+      "file": "client/src/content/microcopy/rotationSeed.ts",
+      "name": "rotationSeed.ts"
+    },
+    {
+      "file": "client/src/content/microcopy/wellness.js",
+      "name": "wellness.js"
+    },
+    {
+      "file": "client/src/content/microcopy/wellnessMicrocopy.ts",
+      "name": "wellnessMicrocopy.ts"
+    },
+    {
+      "file": "client/src/content/microcopy.js",
+      "name": "microcopy.js"
+    },
+    {
+      "file": "client/src/content/modules/mi.ts",
+      "name": "mi.ts"
+    },
+    {
+      "file": "client/src/content/modules/miContent.js",
+      "name": "miContent.js"
+    },
+    {
+      "file": "client/src/content/modules/modules.js",
+      "name": "modules.js"
+    },
+    {
+      "file": "client/src/content/modules/nlp.ts",
+      "name": "nlp.ts"
+    },
+    {
+      "file": "client/src/content/modules/nlpContent.js",
+      "name": "nlpContent.js"
+    },
+    {
+      "file": "client/src/content/modules/twelvePractices.ts",
+      "name": "twelvePractices.ts"
+    },
+    {
+      "file": "client/src/content/modules/twelvePracticesContent.js",
+      "name": "twelvePracticesContent.js"
+    },
+    {
+      "file": "client/src/content/paths/twelvePractices.ts",
+      "name": "twelvePractices.ts"
+    },
+    {
+      "file": "client/src/content/processes/top50ProcessMap.ts",
+      "name": "top50ProcessMap.ts"
+    },
+    {
+      "file": "client/src/content/progress/progressStore.ts",
+      "name": "progressStore.ts"
+    },
+    {
+      "file": "client/src/content/prompts/staticPrompts.ts",
+      "name": "staticPrompts.ts"
+    },
+    {
+      "file": "client/src/content/readingLevels.js",
+      "name": "readingLevels.js"
+    },
+    {
+      "file": "client/src/content/routeKey.js",
+      "name": "routeKey.js"
+    },
+    {
+      "file": "client/src/content/routeMetaRegistry.js",
+      "name": "routeMetaRegistry.js"
+    },
+    {
+      "file": "client/src/content/routes.js",
+      "name": "routes.js"
+    },
+    {
+      "file": "client/src/content/saves/savesStore.ts",
+      "name": "savesStore.ts"
+    },
+    {
+      "file": "client/src/content/searchIndex.ts",
+      "name": "searchIndex.ts"
+    },
+    {
+      "file": "client/src/content/social/socialTemplates.ts",
+      "name": "socialTemplates.ts"
+    },
+    {
+      "file": "client/src/content/tools/nlpReframes.ts",
+      "name": "nlpReframes.ts"
+    },
+    {
+      "file": "client/src/content/wellness/practiceLoader.ts",
+      "name": "practiceLoader.ts"
+    },
+    {
+      "file": "client/src/context/AuthContext.jsx",
+      "name": "AuthContext.jsx"
+    },
+    {
+      "file": "client/src/context/BrandContext.jsx",
+      "name": "BrandContext.jsx"
+    },
+    {
+      "file": "client/src/context/EmotionContext.jsx",
+      "name": "EmotionContext.jsx"
+    },
+    {
+      "file": "client/src/context/GamificationContext.jsx",
+      "name": "GamificationContext.jsx"
+    },
+    {
+      "file": "client/src/context/ReadingLevelContext.jsx",
+      "name": "ReadingLevelContext.jsx"
+    },
+    {
+      "file": "client/src/contexts/FeatureFlagContext.jsx",
+      "name": "FeatureFlagContext.jsx"
+    },
+    {
+      "file": "client/src/data/emotionalJourney.js",
+      "name": "emotionalJourney.js"
+    },
+    {
+      "file": "client/src/data/journalPrompts.ts",
+      "name": "journalPrompts.ts"
+    },
+    {
+      "file": "client/src/data/lumiAssets.js",
+      "name": "lumiAssets.js"
+    },
+    {
+      "file": "client/src/data/lumiEmotionMap.ts",
+      "name": "lumiEmotionMap.ts"
+    },
+    {
+      "file": "client/src/data/lumiEmotions.js",
+      "name": "lumiEmotions.js"
+    },
+    {
+      "file": "client/src/data/lumiThemes.js",
+      "name": "lumiThemes.js"
+    },
+    {
+      "file": "client/src/data/lumiToySpec.ts",
+      "name": "lumiToySpec.ts"
+    },
+    {
+      "file": "client/src/data/nlpMiContent.js",
+      "name": "nlpMiContent.js"
+    },
+    {
+      "file": "client/src/data/reflectionPrompts.ts",
+      "name": "reflectionPrompts.ts"
+    },
+    {
+      "file": "client/src/data/sharedReflections.ts",
+      "name": "sharedReflections.ts"
+    },
+    {
+      "file": "client/src/data/wisdomContent.ts",
+      "name": "wisdomContent.ts"
+    },
+    {
+      "file": "client/src/declarations.d.ts",
+      "name": "declarations.d.ts"
+    },
+    {
+      "file": "client/src/design-system/components/MMHBButton.tsx",
+      "name": "MMHBButton.tsx"
+    },
+    {
+      "file": "client/src/design-system/components/MMHBCard.tsx",
+      "name": "MMHBCard.tsx"
+    },
+    {
+      "file": "client/src/design-system/components/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/design-system/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/colors.ts",
+      "name": "colors.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/legacyMap.ts",
+      "name": "legacyMap.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/motion.ts",
+      "name": "motion.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/radius.ts",
+      "name": "radius.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/shadows.ts",
+      "name": "shadows.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/spacing.ts",
+      "name": "spacing.ts"
+    },
+    {
+      "file": "client/src/design-system/tokens/typography.ts",
+      "name": "typography.ts"
+    },
+    {
+      "file": "client/src/features/community/Community.tsx",
+      "name": "Community.tsx"
+    },
+    {
+      "file": "client/src/features/community/DiscussionPage.jsx",
+      "name": "DiscussionPage.jsx"
+    },
+    {
+      "file": "client/src/features/community/SharedReflectionsPage.jsx",
+      "name": "SharedReflectionsPage.jsx"
+    },
+    {
+      "file": "client/src/features/daily/DailyFlow.tsx",
+      "name": "DailyFlow.tsx"
+    },
+    {
+      "file": "client/src/features/journal/JournalPage.jsx",
+      "name": "JournalPage.jsx"
+    },
+    {
+      "file": "client/src/features/journal/PromptLibrary.js",
+      "name": "PromptLibrary.js"
+    },
+    {
+      "file": "client/src/features/mirror/JournalMirror.tsx",
+      "name": "JournalMirror.tsx"
+    },
+    {
+      "file": "client/src/features/state/StatePage.jsx",
+      "name": "StatePage.jsx"
+    },
+    {
+      "file": "client/src/features/today/TodayPage.jsx",
+      "name": "TodayPage.jsx"
+    },
+    {
+      "file": "client/src/figma/frames.ts",
+      "name": "frames.ts"
+    },
+    {
+      "file": "client/src/figma/mapping.ts",
+      "name": "mapping.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/AtlasRoutingGovernance.ts",
+      "name": "AtlasRoutingGovernance.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/CrisisLanguagePattern.ts",
+      "name": "CrisisLanguagePattern.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/CrisisOverrideEngine.ts",
+      "name": "CrisisOverrideEngine.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/EmotionalStateFirewall.ts",
+      "name": "EmotionalStateFirewall.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/HealingFlowProtectionRules.ts",
+      "name": "HealingFlowProtectionRules.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/InteractionGovernanceRegistry.ts",
+      "name": "InteractionGovernanceRegistry.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/MonetizationBoundaryValidator.ts",
+      "name": "MonetizationBoundaryValidator.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/__tests__/deriveGovernance.test.ts",
+      "name": "deriveGovernance.test.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/buildGovernanceAttrs.ts",
+      "name": "buildGovernanceAttrs.ts"
+    },
+    {
+      "file": "client/src/governance/interactions/deriveGovernance.ts",
+      "name": "deriveGovernance.ts"
+    },
+    {
+      "file": "client/src/guards/ProtectedRoute.jsx",
+      "name": "ProtectedRoute.jsx"
+    },
+    {
+      "file": "client/src/guards/RequirePro.jsx",
+      "name": "RequirePro.jsx"
+    },
+    {
+      "file": "client/src/guards/RequireRole.jsx",
+      "name": "RequireRole.jsx"
+    },
+    {
+      "file": "client/src/hooks/use-analytics.tsx",
+      "name": "use-analytics.tsx"
+    },
+    {
+      "file": "client/src/hooks/use-toast.ts",
+      "name": "use-toast.ts"
+    },
+    {
+      "file": "client/src/hooks/use-upload.ts",
+      "name": "use-upload.ts"
+    },
+    {
+      "file": "client/src/hooks/useAuth.js",
+      "name": "useAuth.js"
+    },
+    {
+      "file": "client/src/hooks/useAutosave.js",
+      "name": "useAutosave.js"
+    },
+    {
+      "file": "client/src/hooks/useBuddy.ts",
+      "name": "useBuddy.ts"
+    },
+    {
+      "file": "client/src/hooks/useBuddyEmotion.js",
+      "name": "useBuddyEmotion.js"
+    },
+    {
+      "file": "client/src/hooks/useDebounce.js",
+      "name": "useDebounce.js"
+    },
+    {
+      "file": "client/src/hooks/useFeatureAccess.js",
+      "name": "useFeatureAccess.js"
+    },
+    {
+      "file": "client/src/hooks/useFocusTrap.js",
+      "name": "useFocusTrap.js"
+    },
+    {
+      "file": "client/src/hooks/useKeyboardNav.js",
+      "name": "useKeyboardNav.js"
+    },
+    {
+      "file": "client/src/hooks/useLumiAudio.js",
+      "name": "useLumiAudio.js"
+    },
+    {
+      "file": "client/src/hooks/useLumiBehavior.js",
+      "name": "useLumiBehavior.js"
+    },
+    {
+      "file": "client/src/hooks/useLumiEmotion.js",
+      "name": "useLumiEmotion.js"
+    },
+    {
+      "file": "client/src/hooks/useLumiTheme.js",
+      "name": "useLumiTheme.js"
+    },
+    {
+      "file": "client/src/hooks/useOptimistic.js",
+      "name": "useOptimistic.js"
+    },
+    {
+      "file": "client/src/hooks/useProgressPersist.js",
+      "name": "useProgressPersist.js"
+    },
+    {
+      "file": "client/src/hooks/useSEO.ts",
+      "name": "useSEO.ts"
+    },
+    {
+      "file": "client/src/hooks/useScrollReveal.js",
+      "name": "useScrollReveal.js"
+    },
+    {
+      "file": "client/src/hooks/useToolSearch.js",
+      "name": "useToolSearch.js"
+    },
+    {
+      "file": "client/src/hooks/useUndoRedo.js",
+      "name": "useUndoRedo.js"
+    },
+    {
+      "file": "client/src/hooks/useUserStats.js",
+      "name": "useUserStats.js"
+    },
+    {
+      "file": "client/src/hooks/useWellnessContent.js",
+      "name": "useWellnessContent.js"
+    },
+    {
+      "file": "client/src/intelligence/insightEngine.ts",
+      "name": "insightEngine.ts"
+    },
+    {
+      "file": "client/src/intelligence/safeMirrorPrompt.ts",
+      "name": "safeMirrorPrompt.ts"
+    },
+    {
+      "file": "client/src/intelligence/stateModel.ts",
+      "name": "stateModel.ts"
+    },
+    {
+      "file": "client/src/layouts/brand.ts",
+      "name": "brand.ts"
+    },
+    {
+      "file": "client/src/legal/Disclaimer.tsx",
+      "name": "Disclaimer.tsx"
+    },
+    {
+      "file": "client/src/legal/EthicsCommitment.tsx",
+      "name": "EthicsCommitment.tsx"
+    },
+    {
+      "file": "client/src/legal/PrivacyHighlights.tsx",
+      "name": "PrivacyHighlights.tsx"
+    },
+    {
+      "file": "client/src/lib/aiChat.ts",
+      "name": "aiChat.ts"
+    },
+    {
+      "file": "client/src/lib/analytics/writingAnalytics.ts",
+      "name": "writingAnalytics.ts"
+    },
+    {
+      "file": "client/src/lib/analytics.ts",
+      "name": "analytics.ts"
+    },
+    {
+      "file": "client/src/lib/api.ts",
+      "name": "api.ts"
+    },
+    {
+      "file": "client/src/lib/atlas/philosophicalAtlas.ts",
+      "name": "philosophicalAtlas.ts"
+    },
+    {
+      "file": "client/src/lib/attention/attentionEcology.ts",
+      "name": "attentionEcology.ts"
+    },
+    {
+      "file": "client/src/lib/autodidact/autodidactForge.ts",
+      "name": "autodidactForge.ts"
+    },
+    {
+      "file": "client/src/lib/avatarState.ts",
+      "name": "avatarState.ts"
+    },
+    {
+      "file": "client/src/lib/benefitSpecs.ts",
+      "name": "benefitSpecs.ts"
+    },
+    {
+      "file": "client/src/lib/benefits.ts",
+      "name": "benefits.ts"
+    },
+    {
+      "file": "client/src/lib/bias/biasBlindSpots.ts",
+      "name": "biasBlindSpots.ts"
+    },
+    {
+      "file": "client/src/lib/brand.ts",
+      "name": "brand.ts"
+    },
+    {
+      "file": "client/src/lib/buddyEmotion.ts",
+      "name": "buddyEmotion.ts"
+    },
+    {
+      "file": "client/src/lib/buddyTelemetry.ts",
+      "name": "buddyTelemetry.ts"
+    },
+    {
+      "file": "client/src/lib/contentTierCompiler.ts",
+      "name": "contentTierCompiler.ts"
+    },
+    {
+      "file": "client/src/lib/creative/creativeProblemSolving.ts",
+      "name": "creativeProblemSolving.ts"
+    },
+    {
+      "file": "client/src/lib/decision/decisionArchitecture.ts",
+      "name": "decisionArchitecture.ts"
+    },
+    {
+      "file": "client/src/lib/epistemic/epistemicCalibration.ts",
+      "name": "epistemicCalibration.ts"
+    },
+    {
+      "file": "client/src/lib/existential/existentialInquiry.ts",
+      "name": "existentialInquiry.ts"
+    },
+    {
+      "file": "client/src/lib/export/reflectionExport.ts",
+      "name": "reflectionExport.ts"
+    },
+    {
+      "file": "client/src/lib/firstCheckinFlag.ts",
+      "name": "firstCheckinFlag.ts"
+    },
+    {
+      "file": "client/src/lib/frameworks/cognitiveFrameworks.ts",
+      "name": "cognitiveFrameworks.ts"
+    },
+    {
+      "file": "client/src/lib/inquiry/dialecticalInquiry.ts",
+      "name": "dialecticalInquiry.ts"
+    },
+    {
+      "file": "client/src/lib/insights/insightEngine.ts",
+      "name": "insightEngine.ts"
+    },
+    {
+      "file": "client/src/lib/journey/journeyComposer.ts",
+      "name": "journeyComposer.ts"
+    },
+    {
+      "file": "client/src/lib/logic/logicLatticeLab.ts",
+      "name": "logicLatticeLab.ts"
+    },
+    {
+      "file": "client/src/lib/lucide-brands.js",
+      "name": "lucide-brands.js"
+    },
+    {
+      "file": "client/src/lib/lumiAudio.js",
+      "name": "lumiAudio.js"
+    },
+    {
+      "file": "client/src/lib/mastery/deepWork.ts",
+      "name": "deepWork.ts"
+    },
+    {
+      "file": "client/src/lib/mastery/mentalModels.ts",
+      "name": "mentalModels.ts"
+    },
+    {
+      "file": "client/src/lib/metacognition/metacognitionDashboard.ts",
+      "name": "metacognitionDashboard.ts"
+    },
+    {
+      "file": "client/src/lib/metacognition/metacognitionStudio.ts",
+      "name": "metacognitionStudio.ts"
+    },
+    {
+      "file": "client/src/lib/miPatterns.ts",
+      "name": "miPatterns.ts"
+    },
+    {
+      "file": "client/src/lib/microcopy.ts",
+      "name": "microcopy.ts"
+    },
+    {
+      "file": "client/src/lib/mindscape/mindscapeNavigator.ts",
+      "name": "mindscapeNavigator.ts"
+    },
+    {
+      "file": "client/src/lib/mode.js",
+      "name": "mode.js"
+    },
+    {
+      "file": "client/src/lib/moral/moralReasoning.ts",
+      "name": "moralReasoning.ts"
+    },
+    {
+      "file": "client/src/lib/narrative/narrativeIdentity.ts",
+      "name": "narrativeIdentity.ts"
+    },
+    {
+      "file": "client/src/lib/nlpReframes.ts",
+      "name": "nlpReframes.ts"
+    },
+    {
+      "file": "client/src/lib/paradox/paradoxCartographer.ts",
+      "name": "paradoxCartographer.ts"
+    },
+    {
+      "file": "client/src/lib/patterns/insightPatternLab.ts",
+      "name": "insightPatternLab.ts"
+    },
+    {
+      "file": "client/src/lib/patterns/patternRecognition.ts",
+      "name": "patternRecognition.ts"
+    },
+    {
+      "file": "client/src/lib/performance.ts",
+      "name": "performance.ts"
+    },
+    {
+      "file": "client/src/lib/queryClient.d.ts",
+      "name": "queryClient.d.ts"
+    },
+    {
+      "file": "client/src/lib/queryClient.js",
+      "name": "queryClient.js"
+    },
+    {
+      "file": "client/src/lib/reflectionModes.ts",
+      "name": "reflectionModes.ts"
+    },
+    {
+      "file": "client/src/lib/safety.ts",
+      "name": "safety.ts"
+    },
+    {
+      "file": "client/src/lib/security.ts",
+      "name": "security.ts"
+    },
+    {
+      "file": "client/src/lib/semantic/semanticMapping.ts",
+      "name": "semanticMapping.ts"
+    },
+    {
+      "file": "client/src/lib/sentry.js",
+      "name": "sentry.js"
+    },
+    {
+      "file": "client/src/lib/social/socialLinks.ts",
+      "name": "socialLinks.ts"
+    },
+    {
+      "file": "client/src/lib/stance/philosophicalStance.ts",
+      "name": "philosophicalStance.ts"
+    },
+    {
+      "file": "client/src/lib/synthesis/synthesisCollider.ts",
+      "name": "synthesisCollider.ts"
+    },
+    {
+      "file": "client/src/lib/systems/systemsResonance.ts",
+      "name": "systemsResonance.ts"
+    },
+    {
+      "file": "client/src/lib/temporal/temporalReflection.ts",
+      "name": "temporalReflection.ts"
+    },
+    {
+      "file": "client/src/lib/thought/thoughtExperiments.ts",
+      "name": "thoughtExperiments.ts"
+    },
+    {
+      "file": "client/src/lib/track.ts",
+      "name": "track.ts"
+    },
+    {
+      "file": "client/src/lib/twelveSteps.ts",
+      "name": "twelveSteps.ts"
+    },
+    {
+      "file": "client/src/lib/userMetrics.js",
+      "name": "userMetrics.js"
+    },
+    {
+      "file": "client/src/lib/utils.ts",
+      "name": "utils.ts"
+    },
+    {
+      "file": "client/src/lib/values/valuesClarity.ts",
+      "name": "valuesClarity.ts"
+    },
+    {
+      "file": "client/src/lib/weave/knowledgeWeave.ts",
+      "name": "knowledgeWeave.ts"
+    },
+    {
+      "file": "client/src/lib/wellness/ensureWellnessCompliance.ts",
+      "name": "ensureWellnessCompliance.ts"
+    },
+    {
+      "file": "client/src/lib/wellnessMethodKits.ts",
+      "name": "wellnessMethodKits.ts"
+    },
+    {
+      "file": "client/src/lib/wisdom/wisdomLibrary.ts",
+      "name": "wisdomLibrary.ts"
+    },
+    {
+      "file": "client/src/lumi-agent/feedback/feedbackLoop.ts",
+      "name": "feedbackLoop.ts"
+    },
+    {
+      "file": "client/src/lumi-agent/governance/agentGovernanceRules.ts",
+      "name": "agentGovernanceRules.ts"
+    },
+    {
+      "file": "client/src/lumi-agent/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-agent/prompts/lumiSafetyGuardrails.ts",
+      "name": "lumiSafetyGuardrails.ts"
+    },
+    {
+      "file": "client/src/lumi-agent/prompts/lumiSystemPrompt.ts",
+      "name": "lumiSystemPrompt.ts"
+    },
+    {
+      "file": "client/src/lumi-agent/runtime/AgentRuntime.ts",
+      "name": "AgentRuntime.ts"
+    },
+    {
+      "file": "client/src/lumi-agent/runtime/useLumiAgent.ts",
+      "name": "useLumiAgent.ts"
+    },
+    {
+      "file": "client/src/lumi-audit/governance/auditGovernanceRules.ts",
+      "name": "auditGovernanceRules.ts"
+    },
+    {
+      "file": "client/src/lumi-audit/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-audit/logger/auditLogger.ts",
+      "name": "auditLogger.ts"
+    },
+    {
+      "file": "client/src/lumi-boundaries/components/BoundaryCard.tsx",
+      "name": "BoundaryCard.tsx"
+    },
+    {
+      "file": "client/src/lumi-boundaries/components/TransparencyDrawer.tsx",
+      "name": "TransparencyDrawer.tsx"
+    },
+    {
+      "file": "client/src/lumi-boundaries/content/boundaryCopy.ts",
+      "name": "boundaryCopy.ts"
+    },
+    {
+      "file": "client/src/lumi-boundaries/governance/boundaryEnforcementRules.ts",
+      "name": "boundaryEnforcementRules.ts"
+    },
+    {
+      "file": "client/src/lumi-boundaries/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-boundaries/runtime/BoundaryEngine.ts",
+      "name": "BoundaryEngine.ts"
+    },
+    {
+      "file": "client/src/lumi-boundaries/runtime/useBoundaryState.ts",
+      "name": "useBoundaryState.ts"
+    },
+    {
+      "file": "client/src/lumi-cbt/engine/CBTSessionEngine.ts",
+      "name": "CBTSessionEngine.ts"
+    },
+    {
+      "file": "client/src/lumi-cbt/engine/useCBTSession.ts",
+      "name": "useCBTSession.ts"
+    },
+    {
+      "file": "client/src/lumi-cbt/governance/cbtSafetyRules.ts",
+      "name": "cbtSafetyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-cbt/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-cbt/worksheets/behavioralActivation.ts",
+      "name": "behavioralActivation.ts"
+    },
+    {
+      "file": "client/src/lumi-cbt/worksheets/cognitiveDefusion.ts",
+      "name": "cognitiveDefusion.ts"
+    },
+    {
+      "file": "client/src/lumi-cbt/worksheets/thoughtRecord.ts",
+      "name": "thoughtRecord.ts"
+    },
+    {
+      "file": "client/src/lumi-circadian/components/OptInPrompt.tsx",
+      "name": "OptInPrompt.tsx"
+    },
+    {
+      "file": "client/src/lumi-circadian/components/QuietNudge.tsx",
+      "name": "QuietNudge.tsx"
+    },
+    {
+      "file": "client/src/lumi-circadian/governance/schedulerSafetyRules.ts",
+      "name": "schedulerSafetyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-circadian/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-circadian/presets/circadianScenes.ts",
+      "name": "circadianScenes.ts"
+    },
+    {
+      "file": "client/src/lumi-circadian/runtime/circadianStateMachine.ts",
+      "name": "circadianStateMachine.ts"
+    },
+    {
+      "file": "client/src/lumi-circadian/runtime/useCircadianScheduler.ts",
+      "name": "useCircadianScheduler.ts"
+    },
+    {
+      "file": "client/src/lumi-circadian/tests/circadianSafety.test.ts",
+      "name": "circadianSafety.test.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/governance/crossPlatformAdaptationBoundaries.ts",
+      "name": "crossPlatformAdaptationBoundaries.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/governance/crossPlatformEnforcementRules.ts",
+      "name": "crossPlatformEnforcementRules.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/identity/sharedCompanionPrinciples.ts",
+      "name": "sharedCompanionPrinciples.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/runtime/identityVerificationSystem.ts",
+      "name": "identityVerificationSystem.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/runtime/preservedInteractionPatterns.ts",
+      "name": "preservedInteractionPatterns.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/runtime/useConsistencyState.ts",
+      "name": "useConsistencyState.ts"
+    },
+    {
+      "file": "client/src/lumi-consistency/tokens/lumiConsistencyTokens.ts",
+      "name": "lumiConsistencyTokens.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/components/LumiConversationPanel.tsx",
+      "name": "LumiConversationPanel.tsx"
+    },
+    {
+      "file": "client/src/lumi-conversation/components/LumiGroundingResponse.tsx",
+      "name": "LumiGroundingResponse.tsx"
+    },
+    {
+      "file": "client/src/lumi-conversation/components/LumiInputBar.tsx",
+      "name": "LumiInputBar.tsx"
+    },
+    {
+      "file": "client/src/lumi-conversation/components/LumiMessageBubble.tsx",
+      "name": "LumiMessageBubble.tsx"
+    },
+    {
+      "file": "client/src/lumi-conversation/components/LumiReflectionCard.tsx",
+      "name": "LumiReflectionCard.tsx"
+    },
+    {
+      "file": "client/src/lumi-conversation/content/calmResponses.ts",
+      "name": "calmResponses.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/content/groundingPrompts.ts",
+      "name": "groundingPrompts.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/content/reflectionPrompts.ts",
+      "name": "reflectionPrompts.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/motion/calmCheckinMotion.ts",
+      "name": "calmCheckinMotion.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/prompts/lumiSystemPrompt.ts",
+      "name": "lumiSystemPrompt.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/runtime/conversationRouter.ts",
+      "name": "conversationRouter.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/runtime/emotionalToneDetector.ts",
+      "name": "emotionalToneDetector.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/safety/emotionalBoundaryRules.ts",
+      "name": "emotionalBoundaryRules.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/safety/escalationBoundaries.ts",
+      "name": "escalationBoundaries.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/safety/forbiddenPatterns.ts",
+      "name": "forbiddenPatterns.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/state/conversationState.ts",
+      "name": "conversationState.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/tests/conversationSafety.test.ts",
+      "name": "conversationSafety.test.ts"
+    },
+    {
+      "file": "client/src/lumi-crisis/components/CrisisPanel.tsx",
+      "name": "CrisisPanel.tsx"
+    },
+    {
+      "file": "client/src/lumi-crisis/components/CrisisTriggerDetector.ts",
+      "name": "CrisisTriggerDetector.ts"
+    },
+    {
+      "file": "client/src/lumi-crisis/governance/crisisSafetyRules.ts",
+      "name": "crisisSafetyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-crisis/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-crisis/resources/crisisResources.ts",
+      "name": "crisisResources.ts"
+    },
+    {
+      "file": "client/src/lumi-disclaimer/disclaimer.ts",
+      "name": "disclaimer.ts"
+    },
+    {
+      "file": "client/src/lumi-disclaimer/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-integration/tests/crossModule.test.ts",
+      "name": "crossModule.test.ts"
+    },
+    {
+      "file": "client/src/lumi-language/coreVocabulary.ts",
+      "name": "coreVocabulary.ts"
+    },
+    {
+      "file": "client/src/lumi-language/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-language/translationTable.ts",
+      "name": "translationTable.ts"
+    },
+    {
+      "file": "client/src/lumi-library/components/LibraryCard.tsx",
+      "name": "LibraryCard.tsx"
+    },
+    {
+      "file": "client/src/lumi-library/content/libraryCatalog.ts",
+      "name": "libraryCatalog.ts"
+    },
+    {
+      "file": "client/src/lumi-library/content/libraryDownloads.ts",
+      "name": "libraryDownloads.ts"
+    },
+    {
+      "file": "client/src/lumi-library/governance/librarySafetyRules.ts",
+      "name": "librarySafetyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-library/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/components/MemoryResetButton.tsx",
+      "name": "MemoryResetButton.tsx"
+    },
+    {
+      "file": "client/src/lumi-memory/components/MemorySettingsPanel.tsx",
+      "name": "MemorySettingsPanel.tsx"
+    },
+    {
+      "file": "client/src/lumi-memory/components/MemoryTransparencyView.tsx",
+      "name": "MemoryTransparencyView.tsx"
+    },
+    {
+      "file": "client/src/lumi-memory/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/runtime/continuityEngine.ts",
+      "name": "continuityEngine.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/runtime/memoryHooks.ts",
+      "name": "memoryHooks.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/runtime/memoryRouter.ts",
+      "name": "memoryRouter.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/safety/forbiddenMemoryPatterns.ts",
+      "name": "forbiddenMemoryPatterns.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/safety/memoryConsentRules.ts",
+      "name": "memoryConsentRules.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/safety/memoryRetentionRules.ts",
+      "name": "memoryRetentionRules.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/state/allowedMemoryFields.ts",
+      "name": "allowedMemoryFields.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/state/memoryStore.ts",
+      "name": "memoryStore.ts"
+    },
+    {
+      "file": "client/src/lumi-memory/tests/memorySafety.test.ts",
+      "name": "memorySafety.test.ts"
+    },
+    {
+      "file": "client/src/lumi-notifications/governance/notificationRules.ts",
+      "name": "notificationRules.ts"
+    },
+    {
+      "file": "client/src/lumi-notifications/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-notifications/push/notificationService.ts",
+      "name": "notificationService.ts"
+    },
+    {
+      "file": "client/src/lumi-rbac/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-rbac/middleware/rbacMiddleware.ts",
+      "name": "rbacMiddleware.ts"
+    },
+    {
+      "file": "client/src/lumi-rbac/roles/roleDefinitions.ts",
+      "name": "roleDefinitions.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/components/LumiSceneRenderer.tsx",
+      "name": "LumiSceneRenderer.tsx"
+    },
+    {
+      "file": "client/src/lumi-registry/components/OfficialLumi.tsx",
+      "name": "OfficialLumi.tsx"
+    },
+    {
+      "file": "client/src/lumi-registry/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/internal/devGate.ts",
+      "name": "devGate.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/lumiEmotionalRoles.ts",
+      "name": "lumiEmotionalRoles.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/lumiPagePlacementMap.ts",
+      "name": "lumiPagePlacementMap.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/lumiPageReplacementMap.ts",
+      "name": "lumiPageReplacementMap.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/lumiPlacementRules.ts",
+      "name": "lumiPlacementRules.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/lumiSceneAssignments.ts",
+      "name": "lumiSceneAssignments.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/lumiUsageRules.ts",
+      "name": "lumiUsageRules.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/officialLumiRegistry.ts",
+      "name": "officialLumiRegistry.ts"
+    },
+    {
+      "file": "client/src/lumi-registry/types/lumiTypes.ts",
+      "name": "lumiTypes.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/components/GuidedPresenceRitual.tsx",
+      "name": "GuidedPresenceRitual.tsx"
+    },
+    {
+      "file": "client/src/lumi-rituals/components/RitualStepCard.tsx",
+      "name": "RitualStepCard.tsx"
+    },
+    {
+      "file": "client/src/lumi-rituals/governance/ritualSafetyRules.ts",
+      "name": "ritualSafetyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/gentleTransition.ts",
+      "name": "gentleTransition.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/grounding54321.ts",
+      "name": "grounding54321.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/holdingSpace.ts",
+      "name": "holdingSpace.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/oneBreathReset.ts",
+      "name": "oneBreathReset.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/sleepSoftener.ts",
+      "name": "sleepSoftener.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/softArrival.ts",
+      "name": "softArrival.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/tinyHope.ts",
+      "name": "tinyHope.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/runtime/RitualEngine.ts",
+      "name": "RitualEngine.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/runtime/ritualRegistry.ts",
+      "name": "ritualRegistry.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/runtime/useRitual.ts",
+      "name": "useRitual.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/tests/ritualSafety.test.ts",
+      "name": "ritualSafety.test.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/governance/presetSafetyRules.ts",
+      "name": "presetSafetyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/presets/cloudRest.ts",
+      "name": "cloudRest.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/presets/gentleLantern.ts",
+      "name": "gentleLantern.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/presets/holdingSpace.ts",
+      "name": "holdingSpace.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/presets/quietOrbit.ts",
+      "name": "quietOrbit.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/presets/softHorizon.ts",
+      "name": "softHorizon.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/presets/stillMeadow.ts",
+      "name": "stillMeadow.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/presets/tinyBloom.ts",
+      "name": "tinyBloom.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/runtime/ScenePresetEngine.ts",
+      "name": "ScenePresetEngine.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/runtime/useScenePreset.ts",
+      "name": "useScenePreset.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/tests/sceneSafety.test.ts",
+      "name": "sceneSafety.test.ts"
+    },
+    {
+      "file": "client/src/lumi-scenes/transitions/SceneTransitionController.tsx",
+      "name": "SceneTransitionController.tsx"
+    },
+    {
+      "file": "client/src/lumi-tokens/colors/colorTokens.ts",
+      "name": "colorTokens.ts"
+    },
+    {
+      "file": "client/src/lumi-tokens/components/componentTokens.ts",
+      "name": "componentTokens.ts"
+    },
+    {
+      "file": "client/src/lumi-tokens/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-tokens/shadows/shadowTokens.ts",
+      "name": "shadowTokens.ts"
+    },
+    {
+      "file": "client/src/lumi-tokens/spacing/spacingTokens.ts",
+      "name": "spacingTokens.ts"
+    },
+    {
+      "file": "client/src/lumi-tokens/typography/typographyTokens.ts",
+      "name": "typographyTokens.ts"
+    },
+    {
+      "file": "client/src/lumi-tracker/governance/trackerPrivacyRules.ts",
+      "name": "trackerPrivacyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-tracker/habits/habitTracker.ts",
+      "name": "habitTracker.ts"
+    },
+    {
+      "file": "client/src/lumi-tracker/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-tracker/mood/moodEntry.ts",
+      "name": "moodEntry.ts"
+    },
+    {
+      "file": "client/src/lumi-tracker/visualization/habitHeatmap.ts",
+      "name": "habitHeatmap.ts"
+    },
+    {
+      "file": "client/src/lumi-tracker/visualization/moodChart.ts",
+      "name": "moodChart.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/accessibility/captionsMode.ts",
+      "name": "captionsMode.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/accessibility/reducedAudioMode.ts",
+      "name": "reducedAudioMode.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/components/VoiceCaptionOverlay.tsx",
+      "name": "VoiceCaptionOverlay.tsx"
+    },
+    {
+      "file": "client/src/lumi-voice/components/VoiceToggle.tsx",
+      "name": "VoiceToggle.tsx"
+    },
+    {
+      "file": "client/src/lumi-voice/governance/antiManipulationRules.ts",
+      "name": "antiManipulationRules.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/governance/voiceSafetyRules.ts",
+      "name": "voiceSafetyRules.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/profiles/sleepyQuiet.ts",
+      "name": "sleepyQuiet.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/profiles/softNeutral.ts",
+      "name": "softNeutral.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/profiles/warmCalm.ts",
+      "name": "warmCalm.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/runtime/BreathPacingEngine.ts",
+      "name": "BreathPacingEngine.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/runtime/VoicePlaybackController.ts",
+      "name": "VoicePlaybackController.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/runtime/VoicePresenceEngine.ts",
+      "name": "VoicePresenceEngine.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/runtime/useVoicePresence.ts",
+      "name": "useVoicePresence.ts"
+    },
+    {
+      "file": "client/src/main.jsx",
+      "name": "main.jsx"
+    },
+    {
+      "file": "client/src/pages/AIChatPage.tsx",
+      "name": "AIChatPage.tsx"
+    },
+    {
+      "file": "client/src/pages/About.jsx",
+      "name": "About.jsx"
+    },
+    {
+      "file": "client/src/pages/AboutApproachPage.jsx",
+      "name": "AboutApproachPage.jsx"
+    },
+    {
+      "file": "client/src/pages/AdaptiveCompanionPage.tsx",
+      "name": "AdaptiveCompanionPage.tsx"
+    },
+    {
+      "file": "client/src/pages/Admin.jsx",
+      "name": "Admin.jsx"
+    },
+    {
+      "file": "client/src/pages/AdminLogin.jsx",
+      "name": "AdminLogin.jsx"
+    },
+    {
+      "file": "client/src/pages/AdvancedToolsPage.tsx",
+      "name": "AdvancedToolsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/AffirmationWall.jsx",
+      "name": "AffirmationWall.jsx"
+    },
+    {
+      "file": "client/src/pages/AffirmationsPage.jsx",
+      "name": "AffirmationsPage.jsx"
+    },
+    {
+      "file": "client/src/pages/AgentInteraction.jsx",
+      "name": "AgentInteraction.jsx"
+    },
+    {
+      "file": "client/src/pages/AlignmentPath.jsx",
+      "name": "AlignmentPath.jsx"
+    },
+    {
+      "file": "client/src/pages/Analytics.jsx",
+      "name": "Analytics.jsx"
+    },
+    {
+      "file": "client/src/pages/AtlasDashboard.tsx",
+      "name": "AtlasDashboard.tsx"
+    },
+    {
+      "file": "client/src/pages/AvatarLab.jsx",
+      "name": "AvatarLab.jsx"
+    },
+    {
+      "file": "client/src/pages/BehaviorChangePage.jsx",
+      "name": "BehaviorChangePage.jsx"
+    },
+    {
+      "file": "client/src/pages/BehaviorChangePage.tsx",
+      "name": "BehaviorChangePage.tsx"
+    },
+    {
+      "file": "client/src/pages/BiometricDashboard.jsx",
+      "name": "BiometricDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/Blog.jsx",
+      "name": "Blog.jsx"
+    },
+    {
+      "file": "client/src/pages/BlogDraftViewer.jsx",
+      "name": "BlogDraftViewer.jsx"
+    },
+    {
+      "file": "client/src/pages/BlogEditor.jsx",
+      "name": "BlogEditor.jsx"
+    },
+    {
+      "file": "client/src/pages/BlogIndex.jsx",
+      "name": "BlogIndex.jsx"
+    },
+    {
+      "file": "client/src/pages/BlogPost.jsx",
+      "name": "BlogPost.jsx"
+    },
+    {
+      "file": "client/src/pages/BodyWellnessPage.jsx",
+      "name": "BodyWellnessPage.jsx"
+    },
+    {
+      "file": "client/src/pages/BoundariesPage.jsx",
+      "name": "BoundariesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/BreathingExercisesPage.jsx",
+      "name": "BreathingExercisesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/CRMPage.jsx",
+      "name": "CRMPage.jsx"
+    },
+    {
+      "file": "client/src/pages/CalmingScenesPage.jsx",
+      "name": "CalmingScenesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/CanvaLanding.jsx",
+      "name": "CanvaLanding.jsx"
+    },
+    {
+      "file": "client/src/pages/CelebrationFlow.jsx",
+      "name": "CelebrationFlow.jsx"
+    },
+    {
+      "file": "client/src/pages/CelebrationRitual.jsx",
+      "name": "CelebrationRitual.jsx"
+    },
+    {
+      "file": "client/src/pages/Challenge.jsx",
+      "name": "Challenge.jsx"
+    },
+    {
+      "file": "client/src/pages/ChallengeDay.jsx",
+      "name": "ChallengeDay.jsx"
+    },
+    {
+      "file": "client/src/pages/CheckIn.jsx",
+      "name": "CheckIn.jsx"
+    },
+    {
+      "file": "client/src/pages/CognitiveArchitecturePage.tsx",
+      "name": "CognitiveArchitecturePage.tsx"
+    },
+    {
+      "file": "client/src/pages/CognitiveToolsPage.jsx",
+      "name": "CognitiveToolsPage.jsx"
+    },
+    {
+      "file": "client/src/pages/CoherenceLadderPage.jsx",
+      "name": "CoherenceLadderPage.jsx"
+    },
+    {
+      "file": "client/src/pages/CollaborativeLabPage.tsx",
+      "name": "CollaborativeLabPage.tsx"
+    },
+    {
+      "file": "client/src/pages/ComingSoon.jsx",
+      "name": "ComingSoon.jsx"
+    },
+    {
+      "file": "client/src/pages/CommunityCircle.jsx",
+      "name": "CommunityCircle.jsx"
+    },
+    {
+      "file": "client/src/pages/CommunityFeed.jsx",
+      "name": "CommunityFeed.jsx"
+    },
+    {
+      "file": "client/src/pages/CommunityGuidelines.jsx",
+      "name": "CommunityGuidelines.jsx"
+    },
+    {
+      "file": "client/src/pages/CommunityHub.jsx",
+      "name": "CommunityHub.jsx"
+    },
+    {
+      "file": "client/src/pages/CommunityPage.tsx",
+      "name": "CommunityPage.tsx"
+    },
+    {
+      "file": "client/src/pages/Contact.jsx",
+      "name": "Contact.jsx"
+    },
+    {
+      "file": "client/src/pages/ContentAdminDashboard.jsx",
+      "name": "ContentAdminDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/ContentIndexPage.jsx",
+      "name": "ContentIndexPage.jsx"
+    },
+    {
+      "file": "client/src/pages/ContentStudioPage.tsx",
+      "name": "ContentStudioPage.tsx"
+    },
+    {
+      "file": "client/src/pages/ControlDashboard.jsx",
+      "name": "ControlDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/CourseCatalog.jsx",
+      "name": "CourseCatalog.jsx"
+    },
+    {
+      "file": "client/src/pages/CreatorProfile.jsx",
+      "name": "CreatorProfile.jsx"
+    },
+    {
+      "file": "client/src/pages/CrisisResources.jsx",
+      "name": "CrisisResources.jsx"
+    },
+    {
+      "file": "client/src/pages/DailyPracticePage.jsx",
+      "name": "DailyPracticePage.jsx"
+    },
+    {
+      "file": "client/src/pages/DailyReflection.jsx",
+      "name": "DailyReflection.jsx"
+    },
+    {
+      "file": "client/src/pages/DailyRitualPage.tsx",
+      "name": "DailyRitualPage.tsx"
+    },
+    {
+      "file": "client/src/pages/DailyRoutinesPage.jsx",
+      "name": "DailyRoutinesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/DailyWisdomOraclePage.tsx",
+      "name": "DailyWisdomOraclePage.tsx"
+    },
+    {
+      "file": "client/src/pages/Dashboard.jsx",
+      "name": "Dashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/DataRetention.jsx",
+      "name": "DataRetention.jsx"
+    },
+    {
+      "file": "client/src/pages/DesignDashboard.jsx",
+      "name": "DesignDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/DesignSystem.jsx",
+      "name": "DesignSystem.jsx"
+    },
+    {
+      "file": "client/src/pages/DesignSystemV2.jsx",
+      "name": "DesignSystemV2.jsx"
+    },
+    {
+      "file": "client/src/pages/DiscernmentDashboard.jsx",
+      "name": "DiscernmentDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/Disclaimer.tsx",
+      "name": "Disclaimer.tsx"
+    },
+    {
+      "file": "client/src/pages/EliteToolsDashboard.tsx",
+      "name": "EliteToolsDashboard.tsx"
+    },
+    {
+      "file": "client/src/pages/EmotionalIntelligencePage.jsx",
+      "name": "EmotionalIntelligencePage.jsx"
+    },
+    {
+      "file": "client/src/pages/ExamplesPage.jsx",
+      "name": "ExamplesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/FAQPage.jsx",
+      "name": "FAQPage.jsx"
+    },
+    {
+      "file": "client/src/pages/ForgotPassword.jsx",
+      "name": "ForgotPassword.jsx"
+    },
+    {
+      "file": "client/src/pages/GlossaryPage.jsx",
+      "name": "GlossaryPage.jsx"
+    },
+    {
+      "file": "client/src/pages/GratitudePractice.jsx",
+      "name": "GratitudePractice.jsx"
+    },
+    {
+      "file": "client/src/pages/GroundingTechniquesPage.jsx",
+      "name": "GroundingTechniquesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/GrowthAnalyticsPage.tsx",
+      "name": "GrowthAnalyticsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/GrowthPage.jsx",
+      "name": "GrowthPage.jsx"
+    },
+    {
+      "file": "client/src/pages/GuidedJournalingPage.tsx",
+      "name": "GuidedJournalingPage.tsx"
+    },
+    {
+      "file": "client/src/pages/HealingJourneysPage.jsx",
+      "name": "HealingJourneysPage.jsx"
+    },
+    {
+      "file": "client/src/pages/HealingLibraryPage.jsx",
+      "name": "HealingLibraryPage.jsx"
+    },
+    {
+      "file": "client/src/pages/HealthPage.jsx",
+      "name": "HealthPage.jsx"
+    },
+    {
+      "file": "client/src/pages/HowToGuidesPage.jsx",
+      "name": "HowToGuidesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/InnerChildPage.jsx",
+      "name": "InnerChildPage.jsx"
+    },
+    {
+      "file": "client/src/pages/InsightCardsPage.tsx",
+      "name": "InsightCardsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/InsightsDashboard.jsx",
+      "name": "InsightsDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/Invite.jsx",
+      "name": "Invite.jsx"
+    },
+    {
+      "file": "client/src/pages/JournalPage.jsx",
+      "name": "JournalPage.jsx"
+    },
+    {
+      "file": "client/src/pages/KnowledgeSynthesisPage.tsx",
+      "name": "KnowledgeSynthesisPage.tsx"
+    },
+    {
+      "file": "client/src/pages/LearnArticles.jsx",
+      "name": "LearnArticles.jsx"
+    },
+    {
+      "file": "client/src/pages/LearnDetail.jsx",
+      "name": "LearnDetail.jsx"
+    },
+    {
+      "file": "client/src/pages/LearnGuides.jsx",
+      "name": "LearnGuides.jsx"
+    },
+    {
+      "file": "client/src/pages/LearnHub.jsx",
+      "name": "LearnHub.jsx"
+    },
+    {
+      "file": "client/src/pages/LegalPage.jsx",
+      "name": "LegalPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Login.jsx",
+      "name": "Login.jsx"
+    },
+    {
+      "file": "client/src/pages/LoginCallback.jsx",
+      "name": "LoginCallback.jsx"
+    },
+    {
+      "file": "client/src/pages/LumiV6Preview.jsx",
+      "name": "LumiV6Preview.jsx"
+    },
+    {
+      "file": "client/src/pages/MasteryToolsPage.tsx",
+      "name": "MasteryToolsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/MeditationGuidePage.jsx",
+      "name": "MeditationGuidePage.jsx"
+    },
+    {
+      "file": "client/src/pages/MetaLearningPage.tsx",
+      "name": "MetaLearningPage.tsx"
+    },
+    {
+      "file": "client/src/pages/MirrorPage.tsx",
+      "name": "MirrorPage.tsx"
+    },
+    {
+      "file": "client/src/pages/MoodPage.jsx",
+      "name": "MoodPage.jsx"
+    },
+    {
+      "file": "client/src/pages/MotionLab.jsx",
+      "name": "MotionLab.jsx"
+    },
+    {
+      "file": "client/src/pages/MovementSnacksPage.jsx",
+      "name": "MovementSnacksPage.jsx"
+    },
+    {
+      "file": "client/src/pages/NervousSystemFloodingPage.jsx",
+      "name": "NervousSystemFloodingPage.jsx"
+    },
+    {
+      "file": "client/src/pages/NewsPage.jsx",
+      "name": "NewsPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Newsletter.jsx",
+      "name": "Newsletter.jsx"
+    },
+    {
+      "file": "client/src/pages/NotFound.jsx",
+      "name": "NotFound.jsx"
+    },
+    {
+      "file": "client/src/pages/Onboarding.tsx",
+      "name": "Onboarding.tsx"
+    },
+    {
+      "file": "client/src/pages/OnboardingFlow.jsx",
+      "name": "OnboardingFlow.jsx"
+    },
+    {
+      "file": "client/src/pages/PeacescapePage.jsx",
+      "name": "PeacescapePage.jsx"
+    },
+    {
+      "file": "client/src/pages/PerceptionRefinementPage.jsx",
+      "name": "PerceptionRefinementPage.jsx"
+    },
+    {
+      "file": "client/src/pages/PermacultureWellnessPage.jsx",
+      "name": "PermacultureWellnessPage.jsx"
+    },
+    {
+      "file": "client/src/pages/PhilosophicalInquiryPage.tsx",
+      "name": "PhilosophicalInquiryPage.tsx"
+    },
+    {
+      "file": "client/src/pages/PracticeLibrary.jsx",
+      "name": "PracticeLibrary.jsx"
+    },
+    {
+      "file": "client/src/pages/Premium.jsx",
+      "name": "Premium.jsx"
+    },
+    {
+      "file": "client/src/pages/Presence.jsx",
+      "name": "Presence.jsx"
+    },
+    {
+      "file": "client/src/pages/PressKit.jsx",
+      "name": "PressKit.jsx"
+    },
+    {
+      "file": "client/src/pages/Pricing.jsx",
+      "name": "Pricing.jsx"
+    },
+    {
+      "file": "client/src/pages/PricingPage.jsx",
+      "name": "PricingPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Privacy.jsx",
+      "name": "Privacy.jsx"
+    },
+    {
+      "file": "client/src/pages/Privacy.tsx",
+      "name": "Privacy.tsx"
+    },
+    {
+      "file": "client/src/pages/ProfessionalResourcesPage.jsx",
+      "name": "ProfessionalResourcesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Profile.jsx",
+      "name": "Profile.jsx"
+    },
+    {
+      "file": "client/src/pages/ProgressDashboardPage.tsx",
+      "name": "ProgressDashboardPage.tsx"
+    },
+    {
+      "file": "client/src/pages/ProtocolBrowser.jsx",
+      "name": "ProtocolBrowser.jsx"
+    },
+    {
+      "file": "client/src/pages/ProtocolSession.jsx",
+      "name": "ProtocolSession.jsx"
+    },
+    {
+      "file": "client/src/pages/PublicRoadmap.jsx",
+      "name": "PublicRoadmap.jsx"
+    },
+    {
+      "file": "client/src/pages/Publishing.jsx",
+      "name": "Publishing.jsx"
+    },
+    {
+      "file": "client/src/pages/QAPage.jsx",
+      "name": "QAPage.jsx"
+    },
+    {
+      "file": "client/src/pages/RecoveryPage.jsx",
+      "name": "RecoveryPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Reflection.jsx",
+      "name": "Reflection.jsx"
+    },
+    {
+      "file": "client/src/pages/Register.jsx",
+      "name": "Register.jsx"
+    },
+    {
+      "file": "client/src/pages/ResearchEvidencePage.jsx",
+      "name": "ResearchEvidencePage.jsx"
+    },
+    {
+      "file": "client/src/pages/ResetPassword.jsx",
+      "name": "ResetPassword.jsx"
+    },
+    {
+      "file": "client/src/pages/ResilienceMetricsPage.tsx",
+      "name": "ResilienceMetricsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/ResourcesPage.jsx",
+      "name": "ResourcesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/RigLab.jsx",
+      "name": "RigLab.jsx"
+    },
+    {
+      "file": "client/src/pages/RoutinesPage.jsx",
+      "name": "RoutinesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/SafetyCenter.jsx",
+      "name": "SafetyCenter.jsx"
+    },
+    {
+      "file": "client/src/pages/SafetyPage.jsx",
+      "name": "SafetyPage.jsx"
+    },
+    {
+      "file": "client/src/pages/SelfCareToolkitPage.jsx",
+      "name": "SelfCareToolkitPage.jsx"
+    },
+    {
+      "file": "client/src/pages/SelfLovePage.jsx",
+      "name": "SelfLovePage.jsx"
+    },
+    {
+      "file": "client/src/pages/SelfWorthReflectionPage.jsx",
+      "name": "SelfWorthReflectionPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Settings.jsx",
+      "name": "Settings.jsx"
+    },
+    {
+      "file": "client/src/pages/SleepGuidePage.jsx",
+      "name": "SleepGuidePage.jsx"
+    },
+    {
+      "file": "client/src/pages/SocialHub.jsx",
+      "name": "SocialHub.jsx"
+    },
+    {
+      "file": "client/src/pages/SoulWellnessPage.jsx",
+      "name": "SoulWellnessPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Start.tsx",
+      "name": "Start.tsx"
+    },
+    {
+      "file": "client/src/pages/StatePage.jsx",
+      "name": "StatePage.jsx"
+    },
+    {
+      "file": "client/src/pages/StrategyMapsPage.tsx",
+      "name": "StrategyMapsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/StressResponseGuidePage.jsx",
+      "name": "StressResponseGuidePage.jsx"
+    },
+    {
+      "file": "client/src/pages/StudyVaultPage.jsx",
+      "name": "StudyVaultPage.jsx"
+    },
+    {
+      "file": "client/src/pages/SubscriberBenefitsPage.jsx",
+      "name": "SubscriberBenefitsPage.jsx"
+    },
+    {
+      "file": "client/src/pages/SupportPage.tsx",
+      "name": "SupportPage.tsx"
+    },
+    {
+      "file": "client/src/pages/SystemMapPage.jsx",
+      "name": "SystemMapPage.jsx"
+    },
+    {
+      "file": "client/src/pages/SystemsThinkingPage.tsx",
+      "name": "SystemsThinkingPage.tsx"
+    },
+    {
+      "file": "client/src/pages/TalkTopics.jsx",
+      "name": "TalkTopics.jsx"
+    },
+    {
+      "file": "client/src/pages/Terms.tsx",
+      "name": "Terms.tsx"
+    },
+    {
+      "file": "client/src/pages/ToolsPage.jsx",
+      "name": "ToolsPage.jsx"
+    },
+    {
+      "file": "client/src/pages/TwelvePracticesPage.jsx",
+      "name": "TwelvePracticesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/TwelveStepsPage.tsx",
+      "name": "TwelveStepsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/Upgrade.jsx",
+      "name": "Upgrade.jsx"
+    },
+    {
+      "file": "client/src/pages/UserProfile.jsx",
+      "name": "UserProfile.jsx"
+    },
+    {
+      "file": "client/src/pages/ValuesFinderPage.jsx",
+      "name": "ValuesFinderPage.jsx"
+    },
+    {
+      "file": "client/src/pages/ValuesPage.jsx",
+      "name": "ValuesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Wellness.jsx",
+      "name": "Wellness.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessDashboard.jsx",
+      "name": "WellnessDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessGlossaryPage.jsx",
+      "name": "WellnessGlossaryPage.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessGoals.jsx",
+      "name": "WellnessGoals.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessHubPage.jsx",
+      "name": "WellnessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessToolsHub.jsx",
+      "name": "WellnessToolsHub.jsx"
+    },
+    {
+      "file": "client/src/pages/WireframeTemplates.jsx",
+      "name": "WireframeTemplates.jsx"
+    },
+    {
+      "file": "client/src/pages/WisdomPracticesPage.tsx",
+      "name": "WisdomPracticesPage.tsx"
+    },
+    {
+      "file": "client/src/pages/WisdomSynthesisPage.tsx",
+      "name": "WisdomSynthesisPage.tsx"
+    },
+    {
+      "file": "client/src/pages/WisdomToolsPage.tsx",
+      "name": "WisdomToolsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/_autopilot.jsx",
+      "name": "_autopilot.jsx"
+    },
+    {
+      "file": "client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx",
+      "name": "HealingLandingPage.jsx"
+    },
+    {
+      "file": "client/src/pages/_quarantine/legacy-landing/Home.jsx",
+      "name": "Home.jsx"
+    },
+    {
+      "file": "client/src/pages/_quarantine/legacy-landing/LandingV2.jsx",
+      "name": "LandingV2.jsx"
+    },
+    {
+      "file": "client/src/pages/account/Billing.jsx",
+      "name": "Billing.jsx"
+    },
+    {
+      "file": "client/src/pages/account/DeleteAccount.jsx",
+      "name": "DeleteAccount.jsx"
+    },
+    {
+      "file": "client/src/pages/account/OrderHistory.jsx",
+      "name": "OrderHistory.jsx"
+    },
+    {
+      "file": "client/src/pages/account/Profile.jsx",
+      "name": "Profile.jsx"
+    },
+    {
+      "file": "client/src/pages/account/Security.jsx",
+      "name": "Security.jsx"
+    },
+    {
+      "file": "client/src/pages/account/Sessions.jsx",
+      "name": "Sessions.jsx"
+    },
+    {
+      "file": "client/src/pages/account/Settings.jsx",
+      "name": "Settings.jsx"
+    },
+    {
+      "file": "client/src/pages/account/Subscription.jsx",
+      "name": "Subscription.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminPublishing.jsx",
+      "name": "AdminPublishing.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminPublishingToday.jsx",
+      "name": "AdminPublishingToday.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminSocial.jsx",
+      "name": "AdminSocial.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminTools.jsx",
+      "name": "AdminTools.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminUsers.jsx",
+      "name": "AdminUsers.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AnalyticsDashboard.jsx",
+      "name": "AnalyticsDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AuditLogExplorer.jsx",
+      "name": "AuditLogExplorer.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/BillingViewer.jsx",
+      "name": "BillingViewer.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/CommandCenter.jsx",
+      "name": "CommandCenter.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/ContentStudioAdmin.jsx",
+      "name": "ContentStudioAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/EngagementDashboard.jsx",
+      "name": "EngagementDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/FeatureFlags.jsx",
+      "name": "FeatureFlags.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/FeedbackAggregator.jsx",
+      "name": "FeedbackAggregator.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/HealthDashboard.jsx",
+      "name": "HealthDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/NarrativeDrafts.jsx",
+      "name": "NarrativeDrafts.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+      "name": "NarrativeOpsConsole.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/NewsletterAdmin.jsx",
+      "name": "NewsletterAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/RevenueAdmin.jsx",
+      "name": "RevenueAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/RolesPermissions.jsx",
+      "name": "RolesPermissions.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SecurityDashboard.jsx",
+      "name": "SecurityDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialAnalytics.jsx",
+      "name": "SocialAnalytics.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialCalendar.jsx",
+      "name": "SocialCalendar.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialDashboard.jsx",
+      "name": "SocialDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialGenerator.jsx",
+      "name": "SocialGenerator.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialLibrary.jsx",
+      "name": "SocialLibrary.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialStudioAdmin.jsx",
+      "name": "SocialStudioAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SystemAlerts.jsx",
+      "name": "SystemAlerts.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx",
+      "name": "AIDiagnosticsPanel.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/AIRepairCenter.jsx",
+      "name": "AIRepairCenter.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx",
+      "name": "DailyOpsRunbook.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx",
+      "name": "GitIntegrityScanner.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx",
+      "name": "PlatformCoverageReport.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx",
+      "name": "PlatformIntegrityDeepScan.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx",
+      "name": "PlatformIntegrityScanner.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminTools/QuickDiagnostics.jsx",
+      "name": "QuickDiagnostics.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminToolsShared.js",
+      "name": "_adminToolsShared.js"
+    },
+    {
+      "file": "client/src/pages/dashboard/Insights.tsx",
+      "name": "Insights.tsx"
+    },
+    {
+      "file": "client/src/pages/dashboard/Journal.jsx",
+      "name": "Journal.jsx"
+    },
+    {
+      "file": "client/src/pages/dashboard/MoodTracker.jsx",
+      "name": "MoodTracker.jsx"
+    },
+    {
+      "file": "client/src/pages/dashboard/Overview.jsx",
+      "name": "Overview.jsx"
+    },
+    {
+      "file": "client/src/pages/dashboard/ProgressDashboard.jsx",
+      "name": "ProgressDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/discovery/DiscoveryPage.jsx",
+      "name": "DiscoveryPage.jsx"
+    },
+    {
+      "file": "client/src/pages/help/RefundHelp.jsx",
+      "name": "RefundHelp.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/AcceptanceHubPage.jsx",
+      "name": "AcceptanceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/AnxietyHubPage.jsx",
+      "name": "AnxietyHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BodyMindHubPage.jsx",
+      "name": "BodyMindHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BoundariesHubPage.jsx",
+      "name": "BoundariesHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BreathworkHubPage.jsx",
+      "name": "BreathworkHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/CommunicationHubPage.jsx",
+      "name": "CommunicationHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ConfidenceHubPage.jsx",
+      "name": "ConfidenceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/CopingSkillsHubPage.jsx",
+      "name": "CopingSkillsHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/CreativityHubPage.jsx",
+      "name": "CreativityHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/DailyPracticeHubPage.jsx",
+      "name": "DailyPracticeHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx",
+      "name": "EmotionalIntelligenceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/EnergyManagementHubPage.jsx",
+      "name": "EnergyManagementHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/FocusHubPage.jsx",
+      "name": "FocusHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ForgivenessHubPage.jsx",
+      "name": "ForgivenessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/GratitudeHubPage.jsx",
+      "name": "GratitudeHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/GriefHubPage.jsx",
+      "name": "GriefHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/HabitsHubPage.jsx",
+      "name": "HabitsHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/HealingJourneyHubPage.jsx",
+      "name": "HealingJourneyHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/HubsIndexPage.jsx",
+      "name": "HubsIndexPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/InnerPeaceHubPage.jsx",
+      "name": "InnerPeaceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/InnerWorkHubPage.jsx",
+      "name": "InnerWorkHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/JournalingHubPage.jsx",
+      "name": "JournalingHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/LifePurposeHubPage.jsx",
+      "name": "LifePurposeHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/MindfulnessHubPage.jsx",
+      "name": "MindfulnessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/MotivationHubPage.jsx",
+      "name": "MotivationHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/NervousSystemHubPage.jsx",
+      "name": "NervousSystemHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/PersonalGrowthHubPage.jsx",
+      "name": "PersonalGrowthHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/PresenceHubPage.jsx",
+      "name": "PresenceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/RelationshipsHubPage.jsx",
+      "name": "RelationshipsHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ResilienceHubPage.jsx",
+      "name": "ResilienceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfAwarenessHubPage.jsx",
+      "name": "SelfAwarenessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfCareHubPage.jsx",
+      "name": "SelfCareHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfCompassionHubPage.jsx",
+      "name": "SelfCompassionHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfDiscoveryHubPage.jsx",
+      "name": "SelfDiscoveryHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfWorthHubPage.jsx",
+      "name": "SelfWorthHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SleepHubPage.jsx",
+      "name": "SleepHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SpiritualityHubPage.jsx",
+      "name": "SpiritualityHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/StressHubPage.jsx",
+      "name": "StressHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ThoughtworkHubPage.jsx",
+      "name": "ThoughtworkHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/TopicHubPage.jsx",
+      "name": "TopicHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/TraumaHealingHubPage.jsx",
+      "name": "TraumaHealingHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/WisdomHubPage.jsx",
+      "name": "WisdomHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/index.jsx",
+      "name": "index.jsx"
+    },
+    {
+      "file": "client/src/pages/library/SavedLibrary.jsx",
+      "name": "SavedLibrary.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/CalmPlan.jsx",
+      "name": "CalmPlan.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/Favorites.jsx",
+      "name": "Favorites.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/GoalOnboarding.jsx",
+      "name": "GoalOnboarding.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/PathwaysHome.jsx",
+      "name": "PathwaysHome.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/ProgressStreaks.jsx",
+      "name": "ProgressStreaks.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/ReflectionHistory.jsx",
+      "name": "ReflectionHistory.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/ValuesToActions.jsx",
+      "name": "ValuesToActions.jsx"
+    },
+    {
+      "file": "client/src/pages/preferences/NotificationPreferences.jsx",
+      "name": "NotificationPreferences.jsx"
+    },
+    {
+      "file": "client/src/pages/preferences/SafetyPreferences.jsx",
+      "name": "SafetyPreferences.jsx"
+    },
+    {
+      "file": "client/src/pages/reflection.tsx",
+      "name": "reflection.tsx"
+    },
+    {
+      "file": "client/src/pages/settings/AIPersonality.jsx",
+      "name": "AIPersonality.jsx"
+    },
+    {
+      "file": "client/src/pages/settings/EmailDigest.jsx",
+      "name": "EmailDigest.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/AweMicrodose.jsx",
+      "name": "AweMicrodose.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BodyScan.jsx",
+      "name": "BodyScan.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BoundaryBuilderTool.jsx",
+      "name": "BoundaryBuilderTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathPacer.jsx",
+      "name": "BreathPacer.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathTool.jsx",
+      "name": "BreathTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathingTool.jsx",
+      "name": "BreathingTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/CognitiveDistortionChecker.jsx",
+      "name": "CognitiveDistortionChecker.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/CommunityCheckin.jsx",
+      "name": "CommunityCheckin.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/CompassionBreak.jsx",
+      "name": "CompassionBreak.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/DigitalSunset.jsx",
+      "name": "DigitalSunset.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/EmotionWheel.jsx",
+      "name": "EmotionWheel.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/GAD7Assessment.jsx",
+      "name": "GAD7Assessment.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/GriefLetter.jsx",
+      "name": "GriefLetter.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/ManipulationDetector.jsx",
+      "name": "ManipulationDetector.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/MeaningMap.jsx",
+      "name": "MeaningMap.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/MeditationPlayer.jsx",
+      "name": "MeditationPlayer.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/NervousSystemCheck.jsx",
+      "name": "NervousSystemCheck.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/PHQ9Assessment.jsx",
+      "name": "PHQ9Assessment.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/Reframe.jsx",
+      "name": "Reframe.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/ReframePage.jsx",
+      "name": "ReframePage.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/RepairScript.jsx",
+      "name": "RepairScript.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/SleepQualityCalculator.jsx",
+      "name": "SleepQualityCalculator.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/ToolDirectoryPage.jsx",
+      "name": "ToolDirectoryPage.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/UrgeSurf.jsx",
+      "name": "UrgeSurf.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/WeeklyReflection.jsx",
+      "name": "WeeklyReflection.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/index.jsx",
+      "name": "index.jsx"
+    },
+    {
+      "file": "client/src/policy/platformPolicy.ts",
+      "name": "platformPolicy.ts"
+    },
+    {
+      "file": "client/src/safety/languageCheck.ts",
+      "name": "languageCheck.ts"
+    },
+    {
+      "file": "client/src/safety/languageFilter.ts",
+      "name": "languageFilter.ts"
+    },
+    {
+      "file": "client/src/safety/toneRules.ts",
+      "name": "toneRules.ts"
+    },
+    {
+      "file": "client/src/sections/EmailCapture.jsx",
+      "name": "EmailCapture.jsx"
+    },
+    {
+      "file": "client/src/sections/EmotionalJourney.jsx",
+      "name": "EmotionalJourney.jsx"
+    },
+    {
+      "file": "client/src/sections/NextStepCTA.jsx",
+      "name": "NextStepCTA.jsx"
+    },
+    {
+      "file": "client/src/sections/NlpMiContent.jsx",
+      "name": "NlpMiContent.jsx"
+    },
+    {
+      "file": "client/src/sections/PricingFAQ.jsx",
+      "name": "PricingFAQ.jsx"
+    },
+    {
+      "file": "client/src/sections/ValueBridge.jsx",
+      "name": "ValueBridge.jsx"
+    },
+    {
+      "file": "client/src/sections/ValueProposition.jsx",
+      "name": "ValueProposition.jsx"
+    },
+    {
+      "file": "client/src/sections/VisualBenefits.jsx",
+      "name": "VisualBenefits.jsx"
+    },
+    {
+      "file": "client/src/services/billingClient.js",
+      "name": "billingClient.js"
+    },
+    {
+      "file": "client/src/shared/brand/copy.js",
+      "name": "copy.js"
+    },
+    {
+      "file": "client/src/skills/index.ts",
+      "name": "index.ts"
+    },
+    {
+      "file": "client/src/skills/packs/mi.ts",
+      "name": "mi.ts"
+    },
+    {
+      "file": "client/src/skills/packs/nlpReframe.ts",
+      "name": "nlpReframe.ts"
+    },
+    {
+      "file": "client/src/skills/packs/twelvePractices.ts",
+      "name": "twelvePractices.ts"
+    },
+    {
+      "file": "client/src/skills/renderSkill.tsx",
+      "name": "renderSkill.tsx"
+    },
+    {
+      "file": "client/src/skills/skillRegistry.ts",
+      "name": "skillRegistry.ts"
+    },
+    {
+      "file": "client/src/smoke.test.js",
+      "name": "smoke.test.js"
+    },
+    {
+      "file": "client/src/tool-registry/toolRegistry.ts",
+      "name": "toolRegistry.ts"
+    },
+    {
+      "file": "client/src/utils/LocalSync.js",
+      "name": "LocalSync.js"
+    },
+    {
+      "file": "client/src/utils/dataExport.js",
+      "name": "dataExport.js"
+    },
+    {
+      "file": "client/src/utils/exportPdf.js",
+      "name": "exportPdf.js"
+    },
+    {
+      "file": "client/src/utils/preloadMascots.js",
+      "name": "preloadMascots.js"
+    },
+    {
+      "file": "client/src/utils/routeKey.js",
+      "name": "routeKey.js"
+    },
+    {
+      "file": "client/src/utils/trackSignalEvent.js",
+      "name": "trackSignalEvent.js"
+    },
+    {
+      "file": "client/src/vite-env.d.ts",
+      "name": "vite-env.d.ts"
+    }
+  ],
+  "hubs": [
+    {
+      "file": "client/src/components/admin/AIKnowledgeHub.jsx",
+      "name": "AIKnowledgeHub.jsx"
+    },
+    {
+      "file": "client/src/content/hubs/hubGraph.ts",
+      "name": "hubGraph.ts"
+    },
+    {
+      "file": "client/src/content/hubs/topicHubs.ts",
+      "name": "topicHubs.ts"
+    },
+    {
+      "file": "client/src/pages/CommunityHub.jsx",
+      "name": "CommunityHub.jsx"
+    },
+    {
+      "file": "client/src/pages/LearnHub.jsx",
+      "name": "LearnHub.jsx"
+    },
+    {
+      "file": "client/src/pages/SocialHub.jsx",
+      "name": "SocialHub.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessHubPage.jsx",
+      "name": "WellnessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessToolsHub.jsx",
+      "name": "WellnessToolsHub.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/AcceptanceHubPage.jsx",
+      "name": "AcceptanceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/AnxietyHubPage.jsx",
+      "name": "AnxietyHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BodyMindHubPage.jsx",
+      "name": "BodyMindHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BoundariesHubPage.jsx",
+      "name": "BoundariesHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BreathworkHubPage.jsx",
+      "name": "BreathworkHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/CommunicationHubPage.jsx",
+      "name": "CommunicationHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ConfidenceHubPage.jsx",
+      "name": "ConfidenceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/CopingSkillsHubPage.jsx",
+      "name": "CopingSkillsHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/CreativityHubPage.jsx",
+      "name": "CreativityHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/DailyPracticeHubPage.jsx",
+      "name": "DailyPracticeHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx",
+      "name": "EmotionalIntelligenceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/EnergyManagementHubPage.jsx",
+      "name": "EnergyManagementHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/FocusHubPage.jsx",
+      "name": "FocusHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ForgivenessHubPage.jsx",
+      "name": "ForgivenessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/GratitudeHubPage.jsx",
+      "name": "GratitudeHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/GriefHubPage.jsx",
+      "name": "GriefHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/HabitsHubPage.jsx",
+      "name": "HabitsHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/HealingJourneyHubPage.jsx",
+      "name": "HealingJourneyHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/HubsIndexPage.jsx",
+      "name": "HubsIndexPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/InnerPeaceHubPage.jsx",
+      "name": "InnerPeaceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/InnerWorkHubPage.jsx",
+      "name": "InnerWorkHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/JournalingHubPage.jsx",
+      "name": "JournalingHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/LifePurposeHubPage.jsx",
+      "name": "LifePurposeHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/MindfulnessHubPage.jsx",
+      "name": "MindfulnessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/MotivationHubPage.jsx",
+      "name": "MotivationHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/NervousSystemHubPage.jsx",
+      "name": "NervousSystemHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/PersonalGrowthHubPage.jsx",
+      "name": "PersonalGrowthHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/PresenceHubPage.jsx",
+      "name": "PresenceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/RelationshipsHubPage.jsx",
+      "name": "RelationshipsHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ResilienceHubPage.jsx",
+      "name": "ResilienceHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfAwarenessHubPage.jsx",
+      "name": "SelfAwarenessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfCareHubPage.jsx",
+      "name": "SelfCareHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfCompassionHubPage.jsx",
+      "name": "SelfCompassionHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfDiscoveryHubPage.jsx",
+      "name": "SelfDiscoveryHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfWorthHubPage.jsx",
+      "name": "SelfWorthHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SleepHubPage.jsx",
+      "name": "SleepHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/SpiritualityHubPage.jsx",
+      "name": "SpiritualityHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/StressHubPage.jsx",
+      "name": "StressHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/ThoughtworkHubPage.jsx",
+      "name": "ThoughtworkHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/TopicHubPage.jsx",
+      "name": "TopicHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/TraumaHealingHubPage.jsx",
+      "name": "TraumaHealingHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/WisdomHubPage.jsx",
+      "name": "WisdomHubPage.jsx"
+    }
+  ],
+  "dashboards": [
+    {
+      "file": "client/src/components/DashboardCard.jsx",
+      "name": "DashboardCard.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessStreakDashboard.jsx",
+      "name": "WellnessStreakDashboard.jsx"
+    },
+    {
+      "file": "client/src/components/metacognition/MetacognitionDashboard.tsx",
+      "name": "MetacognitionDashboard.tsx"
+    },
+    {
+      "file": "client/src/lib/metacognition/metacognitionDashboard.ts",
+      "name": "metacognitionDashboard.ts"
+    },
+    {
+      "file": "client/src/pages/AtlasDashboard.tsx",
+      "name": "AtlasDashboard.tsx"
+    },
+    {
+      "file": "client/src/pages/BiometricDashboard.jsx",
+      "name": "BiometricDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/ContentAdminDashboard.jsx",
+      "name": "ContentAdminDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/ControlDashboard.jsx",
+      "name": "ControlDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/Dashboard.jsx",
+      "name": "Dashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/DesignDashboard.jsx",
+      "name": "DesignDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/DiscernmentDashboard.jsx",
+      "name": "DiscernmentDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/EliteToolsDashboard.tsx",
+      "name": "EliteToolsDashboard.tsx"
+    },
+    {
+      "file": "client/src/pages/InsightsDashboard.jsx",
+      "name": "InsightsDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/ProgressDashboardPage.tsx",
+      "name": "ProgressDashboardPage.tsx"
+    },
+    {
+      "file": "client/src/pages/WellnessDashboard.jsx",
+      "name": "WellnessDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AnalyticsDashboard.jsx",
+      "name": "AnalyticsDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/EngagementDashboard.jsx",
+      "name": "EngagementDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/HealthDashboard.jsx",
+      "name": "HealthDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SecurityDashboard.jsx",
+      "name": "SecurityDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialDashboard.jsx",
+      "name": "SocialDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/dashboard/ProgressDashboard.jsx",
+      "name": "ProgressDashboard.jsx"
+    }
+  ],
+  "tools": [
+    {
+      "file": "client/src/components/AccessibilityToolbar.jsx",
+      "name": "AccessibilityToolbar.jsx"
+    },
+    {
+      "file": "client/src/components/ToolCard.tsx",
+      "name": "ToolCard.tsx"
+    },
+    {
+      "file": "client/src/components/WellnessToolkit.jsx",
+      "name": "WellnessToolkit.jsx"
+    },
+    {
+      "file": "client/src/components/admin/DailyToolsPanel.jsx",
+      "name": "DailyToolsPanel.jsx"
+    },
+    {
+      "file": "client/src/components/discovery/ToolCard.jsx",
+      "name": "ToolCard.jsx"
+    },
+    {
+      "file": "client/src/components/discovery/getRelatedTools.js",
+      "name": "getRelatedTools.js"
+    },
+    {
+      "file": "client/src/components/mi/MITools.tsx",
+      "name": "MITools.tsx"
+    },
+    {
+      "file": "client/src/components/mi/ReframingToolkit.tsx",
+      "name": "ReframingToolkit.tsx"
+    },
+    {
+      "file": "client/src/components/personalization/ToolRecommendations.jsx",
+      "name": "ToolRecommendations.jsx"
+    },
+    {
+      "file": "client/src/components/ui/WellnessToolkit.jsx",
+      "name": "WellnessToolkit.jsx"
+    },
+    {
+      "file": "client/src/components/ui/wellnessToolsData.js",
+      "name": "wellnessToolsData.js"
+    },
+    {
+      "file": "client/src/components/wellnessToolsData.js",
+      "name": "wellnessToolsData.js"
+    },
+    {
+      "file": "client/src/config/toolCategories.js",
+      "name": "toolCategories.js"
+    },
+    {
+      "file": "client/src/hooks/useToolSearch.js",
+      "name": "useToolSearch.js"
+    },
+    {
+      "file": "client/src/pages/AdvancedToolsPage.tsx",
+      "name": "AdvancedToolsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/CognitiveToolsPage.jsx",
+      "name": "CognitiveToolsPage.jsx"
+    },
+    {
+      "file": "client/src/pages/EliteToolsDashboard.tsx",
+      "name": "EliteToolsDashboard.tsx"
+    },
+    {
+      "file": "client/src/pages/MasteryToolsPage.tsx",
+      "name": "MasteryToolsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/SelfCareToolkitPage.jsx",
+      "name": "SelfCareToolkitPage.jsx"
+    },
+    {
+      "file": "client/src/pages/ToolsPage.jsx",
+      "name": "ToolsPage.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessToolsHub.jsx",
+      "name": "WellnessToolsHub.jsx"
+    },
+    {
+      "file": "client/src/pages/WisdomToolsPage.tsx",
+      "name": "WisdomToolsPage.tsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminTools.jsx",
+      "name": "AdminTools.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminToolsShared.js",
+      "name": "_adminToolsShared.js"
+    },
+    {
+      "file": "client/src/pages/tools/BoundaryBuilderTool.jsx",
+      "name": "BoundaryBuilderTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathTool.jsx",
+      "name": "BreathTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathingTool.jsx",
+      "name": "BreathingTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/ToolDirectoryPage.jsx",
+      "name": "ToolDirectoryPage.jsx"
+    },
+    {
+      "file": "client/src/tool-registry/toolRegistry.ts",
+      "name": "toolRegistry.ts"
+    }
+  ],
+  "admin": [
+    {
+      "file": "client/src/components/AdminGuard.jsx",
+      "name": "AdminGuard.jsx"
+    },
+    {
+      "file": "client/src/components/admin/AdminNavGrid.jsx",
+      "name": "AdminNavGrid.jsx"
+    },
+    {
+      "file": "client/src/components/admin/AdminQueryStates.jsx",
+      "name": "AdminQueryStates.jsx"
+    },
+    {
+      "file": "client/src/components/system/AdminErrorBoundary.jsx",
+      "name": "AdminErrorBoundary.jsx"
+    },
+    {
+      "file": "client/src/pages/Admin.jsx",
+      "name": "Admin.jsx"
+    },
+    {
+      "file": "client/src/pages/AdminLogin.jsx",
+      "name": "AdminLogin.jsx"
+    },
+    {
+      "file": "client/src/pages/ContentAdminDashboard.jsx",
+      "name": "ContentAdminDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminPublishing.jsx",
+      "name": "AdminPublishing.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminPublishingToday.jsx",
+      "name": "AdminPublishingToday.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminSocial.jsx",
+      "name": "AdminSocial.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminTools.jsx",
+      "name": "AdminTools.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/AdminUsers.jsx",
+      "name": "AdminUsers.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/ContentStudioAdmin.jsx",
+      "name": "ContentStudioAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/NewsletterAdmin.jsx",
+      "name": "NewsletterAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/RevenueAdmin.jsx",
+      "name": "RevenueAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/SocialStudioAdmin.jsx",
+      "name": "SocialStudioAdmin.jsx"
+    },
+    {
+      "file": "client/src/pages/admin/_adminToolsShared.js",
+      "name": "_adminToolsShared.js"
+    }
+  ],
+  "auth": [
+    {
+      "file": "client/src/api/fetchWithAuth.js",
+      "name": "fetchWithAuth.js"
+    },
+    {
+      "file": "client/src/context/AuthContext.jsx",
+      "name": "AuthContext.jsx"
+    },
+    {
+      "file": "client/src/hooks/useAuth.js",
+      "name": "useAuth.js"
+    },
+    {
+      "file": "client/src/pages/AdminLogin.jsx",
+      "name": "AdminLogin.jsx"
+    },
+    {
+      "file": "client/src/pages/BlogIndex.jsx",
+      "name": "BlogIndex.jsx"
+    },
+    {
+      "file": "client/src/pages/Login.jsx",
+      "name": "Login.jsx"
+    },
+    {
+      "file": "client/src/pages/LoginCallback.jsx",
+      "name": "LoginCallback.jsx"
+    },
+    {
+      "file": "client/src/pages/Register.jsx",
+      "name": "Register.jsx"
+    }
+  ],
+  "wellness": [
+    {
+      "file": "client/src/calm-checkin/__tests/calmCheckinGovernance.test.ts",
+      "name": "calmCheckinGovernance.test.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/accessibility/useReducedCalmMotion.ts",
+      "name": "useReducedCalmMotion.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmBreathGuide.tsx",
+      "name": "CalmBreathGuide.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmCheckinCard.tsx",
+      "name": "CalmCheckinCard.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmCheckinEntry.tsx",
+      "name": "CalmCheckinEntry.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmContinueOptions.tsx",
+      "name": "CalmContinueOptions.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmGroundingOption.tsx",
+      "name": "CalmGroundingOption.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/components/CalmReflectionPrompt.tsx",
+      "name": "CalmReflectionPrompt.tsx"
+    },
+    {
+      "file": "client/src/calm-checkin/content/calmCheckinContent.ts",
+      "name": "calmCheckinContent.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/governance/calmCheckinRules.ts",
+      "name": "calmCheckinRules.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/motion/calmCheckinMotion.ts",
+      "name": "calmCheckinMotion.ts"
+    },
+    {
+      "file": "client/src/calm-checkin/state/calmCheckinState.ts",
+      "name": "calmCheckinState.ts"
+    },
+    {
+      "file": "client/src/checkin-flow/components/FlowStepBreathing.tsx",
+      "name": "FlowStepBreathing.tsx"
+    },
+    {
+      "file": "client/src/components/AIWellnessConcierge.jsx",
+      "name": "AIWellnessConcierge.jsx"
+    },
+    {
+      "file": "client/src/components/BreathingExercise.jsx",
+      "name": "BreathingExercise.jsx"
+    },
+    {
+      "file": "client/src/components/DailyWellnessPlanner.jsx",
+      "name": "DailyWellnessPlanner.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulBreathing.jsx",
+      "name": "MindfulBreathing.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulEating.jsx",
+      "name": "MindfulEating.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulWalking.jsx",
+      "name": "MindfulWalking.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulnessBell.jsx",
+      "name": "MindfulnessBell.jsx"
+    },
+    {
+      "file": "client/src/components/MindfulnessChallenges.jsx",
+      "name": "MindfulnessChallenges.jsx"
+    },
+    {
+      "file": "client/src/components/ReflectionCardExport.jsx",
+      "name": "ReflectionCardExport.jsx"
+    },
+    {
+      "file": "client/src/components/ReflectionInsights.jsx",
+      "name": "ReflectionInsights.jsx"
+    },
+    {
+      "file": "client/src/components/ReminderScheduler.jsx",
+      "name": "ReminderScheduler.jsx"
+    },
+    {
+      "file": "client/src/components/ReminderSettings.jsx",
+      "name": "ReminderSettings.jsx"
+    },
+    {
+      "file": "client/src/components/ShareReflection.jsx",
+      "name": "ShareReflection.jsx"
+    },
+    {
+      "file": "client/src/components/ShareableReflectionCard.jsx",
+      "name": "ShareableReflectionCard.jsx"
+    },
+    {
+      "file": "client/src/components/WeeklyReflection.jsx",
+      "name": "WeeklyReflection.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessGoalTracker.jsx",
+      "name": "WellnessGoalTracker.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessScore.jsx",
+      "name": "WellnessScore.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessStreakDashboard.jsx",
+      "name": "WellnessStreakDashboard.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessTimer.jsx",
+      "name": "WellnessTimer.jsx"
+    },
+    {
+      "file": "client/src/components/WellnessToolkit.jsx",
+      "name": "WellnessToolkit.jsx"
+    },
+    {
+      "file": "client/src/components/community/SharedReflections.tsx",
+      "name": "SharedReflections.tsx"
+    },
+    {
+      "file": "client/src/components/consciousness/QuestionReflection.tsx",
+      "name": "QuestionReflection.tsx"
+    },
+    {
+      "file": "client/src/components/mindscape/MindscapeNavigator.tsx",
+      "name": "MindscapeNavigator.tsx"
+    },
+    {
+      "file": "client/src/components/share/ReflectionCard.jsx",
+      "name": "ReflectionCard.jsx"
+    },
+    {
+      "file": "client/src/components/temporal/TemporalReflection.tsx",
+      "name": "TemporalReflection.tsx"
+    },
+    {
+      "file": "client/src/components/ui/CalmModeToggle.jsx",
+      "name": "CalmModeToggle.jsx"
+    },
+    {
+      "file": "client/src/components/ui/ReflectionFooter.jsx",
+      "name": "ReflectionFooter.jsx"
+    },
+    {
+      "file": "client/src/components/ui/WellnessToolkit.jsx",
+      "name": "WellnessToolkit.jsx"
+    },
+    {
+      "file": "client/src/components/ui/wellnessToolsData.js",
+      "name": "wellnessToolsData.js"
+    },
+    {
+      "file": "client/src/components/wellness/ReflectionPrompt.tsx",
+      "name": "ReflectionPrompt.tsx"
+    },
+    {
+      "file": "client/src/components/wellness/WellnessPageShell.d.ts",
+      "name": "WellnessPageShell.d.ts"
+    },
+    {
+      "file": "client/src/components/wellness/WellnessPageShell.jsx",
+      "name": "WellnessPageShell.jsx"
+    },
+    {
+      "file": "client/src/components/wellnessToolsData.js",
+      "name": "wellnessToolsData.js"
+    },
+    {
+      "file": "client/src/content/frameworks/wellnessMicrocopy.js",
+      "name": "wellnessMicrocopy.js"
+    },
+    {
+      "file": "client/src/content/microcopy/wellness.js",
+      "name": "wellness.js"
+    },
+    {
+      "file": "client/src/content/microcopy/wellnessMicrocopy.ts",
+      "name": "wellnessMicrocopy.ts"
+    },
+    {
+      "file": "client/src/data/reflectionPrompts.ts",
+      "name": "reflectionPrompts.ts"
+    },
+    {
+      "file": "client/src/data/sharedReflections.ts",
+      "name": "sharedReflections.ts"
+    },
+    {
+      "file": "client/src/features/community/SharedReflectionsPage.jsx",
+      "name": "SharedReflectionsPage.jsx"
+    },
+    {
+      "file": "client/src/hooks/useWellnessContent.js",
+      "name": "useWellnessContent.js"
+    },
+    {
+      "file": "client/src/lib/export/reflectionExport.ts",
+      "name": "reflectionExport.ts"
+    },
+    {
+      "file": "client/src/lib/mindscape/mindscapeNavigator.ts",
+      "name": "mindscapeNavigator.ts"
+    },
+    {
+      "file": "client/src/lib/reflectionModes.ts",
+      "name": "reflectionModes.ts"
+    },
+    {
+      "file": "client/src/lib/temporal/temporalReflection.ts",
+      "name": "temporalReflection.ts"
+    },
+    {
+      "file": "client/src/lib/wellness/ensureWellnessCompliance.ts",
+      "name": "ensureWellnessCompliance.ts"
+    },
+    {
+      "file": "client/src/lib/wellnessMethodKits.ts",
+      "name": "wellnessMethodKits.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/components/LumiReflectionCard.tsx",
+      "name": "LumiReflectionCard.tsx"
+    },
+    {
+      "file": "client/src/lumi-conversation/content/calmResponses.ts",
+      "name": "calmResponses.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/content/reflectionPrompts.ts",
+      "name": "reflectionPrompts.ts"
+    },
+    {
+      "file": "client/src/lumi-conversation/motion/calmCheckinMotion.ts",
+      "name": "calmCheckinMotion.ts"
+    },
+    {
+      "file": "client/src/lumi-rituals/presets/oneBreathReset.ts",
+      "name": "oneBreathReset.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/profiles/warmCalm.ts",
+      "name": "warmCalm.ts"
+    },
+    {
+      "file": "client/src/lumi-voice/runtime/BreathPacingEngine.ts",
+      "name": "BreathPacingEngine.ts"
+    },
+    {
+      "file": "client/src/pages/BodyWellnessPage.jsx",
+      "name": "BodyWellnessPage.jsx"
+    },
+    {
+      "file": "client/src/pages/BreathingExercisesPage.jsx",
+      "name": "BreathingExercisesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/CalmingScenesPage.jsx",
+      "name": "CalmingScenesPage.jsx"
+    },
+    {
+      "file": "client/src/pages/ContentAdminDashboard.jsx",
+      "name": "ContentAdminDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/DailyReflection.jsx",
+      "name": "DailyReflection.jsx"
+    },
+    {
+      "file": "client/src/pages/PermacultureWellnessPage.jsx",
+      "name": "PermacultureWellnessPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Reflection.jsx",
+      "name": "Reflection.jsx"
+    },
+    {
+      "file": "client/src/pages/SelfWorthReflectionPage.jsx",
+      "name": "SelfWorthReflectionPage.jsx"
+    },
+    {
+      "file": "client/src/pages/SoulWellnessPage.jsx",
+      "name": "SoulWellnessPage.jsx"
+    },
+    {
+      "file": "client/src/pages/Wellness.jsx",
+      "name": "Wellness.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessDashboard.jsx",
+      "name": "WellnessDashboard.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessGlossaryPage.jsx",
+      "name": "WellnessGlossaryPage.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessGoals.jsx",
+      "name": "WellnessGoals.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessHubPage.jsx",
+      "name": "WellnessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/WellnessToolsHub.jsx",
+      "name": "WellnessToolsHub.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BodyMindHubPage.jsx",
+      "name": "BodyMindHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/BreathworkHubPage.jsx",
+      "name": "BreathworkHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/hubs/MindfulnessHubPage.jsx",
+      "name": "MindfulnessHubPage.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/CalmPlan.jsx",
+      "name": "CalmPlan.jsx"
+    },
+    {
+      "file": "client/src/pages/pathways/ReflectionHistory.jsx",
+      "name": "ReflectionHistory.jsx"
+    },
+    {
+      "file": "client/src/pages/reflection.tsx",
+      "name": "reflection.tsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathPacer.jsx",
+      "name": "BreathPacer.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathTool.jsx",
+      "name": "BreathTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/BreathingTool.jsx",
+      "name": "BreathingTool.jsx"
+    },
+    {
+      "file": "client/src/pages/tools/WeeklyReflection.jsx",
+      "name": "WeeklyReflection.jsx"
+    }
+  ],
+  "pagesTotal": 1202
+}
