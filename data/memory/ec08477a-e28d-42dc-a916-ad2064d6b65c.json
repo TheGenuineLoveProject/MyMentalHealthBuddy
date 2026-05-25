@@ -1,38 +1,6 @@
 [
   {
     "role": "user",
-    "content": "I feel overwhelmed and want to understand what I'm feeling"
-  },
-  {
-    "role": "assistant",
-    "content": "Feeling overwhelmed can be really challenging. Let’s take a moment to identify what’s contributing to that feeling. Can you name one specific thought or situation that feels most overwhelming right now? This can help us understand and process it better."
-  },
-  {
-    "role": "user",
-    "content": "I feel anxious right now and need to calm down"
-  },
-  {
-    "role": "assistant",
-    "content": "It sounds like your anxiety is quite intense. Let’s try a grounding technique called the 5-4-3-2-1 exercise. Identify five things you can see, four things you can touch, three things you can hear, two things you can smell, and one thing you can taste. Take your time with this, focusing on each sense to bring yourself back to the present moment."
-  },
-  {
-    "role": "user",
-    "content": "I'm stuck in negative thoughts and need help thinking clearly"
-  },
-  {
-    "role": "assistant",
-    "content": "It’s tough when negative thoughts take over. Let's interrupt that pattern. What’s one specific negative thought you're having right now? Once you identify it, we can work on reframing or challenging it together."
-  },
-  {
-    "role": "user",
-    "content": "I feel overwhelmed and want to understand what I'm feeling"
-  },
-  {
-    "role": "assistant",
-    "content": "Feeling overwhelmed can be heavy to carry. Let’s take a moment to explore this. What specific thoughts or emotions are surfacing for you right now? Identifying them can help you gain clarity and a better understanding of what you’re experiencing."
-  },
-  {
-    "role": "user",
     "content": "I feel anxious right now and need to calm down"
   },
   {
@@ -46,5 +14,13 @@
   {
     "role": "assistant",
     "content": "Feeling overwhelmed can create a sense of confusion. Let’s break it down together. What specific situation or thought is contributing to your overwhelm right now? Identifying the source can help clarify your feelings."
+  },
+  {
+    "role": "user",
+    "content": "I'm stuck in negative thoughts and need help thinking clearly"
+  },
+  {
+    "role": "assistant",
+    "content": "It can be challenging when negative thoughts take over. Let’s identify one of those thoughts. What’s a specific negative thought that keeps coming up for you? Once we pinpoint it, we can work on reframing it together."
   }
 ]
