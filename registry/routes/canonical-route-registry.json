@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "generatedBy": "Phase 84",
+  "purpose": "Single source of truth for canonical route governance",
+  "domains": {
+    "trust": [
+      "/privacy",
+      "/terms",
+      "/about",
+      "/safety",
+      "/contact",
+      "/support"
+    ],
+    "wellness": [
+      "/wellness-tools",
+      "/mood",
+      "/journal",
+      "/sleep",
+      "/recovery",
+      "/therapy",
+      "/presence",
+      "/affirmations",
+      "/meditation"
+    ],
+    "admin": [
+      "/admin"
+    ],
+    "discoverability": [
+      "/discover",
+      "/explore",
+      "/hubs"
+    ]
+  },
+  "rules": {
+    "trustRoutesMustRemainCanonical": true,
+    "adminMustRemainIsolated": true,
+    "discoverabilityMayAliasCanonicalRoutes": true,
+    "duplicateRoutesRequireGovernanceReview": true,
+    "redirectsMustNotShadowTrustRoutes": true
+  }
+}
