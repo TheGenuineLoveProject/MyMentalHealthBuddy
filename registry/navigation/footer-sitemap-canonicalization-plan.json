@@ -1,0 +1,8 @@
+{
+  "phase": 101,
+  "mode": "governance-only",
+  "canonicalLegalRoutes": ["/privacy", "/terms", "/consent", "/data-policy"],
+  "canonicalDiscoveryRoutes": ["/discover", "/wellness-tools"],
+  "sourceEditsAllowed": false,
+  "nextPhase": "Phase 102 — exact footer/sitemap source ownership confirmation"
+}
