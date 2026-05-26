@@ -20,6 +20,10 @@ function fail(label, detail = "") {
 function warn(label, detail = "") {
   warnings.push(`WARN  ${label}${detail ? ` — ${detail}` : ""}`);
 }
+function check(label, cond, detail = "") {
+  if (cond) ok(label);
+  else fail(label, detail);
+}
 
 if (!existsSync(APP)) fail("App.jsx exists", APP);
 if (!existsSync(REGISTRY)) fail("routeRegistry exists", REGISTRY);
@@ -132,6 +136,30 @@ for (const p of trustPages) {
     ok(`${p}: wires SEO (${hasPageSEO ? "PageSEO" : "Helmet"})`);
   }
 }
+
+const aboutPage = resolve(ROOT, "client/src/pages/About.jsx");
+if (!existsSync(aboutPage)) {
+  fail("About.jsx missing");
+} else {
+  const src = readFileSync(aboutPage, "utf8");
+  check(
+    "About.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/about['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check(
+    "About.jsx: renders <Helmet> (or PageSEO)",
+    /<Helmet>/.test(src) || /<PageSEO\b/.test(src),
+  );
+  check("About.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("About.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("About.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("About.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("About.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+}
+
+const appHasAboutRoute = /<Route\s+path="\/about"\s+component=\{AboutPage\}/.test(app);
+check("App.jsx: /about route uses AboutPage component", appHasAboutRoute);
 
 const seoComponent = resolve(ROOT, "client/src/components/seo/PageSEO.jsx");
 if (!existsSync(seoComponent)) {

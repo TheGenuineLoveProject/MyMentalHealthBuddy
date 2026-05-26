@@ -19,28 +19,9 @@ import { useLocation } from "wouter";
 import { getFullRouteConfig, routes } from "../content/routes.js";
 import PageTemplate from "../components/PageTemplate.jsx";
 import RouteGuard from "../components/RouteGuard.jsx";
-import PageSEO from "../components/seo/PageSEO.jsx";
-import { getRouteMeta } from "../content/routes/routeRegistry.js";
 import styles from "./AutopilotFallback.module.css";
 
 import { deriveRouteKeyFromPath } from "../content/meta/routeMetaRegistry.ts";
-
-const SEO_ENABLED_PATHS = new Set(["/about"]);
-
-function RouteRegistrySEO({ pathname }) {
-  if (!SEO_ENABLED_PATHS.has(pathname)) return null;
-  const meta = getRouteMeta(pathname);
-  if (!meta) return null;
-  return (
-    <PageSEO
-      title={meta.title}
-      description={meta.description}
-      seoDescription={meta.seoDescription}
-      canonical={meta.canonical}
-      indexable={meta.indexable !== false}
-    />
-  );
-}
 
 export default function AutopilotPage({ route, routeKey }) {
   const [location] = useLocation();
@@ -67,12 +48,7 @@ export default function AutopilotPage({ route, routeKey }) {
     );
   }
 
-  const page = (
-    <>
-      <RouteRegistrySEO pathname={pathname} />
-      <PageTemplate config={config} routeKey={effectiveRouteKey} />
-    </>
-  );
+  const page = <PageTemplate config={config} routeKey={effectiveRouteKey} />;
 
   if (config.protected) {
     return <RouteGuard>{page}</RouteGuard>;
