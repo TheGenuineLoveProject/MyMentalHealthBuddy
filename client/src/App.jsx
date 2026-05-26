@@ -953,7 +953,6 @@ export default function App() {
               <Route path="/mentalhealth">{() => <Redirect to="/mental-health" />}</Route>
               <Route path="/ground">{() => <Redirect to="/grounding" />}</Route>
               <Route path="/routine">{() => <Redirect to="/routines" />}</Route>
-              <Route path="/program">{() => <Redirect to="/programs" />}</Route>
               <Route path="/explore">{() => <Redirect to="/wellness-tools" />}</Route>
               <Route path="/discover">{() => <Redirect to="/wellness-tools" />}</Route>
               <Route path="/toolkit">{() => <Redirect to="/wellness-tools" />}</Route>
@@ -1035,7 +1034,6 @@ export default function App() {
               <Route path="/episode">{() => <Redirect to="/learn" />}</Route>
               <Route path="/episodes">{() => <Redirect to="/learn" />}</Route>
               <Route path="/series">{() => <Redirect to="/courses" />}</Route>
-              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
               <Route path="/programs">{() => <Redirect to="/courses" />}</Route>
               <Route path="/meetups">{() => <Redirect to="/community" />}</Route>
               <Route path="/live">{() => <Redirect to="/community" />}</Route>
