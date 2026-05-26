@@ -173,6 +173,7 @@ const FeaturesPage = lazy(() => import("./pages/Features.jsx"));
 const HealingPage = lazy(() => import("./pages/Healing.jsx"));
 const WellbeingPage = lazy(() => import("./pages/Wellbeing.jsx"));
 const MentalWellnessPage = lazy(() => import("./pages/MentalWellness.jsx"));
+const SelfLoveCanonical = lazy(() => import("./pages/SelfLove.jsx"));
 const TrustCenterPage = lazy(() =>
   import("./pages/trust/TrustCenterPage.jsx")
 );
@@ -811,7 +812,7 @@ export default function App() {
               <Route path="/guilt"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/loneliness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/isolation"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
-              <Route path="/self-love"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/self-love"><WellnessRoute><SelfLoveCanonical /></WellnessRoute></Route>
               <Route path="/wellness-tools">{() => <PracticeLibrary />}</Route>
               <Route path="/counseling">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/wellbeing" component={WellbeingPage} />

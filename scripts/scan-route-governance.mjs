@@ -257,6 +257,34 @@ if (!existsSync(mentalWellnessPage)) {
 const appHasMentalWellnessRoute = /<Route\s+path="\/mental-wellness"\s+component=\{MentalWellnessPage\}/.test(app);
 check("App.jsx: /mental-wellness route uses MentalWellnessPage component", appHasMentalWellnessRoute);
 
+const selfLovePage = resolve(ROOT, "client/src/pages/SelfLove.jsx");
+if (!existsSync(selfLovePage)) {
+  fail("SelfLove.jsx missing");
+} else {
+  const src = readFileSync(selfLovePage, "utf8");
+  check(
+    "SelfLove.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/self-love['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check(
+    "SelfLove.jsx: renders <Helmet> (or PageSEO)",
+    /<Helmet>/.test(src) || /<PageSEO\b/.test(src),
+  );
+  check("SelfLove.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("SelfLove.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("SelfLove.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("SelfLove.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("SelfLove.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+  check(
+    "SelfLove.jsx: preserves SelfLovePage body",
+    /SelfLovePage/.test(src),
+  );
+}
+
+const appHasSelfLoveRoute = /<Route\s+path="\/self-love"><WellnessRoute><SelfLoveCanonical\s*\/><\/WellnessRoute><\/Route>/.test(app);
+check("App.jsx: /self-love route renders SelfLoveCanonical inside WellnessRoute", appHasSelfLoveRoute);
+
 const healingMetaSrc = readFileSync(REGISTRY, "utf8");
 const healingBlock = healingMetaSrc.match(/"\/healing"\s*:\s*\{[\s\S]*?\n\s*\}/);
 if (!healingBlock) {
