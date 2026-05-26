@@ -1,0 +1,36 @@
+{
+  "platform": "MyMentalHealthBuddy + The Genuine Love Project",
+  "mode": "governed-platform-completion",
+  "priority": "coherence-before-expansion",
+  "topPriorities": [
+    "semantic-search",
+    "guided-emotional-journeys",
+    "unified-wellness-dashboard",
+    "knowledge-graph",
+    "emotional-continuity-engine",
+    "mobile-nervous-system-safe-ux",
+    "content-intelligence-architecture",
+    "discoverability-engine",
+    "ai-transparency-center",
+    "trust-and-safety-center"
+  ],
+  "qualityGates": [
+    "build",
+    "health",
+    "routes",
+    "accessibility",
+    "bundle",
+    "duplication",
+    "privacy",
+    "rollback"
+  ],
+  "forbidden": [
+    "random-feature-expansion",
+    "dark-patterns",
+    "emotional-manipulation",
+    "healing-data-monetization",
+    "clinical-autonomy",
+    "unverified-runtime-claims",
+    "duplicate-systems"
+  ]
+}
