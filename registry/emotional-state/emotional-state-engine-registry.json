@@ -1,41 +1,149 @@
 {
-  "phase": 112,
-  "name": "Emotional State Engine Governance",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "status": "architecture-map",
+  "lockedAt": "2026-05-25",
+  "phase": "PHASE_112",
+  "kernel": "MMHB v7.4",
   "mode": "governance-only",
+  "name": "Emotional State Engine Governance",
+  "governanceDoc": "docs/governance/EMOTIONAL_STATE_ENGINE_GOVERNANCE.md",
+  "phaseReport": "docs/reports/PHASE_112_EMOTIONAL_STATE_ENGINE_GOVERNANCE.md",
+  "primaryLaw": "The platform may adapt tone, pacing, layout density, and suggestions for the user's comfort. It must never diagnose, manipulate, pressure, shame, exploit, or monetize emotional state.",
+  "scope": {
+    "is": [
+      "consent-gated personalization for surface tone and pacing",
+      "signal-aware UX adapter (reduced motion, smaller choices, calmer copy)",
+      "user-controllable, user-visible, user-resettable state",
+      "short-horizon recency-weighted hint",
+      "optional and reversible"
+    ],
+    "isNot": [
+      "clinical assessment instrument",
+      "diagnostic system",
+      "hidden user score",
+      "persistent personality profile",
+      "default-on behavior tracker"
+    ]
+  },
   "states": [
-    "calm",
-    "overwhelmed",
-    "anxious",
-    "reflective",
-    "exhausted",
-    "focused",
-    "sad",
-    "hopeful",
-    "grounded"
+    { "id": "calm",        "cue": "I'm okay right now",        "uxIntent": "normal density, no extra prompts" },
+    { "id": "grounded",    "cue": "I'm steady, ready",          "uxIntent": "normal density, optional growth surfaces" },
+    { "id": "focused",     "cue": "I want to do one thing",     "uxIntent": "single-task layout" },
+    { "id": "reflective",  "cue": "I want to think",            "uxIntent": "journal + library; longer copy ok" },
+    { "id": "hopeful",     "cue": "Things are looking up",      "uxIntent": "celebrate gently; no streaks" },
+    { "id": "sad",         "cue": "Heavy today",                "uxIntent": "validation first; no upbeat CTAs" },
+    { "id": "anxious",     "cue": "Buzzy, on edge",             "uxIntent": "grounding surfaced; slower transitions" },
+    { "id": "overwhelmed", "cue": "Too much",                   "uxIntent": "min-choice; max 1 next step" },
+    { "id": "exhausted",   "cue": "Empty",                      "uxIntent": "rest + restorative; no goals nudge" }
   ],
   "allowedAdaptations": [
     "tone-softening",
+    "slower-transitions",
     "reduced-motion",
     "lower-cognitive-density",
     "grounding-prompts",
-    "shorter-copy",
-    "gentle-navigation",
-    "accessibility-support"
+    "shorter-paragraphs",
+    "gentler-navigation",
+    "accessibility-first-layout",
+    "surface-ordering-promote-rest",
+    "lumi-opening-line-variant"
   ],
   "forbidden": [
     "diagnosis",
     "prescribing",
     "suicidality-determination",
-    "emotional-monetization",
-    "dark-patterns",
-    "coercive-retention",
+    "clinical-claims",
+    "emotional-scoring-for-monetization",
+    "urgency-manipulation",
+    "addictive-streak-pressure",
     "hidden-persuasion",
-    "clinical-autonomy"
+    "targeted-upsells-from-emotional-data",
+    "vulnerability-exploitation",
+    "default-on-without-consent",
+    "persistent-profiling",
+    "emotional-state-in-logs",
+    "emotional-state-to-third-party-processors"
   ],
+  "allowedInputs": [
+    { "id": "mood-checkin",       "weight": "primary",   "note": "Explicit user pick always wins." },
+    { "id": "journal-sentiment",  "weight": "secondary", "note": "On-device only, opt-in. No raw text leaves device." },
+    { "id": "session-tool-category","weight": "weak",    "note": "Recency only." },
+    { "id": "time-of-day-window", "weight": "hint",      "note": "UX hint, not state by itself." },
+    { "id": "a11y-settings",      "weight": "hard",      "note": "Hard adaptation, not state inference." }
+  ],
+  "forbiddenInputs": [
+    "click-rate",
+    "dwell-time",
+    "scroll-depth",
+    "conversion-proximity",
+    "billing-status",
+    "crisis-lexicon-hits-for-state-inference"
+  ],
+  "recencyAndExpiry": {
+    "defaultStateTTLMinutes": 30,
+    "explicitCheckinTTLHours": 6,
+    "degradesTo": "calm",
+    "sessionBoundaryResets": true,
+    "rememberTonightRequiresConsent": true,
+    "crossDeviceSyncRequiresSecondConsent": true
+  },
+  "userControlContract": {
+    "visibleLabel": true,
+    "oneTapOverride": true,
+    "oneTapResetForgetToday": true,
+    "settingsMasterOff": true,
+    "transparencyView": "client/src/lumi-memory/components/MemoryTransparencyView",
+    "consentMoment": "client/src/lumi-boundaries/ BoundaryCard before first inference"
+  },
+  "crisisInterlock": {
+    "bypassesEngine": true,
+    "alwaysSurfaces": ["/crisis", "988", "741741", "911"],
+    "noStateMayDelayCrisis": true,
+    "engineNeverClaimsSuicidalityDetection": true
+  },
+  "domainSeparation": {
+    "allowedOn": ["HEALING tone/pacing", "PLATFORM trust pins (label-only)"],
+    "forbiddenOn": ["BUSINESS pricing/upgrade/billing surfaces"],
+    "rule": "Emotional state is never a feature in the pricing, upgrade, or conversion model."
+  },
+  "storageContract": {
+    "localFirst": true,
+    "dbWriteRequiresConsent": true,
+    "thirdPartyProcessors": "never",
+    "serverLogs": "never include state",
+    "rightToDelete": "one-tap clears all state history (interlocks Trust Center user-rights)"
+  },
   "qualityGates": [
     "build",
     "health",
-    "scope-clean",
-    "rollback-ready"
-  ]
+    "routes",
+    "accessibility",
+    "privacy",
+    "consent",
+    "crisis",
+    "domain",
+    "rollback"
+  ],
+  "buildSequence": [
+    { "phase": "PHASE_113", "step": "emotional-state-ux-audit-read-only" },
+    { "phase": "PHASE_114", "step": "controlled-vocab-tone-variants-per-state" },
+    { "phase": "PHASE_115", "step": "consent-moment-design-doc" },
+    { "phase": "PHASE_116", "step": "inference-module-spec-local-deterministic" },
+    { "phase": "PHASE_117", "step": "transparency-view-component-spec" },
+    { "phase": "PHASE_118", "step": "red-team-script-50-plus-prompts" }
+  ],
+  "linkedGovernance": [
+    "docs/governance/MMHB_v7.4_ARCHIVAL_KERNEL.md",
+    "docs/governance/AZ_PLATFORM_SUCCESS_GOVERNANCE.md",
+    "docs/governance/TRUST_CENTER_AI_TRANSPARENCY_ARCHITECTURE.md",
+    "docs/governance/SEMANTIC_SEARCH_AND_TOOL_INDEX_GOVERNANCE.md"
+  ],
+  "liveModulesReferencedReadOnly": [
+    "client/src/lumi-memory/",
+    "client/src/lumi-boundaries/",
+    "client/src/lumi-disclaimer/",
+    "client/src/lumi-crisis/"
+  ],
+  "sourceEditsAllowed": false
 }
