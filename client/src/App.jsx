@@ -1377,7 +1377,6 @@ export default function App() {
               <Route path="/body-image">{() => <Redirect to="/self-worth" />}</Route>
               <Route path="/eating">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/sobriety">{() => <Redirect to="/healing" />}</Route>
-              <Route path="/ptsd">{() => <Redirect to="/trauma" />}</Route>
               <Route path="/assertiveness">{() => <Redirect to="/boundaries" />}</Route>
               <Route path="/vulnerability">{() => <Redirect to="/authenticity" />}</Route>
               <Route path="/security">{() => <Redirect to="/safety" />}</Route>
