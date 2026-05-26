@@ -759,7 +759,6 @@ export default function App() {
               <Route path="/anxiety" component={AnxietyCanonical} />
               <Route path="/depression"><WellnessRoute><DepressionCanonical /></WellnessRoute></Route>
               <Route path="/calm">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/peace">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/stress">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/relax">{() => <ConfigRoute route="/calming-scenes" />}</Route>
               <Route path="/emotions"><WellnessRoute><Suspense fallback={<div>Loading...</div>}><EmotionalIntelligenceHubPage /></Suspense></WellnessRoute></Route>
