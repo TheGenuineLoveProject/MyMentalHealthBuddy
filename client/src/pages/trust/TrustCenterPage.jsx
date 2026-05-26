@@ -1,25 +1,30 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import TrustPageLayout from "../../components/trust/TrustPageLayout.jsx";
 import TrustSection from "../../components/trust/TrustSection.jsx";
-import PageSEO from "../../components/seo/PageSEO.jsx";
 import { trustRegistry } from "../../content/trust/trustRegistry.js";
-import { getRouteMeta } from "../../content/routes/routeRegistry.js";
 
 export default function TrustCenterPage() {
   const meta = trustRegistry.trustCenter;
-  const route = getRouteMeta("/trust");
+  const seoTitle = `${meta.title} | MyMentalHealthBuddy`;
+  const seoDescription = meta.seoDescription || meta.subtitle;
+  const canonicalUrl = `https://mymentalhealthbuddy.com${meta.path}`;
 
   return (
     <>
-      {route ? (
-        <PageSEO
-          title={route.title}
-          description={route.description}
-          seoDescription={route.seoDescription}
-          canonical={route.canonical}
-          indexable={route.indexable}
-        />
-      ) : null}
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+      </Helmet>
       <TrustPageLayout
         title={meta.title}
         subtitle={meta.subtitle}

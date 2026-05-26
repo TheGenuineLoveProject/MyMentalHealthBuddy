@@ -92,6 +92,44 @@ for (const r of required) {
   check(`canonical component exists: ${r}`, existsSync(resolve(ROOT, r)));
 }
 
+const trustPagePaths = [
+  ["TrustCenterPage", "client/src/pages/trust/TrustCenterPage.jsx"],
+  ["AITransparencyPage", "client/src/pages/trust/AITransparencyPage.jsx"],
+];
+for (const [name, rel] of trustPagePaths) {
+  const full = resolve(ROOT, rel);
+  if (!existsSync(full)) {
+    errors.push(`FAIL  ${name}: file missing at ${rel}`);
+    continue;
+  }
+  const src = readFileSync(full, "utf8");
+
+  check(
+    `${name}: imports trustRegistry`,
+    /from\s+['"][^'"]*content\/trust\/trustRegistry(\.js)?['"]/.test(src),
+  );
+  check(
+    `${name}: imports Helmet from react-helmet-async`,
+    /import\s*\{\s*Helmet\s*\}\s*from\s*['"]react-helmet-async['"]/.test(src),
+  );
+  check(
+    `${name}: renders <Helmet>`,
+    /<Helmet>/.test(src),
+  );
+  check(
+    `${name}: sets <title>`,
+    /<title>[\s\S]*?<\/title>/.test(src),
+  );
+  check(
+    `${name}: sets meta description`,
+    /<meta\s+name=["']description["']/.test(src),
+  );
+  check(
+    `${name}: sets canonical link`,
+    /<link\s+rel=["']canonical["']/.test(src),
+  );
+}
+
 console.log("");
 console.log("=== Phase 115 — Trust Route Governance Scan ===");
 console.log("");
