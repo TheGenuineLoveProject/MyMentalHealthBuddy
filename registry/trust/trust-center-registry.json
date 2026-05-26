@@ -1,18 +1,63 @@
 {
-  "version": 1,
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
   "status": "architecture-map",
+  "lockedAt": "2026-05-25",
+  "phase": "PHASE_104",
+  "kernel": "MMHB v7.4",
+  "governanceDoc": "docs/governance/TRUST_CENTER_AI_TRANSPARENCY_ARCHITECTURE.md",
+  "phaseReport": "docs/reports/PHASE_104_TRUST_AI_TRANSPARENCY_ARCHITECTURE.md",
+  "companionRegistry": "registry/ai-governance/ai-transparency-registry.json",
   "canonicalRouteProposal": "/trust",
+  "sourceEditsAllowed": false,
+  "domain": "PLATFORM",
+  "publicSurface": true,
+  "authRequired": false,
+  "footerLink": true,
+  "crisisFooterLink": true,
+  "businessCtasForbidden": true,
   "sections": [
-    "safety-philosophy",
-    "privacy-data-boundaries",
-    "ai-transparency",
-    "human-oversight",
-    "crisis-boundaries",
-    "evidence-research",
-    "anti-manipulation-pledge",
-    "user-rights",
-    "accessibility",
-    "support"
+    { "rank": 1,  "id": "safety-philosophy",       "title": "Safety Philosophy",            "anchor": "#safety-philosophy",       "owner": "HEALING+PLATFORM" },
+    { "rank": 2,  "id": "privacy-data-boundaries", "title": "Privacy + Data Boundaries",    "anchor": "#privacy-data-boundaries", "owner": "PLATFORM", "sourceOfTruth": "/privacy" },
+    { "rank": 3,  "id": "ai-transparency",         "title": "AI Transparency (summary)",    "anchor": "#ai-transparency",         "owner": "PLATFORM", "linksTo": "/ai-transparency" },
+    { "rank": 4,  "id": "human-oversight",         "title": "Human Oversight",              "anchor": "#human-oversight",         "owner": "PLATFORM" },
+    { "rank": 5,  "id": "crisis-boundaries",       "title": "Crisis Boundaries",            "anchor": "#crisis-boundaries",       "owner": "CRISIS",   "sourceOfTruth": "/crisis" },
+    { "rank": 6,  "id": "evidence-research",       "title": "Evidence + Research Standards","anchor": "#evidence-research",       "owner": "HEALING" },
+    { "rank": 7,  "id": "anti-manipulation-pledge","title": "Anti-Manipulation Pledge",     "anchor": "#anti-manipulation-pledge","owner": "PLATFORM", "copyLocked": true },
+    { "rank": 8,  "id": "user-rights",             "title": "User Rights",                  "anchor": "#user-rights",             "owner": "PLATFORM", "futureDependency": "/account/data" },
+    { "rank": 9,  "id": "accessibility",           "title": "Accessibility Commitment",     "anchor": "#accessibility",           "owner": "PLATFORM", "baseline": "WCAG AA" },
+    { "rank": 10, "id": "support",                 "title": "Contact + Support",            "anchor": "#support",                 "owner": "PLATFORM" }
   ],
-  "sourceEditsAllowed": false
+  "userRights": [
+    { "id": "right-to-know",    "description": "View every datum stored about you" },
+    { "id": "right-to-export",  "description": "Portable bundle (JSON + Markdown) within 24h" },
+    { "id": "right-to-delete",  "description": "Per-item or full account wipe; 30-day undo" },
+    { "id": "right-to-correct", "description": "Edit any mood/journal/memory item" },
+    { "id": "right-to-refuse",  "description": "Opt out of optional features without losing core access" },
+    { "id": "right-to-escape",  "description": "Account deletion in one button, two confirmations, no friction" },
+    { "id": "right-to-audit",   "description": "Know who at MMHB has accessed your data" }
+  ],
+  "antiManipulationPledge": "We will not engineer urgency you don't feel, scarcity that isn't real, or shame to keep you here. If you want to leave, we will help you leave. If something we build pulls at you in a way that feels off, please tell us — we will take it seriously and, when warranted, we will remove it.",
+  "buildSequence": [
+    { "phase": "PHASE_105", "step": "route-and-source-ownership-audit" },
+    { "phase": "PHASE_106", "step": "content-drafts-in-docs-content-trust" },
+    { "phase": "PHASE_107", "step": "TrustShell-component-derived-from-BrandShell" },
+    { "phase": "PHASE_108", "step": "wire-routes-and-reciprocal-links" },
+    { "phase": "PHASE_109", "step": "a11y-and-lighthouse-lock" },
+    { "phase": "PHASE_110", "step": "red-team-baseline-publish" }
+  ],
+  "qualityGates": ["build", "health", "routes", "accessibility", "bundle", "duplication", "privacy", "rollback"],
+  "crisisRoutingContract": {
+    "show988": true,
+    "show741741": true,
+    "show911": true,
+    "linkToCrisisPage": "/crisis",
+    "hardCodedNumbers": true,
+    "neverGated": true
+  },
+  "domainSeparation": {
+    "allowed": ["HEALING (crisis+safety framing only)", "PLATFORM (full)"],
+    "forbidden": ["BUSINESS (pricing/conversion CTAs)"]
+  },
+  "linkedRegistries": ["registry/ai-governance/ai-transparency-registry.json"]
 }

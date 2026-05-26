@@ -1,16 +1,90 @@
 {
-  "version": 1,
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
   "status": "architecture-map",
+  "lockedAt": "2026-05-25",
+  "phase": "PHASE_104",
+  "kernel": "MMHB v7.4",
+  "governanceDoc": "docs/governance/TRUST_CENTER_AI_TRANSPARENCY_ARCHITECTURE.md",
+  "phaseReport": "docs/reports/PHASE_104_TRUST_AI_TRANSPARENCY_ARCHITECTURE.md",
+  "companionRegistry": "registry/trust/trust-center-registry.json",
   "canonicalRouteProposal": "/ai-transparency",
-  "boundaries": [
-    "no-diagnosis",
-    "no-prescribing",
-    "no-suicidality-determination",
-    "no-emergency-replacement",
-    "no-provider-impersonation",
-    "human-supervised",
-    "privacy-preserving",
-    "non-coercive"
+  "sourceEditsAllowed": false,
+  "domain": "PLATFORM",
+  "publicSurface": true,
+  "authRequired": false,
+  "footerLink": true,
+  "crisisFooterLink": true,
+  "businessCtasForbidden": true,
+  "sections": [
+    { "rank": 1,  "id": "what-ai-can-do",           "title": "What AI Can Do",                       "anchor": "#what-ai-can-do" },
+    { "rank": 2,  "id": "what-ai-cannot-do",        "title": "What AI Cannot Do",                    "anchor": "#what-ai-cannot-do",        "sourceOfTruth": "boundaries[]" },
+    { "rank": 3,  "id": "human-supervision",        "title": "Human Supervision Boundaries",         "anchor": "#human-supervision" },
+    { "rank": 4,  "id": "no-diagnosis-no-prescribing","title": "No Diagnosis / No Prescribing",       "anchor": "#no-diagnosis-no-prescribing","sourceOfTruth": "boundaries[]" },
+    { "rank": 5,  "id": "crisis-escalation",        "title": "Crisis Escalation Boundaries",         "anchor": "#crisis-escalation",        "sourceOfTruth": "/crisis" },
+    { "rank": 6,  "id": "memory-transparency",      "title": "Memory + Personalization Transparency","anchor": "#memory-transparency",      "liveModule": "client/src/lumi-memory/" },
+    { "rank": 7,  "id": "data-use",                 "title": "Data Use Boundaries",                  "anchor": "#data-use" },
+    { "rank": 8,  "id": "safety-testing",           "title": "Safety Testing + Red-Team Practices",  "anchor": "#safety-testing",           "publishesTo": "docs/reports/RED_TEAM_*.md" },
+    { "rank": 9,  "id": "limitations",              "title": "Limitations",                          "anchor": "#limitations" },
+    { "rank": 10, "id": "human-help",               "title": "How to Get Human Help",                "anchor": "#human-help",               "sourceOfTruth": "/crisis" }
   ],
-  "sourceEditsAllowed": false
+  "boundaries": [
+    { "id": "no-diagnosis",                   "law": "Lumi/MMHB never names a disorder for a user." },
+    { "id": "no-prescribing",                 "law": "Lumi/MMHB never recommends a medication, dose, or change." },
+    { "id": "no-suicidality-determination",   "law": "Lumi/MMHB escalates — never resolves — any self-harm signal." },
+    { "id": "no-emergency-replacement",       "law": "Lumi/MMHB is never positioned as an alternative to 911 or a clinician." },
+    { "id": "no-provider-impersonation",      "law": "Lumi/MMHB never claims professional credentials or roleplays as a therapist." },
+    { "id": "human-supervised",               "law": "All AI output is governed by written human policy; red-team precedes release." },
+    { "id": "privacy-preserving",             "law": "No healing data is monetized; no third-party ad/marketing tracking on healing surfaces." },
+    { "id": "non-coercive",                   "law": "No dark patterns, shame nudges, fake urgency, or loss-aversion paywalls." }
+  ],
+  "redTeamContract": {
+    "minPromptCount": 50,
+    "categories": [
+      "jailbreak",
+      "self-harm",
+      "medication",
+      "legal-advice",
+      "financial-advice",
+      "role-override",
+      "provider-impersonation",
+      "emergency-replacement"
+    ],
+    "cadence": "every release + quarterly independent review",
+    "hardFailOn": "any breach of any boundary",
+    "publishesTo": "docs/reports/RED_TEAM_<YYYY-MM-DD>.md"
+  },
+  "memoryTransparencyContract": {
+    "liveSurfaces": [
+      "client/src/lumi-memory/components/MemoryTransparencyView",
+      "client/src/lumi-memory/components/MemoryResetButton",
+      "client/src/lumi-memory/components/MemorySettingsPanel"
+    ],
+    "consentMoment": "client/src/lumi-boundaries/ BoundaryCard on first conversation",
+    "noMemoryWriteWithoutConsent": true,
+    "userControls": ["view", "edit", "reset", "disable"]
+  },
+  "crisisRoutingContract": {
+    "show988": true,
+    "show741741": true,
+    "show911": true,
+    "linkToCrisisPage": "/crisis",
+    "hardCodedNumbers": true,
+    "neverGated": true,
+    "interlockModule": "client/src/lumi-crisis/"
+  },
+  "buildSequence": [
+    { "phase": "PHASE_105", "step": "route-and-source-ownership-audit" },
+    { "phase": "PHASE_106", "step": "content-drafts-in-docs-content-ai-transparency" },
+    { "phase": "PHASE_107", "step": "AiTransparencyShell-component-derived-from-BrandShell" },
+    { "phase": "PHASE_108", "step": "wire-routes-and-reciprocal-links" },
+    { "phase": "PHASE_109", "step": "a11y-and-lighthouse-lock" },
+    { "phase": "PHASE_110", "step": "red-team-baseline-publish" }
+  ],
+  "qualityGates": ["build", "health", "routes", "accessibility", "bundle", "duplication", "privacy", "rollback"],
+  "domainSeparation": {
+    "allowed": ["PLATFORM (full)"],
+    "forbidden": ["BUSINESS", "HEALING flow copy"]
+  },
+  "linkedRegistries": ["registry/trust/trust-center-registry.json"]
 }
