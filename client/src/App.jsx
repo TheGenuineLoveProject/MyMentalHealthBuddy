@@ -1179,7 +1179,6 @@ export default function App() {
               <Route path="/soothing">{() => <Redirect to="/calm" />}</Route>
               <Route path="/soothe">{() => <Redirect to="/calm" />}</Route>
               <Route path="/tranquil">{() => <Redirect to="/peace" />}</Route>
-              <Route path="/tranquility">{() => <Redirect to="/peace" />}</Route>
               <Route path="/serene">{() => <Redirect to="/peace" />}</Route>
               <Route path="/inspired">{() => <Redirect to="/inspire" />}</Route>
               <Route path="/motivated">{() => <Redirect to="/motivation" />}</Route>
