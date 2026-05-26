@@ -844,7 +844,6 @@ export default function App() {
               <Route path="/movement">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/fitness">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/nutrition">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/energy">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/guide">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/science">{() => <ConfigRoute route="/research" />}</Route>
               <Route path="/studies">{() => <ConfigRoute route="/research" />}</Route>
