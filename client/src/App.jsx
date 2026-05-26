@@ -828,7 +828,7 @@ export default function App() {
               <Route path="/compassion"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/patience"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/kindness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
-              <Route path="/presence"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              
               <Route path="/awareness"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
               <Route path="/connection"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/relationships"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
