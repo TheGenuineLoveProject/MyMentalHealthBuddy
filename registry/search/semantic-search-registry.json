@@ -1,32 +1,79 @@
 {
+  "$schema": "https://json-schema.org/draft-07/schema#",
   "version": "1.0.0",
+  "status": "architecture-map",
+  "lockedAt": "2026-05-25",
+  "phase": "PHASE_105",
+  "kernel": "MMHB v7.4",
   "mode": "governance-only",
-  "searchTypes": [
-    "emotional-search",
-    "tool-search",
-    "topic-search",
-    "journey-search",
-    "trust-search",
-    "resource-search"
+  "governanceDoc": "docs/governance/SEMANTIC_SEARCH_AND_TOOL_INDEX_GOVERNANCE.md",
+  "phaseReport": "docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md",
+  "companionRegistry": "registry/tools/visible-tool-index-contract.json",
+  "primaryLaw": "A person in distress should not have to read 26 tool names. Return a small, safe, ordered set; preserve crisis routing; never rank by engagement; never duplicate indexes.",
+  "searchModes": [
+    { "id": "emotional-search", "input": "feeling word", "matches": ["emotionalState[]"] },
+    { "id": "tool-search",      "input": "tool name or near-name", "matches": ["title", "slug", "aliases[]"] },
+    { "id": "topic-search",     "input": "topic word", "matches": ["topic", "relatedTopics[]"] },
+    { "id": "journey-search",   "input": "journey-stage cue", "matches": ["journeyStage"] },
+    { "id": "trust-search",     "input": "trust/safety/privacy/ai term", "pinTo": ["/trust", "/ai-transparency", "/crisis", "/account/data"] },
+    { "id": "resource-search",  "input": "external help type", "matches": ["category=crisis-resources", "externalResources[]"] }
   ],
   "requiredFields": [
-    "title",
-    "slug",
-    "route",
-    "category",
-    "emotionalState",
-    "journeyStage",
-    "userIntent",
-    "safetyLevel",
-    "relatedTools",
-    "relatedTopics",
-    "canonicalOwner"
+    { "name": "title",           "type": "string" },
+    { "name": "slug",            "type": "string", "format": "kebab-case" },
+    { "name": "route",           "type": "string" },
+    { "name": "category",        "type": "enum",   "source": "toolGrouping" },
+    { "name": "emotionalState",  "type": "string[]","vocab": "vocab/emotions" },
+    { "name": "journeyStage",    "type": "enum",   "values": ["starting","stuck","recovering","maintaining","crisis","any"] },
+    { "name": "userIntent",      "type": "string[]","vocab": "vocab/intents" },
+    { "name": "safetyLevel",     "type": "enum",   "values": ["general","sensitive","crisis-adjacent","crisis-only"] },
+    { "name": "relatedTools",    "type": "slug[]" },
+    { "name": "relatedTopics",   "type": "slug[]" },
+    { "name": "canonicalOwner",  "type": "string", "description": "Single source file/module owning this row" }
   ],
+  "controlledVocabularies": {
+    "emotions":      "registry/search/vocab/emotions.json (Phase 107)",
+    "intents":       "registry/search/vocab/intents.json (Phase 107)",
+    "topics":        "registry/search/vocab/topics.json (Phase 107)",
+    "journeyStages": "registry/search/vocab/journeyStages.json (Phase 107)"
+  },
+  "crisisSignalTerms": [
+    "suicide","suicidal","kill myself","end it","end my life","hurt myself","self-harm","cutting","overdose","988","911","crisis","hopeless","no reason to live","want to die"
+  ],
+  "trustSignalTerms": [
+    "trust","privacy","safe","safety","delete my data","export","ai","model","memory","transparency","what do you know about me"
+  ],
+  "safetyFirstRouting": {
+    "crisisPin":       { "trigger": "crisisSignalTerms", "pinAbove": ["all"], "showLabel": "Because you mentioned X, here is immediate support.", "overridable": false },
+    "trustPin":        { "trigger": "trustSignalTerms",  "pinAbove": ["generic"] },
+    "sensitiveWarning":{ "trigger": "safetyLevel=sensitive", "renderAs": "calm pre-engagement chip" },
+    "noSilentInjection": true
+  },
+  "rankingSignals": {
+    "allowed":   ["query-relevance", "journeyStage-match", "recency (news only)"],
+    "forbidden": ["click-through-rate", "time-on-tool", "conversion-proximity", "engagement-score", "hidden-vulnerability-score"]
+  },
+  "domainSeparation": {
+    "healingIndex":  { "allowedResults": ["HEALING","CRISIS pins","PLATFORM trust pins"], "forbiddenResults": ["BUSINESS"] },
+    "adminIndex":    { "allowedResults": ["PLATFORM"], "forbiddenResults": ["HEALING","CRISIS-mixing"], "note": "Admin search is a separate index, never blended with healing." }
+  },
   "forbidden": [
     "manipulative-ranking",
     "crisis-misrouting",
     "healing-data-monetization",
     "hidden-vulnerability-scoring",
-    "duplicate-tool-indexes"
-  ]
+    "duplicate-tool-indexes",
+    "auto-personalized-reorder-without-consent",
+    "business-results-in-healing-search",
+    "search-without-safety-boundaries"
+  ],
+  "buildSequence": [
+    { "phase": "PHASE_106", "step": "tool-inventory-audit" },
+    { "phase": "PHASE_107", "step": "controlled-vocab-lock" },
+    { "phase": "PHASE_108", "step": "tool-metadata-backfill-design" },
+    { "phase": "PHASE_109", "step": "build-time-index-builder-script" },
+    { "phase": "PHASE_110", "step": "explore-canonical-ui-shells" }
+  ],
+  "qualityGates": ["build", "health", "routes", "accessibility", "bundle", "duplication", "privacy", "rollback"],
+  "linkedRegistries": ["registry/tools/visible-tool-index-contract.json"]
 }
