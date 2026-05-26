@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import { applyBrand } from "./lib/brand";
 import { initUIMode } from "./lib/mode";
@@ -148,7 +149,11 @@ if ('serviceWorker' in navigator) {
 
 const root = document.getElementById("root");
 if (root) {
-  ReactDOM.createRoot(root).render(<App />);
+  ReactDOM.createRoot(root).render(
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
+  );
 } else {
   console.error("Root element not found!");
 }
