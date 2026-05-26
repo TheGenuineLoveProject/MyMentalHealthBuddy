@@ -836,7 +836,6 @@ export default function App() {
               <Route path="/spiritual">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/spiritual-wellness">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/body">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/soul">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/yoga">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/exercise">{() => <ConfigRoute route="/grounding" />}</Route>
