@@ -167,9 +167,17 @@ const ForgivenessHubPage = lazy(() => import("./pages/hubs/ForgivenessHubPage.js
 const EnergyManagementHubPage = lazy(() => import("./pages/hubs/EnergyManagementHubPage.jsx"));
 const HabitsHubPage = lazy(() => 
 import("./pages/hubs/HabitsHubPage.jsx"));
-const ConfidenceHubPage = lazy(() => import("./pages/hubs/ConfidenceHubPage.jsx"));
-const TrustCenterPage = lazy(() => import("./pages/trust/TrustCenterPage.tsx"));
-const AITransparencyPage = lazy(() => import("./pages/trust/AITransparencyPage.tsx"));
+const ConfidenceHubPage = lazy(() => 
+
+  const TrustCenterPage = lazy(() =>
+    import("./pages/trust/TrustCenterPage.jsx")
+  );
+
+  const AITransparencyPage = lazy(() =>
+    import("./pages/trust/AITransparencyPage.jsx")
+  );
+
+import("./pages/hubs/ConfidenceHubPage.jsx"));
 const FocusHubPage = lazy(() => import("./pages/hubs/FocusHubPage.jsx"));
 const SpiritualityHubPage = lazy(() => import("./pages/hubs/SpiritualityHubPage.jsx"));
 const MotivationHubPage = lazy(() => import("./pages/hubs/MotivationHubPage.jsx"));
