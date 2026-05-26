@@ -233,6 +233,30 @@ if (!existsSync(wellbeingPage)) {
 const appHasWellbeingRoute = /<Route\s+path="\/wellbeing"\s+component=\{WellbeingPage\}/.test(app);
 check("App.jsx: /wellbeing route uses WellbeingPage component", appHasWellbeingRoute);
 
+const mentalWellnessPage = resolve(ROOT, "client/src/pages/MentalWellness.jsx");
+if (!existsSync(mentalWellnessPage)) {
+  fail("MentalWellness.jsx missing");
+} else {
+  const src = readFileSync(mentalWellnessPage, "utf8");
+  check(
+    "MentalWellness.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/mental-wellness['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check(
+    "MentalWellness.jsx: renders <Helmet> (or PageSEO)",
+    /<Helmet>/.test(src) || /<PageSEO\b/.test(src),
+  );
+  check("MentalWellness.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("MentalWellness.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("MentalWellness.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("MentalWellness.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("MentalWellness.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+}
+
+const appHasMentalWellnessRoute = /<Route\s+path="\/mental-wellness"\s+component=\{MentalWellnessPage\}/.test(app);
+check("App.jsx: /mental-wellness route uses MentalWellnessPage component", appHasMentalWellnessRoute);
+
 const healingMetaSrc = readFileSync(REGISTRY, "utf8");
 const healingBlock = healingMetaSrc.match(/"\/healing"\s*:\s*\{[\s\S]*?\n\s*\}/);
 if (!healingBlock) {
