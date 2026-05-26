@@ -122,10 +122,14 @@ for (const p of trustPages) {
     continue;
   }
   const src = readFileSync(full, "utf8");
-  if (!/PageSEO/.test(src)) {
-    fail(`${p}: does not import PageSEO`);
+  const hasPageSEO = /PageSEO/.test(src);
+  const hasHelmet =
+    /import\s*\{\s*Helmet\s*\}\s*from\s*['"]react-helmet-async['"]/.test(src) &&
+    /<Helmet>/.test(src);
+  if (!hasPageSEO && !hasHelmet) {
+    fail(`${p}: missing SEO wiring (neither PageSEO nor <Helmet>)`);
   } else {
-    ok(`${p}: wires PageSEO`);
+    ok(`${p}: wires SEO (${hasPageSEO ? "PageSEO" : "Helmet"})`);
   }
 }
 
