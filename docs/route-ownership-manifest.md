@@ -1,46 +1,49 @@
 # Route Ownership Manifest
 
-Generated: 2026-05-26T06:55:19.890Z
+Generated: 2026-05-26T07:02:48.967Z
 
-| Route | Duplicate Count | Classification |
-|---|---|---|
-| /about | 2 | SAFE_ALIAS |
-| /activities | 2 | REVIEW_REQUIRED |
-| /activity | 2 | REVIEW_REQUIRED |
-| /affirmations | 2 | REVIEW_REQUIRED |
-| /balance | 2 | REVIEW_REQUIRED |
-| /body | 2 | REVIEW_REQUIRED |
-| /cherish | 2 | REVIEW_REQUIRED |
-| /counseling | 2 | REVIEW_REQUIRED |
-| /embrace | 2 | REVIEW_REQUIRED |
-| /energy | 2 | REVIEW_REQUIRED |
-| /exercises | 2 | REVIEW_REQUIRED |
-| /flourishing | 2 | REVIEW_REQUIRED |
-| /mind | 2 | REVIEW_REQUIRED |
-| /motivated | 2 | REVIEW_REQUIRED |
-| /peace | 2 | REVIEW_REQUIRED |
-| /personal-growth | 2 | REVIEW_REQUIRED |
-| /presence | 2 | REVIEW_REQUIRED |
-| /privacy | 2 | REVIEW_REQUIRED |
-| /program | 3 | CRITICAL_CONFLICT |
-| /programs | 2 | REVIEW_REQUIRED |
-| /ptsd | 2 | REVIEW_REQUIRED |
-| /recovery | 2 | REVIEW_REQUIRED |
-| /rest | 2 | REVIEW_REQUIRED |
-| /serenity | 2 | REVIEW_REQUIRED |
-| /sleep | 2 | REVIEW_REQUIRED |
-| /soul | 2 | REVIEW_REQUIRED |
-| /sounds | 2 | REVIEW_REQUIRED |
-| /subscribe | 2 | REVIEW_REQUIRED |
-| /therapy | 2 | REVIEW_REQUIRED |
-| /tools/meditation | 2 | REVIEW_REQUIRED |
-| /tranquility | 2 | REVIEW_REQUIRED |
-| /webinar | 2 | REVIEW_REQUIRED |
+## Duplicate Route Groups
 
-## Governance Notes
+| Route | Count | Classification | Protected | Wellness | ConfigRoute | Redirect | Components |
+|---|---:|---|---|---|---|---|---|
+| /about | 2 | SAFE_ALIAS | no | no | no | no | AboutPage, inline/children |
+| /activities | 2 | REVIEW_REQUIRED | no | yes | no | yes | inline/children |
+| /activity | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /affirmations | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /balance | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /body | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /cherish | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /counseling | 2 | REVIEW_REQUIRED | no | no | yes | yes | inline/children |
+| /embrace | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /energy | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /exercises | 2 | REVIEW_REQUIRED | no | yes | no | yes | inline/children |
+| /flourishing | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /mind | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /motivated | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /peace | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /personal-growth | 2 | REVIEW_REQUIRED | no | yes | no | no | inline/children |
+| /presence | 2 | REVIEW_REQUIRED | no | yes | no | no | inline/children |
+| /privacy | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /program | 3 | CRITICAL_CONFLICT | no | no | no | yes | inline/children |
+| /programs | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /ptsd | 2 | REVIEW_REQUIRED | no | yes | no | yes | inline/children |
+| /recovery | 2 | REVIEW_REQUIRED | no | yes | no | yes | inline/children |
+| /rest | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /serenity | 2 | REVIEW_REQUIRED | no | no | yes | yes | inline/children |
+| /sleep | 2 | REVIEW_REQUIRED | no | no | yes | no | inline/children |
+| /soul | 2 | REVIEW_REQUIRED | no | yes | yes | no | inline/children |
+| /sounds | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /subscribe | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
+| /therapy | 2 | REVIEW_REQUIRED | no | yes | no | yes | inline/children |
+| /tools/meditation | 2 | REVIEW_REQUIRED | no | yes | yes | no | inline/children |
+| /tranquility | 2 | REVIEW_REQUIRED | no | no | yes | yes | inline/children |
+| /webinar | 2 | REVIEW_REQUIRED | no | no | no | yes | inline/children |
 
-- No runtime behavior modified
-- No route deletion performed
-- No wrapper removal performed
-- Manifest generated for governance visibility only
-- Future cleanup must preserve wrappers and body delegation
+## Governance Rules
+
+- This manifest is observational only.
+- Do not delete duplicate routes without confirming wrapper ownership.
+- ProtectedRoute and WellnessRoute must be preserved.
+- ConfigRoute delegation must not be removed unless the replacement page preserves body behavior.
+- SEO canonical pages should remain thin wrappers around existing body components.
+- Future cleanup must resolve CRITICAL_CONFLICT first, then REVIEW_REQUIRED groups one route at a time.
