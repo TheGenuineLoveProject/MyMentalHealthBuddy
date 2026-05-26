@@ -135,6 +135,21 @@ export const routeRegistry = {
     userGoal: "Practice kindness toward oneself.",
     platformRole: "Self-love practice surface.",
   },
+  "/anxiety": {
+    path: "/anxiety",
+    title: "Anxiety Support | MyMentalHealthBuddy",
+    description:
+      "Gentle anxiety support — breathing practices, grounding, and calm-down resources for moments of overwhelm.",
+    seoDescription:
+      "Supportive anxiety resources — guided breathing, grounding, and calming practices. Trauma-informed, never clinical.",
+    canonical: canonical("/anxiety"),
+    category: "wellness",
+    navGroup: NAV_GROUPS.WELLNESS,
+    indexable: true,
+    emotionalIntent: "calm + reassurance",
+    userGoal: "Find gentle support for anxious moments.",
+    platformRole: "Anxiety support surface (body delegates to /breathing).",
+  },
   "/resilience": {
     path: "/resilience",
     title: "Resilience | MyMentalHealthBuddy",
