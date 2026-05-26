@@ -170,6 +170,7 @@ import("./pages/hubs/HabitsHubPage.jsx"));
 const ConfidenceHubPage = lazy(() => import("./pages/hubs/ConfidenceHubPage.jsx"));
 const AboutPage = lazy(() => import("./pages/About.jsx"));
 const FeaturesPage = lazy(() => import("./pages/Features.jsx"));
+const HealingPage = lazy(() => import("./pages/Healing.jsx"));
 const TrustCenterPage = lazy(() =>
   import("./pages/trust/TrustCenterPage.jsx")
 );
@@ -420,7 +421,7 @@ export default function App() {
               {/* /home and /welcome are handled by server-side 301 redirects to "/" */}
               <Route path="/landing">{() => <ConfigRoute route="/landing" />}</Route>
               <Route path="/original-home">{() => <ConfigRoute route="/original-home" />}</Route>
-              <Route path="/healing">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/healing" component={HealingPage} />
               <Route path="/about" component={AboutPage} />
               <Route path="/about/approach" component={AboutApproachPage} />
               <Route path="/values" component={ValuesPage} />

@@ -185,6 +185,43 @@ if (!existsSync(featuresPage)) {
 const appHasFeaturesRoute = /<Route\s+path="\/features"\s+component=\{FeaturesPage\}/.test(app);
 check("App.jsx: /features route uses FeaturesPage component", appHasFeaturesRoute);
 
+const healingPage = resolve(ROOT, "client/src/pages/Healing.jsx");
+if (!existsSync(healingPage)) {
+  fail("Healing.jsx missing");
+} else {
+  const src = readFileSync(healingPage, "utf8");
+  check(
+    "Healing.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/healing['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check(
+    "Healing.jsx: renders <Helmet> (or PageSEO)",
+    /<Helmet>/.test(src) || /<PageSEO\b/.test(src),
+  );
+  check("Healing.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("Healing.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("Healing.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("Healing.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("Healing.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+}
+
+const appHasHealingRoute = /<Route\s+path="\/healing"\s+component=\{HealingPage\}/.test(app);
+check("App.jsx: /healing route uses HealingPage component", appHasHealingRoute);
+
+const healingMetaSrc = readFileSync(REGISTRY, "utf8");
+const healingBlock = healingMetaSrc.match(/"\/healing"\s*:\s*\{[\s\S]*?\n\s*\}/);
+if (!healingBlock) {
+  fail("routeRegistry: /healing entry missing");
+} else {
+  const block = healingBlock[0];
+  check("routeRegistry /healing: emotionalIntent present", /emotionalIntent\s*:/.test(block));
+  check("routeRegistry /healing: userGoal present", /userGoal\s*:/.test(block));
+  check("routeRegistry /healing: platformRole present", /platformRole\s*:/.test(block));
+  check("routeRegistry /healing: seoDescription present", /seoDescription\s*:/.test(block));
+  check("routeRegistry /healing: canonical present", /canonical\s*:/.test(block));
+}
+
 const seoComponent = resolve(ROOT, "client/src/components/seo/PageSEO.jsx");
 if (!existsSync(seoComponent)) {
   fail("PageSEO component missing");
