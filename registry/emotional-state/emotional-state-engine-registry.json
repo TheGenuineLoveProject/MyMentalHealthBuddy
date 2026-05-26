@@ -1,0 +1,41 @@
+{
+  "phase": 112,
+  "name": "Emotional State Engine Governance",
+  "mode": "governance-only",
+  "states": [
+    "calm",
+    "overwhelmed",
+    "anxious",
+    "reflective",
+    "exhausted",
+    "focused",
+    "sad",
+    "hopeful",
+    "grounded"
+  ],
+  "allowedAdaptations": [
+    "tone-softening",
+    "reduced-motion",
+    "lower-cognitive-density",
+    "grounding-prompts",
+    "shorter-copy",
+    "gentle-navigation",
+    "accessibility-support"
+  ],
+  "forbidden": [
+    "diagnosis",
+    "prescribing",
+    "suicidality-determination",
+    "emotional-monetization",
+    "dark-patterns",
+    "coercive-retention",
+    "hidden-persuasion",
+    "clinical-autonomy"
+  ],
+  "qualityGates": [
+    "build",
+    "health",
+    "scope-clean",
+    "rollback-ready"
+  ]
+}
