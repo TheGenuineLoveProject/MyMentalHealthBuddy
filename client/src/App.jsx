@@ -1415,7 +1415,6 @@ export default function App() {
               <Route path="/healing-journey">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/emotional-wellness"><WellnessRoute><MoodPage /></WellnessRoute></Route>
               <Route path="/mental-health-support">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/personal-growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/self-discovery"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/transformation"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/body-wellness">{() => <ConfigRoute route="/body-wellness" />}</Route>
