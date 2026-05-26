@@ -446,10 +446,8 @@ export default function App() {
               <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />
               <Route path="/signup" component={Register} />
-              <Route path="/sign-up" component={Register} />
               <Route path="/signin" component={Login} />
               <Route path="/admin-login" component={AdminLogin} />
-              <Route path="/admin/login" component={AdminLogin} />
               <Route path="/sign-in" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={ResetPassword} />
@@ -556,9 +554,7 @@ export default function App() {
               <Route path="/tools/sleep-quality-calculator"><SleepQualityCalculator /></Route>
               <Route path="/tools/nervous-system-check"><NervousSystemCheck /></Route>
               <Route path="/tools/all"><ToolsIndex /></Route>
-              <Route path="/affirmations">
-                <AffirmationWall />
-              </Route>
+              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
               <Route path="/wellness-dashboard">
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
@@ -733,7 +729,6 @@ export default function App() {
               <Route path="/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/mindfulness" component={MindfulnessCanonical} />
-              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
               <Route path="/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
               <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
               <Route path="/sleep-guide">{() => <ConfigRoute route="/sleep-guide" />}</Route>
