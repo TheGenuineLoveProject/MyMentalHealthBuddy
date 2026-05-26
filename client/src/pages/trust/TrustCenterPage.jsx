@@ -8,7 +8,7 @@ export default function TrustCenterPage() {
       </h1>
 
       <p className="text-lg max-w-3xl">
-        Transparency, safety, privacy, and ethical AI governance.
+        Transparency, privacy, safety, and ethical AI governance.
       </p>
     </div>
   );
