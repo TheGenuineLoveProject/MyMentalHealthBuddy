@@ -169,6 +169,7 @@ const HabitsHubPage = lazy(() =>
 import("./pages/hubs/HabitsHubPage.jsx"));
 const ConfidenceHubPage = lazy(() => import("./pages/hubs/ConfidenceHubPage.jsx"));
 const AboutPage = lazy(() => import("./pages/About.jsx"));
+const FeaturesPage = lazy(() => import("./pages/Features.jsx"));
 const TrustCenterPage = lazy(() =>
   import("./pages/trust/TrustCenterPage.jsx")
 );
@@ -423,7 +424,7 @@ export default function App() {
               <Route path="/about" component={AboutPage} />
               <Route path="/about/approach" component={AboutApproachPage} />
               <Route path="/values" component={ValuesPage} />
-              <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/features" component={FeaturesPage} />
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />
               <Route path="/start" component={Start} />

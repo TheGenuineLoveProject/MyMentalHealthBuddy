@@ -161,6 +161,30 @@ if (!existsSync(aboutPage)) {
 const appHasAboutRoute = /<Route\s+path="\/about"\s+component=\{AboutPage\}/.test(app);
 check("App.jsx: /about route uses AboutPage component", appHasAboutRoute);
 
+const featuresPage = resolve(ROOT, "client/src/pages/Features.jsx");
+if (!existsSync(featuresPage)) {
+  fail("Features.jsx missing");
+} else {
+  const src = readFileSync(featuresPage, "utf8");
+  check(
+    "Features.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/features['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check(
+    "Features.jsx: renders <Helmet> (or PageSEO)",
+    /<Helmet>/.test(src) || /<PageSEO\b/.test(src),
+  );
+  check("Features.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("Features.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("Features.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("Features.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("Features.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+}
+
+const appHasFeaturesRoute = /<Route\s+path="\/features"\s+component=\{FeaturesPage\}/.test(app);
+check("App.jsx: /features route uses FeaturesPage component", appHasFeaturesRoute);
+
 const seoComponent = resolve(ROOT, "client/src/components/seo/PageSEO.jsx");
 if (!existsSync(seoComponent)) {
   fail("PageSEO component missing");
