@@ -285,6 +285,41 @@ if (!existsSync(selfLovePage)) {
 const appHasSelfLoveRoute = /<Route\s+path="\/self-love"><WellnessRoute><SelfLoveCanonical\s*\/><\/WellnessRoute><\/Route>/.test(app);
 check("App.jsx: /self-love route renders SelfLoveCanonical inside WellnessRoute", appHasSelfLoveRoute);
 
+const growthPage = resolve(ROOT, "client/src/pages/Growth.jsx");
+if (!existsSync(growthPage)) {
+  fail("Growth.jsx missing");
+} else {
+  const src = readFileSync(growthPage, "utf8");
+  check(
+    "Growth.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/growth['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check(
+    "Growth.jsx: renders <Helmet> (or PageSEO)",
+    /<Helmet>/.test(src) || /<PageSEO\b/.test(src),
+  );
+  check("Growth.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("Growth.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("Growth.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("Growth.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("Growth.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+  check("Growth.jsx: preserves GrowthPage body", /GrowthPage/.test(src));
+}
+
+const appHasGrowthRoute = /<Route\s+path="\/growth"><WellnessRoute><GrowthCanonical\s*\/><\/WellnessRoute><\/Route>/.test(app);
+check("App.jsx: /growth route renders GrowthCanonical inside WellnessRoute", appHasGrowthRoute);
+
+const registrySrcForGrowth = readFileSync(REGISTRY, "utf8");
+const growthRegBlock = registrySrcForGrowth.match(/"\/growth"\s*:\s*\{[\s\S]*?\n\s*\}/);
+if (!growthRegBlock) {
+  fail("routeRegistry: /growth entry missing");
+} else {
+  const block = growthRegBlock[0];
+  check("routeRegistry /growth: seoDescription present", /seoDescription\s*:/.test(block));
+  check("routeRegistry /growth: canonical present", /canonical\s*:/.test(block));
+}
+
 const healingMetaSrc = readFileSync(REGISTRY, "utf8");
 const healingBlock = healingMetaSrc.match(/"\/healing"\s*:\s*\{[\s\S]*?\n\s*\}/);
 if (!healingBlock) {
