@@ -14,7 +14,8 @@
     "governor:schema": "bash scripts/governor/schema-validator.sh",
     "governor:contract": "bash scripts/governor/api-contract-enforcer.sh",
     "governor:prompts": "bash scripts/governor/prompt-registry-linter.sh",
-    "governor:refactor-report": "bash scripts/governor/auto-refactor-report.sh"
+    "governor:refactor-report": "bash scripts/governor/auto-refactor-report.sh",
+    "scan:trust": "node scripts/scan-trust-routes.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",

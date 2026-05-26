@@ -1,15 +1,30 @@
 import React from "react";
+import TrustPageLayout from "../../components/trust/TrustPageLayout.jsx";
+import TrustSection from "../../components/trust/TrustSection.jsx";
+import { trustRegistry } from "../../content/trust/trustRegistry.js";
 
 export default function AITransparencyPage() {
-  return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#1E293B] p-8">
-      <h1 className="text-4xl font-bold mb-4">
-        AI Transparency
-      </h1>
+  const meta = trustRegistry.aiTransparency;
 
-      <p className="text-lg max-w-3xl">
-        Learn how MyMentalHealthBuddy uses AI safely and responsibly.
-      </p>
-    </div>
+  return (
+    <TrustPageLayout
+      title={meta.title}
+      subtitle={meta.subtitle}
+      callout={
+        <p>
+          AI here is a gentle reflection aid — never a diagnostician, never a
+          therapist, never a replacement for human care.
+        </p>
+      }
+    >
+      {meta.sections.map((s) => (
+        <TrustSection
+          key={s.id}
+          title={s.title}
+          body={s.body}
+          testId={`section-ai-${s.id}`}
+        />
+      ))}
+    </TrustPageLayout>
   );
 }

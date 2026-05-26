@@ -1,15 +1,30 @@
 import React from "react";
+import TrustPageLayout from "../../components/trust/TrustPageLayout.jsx";
+import TrustSection from "../../components/trust/TrustSection.jsx";
+import { trustRegistry } from "../../content/trust/trustRegistry.js";
 
 export default function TrustCenterPage() {
-  return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#1E293B] p-8">
-      <h1 className="text-4xl font-bold mb-4">
-        Trust Center
-      </h1>
+  const meta = trustRegistry.trustCenter;
 
-      <p className="text-lg max-w-3xl">
-        Transparency, privacy, safety, and ethical AI governance.
-      </p>
-    </div>
+  return (
+    <TrustPageLayout
+      title={meta.title}
+      subtitle={meta.subtitle}
+      callout={
+        <p>
+          MyMentalHealthBuddy is educational and supportive — not a substitute
+          for professional care. In crisis, call 988, text 741741, or 911.
+        </p>
+      }
+    >
+      {meta.sections.map((s) => (
+        <TrustSection
+          key={s.id}
+          title={s.title}
+          body={s.body}
+          testId={`section-trust-${s.id}`}
+        />
+      ))}
+    </TrustPageLayout>
   );
 }
