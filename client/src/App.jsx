@@ -175,6 +175,7 @@ const WellbeingPage = lazy(() => import("./pages/Wellbeing.jsx"));
 const MentalWellnessPage = lazy(() => import("./pages/MentalWellness.jsx"));
 const SelfLoveCanonical = lazy(() => import("./pages/SelfLove.jsx"));
 const GrowthCanonical = lazy(() => import("./pages/Growth.jsx"));
+const MindfulnessCanonical = lazy(() => import("./pages/Mindfulness.jsx"));
 const TrustCenterPage = lazy(() =>
   import("./pages/trust/TrustCenterPage.jsx")
 );
@@ -729,7 +730,7 @@ export default function App() {
               <Route path="/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/mindfulness">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/mindfulness" component={MindfulnessCanonical} />
               <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
               <Route path="/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
               <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>

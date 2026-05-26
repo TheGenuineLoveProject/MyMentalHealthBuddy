@@ -310,6 +310,42 @@ if (!existsSync(growthPage)) {
 const appHasGrowthRoute = /<Route\s+path="\/growth"><WellnessRoute><GrowthCanonical\s*\/><\/WellnessRoute><\/Route>/.test(app);
 check("App.jsx: /growth route renders GrowthCanonical inside WellnessRoute", appHasGrowthRoute);
 
+const mindfulnessPage = resolve(ROOT, "client/src/pages/Mindfulness.jsx");
+if (!existsSync(mindfulnessPage)) {
+  fail("Mindfulness.jsx missing");
+} else {
+  const src = readFileSync(mindfulnessPage, "utf8");
+  check(
+    "Mindfulness.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/mindfulness['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check("Mindfulness.jsx: renders <Helmet> (or PageSEO)", /<Helmet>/.test(src) || /<PageSEO\b/.test(src));
+  check("Mindfulness.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("Mindfulness.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("Mindfulness.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("Mindfulness.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("Mindfulness.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+  check(
+    "Mindfulness.jsx: preserves /meditation body delegation",
+    /AutopilotPage[\s\S]*route=["']\/meditation["']/.test(src),
+  );
+}
+
+const appHasMindfulnessRoute = /<Route\s+path="\/mindfulness"\s+component=\{MindfulnessCanonical\}/.test(app);
+check("App.jsx: /mindfulness route uses MindfulnessCanonical component", appHasMindfulnessRoute);
+
+const registrySrcForMindfulness = readFileSync(REGISTRY, "utf8");
+const mindfulnessRegBlock = registrySrcForMindfulness.match(/"\/mindfulness"\s*:\s*\{[\s\S]*?\n\s*\}/);
+if (!mindfulnessRegBlock) {
+  fail("routeRegistry: /mindfulness entry missing");
+} else {
+  const block = mindfulnessRegBlock[0];
+  check("routeRegistry /mindfulness: seoDescription present", /seoDescription\s*:/.test(block));
+  check("routeRegistry /mindfulness: canonical present", /canonical\s*:/.test(block));
+  check("routeRegistry /mindfulness: emotionalIntent present", /emotionalIntent\s*:/.test(block));
+}
+
 const registrySrcForGrowth = readFileSync(REGISTRY, "utf8");
 const growthRegBlock = registrySrcForGrowth.match(/"\/growth"\s*:\s*\{[\s\S]*?\n\s*\}/);
 if (!growthRegBlock) {

@@ -135,6 +135,21 @@ export const routeRegistry = {
     userGoal: "Practice kindness toward oneself.",
     platformRole: "Self-love practice surface.",
   },
+  "/mindfulness": {
+    path: "/mindfulness",
+    title: "Mindfulness | MyMentalHealthBuddy",
+    description:
+      "Gentle mindfulness and meditation practices — present-moment awareness for emotional calm.",
+    seoDescription:
+      "Accessible mindfulness practices — grounding, present-moment awareness, and gentle meditation for emotional regulation.",
+    canonical: canonical("/mindfulness"),
+    category: "wellness",
+    navGroup: NAV_GROUPS.WELLNESS,
+    indexable: true,
+    emotionalIntent: "presence + calm",
+    userGoal: "Practice present-moment awareness for emotional regulation.",
+    platformRole: "Mindfulness surface (body delegates to /meditation).",
+  },
   "/growth": {
     path: "/growth",
     title: "Growth | MyMentalHealthBuddy",
