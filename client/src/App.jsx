@@ -1065,7 +1065,6 @@ export default function App() {
               <Route path="/wellness-journey">{() => <Redirect to="/healing-journey" />}</Route>
               <Route path="/my-healing">{() => <Redirect to="/healing-journey" />}</Route>
               <Route path="/recovery">{() => <Redirect to="/healing-journey" />}</Route>
-              <Route path="/therapy">{() => <Redirect to="/support" />}</Route>
               <Route path="/counseling">{() => <Redirect to="/support" />}</Route>
               <Route path="/assistance">{() => <Redirect to="/support" />}</Route>
               <Route path="/toolbox">{() => <Redirect to="/tools" />}</Route>
