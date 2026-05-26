@@ -310,6 +310,40 @@ if (!existsSync(growthPage)) {
 const appHasGrowthRoute = /<Route\s+path="\/growth"><WellnessRoute><GrowthCanonical\s*\/><\/WellnessRoute><\/Route>/.test(app);
 check("App.jsx: /growth route renders GrowthCanonical inside WellnessRoute", appHasGrowthRoute);
 
+const resiliencePage = resolve(ROOT, "client/src/pages/Resilience.jsx");
+if (!existsSync(resiliencePage)) {
+  fail("Resilience.jsx missing");
+} else {
+  const src = readFileSync(resiliencePage, "utf8");
+  check(
+    "Resilience.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/resilience['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check("Resilience.jsx: renders <Helmet> (or PageSEO)", /<Helmet>/.test(src) || /<PageSEO\b/.test(src));
+  check("Resilience.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("Resilience.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("Resilience.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("Resilience.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("Resilience.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+  check("Resilience.jsx: preserves ResilienceMetricsPage body", /ResilienceMetricsPage/.test(src));
+}
+
+const appHasResilienceRoute = /<Route\s+path="\/resilience">\s*<ProtectedRoute><ResilienceCanonical\s*\/><\/ProtectedRoute>\s*<\/Route>/.test(app);
+check("App.jsx: /resilience route renders ResilienceCanonical inside ProtectedRoute", appHasResilienceRoute);
+
+const registrySrcForResilience = readFileSync(REGISTRY, "utf8");
+const resilienceRegBlock = registrySrcForResilience.match(/"\/resilience"\s*:\s*\{[\s\S]*?\n\s*\}/);
+if (!resilienceRegBlock) {
+  fail("routeRegistry: /resilience entry missing");
+} else {
+  const block = resilienceRegBlock[0];
+  check("routeRegistry /resilience: seoDescription present", /seoDescription\s*:/.test(block));
+  check("routeRegistry /resilience: canonical present", /canonical\s*:/.test(block));
+  check("routeRegistry /resilience: emotionalIntent present", /emotionalIntent\s*:/.test(block));
+  check("routeRegistry /resilience: indexable present", /indexable\s*:/.test(block));
+}
+
 const mindfulnessPage = resolve(ROOT, "client/src/pages/Mindfulness.jsx");
 if (!existsSync(mindfulnessPage)) {
   fail("Mindfulness.jsx missing");

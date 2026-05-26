@@ -135,6 +135,21 @@ export const routeRegistry = {
     userGoal: "Practice kindness toward oneself.",
     platformRole: "Self-love practice surface.",
   },
+  "/resilience": {
+    path: "/resilience",
+    title: "Resilience | MyMentalHealthBuddy",
+    description:
+      "Personal resilience metrics and reflective tracking — gentle insight into your emotional patterns over time.",
+    seoDescription:
+      "Resilience metrics — private, supportive insight into emotional patterns. A reflective surface, never clinical.",
+    canonical: canonical("/resilience"),
+    category: "wellness",
+    navGroup: NAV_GROUPS.WELLNESS,
+    indexable: false,
+    emotionalIntent: "steadiness + perspective",
+    userGoal: "See gentle patterns in your emotional journey over time.",
+    platformRole: "Protected resilience metrics surface.",
+  },
   "/mindfulness": {
     path: "/mindfulness",
     title: "Mindfulness | MyMentalHealthBuddy",

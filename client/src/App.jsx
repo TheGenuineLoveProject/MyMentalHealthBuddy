@@ -176,6 +176,7 @@ const MentalWellnessPage = lazy(() => import("./pages/MentalWellness.jsx"));
 const SelfLoveCanonical = lazy(() => import("./pages/SelfLove.jsx"));
 const GrowthCanonical = lazy(() => import("./pages/Growth.jsx"));
 const MindfulnessCanonical = lazy(() => import("./pages/Mindfulness.jsx"));
+const ResilienceCanonical = lazy(() => import("./pages/Resilience.jsx"));
 const TrustCenterPage = lazy(() =>
   import("./pages/trust/TrustCenterPage.jsx")
 );
@@ -1508,7 +1509,7 @@ export default function App() {
                 <ProtectedRoute><EliteToolsDashboard /></ProtectedRoute>
               </Route>
               <Route path="/resilience">
-                <ProtectedRoute><ResilienceMetricsPage /></ProtectedRoute>
+                <ProtectedRoute><ResilienceCanonical /></ProtectedRoute>
               </Route>
               <Route path="/companion">
                 <ProtectedRoute><AdaptiveCompanionPage /></ProtectedRoute>
