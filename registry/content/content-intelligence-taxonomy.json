@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "mode": "governed-content-intelligence",
+  "pillars": [
+    "emotional-awareness",
+    "nervous-system-regulation",
+    "journaling-reflection",
+    "calm-grounding",
+    "sleep-restoration",
+    "self-worth-identity",
+    "relationships-connection",
+    "burnout-stress",
+    "anxiety-support",
+    "growth-meaning"
+  ],
+  "requiredMetadata": [
+    "title",
+    "slug",
+    "contentType",
+    "emotionalState",
+    "journeyStage",
+    "pillar",
+    "relatedTools",
+    "relatedJourneys",
+    "safetyLevel",
+    "clinicalBoundary",
+    "seoIntent",
+    "internalLinks"
+  ],
+  "forbidden": [
+    "diagnosis-claims",
+    "cure-claims",
+    "shame-language",
+    "urgency-manipulation",
+    "emotional-dependency-framing",
+    "healing-data-monetization",
+    "hidden-vulnerability-targeting"
+  ]
+}
