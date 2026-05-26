@@ -1049,7 +1049,6 @@ export default function App() {
               <Route path="/depressed">{() => <Redirect to="/depression" />}</Route>
               <Route path="/wellness-journey">{() => <Redirect to="/healing-journey" />}</Route>
               <Route path="/my-healing">{() => <Redirect to="/healing-journey" />}</Route>
-              <Route path="/counseling">{() => <Redirect to="/support" />}</Route>
               <Route path="/assistance">{() => <Redirect to="/support" />}</Route>
               <Route path="/toolbox">{() => <Redirect to="/tools" />}</Route>
               <Route path="/calm-down">{() => <Redirect to="/calm" />}</Route>
