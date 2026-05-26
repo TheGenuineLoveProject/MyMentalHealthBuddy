@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "purpose": "Canonical visible tool indexing contract",
+  "indexSurfaces": [
+    "/wellness-tools",
+    "/discover",
+    "/resources",
+    "/calm-room",
+    "/journal",
+    "/companion"
+  ],
+  "toolGrouping": [
+    "calming",
+    "journaling",
+    "reflection",
+    "breathing",
+    "sleep",
+    "self-worth",
+    "anxiety-support",
+    "burnout-support",
+    "crisis-resources",
+    "growth"
+  ],
+  "visibilityRules": {
+    "mustBeFindableByEmotion": true,
+    "mustBeFindableByCategory": true,
+    "mustBeFindableByJourneyStage": true,
+    "mustPreserveCrisisBoundaries": true,
+    "mustAvoidDarkPatterns": true
+  }
+}

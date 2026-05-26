@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "mode": "governance-only",
+  "searchTypes": [
+    "emotional-search",
+    "tool-search",
+    "topic-search",
+    "journey-search",
+    "trust-search",
+    "resource-search"
+  ],
+  "requiredFields": [
+    "title",
+    "slug",
+    "route",
+    "category",
+    "emotionalState",
+    "journeyStage",
+    "userIntent",
+    "safetyLevel",
+    "relatedTools",
+    "relatedTopics",
+    "canonicalOwner"
+  ],
+  "forbidden": [
+    "manipulative-ranking",
+    "crisis-misrouting",
+    "healing-data-monetization",
+    "hidden-vulnerability-scoring",
+    "duplicate-tool-indexes"
+  ]
+}
