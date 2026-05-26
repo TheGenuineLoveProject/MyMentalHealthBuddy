@@ -1914,7 +1914,6 @@ export default function App() {
               <Route path="/education" component={LearnHub} />
               <Route path="/workshop">{() => <CourseCatalog />}</Route>
               <Route path="/workshops">{() => <CourseCatalog />}</Route>
-              <Route path="/programs">{() => <CourseCatalog />}</Route>
               <Route path="/library" component={LearnHub} />
 
               {/* Fallback - Config Driven Not Found */}
