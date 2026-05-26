@@ -17,7 +17,8 @@
     "governor:refactor-report": "bash scripts/governor/auto-refactor-report.sh",
     "scan:trust": "node scripts/scan-trust-routes.mjs",
     "scan:routes": "node scripts/scan-route-governance.mjs",
-    "audit:duplicates": "node scripts/audit-duplicate-routes.mjs"
+    "audit:duplicates": "node scripts/audit-duplicate-routes.mjs",
+    "export:route-governance": "node scripts/export-route-governance.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
