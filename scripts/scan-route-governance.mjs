@@ -209,6 +209,30 @@ if (!existsSync(healingPage)) {
 const appHasHealingRoute = /<Route\s+path="\/healing"\s+component=\{HealingPage\}/.test(app);
 check("App.jsx: /healing route uses HealingPage component", appHasHealingRoute);
 
+const wellbeingPage = resolve(ROOT, "client/src/pages/Wellbeing.jsx");
+if (!existsSync(wellbeingPage)) {
+  fail("Wellbeing.jsx missing");
+} else {
+  const src = readFileSync(wellbeingPage, "utf8");
+  check(
+    "Wellbeing.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/wellbeing['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check(
+    "Wellbeing.jsx: renders <Helmet> (or PageSEO)",
+    /<Helmet>/.test(src) || /<PageSEO\b/.test(src),
+  );
+  check("Wellbeing.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("Wellbeing.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("Wellbeing.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("Wellbeing.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("Wellbeing.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+}
+
+const appHasWellbeingRoute = /<Route\s+path="\/wellbeing"\s+component=\{WellbeingPage\}/.test(app);
+check("App.jsx: /wellbeing route uses WellbeingPage component", appHasWellbeingRoute);
+
 const healingMetaSrc = readFileSync(REGISTRY, "utf8");
 const healingBlock = healingMetaSrc.match(/"\/healing"\s*:\s*\{[\s\S]*?\n\s*\}/);
 if (!healingBlock) {
