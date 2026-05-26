@@ -1021,7 +1021,6 @@ export default function App() {
               <Route path="/programs">{() => <Redirect to="/courses" />}</Route>
               <Route path="/meetups">{() => <Redirect to="/community" />}</Route>
               <Route path="/live">{() => <Redirect to="/community" />}</Route>
-              <Route path="/webinar">{() => <Redirect to="/courses" />}</Route>
               <Route path="/seminar">{() => <Redirect to="/courses" />}</Route>
               <Route path="/seminars">{() => <Redirect to="/courses" />}</Route>
               <Route path="/inspire">{() => <Redirect to="/affirmation" />}</Route>
