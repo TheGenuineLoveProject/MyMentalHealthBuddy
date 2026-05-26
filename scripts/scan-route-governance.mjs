@@ -310,6 +310,39 @@ if (!existsSync(growthPage)) {
 const appHasGrowthRoute = /<Route\s+path="\/growth"><WellnessRoute><GrowthCanonical\s*\/><\/WellnessRoute><\/Route>/.test(app);
 check("App.jsx: /growth route renders GrowthCanonical inside WellnessRoute", appHasGrowthRoute);
 
+const depressionPage = resolve(ROOT, "client/src/pages/Depression.jsx");
+if (!existsSync(depressionPage)) {
+  fail("Depression.jsx missing");
+} else {
+  const src = readFileSync(depressionPage, "utf8");
+  check(
+    "Depression.jsx: imports routeRegistry (getRouteMeta)",
+    /getRouteMeta\s*\(\s*['"]\/depression['"]/.test(src) ||
+      /from\s+['"][^'"]*content\/routes\/routeRegistry/.test(src),
+  );
+  check("Depression.jsx: renders <Helmet> (or PageSEO)", /<Helmet>/.test(src) || /<PageSEO\b/.test(src));
+  check("Depression.jsx: sets <title>", /<title>[\s\S]*?<\/title>/.test(src) || /title=\{/.test(src));
+  check("Depression.jsx: sets meta description", /name=["']description["']/.test(src) || /description=\{/.test(src));
+  check("Depression.jsx: sets canonical link", /rel=["']canonical["']/.test(src) || /canonical=\{/.test(src));
+  check("Depression.jsx: emits OG metadata", /property=["']og:/.test(src));
+  check("Depression.jsx: emits Twitter metadata", /name=["']twitter:/.test(src));
+  check("Depression.jsx: preserves RecoveryPage body", /RecoveryPage/.test(src));
+}
+
+const appHasDepressionRoute = /<Route\s+path="\/depression"><WellnessRoute><DepressionCanonical\s*\/><\/WellnessRoute><\/Route>/.test(app);
+check("App.jsx: /depression route renders DepressionCanonical inside WellnessRoute", appHasDepressionRoute);
+
+const registrySrcForDepression = readFileSync(REGISTRY, "utf8");
+const depressionRegBlock = registrySrcForDepression.match(/"\/depression"\s*:\s*\{[\s\S]*?\n\s*\}/);
+if (!depressionRegBlock) {
+  fail("routeRegistry: /depression entry missing");
+} else {
+  const block = depressionRegBlock[0];
+  check("routeRegistry /depression: seoDescription present", /seoDescription\s*:/.test(block));
+  check("routeRegistry /depression: canonical present", /canonical\s*:/.test(block));
+  check("routeRegistry /depression: emotionalIntent present", /emotionalIntent\s*:/.test(block));
+}
+
 const anxietyPage = resolve(ROOT, "client/src/pages/Anxiety.jsx");
 if (!existsSync(anxietyPage)) {
   fail("Anxiety.jsx missing");

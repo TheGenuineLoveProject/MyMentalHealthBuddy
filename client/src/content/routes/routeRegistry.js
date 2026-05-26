@@ -135,6 +135,21 @@ export const routeRegistry = {
     userGoal: "Practice kindness toward oneself.",
     platformRole: "Self-love practice surface.",
   },
+  "/depression": {
+    path: "/depression",
+    title: "Depression Support | MyMentalHealthBuddy",
+    description:
+      "Gentle support for low moods — recovery resources, reflection, and compassionate guidance.",
+    seoDescription:
+      "Trauma-informed support for low moods — recovery, reflection, and compassionate guidance. Educational, never clinical.",
+    canonical: canonical("/depression"),
+    category: "wellness",
+    navGroup: NAV_GROUPS.WELLNESS,
+    indexable: true,
+    emotionalIntent: "warmth + slow recovery",
+    userGoal: "Find gentle, non-clinical support during low moods.",
+    platformRole: "Depression support surface (renders RecoveryPage body).",
+  },
   "/anxiety": {
     path: "/anxiety",
     title: "Anxiety Support | MyMentalHealthBuddy",
