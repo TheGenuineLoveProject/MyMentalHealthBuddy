@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "mode": "dashboard-canonization-governance",
+  "canonicalDashboardPurpose": "calm-user-command-center",
+  "allowedModules": [
+    "continue-your-journey",
+    "saved-tools",
+    "mood-awareness",
+    "reflections",
+    "guided-journeys",
+    "calm-room-access",
+    "trust-safety-links",
+    "account-data-controls"
+  ],
+  "forbidden": [
+    "duplicate-dashboard-systems",
+    "dashboard-monetization-pressure",
+    "crisis-upsell-mixing",
+    "hidden-personalization",
+    "emotional-vulnerability-scoring",
+    "business-logic-inside-healing-flows"
+  ]
+}
