@@ -970,7 +970,6 @@ export default function App() {
               <Route path="/log-in">{() => <Redirect to="/login" />}</Route>
               <Route path="/contact-us">{() => <Redirect to="/contact" />}</Route>
               <Route path="/about-us">{() => <Redirect to="/about" />}</Route>
-              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
               <Route path="/faqs">{() => <Redirect to="/faq" />}</Route>
               <Route path="/getting-started">{() => <Redirect to="/onboarding" />}</Route>
               <Route path="/how-it-works">{() => <Redirect to="/features" />}</Route>
