@@ -1130,7 +1130,6 @@ export default function App() {
               <Route path="/uplift">{() => <Redirect to="/joy" />}</Route>
               <Route path="/encourage">{() => <Redirect to="/support" />}</Route>
               <Route path="/motivate">{() => <Redirect to="/growth" />}</Route>
-              <Route path="/embrace">{() => <Redirect to="/acceptance" />}</Route>
               <Route path="/cherish">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/appreciate">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/celebrate">{() => <Redirect to="/joy" />}</Route>
