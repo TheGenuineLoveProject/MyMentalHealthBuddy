@@ -78,7 +78,7 @@ waitForPort = 5000
 
 [nix]
 channel = "stable-25_05"
-packages = ["tree", "libwebp", "lsof", "nano"]
+packages = ["tree", "libwebp", "lsof", "nano", "splat"]
 
 [postMerge]
 path = "scripts/post-merge.sh"
