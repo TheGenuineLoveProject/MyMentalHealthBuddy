@@ -1284,7 +1284,6 @@ export default function App() {
               <Route path="/evolve">{() => <Redirect to="/growth" />}</Route>
               <Route path="/thrive">{() => <Redirect to="/growth" />}</Route>
               <Route path="/flourish">{() => <Redirect to="/growth" />}</Route>
-              <Route path="/flourishing">{() => <Redirect to="/growth" />}</Route>
               <Route path="/bloom">{() => <Redirect to="/growth" />}</Route>
               <Route path="/awaken">{() => <Redirect to="/awakening" />}</Route>
               <Route path="/enlighten">{() => <Redirect to="/spiritual" />}</Route>
