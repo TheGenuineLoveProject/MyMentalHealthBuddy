@@ -1,88 +1,11 @@
-entrypoint = "server/app.mjs"
-run = "npm run dev"
-modules = ["nodejs-20", "postgresql-16", "python-3.11"]
+run = "node server/app.mjs"
+
+[nix]
+channel = "stable-24_05"
 
 [deployment]
-deploymentTarget = "vm"
-
-build = [
-	"sh",
-	"-c",
-	"""
-	node --check server/app.mjs &&
-	rm -rf node_modules &&
-	npm ci --no-audit --no-fund &&
-	npm run build &&
-	echo '[build] tarring node_modules…' &&
-	tar czf nm.tgz node_modules &&
-	ls -la nm.tgz
-	"""
-]
-
-run = [
-	"sh",
-	"-c",
-	"""
-	if [ -d node_modules ]; then
-		rm -rf node_modules
-	fi;
-
-	if [ -f nm.tgz ]; then
-		echo '[boot] restoring node_modules from nm.tgz tarball';
-		tar xzf nm.tgz &&
-		echo '[boot] tarball restored';
-	else
-		echo '[boot] nm.tgz missing — falling back to npm ci';
-		npm ci --no-audit --no-fund --omit=dev;
-	fi;
-
-	if [ ! -f client/dist/index.html ]; then
-		echo '[boot] dist missing — emergency vite build';
-		npm run build;
-	fi;
-
-	NODE_ENV=production exec node --import ./server/observability/preload.mjs server/app.mjs
-	"""
-]
+run = ["sh", "-c", "node server/app.mjs"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[agent]
-expertMode = true
-
-[workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "webview"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "node --import ./server/observability/preload.mjs server/app.mjs"
-waitForPort = 5000
-
-[nix]
-channel = "stable-25_05"
-packages = ["tree", "libwebp", "lsof", "nano", "splat"]
-
-[postMerge]
-path = "scripts/post-merge.sh"
-timeoutMs = 20000
-
-[build]
-cache = ["dist", ".cache"]
