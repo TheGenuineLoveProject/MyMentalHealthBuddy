@@ -2,8 +2,8 @@ import {
   Brain, Heart, Compass, Wind, Shield, ShieldAlert, Moon, Activity,
 } from "lucide-react";
 
-export const TOOLS = [
-  {
+const BASE = {
+  "/tools/gad7": {
     slug: "anxiety-assessment",
     href: "/tools/gad7",
     title: "Anxiety Self-Assessment (GAD-7)",
@@ -14,8 +14,15 @@ export const TOOLS = [
     icon: Brain,
     color: "from-amber-500 to-orange-500",
     testid: "tool-anxiety-assessment",
+    hub: {
+      title: "GAD-7 Anxiety Check-in",
+      body: "A 7-question screening to notice anxiety levels over the last two weeks. Educational only.",
+      tint: "rgba(255, 217, 61, 0.18)",
+      iconColor: "#B88A1F",
+      testid: "tool-gad7",
+    },
   },
-  {
+  "/tools/phq9": {
     slug: "depression-screening",
     href: "/tools/phq9",
     title: "Depression Screening (PHQ-9)",
@@ -26,8 +33,15 @@ export const TOOLS = [
     icon: Heart,
     color: "from-rose-500 to-pink-500",
     testid: "tool-depression-screening",
+    hub: {
+      title: "PHQ-9 Mood Check-in",
+      body: "A 9-question screening to notice depression symptoms. Item 9 routes you to immediate support.",
+      tint: "rgba(255, 154, 139, 0.20)",
+      iconColor: "#C2604F",
+      testid: "tool-phq9",
+    },
   },
-  {
+  "/tools/distortion-checker": {
     slug: "cognitive-distortion-checker",
     href: "/tools/distortion-checker",
     title: "Cognitive Distortion Checker",
@@ -38,8 +52,15 @@ export const TOOLS = [
     icon: Compass,
     color: "from-purple-500 to-indigo-500",
     testid: "tool-cognitive-distortion-checker",
+    hub: {
+      title: "Cognitive Distortion Checker",
+      body: "Spot common thinking patterns (catastrophizing, all-or-nothing, mind-reading) and reframe gently.",
+      tint: "rgba(200, 182, 255, 0.22)",
+      iconColor: "#6B5BA8",
+      testid: "tool-distortion",
+    },
   },
-  {
+  "/tools/manipulation-detector": {
     slug: "manipulation-detector",
     href: "/tools/manipulation-detector",
     title: "Manipulation Detector",
@@ -50,8 +71,15 @@ export const TOOLS = [
     icon: ShieldAlert,
     color: "from-rose-500 to-amber-500",
     testid: "tool-manipulation-detector",
+    hub: {
+      title: "Manipulation Detector",
+      body: "Paste a message or short exchange. We gently flag eight common tactics with reframes you can use.",
+      tint: "rgba(255, 184, 140, 0.22)",
+      iconColor: "#B8662E",
+      testid: "tool-manipulation",
+    },
   },
-  {
+  "/tools/breath-pacer": {
     slug: "breath-pacer",
     href: "/tools/breath-pacer",
     title: "Breathing Exercise Pacer",
@@ -62,8 +90,15 @@ export const TOOLS = [
     icon: Wind,
     color: "from-teal-500 to-cyan-500",
     testid: "tool-breath-pacer",
+    hub: {
+      title: "Breath Pacer",
+      body: "A guided 4-7-8, box, or coherence breathing pattern. Calm your nervous system in two minutes.",
+      tint: "rgba(116, 192, 252, 0.20)",
+      iconColor: "#3D78B8",
+      testid: "tool-breath",
+    },
   },
-  {
+  "/tools/boundary-builder": {
     slug: "boundary-builder",
     href: "/tools/boundary-builder",
     title: "Boundary Script Generator",
@@ -74,8 +109,15 @@ export const TOOLS = [
     icon: Shield,
     color: "from-emerald-500 to-teal-500",
     testid: "tool-boundary-builder",
+    hub: {
+      title: "Boundary Builder",
+      body: "Draft a clear, kind boundary statement using values-first language. Practice before you speak it.",
+      tint: "rgba(168, 213, 186, 0.25)",
+      iconColor: "#4A7E62",
+      testid: "tool-boundary",
+    },
   },
-  {
+  "/tools/sleep-quality-calculator": {
     slug: "sleep-quality-calculator",
     href: "/tools/sleep-quality-calculator",
     title: "Sleep Quality Self-Check",
@@ -86,8 +128,15 @@ export const TOOLS = [
     icon: Moon,
     color: "from-indigo-500 to-slate-500",
     testid: "tool-sleep-quality-calculator",
+    hub: {
+      title: "Sleep Quality Self-Check",
+      body: "A 7-question sleep check inspired by PSQI. Get a band rating and CBT-I-style suggestions.",
+      tint: "rgba(116, 192, 252, 0.18)",
+      iconColor: "#3D78B8",
+      testid: "tool-sleep",
+    },
   },
-  {
+  "/tools/nervous-system-check": {
     slug: "nervous-system-check",
     href: "/tools/nervous-system-check",
     title: "Nervous System State Check",
@@ -98,5 +147,58 @@ export const TOOLS = [
     icon: Activity,
     color: "from-teal-500 to-emerald-500",
     testid: "tool-nervous-system-check",
+    hub: {
+      title: "Nervous System State Check",
+      body: "A polyvagal-informed self-check. Discover whether you are in safe, mobilized, or shut-down mode right now.",
+      tint: "rgba(168, 213, 186, 0.25)",
+      iconColor: "#4A7E62",
+      testid: "tool-nervous-system",
+    },
   },
+  "/discernment": {
+    slug: "discernment",
+    href: "/discernment",
+    title: "Discernment Tutor",
+    description: "Train your awareness against manipulation, distortions, and fallacies \u2014 earn belts as you grow.",
+    category: "Awareness",
+    icon: Activity,
+    testid: "tool-discernment",
+    hub: {
+      title: "Discernment Tutor",
+      body: "Train your awareness against manipulation, distortions, and fallacies \u2014 earn belts as you grow.",
+      tint: "rgba(168, 201, 160, 0.25)",
+      iconColor: "#4A7E72",
+      testid: "tool-discernment",
+    },
+  },
+};
+
+const ALL_ORDER = [
+  "/tools/gad7",
+  "/tools/phq9",
+  "/tools/distortion-checker",
+  "/tools/manipulation-detector",
+  "/tools/breath-pacer",
+  "/tools/boundary-builder",
+  "/tools/sleep-quality-calculator",
+  "/tools/nervous-system-check",
 ];
+
+const HUB_ORDER = [
+  "/tools/gad7",
+  "/tools/phq9",
+  "/tools/distortion-checker",
+  "/tools/breath-pacer",
+  "/tools/boundary-builder",
+  "/discernment",
+  "/tools/manipulation-detector",
+  "/tools/sleep-quality-calculator",
+  "/tools/nervous-system-check",
+];
+
+export const TOOLS = ALL_ORDER.map((href) => BASE[href]);
+
+export const WELLNESS_HUB_TOOLS = HUB_ORDER.map((href) => {
+  const { hub, ...rest } = BASE[href];
+  return { ...rest, ...hub };
+});
