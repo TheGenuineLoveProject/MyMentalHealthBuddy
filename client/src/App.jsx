@@ -932,7 +932,6 @@ export default function App() {
               <Route path="/selflove">{() => <Redirect to="/self-love" />}</Route>
               <Route path="/innerchild">{() => <Redirect to="/inner-child" />}</Route>
               <Route path="/quotes">{() => <Redirect to="/affirmations" />}</Route>
-              <Route path="/activity">{() => <Redirect to="/practices" />}</Route>
               <Route path="/heal">{() => <Redirect to="/healing" />}</Route>
               <Route path="/mentalhealth">{() => <Redirect to="/mental-health" />}</Route>
               <Route path="/ground">{() => <Redirect to="/grounding" />}</Route>
