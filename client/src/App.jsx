@@ -1029,7 +1029,6 @@ export default function App() {
               <Route path="/mantras">{() => <Redirect to="/affirmation" />}</Route>
               <Route path="/mantra">{() => <Redirect to="/affirmation" />}</Route>
               <Route path="/sound">{() => <Redirect to="/meditation" />}</Route>
-              <Route path="/sounds">{() => <Redirect to="/meditation" />}</Route>
               <Route path="/transform">{() => <Redirect to="/growth" />}</Route>
               <Route path="/improve">{() => <Redirect to="/growth" />}</Route>
               <Route path="/change">{() => <Redirect to="/growth" />}</Route>
