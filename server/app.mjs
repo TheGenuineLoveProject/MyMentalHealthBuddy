@@ -305,6 +305,18 @@ for (const [barePath, canonical] of Object.entries(BARE_HEALTH_CANONICALS)) {
   });
 }
 
+
+
+// PHASE152_BARE_HEALTH_ALIAS
+app.get("/health", (_req, res) => {
+  res.status(200).json({
+    status: "ok",
+    canonical: "/api/health",
+    service: "MyMentalHealthBuddy",
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.get("/ready", (_req, res) => {
   res.set("Cache-Control", "no-store");
   res.status(200).json({ status: "ready", timestamp: new Date().toISOString() });
