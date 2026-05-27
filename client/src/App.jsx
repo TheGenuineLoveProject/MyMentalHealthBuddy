@@ -17,6 +17,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import { SafeBoundary } from "./components/SafeBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
 import TglpNavbar from "./components/TglpNavbar.jsx";
+import { MMHBAvatarRuntimeProvider } from "./avatar-life/components/MMHBAvatarRuntimeProvider.tsx";
 const AutopilotPage = lazy(() =>
   import("./pages/_autopilot.jsx").then((m) => ({
     default: m.AutopilotPage || m.default,
@@ -397,6 +398,7 @@ export default function App() {
         <EmotionBackgroundProvider>
         <ResponsiveWrapper>
         <ReadingLevelProvider>
+          <MMHBAvatarRuntimeProvider surfaceContext="buddy" defaultState="calmIdle">
           <ErrorBoundary>
             <PageViewTracker />
             <SkipToContent />
@@ -1925,6 +1927,7 @@ export default function App() {
           </SafeBoundary>
           <ToastContainer />
           </ErrorBoundary>
+          </MMHBAvatarRuntimeProvider>
         </ReadingLevelProvider>
         </ResponsiveWrapper>
         </EmotionBackgroundProvider>
