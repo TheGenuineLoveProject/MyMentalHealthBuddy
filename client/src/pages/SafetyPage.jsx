@@ -1,7 +1,6 @@
 import { Link } from "wouter";
 import { ArrowLeft, AlertTriangle, Phone, Heart, Shield, ExternalLink, BookOpen, Users } from "lucide-react";
 import SEO from "../components/SEO";
-import TglpNavbar from "../components/TglpNavbar";
 import SafetyFooter from "../components/ui/ReflectionFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -52,8 +51,6 @@ export default function SafetyPage() {
         description="Important safety information about our platform. We are not medical advice. If you are in crisis, please contact emergency services immediately."
       />
       <div className="min-h-screen bg-[var(--glp-paper)]">
-        <TglpNavbar />
-        
         <div className="content-wrapper py-12">
           <div className="max-w-3xl mx-auto">
             <header className="mb-10">

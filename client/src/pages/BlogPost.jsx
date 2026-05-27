@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Calendar, Clock, User, ArrowLeft, MessageCircle, Send, Reply, BookOpen } from "lucide-react";
-import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
@@ -182,7 +181,6 @@ export default function BlogPost() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[var(--glp-paper)]">
-        <TglpNavbar />
         <div className="max-w-3xl mx-auto px-4 py-20 text-center">
           <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin motion-reduce:animate-none mx-auto mb-4" />
           <p className="text-[var(--glp-ink)]/70">Loading article...</p>
@@ -194,7 +192,6 @@ export default function BlogPost() {
   if (error || !post) {
     return (
       <div className="min-h-screen bg-[var(--glp-paper)]">
-        <TglpNavbar />
         <div className="max-w-3xl mx-auto px-4 py-20 text-center">
           <BookOpen className="w-16 h-16 mx-auto text-[var(--glp-sage)]/40 mb-4" />
           <h2 className="text-2xl font-semibold text-[var(--glp-sage-deep)]" data-testid="text-post-not-found">
@@ -243,7 +240,6 @@ export default function BlogPost() {
         title={`${post.title} | The Genuine Love Project Blog`}
         description={post.excerpt || post.content?.substring(0, 160)}
       />
-      <TglpNavbar />
 
       <main className="max-w-3xl mx-auto px-4 py-10">
         <Link href="/blog">

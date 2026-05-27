@@ -16,6 +16,7 @@ import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import { SafeBoundary } from "./components/SafeBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
+import TglpNavbar from "./components/TglpNavbar.jsx";
 const AutopilotPage = lazy(() =>
   import("./pages/_autopilot.jsx").then((m) => ({
     default: m.AutopilotPage || m.default,
@@ -399,6 +400,12 @@ export default function App() {
           <ErrorBoundary>
             <PageViewTracker />
             <SkipToContent />
+            {/* Phase 153: global navbar mount — single source of truth.
+                Inline mounts removed from TalkTopics/SafetyPage/Newsletter/
+                BlogIndex/BlogPost/BlogEditor to prevent double render. */}
+            <SafeBoundary label="Navbar">
+              <TglpNavbar />
+            </SafeBoundary>
             {/* v5.8.35 perf: ReturnLoop/MicroWinPrompt/WelcomeBackBanner are
                 lazy now — wrap in Suspense so React doesn't throw "suspended
                 outside of a Suspense boundary" on first hydration. */}
