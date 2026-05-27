@@ -1831,7 +1831,6 @@ export default function App() {
               {/* Legal Pages - Config Driven */}
               <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
               <Route path="/tos">{() => <ConfigRoute route="/tos" />}</Route>
-              <Route path="/privacy">{() => <ConfigRoute route="/privacy" />}</Route>
               <Route path="/legal">{() => <ConfigRoute route="/legal" />}</Route>
               <Route path="/ethics">{() => <ConfigRoute route="/ethics" />}</Route>
               <Route path="/disclaimer">{() => <ConfigRoute route="/disclaimer" />}</Route>
