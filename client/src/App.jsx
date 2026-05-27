@@ -1858,7 +1858,7 @@ export default function App() {
               <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
               <Route path="/admin/tools">{() => <AdminGuard><AdminTools /></AdminGuard>}</Route>
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
-              <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
+              
               <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
               <Route path="/settings/email-digest">{() => <ProtectedRoute><EmailDigest /></ProtectedRoute>}</Route>
               <Route path="/settings/ai-personality">{() => <ProtectedRoute><AIPersonality /></ProtectedRoute>}</Route>
