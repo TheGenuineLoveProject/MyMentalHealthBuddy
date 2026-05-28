@@ -5,9 +5,9 @@ modules = ["nodejs-20", "python-3.11"]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "node server/app.mjs"]
+run = ["sh", "-c", "if [ ! -d node_modules/express ]; then npm install --omit=dev --no-audit --no-fund --prefer-offline; fi && node server/app.mjs"]
 deploymentTarget = "vm"
-build = ["sh", "-c", "npm ci && npm run build"]
+build = ["sh", "-c", "npm run build"]
 
 [[ports]]
 localPort = 5000

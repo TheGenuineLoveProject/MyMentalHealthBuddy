@@ -85,7 +85,7 @@ function Dropdown({ id, label, icon: Icon, items, openId, setOpenId, isActive })
       <button
         type="button"
         onClick={() => setOpenId(open ? null : id)}
-        className="hidden lg:flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)]"
+        className="hidden md:flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)]"
         aria-haspopup="menu"
         aria-expanded={open}
         data-testid={`button-nav-${id}`}
@@ -194,7 +194,7 @@ export default function TglpNavbar() {
             <Link
               key={href}
               href={href}
-              className={`hidden lg:flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 ${
+              className={`hidden md:flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 ${
                 isActive(href)
                   ? "bg-[var(--glp-sage)]/15 text-[var(--glp-sage-deep)]"
                   : "text-[var(--glp-ink)]"
@@ -265,7 +265,7 @@ export default function TglpNavbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-lg transition-colors hover:bg-[var(--glp-sage)]/10"
+            className="md:hidden p-2 rounded-lg transition-colors hover:bg-[var(--glp-sage)]/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
@@ -283,7 +283,7 @@ export default function TglpNavbar() {
       {/* Mobile Menu — full surface, grouped sections, scrollable */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)] max-h-[80vh] overflow-y-auto"
+          className="md:hidden px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)] max-h-[80vh] overflow-y-auto"
           data-testid="menu-mobile"
         >
           {/* Mobile Search */}
