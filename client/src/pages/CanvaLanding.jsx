@@ -24,7 +24,6 @@ import { useFeatureFlags } from "@/contexts/FeatureFlagContext";
 import { markFirstCheckinComplete } from "@/lib/firstCheckinFlag";
 
 export default function CanvaLanding() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [, setLocation] = useLocation();
@@ -297,77 +296,6 @@ export default function CanvaLanding() {
       />
       <SoftLaunchBanner />
       <LandingCalmCheckinSlot />
-
-      <div 
-        className={`mobile-overlay ${mobileMenuOpen ? 'active' : ''}`}
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-      />
-
-      <nav className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
-        <button 
-          onClick={() => setMobileMenuOpen(false)}
-          className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center"
-          style={{ color: 'var(--glp-ink)' }}
-          data-testid="button-close-mobile-menu"
-          aria-label="Close mobile menu"
-        >
-          <X className="w-6 h-6" />
-        </button>
-        {/* V29 Phase 1 hybrid mobile menu (2026-05-15): 4 grouped sections — Core Actions, Discover, Trust, Auth. */}
-        <div className="space-y-4">
-          <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-home">Home</a>
-
-          <div className="pt-4 mt-2 border-t" style={{ borderColor: 'var(--glp-sage-20)' }}>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--glp-sage)' }}>Core Actions</p>
-            <Link href="/tools" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-tools">Tools</Link>
-            <Link href="/checkin" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-checkin">Check-In</Link>
-            <Link href="/companion" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-companion">Companion</Link>
-            <Link href="/journal" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-journal">Journal</Link>
-          </div>
-
-          <div className="pt-4 mt-2 border-t" style={{ borderColor: 'var(--glp-sage-20)' }}>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--glp-sage)' }}>Discover</p>
-            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-about">About</a>
-            <a href="#features" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-features">Features</a>
-            <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-blog">Blog</Link>
-            <Link href="/community" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-community">Community</Link>
-          </div>
-
-          <div className="pt-4 mt-2 border-t" style={{ borderColor: 'var(--glp-sage-20)' }}>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--glp-sage)' }}>Trust</p>
-            <Link href="/crisis" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-rose, #C4787A)' }} data-testid="mobile-nav-crisis">Crisis Help</Link>
-            <Link href="/pricing" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-pricing">Pricing</Link>
-            <Link href="/privacy" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-safety">Safety &amp; Privacy</Link>
-          </div>
-
-          <div className="pt-4 mt-2 border-t" style={{ borderColor: 'var(--glp-sage-30)' }}>
-            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--glp-sage)' }}>Account</p>
-            {!isLoading && isAuthenticated() ? (
-              <>
-                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="btn-primary w-full mb-3" data-testid="button-mobile-dashboard">My Dashboard</button>
-                </Link>
-                {/* v5.8.82: Settings exposed in mobile menu so signed-in
-                    users can reach Memory consent panel (P6 activation). */}
-                <Link href="/settings" onClick={() => setMobileMenuOpen(false)} className="block text-base font-serif font-semibold text-center py-2" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-settings">
-                  Settings
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Login</button>
-                </Link>
-                <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="btn-secondary w-full" data-testid="button-mobile-getstarted">Get Started Free</button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </nav>
-
 
       <section id="home" className="canva-landing-hero-polish relative py-16 md:py-20 lg:py-28 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 40%, var(--glp-teal-50) 100%)' }}>
         {/* Warm cream overlay — additive layer above the sage→teal gradient
