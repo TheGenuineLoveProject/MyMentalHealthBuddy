@@ -18,7 +18,9 @@
     "scan:trust": "node scripts/scan-trust-routes.mjs",
     "scan:routes": "node scripts/scan-route-governance.mjs",
     "audit:duplicates": "node scripts/audit-duplicate-routes.mjs",
-    "export:route-governance": "node scripts/export-route-governance.mjs"
+    "export:route-governance": "node scripts/export-route-governance.mjs",
+    "governance:copyright": "node governance/copyrightScanner.mjs",
+    "verify:all": "node scripts/verify-all.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
@@ -107,6 +109,7 @@
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "broken-link-checker": "^0.7.8",
     "lighthouse": "^12.8.2",
     "nodemon": "^3.1.14",
     "pm2": "^7.0.1",
