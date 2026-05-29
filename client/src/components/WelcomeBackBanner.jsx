@@ -68,7 +68,9 @@ export default function WelcomeBackBanner() {
 
   // Hide on safety-critical routes so we never visually compete with /crisis.
   const onCrisis = location === "/crisis" || location.startsWith("/crisis/");
-  if (!visible || onCrisis) return null;
+  // Homepage suppression: keep the landing page to a single clean nav surface.
+  const onHome = location === "/";
+  if (!visible || onCrisis || onHome) return null;
 
   const ctaHref = isAuthed() ? "/chat" : "/login";
 
