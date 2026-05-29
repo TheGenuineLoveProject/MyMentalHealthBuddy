@@ -1,15 +1,16 @@
-import SacredNav from "@/components/SacredNav.jsx";
 import SafetyFooter from "@/components/safety/LegalFooter";
 
 /**
  * PageLayout — canonical wrapper for direct-routed public pages.
  *
- * Bundles the global navigation (SacredNav) + a centered max-width content
- * region + the trauma-informed SafetyFooter (with crisis link by default).
+ * Provides a centered max-width content region + the trauma-informed
+ * SafetyFooter (with crisis link by default).
  *
- * Use this for any page that doesn't already go through PageTemplate /
- * SacredLayout / WellnessPageShell.  Pages that already have one of those
- * wrappers should NOT be re-wrapped — that would render two navs.
+ * Phase 157: the inline <SacredNav /> render was removed. The global
+ * <TglpNavbar /> (mounted once in App.jsx) is the single canonical navbar,
+ * so rendering SacredNav here produced a second, duplicate navbar on
+ * PageLayout pages (e.g. /faq, /tools/affirmations). SacredNav's links are
+ * a strict subset of TglpNavbar, so no navigation is lost.
  *
  * Notes:
  * - We intentionally use a <div> rather than a second <main> because
@@ -41,7 +42,6 @@ export default function PageLayout({
       style={style}
       data-testid="page-layout"
     >
-      <SacredNav />
       <div
         className={`flex-1 w-full mx-auto ${maxWidth} ${padded ? "px-4 sm:px-6 py-10 sm:py-12" : ""} ${innerClassName}`}
       >

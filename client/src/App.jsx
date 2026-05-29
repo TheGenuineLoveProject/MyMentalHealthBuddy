@@ -43,7 +43,6 @@ const AccessibilityToolbar = lazy(() => import("./components/AccessibilityToolba
 import ToastContainer from "./components/ui/toast-container";
 import './index.css'; // Your Tailwind import
 const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
-import CanonicalNavbar from "./components/navigation/CanonicalNavbar.jsx";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
@@ -403,10 +402,13 @@ export default function App() {
           <ErrorBoundary>
             <PageViewTracker />
             <SkipToContent />
-            <CanonicalNavbar />
-            {/* Phase 153: global navbar mount — single source of truth.
+            {/* Phase 153: global navbar mount — single source of truth (TglpNavbar).
                 Inline mounts removed from TalkTopics/SafetyPage/Newsletter/
-                BlogIndex/BlogPost/BlogEditor to prevent double render. */}
+                BlogIndex/BlogPost/BlogEditor to prevent double render.
+                Phase 157: removed duplicate global <CanonicalNavbar /> that
+                rendered a second sticky desktop navbar above TglpNavbar on
+                every route. TglpNavbar is the single canonical navbar (mobile
+                drawer + Tools from WELLNESS_HUB_TOOLS registry). */}
             <SafeBoundary label="Navbar">
               <TglpNavbar />
             </SafeBoundary>

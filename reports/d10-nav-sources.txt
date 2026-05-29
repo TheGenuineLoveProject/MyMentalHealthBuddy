@@ -1,0 +1,583 @@
+client/src/pages/admin/_adminToolsShared.js:131:  "dependency-missing": { suggestion: "Required dependency or service unavailable. Perplexity KB: Check that all third-party services (Stripe, Resend, OpenAI, Perplexity) have valid API keys configured.", action: "Verify service API keys", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:162:  "upstream-503": { suggestion: "Upstream service temporarily unavailable. Canva KB: External dependency is under maintenance or experiencing issues. Check service status pages.", action: "Check upstream service status", knowledgeBase: "Canva", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:229:  "accessibility-violation": { suggestion: "Accessibility standards violation detected. Codex KB: Check WCAG AA compliance — missing alt text, inadequate contrast, missing ARIA labels, or keyboard navigation issues.", action: "Fix accessibility issues", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:347:      { id: "purpose-compass", label: "Purpose Compass", endpoint: "/api/purpose-compass", icon: Compass, desc: "Purpose navigation" },
+client/src/pages/admin/AdminPublishing.jsx:14:    navigator.clipboard.writeText(text);
+client/src/pages/admin/SocialStudioAdmin.jsx:152:    await navigator.clipboard.writeText(text);
+client/src/pages/admin/NarrativeDrafts.jsx:110:    navigator.clipboard.writeText(text);
+client/src/pages/admin/RevenueAdmin.jsx:57:  if (hasError) return <AdminErrorBanner title="Unable to load revenue data" message="The billing service may be temporarily unavailable." onRetry={refetch} />;
+client/src/pages/admin/NewsletterAdmin.jsx:32:  if (error) return <AdminErrorBanner title="Unable to load newsletter data" message="The newsletter service may be temporarily unavailable." onRetry={refetch} />;
+client/src/pages/admin/FeedbackAggregator.jsx:81:  if (isError) return <AdminErrorBanner title="Unable to load feedback" message="The feedback service may be temporarily unavailable." onRetry={refetch} />;
+client/src/pages/admin/AdminSocial.jsx:72:      await navigator.clipboard.writeText(text);
+client/src/pages/admin/AdminPublishingToday.jsx:24:      await navigator.clipboard.writeText(text);
+client/src/pages/admin/NarrativeOpsConsole.jsx:64:    navigator.clipboard.writeText(text || "").then(() => {
+client/src/pages/admin/SocialGenerator.jsx:58:  const [, navigate] = useLocation();
+client/src/pages/admin/SocialGenerator.jsx:85:      navigate("/admin/social");
+client/src/pages/admin/SocialGenerator.jsx:724:                              navigator.clipboard.writeText(formatted);
+client/src/pages/admin/SocialDashboard.jsx:307:          This page is being refined. Use the navigation to explore tools while we finish this section.
+client/src/pages/account/Security.jsx:131:    navigator.clipboard.writeText(backupCodes.join("\n"));
+client/src/pages/hubs/HubsIndexPage.jsx:303:  const [, navigate] = useLocation();
+client/src/pages/hubs/HubsIndexPage.jsx:353:              onClick={() => navigate(hub.href)}
+client/src/pages/hubs/HubsIndexPage.jsx:354:              onKeyDown={(e) => e.key === 'Enter' && navigate(hub.href)}
+client/src/pages/hubs/GriefHubPage.jsx:47:      description="Gentle educational resources for navigating grief and loss. Find comfort, understanding, and tools for healing at your own pace."
+client/src/pages/hubs/GriefHubPage.jsx:51:      subtitle="Gentle tools for navigating loss"
+client/src/pages/hubs/SelfAwarenessHubPage.jsx:55:        why: "The more you understand yourself, the better you can navigate life.",
+client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx:47:      description="Educational tools for developing emotional intelligence. Learn to understand, navigate, and express your emotions with greater skill and awareness."
+client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx:51:      subtitle="Tools for understanding and navigating emotions"
+client/src/pages/pathways/ReflectionHistory.jsx:37:  const [, navigate] = useLocation();
+client/src/pages/pathways/ReflectionHistory.jsx:115:      navigate("/journal");
+client/src/pages/pathways/ReflectionHistory.jsx:117:      navigate("/mood");
+client/src/pages/pathways/ReflectionHistory.jsx:119:      navigate("/hubs/gratitude");
+client/src/pages/pathways/ReflectionHistory.jsx:121:      navigate("/reflect");
+client/src/pages/pathways/PathwaysHome.jsx:27:    description: "Understand and navigate your emotions with clarity.",
+client/src/pages/tools/BoundaryBuilderTool.jsx:66:      await navigator.clipboard.writeText(statement);
+client/src/pages/tools/RepairScript.jsx:46:    await navigator.clipboard.writeText(customScript);
+client/src/pages/tools/Reframe.jsx:58:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-nav">
+client/src/pages/tools/BreathingTool.jsx:12: * Safety: every phase exposes /crisis in the nav.
+client/src/pages/tools/BreathingTool.jsx:183:        <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
+client/src/pages/tools/BreathingTool.jsx:196:        </nav>
+client/src/pages/_quarantine/legacy-landing/Home.jsx:171:        <nav 
+client/src/pages/_quarantine/legacy-landing/Home.jsx:173:          aria-label="Main navigation"
+client/src/pages/_quarantine/legacy-landing/Home.jsx:218:              data-testid="link-pricing-nav"
+client/src/pages/_quarantine/legacy-landing/Home.jsx:230:        </nav>
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:62:        <nav className="flex items-center gap-3 text-sm">
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:63:          <Link href="/blog" className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-nav-blog">Blog</Link>
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:64:          <Link href="/login" className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-nav-login">Sign in</Link>
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:68:            data-testid="link-nav-register"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:75:            data-testid="link-nav-crisis"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:79:        </nav>
+client/src/pages/AboutApproachPage.jsx:8:        <nav className="mb-8" aria-label="Breadcrumb">
+client/src/pages/AboutApproachPage.jsx:14:        </nav>
+client/src/pages/Analytics.jsx:229:            <nav className="text-center">
+client/src/pages/Analytics.jsx:238:            </nav>
+client/src/pages/ContentIndexPage.jsx:16:  { name: "Atlas Dashboard", path: "/atlas", description: "Intellectual navigation center", category: "Advanced Tools", icon: Globe, protected: true },
+client/src/pages/ContentIndexPage.jsx:80:  { name: "Wellness Hub", path: "/wellness-hub", description: "Central wellness navigation", category: "Wellness", icon: Compass },
+client/src/pages/ContentIndexPage.jsx:249:          <div className="flex flex-wrap justify-center gap-1 mt-4" role="navigation" aria-label="Alphabetical navigation">
+client/src/pages/ContentIndexPage.jsx:267:                  data-testid={`nav-letter-${letter}`}
+client/src/pages/ControlDashboard.jsx:110:            <nav className="w-64 flex-shrink-0">
+client/src/pages/ControlDashboard.jsx:126:                        data-testid={`nav-${section.id}`}
+client/src/pages/ControlDashboard.jsx:163:            </nav>
+client/src/pages/ControlDashboard.jsx:828:                  onClick={() => { navigator.clipboard?.writeText("glp_prod_****"); toast({ title: "Copied", description: "Production API key copied to clipboard" }); }}
+client/src/pages/ControlDashboard.jsx:850:                  onClick={() => { navigator.clipboard?.writeText("glp_dev_****"); toast({ title: "Copied", description: "Development API key copied to clipboard" }); }}
+client/src/pages/DesignSystem.jsx:3:import { Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen, MessageCircle, LogIn, ChevronRight, Smartphone, Tablet, Monitor, Check, Sparkles, Menu, Bell, Search, Filter, Star, TrendingUp, Users, FileText, PenLine, BarChart3, Shield, Eye, Edit, Trash, ExternalLink } from 'lucide-react';
+client/src/pages/DesignSystem.jsx:101:          <nav className="sticky top-24 space-y-1">
+client/src/pages/DesignSystem.jsx:117:          </nav>
+client/src/pages/DesignSystem.jsx:441:                      <span className="nav-link" style={{ color: 'var(--deep-teal)' }}>Home</span>
+client/src/pages/DesignSystem.jsx:442:                      <span className="nav-link" style={{ color: 'var(--charcoal)' }}>Features</span>
+client/src/pages/DesignSystem.jsx:443:                      <span className="nav-link" style={{ color: 'var(--charcoal)' }}>About</span>
+client/src/pages/DesignSystem.jsx:610:                        <li>• Navigation Menu</li>
+client/src/pages/DesignSystem.jsx:907:                        { comp: "Navigation", mobile: "Hamburger menu", tablet: "Collapsed sidebar", desktop: "Full horizontal nav" },
+client/src/pages/DesignSystem.jsx:910:                        { comp: "Sidebar", mobile: "Hidden (drawer)", tablet: "Collapsed icons", desktop: "Full with labels" },
+client/src/pages/DesignSystem.jsx:963:                      "Semantic HTML (header, main, nav, footer)",
+client/src/pages/DesignSystem.jsx:1075:                  Three-column navigation for quick access to Community, Crisis Support, and Tools.
+client/src/pages/DesignSystem.jsx:1294:                        { el: "Header Nav", id: "#main-nav", cls: ".canva-header", test: "nav-main" },
+client/src/pages/DesignSystem.jsx:1320:                    { tag: "role", example: 'role="tab"', usage: "Tab navigation" },
+client/src/pages/DesignSystem.jsx:1401:                      "Support keyboard navigation",
+client/src/pages/DesignSystem.jsx:1403:                      "Use semantic HTML (nav, main, section)"
+client/src/pages/Invite.jsx:47:      await navigator.clipboard.writeText(inviteLink);
+client/src/pages/PracticeLibrary.jsx:16:  const [, navigate] = useLocation();
+client/src/pages/PracticeLibrary.jsx:210:                onClick={() => navigate(tool.href)}
+client/src/pages/PracticeLibrary.jsx:211:                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), navigate(tool.href))}
+client/src/pages/PracticeLibrary.jsx:286:                  onClick={() => navigate("/twelve-practices")}
+client/src/pages/PracticeLibrary.jsx:287:                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), navigate("/twelve-practices"))}
+client/src/pages/ValuesPage.jsx:51:        <nav className="mb-8" aria-label="Breadcrumb">
+client/src/pages/ValuesPage.jsx:56:        </nav>
+client/src/pages/LearnGuides.jsx:28:            Comprehensive guides to help you navigate your healing path with confidence and clarity.
+client/src/pages/LearnHub.jsx:10:    desc: "Step-by-step guides to help you navigate your healing path with confidence.",
+client/src/pages/CRMPage.jsx:69:        <nav className="border-b sticky top-0 z-50 backdrop-blur-lg" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-20)' }}>
+client/src/pages/CRMPage.jsx:109:        </nav>
+client/src/pages/WireframeTemplates.jsx:23: * - Keyboard navigation support
+client/src/pages/WireframeTemplates.jsx:31:import { Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen, MessageCircle, LogIn, Sparkles, Menu, Settings, Search, Plus, Filter, TrendingUp, Users, FileText, Shield, Lock, Clock, Zap, Eye, Check, AlertCircle, Download, Copy, Code, Smartphone, Tablet, Monitor } from 'lucide-react';
+client/src/pages/WireframeTemplates.jsx:72:          Export: header.html, navbar.css
+client/src/pages/WireframeTemplates.jsx:132:            Tags: Sidebar, Navigation, Menu
+client/src/pages/WireframeTemplates.jsx:133:            Export: sidebar.html, sidebar.css
+client/src/pages/WireframeTemplates.jsx:137:          role="navigation"
+client/src/pages/WireframeTemplates.jsx:138:          aria-label="Template navigation"
+client/src/pages/WireframeTemplates.jsx:140:          <nav className="sticky top-24 space-y-2">
+client/src/pages/WireframeTemplates.jsx:197:          </nav>
+client/src/pages/WireframeTemplates.jsx:306:      <nav 
+client/src/pages/WireframeTemplates.jsx:309:        role="navigation"
+client/src/pages/WireframeTemplates.jsx:310:        aria-label="Main navigation"
+client/src/pages/WireframeTemplates.jsx:312:        data-export="navbar.html"
+client/src/pages/WireframeTemplates.jsx:318:        <div className="hidden md:flex items-center gap-6 text-sm" data-slot="nav-links">
+client/src/pages/WireframeTemplates.jsx:328:            data-testid="button-signup-nav"
+client/src/pages/WireframeTemplates.jsx:333:      </nav>
+client/src/pages/WireframeTemplates.jsx:517:          <nav className="flex gap-6 text-sm" aria-label="Footer navigation">
+client/src/pages/WireframeTemplates.jsx:521:          </nav>
+client/src/pages/WireframeTemplates.jsx:643:          <div className="flex gap-4" data-slot="navigation-buttons">
+client/src/pages/WireframeTemplates.jsx:682: * Export Tags: daily-focus, quick-nav, activity-feed, sidebar
+client/src/pages/WireframeTemplates.jsx:691:        role="navigation"
+client/src/pages/WireframeTemplates.jsx:692:        aria-label="Main navigation"
+client/src/pages/WireframeTemplates.jsx:694:        data-export="sidebar.html"
+client/src/pages/WireframeTemplates.jsx:702:        <nav className="flex-1 space-y-2">
+client/src/pages/WireframeTemplates.jsx:718:              data-testid={`link-nav-${item.label.toLowerCase().replace(' ', '-')}`}
+client/src/pages/WireframeTemplates.jsx:725:        </nav>
+client/src/pages/WireframeTemplates.jsx:770:          data-export="quick-nav.html"
+client/src/pages/WireframeTemplates.jsx:1012:      <nav 
+client/src/pages/WireframeTemplates.jsx:1034:      </nav>
+client/src/pages/WireframeTemplates.jsx:1394:          onClick={() => navigator.clipboard.writeText(templateCode)}
+client/src/pages/LumiV6Preview.jsx:69:        <nav className="mb-6 flex items-center justify-between text-sm">
+client/src/pages/LumiV6Preview.jsx:80:        </nav>
+client/src/pages/ResetPassword.jsx:35:          This page is being refined. Use the navigation to explore tools while we finish this section.
+client/src/pages/Blog.jsx:167:      <p>Have you ever wondered why your heart races before a difficult conversation? Or why you freeze when you feel overwhelmed? Your nervous system is constantly working to keep you safe—and understanding it can transform how you navigate life's challenges.</p>
+client/src/pages/AdaptiveCompanionPage.tsx:48:  { id: "mindscape-navigator", name: "Mindscape Navigator", route: "/advanced", category: "advanced", icon: Compass, reason: "Navigate your mental landscape", duration: "15 min", intensity: "moderate" },
+client/src/pages/AdaptiveCompanionPage.tsx:78:      "self-awareness": ["belief-mapping", "metacognition", "mindscape-navigator"],
+client/src/pages/AdaptiveCompanionPage.tsx:82:      "resilience": ["existential-inquiry", "values-clarification", "mindscape-navigator"],
+client/src/pages/Admin.jsx:327:        <nav className="flex items-center gap-3 mb-10 overflow-x-auto pb-3 scrollbar-hide" role="tablist" aria-label="Admin navigation">
+client/src/pages/Admin.jsx:340:                data-testid={`nav-${item.id}`}
+client/src/pages/Admin.jsx:341:                id={`nav-${item.id}`}
+client/src/pages/Admin.jsx:351:        </nav>
+client/src/pages/Admin.jsx:360:              <div role="tabpanel" id="panel-overview" aria-labelledby="nav-overview">
+client/src/pages/Admin.jsx:365:              <div role="tabpanel" id="panel-users" aria-labelledby="nav-users">
+client/src/pages/Admin.jsx:370:              <div role="tabpanel" id="panel-engagement" aria-labelledby="nav-engagement">
+client/src/pages/Admin.jsx:375:              <div role="tabpanel" id="panel-content" aria-labelledby="nav-content">
+client/src/pages/Admin.jsx:380:              <div role="tabpanel" id="panel-system" aria-labelledby="nav-system">
+client/src/pages/Admin.jsx:385:              <div role="tabpanel" id="panel-security" aria-labelledby="nav-security">
+client/src/pages/Admin.jsx:390:              <div role="tabpanel" id="panel-operations" aria-labelledby="nav-operations">
+client/src/pages/Admin.jsx:397:              <div role="tabpanel" id="panel-sop-monitor" aria-labelledby="nav-sop-monitor">
+client/src/pages/CognitiveArchitecturePage.tsx:90:  { id: "redundancy", name: "Redundancy", category: "Risk", description: "Build backup systems. Critical functions should have multiple fail-safes.", example: "Airplanes have multiple engines and backup navigation systems.", application: "For anything critical, ask: What's my backup? What if the primary fails?", tags: ["risk", "resilience", "planning"] },
+client/src/pages/DailyWisdomOraclePage.tsx:181:    await navigator.clipboard.writeText(`"${todaysWisdom.text}" — ${todaysWisdom.source}`);
+client/src/pages/GuidedJournalingPage.tsx:31:    description: "Gentle practices for navigating anxious moments with self-compassion",
+client/src/pages/GuidedJournalingPage.tsx:38:      "Write a letter to your younger self about what you've learned about navigating difficult feelings.",
+client/src/pages/MasteryToolsPage.tsx:99:          <nav className="grid grid-cols-3 gap-4 mb-8">
+client/src/pages/MasteryToolsPage.tsx:126:          </nav>
+client/src/pages/MetaLearningPage.tsx:86:          This page is being refined. Use the navigation to explore tools while we finish this section.
+client/src/pages/QAPage.jsx:25:    answer: "Start with the Wellness Hub - it's your central navigation point. From there, we recommend beginning with Daily Routines for structure, then exploring Breathing or Grounding for immediate stress relief. The How-To Guides provide step-by-step instructions for every tool."
+client/src/pages/SocialHub.jsx:53:    navigator.clipboard.writeText(template.template);
+client/src/pages/SocialHub.jsx:89:    navigator.clipboard.writeText(randomCaption);
+client/src/pages/SupportPage.tsx:12:    await navigator.clipboard.writeText(supportEmail);
+client/src/pages/WisdomToolsPage.tsx:134:          <nav className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+client/src/pages/WisdomToolsPage.tsx:161:          </nav>
+client/src/pages/AtlasDashboard.tsx:77:      { id: "paradox-navigation", name: "Paradox Navigation", icon: Puzzle, description: "Navigate tensions without resolution" },
+client/src/pages/AtlasDashboard.tsx:107:      { id: "mindscape-navigator", name: "Mindscape Navigator", icon: Compass, description: "8 archetypal mind states" },
+client/src/pages/DailyRitualPage.tsx:167:          This page is being refined. Use the navigation to explore tools while we finish this section.
+client/src/pages/Start.tsx:91:    let method: "native" | "clipboard" | "unavailable" = "unavailable";
+client/src/pages/Start.tsx:93:      const nav = navigator as Navigator & { share?: (data: ShareData) => Promise<void> };
+client/src/pages/Start.tsx:94:      if (typeof nav.share === "function") {
+client/src/pages/Start.tsx:95:        await nav.share({ text: message });
+client/src/pages/Start.tsx:105:      await navigator.clipboard.writeText(message);
+client/src/pages/Start.tsx:112:      /* clipboard unavailable — silent. Still log the attempt for funnel
+client/src/pages/Start.tsx:113:         visibility, but mark method unavailable. */
+client/src/pages/Upgrade.jsx:41:          title: "Checkout unavailable",
+client/src/pages/Pricing.jsx:187:          title: "Checkout unavailable",
+client/src/pages/BreathingExercisesPage.jsx:164:          This page is being refined. Use the navigation to explore tools while we finish this section.
+client/src/pages/ProtocolSession.jsx:129:  const [, navigate] = useLocation();
+client/src/pages/ProtocolSession.jsx:175:      const t = setTimeout(() => navigate("/crisis"), 1500);
+client/src/pages/ProtocolSession.jsx:178:  }, [isEscalated, navigate]);
+client/src/pages/ProtocolBrowser.jsx:87:  const [, navigate] = useLocation();
+client/src/pages/ProtocolBrowser.jsx:113:      if (sid) navigate(`/protocols/session/${sid}`);
+client/src/pages/HowToGuidesPage.jsx:186:      "Create a 'self-care menu' for different situations",
+client/src/pages/ContentStudioPage.tsx:123:    navigator.clipboard.writeText(text);
+client/src/pages/BehaviorChangePage.jsx:205:          example: "To reduce TV time: unplug the TV and put the remote in a drawer. The effort of setup gives you a moment to choose consciously."
+client/src/pages/Dashboard.jsx:231:          <section className="mb-8 grid grid-cols-3 gap-4" aria-label="Quick navigation" data-testid="section-quick-nav">
+client/src/pages/DesignSystemV2.jsx:109:            <nav style={{ display: "flex", gap: 8, alignItems: "center" }}>
+client/src/pages/DesignSystemV2.jsx:110:              <Link href="/" className="lumi-link-nav" data-testid="link-home">Home</Link>
+client/src/pages/DesignSystemV2.jsx:111:              <a href="#mascot" className="lumi-link-nav" data-testid="link-mascot">Mascot</a>
+client/src/pages/DesignSystemV2.jsx:112:              <a href="#colors" className="lumi-link-nav" data-testid="link-colors">Colors</a>
+client/src/pages/DesignSystemV2.jsx:113:              <a href="#typography" className="lumi-link-nav" data-testid="link-typography">Type</a>
+client/src/pages/DesignSystemV2.jsx:114:              <a href="#buttons" className="lumi-link-nav" data-testid="link-buttons">Buttons</a>
+client/src/pages/DesignSystemV2.jsx:116:            </nav>
+client/src/pages/DesignSystemV2.jsx:252:              <nav style={{ display: "flex", gap: 4 }}>
+client/src/pages/DesignSystemV2.jsx:253:                <a href="#colors" className="lumi-link-nav" aria-current="page" data-testid="lk-nav-active">Active nav</a>
+client/src/pages/DesignSystemV2.jsx:254:                <a href="#colors" className="lumi-link-nav" data-testid="lk-nav">Resting nav</a>
+client/src/pages/DesignSystemV2.jsx:256:              </nav>
+client/src/pages/DailyReflection.jsx:124:        <nav className="mb-8">
+client/src/pages/DailyReflection.jsx:133:        </nav>
+client/src/pages/CourseCatalog.jsx:85:      description: "Learn to navigate difficult emotions with grace and awareness",
+client/src/pages/AffirmationsPage.jsx:131:      "I trust my ability to navigate whatever comes next.",
+client/src/pages/AffirmationsPage.jsx:261:    await navigator.clipboard.writeText(affirmation);
+client/src/pages/GrowthPage.jsx:15:/*  Kept as gentle navigation companions to the dynamic mirror above.        */
+client/src/pages/GrowthPage.jsx:359:/*  Pillar / Path navigators (kept from prior version, unchanged behavior)   */
+client/src/pages/InnerChildPage.jsx:90:    woundOrigins: "Emotionally unavailable parents, conditional love, parentification, neglect, absence of physical affection",
+client/src/pages/InnerChildPage.jsx:114:    affirmation: "I have the right to my own choices. My voice matters. I trust myself to navigate my life.",
+client/src/pages/BoundariesPage.jsx:129:      await navigator.clipboard.writeText(text);
+client/src/pages/HealingJourneysPage.jsx:48:          { name: "Self-Care Menu Creation", description: "Build a personalized toolkit for different emotional states" },
+client/src/pages/GratitudePractice.jsx:124:        <nav className="mb-8">
+client/src/pages/GratitudePractice.jsx:134:        </nav>
+client/src/pages/EmotionalIntelligencePage.jsx:137:    description: "Managing relationships and navigating social situations effectively",
+client/src/pages/SystemMapPage.jsx:142:          This page is being refined. Use the navigation to explore tools while we finish this section.
+client/src/pages/NewsPage.jsx:46:    summary: "Map your inner landscape with our new tool. Track emotional states, discover transition patterns, and navigate your mental terrain with intention.",
+client/src/pages/NewsPage.jsx:124:          This page is being refined. Use the navigation to explore tools while we finish this section.
+client/src/pages/CelebrationFlow.jsx:144:        <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
+client/src/pages/CelebrationFlow.jsx:159:        </nav>
+client/src/pages/CheckIn.jsx:197:        <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
+client/src/pages/CheckIn.jsx:210:        </nav>
+client/src/pages/ChallengeDay.jsx:27:  const [, navigate] = useLocation();
+client/src/pages/TalkTopics.jsx:78:      { question: "How do you navigate setbacks without losing hope?", depth: 'advanced' },
+client/src/pages/TalkTopics.jsx:114:      { question: "How do you navigate days when motivation is low?", depth: 'advanced' },
+client/src/pages/CanvaLanding.jsx:4:import { Heart, Lightbulb, Users, Zap, BarChart3, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Brain, KeyRound, Settings, Eye, Compass, Sun, Feather, Waves, Fingerprint, HeartHandshake, Infinity } from 'lucide-react';
+client/src/pages/CanvaLanding.jsx:116:      description: "In sixty seconds, you'll enter a private space shaped entirely around how your mind works — your emotional rhythms, your stress patterns, your focus style, your deepest goals. No templates. No one-size-fits-all. Whether you're managing ADHD, navigating overwhelm, or simply seeking clarity, this sanctuary adapts to exactly where you are and evolves as you grow.",
+client/src/pages/CanvaLanding.jsx:231:      description: "Work pressure. Relationship tension. Financial worry. ADHD overwhelm. The invisible weight of daily responsibilities. Lumi helps you process all of it through advanced self-regulation techniques — not by avoiding stress, but by understanding the behavioral and cognitive mechanics behind it deeply enough to navigate any situation with wisdom, calm, and genuine resilience.",
+client/src/pages/CanvaLanding.jsx:259:      answer: "Imagine having a personal success coach, a wise mentor, a behavioral strategist, and a genuinely loyal friend — available 24/7, deeply invested in who you're becoming. That's your AI buddy. It's trained in metacognitive coaching, emotional intelligence, behavioral science, and active listening, paired with 500+ evidence-based tools for mastering everyday stressors from A to Z, building genuine confidence, deepening self-worth, developing self-regulation skills, and unlocking personal growth you can feel. Whether you're navigating ADHD, managing overwhelm, or seeking your fullest potential — this is the always-there companion that helps you understand your own mind from the inside out."
+client/src/pages/CanvaLanding.jsx:267:      answer: "Lumi is coach, mentor, behavioral guide, and friend — woven into one emotionally intelligent presence. It helps you navigate daily stressors with advanced self-regulation techniques, builds your confidence through strength-based coaching and precise cognitive reframing, develops your metacognitive skills so you can observe and evolve your own thinking patterns, and surfaces unconscious behaviors you couldn't see on your own. It remembers your story, adapts to your unique cognitive style, and evolves alongside you — like a wise friend who always knows when to challenge you, when to teach you, and when to just listen."
+client/src/pages/CanvaLanding.jsx:427:              500+ evidence-informed tools for mastering everyday stressors from A to Z, building genuine confidence, deepening self-worth, and developing the metacognitive skills to understand and evolve your own mind — guided by an AI buddy that truly listens, remembers what matters to you, and coaches you with the intelligence of a behavioral strategist, the wisdom of a mentor, and the warmth of a best friend. Whether you're managing ADHD, navigating overwhelm, or seeking your highest potential — this is the support that changes how you relate to your own mind.
+client/src/pages/CanvaLanding.jsx:605:            Most wellness apps are engineered to maximize your screen time. We built this to maximize your potential. Built using evidence-informed wellness principles, your AI buddy combines the strategic intelligence of a success coach, the patient wisdom of a mentor, the behavioral insight of a metacognitive guide, and the unconditional warmth of a genuine friend — alongside 500+ evidence-informed tools for mastering every stressor from A to Z, building genuine confidence, developing self-regulation skills, and understanding the cognitive patterns you've carried for years. Whether you're navigating ADHD, managing overwhelm, building emotional resilience, or seeking your fullest potential — this is the relationship with yourself you've been searching for.
+client/src/components/admin/AdminQueryStates.jsx:4:export function AdminErrorBanner({ title = "Unable to load data", message = "Authentication may be required or the service is temporarily unavailable.", onRetry, testId = "error-state" }) {
+client/src/components/admin/SOPMonitorPanel.jsx:14: * sign-in placeholder rather than a red "unavailable" alert. */
+client/src/components/admin/SOPMonitorPanel.jsx:164:            <h2 className="text-lg font-semibold mb-1" style={{ color: "var(--glp-ink)" }}>SOP Monitor unavailable</h2>
+client/src/components/admin/OrchestratorTestPanel.jsx:30:    /* storage unavailable */
+client/src/components/admin/AdminNavGrid.jsx:52:    <div className={styles.navGridContainer}>
+client/src/components/admin/AdminNavGrid.jsx:54:        <div key={si} className={styles.navSection}>
+client/src/components/admin/AdminNavGrid.jsx:55:          <h3 className={styles.navSectionTitle} data-testid={`nav-section-${si}`}>{section.title}</h3>
+client/src/components/admin/AdminNavGrid.jsx:56:          <div className={styles.navGrid}>
+client/src/components/admin/AdminNavGrid.jsx:63:                  className={styles.navCard}
+client/src/components/admin/AdminNavGrid.jsx:64:                  data-testid={`admin-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+client/src/components/admin/AdminNavGrid.jsx:66:                  <div className={styles.navCardIcon}>
+client/src/components/admin/AdminNavGrid.jsx:69:                  <div className={styles.navCardContent}>
+client/src/components/admin/AdminNavGrid.jsx:70:                    <span className={styles.navCardLabel}>{item.label}</span>
+client/src/components/admin/AdminNavGrid.jsx:71:                    <span className={styles.navCardDesc}>{item.desc}</span>
+client/src/components/admin/AdminNavGrid.jsx:73:                  <ArrowRight size={14} className={styles.navCardArrow} />
+client/src/components/admin/DailyToolsPanel.jsx:300:                    className={styles.navCard}
+client/src/components/admin/DailyToolsPanel.jsx:304:                    <div className={styles.navCardIcon} style={{ flexShrink: 0 }}>
+client/src/components/admin/DailyToolsPanel.jsx:308:                      <span className={styles.navCardLabel} style={{ fontSize: '0.82rem' }}>{tool.label}</span>
+client/src/components/admin/DailyToolsPanel.jsx:309:                      <span className={styles.navCardDesc} style={{ fontSize: '0.7rem' }}>{tool.desc}</span>
+client/src/components/admin/DailyOpsChecklist.jsx:175:              className={styles.navCard}
+client/src/components/admin/DailyOpsChecklist.jsx:197:              <div className={styles.navCardIcon} style={{ flexShrink: 0 }}>
+client/src/components/admin/DailyOpsChecklist.jsx:201:                <span className={styles.navCardLabel} style={{ fontSize: '0.82rem', textDecoration: isChecked ? 'line-through' : 'none' }}>{task.label}</span>
+client/src/components/admin/DailyOpsChecklist.jsx:202:                <span className={styles.navCardDesc} style={{ fontSize: '0.68rem' }}>
+client/src/components/chat/AIChatPanel.tsx:127:      <nav
+client/src/components/chat/AIChatPanel.tsx:128:        aria-label="Chat navigation"
+client/src/components/chat/AIChatPanel.tsx:130:        data-testid="nav-chat-breadcrumbs"
+client/src/components/chat/AIChatPanel.tsx:151:      </nav>
+client/src/components/layout/PageLayout.jsx:7: * Bundles the global navigation (SacredNav) + a centered max-width content
+client/src/components/layout/PageLayout.jsx:12: * wrappers should NOT be re-wrapped — that would render two navs.
+client/src/components/layout/Header.jsx:2:import { Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle, Heart, UserCircle } from "lucide-react";
+client/src/components/layout/Header.jsx:21:  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+client/src/components/layout/Header.jsx:29:  const [modeMenuOpen, setModeMenuOpen] = useState(false);
+client/src/components/layout/Header.jsx:52:        setModeMenuOpen(false);
+client/src/components/layout/Header.jsx:55:    if (modeMenuOpen) {
+client/src/components/layout/Header.jsx:59:  }, [modeMenuOpen]);
+client/src/components/layout/Header.jsx:73:  const navLinks = [
+client/src/components/layout/Header.jsx:130:        <nav className="hidden lg:flex items-center gap-2" aria-label="Main navigation">
+client/src/components/layout/Header.jsx:131:          {navLinks.map(({ href, label, icon: Icon }) => (
+client/src/components/layout/Header.jsx:136:              data-testid={`link-nav-${label.toLowerCase()}`}
+client/src/components/layout/Header.jsx:142:        </nav>
+client/src/components/layout/Header.jsx:149:              onClick={() => setModeMenuOpen(!modeMenuOpen)}
+client/src/components/layout/Header.jsx:156:            {modeMenuOpen && (
+client/src/components/layout/Header.jsx:164:                    onClick={() => { setMode(m); setModeMenuOpen(false); }}
+client/src/components/layout/Header.jsx:203:          {/* Mobile Menu Button */}
+client/src/components/layout/Header.jsx:206:            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+client/src/components/layout/Header.jsx:207:            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+client/src/components/layout/Header.jsx:208:            data-testid="button-mobile-menu"
+client/src/components/layout/Header.jsx:210:            {mobileMenuOpen ? (
+client/src/components/layout/Header.jsx:213:              <Menu className="w-6 h-6 text-[var(--glp-sage-deep)]" />
+client/src/components/layout/Header.jsx:219:      {/* Mobile Menu */}
+client/src/components/layout/Header.jsx:220:      {mobileMenuOpen && (
+client/src/components/layout/Header.jsx:222:          {navLinks.map(({ href, label, icon: Icon }) => (
+client/src/components/layout/Header.jsx:227:              onClick={() => setMobileMenuOpen(false)}
+client/src/components/layout/Header.jsx:262:              onClick={() => setMobileMenuOpen(false)}
+client/src/components/mi/ReframingToolkit.tsx:94:    navigator.clipboard.writeText(text);
+client/src/components/mindscape/MindscapeNavigator.tsx:69:        Your inner landscape has territories. This is a map to help you recognize where you are and navigate intentionally.
+client/src/components/mindscape/MindscapeNavigator.tsx:303:          States are temporary. This map helps you navigate, not judge where you are.
+client/src/components/modules/ModulesPanel.tsx:13:    await navigator.clipboard.writeText(text);
+client/src/components/referral/ReferralInvite.jsx:15:      await navigator.clipboard.writeText(referralLink);
+client/src/components/sacred/SacredFooter.jsx:134:        <nav 
+client/src/components/sacred/SacredFooter.jsx:136:          aria-label="Footer navigation"
+client/src/components/sacred/SacredFooter.jsx:212:        </nav>
+client/src/components/safety/LegalFooter.tsx:44:        <nav className="pt-4 flex flex-wrap justify-center gap-4 text-xs text-gray-500 dark:text-gray-400" aria-label="Legal links">
+client/src/components/safety/LegalFooter.tsx:54:        </nav>
+client/src/components/share/IdentityMirror.jsx:37:      await navigator.clipboard.writeText(shareText);
+client/src/components/share/InfinityHeartCard.jsx:33:      await navigator.clipboard.writeText(text);
+client/src/components/share/InfinityHeartCard.jsx:44:    if (navigator.share) {
+client/src/components/share/InfinityHeartCard.jsx:46:        await navigator.share({
+client/src/components/share/ReflectionCard.jsx:29:      await navigator.clipboard.writeText(text);
+client/src/components/share/ShareCardPrompt.tsx:72:    if (navigator.share && (quote || microTool)) {
+client/src/components/share/ShareCardPrompt.tsx:74:        await navigator.share({
+client/src/components/share/ShareCardPrompt.tsx:212:    if (navigator.share) {
+client/src/components/share/ShareCardPrompt.tsx:214:        await navigator.share({
+client/src/components/share/ShareModal.jsx:52:        await navigator.clipboard.writeText(shareUrl);
+client/src/components/share/StreakShare.jsx:40:      await navigator.clipboard.writeText(text);
+client/src/components/share/StreakShare.jsx:51:    if (navigator.share) {
+client/src/components/share/StreakShare.jsx:53:        await navigator.share({
+client/src/components/ui/CRMWidgets.jsx:235:      <nav className="space-y-2" aria-label="Quick actions">
+client/src/components/ui/CRMWidgets.jsx:256:      </nav>
+client/src/components/ui/QuoteBlock.jsx:114:        <div className="flex gap-2 mt-6" role="tablist" aria-label="Quote navigation">
+client/src/components/ui/QuoteBlock.jsx:171:        <div className="flex justify-center gap-3 mt-8" role="tablist" aria-label="Quote navigation">
+client/src/components/ui/dropdown-menu.tsx:9:interface DropdownMenuContextType {
+client/src/components/ui/dropdown-menu.tsx:14:const DropdownMenuContext = createContext<DropdownMenuContextType | null>(null);
+client/src/components/ui/dropdown-menu.tsx:16:function useDropdownMenu() {
+client/src/components/ui/dropdown-menu.tsx:17:  const context = useContext(DropdownMenuContext);
+client/src/components/ui/dropdown-menu.tsx:19:    throw new Error("DropdownMenu components must be used within a DropdownMenu");
+client/src/components/ui/dropdown-menu.tsx:24:function DropdownMenu({ children }: { children: ReactNode }) {
+client/src/components/ui/dropdown-menu.tsx:28:    <DropdownMenuContext.Provider value={{ open, setOpen }}>
+client/src/components/ui/dropdown-menu.tsx:32:    </DropdownMenuContext.Provider>
+client/src/components/ui/dropdown-menu.tsx:36:const DropdownMenuTrigger = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(
+client/src/components/ui/dropdown-menu.tsx:38:    const { open, setOpen } = useDropdownMenu();
+client/src/components/ui/dropdown-menu.tsx:47:        aria-haspopup="menu"
+client/src/components/ui/dropdown-menu.tsx:55:DropdownMenuTrigger.displayName = "DropdownMenuTrigger";
+client/src/components/ui/dropdown-menu.tsx:57:interface DropdownMenuContentProps extends HTMLAttributes<HTMLDivElement> {
+client/src/components/ui/dropdown-menu.tsx:62:const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
+client/src/components/ui/dropdown-menu.tsx:64:    const { open, setOpen } = useDropdownMenu();
+client/src/components/ui/dropdown-menu.tsx:101:        role="menu"
+client/src/components/ui/dropdown-menu.tsx:110:DropdownMenuContent.displayName = "DropdownMenuContent";
+client/src/components/ui/dropdown-menu.tsx:112:const DropdownMenuItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { inset?: boolean }>(
+client/src/components/ui/dropdown-menu.tsx:114:    const { setOpen } = useDropdownMenu();
+client/src/components/ui/dropdown-menu.tsx:119:        role="menuitem"
+client/src/components/ui/dropdown-menu.tsx:133:DropdownMenuItem.displayName = "DropdownMenuItem";
+client/src/components/ui/dropdown-menu.tsx:135:const DropdownMenuCheckboxItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { checked?: boolean }>(
+client/src/components/ui/dropdown-menu.tsx:139:      role="menuitemcheckbox"
+client/src/components/ui/dropdown-menu.tsx:151:DropdownMenuCheckboxItem.displayName = "DropdownMenuCheckboxItem";
+client/src/components/ui/dropdown-menu.tsx:153:const DropdownMenuLabel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { inset?: boolean }>(
+client/src/components/ui/dropdown-menu.tsx:162:DropdownMenuLabel.displayName = "DropdownMenuLabel";
+client/src/components/ui/dropdown-menu.tsx:164:const DropdownMenuSeparator = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+client/src/components/ui/dropdown-menu.tsx:173:DropdownMenuSeparator.displayName = "DropdownMenuSeparator";
+client/src/components/ui/dropdown-menu.tsx:175:const DropdownMenuShortcut = ({ className = "", ...props }: HTMLAttributes<HTMLSpanElement>) => (
+client/src/components/ui/dropdown-menu.tsx:181:DropdownMenuShortcut.displayName = "DropdownMenuShortcut";
+client/src/components/ui/dropdown-menu.tsx:184:  DropdownMenu,
+client/src/components/ui/dropdown-menu.tsx:185:  DropdownMenuTrigger,
+client/src/components/ui/dropdown-menu.tsx:186:  DropdownMenuContent,
+client/src/components/ui/dropdown-menu.tsx:187:  DropdownMenuItem,
+client/src/components/ui/dropdown-menu.tsx:188:  DropdownMenuCheckboxItem,
+client/src/components/ui/dropdown-menu.tsx:189:  DropdownMenuLabel,
+client/src/components/ui/dropdown-menu.tsx:190:  DropdownMenuSeparator,
+client/src/components/ui/dropdown-menu.tsx:191:  DropdownMenuShortcut,
+client/src/components/ui/Footer.jsx:35:          <nav aria-label="Footer navigation" className="flex flex-wrap justify-center gap-6 text-sm">
+client/src/components/ui/Footer.jsx:41:          </nav>
+client/src/components/wellness/HealingGraph.jsx:215:                aria-controls="time-range-menu"
+client/src/components/wellness/HealingGraph.jsx:225:                  id="time-range-menu"
+client/src/components/wellness/WeatherMoodSync.jsx:172:    if (!navigator.geolocation) {
+client/src/components/wellness/WeatherMoodSync.jsx:180:    navigator.geolocation.getCurrentPosition(
+client/src/components/wellness/WellnessPageShell.jsx:12:  { href: "/", label: "Home", icon: Home, testId: "quicknav-home" },
+client/src/components/wellness/WellnessPageShell.jsx:13:  { href: "/start", label: "Start", icon: Sparkles, testId: "quicknav-start" },
+client/src/components/wellness/WellnessPageShell.jsx:14:  { href: "/ai-chat", label: "Chat", icon: MessageCircle, testId: "quicknav-chat" },
+client/src/components/wellness/WellnessPageShell.jsx:15:  { href: "/journal", label: "Journal", icon: BookOpen, testId: "quicknav-journal" },
+client/src/components/wellness/WellnessPageShell.jsx:16:  { href: "/state", label: "Mood", icon: Activity, testId: "quicknav-mood" },
+client/src/components/wellness/WellnessPageShell.jsx:17:  { href: CRISIS_PATH, label: "Crisis", icon: LifeBuoy, testId: "quicknav-crisis" },
+client/src/components/wellness/WellnessPageShell.jsx:39:      <nav
+client/src/components/wellness/WellnessPageShell.jsx:40:        aria-label="Quick navigation"
+client/src/components/wellness/WellnessPageShell.jsx:42:        data-testid="wellness-quicknav"
+client/src/components/wellness/WellnessPageShell.jsx:55:      </nav>
+client/src/components/navigation/CanonicalNavbar.jsx:44:        <nav className="hidden flex-wrap items-center gap-2 lg:flex">
+client/src/components/navigation/CanonicalNavbar.jsx:72:        </nav>
+client/src/components/navigation/CanonicalNavbar.jsx:76:            Menu
+client/src/components/AffirmationCards.jsx:151:    if (navigator.share) {
+client/src/components/AffirmationCards.jsx:153:        await navigator.share({
+client/src/components/AffirmationCards.jsx:161:      navigator.clipboard.writeText(currentAffirmation);
+client/src/components/Breadcrumbs.jsx:8:    <nav 
+client/src/components/Breadcrumbs.jsx:11:      data-testid="nav-breadcrumbs"
+client/src/components/Breadcrumbs.jsx:50:    </nav>
+client/src/components/ContentStudio.jsx:185:        disclaimer: "Processing emotions can be intense. A therapist can help navigate particularly complex or overwhelming feelings.",
+client/src/components/ContentStudio.jsx:386:      await navigator.clipboard.writeText(text);
+client/src/components/DailyAffirmations.jsx:126:    if (navigator.share) {
+client/src/components/DailyAffirmations.jsx:128:        await navigator.share({
+client/src/components/DailyAffirmations.jsx:136:      navigator.clipboard.writeText(affirmation.text);
+client/src/components/DataExportButton.jsx:99:            data-testid="export-menu-overlay"
+client/src/components/EmotionCalendar.jsx:169:  const navigateMonth = (direction) => {
+client/src/components/EmotionCalendar.jsx:200:          <div className="flex items-center gap-1" role="group" aria-label="Month navigation">
+client/src/components/EmotionCalendar.jsx:204:              onClick={() => navigateMonth(-1)}
+client/src/components/EmotionCalendar.jsx:217:              onClick={() => navigateMonth(1)}
+client/src/components/FlowDiagram.jsx:7: * Shows the complete navigation flow between 7 core screens
+client/src/components/FlowDiagram.jsx:72:        aria-label="User flow diagram showing navigation between 7 core screens"
+client/src/components/GlobalSearch.jsx:216:            <span>navigate</span>
+client/src/components/GlowFooter.jsx:65:        <nav 
+client/src/components/GlowFooter.jsx:67:          aria-label="Footer navigation"
+client/src/components/GlowFooter.jsx:80:        </nav>
+client/src/components/ModeToggle.jsx:61:            data-testid="mode-toggle-menu"
+client/src/components/MoodInsight.jsx:16:      : "You've been navigating some emotional waves lately. Remember: this too shall pass.",
+client/src/components/OfflineIndicator.jsx:5:  const [isOnline, setIsOnline] = useState(navigator.onLine);
+client/src/components/ReadingLevelToggle.jsx:7: * - Radio inputs with keyboard navigation (Tab + Arrow keys)
+client/src/components/ReflectionInsights.jsx:23:    feeling: "navigating waves of uncertainty",
+client/src/components/ReminderScheduler.jsx:93:    if ("serviceWorker" in navigator) {
+client/src/components/ReminderScheduler.jsx:94:      navigator.serviceWorker.ready.then(registration => {
+client/src/components/ResponsiveWrapper.jsx:54:      const touchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+client/src/components/SkipToContent.jsx:7:      aria-label="Skip navigation and go directly to main content"
+client/src/components/SocialShare.jsx:18:      await navigator.clipboard.writeText(shareUrl);
+client/src/components/WeeklyReflection.jsx:106:  const navigateWeek = (direction) => {
+client/src/components/WeeklyReflection.jsx:169:            onClick={() => navigateWeek(-1)}
+client/src/components/WeeklyReflection.jsx:187:            onClick={() => navigateWeek(1)}
+client/src/components/AdminGuard.jsx:56:        // sessionStorage unavailable (e.g. private mode) — fall through.
+client/src/components/SacredNav.jsx:3:import { Menu, X, Heart, Home, BookOpen, LayoutDashboard, Sparkles, LogOut, Wrench, Newspaper, Crown } from "lucide-react";
+client/src/components/SacredNav.jsx:7:// Public navigation order, advisor-aligned: Home → Wellness → Tools →
+client/src/components/SacredNav.jsx:10:// brand-aligned icon so the nav reads at a glance.
+client/src/components/SacredNav.jsx:43:  const toggleMenu = () => setIsOpen(!isOpen);
+client/src/components/SacredNav.jsx:46:    <nav 
+client/src/components/SacredNav.jsx:54:      role="navigation"
+client/src/components/SacredNav.jsx:55:      aria-label="Main navigation"
+client/src/components/SacredNav.jsx:112:                  data-testid={`nav-${label.toLowerCase()}`}
+client/src/components/SacredNav.jsx:151:              onClick={toggleMenu}
+client/src/components/SacredNav.jsx:154:              aria-controls="mobile-menu"
+client/src/components/SacredNav.jsx:155:              aria-label="Toggle menu"
+client/src/components/SacredNav.jsx:156:              data-testid="button-menu-toggle"
+client/src/components/SacredNav.jsx:158:              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+client/src/components/SacredNav.jsx:165:            id="mobile-menu"
+client/src/components/SacredNav.jsx:185:                    data-testid={`nav-mobile-${label.toLowerCase()}`}
+client/src/components/SacredNav.jsx:205:    </nav>
+client/src/components/FeedbackPrompt.tsx:36:  // accepts the POST. Fail-soft: returns null if storage is unavailable.
+client/src/components/UpsellModal.jsx:14:  const [, navigate] = useLocation();
+client/src/components/UpsellModal.jsx:21:      // exit immediately without navigating to the upgrade CTA.
+client/src/components/UpsellModal.jsx:116:          onClick={() => navigate('/register')}
+client/src/components/ShareableReflectionCard.jsx:58:      await navigator.clipboard.writeText(reflection);
+client/src/components/ShareableReflectionCard.jsx:67:    if (navigator.share) {
+client/src/components/ShareableReflectionCard.jsx:69:        await navigator.share({
+client/src/components/Header.jsx:29:  const navItems = [
+client/src/components/Header.jsx:68:        <nav className="flex flex-1 items-center justify-end gap-1" aria-label="Main navigation">
+client/src/components/Header.jsx:69:          {navItems.map(({ href, label, icon: Icon }) => (
+client/src/components/Header.jsx:74:              data-testid={`nav-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+client/src/components/Header.jsx:83:            data-testid="nav-login"
+client/src/components/Header.jsx:91:            data-testid="nav-get-started"
+client/src/components/Header.jsx:95:        </nav>
+client/src/components/WelcomeBackBanner.jsx:7: *   2. On subsequent navigations within the same tab session: show the banner.
+client/src/components/ReturnLoop.jsx:6: *      browser session — guarded by sessionStorage flag so SPA navs don't
+client/src/components/ReturnLoop.jsx:154:      /* lumi-memory unavailable — keep random fallback (v5.6 behavior) */
+client/src/components/Footer.jsx:31:          <nav className="flex flex-wrap gap-6 text-sm font-medium" aria-label="Footer navigation">
+client/src/components/Footer.jsx:32:            <Link href="/" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-home">
+client/src/components/Footer.jsx:35:            <Link href="/about" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-about">
+client/src/components/Footer.jsx:38:            <Link href="/tools" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-tools">
+client/src/components/Footer.jsx:41:            <Link href="/journal" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-journal">
+client/src/components/Footer.jsx:44:            <Link href="/wisdom" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-wisdom">
+client/src/components/Footer.jsx:47:            <Link href="/blog" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-blog">
+client/src/components/Footer.jsx:51:            <Link href="/newsletter" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-newsletter">
+client/src/components/Footer.jsx:55:            <Link href="/settings" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-settings">
+client/src/components/Footer.jsx:59:            <Link href="/disclaimer" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-disclaimer">
+client/src/components/Footer.jsx:62:            <Link href="/crisis" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-crisis">
+client/src/components/Footer.jsx:66:          </nav>
+client/src/components/SocialLinks.jsx:39:      <nav 
+client/src/components/SocialLinks.jsx:62:      </nav>
+client/src/components/SocialLinks.jsx:68:      <nav 
+client/src/components/SocialLinks.jsx:94:      </nav>
+client/src/components/BrandShell.jsx:55:          <nav
+client/src/components/BrandShell.jsx:57:            aria-label="Main navigation"
+client/src/components/BrandShell.jsx:58:            data-testid="nav-main"
+client/src/components/BrandShell.jsx:69:          </nav>
+client/src/components/PageTemplate.jsx:740:        if (section.type === 'navigation' && section.links) {
+client/src/components/PageTemplate.jsx:745:              className={styles.navigationSection}
+client/src/components/PageTemplate.jsx:749:              <h2 className={styles.navigationSectionTitle}>{section.title}</h2>
+client/src/components/PageTemplate.jsx:750:              <div className={styles.navigationLinks}>
+client/src/components/PageTemplate.jsx:755:                    className={styles.navigationLink}
+client/src/components/PageTemplate.jsx:761:                    <ArrowRight className={styles.navLinkIcon} />
+client/src/components/PageTemplate.jsx:1008:        <nav 
+client/src/components/PageTemplate.jsx:1009:          className={styles.nav}
+client/src/components/PageTemplate.jsx:1010:          aria-label="Main navigation"
+client/src/components/PageTemplate.jsx:1012:          <Link href="/" className={styles.navLogo} data-testid="link-nav-logo">
+client/src/components/PageTemplate.jsx:1013:            <div className={styles.navLogoIcon} style={{ overflow: 'visible', background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10, rgba(47,84,67,0.1)) 0%, transparent 72%)' }}>
+client/src/components/PageTemplate.jsx:1014:              <MMHBFloatAvatar imageSrc={getOfficialLumi("calm")} size={32} alt="Lumi mark" data-testid="img-nav-logo-lumi" />
+client/src/components/PageTemplate.jsx:1016:            <span className={styles.navLogoText}>
+client/src/components/PageTemplate.jsx:1021:          <div className={styles.navActions}>
+client/src/components/PageTemplate.jsx:1026:                className={styles.navReadingToggle}
+client/src/components/PageTemplate.jsx:1031:              className={styles.navSignIn}
+client/src/components/PageTemplate.jsx:1032:              data-testid="link-nav-signin"
+client/src/components/PageTemplate.jsx:1037:        </nav>
+client/src/components/ToolCard.tsx:7: * wouter so client navigation stays intact.
+client/src/components/TglpNavbar.jsx:3:  Sparkles, BookOpen, LayoutDashboard, Heart, Menu, X, Home, MessageCircle,
+client/src/components/TglpNavbar.jsx:31:// Phase 153: full nav surface — every link below is route-verified live in App.jsx.
+client/src/components/TglpNavbar.jsx:89:        aria-haspopup="menu"
+client/src/components/TglpNavbar.jsx:91:        data-testid={`button-nav-${id}`}
+client/src/components/TglpNavbar.jsx:100:          role="menu"
+client/src/components/TglpNavbar.jsx:102:          data-testid={`menu-nav-${id}`}
+client/src/components/TglpNavbar.jsx:108:              role="menuitem"
+client/src/components/TglpNavbar.jsx:129:  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+client/src/components/TglpNavbar.jsx:153:      data-testid="navbar-main"
+client/src/components/TglpNavbar.jsx:187:        <nav className="flex items-center gap-2 md:gap-3 shrink-0" aria-label="Main navigation">
+client/src/components/TglpNavbar.jsx:227:                  data-testid="link-navbar-upgrade"
+client/src/components/TglpNavbar.jsx:266:          {/* Mobile Menu Button */}
+client/src/components/TglpNavbar.jsx:269:            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+client/src/components/TglpNavbar.jsx:270:            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+client/src/components/TglpNavbar.jsx:271:            aria-expanded={mobileMenuOpen}
+client/src/components/TglpNavbar.jsx:272:            data-testid="button-mobile-menu"
+client/src/components/TglpNavbar.jsx:274:            {mobileMenuOpen ? (
+client/src/components/TglpNavbar.jsx:277:              <Menu className="w-6 h-6 text-[var(--glp-sage-deep)]" />
+client/src/components/TglpNavbar.jsx:280:        </nav>
+client/src/components/TglpNavbar.jsx:283:      {/* Mobile Menu — full surface, grouped sections, scrollable */}
+client/src/components/TglpNavbar.jsx:284:      {mobileMenuOpen && (
+client/src/components/TglpNavbar.jsx:287:          data-testid="menu-mobile"
+client/src/components/TglpNavbar.jsx:312:              onClick={() => setMobileMenuOpen(false)}
+client/src/components/TglpNavbar.jsx:328:                onClick={() => setMobileMenuOpen(false)}
+client/src/components/TglpNavbar.jsx:344:                onClick={() => setMobileMenuOpen(false)}
+client/src/components/TglpNavbar.jsx:360:                onClick={() => setMobileMenuOpen(false)}
+client/src/components/TglpNavbar.jsx:390:                    onClick={() => setMobileMenuOpen(false)}
+client/src/components/TglpNavbar.jsx:401:                  onClick={() => setMobileMenuOpen(false)}
+client/src/config/toolCategories.js:64:      { id: "purpose-compass", label: "Purpose Compass", endpoint: "/api/purpose-compass", icon: Compass, desc: "Purpose navigation" },
+client/src/content/analytics/eventSchema.ts:2:  NAVIGATION: 'navigation',
+client/src/content/healingFrameworks.ts:52:    description: "Developed by Dr. Marsha Linehan, DBT balances acceptance and change. Its four pillars - mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness - provide practical skills for navigating intense emotions.",
+client/src/content/healingFrameworks.ts:144:    "I trust my ability to navigate whatever comes next.",
+client/src/content/meta/platformProcessRegistry.ts:115:    guardrails: ["Keyboard nav", "Contrast", "Alt text where relevant"],
+client/src/content/microcopy.js:73:  navigation: {
+client/src/content/microcopy.js:132:    navigation: {
+client/src/content/processes/top50ProcessMap.ts:57:  { id: 27, name: 'Keyboard navigation', category: 'C', status: 'done', description: 'Focus rings visible' },
+client/src/content/routes.js:4539:      title: 'Understand and navigate',
+client/src/content/routes.js:4572:          { icon: 'Sparkles', title: 'Advanced', text: 'Notice triggers and patterns. Respond rather than react. Support others in navigating emotions.' }
+client/src/content/routes.js:6870:    description: 'Visual maps for navigating complex healing journeys.',
+client/src/content/routes.js:8463:      subtitle: 'Comprehensive guides to help you navigate your healing path.',
+client/src/content/routes.js:8806:          type: 'navigation',
+client/src/content/routes/routeRegistry.js:27:    navGroup: NAV_GROUPS.TRUST,
+client/src/content/routes/routeRegistry.js:42:    navGroup: NAV_GROUPS.TRUST,
+client/src/content/routes/routeRegistry.js:57:    navGroup: NAV_GROUPS.HEALING,
+client/src/content/routes/routeRegistry.js:72:    navGroup: NAV_GROUPS.TRUST,
+client/src/content/routes/routeRegistry.js:87:    navGroup: NAV_GROUPS.AWARENESS,
+client/src/content/routes/routeRegistry.js:102:    navGroup: NAV_GROUPS.WELLNESS,
+client/src/content/routes/routeRegistry.js:117:    navGroup: NAV_GROUPS.WELLNESS,
+client/src/content/routes/routeRegistry.js:132:    navGroup: NAV_GROUPS.HEALING,
+client/src/content/routes/routeRegistry.js:147:    navGroup: NAV_GROUPS.WELLNESS,
+client/src/content/routes/routeRegistry.js:162:    navGroup: NAV_GROUPS.WELLNESS,
+client/src/content/routes/routeRegistry.js:177:    navGroup: NAV_GROUPS.WELLNESS,
+client/src/content/routes/routeRegistry.js:192:    navGroup: NAV_GROUPS.WELLNESS,
+client/src/content/routes/routeRegistry.js:207:    navGroup: NAV_GROUPS.GROWTH,
+client/src/content/routes/routeRegistry.js:222:    navGroup: NAV_GROUPS.TOOLS,
+client/src/content/routes/routeRegistry.js:237:    navGroup: NAV_GROUPS.TOOLS,
+client/src/content/routes/routeRegistry.js:252:    navGroup: NAV_GROUPS.ACCOUNT,
+client/src/context/AuthContext.jsx:62:    console.warn('localStorage unavailable, using in-memory storage');
+client/src/features/community/SharedReflectionsPage.jsx:240:        <div className="topic-nav" data-testid="topic-navigation">
+client/src/features/daily/DailyFlow.tsx:33:        {/* Back navigation */}
+client/src/features/daily/DailyFlow.tsx:34:        <nav className="mb-8">
+client/src/features/daily/DailyFlow.tsx:43:        </nav>
+client/src/features/journal/JournalPage.jsx:84:                onClick={() => navigator.clipboard?.writeText(prompt)}
+client/src/features/mirror/JournalMirror.tsx:152:                onClick={() => navigator.clipboard?.writeText(reflection)}
+client/src/features/today/TodayPage.jsx:50:              navigator.clipboard?.writeText(`${insight.title}\n\n${insight.body}`);
+client/src/lib/mode.js:6:  try { localStorage.setItem("glp-mode", mode || "default"); } catch { /* localStorage unavailable */ }
+client/src/lib/mode.js:13:  } catch { /* localStorage unavailable */ }
+client/src/lib/buddyTelemetry.ts:48: * NO guest header until they navigated to /start, breaking funnel
+client/src/lib/buddyTelemetry.ts:51: * Returns an empty string if localStorage is unavailable (private
+client/src/lib/buddyTelemetry.ts:62:    /* localStorage unavailable — proceed without guest header */
+client/src/lib/buddyTelemetry.ts:98:   *  - "unavailable" : neither path worked (no Web Share, no clipboard).
+client/src/lib/buddyTelemetry.ts:104:    method: "native" | "clipboard" | "unavailable" | "email" | "sms";
+client/src/lib/lumiAudio.js:156: * Useful for the preference toggle to show "Audio unavailable on this device".
+client/src/lib/lumiAudio.js:204: * audio off, reduced-motion, Web Audio unavailable).
+client/src/lib/security.ts:27: * Disable right-click context menu on premium content
+client/src/lib/security.ts:31:export function disableContextMenu(element: HTMLElement): () => void {
+client/src/lib/security.ts:36:  element.addEventListener('contextmenu', handler);
+client/src/lib/security.ts:37:  return () => element.removeEventListener('contextmenu', handler);
+client/src/lib/security.ts:106:  if (typeof navigator === 'undefined') return false;
+client/src/lib/security.ts:118:  const ua = navigator.userAgent;
+client/src/lib/security.ts:135:    userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'unknown'
+client/src/lib/security.ts:153:  disableContextMenu,
+client/src/utils/LocalSync.js:7:    this.isOnline = navigator.onLine;
+client/src/sections/EmailCapture.jsx:40:    /* localStorage unavailable / quota — silent no-op */
+client/src/sections/ValueProposition.jsx:72:    /* localStorage unavailable / quota — silent no-op (status still flips). */
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:9: *   <MMHBCheckInFlow onClose={() => navigate('/')} />
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:4: * Slide-out drawer showing all 4 boundaries with full copy. Closes via
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:35:      data-testid="transparency-drawer"
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:85:            data-testid="transparency-drawer-close"
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:117:            data-testid="transparency-drawer-crisis-link"
+client/src/lumi-boundaries/governance/boundaryEnforcementRules.ts:20:  { id: "consent-respected", description: "Closing the drawer must never require an explanation or reason." },
+client/src/lumi-registry/internal/devGate.ts:20:    /* import.meta unavailable — fall through */
+client/src/lumi-registry/internal/devGate.ts:28:    /* process unavailable — fall through */
+client/src/governance/interactions/InteractionGovernanceRegistry.ts:20:	navigation: {
+client/src/governance/interactions/InteractionGovernanceRegistry.ts:21:		id: "navigation",
+client/src/_quarantine/orphans/SacredNavBar.jsx:5:    <nav className="w-full fixed top-0 left-0 z-50 bg-[#f8f7f4]/90 shadow-md backdrop-blur-md">
+client/src/_quarantine/orphans/SacredNavBar.jsx:10:          data-testid="link-nav-home"
+client/src/_quarantine/orphans/SacredNavBar.jsx:22:            data-testid="nav-wellness-tools"
+client/src/_quarantine/orphans/SacredNavBar.jsx:29:            data-testid="nav-testimonials"
+client/src/_quarantine/orphans/SacredNavBar.jsx:33:          <a href="/login" className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity cursor-pointer" data-testid="nav-get-started">
+client/src/_quarantine/orphans/SacredNavBar.jsx:38:    </nav>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:4:  DropdownMenu,
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:5:  DropdownMenuContent,
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:6:  DropdownMenuItem,
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:7:  DropdownMenuTrigger,
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:8:} from "@/components/ui/dropdown-menu";
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:24:    <DropdownMenu>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:25:      <DropdownMenuTrigger asChild>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:35:      </DropdownMenuTrigger>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:36:      <DropdownMenuContent align="end">
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:38:          <DropdownMenuItem
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:42:            data-testid={`menu-level-${level.id}`}
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:48:          </DropdownMenuItem>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:50:      </DropdownMenuContent>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:51:    </DropdownMenu>
+client/src/main.jsx:47:if ('serviceWorker' in navigator) {
+client/src/main.jsx:49:    navigator.serviceWorker.register('/serviceWorker.js')
+client/src/main.jsx:55:              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+client/src/main.jsx:86:  navigator.serviceWorker.addEventListener('controllerchange', () => {
+client/src/main.jsx:90:  navigator.serviceWorker.addEventListener('message', (event) => {
+client/src/main.jsx:118:        navigator.serviceWorker.ready.then(registration => {
+client/src/App.jsx:46:import CanonicalNavbar from "./components/navigation/CanonicalNavbar.jsx";
+client/src/App.jsx:407:            {/* Phase 153: global navbar mount — single source of truth.

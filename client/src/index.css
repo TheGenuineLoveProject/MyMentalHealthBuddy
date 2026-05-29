@@ -7602,3 +7602,193 @@ a[href="/journal"] {
   }
 }
 
+
+/* =========================================================
+   D10 NAVIGATION LOCK — prevent duplicate visible nav systems
+   Goal: one top nav + one optional menu drawer only
+========================================================= */
+
+/* Hide known duplicate/legacy nav containers */
+.legacy-nav,
+.legacy-navbar,
+.old-nav,
+.old-navbar,
+.secondary-nav,
+.secondary-navbar,
+.duplicate-nav,
+.extra-nav,
+.desktop-sidebar,
+.left-sidebar,
+.side-nav,
+.sidebar,
+.tool-sidebar,
+.tools-sidebar,
+.floating-sidebar,
+.mobile-sidebar:not(.canonical-mobile-drawer),
+.menu-drawer:not(.canonical-mobile-drawer),
+.hamburger-menu:not(.canonical-mobile-drawer),
+[aria-label="Secondary navigation"],
+[aria-label="Tools sidebar"],
+[aria-label="Legacy navigation"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Keep the real top navigation clean */
+.app-shell > header:first-of-type,
+.site-header,
+.main-navbar,
+.canonical-navbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  width: 100% !important;
+  background: rgba(247, 244, 238, 0.96) !important;
+  backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid rgba(74,126,114,0.14) !important;
+}
+
+/* Prevent stacked navbars from taking layout space */
+body > header + header,
+#root header + header,
+.app-shell header + header,
+main header,
+section header[role="navigation"] {
+  display: none !important;
+}
+
+/* Menu drawer should overlay, not push page content sideways */
+.canonical-mobile-drawer,
+.mobile-menu,
+.menu-panel {
+  position: fixed !important;
+  top: 76px !important;
+  right: 1rem !important;
+  z-index: 10000 !important;
+  width: min(340px, calc(100vw - 2rem)) !important;
+  max-height: calc(100vh - 96px) !important;
+  overflow-y: auto !important;
+  border-radius: 22px !important;
+  background: rgba(247,244,238,0.98) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.18) !important;
+}
+
+/* Desktop: hide drawer unless explicitly open */
+@media (min-width: 1024px) {
+  .canonical-mobile-drawer,
+  .mobile-menu,
+  .menu-panel {
+    display: none !important;
+  }
+}
+
+/* Mobile: reduce nav crowding */
+@media (max-width: 760px) {
+  .desktop-only,
+  .nav-expanded-links {
+    display: none !important;
+  }
+
+  .site-header,
+  .main-navbar,
+  .canonical-navbar {
+    min-height: 64px !important;
+  }
+}
+
+/* =========================================================
+D11 — SINGLE CANONICAL NAVIGATION SYSTEM
+========================================================= */
+
+/* KILL DUPLICATE NAV SYSTEMS */
+
+.secondary-nav,
+.legacy-nav,
+.old-nav,
+.floating-nav,
+.quick-nav,
+.tools-nav-inline,
+.left-sidebar,
+.right-sidebar,
+.desktop-sidebar,
+.mobile-sidebar,
+.duplicate-navbar,
+.extra-navbar,
+.extra-menu,
+.nav-clone,
+.floating-toolbar,
+.overlay-toolbar {
+  display: none !important;
+}
+
+/* ONLY ONE HEADER */
+
+header + header {
+  display: none !important;
+}
+
+/* ONLY ONE TOOLBAR */
+
+nav + nav {
+  display: none !important;
+}
+
+/* DRAWER MUST OVERLAY */
+
+.mobile-menu,
+.mobile-drawer,
+.canonical-mobile-drawer {
+  position: fixed !important;
+  top: 72px !important;
+  right: 16px !important;
+  width: 320px !important;
+  max-height: calc(100vh - 90px) !important;
+  overflow-y: auto !important;
+  z-index: 99999 !important;
+  background: rgba(247,244,238,0.98) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.18) !important;
+}
+
+/* PREVENT DRAWER FROM PUSHING PAGE */
+
+body,
+#root,
+.app-shell,
+main {
+  overflow-x: hidden !important;
+}
+
+/* PREVENT STACKED NAV BARS */
+
+.main-navbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+}
+
+/* HIDE DUPLICATE CHIP GROUPS */
+
+.chip-group + .chip-group {
+  display: none !important;
+}
+
+/* ONLY MOBILE HAMBURGER */
+
+@media (min-width: 1024px) {
+  .mobile-menu-button,
+  .hamburger-button {
+    display: none !important;
+  }
+
+  .mobile-menu,
+  .mobile-drawer,
+  .canonical-mobile-drawer {
+    display: none !important;
+  }
+}
+

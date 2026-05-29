@@ -1,0 +1,311 @@
+client/src/pages/admin/CommandCenter.jsx:110:        <div className={styles.cardHeader}>
+client/src/pages/admin/CommandCenter.jsx:112:            <Zap className={styles.cardHeaderIcon} />
+client/src/pages/admin/CommandCenter.jsx:170:      <div className={styles.cardHeader}>
+client/src/pages/admin/CommandCenter.jsx:172:          <Zap className={styles.cardHeaderIcon} />
+client/src/pages/admin/CommandCenter.jsx:420:        <SafeBoundary label="Admin Nav Grid">
+client/src/pages/admin/CommandCenter.jsx:421:          <AdminNavGrid />
+client/src/pages/admin/SecurityDashboard.jsx:156:            <CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:161:            </CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:201:            <CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:206:            </CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:243:          <CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:248:          </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:477:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:487:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:653:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:655:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:673:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:675:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:700:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:702:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:730:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:733:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:766:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:782:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:864:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:867:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:960:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:963:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1010:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1013:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1094:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1125:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1217:                <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1220:                </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1272:                <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1275:                </CardHeader>
+client/src/pages/admin/NarrativeDrafts.jsx:234:                  <CardHeader className="pb-2">
+client/src/pages/admin/NarrativeDrafts.jsx:273:                  </CardHeader>
+client/src/pages/admin/RevenueAdmin.jsx:135:          <CardHeader>
+client/src/pages/admin/RevenueAdmin.jsx:140:          </CardHeader>
+client/src/pages/admin/FeatureFlags.jsx:210:            <CardHeader>
+client/src/pages/admin/FeatureFlags.jsx:217:            </CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:121:            <CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:123:            </CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:145:            <CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:147:            </CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:181:            <CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:186:            </CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:185:            <CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:187:            </CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:242:            <CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:246:            </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:73:              <CardHeader className="pb-2">
+client/src/pages/admin/BillingViewer.jsx:75:              </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:113:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:116:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:125:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:128:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:137:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:140:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:149:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:152:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:163:        <CardHeader>
+client/src/pages/admin/BillingViewer.jsx:166:        </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:103:          <CardHeader className="pb-2">
+client/src/pages/admin/AuditLogExplorer.jsx:105:          </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:111:          <CardHeader className="pb-2">
+client/src/pages/admin/AuditLogExplorer.jsx:113:          </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:119:          <CardHeader className="pb-2">
+client/src/pages/admin/AuditLogExplorer.jsx:121:          </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:131:        <CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:133:        </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:173:            <TableHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:181:            </TableHeader>
+client/src/pages/admin/AdminUsers.jsx:117:          <CardHeader>
+client/src/pages/admin/AdminUsers.jsx:122:          </CardHeader>
+client/src/pages/admin/RolesPermissions.jsx:99:                <CardHeader className="pb-3">
+client/src/pages/admin/RolesPermissions.jsx:107:                </CardHeader>
+client/src/pages/account/DeleteAccount.jsx:49:          <CardHeader>
+client/src/pages/account/DeleteAccount.jsx:54:          </CardHeader>
+client/src/pages/account/DeleteAccount.jsx:87:        <CardHeader>
+client/src/pages/account/DeleteAccount.jsx:95:        </CardHeader>
+client/src/pages/account/Sessions.jsx:70:          <CardHeader>
+client/src/pages/account/Sessions.jsx:73:          </CardHeader>
+client/src/pages/account/Sessions.jsx:94:          <CardHeader>
+client/src/pages/account/Sessions.jsx:96:          </CardHeader>
+client/src/pages/account/Sessions.jsx:112:        <CardHeader className="pb-6">
+client/src/pages/account/Sessions.jsx:121:        </CardHeader>
+client/src/pages/account/Security.jsx:214:            <CardHeader>
+client/src/pages/account/Security.jsx:220:            </CardHeader>
+client/src/pages/account/Security.jsx:255:            <CardHeader>
+client/src/pages/account/Security.jsx:261:            </CardHeader>
+client/src/pages/account/Security.jsx:336:            <CardHeader>
+client/src/pages/account/Security.jsx:342:            </CardHeader>
+client/src/pages/account/Security.jsx:391:                <CardHeader>
+client/src/pages/account/Security.jsx:401:                </CardHeader>
+client/src/pages/account/Security.jsx:478:            <CardHeader>
+client/src/pages/account/Security.jsx:481:            </CardHeader>
+client/src/pages/account/Subscription.jsx:81:          <CardHeader>
+client/src/pages/account/Subscription.jsx:92:          </CardHeader>
+client/src/pages/account/Subscription.jsx:156:          <CardHeader>
+client/src/pages/account/Subscription.jsx:161:          </CardHeader>
+client/src/pages/account/OrderHistory.jsx:75:            <CardHeader>
+client/src/pages/account/OrderHistory.jsx:77:            </CardHeader>
+client/src/pages/dashboard/Overview.jsx:96:      <div className={styles.statHeader}>
+client/src/pages/dashboard/Overview.jsx:327:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:328:              <Activity className={styles.cardHeaderIcon} />
+client/src/pages/dashboard/Overview.jsx:344:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:345:              <Target className={styles.cardHeaderIcon} />
+client/src/pages/dashboard/Overview.jsx:366:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:367:              <Compass className={styles.cardHeaderIcon} />
+client/src/pages/dashboard/Overview.jsx:378:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:379:              <Sparkles className={styles.cardHeaderIcon} />
+client/src/pages/help/RefundHelp.jsx:83:          <CardHeader>
+client/src/pages/help/RefundHelp.jsx:85:          </CardHeader>
+client/src/pages/help/RefundHelp.jsx:97:          <CardHeader>
+client/src/pages/help/RefundHelp.jsx:99:          </CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:84:          <CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:86:          </CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:133:            <CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:138:            </CardHeader>
+client/src/pages/pathways/CalmPlan.jsx:88:                <CardHeader>
+client/src/pages/pathways/CalmPlan.jsx:93:                </CardHeader>
+client/src/pages/pathways/CalmPlan.jsx:126:          <CardHeader>
+client/src/pages/pathways/CalmPlan.jsx:128:          </CardHeader>
+client/src/pages/pathways/ProgressStreaks.jsx:154:              <CardHeader>
+client/src/pages/pathways/ProgressStreaks.jsx:159:              </CardHeader>
+client/src/pages/pathways/PathwaysHome.jsx:112:                <CardHeader>
+client/src/pages/pathways/PathwaysHome.jsx:119:                </CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:152:          <CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:155:          </CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:180:          <CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:183:          </CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:135:          <CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:138:          </CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:173:          <CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:176:          </CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:195:          <CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:201:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:133:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:135:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:163:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:165:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:186:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:188:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:210:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:212:          </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:101:          <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:112:          </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:123:              <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:125:              </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:147:              <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:151:              </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:177:              <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:179:              </CardHeader>
+client/src/pages/tools/WeeklyReflection.jsx:140:          <CardHeader>
+client/src/pages/tools/WeeklyReflection.jsx:144:          </CardHeader>
+client/src/pages/tools/WeeklyReflection.jsx:159:            <div className="flex gap-3 mt-6" role="group" aria-label="Navigation controls">
+client/src/pages/tools/RepairScript.jsx:99:            <CardHeader>
+client/src/pages/tools/RepairScript.jsx:101:            </CardHeader>
+client/src/pages/tools/RepairScript.jsx:133:          <CardHeader>
+client/src/pages/tools/RepairScript.jsx:135:          </CardHeader>
+client/src/pages/tools/Reframe.jsx:209:          <CardHeader>
+client/src/pages/tools/Reframe.jsx:214:          </CardHeader>
+client/src/pages/tools/MeaningMap.jsx:132:          <CardHeader>
+client/src/pages/tools/MeaningMap.jsx:134:          </CardHeader>
+client/src/pages/tools/MeaningMap.jsx:172:          <CardHeader>
+client/src/pages/tools/MeaningMap.jsx:174:          </CardHeader>
+client/src/pages/tools/MeaningMap.jsx:194:          <CardHeader>
+client/src/pages/tools/MeaningMap.jsx:196:          </CardHeader>
+client/src/pages/tools/GriefLetter.jsx:111:          <CardHeader>
+client/src/pages/tools/GriefLetter.jsx:113:          </CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:69:          <CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:74:          </CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:92:          <CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:94:          </CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:144:          <CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:146:          </CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:112:          <CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:125:          </CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:173:          <CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:175:          </CardHeader>
+client/src/pages/ControlDashboard.jsx:260:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:356:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:450:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:529:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:603:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:697:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:787:      <SectionHeader 
+client/src/pages/DesignSystem.jsx:427:                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Navigation Components</h3>
+client/src/pages/DesignSystem.jsx:608:                      <h4 className="font-semibold mb-3" style={{ color: 'var(--deep-teal)' }}>Sidebar</h4>
+client/src/pages/DesignSystem.jsx:610:                        <li>• Navigation Menu</li>
+client/src/pages/DesignSystem.jsx:1073:                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Quick Navigation Grid</h3>
+client/src/pages/DesignSystem.jsx:1335:                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Screen Flow Navigation</h3>
+client/src/pages/PracticeLibrary.jsx:337:              <CardHeader className="pb-3">
+client/src/pages/PracticeLibrary.jsx:360:              </CardHeader>
+client/src/pages/UserProfile.jsx:94:          <CardHeader>
+client/src/pages/UserProfile.jsx:98:          </CardHeader>
+client/src/pages/WireframeTemplates.jsx:848:      <header className="flex items-center justify-between mb-8" data-component="PageHeader">
+client/src/pages/WireframeTemplates.jsx:989:      <header className="mb-8" data-component="ContentHeader">
+client/src/pages/WireframeTemplates.jsx:1101:      <header className="flex items-center justify-between mb-8" data-component="CommunityHeader">
+client/src/pages/WireframeTemplates.jsx:1376:      <Header />
+client/src/pages/AdvancedToolsPage.tsx:207:            {activeTool === "mindscape" && <MindscapeNavigator />}
+client/src/pages/MirrorPage.tsx:91:      <CardHeader className="pb-2">
+client/src/pages/MirrorPage.tsx:103:      </CardHeader>
+client/src/pages/MirrorPage.tsx:223:            <CardHeader className="pb-2">
+client/src/pages/MirrorPage.tsx:238:            </CardHeader>
+client/src/pages/StudyVaultPage.jsx:448:                    <CardHeader>
+client/src/pages/StudyVaultPage.jsx:453:                    </CardHeader>
+client/src/pages/StudyVaultPage.jsx:498:                        <CardHeader className="pb-2">
+client/src/pages/StudyVaultPage.jsx:503:                        </CardHeader>
+client/src/pages/StudyVaultPage.jsx:517:                <CardHeader>
+client/src/pages/StudyVaultPage.jsx:522:                </CardHeader>
+client/src/pages/LegalPage.jsx:75:          <CardHeader>
+client/src/pages/LegalPage.jsx:80:          </CardHeader>
+client/src/pages/CommunityGuidelines.jsx:105:              <CardHeader>
+client/src/pages/CommunityGuidelines.jsx:110:              </CardHeader>
+client/src/pages/CommunityGuidelines.jsx:120:              <CardHeader>
+client/src/pages/CommunityGuidelines.jsx:125:              </CardHeader>
+client/src/pages/CommunityGuidelines.jsx:135:              <CardHeader>
+client/src/pages/CommunityGuidelines.jsx:140:              </CardHeader>
+client/src/pages/DataRetention.jsx:105:              <CardHeader>
+client/src/pages/DataRetention.jsx:110:              </CardHeader>
+client/src/pages/DataRetention.jsx:124:              <CardHeader>
+client/src/pages/DataRetention.jsx:129:              </CardHeader>
+client/src/pages/WellnessDashboard.jsx:368:          <WelcomeHeader user={user} />
+client/src/pages/SafetyCenter.jsx:91:                <CardHeader className="pb-2">
+client/src/pages/SafetyCenter.jsx:96:                </CardHeader>
+client/src/pages/PricingPage.jsx:136:              <CardHeader className="text-center pb-2">
+client/src/pages/PricingPage.jsx:139:              </CardHeader>
+client/src/pages/Presence.jsx:84:      <PresenceHeader />
+client/src/components/admin/OperationsPanel.jsx:202:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:304:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:409:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:513:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:728:      <PanelHeader
+client/src/components/admin/RecentActivityPanel.jsx:17:        <div className={styles.cardHeader}>
+client/src/components/admin/RecentActivityPanel.jsx:19:            <Clock className={styles.cardHeaderIcon} />
+client/src/components/admin/RecentActivityPanel.jsx:32:      <div className={styles.cardHeader}>
+client/src/components/admin/RecentActivityPanel.jsx:34:          <Clock className={styles.cardHeaderIcon} />
+client/src/components/admin/MetricCard.jsx:13:      <div className={styles.metricHeader}>
+client/src/components/admin/SystemHealthPanel.jsx:30:      <div className={styles.cardHeader}>
+client/src/components/admin/SystemHealthPanel.jsx:32:          <Activity className={styles.cardHeaderIcon} />
+client/src/components/admin/KernelStatusPanel.jsx:17:      <div className={styles.cardHeader}>
+client/src/components/admin/KernelStatusPanel.jsx:19:          <Brain className={styles.cardHeaderIcon} />
+client/src/components/admin/DailyToolsPanel.jsx:110:      <div className={styles.cardHeader}>
+client/src/components/admin/DailyToolsPanel.jsx:112:          <Wand2 className={styles.cardHeaderIcon} />
+client/src/components/admin/SystemTelemetryPanel.jsx:17:      <div className={styles.cardHeader}>
+client/src/components/admin/SystemTelemetryPanel.jsx:19:          <BarChart3 className={styles.cardHeaderIcon} />
+client/src/components/admin/DailyOpsChecklist.jsx:115:      <div className={styles.cardHeader}>
+client/src/components/admin/DailyOpsChecklist.jsx:117:          <CheckSquare className={styles.cardHeaderIcon} />
+client/src/components/admin/AIKnowledgeHub.jsx:55:      <div className={styles.cardHeader}>
+client/src/components/admin/AIKnowledgeHub.jsx:57:          <Brain className={styles.cardHeaderIcon} />
+client/src/components/content/ContentTierCompiler.jsx:27:      <CardHeader className="pb-2">
+client/src/components/content/ContentTierCompiler.jsx:42:      </CardHeader>
+client/src/components/content/WhatNextRecommender.jsx:39:      <CardHeader>
+client/src/components/content/WhatNextRecommender.jsx:44:      </CardHeader>
+client/src/components/layout/AppShell.tsx:14:      <Header />
+client/src/components/layout/PageLayout.jsx:44:      <SacredNav />
+client/src/components/layout/Header.jsx:213:              <Menu className="w-6 h-6 text-[var(--glp-sage-deep)]" />
+client/src/components/mindscape/MindscapeNavigator.tsx:65:        <h2 className="text-xl font-semibold">Mindscape Navigator</h2>
+client/src/components/personalization/ToolRecommendations.jsx:58:        <CardHeader>
+client/src/components/personalization/ToolRecommendations.jsx:63:        </CardHeader>
+client/src/components/personalization/ToolRecommendations.jsx:65:      <CardContent className={showHeader ? "" : "pt-6"}>
+client/src/components/sacred/SacredSection.jsx:50:          <header className={styles.sectionHeader}>
+client/src/components/ui/dropdown-menu.tsx:14:const DropdownMenuContext = createContext<DropdownMenuContextType | null>(null);
+client/src/components/ui/dropdown-menu.tsx:28:    <DropdownMenuContext.Provider value={{ open, setOpen }}>
+client/src/components/ui/dropdown-menu.tsx:32:    </DropdownMenuContext.Provider>
+client/src/components/ui/dropdown-menu.tsx:62:const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
+client/src/components/ContentStudio.jsx:443:          <div className={styles.emailHeader}>
+client/src/components/ContentStudio.jsx:560:        <div className={styles.previewHeader}>
+client/src/components/ContentStudio.jsx:658:      <div className={styles.outputHeader}>
+client/src/components/EmotionCalendar.jsx:194:      <CardHeader className="pb-2">
+client/src/components/EmotionCalendar.jsx:226:      </CardHeader>
+client/src/components/EmotionLog.jsx:58:      <CardHeader>
+client/src/components/EmotionLog.jsx:63:      </CardHeader>
+client/src/components/EmotionPieChart.jsx:134:        <CardHeader>
+client/src/components/EmotionPieChart.jsx:139:        </CardHeader>
+client/src/components/EmotionPieChart.jsx:151:      <CardHeader className="pb-2">
+client/src/components/EmotionPieChart.jsx:159:      </CardHeader>
+client/src/components/MoodTrendsChart.jsx:83:      <CardHeader className="pb-2">
+client/src/components/MoodTrendsChart.jsx:99:      </CardHeader>
+client/src/components/SacredForm.jsx:74:      <div className={styles.formHeader}>
+client/src/components/SacredNav.jsx:158:              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+client/src/components/Header.jsx:70:            <NavLink 
+client/src/components/Header.jsx:78:            </NavLink>
+client/src/components/PageTemplate.jsx:314:        <div className={styles.nextStepHeader}>
+client/src/components/PageTemplate.jsx:450:        <div className={styles.practiceHeader}>
+client/src/components/PageTemplate.jsx:520:      <div className={styles.tieredPracticeHeader}>
+client/src/components/PageTemplate.jsx:553:              <div className={styles.tierHeader}>
+client/src/components/PageTemplate.jsx:665:                      <div className={styles.tierCardHeader}>
+client/src/components/PageTemplate.jsx:788:        <div className={styles.disclaimerHeader}>
+client/src/components/PageTemplate.jsx:841:        <header className={styles.gentleBenefitsHeader}>
+client/src/components/TglpNavbar.jsx:277:              <Menu className="w-6 h-6 text-[var(--glp-sage-deep)]" />
+client/src/features/community/Community.tsx:55:        <CardHeader>
+client/src/features/community/Community.tsx:63:        </CardHeader>
+client/src/features/community/Community.tsx:123:        <CardHeader>
+client/src/features/community/Community.tsx:132:        </CardHeader>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:24:    <DropdownMenu>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:25:      <DropdownMenuTrigger asChild>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:35:      </DropdownMenuTrigger>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:36:      <DropdownMenuContent align="end">
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:38:          <DropdownMenuItem
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:48:          </DropdownMenuItem>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:50:      </DropdownMenuContent>
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:51:    </DropdownMenu>
+client/src/App.jsx:408:                Phase 157: removed duplicate global <CanonicalNavbar /> that
+client/src/App.jsx:412:            <SafeBoundary label="Navbar">
+client/src/App.jsx:413:              <TglpNavbar />
+client/src/App.jsx:1922:          <SafeBoundary label="AccessibilityToolbar">
+client/src/App.jsx:1924:              <AccessibilityToolbar />
