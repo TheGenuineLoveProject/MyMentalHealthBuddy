@@ -7652,14 +7652,11 @@ a[href="/journal"] {
   border-bottom: 1px solid rgba(74,126,114,0.14) !important;
 }
 
-/* Prevent stacked navbars from taking layout space */
-body > header + header,
-#root header + header,
-.app-shell header + header,
-main header,
-section header[role="navigation"] {
-  display: none !important;
-}
+/* Phase 158: removed broad header-suppression selectors (main header,
+   section header[role="navigation"], root-level header + header). Duplicate
+   navs are now prevented at the component level (single canonical TglpNavbar),
+   so these over-broad rules — which also wrongly hid legitimate page-title
+   <header> elements inside <main> — are no longer needed. */
 
 /* Menu drawer should overlay, not push page content sideways */
 .canonical-mobile-drawer,
@@ -7725,17 +7722,9 @@ D11 — SINGLE CANONICAL NAVIGATION SYSTEM
   display: none !important;
 }
 
-/* ONLY ONE HEADER */
-
-header + header {
-  display: none !important;
-}
-
-/* ONLY ONE TOOLBAR */
-
-nav + nav {
-  display: none !important;
-}
+/* Phase 158: removed broad `header + header` / `nav + nav` suppression —
+   the single-navbar invariant is now enforced at the component level. The
+   class-based legacy-nav kill list above remains as defensive coverage. */
 
 /* DRAWER MUST OVERLAY */
 

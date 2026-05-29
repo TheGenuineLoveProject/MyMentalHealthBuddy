@@ -1004,38 +1004,24 @@ export default function PageTemplate({ config, children, routeKey }) {
         canonicalUrl={config.route ? `${SITE_URL}${config.route}` : undefined}
       />
 
-      <header role="banner">
-        <nav 
-          className={styles.nav}
-          aria-label="Main navigation"
+      {/* Phase 158: duplicate logo + Sign in + banner/nav landmark removed.
+          The canonical global navbar (TglpNavbar) is the single navigation
+          system app-wide. Only the page-scoped ReadingLevelToggle — a unique
+          accessibility control not present in the global navbar — is retained,
+          rendered as a plain (non-landmark) bar so it is not a duplicate. */}
+      {showReadingToggle && isReady && (
+        <div
+          className={styles.navActions}
+          style={{ justifyContent: 'flex-end', padding: '0.75rem 1rem' }}
+          data-testid="bar-reading-level"
         >
-          <Link href="/" className={styles.navLogo} data-testid="link-nav-logo">
-            <div className={styles.navLogoIcon} style={{ overflow: 'visible', background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10, rgba(47,84,67,0.1)) 0%, transparent 72%)' }}>
-              <MMHBFloatAvatar imageSrc={getOfficialLumi("calm")} size={32} alt="Lumi mark" data-testid="img-nav-logo-lumi" />
-            </div>
-            <span className={styles.navLogoText}>
-              Genuine Love
-            </span>
-          </Link>
-
-          <div className={styles.navActions}>
-            {showReadingToggle && isReady && (
-              <ReadingLevelToggle
-                value={readingLevel}
-                onChange={setReadingLevel}
-                className={styles.navReadingToggle}
-              />
-            )}
-            <Link
-              href="/login"
-              className={styles.navSignIn}
-              data-testid="link-nav-signin"
-            >
-              Sign in
-            </Link>
-          </div>
-        </nav>
-      </header>
+          <ReadingLevelToggle
+            value={readingLevel}
+            onChange={setReadingLevel}
+            className={styles.navReadingToggle}
+          />
+        </div>
+      )}
 
         <div className={toneClass}>
         {config.stimulationProfile === 'quiet' ? (

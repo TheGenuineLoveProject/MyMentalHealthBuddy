@@ -280,10 +280,10 @@ export default function TglpNavbar() {
         </nav>
       </div>
 
-      {/* Mobile Menu — full surface, grouped sections, scrollable */}
+      {/* Mobile Menu — renders only when open; overlays page (absolute, does not push layout) */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)] max-h-[80vh] overflow-y-auto"
+          className="md:hidden absolute left-0 right-0 top-full z-50 px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)] max-h-[80vh] overflow-y-auto shadow-2xl"
           data-testid="menu-mobile"
         >
           {/* Mobile Search */}
