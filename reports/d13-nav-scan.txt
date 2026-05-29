@@ -1,0 +1,622 @@
+client/src/pages/admin/CommandCenter.module.css:146:.metricHeader {
+client/src/pages/admin/CommandCenter.module.css:249:.cardHeader {
+client/src/pages/admin/CommandCenter.module.css:262:.cardHeaderIcon {
+client/src/pages/admin/CommandCenter.module.css:388:.resourceHeader {
+client/src/pages/admin/_adminToolsShared.js:186:  "preflight-failed": { suggestion: "CORS preflight request failed. Codex KB: OPTIONS request rejected — verify Access-Control-Allow-Methods and Access-Control-Allow-Headers in CORS config.", action: "Update CORS preflight config", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+client/src/pages/admin/CommandCenter.jsx:110:        <div className={styles.cardHeader}>
+client/src/pages/admin/CommandCenter.jsx:112:            <Zap className={styles.cardHeaderIcon} />
+client/src/pages/admin/CommandCenter.jsx:170:      <div className={styles.cardHeader}>
+client/src/pages/admin/CommandCenter.jsx:172:          <Zap className={styles.cardHeaderIcon} />
+client/src/pages/admin/SecurityDashboard.jsx:8:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/admin/SecurityDashboard.jsx:156:            <CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:161:            </CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:201:            <CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:206:            </CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:243:          <CardHeader>
+client/src/pages/admin/SecurityDashboard.jsx:248:          </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:8:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
+client/src/pages/admin/SocialStudioAdmin.jsx:477:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:487:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:653:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:655:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:673:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:675:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:700:                  <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:702:                  </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:730:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:733:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:766:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:782:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:864:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:867:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:960:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:963:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1010:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1013:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1094:              <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1125:              </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1217:                <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1220:                </CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1272:                <CardHeader>
+client/src/pages/admin/SocialStudioAdmin.jsx:1275:                </CardHeader>
+client/src/pages/admin/NarrativeDrafts.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/admin/NarrativeDrafts.jsx:234:                  <CardHeader className="pb-2">
+client/src/pages/admin/NarrativeDrafts.jsx:273:                  </CardHeader>
+client/src/pages/admin/RevenueAdmin.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/admin/RevenueAdmin.jsx:135:          <CardHeader>
+client/src/pages/admin/RevenueAdmin.jsx:140:          </CardHeader>
+client/src/pages/admin/FeatureFlags.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/admin/FeatureFlags.jsx:210:            <CardHeader>
+client/src/pages/admin/FeatureFlags.jsx:217:            </CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/admin/EngagementDashboard.jsx:121:            <CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:123:            </CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:145:            <CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:147:            </CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:181:            <CardHeader>
+client/src/pages/admin/EngagementDashboard.jsx:186:            </CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/admin/ContentStudioAdmin.jsx:185:            <CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:187:            </CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:242:            <CardHeader>
+client/src/pages/admin/ContentStudioAdmin.jsx:246:            </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:8:import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
+client/src/pages/admin/BillingViewer.jsx:73:              <CardHeader className="pb-2">
+client/src/pages/admin/BillingViewer.jsx:75:              </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:113:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:116:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:125:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:128:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:137:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:140:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:149:          <CardHeader className="flex flex-row items-center justify-between pb-2">
+client/src/pages/admin/BillingViewer.jsx:152:          </CardHeader>
+client/src/pages/admin/BillingViewer.jsx:163:        <CardHeader>
+client/src/pages/admin/BillingViewer.jsx:166:        </CardHeader>
+client/src/pages/admin/AdminSocial.jsx:166:        {/* Header */}
+client/src/pages/admin/AuditLogExplorer.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/admin/AuditLogExplorer.jsx:10:import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+client/src/pages/admin/AuditLogExplorer.jsx:103:          <CardHeader className="pb-2">
+client/src/pages/admin/AuditLogExplorer.jsx:105:          </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:111:          <CardHeader className="pb-2">
+client/src/pages/admin/AuditLogExplorer.jsx:113:          </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:119:          <CardHeader className="pb-2">
+client/src/pages/admin/AuditLogExplorer.jsx:121:          </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:131:        <CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:133:        </CardHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:173:            <TableHeader>
+client/src/pages/admin/AuditLogExplorer.jsx:181:            </TableHeader>
+client/src/pages/admin/AdminUsers.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/admin/AdminUsers.jsx:117:          <CardHeader>
+client/src/pages/admin/AdminUsers.jsx:122:          </CardHeader>
+client/src/pages/admin/AdminPublishingToday.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/admin/RolesPermissions.jsx:5:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+client/src/pages/admin/RolesPermissions.jsx:99:                <CardHeader className="pb-3">
+client/src/pages/admin/RolesPermissions.jsx:107:                </CardHeader>
+client/src/pages/account/DeleteAccount.jsx:8:import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/Card';
+client/src/pages/account/DeleteAccount.jsx:49:          <CardHeader>
+client/src/pages/account/DeleteAccount.jsx:54:          </CardHeader>
+client/src/pages/account/DeleteAccount.jsx:87:        <CardHeader>
+client/src/pages/account/DeleteAccount.jsx:95:        </CardHeader>
+client/src/pages/account/Sessions.jsx:8:import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
+client/src/pages/account/Sessions.jsx:70:          <CardHeader>
+client/src/pages/account/Sessions.jsx:73:          </CardHeader>
+client/src/pages/account/Sessions.jsx:94:          <CardHeader>
+client/src/pages/account/Sessions.jsx:96:          </CardHeader>
+client/src/pages/account/Sessions.jsx:112:        <CardHeader className="pb-6">
+client/src/pages/account/Sessions.jsx:121:        </CardHeader>
+client/src/pages/account/Security.jsx:11:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+client/src/pages/account/Security.jsx:214:            <CardHeader>
+client/src/pages/account/Security.jsx:220:            </CardHeader>
+client/src/pages/account/Security.jsx:255:            <CardHeader>
+client/src/pages/account/Security.jsx:261:            </CardHeader>
+client/src/pages/account/Security.jsx:336:            <CardHeader>
+client/src/pages/account/Security.jsx:342:            </CardHeader>
+client/src/pages/account/Security.jsx:391:                <CardHeader>
+client/src/pages/account/Security.jsx:401:                </CardHeader>
+client/src/pages/account/Security.jsx:478:            <CardHeader>
+client/src/pages/account/Security.jsx:481:            </CardHeader>
+client/src/pages/account/Subscription.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/account/Subscription.jsx:81:          <CardHeader>
+client/src/pages/account/Subscription.jsx:92:          </CardHeader>
+client/src/pages/account/Subscription.jsx:156:          <CardHeader>
+client/src/pages/account/Subscription.jsx:161:          </CardHeader>
+client/src/pages/account/OrderHistory.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/account/OrderHistory.jsx:75:            <CardHeader>
+client/src/pages/account/OrderHistory.jsx:77:            </CardHeader>
+client/src/pages/dashboard/Overview.module.css:180:.statHeader {
+client/src/pages/dashboard/Overview.module.css:263:.cardHeader {
+client/src/pages/dashboard/Overview.module.css:270:.cardHeaderIcon {
+client/src/pages/dashboard/Overview.jsx:96:      <div className={styles.statHeader}>
+client/src/pages/dashboard/Overview.jsx:327:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:328:              <Activity className={styles.cardHeaderIcon} />
+client/src/pages/dashboard/Overview.jsx:344:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:345:              <Target className={styles.cardHeaderIcon} />
+client/src/pages/dashboard/Overview.jsx:366:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:367:              <Compass className={styles.cardHeaderIcon} />
+client/src/pages/dashboard/Overview.jsx:378:            <div className={styles.cardHeader}>
+client/src/pages/dashboard/Overview.jsx:379:              <Sparkles className={styles.cardHeaderIcon} />
+client/src/pages/help/RefundHelp.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/help/RefundHelp.jsx:83:          <CardHeader>
+client/src/pages/help/RefundHelp.jsx:85:          </CardHeader>
+client/src/pages/help/RefundHelp.jsx:97:          <CardHeader>
+client/src/pages/help/RefundHelp.jsx:99:          </CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/pathways/ValuesToActions.jsx:84:          <CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:86:          </CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:133:            <CardHeader>
+client/src/pages/pathways/ValuesToActions.jsx:138:            </CardHeader>
+client/src/pages/pathways/Favorites.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/pathways/CalmPlan.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/pathways/CalmPlan.jsx:88:                <CardHeader>
+client/src/pages/pathways/CalmPlan.jsx:93:                </CardHeader>
+client/src/pages/pathways/CalmPlan.jsx:126:          <CardHeader>
+client/src/pages/pathways/CalmPlan.jsx:128:          </CardHeader>
+client/src/pages/pathways/ProgressStreaks.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/pathways/ProgressStreaks.jsx:154:              <CardHeader>
+client/src/pages/pathways/ProgressStreaks.jsx:159:              </CardHeader>
+client/src/pages/pathways/PathwaysHome.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/pathways/PathwaysHome.jsx:112:                <CardHeader>
+client/src/pages/pathways/PathwaysHome.jsx:119:                </CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:6:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
+client/src/pages/preferences/SafetyPreferences.jsx:152:          <CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:155:          </CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:180:          <CardHeader>
+client/src/pages/preferences/SafetyPreferences.jsx:183:          </CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:6:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
+client/src/pages/preferences/NotificationPreferences.jsx:135:          <CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:138:          </CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:173:          <CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:176:          </CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:195:          <CardHeader>
+client/src/pages/preferences/NotificationPreferences.jsx:201:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/settings/AIPersonality.jsx:108:      <SEO title="AI Companion Settings — The Genuine Love Project" />
+client/src/pages/settings/AIPersonality.jsx:117:              <h1 className="text-3xl font-bold" data-testid="text-page-title">AI Companion</h1>
+client/src/pages/settings/AIPersonality.jsx:133:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:135:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:163:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:165:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:186:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:188:          </CardHeader>
+client/src/pages/settings/AIPersonality.jsx:210:          <CardHeader>
+client/src/pages/settings/AIPersonality.jsx:212:          </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/settings/EmailDigest.jsx:101:          <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:112:          </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:123:              <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:125:              </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:147:              <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:151:              </CardHeader>
+client/src/pages/settings/EmailDigest.jsx:177:              <CardHeader>
+client/src/pages/settings/EmailDigest.jsx:179:              </CardHeader>
+client/src/pages/tools/EmotionWheel.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/tools/WeeklyReflection.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/tools/WeeklyReflection.jsx:140:          <CardHeader>
+client/src/pages/tools/WeeklyReflection.jsx:144:          </CardHeader>
+client/src/pages/tools/MeditationPlayer.jsx:4:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/tools/RepairScript.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/tools/RepairScript.jsx:99:            <CardHeader>
+client/src/pages/tools/RepairScript.jsx:101:            </CardHeader>
+client/src/pages/tools/RepairScript.jsx:133:          <CardHeader>
+client/src/pages/tools/RepairScript.jsx:135:          </CardHeader>
+client/src/pages/tools/Reframe.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/tools/Reframe.jsx:209:          <CardHeader>
+client/src/pages/tools/Reframe.jsx:214:          </CardHeader>
+client/src/pages/tools/MeaningMap.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/tools/MeaningMap.jsx:132:          <CardHeader>
+client/src/pages/tools/MeaningMap.jsx:134:          </CardHeader>
+client/src/pages/tools/MeaningMap.jsx:172:          <CardHeader>
+client/src/pages/tools/MeaningMap.jsx:174:          </CardHeader>
+client/src/pages/tools/MeaningMap.jsx:194:          <CardHeader>
+client/src/pages/tools/MeaningMap.jsx:196:          </CardHeader>
+client/src/pages/tools/GriefLetter.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/tools/GriefLetter.jsx:111:          <CardHeader>
+client/src/pages/tools/GriefLetter.jsx:113:          </CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:6:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/tools/DigitalSunset.jsx:69:          <CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:74:          </CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:92:          <CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:94:          </CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:144:          <CardHeader>
+client/src/pages/tools/DigitalSunset.jsx:146:          </CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/tools/CommunityCheckin.jsx:112:          <CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:125:          </CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:173:          <CardHeader>
+client/src/pages/tools/CommunityCheckin.jsx:175:          </CardHeader>
+client/src/pages/tools/BreathingTool.jsx:169:      {/* Floating calm-blue particles — 5 very subtle dots, hidden under
+client/src/pages/_quarantine/legacy-landing/Home.jsx:31:    title: "AI-Powered Reflective Companion",
+client/src/pages/_quarantine/legacy-landing/Home.jsx:481:              { value: '24/7', label: 'AI Companion Available' },
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:80:      title: "AI Companion",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:198:          {/* Section Header */}
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:282:          {/* Section Header */}
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:362:          {/* Section Header */}
+client/src/pages/Contact.jsx:100:          {/* Floating Icons */}
+client/src/pages/Contact.jsx:113:          {/* Header */}
+client/src/pages/Contact.jsx:269:                <span>Talk to AI Companion</span>
+client/src/pages/ContentIndexPage.jsx:10:  { name: "Adaptive Companion", path: "/companion", description: "AI-powered personalized guidance", category: "Advanced Tools", icon: Users },
+client/src/pages/ControlDashboard.jsx:195:function SectionHeader({ icon: Icon, title, description }) {
+client/src/pages/ControlDashboard.jsx:260:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:356:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:450:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:529:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:603:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:697:      <SectionHeader 
+client/src/pages/ControlDashboard.jsx:787:      <SectionHeader 
+client/src/pages/DesignSystem.jsx:73:      {/* Header */}
+client/src/pages/DesignSystem.jsx:278:                    { size: "4xl", px: "36px", label: "Section Header" },
+client/src/pages/DesignSystem.jsx:523:                    • Floating decorative elements<br/>
+client/src/pages/DesignSystem.jsx:1294:                        { el: "Header Nav", id: "#main-nav", cls: ".canva-header", test: "nav-main" },
+client/src/pages/PracticeLibrary.jsx:6:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+client/src/pages/PracticeLibrary.jsx:337:              <CardHeader className="pb-3">
+client/src/pages/PracticeLibrary.jsx:360:              </CardHeader>
+client/src/pages/UserProfile.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/UserProfile.jsx:94:          <CardHeader>
+client/src/pages/UserProfile.jsx:98:          </CardHeader>
+client/src/pages/WellnessGoals.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/WireframeTemplates.jsx:71:          Tags: NavBar, Header, Navigation
+client/src/pages/WireframeTemplates.jsx:229:      {/* Template Header */}
+client/src/pages/WireframeTemplates.jsx:429:            { icon: MessageCircle, title: "AI Companion", desc: "24/7 compassionate guidance" },
+client/src/pages/WireframeTemplates.jsx:769:          data-component="QuickNavGrid"
+client/src/pages/WireframeTemplates.jsx:847:      {/* Header */}
+client/src/pages/WireframeTemplates.jsx:848:      <header className="flex items-center justify-between mb-8" data-component="PageHeader">
+client/src/pages/WireframeTemplates.jsx:988:      {/* Header with Search */}
+client/src/pages/WireframeTemplates.jsx:989:      <header className="mb-8" data-component="ContentHeader">
+client/src/pages/WireframeTemplates.jsx:1100:      {/* Header */}
+client/src/pages/WireframeTemplates.jsx:1101:      <header className="flex items-center justify-between mb-8" data-component="CommunityHeader">
+client/src/pages/WireframeTemplates.jsx:1364:   - Header/Navigation
+client/src/pages/WireframeTemplates.jsx:1376:      <Header />
+client/src/pages/LumiV6Preview.jsx:622:        escalation level 3. <b>Floating particles</b> auto-on for calm /
+client/src/pages/Privacy.jsx:147:                AI Companion Privacy
+client/src/pages/AdaptiveCompanionPage.tsx:97:export default function AdaptiveCompanionPage() {
+client/src/pages/AdaptiveCompanionPage.tsx:122:    title="AdaptiveCompanionPage"
+client/src/pages/AdaptiveCompanionPage.tsx:139:      <SEO title="Adaptive Companion — The Genuine Love Project" description="Your personalized wellness guide that adapts to your needs." />
+client/src/pages/AdaptiveCompanionPage.tsx:152:            Adaptive Companion
+client/src/pages/MirrorPage.tsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/MirrorPage.tsx:91:      <CardHeader className="pb-2">
+client/src/pages/MirrorPage.tsx:103:      </CardHeader>
+client/src/pages/MirrorPage.tsx:223:            <CardHeader className="pb-2">
+client/src/pages/MirrorPage.tsx:238:            </CardHeader>
+client/src/pages/MotionLab.jsx:26:  { phase: 4, name: "Floating",       property: "body translateY", range: "0 → -10px",       cycle: "9.3s" },
+client/src/pages/AIChatPage.tsx:10:        title="Chat with Lumi — Your Emotional Wellness Companion"
+client/src/pages/Pricing.jsx:55:  name: "Your Full Companion",
+client/src/pages/Pricing.jsx:57:  cta: "Get Full Companion",
+client/src/pages/Pricing.jsx:68:  name: "Your Full Companion",
+client/src/pages/Pricing.jsx:70:  cta: "Get Full Companion",
+client/src/pages/Pricing.jsx:119:  "Everything in Your Full Companion",
+client/src/pages/Pricing.jsx:234:        description="Free emotional wellness companion. Optional Personal Guide, Full Companion, and Transformation Partner plans. Cancel anytime."
+client/src/pages/CrisisResources.jsx:287:                Talk to Wellness Companion
+client/src/pages/StudyVaultPage.jsx:9:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/StudyVaultPage.jsx:448:                    <CardHeader>
+client/src/pages/StudyVaultPage.jsx:453:                    </CardHeader>
+client/src/pages/StudyVaultPage.jsx:498:                        <CardHeader className="pb-2">
+client/src/pages/StudyVaultPage.jsx:503:                        </CardHeader>
+client/src/pages/StudyVaultPage.jsx:517:                <CardHeader>
+client/src/pages/StudyVaultPage.jsx:522:                </CardHeader>
+client/src/pages/DesignSystemV2.jsx:98:        {/* Header */}
+client/src/pages/LegalPage.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/LegalPage.jsx:75:          <CardHeader>
+client/src/pages/LegalPage.jsx:80:          </CardHeader>
+client/src/pages/CommunityGuidelines.jsx:4:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/CommunityGuidelines.jsx:105:              <CardHeader>
+client/src/pages/CommunityGuidelines.jsx:110:              </CardHeader>
+client/src/pages/CommunityGuidelines.jsx:120:              <CardHeader>
+client/src/pages/CommunityGuidelines.jsx:125:              </CardHeader>
+client/src/pages/CommunityGuidelines.jsx:135:              <CardHeader>
+client/src/pages/CommunityGuidelines.jsx:140:              </CardHeader>
+client/src/pages/DataRetention.jsx:4:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/DataRetention.jsx:105:              <CardHeader>
+client/src/pages/DataRetention.jsx:110:              </CardHeader>
+client/src/pages/DataRetention.jsx:124:              <CardHeader>
+client/src/pages/DataRetention.jsx:129:              </CardHeader>
+client/src/pages/WellnessDashboard.jsx:20:function WelcomeHeader({ user }) {
+client/src/pages/WellnessDashboard.jsx:368:          <WelcomeHeader user={user} />
+client/src/pages/SafetyCenter.jsx:4:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+client/src/pages/SafetyCenter.jsx:91:                <CardHeader className="pb-2">
+client/src/pages/SafetyCenter.jsx:96:                </CardHeader>
+client/src/pages/PublicRoadmap.jsx:4:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+client/src/pages/PublicRoadmap.jsx:10:    { title: "AI Chat Companion", description: "Supportive AI conversations with trauma-informed responses" },
+client/src/pages/PricingPage.jsx:7:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/pages/PricingPage.jsx:136:              <CardHeader className="text-center pb-2">
+client/src/pages/PricingPage.jsx:139:              </CardHeader>
+client/src/pages/PressKit.jsx:4:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+client/src/pages/Presence.jsx:84:      <PresenceHeader />
+client/src/pages/Presence.jsx:109:// ─── Header with Lumi avatar in calmIdle ───────────────────────────────────
+client/src/pages/Presence.jsx:110:function PresenceHeader() {
+client/src/pages/CheckIn.jsx:183:      {/* Floating soft-purple particles — 5 subtle dots, hidden under
+client/src/pages/TalkTopics.jsx:431:                Talk to AI Companion
+client/src/pages/CanvaLanding.jsx:8:import LumiCompanion from "../components/lumi/LumiCompanion.jsx";
+client/src/pages/CanvaLanding.jsx:294:        title="MyMentalHealthBuddy — Free Emotional Wellness Companion"
+client/src/pages/CanvaLanding.jsx:1071:                <Link href="/chat" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-chat">AI Companion</Link>
+client/src/components/ContentStudio.module.css:210:.previewHeader {
+client/src/components/ContentStudio.module.css:263:.outputHeader {
+client/src/components/ContentStudio.module.css:500:.emailHeader {
+client/src/components/ContentStudio.module.css:561:  .previewHeader {
+client/src/components/PageTemplate.module.css:71:   Subheading: 28px, Section-Header: 24px, Body: 18px, Caption: 14px */
+client/src/components/PageTemplate.module.css:227:.sectionHeader {
+client/src/components/PageTemplate.module.css:329:  font-size: 1.5rem; /* 24px - Section Header */
+client/src/components/PageTemplate.module.css:535:  font-size: 1.5rem; /* 24px - Section Header */
+client/src/components/PageTemplate.module.css:665:.nextStepHeader {
+client/src/components/PageTemplate.module.css:758:  .nextStepHeader {
+client/src/components/PageTemplate.module.css:803:.practiceHeader {
+client/src/components/PageTemplate.module.css:969:.disclaimerHeader {
+client/src/components/PageTemplate.module.css:1175:.tieredPracticeHeader {
+client/src/components/PageTemplate.module.css:1265:.tierHeader {
+client/src/components/PageTemplate.module.css:1535:.tierCardHeader {
+client/src/components/PageTemplate.module.css:2094:.gentleBenefitsHeader {
+client/src/components/SacredForm.module.css:17:.formHeader {
+client/src/components/admin/SOPMonitorPanel.jsx:193:      {/* Header */}
+client/src/components/admin/OperationsPanel.jsx:44:function PanelHeader({ icon: Icon, title, subtitle, onRefresh, refreshing, action }) {
+client/src/components/admin/OperationsPanel.jsx:202:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:304:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:409:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:513:      <PanelHeader
+client/src/components/admin/OperationsPanel.jsx:671:      const baseHeaders = { Accept: "application/json" };
+client/src/components/admin/OperationsPanel.jsx:672:      if (token) baseHeaders.Authorization = `Bearer ${token}`;
+client/src/components/admin/OperationsPanel.jsx:680:              headers: baseHeaders,
+client/src/components/admin/OperationsPanel.jsx:728:      <PanelHeader
+client/src/components/admin/OrchestratorTestPanel.jsx:22:function getAuthHeaders() {
+client/src/components/admin/OrchestratorTestPanel.jsx:61:        headers: getAuthHeaders(),
+client/src/components/admin/OrchestratorTestPanel.jsx:87:        headers: getAuthHeaders(),
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:15:function authHeaders() {
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:22:  const tokens = authHeaders();
+client/src/components/admin/RecentActivityPanel.jsx:17:        <div className={styles.cardHeader}>
+client/src/components/admin/RecentActivityPanel.jsx:19:            <Clock className={styles.cardHeaderIcon} />
+client/src/components/admin/RecentActivityPanel.jsx:32:      <div className={styles.cardHeader}>
+client/src/components/admin/RecentActivityPanel.jsx:34:          <Clock className={styles.cardHeaderIcon} />
+client/src/components/admin/MetricCard.jsx:13:      <div className={styles.metricHeader}>
+client/src/components/admin/SystemHealthPanel.jsx:30:      <div className={styles.cardHeader}>
+client/src/components/admin/SystemHealthPanel.jsx:32:          <Activity className={styles.cardHeaderIcon} />
+client/src/components/admin/KernelStatusPanel.jsx:17:      <div className={styles.cardHeader}>
+client/src/components/admin/KernelStatusPanel.jsx:19:          <Brain className={styles.cardHeaderIcon} />
+client/src/components/admin/DailyToolsPanel.jsx:110:      <div className={styles.cardHeader}>
+client/src/components/admin/DailyToolsPanel.jsx:112:          <Wand2 className={styles.cardHeaderIcon} />
+client/src/components/admin/SystemTelemetryPanel.jsx:17:      <div className={styles.cardHeader}>
+client/src/components/admin/SystemTelemetryPanel.jsx:19:          <BarChart3 className={styles.cardHeaderIcon} />
+client/src/components/admin/DailyOpsChecklist.jsx:115:      <div className={styles.cardHeader}>
+client/src/components/admin/DailyOpsChecklist.jsx:117:          <CheckSquare className={styles.cardHeaderIcon} />
+client/src/components/admin/AIKnowledgeHub.jsx:55:      <div className={styles.cardHeader}>
+client/src/components/admin/AIKnowledgeHub.jsx:57:          <Brain className={styles.cardHeaderIcon} />
+client/src/components/chat/AIChatPanel.tsx:153:        <h1 className="text-2xl font-semibold">AI Companion</h1>
+client/src/components/chat/AIChatPanel.tsx:208:                  {m.role === "user" ? "You" : "Companion"}
+client/src/components/chat/AIChatPanel.tsx:230:                Companion is thinking...
+client/src/components/content/ContentTierCompiler.jsx:3:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+client/src/components/content/ContentTierCompiler.jsx:27:      <CardHeader className="pb-2">
+client/src/components/content/ContentTierCompiler.jsx:42:      </CardHeader>
+client/src/components/content/WhatNextRecommender.jsx:3:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+client/src/components/content/WhatNextRecommender.jsx:39:      <CardHeader>
+client/src/components/content/WhatNextRecommender.jsx:44:      </CardHeader>
+client/src/components/layout/AppShell.tsx:2:import Header from "./Header";
+client/src/components/layout/AppShell.tsx:14:      <Header />
+client/src/components/layout/Header.jsx:13:function Header() {
+client/src/components/layout/Header.jsx:283:export default Header;
+client/src/components/layout/PageLayout.jsx:9: * Phase 157: the inline <SacredNav /> render was removed. The global
+client/src/components/layout/PageLayout.jsx:10: * <TglpNavbar /> (mounted once in App.jsx) is the single canonical navbar,
+client/src/components/layout/PageLayout.jsx:11: * so rendering SacredNav here produced a second, duplicate navbar on
+client/src/components/layout/PageLayout.jsx:12: * PageLayout pages (e.g. /faq, /tools/affirmations). SacredNav's links are
+client/src/components/layout/PageLayout.jsx:13: * a strict subset of TglpNavbar, so no navigation is lost.
+client/src/components/personalization/ToolRecommendations.jsx:4:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+client/src/components/personalization/ToolRecommendations.jsx:29:export function ToolRecommendations({ maxItems = 4, showHeader = true }) {
+client/src/components/personalization/ToolRecommendations.jsx:57:      {showHeader && (
+client/src/components/personalization/ToolRecommendations.jsx:58:        <CardHeader>
+client/src/components/personalization/ToolRecommendations.jsx:63:        </CardHeader>
+client/src/components/personalization/ToolRecommendations.jsx:65:      <CardContent className={showHeader ? "" : "pt-6"}>
+client/src/components/sacred/Hero.module.css:70:   Subheading: 28px, Section-Header: 24px, Body: 18px, Caption: 14px */
+client/src/components/sacred/PlatformComponent.module.css:49:  font-size: 1.5rem; /* 24px - Section Header */
+client/src/components/sacred/SacredSection.module.css:26:.sectionHeader {
+client/src/components/sacred/SacredSection.module.css:33:   Subheading: 28px, Section-Header: 24px, Body: 18px, Caption: 14px */
+client/src/components/sacred/ProgressTracker.jsx:16:  showFloatingBadge = true,
+client/src/components/sacred/ProgressTracker.jsx:133:      {showFloatingBadge && celebratingMilestone && !prefersReducedMotion && (() => {
+client/src/components/sacred/SacredSection.jsx:50:          <header className={styles.sectionHeader}>
+client/src/components/ui/Card.tsx:25:const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+client/src/components/ui/Card.tsx:34:CardHeader.displayName = "CardHeader";
+client/src/components/ui/Card.tsx:76:export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+client/src/components/ui/table.tsx:16:const TableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(
+client/src/components/ui/table.tsx:21:TableHeader.displayName = "TableHeader";
+client/src/components/ui/table.tsx:85:export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };
+client/src/components/ui/Card.jsx:12:export function CardHeader({ children, className = '' }) {
+client/src/components/wellness/JournalAI.jsx:122:              <h2 className="font-serif text-xl font-semibold text-deepTeal dark:text-white">Compassionate AI Companion</h2>
+client/src/components/wellness/JournalAI.jsx:238:                  Share with AI Companion
+client/src/components/wellness/WellnessPageShell.jsx:134:        the page-text scrape (Reflective Journal, State Check-in, Crisis,
+client/src/components/wellness/WellnessPageShell.jsx:135:        AI Companion all showed the same three blocks repeating). Keeping
+client/src/components/wellnessToolsData.js:7:  { name: 'AI Companion', icon: '/icons/ai.svg' },
+client/src/components/avatar/BuddyAvatar.tsx:165: *   xl  → 208px (landing hero LumiCompanion)
+client/src/components/zen/zen-scape.css:61:/* Floating zen "petals" — tiny soft sage circles drifting upward.
+client/src/components/lumi/LumiV6.css:859:/* ----- Floating particles (calm · sleepy · empathy) ------------------- */
+client/src/components/lumi/FloatIdleAnimated.css:28:/* ─── Phase 4: Floating (body translateY 0→-10px over 9.3s, ease) ─── */
+client/src/components/lumi/LumiCompanion.jsx:32: * LumiCompanion
+client/src/components/lumi/LumiCompanion.jsx:69:export function LumiCompanion({
+client/src/components/lumi/LumiCompanion.jsx:310:export default LumiCompanion;
+client/src/components/lumi/LumiCompanion.jsx:313:// <LumiCompanion size="lg" interactive showCustomizer />
+client/src/components/lumi/LumiCompanion.jsx:314:// <LumiCompanion size="sm" /> // for header avatar
+client/src/components/lumi/FloatIdleAnimated.jsx:8: *   Phase 4 — Floating       : body  translateY 0 → -10px  9.3s
+client/src/components/lumi/LumiMascot.jsx:6: * call site (Header, Home, DesignSystemV2 showcase, etc.) keeps working.
+client/src/components/navigation/CanonicalNavbar.jsx:33:export default function CanonicalNavbar() {
+client/src/components/AICompanion.jsx:36:export default function AICompanion({ className = "" }) {
+client/src/components/AICompanion.jsx:201:        aria-label="Open AI Companion"
+client/src/components/AICompanion.jsx:238:                    Sacred Companion
+client/src/components/AICompanion.jsx:302:                        <span className="text-xs font-medium text-[var(--glp-teal)]">Sacred Companion</span>
+client/src/components/App.tsx:24:              <h3 style={{ marginTop: 0 }}>AI Companion</h3>
+client/src/components/BenefitsSection.jsx:104:        {/* Floating Organic Blobs */}
+client/src/components/BenefitsSection.jsx:135:        {/* Section Header */}
+client/src/components/ChatWidget.tsx:2:// Floating chat widget for quick AI conversations
+client/src/components/ContentStudio.jsx:443:          <div className={styles.emailHeader}>
+client/src/components/ContentStudio.jsx:560:        <div className={styles.previewHeader}>
+client/src/components/ContentStudio.jsx:658:      <div className={styles.outputHeader}>
+client/src/components/EmotionCalendar.jsx:4:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/components/EmotionCalendar.jsx:194:      <CardHeader className="pb-2">
+client/src/components/EmotionCalendar.jsx:226:      </CardHeader>
+client/src/components/EmotionLog.jsx:3:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/components/EmotionLog.jsx:58:      <CardHeader>
+client/src/components/EmotionLog.jsx:63:      </CardHeader>
+client/src/components/EmotionPieChart.jsx:5:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/components/EmotionPieChart.jsx:134:        <CardHeader>
+client/src/components/EmotionPieChart.jsx:139:        </CardHeader>
+client/src/components/EmotionPieChart.jsx:151:      <CardHeader className="pb-2">
+client/src/components/EmotionPieChart.jsx:159:      </CardHeader>
+client/src/components/HealingHero.jsx:27:  showFloatingElements = true,
+client/src/components/HealingHero.jsx:97:      {/* Floating Sacred Elements */}
+client/src/components/HealingHero.jsx:98:      {showFloatingElements && (
+client/src/components/HealingHero.jsx:100:          {/* Floating Leaf - Top Left */}
+client/src/components/HealingHero.jsx:111:          {/* Floating Star - Top Right */}
+client/src/components/HealingHero.jsx:122:          {/* Floating Heart - Bottom Right */}
+client/src/components/HealingHero.jsx:133:          {/* Floating Sparkle - Bottom Left */}
+client/src/components/HealingHero.jsx:144:          {/* Organic Floating Blobs */}
+client/src/components/LevelUpModal.jsx:9:  20: { title: "Heart Warrior", reward: "Unlock AI Companion", color: "from-pink-400 to-rose-500" },
+client/src/components/MoodTrendsChart.jsx:3:import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+client/src/components/MoodTrendsChart.jsx:83:      <CardHeader className="pb-2">
+client/src/components/MoodTrendsChart.jsx:99:      </CardHeader>
+client/src/components/SacredForm.jsx:74:      <div className={styles.formHeader}>
+client/src/components/WellnessToolkit.jsx:11:  { name: 'AI Companion', icon: '/icons/ai.svg' },
+client/src/components/SacredNav.jsx:25:export default function SacredNav({ className = "" }) {
+client/src/components/UpsellModal.jsx:74:        {/* Header */}
+client/src/components/Header.jsx:26:export default function Header() {
+client/src/components/Header.jsx:33:    { href: "/companion", label: "Companion", icon: MessageCircle },
+client/src/components/PageTemplate.jsx:314:        <div className={styles.nextStepHeader}>
+client/src/components/PageTemplate.jsx:450:        <div className={styles.practiceHeader}>
+client/src/components/PageTemplate.jsx:520:      <div className={styles.tieredPracticeHeader}>
+client/src/components/PageTemplate.jsx:553:              <div className={styles.tierHeader}>
+client/src/components/PageTemplate.jsx:665:                      <div className={styles.tierCardHeader}>
+client/src/components/PageTemplate.jsx:788:        <div className={styles.disclaimerHeader}>
+client/src/components/PageTemplate.jsx:841:        <header className={styles.gentleBenefitsHeader}>
+client/src/components/PageTemplate.jsx:1008:          The canonical global navbar (TglpNavbar) is the single navigation
+client/src/components/TglpNavbar.jsx:127:export default function TglpNavbar() {
+client/src/content/meta/routeMeta.autogen.ts:860:    "title": "Companion",
+client/src/content/searchIndex.ts:631:  { id: "platform-companion", title: "Adaptive Companion", description: "A guided companion experience.", path: "/companion", type: "Platform", tags: ["companion", "guided"], protected: true },
+client/src/content/routes.js:474:              deep: 'AI Companion'
+client/src/content/routes.js:981:      { icon: 'MessageCircle', title: 'AI Companion', description: 'A patient, trauma-informed presence available whenever you need someone to talk to.' }
+client/src/content/routes.js:1007:          { icon: 'Sparkles', title: 'AI Companion', text: 'A patient, trauma-informed presence available whenever you need support.' }
+client/src/content/routes.js:1555:          { icon: 'MessageCircle', title: 'Talk to AI Companion', text: 'Share what is on your mind with a patient, understanding presence.' }
+client/src/content/routes.js:1700:      { icon: 'MessageCircle', title: 'AI Companion', description: 'A patient, trauma-informed presence available whenever you need someone to listen.' },
+client/src/content/routes.js:1712:          { icon: 'MessageCircle', title: 'Talk to AI Companion', text: 'Share what\'s on your mind with a patient, trauma-informed presence. No appointments needed.' },
+client/src/content/routes.js:2820:    title: 'AI Companion — The Genuine Love Project',
+client/src/content/routes.js:2853:    pageLabel: 'AI Companion',
+client/src/content/routes.js:2854:    title: 'Your AI Companion — The Genuine Love Project',
+client/src/content/routes.js:2862:      secondaryCta: { label: 'Customize Companion', href: '#settings' }
+client/src/content/routes.js:8422:    pageLabel: 'AI Companion',
+client/src/content/routes.js:8423:    title: 'AI Companion — The Genuine Love Project',
+client/src/content/routes.js:8428:      titleHighlight: 'AI Companion.',
+client/src/data/lumiAssets.js:8: * preserved — every downstream consumer (`useLumiEmotion`, `LumiCompanion`,
+client/src/data/lumiAssets.js:23:  // Header / favicon scale — same artwork, shrinks cleanly to 32px.
+client/src/features/community/Community.tsx:3:import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+client/src/features/community/Community.tsx:55:        <CardHeader>
+client/src/features/community/Community.tsx:63:        </CardHeader>
+client/src/features/community/Community.tsx:123:        <CardHeader>
+client/src/features/community/Community.tsx:132:        </CardHeader>
+client/src/features/community/SharedReflectionsPage.jsx:143:        {/* Header */}
+client/src/features/community/SharedReflectionsPage.jsx:231:        {/* Section Header: Q&A Spotlight */}
+client/src/features/community/SharedReflectionsPage.jsx:269:              {/* Question Header */}
+client/src/lib/api.ts:57:  const { body, json: jsonOpt, headers: extraHeaders, ...rest } = options;
+client/src/lib/api.ts:69:    ...((extraHeaders as Record<string, string>) || {}),
+client/src/lib/aiChat.ts:23:function authHeaders(): Record<string, string> {
+client/src/lib/aiChat.ts:43:      ...authHeaders(),
+client/src/lib/aiChat.ts:53:    headers: authHeaders(),
+client/src/lib/aiChat.ts:62:    headers: authHeaders(),
+client/src/skills/renderSkill.tsx:53:  showHeader?: boolean;
+client/src/skills/renderSkill.tsx:60:  showHeader = true,
+client/src/skills/renderSkill.tsx:77:      {showHeader && (
+client/src/styles/emotion-effects.css:78:/* Calm - Floating Lotus Petals */
+client/src/styles/lumi-admin.css:224: * the existing hero sizing comes from inline styles + LumiCompanion props.
+client/src/styles/checkin.css:54:/* 2. Floating soft-purple particles — 5 very subtle (0.04-0.08 opacity)
+client/src/styles/checkin.css:85:/* 3. Header greeting entrance — 700ms gentle fade + translate-up. Plays
+client/src/styles/brand.css:195:   v5.6 follow-up — Header & Footer CTA polish (Option 2 extension)
+client/src/styles/brand.css:196:   Scope: TglpNavbar (Get Started / Dashboard / Sign In) + Footer nav links.
+client/src/styles/brand.css:215:     on TglpNavbar's gold pills (inline style normally beats stylesheet specificity). */
+client/src/styles/brand.css:608:/* Floating Animation */
+client/src/styles/sacred.css:35:   Subheading: 28px, Section Header: 24px, Body: 18px,
+client/src/styles/visual-benefits.css:109:/* Floating avatar overlay (1:1) */
+client/src/styles/breathing-tool.css:41:/* 2. Floating particles — 5 very subtle (0.05-0.10 opacity) calm-blue dots
+client/src/styles/canva-landing.css:164:/* Floating animation for decorative icons */
+client/src/styles/canva-landing.css:277:/* Floating icon container with glow */
+client/src/styles/canva-landing.css:322:/* Floating animation */
+client/src/styles/canva-landing.css:696:/* Header styles */
+client/src/styles/canva-landing.css:2070:/* --- Stats Section — Premium Floating Cards --- */
+client/src/sections/VisualBenefits.jsx:14: *     "Meet Your Companion" → /chat)
+client/src/sections/VisualBenefits.jsx:19: *   - Avatar mapping aligned to spec (Companionship + Understanding share
+client/src/sections/VisualBenefits.jsx:118:    cta: { label: 'Meet Your Companion', href: '/celebration' },
+client/src/design-system/tokens/shadows.ts:26:  cardFloating: shadows.lg,
+client/src/design-system/components/MMHBCard.tsx:46:  floating: shadowFor.cardFloating,
+client/src/companion-voice/types/companionVoiceTypes.ts:2: * Phase 15 — Gentle Companion Conversation Layer.
+client/src/companion-voice/types/companionVoiceTypes.ts:36:export type CompanionInput = {
+client/src/companion-voice/types/companionVoiceTypes.ts:42:export type CompanionResponse = {
+client/src/companion-voice/engine/companionEngine.ts:2: * Phase 15 — Gentle Companion engine.
+client/src/companion-voice/engine/companionEngine.ts:4: * Pure function: (input) → CompanionResponse.
+client/src/companion-voice/engine/companionEngine.ts:29:  CompanionInput,
+client/src/companion-voice/engine/companionEngine.ts:30:  CompanionResponse,
+client/src/companion-voice/engine/companionEngine.ts:112:export function generateResponse(input: CompanionInput): CompanionResponse {
+client/src/companion-voice/governance/companionRules.ts:2: * Phase 15 — Governance rules for the Gentle Companion Conversation Layer.
+client/src/companion-voice/governance/companionRules.ts:24:  CompanionInput,
+client/src/companion-voice/governance/companionRules.ts:25:  CompanionResponse,
+client/src/companion-voice/governance/companionRules.ts:31:export type CompanionRule = {
+client/src/companion-voice/governance/companionRules.ts:35:  check: (response: CompanionResponse, input: CompanionInput) => boolean;
+client/src/companion-voice/governance/companionRules.ts:48:export const rules: CompanionRule[] = [
+client/src/companion-voice/governance/companionRules.ts:184:  response: CompanionResponse,
+client/src/companion-voice/governance/companionRules.ts:185:  input: CompanionInput,
+client/src/companion-voice/governance/companionRules.ts:204: * CompanionResponse with the appropriate intent (reflections → "reflect",
+client/src/companion-voice/governance/companionRules.ts:215:    const synthetic: CompanionResponse = {
+client/src/companion-voice/components/MMHBCompanionMessage.tsx:12:import type { CompanionResponse } from "../types/companionVoiceTypes";
+client/src/companion-voice/components/MMHBCompanionMessage.tsx:14:export type MMHBCompanionMessageProps = {
+client/src/companion-voice/components/MMHBCompanionMessage.tsx:15:  response: CompanionResponse;
+client/src/companion-voice/components/MMHBCompanionMessage.tsx:18:export function MMHBCompanionMessage({ response }: MMHBCompanionMessageProps) {
+client/src/companion-voice/components/MMHBCompanionInput.tsx:14:export type MMHBCompanionInputProps = {
+client/src/companion-voice/components/MMHBCompanionInput.tsx:20:export function MMHBCompanionInput({
+client/src/companion-voice/components/MMHBCompanionInput.tsx:24:}: MMHBCompanionInputProps) {
+client/src/companion-voice/components/MMHBCompanion.tsx:11:import type { CompanionResponse } from "../types/companionVoiceTypes";
+client/src/companion-voice/components/MMHBCompanion.tsx:12:import { MMHBCompanionInput } from "./MMHBCompanionInput";
+client/src/companion-voice/components/MMHBCompanion.tsx:13:import { MMHBCompanionMessage } from "./MMHBCompanionMessage";
+client/src/companion-voice/components/MMHBCompanion.tsx:15:export type MMHBCompanionProps = {
+client/src/companion-voice/components/MMHBCompanion.tsx:18:    intent: CompanionResponse["intent"];
+client/src/companion-voice/components/MMHBCompanion.tsx:19:    detected: CompanionResponse["detected"];
+client/src/companion-voice/components/MMHBCompanion.tsx:24:export function MMHBCompanion({ onResponse }: MMHBCompanionProps) {
+client/src/companion-voice/components/MMHBCompanion.tsx:25:  const [response, setResponse] = useState<CompanionResponse | null>(null);
+client/src/companion-voice/components/MMHBCompanion.tsx:44:      <MMHBCompanionInput onSubmit={handleSubmit} />
+client/src/companion-voice/components/MMHBCompanion.tsx:45:      {response && <MMHBCompanionMessage response={response} />}
+client/src/companion-voice/__tests/companionGovernance.test.ts:2: * Phase 15 — Governance contract tests for the Gentle Companion engine.
+client/src/companion-voice/__tests/companionGovernance.test.ts:29:describe("Phase 15 — Gentle Companion Conversation Layer governance", () => {
+client/src/companion-voice/__tests/companionGovernance.test.ts:371:        `Phase 15 governance bypass — files outside companion-voice/ import internals:\n  ${offenders.join("\n  ")}\n\nUse the barrel: \`import { MMHBCompanion, generateResponse } from "@/companion-voice"\`.`,
+client/src/companion-voice/index.ts:2: * Phase 15 — Gentle Companion Conversation Layer.
+client/src/companion-voice/index.ts:10:export { MMHBCompanion } from "./components/MMHBCompanion";
+client/src/companion-voice/index.ts:11:export type { MMHBCompanionProps } from "./components/MMHBCompanion";
+client/src/companion-voice/index.ts:13:export { MMHBCompanionMessage } from "./components/MMHBCompanionMessage";
+client/src/companion-voice/index.ts:14:export type { MMHBCompanionMessageProps } from "./components/MMHBCompanionMessage";
+client/src/companion-voice/index.ts:16:export { MMHBCompanionInput } from "./components/MMHBCompanionInput";
+client/src/companion-voice/index.ts:17:export type { MMHBCompanionInputProps } from "./components/MMHBCompanionInput";
+client/src/companion-voice/index.ts:29:  CompanionRule,
+client/src/companion-voice/index.ts:35:  CompanionInput,
+client/src/companion-voice/index.ts:36:  CompanionResponse,
+client/src/lumi-conversation/state/conversationState.ts:2: * Phase 15 (spec-aligned) — Gentle Companion Conversation Layer.
+client/src/lumi-conversation/index.ts:2: * Phase 15 (spec-aligned) — Gentle Companion Conversation Layer.
+client/src/lumi-consistency/identity/sharedCompanionPrinciples.ts:2: * Phase 25 — sharedCompanionPrinciples
+client/src/lumi-consistency/identity/sharedCompanionPrinciples.ts:8:export interface CompanionPrinciple {
+client/src/lumi-consistency/identity/sharedCompanionPrinciples.ts:57:export const COMPANION_PRINCIPLES: ReadonlyArray<CompanionPrinciple> = Object.freeze([
+client/src/lumi-consistency/governance/crossPlatformEnforcementRules.ts:37:    description: "Companion name must be 'Lumi' on every platform.",
+client/src/lumi-consistency/governance/crossPlatformEnforcementRules.ts:43:    description: "Companion role must be 'companion' on every platform.",
+client/src/lumi-consistency/runtime/identityVerificationSystem.ts:54:      description: "Companion name matches LUMI_IDENTITY.name",
+client/src/lumi-consistency/runtime/identityVerificationSystem.ts:60:      description: "Companion role matches LUMI_IDENTITY.role",
+client/src/lumi-consistency/index.ts:25:} from "./identity/sharedCompanionPrinciples";
+client/src/lumi-consistency/index.ts:27:  CompanionPrinciple,
+client/src/lumi-consistency/index.ts:29:} from "./identity/sharedCompanionPrinciples";
+client/src/lumi-registry/registry/officialLumiRegistry.ts:67:    description: "Floating egg-shaped Lumi",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:119:    name: "Companion Lumi",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:120:    label: "Companion Lumi",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:192:    label: "Floating calm Lumi",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:193:    description: "Floating idle Lumi with closed eyes — the runtime calmIdle anchor",
+client/src/_quarantine/orphans/SacredNavBar.jsx:3:export default function SacredNavBar() {
+client/src/App.jsx:19:import TglpNavbar from "./components/TglpNavbar.jsx";
+client/src/App.jsx:40:// v5.8.35 perf: AICompanion (393 lines) + AccessibilityToolbar (208) deferred.
+client/src/App.jsx:41:const AICompanion = lazy(() => import("./components/AICompanion.jsx"));
+client/src/App.jsx:124:const AdaptiveCompanionPage = lazy(() => import("./pages/AdaptiveCompanionPage.tsx"));
+client/src/App.jsx:405:            {/* Phase 153: global navbar mount — single source of truth (TglpNavbar).
+client/src/App.jsx:408:                Phase 157: removed duplicate global <CanonicalNavbar /> that
+client/src/App.jsx:409:                rendered a second sticky desktop navbar above TglpNavbar on
+client/src/App.jsx:410:                every route. TglpNavbar is the single canonical navbar (mobile
+client/src/App.jsx:413:              <TglpNavbar />
+client/src/App.jsx:1497:                <ProtectedRoute><AdaptiveCompanionPage /></ProtectedRoute>
+client/src/App.jsx:1917:          <SafeBoundary label="AICompanion">
+client/src/App.jsx:1919:              <AICompanion />
+client/src/index.css:5795:/* Section Headers with Visual Anchors */
+client/src/index.css:7294:   fought TglpNavbar's own Tailwind styling, producing extra nav-looking
+client/src/index.css:7295:   surfaces. The canonical navbar (TglpNavbar) self-styles via Tailwind;
+client/src/index.css:7363:/* Phase D12: removed D9 mobile `header nav` overflow override — TglpNavbar
+client/src/index.css:7418:   navs are now prevented at the component level (single canonical TglpNavbar),
