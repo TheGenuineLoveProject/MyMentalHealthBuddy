@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Search, Calendar, Clock, User, ArrowRight, BookOpen } from "lucide-react";
 import SEO from "../components/SEO";
 import NewsletterSignup from "../components/NewsletterSignup";
+import LotusLoader from "../components/ui/LotusLoader";
 import { trackEvent, trackPageView } from "../hooks/useAnalytics.mjs";
 
 function BlogCard({ post }) {
@@ -146,8 +147,7 @@ export default function BlogIndex() {
 
         {isLoading && (
           <div className="text-center py-12">
-            <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin motion-reduce:animate-none mx-auto mb-4" />
-            <p className="text-[var(--glp-ink)]/70">Loading articles...</p>
+            <LotusLoader message="Loading articles..." />
           </div>
         )}
 
