@@ -55,13 +55,13 @@ const MECHANISMS = [
  * They are catalogued for AWARENESS ONLY — never targeted for change.
  */
 const EXCLUDED_DOMAINS = new Set([
-  "auth", "journal", "crisis", "healing", "chat", "billing", "dashboard", "admin",
+  "auth", "journal", "crisis", "healing", "chat", "billing", "dashboard", "admin", "provider",
 ]);
 
 function inferDomain(relPath, line) {
   const p = relPath.toLowerCase();
   const l = line.toLowerCase();
-  // Path-based (strongest signal)
+  // Path-based (strongest signal) — most specific excluded domains first.
   if (/(^|\/)(auth|login|signin|signup|session|token)/.test(p) || /authcontext/.test(p)) return "auth";
   if (/admin/.test(p) || /admin(session|verified)|feature_flags/.test(l)) return "admin";
   if (/(journal|reflection|reflect)/.test(p) || /reflection|journal/.test(l)) return "journal";
@@ -70,6 +70,8 @@ function inferDomain(relPath, line) {
   if (/chat|conversation|message/.test(p)) return "chat";
   if (/(billing|pricing|checkout|payment|subscription|stripe)/.test(p) || /billing|checkout|payment/.test(l)) return "billing";
   if (/dashboard/.test(p)) return "dashboard";
+  // Provider flows: React context providers + the hooks/state machinery they own.
+  if (/(^|\/)(context|providers?)\//.test(p) || /(provider|context)\.(jsx?|tsx?|mjs)$/.test(p) || /(^|\/)hooks?\//.test(p)) return "provider";
   // Content/keyword-based fallbacks (non-excluded)
   if (/reflection|journal/.test(l)) return "journal";
   if (/admin/.test(l)) return "admin";
@@ -80,6 +82,20 @@ function inferDomain(relPath, line) {
   if (/lumi/.test(p) || /lumi/.test(l)) return "lumi-ux";
   if (/analytics/.test(p) || /analytics|ga_|gtag/.test(l)) return "analytics";
   return "uncategorized";
+}
+
+/** Human-readable reason for the migration decision (audit transparency). */
+function migrationReason(domain, sensitive) {
+  if (EXCLUDED_DOMAINS.has(domain)) {
+    return `Excluded domain '${domain}' — out of scope per H2.3; catalogued for awareness only, never targeted for change.`;
+  }
+  if (sensitive) {
+    return "Security-sensitive value (token/session/credential signal) — defer to a separately-authorized, governed decision.";
+  }
+  if (domain === "uncategorized") {
+    return "Domain could not be inferred from path/keys — needs manual triage before any migration is considered.";
+  }
+  return `Public, non-excluded domain '${domain}' — eligible for future additive, guarded-accessor migration (no change made here).`;
 }
 
 /** Sensitivity: tokens / auth / admin verification are security-relevant. */
@@ -160,7 +176,8 @@ async function main() {
         riskLevel: risk,
         protectedSensitive: sensitive,
         excludedDomain: excluded,
-        migrationAllowed: !excluded,
+        migrationAllowed: !excluded && !sensitive ? "yes" : "no",
+        reason: migrationReason(domain, sensitive),
         snippet: raw.trim().slice(0, 200),
       });
     }
@@ -179,7 +196,7 @@ async function main() {
     if (byRisk[f.riskLevel] !== undefined) byRisk[f.riskLevel] += 1;
     filesSet.add(f.file);
     if (f.protectedSensitive) sensitiveCount += 1;
-    if (!f.migrationAllowed) migrationBlocked += 1;
+    if (f.migrationAllowed === "no") migrationBlocked += 1;
   }
 
   const report = {
@@ -189,7 +206,7 @@ async function main() {
       generatedAt: new Date().toISOString(),
       scanRoot: path.relative(ROOT, SCAN_DIR),
       excludedDomains: [...EXCLUDED_DOMAINS].sort(),
-      note: "Excluded-domain findings are catalogued for awareness only; migrationAllowed=false.",
+      note: "Excluded-domain and sensitive findings are catalogued for awareness only; migrationAllowed='no'.",
     },
     summary: {
       filesScanned: files.length,
@@ -264,8 +281,8 @@ function renderMarkdown(report) {
   lines.push("");
   lines.push("## Findings");
   lines.push("");
-  lines.push(mdTableRow(["File", "Line", "Mechanism", "Domain", "Risk", "Sensitive", "Migration allowed", "Snippet"]));
-  lines.push(mdTableRow(["---", "---", "---", "---", "---", "---", "---", "---"]));
+  lines.push(mdTableRow(["File", "Line", "Mechanism", "Domain", "Risk", "Sensitive", "Migration allowed", "Reason", "Snippet"]));
+  lines.push(mdTableRow(["---", "---", "---", "---", "---", "---", "---", "---", "---"]));
   for (const f of findings) {
     lines.push(
       mdTableRow([
@@ -275,7 +292,8 @@ function renderMarkdown(report) {
         f.likelyDomain,
         f.riskLevel,
         f.protectedSensitive ? "yes" : "no",
-        f.migrationAllowed ? "yes" : "no (excluded)",
+        f.migrationAllowed,
+        f.reason,
         "`" + f.snippet.replace(/`/g, "'") + "`",
       ])
     );
