@@ -30,6 +30,7 @@ import { Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf, BookOpen, Messag
 import { normalizePathname, routeKeyFromPathname } from "./routeKey";
 import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
 import { coreRoutes } from "./routes/coreRoutes.js";
+import { supportRoutes } from "./routes/supportRoutes.js";
 
 let __routeByPathCache = null;
 let __cachedRoutesRef = null;
@@ -8391,53 +8392,9 @@ const rawRoutes = [
   },
   
   // =========================================================================
-  // ADDITIONAL SUPPORT ROUTES (3 routes)
+  // ADDITIONAL SUPPORT ROUTES (3 routes) — extracted to ./routes/supportRoutes.js
   // =========================================================================
-  {
-    route: '/support/guides',
-    category: 'support',
-    pageLabel: 'User Guides',
-    title: 'Guides — The Genuine Love Project',
-    description: 'Helpful guides and tutorials.',
-    hero: {
-      eyebrow: 'Learn',
-      title: 'User',
-      titleHighlight: 'Guides.',
-      subtitle: 'Step-by-step guides to help you use the platform.',
-      primaryCta: { label: 'Browse Guides', href: '#guides' },
-      secondaryCta: { label: 'Video Tutorials', href: '#videos' }
-    }
-  },
-  {
-    route: '/support/feedback',
-    category: 'support',
-    pageLabel: 'Feedback',
-    title: 'Feedback — The Genuine Love Project',
-    description: 'Share your feedback with us.',
-    hero: {
-      eyebrow: 'Your Voice',
-      title: 'Share',
-      titleHighlight: 'Feedback.',
-      subtitle: 'Help us improve your experience.',
-      primaryCta: { label: 'Give Feedback', href: '#feedback' },
-      secondaryCta: { label: 'Feature Requests', href: '#requests' }
-    }
-  },
-  {
-    route: '/support/accessibility',
-    category: 'support',
-    pageLabel: 'Accessibility',
-    title: 'Accessibility — The Genuine Love Project',
-    description: 'Our commitment to accessibility.',
-    hero: {
-      eyebrow: 'Inclusive Design',
-      title: 'Accessibility',
-      titleHighlight: 'First.',
-      subtitle: 'Our commitment to making healing accessible to all.',
-      primaryCta: { label: 'Learn More', href: '#accessibility' },
-      secondaryCta: { label: 'Report Issue', href: '#report' }
-    }
-  },
+  ...supportRoutes,
   
   // =========================================================================
   // DESIGN SYSTEM - Component Catalog
