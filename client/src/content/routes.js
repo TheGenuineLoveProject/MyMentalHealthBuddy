@@ -31,6 +31,7 @@ import { normalizePathname, routeKeyFromPathname } from "./routeKey";
 import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
 import { coreRoutes } from "./routes/coreRoutes.js";
 import { supportRoutes } from "./routes/supportRoutes.js";
+import { learningRoutes } from "./routes/learningRoutes.js";
 
 let __routeByPathCache = null;
 let __cachedRoutesRef = null;
@@ -8281,51 +8282,8 @@ const rawRoutes = [
   // =========================================================================
   // LEARNING & EDUCATION ROUTES (3 routes)
   // =========================================================================
-  {
-    route: '/learn',
-    category: 'learning',
-    pageLabel: 'Learning Hub',
-    title: 'Learning Hub — The Genuine Love Project',
-    description: 'Educational resources for your healing journey.',
-    hero: {
-      eyebrow: 'Grow Your Understanding',
-      title: 'Learn &',
-      titleHighlight: 'Grow.',
-      subtitle: 'Evidence-based articles, guides, and courses to support your healing journey.',
-      primaryCta: { label: 'Explore Topics', href: '#topics' },
-      secondaryCta: { label: 'Featured Guides', href: '#guides' }
-    }
-  },
-  {
-    route: '/learn/guides',
-    category: 'learning',
-    pageLabel: 'Guides',
-    title: 'Healing Guides — The Genuine Love Project',
-    description: 'Step-by-step guides for your wellness journey.',
-    hero: {
-      eyebrow: 'Step by Step',
-      title: 'Healing',
-      titleHighlight: 'Guides.',
-      subtitle: 'Comprehensive guides to help you navigate your healing path.',
-      primaryCta: { label: 'Browse Guides', href: '#guides' },
-      secondaryCta: { label: 'Quick Start', href: '#start' }
-    }
-  },
-  {
-    route: '/learn/articles',
-    category: 'learning',
-    pageLabel: 'Articles',
-    title: 'Articles — The Genuine Love Project',
-    description: 'Insightful articles on emotional wellness.',
-    hero: {
-      eyebrow: 'Insights & Wisdom',
-      title: 'Wellness',
-      titleHighlight: 'Articles.',
-      subtitle: 'Evidence-based articles to deepen your understanding of healing.',
-      primaryCta: { label: 'Read Articles', href: '#articles' },
-      secondaryCta: { label: 'Popular Topics', href: '#topics' }
-    }
-  },
+  // (3 routes extracted to ./routes/learningRoutes.js — spread in place below)
+  ...learningRoutes,
   
   // =========================================================================
   // ADDITIONAL COMMUNITY ROUTES (4 routes)
