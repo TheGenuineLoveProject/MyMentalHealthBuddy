@@ -1,0 +1,502 @@
+{
+  "meta": {
+    "phase": "H2.5",
+    "mode": "STABILIZATION CANDIDATE GOVERNANCE — analysis only, no runtime change, no wrapper, no centralization, no migration",
+    "generatedAt": "2026-05-30T22:55:36.535Z",
+    "sources": [
+      "codex/storage/storageUsageAudit.json",
+      "codex/storage/storageHotspotClusters.json"
+    ],
+    "excludedDomains": [
+      "admin",
+      "auth",
+      "billing",
+      "chat",
+      "crisis",
+      "dashboard",
+      "healing",
+      "journal",
+      "provider"
+    ],
+    "publicSafeDomains": [
+      "ux-preferences",
+      "wellness-progress",
+      "tools-monitors",
+      "lumi-ux",
+      "analytics"
+    ],
+    "gates": [
+      "public-safe",
+      "non-sensitive",
+      "non-excluded/non-cross-domain",
+      "low coupling (single domain)",
+      "low blast radius (≤3 findings)",
+      "hydration-safe",
+      "SSR-safe",
+      "isolated",
+      "fully migration-allowed"
+    ],
+    "note": "Excluded domains never appear as candidates. Candidates are observations only; nothing is migrated, wrapped, or centralized in H2.5."
+  },
+  "summary": {
+    "publicBaselineFilesConsidered": 17,
+    "qualifiedCandidates": 0,
+    "nearMissPublicFiles": 17,
+    "byComplexity": {},
+    "byPriority": {}
+  },
+  "excludedDomainsExplicit": [
+    "admin",
+    "auth",
+    "billing",
+    "chat",
+    "crisis",
+    "dashboard",
+    "healing",
+    "journal",
+    "provider"
+  ],
+  "candidates": [],
+  "nearMissPublicFiles": [
+    {
+      "file": "client/src/components/layout/Header.jsx",
+      "storageKeys": [
+        "glp-mode"
+      ],
+      "domain": "ux-preferences",
+      "findings": 2,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "low (file carries window/storage guard)",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present. Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present"
+      ]
+    },
+    {
+      "file": "client/src/components/lumi/LumiCompanion.jsx",
+      "storageKeys": [],
+      "domain": "lumi-ux",
+      "findings": 1,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "trivial",
+      "blastRadius": "local (single touch)",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "low (no init/render-time read detected)",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/WellnessScore.jsx",
+      "storageKeys": [
+        "last_wellness_score"
+      ],
+      "domain": "wellness-progress",
+      "findings": 2,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "low (no init/render-time read detected)",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/lumi-memory/state/memoryStore.ts",
+      "storageKeys": [],
+      "domain": "lumi-ux",
+      "findings": 3,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "low (no init/render-time read detected)",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/pages/pathways/CalmPlan.jsx",
+      "storageKeys": [
+        "glp_calm_plan"
+      ],
+      "domain": "ux-preferences",
+      "findings": 1,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "trivial",
+      "blastRadius": "local (single touch)",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "low (no init/render-time read detected)",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/AccessibilityToolbar.jsx",
+      "storageKeys": [
+        "glp-a11y-settings"
+      ],
+      "domain": "ux-preferences",
+      "findings": 3,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/DigitalDetox.jsx",
+      "storageKeys": [
+        "digital_detox_data"
+      ],
+      "domain": "tools-monitors",
+      "findings": 3,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/GoalProgress.jsx",
+      "storageKeys": [
+        "wellness_goals"
+      ],
+      "domain": "wellness-progress",
+      "findings": 2,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/SelfCompassion.jsx",
+      "storageKeys": [
+        "self_compassion_data"
+      ],
+      "domain": "tools-monitors",
+      "findings": 2,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/SleepTracker.jsx",
+      "storageKeys": [
+        "sleep_history"
+      ],
+      "domain": "tools-monitors",
+      "findings": 2,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/StressMonitor.jsx",
+      "storageKeys": [
+        "stress_monitor_data"
+      ],
+      "domain": "tools-monitors",
+      "findings": 2,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/ui/CalmModeToggle.jsx",
+      "storageKeys": [
+        "glp-calm-mode"
+      ],
+      "domain": "ux-preferences",
+      "findings": 4,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "medium",
+      "blastRadius": "multi-touch",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "low (file carries window/storage guard)",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: blast radius >3 findings; hydration risk present. Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "blast radius >3 findings",
+        "hydration risk present"
+      ]
+    },
+    {
+      "file": "client/src/components/WorryTimeScheduler.jsx",
+      "storageKeys": [
+        "worry_time_data"
+      ],
+      "domain": "tools-monitors",
+      "findings": 2,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "low",
+      "blastRadius": "single-file",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/pages/GrowthAnalyticsPage.tsx",
+      "storageKeys": [],
+      "domain": "analytics",
+      "findings": 6,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "medium",
+      "blastRadius": "multi-touch",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "low (no init/render-time read detected)",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: blast radius >3 findings; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "blast radius >3 findings",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/HabitTracker.jsx",
+      "storageKeys": [
+        "habit_streaks",
+        "habits_completed_today",
+        "habits_last_date",
+        "wellness_habits"
+      ],
+      "domain": "wellness-progress",
+      "findings": 12,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "medium",
+      "blastRadius": "multi-touch",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: blast radius >3 findings; hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "blast radius >3 findings",
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/SelfCareChecklist.jsx",
+      "storageKeys": [
+        "selfcare_completed",
+        "selfcare_date",
+        "selfcare_streak",
+        "selfcare_total_points"
+      ],
+      "domain": "wellness-progress",
+      "findings": 13,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "medium",
+      "blastRadius": "multi-touch",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: blast radius >3 findings; hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "blast radius >3 findings",
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    },
+    {
+      "file": "client/src/components/ValuesExplorer.jsx",
+      "storageKeys": [
+        "values_explorer_data"
+      ],
+      "domain": "tools-monitors",
+      "findings": 4,
+      "mechanisms": [
+        "localStorage"
+      ],
+      "stabilizationComplexity": "medium",
+      "blastRadius": "multi-touch",
+      "migrationEligibility": "yes (additive, future, separately authorized)",
+      "reversibility": "high (additive; revert by restoring original call sites or checkpoint)",
+      "ssrRisk": "present (no window guard) — stabilize guard first",
+      "hydrationRisk": "present (read in init/render) — stabilize hydration first",
+      "futureSafePriority": "P3 (gated by listed blockers)",
+      "futureWrapperCompatible": "yes (keys are plain, domain-isolated; compatible with a future guarded accessor — none added here)",
+      "governanceNotes": "Public but gated by: blast radius >3 findings; hydration risk present; SSR risk present (no window guard). Observe only.",
+      "whySafe": "Public domain but does not yet meet all lowest-blast-radius gates (see governanceNotes).",
+      "qualifies": false,
+      "blockedBy": [
+        "blast radius >3 findings",
+        "hydration risk present",
+        "SSR risk present (no window guard)"
+      ]
+    }
+  ]
+}
