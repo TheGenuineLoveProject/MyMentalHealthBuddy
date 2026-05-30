@@ -21,7 +21,7 @@ export const COLORS = {
 	charcoalDeep: "#3A3A3A",
 } as const;
 
-export const SEMANTIC_COLORS = {
+export const semantic = {
 	background: COLORS.warmCream,
 
 	surface: COLORS.ivoryLight,

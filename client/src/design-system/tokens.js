@@ -1,6 +1,6 @@
 export {
   COLORS,
-  SEMANTIC_COLORS,
+  semantic as SEMANTIC_COLORS,
   LUMI_COLORS,
   GRADIENTS,
   OPACITY,
