@@ -2,7 +2,7 @@
   "meta": {
     "phase": "H2.3",
     "mode": "AUDIT ONLY — no runtime change, no migration",
-    "generatedAt": "2026-05-30T22:37:15.155Z",
+    "generatedAt": "2026-05-30T23:51:59.976Z",
     "scanRoot": "client/src",
     "excludedDomains": [
       "admin",
@@ -7471,7 +7471,7 @@
       "excludedDomain": false,
       "migrationAllowed": "yes",
       "reason": "Public, non-excluded domain 'ux-preferences' — eligible for future additive, guarded-accessor migration (no change made here).",
-      "snippet": "try { localStorage.setItem(\"glp_calm_plan\", JSON.stringify(plan)); } catch (err) { console.warn(\"[storage-safe-write]\", err); }"
+      "snippet": "try { if (typeof window !== \"undefined\") localStorage.setItem(\"glp_calm_plan\", JSON.stringify(plan)); } catch (err) { console.warn(\"[storage-safe-write]\", err); }"
     },
     {
       "file": "client/src/pages/pathways/GoalOnboarding.jsx",
