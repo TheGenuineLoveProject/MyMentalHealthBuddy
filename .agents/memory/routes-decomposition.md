@@ -31,3 +31,13 @@ blocks (legal, learning, content, advanced, landing) unless splitting into sub-a
 ## Excluded from extraction (governance + user directive)
 auth, admin, account(protected), core(app/dashboard), ai(healing), wellness(healing),
 plus landing's sensitive members (/, aliases, /healing, /pricing, CanvaLanding component).
+
+## Registry tooling: derive module list from routes.js imports, NOT a dir glob
+`client/src/content/routes/` contains files NOT wired into the runtime route array:
+routeRegistry.js (266-line helper), index.js, and 3 empty stubs
+(healingRoutes.js, adminRoutes.js, communityRoutes.js — 0 lines). routes.js only
+imports 7 modules (core/support/learning/legal/content/tool/marketing). Any
+read-only governance collector must parse routes.js `from "./routes/X.js"` imports
+to build its allowlist; a `readdirSync(*.js)` glob risks counting unwired/stub
+files and producing false drift. routes.js can't be runtime-imported in Node
+(pulls lucide-react/React) → static parse only. Registry baseline locked at 145.

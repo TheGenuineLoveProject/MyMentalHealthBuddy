@@ -1,0 +1,1 @@
+- [Routes decomposition & registry governance](routes-decomposition.md) — naming traps (coreRoutes.js=support pages, not 'core' category), non-extractable categories, and registry tooling must derive its module allowlist from routes.js imports (not a dir glob) since stub/helper files share the dir.
