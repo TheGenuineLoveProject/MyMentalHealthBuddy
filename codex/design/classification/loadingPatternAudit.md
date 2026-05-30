@@ -209,3 +209,22 @@ Do not consolidate automatically.
 - client/src/pages/CanvaLanding.jsx
 - client/src/pages/DesignSystem.jsx
 - client/src/pages/DesignSystemV2.jsx
+
+## Follow-Up — Governance (open)
+- **LotusLoader reduce-motion defect** (`client/src/components/ui/LotusLoader.jsx`):
+  petal `<ellipse>` and center `<circle>` set their animations via inline
+  `style={{ animation: ... }}`, which overrides the component's own
+  `@media (prefers-reduced-motion: reduce) { ... animation: none }` rule
+  (inline styles beat stylesheet rules). Result: outer SVG rotation stops under
+  reduce-motion, but petals/center keep pulsing. The `.lotus-loader` rotation is
+  correctly gated; only the inline-styled children are affected.
+  - **Impact:** any surface using `<LotusLoader>` (incl. `/blog` after the
+    spinner consolidation) does not fully honor reduce-motion → WCAG/AA + MMHB
+    reduced-motion contract gap.
+  - **Why deferred:** LotusLoader is a SHARED primitive (hard-exclusion in the
+    single-route spinner consolidation task). Fixing it is a separate, governed
+    accessibility task.
+  - **Suggested fix:** move the ellipse/circle `animation` declarations to
+    CSS classes inside the existing `<style>` block (or conditionally omit the
+    inline `animation` when reduce-motion is active) so the media query can
+    suppress them, then verify `/blog` with OS reduce-motion enabled.
