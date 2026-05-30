@@ -1,0 +1,9 @@
+1340:      secondaryCta: { label: 'View Pricing', href: '/pricing' }
+1567:    route: '/pricing',
+6885:    route: '/premium',
+6896:      secondaryCta: { label: 'Compare Plans', href: '/pricing' }
+6900:    route: '/billing',
+6915:    route: '/upgrade',
+6926:      secondaryCta: { label: 'Learn More', href: '/pricing' }
+6945:    route: '/account/billing',
+7058:    route: '/admin/billing',
