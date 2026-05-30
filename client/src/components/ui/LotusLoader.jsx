@@ -34,10 +34,7 @@ export default function LotusLoader({
             fill="url(#loaderGradient)"
             fillOpacity={0.6}
             transform={`rotate(${angle} 50 50) translate(0, -8)`}
-            style={{ 
-              animation: `loaderPetal 1.5s ease-in-out infinite`,
-              animationDelay: `${i * 0.1}s`
-            }}
+            style={{ animationDelay: `${i * 0.1}s` }}
           />
         ))}
         
@@ -46,7 +43,6 @@ export default function LotusLoader({
           cy="50" 
           r="8" 
           fill="#d4af37"
-          style={{ animation: 'loaderCenter 1.5s ease-in-out infinite' }}
         />
       </svg>
       
@@ -55,6 +51,12 @@ export default function LotusLoader({
       </span>
 
       <style>{`
+        .lotus-loader ellipse {
+          animation: loaderPetal 1.5s ease-in-out infinite;
+        }
+        .lotus-loader circle {
+          animation: loaderCenter 1.5s ease-in-out infinite;
+        }
         @keyframes loaderPetal {
           0%, 100% { 
             opacity: 0.4; 
