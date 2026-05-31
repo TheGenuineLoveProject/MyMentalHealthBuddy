@@ -34,7 +34,7 @@ const TOOL_CATEGORIES = {
 
 function loadGrowthData(): GrowthData {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
     if (saved) return JSON.parse(saved);
   } catch {}
   return {
@@ -62,6 +62,10 @@ function aggregateLocalStorageData(): { categories: Record<string, number>, tota
     "Wellness": 0
   };
   
+  if (typeof window === "undefined") {
+    return { categories, total: 0 };
+  }
+
   const reflectionKeys = ["glp_belief_mapping", "glp_timed_writing", "glp_silence_mode", "glp_question_reflection", "glp_growth_timeline", "glp_knowledge_synthesis"];
   const wisdomKeys = ["glp_cognitive_frameworks", "glp_dialectical_inquiry", "glp_temporal_reflection", "glp_daily_wisdom", "glp_wisdom_practices"];
   const advancedKeys = ["glp_argument_mapping", "glp_bayesian_thinking", "glp_causal_loop", "glp_systems_dynamics", "glp_mental_models"];
