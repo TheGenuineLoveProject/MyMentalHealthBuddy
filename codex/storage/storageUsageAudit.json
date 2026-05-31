@@ -2,7 +2,7 @@
   "meta": {
     "phase": "H2.3",
     "mode": "AUDIT ONLY — no runtime change, no migration",
-    "generatedAt": "2026-05-30T23:51:59.976Z",
+    "generatedAt": "2026-05-31T01:12:17.677Z",
     "scanRoot": "client/src",
     "excludedDomains": [
       "admin",
@@ -2362,7 +2362,7 @@
       "excludedDomain": false,
       "migrationAllowed": "yes",
       "reason": "Public, non-excluded domain 'wellness-progress' — eligible for future additive, guarded-accessor migration (no change made here).",
-      "snippet": "const savedScore = localStorage.getItem(\"last_wellness_score\");"
+      "snippet": "const savedScore = typeof window !== \"undefined\" ? localStorage.getItem(\"last_wellness_score\") : null;"
     },
     {
       "file": "client/src/components/WellnessScore.jsx",
@@ -2375,7 +2375,7 @@
       "excludedDomain": false,
       "migrationAllowed": "yes",
       "reason": "Public, non-excluded domain 'wellness-progress' — eligible for future additive, guarded-accessor migration (no change made here).",
-      "snippet": "try { localStorage.setItem(\"last_wellness_score\", Math.round(totalScore).toString()); } catch (err) { console.warn(\"[storage-safe-write]\", err); }"
+      "snippet": "try { if (typeof window !== \"undefined\") localStorage.setItem(\"last_wellness_score\", Math.round(totalScore).toString()); } catch (err) { console.warn(\"[storage-safe-write]\", err); }"
     },
     {
       "file": "client/src/components/WellnessStreakDashboard.jsx",
