@@ -2,7 +2,7 @@
   "meta": {
     "phase": "H2.3",
     "mode": "AUDIT ONLY — no runtime change, no migration",
-    "generatedAt": "2026-05-31T01:12:17.677Z",
+    "generatedAt": "2026-05-31T03:40:32.084Z",
     "scanRoot": "client/src",
     "excludedDomains": [
       "admin",
@@ -5404,7 +5404,7 @@
       "excludedDomain": false,
       "migrationAllowed": "yes",
       "reason": "Public, non-excluded domain 'lumi-ux' — eligible for future additive, guarded-accessor migration (no change made here).",
-      "snippet": "storage: createJSONStorage(() => localStorage),"
+      "snippet": "storage: createJSONStorage(() => (typeof window !== \"undefined\" ? localStorage : undefined)),"
     },
     {
       "file": "client/src/lumi-memory/state/memoryStore.ts",
@@ -6210,11 +6210,11 @@
       "excludedDomain": false,
       "migrationAllowed": "yes",
       "reason": "Public, non-excluded domain 'analytics' — eligible for future additive, guarded-accessor migration (no change made here).",
-      "snippet": "const saved = localStorage.getItem(STORAGE_KEY);"
+      "snippet": "const saved = typeof window !== \"undefined\" ? localStorage.getItem(STORAGE_KEY) : null;"
     },
     {
       "file": "client/src/pages/GrowthAnalyticsPage.tsx",
-      "line": 72,
+      "line": 76,
       "mechanism": "localStorage",
       "mechanismBase": "localStorage",
       "likelyDomain": "analytics",
@@ -6227,7 +6227,7 @@
     },
     {
       "file": "client/src/pages/GrowthAnalyticsPage.tsx",
-      "line": 84,
+      "line": 88,
       "mechanism": "localStorage",
       "mechanismBase": "localStorage",
       "likelyDomain": "analytics",
@@ -6240,7 +6240,7 @@
     },
     {
       "file": "client/src/pages/GrowthAnalyticsPage.tsx",
-      "line": 96,
+      "line": 100,
       "mechanism": "localStorage",
       "mechanismBase": "localStorage",
       "likelyDomain": "analytics",
@@ -6253,7 +6253,7 @@
     },
     {
       "file": "client/src/pages/GrowthAnalyticsPage.tsx",
-      "line": 108,
+      "line": 112,
       "mechanism": "localStorage",
       "mechanismBase": "localStorage",
       "likelyDomain": "analytics",
@@ -6266,7 +6266,7 @@
     },
     {
       "file": "client/src/pages/GrowthAnalyticsPage.tsx",
-      "line": 120,
+      "line": 124,
       "mechanism": "localStorage",
       "mechanismBase": "localStorage",
       "likelyDomain": "analytics",
