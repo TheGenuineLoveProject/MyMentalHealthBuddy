@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "artifact": "Shell Command Manager (SCM) — Governance Specification",
+    "phase": "H2.16",
+    "mode": "GOVERNANCE / DESIGN ONLY — no runtime code, no executor implemented",
+    "status": "spec-only",
+    "version": "1.0.0",
+    "governedBy": "MMHB v7.4 Archival Kernel (docs/governance/MMHB_v7.4_ARCHIVAL_KERNEL.md)",
+    "principles": [
+      "Shell-first: prefer mechanical shell work; AI for logic/sequencing only.",
+      "Human approval required before ANY execution — non-autonomous by construction.",
+      "No autonomous delete/move/refactor.",
+      "Verification-first: every batch ends in a verification gate.",
+      "Rollback-safe: every executed step must be revertible (checkpoint or inverse command).",
+      "No secrets printed or interpolated into commands or logs.",
+      "One phase at a time; no multi-blocker fan-out.",
+      "Replit-safe execution only; respects platform constraints.",
+      "Domain separation preserved: no auth/healing/crisis/journal/provider/billing/admin/chat runtime changes; no business logic in healing flows."
+    ]
+  },
+  "commandQueueModel": {
+    "description": "An ordered, append-only queue of proposed shell commands. The manager NEVER auto-executes; it proposes, a human approves, then a single approved step runs, is verified, and the result gates the next step.",
+    "queueItem": {
+      "id": "scm-<monotonic-int>",
+      "createdAt": "ISO-8601",
+      "proposedBy": "agent|human",
+      "intent": "one-line human-readable purpose",
+      "command": "literal shell string (no secret interpolation)",
+      "workingDir": "/home/runner/workspace (default; relative paths only)",
+      "classification": "read-only | mutating | destructive-blocked",
+      "domainTouched": "none | ux-preferences | analytics | wellness-progress | tools-monitors | ...",
+      "requiresApproval": true,
+      "approvalState": "pending | approved | rejected | expired",
+      "approvedBy": "human-id | null",
+      "dependsOn": ["scm-<id>"],
+      "rollback": {
+        "strategy": "checkpoint | inverse-command | none-needed",
+        "inverseCommand": "literal shell string | null",
+        "checkpointRef": "auto-checkpoint commit id | null"
+      },
+      "verification": {
+        "gate": "verify:all | build | route-check | custom",
+        "command": "npm run verify:all",
+        "expected": "Summary: NNN pass, 0 fail"
+      },
+      "executionState": "queued | running | succeeded | failed | skipped",
+      "result": {
+        "exitCode": "int | null",
+        "startedAt": "ISO-8601 | null",
+        "finishedAt": "ISO-8601 | null",
+        "stdoutDigest": "redacted summary (no secrets)",
+        "stderrDigest": "redacted summary (no secrets)"
+      }
+    },
+    "lifecycle": [
+      "PROPOSE -> queue item created (approvalState=pending, executionState=queued)",
+      "APPROVE/REJECT -> human sets approvalState (rejected items never run)",
+      "EXECUTE -> single approved, dependency-satisfied item runs (executionState=running)",
+      "VERIFY -> verification gate runs; failure halts the queue",
+      "GATE -> on success, the next item becomes eligible; on failure, queue pauses for human decision"
+    ],
+    "invariants": [
+      "At most ONE item executing at a time (no parallel mutation).",
+      "An item runs only if approvalState=approved AND all dependsOn succeeded.",
+      "destructive-blocked items can never be approved by the manager; they are routed to a human-only escalation path.",
+      "A failed verification gate freezes the queue; no further auto-progress."
+    ]
+  },
+  "allowedCommands": {
+    "readOnly": [
+      "ls", "pwd", "cat", "head", "tail",
+      "rg (ripgrep)", "grep -r (read-only)", "find (without -delete/-exec rm)",
+      "git --no-optional-locks status --short", "git --no-optional-locks diff", "git --no-optional-locks log",
+      "node <read-only analyzer script>",
+      "md5sum / sha256sum", "wc", "stat", "du -sh", "df -h",
+      "curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5000<path> (route health)"
+    ],
+    "mutatingRequiresApproval": [
+      "node scripts/storage/auditStorageUsage.mjs (regenerates codex/ reports)",
+      "npm run build",
+      "npm run verify:all",
+      "writing/editing a single file via the file tools",
+      "mkdir <new dir> (additive only)",
+      "touch <new file> (additive only)"
+    ],
+    "notes": "Allowed != automatic. Every mutating command still requires explicit human approval. Read-only commands may run for diagnosis but are still logged."
+  },
+  "blockedDangerousCommands": {
+    "policy": "These are NEVER executed by the manager under any approval state. They are recognized, refused, and routed to a human-only manual path with explicit out-of-band confirmation.",
+    "patterns": [
+      "rm -rf, rm -r, rm (any recursive/force delete)",
+      "mv / rename of existing tracked files (treated as destructive move)",
+      "git commit, git add, git reset, git restore, git checkout, git clean, git rebase, git revert, git rm, git push --force, git filter-branch, git reflog expire, git gc --prune, git update-ref -d, git init",
+      "chmod -R, chown -R (recursive permission changes)",
+      "kill -9 of platform-managed workflow PIDs / pkill broad patterns",
+      "DROP/TRUNCATE/DELETE SQL, npm run db:push --force (data-loss)",
+      "package.json / vite.config.* / server/vite.ts / drizzle.config.ts / .replit edits",
+      "curl | sh, wget | bash (remote code execution)",
+      ":(){ :|:& };: (fork bomb) and any shell that pipes downloaded content to an interpreter",
+      "writing to or echoing secret/env values; printenv of secret keys",
+      "any command touching auth/healing/crisis/journal/provider/billing/admin/chat runtime code"
+    ],
+    "escalation": "A blocked command produces a refusal record + a human-only proposal note. The platform's auto-checkpoint and (where required) a background Project Task are the only sanctioned routes for destructive git operations."
+  },
+  "approvalGates": {
+    "model": "Two-key, human-in-the-loop. The agent proposes; a human approves; only then does a single step run.",
+    "gates": [
+      {"gate": "G0-classification", "rule": "Every command classified read-only/mutating/destructive-blocked BEFORE proposal. Misclassification = fail-closed (treat as destructive-blocked)."},
+      {"gate": "G1-human-approval", "rule": "Mutating commands require explicit human approval (approvalState=approved). No implicit/time-based approval."},
+      {"gate": "G2-dependency", "rule": "Item runs only when all dependsOn items succeeded."},
+      {"gate": "G3-single-flight", "rule": "Only one mutating command executes at a time."},
+      {"gate": "G4-destructive-refusal", "rule": "destructive-blocked commands cannot be approved here; human-only out-of-band path required."}
+    ],
+    "expiry": "Approvals are scoped to a single queue item and expire if the queue context changes (new dependency, edited command)."
+  },
+  "verificationGates": {
+    "order": ["build", "verify:all", "route-check"],
+    "definitions": {
+      "build": {"command": "npm run build", "pass": "\u2713 built (no TS/bundler errors)"},
+      "verify:all": {"command": "npm run verify:all", "pass": "Summary: NNN pass, 0 fail (warns allowed, e.g. pre-existing copyright WARN)"},
+      "route-check": {"command": "curl 127.0.0.1:5000<path>", "paths": ["/", "/blog", "/about", "/features", "/pricing", "/healing", "/journal", "/chat", "/tools", "/crisis"], "pass": "all 200"}
+    },
+    "rule": "A batch is GREEN only if all applicable gates pass. Any failure freezes the queue (no auto-progress) and surfaces the failing gate to the human."
+  },
+  "rollbackRules": {
+    "strategies": [
+      {"name": "checkpoint", "when": "default for any file mutation", "how": "Rely on Replit auto-checkpoint; record the commit id; revert by suggesting rollback to that checkpoint."},
+      {"name": "inverse-command", "when": "additive shell mutation with a clean inverse", "how": "Store inverseCommand (e.g. created dir -> rmdir of that exact dir). Inverse must itself be non-destructive and approved."},
+      {"name": "none-needed", "when": "read-only command", "how": "No rollback required."}
+    ],
+    "invariants": [
+      "No step executes unless a rollback strategy is recorded.",
+      "Rollback never uses blocked destructive commands; checkpoint rollback is preferred.",
+      "A failed step that left partial state must be rolled back before the queue resumes."
+    ]
+  },
+  "loggingFormat": {
+    "sink": "codex/automation/logs/scm-<date>.jsonl (append-only; created in a FUTURE implementation phase, not now)",
+    "redaction": "Secrets/env values are NEVER logged. stdout/stderr are stored as digests with secret-like tokens masked.",
+    "record": {
+      "ts": "ISO-8601",
+      "id": "scm-<int>",
+      "event": "propose|approve|reject|execute-start|execute-end|verify|gate-pass|gate-fail|rollback|refuse",
+      "classification": "read-only|mutating|destructive-blocked",
+      "command": "literal (secret-free)",
+      "exitCode": "int|null",
+      "gate": "build|verify:all|route-check|null",
+      "outcome": "success|failure|blocked",
+      "checkpointRef": "commit-id|null",
+      "note": "short human-readable"
+    },
+    "outputContract": "Per kernel: What changed (files+lines) / Before / After / Build status / Next step. No speculation."
+  },
+  "replitSafeWorkflow": {
+    "constraints": [
+      "git commit/add and all destructive git are blocked for the main agent; the platform auto-checkpoints after each loop. Treat checkpoints as the commit mechanism.",
+      "Background servers launched from the shell are reaped when the call returns (exit 143). Use the platform-managed 'Start application' workflow for a persistent server; run route checks against 127.0.0.1:5000.",
+      "Port 5000 is owned by the dev workflow and auto-reclaimed; do not fight it with kill/pkill.",
+      "Never edit package.json, vite.config.*, server/vite.ts, server/app.mjs, .replit, drizzle.config.ts.",
+      "DB schema changes go through Drizzle + npm run db:push (never hand-written SQL); --force only with explicit approval (data-loss).",
+      "Secrets are managed via the platform; never echo or interpolate them."
+    ],
+    "executionLoop": "propose (agent) -> approve (human) -> run ONE step -> verify (build/verify:all/route-check) -> gate -> next. Stop on any red."
+  },
+  "codexIntegrationPoints": {
+    "inputs": [
+      "codex/storage/*.json (audit, hotspots, candidates, blockers, remediation plan) as command-source-of-truth for storage-guard passes",
+      "scripts/storage/auditStorageUsage.mjs as the canonical regeneration command"
+    ],
+    "outputs": [
+      "codex/automation/shellCommandManagerSpec.{json,md} (this spec)",
+      "codex/automation/logs/*.jsonl (future runtime logs)",
+      "regenerated codex/storage/*.{json,md} when a guard pass mutates runtime code"
+    ],
+    "alignment": "SCM sequences exactly the kind of one-file, verify-after-each-step storage-guard passes already performed in H2.8\u2013H2.16, formalizing them into an approved, logged, rollback-safe queue."
+  },
+  "futureImplementationPlan": {
+    "note": "Implementation is NOT part of this phase. Sequenced for future, separately-approved phases.",
+    "phases": [
+      {"id": "F1", "title": "Schema + validators", "scope": "Encode queueItem schema + classifier (read-only/mutating/destructive-blocked) as a pure, tested module. No execution."},
+      {"id": "F2", "title": "Dry-run proposer", "scope": "Generate a proposed queue from a codex plan (e.g. remediation plan) WITHOUT executing. Output a human-readable approval sheet."},
+      {"id": "F3", "title": "Approval ledger", "scope": "Append-only approval/refusal log + redacted logging sink. Still no execution."},
+      {"id": "F4", "title": "Single-flight executor (guarded)", "scope": "Execute ONE approved, non-destructive step, then run verification gate. Hard-refuse blocked patterns. Checkpoint-based rollback."},
+      {"id": "F5", "title": "Route + build gate integration", "scope": "Wire build/verify:all/route-check as automatic post-step gates that freeze the queue on red."}
+    ],
+    "exitCriteria": "Each future phase ends GREEN (verify:all 0 fail) and is independently rollback-safe."
+  }
+}
