@@ -167,7 +167,7 @@ export const useMemoryStore = create<MemoryState & MemoryActions>()(
 }),
     {
       name: "mmhb-lumi-memory-v1",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => (typeof window !== "undefined" ? localStorage : undefined)),
       // Persist consent + entries only. Audit stays in-memory: it's
       // diagnostic, capped at MAX_AUDIT_ENTRIES per session, and persisting
       // it would (a) bloat localStorage and (b) leak rejection metadata
