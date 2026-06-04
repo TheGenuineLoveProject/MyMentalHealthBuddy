@@ -1,8 +1,8 @@
 export { LayoutWrapper } from './LayoutWrapper';
 export { Hero } from './Hero';
 export { SectionContainer } from './SectionContainer';
-export { Card, CardGrid } from './Card';
-export { Button } from './Button';
+export { Card, CardGrid } from './card';
+export { Button } from './button';
 export { Footer } from './Footer';
 export { default as SafetyFooter } from './ReflectionFooter';
 export { SafetyNotice } from './SafetyNotice';

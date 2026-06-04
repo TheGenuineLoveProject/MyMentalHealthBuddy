@@ -246,10 +246,10 @@ const TOOL_BUTTONS = [
  *   1. modules: "anxiety"              → "anxious"
  *   v1.5 — Tool-specific expressions (richer toolId mapping):
  *     toolId  "box_breathing"        → "anxious"      (breathing pulse)
- *     toolId  "grounding_54321"      → "overwhelmed"  (sensory grounding)
+ *     toolId  "grounding_54321"      → "anxious"  (sensory grounding)
  *     toolId  "thought_reframe"      → "encouraged"   (focused/reframe)
  *     toolId  "emotional_checkin"    → "sad"          (soft/gentle)
- *     toolId  "overload_reset"       → "overwhelmed"  (held-not-flooded)
+ *     toolId  "overload_reset"       → "anxious"  (held-not-flooded)
  *     toolId  "relationship_repair"  → "encouraged"   (warm preparation)
  *     toolId  "pattern_interrupt"    → "encouraged"   (loop-breaking)
  *
@@ -257,7 +257,7 @@ const TOOL_BUTTONS = [
  *     modules "anxiety"              → "anxious"
  *     modules "emotional_processing" → "sad"
  *     modules "cognitive_reframe"    → "encouraged"
- *     modules "self_regulation"      → "overwhelmed"
+ *     modules "self_regulation"      → "anxious"
  *
  *   selectedToolId fallback (entry-point button — pre-AI responsiveness):
  *     "calm"  (Calm Me Down)         → "anxious"
@@ -280,17 +280,17 @@ function mapToBuddyState({
 }): BuddyState {
   // v1.5: explicit toolId branches first (highest specificity).
   if (toolId === "box_breathing") return "anxious";
-  if (toolId === "grounding_54321") return "overwhelmed";
+  if (toolId === "grounding_54321") return "anxious";
   if (toolId === "thought_reframe") return "encouraged";
   if (toolId === "emotional_checkin") return "sad";
-  if (toolId === "overload_reset") return "overwhelmed";
+  if (toolId === "overload_reset") return "anxious";
   if (toolId === "relationship_repair") return "encouraged";
   if (toolId === "pattern_interrupt") return "encouraged";
   // Module-level signals (when toolId is missing or unmapped).
   if (modules.includes("anxiety")) return "anxious";
   if (modules.includes("emotional_processing")) return "sad";
   if (modules.includes("cognitive_reframe")) return "encouraged";
-  if (modules.includes("self_regulation")) return "overwhelmed";
+  if (modules.includes("self_regulation")) return "anxious";
   // Entry-point button fallback — Buddy reacts before the AI responds.
   if (selectedToolId === "calm") return "anxious";
   if (selectedToolId === "think") return "encouraged";
@@ -335,7 +335,7 @@ function mapToBuddyState({
 function mapResponseToBuddyState(text = ""): BuddyState {
   const t = String(text || "").toLowerCase();
   if (!t) return "calm";
-  if (/(overwhelmed|too much|heavy)/.test(t)) return "overwhelmed";
+  if (/(overwhelmed|too much|heavy)/.test(t)) return "anxious";
   if (/(anxious|breathe|slow down)/.test(t)) return "anxious";
   if (/(sad|hurt|that feeling)/.test(t)) return "sad";
   if (/(you can|small step|try this)/.test(t)) return "encouraged";
@@ -378,7 +378,7 @@ function resolveBuddyBaseline({
   hasCompletedTool?: boolean;
   hasPaywall?: boolean;
 }): BuddyState {
-  if (daysAway >= 2) return "overwhelmed";
+  if (daysAway >= 2) return "anxious";
   if (hasCompletedTool) return "encouraged";
   if (currentStreak >= 7) return "encouraged";
   if (currentStreak >= 3) return "calm";
@@ -628,7 +628,9 @@ export default function Start() {
       // AND `tool.id` (flatter shape) so future server changes don't
       // silently drop tool-aware mapping.
       const responseToolId =
-        result?.response?.tool?.tool?.id ?? result?.response?.tool?.id ?? "";
+        (result as any)?.response?.tool?.tool?.id ??
+        (result as any)?.response?.tool?.id ??
+        "";
       const toolMappedState = mapToBuddyState({
         modules: result?.response?.modules,
         toolId: responseToolId,
@@ -695,7 +697,7 @@ export default function Start() {
   // Fires once per state-entry when the helper copy below the avatar
   // becomes visible. Pure read; never affects AI/tool/response behavior.
   useEffect(() => {
-    if (buddyState === "anxious" || buddyState === "overwhelmed") {
+    if (buddyState === "anxious") {
       track("buddy_grounding_visible", { state: buddyState });
     }
   }, [buddyState]);
@@ -733,7 +735,7 @@ export default function Start() {
       hasCompletedTool,
       hasPaywall,
     });
-    if (baseline !== "calm" && baseline !== buddyState) {
+    if (String(baseline) !== String(buddyState)) {
       baselineAppliedRef.current = true;
       setBuddyState(baseline);
       track("buddy_baseline_applied", {
@@ -755,8 +757,12 @@ export default function Start() {
   //   4. anxious/overwhelmed (no tool) → v1.4 "Follow Buddy's breath"
   //   5. calm baseline    → v1.6 personalized line based on signals
   //   6. otherwise        → null
+  const toolResponse: any = result;
+
   const activeToolIdForCopy: string =
-    result?.response?.tool?.tool?.id ?? result?.response?.tool?.id ?? "";
+    toolResponse?.response?.tool?.tool?.id ??
+    toolResponse?.response?.tool?.id ??
+    "";
   const buddyHelperCopy: string | null = (() => {
     if (buddyState === "crisis") return null;
     if (buddyState === "encouraged" && toolCompleted) {
@@ -765,7 +771,7 @@ export default function Start() {
     if (activeToolIdForCopy && buddyToolCopy[activeToolIdForCopy]) {
       return buddyToolCopy[activeToolIdForCopy];
     }
-    if (buddyState === "anxious" || buddyState === "overwhelmed") {
+    if (buddyState === "anxious") {
       return "Follow Buddy\u2019s breath.";
     }
     if (buddyState === "calm") {
@@ -1240,7 +1246,7 @@ export default function Start() {
         </footer>
       </main>
       <UpsellModal
-        isOpen={showUpsell}
+        open={showUpsell}
         onClose={() => setShowUpsell(false)}
         toolName={tool?.tool?.title || 'this exercise'}
       />

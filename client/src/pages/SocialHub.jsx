@@ -6,7 +6,7 @@ import { SiPinterest, SiTiktok } from "react-icons/si";
 import SEO from "../components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
 const PLATFORMS = [

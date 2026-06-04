@@ -119,7 +119,11 @@ export default function MicroWinPrompt() {
   }, [visible]);
 
   const onCrisis = location === "/crisis" || location.startsWith("/crisis/");
-  if (!visible || onCrisis) return null;
+  // Phase D13: suppress on the homepage so the navbar is the only navigation
+  // surface there — this floating panel renders a row of quick-action links
+  // that reads as a second floating nav. Still shows on every other route.
+  const onHome = location === "/";
+  if (!visible || onCrisis || onHome) return null;
 
   const lumiHref = isAuthed() ? "/chat" : "/login";
 

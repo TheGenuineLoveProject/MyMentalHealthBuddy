@@ -1,0 +1,86 @@
+client/src/pages/admin/AnalyticsDashboard.jsx:151:          Signals are aggregated and minimal. See <code>docs/PRIVACY_SIGNALS.md</code> for full details.
+client/src/pages/ContentIndexPage.jsx:48:  { name: "Legal", path: "/legal", description: "Legal information hub", category: "Legal", icon: FileText },
+client/src/pages/ContentIndexPage.jsx:58:  { name: "Privacy Policy", path: "/privacy", description: "How we protect your data", category: "Legal", icon: Shield },
+client/src/pages/ContentIndexPage.jsx:74:  { name: "Terms of Service", path: "/terms", description: "Usage terms and conditions", category: "Legal", icon: FileText },
+client/src/pages/tools/BreathTool.jsx:8:import { SafetyFooter } from "@/components/safety/LegalFooter";
+client/src/pages/CRMPage.jsx:278:            <Link href="/privacy" className="hover:opacity-80 transition-opacity" data-testid="link-footer-privacy">Privacy</Link>
+client/src/pages/CRMPage.jsx:279:            <Link href="/terms" className="hover:opacity-80 transition-opacity" data-testid="link-footer-terms">Terms</Link>
+client/src/pages/Login.jsx:218:            <Link href="/terms" className="underline">Terms of Service</Link>{" "}
+client/src/pages/Login.jsx:220:            <Link href="/privacy" className="underline">Privacy Policy</Link>
+client/src/pages/Register.jsx:258:            <Link href="/terms" className="underline">Terms of Service</Link>{" "}
+client/src/pages/Register.jsx:260:            <Link href="/privacy" className="underline">Privacy Policy</Link>
+client/src/pages/Profile.jsx:138:                  href="/privacy" 
+client/src/pages/SupportPage.tsx:4:import EthicsSafetyBlock from "@/components/legal/EthicsSafetyBlock";
+client/src/pages/Onboarding.tsx:466:                  <a href="/terms" className="text-[var(--teal-600)] underline">Terms of Service</a>{" "}
+client/src/pages/Onboarding.tsx:468:                  <a href="/privacy" className="text-[var(--teal-600)] underline">Privacy Policy</a>.
+client/src/pages/CanvaLanding.jsx:341:            <Link href="/privacy" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-safety">Safety &amp; Privacy</Link>
+client/src/pages/CanvaLanding.jsx:1265:                <Link href="/privacy" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-privacy">Privacy Policy</Link>
+client/src/pages/CanvaLanding.jsx:1266:                <Link href="/terms" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-terms">Terms of Service</Link>
+client/src/pages/LegalPage.jsx:9:  { title: "Terms of Service", path: "/legal/terms", description: "Our terms and conditions for using the platform." },
+client/src/pages/LegalPage.jsx:10:  { title: "Privacy Policy", path: "/legal/privacy", description: "How we collect, use, and protect your data." },
+client/src/pages/LegalPage.jsx:11:  { title: "Cookie Policy", path: "/legal/cookies", description: "Information about cookies and tracking." },
+client/src/pages/LegalPage.jsx:12:  { title: "Refund Policy", path: "/legal/refunds", description: "Our 30-day money-back guarantee details." },
+client/src/pages/LegalPage.jsx:13:  { title: "Accessibility Statement", path: "/legal/accessibility", description: "Our commitment to WCAG AA compliance." },
+client/src/pages/LegalPage.jsx:14:  { title: "DMCA Policy", path: "/legal/dmca", description: "Copyright and intellectual property." }
+client/src/pages/DataRetention.jsx:163:            <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
+client/src/pages/DataRetention.jsx:165:            <Link href="/terms" className="text-primary hover:underline">Terms of Service</Link>
+client/src/pages/SafetyCenter.jsx:175:                      <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
+client/src/components/GlowFooter.jsx:19:    { href: "/privacy", label: "Privacy" },
+client/src/components/SacredForm.jsx:122:              href="/privacy" 
+client/src/components/layout/PageLayout.jsx:2:import SafetyFooter from "@/components/safety/LegalFooter";
+client/src/components/layout/Footer.tsx:155:                <Link href="/privacy" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-privacy">
+client/src/components/layout/Footer.tsx:161:                <Link href="/terms" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-terms">
+client/src/components/sacred/SacredFooter.jsx:43:      { label: "Privacy Policy", href: "/privacy" },
+client/src/components/sacred/SacredFooter.jsx:44:      { label: "Terms of Service", href: "/terms" },
+client/src/components/ui/Footer.jsx:38:            <Link href="/privacy" className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-privacy">Privacy</Link>
+client/src/components/ui/Footer.jsx:39:            <Link href="/terms"   className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-terms">Terms</Link>
+client/src/components/ui/ReflectionFooter.jsx:77:        <Link href="/privacy" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
+client/src/components/wellness/WellnessPageShell.jsx:4:import { ConsentStrip } from "@/components/wellness/ConsentStrip";
+client/src/components/AgeConsentGate.jsx:149:          <Link href="/terms" className="underline hover:text-foreground">Terms</Link>
+client/src/components/AgeConsentGate.jsx:151:          <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>
+client/src/components/ConsentBanner.jsx:55:                  <a href="/privacy" className="text-primary hover:underline" aria-label="Learn more about our privacy and cookie practices">Learn more about our privacy practices</a>
+client/src/components/Footer.jsx:87:            <Link href="/privacy" className="hover:underline" data-testid="link-privacy">Privacy Policy</Link>
+client/src/components/Footer.jsx:88:            <Link href="/terms" className="hover:underline" data-testid="link-terms">Terms of Service</Link>
+client/src/components/SacredFooter.jsx:44:      { label: "Privacy Policy", href: "/privacy" },
+client/src/components/SacredFooter.jsx:45:      { label: "Terms of Service", href: "/terms" },
+client/src/config/leadMagnets.ts:54:    privacyLink: '/privacy'
+client/src/config/leadMagnets.ts:63:    privacyLink: '/privacy'
+client/src/config/navConfig.js:36:    { path: "/terms", label: "Terms of Service" },
+client/src/config/navConfig.js:37:    { path: "/privacy", label: "Privacy Policy" },
+client/src/config/navConfig.js:57:  "/terms",
+client/src/config/navConfig.js:58:  "/privacy",
+client/src/config/navConfig.js:61:  "/legal",
+client/src/content/allRoutes.json:141:  "/legal",
+client/src/content/allRoutes.json:142:  "/legal-info",
+client/src/content/allRoutes.json:172:  "/privacy",
+client/src/content/allRoutes.json:208:  "/terms",
+client/src/content/meta/routeMeta.autogen.ts:2384:    "canonicalPath": "/legal",
+client/src/content/meta/routeMeta.autogen.ts:2684:    "canonicalPath": "/privacy",
+client/src/content/meta/routeMeta.autogen.ts:3434:    "canonicalPath": "/terms",
+client/src/content/processes/top50ProcessMap.ts:83:  { id: 49, name: 'Trust pages', category: 'E', status: 'done', description: 'About/Safety/Privacy/Terms/Crisis' },
+client/src/content/searchIndex.ts:654:  { id: "public-legal", title: "Legal", description: "Legal and policy overview.", path: "/legal", type: "Update", tags: ["legal", "policy"] },
+client/src/content/searchIndex.ts:655:  { id: "public-terms", title: "Terms", description: "Terms of service.", path: "/terms", type: "Update", tags: ["terms"] },
+client/src/content/searchIndex.ts:656:  { id: "public-privacy", title: "Privacy", description: "Privacy policy and data handling.", path: "/privacy", type: "Update", tags: ["privacy"] },
+client/src/content/routes.js:7439:    route: '/terms',
+client/src/content/routes.js:7454:    route: '/privacy',
+client/src/content/routes.js:7499:    route: '/legal',
+client/src/figma/mapping.ts:24:  "Privacy Policy": "pages/legal/Privacy.tsx",
+client/src/figma/mapping.ts:25:  "Terms of Service": "pages/legal/Terms.tsx",
+client/src/figma/mapping.ts:26:  "Disclaimer": "pages/legal/Disclaimer.tsx"
+client/src/legal/PrivacyHighlights.tsx:91:        <a href="/privacy" className="text-teal-600 hover:underline" data-testid="link-privacy-policy">Privacy Policy</a>.
+client/src/policy/platformPolicy.ts:23:  privacy: "/privacy",
+client/src/policy/platformPolicy.ts:24:  terms: "/terms",
+client/src/sections/VisualBenefits.jsx:30: * Governance: zero framework-name leakage; CTA copy is gentle/consent-based;
+client/src/App.jsx:28:const ConsentBanner = lazy(() => import("./components/ConsentBanner.jsx"));
+client/src/App.jsx:76:const Privacy = lazy(() => import("./pages/Privacy.jsx"));
+client/src/App.jsx:271:const LegalPage = lazy(() => import("./pages/LegalPage.jsx"));
+client/src/App.jsx:1544:              <Route path="/legal-info" component={LegalPage} />
+client/src/App.jsx:1635:              <Route path="/privacy"><Privacy /></Route>
+client/src/App.jsx:1847:              <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
+client/src/App.jsx:1849:              <Route path="/privacy">{() => <ConfigRoute route="/privacy" />}</Route>
+client/src/App.jsx:1850:              <Route path="/legal">{() => <ConfigRoute route="/legal" />}</Route>
+client/src/App.jsx:1859:              <Route path="/data-retention">{() => <DataRetention />}</Route>
+server/routes/feed.mjs:99:      { loc: "/privacy", priority: "0.5", changefreq: "yearly" },
+server/routes/feed.mjs:100:      { loc: "/terms", priority: "0.5", changefreq: "yearly" },
+server/ai/responsePolicy.mjs:25:                "no medical/legal advice",
+server/middleware/requireAdult.mjs:28:    disclaimerUrl: "/legal/disclaimer",

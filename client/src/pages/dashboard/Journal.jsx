@@ -5,8 +5,8 @@ import {
   BookOpen, ArrowLeft, Plus, Search, Calendar, 
   Sparkles, Heart, Clock, ChevronRight, PenLine, X, Loader2
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

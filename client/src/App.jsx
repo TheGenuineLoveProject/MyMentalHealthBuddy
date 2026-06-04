@@ -16,6 +16,8 @@ import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import { SafeBoundary } from "./components/SafeBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
+import TglpNavbar from "./components/TglpNavbar.jsx";
+import { MMHBAvatarRuntimeProvider } from "./avatar-life/components/MMHBAvatarRuntimeProvider.tsx";
 const AutopilotPage = lazy(() =>
   import("./pages/_autopilot.jsx").then((m) => ({
     default: m.AutopilotPage || m.default,
@@ -72,7 +74,6 @@ const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage
 const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
 const FAQPage = lazy(() => import("./pages/FAQPage.jsx"));
-const About = lazy(() => import("./pages/About.jsx"));
 const Privacy = lazy(() => import("./pages/Privacy.jsx"));
 const Invite = lazy(() => import("./pages/Invite.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
@@ -165,8 +166,26 @@ const LifePurposeHubPage = lazy(() => import("./pages/hubs/LifePurposeHubPage.js
 const CommunicationHubPage = lazy(() => import("./pages/hubs/CommunicationHubPage.jsx"));
 const ForgivenessHubPage = lazy(() => import("./pages/hubs/ForgivenessHubPage.jsx"));
 const EnergyManagementHubPage = lazy(() => import("./pages/hubs/EnergyManagementHubPage.jsx"));
-const HabitsHubPage = lazy(() => import("./pages/hubs/HabitsHubPage.jsx"));
+const HabitsHubPage = lazy(() => 
+import("./pages/hubs/HabitsHubPage.jsx"));
 const ConfidenceHubPage = lazy(() => import("./pages/hubs/ConfidenceHubPage.jsx"));
+const AboutPage = lazy(() => import("./pages/About.jsx"));
+const FeaturesPage = lazy(() => import("./pages/Features.jsx"));
+const HealingPage = lazy(() => import("./pages/Healing.jsx"));
+const WellbeingPage = lazy(() => import("./pages/Wellbeing.jsx"));
+const MentalWellnessPage = lazy(() => import("./pages/MentalWellness.jsx"));
+const SelfLoveCanonical = lazy(() => import("./pages/SelfLove.jsx"));
+const GrowthCanonical = lazy(() => import("./pages/Growth.jsx"));
+const MindfulnessCanonical = lazy(() => import("./pages/Mindfulness.jsx"));
+const ResilienceCanonical = lazy(() => import("./pages/Resilience.jsx"));
+const AnxietyCanonical = lazy(() => import("./pages/Anxiety.jsx"));
+const DepressionCanonical = lazy(() => import("./pages/Depression.jsx"));
+const TrustCenterPage = lazy(() =>
+  import("./pages/trust/TrustCenterPage.jsx")
+);
+const AITransparencyPage = lazy(() =>
+  import("./pages/trust/AITransparencyPage.jsx")
+);
 const FocusHubPage = lazy(() => import("./pages/hubs/FocusHubPage.jsx"));
 const SpiritualityHubPage = lazy(() => import("./pages/hubs/SpiritualityHubPage.jsx"));
 const MotivationHubPage = lazy(() => import("./pages/hubs/MotivationHubPage.jsx"));
@@ -379,9 +398,20 @@ export default function App() {
         <EmotionBackgroundProvider>
         <ResponsiveWrapper>
         <ReadingLevelProvider>
+          <MMHBAvatarRuntimeProvider surfaceContext="buddy" defaultState="calmIdle">
           <ErrorBoundary>
             <PageViewTracker />
             <SkipToContent />
+            {/* Phase 153: global navbar mount — single source of truth (TglpNavbar).
+                Inline mounts removed from TalkTopics/SafetyPage/Newsletter/
+                BlogIndex/BlogPost/BlogEditor to prevent double render.
+                Phase 157: removed duplicate global <CanonicalNavbar /> that
+                rendered a second sticky desktop navbar above TglpNavbar on
+                every route. TglpNavbar is the single canonical navbar (mobile
+                drawer + Tools from WELLNESS_HUB_TOOLS registry). */}
+            <SafeBoundary label="Navbar">
+              <TglpNavbar />
+            </SafeBoundary>
             {/* v5.8.35 perf: ReturnLoop/MicroWinPrompt/WelcomeBackBanner are
                 lazy now — wrap in Suspense so React doesn't throw "suspended
                 outside of a Suspense boundary" on first hydration. */}
@@ -411,11 +441,11 @@ export default function App() {
               {/* /home and /welcome are handled by server-side 301 redirects to "/" */}
               <Route path="/landing">{() => <ConfigRoute route="/landing" />}</Route>
               <Route path="/original-home">{() => <ConfigRoute route="/original-home" />}</Route>
-              <Route path="/healing">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/about">{() => <ConfigRoute route="/about" />}</Route>
+              <Route path="/healing" component={HealingPage} />
+              <Route path="/about" component={AboutPage} />
               <Route path="/about/approach" component={AboutApproachPage} />
               <Route path="/values" component={ValuesPage} />
-              <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/features" component={FeaturesPage} />
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />
               <Route path="/start" component={Start} />
@@ -429,10 +459,8 @@ export default function App() {
               <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />
               <Route path="/signup" component={Register} />
-              <Route path="/sign-up" component={Register} />
               <Route path="/signin" component={Login} />
               <Route path="/admin-login" component={AdminLogin} />
-              <Route path="/admin/login" component={AdminLogin} />
               <Route path="/sign-in" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={ResetPassword} />
@@ -539,9 +567,7 @@ export default function App() {
               <Route path="/tools/sleep-quality-calculator"><SleepQualityCalculator /></Route>
               <Route path="/tools/nervous-system-check"><NervousSystemCheck /></Route>
               <Route path="/tools/all"><ToolsIndex /></Route>
-              <Route path="/affirmations">
-                <AffirmationWall />
-              </Route>
+              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
               <Route path="/wellness-dashboard">
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
@@ -715,8 +741,7 @@ export default function App() {
               <Route path="/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/mindfulness">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
+              <Route path="/mindfulness" component={MindfulnessCanonical} />
               <Route path="/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
               <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
               <Route path="/sleep-guide">{() => <ConfigRoute route="/sleep-guide" />}</Route>
@@ -739,15 +764,14 @@ export default function App() {
               <Route path="/activities"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
               <Route path="/routines"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
               <Route path="/habits"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
-              <Route path="/growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/growth"><WellnessRoute><GrowthCanonical /></WellnessRoute></Route>
               <Route path="/peacescape"><WellnessRoute><PeacescapePage /></WellnessRoute></Route>
               <Route path="/recovery"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/reflection"><WellnessRoute><ReflectionPage /></WellnessRoute></Route>
               <Route path="/prompts"><WellnessRoute><JournalPage /></WellnessRoute></Route>
-              <Route path="/anxiety">{() => <ConfigRoute route="/breathing" />}</Route>
-              <Route path="/depression"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/anxiety" component={AnxietyCanonical} />
+              <Route path="/depression"><WellnessRoute><DepressionCanonical /></WellnessRoute></Route>
               <Route path="/calm">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/peace">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/stress">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/relax">{() => <ConfigRoute route="/calming-scenes" />}</Route>
               <Route path="/emotions"><WellnessRoute><Suspense fallback={<div>Loading...</div>}><EmotionalIntelligenceHubPage /></Suspense></WellnessRoute></Route>
@@ -772,7 +796,6 @@ export default function App() {
               <Route path="/joy"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/peace-of-mind">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/inner-peace">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/body">{() => <ConfigRoute route="/body-wellness" />}</Route>
               <Route path="/soul"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/mental-health"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
@@ -799,18 +822,19 @@ export default function App() {
               <Route path="/guilt"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/loneliness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/isolation"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
-              <Route path="/self-love"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/self-love"><WellnessRoute><SelfLoveCanonical /></WellnessRoute></Route>
               <Route path="/wellness-tools">{() => <PracticeLibrary />}</Route>
               <Route path="/counseling">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/wellbeing">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/wellbeing" component={WellbeingPage} />
               <Route path="/well-being">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/mental-wellness">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/mental-wellness" component={MentalWellnessPage} />
               <Route path="/emotional-health"><WellnessRoute><MoodPage /></WellnessRoute></Route>
-              <Route path="/trust"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/trust" component={TrustCenterPage} />
+              <Route path="/ai-transparency" component={AITransparencyPage} />
               <Route path="/compassion"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/patience"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/kindness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
-              <Route path="/presence"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              
               <Route path="/awareness"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
               <Route path="/connection"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/relationships"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
@@ -825,17 +849,11 @@ export default function App() {
               <Route path="/spiritual">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/spiritual-wellness">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/body">{() => <ConfigRoute route="/grounding" />}</Route>
-              <Route path="/soul">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/yoga">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/exercise">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/movement">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/fitness">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/nutrition">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/sleep">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/rest">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/energy">{() => <ConfigRoute route="/breathing" />}</Route>
-              <Route path="/balance">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/guide">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/science">{() => <ConfigRoute route="/research" />}</Route>
               <Route path="/studies">{() => <ConfigRoute route="/research" />}</Route>
@@ -927,14 +945,10 @@ export default function App() {
               <Route path="/selflove">{() => <Redirect to="/self-love" />}</Route>
               <Route path="/innerchild">{() => <Redirect to="/inner-child" />}</Route>
               <Route path="/quotes">{() => <Redirect to="/affirmations" />}</Route>
-              <Route path="/exercises">{() => <Redirect to="/practices" />}</Route>
-              <Route path="/activities">{() => <Redirect to="/practices" />}</Route>
-              <Route path="/activity">{() => <Redirect to="/practices" />}</Route>
               <Route path="/heal">{() => <Redirect to="/healing" />}</Route>
               <Route path="/mentalhealth">{() => <Redirect to="/mental-health" />}</Route>
               <Route path="/ground">{() => <Redirect to="/grounding" />}</Route>
               <Route path="/routine">{() => <Redirect to="/routines" />}</Route>
-              <Route path="/program">{() => <Redirect to="/programs" />}</Route>
               <Route path="/explore">{() => <Redirect to="/wellness-tools" />}</Route>
               <Route path="/discover">{() => <Redirect to="/wellness-tools" />}</Route>
               <Route path="/toolkit">{() => <Redirect to="/wellness-tools" />}</Route>
@@ -968,7 +982,6 @@ export default function App() {
               <Route path="/log-in">{() => <Redirect to="/login" />}</Route>
               <Route path="/contact-us">{() => <Redirect to="/contact" />}</Route>
               <Route path="/about-us">{() => <Redirect to="/about" />}</Route>
-              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
               <Route path="/faqs">{() => <Redirect to="/faq" />}</Route>
               <Route path="/getting-started">{() => <Redirect to="/onboarding" />}</Route>
               <Route path="/how-it-works">{() => <Redirect to="/features" />}</Route>
@@ -1016,11 +1029,9 @@ export default function App() {
               <Route path="/episode">{() => <Redirect to="/learn" />}</Route>
               <Route path="/episodes">{() => <Redirect to="/learn" />}</Route>
               <Route path="/series">{() => <Redirect to="/courses" />}</Route>
-              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
               <Route path="/programs">{() => <Redirect to="/courses" />}</Route>
               <Route path="/meetups">{() => <Redirect to="/community" />}</Route>
               <Route path="/live">{() => <Redirect to="/community" />}</Route>
-              <Route path="/webinar">{() => <Redirect to="/courses" />}</Route>
               <Route path="/seminar">{() => <Redirect to="/courses" />}</Route>
               <Route path="/seminars">{() => <Redirect to="/courses" />}</Route>
               <Route path="/inspire">{() => <Redirect to="/affirmation" />}</Route>
@@ -1029,7 +1040,6 @@ export default function App() {
               <Route path="/mantras">{() => <Redirect to="/affirmation" />}</Route>
               <Route path="/mantra">{() => <Redirect to="/affirmation" />}</Route>
               <Route path="/sound">{() => <Redirect to="/meditation" />}</Route>
-              <Route path="/sounds">{() => <Redirect to="/meditation" />}</Route>
               <Route path="/transform">{() => <Redirect to="/growth" />}</Route>
               <Route path="/improve">{() => <Redirect to="/growth" />}</Route>
               <Route path="/change">{() => <Redirect to="/growth" />}</Route>
@@ -1048,9 +1058,6 @@ export default function App() {
               <Route path="/depressed">{() => <Redirect to="/depression" />}</Route>
               <Route path="/wellness-journey">{() => <Redirect to="/healing-journey" />}</Route>
               <Route path="/my-healing">{() => <Redirect to="/healing-journey" />}</Route>
-              <Route path="/recovery">{() => <Redirect to="/healing-journey" />}</Route>
-              <Route path="/therapy">{() => <Redirect to="/support" />}</Route>
-              <Route path="/counseling">{() => <Redirect to="/support" />}</Route>
               <Route path="/assistance">{() => <Redirect to="/support" />}</Route>
               <Route path="/toolbox">{() => <Redirect to="/tools" />}</Route>
               <Route path="/calm-down">{() => <Redirect to="/calm" />}</Route>
@@ -1136,8 +1143,6 @@ export default function App() {
               <Route path="/uplift">{() => <Redirect to="/joy" />}</Route>
               <Route path="/encourage">{() => <Redirect to="/support" />}</Route>
               <Route path="/motivate">{() => <Redirect to="/growth" />}</Route>
-              <Route path="/embrace">{() => <Redirect to="/acceptance" />}</Route>
-              <Route path="/cherish">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/appreciate">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/celebrate">{() => <Redirect to="/joy" />}</Route>
               <Route path="/affirm">{() => <Redirect to="/affirmations" />}</Route>
@@ -1180,11 +1185,8 @@ export default function App() {
               <Route path="/soothing">{() => <Redirect to="/calm" />}</Route>
               <Route path="/soothe">{() => <Redirect to="/calm" />}</Route>
               <Route path="/tranquil">{() => <Redirect to="/peace" />}</Route>
-              <Route path="/tranquility">{() => <Redirect to="/peace" />}</Route>
               <Route path="/serene">{() => <Redirect to="/peace" />}</Route>
-              <Route path="/serenity">{() => <Redirect to="/peace" />}</Route>
               <Route path="/inspired">{() => <Redirect to="/inspire" />}</Route>
-              <Route path="/motivated">{() => <Redirect to="/motivation" />}</Route>
               <Route path="/inspiring">{() => <Redirect to="/inspire" />}</Route>
               <Route path="/motivating">{() => <Redirect to="/motivation" />}</Route>
               <Route path="/resilient">{() => <Redirect to="/resilience" />}</Route>
@@ -1295,7 +1297,6 @@ export default function App() {
               <Route path="/evolve">{() => <Redirect to="/growth" />}</Route>
               <Route path="/thrive">{() => <Redirect to="/growth" />}</Route>
               <Route path="/flourish">{() => <Redirect to="/growth" />}</Route>
-              <Route path="/flourishing">{() => <Redirect to="/growth" />}</Route>
               <Route path="/bloom">{() => <Redirect to="/growth" />}</Route>
               <Route path="/awaken">{() => <Redirect to="/awakening" />}</Route>
               <Route path="/enlighten">{() => <Redirect to="/spiritual" />}</Route>
@@ -1380,7 +1381,6 @@ export default function App() {
               <Route path="/body-image">{() => <Redirect to="/self-worth" />}</Route>
               <Route path="/eating">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/sobriety">{() => <Redirect to="/healing" />}</Route>
-              <Route path="/ptsd">{() => <Redirect to="/trauma" />}</Route>
               <Route path="/assertiveness">{() => <Redirect to="/boundaries" />}</Route>
               <Route path="/vulnerability">{() => <Redirect to="/authenticity" />}</Route>
               <Route path="/security">{() => <Redirect to="/safety" />}</Route>
@@ -1416,7 +1416,6 @@ export default function App() {
               <Route path="/healing-journey">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/emotional-wellness"><WellnessRoute><MoodPage /></WellnessRoute></Route>
               <Route path="/mental-health-support">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/personal-growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/self-discovery"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/transformation"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/body-wellness">{() => <ConfigRoute route="/body-wellness" />}</Route>
@@ -1492,7 +1491,7 @@ export default function App() {
                 <ProtectedRoute><EliteToolsDashboard /></ProtectedRoute>
               </Route>
               <Route path="/resilience">
-                <ProtectedRoute><ResilienceMetricsPage /></ProtectedRoute>
+                <ProtectedRoute><ResilienceCanonical /></ProtectedRoute>
               </Route>
               <Route path="/companion">
                 <ProtectedRoute><AdaptiveCompanionPage /></ProtectedRoute>
@@ -1631,7 +1630,6 @@ export default function App() {
               <Route path="/support">{() => <ConfigRoute route="/support" />}</Route>
               <Route path="/resources">{() => <ConfigRoute route="/resources" />}</Route>
               <Route path="/contact"><Contact /></Route>
-              <Route path="/about"><About /></Route>
               <Route path="/privacy"><Privacy /></Route>
               <Route path="/invite"><ProtectedRoute><Invite /></ProtectedRoute></Route>
               <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
@@ -1846,7 +1844,6 @@ export default function App() {
               {/* Legal Pages - Config Driven */}
               <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
               <Route path="/tos">{() => <ConfigRoute route="/tos" />}</Route>
-              <Route path="/privacy">{() => <ConfigRoute route="/privacy" />}</Route>
               <Route path="/legal">{() => <ConfigRoute route="/legal" />}</Route>
               <Route path="/ethics">{() => <ConfigRoute route="/ethics" />}</Route>
               <Route path="/disclaimer">{() => <ConfigRoute route="/disclaimer" />}</Route>
@@ -1874,7 +1871,7 @@ export default function App() {
               <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
               <Route path="/admin/tools">{() => <AdminGuard><AdminTools /></AdminGuard>}</Route>
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
-              <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
+              
               <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
               <Route path="/settings/email-digest">{() => <ProtectedRoute><EmailDigest /></ProtectedRoute>}</Route>
               <Route path="/settings/ai-personality">{() => <ProtectedRoute><AIPersonality /></ProtectedRoute>}</Route>
@@ -1897,7 +1894,6 @@ export default function App() {
               <Route path="/education" component={LearnHub} />
               <Route path="/workshop">{() => <CourseCatalog />}</Route>
               <Route path="/workshops">{() => <CourseCatalog />}</Route>
-              <Route path="/programs">{() => <CourseCatalog />}</Route>
               <Route path="/library" component={LearnHub} />
 
               {/* Fallback - Config Driven Not Found */}
@@ -1935,6 +1931,7 @@ export default function App() {
           </SafeBoundary>
           <ToastContainer />
           </ErrorBoundary>
+          </MMHBAvatarRuntimeProvider>
         </ReadingLevelProvider>
         </ResponsiveWrapper>
         </EmotionBackgroundProvider>

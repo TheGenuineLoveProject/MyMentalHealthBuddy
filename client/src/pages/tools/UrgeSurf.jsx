@@ -3,8 +3,8 @@ import { Link } from "wouter";
 import { Waves, ArrowLeft, Play, Pause, RotateCcw, Check } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const URGE_SURF_STEPS = [
   { text: "Notice the urge without acting on it", duration: 10 },

@@ -1,0 +1,26 @@
+{
+  "phase": 113,
+  "name": "Emotional State UX Audit Registry",
+  "mode": "governance-only",
+  "auditCategories": [
+    "calmness",
+    "cognitive-load",
+    "emotional-safety",
+    "accessibility",
+    "continuity"
+  ],
+  "forbiddenPatterns": [
+    "urgency-pressure",
+    "manipulative-countdowns",
+    "addictive-streaks",
+    "fear-retention",
+    "emotional-dependency",
+    "aggressive-interruptions"
+  ],
+  "qualityGates": [
+    "build",
+    "health",
+    "accessibility",
+    "rollback"
+  ]
+}

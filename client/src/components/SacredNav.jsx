@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, Heart, Home, BookOpen, LayoutDashboard, Sparkles, LogOut, Wrench, Newspaper, Crown } from "lucide-react";
-import { Button } from "@/components/ui/Button.jsx";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "../context/AuthContext";
 
 // Public navigation order, advisor-aligned: Home → Wellness → Tools →

@@ -1,6 +1,6 @@
 import { useAuth } from "../context/AuthContext.jsx";
 import { Heart, Lock } from "lucide-react";
-import { Button } from "@/components/ui/Button.jsx";
+import { Button } from "@/components/ui/button";
 import LotusLoader from "@/components/ui/LotusLoader.jsx";
 
 export default function ProtectedRoute({ children }) {

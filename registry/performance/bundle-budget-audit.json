@@ -1,0 +1,191 @@
+{
+  "generatedAt": "2026-05-26T00:13:04.945Z",
+  "limits": {
+    "jsWarnKB": 180,
+    "jsFailKB": 350,
+    "cssWarnKB": 80,
+    "cssFailKB": 160,
+    "assetWarnKB": 500,
+    "assetFailKB": 1500
+  },
+  "totalFiles": 426,
+  "warnings": 7,
+  "failures": 3,
+  "largest": [
+    {
+      "file": "client/dist/assets/mmhb_brand_logo_lockup_1777538625498-Bg5tRRhq.png",
+      "type": "asset",
+      "sizeKB": 2024.81,
+      "warn": true,
+      "fail": true
+    },
+    {
+      "file": "client/dist/assets/thegenuineloveproject_logo_v2_1777538625498-B2Z66psB.png",
+      "type": "asset",
+      "sizeKB": 1570.77,
+      "warn": true,
+      "fail": true
+    },
+    {
+      "file": "client/dist/assets/index-VZ0CyR5M.css",
+      "type": "css",
+      "sizeKB": 343.99,
+      "warn": true,
+      "fail": true
+    },
+    {
+      "file": "client/dist/assets/WellnessDashboard-D4Y2G-I9.js",
+      "type": "js",
+      "sizeKB": 268.7,
+      "warn": true,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/_autopilot-CuE29eAG.js",
+      "type": "js",
+      "sizeKB": 251.89,
+      "warn": true,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/AdvancedToolsPage-DzNeZFUu.js",
+      "type": "js",
+      "sizeKB": 205.08,
+      "warn": true,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/index-6iTq10yq.js",
+      "type": "js",
+      "sizeKB": 183.09,
+      "warn": true,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/vendor-react-CcWttEQd.js",
+      "type": "js",
+      "sizeKB": 178.66,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/CanvaLanding-Cg2TqvDN.js",
+      "type": "js",
+      "sizeKB": 126.83,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/routeMetaRegistry-De_sNDof.js",
+      "type": "js",
+      "sizeKB": 126.27,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/vendor-motion-DnxLftd-.js",
+      "type": "js",
+      "sizeKB": 122.22,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/SacredFooter-CYAJcEX9.js",
+      "type": "js",
+      "sizeKB": 95.16,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/vendor-forms-UbwvMrj5.js",
+      "type": "js",
+      "sizeKB": 94.7,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/CommandCenter-BPPt3W7X.js",
+      "type": "js",
+      "sizeKB": 91.42,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/WisdomToolsPage-_cHOjHlA.js",
+      "type": "js",
+      "sizeKB": 81.59,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/vendor-lucide-bnMo4Sd-.js",
+      "type": "js",
+      "sizeKB": 64.85,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/_adminToolsShared-DEw3Z585.js",
+      "type": "js",
+      "sizeKB": 62.68,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/ContentStudioPage-BSGWjxon.js",
+      "type": "js",
+      "sizeKB": 53.7,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/CanvaLanding-Bi6MZ_aZ.css",
+      "type": "css",
+      "sizeKB": 52.39,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/NarrativeOpsConsole-DpBkNc_s.js",
+      "type": "js",
+      "sizeKB": 52.24,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/Admin-9Fnbm2v8.js",
+      "type": "js",
+      "sizeKB": 51.34,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/PageTemplate-Ej9kDUrm.js",
+      "type": "js",
+      "sizeKB": 49.45,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/AdminTools-DCQGDmls.js",
+      "type": "js",
+      "sizeKB": 48.93,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/PageTemplate-DPX131m5.css",
+      "type": "css",
+      "sizeKB": 47.77,
+      "warn": false,
+      "fail": false
+    },
+    {
+      "file": "client/dist/assets/AdminSocial-BJ0k6KmN.js",
+      "type": "js",
+      "sizeKB": 47.39,
+      "warn": false,
+      "fail": false
+    }
+  ]
+}

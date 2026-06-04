@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "status": "architecture-map",
+  "canonicalRouteProposal": "/ai-transparency",
+  "boundaries": [
+    "no-diagnosis",
+    "no-prescribing",
+    "no-suicidality-determination",
+    "no-emergency-replacement",
+    "no-provider-impersonation",
+    "human-supervised",
+    "privacy-preserving",
+    "non-coercive"
+  ],
+  "sourceEditsAllowed": false
+}

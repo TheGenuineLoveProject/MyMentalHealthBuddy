@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { Mail, Heart, Shield, Clock, ArrowLeft } from "lucide-react";
-import TglpNavbar from "../components/TglpNavbar";
 import NewsletterSignup from "../components/NewsletterSignup";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/ReflectionFooter";
@@ -14,7 +13,6 @@ export default function Newsletter() {
       />
       <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-32 -left-32 absolute" aria-hidden="true" />
-      <TglpNavbar />
 
       <main className="mx-auto max-w-3xl px-4 py-10 relative z-10">
         <Link href="/blog">

@@ -1,0 +1,20 @@
+{
+  "total": 145,
+  "byCategory": {
+    "landing": 12,
+    "auth": 6,
+    "(none)": 5,
+    "core": 11,
+    "ai": 7,
+    "wellness": 29,
+    "community": 7,
+    "account": 9,
+    "admin": 4,
+    "system": 7,
+    "content": 13,
+    "support": 10,
+    "learning": 3,
+    "legal": 8,
+    "advanced": 14
+  }
+}

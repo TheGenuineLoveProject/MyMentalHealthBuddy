@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Award, X, ArrowUp, Sparkles, Gift } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const levelRewards = {
   5: { title: "Novice Seeker", reward: "Unlock Breathing Exercises", color: "from-green-400 to-emerald-500" },

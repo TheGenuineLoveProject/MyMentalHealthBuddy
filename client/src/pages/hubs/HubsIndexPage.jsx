@@ -11,7 +11,7 @@ import {
   Feather, Sparkles, Eye, Brain, TrendingUp, Flame, 
   Sun, ArrowRight, BookOpen, Compass, Search
 } from "lucide-react";
-import { Input } from "@/components/ui/Input";
+import { Input } from "@/components/ui/input";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import SEO from "@/components/SEO";

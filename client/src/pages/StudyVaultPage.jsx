@@ -4,9 +4,9 @@ import {
   BookOpen, ChevronLeft, Search, Info,
   Brain, Heart, Shield, Sparkles, Users, Lightbulb, Phone
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import { useReadingLevel } from "@/context/ReadingLevelContext";

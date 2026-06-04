@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Search, Calendar, Clock, User, ArrowRight, BookOpen } from "lucide-react";
-import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
 import NewsletterSignup from "../components/NewsletterSignup";
+import LotusLoader from "../components/ui/LotusLoader";
 import { trackEvent, trackPageView } from "../hooks/useAnalytics.mjs";
 
 function BlogCard({ post }) {
@@ -109,7 +109,6 @@ export default function BlogIndex() {
       />
       <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-32 -left-32 absolute" aria-hidden="true" />
-      <TglpNavbar />
 
       <main className="mx-auto max-w-6xl px-4 py-10 relative z-10">
         <section className="relative overflow-hidden rounded-3xl border border-[rgba(var(--glp-sage-rgb), 0.22)] bg-[rgba(250,249,247,0.55)] p-8 shadow-sm backdrop-blur mb-10">
@@ -148,8 +147,7 @@ export default function BlogIndex() {
 
         {isLoading && (
           <div className="text-center py-12">
-            <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin motion-reduce:animate-none mx-auto mb-4" />
-            <p className="text-[var(--glp-ink)]/70">Loading articles...</p>
+            <LotusLoader message="Loading articles..." />
           </div>
         )}
 

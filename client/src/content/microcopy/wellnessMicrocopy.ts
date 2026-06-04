@@ -651,7 +651,7 @@ export const gentleExits = {
   advanced: 'Knowing when to stop is a valuable skill.'
 };
 
-export function pick(seed, list) {
+export function pick(seed: string | number, list: string[]) {
   if (!list || list.length === 0) return '';
   const hash = typeof seed === 'string' 
     ? seed.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
@@ -659,7 +659,11 @@ export function pick(seed, list) {
   return list[Math.abs(hash) % list.length];
 }
 
-export function buildTierCopy({ routeKey, tier, level = 'intermediate' }) {
+export function buildTierCopy({ routeKey, tier, level = 'intermediate' }: {
+  routeKey: string;
+  tier: 'quick10s' | 'short1to3' | 'long3to10';
+  level?: 'beginner' | 'intermediate' | 'advanced';
+}) {
   const tierLabels = {
     quick10s: { beginner: '10 seconds', intermediate: '10-second reset', advanced: 'Micro-regulation (10s)' },
     short1to3: { beginner: '1–3 minutes', intermediate: '1–3 minute practice', advanced: 'Short practice (1–3 min)' },
@@ -677,13 +681,13 @@ export function buildTierCopy({ routeKey, tier, level = 'intermediate' }) {
   };
 }
 
-export function getWellnessCopy(category, level = 'intermediate', seed = 0) {
-  const list = wellnessMicrocopy[category]?.[level];
+export function getWellnessCopy(category: string, level = 'intermediate', seed = 0) {
+  const list = (wellnessMicrocopy as Record<string, any>)[category]?.[level];
   if (!list) return '';
   return pick(seed, list);
 }
 
-export function pickSlot(category, level = 'intermediate', seed = '') {
+export function pickSlot(category: string, level = 'intermediate', seed = '') {
   const categories = {
     ctaPrimary,
     ctaSecondary,
@@ -693,7 +697,7 @@ export function pickSlot(category, level = 'intermediate', seed = '') {
     ...wellnessMicrocopy
   };
   
-  const list = categories[category]?.[level] || categories[category]?.intermediate;
+  const list = (categories as Record<string, any>)[category]?.[level] || (categories as Record<string, any>)[category]?.intermediate;
   if (!list) return '';
   return pick(seed || category, list);
 }

@@ -77,7 +77,7 @@ export function AgeConfirmationModal({ onConfirm }: AgeConfirmationModalProps) {
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      className={`fixed inset-0 z-50 overflow-y-auto bg-black/40 backdrop-blur-sm px-4 py-6 flex items-center justify-center transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       role="dialog"
       aria-modal="true"
       aria-labelledby="age-modal-title"
@@ -92,9 +92,8 @@ export function AgeConfirmationModal({ onConfirm }: AgeConfirmationModalProps) {
       
       <div 
         ref={modalRef}
-        className={`relative w-full max-w-md bg-background rounded-2xl shadow-2xl border border-[hsl(var(--sage-200))] dark:border-[hsl(var(--sage-700))] transition-transform duration-300 ${isVisible ? "scale-100" : "scale-95"}`}
-      >
-        <div className="p-6 text-center">
+        className={`relative w-full max-w-3xl bg-background rounded-3xl shadow-2xl overflow-hidden border border-[hsl(var(--sage-200))] dark:border-[hsl(var(--sage-700))] transition-transform duration-300 ${isVisible ? 'scale-100' : 'scale-95'}`}      >
+          <div className="px-6 py-8 md:px-10 text-center">
           <div className="mx-auto w-16 h-16 rounded-full bg-[hsl(var(--sage-100))] dark:bg-[hsl(var(--sage-800))] flex items-center justify-center mb-4">
             <Heart className="w-8 h-8 text-[hsl(var(--sage-600))]" aria-hidden="true" />
           </div>

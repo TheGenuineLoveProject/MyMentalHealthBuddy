@@ -77,18 +77,7 @@ export default function MetaLearningPage() {
 
   const topTechnique = useMemo(() => {
     const entries = Object.entries(profile.bestTechniques);
-    if (entries.length === 0) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Meta Learning — MyMentalHealthBuddy" description="Explore learning about learning itself." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Meta Learning</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+    if (entries.length === 0) return null;
     return entries.sort((a, b) => b[1] - a[1])[0];
   }, [profile.bestTechniques]);
 

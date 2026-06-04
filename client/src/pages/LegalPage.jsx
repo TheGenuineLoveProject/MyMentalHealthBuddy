@@ -2,8 +2,8 @@ import { Link } from "wouter";
 import { Scale, FileText, Shield, ArrowLeft } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const LEGAL_LINKS = [
   { title: "Terms of Service", path: "/legal/terms", description: "Our terms and conditions for using the platform." },

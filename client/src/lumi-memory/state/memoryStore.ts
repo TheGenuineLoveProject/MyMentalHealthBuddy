@@ -7,7 +7,7 @@
  */
 
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { persist, createJSONStorage, type StateStorage } from "zustand/middleware";
 import {
   ALLOWED_MEMORY_FIELDS,
   type AllowedMemoryField,
@@ -21,6 +21,17 @@ import {
   isExpired,
   expiresAtFor,
 } from "../safety/memoryRetentionRules";
+
+/**
+ * No-op storage used when `window` is unavailable (SSR / non-browser contexts).
+ * Keeps `createJSONStorage` type-safe (the factory must return a StateStorage,
+ * never `undefined`) while persisting nothing outside the browser.
+ */
+const noopStorage: StateStorage = {
+  getItem: () => null,
+  setItem: () => {},
+  removeItem: () => {},
+};
 
 /** A single memory entry with retention metadata. */
 export type MemoryEntry<F extends AllowedMemoryField = AllowedMemoryField> = {
@@ -167,7 +178,12 @@ export const useMemoryStore = create<MemoryState & MemoryActions>()(
 }),
     {
       name: "mmhb-lumi-memory-v1",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() =>
+        typeof window !== "undefined"
+          ? localStorage
+          : noopStorage
+      ),
+      
       // Persist consent + entries only. Audit stays in-memory: it's
       // diagnostic, capped at MAX_AUDIT_ENTRIES per session, and persisting
       // it would (a) bloat localStorage and (b) leak rejection metadata

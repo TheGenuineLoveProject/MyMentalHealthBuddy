@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, createContext, useContext, ReactNode, HTML
 interface PopoverContextType {
   open: boolean;
   setOpen: (open: boolean) => void;
-  triggerRef: React.RefObject<HTMLButtonElement>;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 const PopoverContext = createContext<PopoverContextType | null>(null);

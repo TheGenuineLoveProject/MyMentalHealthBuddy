@@ -1,0 +1,33 @@
+{
+  "phase": 114,
+  "name": "footer-and-governance-index-canon",
+  "mode": "governance-only",
+  "footerColumns": [
+    "Healing",
+    "Learn",
+    "Trust",
+    "About",
+    "Crisis"
+  ],
+  "requiredLinks": {
+    "trust": [
+      "Trust Center",
+      "AI Transparency",
+      "Privacy",
+      "Safety",
+      "Clinical Boundaries"
+    ],
+    "crisis": [
+      "Crisis Resources",
+      "Emergency Disclaimer"
+    ]
+  },
+  "forbidden": [
+    "dense-link-wall",
+    "manipulative-cta",
+    "urgency-copy",
+    "healing-data-monetization",
+    "hidden-governance",
+    "private-log-exposure"
+  ]
+}

@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import SafetyFooter from "../components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { ArrowLeft, Sparkles, Heart, Sun, Moon, Star, Compass, Feather, Flame, Eye, Book, Lightbulb, Users, Clock } from 'lucide-react';
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";

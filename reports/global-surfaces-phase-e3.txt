@@ -1,0 +1,216 @@
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:13:  const [repairStats, setRepairStats] = useState({ attempted: 0, fixed: 0, failed: 0 });
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:36:    let fixed = 0;
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:190:      if (wasFixed) fixed++;
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:192:      log[log.length - 1].status = wasFixed ? 'fixed' : 'failed';
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:196:    setRepairStats({ attempted: fixableIssues.length, fixed, failed });
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:256:          <span className="text-green-600">{repairStats.fixed} fixed</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:305:                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${logEntry.status === 'fixed' ? 'bg-green-100 text-green-600' : logEntry.status === 'failed' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:306:                            {logEntry.status === 'running' ? 'Repairing...' : logEntry.status === 'fixed' ? 'Fixed' : 'Needs Manual Fix'}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:355:                        <span className={entry.status === 'fixed' ? 'text-green-600' : entry.status === 'failed' ? 'text-red-500' : 'text-blue-500'}>
+client/src/pages/admin/AdminSocial.jsx:934:    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={onClose}>
+client/src/pages/admin/NarrativeOpsConsole.jsx:667:        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+client/src/pages/admin/NarrativeOpsConsole.jsx:1044:    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+client/src/pages/admin/SocialCalendar.jsx:333:        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/admin/SocialDashboard.jsx:691:        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/account/Profile.jsx:117:                    <button className="absolute bottom-0 right-0 icon-container icon-sm icon-soft-sage" data-testid="button-change-avatar">
+client/src/pages/account/Security.jsx:190:      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+client/src/pages/account/Security.jsx:277:                    className="absolute right-0 top-0 h-full px-3"
+client/src/pages/account/Security.jsx:299:                    className="absolute right-0 top-0 h-full px-3"
+client/src/pages/account/Security.jsx:389:            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/dashboard/Journal.jsx:104:    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" data-testid="modal-new-entry" role="dialog" aria-modal="true" aria-labelledby="new-entry-title">
+client/src/pages/tools/CognitiveDistortionChecker.jsx:53:    description: "Attaching a fixed label to yourself or others (e.g., 'I am a failure').",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:188:            className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-40"
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:192:            className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-30"
+client/src/pages/CommunityCircle.jsx:52:        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+client/src/pages/ContentIndexPage.jsx:219:        <div className="sticky top-0 z-20 py-4 mb-6" style={{ background: 'var(--glp-paper)' }}>
+client/src/pages/ControlDashboard.jsx:74:          <div className="absolute bottom-0 -left-32 w-80 h-80 bg-gradient-to-tr from-gold-100/30 to-amber-50/20 rounded-full blur-3xl" />
+client/src/pages/ControlDashboard.jsx:77:        <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200">
+client/src/pages/ControlDashboard.jsx:111:              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sticky top-28">
+client/src/pages/DesignSystem.jsx:74:      <header className="sticky top-0 z-50 px-6 py-4" style={{ 
+client/src/pages/DesignSystem.jsx:101:          <nav className="sticky top-24 space-y-1">
+client/src/pages/DesignSystem.jsx:507:                      {["NavBar (sticky)", "Hero Section", "About / Values Grid", "How It Works (3 steps)", "Features Grid", "Testimonials", "Trust Badges", "FAQ Accordion", "Final CTA", "Footer"].map((section, i) => (
+client/src/pages/DesignSystem.jsx:1048:                    className="absolute top-0 left-1/4 right-1/4 h-1 rounded-b-full"
+client/src/pages/AffirmationWall.jsx:195:          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+client/src/pages/CRMPage.jsx:69:        <nav className="border-b sticky top-0 z-50 backdrop-blur-lg" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-20)' }}>
+client/src/pages/WireframeTemplates.jsx:76:        className="sticky top-0 z-50 px-6 py-4"
+client/src/pages/WireframeTemplates.jsx:140:          <nav className="sticky top-24 space-y-2">
+client/src/pages/WireframeTemplates.jsx:742:            className="absolute top-0 left-1/4 right-1/4 h-1 rounded-b-full"
+client/src/pages/Login.jsx:97:        <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
+client/src/pages/Register.jsx:85:        <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
+client/src/pages/ForgotPassword.jsx:133:        <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse motion-reduce:animate-none" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
+client/src/pages/Admin.jsx:241:        <div className="absolute bottom-0 -left-32 w-80 h-80 rounded-full blur-3xl" style={{ background: 'var(--glp-gold-10)' }} />
+client/src/pages/DesignDashboard.jsx:38:        <header className="sticky top-0 z-10 bg-[var(--glp-paper)]/85 backdrop-blur-md border-b border-[var(--sage-200)]">
+client/src/pages/ExamplesPage.jsx:99:      { step: "Take Repair Action", detail: "If possible, apologize or fix what can be fixed. Then practice letting go" }
+client/src/pages/Publishing.jsx:216:              <div className="card-bordered sticky top-8">
+client/src/pages/Publishing.jsx:286:        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/ResilienceMetricsPage.tsx:358:                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-sage-200" />
+client/src/pages/StrategyMapsPage.tsx:483:                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-[var(--sage-200)]" />
+client/src/pages/StrategyMapsPage.tsx:500:                        {isCompleted && <Check className="h-3 w-3 text-white absolute -left-0.5 -top-0.5" />}
+client/src/pages/StudyVaultPage.jsx:144:    summary: "Resilience is the ability to adapt and recover from adversity. It's not a fixed trait—it can be developed through intentional practice.",
+client/src/pages/ResearchEvidencePage.jsx:139:        implications: "Your attachment style isn't fixed. Therapy and healthy relationships can help you develop secure attachment patterns.",
+client/src/pages/HowToGuidesPage.jsx:128:      "Post sticky notes in visible places"
+client/src/pages/DiscernmentDashboard.jsx:111:      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4"
+client/src/pages/Dashboard.jsx:135:          <div className="absolute bottom-0 -left-32 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)' }} />
+client/src/pages/Dashboard.jsx:197:              className="absolute top-0 left-1/4 right-1/4 h-1 rounded-b-full"
+client/src/pages/Dashboard.jsx:264:              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+client/src/pages/Dashboard.jsx:296:              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+client/src/pages/DesignSystemV2.jsx:101:            position: "sticky", top: 0, zIndex: 30,
+client/src/pages/AffirmationsPage.jsx:153:      "My potential is not fixed; it expands with each step I take.",
+client/src/pages/HealingJourneysPage.jsx:439:          <div className="absolute left-6 top-0 bottom-0 w-0.5" style={{ background: 'var(--glp-sage-20)' }} />
+client/src/pages/HealingJourneysPage.jsx:445:                  className="absolute left-0 top-0 w-12 h-12 rounded-full flex items-center justify-center"
+client/src/pages/CanvaLanding.jsx:955:          <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full blur-3xl" style={{ background: 'rgba(var(--glp-sage-rgb), 0.10)' }} />
+client/src/pages/CanvaLanding.jsx:956:          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(var(--glp-gold-rgb), 0.08)' }} />
+client/src/pages/CanvaLanding.jsx:1016:        className="sticky bottom-0 z-[110] backdrop-blur-md py-3 pl-5 pr-16 md:pr-20 flex items-center justify-between"
+client/src/pages/CanvaLanding.jsx:1021:        data-testid="sticky-cta-talk-to-lumi"
+client/src/pages/CanvaLanding.jsx:1035:          data-testid="link-sticky-cta-chat"
+client/src/components/a11y/SkipToContent.tsx:5:      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--glp-gold)] focus:text-[var(--glp-ink)] focus:rounded-lg focus:font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--glp-gold)]"
+client/src/components/admin/AIHealthPipeline.jsx:85:      fixed: fixable.length,
+client/src/components/admin/AIHealthPipeline.jsx:165:                  {run.fixed > 0 && <span className="text-purple-600">{run.fixed} auto-fixed</span>}
+client/src/components/growth/GrowthTimeline.tsx:153:        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border" />
+client/src/components/layout/AppShell.tsx:35:        <div className="fixed inset-0 z-50 bg-black/40">
+client/src/components/layout/Header.jsx:89:      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+client/src/components/layout/Header.jsx:158:                className="absolute right-0 top-full mt-2 rounded-xl py-2 min-w-[120px] z-50 bg-[var(--glp-paper)] border border-[var(--glp-sage-20)]"
+client/src/components/paradox/ParadoxCartographer.tsx:96:            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10" />
+client/src/components/sacred/EmotionBackground.jsx:73:      className={`fixed inset-0 -z-10 transition-all duration-1000 ${className}`}
+client/src/components/sacred/LotusGuide.jsx:197:    "bottom-right": "fixed bottom-6 right-6",
+client/src/components/sacred/LotusGuide.jsx:198:    "bottom-left": "fixed bottom-6 left-6",
+client/src/components/sacred/LotusGuide.jsx:199:    "top-right": "fixed top-24 right-6",
+client/src/components/sacred/LotusGuide.jsx:200:    "top-left": "fixed top-24 left-6"
+client/src/components/sacred/LotusGuide.jsx:208:      className={`flex flex-col items-center gap-4 z-50 ${floatingClass} ${floating ? 'lotus-float' : ''} ${className}`}
+client/src/components/sacred/ProgressTracker.jsx:137:            className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center"
+client/src/components/sacred/SacredBackground.jsx:46:          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] sacred-halo"
+client/src/components/sacred/SacredBackground.jsx:87:            className="absolute bottom-0 left-0 right-0 w-full h-24"
+client/src/components/sacred/SacredFooter.jsx:72:        className="absolute top-0 left-0 right-0 h-px"
+client/src/components/share/InfinityHeartCard.jsx:62:      <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+client/src/components/share/ShareModal.jsx:68:      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+client/src/components/ui/QuoteBlock.jsx:82:          className="absolute top-0 left-0 right-0 h-1"
+client/src/components/ui/SacredModal.jsx:72:      className={`fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop ${isExiting ? 'opacity-0' : ''}`}
+client/src/components/ui/dropdown-menu.tsx:102:        className={`absolute z-50 mt-${sideOffset} ${alignClass} min-w-[8rem] overflow-hidden rounded-xl border border-[var(--glp-border)] bg-[var(--glp-surface)] p-1 shadow-lg animate-in fade-in-0 zoom-in-95 ${className}`}
+client/src/components/ui/popover.tsx:107:        className={`absolute z-50 mt-${sideOffset} ${alignClass} w-72 rounded-xl border border-[var(--glp-border)] bg-[var(--glp-surface)] p-4 shadow-lg animate-in fade-in-0 zoom-in-95 ${className}`}
+client/src/components/ui/select.tsx:173:        absolute z-50 mt-1 w-full min-w-[8rem] overflow-hidden rounded-xl 
+client/src/components/ui/toast-container.tsx:91:      className="pointer-events-none fixed bottom-24 right-4 flex flex-col gap-2 w-full max-w-[320px]"
+client/src/components/ui/LayoutWrapper.jsx:34:              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--glp-sage-deep)] focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--glp-gold)] focus:ring-offset-2"
+client/src/components/ui/LayoutWrapper.jsx:43:              className="fixed inset-0 -z-10 opacity-50 pointer-events-none"
+client/src/components/wellness/HealingGraph.jsx:287:            <div className="absolute left-0 top-0 bottom-8 w-8 flex flex-col justify-between text-right pr-2">
+client/src/components/wellness/MoodCalendar.jsx:228:                    <span className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-deepTeal text-softWhite text-[10px] flex items-center justify-center font-sans font-bold">
+client/src/components/zen/BuddyBubble.jsx:67:  { category: "evolve", emoji: "🧬", text: "You are not a project to be fixed. You are a self being remembered." },
+client/src/components/lumi/LumiCustomizer.jsx:89:        position: "fixed",
+client/src/components/lumi/LumiV6.tsx:18: *       fixed CSS blink loop with JS-scheduled 2-6s intervals + 15% chance
+client/src/components/navigation/CanonicalNavbar.jsx:35:    <header className="sticky top-0 z-50 border-b border-[#A8D5BA]/40 bg-[#F7F4EE]/95 backdrop-blur">
+client/src/components/AICompanion.jsx:196:        className={`fixed bottom-24 right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl transition-all hover:scale-110 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--glp-gold)] ${className}`}
+client/src/components/AICompanion.jsx:210:          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+client/src/components/AICompanion.jsx:376:        <div className="fixed inset-0 z-50 flex items-center justify-center p-8 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
+client/src/components/AccessibilityToolbar.jsx:81:    <div ref={toolbarRef} className="fixed bottom-6 right-6 z-50" style={{ pointerEvents: 'auto' }} data-testid="accessibility-toolbar">
+client/src/components/AccessibilityToolbar.jsx:131:                <span className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${settings.highContrast ? 'right-0.5' : 'left-0.5'}`} />
+client/src/components/AccessibilityToolbar.jsx:147:                <span className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${settings.reduceMotion ? 'right-0.5' : 'left-0.5'}`} />
+client/src/components/AccessibilityToolbar.jsx:163:                <span className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${settings.dyslexiaFont ? 'right-0.5' : 'left-0.5'}`} />
+client/src/components/AchievementBadge.jsx:149:    <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+client/src/components/AchievementBadges.jsx:199:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-amber-400/10 to-yellow-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/AffirmationCards.jsx:172:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-white/30 to-transparent rounded-full blur-3xl" />
+client/src/components/AffirmationCards.jsx:173:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-white/20 to-transparent rounded-full blur-3xl" />
+client/src/components/AgeConfirmationModal.tsx:80:      className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+client/src/components/AngerManagement.jsx:151:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-orange-400/10 to-red-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/AnxietyRelief.jsx:151:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-purple-400/10 to-pink-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/BodyScanMeditation.jsx:84:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-pink-400/10 to-rose-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/BoundaryBuilder.jsx:106:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-violet-400/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/CBTThoughtDiary.jsx:92:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-violet-400/20 to-purple-500/20 rounded-full blur-3xl" />
+client/src/components/CBTThoughtDiary.jsx:93:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-fuchsia-400/20 to-pink-500/20 rounded-full blur-3xl" />
+client/src/components/ChatWidget.tsx:84:      className="fixed right-6 bottom-6 w-[340px] max-h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col z-60 overflow-hidden"
+client/src/components/ContentStudio.jsx:209:        body: "Research identifies key factors that support resilience:\n\n1. Connection: Supportive relationships buffer stress. We're wired for co-regulation.\n\n2. Meaning: Finding purpose, even in difficulty, helps us persevere.\n\n3. Cognitive flexibility: The ability to reframe challenges without denial.\n\n4. Self-care: Meeting basic needs (sleep, nutrition, movement) supports nervous system capacity.\n\nResilience isn't fixed—it's built through intentional practice and, importantly, through healing what depletes it.",
+client/src/components/CopingStrategies.jsx:255:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-indigo-400/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/DailyAffirmations.jsx:12:  { text: "I am enough, exactly as I am. I don't need to be fixed—I need to be witnessed.", category: "self-worth" },
+client/src/components/DailyAffirmations.jsx:148:        <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${gradientColor} opacity-10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2`} />
+client/src/components/DailyAffirmations.jsx:193:      <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-gradient-to-br ${gradientColor} opacity-10 rounded-full blur-3xl -translate-y-1/2`} />
+client/src/components/DataExportButton.jsx:97:            className="fixed inset-0 z-40"
+client/src/components/DataExportButton.jsx:101:          <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+client/src/components/DigitalDetox.jsx:146:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-sky-400/10 to-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/EmotionWheel.jsx:152:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-pink-400/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/EmotionalIntelligenceQuiz.jsx:148:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-violet-400/20 to-indigo-500/20 rounded-full blur-3xl" />
+client/src/components/EmotionalIntelligenceQuiz.jsx:149:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-blue-400/20 to-cyan-500/20 rounded-full blur-3xl" />
+client/src/components/EnergyBooster.jsx:142:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-orange-400/10 to-red-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/GlobalSearch.jsx:103:      className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh] px-4"
+client/src/components/GlobalSearch.jsx:114:      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true" />
+client/src/components/GlowFooter.jsx:37:      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8fbf9f]/30 to-transparent" aria-hidden="true" />
+client/src/components/GoalProgress.jsx:131:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-amber-400/10 to-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/GratitudeJar.jsx:107:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl" />
+client/src/components/GratitudeJar.jsx:108:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-rose-400/20 to-pink-500/20 rounded-full blur-3xl" />
+client/src/components/GratitudeJar.jsx:145:          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedGratitude(null)}>
+client/src/components/GratitudeJar.jsx:249:            <div className="absolute top-0 left-0 right-0 h-4 bg-amber-400 dark:bg-amber-600 rounded-t-sm" />
+client/src/components/GratitudeJar.jsx:283:          <h3 className="text-lg font-semibold text-gray-900 dark:text-white sticky top-0 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-rose-950/30 py-2">
+client/src/components/HabitTracker.jsx:99:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-emerald-400/10 to-teal-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/KeyboardShortcuts.jsx:42:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+client/src/components/KnowledgeBase.jsx:30:    <div className="fixed bottom-20 right-6 z-50">
+client/src/components/KnowledgeBase.jsx:66:        className="relative z-50 animate-float"
+client/src/components/LevelUpModal.jsx:34:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+client/src/components/LotusGuide.jsx:170:      className={`fixed bottom-[10.5rem] right-6 z-30 ${className}`}
+client/src/components/MindfulEating.jsx:146:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-lime-400/10 to-green-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/MindfulnessBell.jsx:149:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-violet-400/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/MindfulnessChallenges.jsx:116:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full blur-3xl" />
+client/src/components/MindfulnessChallenges.jsx:117:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl" />
+client/src/components/ModeToggle.jsx:52:            className="fixed inset-0 z-40"
+client/src/components/ModeToggle.jsx:59:            className="absolute right-0 top-full mt-2 z-50 min-w-[200px] py-2 rounded-lg 
+client/src/components/MoodTrendsChart.jsx:175:          <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-muted-foreground px-1">
+client/src/components/MorningEveningRituals.jsx:112:        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in">
+client/src/components/MotivationBooster.jsx:122:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-amber-400/10 to-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/NotificationCenter.jsx:108:      className="fixed inset-0 z-50 flex justify-end"
+client/src/components/OfflineIndicator.jsx:29:      className={`fixed bottom-4 left-4 z-50 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg transition-all ${
+client/src/components/PositiveReframing.jsx:100:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-amber-400/10 to-yellow-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/PositiveVisualization.jsx:170:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-amber-400/10 to-yellow-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/ProgressiveMuscleRelaxation.jsx:112:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-violet-400/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/ReflectionInsights.jsx:214:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-radial from-yellow-200/40 to-transparent rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
+client/src/components/ReflectionInsights.jsx:215:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-radial from-rose-200/40 to-transparent rounded-full blur-2xl translate-y-1/3 -translate-x-1/3" />
+client/src/components/SacredPattern.jsx:6: * A fixed, animated sacred geometry pattern that pulses gently
+client/src/components/SacredPattern.jsx:79:      className="fixed inset-0 pointer-events-none overflow-hidden"
+client/src/components/SelfCareBingo.jsx:154:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-pink-400/20 to-rose-500/20 rounded-full blur-3xl" />
+client/src/components/SelfCareBingo.jsx:155:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-orange-400/20 to-amber-500/20 rounded-full blur-3xl" />
+client/src/components/SelfCareBingo.jsx:158:        <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-50 animate-fade-in">
+client/src/components/SelfCareChecklist.jsx:140:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-pink-400/10 to-rose-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/SelfCompassion.jsx:164:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-rose-400/10 to-pink-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/ShareReflection.jsx:56:    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+client/src/components/ShareReflection.jsx:61:        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-br from-violet-400 via-purple-400 to-pink-400 opacity-20" />
+client/src/components/SleepTracker.jsx:111:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-indigo-400/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/SocialConnection.jsx:105:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/SocialShare.jsx:24:      textArea.style.position = 'fixed';
+client/src/components/StreakCelebration.jsx:48:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+client/src/components/StreakCounter.jsx:79:      <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br ${getFlameColor(currentStreak)} opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4`} />
+client/src/components/StressMonitor.jsx:120:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-blue-400/10 to-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/ValuesExplorer.jsx:136:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-emerald-400/10 to-teal-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/WeeklyRecap.jsx:207:          className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+client/src/components/WeeklyReflection.jsx:150:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-indigo-400/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/WellnessScore.jsx:105:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-teal-400/10 to-cyan-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/WellnessStreakDashboard.jsx:157:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-400/20 to-amber-500/20 rounded-full blur-3xl" />
+client/src/components/WellnessStreakDashboard.jsx:158:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-yellow-400/20 to-orange-500/20 rounded-full blur-3xl" />
+client/src/components/WorryTimeScheduler.jsx:117:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-slate-400/10 to-gray-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/XPProgressBar.jsx:107:              className="absolute top-0 h-full w-1 bg-white/50"
+client/src/components/BrandGlow.tsx:3:    <div aria-hidden className="brand-glow pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+client/src/components/SoundHealingPlayer.jsx:194:      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 rounded-full blur-3xl" />
+client/src/components/SoundHealingPlayer.jsx:195:      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-pink-400/20 to-rose-500/20 rounded-full blur-3xl" />
+client/src/components/MeditationTimer.jsx:112:      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 rounded-full blur-3xl -translate-y-1/2" />
+client/src/components/SacredNav.jsx:47:      className={`sticky top-0 z-50 transition-all duration-500 ${
+client/src/components/FeedbackWidget.jsx:113:        className="fixed bottom-6 left-6 z-40 min-h-[48px] min-w-[48px] p-3 rounded-full shadow-lg"
+client/src/components/FeedbackWidget.jsx:124:      className="fixed bottom-20 left-6 z-50 w-80 bg-background border rounded-xl shadow-xl overflow-hidden"
+client/src/components/GratitudePrompt.jsx:119:      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-rose-400/20 to-pink-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+client/src/components/GratitudePrompt.jsx:120:      <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-br from-amber-400/10 to-orange-500/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/4" />
+client/src/components/UpsellModal.jsx:43:      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+client/src/components/ReflectionCardExport.jsx:157:      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+client/src/components/ConsentBanner.jsx:42:      className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-background border-t shadow-lg"
+client/src/components/Header.jsx:39:      className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-xl supports-[backdrop-filter]:bg-[var(--bg)]/70"
+client/src/components/SessionTimeout.jsx:79:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+client/src/components/SacredFooter.jsx:73:        className="absolute top-0 left-0 right-0 h-px"
+client/src/components/CelebrationOverlay.tsx:92:        position: "fixed",
+client/src/components/TglpNavbar.jsx:101:          className="absolute right-0 mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl border border-[var(--glp-sage-15)] bg-[var(--glp-paper)] shadow-lg py-2 z-50"
+client/src/components/TglpNavbar.jsx:146:      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+client/src/components/TglpNavbar.jsx:286:          className="md:hidden absolute left-0 right-0 top-full z-50 px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)] max-h-[80vh] overflow-y-auto shadow-2xl"
+client/src/components/MicroWinPrompt.jsx:193:          position: fixed;
+client/src/components/MicroWinPrompt.jsx:199:          /* v5.6 architect fix: yield z-index to ConsentBanner (z-50) so privacy
+client/src/components/ReturnLoop.jsx:163:  // navigation surface there — this sticky banner otherwise stacks beneath the
+client/src/components/ReturnLoop.jsx:184:        // scrolling under the sticky bar doesn't bleed through (was 18% alpha).
+client/src/components/ReturnLoop.jsx:225:          position: sticky;
+client/src/context/GamificationContext.jsx:174:          className="fixed top-20 right-4 z-50 animate-bounce-in"
+client/src/context/GamificationContext.jsx:187:          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in"
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:10: *   2. Reducer marks `escalation: "critical"` as sticky.
+client/src/lumi-voice/components/VoiceCaptionOverlay.tsx:25:        position: "fixed",
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:37:        position: "fixed",
+client/src/_quarantine/orphans/SacredNavBar.jsx:5:    <nav className="w-full fixed top-0 left-0 z-50 bg-[#f8f7f4]/90 shadow-md backdrop-blur-md">
+client/src/main.jsx:31:  banner.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#5A8A6E;color:#fff;padding:14px 24px;border-radius:12px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.18);font-family:Inter,sans-serif;font-size:14px;max-width:440px;width:calc(100% - 32px);animation:slideUp 0.3s ease-out';
+client/src/App.jsx:409:                rendered a second sticky desktop navbar above TglpNavbar on

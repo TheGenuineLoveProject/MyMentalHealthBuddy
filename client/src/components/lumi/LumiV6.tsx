@@ -88,7 +88,7 @@
  * - all onboarding/tool surfaces migrated
  */
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
-import { useLumiAudio } from "@/hooks/useLumiAudio.js";
+import { useLumiAudio } from "@/hooks/useLumiAudio";
 import { getLumiV6Derivation } from "@/data/lumiEmotionMap";
 import "./LumiV6.css";
 

@@ -228,13 +228,13 @@ export default function Pricing() {
     ]}
   >
 
-    <div className="hxos-vnext min-h-screen relative" style={{ background: 'var(--glp-paper, #F7F1E8)' }}>
+      <div className="hxos-vnext relative" style={{ background: 'var(--glp-paper, #F7F1E8)' }}>
       <SEO
         title="Pricing - MyMentalHealthBuddy"
         description="Free emotional wellness companion. Optional Personal Guide, Full Companion, and Transformation Partner plans. Cancel anytime."
       />
 
-      <div className="relative z-10 py-20 px-6">
+        <div className="relative z-10 py-12 md:py-16 px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           <Link
             href="/"
@@ -293,7 +293,7 @@ export default function Pricing() {
           </div>
 
           {/* Tier cards — V28: white cards, circle icons, sage gradient buttons */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 max-w-5xl mx-auto">
             {tiers.map((tier, index) => {
               const Icon = tier.icon;
               return (
@@ -368,7 +368,7 @@ export default function Pricing() {
                     <button
                       onClick={() => startCheckout(tier.planId, tier.interval)}
                       disabled={checkingOut}
-                      className={`w-full py-3.5 px-6 rounded-full font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-lg ${checkingOut ? 'opacity-70 cursor-not-allowed' : ''}`}
+className={`w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 rounded-full font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-lg ${checkingOut ? 'opacity-70 cursor-not-allowed' : ''}`}
                       style={{
                         background: tier.popular
                           ? 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))'
@@ -393,7 +393,7 @@ export default function Pricing() {
                   ) : (
                     <Link
                       href="/register"
-                      className="block w-full py-3.5 px-6 text-center rounded-full font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-lg"
+                      className="block w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 text-center rounded-full font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-lg"
                       style={{
                         background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))',
                         boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)'

@@ -4,7 +4,7 @@ import { ArrowLeft, ChevronRight, Compass, PenLine, Activity } from "lucide-reac
 import { StateTracker } from "@/components/state/StateTracker";
 import { journalPrompts, categoryLabels, PromptCategory } from "@/data/journalPrompts";
 import SEO from "@/components/SEO";
-import { TodaysInsight } from "@/components/insights/TodaysInsight";
+import TodaysInsight from "@/components/insights/TodaysInsight.jsx";
 
 type FlowStep = "welcome" | "state" | "prompt" | "complete";
 

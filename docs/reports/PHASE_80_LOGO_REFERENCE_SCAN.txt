@@ -1,0 +1,5 @@
+client/src/components/lumi/LumiBrandLockupImage.jsx:10:import lockupPng from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/lumi/TGLPMandala.jsx:8:import mandalaUrl from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/TGLPMandalaImage.jsx:8:import mandalaPng from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/LumiBrandLogo.jsx:17:import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/BrandShell.jsx:4:export default function BrandShell({ children, logoSrc = "/logo.png" }) {

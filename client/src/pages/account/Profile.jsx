@@ -5,8 +5,8 @@ import {
   User, ArrowLeft, Camera, Mail, Calendar, MapPin, 
   Heart, Shield, Award, Save, Loader2, Edit2
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

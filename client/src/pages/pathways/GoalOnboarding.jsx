@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { ArrowRight, ArrowLeft, Check, Heart, Brain, Shield, Sparkles, Target, Sun } from "lucide-react";
 import SEO from "../../components/SEO";
-import { Button } from "@/components/ui/Button.jsx";
-import { Card, CardContent } from "@/components/ui/Card.jsx";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import BuddyPanel from "@/components/avatar/BuddyPanel";
 import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
 

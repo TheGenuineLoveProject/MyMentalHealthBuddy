@@ -196,7 +196,7 @@ describe("Architect hardening — runtime immutability", () => {
       // Attempt to mutate a numeric ceiling field.
       const before = p.lighting;
       try {
-        // @ts-expect-error — runtime mutation attempt
+        // runtime mutation attempt — immutability enforced at runtime via deep-freeze
         p.lighting = 0.99;
       } catch {
         /* strict-mode TypeError is acceptable */

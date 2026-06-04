@@ -142,14 +142,14 @@ export const personInEnvironment = {
   ]
 };
 
-export function pickMiPattern(category, subcategory, index = 0) {
-  const patterns = miMicroPatterns[category] || miPrinciples[category] || [];
+export function pickMiPattern(category: string, subcategory: string, index = 0) {
+  const patterns = (miMicroPatterns as Record<string, string[]>)[category] || (miPrinciples as Record<string, string[]>)[category] || [];
   if (!patterns.length) return '';
   return patterns[index % patterns.length];
 }
 
-export function getRandomMiPrinciple(principle) {
-  const options = miPrinciples[principle] || [];
+  export function getRandomMIPrinciple(principle: string) {
+  const options = miPrinciples[principle as keyof typeof miPrinciples] || [];
   return options[Math.floor(Math.random() * options.length)] || '';
 }
 
@@ -160,7 +160,7 @@ export default {
   ctas: miUpgradeCtas,
   pie: personInEnvironment,
   pick: pickMiPattern,
-  random: getRandomMiPrinciple
+  random: getRandomMIPrinciple
 };
 export const MI = {
   name: "Motivational Interviewing (Educational Self-Reflection)",

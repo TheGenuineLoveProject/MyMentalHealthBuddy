@@ -1,0 +1,143 @@
+client/src/pages/BlogEditor.jsx:234:                  placeholder="https://example.com/image.jpg"
+client/src/pages/OnboardingFlow.jsx:122:        src="/lumi/official/lumi-meditation.png"
+client/src/components/CreativeExpression.jsx:187:    link.download = `creative-expression-${Date.now()}.png`;
+client/src/components/avatar/BuddyAvatar.tsx:50: * `default` is the canonical V17 official sage Lumi (avatar-floating-nobg.png).
+client/src/components/avatar/BuddyAvatar.tsx:71:  default: "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:72:  yellow:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:73:  pink:    "/lumi/official/lumi-heart.png",
+client/src/components/avatar/BuddyAvatar.tsx:74:  blue:    "/lumi/official/lumi-meditation.png",
+client/src/components/avatar/BuddyAvatar.tsx:75:  purple:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:76:  sleep:   "/lumi/official/lumi-meditation.png",
+client/src/components/avatar/BuddyAvatar.tsx:77:  orange:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:98:  pompompurin:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:99:  cinnamoroll:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:100:  chiikawa:     "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:101:  jellycat:     "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:102:  squishmallow: "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:130:const FALLBACK_LUMI = "/lumi/official/lumi-float-idle.png";
+client/src/components/avatar/BuddyAvatar.tsx:136:  if (pngUrl.startsWith(V17_WEBP_PREFIX) && pngUrl.endsWith(".png")) {
+client/src/components/avatar/BuddyAvatar.tsx:142:  eating:      "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:143:  dancing:     "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:144:  waving:      "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:145:  meditating:  "/lumi/official/lumi-meditation.png",
+client/src/components/avatar/BuddyAvatar.tsx:146:  celebrating: "/lumi/official/lumi-heart.png",
+client/src/components/avatar/BuddyAvatar.tsx:147:  hugging:     "/lumi/official/lumi-heart.png",
+client/src/components/lumi/LumiBrandLockupImage.jsx:10:import lockupPng from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/lumi/TGLPMandala.jsx:8:import mandalaUrl from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/TGLPMandalaImage.jsx:8:import mandalaPng from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/LumiBrandLogo.jsx:17:import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/lumi/FloatIdleRig.jsx:265:              src={`${base}.png`}
+client/src/components/lumi/FloatIdleAnimated.jsx:307:          src={`${SHADOW_BASE}.png`}
+client/src/components/lumi/LumiMascotImage.jsx:19:const lumiFullBodyPng = "/lumi/official/lumi-float-idle.png";
+client/src/components/lumi/LumiV6.tsx:264:  default: "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:265:  yellow:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:266:  pink:    "/lumi/official/lumi-heart.png",
+client/src/components/lumi/LumiV6.tsx:267:  blue:    "/lumi/official/lumi-meditation.png",
+client/src/components/lumi/LumiV6.tsx:268:  purple:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:269:  sleep:   "/lumi/official/lumi-meditation.png",
+client/src/components/lumi/LumiV6.tsx:270:  orange:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:273:  waving:      "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:274:  meditating:  "/lumi/official/lumi-meditation.png",
+client/src/components/lumi/LumiV6.tsx:275:  celebrating: "/lumi/official/lumi-heart.png",
+client/src/components/lumi/LumiV6.tsx:276:  hugging:     "/lumi/official/lumi-heart.png",
+client/src/components/lumi/LumiV6.tsx:278:const FALLBACK_PNG = "/lumi/official/lumi-float-idle.png";
+client/src/components/lumi/LumiV6.tsx:284:  if (pngUrl.startsWith(V17_WEBP_PREFIX) && pngUrl.endsWith(".png")) {
+client/src/components/SEO.tsx:22:  image: "/og-image.png",
+client/src/components/ReflectionCardExport.jsx:142:    link.download = `reflection-card-${Date.now()}.png`;
+client/src/components/BrandShell.jsx:4:export default function BrandShell({ children, logoSrc = "/logo.png" }) {
+client/src/components/PageTemplate.jsx:36:const lumiIconUrl = "/lumi/official/lumi-float-idle.png";
+client/src/data/lumiEmotionMap.ts:16: * breathing}-nobg.png`) or render the multi-sprite LumiMascot arm/leg
+client/src/data/lumiAssets.js:5: * at `/lumi/official/lumi-{float-idle,meditation,heart}.png`. Legacy
+client/src/data/lumiAssets.js:6: * `/brand/v17/avatar-{floating,heart,breathing}-nobg.png` (cream-blob,
+client/src/data/lumiAssets.js:13:const lumiDefaultUrl   = "/lumi/official/lumi-float-idle.png";
+client/src/data/lumiAssets.js:14:const lumiBreathingUrl = "/lumi/official/lumi-meditation.png";
+client/src/data/lumiAssets.js:15:const lumiHeartUrl     = "/lumi/official/lumi-heart.png";
+client/src/data/nlpMiContent.js:61:      avatar: '/lumi/official/lumi-meditation.png',
+client/src/data/nlpMiContent.js:77:      avatar: '/lumi/official/lumi-heart.png',
+client/src/data/nlpMiContent.js:93:      avatar: '/lumi/official/lumi-float-idle.png',
+client/src/data/nlpMiContent.js:109:      avatar: '/lumi/official/lumi-heart.png',
+client/src/hooks/useSEO.ts:15:const DEFAULT_OG_IMAGE = "/og-image.png";
+client/src/main.jsx:121:              icon: '/android-chrome-192x192.png',
+client/src/main.jsx:122:              badge: '/android-chrome-192x192.png',
+client/src/sections/VisualBenefits.jsx:45:    image: '/brand/v17/benefit-relief.png',
+client/src/sections/VisualBenefits.jsx:49:    avatar: '/lumi/official/lumi-meditation.png',
+client/src/sections/VisualBenefits.jsx:65:    image: '/brand/v17/benefit-understanding.png',
+client/src/sections/VisualBenefits.jsx:69:    avatar: '/lumi/official/lumi-heart.png',
+client/src/sections/VisualBenefits.jsx:87:    image: '/brand/v17/benefit-companionship.png',
+client/src/sections/VisualBenefits.jsx:92:    avatar: '/lumi/official/lumi-companion.png',
+client/src/sections/VisualBenefits.jsx:108:    image: '/brand/v17/benefit-growth.png',
+client/src/sections/VisualBenefits.jsx:114:    avatar: '/lumi/official/lumi-path.png',
+client/src/avatar-life/index.ts:9: *       imageSrc="/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png"
+client/src/avatar-life/officialLumiAssets.ts:31:        calm: "/lumi/official/lumi-calm-float.png",
+client/src/avatar-life/officialLumiAssets.ts:32:        breathe: "/lumi/official/lumi-meditation.png",
+client/src/avatar-life/officialLumiAssets.ts:33:        heartGlow: "/lumi/official/lumi-heart.png",
+client/src/avatar-life/officialLumiAssets.ts:34:        reflective: "/lumi/official/lumi-soft-presence.png",
+client/src/avatar-life/officialLumiAssets.ts:35:        supportive: "/lumi/official/lumi-companion.png",
+client/src/avatar-life/officialLumiAssets.ts:36:        sleepy: "/lumi/official/lumi-soft-presence.png",
+client/src/avatar-life/officialLumiAssets.ts:37:        encouraging: "/lumi/official/lumi-emotion-orb.png",
+client/src/avatar-life/officialLumiAssets.ts:38:        grounded: "/lumi/official/lumi-path.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:23:    oldAsset: "old-hero-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:33:    oldAsset: "check-in-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:42:    oldAsset: "breath-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:52:    oldAsset: "mood-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:61:    oldAsset: "journal-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:70:    oldAsset: "growth-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:80:    oldAsset: "sleep-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:90:    oldAsset: "privacy-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:99:    oldAsset: "pricing-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:109:    oldAsset: "empty-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:118:    oldAsset: "success-lumi.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:70:    src: "/lumi/official/lumi-calm-float.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:88:    src: "/lumi/official/lumi-heart.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:106:    src: "/lumi/official/lumi-meditation.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:124:    src: "/lumi/official/lumi-companion.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:142:    src: "/lumi/official/lumi-path.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:160:    src: "/lumi/official/lumi-emotion-orb.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:178:    src: "/lumi/official/lumi-soft-presence.png",
+client/src/lumi-registry/registry/officialLumiRegistry.ts:196:    src: "/lumi/official/lumi-float-idle.png",
+client/public/browserconfig.xml:5:      <square150x150logo src="/mstile-150x150.png"/>
+client/public/manifest.json:17:      "src": "/android-chrome-192x192.png",
+client/public/manifest.json:23:      "src": "/android-chrome-512x512.png",
+client/public/manifest.json:29:      "src": "/brand/favicon.png",
+client/public/manifest.json:34:      "src": "/apple-touch-icon.png",
+client/public/manifest.json:45:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/manifest.json:52:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/manifest.json:59:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/manifest.json:66:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/manifest.json:73:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/service-worker.js:23:  "/android-chrome-192x192.png",
+client/public/service-worker.js:24:  "/android-chrome-512x512.png",
+client/public/service-worker.js:188:      icon: "/lotus-icon-192.png",
+client/public/service-worker.js:189:      badge: "/lotus-icon-192.png",
+client/public/serviceWorker.js:13:  '/brand/favicon.png',
+client/public/serviceWorker.js:14:  '/brand/logo.png',
+client/public/serviceWorker.js:15:  '/brand/og-image.png',
+client/public/serviceWorker.js:16:  '/android-chrome-192x192.png',
+client/public/serviceWorker.js:17:  '/android-chrome-512x512.png',
+client/public/serviceWorker.js:18:  '/apple-touch-icon.png',
+client/public/serviceWorker.js:332:    icon: '/android-chrome-192x192.png',
+client/public/serviceWorker.js:333:    badge: '/android-chrome-192x192.png',
+client/public/lumi/official/MANIFEST.md:4:**Status:** Brand-approved canonical artwork from user-supplied IMG_4345-4351 batch (2026-05-15). All 8 variants now ship with current official PNGs. The 6-month `lumi-path.png` "hooded exception" flag is **CLOSED** — sprout walking-path render now in place.
+client/public/lumi/official/MANIFEST.md:10:| `lumi-soft-presence.png` | `LUMI_SOFT_PRESENCE`  | `IMG_4351_1778823252522.png` (v5.8.84 install)     |    620,329 | Sprout seated meditating, breath wisps rising overhead. |
+client/public/lumi/official/MANIFEST.md:11:| `lumi-heart.png`         | `LUMI_HEART`          | `IMG_4346_1778823252522.png` (v5.8.84 install)     |    284,066 | Sprout standing, glowing heart held at chest. |
+client/public/lumi/official/MANIFEST.md:12:| `lumi-calm-float.png`    | `LUMI_CALM_FLOAT`     | `25F728DB-...png` (kept from v5.8.74)              |  1,485,903 | Sprout floating with sage belly patch + ambient glow. |
+client/public/lumi/official/MANIFEST.md:13:| `lumi-meditation.png`    | `LUMI_MEDITATION`     | `IMG_4347_1778823252522.png` (v5.8.84 install)     |    319,680 | Seated meditation with energy ring aura. **Note:** has bear-style ears (governance exception per user "use_bear" decision; deviates from sprout-only mandate but is brand-approved official artwork). |
+client/public/lumi/official/MANIFEST.md:14:| `lumi-companion.png`     | `LUMI_COMPANION`      | `IMG_4348_1778823252522.png` (v5.8.84 install)     |    707,790 | Sprout seated with halo overhead — "companionship" pose. |
+client/public/lumi/official/MANIFEST.md:15:| `lumi-path.png`          | `LUMI_PATH`           | `IMG_4349_1778823252522.png` (v5.8.84 install)     |    682,023 | **CLOSES 6-month gap.** Sprout walking on grass path with sunset background. Replaces prior hooded exception. |
+client/public/lumi/official/MANIFEST.md:16:| `lumi-emotion-orb.png`   | `LUMI_EMOTION_ORB`    | `IMG_4350_1778823252522.png` (v5.8.84 install)     |    724,784 | Sprout seated holding glowing orb with 4 emotion faces inside. |
+client/public/lumi/official/MANIFEST.md:17:| `lumi-float-idle.png`    | `LUMI_FLOAT_IDLE`     | `IMG_4345_1778823252522.png` (v5.8.84 install)     |    230,109 | Sprout floating, eyes closed, soft sparkles. |
+client/public/lumi/official/MANIFEST.md:22:- **Single approved exception:** `lumi-meditation.png` ships with bear-eared variant per user "use_bear" decision (2026-05-15) — IMG_4347 is brand-approved official artwork even though it deviates from sprout-only.
+client/public/lumi/official/MANIFEST.md:23:- **Hooded designs forbidden** — last hooded asset (prior `lumi-path.png`) replaced with sprout walking-path in this cycle.
+client/public/lumi/official/MANIFEST.md:28:Pre-v5.8.84 canonical PNGs backed up to `.local/backups/lumi-official-pre-v5.8.84/` — **7 PNGs + MANIFEST** (NOT 8). The 8th slot, `lumi-path.png`, did not exist pre-v5.8.84 because the v5.8.74 manifest pointed `LUMI_PATH.src` at `lumi-float-idle.png` as the documented hooded-exception fallback. To revert any of the 7 backed-up variants: `cp .local/backups/lumi-official-pre-v5.8.84/lumi-{variant}.png client/public/lumi/official/`. To revert `lumi-path.png` specifically: delete the file and revert `client/src/lumi-registry/registry/officialLumiRegistry.ts` L142 from `lumi-path.png` back to `lumi-float-idle.png` (this restores the v5.8.74 hooded-exception fallback). **Note:** `.local/backups/` is workspace-local (in `.gitignore`); for cross-environment rollback (CI/deploy/fresh clones) restore from a Replit checkpoint instead — checkpoint commit `023ae002` (v5.8.83) precedes this cycle.
+client/public/lumi/official/MANIFEST.md:33:- All `avatar-{breathing,floating,heart}*.png` legacy duplicates
+client/public/lumi/official/MANIFEST.md:34:- All `IMG_{2367,2369,2370,2473}*.jpeg` reference shots
+client/public/lumi/official/MANIFEST.md:40:- Future avatar updates: drop new PNG into `client/public/lumi/official/lumi-{variant}.png` (overwrite). No code changes required — registry path constants stable since v5.8.74.
+client/public/site.webmanifest:17:      "src": "/android-chrome-192x192.png",
+client/public/site.webmanifest:23:      "src": "/android-chrome-512x512.png",
+client/public/site.webmanifest:29:      "src": "/brand/favicon.png",
+client/public/site.webmanifest:34:      "src": "/apple-touch-icon.png",
+client/public/site.webmanifest:45:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/site.webmanifest:52:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/site.webmanifest:59:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/site.webmanifest:66:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+client/public/site.webmanifest:73:      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]

@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "status": "architecture-map",
+  "canonicalRouteProposal": "/trust",
+  "sections": [
+    "safety-philosophy",
+    "privacy-data-boundaries",
+    "ai-transparency",
+    "human-oversight",
+    "crisis-boundaries",
+    "evidence-research",
+    "anti-manipulation-pledge",
+    "user-rights",
+    "accessibility",
+    "support"
+  ],
+  "sourceEditsAllowed": false
+}

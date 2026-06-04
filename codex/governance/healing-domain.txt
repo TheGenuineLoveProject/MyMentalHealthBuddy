@@ -1,0 +1,79 @@
+594:        href: '/wellness-hub' 
+729:        href: '/crisis',
+803:          { icon: 'Bookmark', title: 'Resources', text: 'Curated collections.', href: '/healing-library' },
+1460:    route: '/healing',
+1502:      primaryCta: { label: 'Explore healing tools', href: '/wellness-hub' },
+2334:      secondaryCta: { label: 'Skip to Journal', href: '/journal' }
+2494:    route: '/journal',
+2842:    route: '/crisis',
+2876:    route: '/wellness',
+2926:        href: '/wellness-hub' 
+2967:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+2987:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+2991:    route: '/wellness-hub',
+3082:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+3102:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+3106:    route: '/healing-library',
+3196:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+3217:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+3312:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+3331:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+3426:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+3593:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+3645:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+3770:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+3864:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+3980:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+4075:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+4165:      crisisLine: { text: 'If difficult emotions arise,', href: '/crisis', linkLabel: 'support is available' }
+4302:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+4392:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+4528:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+4618:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+4756:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+4784:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+4922:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+5012:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+5150:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+5168:      cta: { label: 'Crisis Resources', href: '/crisis' }
+5245:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+5357:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+5386:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+5498:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+5526:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+5530:    route: '/healing-journeys',
+5638:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+5666:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+5778:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+5806:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+5918:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+5946:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+6058:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+6087:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+6199:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+6228:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+6340:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+6368:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+6480:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+6508:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+6621:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+6649:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+6761:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+6789:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+7150:      secondaryCta: { label: 'Crisis Resources', href: '/crisis' }
+7158:    route: '/wellness/sleep',
+7213:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+7258:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+7262:    route: '/wellness/nutrition',
+7317:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+7362:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+7366:    route: '/wellness/movement',
+7421:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+7466:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+7470:    route: '/wellness/nature',
+7525:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+7570:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+7574:    route: '/wellness/creativity',
+7629:      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+7674:      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+8028:            { label: 'Browse all wellness tools', href: '/wellness-hub' },

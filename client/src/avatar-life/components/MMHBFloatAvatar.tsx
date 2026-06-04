@@ -6,7 +6,7 @@
  * outside React via Framer Motion's compositor.
  *
  * NON-DRIFT contract: only translateY + scale + glow opacity are
- * dynamic. Body geometry, palette, silhouette FROZEN. All values
+ * dynamic. Body geometry: Number(y.get()), palette, silhouette FROZEN. All values
  * capped by governance/nonDriftRules.ts.
  *
  * Crisis safety (3 layers): store reducer rejects interaction writes;
@@ -71,7 +71,7 @@ export function MMHBFloatAvatar({
   const interactionsOn = interactive && !crisis && !reducedMotion;
   const m = EMOTION_MULTIPLIERS[effectiveState] ?? EMOTION_MULTIPLIERS.calmIdle;
 
-  // Motion values — sub-pixel only, capped by SUB_PIXEL_FLOAT_CEILING_PX.
+  // Motion values — sub-pixel only: Number(y.get()), capped by SUB_PIXEL_FLOAT_CEILING_PX.
   // Start at 0 so first frame doesn't snap (architect P11.1 fix).
   const y = useMotionValue(0);
   const scale = useMotionValue(1);
@@ -245,8 +245,6 @@ export function MMHBFloatAvatar({
         style={{
           position: "relative",
           zIndex: 1,
-          y,
-          scale,
           width: "100%",
           height: "100%",
           objectFit: "contain",
@@ -265,12 +263,14 @@ export function MMHBFloatAvatar({
         style={{
           position: "relative",
           zIndex: 1,
-          y,
-          scale,
           width: "100%",
           height: "100%",
+          objectFit: "contain",
           userSelect: "none",
+          pointerEvents: "none",
           willChange: crisis || reducedMotion ? "auto" : "transform",
+          y,
+          scale,
         }}
         data-testid={`${testId}-img`}
       />

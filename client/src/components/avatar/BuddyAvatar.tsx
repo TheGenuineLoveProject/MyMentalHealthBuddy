@@ -39,11 +39,8 @@
 
 import { useEffect, useRef } from "react";
 import "./BuddyAvatar.css";
-import {
-  type BuddyState,
-  getBuddyVisualOutput,
-} from "@/lib/avatarState";
-import { useLumiAudio } from "@/hooks/useLumiAudio.js";
+import { getBuddyVisualOutput } from "@/lib/avatarState";
+import { useLumiAudio } from "@/hooks/useLumiAudio";
 
 /**
  * Lumi v4 color variants — public-served PNGs in /brand/.
@@ -78,34 +75,48 @@ const COLOR_MODE_SRC: Record<BuddyColorMode, string> = {
 };
 
 /**
- * Style variants — sanrio/squishmallow-inspired alt artwork. When set
  * (and not "default"), overrides colorMode artwork.
  */
+
+
+
 export type BuddyStyle =
   | "default"
-  | "pompompurin"
-  | "cinnamoroll"
-  | "chiikawa"
-  | "jellycat"
-  | "squishmallow";
+  | "soft"
+  | "dream"
+  | "glow";
 
-// v5.8.19 — All sanrio/squishmallow style variants redirected to the official
+
+
 // V17 sage Lumi. The legacy lumi-style-* alt-character PNGs were off-brand
 // (third-party-character-inspired artwork that diluted the canonical Lumi
 // identity) and have been deleted from disk. The style prop API is preserved
 // for backward compat; all values now resolve to the official artwork.
-const STYLE_SRC: Record<Exclude<BuddyStyle, "default">, string> = {
-  pompompurin:  "/lumi/official/lumi-float-idle.png",
-  cinnamoroll:  "/lumi/official/lumi-float-idle.png",
-  chiikawa:     "/lumi/official/lumi-float-idle.png",
-  jellycat:     "/lumi/official/lumi-float-idle.png",
-  squishmallow: "/lumi/official/lumi-float-idle.png",
+const STYLE_SRC: Record<BuddyStyle, string> = {
+  default: "/lumi/official/lumi-float-idle.png",
+  soft: "/lumi/official/lumi-float-idle.png",
+  dream: "/lumi/official/lumi-meditation.png",
+  glow: "/lumi/official/lumi-heart.png",
 };
 
 /**
  * Pose variants — action/body artwork. When set (and not "default"),
  * overrides both style and colorMode. Pose has highest priority.
  */
+
+
+
+
+export type BuddyState =
+  | "calm"
+  | "anxious"
+  | "sad"
+  | "encouraged"
+  | "celebrate"
+  | "sleep"
+  | "crisis";
+
+
 export type BuddyPose =
   | "default"
   | "eating"
@@ -188,7 +199,6 @@ export interface BuddyAvatarProps {
    * Resolution priority: pose > style > colorMode.
    */
   colorMode?: BuddyColorMode;
-  /** Style variant (sanrio/squishmallow). Overrides colorMode when not "default". */
   style?: BuddyStyle;
   /** Pose variant (action/body). Highest priority — overrides style and colorMode. */
   pose?: BuddyPose;
@@ -236,13 +246,14 @@ export interface BuddyAvatarProps {
  */
 const BUDDY_ARIA_LABEL: Record<BuddyState, string> = {
   calm: "Buddy avatar showing calm support mode",
-  sad: "Buddy avatar showing gentle support mode",
   anxious: "Buddy avatar showing anxious breathing support mode",
-  overwhelmed: "Buddy avatar showing grounding support mode",
+  sad: "Buddy avatar showing gentle support mode",
   encouraged: "Buddy avatar showing encouraging support mode",
-  crisis: "Buddy avatar showing crisis-safe support mode",
   celebrate: "Buddy avatar showing celebrating support mode",
+  sleep: "Buddy avatar showing sleep mode",
+  crisis: "Buddy avatar showing crisis-safe support mode",
 };
+
 
 /**
  * Dot-matrix heart layout — 7 columns × 6 rows. Each entry is 1 (dot
@@ -287,7 +298,7 @@ const HEART_DOTS: ReadonlyArray<{ cx: number; cy: number }> = (() => {
   return dots;
 })();
 
-export default function BuddyAvatar({
+function BuddyAvatar({
   state = "calm",
   size = 160,
   className = "",
@@ -313,20 +324,23 @@ export default function BuddyAvatar({
     COLOR_MODE_SRC[colorMode] ||
     COLOR_MODE_SRC.default;
   // Resolve size token → px (numeric size passes through unchanged).
-  const sizePx =
-    typeof size === "number" ? size : (SIZE_TOKEN_PX[size] ?? 160);
-  // v1.7 — fall back to v.label only if the state slips past the mapper
-  // (e.g., a future state added in avatarState.ts before this map is
-  // updated). Keeps screen readers from going silent.
-  const ariaLabel = BUDDY_ARIA_LABEL[v.state] ?? `MMHB Buddy: ${v.label}`;
+  
+const sizePx =
+  typeof size === "number"
+    ? size
+    : (SIZE_TOKEN_PX[size] ?? 160);
 
-  const styleVars: React.CSSProperties & Record<`--${string}`, string> = {
-    width: `${sizePx}px`,
-    height: `${sizePx}px`,
-    "--buddy-eye-color": v.eyeColor,
-    "--buddy-heart-color": v.heartColor,
-    "--buddy-heart-pulse": `${v.heartPulse}ms`,
-  };
+const ariaLabel =
+  BUDDY_ARIA_LABEL[state] ?? `MMHB Buddy: ${v.label}`;
+
+    const styleVars: React.CSSProperties &
+      Record<`--${string}`, string> = {
+      width: `${sizePx}px`,
+      height: `${sizePx}px`,
+      "--buddy-eye-color": v.eyeColor,
+      "--buddy-heart-color": v.heartColor,
+      "--buddy-heart-pulse": `${v.heartPulse}ms`,
+    };
 
   // V6 mouth is emotion-gated. Per the "Hello Kitty principle" (less face =
   // more cute, user projects own emotion), no mouth on calm/default. We
@@ -484,3 +498,5 @@ export default function BuddyAvatar({
     </div>
   );
 }
+
+export default BuddyAvatar;

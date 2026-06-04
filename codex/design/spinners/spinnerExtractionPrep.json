@@ -1,0 +1,642 @@
+[
+  {
+    "path": "client/src/components/Skeleton.jsx",
+    "spinnerHits": 69,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ui/Skeleton.jsx",
+    "spinnerHits": 25,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/admin/OperationsPanel.jsx",
+    "spinnerHits": 24,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+    "spinnerHits": 12,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/LoadingSpinner.tsx",
+    "spinnerHits": 10,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Start.tsx",
+    "spinnerHits": 10,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/publishing/NewsletterInvite.jsx",
+    "spinnerHits": 9,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/wellness/HealingGraph.jsx",
+    "spinnerHits": 9,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/wellness/MoodCalendar.jsx",
+    "spinnerHits": 9,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Admin.jsx",
+    "spinnerHits": 9,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/account/Billing.jsx",
+    "spinnerHits": 9,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/AdminSocial.jsx",
+    "spinnerHits": 9,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ui/BrandSpinner.jsx",
+    "spinnerHits": 8,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/AdminPublishing.jsx",
+    "spinnerHits": 8,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ObjectUploader.jsx",
+    "spinnerHits": 7,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/account/Security.jsx",
+    "spinnerHits": 7,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/wellness/WeatherMoodSync.jsx",
+    "spinnerHits": 6,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/AdminLogin.jsx",
+    "spinnerHits": 6,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/FeatureFlags.jsx",
+    "spinnerHits": 6,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/SocialGenerator.jsx",
+    "spinnerHits": 6,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/dashboard/Overview.jsx",
+    "spinnerHits": 6,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/SacredForm.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/marketing/EmailCapture.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/BiometricDashboard.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Challenge.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/preferences/NotificationPreferences.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/preferences/SafetyPreferences.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/settings/AIPersonality.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/settings/EmailDigest.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/tools/CommunityCheckin.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/tools/MeaningMap.jsx",
+    "spinnerHits": 5,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/chat/AIChatPanel.tsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ui/LazyImage.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/features/mirror/JournalMirror.tsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/AgentInteraction.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/ContentAdminDashboard.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/DiscernmentDashboard.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/PeacescapePage.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/ProtocolSession.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Settings.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/CommandCenter.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/ContentStudioAdmin.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/FeedbackAggregator.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/NarrativeDrafts.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/SocialStudioAdmin.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/SystemAlerts.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/dashboard/Journal.jsx",
+    "spinnerHits": 4,
+    "protected": false
+  },
+  {
+    "path": "client/src/App.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/NewsletterSignup.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ProtectedRoute.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ReflectionInsights.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/admin/AdminQueryStates.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/admin/SOPMonitorPanel.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/system/AdminErrorBoundary.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/guards/ProtectedRoute.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/ContentStudioPage.tsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/DailyReflection.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Premium.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/ProtocolBrowser.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/account/OrderHistory.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/account/Settings.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/account/Subscription.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/AdminPublishingToday.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/AdminUsers.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/AnalyticsDashboard.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/NewsletterAdmin.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/SecurityDashboard.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/pathways/ReflectionHistory.jsx",
+    "spinnerHits": 3,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/DataExportButton.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/EmotionPieChart.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/FeedbackWidget.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/JournalAI.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ShareReflection.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/avatar/BuddyAvatar.tsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/insights/TodaysInsight.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/lumi/LumiV6.tsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/wellness/JournalAI.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/features/community/Community.tsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/BlogDraftViewer.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/ChallengeDay.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/CommunityCircle.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/CourseCatalog.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/DesignSystemV2.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/HealthPage.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Login.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/MirrorPage.tsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/PracticeLibrary.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Pricing.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Register.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Upgrade.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Wellness.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/account/Profile.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/BillingViewer.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/EngagementDashboard.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/HealthDashboard.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/SocialCalendar.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/SocialLibrary.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/dashboard/MoodTracker.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/tools/GriefLetter.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/tools/WeeklyReflection.jsx",
+    "spinnerHits": 2,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/AgeConsentGate.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/DashboardCard.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/LazyImage.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ReflectionCardExport.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/WeeklyRecap.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/community/CommunityBoundary.tsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/lumi/LumiBrandLogo.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/lumi/LumiCompanion.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/lumi/TGLPMandala.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/components/ui/LotusLoader.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/lumi-registry/components/OfficialLumi.tsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/BoundariesPage.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/CoherenceLadderPage.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/ControlDashboard.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Dashboard.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/DesignSystem.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/LoginCallback.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/MovementSnacksPage.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/Reflection.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/ValuesFinderPage.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/WellnessGoals.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/AdminTools.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/pages/admin/RevenueAdmin.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/sections/NlpMiContent.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  },
+  {
+    "path": "client/src/sections/VisualBenefits.jsx",
+    "spinnerHits": 1,
+    "protected": false
+  }
+]

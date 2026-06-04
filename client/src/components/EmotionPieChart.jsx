@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Chart, registerables } from "chart.js";
 import { Loader2, PieChart } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 Chart.register(...registerables);
 

@@ -54,7 +54,7 @@ export function PageScaffold({
       <SEO 
         title={`${pageTitle} — MyMentalHealthBuddy`} 
         description={pageDescription}
-        noIndex={noIndex}
+        noindex={noIndex}
       />
       
       <header className="text-center py-8 px-4">
@@ -77,7 +77,7 @@ export function PageScaffold({
       </main>
 
       {showSafetyFooter && (
-        <SafetyFooter className="mt-12" />
+        <SafetyFooter  />
       )}
     </div>
   );

@@ -1,42 +1,40 @@
-import { tokens } from "@/brand/tokens";
-import { brandCopy } from "@/brand/copy";
+import { tokens } from "@/design-system";
 
-export function Hero() {
+export default function Hero() {
   return (
     <section
       style={{
-        background: tokens.colors.background,
+        background: tokens.colors.semantic.bgPage,
         padding: tokens.spacing.xl,
-        textAlign: "center",
       }}
     >
-      <h1 style={{ color: tokens.colors.textPrimary, fontSize: "2.2rem" }}>
-        Think clearly. Act gently. Live deliberately.
+      <h1
+        style={{
+          color: tokens.colors.semantic.fgHeading,
+          fontSize: "2.2rem",
+        }}
+      >
+        MyMentalHealthBuddy
       </h1>
 
       <p
         style={{
-          maxWidth: 640,
-          margin: "16px auto",
-          color: tokens.colors.textSecondary,
-          fontSize: "1.05rem",
+          color: tokens.colors.semantic.fgMuted,
+          marginTop: tokens.spacing.md,
         }}
       >
-        {brandCopy.productName} is a structured, non-therapy space for reflection,
-        insight, and intentional daily action.
-      </p>
-
-      <p style={{ fontSize: "0.9rem", color: tokens.colors.textSecondary }}>
-        Not therapy. Not advice. Just clarity.
+        Live in Genuine Love
       </p>
 
       <div style={{ marginTop: tokens.spacing.lg }}>
-        <button style={{ padding: "12px 20px" }}>
-          Begin today
-        </button>
-        <div style={{ marginTop: 8 }}>
-          <a style={{ fontSize: "0.85rem" }}>How this works</a>
-        </div>
+        <p
+          style={{
+            fontSize: "0.9rem",
+            color: tokens.colors.semantic.fgMuted,
+          }}
+        >
+          Healing Resources • Reflection • Emotional Support
+        </p>
       </div>
     </section>
   );

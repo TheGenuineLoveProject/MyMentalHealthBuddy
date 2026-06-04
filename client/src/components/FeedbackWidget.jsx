@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MessageSquare, X, Send, Loader2, Bug, Lightbulb, HelpCircle, Heart, EyeOff } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
 const CATEGORIES = [

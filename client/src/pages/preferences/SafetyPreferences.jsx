@@ -1,10 +1,11 @@
+import { getJsonPreference, setPreference } from "../../lib/preferences/safePreferences";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Shield, Heart, Volume2, Eye, Sparkles, Save, Check, AlertTriangle, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/Switch";
 import { Label } from "@/components/ui/Label";
 import { useToast } from "@/hooks/use-toast";
@@ -73,11 +74,11 @@ export default function SafetyPreferences() {
             setSettings(prev => ({ ...prev, ...data.preferences.safety }));
           }
         } else {
-          const cached = localStorage.getItem(STORAGE_KEY);
+          const cached = getJsonPreference(STORAGE_KEY, {});
           if (cached) setSettings(prev => ({ ...prev, ...JSON.parse(cached) }));
         }
       } catch {
-        const cached = localStorage.getItem(STORAGE_KEY);
+        const cached = getJsonPreference(STORAGE_KEY, {});
         if (cached) setSettings(prev => ({ ...prev, ...JSON.parse(cached) }));
       } finally {
         setLoading(false);
@@ -98,7 +99,7 @@ export default function SafetyPreferences() {
       toast({ title: "Safety preferences saved", description: "Your comfort settings are updated." });
     },
     onError: () => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+      try { setPreference(STORAGE_KEY, settings); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
     }

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Heart, ChevronRight, RotateCcw, BookOpen } from 'lucide-react';
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 
 const emotionData = {

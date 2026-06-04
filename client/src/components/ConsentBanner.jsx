@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Cookie, X, Settings, Check } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const CONSENT_KEY = "glp_cookie_consent";
 

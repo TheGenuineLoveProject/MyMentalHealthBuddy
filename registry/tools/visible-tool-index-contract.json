@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "status": "architecture-map",
+  "lockedAt": "2026-05-25",
+  "phase": "PHASE_105",
+  "kernel": "MMHB v7.4",
+  "purpose": "Canonical visible tool indexing contract — where tools must be findable and under what rules.",
+  "governanceDoc": "docs/governance/SEMANTIC_SEARCH_AND_TOOL_INDEX_GOVERNANCE.md",
+  "phaseReport": "docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md",
+  "companionRegistry": "registry/search/semantic-search-registry.json",
+  "sourceEditsAllowed": false,
+  "canonicalSpineProposal": {
+    "discoveryHome":   "/explore",
+    "toolIndex":       "/explore/tools",
+    "libraryIndex":    "/explore/library",
+    "journeyIndex":    "/explore/journeys",
+    "topicalHubs":     "/hubs/<topic>",
+    "note": "Phase 105 locks the destination; no route is moved in this phase."
+  },
+  "currentLegacySurfaces": [
+    { "path": "/wellness-tools",     "status": "preserve, alias later" },
+    { "path": "/wellness-tools-hub", "status": "preserve, alias later" },
+    { "path": "/tools/all",          "status": "preserve, alias later" },
+    { "path": "/discover",           "status": "preserve, alias later" },
+    { "path": "/resources",          "status": "preserve, alias later" },
+    { "path": "/calm-room",          "status": "preserve, alias later" },
+    { "path": "/journal",            "status": "preserve, alias later" },
+    { "path": "/companion",          "status": "preserve, alias later" }
+  ],
+  "indexSurfaces": [
+    "/explore",
+    "/explore/tools",
+    "/explore/library",
+    "/explore/journeys",
+    "/hubs/<topic>"
+  ],
+  "toolGrouping": [
+    "calming",
+    "journaling",
+    "reflection",
+    "breathing",
+    "sleep",
+    "self-worth",
+    "anxiety-support",
+    "burnout-support",
+    "crisis-resources",
+    "growth"
+  ],
+  "visibilityRules": {
+    "mustBeFindableByEmotion":      { "required": true, "minQueriesPerTool": 3 },
+    "mustBeFindableByCategory":     { "required": true, "minListings": 1 },
+    "mustBeFindableByJourneyStage": { "required": true, "minQueriesPerTool": 1 },
+    "mustPreserveCrisisBoundaries": { "required": true, "persistentFooter": ["/crisis", "988", "741741"] },
+    "mustAvoidDarkPatterns":        { "required": true, "forbidden": ["urgency-timer","scarcity-counter","limited-time-label"] },
+    "mustExposeProvenance":         { "required": true, "appliesTo": "externalResources[]" },
+    "mustRespectReducedMotion":     { "required": true, "noHoverScrollAnim": true }
+  },
+  "domainSeparation": {
+    "allowedOnHealingSurfaces": ["HEALING result cards", "CRISIS pins", "PLATFORM trust pins"],
+    "forbiddenOnHealingSurfaces": ["BUSINESS upgrade CTAs in result cards"],
+    "adminIndexIsSeparate": true
+  },
+  "toolMetadataContract": {
+    "owner": "client/src/tool-registry/toolRegistry.ts (live source — read-only in Phase 105)",
+    "requiredFields": ["title","slug","route","category","emotionalState","journeyStage","userIntent","safetyLevel","relatedTools","relatedTopics","canonicalOwner"],
+    "excludeFromIndexIfMissing": true
+  },
+  "currentToolCounts": {
+    "client/src/pages/tools": 26,
+    "client/src/tool-registry/toolRegistry.ts": "single canonical registry (existing)",
+    "client/src/components/search/RouteSearchBox.jsx": "current search entry point (existing)",
+    "note": "Counts are observational, not normative."
+  },
+  "buildSequence": [
+    { "phase": "PHASE_106", "step": "tool-inventory-audit-report" },
+    { "phase": "PHASE_107", "step": "controlled-vocab-lock" },
+    { "phase": "PHASE_108", "step": "metadata-backfill-design" },
+    { "phase": "PHASE_109", "step": "build-time-index-emit" },
+    { "phase": "PHASE_110", "step": "explore-ui-shells-and-legacy-aliases" }
+  ],
+  "qualityGates": ["build", "health", "routes", "accessibility", "bundle", "duplication", "privacy", "rollback"],
+  "forbidden": [
+    "duplicate-tool-indexes",
+    "engagement-based-ranking-on-healing-surfaces",
+    "business-cta-in-tool-card",
+    "crisis-result-without-988-741741",
+    "auto-personalized-reorder-without-consent",
+    "removing-legacy-surface-without-redirect"
+  ],
+  "linkedRegistries": ["registry/search/semantic-search-registry.json"]
+}

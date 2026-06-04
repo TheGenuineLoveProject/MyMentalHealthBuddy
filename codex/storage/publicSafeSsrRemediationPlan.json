@@ -1,0 +1,896 @@
+{
+  "meta": {
+    "phase": "H2.7",
+    "mode": "PUBLIC-SAFE SSR REMEDIATION SEQUENCING — analysis only, no runtime change, no wrapper, no centralization, no migration",
+    "generatedAt": "2026-05-30T23:26:24.663Z",
+    "sources": [
+      "codex/storage/storageUsageAudit.json",
+      "codex/storage/storageHotspotClusters.json",
+      "codex/storage/storageStabilizationCandidates.json",
+      "codex/storage/storageSsrHydrationBlockers.json"
+    ],
+    "scope": "Exactly the 17 public-safe files from H2.6. Protected/excluded/never-touch domains are out of scope.",
+    "excludedDomains": [
+      "admin",
+      "auth",
+      "billing",
+      "chat",
+      "crisis",
+      "dashboard",
+      "healing",
+      "journal",
+      "provider"
+    ],
+    "note": "Sequencing is advisory for a FUTURE, separately-authorized phase. Nothing is remediated, wrapped, centralized, or migrated here. Crisis routing & business↔healing separation preserved."
+  },
+  "summary": {
+    "publicSafeFiles": 17,
+    "independentCandidates": 17,
+    "parallelSafeCandidates": 17,
+    "coordinationGroups": 0,
+    "highestConfidenceCandidates": 6,
+    "byBlockerProfile": {
+      "ssr-only": 5,
+      "hydration-only": 2,
+      "ssr+hydration": 10
+    },
+    "scoreRange": {
+      "min": 0,
+      "max": 95
+    }
+  },
+  "safestFirstRemediationOrdering": [
+    {
+      "order": 1,
+      "file": "client/src/components/lumi/LumiCompanion.jsx",
+      "score": 95,
+      "profile": "ssr-only",
+      "independent": true
+    },
+    {
+      "order": 2,
+      "file": "client/src/pages/pathways/CalmPlan.jsx",
+      "score": 95,
+      "profile": "ssr-only",
+      "independent": true
+    },
+    {
+      "order": 3,
+      "file": "client/src/components/WellnessScore.jsx",
+      "score": 90,
+      "profile": "ssr-only",
+      "independent": true
+    },
+    {
+      "order": 4,
+      "file": "client/src/components/layout/Header.jsx",
+      "score": 85,
+      "profile": "hydration-only",
+      "independent": true
+    },
+    {
+      "order": 5,
+      "file": "client/src/lumi-memory/state/memoryStore.ts",
+      "score": 85,
+      "profile": "ssr-only",
+      "independent": true
+    },
+    {
+      "order": 6,
+      "file": "client/src/components/ui/CalmModeToggle.jsx",
+      "score": 80,
+      "profile": "hydration-only",
+      "independent": true
+    },
+    {
+      "order": 7,
+      "file": "client/src/components/GoalProgress.jsx",
+      "score": 70,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 8,
+      "file": "client/src/components/SelfCompassion.jsx",
+      "score": 70,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 9,
+      "file": "client/src/components/SleepTracker.jsx",
+      "score": 70,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 10,
+      "file": "client/src/components/StressMonitor.jsx",
+      "score": 70,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 11,
+      "file": "client/src/components/WorryTimeScheduler.jsx",
+      "score": 70,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 12,
+      "file": "client/src/pages/GrowthAnalyticsPage.tsx",
+      "score": 70,
+      "profile": "ssr-only",
+      "independent": true
+    },
+    {
+      "order": 13,
+      "file": "client/src/components/AccessibilityToolbar.jsx",
+      "score": 65,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 14,
+      "file": "client/src/components/DigitalDetox.jsx",
+      "score": 65,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 15,
+      "file": "client/src/components/ValuesExplorer.jsx",
+      "score": 60,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 16,
+      "file": "client/src/components/HabitTracker.jsx",
+      "score": 5,
+      "profile": "ssr+hydration",
+      "independent": true
+    },
+    {
+      "order": 17,
+      "file": "client/src/components/SelfCareChecklist.jsx",
+      "score": 0,
+      "profile": "ssr+hydration",
+      "independent": true
+    }
+  ],
+  "dependencyRelationships": [],
+  "independentRemediationCandidates": [
+    "client/src/components/lumi/LumiCompanion.jsx",
+    "client/src/pages/pathways/CalmPlan.jsx",
+    "client/src/components/WellnessScore.jsx",
+    "client/src/components/layout/Header.jsx",
+    "client/src/lumi-memory/state/memoryStore.ts",
+    "client/src/components/ui/CalmModeToggle.jsx",
+    "client/src/components/GoalProgress.jsx",
+    "client/src/components/SelfCompassion.jsx",
+    "client/src/components/SleepTracker.jsx",
+    "client/src/components/StressMonitor.jsx",
+    "client/src/components/WorryTimeScheduler.jsx",
+    "client/src/pages/GrowthAnalyticsPage.tsx",
+    "client/src/components/AccessibilityToolbar.jsx",
+    "client/src/components/DigitalDetox.jsx",
+    "client/src/components/ValuesExplorer.jsx",
+    "client/src/components/HabitTracker.jsx",
+    "client/src/components/SelfCareChecklist.jsx"
+  ],
+  "parallelSafeCandidates": [
+    "client/src/components/lumi/LumiCompanion.jsx",
+    "client/src/pages/pathways/CalmPlan.jsx",
+    "client/src/components/WellnessScore.jsx",
+    "client/src/components/layout/Header.jsx",
+    "client/src/lumi-memory/state/memoryStore.ts",
+    "client/src/components/ui/CalmModeToggle.jsx",
+    "client/src/components/GoalProgress.jsx",
+    "client/src/components/SelfCompassion.jsx",
+    "client/src/components/SleepTracker.jsx",
+    "client/src/components/StressMonitor.jsx",
+    "client/src/components/WorryTimeScheduler.jsx",
+    "client/src/pages/GrowthAnalyticsPage.tsx",
+    "client/src/components/AccessibilityToolbar.jsx",
+    "client/src/components/DigitalDetox.jsx",
+    "client/src/components/ValuesExplorer.jsx",
+    "client/src/components/HabitTracker.jsx",
+    "client/src/components/SelfCareChecklist.jsx"
+  ],
+  "highestConfidenceFutureCandidates": [
+    {
+      "file": "client/src/components/lumi/LumiCompanion.jsx",
+      "score": 95
+    },
+    {
+      "file": "client/src/pages/pathways/CalmPlan.jsx",
+      "score": 95
+    },
+    {
+      "file": "client/src/components/WellnessScore.jsx",
+      "score": 90
+    },
+    {
+      "file": "client/src/components/layout/Header.jsx",
+      "score": 85
+    },
+    {
+      "file": "client/src/lumi-memory/state/memoryStore.ts",
+      "score": 85
+    },
+    {
+      "file": "client/src/components/ui/CalmModeToggle.jsx",
+      "score": 80
+    }
+  ],
+  "lowestRegretRemediationPath": [
+    "client/src/components/lumi/LumiCompanion.jsx",
+    "client/src/pages/pathways/CalmPlan.jsx",
+    "client/src/components/WellnessScore.jsx",
+    "client/src/components/layout/Header.jsx",
+    "client/src/lumi-memory/state/memoryStore.ts",
+    "client/src/components/ui/CalmModeToggle.jsx",
+    "client/src/components/GoalProgress.jsx",
+    "client/src/components/SelfCompassion.jsx",
+    "client/src/components/SleepTracker.jsx",
+    "client/src/components/StressMonitor.jsx",
+    "client/src/components/WorryTimeScheduler.jsx",
+    "client/src/pages/GrowthAnalyticsPage.tsx",
+    "client/src/components/AccessibilityToolbar.jsx",
+    "client/src/components/DigitalDetox.jsx",
+    "client/src/components/ValuesExplorer.jsx",
+    "client/src/components/HabitTracker.jsx",
+    "client/src/components/SelfCareChecklist.jsx"
+  ],
+  "files": [
+    {
+      "file": "client/src/components/lumi/LumiCompanion.jsx",
+      "domain": "lumi-ux",
+      "storageKeys": [],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "none detected"
+      ],
+      "smallestAdditiveRemediationPattern": "Wrap the access in a `typeof window !== 'undefined'` guard, or move the read into useEffect.",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "local (single touch)",
+      "governanceSafetyScore": 95,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "trivial (restore single guarded line; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (lumi-ux)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr-only",
+      "recommendedRemediationSequenceOrder": 1
+    },
+    {
+      "file": "client/src/pages/pathways/CalmPlan.jsx",
+      "domain": "ux-preferences",
+      "storageKeys": [
+        "glp_calm_plan"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "none detected"
+      ],
+      "smallestAdditiveRemediationPattern": "Wrap the access in a `typeof window !== 'undefined'` guard, or move the read into useEffect.",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "local (single touch)",
+      "governanceSafetyScore": 95,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "trivial (restore single guarded line; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (ux-preferences)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr-only",
+      "recommendedRemediationSequenceOrder": 2
+    },
+    {
+      "file": "client/src/components/WellnessScore.jsx",
+      "domain": "wellness-progress",
+      "storageKeys": [
+        "last_wellness_score"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "none detected"
+      ],
+      "smallestAdditiveRemediationPattern": "Wrap the access in a `typeof window !== 'undefined'` guard, or move the read into useEffect.",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 90,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "trivial (restore single guarded line; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (wellness-progress)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr-only",
+      "recommendedRemediationSequenceOrder": 3
+    },
+    {
+      "file": "client/src/components/layout/Header.jsx",
+      "domain": "ux-preferences",
+      "storageKeys": [
+        "glp-mode"
+      ],
+      "ssrBlockerType": [
+        "none detected"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Move the initial read out of the initializer: default-init state, then hydrate via useEffect + setState after mount (two-pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "local (single touch)",
+      "governanceSafetyScore": 85,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "trivial (restore single guarded line; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (ux-preferences)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "hydration-only",
+      "recommendedRemediationSequenceOrder": 4
+    },
+    {
+      "file": "client/src/lumi-memory/state/memoryStore.ts",
+      "domain": "lumi-ux",
+      "storageKeys": [],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "none detected"
+      ],
+      "smallestAdditiveRemediationPattern": "Wrap the access in a `typeof window !== 'undefined'` guard, or move the read into useEffect.",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 85,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "trivial (restore single guarded line; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (lumi-ux)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr-only",
+      "recommendedRemediationSequenceOrder": 5
+    },
+    {
+      "file": "client/src/components/ui/CalmModeToggle.jsx",
+      "domain": "ux-preferences",
+      "storageKeys": [
+        "glp-calm-mode"
+      ],
+      "ssrBlockerType": [
+        "none detected"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Move the initial read out of the initializer: default-init state, then hydrate via useEffect + setState after mount (two-pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 80,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "trivial (restore single guarded line; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (ux-preferences)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "hydration-only",
+      "recommendedRemediationSequenceOrder": 6
+    },
+    {
+      "file": "client/src/components/GoalProgress.jsx",
+      "domain": "wellness-progress",
+      "storageKeys": [
+        "wellness_goals"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 70,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (wellness-progress)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 7
+    },
+    {
+      "file": "client/src/components/SelfCompassion.jsx",
+      "domain": "tools-monitors",
+      "storageKeys": [
+        "self_compassion_data"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 70,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (tools-monitors)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 8
+    },
+    {
+      "file": "client/src/components/SleepTracker.jsx",
+      "domain": "tools-monitors",
+      "storageKeys": [
+        "sleep_history"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 70,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (tools-monitors)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 9
+    },
+    {
+      "file": "client/src/components/StressMonitor.jsx",
+      "domain": "tools-monitors",
+      "storageKeys": [
+        "stress_monitor_data"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 70,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (tools-monitors)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 10
+    },
+    {
+      "file": "client/src/components/WorryTimeScheduler.jsx",
+      "domain": "tools-monitors",
+      "storageKeys": [
+        "worry_time_data"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useRef initializer"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 70,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (tools-monitors)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 11
+    },
+    {
+      "file": "client/src/pages/GrowthAnalyticsPage.tsx",
+      "domain": "analytics",
+      "storageKeys": [],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "none detected"
+      ],
+      "smallestAdditiveRemediationPattern": "Wrap the access in a `typeof window !== 'undefined'` guard, or move the read into useEffect.",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (multiple touches)",
+      "governanceSafetyScore": 70,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "trivial (restore single guarded line; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (analytics)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr-only",
+      "recommendedRemediationSequenceOrder": 12
+    },
+    {
+      "file": "client/src/components/AccessibilityToolbar.jsx",
+      "domain": "ux-preferences",
+      "storageKeys": [
+        "glp-a11y-settings"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useRef initializer"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 65,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (ux-preferences)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 13
+    },
+    {
+      "file": "client/src/components/DigitalDetox.jsx",
+      "domain": "tools-monitors",
+      "storageKeys": [
+        "digital_detox_data"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useRef initializer"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (few touches)",
+      "governanceSafetyScore": 65,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (tools-monitors)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 14
+    },
+    {
+      "file": "client/src/components/ValuesExplorer.jsx",
+      "domain": "tools-monitors",
+      "storageKeys": [
+        "values_explorer_data"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (multiple touches)",
+      "governanceSafetyScore": 60,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (tools-monitors)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 15
+    },
+    {
+      "file": "client/src/components/HabitTracker.jsx",
+      "domain": "wellness-progress",
+      "storageKeys": [
+        "habit_streaks",
+        "habits_completed_today",
+        "habits_last_date",
+        "wellness_habits"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read during component init/render path",
+        "storage read inside useState initializer (server/client value mismatch)"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (multiple touches)",
+      "governanceSafetyScore": 5,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (wellness-progress)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 16
+    },
+    {
+      "file": "client/src/components/SelfCareChecklist.jsx",
+      "domain": "wellness-progress",
+      "storageKeys": [
+        "selfcare_completed",
+        "selfcare_date",
+        "selfcare_streak",
+        "selfcare_total_points"
+      ],
+      "ssrBlockerType": [
+        "bare localStorage access without typeof-window guard"
+      ],
+      "hydrationBlockerType": [
+        "storage read during component init/render path"
+      ],
+      "smallestAdditiveRemediationPattern": "Default-initialize state to a deterministic value, then read storage in a post-mount useEffect under a `typeof window !== 'undefined'` guard (covers SSR + hydration in one pass).",
+      "reversibility": "high (additive guard / two-pass init; revert by restoring original line or checkpoint)",
+      "estimatedBlastRadius": "single-file (multiple touches)",
+      "governanceSafetyScore": 0,
+      "migrationReadinessAfterRemediation": "Becomes a qualified lowest-blast-radius stabilization candidate (H2.5 gates) once SSR + hydration guards are added.",
+      "rollbackComplexity": "low (two-pass init revert is mechanical; or checkpoint rollback)",
+      "verificationRequirements": [
+        "npm run verify:all green (build + scans)",
+        "route still returns 200",
+        "no React hydration warning in console (server/client parity)",
+        "storage read/write value parity (persisted value identical before/after)",
+        "behavior parity: storage-available path unchanged; storage-unavailable path degrades gracefully (no throw)",
+        "reduced-motion / a11y unaffected on the page"
+      ],
+      "whyLowRisk": [
+        "public, non-sensitive domain (wellness-progress)",
+        "isolated single-file change",
+        "additive guard / two-pass init only — no API or data-shape change",
+        "fully reversible",
+        "no shared-key coupling"
+      ],
+      "sharedKeyCoordination": [],
+      "independent": true,
+      "blockerProfile": "ssr+hydration",
+      "recommendedRemediationSequenceOrder": 17
+    }
+  ]
+}

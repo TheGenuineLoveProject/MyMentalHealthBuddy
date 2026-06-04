@@ -27,7 +27,7 @@ import {
   shadowFor,
   card as cardSpacing,
   transition,
-} from "../tokens";
+} from "../tokens/index";
 
 export type MMHBCardElevation = "resting" | "elevated" | "floating";
 

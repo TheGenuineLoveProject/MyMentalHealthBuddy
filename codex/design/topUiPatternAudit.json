@@ -1,0 +1,462 @@
+{
+  "topButtonFiles": [
+    {
+      "path": "client/src/pages/DesignSystem.jsx",
+      "lines": 1509,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+      "lines": 1475,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/WireframeTemplates.jsx",
+      "lines": 1415,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Admin.jsx",
+      "lines": 1391,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/SocialStudioAdmin.jsx",
+      "lines": 1319,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/CanvaLanding.jsx",
+      "lines": 1283,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Start.tsx",
+      "lines": 1250,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/components/PageTemplate.jsx",
+      "lines": 1152,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/components/lumi/LumiV6.tsx",
+      "lines": 1081,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/AdminSocial.jsx",
+      "lines": 1021,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    }
+  ],
+  "topCardFiles": [
+    {
+      "path": "client/src/App.jsx",
+      "lines": 1946,
+      "usesButton": false,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/DesignSystem.jsx",
+      "lines": 1509,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+      "lines": 1475,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/WireframeTemplates.jsx",
+      "lines": 1415,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Admin.jsx",
+      "lines": 1391,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/SocialStudioAdmin.jsx",
+      "lines": 1319,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Start.tsx",
+      "lines": 1250,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/components/PageTemplate.jsx",
+      "lines": 1152,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/ControlDashboard.jsx",
+      "lines": 903,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/HealthDashboard.jsx",
+      "lines": 885,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    }
+  ],
+  "topModalFiles": [
+    {
+      "path": "client/src/pages/DesignSystem.jsx",
+      "lines": 1509,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+      "lines": 1475,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Start.tsx",
+      "lines": 1250,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/AdminSocial.jsx",
+      "lines": 1021,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/SocialDashboard.jsx",
+      "lines": 791,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/SocialCalendar.jsx",
+      "lines": 452,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/dashboard/Journal.jsx",
+      "lines": 376,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": true,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/HealingLibraryPage.jsx",
+      "lines": 367,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Publishing.jsx",
+      "lines": 352,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/ChallengeDay.jsx",
+      "lines": 333,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    }
+  ],
+  "topInputFiles": [
+    {
+      "path": "client/src/pages/DesignSystem.jsx",
+      "lines": 1509,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/WireframeTemplates.jsx",
+      "lines": 1415,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/SocialStudioAdmin.jsx",
+      "lines": 1319,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/StudyVaultPage.jsx",
+      "lines": 547,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/account/Security.jsx",
+      "lines": 500,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/PracticeLibrary.jsx",
+      "lines": 420,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/WisdomSynthesisPage.tsx",
+      "lines": 412,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/ContentStudioPage.tsx",
+      "lines": 403,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/hubs/HubsIndexPage.jsx",
+      "lines": 395,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/components/AICompanion.jsx",
+      "lines": 394,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    }
+  ],
+  "topTailwindHeavyFiles": [
+    {
+      "path": "client/src/App.jsx",
+      "lines": 1946,
+      "usesButton": false,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/DesignSystem.jsx",
+      "lines": 1509,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+      "lines": 1475,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/WireframeTemplates.jsx",
+      "lines": 1415,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Admin.jsx",
+      "lines": 1391,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/admin/SocialStudioAdmin.jsx",
+      "lines": 1319,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": true,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/CanvaLanding.jsx",
+      "lines": 1283,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/pages/Start.tsx",
+      "lines": 1250,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": true,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/components/PageTemplate.jsx",
+      "lines": 1152,
+      "usesButton": true,
+      "usesCard": true,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    },
+    {
+      "path": "client/src/components/lumi/LumiV6.tsx",
+      "lines": 1081,
+      "usesButton": true,
+      "usesCard": false,
+      "usesModal": false,
+      "usesInput": false,
+      "usesTailwind": true
+    }
+  ]
+}

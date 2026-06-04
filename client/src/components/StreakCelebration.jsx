@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Flame, X, Trophy, Star, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const milestones = [7, 14, 21, 30, 60, 90, 100, 180, 365];
 

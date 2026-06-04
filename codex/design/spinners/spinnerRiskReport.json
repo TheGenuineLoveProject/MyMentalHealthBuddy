@@ -1,0 +1,132 @@
+{
+  "totalSpinnerFiles": 159,
+  "protectedCount": 32,
+  "publicCount": 127,
+  "safestPublic": [
+    {
+      "path": "client/src/components/LazyImage.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/ReflectionCardExport.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/community/CommunityBoundary.tsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/lumi/LumiBrandLogo.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/lumi/LumiCompanion.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/lumi/TGLPMandala.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/system/AdminErrorBoundary.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/ui/LotusLoader.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/ui/Skeleton.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/lumi-registry/components/OfficialLumi.tsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/pages/ControlDashboard.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/pages/DesignSystem.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/pages/Onboarding.tsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/pages/WellnessGoals.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/sections/NlpMiContent.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/sections/VisualBenefits.jsx",
+      "spinnerHits": 1,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/AchievementBadge.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/DailyInsight.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/DataExportButton.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/FeedbackWidget.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/GratitudePrompt.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/JournalAI.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/MoodHistoryChart.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/MoodInsight.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    },
+    {
+      "path": "client/src/components/ProgressTracker.jsx",
+      "spinnerHits": 2,
+      "protected": false
+    }
+  ]
+}

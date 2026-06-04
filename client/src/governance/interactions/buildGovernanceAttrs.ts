@@ -31,5 +31,6 @@ export function buildGovernanceAttrs(
                 "data-paywalls-blocked": b(input.overrideState.paywallsBlocked),
                 "data-upgrade-prompts-blocked": b(input.overrideState.upgradePromptsBlocked),
                 "data-analytics-restricted": b(input.overrideState.analyticsRestricted),
-        };
+        } as GovernanceAttrs;
 }
+

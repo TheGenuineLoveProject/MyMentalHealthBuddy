@@ -159,7 +159,11 @@ export default function ReturnLoop() {
   }, []);
 
   const onCrisis = location === "/crisis" || location.startsWith("/crisis/");
-  if (!visible || onCrisis) return null;
+  // Phase D13: suppress on the homepage so TglpNavbar is the only top-of-page
+  // navigation surface there — this sticky banner otherwise stacks beneath the
+  // navbar and reads as a second nav bar. Still shows on every other route.
+  const onHome = location === "/";
+  if (!visible || onCrisis || onHome) return null;
 
   const ctaHref = isAuthed() ? "/chat" : "/login";
   const accent = ACCENT_TOKENS[message.accent];

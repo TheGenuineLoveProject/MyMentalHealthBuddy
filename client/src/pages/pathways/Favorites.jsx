@@ -4,9 +4,9 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { Heart, Bookmark, Trash2, ArrowRight, Grid, List, Search, RefreshCw, AlertCircle } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
-import { Input } from "@/components/ui/Input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 
 export default function Favorites() {

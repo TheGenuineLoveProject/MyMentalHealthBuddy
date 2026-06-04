@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "mode": "ethical-retention-governance",
+  "allowedLoops": [
+    "saved-reflections",
+    "continue-your-journey",
+    "gentle-check-ins",
+    "saved-tools",
+    "weekly-grounding",
+    "unfinished-guided-journeys",
+    "user-controlled-reminders",
+    "opt-in-newsletters",
+    "progress-without-pressure"
+  ],
+  "forbidden": [
+    "manipulative-streaks",
+    "shame-reminders",
+    "urgency-pressure",
+    "fear-based-notifications",
+    "hidden-opt-ins",
+    "emotional-dependency-loops",
+    "healing-data-monetization",
+    "vulnerability-targeting"
+  ]
+}

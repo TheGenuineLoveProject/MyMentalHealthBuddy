@@ -5,6 +5,7 @@ import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
+import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
 // Pure read-only regex; no fetch, no AI, no behavior modification.
@@ -192,7 +193,7 @@ export default function DailyRitualPage() {
       state: stateValues,
       mode: selectedMode,
       reflection: reflectionText,
-      insightTags: insightOutput?.tags || [],
+      insightTags: [],
       savedAt: new Date().toISOString(),
     };
     const existing = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
@@ -489,12 +490,12 @@ export default function DailyRitualPage() {
                 Take what resonates. Leave what doesn't. You know yourself best.
               </p>
 
-              {insightOutput && (
-                <InsightCards
-                  cards={insightOutput.cards}
-                  tags={insightOutput.tags}
-                />
-              )}
+                    {Array.isArray(insightOutput) && (
+                      <InsightCards
+                        cards={insightOutput}
+                        tags={[]}
+                      />
+                    )}
 
               <div className="mt-6 p-4 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)]">
                 <h3 className="text-heading-sm text-teal mb-2">Today's Insight</h3>

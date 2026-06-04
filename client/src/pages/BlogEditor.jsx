@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { Save, Eye, Send, ArrowLeft, Image, Tag } from "lucide-react";
-import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
@@ -87,7 +86,6 @@ export default function BlogEditor() {
   >
 
       <div className="min-h-screen v28-paper-bg relative overflow-hidden">
-        <TglpNavbar />
         <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
         <div className="max-w-3xl mx-auto px-4 py-20 text-center relative z-10">
@@ -130,7 +128,6 @@ export default function BlogEditor() {
       <SEO title="Write a Post | The Genuine Love Project Blog" />
       <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-20 -left-20 absolute" aria-hidden="true" />
-      <TglpNavbar />
 
       <main className="max-w-4xl mx-auto px-4 py-8 relative z-10">
         <div className="flex items-center justify-between mb-8">

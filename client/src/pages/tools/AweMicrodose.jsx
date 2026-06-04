@@ -3,8 +3,8 @@ import { Link } from "wouter";
 import { Sparkles, ArrowLeft, Play, Pause, RotateCcw } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const AWE_PROMPTS = [
   { text: "Think of the vastness of the night sky...", duration: 10 },

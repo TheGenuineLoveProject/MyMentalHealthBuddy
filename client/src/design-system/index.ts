@@ -1,22 +1,29 @@
-/**
- * Phase 12 — Platform Safety Architecture v1
- * Top-level barrel for the canonical MMHB design system.
- *
- * Usage:
- *   import { MMHBButton, MMHBCard, colors, spacing } from '@/design-system';
- *
- * Status: opt-in. Existing surfaces are not migrated by this PR.
- * Governance: docs/governance/PLATFORMSAFETYARCHITECTURE.md
- */
+export * from "./components/MMHBCard";
+export * from "./components/MMHBButton";
 
-// Tokens
-export * from "./tokens";
+export * from "./tokens/colors";
+export * from "./tokens/spacing";
+export * from "./tokens/radius";
+export * from "./tokens/typography";
 
-// Components
-export { MMHBButton } from "./components/MMHBButton";
-export type {
-  MMHBButtonVariant,
-  MMHBButtonSize,
-} from "./components/MMHBButton";
-export { MMHBCard } from "./components/MMHBCard";
-export type { MMHBCardElevation } from "./components/MMHBCard";
+import { colors } from "./tokens/colors";
+import { spacing } from "./tokens/spacing";
+import { radius } from "./tokens/radius";
+import { typography } from "./tokens/typography";
+
+export const tokens = {
+	colors,
+	spacing,
+	radius,
+	typography,
+} as const;
+
+export { colors, spacing, radius, typography };
+
+export const semantic = colors.semantic;
+export const palette = colors.palette;
+export const aura = colors.aura;
+
+export const fonts = typography.fonts;
+export const heading = typography.heading;
+export const body = typography.body;

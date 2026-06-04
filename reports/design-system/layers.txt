@@ -1,0 +1,263 @@
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:13:  const [repairStats, setRepairStats] = useState({ attempted: 0, fixed: 0, failed: 0 });
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:36:    let fixed = 0;
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:190:      if (wasFixed) fixed++;
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:192:      log[log.length - 1].status = wasFixed ? 'fixed' : 'failed';
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:196:    setRepairStats({ attempted: fixableIssues.length, fixed, failed });
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:256:          <span className="text-green-600">{repairStats.fixed} fixed</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:305:                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${logEntry.status === 'fixed' ? 'bg-green-100 text-green-600' : logEntry.status === 'failed' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:306:                            {logEntry.status === 'running' ? 'Repairing...' : logEntry.status === 'fixed' ? 'Fixed' : 'Needs Manual Fix'}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:355:                        <span className={entry.status === 'fixed' ? 'text-green-600' : entry.status === 'failed' ? 'text-red-500' : 'text-blue-500'}>
+client/src/pages/admin/AdminSocial.jsx:934:    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4" onClick={onClose}>
+client/src/pages/admin/NarrativeOpsConsole.jsx:667:        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+client/src/pages/admin/NarrativeOpsConsole.jsx:1044:    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+client/src/pages/admin/SocialCalendar.jsx:333:        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/admin/SocialDashboard.jsx:691:        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/account/Security.jsx:190:      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+client/src/pages/account/Security.jsx:389:            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/dashboard/Journal.jsx:104:    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" data-testid="modal-new-entry" role="dialog" aria-modal="true" aria-labelledby="new-entry-title">
+client/src/pages/tools/CognitiveDistortionChecker.jsx:53:    description: "Attaching a fixed label to yourself or others (e.g., 'I am a failure').",
+client/src/pages/tools/BreathTool.jsx:286:                <span className="relative z-10 text-2xl font-medium text-sky-700 dark:text-sky-300 capitalize">
+client/src/pages/tools/BreathingTool.jsx:182:      <div className="relative z-10 mx-auto max-w-2xl px-6 py-12">
+client/src/pages/_quarantine/legacy-landing/Home.jsx:172:          className="relative z-10 mx-auto max-w-6xl py-5 px-6 flex items-center justify-between"
+client/src/pages/_quarantine/legacy-landing/Home.jsx:233:      <main id="main-content" className="relative z-10">
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:411:                  className="mb-6 leading-relaxed relative z-10"
+client/src/pages/Analytics.jsx:37:        <div className="content-wrapper relative z-10">
+client/src/pages/CommunityCircle.jsx:52:        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+client/src/pages/CommunityCircle.jsx:193:        <div className="absolute -top-2 -right-2 z-10">
+client/src/pages/CommunityCircle.jsx:200:      <div className="relative z-10 flex items-center gap-2 mb-3">
+client/src/pages/CommunityCircle.jsx:209:      <p className="relative z-10 text-gray-700 dark:text-gray-200 font-playfair italic leading-relaxed mb-4 line-clamp-4">
+client/src/pages/CommunityCircle.jsx:213:      <div className="relative z-10 flex items-center justify-between">
+client/src/pages/Contact.jsx:112:        <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-24">
+client/src/pages/ContentIndexPage.jsx:219:        <div className="sticky top-0 z-20 py-4 mb-6" style={{ background: 'var(--glp-paper)' }}>
+client/src/pages/ControlDashboard.jsx:77:        <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200">
+client/src/pages/ControlDashboard.jsx:108:        <div className="max-w-[1600px] mx-auto px-6 py-8 relative z-10">
+client/src/pages/ControlDashboard.jsx:111:              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sticky top-28">
+client/src/pages/DesignSystem.jsx:74:      <header className="sticky top-0 z-50 px-6 py-4" style={{ 
+client/src/pages/DesignSystem.jsx:101:          <nav className="sticky top-24 space-y-1">
+client/src/pages/DesignSystem.jsx:507:                      {["NavBar (sticky)", "Hero Section", "About / Values Grid", "How It Works (3 steps)", "Features Grid", "Testimonials", "Trust Badges", "FAQ Accordion", "Final CTA", "Footer"].map((section, i) => (
+client/src/pages/Invite.jsx:89:      <main className="flex-1 relative z-10">
+client/src/pages/AffirmationWall.jsx:195:          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+client/src/pages/CRMPage.jsx:69:        <nav className="border-b sticky top-0 z-50 backdrop-blur-lg" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-20)' }}>
+client/src/pages/WireframeTemplates.jsx:76:        className="sticky top-0 z-50 px-6 py-4"
+client/src/pages/WireframeTemplates.jsx:140:          <nav className="sticky top-24 space-y-2">
+client/src/pages/LumiV6Preview.jsx:68:      <div className="v6-preview-content relative z-10 mx-auto max-w-6xl px-6 py-10">
+client/src/pages/LumiV6Preview.jsx:327:              <Cell key={hz} label={`${hz} Hz`} testId={`cell-v7-hz-${hz}`}>
+client/src/pages/Disclaimer.tsx:33:        <main className="mx-auto max-w-3xl p-6 py-12 space-y-6 relative z-10">
+client/src/pages/Login.jsx:100:        <div className="relative z-10 w-full max-w-md animate-fade-in-up">
+client/src/pages/Register.jsx:88:        <div className="relative z-10 w-full max-w-md animate-fade-in-up">
+client/src/pages/ResetPassword.jsx:110:          <div className="w-full max-w-md rounded-2xl p-8 text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
+client/src/pages/ResetPassword.jsx:165:          <div className="w-full max-w-md rounded-2xl p-8 text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
+client/src/pages/ResetPassword.jsx:219:        <div className="w-full max-w-md relative z-10 animate-fade-in-up">
+client/src/pages/Blog.jsx:380:          <div className="max-w-3xl mx-auto px-4 py-12 relative z-10">
+client/src/pages/Blog.jsx:472:        <div className="max-w-4xl mx-auto px-4 py-12 relative z-10">
+client/src/pages/NotFound.jsx:47:        <div className="relative z-10 w-full max-w-2xl text-center animate-fade-in-up">
+client/src/pages/ForgotPassword.jsx:74:          <div className="w-full max-w-md v28-card rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
+client/src/pages/ForgotPassword.jsx:135:        <div className="w-full max-w-md relative z-10 animate-fade-in-up">
+client/src/pages/Admin.jsx:244:      <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-10 py-10">
+client/src/pages/DesignDashboard.jsx:38:        <header className="sticky top-0 z-10 bg-[var(--glp-paper)]/85 backdrop-blur-md border-b border-[var(--sage-200)]">
+client/src/pages/ExamplesPage.jsx:99:      { step: "Take Repair Action", detail: "If possible, apologize or fix what can be fixed. Then practice letting go" }
+client/src/pages/Publishing.jsx:216:              <div className="card-bordered sticky top-8">
+client/src/pages/Publishing.jsx:286:        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+client/src/pages/Upgrade.jsx:86:        <div className="container-sm px-responsive py-12 relative z-10">
+client/src/pages/Pricing.jsx:237:      <div className="relative z-10 py-20 px-6">
+client/src/pages/Pricing.jsx:514:            <div className="relative z-10">
+client/src/pages/ToolsPage.jsx:198:        <div className="relative z-10">
+client/src/pages/CrisisResources.jsx:116:        <div className="relative z-10">
+client/src/pages/StudyVaultPage.jsx:144:    summary: "Resilience is the ability to adapt and recover from adversity. It's not a fixed trait—it can be developed through intentional practice.",
+client/src/pages/ResearchEvidencePage.jsx:139:        implications: "Your attachment style isn't fixed. Therapy and healthy relationships can help you develop secure attachment patterns.",
+client/src/pages/HowToGuidesPage.jsx:128:      "Post sticky notes in visible places"
+client/src/pages/DiscernmentDashboard.jsx:111:      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4"
+client/src/pages/Dashboard.jsx:138:        <div className="relative z-10 max-w-5xl mx-auto px-6 py-10">
+client/src/pages/DesignSystemV2.jsx:101:            position: "sticky", top: 0, zIndex: 30,
+client/src/pages/AffirmationsPage.jsx:153:      "My potential is not fixed; it expands with each step I take.",
+client/src/pages/CelebrationFlow.jsx:120:      {/* Confetti backdrop — hidden under reduced motion. z-index 2 sits
+client/src/pages/CelebrationFlow.jsx:121:          above the wash (0) and sparkle layer (1), below content (z-10). */}
+client/src/pages/CelebrationFlow.jsx:143:      <div className="relative z-10 mx-auto max-w-2xl px-6 py-16">
+client/src/pages/CelebrationRitual.jsx:158:      <div className="relative z-10 max-w-2xl mx-auto px-4 py-8">
+client/src/pages/CheckIn.jsx:196:      <div className="relative z-10 mx-auto max-w-2xl px-6 py-12">
+client/src/pages/Wellness.jsx:339:        <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
+client/src/pages/Premium.jsx:178:        <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
+client/src/pages/Newsletter.jsx:17:      <main className="mx-auto max-w-3xl px-4 py-10 relative z-10">
+client/src/pages/BlogIndex.jsx:112:      <main className="mx-auto max-w-6xl px-4 py-10 relative z-10">
+client/src/pages/BlogEditor.jsx:91:        <div className="max-w-3xl mx-auto px-4 py-20 text-center relative z-10">
+client/src/pages/BlogEditor.jsx:132:      <main className="max-w-4xl mx-auto px-4 py-8 relative z-10">
+client/src/pages/CanvaLanding.jsx:343:        <div className="max-w-6xl mx-auto relative z-10">
+client/src/pages/CanvaLanding.jsx:673:        <div className="max-w-[1100px] mx-auto relative z-10">
+client/src/pages/CanvaLanding.jsx:718:            <p className="relative z-10 text-lg md:text-2xl font-serif italic leading-relaxed text-center" style={{ color: 'var(--glp-sage-deep)', lineHeight: '1.7' }}>
+client/src/pages/CanvaLanding.jsx:721:            <p className="relative z-10 text-sm font-semibold text-center mt-4 shimmer-text">
+client/src/pages/CanvaLanding.jsx:829:        <div className="max-w-[1200px] mx-auto px-2 md:px-8 relative z-10">
+client/src/pages/CanvaLanding.jsx:958:        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
+client/src/pages/CanvaLanding.jsx:1016:        className="sticky bottom-0 z-[110] backdrop-blur-md py-3 pl-5 pr-16 md:pr-20 flex items-center justify-between"
+client/src/pages/CanvaLanding.jsx:1021:        data-testid="sticky-cta-talk-to-lumi"
+client/src/pages/CanvaLanding.jsx:1035:          data-testid="link-sticky-cta-chat"
+client/src/components/a11y/SkipToContent.tsx:5:      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--glp-gold)] focus:text-[var(--glp-ink)] focus:rounded-lg focus:font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--glp-gold)]"
+client/src/components/admin/AIHealthPipeline.jsx:85:      fixed: fixable.length,
+client/src/components/admin/AIHealthPipeline.jsx:165:                  {run.fixed > 0 && <span className="text-purple-600">{run.fixed} auto-fixed</span>}
+client/src/components/brand/BrandLogo.jsx:29:          className={`brand-logo-img relative z-[1] w-full h-full ${s.radius} flex items-center justify-center overflow-hidden transition-transform duration-300`}
+client/src/components/layout/AppShell.tsx:35:        <div className="fixed inset-0 z-50 bg-black/40">
+client/src/components/layout/Header.jsx:89:      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+client/src/components/layout/Header.jsx:158:                className="absolute right-0 top-full mt-2 rounded-xl py-2 min-w-[120px] z-50 bg-[var(--glp-paper)] border border-[var(--glp-sage-20)]"
+client/src/components/sacred/EmotionBackground.jsx:73:      className={`fixed inset-0 -z-10 transition-all duration-1000 ${className}`}
+client/src/components/sacred/EmotionCharts.jsx:150:      <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg relative z-10">
+client/src/components/sacred/EmotionCharts.jsx:240:      <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg relative z-10">
+client/src/components/sacred/LotusGuide.jsx:197:    "bottom-right": "fixed bottom-6 right-6",
+client/src/components/sacred/LotusGuide.jsx:198:    "bottom-left": "fixed bottom-6 left-6",
+client/src/components/sacred/LotusGuide.jsx:199:    "top-right": "fixed top-24 right-6",
+client/src/components/sacred/LotusGuide.jsx:200:    "top-left": "fixed top-24 left-6"
+client/src/components/sacred/LotusGuide.jsx:208:      className={`flex flex-col items-center gap-4 z-50 ${floatingClass} ${floating ? 'lotus-float' : ''} ${className}`}
+client/src/components/sacred/ProgressTracker.jsx:137:            className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center"
+client/src/components/share/InfinityHeartCard.jsx:66:      <div className="relative z-10">
+client/src/components/share/ShareModal.jsx:68:      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+client/src/components/ui/SacredBackground.jsx:4:      className="absolute inset-0 pointer-events-none overflow-hidden -z-10"
+client/src/components/ui/SacredModal.jsx:72:      className={`fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop ${isExiting ? 'opacity-0' : ''}`}
+client/src/components/ui/dropdown-menu.tsx:102:        className={`absolute z-50 mt-${sideOffset} ${alignClass} min-w-[8rem] overflow-hidden rounded-xl border border-[var(--glp-border)] bg-[var(--glp-surface)] p-1 shadow-lg animate-in fade-in-0 zoom-in-95 ${className}`}
+client/src/components/ui/popover.tsx:107:        className={`absolute z-50 mt-${sideOffset} ${alignClass} w-72 rounded-xl border border-[var(--glp-border)] bg-[var(--glp-surface)] p-4 shadow-lg animate-in fade-in-0 zoom-in-95 ${className}`}
+client/src/components/ui/select.tsx:173:        absolute z-50 mt-1 w-full min-w-[8rem] overflow-hidden rounded-xl 
+client/src/components/ui/toast-container.tsx:91:      className="pointer-events-none fixed bottom-24 right-4 flex flex-col gap-2 w-full max-w-[320px]"
+client/src/components/ui/LayoutWrapper.jsx:34:              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--glp-sage-deep)] focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--glp-gold)] focus:ring-offset-2"
+client/src/components/ui/LayoutWrapper.jsx:43:              className="fixed inset-0 -z-10 opacity-50 pointer-events-none"
+client/src/components/wellness/HealingGraph.jsx:228:                  className="absolute right-0 mt-1 w-28 bg-softWhite dark:bg-gray-700 rounded-lg shadow-lg border border-sageGreen/20 z-10"
+client/src/components/wellness/HealingGraph.jsx:320:                      <div className="tooltip absolute bottom-full mb-2 hidden group-hover:block group-focus-within:block bg-deepTeal text-softWhite px-2 py-1 rounded text-xs font-sans whitespace-nowrap z-10">
+client/src/components/zen/BuddyBubble.jsx:67:  { category: "evolve", emoji: "🧬", text: "You are not a project to be fixed. You are a self being remembered." },
+client/src/components/zen/ZenScape.jsx:22: * children render above it inside a `relative z-10` wrapper.
+client/src/components/lumi/LumiCustomizer.jsx:89:        position: "fixed",
+client/src/components/lumi/LumiV6.tsx:18: *       fixed CSS blink loop with JS-scheduled 2-6s intervals + 15% chance
+client/src/components/lumi/LumiV6.tsx:949:      {/* V20: floating particles (z-index 2 — between body and face) */}
+client/src/components/lumi/LumiV6.tsx:958:      {/* V20: cheek blush (z-index 14 — above body, below face) */}
+client/src/components/lumi/LumiV6.tsx:966:      {/* V20 Phase 2: tear drops (z-index 20 — deep empathy, never crisis) */}
+client/src/components/lumi/LumiV6.tsx:1058:      {/* V20: sparkles (z-index 22 — above face, joy + escalation 3+) */}
+client/src/components/navigation/CanonicalNavbar.jsx:35:    <header className="sticky top-0 z-50 border-b border-[#A8D5BA]/40 bg-[#F7F4EE]/95 backdrop-blur">
+client/src/components/AICompanion.jsx:196:        className={`fixed bottom-24 right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl transition-all hover:scale-110 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--glp-gold)] ${className}`}
+client/src/components/AICompanion.jsx:210:          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+client/src/components/AICompanion.jsx:376:        <div className="fixed inset-0 z-50 flex items-center justify-center p-8 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
+client/src/components/AccessibilityToolbar.jsx:81:    <div ref={toolbarRef} className="fixed bottom-6 right-6 z-50" style={{ pointerEvents: 'auto' }} data-testid="accessibility-toolbar">
+client/src/components/AchievementBadge.jsx:125:      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+client/src/components/AchievementBadge.jsx:149:    <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+client/src/components/AchievementBadges.jsx:201:      <div className="relative z-10">
+client/src/components/AffirmationCards.jsx:175:      <div className="relative z-10">
+client/src/components/AgeConfirmationModal.tsx:80:      className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+client/src/components/AngerManagement.jsx:153:      <div className="relative z-10">
+client/src/components/AnxietyRelief.jsx:153:      <div className="relative z-10">
+client/src/components/BodyScanMeditation.jsx:86:      <div className="relative z-10">
+client/src/components/BoundaryBuilder.jsx:108:      <div className="relative z-10">
+client/src/components/CBTThoughtDiary.jsx:95:      <div className="relative z-10">
+client/src/components/ChatWidget.tsx:84:      className="fixed right-6 bottom-6 w-[340px] max-h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col z-60 overflow-hidden"
+client/src/components/ContentStudio.jsx:209:        body: "Research identifies key factors that support resilience:\n\n1. Connection: Supportive relationships buffer stress. We're wired for co-regulation.\n\n2. Meaning: Finding purpose, even in difficulty, helps us persevere.\n\n3. Cognitive flexibility: The ability to reframe challenges without denial.\n\n4. Self-care: Meeting basic needs (sleep, nutrition, movement) supports nervous system capacity.\n\nResilience isn't fixed—it's built through intentional practice and, importantly, through healing what depletes it.",
+client/src/components/CopingStrategies.jsx:257:      <div className="relative z-10">
+client/src/components/DailyAffirmations.jsx:12:  { text: "I am enough, exactly as I am. I don't need to be fixed—I need to be witnessed.", category: "self-worth" },
+client/src/components/DailyAffirmations.jsx:150:        <div className="flex items-start gap-4 relative z-10">
+client/src/components/DailyAffirmations.jsx:195:      <div className="relative z-10">
+client/src/components/DataExportButton.jsx:97:            className="fixed inset-0 z-40"
+client/src/components/DataExportButton.jsx:101:          <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+client/src/components/DigitalDetox.jsx:148:      <div className="relative z-10">
+client/src/components/EmotionAdaptiveBackground.jsx:96:      <div className="relative z-10">
+client/src/components/EmotionWheel.jsx:154:      <div className="relative z-10">
+client/src/components/EmotionalIntelligenceQuiz.jsx:46:const STORAGE_KEY = "eq-quiz-results";
+client/src/components/EmotionalIntelligenceQuiz.jsx:151:      <div className="relative z-10">
+client/src/components/EnergyBooster.jsx:144:      <div className="relative z-10">
+client/src/components/GlobalSearch.jsx:103:      className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh] px-4"
+client/src/components/GlobalSearch.jsx:114:      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true" />
+client/src/components/GlowingCard.jsx:85:      <div className="relative z-10">
+client/src/components/GoalProgress.jsx:133:      <div className="relative z-10">
+client/src/components/GratitudeJar.jsx:110:      <div className="relative z-10">
+client/src/components/GratitudeJar.jsx:145:          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedGratitude(null)}>
+client/src/components/GratitudeJar.jsx:283:          <h3 className="text-lg font-semibold text-gray-900 dark:text-white sticky top-0 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-rose-950/30 py-2">
+client/src/components/HabitTracker.jsx:101:      <div className="relative z-10">
+client/src/components/HealingHero.jsx:158:        className={`relative z-10 max-w-5xl mx-auto px-6 text-center transition-all duration-1000 ${
+client/src/components/HeroSection.jsx:5:    <section id="hero" className="text-center py-20 relative z-10">
+client/src/components/KeyboardShortcuts.jsx:42:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+client/src/components/KnowledgeBase.jsx:30:    <div className="fixed bottom-20 right-6 z-50">
+client/src/components/KnowledgeBase.jsx:66:        className="relative z-50 animate-float"
+client/src/components/LevelUpModal.jsx:34:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+client/src/components/LevelUpModal.jsx:45:          className="absolute top-4 right-4 min-h-[44px] min-w-[44px] z-10"
+client/src/components/LotusGuide.jsx:170:      className={`fixed bottom-[10.5rem] right-6 z-30 ${className}`}
+client/src/components/LotusGuide.jsx:242:          <div className="absolute inset-0 -z-10">
+client/src/components/MilestoneTracker.jsx:26:                  w-12 h-12 rounded-full flex items-center justify-center z-10
+client/src/components/MindfulEating.jsx:148:      <div className="relative z-10">
+client/src/components/MindfulnessBell.jsx:151:      <div className="relative z-10">
+client/src/components/MindfulnessChallenges.jsx:119:      <div className="relative z-10">
+client/src/components/ModeToggle.jsx:52:            className="fixed inset-0 z-40"
+client/src/components/ModeToggle.jsx:59:            className="absolute right-0 top-full mt-2 z-50 min-w-[200px] py-2 rounded-lg 
+client/src/components/MoodInsight.jsx:122:      <div className="relative z-10">
+client/src/components/MoodMeter.jsx:86:                  ? `bg-gradient-to-br ${mood.color} shadow-md scale-125 z-10`
+client/src/components/MorningEveningRituals.jsx:112:        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in">
+client/src/components/MotivationBooster.jsx:124:      <div className="relative z-10">
+client/src/components/NotificationCenter.jsx:108:      className="fixed inset-0 z-50 flex justify-end"
+client/src/components/OfflineIndicator.jsx:29:      className={`fixed bottom-4 left-4 z-50 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg transition-all ${
+client/src/components/PositiveReframing.jsx:102:      <div className="relative z-10">
+client/src/components/PositiveVisualization.jsx:172:      <div className="relative z-10">
+client/src/components/PositiveVisualization.jsx:179:              <h3 className="font-display font-bold text-[var(--text)]" data-testid="text-viz-title">
+client/src/components/PositiveVisualization.jsx:201:                data-testid={`button-viz-${viz.id}`}
+client/src/components/ProgressTracker.jsx:83:      <div className="relative z-10">
+client/src/components/ProgressiveMuscleRelaxation.jsx:114:      <div className="relative z-10">
+client/src/components/ReflectionInsights.jsx:217:      <div className="relative z-10 p-8">
+client/src/components/ReminderScheduler.jsx:200:                  <div className="absolute z-10 w-full mt-2 rounded-xl shadow-lg overflow-hidden" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+client/src/components/SacredBackground.jsx:4:      className="sacred-bg-container absolute inset-0 pointer-events-none overflow-hidden -z-10"
+client/src/components/SacredPattern.jsx:6: * A fixed, animated sacred geometry pattern that pulses gently
+client/src/components/SacredPattern.jsx:79:      className="fixed inset-0 pointer-events-none overflow-hidden"
+client/src/components/SelfCareBingo.jsx:158:        <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-50 animate-fade-in">
+client/src/components/SelfCareBingo.jsx:167:      <div className="relative z-10">
+client/src/components/SelfCareChecklist.jsx:142:      <div className="relative z-10">
+client/src/components/SelfCompassion.jsx:166:      <div className="relative z-10">
+client/src/components/ShareReflection.jsx:56:    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+client/src/components/SkipToContent.jsx:5:      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all"
+client/src/components/SleepTracker.jsx:113:      <div className="relative z-10">
+client/src/components/SocialConnection.jsx:107:      <div className="relative z-10">
+client/src/components/SocialShare.jsx:24:      textArea.style.position = 'fixed';
+client/src/components/StreakCelebration.jsx:48:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+client/src/components/StreakCounter.jsx:81:      <div className="relative z-10">
+client/src/components/StressMonitor.jsx:122:      <div className="relative z-10">
+client/src/components/TimeOfDayBackground.jsx:122:      <div className="relative z-10">
+client/src/components/ValuesExplorer.jsx:138:      <div className="relative z-10">
+client/src/components/WeeklyRecap.jsx:207:          className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+client/src/components/WeeklyReflection.jsx:152:      <div className="relative z-10">
+client/src/components/WellnessScore.jsx:107:      <div className="relative z-10">
+client/src/components/WellnessStreakDashboard.jsx:160:      <div className="relative z-10">
+client/src/components/WorryTimeScheduler.jsx:119:      <div className="relative z-10">
+client/src/components/BrandGlow.tsx:3:    <div aria-hidden className="brand-glow pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+client/src/components/SoundHealingPlayer.jsx:197:      <div className="relative z-10">
+client/src/components/MeditationTimer.jsx:114:      <div className="relative z-10">
+client/src/components/MindfulBreathing.jsx:224:          <div className="absolute top-full left-0 right-0 mt-2 p-2 rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-xl z-10 space-y-1">
+client/src/components/SacredNav.jsx:47:      className={`sticky top-0 z-50 transition-all duration-500 ${
+client/src/components/FeedbackWidget.jsx:113:        className="fixed bottom-6 left-6 z-40 min-h-[48px] min-w-[48px] p-3 rounded-full shadow-lg"
+client/src/components/FeedbackWidget.jsx:124:      className="fixed bottom-20 left-6 z-50 w-80 bg-background border rounded-xl shadow-xl overflow-hidden"
+client/src/components/GratitudePrompt.jsx:122:      <div className="relative z-10">
+client/src/components/UpsellModal.jsx:43:      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+client/src/components/ReflectionCardExport.jsx:157:      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+client/src/components/ConsentBanner.jsx:42:      className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-background border-t shadow-lg"
+client/src/components/Header.jsx:39:      className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-xl supports-[backdrop-filter]:bg-[var(--bg)]/70"
+client/src/components/Footer.jsx:16:      <div className="relative z-10 max-w-6xl mx-auto px-6">
+client/src/components/SessionTimeout.jsx:79:      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+client/src/components/CelebrationOverlay.tsx:92:        position: "fixed",
+client/src/components/TglpNavbar.jsx:101:          className="absolute right-0 mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl border border-[var(--glp-sage-15)] bg-[var(--glp-paper)] shadow-lg py-2 z-50"
+client/src/components/TglpNavbar.jsx:146:      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+client/src/components/TglpNavbar.jsx:286:          className="md:hidden absolute left-0 right-0 top-full z-50 px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)] max-h-[80vh] overflow-y-auto shadow-2xl"
+client/src/components/MicroWinPrompt.jsx:193:          position: fixed;
+client/src/components/MicroWinPrompt.jsx:199:          /* v5.6 architect fix: yield z-index to ConsentBanner (z-50) so privacy
+client/src/components/MicroWinPrompt.jsx:202:          z-index: 40;
+client/src/components/WelcomeBackBanner.jsx:121:          z-index: 35;
+client/src/components/ReturnLoop.jsx:163:  // navigation surface there — this sticky banner otherwise stacks beneath the
+client/src/components/ReturnLoop.jsx:184:        // scrolling under the sticky bar doesn't bleed through (was 18% alpha).
+client/src/components/ReturnLoop.jsx:225:          position: sticky;
+client/src/components/ReturnLoop.jsx:228:          z-index: 50;
+client/src/context/GamificationContext.jsx:174:          className="fixed top-20 right-4 z-50 animate-bounce-in"
+client/src/context/GamificationContext.jsx:187:          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in"
+client/src/sections/EmotionalJourney.jsx:52:      <div className="relative z-10 max-w-3xl mx-auto">
+client/src/sections/NextStepCTA.jsx:185:          z-index: 0;
+client/src/sections/NextStepCTA.jsx:191:          z-index: 1;
+client/src/sections/NlpMiContent.jsx:114:      <div className="relative z-10 max-w-3xl mx-auto">
+client/src/sections/NlpMiContent.jsx:380:          z-index: 1;
+client/src/sections/VisualBenefits.jsx:185:      <div className="max-w-[1180px] mx-auto relative z-10">
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:10: *   2. Reducer marks `escalation: "critical"` as sticky.
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:8: * Layers (z-index ascending):
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:9: *   z-0  background gradient (current)
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:10: *   z-1  background gradient (previous, fading out during crossfade)
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:11: *   z-2  particle layer
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:12: *   z-3  fog overlay (opacity ≤ 0.15)
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:13: *   z-4  lighting wash (opacity = preset.lighting * 0.4, max ~0.32)
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:14: *   z-10 children (Lumi)
+client/src/lumi-voice/components/VoiceCaptionOverlay.tsx:25:        position: "fixed",
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:37:        position: "fixed",
+client/src/_quarantine/orphans/SacredNavBar.jsx:5:    <nav className="w-full fixed top-0 left-0 z-50 bg-[#f8f7f4]/90 shadow-md backdrop-blur-md">
+client/src/main.jsx:31:  banner.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:#5A8A6E;color:#fff;padding:14px 24px;border-radius:12px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.18);font-family:Inter,sans-serif;font-size:14px;max-width:440px;width:calc(100% - 32px);animation:slideUp 0.3s ease-out';
+client/src/App.jsx:409:                rendered a second sticky desktop navbar above TglpNavbar on

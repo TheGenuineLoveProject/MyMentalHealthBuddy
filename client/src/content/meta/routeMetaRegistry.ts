@@ -88,7 +88,7 @@ function safeDefaultMeta(routeKey: string): RouteMeta {
  * Add special routes with curated metadata here.
  * These win over auto-generated entries.
  */
-const MANUAL_REGISTRY: Record<string, Partial<RouteMeta>> = {
+const MANUAL_REGISTRY: Record<string, any> = {
   // ═══════════════════════════════════════════════════════════════════
   // CORE TOOLS
   // ═══════════════════════════════════════════════════════════════════
@@ -1101,7 +1101,7 @@ const MANUAL_REGISTRY: Record<string, Partial<RouteMeta>> = {
  * ✅ MERGED REGISTRY (autogen + manual)
  * Manual overrides always win.
  */
-const REGISTRY: Record<string, Partial<RouteMeta>> = {
+const REGISTRY = {
   ...AUTOGEN_REGISTRY,
   ...MANUAL_REGISTRY,
 };
@@ -1123,7 +1123,7 @@ export function deriveRouteKeyFromPath(pathname: string) {
 export function getRouteMeta(routeKey: string): RouteMeta {
   const key = String(routeKey || "home").trim() || "home";
   const base = safeDefaultMeta(key);
-  const override = REGISTRY[key] || {};
+  const override = REGISTRY[key as keyof typeof REGISTRY] || {};
 
   // Ensure canonicalPath always exists (registry wins, otherwise inferred)
   const canonicalPath = override.canonicalPath || base.canonicalPath;
@@ -1133,9 +1133,9 @@ export function getRouteMeta(routeKey: string): RouteMeta {
     ...override,
     routeKey: key,
     canonicalPath,
-    benefits: override.benefits || base.benefits,
-    internalLinks: override.internalLinks || base.internalLinks,
-    modules: override.modules || base.modules,
+    benefits: [...(override.benefits || base.benefits)],
+    internalLinks: [...(override.internalLinks || base.internalLinks)] as InternalLink[],
+    modules: [...(override.modules || base.modules)] as ModuleKey[],
   };
 }
 

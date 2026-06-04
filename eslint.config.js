@@ -1,42 +1,39 @@
-import js from "@eslint/js";
-import globals from "globals";
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
+
   {
     ignores: [
-      "**/dist/**",
-      "**/node_modules/**",
-      "_quarantine/**",
-      "client/dist/**",
-      ".replit",
-      "**/*.test.js",
-      "**/*.test.mjs",
-      "**/*.ts",
-      "**/*.tsx",
-      "**/*.d.ts",
-      "attached_assets/**",
-      "public/**",
-      "scripts/**",
-      "automation/**",
-      "helpers/**",
-    ],
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/coverage/**',
+      '**/production-backups/**',
+      '**/static-export/**',
+      '**/archives/**',
+      '**/temp/**',
+      '**/.cache/**',
+      '**/*.min.js'
+    ]
   },
-  js.configs.recommended,
+
   {
+    files: ['server/**/*.{js,mjs,ts}'],
+
     languageOptions: {
+      parser: tsParser,
       ecmaVersion: 2022,
-      sourceType: "module",
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-        ...globals.es2021,
-      },
+      sourceType: 'module'
     },
+
+    plugins: {
+      '@typescript-eslint': tsPlugin
+    },
+
     rules: {
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
-      "no-console": "off",
-      "prefer-const": "warn",
-      "no-empty": "warn",
-    },
-  },
+      'no-unused-vars': 'warn',
+      'no-empty': 'warn'
+    }
+  }
 ];

@@ -1,0 +1,11 @@
+client/src/checkin-flow/components/FlowStepCheckout.tsx
+client/src/pages/account/Billing.jsx
+client/src/pages/account/Subscription.jsx
+client/src/pages/admin/BillingViewer.jsx
+client/src/services/billingClient.js
+server/auth/webhookStripe.mjs
+server/billing/stripeCustomer.mjs
+server/routes/adminBilling.mjs
+server/routes/billing.mjs
+server/services/stripeSync.mjs
+server/utils/stripe.mjs
