@@ -5,8 +5,8 @@
 
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { AlertTriangle, Heart, CheckCircle, ExternalLink } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
@@ -19,10 +19,7 @@ export default function DeleteAccountPage() {
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest('/api/account/delete-request', {
-        method: 'POST',
-        body: JSON.stringify({ confirmation: 'DELETE MY ACCOUNT' }),
-      });
+      return apiRequest('POST', '/api/account/delete-request', { confirmation: 'DELETE MY ACCOUNT' });
     },
     onSuccess: () => {
       setSubmitted(true);

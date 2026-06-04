@@ -1,0 +1,4654 @@
+[
+  {
+    "path": "client/src/components/a11y/ReducedMotionProvider.jsx",
+    "size": 3015
+  },
+  {
+    "path": "client/src/components/a11y/SkipToContent.tsx",
+    "size": 444
+  },
+  {
+    "path": "client/src/components/AccessibilityToolbar.jsx",
+    "size": 8912
+  },
+  {
+    "path": "client/src/components/AchievementBadge.jsx",
+    "size": 9817
+  },
+  {
+    "path": "client/src/components/AchievementBadges.jsx",
+    "size": 10250
+  },
+  {
+    "path": "client/src/components/AchievementSystem.jsx",
+    "size": 15860
+  },
+  {
+    "path": "client/src/components/admin/AdminNavGrid.jsx",
+    "size": 5084
+  },
+  {
+    "path": "client/src/components/admin/AdminQueryStates.jsx",
+    "size": 2480
+  },
+  {
+    "path": "client/src/components/admin/AIHealthPipeline.jsx",
+    "size": 9619
+  },
+  {
+    "path": "client/src/components/admin/AIKnowledgeBaseSummary.jsx",
+    "size": 9013
+  },
+  {
+    "path": "client/src/components/admin/AIKnowledgeHub.jsx",
+    "size": 8324
+  },
+  {
+    "path": "client/src/components/admin/ConsciousnessRegistryPanel.jsx",
+    "size": 18828
+  },
+  {
+    "path": "client/src/components/admin/DailyOpsChecklist.jsx",
+    "size": 12256
+  },
+  {
+    "path": "client/src/components/admin/DailyToolsPanel.jsx",
+    "size": 19403
+  },
+  {
+    "path": "client/src/components/admin/GroupedHealthOverview.jsx",
+    "size": 4255
+  },
+  {
+    "path": "client/src/components/admin/KernelStatusPanel.jsx",
+    "size": 1484
+  },
+  {
+    "path": "client/src/components/admin/MetricCard.jsx",
+    "size": 1080
+  },
+  {
+    "path": "client/src/components/admin/OperationsPanel.jsx",
+    "size": 32512
+  },
+  {
+    "path": "client/src/components/admin/OrchestratorTestPanel.jsx",
+    "size": 13137
+  },
+  {
+    "path": "client/src/components/admin/RecentActivityPanel.jsx",
+    "size": 2276
+  },
+  {
+    "path": "client/src/components/admin/SOPMonitorPanel.jsx",
+    "size": 16869
+  },
+  {
+    "path": "client/src/components/admin/StatusBadge.jsx",
+    "size": 841
+  },
+  {
+    "path": "client/src/components/admin/SystemHealthPanel.jsx",
+    "size": 4696
+  },
+  {
+    "path": "client/src/components/admin/SystemOptimizationAdvisor.jsx",
+    "size": 11832
+  },
+  {
+    "path": "client/src/components/admin/SystemTelemetryPanel.jsx",
+    "size": 1891
+  },
+  {
+    "path": "client/src/components/admin/Top50ProcessTracker.jsx",
+    "size": 5172
+  },
+  {
+    "path": "client/src/components/AdminGuard.jsx",
+    "size": 3435
+  },
+  {
+    "path": "client/src/components/AdvisorySection.module.css",
+    "size": 2068
+  },
+  {
+    "path": "client/src/components/AffirmationCards.jsx",
+    "size": 13545
+  },
+  {
+    "path": "client/src/components/AffirmationDeck.jsx",
+    "size": 9879
+  },
+  {
+    "path": "client/src/components/AgeConfirmationModal.tsx",
+    "size": 6527
+  },
+  {
+    "path": "client/src/components/AgeConsentGate.jsx",
+    "size": 7954
+  },
+  {
+    "path": "client/src/components/AIChat.jsx",
+    "size": 1775
+  },
+  {
+    "path": "client/src/components/AICompanion.jsx",
+    "size": 15566
+  },
+  {
+    "path": "client/src/components/AIWellnessConcierge.jsx",
+    "size": 12318
+  },
+  {
+    "path": "client/src/components/analytics/WritingStats.tsx",
+    "size": 2504
+  },
+  {
+    "path": "client/src/components/AngerManagement.jsx",
+    "size": 13800
+  },
+  {
+    "path": "client/src/components/AnimatedPageTransition.jsx",
+    "size": 2691
+  },
+  {
+    "path": "client/src/components/AnxietyRelief.jsx",
+    "size": 16295
+  },
+  {
+    "path": "client/src/components/App.tsx",
+    "size": 1671
+  },
+  {
+    "path": "client/src/components/atlas/PhilosophicalAtlas.d.ts",
+    "size": 88
+  },
+  {
+    "path": "client/src/components/atlas/PhilosophicalAtlas.jsx",
+    "size": 8962
+  },
+  {
+    "path": "client/src/components/attention/AttentionEcology.d.ts",
+    "size": 84
+  },
+  {
+    "path": "client/src/components/attention/AttentionEcology.jsx",
+    "size": 11471
+  },
+  {
+    "path": "client/src/components/autodidact/AutodidactForge.tsx",
+    "size": 13679
+  },
+  {
+    "path": "client/src/components/avatar/BuddyAvatar.css",
+    "size": 24703
+  },
+  {
+    "path": "client/src/components/avatar/BuddyAvatar.tsx",
+    "size": 19759
+  },
+  {
+    "path": "client/src/components/avatar/BuddyPanel.tsx",
+    "size": 9280
+  },
+  {
+    "path": "client/src/components/Badges.jsx",
+    "size": 8311
+  },
+  {
+    "path": "client/src/components/beliefs/BeliefMapper.tsx",
+    "size": 5418
+  },
+  {
+    "path": "client/src/components/benefits/BeforeAfter.jsx",
+    "size": 3735
+  },
+  {
+    "path": "client/src/components/benefits/BenefitBlock.tsx",
+    "size": 1229
+  },
+  {
+    "path": "client/src/components/benefits/BenefitsStrip.jsx",
+    "size": 4374
+  },
+  {
+    "path": "client/src/components/benefits/index.js",
+    "size": 226
+  },
+  {
+    "path": "client/src/components/benefits/TrustSignals.jsx",
+    "size": 4346
+  },
+  {
+    "path": "client/src/components/BenefitsBlock.d.ts",
+    "size": 424
+  },
+  {
+    "path": "client/src/components/BenefitsBlock.jsx",
+    "size": 6617
+  },
+  {
+    "path": "client/src/components/BenefitsSection.jsx",
+    "size": 8744
+  },
+  {
+    "path": "client/src/components/BenefitStrip.tsx",
+    "size": 456
+  },
+  {
+    "path": "client/src/components/bias/BiasBlindSpots.tsx",
+    "size": 9851
+  },
+  {
+    "path": "client/src/components/BodyScanMeditation.jsx",
+    "size": 9849
+  },
+  {
+    "path": "client/src/components/BoundaryBuilder.jsx",
+    "size": 12019
+  },
+  {
+    "path": "client/src/components/brand/BrandLogo.jsx",
+    "size": 2344
+  },
+  {
+    "path": "client/src/components/BrandGlow.tsx",
+    "size": 1600
+  },
+  {
+    "path": "client/src/components/BrandHero.tsx",
+    "size": 1577
+  },
+  {
+    "path": "client/src/components/BrandLogo.tsx",
+    "size": 1577
+  },
+  {
+    "path": "client/src/components/BrandShell.jsx",
+    "size": 3401
+  },
+  {
+    "path": "client/src/components/Breadcrumbs.jsx",
+    "size": 1931
+  },
+  {
+    "path": "client/src/components/BreathingExercise.jsx",
+    "size": 10572
+  },
+  {
+    "path": "client/src/components/CBTThoughtDiary.jsx",
+    "size": 19779
+  },
+  {
+    "path": "client/src/components/CelebrationOverlay.tsx",
+    "size": 5126
+  },
+  {
+    "path": "client/src/components/charts/MoodPieChart.jsx",
+    "size": 5830
+  },
+  {
+    "path": "client/src/components/charts/MoodTrendsChartJS.jsx",
+    "size": 7104
+  },
+  {
+    "path": "client/src/components/chat/AIChatPanel.tsx",
+    "size": 9384
+  },
+  {
+    "path": "client/src/components/ChatWidget.tsx",
+    "size": 5885
+  },
+  {
+    "path": "client/src/components/CodeCopilotPanel.tsx",
+    "size": 4416
+  },
+  {
+    "path": "client/src/components/community/CommunityBoundary.tsx",
+    "size": 1581
+  },
+  {
+    "path": "client/src/components/community/SharedReflections.tsx",
+    "size": 897
+  },
+  {
+    "path": "client/src/components/consciousness/QuestionReflection.tsx",
+    "size": 4795
+  },
+  {
+    "path": "client/src/components/consciousness/SilenceMode.tsx",
+    "size": 2575
+  },
+  {
+    "path": "client/src/components/ConsentBanner.jsx",
+    "size": 6362
+  },
+  {
+    "path": "client/src/components/content/ClarityCard.d.ts",
+    "size": 269
+  },
+  {
+    "path": "client/src/components/content/ClarityCard.jsx",
+    "size": 7664
+  },
+  {
+    "path": "client/src/components/content/ContentTierCompiler.jsx",
+    "size": 2532
+  },
+  {
+    "path": "client/src/components/content/ExamplesAccordion.d.ts",
+    "size": 290
+  },
+  {
+    "path": "client/src/components/content/ExamplesAccordion.jsx",
+    "size": 4443
+  },
+  {
+    "path": "client/src/components/content/GlossaryTerm.jsx",
+    "size": 3318
+  },
+  {
+    "path": "client/src/components/content/WhatNextRecommender.jsx",
+    "size": 2720
+  },
+  {
+    "path": "client/src/components/ContentLevelToggle.jsx",
+    "size": 4522
+  },
+  {
+    "path": "client/src/components/ContentLevelToggle.module.css",
+    "size": 6689
+  },
+  {
+    "path": "client/src/components/ContentStudio.jsx",
+    "size": 48998
+  },
+  {
+    "path": "client/src/components/ContentStudio.module.css",
+    "size": 11463
+  },
+  {
+    "path": "client/src/components/CopingStrategies.jsx",
+    "size": 16134
+  },
+  {
+    "path": "client/src/components/creative/CreativeProblemSolver.d.ts",
+    "size": 94
+  },
+  {
+    "path": "client/src/components/creative/CreativeProblemSolver.jsx",
+    "size": 12208
+  },
+  {
+    "path": "client/src/components/CreativeExpression.jsx",
+    "size": 14250
+  },
+  {
+    "path": "client/src/components/CrisisStabilizer.jsx",
+    "size": 13647
+  },
+  {
+    "path": "client/src/components/DailyAffirmations.jsx",
+    "size": 11990
+  },
+  {
+    "path": "client/src/components/DailyInsight.jsx",
+    "size": 804
+  },
+  {
+    "path": "client/src/components/DailyWellnessPlanner.jsx",
+    "size": 12784
+  },
+  {
+    "path": "client/src/components/dashboard/WeeklyRecap.jsx",
+    "size": 4557
+  },
+  {
+    "path": "client/src/components/DashboardCard.jsx",
+    "size": 2846
+  },
+  {
+    "path": "client/src/components/DataExportButton.jsx",
+    "size": 4651
+  },
+  {
+    "path": "client/src/components/decision/DecisionArchitecture.d.ts",
+    "size": 92
+  },
+  {
+    "path": "client/src/components/decision/DecisionArchitecture.jsx",
+    "size": 14476
+  },
+  {
+    "path": "client/src/components/DigitalDetox.jsx",
+    "size": 11628
+  },
+  {
+    "path": "client/src/components/disclaimers/PlatformDisclaimer.tsx",
+    "size": 2722
+  },
+  {
+    "path": "client/src/components/discovery/getRelatedTools.js",
+    "size": 450
+  },
+  {
+    "path": "client/src/components/discovery/ToolCard.jsx",
+    "size": 894
+  },
+  {
+    "path": "client/src/components/EmotionAdaptiveBackground.jsx",
+    "size": 6054
+  },
+  {
+    "path": "client/src/components/EmotionalIntelligenceQuiz.jsx",
+    "size": 14642
+  },
+  {
+    "path": "client/src/components/EmotionAuraRing.jsx",
+    "size": 5068
+  },
+  {
+    "path": "client/src/components/EmotionBackgroundProvider.jsx",
+    "size": 759
+  },
+  {
+    "path": "client/src/components/EmotionCalendar.jsx",
+    "size": 12173
+  },
+  {
+    "path": "client/src/components/EmotionLog.jsx",
+    "size": 6326
+  },
+  {
+    "path": "client/src/components/EmotionPieChart.jsx",
+    "size": 4630
+  },
+  {
+    "path": "client/src/components/EmotionWheel.jsx",
+    "size": 12544
+  },
+  {
+    "path": "client/src/components/EmptyState.jsx",
+    "size": 5060
+  },
+  {
+    "path": "client/src/components/EnergyBooster.jsx",
+    "size": 11761
+  },
+  {
+    "path": "client/src/components/epistemic/EpistemicCalibration.tsx",
+    "size": 13637
+  },
+  {
+    "path": "client/src/components/ErrorBoundary.jsx",
+    "size": 6881
+  },
+  {
+    "path": "client/src/components/existential/ExistentialInquiry.tsx",
+    "size": 6718
+  },
+  {
+    "path": "client/src/components/export/ExportPanel.tsx",
+    "size": 2593
+  },
+  {
+    "path": "client/src/components/FeedbackPrompt.tsx",
+    "size": 5313
+  },
+  {
+    "path": "client/src/components/FeedbackWidget.jsx",
+    "size": 8652
+  },
+  {
+    "path": "client/src/components/figma/FigmaPanel.tsx",
+    "size": 609
+  },
+  {
+    "path": "client/src/components/flow/TimedSession.tsx",
+    "size": 4219
+  },
+  {
+    "path": "client/src/components/FlowDiagram.jsx",
+    "size": 9607
+  },
+  {
+    "path": "client/src/components/FocusTimer.jsx",
+    "size": 13968
+  },
+  {
+    "path": "client/src/components/Footer.jsx",
+    "size": 6463
+  },
+  {
+    "path": "client/src/components/frameworks/FrameworkExplorer.tsx",
+    "size": 6541
+  },
+  {
+    "path": "client/src/components/GlobalSearch.jsx",
+    "size": 8919
+  },
+  {
+    "path": "client/src/components/GlowFooter.jsx",
+    "size": 5211
+  },
+  {
+    "path": "client/src/components/GlowingCard.jsx",
+    "size": 3856
+  },
+  {
+    "path": "client/src/components/GoalProgress.jsx",
+    "size": 15738
+  },
+  {
+    "path": "client/src/components/GratitudeJar.jsx",
+    "size": 14867
+  },
+  {
+    "path": "client/src/components/GratitudePrompt.jsx",
+    "size": 7547
+  },
+  {
+    "path": "client/src/components/growth/GrowthTimeline.tsx",
+    "size": 6502
+  },
+  {
+    "path": "client/src/components/GrowthCTA.tsx",
+    "size": 524
+  },
+  {
+    "path": "client/src/components/GuardianHeartPanel.tsx",
+    "size": 2542
+  },
+  {
+    "path": "client/src/components/guards/FeatureGuard.jsx",
+    "size": 515
+  },
+  {
+    "path": "client/src/components/HabitTracker.jsx",
+    "size": 11523
+  },
+  {
+    "path": "client/src/components/Header.jsx",
+    "size": 3694
+  },
+  {
+    "path": "client/src/components/HealingChat.tsx",
+    "size": 655
+  },
+  {
+    "path": "client/src/components/HealingHero.jsx",
+    "size": 11806
+  },
+  {
+    "path": "client/src/components/HealingJourneys.jsx",
+    "size": 17531
+  },
+  {
+    "path": "client/src/components/HeroSection.jsx",
+    "size": 1383
+  },
+  {
+    "path": "client/src/components/HydrationTracker.jsx",
+    "size": 14009
+  },
+  {
+    "path": "client/src/components/inquiry/DialecticalInquiry.tsx",
+    "size": 7381
+  },
+  {
+    "path": "client/src/components/insights/InsightCards.tsx",
+    "size": 2230
+  },
+  {
+    "path": "client/src/components/insights/TodaysInsight.jsx",
+    "size": 1060
+  },
+  {
+    "path": "client/src/components/JournalAI.jsx",
+    "size": 7190
+  },
+  {
+    "path": "client/src/components/JournalInsights.jsx",
+    "size": 10533
+  },
+  {
+    "path": "client/src/components/journey/JourneyComposer.tsx",
+    "size": 10396
+  },
+  {
+    "path": "client/src/components/KeyboardShortcuts.jsx",
+    "size": 3361
+  },
+  {
+    "path": "client/src/components/KnowledgeBase.jsx",
+    "size": 2372
+  },
+  {
+    "path": "client/src/components/landing/Hero.tsx",
+    "size": 1168
+  },
+  {
+    "path": "client/src/components/LaughterTherapy.jsx",
+    "size": 12712
+  },
+  {
+    "path": "client/src/components/layout/AppShell.tsx",
+    "size": 1811
+  },
+  {
+    "path": "client/src/components/layout/Footer.tsx",
+    "size": 8458
+  },
+  {
+    "path": "client/src/components/layout/Header.jsx",
+    "size": 11595
+  },
+  {
+    "path": "client/src/components/layout/PageLayout.jsx",
+    "size": 1983
+  },
+  {
+    "path": "client/src/components/layout/PageScaffold.tsx",
+    "size": 2642
+  },
+  {
+    "path": "client/src/components/LazyImage.jsx",
+    "size": 2971
+  },
+  {
+    "path": "client/src/components/legal/ContentCredit.jsx",
+    "size": 694
+  },
+  {
+    "path": "client/src/components/legal/EthicsSafetyBlock.tsx",
+    "size": 1875
+  },
+  {
+    "path": "client/src/components/LevelUpModal.jsx",
+    "size": 3463
+  },
+  {
+    "path": "client/src/components/LiveRegion.jsx",
+    "size": 2184
+  },
+  {
+    "path": "client/src/components/LoadingSpinner.tsx",
+    "size": 2249
+  },
+  {
+    "path": "client/src/components/logic/LogicLatticeLab.tsx",
+    "size": 9356
+  },
+  {
+    "path": "client/src/components/LotusGuide.jsx",
+    "size": 9479
+  },
+  {
+    "path": "client/src/components/lumi/FloatIdleAnimated.css",
+    "size": 17182
+  },
+  {
+    "path": "client/src/components/lumi/FloatIdleAnimated.jsx",
+    "size": 13519
+  },
+  {
+    "path": "client/src/components/lumi/FloatIdleRig.css",
+    "size": 2297
+  },
+  {
+    "path": "client/src/components/lumi/FloatIdleRig.jsx",
+    "size": 10288
+  },
+  {
+    "path": "client/src/components/lumi/LumiAccessibleWrapper.jsx",
+    "size": 5805
+  },
+  {
+    "path": "client/src/components/lumi/LumiBrandLockupImage.jsx",
+    "size": 1549
+  },
+  {
+    "path": "client/src/components/lumi/LumiBrandLogo.jsx",
+    "size": 3717
+  },
+  {
+    "path": "client/src/components/lumi/LumiCompanion.jsx",
+    "size": 12014
+  },
+  {
+    "path": "client/src/components/lumi/LumiCustomizer.jsx",
+    "size": 10301
+  },
+  {
+    "path": "client/src/components/lumi/LumiCustomizerTrigger.jsx",
+    "size": 1716
+  },
+  {
+    "path": "client/src/components/lumi/LumiMascot.css",
+    "size": 15706
+  },
+  {
+    "path": "client/src/components/lumi/LumiMascot.jsx",
+    "size": 3978
+  },
+  {
+    "path": "client/src/components/lumi/LumiMascotImage.jsx",
+    "size": 2014
+  },
+  {
+    "path": "client/src/components/lumi/LumiV6.css",
+    "size": 35221
+  },
+  {
+    "path": "client/src/components/lumi/LumiV6.tsx",
+    "size": 44940
+  },
+  {
+    "path": "client/src/components/lumi/LumiV7.css",
+    "size": 9463
+  },
+  {
+    "path": "client/src/components/lumi/LumiV7.jsx",
+    "size": 13470
+  },
+  {
+    "path": "client/src/components/lumi/TGLPMandala.jsx",
+    "size": 1007
+  },
+  {
+    "path": "client/src/components/lumi/TGLPMandalaImage.jsx",
+    "size": 1121
+  },
+  {
+    "path": "client/src/components/marketing/BenefitsBlock.tsx",
+    "size": 1621
+  },
+  {
+    "path": "client/src/components/marketing/EmailCapture.jsx",
+    "size": 3583
+  },
+  {
+    "path": "client/src/components/mastery/DeepWorkTracker.tsx",
+    "size": 9330
+  },
+  {
+    "path": "client/src/components/mastery/MentalModelsLibrary.tsx",
+    "size": 11172
+  },
+  {
+    "path": "client/src/components/mastery/SkillForge.tsx",
+    "size": 14211
+  },
+  {
+    "path": "client/src/components/MeditationTimer.jsx",
+    "size": 12094
+  },
+  {
+    "path": "client/src/components/metacognition/MetacognitionDashboard.tsx",
+    "size": 11680
+  },
+  {
+    "path": "client/src/components/metacognition/MetaCognitionStudio.tsx",
+    "size": 13624
+  },
+  {
+    "path": "client/src/components/methods/index.js",
+    "size": 160
+  },
+  {
+    "path": "client/src/components/methods/MITile.jsx",
+    "size": 5135
+  },
+  {
+    "path": "client/src/components/methods/NLPTile.jsx",
+    "size": 6516
+  },
+  {
+    "path": "client/src/components/methods/StrengthsPIETile.jsx",
+    "size": 6115
+  },
+  {
+    "path": "client/src/components/mi/index.ts",
+    "size": 717
+  },
+  {
+    "path": "client/src/components/mi/MicroCommitmentEngine.tsx",
+    "size": 6664
+  },
+  {
+    "path": "client/src/components/mi/MIPromptCard.tsx",
+    "size": 4429
+  },
+  {
+    "path": "client/src/components/mi/MITools.tsx",
+    "size": 12163
+  },
+  {
+    "path": "client/src/components/mi/ReadinessScale.tsx",
+    "size": 4789
+  },
+  {
+    "path": "client/src/components/mi/ReframingToolkit.tsx",
+    "size": 7751
+  },
+  {
+    "path": "client/src/components/Microcopy.jsx",
+    "size": 1545
+  },
+  {
+    "path": "client/src/components/MicroWinPrompt.jsx",
+    "size": 11458
+  },
+  {
+    "path": "client/src/components/MilestoneTracker.jsx",
+    "size": 3530
+  },
+  {
+    "path": "client/src/components/MindfulBreathing.jsx",
+    "size": 14518
+  },
+  {
+    "path": "client/src/components/MindfulEating.jsx",
+    "size": 14228
+  },
+  {
+    "path": "client/src/components/MindfulnessBell.jsx",
+    "size": 12052
+  },
+  {
+    "path": "client/src/components/MindfulnessChallenges.jsx",
+    "size": 13669
+  },
+  {
+    "path": "client/src/components/MindfulWalking.jsx",
+    "size": 17690
+  },
+  {
+    "path": "client/src/components/mindscape/MindscapeNavigator.tsx",
+    "size": 12637
+  },
+  {
+    "path": "client/src/components/MIQuickPrompt.tsx",
+    "size": 394
+  },
+  {
+    "path": "client/src/components/ModeToggle.jsx",
+    "size": 4088
+  },
+  {
+    "path": "client/src/components/modules/ModulesPanel.tsx",
+    "size": 10164
+  },
+  {
+    "path": "client/src/components/MoodHistoryChart.jsx",
+    "size": 4497
+  },
+  {
+    "path": "client/src/components/MoodInsight.jsx",
+    "size": 8847
+  },
+  {
+    "path": "client/src/components/MoodMeter.jsx",
+    "size": 4260
+  },
+  {
+    "path": "client/src/components/MoodResponder.jsx",
+    "size": 8031
+  },
+  {
+    "path": "client/src/components/MoodTrendsChart.jsx",
+    "size": 7442
+  },
+  {
+    "path": "client/src/components/MoodVisualizer.jsx",
+    "size": 12015
+  },
+  {
+    "path": "client/src/components/moral/MoralReasoningLab.tsx",
+    "size": 8590
+  },
+  {
+    "path": "client/src/components/MorningEveningRituals.jsx",
+    "size": 11828
+  },
+  {
+    "path": "client/src/components/MotivationBooster.jsx",
+    "size": 12727
+  },
+  {
+    "path": "client/src/components/narrative/NarrativeIdentityStudio.tsx",
+    "size": 8508
+  },
+  {
+    "path": "client/src/components/navigation/CanonicalNavbar.jsx",
+    "size": 3152
+  },
+  {
+    "path": "client/src/components/NewsletterSignup.jsx",
+    "size": 5862
+  },
+  {
+    "path": "client/src/components/NotificationCenter.jsx",
+    "size": 10474
+  },
+  {
+    "path": "client/src/components/ObjectUploader.jsx",
+    "size": 6293
+  },
+  {
+    "path": "client/src/components/ObjectUploaderUppy.tsx",
+    "size": 3327
+  },
+  {
+    "path": "client/src/components/OfflineIndicator.jsx",
+    "size": 1511
+  },
+  {
+    "path": "client/src/components/OnboardingFlow.jsx",
+    "size": 3794
+  },
+  {
+    "path": "client/src/components/PageScaffold.d.ts",
+    "size": 358
+  },
+  {
+    "path": "client/src/components/PageScaffold.jsx",
+    "size": 103
+  },
+  {
+    "path": "client/src/components/PageTemplate.*",
+    "size": 388
+  },
+  {
+    "path": "client/src/components/PageTemplate.jsx",
+    "size": 38708
+  },
+  {
+    "path": "client/src/components/PageTemplate.module.css",
+    "size": 46324
+  },
+  {
+    "path": "client/src/components/PageTransition.jsx",
+    "size": 655
+  },
+  {
+    "path": "client/src/components/paradox/ParadoxCartographer.tsx",
+    "size": 12436
+  },
+  {
+    "path": "client/src/components/patterns/InsightPatternLab.tsx",
+    "size": 7644
+  },
+  {
+    "path": "client/src/components/patterns/PatternInsights.tsx",
+    "size": 4585
+  },
+  {
+    "path": "client/src/components/peacescape/CustomizerPanel.jsx",
+    "size": 11590
+  },
+  {
+    "path": "client/src/components/peacescape/InteractiveBuddy.jsx",
+    "size": 3427
+  },
+  {
+    "path": "client/src/components/PersistentDisclaimer.jsx",
+    "size": 5618
+  },
+  {
+    "path": "client/src/components/personalization/ToolRecommendations.jsx",
+    "size": 4980
+  },
+  {
+    "path": "client/src/components/PlanGate.jsx",
+    "size": 3511
+  },
+  {
+    "path": "client/src/components/PositiveReframing.jsx",
+    "size": 11532
+  },
+  {
+    "path": "client/src/components/PositiveVisualization.jsx",
+    "size": 13781
+  },
+  {
+    "path": "client/src/components/PowerNap.jsx",
+    "size": 16788
+  },
+  {
+    "path": "client/src/components/progress/TinyStepPanel.jsx",
+    "size": 2096
+  },
+  {
+    "path": "client/src/components/ProgressAnalytics.jsx",
+    "size": 11936
+  },
+  {
+    "path": "client/src/components/ProgressiveMuscleRelaxation.jsx",
+    "size": 10786
+  },
+  {
+    "path": "client/src/components/ProgressRing.jsx",
+    "size": 7999
+  },
+  {
+    "path": "client/src/components/ProgressTracker.jsx",
+    "size": 10971
+  },
+  {
+    "path": "client/src/components/PromptCard.tsx",
+    "size": 221
+  },
+  {
+    "path": "client/src/components/ProtectedRoute.jsx",
+    "size": 890
+  },
+  {
+    "path": "client/src/components/publishing/NewsletterInvite.jsx",
+    "size": 5078
+  },
+  {
+    "path": "client/src/components/publishing/PublishingCtaBar.jsx",
+    "size": 2587
+  },
+  {
+    "path": "client/src/components/publishing/SoftUpgradeCTA.jsx",
+    "size": 2579
+  },
+  {
+    "path": "client/src/components/QuestPanel.jsx",
+    "size": 10810
+  },
+  {
+    "path": "client/src/components/ReadingLevelToggle.jsx",
+    "size": 2258
+  },
+  {
+    "path": "client/src/components/ReadingLevelToggle.module.css",
+    "size": 2206
+  },
+  {
+    "path": "client/src/components/referral/index.js",
+    "size": 62
+  },
+  {
+    "path": "client/src/components/referral/ReferralInvite.jsx",
+    "size": 4342
+  },
+  {
+    "path": "client/src/components/ReflectionCardExport.jsx",
+    "size": 14187
+  },
+  {
+    "path": "client/src/components/ReflectionInsights.jsx",
+    "size": 13808
+  },
+  {
+    "path": "client/src/components/RelatedLinksBlock.tsx",
+    "size": 1304
+  },
+  {
+    "path": "client/src/components/RelatedNextSteps.jsx",
+    "size": 1925
+  },
+  {
+    "path": "client/src/components/ReminderScheduler.jsx",
+    "size": 11199
+  },
+  {
+    "path": "client/src/components/ReminderSettings.jsx",
+    "size": 9748
+  },
+  {
+    "path": "client/src/components/ResilienceStories.jsx",
+    "size": 15828
+  },
+  {
+    "path": "client/src/components/ResponsiveWrapper.jsx",
+    "size": 3615
+  },
+  {
+    "path": "client/src/components/ReturnLoop.jsx",
+    "size": 12113
+  },
+  {
+    "path": "client/src/components/RouteGuard.jsx",
+    "size": 1646
+  },
+  {
+    "path": "client/src/components/sacred/EmotionBackground.jsx",
+    "size": 3307
+  },
+  {
+    "path": "client/src/components/sacred/EmotionCharts.jsx",
+    "size": 7216
+  },
+  {
+    "path": "client/src/components/sacred/Hero.jsx",
+    "size": 5110
+  },
+  {
+    "path": "client/src/components/sacred/Hero.module.css",
+    "size": 4873
+  },
+  {
+    "path": "client/src/components/sacred/index.js",
+    "size": 551
+  },
+  {
+    "path": "client/src/components/sacred/Layout.module.css",
+    "size": 1487
+  },
+  {
+    "path": "client/src/components/sacred/LotusGuide.jsx",
+    "size": 12515
+  },
+  {
+    "path": "client/src/components/sacred/PlatformComponent.jsx",
+    "size": 2140
+  },
+  {
+    "path": "client/src/components/sacred/PlatformComponent.module.css",
+    "size": 2340
+  },
+  {
+    "path": "client/src/components/sacred/ProgressTracker.jsx",
+    "size": 7614
+  },
+  {
+    "path": "client/src/components/sacred/SacredBackground.jsx",
+    "size": 6186
+  },
+  {
+    "path": "client/src/components/sacred/SacredButton.jsx",
+    "size": 3352
+  },
+  {
+    "path": "client/src/components/sacred/SacredButton.module.css",
+    "size": 2577
+  },
+  {
+    "path": "client/src/components/sacred/SacredFooter.jsx",
+    "size": 8786
+  },
+  {
+    "path": "client/src/components/sacred/SacredFooter.module.css",
+    "size": 3688
+  },
+  {
+    "path": "client/src/components/sacred/SacredHero.jsx",
+    "size": 2086
+  },
+  {
+    "path": "client/src/components/sacred/SacredLayout.jsx",
+    "size": 1691
+  },
+  {
+    "path": "client/src/components/sacred/SacredSection.jsx",
+    "size": 2139
+  },
+  {
+    "path": "client/src/components/sacred/SacredSection.module.css",
+    "size": 2668
+  },
+  {
+    "path": "client/src/components/SacredBackground.css",
+    "size": 626
+  },
+  {
+    "path": "client/src/components/SacredBackground.jsx",
+    "size": 864
+  },
+  {
+    "path": "client/src/components/SacredFooter.jsx",
+    "size": 8844
+  },
+  {
+    "path": "client/src/components/SacredForm.jsx",
+    "size": 4813
+  },
+  {
+    "path": "client/src/components/SacredForm.module.css",
+    "size": 5135
+  },
+  {
+    "path": "client/src/components/SacredGeometryBg.jsx",
+    "size": 8861
+  },
+  {
+    "path": "client/src/components/SacredNav.jsx",
+    "size": 8704
+  },
+  {
+    "path": "client/src/components/SacredPattern.jsx",
+    "size": 3833
+  },
+  {
+    "path": "client/src/components/SacredQuote.jsx",
+    "size": 8065
+  },
+  {
+    "path": "client/src/components/SafeBoundary.jsx",
+    "size": 3517
+  },
+  {
+    "path": "client/src/components/safety/LegalFooter.tsx",
+    "size": 2237
+  },
+  {
+    "path": "client/src/components/safety/SafetyFooterStrip.tsx",
+    "size": 896
+  },
+  {
+    "path": "client/src/components/SafetyDisclaimer.jsx",
+    "size": 3342
+  },
+  {
+    "path": "client/src/components/SafetyDisclaimer.module.css",
+    "size": 2738
+  },
+  {
+    "path": "client/src/components/SafetyFooter.d.ts",
+    "size": 373
+  },
+  {
+    "path": "client/src/components/SafetyFooter.jsx",
+    "size": 3155
+  },
+  {
+    "path": "client/src/components/saves/SaveButton.jsx",
+    "size": 821
+  },
+  {
+    "path": "client/src/components/search/RouteSearchBox.jsx",
+    "size": 2828
+  },
+  {
+    "path": "client/src/components/SelfCareBingo.jsx",
+    "size": 12478
+  },
+  {
+    "path": "client/src/components/SelfCareChecklist.jsx",
+    "size": 11424
+  },
+  {
+    "path": "client/src/components/SelfCompassion.jsx",
+    "size": 12191
+  },
+  {
+    "path": "client/src/components/semantic/SemanticMapping.tsx",
+    "size": 11842
+  },
+  {
+    "path": "client/src/components/SEO.tsx",
+    "size": 4233
+  },
+  {
+    "path": "client/src/components/seo/PageSEO.jsx",
+    "size": 1279
+  },
+  {
+    "path": "client/src/components/seo/SEO.tsx",
+    "size": 202
+  },
+  {
+    "path": "client/src/components/SessionTimeout.jsx",
+    "size": 3574
+  },
+  {
+    "path": "client/src/components/share/IdentityMirror.jsx",
+    "size": 3783
+  },
+  {
+    "path": "client/src/components/share/index.js",
+    "size": 384
+  },
+  {
+    "path": "client/src/components/share/InfinityHeartCard.jsx",
+    "size": 5182
+  },
+  {
+    "path": "client/src/components/share/ReflectionCard.jsx",
+    "size": 5032
+  },
+  {
+    "path": "client/src/components/share/ShareCardPrompt.tsx",
+    "size": 9309
+  },
+  {
+    "path": "client/src/components/share/ShareModal.jsx",
+    "size": 4569
+  },
+  {
+    "path": "client/src/components/share/StreakShare.jsx",
+    "size": 5497
+  },
+  {
+    "path": "client/src/components/ShareableReflectionCard.jsx",
+    "size": 7059
+  },
+  {
+    "path": "client/src/components/SharedEntryCard.jsx",
+    "size": 6630
+  },
+  {
+    "path": "client/src/components/ShareReflection.jsx",
+    "size": 9526
+  },
+  {
+    "path": "client/src/components/Skeleton.jsx",
+    "size": 6261
+  },
+  {
+    "path": "client/src/components/SkipToContent.jsx",
+    "size": 530
+  },
+  {
+    "path": "client/src/components/SleepSanctuary.jsx",
+    "size": 18256
+  },
+  {
+    "path": "client/src/components/SleepTracker.jsx",
+    "size": 12797
+  },
+  {
+    "path": "client/src/components/SocialConnection.jsx",
+    "size": 11330
+  },
+  {
+    "path": "client/src/components/SocialLinks.jsx",
+    "size": 3899
+  },
+  {
+    "path": "client/src/components/SocialShare.jsx",
+    "size": 2332
+  },
+  {
+    "path": "client/src/components/SocialShare.module.css",
+    "size": 1930
+  },
+  {
+    "path": "client/src/components/SoftLaunchBanner.jsx",
+    "size": 1836
+  },
+  {
+    "path": "client/src/components/SomaticRelease.jsx",
+    "size": 14031
+  },
+  {
+    "path": "client/src/components/SoundHealingPlayer.jsx",
+    "size": 14304
+  },
+  {
+    "path": "client/src/components/Sparkline.jsx",
+    "size": 1182
+  },
+  {
+    "path": "client/src/components/stance/PhilosophicalStanceMapper.tsx",
+    "size": 9028
+  },
+  {
+    "path": "client/src/components/StartHerePathways.jsx",
+    "size": 2687
+  },
+  {
+    "path": "client/src/components/state/index.ts",
+    "size": 56
+  },
+  {
+    "path": "client/src/components/state/StateTracker.tsx",
+    "size": 5550
+  },
+  {
+    "path": "client/src/components/StateTracker.jsx",
+    "size": 4598
+  },
+  {
+    "path": "client/src/components/StateTracker.tsx",
+    "size": 62
+  },
+  {
+    "path": "client/src/components/StreakCelebration.jsx",
+    "size": 3955
+  },
+  {
+    "path": "client/src/components/StreakCounter.jsx",
+    "size": 6428
+  },
+  {
+    "path": "client/src/components/StressMonitor.jsx",
+    "size": 13331
+  },
+  {
+    "path": "client/src/components/synthesis/SynthesisCollider.tsx",
+    "size": 12411
+  },
+  {
+    "path": "client/src/components/system/AdminErrorBoundary.jsx",
+    "size": 4123
+  },
+  {
+    "path": "client/src/components/systems/SystemsResonance.tsx",
+    "size": 12829
+  },
+  {
+    "path": "client/src/components/temporal/TemporalReflection.tsx",
+    "size": 8872
+  },
+  {
+    "path": "client/src/components/TestimonialCarousel.jsx",
+    "size": 1579
+  },
+  {
+    "path": "client/src/components/TglpNavbar.jsx",
+    "size": 18104
+  },
+  {
+    "path": "client/src/components/theme.ts",
+    "size": 888
+  },
+  {
+    "path": "client/src/components/ThemeProvider.jsx",
+    "size": 211
+  },
+  {
+    "path": "client/src/components/thought/ThoughtExperimentsLab.tsx",
+    "size": 9420
+  },
+  {
+    "path": "client/src/components/TimeOfDayBackground.jsx",
+    "size": 4464
+  },
+  {
+    "path": "client/src/components/ToolCard.tsx",
+    "size": 4156
+  },
+  {
+    "path": "client/src/components/trust/TrustPageLayout.jsx",
+    "size": 1698
+  },
+  {
+    "path": "client/src/components/trust/TrustSection.jsx",
+    "size": 1008
+  },
+  {
+    "path": "client/src/components/ui/badge.tsx",
+    "size": 1671
+  },
+  {
+    "path": "client/src/components/ui/BrandSpinner.jsx",
+    "size": 858
+  },
+  {
+    "path": "client/src/components/ui/Button.jsx",
+    "size": 1709
+  },
+  {
+    "path": "client/src/components/ui/button.tsx",
+    "size": 2151
+  },
+  {
+    "path": "client/src/components/ui/Button.tsx",
+    "size": 2151
+  },
+  {
+    "path": "client/src/components/ui/Callout.jsx",
+    "size": 1505
+  },
+  {
+    "path": "client/src/components/ui/CalmModeToggle.jsx",
+    "size": 2417
+  },
+  {
+    "path": "client/src/components/ui/Card.jsx",
+    "size": 3874
+  },
+  {
+    "path": "client/src/components/ui/card.tsx",
+    "size": 24
+  },
+  {
+    "path": "client/src/components/ui/Card.tsx",
+    "size": 2299
+  },
+  {
+    "path": "client/src/components/ui/CRMWidgets.jsx",
+    "size": 13249
+  },
+  {
+    "path": "client/src/components/ui/dropdown-menu.tsx",
+    "size": 6102
+  },
+  {
+    "path": "client/src/components/ui/EmptyState.jsx",
+    "size": 2915
+  },
+  {
+    "path": "client/src/components/ui/EvidenceNote.jsx",
+    "size": 815
+  },
+  {
+    "path": "client/src/components/ui/Footer.jsx",
+    "size": 4983
+  },
+  {
+    "path": "client/src/components/ui/Hero.d.ts",
+    "size": 310
+  },
+  {
+    "path": "client/src/components/ui/Hero.jsx",
+    "size": 2202
+  },
+  {
+    "path": "client/src/components/ui/HeroSection.jsx",
+    "size": 2187
+  },
+  {
+    "path": "client/src/components/ui/IconBadge.jsx",
+    "size": 1181
+  },
+  {
+    "path": "client/src/components/ui/index.js",
+    "size": 519
+  },
+  {
+    "path": "client/src/components/ui/input.tsx",
+    "size": 25
+  },
+  {
+    "path": "client/src/components/ui/Input.tsx",
+    "size": 904
+  },
+  {
+    "path": "client/src/components/ui/Label.jsx",
+    "size": 386
+  },
+  {
+    "path": "client/src/components/ui/label.tsx",
+    "size": 44
+  },
+  {
+    "path": "client/src/components/ui/LayoutWrapper.d.ts",
+    "size": 320
+  },
+  {
+    "path": "client/src/components/ui/LayoutWrapper.jsx",
+    "size": 2018
+  },
+  {
+    "path": "client/src/components/ui/LazyImage.jsx",
+    "size": 3170
+  },
+  {
+    "path": "client/src/components/ui/lotus-guide.svg",
+    "size": 490
+  },
+  {
+    "path": "client/src/components/ui/LotusLoader.jsx",
+    "size": 2436
+  },
+  {
+    "path": "client/src/components/ui/popover.tsx",
+    "size": 3378
+  },
+  {
+    "path": "client/src/components/ui/PrimaryButton.jsx",
+    "size": 506
+  },
+  {
+    "path": "client/src/components/ui/Quote.jsx",
+    "size": 876
+  },
+  {
+    "path": "client/src/components/ui/QuoteBlock.jsx",
+    "size": 7528
+  },
+  {
+    "path": "client/src/components/ui/ReflectionFooter.jsx",
+    "size": 4336
+  },
+  {
+    "path": "client/src/components/ui/ResourceTiles.jsx",
+    "size": 12075
+  },
+  {
+    "path": "client/src/components/ui/SacredBackground.jsx",
+    "size": 930
+  },
+  {
+    "path": "client/src/components/ui/SacredModal.jsx",
+    "size": 4096
+  },
+  {
+    "path": "client/src/components/ui/SafetyFooter.d.ts",
+    "size": 207
+  },
+  {
+    "path": "client/src/components/ui/SafetyNotice.jsx",
+    "size": 1542
+  },
+  {
+    "path": "client/src/components/ui/SectionContainer.d.ts",
+    "size": 337
+  },
+  {
+    "path": "client/src/components/ui/SectionContainer.jsx",
+    "size": 1785
+  },
+  {
+    "path": "client/src/components/ui/select.tsx",
+    "size": 8174
+  },
+  {
+    "path": "client/src/components/ui/Skeleton.jsx",
+    "size": 2222
+  },
+  {
+    "path": "client/src/components/ui/Steps.jsx",
+    "size": 1681
+  },
+  {
+    "path": "client/src/components/ui/Switch.tsx",
+    "size": 2510
+  },
+  {
+    "path": "client/src/components/ui/table.tsx",
+    "size": 2786
+  },
+  {
+    "path": "client/src/components/ui/tabs.tsx",
+    "size": 6022
+  },
+  {
+    "path": "client/src/components/ui/textarea.tsx",
+    "size": 777
+  },
+  {
+    "path": "client/src/components/ui/theme-provider.jsx",
+    "size": 1171
+  },
+  {
+    "path": "client/src/components/ui/theme.js",
+    "size": 833
+  },
+  {
+    "path": "client/src/components/ui/toast-container.tsx",
+    "size": 3148
+  },
+  {
+    "path": "client/src/components/ui/WellnessToolkit.jsx",
+    "size": 1889
+  },
+  {
+    "path": "client/src/components/ui/wellnessToolsData.js",
+    "size": 54
+  },
+  {
+    "path": "client/src/components/UpsellModal.jsx",
+    "size": 4549
+  },
+  {
+    "path": "client/src/components/values/ValuesClarification.tsx",
+    "size": 8915
+  },
+  {
+    "path": "client/src/components/ValuesExplorer.jsx",
+    "size": 13674
+  },
+  {
+    "path": "client/src/components/VirtualList.jsx",
+    "size": 3596
+  },
+  {
+    "path": "client/src/components/VoiceAffirmation.jsx",
+    "size": 6397
+  },
+  {
+    "path": "client/src/components/VoiceSettings.jsx",
+    "size": 12017
+  },
+  {
+    "path": "client/src/components/weave/KnowledgeWeaveMap.tsx",
+    "size": 11811
+  },
+  {
+    "path": "client/src/components/WeeklyRecap.jsx",
+    "size": 8383
+  },
+  {
+    "path": "client/src/components/WeeklyReflection.jsx",
+    "size": 12975
+  },
+  {
+    "path": "client/src/components/WelcomeBackBanner.jsx",
+    "size": 6944
+  },
+  {
+    "path": "client/src/components/wellness/BenefitsBlock.tsx",
+    "size": 3357
+  },
+  {
+    "path": "client/src/components/wellness/ClarityCard.tsx",
+    "size": 1125
+  },
+  {
+    "path": "client/src/components/wellness/ConsentRibbon.tsx",
+    "size": 879
+  },
+  {
+    "path": "client/src/components/wellness/ConsentStrip.tsx",
+    "size": 1361
+  },
+  {
+    "path": "client/src/components/wellness/EmotionLog.jsx",
+    "size": 11256
+  },
+  {
+    "path": "client/src/components/wellness/ExamplesAccordion.tsx",
+    "size": 1525
+  },
+  {
+    "path": "client/src/components/wellness/HealingGraph.jsx",
+    "size": 15768
+  },
+  {
+    "path": "client/src/components/wellness/JournalAI.jsx",
+    "size": 16548
+  },
+  {
+    "path": "client/src/components/wellness/MoodCalendar.jsx",
+    "size": 12238
+  },
+  {
+    "path": "client/src/components/wellness/ReflectionPrompt.tsx",
+    "size": 983
+  },
+  {
+    "path": "client/src/components/wellness/SafetyFooter.tsx",
+    "size": 1782
+  },
+  {
+    "path": "client/src/components/wellness/SofterVersionToggle.jsx",
+    "size": 4609
+  },
+  {
+    "path": "client/src/components/wellness/WeatherMoodSync.jsx",
+    "size": 12935
+  },
+  {
+    "path": "client/src/components/wellness/WellnessPageShell.d.ts",
+    "size": 299
+  },
+  {
+    "path": "client/src/components/wellness/WellnessPageShell.jsx",
+    "size": 6044
+  },
+  {
+    "path": "client/src/components/WellnessGoalTracker.jsx",
+    "size": 13736
+  },
+  {
+    "path": "client/src/components/WellnessScore.jsx",
+    "size": 7248
+  },
+  {
+    "path": "client/src/components/WellnessStreakDashboard.jsx",
+    "size": 14117
+  },
+  {
+    "path": "client/src/components/WellnessTimer.jsx",
+    "size": 11644
+  },
+  {
+    "path": "client/src/components/WellnessToolkit.jsx",
+    "size": 1985
+  },
+  {
+    "path": "client/src/components/wellnessToolsData.js",
+    "size": 371
+  },
+  {
+    "path": "client/src/components/wisdom/WisdomCard.tsx",
+    "size": 3394
+  },
+  {
+    "path": "client/src/components/WorryTimeScheduler.jsx",
+    "size": 11413
+  },
+  {
+    "path": "client/src/components/XPProgressBar.jsx",
+    "size": 6579
+  },
+  {
+    "path": "client/src/components/zen/buddy-bubble.css",
+    "size": 4001
+  },
+  {
+    "path": "client/src/components/zen/BuddyBubble.jsx",
+    "size": 8188
+  },
+  {
+    "path": "client/src/components/zen/zen-scape.css",
+    "size": 13630
+  },
+  {
+    "path": "client/src/components/zen/ZenScape.jsx",
+    "size": 5132
+  },
+  {
+    "path": "client/src/features/community/Community.tsx",
+    "size": 7067
+  },
+  {
+    "path": "client/src/features/community/DiscussionPage.jsx",
+    "size": 13058
+  },
+  {
+    "path": "client/src/features/community/SharedReflectionsPage.jsx",
+    "size": 16667
+  },
+  {
+    "path": "client/src/features/daily/DailyFlow.tsx",
+    "size": 10744
+  },
+  {
+    "path": "client/src/features/journal/JournalPage.jsx",
+    "size": 4555
+  },
+  {
+    "path": "client/src/features/journal/PromptLibrary.js",
+    "size": 940
+  },
+  {
+    "path": "client/src/features/mirror/JournalMirror.tsx",
+    "size": 5668
+  },
+  {
+    "path": "client/src/features/state/StatePage.jsx",
+    "size": 5047
+  },
+  {
+    "path": "client/src/features/today/TodayPage.jsx",
+    "size": 2534
+  },
+  {
+    "path": "client/src/pages/_autopilot.jsx",
+    "size": 2314
+  },
+  {
+    "path": "client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx",
+    "size": 19158
+  },
+  {
+    "path": "client/src/pages/_quarantine/legacy-landing/Home.jsx",
+    "size": 22944
+  },
+  {
+    "path": "client/src/pages/_quarantine/legacy-landing/LandingV2.jsx",
+    "size": 7733
+  },
+  {
+    "path": "client/src/pages/About.jsx",
+    "size": 1428
+  },
+  {
+    "path": "client/src/pages/AboutApproachPage.jsx",
+    "size": 5949
+  },
+  {
+    "path": "client/src/pages/account/Billing.jsx",
+    "size": 20877
+  },
+  {
+    "path": "client/src/pages/account/DeleteAccount.jsx",
+    "size": 7830
+  },
+  {
+    "path": "client/src/pages/account/OrderHistory.jsx",
+    "size": 5884
+  },
+  {
+    "path": "client/src/pages/account/Profile.jsx",
+    "size": 11020
+  },
+  {
+    "path": "client/src/pages/account/Security.jsx",
+    "size": 20237
+  },
+  {
+    "path": "client/src/pages/account/Sessions.jsx",
+    "size": 6529
+  },
+  {
+    "path": "client/src/pages/account/Settings.jsx",
+    "size": 13221
+  },
+  {
+    "path": "client/src/pages/account/Subscription.jsx",
+    "size": 8014
+  },
+  {
+    "path": "client/src/pages/AdaptiveCompanionPage.tsx",
+    "size": 18363
+  },
+  {
+    "path": "client/src/pages/Admin.jsx",
+    "size": 68023
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx",
+    "size": 7144
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/AIRepairCenter.jsx",
+    "size": 23626
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx",
+    "size": 21001
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx",
+    "size": 6813
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx",
+    "size": 20780
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx",
+    "size": 9226
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx",
+    "size": 11146
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/QuickDiagnostics.jsx",
+    "size": 4273
+  },
+  {
+    "path": "client/src/pages/admin/_adminToolsShared.js",
+    "size": 72441
+  },
+  {
+    "path": "client/src/pages/admin/AdminPublishing.jsx",
+    "size": 40657
+  },
+  {
+    "path": "client/src/pages/admin/AdminPublishingToday.jsx",
+    "size": 14349
+  },
+  {
+    "path": "client/src/pages/admin/AdminSocial.jsx",
+    "size": 60810
+  },
+  {
+    "path": "client/src/pages/admin/AdminTools.jsx",
+    "size": 37525
+  },
+  {
+    "path": "client/src/pages/admin/AdminUsers.jsx",
+    "size": 9121
+  },
+  {
+    "path": "client/src/pages/admin/AnalyticsDashboard.jsx",
+    "size": 8903
+  },
+  {
+    "path": "client/src/pages/admin/AuditLogExplorer.jsx",
+    "size": 9906
+  },
+  {
+    "path": "client/src/pages/admin/BillingViewer.jsx",
+    "size": 8210
+  },
+  {
+    "path": "client/src/pages/admin/CommandCenter.jsx",
+    "size": 21019
+  },
+  {
+    "path": "client/src/pages/admin/CommandCenter.module.css",
+    "size": 12812
+  },
+  {
+    "path": "client/src/pages/admin/ContentStudioAdmin.jsx",
+    "size": 12661
+  },
+  {
+    "path": "client/src/pages/admin/EngagementDashboard.jsx",
+    "size": 9867
+  },
+  {
+    "path": "client/src/pages/admin/FeatureFlags.jsx",
+    "size": 13971
+  },
+  {
+    "path": "client/src/pages/admin/FeedbackAggregator.jsx",
+    "size": 9346
+  },
+  {
+    "path": "client/src/pages/admin/HealthDashboard.jsx",
+    "size": 48154
+  },
+  {
+    "path": "client/src/pages/admin/NarrativeDrafts.jsx",
+    "size": 20039
+  },
+  {
+    "path": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+    "size": 71912
+  },
+  {
+    "path": "client/src/pages/admin/NewsletterAdmin.jsx",
+    "size": 12862
+  },
+  {
+    "path": "client/src/pages/admin/RevenueAdmin.jsx",
+    "size": 8192
+  },
+  {
+    "path": "client/src/pages/admin/RolesPermissions.jsx",
+    "size": 9284
+  },
+  {
+    "path": "client/src/pages/admin/SecurityDashboard.jsx",
+    "size": 12911
+  },
+  {
+    "path": "client/src/pages/admin/SocialAnalytics.jsx",
+    "size": 14238
+  },
+  {
+    "path": "client/src/pages/admin/SocialCalendar.jsx",
+    "size": 20268
+  },
+  {
+    "path": "client/src/pages/admin/SocialDashboard.jsx",
+    "size": 36259
+  },
+  {
+    "path": "client/src/pages/admin/SocialGenerator.jsx",
+    "size": 36307
+  },
+  {
+    "path": "client/src/pages/admin/SocialLibrary.jsx",
+    "size": 13758
+  },
+  {
+    "path": "client/src/pages/admin/SocialStudioAdmin.jsx",
+    "size": 63516
+  },
+  {
+    "path": "client/src/pages/admin/SystemAlerts.jsx",
+    "size": 10584
+  },
+  {
+    "path": "client/src/pages/AdminLogin.jsx",
+    "size": 8424
+  },
+  {
+    "path": "client/src/pages/AdvancedToolsPage.tsx",
+    "size": 12458
+  },
+  {
+    "path": "client/src/pages/AffirmationsPage.jsx",
+    "size": 27608
+  },
+  {
+    "path": "client/src/pages/AffirmationWall.jsx",
+    "size": 11778
+  },
+  {
+    "path": "client/src/pages/AgentInteraction.jsx",
+    "size": 14791
+  },
+  {
+    "path": "client/src/pages/AIChatPage.tsx",
+    "size": 1261
+  },
+  {
+    "path": "client/src/pages/AlignmentPath.jsx",
+    "size": 13183
+  },
+  {
+    "path": "client/src/pages/Analytics.jsx",
+    "size": 11665
+  },
+  {
+    "path": "client/src/pages/Anxiety.jsx",
+    "size": 1470
+  },
+  {
+    "path": "client/src/pages/AtlasDashboard.tsx",
+    "size": 23482
+  },
+  {
+    "path": "client/src/pages/AutopilotFallback.module.css",
+    "size": 1686
+  },
+  {
+    "path": "client/src/pages/AvatarLab.jsx",
+    "size": 7429
+  },
+  {
+    "path": "client/src/pages/BehaviorChangePage.jsx",
+    "size": 26720
+  },
+  {
+    "path": "client/src/pages/BehaviorChangePage.tsx",
+    "size": 15023
+  },
+  {
+    "path": "client/src/pages/BiometricDashboard.jsx",
+    "size": 15424
+  },
+  {
+    "path": "client/src/pages/Blog.jsx",
+    "size": 30501
+  },
+  {
+    "path": "client/src/pages/BlogDraftViewer.jsx",
+    "size": 6692
+  },
+  {
+    "path": "client/src/pages/BlogEditor.jsx",
+    "size": 12061
+  },
+  {
+    "path": "client/src/pages/BlogIndex.jsx",
+    "size": 9044
+  },
+  {
+    "path": "client/src/pages/BlogPost.jsx",
+    "size": 14077
+  },
+  {
+    "path": "client/src/pages/BodyWellnessPage.jsx",
+    "size": 25718
+  },
+  {
+    "path": "client/src/pages/BoundariesPage.jsx",
+    "size": 19170
+  },
+  {
+    "path": "client/src/pages/BreathingExercisesPage.jsx",
+    "size": 27782
+  },
+  {
+    "path": "client/src/pages/CalmingScenesPage.jsx",
+    "size": 16372
+  },
+  {
+    "path": "client/src/pages/CanvaLanding.jsx",
+    "size": 82658
+  },
+  {
+    "path": "client/src/pages/CelebrationFlow.jsx",
+    "size": 9706
+  },
+  {
+    "path": "client/src/pages/CelebrationRitual.jsx",
+    "size": 15195
+  },
+  {
+    "path": "client/src/pages/Challenge.jsx",
+    "size": 12376
+  },
+  {
+    "path": "client/src/pages/ChallengeDay.jsx",
+    "size": 14575
+  },
+  {
+    "path": "client/src/pages/CheckIn.jsx",
+    "size": 16747
+  },
+  {
+    "path": "client/src/pages/CognitiveArchitecturePage.tsx",
+    "size": 26523
+  },
+  {
+    "path": "client/src/pages/CognitiveToolsPage.jsx",
+    "size": 22612
+  },
+  {
+    "path": "client/src/pages/CoherenceLadderPage.jsx",
+    "size": 21944
+  },
+  {
+    "path": "client/src/pages/CollaborativeLabPage.tsx",
+    "size": 20850
+  },
+  {
+    "path": "client/src/pages/ComingSoon.jsx",
+    "size": 5119
+  },
+  {
+    "path": "client/src/pages/CommunityCircle.jsx",
+    "size": 10020
+  },
+  {
+    "path": "client/src/pages/CommunityFeed.jsx",
+    "size": 7221
+  },
+  {
+    "path": "client/src/pages/CommunityGuidelines.jsx",
+    "size": 7647
+  },
+  {
+    "path": "client/src/pages/CommunityHub.jsx",
+    "size": 7739
+  },
+  {
+    "path": "client/src/pages/CommunityPage.tsx",
+    "size": 3638
+  },
+  {
+    "path": "client/src/pages/Contact.jsx",
+    "size": 14572
+  },
+  {
+    "path": "client/src/pages/ContentAdminDashboard.jsx",
+    "size": 27951
+  },
+  {
+    "path": "client/src/pages/ContentIndexPage.jsx",
+    "size": 26221
+  },
+  {
+    "path": "client/src/pages/ContentStudioPage.module.css",
+    "size": 4482
+  },
+  {
+    "path": "client/src/pages/ContentStudioPage.tsx",
+    "size": 17727
+  },
+  {
+    "path": "client/src/pages/ControlDashboard.jsx",
+    "size": 40360
+  },
+  {
+    "path": "client/src/pages/CourseCatalog.jsx",
+    "size": 14409
+  },
+  {
+    "path": "client/src/pages/CreatorProfile.jsx",
+    "size": 6363
+  },
+  {
+    "path": "client/src/pages/CrisisResources.jsx",
+    "size": 14310
+  },
+  {
+    "path": "client/src/pages/CRMPage.jsx",
+    "size": 16540
+  },
+  {
+    "path": "client/src/pages/DailyPracticePage.jsx",
+    "size": 13374
+  },
+  {
+    "path": "client/src/pages/DailyReflection.jsx",
+    "size": 13116
+  },
+  {
+    "path": "client/src/pages/DailyRitualPage.tsx",
+    "size": 21531
+  },
+  {
+    "path": "client/src/pages/DailyRoutinesPage.jsx",
+    "size": 21473
+  },
+  {
+    "path": "client/src/pages/DailyWisdomOraclePage.tsx",
+    "size": 18298
+  },
+  {
+    "path": "client/src/pages/Dashboard.jsx",
+    "size": 33715
+  },
+  {
+    "path": "client/src/pages/dashboard/Insights.tsx",
+    "size": 9614
+  },
+  {
+    "path": "client/src/pages/dashboard/Journal.jsx",
+    "size": 16421
+  },
+  {
+    "path": "client/src/pages/dashboard/MoodTracker.jsx",
+    "size": 13003
+  },
+  {
+    "path": "client/src/pages/dashboard/Overview.jsx",
+    "size": 17332
+  },
+  {
+    "path": "client/src/pages/dashboard/Overview.module.css",
+    "size": 11244
+  },
+  {
+    "path": "client/src/pages/dashboard/ProgressDashboard.jsx",
+    "size": 2817
+  },
+  {
+    "path": "client/src/pages/DataRetention.jsx",
+    "size": 7078
+  },
+  {
+    "path": "client/src/pages/Depression.jsx",
+    "size": 1484
+  },
+  {
+    "path": "client/src/pages/DesignDashboard.jsx",
+    "size": 9470
+  },
+  {
+    "path": "client/src/pages/DesignSystem.jsx",
+    "size": 82964
+  },
+  {
+    "path": "client/src/pages/DesignSystemV2.jsx",
+    "size": 28123
+  },
+  {
+    "path": "client/src/pages/DiscernmentDashboard.jsx",
+    "size": 26910
+  },
+  {
+    "path": "client/src/pages/Disclaimer.tsx",
+    "size": 5812
+  },
+  {
+    "path": "client/src/pages/discovery/DiscoveryPage.jsx",
+    "size": 1542
+  },
+  {
+    "path": "client/src/pages/EliteToolsDashboard.tsx",
+    "size": 12789
+  },
+  {
+    "path": "client/src/pages/EmotionalIntelligencePage.jsx",
+    "size": 19214
+  },
+  {
+    "path": "client/src/pages/ExamplesPage.jsx",
+    "size": 16869
+  },
+  {
+    "path": "client/src/pages/FAQPage.jsx",
+    "size": 12598
+  },
+  {
+    "path": "client/src/pages/Features.jsx",
+    "size": 1465
+  },
+  {
+    "path": "client/src/pages/ForgotPassword.jsx",
+    "size": 11963
+  },
+  {
+    "path": "client/src/pages/GlossaryPage.jsx",
+    "size": 20339
+  },
+  {
+    "path": "client/src/pages/GratitudePractice.jsx",
+    "size": 16476
+  },
+  {
+    "path": "client/src/pages/GroundingTechniquesPage.jsx",
+    "size": 27083
+  },
+  {
+    "path": "client/src/pages/Growth.jsx",
+    "size": 1411
+  },
+  {
+    "path": "client/src/pages/GrowthAnalyticsPage.tsx",
+    "size": 16354
+  },
+  {
+    "path": "client/src/pages/GrowthPage.jsx",
+    "size": 29500
+  },
+  {
+    "path": "client/src/pages/GuidedJournalingPage.tsx",
+    "size": 17266
+  },
+  {
+    "path": "client/src/pages/Healing.jsx",
+    "size": 1451
+  },
+  {
+    "path": "client/src/pages/HealingJourneysPage.jsx",
+    "size": 29218
+  },
+  {
+    "path": "client/src/pages/HealingLibraryPage.jsx",
+    "size": 19260
+  },
+  {
+    "path": "client/src/pages/HealthPage.jsx",
+    "size": 4834
+  },
+  {
+    "path": "client/src/pages/help/RefundHelp.jsx",
+    "size": 4980
+  },
+  {
+    "path": "client/src/pages/HowToGuidesPage.jsx",
+    "size": 17846
+  },
+  {
+    "path": "client/src/pages/hubs/AcceptanceHubPage.jsx",
+    "size": 4031
+  },
+  {
+    "path": "client/src/pages/hubs/AnxietyHubPage.jsx",
+    "size": 3794
+  },
+  {
+    "path": "client/src/pages/hubs/BodyMindHubPage.jsx",
+    "size": 3661
+  },
+  {
+    "path": "client/src/pages/hubs/BoundariesHubPage.jsx",
+    "size": 3891
+  },
+  {
+    "path": "client/src/pages/hubs/BreathworkHubPage.jsx",
+    "size": 3631
+  },
+  {
+    "path": "client/src/pages/hubs/CommunicationHubPage.jsx",
+    "size": 3687
+  },
+  {
+    "path": "client/src/pages/hubs/ConfidenceHubPage.jsx",
+    "size": 3586
+  },
+  {
+    "path": "client/src/pages/hubs/CopingSkillsHubPage.jsx",
+    "size": 3700
+  },
+  {
+    "path": "client/src/pages/hubs/CreativityHubPage.jsx",
+    "size": 3534
+  },
+  {
+    "path": "client/src/pages/hubs/DailyPracticeHubPage.jsx",
+    "size": 3584
+  },
+  {
+    "path": "client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx",
+    "size": 3805
+  },
+  {
+    "path": "client/src/pages/hubs/EnergyManagementHubPage.jsx",
+    "size": 3662
+  },
+  {
+    "path": "client/src/pages/hubs/FocusHubPage.jsx",
+    "size": 3514
+  },
+  {
+    "path": "client/src/pages/hubs/ForgivenessHubPage.jsx",
+    "size": 4023
+  },
+  {
+    "path": "client/src/pages/hubs/GratitudeHubPage.jsx",
+    "size": 3620
+  },
+  {
+    "path": "client/src/pages/hubs/GriefHubPage.jsx",
+    "size": 3703
+  },
+  {
+    "path": "client/src/pages/hubs/HabitsHubPage.jsx",
+    "size": 4041
+  },
+  {
+    "path": "client/src/pages/hubs/HealingJourneyHubPage.jsx",
+    "size": 3673
+  },
+  {
+    "path": "client/src/pages/hubs/HubsIndexPage.jsx",
+    "size": 12641
+  },
+  {
+    "path": "client/src/pages/hubs/index.jsx",
+    "size": 2902
+  },
+  {
+    "path": "client/src/pages/hubs/InnerPeaceHubPage.jsx",
+    "size": 3591
+  },
+  {
+    "path": "client/src/pages/hubs/InnerWorkHubPage.jsx",
+    "size": 3612
+  },
+  {
+    "path": "client/src/pages/hubs/JournalingHubPage.jsx",
+    "size": 3640
+  },
+  {
+    "path": "client/src/pages/hubs/LifePurposeHubPage.jsx",
+    "size": 3637
+  },
+  {
+    "path": "client/src/pages/hubs/MindfulnessHubPage.jsx",
+    "size": 3710
+  },
+  {
+    "path": "client/src/pages/hubs/MotivationHubPage.jsx",
+    "size": 3538
+  },
+  {
+    "path": "client/src/pages/hubs/NervousSystemHubPage.jsx",
+    "size": 4016
+  },
+  {
+    "path": "client/src/pages/hubs/PersonalGrowthHubPage.jsx",
+    "size": 3690
+  },
+  {
+    "path": "client/src/pages/hubs/PresenceHubPage.jsx",
+    "size": 3527
+  },
+  {
+    "path": "client/src/pages/hubs/RelationshipsHubPage.jsx",
+    "size": 3795
+  },
+  {
+    "path": "client/src/pages/hubs/ResilienceHubPage.jsx",
+    "size": 3904
+  },
+  {
+    "path": "client/src/pages/hubs/SelfAwarenessHubPage.jsx",
+    "size": 3608
+  },
+  {
+    "path": "client/src/pages/hubs/SelfCareHubPage.jsx",
+    "size": 3673
+  },
+  {
+    "path": "client/src/pages/hubs/SelfCompassionHubPage.jsx",
+    "size": 3784
+  },
+  {
+    "path": "client/src/pages/hubs/SelfDiscoveryHubPage.jsx",
+    "size": 3567
+  },
+  {
+    "path": "client/src/pages/hubs/SelfWorthHubPage.jsx",
+    "size": 3846
+  },
+  {
+    "path": "client/src/pages/hubs/SleepHubPage.jsx",
+    "size": 3830
+  },
+  {
+    "path": "client/src/pages/hubs/SpiritualityHubPage.jsx",
+    "size": 4013
+  },
+  {
+    "path": "client/src/pages/hubs/StressHubPage.jsx",
+    "size": 3654
+  },
+  {
+    "path": "client/src/pages/hubs/ThoughtworkHubPage.jsx",
+    "size": 3680
+  },
+  {
+    "path": "client/src/pages/hubs/TopicHubPage.jsx",
+    "size": 1473
+  },
+  {
+    "path": "client/src/pages/hubs/TraumaHealingHubPage.jsx",
+    "size": 4248
+  },
+  {
+    "path": "client/src/pages/hubs/WisdomHubPage.jsx",
+    "size": 3468
+  },
+  {
+    "path": "client/src/pages/InnerChildPage.jsx",
+    "size": 33097
+  },
+  {
+    "path": "client/src/pages/InsightCardsPage.tsx",
+    "size": 16363
+  },
+  {
+    "path": "client/src/pages/InsightsDashboard.jsx",
+    "size": 10527
+  },
+  {
+    "path": "client/src/pages/Invite.jsx",
+    "size": 8958
+  },
+  {
+    "path": "client/src/pages/JournalPage.jsx",
+    "size": 22970
+  },
+  {
+    "path": "client/src/pages/KnowledgeSynthesisPage.tsx",
+    "size": 25095
+  },
+  {
+    "path": "client/src/pages/LearnArticles.jsx",
+    "size": 3674
+  },
+  {
+    "path": "client/src/pages/LearnDetail.jsx",
+    "size": 8021
+  },
+  {
+    "path": "client/src/pages/LearnGuides.jsx",
+    "size": 3494
+  },
+  {
+    "path": "client/src/pages/LearnHub.jsx",
+    "size": 3374
+  },
+  {
+    "path": "client/src/pages/LegalPage.jsx",
+    "size": 4400
+  },
+  {
+    "path": "client/src/pages/library/SavedLibrary.jsx",
+    "size": 2608
+  },
+  {
+    "path": "client/src/pages/Login.jsx",
+    "size": 11049
+  },
+  {
+    "path": "client/src/pages/LoginCallback.jsx",
+    "size": 2743
+  },
+  {
+    "path": "client/src/pages/LumiV6Preview.jsx",
+    "size": 35133
+  },
+  {
+    "path": "client/src/pages/MasteryToolsPage.tsx",
+    "size": 6289
+  },
+  {
+    "path": "client/src/pages/MeditationGuidePage.jsx",
+    "size": 32018
+  },
+  {
+    "path": "client/src/pages/MentalWellness.jsx",
+    "size": 1463
+  },
+  {
+    "path": "client/src/pages/MetaLearningPage.tsx",
+    "size": 18049
+  },
+  {
+    "path": "client/src/pages/Mindfulness.jsx",
+    "size": 1483
+  },
+  {
+    "path": "client/src/pages/MirrorPage.tsx",
+    "size": 10054
+  },
+  {
+    "path": "client/src/pages/MoodPage.jsx",
+    "size": 21161
+  },
+  {
+    "path": "client/src/pages/MotionLab.jsx",
+    "size": 15458
+  },
+  {
+    "path": "client/src/pages/MovementSnacksPage.jsx",
+    "size": 19459
+  },
+  {
+    "path": "client/src/pages/NervousSystemFloodingPage.jsx",
+    "size": 21976
+  },
+  {
+    "path": "client/src/pages/Newsletter.jsx",
+    "size": 6613
+  },
+  {
+    "path": "client/src/pages/NewsPage.jsx",
+    "size": 14354
+  },
+  {
+    "path": "client/src/pages/NotFound.jsx",
+    "size": 6959
+  },
+  {
+    "path": "client/src/pages/Onboarding.tsx",
+    "size": 21568
+  },
+  {
+    "path": "client/src/pages/OnboardingFlow.jsx",
+    "size": 20175
+  },
+  {
+    "path": "client/src/pages/pathways/CalmPlan.jsx",
+    "size": 6643
+  },
+  {
+    "path": "client/src/pages/pathways/Favorites.jsx",
+    "size": 7578
+  },
+  {
+    "path": "client/src/pages/pathways/GoalOnboarding.jsx",
+    "size": 8353
+  },
+  {
+    "path": "client/src/pages/pathways/PathwaysHome.jsx",
+    "size": 6389
+  },
+  {
+    "path": "client/src/pages/pathways/ProgressStreaks.jsx",
+    "size": 8070
+  },
+  {
+    "path": "client/src/pages/pathways/ReflectionHistory.jsx",
+    "size": 10215
+  },
+  {
+    "path": "client/src/pages/pathways/ValuesToActions.jsx",
+    "size": 7113
+  },
+  {
+    "path": "client/src/pages/PeacescapePage.jsx",
+    "size": 12973
+  },
+  {
+    "path": "client/src/pages/PerceptionRefinementPage.jsx",
+    "size": 19653
+  },
+  {
+    "path": "client/src/pages/PermacultureWellnessPage.jsx",
+    "size": 21743
+  },
+  {
+    "path": "client/src/pages/PhilosophicalInquiryPage.tsx",
+    "size": 18688
+  },
+  {
+    "path": "client/src/pages/PracticeLibrary.jsx",
+    "size": 19065
+  },
+  {
+    "path": "client/src/pages/preferences/NotificationPreferences.jsx",
+    "size": 9285
+  },
+  {
+    "path": "client/src/pages/preferences/SafetyPreferences.jsx",
+    "size": 8526
+  },
+  {
+    "path": "client/src/pages/Premium.jsx",
+    "size": 12587
+  },
+  {
+    "path": "client/src/pages/Presence.jsx",
+    "size": 10166
+  },
+  {
+    "path": "client/src/pages/PressKit.jsx",
+    "size": 7764
+  },
+  {
+    "path": "client/src/pages/Pricing.jsx",
+    "size": 27373
+  },
+  {
+    "path": "client/src/pages/PricingPage.jsx",
+    "size": 8849
+  },
+  {
+    "path": "client/src/pages/Privacy.jsx",
+    "size": 10006
+  },
+  {
+    "path": "client/src/pages/Privacy.tsx",
+    "size": 6538
+  },
+  {
+    "path": "client/src/pages/ProfessionalResourcesPage.jsx",
+    "size": 9111
+  },
+  {
+    "path": "client/src/pages/Profile.jsx",
+    "size": 8116
+  },
+  {
+    "path": "client/src/pages/ProgressDashboardPage.tsx",
+    "size": 16048
+  },
+  {
+    "path": "client/src/pages/ProtocolBrowser.jsx",
+    "size": 9779
+  },
+  {
+    "path": "client/src/pages/ProtocolSession.jsx",
+    "size": 14238
+  },
+  {
+    "path": "client/src/pages/PublicRoadmap.jsx",
+    "size": 7221
+  },
+  {
+    "path": "client/src/pages/Publishing.jsx",
+    "size": 16584
+  },
+  {
+    "path": "client/src/pages/QAPage.jsx",
+    "size": 17001
+  },
+  {
+    "path": "client/src/pages/RecoveryPage.jsx",
+    "size": 12275
+  },
+  {
+    "path": "client/src/pages/Reflection.jsx",
+    "size": 19662
+  },
+  {
+    "path": "client/src/pages/reflection.tsx",
+    "size": 431
+  },
+  {
+    "path": "client/src/pages/Register.jsx",
+    "size": 13637
+  },
+  {
+    "path": "client/src/pages/ResearchEvidencePage.jsx",
+    "size": 19159
+  },
+  {
+    "path": "client/src/pages/ResetPassword.jsx",
+    "size": 18189
+  },
+  {
+    "path": "client/src/pages/Resilience.jsx",
+    "size": 1478
+  },
+  {
+    "path": "client/src/pages/ResilienceMetricsPage.tsx",
+    "size": 18449
+  },
+  {
+    "path": "client/src/pages/ResourcesPage.jsx",
+    "size": 15365
+  },
+  {
+    "path": "client/src/pages/RigLab.jsx",
+    "size": 9902
+  },
+  {
+    "path": "client/src/pages/RoutinesPage.jsx",
+    "size": 11803
+  },
+  {
+    "path": "client/src/pages/SafetyCenter.jsx",
+    "size": 8447
+  },
+  {
+    "path": "client/src/pages/SafetyPage.jsx",
+    "size": 14462
+  },
+  {
+    "path": "client/src/pages/SelfCareToolkitPage.jsx",
+    "size": 20588
+  },
+  {
+    "path": "client/src/pages/SelfLove.jsx",
+    "size": 1433
+  },
+  {
+    "path": "client/src/pages/SelfLovePage.jsx",
+    "size": 7536
+  },
+  {
+    "path": "client/src/pages/SelfWorthReflectionPage.jsx",
+    "size": 24862
+  },
+  {
+    "path": "client/src/pages/Settings.jsx",
+    "size": 28884
+  },
+  {
+    "path": "client/src/pages/settings/AIPersonality.jsx",
+    "size": 10091
+  },
+  {
+    "path": "client/src/pages/settings/EmailDigest.jsx",
+    "size": 9116
+  },
+  {
+    "path": "client/src/pages/SleepGuidePage.jsx",
+    "size": 17771
+  },
+  {
+    "path": "client/src/pages/SocialHub.jsx",
+    "size": 10027
+  },
+  {
+    "path": "client/src/pages/SoulWellnessPage.jsx",
+    "size": 20415
+  },
+  {
+    "path": "client/src/pages/Start.tsx",
+    "size": 56083
+  },
+  {
+    "path": "client/src/pages/StatePage.jsx",
+    "size": 4816
+  },
+  {
+    "path": "client/src/pages/StrategyMapsPage.tsx",
+    "size": 21856
+  },
+  {
+    "path": "client/src/pages/StressResponseGuidePage.jsx",
+    "size": 15302
+  },
+  {
+    "path": "client/src/pages/StudyVaultPage.jsx",
+    "size": 25107
+  },
+  {
+    "path": "client/src/pages/SubscriberBenefitsPage.jsx",
+    "size": 15707
+  },
+  {
+    "path": "client/src/pages/SupportPage.tsx",
+    "size": 4918
+  },
+  {
+    "path": "client/src/pages/SystemMapPage.jsx",
+    "size": 12040
+  },
+  {
+    "path": "client/src/pages/SystemsThinkingPage.tsx",
+    "size": 18207
+  },
+  {
+    "path": "client/src/pages/TalkTopics.jsx",
+    "size": 22604
+  },
+  {
+    "path": "client/src/pages/Terms.tsx",
+    "size": 5429
+  },
+  {
+    "path": "client/src/pages/tools/AweMicrodose.jsx",
+    "size": 6899
+  },
+  {
+    "path": "client/src/pages/tools/BodyScan.jsx",
+    "size": 8052
+  },
+  {
+    "path": "client/src/pages/tools/BoundaryBuilderTool.jsx",
+    "size": 7998
+  },
+  {
+    "path": "client/src/pages/tools/BreathingTool.jsx",
+    "size": 19580
+  },
+  {
+    "path": "client/src/pages/tools/BreathPacer.jsx",
+    "size": 8321
+  },
+  {
+    "path": "client/src/pages/tools/BreathTool.jsx",
+    "size": 14965
+  },
+  {
+    "path": "client/src/pages/tools/CognitiveDistortionChecker.jsx",
+    "size": 9251
+  },
+  {
+    "path": "client/src/pages/tools/CommunityCheckin.jsx",
+    "size": 8285
+  },
+  {
+    "path": "client/src/pages/tools/CompassionBreak.jsx",
+    "size": 6685
+  },
+  {
+    "path": "client/src/pages/tools/DigitalSunset.jsx",
+    "size": 6588
+  },
+  {
+    "path": "client/src/pages/tools/EmotionWheel.jsx",
+    "size": 10235
+  },
+  {
+    "path": "client/src/pages/tools/GAD7Assessment.jsx",
+    "size": 8393
+  },
+  {
+    "path": "client/src/pages/tools/GriefLetter.jsx",
+    "size": 8088
+  },
+  {
+    "path": "client/src/pages/tools/index.jsx",
+    "size": 4880
+  },
+  {
+    "path": "client/src/pages/tools/ManipulationDetector.jsx",
+    "size": 11328
+  },
+  {
+    "path": "client/src/pages/tools/MeaningMap.jsx",
+    "size": 9296
+  },
+  {
+    "path": "client/src/pages/tools/MeditationPlayer.jsx",
+    "size": 10029
+  },
+  {
+    "path": "client/src/pages/tools/NervousSystemCheck.jsx",
+    "size": 12642
+  },
+  {
+    "path": "client/src/pages/tools/PHQ9Assessment.jsx",
+    "size": 9587
+  },
+  {
+    "path": "client/src/pages/tools/Reframe.jsx",
+    "size": 8992
+  },
+  {
+    "path": "client/src/pages/tools/ReframePage.jsx",
+    "size": 9728
+  },
+  {
+    "path": "client/src/pages/tools/RepairScript.jsx",
+    "size": 6072
+  },
+  {
+    "path": "client/src/pages/tools/SleepQualityCalculator.jsx",
+    "size": 11413
+  },
+  {
+    "path": "client/src/pages/tools/ToolDirectoryPage.jsx",
+    "size": 1637
+  },
+  {
+    "path": "client/src/pages/tools/UrgeSurf.jsx",
+    "size": 7772
+  },
+  {
+    "path": "client/src/pages/tools/WeeklyReflection.jsx",
+    "size": 8148
+  },
+  {
+    "path": "client/src/pages/ToolsPage.jsx",
+    "size": 14660
+  },
+  {
+    "path": "client/src/pages/trust/AITransparencyPage.jsx",
+    "size": 1787
+  },
+  {
+    "path": "client/src/pages/trust/TrustCenterPage.jsx",
+    "size": 1803
+  },
+  {
+    "path": "client/src/pages/TwelvePracticesPage.jsx",
+    "size": 7839
+  },
+  {
+    "path": "client/src/pages/TwelveStepsPage.tsx",
+    "size": 12924
+  },
+  {
+    "path": "client/src/pages/Upgrade.jsx",
+    "size": 7195
+  },
+  {
+    "path": "client/src/pages/UserProfile.jsx",
+    "size": 5609
+  },
+  {
+    "path": "client/src/pages/ValuesFinderPage.jsx",
+    "size": 16738
+  },
+  {
+    "path": "client/src/pages/ValuesPage.jsx",
+    "size": 5735
+  },
+  {
+    "path": "client/src/pages/Wellbeing.jsx",
+    "size": 1449
+  },
+  {
+    "path": "client/src/pages/Wellness.jsx",
+    "size": 28332
+  },
+  {
+    "path": "client/src/pages/WellnessDashboard.jsx",
+    "size": 19548
+  },
+  {
+    "path": "client/src/pages/WellnessGlossaryPage.jsx",
+    "size": 29655
+  },
+  {
+    "path": "client/src/pages/WellnessGoals.jsx",
+    "size": 12742
+  },
+  {
+    "path": "client/src/pages/WellnessHubPage.jsx",
+    "size": 12075
+  },
+  {
+    "path": "client/src/pages/WellnessToolsHub.jsx",
+    "size": 5278
+  },
+  {
+    "path": "client/src/pages/WireframeTemplates.jsx",
+    "size": 58855
+  },
+  {
+    "path": "client/src/pages/WisdomPracticesPage.tsx",
+    "size": 19915
+  },
+  {
+    "path": "client/src/pages/WisdomSynthesisPage.tsx",
+    "size": 17207
+  },
+  {
+    "path": "client/src/pages/WisdomToolsPage.tsx",
+    "size": 8260
+  },
+  {
+    "path": "scripts/assets/generate-true-logo-webp.mjs",
+    "size": 958
+  },
+  {
+    "path": "scripts/assets/generate-webp-variants.mjs",
+    "size": 1478
+  },
+  {
+    "path": "scripts/assets/optimize-assets.mjs",
+    "size": 433
+  },
+  {
+    "path": "scripts/audit-duplicate-routes.mjs",
+    "size": 1249
+  },
+  {
+    "path": "scripts/audit-registry-routes.mjs",
+    "size": 3234
+  },
+  {
+    "path": "scripts/check-links.mjs",
+    "size": 340
+  },
+  {
+    "path": "scripts/export-route-governance.mjs",
+    "size": 2768
+  },
+  {
+    "path": "scripts/generate-route-manifest.mjs",
+    "size": 4975
+  },
+  {
+    "path": "scripts/governance/bundle-budget-audit.mjs",
+    "size": 2798
+  },
+  {
+    "path": "scripts/governance/bundle-ownership-audit.mjs",
+    "size": 1167
+  },
+  {
+    "path": "scripts/governance/content-taxonomy-audit.mjs",
+    "size": 611
+  },
+  {
+    "path": "scripts/governance/dashboard-canonization-audit.mjs",
+    "size": 715
+  },
+  {
+    "path": "scripts/governance/discoverability-audit.mjs",
+    "size": 2908
+  },
+  {
+    "path": "scripts/governance/emotional-state-ux-audit.mjs",
+    "size": 640
+  },
+  {
+    "path": "scripts/governance/footer-sitemap-ownership-audit.mjs",
+    "size": 1528
+  },
+  {
+    "path": "scripts/governance/mobile-ux-audit.mjs",
+    "size": 696
+  },
+  {
+    "path": "scripts/governance/navigation-manifest-audit.mjs",
+    "size": 2261
+  },
+  {
+    "path": "scripts/governance/retention-loop-audit.mjs",
+    "size": 689
+  },
+  {
+    "path": "scripts/governance/route-discoverability-audit.mjs",
+    "size": 2107
+  },
+  {
+    "path": "scripts/governance/validate-ia.mjs",
+    "size": 456
+  },
+  {
+    "path": "scripts/health/platformSnapshot.mjs",
+    "size": 907
+  },
+  {
+    "path": "scripts/health/runtimeHealthCheck.sh",
+    "size": 558
+  },
+  {
+    "path": "scripts/inventory/generatePlatformInventory.mjs",
+    "size": 788
+  },
+  {
+    "path": "scripts/lib/route-registry.mjs",
+    "size": 6826
+  },
+  {
+    "path": "scripts/post-merge.sh",
+    "size": 83
+  },
+  {
+    "path": "scripts/production-check.sh",
+    "size": 444
+  },
+  {
+    "path": "scripts/recover-runtime.sh",
+    "size": 345
+  },
+  {
+    "path": "scripts/release/finalReleaseCheck.sh",
+    "size": 506
+  },
+  {
+    "path": "scripts/runtime-report.sh",
+    "size": 491
+  },
+  {
+    "path": "scripts/scan-route-governance.mjs",
+    "size": 22206
+  },
+  {
+    "path": "scripts/scan-trust-routes.mjs",
+    "size": 4632
+  },
+  {
+    "path": "scripts/uptime-log.sh",
+    "size": 1206
+  },
+  {
+    "path": "scripts/verify-all.mjs",
+    "size": 548
+  },
+  {
+    "path": "server/.data/admin-store.json",
+    "size": 106
+  },
+  {
+    "path": "server/ai/aiTelemetry.mjs",
+    "size": 8614
+  },
+  {
+    "path": "server/ai/crisisClassifier.mjs",
+    "size": 554
+  },
+  {
+    "path": "server/ai/emotionInference.mjs",
+    "size": 2348
+  },
+  {
+    "path": "server/ai/emotionPhrases.mjs",
+    "size": 2235
+  },
+  {
+    "path": "server/ai/evolution.mjs",
+    "size": 340
+  },
+  {
+    "path": "server/ai/memory.mjs",
+    "size": 4074
+  },
+  {
+    "path": "server/ai/memorySummary.mjs",
+    "size": 1158
+  },
+  {
+    "path": "server/ai/moduleRouter.mjs",
+    "size": 8519
+  },
+  {
+    "path": "server/ai/modules.mjs",
+    "size": 1203
+  },
+  {
+    "path": "server/ai/normalizeResponse.mjs",
+    "size": 974
+  },
+  {
+    "path": "server/ai/openaiClient.mjs",
+    "size": 105
+  },
+  {
+    "path": "server/ai/orchestrator.mjs",
+    "size": 13646
+  },
+  {
+    "path": "server/ai/paywallPolicy.mjs",
+    "size": 844
+  },
+  {
+    "path": "server/ai/profileExtractor.mjs",
+    "size": 4699
+  },
+  {
+    "path": "server/ai/profileStore.mjs",
+    "size": 5964
+  },
+  {
+    "path": "server/ai/provider.mjs",
+    "size": 12301
+  },
+  {
+    "path": "server/ai/providerPolicy.mjs",
+    "size": 647
+  },
+  {
+    "path": "server/ai/responsePolicy.mjs",
+    "size": 10997
+  },
+  {
+    "path": "server/ai/safety/crisis.mjs",
+    "size": 807
+  },
+  {
+    "path": "server/ai/safety/guard.mjs",
+    "size": 917
+  },
+  {
+    "path": "server/ai/safety/policy.mjs",
+    "size": 926
+  },
+  {
+    "path": "server/ai/safety/sanitize.mjs",
+    "size": 489
+  },
+  {
+    "path": "server/ai/scoring.mjs",
+    "size": 984
+  },
+  {
+    "path": "server/ai/summarizer.mjs",
+    "size": 3035
+  },
+  {
+    "path": "server/ai/system-prompts/mental-health-ux.txt",
+    "size": 14691
+  },
+  {
+    "path": "server/ai/system-prompts/wellnessSystemPrompt.mjs",
+    "size": 744
+  },
+  {
+    "path": "server/ai/therapyFlows.mjs",
+    "size": 568
+  },
+  {
+    "path": "server/ai/toolExecutor.mjs",
+    "size": 1614
+  },
+  {
+    "path": "server/ai/tools.mjs",
+    "size": 4470
+  },
+  {
+    "path": "server/ai/toolSelector.mjs",
+    "size": 1529
+  },
+  {
+    "path": "server/ai/v2/agentEscalation.mjs",
+    "size": 3842
+  },
+  {
+    "path": "server/ai/v2/agentMemory.mjs",
+    "size": 3581
+  },
+  {
+    "path": "server/ai/v2/agentOrchestrator.mjs",
+    "size": 18495
+  },
+  {
+    "path": "server/ai/v2/agentState.mjs",
+    "size": 5267
+  },
+  {
+    "path": "server/ai/v2/agentWorkingMemory.mjs",
+    "size": 8115
+  },
+  {
+    "path": "server/ai/v2/constitutionalGate.mjs",
+    "size": 7352
+  },
+  {
+    "path": "server/app.mjs",
+    "size": 17285
+  },
+  {
+    "path": "server/auth/jwt.mjs",
+    "size": 311
+  },
+  {
+    "path": "server/auth/password.js",
+    "size": 213
+  },
+  {
+    "path": "server/auth/tokens.mjs",
+    "size": 525
+  },
+  {
+    "path": "server/auth/webhookStripe.mjs",
+    "size": 938
+  },
+  {
+    "path": "server/awareness/detection/pipeline.mjs",
+    "size": 24917
+  },
+  {
+    "path": "server/awareness/rules.mjs",
+    "size": 10158
+  },
+  {
+    "path": "server/awareness/seedRules.mjs",
+    "size": 3887
+  },
+  {
+    "path": "server/awareness/tutor/engine.mjs",
+    "size": 15859
+  },
+  {
+    "path": "server/awareness/tutor/lessons.seed.mjs",
+    "size": 14712
+  },
+  {
+    "path": "server/billing/applyPendingEntitlements.mjs",
+    "size": 957
+  },
+  {
+    "path": "server/billing/entitlements.mjs",
+    "size": 951
+  },
+  {
+    "path": "server/billing/stripeCustomer.mjs",
+    "size": 630
+  },
+  {
+    "path": "server/biometrics/crypto.mjs",
+    "size": 3388
+  },
+  {
+    "path": "server/biometrics/inference.mjs",
+    "size": 4945
+  },
+  {
+    "path": "server/biometrics/normalizers.mjs",
+    "size": 13089
+  },
+  {
+    "path": "server/biometrics/pipeline.mjs",
+    "size": 10850
+  },
+  {
+    "path": "server/biometrics/providers.mjs",
+    "size": 11427
+  },
+  {
+    "path": "server/biometrics/scheduler.mjs",
+    "size": 2709
+  },
+  {
+    "path": "server/bootstrap.mjs",
+    "size": 1395
+  },
+  {
+    "path": "server/config/secrets.mjs",
+    "size": 308
+  },
+  {
+    "path": "server/contracts/content-model.schema.mjs",
+    "size": 13590
+  },
+  {
+    "path": "server/contracts/content.schema.ts",
+    "size": 491
+  },
+  {
+    "path": "server/contracts/content/b1-content-contract.mjs",
+    "size": 9654
+  },
+  {
+    "path": "server/db.mjs",
+    "size": 130
+  },
+  {
+    "path": "server/db/client.mjs",
+    "size": 775
+  },
+  {
+    "path": "server/db/connection.mjs",
+    "size": 2013
+  },
+  {
+    "path": "server/db/ensureSchema.mjs",
+    "size": 22571
+  },
+  {
+    "path": "server/db/helpers.mjs",
+    "size": 2131
+  },
+  {
+    "path": "server/db/queries/users.js",
+    "size": 496
+  },
+  {
+    "path": "server/db/schema.mjs",
+    "size": 199
+  },
+  {
+    "path": "server/db/schema/index.mjs",
+    "size": 63
+  },
+  {
+    "path": "server/db/schema/refreshTokens.js",
+    "size": 558
+  },
+  {
+    "path": "server/db/schema/users.js",
+    "size": 701
+  },
+  {
+    "path": "server/db/schemaBridge.mjs",
+    "size": 111
+  },
+  {
+    "path": "server/db/sessionStore.mjs",
+    "size": 837
+  },
+  {
+    "path": "server/db/streaks.mjs",
+    "size": 130
+  },
+  {
+    "path": "server/engine/crisisDetection.mjs",
+    "size": 2409
+  },
+  {
+    "path": "server/engine/prompt-os/kernel-bridge.mjs",
+    "size": 4357
+  },
+  {
+    "path": "server/engine/therapyIntelligence.mjs",
+    "size": 10713
+  },
+  {
+    "path": "server/insights/daily.mjs",
+    "size": 3279
+  },
+  {
+    "path": "server/intelligence/aiInsight.mjs",
+    "size": 340
+  },
+  {
+    "path": "server/intelligence/journalingMirror.mjs",
+    "size": 2888
+  },
+  {
+    "path": "server/lib/authErrors.mjs",
+    "size": 733
+  },
+  {
+    "path": "server/lib/csrf.mjs",
+    "size": 2961
+  },
+  {
+    "path": "server/lib/healAI.mjs",
+    "size": 7817
+  },
+  {
+    "path": "server/lib/healScheduler.mjs",
+    "size": 7790
+  },
+  {
+    "path": "server/lib/mode.js",
+    "size": 258
+  },
+  {
+    "path": "server/lib/promptEngine.mjs",
+    "size": 7669
+  },
+  {
+    "path": "server/lib/rateLimitLogger.mjs",
+    "size": 3028
+  },
+  {
+    "path": "server/lib/websocket.mjs",
+    "size": 5880
+  },
+  {
+    "path": "server/logging/aiLogger.mjs",
+    "size": 2108
+  },
+  {
+    "path": "server/logging/safetyLogger.mjs",
+    "size": 1106
+  },
+  {
+    "path": "server/memory/store.mjs",
+    "size": 369
+  },
+  {
+    "path": "server/middleware/admin-rate-limit.mjs",
+    "size": 1506
+  },
+  {
+    "path": "server/middleware/adminAuth.mjs",
+    "size": 190
+  },
+  {
+    "path": "server/middleware/audit.mjs",
+    "size": 699
+  },
+  {
+    "path": "server/middleware/auth.mjs",
+    "size": 2511
+  },
+  {
+    "path": "server/middleware/csrf.mjs",
+    "size": 1789
+  },
+  {
+    "path": "server/middleware/errorHandler.mjs",
+    "size": 1058
+  },
+  {
+    "path": "server/middleware/loginRateLimit.mjs",
+    "size": 1707
+  },
+  {
+    "path": "server/middleware/observabilityContext.mjs",
+    "size": 1807
+  },
+  {
+    "path": "server/middleware/promptshield.mjs",
+    "size": 690
+  },
+  {
+    "path": "server/middleware/rateLimit.mjs",
+    "size": 5258
+  },
+  {
+    "path": "server/middleware/rbac.mjs",
+    "size": 785
+  },
+  {
+    "path": "server/middleware/requestId.mjs",
+    "size": 1067
+  },
+  {
+    "path": "server/middleware/requireAdmin.mjs",
+    "size": 512
+  },
+  {
+    "path": "server/middleware/requireAdult.mjs",
+    "size": 1414
+  },
+  {
+    "path": "server/middleware/requirePlan.mjs",
+    "size": 2035
+  },
+  {
+    "path": "server/middleware/requireRole.mjs",
+    "size": 610
+  },
+  {
+    "path": "server/middleware/security.mjs",
+    "size": 1948
+  },
+  {
+    "path": "server/middleware/session.mjs",
+    "size": 1191
+  },
+  {
+    "path": "server/middleware/validate-body.mjs",
+    "size": 423
+  },
+  {
+    "path": "server/middleware/validate-content-model.mjs",
+    "size": 1069
+  },
+  {
+    "path": "server/migrations/20260429034917_add_lumi_theme.sql",
+    "size": 1568
+  },
+  {
+    "path": "server/observability/alerter.mjs",
+    "size": 8486
+  },
+  {
+    "path": "server/observability/otelApi.mjs",
+    "size": 3852
+  },
+  {
+    "path": "server/observability/preload.mjs",
+    "size": 1366
+  },
+  {
+    "path": "server/observability/safetyAlerts.mjs",
+    "size": 6255
+  },
+  {
+    "path": "server/observability/spans.mjs",
+    "size": 3500
+  },
+  {
+    "path": "server/observability/tracing.mjs",
+    "size": 8087
+  },
+  {
+    "path": "server/premium/features.ts",
+    "size": 177
+  },
+  {
+    "path": "server/protocols/engine/executor.mjs",
+    "size": 23809
+  },
+  {
+    "path": "server/protocols/seed/protocols.mjs",
+    "size": 20837
+  },
+  {
+    "path": "server/replit_integrations/audio/client.ts",
+    "size": 9073
+  },
+  {
+    "path": "server/replit_integrations/audio/index.ts",
+    "size": 277
+  },
+  {
+    "path": "server/replit_integrations/audio/routes.ts",
+    "size": 5151
+  },
+  {
+    "path": "server/replit_integrations/auth/index.mjs",
+    "size": 258
+  },
+  {
+    "path": "server/replit_integrations/auth/replitAuth.mjs",
+    "size": 7876
+  },
+  {
+    "path": "server/replit_integrations/auth/routes.mjs",
+    "size": 1644
+  },
+  {
+    "path": "server/replit_integrations/auth/storage.mjs",
+    "size": 2793
+  },
+  {
+    "path": "server/replit_integrations/batch/index.ts",
+    "size": 108
+  },
+  {
+    "path": "server/replit_integrations/batch/utils.ts",
+    "size": 4747
+  },
+  {
+    "path": "server/replit_integrations/chat/index.ts",
+    "size": 108
+  },
+  {
+    "path": "server/replit_integrations/chat/routes.ts",
+    "size": 4044
+  },
+  {
+    "path": "server/replit_integrations/chat/storage.ts",
+    "size": 2524
+  },
+  {
+    "path": "server/replit_integrations/image/client.ts",
+    "size": 1410
+  },
+  {
+    "path": "server/replit_integrations/image/index.ts",
+    "size": 117
+  },
+  {
+    "path": "server/replit_integrations/image/routes.ts",
+    "size": 872
+  },
+  {
+    "path": "server/replit_integrations/object_storage/index.ts",
+    "size": 377
+  },
+  {
+    "path": "server/replit_integrations/object_storage/objectAcl.ts",
+    "size": 5545
+  },
+  {
+    "path": "server/replit_integrations/object_storage/objectStorage.ts",
+    "size": 8409
+  },
+  {
+    "path": "server/replit_integrations/object_storage/routes.ts",
+    "size": 2786
+  },
+  {
+    "path": "server/routes/account.mjs",
+    "size": 20701
+  },
+  {
+    "path": "server/routes/accountActions.mjs",
+    "size": 5548
+  },
+  {
+    "path": "server/routes/admin-publishing.mjs",
+    "size": 12712
+  },
+  {
+    "path": "server/routes/admin-security.mjs",
+    "size": 2505
+  },
+  {
+    "path": "server/routes/admin-social-studio.mjs",
+    "size": 37425
+  },
+  {
+    "path": "server/routes/admin.mjs",
+    "size": 39726
+  },
+  {
+    "path": "server/routes/adminBilling.mjs",
+    "size": 4192
+  },
+  {
+    "path": "server/routes/ai-dashboard.mjs",
+    "size": 9931
+  },
+  {
+    "path": "server/routes/ai.business.mjs",
+    "size": 6444
+  },
+  {
+    "path": "server/routes/ai.healing.mjs",
+    "size": 7055
+  },
+  {
+    "path": "server/routes/ai.mjs",
+    "size": 12774
+  },
+  {
+    "path": "server/routes/analytics-events.mjs",
+    "size": 4114
+  },
+  {
+    "path": "server/routes/analytics.mjs",
+    "size": 9739
+  },
+  {
+    "path": "server/routes/api.mjs",
+    "size": 362
+  },
+  {
+    "path": "server/routes/audit-logs.mjs",
+    "size": 5600
+  },
+  {
+    "path": "server/routes/auth.mjs",
+    "size": 8396
+  },
+  {
+    "path": "server/routes/awareness.mjs",
+    "size": 11766
+  },
+  {
+    "path": "server/routes/badges.mjs",
+    "size": 4490
+  },
+  {
+    "path": "server/routes/billing.mjs",
+    "size": 11462
+  },
+  {
+    "path": "server/routes/biometrics.mjs",
+    "size": 17684
+  },
+  {
+    "path": "server/routes/blog.mjs",
+    "size": 24124
+  },
+  {
+    "path": "server/routes/buddy.mjs",
+    "size": 9666
+  },
+  {
+    "path": "server/routes/canva-oauth.mjs",
+    "size": 6233
+  },
+  {
+    "path": "server/routes/cognitive-enhancement.mjs",
+    "size": 13346
+  },
+  {
+    "path": "server/routes/cognitive-lab.mjs",
+    "size": 8615
+  },
+  {
+    "path": "server/routes/cognitive-mastery.mjs",
+    "size": 19723
+  },
+  {
+    "path": "server/routes/collective-intelligence.mjs",
+    "size": 7924
+  },
+  {
+    "path": "server/routes/community.mjs",
+    "size": 9827
+  },
+  {
+    "path": "server/routes/consciousness-expansion.mjs",
+    "size": 4232
+  },
+  {
+    "path": "server/routes/consciousness.mjs",
+    "size": 19980
+  },
+  {
+    "path": "server/routes/contact.mjs",
+    "size": 1610
+  },
+  {
+    "path": "server/routes/contemplative.mjs",
+    "size": 7601
+  },
+  {
+    "path": "server/routes/content-generator.mjs",
+    "size": 10489
+  },
+  {
+    "path": "server/routes/content-intelligence.mjs",
+    "size": 11151
+  },
+  {
+    "path": "server/routes/content-studio.mjs",
+    "size": 14758
+  },
+  {
+    "path": "server/routes/content.mjs",
+    "size": 8533
+  },
+  {
+    "path": "server/routes/creativity.mjs",
+    "size": 6737
+  },
+  {
+    "path": "server/routes/deep-learning.mjs",
+    "size": 8751
+  },
+  {
+    "path": "server/routes/deploymentReadiness.mjs",
+    "size": 4269
+  },
+  {
+    "path": "server/routes/dialectics.mjs",
+    "size": 22315
+  },
+  {
+    "path": "server/routes/discernment.mjs",
+    "size": 4704
+  },
+  {
+    "path": "server/routes/email.mjs",
+    "size": 2969
+  },
+  {
+    "path": "server/routes/embodiment.mjs",
+    "size": 6542
+  },
+  {
+    "path": "server/routes/emotional-mastery.mjs",
+    "size": 9553
+  },
+  {
+    "path": "server/routes/emotional-resilience.mjs",
+    "size": 10916
+  },
+  {
+    "path": "server/routes/ethical-reasoning.mjs",
+    "size": 7879
+  },
+  {
+    "path": "server/routes/existential.mjs",
+    "size": 7174
+  },
+  {
+    "path": "server/routes/favorites.mjs",
+    "size": 2831
+  },
+  {
+    "path": "server/routes/feed.mjs",
+    "size": 4751
+  },
+  {
+    "path": "server/routes/feedback.mjs",
+    "size": 2483
+  },
+  {
+    "path": "server/routes/figma.mjs",
+    "size": 548
+  },
+  {
+    "path": "server/routes/foresight.mjs",
+    "size": 7868
+  },
+  {
+    "path": "server/routes/gamification.mjs",
+    "size": 9814
+  },
+  {
+    "path": "server/routes/gratitude.mjs",
+    "size": 6124
+  },
+  {
+    "path": "server/routes/growth-journey.mjs",
+    "size": 8140
+  },
+  {
+    "path": "server/routes/healing-intelligence.mjs",
+    "size": 15734
+  },
+  {
+    "path": "server/routes/healing-modalities.mjs",
+    "size": 7948
+  },
+  {
+    "path": "server/routes/healing-tools.mjs",
+    "size": 11617
+  },
+  {
+    "path": "server/routes/healing.mjs",
+    "size": 1887
+  },
+  {
+    "path": "server/routes/health.mjs",
+    "size": 35382
+  },
+  {
+    "path": "server/routes/holistic-healing.mjs",
+    "size": 12503
+  },
+  {
+    "path": "server/routes/human-potential.mjs",
+    "size": 7371
+  },
+  {
+    "path": "server/routes/insights.mjs",
+    "size": 7424
+  },
+  {
+    "path": "server/routes/integrationHealth.mjs",
+    "size": 2989
+  },
+  {
+    "path": "server/routes/invites.mjs",
+    "size": 1805
+  },
+  {
+    "path": "server/routes/journal.mjs",
+    "size": 6338
+  },
+  {
+    "path": "server/routes/kernel.mjs",
+    "size": 783
+  },
+  {
+    "path": "server/routes/knowledge.mjs",
+    "size": 15383
+  },
+  {
+    "path": "server/routes/leads.mjs",
+    "size": 4720
+  },
+  {
+    "path": "server/routes/life-design.mjs",
+    "size": 7889
+  },
+  {
+    "path": "server/routes/life-purpose.mjs",
+    "size": 11629
+  },
+  {
+    "path": "server/routes/login.mjs",
+    "size": 472
+  },
+  {
+    "path": "server/routes/mastery-excellence.mjs",
+    "size": 11748
+  },
+  {
+    "path": "server/routes/meaning-future.mjs",
+    "size": 7274
+  },
+  {
+    "path": "server/routes/meaning.mjs",
+    "size": 1504
+  },
+  {
+    "path": "server/routes/metacognition.mjs",
+    "size": 7573
+  },
+  {
+    "path": "server/routes/metrics.mjs",
+    "size": 4204
+  },
+  {
+    "path": "server/routes/metricsSummary.mjs",
+    "size": 703
+  },
+  {
+    "path": "server/routes/mfa.mjs",
+    "size": 1420
+  },
+  {
+    "path": "server/routes/mind-body-integration.mjs",
+    "size": 11955
+  },
+  {
+    "path": "server/routes/mirror.mjs",
+    "size": 8807
+  },
+  {
+    "path": "server/routes/mood.mjs",
+    "size": 6220
+  },
+  {
+    "path": "server/routes/narrative-drafts.mjs",
+    "size": 2901
+  },
+  {
+    "path": "server/routes/narrative.mjs",
+    "size": 5700
+  },
+  {
+    "path": "server/routes/neuro-integration.mjs",
+    "size": 6902
+  },
+  {
+    "path": "server/routes/newsletter.mjs",
+    "size": 5235
+  },
+  {
+    "path": "server/routes/object-storage.mjs",
+    "size": 3324
+  },
+  {
+    "path": "server/routes/observability.mjs",
+    "size": 2973
+  },
+  {
+    "path": "server/routes/onboarding.mjs",
+    "size": 7737
+  },
+  {
+    "path": "server/routes/peacescape.mjs",
+    "size": 8292
+  },
+  {
+    "path": "server/routes/peak-performance.mjs",
+    "size": 14572
+  },
+  {
+    "path": "server/routes/perplexity.mjs",
+    "size": 4720
+  },
+  {
+    "path": "server/routes/personal-growth.mjs",
+    "size": 11364
+  },
+  {
+    "path": "server/routes/philosophy.mjs",
+    "size": 16035
+  },
+  {
+    "path": "server/routes/post-trauma.mjs",
+    "size": 1503
+  },
+  {
+    "path": "server/routes/practices.mjs",
+    "size": 14635
+  },
+  {
+    "path": "server/routes/praxis.mjs",
+    "size": 1617
+  },
+  {
+    "path": "server/routes/pro-features.mjs",
+    "size": 1924
+  },
+  {
+    "path": "server/routes/products.mjs",
+    "size": 9241
+  },
+  {
+    "path": "server/routes/progress.mjs",
+    "size": 6481
+  },
+  {
+    "path": "server/routes/prompts.mjs",
+    "size": 3443
+  },
+  {
+    "path": "server/routes/protocols.mjs",
+    "size": 10168
+  },
+  {
+    "path": "server/routes/psychological-safety.mjs",
+    "size": 12462
+  },
+  {
+    "path": "server/routes/purpose-compass.mjs",
+    "size": 9188
+  },
+  {
+    "path": "server/routes/redirects.mjs",
+    "size": 3105
+  },
+  {
+    "path": "server/routes/reflection.mjs",
+    "size": 5048
+  },
+  {
+    "path": "server/routes/relational.mjs",
+    "size": 6110
+  },
+  {
+    "path": "server/routes/relationship-dynamics.mjs",
+    "size": 10123
+  },
+  {
+    "path": "server/routes/resilience.mjs",
+    "size": 7996
+  },
+  {
+    "path": "server/routes/revenue.mjs",
+    "size": 4881
+  },
+  {
+    "path": "server/routes/rss.mjs",
+    "size": 3306
+  },
+  {
+    "path": "server/routes/self-mastery-intelligence.mjs",
+    "size": 15780
+  },
+  {
+    "path": "server/routes/self-mastery.mjs",
+    "size": 10152
+  },
+  {
+    "path": "server/routes/session-boundary.mjs",
+    "size": 1879
+  },
+  {
+    "path": "server/routes/social-enterprise.mjs",
+    "size": 25238
+  },
+  {
+    "path": "server/routes/social-intelligence.mjs",
+    "size": 14110
+  },
+  {
+    "path": "server/routes/social-posting.mjs",
+    "size": 9684
+  },
+  {
+    "path": "server/routes/social-posts.mjs",
+    "size": 5421
+  },
+  {
+    "path": "server/routes/socio-ecology.mjs",
+    "size": 1885
+  },
+  {
+    "path": "server/routes/soft-launch-metrics.mjs",
+    "size": 1936
+  },
+  {
+    "path": "server/routes/sop.mjs",
+    "size": 30222
+  },
+  {
+    "path": "server/routes/spiritual-intelligence.mjs",
+    "size": 9241
+  },
+  {
+    "path": "server/routes/states.mjs",
+    "size": 2437
+  },
+  {
+    "path": "server/routes/streaks.mjs",
+    "size": 4415
+  },
+  {
+    "path": "server/routes/system.mjs",
+    "size": 1832
+  },
+  {
+    "path": "server/routes/systems-compassion.mjs",
+    "size": 7788
+  },
+  {
+    "path": "server/routes/telemetry.mjs",
+    "size": 810
+  },
+  {
+    "path": "server/routes/therapy.mjs",
+    "size": 10770
+  },
+  {
+    "path": "server/routes/transformation-engine.mjs",
+    "size": 10346
+  },
+  {
+    "path": "server/routes/trauma-healing-protocols.mjs",
+    "size": 17754
+  },
+  {
+    "path": "server/routes/ui-dashboard.mjs",
+    "size": 2384
+  },
+  {
+    "path": "server/routes/universal-content.mjs",
+    "size": 14723
+  },
+  {
+    "path": "server/routes/user.mjs",
+    "size": 17384
+  },
+  {
+    "path": "server/routes/userSettings.mjs",
+    "size": 2470
+  },
+  {
+    "path": "server/routes/values.mjs",
+    "size": 5988
+  },
+  {
+    "path": "server/routes/webhook.mjs",
+    "size": 13011
+  },
+  {
+    "path": "server/routes/wellness-tools.mjs",
+    "size": 13888
+  },
+  {
+    "path": "server/routes/wisdom-engine.mjs",
+    "size": 10429
+  },
+  {
+    "path": "server/routes/wisdom-synthesis.mjs",
+    "size": 8265
+  },
+  {
+    "path": "server/routes/wisdom-traditions.mjs",
+    "size": 6882
+  },
+  {
+    "path": "server/routes/wisdom.mjs",
+    "size": 20808
+  },
+  {
+    "path": "server/scripts/setAdminPassword.mjs",
+    "size": 1980
+  },
+  {
+    "path": "server/security/audit.mjs",
+    "size": 673
+  },
+  {
+    "path": "server/security/cookies.mjs",
+    "size": 367
+  },
+  {
+    "path": "server/security/csrf.mjs",
+    "size": 2818
+  },
+  {
+    "path": "server/security/envGuard.mjs",
+    "size": 197
+  },
+  {
+    "path": "server/security/hardening.mjs",
+    "size": 1010
+  },
+  {
+    "path": "server/services/aiChatService.mjs",
+    "size": 4769
+  },
+  {
+    "path": "server/services/aiClient.mjs",
+    "size": 595
+  },
+  {
+    "path": "server/services/aiHandler.mjs",
+    "size": 1722
+  },
+  {
+    "path": "server/services/aiService.mjs",
+    "size": 943
+  },
+  {
+    "path": "server/services/auditLog.mjs",
+    "size": 1273
+  },
+  {
+    "path": "server/services/canvaDesignService.js",
+    "size": 3677
+  },
+  {
+    "path": "server/services/chatMemory.mjs",
+    "size": 2542
+  },
+  {
+    "path": "server/services/content/.gitkeep",
+    "size": 0
+  },
+  {
+    "path": "server/services/email.mjs",
+    "size": 17906
+  },
+  {
+    "path": "server/services/monetization/.gitkeep",
+    "size": 0
+  },
+  {
+    "path": "server/services/newsletterSend.mjs",
+    "size": 2748
+  },
+  {
+    "path": "server/services/notifications/.gitkeep",
+    "size": 0
+  },
+  {
+    "path": "server/services/refreshTokens.service.mjs",
+    "size": 761
+  },
+  {
+    "path": "server/services/reminders/.gitkeep",
+    "size": 0
+  },
+  {
+    "path": "server/services/social-platforms.mjs",
+    "size": 6920
+  },
+  {
+    "path": "server/services/social-posting.mjs",
+    "size": 11869
+  },
+  {
+    "path": "server/services/streaks/.gitkeep",
+    "size": 0
+  },
+  {
+    "path": "server/services/stripeSync.mjs",
+    "size": 915
+  },
+  {
+    "path": "server/services/therapyEngine.mjs",
+    "size": 3277
+  },
+  {
+    "path": "server/services/users.mjs",
+    "size": 698
+  },
+  {
+    "path": "server/sessionStore.mjs",
+    "size": 1191
+  },
+  {
+    "path": "server/shared/importMap.mjs",
+    "size": 1177
+  },
+  {
+    "path": "server/test.config.mjs",
+    "size": 233
+  },
+  {
+    "path": "server/tests/ai.test.mjs",
+    "size": 427
+  },
+  {
+    "path": "server/tests/app.mjs",
+    "size": 1389
+  },
+  {
+    "path": "server/tests/auth.test.mjs",
+    "size": 1216
+  },
+  {
+    "path": "server/tests/journal.test.mjs",
+    "size": 671
+  },
+  {
+    "path": "server/tests/mood.test.mjs",
+    "size": 385
+  },
+  {
+    "path": "server/tests/test-mocks.mjs",
+    "size": 280
+  },
+  {
+    "path": "server/utils/aiClient.mjs",
+    "size": 6245
+  },
+  {
+    "path": "server/utils/aiGuardrails.mjs",
+    "size": 5486
+  },
+  {
+    "path": "server/utils/asyncHandler.mjs",
+    "size": 131
+  },
+  {
+    "path": "server/utils/asyncLock.mjs",
+    "size": 1225
+  },
+  {
+    "path": "server/utils/auditLogger.mjs",
+    "size": 1957
+  },
+  {
+    "path": "server/utils/cookies.mjs",
+    "size": 538
+  },
+  {
+    "path": "server/utils/email.mjs",
+    "size": 853
+  },
+  {
+    "path": "server/utils/hash.mjs",
+    "size": 129
+  },
+  {
+    "path": "server/utils/jwt.mjs",
+    "size": 1119
+  },
+  {
+    "path": "server/utils/logger.mjs",
+    "size": 2319
+  },
+  {
+    "path": "server/utils/logRedaction.mjs",
+    "size": 2554
+  },
+  {
+    "path": "server/utils/metrics.mjs",
+    "size": 830
+  },
+  {
+    "path": "server/utils/password.mjs",
+    "size": 213
+  },
+  {
+    "path": "server/utils/planMapping.mjs",
+    "size": 3971
+  },
+  {
+    "path": "server/utils/response.mjs",
+    "size": 1771
+  },
+  {
+    "path": "server/utils/responses.mjs",
+    "size": 477
+  },
+  {
+    "path": "server/utils/safetyCheck.mjs",
+    "size": 3338
+  },
+  {
+    "path": "server/utils/sentry.mjs",
+    "size": 2187
+  },
+  {
+    "path": "server/utils/stripe.mjs",
+    "size": 1610
+  },
+  {
+    "path": "server/utils/usageCounter.mjs",
+    "size": 1820
+  },
+  {
+    "path": "server/utils/validation.mjs",
+    "size": 1428
+  },
+  {
+    "path": "server/validation/schemas.mjs",
+    "size": 2380
+  }
+]

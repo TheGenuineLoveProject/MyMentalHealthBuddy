@@ -1,10 +1,11 @@
+import { getJsonPreference, setPreference } from "../../lib/preferences/safePreferences";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Bell, Mail, Smartphone, Clock, Save, Check, Loader2 } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/Switch";
 import { Label } from "@/components/ui/Label";
 import { useToast } from "@/hooks/use-toast";
@@ -70,7 +71,7 @@ export default function NotificationPreferences() {
           }
         }
       } catch {
-        const cached = localStorage.getItem("glp_notification_prefs");
+        const cached = getJsonPreference("glp_notification_prefs", {});
         if (cached) setSettings(JSON.parse(cached));
       } finally {
         setLoading(false);
@@ -91,7 +92,7 @@ export default function NotificationPreferences() {
       toast({ title: "Preferences saved", description: "Your notification settings are updated." });
     },
     onError: () => {
-      try { localStorage.setItem("glp_notification_prefs", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+      try { setPreference("glp_notification_prefs", settings); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Your preferences are saved on this device." });
     }

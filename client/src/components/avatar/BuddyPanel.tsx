@@ -39,8 +39,8 @@ const BUDDY_IS_HEALING_FLOW = false;
 // Per MMHB v7.4 Primary Law: monetization is prohibited inside regulated healing flows,
 // and any crisis/vulnerable/escalation signal must hard-suspend it.
 const CRISIS_STATES: readonly BuddyState[] = ["crisis"];
-const VULNERABLE_STATES: readonly BuddyState[] = ["sad", "anxious", "overwhelmed", "crisis"];
-const DYSREGULATED_STATES: readonly BuddyState[] = ["overwhelmed", "crisis"];
+const VULNERABLE_STATES: readonly BuddyState[] = ["sad", "anxious", "anxious", "crisis"];
+const DYSREGULATED_STATES: readonly BuddyState[] = ["anxious", "crisis"];
 
 /**
  * v1.15 active-listener reflection rotator.

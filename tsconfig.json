@@ -3,15 +3,47 @@
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "Bundler",
-    "outDir": "dist",
-    "rootDir": ".",
+
     "strict": true,
+
+    "jsx": "react-jsx",
+
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "types": ["node"]
+
+    "types": ["node"],
+
+    "ignoreDeprecations": "6.0",
+
+    "baseUrl": ".",
+
+    "paths": {
+      "@/*": ["client/src/*"],
+      "@shared/*": ["shared/*"],
+      "@assets/*": ["attached_assets/*"]
+    },
+
+    "outDir": "dist",
+    "rootDir": "."
   },
-  "include": ["shared/**/*.ts"],
-  "exclude": ["node_modules", "dist", "drizzle.config.ts"]
+
+  "include": [
+    "client/src/**/*",
+    "server/**/*",
+    "shared/**/*",
+    "tests/**/*"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "backups",
+    "production-backups",
+    "static-export",
+    "archives",
+    "temp"
+  ]
 }

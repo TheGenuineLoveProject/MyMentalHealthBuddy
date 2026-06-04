@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0",
+  "mode": "mobile-nervous-system-safe-ux",
+  "auditAreas": [
+    "thumb-reach",
+    "font-readability",
+    "spacing",
+    "tap-targets",
+    "reduced-motion",
+    "calming-transitions",
+    "low-cognitive-density",
+    "crisis-visibility",
+    "privacy-visibility",
+    "tool-discoverability",
+    "journey-continuity",
+    "page-speed"
+  ],
+  "minimumStandards": {
+    "tapTargetPx": 44,
+    "supportsReducedMotion": true,
+    "crisisResourcesVisible": true,
+    "privacyAccessVisible": true,
+    "noDarkPatterns": true
+  },
+  "forbidden": [
+    "tiny-tap-targets",
+    "flashing-motion",
+    "urgency-pressure",
+    "hidden-crisis-resources",
+    "confusing-navigation",
+    "manipulative-streaks",
+    "emotional-dependency-loops"
+  ]
+}

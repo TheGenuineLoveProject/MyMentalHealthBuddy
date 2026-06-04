@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Play, Pause, RotateCcw, Wind, Clock, Leaf } from "lucide-react";
 import { Button } from "@/components/ui";
-import { CardWrapper, CardContent } from "@/components/ui/Card";
+import { CardWrapper, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/Switch";
 import SEO from "@/components/SEO";
 import { SafetyFooter } from "@/components/safety/LegalFooter";

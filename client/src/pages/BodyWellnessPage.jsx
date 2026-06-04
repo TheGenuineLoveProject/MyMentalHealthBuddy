@@ -5,7 +5,7 @@ import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { ArrowLeft, Activity, Heart, Utensils, Moon, Droplets, Wind, Footprints, Sparkles, Brain, Leaf, Timer, Eye, Hand } from 'lucide-react';
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

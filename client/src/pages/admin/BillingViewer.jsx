@@ -5,7 +5,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'wouter';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft } from 'lucide-react';
 import SafetyFooter from "../../components/ui/ReflectionFooter";

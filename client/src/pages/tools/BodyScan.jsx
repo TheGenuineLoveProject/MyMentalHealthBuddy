@@ -3,8 +3,8 @@ import { Link } from "wouter";
 import { Activity, ArrowLeft, Play, Pause, RotateCcw, Check } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const BODY_SCAN_STEPS = [
   { text: "Find a comfortable position and close your eyes if that feels okay", area: "general", duration: 8 },

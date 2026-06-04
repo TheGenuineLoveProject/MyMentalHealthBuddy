@@ -1,8 +1,9 @@
+import { getJsonPreference, setPreference } from "../../lib/preferences/safePreferences";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Mail, Clock, Check, Save, Loader2 } from 'lucide-react';
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -34,7 +35,7 @@ export default function EmailDigest() {
           }
         }
       } catch {
-        const cached = localStorage.getItem("glp_email_digest");
+        const cached = getJsonPreference("glp_email_digest", {});
         if (cached) setSettings(JSON.parse(cached));
       } finally {
         setLoading(false);
@@ -61,7 +62,7 @@ export default function EmailDigest() {
       setTimeout(() => setSaved(false), 3000);
     },
     onError: () => {
-      try { localStorage.setItem("glp_email_digest", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+      try { setPreference("glp_email_digest", settings); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
       setTimeout(() => setSaved(false), 3000);

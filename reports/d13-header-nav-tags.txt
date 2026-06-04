@@ -1,0 +1,236 @@
+client/src/pages/admin/CommandCenter.jsx:334:        <header className={styles.header}>
+client/src/pages/admin/SocialStudioAdmin.jsx:338:        <header className="mb-8">
+client/src/pages/admin/RevenueAdmin.jsx:78:        <header className="mb-8">
+client/src/pages/admin/FeatureFlags.jsx:174:        <header className="mb-8" data-testid="panel-header">
+client/src/pages/admin/EngagementDashboard.jsx:81:        <header className="mb-8">
+client/src/pages/admin/ContentStudioAdmin.jsx:135:        <header className="mb-8" data-testid="panel-header">
+client/src/pages/admin/AdminUsers.jsx:78:        <header className="mb-8">
+client/src/pages/admin/RolesPermissions.jsx:77:        <header className="mb-12">
+client/src/pages/admin/SystemAlerts.jsx:120:        <header className="mb-8">
+client/src/pages/admin/AdminTools.jsx:323:        <header className="mb-6">
+client/src/pages/account/Billing.jsx:166:          <header className="mb-8">
+client/src/pages/account/Profile.jsx:86:          <header className="mb-8">
+client/src/pages/account/Settings.jsx:102:          <header className="mb-8">
+client/src/pages/account/Security.jsx:190:      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+client/src/pages/account/Subscription.jsx:62:        <header className="mb-12">
+client/src/pages/account/OrderHistory.jsx:36:        <header className="mb-8" data-testid="header-order-history">
+client/src/pages/dashboard/Overview.jsx:267:        <header className={styles.header}>
+client/src/pages/dashboard/Insights.tsx:82:          <header className="mb-8">
+client/src/pages/dashboard/Journal.jsx:236:          <header className="mb-8">
+client/src/pages/dashboard/MoodTracker.jsx:121:          <header className="mb-8">
+client/src/pages/help/RefundHelp.jsx:50:        <header className="mb-8">
+client/src/pages/pathways/ValuesToActions.jsx:69:        <header className="text-center mb-10">
+client/src/pages/pathways/Favorites.jsx:81:        <header className="mb-8">
+client/src/pages/pathways/ReflectionHistory.jsx:147:        <header className="mb-8">
+client/src/pages/pathways/CalmPlan.jsx:69:        <header className="text-center mb-10">
+client/src/pages/pathways/ProgressStreaks.jsx:76:        <header className="mb-8 flex items-start justify-between">
+client/src/pages/pathways/PathwaysHome.jsx:89:        <header className="text-center mb-16">
+client/src/pages/preferences/SafetyPreferences.jsx:119:        <header className="mb-8">
+client/src/pages/preferences/NotificationPreferences.jsx:112:        <header className="mb-8">
+client/src/pages/settings/AIPersonality.jsx:111:        <header className="mb-8">
+client/src/pages/settings/EmailDigest.jsx:88:        <header className="mb-8">
+client/src/pages/tools/EmotionWheel.jsx:118:        <header className="text-center mb-12">
+client/src/pages/tools/WeeklyReflection.jsx:118:        <header className="text-center mb-8">
+client/src/pages/tools/MeditationPlayer.jsx:111:        <header className="text-center mb-12">
+client/src/pages/tools/PHQ9Assessment.jsx:72:        <header className="mb-6">
+client/src/pages/tools/SleepQualityCalculator.jsx:162:        <header className="mb-6">
+client/src/pages/tools/NervousSystemCheck.jsx:173:        <header className="mb-6">
+client/src/pages/tools/ManipulationDetector.jsx:157:        <header className="mb-6">
+client/src/pages/tools/CognitiveDistortionChecker.jsx:93:        <header className="mb-6">
+client/src/pages/tools/BoundaryBuilderTool.jsx:95:        <header className="mb-6">
+client/src/pages/tools/BreathPacer.jsx:108:        <header className="mb-6 text-center">
+client/src/pages/tools/GAD7Assessment.jsx:63:        <header className="mb-6">
+client/src/pages/tools/UrgeSurf.jsx:74:        <header className="text-center mb-10">
+client/src/pages/tools/RepairScript.jsx:66:        <header className="text-center mb-10">
+client/src/pages/tools/Reframe.jsx:64:        <header className="text-center mb-10">
+client/src/pages/tools/MeaningMap.jsx:118:        <header className="text-center mb-10">
+client/src/pages/tools/GriefLetter.jsx:87:        <header className="text-center mb-10">
+client/src/pages/tools/DigitalSunset.jsx:55:        <header className="text-center mb-10">
+client/src/pages/tools/CompassionBreak.jsx:72:        <header className="text-center mb-12">
+client/src/pages/tools/CommunityCheckin.jsx:98:        <header className="text-center mb-10">
+client/src/pages/tools/BodyScan.jsx:96:        <header className="text-center mb-12">
+client/src/pages/tools/AweMicrodose.jsx:71:        <header className="text-center mb-10">
+client/src/pages/tools/BreathTool.jsx:176:        <header className="text-center mb-10">
+client/src/pages/tools/BreathingTool.jsx:183:        <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
+client/src/pages/tools/BreathingTool.jsx:198:        <header className="mb-8 text-center">
+client/src/pages/tools/index.jsx:68:        <header className="mb-8 text-center">
+client/src/pages/_quarantine/legacy-landing/Home.jsx:170:      <header role="banner">
+client/src/pages/_quarantine/legacy-landing/Home.jsx:171:        <nav 
+client/src/pages/_quarantine/legacy-landing/Home.jsx:173:          aria-label="Main navigation"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:62:        <nav className="flex items-center gap-3 text-sm">
+client/src/pages/AboutApproachPage.jsx:8:        <nav className="mb-8" aria-label="Breadcrumb">
+client/src/pages/AboutApproachPage.jsx:16:        <header className="text-center mb-12">
+client/src/pages/Analytics.jsx:113:            <header className="flex items-center gap-4 mb-8">
+client/src/pages/Analytics.jsx:229:            <nav className="text-center">
+client/src/pages/CommunityCircle.jsx:61:        <header className="text-center mb-8">
+client/src/pages/ContentIndexPage.jsx:185:        <header className="text-center mb-8">
+client/src/pages/ControlDashboard.jsx:77:        <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200">
+client/src/pages/ControlDashboard.jsx:110:            <nav className="w-64 flex-shrink-0">
+client/src/pages/DesignSystem.jsx:74:      <header className="sticky top-0 z-50 px-6 py-4" style={{ 
+client/src/pages/DesignSystem.jsx:101:          <nav className="sticky top-24 space-y-1">
+client/src/pages/PracticeLibrary.jsx:182:        <header className="text-center mb-10">
+client/src/pages/ValuesPage.jsx:51:        <nav className="mb-8" aria-label="Breadcrumb">
+client/src/pages/ValuesPage.jsx:58:        <header className="text-center mb-16">
+client/src/pages/WellnessGoals.jsx:164:        <header className="mb-8">
+client/src/pages/reflection.tsx:6:      <header>
+client/src/pages/AffirmationWall.jsx:87:        <header className="text-center mb-12">
+client/src/pages/LearnDetail.jsx:77:        <header className="mb-10">
+client/src/pages/CRMPage.jsx:69:        <nav className="border-b sticky top-0 z-50 backdrop-blur-lg" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-20)' }}>
+client/src/pages/WireframeTemplates.jsx:74:      <header 
+client/src/pages/WireframeTemplates.jsx:82:        role="banner"
+client/src/pages/WireframeTemplates.jsx:140:          <nav className="sticky top-24 space-y-2">
+client/src/pages/WireframeTemplates.jsx:306:      <nav 
+client/src/pages/WireframeTemplates.jsx:310:        aria-label="Main navigation"
+client/src/pages/WireframeTemplates.jsx:517:          <nav className="flex gap-6 text-sm" aria-label="Footer navigation">
+client/src/pages/WireframeTemplates.jsx:692:        aria-label="Main navigation"
+client/src/pages/WireframeTemplates.jsx:702:        <nav className="flex-1 space-y-2">
+client/src/pages/WireframeTemplates.jsx:848:      <header className="flex items-center justify-between mb-8" data-component="PageHeader">
+client/src/pages/WireframeTemplates.jsx:989:      <header className="mb-8" data-component="ContentHeader">
+client/src/pages/WireframeTemplates.jsx:1012:      <nav 
+client/src/pages/WireframeTemplates.jsx:1101:      <header className="flex items-center justify-between mb-8" data-component="CommunityHeader">
+client/src/pages/LumiV6Preview.jsx:69:        <nav className="mb-6 flex items-center justify-between text-sm">
+client/src/pages/LumiV6Preview.jsx:82:        <header className="mb-8">
+client/src/pages/Blog.jsx:391:              <header className="mb-8 not-prose">
+client/src/pages/Blog.jsx:473:          <header className="text-center mb-12">
+client/src/pages/Terms.tsx:36:            <header className="mb-8">
+client/src/pages/Privacy.tsx:36:            <header className="mb-8">
+client/src/pages/FAQPage.jsx:195:      <header className="mb-8">
+client/src/pages/AdaptiveCompanionPage.tsx:145:        <header className="text-center mb-10">
+client/src/pages/Admin.jsx:245:        <header className="mb-10">
+client/src/pages/Admin.jsx:327:        <nav className="flex items-center gap-3 mb-10 overflow-x-auto pb-3 scrollbar-hide" role="tablist" aria-label="Admin navigation">
+client/src/pages/AdvancedToolsPage.tsx:119:          <header className="mb-8">
+client/src/pages/CognitiveArchitecturePage.tsx:174:        <header className="mb-8">
+client/src/pages/CollaborativeLabPage.tsx:220:        <header className="text-center mb-8">
+client/src/pages/CommunityPage.tsx:37:            <header className="mb-8">
+client/src/pages/ContentAdminDashboard.jsx:545:          <header className="mb-8">
+client/src/pages/DailyWisdomOraclePage.tsx:212:        <header className="mb-8">
+client/src/pages/DesignDashboard.jsx:38:        <header className="sticky top-0 z-10 bg-[var(--glp-paper)]/85 backdrop-blur-md border-b border-[var(--sage-200)]">
+client/src/pages/ExamplesPage.jsx:250:          <header className="mb-8">
+client/src/pages/GrowthAnalyticsPage.tsx:193:        <header className="mb-8">
+client/src/pages/GuidedJournalingPage.tsx:213:        <header className="mb-8">
+client/src/pages/HealthPage.jsx:41:          <header className="mb-8">
+client/src/pages/InsightCardsPage.tsx:148:        <header className="mb-8">
+client/src/pages/KnowledgeSynthesisPage.tsx:202:        <header className="mb-8">
+client/src/pages/MasteryToolsPage.tsx:65:          <header className="mb-8">
+client/src/pages/MasteryToolsPage.tsx:99:          <nav className="grid grid-cols-3 gap-4 mb-8">
+client/src/pages/MetaLearningPage.tsx:160:        <header className="mb-8">
+client/src/pages/MirrorPage.tsx:138:      <header className="text-center space-y-2">
+client/src/pages/PhilosophicalInquiryPage.tsx:169:        <header className="mb-8">
+client/src/pages/ProgressDashboardPage.tsx:189:        <header className="mb-10">
+client/src/pages/Publishing.jsx:87:          <header className="mb-8">
+client/src/pages/QAPage.jsx:196:          <header className="mb-8">
+client/src/pages/ResilienceMetricsPage.tsx:175:        <header className="text-center mb-10">
+client/src/pages/SocialHub.jsx:123:          <header className="mb-8">
+client/src/pages/StrategyMapsPage.tsx:368:        <header className="text-center mb-12">
+client/src/pages/SupportPage.tsx:27:          <header className="mb-8">
+client/src/pages/SystemsThinkingPage.tsx:150:        <header className="mb-8">
+client/src/pages/WisdomPracticesPage.tsx:210:        <header className="mb-8">
+client/src/pages/WisdomSynthesisPage.tsx:201:        <header className="mb-8">
+client/src/pages/WisdomToolsPage.tsx:100:          <header className="mb-8">
+client/src/pages/WisdomToolsPage.tsx:134:          <nav className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+client/src/pages/RigLab.jsx:66:      <header style={{ maxWidth: 1200, margin: "0 auto 1.5rem" }}>
+client/src/pages/MotionLab.jsx:63:      <header style={{ maxWidth: 1100, margin: "0 auto 1.5rem" }}>
+client/src/pages/AtlasDashboard.tsx:320:        <header className="text-center mb-12">
+client/src/pages/DailyRitualPage.tsx:275:        <header className="mb-8 text-center">
+client/src/pages/Settings.jsx:243:            <header className="flex items-center gap-4 mb-8">
+client/src/pages/Upgrade.jsx:88:            <header className="mb-8">
+client/src/pages/SoulWellnessPage.jsx:219:          <header className="mb-8">
+client/src/pages/ResearchEvidencePage.jsx:208:          <header className="mb-8">
+client/src/pages/ProtocolSession.jsx:229:            <header className="flex items-center justify-between mb-4">
+client/src/pages/ProtocolBrowser.jsx:140:        <header className="mb-6">
+client/src/pages/ProfessionalResourcesPage.jsx:157:          <header className="mb-8">
+client/src/pages/HowToGuidesPage.jsx:321:          <header className="mb-8">
+client/src/pages/DiscernmentDashboard.jsx:292:      <header className="flex items-center gap-2 mb-3">
+client/src/pages/DiscernmentDashboard.jsx:456:        <header className="mb-8">
+client/src/pages/DailyRoutinesPage.jsx:286:          <header className="mb-8">
+client/src/pages/CognitiveToolsPage.jsx:243:          <header className="mb-8">
+client/src/pages/BodyWellnessPage.jsx:350:          <header className="mb-8">
+client/src/pages/BiometricDashboard.jsx:220:        <header className="mb-6">
+client/src/pages/BehaviorChangePage.jsx:300:          <header className="mb-8">
+client/src/pages/AgentInteraction.jsx:116:      <header className="flex items-center justify-between mb-3">
+client/src/pages/AgentInteraction.jsx:267:        <header className="mb-6">
+client/src/pages/GlossaryPage.jsx:105:          <header className="mb-8">
+client/src/pages/ResourcesPage.jsx:129:          <header className="mb-8">
+client/src/pages/Dashboard.jsx:139:          <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
+client/src/pages/DesignSystemV2.jsx:99:        <header
+client/src/pages/DesignSystemV2.jsx:109:            <nav style={{ display: "flex", gap: 8, alignItems: "center" }}>
+client/src/pages/DesignSystemV2.jsx:252:              <nav style={{ display: "flex", gap: 4 }}>
+client/src/pages/DailyReflection.jsx:124:        <nav className="mb-8">
+client/src/pages/DailyReflection.jsx:135:        <header className="mb-8 space-y-3">
+client/src/pages/CourseCatalog.jsx:165:        <header className="text-center mb-12">
+client/src/pages/CommunityHub.jsx:33:          <header className="text-center mb-12">
+client/src/pages/GrowthPage.jsx:475:          <header className="mb-12" data-testid="growth-hero">
+client/src/pages/LegalPage.jsx:40:        <header className="mb-8">
+client/src/pages/CommunityGuidelines.jsx:35:        <header className="text-center mb-16">
+client/src/pages/CommunityFeed.jsx:47:          <header className="mb-8">
+client/src/pages/HealingJourneysPage.jsx:509:              <header className="mb-8">
+client/src/pages/GratitudePractice.jsx:124:        <nav className="mb-8">
+client/src/pages/DataRetention.jsx:50:        <header className="text-center mb-16">
+client/src/pages/DailyPracticePage.jsx:194:          <header className="text-center mb-10">
+client/src/pages/CreatorProfile.jsx:40:        <header className="text-center mb-16">
+client/src/pages/SafetyCenter.jsx:44:        <header className="text-center mb-16">
+client/src/pages/RoutinesPage.jsx:228:          <header className="text-center mb-10">
+client/src/pages/RecoveryPage.jsx:160:          <header className="text-center mb-10">
+client/src/pages/PublicRoadmap.jsx:39:        <header className="text-center mb-16">
+client/src/pages/PricingPage.jsx:110:        <header className="text-center mb-16">
+client/src/pages/StatePage.jsx:47:        <header className="mb-8">
+client/src/pages/PressKit.jsx:24:        <header className="text-center mb-16">
+client/src/pages/CelebrationFlow.jsx:144:        <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
+client/src/pages/CheckIn.jsx:197:        <nav className="mb-6 flex items-center gap-3 text-sm" aria-label="Breadcrumb">
+client/src/pages/CheckIn.jsx:212:        <header className="checkin-greeting mb-6 text-center" key={phase}>
+client/src/pages/Wellness.jsx:340:          <header className="mb-8">
+client/src/pages/Premium.jsx:179:          <header className="mb-8">
+client/src/pages/InsightsDashboard.jsx:94:        <header className="mb-8">
+client/src/pages/WellnessToolsHub.jsx:67:        <header className="mb-8 text-center">
+client/src/pages/TalkTopics.jsx:162:        <header className="text-center mb-12">
+client/src/pages/SafetyPage.jsx:56:            <header className="mb-10">
+client/src/pages/BlogPost.jsx:261:          <header className="mb-8">
+client/src/components/admin/OrchestratorTestPanel.jsx:119:      <header className="mb-4 flex items-start justify-between gap-4">
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:163:      <header className="flex items-start justify-between gap-4 flex-wrap">
+client/src/components/chat/AIChatPanel.tsx:127:      <nav
+client/src/components/layout/PageScaffold.tsx:60:      <header className="text-center py-8 px-4">
+client/src/components/layout/Header.jsx:88:    <header 
+client/src/components/layout/Header.jsx:130:        <nav className="hidden lg:flex items-center gap-2" aria-label="Main navigation">
+client/src/components/sacred/Hero.jsx:55:      role="banner"
+client/src/components/sacred/SacredHero.jsx:39:      role="banner"
+client/src/components/sacred/SacredSection.jsx:50:          <header className={styles.sectionHeader}>
+client/src/components/sacred/SacredFooter.jsx:134:        <nav 
+client/src/components/safety/LegalFooter.tsx:44:        <nav className="pt-4 flex flex-wrap justify-center gap-4 text-xs text-gray-500 dark:text-gray-400" aria-label="Legal links">
+client/src/components/ui/CRMWidgets.jsx:235:      <nav className="space-y-2" aria-label="Quick actions">
+client/src/components/ui/SectionContainer.jsx:27:          <header className="text-center mb-10 md:mb-14">
+client/src/components/ui/Footer.jsx:35:          <nav aria-label="Footer navigation" className="flex flex-wrap justify-center gap-6 text-sm">
+client/src/components/wellness/WellnessPageShell.jsx:39:      <nav
+client/src/components/wellness/WellnessPageShell.jsx:58:        <header className="mb-6">
+client/src/components/lumi/LumiCustomizer.jsx:120:        <header style={{ marginBottom: 16 }}>
+client/src/components/trust/TrustPageLayout.jsx:15:        <header className="mb-12 md:mb-16 text-center">
+client/src/components/navigation/CanonicalNavbar.jsx:35:    <header className="sticky top-0 z-50 border-b border-[#A8D5BA]/40 bg-[#F7F4EE]/95 backdrop-blur">
+client/src/components/navigation/CanonicalNavbar.jsx:44:        <nav className="hidden flex-wrap items-center gap-2 lg:flex">
+client/src/components/AICompanion.jsx:221:            <header 
+client/src/components/Breadcrumbs.jsx:8:    <nav 
+client/src/components/ChatWidget.tsx:86:      <header
+client/src/components/DashboardCard.jsx:23:        <header className="flex-between mb-4">
+client/src/components/GlowFooter.jsx:65:        <nav 
+client/src/components/SafetyFooter.jsx:60:      role="banner"
+client/src/components/SacredNav.jsx:46:    <nav 
+client/src/components/SacredNav.jsx:55:      aria-label="Main navigation"
+client/src/components/Header.jsx:38:    <header
+client/src/components/Header.jsx:68:        <nav className="flex flex-1 items-center justify-end gap-1" aria-label="Main navigation">
+client/src/components/Footer.jsx:31:          <nav className="flex flex-wrap gap-6 text-sm font-medium" aria-label="Footer navigation">
+client/src/components/SocialLinks.jsx:39:      <nav 
+client/src/components/SocialLinks.jsx:68:      <nav 
+client/src/components/BrandShell.jsx:8:        <header
+client/src/components/BrandShell.jsx:55:          <nav
+client/src/components/BrandShell.jsx:57:            aria-label="Main navigation"
+client/src/components/PageTemplate.jsx:841:        <header className={styles.gentleBenefitsHeader}>
+client/src/components/TglpNavbar.jsx:145:    <header
+client/src/components/TglpNavbar.jsx:152:      role="banner"
+client/src/components/TglpNavbar.jsx:187:        <nav className="flex items-center gap-2 md:gap-3 shrink-0" aria-label="Main navigation">
+client/src/features/community/SharedReflectionsPage.jsx:144:        <header className="text-center mb-12">
+client/src/features/daily/DailyFlow.tsx:34:        <nav className="mb-8">
+client/src/features/daily/DailyFlow.tsx:48:            <header className="space-y-3">
+client/src/skills/renderSkill.tsx:78:        <header className="mb-6">
+client/src/sections/ValueBridge.jsx:52:        <header className="vb-header">
+client/src/lumi-boundaries/components/TransparencyDrawer.tsx:71:        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+client/src/_quarantine/orphans/SacredNavBar.jsx:5:    <nav className="w-full fixed top-0 left-0 z-50 bg-[#f8f7f4]/90 shadow-md backdrop-blur-md">
+client/src/index.css:7293:   page <header>, breadcrumb, and footer <nav> as a sticky navbar and
+client/src/index.css:7420:   <header> elements inside <main> — are no longer needed. */

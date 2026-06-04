@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
@@ -156,7 +156,6 @@ export default function MirrorPage() {
             </p>
             <Button 
               variant="ghost" 
-              size="sm"
               onClick={cyclePrompt}
               className="text-sage-500 hover:text-teal-600"
               data-testid="button-cycle-prompt"

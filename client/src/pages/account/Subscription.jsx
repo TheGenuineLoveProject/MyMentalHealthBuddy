@@ -4,8 +4,8 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { CreditCard, Check, ExternalLink, Calendar, Shield, ArrowRight, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
@@ -23,14 +23,20 @@ export default function Subscription() {
   const { data: subscription, isLoading, error } = useQuery({
     queryKey: ["/api/billing/subscription-status"],
   });
-  
   const openPortal = async () => {
     setPortalLoading(true);
     try {
-      const res = await apiRequest("/api/billing/portal", { method: "POST" });
-      if (res.url) {
-        window.location.href = res.url;
-      } else {
+
+        const res = await apiRequest(
+          "POST",
+          "/api/billing/portal"
+        );
+
+        const portalUrl = res?.url || res?.data?.url;
+
+        if (portalUrl) {
+          window.location.href = portalUrl;
+        } else {
         toast({ title: "Error", description: "Unable to open billing portal", variant: "destructive" });
       }
     } catch (e) {

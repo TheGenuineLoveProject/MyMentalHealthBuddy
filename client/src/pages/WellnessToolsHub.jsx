@@ -1,104 +1,11 @@
 import { Link } from "wouter";
 import {
-  Brain, Heart, Wind, Shield, Activity, Compass, ArrowRight,
-  AlertTriangle, ArrowLeft, BookOpen, Sparkles, ShieldAlert, Moon,
+  ArrowRight, AlertTriangle, ArrowLeft, BookOpen, Sparkles,
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NewsletterSignup from "@/components/NewsletterSignup";
-
-const TOOLS = [
-  {
-    icon: Brain,
-    title: "GAD-7 Anxiety Check-in",
-    body: "A 7-question screening to notice anxiety levels over the last two weeks. Educational only.",
-    href: "/tools/gad7",
-    category: "Assessment",
-    tint: "rgba(255, 217, 61, 0.18)",
-    iconColor: "#B88A1F",
-    testid: "tool-gad7",
-  },
-  {
-    icon: Heart,
-    title: "PHQ-9 Mood Check-in",
-    body: "A 9-question screening to notice depression symptoms. Item 9 routes you to immediate support.",
-    href: "/tools/phq9",
-    category: "Assessment",
-    tint: "rgba(255, 154, 139, 0.20)",
-    iconColor: "#C2604F",
-    testid: "tool-phq9",
-  },
-  {
-    icon: Compass,
-    title: "Cognitive Distortion Checker",
-    body: "Spot common thinking patterns (catastrophizing, all-or-nothing, mind-reading) and reframe gently.",
-    href: "/tools/distortion-checker",
-    category: "Cognitive",
-    tint: "rgba(200, 182, 255, 0.22)",
-    iconColor: "#6B5BA8",
-    testid: "tool-distortion",
-  },
-  {
-    icon: Wind,
-    title: "Breath Pacer",
-    body: "A guided 4-7-8, box, or coherence breathing pattern. Calm your nervous system in two minutes.",
-    href: "/tools/breath-pacer",
-    category: "Somatic",
-    tint: "rgba(116, 192, 252, 0.20)",
-    iconColor: "#3D78B8",
-    testid: "tool-breath",
-  },
-  {
-    icon: Shield,
-    title: "Boundary Builder",
-    body: "Draft a clear, kind boundary statement using values-first language. Practice before you speak it.",
-    href: "/tools/boundary-builder",
-    category: "Relational",
-    tint: "rgba(168, 213, 186, 0.25)",
-    iconColor: "#4A7E62",
-    testid: "tool-boundary",
-  },
-  {
-    icon: Activity,
-    title: "Discernment Tutor",
-    body: "Train your awareness against manipulation, distortions, and fallacies — earn belts as you grow.",
-    href: "/discernment",
-    category: "Awareness",
-    tint: "rgba(168, 201, 160, 0.25)",
-    iconColor: "#4A7E72",
-    testid: "tool-discernment",
-  },
-  {
-    icon: ShieldAlert,
-    title: "Manipulation Detector",
-    body: "Paste a message or short exchange. We gently flag eight common tactics with reframes you can use.",
-    href: "/tools/manipulation-detector",
-    category: "Awareness",
-    tint: "rgba(255, 184, 140, 0.22)",
-    iconColor: "#B8662E",
-    testid: "tool-manipulation",
-  },
-  {
-    icon: Moon,
-    title: "Sleep Quality Self-Check",
-    body: "A 7-question sleep check inspired by PSQI. Get a band rating and CBT-I-style suggestions.",
-    href: "/tools/sleep-quality-calculator",
-    category: "Assessment",
-    tint: "rgba(116, 192, 252, 0.18)",
-    iconColor: "#3D78B8",
-    testid: "tool-sleep",
-  },
-  {
-    icon: Activity,
-    title: "Nervous System State Check",
-    body: "A polyvagal-informed self-check. Discover whether you are in safe, mobilized, or shut-down mode right now.",
-    href: "/tools/nervous-system-check",
-    category: "Somatic",
-    tint: "rgba(168, 213, 186, 0.25)",
-    iconColor: "#4A7E62",
-    testid: "tool-nervous-system",
-  },
-];
+import { WELLNESS_HUB_TOOLS as TOOLS } from "@/content/tools/toolsRegistry";
 
 function ToolCard({ tool }) {
   const Icon = tool.icon;

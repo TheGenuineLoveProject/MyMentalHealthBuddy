@@ -66,7 +66,7 @@ export default function WellnessScore({ moodData, journalCount, habitCompletion,
 
     setScore(Math.round(totalScore));
 
-    const savedScore = localStorage.getItem("last_wellness_score");
+    const savedScore = typeof window !== "undefined" ? localStorage.getItem("last_wellness_score") : null;
     if (savedScore) {
       const lastScore = parseInt(savedScore, 10);
       if (totalScore > lastScore + 5) {
@@ -77,7 +77,7 @@ export default function WellnessScore({ moodData, journalCount, habitCompletion,
         setTrend("stable");
       }
     }
-    try { localStorage.setItem("last_wellness_score", Math.round(totalScore).toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+    try { if (typeof window !== "undefined") localStorage.setItem("last_wellness_score", Math.round(totalScore).toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
   }, [moodData, journalCount, habitCompletion, meditationMinutes]);
 
   const getScoreColor = (s) => {

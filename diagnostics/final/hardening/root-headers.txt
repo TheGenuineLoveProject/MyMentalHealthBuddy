@@ -1,0 +1,27 @@
+HTTP/2 200 
+accept-ranges: bytes
+access-control-allow-credentials: true
+alt-svc: h3=":443"; ma=2592000
+cache-control: public, max-age=0
+content-security-policy: script-src 'self' 'unsafe-inline' 'unsafe-eval';style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;connect-src 'self' ws: wss: http: https:;img-src 'self' data: blob: https:;font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net;default-src 'self';base-uri 'self';form-action 'self';frame-ancestors 'self';object-src 'none';script-src-attr 'none';upgrade-insecure-requests
+content-type: text/html; charset=UTF-8
+cross-origin-opener-policy: same-origin
+cross-origin-resource-policy: same-origin
+date: Wed, 03 Jun 2026 18:13:31 GMT
+etag: W/"299c-19e81965a98"
+last-modified: Mon, 01 Jun 2026 05:09:35 GMT
+origin-agent-cluster: ?1
+referrer-policy: no-referrer
+strict-transport-security: max-age=63072000; includeSubDomains
+strict-transport-security: max-age=31536000; includeSubDomains
+vary: Origin
+via: 1.1 google
+x-content-type-options: nosniff
+x-dns-prefetch-control: off
+x-download-options: noopen
+x-frame-options: SAMEORIGIN
+x-permitted-cross-domain-policies: none
+x-request-id: 51d7f577-1918-4c31-bb79-f1c1db34948f
+x-xss-protection: 0
+content-length: 10652
+

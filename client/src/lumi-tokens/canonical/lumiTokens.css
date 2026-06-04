@@ -1,0 +1,30 @@
+@import "./lumi-tokens/canonical/lumiTokens.css";
+
+:root {
+
+	--lumi-sage: #A8BFA3;
+	--lumi-sage-deep: #7E9B7B;
+
+	--lumi-cream: #F6F1E8;
+	--lumi-mist: #EEF5F0;
+
+	--lumi-gold: #D6B36A;
+	--lumi-gold-soft: #E7D2A1;
+
+	--lumi-blush: #F6CFC7;
+
+	--lumi-forest: #1F3A36;
+	--lumi-night: #1C2524;
+
+	--lumi-text: var(--lumi-forest);
+
+	--lumi-bg: var(--lumi-cream);
+
+	--lumi-card:
+		linear-gradient(
+			135deg,
+			rgba(255,255,255,0.82),
+			rgba(246,241,232,0.94)
+		);
+
+}

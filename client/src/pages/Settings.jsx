@@ -1,3 +1,4 @@
+import { getPreference, setPreference } from "../lib/preferences/safePreferences";
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
 import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText, Gift, Loader2, Brain } from "lucide-react";
@@ -81,8 +82,8 @@ export default function Settings() {
     };
     
     const loadFromLocalStorage = () => {
-      const savedTheme = localStorage.getItem("theme") || "light";
-      const savedNotifications = localStorage.getItem("notifications") !== "false";
+      const savedTheme = getPreference("theme", "light");
+      const savedNotifications = getPreference("notifications", "true") !== "false";
       const savedMode = localStorage.getItem(VISUAL_MODE_KEY) || "";
       const savedTone = localStorage.getItem("glp-affirmation-tone") || "gentle";
       const savedVoice = localStorage.getItem("glp-voice-enabled") === "true";
@@ -147,7 +148,7 @@ export default function Settings() {
   }
   
   function saveToLocalStorage() {
-    try { localStorage.setItem("theme", theme); } catch (err) { console.warn("[storage-safe-write]", err); }
+    try { setPreference("theme", theme); } catch (err) { console.warn("[storage-safe-write]", err); }
     localStorage.setItem("notifications", String(notifications));
     localStorage.setItem("glp-affirmation-tone", affirmationTone);
     localStorage.setItem("glp-voice-enabled", String(voiceEnabled));

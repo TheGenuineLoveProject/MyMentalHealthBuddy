@@ -1,0 +1,10 @@
+- [LotusLoader reduced-motion defect](lotus-loader-reduced-motion.md) — inline-style animations on petals/center beat the reduce-motion media query; consolidating ad-hoc spinners to LotusLoader inherits this WCAG gap.
+- [Port 5000 orphan restarts](port-5000-orphan-restarts.md) — workflow FAILED/EADDRINUSE + empty {} SafeBoundary route errors trace to an orphaned node holding :5000; kill it and restart, not a code bug.
+- [Billing response contract](billing-response-contract.md) — MMHB `success()` nests under `data` but billing clients read top-level; mismatch silently breaks checkout/portal redirects. Use `ok()` for those endpoints.
+- [Vite build vs tsc](vite-build-vs-tsc.md) — publish runs `vite build`, not tsc; it fails on case-sensitive imports, duplicate top-level const, default/named export mismatches the one-by-one tsc workflow misses. Reproduce with `npx vite build`.
+- [Ambient module stub drift](ambient-module-stub-drift.md) — hand-written `declare module` stubs in `client/src/types/*.d.ts` override real exports; a default-vs-named mismatch makes imports flip forever. Fix the STUB, not the import.
+- [allowJs vs TS7016](allowjs-ts7016-tradeoff.md) — don't enable allowJs to fix ".jsx implicitly any"; it adds 22 JSX false-positives. Use colocated `.d.ts` stubs instead.
+- [design-system tokens shadowing](design-system-tokens-shadowing.md) — untyped `tokens.js` shadows typed `tokens/` dir; import `tokens/index` explicitly. Fix unmasks `any`-hidden bugs (e.g. index.ts heading/body="" stubs).
+- [Verification foundation](verification-foundation.md) — canonical non-destructive `npm run verify`; docs memory system under `docs/`; distrust placeholder lint/typecheck/test (always exit 0) and `/ready` SPA-fallback contract check.
+- [Canonical palette & homepage](canonical-palette-and-homepage.md) — colors.ts is the locked palette; canonical gold #D4B06A fails AA as text; `/` renders the CanvaLanding stub, not the PageTemplate landing.
+- [rg replace-flag footgun](rg-replace-flag-footgun.md) — `rg -rn`/`-rc` means --replace; output `n` artifacts are NOT file corruption. Use `-n` for line numbers, never `-r` unless replacing.

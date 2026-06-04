@@ -19,7 +19,7 @@ export function MMHBCompanionMessage({ response }: MMHBCompanionMessageProps) {
   if (response.isCrisis) {
     return (
       <MMHBCard
-        elevation="raised"
+        elevation="elevated"
         data-testid="companion-crisis-card"
         style={{ background: colors.aura.warmth }}
       >

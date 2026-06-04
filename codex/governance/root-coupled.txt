@@ -1,0 +1,5 @@
+14: * - Alias resolution (/home -> /)
+139:  if (routeKey.startsWith("/")) return routeKey;
+1046:    route: '/home',
+1052:    route: '/welcome',
+1659:    route: '/landing',

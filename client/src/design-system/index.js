@@ -1,0 +1,181 @@
+import React from "react";
+
+export * from "./Button.jsx";
+export * from "./Card.jsx";
+export * from "./PageShell.jsx";
+export * from "./Typography.jsx";
+
+
+
+
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+export const colors = {
+  serenitySage: "#4A7E72",
+  healingMint: "#A8D5BA",
+  eternalGold: "#F4B942",
+  heartGlow: "#FFC857",
+  roseBlush: "#F7B7A3",
+  calmIvory: "#F7F4EE",
+  dreamLavender: "#BFA2DB",
+  oceanComfort: "#75C7FF",
+};
+
+
+
+
+
+/* =========================================================
+   SPACING
+========================================================= */
+
+export const spacing = {
+  xs: "0.25rem",
+  sm: "0.5rem",
+  md: "1rem",
+  lg: "1.5rem",
+  xl: "2rem",
+  "2xl": "3rem",
+};
+
+
+
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+export const typography = {
+  heading: "font-bold tracking-tight",
+  subheading: "font-semibold",
+  body: "leading-7",
+  calm: "leading-relaxed",
+};
+
+
+
+
+
+/* =========================================================
+   ALIASES REQUIRED BY APP
+========================================================= */
+
+export const heading = typography.heading;
+export const body = typography.body;
+
+export const semantic = {
+  success: "text-green-600",
+  warning: "text-yellow-600",
+  danger: "text-red-600",
+  info: "text-blue-600",
+};
+
+export const fonts = {
+  heading: "'Nunito', sans-serif",
+  body: "'Inter', sans-serif",
+  calm: "'DM Sans', sans-serif",
+};
+
+
+
+
+
+/* =========================================================
+   RADIUS
+========================================================= */
+
+export const radius = {
+  sm: "0.5rem",
+  md: "0.75rem",
+  lg: "1rem",
+  xl: "1.25rem",
+  "2xl": "1.5rem",
+};
+
+
+
+
+
+/* =========================================================
+   MMHB BUTTON
+========================================================= */
+
+export function MMHBButton({
+  children,
+  className = "",
+  variant = "primary",
+  ...props
+}) {
+  const variants = {
+    primary: "bg-[#4A7E72] text-white hover:opacity-90",
+    gold: "bg-[#F4B942] text-black hover:opacity-90",
+    soft: "bg-[#F7F4EE] text-[#1f2937] hover:bg-[#A8D5BA]/30",
+    outline:
+      "border border-[#4A7E72] text-[#4A7E72] bg-transparent hover:bg-[#4A7E72]/10",
+  };
+
+  return React.createElement(
+    "button",
+    {
+      className:
+        `rounded-xl px-5 py-3 font-semibold transition ` +
+        `focus:outline-none focus:ring-2 focus:ring-[#F4B942] ` +
+        `focus:ring-offset-2 disabled:opacity-50 ` +
+        `${variants[variant] || variants.primary} ${className}`,
+      ...props,
+    },
+    children
+  );
+}
+
+
+
+
+
+/* =========================================================
+   MMHB CARD
+========================================================= */
+
+export function MMHBCard({
+  children,
+  className = "",
+  ...props
+}) {
+  return React.createElement(
+    "section",
+    {
+      className:
+        `rounded-2xl border border-[#A8D5BA]/40 ` +
+        `bg-white/85 p-6 shadow-sm ${className}`,
+      ...props,
+    },
+    children
+  );
+}
+
+/* =========================================================
+   PALETTE ALIAS — required by lumi-scenes presets
+========================================================= */
+
+export const palette = {
+  sage: colors.serenitySage,
+  mint: colors.healingMint,
+  gold: colors.eternalGold,
+  glow: colors.heartGlow,
+  rose: colors.roseBlush,
+  ivory: colors.calmIvory,
+  lavender: colors.dreamLavender,
+  ocean: colors.oceanComfort,
+
+  primary: colors.serenitySage,
+  secondary: colors.healingMint,
+  accent: colors.eternalGold,
+  background: colors.calmIvory,
+  surface: "#ffffff",
+  text: "#1f2937",
+  muted: "#6b7280",
+};

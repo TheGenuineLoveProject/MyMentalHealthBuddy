@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "artifact": "Deployment Readiness Audit",
+    "phase": "H2.17",
+    "mode": "AUDIT ONLY — no runtime code modified, no features, no refactor",
+    "date": "2026-05-31",
+    "governedBy": "MMHB v7.4 Archival Kernel (docs/governance/MMHB_v7.4_ARCHIVAL_KERNEL.md)",
+    "scope": "Evidence-based readiness classification gathered via shell. Domains auth/healing/crisis/journal/provider/billing/dashboard/admin/chat untouched."
+  },
+  "verdict": {
+    "deployableNow": true,
+    "confidence": "high",
+    "summary": "Working tree clean, build green, verify:all 121 pass / 0 fail, all 10 public routes return 200. No deploy-blocking issues found. One non-blocking warning (analytics env var) noted."
+  },
+  "buildStatus": {
+    "command": "npm run build",
+    "result": "PASS",
+    "buildTimeSeconds": 50.68,
+    "distDir": "client/dist",
+    "distSize": "36M",
+    "tsErrors": 0,
+    "bundlerErrors": 0
+  },
+  "verification": {
+    "command": "npm run verify:all",
+    "result": "PASS",
+    "summary": "121 pass, 0 warn, 0 fail",
+    "buildInsideVerify": "\u2713 built in 51.23s"
+  },
+  "gitStatus": {
+    "command": "git --no-optional-locks status --short",
+    "result": "clean",
+    "uncommittedChanges": 0,
+    "note": "Working tree clean; platform auto-checkpoints serve as commit mechanism for the main agent."
+  },
+  "routesVerified": {
+    "target": "live workflow http://127.0.0.1:5000",
+    "method": "curl -s -o /dev/null -w '%{http_code}'",
+    "note": "App is a client-only SPA (ReactDOM.createRoot, no real SSR); server returns 200 for SPA routes and the client router renders the view.",
+    "results": [
+      {"path": "/", "code": 200, "status": "OK"},
+      {"path": "/blog", "code": 200, "status": "OK"},
+      {"path": "/about", "code": 200, "status": "OK"},
+      {"path": "/features", "code": 200, "status": "OK"},
+      {"path": "/pricing", "code": 200, "status": "OK"},
+      {"path": "/healing", "code": 200, "status": "OK"},
+      {"path": "/journal", "code": 200, "status": "OK"},
+      {"path": "/chat", "code": 200, "status": "OK"},
+      {"path": "/tools", "code": 200, "status": "OK"},
+      {"path": "/crisis", "code": 200, "status": "OK"}
+    ],
+    "passed": 10,
+    "failed": 0
+  },
+  "blockers": [],
+  "warnings": [
+    {
+      "id": "W1",
+      "severity": "low",
+      "area": "analytics",
+      "finding": "VITE_GA_MEASUREMENT_ID is listed as a missing (not-yet-provided) secret.",
+      "impact": "Google Analytics will be inert until the value is supplied. Does NOT block deploy; app functions normally without it.",
+      "action": "Optional pre-launch: provide VITE_GA_MEASUREMENT_ID via the platform secrets manager if analytics is desired. Never hardcode it."
+    },
+    {
+      "id": "W2",
+      "severity": "informational",
+      "area": "rendering",
+      "finding": "SPA renders via createRoot (no SSR). SSR storage guards added in H2.8\u2013H2.16 are defensive/additive only.",
+      "impact": "No runtime impact; routes serve and render correctly. Noted for accuracy.",
+      "action": "None required."
+    },
+    {
+      "id": "W3",
+      "severity": "informational",
+      "area": "bundle",
+      "finding": "client/dist is 36M (includes static media/brand assets, not just JS).",
+      "impact": "Acceptable for deploy; CDN/static hosting handles assets. Not a blocker.",
+      "action": "Optional future optimization pass (out of scope for this phase)."
+    }
+  ],
+  "governanceStatus": {
+    "kernel": "MMHB v7.4 (locked 2026-05-06)",
+    "primaryLaw": "PASS — no business logic in healing flows; healing surfaces free of pricing/conversion/debugging.",
+    "crisisRouting": "PASS — /crisis returns 200; crisis routing preserved.",
+    "domainSeparation": "PASS — no auth/healing/crisis/journal/provider/billing/dashboard/admin/chat runtime changes in this phase.",
+    "executionDiscipline": "PASS — evidence-first, verification-first, single-phase, no destructive ops.",
+    "auditOnly": true
+  },
+  "remainingPreLaunchTasks": [
+    {"id": "T1", "priority": "optional", "task": "Provide VITE_GA_MEASUREMENT_ID secret if analytics is wanted (W1)."},
+    {"id": "T2", "priority": "recommended", "task": "Confirm production deployment type (static/autoscale) and run health check against the deployed .replit.app domain post-publish."},
+    {"id": "T3", "priority": "recommended", "task": "Smoke-test crisis routing (988 / 741741 / 911 / /crisis) on the live deployed domain."},
+    {"id": "T4", "priority": "optional", "task": "Future bundle-size optimization pass (W3), separately scoped."}
+  ],
+  "rollbackPlan": {
+    "strategy": "checkpoint-first",
+    "steps": [
+      "Each phase is auto-checkpointed by the platform; this audit added only docs (no runtime change) so rollback risk is nil.",
+      "If a future deploy regresses, roll back to the last green checkpoint (most recent commit id from <checkpoint_created>).",
+      "Re-run gate trio to confirm recovery: npm run verify:all -> npm run build -> route checks (/ /blog /about /features /pricing /healing /journal /chat /tools /crisis all 200).",
+      "Never use destructive git to revert; use platform rollback. Never db:push --force without explicit approval."
+    ],
+    "lastKnownGreen": "verify:all 121 pass / 0 fail; build \u2713 50.68s; 10/10 routes 200; git clean (this phase)."
+  }
+}

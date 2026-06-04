@@ -7,21 +7,21 @@
 
 export type BuddyState =
   | "calm"
-  | "sad"
   | "anxious"
-  | "overwhelmed"
+  | "sad"
   | "encouraged"
-  | "crisis"
-  | "celebrate";
+  | "celebrate"
+  | "sleep"
+  | "crisis";
 
 export const BUDDY_STATES: readonly BuddyState[] = [
   "calm",
   "sad",
-  "anxious",
-  "overwhelmed",
   "encouraged",
-  "crisis",
   "celebrate",
+  "sleep",
+  "crisis",
+  "anxious",
 ] as const;
 
 /**
@@ -38,14 +38,13 @@ export const BUDDY_STATES: readonly BuddyState[] = [
  *   sparkle    — joyful bounce with extra glow (celebrate)
  */
 export type BuddyMotion =
-  | "idle"
-  | "slow_glow"
-  | "breathing"
-  | "grounding"
+  | "float"
+  | "pulse"
+  | "grounded"
   | "warm_glow"
   | "steady"
+  | "idle"
   | "sparkle";
-
 /**
  * BuddyExpression (v1.9) — facial / postural expression vocabulary.
  *
@@ -125,47 +124,44 @@ export type BuddyOutput = BuddyVisualOutput;
 //     authoritative routing flag — any future surface MUST honor it.
 //   - All other states are `safetyMode: "normal"`.
 const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
-  calm: {
-    state: "calm",
-    safetyMode: "normal",
-    eyeColor: "#6FE3B0",
-    heartColor: "#7FD8A8",
-    heartPulse: 5200,
-    motion: "idle",
-    expression: "soft",
-    label: "Calm and present",
-  },
-  sad: {
-    state: "sad",
-    safetyMode: "normal",
-    eyeColor: "#9D8FCC",
-    heartColor: "#B19CD9",
-    heartPulse: 6800,
-    motion: "slow_glow",
-    expression: "lowered",
-    label: "Holding sadness gently",
-  },
-  anxious: {
-    state: "anxious",
-    safetyMode: "normal",
-    eyeColor: "#8FF0BC",
-    heartColor: "#7FD8A8",
-    heartPulse: 4400,
-    motion: "breathing",
-    expression: "focused",
-    label: "Noticing anxious energy — slow breath together",
-  },
-  overwhelmed: {
-    state: "overwhelmed",
-    safetyMode: "normal",
-    eyeColor: "#5DA88E",
-    heartColor: "#5DA88E",
-    heartPulse: 4800,
-    motion: "grounding",
-    expression: "grounded",
-    label: "Feeling overwhelmed — grounding together",
-  },
-  encouraged: {
+  
+
+calm: {
+  state: "calm",
+  safetyMode: "normal",
+  eyeColor: "#A7F3D0",
+  heartColor: "#6EE7B7",
+  heartPulse: 3200,
+  motion: "idle",
+  expression: "soft",
+  label: "Feeling calm and safe",
+},
+
+sad: {
+  state: "sad",
+  safetyMode: "normal",
+  eyeColor: "#93C5FD",
+  heartColor: "#60A5FA",
+  heartPulse: 3600,
+  motion: "grounded",
+  expression: "lowered",
+  label: "Holding sadness gently",
+},
+
+anxious: {
+  state: "anxious",
+  safetyMode: "normal",
+  eyeColor: "#FDE68A",
+  heartColor: "#F59E0B",
+  heartPulse: 4800,
+  motion: "grounded",
+  expression: "focused",
+  label: "Grounding anxious feelings",
+},
+
+encouraged: {
+
+
     state: "encouraged",
     safetyMode: "normal",
     eyeColor: "#7AE2A6",
@@ -185,6 +181,17 @@ const VISUAL_MAP: Record<BuddyState, BuddyVisualOutput> = {
     expression: "steady",
     label: "Crisis support — you are safe with me",
   },
+  sleep: {
+    state: "sleep",
+    motion: "idle",
+    expression: "soft",
+    label: "sleep",
+    eyeColor: "#A78BFA",
+    heartColor: "#C4B5FD",
+    heartPulse: 2200,
+    safetyMode: "normal"
+  },
+
   celebrate: {
     state: "celebrate",
     safetyMode: "normal",
@@ -226,7 +233,7 @@ export function resolveBuddyState(input: unknown): BuddyState {
 
   // Lightweight free-text fallback (server is canonical)
   if (/\b(suicid|kill myself|end it|self.?harm|hurt myself)\b/.test(normalized)) return "crisis";
-  if (/\b(overwhelm|too much|can'?t cope|breaking down|drowning)\b/.test(normalized)) return "overwhelmed";
+  if (/\b(overwhelm|too much|can'?t cope|breaking down|drowning)\b/.test(normalized)) return "anxious";
   if (/\b(anxious|panic|worried|nervous|scared|afraid)\b/.test(normalized)) return "anxious";
   if (/\b(sad|down|depressed|grief|lonely|empty|cry)\b/.test(normalized)) return "sad";
   if (/\b(yay|great|amazing|won|achieved|celebrate|proud)\b/.test(normalized)) return "celebrate";

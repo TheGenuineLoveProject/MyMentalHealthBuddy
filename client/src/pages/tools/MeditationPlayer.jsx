@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Clock } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";

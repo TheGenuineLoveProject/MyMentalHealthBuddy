@@ -1,0 +1,930 @@
+
+==== STORAGE USAGE REPORT ====
+
+client/src/api/fetchWithAuth.js
+  L1: // Safe localStorage helpers for environments with blocked storage
+  L4: return localStorage.getItem(key);
+  L12: localStorage.setItem(key, value);
+
+client/src/components/AccessibilityToolbar.jsx
+  L25: const stored = localStorage.getItem("glp-a11y-settings");
+  L70: try { localStorage.setItem("glp-a11y-settings", JSON.stringify(newSettings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L76: try { localStorage.setItem("glp-a11y-settings", JSON.stringify(DEFAULT_A11Y_SETTINGS)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/AchievementBadges.jsx
+  L120: const saved = localStorage.getItem("achievements_unlocked");
+  L144: try { localStorage.setItem("achievements_unlocked", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/AchievementSystem.jsx
+  L85: const saved = localStorage.getItem("earned_achievements");
+  L123: try { localStorage.setItem("earned_achievements", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/AffirmationCards.jsx
+  L97: const saved = localStorage.getItem(STORAGE_KEY);
+  L147: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/AgeConfirmationModal.tsx
+  L17: const confirmed = localStorage.getItem(STORAGE_KEY);
+  L39: try { localStorage.setItem(STORAGE_KEY, "true"); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/AgeConsentGate.jsx
+  L12: const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
+  L20: try { localStorage.setItem(CONSENT_STORAGE_KEY, 'true'); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L163: const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
+  L171: try { localStorage.removeItem(CONSENT_STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/AngerManagement.jsx
+  L85: const saved = localStorage.getItem("anger_management_data");
+  L131: try { localStorage.setItem("anger_management_data", JSON.stringify({ sessions: newSessions })); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/BodyScanMeditation.jsx
+  L27: const saved = localStorage.getItem("body_scan_sessions");
+  L44: try { localStorage.setItem("body_scan_sessions", newCount.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/BoundaryBuilder.jsx
+  L43: const saved = localStorage.getItem("boundary_builder_data");
+  L55: localStorage.setItem("boundary_builder_data", JSON.stringify({
+
+client/src/components/CBTThoughtDiary.jsx
+  L37: const saved = localStorage.getItem(STORAGE_KEY);
+  L54: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L73: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/ConsentBanner.jsx
+  L17: const consent = localStorage.getItem(CONSENT_KEY);
+  L34: try { localStorage.setItem(CONSENT_KEY, JSON.stringify(consentData)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/ContentLevelToggle.jsx
+  L6: * - localStorage persistence
+  L32: const stored = localStorage.getItem(STORAGE_KEY);
+  L43: localStorage.setItem(STORAGE_KEY, newLevel);
+
+client/src/components/CopingStrategies.jsx
+  L232: const saved = localStorage.getItem("favorite_strategies");
+  L247: try { localStorage.setItem("favorite_strategies", JSON.stringify(newFavorites)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/DailyAffirmations.jsx
+  L77: const savedAffirmations = localStorage.getItem("savedAffirmations");
+  L83: const lastDate = localStorage.getItem("affirmationDate");
+  L87: try { localStorage.setItem("affirmationDate", today); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L88: localStorage.setItem("dailyAffirmationIndex", randomIndex.toString());
+  L90: const savedIndex = localStorage.getItem("dailyAffirmationIndex");
+  L122: try { localStorage.setItem("savedAffirmations", JSON.stringify(newSaved)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/DigitalDetox.jsx
+  L45: const saved = localStorage.getItem("digital_detox_data");
+  L90: localStorage.setItem("digital_detox_data", JSON.stringify({
+  L115: localStorage.setItem("digital_detox_data", JSON.stringify({
+
+client/src/components/EmotionLog.jsx
+  L50: try { localStorage.setItem(`glp_emotion_${new Date().toISOString().split('T')[0]}`, JSON.stringify(entry)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/EmotionalIntelligenceQuiz.jsx
+  L56: const saved = localStorage.getItem(STORAGE_KEY);
+  L109: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedResults)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/EnergyBooster.jsx
+  L71: const saved = localStorage.getItem("energy_booster_data");
+  L117: localStorage.setItem("energy_booster_data", JSON.stringify({
+
+client/src/components/FeedbackPrompt.tsx
+  L38: const existing = localStorage.getItem("mmhb_guest_id");
+  L41: try { localStorage.setItem("mmhb_guest_id", id); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L50: return localStorage.getItem("mmhb_token");
+
+client/src/components/FeedbackWidget.jsx
+  L19: const raw = window.localStorage.getItem(SUPPRESSION_KEY);
+  L32: window.localStorage.setItem(SUPPRESSION_KEY, String(Date.now() + SUPPRESSION_MS));
+  L48: // Re-check suppression once on mount in case localStorage was cleared in
+
+client/src/components/GoalProgress.jsx
+  L31: const saved = typeof window !== "undefined" ? localStorage.getItem("wellness_goals") : null;
+  L39: try { if (typeof window !== "undefined") localStorage.setItem("wellness_goals", JSON.stringify(updatedGoals)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/GratitudeJar.jsx
+  L38: const saved = localStorage.getItem(STORAGE_KEY);
+  L56: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L64: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/GratitudePrompt.jsx
+  L100: const existing = ((()=>{try{return JSON.parse(localStorage.getItem("gratitudeEntries") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L109: try { localStorage.setItem("gratitudeEntries", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/HabitTracker.jsx
+  L20: const savedHabits = localStorage.getItem("wellness_habits");
+  L21: const savedCompleted = localStorage.getItem("habits_completed_today");
+  L22: const savedStreaks = localStorage.getItem("habit_streaks");
+  L23: const lastDate = localStorage.getItem("habits_last_date");
+  L30: try { localStorage.setItem("wellness_habits", JSON.stringify(DEFAULT_HABITS)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L40: try { localStorage.setItem("habits_last_date", today); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L41: localStorage.setItem("habits_completed_today", JSON.stringify({}));
+  L52: try { localStorage.setItem("habits_completed_today", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L61: try { localStorage.setItem("habit_streaks", JSON.stringify(newStreaks)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L76: try { localStorage.setItem("wellness_habits", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L84: try { localStorage.setItem("wellness_habits", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L89: try { localStorage.setItem("habits_completed_today", JSON.stringify(updatedCompleted)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/HydrationTracker.jsx
+  L41: const saved = localStorage.getItem("hydration_data");
+  L56: localStorage.setItem("hydration_data", JSON.stringify({
+
+client/src/components/LaughterTherapy.jsx
+  L113: const saved = localStorage.getItem("laughterMinutes");
+  L166: try { localStorage.setItem("laughterMinutes", newMinutes.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/MeditationTimer.jsx
+  L32: const saved = localStorage.getItem("meditation_sessions");
+  L54: try { localStorage.setItem("meditation_sessions", newCount.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/MicroWinPrompt.jsx
+  L41: try { return Boolean(window.localStorage.getItem(AUTH_TOKEN_KEY)); } catch { return false; }
+
+client/src/components/MindfulEating.jsx
+  L83: const saved = localStorage.getItem("mindful_eating_data");
+  L126: try { localStorage.setItem("mindful_eating_data", JSON.stringify({ meals: newCount })); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/MindfulWalking.jsx
+  L90: const saved = localStorage.getItem("mindful_walking_sessions");
+  L132: try { localStorage.setItem("mindful_walking_sessions", newTotal.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/MindfulnessBell.jsx
+  L50: const saved = localStorage.getItem("mindfulness_bell_settings");
+  L58: const savedCount = localStorage.getItem("mindfulness_bell_count");
+  L70: localStorage.setItem("mindfulness_bell_settings", JSON.stringify({
+  L120: localStorage.setItem("mindfulness_bell_count", JSON.stringify({
+
+client/src/components/MindfulnessChallenges.jsx
+  L39: const saved = localStorage.getItem(STORAGE_KEY);
+  L51: localStorage.setItem(STORAGE_KEY, JSON.stringify({
+
+client/src/components/ModeToggle.jsx
+  L17: const saved = localStorage.getItem(STORAGE_KEY) || "";
+  L25: try { localStorage.setItem(STORAGE_KEY, modeId); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/MorningEveningRituals.jsx
+  L32: const saved = localStorage.getItem("morningRituals");
+  L40: const saved = localStorage.getItem("eveningRituals");
+  L48: const saved = localStorage.getItem("ritualStreak");
+  L64: localStorage.setItem(key, JSON.stringify({
+  L87: try { localStorage.setItem("ritualStreak", JSON.stringify(newStreak)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/MotivationBooster.jsx
+  L59: const saved = localStorage.getItem("motivation_booster_data");
+  L115: try { localStorage.setItem("motivation_booster_data", JSON.stringify(data)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/NewsletterSignup.jsx
+  L7: const stored = localStorage.getItem("glp_utm");
+  L26: try { localStorage.setItem("glp_utm", JSON.stringify(utmData)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/PositiveReframing.jsx
+  L59: const savedHistory = localStorage.getItem("reframing_history");
+  L82: try { localStorage.setItem("reframing_history", JSON.stringify(newHistory)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/PositiveVisualization.jsx
+  L103: const savedFavorites = localStorage.getItem("viz_favorites");
+  L164: try { localStorage.setItem("viz_favorites", JSON.stringify(newFavorites)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/PowerNap.jsx
+  L69: const saved = localStorage.getItem("nap_count");
+  L97: localStorage.setItem("nap_count", JSON.stringify({
+
+client/src/components/ProgressiveMuscleRelaxation.jsx
+  L31: const saved = localStorage.getItem("pmr_sessions");
+  L56: try { localStorage.setItem("pmr_sessions", newCount.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/QuestPanel.jsx
+  L14: setSavedInterest(localStorage.getItem('glp_quest_interest') === 'true');
+  L151: try { localStorage.setItem('glp_quest_interest', 'true'); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/ReminderScheduler.jsx
+  L37: const stored = localStorage.getItem("glp-reminder-settings");
+  L59: localStorage.setItem("glp-reminder-settings", JSON.stringify(settings));
+  L103: localStorage.setItem("glp-scheduled-reminder", JSON.stringify({
+
+client/src/components/ResilienceStories.jsx
+  L25: const saved = localStorage.getItem("resilienceStories");
+  L42: try { localStorage.setItem("resilienceStories", JSON.stringify(stories)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/ReturnLoop.jsx
+  L5: *   1. On every mount, increment localStorage["mmhb_visit_count"] (once per
+  L18: *   localStorage). WelcomeBackBanner fires within a single tab session.
+  L101: try { return window.localStorage.getItem(key); } catch { return null; }
+  L105: try { window.localStorage.setItem(key, val); } catch { /* noop */ }
+
+client/src/components/SelfCareBingo.jsx
+  L66: const saved = localStorage.getItem(STORAGE_KEY);
+  L98: localStorage.setItem(STORAGE_KEY, JSON.stringify({
+  L136: localStorage.setItem(STORAGE_KEY, JSON.stringify({
+
+client/src/components/SelfCareChecklist.jsx
+  L62: const savedDate = localStorage.getItem("selfcare_date");
+  L63: const savedCompleted = localStorage.getItem("selfcare_completed");
+  L64: const savedStreak = localStorage.getItem("selfcare_streak");
+  L65: const savedPoints = localStorage.getItem("selfcare_total_points");
+  L81: try { localStorage.setItem("selfcare_streak", newStreak.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L84: localStorage.setItem("selfcare_streak", "0");
+  L88: try { localStorage.setItem("selfcare_streak", "0"); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L90: localStorage.setItem("selfcare_date", today);
+  L91: localStorage.setItem("selfcare_completed", JSON.stringify({}));
+  L93: try { localStorage.setItem("selfcare_date", today); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L101: try { localStorage.setItem("selfcare_completed", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L106: try { localStorage.setItem("selfcare_total_points", newTotal.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L111: try { localStorage.setItem("selfcare_completed", JSON.stringify({})); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/SelfCompassion.jsx
+  L88: const saved = localStorage.getItem("self_compassion_data");
+  L152: try { localStorage.setItem("self_compassion_data", JSON.stringify(data)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/SleepTracker.jsx
+  L35: const savedHistory = localStorage.getItem("sleep_history");
+  L97: try { localStorage.setItem("sleep_history", JSON.stringify(updatedHistory)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/SocialConnection.jsx
+  L46: const savedData = localStorage.getItem("social_connection_data");
+  L80: localStorage.setItem("social_connection_data", JSON.stringify({
+
+client/src/components/StressMonitor.jsx
+  L47: const saved = localStorage.getItem("stress_monitor_data");
+  L77: localStorage.setItem("stress_monitor_data", JSON.stringify({
+
+client/src/components/ValuesExplorer.jsx
+  L49: const saved = localStorage.getItem("values_explorer_data");
+  L92: localStorage.setItem("values_explorer_data", JSON.stringify({
+  L115: localStorage.setItem("values_explorer_data", JSON.stringify({
+  L129: try { localStorage.removeItem("values_explorer_data"); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/VoiceSettings.jsx
+  L49: const stored = localStorage.getItem("glp-voice-settings");
+  L70: localStorage.setItem("glp-voice-settings", JSON.stringify(settings));
+
+client/src/components/WeeklyReflection.jsx
+  L80: const saved = localStorage.getItem("weekly_reflections");
+  L127: try { localStorage.setItem("weekly_reflections", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/WelcomeBackBanner.jsx
+  L11: *      `mmhb_token` localStorage key the AuthContext writes), else /login.
+  L43: try { return Boolean(window.localStorage.getItem(AUTH_TOKEN_KEY)); } catch { return false; }
+  L57: const count = parseInt(window.localStorage.getItem(VISIT_COUNT_KEY) || "0", 10) || 0;
+
+client/src/components/WellnessScore.jsx
+  L69: const savedScore = typeof window !== "undefined" ? localStorage.getItem("last_wellness_score") : null;
+  L80: try { if (typeof window !== "undefined") localStorage.setItem("last_wellness_score", Math.round(totalScore).toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/WellnessStreakDashboard.jsx
+  L39: const saved = localStorage.getItem(STORAGE_KEY);
+  L58: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(newStats)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/WorryTimeScheduler.jsx
+  L25: const saved = localStorage.getItem("worry_time_data");
+  L51: try { localStorage.setItem("worry_time_data", JSON.stringify(data)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/admin/AIHealthPipeline.jsx
+  L13: try { const s = localStorage.getItem('glp_health_pipeline_history'); return s ? JSON.parse(s) : []; } catch { return []; }
+  L91: try { localStorage.setItem('glp_health_pipeline_history', JSON.stringify(newHistory)); } catch {}
+
+client/src/components/admin/ConsciousnessRegistryPanel.jsx
+  L16: const userToken = (typeof localStorage !== "undefined" && localStorage.getItem("mmhb_token")) || null;
+
+client/src/components/admin/DailyOpsChecklist.jsx
+  L9: const saved = localStorage.getItem('glp_daily_ops_checklist');
+  L21: const saved = localStorage.getItem('glp_daily_ops_timestamps');
+  L56: localStorage.setItem('glp_daily_ops_checklist', JSON.stringify({ date: new Date().toDateString(), items: updated }));
+  L63: localStorage.setItem('glp_daily_ops_timestamps', JSON.stringify({ date: new Date().toDateString(), stamps }));
+
+client/src/components/admin/DailyToolsPanel.jsx
+  L82: localStorage.setItem('glp_tools_last_check', JSON.stringify({
+
+client/src/components/admin/OperationsPanel.jsx
+  L664: return typeof localStorage !== "undefined"
+  L665: ? localStorage.getItem("mmhb_token")
+
+client/src/components/admin/OrchestratorTestPanel.jsx
+  L25: const jwt = localStorage.getItem(TOKEN_KEY);
+
+client/src/components/admin/SOPMonitorPanel.jsx
+  L24: const userToken = (typeof localStorage !== "undefined" && localStorage.getItem("mmhb_token")) || null;
+
+client/src/components/avatar/BuddyAvatar.tsx
+  L362: //   - Default OFF (lumi:audio:enabled localStorage)
+
+client/src/components/beliefs/BeliefMapper.tsx
+  L22: return ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L29: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(beliefs)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/consciousness/SilenceMode.tsx
+  L15: const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L21: try { localStorage.setItem(key, JSON.stringify([entry, ...existing].slice(0, 100))); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/growth/GrowthTimeline.tsx
+  L21: const reflections = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEYS.reflections) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L32: const beliefs = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEYS.beliefs) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L42: const silence = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEYS.silence) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+
+client/src/components/layout/Header.jsx
+  L25: return localStorage.getItem("glp-mode") || "default";
+  L46: try { localStorage.setItem("glp-mode", mode); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/components/lumi/LumiCompanion.jsx
+  L67: * localStorage and reads them back on next mount.
+
+client/src/components/modules/ModulesPanel.tsx
+  L23: const raw = localStorage.getItem(key);
+  L31: localStorage.setItem(key, JSON.stringify(value));
+
+client/src/components/patterns/InsightPatternLab.tsx
+  L38: const stateHistoryRaw = localStorage.getItem("glp_state_history");
+
+client/src/components/personalization/ToolRecommendations.jsx
+  L32: const prefs = ((()=>{try{return JSON.parse(localStorage.getItem("glp_onboarding_preferences") || "{}");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("{}");}})());
+
+client/src/components/ui/CalmModeToggle.jsx
+  L12: return localStorage.getItem('glp-calm-mode') === 'true' ||
+  L26: try { localStorage.setItem('glp-calm-mode', calmMode.toString()); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L59: return localStorage.getItem('glp-calm-mode') === 'true';
+  L66: setCalmMode(localStorage.getItem('glp-calm-mode') === 'true');
+
+client/src/components/ui/theme-provider.jsx
+  L23: ? localStorage.getItem("theme") || "system"
+  L27: // Apply theme to <html> and persist in localStorage
+  L34: try { localStorage.setItem("theme", theme); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/content/flags/featureFlags.ts
+  L23: return ((()=>{try{return JSON.parse(localStorage.getItem(KEY) || "{}");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("{}");}})());
+  L32: localStorage.setItem(KEY, JSON.stringify(v));
+  L51: localStorage.removeItem(KEY);
+
+client/src/content/progress/progressStore.ts
+  L9: const raw = localStorage.getItem(key);
+  L20: localStorage.setItem(key, JSON.stringify(value));
+
+client/src/content/readingLevels.js
+  L6: * - SSR-safe localStorage handling
+  L8: * - Fallback chain: URL > localStorage > route default > intermediate
+  L178: * Priority: URL query > localStorage > route default > 'intermediate'
+  L183: * @param {string} options.storedLevel - localStorage value (pass null during SSR)
+  L201: * Get stored reading level from localStorage (SSR-safe)
+  L207: return localStorage.getItem(STORAGE_KEY);
+  L214: * Store reading level to localStorage (SSR-safe)
+  L222: localStorage.setItem(STORAGE_KEY, normalized);
+
+client/src/content/saves/savesStore.ts
+  L6: return ((()=>{try{return JSON.parse(localStorage.getItem(KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L15: localStorage.setItem(KEY, JSON.stringify(v));
+  L36: localStorage.removeItem(KEY);
+
+client/src/context/AuthContext.jsx
+  L57: // Safe localStorage helper that handles blocked storage (Safari Private, privacy extensions)
+  L60: return localStorage.getItem(key);
+  L62: console.warn('localStorage unavailable, using in-memory storage');
+  L69: localStorage.setItem(key, value);
+  L77: localStorage.removeItem(key);
+
+client/src/context/EmotionContext.jsx
+  L123: const saved = localStorage.getItem(STORAGE_KEY);
+  L158: localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  L196: try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/context/ReadingLevelContext.jsx
+  L7: * - localStorage persistence
+
+client/src/hooks/useLumiAudio.js
+  L5: *   - localStorage-backed enabled flag (key: "mmhb-lumi-audio-enabled", default OFF)
+  L31: const legacy = window.localStorage.getItem("mmhb-lumi-audio-enabled");
+  L32: if (legacy != null && window.localStorage.getItem(STORAGE_KEY) == null) {
+  L33: window.localStorage.setItem(STORAGE_KEY, legacy);
+  L35: if (legacy != null) window.localStorage.removeItem("mmhb-lumi-audio-enabled");
+  L45: return window.localStorage.getItem(STORAGE_KEY) === "true";
+  L99: window.localStorage.setItem(STORAGE_KEY, next ? "true" : "false");
+
+client/src/hooks/useLumiBehavior.js
+  L37: if (typeof window === "undefined" || typeof localStorage === "undefined") {
+  L41: const raw = localStorage.getItem(STATS_STORAGE_KEY);
+  L51: if (typeof window === "undefined" || typeof localStorage === "undefined") return;
+  L53: localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats));
+  L102: *     bump localStorage stats, check for milestone crossings, fire the
+
+client/src/hooks/useLumiTheme.js
+  L9: if (typeof window === "undefined" || typeof localStorage === "undefined") {
+  L13: const stored = localStorage.getItem(STORAGE_KEY);
+  L50: * Owns the persisted Lumi color theme. Reads from localStorage on mount,
+  L77: if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
+  L79: localStorage.setItem(STORAGE_KEY, nextId);
+
+client/src/lib/aiChat.ts
+  L15: let id = localStorage.getItem(GUEST_ID_KEY);
+  L18: try { localStorage.setItem(GUEST_ID_KEY, id); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L25: // localStorage.getItem can throw in some sandboxed iframe / private-mode
+  L29: token = localStorage.getItem(TOKEN_KEY);
+
+client/src/lib/api.ts
+  L6: if (typeof window === "undefined" || typeof localStorage === "undefined") return null;
+  L8: return localStorage.getItem(TOKEN_KEY);
+  L15: if (typeof window === "undefined" || typeof localStorage === "undefined") return;
+  L17: localStorage.setItem(TOKEN_KEY, token);
+  L23: if (typeof window === "undefined" || typeof localStorage === "undefined") return;
+  L25: localStorage.removeItem(TOKEN_KEY);
+  L31: if (typeof window === "undefined" || typeof localStorage === "undefined") return false;
+  L33: return localStorage.getItem(CONSENT_STORAGE_KEY) === "true";
+
+client/src/lib/atlas/philosophicalAtlas.ts
+  L231: const existing: AtlasPath[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L238: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 50))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L242: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_atlas_paths") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+
+client/src/lib/attention/attentionEcology.ts
+  L76: const stored = localStorage.getItem(STORAGE_KEY);
+  L83: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/autodidact/autodidactForge.ts
+  L135: const existing: AutodidactPlan[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L143: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 10))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L147: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_autodidact_plans") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L152: const existing: AutodidactPlan[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L153: localStorage.setItem(key, JSON.stringify(existing.filter(p => p.id !== id)));
+
+client/src/lib/bias/biasBlindSpots.ts
+  L174: try { localStorage.setItem(key, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L178: const stored = localStorage.getItem("glp_bias_profile");
+
+client/src/lib/buddyTelemetry.ts
+  L42: * Get-or-create a stable guest identifier in localStorage.
+  L51: * Returns an empty string if localStorage is unavailable (private
+  L56: const existing = localStorage.getItem(GUEST_ID_KEY);
+  L59: try { localStorage.setItem(GUEST_ID_KEY, fresh); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L62: /* localStorage unavailable — proceed without guest header */
+
+client/src/lib/creative/creativeProblemSolving.ts
+  L116: const stored = localStorage.getItem(STORAGE_KEY);
+  L123: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/decision/decisionArchitecture.ts
+  L113: const existing: DecisionFrame[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L121: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 25))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L125: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_decision_frames") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L130: const existing: DecisionFrame[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L131: localStorage.setItem(key, JSON.stringify(existing.filter(f => f.id !== id)));
+
+client/src/lib/epistemic/epistemicCalibration.ts
+  L99: try { localStorage.setItem(key, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L103: const stored = localStorage.getItem("glp_epistemic_profile");
+
+client/src/lib/existential/existentialInquiry.ts
+  L108: const stored = localStorage.getItem(STORAGE_KEY);
+  L115: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/export/reflectionExport.ts
+  L12: return ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L116: try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/firstCheckinFlag.ts
+  L5: * first Calm Check-in (Phase 14). This helper persists a single localStorage
+  L17: return window.localStorage.getItem(FIRST_CHECKIN_KEY) === "true";
+  L26: window.localStorage.setItem(FIRST_CHECKIN_KEY, "true");
+  L28: /* localStorage disabled — gate stays closed, user can re-attempt */
+  L35: window.localStorage.removeItem(FIRST_CHECKIN_KEY);
+
+client/src/lib/inquiry/dialecticalInquiry.ts
+  L119: const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L120: localStorage.setItem(key, JSON.stringify([session, ...existing].slice(0, 30)));
+  L125: return ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+
+client/src/lib/journey/journeyComposer.ts
+  L120: const existing: JourneyFlow[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L127: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 30))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L131: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_journey_flows") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L136: const existing: JourneyFlow[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L137: localStorage.setItem(key, JSON.stringify(existing.filter(f => f.id !== id)));
+
+client/src/lib/logic/logicLatticeLab.ts
+  L99: const existing: LogicSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L107: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 30))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L111: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_logic_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L116: const existing: LogicSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L117: localStorage.setItem(key, JSON.stringify(existing.filter(s => s.id !== id)));
+
+client/src/lib/mastery/deepWork.ts
+  L95: const stored = localStorage.getItem(STORAGE_KEY);
+  L108: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/mastery/mentalModels.ts
+  L142: const stored = localStorage.getItem(STORAGE_KEY);
+  L149: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(library)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/metacognition/metacognitionDashboard.ts
+  L120: try { localStorage.setItem(key, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L124: const stored = localStorage.getItem("glp_metacognitive_profile");
+
+client/src/lib/metacognition/metacognitionStudio.ts
+  L171: const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L172: localStorage.setItem(key, JSON.stringify([session, ...existing].slice(0, 30)));
+  L176: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_metacognition_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+
+client/src/lib/mindscape/mindscapeNavigator.ts
+  L95: const stored = localStorage.getItem(STORAGE_KEY);
+  L109: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(map)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/mode.js
+  L6: try { localStorage.setItem("glp-mode", mode || "default"); } catch { /* localStorage unavailable */ }
+  L11: const saved = localStorage.getItem("glp-mode");
+  L13: } catch { /* localStorage unavailable */ }
+
+client/src/lib/moral/moralReasoning.ts
+  L94: const stored = localStorage.getItem(STORAGE_KEY);
+  L101: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(dilemmas)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/narrative/narrativeIdentity.ts
+  L79: const stored = localStorage.getItem(STORAGE_KEY);
+  L94: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(narrative)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/paradox/paradoxCartographer.ts
+  L108: const existing: ParadoxSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L116: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 25))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L120: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_paradox_maps") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L125: const existing: ParadoxSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L126: localStorage.setItem(key, JSON.stringify(existing.filter(s => s.id !== id)));
+
+client/src/lib/patterns/insightPatternLab.ts
+  L173: const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L174: localStorage.setItem(key, JSON.stringify([session, ...existing].slice(0, 20)));
+  L178: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_pattern_lab_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+
+client/src/lib/queryClient.js
+  L7: if (typeof window === "undefined" || typeof localStorage === "undefined") {
+  L10: return localStorage.getItem(TOKEN_KEY);
+  L25: if (typeof window === "undefined" || typeof localStorage === "undefined") {
+  L28: return localStorage.getItem(CONSENT_STORAGE_KEY) === "true";
+
+client/src/lib/semantic/semanticMapping.ts
+  L98: const existing: SemanticMap[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L106: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 20))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L110: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_semantic_maps") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L115: const existing: SemanticMap[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L116: localStorage.setItem(key, JSON.stringify(existing.filter(m => m.id !== id)));
+
+client/src/lib/stance/philosophicalStance.ts
+  L163: try { localStorage.setItem(key, JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L167: const stored = localStorage.getItem("glp_philosophical_profile");
+
+client/src/lib/storage/safeStorage.ts
+  L3: if (typeof window === "undefined" || !window.localStorage) return false;
+  L5: window.localStorage.setItem(key, key);
+  L6: window.localStorage.removeItem(key);
+  L16: return window.localStorage.getItem(key) ?? fallback;
+  L25: window.localStorage.setItem(key, value);
+  L35: window.localStorage.removeItem(key);
+
+client/src/lib/synthesis/synthesisCollider.ts
+  L93: const existing: ColliderSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L101: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 20))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L105: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_synthesis_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L110: const existing: ColliderSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L111: localStorage.setItem(key, JSON.stringify(existing.filter(s => s.id !== id)));
+
+client/src/lib/systems/systemsResonance.ts
+  L125: const existing: SystemModel[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L133: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 20))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L137: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_system_models") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L142: const existing: SystemModel[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L143: localStorage.setItem(key, JSON.stringify(existing.filter(m => m.id !== id)));
+
+client/src/lib/temporal/temporalReflection.ts
+  L98: const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L99: localStorage.setItem(key, JSON.stringify([integration, ...existing].slice(0, 30)));
+  L104: return ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+
+client/src/lib/thought/thoughtExperiments.ts
+  L149: const existing: ExperimentSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L156: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 50))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L160: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_thought_sessions") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L165: const existing: ExperimentSession[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L166: localStorage.setItem(key, JSON.stringify(existing.filter(s => s.id !== id)));
+
+client/src/lib/values/valuesClarity.ts
+  L65: const stored = localStorage.getItem(STORAGE_KEY);
+  L72: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/lib/weave/knowledgeWeave.ts
+  L106: const existing: KnowledgeWeave[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L114: try { localStorage.setItem(key, JSON.stringify(existing.slice(0, 15))); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L118: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_knowledge_weaves") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L123: const existing: KnowledgeWeave[] = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L124: localStorage.setItem(key, JSON.stringify(existing.filter(w => w.id !== id)));
+
+client/src/lumi-cbt/engine/CBTSessionEngine.ts
+  L31: * + `replaceSessions()` with their own storage layer (e.g. localStorage,
+
+client/src/lumi-memory/state/memoryStore.ts
+  L112: // diagnostic, would grow unbounded across reloads and bloat localStorage).
+  L183: ? localStorage
+  L189: // it would (a) bloat localStorage and (b) leak rejection metadata
+
+client/src/main.jsx
+  L102: try { localStorage.setItem('glp-scheduled-reminder', JSON.stringify(event.data.data)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L105: localStorage.removeItem('glp-scheduled-reminder');
+  L110: const stored = localStorage.getItem('glp-scheduled-reminder');
+  L133: localStorage.setItem('glp-scheduled-reminder', JSON.stringify({
+
+client/src/pages/Admin.jsx
+  L15: const userToken = (typeof localStorage !== "undefined" && localStorage.getItem("mmhb_token")) || null;
+
+client/src/pages/AffirmationWall.jsx
+  L27: const stored = localStorage.getItem("glp-liked-affirmations");
+  L70: try { localStorage.setItem("glp-liked-affirmations", JSON.stringify([...newLiked])); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/AlignmentPath.jsx
+  L219: const stored = localStorage.getItem('glp_alignment_progress');
+  L235: try { localStorage.setItem('glp_alignment_progress', JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/AtlasDashboard.tsx
+  L167: const saved = localStorage.getItem(STORAGE_KEY);
+  L180: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/CelebrationFlow.jsx
+  L53: // Bump completion counter (lightweight localStorage streak).
+  L56: const raw = window.localStorage.getItem("mmhb-completion-streak");
+  L66: window.localStorage.setItem(
+
+client/src/pages/Challenge.jsx
+  L82: const cached = localStorage.getItem(STORAGE_KEY);
+  L86: const cached = localStorage.getItem(STORAGE_KEY);
+  L90: const cached = localStorage.getItem(STORAGE_KEY);
+  L114: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L117: localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
+
+client/src/pages/ChallengeDay.jsx
+  L47: const saved = localStorage.getItem("glp-challenge-progress");
+  L75: const saved = localStorage.getItem("glp-challenge-progress");
+  L78: try { localStorage.setItem("glp-challenge-progress", JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L96: const saved = localStorage.getItem("glp-challenge-progress");
+  L99: try { localStorage.setItem("glp-challenge-progress", JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L114: const saved = localStorage.getItem("glp-challenge-progress");
+  L117: try { localStorage.setItem("glp-challenge-progress", JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L129: const saved = localStorage.getItem("glp-reflection-cards");
+  L138: try { localStorage.setItem("glp-reflection-cards", JSON.stringify(cards)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/CheckIn.jsx
+  L8: * is optional. Storage is localStorage only — the point is presence,
+  L64: // Compute streak from localStorage on mount.
+  L67: const raw = window.localStorage.getItem("mmhb-checkin-streak");
+  L112: window.localStorage.setItem(
+  L117: window.localStorage.setItem(
+
+client/src/pages/CognitiveArchitecturePage.tsx
+  L100: const raw = localStorage.getItem(STORAGE_KEY);
+  L108: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/CollaborativeLabPage.tsx
+  L101: const saved = localStorage.getItem(STORAGE_KEY);
+  L113: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/CourseCatalog.jsx
+  L24: const saved = localStorage.getItem(ENROLLMENT_KEY);
+  L55: localStorage.setItem(ENROLLMENT_KEY, JSON.stringify(updatedEnrollments));
+
+client/src/pages/DailyPracticePage.jsx
+  L160: const saved = localStorage.getItem("dailyPractices");
+  L170: localStorage.setItem("dailyPractices", JSON.stringify({
+
+client/src/pages/DailyRitualPage.tsx
+  L199: const existing = ((()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L201: localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+
+client/src/pages/DailyWisdomOraclePage.tsx
+  L111: const raw = localStorage.getItem(STORAGE_KEY);
+  L119: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/Dashboard.jsx
+  L611: const entries = ((()=>{try{return JSON.parse(localStorage.getItem("glp_reflections") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L630: const totalXp = parseInt(localStorage.getItem("glp_reflection_xp") || "0", 10);
+
+client/src/pages/GrowthAnalyticsPage.tsx
+  L37: const saved = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
+  L76: const data = localStorage.getItem(key);
+  L88: const data = localStorage.getItem(key);
+  L100: const data = localStorage.getItem(key);
+  L112: const data = localStorage.getItem(key);
+  L124: const data = localStorage.getItem(key);
+
+client/src/pages/GrowthPage.jsx
+  L118: return window.localStorage.getItem("mmhb_token");
+
+client/src/pages/GuidedJournalingPage.tsx
+  L112: const stored = localStorage.getItem(STORAGE_KEY);
+  L119: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/InsightCardsPage.tsx
+  L50: const stored = localStorage.getItem(STORAGE_KEY);
+  L57: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(library)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/KnowledgeSynthesisPage.tsx
+  L54: const saved = localStorage.getItem(STORAGE_KEY);
+  L67: localStorage.setItem(STORAGE_KEY, JSON.stringify({
+
+client/src/pages/LumiV6Preview.jsx
+  L679: * gated behind a localStorage preference. Per-surface auto-wiring is deferred
+  L699: in <code>localStorage</code> as <code>lumi:audio:enabled</code>.
+
+client/src/pages/MetaLearningPage.tsx
+  L53: const raw = localStorage.getItem(STORAGE_KEY);
+  L61: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/OnboardingFlow.jsx
+  L34: const raw = localStorage.getItem(STORAGE_KEY);
+  L40: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* noop */ }
+
+client/src/pages/PhilosophicalInquiryPage.tsx
+  L48: const raw = localStorage.getItem(STORAGE_KEY);
+  L56: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/PracticeLibrary.jsx
+  L26: const saved = localStorage.getItem(FAVORITES_KEY);
+  L73: localStorage.setItem(FAVORITES_KEY, JSON.stringify(updatedFavorites));
+
+client/src/pages/Presence.jsx
+  L43: // because the helper reads the same localStorage key on both passes.
+
+client/src/pages/Pricing.jsx
+  L207: window.localStorage.setItem("mmhb-pricing-lead", JSON.stringify({ email, at: Date.now() }));
+
+client/src/pages/ProgressDashboardPage.tsx
+  L37: const stored = localStorage.getItem(key);
+
+client/src/pages/Reflection.jsx
+  L100: localStorage.setItem("glp_reflections", JSON.stringify(local));
+  L106: return ((()=>{try{return JSON.parse(localStorage.getItem("glp_reflections") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L116: const [totalXp, setTotalXp] = useState(() => parseInt(localStorage.getItem("glp_reflection_xp") || "0", 10));
+  L144: const draft = localStorage.getItem("glp_reflection_draft");
+  L151: try { localStorage.setItem("glp_reflection_draft", text); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L153: localStorage.removeItem("glp_reflection_draft");
+  L171: try { localStorage.removeItem("glp_reflection_draft"); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L178: try { localStorage.setItem("glp_reflections", JSON.stringify(localEntries)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L191: try { localStorage.setItem("glp_reflection_xp", String(newTotal)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/ResilienceMetricsPage.tsx
+  L76: const saved = localStorage.getItem(STORAGE_KEY);
+  L98: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/Settings.jsx
+  L84: const savedTheme = localStorage.getItem("theme") || "light";
+  L85: const savedNotifications = localStorage.getItem("notifications") !== "false";
+  L86: const savedMode = localStorage.getItem(VISUAL_MODE_KEY) || "";
+  L87: const savedTone = localStorage.getItem("glp-affirmation-tone") || "gentle";
+  L88: const savedVoice = localStorage.getItem("glp-voice-enabled") === "true";
+  L89: const savedMoodBg = localStorage.getItem("glp-mood-background") || "adaptive";
+  L104: try { localStorage.setItem(VISUAL_MODE_KEY, modeId); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L150: try { localStorage.setItem("theme", theme); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L151: localStorage.setItem("notifications", String(notifications));
+  L152: localStorage.setItem("glp-affirmation-tone", affirmationTone);
+  L153: localStorage.setItem("glp-voice-enabled", String(voiceEnabled));
+  L154: try { localStorage.setItem("glp-mood-background", moodBackground); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/Start.tsx
+  L391: const existing = localStorage.getItem("mmhb_guest_id");
+  L394: try { localStorage.setItem("mmhb_guest_id", id); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L541: try { token = localStorage.getItem("mmhb_token"); } catch { /* noop */ }
+
+client/src/pages/StrategyMapsPage.tsx
+  L289: const saved = localStorage.getItem(STORAGE_KEY);
+  L301: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/SystemsThinkingPage.tsx
+  L45: const raw = localStorage.getItem(STORAGE_KEY);
+  L53: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/ToolsPage.jsx
+  L97: const existing = ((()=>{try{return JSON.parse(localStorage.getItem(key) || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
+  L104: try { localStorage.setItem(key, JSON.stringify([entry, ...existing].slice(0, 50))); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/WellnessDashboard.jsx
+  L307: const savedPref = localStorage.getItem("glp-mood-background") || "adaptive";
+
+client/src/pages/WellnessGoals.jsx
+  L35: const saved = localStorage.getItem(STORAGE_KEY);
+  L40: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_GOALS)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L50: localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedGoals));
+
+client/src/pages/WisdomPracticesPage.tsx
+  L64: const saved = localStorage.getItem(STORAGE_KEY);
+  L77: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/WisdomSynthesisPage.tsx
+  L49: const raw = localStorage.getItem(STORAGE_KEY);
+  L57: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/admin/AdminTools.jsx
+  L38: const saved = localStorage.getItem(STORAGE_KEY);
+  L51: const saved = localStorage.getItem(STORAGE_KEY);
+  L64: try { return Number(localStorage.getItem('glp_tools_auto_refresh')) || 0; } catch { return 0; }
+  L67: try { return localStorage.getItem('glp_tools_status_filter') || 'all'; } catch { return 'all'; }
+  L76: localStorage.setItem(STORAGE_KEY, JSON.stringify({
+  L151: try { localStorage.setItem('glp_tools_auto_refresh', String(autoRefreshInterval)); } catch {}
+  L167: try { localStorage.setItem('glp_tools_status_filter', statusFilter); } catch {}
+  L173: try { localStorage.removeItem(STORAGE_KEY); } catch {}
+
+client/src/pages/admin/AnalyticsDashboard.jsx
+  L150: <strong>Privacy-first analytics:</strong> No PII, no fingerprinting, no session replay. Users can opt out via localStorage.
+
+client/src/pages/admin/CommandCenter.jsx
+  L59: const saved = localStorage.getItem('glp_tools_last_check');
+
+client/src/pages/admin/ContentStudioAdmin.jsx
+  L41: const cached = localStorage.getItem("glp_admin_content");
+  L51: try { localStorage.setItem("glp_admin_content", JSON.stringify(DEFAULT_CONTENT)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L64: const cached = localStorage.getItem(`glp_content_tiers_${selectedContent.id}`);
+  L82: localStorage.setItem(`glp_content_tiers_${selectedContent.id}`, JSON.stringify(tierContent));
+  L91: try { localStorage.setItem("glp_admin_content", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/admin/FeatureFlags.jsx
+  L37: const cached = localStorage.getItem("glp_admin_feature_flags");
+  L47: try { localStorage.setItem("glp_admin_feature_flags", JSON.stringify(DEFAULT_FLAGS)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L52: localStorage.setItem("glp_admin_feature_flags", JSON.stringify(DEFAULT_FLAGS));
+  L72: localStorage.setItem("glp_admin_feature_flags", JSON.stringify(updated));
+  L121: localStorage.setItem("glp_admin_feature_flags", JSON.stringify(updated));
+  L139: localStorage.setItem("glp_admin_feature_flags", JSON.stringify(updated));
+
+client/src/pages/admin/HealthDashboard.jsx
+  L210: const token = localStorage.getItem("adminSessionToken");
+
+client/src/pages/admin/NarrativeDrafts.jsx
+  L41: const token = localStorage.getItem("glp_admin_token");
+
+client/src/pages/admin/SocialStudioAdmin.jsx
+  L140: const saved = localStorage.getItem("social_drafts_v2");
+  L147: try { localStorage.setItem("social_drafts_v2", JSON.stringify(newDrafts)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/admin/SystemAlerts.jsx
+  L36: const cached = localStorage.getItem("glp_admin_alerts");
+  L46: try { localStorage.setItem("glp_admin_alerts", JSON.stringify(DEFAULT_ALERTS)); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L64: localStorage.setItem("glp_admin_alerts", JSON.stringify(updated));
+
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx
+  L16: try { const s = localStorage.getItem('glp_daily_ops_history'); return s ? JSON.parse(s) : []; } catch { return []; }
+  L177: try { localStorage.setItem('glp_daily_ops_history', JSON.stringify(newHistory)); } catch {}
+
+client/src/pages/pathways/CalmPlan.jsx
+  L46: try { if (typeof window !== "undefined") localStorage.setItem("glp_calm_plan", JSON.stringify(plan)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/pathways/GoalOnboarding.jsx
+  L55: try { localStorage.setItem("glp_onboarding_preferences", JSON.stringify(preferences)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/pathways/ValuesToActions.jsx
+  L57: try { localStorage.setItem("glp_values_plan", JSON.stringify(plan)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/preferences/NotificationPreferences.jsx
+  L73: const cached = localStorage.getItem("glp_notification_prefs");
+  L94: try { localStorage.setItem("glp_notification_prefs", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/preferences/SafetyPreferences.jsx
+  L76: const cached = localStorage.getItem(STORAGE_KEY);
+  L80: const cached = localStorage.getItem(STORAGE_KEY);
+  L101: try { localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/settings/AIPersonality.jsx
+  L76: const cached = localStorage.getItem("glp_ai_personality");
+  L93: try { localStorage.setItem("glp_ai_personality", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/settings/EmailDigest.jsx
+  L37: const cached = localStorage.getItem("glp_email_digest");
+  L64: try { localStorage.setItem("glp_email_digest", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/tools/BreathTool.jsx
+  L52: const history = JSON.parse(localStorage.getItem(getStorageKey()) || "[]");
+  L59: try { localStorage.setItem(getStorageKey(), JSON.stringify(history)); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/tools/BreathingTool.jsx
+  L59: // v5.8.36 — Return Loop: read prior practice count from localStorage so the
+  L68: const raw = window.localStorage.getItem("mmhb-breathing-streak-v1");
+  L81: const raw = window.localStorage.getItem("mmhb-breathing-streak-v1");
+  L85: window.localStorage.setItem(
+
+client/src/pages/tools/GriefLetter.jsx
+  L31: const cached = localStorage.getItem(STORAGE_KEY);
+  L45: try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L49: try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() })); } catch (err) { console.warn("[storage-safe-write]", err); }
+  L68: try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/tools/MeaningMap.jsx
+  L46: const cached = localStorage.getItem("glp_meaning_map");
+  L85: try { localStorage.setItem("glp_meaning_map", JSON.stringify({ answers, coreValues, meaningStatement })); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/pages/tools/WeeklyReflection.jsx
+  L58: try { localStorage.setItem(`glp_weekly_${Date.now()}`, JSON.stringify({ answers, weekRange: getWeekRange() })); } catch (err) { console.warn("[storage-safe-write]", err); }
+
+client/src/sections/EmailCapture.jsx
+  L8: * Both write to the SAME localStorage key (`mmhb:email_subscribers`) so a user
+  L26: const raw = window.localStorage.getItem(STORAGE_KEY);
+  L38: window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  L40: /* localStorage unavailable / quota — silent no-op */
+
+client/src/sections/ValueProposition.jsx
+  L8: * Storage: writes to localStorage["mmhb:email_subscribers"] as a JSON
+  L58: const raw = window.localStorage.getItem(STORAGE_KEY);
+  L70: window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  L72: /* localStorage unavailable / quota — silent no-op (status still flips). */
+
+client/src/utils/LocalSync.js
+  L37: const stored = localStorage.getItem(SYNC_STORAGE_KEY);
+  L46: localStorage.setItem(SYNC_STORAGE_KEY, JSON.stringify(this.pendingItems));
+
+TOTAL_MATCHES=547
+TOTAL_FILES=189

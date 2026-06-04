@@ -1,0 +1,139 @@
+client/src/pages/admin/AdminPublishing.jsx:const SHARE_TEMPLATES = {
+client/src/pages/admin/AdminPublishing.jsx:      {Object.entries(SHARE_TEMPLATES).map(([platform, fn]) => (
+client/src/pages/admin/SocialStudioAdmin.jsx:const HOOK_TEMPLATES = {
+client/src/pages/admin/SocialStudioAdmin.jsx:const CONTENT_TEMPLATES = [
+client/src/pages/admin/SocialStudioAdmin.jsx:    const templates = HOOK_TEMPLATES[selectedHookType] || HOOK_TEMPLATES.question;
+client/src/pages/admin/SocialStudioAdmin.jsx:                  {CONTENT_TEMPLATES.map(template => (
+client/src/pages/admin/SocialStudioAdmin.jsx:                      {Object.keys(HOOK_TEMPLATES).map(type => (
+client/src/pages/admin/AdminSocial.jsx:const PILLAR_TEMPLATES = [
+client/src/pages/admin/AdminSocial.jsx:          {PILLAR_TEMPLATES.map(t => {
+client/src/pages/admin/SocialGenerator.jsx:const DISCLAIMER_TEMPLATES = [
+client/src/pages/admin/SocialGenerator.jsx:                      {DISCLAIMER_TEMPLATES.map((d, idx) => (
+client/src/pages/admin/SocialLibrary.jsx:const TEMPLATE_TYPES = [
+client/src/pages/admin/SocialLibrary.jsx:  const groupedTemplates = TEMPLATE_TYPES.reduce((acc, type) => {
+client/src/pages/admin/SocialLibrary.jsx:                  {TEMPLATE_TYPES.map(t => (
+client/src/pages/admin/SocialLibrary.jsx:            {TEMPLATE_TYPES.map(type => {
+client/src/pages/tools/ReframePage.jsx:const REFRAME_TEMPLATES = [
+client/src/pages/tools/ReframePage.jsx:            {REFRAME_TEMPLATES.map((template) => (
+client/src/pages/tools/RepairScript.jsx:const SCRIPT_TEMPLATES = [
+client/src/pages/tools/RepairScript.jsx:          {SCRIPT_TEMPLATES.map(template => (
+client/src/pages/WireframeTemplates.jsx: * THE GENUINE LOVE PROJECT - WIREFRAME TEMPLATES
+client/src/pages/PhilosophicalInquiryPage.tsx:const SOCRATIC_TEMPLATES = [
+client/src/pages/PhilosophicalInquiryPage.tsx:  const templates = SOCRATIC_TEMPLATES[depth % SOCRATIC_TEMPLATES.length];
+client/src/pages/PhilosophicalInquiryPage.tsx:                {SOCRATIC_TEMPLATES.map((cat, i) => (
+client/src/pages/SocialHub.jsx:const CONTENT_TEMPLATES = [
+client/src/pages/SocialHub.jsx:    const exportData = CONTENT_TEMPLATES.map(t => 
+client/src/pages/SocialHub.jsx:              {CONTENT_TEMPLATES.map((template) => (
+client/src/pages/WisdomPracticesPage.tsx:const CONTEMPLATION_PROMPTS = [
+client/src/pages/WisdomPracticesPage.tsx:      prompt: CONTEMPLATION_PROMPTS[currentPrompt],
+client/src/pages/WisdomPracticesPage.tsx:    setCurrentPrompt(p => (p + 1) % CONTEMPLATION_PROMPTS.length);
+client/src/pages/WisdomPracticesPage.tsx:                {CONTEMPLATION_PROMPTS[currentPrompt]}
+client/src/pages/WisdomSynthesisPage.tsx:const PATTERN_TEMPLATES = [
+client/src/pages/WisdomSynthesisPage.tsx:                {PATTERN_TEMPLATES.map((pt, i) => (
+client/src/pages/BoundariesPage.jsx:const SCRIPT_TEMPLATES = [
+client/src/pages/BoundariesPage.jsx:            {SCRIPT_TEMPLATES.map((template, idx) => (
+client/src/pages/RoutinesPage.jsx:const ROUTINE_TEMPLATES = [
+client/src/pages/RoutinesPage.jsx:                {ROUTINE_TEMPLATES.map(routine => (
+client/src/pages/CelebrationRitual.jsx:const AFFIRMATION_TEMPLATES = {
+client/src/pages/CelebrationRitual.jsx:  const affirmation = AFFIRMATION_TEMPLATES[stats?.dominantEmotion] || AFFIRMATION_TEMPLATES.balanced;
+client/src/components/autodidact/AutodidactForge.tsx:  EXPERIMENT_TEMPLATES,
+client/src/components/autodidact/AutodidactForge.tsx:              {EXPERIMENT_TEMPLATES.map((template, idx) => (
+client/src/components/journey/JourneyComposer.tsx:  JOURNEY_TEMPLATES,
+client/src/components/journey/JourneyComposer.tsx:    const journey = createJourneyFromTemplate(JOURNEY_TEMPLATES[templateIndex]);
+client/src/components/journey/JourneyComposer.tsx:          {JOURNEY_TEMPLATES.map((template, idx) => (
+client/src/components/mi/ReframingToolkit.tsx:  REFRAME_TEMPLATES, 
+client/src/components/mi/ReframingToolkit.tsx:    ? REFRAME_TEMPLATES 
+client/src/components/paradox/ParadoxCartographer.tsx:  PARADOX_TEMPLATES,
+client/src/components/paradox/ParadoxCartographer.tsx:    const template = PARADOX_TEMPLATES[idx];
+client/src/components/paradox/ParadoxCartographer.tsx:          {PARADOX_TEMPLATES.map((template, idx) => (
+client/src/components/temporal/TemporalReflection.tsx:  TEMPORAL_LENSES,
+client/src/components/temporal/TemporalReflection.tsx:    ? TEMPORAL_LENSES.find(l => l.id === currentLens)!
+client/src/components/temporal/TemporalReflection.tsx:          {TEMPORAL_LENSES.map((lens) => {
+client/src/components/temporal/TemporalReflection.tsx:                    {lens === "integration" ? "Integrate" : TEMPORAL_LENSES.find(l => l.id === lens)?.name}
+client/src/components/BoundaryBuilder.jsx:const BOUNDARY_TEMPLATES = [
+client/src/components/BoundaryBuilder.jsx:                {BOUNDARY_TEMPLATES.map((template, i) => (
+client/src/components/ContentStudio.jsx:const TEMPLATES = {
+client/src/components/ContentStudio.jsx:  return TEMPLATES[contentType]?.[topic]?.[level] || TEMPLATES['short-post']?.['self-compassion']?.[level] || {
+client/src/components/MoodInsight.jsx:const INSIGHT_TEMPLATES = {
+client/src/components/ReflectionInsights.jsx:const POETIC_TEMPLATES = {
+client/src/components/ReflectionInsights.jsx:  const template = POETIC_TEMPLATES[summary.dominantEmotion] || POETIC_TEMPLATES.balanced;
+client/src/components/WellnessGoalTracker.jsx:const GOAL_TEMPLATES = [
+client/src/components/WellnessGoalTracker.jsx:    const template = GOAL_TEMPLATES.find(t => t.category === newGoal.category);
+client/src/components/WellnessGoalTracker.jsx:              {GOAL_TEMPLATES.map((template, index) => {
+client/src/components/GoalProgress.jsx:const GOAL_TEMPLATES = [
+client/src/components/GoalProgress.jsx:                {GOAL_TEMPLATES.slice(0, 4).map((template, i) => (
+client/src/content/social/socialTemplates.ts:export const SOCIAL_TEMPLATES: SocialTemplate[] = [
+client/src/content/social/socialTemplates.ts:  return SOCIAL_TEMPLATES.filter(t => t.platform === platform);
+client/src/content/social/socialTemplates.ts:  return SOCIAL_TEMPLATES.filter(t => t.category === category);
+client/src/content/social/socialTemplates.ts:  return SOCIAL_TEMPLATES[Math.floor(Math.random() * SOCIAL_TEMPLATES.length)];
+client/src/content/tools/nlpReframes.ts:export const REFRAME_TEMPLATES: ReframeTemplate[] = [
+client/src/content/tools/nlpReframes.ts:  return REFRAME_TEMPLATES.filter(t => t.category === category);
+client/src/content/tools/nlpReframes.ts:  return REFRAME_TEMPLATES[Math.floor(Math.random() * REFRAME_TEMPLATES.length)];
+client/src/lib/autodidact/autodidactForge.ts:export const EXPERIMENT_TEMPLATES = [
+client/src/lib/journey/journeyComposer.ts:export const JOURNEY_TEMPLATES: Omit<JourneyFlow, "id" | "createdAt" | "lastAccessedAt">[] = [
+client/src/lib/journey/journeyComposer.ts:export function createJourneyFromTemplate(template: typeof JOURNEY_TEMPLATES[0]): JourneyFlow {
+client/src/lib/nlpReframes.ts:export const REFRAME_TEMPLATES: ReframeTemplate[] = [
+client/src/lib/nlpReframes.ts:  return REFRAME_TEMPLATES[Math.floor(Math.random() * REFRAME_TEMPLATES.length)];
+client/src/lib/nlpReframes.ts:  return REFRAME_TEMPLATES.find(template => template.id === id);
+client/src/lib/paradox/paradoxCartographer.ts:export const PARADOX_TEMPLATES: { name: string; theme: string; axisX: ParadoxAxis; axisY: ParadoxAxis }[] = [
+client/src/lib/patterns/patternRecognition.ts:const TEMPORAL_PATTERNS = {
+client/src/lib/patterns/patternRecognition.ts:      title: TEMPORAL_PATTERNS.morning.label,
+client/src/lib/patterns/patternRecognition.ts:      question: TEMPORAL_PATTERNS.morning.question,
+client/src/lib/patterns/patternRecognition.ts:      title: TEMPORAL_PATTERNS.evening.label,
+client/src/lib/patterns/patternRecognition.ts:      question: TEMPORAL_PATTERNS.evening.question,
+client/src/lib/temporal/temporalReflection.ts:export const TEMPORAL_LENSES: TemporalLens[] = [
+client/src/lib/temporal/temporalReflection.ts:  return TEMPORAL_LENSES.find(l => l.id === id)!;
+client/src/lib/temporal/temporalReflection.ts:  const allQuestions = TEMPORAL_LENSES.flatMap(l => l.questions);
+client/src/lumi-cbt/worksheets/thoughtRecord.ts:export const THOUGHT_RECORD_TEMPLATE = Object.freeze({
+client/src/lumi-cbt/index.ts:  THOUGHT_RECORD_TEMPLATE,
+client/src/lumi-notifications/push/notificationService.ts:export const NOTIFICATION_TEMPLATES: Record<string, { title: string; body: string }> = {
+client/src/lumi-notifications/index.ts:  NOTIFICATION_TEMPLATES,
+server/routes/admin-social-studio.mjs: * CONTENT TEMPLATES CRUD
+server/routes/admin-social-studio.mjs:const PRESET_TEMPLATES = [
+server/routes/admin-social-studio.mjs:    const toInsert = PRESET_TEMPLATES.filter(t => !existingNames.has(t.name));
+server/routes/admin-social-studio.mjs:  return success(res, PRESET_TEMPLATES);
+server/routes/contemplative.mjs:const CONTEMPLATIVE_QUESTIONS = [
+server/routes/contemplative.mjs:  res.json({ ok: true, questions: CONTEMPLATIVE_QUESTIONS });
+server/routes/contemplative.mjs:  const category = CONTEMPLATIVE_QUESTIONS[dayOfYear % CONTEMPLATIVE_QUESTIONS.length];
+server/routes/content-studio.mjs:const PODCAST_TEMPLATES = {
+server/routes/content-studio.mjs:const YOUTUBE_TEMPLATES = {
+server/routes/content-studio.mjs:const BOOK_OUTLINE_TEMPLATE = {
+server/routes/content-studio.mjs:const COURSE_TEMPLATE = {
+server/routes/content-studio.mjs:const PRESENTATION_TEMPLATES = {
+server/routes/content-studio.mjs:  const template = PODCAST_TEMPLATES[input.type || "solo"];
+server/routes/content-studio.mjs:  const template = isShort ? YOUTUBE_TEMPLATES.shortForm : YOUTUBE_TEMPLATES.educational;
+server/routes/content-studio.mjs:    template: BOOK_OUTLINE_TEMPLATE.nonfiction,
+server/routes/content-studio.mjs:    template: COURSE_TEMPLATE,
+server/routes/content-studio.mjs:  const template = PRESENTATION_TEMPLATES[input.type || "ted"];
+server/routes/content-studio.mjs:  res.json({ success: true, data: PODCAST_TEMPLATES });
+server/routes/content-studio.mjs:  res.json({ success: true, data: YOUTUBE_TEMPLATES });
+server/routes/content-studio.mjs:  res.json({ success: true, data: BOOK_OUTLINE_TEMPLATE });
+server/routes/content-studio.mjs:  res.json({ success: true, data: COURSE_TEMPLATE });
+server/routes/content-studio.mjs:  res.json({ success: true, data: PRESENTATION_TEMPLATES });
+server/routes/content-studio.mjs:      podcast: PODCAST_TEMPLATES,
+server/routes/content-studio.mjs:      youtube: YOUTUBE_TEMPLATES,
+server/routes/content-studio.mjs:      book: BOOK_OUTLINE_TEMPLATE,
+server/routes/content-studio.mjs:      course: COURSE_TEMPLATE,
+server/routes/content-studio.mjs:      presentation: PRESENTATION_TEMPLATES
+server/routes/gamification.mjs:const QUEST_TEMPLATES = [
+server/routes/gamification.mjs:      const selectedQuests = QUEST_TEMPLATES
+server/routes/practices.mjs:// CONTEMPLATIVE PRACTICES
+server/routes/practices.mjs:const CONTEMPLATIVE_PRACTICES = [
+server/routes/practices.mjs:    practices: CONTEMPLATIVE_PRACTICES,
+server/routes/practices.mjs:    total: CONTEMPLATIVE_PRACTICES.length,
+server/routes/practices.mjs:    traditions: [...new Set(CONTEMPLATIVE_PRACTICES.map(p => p.tradition))],
+server/routes/practices.mjs:  const practice = CONTEMPLATIVE_PRACTICES.find(p => p.id === parseInt(req.params.id));
+server/routes/practices.mjs:  const practices = CONTEMPLATIVE_PRACTICES.filter(p => p.difficulty === level);
+server/routes/practices.mjs:  const contemplative = CONTEMPLATIVE_PRACTICES[dayOfYear % CONTEMPLATIVE_PRACTICES.length];
+server/routes/practices.mjs:    contemplative: CONTEMPLATIVE_PRACTICES,
+server/routes/practices.mjs:      contemplative: CONTEMPLATIVE_PRACTICES.length,
+server/routes/practices.mjs:      total: CONTEMPLATIVE_PRACTICES.length + GROWTH_PRACTICES.length + INTEGRATION_RITUALS.length
+server/routes/user.mjs:const QUEST_TEMPLATES = [
+server/routes/user.mjs:  const shuffled = [...QUEST_TEMPLATES].sort((a, b) => {
+server/ai/providerPolicy.mjs:		temperature: Number(process.env.AI_TEMPERATURE || 0.7),
+server/services/canvaDesignService.js:const THERAPEUTIC_TEMPLATES = [
+server/services/canvaDesignService.js:    const template = THERAPEUTIC_TEMPLATES.find(t => t.id === templateId);
+server/awareness/detection/pipeline.mjs:    // TODO (v2.0 Phase 4): load fine-tuned BERT / RoBERTa from
+server/biometrics/normalizers.mjs:  BODY_TEMP_C:         { unit: "celsius", min: 30,   max: 45    },
+server/biometrics/normalizers.mjs:  HKQuantityTypeIdentifierBodyTemperature:           { metric: "BODY_TEMP_C", unit: "celsius" },
+server/biometrics/normalizers.mjs:  "com.google.body.temperature":             { metric: "BODY_TEMP_C", unit: "celsius", path: "fpVal" },

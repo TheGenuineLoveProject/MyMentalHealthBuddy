@@ -94,8 +94,13 @@ router.post(
             logger.warn("checkout.session.completed missing customer or subscription", { sessionId: session.id });
             break;
           }
-          if (!session.customer_email) {
-            logger.warn("checkout.session.completed missing customer_email — cannot match user", { customer: session.customer });
+          // Stripe leaves session.customer_email null when a Customer is
+          // attached at session creation (billing.mjs passes `customer`);
+          // the buyer's email lives on customer_details.email. Derive from
+          // both so the primary activation path can match the user.
+          const customerEmail = session.customer_details?.email || session.customer_email;
+          if (!customerEmail) {
+            logger.warn("checkout.session.completed missing customer email — cannot match user", { customer: session.customer });
             break;
           }
           // Re-fetch session with line items expanded — webhook payload
@@ -142,15 +147,15 @@ router.post(
               subscriptionStatus: checkoutPlan,
               updatedAt: new Date(),
             })
-            .where(eq(users.email, session.customer_email));
+            .where(eq(users.email, customerEmail));
           const checkoutRowsAffected = checkoutResult?.rowCount ?? checkoutResult?.changes ?? 0;
           if (checkoutRowsAffected === 0) {
-            logger.warn("checkout.session.completed: no user matched by email", { email: session.customer_email, customer: session.customer });
+            logger.warn("checkout.session.completed: no user matched by email", { email: customerEmail, customer: session.customer });
           } else {
             logger.info("Subscription activated via checkout", { customer: session.customer, status: checkoutPlan });
             increment("subscription_transition", { plan: `free_to_${checkoutPlan}` });
           }
-          sendUpgradeConfirmation(session.customer_email, session.customer_details?.name || "").catch(err => {
+          sendUpgradeConfirmation(customerEmail, session.customer_details?.name || "").catch(err => {
             logger.warn("Failed to send upgrade email", { error: err.message });
           });
           break;

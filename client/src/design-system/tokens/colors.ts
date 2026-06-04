@@ -17,6 +17,18 @@ export const palette = {
   mist: "#F8F8F4",
 } as const;
 
+export const MMHB_COLORS = {
+  warmCream: "#F7F1E8",
+  softSage: "#A8B89A",
+  calmMoss: "#7C9271",
+  blushWarmth: "#F6C9B8",
+  gentleGlowGold: "#F3D98A",
+  calmAuraCyan: "#BEEFFF",
+  sleepLavender: "#CFC7F8",
+  emotionalSafetyMint: "#DDEBD7",
+  warmHeartLight: "#FFE6B8",
+};
+
 export type PaletteToken = keyof typeof palette;
 
 /** Semantic mappings — components use these, not raw palette names. */
@@ -68,4 +80,21 @@ export const aura = {
 
 export type AuraToken = keyof typeof aura;
 
-export const colors = { palette, semantic, aura } as const;
+export const colors = {
+  palette,
+  semantic,
+  aura,
+
+  // Legacy compatibility aliases
+  background: semantic.bgPage,
+
+  textPrimary: semantic.fgHeading,
+  textSecondary: semantic.fgMuted,
+
+  gold: palette.eternalGold,
+  goldSoft: palette.softBlush,
+
+  warning: semantic.statusWarning,
+
+  border: semantic.borderSubtle,
+} as const;

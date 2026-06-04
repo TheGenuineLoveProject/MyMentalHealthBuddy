@@ -1,5 +1,6 @@
 import React from "react";
 import { brand } from "../brand/tokens";
+import { officialLumiAssets } from "../officialLumiAssets";
 
 export default function BrandHero() {
   return (
@@ -7,7 +8,7 @@ export default function BrandHero() {
       <div className="glass" style={{ padding: 26 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
           <img
-            src={brand.assets.logoMark}
+            src={officialLumiAssets.LogoMark}
             alt={brand.name}
             style={{ width: 56, height: 56, borderRadius: 12 }}
           />

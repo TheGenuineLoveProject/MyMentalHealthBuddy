@@ -529,7 +529,7 @@ export const INTEGRATION_REGISTRY: IntegrationEntry[] = [
   },
   {
     integrationKey: 'admin_billing_viewer',
-    category: 'admin',
+    category: 'devex',
     status: 'done',
     canonicalFiles: ['client/src/pages/admin/BillingViewer.jsx', 'server/routes/adminBilling.mjs'],
     routeKeysTouched: ['admin_billing'],

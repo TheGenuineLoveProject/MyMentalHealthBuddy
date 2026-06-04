@@ -4,10 +4,10 @@ import { useMutation } from "@tanstack/react-query";
 import { Feather, ArrowLeft, Save, Trash2, AlertTriangle, Loader2, Check } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/Input";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 

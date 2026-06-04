@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "governance": "canonical-information-architecture",
+  "semanticHubs": [
+    "emotional-wellness",
+    "mindfulness",
+    "self-awareness",
+    "emotional-regulation",
+    "healing-tools",
+    "journaling",
+    "growth",
+    "education",
+    "trust-center",
+    "legal",
+    "platform",
+    "social",
+    "admin"
+  ]
+}

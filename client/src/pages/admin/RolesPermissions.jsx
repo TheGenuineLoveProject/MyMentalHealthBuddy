@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { Link } from "wouter";
 import { Shield, Users, Settings, Check, X, Info, ArrowLeft, Lock, Eye } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 

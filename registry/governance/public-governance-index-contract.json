@@ -1,0 +1,31 @@
+{
+  "phase": 114,
+  "name": "public-governance-index-contract",
+  "mode": "read-only-future-contract",
+  "allowedDocumentTypes": [
+    "trust",
+    "ai-transparency",
+    "privacy",
+    "safety",
+    "accessibility",
+    "clinical-boundaries",
+    "anti-manipulation",
+    "governance-summary"
+  ],
+  "blockedDocumentTypes": [
+    "private-logs",
+    "secrets",
+    "incident-private-notes",
+    "user-data",
+    "security-exploit-details",
+    "credentials",
+    "database-dumps"
+  ],
+  "requirements": [
+    "read-only",
+    "generated-from-approved-registry",
+    "no-user-data",
+    "no-secrets",
+    "human-reviewed-before-public"
+  ]
+}

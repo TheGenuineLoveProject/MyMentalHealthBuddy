@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LayoutWrapper } from "@/components/ui/LayoutWrapper";
 import { Hero } from "@/components/ui/Hero";
 import { SectionContainer } from "@/components/ui/SectionContainer";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";

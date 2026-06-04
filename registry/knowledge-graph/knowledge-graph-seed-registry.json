@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "mode": "governance-only",
+  "purpose": "seed semantic relationships for safe discoverability and emotional continuity",
+  "nodes": [
+    "overwhelmed",
+    "anxious",
+    "exhausted",
+    "reflective",
+    "disconnected",
+    "sleep_support",
+    "grounding",
+    "journaling",
+    "calm_room",
+    "companion",
+    "crisis_resources",
+    "privacy",
+    "ai_transparency",
+    "trust_center"
+  ],
+  "relationships": [
+    {
+      "from": "overwhelmed",
+      "to": "grounding",
+      "type": "emotion_to_tool",
+      "safety": "low_cognitive_load"
+    },
+    {
+      "from": "anxious",
+      "to": "calm_room",
+      "type": "emotion_to_journey",
+      "safety": "slow_pacing"
+    },
+    {
+      "from": "reflective",
+      "to": "journaling",
+      "type": "emotion_to_tool",
+      "safety": "self_guided"
+    },
+    {
+      "from": "companion",
+      "to": "ai_transparency",
+      "type": "trust_surface_to_policy",
+      "safety": "disclosure_required"
+    },
+    {
+      "from": "crisis_resources",
+      "to": "trust_center",
+      "type": "crisis_boundary_to_resource",
+      "safety": "human_emergency_boundary"
+    }
+  ],
+  "forbiddenUses": [
+    "diagnosis",
+    "prescribing",
+    "suicidality_determination",
+    "emotional_monetization",
+    "dark_patterns",
+    "vulnerability_scoring",
+    "coercive_retention"
+  ]
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Keyboard, X } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const shortcuts = [
   { keys: ["?"], description: "Show keyboard shortcuts" },

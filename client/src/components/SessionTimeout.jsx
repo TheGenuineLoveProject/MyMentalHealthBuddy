@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Clock, RefreshCw } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { getAuthToken } from "@/lib/api";
 
 const TIMEOUT_WARNING = 5 * 60 * 1000;

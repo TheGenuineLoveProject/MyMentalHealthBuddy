@@ -73,10 +73,7 @@ export default function JournalAI({
   const analysisMutation = useMutation({
     mutationFn: async (text) => {
       try {
-        const response = await apiRequest("/api/ai/analyze-journal", {
-          method: "POST",
-          body: JSON.stringify({ text })
-        });
+        const response = await apiRequest("POST", "/api/ai/analyze-journal", { text });
         return response;
       } catch {
         const detectedMood = analyzeMood(text);

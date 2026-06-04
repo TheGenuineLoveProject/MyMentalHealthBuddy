@@ -5,9 +5,9 @@ import { Instagram, Twitter, Linkedin, Youtube, Facebook } from "../../lib/lucid
 import { SiInstagram, SiX, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
 import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import SEO from "../../components/SEO";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
-import { Input } from "@/components/ui/Input";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";

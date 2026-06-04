@@ -1,0 +1,77 @@
+server/routes/sop.mjs:  // `app.use(csrfProtection)` (passing the factory itself as middleware) instead
+server/routes/sop.mjs:  // of `app.use(csrfProtection())` (invoking the factory). Result: CSRF middleware
+server/routes/sop.mjs:    remediation: "Tracked debt (advisor: do NOT fix yet). server/app.mjs:101 — change `app.use(csrfProtection)` to `app.use(csrfProtection())`. Test order: (1) verify CSRF cookie issuance still works on GET, (2) verify state-changing requests now require x-csrf-token header, (3) update any client mutations to send the cookie value as the header.",
+server/routes/sop.mjs:  // Fixed pattern: factory invoked → `app.use(csrfProtection())`
+server/routes/sop.mjs:  // Buggy pattern: factory passed directly → `app.use(csrfProtection)`
+server/replit_integrations/auth/replitAuth.mjs:  app.use(getSession());
+server/replit_integrations/auth/replitAuth.mjs:  app.use(passport.initialize());
+server/replit_integrations/auth/replitAuth.mjs:  app.use(passport.session());
+server/security/hardening.mjs:  app.use(
+server/security/hardening.mjs:  app.use(
+server/security/hardening.mjs:  app.use(
+server/security/hardening.mjs:  app.use(
+server/tests/app.mjs:  app.use(express.json());
+server/awareness/detection/pipeline.mjs://     opt-in by adding a single `app.use(...)` line.
+server/awareness/detection/pipeline.mjs: *   app.use("/api/ai/chat", scanLayer1Middleware({ field: "message" }));
+server/app.mjs.bak:app.use(cors({
+server/app.mjs.bak:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs.bak:app.use(express.json({
+server/app.mjs.bak:app.use(helmet({
+server/app.mjs.bak:app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
+server/app.mjs.bak:  app.use(requestId);
+server/app.mjs.bak:  app.use(observabilityContext);
+server/app.mjs.bak:  app.use(requestLogger);
+server/app.mjs.bak:app.use('/api/session-boundary', sessionBoundaryRoutes);
+server/app.mjs.bak:app.use("/api/health", healthRoutes);
+server/app.mjs.bak:app.use(csrfProtection);
+server/app.mjs.bak:app.use("/api/ai", aiLimiter);
+server/app.mjs.bak:// but never registered with app.use. Each module has been audited for
+server/app.mjs.bak:app.use("/api/admin/verify-token", adminLoginLimiter);
+server/app.mjs.bak:app.use("/api/admin", adminLimiter);
+server/app.mjs.bak:app.use("/api/auth", authRoutes);
+server/app.mjs.bak:app.use("/api/ai", aiRoutes);
+server/app.mjs.bak:app.use("/api/ai/healing", aiHealingRoutes);
+server/app.mjs.bak:app.use("/api/ai/business", aiBusinessRoutes);
+server/app.mjs.bak:app.use("/api/admin/billing", adminBillingRoutes);
+server/app.mjs.bak:app.use("/api/admin/publishing", adminPublishingRoutes);
+server/app.mjs.bak:app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
+server/app.mjs.bak:app.use("/api/admin", adminRoutes);
+server/app.mjs.bak:app.use("/api/telemetry", telemetryRoutes);
+server/app.mjs.bak:app.use("/api/buddy", buddyLimiter);
+server/app.mjs.bak:app.use("/api", buddyRoutes);
+server/app.mjs.bak:app.use("/api/streaks", streaksLimiter, optionalAuth, streaksRoutes);
+server/app.mjs.bak:app.use("/api/billing", billingRoutes);
+server/app.mjs.bak:app.use("/api/user", userRoutes);
+server/app.mjs.bak:app.use(express.static(CLIENT_DIST, {
+server/app.mjs.bak:  app.use(errorHandler);
+server/app.mjs:app.use(cors({
+server/app.mjs:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs:app.use(express.json({
+server/app.mjs:app.use(helmet({
+server/app.mjs:app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
+server/app.mjs:  app.use(requestId);
+server/app.mjs:  app.use(observabilityContext);
+server/app.mjs:  app.use(requestLogger);
+server/app.mjs:app.use('/api/session-boundary', sessionBoundaryRoutes);
+server/app.mjs:app.use("/api/health", healthRoutes);
+server/app.mjs:app.use(csrfProtection);
+server/app.mjs:app.use("/api/ai", aiLimiter);
+server/app.mjs:// but never registered with app.use. Each module has been audited for
+server/app.mjs:app.use("/api/admin/verify-token", adminLoginLimiter);
+server/app.mjs:app.use("/api/admin", adminLimiter);
+server/app.mjs:app.use("/api/auth", authRoutes);
+server/app.mjs:app.use("/api/ai", aiRoutes);
+server/app.mjs:app.use("/api/ai/healing", aiHealingRoutes);
+server/app.mjs:app.use("/api/ai/business", aiBusinessRoutes);
+server/app.mjs:app.use("/api/admin/billing", adminBillingRoutes);
+server/app.mjs:app.use("/api/admin/publishing", adminPublishingRoutes);
+server/app.mjs:app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
+server/app.mjs:app.use("/api/admin", adminRoutes);
+server/app.mjs:app.use("/api/telemetry", telemetryRoutes);
+server/app.mjs:app.use("/api/buddy", buddyLimiter);
+server/app.mjs:app.use("/api", buddyRoutes);
+server/app.mjs:app.use("/api/streaks", streaksLimiter, optionalAuth, streaksRoutes);
+server/app.mjs:app.use("/api/billing", billingRoutes);
+server/app.mjs:app.use("/api/user", userRoutes);
+server/app.mjs:app.use(express.static(CLIENT_DIST, {
+server/app.mjs:  app.use(errorHandler);

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Volume2, VolumeX, RefreshCw, Heart, Sparkles } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const AFFIRMATIONS_BY_MOOD = {
   happy: [

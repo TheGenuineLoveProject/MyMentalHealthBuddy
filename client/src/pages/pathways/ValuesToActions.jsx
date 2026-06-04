@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Compass, Plus, X, Check, Save, Calendar } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
-import { Input } from "@/components/ui/Input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const EXAMPLE_VALUES = [
   "Compassion", "Growth", "Connection", "Authenticity", "Creativity",

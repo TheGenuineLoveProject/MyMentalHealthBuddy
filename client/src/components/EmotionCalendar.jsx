@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
-import { Button } from "@/components/ui/Button.jsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const MOOD_COLORS = {
   calm: { bg: "bg-teal-100 dark:bg-teal-900/40", border: "border-teal-300 dark:border-teal-700", label: "Calm", hex: "#14b8a6" },

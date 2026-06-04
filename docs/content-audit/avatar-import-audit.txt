@@ -1,0 +1,1077 @@
+client/src/pages/admin/AdminPublishing.jsx:45:  const url = `https://mymentalhealthbuddy.com/blog/${slug}`;
+client/src/pages/admin/SocialStudioAdmin.jsx:202:    const base = "https://mymentalhealthbuddy.com";
+client/src/pages/admin/AdminTools.jsx:201:        platform: "MyMentalHealthBuddy",
+client/src/pages/account/Profile.jsx:117:                    <button className="absolute bottom-0 right-0 icon-container icon-sm icon-soft-sage" data-testid="button-change-avatar">
+client/src/pages/hubs/HabitsHubPage.jsx:14:import { OfficialLumi } from "@/lumi-registry";
+client/src/pages/hubs/HabitsHubPage.jsx:63:          <OfficialLumi variant="LUMI_PATH" scene="page-header" position="card" pageId="habits-hub" widthPx={100} decorative />
+client/src/pages/library/SavedLibrary.jsx:5:import { OfficialLumi } from "@/lumi-registry";
+client/src/pages/library/SavedLibrary.jsx:36:        <OfficialLumi variant="LUMI_EMOTION_ORB" scene="page-header" position="card" pageId="saved-library" widthPx={100} decorative />
+client/src/pages/pathways/GoalOnboarding.jsx:7:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/pages/pathways/GoalOnboarding.jsx:8:import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
+client/src/pages/pathways/GoalOnboarding.jsx:66:      {/* v2.3 BuddyPanel placement — calm/88px work-surface treatment, matching
+client/src/pages/pathways/GoalOnboarding.jsx:68:          user's goal/experience/time selections per BuddyPanel placement contract.
+client/src/pages/pathways/GoalOnboarding.jsx:70:      <BuddyPanel
+client/src/pages/pathways/GoalOnboarding.jsx:72:        title={BUDDY_PANEL_COPY.onboarding.title}
+client/src/pages/pathways/GoalOnboarding.jsx:74:        subtitle={BUDDY_PANEL_COPY.onboarding.subtitle}
+client/src/pages/pathways/GoalOnboarding.jsx:78:        data-testid="panel-buddy-onboarding"
+client/src/pages/tools/ReframePage.jsx:91:      <SEO title="Reframe Tool — MyMentalHealthBuddy" description="Shift harsh self-talk into gentler, more actionable perspectives. Educational cognitive reframing exercises." />
+client/src/pages/tools/WeeklyReflection.jsx:71:        <SEO title="Weekly Reflection — MyMentalHealthBuddy" />
+client/src/pages/tools/WeeklyReflection.jsx:115:      <SEO title="Weekly Reflection — MyMentalHealthBuddy" />
+client/src/pages/tools/PHQ9Assessment.jsx:61:      <SEO title="PHQ-9 Mood Check-in | MyMentalHealthBuddy" description="Free 9-question screening to notice depression symptoms over the past two weeks. Educational only." />
+client/src/pages/tools/SleepQualityCalculator.jsx:141:        title="Sleep Quality Self-Check | MyMentalHealthBuddy"
+client/src/pages/tools/NervousSystemCheck.jsx:152:        title="Nervous System State Check | MyMentalHealthBuddy"
+client/src/pages/tools/ManipulationDetector.jsx:136:        title="Manipulation Detector | MyMentalHealthBuddy"
+client/src/pages/tools/CognitiveDistortionChecker.jsx:80:        title="Cognitive Distortion Checker | MyMentalHealthBuddy"
+client/src/pages/tools/BoundaryBuilderTool.jsx:82:        title="Boundary Builder | MyMentalHealthBuddy"
+client/src/pages/tools/BreathPacer.jsx:97:      <SEO title="Breath Pacer | MyMentalHealthBuddy" description="Free guided breathing — 4-7-8, box, and coherence patterns. Calm your nervous system in two minutes. Educational only." />
+client/src/pages/tools/GAD7Assessment.jsx:52:      <SEO title="GAD-7 Anxiety Check-in | MyMentalHealthBuddy" description="Free 7-question screening to notice anxiety symptoms over the past two weeks. Educational only." />
+client/src/pages/tools/UrgeSurf.jsx:62:        title="Urge Surf — MyMentalHealthBuddy"
+client/src/pages/tools/RepairScript.jsx:54:        title="Repair Script — MyMentalHealthBuddy"
+client/src/pages/tools/BreathingTool.jsx:2: * BreathingTool — /tools/breathing  (Avatar v4.2 Flow A spec)
+client/src/pages/tools/BreathingTool.jsx:20:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/tools/BreathingTool.jsx:21:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/tools/BreathingTool.jsx:152:  // Per-phase avatar config per spec.
+client/src/pages/tools/BreathingTool.jsx:153:  const avatar = useMemo(() => {
+client/src/pages/tools/BreathingTool.jsx:217:          {/* Concentric breath rings — decorative, sit behind avatar.
+client/src/pages/tools/BreathingTool.jsx:225:            {/* Animated breath circle (decorative — wraps the avatar) */}
+client/src/pages/tools/BreathingTool.jsx:244:              {/* Soft glow halo behind the avatar — pulses synced to the
+client/src/pages/tools/BreathingTool.jsx:247:              <MMHBFloatAvatar
+client/src/pages/tools/BreathingTool.jsx:248:                imageSrc={getOfficialLumi("breathe")}
+client/src/pages/_quarantine/legacy-landing/Home.jsx:7:// Iter 2d (2026-05-15): removed legacy LumiMascot import — sole usage at L184
+client/src/pages/_quarantine/legacy-landing/Home.jsx:8:// swapped to canonical OfficialLumi.
+client/src/pages/_quarantine/legacy-landing/Home.jsx:9:import { OfficialLumi } from '../../../lumi-registry';
+client/src/pages/_quarantine/legacy-landing/Home.jsx:166:        title="MyMentalHealthBuddy — A Private Space for Honest Reflection" 
+client/src/pages/_quarantine/legacy-landing/Home.jsx:186:              {/* Iter 2d (2026-05-15): swapped legacy LumiMascot (56px,
+client/src/pages/_quarantine/legacy-landing/Home.jsx:187:                  emotion="neutral") → canonical OfficialLumi gated by
+client/src/pages/_quarantine/legacy-landing/Home.jsx:190:                  because brand heading "MyMentalHealthBuddy" renders
+client/src/pages/_quarantine/legacy-landing/Home.jsx:195:              <OfficialLumi
+client/src/pages/_quarantine/legacy-landing/Home.jsx:210:              MyMentalHealthBuddy
+client/src/pages/_quarantine/legacy-landing/Home.jsx:244:              data-testid="img-hero-mascot"
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:127:      avatar: "S",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:133:      avatar: "J",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:139:      avatar: "M",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:426:                    {testimonial.avatar}
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:53:        title="MyMentalHealthBuddy — A gentle AI companion for healing"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:60:          <span className="font-bold text-slate-900 dark:text-slate-100">MyMentalHealthBuddy</span>
+client/src/pages/trust/TrustCenterPage.jsx:9:  const seoTitle = `${meta.title} | MyMentalHealthBuddy`;
+client/src/pages/trust/TrustCenterPage.jsx:11:  const canonicalUrl = `https://mymentalhealthbuddy.com${meta.path}`;
+client/src/pages/trust/TrustCenterPage.jsx:23:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/trust/TrustCenterPage.jsx:33:            MyMentalHealthBuddy is educational and supportive — not a substitute
+client/src/pages/trust/AITransparencyPage.jsx:9:  const seoTitle = `${meta.title} | MyMentalHealthBuddy`;
+client/src/pages/trust/AITransparencyPage.jsx:11:  const canonicalUrl = `https://mymentalhealthbuddy.com${meta.path}`;
+client/src/pages/trust/AITransparencyPage.jsx:23:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/ComingSoon.jsx:12:        title={`${featureName} - Coming Soon | MyMentalHealthBuddy`}
+client/src/pages/ControlDashboard.jsx:23:    siteName: "MyMentalHealthBuddy",
+client/src/pages/ControlDashboard.jsx:68:        title="Control Center - MyMentalHealthBuddy"
+client/src/pages/CRMPage.jsx:6:import LumiMascot from "../components/lumi/LumiMascot.jsx";
+client/src/pages/CRMPage.jsx:75:                    <LumiMascot emotion="neutral" size={40} />
+client/src/pages/AdminLogin.jsx:25:    document.title = "Admin Login — MyMentalHealthBuddy Command Center";
+client/src/pages/AdminLogin.jsx:129:              Enter your administrator token to enter the MyMentalHealthBuddy
+client/src/pages/AdminLogin.jsx:227:                Return to MyMentalHealthBuddy
+client/src/pages/WireframeTemplates.jsx:6: * Developer-ready wireframe system for mymentalhealthbuddy.com
+client/src/pages/LumiV6Preview.jsx:4: * Side-by-side preview of overlay={false} (current PNG-only) vs
+client/src/pages/LumiV6Preview.jsx:13:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/pages/LumiV6Preview.jsx:87:            Each row compares <code>overlay=false</code> (current PNG) with
+client/src/pages/LumiV6Preview.jsx:89:            Faceless V5 PNGs will replace the underlying art later; until then
+client/src/pages/LumiV6Preview.jsx:90:            the soft face-pad mutes the PNG face beneath the new CSS face.
+client/src/pages/LumiV6Preview.jsx:103:                <BuddyAvatar state={s} colorMode="default" overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:114:                <BuddyAvatar state="calm" colorMode={c} overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:125:                <BuddyAvatar state="encouraged" colorMode="pink" pose={p} overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:137:                  <BuddyAvatar state={s} colorMode="default" overlay={false} size={140} />
+client/src/pages/LumiV6Preview.jsx:140:                  <BuddyAvatar state={s} colorMode="default" overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:152:                <BuddyAvatar state="calm" colorMode="default" overlay={true} size={sz} />
+client/src/pages/LumiV6Preview.jsx:163:            New multi-layer component (separate from BuddyAvatar). Mouse-track,
+client/src/pages/LumiV6Preview.jsx:165:            <code className="mx-1">interactive</code>. Hover any avatar below
+client/src/pages/LumiV6Preview.jsx:384: * EmotionCycleDemo — interactive button cycles the avatar through all 7
+client/src/pages/LumiV6Preview.jsx:407:        <LumiV6 emotion={current} size="lg" data-testid={`cycle-avatar-${current}`} />
+client/src/pages/LumiV6Preview.jsx:445:        avatar's emotion → expression mapping mirrors this spec so the toy
+client/src/pages/LumiV6Preview.jsx:624:        click-zone interactions only (1, 2, 3 clicks within 10s). The PNG
+client/src/pages/AvatarLab.jsx:2: * AvatarLab — V32 LumiV7 coordination demo + QA surface.
+client/src/pages/AvatarLab.jsx:48:export default function AvatarLab() {
+client/src/pages/AvatarLab.jsx:56:  // Mouse-tracking gaze for the playground avatar
+client/src/pages/AvatarLab.jsx:71:    if (typeof document !== "undefined") document.title = "Avatar Lab — MyMentalHealthBuddy";
+client/src/pages/AvatarLab.jsx:78:      data-testid="page-avatar-lab"
+client/src/pages/AvatarLab.jsx:83:            V32 § Avatar Evolution Engine
+client/src/pages/Login.jsx:8:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/Login.jsx:91:        title="Sign In - MyMentalHealthBuddy"
+client/src/pages/Login.jsx:92:        description="Sign in to your MyMentalHealthBuddy account to access your wellness tools."
+client/src/pages/Login.jsx:109:                <LumiMascotImage
+client/src/pages/Login.jsx:116:              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
+client/src/pages/Register.jsx:8:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/Register.jsx:53:      toast({ title: "Welcome to MyMentalHealthBuddy", description: "Your account is ready. Let's begin." });
+client/src/pages/Register.jsx:79:        title="Create Account - MyMentalHealthBuddy"
+client/src/pages/Register.jsx:97:                <LumiMascotImage
+client/src/pages/Register.jsx:104:              <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
+client/src/pages/ResetPassword.jsx:10:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/ResetPassword.jsx:31:      <SEO title="Reset Password — MyMentalHealthBuddy" description="Explore reset password tools for your wellness journey." noindex />
+client/src/pages/ResetPassword.jsx:212:        description="Create a new password for your MyMentalHealthBuddy account."
+client/src/pages/ResetPassword.jsx:230:              {/* Recovery surface: static official PNG only, no interaction.
+client/src/pages/ResetPassword.jsx:231:                  Renders the canonical avatar-floating PNG from /brand/v17. */}
+client/src/pages/ResetPassword.jsx:232:              <LumiMascotImage
+client/src/pages/ResetPassword.jsx:239:            <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
+client/src/pages/Privacy.jsx:16:        title="Privacy Policy — MyMentalHealthBuddy"
+client/src/pages/Privacy.jsx:17:        description="How MyMentalHealthBuddy collects, uses, and protects your wellness data. Your healing journey is sacred."
+client/src/pages/Profile.jsx:93:                      Upload a photo to personalize your profile. JPEG, PNG, or WebP up to 10MB.
+client/src/pages/FAQPage.jsx:13:        a: "MyMentalHealthBuddy by The Genuine Love Project is an AI-powered mental wellness platform designed to support self-love, healing, and emotional growth. We provide tools for mood tracking, journaling, guided reflections, and compassionate AI chat support."
+client/src/pages/FAQPage.jsx:189:    description: "Frequently asked questions about MyMentalHealthBuddy - mental wellness, trauma healing, wellness tools, and getting started with your healing journey.",
+client/src/pages/ForgotPassword.jsx:9:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/ForgotPassword.jsx:128:          description="Reset your MyMentalHealthBuddy password. We'll send you a secure link to create a new password."
+client/src/pages/ForgotPassword.jsx:146:              {/* Sensitive surface (account recovery): static official PNG only,
+client/src/pages/ForgotPassword.jsx:148:                  invited to interact with the mascot). Renders the canonical
+client/src/pages/ForgotPassword.jsx:149:                  avatar-floating PNG from /brand/v17. */}
+client/src/pages/ForgotPassword.jsx:150:              <LumiMascotImage
+client/src/pages/ForgotPassword.jsx:157:            <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
+client/src/pages/Admin.jsx:642:    { id: 1, name: "Sarah M.", email: "sarah@example.com", status: "active", plan: "premium", sessions: 24, joined: "2 days ago", avatar: "S" },
+client/src/pages/Admin.jsx:643:    { id: 2, name: "James K.", email: "james@example.com", status: "active", plan: "free", sessions: 8, joined: "1 week ago", avatar: "J" },
+client/src/pages/Admin.jsx:644:    { id: 3, name: "Emily R.", email: "emily@example.com", status: "trial", plan: "trial", sessions: 3, joined: "3 days ago", avatar: "E" },
+client/src/pages/Admin.jsx:645:    { id: 4, name: "Michael T.", email: "michael@example.com", status: "churned", plan: "free", sessions: 1, joined: "1 month ago", avatar: "M" },
+client/src/pages/Admin.jsx:699:                          {user.avatar}
+client/src/pages/ExamplesPage.jsx:161:      <SEO title="Examples — MyMentalHealthBuddy" description="See examples of wellness tools and practices." />
+client/src/pages/RigLab.jsx:7: * surfaces. Mirrors the /avatar-lab pattern from v5.8.28.
+client/src/pages/MotionLab.jsx:43:  { name: "Click ack",          trigger: "pointerdown on avatar",     effect: "glow pulse +0.05, decays over 600ms", transition: "3s ease" },
+client/src/pages/MotionLab.jsx:179:              Move cursor near the avatar to see proximity build (4s). Hover for soft awareness. Click for a gentle glow pulse. Move away — Lumi gently returns to baseline.
+client/src/pages/OnboardingFlow.jsx:122:        src="/lumi/official/lumi-meditation.png"
+client/src/pages/OnboardingFlow.jsx:477:    if (typeof document !== "undefined") document.title = "Welcome — MyMentalHealthBuddy";
+client/src/pages/JournalPage.jsx:27:import { OfficialLumi } from "@/lumi-registry";
+client/src/pages/JournalPage.jsx:269:        <OfficialLumi variant="LUMI_SOFT_PRESENCE" scene="page-header" position="card" pageId="journal" widthPx={100} decorative />
+client/src/pages/MoodPage.jsx:333:        title="Mood Check-In — MyMentalHealthBuddy"
+client/src/pages/Settings.jsx:12:import { OfficialLumi } from "@/lumi-registry";
+client/src/pages/Settings.jsx:265:              <OfficialLumi variant="LUMI_COMPANION" scene="page-header" position="inline" pageId="settings" widthPx={60} decorative />
+client/src/pages/BreathingExercisesPage.jsx:14:import { OfficialLumi } from "@/lumi-registry";
+client/src/pages/BreathingExercisesPage.jsx:322:          buddyState="anxious"
+client/src/pages/BreathingExercisesPage.jsx:323:          buddySize={160}
+client/src/pages/BreathingExercisesPage.jsx:324:          buddyLabel="I'll breathe with you. Slow inhale, slower exhale."
+client/src/pages/BreathingExercisesPage.jsx:337:            <OfficialLumi variant="LUMI_MEDITATION" scene="page-header" position="card" pageId="breathing-exercises" widthPx={120} decorative />
+client/src/pages/ProtocolSession.jsx:191:      <SEO title="Protocol Session | MyMentalHealthBuddy" description="Active protocol session. Educational only." />
+client/src/pages/ProtocolBrowser.jsx:127:        title="Therapeutic Protocols | MyMentalHealthBuddy"
+client/src/pages/DiscernmentDashboard.jsx:435:        title="Discernment Tutor | MyMentalHealthBuddy"
+client/src/pages/CognitiveToolsPage.jsx:237:      <SEO title="Cognitive Tools — MyMentalHealthBuddy" description="Practical tools for clearer thinking and decision-making." />
+client/src/pages/BiometricDashboard.jsx:209:      <SEO title="Biometric Dashboard | MyMentalHealthBuddy" description="Opt-in nervous system telemetry. Educational only." />
+client/src/pages/AgentInteraction.jsx:244:            This console is restricted to operators of MyMentalHealthBuddy.
+client/src/pages/AgentInteraction.jsx:256:      <SEO title="Agent Console | MyMentalHealthBuddy Admin" description="Orchestrator invocation console (admin only)." />
+client/src/pages/GlossaryPage.jsx:99:      <SEO title="Glossary — MyMentalHealthBuddy" description="Definitions of key wellness and self-care terms." />
+client/src/pages/DesignSystemV2.jsx:4:import LumiMascot, { VALID_EMOTIONS } from "@/components/lumi/LumiMascot.jsx";
+client/src/pages/DesignSystemV2.jsx:5:import LumiMascotImage from "@/components/lumi/LumiMascotImage.jsx";
+client/src/pages/DesignSystemV2.jsx:11:import useBuddyEmotion from "@/hooks/useBuddyEmotion.js";
+client/src/pages/DesignSystemV2.jsx:68:  const { emotion, derived, override, celebrate, setEmotion } = useBuddyEmotion(demoCtx);
+client/src/pages/DesignSystemV2.jsx:86:        <title>Lumi Design System v2.0 — MyMentalHealthBuddy</title>
+client/src/pages/DesignSystemV2.jsx:89:          content="Living design system for MyMentalHealthBuddy: Lumi mascot, color tokens, typography, buttons, links, motion, and accessibility utilities."
+client/src/pages/DesignSystemV2.jsx:92:        <meta property="og:description" content="Aurora + Lumi — the additive design system for MyMentalHealthBuddy by The Genuine Love Project." />
+client/src/pages/DesignSystemV2.jsx:111:              <a href="#mascot" className="lumi-link-nav" data-testid="link-mascot">Mascot</a>
+client/src/pages/DesignSystemV2.jsx:135:                  <a href="#mascot" className="lumi-btn lumi-btn-primary lumi-btn--lg" data-testid="button-meet-lumi">Meet Lumi</a>
+client/src/pages/DesignSystemV2.jsx:143:              <LumiMascot emotion="joy" size={300} ariaLabel="Lumi waving hello" />
+client/src/pages/DesignSystemV2.jsx:147:          {/* Mascot gallery */}
+client/src/pages/DesignSystemV2.jsx:148:          <Section id="mascot" kicker="Phase D1 + I1" title="Lumi — 10 emotion states">
+client/src/pages/DesignSystemV2.jsx:161:                    <LumiMascot emotion={em} size={150} trackCursor={false} ariaLabel={`Lumi expressing ${em}`} />
+client/src/pages/DesignSystemV2.jsx:175:                <LumiMascot emotion={galleryEmotion} size={260} />
+client/src/pages/DesignSystemV2.jsx:258:                <Link href="/" className="lumi-link-brand" data-testid="lk-brand">MyMentalHealthBuddy</Link>
+client/src/pages/DesignSystemV2.jsx:323:          {/* Real PNG art assets */}
+client/src/pages/DesignSystemV2.jsx:324:          <Section id="real-assets" kicker="Painted Art" title="Real PNG brand assets">
+client/src/pages/DesignSystemV2.jsx:326:              The canonical brand artwork is shared across the system — the components above and the helpers below all render the same painted PNG assets supplied by the brand owners. Reach for these dedicated <code>*Image</code> helpers when you want a non-interactive surface (hero headers, marketing splashes, social cards) with a simpler API and no click handlers.
+client/src/pages/DesignSystemV2.jsx:330:                <LumiMascotImage size={240} animation="float" ariaLabel="Lumi (full-color illustration)" />
+client/src/pages/DesignSystemV2.jsx:332:                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>&lt;LumiMascotImage /&gt;</code>
+client/src/pages/DesignSystemV2.jsx:348:          <Section id="hook" kicker="Phase I3" title="useBuddyEmotion — context → emotion">
+client/src/pages/DesignSystemV2.jsx:371:                <LumiMascot emotion={emotion} size={240} onEmote={() => celebrate("celebration", 1500)} />
+client/src/pages/PeacescapePage.jsx:7:import InteractiveBuddy from "@/components/peacescape/InteractiveBuddy";
+client/src/pages/PeacescapePage.jsx:13:  { phase: "Phase 1", title: "Sanctuary foundation", body: "A quiet, breathing scape. Buddy beside you. Tenure-aware copy." },
+client/src/pages/PeacescapePage.jsx:14:  { phase: "Phase 2", title: "Avatar customizer",   body: "Choose your Buddy's palette and accessory. Small, gentle expressions of self." },
+client/src/pages/PeacescapePage.jsx:18:  { phase: "Phase 6", title: "360° support fabric", body: "Your sanctuary, your check-ins, and your Buddy — woven together as one companion." },
+client/src/pages/PeacescapePage.jsx:28:      "A gentle, evolving sanctuary that grows with every reflection. Customize your Buddy. Tend your inner space. Your forever companion's home.",
+client/src/pages/PeacescapePage.jsx:86:        {/* Hero — sanctuary preview with Buddy */}
+client/src/pages/PeacescapePage.jsx:88:          buddyState="calm"
+client/src/pages/PeacescapePage.jsx:89:          buddySize={200}
+client/src/pages/PeacescapePage.jsx:90:          buddyLabel="This is your space. We tend it together — one breath, one reflection at a time."
+client/src/pages/PeacescapePage.jsx:119:              <InteractiveBuddy
+client/src/pages/PeacescapePage.jsx:122:                ariaLabel="Tap Buddy to see a different expression."
+client/src/pages/PeacescapePage.jsx:123:                testId="sanctuary-buddy"
+client/src/pages/PeacescapePage.jsx:250:              <h3 className="font-bold mb-1" style={{ color: "var(--glp-sage-deep)" }}>Avatar customizer (coming soon)</h3>
+client/src/pages/PeacescapePage.jsx:252:                Choose your Buddy's palette and accessory. Small, considered ways to make this companion feel like yours.
+client/src/pages/PeacescapePage.jsx:265:                This space is built to be slow on purpose. Buddy stays. Your sanctuary stays. You can return any time.
+client/src/pages/CalmingScenesPage.jsx:178:          buddyState="calm"
+client/src/pages/CalmingScenesPage.jsx:179:          buddySize={160}
+client/src/pages/CalmingScenesPage.jsx:180:          buddyLabel="Close your eyes for a moment. We'll go somewhere peaceful together."
+client/src/pages/MovementSnacksPage.jsx:154:      <SEO title="Movement Snacks — MyMentalHealthBuddy" description="Quick movement breaks for body wellness." />
+client/src/pages/AffirmationsPage.jsx:349:          buddyState="encouraged"
+client/src/pages/AffirmationsPage.jsx:350:          buddySize={160}
+client/src/pages/AffirmationsPage.jsx:351:          buddyLabel="Speak it gently. Let the words land where they're needed."
+client/src/pages/GrowthPage.jsx:57:/*  Growth Aura — page-local SVG visual (NOT a Buddy Engine surface)         */
+client/src/pages/GroundingTechniquesPage.jsx:204:      <SEO title="Grounding Techniques — MyMentalHealthBuddy" description="Methods for staying present and centered." />
+client/src/pages/GroundingTechniquesPage.jsx:332:    title: "Grounding Techniques for Anxiety & Dissociation | MyMentalHealthBuddy",
+client/src/pages/CoherenceLadderPage.jsx:159:      <SEO title="Coherence Ladder — MyMentalHealthBuddy" description="Step-by-step guidance for emotional regulation." />
+client/src/pages/GratitudePractice.jsx:119:        title="Gratitude Practice — MyMentalHealthBuddy"
+client/src/pages/EmotionalIntelligencePage.jsx:185:      <SEO title="Emotional Intelligence — MyMentalHealthBuddy" description="Develop awareness and skills for emotional wellbeing." />
+client/src/pages/PricingPage.jsx:105:        title="Pricing — MyMentalHealthBuddy"
+client/src/pages/PressKit.jsx:134:                  <span>Use our full name: "MyMentalHealthBuddy by The Genuine Love Project"</span>
+client/src/pages/PermacultureWellnessPage.jsx:173:      <SEO title="Permaculture Wellness — MyMentalHealthBuddy" description="Ecological principles for personal wellbeing." />
+client/src/pages/PerceptionRefinementPage.jsx:126:      <SEO title="Perception Refinement — MyMentalHealthBuddy" description="Tools for clearer perception and awareness." />
+client/src/pages/NewsPage.jsx:120:      <SEO title="News — MyMentalHealthBuddy" description="Latest updates from MyMentalHealthBuddy." />
+client/src/pages/NewsPage.jsx:139:    description: "Latest wellness tips, research insights, and platform updates from MyMentalHealthBuddy. Stay informed about mental health and healing practices.",
+client/src/pages/NewsPage.jsx:179:      <SEO title="News — MyMentalHealthBuddy" description="Latest updates from MyMentalHealthBuddy." />
+client/src/pages/NervousSystemFloodingPage.jsx:98:      <SEO title="Nervous System Flooding — MyMentalHealthBuddy" description="Understand and work with nervous system responses." />
+client/src/pages/Presence.jsx:3:import { MMHBFloatAvatar, MMHBAvatarRuntimeProvider } from "@/avatar-life";
+client/src/pages/Presence.jsx:20:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/Presence.jsx:33: * The avatar renders in calmIdle as a visual anchor at the top.
+client/src/pages/Presence.jsx:57:    <MMHBAvatarRuntimeProvider surfaceContext="presence" defaultState="calmIdle">
+client/src/pages/Presence.jsx:59:    </MMHBAvatarRuntimeProvider>
+client/src/pages/Presence.jsx:80:        title="Presence — MyMentalHealthBuddy"
+client/src/pages/Presence.jsx:109:// ─── Header with Lumi avatar in calmIdle ───────────────────────────────────
+client/src/pages/Presence.jsx:116:      <MMHBFloatAvatar
+client/src/pages/Presence.jsx:117:        imageSrc={getOfficialLumi("calm")}
+client/src/pages/CelebrationFlow.jsx:2: * CelebrationFlow — /celebration  (Avatar v4.2 Flow C spec)
+client/src/pages/CelebrationFlow.jsx:19:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/CelebrationFlow.jsx:20:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/CelebrationFlow.jsx:170:              <MMHBFloatAvatar
+client/src/pages/CelebrationFlow.jsx:171:                imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CelebrationFlow.jsx:185:              <MMHBFloatAvatar
+client/src/pages/CelebrationFlow.jsx:186:                imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CelebrationFlow.jsx:200:              <MMHBFloatAvatar
+client/src/pages/CelebrationFlow.jsx:201:                imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CelebrationRitual.jsx:9:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/CelebrationRitual.jsx:10:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/CelebrationRitual.jsx:173:                    per Avatar v4.2; preserves Crown import for downstream phases. */}
+client/src/pages/CelebrationRitual.jsx:174:                <MMHBFloatAvatar
+client/src/pages/CelebrationRitual.jsx:175:                  imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CheckIn.jsx:2: * CheckIn — /checkin  (Avatar v4.2 Flow B spec)
+client/src/pages/CheckIn.jsx:6: * Avatar color transitions in real time as the user picks an emotion,
+client/src/pages/CheckIn.jsx:7: * routed through the buddyEmotion single-source-of-truth lookup. Note
+client/src/pages/CheckIn.jsx:13:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/CheckIn.jsx:17:import { emotionToAvatar } from "@/lib/buddyEmotion";
+client/src/pages/CheckIn.jsx:79:  // Real-time avatar: greeting/default at start, then the picked emotion's
+client/src/pages/CheckIn.jsx:81:  const avatar = useMemo(() => {
+client/src/pages/CheckIn.jsx:84:    return emotionToAvatar(emotion);
+client/src/pages/CheckIn.jsx:227:          data-testid="container-buddy"
+client/src/pages/CheckIn.jsx:230:            src={getOfficialLumi("supportive")}
+client/src/pages/CheckIn.jsx:235:            data-testid={`img-checkin-buddy-${phase}`}
+client/src/pages/Challenge.jsx:11:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/Challenge.jsx:174:          title="7-Day Gentle Challenge | MyMentalHealthBuddy"
+client/src/pages/Challenge.jsx:200:              src={getOfficialLumi("encouraging")}
+client/src/pages/Wellness.jsx:531:                  <span className="text-sm font-medium text-[var(--text)]">Talk to Buddy</span>
+client/src/pages/About.jsx:8:  const title = meta?.title || "About | MyMentalHealthBuddy";
+client/src/pages/About.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/about";
+client/src/pages/About.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Features.jsx:8:  const title = meta?.title || "Features | MyMentalHealthBuddy";
+client/src/pages/Features.jsx:12:    "Explore MyMentalHealthBuddy features — AI-assisted guidance, mood tracking, journaling, and gentle daily practices.";
+client/src/pages/Features.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/features";
+client/src/pages/Features.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Healing.jsx:8:  const title = meta?.title || "Healing | MyMentalHealthBuddy";
+client/src/pages/Healing.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/healing";
+client/src/pages/Healing.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Wellbeing.jsx:8:  const title = meta?.title || "Wellbeing | MyMentalHealthBuddy";
+client/src/pages/Wellbeing.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/wellbeing";
+client/src/pages/Wellbeing.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/MentalWellness.jsx:8:  const title = meta?.title || "Mental Wellness | MyMentalHealthBuddy";
+client/src/pages/MentalWellness.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/mental-wellness";
+client/src/pages/MentalWellness.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/SelfLove.jsx:8:  const title = meta?.title || "Self-Love | MyMentalHealthBuddy";
+client/src/pages/SelfLove.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/self-love";
+client/src/pages/SelfLove.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Growth.jsx:8:  const title = meta?.title || "Growth | MyMentalHealthBuddy";
+client/src/pages/Growth.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/growth";
+client/src/pages/Growth.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Mindfulness.jsx:8:  const title = meta?.title || "Mindfulness | MyMentalHealthBuddy";
+client/src/pages/Mindfulness.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/mindfulness";
+client/src/pages/Mindfulness.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Resilience.jsx:8:  const title = meta?.title || "Resilience | MyMentalHealthBuddy";
+client/src/pages/Resilience.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/resilience";
+client/src/pages/Resilience.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Anxiety.jsx:8:  const title = meta?.title || "Anxiety Support | MyMentalHealthBuddy";
+client/src/pages/Anxiety.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/anxiety";
+client/src/pages/Anxiety.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/Depression.jsx:8:  const title = meta?.title || "Depression Support | MyMentalHealthBuddy";
+client/src/pages/Depression.jsx:14:    meta?.canonical || "https://mymentalhealthbuddy.com/depression";
+client/src/pages/Depression.jsx:29:        <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/pages/WellnessToolsHub.jsx:44:        title="Free Wellness Tools | MyMentalHealthBuddy"
+client/src/pages/Newsletter.jsx:11:        title="Newsletter | MyMentalHealthBuddy"
+client/src/pages/BlogEditor.jsx:231:                  placeholder="https://example.com/image.jpg"
+client/src/pages/BlogIndex.jsx:107:        title="Blog | MyMentalHealthBuddy"
+client/src/pages/BlogIndex.jsx:108:        description="Wellness resources, emotional health insights, and gentle guidance from MyMentalHealthBuddy."
+client/src/pages/CanvaLanding.jsx:9:          MyMentalHealthBuddy • The Genuine Love Project
+client/src/pages/Pricing.jsx:233:        title="Pricing - MyMentalHealthBuddy"
+client/src/pages/CognitiveArchitecturePage.tsx:169:      <SEO title="Cognitive Architecture — MyMentalHealthBuddy" description="Understand and work with your thinking patterns." />
+client/src/pages/CollaborativeLabPage.tsx:214:      <SEO title="Collaborative Lab — MyMentalHealthBuddy" description="Explore wellness tools in a collaborative environment." />
+client/src/pages/EliteToolsDashboard.tsx:228:        title="Elite Intellectual Tools | MyMentalHealthBuddy"
+client/src/pages/GuidedJournalingPage.tsx:207:      <SEO title="Guided Journaling — MyMentalHealthBuddy" description="Prompts and guidance for reflective writing." />
+client/src/pages/PhilosophicalInquiryPage.tsx:164:      <SEO title="Philosophical Inquiry — MyMentalHealthBuddy" description="Explore life's big questions with gentle guidance." />
+client/src/pages/AIChatPage.tsx:4:import { OfficialLumi } from "@/lumi-registry";
+client/src/pages/AIChatPage.tsx:14:          AIChatPanel itself does not render OfficialLumi (uses BuddyAvatar);
+client/src/pages/AIChatPage.tsx:18:          <OfficialLumi variant="LUMI_HEART" scene="page-header" position="inline" pageId="ai-chat" widthPx={40} decorative />
+client/src/pages/GrowthAnalyticsPage.tsx:191:      <SEO title="Growth Analytics — MyMentalHealthBuddy" description="Track your wellness journey and growth patterns." />
+client/src/pages/MetaLearningPage.tsx:144:      <SEO title="Meta Learning — MyMentalHealthBuddy" description="Explore learning about learning itself." />
+client/src/pages/Start.tsx:4:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/pages/Start.tsx:5:import type { BuddyState } from "@/lib/avatarState";
+client/src/pages/Start.tsx:42: * MMHB Buddy Engine v1.8 — Shareable Buddy Moments after relief.
+client/src/pages/Start.tsx:52: *   - "buddy_share_shown"   { toolId, buddyState }   — once per mount
+client/src/pages/Start.tsx:53: *   - "buddy_share_clicked" { toolId, buddyState, method } — per click
+client/src/pages/Start.tsx:57: * The toolId/buddyState in telemetry are bucketed labels (e.g.
+client/src/pages/Start.tsx:62:  buddyState,
+client/src/pages/Start.tsx:65:  buddyState: BuddyState;
+client/src/pages/Start.tsx:73:    "Buddy helped me reset for one minute. Try MyMentalHealthBuddy: https://mymentalhealthbuddy.com/start";
+client/src/pages/Start.tsx:81:  // not per-visit. `buddyState` intentionally omitted from deps to avoid
+client/src/pages/Start.tsx:82:  // double-counting when the avatar transitions (anxious → encouraged
+client/src/pages/Start.tsx:86:    track("buddy_share_shown", { toolId, buddyState });
+client/src/pages/Start.tsx:98:        track("buddy_share_clicked", { toolId, buddyState, method });
+client/src/pages/Start.tsx:109:      track("buddy_share_clicked", { toolId, buddyState, method });
+client/src/pages/Start.tsx:114:      track("buddy_share_clicked", { toolId, buddyState, method });
+client/src/pages/Start.tsx:140:          aria-label={copied ? "Share message copied to clipboard" : "Share Buddy with someone who may need a reset"}
+client/src/pages/Start.tsx:142:          {copied ? "Copied" : "Share Buddy"}
+client/src/pages/Start.tsx:239: * MMHB Buddy Engine v1.3 — state mapper.
+client/src/pages/Start.tsx:241: * Translates real signals from the /start surface into a BuddyState the
+client/src/pages/Start.tsx:242: * avatar can render. Pure function — no side effects, no AI logic, no
+client/src/pages/Start.tsx:272:function mapToBuddyState({
+client/src/pages/Start.tsx:280:}): BuddyState {
+client/src/pages/Start.tsx:294:  // Entry-point button fallback — Buddy reacts before the AI responds.
+client/src/pages/Start.tsx:304: * Map the AI reply text → BuddyState so Buddy's avatar reflects the
+client/src/pages/Start.tsx:316: *     → anxious, so Buddy still lands on the right state for tool
+client/src/pages/Start.tsx:331: * (mapToBuddyState) so we never regress prior attribution.
+client/src/pages/Start.tsx:335:function mapResponseToBuddyState(text = ""): BuddyState {
+client/src/pages/Start.tsx:347: * v1.5 — Tool-specific helper copy shown beneath BuddyAvatar.
+client/src/pages/Start.tsx:351:const buddyToolCopy: Record<string, string> = {
+client/src/pages/Start.tsx:352:  box_breathing: "Follow Buddy\u2019s breath.",
+client/src/pages/Start.tsx:353:  grounding_54321: "Let Buddy help you ground.",
+client/src/pages/Start.tsx:354:  thought_reframe: "Buddy is helping you think clearly.",
+client/src/pages/Start.tsx:355:  emotional_checkin: "Buddy is staying gentle with you.",
+client/src/pages/Start.tsx:356:  overload_reset: "Buddy is helping you make this smaller.",
+client/src/pages/Start.tsx:357:  relationship_repair: "Buddy is helping you prepare with care.",
+client/src/pages/Start.tsx:358:  pattern_interrupt: "Buddy is helping you break the loop.",
+client/src/pages/Start.tsx:366: * Returns the suggested baseline state for an idle (calm) Buddy. Tool
+client/src/pages/Start.tsx:368: * at the call site by gating on `buddyState === "calm"`).
+client/src/pages/Start.tsx:370:function resolveBuddyBaseline({
+client/src/pages/Start.tsx:380:}): BuddyState {
+client/src/pages/Start.tsx:431:  // for BuddyAvatar — never affects AI / tool execution / response logic.
+client/src/pages/Start.tsx:438:  // v1.5 — dedupe `buddy_tool_expression` telemetry per unique toolId so
+client/src/pages/Start.tsx:439:  // we don't re-fire on every Buddy state change while the same tool is
+client/src/pages/Start.tsx:441:  const buddyToolExpressionRef = useRef<string>("");
+client/src/pages/Start.tsx:442:  // v2.1 (Phase 5) — dedupe `buddy_response_alignment` telemetry per
+client/src/pages/Start.tsx:448:  const buddyResponseAlignmentRef = useRef<string>("");
+client/src/pages/Start.tsx:458:    // v1.7 — fire once on mount to confirm Buddy mounted with all
+client/src/pages/Start.tsx:462:    track("buddy_accessibility_ready");
+client/src/pages/Start.tsx:530:    // v1.3: capture the entry-point as a Buddy signal so the avatar can
+client/src/pages/Start.tsx:532:    // when the AI doesn't tag modules. See mapToBuddyState above.
+client/src/pages/Start.tsx:576:  // MMHB Buddy Engine v1.3 — connect avatar to REAL user-flow signals.
+client/src/pages/Start.tsx:580:  //   - Does NOT call /api/buddy, does NOT touch /api/ai/chat, does NOT
+client/src/pages/Start.tsx:583:  //     (mapToBuddyState above the component).
+client/src/pages/Start.tsx:588:  //   3. result OR selectedToolId → mapToBuddyState(...)
+client/src/pages/Start.tsx:590:  //        - falls back to selectedToolId so Buddy reacts immediately
+client/src/pages/Start.tsx:593:  const [buddyState, setBuddyState] = useState<BuddyState>("calm");
+client/src/pages/Start.tsx:596:      setBuddyState("crisis");
+client/src/pages/Start.tsx:600:      setBuddyState("encouraged");
+client/src/pages/Start.tsx:610:      buddyResponseAlignmentRef.current = "";
+client/src/pages/Start.tsx:617:    // pure-reply turns (no tool returned) still drive Buddy.
+client/src/pages/Start.tsx:622:    //   3. toolState     (existing mapToBuddyState — v1.5 fallback)
+client/src/pages/Start.tsx:623:    //   4. baseline      (separate effect, only when buddyState=calm)
+client/src/pages/Start.tsx:626:      const responseState = mapResponseToBuddyState(replyText);
+client/src/pages/Start.tsx:634:      const toolMappedState = mapToBuddyState({
+client/src/pages/Start.tsx:641:      const nextState: BuddyState =
+client/src/pages/Start.tsx:643:      setBuddyState(nextState);
+client/src/pages/Start.tsx:651:        replyText !== buddyResponseAlignmentRef.current
+client/src/pages/Start.tsx:653:        buddyResponseAlignmentRef.current = replyText;
+client/src/pages/Start.tsx:654:        track("buddy_response_alignment", { state: responseState });
+client/src/pages/Start.tsx:659:      if (responseToolId && responseToolId !== buddyToolExpressionRef.current) {
+client/src/pages/Start.tsx:660:        buddyToolExpressionRef.current = responseToolId;
+client/src/pages/Start.tsx:661:        track("buddy_tool_expression", {
+client/src/pages/Start.tsx:663:          buddyState: nextState,
+client/src/pages/Start.tsx:668:    setBuddyState("calm");
+client/src/pages/Start.tsx:671:  // MMHB Buddy Engine v1.4 — time-based state recovery.
+client/src/pages/Start.tsx:673:  // Buddy gradually returns to "calm" after any emotional state, except
+client/src/pages/Start.tsx:682:    if (buddyState === "calm" || buddyState === "crisis") return;
+client/src/pages/Start.tsx:683:    const isSoftLanding = toolCompleted && buddyState === "encouraged";
+client/src/pages/Start.tsx:686:      ? "buddy_completion_soft_landing"
+client/src/pages/Start.tsx:687:      : "buddy_state_recovered";
+client/src/pages/Start.tsx:688:    const from = buddyState;
+client/src/pages/Start.tsx:690:      setBuddyState("calm");
+client/src/pages/Start.tsx:694:  }, [buddyState, toolCompleted]);
+client/src/pages/Start.tsx:696:  // MMHB Buddy Engine v1.4 — grounding-helper visibility telemetry.
+client/src/pages/Start.tsx:697:  // Fires once per state-entry when the helper copy below the avatar
+client/src/pages/Start.tsx:700:    if (buddyState === "anxious" || buddyState === "anxious") {
+client/src/pages/Start.tsx:701:      track("buddy_grounding_visible", { state: buddyState });
+client/src/pages/Start.tsx:703:  }, [buddyState]);
+client/src/pages/Start.tsx:705:  // MMHB Buddy Engine v1.6 — memory-aware visual baseline.
+client/src/pages/Start.tsx:710:  // win — baseline only fires when buddyState is calm and no
+client/src/pages/Start.tsx:714:  // ping-pong with v1.4 recovery (which periodically returns Buddy to
+client/src/pages/Start.tsx:719:    if (buddyState !== "calm") return;
+client/src/pages/Start.tsx:732:    const baseline = resolveBuddyBaseline({
+client/src/pages/Start.tsx:738:    if (String(baseline) !== String(buddyState)) {
+client/src/pages/Start.tsx:740:      setBuddyState(baseline);
+client/src/pages/Start.tsx:741:      track("buddy_baseline_applied", {
+client/src/pages/Start.tsx:751:  }, [loading, crisis, buddyState, streak, result]);
+client/src/pages/Start.tsx:753:  // Layered helper copy beneath the avatar:
+client/src/pages/Start.tsx:754:  //   1. crisis           → null (avatar speaks via presence)
+client/src/pages/Start.tsx:757:  //   4. anxious/overwhelmed (no tool) → v1.4 "Follow Buddy's breath"
+client/src/pages/Start.tsx:766:  const buddyHelperCopy: string | null = (() => {
+client/src/pages/Start.tsx:767:    if (buddyState === "crisis") return null;
+client/src/pages/Start.tsx:768:    if (buddyState === "encouraged" && toolCompleted) {
+client/src/pages/Start.tsx:771:    if (activeToolIdForCopy && buddyToolCopy[activeToolIdForCopy]) {
+client/src/pages/Start.tsx:772:      return buddyToolCopy[activeToolIdForCopy];
+client/src/pages/Start.tsx:774:    if (buddyState === "anxious" || buddyState === "anxious") {
+client/src/pages/Start.tsx:775:      return "Follow Buddy\u2019s breath.";
+client/src/pages/Start.tsx:777:    if (buddyState === "calm") {
+client/src/pages/Start.tsx:780:      if (daysAwayNum >= 2) return "Buddy is here to help you restart gently.";
+client/src/pages/Start.tsx:781:      if (currentStreakNum >= 7) return "Buddy remembers your consistency.";
+client/src/pages/Start.tsx:782:      if (currentStreakNum >= 3) return "Buddy is here for today\u2019s reset.";
+client/src/pages/Start.tsx:784:        return "Buddy can help you go deeper when you\u2019re ready.";
+client/src/pages/Start.tsx:786:      // v1.13: avoid echoing the BuddyPanel title ("Buddy is here with you").
+client/src/pages/Start.tsx:788:      // the helper-copy line below the avatar reads as noisy filler. Returning
+client/src/pages/Start.tsx:799:        {/* MMHB Buddy v2.0 — cross-platform visual companion via BuddyPanel.
+client/src/pages/Start.tsx:800:            Wraps the visual avatar + companion sr-only + dynamic helper-copy
+client/src/pages/Start.tsx:802:            (onboarding, journaling, mood/check-in, tools) render Buddy
+client/src/pages/Start.tsx:806:            (BuddyOutput contract surfaced via avatar data-attrs). */}
+client/src/pages/Start.tsx:807:        <BuddyPanel
+client/src/pages/Start.tsx:808:          state={buddyState}
+client/src/pages/Start.tsx:809:          title="Buddy is here with you"
+client/src/pages/Start.tsx:813:          data-testid="panel-buddy-start"
+client/src/pages/Start.tsx:817:            assistive tech (and reduced-motion users) that the avatar is
+client/src/pages/Start.tsx:821:          <p className="sr-only" data-testid="text-buddy-sr-companion">
+client/src/pages/Start.tsx:822:            Buddy is a visual companion. Your support tools still work
+client/src/pages/Start.tsx:826:            v1.4 grounding helper copy — appears when Buddy is anxious /
+client/src/pages/Start.tsx:831:            BuddyPanel so the dynamic copy continues to flow visually
+client/src/pages/Start.tsx:832:            beneath the avatar/title for /start, while other surfaces
+client/src/pages/Start.tsx:833:            can use BuddyPanel without it.
+client/src/pages/Start.tsx:839:            style={{ opacity: buddyHelperCopy ? 1 : 0 }}
+client/src/pages/Start.tsx:840:            data-testid="text-buddy-helper-copy"
+client/src/pages/Start.tsx:842:            {buddyHelperCopy ?? "\u00A0"}
+client/src/pages/Start.tsx:844:        </BuddyPanel>
+client/src/pages/Start.tsx:1030:                  buddyState={buddyState}
+client/src/pages/Start.tsx:1203:        {/* MMHB Buddy Engine v1.8 — share gate.
+client/src/pages/Start.tsx:1211:            content. Only neutral metadata (toolId, buddyState) for
+client/src/pages/Start.tsx:1216:            buddyState={buddyState}
+client/src/pages/MirrorPage.tsx:132:      <SEO title="Mirror — MyMentalHealthBuddy" description="Reflective tools for self-discovery." />
+client/src/blog/BlogPage.tsx:4:			<h1>MyMentalHealthBuddy Blog</h1>
+client/src/components/a11y/ReducedMotionProvider.jsx:68:  // (e.g. lumi-mascot.css) can react without needing JS-time access.
+client/src/components/brand/BrandLogo.jsx:2:import LumiMascot from "../lumi/LumiMascot.jsx";
+client/src/components/brand/BrandLogo.jsx:32:          <LumiMascot emotion="neutral" size={s.px} />
+client/src/components/brand/BrandLogo.jsx:41:            MyMentalHealthBuddy
+client/src/components/chat/AIChatPanel.tsx:3:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/chat/AIChatPanel.tsx:4:import { detectChatSentiment, aiStateToPose } from "@/lib/buddyEmotion";
+client/src/components/chat/AIChatPanel.tsx:190:                      src={getOfficialLumi("supportive")}
+client/src/components/chat/AIChatPanel.tsx:221:                  src={getOfficialLumi("supportive")}
+client/src/components/landing/Hero.tsx:17:        MyMentalHealthBuddy
+client/src/components/layout/Header.jsx:6:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/layout/Header.jsx:7:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/layout/Header.jsx:112:            <MMHBFloatAvatar
+client/src/components/layout/Header.jsx:113:              imageSrc={getOfficialLumi("calm")}
+client/src/components/layout/Footer.tsx:15:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/layout/Footer.tsx:16:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/layout/Footer.tsx:27:              <MMHBFloatAvatar
+client/src/components/layout/Footer.tsx:28:                imageSrc={getOfficialLumi("calm")}
+client/src/components/layout/PageScaffold.tsx:55:        title={`${pageTitle} — MyMentalHealthBuddy`} 
+client/src/components/modules/ModulesPanel.tsx:71:    `mymentalhealthbuddy.com`;
+client/src/components/sacred/Hero.jsx:70:                alt="MyMentalHealthBuddy" 
+client/src/components/sacred/SacredFooter.jsx:22:import LumiMascot from "@/components/lumi/LumiMascot.jsx";
+client/src/components/sacred/SacredFooter.jsx:90:                <LumiMascot emotion="neutral" size={40} />
+client/src/components/seo/PageSEO.jsx:26:      <meta property="og:site_name" content="MyMentalHealthBuddy" />
+client/src/components/share/InfinityHeartCard.jsx:47:          title: "MyMentalHealthBuddy",
+client/src/components/share/ShareCardPrompt.tsx:75:          title: "MyMentalHealthBuddy",
+client/src/components/ui/Skeleton.jsx:13:    avatar: 'h-12 w-12 rounded-full',
+client/src/components/ui/Skeleton.jsx:32:      <Skeleton variant="avatar" />
+client/src/components/ui/Footer.jsx:32:            <span className="font-sacred text-lg">MyMentalHealthBuddy</span>
+client/src/components/ui/Footer.jsx:51:            aria-label="Follow MyMentalHealthBuddy on social media"
+client/src/components/ui/Footer.jsx:60:                  aria-label={`MyMentalHealthBuddy on ${name} (opens in new tab)`}
+client/src/components/avatar/BuddyPanel.tsx:2: * BuddyPanel.tsx — MMHB Buddy Engine v2.0.
+client/src/components/avatar/BuddyPanel.tsx:4: * Reusable, cross-platform Buddy companion wrapper.
+client/src/components/avatar/BuddyPanel.tsx:7: *   - imports BuddyAvatar
+client/src/components/avatar/BuddyPanel.tsx:15: * mood/check-in, tools) can render Buddy with consistent framing —
+client/src/components/avatar/BuddyPanel.tsx:18: * Telemetry (additive): `buddy_panel_viewed { surface, state }` fires
+client/src/components/avatar/BuddyPanel.tsx:25:import BuddyAvatar from "./BuddyAvatar";
+client/src/components/avatar/BuddyPanel.tsx:26:import type { BuddyState } from "@/lib/avatarState";
+client/src/components/avatar/BuddyPanel.tsx:27:import { emitBuddyEvent } from "@/lib/buddyTelemetry";
+client/src/components/avatar/BuddyPanel.tsx:28:import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
+client/src/components/avatar/BuddyPanel.tsx:32:// HX-OS Interaction Governance — BuddyPanel is a presentational companion
+client/src/components/avatar/BuddyPanel.tsx:35:// route parity established when BuddyPanel first wired runtime enforcement.
+client/src/components/avatar/BuddyPanel.tsx:36:const BUDDY_IS_HEALING_FLOW = false;
+client/src/components/avatar/BuddyPanel.tsx:41:const CRISIS_STATES: readonly BuddyState[] = ["crisis"];
+client/src/components/avatar/BuddyPanel.tsx:42:const VULNERABLE_STATES: readonly BuddyState[] = ["sad", "anxious", "anxious", "crisis"];
+client/src/components/avatar/BuddyPanel.tsx:43:const DYSREGULATED_STATES: readonly BuddyState[] = ["anxious", "crisis"];
+client/src/components/avatar/BuddyPanel.tsx:48: * Looks up the surface key in BUDDY_PANEL_COPY and, if a `reflections`
+client/src/components/avatar/BuddyPanel.tsx:59:  const entry = (BUDDY_PANEL_COPY as Record<string, { reflections?: readonly string[] }>)[surface];
+client/src/components/avatar/BuddyPanel.tsx:67:export interface BuddyPanelProps {
+client/src/components/avatar/BuddyPanel.tsx:68:  /** Buddy emotional state (drives avatar visuals via the v1.9 contract). */
+client/src/components/avatar/BuddyPanel.tsx:69:  state: BuddyState;
+client/src/components/avatar/BuddyPanel.tsx:70:  /** Headline copy near the avatar. Optional — omit for surfaces that need only the avatar. */
+client/src/components/avatar/BuddyPanel.tsx:74:   * semantics where Buddy IS the page heading). Pass `"p"` on companion
+client/src/components/avatar/BuddyPanel.tsx:86:  /** Avatar pixel size. Defaults to 140 for parity with the /start hero. */
+client/src/components/avatar/BuddyPanel.tsx:94:export default function BuddyPanel({
+client/src/components/avatar/BuddyPanel.tsx:103:  "data-testid": testId = "panel-buddy",
+client/src/components/avatar/BuddyPanel.tsx:104:}: BuddyPanelProps) {
+client/src/components/avatar/BuddyPanel.tsx:107:  // impressions to the emotional state Buddy was rendering at that moment.
+client/src/components/avatar/BuddyPanel.tsx:109:  // Uses the shared, typed `emitBuddyEvent` helper (v2.1) so every
+client/src/components/avatar/BuddyPanel.tsx:110:  // Buddy surface — present and future — gets identical wire shape,
+client/src/components/avatar/BuddyPanel.tsx:113:    emitBuddyEvent("buddy_panel_viewed", { surface, state });
+client/src/components/avatar/BuddyPanel.tsx:133:  // HX-OS Interaction Governance — Runtime Enforcement (v5.8.120, BuddyPanel iter 2).
+client/src/components/avatar/BuddyPanel.tsx:149:  // BuddyPanel has two INDEPENDENT emotional dimensions per v7.4 governance:
+client/src/components/avatar/BuddyPanel.tsx:161:        healingFlow: BUDDY_IS_HEALING_FLOW,
+client/src/components/avatar/BuddyPanel.tsx:172:        surface: "buddy",
+client/src/components/avatar/BuddyPanel.tsx:173:        healingFlow: BUDDY_IS_HEALING_FLOW,
+client/src/components/avatar/BuddyPanel.tsx:190:      <BuddyAvatar
+client/src/components/avatar/BuddyPanel.tsx:194:        data-testid={`${testId}-avatar`}
+client/src/components/avatar/BuddyAvatar.tsx:2: * BuddyAvatar.tsx — MMHB Buddy Engine visual.
+client/src/components/avatar/BuddyAvatar.tsx:13: * Style still lives in BuddyAvatar.css (sibling) — keyframes are state-
+client/src/components/avatar/BuddyAvatar.tsx:14: * class scoped (.buddy--<state>) so adding new states later is additive.
+client/src/components/avatar/BuddyAvatar.tsx:18: *   - 3 canonical CSS vars only (--buddy-eye-color / --buddy-heart-color /
+client/src/components/avatar/BuddyAvatar.tsx:19: *     --buddy-heart-pulse)
+client/src/components/avatar/BuddyAvatar.tsx:21: *   - .buddy--crisis CSS rule untouched (crisis must stay steady & green)
+client/src/components/avatar/BuddyAvatar.tsx:22: *   - .buddy__antenna circle:nth-of-type(1) preserved (CSS targets it for
+client/src/components/avatar/BuddyAvatar.tsx:24: *   - .buddy__heart-shape, .buddy__heart-glow, .buddy__heart-core,
+client/src/components/avatar/BuddyAvatar.tsx:25: *     .buddy__eye class hooks preserved (CSS animations target them)
+client/src/components/avatar/BuddyAvatar.tsx:29: * LEGACY AVATAR WRAPPER
+client/src/components/avatar/BuddyAvatar.tsx:32: * MMHBFloatAvatar
+client/src/components/avatar/BuddyAvatar.tsx:35: * client/src/avatar-life
+client/src/components/avatar/BuddyAvatar.tsx:41:import "./BuddyAvatar.css";
+client/src/components/avatar/BuddyAvatar.tsx:42:import { getBuddyVisualOutput } from "@/lib/avatarState";
+client/src/components/avatar/BuddyAvatar.tsx:46: * Lumi v4 color variants — public-served PNGs in /brand/.
+client/src/components/avatar/BuddyAvatar.tsx:47: * `default` is the canonical V17 official sage Lumi (avatar-floating-nobg.png).
+client/src/components/avatar/BuddyAvatar.tsx:51:export type BuddyColorMode =
+client/src/components/avatar/BuddyAvatar.tsx:61:// V17 sage Lumi (avatar-floating-nobg). The legacy lumi-v4-* tinted PNGs were
+client/src/components/avatar/BuddyAvatar.tsx:65:// always lands on the official artwork. `sleep` maps to avatar-breathing
+client/src/components/avatar/BuddyAvatar.tsx:67:const COLOR_MODE_SRC: Record<BuddyColorMode, string> = {
+client/src/components/avatar/BuddyAvatar.tsx:68:  default: "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:69:  yellow:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:70:  pink:    "/lumi/official/lumi-heart.png",
+client/src/components/avatar/BuddyAvatar.tsx:71:  blue:    "/lumi/official/lumi-meditation.png",
+client/src/components/avatar/BuddyAvatar.tsx:72:  purple:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:73:  sleep:   "/lumi/official/lumi-meditation.png",
+client/src/components/avatar/BuddyAvatar.tsx:74:  orange:  "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:83:export type BuddyStyle =
+client/src/components/avatar/BuddyAvatar.tsx:91:// V17 sage Lumi. The legacy lumi-style-* alt-character PNGs were off-brand
+client/src/components/avatar/BuddyAvatar.tsx:95:const STYLE_SRC: Record<BuddyStyle, string> = {
+client/src/components/avatar/BuddyAvatar.tsx:96:  default: "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:97:  soft: "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:98:  dream: "/lumi/official/lumi-meditation.png",
+client/src/components/avatar/BuddyAvatar.tsx:99:  glow: "/lumi/official/lumi-heart.png",
+client/src/components/avatar/BuddyAvatar.tsx:110:export type BuddyState =
+client/src/components/avatar/BuddyAvatar.tsx:120:export type BuddyPose =
+client/src/components/avatar/BuddyAvatar.tsx:137:// Poses without dedicated PNGs (listening, pointing, presenting, running,
+client/src/components/avatar/BuddyAvatar.tsx:141:const FALLBACK_LUMI = "/lumi/official/lumi-float-idle.png";
+client/src/components/avatar/BuddyAvatar.tsx:143:// V17 PNGs ship a same-name `.webp` sibling (~14–22 KB vs 263–365 KB).
+client/src/components/avatar/BuddyAvatar.tsx:144:// v4 themes don't, so we only emit a <source> when we know the webp exists.
+client/src/components/avatar/BuddyAvatar.tsx:145:const V17_WEBP_PREFIX = "/brand/v17/";
+client/src/components/avatar/BuddyAvatar.tsx:146:function pickWebp(pngUrl: string): string | null {
+client/src/components/avatar/BuddyAvatar.tsx:147:  if (pngUrl.startsWith(V17_WEBP_PREFIX) && pngUrl.endsWith(".png")) {
+client/src/components/avatar/BuddyAvatar.tsx:148:    return pngUrl.slice(0, -4) + ".webp";
+client/src/components/avatar/BuddyAvatar.tsx:152:const POSE_SRC: Record<Exclude<BuddyPose, "default">, string> = {
+client/src/components/avatar/BuddyAvatar.tsx:153:  eating:      "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:154:  dancing:     "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:155:  waving:      "/lumi/official/lumi-float-idle.png",
+client/src/components/avatar/BuddyAvatar.tsx:156:  meditating:  "/lumi/official/lumi-meditation.png",
+client/src/components/avatar/BuddyAvatar.tsx:157:  celebrating: "/lumi/official/lumi-heart.png",
+client/src/components/avatar/BuddyAvatar.tsx:158:  hugging:     "/lumi/official/lumi-heart.png",
+client/src/components/avatar/BuddyAvatar.tsx:159:  // Below: declared in the union for type safety; PNGs ship later. Point at
+client/src/components/avatar/BuddyAvatar.tsx:173: *   sm  →  32px (header logos, chat bubble avatars)
+client/src/components/avatar/BuddyAvatar.tsx:178:export type BuddySizeToken = "sm" | "md-header" | "md" | "lg" | "xl";
+client/src/components/avatar/BuddyAvatar.tsx:180:const SIZE_TOKEN_PX: Record<BuddySizeToken, number> = {
+client/src/components/avatar/BuddyAvatar.tsx:188:export interface BuddyAvatarProps {
+client/src/components/avatar/BuddyAvatar.tsx:189:  state?: BuddyState;
+client/src/components/avatar/BuddyAvatar.tsx:191:  size?: number | BuddySizeToken;
+client/src/components/avatar/BuddyAvatar.tsx:195:   * sage hero pose). Palette options swap the rendered PNG only —
+client/src/components/avatar/BuddyAvatar.tsx:201:  colorMode?: BuddyColorMode;
+client/src/components/avatar/BuddyAvatar.tsx:202:  style?: BuddyStyle;
+client/src/components/avatar/BuddyAvatar.tsx:204:  pose?: BuddyPose;
+client/src/components/avatar/BuddyAvatar.tsx:207:   * of the PNG: soft face-pad to mute existing PNG features, CSS dot eyes,
+client/src/components/avatar/BuddyAvatar.tsx:212:   * adds a `buddy--v6` root class so CSS can scope the overlay rules.
+client/src/components/avatar/BuddyAvatar.tsx:214:   * Faceless V5 PNGs ship later. Until then, the soft face-pad does its
+client/src/components/avatar/BuddyAvatar.tsx:215:   * best to obscure the PNG face beneath the new CSS face. Per user spec.
+client/src/components/avatar/BuddyAvatar.tsx:223:   * state drift sends a non-crisis state, the avatar stays still.
+client/src/components/avatar/BuddyAvatar.tsx:229:   * off-screen avatar instances across the app). Set to "eager" at
+client/src/components/avatar/BuddyAvatar.tsx:240: * MMHB Buddy Engine v1.7 — accessibility-first aria-label vocabulary.
+client/src/components/avatar/BuddyAvatar.tsx:243: * calm understanding of what Buddy is doing right now WITHOUT exposing
+client/src/components/avatar/BuddyAvatar.tsx:247:const BUDDY_ARIA_LABEL: Record<BuddyState, string> = {
+client/src/components/avatar/BuddyAvatar.tsx:248:  calm: "Buddy avatar showing calm support mode",
+client/src/components/avatar/BuddyAvatar.tsx:249:  anxious: "Buddy avatar showing anxious breathing support mode",
+client/src/components/avatar/BuddyAvatar.tsx:250:  sad: "Buddy avatar showing gentle support mode",
+client/src/components/avatar/BuddyAvatar.tsx:251:  encouraged: "Buddy avatar showing encouraging support mode",
+client/src/components/avatar/BuddyAvatar.tsx:252:  celebrate: "Buddy avatar showing celebrating support mode",
+client/src/components/avatar/BuddyAvatar.tsx:253:  sleep: "Buddy avatar showing sleep mode",
+client/src/components/avatar/BuddyAvatar.tsx:254:  crisis: "Buddy avatar showing crisis-safe support mode",
+client/src/components/avatar/BuddyAvatar.tsx:301:function BuddyAvatar({
+client/src/components/avatar/BuddyAvatar.tsx:312:  "data-testid": testId = "buddy-avatar",
+client/src/components/avatar/BuddyAvatar.tsx:313:}: BuddyAvatarProps) {
+client/src/components/avatar/BuddyAvatar.tsx:315:  // every animation gate (.buddy--motion-steady selectors + breathe class
+client/src/components/avatar/BuddyAvatar.tsx:318:  const v = getBuddyVisualOutput(state);
+client/src/components/avatar/BuddyAvatar.tsx:334:  BUDDY_ARIA_LABEL[state] ?? `MMHB Buddy: ${v.label}`;
+client/src/components/avatar/BuddyAvatar.tsx:340:      "--buddy-eye-color": v.eyeColor,
+client/src/components/avatar/BuddyAvatar.tsx:341:      "--buddy-heart-color": v.heartColor,
+client/src/components/avatar/BuddyAvatar.tsx:342:      "--buddy-heart-pulse": `${v.heartPulse}ms`,
+client/src/components/avatar/BuddyAvatar.tsx:352:  // PNG-only render at sm reads cleaner and is what chat bubble avatars
+client/src/components/avatar/BuddyAvatar.tsx:359:  // chime) into BuddyAvatar so EVERY avatar surface in the app — header,
+client/src/components/avatar/BuddyAvatar.tsx:368:  //     N avatars mount; first claim wins, releases on unmount)
+client/src/components/avatar/BuddyAvatar.tsx:370:  // Tiny avatars (<48px — chat bubble badges, footer logos) skip the
+client/src/components/avatar/BuddyAvatar.tsx:375:  // 1) Entrance pop on first viewport intersection (any avatar can fire it;
+client/src/components/avatar/BuddyAvatar.tsx:394:  // 2) Heartbeat — only avatars rendered at >=96px try to claim ownership.
+client/src/components/avatar/BuddyAvatar.tsx:395:  //    This keeps tiny header / chat-bubble / footer avatars silent while
+client/src/components/avatar/BuddyAvatar.tsx:401:    if (!token) return; // another avatar already owns the beat
+client/src/components/avatar/BuddyAvatar.tsx:406:  //    means rapid taps across multiple avatars still yield at most one
+client/src/components/avatar/BuddyAvatar.tsx:418:      className={`buddy buddy--${v.state} buddy--motion-${effectiveMotion ?? v.motion} buddy--expr-${v.expression} ${showV6Overlay ? "buddy--v6" : ""} ${className}`.trim()}
+client/src/components/avatar/BuddyAvatar.tsx:424:      // v1.9 — full BuddyOutput contract surfaced as data-attributes so any
+client/src/components/avatar/BuddyAvatar.tsx:440:        {pickWebp(lumiArtworkUrl) && (
+client/src/components/avatar/BuddyAvatar.tsx:441:          <source srcSet={pickWebp(lumiArtworkUrl) as string} type="image/webp" />
+client/src/components/avatar/BuddyAvatar.tsx:453:            // canonical sage Lumi so the avatar never renders as a broken image.
+client/src/components/avatar/BuddyAvatar.tsx:459:          className={`buddy__svg ${(effectiveMotion ?? v.motion) === 'steady' ? '' : 'lumi-breathe'}`.trim()}
+client/src/components/avatar/BuddyAvatar.tsx:465:          v4 PNG body region. Face pad sits over the upper-mid third to
+client/src/components/avatar/BuddyAvatar.tsx:466:          mute the underlying PNG face; new CSS face draws on top.
+client/src/components/avatar/BuddyAvatar.tsx:470:        <div className="buddy__v6" aria-hidden="true" data-testid={`${testId}-v6`}>
+client/src/components/avatar/BuddyAvatar.tsx:471:          <div className="buddy__v6-face-pad" />
+client/src/components/avatar/BuddyAvatar.tsx:472:          <div className="buddy__v6-eye buddy__v6-eye--left" />
+client/src/components/avatar/BuddyAvatar.tsx:473:          <div className="buddy__v6-eye buddy__v6-eye--right" />
+client/src/components/avatar/BuddyAvatar.tsx:474:          {v6ShowMouth && <div className="buddy__v6-mouth" />}
+client/src/components/avatar/BuddyAvatar.tsx:475:          <div className="buddy__v6-heart">
+client/src/components/avatar/BuddyAvatar.tsx:476:            <div className="buddy__v6-heart-glow" />
+client/src/components/avatar/BuddyAvatar.tsx:478:              className="buddy__v6-heart-svg"
+client/src/components/avatar/BuddyAvatar.tsx:502:export default BuddyAvatar;
+client/src/components/zen/BuddyBubble.jsx:3:import "./buddy-bubble.css";
+client/src/components/zen/BuddyBubble.jsx:6: * BuddyBubble — a small speech bubble next to BuddyAvatar that softly
+client/src/components/zen/BuddyBubble.jsx:87:export default function BuddyBubble({
+client/src/components/zen/BuddyBubble.jsx:91:  testIdPrefix = "buddy-bubble",
+client/src/components/zen/BuddyBubble.jsx:112:      className={`buddy-bubble ${isCrisis ? "buddy-bubble--crisis" : ""} ${className}`}
+client/src/components/zen/BuddyBubble.jsx:116:      <div className="buddy-bubble__tail" aria-hidden="true" />
+client/src/components/zen/BuddyBubble.jsx:118:        className="buddy-bubble__body"
+client/src/components/zen/BuddyBubble.jsx:123:        <div className="buddy-bubble__header">
+client/src/components/zen/BuddyBubble.jsx:124:          <MessageCircleHeart className="buddy-bubble__icon" aria-hidden="true" />
+client/src/components/zen/BuddyBubble.jsx:125:          <span className="buddy-bubble__name">Buddy</span>
+client/src/components/zen/BuddyBubble.jsx:126:          <span className="buddy-bubble__category">
+client/src/components/zen/BuddyBubble.jsx:130:        <p className="buddy-bubble__text" data-testid={`${testIdPrefix}-text`}>
+client/src/components/zen/BuddyBubble.jsx:131:          <span className="buddy-bubble__emoji" aria-hidden="true">{message.emoji}</span>
+client/src/components/zen/BuddyBubble.jsx:134:        <div className="buddy-bubble__footer">
+client/src/components/zen/BuddyBubble.jsx:138:              className="buddy-bubble__cta"
+client/src/components/zen/BuddyBubble.jsx:147:              className="buddy-bubble__more"
+client/src/components/zen/BuddyBubble.jsx:148:              aria-label="Show me another thought from Buddy"
+client/src/components/zen/BuddyBubble.jsx:151:              <RefreshCw className="buddy-bubble__more-icon" aria-hidden="true" />
+client/src/components/zen/ZenScape.jsx:1:import BuddyAvatar from "../avatar/BuddyAvatar";
+client/src/components/zen/ZenScape.jsx:2:import BuddyBubble from "./BuddyBubble";
+client/src/components/zen/ZenScape.jsx:12: *   - an optional BuddyAvatar hero (state="calm", default size 140) + bubble
+client/src/components/zen/ZenScape.jsx:13: *   - an optional accessory glyph that floats above Buddy
+client/src/components/zen/ZenScape.jsx:36:  showBuddy = true,
+client/src/components/zen/ZenScape.jsx:37:  buddyState = "calm",
+client/src/components/zen/ZenScape.jsx:38:  buddySize = 140,
+client/src/components/zen/ZenScape.jsx:39:  buddyLabel,
+client/src/components/zen/ZenScape.jsx:100:      {showBuddy ? (
+client/src/components/zen/ZenScape.jsx:103:            <div className="zenscape__buddy-stack">
+client/src/components/zen/ZenScape.jsx:114:              <BuddyAvatar
+client/src/components/zen/ZenScape.jsx:115:                state={buddyState}
+client/src/components/zen/ZenScape.jsx:116:                size={buddySize}
+client/src/components/zen/ZenScape.jsx:118:                data-testid="zenscape-buddy"
+client/src/components/zen/ZenScape.jsx:122:              <BuddyBubble state={buddyState} rotateMs={bubbleRotateMs} />
+client/src/components/zen/ZenScape.jsx:125:          {buddyLabel ? (
+client/src/components/zen/ZenScape.jsx:126:            <p className="zenscape__hero-label" data-testid="zenscape-buddy-label">
+client/src/components/zen/ZenScape.jsx:127:              {buddyLabel}
+client/src/components/peacescape/InteractiveBuddy.jsx:2:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/peacescape/InteractiveBuddy.jsx:5: * InteractiveBuddy — gentle wrapper that lets the user tap Buddy to cycle
+client/src/components/peacescape/InteractiveBuddy.jsx:9: * SAFETY CONTRACT (preserves Buddy v2.11 crisis-color stability):
+client/src/components/peacescape/InteractiveBuddy.jsx:12: *   - The wrapper does not modify BuddyAvatar source — it only swaps the
+client/src/components/peacescape/InteractiveBuddy.jsx:20:export default function InteractiveBuddy({
+client/src/components/peacescape/InteractiveBuddy.jsx:23:  ariaLabel = "Tap Buddy to see a different expression.",
+client/src/components/peacescape/InteractiveBuddy.jsx:25:  testId = "interactive-buddy",
+client/src/components/peacescape/InteractiveBuddy.jsx:50:    setHint("Buddy notices you.");
+client/src/components/peacescape/InteractiveBuddy.jsx:58:    <div className="interactive-buddy" data-testid={testId}>
+client/src/components/peacescape/InteractiveBuddy.jsx:63:        className="interactive-buddy__btn"
+client/src/components/peacescape/InteractiveBuddy.jsx:64:        aria-label={isLocked ? "Buddy is here with you." : ariaLabel}
+client/src/components/peacescape/InteractiveBuddy.jsx:76:        <BuddyAvatar
+client/src/components/peacescape/InteractiveBuddy.jsx:80:          ariaLabel={`Buddy is feeling ${state}.`}
+client/src/components/peacescape/InteractiveBuddy.jsx:84:        className="interactive-buddy__hint"
+client/src/components/lumi/LumiAccessibleWrapper.jsx:10: * accessibility scaffolding the mascot needs to be a good citizen of the
+client/src/components/lumi/LumiAccessibleWrapper.jsx:22: * Children are expected to render the actual mascot image. The wrapper
+client/src/components/lumi/LumiAccessibleWrapper.jsx:33: *   - children       (node)    the actual mascot image / SVG
+client/src/components/lumi/LumiCustomizer.jsx:3:import { MASCOT_ASSETS } from "../../data/lumiAssets";
+client/src/components/lumi/LumiCustomizer.jsx:6:const PREVIEW_HERO = MASCOT_ASSETS.default;
+client/src/components/lumi/LumiCustomizerTrigger.jsx:9: * Designed to sit beside <LumiMascot /> in the header or chat.
+client/src/components/lumi/LumiCustomizerTrigger.jsx:55:// <LumiCustomizerTrigger /> placed next to <LumiMascot />
+client/src/components/lumi/LumiCompanion.jsx:5:import { preloadImage } from "../../utils/preloadMascots";
+client/src/components/lumi/LumiCompanion.jsx:7:import { MASCOT_ASSETS } from "../../data/lumiAssets";
+client/src/components/lumi/LumiCompanion.jsx:34: * The canonical Lumi mascot display surface. Owns:
+client/src/components/lumi/LumiCompanion.jsx:36: *   - PNG src resolution + preload (no layout shift)
+client/src/components/lumi/LumiCompanion.jsx:47: *   - lockImage          string   optional MASCOT_ASSETS key to pin the visible
+client/src/components/lumi/LumiCompanion.jsx:91:  // When `lockImage` is set, pin the displayed PNG to that MASCOT_ASSETS key
+client/src/components/lumi/LumiCompanion.jsx:97:    lockImage && MASCOT_ASSETS[lockImage] ? MASCOT_ASSETS[lockImage] : null;
+client/src/components/lumi/LumiCompanion.jsx:103:  // bundled MASCOT_ASSETS bitmap, so there is no upside to gating its
+client/src/components/lumi/LumiCompanion.jsx:166:  // Compose CSS class string for the <img>: base mascot class + the active
+client/src/components/lumi/LumiCompanion.jsx:174:      "lumi-mascot",
+client/src/components/lumi/LumiCompanion.jsx:175:      "lumi-mascot--png",
+client/src/components/lumi/LumiCompanion.jsx:191:  // Reserve the image box BEFORE the PNG resolves so the surrounding layout
+client/src/components/lumi/LumiCompanion.jsx:206:  //     inline style defeats the body-level `body.lumi-theme-X .lumi-mascot`
+client/src/components/lumi/LumiCompanion.jsx:232:  // The mascot+customizer row ALWAYS uses containerStyle so its `gap`
+client/src/components/lumi/LumiCompanion.jsx:233:  // (which separates the mascot from the customizer trigger) is preserved
+client/src/components/lumi/LumiCompanion.jsx:246:  const mascotRowStyle = containerStyle;
+client/src/components/lumi/LumiCompanion.jsx:273:      <span style={mascotRowStyle}>
+client/src/components/lumi/LumiCompanion.jsx:314:// <LumiCompanion size="sm" /> // for header avatar
+client/src/components/lumi/LumiBrandLockupImage.jsx:2: * LumiBrandLockupImage — Real PNG horizontal brand lockup (icon + wordmark).
+client/src/components/lumi/LumiBrandLockupImage.jsx:10:import lockupPng from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/lumi/LumiBrandLockupImage.jsx:15:  ariaLabel = "MyMentalHealthBuddy by The Genuine Love Project",
+client/src/components/lumi/LumiBrandLockupImage.jsx:22:      src={lockupPng}
+client/src/components/lumi/TGLPMandala.jsx:5: * Now uses the canonical PNG provided by the brand owners. Component API is
+client/src/components/lumi/TGLPMandala.jsx:8:import mandalaUrl from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/TGLPMandalaImage.jsx:2: * TGLPMandalaImage — Real PNG of the Genuine Love Project mandala emblem.
+client/src/components/lumi/TGLPMandalaImage.jsx:8:import mandalaPng from "@assets/thegenuineloveproject_logo_v2_1777538625498.png";
+client/src/components/lumi/TGLPMandalaImage.jsx:20:      src={mandalaPng}
+client/src/components/lumi/LumiBrandLogo.jsx:2: * LumiBrandLogo — renders the official MyMentalHealthBuddy brand lockup.
+client/src/components/lumi/LumiBrandLogo.jsx:4: * Now uses the canonical brand artwork (lockup PNG with sleeping-Lumi icon +
+client/src/components/lumi/LumiBrandLogo.jsx:6: * uses the buddy character PNG cropped via object-fit.
+client/src/components/lumi/LumiBrandLogo.jsx:9: *   - "horizontal" (default)  → full lockup PNG
+client/src/components/lumi/LumiBrandLogo.jsx:10: *   - "stacked"               → full lockup PNG (composition is identical here)
+client/src/components/lumi/LumiBrandLogo.jsx:11: *   - "icon-only"             → buddy character only
+client/src/components/lumi/LumiBrandLogo.jsx:12: *   - "wordmark-only"         → lockup PNG with the icon visually trimmed (same image, simpler)
+client/src/components/lumi/LumiBrandLogo.jsx:17:import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+client/src/components/lumi/LumiBrandLogo.jsx:18:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/lumi/LumiBrandLogo.jsx:27:// The supplied lockup PNG is roughly 1024 x 320 (~3.2:1). We reserve that
+client/src/components/lumi/LumiBrandLogo.jsx:34:  // ariaHidden retained for API compat — BuddyAvatar handles its own
+client/src/components/lumi/LumiBrandLogo.jsx:35:  // role/aria via the buddy state contract; the wrapper element below
+client/src/components/lumi/LumiBrandLogo.jsx:42:      <BuddyAvatar state="calm" colorMode="default" size={size} data-testid="lumi-icon-mark" />
+client/src/components/lumi/LumiBrandLogo.jsx:50:  showParent = true, // accepted for API compat; lockup PNG already includes the subhead
+client/src/components/lumi/LumiBrandLogo.jsx:53:  ariaLabel = "MyMentalHealthBuddy by The Genuine Love Project — go to home",
+client/src/components/lumi/FloatIdleRig.jsx:4: * Standalone — does NOT replace LumiV6 / LumiV7 / BuddyAvatar / LumiMascot.
+client/src/components/lumi/FloatIdleRig.jsx:5: * Mounts the 11 region PNGs from `client/public/avatar-core/regions/`
+client/src/components/lumi/FloatIdleRig.jsx:6: * (SSOT mirrored from repo `avatar-core/`, locked v5.8.41) at their
+client/src/components/lumi/FloatIdleRig.jsx:10: *   The avatar body is FROZEN. Permitted modifications are ONLY:
+client/src/components/lumi/FloatIdleRig.jsx:19: *   Each region PNG is full 1024×1024 with the region painted at its
+client/src/components/lumi/FloatIdleRig.jsx:76:const REGION_BASE = "/avatar-core/regions";
+client/src/components/lumi/FloatIdleRig.jsx:250:        // v5.8.46 — WebP-first <picture> with PNG fallback. WebP siblings
+client/src/components/lumi/FloatIdleRig.jsx:251:        // generated via cwebp q82 m6: 14MB total PNGs → 117KB total WebP
+client/src/components/lumi/FloatIdleRig.jsx:263:            <source srcSet={`${base}.webp`} type="image/webp" />
+client/src/components/lumi/FloatIdleRig.jsx:265:              src={`${base}.png`}
+client/src/components/lumi/FloatIdleAnimated.jsx:29: *   The avatar has 8 verified emotional states (6 shipped + 2 pending
+client/src/components/lumi/FloatIdleAnimated.jsx:31: *   without changing the avatar's appearance. Each state is the same
+client/src/components/lumi/FloatIdleAnimated.jsx:70:// v5.8.46 — WebP-first shadow with PNG fallback. cwebp q82 m6: 90KB → 5.5KB (94% smaller).
+client/src/components/lumi/FloatIdleAnimated.jsx:71:const SHADOW_BASE = "/avatar-core/shadow/MMHB_FLOAT_IDLE_UNIT_v1_shadow";
+client/src/components/lumi/FloatIdleAnimated.jsx:96:  // v5.8.47 — Phase 9 interaction systems. When true, the avatar gently
+client/src/components/lumi/FloatIdleAnimated.jsx:305:        <source srcSet={`${SHADOW_BASE}.webp`} type="image/webp" />
+client/src/components/lumi/FloatIdleAnimated.jsx:307:          src={`${SHADOW_BASE}.png`}
+client/src/components/lumi/LumiMascotImage.jsx:2: * LumiMascotImage — Full-color PNG of Lumi (the real illustrated mascot).
+client/src/components/lumi/LumiMascotImage.jsx:4: * This is the *static art* counterpart to LumiMascot.jsx. Use this when you
+client/src/components/lumi/LumiMascotImage.jsx:8: * keep using <LumiMascot/> instead.
+client/src/components/lumi/LumiMascotImage.jsx:15:// v4 canonical PNG served from /public — see BuddyAvatar.tsx for the
+client/src/components/lumi/LumiMascotImage.jsx:19:const lumiFullBodyPng = "/lumi/official/lumi-float-idle.png";
+client/src/components/lumi/LumiMascotImage.jsx:21:export default function LumiMascotImage({
+client/src/components/lumi/LumiMascotImage.jsx:38:      src={lumiFullBodyPng}
+client/src/components/lumi/LumiMascotImage.jsx:45:      className={`lumi-mascot-image ${animClass} ${className}`.trim()}
+client/src/components/lumi/LumiMascotImage.jsx:46:      data-testid="lumi-mascot-image"
+client/src/components/lumi/LumiMascotImage.jsx:51:        // PNG itself has no background; let it sit on whatever surface it's on.
+client/src/components/lumi/LumiV7.jsx:2: * LumiV7 — Avatar Evolution Engine (V32 spec).
+client/src/components/lumi/LumiV7.jsx:4: * Standalone — does NOT replace LumiV6 / BuddyAvatar / LumiMascot.
+client/src/components/lumi/LumiV7.jsx:5: * This is a pure-SVG mascot whose body is FROZEN to the canonical
+client/src/components/lumi/LumiV7.jsx:94:  //   1. Explicit `eye` / `mouth` props (preserves AvatarLab gallery's
+client/src/components/lumi/LumiV7.jsx:105:  // P7 (v5.8.83) — Avatar Life System Phase 3: Arm & Leg Movement.
+client/src/components/lumi/LumiMascot.jsx:2: * LumiMascot — renders the official MMHB Lumi character artwork.
+client/src/components/lumi/LumiMascot.jsx:5: * PNG provided by the brand owners. Component API is preserved so every existing
+client/src/components/lumi/LumiMascot.jsx:12: *   size          — pixel width/height for the mascot box.
+client/src/components/lumi/LumiMascot.jsx:13: *   trackCursor   — kept for API compatibility (no-op with the PNG body).
+client/src/components/lumi/LumiMascot.jsx:21: * LEGACY MASCOT SYSTEM
+client/src/components/lumi/LumiMascot.jsx:25: * Canonical avatar runtime:
+client/src/components/lumi/LumiMascot.jsx:26: * client/src/avatar-life
+client/src/components/lumi/LumiMascot.jsx:29:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/lumi/LumiMascot.jsx:30:import "./LumiMascot.css";
+client/src/components/lumi/LumiMascot.jsx:37:// LumiMascot's emotion vocabulary → BuddyAvatar's BuddyState vocabulary.
+client/src/components/lumi/LumiMascot.jsx:56:export default function LumiMascot({
+client/src/components/lumi/LumiMascot.jsx:59:  trackCursor: _trackCursor = true, // accepted for API compat; PNG body has no per-eye control
+client/src/components/lumi/LumiMascot.jsx:92:      className={`lumi-mascot lumi-mascot--png ${className}`.trim()}
+client/src/components/lumi/LumiMascot.jsx:103:      data-testid="lumi-mascot"
+client/src/components/lumi/LumiMascot.jsx:106:        className="lumi-mascot__img"
+client/src/components/lumi/LumiMascot.jsx:109:        <BuddyAvatar
+client/src/components/lumi/LumiMascot.jsx:113:          data-testid="lumi-mascot-img"
+client/src/components/lumi/LumiMascot.jsx:116:      <span className="lumi-mascot__heart-glow" aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:2: * LumiV6 — "Living Lumi" multi-layer avatar.
+client/src/components/lumi/LumiV6.tsx:4: * V6 (Section 1): 4-layer composition (BODY PNG · CSS dot eyes · emotion
+client/src/components/lumi/LumiV6.tsx:64: * Standalone — does NOT replace BuddyAvatar. All classes scoped under
+client/src/components/lumi/LumiV6.tsx:65: * `.lumiv6` (cannot collide with `.buddy*`). V9 modifiers use the
+client/src/components/lumi/LumiV6.tsx:71: * TRANSITIONAL AVATAR SYSTEM
+client/src/components/lumi/LumiV6.tsx:79: * client/src/avatar-life
+client/src/components/lumi/LumiV6.tsx:85: * - all BuddyAvatar references removed
+client/src/components/lumi/LumiV6.tsx:86: * - all LumiMascot references removed
+client/src/components/lumi/LumiV6.tsx:163:  /** Show speech bubble above the avatar. Default false. */
+client/src/components/lumi/LumiV6.tsx:183:   *  avatar briefly switches emotion and plays a flourish. */
+client/src/components/lumi/LumiV6.tsx:189:  /** Exact pixel override for non-canonical sizes (legacy LumiMascot
+client/src/components/lumi/LumiV6.tsx:216:   * completely still. The underlying PNG/WebP image is byte-identical
+client/src/components/lumi/LumiV6.tsx:235:   * ONLY (never from emotion alone — the V17 PNG already ships with
+client/src/components/lumi/LumiV6.tsx:259:// Mirrors BuddyAvatar.COLOR_MODE_SRC. Legacy lumi-v4-* tinted PNGs deleted
+client/src/components/lumi/LumiV6.tsx:262:// Legacy /brand/v17/avatar-* (cream-blob, non-sprout) deleted per V26.
+client/src/components/lumi/LumiV6.tsx:263:const COLOR_PNG: Record<LumiV6ColorMode, string> = {
+client/src/components/lumi/LumiV6.tsx:264:  default: "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:265:  yellow:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:266:  pink:    "/lumi/official/lumi-heart.png",
+client/src/components/lumi/LumiV6.tsx:267:  blue:    "/lumi/official/lumi-meditation.png",
+client/src/components/lumi/LumiV6.tsx:268:  purple:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:269:  sleep:   "/lumi/official/lumi-meditation.png",
+client/src/components/lumi/LumiV6.tsx:270:  orange:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:272:const POSE_PNG: Partial<Record<LumiV6Pose, string>> = {
+client/src/components/lumi/LumiV6.tsx:273:  waving:      "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:274:  meditating:  "/lumi/official/lumi-meditation.png",
+client/src/components/lumi/LumiV6.tsx:275:  celebrating: "/lumi/official/lumi-heart.png",
+client/src/components/lumi/LumiV6.tsx:276:  hugging:     "/lumi/official/lumi-heart.png",
+client/src/components/lumi/LumiV6.tsx:278:const FALLBACK_PNG = "/lumi/official/lumi-float-idle.png";
+client/src/components/lumi/LumiV6.tsx:280:// V17 PNGs ship a same-name `.webp` sibling (~14–22 KB vs 263–365 KB).
+client/src/components/lumi/LumiV6.tsx:281:// v4 themes don't, so we only emit a <source> when we know the webp exists.
+client/src/components/lumi/LumiV6.tsx:282:const V17_WEBP_PREFIX = "/brand/v17/";
+client/src/components/lumi/LumiV6.tsx:283:function pickWebp(pngUrl: string): string | null {
+client/src/components/lumi/LumiV6.tsx:284:  if (pngUrl.startsWith(V17_WEBP_PREFIX) && pngUrl.endsWith(".png")) {
+client/src/components/lumi/LumiV6.tsx:285:    return pngUrl.slice(0, -4) + ".webp";
+client/src/components/lumi/LumiV6.tsx:380:  const bodySrc = POSE_PNG[pose] || COLOR_PNG[colorMode] || FALLBACK_PNG;
+client/src/components/lumi/LumiV6.tsx:385:  // BuddyAvatar cooperate when both are mounted on the same page (e.g. /v6
+client/src/components/lumi/LumiV6.tsx:626:          // gate is enforced inside tryPop, shared with BuddyAvatar so the
+client/src/components/lumi/LumiV6.tsx:643:  // Claims the global heartbeat slot. If another Lumi (BuddyAvatar / sibling
+client/src/components/lumi/LumiV6.tsx:862:  // from emotion alone, since the V17 PNG already has baked-in blush.
+client/src/components/lumi/LumiV6.tsx:976:          {pickWebp(bodySrc) && (
+client/src/components/lumi/LumiV6.tsx:977:            <source srcSet={pickWebp(bodySrc) as string} type="image/webp" />
+client/src/components/lumi/LumiV6.tsx:990:              if (!img.src.endsWith(FALLBACK_PNG)) img.src = FALLBACK_PNG;
+client/src/components/navigation/CanonicalNavbar.jsx:41:          MyMentalHealthBuddy
+client/src/components/CreativeExpression.jsx:187:    link.download = `creative-expression-${Date.now()}.png`;
+client/src/components/GlowFooter.jsx:54:            MyMentalHealthBuddy
+client/src/components/GlowFooter.jsx:87:            © {currentYear} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
+client/src/components/ObjectUploader.jsx:5:  image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+client/src/components/ObjectUploader.jsx:195:              {allowedTypes === 'image' && 'JPEG, PNG, GIF, WebP up to 10MB'}
+client/src/components/OnboardingFlow.jsx:5:  { title: "Welcome", message: "Welcome to MyMentalHealthBuddy 💗" },
+client/src/components/SoundHealingPlayer.jsx:186:      buddyState={isPlaying ? "encouraged" : "calm"}
+client/src/components/SoundHealingPlayer.jsx:187:      buddySize={150}
+client/src/components/SoundHealingPlayer.jsx:188:      buddyLabel={isPlaying ? "Listening together — let the sound carry you." : "Pick a sound. We'll listen together."}
+client/src/components/MeditationTimer.jsx:100:      buddyState={isActive ? "encouraged" : phase === "complete" ? "celebrate" : "calm"}
+client/src/components/MeditationTimer.jsx:101:      buddySize={150}
+client/src/components/MeditationTimer.jsx:102:      buddyLabel={
+client/src/components/MindfulBreathing.jsx:169:      buddyState={phase === "complete" ? "celebrate" : isActive ? "anxious" : "calm"}
+client/src/components/MindfulBreathing.jsx:170:      buddySize={150}
+client/src/components/MindfulBreathing.jsx:171:      buddyLabel={
+client/src/components/ShareableReflectionCard.jsx:42:const SITE_URL = 'mymentalhealthbuddy.com';
+client/src/components/ReflectionCardExport.jsx:115:    ctx.fillText("If in crisis: mymentalhealthbuddy.com/crisis", width / 2, height - 90);
+client/src/components/ReflectionCardExport.jsx:119:    ctx.fillText("mymentalhealthbuddy.com", width / 2, height - 50);
+client/src/components/ReflectionCardExport.jsx:128:        ctx.fillText("mymentalhealthbuddy.com", x, y);
+client/src/components/ReflectionCardExport.jsx:133:    const dataUrl = canvas.toDataURL("image/png");
+client/src/components/ReflectionCardExport.jsx:142:    link.download = `reflection-card-${Date.now()}.png`;
+client/src/components/Header.jsx:4:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/Header.jsx:61:            <LumiMascot emotion="neutral" size={40} interactive={false} />
+client/src/components/Footer.jsx:4:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/Footer.jsx:24:              <LumiMascot emotion="neutral" size={40} />
+client/src/components/Footer.jsx:27:              MyMentalHealthBuddy
+client/src/components/Footer.jsx:85:          <p>© {currentYear} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.</p>
+client/src/components/SacredFooter.jsx:98:                MyMentalHealthBuddy
+client/src/components/SacredFooter.jsx:222:            © {currentYear} MyMentalHealthBuddy by The Genuine Love Project. All rights reserved.
+client/src/components/BrandShell.jsx:4:export default function BrandShell({ children, logoSrc = "/logo.png" }) {
+client/src/components/BrandShell.jsx:21:              aria-label="MyMentalHealthBuddy logo"
+client/src/components/BrandShell.jsx:26:                alt="MyMentalHealthBuddy"
+client/src/components/BrandShell.jsx:42:                MyMentalHealthBuddy
+client/src/components/EmptyState.jsx:4:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/EmptyState.jsx:5:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/EmptyState.jsx:94:          slot per Avatar Uniformity v4.2 spec. The original Icon is kept
+client/src/components/EmptyState.jsx:97:        <MMHBFloatAvatar
+client/src/components/EmptyState.jsx:98:          imageSrc={getOfficialLumi("supportive")}
+client/src/components/EmptyState.jsx:101:          data-testid={`empty-state-${type}-buddy`}
+client/src/components/SafetyDisclaimer.jsx:14:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/SafetyDisclaimer.jsx:15:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/SafetyDisclaimer.jsx:44:        <MMHBFloatAvatar
+client/src/components/SafetyDisclaimer.jsx:45:          imageSrc={getOfficialLumi("supportive")}
+client/src/components/ErrorBoundary.jsx:3:const MMHBFloatAvatar = React.lazy(() =>
+client/src/components/ErrorBoundary.jsx:4:  import("@/avatar-life/components/MMHBFloatAvatar").then((m) => ({
+client/src/components/ErrorBoundary.jsx:5:    default: m.MMHBFloatAvatar || m.default,
+client/src/components/ErrorBoundary.jsx:8:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/ErrorBoundary.jsx:52:                guaranteed motion="steady" per avatarState.ts. Errors are
+client/src/components/ErrorBoundary.jsx:66:                <MMHBFloatAvatar
+client/src/components/ErrorBoundary.jsx:67:                  imageSrc={getOfficialLumi("supportive")}
+client/src/components/ErrorBoundary.jsx:70:                  data-testid="error-boundary-buddy"
+client/src/components/PageTemplate.jsx:17:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/PageTemplate.jsx:18:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/PageTemplate.jsx:33:// Canonical Lumi brand PNG (matches LumiV6.tsx + BuddyAvatar.tsx). Restored
+client/src/components/PageTemplate.jsx:36:const lumiIconUrl = "/lumi/official/lumi-float-idle.png";
+client/src/components/PageTemplate.jsx:106:          <MMHBFloatAvatar imageSrc={getOfficialLumi("calm")} size={32} alt="Lumi mark" data-testid="img-logo-badge-lumi" />
+client/src/components/TglpNavbar.jsx:10:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/TglpNavbar.jsx:166:          aria-label="MyMentalHealthBuddy home"
+client/src/components/TglpNavbar.jsx:173:            <LumiMascot emotion="neutral" size={40} className="w-full h-full" data-testid="img-brand-logo" />
+client/src/components/TglpNavbar.jsx:178:              MyMentalHealthBuddy
+client/src/components/BrandLogo.tsx:3:import { officialLumiAssets } from "../officialLumiAssets";
+client/src/components/BrandLogo.tsx:11:            src={officialLumiAssets.LogoMark}
+client/src/components/ChatWidget.tsx:82:      aria-label="Chat with AI Buddy"
+client/src/components/CodeCopilotPanel.tsx:3:// A gentle "developer buddy" card that lives on the dashboard.
+client/src/components/CodeCopilotPanel.tsx:43:            This panel is your gentle engineering buddy. It reminds you that
+client/src/components/HealingChat.tsx:2:You are MyMentalHealthBuddy AI by The Genuine Love Project.
+client/src/components/FeedbackPrompt.tsx:10:// surface, toolId, buddyState, and helpful:boolean. No new endpoint, no
+client/src/components/FeedbackPrompt.tsx:12:// powers buddy_*, paywall_*, and streak_* signals.
+client/src/components/FeedbackPrompt.tsx:26:  buddyState?: string | null;
+client/src/components/FeedbackPrompt.tsx:60:  buddyState?: string | null,
+client/src/components/FeedbackPrompt.tsx:79:          buddyState: buddyState ?? null,
+client/src/components/FeedbackPrompt.tsx:92:  buddyState,
+client/src/components/FeedbackPrompt.tsx:101:    emitFeedback(surface, helpful, toolId, buddyState, turnId);
+client/src/components/FeedbackPrompt.tsx:112:        Thanks — your signal helps tune Buddy.
+client/src/components/SEO.tsx:4:export const SITE_URL = "https://mymentalhealthbuddy.com";
+client/src/components/SEO.tsx:22:  image: "/og-image.png",
+client/src/components/SEO.tsx:100:      "@type": "WebPage",
+client/src/components/LoadingSpinner.tsx:8: * Note: BuddyAvatar's `motion` is derived from `state`, not a prop —
+client/src/components/LoadingSpinner.tsx:11:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/LoadingSpinner.tsx:12:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/LoadingSpinner.tsx:51:        <MMHBFloatAvatar
+client/src/components/LoadingSpinner.tsx:52:          imageSrc={getOfficialLumi("calm")}
+client/src/components/LoadingSpinner.tsx:55:          data-testid="loading-spinner-buddy"
+client/src/components/CelebrationOverlay.tsx:9: * routing. State is "celebrate" (sparkle motion) per the avatar contract.
+client/src/components/CelebrationOverlay.tsx:12:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/CelebrationOverlay.tsx:13:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/CelebrationOverlay.tsx:126:      <MMHBFloatAvatar
+client/src/components/CelebrationOverlay.tsx:127:        imageSrc={getOfficialLumi("encouraging")}
+client/src/components/CelebrationOverlay.tsx:130:        data-testid="celebration-overlay-buddy"
+client/src/components/ToolCard.tsx:3: * category-tinted Lumi avatar on the left and title/description on the right.
+client/src/components/ToolCard.tsx:11:  BuddyColorMode,
+client/src/components/ToolCard.tsx:12:  BuddyState,
+client/src/components/ToolCard.tsx:13:} from "@/components/avatar/BuddyAvatar";
+client/src/components/ToolCard.tsx:14:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/ToolCard.tsx:27:const CATEGORY_TO_COLOR: Record<ToolCategory, BuddyColorMode> = {
+client/src/components/ToolCard.tsx:39:// Per-category avatar state — kept emotionally safe (never alarming).
+client/src/components/ToolCard.tsx:41:const CATEGORY_TO_STATE: Record<ToolCategory, BuddyState> = {
+client/src/components/ToolCard.tsx:58:  colorMode?: BuddyColorMode;
+client/src/components/ToolCard.tsx:72:  const resolvedColor: BuddyColorMode =
+client/src/components/ToolCard.tsx:74:  const resolvedState: BuddyState = category
+client/src/components/ToolCard.tsx:113:          src={getOfficialLumi("calm")}
+client/src/components/ToolCard.tsx:118:          data-testid={`${slug}-avatar`}
+client/src/components/BrandHero.tsx:3:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/BrandHero.tsx:11:            src={getOfficialLumi("calm")}
+client/src/features/journal/JournalPage.jsx:3:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/features/journal/JournalPage.jsx:4:import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
+client/src/features/journal/JournalPage.jsx:27:      {/* MMHB Buddy v2.0 — friction-reducing companion for the journaling
+client/src/features/journal/JournalPage.jsx:30:          Buddy stays supportive, not centerpiece. Visual-only — no fetch,
+client/src/features/journal/JournalPage.jsx:31:          no AI, no profile/streak/paywall logic per BuddyPanel contract. */}
+client/src/features/journal/JournalPage.jsx:32:      <BuddyPanel
+client/src/features/journal/JournalPage.jsx:34:        title={BUDDY_PANEL_COPY.journal.title}
+client/src/features/journal/JournalPage.jsx:36:        subtitle={BUDDY_PANEL_COPY.journal.subtitle}
+client/src/features/journal/JournalPage.jsx:40:        data-testid="panel-buddy-journal"
+client/src/features/state/StatePage.jsx:2:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/features/state/StatePage.jsx:3:import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
+client/src/features/state/StatePage.jsx:51:      {/* MMHB Buddy v2.0 — friction-reducing companion for the state-tracker
+client/src/features/state/StatePage.jsx:53:          (energy, clarity, safety, connection, agency) on sliders. Buddy at
+client/src/features/state/StatePage.jsx:55:          Smaller (88px) so Buddy is a presence, not the centerpiece.
+client/src/features/state/StatePage.jsx:57:          profile/streak/paywall logic per BuddyPanel contract. */}
+client/src/features/state/StatePage.jsx:58:      <BuddyPanel
+client/src/features/state/StatePage.jsx:60:        title={BUDDY_PANEL_COPY.mood.title}
+client/src/features/state/StatePage.jsx:62:        subtitle={BUDDY_PANEL_COPY.mood.subtitle}
+client/src/features/state/StatePage.jsx:66:        data-testid="panel-buddy-state"
+client/src/sections/NlpMiContent.jsx:190:        {/* 5. Benefit rows — alternating mascot + content (V17 VisualBenefits formatting) */}
+client/src/sections/NlpMiContent.jsx:211:                  {s.avatar && (
+client/src/sections/NlpMiContent.jsx:215:                        {s.avatarWebp && <source srcSet={s.avatarWebp} type="image/webp" />}
+client/src/sections/NlpMiContent.jsx:217:                          src={s.avatar}
+client/src/sections/NlpMiContent.jsx:221:                          className="nlp-mi-row-avatar"
+client/src/sections/NlpMiContent.jsx:378:        .nlp-mi-polish .nlp-mi-row-avatar {
+client/src/sections/VisualBenefits.jsx:6: * (with a small 1:1 floating Lumi avatar overlay) against an emotionally
+client/src/sections/VisualBenefits.jsx:11: *   - <picture> element with WebP source (98KB total vs 9MB PNG-only)
+client/src/sections/VisualBenefits.jsx:19: *   - Avatar mapping aligned to spec (Companionship + Understanding share
+client/src/sections/VisualBenefits.jsx:20: *     avatar-heart; Growth uses avatar-floating)
+client/src/sections/VisualBenefits.jsx:44:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:45:    image: '/brand/v17/benefit-relief.png',
+client/src/sections/VisualBenefits.jsx:46:    imageWebp: '/brand/v17/benefit-relief.webp',
+client/src/sections/VisualBenefits.jsx:47:    // v5.8.71 — avatar overlay swapped to canonical LUMI_MEDITATION
+client/src/sections/VisualBenefits.jsx:49:    avatar: '/lumi/official/lumi-meditation.png',
+client/src/sections/VisualBenefits.jsx:50:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:64:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:65:    image: '/brand/v17/benefit-understanding.png',
+client/src/sections/VisualBenefits.jsx:66:    imageWebp: '/brand/v17/benefit-understanding.webp',
+client/src/sections/VisualBenefits.jsx:67:    // v5.8.71 — avatar overlay swapped to canonical LUMI_HEART
+client/src/sections/VisualBenefits.jsx:69:    avatar: '/lumi/official/lumi-heart.png',
+client/src/sections/VisualBenefits.jsx:70:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:84:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:85:    // Overlay reuses the official avatar-heart asset (sage hooded body
+client/src/sections/VisualBenefits.jsx:87:    image: '/brand/v17/benefit-companionship.png',
+client/src/sections/VisualBenefits.jsx:88:    imageWebp: '/brand/v17/benefit-companionship.webp',
+client/src/sections/VisualBenefits.jsx:89:    // v5.8.71 — avatar overlay swapped to canonical LUMI_COMPANION
+client/src/sections/VisualBenefits.jsx:92:    avatar: '/lumi/official/lumi-companion.png',
+client/src/sections/VisualBenefits.jsx:93:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:107:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:108:    image: '/brand/v17/benefit-growth.png',
+client/src/sections/VisualBenefits.jsx:109:    imageWebp: '/brand/v17/benefit-growth.webp',
+client/src/sections/VisualBenefits.jsx:114:    avatar: '/lumi/official/lumi-path.png',
+client/src/sections/VisualBenefits.jsx:115:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:126:/* ─── <picture> with WebP fallback (lazy + async decode) ─── */
+client/src/sections/VisualBenefits.jsx:127:function ResponsiveImage({ src, srcWebp, alt, className, style, testId }) {
+client/src/sections/VisualBenefits.jsx:130:      {srcWebp && <source srcSet={srcWebp} type="image/webp" />}
+client/src/sections/VisualBenefits.jsx:239:                      srcWebp={b.imageWebp}
+client/src/sections/VisualBenefits.jsx:245:                  <div className="vb-avatar-overlay" aria-hidden="true">
+client/src/sections/VisualBenefits.jsx:247:                      src={b.avatar}
+client/src/sections/VisualBenefits.jsx:248:                      srcWebp={b.avatarWebp}
+client/src/sections/VisualBenefits.jsx:250:                      className="vb-avatar-img"
+client/src/avatar-life/state/useAvatarLifeStore.tsx:5: * `MMHBAvatarRuntimeProvider` instantiates its own isolated store, so
+client/src/avatar-life/state/useAvatarLifeStore.tsx:6: * hero/chat/buddy never cross-contaminate state, telemetry, or crisis
+client/src/avatar-life/state/useAvatarLifeStore.tsx:18:} from "../types/avatarLifeTypes";
+client/src/avatar-life/state/useAvatarLifeStore.tsx:20:export interface AvatarLifeState {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:43:export type AvatarLifeStoreApi = ReturnType<typeof createAvatarLifeStore>;
+client/src/avatar-life/state/useAvatarLifeStore.tsx:47:/** Create an isolated avatar-life store. Called once per provider. */
+client/src/avatar-life/state/useAvatarLifeStore.tsx:48:export function createAvatarLifeStore(initialSurface: SurfaceContext = "hero") {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:49:  return createStore<AvatarLifeState>((set) => ({
+client/src/avatar-life/state/useAvatarLifeStore.tsx:97:const AvatarStoreContext = createContext<AvatarLifeStoreApi | null>(null);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:105:export function AvatarStoreProvider({ surface, children }: ProviderProps) {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:106:  const ref = useRef<AvatarLifeStoreApi | null>(null);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:107:  if (!ref.current) ref.current = createAvatarLifeStore(surface);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:109:    <AvatarStoreContext.Provider value={ref.current}>
+client/src/avatar-life/state/useAvatarLifeStore.tsx:111:    </AvatarStoreContext.Provider>
+client/src/avatar-life/state/useAvatarLifeStore.tsx:116:export function useAvatarStoreApi(): AvatarLifeStoreApi {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:117:  const api = useContext(AvatarStoreContext);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:120:      "Avatar runtime hooks must be used inside <MMHBAvatarRuntimeProvider>.",
+client/src/avatar-life/state/useAvatarLifeStore.tsx:127:export function useAvatarLifeStore<T>(selector: (s: AvatarLifeState) => T): T {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:128:  const api = useAvatarStoreApi();
+client/src/avatar-life/state/useAvatarLifeStore.tsx:133:export function useAvatarLifeStoreActions() {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:134:  const api = useAvatarStoreApi();
+client/src/avatar-life/state/useAvatarLifeStore.tsx:145:export const selectInteractionIntensity = (s: AvatarLifeState): number => {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:155:export const selectReactBridge = (s: AvatarLifeState) => ({
+client/src/avatar-life/components/AvatarWithReactState.tsx:13:import { useAvatarLifeStore, selectReactBridge } from "../state/useAvatarLifeStore";
+client/src/avatar-life/components/AvatarWithReactState.tsx:14:import type { AvatarReactState } from "../types/avatarLifeTypes";
+client/src/avatar-life/components/AvatarWithReactState.tsx:17:  children: (state: AvatarReactState) => ReactNode;
+client/src/avatar-life/components/AvatarWithReactState.tsx:20:export function AvatarWithReactState({ children }: BridgeProps) {
+client/src/avatar-life/components/AvatarWithReactState.tsx:21:  const bridge = useAvatarLifeStore(selectReactBridge);
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:2: * Phase 11 — React provider that mounts an isolated avatar runtime per surface.
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:4: * Each provider creates its own Zustand store (via `AvatarStoreProvider`),
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:5: * so multiple surfaces (hero + chat + buddy) can mount concurrently
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:14:} from "../types/avatarLifeTypes";
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:15:import { AvatarStoreProvider } from "../state/useAvatarLifeStore";
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:16:import { useAvatarPresenceRuntime } from "../hooks/useAvatarPresenceRuntime";
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:40:  useAvatarPresenceRuntime({ surface: surfaceContext, initialState, sampleFps });
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:48:export function MMHBAvatarRuntimeProvider(props: ProviderProps) {
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:50:    <AvatarStoreProvider surface={props.surfaceContext}>
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:52:    </AvatarStoreProvider>
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:57:export function useAvatarRuntimeContext(): RuntimeContextValue {
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:61:      "useAvatarRuntimeContext must be called inside <MMHBAvatarRuntimeProvider>",
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:2: * Phase 11 — Production Framer Motion avatar component.
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:28:} from "../types/avatarLifeTypes";
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:30:  useAvatarLifeStore,
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:31:  useAvatarStoreApi,
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:32:} from "../state/useAvatarLifeStore";
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:33:import { emitAvatarTelemetry } from "../observability/avatarRuntimeTelemetry";
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:35:interface MMHBFloatAvatarProps {
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:36:  /** Path to the clean-master sprite (PNG or WebP). */
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:51:export function MMHBFloatAvatar({
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:59:  "data-testid": testId = "mmhb-float-avatar",
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:60:}: MMHBFloatAvatarProps) {
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:61:  const api = useAvatarStoreApi();
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:62:  const storeState = useAvatarLifeStore((s) => s.currentState);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:63:  const storeCrisis = useAvatarLifeStore((s) => s.crisis);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:64:  const reducedMotion = useAvatarLifeStore((s) => s.reducedMotion);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:65:  const hover = useAvatarLifeStore((s) => s.hover);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:66:  const proximity = useAvatarLifeStore((s) => s.proximity);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:67:  const clicked = useAvatarLifeStore((s) => s.clicked);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:160:      emitAvatarTelemetry({
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:161:        type: "avatar:click",
+client/src/companion-voice/components/MMHBCompanionMessage.tsx:5: * "your buddy" / "Lumi" — never "I" — and avatar is decorative only.
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:37:  /** Avatar slot — host can pass MMHBFloatAvatar or any element. */
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:38:  avatarSlot?: React.ReactNode;
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:97:  avatarSlot,
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:177:            {avatarSlot}
+client/src/lumi-rituals/components/RitualStepCard.tsx:10: * Avatar identity untouched — this component never references Lumi DOM.
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:11: *  - Avatar DOM (Lumi identity is preserved by not being touched)
+client/src/lumi-circadian/components/OptInPrompt.tsx:11: * Avatar identity: this component does not import or render Lumi. It
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:13:import { OfficialLumi, type OfficialLumiPosition } from "./OfficialLumi";
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:16:} from "../registry/officialLumiRegistry";
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:31:  /** When provided, page-placement policy is enforced via `OfficialLumi`. */
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:60:        position: "inline" as OfficialLumiPosition,
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:83:    const position: OfficialLumiPosition = assignment.position === "background" ? "background" : assignment.position;
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:120:      <OfficialLumi
+client/src/lumi-registry/components/OfficialLumi.tsx:25:} from "../registry/officialLumiRegistry";
+client/src/lumi-registry/components/OfficialLumi.tsx:30:export type OfficialLumiPosition = "hero" | "card" | "inline" | "background";
+client/src/lumi-registry/components/OfficialLumi.tsx:36:export type OfficialLumiRenderMode = "svg" | "asset";
+client/src/lumi-registry/components/OfficialLumi.tsx:39:export type OfficialLumiMotion = "soft" | "reduced" | "none";
+client/src/lumi-registry/components/OfficialLumi.tsx:41:export interface OfficialLumiProps {
+client/src/lumi-registry/components/OfficialLumi.tsx:44:  readonly position: OfficialLumiPosition;
+client/src/lumi-registry/components/OfficialLumi.tsx:63:  readonly renderMode?: OfficialLumiRenderMode;
+client/src/lumi-registry/components/OfficialLumi.tsx:65:  readonly motion?: OfficialLumiMotion;
+client/src/lumi-registry/components/OfficialLumi.tsx:76: * the parent `OfficialLumi` may bail out before this body is reached).
+client/src/lumi-registry/components/OfficialLumi.tsx:92:  position: OfficialLumiPosition;
+client/src/lumi-registry/components/OfficialLumi.tsx:94:  effectiveMotion: OfficialLumiMotion;
+client/src/lumi-registry/components/OfficialLumi.tsx:154:              console.warn(`[OfficialLumi] asset failed to load: ${variantData.src}`);
+client/src/lumi-registry/components/OfficialLumi.tsx:169:export const OfficialLumi: React.FC<OfficialLumiProps> = ({
+client/src/lumi-registry/components/OfficialLumi.tsx:222:      console.warn(`[OfficialLumi] placement issues for variant="${variant}" scene="${scene}":`, validation.issues);
+client/src/lumi-registry/components/OfficialLumi.tsx:266:        `[OfficialLumi] renderMode="svg" is deprecated and a runtime no-op since v5.8.64; the canonical PNG asset is rendered instead. Remove the prop from this call site (variant="${variant}", scene="${scene}").`,
+client/src/lumi-registry/components/OfficialLumi.tsx:272:  const effectiveMotion: OfficialLumiMotion = reducedMotion ? "reduced" : motion;
+client/src/_quarantine/orphans/SacredNavBar.jsx:11:          aria-label="MyMentalHealthBuddy — Home"
+client/src/_quarantine/orphans/SacredNavBar.jsx:16:          <span className="font-serif text-xl text-[#2f5d5d] font-bold no-underline">MyMentalHealthBuddy</span>
+client/src/App.jsx:20:import { MMHBAvatarRuntimeProvider } from "./avatar-life/components/MMHBAvatarRuntimeProvider.tsx";
+client/src/App.jsx:82:const AvatarLab = lazy(() => import("./pages/AvatarLab.jsx"));
+client/src/App.jsx:401:          <MMHBAvatarRuntimeProvider surfaceContext="buddy" defaultState="calmIdle">
+client/src/App.jsx:731:              <Route path="/avatar-lab"><AvatarLab /></Route>
+client/src/App.jsx:1588:              {/* /celebration: 3-phase "I Did It!" flow per Avatar v4.2 Flow C.
+client/src/App.jsx:1934:          </MMHBAvatarRuntimeProvider>
+client/src/main.jsx:120:            registration.showNotification('MyMentalHealthBuddy', {
+client/src/main.jsx:122:              icon: '/android-chrome-192x192.png',
+client/src/main.jsx:123:              badge: '/android-chrome-192x192.png',

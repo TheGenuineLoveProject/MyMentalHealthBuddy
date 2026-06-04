@@ -1,0 +1,1041 @@
+client/src/pages/admin/CommandCenter.module.css:3:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/admin/CommandCenter.module.css:599:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/admin/CommandCenter.module.css:622:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/admin/CommandCenter.module.css:681:  color: var(--glp-sage, #8A9A5B);
+client/src/pages/admin/CommandCenter.module.css:720:  color: var(--glp-sage, #8A9A5B);
+client/src/pages/admin/CommandCenter.module.css:734:  color: var(--glp-teal, #2C6E63);
+client/src/pages/AutopilotFallback.module.css:2:/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a */
+client/src/pages/AutopilotFallback.module.css:9:  background: var(--sacred-white, #faf9f7);
+client/src/pages/AutopilotFallback.module.css:22:  color: var(--sacred-teal, #2f5d5d);
+client/src/pages/AutopilotFallback.module.css:37:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/pages/AutopilotFallback.module.css:52:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/pages/AutopilotFallback.module.css:64:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/pages/ContentStudioPage.module.css:34:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/pages/ContentStudioPage.module.css:48:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/pages/ContentStudioPage.module.css:61:  color: var(--sacred-teal, #2f5d5d);
+client/src/pages/ContentStudioPage.module.css:94:  color: var(--sacred-teal, #2f5d5d);
+client/src/pages/ContentStudioPage.module.css:114:  color: var(--sacred-teal, #2f5d5d);
+client/src/pages/ContentStudioPage.module.css:124:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/pages/ContentStudioPage.module.css:136:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/pages/ContentStudioPage.module.css:145:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/pages/ContentStudioPage.module.css:172:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/pages/ContentStudioPage.module.css:179:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/pages/ContentStudioPage.module.css:196:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/pages/ContentStudioPage.module.css:210:  color: var(--sacred-sage, #8fbf9f);
+client/src/pages/dashboard/Overview.module.css:3:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/dashboard/Overview.module.css:72:  background: #FFD700;
+client/src/pages/dashboard/Overview.module.css:79:  color: #1a1917;
+client/src/pages/dashboard/Overview.module.css:85:  color: #1a1917;
+client/src/pages/dashboard/Overview.module.css:224:  color: var(--glp-sage-deep, #2d5a3d);
+client/src/pages/dashboard/Overview.module.css:225:  background: #FFD700;
+client/src/pages/dashboard/Overview.module.css:228:  color: #1a1917;
+client/src/pages/dashboard/Overview.module.css:351:  color: #1a1917;
+client/src/pages/dashboard/Overview.module.css:352:  background: #FFD700;
+client/src/pages/dashboard/Overview.module.css:366:  border: 1.5px solid #c8d9c8;
+client/src/pages/dashboard/Overview.module.css:368:  background: #ffffff;
+client/src/pages/dashboard/Overview.module.css:371:  color: #5a8a5a;
+client/src/pages/dashboard/Overview.module.css:378:  border-color: #a3c2a3;
+client/src/pages/dashboard/Overview.module.css:379:  background: #f5faf5;
+client/src/pages/dashboard/Overview.module.css:446:  color: #1a1917;
+client/src/pages/dashboard/Overview.module.css:447:  background: #FFD700;
+client/src/pages/dashboard/Overview.module.css:499:  background: #ffffff;
+client/src/pages/dashboard/Overview.module.css:500:  border: 1.5px solid #c8d9c8;
+client/src/pages/dashboard/Overview.module.css:508:  border-color: #a3c2a3;
+client/src/pages/dashboard/Overview.module.css:550:  color: #1a1917;
+client/src/pages/dashboard/Overview.module.css:610:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/dashboard/Overview.module.css:633:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/dashboard/Overview.module.css:673:  color: var(--glp-sage, #7a8c7e);
+client/src/pages/Disclaimer.tsx:32:      <div className="min-h-screen relative" style={{ background: 'var(--glp-paper, #F7F4EE)' }}>
+client/src/pages/Disclaimer.tsx:62:              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full flex-shrink-0 shadow-md" style={{ background: 'linear-gradient(135deg, #FF9A8B, #E8913A)' }} aria-hidden="true">
+client/src/pages/Onboarding.tsx:30:    color: "#f4c7c3"
+client/src/pages/Onboarding.tsx:36:    color: "#8fbf9f"
+client/src/pages/Onboarding.tsx:42:    color: "#eac33b"
+client/src/brand/brand.ts:7:    serenitySage: "#7BAE9D",
+client/src/brand/brand.ts:8:    eternalGold: "#C9A227",
+client/src/brand/brand.ts:9:    midnightInk: "#0B0F14",
+client/src/brand/brand.ts:10:    pearl: "#F7F5F2",
+client/src/brand/tokens.ts:8:  sage: '#8fbf9f',
+client/src/brand/tokens.ts:9:  sageDeep: '#2f5d5d',
+client/src/brand/tokens.ts:10:  blush: '#f4c7c3',
+client/src/brand/tokens.ts:11:  rose: '#f4c7c3',
+client/src/brand/tokens.ts:12:  paper: '#faf9f7',
+client/src/brand/tokens.ts:13:  ink: '#3a3a3a',
+client/src/brand/tokens.ts:14:  gold: '#eac33b',
+client/src/brand/tokens.ts:15:  goldDark: '#ddb12d',
+client/src/brand/tokens.ts:16:  white: '#ffffff',
+client/src/brand/tokens.ts:19:    50: '#EDF5F5',
+client/src/brand/tokens.ts:20:    100: '#D5E8E8',
+client/src/brand/tokens.ts:21:    200: '#A8D1D1',
+client/src/brand/tokens.ts:22:    300: '#6FB3B3',
+client/src/brand/tokens.ts:23:    400: '#3D8585',
+client/src/brand/tokens.ts:24:    500: '#2A5454',
+client/src/brand/tokens.ts:25:    600: '#234747',
+client/src/brand/tokens.ts:26:    700: '#1C3939',
+client/src/brand/tokens.ts:27:    800: '#152C2C',
+client/src/brand/tokens.ts:28:    900: '#0E1F1F',
+client/src/brand/tokens.ts:31:    50: '#FCF8ED',
+client/src/brand/tokens.ts:32:    100: '#F7EDD4',
+client/src/brand/tokens.ts:33:    200: '#EDDBA8',
+client/src/brand/tokens.ts:34:    300: '#E3C87C',
+client/src/brand/tokens.ts:35:    400: '#D4A84B',
+client/src/brand/tokens.ts:36:    500: '#C4922D',
+client/src/brand/tokens.ts:37:    600: '#A47724',
+client/src/brand/tokens.ts:38:    700: '#845C1C',
+client/src/brand/tokens.ts:39:    800: '#634314',
+client/src/brand/tokens.ts:40:    900: '#422C0D',
+client/src/brand/tokens.ts:43:    50: '#F0F7F2',
+client/src/brand/tokens.ts:44:    100: '#D9EBE0',
+client/src/brand/tokens.ts:45:    200: '#BFDDCA',
+client/src/brand/tokens.ts:46:    300: '#A1CDB2',
+client/src/brand/tokens.ts:47:    400: '#7FB39A',
+client/src/brand/tokens.ts:48:    500: '#5D9A7F',
+client/src/brand/tokens.ts:49:    600: '#4A7A65',
+client/src/brand/tokens.ts:50:    700: '#375A4B',
+client/src/brand/tokens.ts:51:    800: '#253D32',
+client/src/brand/tokens.ts:52:    900: '#131F1A',
+client/src/brand/tokens.ts:55:    50: '#FDF6F5',
+client/src/brand/tokens.ts:56:    100: '#FAEAE8',
+client/src/brand/tokens.ts:57:    200: '#F5D5D2',
+client/src/brand/tokens.ts:58:    300: '#EFC0BB',
+client/src/brand/tokens.ts:59:    400: '#E8A9A3',
+client/src/brand/tokens.ts:60:    500: '#E0918A',
+client/src/brand/tokens.ts:61:    600: '#D47A72',
+client/src/brand/tokens.ts:62:    700: '#C4635A',
+client/src/brand/tokens.ts:63:    800: '#A54D45',
+client/src/brand/tokens.ts:64:    900: '#7A3933',
+client/src/components/ContentLevelToggle.module.css:24:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:44:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:54:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/ContentLevelToggle.module.css:59:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/ContentLevelToggle.module.css:104:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:116:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentLevelToggle.module.css:123:  border-left: 4px solid var(--sacred-sage, #8fbf9f);
+client/src/components/ContentLevelToggle.module.css:141:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentLevelToggle.module.css:154:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/ContentLevelToggle.module.css:165:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:184:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:197:  background: var(--sacred-sage, #8fbf9f);
+client/src/components/ContentLevelToggle.module.css:207:  border-left: 4px solid var(--sacred-gold, #eac33b);
+client/src/components/ContentLevelToggle.module.css:214:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:230:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:247:  border-left: 4px solid var(--sacred-teal, #2f5d5d);
+client/src/components/ContentLevelToggle.module.css:254:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentLevelToggle.module.css:268:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:278:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentLevelToggle.module.css:287:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentLevelToggle.module.css:304:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:37:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:45:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:63:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentStudio.module.css:76:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:82:  border-color: var(--sacred-sage, #8fbf9f);
+client/src/components/ContentStudio.module.css:88:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:95:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:117:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentStudio.module.css:125:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:135:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:141:  border-color: var(--sacred-sage, #8fbf9f);
+client/src/components/ContentStudio.module.css:147:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:164:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentStudio.module.css:178:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:184:  border-color: var(--sacred-sage, #8fbf9f);
+client/src/components/ContentStudio.module.css:191:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:197:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:223:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:232:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/ContentStudio.module.css:249:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:274:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:288:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:298:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:310:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:314:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentStudio.module.css:322:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:325:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentStudio.module.css:344:  border-left: 4px solid var(--sacred-gold, #eac33b);
+client/src/components/ContentStudio.module.css:351:  color: var(--sacred-gold, #eac33b);
+client/src/components/ContentStudio.module.css:360:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:369:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:390:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:396:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:417:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentStudio.module.css:427:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/ContentStudio.module.css:440:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:447:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:475:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/ContentStudio.module.css:486:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:494:  background: var(--sacred-cream, #faf9f7);
+client/src/components/ContentStudio.module.css:510:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/ContentStudio.module.css:527:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:2:/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+client/src/components/PageTemplate.module.css:29:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:56:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:65:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:76:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:88:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:98:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:115:  color: var(--glp-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:152:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:164:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:177:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:179:  border: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:185:  background: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:190:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:236:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:246:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:261:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:323:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:331:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:340:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:351:  color: var(--glp-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:386:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:400:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:431:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:432:  border: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:439:  background: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:444:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:461:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:502:  background: var(--sacred-cream, #faf9f7);
+client/src/components/PageTemplate.module.css:522:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:537:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:545:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:597:  background: var(--sacred-cream, #faf9f7);
+client/src/components/PageTemplate.module.css:612:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:620:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:660:  border: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:678:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:699:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:707:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:716:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:728:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:745:  outline: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:797:  background: var(--sacred-cream, #faf9f7);
+client/src/components/PageTemplate.module.css:820:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:842:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:856:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:865:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:904:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:917:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:928:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:945:  outline: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:964:  border: 1px solid var(--sacred-rose, #f4c7c3);
+client/src/components/PageTemplate.module.css:965:  border-left: 4px solid var(--sacred-rose, #f4c7c3);
+client/src/components/PageTemplate.module.css:979:  color: var(--sacred-rose, #f4c7c3);
+client/src/components/PageTemplate.module.css:986:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:994:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:1022:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1029:  border-color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1033:  outline: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1141:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1149:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1188:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1201:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:1217:  color: var(--sacred-rose, #f4c7c3);
+client/src/components/PageTemplate.module.css:1239:  background: var(--sacred-white, #faf9f7);
+client/src/components/PageTemplate.module.css:1252:  background: linear-gradient(180deg, rgba(143, 191, 159, 0.08), var(--sacred-white, #faf9f7));
+client/src/components/PageTemplate.module.css:1257:  background: linear-gradient(180deg, rgba(47, 93, 93, 0.06), var(--sacred-white, #faf9f7));
+client/src/components/PageTemplate.module.css:1262:  background: linear-gradient(180deg, rgba(234, 195, 59, 0.06), var(--sacred-white, #faf9f7));
+client/src/components/PageTemplate.module.css:1284:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1296:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:1309:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:1343:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1349:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:1365:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1375:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:1387:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/PageTemplate.module.css:1409:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1418:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1424:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:1434:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1443:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1489:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1511:  background: var(--glp-white, #fafaf8);
+client/src/components/PageTemplate.module.css:1545:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1551:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1559:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1566:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1596:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1622:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1639:  background: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1651:  background: var(--sacred-teal-dark, #245050);
+client/src/components/PageTemplate.module.css:1655:  outline: 2px solid var(--sacred-gold, #d4a574);
+client/src/components/PageTemplate.module.css:1673:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1690:  background: var(--glp-white, #fafaf8);
+client/src/components/PageTemplate.module.css:1699:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1721:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1743:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1756:  outline: 2px solid var(--sacred-gold, #d4a574);
+client/src/components/PageTemplate.module.css:1850:  background: linear-gradient(135deg, var(--sacred-cream, #f8f6f0) 0%, var(--glp-white, #fafaf8) 100%);
+client/src/components/PageTemplate.module.css:1857:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1871:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1878:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1891:  background: var(--glp-white, #fafaf8);
+client/src/components/PageTemplate.module.css:1913:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1925:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:1952:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1972:  background: linear-gradient(135deg, var(--sacred-cream, #f8f6f0) 0%, var(--glp-white, #fafaf8) 100%);
+client/src/components/PageTemplate.module.css:1982:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:1994:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:2041:  background: var(--sacred-cream, #f8f6f0);
+client/src/components/PageTemplate.module.css:2054:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:2061:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:2065:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:2087:  background: linear-gradient(135deg, var(--sacred-cream, #faf9f7) 0%, #fff 100%);
+client/src/components/PageTemplate.module.css:2104:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:2112:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:2137:  color: var(--glp-charcoal, #3a3a3a);
+client/src/components/PageTemplate.module.css:2144:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:2169:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:2185:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:2190:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/PageTemplate.module.css:2197:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/PageTemplate.module.css:2201:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/SacredBackground.css:15:  stroke: #ffd700;
+client/src/components/SafetyDisclaimer.module.css:32:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/SafetyDisclaimer.module.css:45:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/SafetyDisclaimer.module.css:62:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/SafetyDisclaimer.module.css:68:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/SafetyDisclaimer.module.css:73:  outline: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/components/SafetyDisclaimer.module.css:90:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/SafetyDisclaimer.module.css:104:  border-left: 3px solid var(--sacred-rose, #f4c7c3);
+client/src/components/SafetyDisclaimer.module.css:112:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/SafetyDisclaimer.module.css:118:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/SafetyDisclaimer.module.css:127:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/SafetyDisclaimer.module.css:132:  color: var(--sacred-sage, #8fbf9f);
+client/src/components/sacred/Hero.module.css:2:/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+client/src/components/sacred/Hero.module.css:34:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/sacred/Hero.module.css:62:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/Hero.module.css:75:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/Hero.module.css:87:  background: linear-gradient(135deg, var(--sacred-teal, #2f5d5d), var(--sacred-sage, #8fbf9f));
+client/src/components/sacred/Hero.module.css:97:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/Hero.module.css:114:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/Hero.module.css:132:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/Hero.module.css:145:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/Hero.module.css:166:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/sacred/Hero.module.css:181:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/Hero.module.css:193:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/Hero.module.css:195:  border: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/Hero.module.css:203:  background: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/Hero.module.css:208:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/Layout.module.css:6:  background: var(--sacred-white, #faf9f7);
+client/src/components/sacred/Layout.module.css:9:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/Layout.module.css:66:  background: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/PlatformComponent.module.css:2:/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+client/src/components/sacred/PlatformComponent.module.css:8:  background: var(--sacred-white, #faf9f7);
+client/src/components/sacred/PlatformComponent.module.css:37:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/PlatformComponent.module.css:51:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/PlatformComponent.module.css:60:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredButton.module.css:2:/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+client/src/components/sacred/SacredButton.module.css:23:  outline: 2px solid var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredButton.module.css:29:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/sacred/SacredButton.module.css:42:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredButton.module.css:43:  border-color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredButton.module.css:48:  border-color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredButton.module.css:54:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredFooter.module.css:7:    var(--sacred-white, #faf9f7) 0%, 
+client/src/components/sacred/SacredFooter.module.css:52:  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+client/src/components/sacred/SacredFooter.module.css:65:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredFooter.module.css:71:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredFooter.module.css:85:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredFooter.module.css:103:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredFooter.module.css:111:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredFooter.module.css:146:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredFooter.module.css:156:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredFooter.module.css:161:  color: var(--sacred-rose, #f4c7c3);
+client/src/components/sacred/SacredFooter.module.css:181:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredFooter.module.css:188:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredSection.module.css:2:/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+client/src/components/sacred/SacredSection.module.css:38:  color: var(--sacred-teal, #2f5d5d);
+client/src/components/sacred/SacredSection.module.css:48:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredSection.module.css:63:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/components/sacred/SacredSection.module.css:101:    var(--sacred-white, #faf9f7) 0%, 
+client/src/components/sacred/SacredSection.module.css:103:    var(--sacred-white, #faf9f7) 100%
+client/src/components/ui/toast-container.tsx:8:  destructive: "#C4787A",
+client/src/components/avatar/BuddyAvatar.css:35:  filter: drop-shadow(0 0 6px var(--buddy-heart-color, #7FD8A8));
+client/src/components/avatar/BuddyAvatar.css:68:  filter: drop-shadow(0 0 4px var(--buddy-eye-color, #6FE3B0));
+client/src/components/avatar/BuddyAvatar.css:150:  filter: drop-shadow(0 0 12px var(--buddy-heart-color, #5DA3C9));
+client/src/components/avatar/BuddyAvatar.css:187:  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #5DDB94))
+client/src/components/avatar/BuddyAvatar.css:188:          drop-shadow(0 0 4px #FFD75A);
+client/src/components/avatar/BuddyAvatar.css:211:  filter: drop-shadow(0 0 14px var(--buddy-heart-color, #FFD75A))
+client/src/components/avatar/BuddyAvatar.css:212:          drop-shadow(0 0 6px #A78BFA);
+client/src/components/avatar/BuddyAvatar.css:229:  background: var(--buddy-heart-color, #FFD75A);
+client/src/components/avatar/BuddyAvatar.css:230:  box-shadow: 0 0 10px var(--buddy-heart-color, #FFD75A);
+client/src/components/avatar/BuddyAvatar.css:264:  background: var(--buddy-heart-color, #5DDB94);
+client/src/components/avatar/BuddyAvatar.css:265:  box-shadow: 0 0 8px var(--buddy-heart-color, #5DDB94);
+client/src/components/avatar/BuddyAvatar.css:460:  filter: drop-shadow(0 0 10px var(--buddy-heart-color, #7FD8A8));
+client/src/components/avatar/BuddyAvatar.css:551:  background: #2d1810;
+client/src/components/avatar/BuddyAvatar.css:577:  border-bottom: 2.5px solid #2d1810;
+client/src/components/avatar/BuddyAvatar.css:591:  border-top: 2.5px solid #2d1810;
+client/src/components/avatar/BuddyAvatar.css:679:    filter: drop-shadow(0 0 4px var(--buddy-heart-color, #7FD8A8));
+client/src/components/avatar/BuddyAvatar.tsx:485:                  <stop offset="0%"   stopColor="#FFD27A" />
+client/src/components/avatar/BuddyAvatar.tsx:486:                  <stop offset="55%"  stopColor="#FFB347" />
+client/src/components/avatar/BuddyAvatar.tsx:487:                  <stop offset="100%" stopColor="#FF8C42" />
+client/src/components/zen/buddy-bubble.css:12:  color: var(--glp-ink, #1f2933);
+client/src/components/zen/buddy-bubble.css:58:  color: var(--glp-sage-deep, #2d5040);
+client/src/components/zen/buddy-bubble.css:64:  color: var(--glp-sage-deep, #2d5040);
+client/src/components/zen/buddy-bubble.css:86:  color: var(--glp-ink, #1f2933);
+client/src/components/zen/buddy-bubble.css:112:  color: var(--glp-sage-deep, #2d5040);
+client/src/components/zen/buddy-bubble.css:148:  color: var(--glp-sage-deep, #2d5040);
+client/src/components/zen/zen-scape.css:29:    linear-gradient(180deg, var(--glp-paper, #faf8f3) 0%, rgba(143, 191, 159, 0.06) 100%);
+client/src/components/zen/zen-scape.css:123:  color: var(--glp-sage-deep, #264f4f);
+client/src/components/zen/zen-scape.css:155:  --zen-cool:       #7FD8A8;
+client/src/components/zen/zen-scape.css:156:  --zen-cool-deep:  #5DDB94;
+client/src/components/zen/zen-scape.css:157:  --zen-warm:       #FFD75A;
+client/src/components/zen/zen-scape.css:170:    linear-gradient(180deg, var(--glp-paper, #faf8f3) 0%, rgba(var(--zen-wash-tail-rgb), 0.06) 100%);
+client/src/components/zen/zen-scape.css:179:  --zen-cool:       #F4B6C2;
+client/src/components/zen/zen-scape.css:180:  --zen-cool-deep:  #E08FA1;
+client/src/components/zen/zen-scape.css:181:  --zen-warm:       #FFD7BA;
+client/src/components/zen/zen-scape.css:186:  --zen-cool:       #FFE08A;
+client/src/components/zen/zen-scape.css:187:  --zen-cool-deep:  #F0C46A;
+client/src/components/zen/zen-scape.css:188:  --zen-warm:       #FFAA6E;
+client/src/components/zen/zen-scape.css:193:  --zen-cool:       #9FD4F4;
+client/src/components/zen/zen-scape.css:194:  --zen-cool-deep:  #7BB8E8;
+client/src/components/zen/zen-scape.css:195:  --zen-warm:       #D4E8FA;
+client/src/components/zen/zen-scape.css:200:  --zen-cool:       #C8B6F0;
+client/src/components/zen/zen-scape.css:201:  --zen-cool-deep:  #A693DC;
+client/src/components/zen/zen-scape.css:202:  --zen-warm:       #F0E0F8;
+client/src/components/zen/zen-scape.css:207:  --zen-cool:       #FFB89D;
+client/src/components/zen/zen-scape.css:208:  --zen-cool-deep:  #F09A85;
+client/src/components/zen/zen-scape.css:209:  --zen-warm:       #FFE2B5;
+client/src/components/zen/zen-scape.css:251:  color: var(--zen-cool-deep, #5DDB94);
+client/src/components/lumi/LumiMascot.css:383:  outline: 2px solid var(--lumi-amber-500, #f59e0b);
+client/src/components/lumi/LumiV6.css:67:  background: #fff8ee;
+client/src/components/lumi/LumiV6.css:82:  background: #2d1810;
+client/src/components/lumi/LumiV6.css:106:  background: #2d1810;
+client/src/components/lumi/LumiV6.css:128:  border-bottom: 2.5px solid #2d1810;
+client/src/components/lumi/LumiV6.css:153:  border-top: 2px solid #2d1810;
+client/src/components/lumi/LumiV6.css:162:  border-top: 1.5px solid #2d1810;
+client/src/components/lumi/LumiV6.css:172:  border: 2px solid #2d1810;
+client/src/components/lumi/LumiV6.css:244:  color: #1a1917;
+client/src/components/lumi/LumiV6.css:245:  border: 1px solid #ead7b9;
+client/src/components/lumi/LumiV6.css:269:  border-right: 1px solid #ead7b9;
+client/src/components/lumi/LumiV6.css:270:  border-bottom: 1px solid #ead7b9;
+client/src/components/lumi/LumiV6.css:300:  border-top: 3px solid #2d1810;
+client/src/components/lumi/LumiV6.css:311:  background: #d4546a;
+client/src/components/lumi/LumiV6.css:312:  border: 2px solid #2d1810;
+client/src/components/lumi/LumiV6.css:329:  border-bottom: 2px solid #2d1810;
+client/src/components/lumi/LumiV6.css:341:  background: #2d1810;
+client/src/components/lumi/LumiV6.css:352:  background: #2d1810;
+client/src/components/lumi/LumiV6.css:842:  background: linear-gradient(135deg, #FFD93D 0%, #FFC857 100%);
+client/src/components/lumi/LumiV7.css:19:  --lumi-cream: #F5F0E8;
+client/src/components/lumi/LumiV7.css:20:  --lumi-sage: #A8C9A0;
+client/src/components/lumi/LumiV7.css:21:  --lumi-sage-deep: #4A7E72;
+client/src/components/lumi/LumiV7.css:22:  --lumi-blush: #F5A3A3;
+client/src/components/lumi/LumiV7.css:23:  --lumi-eye: #1A1A1A;
+client/src/components/lumi/LumiV7.css:24:  --lumi-mouth: #2A2A2A;
+client/src/components/lumi/LumiV7.css:58:.lumi-v7 .lumi-v7-eye-highlight { fill: #FFFFFF; pointer-events: none; }
+client/src/components/lumi/LumiV6.tsx:1018:                  <stop offset="0%"   stopColor="#FFD27A" />
+client/src/components/lumi/LumiV6.tsx:1019:                  <stop offset="55%"  stopColor="#FFB347" />
+client/src/components/lumi/LumiV6.tsx:1020:                  <stop offset="100%" stopColor="#FF8C42" />
+client/src/components/theme.ts:8:    sageGreen: '#8fbf9f',
+client/src/components/theme.ts:9:    dustyRose: '#f4c7c3',
+client/src/components/theme.ts:10:    deepTeal: '#2f5d5d',
+client/src/components/theme.ts:11:    softWhite: '#faf9f7',
+client/src/components/theme.ts:12:    charcoal: '#3a3a3a',
+client/src/components/theme.ts:13:    metallicGoldGradient: 'linear-gradient(90deg, #d4af37, #ffd700)',
+client/src/components/theme.ts:14:    metallicGoldBase: '#d4af37',
+client/src/components/LoadingSpinner.tsx:63:            color: "var(--text-2, #6b6b6b)",
+client/src/components/CelebrationOverlay.tsx:22:  "#FFD75A", "#7FD8A8", "#B19CD9", "#7AE2A6", "#F4A6CD", "#FFB36F",
+client/src/components/ToolCard.tsx:93:        background: "var(--surface-1, #ffffff)",
+client/src/components/ToolCard.tsx:94:        border: "1px solid var(--border, #e5e7eb)",
+client/src/components/ToolCard.tsx:103:        e.currentTarget.style.borderColor = "var(--glp-sage-30, #c8d9c8)";
+client/src/components/ToolCard.tsx:108:        e.currentTarget.style.borderColor = "var(--border, #e5e7eb)";
+client/src/components/ToolCard.tsx:127:            color: "var(--glp-ink-100, #1a1917)",
+client/src/components/ToolCard.tsx:137:            color: "var(--text-2, #4a4540)",
+client/src/data/lumiToySpec.ts:33:  /** Always amber (#E8913A) per V7 brand spec; brightness varies. */
+client/src/data/lumiToySpec.ts:80:  heartLed: { type: "rgb-capacitive-touch", color: "#E8913A" },
+client/src/data/lumiToySpec.ts:201:    heart:    { type: "RGB", feature: "capacitive-touch", defaultColor: "#E8913A" },
+client/src/data/lumiToySpec.ts:217:    { name: "greeting", color: "#A8C9A0", ledPattern: "gentle-pulse",       heartRate: 0.5   },
+client/src/data/lumiToySpec.ts:218:    { name: "joy",      color: "#FFD93D", ledPattern: "bright-quick-pulse", heartRate: 1.0   },
+client/src/data/lumiToySpec.ts:219:    { name: "love",     color: "#FF9A8B", ledPattern: "warm-pulse",         heartRate: 0.5   },
+client/src/data/lumiToySpec.ts:220:    { name: "calm",     color: "#74C0FC", ledPattern: "slow-wave",          heartRate: 0.25  },
+client/src/data/lumiToySpec.ts:221:    { name: "empathy",  color: "#C8B6FF", ledPattern: "soft-pulse",         heartRate: 0.35  },
+client/src/data/lumiToySpec.ts:222:    { name: "sleepy",   color: "#A8D5BA", ledPattern: "dim-slow",           heartRate: 0.125 },
+client/src/data/lumiToySpec.ts:223:    { name: "surprise", color: "#FFB88C", ledPattern: "quick-flash",        heartRate: 1.5   },
+client/src/data/lumiEmotionMap.ts:92:    blushLevel: 1, glowColor: "#A8C9A0", glowIntensity: 0.5, breathSpeed: 0.8,
+client/src/data/lumiEmotionMap.ts:97:    blushLevel: 0, glowColor: "#74C0FC", glowIntensity: 0.4, breathSpeed: 1,
+client/src/data/lumiEmotionMap.ts:102:    blushLevel: 0, glowColor: "#C8B6FF", glowIntensity: 0.6, breathSpeed: 0.7,
+client/src/data/lumiEmotionMap.ts:107:    blushLevel: 2, glowColor: "#FF9A8B", glowIntensity: 0.7, breathSpeed: 0.9,
+client/src/data/lumiEmotionMap.ts:112:    blushLevel: 2, glowColor: "#FFD93D", glowIntensity: 0.8, breathSpeed: 1.2,
+client/src/data/lumiEmotionMap.ts:117:    blushLevel: 1, glowColor: "#FFB88C", glowIntensity: 0.7, breathSpeed: 1.5,
+client/src/data/lumiEmotionMap.ts:122:    blushLevel: 0, glowColor: "#A8D5BA", glowIntensity: 0.3, breathSpeed: 0.5,
+client/src/lib/weave/knowledgeWeave.ts:42:  { id: "philosophy", label: "Philosophy", color: "#8B5CF6" },
+client/src/lib/weave/knowledgeWeave.ts:43:  { id: "psychology", label: "Psychology", color: "#EC4899" },
+client/src/lib/weave/knowledgeWeave.ts:44:  { id: "science", label: "Science", color: "#3B82F6" },
+client/src/lib/weave/knowledgeWeave.ts:45:  { id: "systems", label: "Systems", color: "#10B981" },
+client/src/lib/weave/knowledgeWeave.ts:46:  { id: "creativity", label: "Creativity", color: "#F59E0B" },
+client/src/lib/weave/knowledgeWeave.ts:47:  { id: "spirituality", label: "Spirituality", color: "#6366F1" },
+client/src/lib/weave/knowledgeWeave.ts:48:  { id: "practice", label: "Practice", color: "#14B8A6" },
+client/src/lib/weave/knowledgeWeave.ts:49:  { id: "experience", label: "Experience", color: "#F97316" }
+client/src/lib/avatarState.ts:133:  eyeColor: "#A7F3D0",
+client/src/lib/avatarState.ts:134:  heartColor: "#6EE7B7",
+client/src/lib/avatarState.ts:144:  eyeColor: "#93C5FD",
+client/src/lib/avatarState.ts:145:  heartColor: "#60A5FA",
+client/src/lib/avatarState.ts:155:  eyeColor: "#FDE68A",
+client/src/lib/avatarState.ts:156:  heartColor: "#F59E0B",
+client/src/lib/avatarState.ts:168:    eyeColor: "#7AE2A6",
+client/src/lib/avatarState.ts:169:    heartColor: "#5DDB94",
+client/src/lib/avatarState.ts:178:    eyeColor: "#6FE3B0",
+client/src/lib/avatarState.ts:179:    heartColor: "#7FD8A8",
+client/src/lib/avatarState.ts:190:    eyeColor: "#A78BFA",
+client/src/lib/avatarState.ts:191:    heartColor: "#C4B5FD",
+client/src/lib/avatarState.ts:199:    eyeColor: "#7AE2A6",
+client/src/lib/avatarState.ts:200:    heartColor: "#FFD75A",
+client/src/lib/security.ts:63:    color = '#000000',
+client/src/styles/accessibility.css:6:  --glp-paper: #ffffff;
+client/src/styles/accessibility.css:7:  --glp-ink: #000000;
+client/src/styles/accessibility.css:8:  --glp-sage: #006400;
+client/src/styles/accessibility.css:9:  --glp-sage-deep: #004d00;
+client/src/styles/accessibility.css:10:  --glp-sage-10: #e6ffe6;
+client/src/styles/accessibility.css:11:  --glp-sage-15: #ccffcc;
+client/src/styles/accessibility.css:12:  --glp-sage-20: #b3ffb3;
+client/src/styles/accessibility.css:13:  --glp-sage-30: #99ff99;
+client/src/styles/accessibility.css:14:  --glp-rose: #cc0000;
+client/src/styles/accessibility.css:15:  --glp-rose-dark: #990000;
+client/src/styles/accessibility.css:16:  --glp-rose-15: #ffe6e6;
+client/src/styles/accessibility.css:17:  --glp-rose-20: #ffcccc;
+client/src/styles/accessibility.css:18:  --glp-gold: #cc9900;
+client/src/styles/accessibility.css:19:  --glp-gold-dark: #996600;
+client/src/styles/accessibility.css:20:  --glp-gold-20: #fff5cc;
+client/src/styles/accessibility.css:21:  --glp-gold-30: #ffeb99;
+client/src/styles/accessibility.css:22:  --glp-teal-50: #e6ffff;
+client/src/styles/accessibility.css:97:  outline: 3px solid var(--glp-sage, #8FBF9F) !important;
+client/src/styles/accessibility.css:106:  outline: 3px solid var(--glp-sage, #8FBF9F) !important;
+client/src/styles/accessibility.css:127:  background: var(--glp-sage, #8FBF9F);
+client/src/styles/accessibility.css:165:    --glp-paper: #ffffff;
+client/src/styles/accessibility.css:166:    --glp-ink: #000000;
+client/src/styles/accessibility.css:186:  background: var(--glp-sage, #8FBF9F);
+client/src/styles/accessibility.css:196:  background: var(--glp-sage, #8FBF9F);
+client/src/styles/accessibility.css:203:  outline: 3px solid var(--glp-sage, #8FBF9F);
+client/src/styles/emotion-effects.css:248:  background: linear-gradient(45deg, #8fbf9f, #d4af37, #f4c7c3);
+client/src/styles/emotion-effects.css:266:  border-color: #d4af37 !important;
+client/src/styles/emotion-effects.css:443:  background: linear-gradient(135deg, #fef9e7 0%, #fff8e1 50%, #fffbf0 100%);
+client/src/styles/emotion-effects.css:447:  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 50%, #fff8e1 100%);
+client/src/styles/emotion-effects.css:451:  background: linear-gradient(135deg, #f5f5dc 0%, #fdf5e6 50%, #fffaf0 100%);
+client/src/styles/emotion-effects.css:455:  background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 50%, #fff5f8 100%);
+client/src/styles/emotion-effects.css:459:  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #f5fff5 100%);
+client/src/styles/emotion-effects.css:463:  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 30%, #f1f8e9 100%);
+client/src/styles/emotion-effects.css:467:  background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e9 50%, #f5f5f5 100%);
+client/src/styles/emotion-effects.css:471:  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 50%, #eeeeee 100%);
+client/src/styles/emotion-effects.css:475:  background: linear-gradient(135deg, #eceff1 0%, #e0e0e0 50%, #eeeeee 100%);
+client/src/styles/emotion-effects.css:479:  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ede7f6 100%);
+client/src/styles/emotion-effects.css:483:  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 30%, #e1f5fe 100%);
+client/src/styles/emotion-effects.css:487:  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 30%, #fff5f5 100%);
+client/src/styles/emotion-effects.css:492:  background: linear-gradient(135deg, #1a1a0f 0%, #1f1a10 50%, #1a1815 100%);
+client/src/styles/emotion-effects.css:496:  background: linear-gradient(135deg, #0f1a1a 0%, #101815 50%, #121a18 100%);
+client/src/styles/emotion-effects.css:500:  background: linear-gradient(135deg, #0f1520 0%, #101822 50%, #0f1a25 100%);
+client/src/styles/emotion-effects.css:504:  background: linear-gradient(135deg, #1a0f18 0%, #1a1020 50%, #180f1a 100%);
+client/src/styles/emotion-effects.css:509:  background: linear-gradient(135deg, #1a1a1a 0%, #1f1f1f 50%, #181818 100%);
+client/src/styles/tokens.css:108:  background: linear-gradient(135deg, var(--glp-sage, #8fbf9f), var(--glp-sage-deep, #2f5d5d));
+client/src/styles/tokens.css:120:  color: var(--glp-sage-deep, #2f5d5d);
+client/src/styles/tokens.css:121:  border-color: var(--glp-sage-deep, #2f5d5d);
+client/src/styles/tokens.css:130:  color: var(--glp-sage-deep, #2f5d5d);
+client/src/styles/tokens.css:771:  background: linear-gradient(135deg, var(--glp-gold), #D4A520);
+client/src/styles/wellness-shell.css:116:    var(--glp-sage-deep, #062a2a) 0%,
+client/src/styles/wellness-shell.css:117:    #0d4a3d 50%,
+client/src/styles/wellness-shell.css:118:    var(--glp-sage-deep, #062a2a) 100%);
+client/src/styles/peacescape-shell.css:133:    var(--glp-sage-deep, #062a2a) 0%,
+client/src/styles/peacescape-shell.css:134:    #0d4a3d 50%,
+client/src/styles/peacescape-shell.css:135:    var(--glp-sage-deep, #062a2a) 100%);
+client/src/styles/lumi-a11y.css:10:  color: #ffffff;
+client/src/styles/lumi-buttons.css:8:  --_btn-fg: #ffffff;
+client/src/styles/lumi-buttons.css:78:  --_btn-fg: #1a1308;
+client/src/styles/lumi-buttons.css:102:  --_btn-fg: #ffffff;
+client/src/styles/lumi-buttons.css:152:  --_btn-fg: #ffffff;
+client/src/styles/lumi-buttons.css:158:  --_btn-fg: #ffffff;
+client/src/styles/lumi-admin.css:82:.lumi-status-success { background: #d4ede4; color: #2d6a4f; }
+client/src/styles/lumi-admin.css:83:.lumi-status-success::before { background: #2d6a4f; }
+client/src/styles/lumi-admin.css:84:.lumi-status-warning { background: #fcebc7; color: #8a5a00; }
+client/src/styles/lumi-admin.css:85:.lumi-status-warning::before { background: #d4943a; }
+client/src/styles/lumi-admin.css:86:.lumi-status-error   { background: #f0d4d0; color: #8a3a2a; }
+client/src/styles/lumi-admin.css:87:.lumi-status-error::before { background: #c45b4a; }
+client/src/styles/lumi-admin.css:88:.lumi-status-info    { background: #d8e0f0; color: #3a5a8a; }
+client/src/styles/lumi-admin.css:89:.lumi-status-info::before { background: #5a8ad4; }
+client/src/styles/lumi-admin.css:211:  background: #ffffff;
+client/src/styles/lumi-admin.css:339:  background: #f0d4d0;
+client/src/styles/lumi-admin.css:340:  border: 1px solid #c45b4a;
+client/src/styles/lumi-admin.css:343:  color: #5a2a20;
+client/src/styles/lumi-admin.css:352:  color: #8a3a2a;
+client/src/styles/checkin.css:68:  background: radial-gradient(circle, #C8B6FF 0%, transparent 70%);
+client/src/styles/celebration.css:68:  background: radial-gradient(circle, #FFD93D 0%, transparent 70%);
+client/src/styles/v6-preview.css:74:  background: linear-gradient(90deg, #FFD93D 0%, #FFB88C 100%);
+client/src/styles/brand.css:136:  outline: 3px solid var(--glp-gold, #D4AF37);
+client/src/styles/brand.css:231:     resolves to #be8622; use literal #D4AF37 to honor the v5.6 palette spec). */
+client/src/styles/brand.css:232:  outline: 3px solid #D4AF37;
+client/src/styles/brand.css:255:     currently resolves to #062a2a; use literal #2F5443 per v5.6 palette spec). */
+client/src/styles/brand.css:256:  outline: 3px solid #2F5443;
+client/src/styles/brand.css:272:  outline: 3px solid #2F5443;
+client/src/styles/sacred.css:13:  --sacred-sage: #8fbf9f;
+client/src/styles/sacred.css:14:  --sacred-rose: #f4c7c3;
+client/src/styles/sacred.css:15:  --sacred-teal: #2f5d5d;
+client/src/styles/sacred.css:16:  --sacred-white: #faf9f7;
+client/src/styles/sacred.css:17:  --sacred-charcoal: #3a3a3a;
+client/src/styles/sacred.css:18:  --sacred-gold: #eac33b;
+client/src/styles/sacred.css:154:  background: #274e4e;
+client/src/styles/sacred.css:484:  background: linear-gradient(135deg, var(--sacred-teal), #3d7a7a);
+client/src/styles/sacred-typography.css:32:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/styles/sacred-typography.css:42:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/styles/sacred-typography.css:51:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/styles/sacred-typography.css:60:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/styles/sacred-typography.css:69:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/styles/sacred-typography.css:78:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/styles/sacred-typography.css:88:  color: var(--sacred-teal, #2f5d5d);
+client/src/styles/sacred-typography.css:97:  color: var(--sacred-charcoal, #3a3a3a);
+client/src/styles/sacred-typography.css:140:  outline: 2px solid var(--sacred-sage, #8fbf9f);
+client/src/styles/lumi-tokens.css:113:  --lumi-bg-elev:   #ffffff;
+client/src/styles/lumi-tokens.css:119:  --lumi-accent-fg: #ffffff;
+client/src/styles/lumi-tokens.css:222:  --color-calm-light:  #d4ede4;
+client/src/styles/lumi-tokens.css:224:  --color-growth-light:#e1edd3;
+client/src/styles/lumi-tokens.css:226:  --color-love-light:  #f5d4cc;
+client/src/styles/lumi-tokens.css:228:  --color-insight-light:#d8e0f0;
+client/src/styles/lumi-tokens.css:230:  --color-energy-light:#fcebc7;
+client/src/styles/lumi-tokens.css:232:  --color-rest-light:  #e5deec;
+client/src/styles/lumi-tokens.css:235:  --color-white:         #ffffff;
+client/src/styles/lumi-tokens.css:236:  --color-black:         #000000;
+client/src/styles/lumi-tokens.css:237:  --color-crisis:        #c45b4a;
+client/src/styles/lumi-tokens.css:238:  --color-crisis-light:  #f0d4d0;
+client/src/styles/lumi-tokens.css:239:  --color-warning:       #d4943a;
+client/src/styles/lumi-tokens.css:240:  --color-warning-light: #f5e5d0;
+client/src/styles/visual-benefits.css:13:    var(--glp-paper, #fdfcf9) 0%,
+client/src/styles/visual-benefits.css:15:    var(--glp-paper, #fdfcf9) 100%
+client/src/styles/visual-benefits.css:162:  color: var(--glp-sage-deep, #4A7E72);
+client/src/styles/visual-benefits.css:169:  color: var(--glp-ink, #2d3a35);
+client/src/styles/visual-benefits.css:191:  color: color-mix(in srgb, var(--vb-accent) 70%, #2d3a35);
+client/src/styles/visual-benefits.css:205:  color: #ffffff;
+client/src/styles/visual-benefits.css:206:  background: linear-gradient(135deg, #4A7E72 0%, var(--vb-accent) 100%);
+client/src/styles/visual-benefits.css:253:  color: #ffffff;
+client/src/styles/visual-benefits.css:254:  background: linear-gradient(135deg, #4A7E72 0%, #F4B942 100%);
+client/src/styles/visual-benefits.css:281:  outline: 3px solid #F4B942;
+client/src/styles/breathing-tool.css:53:  background: radial-gradient(circle, #74C0FC 0%, transparent 70%);
+client/src/styles/breathing-tool.css:148:.breathing-tool-polish[data-breath-sub="hold"]   .breathing-particle { background: radial-gradient(circle, #C8B6FF 0%, transparent 70%); }
+client/src/styles/breathing-tool.css:149:.breathing-tool-polish[data-breath-sub="exhale"] .breathing-particle { background: radial-gradient(circle, #A8C9A0 0%, transparent 70%); }
+client/src/styles/brand-tokens.css:21:    • Luminous Sage (#1ec890) — Magnetic vitality, alive growth, sensory calm that draws you inward
+client/src/styles/brand-tokens.css:22:    • Abyssal Wisdom (#062a2a) — Hypnotic depth, infinite grounding, mystery that feels like safety
+client/src/styles/brand-tokens.css:23:    • Sacred Pearl (#fcf6ea) — Golden sanctuary warmth, luminous embrace, the feeling of coming home
+client/src/styles/brand-tokens.css:24:    • Wisdom Ink (#142626) — Quiet genius, deep knowing, the intelligence behind stillness
+client/src/styles/brand-tokens.css:25:    • Liquid Amber (#be8622) — Molten confidence, warm inner power, radiance that inspires trust
+client/src/styles/brand-tokens.css:26:    • Heart Rose (#d08672) — Tender compassion, unconditional loving kindness, warmth without limit
+client/src/styles/brand-tokens.css:27:    • Consciousness Violet (#6c58b8) — Expanded perception, awakened intuition, deeper seeing
+client/src/styles/brand-tokens.css:29:  --glp-sage: #1ec890;          /* Luminous Sage — magnetic vitality, alive growth */
+client/src/styles/brand-tokens.css:30:  --glp-blush: #d08672;         /* Heart Rose — tender compassion, unconditional warmth */
+client/src/styles/brand-tokens.css:31:  --glp-rose: #d08672;          /* Alias for blush */
+client/src/styles/brand-tokens.css:32:  --glp-sage-deep: #062a2a;     /* Abyssal Wisdom — hypnotic depth, infinite grounding */
+client/src/styles/brand-tokens.css:33:  --glp-paper: #fcf6ea;         /* Sacred Pearl — golden sanctuary warmth, coming home */
+client/src/styles/brand-tokens.css:34:  --glp-ink: #142626;           /* Wisdom Ink — quiet genius, intelligent stillness */
+client/src/styles/brand-tokens.css:35:  --glp-gold: #E8913A;          /* Heart Amber — warm radiant gold, canonical palette */
+client/src/styles/brand-tokens.css:36:  --glp-gold-dark: #C9701F;     /* Deep Heart Amber — grounded warm wisdom */
+client/src/styles/brand-tokens.css:37:  --glp-violet: #6c58b8;        /* Consciousness Violet — expanded perception, awakened seeing */
+client/src/styles/brand-tokens.css:38:  --glp-violet-dark: #5c4aa0;   /* Deep Violet — profound intuition */
+client/src/styles/brand-tokens.css:68:  --glp-white: #ffffff;
+client/src/styles/brand-tokens.css:105:  --glp-teal-50: #dff1ee;
+client/src/styles/brand-tokens.css:106:  --glp-teal-100: #aedcd6;
+client/src/styles/brand-tokens.css:107:  --glp-teal-200: #74beb6;
+client/src/styles/brand-tokens.css:108:  --glp-teal-300: #3e9c94;
+client/src/styles/brand-tokens.css:109:  --glp-teal-400: #1c6e6c;
+client/src/styles/brand-tokens.css:110:  --glp-teal-500: #0e4e4e;
+client/src/styles/brand-tokens.css:111:  --glp-teal-600: #0b4040;
+client/src/styles/brand-tokens.css:112:  --glp-teal-700: #062a2a;
+client/src/styles/brand-tokens.css:113:  --glp-teal-800: #041e1e;
+client/src/styles/brand-tokens.css:114:  --glp-teal-900: #021414;
+client/src/styles/brand-tokens.css:117:  --glp-gold-50: #fdf2e8;
+client/src/styles/brand-tokens.css:118:  --glp-gold-100: #fbe0c5;
+client/src/styles/brand-tokens.css:119:  --glp-gold-200: #f6c388;
+client/src/styles/brand-tokens.css:120:  --glp-gold-300: #f0a55a;
+client/src/styles/brand-tokens.css:121:  --glp-gold-400: #E8913A;
+client/src/styles/brand-tokens.css:122:  --glp-gold-500: #C9701F;
+client/src/styles/brand-tokens.css:123:  --glp-gold-600: #a55a14;
+client/src/styles/brand-tokens.css:124:  --glp-gold-700: #82480f;
+client/src/styles/brand-tokens.css:125:  --glp-gold-800: #5e340a;
+client/src/styles/brand-tokens.css:126:  --glp-gold-900: #3a2106;
+client/src/styles/brand-tokens.css:129:  --glp-sage-50: #e0f9f0;
+client/src/styles/brand-tokens.css:130:  --glp-sage-100: #b2f0d6;
+client/src/styles/brand-tokens.css:131:  --glp-sage-200: #7ee5ba;
+client/src/styles/brand-tokens.css:132:  --glp-sage-300: #4cd8a0;
+client/src/styles/brand-tokens.css:133:  --glp-sage-400: #1ec890;
+client/src/styles/brand-tokens.css:134:  --glp-sage-500: #18a876;
+client/src/styles/brand-tokens.css:135:  --glp-sage-600: #148a60;
+client/src/styles/brand-tokens.css:136:  --glp-sage-700: #0e6c4a;
+client/src/styles/brand-tokens.css:137:  --glp-sage-800: #094e34;
+client/src/styles/brand-tokens.css:138:  --glp-sage-900: #04301e;
+client/src/styles/brand-tokens.css:141:  --glp-blush-50: #f8ede8;
+client/src/styles/brand-tokens.css:142:  --glp-blush-100: #efd4ca;
+client/src/styles/brand-tokens.css:143:  --glp-blush-200: #e2b2a4;
+client/src/styles/brand-tokens.css:144:  --glp-blush-300: #d08672;
+client/src/styles/brand-tokens.css:145:  --glp-blush-400: #c07060;
+client/src/styles/brand-tokens.css:146:  --glp-blush-500: #ae584c;
+client/src/styles/brand-tokens.css:147:  --glp-blush-600: #984840;
+client/src/styles/brand-tokens.css:148:  --glp-blush-700: #7e3832;
+client/src/styles/brand-tokens.css:149:  --glp-blush-800: #642c26;
+client/src/styles/brand-tokens.css:150:  --glp-blush-900: #4a1e1a;
+client/src/styles/brand-tokens.css:198:  --glp-sage-rgb: 30, 200, 144;       /* #1ec890 */
+client/src/styles/brand-tokens.css:199:  --glp-sage-deep-rgb: 6, 42, 42;     /* #062a2a */
+client/src/styles/brand-tokens.css:200:  --glp-blush-rgb: 208, 134, 114;     /* #d08672 */
+client/src/styles/brand-tokens.css:201:  --glp-paper-rgb: 252, 246, 234;     /* #fcf6ea */
+client/src/styles/brand-tokens.css:202:  --glp-ink-rgb: 20, 38, 38;          /* #142626 */
+client/src/styles/brand-tokens.css:203:  --glp-gold-rgb: 232, 145, 58;       /* #E8913A — Heart Amber */
+client/src/styles/brand-tokens.css:204:  --glp-violet-rgb: 108, 88, 184;     /* #6c58b8 */
+client/src/styles/brand-tokens.css:210:  --glp-surface: #FFFFFF;
+client/src/styles/brand-tokens.css:211:  --glp-surface-2: #F5F2EE;
+client/src/styles/brand-tokens.css:220:  --glp-accent-foreground: #1A1A1A;
+client/src/styles/brand-tokens.css:229:  --surface-1: #FFFFFF;
+client/src/styles/brand-tokens.css:255:  --glp-success: #10b981;
+client/src/styles/brand-tokens.css:256:  --glp-success-light: #34d399;
+client/src/styles/brand-tokens.css:257:  --glp-success-dark: #059669;
+client/src/styles/brand-tokens.css:260:  --glp-warning: #f59e0b;
+client/src/styles/brand-tokens.css:261:  --glp-warning-light: #fbbf24;
+client/src/styles/brand-tokens.css:262:  --glp-warning-dark: #d97706;
+client/src/styles/brand-tokens.css:265:  --glp-error: #ef4444;
+client/src/styles/brand-tokens.css:266:  --glp-error-light: #f87171;
+client/src/styles/brand-tokens.css:267:  --glp-error-dark: #dc2626;
+client/src/styles/brand-tokens.css:270:  --glp-info: #3b82f6;
+client/src/styles/brand-tokens.css:271:  --glp-info-light: #60a5fa;
+client/src/styles/brand-tokens.css:272:  --glp-info-dark: #2563eb;
+client/src/styles/brand-tokens.css:275:  --glp-cyan: #06b6d4;
+client/src/styles/brand-tokens.css:276:  --glp-cyan-light: #22d3ee;
+client/src/styles/brand-tokens.css:279:  --glp-purple: #8b5cf6;
+client/src/styles/brand-tokens.css:280:  --glp-purple-light: #a78bfa;
+client/src/styles/brand-tokens.css:281:  --glp-purple-dark: #7c3aed;
+client/src/styles/brand-tokens.css:284:  --glp-indigo: #6366f1;
+client/src/styles/brand-tokens.css:285:  --glp-indigo-light: #818cf8;
+client/src/styles/brand-tokens.css:288:  --glp-status-rose: #f43f5e;
+client/src/styles/brand-tokens.css:289:  --glp-status-rose-light: #fb7185;
+client/src/styles/brand-tokens.css:290:  --glp-status-rose-dark: #e11d48;
+client/src/styles/brand-tokens.css:296:  --glp-orange: #f97316;
+client/src/styles/brand-tokens.css:297:  --glp-orange-light: #fb923c;
+client/src/styles/brand-tokens.css:300:  --glp-lime: #84cc16;
+client/src/styles/brand-tokens.css:303:  --glp-teal-light: #14b8a6;
+client/src/styles/brand-tokens.css:306:  --glp-pink: #ec4899;
+client/src/styles/brand-tokens.css:307:  --glp-pink-light: #f472b6;
+client/src/styles/brand-tokens.css:311:  --glp-gray-50: #f9fafb;
+client/src/styles/brand-tokens.css:312:  --glp-gray-100: #f3f4f6;
+client/src/styles/brand-tokens.css:313:  --glp-gray-200: #e5e7eb;
+client/src/styles/brand-tokens.css:314:  --glp-gray-300: #d1d5db;
+client/src/styles/brand-tokens.css:315:  --glp-gray-400: #9ca3af;
+client/src/styles/brand-tokens.css:316:  --glp-gray-500: #6b7280;
+client/src/styles/brand-tokens.css:317:  --glp-gray-600: #4b5563;
+client/src/styles/brand-tokens.css:318:  --glp-gray-700: #374151;
+client/src/styles/brand-tokens.css:319:  --glp-gray-800: #1f2937;
+client/src/styles/brand-tokens.css:320:  --glp-gray-900: #111827;
+client/src/styles/brand-tokens.css:434:  --glp-gold: #D9B43A;
+client/src/styles/brand-tokens.css:437:  --glp-surface-2: #F4F2EE;
+client/src/styles/brand-tokens.css:457:  --glp-bg: #FFFFFF;
+client/src/styles/brand-tokens.css:458:  --glp-paper: #FFFFFF;
+client/src/styles/brand-tokens.css:461:  --glp-surface: #FFFFFF;
+client/src/styles/brand-tokens.css:462:  --glp-surface-2: #FAFAFA;
+client/src/styles/brand-tokens.css:464:  --glp-text: #2A2A2A;
+client/src/styles/brand-tokens.css:465:  --glp-ink: #2A2A2A;
+client/src/styles/brand-tokens.css:475:  --bg: #FFFFFF;
+client/src/styles/brand-tokens.css:476:  --text-1: #2A2A2A;
+client/src/styles/brand-tokens.css:478:  --surface-1: #FFFFFF;
+client/src/styles/brand-tokens.css:480:  --primary-contrast: #FFFFFF;
+client/src/styles/canva-landing.css:40: *   #F6F1E8 (warm cream)      → --glp-paper, --glp-paper-98
+client/src/styles/canva-landing.css:44: *   #C4787A (dusty rose)      → --glp-rose, --glp-blush (crisis accent)
+client/src/styles/canva-landing.css:48:  --glp-paper: #F6F1E8;
+client/src/styles/canva-landing.css:49:  --glp-paper-98: #F6F1E8;
+client/src/styles/canva-landing.css:55:  --glp-rose: #C4787A;
+client/src/styles/canva-landing.css:56:  --glp-blush: #C4787A;
+client/src/styles/canva-landing.css:71:  /* Alpha derivatives — recomputed from new rose #C4787A → rgb(196,120,122) */
+client/src/styles/canva-landing.css:1259:  background: #FFFFFF !important;
+client/src/styles/canva-landing.css:1295:    #f0d080 50%,
+client/src/styles/canva-landing.css:1501:  color: var(--glp-gold-dark, #b07c1c);
+client/src/styles/canva-landing.css:1568:  background: linear-gradient(135deg, var(--glp-sage-deep), #0a3a3a);
+client/src/styles/canva-landing.css:1580:  color: #ffffff;
+client/src/styles/canva-landing.css:1759:  outline: 3px solid var(--glp-gold, #D4AF37);
+client/src/styles/canva-landing.css:1792:  outline: 3px solid var(--glp-sage-deep, #2F5443);
+client/src/styles/canva-landing.css:1804:  color: var(--glp-sage-deep, #2F5443);
+client/src/styles/canva-landing.css:1830:  outline: 3px solid var(--glp-sage-deep, #2F5443);
+client/src/styles/canva-landing.css:1920:    #0a3636 40%,
+client/src/styles/canva-landing.css:1921:    #0d4242 70%,
+client/src/styles/canva-landing.css:2361:   the var(--glp-sage-deep) #062a2a foreground exceeds AA 4.5:1 across the entire
+client/src/styles/canva-landing.css:2362:   button surface — the prior --glp-gold-dark #9e7018 stop sat at ~3.5:1 and was
+client/src/styles/canva-landing.css:2365:  background: linear-gradient(135deg, #fbe39a 0%, #f4d271 50%, #e7bf5d 100%);
+client/src/styles/canva-landing.css:2403:   #1ec890 half. */
+client/src/styles/canva-landing.css:2406:  color: #ffffff;
+client/src/styles/canva-landing.css:2646:  background: radial-gradient(circle, #A8C9A0 0%, transparent 70%);
+client/src/styles/hxos-vnext.css:12: *   - Brand accents (gold #E8913A, violet #6c58b8, aurora) → preserved
+client/src/styles/hxos-vnext.css:28:  --glp-paper: #F6F1E8;
+client/src/styles/hxos-vnext.css:29:  --glp-paper-98: #F6F1E8;
+client/src/styles/hxos-vnext.css:35:  --glp-rose: #C4787A;
+client/src/styles/hxos-vnext.css:36:  --glp-blush: #C4787A;
+client/src/styles/hxos-vnext.css:51:  /* Alpha derivatives — recomputed from new rose #C4787A → rgb(196,120,122) */
+client/src/styles/hxos-vnext.css:61:  --glp-warm-white: #FAFAF7;
+client/src/styles/hxos-vnext.css:62:  --glp-light-gray: #F0EDE6;
+client/src/styles/hxos-vnext.css:77:  --glp-rose: #C4787A;
+client/src/styles/hxos-vnext.css:78:  --glp-blush: #C4787A;
+client/src/main.css:94:  border-color: #3d6b50;
+client/src/main.css:95:  background: linear-gradient(135deg, #4a7a5e 0%, #5A8A6E 100%);
+client/src/avatar-life/types/avatarLifeTypes.ts:60:    glowColor: "#A8C9A0",
+client/src/avatar-life/types/avatarLifeTypes.ts:67:    glowColor: "#7AA86F",
+client/src/avatar-life/types/avatarLifeTypes.ts:74:    glowColor: "#74C0FC",
+client/src/avatar-life/types/avatarLifeTypes.ts:81:    glowColor: "#A78BFA",
+client/src/avatar-life/types/avatarLifeTypes.ts:88:    glowColor: "#F8C6C0",
+client/src/avatar-life/types/avatarLifeTypes.ts:95:    glowColor: "#F4C95D",
+client/src/avatar-life/types/avatarLifeTypes.ts:103:    glowColor: "#A78BFA",
+client/src/avatar-life/types/avatarLifeTypes.ts:111:    glowColor: "#F4C95D",
+client/src/avatar-life/governance/nonDriftRules.ts:61:  "#A8C9A0", // sage
+client/src/avatar-life/governance/nonDriftRules.ts:62:  "#7AA86F", // sage-deep
+client/src/avatar-life/governance/nonDriftRules.ts:63:  "#74C0FC", // calm-blue
+client/src/avatar-life/governance/nonDriftRules.ts:64:  "#A78BFA", // empathy-purple
+client/src/avatar-life/governance/nonDriftRules.ts:65:  "#A8E6CF", // mint
+client/src/avatar-life/governance/nonDriftRules.ts:66:  "#F8C6C0", // blush
+client/src/avatar-life/governance/nonDriftRules.ts:67:  "#F4C95D", // sunshine
+client/src/avatar-life/governance/nonDriftRules.ts:68:  "#142626", // ink
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:88:      glowColor: "#FF00FF",
+client/src/design-system/tokens/legacyMap.ts:14: *   const sage = legacyMap['--glp-sage']; // → '#7BA483' (palette.primarySage)
+client/src/design-system/tokens/colors.ts:12:  primarySage: "#7BA483",
+client/src/design-system/tokens/colors.ts:13:  deepForest: "#163A36",
+client/src/design-system/tokens/colors.ts:14:  warmCream: "#F6F1E8",
+client/src/design-system/tokens/colors.ts:15:  eternalGold: "#D4B06A",
+client/src/design-system/tokens/colors.ts:16:  softBlush: "#E5B8AE",
+client/src/design-system/tokens/colors.ts:17:  mist: "#F8F8F4",
+client/src/design-system/tokens/colors.ts:33:  fgBody: "#2A3F3D",
+client/src/design-system/tokens.ts:3:		sage: "#A8B5A2",
+client/src/design-system/tokens.ts:4:		sageDark: "#6E7C68",
+client/src/design-system/tokens.ts:5:		gold: "#D4A64A",
+client/src/design-system/tokens.ts:6:		goldSoft: "#E6C98A",
+client/src/design-system/tokens.ts:7:		cream: "#F8F6F2",
+client/src/design-system/tokens.ts:8:		text: "#2B2B2B",
+client/src/design-system/tokens.ts:9:		success: "#4C8C4A",
+client/src/design-system/tokens.ts:10:		danger: "#C65B5B",
+client/src/design-system/tokens.ts:11:		border: "#E5E2DA",
+client/src/design-system/tokens.ts:12:		background: "#F8F6F2",
+client/src/design-system/tokens.ts:13:		textPrimary: "#2B2B2B",
+client/src/design-system/tokens.ts:14:		textSecondary: "#6B7280"
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:107:          color: isDev() ? "#dc2626" : "transparent",
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:109:          border: isDev() ? "1px dashed #dc2626" : "none",
+client/src/lumi-crisis/components/CrisisPanel.tsx:21:  background: "#FFFFFF",
+client/src/lumi-crisis/components/CrisisPanel.tsx:22:  color: "#1A1A1A",
+client/src/lumi-crisis/components/CrisisPanel.tsx:35:  color: "#1A1A1A",
+client/src/lumi-crisis/components/CrisisPanel.tsx:44:  color: "#FFFFFF",
+client/src/lumi-crisis/components/CrisisPanel.tsx:45:  background: "#1B5E20",
+client/src/lumi-crisis/components/CrisisPanel.tsx:60:  color: "#1A1A1A",
+client/src/lumi-crisis/components/CrisisPanel.tsx:61:  background: "#F5F5F5",
+client/src/lumi-crisis/components/CrisisPanel.tsx:62:  border: "1px solid #1A1A1A",
+client/src/lumi-crisis/components/CrisisPanel.tsx:71:  color: "#444444",
+client/src/lumi-crisis/components/CrisisPanel.tsx:115:          style={{ color: "#1B5E20", textDecoration: "underline" }}
+client/src/lumi-crisis/components/CrisisPanel.tsx:129:            color: "#1A1A1A",
+client/src/lumi-crisis/components/CrisisPanel.tsx:130:            border: "1px solid #CCCCCC",
+client/src/lumi-library/components/LibraryCard.tsx:19:  background: "#FFFFFF",
+client/src/lumi-library/components/LibraryCard.tsx:20:  border: "1px solid #E5E5E0",
+client/src/lumi-library/components/LibraryCard.tsx:24:  color: "#1A1A1A",
+client/src/lumi-library/components/LibraryCard.tsx:40:  background: "#F0F4EF",
+client/src/lumi-library/components/LibraryCard.tsx:41:  color: "#3D5C3F",
+client/src/lumi-library/components/LibraryCard.tsx:48:  color: "#4A4A4A",
+client/src/lumi-library/components/LibraryCard.tsx:59:  color: "#666666",
+client/src/lumi-library/components/LibraryCard.tsx:63:  background: "#F5F5F0",
+client/src/lumi-library/components/LibraryCard.tsx:69:  background: "#3D5C3F",
+client/src/lumi-library/components/LibraryCard.tsx:70:  color: "#FFFFFF",
+client/src/lumi-tokens/colors/colorTokens.ts:7:	serenitySage: "#8FBF9F",
+client/src/lumi-tokens/colors/colorTokens.ts:8:	primarySage: "#7BA483",
+client/src/lumi-tokens/colors/colorTokens.ts:10:	deepTeal: "#2F5D50",
+client/src/lumi-tokens/colors/colorTokens.ts:11:	deepForest: "#163A36",
+client/src/lumi-tokens/colors/colorTokens.ts:13:	eternalGold: "#D4AF37",
+client/src/lumi-tokens/colors/colorTokens.ts:15:	warmCream: "#F6F1E8",
+client/src/lumi-tokens/colors/colorTokens.ts:16:	ivoryLight: "#FAF9F7",
+client/src/lumi-tokens/colors/colorTokens.ts:18:	softBlush: "#E5B8AE",
+client/src/lumi-tokens/colors/colorTokens.ts:19:	mist: "#F8F8F4",
+client/src/lumi-tokens/colors/colorTokens.ts:21:	charcoalDeep: "#3A3A3A",
+client/src/lumi-tokens/colors/colorTokens.ts:33:	textMuted: "#6B6B6B",
+client/src/lumi-tokens/colors/colorTokens.ts:49:	error: "#C4787A",
+client/src/lumi-tokens/colors/colorTokens.ts:51:	warning: "#D4A76A",
+client/src/lumi-tokens/colors/colorTokens.ts:55:	body: "#FFF5F0",
+client/src/lumi-tokens/colors/colorTokens.ts:101:	"#000000",
+client/src/lumi-tokens/colors/colorTokens.ts:102:	"#FF0000",
+client/src/lumi-tokens/colors/colorTokens.ts:103:	"#FF6B6B",
+client/src/lumi-tokens/colors/colorTokens.ts:104:	"#00FF00",
+client/src/lumi-tokens/colors/colorTokens.ts:105:	"#0000FF",
+client/src/lumi-tokens/colors/colorTokens.ts:106:	"#FF00FF",
+client/src/lumi-tokens/colors/colorTokens.ts:107:	"#00FFFF",
+client/src/lumi-tokens/colors/colorTokens.ts:108:	"#FFA500",
+client/src/lumi-tokens/colors/colorTokens.ts:109:	"#FFFFFF",
+client/src/index.css:122:    linear-gradient(180deg, var(--ivory), #ffffff);
+client/src/index.css:547:  color: #5A8A6E;
+client/src/index.css:552:  color: #B4912A;
+client/src/index.css:557:  color: #A87D68;
+client/src/index.css:562:  color: #2F5D5D;
+client/src/index.css:611:  color: #4a7a5e;
+client/src/index.css:617:  color: #8B7023;
+client/src/index.css:622:  background: linear-gradient(135deg, #D4AF37 0%, #F0D878 50%, #D4AF37 100%);
+client/src/index.css:623:  color: #5A4510;
+client/src/index.css:662:  background: linear-gradient(135deg, #8FBF9F, #5A8A6E);
+client/src/index.css:726:  color: #16A34A;
+client/src/index.css:731:  color: #DC2626;
+client/src/index.css:759:  --sage-50: #f4f9f6;
+client/src/index.css:760:  --sage-100: #e4f0e8;
+client/src/index.css:761:  --sage-200: #c9e1d1;
+client/src/index.css:762:  --sage-300: #a8cfb5;
+client/src/index.css:763:  --sage-400: #8FBF9F;
+client/src/index.css:764:  --sage-500: #5A8A6E;
+client/src/index.css:765:  --sage-600: #4a7a5e;
+client/src/index.css:766:  --sage-700: #3d6550;
+client/src/index.css:767:  --sage-800: #335443;
+client/src/index.css:768:  --sage-900: #2a4537;
+client/src/index.css:770:  --gold-50: #fffbeb;
+client/src/index.css:771:  --gold-100: #fef3c7;
+client/src/index.css:772:  --gold-200: #fde68a;
+client/src/index.css:773:  --gold-300: #fcd34d;
+client/src/index.css:774:  --gold-400: #D4AF37;
+client/src/index.css:775:  --gold-500: #B4912A;
+client/src/index.css:776:  --gold-600: #92751f;
+client/src/index.css:777:  --gold-700: #7a5f18;
+client/src/index.css:778:  --gold-800: #634c14;
+client/src/index.css:779:  --gold-900: #4d3b10;
+client/src/index.css:781:  --blush-50: #fef7f6;
+client/src/index.css:782:  --blush-100: #fdeeed;
+client/src/index.css:783:  --blush-200: #fbd6d4;
+client/src/index.css:784:  --blush-300: #F4C7C3;
+client/src/index.css:785:  --blush-400: #e6a9a4;
+client/src/index.css:786:  --blush-500: #d48b85;
+client/src/index.css:787:  --blush-600: #be6e68;
+client/src/index.css:788:  --blush-700: #a55550;
+client/src/index.css:789:  --blush-800: #8a4541;
+client/src/index.css:790:  --blush-900: #733a37;
+client/src/index.css:792:  --teal-50: #f0f5f5;
+client/src/index.css:793:  --teal-100: #d8e5e5;
+client/src/index.css:794:  --teal-200: #b1cbcb;
+client/src/index.css:795:  --teal-300: #7fa5a5;
+client/src/index.css:796:  --teal-400: #5a8585;
+client/src/index.css:797:  --teal-500: #2F5D5D;
+client/src/index.css:798:  --teal-600: #274d4d;
+client/src/index.css:799:  --teal-700: #1f3f3f;
+client/src/index.css:800:  --teal-800: #183232;
+client/src/index.css:801:  --teal-900: #112525;
+client/src/index.css:1395:  --teal-vivid: #1A4F4F;
+client/src/index.css:1396:  --teal-accent: #2D7A7A;
+client/src/index.css:1397:  --teal-glow: #3CA0A0;
+client/src/index.css:1398:  --teal-soft: #D0E6E6;
+client/src/index.css:1401:  --gold-vivid: #C9963A;
+client/src/index.css:1402:  --gold-shimmer: #E5C76E;
+client/src/index.css:1403:  --gold-warm: #F0D890;
+client/src/index.css:1407:  --sage-vivid: #4A8A60;
+client/src/index.css:1408:  --sage-glow: #6BAA80;
+client/src/index.css:1409:  --sage-mist: #E8F4EC;
+client/src/index.css:1412:  --blush-vivid: #E89B95;
+client/src/index.css:1413:  --blush-glow: #F5C4C0;
+client/src/index.css:1414:  --blush-mist: #FDF5F4;
+client/src/index.css:2065:  --teal-vivid: #3CA0A0;
+client/src/index.css:2066:  --teal-accent: #4BBABA;
+client/src/index.css:2067:  --teal-glow: #5DD4D4;
+client/src/index.css:2068:  --teal-soft: #1A3535;
+client/src/index.css:2070:  --gold-vivid: #E5C76E;
+client/src/index.css:2071:  --gold-shimmer: #F0D890;
+client/src/index.css:2072:  --gold-warm: #FAEAB8;
+client/src/index.css:2075:  --sage-vivid: #6BAA80;
+client/src/index.css:2076:  --sage-glow: #8AC49E;
+client/src/index.css:2077:  --sage-mist: #1A2A20;
+client/src/index.css:2079:  --blush-vivid: #F5C4C0;
+client/src/index.css:2080:  --blush-glow: #FADAD7;
+client/src/index.css:2081:  --blush-mist: #2A1F1E;
+client/src/index.css:2339:.text-success { color: #10b981; }
+client/src/index.css:2340:.text-warning { color: #f59e0b; }
+client/src/index.css:2341:.text-error { color: #ef4444; }
+client/src/index.css:2342:.text-info { color: #3b82f6; }
+client/src/index.css:2353:  background: linear-gradient(135deg, #2A5454 0%, #7FB39A 50%, #D4AF37 100%);
+client/src/index.css:2360:  background: linear-gradient(135deg, #D4AF37 0%, #F5D76E 50%, #D4AF37 100%);
+client/src/index.css:2473:.icon-success { color: #10b981; }
+client/src/index.css:2474:.icon-warning { color: #f59e0b; }
+client/src/index.css:2475:.icon-error { color: #ef4444; }
+client/src/index.css:3451:.stat-trend-up { background: rgba(16, 185, 129, 0.1); color: #059669; }
+client/src/index.css:3452:.stat-trend-down { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+client/src/index.css:3453:.stat-trend-neutral { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+client/src/index.css:3478:.icon-success { color: #10b981; }
+client/src/index.css:3479:.icon-warning { color: #f59e0b; }
+client/src/index.css:3480:.icon-danger { color: #ef4444; }
+client/src/index.css:3481:.icon-info { color: #3b82f6; }
+client/src/index.css:3707:  background: linear-gradient(135deg, #FAFAF8 0%, #F6F4F1 50%, #EDF5F5 100%);
+client/src/index.css:3712:  background: linear-gradient(180deg, hsl(var(--background)) 0%, #F6F4F1 100%);
+client/src/index.css:3951:  background: linear-gradient(135deg, var(--glp-sage-deep) 0%, #3A6464 100%);
+client/src/index.css:3963:  color: #1A1A1A;
+client/src/index.css:4221:.icon-success { color: #16a34a; }
+client/src/index.css:4222:.icon-warning { color: #d97706; }
+client/src/index.css:4223:.icon-danger { color: #dc2626; }
+client/src/index.css:4224:.icon-info { color: #0284c7; }
+client/src/index.css:4273:  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+client/src/index.css:4274:  color: #475569;
+client/src/index.css:4280:.bg-surface-elevated { background-color: #ffffff; }
+client/src/index.css:4309:    #f0fdf4 100%
+client/src/index.css:4402:  color: #16a34a;
+client/src/index.css:4411:  color: #dc2626;
+client/src/index.css:4479:  background: #dcfce7;
+client/src/index.css:4480:  color: #166534;
+client/src/index.css:4484:  background: #fef3c7;
+client/src/index.css:4485:  color: #92400e;
+client/src/index.css:4489:  background: #fee2e2;
+client/src/index.css:4490:  color: #991b1b;
+client/src/index.css:4494:  background: #f1f5f9;
+client/src/index.css:4495:  color: #475569;
+client/src/index.css:5522:  background: linear-gradient(135deg, #eac33b 0%, #d4a84b 100%);
+client/src/index.css:5523:  color: #2f5d5d;
+client/src/index.css:5529:  color: #eac33b;
+client/src/index.css:5534:  border: 2px solid #eac33b;
+client/src/index.css:5535:  color: #eac33b;
+client/src/index.css:5540:  background: linear-gradient(135deg, #f4c7c3 0%, #e6a9a4 100%);
+client/src/index.css:5541:  color: #2f5d5d;
+client/src/index.css:5547:  background: linear-gradient(135deg, #8fbf9f 0%, #5a8a6e 100%);
+client/src/index.css:5554:  background: linear-gradient(135deg, #2f5d5d 0%, #1f3f3f 100%);
+client/src/index.css:5555:  color: #eac33b;
+client/src/index.css:5561:  background: linear-gradient(135deg, #faf9f7 0%, #e5e5e5 100%);
+client/src/index.css:5562:  color: #2f5d5d;
+client/src/index.css:5569:  color: #2f5d5d;
+client/src/index.css:5574:  background: linear-gradient(135deg, #eac33b 0%, #f4c7c3 100%);
+client/src/index.css:5575:  color: #2f5d5d;
+client/src/index.css:5580:  background: linear-gradient(135deg, #8fbf9f 0%, #f4c7c3 100%);
+client/src/index.css:5581:  color: #2f5d5d;
+client/src/index.css:5641:  background: linear-gradient(90deg, transparent, #eac33b, transparent);
+client/src/index.css:5647:  background: linear-gradient(180deg, transparent, #eac33b, transparent);
+client/src/index.css:5655:  color: #2f5d5d;
+client/src/index.css:5663:  background: linear-gradient(135deg, #eac33b, #d4a84b);
+client/src/index.css:5664:  color: #2f5d5d;
+client/src/index.css:5676:  color: #2f5d5d;
+client/src/index.css:5685:  background: #2f5d5d;
+client/src/index.css:5686:  color: #faf9f7;
+client/src/index.css:5691:  color: #8B7023;
+client/src/index.css:5697:  border-left: 3px solid #eac33b;
+client/src/index.css:5725:  background: #f4c7c3;
+client/src/index.css:5726:  color: #2f5d5d;
+client/src/index.css:5730:  background: #8fbf9f;
+client/src/index.css:5735:  background: #2f5d5d;
+client/src/index.css:5746:  color: #059669;
+client/src/index.css:6617:  color: var(--glp-sage-deep, #062a2a);
+client/src/index.css:6622:  color: var(--glp-sage-deep, #062a2a);
+client/src/index.css:6626:  color: var(--glp-paper, #fcf6ea);
+client/src/index.css:6630:  color: var(--glp-paper, #fcf6ea);
+client/src/index.css:6635:  outline: 2px solid var(--glp-sage, #1ec890);
+client/src/index.css:6665:  color: var(--glp-sage, #1ec890);
+client/src/index.css:6683:    var(--glp-sage, #1ec890) 0%,
+client/src/index.css:6684:    var(--glp-sage-deep, #062a2a) 95%);
+client/src/index.css:6712:  scrollbar-color: var(--glp-sage-400, #6fa39a) transparent;
+client/src/index.css:6741:  scrollbar-color: var(--glp-sage-500, #88b8af) transparent;
+client/src/index.css:6747:  scrollbar-color: var(--glp-sage-400, #6fa39a) transparent;
+client/src/index.css:6757:  background: var(--glp-aurora-linear, var(--glp-sage-500, #88b8af));
+client/src/index.css:6921:  background-color: var(--glp-cream-50, #fdfaf3);
+client/src/index.css:6937:  border-color: var(--glp-sage-600, #4f8b80);
+client/src/index.css:6942:    0 0 0 1px var(--glp-sage-500, #6fa39a),
+client/src/index.css:6948:  background-color: var(--glp-sage-600, #4f8b80);
+client/src/index.css:6949:  border-color: var(--glp-sage-700, #3a6b62);
+client/src/index.css:6950:  box-shadow: 0 0 0 1px var(--glp-sage-700, #3a6b62),
+client/src/index.css:6969:  background: var(--glp-cream-50, #fdfaf3);
+client/src/index.css:6979:  border-color: var(--glp-sage-500, #6fa39a);
+client/src/index.css:6982:  background-color: var(--glp-sage-500, #6fa39a);
+client/src/index.css:6983:  border-color: var(--glp-sage-400, #88b8af);
+client/src/index.css:7030:  color: var(--glp-ink-800, #2d3748);
+client/src/index.css:7041:  color: var(--glp-sage-500, #6fa39a);
+client/src/index.css:7049:  color: var(--glp-cream-100, #f4ede0);
+client/src/index.css:7057:  color: var(--glp-sage-300, #a8d0c7);
+client/src/index.css:7069:  color: var(--glp-sage-600, #4f8b80);
+client/src/index.css:7074:  color: var(--glp-sage-300, #a8d0c7);
+client/src/index.css:7092:  background: #F7F4EE;
+client/src/index.css:7095:  background: #FFFFFF;
+client/src/index.css:7106: * Drop-in: <article class="polish-card" style="--card-accent:#A8C9A0">
+client/src/index.css:7113:  background: #FFFFFF;
+client/src/index.css:7128:  background: var(--card-accent, #A8C9A0);
+client/src/index.css:7144:  background: color-mix(in srgb, var(--card-accent, #A8C9A0) 14%, transparent);
+client/src/index.css:7145:  color: var(--card-accent, #A8C9A0);
+client/src/index.css:7152:  color: #2F5443;
+client/src/index.css:7159:  color: #5C6B62;
+client/src/index.css:7205:  color: #FFFFFF;
+client/src/index.css:7206:  background: linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%);
+client/src/index.css:7218:  outline: 3px solid #4A7E72;
+client/src/index.css:7236:  background: #f7f4ee;
+client/src/index.css:7237:  color: #2f4f4a;
+client/src/index.css:7260:  outline: 3px solid #f4b942;
+client/src/index.css:7346:  color: #355f56 !important;

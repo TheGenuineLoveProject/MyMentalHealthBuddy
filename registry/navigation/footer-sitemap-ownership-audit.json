@@ -1,0 +1,2833 @@
+{
+  "generatedAt": "2026-05-25T22:35:50.326Z",
+  "hits": [
+    {
+      "file": "client/src/App.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/App.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/App.jsx",
+      "target": "/sitemap"
+    },
+    {
+      "file": "client/src/_registry/components.json",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/AgeConsentGate.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/AgeConsentGate.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/components/BrandShell.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/ConsentBanner.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/DashboardCard.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/Footer.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/Footer.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/components/Footer.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/Footer.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/GlowFooter.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/GlowFooter.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/GlowFooter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/Microcopy.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/NewsletterSignup.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/PageTemplate.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/PageTemplate.module.css",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/PersistentDisclaimer.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/RouteGuard.jsx",
+      "target": "robots"
+    },
+    {
+      "file": "client/src/components/SEO.tsx",
+      "target": "robots"
+    },
+    {
+      "file": "client/src/components/SacredFooter.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/SacredFooter.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/components/SacredFooter.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/SacredFooter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/SacredForm.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/SacredForm.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/SacredForm.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/SacredForm.module.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/SacredGeometryBg.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/SafetyFooter.d.ts",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/SafetyFooter.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/SafetyFooter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/SocialLinks.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/admin/SOPMonitorPanel.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/attention/AttentionEcology.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/avatar/BuddyAvatar.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/avatar/BuddyAvatar.tsx",
+      "target": "robots"
+    },
+    {
+      "file": "client/src/components/content/ExamplesAccordion.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/creative/CreativeProblemSolver.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/disclaimers/PlatformDisclaimer.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/existential/ExistentialInquiry.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/layout/AppShell.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/layout/Footer.tsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/layout/Footer.tsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/components/layout/Footer.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/layout/Footer.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/layout/PageLayout.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/layout/PageScaffold.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/lumi/LumiBrandLockupImage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/lumi/LumiCustomizer.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/lumi/LumiMascot.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/lumi/LumiV6.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/lumi/TGLPMandalaImage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/mastery/DeepWorkTracker.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/mastery/MentalModelsLibrary.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/mastery/SkillForge.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/mindscape/MindscapeNavigator.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/moral/MoralReasoningLab.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/narrative/NarrativeIdentityStudio.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/sacred/SacredBackground.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/sacred/SacredFooter.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/sacred/SacredFooter.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/components/sacred/SacredFooter.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/sacred/SacredFooter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/sacred/SacredFooter.module.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/sacred/SacredFooter.module.css",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/sacred/index.js",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/safety/LegalFooter.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/safety/LegalFooter.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/safety/SafetyFooterStrip.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/safety/SafetyFooterStrip.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/ui/Card.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/ui/Card.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/ui/Card.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/ui/Footer.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/ui/Footer.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/components/ui/Footer.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/ui/Footer.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/ui/QuoteBlock.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/ui/ReflectionFooter.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/components/ui/ReflectionFooter.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/ui/ReflectionFooter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/ui/SafetyFooter.d.ts",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/ui/index.js",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/ui/table.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/values/ValuesClarification.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/wellness/SafetyFooter.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/wellness/SafetyFooter.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/wellness/WellnessPageShell.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/components/zen/BuddyBubble.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/components/zen/buddy-bubble.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/config/leadMagnets.ts",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/config/navConfig.js",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/config/navConfig.js",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/content/allRoutes.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/content/allRoutes.json",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/content/frameworks/wellnessMicrocopy.js",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/content/meta/integrationRegistry.ts",
+      "target": "/sitemap"
+    },
+    {
+      "file": "client/src/content/meta/integrationRegistry.ts",
+      "target": "robots"
+    },
+    {
+      "file": "client/src/content/meta/platformProcessRegistry.ts",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/content/meta/routeMeta.autogen.ts",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/content/meta/routeMeta.autogen.ts",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/content/microcopy/wellnessMicrocopy.ts",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/content/microcopy.js",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/content/processes/top50ProcessMap.ts",
+      "target": "robots"
+    },
+    {
+      "file": "client/src/content/routes.js",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/content/routes.js",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/content/searchIndex.ts",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/content/searchIndex.ts",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/data/nlpMiContent.js",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/features/community/DiscussionPage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/features/community/SharedReflectionsPage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/features/community/SharedReflectionsPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/features/daily/DailyFlow.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/hooks/useSEO.ts",
+      "target": "robots"
+    },
+    {
+      "file": "client/src/hooks/useWellnessContent.js",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/legal/PrivacyHighlights.tsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/lib/lumiAudio.js",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/lib/wellness/ensureWellnessCompliance.ts",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/lib/wellness/ensureWellnessCompliance.ts",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/lumi-crisis/governance/crisisSafetyRules.ts",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/lumi-disclaimer/disclaimer.ts",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/lumi-library/governance/librarySafetyRules.ts",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/lumi-registry/registry/lumiPagePlacementMap.ts",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/lumi-rituals/components/GuidedPresenceRitual.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/main.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/About.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/AboutApproachPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Admin.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/AdminLogin.jsx",
+      "target": "robots"
+    },
+    {
+      "file": "client/src/pages/AdvancedToolsPage.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/AffirmationsPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/AgentInteraction.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/BehaviorChangePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/BiometricDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Blog.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/BodyWellnessPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/BoundariesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/BreathingExercisesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CRMPage.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/CRMPage.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/CRMPage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/CalmingScenesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CanvaLanding.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/CanvaLanding.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/CanvaLanding.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/CanvaLanding.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CelebrationFlow.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Challenge.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ChallengeDay.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CheckIn.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CognitiveToolsPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CoherenceLadderPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CommunityFeed.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CommunityGuidelines.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CommunityHub.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ContentIndexPage.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/ContentIndexPage.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/ContentIndexPage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/ContentStudioPage.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CourseCatalog.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CreatorProfile.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/CrisisResources.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DailyPracticePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DailyReflection.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DailyRitualPage.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/DailyRitualPage.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DailyRoutinesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Dashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DataRetention.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/DataRetention.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/DataRetention.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DesignSystem.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/DesignSystem.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DesignSystemV2.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/DesignSystemV2.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/DiscernmentDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/EmotionalIntelligencePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ExamplesPage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/GlossaryPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/GratitudePractice.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/GroundingTechniquesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/GrowthPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/HealingJourneysPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/HealingLibraryPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/HowToGuidesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/InnerChildPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Invite.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/LegalPage.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/LegalPage.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/LegalPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Login.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/Login.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/MasteryToolsPage.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/MeditationGuidePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/MetaLearningPage.tsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/MirrorPage.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/MovementSnacksPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/NervousSystemFloodingPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/NewsPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Newsletter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Onboarding.tsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/Onboarding.tsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/OnboardingFlow.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/PeacescapePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/PerceptionRefinementPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/PermacultureWellnessPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Premium.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Presence.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/Presence.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/PressKit.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Pricing.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/PricingPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Privacy.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Privacy.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/ProfessionalResourcesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Profile.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/ProtocolBrowser.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ProtocolSession.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/PublicRoadmap.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/QAPage.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/RecoveryPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Register.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/Register.jsx",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/pages/ResearchEvidencePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ResetPassword.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ResourcesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/RoutinesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SafetyCenter.jsx",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/pages/SafetyCenter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SafetyPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SelfCareToolkitPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SelfLovePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SelfWorthReflectionPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SleepGuidePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SoulWellnessPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Start.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/StatePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/StressResponseGuidePage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/StudyVaultPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SubscriberBenefitsPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/SupportPage.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/SystemMapPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/TalkTopics.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Terms.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/ToolsPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/TwelvePracticesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Upgrade.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ValuesFinderPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/ValuesPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/Wellness.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/WellnessDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/WellnessGlossaryPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/WellnessHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/WellnessToolsHub.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/WireframeTemplates.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/WireframeTemplates.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/WisdomToolsPage.tsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/_quarantine/legacy-landing/Home.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/_quarantine/legacy-landing/LandingV2.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/account/DeleteAccount.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/account/OrderHistory.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/account/Security.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/account/Subscription.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AdminPublishing.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AdminPublishingToday.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AdminSocial.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AdminTools.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AdminTools.jsx.phase1.bak",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AdminTools.jsx.phase2.bak",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AdminUsers.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AnalyticsDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/AuditLogExplorer.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/BillingViewer.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/CommandCenter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/ContentStudioAdmin.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/EngagementDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/FeatureFlags.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/FeedbackAggregator.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/HealthDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/NarrativeDrafts.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/NewsletterAdmin.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/RevenueAdmin.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/RolesPermissions.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SecurityDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SocialAnalytics.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SocialCalendar.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SocialDashboard.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SocialGenerator.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SocialLibrary.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SocialStudioAdmin.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/admin/SystemAlerts.jsx",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/pages/admin/SystemAlerts.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/help/RefundHelp.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/AcceptanceHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/AnxietyHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/BodyMindHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/BoundariesHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/BreathworkHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/CommunicationHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/ConfidenceHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/CopingSkillsHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/CreativityHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/DailyPracticeHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/EnergyManagementHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/FocusHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/ForgivenessHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/GratitudeHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/GriefHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/HabitsHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/HealingJourneyHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/InnerPeaceHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/InnerWorkHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/JournalingHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/LifePurposeHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/MindfulnessHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/MotivationHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/NervousSystemHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/PersonalGrowthHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/PresenceHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/RelationshipsHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/ResilienceHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfAwarenessHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfCareHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfCompassionHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfDiscoveryHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/SelfWorthHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/SleepHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/SpiritualityHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/StressHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/ThoughtworkHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/TraumaHealingHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/hubs/WisdomHubPage.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/pathways/CalmPlan.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/pathways/Favorites.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/pathways/PathwaysHome.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/pathways/ProgressStreaks.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/pathways/ReflectionHistory.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/pathways/ValuesToActions.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/preferences/NotificationPreferences.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/preferences/SafetyPreferences.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/AweMicrodose.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/BodyScan.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/BoundaryBuilderTool.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/BreathPacer.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/BreathTool.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/BreathingTool.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/CognitiveDistortionChecker.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/CommunityCheckin.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/CompassionBreak.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/DigitalSunset.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/GAD7Assessment.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/GriefLetter.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/ManipulationDetector.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/MeaningMap.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/NervousSystemCheck.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/PHQ9Assessment.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/Reframe.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/RepairScript.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/SleepQualityCalculator.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/UrgeSurf.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/pages/tools/index.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/policy/platformPolicy.ts",
+      "target": "/privacy"
+    },
+    {
+      "file": "client/src/policy/platformPolicy.ts",
+      "target": "/terms"
+    },
+    {
+      "file": "client/src/sections/ValueProposition.jsx",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/sections/VisualBenefits.jsx",
+      "target": "/consent"
+    },
+    {
+      "file": "client/src/styles/brand.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/styles/brand.css",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/styles/canva-landing.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/styles/canva-landing.css",
+      "target": "Footer"
+    },
+    {
+      "file": "client/src/styles/lumi-admin.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/styles/lumi-links.css",
+      "target": "footer"
+    },
+    {
+      "file": "client/src/utils/exportPdf.js",
+      "target": "footer"
+    },
+    {
+      "file": "public/robots.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "public/robots.txt",
+      "target": "robots"
+    },
+    {
+      "file": "public/sitemap.xml",
+      "target": "/sitemap"
+    },
+    {
+      "file": "server/awareness/tutor/engine.mjs",
+      "target": "footer"
+    },
+    {
+      "file": "server/awareness/tutor/lessons.seed.mjs",
+      "target": "footer"
+    },
+    {
+      "file": "server/contracts/content/b1-content-contract.mjs",
+      "target": "robots"
+    },
+    {
+      "file": "server/contracts/content-model.schema.mjs",
+      "target": "robots"
+    },
+    {
+      "file": "server/routes/awareness.mjs",
+      "target": "footer"
+    },
+    {
+      "file": "server/routes/content-generator.mjs",
+      "target": "footer"
+    },
+    {
+      "file": "server/routes/content.mjs",
+      "target": "robots"
+    },
+    {
+      "file": "server/routes/feed.mjs",
+      "target": "/privacy"
+    },
+    {
+      "file": "server/routes/feed.mjs",
+      "target": "/terms"
+    },
+    {
+      "file": "server/routes/feed.mjs",
+      "target": "/sitemap"
+    },
+    {
+      "file": "server/routes/feed.mjs",
+      "target": "robots"
+    },
+    {
+      "file": "server/routes/protocols.mjs",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/AI_GUARDRAILS.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/AI_PLATFORM_PERFECTION_PROMPT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/ARCHITECTURE_RULES.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/CANONICAL.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/CANVA_TEMPLATE_SPEC.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/CAPABILITY_REGISTRY.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/CHANGELOG.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/CHANGELOG.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/COMPONENT_GRAVITY.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/CONTENT_POLICY.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/CONTENT_POLICY.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/DEDUP_REPORT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/DRIFT_SCAN.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/DRY-RUN-AUDIT-REPORT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/DRY-RUN-AUDIT-REPORT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/DUPLICATE_REPORT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/INFORMATION_ARCHITECTURE.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/INFORMATION_ARCHITECTURE.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/LAUNCH_CHECKLIST.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/LAUNCH_CHECKLIST.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/LAUNCH_READY.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/LAUNCH_READY.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/LINK_AUDIT_REPORT.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/LINK_AUDIT_REPORT.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/LINK_AUDIT_REPORT.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/NARRATIVE_AMPLIFICATION_HARDENING_COMPLETE.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/NARRATIVE_AMPLIFICATION_HARDENING_COMPLETE.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/NARRATIVE_AMPLIFICATION_HARDENING_COMPLETE.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/NARRATIVE_BASELINE.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/NARRATIVE_BASELINE.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/NARRATIVE_PHASE_BASELINE.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/NARRATIVE_PHASE_BASELINE.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/NAVIGATION_MAP.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/NAVIGATION_MAP.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/NAVIGATION_MAP.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/NEWSLETTER_PLAYBOOK.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/NEWSLETTER_READINESS.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/NEWSLETTER_READINESS.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/NEWSLETTER_READINESS.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/NO_DUPES_REPORT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/NO_DUPES_REPORT.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/PAGE_OPTIMIZATION_KIT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/PAGE_OPTIMIZATION_KIT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/PAGE_RUNLIST.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/PAGE_RUNLIST.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/PAGE_RUNLIST.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/PHASE_STATUS.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/PUBLIC_SURFACE_MAP.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/PUBLIC_SURFACE_MAP.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/PUBLIC_SURFACE_MAP.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/PUBLISHING_BASELINE.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/PUBLISHING_BASELINE.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/PUBLISHING_BASELINE.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/PUBLISHING_NEWSLETTER_SOCIAL_READY.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/PUBLISHING_SPINE_COMPLETE.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/PUBLISHING_SYSTEM_COMPLETE.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/ROADMAP_P051_P100.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/ROADMAP_P051_P100.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/ROADMAP_P051_P100.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/ROADMAP_P101_P150.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/ROADMAP_P101_P150.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/ROADMAP_TOP50.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/ROUTES.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/ROUTES.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/ROUTE_MANIFEST.json",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/ROUTE_MANIFEST.json",
+      "target": "robots"
+    },
+    {
+      "file": "docs/ROUTE_MAP.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/ROUTE_MAP.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/ROUTE_MAP.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/SECURITY_POSTURE.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/SELECTIVE_VISIBILITY_COMPLETE.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/SELECTIVE_VISIBILITY_COMPLETE.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/TOP_50_PROCESSES.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/WORK_LEDGER.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/WORK_LEDGER.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/architecture/ROUTE_REGISTRY.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/architecture.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/architecture.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/audits/CONTENT_COHESION_AUDIT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/audits/CONTENT_COHESION_AUDIT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/audits/DOMAIN_SEPARATION_AUDIT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/audits/DOMAIN_SEPARATION_AUDIT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/audits/DUPLICATION_SCAN.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/audits/DUPLICATION_SCAN.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/audits/INVENTORY.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/audits/phase12-surface-drift-2026-05-13.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/batch-10/deep-scan.json",
+      "target": "robots"
+    },
+    {
+      "file": "docs/batch-10/deep-scan.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/batch-12/ui-overcrowding-audit.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/batch-14/safety-copy-scan.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/batch-9/deep-scan.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/batch-9/deep-scan.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/batch-9/deep-scan.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/canonical/CANONICAL_FEATURE_TIERS.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/changelog.md",
+      "target": "/consent"
+    },
+    {
+      "file": "docs/changelog.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/changelog.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/changelog.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/changelog.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/changelog.md.bak",
+      "target": "/consent"
+    },
+    {
+      "file": "docs/changelog.md.bak",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/changelog.md.bak",
+      "target": "footer"
+    },
+    {
+      "file": "docs/changelog.md.bak",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/changelog.md.bak",
+      "target": "robots"
+    },
+    {
+      "file": "docs/ci/route-snapshot.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/ci/route-snapshot.json",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/content-qa.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/content-style.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/design/NAVIGATION_MAP.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/design/NAVIGATION_MAP.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/design/NAVIGATION_MAP.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/duplicates/collisions-latest.json",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/duplicates/collisions-latest.json",
+      "target": "robots"
+    },
+    {
+      "file": "docs/duplicates/scan-latest.json",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/engineering/ux-contracts.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/governance/CANONICAL_ROUTE_TAXONOMY.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/integration-batches/integration-001-050.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/integration-batches/integration-001-050.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/integration-batches/integration-001-050.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/inventory/AI_SURFACE_SCAN.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/inventory/AI_SURFACE_SCAN.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/inventory/AI_SURFACE_SCAN.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/inventory/AI_SURFACE_SCAN.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/inventory/AI_SURFACE_SCAN.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/AI_SURFACE_SCAN.txt",
+      "target": "robots"
+    },
+    {
+      "file": "docs/inventory/API_USAGE_SCAN.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/inventory/API_USAGE_SCAN.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/inventory/API_USAGE_SCAN.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/inventory/API_USAGE_SCAN.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/inventory/API_USAGE_SCAN.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/API_USAGE_SCAN.txt",
+      "target": "robots"
+    },
+    {
+      "file": "docs/inventory/BUILD_SYSTEM_SCAN.txt",
+      "target": "robots"
+    },
+    {
+      "file": "docs/inventory/COMPONENT_LIST.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/DATABASE_SCAN.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/inventory/DATABASE_SCAN.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/inventory/DATABASE_SCAN.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/inventory/DATABASE_SCAN.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/inventory/DATABASE_SCAN.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/DATABASE_SCAN.txt",
+      "target": "robots"
+    },
+    {
+      "file": "docs/inventory/PHASE_66_ROUTE_CANDIDATE_FILES.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/PHASE_67_GROWTH_HOME_REFLECTION_FILES.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/PHASE_68_SENSITIVE_ROUTE_CRISIS_AUDIT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/inventory/PHASE_68_SENSITIVE_ROUTE_CRISIS_AUDIT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/PHASE_69_ROUTE_DECLARATION_SCAN.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/inventory/PHASE_69_ROUTE_DECLARATION_SCAN.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/inventory/PHASE_69_ROUTE_DECLARATION_SCAN.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/inventory/PHASE_70_FRONTEND_ROUTE_PATHS.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/inventory/PHASE_70_FRONTEND_ROUTE_PATHS.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/inventory/PHASE_70_FRONTEND_ROUTE_PATHS.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/inventory/PHASE_70_TOOL_LIKE_FILES.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/PHASE_71_ALL_TOOL_SURFACES.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/inventory/ROUTE_FAMILY_LOWRISK_PHASE_67.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/inventory/ROUTE_FAMILY_LOWRISK_PHASE_67.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/inventory/ROUTE_FAMILY_LOWRISK_PHASE_67.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/inventory/ROUTE_SCAN.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/inventory/ROUTE_SCAN.txt",
+      "target": "robots"
+    },
+    {
+      "file": "docs/inventory/route-inventory.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/inventory/route-inventory.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/maps/USER_JOURNEY_MAP.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/maps/USER_JOURNEY_MAP.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/marketing/templates/quote-card.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/migration/avatar-legacy-audit.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/migration/avatar-migration-checklist.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/operations/DISASTER_RECOVERY_RUNBOOK.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/operations/LAUNCH_APPROVAL_MATRIX.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/operations/LAUNCH_APPROVAL_MATRIX.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_HARDENING_CHECKLIST.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_HARDENING_CHECKLIST.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_HARDENING_CHECKLIST.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_HARDENING_CHECKLIST.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_HARDENING_CHECKLIST.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_PROBE_CHECKLIST.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_PROBE_CHECKLIST.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/operations/PRODUCTION_PROBE_CHECKLIST.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/operations/T_MINUS_1H_LAUNCH_SIGNOFF.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/operations/T_MINUS_1H_LAUNCH_SIGNOFF.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/operations/T_MINUS_1H_LAUNCH_SIGNOFF.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/platform/top-platform-processes-matrix.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/platform/top-platform-processes-matrix.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/platform-analysis-2026-01-27.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/platform-map/PHASE_62_ROUTE_FILES.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/platform-map/PHASE_63_DUPLICATE_ROUTE_CANDIDATES.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/platform-map/PHASE_65_ROUTE_DECISION_LEDGER.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/process-batches/batch-001.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/process-batches/batch-001.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/process-batches/batch-002.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/process-batches/batch-002.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/process-engine/batches/process-101-150.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/prompts/NAV_DOCTOR.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/prompts/NAV_DOCTOR.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/prompts/STYLE_OPTIMIZATION.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/prompts/VISUAL_SYSTEM.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/registry/endpoints.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/registry/endpoints.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/registry/ui-routes.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/registry/ui-routes.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/replit-history.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/replit-history.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/replit-history.md.bak",
+      "target": "footer"
+    },
+    {
+      "file": "docs/replit-history.md.bak",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/CANONICAL_TAXONOMY_AUDIT.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_18_PRODUCTION_SNAPSHOT_20260522T185852Z.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/PHASE_18_PRODUCTION_SNAPSHOT_20260522T185852Z.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/reports/PHASE_29_RELEASE_READINESS.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/reports/PHASE_32_PRODUCTION_HARDENING.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/PHASE_32_PRODUCTION_HARDENING.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/reports/PHASE_33_HARDENING_VERIFICATION.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/PHASE_33_HARDENING_VERIFICATION.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_33_HARDENING_VERIFICATION.md",
+      "target": "robots"
+    },
+    {
+      "file": "docs/reports/PHASE_55_PLATFORM_COHESION_AUDIT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_55_PLATFORM_COHESION_AUDIT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_67_LOWRISK_ROUTE_FAMILY.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_67_LOWRISK_ROUTE_FAMILY.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/PHASE_67_LOWRISK_ROUTE_FAMILY.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_68_CRISIS_FOOTER_AUDIT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_68_CRISIS_FOOTER_AUDIT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_69_DUPLICATE_ROUTE_AUDIT.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_74_DISCOVERY_ROUTE_VISIBILITY.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_75_NAV_CANDIDATES.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/bundle_sizes.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/client_files_20260524_032935.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/dashboard_usage.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/dashboard_usage.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/routes_raw.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/routes_raw.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/routes_raw.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/PHASE_77_GOVERNANCE/wellness_tools_refs.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_78_ADMIN_DIAGNOSTIC_CHUNK_SCAN.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_78_ADMIN_DIAGNOSTIC_CHUNK_SCAN.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/PHASE_78_ADMIN_DIAGNOSTIC_CHUNK_SCAN.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/PHASE_78_ADMIN_DIAGNOSTIC_CHUNK_SCAN.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_78_ADMIN_DIAGNOSTIC_CHUNK_SCAN.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_78_ADMIN_DIAGNOSTIC_CHUNK_SCAN.txt",
+      "target": "robots"
+    },
+    {
+      "file": "docs/reports/PHASE_78_LARGE_ASSETS_AUDIT.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_79_SOURCE_IMAGE_AUDIT.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_80_AVAILABLE_WEBP_VARIANTS.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_80_LOGO_IMPORT_TARGETS.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_80_STEP_4_WEBP_ADOPTION_NOOP.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_80_WEBP_FILES.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_81_DUPLICATE_ROUTES.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_81_ROUTE_DISCOVERABILITY.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_81_ROUTE_DISCOVERABILITY.json",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/PHASE_81_ROUTE_DISCOVERABILITY.json",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/PHASE_83_DUPLICATE_ROUTE_DECISION.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_83_DUPLICATE_ROUTE_LOCATIONS.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_92_BUNDLE_OWNERSHIP.json",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_92_BUNDLE_OWNERSHIP.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_93_DISCOVERABILITY_AUDIT.md",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/PHASE_94_NAVIGATION_MANIFEST.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_97_PRIVACY_ROUTE_AUDIT.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_98_PRIVACY_ROUTE_OWNERSHIP_MAP.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_98_PRIVACY_ROUTE_OWNERSHIP_MAP.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/PHASE_98_PRIVACY_ROUTE_OWNERSHIP_MAP.md",
+      "target": "/consent"
+    },
+    {
+      "file": "docs/reports/PHASE_98_PRIVACY_ROUTE_OWNERSHIP_MAP.md",
+      "target": "/data-policy"
+    },
+    {
+      "file": "docs/reports/PHASE_98_PRIVACY_ROUTE_OWNERSHIP_MAP.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/PHASE_98_PRIVACY_ROUTE_OWNERSHIP_MAP.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/PHASE_99_PRIVACY_CANONICAL_DECISION_LOCK.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/PHASE_99_PRIVACY_CANONICAL_DECISION_LOCK.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/PHASE_99_PRIVACY_CANONICAL_DECISION_LOCK.md",
+      "target": "/consent"
+    },
+    {
+      "file": "docs/reports/PHASE_99_PRIVACY_CANONICAL_DECISION_LOCK.md",
+      "target": "/data-policy"
+    },
+    {
+      "file": "docs/reports/PHASE_99_PRIVACY_CANONICAL_DECISION_LOCK.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/phase19_20260522T190303Z/configs/package-lock.json",
+      "target": "robots"
+    },
+    {
+      "file": "docs/reports/phase24_largest_chunks.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/phase25_20260522T202553Z_artifacts/top100_class_fragments.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/phase25_css_files.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/phase26_duplicate_asset_names.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/phase26_largest_assets.txt",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/probe-routes.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/probe-routes.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.json",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.json",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.json",
+      "target": "footer"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.json",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/public-surface-audit.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/reports/route-snapshot.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/reports/route-snapshot.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/reports/route-snapshot.md",
+      "target": "/sitemap"
+    },
+    {
+      "file": "docs/runbooks/LAUNCH_OPERATIONS_RUNBOOK.md",
+      "target": "footer"
+    },
+    {
+      "file": "docs/scan-deadcode-result.json",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/scan-duplicates-result.json",
+      "target": "Footer"
+    },
+    {
+      "file": "docs/top-50.md",
+      "target": "/privacy"
+    },
+    {
+      "file": "docs/top-50.md",
+      "target": "/terms"
+    },
+    {
+      "file": "docs/verification/lumi-boundaries/verification/phase24-checklist.md",
+      "target": "footer"
+    },
+    {
+      "file": "registry/discoverability/discoverability-registry.json",
+      "target": "Footer"
+    },
+    {
+      "file": "registry/navigation/navigation-manifest.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "registry/privacy/PRIVACY_CANONICAL_DECISION_LOCK.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "registry/privacy/PRIVACY_CANONICAL_DECISION_LOCK.json",
+      "target": "/terms"
+    },
+    {
+      "file": "registry/privacy/PRIVACY_CANONICAL_DECISION_LOCK.json",
+      "target": "/consent"
+    },
+    {
+      "file": "registry/privacy/PRIVACY_CANONICAL_DECISION_LOCK.json",
+      "target": "/data-policy"
+    },
+    {
+      "file": "registry/privacy/PRIVACY_CANONICAL_DECISION_LOCK.json",
+      "target": "Footer"
+    },
+    {
+      "file": "registry/privacy/privacy-route-ownership-map.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "registry/privacy/privacy-route-ownership-map.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "registry/privacy/privacy-route-ownership-map.txt",
+      "target": "/consent"
+    },
+    {
+      "file": "registry/privacy/privacy-route-ownership-map.txt",
+      "target": "footer"
+    },
+    {
+      "file": "registry/privacy/privacy-route-ownership-map.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "registry/privacy/privacy-route-scan.txt",
+      "target": "/privacy"
+    },
+    {
+      "file": "registry/privacy/privacy-route-scan.txt",
+      "target": "/terms"
+    },
+    {
+      "file": "registry/privacy/privacy-route-scan.txt",
+      "target": "/consent"
+    },
+    {
+      "file": "registry/privacy/privacy-route-scan.txt",
+      "target": "/sitemap"
+    },
+    {
+      "file": "registry/privacy/privacy-route-scan.txt",
+      "target": "footer"
+    },
+    {
+      "file": "registry/privacy/privacy-route-scan.txt",
+      "target": "Footer"
+    },
+    {
+      "file": "registry/privacy/privacy-route-scan.txt",
+      "target": "robots"
+    },
+    {
+      "file": "registry/routes/canonical-route-registry.json",
+      "target": "/privacy"
+    },
+    {
+      "file": "registry/routes/canonical-route-registry.json",
+      "target": "/terms"
+    }
+  ]
+}

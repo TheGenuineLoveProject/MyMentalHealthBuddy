@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "mode": "governed-guided-journeys",
+  "primaryLaw": "Guide users gently without diagnosis, coercion, manipulation, or healing-data monetization.",
+  "journeys": [
+    {
+      "id": "anxiety-grounding",
+      "name": "Anxiety Grounding Journey",
+      "state": "anxious",
+      "firstStep": "breathing-or-grounding-tool",
+      "boundary": "non-clinical-support-only"
+    },
+    {
+      "id": "burnout-recovery",
+      "name": "Burnout Recovery Journey",
+      "state": "exhausted",
+      "firstStep": "low-effort-reset",
+      "boundary": "non-clinical-support-only"
+    },
+    {
+      "id": "sleep-restoration",
+      "name": "Sleep Restoration Journey",
+      "state": "tired",
+      "firstStep": "calm-room-or-sleep-tool",
+      "boundary": "non-clinical-support-only"
+    },
+    {
+      "id": "self-worth",
+      "name": "Self-Worth Journey",
+      "state": "discouraged",
+      "firstStep": "gentle-reflection",
+      "boundary": "non-clinical-support-only"
+    },
+    {
+      "id": "emotional-overwhelm",
+      "name": "Emotional Overwhelm Journey",
+      "state": "overwhelmed",
+      "firstStep": "reduce-cognitive-load",
+      "boundary": "crisis-resources-visible"
+    }
+  ],
+  "forbidden": [
+    "diagnosis",
+    "prescribing",
+    "suicidality-determination",
+    "dark-patterns",
+    "coercive-retention",
+    "healing-data-monetization",
+    "dependency-framing"
+  ],
+  "qualityGates": [
+    "build",
+    "health",
+    "routes",
+    "accessibility",
+    "privacy",
+    "content-coherence",
+    "rollback"
+  ]
+}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Users, ArrowLeft, RefreshCw, Shield, UserCheck, Search, Loader2, Activity, TrendingUp, Clock, Mail } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";

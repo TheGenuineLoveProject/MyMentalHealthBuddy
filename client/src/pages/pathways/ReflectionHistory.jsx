@@ -4,9 +4,9 @@ import { BookOpen, Calendar, Search, Eye, ArrowRight, Loader2, AlertCircle } fro
 import { useQuery } from "@tanstack/react-query";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
-import { Input } from "@/components/ui/Input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
 const TYPE_COLORS = {

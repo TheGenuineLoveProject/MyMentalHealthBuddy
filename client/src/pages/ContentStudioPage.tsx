@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { FileText, Save, Loader2, ChevronLeft, Copy, Sparkles, FileJson, FileCode, MessageSquare } from 'lucide-react';
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/Input";
+import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient.js";

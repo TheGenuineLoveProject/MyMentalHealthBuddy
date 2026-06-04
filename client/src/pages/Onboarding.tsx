@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { Heart, Sparkles, Shield, Brain, Wind, Target, ChevronRight, ChevronLeft, Check, Sun, Moon, Leaf, Flower2, Users } from 'lucide-react';

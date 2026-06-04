@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Heart, BookOpen, Sparkles, Users, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/ReflectionFooter";
 

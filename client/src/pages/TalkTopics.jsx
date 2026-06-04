@@ -5,7 +5,6 @@ import {
   RefreshCw, BookOpen, ArrowRight, Star, Shield,
   Lightbulb, Compass, Sun, Moon, Feather, Target
 } from 'lucide-react';
-import TglpNavbar from '../components/TglpNavbar';
 import SafetyFooter from '../components/ui/ReflectionFooter';
 
 const TOPIC_CATEGORIES = [
@@ -159,8 +158,6 @@ export default function TalkTopics() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-cream-50 to-white dark:from-gray-900 dark:to-gray-950">
-      <TglpNavbar />
-      
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <header className="text-center mb-12">
           <div className="inline-flex items-center gap-2 text-sage-600 dark:text-sage-400 mb-4">

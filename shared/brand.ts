@@ -5,33 +5,59 @@
 
 export const BRAND = {
   name: "MyMentalHealthBuddy",
+  shortName: "MMHB",
+
   byline: "by The Genuine Love Project",
-  fullName: "MyMentalHealthBuddy by The Genuine Love Project",
+
+  fullName:
+    "MyMentalHealthBuddy by The Genuine Love Project",
+
   tagline: "Live in Genuine Love",
+
   mission:
     "Helping people heal, grow, and align through everyday self-love and consciousness.",
+
   seo: {
-    title: "MyMentalHealthBuddy by The Genuine Love Project — Live in Genuine Love",
+    title:
+      "MyMentalHealthBuddy by The Genuine Love Project — Live in Genuine Love",
+
     description:
       "AI-powered mental wellness platform for self-love, healing, and emotional growth — private, compassionate, available 24/7.",
   },
+
+  logo: {
+    assets: {
+      logoMark: "/brand/logo.svg",
+    },
+
+    concept: "Infinity-Heart Fusion",
+
+    meaning:
+      "Infinite compassion, healing, and growth",
+  },
+
   colors: {
-    // Core Brand (Serenity Sage family + paper + ink + gold accent)
-    primary: "#8FBF9F", // Serenity Sage
+    // Core Brand
+    primary: "#8FBF9F",
     sage: "#8FBF9F",
+
     sageDark: "#5A9A6E",
+
     paper: "#FAF9F7",
     background: "#FAF9F7",
+
     ink: "#2D3748",
     text: "#2D3748",
+
     mist: "#F8FAFC",
+
     border: "#E5E7EB",
 
     // Accent
     gold: "#D4AF37",
     accent: "#D4AF37",
 
-    // System (allowed but keep minimal)
+    // System
     success: "#22C55E",
     warning: "#F59E0B",
     danger: "#EF4444",
@@ -40,7 +66,8 @@ export const BRAND = {
 } as const;
 
 /**
- * Allowlist used by brand scanners / cleanup scripts to avoid false positives.
+ * Allowlist used by brand scanners / cleanup scripts
+ * to avoid false positives.
  * ONLY hex strings here. No objects.
  */
 export const BRAND_HEX_ALLOWLIST = [
@@ -61,5 +88,9 @@ export const BRAND_HEX_ALLOWLIST = [
   BRAND.colors.info,
 ].map((x) => x.toUpperCase());
 
-export type BrandColor = keyof typeof BRAND.colors;
-export const getBrandHex = (key: BrandColor) => BRAND.colors[key];
+export type BrandColor =
+  keyof typeof BRAND.colors;
+
+export const getBrandHex = (
+  key: BrandColor
+) => BRAND.colors[key];

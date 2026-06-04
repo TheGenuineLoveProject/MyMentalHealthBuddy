@@ -1,3 +1,11 @@
-client/dist
-dist
 node_modules
+dist
+coverage
+backups
+.hx-backups
+production-backups
+archives
+docs/reports
+temp
+attached_assets
+static-export

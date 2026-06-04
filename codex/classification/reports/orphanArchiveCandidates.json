@@ -1,0 +1,3252 @@
+[
+  {
+    "component": "AccessibilityToolbar.jsx",
+    "path": "client/src/components/AccessibilityToolbar.jsx",
+    "lines": 209,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AchievementBadge.jsx",
+    "path": "client/src/components/AchievementBadge.jsx",
+    "lines": 276,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AchievementBadges.jsx",
+    "path": "client/src/components/AchievementBadges.jsx",
+    "lines": 293,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AchievementSystem.jsx",
+    "path": "client/src/components/AchievementSystem.jsx",
+    "lines": 329,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AffirmationCards.jsx",
+    "path": "client/src/components/AffirmationCards.jsx",
+    "lines": 339,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AffirmationDeck.jsx",
+    "path": "client/src/components/AffirmationDeck.jsx",
+    "lines": 240,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AgeConfirmationModal.tsx",
+    "path": "client/src/components/AgeConfirmationModal.tsx",
+    "lines": 169,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AgeConsentGate.jsx",
+    "path": "client/src/components/AgeConsentGate.jsx",
+    "lines": 172,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AIChat.jsx",
+    "path": "client/src/components/AIChat.jsx",
+    "lines": 76,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AIChatPanel.tsx",
+    "path": "client/src/components/chat/AIChatPanel.tsx",
+    "lines": 262,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AICompanion.jsx",
+    "path": "client/src/components/AICompanion.jsx",
+    "lines": 394,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AIHealthPipeline.jsx",
+    "path": "client/src/components/admin/AIHealthPipeline.jsx",
+    "lines": 182,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AIKnowledgeBaseSummary.jsx",
+    "path": "client/src/components/admin/AIKnowledgeBaseSummary.jsx",
+    "lines": 149,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AIKnowledgeHub.jsx",
+    "path": "client/src/components/admin/AIKnowledgeHub.jsx",
+    "lines": 128,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AIWellnessConcierge.jsx",
+    "path": "client/src/components/AIWellnessConcierge.jsx",
+    "lines": 288,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AngerManagement.jsx",
+    "path": "client/src/components/AngerManagement.jsx",
+    "lines": 332,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AnimatedPageTransition.jsx",
+    "path": "client/src/components/AnimatedPageTransition.jsx",
+    "lines": 99,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AnxietyRelief.jsx",
+    "path": "client/src/components/AnxietyRelief.jsx",
+    "lines": 385,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "App.tsx",
+    "path": "client/src/components/App.tsx",
+    "lines": 36,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AppShell.tsx",
+    "path": "client/src/components/layout/AppShell.tsx",
+    "lines": 57,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AttentionEcology.d.ts",
+    "path": "client/src/components/attention/AttentionEcology.d.ts",
+    "lines": 3,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AttentionEcology.jsx",
+    "path": "client/src/components/attention/AttentionEcology.jsx",
+    "lines": 261,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AutodidactForge.tsx",
+    "path": "client/src/components/autodidact/AutodidactForge.tsx",
+    "lines": 345,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "badge.tsx",
+    "path": "client/src/components/ui/badge.tsx",
+    "lines": 34,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "Badges.jsx",
+    "path": "client/src/components/Badges.jsx",
+    "lines": 294,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BeliefMapper.tsx",
+    "path": "client/src/components/beliefs/BeliefMapper.tsx",
+    "lines": 162,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BenefitsBlock.d.ts",
+    "path": "client/src/components/BenefitsBlock.d.ts",
+    "lines": 14,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BenefitsSection.jsx",
+    "path": "client/src/components/BenefitsSection.jsx",
+    "lines": 255,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BenefitStrip.tsx",
+    "path": "client/src/components/BenefitStrip.tsx",
+    "lines": 16,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BiasBlindSpots.tsx",
+    "path": "client/src/components/bias/BiasBlindSpots.tsx",
+    "lines": 240,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BodyScanMeditation.jsx",
+    "path": "client/src/components/BodyScanMeditation.jsx",
+    "lines": 209,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BoundaryBuilder.jsx",
+    "path": "client/src/components/BoundaryBuilder.jsx",
+    "lines": 295,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BrandGlow.tsx",
+    "path": "client/src/components/BrandGlow.tsx",
+    "lines": 30,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BrandLogo.jsx",
+    "path": "client/src/components/brand/BrandLogo.jsx",
+    "lines": 68,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BrandLogo.tsx",
+    "path": "client/src/components/BrandLogo.tsx",
+    "lines": 40,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BrandShell.jsx",
+    "path": "client/src/components/BrandShell.jsx",
+    "lines": 96,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BrandSpinner.jsx",
+    "path": "client/src/components/ui/BrandSpinner.jsx",
+    "lines": 25,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "Breadcrumbs.jsx",
+    "path": "client/src/components/Breadcrumbs.jsx",
+    "lines": 53,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BreathingExercise.jsx",
+    "path": "client/src/components/BreathingExercise.jsx",
+    "lines": 312,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "BuddyPanel.tsx",
+    "path": "client/src/components/avatar/BuddyPanel.tsx",
+    "lines": 242,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CalmModeToggle.jsx",
+    "path": "client/src/components/ui/CalmModeToggle.jsx",
+    "lines": 76,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CanonicalNavbar.jsx",
+    "path": "client/src/components/navigation/CanonicalNavbar.jsx",
+    "lines": 95,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CBTThoughtDiary.jsx",
+    "path": "client/src/components/CBTThoughtDiary.jsx",
+    "lines": 378,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CelebrationOverlay.tsx",
+    "path": "client/src/components/CelebrationOverlay.tsx",
+    "lines": 169,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ChatWidget.tsx",
+    "path": "client/src/components/ChatWidget.tsx",
+    "lines": 194,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ClarityCard.d.ts",
+    "path": "client/src/components/content/ClarityCard.d.ts",
+    "lines": 11,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CodeCopilotPanel.tsx",
+    "path": "client/src/components/CodeCopilotPanel.tsx",
+    "lines": 102,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CommunityBoundary.tsx",
+    "path": "client/src/components/community/CommunityBoundary.tsx",
+    "lines": 55,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ConsciousnessRegistryPanel.jsx",
+    "path": "client/src/components/admin/ConsciousnessRegistryPanel.jsx",
+    "lines": 446,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ConsentBanner.jsx",
+    "path": "client/src/components/ConsentBanner.jsx",
+    "lines": 166,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ConsentRibbon.tsx",
+    "path": "client/src/components/wellness/ConsentRibbon.tsx",
+    "lines": 30,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ContentCredit.jsx",
+    "path": "client/src/components/legal/ContentCredit.jsx",
+    "lines": 33,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ContentTierCompiler.jsx",
+    "path": "client/src/components/content/ContentTierCompiler.jsx",
+    "lines": 78,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CopingStrategies.jsx",
+    "path": "client/src/components/CopingStrategies.jsx",
+    "lines": 408,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CreativeExpression.jsx",
+    "path": "client/src/components/CreativeExpression.jsx",
+    "lines": 400,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CreativeProblemSolver.d.ts",
+    "path": "client/src/components/creative/CreativeProblemSolver.d.ts",
+    "lines": 3,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CreativeProblemSolver.jsx",
+    "path": "client/src/components/creative/CreativeProblemSolver.jsx",
+    "lines": 280,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CRMWidgets.jsx",
+    "path": "client/src/components/ui/CRMWidgets.jsx",
+    "lines": 336,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CustomizerPanel.jsx",
+    "path": "client/src/components/peacescape/CustomizerPanel.jsx",
+    "lines": 270,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DailyAffirmations.jsx",
+    "path": "client/src/components/DailyAffirmations.jsx",
+    "lines": 258,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DailyInsight.jsx",
+    "path": "client/src/components/DailyInsight.jsx",
+    "lines": 30,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DailyOpsChecklist.jsx",
+    "path": "client/src/components/admin/DailyOpsChecklist.jsx",
+    "lines": 222,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DailyToolsPanel.jsx",
+    "path": "client/src/components/admin/DailyToolsPanel.jsx",
+    "lines": 357,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DailyWellnessPlanner.jsx",
+    "path": "client/src/components/DailyWellnessPlanner.jsx",
+    "lines": 287,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DashboardCard.jsx",
+    "path": "client/src/components/DashboardCard.jsx",
+    "lines": 102,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DataExportButton.jsx",
+    "path": "client/src/components/DataExportButton.jsx",
+    "lines": 132,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DecisionArchitecture.d.ts",
+    "path": "client/src/components/decision/DecisionArchitecture.d.ts",
+    "lines": 3,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DecisionArchitecture.jsx",
+    "path": "client/src/components/decision/DecisionArchitecture.jsx",
+    "lines": 314,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DeepWorkTracker.tsx",
+    "path": "client/src/components/mastery/DeepWorkTracker.tsx",
+    "lines": 243,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DialecticalInquiry.tsx",
+    "path": "client/src/components/inquiry/DialecticalInquiry.tsx",
+    "lines": 203,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "DigitalDetox.jsx",
+    "path": "client/src/components/DigitalDetox.jsx",
+    "lines": 288,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "dropdown-menu.tsx",
+    "path": "client/src/components/ui/dropdown-menu.tsx",
+    "lines": 193,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmailCapture.jsx",
+    "path": "client/src/components/marketing/EmailCapture.jsx",
+    "lines": 107,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionAdaptiveBackground.jsx",
+    "path": "client/src/components/EmotionAdaptiveBackground.jsx",
+    "lines": 177,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionalIntelligenceQuiz.jsx",
+    "path": "client/src/components/EmotionalIntelligenceQuiz.jsx",
+    "lines": 314,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionAuraRing.jsx",
+    "path": "client/src/components/EmotionAuraRing.jsx",
+    "lines": 179,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionBackground.jsx",
+    "path": "client/src/components/sacred/EmotionBackground.jsx",
+    "lines": 122,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionBackgroundProvider.jsx",
+    "path": "client/src/components/EmotionBackgroundProvider.jsx",
+    "lines": 29,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionCalendar.jsx",
+    "path": "client/src/components/EmotionCalendar.jsx",
+    "lines": 305,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionCharts.jsx",
+    "path": "client/src/components/sacred/EmotionCharts.jsx",
+    "lines": 266,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionLog.jsx",
+    "path": "client/src/components/EmotionLog.jsx",
+    "lines": 161,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionLog.jsx",
+    "path": "client/src/components/wellness/EmotionLog.jsx",
+    "lines": 255,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionPieChart.jsx",
+    "path": "client/src/components/EmotionPieChart.jsx",
+    "lines": 168,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmotionWheel.jsx",
+    "path": "client/src/components/EmotionWheel.jsx",
+    "lines": 282,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmptyState.jsx",
+    "path": "client/src/components/EmptyState.jsx",
+    "lines": 147,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EmptyState.jsx",
+    "path": "client/src/components/ui/EmptyState.jsx",
+    "lines": 128,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EnergyBooster.jsx",
+    "path": "client/src/components/EnergyBooster.jsx",
+    "lines": 298,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EpistemicCalibration.tsx",
+    "path": "client/src/components/epistemic/EpistemicCalibration.tsx",
+    "lines": 315,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ErrorBoundary.jsx",
+    "path": "client/src/components/ErrorBoundary.jsx",
+    "lines": 215,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "EthicsSafetyBlock.tsx",
+    "path": "client/src/components/legal/EthicsSafetyBlock.tsx",
+    "lines": 57,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ExamplesAccordion.d.ts",
+    "path": "client/src/components/content/ExamplesAccordion.d.ts",
+    "lines": 11,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ExistentialInquiry.tsx",
+    "path": "client/src/components/existential/ExistentialInquiry.tsx",
+    "lines": 173,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ExportPanel.tsx",
+    "path": "client/src/components/export/ExportPanel.tsx",
+    "lines": 80,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "FeatureGuard.jsx",
+    "path": "client/src/components/guards/FeatureGuard.jsx",
+    "lines": 16,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "FeedbackPrompt.tsx",
+    "path": "client/src/components/FeedbackPrompt.tsx",
+    "lines": 146,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "FeedbackWidget.jsx",
+    "path": "client/src/components/FeedbackWidget.jsx",
+    "lines": 250,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "FloatIdleAnimated.jsx",
+    "path": "client/src/components/lumi/FloatIdleAnimated.jsx",
+    "lines": 332,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "FlowDiagram.jsx",
+    "path": "client/src/components/FlowDiagram.jsx",
+    "lines": 260,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "FocusTimer.jsx",
+    "path": "client/src/components/FocusTimer.jsx",
+    "lines": 352,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "FrameworkExplorer.tsx",
+    "path": "client/src/components/frameworks/FrameworkExplorer.tsx",
+    "lines": 163,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "getRelatedTools.js",
+    "path": "client/src/components/discovery/getRelatedTools.js",
+    "lines": 18,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GlossaryTerm.jsx",
+    "path": "client/src/components/content/GlossaryTerm.jsx",
+    "lines": 88,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GlowFooter.jsx",
+    "path": "client/src/components/GlowFooter.jsx",
+    "lines": 144,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GoalProgress.jsx",
+    "path": "client/src/components/GoalProgress.jsx",
+    "lines": 356,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GratitudeJar.jsx",
+    "path": "client/src/components/GratitudeJar.jsx",
+    "lines": 344,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GratitudePrompt.jsx",
+    "path": "client/src/components/GratitudePrompt.jsx",
+    "lines": 195,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GroupedHealthOverview.jsx",
+    "path": "client/src/components/admin/GroupedHealthOverview.jsx",
+    "lines": 45,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GrowthCTA.tsx",
+    "path": "client/src/components/GrowthCTA.tsx",
+    "lines": 18,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GrowthTimeline.tsx",
+    "path": "client/src/components/growth/GrowthTimeline.tsx",
+    "lines": 203,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "GuardianHeartPanel.tsx",
+    "path": "client/src/components/GuardianHeartPanel.tsx",
+    "lines": 73,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HabitTracker.jsx",
+    "path": "client/src/components/HabitTracker.jsx",
+    "lines": 263,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HealingChat.tsx",
+    "path": "client/src/components/HealingChat.tsx",
+    "lines": 24,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HealingGraph.jsx",
+    "path": "client/src/components/wellness/HealingGraph.jsx",
+    "lines": 369,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HealingHero.jsx",
+    "path": "client/src/components/HealingHero.jsx",
+    "lines": 296,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HealingJourneys.jsx",
+    "path": "client/src/components/HealingJourneys.jsx",
+    "lines": 422,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "Hero.d.ts",
+    "path": "client/src/components/ui/Hero.d.ts",
+    "lines": 13,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HeroSection.jsx",
+    "path": "client/src/components/HeroSection.jsx",
+    "lines": 34,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HeroSection.jsx",
+    "path": "client/src/components/ui/HeroSection.jsx",
+    "lines": 95,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "HydrationTracker.jsx",
+    "path": "client/src/components/HydrationTracker.jsx",
+    "lines": 332,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "IconBadge.jsx",
+    "path": "client/src/components/ui/IconBadge.jsx",
+    "lines": 57,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.js",
+    "path": "client/src/components/benefits/index.js",
+    "lines": 4,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.js",
+    "path": "client/src/components/methods/index.js",
+    "lines": 4,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.js",
+    "path": "client/src/components/referral/index.js",
+    "lines": 2,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.js",
+    "path": "client/src/components/sacred/index.js",
+    "lines": 10,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.js",
+    "path": "client/src/components/share/index.js",
+    "lines": 7,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.js",
+    "path": "client/src/components/ui/index.js",
+    "lines": 13,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.ts",
+    "path": "client/src/components/mi/index.ts",
+    "lines": 26,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "index.ts",
+    "path": "client/src/components/state/index.ts",
+    "lines": 2,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "input.tsx",
+    "path": "client/src/components/ui/input.tsx",
+    "lines": 2,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "InsightCards.tsx",
+    "path": "client/src/components/insights/InsightCards.tsx",
+    "lines": 80,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "InsightPatternLab.tsx",
+    "path": "client/src/components/patterns/InsightPatternLab.tsx",
+    "lines": 207,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "InteractiveBuddy.jsx",
+    "path": "client/src/components/peacescape/InteractiveBuddy.jsx",
+    "lines": 104,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "JourneyComposer.tsx",
+    "path": "client/src/components/journey/JourneyComposer.tsx",
+    "lines": 280,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "KernelStatusPanel.jsx",
+    "path": "client/src/components/admin/KernelStatusPanel.jsx",
+    "lines": 36,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "KeyboardShortcuts.jsx",
+    "path": "client/src/components/KeyboardShortcuts.jsx",
+    "lines": 97,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "KnowledgeBase.jsx",
+    "path": "client/src/components/KnowledgeBase.jsx",
+    "lines": 76,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "KnowledgeWeaveMap.tsx",
+    "path": "client/src/components/weave/KnowledgeWeaveMap.tsx",
+    "lines": 307,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "label.tsx",
+    "path": "client/src/components/ui/label.tsx",
+    "lines": 3,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LaughterTherapy.jsx",
+    "path": "client/src/components/LaughterTherapy.jsx",
+    "lines": 356,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LayoutWrapper.d.ts",
+    "path": "client/src/components/ui/LayoutWrapper.d.ts",
+    "lines": 12,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LazyImage.jsx",
+    "path": "client/src/components/LazyImage.jsx",
+    "lines": 136,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LazyImage.jsx",
+    "path": "client/src/components/ui/LazyImage.jsx",
+    "lines": 132,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LevelUpModal.jsx",
+    "path": "client/src/components/LevelUpModal.jsx",
+    "lines": 81,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LiveRegion.jsx",
+    "path": "client/src/components/LiveRegion.jsx",
+    "lines": 80,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LoadingSpinner.tsx",
+    "path": "client/src/components/LoadingSpinner.tsx",
+    "lines": 83,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LogicLatticeLab.tsx",
+    "path": "client/src/components/logic/LogicLatticeLab.tsx",
+    "lines": 257,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LotusLoader.jsx",
+    "path": "client/src/components/ui/LotusLoader.jsx",
+    "lines": 94,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LumiBrandLockupImage.jsx",
+    "path": "client/src/components/lumi/LumiBrandLockupImage.jsx",
+    "lines": 56,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LumiBrandLogo.jsx",
+    "path": "client/src/components/lumi/LumiBrandLogo.jsx",
+    "lines": 115,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LumiCompanion.jsx",
+    "path": "client/src/components/lumi/LumiCompanion.jsx",
+    "lines": 315,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LumiMascotImage.jsx",
+    "path": "client/src/components/lumi/LumiMascotImage.jsx",
+    "lines": 60,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LumiV6.tsx",
+    "path": "client/src/components/lumi/LumiV6.tsx",
+    "lines": 1081,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "LumiV7.jsx",
+    "path": "client/src/components/lumi/LumiV7.jsx",
+    "lines": 325,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MeditationTimer.jsx",
+    "path": "client/src/components/MeditationTimer.jsx",
+    "lines": 298,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MentalModelsLibrary.tsx",
+    "path": "client/src/components/mastery/MentalModelsLibrary.tsx",
+    "lines": 259,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MetacognitionDashboard.tsx",
+    "path": "client/src/components/metacognition/MetacognitionDashboard.tsx",
+    "lines": 288,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MetaCognitionStudio.tsx",
+    "path": "client/src/components/metacognition/MetaCognitionStudio.tsx",
+    "lines": 343,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MetricCard.jsx",
+    "path": "client/src/components/admin/MetricCard.jsx",
+    "lines": 24,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MicroWinPrompt.jsx",
+    "path": "client/src/components/MicroWinPrompt.jsx",
+    "lines": 315,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MilestoneTracker.jsx",
+    "path": "client/src/components/MilestoneTracker.jsx",
+    "lines": 89,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MindfulBreathing.jsx",
+    "path": "client/src/components/MindfulBreathing.jsx",
+    "lines": 385,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MindfulEating.jsx",
+    "path": "client/src/components/MindfulEating.jsx",
+    "lines": 355,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MindfulnessBell.jsx",
+    "path": "client/src/components/MindfulnessBell.jsx",
+    "lines": 320,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MindfulnessChallenges.jsx",
+    "path": "client/src/components/MindfulnessChallenges.jsx",
+    "lines": 275,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MindfulWalking.jsx",
+    "path": "client/src/components/MindfulWalking.jsx",
+    "lines": 377,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MindscapeNavigator.tsx",
+    "path": "client/src/components/mindscape/MindscapeNavigator.tsx",
+    "lines": 309,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MIQuickPrompt.tsx",
+    "path": "client/src/components/MIQuickPrompt.tsx",
+    "lines": 12,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MITools.tsx",
+    "path": "client/src/components/mi/MITools.tsx",
+    "lines": 337,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoralReasoningLab.tsx",
+    "path": "client/src/components/moral/MoralReasoningLab.tsx",
+    "lines": 209,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MorningEveningRituals.jsx",
+    "path": "client/src/components/MorningEveningRituals.jsx",
+    "lines": 252,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MotivationBooster.jsx",
+    "path": "client/src/components/MotivationBooster.jsx",
+    "lines": 254,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "NarrativeIdentityStudio.tsx",
+    "path": "client/src/components/narrative/NarrativeIdentityStudio.tsx",
+    "lines": 204,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "NewsletterInvite.jsx",
+    "path": "client/src/components/publishing/NewsletterInvite.jsx",
+    "lines": 124,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "NotificationCenter.jsx",
+    "path": "client/src/components/NotificationCenter.jsx",
+    "lines": 265,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ObjectUploader.jsx",
+    "path": "client/src/components/ObjectUploader.jsx",
+    "lines": 212,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ObjectUploaderUppy.tsx",
+    "path": "client/src/components/ObjectUploaderUppy.tsx",
+    "lines": 104,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "OfflineIndicator.jsx",
+    "path": "client/src/components/OfflineIndicator.jsx",
+    "lines": 51,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "OnboardingFlow.jsx",
+    "path": "client/src/components/OnboardingFlow.jsx",
+    "lines": 91,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "OperationsPanel.jsx",
+    "path": "client/src/components/admin/OperationsPanel.jsx",
+    "lines": 810,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "OrchestratorTestPanel.jsx",
+    "path": "client/src/components/admin/OrchestratorTestPanel.jsx",
+    "lines": 335,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PageLayout.jsx",
+    "path": "client/src/components/layout/PageLayout.jsx",
+    "lines": 54,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PageScaffold.d.ts",
+    "path": "client/src/components/PageScaffold.d.ts",
+    "lines": 13,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PageSEO.jsx",
+    "path": "client/src/components/seo/PageSEO.jsx",
+    "lines": 36,
+    "usesHelmet": true,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PageTransition.jsx",
+    "path": "client/src/components/PageTransition.jsx",
+    "lines": 24,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ParadoxCartographer.tsx",
+    "path": "client/src/components/paradox/ParadoxCartographer.tsx",
+    "lines": 315,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PatternInsights.tsx",
+    "path": "client/src/components/patterns/PatternInsights.tsx",
+    "lines": 115,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PersistentDisclaimer.jsx",
+    "path": "client/src/components/PersistentDisclaimer.jsx",
+    "lines": 168,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PhilosophicalAtlas.d.ts",
+    "path": "client/src/components/atlas/PhilosophicalAtlas.d.ts",
+    "lines": 3,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PhilosophicalAtlas.jsx",
+    "path": "client/src/components/atlas/PhilosophicalAtlas.jsx",
+    "lines": 208,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PhilosophicalStanceMapper.tsx",
+    "path": "client/src/components/stance/PhilosophicalStanceMapper.tsx",
+    "lines": 242,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PlanGate.jsx",
+    "path": "client/src/components/PlanGate.jsx",
+    "lines": 107,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PlatformDisclaimer.tsx",
+    "path": "client/src/components/disclaimers/PlatformDisclaimer.tsx",
+    "lines": 82,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PositiveReframing.jsx",
+    "path": "client/src/components/PositiveReframing.jsx",
+    "lines": 281,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PositiveVisualization.jsx",
+    "path": "client/src/components/PositiveVisualization.jsx",
+    "lines": 291,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PowerNap.jsx",
+    "path": "client/src/components/PowerNap.jsx",
+    "lines": 404,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PrimaryButton.jsx",
+    "path": "client/src/components/ui/PrimaryButton.jsx",
+    "lines": 23,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ProgressAnalytics.jsx",
+    "path": "client/src/components/ProgressAnalytics.jsx",
+    "lines": 288,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ProgressiveMuscleRelaxation.jsx",
+    "path": "client/src/components/ProgressiveMuscleRelaxation.jsx",
+    "lines": 211,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ProgressRing.jsx",
+    "path": "client/src/components/ProgressRing.jsx",
+    "lines": 249,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ProgressTracker.jsx",
+    "path": "client/src/components/ProgressTracker.jsx",
+    "lines": 243,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ProgressTracker.jsx",
+    "path": "client/src/components/sacred/ProgressTracker.jsx",
+    "lines": 195,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ProtectedRoute.jsx",
+    "path": "client/src/components/ProtectedRoute.jsx",
+    "lines": 32,
+    "usesHelmet": false,
+    "usesProtectedRoute": true,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "PublishingCtaBar.jsx",
+    "path": "client/src/components/publishing/PublishingCtaBar.jsx",
+    "lines": 57,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "QuestionReflection.tsx",
+    "path": "client/src/components/consciousness/QuestionReflection.tsx",
+    "lines": 143,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "QuestPanel.jsx",
+    "path": "client/src/components/QuestPanel.jsx",
+    "lines": 241,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "QuoteBlock.jsx",
+    "path": "client/src/components/ui/QuoteBlock.jsx",
+    "lines": 232,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "RecentActivityPanel.jsx",
+    "path": "client/src/components/admin/RecentActivityPanel.jsx",
+    "lines": 62,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ReflectionInsights.jsx",
+    "path": "client/src/components/ReflectionInsights.jsx",
+    "lines": 369,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ReflectionPrompt.tsx",
+    "path": "client/src/components/wellness/ReflectionPrompt.tsx",
+    "lines": 32,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "RelatedNextSteps.jsx",
+    "path": "client/src/components/RelatedNextSteps.jsx",
+    "lines": 41,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ReminderScheduler.jsx",
+    "path": "client/src/components/ReminderScheduler.jsx",
+    "lines": 274,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ReminderSettings.jsx",
+    "path": "client/src/components/ReminderSettings.jsx",
+    "lines": 251,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ResilienceStories.jsx",
+    "path": "client/src/components/ResilienceStories.jsx",
+    "lines": 379,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ResourceTiles.jsx",
+    "path": "client/src/components/ui/ResourceTiles.jsx",
+    "lines": 380,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ResponsiveWrapper.jsx",
+    "path": "client/src/components/ResponsiveWrapper.jsx",
+    "lines": 129,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ReturnLoop.jsx",
+    "path": "client/src/components/ReturnLoop.jsx",
+    "lines": 307,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "RouteGuard.jsx",
+    "path": "client/src/components/RouteGuard.jsx",
+    "lines": 56,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "RouteSearchBox.jsx",
+    "path": "client/src/components/search/RouteSearchBox.jsx",
+    "lines": 61,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SacredModal.jsx",
+    "path": "client/src/components/ui/SacredModal.jsx",
+    "lines": 155,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SacredNav.jsx",
+    "path": "client/src/components/SacredNav.jsx",
+    "lines": 208,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SacredPattern.jsx",
+    "path": "client/src/components/SacredPattern.jsx",
+    "lines": 132,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SacredQuote.jsx",
+    "path": "client/src/components/SacredQuote.jsx",
+    "lines": 141,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SafeBoundary.jsx",
+    "path": "client/src/components/SafeBoundary.jsx",
+    "lines": 108,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SafetyFooter.d.ts",
+    "path": "client/src/components/SafetyFooter.d.ts",
+    "lines": 11,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SafetyFooter.d.ts",
+    "path": "client/src/components/ui/SafetyFooter.d.ts",
+    "lines": 8,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SafetyFooter.jsx",
+    "path": "client/src/components/SafetyFooter.jsx",
+    "lines": 100,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SafetyFooter.tsx",
+    "path": "client/src/components/wellness/SafetyFooter.tsx",
+    "lines": 55,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SafetyFooterStrip.tsx",
+    "path": "client/src/components/safety/SafetyFooterStrip.tsx",
+    "lines": 36,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SaveButton.jsx",
+    "path": "client/src/components/saves/SaveButton.jsx",
+    "lines": 31,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SectionContainer.d.ts",
+    "path": "client/src/components/ui/SectionContainer.d.ts",
+    "lines": 11,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "select.tsx",
+    "path": "client/src/components/ui/select.tsx",
+    "lines": 275,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SelfCareBingo.jsx",
+    "path": "client/src/components/SelfCareBingo.jsx",
+    "lines": 288,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SelfCareChecklist.jsx",
+    "path": "client/src/components/SelfCareChecklist.jsx",
+    "lines": 259,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SelfCompassion.jsx",
+    "path": "client/src/components/SelfCompassion.jsx",
+    "lines": 304,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SemanticMapping.tsx",
+    "path": "client/src/components/semantic/SemanticMapping.tsx",
+    "lines": 307,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SessionTimeout.jsx",
+    "path": "client/src/components/SessionTimeout.jsx",
+    "lines": 120,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SharedEntryCard.jsx",
+    "path": "client/src/components/SharedEntryCard.jsx",
+    "lines": 159,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SharedReflections.tsx",
+    "path": "client/src/components/community/SharedReflections.tsx",
+    "lines": 24,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ShareReflection.jsx",
+    "path": "client/src/components/ShareReflection.jsx",
+    "lines": 227,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SilenceMode.tsx",
+    "path": "client/src/components/consciousness/SilenceMode.tsx",
+    "lines": 78,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SkillForge.tsx",
+    "path": "client/src/components/mastery/SkillForge.tsx",
+    "lines": 357,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SkipToContent.jsx",
+    "path": "client/src/components/SkipToContent.jsx",
+    "lines": 13,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SkipToContent.tsx",
+    "path": "client/src/components/a11y/SkipToContent.tsx",
+    "lines": 12,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SleepSanctuary.jsx",
+    "path": "client/src/components/SleepSanctuary.jsx",
+    "lines": 473,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SleepTracker.jsx",
+    "path": "client/src/components/SleepTracker.jsx",
+    "lines": 297,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SocialConnection.jsx",
+    "path": "client/src/components/SocialConnection.jsx",
+    "lines": 248,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SocialLinks.jsx",
+    "path": "client/src/components/SocialLinks.jsx",
+    "lines": 129,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SofterVersionToggle.jsx",
+    "path": "client/src/components/wellness/SofterVersionToggle.jsx",
+    "lines": 150,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SoftLaunchBanner.jsx",
+    "path": "client/src/components/SoftLaunchBanner.jsx",
+    "lines": 65,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SoftUpgradeCTA.jsx",
+    "path": "client/src/components/publishing/SoftUpgradeCTA.jsx",
+    "lines": 67,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SomaticRelease.jsx",
+    "path": "client/src/components/SomaticRelease.jsx",
+    "lines": 367,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SOPMonitorPanel.jsx",
+    "path": "client/src/components/admin/SOPMonitorPanel.jsx",
+    "lines": 354,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SoundHealingPlayer.jsx",
+    "path": "client/src/components/SoundHealingPlayer.jsx",
+    "lines": 363,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "Sparkline.jsx",
+    "path": "client/src/components/Sparkline.jsx",
+    "lines": 37,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "StartHerePathways.jsx",
+    "path": "client/src/components/StartHerePathways.jsx",
+    "lines": 78,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "StreakCelebration.jsx",
+    "path": "client/src/components/StreakCelebration.jsx",
+    "lines": 112,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "StreakCounter.jsx",
+    "path": "client/src/components/StreakCounter.jsx",
+    "lines": 155,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "StressMonitor.jsx",
+    "path": "client/src/components/StressMonitor.jsx",
+    "lines": 314,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "Switch.tsx",
+    "path": "client/src/components/ui/Switch.tsx",
+    "lines": 86,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SynthesisCollider.tsx",
+    "path": "client/src/components/synthesis/SynthesisCollider.tsx",
+    "lines": 314,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SystemHealthPanel.jsx",
+    "path": "client/src/components/admin/SystemHealthPanel.jsx",
+    "lines": 87,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SystemOptimizationAdvisor.jsx",
+    "path": "client/src/components/admin/SystemOptimizationAdvisor.jsx",
+    "lines": 143,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SystemsResonance.tsx",
+    "path": "client/src/components/systems/SystemsResonance.tsx",
+    "lines": 334,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "SystemTelemetryPanel.jsx",
+    "path": "client/src/components/admin/SystemTelemetryPanel.jsx",
+    "lines": 46,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "table.tsx",
+    "path": "client/src/components/ui/table.tsx",
+    "lines": 86,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "tabs.tsx",
+    "path": "client/src/components/ui/tabs.tsx",
+    "lines": 209,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TemporalReflection.tsx",
+    "path": "client/src/components/temporal/TemporalReflection.tsx",
+    "lines": 232,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TestimonialCarousel.jsx",
+    "path": "client/src/components/TestimonialCarousel.jsx",
+    "lines": 48,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TGLPMandala.jsx",
+    "path": "client/src/components/lumi/TGLPMandala.jsx",
+    "lines": 38,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TGLPMandalaImage.jsx",
+    "path": "client/src/components/lumi/TGLPMandalaImage.jsx",
+    "lines": 39,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TglpNavbar.jsx",
+    "path": "client/src/components/TglpNavbar.jsx",
+    "lines": 434,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "theme-provider.jsx",
+    "path": "client/src/components/ui/theme-provider.jsx",
+    "lines": 45,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ThemeProvider.jsx",
+    "path": "client/src/components/ThemeProvider.jsx",
+    "lines": 8,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ThoughtExperimentsLab.tsx",
+    "path": "client/src/components/thought/ThoughtExperimentsLab.tsx",
+    "lines": 244,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TimedSession.tsx",
+    "path": "client/src/components/flow/TimedSession.tsx",
+    "lines": 142,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TimeOfDayBackground.jsx",
+    "path": "client/src/components/TimeOfDayBackground.jsx",
+    "lines": 152,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TinyStepPanel.jsx",
+    "path": "client/src/components/progress/TinyStepPanel.jsx",
+    "lines": 57,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "toast-container.tsx",
+    "path": "client/src/components/ui/toast-container.tsx",
+    "lines": 108,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TodaysInsight.jsx",
+    "path": "client/src/components/insights/TodaysInsight.jsx",
+    "lines": 38,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ToolCard.jsx",
+    "path": "client/src/components/discovery/ToolCard.jsx",
+    "lines": 42,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ToolCard.tsx",
+    "path": "client/src/components/ToolCard.tsx",
+    "lines": 148,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ToolRecommendations.jsx",
+    "path": "client/src/components/personalization/ToolRecommendations.jsx",
+    "lines": 108,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "Top50ProcessTracker.jsx",
+    "path": "client/src/components/admin/Top50ProcessTracker.jsx",
+    "lines": 142,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TrustPageLayout.jsx",
+    "path": "client/src/components/trust/TrustPageLayout.jsx",
+    "lines": 61,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "TrustSection.jsx",
+    "path": "client/src/components/trust/TrustSection.jsx",
+    "lines": 42,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "UpsellModal.jsx",
+    "path": "client/src/components/UpsellModal.jsx",
+    "lines": 138,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ValuesClarification.tsx",
+    "path": "client/src/components/values/ValuesClarification.tsx",
+    "lines": 229,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "ValuesExplorer.jsx",
+    "path": "client/src/components/ValuesExplorer.jsx",
+    "lines": 314,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "VirtualList.jsx",
+    "path": "client/src/components/VirtualList.jsx",
+    "lines": 127,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "VoiceSettings.jsx",
+    "path": "client/src/components/VoiceSettings.jsx",
+    "lines": 311,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WeeklyRecap.jsx",
+    "path": "client/src/components/WeeklyRecap.jsx",
+    "lines": 255,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WeeklyRecap.jsx",
+    "path": "client/src/components/dashboard/WeeklyRecap.jsx",
+    "lines": 106,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WeeklyReflection.jsx",
+    "path": "client/src/components/WeeklyReflection.jsx",
+    "lines": 342,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WelcomeBackBanner.jsx",
+    "path": "client/src/components/WelcomeBackBanner.jsx",
+    "lines": 204,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessGoalTracker.jsx",
+    "path": "client/src/components/WellnessGoalTracker.jsx",
+    "lines": 311,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessPageShell.d.ts",
+    "path": "client/src/components/wellness/WellnessPageShell.d.ts",
+    "lines": 13,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessPageShell.jsx",
+    "path": "client/src/components/wellness/WellnessPageShell.jsx",
+    "lines": 145,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessScore.jsx",
+    "path": "client/src/components/WellnessScore.jsx",
+    "lines": 194,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessStreakDashboard.jsx",
+    "path": "client/src/components/WellnessStreakDashboard.jsx",
+    "lines": 321,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessTimer.jsx",
+    "path": "client/src/components/WellnessTimer.jsx",
+    "lines": 298,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessToolkit.jsx",
+    "path": "client/src/components/WellnessToolkit.jsx",
+    "lines": 76,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WellnessToolkit.jsx",
+    "path": "client/src/components/ui/WellnessToolkit.jsx",
+    "lines": 95,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WhatNextRecommender.jsx",
+    "path": "client/src/components/content/WhatNextRecommender.jsx",
+    "lines": 67,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WisdomCard.tsx",
+    "path": "client/src/components/wisdom/WisdomCard.tsx",
+    "lines": 97,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WorryTimeScheduler.jsx",
+    "path": "client/src/components/WorryTimeScheduler.jsx",
+    "lines": 279,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WritingStats.tsx",
+    "path": "client/src/components/analytics/WritingStats.tsx",
+    "lines": 79,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "XPProgressBar.jsx",
+    "path": "client/src/components/XPProgressBar.jsx",
+    "lines": 155,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -10,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "JournalAI.jsx",
+    "path": "client/src/components/JournalAI.jsx",
+    "lines": 169,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "JournalAI.jsx",
+    "path": "client/src/components/wellness/JournalAI.jsx",
+    "lines": 362,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "JournalInsights.jsx",
+    "path": "client/src/components/JournalInsights.jsx",
+    "lines": 275,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodCalendar.jsx",
+    "path": "client/src/components/wellness/MoodCalendar.jsx",
+    "lines": 297,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodHistoryChart.jsx",
+    "path": "client/src/components/MoodHistoryChart.jsx",
+    "lines": 136,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodInsight.jsx",
+    "path": "client/src/components/MoodInsight.jsx",
+    "lines": 218,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodMeter.jsx",
+    "path": "client/src/components/MoodMeter.jsx",
+    "lines": 109,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodPieChart.jsx",
+    "path": "client/src/components/charts/MoodPieChart.jsx",
+    "lines": 163,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodResponder.jsx",
+    "path": "client/src/components/MoodResponder.jsx",
+    "lines": 248,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodTrendsChart.jsx",
+    "path": "client/src/components/MoodTrendsChart.jsx",
+    "lines": 212,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodTrendsChartJS.jsx",
+    "path": "client/src/components/charts/MoodTrendsChartJS.jsx",
+    "lines": 235,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "MoodVisualizer.jsx",
+    "path": "client/src/components/MoodVisualizer.jsx",
+    "lines": 291,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "WeatherMoodSync.jsx",
+    "path": "client/src/components/wellness/WeatherMoodSync.jsx",
+    "lines": 341,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -50,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AdminErrorBoundary.jsx",
+    "path": "client/src/components/system/AdminErrorBoundary.jsx",
+    "lines": 116,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -60,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AdminGuard.jsx",
+    "path": "client/src/components/AdminGuard.jsx",
+    "lines": 96,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -60,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AdminNavGrid.jsx",
+    "path": "client/src/components/admin/AdminNavGrid.jsx",
+    "lines": 83,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -60,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "AdminQueryStates.jsx",
+    "path": "client/src/components/admin/AdminQueryStates.jsx",
+    "lines": 54,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -60,
+    "archiveBucket": "KEEP_REVIEW"
+  },
+  {
+    "component": "CrisisStabilizer.jsx",
+    "path": "client/src/components/CrisisStabilizer.jsx",
+    "lines": 341,
+    "usesHelmet": false,
+    "usesProtectedRoute": false,
+    "category": "ORPHAN",
+    "archiveScore": -60,
+    "archiveBucket": "KEEP_REVIEW"
+  }
+]

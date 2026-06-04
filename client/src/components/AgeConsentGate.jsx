@@ -25,7 +25,7 @@ export default function AgeConsentGate({ children, onConsent }) {
   if (isLoading) {
     return (
       <div 
-        className="min-h-screen flex items-center justify-center"
+        className="min-h-screen flex items-center justify-center px-4 py-8 md:py-12 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30"
         data-testid="consent-loading"
       >
         <div className="animate-pulse motion-reduce:animate-none text-muted-foreground">Loading...</div>
@@ -39,10 +39,11 @@ export default function AgeConsentGate({ children, onConsent }) {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30"
+      className="min-h-screen flex items-center justify-center px-4 py-8 md:py-12 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30"
       data-testid="age-consent-gate"
     >
-      <div className="max-w-lg w-full bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-emerald-200 dark:border-emerald-800">
+        <div className="max-w-3xl mx-auto w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden px-6 py-8 md:px-10 border border-emerald-200 dark:border-emerald-800">
+
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/50 mb-4">
             <Shield className="w-8 h-8 text-emerald-700 dark:text-emerald-300" aria-hidden="true" />
@@ -103,7 +104,7 @@ export default function AgeConsentGate({ children, onConsent }) {
           </ul>
         </div>
 
-        <div className="flex flex-col gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             onClick={handleConsent}
             className="w-full py-3 px-6 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"

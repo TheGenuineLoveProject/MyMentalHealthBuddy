@@ -1,8 +1,9 @@
+import { getJsonPreference, setPreference } from "../../lib/preferences/safePreferences";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Bot, Heart, Sparkles, Brain, Shield, Save, Check, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -73,7 +74,7 @@ export default function AIPersonality() {
           }
         }
       } catch {
-        const cached = localStorage.getItem("glp_ai_personality");
+        const cached = getJsonPreference("glp_ai_personality", {});
         if (cached) setSettings(JSON.parse(cached));
       } finally {
         setLoading(false);
@@ -90,7 +91,7 @@ export default function AIPersonality() {
       setTimeout(() => setSaved(false), 3000);
     },
     onError: () => {
-      try { localStorage.setItem("glp_ai_personality", JSON.stringify(settings)); } catch (err) { console.warn("[storage-safe-write]", err); }
+      try { setPreference("glp_ai_personality", settings); } catch (err) { console.warn("[storage-safe-write]", err); }
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
       setTimeout(() => setSaved(false), 3000);

@@ -1,0 +1,122 @@
+[
+  {
+    "path": "client/src/components/LazyImage.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/ReflectionCardExport.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/community/CommunityBoundary.tsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/lumi/LumiBrandLogo.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/lumi/LumiCompanion.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/lumi/TGLPMandala.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/system/AdminErrorBoundary.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/ui/LotusLoader.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/components/ui/Skeleton.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/lumi-registry/components/OfficialLumi.tsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/pages/ControlDashboard.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/pages/DesignSystem.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/pages/Onboarding.tsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/pages/WellnessGoals.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  },
+  {
+    "path": "client/src/sections/NlpMiContent.jsx",
+    "estimatedRisk": "LOW",
+    "suggestedPrimitive": "OfficialLumi",
+    "requiresVisualQA": true,
+    "protectedSurface": false,
+    "runtimeRisk": "MINIMAL"
+  }
+]

@@ -28,7 +28,7 @@ export default function GoalProgress() {
   const [selectedGoal, setSelectedGoal] = useState(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem("wellness_goals");
+    const saved = typeof window !== "undefined" ? localStorage.getItem("wellness_goals") : null;
     if (saved) {
       setGoals(JSON.parse(saved));
     }
@@ -36,7 +36,7 @@ export default function GoalProgress() {
 
   const saveGoals = (updatedGoals) => {
     setGoals(updatedGoals);
-    try { localStorage.setItem("wellness_goals", JSON.stringify(updatedGoals)); } catch (err) { console.warn("[storage-safe-write]", err); }
+    try { if (typeof window !== "undefined") localStorage.setItem("wellness_goals", JSON.stringify(updatedGoals)); } catch (err) { console.warn("[storage-safe-write]", err); }
   };
 
   const addGoal = () => {

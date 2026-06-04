@@ -1,0 +1,28 @@
+==== DATE ====
+Wed Jun  3 06:01:59 PM UTC 2026
+
+==== NODE ====
+v20.20.0
+
+==== NPM ====
+11.11.0
+
+==== DIST SIZE ====
+36M	client/dist
+
+==== ROUTES ====
+HTTP/2 200 
+HTTP/2 200 
+HTTP/2 200 
+HTTP/2 200 
+
+==== HEALTH ====
+{"status":"healthy","environment":"development","version":"2.0.0","uptime":219013,"uptimeFormatted":"2d 12h 50m 13s","startedAt":"2026-06-01T05:14:47.903Z","database":{"connected":true},"ai":{"available":true},"softLaunch":false,"platform":{"totalTools":127,"totalRoutes":127,"adminPages":27},"services":{"stripe":true,"resend":true,"perplexity":true,"sentry":true},"memory":{"heapUsedMB":30,"heapTotalMB":32,"rssMB":94},"node":"v20.20.0"}
+==== GIT ====
+?? diagnostics/final/console-log-audit.txt
+?? diagnostics/final/dist-assets-after-rebuild.txt
+?? diagnostics/final/largest-js-assets.txt
+?? diagnostics/final/oversized-js-assets.txt
+?? diagnostics/final/platform-runtime-snapshot.txt
+?? diagnostics/final/security-headers.txt
+?? diagnostics/final/top-assets-bytes.txt

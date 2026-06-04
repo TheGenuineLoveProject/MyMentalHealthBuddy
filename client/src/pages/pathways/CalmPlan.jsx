@@ -3,8 +3,8 @@ import { Link } from "wouter";
 import { Leaf, Save, RefreshCw, Check, Clock, Sun, Moon, Coffee } from 'lucide-react';
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
-import { Button } from "@/components/ui/Button.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 const TIME_OF_DAY = [
@@ -43,7 +43,7 @@ export default function CalmPlan() {
 
   const handleSave = () => {
     const plan = { selections, notes, savedAt: new Date().toISOString() };
-    try { localStorage.setItem("glp_calm_plan", JSON.stringify(plan)); } catch (err) { console.warn("[storage-safe-write]", err); }
+    try { if (typeof window !== "undefined") localStorage.setItem("glp_calm_plan", JSON.stringify(plan)); } catch (err) { console.warn("[storage-safe-write]", err); }
     setSaved(true);
   };
 

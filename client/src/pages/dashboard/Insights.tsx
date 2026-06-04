@@ -3,7 +3,7 @@ import {
   Lightbulb, ArrowLeft, TrendingUp, Heart, Brain, Sparkles,
   Calendar, BarChart3, PieChart, Activity, Target, Award
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";

@@ -5,8 +5,8 @@ import {
   Settings as SettingsIcon, User, Bell, Shield, Moon, Sun, Monitor,
   ArrowLeft, Save, Loader2, Globe, Lock, Trash2, Heart
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/Switch";
 import { useToast } from "@/hooks/use-toast";
 import { useSEO } from "@/hooks/useSEO";

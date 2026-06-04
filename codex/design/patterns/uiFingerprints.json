@@ -1,0 +1,8112 @@
+[
+  {
+    "path": "client/src/pages/admin/SocialStudioAdmin.jsx",
+    "buttonCount": 64,
+    "cardCount": 142,
+    "modalCount": 0,
+    "inputCount": 33,
+    "tailwindCount": 254,
+    "hooks": 21,
+    "lines": 1319
+  },
+  {
+    "path": "client/src/pages/DesignSystem.jsx",
+    "buttonCount": 18,
+    "cardCount": 15,
+    "modalCount": 3,
+    "inputCount": 5,
+    "tailwindCount": 397,
+    "hooks": 2,
+    "lines": 1509
+  },
+  {
+    "path": "client/src/pages/admin/NarrativeOpsConsole.jsx",
+    "buttonCount": 26,
+    "cardCount": 23,
+    "modalCount": 17,
+    "inputCount": 39,
+    "tailwindCount": 281,
+    "hooks": 22,
+    "lines": 1475
+  },
+  {
+    "path": "client/src/pages/admin/AdminSocial.jsx",
+    "buttonCount": 32,
+    "cardCount": 0,
+    "modalCount": 9,
+    "inputCount": 36,
+    "tailwindCount": 267,
+    "hooks": 39,
+    "lines": 1021
+  },
+  {
+    "path": "client/src/pages/Admin.jsx",
+    "buttonCount": 8,
+    "cardCount": 30,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 297,
+    "hooks": 11,
+    "lines": 1391
+  },
+  {
+    "path": "client/src/pages/WireframeTemplates.jsx",
+    "buttonCount": 31,
+    "cardCount": 11,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 256,
+    "hooks": 4,
+    "lines": 1415
+  },
+  {
+    "path": "client/src/pages/CanvaLanding.jsx",
+    "buttonCount": 10,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 292,
+    "hooks": 10,
+    "lines": 1283
+  },
+  {
+    "path": "client/src/pages/ControlDashboard.jsx",
+    "buttonCount": 20,
+    "cardCount": 39,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 204,
+    "hooks": 3,
+    "lines": 903
+  },
+  {
+    "path": "client/src/pages/admin/AdminPublishing.jsx",
+    "buttonCount": 23,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 200,
+    "hooks": 8,
+    "lines": 720
+  },
+  {
+    "path": "client/src/components/PageTemplate.jsx",
+    "buttonCount": 1,
+    "cardCount": 34,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 182,
+    "hooks": 4,
+    "lines": 1152
+  },
+  {
+    "path": "client/src/pages/admin/SocialDashboard.jsx",
+    "buttonCount": 12,
+    "cardCount": 2,
+    "modalCount": 7,
+    "inputCount": 16,
+    "tailwindCount": 176,
+    "hooks": 7,
+    "lines": 791
+  },
+  {
+    "path": "client/src/pages/admin/HealthDashboard.jsx",
+    "buttonCount": 7,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 198,
+    "hooks": 3,
+    "lines": 885
+  },
+  {
+    "path": "client/src/pages/ContentAdminDashboard.jsx",
+    "buttonCount": 11,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 171,
+    "hooks": 5,
+    "lines": 667
+  },
+  {
+    "path": "client/src/pages/Dashboard.jsx",
+    "buttonCount": 6,
+    "cardCount": 10,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 160,
+    "hooks": 0,
+    "lines": 684
+  },
+  {
+    "path": "client/src/pages/account/Security.jsx",
+    "buttonCount": 24,
+    "cardCount": 54,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 88,
+    "hooks": 9,
+    "lines": 500
+  },
+  {
+    "path": "client/src/pages/DesignSystemV2.jsx",
+    "buttonCount": 24,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 144,
+    "hooks": 6,
+    "lines": 436
+  },
+  {
+    "path": "client/src/pages/LumiV6Preview.jsx",
+    "buttonCount": 7,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 151,
+    "hooks": 7,
+    "lines": 796
+  },
+  {
+    "path": "client/src/pages/admin/SocialGenerator.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 16,
+    "tailwindCount": 137,
+    "hooks": 10,
+    "lines": 749
+  },
+  {
+    "path": "client/src/pages/Start.tsx",
+    "buttonCount": 5,
+    "cardCount": 5,
+    "modalCount": 3,
+    "inputCount": 17,
+    "tailwindCount": 109,
+    "hooks": 23,
+    "lines": 1250
+  },
+  {
+    "path": "client/src/pages/DiscernmentDashboard.jsx",
+    "buttonCount": 6,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 12,
+    "tailwindCount": 118,
+    "hooks": 11,
+    "lines": 610
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 131,
+    "hooks": 4,
+    "lines": 336
+  },
+  {
+    "path": "client/src/pages/KnowledgeSynthesisPage.tsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 17,
+    "tailwindCount": 110,
+    "hooks": 9,
+    "lines": 566
+  },
+  {
+    "path": "client/src/pages/InnerChildPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 113,
+    "hooks": 3,
+    "lines": 579
+  },
+  {
+    "path": "client/src/pages/InsightCardsPage.tsx",
+    "buttonCount": 8,
+    "cardCount": 36,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 71,
+    "hooks": 8,
+    "lines": 397
+  },
+  {
+    "path": "client/src/pages/OnboardingFlow.jsx",
+    "buttonCount": 27,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 75,
+    "hooks": 12,
+    "lines": 525
+  },
+  {
+    "path": "client/src/pages/admin/SecurityDashboard.jsx",
+    "buttonCount": 4,
+    "cardCount": 45,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 75,
+    "hooks": 0,
+    "lines": 277
+  },
+  {
+    "path": "client/src/pages/Settings.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 115,
+    "hooks": 13,
+    "lines": 608
+  },
+  {
+    "path": "client/src/pages/admin/NarrativeDrafts.jsx",
+    "buttonCount": 20,
+    "cardCount": 23,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 74,
+    "hooks": 8,
+    "lines": 416
+  },
+  {
+    "path": "client/src/pages/account/Billing.jsx",
+    "buttonCount": 18,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 101,
+    "hooks": 5,
+    "lines": 476
+  },
+  {
+    "path": "client/src/pages/NervousSystemFloodingPage.jsx",
+    "buttonCount": 4,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 114,
+    "hooks": 3,
+    "lines": 455
+  },
+  {
+    "path": "client/src/pages/dashboard/Journal.jsx",
+    "buttonCount": 12,
+    "cardCount": 0,
+    "modalCount": 9,
+    "inputCount": 10,
+    "tailwindCount": 88,
+    "hooks": 10,
+    "lines": 376
+  },
+  {
+    "path": "client/src/pages/GrowthPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 112,
+    "hooks": 8,
+    "lines": 575
+  },
+  {
+    "path": "client/src/pages/Publishing.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 7,
+    "inputCount": 11,
+    "tailwindCount": 89,
+    "hooks": 5,
+    "lines": 352
+  },
+  {
+    "path": "client/src/components/MindfulWalking.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 25,
+    "tailwindCount": 84,
+    "hooks": 11,
+    "lines": 377
+  },
+  {
+    "path": "client/src/pages/admin/AdminPublishingToday.jsx",
+    "buttonCount": 17,
+    "cardCount": 33,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 62,
+    "hooks": 3,
+    "lines": 334
+  },
+  {
+    "path": "client/src/pages/admin/AdminTools.jsx",
+    "buttonCount": 11,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 96,
+    "hooks": 16,
+    "lines": 670
+  },
+  {
+    "path": "client/src/pages/ContentStudioPage.tsx",
+    "buttonCount": 10,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 86,
+    "hooks": 7,
+    "lines": 403
+  },
+  {
+    "path": "client/src/pages/WellnessGoals.jsx",
+    "buttonCount": 13,
+    "cardCount": 29,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 62,
+    "hooks": 9,
+    "lines": 324
+  },
+  {
+    "path": "client/src/pages/WisdomPracticesPage.tsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 16,
+    "tailwindCount": 88,
+    "hooks": 13,
+    "lines": 474
+  },
+  {
+    "path": "client/src/pages/BreathingExercisesPage.jsx",
+    "buttonCount": 5,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 88,
+    "hooks": 13,
+    "lines": 518
+  },
+  {
+    "path": "client/src/pages/JournalPage.jsx",
+    "buttonCount": 12,
+    "cardCount": 14,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 79,
+    "hooks": 16,
+    "lines": 529
+  },
+  {
+    "path": "client/src/pages/dashboard/Overview.jsx",
+    "buttonCount": 8,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 97,
+    "hooks": 2,
+    "lines": 440
+  },
+  {
+    "path": "client/src/components/admin/OperationsPanel.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 100,
+    "hooks": 32,
+    "lines": 810
+  },
+  {
+    "path": "client/src/pages/CognitiveArchitecturePage.tsx",
+    "buttonCount": 8,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 19,
+    "tailwindCount": 77,
+    "hooks": 8,
+    "lines": 388
+  },
+  {
+    "path": "client/src/pages/SelfWorthReflectionPage.jsx",
+    "buttonCount": 7,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 94,
+    "hooks": 5,
+    "lines": 490
+  },
+  {
+    "path": "client/src/components/PowerNap.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 15,
+    "tailwindCount": 81,
+    "hooks": 13,
+    "lines": 404
+  },
+  {
+    "path": "client/src/pages/CoherenceLadderPage.jsx",
+    "buttonCount": 5,
+    "cardCount": 10,
+    "modalCount": 0,
+    "inputCount": 24,
+    "tailwindCount": 65,
+    "hooks": 6,
+    "lines": 424
+  },
+  {
+    "path": "client/src/pages/DailyRitualPage.tsx",
+    "buttonCount": 10,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 80,
+    "hooks": 11,
+    "lines": 565
+  },
+  {
+    "path": "client/src/pages/ResilienceMetricsPage.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 103,
+    "hooks": 5,
+    "lines": 425
+  },
+  {
+    "path": "client/src/pages/admin/ContentStudioAdmin.jsx",
+    "buttonCount": 4,
+    "cardCount": 33,
+    "modalCount": 0,
+    "inputCount": 18,
+    "tailwindCount": 49,
+    "hooks": 10,
+    "lines": 288
+  },
+  {
+    "path": "client/src/pages/TalkTopics.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 90,
+    "hooks": 5,
+    "lines": 457
+  },
+  {
+    "path": "client/src/pages/admin/AuditLogExplorer.jsx",
+    "buttonCount": 15,
+    "cardCount": 41,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 36,
+    "hooks": 5,
+    "lines": 250
+  },
+  {
+    "path": "client/src/pages/admin/BillingViewer.jsx",
+    "buttonCount": 0,
+    "cardCount": 57,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 45,
+    "hooks": 0,
+    "lines": 216
+  },
+  {
+    "path": "client/src/pages/tools/BreathTool.jsx",
+    "buttonCount": 14,
+    "cardCount": 23,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 58,
+    "hooks": 16,
+    "lines": 397
+  },
+  {
+    "path": "client/src/pages/AgentInteraction.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 83,
+    "hooks": 8,
+    "lines": 342
+  },
+  {
+    "path": "client/src/pages/MetaLearningPage.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 13,
+    "tailwindCount": 83,
+    "hooks": 11,
+    "lines": 383
+  },
+  {
+    "path": "client/src/pages/StudyVaultPage.jsx",
+    "buttonCount": 6,
+    "cardCount": 29,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 59,
+    "hooks": 4,
+    "lines": 547
+  },
+  {
+    "path": "client/src/pages/SystemsThinkingPage.tsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 88,
+    "hooks": 9,
+    "lines": 388
+  },
+  {
+    "path": "client/src/pages/admin/FeatureFlags.jsx",
+    "buttonCount": 14,
+    "cardCount": 21,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 55,
+    "hooks": 9,
+    "lines": 343
+  },
+  {
+    "path": "client/src/pages/admin/SocialCalendar.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 7,
+    "inputCount": 10,
+    "tailwindCount": 71,
+    "hooks": 5,
+    "lines": 452
+  },
+  {
+    "path": "client/src/components/Skeleton.jsx",
+    "buttonCount": 0,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 87,
+    "hooks": 0,
+    "lines": 205
+  },
+  {
+    "path": "client/src/pages/PhilosophicalInquiryPage.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 85,
+    "hooks": 7,
+    "lines": 391
+  },
+  {
+    "path": "client/src/pages/settings/AIPersonality.jsx",
+    "buttonCount": 9,
+    "cardCount": 41,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 44,
+    "hooks": 6,
+    "lines": 264
+  },
+  {
+    "path": "client/src/components/HealingJourneys.jsx",
+    "buttonCount": 5,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 15,
+    "tailwindCount": 69,
+    "hooks": 4,
+    "lines": 422
+  },
+  {
+    "path": "client/src/pages/PracticeLibrary.jsx",
+    "buttonCount": 13,
+    "cardCount": 16,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 61,
+    "hooks": 7,
+    "lines": 420
+  },
+  {
+    "path": "client/src/pages/Pricing.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 89,
+    "hooks": 7,
+    "lines": 556
+  },
+  {
+    "path": "client/src/pages/MeditationGuidePage.jsx",
+    "buttonCount": 6,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 70,
+    "hooks": 5,
+    "lines": 568
+  },
+  {
+    "path": "client/src/pages/pathways/ProgressStreaks.jsx",
+    "buttonCount": 8,
+    "cardCount": 31,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 53,
+    "hooks": 3,
+    "lines": 206
+  },
+  {
+    "path": "client/src/components/ResilienceStories.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 79,
+    "hooks": 9,
+    "lines": 379
+  },
+  {
+    "path": "client/src/components/admin/SOPMonitorPanel.jsx",
+    "buttonCount": 3,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 82,
+    "hooks": 6,
+    "lines": 354
+  },
+  {
+    "path": "client/src/components/wellness/JournalAI.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 21,
+    "tailwindCount": 61,
+    "hooks": 8,
+    "lines": 362
+  },
+  {
+    "path": "client/src/features/community/SharedReflectionsPage.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 83,
+    "hooks": 6,
+    "lines": 393
+  },
+  {
+    "path": "client/src/pages/MoodPage.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 75,
+    "hooks": 13,
+    "lines": 512
+  },
+  {
+    "path": "client/src/components/SleepSanctuary.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 71,
+    "hooks": 18,
+    "lines": 473
+  },
+  {
+    "path": "client/src/pages/Onboarding.tsx",
+    "buttonCount": 13,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 12,
+    "tailwindCount": 65,
+    "hooks": 15,
+    "lines": 507
+  },
+  {
+    "path": "client/src/pages/WisdomSynthesisPage.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 78,
+    "hooks": 6,
+    "lines": 412
+  },
+  {
+    "path": "client/src/pages/account/Settings.jsx",
+    "buttonCount": 11,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 75,
+    "hooks": 6,
+    "lines": 300
+  },
+  {
+    "path": "client/src/pages/GroundingTechniquesPage.jsx",
+    "buttonCount": 3,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 75,
+    "hooks": 3,
+    "lines": 454
+  },
+  {
+    "path": "client/src/pages/MirrorPage.tsx",
+    "buttonCount": 6,
+    "cardCount": 34,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 48,
+    "hooks": 7,
+    "lines": 275
+  },
+  {
+    "path": "client/src/pages/ProgressDashboardPage.tsx",
+    "buttonCount": 0,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 87,
+    "hooks": 11,
+    "lines": 370
+  },
+  {
+    "path": "client/src/components/synthesis/SynthesisCollider.tsx",
+    "buttonCount": 11,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 21,
+    "tailwindCount": 56,
+    "hooks": 12,
+    "lines": 314
+  },
+  {
+    "path": "client/src/pages/HealingJourneysPage.jsx",
+    "buttonCount": 3,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 77,
+    "hooks": 2,
+    "lines": 572
+  },
+  {
+    "path": "client/src/pages/PermacultureWellnessPage.jsx",
+    "buttonCount": 6,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 71,
+    "hooks": 5,
+    "lines": 452
+  },
+  {
+    "path": "client/src/pages/SubscriberBenefitsPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 88,
+    "hooks": 0,
+    "lines": 272
+  },
+  {
+    "path": "client/src/components/epistemic/EpistemicCalibration.tsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 72,
+    "hooks": 13,
+    "lines": 315
+  },
+  {
+    "path": "client/src/pages/CRMPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 85,
+    "hooks": 2,
+    "lines": 288
+  },
+  {
+    "path": "client/src/pages/CommunityGuidelines.jsx",
+    "buttonCount": 6,
+    "cardCount": 33,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 48,
+    "hooks": 0,
+    "lines": 183
+  },
+  {
+    "path": "client/src/pages/PressKit.jsx",
+    "buttonCount": 6,
+    "cardCount": 26,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 55,
+    "hooks": 0,
+    "lines": 171
+  },
+  {
+    "path": "client/src/pages/SafetyPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 87,
+    "hooks": 0,
+    "lines": 278
+  },
+  {
+    "path": "client/src/components/CBTThoughtDiary.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 75,
+    "hooks": 8,
+    "lines": 378
+  },
+  {
+    "path": "client/src/pages/GrowthAnalyticsPage.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 85,
+    "hooks": 9,
+    "lines": 378
+  },
+  {
+    "path": "client/src/pages/MovementSnacksPage.jsx",
+    "buttonCount": 6,
+    "cardCount": 10,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 68,
+    "hooks": 9,
+    "lines": 410
+  },
+  {
+    "path": "client/src/pages/SafetyCenter.jsx",
+    "buttonCount": 4,
+    "cardCount": 29,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 53,
+    "hooks": 0,
+    "lines": 202
+  },
+  {
+    "path": "client/src/pages/preferences/NotificationPreferences.jsx",
+    "buttonCount": 4,
+    "cardCount": 40,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 42,
+    "hooks": 6,
+    "lines": 251
+  },
+  {
+    "path": "client/src/pages/tools/EmotionWheel.jsx",
+    "buttonCount": 11,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 25,
+    "tailwindCount": 41,
+    "hooks": 5,
+    "lines": 246
+  },
+  {
+    "path": "client/src/components/HydrationTracker.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 75,
+    "hooks": 11,
+    "lines": 332
+  },
+  {
+    "path": "client/src/pages/AffirmationsPage.jsx",
+    "buttonCount": 5,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 9,
+    "tailwindCount": 63,
+    "hooks": 8,
+    "lines": 518
+  },
+  {
+    "path": "client/src/pages/CognitiveToolsPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 76,
+    "hooks": 2,
+    "lines": 445
+  },
+  {
+    "path": "client/src/pages/CollaborativeLabPage.tsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 74,
+    "hooks": 8,
+    "lines": 477
+  },
+  {
+    "path": "client/src/pages/GuidedJournalingPage.tsx",
+    "buttonCount": 3,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 65,
+    "hooks": 7,
+    "lines": 396
+  },
+  {
+    "path": "client/src/pages/PerceptionRefinementPage.jsx",
+    "buttonCount": 6,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 73,
+    "hooks": 4,
+    "lines": 396
+  },
+  {
+    "path": "client/src/pages/account/Subscription.jsx",
+    "buttonCount": 12,
+    "cardCount": 29,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 2,
+    "lines": 196
+  },
+  {
+    "path": "client/src/components/MindfulBreathing.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 15,
+    "tailwindCount": 62,
+    "hooks": 14,
+    "lines": 385
+  },
+  {
+    "path": "client/src/components/autodidact/AutodidactForge.tsx",
+    "buttonCount": 13,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 66,
+    "hooks": 12,
+    "lines": 345
+  },
+  {
+    "path": "client/src/components/mindscape/MindscapeNavigator.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 16,
+    "tailwindCount": 63,
+    "hooks": 12,
+    "lines": 309
+  },
+  {
+    "path": "client/src/pages/AtlasDashboard.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 1,
+    "inputCount": 2,
+    "tailwindCount": 77,
+    "hooks": 12,
+    "lines": 514
+  },
+  {
+    "path": "client/src/components/GoalProgress.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 66,
+    "hooks": 7,
+    "lines": 356
+  },
+  {
+    "path": "client/src/components/mastery/SkillForge.tsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 18,
+    "tailwindCount": 57,
+    "hooks": 8,
+    "lines": 357
+  },
+  {
+    "path": "client/src/components/systems/SystemsResonance.tsx",
+    "buttonCount": 11,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 66,
+    "hooks": 12,
+    "lines": 334
+  },
+  {
+    "path": "client/src/pages/Analytics.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 82,
+    "hooks": 0,
+    "lines": 246
+  },
+  {
+    "path": "client/src/pages/BodyWellnessPage.jsx",
+    "buttonCount": 5,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 66,
+    "hooks": 3,
+    "lines": 537
+  },
+  {
+    "path": "client/src/pages/BehaviorChangePage.jsx",
+    "buttonCount": 1,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 18,
+    "tailwindCount": 60,
+    "hooks": 2,
+    "lines": 479
+  },
+  {
+    "path": "client/src/pages/ValuesFinderPage.jsx",
+    "buttonCount": 6,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 20,
+    "tailwindCount": 43,
+    "hooks": 5,
+    "lines": 341
+  },
+  {
+    "path": "client/src/components/FocusTimer.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 59,
+    "hooks": 15,
+    "lines": 352
+  },
+  {
+    "path": "client/src/pages/BoundariesPage.jsx",
+    "buttonCount": 8,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 52,
+    "hooks": 6,
+    "lines": 393
+  },
+  {
+    "path": "client/src/pages/EmotionalIntelligencePage.jsx",
+    "buttonCount": 2,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 61,
+    "hooks": 3,
+    "lines": 402
+  },
+  {
+    "path": "client/src/pages/dashboard/MoodTracker.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 23,
+    "tailwindCount": 51,
+    "hooks": 5,
+    "lines": 285
+  },
+  {
+    "path": "client/src/pages/settings/EmailDigest.jsx",
+    "buttonCount": 8,
+    "cardCount": 37,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 36,
+    "hooks": 6,
+    "lines": 233
+  },
+  {
+    "path": "client/src/components/GratitudeJar.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 66,
+    "hooks": 10,
+    "lines": 344
+  },
+  {
+    "path": "client/src/components/ProgressAnalytics.jsx",
+    "buttonCount": 3,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 62,
+    "hooks": 6,
+    "lines": 288
+  },
+  {
+    "path": "client/src/components/admin/ConsciousnessRegistryPanel.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 67,
+    "hooks": 7,
+    "lines": 446
+  },
+  {
+    "path": "client/src/pages/account/Profile.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 63,
+    "hooks": 5,
+    "lines": 248
+  },
+  {
+    "path": "client/src/pages/admin/EngagementDashboard.jsx",
+    "buttonCount": 1,
+    "cardCount": 33,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 45,
+    "hooks": 1,
+    "lines": 211
+  },
+  {
+    "path": "client/src/components/AIWellnessConcierge.jsx",
+    "buttonCount": 6,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 71,
+    "hooks": 7,
+    "lines": 288
+  },
+  {
+    "path": "client/src/components/wellness/HealingGraph.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 75,
+    "hooks": 6,
+    "lines": 369
+  },
+  {
+    "path": "client/src/pages/UserProfile.jsx",
+    "buttonCount": 6,
+    "cardCount": 29,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 2,
+    "lines": 138
+  },
+  {
+    "path": "client/src/components/WellnessGoalTracker.jsx",
+    "buttonCount": 7,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 62,
+    "hooks": 4,
+    "lines": 311
+  },
+  {
+    "path": "client/src/components/mastery/MentalModelsLibrary.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 24,
+    "tailwindCount": 49,
+    "hooks": 8,
+    "lines": 259
+  },
+  {
+    "path": "client/src/components/paradox/ParadoxCartographer.tsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 68,
+    "hooks": 10,
+    "lines": 315
+  },
+  {
+    "path": "client/src/components/semantic/SemanticMapping.tsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 58,
+    "hooks": 12,
+    "lines": 307
+  },
+  {
+    "path": "client/src/pages/AdaptiveCompanionPage.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 70,
+    "hooks": 5,
+    "lines": 368
+  },
+  {
+    "path": "client/src/pages/BiometricDashboard.jsx",
+    "buttonCount": 3,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 68,
+    "hooks": 8,
+    "lines": 344
+  },
+  {
+    "path": "client/src/pages/pathways/ValuesToActions.jsx",
+    "buttonCount": 7,
+    "cardCount": 21,
+    "modalCount": 0,
+    "inputCount": 20,
+    "tailwindCount": 28,
+    "hooks": 5,
+    "lines": 190
+  },
+  {
+    "path": "client/src/pages/tools/MeaningMap.jsx",
+    "buttonCount": 9,
+    "cardCount": 29,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 33,
+    "hooks": 9,
+    "lines": 234
+  },
+  {
+    "path": "client/src/components/decision/DecisionArchitecture.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 64,
+    "hooks": 9,
+    "lines": 314
+  },
+  {
+    "path": "client/src/pages/Wellness.jsx",
+    "buttonCount": 3,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 68,
+    "hooks": 6,
+    "lines": 554
+  },
+  {
+    "path": "client/src/components/weave/KnowledgeWeaveMap.tsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 55,
+    "hooks": 13,
+    "lines": 307
+  },
+  {
+    "path": "client/src/pages/DataRetention.jsx",
+    "buttonCount": 8,
+    "cardCount": 25,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 41,
+    "hooks": 0,
+    "lines": 176
+  },
+  {
+    "path": "client/src/pages/account/DeleteAccount.jsx",
+    "buttonCount": 6,
+    "cardCount": 27,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 41,
+    "hooks": 4,
+    "lines": 189
+  },
+  {
+    "path": "client/src/components/AngerManagement.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 58,
+    "hooks": 11,
+    "lines": 332
+  },
+  {
+    "path": "client/src/components/CopingStrategies.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 17,
+    "tailwindCount": 50,
+    "hooks": 5,
+    "lines": 408
+  },
+  {
+    "path": "client/src/components/SomaticRelease.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 61,
+    "hooks": 13,
+    "lines": 367
+  },
+  {
+    "path": "client/src/components/bias/BiasBlindSpots.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 16,
+    "tailwindCount": 52,
+    "hooks": 10,
+    "lines": 240
+  },
+  {
+    "path": "client/src/pages/ContentIndexPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 60,
+    "hooks": 8,
+    "lines": 378
+  },
+  {
+    "path": "client/src/pages/PublicRoadmap.jsx",
+    "buttonCount": 4,
+    "cardCount": 18,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 51,
+    "hooks": 0,
+    "lines": 151
+  },
+  {
+    "path": "client/src/pages/admin/SocialAnalytics.jsx",
+    "buttonCount": 1,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 67,
+    "hooks": 0,
+    "lines": 322
+  },
+  {
+    "path": "client/src/pages/preferences/SafetyPreferences.jsx",
+    "buttonCount": 5,
+    "cardCount": 34,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 34,
+    "hooks": 6,
+    "lines": 231
+  },
+  {
+    "path": "client/src/components/MindfulEating.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 66,
+    "hooks": 12,
+    "lines": 355
+  },
+  {
+    "path": "client/src/components/ValuesExplorer.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 51,
+    "hooks": 9,
+    "lines": 314
+  },
+  {
+    "path": "client/src/pages/DailyRoutinesPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 53,
+    "hooks": 3,
+    "lines": 451
+  },
+  {
+    "path": "client/src/pages/EliteToolsDashboard.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 2,
+    "inputCount": 0,
+    "tailwindCount": 69,
+    "hooks": 2,
+    "lines": 315
+  },
+  {
+    "path": "client/src/pages/admin/NewsletterAdmin.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 68,
+    "hooks": 2,
+    "lines": 232
+  },
+  {
+    "path": "client/src/pages/tools/MeditationPlayer.jsx",
+    "buttonCount": 12,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 36,
+    "hooks": 12,
+    "lines": 232
+  },
+  {
+    "path": "client/src/components/DigitalDetox.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 56,
+    "hooks": 11,
+    "lines": 288
+  },
+  {
+    "path": "client/src/components/wellness/MoodCalendar.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 9,
+    "tailwindCount": 59,
+    "hooks": 5,
+    "lines": 297
+  },
+  {
+    "path": "client/src/pages/ResetPassword.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 68,
+    "hooks": 5,
+    "lines": 377
+  },
+  {
+    "path": "client/src/pages/SoulWellnessPage.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 57,
+    "hooks": 2,
+    "lines": 364
+  },
+  {
+    "path": "client/src/pages/admin/SocialLibrary.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 58,
+    "hooks": 3,
+    "lines": 295
+  },
+  {
+    "path": "client/src/pages/BlogPost.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 63,
+    "hooks": 6,
+    "lines": 353
+  },
+  {
+    "path": "client/src/pages/pathways/Favorites.jsx",
+    "buttonCount": 14,
+    "cardCount": 11,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 42,
+    "hooks": 3,
+    "lines": 189
+  },
+  {
+    "path": "client/src/components/QuestPanel.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 68,
+    "hooks": 5,
+    "lines": 241
+  },
+  {
+    "path": "client/src/components/StressMonitor.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 58,
+    "hooks": 8,
+    "lines": 314
+  },
+  {
+    "path": "client/src/pages/StressResponseGuidePage.jsx",
+    "buttonCount": 1,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 63,
+    "hooks": 2,
+    "lines": 387
+  },
+  {
+    "path": "client/src/pages/tools/Reframe.jsx",
+    "buttonCount": 10,
+    "cardCount": 17,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 41,
+    "hooks": 5,
+    "lines": 232
+  },
+  {
+    "path": "client/src/components/ContentStudio.jsx",
+    "buttonCount": 12,
+    "cardCount": 0,
+    "modalCount": 1,
+    "inputCount": 1,
+    "tailwindCount": 54,
+    "hooks": 8,
+    "lines": 678
+  },
+  {
+    "path": "client/src/components/EnergyBooster.jsx",
+    "buttonCount": 4,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 16,
+    "tailwindCount": 47,
+    "hooks": 10,
+    "lines": 298
+  },
+  {
+    "path": "client/src/components/TglpNavbar.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 65,
+    "hooks": 7,
+    "lines": 434
+  },
+  {
+    "path": "client/src/components/WellnessTimer.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 49,
+    "hooks": 10,
+    "lines": 298
+  },
+  {
+    "path": "client/src/pages/HealingLibraryPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 7,
+    "inputCount": 0,
+    "tailwindCount": 59,
+    "hooks": 3,
+    "lines": 367
+  },
+  {
+    "path": "client/src/pages/InsightsDashboard.jsx",
+    "buttonCount": 2,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 63,
+    "hooks": 2,
+    "lines": 239
+  },
+  {
+    "path": "client/src/pages/PricingPage.jsx",
+    "buttonCount": 4,
+    "cardCount": 17,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 47,
+    "hooks": 3,
+    "lines": 237
+  },
+  {
+    "path": "client/src/pages/ProtocolSession.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 59,
+    "hooks": 7,
+    "lines": 313
+  },
+  {
+    "path": "client/src/pages/SelfCareToolkitPage.jsx",
+    "buttonCount": 3,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 46,
+    "hooks": 3,
+    "lines": 415
+  },
+  {
+    "path": "client/src/pages/SleepGuidePage.jsx",
+    "buttonCount": 1,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 62,
+    "hooks": 2,
+    "lines": 346
+  },
+  {
+    "path": "client/src/pages/_quarantine/legacy-landing/Home.jsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 67,
+    "hooks": 2,
+    "lines": 612
+  },
+  {
+    "path": "client/src/pages/admin/RevenueAdmin.jsx",
+    "buttonCount": 5,
+    "cardCount": 21,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 41,
+    "hooks": 2,
+    "lines": 185
+  },
+  {
+    "path": "client/src/pages/admin/RolesPermissions.jsx",
+    "buttonCount": 2,
+    "cardCount": 20,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 46,
+    "hooks": 0,
+    "lines": 203
+  },
+  {
+    "path": "client/src/components/LaughterTherapy.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 9,
+    "tailwindCount": 55,
+    "hooks": 13,
+    "lines": 356
+  },
+  {
+    "path": "client/src/components/WellnessStreakDashboard.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 66,
+    "hooks": 4,
+    "lines": 321
+  },
+  {
+    "path": "client/src/components/metacognition/MetacognitionDashboard.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 55,
+    "hooks": 8,
+    "lines": 288
+  },
+  {
+    "path": "client/src/pages/CheckIn.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 47,
+    "hooks": 15,
+    "lines": 393
+  },
+  {
+    "path": "client/src/pages/GratitudePractice.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 57,
+    "hooks": 9,
+    "lines": 424
+  },
+  {
+    "path": "client/src/pages/WellnessDashboard.jsx",
+    "buttonCount": 1,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 62,
+    "hooks": 10,
+    "lines": 481
+  },
+  {
+    "path": "client/src/pages/help/RefundHelp.jsx",
+    "buttonCount": 8,
+    "cardCount": 25,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 34,
+    "hooks": 0,
+    "lines": 130
+  },
+  {
+    "path": "client/src/pages/tools/CommunityCheckin.jsx",
+    "buttonCount": 10,
+    "cardCount": 21,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 34,
+    "hooks": 8,
+    "lines": 211
+  },
+  {
+    "path": "client/src/components/AnxietyRelief.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 61,
+    "hooks": 13,
+    "lines": 385
+  },
+  {
+    "path": "client/src/components/MindfulnessChallenges.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 61,
+    "hooks": 8,
+    "lines": 275
+  },
+  {
+    "path": "client/src/components/metacognition/MetaCognitionStudio.tsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 53,
+    "hooks": 11,
+    "lines": 343
+  },
+  {
+    "path": "client/src/components/moral/MoralReasoningLab.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 12,
+    "tailwindCount": 49,
+    "hooks": 8,
+    "lines": 209
+  },
+  {
+    "path": "client/src/features/daily/DailyFlow.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 59,
+    "hooks": 2,
+    "lines": 234
+  },
+  {
+    "path": "client/src/pages/BehaviorChangePage.tsx",
+    "buttonCount": 3,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 55,
+    "hooks": 6,
+    "lines": 319
+  },
+  {
+    "path": "client/src/pages/DailyWisdomOraclePage.tsx",
+    "buttonCount": 4,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 58,
+    "hooks": 9,
+    "lines": 369
+  },
+  {
+    "path": "client/src/pages/account/Sessions.jsx",
+    "buttonCount": 4,
+    "cardCount": 34,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 28,
+    "hooks": 2,
+    "lines": 186
+  },
+  {
+    "path": "client/src/pages/tools/DigitalSunset.jsx",
+    "buttonCount": 4,
+    "cardCount": 29,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 33,
+    "hooks": 3,
+    "lines": 166
+  },
+  {
+    "path": "client/src/components/EmotionWheel.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 46,
+    "hooks": 4,
+    "lines": 282
+  },
+  {
+    "path": "client/src/pages/StrategyMapsPage.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 59,
+    "hooks": 5,
+    "lines": 563
+  },
+  {
+    "path": "client/src/pages/admin/AdminUsers.jsx",
+    "buttonCount": 1,
+    "cardCount": 17,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 46,
+    "hooks": 2,
+    "lines": 186
+  },
+  {
+    "path": "client/src/components/WeeklyReflection.jsx",
+    "buttonCount": 6,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 48,
+    "hooks": 10,
+    "lines": 342
+  },
+  {
+    "path": "client/src/features/community/Community.tsx",
+    "buttonCount": 3,
+    "cardCount": 25,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 35,
+    "hooks": 3,
+    "lines": 171
+  },
+  {
+    "path": "client/src/pages/AlignmentPath.jsx",
+    "buttonCount": 2,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 60,
+    "hooks": 3,
+    "lines": 321
+  },
+  {
+    "path": "client/src/pages/pathways/ReflectionHistory.jsx",
+    "buttonCount": 10,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 38,
+    "hooks": 3,
+    "lines": 264
+  },
+  {
+    "path": "client/src/components/AchievementSystem.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 58,
+    "hooks": 7,
+    "lines": 329
+  },
+  {
+    "path": "client/src/components/CrisisStabilizer.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 59,
+    "hooks": 14,
+    "lines": 341
+  },
+  {
+    "path": "client/src/components/PositiveVisualization.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 22,
+    "tailwindCount": 37,
+    "hooks": 11,
+    "lines": 291
+  },
+  {
+    "path": "client/src/components/creative/CreativeProblemSolver.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 54,
+    "hooks": 10,
+    "lines": 280
+  },
+  {
+    "path": "client/src/components/journey/JourneyComposer.tsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 54,
+    "hooks": 8,
+    "lines": 280
+  },
+  {
+    "path": "client/src/pages/Blog.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 60,
+    "hooks": 4,
+    "lines": 566
+  },
+  {
+    "path": "client/src/pages/account/OrderHistory.jsx",
+    "buttonCount": 8,
+    "cardCount": 21,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 34,
+    "hooks": 0,
+    "lines": 135
+  },
+  {
+    "path": "client/src/pages/tools/RepairScript.jsx",
+    "buttonCount": 6,
+    "cardCount": 25,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 24,
+    "hooks": 4,
+    "lines": 152
+  },
+  {
+    "path": "client/src/pages/tools/WeeklyReflection.jsx",
+    "buttonCount": 10,
+    "cardCount": 17,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 35,
+    "hooks": 5,
+    "lines": 176
+  },
+  {
+    "path": "client/src/components/PositiveReframing.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 51,
+    "hooks": 10,
+    "lines": 281
+  },
+  {
+    "path": "client/src/components/SoundHealingPlayer.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 46,
+    "hooks": 12,
+    "lines": 363
+  },
+  {
+    "path": "client/src/components/atlas/PhilosophicalAtlas.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 16,
+    "tailwindCount": 41,
+    "hooks": 5,
+    "lines": 208
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/AIRepairCenter.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 58,
+    "hooks": 5,
+    "lines": 390
+  },
+  {
+    "path": "client/src/pages/tools/GriefLetter.jsx",
+    "buttonCount": 9,
+    "cardCount": 17,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 31,
+    "hooks": 6,
+    "lines": 190
+  },
+  {
+    "path": "client/src/components/AffirmationCards.jsx",
+    "buttonCount": 7,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 42,
+    "hooks": 8,
+    "lines": 339
+  },
+  {
+    "path": "client/src/components/CreativeExpression.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 53,
+    "hooks": 13,
+    "lines": 400
+  },
+  {
+    "path": "client/src/components/MindfulnessBell.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 55,
+    "hooks": 15,
+    "lines": 320
+  },
+  {
+    "path": "client/src/components/ReflectionInsights.jsx",
+    "buttonCount": 4,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 48,
+    "hooks": 6,
+    "lines": 369
+  },
+  {
+    "path": "client/src/components/admin/OrchestratorTestPanel.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 14,
+    "tailwindCount": 44,
+    "hooks": 12,
+    "lines": 335
+  },
+  {
+    "path": "client/src/components/ui/CRMWidgets.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 58,
+    "hooks": 0,
+    "lines": 336
+  },
+  {
+    "path": "client/src/pages/CalmingScenesPage.jsx",
+    "buttonCount": 4,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 51,
+    "hooks": 4,
+    "lines": 333
+  },
+  {
+    "path": "client/src/pages/DesignDashboard.jsx",
+    "buttonCount": 3,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 49,
+    "hooks": 2,
+    "lines": 220
+  },
+  {
+    "path": "client/src/pages/Reflection.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 48,
+    "hooks": 19,
+    "lines": 552
+  },
+  {
+    "path": "client/src/pages/admin/FeedbackAggregator.jsx",
+    "buttonCount": 9,
+    "cardCount": 11,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 40,
+    "hooks": 3,
+    "lines": 210
+  },
+  {
+    "path": "client/src/pages/admin/SystemAlerts.jsx",
+    "buttonCount": 6,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 48,
+    "hooks": 7,
+    "lines": 236
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 60,
+    "hooks": 2,
+    "lines": 193
+  },
+  {
+    "path": "client/src/pages/dashboard/Insights.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 57,
+    "hooks": 0,
+    "lines": 212
+  },
+  {
+    "path": "client/src/components/EmotionalIntelligenceQuiz.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 58,
+    "hooks": 8,
+    "lines": 314
+  },
+  {
+    "path": "client/src/components/logic/LogicLatticeLab.tsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 52,
+    "hooks": 7,
+    "lines": 257
+  },
+  {
+    "path": "client/src/features/community/DiscussionPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 55,
+    "hooks": 3,
+    "lines": 310
+  },
+  {
+    "path": "client/src/pages/DailyReflection.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 55,
+    "hooks": 9,
+    "lines": 317
+  },
+  {
+    "path": "client/src/pages/ProtocolBrowser.jsx",
+    "buttonCount": 1,
+    "cardCount": 2,
+    "modalCount": 3,
+    "inputCount": 7,
+    "tailwindCount": 47,
+    "hooks": 7,
+    "lines": 225
+  },
+  {
+    "path": "client/src/pages/ResearchEvidencePage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 60,
+    "hooks": 0,
+    "lines": 342
+  },
+  {
+    "path": "client/src/pages/pathways/CalmPlan.jsx",
+    "buttonCount": 7,
+    "cardCount": 21,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 26,
+    "hooks": 4,
+    "lines": 170
+  },
+  {
+    "path": "client/src/components/AICompanion.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 51,
+    "hooks": 13,
+    "lines": 394
+  },
+  {
+    "path": "client/src/components/MoodVisualizer.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 49,
+    "hooks": 6,
+    "lines": 291
+  },
+  {
+    "path": "client/src/components/SleepTracker.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 54,
+    "hooks": 7,
+    "lines": 297
+  },
+  {
+    "path": "client/src/components/modules/ModulesPanel.tsx",
+    "buttonCount": 1,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 56,
+    "hooks": 7,
+    "lines": 260
+  },
+  {
+    "path": "client/src/components/temporal/TemporalReflection.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 53,
+    "hooks": 6,
+    "lines": 232
+  },
+  {
+    "path": "client/src/components/thought/ThoughtExperimentsLab.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 46,
+    "hooks": 9,
+    "lines": 244
+  },
+  {
+    "path": "client/src/pages/CourseCatalog.jsx",
+    "buttonCount": 9,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 47,
+    "hooks": 6,
+    "lines": 393
+  },
+  {
+    "path": "client/src/pages/CreatorProfile.jsx",
+    "buttonCount": 6,
+    "cardCount": 15,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 38,
+    "hooks": 0,
+    "lines": 144
+  },
+  {
+    "path": "client/src/pages/RecoveryPage.jsx",
+    "buttonCount": 1,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 54,
+    "hooks": 0,
+    "lines": 252
+  },
+  {
+    "path": "client/src/pages/Register.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 58,
+    "hooks": 4,
+    "lines": 267
+  },
+  {
+    "path": "client/src/pages/ResourcesPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 59,
+    "hooks": 0,
+    "lines": 292
+  },
+  {
+    "path": "client/src/components/ProgressTracker.jsx",
+    "buttonCount": 2,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 51,
+    "hooks": 3,
+    "lines": 243
+  },
+  {
+    "path": "client/src/pages/CelebrationRitual.jsx",
+    "buttonCount": 4,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 49,
+    "hooks": 5,
+    "lines": 320
+  },
+  {
+    "path": "client/src/pages/RoutinesPage.jsx",
+    "buttonCount": 3,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 50,
+    "hooks": 2,
+    "lines": 273
+  },
+  {
+    "path": "client/src/components/share/ShareCardPrompt.tsx",
+    "buttonCount": 5,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 43,
+    "hooks": 4,
+    "lines": 259
+  },
+  {
+    "path": "client/src/components/SelfCompassion.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 51,
+    "hooks": 10,
+    "lines": 304
+  },
+  {
+    "path": "client/src/pages/BlogEditor.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 47,
+    "hooks": 7,
+    "lines": 278
+  },
+  {
+    "path": "client/src/pages/CommunityCircle.jsx",
+    "buttonCount": 5,
+    "cardCount": 2,
+    "modalCount": 7,
+    "inputCount": 0,
+    "tailwindCount": 42,
+    "hooks": 4,
+    "lines": 239
+  },
+  {
+    "path": "client/src/pages/Contact.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 52,
+    "hooks": 3,
+    "lines": 278
+  },
+  {
+    "path": "client/src/pages/WellnessGlossaryPage.jsx",
+    "buttonCount": 3,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 46,
+    "hooks": 4,
+    "lines": 502
+  },
+  {
+    "path": "client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 53,
+    "hooks": 4,
+    "lines": 512
+  },
+  {
+    "path": "client/src/pages/admin/AnalyticsDashboard.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 51,
+    "hooks": 2,
+    "lines": 158
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx",
+    "buttonCount": 12,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 7,
+    "lines": 318
+  },
+  {
+    "path": "client/src/components/DailyWellnessPlanner.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 50,
+    "hooks": 4,
+    "lines": 287
+  },
+  {
+    "path": "client/src/components/ReflectionCardExport.jsx",
+    "buttonCount": 6,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 42,
+    "hooks": 11,
+    "lines": 347
+  },
+  {
+    "path": "client/src/components/WorryTimeScheduler.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 50,
+    "hooks": 12,
+    "lines": 279
+  },
+  {
+    "path": "client/src/components/XPProgressBar.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 55,
+    "hooks": 4,
+    "lines": 155
+  },
+  {
+    "path": "client/src/components/mastery/DeepWorkTracker.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 48,
+    "hooks": 6,
+    "lines": 243
+  },
+  {
+    "path": "client/src/components/mi/MITools.tsx",
+    "buttonCount": 3,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 51,
+    "hooks": 7,
+    "lines": 337
+  },
+  {
+    "path": "client/src/pages/AffirmationWall.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 8,
+    "inputCount": 1,
+    "tailwindCount": 40,
+    "hooks": 6,
+    "lines": 259
+  },
+  {
+    "path": "client/src/pages/HowToGuidesPage.jsx",
+    "buttonCount": 1,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 52,
+    "hooks": 2,
+    "lines": 368
+  },
+  {
+    "path": "client/src/pages/admin/CommandCenter.jsx",
+    "buttonCount": 6,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 44,
+    "hooks": 8,
+    "lines": 436
+  },
+  {
+    "path": "client/src/components/HealingHero.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 50,
+    "hooks": 4,
+    "lines": 296
+  },
+  {
+    "path": "client/src/components/MeditationTimer.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 45,
+    "hooks": 13,
+    "lines": 298
+  },
+  {
+    "path": "client/src/components/ShareReflection.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 40,
+    "hooks": 7,
+    "lines": 227
+  },
+  {
+    "path": "client/src/pages/CrisisResources.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 54,
+    "hooks": 0,
+    "lines": 308
+  },
+  {
+    "path": "client/src/pages/DailyPracticePage.jsx",
+    "buttonCount": 1,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 49,
+    "hooks": 2,
+    "lines": 284
+  },
+  {
+    "path": "client/src/components/EmotionCalendar.jsx",
+    "buttonCount": 8,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 29,
+    "hooks": 8,
+    "lines": 305
+  },
+  {
+    "path": "client/src/components/attention/AttentionEcology.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 47,
+    "hooks": 7,
+    "lines": 261
+  },
+  {
+    "path": "client/src/components/peacescape/CustomizerPanel.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 40,
+    "hooks": 7,
+    "lines": 270
+  },
+  {
+    "path": "client/src/components/stance/PhilosophicalStanceMapper.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 42,
+    "hooks": 9,
+    "lines": 242
+  },
+  {
+    "path": "client/src/components/values/ValuesClarification.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 45,
+    "hooks": 6,
+    "lines": 229
+  },
+  {
+    "path": "client/src/components/wellness/EmotionLog.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 11,
+    "tailwindCount": 39,
+    "hooks": 5,
+    "lines": 255
+  },
+  {
+    "path": "client/src/pages/ChallengeDay.jsx",
+    "buttonCount": 2,
+    "cardCount": 5,
+    "modalCount": 3,
+    "inputCount": 2,
+    "tailwindCount": 41,
+    "hooks": 7,
+    "lines": 333
+  },
+  {
+    "path": "client/src/pages/LegalPage.jsx",
+    "buttonCount": 4,
+    "cardCount": 21,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 28,
+    "hooks": 0,
+    "lines": 110
+  },
+  {
+    "path": "client/src/pages/NewsPage.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 52,
+    "hooks": 5,
+    "lines": 324
+  },
+  {
+    "path": "client/src/pages/pathways/GoalOnboarding.jsx",
+    "buttonCount": 11,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 30,
+    "hooks": 5,
+    "lines": 212
+  },
+  {
+    "path": "client/src/components/ReminderSettings.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 42,
+    "hooks": 5,
+    "lines": 251
+  },
+  {
+    "path": "client/src/components/SocialConnection.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 46,
+    "hooks": 10,
+    "lines": 248
+  },
+  {
+    "path": "client/src/components/existential/ExistentialInquiry.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 39,
+    "hooks": 8,
+    "lines": 173
+  },
+  {
+    "path": "client/src/components/layout/Footer.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 52,
+    "hooks": 0,
+    "lines": 187
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 49,
+    "hooks": 4,
+    "lines": 158
+  },
+  {
+    "path": "client/src/components/BoundaryBuilder.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 40,
+    "hooks": 9,
+    "lines": 295
+  },
+  {
+    "path": "client/src/components/narrative/NarrativeIdentityStudio.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 45,
+    "hooks": 7,
+    "lines": 204
+  },
+  {
+    "path": "client/src/pages/ExamplesPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 47,
+    "hooks": 3,
+    "lines": 312
+  },
+  {
+    "path": "client/src/pages/tools/BreathingTool.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 48,
+    "hooks": 15,
+    "lines": 444
+  },
+  {
+    "path": "client/src/components/MorningEveningRituals.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 47,
+    "hooks": 9,
+    "lines": 252
+  },
+  {
+    "path": "client/src/components/inquiry/DialecticalInquiry.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 43,
+    "hooks": 5,
+    "lines": 203
+  },
+  {
+    "path": "client/src/pages/tools/UrgeSurf.jsx",
+    "buttonCount": 10,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 33,
+    "hooks": 7,
+    "lines": 185
+  },
+  {
+    "path": "client/src/components/HabitTracker.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 43,
+    "hooks": 8,
+    "lines": 263
+  },
+  {
+    "path": "client/src/components/MotivationBooster.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 10,
+    "lines": 254
+  },
+  {
+    "path": "client/src/components/SelfCareBingo.jsx",
+    "buttonCount": 2,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 46,
+    "hooks": 9,
+    "lines": 288
+  },
+  {
+    "path": "client/src/components/VoiceSettings.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 7,
+    "lines": 311
+  },
+  {
+    "path": "client/src/components/mi/ReframingToolkit.tsx",
+    "buttonCount": 6,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 41,
+    "hooks": 4,
+    "lines": 197
+  },
+  {
+    "path": "client/src/components/patterns/InsightPatternLab.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 45,
+    "hooks": 8,
+    "lines": 207
+  },
+  {
+    "path": "client/src/pages/BlogIndex.jsx",
+    "buttonCount": 2,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 45,
+    "hooks": 4,
+    "lines": 207
+  },
+  {
+    "path": "client/src/pages/TwelvePracticesPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 45,
+    "hooks": 2,
+    "lines": 180
+  },
+  {
+    "path": "client/src/pages/tools/BodyScan.jsx",
+    "buttonCount": 10,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 32,
+    "hooks": 7,
+    "lines": 187
+  },
+  {
+    "path": "client/src/components/AchievementBadge.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 2,
+    "inputCount": 3,
+    "tailwindCount": 42,
+    "hooks": 5,
+    "lines": 276
+  },
+  {
+    "path": "client/src/components/ConsentBanner.jsx",
+    "buttonCount": 14,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 34,
+    "hooks": 6,
+    "lines": 166
+  },
+  {
+    "path": "client/src/components/WeeklyRecap.jsx",
+    "buttonCount": 2,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 37,
+    "hooks": 2,
+    "lines": 255
+  },
+  {
+    "path": "client/src/components/ui/ResourceTiles.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 46,
+    "hooks": 0,
+    "lines": 380
+  },
+  {
+    "path": "client/src/pages/Invite.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 46,
+    "hooks": 4,
+    "lines": 217
+  },
+  {
+    "path": "client/src/pages/Login.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 47,
+    "hooks": 6,
+    "lines": 227
+  },
+  {
+    "path": "client/src/pages/SocialHub.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 39,
+    "hooks": 3,
+    "lines": 240
+  },
+  {
+    "path": "client/src/pages/tools/AweMicrodose.jsx",
+    "buttonCount": 10,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 31,
+    "hooks": 7,
+    "lines": 174
+  },
+  {
+    "path": "client/src/components/BreathingExercise.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 34,
+    "hooks": 13,
+    "lines": 312
+  },
+  {
+    "path": "client/src/pages/Premium.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 6,
+    "lines": 299
+  },
+  {
+    "path": "client/src/pages/Privacy.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 47,
+    "hooks": 0,
+    "lines": 201
+  },
+  {
+    "path": "client/src/pages/Privacy.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 47,
+    "hooks": 0,
+    "lines": 144
+  },
+  {
+    "path": "client/src/pages/tools/CompassionBreak.jsx",
+    "buttonCount": 10,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 30,
+    "hooks": 7,
+    "lines": 162
+  },
+  {
+    "path": "client/src/components/GlobalSearch.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 37,
+    "hooks": 11,
+    "lines": 231
+  },
+  {
+    "path": "client/src/pages/Newsletter.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 45,
+    "hooks": 0,
+    "lines": 124
+  },
+  {
+    "path": "client/src/components/AgeConsentGate.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 7,
+    "lines": 172
+  },
+  {
+    "path": "client/src/components/FeedbackWidget.jsx",
+    "buttonCount": 14,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 29,
+    "hooks": 10,
+    "lines": 250
+  },
+  {
+    "path": "client/src/components/MoodInsight.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 42,
+    "hooks": 5,
+    "lines": 218
+  },
+  {
+    "path": "client/src/components/NotificationCenter.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 39,
+    "hooks": 3,
+    "lines": 265
+  },
+  {
+    "path": "client/src/components/BodyScanMeditation.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 40,
+    "hooks": 10,
+    "lines": 209
+  },
+  {
+    "path": "client/src/components/EmotionLog.jsx",
+    "buttonCount": 5,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 9,
+    "tailwindCount": 17,
+    "hooks": 5,
+    "lines": 161
+  },
+  {
+    "path": "client/src/components/ReminderScheduler.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 34,
+    "hooks": 7,
+    "lines": 274
+  },
+  {
+    "path": "client/src/pages/CommunityHub.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 0,
+    "lines": 153
+  },
+  {
+    "path": "client/src/pages/LearnDetail.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 44,
+    "hooks": 0,
+    "lines": 211
+  },
+  {
+    "path": "client/src/components/content/ClarityCard.jsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 42,
+    "hooks": 0,
+    "lines": 189
+  },
+  {
+    "path": "client/src/components/layout/Header.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 37,
+    "hooks": 11,
+    "lines": 284
+  },
+  {
+    "path": "client/src/components/wellness/WeatherMoodSync.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 36,
+    "hooks": 9,
+    "lines": 341
+  },
+  {
+    "path": "client/src/pages/ForgotPassword.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 42,
+    "hooks": 0,
+    "lines": 254
+  },
+  {
+    "path": "client/src/pages/GlossaryPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 8,
+    "tailwindCount": 35,
+    "hooks": 6,
+    "lines": 206
+  },
+  {
+    "path": "client/src/pages/PeacescapePage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 43,
+    "hooks": 5,
+    "lines": 276
+  },
+  {
+    "path": "client/src/pages/Profile.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 42,
+    "hooks": 3,
+    "lines": 164
+  },
+  {
+    "path": "client/src/pages/QAPage.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 40,
+    "hooks": 6,
+    "lines": 300
+  },
+  {
+    "path": "client/src/pages/SystemMapPage.jsx",
+    "buttonCount": 1,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 31,
+    "hooks": 2,
+    "lines": 307
+  },
+  {
+    "path": "client/src/pages/pathways/PathwaysHome.jsx",
+    "buttonCount": 6,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 23,
+    "hooks": 2,
+    "lines": 166
+  },
+  {
+    "path": "client/src/pages/tools/PHQ9Assessment.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 40,
+    "hooks": 6,
+    "lines": 204
+  },
+  {
+    "path": "client/src/components/ProgressiveMuscleRelaxation.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 39,
+    "hooks": 10,
+    "lines": 211
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 39,
+    "hooks": 5,
+    "lines": 124
+  },
+  {
+    "path": "client/src/pages/tools/ReframePage.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 36,
+    "hooks": 5,
+    "lines": 244
+  },
+  {
+    "path": "client/src/components/AchievementBadges.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 40,
+    "hooks": 6,
+    "lines": 293
+  },
+  {
+    "path": "client/src/components/frameworks/FrameworkExplorer.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 33,
+    "hooks": 3,
+    "lines": 163
+  },
+  {
+    "path": "client/src/components/patterns/PatternInsights.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 41,
+    "hooks": 3,
+    "lines": 115
+  },
+  {
+    "path": "client/src/pages/ToolsPage.jsx",
+    "buttonCount": 2,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 36,
+    "hooks": 2,
+    "lines": 292
+  },
+  {
+    "path": "client/src/components/SelfCareChecklist.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 38,
+    "hooks": 6,
+    "lines": 259
+  },
+  {
+    "path": "client/src/pages/ProfessionalResourcesPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 38,
+    "hooks": 0,
+    "lines": 232
+  },
+  {
+    "path": "client/src/pages/SupportPage.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 39,
+    "hooks": 2,
+    "lines": 119
+  },
+  {
+    "path": "client/src/pages/WellnessHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 38,
+    "hooks": 0,
+    "lines": 230
+  },
+  {
+    "path": "client/src/pages/_quarantine/legacy-landing/LandingV2.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 40,
+    "hooks": 0,
+    "lines": 172
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 38,
+    "hooks": 2,
+    "lines": 123
+  },
+  {
+    "path": "client/src/components/EmotionPieChart.jsx",
+    "buttonCount": 0,
+    "cardCount": 25,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 2,
+    "lines": 168
+  },
+  {
+    "path": "client/src/components/MoodTrendsChart.jsx",
+    "buttonCount": 0,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 26,
+    "hooks": 2,
+    "lines": 212
+  },
+  {
+    "path": "client/src/components/SacredNav.jsx",
+    "buttonCount": 8,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 31,
+    "hooks": 6,
+    "lines": 208
+  },
+  {
+    "path": "client/src/pages/Challenge.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 39,
+    "hooks": 8,
+    "lines": 331
+  },
+  {
+    "path": "client/src/pages/tools/GAD7Assessment.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 37,
+    "hooks": 6,
+    "lines": 181
+  },
+  {
+    "path": "client/src/components/AccessibilityToolbar.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 31,
+    "hooks": 7,
+    "lines": 209
+  },
+  {
+    "path": "client/src/components/DailyAffirmations.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 33,
+    "hooks": 6,
+    "lines": 258
+  },
+  {
+    "path": "client/src/components/admin/AIKnowledgeBaseSummary.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 37,
+    "hooks": 2,
+    "lines": 149
+  },
+  {
+    "path": "client/src/pages/tools/ManipulationDetector.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 34,
+    "hooks": 5,
+    "lines": 266
+  },
+  {
+    "path": "client/src/components/StreakCounter.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 37,
+    "hooks": 4,
+    "lines": 155
+  },
+  {
+    "path": "client/src/pages/Terms.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 37,
+    "hooks": 0,
+    "lines": 119
+  },
+  {
+    "path": "client/src/pages/tools/BreathPacer.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 33,
+    "hooks": 9,
+    "lines": 196
+  },
+  {
+    "path": "client/src/pages/tools/CognitiveDistortionChecker.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 33,
+    "hooks": 5,
+    "lines": 186
+  },
+  {
+    "path": "client/src/components/JournalInsights.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 36,
+    "hooks": 4,
+    "lines": 275
+  },
+  {
+    "path": "client/src/components/ui/Card.tsx",
+    "buttonCount": 0,
+    "cardCount": 30,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 77
+  },
+  {
+    "path": "client/src/pages/CommunityFeed.jsx",
+    "buttonCount": 2,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 30,
+    "hooks": 2,
+    "lines": 171
+  },
+  {
+    "path": "client/src/components/AffirmationDeck.jsx",
+    "buttonCount": 3,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 29,
+    "hooks": 8,
+    "lines": 240
+  },
+  {
+    "path": "client/src/components/Footer.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 35,
+    "hooks": 0,
+    "lines": 95
+  },
+  {
+    "path": "client/src/components/MoodResponder.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 32,
+    "hooks": 10,
+    "lines": 248
+  },
+  {
+    "path": "client/src/components/lumi/LumiV6.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 32,
+    "hooks": 35,
+    "lines": 1081
+  },
+  {
+    "path": "client/src/components/mi/MicroCommitmentEngine.tsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 32,
+    "hooks": 4,
+    "lines": 181
+  },
+  {
+    "path": "client/src/pages/TwelveStepsPage.tsx",
+    "buttonCount": 2,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 27,
+    "hooks": 3,
+    "lines": 283
+  },
+  {
+    "path": "client/src/pages/tools/NervousSystemCheck.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 33,
+    "hooks": 5,
+    "lines": 296
+  },
+  {
+    "path": "client/src/sections/NlpMiContent.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 35,
+    "hooks": 2,
+    "lines": 506
+  },
+  {
+    "path": "client/src/components/share/InfinityHeartCard.jsx",
+    "buttonCount": 3,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 28,
+    "hooks": 3,
+    "lines": 144
+  },
+  {
+    "path": "client/src/pages/SelfLovePage.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 32,
+    "hooks": 3,
+    "lines": 153
+  },
+  {
+    "path": "client/src/components/AgeConfirmationModal.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 4,
+    "inputCount": 2,
+    "tailwindCount": 21,
+    "hooks": 9,
+    "lines": 169
+  },
+  {
+    "path": "client/src/components/ShareableReflectionCard.jsx",
+    "buttonCount": 3,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 23,
+    "hooks": 2,
+    "lines": 227
+  },
+  {
+    "path": "client/src/pages/HealthPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 30,
+    "hooks": 0,
+    "lines": 105
+  },
+  {
+    "path": "client/src/pages/tools/SleepQualityCalculator.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 31,
+    "hooks": 6,
+    "lines": 280
+  },
+  {
+    "path": "client/src/pages/tools/index.jsx",
+    "buttonCount": 0,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 31,
+    "hooks": 0,
+    "lines": 115
+  },
+  {
+    "path": "client/src/components/WellnessScore.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 32,
+    "hooks": 6,
+    "lines": 194
+  },
+  {
+    "path": "client/src/components/chat/AIChatPanel.tsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 26,
+    "hooks": 11,
+    "lines": 262
+  },
+  {
+    "path": "client/src/components/share/ReflectionCard.jsx",
+    "buttonCount": 3,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 22,
+    "hooks": 4,
+    "lines": 137
+  },
+  {
+    "path": "client/src/lumi-rituals/components/GuidedPresenceRitual.tsx",
+    "buttonCount": 21,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 5,
+    "lines": 287
+  },
+  {
+    "path": "client/src/pages/AboutApproachPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 32,
+    "hooks": 0,
+    "lines": 105
+  },
+  {
+    "path": "client/src/pages/WellnessToolsHub.jsx",
+    "buttonCount": 0,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 30,
+    "hooks": 0,
+    "lines": 115
+  },
+  {
+    "path": "client/src/pages/tools/BoundaryBuilderTool.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 29,
+    "hooks": 5,
+    "lines": 182
+  },
+  {
+    "path": "client/src/components/PersistentDisclaimer.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 30,
+    "hooks": 0,
+    "lines": 168
+  },
+  {
+    "path": "client/src/components/admin/AIHealthPipeline.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 29,
+    "hooks": 5,
+    "lines": 182
+  },
+  {
+    "path": "client/src/pages/ComingSoon.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 31,
+    "hooks": 0,
+    "lines": 112
+  },
+  {
+    "path": "client/src/pages/NotFound.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 30,
+    "hooks": 0,
+    "lines": 126
+  },
+  {
+    "path": "client/src/pages/Upgrade.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 30,
+    "hooks": 2,
+    "lines": 164
+  },
+  {
+    "path": "client/src/components/admin/Top50ProcessTracker.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 30,
+    "hooks": 0,
+    "lines": 142
+  },
+  {
+    "path": "client/src/pages/AvatarLab.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 29,
+    "hooks": 10,
+    "lines": 186
+  },
+  {
+    "path": "client/src/pages/FAQPage.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 28,
+    "hooks": 4,
+    "lines": 246
+  },
+  {
+    "path": "client/src/components/BenefitsBlock.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 29,
+    "hooks": 0,
+    "lines": 204
+  },
+  {
+    "path": "client/src/components/SacredForm.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 27,
+    "hooks": 5,
+    "lines": 156
+  },
+  {
+    "path": "client/src/components/VoiceAffirmation.jsx",
+    "buttonCount": 6,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 8,
+    "lines": 189
+  },
+  {
+    "path": "client/src/components/mi/MIPromptCard.tsx",
+    "buttonCount": 2,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 3,
+    "lines": 109
+  },
+  {
+    "path": "client/src/components/BenefitsSection.jsx",
+    "buttonCount": 0,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 24,
+    "hooks": 4,
+    "lines": 255
+  },
+  {
+    "path": "client/src/components/LevelUpModal.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 1,
+    "inputCount": 0,
+    "tailwindCount": 21,
+    "hooks": 3,
+    "lines": 81
+  },
+  {
+    "path": "client/src/components/OnboardingFlow.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 26,
+    "hooks": 2,
+    "lines": 91
+  },
+  {
+    "path": "client/src/components/SacredFooter.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 28,
+    "hooks": 0,
+    "lines": 239
+  },
+  {
+    "path": "client/src/components/methods/NLPTile.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 27,
+    "hooks": 0,
+    "lines": 193
+  },
+  {
+    "path": "client/src/components/personalization/ToolRecommendations.jsx",
+    "buttonCount": 1,
+    "cardCount": 12,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 14,
+    "hooks": 2,
+    "lines": 108
+  },
+  {
+    "path": "client/src/components/referral/ReferralInvite.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 27,
+    "hooks": 2,
+    "lines": 118
+  },
+  {
+    "path": "client/src/components/sacred/ProgressTracker.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 28,
+    "hooks": 9,
+    "lines": 195
+  },
+  {
+    "path": "client/src/components/Badges.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 24,
+    "hooks": 0,
+    "lines": 294
+  },
+  {
+    "path": "client/src/components/ContentLevelToggle.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 25,
+    "hooks": 4,
+    "lines": 158
+  },
+  {
+    "path": "client/src/components/GratitudePrompt.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 23,
+    "hooks": 5,
+    "lines": 195
+  },
+  {
+    "path": "client/src/components/dashboard/WeeklyRecap.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 27,
+    "hooks": 0,
+    "lines": 106
+  },
+  {
+    "path": "client/src/components/sacred/SacredFooter.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 27,
+    "hooks": 0,
+    "lines": 240
+  },
+  {
+    "path": "client/src/components/ui/QuoteBlock.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 23,
+    "hooks": 5,
+    "lines": 232
+  },
+  {
+    "path": "client/src/features/mirror/JournalMirror.tsx",
+    "buttonCount": 3,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 21,
+    "hooks": 8,
+    "lines": 169
+  },
+  {
+    "path": "client/src/pages/CelebrationFlow.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 27,
+    "hooks": 10,
+    "lines": 253
+  },
+  {
+    "path": "client/src/pages/LearnArticles.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 27,
+    "hooks": 0,
+    "lines": 81
+  },
+  {
+    "path": "client/src/pages/WisdomToolsPage.tsx",
+    "buttonCount": 1,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 22,
+    "hooks": 2,
+    "lines": 193
+  },
+  {
+    "path": "client/src/sections/ValueProposition.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 26,
+    "hooks": 7,
+    "lines": 451
+  },
+  {
+    "path": "client/src/components/content/ContentTierCompiler.jsx",
+    "buttonCount": 4,
+    "cardCount": 12,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 3,
+    "lines": 78
+  },
+  {
+    "path": "client/src/pages/Presence.jsx",
+    "buttonCount": 7,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 6,
+    "lines": 306
+  },
+  {
+    "path": "client/src/components/ObjectUploader.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 19,
+    "hooks": 6,
+    "lines": 212
+  },
+  {
+    "path": "client/src/components/StreakCelebration.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 19,
+    "hooks": 5,
+    "lines": 112
+  },
+  {
+    "path": "client/src/components/beliefs/BeliefMapper.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 19,
+    "hooks": 4,
+    "lines": 162
+  },
+  {
+    "path": "client/src/components/methods/StrengthsPIETile.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 25,
+    "hooks": 0,
+    "lines": 184
+  },
+  {
+    "path": "client/src/components/publishing/NewsletterInvite.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 4,
+    "lines": 124
+  },
+  {
+    "path": "client/src/components/share/StreakShare.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 2,
+    "lines": 150
+  },
+  {
+    "path": "client/src/components/wellness/WellnessPageShell.jsx",
+    "buttonCount": 2,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 19,
+    "hooks": 3,
+    "lines": 145
+  },
+  {
+    "path": "client/src/components/wisdom/WisdomCard.tsx",
+    "buttonCount": 2,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 5,
+    "lines": 97
+  },
+  {
+    "path": "client/src/pages/AdvancedToolsPage.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 24,
+    "hooks": 2,
+    "lines": 224
+  },
+  {
+    "path": "client/src/components/ChatWidget.tsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 4,
+    "tailwindCount": 18,
+    "hooks": 7,
+    "lines": 194
+  },
+  {
+    "path": "client/src/components/CodeCopilotPanel.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 24,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/components/consciousness/QuestionReflection.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 18,
+    "hooks": 7,
+    "lines": 143
+  },
+  {
+    "path": "client/src/components/growth/GrowthTimeline.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 5,
+    "lines": 203
+  },
+  {
+    "path": "client/src/components/ui/Card.jsx",
+    "buttonCount": 0,
+    "cardCount": 12,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 12,
+    "hooks": 0,
+    "lines": 126
+  },
+  {
+    "path": "client/src/pages/Disclaimer.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 24,
+    "hooks": 0,
+    "lines": 98
+  },
+  {
+    "path": "client/src/pages/ValuesPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 24,
+    "hooks": 0,
+    "lines": 134
+  },
+  {
+    "path": "client/src/components/LotusGuide.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 16,
+    "lines": 270
+  },
+  {
+    "path": "client/src/components/MilestoneTracker.jsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 22,
+    "hooks": 0,
+    "lines": 89
+  },
+  {
+    "path": "client/src/components/SharedEntryCard.jsx",
+    "buttonCount": 2,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 3,
+    "lines": 159
+  },
+  {
+    "path": "client/src/components/sacred/Hero.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 2,
+    "lines": 180
+  },
+  {
+    "path": "client/src/components/share/ShareModal.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 1,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 2,
+    "lines": 140
+  },
+  {
+    "path": "client/src/features/journal/JournalPage.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 19,
+    "hooks": 6,
+    "lines": 123
+  },
+  {
+    "path": "client/src/legal/PrivacyHighlights.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/lumi-conversation/components/LumiConversationPanel.tsx",
+    "buttonCount": 5,
+    "cardCount": 13,
+    "modalCount": 0,
+    "inputCount": 5,
+    "tailwindCount": 0,
+    "hooks": 9,
+    "lines": 273
+  },
+  {
+    "path": "client/src/pages/AdminLogin.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 21,
+    "hooks": 6,
+    "lines": 236
+  },
+  {
+    "path": "client/src/pages/LearnGuides.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 0,
+    "lines": 77
+  },
+  {
+    "path": "client/src/sections/VisualBenefits.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 23,
+    "hooks": 2,
+    "lines": 293
+  },
+  {
+    "path": "client/src/components/NewsletterSignup.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 21,
+    "hooks": 7,
+    "lines": 167
+  },
+  {
+    "path": "client/src/components/benefits/BeforeAfter.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 22,
+    "hooks": 0,
+    "lines": 117
+  },
+  {
+    "path": "client/src/components/benefits/TrustSignals.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 22,
+    "hooks": 0,
+    "lines": 139
+  },
+  {
+    "path": "client/src/components/flow/TimedSession.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 16,
+    "hooks": 11,
+    "lines": 142
+  },
+  {
+    "path": "client/src/components/ui/Footer.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 22,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/design-system/components/MMHBButton.tsx",
+    "buttonCount": 21,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 4,
+    "lines": 226
+  },
+  {
+    "path": "client/src/pages/MasteryToolsPage.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 21,
+    "hooks": 2,
+    "lines": 148
+  },
+  {
+    "path": "client/src/components/DashboardCard.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 18,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/components/ProgressRing.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 21,
+    "hooks": 4,
+    "lines": 249
+  },
+  {
+    "path": "client/src/components/admin/DailyToolsPanel.jsx",
+    "buttonCount": 7,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 9,
+    "lines": 357
+  },
+  {
+    "path": "client/src/components/admin/SystemOptimizationAdvisor.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 2,
+    "lines": 143
+  },
+  {
+    "path": "client/src/components/export/ExportPanel.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 18,
+    "hooks": 2,
+    "lines": 80
+  },
+  {
+    "path": "client/src/components/state/StateTracker.tsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 17,
+    "hooks": 4,
+    "lines": 172
+  },
+  {
+    "path": "client/src/components/ui/SacredModal.jsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 4,
+    "inputCount": 0,
+    "tailwindCount": 12,
+    "hooks": 5,
+    "lines": 155
+  },
+  {
+    "path": "client/src/sections/EmailCapture.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 7,
+    "lines": 289
+  },
+  {
+    "path": "client/src/skills/renderSkill.tsx",
+    "buttonCount": 0,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 17,
+    "hooks": 0,
+    "lines": 152
+  },
+  {
+    "path": "client/src/calm-checkin/components/CalmCheckinEntry.tsx",
+    "buttonCount": 6,
+    "cardCount": 14,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 191
+  },
+  {
+    "path": "client/src/components/DataExportButton.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 3,
+    "lines": 132
+  },
+  {
+    "path": "client/src/components/KeyboardShortcuts.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 4,
+    "lines": 97
+  },
+  {
+    "path": "client/src/components/StateTracker.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 17,
+    "hooks": 4,
+    "lines": 147
+  },
+  {
+    "path": "client/src/components/charts/MoodPieChart.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 2,
+    "lines": 163
+  },
+  {
+    "path": "client/src/components/methods/MITile.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 0,
+    "lines": 152
+  },
+  {
+    "path": "client/src/components/mi/ReadinessScale.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 19,
+    "hooks": 3,
+    "lines": 124
+  },
+  {
+    "path": "client/src/components/ui/select.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 14,
+    "hooks": 5,
+    "lines": 275
+  },
+  {
+    "path": "client/src/features/state/StatePage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 4,
+    "lines": 128
+  },
+  {
+    "path": "client/src/lumi-memory/components/MemorySettingsPanel.tsx",
+    "buttonCount": 14,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 0,
+    "hooks": 7,
+    "lines": 135
+  },
+  {
+    "path": "client/src/pages/StatePage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 20,
+    "hooks": 0,
+    "lines": 109
+  },
+  {
+    "path": "client/src/pages/admin/_adminTools/QuickDiagnostics.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 19,
+    "hooks": 0,
+    "lines": 81
+  },
+  {
+    "path": "client/src/pages/hubs/HubsIndexPage.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 16,
+    "hooks": 2,
+    "lines": 395
+  },
+  {
+    "path": "client/src/components/EmptyState.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 0,
+    "lines": 147
+  },
+  {
+    "path": "client/src/components/analytics/WritingStats.tsx",
+    "buttonCount": 0,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 3,
+    "lines": 79
+  },
+  {
+    "path": "client/src/components/content/ExamplesAccordion.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 18,
+    "hooks": 2,
+    "lines": 129
+  },
+  {
+    "path": "client/src/components/ui/Skeleton.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 0,
+    "lines": 79
+  },
+  {
+    "path": "client/src/components/wellness/SofterVersionToggle.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 17,
+    "hooks": 6,
+    "lines": 150
+  },
+  {
+    "path": "client/src/lumi-voice/components/VoiceToggle.tsx",
+    "buttonCount": 9,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 2,
+    "lines": 143
+  },
+  {
+    "path": "client/src/pages/LearnHub.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 19,
+    "hooks": 0,
+    "lines": 91
+  },
+  {
+    "path": "client/src/components/BrandShell.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 17,
+    "hooks": 0,
+    "lines": 96
+  },
+  {
+    "path": "client/src/components/SessionTimeout.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 12,
+    "hooks": 7,
+    "lines": 120
+  },
+  {
+    "path": "client/src/components/UpsellModal.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 1,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 5,
+    "lines": 138
+  },
+  {
+    "path": "client/src/components/admin/AdminNavGrid.jsx",
+    "buttonCount": 0,
+    "cardCount": 8,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 0,
+    "lines": 83
+  },
+  {
+    "path": "client/src/components/admin/AdminQueryStates.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 0,
+    "lines": 54
+  },
+  {
+    "path": "client/src/components/admin/RecentActivityPanel.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 18,
+    "hooks": 0,
+    "lines": 62
+  },
+  {
+    "path": "client/src/components/content/WhatNextRecommender.jsx",
+    "buttonCount": 0,
+    "cardCount": 12,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 67
+  },
+  {
+    "path": "client/src/components/insights/InsightCards.tsx",
+    "buttonCount": 1,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 0,
+    "lines": 80
+  },
+  {
+    "path": "client/src/components/lumi/LumiV7.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 17,
+    "hooks": 7,
+    "lines": 325
+  },
+  {
+    "path": "client/src/sections/EmotionalJourney.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 18,
+    "hooks": 2,
+    "lines": 145
+  },
+  {
+    "path": "client/src/checkin-flow/components/FlowStepWelcome.tsx",
+    "buttonCount": 7,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 9,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 174
+  },
+  {
+    "path": "client/src/components/JournalAI.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 5,
+    "lines": 169
+  },
+  {
+    "path": "client/src/components/PlanGate.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 16,
+    "hooks": 0,
+    "lines": 107
+  },
+  {
+    "path": "client/src/components/SacredQuote.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 6,
+    "lines": 141
+  },
+  {
+    "path": "client/src/components/SafetyFooter.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 17,
+    "hooks": 0,
+    "lines": 100
+  },
+  {
+    "path": "client/src/components/share/IdentityMirror.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 4,
+    "lines": 109
+  },
+  {
+    "path": "client/src/components/ui/ReflectionFooter.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 17,
+    "hooks": 0,
+    "lines": 88
+  },
+  {
+    "path": "client/src/components/zen/ZenScape.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 17,
+    "hooks": 0,
+    "lines": 137
+  },
+  {
+    "path": "client/src/pages/hubs/HabitsHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 0,
+    "lines": 109
+  },
+  {
+    "path": "client/src/pages/hubs/TraumaHealingHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 0,
+    "lines": 111
+  },
+  {
+    "path": "client/src/sections/NextStepCTA.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 0,
+    "lines": 299
+  },
+  {
+    "path": "client/src/components/GlowFooter.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 0,
+    "lines": 144
+  },
+  {
+    "path": "client/src/components/admin/DailyOpsChecklist.jsx",
+    "buttonCount": 3,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 3,
+    "lines": 222
+  },
+  {
+    "path": "client/src/components/admin/SystemHealthPanel.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 0,
+    "lines": 87
+  },
+  {
+    "path": "client/src/components/sacred/LotusGuide.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 12,
+    "hooks": 15,
+    "lines": 350
+  },
+  {
+    "path": "client/src/components/system/AdminErrorBoundary.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 0,
+    "lines": 116
+  },
+  {
+    "path": "client/src/components/ui/dropdown-menu.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 9,
+    "hooks": 4,
+    "lines": 193
+  },
+  {
+    "path": "client/src/components/ui/tabs.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 4,
+    "hooks": 3,
+    "lines": 209
+  },
+  {
+    "path": "client/src/pages/CommunityPage.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 16,
+    "hooks": 0,
+    "lines": 81
+  },
+  {
+    "path": "client/src/pages/hubs/AcceptanceHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 13,
+    "hooks": 0,
+    "lines": 110
+  },
+  {
+    "path": "client/src/pages/hubs/ForgivenessHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 13,
+    "hooks": 0,
+    "lines": 110
+  },
+  {
+    "path": "client/src/pages/hubs/NervousSystemHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 13,
+    "hooks": 0,
+    "lines": 110
+  },
+  {
+    "path": "client/src/pages/hubs/SpiritualityHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 13,
+    "hooks": 0,
+    "lines": 110
+  },
+  {
+    "path": "client/src/checkin-flow/components/FlowStepCheckout.tsx",
+    "buttonCount": 5,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 9,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 143
+  },
+  {
+    "path": "client/src/components/MoodHistoryChart.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 0,
+    "lines": 136
+  },
+  {
+    "path": "client/src/components/SocialShare.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 10,
+    "hooks": 4,
+    "lines": 80
+  },
+  {
+    "path": "client/src/components/benefits/BenefitsStrip.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 0,
+    "lines": 135
+  },
+  {
+    "path": "client/src/components/consciousness/SilenceMode.tsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 11,
+    "hooks": 3,
+    "lines": 78
+  },
+  {
+    "path": "client/src/components/search/RouteSearchBox.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 4,
+    "lines": 61
+  },
+  {
+    "path": "client/src/components/ui/Button.tsx",
+    "buttonCount": 14,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 50
+  },
+  {
+    "path": "client/src/components/ui/button.tsx",
+    "buttonCount": 14,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 50
+  },
+  {
+    "path": "client/src/guards/ProtectedRoute.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 67
+  },
+  {
+    "path": "client/src/lumi-boundaries/components/BoundaryCard.tsx",
+    "buttonCount": 5,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 2,
+    "lines": 122
+  },
+  {
+    "path": "client/src/pages/hubs/CreativityHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/JournalingHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/ThoughtworkHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/sections/ValueBridge.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 15,
+    "hooks": 0,
+    "lines": 226
+  },
+  {
+    "path": "client/src/components/KnowledgeBase.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 9,
+    "hooks": 4,
+    "lines": 76
+  },
+  {
+    "path": "client/src/components/ModeToggle.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 11,
+    "hooks": 5,
+    "lines": 102
+  },
+  {
+    "path": "client/src/components/SafetyDisclaimer.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/components/content/GlossaryTerm.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 2,
+    "lines": 88
+  },
+  {
+    "path": "client/src/components/publishing/SoftUpgradeCTA.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 14,
+    "hooks": 0,
+    "lines": 67
+  },
+  {
+    "path": "client/src/components/ui/Hero.jsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 8,
+    "hooks": 0,
+    "lines": 78
+  },
+  {
+    "path": "client/src/components/zen/BuddyBubble.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 13,
+    "hooks": 8,
+    "lines": 160
+  },
+  {
+    "path": "client/src/lumi-circadian/components/OptInPrompt.tsx",
+    "buttonCount": 7,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 3,
+    "lines": 164
+  },
+  {
+    "path": "client/src/lumi-conversation/components/LumiReflectionCard.tsx",
+    "buttonCount": 5,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 139
+  },
+  {
+    "path": "client/src/pages/hubs/AnxietyHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/BodyMindHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/BoundariesHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/pages/hubs/BreathworkHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/CommunicationHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/ConfidenceHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/CopingSkillsHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/DailyPracticeHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/EnergyManagementHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/FocusHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/GratitudeHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/GriefHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/HealingJourneyHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/InnerPeaceHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/InnerWorkHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/LifePurposeHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/MindfulnessHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/MotivationHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/PersonalGrowthHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/PresenceHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/RelationshipsHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/ResilienceHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/pages/hubs/SelfAwarenessHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/SelfCareHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/SelfCompassionHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/SelfDiscoveryHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/SelfWorthHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/pages/hubs/SleepHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 102
+  },
+  {
+    "path": "client/src/pages/hubs/StressHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/pages/hubs/WisdomHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 103
+  },
+  {
+    "path": "client/src/companion-voice/components/MMHBCompanionInput.tsx",
+    "buttonCount": 6,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 94
+  },
+  {
+    "path": "client/src/components/MoodMeter.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 12,
+    "hooks": 2,
+    "lines": 109
+  },
+  {
+    "path": "client/src/components/navigation/CanonicalNavbar.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 13,
+    "hooks": 0,
+    "lines": 95
+  },
+  {
+    "path": "client/src/pages/dashboard/ProgressDashboard.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 13,
+    "hooks": 0,
+    "lines": 71
+  },
+  {
+    "path": "client/src/pages/discovery/DiscoveryPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 8,
+    "hooks": 0,
+    "lines": 67
+  },
+  {
+    "path": "client/src/sections/PricingFAQ.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 2,
+    "lines": 180
+  },
+  {
+    "path": "client/src/components/Header.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 12,
+    "hooks": 0,
+    "lines": 100
+  },
+  {
+    "path": "client/src/components/ObjectUploaderUppy.tsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 7,
+    "inputCount": 1,
+    "tailwindCount": 1,
+    "hooks": 3,
+    "lines": 104
+  },
+  {
+    "path": "client/src/components/charts/MoodTrendsChartJS.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 12,
+    "hooks": 2,
+    "lines": 235
+  },
+  {
+    "path": "client/src/components/layout/AppShell.tsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 4,
+    "lines": 57
+  },
+  {
+    "path": "client/src/components/marketing/EmailCapture.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 4,
+    "lines": 107
+  },
+  {
+    "path": "client/src/components/sacred/SacredButton.jsx",
+    "buttonCount": 7,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 2,
+    "lines": 153
+  },
+  {
+    "path": "client/src/components/wellness/SafetyFooter.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 12,
+    "hooks": 0,
+    "lines": 55
+  },
+  {
+    "path": "client/src/context/GamificationContext.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 16,
+    "lines": 219
+  },
+  {
+    "path": "client/src/lumi-conversation/components/LumiInputBar.tsx",
+    "buttonCount": 5,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 6,
+    "tailwindCount": 0,
+    "hooks": 6,
+    "lines": 145
+  },
+  {
+    "path": "client/src/components/EmotionAuraRing.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 2,
+    "lines": 179
+  },
+  {
+    "path": "client/src/components/GuardianHeartPanel.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 73
+  },
+  {
+    "path": "client/src/components/MicroWinPrompt.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 10,
+    "lines": 315
+  },
+  {
+    "path": "client/src/components/ReadingLevelToggle.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 75
+  },
+  {
+    "path": "client/src/components/avatar/BuddyAvatar.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 10,
+    "hooks": 3,
+    "lines": 487
+  },
+  {
+    "path": "client/src/components/legal/EthicsSafetyBlock.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 57
+  },
+  {
+    "path": "client/src/components/sacred/EmotionCharts.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 3,
+    "lines": 266
+  },
+  {
+    "path": "client/src/components/sacred/SacredBackground.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 137
+  },
+  {
+    "path": "client/src/components/safety/LegalFooter.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 65
+  },
+  {
+    "path": "client/src/components/ui/Input.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 10,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 20
+  },
+  {
+    "path": "client/src/components/ui/Steps.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 48
+  },
+  {
+    "path": "client/src/lumi-circadian/components/QuietNudge.tsx",
+    "buttonCount": 7,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 2,
+    "lines": 149
+  },
+  {
+    "path": "client/src/pages/library/SavedLibrary.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 11,
+    "hooks": 0,
+    "lines": 62
+  },
+  {
+    "path": "client/src/App.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 0,
+    "lines": 1946
+  },
+  {
+    "path": "client/src/_quarantine/orphans/SacredNavBar.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 0,
+    "lines": 41
+  },
+  {
+    "path": "client/src/components/Breadcrumbs.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 0,
+    "lines": 53
+  },
+  {
+    "path": "client/src/components/FeedbackPrompt.tsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 7,
+    "hooks": 2,
+    "lines": 146
+  },
+  {
+    "path": "client/src/components/FlowDiagram.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 0,
+    "lines": 260
+  },
+  {
+    "path": "client/src/components/GlowingCard.jsx",
+    "buttonCount": 0,
+    "cardCount": 5,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 143
+  },
+  {
+    "path": "client/src/components/RelatedNextSteps.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 0,
+    "lines": 41
+  },
+  {
+    "path": "client/src/components/ReturnLoop.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 5,
+    "lines": 307
+  },
+  {
+    "path": "client/src/components/WelcomeBackBanner.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 4,
+    "lines": 204
+  },
+  {
+    "path": "client/src/components/ui/EmptyState.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 0,
+    "lines": 128
+  },
+  {
+    "path": "client/src/components/ui/table.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 86
+  },
+  {
+    "path": "client/src/design-system/components/MMHBCard.tsx",
+    "buttonCount": 0,
+    "cardCount": 9,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 4,
+    "lines": 128
+  },
+  {
+    "path": "client/src/features/today/TodayPage.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 4,
+    "lines": 78
+  },
+  {
+    "path": "client/src/pages/tools/ToolDirectoryPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 10,
+    "hooks": 4,
+    "lines": 64
+  },
+  {
+    "path": "client/src/components/EmotionAdaptiveBackground.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 2,
+    "lines": 177
+  },
+  {
+    "path": "client/src/components/HeroSection.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 8,
+    "hooks": 0,
+    "lines": 34
+  },
+  {
+    "path": "client/src/components/RelatedLinksBlock.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 47
+  },
+  {
+    "path": "client/src/components/StartHerePathways.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 78
+  },
+  {
+    "path": "client/src/components/admin/GroupedHealthOverview.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 45
+  },
+  {
+    "path": "client/src/components/admin/MetricCard.jsx",
+    "buttonCount": 0,
+    "cardCount": 2,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 0,
+    "lines": 24
+  },
+  {
+    "path": "client/src/components/discovery/ToolCard.jsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 8,
+    "hooks": 0,
+    "lines": 42
+  },
+  {
+    "path": "client/src/components/lumi/LumiCustomizer.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 1,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 10,
+    "lines": 318
+  },
+  {
+    "path": "client/src/components/progress/TinyStepPanel.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 7,
+    "hooks": 3,
+    "lines": 57
+  },
+  {
+    "path": "client/src/components/trust/TrustPageLayout.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 61
+  },
+  {
+    "path": "client/src/components/ui/SafetyNotice.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 36
+  },
+  {
+    "path": "client/src/components/wellness/BenefitsBlock.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 110
+  },
+  {
+    "path": "client/src/components/wellness/ConsentStrip.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 9,
+    "hooks": 0,
+    "lines": 40
+  },
+  {
+    "path": "client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 56
+  },
+  {
+    "path": "client/src/calm-checkin/components/CalmReflectionPrompt.tsx",
+    "buttonCount": 6,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 99
+  },
+  {
+    "path": "client/src/components/brand/BrandLogo.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 8,
+    "hooks": 0,
+    "lines": 68
+  },
+  {
+    "path": "client/src/components/disclaimers/PlatformDisclaimer.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 8,
+    "hooks": 0,
+    "lines": 82
+  },
+  {
+    "path": "client/src/components/ui/LazyImage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 8,
+    "hooks": 6,
+    "lines": 132
+  },
+  {
+    "path": "client/src/components/ui/WellnessToolkit.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 95
+  },
+  {
+    "path": "client/src/components/ui/popover.tsx",
+    "buttonCount": 5,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 4,
+    "lines": 118
+  },
+  {
+    "path": "client/src/components/wellness/ReflectionPrompt.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 6,
+    "hooks": 3,
+    "lines": 32
+  },
+  {
+    "path": "client/src/lumi-conversation/components/LumiGroundingResponse.tsx",
+    "buttonCount": 5,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 85
+  },
+  {
+    "path": "client/src/avatar-life/state/useAvatarLifeStore.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 7,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 161
+  },
+  {
+    "path": "client/src/calm-checkin/components/CalmCheckinCard.tsx",
+    "buttonCount": 0,
+    "cardCount": 7,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 87
+  },
+  {
+    "path": "client/src/components/SocialLinks.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 0,
+    "lines": 129
+  },
+  {
+    "path": "client/src/components/TestimonialCarousel.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 4,
+    "lines": 48
+  },
+  {
+    "path": "client/src/components/TimeOfDayBackground.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 7,
+    "lines": 152
+  },
+  {
+    "path": "client/src/components/admin/AIKnowledgeHub.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 3,
+    "lines": 128
+  },
+  {
+    "path": "client/src/components/layout/PageScaffold.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 0,
+    "lines": 87
+  },
+  {
+    "path": "client/src/components/marketing/BenefitsBlock.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 0,
+    "lines": 61
+  },
+  {
+    "path": "client/src/components/sacred/SacredSection.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 7,
+    "hooks": 0,
+    "lines": 90
+  },
+  {
+    "path": "client/src/components/ui/HeroSection.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 95
+  },
+  {
+    "path": "client/src/components/ui/toast-container.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 4,
+    "lines": 108
+  },
+  {
+    "path": "client/src/components/wellness/ClarityCard.tsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 38
+  },
+  {
+    "path": "client/src/components/wellness/ExamplesAccordion.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 2,
+    "lines": 54
+  },
+  {
+    "path": "client/src/lumi-boundaries/components/TransparencyDrawer.tsx",
+    "buttonCount": 3,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 2,
+    "lines": 127
+  },
+  {
+    "path": "client/src/calm-checkin/components/CalmBreathGuide.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 4,
+    "lines": 186
+  },
+  {
+    "path": "client/src/calm-checkin/components/CalmGroundingOption.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 75
+  },
+  {
+    "path": "client/src/checkin-flow/components/FlowStepOffer.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 131
+  },
+  {
+    "path": "client/src/companion-voice/components/MMHBCompanionMessage.tsx",
+    "buttonCount": 0,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 136
+  },
+  {
+    "path": "client/src/components/App.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 36
+  },
+  {
+    "path": "client/src/components/LazyImage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 10,
+    "lines": 136
+  },
+  {
+    "path": "client/src/components/SacredGeometryBg.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 4,
+    "lines": 263
+  },
+  {
+    "path": "client/src/components/ToolCard.tsx",
+    "buttonCount": 0,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 148
+  },
+  {
+    "path": "client/src/components/insights/TodaysInsight.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 38
+  },
+  {
+    "path": "client/src/components/sacred/PlatformComponent.jsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 2,
+    "lines": 92
+  },
+  {
+    "path": "client/src/components/sacred/SacredHero.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 2,
+    "lines": 88
+  },
+  {
+    "path": "client/src/components/trust/TrustSection.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 42
+  },
+  {
+    "path": "client/src/components/ui/Button.jsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 61
+  },
+  {
+    "path": "client/src/components/ui/Quote.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 26
+  },
+  {
+    "path": "client/src/components/ui/SectionContainer.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 56
+  },
+  {
+    "path": "client/src/components/ui/Switch.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 86
+  },
+  {
+    "path": "client/src/components/wellness/ConsentRibbon.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 6,
+    "hooks": 0,
+    "lines": 30
+  },
+  {
+    "path": "client/src/lumi-memory/components/MemoryResetButton.tsx",
+    "buttonCount": 6,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 49
+  },
+  {
+    "path": "client/src/lumi-rituals/components/RitualStepCard.tsx",
+    "buttonCount": 0,
+    "cardCount": 6,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 85
+  },
+  {
+    "path": "client/src/pages/RigLab.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 0,
+    "hooks": 6,
+    "lines": 265
+  },
+  {
+    "path": "client/src/components/BrandHero.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 40
+  },
+  {
+    "path": "client/src/components/BrandLogo.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 40
+  },
+  {
+    "path": "client/src/components/DailyInsight.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 30
+  },
+  {
+    "path": "client/src/components/OfflineIndicator.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 5,
+    "lines": 51
+  },
+  {
+    "path": "client/src/components/SacredBackground.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 32
+  },
+  {
+    "path": "client/src/components/SoftLaunchBanner.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 5,
+    "lines": 65
+  },
+  {
+    "path": "client/src/components/admin/KernelStatusPanel.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 36
+  },
+  {
+    "path": "client/src/components/admin/SystemTelemetryPanel.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 46
+  },
+  {
+    "path": "client/src/components/avatar/BuddyPanel.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 11,
+    "lines": 242
+  },
+  {
+    "path": "client/src/components/community/CommunityBoundary.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 55
+  },
+  {
+    "path": "client/src/components/ui/Callout.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 55
+  },
+  {
+    "path": "client/src/components/ui/EvidenceNote.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 28
+  },
+  {
+    "path": "client/src/lumi-library/components/LibraryCard.tsx",
+    "buttonCount": 1,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 112
+  },
+  {
+    "path": "client/src/pages/_autopilot.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 5,
+    "hooks": 0,
+    "lines": 59
+  },
+  {
+    "path": "client/src/calm-checkin/components/CalmContinueOptions.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 86
+  },
+  {
+    "path": "client/src/checkin-flow/components/FlowStepBreathing.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 9,
+    "lines": 193
+  },
+  {
+    "path": "client/src/checkin-flow/components/FlowStepComplete.tsx",
+    "buttonCount": 4,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 92
+  },
+  {
+    "path": "client/src/checkin-flow/components/MMHBCheckInFlow.tsx",
+    "buttonCount": 0,
+    "cardCount": 4,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 3,
+    "lines": 69
+  },
+  {
+    "path": "client/src/components/AIChat.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 3,
+    "lines": 76
+  },
+  {
+    "path": "client/src/components/AdminGuard.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 4,
+    "lines": 96
+  },
+  {
+    "path": "client/src/components/BenefitStrip.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 16
+  },
+  {
+    "path": "client/src/components/BrandGlow.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 30
+  },
+  {
+    "path": "client/src/components/GrowthCTA.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 18
+  },
+  {
+    "path": "client/src/components/LiveRegion.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 9,
+    "lines": 80
+  },
+  {
+    "path": "client/src/components/ProtectedRoute.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 2,
+    "lines": 32
+  },
+  {
+    "path": "client/src/components/benefits/BenefitBlock.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 40
+  },
+  {
+    "path": "client/src/components/legal/ContentCredit.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 33
+  },
+  {
+    "path": "client/src/components/peacescape/InteractiveBuddy.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 7,
+    "lines": 104
+  },
+  {
+    "path": "client/src/components/sacred/SacredLayout.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 2,
+    "lines": 74
+  },
+  {
+    "path": "client/src/components/saves/SaveButton.jsx",
+    "buttonCount": 3,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 4,
+    "lines": 31
+  },
+  {
+    "path": "client/src/components/ui/CalmModeToggle.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 6,
+    "lines": 76
+  },
+  {
+    "path": "client/src/components/ui/LayoutWrapper.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 2,
+    "lines": 59
+  },
+  {
+    "path": "client/src/components/ui/PrimaryButton.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 23
+  },
+  {
+    "path": "client/src/components/ui/SacredBackground.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 37
+  },
+  {
+    "path": "client/src/pages/AIChatPage.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 0,
+    "lines": 26
+  },
+  {
+    "path": "client/src/pages/LoginCallback.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 4,
+    "hooks": 2,
+    "lines": 69
+  },
+  {
+    "path": "client/src/pages/MotionLab.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 0,
+    "hooks": 5,
+    "lines": 311
+  },
+  {
+    "path": "client/src/companion-voice/components/MMHBCompanion.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 3,
+    "tailwindCount": 0,
+    "hooks": 5,
+    "lines": 49
+  },
+  {
+    "path": "client/src/components/AnimatedPageTransition.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 7,
+    "lines": 99
+  },
+  {
+    "path": "client/src/components/MIQuickPrompt.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 0,
+    "lines": 12
+  },
+  {
+    "path": "client/src/components/PromptCard.tsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 9
+  },
+  {
+    "path": "client/src/components/WellnessToolkit.jsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 76
+  },
+  {
+    "path": "client/src/components/lumi/FloatIdleAnimated.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 9,
+    "lines": 332
+  },
+  {
+    "path": "client/src/components/lumi/LumiMascot.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 5,
+    "lines": 122
+  },
+  {
+    "path": "client/src/components/publishing/PublishingCtaBar.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 0,
+    "lines": 57
+  },
+  {
+    "path": "client/src/components/safety/SafetyFooterStrip.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 0,
+    "lines": 36
+  },
+  {
+    "path": "client/src/components/ui/LotusLoader.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 0,
+    "lines": 94
+  },
+  {
+    "path": "client/src/design-system/Button.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 11
+  },
+  {
+    "path": "client/src/design-system/Typography.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 0,
+    "lines": 12
+  },
+  {
+    "path": "client/src/lumi-conversation/components/LumiMessageBubble.tsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 101
+  },
+  {
+    "path": "client/src/lumi-memory/components/MemoryTransparencyView.tsx",
+    "buttonCount": 0,
+    "cardCount": 3,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 8,
+    "lines": 106
+  },
+  {
+    "path": "client/src/lumi-registry/components/OfficialLumi.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 11,
+    "lines": 295
+  },
+  {
+    "path": "client/src/pages/reflection.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 3,
+    "hooks": 0,
+    "lines": 16
+  },
+  {
+    "path": "client/src/avatar-life/components/AvatarWithReactState.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 2,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 24
+  },
+  {
+    "path": "client/src/components/HealingChat.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 24
+  },
+  {
+    "path": "client/src/components/LoadingSpinner.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 83
+  },
+  {
+    "path": "client/src/components/Microcopy.jsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 57
+  },
+  {
+    "path": "client/src/components/RouteGuard.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 3,
+    "lines": 56
+  },
+  {
+    "path": "client/src/components/VirtualList.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 8,
+    "lines": 127
+  },
+  {
+    "path": "client/src/components/admin/StatusBadge.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 27
+  },
+  {
+    "path": "client/src/components/layout/PageLayout.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 54
+  },
+  {
+    "path": "client/src/components/lumi/FloatIdleRig.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 2,
+    "lines": 278
+  },
+  {
+    "path": "client/src/components/lumi/LumiBrandLockupImage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 56
+  },
+  {
+    "path": "client/src/components/lumi/LumiBrandLogo.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 115
+  },
+  {
+    "path": "client/src/components/lumi/LumiCompanion.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 9,
+    "lines": 315
+  },
+  {
+    "path": "client/src/components/lumi/LumiCustomizerTrigger.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 2,
+    "lines": 56
+  },
+  {
+    "path": "client/src/components/sacred/EmotionBackground.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 7,
+    "lines": 122
+  },
+  {
+    "path": "client/src/components/ui/BrandSpinner.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 25
+  },
+  {
+    "path": "client/src/components/ui/textarea.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 24
+  },
+  {
+    "path": "client/src/design-system/Card.jsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 11
+  },
+  {
+    "path": "client/src/lumi-crisis/components/CrisisPanel.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 142
+  },
+  {
+    "path": "client/src/lumi-registry/components/LumiSceneRenderer.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 5,
+    "lines": 154
+  },
+  {
+    "path": "client/src/main.jsx",
+    "buttonCount": 2,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 160
+  },
+  {
+    "path": "client/src/pages/hubs/TopicHubPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 2,
+    "hooks": 0,
+    "lines": 38
+  },
+  {
+    "path": "client/src/avatar-life/components/MMHBFloatAvatar.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 4,
+    "lines": 280
+  },
+  {
+    "path": "client/src/components/ErrorBoundary.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 215
+  },
+  {
+    "path": "client/src/components/PageTransition.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 4,
+    "lines": 24
+  },
+  {
+    "path": "client/src/components/ResponsiveWrapper.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 4,
+    "lines": 129
+  },
+  {
+    "path": "client/src/components/SacredPattern.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 4,
+    "lines": 132
+  },
+  {
+    "path": "client/src/components/SafeBoundary.jsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 108
+  },
+  {
+    "path": "client/src/components/SkipToContent.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 13
+  },
+  {
+    "path": "client/src/components/a11y/ReducedMotionProvider.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 0,
+    "hooks": 7,
+    "lines": 98
+  },
+  {
+    "path": "client/src/components/a11y/SkipToContent.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 12
+  },
+  {
+    "path": "client/src/components/landing/Hero.tsx",
+    "buttonCount": 1,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 43
+  },
+  {
+    "path": "client/src/components/lumi/LumiAccessibleWrapper.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 8,
+    "lines": 171
+  },
+  {
+    "path": "client/src/components/lumi/LumiMascotImage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 60
+  },
+  {
+    "path": "client/src/components/lumi/TGLPMandala.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 38
+  },
+  {
+    "path": "client/src/components/lumi/TGLPMandalaImage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/components/ui/IconBadge.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 57
+  },
+  {
+    "path": "client/src/components/ui/Label.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 18
+  },
+  {
+    "path": "client/src/components/ui/badge.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 34
+  },
+  {
+    "path": "client/src/components/ui/card.tsx",
+    "buttonCount": 0,
+    "cardCount": 1,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 2
+  },
+  {
+    "path": "client/src/components/ui/input.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 1,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 2
+  },
+  {
+    "path": "client/src/design-system/PageShell.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 8
+  },
+  {
+    "path": "client/src/lumi-scenes/transitions/SceneTransitionController.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 6,
+    "lines": 255
+  },
+  {
+    "path": "client/src/lumi-voice/components/VoiceCaptionOverlay.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 1,
+    "hooks": 0,
+    "lines": 58
+  },
+  {
+    "path": "client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 66
+  },
+  {
+    "path": "client/src/blog/BlogPage.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 8
+  },
+  {
+    "path": "client/src/components/CelebrationOverlay.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 4,
+    "lines": 169
+  },
+  {
+    "path": "client/src/components/EmotionBackgroundProvider.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 29
+  },
+  {
+    "path": "client/src/components/PageScaffold.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 3
+  },
+  {
+    "path": "client/src/components/SEO.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 138
+  },
+  {
+    "path": "client/src/components/Sparkline.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 37
+  },
+  {
+    "path": "client/src/components/StateTracker.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 2
+  },
+  {
+    "path": "client/src/components/ThemeProvider.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 8
+  },
+  {
+    "path": "client/src/components/community/SharedReflections.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 24
+  },
+  {
+    "path": "client/src/components/figma/FigmaPanel.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 30
+  },
+  {
+    "path": "client/src/components/guards/FeatureGuard.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 16
+  },
+  {
+    "path": "client/src/components/seo/PageSEO.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 36
+  },
+  {
+    "path": "client/src/components/seo/SEO.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 8
+  },
+  {
+    "path": "client/src/components/ui/label.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 3
+  },
+  {
+    "path": "client/src/components/ui/theme-provider.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 4,
+    "lines": 45
+  },
+  {
+    "path": "client/src/context/AuthContext.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 9,
+    "lines": 246
+  },
+  {
+    "path": "client/src/context/BrandContext.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 9
+  },
+  {
+    "path": "client/src/context/EmotionContext.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 14,
+    "lines": 232
+  },
+  {
+    "path": "client/src/context/ReadingLevelContext.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 9,
+    "lines": 85
+  },
+  {
+    "path": "client/src/contexts/FeatureFlagContext.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 35
+  },
+  {
+    "path": "client/src/design-system/Container.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 1
+  },
+  {
+    "path": "client/src/design-system/PageSection.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 1
+  },
+  {
+    "path": "client/src/design-system/Stack.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 1
+  },
+  {
+    "path": "client/src/design-system/Surface.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 1
+  },
+  {
+    "path": "client/src/guards/RequirePro.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 18
+  },
+  {
+    "path": "client/src/guards/RequireRole.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 26
+  },
+  {
+    "path": "client/src/hooks/use-analytics.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 2,
+    "lines": 16
+  },
+  {
+    "path": "client/src/legal/Disclaimer.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 30
+  },
+  {
+    "path": "client/src/legal/EthicsCommitment.tsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 25
+  },
+  {
+    "path": "client/src/pages/About.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/Anxiety.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/BlogDraftViewer.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 6,
+    "lines": 241
+  },
+  {
+    "path": "client/src/pages/Depression.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/Features.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/Growth.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/Healing.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/MentalWellness.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/Mindfulness.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/Resilience.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/SelfLove.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/Wellbeing.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 39
+  },
+  {
+    "path": "client/src/pages/hubs/index.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 47
+  },
+  {
+    "path": "client/src/pages/trust/AITransparencyPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 50
+  },
+  {
+    "path": "client/src/pages/trust/TrustCenterPage.jsx",
+    "buttonCount": 0,
+    "cardCount": 0,
+    "modalCount": 0,
+    "inputCount": 0,
+    "tailwindCount": 0,
+    "hooks": 0,
+    "lines": 50
+  }
+]

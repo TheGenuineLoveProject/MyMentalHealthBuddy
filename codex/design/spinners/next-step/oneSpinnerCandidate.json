@@ -1,0 +1,8 @@
+{
+  "path": "client/src/components/LazyImage.jsx",
+  "estimatedRisk": "LOW",
+  "suggestedPrimitive": "OfficialLumi",
+  "requiresVisualQA": true,
+  "protectedSurface": false,
+  "runtimeRisk": "MINIMAL"
+}

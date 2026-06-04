@@ -6,9 +6,9 @@ import {
   Eye, EyeOff, CheckCircle2, AlertTriangle, Loader2,
   QrCode, Copy, X, ShieldCheck
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useSEO } from "@/hooks/useSEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
@@ -46,7 +46,7 @@ export default function Security() {
 
   const setup2FAMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest("/api/account/2fa/setup", { method: "POST" });
+      return apiRequest("POST", "/api/account/2fa/setup");
     },
     onSuccess: (data) => {
       setBackupCodes(data.backupCodes || []);
@@ -66,10 +66,7 @@ export default function Security() {
   
   const verify2FAMutation = useMutation({
     mutationFn: async (code) => {
-      return apiRequest("/api/account/2fa/verify", {
-        method: "POST",
-        body: JSON.stringify({ code })
-      });
+      return apiRequest("POST", "/api/account/2fa/verify", { code });
     },
     onSuccess: () => {
       toast({
@@ -92,7 +89,7 @@ export default function Security() {
   
   const disable2FAMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest("/api/account/2fa/disable", { method: "POST" });
+      return apiRequest("POST", "/api/account/2fa/disable");
     },
     onSuccess: () => {
       toast({
@@ -137,10 +134,7 @@ export default function Security() {
 
   const passwordMutation = useMutation({
     mutationFn: async (data) => {
-      return apiRequest("/api/account/password", {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
+      return apiRequest("POST", "/api/account/password", data);
     },
     onSuccess: () => {
       toast({

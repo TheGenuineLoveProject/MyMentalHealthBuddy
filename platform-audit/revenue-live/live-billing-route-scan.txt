@@ -1,0 +1,390 @@
+server/routes/adminBilling.mjs:    // Total subscriptions
+server/routes/adminBilling.mjs:      SELECT COUNT(*) as count FROM subscriptions
+server/routes/adminBilling.mjs:    // Active subscriptions
+server/routes/adminBilling.mjs:      SELECT COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:      SELECT tier, COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:      SELECT COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:// P128: Get subscription list (read-only)
+server/routes/adminBilling.mjs:router.get('/subscriptions', async (req, res) => {
+server/routes/adminBilling.mjs:        s.stripe_subscription_id as "stripeSubscriptionId",
+server/routes/adminBilling.mjs:      FROM subscriptions s
+server/routes/adminBilling.mjs:    const subscriptions = result.rows?.map(s => ({
+server/routes/adminBilling.mjs:    return success(res, { subscriptions });
+server/routes/adminBilling.mjs:    logger.error('Admin subscriptions fetch error', { error: err.message });
+server/routes/adminBilling.mjs:      FROM subscriptions 
+server/routes/analytics-events.mjs:    const checkoutFunnel = {};
+server/routes/analytics-events.mjs:    for (const step of ["pricing_view", "checkout_start", "checkout_success", "checkout_cancel"]) {
+server/routes/analytics-events.mjs:      checkoutFunnel[step] = result?.total || 0;
+server/routes/analytics-events.mjs:      checkoutFunnel,
+server/routes/analytics.mjs:  "subscription_viewed", "error_occurred",
+server/routes/analytics.mjs:  "pricing_view", "checkout_start"
+server/routes/analytics.mjs:    const checkoutFunnel = {};
+server/routes/analytics.mjs:    for (const step of ["pricing_view", "checkout_start", "checkout_success", "checkout_cancel"]) {
+server/routes/analytics.mjs:      checkoutFunnel[step] = result?.total || 0;
+server/routes/analytics.mjs:    return res.json({ totalEvents: totalEvents?.total || 0, topPages24h, topCTAs7d, checkoutFunnel, newsletterFunnel });
+server/routes/canva-oauth.mjs:router.post("/webhook", async (req, res) => {
+server/routes/canva-oauth.mjs:    logger.info("Canva webhook received", { event, dataKeys: Object.keys(data || {}) });
+server/routes/canva-oauth.mjs:    logger.error("Canva webhook error", { error: err.message });
+server/routes/canva-oauth.mjs:      webhook: "/api/canva/webhook",
+server/routes/deploymentReadiness.mjs:      WHERE table_name = 'users' AND column_name = 'subscription_status'
+server/routes/deploymentReadiness.mjs:      results.checks.subscriptionStatusColumn = {
+server/routes/deploymentReadiness.mjs:      results.checks.subscriptionStatusColumn = {
+server/routes/deploymentReadiness.mjs:        detail: "Column subscription_status not found in users table",
+server/routes/deploymentReadiness.mjs:    logger.warn("Deployment check: subscription_status column query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:    results.checks.subscriptionStatusColumn = { status: "fail", detail: "Query failed" };
+server/routes/deploymentReadiness.mjs:      SELECT subscription_status, COUNT(*) as count 
+server/routes/deploymentReadiness.mjs:      GROUP BY subscription_status
+server/routes/deploymentReadiness.mjs:    const statuses = statusCheck.rows?.map(r => r.subscription_status) || [];
+server/routes/deploymentReadiness.mjs:    results.checks.subscriptionStatusIntegrity = {
+server/routes/deploymentReadiness.mjs:    logger.warn("Deployment check: subscription status integrity query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:    results.checks.subscriptionStatusIntegrity = { status: "fail", detail: "Query failed" };
+server/routes/deploymentReadiness.mjs:        SELECT FROM information_schema.tables WHERE table_name = 'webhook_events'
+server/routes/deploymentReadiness.mjs:    results.checks.webhookEventsTable = {
+server/routes/deploymentReadiness.mjs:    logger.warn("Deployment check: webhook_events table query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:    results.checks.webhookEventsTable = { status: "fail", detail: "Query failed" };
+server/routes/newsletter.mjs:        message: 'Unable to process subscription'
+server/routes/revenue.mjs:      SELECT subscription_status, COUNT(*) as count FROM users 
+server/routes/revenue.mjs:      WHERE subscription_status IN ('starter', 'pro', 'elite')
+server/routes/revenue.mjs:      GROUP BY subscription_status
+server/routes/revenue.mjs:      planBreakdown[row.subscription_status] = parseInt(row.count, 10);
+server/routes/revenue.mjs:      WHERE subscription_status IN ('starter', 'pro', 'elite') 
+server/routes/revenue.mjs:      WHERE subscription_status IN ('starter', 'pro', 'elite')
+server/routes/soft-launch-metrics.mjs:    checkout_start: 0,
+server/routes/soft-launch-metrics.mjs:    checkout_success: 0,
+server/routes/biometrics.mjs:// public web API, so it's exposed as a webhook endpoint that an iOS
+server/routes/biometrics.mjs://   POST   /api/biometrics/healthkit/webhook           iOS HealthKit push (HMAC)
+server/routes/biometrics.mjs:      apple_healthkit: "iOS-only. Use the /healthkit/webhook endpoint from a native companion app with HMAC-SHA256 signed body.",
+server/routes/biometrics.mjs:        help: "HealthKit has no public web API. Use a native iOS companion app to POST signed payloads to /api/biometrics/healthkit/webhook.",
+server/routes/biometrics.mjs: * POST /healthkit/webhook — iOS companion app push
+server/routes/biometrics.mjs: * keyed by HKDF(JWT_SECRET, "healthkit-webhook-v1"). The user id is
+server/routes/biometrics.mjs:  "/healthkit/webhook",
+server/routes/biometrics.mjs:      return fail(res, "healthkit_webhook", err);
+server/routes/billing.mjs:  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
+server/routes/billing.mjs:  elite: { name: "Elite", priceId: process.env.STRIPE_PRICE_ELITE, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support", "voice_affirmations", "1on1_onboarding", "early_access", "elite_community"] },
+server/routes/billing.mjs:router.post("/checkout", async (req, res) => {
+server/routes/billing.mjs:    // being charged via the checkout endpoint.
+server/routes/billing.mjs:        increment("checkout_priceid_rejected", { plan });
+server/routes/billing.mjs:      logger.warn("checkout blocked: price/plan mismatch", {
+server/routes/billing.mjs:      increment("checkout_priceid_plan_mismatch", {
+server/routes/billing.mjs:    const checkoutMode = planConfig.mode || "subscription";
+server/routes/billing.mjs:    const session = await stripe.checkout.sessions.create({
+server/routes/billing.mjs:      mode: checkoutMode,
+server/routes/billing.mjs:    increment("checkout_initiated", { plan: `${plan}_${interval}` });
+server/routes/billing.mjs:router.get("/subscription-status", async (req, res) => {
+server/routes/billing.mjs:      SELECT subscription_status, subscription_expires_at, stripe_customer_id
+server/routes/billing.mjs:    const plan = user.subscription_status || "free";
+server/routes/billing.mjs:        const subs = await stripe.subscriptions.list({
+server/routes/billing.mjs:        logger.warn("Failed to fetch Stripe subscription details", { error: stripeErr.message });
+server/routes/billing.mjs:      currentPeriodEnd: user.subscription_expires_at || null,
+server/routes/billing.mjs:      SELECT subscription_status FROM users WHERE id = ${req.dbUserId} LIMIT 1
+server/routes/billing.mjs:    const plan = userResult.rows?.[0]?.subscription_status || "free";
+server/routes/auth.mjs:        subscription_status text DEFAULT 'free',
+server/routes/auth.mjs:        subscription_expires_at timestamp,
+server/routes/webhook.mjs:import { users, webhookEvents } from "../../shared/schema.mjs";
+server/routes/webhook.mjs:    const rows = await db.select().from(webhookEvents).where(eq(webhookEvents.id, eventId));
+server/routes/webhook.mjs:    await db.insert(webhookEvents).values({
+server/routes/webhook.mjs:      logger.warn("Stripe webhook received but STRIPE_SECRET_KEY not configured");
+server/routes/webhook.mjs:    // Validate webhook signature
+server/routes/webhook.mjs:      event = stripe.webhooks.constructEvent(
+server/routes/webhook.mjs:      logger.error("Stripe webhook signature verification failed", { error: err.message });
+server/routes/webhook.mjs:      logger.info("Duplicate webhook event skipped", { eventId: event.id, type: event.type });
+server/routes/webhook.mjs:        case "checkout.session.completed": {
+server/routes/webhook.mjs:          if (!session.customer || !session.subscription) {
+server/routes/webhook.mjs:            logger.warn("checkout.session.completed missing customer or subscription", { sessionId: session.id });
+server/routes/webhook.mjs:            logger.warn("checkout.session.completed missing customer email — cannot match user", { customer: session.customer });
+server/routes/webhook.mjs:          // Re-fetch session with line items expanded — webhook payload
+server/routes/webhook.mjs:            authoritativeSession = await stripe.checkout.sessions.retrieve(session.id, {
+server/routes/webhook.mjs:            logger.error("checkout.session.completed: line_items retrieve FAILED — refusing entitlement, deferring to Stripe retry", {
+server/routes/webhook.mjs:            increment("subscription_mapping_unknown", { source: "checkout_retrieve_failed" });
+server/routes/webhook.mjs:          const checkoutPlan = resolvePlanFromCheckoutSession(authoritativeSession);
+server/routes/webhook.mjs:          if (!checkoutPlan) {
+server/routes/webhook.mjs:            const alertSource = diag.mismatch ? "checkout_mismatch" : "checkout";
+server/routes/webhook.mjs:                ? "checkout.session.completed: SECURITY metadata.plan != price-derived plan — refusing entitlement"
+server/routes/webhook.mjs:                : "checkout.session.completed: unknown plan — refusing to default",
+server/routes/webhook.mjs:            increment("subscription_mapping_unknown", { source: alertSource });
+server/routes/webhook.mjs:          const checkoutResult = await db
+server/routes/webhook.mjs:              subscriptionStatus: checkoutPlan,
+server/routes/webhook.mjs:          const checkoutRowsAffected = checkoutResult?.rowCount ?? checkoutResult?.changes ?? 0;
+server/routes/webhook.mjs:          if (checkoutRowsAffected === 0) {
+server/routes/webhook.mjs:            logger.warn("checkout.session.completed: no user matched by email", { email: customerEmail, customer: session.customer });
+server/routes/webhook.mjs:            logger.info("Subscription activated via checkout", { customer: session.customer, status: checkoutPlan });
+server/routes/webhook.mjs:            increment("subscription_transition", { plan: `free_to_${checkoutPlan}` });
+server/routes/webhook.mjs:        case "customer.subscription.created":
+server/routes/webhook.mjs:        case "customer.subscription.updated": {
+server/routes/webhook.mjs:          const subscription = event.data.object;
+server/routes/webhook.mjs:          if (!subscription.customer) {
+server/routes/webhook.mjs:            logger.warn(`${event.type} missing customer field`, { subscriptionId: subscription.id });
+server/routes/webhook.mjs:          const isActive = ["active", "trialing"].includes(subscription.status);
+server/routes/webhook.mjs:            const mappedPlan = mapSubscriptionToPlan(subscription);
+server/routes/webhook.mjs:                subscriptionId: subscription.id,
+server/routes/webhook.mjs:                priceId: subscription?.items?.data?.[0]?.price?.id ?? null,
+server/routes/webhook.mjs:                customer: subscription.customer,
+server/routes/webhook.mjs:              increment("subscription_mapping_unknown", { source: "subscription" });
+server/routes/webhook.mjs:              subscriptionStatus: canonicalStatus,
+server/routes/webhook.mjs:              subscriptionExpiresAt: subscription.current_period_end
+server/routes/webhook.mjs:                ? new Date(subscription.current_period_end * 1000)
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:            logger.warn(`${event.type}: no user found for stripeCustomerId`, { customer: subscription.customer, stripeStatus: subscription.status });
+server/routes/webhook.mjs:            logger.info("Subscription status synced", { customer: subscription.customer, stripeStatus: subscription.status, canonicalStatus });
+server/routes/webhook.mjs:        case "customer.subscription.deleted": {
+server/routes/webhook.mjs:          const subscription = event.data.object;
+server/routes/webhook.mjs:          if (!subscription.customer) {
+server/routes/webhook.mjs:            logger.warn("customer.subscription.deleted missing customer field", { subscriptionId: subscription.id });
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:              subscriptionStatus: "free",
+server/routes/webhook.mjs:              subscriptionExpiresAt: new Date(),
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId", { customer: subscription.customer });
+server/routes/webhook.mjs:            logger.info("Subscription deleted, reverted to free", { customer: subscription.customer });
+server/routes/webhook.mjs:            increment("subscription_transition", { plan: "pro_to_free" });
+server/routes/webhook.mjs:              subscription.current_period_end
+server/routes/webhook.mjs:            increment("subscription_mapping_unknown", { source: "invoice_paid" });
+server/routes/webhook.mjs:              subscriptionStatus: invoicePlan,
+server/routes/webhook.mjs:              subscriptionStatus: "free",
+server/routes/webhook.mjs:  res.json({ ok: true, module: "webhook", status: "operational", timestamp: new Date().toISOString() });
+server/auth/webhookStripe.mjs:import { pendingEntitlements, users, subscriptions } from "../db/schema/index.mjs";
+server/auth/webhookStripe.mjs:  await db.insert(subscriptions).values({
+server/auth/webhookStripe.mjs:    target: subscriptions.userId,
+server/billing/applyPendingEntitlements.mjs:import { pendingEntitlements, subscriptions } from "../db/schema/index.mjs";
+server/billing/applyPendingEntitlements.mjs:    await db.insert(subscriptions).values({
+server/billing/applyPendingEntitlements.mjs:      target: subscriptions.userId,
+server/billing/entitlements.mjs:import { users, subscriptions } from "../db/schema.mjs";
+server/billing/entitlements.mjs:    .insert(subscriptions)
+server/billing/entitlements.mjs:      target: subscriptions.userId,
+server/contracts/content-model.schema.mjs:    /\b(buy now|subscribe now|upgrade now|limited time|last chance|act now|start your paid plan|checkout now)\b/i;
+server/contracts/content/b1-content-contract.mjs:  /\bcheckout\b/i,
+server/lib/promptEngine.mjs:  if (/(price|tier|packaging|subscription plan)/i.test(t))     return "b07_pricing_packaging";
+server/middleware/requirePlan.mjs:      SELECT tier, status FROM subscriptions 
+server/security/csrf.mjs:  // GET-only via the SAFE_METHODS check above) and HealthKit webhook
+server/security/csrf.mjs:  if (req.path === "/api/biometrics/healthkit/webhook") return next();
+server/services/auditLog.mjs:  SUBSCRIPTION_CHANGE: "billing.subscription_change",
+server/services/email.mjs:            You can manage your subscription anytime from your 
+server/services/email.mjs:            Your Pro subscription has been canceled. You'll continue to have access to all Pro features 
+server/services/stripeSync.mjs:    `UPDATE users SET subscription_status = $1, subscription_expires_at = $2 WHERE stripe_customer_id = $3`,
+server/shared/importMap.mjs:    webhook: "../routes/webhook.mjs",
+server/utils/stripe.mjs:  const session = await client.checkout.sessions.create({
+server/utils/stripe.mjs:    mode: "subscription",
+server/utils/stripe.mjs:  return client.webhooks.constructEvent(rawBody, signature, endpointSecret);
+server/utils/planMapping.mjs:// checkout side and the webhook side stay in sync via shared env source.
+server/utils/planMapping.mjs:export function mapSubscriptionToPlan(subscription) {
+server/utils/planMapping.mjs:  const priceId = subscription?.items?.data?.[0]?.price?.id;
+server/utils/planMapping.mjs:  // No line item price at all (e.g., retrieve failed and webhook payload
+server/biometrics/providers.mjs:// instead by the webhook receiver in routes/biometrics.mjs.
+server/biometrics/crypto.mjs:// Deterministic HMAC for HealthKit webhook signature verification.
+server/biometrics/crypto.mjs:// shared secret = HKDF(JWT_SECRET, "healthkit-webhook-v1").
+server/biometrics/crypto.mjs:let _webhookKey = null;
+server/biometrics/crypto.mjs:  if (_webhookKey) return _webhookKey;
+server/biometrics/crypto.mjs:  if (!ikm) throw new Error("JWT_SECRET missing for healthkit webhook key");
+server/biometrics/crypto.mjs:  _webhookKey = Buffer.from(
+server/biometrics/crypto.mjs:      Buffer.from("healthkit-webhook-v1", "utf8"),
+server/biometrics/crypto.mjs:  return _webhookKey;
+server/observability/safetyAlerts.mjs: * Stripe webhook signature verification failed.
+server/observability/safetyAlerts.mjs:    summary: `${provider} webhook signature verification failed`,
+server/observability/safetyAlerts.mjs:    source: "mmhb-webhook",
+server/observability/safetyAlerts.mjs:    dedupKey: `webhook-sig:${provider}`,
+server/observability/alerter.mjs: * @param {string} [args.component] - Optional sub-component (e.g. "stripe-webhook").
+server/app.mjs:import webhookRoutes from "./routes/webhook.mjs";
+server/app.mjs:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs:  // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks
+server/app.mjs.bak:import webhookRoutes from "./routes/webhook.mjs";
+server/app.mjs.bak:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs.bak:  // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks
+client/src/pages/admin/_adminToolsShared.js:  "billing": "/admin/billing", "webhook": "/admin/billing", "email": "/admin/newsletter",
+client/src/pages/admin/_adminToolsShared.js:  "canva-oauth": "critical", "webhook": "critical", "api-core": "critical",
+client/src/pages/admin/_adminToolsShared.js:  "stripe-webhook-fail": { suggestion: "Stripe webhook endpoint is failing. Canva KB: Verify STRIPE_WEBHOOK_SECRET is configured and webhook signature validation matches. Check Stripe dashboard for delivery failures.", action: "Verify Stripe webhook secret", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-admin-token" },
+client/src/pages/admin/_adminToolsShared.js:  "webhook-signature-invalid": { suggestion: "Webhook signature verification failed. Canva KB: Webhook secret may have been rotated on the provider side. Update STRIPE_WEBHOOK_SECRET or verify signing key.", action: "Update webhook signing secret", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:  "git-corruption": { suggestion: "Git repository may have integrity issues. Codex KB: Run git fsck to check object database integrity. Corrupted refs or loose objects can cause checkout failures.", action: "Run git integrity check", knowledgeBase: "Codex", autoFixable: true, fixCommand: "repair-git" },
+client/src/pages/admin/_adminToolsShared.js:  "stripe-config-invalid": { suggestion: "Stripe integration configuration issue. Canva KB: Verify STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY are valid, webhook secret matches, and product/price IDs exist.", action: "Verify Stripe setup", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-stripe" },
+client/src/pages/admin/_adminToolsShared.js:  "payment-flow-error": { suggestion: "Payment processing flow encountered an error. Canva KB: Check Stripe dashboard for declined payments, webhook delivery failures, and checkout session status.", action: "Review payment flow logs", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:      { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
+client/src/pages/admin/RevenueAdmin.jsx:    { label: "Subscribers", value: stats.subscribers, icon: Users, desc: "Active subscriptions", testId: "card-subscribers" },
+client/src/pages/admin/RevenueAdmin.jsx:        description="Admin revenue and subscription analytics."
+client/src/pages/admin/RevenueAdmin.jsx:                <p className="text-muted-foreground text-center py-4" data-testid="text-no-subscriptions">No active subscriptions</p>
+client/src/pages/admin/BillingViewer.jsx:  const { data: subscriptions, isLoading: subsLoading } = useQuery({
+client/src/pages/admin/BillingViewer.jsx:    queryKey: ['/api/admin/billing/subscriptions'],
+client/src/pages/admin/BillingViewer.jsx:  const subsList = subscriptions?.subscriptions || [];
+client/src/pages/admin/BillingViewer.jsx:        <p className="text-muted-foreground">Read-only view of subscription data</p>
+client/src/pages/admin/BillingViewer.jsx:        <Card data-testid="card-total-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:        <Card data-testid="card-active-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:      <Card data-testid="card-recent-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:          <CardDescription>Last 50 subscription records (read-only)</CardDescription>
+client/src/pages/admin/BillingViewer.jsx:            <p className="text-center text-muted-foreground py-8" data-testid="text-empty-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:              No subscription data available.
+client/src/pages/admin/BillingViewer.jsx:              <table className="w-full text-sm" data-testid="subscriptions-table">
+client/src/pages/admin/AnalyticsDashboard.jsx:          <div className="rounded-xl border border-[var(--glp-sage-15)] bg-white dark:bg-gray-900 p-6 space-y-4" data-testid="card-checkout-funnel">
+client/src/pages/admin/AnalyticsDashboard.jsx:              {Object.entries(data?.checkoutFunnel || {}).map(([step, total]) => {
+client/src/pages/admin/AnalyticsDashboard.jsx:                const labels = { pricing_view: "Viewed Pricing", checkout_start: "Started Checkout", checkout_success: "Completed", checkout_cancel: "Cancelled" };
+client/src/pages/admin/AnalyticsDashboard.jsx:              {Object.keys(data?.checkoutFunnel || {}).length === 0 && (
+client/src/pages/admin/AnalyticsDashboard.jsx:                <p className="text-sm text-[var(--glp-ink-40)] italic" data-testid="text-no-checkout">No checkout events recorded</p>
+client/src/pages/admin/AdminUsers.jsx:    { label: "Pro Subscribers", value: proUsers, icon: TrendingUp, desc: "Active Pro subscriptions", color: "text-emerald-600" },
+client/src/pages/admin/SystemAlerts.jsx:  { id: 4, type: "error", title: "Payment Webhook Failed", message: "Stripe webhook returned 500 error", time: "1 day ago", resolved: true },
+client/src/pages/account/Billing.jsx:    description: "Manage your subscription plan and view your billing history.",
+client/src/pages/account/Billing.jsx:  const { subscriptionStatus, isPro, isLoading: authLoading } = useAuth();
+client/src/pages/account/Billing.jsx:  const { data: subscriptionData, isLoading: subLoading } = useQuery({
+client/src/pages/account/Billing.jsx:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Billing.jsx:  const currentPlan = subscriptionStatus || subscriptionData?.plan || "free";
+client/src/pages/account/Billing.jsx:  const isActive = isPro || subscriptionData?.status === "active" || subscriptionData?.status === "trialing";
+client/src/pages/account/Billing.jsx:  const checkoutMutation = useMutation({
+client/src/pages/account/Billing.jsx:    mutationFn: (interval) => apiRequest("POST", "/api/billing/checkout", { plan: "pro", interval: interval || billingInterval }),
+client/src/pages/account/Billing.jsx:        title: "Unable to start checkout",
+client/src/pages/account/Billing.jsx:    checkoutMutation.mutate(interval || billingInterval);
+client/src/pages/account/Billing.jsx:    subtitle="Your subscription and payment details."
+client/src/pages/account/Billing.jsx:      what: "Manage your subscription plan.",
+client/src/pages/account/Billing.jsx:                        {subscriptionData?.cancelAtPeriodEnd
+client/src/pages/account/Billing.jsx:                          ? `Cancels on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+client/src/pages/account/Billing.jsx:                          : `Renews on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+client/src/pages/account/Billing.jsx:                    data-testid="button-manage-subscription"
+client/src/pages/account/Billing.jsx:                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Redirecting to checkout...</>
+client/src/pages/account/Billing.jsx:                      data-testid="button-manage-subscription-plan"
+client/src/pages/account/Billing.jsx:                Pro subscriptions can be canceled anytime from this page — no hidden fees, no lock-in, no cancellation hoops. If you cancel, you keep full access through the end of your paid period, and your free tools never go away.
+client/src/pages/account/Subscription.jsx:  const { data: subscription, isLoading, error } = useQuery({
+client/src/pages/account/Subscription.jsx:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Subscription.jsx:  const subData = subscription || { plan: "free", status: "none" };
+client/src/pages/account/Subscription.jsx:        description="Manage your subscription and billing."
+client/src/pages/account/Subscription.jsx:              Questions about billing, refunds, or your subscription?
+client/src/pages/dashboard/Overview.jsx:        description: "Your subscription is active. All premium features are now unlocked.",
+client/src/pages/dashboard/Overview.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/billing/subscription-status"] });
+client/src/pages/dashboard/Overview.jsx:                href="/account/subscription"
+client/src/pages/help/RefundHelp.jsx:    a: "Yes, we can prorate refunds based on your remaining subscription time."
+client/src/pages/ControlDashboard.jsx:    webhooksEnabled: false,
+client/src/pages/ControlDashboard.jsx:    { name: "Stripe", description: "Payment processing and subscriptions", status: "connected", icon: "💳" },
+client/src/pages/ControlDashboard.jsx:          <Toggle enabled={settings.webhooksEnabled} onChange={() => toggleSetting('webhooksEnabled')} label="Webhooks" />
+client/src/pages/ControlDashboard.jsx:        {settings.webhooksEnabled && (
+client/src/pages/ControlDashboard.jsx:              onClick={() => toast({ title: "Add Webhook", description: "Opening webhook configuration..." })}
+client/src/pages/ControlDashboard.jsx:              data-testid="button-add-webhook"
+client/src/pages/ControlDashboard.jsx:        description="API keys, webhooks, and debugging tools"
+client/src/pages/FAQPage.jsx:        a: "Yes. You can cancel your subscription at any time from Settings. You'll retain access until the end of your billing period."
+client/src/pages/Upgrade.jsx:      const res = await fetch("/api/billing/checkout", {
+client/src/pages/Upgrade.jsx:          description: data.error || "Unable to start checkout. Please try again.",
+client/src/pages/Upgrade.jsx:                    <><Loader2 className="w-5 h-5 animate-spin" />Redirecting to checkout...</>
+client/src/pages/Pricing.jsx:      const checkoutToken = getAuthToken();
+client/src/pages/Pricing.jsx:      const res = await fetch("/api/billing/checkout", {
+client/src/pages/Pricing.jsx:          ...(checkoutToken ? { Authorization: `Bearer ${checkoutToken}` } : {}),
+client/src/pages/Pricing.jsx:          description: data.error || "Unable to start checkout. Please try again.",
+client/src/pages/SubscriberBenefitsPage.jsx:        description="Discover all the features, tools, and resources included in your Genuine Love Project subscription."
+client/src/pages/SubscriberBenefitsPage.jsx:        subtitle="Your complete guide to everything included in your subscription"
+client/src/pages/SubscriberBenefitsPage.jsx:          what: "A complete overview of your subscription benefits.",
+client/src/pages/LegalPage.jsx:  "Tax will be calculated at checkout.",
+client/src/pages/PricingPage.jsx:    a: "Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period."
+client/src/components/admin/GroupedHealthOverview.jsx:          { label: 'Billing', tools: allTools.filter(t => t.id.includes('billing') || t.id === 'webhook' || t.id === 'products' || t.id === 'pro-features' || t.id === 'leads'), color: 'text-green-600' },
+client/src/components/admin/DailyOpsChecklist.jsx:    { id: 'billing-review', label: 'Review Billing', desc: 'Check revenue, subscriptions, and payments', icon: DollarSign, href: '/admin/billing', category: 'revenue', priority: 'low' },
+client/src/components/admin/DailyOpsChecklist.jsx:    { id: 'revenue-check', label: 'Revenue Dashboard', desc: 'Review MRR, subscriptions, and financial health', icon: TrendingUp, href: '/admin/revenue', category: 'revenue', priority: 'low' },
+client/src/components/admin/AIKnowledgeHub.jsx:    { label: 'Infrastructure', count: 20, href: '/admin/tools', icon: Server, desc: 'Auth, billing, email, webhooks' },
+client/src/components/layout/Header.jsx:      ? [{ href: "/account/subscription", label: "Account", icon: UserCircle }]
+client/src/components/PlanGate.jsx:  const userPlan = user?.subscriptionStatus || (isPro ? "pro" : "free");
+client/src/components/GratitudePrompt.jsx:  "/checkout",
+client/src/components/UpsellModal.jsx:          <p className="text-xs text-[#9CA5A0] mt-1">No subscription. No hidden fees.</p>
+client/src/config/toolCategories.js:      { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
+client/src/content/allRoutes.json:  "/account/subscription",
+client/src/content/analytics/eventSchema.ts:  subscriptionStart: {
+client/src/content/analytics/eventSchema.ts:    action: 'subscription_start',
+client/src/content/meta/integrationRegistry.ts:    notes: 'Stripe checkout, webhooks, subscription management',
+client/src/content/meta/integrationRegistry.ts:    notes: 'Feature gating based on subscription tier',
+client/src/content/searchIndex.ts:    tags: ["pricing", "plans", "subscription"],
+client/src/content/routes.js:    description: 'Manage your subscription and payment methods.',
+client/src/content/routes.js:      subtitle: 'Manage your subscription, view invoices, and update payment methods.',
+client/src/content/routes.js:      primaryCta: { label: 'Manage Subscription', href: '#subscription' },
+client/src/content/routes.js:    description: 'Manage your subscription and billing.',
+client/src/content/routes.js:      titleHighlight: 'subscription.',
+client/src/content/routes.js:      subtitle: 'Manage your payment and subscription details.',
+client/src/content/routes.js:    description: 'View subscription and billing statistics.',
+client/src/content/routes.js:      subtitle: 'Read-only view of subscription data and metrics.',
+client/src/content/routes/marketingRoutes.js:        subtitle: 'These foundational tools are available to everyone, no subscription required.',
+client/src/content/routes/marketingRoutes.js:        subtitle: 'Unlock the full power of the platform with a subscription.',
+client/src/content/routes.js.BACKUP.1780108447:        subtitle: 'These foundational tools are available to everyone, no subscription required.',
+client/src/content/routes.js.BACKUP.1780108447:        subtitle: 'Unlock the full power of the platform with a subscription.',
+client/src/content/routes.js.BACKUP.1780108447:    description: 'Manage your subscription and payment methods.',
+client/src/content/routes.js.BACKUP.1780108447:      subtitle: 'Manage your subscription, view invoices, and update payment methods.',
+client/src/content/routes.js.BACKUP.1780108447:      primaryCta: { label: 'Manage Subscription', href: '#subscription' },
+client/src/content/routes.js.BACKUP.1780108447:    description: 'Manage your subscription and billing.',
+client/src/content/routes.js.BACKUP.1780108447:      titleHighlight: 'subscription.',
+client/src/content/routes.js.BACKUP.1780108447:      subtitle: 'Manage your payment and subscription details.',
+client/src/content/routes.js.BACKUP.1780108447:    description: 'View subscription and billing statistics.',
+client/src/content/routes.js.BACKUP.1780108447:      subtitle: 'Read-only view of subscription data and metrics.',
+client/src/context/AuthContext.jsx:  const subscriptionStatus = user?.subscriptionStatus || "free";
+client/src/context/AuthContext.jsx:  const isPro = subscriptionStatus === "pro";
+client/src/context/AuthContext.jsx:    console.debug("[Auth] subscriptionStatus:", subscriptionStatus, "isPro:", isPro);
+client/src/context/AuthContext.jsx:        subscriptionStatus,
+client/src/guards/RequirePro.jsx:  const plan = user?.subscription_status || "free";
+client/src/guards/RequirePro.jsx:        <p>This feature requires a Pro subscription.</p>
+client/src/hooks/useFeatureAccess.js:  const { subscriptionStatus, isPro } = useAuth();
+client/src/hooks/useFeatureAccess.js:      subscriptionStatus,
+client/src/hooks/useFeatureAccess.js:    subscriptionStatus,
+client/src/hooks/useFeatureAccess.js:export function checkFeatureAccess(featureKey, subscriptionStatus) {
+client/src/hooks/useFeatureAccess.js:  const isPro = subscriptionStatus === "pro";
+client/src/lib/track.ts:export function trackConversion(type: 'cta' | 'signup' | 'subscription', details: Record<string, string>) {
+client/src/lib/track.ts:    track('subscriptionStart', details);
+client/src/services/billingClient.js: * Canonical billing client for checkout + portal
+client/src/services/billingClient.js:    const res = await fetch('/api/billing/checkout', {
+client/src/services/billingClient.js:    throw new Error(data.error?.message || data.message || 'Unable to start checkout');
+client/src/utils/trackSignalEvent.js:  'checkout_start',
+client/src/sections/PricingFAQ.jsx: * PricingFAQ — accordion of subscription-related questions.
+client/src/sections/EmailCapture.jsx: * EmailCapture — homepage subscription surface.
+client/src/sections/ValueProposition.jsx: * (When a backend subscription endpoint lands, swap the handleSubmit.)
+client/src/design-system/components/MMHBButton.tsx:/** SSR-safe reduced-motion subscription. */
+client/src/design-system/components/MMHBCard.tsx:/** SSR-safe reduced-motion subscription. */
+client/src/checkin-flow/types/checkInFlowTypes.ts: * Trust-first contract: subscription messaging never appears before breathing completes.
+client/src/checkin-flow/types/checkInFlowTypes.ts:  | "checkout"
+client/src/checkin-flow/types/checkInFlowTypes.ts:  subscriptionMentioned: boolean;
+client/src/checkin-flow/types/checkInFlowTypes.ts:/** Selector contract: subscription UI MUST gate behind this. */
+client/src/checkin-flow/copy/microCopy.ts:export const checkoutCopy = {
+client/src/checkin-flow/state/useCheckInFlowStore.ts: *   - subscriptionMentioned can ONLY become true via the guarded goToOffer()
+client/src/checkin-flow/state/useCheckInFlowStore.ts:  subscriptionMentioned: false,
+client/src/checkin-flow/state/useCheckInFlowStore.ts:      return { breathingCompleted: true, step: "checkout" };
+client/src/checkin-flow/state/useCheckInFlowStore.ts:    set({ step: "offer", subscriptionMentioned: true });
+client/src/checkin-flow/state/useCheckInFlowStore.ts: * Selector — subscription messaging is allowed ONLY when:
+client/src/checkin-flow/state/useCheckInFlowStore.ts: *   3. subscriptionMentioned has been flipped true by goToOffer()
+client/src/checkin-flow/state/useCheckInFlowStore.ts: * Any UI rendering subscription content MUST gate behind this.
+client/src/checkin-flow/state/useCheckInFlowStore.ts:  state.subscriptionMentioned === true;
+client/src/checkin-flow/state/useCheckInFlowStore.ts: *    - useCheckInFlowState(selector) — read-only state subscription
+client/src/checkin-flow/governance/checkInFlowRules.ts:  checkoutCopy,
+client/src/checkin-flow/governance/checkInFlowRules.ts:    checkoutCopy.title, checkoutCopy.subtitle,
+client/src/checkin-flow/governance/checkInFlowRules.ts:    checkoutCopy.title, checkoutCopy.subtitle,
+client/src/checkin-flow/governance/checkInFlowRules.ts:  "subscribe", "subscription", "upgrade", "premium", "plan",
+client/src/checkin-flow/governance/checkInFlowRules.ts:  "checkout", "buy", "purchase", "pay", "$", "trial",
+client/src/checkin-flow/governance/checkInFlowRules.ts:      !s.subscriptionMentioned ||
+client/src/checkin-flow/governance/checkInFlowRules.ts:      (s.subscriptionMentioned && s.breathingCompleted),
+client/src/checkin-flow/governance/checkInFlowRules.ts:    description: "Welcome copy contains no subscription terms.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:    description: "Breathing-step copy contains no subscription terms.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:      // 'checkout' here refers to the FLOW step name (post-breathing feeling check),
+client/src/checkin-flow/governance/checkInFlowRules.ts:      // never to a payment checkout. Allow.
+client/src/checkin-flow/governance/checkInFlowRules.ts:        .filter((t) => t !== "checkout")
+client/src/checkin-flow/governance/checkInFlowRules.ts:    description: "Pre-offer copy carries no subscription / payment language (no hard-sell modal copy can leak).",
+client/src/checkin-flow/governance/checkInFlowRules.ts:        .filter((t) => t !== "checkout") // step name, not payment
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:  /** Called when user accepts the offer (delegate to your subscription/onboarding entry). */
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:      {step === "checkout" && <FlowStepCheckout />}
+client/src/checkin-flow/components/FlowStepWelcome.tsx: * NO subscription content. Crisis link rendered.
+client/src/checkin-flow/components/FlowStepBreathing.tsx: * NO subscription content.
+client/src/checkin-flow/components/FlowStepCheckout.tsx: * 4 shift options. NO subscription content yet — that's the next step.
+client/src/checkin-flow/components/FlowStepCheckout.tsx:import { checkoutCopy, shiftOptions } from "../copy/microCopy";
+client/src/checkin-flow/components/FlowStepCheckout.tsx:      data-testid="checkin-flow-step-checkout"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:      aria-labelledby="checkin-checkout-title"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:        id="checkin-checkout-title"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:        data-testid="text-checkout-title"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:        {checkoutCopy.title}
+client/src/checkin-flow/components/FlowStepCheckout.tsx:        {checkoutCopy.subtitle}
+client/src/checkin-flow/components/FlowStepCheckout.tsx:          data-testid="button-checkout-continue"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:          data-testid="link-crisis-checkout"
+client/src/checkin-flow/components/FlowStepOffer.tsx: * Phase 14 — Soft subscription invitation.
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts: * 22 assertions covering all 14 rules + the hard subscription guard.
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:  // ---- Hard subscription guard --------------------------------------------
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    expect(after.subscriptionMentioned).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    expect(after.subscriptionMentioned).toBe(true);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    expect(after.subscriptionMentioned).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:  it("auditFlow detects illegal subscriptionMentioned-without-breathing combo (CF-R001)", () => {
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:      subscriptionMentioned: true,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:      subscriptionMentioned: true,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    expect(useCheckInFlowStore.getState().step).toBe("checkout");
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:      subscriptionMentioned: true,
+client/src/lumi-rituals/runtime/useRitual.ts: * SSR-safe reduced-motion subscription.
+client/src/lumi-rituals/tests/ritualSafety.test.ts:    // No subscription / upsell language sneaks through.
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts: *   - Reduced-motion subscription (SSR-safe). When set, the optional
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:  // Reduced-motion live subscription.
+client/src/governance/interactions/HealingFlowProtectionRules.ts:                "subscription_overlay",
+client/src/App.jsx:              <Route path="/subscription">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/account/subscription">
+shared/schema.mjs:  subscriptionStatus: text("subscription_status").default("free"),
+shared/schema.mjs:  subscriptionExpiresAt: timestamp("subscription_expires_at"),
+shared/schema.mjs:export const subscriptions = pgTable("subscriptions", {
+shared/schema.mjs:export const webhookEvents = pgTable("webhook_events", {
+shared/schema.mjs: * wearables (Apple HealthKit webhook, Oura, Google Fit, Whoop) plus

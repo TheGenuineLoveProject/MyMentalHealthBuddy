@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "governance": "HX-OS QUANTUM ∞",
+  "status": "LOCKED",
+  "canonicalRoutes": {
+    "privacy": "/privacy",
+    "terms": "/terms",
+    "consent": "/consent",
+    "dataPolicy": "/data-policy"
+  },
+  "rules": [
+    "No duplicate privacy routes",
+    "No duplicate legal hubs",
+    "No duplicate consent pages",
+    "Footer must reference canonical routes only",
+    "Navigation must reference canonical routes only",
+    "Sitemap must reference canonical routes only",
+    "Robots must not expose deprecated legal duplicates",
+    "No marketing personalization from healing data",
+    "No monetization crossover into wellness flows",
+    "No hidden analytics tied to emotional state"
+  ],
+  "futureRedirectPolicy": {
+    "enabled": true,
+    "mode": "301_CANONICAL_REDIRECT_ONLY"
+  },
+  "editingRestrictions": [
+    "No route deletions without governance review",
+    "No rewrites during unstable runtime",
+    "No schema mutations",
+    "No auth changes",
+    "No billing changes"
+  ]
+}

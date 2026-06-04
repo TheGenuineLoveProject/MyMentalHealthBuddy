@@ -4,7 +4,7 @@ import crypto from "crypto";
 import { sql } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth.mjs";
 import db from "../db/client.mjs";
-import { success, badRequest, serverError, unauthorized } from "../utils/response.mjs";
+import { ok, badRequest, serverError, unauthorized } from "../utils/response.mjs";
 import { logger } from "../utils/logger.mjs";
 import { increment } from "../utils/metrics.mjs";
 
@@ -58,7 +58,7 @@ async function getOrCreateStripeCustomer(userId, email) {
 }
 
 router.get("/plans", async (req, res) => {
-  return success(res, {
+  return ok(res, {
     plans: Object.entries(PLANS).map(([key, plan]) => ({
       id: key,
       name: plan.name,
@@ -176,7 +176,7 @@ router.post("/checkout", async (req, res) => {
 
     logger.info("Checkout session created", { userId: dbUserId, plan, interval, sessionId: session.id });
     increment("checkout_initiated", { plan: `${plan}_${interval}` });
-    return success(res, { url: session.url, sessionId: session.id });
+    return ok(res, { url: session.url, sessionId: session.id });
   } catch (err) {
     logger.error("Checkout error", { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
@@ -198,7 +198,7 @@ router.post("/portal", async (req, res) => {
       customer: customerId,
       return_url: `${baseUrl}/account/billing`,
     });
-    return success(res, { url: portal.url });
+    return ok(res, { url: portal.url });
   } catch (err) {
     return serverError(res, err);
   }
@@ -215,7 +215,7 @@ router.get("/subscription-status", async (req, res) => {
 
     const user = userResult.rows?.[0];
     if (!user) {
-      return success(res, { plan: "free", status: "none" });
+      return ok(res, { plan: "free", status: "none" });
     }
 
     const plan = user.subscription_status || "free";
@@ -237,7 +237,7 @@ router.get("/subscription-status", async (req, res) => {
       }
     }
 
-    return success(res, {
+    return ok(res, {
       plan,
       status: isActive ? "active" : "none",
       currentPeriodEnd: user.subscription_expires_at || null,
@@ -260,7 +260,7 @@ router.get("/current-plan", async (req, res) => {
     const plan = userResult.rows?.[0]?.subscription_status || "free";
     const planConfig = PLANS[plan] || PLANS.free;
 
-    return success(res, {
+    return ok(res, {
       plan,
       name: planConfig.name,
       features: planConfig.features,
@@ -277,13 +277,13 @@ router.get("/current-plan", async (req, res) => {
 router.get("/invoices", async (req, res) => {
   try {
     if (!req.dbUserId) return unauthorized(res);
-    if (!stripe) return success(res, { invoices: [] });
+    if (!stripe) return ok(res, { invoices: [] });
 
     const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.dbUserId}`);
     const customerId = userResult.rows?.[0]?.stripe_customer_id;
     
     if (!customerId) {
-      return success(res, { invoices: [] });
+      return ok(res, { invoices: [] });
     }
 
     const invoices = await stripe.invoices.list({
@@ -301,7 +301,7 @@ router.get("/invoices", async (req, res) => {
       hostedUrl: inv.hosted_invoice_url,
     }));
 
-    return success(res, { invoices: formatted });
+    return ok(res, { invoices: formatted });
   } catch (err) {
     logger.error("Invoices error", { error: err.message });
     return serverError(res, err);

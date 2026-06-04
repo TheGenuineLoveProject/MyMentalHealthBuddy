@@ -1,0 +1,910 @@
+client/src/pages/admin/SocialStudioAdmin.jsx:51:    "I spent years learning about {topic}. Here's what I discovered:"
+client/src/pages/admin/RevenueAdmin.jsx:173:          <p className="text-xs text-muted-foreground" data-testid="text-privacy-notice">
+client/src/pages/admin/EngagementDashboard.jsx:45:    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
+client/src/pages/admin/AnalyticsDashboard.jsx:148:        <div className="rounded-xl border border-[var(--glp-sage-10)] bg-[var(--glp-sage)]/5 p-4 text-xs text-[var(--glp-ink-60)]" data-testid="text-privacy-notice">
+client/src/pages/admin/SocialLibrary.jsx:187:                placeholder="e.g., Calm, non-clinical, consent-based language"
+client/src/pages/admin/SystemAlerts.jsx:225:        <div className="mt-6 flex items-center justify-between text-xs text-muted-foreground" data-testid="panel-alert-footer">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:38:    { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap, category: 'discovery' },
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:39:    { id: 'full-scan', label: `Full Platform Scan (${totalTools} tools)`, done: checkedCount === totalTools, icon: ScanLine, category: 'discovery' },
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:235:              discovery: 'text-amber-500', triage: 'text-red-500', repair: 'text-purple-500',
+client/src/pages/admin/AdminTools.jsx.phase1.bak:13:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/AdminTools.jsx.phase1.bak:83:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/AdminTools.jsx.phase1.bak:232:  "cookie-policy-violation": { suggestion: "Cookie handling may not comply with privacy regulations. Canva KB: Ensure consent banner is shown, SameSite attributes are set, and secure flag is enabled for all cookies.", action: "Review cookie policy", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:237:  "analytics-gap": { suggestion: "Analytics tracking has gaps in data collection. Perplexity KB: Check Google Analytics integration, event tracking code, and consent-gated analytics initialization.", action: "Audit analytics coverage", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:298:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:346:      { id: "life-purpose", label: "Life Purpose", endpoint: "/api/life-purpose", icon: Target, desc: "Purpose discovery" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:353:      { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:1855:    { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap, category: 'discovery' },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:1856:    { id: 'full-scan', label: `Full Platform Scan (${totalTools} tools)`, done: checkedCount === totalTools, icon: ScanLine, category: 'discovery' },
+client/src/pages/admin/AdminTools.jsx.phase1.bak:2052:              discovery: 'text-amber-500', triage: 'text-red-500', repair: 'text-purple-500',
+client/src/pages/admin/_adminToolsShared.js:12:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/_adminToolsShared.js:82:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/_adminToolsShared.js:231:  "cookie-policy-violation": { suggestion: "Cookie handling may not comply with privacy regulations. Canva KB: Ensure consent banner is shown, SameSite attributes are set, and secure flag is enabled for all cookies.", action: "Review cookie policy", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:236:  "analytics-gap": { suggestion: "Analytics tracking has gaps in data collection. Perplexity KB: Check Google Analytics integration, event tracking code, and consent-gated analytics initialization.", action: "Audit analytics coverage", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:297:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/admin/_adminToolsShared.js:345:      { id: "life-purpose", label: "Life Purpose", endpoint: "/api/life-purpose", icon: Target, desc: "Purpose discovery" },
+client/src/pages/admin/_adminToolsShared.js:352:      { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:13:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/AdminTools.jsx.phase2.bak:83:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/AdminTools.jsx.phase2.bak:232:  "cookie-policy-violation": { suggestion: "Cookie handling may not comply with privacy regulations. Canva KB: Ensure consent banner is shown, SameSite attributes are set, and secure flag is enabled for all cookies.", action: "Review cookie policy", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:237:  "analytics-gap": { suggestion: "Analytics tracking has gaps in data collection. Perplexity KB: Check Google Analytics integration, event tracking code, and consent-gated analytics initialization.", action: "Audit analytics coverage", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:298:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:346:      { id: "life-purpose", label: "Life Purpose", endpoint: "/api/life-purpose", icon: Target, desc: "Purpose discovery" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:353:      { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:1855:    { id: 'quick-diag', label: 'Quick Diagnostics (8 critical)', done: CRITICAL_CHECKS.every(c => toolResults[c.id]), icon: Zap, category: 'discovery' },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:1856:    { id: 'full-scan', label: `Full Platform Scan (${totalTools} tools)`, done: checkedCount === totalTools, icon: ScanLine, category: 'discovery' },
+client/src/pages/admin/AdminTools.jsx.phase2.bak:2052:              discovery: 'text-amber-500', triage: 'text-red-500', repair: 'text-purple-500',
+client/src/pages/AboutApproachPage.jsx:30:              Rather than prescribing solutions, we help you discover your own wisdom and motivation for positive change.
+client/src/pages/BehaviorChangePage.tsx:115:                your own motivation for change. Rather than being told what to do, you discover your 
+client/src/pages/ContentIndexPage.jsx:37:  { name: "Glossary", path: "/glossary-full", description: "A-Z of wellness terms", category: "Knowledge", icon: BookOpen },
+client/src/pages/ContentIndexPage.jsx:58:  { name: "Privacy Policy", path: "/privacy", description: "How we protect your data", category: "Legal", icon: Shield },
+client/src/pages/ContentIndexPage.jsx:74:  { name: "Terms of Service", path: "/terms", description: "Usage terms and conditions", category: "Legal", icon: FileText },
+client/src/pages/ContentIndexPage.jsx:79:  { name: "Wellness Glossary", path: "/glossary", description: "Key wellness terms", category: "Knowledge", icon: BookOpen },
+client/src/pages/ContentIndexPage.jsx:360:        <footer className="mt-16 text-center pb-8">
+client/src/pages/ContentIndexPage.jsx:372:        </footer>
+client/src/pages/DesignSystem.jsx:963:                      "Semantic HTML (header, main, nav, footer)",
+client/src/pages/Invite.jsx:75:      url: `https://wa.me/?text=${encodeURIComponent(`Join me on The Genuine Love Project - a sacred space for healing and self-discovery. ${inviteLink}`)}`
+client/src/pages/UserProfile.jsx:128:                  Manage privacy settings
+client/src/pages/account/Settings.jsx:20:    description: "Manage your account settings, preferences, and privacy options.",
+client/src/pages/account/Settings.jsx:83:    benefits={pickBenefits(["agency","calm","clarity","selfRespect","privacy"], 5)}
+client/src/pages/account/Settings.jsx:246:                    <Button variant="outline" size="sm" data-testid="button-data-privacy">Manage</Button>
+client/src/pages/account/Settings.jsx:272:                <span className="text-caption">Your privacy is sacred to us</span>
+client/src/pages/hubs/HubsIndexPage.jsx:141:    description: "Deep self-discovery",
+client/src/pages/hubs/HubsIndexPage.jsx:296:    href: "/hubs/self-discovery",
+client/src/pages/hubs/HubsIndexPage.jsx:322:      benefits={pickBenefits(["calm", "meaning", "privacy", "clarity"], 4)}
+client/src/pages/hubs/InnerWorkHubPage.jsx:4: * Topic hub for deep inner work and self-discovery resources
+client/src/pages/hubs/InnerWorkHubPage.jsx:47:      description="Resources for deep inner work and self-discovery. Explore inner child healing, self-reflection, journaling, and values discovery."
+client/src/pages/hubs/InnerWorkHubPage.jsx:51:      subtitle="Tools for deep self-discovery"
+client/src/pages/hubs/InnerWorkHubPage.jsx:54:        what: "Resources for deep inner work and self-discovery.",
+client/src/pages/hubs/ThoughtworkHubPage.jsx:52:      benefits={pickBenefits(["clarity", "agency", "meaning", "privacy"], 4)}
+client/src/pages/hubs/SpiritualityHubPage.jsx:52:      benefits={pickBenefits(["meaning", "agency", "privacy", "calm"], 4)}
+client/src/pages/hubs/GriefHubPage.jsx:52:      benefits={pickBenefits(["calm", "meaning", "privacy", "connection"], 4)}
+client/src/pages/hubs/SelfDiscoveryHubPage.jsx:47:      description="Explore who you are. Tools for discovering your values, identity, and authentic self."
+client/src/pages/hubs/SelfDiscoveryHubPage.jsx:52:      benefits={pickBenefits(["agency", "meaning", "privacy", "clarity"], 4)}
+client/src/pages/hubs/ForgivenessHubPage.jsx:63:            to heal. These tools are for when you're ready to explore, on your own terms.
+client/src/pages/hubs/SelfCompassionHubPage.jsx:52:      benefits={pickBenefits(["connection", "selfRespect", "privacy", "meaning"], 4)}
+client/src/pages/hubs/SelfAwarenessHubPage.jsx:52:      benefits={pickBenefits(["clarity", "agency", "meaning", "privacy"], 4)}
+client/src/pages/hubs/CreativityHubPage.jsx:52:      benefits={pickBenefits(["agency", "meaning", "privacy", "calm"], 4)}
+client/src/pages/hubs/AnxietyHubPage.jsx:52:      benefits={pickBenefits(["calm", "calm", "meaning", "privacy"], 4)}
+client/src/pages/hubs/AcceptanceHubPage.jsx:52:      benefits={pickBenefits(["calm", "meaning", "privacy", "connection"], 4)}
+client/src/pages/hubs/LifePurposeHubPage.jsx:47:      description="Explore meaning, values, and purpose. Tools for discovering what matters most and aligning your life with your deepest values."
+client/src/pages/hubs/JournalingHubPage.jsx:47:      description="Explore the healing power of writing. Guided journaling prompts, free writing spaces, and reflection tools for self-discovery."
+client/src/pages/hubs/JournalingHubPage.jsx:54:        what: "Tools and prompts for written reflection and self-discovery.",
+client/src/pages/hubs/JournalingHubPage.jsx:55:        why: "Writing helps us process emotions and discover insights.",
+client/src/pages/pathways/ReflectionHistory.jsx:256:          Your reflections are stored securely. Only metadata is shown here for privacy.
+client/src/pages/pathways/PathwaysHome.jsx:148:            Take our quick assessment to discover which pathway aligns with your current needs and goals.
+client/src/pages/tools/EmotionWheel.jsx:123:            Explore and name your emotions with greater precision. Start with a core feeling and discover the nuances.
+client/src/pages/tools/WeeklyReflection.jsx:52:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/weekly-reflection", data),
+client/src/pages/tools/PHQ9Assessment.jsx:64:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/index.jsx:197:                clinician. If anything you discover here feels overwhelming, please reach out to{" "}
+client/src/pages/tools/SleepQualityCalculator.jsx:147:            href="/wellness-tools-hub"
+client/src/pages/tools/NervousSystemCheck.jsx:158:            href="/wellness-tools-hub"
+client/src/pages/tools/ManipulationDetector.jsx:142:            href="/wellness-tools-hub"
+client/src/pages/tools/CognitiveDistortionChecker.jsx:85:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/BoundaryBuilderTool.jsx:87:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/BreathPacer.jsx:100:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/GAD7Assessment.jsx:55:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/MeaningMap.jsx:34:        const res = await fetch("/api/wellness-tools/meaning-map/latest", { credentials: "include" });
+client/src/pages/tools/MeaningMap.jsx:79:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/meaning-map", data),
+client/src/pages/tools/GriefLetter.jsx:42:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/grief-letter", data),
+client/src/pages/tools/BreathTool.jsx:187:            {pickSlot("consent", tierKey, "breath-consent")}
+client/src/pages/AffirmationWall.jsx:188:            "In sharing our light, we discover we were never alone in the darkness."
+client/src/pages/CRMPage.jsx:272:      <footer className="border-t mt-12 py-8" style={{ borderColor: 'var(--glp-sage-15)' }}>
+client/src/pages/CRMPage.jsx:275:            <Link href="/" className="hover:opacity-80 transition-opacity" data-testid="link-footer-home">Home</Link>
+client/src/pages/CRMPage.jsx:276:            <Link href="/content-index" className="hover:opacity-80 transition-opacity" data-testid="link-footer-content">Content</Link>
+client/src/pages/CRMPage.jsx:277:            <Link href="/qa" className="hover:opacity-80 transition-opacity" data-testid="link-footer-qa">Q&A</Link>
+client/src/pages/CRMPage.jsx:278:            <Link href="/privacy" className="hover:opacity-80 transition-opacity" data-testid="link-footer-privacy">Privacy</Link>
+client/src/pages/CRMPage.jsx:279:            <Link href="/terms" className="hover:opacity-80 transition-opacity" data-testid="link-footer-terms">Terms</Link>
+client/src/pages/CRMPage.jsx:282:      </footer>
+client/src/pages/WireframeTemplates.jsx:505:      <footer 
+client/src/pages/WireframeTemplates.jsx:510:        data-export="footer.html"
+client/src/pages/WireframeTemplates.jsx:518:            <a href="#privacy" style={{ color: '#3a3a3a' }} data-testid="link-privacy">Privacy</a>
+client/src/pages/WireframeTemplates.jsx:519:            <a href="#terms" style={{ color: '#3a3a3a' }} data-testid="link-terms">Terms</a>
+client/src/pages/WireframeTemplates.jsx:523:      </footer>
+client/src/pages/Login.jsx:218:            <Link href="/terms" className="underline">Terms of Service</Link>{" "}
+client/src/pages/Login.jsx:220:            <Link href="/privacy" className="underline">Privacy Policy</Link>
+client/src/pages/Register.jsx:258:            <Link href="/terms" className="underline">Terms of Service</Link>{" "}
+client/src/pages/Register.jsx:260:            <Link href="/privacy" className="underline">Privacy Policy</Link>
+client/src/pages/Privacy.jsx:31:          <div className="text-center mb-12" data-testid="privacy-header">
+client/src/pages/Privacy.jsx:42:              data-testid="text-privacy-title"
+client/src/pages/Privacy.jsx:49:              data-testid="text-privacy-subtitle"
+client/src/pages/Privacy.jsx:53:            <p className="text-sm mt-4" style={{ color: "var(--glp-sage)" }} data-testid="text-privacy-updated">
+client/src/pages/Privacy.jsx:58:          <div className="space-y-8" data-testid="privacy-sections">
+client/src/pages/Privacy.jsx:151:                  Conversations with our AI companion are designed with your privacy in mind:
+client/src/pages/Privacy.jsx:171:                If you have questions about this privacy policy or wish to exercise your rights, please reach out:
+client/src/pages/Privacy.jsx:174:                <strong>Email:</strong> privacy@thegenuineloveproject.com
+client/src/pages/Blog.jsx:32:    excerpt: "Discover the philosophy behind The Genuine Love Project and how we're creating a safe space for emotional healing and self-discovery. Your path to genuine self-love starts here.",
+client/src/pages/Blog.jsx:165:    excerpt: "Learn how your nervous system responds to stress and discover simple practices to help yourself feel safer and more grounded in daily life.",
+client/src/pages/Blog.jsx:421:              <footer className="mt-12 pt-8 border-t border-[var(--sage-200)] not-prose">
+client/src/pages/Blog.jsx:434:              </footer>
+client/src/pages/Blog.jsx:482:              Thoughtful articles on healing, self-discovery, and nurturing your relationship with yourself.
+client/src/pages/Blog.jsx:552:              <Link href="/crisis" className="text-[var(--teal-600)] hover:underline font-medium" data-testid="link-crisis-footer">
+client/src/pages/Terms.tsx:101:              <footer className="card-bordered bg-[var(--sage-50)] border-[var(--sage-200)]">
+client/src/pages/Terms.tsx:110:              </footer>
+client/src/pages/Profile.jsx:138:                  href="/privacy" 
+client/src/pages/Profile.jsx:140:                  data-testid="link-privacy-policy"
+client/src/pages/Privacy.tsx:64:                  We built The Genuine Love Project to be privacy-first. We only collect what's needed to run
+client/src/pages/Privacy.tsx:126:              <footer className="card-bordered bg-[var(--sage-50)] border-[var(--sage-200)]">
+client/src/pages/Privacy.tsx:135:              </footer>
+client/src/pages/FAQPage.jsx:84:        a: "Yes. Your journal entries, mood logs, and conversations are encrypted and never shared. We take your privacy seriously and follow strict data protection practices."
+client/src/pages/About.jsx:46:              If you're someone who values privacy, prefers going at your own pace, and wants tools that don't demand constant participation — you'll probably recognize what this is for. You don't need to be in crisis to use it. You don't need to commit to a program. It's here when you want to check in with yourself, and it stays out of the way when you don't.
+client/src/pages/About.jsx:57:                Your reflections are private. We prioritize your privacy and create a judgment-free space for exploration.
+client/src/pages/Admin.jsx:406:        <footer className="mt-12 pt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+client/src/pages/Admin.jsx:414:        </footer>
+client/src/pages/AdvancedToolsPage.tsx:115:        description="Thoughtful tools for gentle self-discovery. Explore logic, ethics, identity, and meaning at your own pace with compassionate guidance." 
+client/src/pages/AdvancedToolsPage.tsx:134:                <p className="text-body-sm">Gentle yet powerful instruments for self-discovery. Explore logic, ethics, identity, and meaning—at your own pace, in your own way.</p>
+client/src/pages/AdvancedToolsPage.tsx:141:              "20 specialized thinking tools for deeper self-discovery",
+client/src/pages/AdvancedToolsPage.tsx:210:          <footer className="mt-8 text-center space-y-2">
+client/src/pages/AdvancedToolsPage.tsx:217:          </footer>
+client/src/pages/CollaborativeLabPage.tsx:239:            "Connect through wisdom, not identity—privacy is sacred"
+client/src/pages/CollaborativeLabPage.tsx:277:                <p className="text-caption">All insights are shared anonymously. Your privacy is sacred.</p>
+client/src/pages/CollaborativeLabPage.tsx:407:                Your privacy is protected—we never collect identifying information.
+client/src/pages/ExamplesPage.jsx:300:          <footer className="mt-8 card-bordered bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+client/src/pages/ExamplesPage.jsx:305:          </footer>
+client/src/pages/GuidedJournalingPage.tsx:63:    description: "Rediscovering your inherent worth and building authentic confidence",
+client/src/pages/GuidedJournalingPage.tsx:223:            benefit="Guided reflection, emotional processing, and self-discovery"
+client/src/pages/MasteryToolsPage.tsx:134:          <footer className="mt-8 text-center space-y-2">
+client/src/pages/MasteryToolsPage.tsx:141:          </footer>
+client/src/pages/MetaLearningPage.tsx:28:  { id: "spaced-rep", name: "Spaced Repetition", description: "Review material at increasing intervals. Optimal for long-term retention.", scienceNote: "Exploits the spacing effect discovered by Ebbinghaus." },
+client/src/pages/MirrorPage.tsx:132:      <SEO title="Mirror — MyMentalHealthBuddy" description="Reflective tools for self-discovery." />
+client/src/pages/MirrorPage.tsx:263:      <footer className="text-center text-caption pt-4 border-t border-[var(--sage-200)]">
+client/src/pages/MirrorPage.tsx:268:      </footer>
+client/src/pages/PhilosophicalInquiryPage.tsx:182:            Socratic questioning and dialectical reasoning. Examine beliefs, discover assumptions, find synthesis.
+client/src/pages/QAPage.jsx:120:    answer: "Yes, we take privacy seriously. Personal journal entries and data are encrypted and never shared. We don't sell user data. Any community features are optional, and you control what you share publicly. Review our Privacy Policy for complete details."
+client/src/pages/QAPage.jsx:288:          <footer className="mt-8 card-bordered bg-gray-50 dark:bg-gray-800/50">
+client/src/pages/QAPage.jsx:293:          </footer>
+client/src/pages/SupportPage.tsx:103:            <footer className="text-center py-4">
+client/src/pages/SupportPage.tsx:111:            </footer>
+client/src/pages/WisdomSynthesisPage.tsx:214:            Organize raw thoughts into structured insights. Extract patterns, discover connections, find actionable wisdom.
+client/src/pages/WisdomSynthesisPage.tsx:221:            "Extract patterns and discover hidden connections",
+client/src/pages/WisdomToolsPage.tsx:182:          <footer className="mt-8 text-center">
+client/src/pages/WisdomToolsPage.tsx:186:          </footer>
+client/src/pages/_quarantine/legacy-landing/Home.jsx:65:    description: "End-to-end encryption, no social features. Complete privacy for complete honesty.",
+client/src/pages/_quarantine/legacy-landing/Home.jsx:72:    stat: "100% consent-based"
+client/src/pages/_quarantine/legacy-landing/Home.jsx:167:        description="Journaling, mood tracking, and AI-assisted reflection — built with trauma-informed care. Evidence-informed tools including inner child work, nervous system education, and somatic practices, all in complete privacy."
+client/src/pages/_quarantine/legacy-landing/Home.jsx:272:          subtitle="Journaling, mood tracking, and AI-assisted reflection for people who carry more than they show. Notice patterns, understand yourself better, check in when you want to — all in complete privacy."
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:95:      description: "Prompts and frameworks designed to unlock self-discovery and emotional clarity.",
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:36:    href: "/wellness-tools-hub",
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:43:  "Trauma-informed by default — gentle, consent-based language.",
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:105:            href="/wellness-tools-hub"
+client/src/pages/OnboardingFlow.jsx:507:            Crisis? Visit <Link href="/crisis" className="underline" data-testid="link-onboarding-crisis-footer">/crisis</Link> for immediate support.
+client/src/pages/AtlasDashboard.tsx:330:            Navigate 37 instruments for deep thinking, self-discovery, and mastery.
+client/src/pages/JournalPage.jsx:253:        where: "Right here, in complete privacy.",
+client/src/pages/DailyRitualPage.tsx:48:    result: "You discover actionable patterns—like how sleep affects your clarity or how certain activities boost regulation."
+client/src/pages/DailyRitualPage.tsx:555:        <footer className="mt-12 text-center">
+client/src/pages/DailyRitualPage.tsx:558:        </footer>
+client/src/pages/Onboarding.tsx:466:                  <a href="/terms" className="text-[var(--teal-600)] underline">Terms of Service</a>{" "}
+client/src/pages/Onboarding.tsx:468:                  <a href="/privacy" className="text-[var(--teal-600)] underline">Privacy Policy</a>.
+client/src/pages/Start.tsx:1234:        <footer className="mt-16 text-center text-xs text-slate-500 dark:text-slate-400">
+client/src/pages/Start.tsx:1240:        </footer>
+client/src/pages/Settings.jsx:13:// Mounting unlocks the consent grant button which in turn activates the
+client/src/pages/Settings.jsx:15:// consent.state === "granted").
+client/src/pages/Settings.jsx:502:            <section data-testid="section-privacy" className="card-bordered mb-6" aria-labelledby="privacy-heading">
+client/src/pages/Settings.jsx:507:                <h2 id="privacy-heading" className="text-heading-md text-teal">Privacy & Data</h2>
+client/src/pages/Pricing.jsx:271:                <span className="text-sm font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-stat-privacy">Private by default</span>
+client/src/pages/ToolsPage.jsx:24:  when: "When you want dedicated time for self-discovery, processing thoughts, or tracking personal growth.",
+client/src/pages/ToolsPage.jsx:42:    result: "You discover you've been holding tension about a conversation you need to have."
+client/src/pages/ToolsPage.jsx:85:    subtitle: "Evidence-informed tools for self-discovery, belief examination, and growth tracking. Designed for consistent practice over time.",
+client/src/pages/ToolsPage.jsx:130:        <SEO title="Reflection Tools - The Genuine Love Project" description="Privacy-focused self-discovery tools for journaling and personal growth." />
+client/src/pages/ToolsPage.jsx:173:      subtitle="A gentle toolkit for self-discovery"
+client/src/pages/ToolsPage.jsx:177:        why: "To support self-discovery and gentle growth.",
+client/src/pages/ToolsPage.jsx:180:        where: "Right here, in complete privacy.",
+client/src/pages/ToolsPage.jsx:192:        description="A gentle toolkit for self-discovery including belief mapping, timed writing, and growth tracking." 
+client/src/pages/ToolsPage.jsx:227:              <Microcopy slot="consent" seed="tools-page" as="span" />
+client/src/pages/ToolsPage.jsx:281:              These tools are for reflection and self-discovery, not therapy. You know yourself best.
+client/src/pages/CanvaLanding.jsx:264:      answer: "Your privacy isn't a feature — it's a promise. Every journal entry, mood insight, behavioral pattern, and conversation is encrypted with industry-standard security and belongs exclusively to you. We don't sell data, serve ads, or share anything with anyone. There's no social feed, no public profile, and no way for another person to see your inner world. We built this with the same reverence we'd want for our own deepest thoughts — because trust isn't a marketing word to us, it's the foundation."
+client/src/pages/CanvaLanding.jsx:288:      answer: "No — and we'll always be transparent about that, because integrity isn't optional. This is an educational wellness companion: a metacognitive coach and behavioral guide for deepening self-awareness, mastering stress, building emotional resilience, developing self-regulation skills, growing genuine confidence, and discovering the strength you already carry. If you're in crisis, we connect you directly to professional help. If you have a therapist, this complements their work beautifully. If you're not there yet, this is a gentle, empowering, judgment-free first step toward genuinely understanding and evolving your own mind."
+client/src/pages/CanvaLanding.jsx:341:            <Link href="/privacy" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-safety">Safety &amp; Privacy</Link>
+client/src/pages/CanvaLanding.jsx:352:                    users can reach Memory consent panel (P6 activation). */}
+client/src/pages/CanvaLanding.jsx:413:            {/* V29 Phase 1 hybrid nav (2026-05-15): action-first ordering. About/Features/Community/Learn moved to mobile-only "Discover" section + footer.
+client/src/pages/CanvaLanding.jsx:1202:          via SafetyFooter + footer block below; this bar is additive only. */}
+client/src/pages/CanvaLanding.jsx:1229:      <footer className="py-10 px-6" style={{ background: 'var(--glp-paper)', borderTop: '1px solid var(--glp-sage-15)' }}>
+client/src/pages/CanvaLanding.jsx:1235:                <Link href="/" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-home">Home</Link>
+client/src/pages/CanvaLanding.jsx:1236:                <Link href="/about" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-about">About</Link>
+client/src/pages/CanvaLanding.jsx:1237:                <Link href="/crm" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-dashboard">Dashboard</Link>
+client/src/pages/CanvaLanding.jsx:1238:                <Link href="/onboarding" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-onboarding">Get Started</Link>
+client/src/pages/CanvaLanding.jsx:1239:                <Link href="/pricing" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-pricing">Pricing</Link>
+client/src/pages/CanvaLanding.jsx:1240:                <Link href="/tools" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-tools">Tools Library</Link>
+client/src/pages/CanvaLanding.jsx:1246:                <Link href="/blog" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-blog">Blog</Link>
+client/src/pages/CanvaLanding.jsx:1247:                <Link href="/community" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-community">Community</Link>
+client/src/pages/CanvaLanding.jsx:1248:                <Link href="/learn" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-learn">Learn & Grow</Link>
+client/src/pages/CanvaLanding.jsx:1249:                <Link href="/affirmations" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-affirmations">Affirmation Wall</Link>
+client/src/pages/CanvaLanding.jsx:1250:                <Link href="/crisis" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-crisis">Crisis Support</Link>
+client/src/pages/CanvaLanding.jsx:1256:                <Link href="/content-index" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-content">A–Z Directory</Link>
+client/src/pages/CanvaLanding.jsx:1257:                <Link href="/study-vault" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-study-vault">Study Vault</Link>
+client/src/pages/CanvaLanding.jsx:1258:                <Link href="/qa" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-qa">Q&A Community</Link>
+client/src/pages/CanvaLanding.jsx:1259:                <Link href="/chat" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-chat">AI Companion</Link>
+client/src/pages/CanvaLanding.jsx:1265:                <Link href="/privacy" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-privacy">Privacy Policy</Link>
+client/src/pages/CanvaLanding.jsx:1266:                <Link href="/terms" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-terms">Terms of Service</Link>
+client/src/pages/CanvaLanding.jsx:1267:                <Link href="/accessibility" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-accessibility">Accessibility</Link>
+client/src/pages/CanvaLanding.jsx:1268:                <Link href="/contact" className="block hover:underline transition-colors" style={{ color: 'var(--glp-ink)' }} data-testid="link-footer-contact">Contact Us</Link>
+client/src/pages/CanvaLanding.jsx:1282:                data-testid="img-canva-footer-logo"
+client/src/pages/CanvaLanding.jsx:1286:                    to preserve the existing 36px (w-9 h-9) footer container layout;
+client/src/pages/CanvaLanding.jsx:1290:                  scene="footer-logo"
+client/src/pages/CanvaLanding.jsx:1306:          {/* v5.8.39 P2 — Universal trust strip on every page footer */}
+client/src/pages/CanvaLanding.jsx:1323:      </footer>
+client/src/pages/SubscriberBenefitsPage.jsx:68:          why: "So you can discover and use all the tools available to you.",
+client/src/pages/SubscriberBenefitsPage.jsx:154:                    <p className="text-body-sm text-[var(--sage-600)]">Powerful features you might not have discovered yet</p>
+client/src/pages/StudyVaultPage.jsx:397:            <Microcopy slot="consent" seed="study-vault" as="span" />
+client/src/pages/CognitiveToolsPage.jsx:117:    questions: ["Am I thinking in all-or-nothing terms?", "Am I mind reading or fortune telling?", "Am I catastrophizing or using 'should' statements?"]
+client/src/pages/GlossaryPage.jsx:58:    description: "Comprehensive glossary of mental health, psychology, and wellness terms. Learn about therapy concepts, neuroscience, emotional regulation, and healing practices.",
+client/src/pages/GlossaryPage.jsx:99:      <SEO title="Glossary — MyMentalHealthBuddy" description="Definitions of key wellness and self-care terms." />
+client/src/pages/GlossaryPage.jsx:115:                <p className="text-lead">{glossaryTerms.length} terms explained in simple language</p>
+client/src/pages/GlossaryPage.jsx:126:                  placeholder="Search terms..."
+client/src/pages/GlossaryPage.jsx:164:              <p className="text-gray-500 dark:text-gray-400">No terms found matching your search.</p>
+client/src/pages/WellnessToolsHub.jsx:191:                clinician. If anything you discover here feels overwhelming, please reach out to{" "}
+client/src/pages/WellnessToolsHub.jsx:200:          <NewsletterSignup variant="inline" source="wellness-tools-hub" />
+client/src/pages/DesignSystemV2.jsx:259:                <a href="#footer-style-demo" className="lumi-link-footer" data-testid="lk-footer" aria-label="Footer link style example">Footer link</a>
+client/src/pages/DesignSystemV2.jsx:377:          <footer
+client/src/pages/DesignSystemV2.jsx:397:                    <Link href="/" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-home">Home</Link>
+client/src/pages/DesignSystemV2.jsx:398:                    <Link href="/wellness-tools-hub" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-tools">Wellness Tools</Link>
+client/src/pages/DesignSystemV2.jsx:399:                    <Link href="/discernment" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-discernment">Discernment</Link>
+client/src/pages/DesignSystemV2.jsx:405:                    <Link href="/blog" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-blog">Blog</Link>
+client/src/pages/DesignSystemV2.jsx:406:                    <Link href="/learn" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-learn">Learn</Link>
+client/src/pages/DesignSystemV2.jsx:407:                    <Link href="/faq" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-faq">FAQ</Link>
+client/src/pages/DesignSystemV2.jsx:413:                    <Link href="/crisis" className="lumi-link-crisis" data-testid="footer-crisis">Crisis Support</Link>
+client/src/pages/DesignSystemV2.jsx:428:          </footer>
+client/src/pages/PeacescapePage.jsx:183:        {/* Customizer — palette / accessory / theme. Optional, gentle, consent-based. */}
+client/src/pages/MovementSnacksPage.jsx:79:    queryKey: ["/api/wellness-tools/movement"],
+client/src/pages/MovementSnacksPage.jsx:83:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/movement", data),
+client/src/pages/MovementSnacksPage.jsx:85:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/movement"] });
+client/src/pages/GrowthPage.jsx:450:  const signedIn = Boolean(data?.privacy?.signedIn);
+client/src/pages/GrowthPage.jsx:562:            {data?.privacy?.consent && (
+client/src/pages/GrowthPage.jsx:563:              <p className="mt-4 text-[11px] text-slate-500 dark:text-slate-500" data-testid="text-consent">
+client/src/pages/GrowthPage.jsx:564:                {data.privacy.consent}
+client/src/pages/LegalPage.jsx:9:  { title: "Terms of Service", path: "/legal/terms", description: "Our terms and conditions for using the platform." },
+client/src/pages/LegalPage.jsx:10:  { title: "Privacy Policy", path: "/legal/privacy", description: "How we collect, use, and protect your data." },
+client/src/pages/LegalPage.jsx:29:        description="Legal policies, terms, and tax information."
+client/src/pages/BoundariesPage.jsx:85:    queryKey: ["/api/wellness-tools/boundaries"],
+client/src/pages/BoundariesPage.jsx:89:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/boundaries", data),
+client/src/pages/BoundariesPage.jsx:91:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
+client/src/pages/BoundariesPage.jsx:103:    mutationFn: (id) => apiRequest("DELETE", `/api/wellness-tools/boundaries/${id}`),
+client/src/pages/BoundariesPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
+client/src/pages/HealingJourneysPage.jsx:50:          { name: "Joy Inventory", description: "Rediscover what brings you genuine happiness—not just productivity" }
+client/src/pages/HealingJourneysPage.jsx:259:    id: "purpose-discovery",
+client/src/pages/HealingJourneysPage.jsx:265:    description: "Move from feeling lost or unfulfilled to discovering what truly matters to you. This journey combines ACT values clarification, strengths discovery, and vision work to help you find your unique purpose—not imposed by others, but authentically yours. Purpose isn't found; it's uncovered from within.",
+client/src/pages/CoherenceLadderPage.jsx:99:    queryKey: ["/api/wellness-tools/coherence"],
+client/src/pages/CoherenceLadderPage.jsx:103:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/coherence", data),
+client/src/pages/CoherenceLadderPage.jsx:105:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
+client/src/pages/GratitudePractice.jsx:26:  "What strength have you discovered in yourself?",
+client/src/pages/DataRetention.jsx:25:      details: "AI chat history is automatically deleted after 90 days to protect your privacy.",
+client/src/pages/DataRetention.jsx:46:        description="Understand how we store, protect, and delete your data. Your privacy matters to us."
+client/src/pages/DataRetention.jsx:150:            If you have questions about our data practices or want to exercise your privacy rights, 
+client/src/pages/DataRetention.jsx:163:            <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
+client/src/pages/DataRetention.jsx:165:            <Link href="/terms" className="text-primary hover:underline">Terms of Service</Link>
+client/src/pages/CreatorProfile.jsx:67:                  where you are—24/7, at your own pace, in the privacy of your own space.
+client/src/pages/CreatorProfile.jsx:122:            discover what resonates with you.
+client/src/pages/WellnessGlossaryPage.jsx:327:      <SEO title="Wellness Glossary — The Genuine Love Project" description="Key terms and definitions for wellness." />
+client/src/pages/WellnessGlossaryPage.jsx:446:              placeholder="Search terms..."
+client/src/pages/WellnessGlossaryPage.jsx:491:              No terms found matching your search.
+client/src/pages/SafetyCenter.jsx:173:                      We take your privacy seriously. Your journal entries and personal reflections 
+client/src/pages/SafetyCenter.jsx:175:                      <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
+client/src/pages/ValuesFinderPage.jsx:76:    queryKey: ["/api/wellness-tools/values"],
+client/src/pages/ValuesFinderPage.jsx:80:    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/values", data),
+client/src/pages/ValuesFinderPage.jsx:82:      queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/values"] });
+client/src/pages/SelfCareToolkitPage.jsx:43:    result: "You discover new ways to care for yourself and feel more balanced overall."
+client/src/pages/SelfCareToolkitPage.jsx:262:            <Microcopy slot="consent" seed="self-care-toolkit" as="span" />
+client/src/pages/NewsPage.jsx:46:    summary: "Map your inner landscape with our new tool. Track emotional states, discover transition patterns, and navigate your mental terrain with intention.",
+client/src/pages/WellnessHubPage.jsx:54:      { name: "Wellness Glossary", description: "38 key terms with definitions", href: "/glossary-full", icon: BookOpen }
+client/src/pages/WellnessHubPage.jsx:152:            Your central destination for healing, growth, and self-discovery. 
+client/src/pages/Presence.jsx:26: *   2. Per-section in-page consent — each section requires intentional toggle ON;
+client/src/pages/Presence.jsx:28: *      Panel, ritual launch button, scene toggle) provide that consent affordance.
+client/src/pages/Presence.jsx:286:    <footer
+client/src/pages/Presence.jsx:292:      data-testid="footer-presence-crisis"
+client/src/pages/Presence.jsx:303:    </footer>
+client/src/pages/Challenge.jsx:76:        const res = await fetch("/api/wellness-tools/challenge-progress", { credentials: "include" });
+client/src/pages/Challenge.jsx:102:      const res = await fetch("/api/wellness-tools/challenge-progress", {
+client/src/pages/discovery/DiscoveryPage.jsx:2:import ToolCard from "../../components/discovery/ToolCard";
+client/src/pages/discovery/DiscoveryPage.jsx:52:        {results.length} tools discovered
+client/src/components/AboutSection.jsx:136:            support and evidence-based wellness tools — on their own terms, at their own pace.
+client/src/components/BenefitsSection.jsx:57:      description: "Prompts designed by mental health professionals to unlock self-discovery and emotional clarity.",
+client/src/components/ContentStudio.jsx:109:        altText: "Journal pages with handwritten text (blurred for privacy), warm lighting suggesting reflection and introspection"
+client/src/components/ContentStudio.jsx:113:        body: "From an Internal Family Systems perspective, journaling can become a way to dialogue with different parts of yourself.\n\nInstead of writing 'I feel anxious,' try:\n\n'There's a part of me that feels anxious. What does this part need me to know?'\n\nThis externalizes the emotion, reducing fusion and creating space for curiosity. You might discover that the anxious part is protecting you, or carrying a burden from the past.\n\nOther approaches:\n• Letter writing to younger self\n• Dialogue between conflicting parts\n• Gratitude to protective parts",
+client/src/components/DashboardCard.jsx:8:  footer,
+client/src/components/DashboardCard.jsx:40:      {footer && (
+client/src/components/DashboardCard.jsx:43:          <footer>{footer}</footer>
+client/src/components/GlowFooter.jsx:17:  const footerLinks = [
+client/src/components/GlowFooter.jsx:19:    { href: "/privacy", label: "Privacy" },
+client/src/components/GlowFooter.jsx:26:    <footer 
+client/src/components/GlowFooter.jsx:32:      aria-label="Site footer"
+client/src/components/GlowFooter.jsx:33:      data-testid="footer-glow"
+client/src/components/GlowFooter.jsx:69:          {footerLinks.map((link) => (
+client/src/components/GlowFooter.jsx:75:              data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+client/src/components/GlowFooter.jsx:119:    </footer>
+client/src/components/HealingJourneys.jsx:135:  const [view, setView] = useState("discover");
+client/src/components/HealingJourneys.jsx:365:              onClick={() => setView("discover")}
+client/src/components/HealingJourneys.jsx:367:                view === "discover" 
+client/src/components/HealingJourneys.jsx:371:              data-testid="button-view-discover"
+client/src/components/Microcopy.jsx:43:  hero: ['consent', 'pacing'],
+client/src/components/Microcopy.jsx:44:  practiceCard: ['ctaPrimary', 'consent'],
+client/src/components/PersistentDisclaimer.jsx:3: * Persistent footer disclaimer component
+client/src/components/PositiveVisualization.jsx:38:      { text: "You discover a hidden clearing with a crystal-clear stream...", duration: 15 },
+client/src/components/ResilienceStories.jsx:16:  "What strength did you discover in yourself?",
+client/src/components/ResilienceStories.jsx:174:              What strength did you discover? (optional)
+client/src/components/SacredForm.jsx:13:  const [consent, setConsent] = useState(false);
+client/src/components/SacredForm.jsx:20:    if (!email || !consent) {
+client/src/components/SacredForm.jsx:21:      setError('Please enter your email and confirm consent.');
+client/src/components/SacredForm.jsx:37:        body: JSON.stringify({ email, consent })
+client/src/components/SacredForm.jsx:56:        className={`${styles.sacredForm} ${showInFooter ? styles.footerVariant : ''}`}
+client/src/components/SacredForm.jsx:71:      className={`${styles.sacredForm} ${showInFooter ? styles.footerVariant : ''}`}
+client/src/components/SacredForm.jsx:105:        <div className={styles.consentGroup}>
+client/src/components/SacredForm.jsx:106:          <label className={styles.consentLabel}>
+client/src/components/SacredForm.jsx:109:              checked={consent}
+client/src/components/SacredForm.jsx:113:              data-testid="checkbox-consent"
+client/src/components/SacredForm.jsx:115:            <span className={styles.consentText}>
+client/src/components/SacredForm.jsx:119:          <p className={styles.privacyNote}>
+client/src/components/SacredForm.jsx:120:            Your privacy matters.{' '}
+client/src/components/SacredForm.jsx:122:              href="/privacy" 
+client/src/components/SacredForm.jsx:123:              className={styles.privacyLink}
+client/src/components/SacredForm.jsx:124:              data-testid="link-privacy"
+client/src/components/SacredForm.jsx:126:              Read our privacy policy
+client/src/components/SacredForm.jsx:141:          disabled={status === 'loading' || !consent}
+client/src/components/SacredForm.module.css:10:.footerVariant {
+client/src/components/SacredForm.module.css:118:.consentGroup {
+client/src/components/SacredForm.module.css:124:.consentLabel {
+client/src/components/SacredForm.module.css:150:.consentText {
+client/src/components/SacredForm.module.css:157:.privacyNote {
+client/src/components/SacredForm.module.css:164:.privacyLink {
+client/src/components/SacredForm.module.css:171:.privacyLink:hover {
+client/src/components/SacredForm.module.css:175:.privacyLink:focus-visible {
+client/src/components/SacredForm.module.css:275:  .privacyLink {
+client/src/components/SafetyFooter.jsx:16:    <footer 
+client/src/components/SafetyFooter.jsx:20:      data-testid="safety-footer"
+client/src/components/SafetyFooter.jsx:52:    </footer>
+client/src/components/WeeklyReflection.jsx:32:    placeholder: "I discovered..., I realized..., I'm getting better at...",
+client/src/components/admin/AIHealthPipeline.jsx:23:    { id: 'discovery', label: 'Service Discovery', desc: 'Scan all 127 endpoints', icon: ScanLine, kb: 'Codex' },
+client/src/components/admin/AIHealthPipeline.jsx:36:    setCurrentPhase('discovery');
+client/src/components/admin/AIHealthPipeline.jsx:39:    phaseResults.discovery = { status: 'done', time: new Date().toLocaleTimeString() };
+client/src/components/admin/GroupedHealthOverview.jsx:15:          { label: 'AI/Wellness', tools: allTools.filter(t => ['ai-chat','therapy','mood-tracker','journal','gratitude','reflection','wellness-tools','mirror','prompts','states'].includes(t.id)), color: 'text-purple-600' },
+client/src/components/attention/AttentionEcology.jsx:253:      <footer className="pt-4 border-t border-white/10">
+client/src/components/attention/AttentionEcology.jsx:257:      </footer>
+client/src/components/creative/CreativeProblemSolver.jsx:272:      <footer className="pt-4 border-t border-white/10">
+client/src/components/creative/CreativeProblemSolver.jsx:276:      </footer>
+client/src/components/existential/ExistentialInquiry.tsx:165:      <footer className="pt-4 border-t border-white/10">
+client/src/components/existential/ExistentialInquiry.tsx:169:      </footer>
+client/src/components/inquiry/DialecticalInquiry.tsx:105:        discovering truth by holding opposing perspectives.
+client/src/components/layout/Footer.tsx:22:    <footer className="border-t border-gray-100 bg-gray-50">
+client/src/components/layout/Footer.tsx:31:                data-testid="img-footer-lumi"
+client/src/components/layout/Footer.tsx:49:                <Link href="/wellness" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-wellness">
+client/src/components/layout/Footer.tsx:54:                <Link href="/wellness-hub" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-wellness-hub">
+client/src/components/layout/Footer.tsx:60:                <Link href="/glossary" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-glossary">
+client/src/components/layout/Footer.tsx:66:                <Link href="/healing-library" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-healing-library">
+client/src/components/layout/Footer.tsx:72:                <Link href="/news" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-news">
+client/src/components/layout/Footer.tsx:78:                <Link href="/crisis" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-crisis">
+client/src/components/layout/Footer.tsx:89:                <Link href="/faq" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-faq">
+client/src/components/layout/Footer.tsx:95:                <Link href="/resources" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-resources">
+client/src/components/layout/Footer.tsx:101:                <Link href="/support" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-support">
+client/src/components/layout/Footer.tsx:113:                <Link href="/breathing" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-breathing">
+client/src/components/layout/Footer.tsx:119:                <Link href="/meditation" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-meditation">
+client/src/components/layout/Footer.tsx:125:                <Link href="/grounding" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-grounding">
+client/src/components/layout/Footer.tsx:131:                <Link href="/affirmations" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-affirmations">
+client/src/components/layout/Footer.tsx:137:                <Link href="/calming-scenes" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-calming">
+client/src/components/layout/Footer.tsx:143:                <Link href="/self-care" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-selfcare">
+client/src/components/layout/Footer.tsx:155:                <Link href="/privacy" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-privacy">
+client/src/components/layout/Footer.tsx:161:                <Link href="/terms" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-terms">
+client/src/components/layout/Footer.tsx:167:                <a href={`mailto:support@${BRAND.name.toLowerCase().replace(/\s+/g, '')}.com`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-contact">
+client/src/components/layout/Footer.tsx:182:    </footer>
+client/src/components/marketing/EmailCapture.jsx:31:          consent: true
+client/src/components/marketing/EmailCapture.jsx:100:        We respect your privacy. Unsubscribe anytime. No spam, ever.
+client/src/components/mastery/DeepWorkTracker.tsx:235:      <footer className="pt-4 border-t border-white/10">
+client/src/components/mastery/DeepWorkTracker.tsx:239:      </footer>
+client/src/components/mastery/MentalModelsLibrary.tsx:251:      <footer className="pt-4 border-t border-white/10">
+client/src/components/mastery/MentalModelsLibrary.tsx:255:      </footer>
+client/src/components/mastery/SkillForge.tsx:349:      <footer className="pt-4 border-t border-white/10">
+client/src/components/mastery/SkillForge.tsx:353:      </footer>
+client/src/components/methods/NLPTile.jsx:108:        patterns—always transparently and with your consent.
+client/src/components/mindscape/MindscapeNavigator.tsx:301:      <footer className="pt-4 border-t border-white/10">
+client/src/components/mindscape/MindscapeNavigator.tsx:305:      </footer>
+client/src/components/moral/MoralReasoningLab.tsx:201:      <footer className="pt-4 border-t border-white/10">
+client/src/components/moral/MoralReasoningLab.tsx:205:      </footer>
+client/src/components/narrative/NarrativeIdentityStudio.tsx:196:      <footer className="pt-4 border-t border-white/10">
+client/src/components/narrative/NarrativeIdentityStudio.tsx:200:      </footer>
+client/src/components/sacred/SacredBackground.jsx:78:      {variant === "footer" && (
+client/src/components/sacred/SacredFooter.module.css:3:.footer {
+client/src/components/sacred/SacredFooter.module.css:12:.footerInner {
+client/src/components/sacred/SacredFooter.module.css:17:.footerGrid {
+client/src/components/sacred/SacredFooter.module.css:25:  .footerGrid {
+client/src/components/sacred/SacredFooter.module.css:31:  .footerGrid {
+client/src/components/sacred/SacredFooter.jsx:11: * This elaborate footer is for marketing/landing pages only.
+client/src/components/sacred/SacredFooter.jsx:28:  const footerLinks = {
+client/src/components/sacred/SacredFooter.jsx:43:      { label: "Privacy Policy", href: "/privacy" },
+client/src/components/sacred/SacredFooter.jsx:44:      { label: "Terms of Service", href: "/terms" },
+client/src/components/sacred/SacredFooter.jsx:57:    <footer 
+client/src/components/sacred/SacredFooter.jsx:63:      aria-label="Site footer"
+client/src/components/sacred/SacredFooter.jsx:65:      data-testid="footer-sacred"
+client/src/components/sacred/SacredFooter.jsx:129:            <NewsletterSignup variant="footer" source="sacred-footer-v2" />
+client/src/components/sacred/SacredFooter.jsx:147:              {footerLinks.explore.map((link, index) => (
+client/src/components/sacred/SacredFooter.jsx:153:                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+client/src/components/sacred/SacredFooter.jsx:172:              {footerLinks.support.map((link, index) => (
+client/src/components/sacred/SacredFooter.jsx:178:                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+client/src/components/sacred/SacredFooter.jsx:197:              {footerLinks.legal.map((link, index) => (
+client/src/components/sacred/SacredFooter.jsx:203:                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+client/src/components/sacred/SacredFooter.jsx:237:    </footer>
+client/src/components/safety/SafetyFooterStrip.tsx:14:    <footer className="rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">
+client/src/components/safety/SafetyFooterStrip.tsx:27:            data-testid="link-crisis-footer"
+client/src/components/safety/SafetyFooterStrip.tsx:33:    </footer>
+client/src/components/safety/LegalFooter.tsx:17:    <footer
+client/src/components/safety/LegalFooter.tsx:20:      data-testid="safety-footer"
+client/src/components/safety/LegalFooter.tsx:45:          <Link href={LEGAL_LINKS.privacy} className="hover:underline" data-testid="link-privacy">
+client/src/components/safety/LegalFooter.tsx:48:          <Link href={LEGAL_LINKS.terms} className="hover:underline" data-testid="link-terms">
+client/src/components/safety/LegalFooter.tsx:60:    </footer>
+client/src/components/share/ShareModal.jsx:132:          Your privacy matters. We never post without your permission.
+client/src/components/ui/QuoteBlock.jsx:37:    text: "The love you seek is already within you, waiting to be discovered.", 
+client/src/components/ui/QuoteBlock.jsx:105:          <footer 
+client/src/components/ui/QuoteBlock.jsx:111:          </footer>
+client/src/components/ui/QuoteBlock.jsx:163:          <footer 
+client/src/components/ui/QuoteBlock.jsx:168:          </footer>
+client/src/components/ui/QuoteBlock.jsx:220:        <footer 
+client/src/components/ui/QuoteBlock.jsx:225:        </footer>
+client/src/components/ui/ResourceTiles.jsx:6: * Modular card component for content discovery
+client/src/components/ui/Footer.jsx:7: * Canonical site footer.
+client/src/components/ui/Footer.jsx:13:  { name: 'X / Twitter', href: 'https://twitter.com/genuineloveproj',                   Icon: SiX,         testId: 'footer-social-twitter'   },
+client/src/components/ui/Footer.jsx:14:  { name: 'Instagram',   href: 'https://instagram.com/genuineloveproj',                 Icon: SiInstagram, testId: 'footer-social-instagram' },
+client/src/components/ui/Footer.jsx:15:  { name: 'LinkedIn',    href: 'https://www.linkedin.com/company/the-genuine-love-project', Icon: SiLinkedin, testId: 'footer-social-linkedin' },
+client/src/components/ui/Footer.jsx:16:  { name: 'YouTube',     href: 'https://www.youtube.com/@genuineloveproj',              Icon: SiYoutube,   testId: 'footer-social-youtube'   },
+client/src/components/ui/Footer.jsx:17:  { name: 'Facebook',    href: 'https://www.facebook.com/genuineloveproj',              Icon: SiFacebook,  testId: 'footer-social-facebook'  },
+client/src/components/ui/Footer.jsx:24:    <footer
+client/src/components/ui/Footer.jsx:36:            <Link href="/about"   className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-about">About</Link>
+client/src/components/ui/Footer.jsx:37:            <Link href="/blog"    className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-blog">Blog</Link>
+client/src/components/ui/Footer.jsx:38:            <Link href="/privacy" className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-privacy">Privacy</Link>
+client/src/components/ui/Footer.jsx:39:            <Link href="/terms"   className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-terms">Terms</Link>
+client/src/components/ui/Footer.jsx:40:            <Link href="/contact" className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-contact">Contact</Link>
+client/src/components/ui/Footer.jsx:74:                data-testid="footer-social-email"
+client/src/components/ui/Footer.jsx:89:              data-testid="footer-crisis-link"
+client/src/components/ui/Footer.jsx:97:    </footer>
+client/src/components/ui/Card.jsx:46:    <div className={`flex items-center p-6 pt-0 ${className}`} data-testid="card-footer">
+client/src/components/ui/ReflectionFooter.jsx:31:    <footer 
+client/src/components/ui/ReflectionFooter.jsx:34:      data-testid="safety-footer"
+client/src/components/ui/ReflectionFooter.jsx:64:      <div className={`safety-footer__secondary mt-3 text-xs flex flex-wrap items-center gap-2 ${variant === "compact" ? "justify-center" : ""}`}>
+client/src/components/ui/ReflectionFooter.jsx:65:        <Link href="/blog" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-blog">
+client/src/components/ui/ReflectionFooter.jsx:68:        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+client/src/components/ui/ReflectionFooter.jsx:69:        <Link href="/newsletter" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-newsletter">
+client/src/components/ui/ReflectionFooter.jsx:72:        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+client/src/components/ui/ReflectionFooter.jsx:73:        <Link href="/disclaimer" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
+client/src/components/ui/ReflectionFooter.jsx:76:        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+client/src/components/ui/ReflectionFooter.jsx:77:        <Link href="/privacy" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
+client/src/components/ui/ReflectionFooter.jsx:80:        <span className="safety-footer__secondary-sep" aria-hidden="true">·</span>
+client/src/components/ui/ReflectionFooter.jsx:81:        <Link href="/crisis" className="safety-footer__secondary-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
+client/src/components/ui/ReflectionFooter.jsx:85:    </footer>
+client/src/components/values/ValuesClarification.tsx:221:      <footer className="pt-4 border-t border-white/10">
+client/src/components/values/ValuesClarification.tsx:225:      </footer>
+client/src/components/wellness/ConsentRibbon.tsx:13:      data-testid="wellness-consent-ribbon"
+client/src/components/wellness/ConsentStrip.tsx:17:      data-testid="consent-strip"
+client/src/components/wellness/ConsentStrip.tsx:28:              data-testid="link-crisis-consent"
+client/src/components/wellness/SafetyFooter.tsx:14:    <footer 
+client/src/components/wellness/SafetyFooter.tsx:18:      data-testid="wellness-safety-footer"
+client/src/components/wellness/SafetyFooter.tsx:43:              data-testid="link-crisis-footer"
+client/src/components/wellness/SafetyFooter.tsx:50:    </footer>
+client/src/components/avatar/BuddyAvatar.tsx:234: * private chat content. Wording is consent-based and trauma-informed:
+client/src/components/avatar/BuddyAvatar.tsx:346:  // footer, chat bubbles, tool cards, celebration overlays — shares the
+client/src/components/avatar/BuddyAvatar.tsx:352:  //     across header + hero + footer + chat + tools)
+client/src/components/avatar/BuddyAvatar.tsx:356:  // Tiny avatars (<48px — chat bubble badges, footer logos) skip the
+client/src/components/avatar/BuddyAvatar.tsx:381:  //    This keeps tiny header / chat-bubble / footer avatars silent while
+client/src/components/zen/BuddyBubble.jsx:14: *     "another thought" button (consent-based).
+client/src/components/zen/BuddyBubble.jsx:134:        <div className="buddy-bubble__footer">
+client/src/components/zen/buddy-bubble.css:98:.buddy-bubble__footer {
+client/src/components/peacescape/CustomizerPanel.jsx:34: * CustomizerPanel — gentle, consent-based sanctuary picker.
+client/src/components/lumi/LumiMascot.css:165: * Compact instances (size ≤ 80px, e.g. logo badges in nav/footer) get
+client/src/components/lumi/LumiCustomizer.jsx:275:        <footer
+client/src/components/lumi/LumiCustomizer.jsx:299:        </footer>
+client/src/components/lumi/LumiBrandLockupImage.jsx:6: * footer credit lines, social cards. For headers that need crisp scaling
+client/src/components/lumi/TGLPMandalaImage.jsx:5: * full-color sacred-geometry version (parent-brand splashes, footer credit
+client/src/components/lumi/LumiV6.tsx:386:  // demo + header/footer Lumi). One pop per session, one heartbeat owner at
+client/src/components/AgeConsentGate.jsx:29:        data-testid="consent-loading"
+client/src/components/AgeConsentGate.jsx:43:      data-testid="age-consent-gate"
+client/src/components/AgeConsentGate.jsx:54:            A safe space for emotional wellness and self-discovery
+client/src/components/AgeConsentGate.jsx:110:            data-testid="button-confirm-consent"
+client/src/components/AgeConsentGate.jsx:149:          <Link href="/terms" className="underline hover:text-foreground">Terms</Link>
+client/src/components/AgeConsentGate.jsx:151:          <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>
+client/src/components/ReflectionCardExport.jsx:19:  const [consentChecked, setConsentChecked] = useState(false);
+client/src/components/ReflectionCardExport.jsx:139:    if (!imageUrl || !consentChecked) return;
+client/src/components/ReflectionCardExport.jsx:297:                    checked={consentChecked}
+client/src/components/ReflectionCardExport.jsx:300:                    data-testid="checkbox-consent"
+client/src/components/ReflectionCardExport.jsx:303:                    I've edited and reviewed this card. I consent to downloading it for personal sharing. I understand this is for educational wellness purposes only.
+client/src/components/ReflectionCardExport.jsx:319:                  disabled={!consentChecked}
+client/src/components/ConsentBanner.jsx:5:const CONSENT_KEY = "glp_cookie_consent";
+client/src/components/ConsentBanner.jsx:17:    const consent = localStorage.getItem(CONSENT_KEY);
+client/src/components/ConsentBanner.jsx:18:    if (!consent) {
+client/src/components/ConsentBanner.jsx:25:    const consentData = {
+client/src/components/ConsentBanner.jsx:34:    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(consentData)); } catch (err) { console.warn("[storage-safe-write]", err); }
+client/src/components/ConsentBanner.jsx:44:      aria-label="Cookie consent"
+client/src/components/ConsentBanner.jsx:55:                  <a href="/privacy" className="text-primary hover:underline" aria-label="Learn more about our privacy and cookie practices">Learn more about our privacy practices</a>
+client/src/components/MicroWinPrompt.jsx:74:  // so users discover the dialog and can immediately dismiss with Enter.
+client/src/components/MicroWinPrompt.jsx:195:          /* v5.6 architect fix: yield z-index to ConsentBanner (z-50) so privacy
+client/src/components/MicroWinPrompt.jsx:196:             consent always wins. MicroWinPrompt is non-critical and waits 45s — it
+client/src/components/MicroWinPrompt.jsx:197:             can sit beneath the consent surface. */
+client/src/components/ReturnLoop.jsx:32:// Memory Layer. Hardened router; writes are silently rejected when consent
+client/src/components/ReturnLoop.jsx:117:  // pick. When consent is unset/declined the random fallback is what ships
+client/src/components/ReturnLoop.jsx:140:    // is silently rejected without consent (no throw, audit-logged) — that
+client/src/components/ReturnLoop.jsx:141:    // path is intentional; consent gate is owned by MemorySettingsPanel.
+client/src/components/Footer.jsx:10:    <footer 
+client/src/components/Footer.jsx:12:      data-testid="footer"
+client/src/components/Footer.jsx:32:            <Link href="/" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-home">
+client/src/components/Footer.jsx:35:            <Link href="/about" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-about">
+client/src/components/Footer.jsx:38:            <Link href="/tools" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-tools">
+client/src/components/Footer.jsx:41:            <Link href="/journal" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-journal">
+client/src/components/Footer.jsx:44:            <Link href="/wisdom" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-wisdom">
+client/src/components/Footer.jsx:47:            <Link href="/blog" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-blog">
+client/src/components/Footer.jsx:51:            <Link href="/newsletter" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-newsletter">
+client/src/components/Footer.jsx:55:            <Link href="/settings" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-settings">
+client/src/components/Footer.jsx:59:            <Link href="/disclaimer" className="footer-nav-link hover:text-[var(--glp-teal)] transition" data-testid="link-footer-disclaimer">
+client/src/components/Footer.jsx:62:            <Link href="/crisis" className="footer-nav-link hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-crisis">
+client/src/components/Footer.jsx:87:            <Link href="/privacy" className="hover:underline" data-testid="link-privacy">Privacy Policy</Link>
+client/src/components/Footer.jsx:88:            <Link href="/terms" className="hover:underline" data-testid="link-terms">Terms of Service</Link>
+client/src/components/Footer.jsx:92:    </footer>
+client/src/components/NewsletterSignup.jsx:30:export default function NewsletterSignup({ variant = "footer", source = "newsletter" }) {
+client/src/components/NewsletterSignup.jsx:32:  const [consent, setConsent] = useState(false);
+client/src/components/NewsletterSignup.jsx:43:    if (!email || !consent) {
+client/src/components/NewsletterSignup.jsx:60:          consent,
+client/src/components/NewsletterSignup.jsx:106:    <form onSubmit={handleSubmit} className={variant === "footer" ? "max-w-md" : ""} data-testid="form-newsletter">
+client/src/components/NewsletterSignup.jsx:147:          checked={consent}
+client/src/components/NewsletterSignup.jsx:150:          data-testid="checkbox-newsletter-consent"
+client/src/components/SacredFooter.jsx:11: * This elaborate footer is for marketing/landing pages only.
+client/src/components/SacredFooter.jsx:29:  const footerLinks = {
+client/src/components/SacredFooter.jsx:44:      { label: "Privacy Policy", href: "/privacy" },
+client/src/components/SacredFooter.jsx:45:      { label: "Terms of Service", href: "/terms" },
+client/src/components/SacredFooter.jsx:60:    <footer 
+client/src/components/SacredFooter.jsx:66:      data-testid="footer-sacred"
+client/src/components/SacredFooter.jsx:131:            <NewsletterSignup variant="footer" source="sacred-footer" />
+client/src/components/SacredFooter.jsx:146:              {footerLinks.explore.map((link, index) => (
+client/src/components/SacredFooter.jsx:152:                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+client/src/components/SacredFooter.jsx:171:              {footerLinks.support.map((link, index) => (
+client/src/components/SacredFooter.jsx:177:                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+client/src/components/SacredFooter.jsx:196:              {footerLinks.legal.map((link, index) => (
+client/src/components/SacredFooter.jsx:202:                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+client/src/components/SacredFooter.jsx:236:    </footer>
+client/src/components/BrandShell.jsx:79:        <footer
+client/src/components/BrandShell.jsx:81:          data-testid="footer-main"
+client/src/components/BrandShell.jsx:91:        </footer>
+client/src/config/leadMagnets.ts:33:    tags: ['journaling', 'reflection', 'self-discovery']
+client/src/config/leadMagnets.ts:52:    consent: 'I agree to receive emails. I can unsubscribe at any time.',
+client/src/config/leadMagnets.ts:53:    disclaimer: 'We respect your privacy. No spam, ever.',
+client/src/config/leadMagnets.ts:54:    privacyLink: '/privacy'
+client/src/config/leadMagnets.ts:61:    consent: 'I agree to receive emails. I can unsubscribe at any time.',
+client/src/config/leadMagnets.ts:63:    privacyLink: '/privacy'
+client/src/config/navConfig.js:36:    { path: "/terms", label: "Terms of Service" },
+client/src/config/navConfig.js:37:    { path: "/privacy", label: "Privacy Policy" },
+client/src/config/navConfig.js:57:  "/terms",
+client/src/config/navConfig.js:58:  "/privacy",
+client/src/config/toolCategories.js:13:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/config/toolCategories.js:62:      { id: "life-purpose", label: "Life Purpose", endpoint: "/api/life-purpose", icon: Target, desc: "Purpose discovery" },
+client/src/config/toolCategories.js:69:      { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
+client/src/content/allRoutes.json:127:  "/hubs/self-discovery",
+client/src/content/allRoutes.json:172:  "/privacy",
+client/src/content/allRoutes.json:208:  "/terms",
+client/src/content/context/buildPageContext.ts:41:    description: "A private space for reflection and self-discovery through writing.",
+client/src/content/frameworks/benefitPillars.js:110:    'Built with consent-based prompts, opt-out language, and crisis routing.',
+client/src/content/frameworks/nlpPatterns.js:3: * Educational, non-manipulative, consent-based
+client/src/content/frameworks/wellnessMicrocopy.js:3: * Rotation-safe, trauma-informed, consent-based messaging
+client/src/content/frameworks/wellnessMicrocopy.js:10:  consentControl: [
+client/src/content/legal/disclaimer.ts:7:  privacyNote:
+client/src/content/meta/integrationRegistry.ts:205:    canonicalFiles: ['client/src/components/SEO.tsx', 'public/sitemap.xml', 'public/robots.txt'],
+client/src/content/meta/integrationRegistry.ts:207:    notes: 'SEO meta tags, sitemap, robots.txt',
+client/src/content/meta/platformProcessRegistry.ts:10:  | "privacy"
+client/src/content/meta/platformProcessRegistry.ts:59:    guardrails: ["No medical promises", "18+ only", "Always show safety footer"],
+client/src/content/meta/platformProcessRegistry.ts:75:    guardrails: ["Respect privacy", "Local-first where possible"],
+client/src/content/meta/platformProcessRegistry.ts:97:    userBenefit: ["Speed", "Less friction", "Better discovery"],
+client/src/content/meta/platformProcessRegistry.ts:99:    guardrails: ["No sensitive inference", "No tracking without consent"],
+client/src/content/meta/platformProcessRegistry.ts:117:  privacy: {
+client/src/content/meta/platformProcessRegistry.ts:118:    key: "privacy",
+client/src/content/meta/platformProcessRegistry.ts:159:    title: "Analytics (minimal + consent)",
+client/src/content/meta/platformProcessRegistry.ts:248:    purpose: "Make pages discoverable with consistent metadata.",
+client/src/content/meta/platformProcessRegistry.ts:336:    purpose: "Clear disclaimers and terms.",
+client/src/content/meta/routeMeta.autogen.ts:2158:  "hubs__self-discovery": {
+client/src/content/meta/routeMeta.autogen.ts:2159:    "canonicalPath": "/hubs/self-discovery",
+client/src/content/meta/routeMeta.autogen.ts:2160:    "title": "Hubs - Self discovery",
+client/src/content/meta/routeMeta.autogen.ts:2683:  "privacy": {
+client/src/content/meta/routeMeta.autogen.ts:2684:    "canonicalPath": "/privacy",
+client/src/content/meta/routeMeta.autogen.ts:3433:  "terms": {
+client/src/content/meta/routeMeta.autogen.ts:3434:    "canonicalPath": "/terms",
+client/src/content/meta/routeMetaRegistry.ts:98:    description: "Simple, evidence-informed tools for emotional regulation and self-discovery.",
+client/src/content/meta/routeMetaRegistry.ts:474:    description: "Unlock creative expression for healing and self-discovery.",
+client/src/content/meta/routeMetaRegistry.ts:664:      { label: "Self-Discovery Hub", routeKey: "hubs__self-discovery" },
+client/src/content/meta/routeMetaRegistry.ts:674:    description: "Written reflection practices for self-discovery and emotional processing.",
+client/src/content/meta/routeMetaRegistry.ts:699:      { label: "Self-Discovery Hub", routeKey: "hubs__self-discovery" },
+client/src/content/meta/routeMetaRegistry.ts:750:      { label: "Self-Discovery Hub", routeKey: "hubs__self-discovery" },
+client/src/content/meta/routeMetaRegistry.ts:841:  "hubs__self-discovery": {
+client/src/content/meta/routeMetaRegistry.ts:842:    canonicalPath: "/hubs/self-discovery",
+client/src/content/microcopy.js:28:    ...wellnessMicrocopy.consent.beginner
+client/src/content/microcopy.js:31:  choiceLanguage: wellnessMicrocopy.consent.beginner,
+client/src/content/microcopy.js:114:    consent: pick(route + '-consent', wellnessMicrocopy.consent[level]),
+client/src/content/microcopy/wellnessMicrocopy.ts:15: * - Always: choice language, consent cues, pause/stop options
+client/src/content/microcopy/wellnessMicrocopy.ts:29:  consent: [
+client/src/content/microcopy/wellnessMicrocopy.ts:54:  consent: {
+client/src/content/microcopy/wellnessMicrocopy.ts:417:  privacy: {
+client/src/content/microcopy/wellnessMicrocopy.ts:465:  consentControl: {
+client/src/content/microcopy/wellnessMicrocopy.ts:672:    consent: pick(seed + '-consent', wellnessMicrocopy.consent[level]),
+client/src/content/microcopy/wellnessMicrocopy.ts:730:export const consent: string[] = [
+client/src/content/microcopy/wellnessMicrocopy.ts:891:  consentLine: string;
+client/src/content/microcopy/wellnessMicrocopy.ts:900:    consentLine: pickDeterministic(routeKey, consent, "consent"),
+client/src/content/microcopy/wellnessMicrocopy.ts:926:  consent,
+client/src/content/microcopy/wellnessMicrocopy.ts:1009: *         consent affirmation, agency-protecting check-in
+client/src/content/searchIndex.ts:45:    description: "A curated list of key terms and definitions used across the platform.",
+client/src/content/searchIndex.ts:46:    tags: ["glossary", "definitions", "terms", "vocabulary"],
+client/src/content/searchIndex.ts:52:    description: "Complete A–Z glossary of terms for deeper exploration and clarity.",
+client/src/content/searchIndex.ts:53:    tags: ["glossary", "a-z", "dictionary", "terms"],
+client/src/content/searchIndex.ts:474:    tags: ["terms", "definitions", "learn"],
+client/src/content/searchIndex.ts:482:    tags: ["A-Z", "terms", "definitions"],
+client/src/content/searchIndex.ts:655:  { id: "public-terms", title: "Terms", description: "Terms of service.", path: "/terms", type: "Update", tags: ["terms"] },
+client/src/content/searchIndex.ts:656:  { id: "public-privacy", title: "Privacy", description: "Privacy policy and data handling.", path: "/privacy", type: "Update", tags: ["privacy"] },
+client/src/content/wellness/additional-practices.json:23:      "consent": {
+client/src/content/wellness/additional-practices.json:184:      "consent": {
+client/src/content/wellness/core-practices.json:23:      "consent": {
+client/src/content/wellness/core-practices.json:173:      "consent": {
+client/src/content/wellness/core-practices.json:324:      "consent": {
+client/src/content/wellness/practiceLoader.ts:15:  consent: {
+client/src/content/wellness/practiceLoader.ts:151:    consent: practice.consent,
+client/src/content/learn.js:21:    description: "Learn how your nervous system responds to stress and discover ways to find calm.",
+client/src/content/learn.js:155:      "It grows from small, repeated experiences of feeling something hard and discovering you can metabolise it. Practices that calm the body, name the feeling, and reconnect you with what matters all build that capacity.",
+client/src/content/routes.js:974:      subtitle: 'This is a quiet corner of the internet built for people who carry more than they show. Here, you can process grief, calm your nervous system, reconnect with your inner child, and learn to hold yourself with compassion—all in complete privacy.',
+client/src/content/routes.js:1028:        title: 'Your privacy and safety come first',
+client/src/content/routes.js:1932:        subtitle: 'Evidence-based tools with privacy at the core.',
+client/src/content/routes.js:7153:    description: 'Definitions of key healing and wellness terms.',
+client/src/content/routes.js:7158:      subtitle: 'Clear explanations of key concepts and terms.',
+client/src/content/routes.js:7159:      primaryCta: { label: 'Browse Terms', href: '#terms' },
+client/src/content/routes.js:7168:    description: 'Comprehensive glossary of all healing terms.',
+client/src/content/routes.js:7380:          'Your privacy is protected',
+client/src/content/routes.js:7428:          { icon: 'Shield', title: 'Privacy Concerns', text: 'Questions about your data and privacy.' },
+client/src/content/routes.js:7439:    route: '/terms',
+client/src/content/routes.js:7443:    description: 'Our terms of service and usage agreement.',
+client/src/content/routes.js:7448:      subtitle: 'Please read these terms carefully.',
+client/src/content/routes.js:7449:      primaryCta: { label: 'Read Terms', href: '#terms' },
+client/src/content/routes.js:7454:    route: '/privacy',
+client/src/content/routes.js:7463:      subtitle: 'Your privacy is important to us. Here\'s how we protect it.',
+client/src/content/routes.js:7493:      subtitle: 'The terms that govern your use of our wellness platform.',
+client/src/content/routes.js:7494:      primaryCta: { label: 'Read Terms', href: '#terms' },
+client/src/context/AuthContext.jsx:57:// Safe localStorage helper that handles blocked storage (Safari Private, privacy extensions)
+client/src/data/wisdomContent.ts:44:  "You carry wisdom inside you that you have not even discovered yet.",
+client/src/data/nlpMiContent.js:43:    'As you explore, you will discover tools that feel right for the way you feel right now.',
+client/src/features/community/SharedReflectionsPage.jsx:374:        <footer className="resource-section text-center">
+client/src/features/community/SharedReflectionsPage.jsx:388:        </footer>
+client/src/features/community/DiscussionPage.jsx:299:          <footer className="mt-8 p-5 rounded-2xl bg-slate-50 dark:bg-gray-800/50 text-center">
+client/src/features/community/DiscussionPage.jsx:304:          </footer>
+client/src/features/daily/DailyFlow.tsx:140:            {/* Gentle footer */}
+client/src/hooks/useWellnessContent.js:19:      consent: getWellnessCopy('consent', level, routeKey),
+client/src/legal/PrivacyHighlights.tsx:42:        Your privacy matters deeply to us. Here's a quick overview of how we protect your information 
+client/src/legal/PrivacyHighlights.tsx:53:              data-testid={`privacy-highlight-${index}`}
+client/src/legal/PrivacyHighlights.tsx:91:        <a href="/privacy" className="text-teal-600 hover:underline" data-testid="link-privacy-policy">Privacy Policy</a>.
+client/src/legal/PrivacyHighlights.tsx:93:        <a href="mailto:privacy@genuinelove.org" className="text-teal-600 hover:underline" data-testid="link-privacy-email">
+client/src/legal/PrivacyHighlights.tsx:94:          privacy@genuinelove.org
+client/src/lib/analytics/writingAnalytics.ts:103:  return insights.join(" ") || "Keep writing to discover your patterns.";
+client/src/lib/benefits.ts:10:  | "privacy"
+client/src/lib/benefits.ts:108:  privacy: {
+client/src/lib/benefits.ts:138:  privacy: { title: "Privacy-first by design", body: "You control what you save, share, or keep private - always." },
+client/src/lib/contentTierCompiler.ts:33:    avoid: ['clinical terms', 'pressure language'],
+client/src/lib/existential/existentialInquiry.ts:76:      "Are you creating meaning or discovering it?"
+client/src/lib/inquiry/dialecticalInquiry.ts:84:      "What am I most afraid others will discover about me?",
+client/src/lib/microcopy.ts:6:  | "privacy"
+client/src/lib/microcopy.ts:26:    "Your privacy matters more than posting.",
+client/src/lib/microcopy.ts:33:  privacy: [
+client/src/lib/moral/moralReasoning.ts:75:    description: "You discover your company is engaging in harmful but legal practices. Reporting could cost your job and harm colleagues.",
+client/src/lib/stance/philosophicalStance.ts:59:    description: "Is meaning created, discovered, or absent?",
+client/src/lib/weave/knowledgeWeave.ts:26:  discoveredAt: string;
+client/src/lib/wellness/ensureWellnessCompliance.ts:48:    source.includes("safety-footer") ||
+client/src/lib/wellness/ensureWellnessCompliance.ts:49:    source.includes("data-testid=\"wellness-safety-footer\"") ||
+client/src/lib/wellness/ensureWellnessCompliance.ts:58:    source.includes("consent-ribbon") ||
+client/src/lib/wellness/ensureWellnessCompliance.ts:59:    source.includes("data-testid=\"wellness-consent-ribbon\"") ||
+client/src/lib/wellness/ensureWellnessCompliance.ts:116:  consentRibbon: number;
+client/src/lib/wellness/ensureWellnessCompliance.ts:135:    consentRibbon: mainTagIdx > 0 ? mainTagIdx + 1 : returnIdx + 2,
+client/src/lib/wellnessMethodKits.ts:30:    "No manipulation. User consent + opt-out always.",
+client/src/lib/lumiAudio.js:202: * (header / hero / chat / footer) all share a single "first pop per session".
+client/src/policy/platformPolicy.ts:23:  privacy: "/privacy",
+client/src/policy/platformPolicy.ts:24:  terms: "/terms",
+client/src/styles/lumi-links.css:40:.lumi-link-footer {
+client/src/styles/lumi-links.css:46:.lumi-link-footer:hover { color: var(--lumi-sage-700); text-decoration: underline; text-underline-offset: 3px; }
+client/src/styles/lumi-links.css:47:.dark .lumi-link-footer { color: var(--lumi-stone-300); }
+client/src/styles/lumi-links.css:48:.dark .lumi-link-footer:hover { color: var(--lumi-sage-200); }
+client/src/styles/lumi-links.css:133:.lumi-link-footer:focus-visible,
+client/src/styles/lumi-links.css:145:.dark .lumi-link-footer:focus-visible,
+client/src/styles/lumi-admin.css:17: *   - .lumi-section-alt / .footer-grid / .hero-cta-group       (layout helpers)
+client/src/styles/lumi-admin.css:178:.footer-grid {
+client/src/styles/brand.css:263:.footer-nav-link {
+client/src/styles/brand.css:270:.footer-nav-link:focus-visible {
+client/src/styles/brand.css:280:  .footer-nav-link {
+client/src/styles/lumi-tokens.css:174: * defined ONLY in terms of the underlying `--lumi-*` token, so changing a
+client/src/styles/canva-landing.css:2594:.safety-footer__secondary {
+client/src/styles/canva-landing.css:2601:.safety-footer__secondary-link {
+client/src/styles/canva-landing.css:2606:.safety-footer__secondary-sep {
+client/src/utils/exportPdf.js:52:        .footer {
+client/src/utils/exportPdf.js:93:      <div class="footer">
+client/src/utils/trackSignalEvent.js:3: * Minimal, privacy-first signal event tracker
+client/src/sections/VisualBenefits.jsx:30: * Governance: zero framework-name leakage; CTA copy is gentle/consent-based;
+client/src/sections/ValueProposition.jsx:30:    body: "Gentle, consent-based prompts designed with mental wellness best practices — never clinical, never alarmist.",
+client/src/main.css:123:.footer {
+client/src/checkin-flow/copy/microCopy.ts:49:  consent: "No log-in. No tracking. Just a moment for you.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:40:    welcomeCopy.greeting, welcomeCopy.intro, welcomeCopy.consent,
+client/src/checkin-flow/governance/checkInFlowRules.ts:55:    welcomeCopy.greeting, welcomeCopy.intro, welcomeCopy.consent,
+client/src/checkin-flow/governance/checkInFlowRules.ts:81:    description: "Welcome copy contains no subscription terms.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:83:      const text = (welcomeCopy.greeting + welcomeCopy.intro + welcomeCopy.consent).toLowerCase();
+client/src/checkin-flow/governance/checkInFlowRules.ts:90:    description: "Breathing-step copy contains no subscription terms.",
+client/src/checkin-flow/components/FlowStepWelcome.tsx:60:        {welcomeCopy.consent}
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:125:      welcomeCopy.greeting, welcomeCopy.intro, welcomeCopy.consent,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:194:      welcomeCopy.greeting, welcomeCopy.intro, welcomeCopy.consent,
+client/src/lumi-memory/state/memoryStore.ts:43:    | "consent_granted"
+client/src/lumi-memory/state/memoryStore.ts:44:    | "consent_declined"
+client/src/lumi-memory/state/memoryStore.ts:45:    | "consent_revoked"
+client/src/lumi-memory/state/memoryStore.ts:50:    | "rejected_no_consent";
+client/src/lumi-memory/state/memoryStore.ts:59:  consent: ConsentRecord;
+client/src/lumi-memory/state/memoryStore.ts:79:  consent: INITIAL_CONSENT,
+client/src/lumi-memory/state/memoryStore.ts:100:// v5.8.80: persist consent + entries (NOT audit — audit is ephemeral
+client/src/lumi-memory/state/memoryStore.ts:103:// continuity contract (30-day retention, welcome-back tiering, consent
+client/src/lumi-memory/state/memoryStore.ts:115:        return { ...s, consent: next, entries: {} };
+client/src/lumi-memory/state/memoryStore.ts:117:      return { ...s, consent: next };
+client/src/lumi-memory/state/memoryStore.ts:171:      // Persist consent + entries only. Audit stays in-memory: it's
+client/src/lumi-memory/state/memoryStore.ts:175:      partialize: (s) => ({ consent: s.consent, entries: s.entries }),
+client/src/lumi-memory/state/memoryStore.ts:188:  return s.consent;
+client/src/lumi-memory/safety/memoryConsentRules.ts:4: * Consent state machine. Memory writes are GATED on consent.
+client/src/lumi-memory/safety/memoryConsentRules.ts:13: * Re-consent requirement: any change to retention policy or allowed-field
+client/src/lumi-memory/safety/memoryConsentRules.ts:14: * list bumps `CONSENT_POLICY_VERSION` and forces re-consent (granted →
+client/src/lumi-memory/safety/memoryConsentRules.ts:30: * long. Existing consent is invalidated on bump.
+client/src/lumi-memory/safety/memoryConsentRules.ts:36:  /** ISO-8601 timestamp the consent was last set. */
+client/src/lumi-memory/safety/memoryConsentRules.ts:38:  /** Policy version at time of consent. Re-consent required if mismatched. */
+client/src/lumi-memory/safety/memoryConsentRules.ts:55: * Anything else returns false. There is no "implicit" consent path.
+client/src/lumi-memory/safety/memoryConsentRules.ts:57:export function isWriteAllowed(consent: ConsentRecord): boolean {
+client/src/lumi-memory/safety/memoryConsentRules.ts:58:  if (consent.state !== "granted") return false;
+client/src/lumi-memory/safety/memoryConsentRules.ts:59:  if (consent.policyVersion !== CONSENT_POLICY_VERSION) return false;
+client/src/lumi-memory/safety/memoryConsentRules.ts:64: * Validate a consent transition. Returns true iff the transition is one
+client/src/lumi-memory/safety/memoryConsentRules.ts:83: * Was the consent issued under the current policy? Used to surface a
+client/src/lumi-memory/safety/memoryConsentRules.ts:86:export function needsReconsent(consent: ConsentRecord): boolean {
+client/src/lumi-memory/safety/memoryConsentRules.ts:88:    consent.state === "granted" &&
+client/src/lumi-memory/safety/memoryConsentRules.ts:89:    consent.policyVersion !== CONSENT_POLICY_VERSION
+client/src/lumi-memory/safety/memoryRetentionRules.ts:22: * in `memoryConsentRules.ts` so existing consent is invalidated.
+client/src/lumi-memory/runtime/memoryRouter.ts:12: *   4. Consent gate                    → rejected_no_consent
+client/src/lumi-memory/runtime/memoryRouter.ts:16: * Order matters: cheap checks first; consent check is LAST among the
+client/src/lumi-memory/runtime/memoryRouter.ts:18: * most specific reason hint, even if consent would also have blocked it.
+client/src/lumi-memory/runtime/memoryRouter.ts:47:      | "no_consent";
+client/src/lumi-memory/runtime/memoryRouter.ts:82:  if (!isWriteAllowed(store.consent)) {
+client/src/lumi-memory/runtime/memoryRouter.ts:83:    store._appendAudit(makeAuditEntry("rejected_no_consent", { field: fld, reasonHint: `consent state: ${store.consent.state}` }));
+client/src/lumi-memory/runtime/memoryRouter.ts:84:    return { kind: "rejected", field, reason: "no_consent" };
+client/src/lumi-memory/runtime/memoryRouter.ts:111: * Public consent transition. Enforces legal-transition table. Returns
+client/src/lumi-memory/runtime/memoryRouter.ts:116:  const from = store.consent.state;
+client/src/lumi-memory/runtime/memoryRouter.ts:124:    policyVersion: next === "granted" ? CONSENT_POLICY_VERSION : store.consent.policyVersion,
+client/src/lumi-memory/runtime/memoryRouter.ts:127:  if (next === "granted") store._appendAudit(makeAuditEntry("consent_granted"));
+client/src/lumi-memory/runtime/memoryRouter.ts:128:  else if (next === "declined") store._appendAudit(makeAuditEntry("consent_declined"));
+client/src/lumi-memory/runtime/memoryRouter.ts:129:  else if (next === "revoked") store._appendAudit(makeAuditEntry("consent_revoked"));
+client/src/lumi-memory/components/MemoryTransparencyView.tsx:25:  const consent = useMemoryConsent();
+client/src/lumi-memory/components/MemoryTransparencyView.tsx:70:            <span style={styles.val} data-testid="text-memory-consent-state">{consent.state}</span>
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:23:import { needsReconsent } from "../safety/memoryConsentRules";
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:39:  const consent = useMemoryConsent();
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:52:  const reconsentNeeded = needsReconsent(consent);
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:76:        {reconsentNeeded ? (
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:77:          <div style={styles.callout} data-testid="callout-memory-reconsent">
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:83:          <span style={styles.label}>Consent (current: {consent.state})</span>
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:85:            <MMHBButton variant="primary" size="sm" onClick={() => handleConsent("granted")} data-testid="button-memory-consent-grant">
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:88:            <MMHBButton variant="tertiary" size="sm" onClick={() => handleConsent("declined")} data-testid="button-memory-consent-decline">
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:91:            {consent.state === "granted" ? (
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:92:              <MMHBButton variant="tertiary" size="sm" onClick={() => handleConsent("revoked")} data-testid="button-memory-consent-revoke">
+client/src/lumi-memory/tests/memorySafety.test.ts:33:  needsReconsent,
+client/src/lumi-memory/tests/memorySafety.test.ts:126:    if (decision.kind === "rejected") expect(decision.reason).toBe("no_consent");
+client/src/lumi-memory/tests/memorySafety.test.ts:143:  it("rejects illegal transitions and invalidates consent on policy change", () => {
+client/src/lumi-memory/tests/memorySafety.test.ts:151:      needsReconsent({ state: "granted", setAt: "2026-01-01T00:00:00Z", policyVersion: "OLD" }),
+client/src/lumi-memory/tests/memorySafety.test.ts:154:      needsReconsent({ state: "granted", setAt: "2026-01-01T00:00:00Z", policyVersion: CONSENT_POLICY_VERSION }),
+client/src/lumi-memory/index.ts:53:  needsReconsent,
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:35:  footerSlot?: ReactNode;
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:44:  footerSlot,
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:161:            {footerSlot}
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:200:            {footerSlot}
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:283:      {footerSlot}
+client/src/lumi-boundaries/governance/boundaryEnforcementRules.ts:20:  { id: "consent-respected", description: "Closing the drawer must never require an explanation or reason." },
+client/src/lumi-registry/registry/lumiEmotionalRoles.ts:35:  { context: "exploration", primary: "LUMI_EMOTION_ORB", reasoning: "Soft curiosity for self-discovery", intensity: 4 },
+client/src/lumi-registry/registry/lumiEmotionalRoles.ts:43:  { context: "privacy", primary: "LUMI_HEART", reasoning: "Compassionate framing for sensitive content", intensity: 4 },
+client/src/lumi-registry/registry/lumiSceneAssignments.ts:36:  { scene: "privacy-page", variant: "LUMI_HEART", position: "hero", maxSizePx: 260, notes: "Compassionate framing for sensitive content" },
+client/src/lumi-registry/registry/lumiUsageRules.ts:75:  { id: "tone-respects-consent", rule: "Tone respects opt-in consent.", severity: "critical" },
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:90:    oldAsset: "privacy-lumi.png",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:226:  "privacy-lumi",
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:48:    specialRules: Object.freeze(["NO heading text beside Lumi", "NO CTA crowding within 2rem", "Default: opt-in only — CanvaLanding renders OfficialLumi when ready", "Crisis routing (/crisis + 988 + 741741) must remain in footer regardless"]),
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:115:    pageId: "privacy-safety",
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:200:  // CanvaLanding's footer LUMI_FLOAT_IDLE is intentionally NOT enrolled as a
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:203:  // footer call site keeps `pageId` omitted (silent gate).
+client/src/lumi-registry/registry/officialLumiRegistry.ts:91:    useWhen: Object.freeze(["privacy", "welcome", "success", "encouragement"]),
+client/src/lumi-registry/components/OfficialLumi.tsx:238:        data-policy-blocked="true"
+client/src/lumi-cbt/engine/CBTSessionEngine.ts:6: * of session content (governance: privacy-first).
+client/src/lumi-cbt/engine/CBTSessionEngine.ts:69:  /** Wipe all sessions (consent-revoke flow). */
+client/src/lumi-tracker/governance/trackerPrivacyRules.ts:2: * Phase 33 — Tracker privacy contract.
+client/src/lumi-tracker/governance/trackerPrivacyRules.ts:22:    id: "no-server-sync-without-consent",
+client/src/lumi-tracker/governance/trackerPrivacyRules.ts:24:    detail: "Background sync is forbidden. Sync requires a visible per-action consent surface.",
+client/src/lumi-crisis/governance/crisisSafetyRules.ts:18:    detail: "Host wiring must place a /crisis link in the persistent footer or header on every route.",
+client/src/lumi-library/governance/librarySafetyRules.ts:40:    detail: "Disclaimer on every download includes the 988 pointer; host UI must surface a /crisis link in the footer.",
+client/src/lumi-agent/governance/agentGovernanceRules.ts:26:    id: "no-server-storage-without-consent",
+client/src/lumi-agent/governance/agentGovernanceRules.ts:28:    detail: "AgentRuntime keeps messages in-memory. Hosts that persist must obtain explicit consent.",
+client/src/lumi-disclaimer/disclaimer.ts:12:  "settings", "footer systems", "API responses", "UI pages", "tests",
+client/src/_quarantine/orphans/SacredNavBar.jsx:22:            data-testid="nav-wellness-tools"
+client/src/App.jsx:531:              <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
+client/src/App.jsx:677:              <Route path="/hubs/self-discovery">
+client/src/App.jsx:803:              <Route path="/wellness-tools">{() => <PracticeLibrary />}</Route>
+client/src/App.jsx:938:              <Route path="/explore">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:939:              <Route path="/discover">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:940:              <Route path="/toolkit">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:975:              <Route path="/sitemap">{() => <Redirect to="/explore" />}</Route>
+client/src/App.jsx:1120:              <Route path="/rediscover">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1229:              <Route path="/inner-self">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1233:              <Route path="/ego">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1236:              <Route path="/psyche">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1242:              <Route path="/beliefs">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1244:              <Route path="/patterns">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1273:              <Route path="/ifs">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1274:              <Route path="/parts-work">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:1420:              <Route path="/self-discovery"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:1635:              <Route path="/privacy"><Privacy /></Route>
+client/src/App.jsx:1847:              <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
+client/src/App.jsx:1849:              <Route path="/privacy">{() => <ConfigRoute route="/privacy" />}</Route>
+public/analytics.json:3:  "privacy": "No selling data. No ads. No tracking beyond analytics.",
+public/analytics.json:4:  "mode": "privacy-first"
+public/robots.txt:57:Sitemap: https://mymentalhealthbuddy.com/sitemap.xml
+public/sitemap.xml:2:<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+public/sitemap.xml:44:  <url><loc>https://mymentalhealthbuddy.com/hubs/self-discovery</loc></url>
+server/engine/therapyIntelligence.mjs:17: *   - Cognitive reframe (CBT-style, gentle, consent-based)
+server/engine/therapyIntelligence.mjs:23: *   - Calm, consent-based language
+server/engine/therapyIntelligence.mjs:125:      consent: "Take only what fits. Skip what doesn't.",
+server/engine/therapyIntelligence.mjs:151:      consent: "This is a reflection, not a diagnosis.",
+server/engine/therapyIntelligence.mjs:193:    consent: "This is a reflection, not a diagnosis.",
+server/engine/therapyIntelligence.mjs:233:    consent: "This is supportive, not clinical. If risk feels real, please use 988 (US/Canada) or text HOME to 741741.",
+server/routes/admin-social-studio.mjs:317:    voiceRules: "Each slide stands alone. End with consent and safety info.",
+server/routes/admin-social-studio.mjs:585:- Use consent-led, autonomy-respecting language ("you might", "if you'd like", "when you're ready")
+server/routes/admin-social-studio.mjs:587:- Avoid pathologizing terms ("broken", "toxic", "damaged", "crazy")
+server/routes/admin-social-studio.mjs:606:  "cta": "Gentle call to action (consent-led)",
+server/routes/admin-social-studio.mjs:657:MAINTAIN: Trauma-informed language, consent-led phrasing, educational framing.
+server/routes/admin-social-studio.mjs:758:          content: `You are a trauma-informed content editor. Rewrite the given text to be more trauma-informed and consent-led.
+server/routes/admin-social-studio.mjs:762:- Remove pathologizing terms ("broken", "toxic", "damaged")
+server/routes/admin-social-studio.mjs:868:Use consent-led language, avoid prescriptive terms, use evidence-informed phrasing.
+server/routes/admin-social-studio.mjs:923:Maintain consent-led language and avoid prescriptive terms.
+server/routes/cognitive-enhancement.mjs:187:    description: "Explain concepts in simple terms to identify gaps in understanding",
+server/routes/content-generator.mjs:25:    footer: "With genuine love,\nThe Genuine Love Project"
+server/routes/dialectics.mjs:20:      "Refine the belief based on what you've discovered",
+server/routes/dialectics.mjs:344:  { name: "Loss Aversion", description: "Feeling losses more strongly than equivalent gains", antidote: "Reframe in terms of total portfolio, not individual decisions" },
+server/routes/existential.mjs:33:      "Meaning is created, not discovered",
+server/routes/feed.mjs:89:router.get("/sitemap.xml", async (req, res) => {
+server/routes/feed.mjs:99:      { loc: "/privacy", priority: "0.5", changefreq: "yearly" },
+server/routes/feed.mjs:100:      { loc: "/terms", priority: "0.5", changefreq: "yearly" },
+server/routes/feed.mjs:119:    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+server/routes/feed.mjs:120:<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+server/routes/feed.mjs:126:    res.send(sitemap);
+server/routes/feed.mjs:129:    res.status(500).send("Error generating sitemap");
+server/routes/feed.mjs:139:Sitemap: ${SITE_URL}/sitemap.xml
+server/routes/human-potential.mjs:168:    "Need for privacy and detachment",
+server/routes/knowledge.mjs:30:    benefits: ["Non-linear thinking", "Serendipitous discovery", "Long-term knowledge building"]
+server/routes/leads.mjs:15:  consent: z.boolean().refine(v => v === true, "Consent is required"),
+server/routes/leads.mjs:35:    let { email, consent, interests, source, utmSource, utmMedium, utmCampaign, utmContent, utmTerm, utmTimestamp } = validation.data;
+server/routes/leads.mjs:72:      consent,
+server/routes/leads.mjs:119:        lead.consent,
+server/routes/life-design.mjs:88:    process: "Find the intersection of all four to discover your reason for being"
+server/routes/life-purpose.mjs:82:  discoveryExercises: [
+server/routes/life-purpose.mjs:190:    discovery: [
+server/routes/life-purpose.mjs:228:router.get("/values-discovery", (_req, res) => {
+server/routes/life-purpose.mjs:231:    insight: "Your values are already there - these exercises help you discover them, not invent them"
+server/routes/meaning-future.mjs:18:  { chapter: "discovery", prompt: "What's something important you learned about yourself?", theme: "Self-knowledge" },
+server/routes/mind-body-integration.mjs:195:        benefits: ["Unconscious expression", "Self-discovery", "Trauma processing"]
+server/routes/newsletter.mjs:76:      consent: true,
+server/routes/newsletter.mjs:95:      privacyLevel: "minimal",
+server/routes/newsletter.mjs:158:      privacyLevel: "minimal",
+server/routes/practices.mjs:82:      "Sit quietly and introduce the word as a symbol of consent",
+server/routes/practices.mjs:156:    benefits: ["Cleared mental clutter", "Creative unblocking", "Self-discovery"],
+server/routes/self-mastery-intelligence.mjs:239:            "No one can diminish my worth without my consent",
+server/routes/soft-launch-metrics.mjs:54:    privacy_notice: "Aggregate counts only. No PII, no IPs, no fingerprinting.",
+server/routes/therapy.mjs:40:  reflection: `You are a gentle journaling companion. Help the user explore their thoughts and feelings through reflective prompts. Ask open-ended questions like "What's on your mind today?" or "How did that make you feel?" Keep responses warm, brief, and focused on self-discovery.`,
+server/routes/universal-content.mjs:220:        "POV: You finally discover [solution]..."
+server/routes/growth-journey.mjs:93: *   privacy: { signedIn, consent },
+server/routes/growth-journey.mjs:224:      privacy: {
+server/routes/growth-journey.mjs:226:        consent: "This page reflects your own data back to you. It is not a diagnosis.",
+server/routes/wellness-tools.mjs:461:  res.json({ ok: true, module: "wellness-tools", status: "operational", timestamp: new Date().toISOString() });
+server/routes/sop.mjs:67:  { id: "wellness-tools",    name: "Wellness tools",             domain: "healing",  method: "GET",  path: "/api/wellness-tools", expect: [200, 401], protected: false, remediation: "server/routes/wellness-tools.mjs (extended-routes mount)" },
+server/routes/awareness.mjs:12:// /crisis routing is preserved by always returning a safety footer
+server/routes/health.mjs:480:        const warmTargets = ["/api/health", "/api/health/ready", "/api/wellness-tools/all", "/api/wisdom", "/api/gratitude", "/api/reflection", "/api/prompts/daily"];
+server/routes/health.mjs:661:        const warmPaths = ["/api/health", "/api/health/ready", "/api/wellness-tools/all", "/api/wisdom", "/api/gratitude"];
+server/ai/system-prompts/wellnessSystemPrompt.mjs:22:- Avoid clinical terms.
+server/ai/system-prompts/mental-health-ux.txt:28:- Encourage professional or emergency help in general terms
+server/ai/system-prompts/mental-health-ux.txt:64:     “In simple terms, it sounds like…”
+server/ai/system-prompts/mental-health-ux.txt:87:- Clinical terms
+server/ai/system-prompts/mental-health-ux.txt:176:  No clinical terms unless framed as gentle education ("some people
+server/ai/profileExtractor.mjs:36:- "risk_flags" should ONLY contain neutral, non-clinical observations (e.g. "reports persistent insomnia"). Never include diagnoses or crisis terms.
+server/db/ensureSchema.mjs:92:    consent BOOLEAN NOT NULL DEFAULT false,
+server/intelligence/journalingMirror.mjs:20:        suggestion: "Start journaling to discover patterns in your thoughts and feelings."
+server/replit_integrations/auth/replitAuth.mjs:18:    return await client.discovery(
+server/replit_integrations/auth/replitAuth.mjs:115:      prompt: "login consent",
+server/services/email.mjs:75:            and learn to hold yourself with compassion—all in complete privacy.
+server/services/social-posting.mjs:211:            privacy_level: 'PUBLIC_TO_EVERYONE',
+server/services/social-posting.mjs:233:      message: 'YouTube video upload requires OAuth consent flow. Content saved for manual upload.',
+server/utils/aiGuardrails.mjs:167:- Ask questions that invite self-discovery
+server/awareness/tutor/lessons.seed.mjs:8:// links to /crisis in the dashboard footer.
+server/awareness/tutor/engine.mjs:14://     a /crisis link in every dashboard footer (frontend) and the API
+server/biometrics/providers.mjs:163:    u.searchParams.set("prompt", "consent");

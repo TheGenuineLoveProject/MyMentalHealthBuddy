@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { CreditCard, ArrowLeft, Check, Crown, Zap, Star, Download, Calendar, Shield, Sparkles, Loader2, ExternalLink } from 'lucide-react';
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
