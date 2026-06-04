@@ -319,6 +319,17 @@ for (const [barePath, canonical] of Object.entries(BARE_HEALTH_CANONICALS)) {
   });
 });
 
+
+app.get("/api/ready", (_req, res) => {
+  res.status(200).json({
+    status: "ready",
+    environment: process.env.NODE_ENV || "development",
+    version: process.env.npm_package_version || "1.0.0",
+    timestamp: new Date().toISOString()
+  });
+});
+
+
 app.get("/ready", (_req, res) => {
   res.set("Cache-Control", "no-store");
   res.status(200).json({ status: "ready", timestamp: new Date().toISOString() });
