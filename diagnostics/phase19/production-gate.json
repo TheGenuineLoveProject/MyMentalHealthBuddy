@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-06-05T03:25:40.507Z",
+  "files": {
+    "packageJson": true,
+    "serverApp": true,
+    "clientDist": true,
+    "billingRoute": true,
+    "webhookRoute": true,
+    "billingClient": true
+  },
+  "stripe": {
+    "secretMode": "test",
+    "publishableMode": "live",
+    "vitePublishableMode": "missing",
+    "webhookSecretPresent": true,
+    "aligned": false
+  },
+  "cors": {
+    "value": "*",
+    "present": true,
+    "wildcard": true,
+    "productionSafe": false
+  },
+  "gate": {
+    "readyForRealPayments": false,
+    "readyForPublicProduction": false
+  },
+  "nextActions": [
+    "Fix Stripe secrets: STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, and VITE_STRIPE_PUBLISHABLE_KEY must exist and use the same mode.",
+    "Set CORS_ORIGIN to the production domain, not wildcard.",
+    "Do not run real payments or public production launch yet."
+  ]
+}
