@@ -1,6 +1,0 @@
-client/src/pages/admin/_adminToolsShared.js:138:  "env-missing": { suggestion: "Required environment variable is not set. Perplexity KB: Check Replit Secrets panel for missing keys. Common missing vars: STRIPE_SECRET_KEY, RESEND_API_KEY, OPENAI_API_KEY.", action: "Add missing env var in Secrets", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
-client/src/pages/admin/_adminToolsShared.js:213:  "stripe-config-invalid": { suggestion: "Stripe integration configuration issue. Canva KB: Verify STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY are valid, webhook secret matches, and product/price IDs exist.", action: "Verify Stripe setup", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-stripe" },
-client/src/pages/admin/HealthDashboard.jsx:329:              <EnvCheckItem name="STRIPE_SECRET_KEY" isSet={envConfig.STRIPE_SECRET_KEY} />
-client/src/pages/Premium.jsx:14:const STRIPE_PUBLISHABLE_KEY = "pk_live_REDACTED";
-client/src/pages/Premium.jsx:136:        publishable-key={STRIPE_PUBLISHABLE_KEY}
-client/src/services/billingClient.js:3: * Client-safe only. Never import or expose STRIPE_SECRET_KEY here.

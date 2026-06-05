@@ -11,7 +11,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
 const STRIPE_PRICING_TABLE_ID = "prctbl_1SanK5RtwDw9mKhaSKDHxmn5";
-const STRIPE_PUBLISHABLE_KEY = "pk_live_51RIV9vRtwDw9mKhaldQnCVBo6Grjc2KXIjwyolZbTClMNgMGySVBrT6LayaZhBebFDUaQI0yoXoxiAjyLXLOl2b800NJXSDcQd";
+const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "";
 
 const HealingJourneys = lazy(() => import("../components/HealingJourneys.jsx"));
 const ProgressAnalytics = lazy(() => import("../components/ProgressAnalytics.jsx"));

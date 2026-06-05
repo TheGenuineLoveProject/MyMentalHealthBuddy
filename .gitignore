@@ -32,6 +32,18 @@ data/memory/*.json
 data/usage/*.json
 *.db
 # Dependencies
+diagnostics/**/client-stripe-references*.txt
+diagnostics/**/cors-env-before.txt
+diagnostics/**/env*.txt
+diagnostics/phase10/
+diagnostics/phase11/
+diagnostics/phase6/
+diagnostics/phase9/
+diagnostics/**/secrets*.txt
+diagnostics/**/stripe-env-before.txt
+diagnostics/**/stripe-references-raw.txt
+diagnostics/**/stripe-references*.txt
+diagnostics/**/stripe-references.txt
 # dist/
 dist/
 docs/inventory/AI_SURFACE_SCAN.txt
@@ -124,17 +136,3 @@ Thumbs.db
 .vscode/
 yarn-debug.log*
 yarn-error.log*
-diagnostics/**/stripe-references.txt
-diagnostics/phase9/
-diagnostics/**/stripe-references.txt
-diagnostics/phase9/
-diagnostics/**/stripe-references.txt
-diagnostics/phase9/
-diagnostics/**/stripe-references-raw.txt
-diagnostics/**/secrets*.txt
-diagnostics/phase6/
-diagnostics/phase10/
-diagnostics/phase11/
-diagnostics/**/env*.txt
-diagnostics/**/stripe-env-before.txt
-diagnostics/**/cors-env-before.txt
