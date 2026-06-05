@@ -1,0 +1,58 @@
+server/routes/canva-oauth.mjs:router.post("/webhook", async (req, res) => {
+server/routes/canva-oauth.mjs:    logger.info("Canva webhook received", { event, dataKeys: Object.keys(data || {}) });
+server/routes/canva-oauth.mjs:    logger.error("Canva webhook error", { error: err.message });
+server/routes/canva-oauth.mjs:      webhook: "/api/canva/webhook",
+server/routes/deploymentReadiness.mjs:        SELECT FROM information_schema.tables WHERE table_name = 'webhook_events'
+server/routes/deploymentReadiness.mjs:    results.checks.webhookEventsTable = {
+server/routes/deploymentReadiness.mjs:    logger.warn("Deployment check: webhook_events table query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:    results.checks.webhookEventsTable = { status: "fail", detail: "Query failed" };
+server/routes/biometrics.mjs:// public web API, so it's exposed as a webhook endpoint that an iOS
+server/routes/biometrics.mjs://   POST   /api/biometrics/healthkit/webhook           iOS HealthKit push (HMAC)
+server/routes/biometrics.mjs:      apple_healthkit: "iOS-only. Use the /healthkit/webhook endpoint from a native companion app with HMAC-SHA256 signed body.",
+server/routes/biometrics.mjs:        help: "HealthKit has no public web API. Use a native iOS companion app to POST signed payloads to /api/biometrics/healthkit/webhook.",
+server/routes/biometrics.mjs: * POST /healthkit/webhook — iOS companion app push
+server/routes/biometrics.mjs: * keyed by HKDF(JWT_SECRET, "healthkit-webhook-v1"). The user id is
+server/routes/biometrics.mjs:  "/healthkit/webhook",
+server/routes/biometrics.mjs:      return fail(res, "healthkit_webhook", err);
+server/routes/webhook.mjs:import { users, webhookEvents } from "../../shared/schema.mjs";
+server/routes/webhook.mjs:    const rows = await db.select().from(webhookEvents).where(eq(webhookEvents.id, eventId));
+server/routes/webhook.mjs:    await db.insert(webhookEvents).values({
+server/routes/webhook.mjs:      logger.warn("Stripe webhook received but STRIPE_SECRET_KEY not configured");
+server/routes/webhook.mjs:    // Validate webhook signature
+server/routes/webhook.mjs:      event = stripe.webhooks.constructEvent(
+server/routes/webhook.mjs:      logger.error("Stripe webhook signature verification failed", { error: err.message });
+server/routes/webhook.mjs:      logger.info("Duplicate webhook event skipped", { eventId: event.id, type: event.type });
+server/routes/webhook.mjs:          // Re-fetch session with line items expanded — webhook payload
+server/routes/webhook.mjs:  res.json({ ok: true, module: "webhook", status: "operational", timestamp: new Date().toISOString() });
+server/security/csrf.mjs:  // GET-only via the SAFE_METHODS check above) and HealthKit webhook
+server/security/csrf.mjs:  if (req.path === "/api/biometrics/healthkit/webhook") return next();
+server/shared/importMap.mjs:    webhook: "../routes/webhook.mjs",
+server/utils/stripe.mjs:  return client.webhooks.constructEvent(rawBody, signature, endpointSecret);
+server/utils/planMapping.mjs:// checkout side and the webhook side stay in sync via shared env source.
+server/utils/planMapping.mjs:  // No line item price at all (e.g., retrieve failed and webhook payload
+server/biometrics/providers.mjs:// instead by the webhook receiver in routes/biometrics.mjs.
+server/biometrics/crypto.mjs:// Deterministic HMAC for HealthKit webhook signature verification.
+server/biometrics/crypto.mjs:// shared secret = HKDF(JWT_SECRET, "healthkit-webhook-v1").
+server/biometrics/crypto.mjs:let _webhookKey = null;
+server/biometrics/crypto.mjs:  if (_webhookKey) return _webhookKey;
+server/biometrics/crypto.mjs:  if (!ikm) throw new Error("JWT_SECRET missing for healthkit webhook key");
+server/biometrics/crypto.mjs:  _webhookKey = Buffer.from(
+server/biometrics/crypto.mjs:      Buffer.from("healthkit-webhook-v1", "utf8"),
+server/biometrics/crypto.mjs:  return _webhookKey;
+server/observability/safetyAlerts.mjs: * Stripe webhook signature verification failed.
+server/observability/safetyAlerts.mjs:    summary: `${provider} webhook signature verification failed`,
+server/observability/safetyAlerts.mjs:    source: "mmhb-webhook",
+server/observability/safetyAlerts.mjs:    dedupKey: `webhook-sig:${provider}`,
+server/observability/alerter.mjs: * @param {string} [args.component] - Optional sub-component (e.g. "stripe-webhook").
+server/app.mjs.bak:import webhookRoutes from "./routes/webhook.mjs";
+server/app.mjs.bak:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs.bak:  // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks
+server/app.mjs:import webhookRoutes from "./routes/webhook.mjs";
+server/app.mjs:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs:  // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks
+server/app.mjs.STABLE:import webhookRoutes from "./routes/webhook.mjs";
+server/app.mjs.STABLE:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs.STABLE:  // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks
+server/app.mjs.bak-ready-alias:import webhookRoutes from "./routes/webhook.mjs";
+server/app.mjs.bak-ready-alias:app.use("/api/webhooks", webhookRoutes);
+server/app.mjs.bak-ready-alias:  // v2.0 Prompt 3.4 — capture raw bytes for HMAC-signed webhooks

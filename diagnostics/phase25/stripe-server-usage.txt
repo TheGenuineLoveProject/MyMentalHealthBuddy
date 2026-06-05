@@ -1,0 +1,54 @@
+server/routes/deploymentReadiness.mjs:    status: !!process.env.STRIPE_SECRET_KEY ? "pass" : "fail",
+server/routes/deploymentReadiness.mjs:    detail: process.env.STRIPE_SECRET_KEY ? "Present" : "Missing STRIPE_SECRET_KEY",
+server/routes/deploymentReadiness.mjs:    status: !!process.env.STRIPE_WEBHOOK_SECRET ? "pass" : "fail",
+server/routes/deploymentReadiness.mjs:    detail: process.env.STRIPE_WEBHOOK_SECRET ? "Present" : "Missing STRIPE_WEBHOOK_SECRET",
+server/routes/integrationHealth.mjs:  const stripeKey = process.env.STRIPE_SECRET_KEY;
+server/routes/admin.mjs:        stripe: { configured: !!process.env.STRIPE_SECRET_KEY },
+server/routes/admin.mjs:      'STRIPE_SECRET_KEY',
+server/routes/health.mjs:        stripe: !!process.env.STRIPE_SECRET_KEY,
+server/routes/health.mjs:  checks.stripe.configured = !!process.env.STRIPE_SECRET_KEY;
+server/routes/health.mjs:        results.actions.push(`STRIPE_SECRET_KEY: ${!!process.env.STRIPE_SECRET_KEY ? "configured" : "not set"}`);
+server/routes/health.mjs:        results.actions.push(`STRIPE_WEBHOOK_SECRET: ${!!process.env.STRIPE_WEBHOOK_SECRET ? "configured" : "not set"}`);
+server/routes/health.mjs:        const envKeys = ["DATABASE_URL", "ADMIN_TOKEN", "STRIPE_SECRET_KEY", "RESEND_API_KEY", "PERPLEXITY_API_KEY", "OPENAI_API_KEY", "AI_INTEGRATIONS_OPENAI_API_KEY"];
+server/routes/health.mjs:        deepChecks.push({ check: "Stripe", status: !!process.env.STRIPE_SECRET_KEY ? "healthy" : "not configured" });
+server/routes/health.mjs:        results.actions.push(`STRIPE_SECRET_KEY: ${process.env.STRIPE_SECRET_KEY ? "configured" : "MISSING"}`);
+server/routes/health.mjs:        results.actions.push(`STRIPE_WEBHOOK_SECRET: ${process.env.STRIPE_WEBHOOK_SECRET ? "configured" : "MISSING"}`);
+server/routes/health.mjs:        results.success = !!process.env.STRIPE_SECRET_KEY;
+server/routes/health.mjs:        results.message = process.env.STRIPE_SECRET_KEY ? "Stripe configuration verified" : "Stripe not fully configured — STRIPE_SECRET_KEY missing";
+server/routes/health.mjs:        const sensitiveEnv = ["ADMIN_TOKEN", "STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "RESEND_API_KEY", "OPENAI_API_KEY", "AI_INTEGRATIONS_OPENAI_API_KEY", "DATABASE_URL", "SESSION_SECRET"];
+server/routes/health.mjs:    const criticalEnvVars = ["DATABASE_URL", "ADMIN_TOKEN", "STRIPE_SECRET_KEY", "RESEND_API_KEY", "PERPLEXITY_API_KEY"];
+server/routes/health.mjs:    const optionalEnvVars = ["OPENAI_API_KEY", "AI_INTEGRATIONS_OPENAI_API_KEY", "SENTRY_DSN", "GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET", "STRIPE_WEBHOOK_SECRET"];
+server/routes/health.mjs:      stripe: !!process.env.STRIPE_SECRET_KEY,
+server/routes/billing.mjs:const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+server/routes/billing.mjs:if (STRIPE_SECRET_KEY) {
+server/routes/billing.mjs:  stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" });
+server/routes/billing.mjs:  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
+server/routes/billing.mjs:  elite: { name: "Elite", priceId: process.env.STRIPE_PRICE_ELITE, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support", "voice_affirmations", "1on1_onboarding", "early_access", "elite_community"] },
+server/routes/billing.mjs:  monthly: process.env.STRIPE_PRICE_PRO_MONTHLY || process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:  yearly: process.env.STRIPE_PRICE_PRO_YEARLY || process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:  monthly: process.env.STRIPE_PRICE_ELITE_MONTHLY || process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:  yearly: process.env.STRIPE_PRICE_ELITE_YEARLY || process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_PRO_MONTHLY,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_PRO_YEARLY,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_ELITE_MONTHLY,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_ELITE_YEARLY,
+server/routes/webhook.mjs:const stripe = process.env.STRIPE_SECRET_KEY
+server/routes/webhook.mjs:  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" })
+server/routes/webhook.mjs:      logger.warn("Stripe webhook received but STRIPE_SECRET_KEY not configured");
+server/routes/webhook.mjs:        process.env.STRIPE_WEBHOOK_SECRET
+server/utils/stripe.mjs:const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+server/utils/stripe.mjs:if (STRIPE_SECRET_KEY) {
+server/utils/stripe.mjs:  stripe = new Stripe(STRIPE_SECRET_KEY, {
+server/utils/stripe.mjs:  logger.warn("STRIPE_SECRET_KEY not set. Billing is disabled");
+server/utils/stripe.mjs:    throw new Error("Stripe client not configured (missing STRIPE_SECRET_KEY).");
+server/utils/stripe.mjs:  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+server/utils/stripe.mjs:    throw new Error("STRIPE_WEBHOOK_SECRET not set");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_PRO,            "pro");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_PRO_MONTHLY,    "pro");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_PRO_YEARLY,     "pro");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_ELITE,          "elite");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_ELITE_MONTHLY,  "elite");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_ELITE_YEARLY,   "elite");
+server/services/stripeSync.mjs:const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);

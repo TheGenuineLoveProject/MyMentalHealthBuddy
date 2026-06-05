@@ -1,0 +1,127 @@
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:      } else if (rem.fixCommand === 'verify-stripe') {
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }).catch(() => {}),
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
+client/src/pages/admin/_adminToolsShared.js:  "stripe-webhook-fail": { suggestion: "Stripe webhook endpoint is failing. Canva KB: Verify STRIPE_WEBHOOK_SECRET is configured and webhook signature validation matches. Check Stripe dashboard for delivery failures.", action: "Verify Stripe webhook secret", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-admin-token" },
+client/src/pages/admin/_adminToolsShared.js:  "stripe-config-invalid": { suggestion: "Stripe integration configuration issue. Canva KB: Verify STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY are valid, webhook secret matches, and product/price IDs exist.", action: "Verify Stripe setup", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-stripe" },
+client/src/pages/admin/EngagementDashboard.jsx:                      { name: 'Stripe', active: health.services.stripe },
+client/src/pages/Premium.jsx:    script.src = "https://js.stripe.com/v3/pricing-table.js";
+client/src/pages/Premium.jsx:    <div className="stripe-pricing-wrapper" data-testid="stripe-pricing-table">
+client/src/pages/Premium.jsx:      <stripe-pricing-table
+client/src/components/admin/SystemHealthPanel.jsx:    { name: 'Stripe', active: health.services.stripe },
+client/src/content/meta/integrationRegistry.ts:    integrationKey: 'payments_stripe',
+client/src/content/meta/integrationRegistry.ts:    canonicalFiles: ['server/routes/stripe.mjs', 'server/billing/entitlements.mjs'],
+client/src/index.css: * white surface, sage-15 hairline border, 2px top accent stripe
+server/routes/adminBilling.mjs:        s.stripe_subscription_id as "stripeSubscriptionId",
+server/routes/deploymentReadiness.mjs:  results.checks.stripeSecretKey = {
+server/routes/deploymentReadiness.mjs:  results.checks.stripeWebhookSecret = {
+server/routes/integrationHealth.mjs:  const stripeKey = process.env.STRIPE_SECRET_KEY;
+server/routes/integrationHealth.mjs:  if (!stripeKey) {
+server/routes/integrationHealth.mjs:    const [database, openai, stripe] = await Promise.all([
+server/routes/integrationHealth.mjs:      (stripe.status === "configured" || stripe.status === "not_configured");
+server/routes/integrationHealth.mjs:        stripe,
+server/routes/integrationHealth.mjs:router.get("/stripe", async (req, res) => {
+server/routes/admin.mjs:        stripe: { configured: !!process.env.STRIPE_SECRET_KEY },
+server/routes/health.mjs:        stripe: !!process.env.STRIPE_SECRET_KEY,
+server/routes/health.mjs:    stripe: { ok: false, configured: false },
+server/routes/health.mjs:  checks.stripe.configured = !!process.env.STRIPE_SECRET_KEY;
+server/routes/health.mjs:  checks.stripe.ok = checks.stripe.configured;
+server/routes/health.mjs:      case "verify-stripe":
+server/routes/health.mjs:          const criticalDeps = ["express", "drizzle-orm", "react", "vite", "stripe", "openai", "resend", "@neondatabase/serverless"];
+server/routes/health.mjs:      stripe: !!process.env.STRIPE_SECRET_KEY,
+server/routes/auth.mjs:        stripe_customer_id text,
+server/routes/billing.mjs:import Stripe from "stripe";
+server/routes/billing.mjs:let stripe = null;
+server/routes/billing.mjs:  stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" });
+server/routes/billing.mjs:  const userResult = await db.execute(sql`SELECT stripe_customer_id, email FROM users WHERE id = ${userId}`);
+server/routes/billing.mjs:  const existingCustomerId = userResult.rows?.[0]?.stripe_customer_id;
+server/routes/billing.mjs:  const customer = await stripe.customers.create({
+server/routes/billing.mjs:  await db.execute(sql`UPDATE users SET stripe_customer_id = ${customer.id} WHERE id = ${userId}`);
+server/routes/billing.mjs:    if (!stripe) return serverError(res, new Error("Stripe not configured"));
+server/routes/billing.mjs:    const session = await stripe.checkout.sessions.create({
+server/routes/billing.mjs:    if (!stripe) return serverError(res, new Error("Stripe not configured"));
+server/routes/billing.mjs:    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.dbUserId}`);
+server/routes/billing.mjs:    const customerId = userResult.rows?.[0]?.stripe_customer_id;
+server/routes/billing.mjs:    const portal = await stripe.billingPortal.sessions.create({
+server/routes/billing.mjs:      SELECT subscription_status, subscription_expires_at, stripe_customer_id
+server/routes/billing.mjs:    if (["pro", "elite"].includes(plan) && stripe && user.stripe_customer_id) {
+server/routes/billing.mjs:        const subs = await stripe.subscriptions.list({
+server/routes/billing.mjs:          customer: user.stripe_customer_id,
+server/routes/billing.mjs:      } catch (stripeErr) {
+server/routes/billing.mjs:        logger.warn("Failed to fetch Stripe subscription details", { error: stripeErr.message });
+server/routes/billing.mjs:    if (!stripe) return ok(res, { invoices: [] });
+server/routes/billing.mjs:    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.dbUserId}`);
+server/routes/billing.mjs:    const customerId = userResult.rows?.[0]?.stripe_customer_id;
+server/routes/billing.mjs:    const invoices = await stripe.invoices.list({
+server/routes/webhook.mjs:import Stripe from "stripe";
+server/routes/webhook.mjs:const stripe = process.env.STRIPE_SECRET_KEY
+server/routes/webhook.mjs:// IMPORTANT: raw body ONLY for stripe signature verification
+server/routes/webhook.mjs:  "/stripe",
+server/routes/webhook.mjs:    if (!stripe) {
+server/routes/webhook.mjs:    const sig = req.headers["stripe-signature"];
+server/routes/webhook.mjs:      event = stripe.webhooks.constructEvent(
+server/routes/webhook.mjs:        provider: "stripe",
+server/routes/webhook.mjs:            authoritativeSession = await stripe.checkout.sessions.retrieve(session.id, {
+server/routes/webhook.mjs:              stripeCustomerId: session.customer,
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:            logger.warn(`${event.type}: no user found for stripeCustomerId`, { customer: subscription.customer, stripeStatus: subscription.status });
+server/routes/webhook.mjs:            logger.info("Subscription status synced", { customer: subscription.customer, stripeStatus: subscription.status, canonicalStatus });
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId", { customer: subscription.customer });
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, invoice.customer));
+server/routes/webhook.mjs:            logger.warn("invoice.paid: no user found for stripeCustomerId", { customer: invoice.customer });
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, invoice.customer));
+server/routes/webhook.mjs:            logger.warn("invoice.payment_failed: no user found for stripeCustomerId", { customer: invoice.customer });
+server/auth/webhookStripe.mjs:export async function applyOrBufferEntitlement({ stripeCustomerId, email, tier, status }) {
+server/auth/webhookStripe.mjs:  // 1) try to find user by stripe_customer_id (best) or email (fallback)
+server/auth/webhookStripe.mjs:  const userByStripe = await db.select().from(users).where(eq(users.stripeCustomerId, stripeCustomerId)).limit(1);
+server/auth/webhookStripe.mjs:      stripeCustomerId,
+server/auth/webhookStripe.mjs:    stripeCustomerId,
+server/auth/webhookStripe.mjs:    set: { tier, status, stripeCustomerId },
+server/billing/applyPendingEntitlements.mjs:  const stripeCustomerId = user.stripeCustomerId;
+server/billing/applyPendingEntitlements.mjs:  const pending = stripeCustomerId
+server/billing/applyPendingEntitlements.mjs:    ? await db.select().from(pendingEntitlements).where(and(eq(pendingEntitlements.stripeCustomerId, stripeCustomerId), isNull(pendingEntitlements.appliedAt)))
+server/billing/applyPendingEntitlements.mjs:      stripeCustomerId: p.stripeCustomerId,
+server/billing/applyPendingEntitlements.mjs:      set: { tier: p.tier, status: p.status, stripeCustomerId: p.stripeCustomerId },
+server/billing/entitlements.mjs:export async function applyOrBufferEntitlement({ stripeCustomerId, tier, status }) {
+server/billing/entitlements.mjs:  const found = await db.select().from(users).where(eq(users.stripeCustomerId, stripeCustomerId)).limit(1);
+server/billing/entitlements.mjs:    logger.warn("User not found for stripeCustomerId, entitlement not applied", { stripeCustomerId, tier });
+server/billing/entitlements.mjs:    .values({ userId: user.id, stripeCustomerId, tier, status })
+server/billing/entitlements.mjs:      set: { stripeCustomerId, tier, status },
+server/billing/stripeCustomer.mjs:import Stripe from "stripe";
+server/billing/stripeCustomer.mjs:const stripe = process.env.STRIPE_SECRET_KEY
+server/billing/stripeCustomer.mjs:  if (!stripe) throw new Error("Stripe is not configured");
+server/billing/stripeCustomer.mjs:  if (user.stripe_customer_id) return user.stripe_customer_id;
+server/billing/stripeCustomer.mjs:  const customer = await stripe.customers.create({
+server/billing/stripeCustomer.mjs:    `UPDATE users SET stripe_customer_id=$1 WHERE id=$2`,
+server/services/stripeSync.mjs:import Stripe from "stripe";
+server/services/stripeSync.mjs:const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+server/services/stripeSync.mjs:    `SELECT stripe_customer_id FROM users WHERE id = $1`,
+server/services/stripeSync.mjs:  const existing = found.rows?.[0]?.stripe_customer_id;
+server/services/stripeSync.mjs:  const customer = await stripe.customers.create({
+server/services/stripeSync.mjs:    `UPDATE users SET stripe_customer_id = $1 WHERE id = $2`,
+server/services/stripeSync.mjs:    `UPDATE users SET subscription_status = $1, subscription_expires_at = $2 WHERE stripe_customer_id = $3`,
+server/services/stripeSync.mjs:export { stripe };
+server/shared/importMap.mjs:    stripe: "../routes/stripe.mjs",
+server/tests/billing-response-shape.test.js:	url: "https://checkout.stripe.com/test"
+server/tests/billing-response-shape.test.js:		url: "https://checkout.stripe.com/test"
+server/utils/stripe.mjs:// server/utils/stripe.mjs
+server/utils/stripe.mjs:import Stripe from "stripe";
+server/utils/stripe.mjs:let stripe = null;
+server/utils/stripe.mjs:  stripe = new Stripe(STRIPE_SECRET_KEY, {
+server/utils/stripe.mjs:  if (!stripe) {
+server/utils/stripe.mjs:  return stripe;
+server/observability/alerter.mjs: * @param {string} [args.component] - Optional sub-component (e.g. "stripe-webhook").
+server/app.mjs.bak:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs.bak:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs.bak:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+server/app.mjs:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+server/app.mjs.STABLE:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs.STABLE:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs.STABLE:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+server/app.mjs.bak-ready-alias:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs.bak-ready-alias:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs.bak-ready-alias:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],

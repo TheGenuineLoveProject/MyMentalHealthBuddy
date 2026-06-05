@@ -1,0 +1,200 @@
+client/src/pages/admin/AdminUsers.jsx:    { label: "Pro Subscribers", value: proUsers, icon: TrendingUp, desc: "Active Pro subscriptions", color: "text-emerald-600" },
+client/src/pages/admin/BillingViewer.jsx:  const { data: subscriptions, isLoading: subsLoading } = useQuery({
+client/src/pages/admin/BillingViewer.jsx:    queryKey: ['/api/admin/billing/subscriptions'],
+client/src/pages/admin/BillingViewer.jsx:  const subsList = subscriptions?.subscriptions || [];
+client/src/pages/admin/BillingViewer.jsx:        <p className="text-muted-foreground">Read-only view of subscription data</p>
+client/src/pages/admin/BillingViewer.jsx:        <Card data-testid="card-total-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:        <Card data-testid="card-active-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:      <Card data-testid="card-recent-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:          <CardDescription>Last 50 subscription records (read-only)</CardDescription>
+client/src/pages/admin/BillingViewer.jsx:            <p className="text-center text-muted-foreground py-8" data-testid="text-empty-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:              No subscription data available.
+client/src/pages/admin/BillingViewer.jsx:              <table className="w-full text-sm" data-testid="subscriptions-table">
+client/src/pages/admin/RevenueAdmin.jsx:    { label: "Subscribers", value: stats.subscribers, icon: Users, desc: "Active subscriptions", testId: "card-subscribers" },
+client/src/pages/admin/RevenueAdmin.jsx:        description="Admin revenue and subscription analytics."
+client/src/pages/admin/RevenueAdmin.jsx:                <p className="text-muted-foreground text-center py-4" data-testid="text-no-subscriptions">No active subscriptions</p>
+client/src/pages/account/Billing.jsx:    description: "Manage your subscription plan and view your billing history.",
+client/src/pages/account/Billing.jsx:  const { subscriptionStatus, isPro, isLoading: authLoading } = useAuth();
+client/src/pages/account/Billing.jsx:  const { data: subscriptionData, isLoading: subLoading } = useQuery({
+client/src/pages/account/Billing.jsx:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Billing.jsx:  const currentPlan = subscriptionStatus || subscriptionData?.plan || "free";
+client/src/pages/account/Billing.jsx:  const isActive = isPro || subscriptionData?.status === "active" || subscriptionData?.status === "trialing";
+client/src/pages/account/Billing.jsx:    subtitle="Your subscription and payment details."
+client/src/pages/account/Billing.jsx:      what: "Manage your subscription plan.",
+client/src/pages/account/Billing.jsx:                        {subscriptionData?.cancelAtPeriodEnd
+client/src/pages/account/Billing.jsx:                          ? `Cancels on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+client/src/pages/account/Billing.jsx:                          : `Renews on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+client/src/pages/account/Billing.jsx:                    data-testid="button-manage-subscription"
+client/src/pages/account/Billing.jsx:                      data-testid="button-manage-subscription-plan"
+client/src/pages/account/Billing.jsx:                Pro subscriptions can be canceled anytime from this page — no hidden fees, no lock-in, no cancellation hoops. If you cancel, you keep full access through the end of your paid period, and your free tools never go away.
+client/src/pages/account/Subscription.jsx:  const { data: subscription, isLoading, error } = useQuery({
+client/src/pages/account/Subscription.jsx:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Subscription.jsx:  const subData = subscription || { plan: "free", status: "none" };
+client/src/pages/account/Subscription.jsx:        description="Manage your subscription and billing."
+client/src/pages/account/Subscription.jsx:              Questions about billing, refunds, or your subscription?
+client/src/pages/dashboard/Overview.jsx:        description: "Your subscription is active. All premium features are now unlocked.",
+client/src/pages/dashboard/Overview.jsx:      queryClient.invalidateQueries({ queryKey: ["/api/billing/subscription-status"] });
+client/src/pages/dashboard/Overview.jsx:                href="/account/subscription"
+client/src/pages/help/RefundHelp.jsx:    a: "Yes, we can prorate refunds based on your remaining subscription time."
+client/src/pages/FAQPage.jsx:        a: "Yes. You can cancel your subscription at any time from Settings. You'll retain access until the end of your billing period."
+client/src/pages/SubscriberBenefitsPage.jsx:        description="Discover all the features, tools, and resources included in your Genuine Love Project subscription."
+client/src/pages/SubscriberBenefitsPage.jsx:        subtitle="Your complete guide to everything included in your subscription"
+client/src/pages/SubscriberBenefitsPage.jsx:          what: "A complete overview of your subscription benefits.",
+client/src/pages/ControlDashboard.jsx:    { name: "Stripe", description: "Payment processing and subscriptions", status: "connected", icon: "💳" },
+client/src/pages/PricingPage.jsx:    a: "Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period."
+client/src/components/admin/DailyOpsChecklist.jsx:    { id: 'billing-review', label: 'Review Billing', desc: 'Check revenue, subscriptions, and payments', icon: DollarSign, href: '/admin/billing', category: 'revenue', priority: 'low' },
+client/src/components/admin/DailyOpsChecklist.jsx:    { id: 'revenue-check', label: 'Revenue Dashboard', desc: 'Review MRR, subscriptions, and financial health', icon: TrendingUp, href: '/admin/revenue', category: 'revenue', priority: 'low' },
+client/src/components/layout/Header.jsx:      ? [{ href: "/account/subscription", label: "Account", icon: UserCircle }]
+client/src/components/PlanGate.jsx:  const userPlan = user?.subscriptionStatus || (isPro ? "pro" : "free");
+client/src/components/UpsellModal.jsx:          <p className="text-xs text-[#9CA5A0] mt-1">No subscription. No hidden fees.</p>
+client/src/content/allRoutes.json:  "/account/subscription",
+client/src/content/analytics/eventSchema.ts:  subscriptionStart: {
+client/src/content/analytics/eventSchema.ts:    action: 'subscription_start',
+client/src/content/meta/integrationRegistry.ts:    notes: 'Stripe checkout, webhooks, subscription management',
+client/src/content/meta/integrationRegistry.ts:    notes: 'Feature gating based on subscription tier',
+client/src/content/searchIndex.ts:    tags: ["pricing", "plans", "subscription"],
+client/src/content/routes.js:    description: 'Manage your subscription and payment methods.',
+client/src/content/routes.js:      subtitle: 'Manage your subscription, view invoices, and update payment methods.',
+client/src/content/routes.js:      primaryCta: { label: 'Manage Subscription', href: '#subscription' },
+client/src/content/routes.js:    description: 'Manage your subscription and billing.',
+client/src/content/routes.js:      titleHighlight: 'subscription.',
+client/src/content/routes.js:      subtitle: 'Manage your payment and subscription details.',
+client/src/content/routes.js:    description: 'View subscription and billing statistics.',
+client/src/content/routes.js:      subtitle: 'Read-only view of subscription data and metrics.',
+client/src/content/routes.js.BACKUP.1780108447:        subtitle: 'These foundational tools are available to everyone, no subscription required.',
+client/src/content/routes.js.BACKUP.1780108447:        subtitle: 'Unlock the full power of the platform with a subscription.',
+client/src/content/routes.js.BACKUP.1780108447:    description: 'Manage your subscription and payment methods.',
+client/src/content/routes.js.BACKUP.1780108447:      subtitle: 'Manage your subscription, view invoices, and update payment methods.',
+client/src/content/routes.js.BACKUP.1780108447:      primaryCta: { label: 'Manage Subscription', href: '#subscription' },
+client/src/content/routes.js.BACKUP.1780108447:    description: 'Manage your subscription and billing.',
+client/src/content/routes.js.BACKUP.1780108447:      titleHighlight: 'subscription.',
+client/src/content/routes.js.BACKUP.1780108447:      subtitle: 'Manage your payment and subscription details.',
+client/src/content/routes.js.BACKUP.1780108447:    description: 'View subscription and billing statistics.',
+client/src/content/routes.js.BACKUP.1780108447:      subtitle: 'Read-only view of subscription data and metrics.',
+client/src/content/routes/marketingRoutes.js:        subtitle: 'These foundational tools are available to everyone, no subscription required.',
+client/src/content/routes/marketingRoutes.js:        subtitle: 'Unlock the full power of the platform with a subscription.',
+client/src/context/AuthContext.jsx:  const subscriptionStatus = user?.subscriptionStatus || "free";
+client/src/context/AuthContext.jsx:  const isPro = subscriptionStatus === "pro";
+client/src/context/AuthContext.jsx:    console.debug("[Auth] subscriptionStatus:", subscriptionStatus, "isPro:", isPro);
+client/src/context/AuthContext.jsx:        subscriptionStatus,
+client/src/guards/RequirePro.jsx:  const plan = user?.subscription_status || "free";
+client/src/guards/RequirePro.jsx:        <p>This feature requires a Pro subscription.</p>
+client/src/hooks/useFeatureAccess.js:  const { subscriptionStatus, isPro } = useAuth();
+client/src/hooks/useFeatureAccess.js:      subscriptionStatus,
+client/src/hooks/useFeatureAccess.js:    subscriptionStatus,
+client/src/hooks/useFeatureAccess.js:export function checkFeatureAccess(featureKey, subscriptionStatus) {
+client/src/hooks/useFeatureAccess.js:  const isPro = subscriptionStatus === "pro";
+client/src/lib/track.ts:export function trackConversion(type: 'cta' | 'signup' | 'subscription', details: Record<string, string>) {
+client/src/lib/track.ts:    track('subscriptionStart', details);
+client/src/services/billingClient.js:  const response = await fetch("/api/billing/subscription-status", {
+client/src/sections/PricingFAQ.jsx: * PricingFAQ — accordion of subscription-related questions.
+client/src/sections/EmailCapture.jsx: * EmailCapture — homepage subscription surface.
+client/src/sections/ValueProposition.jsx: * (When a backend subscription endpoint lands, swap the handleSubmit.)
+client/src/design-system/components/MMHBCard.tsx:/** SSR-safe reduced-motion subscription. */
+client/src/checkin-flow/types/checkInFlowTypes.ts: * Trust-first contract: subscription messaging never appears before breathing completes.
+client/src/checkin-flow/types/checkInFlowTypes.ts:  subscriptionMentioned: boolean;
+client/src/checkin-flow/types/checkInFlowTypes.ts:/** Selector contract: subscription UI MUST gate behind this. */
+client/src/checkin-flow/state/useCheckInFlowStore.ts: *   - subscriptionMentioned can ONLY become true via the guarded goToOffer()
+client/src/checkin-flow/state/useCheckInFlowStore.ts:  subscriptionMentioned: false,
+client/src/checkin-flow/state/useCheckInFlowStore.ts:    set({ step: "offer", subscriptionMentioned: true });
+client/src/checkin-flow/state/useCheckInFlowStore.ts: * Selector — subscription messaging is allowed ONLY when:
+client/src/checkin-flow/state/useCheckInFlowStore.ts: *   3. subscriptionMentioned has been flipped true by goToOffer()
+client/src/checkin-flow/state/useCheckInFlowStore.ts: * Any UI rendering subscription content MUST gate behind this.
+client/src/checkin-flow/state/useCheckInFlowStore.ts:  state.subscriptionMentioned === true;
+client/src/checkin-flow/state/useCheckInFlowStore.ts: *    - useCheckInFlowState(selector) — read-only state subscription
+client/src/checkin-flow/governance/checkInFlowRules.ts:  "subscribe", "subscription", "upgrade", "premium", "plan",
+client/src/checkin-flow/governance/checkInFlowRules.ts:      !s.subscriptionMentioned ||
+client/src/checkin-flow/governance/checkInFlowRules.ts:      (s.subscriptionMentioned && s.breathingCompleted),
+client/src/checkin-flow/governance/checkInFlowRules.ts:    description: "Welcome copy contains no subscription terms.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:    description: "Breathing-step copy contains no subscription terms.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:    description: "Pre-offer copy carries no subscription / payment language (no hard-sell modal copy can leak).",
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:  /** Called when user accepts the offer (delegate to your subscription/onboarding entry). */
+client/src/checkin-flow/components/FlowStepWelcome.tsx: * NO subscription content. Crisis link rendered.
+client/src/checkin-flow/components/FlowStepBreathing.tsx: * NO subscription content.
+client/src/checkin-flow/components/FlowStepCheckout.tsx: * 4 shift options. NO subscription content yet — that's the next step.
+client/src/checkin-flow/components/FlowStepOffer.tsx: * Phase 14 — Soft subscription invitation.
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts: * 22 assertions covering all 14 rules + the hard subscription guard.
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:  // ---- Hard subscription guard --------------------------------------------
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    expect(after.subscriptionMentioned).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    expect(after.subscriptionMentioned).toBe(true);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:    expect(after.subscriptionMentioned).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:  it("auditFlow detects illegal subscriptionMentioned-without-breathing combo (CF-R001)", () => {
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:      subscriptionMentioned: true,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:      subscriptionMentioned: true,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:      subscriptionMentioned: true,
+client/src/lumi-rituals/runtime/useRitual.ts: * SSR-safe reduced-motion subscription.
+client/src/lumi-rituals/tests/ritualSafety.test.ts:    // No subscription / upsell language sneaks through.
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts: *   - Reduced-motion subscription (SSR-safe). When set, the optional
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:  // Reduced-motion live subscription.
+client/src/governance/interactions/HealingFlowProtectionRules.ts:                "subscription_overlay",
+client/src/App.jsx:              <Route path="/subscription">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/account/subscription">
+server/routes/adminBilling.mjs:    // Total subscriptions
+server/routes/adminBilling.mjs:      SELECT COUNT(*) as count FROM subscriptions
+server/routes/adminBilling.mjs:    // Active subscriptions
+server/routes/adminBilling.mjs:      SELECT COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:      SELECT tier, COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:      SELECT COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:// P128: Get subscription list (read-only)
+server/routes/adminBilling.mjs:router.get('/subscriptions', async (req, res) => {
+server/routes/adminBilling.mjs:        s.stripe_subscription_id as "stripeSubscriptionId",
+server/routes/adminBilling.mjs:      FROM subscriptions s
+server/routes/adminBilling.mjs:    const subscriptions = result.rows?.map(s => ({
+server/routes/adminBilling.mjs:    return success(res, { subscriptions });
+server/routes/adminBilling.mjs:    logger.error('Admin subscriptions fetch error', { error: err.message });
+server/routes/adminBilling.mjs:      FROM subscriptions 
+server/routes/analytics.mjs:  "subscription_viewed", "error_occurred",
+server/routes/deploymentReadiness.mjs:      WHERE table_name = 'users' AND column_name = 'subscription_status'
+server/routes/deploymentReadiness.mjs:      results.checks.subscriptionStatusColumn = {
+server/routes/deploymentReadiness.mjs:      results.checks.subscriptionStatusColumn = {
+server/routes/deploymentReadiness.mjs:        detail: "Column subscription_status not found in users table",
+server/routes/deploymentReadiness.mjs:    logger.warn("Deployment check: subscription_status column query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:    results.checks.subscriptionStatusColumn = { status: "fail", detail: "Query failed" };
+server/routes/deploymentReadiness.mjs:      SELECT subscription_status, COUNT(*) as count 
+server/routes/deploymentReadiness.mjs:      GROUP BY subscription_status
+server/routes/deploymentReadiness.mjs:    const statuses = statusCheck.rows?.map(r => r.subscription_status) || [];
+server/routes/deploymentReadiness.mjs:    results.checks.subscriptionStatusIntegrity = {
+server/routes/deploymentReadiness.mjs:    logger.warn("Deployment check: subscription status integrity query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:    results.checks.subscriptionStatusIntegrity = { status: "fail", detail: "Query failed" };
+server/routes/newsletter.mjs:        message: 'Unable to process subscription'
+server/routes/revenue.mjs:      SELECT subscription_status, COUNT(*) as count FROM users 
+server/routes/revenue.mjs:      WHERE subscription_status IN ('starter', 'pro', 'elite')
+server/routes/revenue.mjs:      GROUP BY subscription_status
+server/routes/revenue.mjs:      planBreakdown[row.subscription_status] = parseInt(row.count, 10);
+server/routes/revenue.mjs:      WHERE subscription_status IN ('starter', 'pro', 'elite') 
+server/routes/revenue.mjs:      WHERE subscription_status IN ('starter', 'pro', 'elite')
+server/routes/auth.mjs:        subscription_status text DEFAULT 'free',
+server/routes/auth.mjs:        subscription_expires_at timestamp,
+server/routes/billing.mjs:  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
+server/routes/billing.mjs:  elite: { name: "Elite", priceId: process.env.STRIPE_PRICE_ELITE, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support", "voice_affirmations", "1on1_onboarding", "early_access", "elite_community"] },
+server/routes/billing.mjs:    const checkoutMode = planConfig.mode || "subscription";
+server/routes/billing.mjs:router.get("/subscription-status", async (req, res) => {
+server/routes/billing.mjs:      SELECT subscription_status, subscription_expires_at, stripe_customer_id
+server/routes/billing.mjs:    const plan = user.subscription_status || "free";
+server/routes/billing.mjs:        const subs = await stripe.subscriptions.list({
+server/routes/billing.mjs:        logger.warn("Failed to fetch Stripe subscription details", { error: stripeErr.message });
+server/routes/billing.mjs:      currentPeriodEnd: user.subscription_expires_at || null,
+server/routes/billing.mjs:      SELECT subscription_status FROM users WHERE id = ${req.dbUserId} LIMIT 1
+server/routes/billing.mjs:    const plan = userResult.rows?.[0]?.subscription_status || "free";
+server/routes/webhook.mjs:          if (!session.customer || !session.subscription) {
+server/routes/webhook.mjs:            logger.warn("checkout.session.completed missing customer or subscription", { sessionId: session.id });
+server/routes/webhook.mjs:            increment("subscription_mapping_unknown", { source: "checkout_retrieve_failed" });
+server/routes/webhook.mjs:            increment("subscription_mapping_unknown", { source: alertSource });
+server/routes/webhook.mjs:              subscriptionStatus: checkoutPlan,
+server/routes/webhook.mjs:            increment("subscription_transition", { plan: `free_to_${checkoutPlan}` });
+server/routes/webhook.mjs:        case "customer.subscription.created":
+server/routes/webhook.mjs:        case "customer.subscription.updated": {
+server/routes/webhook.mjs:          const subscription = event.data.object;
+server/routes/webhook.mjs:          if (!subscription.customer) {
+server/routes/webhook.mjs:            logger.warn(`${event.type} missing customer field`, { subscriptionId: subscription.id });
+server/routes/webhook.mjs:          const isActive = ["active", "trialing"].includes(subscription.status);
+server/routes/webhook.mjs:            const mappedPlan = mapSubscriptionToPlan(subscription);
+server/routes/webhook.mjs:                subscriptionId: subscription.id,
+server/routes/webhook.mjs:                priceId: subscription?.items?.data?.[0]?.price?.id ?? null,
+server/routes/webhook.mjs:                customer: subscription.customer,
+server/routes/webhook.mjs:              increment("subscription_mapping_unknown", { source: "subscription" });
+server/routes/webhook.mjs:              subscriptionStatus: canonicalStatus,
+server/routes/webhook.mjs:              subscriptionExpiresAt: subscription.current_period_end
+server/routes/webhook.mjs:                ? new Date(subscription.current_period_end * 1000)
+server/routes/webhook.mjs:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:            logger.warn(`${event.type}: no user found for stripeCustomerId`, { customer: subscription.customer, stripeStatus: subscription.status });
