@@ -437,11 +437,10 @@ client/dist/assets/_autopilot-BI_hVxfB.js                                      2
 client/dist/assets/WellnessDashboard-IsAQbj32.js                               275.14 kB │ gzip: 89.13 kB
 
 [33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
-  - vite:esbuild-transpile (62%)
+  - vite:esbuild-transpile (70%)
   - vite:css (10%)
-  - vite:css-post (7%)
-  - visualizer (6%)
-  - vite:asset (5%)
+  - vite:css-post (5%)
+  - visualizer (5%)
 See https://rolldown.rs/options/checks#plugintimings for more details.
 
-✓ built in 28.16s
+✓ built in 34.11s
