@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-06-05T02:49:00.944Z",
+  "verifiedState": {
+    "packageJson": true,
+    "serverApp": true,
+    "clientSrc": true,
+    "sharedSchema": true,
+    "distIndex": true,
+    "pagesCount": 330,
+    "componentsCount": 472,
+    "serverFileCount": 342,
+    "sharedFileCount": 15
+  },
+  "runtimeWiring": {
+    "usesPortEnv": true,
+    "hasListen": true,
+    "billingMounted": true,
+    "webhookMounted": true,
+    "healthReadyPresent": true
+  },
+  "billingSafety": {
+    "clientBillingExists": true,
+    "clientCallsServerCheckout": true,
+    "clientExportsCheckout": true,
+    "serverCreatesCheckoutSession": true,
+    "serverCreatesPortalSession": true,
+    "webhookHandlesCheckoutComplete": true,
+    "webhookHandlesSubscriptionUpdated": true,
+    "webhookHandlesInvoicePaid": true
+  },
+  "stripeGate": {
+    "secretMode": "test",
+    "publishableMode": "live",
+    "vitePublishableMode": "missing",
+    "aligned": false,
+    "safeForCheckoutTesting": false
+  },
+  "hardBlockersBeforeRevenueTesting": [
+    "Stripe keys are not mode-aligned or VITE_STRIPE_PUBLISHABLE_KEY is missing.",
+    "CORS_ORIGIN is wildcard and must be restricted before production.",
+    "Rotate every exposed Stripe/Replit/GitHub token before production.",
+    "Review and patch GitHub Dependabot vulnerabilities.",
+    "Run Stripe test checkout only after secret rotation and Stripe mode alignment."
+  ]
+}
