@@ -1,0 +1,5 @@
+128-    "@typescript-eslint/eslint-plugin": "^8.60.0",
+129-    "@typescript-eslint/parser": "^8.60.0",
+130:    "broken-link-checker": "^0.7.8",
+131-    "eslint": "^10.4.1",
+132-    "eslint-plugin-react-hooks": "^7.1.1",

@@ -1,0 +1,5 @@
+134-    "nodemon": "^3.1.14",
+135-    "playwright": "^1.60.0",
+136:    "pm2": "^7.0.1",
+137-    "prettier": "^3.8.3",
+138-    "rollup-plugin-visualizer": "^6.0.11",
