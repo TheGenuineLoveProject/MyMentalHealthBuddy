@@ -1,0 +1,3 @@
+   372 diagnostics/phase57/routes-paths.txt
+  1006 diagnostics/phase57/routes-react-router.txt
+  1378 total
