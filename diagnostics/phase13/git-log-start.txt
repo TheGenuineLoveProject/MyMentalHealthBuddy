@@ -1,0 +1,10 @@
+cbb3597ea Harden client billing service against secret exposure
+aa71bfed0 Ignore generated stripe audit artifacts
+43444a8a4 Ignore generated stripe audit artifacts
+78522b9f8 Ignore generated stripe audit artifacts
+feead6cc0 Add phase 8 Stripe mode blocker guard and secret rotation ledger
+48c9a5bdf Add phase 7 execution ledger and Stripe mode audit
+573b29758 Add phase 5 platform coverage audit reports
+2f7fbd1a4 Add deployment readiness endpoint
+42915ef29 Remove duplicate and conflicting component files from the UI
+11cec09af deployment-ready platform state
