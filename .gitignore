@@ -126,3 +126,5 @@ yarn-debug.log*
 yarn-error.log*
 diagnostics/**/stripe-references.txt
 diagnostics/phase9/
+diagnostics/**/stripe-references.txt
+diagnostics/phase9/
