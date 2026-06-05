@@ -1,0 +1,17 @@
+./backups/phase31A/server-20260603-042302/routes/auth.mjs
+./.config/npm/node_global/lib/node_modules/drizzle-kit/api.d.ts
+./.config/npm/node_global/lib/node_modules/drizzle-kit/api.js
+./.config/npm/node_global/lib/node_modules/drizzle-kit/api.mjs
+./.config/npm/node_global/lib/node_modules/drizzle-kit/index.d.ts
+./.config/npm/node_global/lib/node_modules/drizzle-kit/utils.js
+./.config/npm/node_global/lib/node_modules/drizzle-kit/utils.mjs
+./docs/reports/phase19_20260522T190303Z/configs/drizzle.config.ts
+./drizzle.config.ts
+./.local/snapshots/phase49-20260523T020643Z/runtime/drizzle.config.ts
+./.local/snapshots/phase49-20260523T020643Z/runtime/routes/auth.mjs
+./production-backups/phase189-live-snapshot/server/routes/auth.mjs
+./_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_drizzle.config.ts
+./scripts/check-links.mjs
+scripts/check-links.mjs
+./server/routes/auth.mjs
+server/routes/auth.mjs
