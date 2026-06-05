@@ -1,0 +1,18 @@
+{
+  "vulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 16,
+    "high": 3,
+    "critical": 0,
+    "total": 19
+  },
+  "dependencies": {
+    "prod": 784,
+    "dev": 437,
+    "optional": 153,
+    "peer": 165,
+    "peerOptional": 0,
+    "total": 1498
+  }
+}

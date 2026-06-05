@@ -1,0 +1,5 @@
+{
+  "secret": "test",
+  "publishable": "live",
+  "vite": "missing"
+}

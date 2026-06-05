@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-06-05T03:20:02.565Z",
+  "stripeSecret": true,
+  "stripePublishable": true,
+  "viteStripe": false,
+  "webhook": true,
+  "cors": "*",
+  "node": "v20.20.0"
+}
