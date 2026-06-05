@@ -441,7 +441,7 @@ client/dist/assets/WellnessDashboard-IsAQbj32.js                               2
   - vite:css (11%)
   - vite:css-post (7%)
   - visualizer (6%)
-  - vite:asset (4%)
+  - vite:asset (5%)
 See https://rolldown.rs/options/checks#plugintimings for more details.
 
-✓ built in 32.94s
+✓ built in 32.51s
