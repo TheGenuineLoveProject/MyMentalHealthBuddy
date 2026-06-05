@@ -1,8 +1,0 @@
-client/src/pages/account/Billing.jsx
-client/src/pages/account/Subscription.jsx
-client/src/pages/admin/BillingViewer.jsx
-client/src/pages/admin/RevenueAdmin.jsx
-client/src/pages/Pricing.jsx
-client/src/pages/PricingPage.jsx
-client/src/sections/PricingFAQ.jsx
-client/src/services/billingClient.js

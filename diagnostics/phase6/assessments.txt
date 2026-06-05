@@ -1,3 +1,0 @@
-client/src/components/EmotionalIntelligenceQuiz.jsx
-client/src/pages/tools/GAD7Assessment.jsx
-client/src/pages/tools/PHQ9Assessment.jsx
