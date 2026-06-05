@@ -1,0 +1,11 @@
+@esbuild-kit/core-utils :: severity=moderate
+@esbuild-kit/esm-loader :: severity=moderate
+@google-cloud/storage :: severity=moderate
+drizzle-kit :: severity=moderate
+esbuild :: severity=moderate
+gaxios :: severity=moderate
+pm2 :: severity=moderate
+retry-request :: severity=moderate
+teeny-request :: severity=moderate
+uuid :: severity=moderate
+ws :: severity=moderate
