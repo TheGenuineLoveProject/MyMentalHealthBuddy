@@ -1,0 +1,7 @@
+{
+  "revenue": 1569,
+  "admin": 97,
+  "routes": 585,
+  "stripe": 632,
+  "ai": 12554
+}
