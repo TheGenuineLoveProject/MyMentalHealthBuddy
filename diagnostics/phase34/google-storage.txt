@@ -1,0 +1,2 @@
+package.json:    "@google-cloud/storage": "^7.19.0",
+package-lock.json:        "@google-cloud/storage": "^7.19.0",
