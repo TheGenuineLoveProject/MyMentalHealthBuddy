@@ -1,0 +1,4 @@
+client/src/pages/ComingSoon.jsx:export default function ComingSoon() {
+client/src/pages/ComingSoon.jsx:        title={`${featureName} - Coming Soon | MyMentalHealthBuddy`}
+client/src/App.jsx:import ComingSoon from "./pages/ComingSoon.jsx";
+client/src/App.jsx:              <Route path="/coming-soon">{() => <ComingSoon />}</Route>
