@@ -1,0 +1,61 @@
+mymentalhealthbuddy@1.0.0 /home/runner/workspace
+├─┬ @google-cloud/storage@7.19.0
+│ ├─┬ gaxios@6.7.1
+│ │ └── uuid@9.0.1
+│ ├─┬ google-auth-library@9.15.1
+│ │ ├─┬ gaxios@6.7.1
+│ │ │ └── uuid@9.0.1
+│ │ └─┬ gtoken@7.1.0
+│ │   └─┬ gaxios@6.7.1
+│ │     └── uuid@9.0.1
+│ ├─┬ teeny-request@9.0.0
+│ │ └── uuid@9.0.1
+│ └── uuid@8.3.2
+├─┬ @langchain/openai@1.4.7
+│ └─┬ @langchain/core@1.1.48
+│   └─┬ langsmith@0.7.3
+│     └── ws@8.21.0 deduped
+├─┬ broken-link-checker@0.7.8
+│ ├─┬ bhttp@1.2.8
+│ │ ├─┬ form-data2@1.0.4
+│ │ │ └── uuid@2.0.3
+│ │ └── tough-cookie@2.5.0
+│ ├─┬ robot-directives@0.3.0
+│ │ └─┬ useragent@2.3.0
+│ │   └── tmp@0.0.33
+│ └── robots-txt-guard@0.1.1
+├─┬ drizzle-kit@0.31.10
+│ ├─┬ @esbuild-kit/esm-loader@2.6.5
+│ │ └─┬ @esbuild-kit/core-utils@3.3.2
+│ │   └── esbuild@0.18.20
+│ ├── esbuild@0.25.12
+│ └─┬ tsx@4.22.3
+│   └── esbuild@0.28.0 deduped
+├── esbuild@0.28.0
+├─┬ lighthouse@12.8.2
+│ ├─┬ puppeteer-core@24.43.1
+│ │ └── ws@8.21.0 deduped
+│ └── ws@7.5.11
+├─┬ openai@6.39.0
+│ └── ws@8.21.0 deduped
+├─┬ pm2@7.0.1
+│ ├─┬ @pm2/js-api@0.8.0
+│ │ └── ws@7.5.11
+│ └── ws@8.20.0
+├─┬ react-spring@10.0.4
+│ └─┬ @react-spring/native@10.1.0
+│   └─┬ react-native@0.85.3
+│     ├─┬ @react-native/community-cli-plugin@0.85.3
+│     │ ├─┬ @react-native/dev-middleware@0.85.3
+│     │ │ └── ws@7.5.11
+│     │ └─┬ metro@0.84.4
+│     │   └── ws@7.5.11
+│     ├─┬ react-devtools-core@6.1.5
+│     │ └── ws@7.5.11
+│     └── ws@7.5.11
+├─┬ vite-bundle-visualizer@1.2.1
+│ └── tmp@0.2.7
+├─┬ vite@8.0.14
+│ └── esbuild@0.28.0 deduped
+└── ws@8.21.0
+
