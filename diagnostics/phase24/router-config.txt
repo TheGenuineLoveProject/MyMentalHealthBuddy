@@ -1,0 +1,2127 @@
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:import { Link } from 'wouter';
+client/src/pages/admin/_adminToolsShared.js:  "404": { suggestion: "Endpoint not found. Route may not be mounted or the path may be incorrect. Codex KB: Verify mountIfExists() call in server/app.mjs and check the route file exports a valid Express router.", action: "Check server/app.mjs for route mount", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:  "route-missing": { suggestion: "Route file exists but is not mounted. Codex KB: Add mountIfExists() call in server/app.mjs for the route path. Verify the file exports a default Express router.", action: "Mount route in server/app.mjs", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+client/src/pages/admin/CommandCenter.jsx:import { Link } from "wouter";
+client/src/pages/admin/SocialLibrary.jsx:import { Link } from "wouter";
+client/src/pages/admin/AdminPublishing.jsx:import { Link } from "wouter";
+client/src/pages/admin/AdminPublishing.jsx:                {(signals.byRoute || []).length > 0 && (
+client/src/pages/admin/AdminPublishing.jsx:                    <h3 className="font-medium mb-2">Top Routes</h3>
+client/src/pages/admin/AdminPublishing.jsx:                      {(signals.byRoute || []).map(r => (
+client/src/pages/admin/AdminSocial.jsx:import { Link } from "wouter";
+client/src/pages/admin/AdminTools.jsx:import { Link } from "wouter";
+client/src/pages/admin/HealthDashboard.jsx:import { Link } from "wouter";
+client/src/pages/admin/NarrativeOpsConsole.jsx:import { Link } from "wouter";
+client/src/pages/admin/NewsletterAdmin.jsx:import { Link } from "wouter";
+client/src/pages/admin/SocialAnalytics.jsx:import { Link } from "wouter";
+client/src/pages/admin/SocialCalendar.jsx:import { Link } from "wouter";
+client/src/pages/admin/SocialDashboard.jsx:import { Link } from "wouter";
+client/src/pages/admin/SocialGenerator.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/admin/AdminPublishingToday.jsx:import { Link } from "wouter";
+client/src/pages/admin/AdminUsers.jsx:import { Link } from "wouter";
+client/src/pages/admin/AnalyticsDashboard.jsx:import { Link } from "wouter";
+client/src/pages/admin/AuditLogExplorer.jsx:import { Link } from "wouter";
+client/src/pages/admin/BillingViewer.jsx:import { Link } from 'wouter';
+client/src/pages/admin/ContentStudioAdmin.jsx:import { Link } from "wouter";
+client/src/pages/admin/EngagementDashboard.jsx:import { Link } from "wouter";
+client/src/pages/admin/EngagementDashboard.jsx:    { label: "API Routes", value: health?.platform?.totalRoutes || 123 },
+client/src/pages/admin/FeatureFlags.jsx:import { Link } from "wouter";
+client/src/pages/admin/FeedbackAggregator.jsx:import { Link } from "wouter";
+client/src/pages/admin/NarrativeDrafts.jsx:import { Link } from "wouter";
+client/src/pages/admin/RevenueAdmin.jsx:import { Link } from "wouter";
+client/src/pages/admin/RolesPermissions.jsx:import { Link } from "wouter";
+client/src/pages/admin/SecurityDashboard.jsx:import { Link } from "wouter";
+client/src/pages/admin/SocialStudioAdmin.jsx:import { Link } from "wouter";
+client/src/pages/admin/SystemAlerts.jsx:import { Link } from "wouter";
+client/src/pages/account/Billing.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/account/Profile.jsx:import { Link } from "wouter";
+client/src/pages/account/Security.jsx:import { Link } from "wouter";
+client/src/pages/account/Settings.jsx:import { Link } from "wouter";
+client/src/pages/account/Subscription.jsx:import { Link } from "wouter";
+client/src/pages/dashboard/ProgressDashboard.jsx:  const lastRouteKey = wins[0]?.routeKey || "hubs__anxiety";
+client/src/pages/dashboard/ProgressDashboard.jsx:  const recs = getRecommendations(lastRouteKey, 6).map((r) => ({
+client/src/pages/dashboard/Overview.jsx:import { Link } from "wouter";
+client/src/pages/dashboard/Insights.tsx:import { Link } from "wouter";
+client/src/pages/dashboard/Journal.jsx:import { Link } from "wouter";
+client/src/pages/dashboard/MoodTracker.jsx:import { Link } from "wouter";
+client/src/pages/help/RefundHelp.jsx:import { Link } from "wouter";
+client/src/pages/hubs/TopicHubPage.jsx:import { useLocation } from "wouter";
+client/src/pages/hubs/AcceptanceHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/AnxietyHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/BodyMindHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/BoundariesHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/BreathworkHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/CommunicationHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/ConfidenceHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/CopingSkillsHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/CreativityHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/DailyPracticeHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/EnergyManagementHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/FocusHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/ForgivenessHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/GratitudeHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/GriefHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/HabitsHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/HealingJourneyHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/InnerPeaceHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/InnerWorkHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/JournalingHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/LifePurposeHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/MindfulnessHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/MotivationHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/NervousSystemHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/PersonalGrowthHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/PresenceHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/RelationshipsHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/ResilienceHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/SelfAwarenessHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/SelfCareHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/SelfCompassionHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/SelfDiscoveryHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/SelfWorthHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/SleepHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/SpiritualityHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/StressHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/ThoughtworkHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/TraumaHealingHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/WisdomHubPage.jsx:import { Link } from "wouter";
+client/src/pages/hubs/HubsIndexPage.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/library/SavedLibrary.jsx:import { getRouteMeta, resolveRoutePath } from "../../content/meta/routeMetaRegistry";
+client/src/pages/library/SavedLibrary.jsx:import { Link } from "wouter";
+client/src/pages/library/SavedLibrary.jsx:      const m = getRouteMeta(rk);
+client/src/pages/library/SavedLibrary.jsx:      return { routeKey: rk, title: m.title, description: m.description, href: resolveRoutePath(rk) };
+client/src/pages/pathways/CalmPlan.jsx:import { Link } from "wouter";
+client/src/pages/pathways/Favorites.jsx:import { Link } from "wouter";
+client/src/pages/pathways/GoalOnboarding.jsx:import { useLocation } from "wouter";
+client/src/pages/pathways/PathwaysHome.jsx:import { Link } from "wouter";
+client/src/pages/pathways/ProgressStreaks.jsx:import { Link } from "wouter";
+client/src/pages/pathways/ReflectionHistory.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/tools/PHQ9Assessment.jsx:import { Link } from "wouter";
+client/src/pages/tools/BreathPacer.jsx:import { Link } from "wouter";
+client/src/pages/tools/GAD7Assessment.jsx:import { Link } from "wouter";
+client/src/pages/tools/BreathingTool.jsx:import { Link } from "wouter";
+client/src/pages/tools/BoundaryBuilderTool.jsx:import { Link } from "wouter";
+client/src/pages/tools/CognitiveDistortionChecker.jsx:import { Link } from "wouter";
+client/src/pages/tools/ManipulationDetector.jsx:import { Link } from "wouter";
+client/src/pages/tools/NervousSystemCheck.jsx:import { Link } from "wouter";
+client/src/pages/tools/SleepQualityCalculator.jsx:import { Link } from "wouter";
+client/src/pages/tools/AweMicrodose.jsx:import { Link } from "wouter";
+client/src/pages/tools/BodyScan.jsx:import { Link } from "wouter";
+client/src/pages/tools/BreathTool.jsx:import { Link } from "wouter";
+client/src/pages/tools/CommunityCheckin.jsx:import { Link } from "wouter";
+client/src/pages/tools/CompassionBreak.jsx:import { Link } from "wouter";
+client/src/pages/tools/DigitalSunset.jsx:import { Link } from "wouter";
+client/src/pages/tools/EmotionWheel.jsx:import { Link } from "wouter";
+client/src/pages/tools/GriefLetter.jsx:import { Link } from "wouter";
+client/src/pages/tools/MeaningMap.jsx:import { Link } from "wouter";
+client/src/pages/tools/Reframe.jsx:import { Link } from "wouter";
+client/src/pages/tools/RepairScript.jsx:import { Link } from "wouter";
+client/src/pages/tools/UrgeSurf.jsx:import { Link } from "wouter";
+client/src/pages/tools/WeeklyReflection.jsx:import { Link } from "wouter";
+client/src/pages/tools/index.jsx:import { Link } from "wouter";
+client/src/pages/_quarantine/legacy-landing/Home.jsx:import { Link } from 'wouter';
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:import { Link } from "wouter";
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:import { Link } from "wouter";
+client/src/pages/CanvaLanding.jsx.v19.bak:import { Link } from "wouter";
+client/src/pages/AboutApproachPage.jsx:import { Link } from "wouter";
+client/src/pages/AlignmentPath.jsx:import { Link } from 'wouter';
+client/src/pages/Analytics.jsx:import { Link } from "wouter";
+client/src/pages/BlogDraftViewer.jsx:import { useRoute } from "wouter";
+client/src/pages/BlogDraftViewer.jsx:  const [, params] = useRoute("/blog/draft/:id");
+client/src/pages/ComingSoon.jsx:import { Link, useSearch } from "wouter";
+client/src/pages/Contact.jsx:import { Link } from "wouter";
+client/src/pages/DesignSystem.jsx:import { Link } from "wouter";
+client/src/pages/Invite.jsx:import { Link } from "wouter";
+client/src/pages/LoginCallback.jsx:import { useLocation, useSearch } from "wouter";
+client/src/pages/ValuesPage.jsx:import { Link } from "wouter";
+client/src/pages/LearnDetail.jsx:import { Link, useRoute } from "wouter";
+client/src/pages/LearnDetail.jsx:  const [, params] = useRoute("/learn/guides/:slug");
+client/src/pages/LearnDetail.jsx:  const [, params] = useRoute("/learn/articles/:slug");
+client/src/pages/LearnHub.jsx:import { Link } from "wouter";
+client/src/pages/CRMPage.jsx:import { Link, useLocation } from 'wouter';
+client/src/pages/AdminLogin.jsx:import { useLocation } from "wouter";
+client/src/pages/WireframeTemplates.jsx:import { Link } from "wouter";
+client/src/pages/AvatarLab.jsx:import { Link } from "wouter";
+client/src/pages/Login.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/Register.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/ResetPassword.jsx:import { Link, useSearch } from "wouter";
+client/src/pages/Privacy.jsx:import { Link } from "wouter";
+client/src/pages/Blog.jsx:import { Link } from "wouter";
+client/src/pages/Profile.jsx:import { Link } from "wouter";
+client/src/pages/FAQPage.jsx:import { Link } from "wouter";
+client/src/pages/NotFound.jsx:import { Link } from "wouter";
+client/src/pages/ForgotPassword.jsx:import { Link } from "wouter";
+client/src/pages/DesignDashboard.jsx:import { Link } from "wouter";
+client/src/pages/HealthPage.jsx:import { Link } from "wouter";
+client/src/pages/QAPage.jsx:import { Link } from "wouter";
+client/src/pages/RigLab.jsx:import { Link } from "wouter";
+client/src/pages/MotionLab.jsx:import { Link } from "wouter";
+client/src/pages/OnboardingFlow.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/Upgrade.jsx:import { Link } from "wouter";
+client/src/pages/ToolsPage.jsx:import { Link } from "wouter";
+client/src/pages/CrisisResources.jsx:import { Link } from "wouter";
+client/src/pages/BreathingExercisesPage.jsx:import { Link } from "wouter";
+client/src/pages/SubscriberBenefitsPage.jsx:import { Link } from "wouter";
+client/src/pages/ProtocolBrowser.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/ProfessionalResourcesPage.jsx:import { Link } from "wouter";
+client/src/pages/DailyRoutinesPage.jsx:import { Link } from "wouter";
+client/src/pages/CognitiveToolsPage.jsx:import { Link } from "wouter";
+client/src/pages/BiometricDashboard.jsx:import { Link } from "wouter";
+client/src/pages/BehaviorChangePage.jsx:import { Link } from "wouter";
+client/src/pages/AgentInteraction.jsx:import { Link } from "wouter";
+client/src/pages/GlossaryPage.jsx:import { Link } from "wouter";
+client/src/pages/Dashboard.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/DesignSystemV2.jsx:import { Link } from "wouter";
+client/src/pages/DailyReflection.jsx:import { Link } from "wouter";
+client/src/pages/PeacescapePage.jsx:import { Link } from "wouter";
+client/src/pages/CommunityHub.jsx:import { Link } from "wouter";
+client/src/pages/CalmingScenesPage.jsx:import { Link } from "wouter";
+client/src/pages/AffirmationsPage.jsx:import { Link } from "wouter";
+client/src/pages/MeditationGuidePage.jsx:import { Link } from "wouter";
+client/src/pages/GrowthPage.jsx:import { Link } from "wouter";
+client/src/pages/InnerChildPage.jsx:import { Link } from "wouter";
+client/src/pages/CommunityFeed.jsx:import { Link } from "wouter";
+client/src/pages/HealingJourneysPage.jsx:import { Link } from "wouter";
+client/src/pages/GroundingTechniquesPage.jsx:import { Link } from "wouter";
+client/src/pages/GratitudePractice.jsx:import { Link } from "wouter";
+client/src/pages/EmotionalIntelligencePage.jsx:import { Link } from "wouter";
+client/src/pages/DailyPracticePage.jsx:import { Link } from "wouter";
+client/src/pages/RoutinesPage.jsx:import { Link } from "wouter";
+client/src/pages/TwelvePracticesPage.jsx:import { Link } from "wouter";
+client/src/pages/RecoveryPage.jsx:import { Link } from "wouter";
+client/src/pages/SystemMapPage.jsx:import { Link } from "wouter";
+client/src/pages/StatePage.jsx:import { Link } from "wouter";
+client/src/pages/SleepGuidePage.jsx:import { Link } from "wouter";
+client/src/pages/SelfCareToolkitPage.jsx:import { Link } from "wouter";
+client/src/pages/NewsPage.jsx:import { Link } from "wouter";
+client/src/pages/WellnessHubPage.jsx:import { Link } from "wouter";
+client/src/pages/Presence.jsx:import { Redirect, Link } from "wouter";
+client/src/pages/Presence.jsx: * Route guard: page redirects to / if the visitor has not completed their first
+client/src/pages/Presence.jsx:  // Route guard — gentle redirect (no error UI) if first check-in missing.
+client/src/pages/CelebrationRitual.jsx:import { Link } from "wouter";
+client/src/pages/Challenge.jsx:import { Link } from "wouter";
+client/src/pages/Wellness.jsx:import { Link } from "wouter";
+client/src/pages/Premium.jsx:import { Link } from "wouter";
+client/src/pages/InsightsDashboard.jsx:import { Link } from "wouter";
+client/src/pages/_autopilot.jsx: * AUTOPILOT PAGE - Config-Driven Route Renderer (v145)
+client/src/pages/_autopilot.jsx: * Renders any route via: getRouteConfig(pathname) -> <PageTemplate config={...} />
+client/src/pages/_autopilot.jsx:import { useLocation } from "wouter";
+client/src/pages/_autopilot.jsx:import { getFullRouteConfig, routes } from "../content/routes.js";
+client/src/pages/_autopilot.jsx:import RouteGuard from "../components/RouteGuard.jsx";
+client/src/pages/_autopilot.jsx:import { deriveRouteKeyFromPath } from "../content/meta/routeMetaRegistry.ts";
+client/src/pages/_autopilot.jsx:  const effectiveRouteKey = routeKey || deriveRouteKeyFromPath(pathname);
+client/src/pages/_autopilot.jsx:  const config = getFullRouteConfig(pathname, routes, { routeKey: effectiveRouteKey });
+client/src/pages/_autopilot.jsx:    const notFoundConfig = getFullRouteConfig("/not-found", routes, { routeKey: "not_found" });
+client/src/pages/_autopilot.jsx:  const page = <PageTemplate config={config} routeKey={effectiveRouteKey} />;
+client/src/pages/_autopilot.jsx:    return <RouteGuard>{page}</RouteGuard>;
+client/src/pages/Terms.tsx:import { Link } from "wouter";
+client/src/pages/Privacy.tsx:import { Link } from "wouter";
+client/src/pages/AdvancedToolsPage.tsx:import { Link } from "wouter";
+client/src/pages/CognitiveArchitecturePage.tsx:import { Link } from "wouter";
+client/src/pages/CollaborativeLabPage.tsx:import { Link } from "wouter";
+client/src/pages/CommunityPage.tsx:import { Link } from "wouter";
+client/src/pages/DailyWisdomOraclePage.tsx:import { Link } from "wouter";
+client/src/pages/EliteToolsDashboard.tsx:import { Link } from "wouter";
+client/src/pages/KnowledgeSynthesisPage.tsx:import { Link } from "wouter";
+client/src/pages/MasteryToolsPage.tsx:import { Link } from "wouter";
+client/src/pages/PhilosophicalInquiryPage.tsx:import { Link } from "wouter";
+client/src/pages/ProgressDashboardPage.tsx:import { Link } from "wouter";
+client/src/pages/ResilienceMetricsPage.tsx:import { Link } from "wouter";
+client/src/pages/StrategyMapsPage.tsx:import { Link } from "wouter";
+client/src/pages/SupportPage.tsx:import { Link } from "wouter";
+client/src/pages/WisdomPracticesPage.tsx:import { Link } from "wouter";
+client/src/pages/WisdomSynthesisPage.tsx:import { Link } from "wouter";
+client/src/pages/WisdomToolsPage.tsx:import { Link } from "wouter";
+client/src/pages/WisdomToolsPage.tsx:import { ArrowLeft, Brain, Scale, Clock, Sparkles, Map, Eye, Activity, Route, BookOpen } from "lucide-react";
+client/src/pages/WisdomToolsPage.tsx:    icon: Route,
+client/src/pages/AtlasDashboard.tsx:import { Link } from "wouter";
+client/src/pages/AtlasDashboard.tsx:  isRegulatedAtlasRoute,
+client/src/pages/AtlasDashboard.tsx:// Routes here are treated as regulated cognitive/healing flows where Atlas
+client/src/pages/AtlasDashboard.tsx:  const currentRoute = "/atlas";
+client/src/pages/AtlasDashboard.tsx:    () => isRegulatedAtlasRoute(currentRoute),
+client/src/pages/AtlasDashboard.tsx:        currentRoute === p || currentRoute.startsWith(`${p}/`),
+client/src/pages/AtlasDashboard.tsx:        regulated: isRegulatedAtlasRoute(c.route),
+client/src/pages/AtlasDashboard.tsx:      data-atlas-route={currentRoute}
+client/src/pages/Settings.jsx.phase-s4.bak:import { useLocation, Link } from "wouter";
+client/src/pages/AdaptiveCompanionPage.tsx:import { Link } from "wouter";
+client/src/pages/Admin.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/CelebrationFlow.jsx:import { Link } from "wouter";
+client/src/pages/ChallengeDay.jsx:import { Link, useRoute, useLocation } from "wouter";
+client/src/pages/ChallengeDay.jsx:  const [, params] = useRoute("/challenge/day/:dayNum");
+client/src/pages/CheckIn.jsx:import { Link } from "wouter";
+client/src/pages/ContentAdminDashboard.jsx:import { Link } from "wouter";
+client/src/pages/ContentIndexPage.jsx:import { Link } from "wouter";
+client/src/pages/ControlDashboard.jsx:import { Link } from "wouter";
+client/src/pages/DiscernmentDashboard.jsx:import { Link } from "wouter";
+client/src/pages/ExamplesPage.jsx:import { Link } from "wouter";
+client/src/pages/GuidedJournalingPage.tsx:import { Link } from "wouter";
+client/src/pages/HealingLibraryPage.jsx:import { Link } from "wouter";
+client/src/pages/HowToGuidesPage.jsx:import { Link } from "wouter";
+client/src/pages/InsightCardsPage.tsx:import { Link } from "wouter";
+client/src/pages/LearnArticles.jsx:import { Link } from "wouter";
+client/src/pages/LearnGuides.jsx:import { Link } from "wouter";
+client/src/pages/LumiV6Preview.jsx:import { Link } from "wouter";
+client/src/pages/ProtocolSession.jsx:import { Link, useRoute, useLocation } from "wouter";
+client/src/pages/ProtocolSession.jsx:  const [, params] = useRoute("/protocols/session/:id");
+client/src/pages/Publishing.jsx:import { Link } from "wouter";
+client/src/pages/ResearchEvidencePage.jsx:import { Link } from "wouter";
+client/src/pages/ResourcesPage.jsx:import { Link } from "wouter";
+client/src/pages/StressResponseGuidePage.jsx:import { Link } from "wouter";
+client/src/pages/SystemsThinkingPage.tsx:import { Link } from "wouter";
+client/src/pages/WellnessDashboard.jsx:import { Link } from "wouter";
+client/src/pages/WellnessGlossaryPage.jsx:import { Link } from "wouter";
+client/src/pages/About.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/About.jsx:  const meta = getRouteMeta("/about");
+client/src/pages/Anxiety.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Anxiety.jsx:  const meta = getRouteMeta("/anxiety");
+client/src/pages/BlogEditor.jsx:import { useLocation } from "wouter";
+client/src/pages/BlogEditor.jsx:import { Link } from "wouter";
+client/src/pages/BlogIndex.jsx:import { Link } from "wouter";
+client/src/pages/BlogPost.jsx:import { useRoute, Link } from "wouter";
+client/src/pages/BlogPost.jsx:  const [, params] = useRoute("/blog/:slug");
+client/src/pages/BodyWellnessPage.jsx:import { Link } from "wouter";
+client/src/pages/CanvaLanding.jsx:import { Link } from "wouter";
+client/src/pages/CommunityGuidelines.jsx:import { Link } from "wouter";
+client/src/pages/ContentStudioPage.tsx:import { Link } from "wouter";
+client/src/pages/CourseCatalog.jsx:import { Link } from "wouter";
+client/src/pages/CreatorProfile.jsx:import { Link } from "wouter";
+client/src/pages/DataRetention.jsx:import { Link } from "wouter";
+client/src/pages/Depression.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Depression.jsx:  const meta = getRouteMeta("/depression");
+client/src/pages/Features.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Features.jsx:  const meta = getRouteMeta("/features");
+client/src/pages/Growth.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Growth.jsx:  const meta = getRouteMeta("/growth");
+client/src/pages/GrowthAnalyticsPage.tsx:import { Link } from "wouter";
+client/src/pages/Healing.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Healing.jsx:  const meta = getRouteMeta("/healing");
+client/src/pages/LegalPage.jsx:import { Link } from "wouter";
+client/src/pages/MentalWellness.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/MentalWellness.jsx:  const meta = getRouteMeta("/mental-wellness");
+client/src/pages/MetaLearningPage.tsx:import { Link } from "wouter";
+client/src/pages/Mindfulness.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Mindfulness.jsx:  const meta = getRouteMeta("/mindfulness");
+client/src/pages/Newsletter.jsx:import { Link } from "wouter";
+client/src/pages/Onboarding.tsx:import { useLocation } from "wouter";
+client/src/pages/PracticeLibrary.jsx:import { Link, useLocation } from "wouter";
+client/src/pages/PressKit.jsx:import { Link } from "wouter";
+client/src/pages/Pricing.jsx:import { Link } from "wouter";
+client/src/pages/PricingPage.jsx:import { Link } from "wouter";
+client/src/pages/PublicRoadmap.jsx:import { Link } from "wouter";
+client/src/pages/Resilience.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Resilience.jsx:  const meta = getRouteMeta("/resilience");
+client/src/pages/SafetyCenter.jsx:import { Link } from "wouter";
+client/src/pages/SafetyPage.jsx:import { Link } from "wouter";
+client/src/pages/SelfLove.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/SelfLove.jsx:  const meta = getRouteMeta("/self-love");
+client/src/pages/Settings.jsx:import { useLocation, Link } from "wouter";
+client/src/pages/SocialHub.jsx:import { Link } from "wouter";
+client/src/pages/SoulWellnessPage.jsx:import { Link } from "wouter";
+client/src/pages/Start.tsx:import { Link } from "wouter";
+client/src/pages/StudyVaultPage.jsx:import { Link } from "wouter";
+client/src/pages/TalkTopics.jsx:import { Link } from 'wouter';
+client/src/pages/UserProfile.jsx:import { Link } from "wouter";
+client/src/pages/Wellbeing.jsx:import { getRouteMeta } from "../content/routes/routeRegistry.js";
+client/src/pages/Wellbeing.jsx:  const meta = getRouteMeta("/wellbeing");
+client/src/pages/WellnessToolsHub.jsx:import { Link } from "wouter";
+client/src/components/PageTemplate.*:import { getRouteMeta } from "../content/meta/routeMetaRegistry";
+client/src/components/PageTemplate.*:  const meta = getRouteMeta(routeKey);
+client/src/components/admin/AdminQueryStates.jsx:import { Link } from "wouter";
+client/src/components/admin/SOPMonitorPanel.jsx:          Routes flagged <em>protected</em> are required to return <code>401/403</code> when called without admin credentials. A <code>2xx</code> on any of those is treated as a security FAIL even if the route "works."
+client/src/components/admin/OperationsPanel.jsx:/* ---------------- Route Status ----------------
+client/src/components/admin/OperationsPanel.jsx:function RouteStatusPanel() {
+client/src/components/admin/OperationsPanel.jsx:        title="Route Status"
+client/src/components/admin/OperationsPanel.jsx:      <RouteStatusPanel />
+client/src/components/admin/SystemHealthPanel.jsx:            <span data-testid="text-route-count">{health.platform.totalRoutes} Routes</span>
+client/src/components/admin/AdminNavGrid.jsx:import { Link } from "wouter";
+client/src/components/admin/DailyOpsChecklist.jsx:import { Link } from "wouter";
+client/src/components/admin/AIKnowledgeHub.jsx:import { Link } from "wouter";
+client/src/components/brand/BrandLogo.jsx:import { Link } from "wouter";
+client/src/components/content/ClarityCard.jsx:import { Link } from "wouter";
+client/src/components/content/WhatNextRecommender.jsx:import { Link } from "wouter";
+client/src/components/content/WhatNextRecommender.jsx:export function WhatNextRecommender({ currentRouteKey, maxItems = 3 }) {
+client/src/components/content/WhatNextRecommender.jsx:  const recommendations = RECOMMENDATIONS[currentRouteKey] || RECOMMENDATIONS.default;
+client/src/components/guards/FeatureGuard.jsx:import { Redirect } from "wouter";
+client/src/components/journey/JourneyComposer.tsx:import { Route, Play, Check, Trash2, ChevronRight, Clock, Plus } from "lucide-react";
+client/src/components/journey/JourneyComposer.tsx:          <Route className="h-5 w-5 text-teal-400" />
+client/src/components/journey/JourneyComposer.tsx:          <Route className="h-8 w-8 opacity-30 mx-auto mb-3" />
+client/src/components/layout/Header.jsx:import { Link } from "wouter";
+client/src/components/layout/Footer.tsx:import { Link } from "wouter";
+client/src/components/layout/PageScaffold.tsx:import { useLocation } from "wouter";
+client/src/components/layout/PageScaffold.tsx:import { getBenefitsForRoute } from "@/content/benefits/benefitsBank";
+client/src/components/layout/PageScaffold.tsx:import { routeKeyFromRoute } from "@/utils/routeKey";
+client/src/components/layout/PageScaffold.tsx:  const effectiveRouteKey = routeKey || routeKeyFromRoute(location);
+client/src/components/layout/PageScaffold.tsx:  const context = effectiveRouteKey ? buildPageContext(effectiveRouteKey) : null;
+client/src/components/layout/PageScaffold.tsx:    (effectiveRouteKey ? getBenefitsForRoute(effectiveRouteKey).slice(0, 3) : [
+client/src/components/methods/MITile.jsx:import { Link } from "wouter";
+client/src/components/methods/NLPTile.jsx:import { Link } from "wouter";
+client/src/components/methods/StrengthsPIETile.jsx:import { Link } from "wouter";
+client/src/components/modules/ModulesPanel.tsx:import { getRouteMeta } from "../../content/meta/routeMetaRegistry";
+client/src/components/modules/ModulesPanel.tsx:  const meta = useMemo(() => getRouteMeta(routeKey), [routeKey]);
+client/src/components/personalization/ToolRecommendations.jsx:import { Link } from "wouter";
+client/src/components/publishing/PublishingCtaBar.jsx:import { Link } from "wouter";
+client/src/components/publishing/SoftUpgradeCTA.jsx:import { Link } from "wouter";
+client/src/components/referral/ReferralInvite.jsx:import { Link } from "wouter";
+client/src/components/sacred/Hero.jsx:import { Link } from 'wouter';
+client/src/components/sacred/SacredButton.jsx:import { Link } from 'wouter';
+client/src/components/sacred/SacredFooter.jsx:import { Link } from "wouter";
+client/src/components/safety/LegalFooter.tsx:import { Link } from "wouter";
+client/src/components/search/RouteSearchBox.jsx:import { Link } from "wouter";
+client/src/components/search/RouteSearchBox.jsx:import { searchRoutes } from "../../content/meta/routeSearchIndex";
+client/src/components/search/RouteSearchBox.jsx:export function RouteSearchBox({ placeholder = "Search tools, hubs, paths..." }) {
+client/src/components/search/RouteSearchBox.jsx:  const hits = useMemo(() => searchRoutes(q, 10), [q]);
+client/src/components/search/RouteSearchBox.jsx:export default RouteSearchBox;
+client/src/components/ui/Footer.jsx:import { Link } from 'wouter';
+client/src/components/ui/ResourceTiles.jsx:import { Link } from "wouter";
+client/src/components/ui/Button.jsx:import { Link } from 'wouter';
+client/src/components/ui/ReflectionFooter.jsx:import { Link } from 'wouter';
+client/src/components/wellness/WellnessPageShell.jsx:import { Link } from "wouter";
+client/src/components/wellness/SafetyFooter.tsx:import { Link } from "wouter";
+client/src/components/lumi/LumiBrandLockupImage.jsx:import { Link } from "wouter";
+client/src/components/lumi/LumiBrandLogo.jsx:import { Link } from "wouter";
+client/src/components/AnimatedPageTransition.jsx:import { useLocation } from "wouter";
+client/src/components/BenefitsBlock.jsx:import { Link } from 'wouter';
+client/src/components/Breadcrumbs.jsx:import { Link } from "wouter";
+client/src/components/DashboardCard.jsx:import { Link } from "wouter";
+client/src/components/FlowDiagram.jsx:| # | Screen      | Route         | Purpose                    |
+client/src/components/GlobalSearch.jsx:import { useLocation } from "wouter";
+client/src/components/GlowFooter.jsx:import { Link } from "wouter";
+client/src/components/HeroSection.jsx:import { Link } from "wouter";
+client/src/components/LotusGuide.jsx:import { useLocation } from "wouter";
+client/src/components/OnboardingFlow.jsx:import { Link } from 'wouter';
+client/src/components/PersistentDisclaimer.jsx:import { Link } from 'wouter';
+client/src/components/PlanGate.jsx:import { Link } from "wouter";
+client/src/components/ProtectedRoute.jsx:export default function ProtectedRoute({ children }) {
+client/src/components/RelatedNextSteps.jsx:import { Link } from "wouter";
+client/src/components/RouteGuard.jsx:import { useLocation } from "wouter";
+client/src/components/RouteGuard.jsx:export default function RouteGuard({ children }) {
+client/src/components/SacredForm.jsx:import { Link } from 'wouter';
+client/src/components/SafetyFooter.jsx:import { Link } from 'wouter';
+client/src/components/SoftLaunchBanner.jsx:import { Link } from "wouter";
+client/src/components/StartHerePathways.jsx:import { Link } from "wouter";
+client/src/components/AdminGuard.jsx:import { useLocation } from "wouter";
+client/src/components/Header.jsx:import { Link, useLocation } from "wouter";
+client/src/components/Footer.jsx:import { Link } from "wouter";
+client/src/components/BrandShell.jsx:import { Link } from "wouter";
+client/src/components/BrandShell.jsx:          {/* V29 Phase 1 fix (2026-05-15): replaced inert <button type="button"> with wouter Link wrappers.
+client/src/components/EmptyState.jsx:import { Link } from "wouter";
+client/src/components/SafetyDisclaimer.jsx:import { Link } from 'wouter';
+client/src/components/RelatedLinksBlock.tsx:import { Link } from "wouter";
+client/src/components/ToolCard.tsx: * wouter so client navigation stays intact.
+client/src/components/ToolCard.tsx:import { Link } from "wouter";
+client/src/components/GratitudePrompt.jsx:import { useLocation } from "wouter";
+client/src/components/GratitudePrompt.jsx:// Routes where a "What are you grateful for?" widget would feel intrusive
+client/src/components/HealingHero.jsx:import { Link } from "wouter";
+client/src/components/SacredFooter.jsx:import { Link } from "wouter";
+client/src/components/QuickActions.jsx:import { Link } from "wouter";
+client/src/components/UpsellModal.jsx:import { useLocation } from 'wouter';
+client/src/components/AgeConsentGate.jsx:import { Link } from 'wouter';
+client/src/components/MicroWinPrompt.jsx:import { Link, useLocation } from "wouter";
+client/src/components/PageTemplate.jsx:import { Link } from 'wouter';
+client/src/components/PageTemplate.jsx:import { getRouteMeta, resolveInternalLinks } from "../content/meta/routeMetaRegistry";
+client/src/components/PageTemplate.jsx:  const { readingLevel, setReadingLevel, setRouteDefault, isReady } = useReadingLevel();
+client/src/components/PageTemplate.jsx:  const effectiveRouteKey = routeKey || config?.routeKey || "unknown";
+client/src/components/PageTemplate.jsx:  const meta = getRouteMeta(effectiveRouteKey);
+client/src/components/PageTemplate.jsx:  const resolvedLinks = resolveInternalLinks(effectiveRouteKey);
+client/src/components/PageTemplate.jsx:      setRouteDefault(config.defaultReadingLevel);
+client/src/components/PageTemplate.jsx:  }, [config?.defaultReadingLevel, setRouteDefault]);
+client/src/components/PageTemplate.jsx:            <ModulesPanel routeKey={effectiveRouteKey} />
+client/src/components/ReturnLoop.jsx:import { Link, useLocation } from "wouter";
+client/src/components/SacredNav.jsx:import { Link, useLocation } from "wouter";
+client/src/components/TglpNavbar.jsx:import { Link, useLocation } from "wouter";
+client/src/components/WelcomeBackBanner.jsx: * inside the wouter location check) so we never visually compete with safety
+client/src/components/WelcomeBackBanner.jsx:import { Link, useLocation } from "wouter";
+client/src/content/benefits/benefitsBank.ts: * Usage: getBenefitsForRoute("uniqueKey").slice(0, 3)
+client/src/content/benefits/benefitsBank.ts:export function getBenefitsForRoute(routeKey: string): string[] {
+client/src/content/context/buildPageContext.ts:  relatedRoutes: string[];
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/dashboard", "/wellness", "/tools"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/journal", "/mood", "/analytics"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/tools", "/breathing", "/meditation"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/breathing", "/grounding", "/affirmations"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/guided-journaling", "/mood", "/dashboard"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/state", "/analytics", "/journal"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/grounding", "/meditation", "/stress-response"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/breathing", "/calming-scenes", "/mindfulness"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/", "/grounding"],
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/dashboard", "/wellness"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/dashboard", "/journal"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/wellness", "/tools"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/tools", "/wellness"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/crisis", "/"]
+client/src/content/context/buildPageContext.ts:    relatedRoutes: ["/wellness", "/tools", "/dashboard"],
+client/src/content/context/buildPageContext.ts:export function getRelatedRoutes(routeKey: string): string[] {
+client/src/content/context/buildPageContext.ts:  return context.relatedRoutes;
+client/src/content/hubs/hubGraph.ts:import { listAllRouteMeta, resolveRoutePath } from "../meta/routeMetaRegistry";
+client/src/content/hubs/hubGraph.ts:  const all = listAllRouteMeta();
+client/src/content/hubs/hubGraph.ts:      href: resolveRoutePath(x.m.routeKey),
+client/src/content/meta/platformProcessRegistry.ts:    title: "Route health scanner",
+client/src/content/meta/recommendations.ts:import { getRouteMeta, listAllRouteMeta, resolveInternalLinks, resolveRoutePath } from "./routeMetaRegistry";
+client/src/content/meta/recommendations.ts:  const meta = getRouteMeta(routeKey);
+client/src/content/meta/recommendations.ts:  const all = listAllRouteMeta()
+client/src/content/meta/recommendations.ts:      href: resolveRoutePath(x.m.routeKey),
+client/src/content/meta/routeSearchIndex.ts:import { listAllRouteMeta, resolveRoutePath } from "./routeMetaRegistry";
+client/src/content/meta/routeSearchIndex.ts:  return listAllRouteMeta().map((m) => ({
+client/src/content/meta/routeSearchIndex.ts:    href: resolveRoutePath(m.routeKey),
+client/src/content/meta/routeSearchIndex.ts:export function searchRoutes(query: string, limit = 12): SearchHit[] {
+client/src/content/meta/integrationRegistry.ts:    canonicalFiles: ['client/src/components/RouteGuard.jsx'],
+client/src/content/meta/integrationRegistry.ts:    notes: 'Route-level code splitting with React.lazy',
+client/src/content/meta/integrationRegistry.ts:    canonicalFiles: ['scripts/validateRoutes.mjs'],
+client/src/content/meta/integrationRegistry.ts:    notes: 'Route collision validation script',
+client/src/content/meta/integrationRegistry.ts:    notes: 'P161 - Route registry snapshot tests',
+client/src/content/meta/routeMetaRegistry.ts:export type RouteMeta = {
+client/src/content/meta/routeMetaRegistry.ts:function titleizeFromRouteKey(routeKey: string) {
+client/src/content/meta/routeMetaRegistry.ts:function inferPathFromRouteKey(routeKey: string) {
+client/src/content/meta/routeMetaRegistry.ts:function safeDefaultMeta(routeKey: string): RouteMeta {
+client/src/content/meta/routeMetaRegistry.ts:  const pretty = titleizeFromRouteKey(routeKey);
+client/src/content/meta/routeMetaRegistry.ts:    canonicalPath: inferPathFromRouteKey(routeKey),
+client/src/content/meta/routeMetaRegistry.ts:export function deriveRouteKeyFromPath(pathname: string) {
+client/src/content/meta/routeMetaRegistry.ts:export function getRouteMeta(routeKey: string): RouteMeta {
+client/src/content/meta/routeMetaRegistry.ts:export function resolveRoutePath(routeKey: string) {
+client/src/content/meta/routeMetaRegistry.ts:  return getRouteMeta(routeKey).canonicalPath;
+client/src/content/meta/routeMetaRegistry.ts:  const meta = getRouteMeta(routeKey);
+client/src/content/meta/routeMetaRegistry.ts:    href: resolveRoutePath(l.routeKey),
+client/src/content/meta/routeMetaRegistry.ts:  return getRouteMeta(routeKey).modules || [];
+client/src/content/meta/routeMetaRegistry.ts:export function listAllRouteMeta(): RouteMeta[] {
+client/src/content/meta/routeMetaRegistry.ts:  return Array.from(allKeys).map(key => getRouteMeta(key));
+client/src/content/microcopy/index.js:export { hashString, pickByRoute } from './pick.js';
+client/src/content/microcopy/pick.js:export function pickByRoute(route, list, salt = "") {
+client/src/content/microcopy.js:export function pickByRoute(route, arr, offset = 0) {
+client/src/content/microcopy.js:export function getMicrocopyForRoute(route) {
+client/src/content/microcopy.js:    map[route] = getMicrocopyForRoute(route);
+client/src/content/readingLevels.js: * @param {string} options.routeDefault - Route-specific default
+client/src/content/readingLevels.js:  const fromRoute = normalizeReadingLevel(routeDefault);
+client/src/content/readingLevels.js:  if (fromRoute) return fromRoute;
+client/src/content/routeKey.js:export function titleFromRouteKey(routeKey = "") {
+client/src/content/routeMetaRegistry.js:import { titleFromRouteKey } from "./routeKey";
+client/src/content/routeMetaRegistry.js:export function getRouteMeta(routeKey) {
+client/src/content/routeMetaRegistry.js:  const title = base.title || titleFromRouteKey(key);
+client/src/content/routeMetaRegistry.js:export function setRouteMeta(routeKey, patch) {
+client/src/content/searchIndex.ts:  /** If true, only show when user is authenticated (RouteGuard routes). */
+client/src/content/routes.js:// Routes Registry - The Genuine Love Project
+client/src/content/routes.js: * ROUTES.JS - Single Source of Truth for All Platform Routes
+client/src/content/routes.js: * - Route protection for authenticated pages
+client/src/content/routes.js: *   import { getRouteConfig, listRoutesByCategory } from './routes.js';
+client/src/content/routes.js: *   const config = getRouteConfig('/dashboard');
+client/src/content/routes.js: *   const grouped = listRoutesByCategory();
+client/src/content/routes.js:import { getMicrocopyForRoute } from './microcopy.js';
+client/src/content/routes.js:import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
+client/src/content/routes.js:import { coreRoutes } from "./routes/coreRoutes.js";
+client/src/content/routes.js:import { supportRoutes } from "./routes/supportRoutes.js";
+client/src/content/routes.js:import { learningRoutes } from "./routes/learningRoutes.js";
+client/src/content/routes.js:import { legalRoutes } from "./routes/legalRoutes.js";
+client/src/content/routes.js:import { contentRoutes } from "./routes/contentRoutes.js";
+client/src/content/routes.js:import { toolRoutes } from "./routes/toolRoutes.js";
+client/src/content/routes.js:import { marketingRoutes } from "./routes/marketingRoutes.js";
+client/src/content/routes.js:let __cachedRoutesRef = null;
+client/src/content/routes.js:function buildRouteByPathCache(routesArray) {
+client/src/content/routes.js:function getRouteByPath(pathname, routesArray) {
+client/src/content/routes.js:  if (!__routeByPathCache || __cachedRoutesRef !== routesArray || __cacheVersion !== EXPECTED_CACHE_VERSION) {
+client/src/content/routes.js:    __routeByPathCache = buildRouteByPathCache(routesArray);
+client/src/content/routes.js:    __cachedRoutesRef = routesArray;
+client/src/content/routes.js:// Routes are defined below via rawRoutes and processed at line ~8719
+client/src/content/routes.js:export function getRouteConfig(pathname, opts = {}) {
+client/src/content/routes.js:  const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname);
+client/src/content/routes.js:  const meta = getRouteMeta(routeKey);
+client/src/content/routes.js:  const protectedRoute = Boolean(opts.protected);
+client/src/content/routes.js:    protected: protectedRoute,
+client/src/content/routes.js:export function getFullRouteConfig(pathname, routesArray, opts = {}) {
+client/src/content/routes.js:  const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname);
+client/src/content/routes.js:  const meta = getRouteMeta(routeKey);
+client/src/content/routes.js:  const routeData = getRouteByPath(pathname, routesArray);
+client/src/content/routes.js:  const protectedRoute = Boolean(opts.protected || routeData?.protected);
+client/src/content/routes.js:    protected: protectedRoute,
+client/src/content/routes.js:// --- RouteKey -> Path resolver (single source of truth) ---
+client/src/content/routes.js:function buildRouteKeyToPath(routes) {
+client/src/content/routes.js:export function getPathForRouteKey(routeKey) {
+client/src/content/routes.js:    __routeKeyToPathCache = buildRouteKeyToPath(ROUTES);
+client/src/content/routes.js:const rawRoutes = [
+client/src/content/routes.js:  // (4 public marketing routes extracted to ./routes/marketingRoutes.js — spread in place below)
+client/src/content/routes.js:  ...marketingRoutes,
+client/src/content/routes.js:  // (14 routes extracted to ./routes/toolRoutes.js — spread in place below)
+client/src/content/routes.js:  ...toolRoutes,
+client/src/content/routes.js:  // (13 routes extracted to ./routes/contentRoutes.js — spread in place below)
+client/src/content/routes.js:  ...contentRoutes,
+client/src/content/routes.js:  // SUPPORT & RESOURCES (7 routes) — extracted to ./routes/coreRoutes.js
+client/src/content/routes.js:  ...coreRoutes,
+client/src/content/routes.js:  // (8 routes extracted to ./routes/legalRoutes.js — spread in place below)
+client/src/content/routes.js:  ...legalRoutes,
+client/src/content/routes.js:  // (3 routes extracted to ./routes/learningRoutes.js — spread in place below)
+client/src/content/routes.js:  ...learningRoutes,
+client/src/content/routes.js:  // ADDITIONAL SUPPORT ROUTES (3 routes) — extracted to ./routes/supportRoutes.js
+client/src/content/routes.js:  ...supportRoutes,
+client/src/content/routes.js:export const routes = rawRoutes.map(route => {
+client/src/content/routes.js:const aliasRoutes = routes.filter(r => r.aliasOf);
+client/src/content/routes.js:const dynamicRoutes = routes.filter(r => r.isDynamic);
+client/src/content/routes.js:const staticRoutes = routes.filter(r => !r.aliasOf && !r.isDynamic);
+client/src/content/routes.js:function matchDynamicRoute(path) {
+client/src/content/routes.js:  for (const route of dynamicRoutes) {
+client/src/content/routes.js:    const microcopyData = getMicrocopyForRoute(config.route);
+client/src/content/routes.js:      const neighborRoutes = getNeighborWellnessRoutes(config.route);
+client/src/content/routes.js:            ...neighborRoutes.map(r => ({ label: r.label, href: r.route }))
+client/src/content/routes.js:function getNeighborWellnessRoutes(currentRoute) {
+client/src/content/routes.js:  const wellnessRoutes = routes.filter(r => r.tone === 'practice' && r.route !== currentRoute);
+client/src/content/routes.js:  const hash = currentRoute.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+client/src/content/routes.js:  const idx = hash % wellnessRoutes.length;
+client/src/content/routes.js:  if (wellnessRoutes[idx]) neighbors.push({ route: wellnessRoutes[idx].route, label: wellnessRoutes[idx].pageLabel });
+client/src/content/routes.js:  if (wellnessRoutes[(idx + 1) % wellnessRoutes.length]) {
+client/src/content/routes.js:    neighbors.push({ route: wellnessRoutes[(idx + 1) % wellnessRoutes.length].route, label: wellnessRoutes[(idx + 1) % wellnessRoutes.length].pageLabel });
+client/src/content/routes.js:export function getRoutesByCategory(category) {
+client/src/content/routes.js:export function listRoutesByCategory() {
+client/src/content/routes.js:export function isProtectedRoute(path) {
+client/src/content/routes.js:  const config = getRouteConfig(path);
+client/src/content/routes.js:export function isAdminRoute(path) {
+client/src/content/routes.js:  const config = getRouteConfig(path);
+client/src/content/routes.js.BACKUP.1780108447:// Routes Registry - The Genuine Love Project
+client/src/content/routes.js.BACKUP.1780108447: * ROUTES.JS - Single Source of Truth for All Platform Routes
+client/src/content/routes.js.BACKUP.1780108447: * - Route protection for authenticated pages
+client/src/content/routes.js.BACKUP.1780108447: *   import { getRouteConfig, listRoutesByCategory } from './routes.js';
+client/src/content/routes.js.BACKUP.1780108447: *   const config = getRouteConfig('/dashboard');
+client/src/content/routes.js.BACKUP.1780108447: *   const grouped = listRoutesByCategory();
+client/src/content/routes.js.BACKUP.1780108447:import { getMicrocopyForRoute } from './microcopy.js';
+client/src/content/routes.js.BACKUP.1780108447:import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
+client/src/content/routes.js.BACKUP.1780108447:let __cachedRoutesRef = null;
+client/src/content/routes.js.BACKUP.1780108447:function buildRouteByPathCache(routesArray) {
+client/src/content/routes.js.BACKUP.1780108447:function getRouteByPath(pathname, routesArray) {
+client/src/content/routes.js.BACKUP.1780108447:  if (!__routeByPathCache || __cachedRoutesRef !== routesArray || __cacheVersion !== EXPECTED_CACHE_VERSION) {
+client/src/content/routes.js.BACKUP.1780108447:    __routeByPathCache = buildRouteByPathCache(routesArray);
+client/src/content/routes.js.BACKUP.1780108447:    __cachedRoutesRef = routesArray;
+client/src/content/routes.js.BACKUP.1780108447:// Routes are defined below via rawRoutes and processed at line ~8719
+client/src/content/routes.js.BACKUP.1780108447:export function getRouteConfig(pathname, opts = {}) {
+client/src/content/routes.js.BACKUP.1780108447:  const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname);
+client/src/content/routes.js.BACKUP.1780108447:  const meta = getRouteMeta(routeKey);
+client/src/content/routes.js.BACKUP.1780108447:  const protectedRoute = Boolean(opts.protected);
+client/src/content/routes.js.BACKUP.1780108447:    protected: protectedRoute,
+client/src/content/routes.js.BACKUP.1780108447:export function getFullRouteConfig(pathname, routesArray, opts = {}) {
+client/src/content/routes.js.BACKUP.1780108447:  const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname);
+client/src/content/routes.js.BACKUP.1780108447:  const meta = getRouteMeta(routeKey);
+client/src/content/routes.js.BACKUP.1780108447:  const routeData = getRouteByPath(pathname, routesArray);
+client/src/content/routes.js.BACKUP.1780108447:  const protectedRoute = Boolean(opts.protected || routeData?.protected);
+client/src/content/routes.js.BACKUP.1780108447:    protected: protectedRoute,
+client/src/content/routes.js.BACKUP.1780108447:// --- RouteKey -> Path resolver (single source of truth) ---
+client/src/content/routes.js.BACKUP.1780108447:function buildRouteKeyToPath(routes) {
+client/src/content/routes.js.BACKUP.1780108447:export function getPathForRouteKey(routeKey) {
+client/src/content/routes.js.BACKUP.1780108447:    __routeKeyToPathCache = buildRouteKeyToPath(ROUTES);
+client/src/content/routes.js.BACKUP.1780108447:const rawRoutes = [
+client/src/content/routes.js.BACKUP.1780108447:export const routes = rawRoutes.map(route => {
+client/src/content/routes.js.BACKUP.1780108447:const aliasRoutes = routes.filter(r => r.aliasOf);
+client/src/content/routes.js.BACKUP.1780108447:const dynamicRoutes = routes.filter(r => r.isDynamic);
+client/src/content/routes.js.BACKUP.1780108447:const staticRoutes = routes.filter(r => !r.aliasOf && !r.isDynamic);
+client/src/content/routes.js.BACKUP.1780108447:function matchDynamicRoute(path) {
+client/src/content/routes.js.BACKUP.1780108447:  for (const route of dynamicRoutes) {
+client/src/content/routes.js.BACKUP.1780108447:    const microcopyData = getMicrocopyForRoute(config.route);
+client/src/content/routes.js.BACKUP.1780108447:      const neighborRoutes = getNeighborWellnessRoutes(config.route);
+client/src/content/routes.js.BACKUP.1780108447:            ...neighborRoutes.map(r => ({ label: r.label, href: r.route }))
+client/src/content/routes.js.BACKUP.1780108447:function getNeighborWellnessRoutes(currentRoute) {
+client/src/content/routes.js.BACKUP.1780108447:  const wellnessRoutes = routes.filter(r => r.tone === 'practice' && r.route !== currentRoute);
+client/src/content/routes.js.BACKUP.1780108447:  const hash = currentRoute.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+client/src/content/routes.js.BACKUP.1780108447:  const idx = hash % wellnessRoutes.length;
+client/src/content/routes.js.BACKUP.1780108447:  if (wellnessRoutes[idx]) neighbors.push({ route: wellnessRoutes[idx].route, label: wellnessRoutes[idx].pageLabel });
+client/src/content/routes.js.BACKUP.1780108447:  if (wellnessRoutes[(idx + 1) % wellnessRoutes.length]) {
+client/src/content/routes.js.BACKUP.1780108447:    neighbors.push({ route: wellnessRoutes[(idx + 1) % wellnessRoutes.length].route, label: wellnessRoutes[(idx + 1) % wellnessRoutes.length].pageLabel });
+client/src/content/routes.js.BACKUP.1780108447:export function getRoutesByCategory(category) {
+client/src/content/routes.js.BACKUP.1780108447:export function listRoutesByCategory() {
+client/src/content/routes.js.BACKUP.1780108447:export function isProtectedRoute(path) {
+client/src/content/routes.js.BACKUP.1780108447:  const config = getRouteConfig(path);
+client/src/content/routes.js.BACKUP.1780108447:export function isAdminRoute(path) {
+client/src/content/routes.js.BACKUP.1780108447:  const config = getRouteConfig(path);
+client/src/content/routes/contentRoutes.js:// contentRoutes — public CONTENT & LEARNING routes (blog, glossary, research, etc.).
+client/src/content/routes/contentRoutes.js:// Merged back into rawRoutes via `...contentRoutes`, preserving array order.
+client/src/content/routes/contentRoutes.js:export const contentRoutes = [
+client/src/content/routes/coreRoutes.js:// coreRoutes — public informational SUPPORT & RESOURCES routes.
+client/src/content/routes/coreRoutes.js:// helper dependencies). Merged back into rawRoutes via `...coreRoutes`.
+client/src/content/routes/coreRoutes.js:export const coreRoutes = [
+client/src/content/routes/index.js:export * from './coreRoutes';
+client/src/content/routes/index.js:export * from './healingRoutes';
+client/src/content/routes/index.js:export * from './toolRoutes';
+client/src/content/routes/index.js:export * from './adminRoutes';
+client/src/content/routes/index.js:export * from './legalRoutes';
+client/src/content/routes/index.js:export * from './communityRoutes';
+client/src/content/routes/index.js:export * from './supportRoutes';
+client/src/content/routes/learningRoutes.js:// learningRoutes — public LEARNING & EDUCATION routes.
+client/src/content/routes/learningRoutes.js:// Merged back into rawRoutes via `...learningRoutes`, preserving array order.
+client/src/content/routes/learningRoutes.js:export const learningRoutes = [
+client/src/content/routes/legalRoutes.js:// legalRoutes — public LEGAL & POLICY routes.
+client/src/content/routes/legalRoutes.js:// Merged back into rawRoutes via `...legalRoutes`, preserving array order.
+client/src/content/routes/legalRoutes.js:export const legalRoutes = [
+client/src/content/routes/marketingRoutes.js:// marketingRoutes — public marketing / informational pages (LOW RISK).
+client/src/content/routes/marketingRoutes.js:// no healing/auth coupling). Merged back via `...marketingRoutes`, order preserved.
+client/src/content/routes/marketingRoutes.js:export const marketingRoutes = [
+client/src/content/routes/routeRegistry.js:export function getRouteMeta(path) {
+client/src/content/routes/supportRoutes.js:// supportRoutes — additional public informational SUPPORT sub-pages.
+client/src/content/routes/supportRoutes.js:// Merged back into rawRoutes via `...supportRoutes`, preserving array order.
+client/src/content/routes/supportRoutes.js:export const supportRoutes = [
+client/src/content/routes/toolRoutes.js:// toolRoutes — public ADVANCED & MASTERY informational routes.
+client/src/content/routes/toolRoutes.js:// Merged back into rawRoutes via `...toolRoutes`, preserving array order.
+client/src/content/routes/toolRoutes.js:export const toolRoutes = [
+client/src/context/ReadingLevelContext.jsx: * - Route-specific defaults support
+client/src/context/ReadingLevelContext.jsx:import { useSearch } from 'wouter';
+client/src/context/ReadingLevelContext.jsx:  setRouteDefault: () => {},
+client/src/context/ReadingLevelContext.jsx:  const [routeDefault, setRouteDefaultState] = useState('intermediate');
+client/src/context/ReadingLevelContext.jsx:  const setRouteDefault = useCallback((defaultLevel) => {
+client/src/context/ReadingLevelContext.jsx:      setRouteDefaultState(normalized);
+client/src/context/ReadingLevelContext.jsx:    <ReadingLevelContext.Provider value={{ readingLevel, setReadingLevel, setRouteDefault, isReady }}>
+client/src/features/community/DiscussionPage.jsx:import { Link, useRoute } from "wouter";
+client/src/features/community/DiscussionPage.jsx:  const [, params] = useRoute("/community/discussion/:id");
+client/src/features/community/SharedReflectionsPage.jsx:import { Link, useLocation } from "wouter";
+client/src/features/daily/DailyFlow.tsx:import { Link } from "wouter";
+client/src/guards/ProtectedRoute.jsx:export default function ProtectedRoute({ children }) {
+client/src/hooks/useAnalytics.mjs:import { useLocation } from "wouter";
+client/src/hooks/use-analytics.tsx:import { useLocation } from 'wouter';
+client/src/hooks/useKeyboardNav.js:import { useLocation } from "wouter";
+client/src/lib/wellness/ensureWellnessCompliance.ts:export function isWellnessRoute(path: string): boolean {
+client/src/utils/routeKey.js:export function routeKeyFromRoute(route) {
+client/src/sections/EmotionalJourney.jsx:import { Link } from 'wouter';
+client/src/sections/NextStepCTA.jsx:import { Link } from "wouter";
+client/src/sections/NlpMiContent.jsx:import { Link } from 'wouter';
+client/src/sections/ValueBridge.jsx:import { Link } from "wouter";
+client/src/sections/VisualBenefits.jsx:import { Link } from 'wouter';
+client/src/lumi-conversation/prompts/lumiSystemPrompt.ts: * `runConversationRouter()` before being delivered. The system prompt is not
+client/src/lumi-conversation/runtime/conversationRouter.ts:export type RouterInput = {
+client/src/lumi-conversation/runtime/conversationRouter.ts:export type RouterDecision = {
+client/src/lumi-conversation/runtime/conversationRouter.ts:export function runConversationRouter(input: RouterInput): RouterDecision {
+client/src/lumi-conversation/runtime/conversationRouter.ts:export function submitUserTurn(userText: string): RouterDecision {
+client/src/lumi-conversation/runtime/conversationRouter.ts:    return runConversationRouter({
+client/src/lumi-conversation/runtime/conversationRouter.ts:  const decision = runConversationRouter({ userText: trimmed, state: stateAfterUser });
+client/src/lumi-conversation/components/LumiConversationPanel.tsx: * runConversationRouter(), and renders message bubbles + grounding /
+client/src/lumi-conversation/components/LumiConversationPanel.tsx: *   1. Router short-circuits on critical signals before bank lookup.
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:import { runConversationRouter } from "../runtime/conversationRouter";
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:      const decision = runConversationRouter({
+client/src/lumi-conversation/tests/conversationSafety.test.ts: *   Conversation Router       5 tests
+client/src/lumi-conversation/tests/conversationSafety.test.ts:  runConversationRouter,
+client/src/lumi-conversation/tests/conversationSafety.test.ts:} from "../runtime/conversationRouter";
+client/src/lumi-conversation/tests/conversationSafety.test.ts:// ─── Suite 6: Conversation Router (5 tests) ─────────────────────────────────
+client/src/lumi-conversation/tests/conversationSafety.test.ts:    const d = runConversationRouter({ userText: "  ", state: baseState });
+client/src/lumi-conversation/tests/conversationSafety.test.ts:    const d = runConversationRouter({
+client/src/lumi-conversation/tests/conversationSafety.test.ts:    const d = runConversationRouter({
+client/src/lumi-conversation/tests/conversationSafety.test.ts:    const d = runConversationRouter({
+client/src/lumi-conversation/tests/conversationSafety.test.ts:    const capped = runConversationRouter({
+client/src/lumi-conversation/tests/conversationSafety.test.ts:    const pauseTime = runConversationRouter({
+client/src/lumi-conversation/tests/conversationSafety.test.ts:import { submitUserTurn } from "../runtime/conversationRouter";
+client/src/lumi-conversation/index.ts: *   import { LumiConversationPanel, runConversationRouter } from "@/lumi-conversation";
+client/src/lumi-conversation/index.ts:// Router — `submitUserTurn` is the SINGLE hardened public write path.
+client/src/lumi-conversation/index.ts:// `runConversationRouter` is exposed for stateless inspection / advanced uses
+client/src/lumi-conversation/index.ts:export { runConversationRouter, submitUserTurn } from "./runtime/conversationRouter";
+client/src/lumi-conversation/index.ts:export type { RouterInput, RouterDecision } from "./runtime/conversationRouter";
+client/src/lumi-memory/state/allowedMemoryFields.ts: * memory-write violation and is rejected by `memoryRouter.writeMemory()`.
+client/src/lumi-memory/state/memoryStore.ts: * directly — use `memoryRouter.{writeMemory, resetMemory, setConsent}`
+client/src/lumi-memory/runtime/memoryRouter.ts: * results in a logged audit entry and `RouterDecision.kind: "rejected"`:
+client/src/lumi-memory/runtime/memoryRouter.ts:export type RouterDecision =
+client/src/lumi-memory/runtime/memoryRouter.ts:): RouterDecision {
+client/src/lumi-memory/components/MemoryResetButton.tsx:import { resetMemory } from "../runtime/memoryRouter";
+client/src/lumi-memory/components/MemorySettingsPanel.tsx: * `memoryRouter.writeMemory()` so the audit pipeline + forbidden scan
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:} from "../runtime/memoryRouter";
+client/src/lumi-memory/tests/memorySafety.test.ts: *   Router (writeMemory)       3
+client/src/lumi-memory/tests/memorySafety.test.ts:} from "../runtime/memoryRouter";
+client/src/lumi-memory/tests/memorySafety.test.ts:describe("Router (writeMemory)", () => {
+client/src/lumi-memory/index.ts:// Router — single hardened public write path.
+client/src/lumi-memory/index.ts:} from "./runtime/memoryRouter";
+client/src/lumi-memory/index.ts:export type { RouterDecision } from "./runtime/memoryRouter";
+client/src/lumi-consistency/governance/crossPlatformEnforcementRules.ts:  readonly crisisRouteAvailable?: boolean;
+client/src/lumi-consistency/governance/crossPlatformEnforcementRules.ts:    check: (r) => r.crisisRouteAvailable === true,
+client/src/lumi-consistency/runtime/identityVerificationSystem.ts:  readonly crisisRouteAvailable?: boolean;
+client/src/lumi-integration/tests/crossModule.test.ts:      crisisRouteAvailable: true,
+client/src/lumi-integration/tests/crossModule.test.ts:      crisisRouteAvailable: true,
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:/** --- Route protection spec --- */
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:export interface RouteProtection {
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:/** --- Route protection map --- */
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:export const PROTECTED_ROUTES: RouteProtection[] = [
+client/src/lumi-rbac/middleware/rbacMiddleware.ts:export function getRoutePermission(path: string, method: string): RouteProtection | undefined {
+client/src/lumi-rbac/index.ts:  type RouteProtection,
+client/src/lumi-rbac/index.ts:  getRoutePermission,
+client/src/governance/interactions/AtlasRoutingGovernance.ts:export interface AtlasRouteDefinition {
+client/src/governance/interactions/AtlasRoutingGovernance.ts:export const ATLAS_ROUTE_GOVERNANCE: AtlasRouteDefinition[] = [
+client/src/governance/interactions/AtlasRoutingGovernance.ts:export function isRegulatedAtlasRoute(
+client/src/governance/interactions/MonetizationBoundaryValidator.ts:import { isRegulatedAtlasRoute } from "./AtlasRoutingGovernance";
+client/src/governance/interactions/MonetizationBoundaryValidator.ts:			isRegulatedAtlasRoute(input.route);
+client/src/_quarantine/orphans/SacredNavBar.jsx:import { Link } from 'wouter';
+client/src/App.jsx:import { Switch, Route, Redirect } from "wouter";
+client/src/App.jsx:import RouteGuard from "./components/RouteGuard.jsx";
+client/src/App.jsx:import { routeKeyFromRoute } from "./utils/routeKey.js";
+client/src/App.jsx:function ConfigRoute({ route }) {
+client/src/App.jsx:  const routeKey = routeKeyFromRoute(route);
+client/src/App.jsx:function ProtectedRoute({ children }) {
+client/src/App.jsx:  return <RouteGuard>{children}</RouteGuard>;
+client/src/App.jsx:function WellnessRoute({ children }) {
+client/src/App.jsx:      <RouteGuard>{children}</RouteGuard>
+client/src/App.jsx:            <SafeBoundary label="Route">
+client/src/App.jsx:              <Route path="/">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/landing">{() => <ConfigRoute route="/landing" />}</Route>
+client/src/App.jsx:              <Route path="/original-home">{() => <ConfigRoute route="/original-home" />}</Route>
+client/src/App.jsx:              <Route path="/healing" component={HealingPage} />
+client/src/App.jsx:              <Route path="/about" component={AboutPage} />
+client/src/App.jsx:              <Route path="/about/approach" component={AboutApproachPage} />
+client/src/App.jsx:              <Route path="/values" component={ValuesPage} />
+client/src/App.jsx:              <Route path="/features" component={FeaturesPage} />
+client/src/App.jsx:              <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
+client/src/App.jsx:              <Route path="/canva-landing" component={CanvaLanding} />
+client/src/App.jsx:              <Route path="/start" component={Start} />
+client/src/App.jsx:              <Route path="/pricing" component={PricingReal} />
+client/src/App.jsx:              <Route path="/coming-soon">{() => <ComingSoon />}</Route>
+client/src/App.jsx:              <Route path="/challenge" component={Challenge} />
+client/src/App.jsx:              <Route path="/challenge/day/:dayNum" component={ChallengeDay} />
+client/src/App.jsx:              <Route path="/login" component={Login} />
+client/src/App.jsx:              <Route path="/login/callback" component={LoginCallback} />
+client/src/App.jsx:              <Route path="/register" component={Register} />
+client/src/App.jsx:              <Route path="/signup" component={Register} />
+client/src/App.jsx:              <Route path="/signin" component={Login} />
+client/src/App.jsx:              <Route path="/admin-login" component={AdminLogin} />
+client/src/App.jsx:              <Route path="/sign-in" component={Login} />
+client/src/App.jsx:              <Route path="/forgot-password" component={ForgotPassword} />
+client/src/App.jsx:              <Route path="/reset-password" component={ResetPassword} />
+client/src/App.jsx:              <Route path="/create-account" component={Register} />
+client/src/App.jsx:              {/* Protected Core Routes - Special Components */}
+client/src/App.jsx:              <Route path="/dashboard">
+client/src/App.jsx:                <ProtectedRoute><DashboardOverview /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/today">
+client/src/App.jsx:                <ProtectedRoute><DailyFlow /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/mood">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/state">
+client/src/App.jsx:                <WellnessRoute><StatePage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/journal">
+client/src/App.jsx:                <WellnessRoute><JournalPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/chat">
+client/src/App.jsx:                <WellnessRoute><AIChatPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/ai-chat">
+client/src/App.jsx:                <WellnessRoute><AIChatPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/therapy">
+client/src/App.jsx:                <WellnessRoute><AIChatPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/therapy-tools"><ToolsPage /></Route>
+client/src/App.jsx:              <Route path="/coach">
+client/src/App.jsx:                <WellnessRoute><AIChatPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/mentor">
+client/src/App.jsx:                <WellnessRoute><AIChatPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/sessions">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/analytics">
+client/src/App.jsx:                <ProtectedRoute><Analytics /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/crisis">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/settings">
+client/src/App.jsx:                <ProtectedRoute><Settings /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/reminders">
+client/src/App.jsx:                <ProtectedRoute><ReminderScheduler /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/voice-settings">
+client/src/App.jsx:                <ProtectedRoute><VoiceSettings /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/library/saved">
+client/src/App.jsx:                <ProtectedRoute><SavedLibrary /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/dashboard/progress">
+client/src/App.jsx:                <ProtectedRoute><GentleProgressDashboard /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/gratitude">
+client/src/App.jsx:                <WellnessRoute><GratitudePractice /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/gratitude/hub">
+client/src/App.jsx:                <WellnessRoute><GratitudeHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/reflect">
+client/src/App.jsx:                <WellnessRoute><DailyReflection /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/daily-reflection">
+client/src/App.jsx:                <WellnessRoute><DailyReflection /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/reflections">
+client/src/App.jsx:                <ProtectedRoute><ReflectionHistory /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/wellness">
+client/src/App.jsx:                <WellnessRoute><Wellness /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/discernment">
+client/src/App.jsx:                <ProtectedRoute><DiscernmentDashboard /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/protocols">
+client/src/App.jsx:                <ProtectedRoute><ProtocolBrowser /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/protocols/session/:id">
+client/src/App.jsx:                <ProtectedRoute><ProtocolSession /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/biometrics">
+client/src/App.jsx:                <ProtectedRoute><BiometricDashboard /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/agents">
+client/src/App.jsx:                <ProtectedRoute><AgentInteraction /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/presence"><Presence /></Route>
+client/src/App.jsx:              <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
+client/src/App.jsx:              <Route path="/lumi-design-system"><DesignSystemV2 /></Route>
+client/src/App.jsx:              <Route path="/tools/gad7"><GAD7Assessment /></Route>
+client/src/App.jsx:              <Route path="/tools/phq9"><PHQ9Assessment /></Route>
+client/src/App.jsx:              <Route path="/tools/distortion-checker"><CognitiveDistortionChecker /></Route>
+client/src/App.jsx:              <Route path="/tools/breath-pacer"><BreathPacer /></Route>
+client/src/App.jsx:              <Route path="/tools/boundary-builder"><BoundaryBuilderTool /></Route>
+client/src/App.jsx:              <Route path="/tools/manipulation-detector"><ManipulationDetector /></Route>
+client/src/App.jsx:              <Route path="/tools/sleep-quality-calculator"><SleepQualityCalculator /></Route>
+client/src/App.jsx:              <Route path="/tools/nervous-system-check"><NervousSystemCheck /></Route>
+client/src/App.jsx:              <Route path="/tools/all"><ToolsIndex /></Route>
+client/src/App.jsx:              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
+client/src/App.jsx:              <Route path="/wellness-dashboard">
+client/src/App.jsx:                <WellnessRoute><WellnessDashboard /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/sleep">
+client/src/App.jsx:                <WellnessRoute><SleepHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/boundaries">
+client/src/App.jsx:                <WellnessRoute><BoundariesHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/self-worth">
+client/src/App.jsx:                <WellnessRoute><SelfWorthHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/resilience">
+client/src/App.jsx:                <WellnessRoute><ResilienceHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/anxiety">
+client/src/App.jsx:                <WellnessRoute><AnxietyHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/relationships">
+client/src/App.jsx:                <WellnessRoute><RelationshipsHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/grief">
+client/src/App.jsx:                <WellnessRoute><GriefHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/self-compassion">
+client/src/App.jsx:                <WellnessRoute><SelfCompassionHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/mindfulness">
+client/src/App.jsx:                <WellnessRoute><MindfulnessHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/stress">
+client/src/App.jsx:                <WellnessRoute><StressHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/trauma-healing">
+client/src/App.jsx:                <WellnessRoute><TraumaHealingHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/emotional-intelligence">
+client/src/App.jsx:                <WellnessRoute><EmotionalIntelligenceHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/personal-growth">
+client/src/App.jsx:                <WellnessRoute><PersonalGrowthHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/inner-peace">
+client/src/App.jsx:                <WellnessRoute><InnerPeaceHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs">
+client/src/App.jsx:                <WellnessRoute><HubsIndexPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/explore/topics">
+client/src/App.jsx:                <WellnessRoute><HubsIndexPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/explore/pathways">
+client/src/App.jsx:                <ProtectedRoute><PathwaysHome /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/explore/search">
+client/src/App.jsx:                <WellnessRoute><HubsIndexPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/healing-journey">
+client/src/App.jsx:                <WellnessRoute><HealingJourneyHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/self-care">
+client/src/App.jsx:                <WellnessRoute><SelfCareHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/coping-skills">
+client/src/App.jsx:                <WellnessRoute><CopingSkillsHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/inner-work">
+client/src/App.jsx:                <WellnessRoute><InnerWorkHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/breathwork">
+client/src/App.jsx:                <WellnessRoute><BreathworkHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/journaling">
+client/src/App.jsx:                <WellnessRoute><JournalingHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/body-mind">
+client/src/App.jsx:                <WellnessRoute><BodyMindHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/daily-practice">
+client/src/App.jsx:                <WellnessRoute><DailyPracticeHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/gratitude">
+client/src/App.jsx:                <WellnessRoute><GratitudeHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/thoughtwork">
+client/src/App.jsx:                <WellnessRoute><ThoughtworkHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/life-purpose">
+client/src/App.jsx:                <WellnessRoute><LifePurposeHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/communication">
+client/src/App.jsx:                <WellnessRoute><CommunicationHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/forgiveness">
+client/src/App.jsx:                <WellnessRoute><ForgivenessHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/energy-management">
+client/src/App.jsx:                <WellnessRoute><EnergyManagementHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/habits">
+client/src/App.jsx:                <WellnessRoute><HabitsHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/confidence">
+client/src/App.jsx:                <WellnessRoute><ConfidenceHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/focus">
+client/src/App.jsx:                <WellnessRoute><FocusHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/spirituality">
+client/src/App.jsx:                <WellnessRoute><SpiritualityHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/motivation">
+client/src/App.jsx:                <WellnessRoute><MotivationHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/acceptance">
+client/src/App.jsx:                <WellnessRoute><AcceptanceHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/creativity">
+client/src/App.jsx:                <WellnessRoute><CreativityHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/self-awareness">
+client/src/App.jsx:                <WellnessRoute><SelfAwarenessHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/nervous-system">
+client/src/App.jsx:                <WellnessRoute><NervousSystemHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/presence">
+client/src/App.jsx:                <WellnessRoute><PresenceHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/wisdom">
+client/src/App.jsx:                <WellnessRoute><WisdomHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/self-discovery">
+client/src/App.jsx:                <WellnessRoute><SelfDiscoveryHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/emotions">
+client/src/App.jsx:                <WellnessRoute><EmotionalIntelligenceHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/hubs/self-love">
+client/src/App.jsx:                <WellnessRoute><SelfCompassionHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/twelve-practices">
+client/src/App.jsx:                <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/paths/12-practices">
+client/src/App.jsx:                <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/premium">
+client/src/App.jsx:                <ProtectedRoute><Premium /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/upgrade">
+client/src/App.jsx:                <ProtectedRoute><Upgrade /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/what-you-get">
+client/src/App.jsx:                <ProtectedRoute><SubscriberBenefitsPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/onboarding">
+client/src/App.jsx:                <ProtectedRoute><Onboarding /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/welcome"><OnboardingFlow /></Route>
+client/src/App.jsx:              <Route path="/avatar-lab"><AvatarLab /></Route>
+client/src/App.jsx:              <Route path="/rig-lab"><RigLab /></Route>
+client/src/App.jsx:              <Route path="/motion-lab"><MotionLab /></Route>
+client/src/App.jsx:              <Route path="/profile">
+client/src/App.jsx:                <ProtectedRoute><Profile /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/billing">{() => <ConfigRoute route="/billing" />}</Route>
+client/src/App.jsx:              <Route path="/overview">{() => <ConfigRoute route="/overview" />}</Route>
+client/src/App.jsx:              <Route path="/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/mindfulness" component={MindfulnessCanonical} />
+client/src/App.jsx:              <Route path="/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+client/src/App.jsx:              <Route path="/sleep-guide">{() => <ConfigRoute route="/sleep-guide" />}</Route>
+client/src/App.jsx:              <Route path="/stress-response">{() => <ConfigRoute route="/stress-response" />}</Route>
+client/src/App.jsx:              <Route path="/emotional-intelligence">{() => <ConfigRoute route="/emotional-intelligence" />}</Route>
+client/src/App.jsx:              {/* Tools Route Aliases */}
+client/src/App.jsx:              <Route path="/tools/journal"><WellnessRoute><JournalPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/tools/mood"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/tools/breathing"><BreathingTool /></Route>
+client/src/App.jsx:              <Route path="/tools/affirmations"><AffirmationWall /></Route>
+client/src/App.jsx:              <Route path="/tools/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/tools/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/tools/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/daily"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/practice"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/exercises"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/activities"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/routines"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/habits"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/growth"><WellnessRoute><GrowthCanonical /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/peacescape"><WellnessRoute><PeacescapePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/recovery"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/reflection"><WellnessRoute><ReflectionPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/prompts"><WellnessRoute><JournalPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/anxiety" component={AnxietyCanonical} />
+client/src/App.jsx:              <Route path="/depression"><WellnessRoute><DepressionCanonical /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/calm">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/stress">{() => <ConfigRoute route="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/relax">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+client/src/App.jsx:              <Route path="/emotions"><WellnessRoute><Suspense fallback={<div>Loading...</div>}><EmotionalIntelligenceHubPage /></Suspense></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/feelings"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/trauma"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/love"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/hope"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/mindset"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/sleep">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+client/src/App.jsx:              <Route path="/rest">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+client/src/App.jsx:              <Route path="/focus">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/clarity">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/strength"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/courage"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/acceptance"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/forgiveness"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/motivation"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/purpose"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/balance">{() => <ConfigRoute route="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/energy">{() => <ConfigRoute route="/body-wellness" />}</Route>
+client/src/App.jsx:              <Route path="/happiness"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/joy"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/peace-of-mind">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/inner-peace">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/body">{() => <ConfigRoute route="/body-wellness" />}</Route>
+client/src/App.jsx:              <Route path="/soul"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/mental-health"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/self-help">{() => <ConfigRoute route="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/self-improvement"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/personal-growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/emotional"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/coping">{() => <ConfigRoute route="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/nervous-system">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/triggers"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/worry">{() => <ConfigRoute route="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/overthinking">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/relaxation">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/serenity">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/peace">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/tranquility">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/ptsd"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/grief"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/loss"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/sadness"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/anger">{() => <ConfigRoute route="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/fear">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/shame"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/guilt"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/loneliness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/isolation"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/self-love"><WellnessRoute><SelfLoveCanonical /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/wellness-tools">{() => <PracticeLibrary />}</Route>
+client/src/App.jsx:              <Route path="/counseling">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/wellbeing" component={WellbeingPage} />
+client/src/App.jsx:              <Route path="/well-being">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/mental-wellness" component={MentalWellnessPage} />
+client/src/App.jsx:              <Route path="/emotional-health"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/trust" component={TrustCenterPage} />
+client/src/App.jsx:              <Route path="/ai-transparency" component={AITransparencyPage} />
+client/src/App.jsx:              <Route path="/compassion"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/patience"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/kindness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/awareness"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/connection"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/relationships"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/intimacy"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/attachment"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/addiction"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/self-esteem"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/confidence"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/boundaries"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/empowerment"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/mental">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/spiritual">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/spiritual-wellness">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/yoga">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/exercise">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/movement">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/fitness">{() => <ConfigRoute route="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/nutrition">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/guide">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/science">{() => <ConfigRoute route="/research" />}</Route>
+client/src/App.jsx:              <Route path="/studies">{() => <ConfigRoute route="/research" />}</Route>
+client/src/App.jsx:              <Route path="/evidence">{() => <ConfigRoute route="/research" />}</Route>
+client/src/App.jsx:              <Route path="/materials">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/videos">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/podcasts">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/ebooks">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/webinars">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/events">{() => <ConfigRoute route="/community" />}</Route>
+client/src/App.jsx:              <Route path="/calendar">{() => <ConfigRoute route="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/feedback">{() => <ConfigRoute route="/contact" />}</Route>
+client/src/App.jsx:              <Route path="/reviews">{() => <ConfigRoute route="/testimonials" />}</Route>
+client/src/App.jsx:              <Route path="/partners">{() => <ConfigRoute route="/about" />}</Route>
+client/src/App.jsx:              <Route path="/sponsorship">{() => <ConfigRoute route="/about" />}</Route>
+client/src/App.jsx:              <Route path="/careers">{() => <ConfigRoute route="/about" />}</Route>
+client/src/App.jsx:              <Route path="/team">{() => <ConfigRoute route="/about" />}</Route>
+client/src/App.jsx:              <Route path="/mobile">{() => <ConfigRoute route="/features" />}</Route>
+client/src/App.jsx:              <Route path="/newsletter" component={lazy(() => import("./pages/Newsletter.jsx"))} />
+client/src/App.jsx:              <Route path="/app">{() => <ConfigRoute route="/features" />}</Route>
+client/src/App.jsx:              <Route path="/download">{() => <ConfigRoute route="/features" />}</Route>
+client/src/App.jsx:              <Route path="/store">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/shop">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/coaching">{() => <ConfigRoute route="/chat" />}</Route>
+client/src/App.jsx:              <Route path="/mentoring">{() => <ConfigRoute route="/chat" />}</Route>
+client/src/App.jsx:              <Route path="/retreats">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/services">{() => <ConfigRoute route="/features" />}</Route>
+client/src/App.jsx:              <Route path="/schedule">{() => <ConfigRoute route="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/booking">{() => <ConfigRoute route="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/webinar">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/ebook">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/podcast">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/membership">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/subscription">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/video">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/free">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/trial">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/demo">{() => <ConfigRoute route="/features" />}</Route>
+client/src/App.jsx:              <Route path="/group">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/groups">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/event">{() => <Redirect to="/events" />}</Route>
+client/src/App.jsx:              <Route path="/updates">{() => <Redirect to="/news" />}</Route>
+client/src/App.jsx:              <Route path="/partner">{() => <Redirect to="/partners" />}</Route>
+client/src/App.jsx:              <Route path="/affiliate">{() => <Redirect to="/partners" />}</Route>
+client/src/App.jsx:              <Route path="/affiliates">{() => <Redirect to="/partners" />}</Route>
+client/src/App.jsx:              <Route path="/career">{() => <Redirect to="/careers" />}</Route>
+client/src/App.jsx:              <Route path="/job">{() => <Redirect to="/careers" />}</Route>
+client/src/App.jsx:              <Route path="/jobs">{() => <Redirect to="/careers" />}</Route>
+client/src/App.jsx:              <Route path="/ios">{() => <ConfigRoute route="/features" />}</Route>
+client/src/App.jsx:              <Route path="/android">{() => <ConfigRoute route="/features" />}</Route>
+client/src/App.jsx:              <Route path="/book">{() => <ConfigRoute route="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/audio">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/music">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/sounds">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/service">{() => <Redirect to="/services" />}</Route>
+client/src/App.jsx:              <Route path="/retreat">{() => <Redirect to="/retreats" />}</Route>
+client/src/App.jsx:              <Route path="/plans">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/plan">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/resource">{() => <Redirect to="/resources" />}</Route>
+client/src/App.jsx:              <Route path="/tool">{() => <Redirect to="/tools" />}</Route>
+client/src/App.jsx:              <Route path="/course">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/account">{() => <Redirect to="/settings" />}</Route>
+client/src/App.jsx:              <Route path="/lesson">{() => <Redirect to="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/session">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/challenges">{() => <Redirect to="/challenge" />}</Route>
+client/src/App.jsx:              <Route path="/therapist">{() => <Redirect to="/therapy" />}</Route>
+client/src/App.jsx:              <Route path="/donate">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/article">{() => <Redirect to="/articles" />}</Route>
+client/src/App.jsx:              <Route path="/posts">{() => <Redirect to="/blog" />}</Route>
+client/src/App.jsx:              <Route path="/breathwork">{() => <Redirect to="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/meditate">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/affirmation">{() => <Redirect to="/affirmations" />}</Route>
+client/src/App.jsx:              <Route path="/timer">{() => <Redirect to="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/activity">{() => <Redirect to="/activities" />}</Route>
+client/src/App.jsx:              <Route path="/prompt">{() => <Redirect to="/prompts" />}</Route>
+client/src/App.jsx:              <Route path="/story">{() => <Redirect to="/journal" />}</Route>
+client/src/App.jsx:              <Route path="/stories">{() => <Redirect to="/journal" />}</Route>
+client/src/App.jsx:              <Route path="/track">{() => <Redirect to="/mood" />}</Route>
+client/src/App.jsx:              <Route path="/tracker">{() => <Redirect to="/mood" />}</Route>
+client/src/App.jsx:              <Route path="/tracking">{() => <Redirect to="/mood" />}</Route>
+client/src/App.jsx:              <Route path="/log">{() => <Redirect to="/journal" />}</Route>
+client/src/App.jsx:              <Route path="/logs">{() => <Redirect to="/journal" />}</Route>
+client/src/App.jsx:              <Route path="/tutorial">{() => <Redirect to="/guides" />}</Route>
+client/src/App.jsx:              <Route path="/class">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/classes">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/selfcare">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/selflove">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/innerchild">{() => <Redirect to="/inner-child" />}</Route>
+client/src/App.jsx:              <Route path="/quotes">{() => <Redirect to="/affirmations" />}</Route>
+client/src/App.jsx:              <Route path="/heal">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/mentalhealth">{() => <Redirect to="/mental-health" />}</Route>
+client/src/App.jsx:              <Route path="/ground">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/routine">{() => <Redirect to="/routines" />}</Route>
+client/src/App.jsx:              <Route path="/explore">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:              <Route path="/discover">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:              <Route path="/toolkit">{() => <Redirect to="/wellness-tools" />}</Route>
+client/src/App.jsx:              <Route path="/breathe">{() => <Redirect to="/breathing" />}</Route>
+client/src/App.jsx:              <Route path="/technique">{() => <Redirect to="/practices" />}</Route>
+client/src/App.jsx:              <Route path="/techniques">{() => <Redirect to="/practices" />}</Route>
+client/src/App.jsx:              <Route path="/selfworth">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/emotion">{() => <Redirect to="/emotions" />}</Route>
+client/src/App.jsx:              <Route path="/topics">{() => <Redirect to="/talk-topics" />}</Route>
+client/src/App.jsx:              <Route path="/talk">{() => <Redirect to="/talk-topics" />}</Route>
+client/src/App.jsx:              <Route path="/conversations">{() => <Redirect to="/talk-topics" />}</Route>
+client/src/App.jsx:              <Route path="/discussion">{() => <Redirect to="/talk-topics" />}</Route>
+client/src/App.jsx:              <Route path="/find">{() => <Redirect to="/explore/search" />}</Route>
+client/src/App.jsx:              <Route path="/search">{() => <Redirect to="/explore/search" />}</Route>
+client/src/App.jsx:              <Route path="/guidance">{() => <Redirect to="/support" />}</Route>
+client/src/App.jsx:              <Route path="/healing-tools">{() => <Redirect to="/practices" />}</Route>
+client/src/App.jsx:              <Route path="/my-journey">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/media">{() => <Redirect to="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/downloads">{() => <Redirect to="/resources" />}</Route>
+client/src/App.jsx:              <Route path="/user">{() => <Redirect to="/profile" />}</Route>
+client/src/App.jsx:              <Route path="/apps">{() => <Redirect to="/tools" />}</Route>
+client/src/App.jsx:              <Route path="/appointment">{() => <Redirect to="/booking" />}</Route>
+client/src/App.jsx:              <Route path="/test">{() => <Redirect to="/demo" />}</Route>
+client/src/App.jsx:              <Route path="/begin">{() => <Redirect to="/onboarding" />}</Route>
+client/src/App.jsx:              <Route path="/join">{() => <Redirect to="/register" />}</Route>
+client/src/App.jsx:              <Route path="/worksheets">{() => <Redirect to="/practices" />}</Route>
+client/src/App.jsx:              <Route path="/meditations">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/appointments">{() => <Redirect to="/booking" />}</Route>
+client/src/App.jsx:              <Route path="/members">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/member">{() => <Redirect to="/profile" />}</Route>
+client/src/App.jsx:              <Route path="/log-in">{() => <Redirect to="/login" />}</Route>
+client/src/App.jsx:              <Route path="/contact-us">{() => <Redirect to="/contact" />}</Route>
+client/src/App.jsx:              <Route path="/about-us">{() => <Redirect to="/about" />}</Route>
+client/src/App.jsx:              <Route path="/faqs">{() => <Redirect to="/faq" />}</Route>
+client/src/App.jsx:              <Route path="/getting-started">{() => <Redirect to="/onboarding" />}</Route>
+client/src/App.jsx:              <Route path="/how-it-works">{() => <Redirect to="/features" />}</Route>
+client/src/App.jsx:              <Route path="/sitemap">{() => <Redirect to="/explore" />}</Route>
+client/src/App.jsx:              <Route path="/my-profile">{() => <Redirect to="/profile" />}</Route>
+client/src/App.jsx:              <Route path="/my-account">{() => <Redirect to="/profile" />}</Route>
+client/src/App.jsx:              <Route path="/my-settings">{() => <Redirect to="/settings" />}</Route>
+client/src/App.jsx:              <Route path="/preferences">{() => <Redirect to="/settings" />}</Route>
+client/src/App.jsx:              <Route path="/logout">{() => <Redirect to="/login" />}</Route>
+client/src/App.jsx:              <Route path="/signout">{() => <Redirect to="/login" />}</Route>
+client/src/App.jsx:              <Route path="/sign-out">{() => <Redirect to="/login" />}</Route>
+client/src/App.jsx:              <Route path="/log-out">{() => <Redirect to="/login" />}</Route>
+client/src/App.jsx:              <Route path="/products">{() => <Redirect to="/features" />}</Route>
+client/src/App.jsx:              <Route path="/index">{() => <Redirect to="/" />}</Route>
+client/src/App.jsx:              <Route path="/main">{() => <Redirect to="/" />}</Route>
+client/src/App.jsx:              <Route path="/intro">{() => <Redirect to="/onboarding" />}</Route>
+client/src/App.jsx:              <Route path="/checkin"><CheckIn /></Route>
+client/src/App.jsx:              <Route path="/check-in">{() => <Redirect to="/checkin" />}</Route>
+client/src/App.jsx:              <Route path="/workbooks">{() => <Redirect to="/practices" />}</Route>
+client/src/App.jsx:              <Route path="/templates">{() => <Redirect to="/practices" />}</Route>
+client/src/App.jsx:              <Route path="/notifications">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/inbox">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/messages">{() => <Redirect to="/chat" />}</Route>
+client/src/App.jsx:              <Route path="/alerts">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/cart">{() => <Redirect to="/pricing" />}</Route>
+client/src/App.jsx:              <Route path="/treatment">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/discussions">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/reports">{() => <Redirect to="/progress" />}</Route>
+client/src/App.jsx:              <Route path="/history">{() => <Redirect to="/journal" />}</Route>
+client/src/App.jsx:              <Route path="/favorites">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/bookmarks">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/saved">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/collections">{() => <Redirect to="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/feed">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/playlist">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/playlists">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/testimonial">{() => <Redirect to="/reviews" />}</Route>
+client/src/App.jsx:              <Route path="/review">{() => <Redirect to="/reviews" />}</Route>
+client/src/App.jsx:              <Route path="/creators">{() => <Redirect to="/about" />}</Route>
+client/src/App.jsx:              <Route path="/experts">{() => <Redirect to="/about" />}</Route>
+client/src/App.jsx:              <Route path="/tasks">{() => <Redirect to="/dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/notes">{() => <Redirect to="/journal" />}</Route>
+client/src/App.jsx:              <Route path="/sponsor">{() => <Redirect to="/about" />}</Route>
+client/src/App.jsx:              <Route path="/archive">{() => <Redirect to="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/episode">{() => <Redirect to="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/episodes">{() => <Redirect to="/learn" />}</Route>
+client/src/App.jsx:              <Route path="/series">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/programs">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/meetups">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/live">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/seminar">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/seminars">{() => <Redirect to="/courses" />}</Route>
+client/src/App.jsx:              <Route path="/inspire">{() => <Redirect to="/affirmation" />}</Route>
+client/src/App.jsx:              <Route path="/inspiration">{() => <Redirect to="/affirmation" />}</Route>
+client/src/App.jsx:              <Route path="/motivated">{() => <Redirect to="/motivation" />}</Route>
+client/src/App.jsx:              <Route path="/mantras">{() => <Redirect to="/affirmation" />}</Route>
+client/src/App.jsx:              <Route path="/mantra">{() => <Redirect to="/affirmation" />}</Route>
+client/src/App.jsx:              <Route path="/sound">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/transform">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/improve">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/change">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/spirit">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/sad">{() => <Redirect to="/sadness" />}</Route>
+client/src/App.jsx:              <Route path="/happy">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/lonely">{() => <Redirect to="/loneliness" />}</Route>
+client/src/App.jsx:              <Route path="/stressed">{() => <Redirect to="/stress" />}</Route>
+client/src/App.jsx:              <Route path="/tired">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/overwhelmed">{() => <Redirect to="/stress" />}</Route>
+client/src/App.jsx:              <Route path="/anxious">{() => <Redirect to="/anxiety" />}</Route>
+client/src/App.jsx:              <Route path="/nervous">{() => <Redirect to="/anxiety" />}</Route>
+client/src/App.jsx:              <Route path="/upset">{() => <Redirect to="/anger" />}</Route>
+client/src/App.jsx:              <Route path="/hurt">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/frustrated">{() => <Redirect to="/anger" />}</Route>
+client/src/App.jsx:              <Route path="/depressed">{() => <Redirect to="/depression" />}</Route>
+client/src/App.jsx:              <Route path="/wellness-journey">{() => <Redirect to="/healing-journey" />}</Route>
+client/src/App.jsx:              <Route path="/my-healing">{() => <Redirect to="/healing-journey" />}</Route>
+client/src/App.jsx:              <Route path="/assistance">{() => <Redirect to="/support" />}</Route>
+client/src/App.jsx:              <Route path="/toolbox">{() => <Redirect to="/tools" />}</Route>
+client/src/App.jsx:              <Route path="/calm-down">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/grounded">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/grateful">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/peaceful">{() => <Redirect to="/peace" />}</Route>
+client/src/App.jsx:              <Route path="/insomnia">{() => <Redirect to="/sleep" />}</Route>
+client/src/App.jsx:              <Route path="/safe">{() => <Redirect to="/safety" />}</Route>
+client/src/App.jsx:              <Route path="/secure">{() => <Redirect to="/safety" />}</Route>
+client/src/App.jsx:              <Route path="/hopeful">{() => <Redirect to="/hope" />}</Route>
+client/src/App.jsx:              <Route path="/strong">{() => <Redirect to="/strength" />}</Route>
+client/src/App.jsx:              <Route path="/present">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/moment">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/now">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/connect">{() => <Redirect to="/connection" />}</Route>
+client/src/App.jsx:              <Route path="/belong">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/belonging">{() => <Redirect to="/community" />}</Route>
+client/src/App.jsx:              <Route path="/forgive">{() => <Redirect to="/forgiveness" />}</Route>
+client/src/App.jsx:              <Route path="/forgiving">{() => <Redirect to="/forgiveness" />}</Route>
+client/src/App.jsx:              <Route path="/accept">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/accepting">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/loving">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/kind">{() => <Redirect to="/kindness" />}</Route>
+client/src/App.jsx:              <Route path="/tender">{() => <Redirect to="/compassion" />}</Route>
+client/src/App.jsx:              <Route path="/gentle">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/soft">{() => <Redirect to="/compassion" />}</Route>
+client/src/App.jsx:              <Route path="/warm">{() => <Redirect to="/love" />}</Route>
+client/src/App.jsx:              <Route path="/caring">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/understanding">{() => <Redirect to="/compassion" />}</Route>
+client/src/App.jsx:              <Route path="/supportive">{() => <Redirect to="/support" />}</Route>
+client/src/App.jsx:              <Route path="/fulfilled">{() => <Redirect to="/purpose" />}</Route>
+client/src/App.jsx:              <Route path="/uplifting">{() => <Redirect to="/hope" />}</Route>
+client/src/App.jsx:              <Route path="/fearless">{() => <Redirect to="/courage" />}</Route>
+client/src/App.jsx:              <Route path="/still">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/vitality">{() => <Redirect to="/energy" />}</Route>
+client/src/App.jsx:              <Route path="/blossoming">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/integrated">{() => <Redirect to="/balance" />}</Route>
+client/src/App.jsx:              <Route path="/unified">{() => <Redirect to="/balance" />}</Route>
+client/src/App.jsx:              <Route path="/harmonize">{() => <Redirect to="/balance" />}</Route>
+client/src/App.jsx:              <Route path="/essence">{() => <Redirect to="/purpose" />}</Route>
+client/src/App.jsx:              <Route path="/inner">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/core">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/depths">{() => <Redirect to="/reflection" />}</Route>
+client/src/App.jsx:              <Route path="/within">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/emerge">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/unfold">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/rise">{() => <Redirect to="/resilience" />}</Route>
+client/src/App.jsx:              <Route path="/expand">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/deepen">{() => <Redirect to="/reflection" />}</Route>
+client/src/App.jsx:              <Route path="/strengthen">{() => <Redirect to="/resilience" />}</Route>
+client/src/App.jsx:              <Route path="/nourish">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/sustain">{() => <Redirect to="/resilience" />}</Route>
+client/src/App.jsx:              <Route path="/cultivate">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/embody">{() => <Redirect to="/presence" />}</Route>
+client/src/App.jsx:              <Route path="/embrace">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/embark">{() => <Redirect to="/onboarding" />}</Route>
+client/src/App.jsx:              <Route path="/honor">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/cherish">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/treasure">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/sacred">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/devotion">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/liberation">{() => <Redirect to="/freedom" />}</Route>
+client/src/App.jsx:              <Route path="/renewal">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/rebirth">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/restore">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/reclaim">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/rediscover">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/reawaken">{() => <Redirect to="/awareness" />}</Route>
+client/src/App.jsx:              <Route path="/reconnect">{() => <Redirect to="/connection" />}</Route>
+client/src/App.jsx:              <Route path="/rebuild">{() => <Redirect to="/resilience" />}</Route>
+client/src/App.jsx:              <Route path="/revive">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/rebalance">{() => <Redirect to="/balance" />}</Route>
+client/src/App.jsx:              <Route path="/reinvent">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/prosper">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/excel">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/blossom">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/ascend">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/soar">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/shine">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/glow">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/radiate">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/illuminate">{() => <Redirect to="/awareness" />}</Route>
+client/src/App.jsx:              <Route path="/uplift">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/encourage">{() => <Redirect to="/support" />}</Route>
+client/src/App.jsx:              <Route path="/motivate">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/appreciate">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/celebrate">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/affirm">{() => <Redirect to="/affirmations" />}</Route>
+client/src/App.jsx:              <Route path="/validate">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/renew">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/refresh">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/recharge">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/recover">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/center">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/anchor">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/feel">{() => <Redirect to="/emotions" />}</Route>
+client/src/App.jsx:              <Route path="/listen">{() => <Redirect to="/awareness" />}</Route>
+client/src/App.jsx:              <Route path="/witness">{() => <Redirect to="/awareness" />}</Route>
+client/src/App.jsx:              <Route path="/acknowledge">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/let-go">{() => <Redirect to="/release" />}</Route>
+client/src/App.jsx:              <Route path="/protect">{() => <Redirect to="/boundaries" />}</Route>
+client/src/App.jsx:              <Route path="/shield">{() => <Redirect to="/boundaries" />}</Route>
+client/src/App.jsx:              <Route path="/patient">{() => <Redirect to="/patience" />}</Route>
+client/src/App.jsx:              <Route path="/thankful">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/thanks">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/worth">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/worthy">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/valued">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/brave">{() => <Redirect to="/courage" />}</Route>
+client/src/App.jsx:              <Route path="/courageous">{() => <Redirect to="/courage" />}</Route>
+client/src/App.jsx:              <Route path="/empowered">{() => <Redirect to="/empowerment" />}</Route>
+client/src/App.jsx:              <Route path="/empower">{() => <Redirect to="/empowerment" />}</Route>
+client/src/App.jsx:              <Route path="/authentic">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/authenticity">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/genuine">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/mindful">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/aware">{() => <Redirect to="/awareness" />}</Route>
+client/src/App.jsx:              <Route path="/centered">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/balanced">{() => <Redirect to="/balance" />}</Route>
+client/src/App.jsx:              <Route path="/nurture">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/nurtured">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/nurturing">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/relaxed">{() => <Redirect to="/relax" />}</Route>
+client/src/App.jsx:              <Route path="/calming">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/soothing">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/soothe">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/tranquil">{() => <Redirect to="/peace" />}</Route>
+client/src/App.jsx:              <Route path="/serene">{() => <Redirect to="/peace" />}</Route>
+client/src/App.jsx:              <Route path="/inspired">{() => <Redirect to="/inspire" />}</Route>
+client/src/App.jsx:              <Route path="/inspiring">{() => <Redirect to="/inspire" />}</Route>
+client/src/App.jsx:              <Route path="/motivating">{() => <Redirect to="/motivation" />}</Route>
+client/src/App.jsx:              <Route path="/resilient">{() => <Redirect to="/resilience" />}</Route>
+client/src/App.jsx:              <Route path="/confident">{() => <Redirect to="/confidence" />}</Route>
+client/src/App.jsx:              <Route path="/supported">{() => <Redirect to="/support" />}</Route>
+client/src/App.jsx:              <Route path="/cherished">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/treasured">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/blessed">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/whole">{() => <Redirect to="/wholeness" />}</Route>
+client/src/App.jsx:              <Route path="/complete">{() => <Redirect to="/wholeness" />}</Route>
+client/src/App.jsx:              <Route path="/connected">{() => <Redirect to="/connection" />}</Route>
+client/src/App.jsx:              <Route path="/restored">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/renewed">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/refreshed">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/liberated">{() => <Redirect to="/empowerment" />}</Route>
+client/src/App.jsx:              <Route path="/freedom">{() => <Redirect to="/empowerment" />}</Route>
+client/src/App.jsx:              <Route path="/clear">{() => <Redirect to="/clarity" />}</Route>
+client/src/App.jsx:              <Route path="/focused">{() => <Redirect to="/focus" />}</Route>
+client/src/App.jsx:              <Route path="/stable">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/steady">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/protected">{() => <Redirect to="/safety" />}</Route>
+client/src/App.jsx:              <Route path="/embraced">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/accepted">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/understood">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/validated">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/seen">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/heard">{() => <Redirect to="/support" />}</Route>
+client/src/App.jsx:              <Route path="/held">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/uplifted">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/lifted">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/elevated">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/rising">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/blooming">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/flourishing">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/thriving">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/growing">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/transforming">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/awakening">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/alive">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/stillness">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/consciousness">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/inner-self">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/inner-work">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/shadow-work">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/higher-self">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/ego">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/subconscious">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/unconscious">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/psyche">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/heart">{() => <Redirect to="/self-love" />}</Route>
+client/src/App.jsx:              <Route path="/intuition">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/instinct">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/feeling">{() => <Redirect to="/emotions" />}</Route>
+client/src/App.jsx:              <Route path="/thoughts">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/beliefs">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/behavior">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/patterns">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/chakra">{() => <Redirect to="/energy" />}</Route>
+client/src/App.jsx:              <Route path="/aura">{() => <Redirect to="/energy" />}</Route>
+client/src/App.jsx:              <Route path="/vibration">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/frequency">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/manifest">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/prayer">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/faith">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/religion">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/karma">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/zen">{() => <Redirect to="/mindfulness" />}</Route>
+client/src/App.jsx:              <Route path="/buddhism">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/reiki">{() => <Redirect to="/energy" />}</Route>
+client/src/App.jsx:              <Route path="/tarot">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/astrology">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/numerology">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/crystals">{() => <Redirect to="/energy" />}</Route>
+client/src/App.jsx:              <Route path="/taichi">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/qigong">{() => <Redirect to="/energy" />}</Route>
+client/src/App.jsx:              <Route path="/acupuncture">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/massage">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/hypnosis">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/eft">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/tapping">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/emdr">{() => <Redirect to="/trauma" />}</Route>
+client/src/App.jsx:              <Route path="/cbt">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/dbt">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/somatic">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/act">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/ifs">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/parts-work">{() => <Redirect to="/self-discovery" />}</Route>
+client/src/App.jsx:              <Route path="/reparenting">{() => <Redirect to="/inner-child" />}</Route>
+client/src/App.jsx:              <Route path="/secure-attachment">{() => <Redirect to="/relationships" />}</Route>
+client/src/App.jsx:              <Route path="/polyvagal">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/window-of-tolerance">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/regulation">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/dysregulation">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/skills">{() => <Redirect to="/practices" />}</Route>
+client/src/App.jsx:              <Route path="/shadow">{() => <Redirect to="/shadow-work" />}</Route>
+client/src/App.jsx:              <Route path="/wholeness">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/harmony">{() => <Redirect to="/balance" />}</Route>
+client/src/App.jsx:              <Route path="/authentic-self">{() => <Redirect to="/authentic" />}</Route>
+client/src/App.jsx:              <Route path="/true-self">{() => <Redirect to="/authentic" />}</Route>
+client/src/App.jsx:              <Route path="/enough">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/i-am-enough">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/positive-thinking">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/positive">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/positivity">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/optimism">{() => <Redirect to="/hope" />}</Route>
+client/src/App.jsx:              <Route path="/bravery">{() => <Redirect to="/courage" />}</Route>
+client/src/App.jsx:              <Route path="/self-acceptance">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/evolve">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/thrive">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/flourish">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/bloom">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/awaken">{() => <Redirect to="/awakening" />}</Route>
+client/src/App.jsx:              <Route path="/enlighten">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/enlightenment">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/transcend">{() => <Redirect to="/spiritual" />}</Route>
+client/src/App.jsx:              <Route path="/compassionate">{() => <Redirect to="/compassion" />}</Route>
+client/src/App.jsx:              <Route path="/empathetic">{() => <Redirect to="/empathy" />}</Route>
+client/src/App.jsx:              <Route path="/calmness">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/quietude">{() => <Redirect to="/meditation" />}</Route>
+client/src/App.jsx:              <Route path="/centeredness">{() => <Redirect to="/grounding" />}</Route>
+client/src/App.jsx:              <Route path="/completeness">{() => <Redirect to="/wholeness" />}</Route>
+client/src/App.jsx:              <Route path="/loved">{() => <Redirect to="/love" />}</Route>
+client/src/App.jsx:              <Route path="/precious">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/harmonious">{() => <Redirect to="/harmony" />}</Route>
+client/src/App.jsx:              <Route path="/quiet">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/silence">{() => <Redirect to="/stillness" />}</Route>
+client/src/App.jsx:              <Route path="/solitude">{() => <Redirect to="/stillness" />}</Route>
+client/src/App.jsx:              <Route path="/healed">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/recovered">{() => <Redirect to="/healing-journey" />}</Route>
+client/src/App.jsx:              <Route path="/stronger">{() => <Redirect to="/resilience" />}</Route>
+client/src/App.jsx:              <Route path="/content">{() => <Redirect to="/peace" />}</Route>
+client/src/App.jsx:              <Route path="/fulfillment">{() => <Redirect to="/purpose" />}</Route>
+client/src/App.jsx:              <Route path="/lightness">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/openness">{() => <Redirect to="/acceptance" />}</Route>
+client/src/App.jsx:              <Route path="/spaciousness">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/ease">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/relief">{() => <Redirect to="/release" />}</Route>
+client/src/App.jsx:              <Route path="/comfort">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/valid">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/lovable">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/deserving">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/capable">{() => <Redirect to="/resilience" />}</Route>
+client/src/App.jsx:              <Route path="/evolving">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/becoming">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/unfolding">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/emerging">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/ascending">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/expanding">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/deepening">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/integrating">{() => <Redirect to="/growth" />}</Route>
+client/src/App.jsx:              <Route path="/releasing">{() => <Redirect to="/release" />}</Route>
+client/src/App.jsx:              <Route path="/aligned">{() => <Redirect to="/balance" />}</Route>
+client/src/App.jsx:              <Route path="/revived">{() => <Redirect to="/calm" />}</Route>
+client/src/App.jsx:              <Route path="/rested">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/optimistic">{() => <Redirect to="/hope" />}</Route>
+client/src/App.jsx:              <Route path="/joyful">{() => <Redirect to="/joy" />}</Route>
+client/src/App.jsx:              <Route path="/satisfied">{() => <Redirect to="/gratitude" />}</Route>
+client/src/App.jsx:              <Route path="/nourished">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/worried">{() => <Redirect to="/anxiety" />}</Route>
+client/src/App.jsx:              <Route path="/fearful">{() => <Redirect to="/fear" />}</Route>
+client/src/App.jsx:              <Route path="/scared">{() => <Redirect to="/fear" />}</Route>
+client/src/App.jsx:              <Route path="/afraid">{() => <Redirect to="/fear" />}</Route>
+client/src/App.jsx:              <Route path="/panicked">{() => <Redirect to="/anxiety" />}</Route>
+client/src/App.jsx:              <Route path="/hopeless">{() => <Redirect to="/hope" />}</Route>
+client/src/App.jsx:              <Route path="/empty">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/lost">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/stuck">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/numb">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/broken">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/damaged">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/ashamed">{() => <Redirect to="/shame" />}</Route>
+client/src/App.jsx:              <Route path="/guilty">{() => <Redirect to="/guilt" />}</Route>
+client/src/App.jsx:              <Route path="/jealous">{() => <Redirect to="/emotions" />}</Route>
+client/src/App.jsx:              <Route path="/envious">{() => <Redirect to="/emotions" />}</Route>
+client/src/App.jsx:              <Route path="/jealousy">{() => <Redirect to="/emotions" />}</Route>
+client/src/App.jsx:              <Route path="/resentful">{() => <Redirect to="/anger" />}</Route>
+client/src/App.jsx:              <Route path="/bitter">{() => <Redirect to="/anger" />}</Route>
+client/src/App.jsx:              <Route path="/exhausted">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/drained">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/burnout">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/burned-out">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/weary">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/fatigued">{() => <Redirect to="/rest" />}</Route>
+client/src/App.jsx:              <Route path="/letting-go">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/surrender">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/release">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/moving-on">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/closure">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/meaning">{() => <Redirect to="/purpose" />}</Route>
+client/src/App.jsx:              <Route path="/identity">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/empathy">{() => <Redirect to="/compassion" />}</Route>
+client/src/App.jsx:              <Route path="/body-image">{() => <Redirect to="/self-worth" />}</Route>
+client/src/App.jsx:              <Route path="/eating">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/sobriety">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/assertiveness">{() => <Redirect to="/boundaries" />}</Route>
+client/src/App.jsx:              <Route path="/vulnerability">{() => <Redirect to="/authenticity" />}</Route>
+client/src/App.jsx:              <Route path="/security">{() => <Redirect to="/safety" />}</Route>
+client/src/App.jsx:              <Route path="/stability">{() => <Redirect to="/safety" />}</Route>
+client/src/App.jsx:              <Route path="/nightmares">{() => <Redirect to="/sleep" />}</Route>
+client/src/App.jsx:              <Route path="/trauma-responses">{() => <Redirect to="/trauma" />}</Route>
+client/src/App.jsx:              <Route path="/flashbacks">{() => <Redirect to="/trauma" />}</Route>
+client/src/App.jsx:              <Route path="/dissociation">{() => <Redirect to="/trauma" />}</Route>
+client/src/App.jsx:              <Route path="/relationship">{() => <Redirect to="/relationships" />}</Route>
+client/src/App.jsx:              <Route path="/communication">{() => <Redirect to="/relationships" />}</Route>
+client/src/App.jsx:              <Route path="/parenting">{() => <Redirect to="/relationships" />}</Route>
+client/src/App.jsx:              <Route path="/family">{() => <Redirect to="/relationships" />}</Route>
+client/src/App.jsx:              <Route path="/divorce">{() => <Redirect to="/relationships" />}</Route>
+client/src/App.jsx:              <Route path="/breakup">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/heartbreak">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/rejection">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/abandonment">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/betrayal">{() => <Redirect to="/trust" />}</Route>
+client/src/App.jsx:              <Route path="/codependency">{() => <Redirect to="/relationships" />}</Route>
+client/src/App.jsx:              <Route path="/narcissism">{() => <Redirect to="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/abuse">{() => <Redirect to="/crisis" />}</Route>
+client/src/App.jsx:              <Route path="/self-harm">{() => <Redirect to="/crisis" />}</Route>
+client/src/App.jsx:              <Route path="/suicide">{() => <Redirect to="/crisis" />}</Route>
+client/src/App.jsx:              <Route path="/self-compassion">{() => <Redirect to="/self-care" />}</Route>
+client/src/App.jsx:              <Route path="/talk-topics">{() => <TalkTopics />}</Route>
+client/src/App.jsx:              <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
+client/src/App.jsx:              <Route path="/healing-library">{() => <ConfigRoute route="/healing-library" />}</Route>
+client/src/App.jsx:              <Route path="/healing-journeys">{() => <ConfigRoute route="/healing-journeys" />}</Route>
+client/src/App.jsx:              <Route path="/healing-journey">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/emotional-wellness"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/mental-health-support">{() => <ConfigRoute route="/healing" />}</Route>
+client/src/App.jsx:              <Route path="/self-discovery"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/transformation"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+client/src/App.jsx:              <Route path="/body-wellness">{() => <ConfigRoute route="/body-wellness" />}</Route>
+client/src/App.jsx:              <Route path="/soul-wellness">{() => <ConfigRoute route="/soul-wellness" />}</Route>
+client/src/App.jsx:              <Route path="/wisdom">
+client/src/App.jsx:                <WellnessRoute><WisdomToolsPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/wisdom-practices">
+client/src/App.jsx:                <WellnessRoute><WisdomPracticesPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/wisdom-synthesis">
+client/src/App.jsx:                <WellnessRoute><WisdomSynthesisPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/daily-wisdom">
+client/src/App.jsx:                <WellnessRoute><DailyWisdomOraclePage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools">
+client/src/App.jsx:                <WellnessRoute><ToolsPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/alignment-path">
+client/src/App.jsx:                <WellnessRoute><AlignmentPath /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/system-map">
+client/src/App.jsx:                <WellnessRoute><SystemMapPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/breath">
+client/src/App.jsx:                <WellnessRoute><BreathTool /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/reframe">
+client/src/App.jsx:                <WellnessRoute><ReframePage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/advanced">
+client/src/App.jsx:                <WellnessRoute><AdvancedToolsPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/mastery">
+client/src/App.jsx:                <WellnessRoute><MasteryToolsPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/ritual">
+client/src/App.jsx:                <WellnessRoute><DailyRitualPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/atlas">
+client/src/App.jsx:                <ProtectedRoute><AtlasDashboard /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/strategy-maps">
+client/src/App.jsx:                <ProtectedRoute><StrategyMapsPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/meta-learning">
+client/src/App.jsx:                <ProtectedRoute><MetaLearningPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/systems-thinking">
+client/src/App.jsx:                <ProtectedRoute><SystemsThinkingPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/cognitive-architecture">
+client/src/App.jsx:                <ProtectedRoute><CognitiveArchitecturePage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/philosophical-inquiry">
+client/src/App.jsx:                <ProtectedRoute><PhilosophicalInquiryPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/knowledge-synthesis">
+client/src/App.jsx:                <ProtectedRoute><KnowledgeSynthesisPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/content-studio">
+client/src/App.jsx:                <ProtectedRoute><ContentStudioPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/study-vault">
+client/src/App.jsx:                <ProtectedRoute><StudyVaultPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/elite-tools">
+client/src/App.jsx:                <ProtectedRoute><EliteToolsDashboard /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/resilience">
+client/src/App.jsx:                <ProtectedRoute><ResilienceCanonical /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/companion">
+client/src/App.jsx:                <ProtectedRoute><AdaptiveCompanionPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/collaborative-lab">
+client/src/App.jsx:                <ProtectedRoute><CollaborativeLabPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/growth-analytics">
+client/src/App.jsx:                <ProtectedRoute><GrowthAnalyticsPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/guided-journaling">
+client/src/App.jsx:                <WellnessRoute><GuidedJournalingPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/insight-cards">
+client/src/App.jsx:                <WellnessRoute><InsightCardsPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/progress">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/mirror">
+client/src/App.jsx:                <ProtectedRoute><MirrorPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pathways">
+client/src/App.jsx:                <ProtectedRoute><PathwaysHome /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pathways/onboarding">
+client/src/App.jsx:                <ProtectedRoute><GoalOnboarding /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pathways/favorites">
+client/src/App.jsx:                <ProtectedRoute><Favorites /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pathways/streaks">
+client/src/App.jsx:                <ProtectedRoute><ProgressStreaks /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pathways/calm-plan">
+client/src/App.jsx:                <ProtectedRoute><CalmPlan /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pathways/values">
+client/src/App.jsx:                <ProtectedRoute><ValuesToActions /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pathways/reflections">
+client/src/App.jsx:                <ProtectedRoute><ReflectionHistory /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/pricing-page" component={PricingPage} />
+client/src/App.jsx:              <Route path="/legal-info" component={LegalPage} />
+client/src/App.jsx:              <Route path="/help/billing" component={RefundHelp} />
+client/src/App.jsx:              {/* Gamification Routes */}
+client/src/App.jsx:              <Route path="/quests">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/achievements">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/rewards">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/levels">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/badges">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/xp">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/streaks">
+client/src/App.jsx:                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              {/* Community Routes */}
+client/src/App.jsx:              <Route path="/community">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/community/feed">
+client/src/App.jsx:                <ProtectedRoute><CommunityPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/forum">
+client/src/App.jsx:                <ProtectedRoute><CommunityPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/community/circle">
+client/src/App.jsx:                <ProtectedRoute><CommunityCircle /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/community/discussion/:id">
+client/src/App.jsx:                <ProtectedRoute><DiscussionPage /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/insights">
+client/src/App.jsx:                <ProtectedRoute><InsightsDashboard /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:                  Public (no ProtectedRoute) so any tool completion can route
+client/src/App.jsx:              <Route path="/celebration">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/v6">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/celebration/ritual">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/social">
+client/src/App.jsx:                <WellnessRoute><SocialHub /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/blog" component={BlogIndex} />
+client/src/App.jsx:              <Route path="/blog/:slug" component={BlogPost} />
+client/src/App.jsx:              <Route path="/write">
+client/src/App.jsx:                <ProtectedRoute><BlogEditor /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/news">{() => <ConfigRoute route="/news" />}</Route>
+client/src/App.jsx:              <Route path="/research">{() => <ConfigRoute route="/research" />}</Route>
+client/src/App.jsx:              <Route path="/glossary">{() => <ConfigRoute route="/glossary" />}</Route>
+client/src/App.jsx:              <Route path="/glossary-full">{() => <ConfigRoute route="/glossary-full" />}</Route>
+client/src/App.jsx:              <Route path="/how-to-guides">{() => <ConfigRoute route="/how-to-guides" />}</Route>
+client/src/App.jsx:              <Route path="/daily-routines">{() => <ConfigRoute route="/daily-routines" />}</Route>
+client/src/App.jsx:              <Route path="/cognitive-tools">{() => <ConfigRoute route="/cognitive-tools" />}</Route>
+client/src/App.jsx:              <Route path="/behavior-change">{() => <ConfigRoute route="/behavior-change" />}</Route>
+client/src/App.jsx:              <Route path="/wellness-hub">{() => <ConfigRoute route="/wellness-hub" />}</Route>
+client/src/App.jsx:              <Route path="/content-index">{() => <ConfigRoute route="/content-index" />}</Route>
+client/src/App.jsx:              <Route path="/examples">{() => <ConfigRoute route="/examples" />}</Route>
+client/src/App.jsx:              <Route path="/professional-resources">{() => <ConfigRoute route="/professional-resources" />}</Route>
+client/src/App.jsx:              <Route path="/faq">{() => <FAQPage />}</Route>
+client/src/App.jsx:              <Route path="/support">{() => <ConfigRoute route="/support" />}</Route>
+client/src/App.jsx:              <Route path="/resources">{() => <ConfigRoute route="/resources" />}</Route>
+client/src/App.jsx:              <Route path="/contact"><Contact /></Route>
+client/src/App.jsx:              <Route path="/privacy"><Privacy /></Route>
+client/src/App.jsx:              <Route path="/invite"><ProtectedRoute><Invite /></ProtectedRoute></Route>
+client/src/App.jsx:              <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
+client/src/App.jsx:              <Route path="/support/guides">{() => <ConfigRoute route="/support/guides" />}</Route>
+client/src/App.jsx:              <Route path="/support/feedback">{() => <ConfigRoute route="/support/feedback" />}</Route>
+client/src/App.jsx:              <Route path="/support/accessibility">{() => <ConfigRoute route="/support/accessibility" />}</Route>
+client/src/App.jsx:              {/* Additional Wellness Routes - Config Driven */}
+client/src/App.jsx:              <Route path="/wellness/sleep">{() => <ConfigRoute route="/wellness/sleep" />}</Route>
+client/src/App.jsx:              <Route path="/wellness/nutrition">{() => <ConfigRoute route="/wellness/nutrition" />}</Route>
+client/src/App.jsx:              <Route path="/wellness/movement">{() => <ConfigRoute route="/wellness/movement" />}</Route>
+client/src/App.jsx:              <Route path="/wellness/nature">{() => <ConfigRoute route="/wellness/nature" />}</Route>
+client/src/App.jsx:              <Route path="/wellness/creativity">{() => <ConfigRoute route="/wellness/creativity" />}</Route>
+client/src/App.jsx:              <Route path="/tools/values">
+client/src/App.jsx:                <WellnessRoute><ValuesFinderPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/boundaries">
+client/src/App.jsx:                <WellnessRoute><BoundariesPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/movement-snacks">
+client/src/App.jsx:                <WellnessRoute><MovementSnacksPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/coherence">
+client/src/App.jsx:                <WellnessRoute><CoherenceLadderPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/perception-refinement">
+client/src/App.jsx:                <WellnessRoute><PerceptionRefinementPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/nervous-system-flooding">
+client/src/App.jsx:                <WellnessRoute><NervousSystemFloodingPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/permaculture">
+client/src/App.jsx:                <WellnessRoute><PermacultureWellnessPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/self-worth">
+client/src/App.jsx:                <WellnessRoute><SelfWorthReflectionPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/self-worth-reflection">
+client/src/App.jsx:                <WellnessRoute><SelfWorthReflectionPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/self-worth">
+client/src/App.jsx:                <WellnessRoute><SelfWorthHubPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/twelve-steps">
+client/src/App.jsx:                <WellnessRoute><TwelveStepsPage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/behavior-change">
+client/src/App.jsx:                <WellnessRoute><BehaviorChangePage /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/compassion-break">
+client/src/App.jsx:                <WellnessRoute><CompassionBreak /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/reframe-tool">
+client/src/App.jsx:                <WellnessRoute><Reframe /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/urge-surf">
+client/src/App.jsx:                <WellnessRoute><UrgeSurf /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/grief-letter">
+client/src/App.jsx:                <WellnessRoute><GriefLetter /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/repair-script">
+client/src/App.jsx:                <WellnessRoute><RepairScript /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/awe-microdose">
+client/src/App.jsx:                <WellnessRoute><AweMicrodose /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/body-scan">
+client/src/App.jsx:                <WellnessRoute><BodyScan /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/digital-sunset">
+client/src/App.jsx:                <WellnessRoute><DigitalSunset /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/meaning-map">
+client/src/App.jsx:                <WellnessRoute><MeaningMap /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/tools/community-checkin">
+client/src/App.jsx:                <WellnessRoute><CommunityCheckin /></WellnessRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              {/* Additional AI Routes - Config Driven */}
+client/src/App.jsx:              <Route path="/ai/insights">
+client/src/App.jsx:                <ProtectedRoute><ConfigRoute route="/ai/insights" /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/ai/coach">
+client/src/App.jsx:                <ProtectedRoute><ConfigRoute route="/ai/coach" /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/ai/meditation">
+client/src/App.jsx:                <ProtectedRoute><ConfigRoute route="/ai/meditation" /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              {/* Additional Community Routes - Config Driven */}
+client/src/App.jsx:              <Route path="/community/events">
+client/src/App.jsx:                <ProtectedRoute><ConfigRoute route="/community/events" /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/community/stories">
+client/src/App.jsx:                <ProtectedRoute><ConfigRoute route="/community/stories" /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/community/mentors">
+client/src/App.jsx:                <ProtectedRoute><ConfigRoute route="/community/mentors" /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/community/challenges">
+client/src/App.jsx:                <ProtectedRoute><ConfigRoute route="/community/challenges" /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              {/* Admin Routes (require admin role) */}
+client/src/App.jsx:              <Route path="/admin">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/health">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/social/ops">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/social">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/social/generate">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/social/library">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/social/calendar">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/social/analytics">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/billing">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              {/* Batch 11 - Admin Routes (P231-P240, P250) */}
+client/src/App.jsx:              <Route path="/admin/content-studio">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/social-studio">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/newsletter">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/publishing/today">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/publishing">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/blog/draft/:id">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/revenue">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/security">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/admin/audit-log">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/account/sessions">
+client/src/App.jsx:                <ProtectedRoute><Sessions /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/account/delete">
+client/src/App.jsx:                <ProtectedRoute><DeleteAccount /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              {/* Batch 11 - Account Routes (P244-P246) */}
+client/src/App.jsx:              <Route path="/account/subscription">
+client/src/App.jsx:                <ProtectedRoute><Subscription /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/account/orders">
+client/src/App.jsx:                <ProtectedRoute><OrderHistory /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/account/profile">
+client/src/App.jsx:                <ProtectedRoute><AccountProfile /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/account/security">
+client/src/App.jsx:                <ProtectedRoute><AccountSecurity /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/account/billing">
+client/src/App.jsx:                <ProtectedRoute><AccountBilling /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/preferences/notifications">
+client/src/App.jsx:                <ProtectedRoute><NotificationPreferences /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/preferences/safety">
+client/src/App.jsx:                <ProtectedRoute><SafetyPreferences /></ProtectedRoute>
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/content-admin">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/crm">
+client/src/App.jsx:              </Route>
+client/src/App.jsx:              <Route path="/control">{() => <ConfigRoute route="/control" />}</Route>
+client/src/App.jsx:              <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
+client/src/App.jsx:              <Route path="/publishing">{() => <ConfigRoute route="/publishing" />}</Route>
+client/src/App.jsx:              <Route path="/qa">{() => <ConfigRoute route="/qa" />}</Route>
+client/src/App.jsx:              <Route path="/design-system">{() => <ConfigRoute route="/design-system" />}</Route>
+client/src/App.jsx:              <Route path="/wireframes">{() => <ConfigRoute route="/wireframes" />}</Route>
+client/src/App.jsx:              <Route path="/design-dashboard">{() => <ConfigRoute route="/design-dashboard" />}</Route>
+client/src/App.jsx:              <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
+client/src/App.jsx:              <Route path="/tos">{() => <ConfigRoute route="/tos" />}</Route>
+client/src/App.jsx:              <Route path="/legal">{() => <ConfigRoute route="/legal" />}</Route>
+client/src/App.jsx:              <Route path="/ethics">{() => <ConfigRoute route="/ethics" />}</Route>
+client/src/App.jsx:              <Route path="/disclaimer">{() => <ConfigRoute route="/disclaimer" />}</Route>
+client/src/App.jsx:              <Route path="/safety">{() => <ConfigRoute route="/safety" />}</Route>
+client/src/App.jsx:              <Route path="/accessibility">{() => <ConfigRoute route="/accessibility" />}</Route>
+client/src/App.jsx:              <Route path="/cookies">{() => <ConfigRoute route="/cookies" />}</Route>
+client/src/App.jsx:              <Route path="/safety-center">{() => <SafetyCenter />}</Route>
+client/src/App.jsx:              <Route path="/data-retention">{() => <DataRetention />}</Route>
+client/src/App.jsx:              <Route path="/community-guidelines">{() => <CommunityGuidelines />}</Route>
+client/src/App.jsx:              <Route path="/roadmap">{() => <PublicRoadmap />}</Route>
+client/src/App.jsx:              <Route path="/our-story">{() => <CreatorProfile />}</Route>
+client/src/App.jsx:              <Route path="/press">{() => <PressKit />}</Route>
+client/src/App.jsx:              <Route path="/courses">{() => <CourseCatalog />}</Route>
+client/src/App.jsx:              <Route path="/learn/courses">{() => <CourseCatalog />}</Route>
+client/src/App.jsx:              <Route path="/practices">{() => <PracticeLibrary />}</Route>
+client/src/App.jsx:              <Route path="/admin/roles">{() => <AdminGuard><RolesPermissions /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/feature-flags">{() => <AdminGuard><FeatureFlags /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/alerts">{() => <AdminGuard><SystemAlerts /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/feedback">{() => <AdminGuard><FeedbackAggregator /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/narrative">{() => <AdminGuard><NarrativeDrafts /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/engagement">{() => <AdminGuard><EngagementDashboard /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/analytics">{() => <AdminGuard><AnalyticsDashboard /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/admin/tools">{() => <AdminGuard><AdminTools /></AdminGuard>}</Route>
+client/src/App.jsx:              <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
+client/src/App.jsx:              <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
+client/src/App.jsx:              <Route path="/settings/email-digest">{() => <ProtectedRoute><EmailDigest /></ProtectedRoute>}</Route>
+client/src/App.jsx:              <Route path="/settings/ai-personality">{() => <ProtectedRoute><AIPersonality /></ProtectedRoute>}</Route>
+client/src/App.jsx:              <Route path="/tools/weekly-reflection">{() => <WellnessRoute><WeeklyReflection /></WellnessRoute>}</Route>
+client/src/App.jsx:              {/* AI Routes */}
+client/src/App.jsx:              <Route path="/ai/companion">{() => <ConfigRoute route="/ai/companion" />}</Route>
+client/src/App.jsx:              {/* Learning Routes */}
+client/src/App.jsx:              <Route path="/learn" component={LearnHub} />
+client/src/App.jsx:              <Route path="/learn/guides" component={LearnGuides} />
+client/src/App.jsx:              <Route path="/learn/guides/:slug" component={LearnGuideDetail} />
+client/src/App.jsx:              <Route path="/learn/articles" component={LearnArticles} />
+client/src/App.jsx:              <Route path="/learn/articles/:slug" component={LearnArticleDetail} />
+client/src/App.jsx:              <Route path="/guides" component={LearnGuides} />
+client/src/App.jsx:              <Route path="/articles" component={LearnArticles} />
+client/src/App.jsx:              <Route path="/tutorials" component={LearnGuides} />
+client/src/App.jsx:              <Route path="/lessons" component={LearnGuides} />
+client/src/App.jsx:              <Route path="/training">{() => <CourseCatalog />}</Route>
+client/src/App.jsx:              <Route path="/education" component={LearnHub} />
+client/src/App.jsx:              <Route path="/workshop">{() => <CourseCatalog />}</Route>
+client/src/App.jsx:              <Route path="/workshops">{() => <CourseCatalog />}</Route>
+client/src/App.jsx:              <Route path="/library" component={LearnHub} />
+client/src/App.jsx:              <Route>{() => <ConfigRoute route="/not-found" />}</Route>
+client/src/types/global.d.ts:  export const routeKeyFromRoute: any;

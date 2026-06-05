@@ -1,0 +1,5 @@
+60:router.get("/plans", async (req, res) => {
+77:router.get("/", (req, res) => {
+207:router.get("/subscription-status", async (req, res) => {
+252:router.get("/current-plan", async (req, res) => {
+277:router.get("/invoices", async (req, res) => {

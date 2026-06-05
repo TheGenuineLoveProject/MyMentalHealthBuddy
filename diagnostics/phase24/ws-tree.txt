@@ -1,0 +1,17 @@
+mymentalhealthbuddy@1.0.0 /home/runner/workspace
+├─┬ @langchain/openai@1.4.7
+│ └─┬ @langchain/core@1.1.48
+│   └─┬ langsmith@0.7.3
+│     └── ws@8.21.0 deduped
+├─┬ lighthouse@12.8.2
+│ ├─┬ puppeteer-core@24.43.1
+│ │ └── ws@8.21.0 deduped
+│ └── ws@7.5.11
+├─┬ openai@6.39.0
+│ └── ws@8.21.0 deduped
+├─┬ pm2@7.0.1
+│ ├─┬ @pm2/js-api@0.8.0
+│ │ └── ws@7.5.11
+│ └── ws@8.20.0
+└── ws@8.21.0
+
