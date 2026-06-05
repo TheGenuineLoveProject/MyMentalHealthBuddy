@@ -124,3 +124,9 @@ One blocker at a time. Verify before fixing. Fix smallest safe issue. Rebuild. R
 - Protected generated large/secret diagnostic artifacts in .gitignore.
 - Restored generated Phase 12 diagnostic drift.
 - Next required human action: rotate exposed secrets and align Stripe keys in Replit Secrets.
+
+## Phase 17 Final Deployment Gate
+- Added safe deployment gate report.
+- Added human secret rotation checklist.
+- Confirmed real payment testing must wait until Stripe keys are rotated, aligned, and CORS is restricted.
+- Next phase after human secret update: Phase 18 checkout verification.
