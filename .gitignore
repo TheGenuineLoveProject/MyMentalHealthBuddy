@@ -136,3 +136,5 @@ diagnostics/phase6/
 diagnostics/phase10/
 diagnostics/phase11/
 diagnostics/**/env*.txt
+diagnostics/**/stripe-env-before.txt
+diagnostics/**/cors-env-before.txt

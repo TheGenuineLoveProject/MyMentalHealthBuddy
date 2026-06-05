@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-06-05T03:34:05.781Z",
+  "files": {
+    "packageJson": true,
+    "serverApp": true,
+    "clientDist": true,
+    "billingRoute": true,
+    "webhookRoute": true,
+    "billingClient": true
+  },
+  "stripe": {
+    "secretMode": "test",
+    "publishableMode": "test",
+    "vitePublishableMode": "test",
+    "webhookSecretPresent": true,
+    "aligned": true
+  },
+  "cors": {
+    "value": "https://www.mymentalhealthbuddy.com",
+    "present": true,
+    "wildcard": false,
+    "productionSafe": true
+  },
+  "gate": {
+    "readyForRealPayments": true,
+    "readyForPublicProduction": true
+  },
+  "nextActions": []
+}
