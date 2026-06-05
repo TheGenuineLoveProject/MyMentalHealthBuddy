@@ -7542,3 +7542,94 @@ main {
   }
 }
 
+
+/* PHASE 58: universal visual polish + button/readability/focus coherence */
+:root {
+  --mmhb-focus-ring: 0 0 0 3px rgba(124, 58, 237, 0.32);
+  --mmhb-readable-line: 1.65;
+  --mmhb-tap-target: 44px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+[role="button"],
+a,
+input,
+select,
+textarea {
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease;
+}
+
+button,
+[role="button"],
+a[class*="button"],
+a[class*="Button"] {
+  min-height: var(--mmhb-tap-target);
+  min-width: var(--mmhb-tap-target);
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--mmhb-focus-ring);
+}
+
+button:not(:disabled):hover,
+[role="button"]:not(:disabled):hover,
+a[class*="button"]:hover,
+a[class*="Button"]:hover {
+  transform: translateY(-1px);
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+p,
+li {
+  line-height: var(--mmhb-readable-line);
+}
+
+main,
+section,
+article {
+  overflow-wrap: anywhere;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
