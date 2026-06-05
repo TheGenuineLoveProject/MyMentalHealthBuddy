@@ -78,3 +78,30 @@ One blocker at a time. Verify before fixing. Fix smallest safe issue. Rebuild. R
 4. Restrict CORS_ORIGIN to production domain.
 5. Resolve or document GitHub Dependabot vulnerabilities.
 6. Verify checkout, webhook, subscription activation, and billing portal.
+
+## Phase 14 Deployment + Revenue Gate
+- Clean deployment readiness audit created without printing secrets.
+- Old generated Phase 6 and Phase 10 audit folders are ignored to keep Git clean.
+- Oversized Stripe reference artifacts are ignored and deleted from the working tree.
+- Revenue readiness is gated by Stripe key alignment, VITE_STRIPE_PUBLISHABLE_KEY, CORS restriction, secret rotation, Dependabot review, checkout test, webhook test, subscription activation test, and billing portal test.
+- No real checkout testing should occur until Stripe mode alignment passes.
+
+## Phase 14 Clean Git State + Deployment Blocker Ledger
+- Cleaned generated diagnostic tracking rules.
+- Restored unstable generated Phase 12 diagnostic modifications.
+- Confirmed billing client uses server checkout route.
+- Confirmed revenue testing remains blocked until Stripe secrets are rotated, Stripe modes are aligned, VITE_STRIPE_PUBLISHABLE_KEY is added, production CORS is restricted, Dependabot alerts are reviewed, and Stripe checkout/webhook tests pass.
+
+## Phase 13 Git + Deployment State
+- Oversized Stripe diagnostic artifacts are ignored and removed from the working tree.
+- Current focus remains deployment readiness, revenue readiness, and safe checkout enablement.
+- Checkout testing must not proceed until all exposed secrets are rotated and Stripe key modes are aligned.
+- Deployment can proceed only after build, health, ready, CORS, auth, billing, webhook, legal, and security checks pass.
+
+## Phase 13 Active Blockers
+1. Rotate exposed secrets.
+2. Align Stripe key modes.
+3. Add VITE_STRIPE_PUBLISHABLE_KEY.
+4. Restrict CORS_ORIGIN to production domain.
+5. Resolve or document GitHub Dependabot vulnerabilities.
+6. Verify checkout, webhook, subscription activation, and billing portal.
