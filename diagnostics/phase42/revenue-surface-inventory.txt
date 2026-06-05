@@ -1,0 +1,1569 @@
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:146:      } else if (rem.fixCommand === 'verify-stripe') {
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:147:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:115:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }).catch(() => {}),
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:280:                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
+client/src/pages/admin/_adminToolsShared.js:47:  "admin-billing": "/admin/billing", "admin-publishing": "/admin/publishing",
+client/src/pages/admin/_adminToolsShared.js:52:  "billing": "/admin/billing", "webhook": "/admin/billing", "email": "/admin/newsletter",
+client/src/pages/admin/_adminToolsShared.js:64:  "billing": "critical", "email": "critical", "perplexity": "critical",
+client/src/pages/admin/_adminToolsShared.js:73:  "admin-audit": "high", "admin-billing": "high", "admin-publishing": "high",
+client/src/pages/admin/_adminToolsShared.js:131:  "dependency-missing": { suggestion: "Required dependency or service unavailable. Perplexity KB: Check that all third-party services (Stripe, Resend, OpenAI, Perplexity) have valid API keys configured.", action: "Verify service API keys", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:134:  "integration-down": { suggestion: "Third-party integration is not responding. Canva KB: Check service status pages for Stripe, Resend, OpenAI, and Perplexity. These are external dependencies.", action: "Check external service status", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:138:  "env-missing": { suggestion: "Required environment variable is not set. Perplexity KB: Check Replit Secrets panel for missing keys. Common missing vars: STRIPE_SECRET_KEY, RESEND_API_KEY, OPENAI_API_KEY.", action: "Add missing env var in Secrets", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:139:  "stripe-webhook-fail": { suggestion: "Stripe webhook endpoint is failing. Canva KB: Verify STRIPE_WEBHOOK_SECRET is configured and webhook signature validation matches. Check Stripe dashboard for delivery failures.", action: "Verify Stripe webhook secret", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-admin-token" },
+client/src/pages/admin/_adminToolsShared.js:140:  "openai-quota": { suggestion: "OpenAI API quota exceeded or rate limited. Perplexity KB: Check billing status on OpenAI dashboard. Implement exponential backoff and request queueing for high-volume periods.", action: "Check OpenAI billing/quota", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:152:  "dns-fail": { suggestion: "DNS resolution failed for external service. Perplexity KB: External APIs (Stripe, Resend, OpenAI) may be unreachable due to DNS issues. Usually transient — retry after 30 seconds.", action: "Retry after DNS propagation", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:161:  "upstream-502": { suggestion: "Bad gateway from upstream service. Perplexity KB: External API (Stripe, OpenAI, Resend) returned an invalid response. This is typically transient — retry after 10 seconds.", action: "Retry after brief delay", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:173:  "webhook-signature-invalid": { suggestion: "Webhook signature verification failed. Canva KB: Webhook secret may have been rotated on the provider side. Update STRIPE_WEBHOOK_SECRET or verify signing key.", action: "Update webhook signing secret", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:180:  "idempotency-violation": { suggestion: "Duplicate request processing detected. Codex KB: Non-idempotent operation executed multiple times. Implement idempotency keys for payment and state-changing endpoints.", action: "Add idempotency key handling", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:195:  "git-corruption": { suggestion: "Git repository may have integrity issues. Codex KB: Run git fsck to check object database integrity. Corrupted refs or loose objects can cause checkout failures.", action: "Run git integrity check", knowledgeBase: "Codex", autoFixable: true, fixCommand: "repair-git" },
+client/src/pages/admin/_adminToolsShared.js:213:  "stripe-config-invalid": { suggestion: "Stripe integration configuration issue. Canva KB: Verify STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY are valid, webhook secret matches, and product/price IDs exist.", action: "Verify Stripe setup", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-stripe" },
+client/src/pages/admin/_adminToolsShared.js:215:  "openai-config-invalid": { suggestion: "OpenAI API configuration issue. Codex KB: Verify API key validity, check model access permissions, and ensure billing is active on the OpenAI dashboard.", action: "Verify OpenAI setup", knowledgeBase: "Codex", autoFixable: true, fixCommand: "check-openai" },
+client/src/pages/admin/_adminToolsShared.js:221:  "payment-flow-error": { suggestion: "Payment processing flow encountered an error. Canva KB: Check Stripe dashboard for declined payments, webhook delivery failures, and checkout session status.", action: "Review payment flow logs", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:412:      { id: "pro-features", label: "Pro Features", endpoint: "/api/pro-features", icon: Gem, desc: "Premium feature gates" },
+client/src/pages/admin/_adminToolsShared.js:426:      { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/pages/admin/_adminToolsShared.js:443:      { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: DollarSign, desc: "Stripe billing" },
+client/src/pages/admin/_adminToolsShared.js:444:      { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
+client/src/pages/admin/_adminToolsShared.js:471:  { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: CreditCard, desc: "Stripe billing" },
+client/src/pages/admin/CommandCenter.jsx:73:    { id: 'billing', label: 'Billing API', endpoint: '/api/billing' },
+client/src/pages/admin/HealthDashboard.jsx:329:              <EnvCheckItem name="STRIPE_SECRET_KEY" isSet={envConfig.STRIPE_SECRET_KEY} />
+client/src/pages/admin/AdminUsers.jsx:51:    { label: "Pro Subscribers", value: proUsers, icon: TrendingUp, desc: "Active Pro subscriptions", color: "text-emerald-600" },
+client/src/pages/admin/AdminUsers.jsx:63:    { label: "Billing Overview", href: "/admin/billing", icon: UserCheck, testId: "link-billing" },
+client/src/pages/admin/AnalyticsDashboard.jsx:105:          <div className="rounded-xl border border-[var(--glp-sage-15)] bg-white dark:bg-gray-900 p-6 space-y-4" data-testid="card-checkout-funnel">
+client/src/pages/admin/AnalyticsDashboard.jsx:108:              <h2 className="font-semibold text-[var(--glp-sage-deep)]">Checkout Funnel (7d)</h2>
+client/src/pages/admin/AnalyticsDashboard.jsx:111:              {Object.entries(data?.checkoutFunnel || {}).map(([step, total]) => {
+client/src/pages/admin/AnalyticsDashboard.jsx:112:                const labels = { pricing_view: "Viewed Pricing", checkout_start: "Started Checkout", checkout_success: "Completed", checkout_cancel: "Cancelled" };
+client/src/pages/admin/AnalyticsDashboard.jsx:120:              {Object.keys(data?.checkoutFunnel || {}).length === 0 && (
+client/src/pages/admin/AnalyticsDashboard.jsx:121:                <p className="text-sm text-[var(--glp-ink-40)] italic" data-testid="text-no-checkout">No checkout events recorded</p>
+client/src/pages/admin/BillingViewer.jsx:2: * Admin Billing Viewer (P128)
+client/src/pages/admin/BillingViewer.jsx:3: * Read-only billing information for admins
+client/src/pages/admin/BillingViewer.jsx:58:export default function BillingViewerPage() {
+client/src/pages/admin/BillingViewer.jsx:59:  const { data: billingData, isLoading, error, refetch } = useQuery({
+client/src/pages/admin/BillingViewer.jsx:60:    queryKey: ['/api/admin/billing/overview'],
+client/src/pages/admin/BillingViewer.jsx:63:  const { data: subscriptions, isLoading: subsLoading } = useQuery({
+client/src/pages/admin/BillingViewer.jsx:64:    queryKey: ['/api/admin/billing/subscriptions'],
+client/src/pages/admin/BillingViewer.jsx:87:    return <AdminErrorBanner title="Unable to load billing data" onRetry={refetch} />;
+client/src/pages/admin/BillingViewer.jsx:90:  const stats = billingData || {
+client/src/pages/admin/BillingViewer.jsx:91:    totalSubscriptions: 0,
+client/src/pages/admin/BillingViewer.jsx:92:    activeSubscriptions: 0,
+client/src/pages/admin/BillingViewer.jsx:97:  const subsList = subscriptions?.subscriptions || [];
+client/src/pages/admin/BillingViewer.jsx:101:      <SEO title="Billing Manager — Admin" noindex />
+client/src/pages/admin/BillingViewer.jsx:106:        <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">Billing Overview</h1>
+client/src/pages/admin/BillingViewer.jsx:107:        <p className="text-muted-foreground">Read-only view of subscription data</p>
+client/src/pages/admin/BillingViewer.jsx:112:        <Card data-testid="card-total-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:114:            <CardTitle className="text-sm font-medium">Total Subscriptions</CardTitle>
+client/src/pages/admin/BillingViewer.jsx:119:              {stats.totalSubscriptions}
+client/src/pages/admin/BillingViewer.jsx:124:        <Card data-testid="card-active-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:131:              {stats.activeSubscriptions}
+client/src/pages/admin/BillingViewer.jsx:161:      {/* Subscriptions Table */}
+client/src/pages/admin/BillingViewer.jsx:162:      <Card data-testid="card-recent-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:164:          <CardTitle>Recent Subscriptions</CardTitle>
+client/src/pages/admin/BillingViewer.jsx:165:          <CardDescription>Last 50 subscription records (read-only)</CardDescription>
+client/src/pages/admin/BillingViewer.jsx:175:            <p className="text-center text-muted-foreground py-8" data-testid="text-empty-subscriptions">
+client/src/pages/admin/BillingViewer.jsx:176:              No subscription data available.
+client/src/pages/admin/BillingViewer.jsx:180:              <table className="w-full text-sm" data-testid="subscriptions-table">
+client/src/pages/admin/EngagementDashboard.jsx:162:                      { name: 'Stripe', active: health.services.stripe },
+client/src/pages/admin/FeatureFlags.jsx:13:  { id: "ai_v2", name: "AI Chat V2", enabled: true, percentage: 50, description: "Upgraded AI conversation model" },
+client/src/pages/admin/FeatureFlags.jsx:17:  { id: "premium_courses", name: "Premium Courses", enabled: true, percentage: 100, description: "Access to paid course content" },
+client/src/pages/admin/RevenueAdmin.jsx:15:    queryKey: ["/api/admin/billing/overview"],
+client/src/pages/admin/RevenueAdmin.jsx:22:    queryKey: ["/api/admin/billing/plan-distribution"],
+client/src/pages/admin/RevenueAdmin.jsx:32:    subscribers: overviewData?.data?.activeSubscriptions || 0,
+client/src/pages/admin/RevenueAdmin.jsx:57:  if (hasError) return <AdminErrorBanner title="Unable to load revenue data" message="The billing service may be temporarily unavailable." onRetry={refetch} />;
+client/src/pages/admin/RevenueAdmin.jsx:61:    { label: "Subscribers", value: stats.subscribers, icon: Users, desc: "Active subscriptions", testId: "card-subscribers" },
+client/src/pages/admin/RevenueAdmin.jsx:70:        description="Admin revenue and subscription analytics."
+client/src/pages/admin/RevenueAdmin.jsx:144:                <p className="text-muted-foreground text-center py-4" data-testid="text-no-subscriptions">No active subscriptions</p>
+client/src/pages/admin/RevenueAdmin.jsx:174:            All metrics are aggregated. No individual payment details are shown.
+client/src/pages/admin/RevenueAdmin.jsx:176:          <Link href="/admin/billing" className="text-xs text-primary hover:underline" data-testid="link-billing-details">
+client/src/pages/admin/RevenueAdmin.jsx:177:            View Billing Details
+client/src/pages/admin/RolesPermissions.jsx:44:    { id: "billing_view", label: "View Billing", category: "Billing" },
+client/src/pages/admin/RolesPermissions.jsx:45:    { id: "billing_manage", label: "Manage Billing", category: "Billing" },
+client/src/pages/admin/SystemAlerts.jsx:16:  { id: 4, type: "error", title: "Payment Webhook Failed", message: "Stripe webhook returned 500 error", time: "1 day ago", resolved: true },
+client/src/pages/account/Billing.jsx:61:export default function Billing() {
+client/src/pages/account/Billing.jsx:63:    title: "Billing & Subscription",
+client/src/pages/account/Billing.jsx:64:    description: "Manage your subscription plan and view your billing history.",
+client/src/pages/account/Billing.jsx:69:  const { subscriptionStatus, isPro, isLoading: authLoading } = useAuth();
+client/src/pages/account/Billing.jsx:72:  const [billingInterval, setBillingInterval] = useState("monthly");
+client/src/pages/account/Billing.jsx:74:  const { data: subscriptionData, isLoading: subLoading } = useQuery({
+client/src/pages/account/Billing.jsx:75:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Billing.jsx:79:    queryKey: ["/api/billing/invoices"],
+client/src/pages/account/Billing.jsx:82:  const currentPlan = subscriptionStatus || subscriptionData?.plan || "free";
+client/src/pages/account/Billing.jsx:83:  const isActive = isPro || subscriptionData?.status === "active" || subscriptionData?.status === "trialing";
+client/src/pages/account/Billing.jsx:90:        title: "Checkout canceled",
+client/src/pages/account/Billing.jsx:91:        description: "No worries — you can upgrade whenever you're ready.",
+client/src/pages/account/Billing.jsx:93:      window.history.replaceState({}, "", "/account/billing");
+client/src/pages/account/Billing.jsx:97:  const checkoutMutation = useMutation({
+client/src/pages/account/Billing.jsx:98:    mutationFn: (interval) => apiRequest("POST", "/api/billing/checkout", { plan: "pro", interval: interval || billingInterval }),
+client/src/pages/account/Billing.jsx:106:        title: "Unable to start checkout",
+client/src/pages/account/Billing.jsx:115:    mutationFn: () => apiRequest("POST", "/api/billing/portal"),
+client/src/pages/account/Billing.jsx:123:        title: "Unable to open billing portal",
+client/src/pages/account/Billing.jsx:130:  const handleUpgrade = (interval) => {
+client/src/pages/account/Billing.jsx:132:    checkoutMutation.mutate(interval || billingInterval);
+client/src/pages/account/Billing.jsx:149:    title="Billing"
+client/src/pages/account/Billing.jsx:150:    subtitle="Your subscription and payment details."
+client/src/pages/account/Billing.jsx:153:      what: "Manage your subscription plan.",
+client/src/pages/account/Billing.jsx:157:      where: "Right here — secure payments handled by Stripe.",
+client/src/pages/account/Billing.jsx:158:      how: "Choose your plan, and Stripe handles the rest safely."
+client/src/pages/account/Billing.jsx:175:                <h1 className="text-display-lg text-teal" data-testid="text-page-title">Billing & Subscription</h1>
+client/src/pages/account/Billing.jsx:176:                <p className="text-lead">Manage your plan and payment details</p>
+client/src/pages/account/Billing.jsx:197:                        {subscriptionData?.cancelAtPeriodEnd
+client/src/pages/account/Billing.jsx:198:                          ? `Cancels on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+client/src/pages/account/Billing.jsx:199:                          : `Renews on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+client/src/pages/account/Billing.jsx:208:                    data-testid="button-manage-subscription"
+client/src/pages/account/Billing.jsx:213:                      <><ExternalLink className="h-4 w-4 mr-2" />Manage Subscription</>
+client/src/pages/account/Billing.jsx:226:                    <p className="text-body-sm text-[var(--sage-600)]">Core tools are always free — no expiration, no pressure to upgrade, no features taken away</p>
+client/src/pages/account/Billing.jsx:238:                <div className="flex items-center justify-center gap-1 mb-6 p-1 rounded-full bg-[var(--sage-100)] w-fit mx-auto" data-testid="toggle-billing-interval">
+client/src/pages/account/Billing.jsx:240:                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${billingInterval === "monthly" ? "bg-white shadow-sm text-[var(--teal-700)]" : "text-[var(--sage-600)] hover:text-[var(--sage-800)]"}`}
+client/src/pages/account/Billing.jsx:241:                    onClick={() => setBillingInterval("monthly")}
+client/src/pages/account/Billing.jsx:247:                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-1.5 ${billingInterval === "yearly" ? "bg-white shadow-sm text-[var(--teal-700)]" : "text-[var(--sage-600)] hover:text-[var(--sage-800)]"}`}
+client/src/pages/account/Billing.jsx:248:                    onClick={() => setBillingInterval("yearly")}
+client/src/pages/account/Billing.jsx:295:                      {PRO_PLAN[billingInterval].price}
+client/src/pages/account/Billing.jsx:298:                      {PRO_PLAN[billingInterval].period}
+client/src/pages/account/Billing.jsx:299:                      {PRO_PLAN[billingInterval].savings && (
+client/src/pages/account/Billing.jsx:300:                        <span className="ml-2 text-[var(--gold-600)] font-medium">{PRO_PLAN[billingInterval].savings}</span>
+client/src/pages/account/Billing.jsx:303:                    {billingInterval === "yearly" && (
+client/src/pages/account/Billing.jsx:319:                      className="w-full btn-premium"
+client/src/pages/account/Billing.jsx:321:                      onClick={() => handleUpgrade(billingInterval)}
+client/src/pages/account/Billing.jsx:322:                      data-testid="button-upgrade-pro"
+client/src/pages/account/Billing.jsx:325:                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Redirecting to checkout...</>
+client/src/pages/account/Billing.jsx:327:                        <><Sparkles className="w-4 h-4 mr-2" />Subscribe to Pro — {PRO_PLAN[billingInterval].price}{PRO_PLAN[billingInterval].period}</>
+client/src/pages/account/Billing.jsx:336:                      data-testid="button-manage-subscription-plan"
+client/src/pages/account/Billing.jsx:341:                        <><ExternalLink className="w-4 h-4 mr-2" />Manage Subscription</>
+client/src/pages/account/Billing.jsx:346:                      className="w-full btn-premium"
+client/src/pages/account/Billing.jsx:348:                      onClick={() => handleUpgrade(billingInterval)}
+client/src/pages/account/Billing.jsx:366:                  Payment History
+client/src/pages/account/Billing.jsx:372:                    className="btn-secondary-premium" 
+client/src/pages/account/Billing.jsx:382:                    Stripe Portal
+client/src/pages/account/Billing.jsx:393:                    No invoices yet. Your payment history will appear here after your first payment.
+client/src/pages/account/Billing.jsx:403:                          <p className="text-body-sm font-medium">{invoice.description || "Subscription"}</p>
+client/src/pages/account/Billing.jsx:433:            <section className="card-bordered" data-testid="section-payment-security">
+client/src/pages/account/Billing.jsx:438:                <h2 className="text-heading-md text-teal">Payment Security</h2>
+client/src/pages/account/Billing.jsx:441:                All payments are securely processed by Stripe. We never store your card details on our servers.
+client/src/pages/account/Billing.jsx:444:                Pro subscriptions can be canceled anytime from this page — no hidden fees, no lock-in, no cancellation hoops. If you cancel, you keep full access through the end of your paid period, and your free tools never go away.
+client/src/pages/account/Billing.jsx:452:                  data-testid="button-update-payment"
+client/src/pages/account/Billing.jsx:457:                    <><ExternalLink className="h-4 w-4 mr-2" />Manage Payment Method</>
+client/src/pages/account/DeleteAccount.jsx:106:                  <li>Subscription and billing history</li>
+client/src/pages/account/OrderHistory.jsx:10:    queryKey: ["/api/billing/invoices"],
+client/src/pages/account/Profile.jsx:101:                <Button variant="outline" onClick={() => setEditing(true)} className="btn-secondary-premium" data-testid="button-edit-profile">
+client/src/pages/account/Profile.jsx:127:                      Premium Member
+client/src/pages/account/Profile.jsx:137:                    className="input-premium"
+client/src/pages/account/Profile.jsx:149:                      className="input-premium pl-10"
+client/src/pages/account/Profile.jsx:162:                      className="input-premium pl-10"
+client/src/pages/account/Profile.jsx:176:                      className="input-premium pl-10"
+client/src/pages/account/Profile.jsx:190:                  <Button onClick={handleSave} disabled={profileMutation.isPending} className="btn-premium" data-testid="button-save-profile">
+client/src/pages/account/Settings.jsx:129:                    className="input-premium" 
+client/src/pages/account/Settings.jsx:138:                    className="input-premium" 
+client/src/pages/account/Settings.jsx:277:                className="btn-premium"
+client/src/pages/account/Subscription.jsx:16:  premium: ["Unlimited AI chat sessions", "All wellness tools", "Priority support", "Advanced analytics"]
+client/src/pages/account/Subscription.jsx:19:export default function Subscription() {
+client/src/pages/account/Subscription.jsx:23:  const { data: subscription, isLoading, error } = useQuery({
+client/src/pages/account/Subscription.jsx:24:    queryKey: ["/api/billing/subscription-status"],
+client/src/pages/account/Subscription.jsx:32:          "/api/billing/portal"
+client/src/pages/account/Subscription.jsx:40:        toast({ title: "Error", description: "Unable to open billing portal", variant: "destructive" });
+client/src/pages/account/Subscription.jsx:43:      toast({ title: "Error", description: "Failed to access billing portal", variant: "destructive" });
+client/src/pages/account/Subscription.jsx:49:  const subData = subscription || { plan: "free", status: "none" };
+client/src/pages/account/Subscription.jsx:63:        title="My Subscription — The Genuine Love Project"
+client/src/pages/account/Subscription.jsx:64:        description="Manage your subscription and billing."
+client/src/pages/account/Subscription.jsx:74:            My Subscription
+client/src/pages/account/Subscription.jsx:77:            Manage your plan and billing preferences.
+client/src/pages/account/Subscription.jsx:131:                    data-testid="button-billing-portal"
+client/src/pages/account/Subscription.jsx:136:                    Billing Portal
+client/src/pages/account/Subscription.jsx:140:                      Resume Subscription
+client/src/pages/account/Subscription.jsx:150:                  <Button className="w-full min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-upgrade">
+client/src/pages/account/Subscription.jsx:152:                    Upgrade to Pro
+client/src/pages/account/Subscription.jsx:165:              Payment Security
+client/src/pages/account/Subscription.jsx:170:              Your payment information is securely processed by Stripe. 
+client/src/pages/account/Subscription.jsx:186:              Questions about billing, refunds, or your subscription?
+client/src/pages/account/Subscription.jsx:188:            <Link href="/help/billing">
+client/src/pages/account/Subscription.jsx:189:              <Button variant="outline" data-testid="button-billing-help">
+client/src/pages/account/Subscription.jsx:190:                Billing Help
+client/src/pages/dashboard/Overview.jsx:166:    if (params.get("billing") === "success") {
+client/src/pages/dashboard/Overview.jsx:169:        description: "Your subscription is active. All premium features are now unlocked.",
+client/src/pages/dashboard/Overview.jsx:172:      queryClient.invalidateQueries({ queryKey: ["/api/billing/subscription-status"] });
+client/src/pages/dashboard/Overview.jsx:396:              data-testid="card-dashboard-upgrade"
+client/src/pages/dashboard/Overview.jsx:415:                href="/account/subscription"
+client/src/pages/dashboard/Overview.jsx:427:                data-testid="link-dashboard-upgrade"
+client/src/pages/dashboard/Insights.tsx:180:              <Button variant="outline" className="btn-secondary-premium" data-testid="button-view-all-achievements">
+client/src/pages/dashboard/Journal.jsx:64:      <Button className="btn-premium" onClick={onNewEntry} data-testid="button-first-entry">
+client/src/pages/dashboard/Journal.jsx:119:              className="input-premium"
+client/src/pages/dashboard/Journal.jsx:136:            <Button type="button" variant="outline" onClick={onClose} className="btn-secondary-premium" data-testid="button-cancel">
+client/src/pages/dashboard/Journal.jsx:139:            <Button type="submit" className="btn-premium" disabled={createMutation.isPending} data-testid="button-save-entry">
+client/src/pages/dashboard/Journal.jsx:250:              <Button className="btn-premium" onClick={() => setIsModalOpen(true)} data-testid="button-new-entry">
+client/src/pages/dashboard/Journal.jsx:266:                    className="input-premium pl-10"
+client/src/pages/dashboard/MoodTracker.jsx:256:                className="btn-premium"
+client/src/pages/help/RefundHelp.jsx:22:    a: "You'll retain access until the end of your current billing period, even after requesting a refund."
+client/src/pages/help/RefundHelp.jsx:26:    a: "Yes, we can prorate refunds based on your remaining subscription time."
+client/src/pages/help/RefundHelp.jsx:38:        title="Refund & Billing Help — The Genuine Love Project"
+client/src/pages/help/RefundHelp.jsx:39:        description="Get help with refunds and billing questions."
+client/src/pages/help/RefundHelp.jsx:56:            Refund & Billing Help
+client/src/pages/help/RefundHelp.jsx:59:            We're here to help with any billing concerns. Our process is calm, clear, and respectful.
+client/src/pages/help/RefundHelp.jsx:102:              Need help with a refund or billing issue? We're here for you.
+client/src/pages/Analytics.jsx:33:      <div className="min-h-screen p-6 hero-premium relative overflow-hidden" role="status" aria-label="Loading analytics">
+client/src/pages/Analytics.jsx:40:              <div className="h-10 skeleton-premium w-1/3" aria-hidden="true"></div>
+client/src/pages/Analytics.jsx:43:                  <div key={i} className="skeleton-premium-card h-36" aria-hidden="true">
+client/src/pages/Analytics.jsx:45:                      <div className="w-12 h-12 skeleton-premium rounded-xl"></div>
+client/src/pages/Analytics.jsx:47:                        <div className="h-4 skeleton-premium w-1/2"></div>
+client/src/pages/Analytics.jsx:48:                        <div className="h-3 skeleton-premium w-1/3"></div>
+client/src/pages/Analytics.jsx:51:                    <div className="h-8 skeleton-premium w-1/4"></div>
+client/src/pages/Analytics.jsx:75:            className="btn-premium flex items-center gap-2 mx-auto"
+client/src/pages/Analytics.jsx:232:                className="btn-premium inline-flex items-center gap-2"
+client/src/pages/DesignSystem.jsx:18:    { name: "Warm Gold", hex: "#eac33b", usage: "CTAs, highlights, premium features" }
+client/src/pages/DesignSystem.jsx:413:                      For featured or premium content
+client/src/pages/WireframeTemplates.jsx:14: * - Gold: #eac33b (CTAs, highlights, premium)
+client/src/pages/WireframeTemplates.jsx:934:              { name: "James K.", email: "james@email.com", status: "Premium", time: "1h ago" },
+client/src/pages/WireframeTemplates.jsx:951:                      background: user.status === 'Premium' ? 'rgba(234, 195, 59, 0.2)' : 'rgba(143, 191, 159, 0.2)',
+client/src/pages/WireframeTemplates.jsx:952:                      color: user.status === 'Premium' ? '#8B7023' : '#2f5d5d'
+client/src/pages/Login.jsx:187:              className="w-full mt-4 btn-premium py-4 hover-glow-gold flex items-center justify-center gap-3 min-h-[56px] text-lg font-semibold rounded-xl disabled:opacity-60 disabled:cursor-not-allowed"
+client/src/pages/Register.jsx:225:              className="w-full mt-4 btn-premium py-4 hover-glow-gold flex items-center justify-center gap-3 min-h-[56px] text-lg font-semibold rounded-xl disabled:opacity-60 disabled:cursor-not-allowed"
+client/src/pages/FAQPage.jsx:131:    category: "Account & Billing",
+client/src/pages/FAQPage.jsx:138:        q: "How do I upgrade to Pro?",
+client/src/pages/FAQPage.jsx:139:        a: "Visit the Pricing page to see what Pro includes. You can upgrade from your dashboard anytime, and cancel anytime with no penalties."
+client/src/pages/FAQPage.jsx:143:        a: "Yes. You can cancel your subscription at any time from Settings. You'll retain access until the end of your billing period."
+client/src/pages/FAQPage.jsx:233:                <Link href="/support" className="btn-primary-premium" data-testid="link-support">
+client/src/pages/FAQPage.jsx:236:                <Link href="/crisis" className="btn-secondary-premium" data-testid="link-crisis">
+client/src/pages/NotFound.jsx:75:                className="btn-premium px-6 py-3 inline-flex items-center gap-2 hover-glow-gold"
+client/src/pages/Upgrade.jsx:19:export default function Upgrade() {
+client/src/pages/Upgrade.jsx:23:  const handleUpgrade = async () => {
+client/src/pages/Upgrade.jsx:26:      const upgradeToken = getAuthToken();
+client/src/pages/Upgrade.jsx:27:      const res = await fetch("/api/billing/checkout", {
+client/src/pages/Upgrade.jsx:31:          ...(upgradeToken ? { Authorization: `Bearer ${upgradeToken}` } : {}),
+client/src/pages/Upgrade.jsx:41:          title: "Checkout unavailable",
+client/src/pages/Upgrade.jsx:42:          description: data.error || "Unable to start checkout. Please try again.",
+client/src/pages/Upgrade.jsx:50:        description: "Unable to connect to payment service. Please try again.",
+client/src/pages/Upgrade.jsx:59:    title="Upgrade"
+client/src/pages/Upgrade.jsx:79:        title="Upgrade to Pro - The Genuine Love Project"
+client/src/pages/Upgrade.jsx:102:                <h1 className="text-display-lg text-teal mb-2" data-testid="text-upgrade-title">
+client/src/pages/Upgrade.jsx:103:                  Upgrade to <span className="text-gradient-brand">Pro</span>
+client/src/pages/Upgrade.jsx:137:                onClick={handleUpgrade}
+client/src/pages/Upgrade.jsx:139:                className={`w-full btn-premium py-4 text-lg hover-glow-gold ${upgrading ? 'opacity-70 cursor-not-allowed' : ''}`}
+client/src/pages/Upgrade.jsx:140:                data-testid="button-upgrade"
+client/src/pages/Upgrade.jsx:144:                    <><Loader2 className="w-5 h-5 animate-spin" />Redirecting to checkout...</>
+client/src/pages/ToolsPage.jsx:238:                    className="card-premium p-6 text-left transition-all group"
+client/src/pages/SubscriberBenefitsPage.jsx:13:const PREMIUM_FEATURES = [
+client/src/pages/SubscriberBenefitsPage.jsx:19:  { name: "Elite Tools", path: "/elite-tools", icon: Crown, description: "Premium cognitive enhancement" },
+client/src/pages/SubscriberBenefitsPage.jsx:58:        title="What You Get | Your Subscription Benefits"
+client/src/pages/SubscriberBenefitsPage.jsx:59:        description="Discover all the features, tools, and resources included in your Genuine Love Project subscription."
+client/src/pages/SubscriberBenefitsPage.jsx:64:        subtitle="Your complete guide to everything included in your subscription"
+client/src/pages/SubscriberBenefitsPage.jsx:67:          what: "A complete overview of your subscription benefits.",
+client/src/pages/SubscriberBenefitsPage.jsx:91:                    <h2 className="text-heading-lg text-teal" data-testid="text-plan-title">Premium Subscriber</h2>
+client/src/pages/SubscriberBenefitsPage.jsx:115:              {/* Premium Features Grid */}
+client/src/pages/SubscriberBenefitsPage.jsx:121:                  <h2 className="text-heading-lg text-teal" data-testid="text-premium-features">Premium Features Unlocked</h2>
+client/src/pages/SubscriberBenefitsPage.jsx:124:                  {PREMIUM_FEATURES.map((feature) => (
+client/src/pages/ProfessionalResourcesPage.jsx:214:                  <a href="tel:988" className="btn-primary-premium" data-testid="button-call-988">
+client/src/pages/ProfessionalResourcesPage.jsx:217:                  <Link href="/crisis" className="btn-secondary-premium" data-testid="link-crisis-page">
+client/src/pages/Premium.jsx:13:const STRIPE_PRICING_TABLE_ID = "prctbl_1SanK5RtwDw9mKhaSKDHxmn5";
+client/src/pages/Premium.jsx:14:const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "";
+client/src/pages/Premium.jsx:25:const PremiumLoadingFallback = () => (
+client/src/pages/Premium.jsx:29:      <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Loading premium feature...</p>
+client/src/pages/Premium.jsx:34:const PREMIUM_FEATURES = [
+client/src/pages/Premium.jsx:101:function StripePricingTable() {
+client/src/pages/Premium.jsx:111:    script.src = "https://js.stripe.com/v3/pricing-table.js";
+client/src/pages/Premium.jsx:133:    <div className="stripe-pricing-wrapper" data-testid="stripe-pricing-table">
+client/src/pages/Premium.jsx:134:      <stripe-pricing-table
+client/src/pages/Premium.jsx:135:        pricing-table-id={STRIPE_PRICING_TABLE_ID}
+client/src/pages/Premium.jsx:136:        publishable-key={STRIPE_PUBLISHABLE_KEY}
+client/src/pages/Premium.jsx:142:export default function Premium() {
+client/src/pages/Premium.jsx:146:  const ActiveComponent = PREMIUM_FEATURES.find(f => f.id === activeFeature)?.component;
+client/src/pages/Premium.jsx:150:      title="Premium Features"
+client/src/pages/Premium.jsx:154:        what: "Premium wellness tools and features.",
+client/src/pages/Premium.jsx:162:        { label: "Beginner", examples: ["Explore available features.", "Start with one premium tool."] },
+client/src/pages/Premium.jsx:169:        title="Premium Features"
+client/src/pages/Premium.jsx:194:                  <h1 className="text-display-lg text-teal" data-testid="text-premium-title">
+client/src/pages/Premium.jsx:195:                    Premium Features
+client/src/pages/Premium.jsx:239:              <StripePricingTable />
+client/src/pages/Premium.jsx:247:                    Premium Tools
+client/src/pages/Premium.jsx:249:                  {PREMIUM_FEATURES.map(feature => {
+client/src/pages/Premium.jsx:284:                <SafeBoundary label="PremiumTool">
+client/src/pages/Premium.jsx:285:                  <Suspense fallback={<PremiumLoadingFallback />}>
+client/src/pages/CognitiveArchitecturePage.tsx:339:                className="w-full btn-premium py-3"
+client/src/pages/CollaborativeLabPage.tsx:394:                    className="btn-premium flex items-center gap-2 px-4 py-2 disabled:opacity-50"
+client/src/pages/DailyWisdomOraclePage.tsx:312:              className="mt-3 btn-premium px-6 py-2 disabled:opacity-50"
+client/src/pages/KnowledgeSynthesisPage.tsx:274:            className="flex items-center gap-2 btn-premium px-4 py-2"
+client/src/pages/KnowledgeSynthesisPage.tsx:335:                  className="w-full btn-premium py-3 disabled:opacity-50 flex items-center justify-center gap-2"
+client/src/pages/KnowledgeSynthesisPage.tsx:420:                  className="w-full btn-premium py-3 disabled:opacity-50 flex items-center justify-center gap-2"
+client/src/pages/KnowledgeSynthesisPage.tsx:507:                  className="w-full btn-premium py-3 disabled:opacity-50 flex items-center justify-center gap-2"
+client/src/pages/PhilosophicalInquiryPage.tsx:240:                  className="w-full btn-premium py-3 disabled:opacity-50"
+client/src/pages/PhilosophicalInquiryPage.tsx:288:                      className="w-full btn-premium py-2 disabled:opacity-50"
+client/src/pages/SupportPage.tsx:69:                className="btn-secondary-premium inline-flex items-center gap-2"
+client/src/pages/WisdomPracticesPage.tsx:309:                className="w-full btn-premium py-3 disabled:opacity-50"
+client/src/pages/WisdomPracticesPage.tsx:362:                className="w-full btn-premium py-2 disabled:opacity-50"
+client/src/pages/WisdomPracticesPage.tsx:419:                  className="w-full btn-premium py-2"
+client/src/pages/WisdomSynthesisPage.tsx:296:                  className="btn-premium flex-1 py-3 disabled:opacity-50"
+client/src/pages/AtlasDashboard.tsx:490:                      className="btn-secondary-premium inline-flex items-center gap-2"
+client/src/pages/Settings.jsx.phase-s4.bak:301:                    className="input-premium bg-[var(--sage-50)] text-[var(--teal-600)] cursor-not-allowed"
+client/src/pages/Settings.jsx.phase-s4.bak:488:                  className="w-full btn-premium py-3.5 disabled:opacity-50"
+client/src/pages/AdaptiveCompanionPage.tsx:284:              className="btn-premium w-full py-4 text-lg flex items-center justify-center gap-2"
+client/src/pages/Admin.jsx:198:            <Link href="/dashboard" className="btn-premium inline-flex items-center justify-center gap-2">
+client/src/pages/Admin.jsx:642:    { id: 1, name: "Sarah M.", email: "sarah@example.com", status: "active", plan: "premium", sessions: 24, joined: "2 days ago", avatar: "S" },
+client/src/pages/Admin.jsx:714:                          user.plan === 'premium' ? { background: 'var(--glp-gold-10)', color: 'var(--glp-gold-dark)' } :
+client/src/pages/Admin.jsx:779:                <span style={{ color: 'var(--glp-sage)' }}>Active Subscriptions</span>
+client/src/pages/Admin.jsx:952:            <SystemStatusItem label="Payment Gateway" status="operational" latency="95ms" />
+client/src/pages/ContentAdminDashboard.jsx:84:          <div key={i} className="skeleton-premium-card h-24" />
+client/src/pages/ContentAdminDashboard.jsx:98:          className="btn-premium flex items-center gap-2"
+client/src/pages/ContentAdminDashboard.jsx:113:          <Link href="/write" className="btn-secondary-premium inline-flex items-center gap-2">
+client/src/pages/ContentAdminDashboard.jsx:253:              className="btn-secondary-premium flex items-center gap-2"
+client/src/pages/ContentAdminDashboard.jsx:262:              className="btn-premium flex items-center gap-2"
+client/src/pages/ContentAdminDashboard.jsx:276:            {[1, 2, 3].map(i => <div key={i} className="skeleton-premium-card h-20" />)}
+client/src/pages/ContentAdminDashboard.jsx:355:          className="btn-premium flex items-center gap-2"
+client/src/pages/ContentAdminDashboard.jsx:445:              className="btn-premium flex items-center gap-2"
+client/src/pages/ContentAdminDashboard.jsx:457:          {[1, 2, 3, 4].map(i => <div key={i} className="skeleton-premium-card h-40" />)}
+client/src/pages/ContentIndexPage.jsx:33:  { name: "Elite Tools", path: "/elite-tools", description: "Premium advanced features", category: "Mastery", icon: Award, protected: true },
+client/src/pages/ContentIndexPage.jsx:56:  { name: "Premium", path: "/premium", description: "Unlock premium features", category: "Account", icon: Star, protected: true },
+client/src/pages/ContentIndexPage.jsx:57:  { name: "Pricing", path: "/pricing", description: "Subscription plans", category: "Account", icon: Award },
+client/src/pages/ContentIndexPage.jsx:77:  { name: "Upgrade", path: "/upgrade", description: "Upgrade your plan", category: "Account", icon: Zap, protected: true },
+client/src/pages/ControlDashboard.jsx:399:            <div className="text-sm text-violet-600">Premium</div>
+client/src/pages/ControlDashboard.jsx:567:            { icon: CreditCard, label: "Payment Events", enabled: true },
+client/src/pages/ControlDashboard.jsx:594:    { name: "Stripe", description: "Payment processing and subscriptions", status: "connected", icon: "💳" },
+client/src/pages/GuidedJournalingPage.tsx:360:                  className="btn-premium flex items-center gap-2 px-5 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+client/src/pages/InsightCardsPage.tsx:245:            className="btn-premium flex items-center gap-2 px-4 py-2.5"
+client/src/pages/InsightCardsPage.tsx:319:                className="btn-premium px-5 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+client/src/pages/SystemsThinkingPage.tsx:238:                    className="btn-premium px-4 py-2"
+client/src/pages/SystemsThinkingPage.tsx:313:                  className="btn-premium flex-1 py-3 disabled:opacity-50"
+client/src/pages/BlogEditor.jsx:98:            <button className="btn-premium btn-lg" data-testid="button-login">
+client/src/pages/BlogEditor.jsx:159:              className="btn-premium flex items-center gap-2 disabled:opacity-50"
+client/src/pages/ContentStudioPage.tsx:172:          className="btn-secondary-premium inline-flex items-center gap-2"
+client/src/pages/ContentStudioPage.tsx:260:                    className="input-premium"
+client/src/pages/ContentStudioPage.tsx:271:                    className="min-h-[200px] input-premium"
+client/src/pages/ContentStudioPage.tsx:285:                  <button className="btn-secondary-premium btn-sm" onClick={selectAll} data-testid="button-select-all">
+client/src/pages/ContentStudioPage.tsx:288:                  <button className="btn-secondary-premium btn-sm" onClick={clearAll} data-testid="button-clear-all">
+client/src/pages/ContentStudioPage.tsx:317:                className="btn-premium flex-1 flex items-center justify-center gap-2"
+client/src/pages/ContentStudioPage.tsx:342:                      className="btn-secondary-premium btn-sm inline-flex items-center gap-2"
+client/src/pages/ContentStudioPage.tsx:350:                    <button className="btn-secondary-premium btn-sm inline-flex items-center gap-2" onClick={exportAsJSON} data-testid="button-export-json">
+client/src/pages/ContentStudioPage.tsx:353:                    <button className="btn-secondary-premium btn-sm inline-flex items-center gap-2" onClick={exportAsMarkdown} data-testid="button-export-md">
+client/src/pages/CourseCatalog.jsx:380:              data-testid="button-upgrade"
+client/src/pages/CourseCatalog.jsx:382:              View Pro Plan
+client/src/pages/DailyRitualPage.tsx:371:              className="btn-premium w-full"
+client/src/pages/DailyRitualPage.tsx:415:                className="btn-secondary-premium flex-1"
+client/src/pages/DailyRitualPage.tsx:422:                className="btn-premium flex-1"
+client/src/pages/DailyRitualPage.tsx:458:                className="input-premium w-full min-h-[200px] resize-none"
+client/src/pages/DailyRitualPage.tsx:468:                className="btn-secondary-premium flex-1"
+client/src/pages/DailyRitualPage.tsx:476:                className="btn-premium flex-1 disabled:opacity-50"
+client/src/pages/DailyRitualPage.tsx:511:                className="btn-secondary-premium flex-1"
+client/src/pages/DailyRitualPage.tsx:518:                className="btn-premium flex-1"
+client/src/pages/DailyRitualPage.tsx:548:              className="btn-secondary-premium"
+client/src/pages/DataRetention.jsx:35:      category: "Payment Records",
+client/src/pages/DataRetention.jsx:37:      details: "Financial records are kept as required by law. Payment details are stored by Stripe.",
+client/src/pages/LegalPage.jsx:20:  "Tax will be calculated at checkout.",
+client/src/pages/MetaLearningPage.tsx:286:                    className="flex-1 btn-premium py-3 disabled:opacity-50"
+client/src/pages/MirrorPage.tsx:196:              className="btn-premium w-full sm:w-auto"
+client/src/pages/Newsletter.jsx:45:          <div className="card-premium p-6 text-center" data-testid="card-what-expect-1">
+client/src/pages/Newsletter.jsx:55:          <div className="card-premium p-6 text-center" data-testid="card-what-expect-2">
+client/src/pages/Newsletter.jsx:65:          <div className="card-premium p-6 text-center" data-testid="card-what-expect-3">
+client/src/pages/Onboarding.tsx:479:              className="btn-secondary-premium"
+client/src/pages/Onboarding.tsx:489:              className="btn-premium"
+client/src/pages/Pricing.jsx:147:    fetch("/api/billing/pricing-view", {
+client/src/pages/Pricing.jsx:163:  const startCheckout = async (plan, billingInterval) => {
+client/src/pages/Pricing.jsx:171:      const checkoutToken = getAuthToken();
+client/src/pages/Pricing.jsx:172:      const res = await fetch("/api/billing/checkout", {
+client/src/pages/Pricing.jsx:176:          ...(checkoutToken ? { Authorization: `Bearer ${checkoutToken}` } : {}),
+client/src/pages/Pricing.jsx:179:        body: JSON.stringify({ plan, interval: billingInterval }),
+client/src/pages/Pricing.jsx:187:          title: "Checkout unavailable",
+client/src/pages/Pricing.jsx:188:          description: data.error || "Unable to start checkout. Please try again.",
+client/src/pages/Pricing.jsx:196:        description: "Unable to connect to payment service. Please try again.",
+client/src/pages/Pricing.jsx:275:            <div className="mt-8 inline-flex items-center rounded-full p-1 bg-white shadow-sm" style={{ border: '1px solid var(--glp-sage-20)' }} data-testid="toggle-billing-interval">
+client/src/pages/Pricing.jsx:369:                      onClick={() => startCheckout(tier.planId, tier.interval)}
+client/src/pages/Pricing.jsx:427:                What grows when you upgrade
+client/src/pages/Pricing.jsx:520:                Start with the free tier. Upgrade when (and only if) it feels right. Downgrade anytime. We're here for the long road, not a single transaction.
+client/src/pages/PricingPage.jsx:33:    description: "A gentle step up — unlock deeper tools with a single payment",
+client/src/pages/PricingPage.jsx:58:    cta: "Upgrade to Pro",
+client/src/pages/PricingPage.jsx:66:    description: "The complete experience with premium tools and early access",
+client/src/pages/PricingPage.jsx:82:    a: "Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period."
+client/src/pages/PricingPage.jsx:89:    q: "What payment methods do you accept?",
+client/src/pages/PricingPage.jsx:90:    a: "We accept all major credit cards through Stripe. Your payment information is securely encrypted."
+client/src/pages/PricingPage.jsx:94:    a: "You can cancel anytime from your billing page. You'll keep full access through the end of your paid period — no penalties, no hassle."
+client/src/pages/PricingPage.jsx:99:  const [billingPeriod, setBillingPeriod] = useState("monthly");
+client/src/pages/Settings.jsx:302:                    className="input-premium bg-[var(--sage-50)] text-[var(--teal-600)] cursor-not-allowed"
+client/src/pages/Settings.jsx:489:                  className="w-full btn-premium py-3.5 disabled:opacity-50"
+client/src/pages/Start.tsx:17:  reason: "value_proven" | "daily_limit" | "premium_feature" | null;
+client/src/pages/Start.tsx:39:type PaywallReason = "value_proven" | "daily_limit" | "premium_feature" | null;
+client/src/pages/Start.tsx:157:      : reason === "premium_feature"
+client/src/pages/Start.tsx:164:      : reason === "premium_feature"
+client/src/pages/Start.tsx:182:          onClick={() => track("paywall_clicked", { reason: reason ?? "unspecified", action: "upgrade" })}
+client/src/pages/Start.tsx:184:          data-testid="link-paywall-upgrade"
+client/src/components/admin/OperationsPanel.jsx:575:                  className="btn-premium inline-flex items-center gap-2 shrink-0"
+client/src/components/admin/OperationsPanel.jsx:597:                    className="btn-premium inline-flex items-center gap-2"
+client/src/components/admin/GroupedHealthOverview.jsx:20:          { label: 'Billing', tools: allTools.filter(t => t.id.includes('billing') || t.id === 'webhook' || t.id === 'products' || t.id === 'pro-features' || t.id === 'leads'), color: 'text-green-600' },
+client/src/components/admin/SystemHealthPanel.jsx:22:    { name: 'Stripe', active: health.services.stripe },
+client/src/components/admin/AdminNavGrid.jsx:29:        { label: "Billing Manager", icon: CreditCard, href: "/admin/billing", desc: "Subscription & payment management" },
+client/src/components/admin/DailyOpsChecklist.jsx:40:    { id: 'billing-review', label: 'Review Billing', desc: 'Check revenue, subscriptions, and payments', icon: DollarSign, href: '/admin/billing', category: 'revenue', priority: 'low' },
+client/src/components/admin/DailyOpsChecklist.jsx:46:    { id: 'revenue-check', label: 'Revenue Dashboard', desc: 'Review MRR, subscriptions, and financial health', icon: TrendingUp, href: '/admin/revenue', category: 'revenue', priority: 'low' },
+client/src/components/admin/AIKnowledgeHub.jsx:27:    { label: 'Infrastructure', count: 20, href: '/admin/tools', icon: Server, desc: 'Auth, billing, email, webhooks' },
+client/src/components/layout/Header.jsx:83:      ? [{ href: "/account/subscription", label: "Account", icon: UserCircle }]
+client/src/components/publishing/SoftUpgradeCTA.jsx:5:export default function SoftUpgradeCTA({ surface = "blog", variant = "light" }) {
+client/src/components/publishing/SoftUpgradeCTA.jsx:14:        data-testid={`soft-upgrade-cta-${surface}`}
+client/src/components/publishing/SoftUpgradeCTA.jsx:34:      data-testid={`soft-upgrade-cta-${surface}`}
+client/src/components/ui/IconBadge.jsx:17:  xs: "icon-premium-xs",
+client/src/components/ui/IconBadge.jsx:18:  sm: "icon-premium-sm",
+client/src/components/ui/IconBadge.jsx:19:  md: "icon-premium-md",
+client/src/components/ui/IconBadge.jsx:20:  lg: "icon-premium-lg",
+client/src/components/ui/IconBadge.jsx:21:  xl: "icon-premium-xl",
+client/src/components/ui/IconBadge.jsx:22:  "2xl": "icon-premium-2xl",
+client/src/components/ui/IconBadge.jsx:44:        "icon-premium flex items-center justify-center shrink-0",
+client/src/components/ui/badge.tsx:4:  variant?: "default" | "secondary" | "destructive" | "outline" | "sage" | "gold" | "premium";
+client/src/components/ui/badge.tsx:18:      premium: "border-transparent bg-gradient-to-r from-[var(--glp-gold-400)] to-[var(--glp-gold-500)] text-white shadow-[var(--glp-shadow-sm)]",
+client/src/components/avatar/BuddyAvatar.css:545:/* Kawaii dot eyes — small, dark warm brown for premium matte feel.
+client/src/components/avatar/BuddyPanel.tsx:154:  //     upgrade-prompts-blocked/analytics-restricted)
+client/src/components/DashboardCard.jsx:15:    premium: "card-elevated hover-glow-sage",
+client/src/components/HealingJourneys.jsx:14:    isPremium: false,
+client/src/components/HealingJourneys.jsx:35:    isPremium: true,
+client/src/components/HealingJourneys.jsx:56:    isPremium: true,
+client/src/components/HealingJourneys.jsx:77:    isPremium: true,
+client/src/components/HealingJourneys.jsx:96:    isPremium: false,
+client/src/components/HealingJourneys.jsx:117:    isPremium: true,
+client/src/components/HealingJourneys.jsx:189:              {journey.isPremium && (
+client/src/components/HealingJourneys.jsx:191:                  Premium
+client/src/components/HealingJourneys.jsx:403:                  {JOURNEYS.filter(j => !j.isPremium).map(renderJourneyCard)}
+client/src/components/HealingJourneys.jsx:409:                  Premium Journeys
+client/src/components/HealingJourneys.jsx:412:                  {JOURNEYS.filter(j => j.isPremium).map(renderJourneyCard)}
+client/src/components/PlanGate.jsx:22:  const userPlan = user?.subscriptionStatus || (isPro ? "pro" : "free");
+client/src/components/PlanGate.jsx:72:                data-testid="link-upgrade"
+client/src/components/SacredForm.jsx:45:        throw new Error('Subscription failed');
+client/src/components/Badges.jsx:126:  "premium-member": {
+client/src/components/Badges.jsx:127:    id: "premium-member",
+client/src/components/Badges.jsx:129:    description: "Became a premium member",
+client/src/components/BrandShell.jsx:19:              className="icon-premium icon-premium-lg icon-teal-gradient"
+client/src/components/BrandShell.jsx:67:              <a className="btn-premium-teal">Start a Check-In</a>
+client/src/components/EmptyState.jsx:72:      className="btn-premium px-6 py-3 inline-flex items-center gap-2"
+client/src/components/EmptyState.jsx:83:      className="btn-premium px-6 py-3 inline-flex items-center gap-2"
+client/src/components/GratitudePrompt.jsx:26:  "/checkout",
+client/src/components/GratitudePrompt.jsx:29:  "/billing",
+client/src/components/UpsellModal.jsx:21:      // exit immediately without navigating to the upgrade CTA.
+client/src/components/UpsellModal.jsx:111:          <p className="text-xs text-[#9CA5A0] mt-1">No subscription. No hidden fees.</p>
+client/src/components/UpsellModal.jsx:120:          Upgrade to Pro
+client/src/components/LevelUpModal.jsx:10:  25: { title: "Wisdom Walker", reward: "Unlock Premium Tools", color: "from-amber-400 to-orange-500" },
+client/src/components/SacredNav.jsx:17:  { href: "/premium", label: "Pricing", icon: Crown },
+client/src/components/TglpNavbar.jsx:221:                  href="/account/billing"
+client/src/components/TglpNavbar.jsx:227:                  data-testid="link-navbar-upgrade"
+client/src/components/TglpNavbar.jsx:230:                  Upgrade
+client/src/components/TglpNavbar.jsx:380:                    <span className="text-xs text-[var(--glp-ink-60)]">Premium member</span>
+client/src/components/TglpNavbar.jsx:384:                    href="/account/billing"
+client/src/components/TglpNavbar.jsx:391:                    data-testid="link-mobile-upgrade"
+client/src/components/UpsellModal.tsx:20:          Upgrade
+client/src/components/UpsellModal.tsx:25:            ? `Premium features for ${toolName} are coming soon.`
+client/src/components/UpsellModal.tsx:26:            : "Premium features coming soon."}
+client/src/config/toolCategories.js:128:      { id: "pro-features", label: "Pro Features", endpoint: "/api/pro-features", icon: Gem, desc: "Premium feature gates" },
+client/src/config/toolCategories.js:141:      { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/config/toolCategories.js:156:      { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: DollarSign, desc: "Stripe billing" },
+client/src/config/toolCategories.js:157:      { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
+client/src/config/navConfig.js:31:    { path: "/premium", label: "Premium", icon: Sparkles },
+client/src/config/navConfig.js:80:  "/premium",
+client/src/config/navConfig.js:81:  "/upgrade",
+client/src/content/allRoutes.json:9:  "/account/subscription",
+client/src/content/allRoutes.json:12:  "/admin/billing",
+client/src/content/allRoutes.json:36:  "/billing",
+client/src/content/allRoutes.json:92:  "/help/billing",
+client/src/content/allRoutes.json:168:  "/premium",
+client/src/content/allRoutes.json:239:  "/upgrade",
+client/src/content/analytics/eventSchema.ts:60:  subscriptionStart: {
+client/src/content/analytics/eventSchema.ts:62:    action: 'subscription_start',
+client/src/content/frameworks/index.js:6:export { default as mi, miPrinciples, miMicroPatterns, miReflectivePrompts, miUpgradeCtas } from './motivationalInterviewing.js';
+client/src/content/frameworks/motivationalInterviewing.ts:102:export const miUpgradeCtas = {
+client/src/content/frameworks/motivationalInterviewing.ts:105:    "Ready to explore more? Premium offers additional tools—no pressure.",
+client/src/content/frameworks/motivationalInterviewing.ts:111:    "This matters to you. Premium can help you go further.",
+client/src/content/frameworks/motivationalInterviewing.ts:160:  ctas: miUpgradeCtas,
+client/src/content/meta/platformProcessRegistry.ts:13:  | "billing"
+client/src/content/meta/platformProcessRegistry.ts:141:  billing: {
+client/src/content/meta/platformProcessRegistry.ts:142:    key: "billing",
+client/src/content/meta/platformProcessRegistry.ts:143:    title: "Clean billing tiers + upgrades",
+client/src/content/meta/routeMeta.autogen.ts:408:  "billing": {
+client/src/content/meta/routeMeta.autogen.ts:409:    "canonicalPath": "/billing",
+client/src/content/meta/routeMeta.autogen.ts:410:    "title": "Billing",
+client/src/content/meta/routeMeta.autogen.ts:2658:  "premium": {
+client/src/content/meta/routeMeta.autogen.ts:2659:    "canonicalPath": "/premium",
+client/src/content/meta/routeMeta.autogen.ts:2660:    "title": "Premium",
+client/src/content/meta/routeMeta.autogen.ts:3758:  "upgrade": {
+client/src/content/meta/routeMeta.autogen.ts:3759:    "canonicalPath": "/upgrade",
+client/src/content/meta/routeMeta.autogen.ts:3760:    "title": "Upgrade",
+client/src/content/meta/integrationRegistry.ts:5: * Categories: security|observability|content|growth|performance|accessibility|infra|payments|auth|data|devex
+client/src/content/meta/integrationRegistry.ts:11:  category: 'security' | 'observability' | 'content' | 'growth' | 'performance' | 'accessibility' | 'infra' | 'payments' | 'auth' | 'data' | 'devex';
+client/src/content/meta/integrationRegistry.ts:61:  // PAYMENTS (DONE)
+client/src/content/meta/integrationRegistry.ts:64:    integrationKey: 'payments_stripe',
+client/src/content/meta/integrationRegistry.ts:65:    category: 'payments',
+client/src/content/meta/integrationRegistry.ts:67:    canonicalFiles: ['server/routes/stripe.mjs', 'server/billing/entitlements.mjs'],
+client/src/content/meta/integrationRegistry.ts:68:    routeKeysTouched: ['upgrade', 'premium', 'billing'],
+client/src/content/meta/integrationRegistry.ts:69:    notes: 'Stripe checkout, webhooks, subscription management',
+client/src/content/meta/integrationRegistry.ts:73:    integrationKey: 'payments_entitlements',
+client/src/content/meta/integrationRegistry.ts:74:    category: 'payments',
+client/src/content/meta/integrationRegistry.ts:76:    canonicalFiles: ['server/billing/applyPendingEntitlements.mjs', 'server/billing/entitlements.mjs'],
+client/src/content/meta/integrationRegistry.ts:78:    notes: 'Feature gating based on subscription tier',
+client/src/content/meta/integrationRegistry.ts:531:    integrationKey: 'admin_billing_viewer',
+client/src/content/meta/integrationRegistry.ts:534:    canonicalFiles: ['client/src/pages/admin/BillingViewer.jsx', 'server/routes/adminBilling.mjs'],
+client/src/content/meta/integrationRegistry.ts:535:    routeKeysTouched: ['admin_billing'],
+client/src/content/meta/integrationRegistry.ts:536:    notes: 'P128 - Admin billing viewer (read-only)',
+client/src/content/microcopy/errorMicrocopy.ts:42:    upgrade: "There may be something perfect waiting for you."
+client/src/content/microcopy/wellnessMicrocopy.ts:716:  premium: {
+client/src/content/microcopy/wellnessMicrocopy.ts:717:    label: "Premium",
+client/src/content/processes/top50ProcessMap.ts:80:  { id: 46, name: 'Pricing/tiers pattern', category: 'E', status: 'done', description: 'Subscription structure' },
+client/src/content/processes/top50ProcessMap.ts:81:  { id: 47, name: 'Stripe readiness', category: 'E', status: 'done', description: 'Webhook guardrails' },
+client/src/content/searchIndex.ts:271:    title: "Premium",
+client/src/content/searchIndex.ts:272:    description: "Premium features and upgrades.",
+client/src/content/searchIndex.ts:273:    tags: ["premium", "upgrade"],
+client/src/content/searchIndex.ts:274:    path: "/premium",
+client/src/content/searchIndex.ts:279:    title: "Upgrade",
+client/src/content/searchIndex.ts:280:    description: "Upgrade options and next steps.",
+client/src/content/searchIndex.ts:281:    tags: ["upgrade", "plans"],
+client/src/content/searchIndex.ts:282:    path: "/upgrade",
+client/src/content/searchIndex.ts:291:    tags: ["pricing", "plans", "subscription"],
+client/src/content/searchIndex.ts:596:    id: "platform-premium",
+client/src/content/searchIndex.ts:597:    title: "Premium",
+client/src/content/searchIndex.ts:598:    description: "Premium features and membership benefits.",
+client/src/content/searchIndex.ts:599:    path: "/premium",
+client/src/content/searchIndex.ts:601:    tags: ["premium", "membership", "features"],
+client/src/content/searchIndex.ts:605:    id: "platform-upgrade",
+client/src/content/searchIndex.ts:606:    title: "Upgrade",
+client/src/content/searchIndex.ts:607:    description: "Upgrade your plan and unlock premium features.",
+client/src/content/searchIndex.ts:608:    path: "/upgrade",
+client/src/content/searchIndex.ts:610:    tags: ["upgrade", "pricing", "premium"],
+client/src/content/routes.js:1264:    description: 'Simple, transparent pricing. Start free and stay free as long as you need. Upgrade only when it feels right.',
+client/src/content/routes.js:1272:          'If you ever upgrade, you can cancel anytime',
+client/src/content/routes.js:1281:          'Premium: Unlimited AI companion, deeper healing journeys, advanced analytics',
+client/src/content/routes.js:1282:          'Lifetime option: One-time payment for forever access',
+client/src/content/routes.js:1308:      { icon: 'Sparkles', title: 'One-time option available', description: 'Lifetime access with a single payment, if that feels better.' }
+client/src/content/routes.js:1333:          { icon: 'Heart', title: 'Upgrade if you wish', text: 'Premium unlocks more when you are ready. No rush.' }
+client/src/content/routes.js:1437:          { icon: 'Sparkles', title: 'Free Forever', text: 'Core features never expire. Upgrade only if you want more.' },
+client/src/content/routes.js:1635:          'Upgrade path available when you\'re ready for deeper work',
+client/src/content/routes.js:6578:    route: '/premium',
+client/src/content/routes.js:6580:    pageLabel: 'Premium',
+client/src/content/routes.js:6581:    title: 'Premium — The Genuine Love Project',
+client/src/content/routes.js:6584:      eyebrow: 'Upgrade',
+client/src/content/routes.js:6586:      titleHighlight: 'Premium.',
+client/src/content/routes.js:6588:      primaryCta: { label: 'Upgrade Now', href: '#upgrade' },
+client/src/content/routes.js:6593:    route: '/billing',
+client/src/content/routes.js:6595:    pageLabel: 'Billing',
+client/src/content/routes.js:6596:    title: 'Billing — The Genuine Love Project',
+client/src/content/routes.js:6597:    description: 'Manage your subscription and payment methods.',
+client/src/content/routes.js:6600:      title: 'Billing &',
+client/src/content/routes.js:6601:      titleHighlight: 'Payments.',
+client/src/content/routes.js:6602:      subtitle: 'Manage your subscription, view invoices, and update payment methods.',
+client/src/content/routes.js:6603:      primaryCta: { label: 'Manage Subscription', href: '#subscription' },
+client/src/content/routes.js:6608:    route: '/upgrade',
+client/src/content/routes.js:6610:    pageLabel: 'Upgrade',
+client/src/content/routes.js:6611:    title: 'Upgrade — The Genuine Love Project',
+client/src/content/routes.js:6612:    description: 'Upgrade your account for full access.',
+client/src/content/routes.js:6615:      title: 'Upgrade your',
+client/src/content/routes.js:6617:      subtitle: 'Get access to all premium features.',
+client/src/content/routes.js:6638:    route: '/account/billing',
+client/src/content/routes.js:6640:    pageLabel: 'Billing',
+client/src/content/routes.js:6641:    title: 'Billing — The Genuine Love Project',
+client/src/content/routes.js:6642:    description: 'Manage your subscription and billing.',
+client/src/content/routes.js:6644:      eyebrow: 'Billing',
+client/src/content/routes.js:6645:      title: 'Billing &',
+client/src/content/routes.js:6646:      titleHighlight: 'subscription.',
+client/src/content/routes.js:6647:      subtitle: 'Manage your payment and subscription details.',
+client/src/content/routes.js:6648:      primaryCta: { label: 'Manage Billing', href: '#billing' },
+client/src/content/routes.js:6751:    route: '/admin/billing',
+client/src/content/routes.js:6752:    routeKey: 'admin_billing',
+client/src/content/routes.js:6754:    pageLabel: 'Billing Overview',
+client/src/content/routes.js:6755:    title: 'Billing Overview — Admin — The Genuine Love Project',
+client/src/content/routes.js:6756:    description: 'View subscription and billing statistics.',
+client/src/content/routes.js:6760:      title: 'Billing',
+client/src/content/routes.js:6762:      subtitle: 'Read-only view of subscription data and metrics.',
+client/src/content/routes.js.BACKUP.1780108447:1318:        title: 'Premium Features',
+client/src/content/routes.js.BACKUP.1780108447:1324:          'Your one next step: Upgrade your experience'
+client/src/content/routes.js.BACKUP.1780108447:1349:        subtitle: 'These foundational tools are available to everyone, no subscription required.',
+client/src/content/routes.js.BACKUP.1780108447:1359:        id: 'premium-tools',
+client/src/content/routes.js.BACKUP.1780108447:1360:        eyebrow: 'Premium Features',
+client/src/content/routes.js.BACKUP.1780108447:1362:        subtitle: 'Unlock the full power of the platform with a subscription.',
+client/src/content/routes.js.BACKUP.1780108447:1565:    description: 'Simple, transparent pricing. Start free and stay free as long as you need. Upgrade only when it feels right.',
+client/src/content/routes.js.BACKUP.1780108447:1573:          'If you ever upgrade, you can cancel anytime',
+client/src/content/routes.js.BACKUP.1780108447:1582:          'Premium: Unlimited AI companion, deeper healing journeys, advanced analytics',
+client/src/content/routes.js.BACKUP.1780108447:1583:          'Lifetime option: One-time payment for forever access',
+client/src/content/routes.js.BACKUP.1780108447:1609:      { icon: 'Sparkles', title: 'One-time option available', description: 'Lifetime access with a single payment, if that feels better.' }
+client/src/content/routes.js.BACKUP.1780108447:1634:          { icon: 'Heart', title: 'Upgrade if you wish', text: 'Premium unlocks more when you are ready. No rush.' }
+client/src/content/routes.js.BACKUP.1780108447:1738:          { icon: 'Sparkles', title: 'Free Forever', text: 'Core features never expire. Upgrade only if you want more.' },
+client/src/content/routes.js.BACKUP.1780108447:1936:          'Upgrade path available when you\'re ready for deeper work',
+client/src/content/routes.js.BACKUP.1780108447:6840:    description: 'Premium tools for advanced practitioners.',
+client/src/content/routes.js.BACKUP.1780108447:6842:      eyebrow: 'Premium Access',
+client/src/content/routes.js.BACKUP.1780108447:6847:      secondaryCta: { label: 'Upgrade', href: '/upgrade' }
+client/src/content/routes.js.BACKUP.1780108447:7578:    route: '/premium',
+client/src/content/routes.js.BACKUP.1780108447:7580:    pageLabel: 'Premium',
+client/src/content/routes.js.BACKUP.1780108447:7581:    title: 'Premium — The Genuine Love Project',
+client/src/content/routes.js.BACKUP.1780108447:7584:      eyebrow: 'Upgrade',
+client/src/content/routes.js.BACKUP.1780108447:7586:      titleHighlight: 'Premium.',
+client/src/content/routes.js.BACKUP.1780108447:7588:      primaryCta: { label: 'Upgrade Now', href: '#upgrade' },
+client/src/content/routes.js.BACKUP.1780108447:7593:    route: '/billing',
+client/src/content/routes.js.BACKUP.1780108447:7595:    pageLabel: 'Billing',
+client/src/content/routes.js.BACKUP.1780108447:7596:    title: 'Billing — The Genuine Love Project',
+client/src/content/routes.js.BACKUP.1780108447:7597:    description: 'Manage your subscription and payment methods.',
+client/src/content/routes.js.BACKUP.1780108447:7600:      title: 'Billing &',
+client/src/content/routes.js.BACKUP.1780108447:7601:      titleHighlight: 'Payments.',
+client/src/content/routes.js.BACKUP.1780108447:7602:      subtitle: 'Manage your subscription, view invoices, and update payment methods.',
+client/src/content/routes.js.BACKUP.1780108447:7603:      primaryCta: { label: 'Manage Subscription', href: '#subscription' },
+client/src/content/routes.js.BACKUP.1780108447:7608:    route: '/upgrade',
+client/src/content/routes.js.BACKUP.1780108447:7610:    pageLabel: 'Upgrade',
+client/src/content/routes.js.BACKUP.1780108447:7611:    title: 'Upgrade — The Genuine Love Project',
+client/src/content/routes.js.BACKUP.1780108447:7612:    description: 'Upgrade your account for full access.',
+client/src/content/routes.js.BACKUP.1780108447:7615:      title: 'Upgrade your',
+client/src/content/routes.js.BACKUP.1780108447:7617:      subtitle: 'Get access to all premium features.',
+client/src/content/routes.js.BACKUP.1780108447:7638:    route: '/account/billing',
+client/src/content/routes.js.BACKUP.1780108447:7640:    pageLabel: 'Billing',
+client/src/content/routes.js.BACKUP.1780108447:7641:    title: 'Billing — The Genuine Love Project',
+client/src/content/routes.js.BACKUP.1780108447:7642:    description: 'Manage your subscription and billing.',
+client/src/content/routes.js.BACKUP.1780108447:7644:      eyebrow: 'Billing',
+client/src/content/routes.js.BACKUP.1780108447:7645:      title: 'Billing &',
+client/src/content/routes.js.BACKUP.1780108447:7646:      titleHighlight: 'subscription.',
+client/src/content/routes.js.BACKUP.1780108447:7647:      subtitle: 'Manage your payment and subscription details.',
+client/src/content/routes.js.BACKUP.1780108447:7648:      primaryCta: { label: 'Manage Billing', href: '#billing' },
+client/src/content/routes.js.BACKUP.1780108447:7751:    route: '/admin/billing',
+client/src/content/routes.js.BACKUP.1780108447:7752:    routeKey: 'admin_billing',
+client/src/content/routes.js.BACKUP.1780108447:7754:    pageLabel: 'Billing Overview',
+client/src/content/routes.js.BACKUP.1780108447:7755:    title: 'Billing Overview — Admin — The Genuine Love Project',
+client/src/content/routes.js.BACKUP.1780108447:7756:    description: 'View subscription and billing statistics.',
+client/src/content/routes.js.BACKUP.1780108447:7760:      title: 'Billing',
+client/src/content/routes.js.BACKUP.1780108447:7762:      subtitle: 'Read-only view of subscription data and metrics.',
+client/src/content/routes/marketingRoutes.js:183:        title: 'Premium Features',
+client/src/content/routes/marketingRoutes.js:189:          'Your one next step: Upgrade your experience'
+client/src/content/routes/marketingRoutes.js:214:        subtitle: 'These foundational tools are available to everyone, no subscription required.',
+client/src/content/routes/marketingRoutes.js:224:        id: 'premium-tools',
+client/src/content/routes/marketingRoutes.js:225:        eyebrow: 'Premium Features',
+client/src/content/routes/marketingRoutes.js:227:        subtitle: 'Unlock the full power of the platform with a subscription.',
+client/src/content/routes/toolRoutes.js:58:    description: 'Premium tools for advanced practitioners.',
+client/src/content/routes/toolRoutes.js:60:      eyebrow: 'Premium Access',
+client/src/content/routes/toolRoutes.js:65:      secondaryCta: { label: 'Upgrade', href: '/upgrade' }
+client/src/context/AuthContext.jsx:207:  const subscriptionStatus = user?.subscriptionStatus || "free";
+client/src/context/AuthContext.jsx:208:  const isPro = subscriptionStatus === "pro";
+client/src/context/AuthContext.jsx:211:    console.debug("[Auth] subscriptionStatus:", subscriptionStatus, "isPro:", isPro);
+client/src/context/AuthContext.jsx:230:        subscriptionStatus,
+client/src/figma/frames.ts:31:    "Billing"
+client/src/figma/mapping.ts:22:  "Billing": "pages/account/Billing.jsx",
+client/src/guards/RequirePro.jsx:5:  const plan = user?.subscription_status || "free";
+client/src/guards/RequirePro.jsx:7:  if (plan !== "pro" && plan !== "premium") {
+client/src/guards/RequirePro.jsx:11:        <p>This feature requires a Pro subscription.</p>
+client/src/hooks/useFeatureAccess.js:5:  const { subscriptionStatus, isPro } = useAuth();
+client/src/hooks/useFeatureAccess.js:14:      subscriptionStatus,
+client/src/hooks/useFeatureAccess.js:25:    reason: allowed ? "access_granted" : "upgrade_required",
+client/src/hooks/useFeatureAccess.js:27:    subscriptionStatus,
+client/src/hooks/useFeatureAccess.js:35:export function checkFeatureAccess(featureKey, subscriptionStatus) {
+client/src/hooks/useFeatureAccess.js:39:  const isPro = subscriptionStatus === "pro";
+client/src/hooks/useFeatureAccess.js:45:    reason: allowed ? "access_granted" : "upgrade_required",
+client/src/hooks/useLumiAudio.js:27:// Safe no-op once migrated; fires only on first read after upgrade.
+client/src/lib/track.ts:55:export function trackConversion(type: 'cta' | 'signup' | 'subscription', details: Record<string, string>) {
+client/src/lib/track.ts:61:    track('subscriptionStart', details);
+client/src/lib/security.ts:27: * Disable right-click context menu on premium content
+client/src/lib/security.ts:123: * Log premium content access (for audit trails)
+client/src/services/billingClient.js:2: * Billing client
+client/src/services/billingClient.js:3: * Client-safe only. Never import or expose STRIPE_SECRET_KEY here.
+client/src/services/billingClient.js:24:      `Billing request failed with status ${response.status}`;
+client/src/services/billingClient.js:31:export async function createCheckoutSession(priceIdOrOptions) {
+client/src/services/billingClient.js:37:  const response = await fetch("/api/billing/checkout", {
+client/src/services/billingClient.js:48:export async function createBillingPortalSession() {
+client/src/services/billingClient.js:49:  const response = await fetch("/api/billing/portal", {
+client/src/services/billingClient.js:59:export async function getSubscriptionStatus() {
+client/src/services/billingClient.js:60:  const response = await fetch("/api/billing/subscription-status", {
+client/src/services/billingClient.js:70:  const response = await fetch("/api/billing/current-plan", {
+client/src/services/billingClient.js:79:export async function getBillingPlans() {
+client/src/services/billingClient.js:80:  const response = await fetch("/api/billing/plans", {
+client/src/styles/tokens.css:751:.glass-premium {
+client/src/styles/brand-tokens.css:78:     button sheen, premium card rings, and ambient glows. Composed
+client/src/styles/brand-tokens.css:323:    Premium Typography System
+client/src/styles/brand-tokens.css:392:    Premium Gradient Presets — layered, dimensional, mesmerizing
+client/src/styles/brand-tokens.css:405:  --glp-gradient-premium: linear-gradient(135deg, var(--glp-primary), var(--glp-sage), var(--glp-gold));
+client/src/styles/canva-landing.css:2070:/* --- Stats Section — Premium Floating Cards --- */
+client/src/styles/brand.css:108:.btn-premium {
+client/src/styles/brand.css:123:.btn-premium:hover {
+client/src/styles/brand.css:129:.btn-premium:active {
+client/src/styles/brand.css:135:.btn-premium:focus-visible {
+client/src/styles/brand.css:141:  .btn-premium { transition: none !important; }
+client/src/styles/brand.css:142:  .btn-premium:hover, .btn-premium:active { transform: none !important; }
+client/src/styles/brand.css:145:.btn-premium.btn-lg {
+client/src/styles/brand.css:150:.btn-premium.btn-sm {
+client/src/styles/brand.css:155:.btn-secondary-premium {
+client/src/styles/brand.css:170:.btn-secondary-premium:hover {
+client/src/styles/brand.css:177:.btn-secondary-premium:active {
+client/src/styles/brand.css:184:.btn-secondary-premium:focus-visible {
+client/src/styles/brand.css:190:  .btn-secondary-premium { transition: none !important; }
+client/src/styles/brand.css:191:  .btn-secondary-premium:hover, .btn-secondary-premium:active { transform: none !important; }
+client/src/styles/brand.css:292:.btn-secondary-premium.btn-sm {
+client/src/styles/brand.css:521:/* Premium Shimmer Effect */
+client/src/styles/brand.css:556:/* Premium Ring Glow */
+client/src/styles/brand.css:565:/* Premium Input Focus */
+client/src/styles/brand.css:581:/* Premium Divider */
+client/src/styles/brand.css:588:/* Premium Badge Variants */
+client/src/styles/brand.css:599:.badge-premium {
+client/src/styles/brand.css:669:  .btn-premium,
+client/src/styles/brand.css:670:  .btn-secondary-premium,
+client/src/styles/brand.css:675:  .btn-premium:hover {
+client/src/styles/brand.css:695:  .card-premium:hover,
+client/src/styles/brand.css:716:html[data-mode="low-stim"] .card-premium:hover {
+client/src/styles/brand.css:721:   PREMIUM VISUAL ENHANCEMENTS
+client/src/styles/brand.css:725:/* Premium Card Variants */
+client/src/styles/brand.css:726:.card-premium {
+client/src/styles/brand.css:737:.card-premium::before {
+client/src/styles/brand.css:747:.card-premium:hover {
+client/src/styles/brand.css:772:/* Premium Input Fields */
+client/src/styles/brand.css:773:.input-premium {
+client/src/styles/brand.css:785:.input-premium::placeholder {
+client/src/styles/brand.css:789:.input-premium:focus {
+client/src/styles/brand.css:795:.input-premium:hover:not(:focus) {
+client/src/styles/brand.css:799:.dark .input-premium {
+client/src/styles/brand.css:805:.skeleton-premium {
+client/src/styles/brand.css:822:.skeleton-premium-card {
+client/src/styles/brand.css:832:.skeleton-premium-card::before {
+client/src/styles/brand.css:843:/* Premium Icon Containers with Glow */
+client/src/styles/brand.css:880:/* Premium Text Effects */
+client/src/styles/brand.css:881:.text-gradient-premium {
+client/src/styles/brand.css:882:  background: var(--glp-gradient-premium);
+client/src/styles/brand.css:920:.body-premium {
+client/src/styles/brand.css:927:.caption-premium {
+client/src/styles/brand.css:1004:.focus-ring-premium:focus-visible {
+client/src/styles/brand.css:1023:.hero-premium {
+client/src/styles/brand.css:1029:.hero-premium::before {
+client/src/styles/brand.css:1431:  PREMIUM TYPOGRAPHY SYSTEM
+client/src/styles/brand.css:1543:/* Premium text gradients */
+client/src/styles/brand.css:1544:.text-gradient-premium {
+client/src/styles/brand.css:1623:/* Premium icon badges - healing luxury treatment */
+client/src/styles/brand.css:1778:.card-premium {
+client/src/styles/brand.css:1786:.card-premium:hover {
+client/src/styles/brand.css:1811:/* Glass morphism premium */
+client/src/styles/brand.css:1812:.glass-premium {
+client/src/styles/brand.css:1869:  PREMIUM ANIMATIONS
+client/src/styles/brand.css:1901:/* Skeleton loading premium */
+client/src/styles/brand.css:1902:.skeleton-premium {
+client/src/styles/brand.css:1914:.skeleton-premium-card {
+client/src/styles/brand.css:1971:  INPUT PREMIUM STYLES
+client/src/styles/brand.css:1974:.input-premium {
+client/src/styles/brand.css:1985:.input-premium:focus {
+client/src/styles/brand.css:1991:.input-premium::placeholder {
+client/src/styles/brand.css:1996:  ENHANCED ICON SYSTEM - Premium Effects
+client/src/styles/brand.css:2019:/* Premium icon glow effects */
+client/src/styles/brand.css:2060:/* Premium icon badge containers */
+client/src/styles/brand.css:2233:/* Premium text gradients */
+client/src/styles/brand.css:2234:.text-gradient-premium {
+client/src/styles/brand.css:2357:  GLASS PREMIUM ENHANCEMENT
+client/src/styles/brand.css:2360:.glass-premium {
+client/src/styles/brand.css:2370:  CARD PREMIUM ENHANCEMENT
+client/src/styles/brand.css:2373:.card-premium {
+client/src/styles/brand.css:2383:.card-premium:hover {
+client/src/styles/brand.css:2418:   Clear visual hierarchy with premium type system
+client/src/styles/brand.css:2553:/* Premium gradient text */
+client/src/styles/brand.css:2747:/* Premium hero gradient */
+client/src/styles/brand.css:2748:.bg-hero-premium {
+client/src/utils/trackSignalEvent.js:14:  'checkout_start',
+client/src/sections/PricingFAQ.jsx:2: * PricingFAQ — accordion of subscription-related questions.
+client/src/sections/PricingFAQ.jsx:19:    a: "Yes, anytime. Upgrade and your new features unlock immediately. Downgrade takes effect at your next billing cycle.",
+client/src/sections/PricingFAQ.jsx:35:    a: "You keep everything you had until the end of your billing period, then gracefully return to the free tier. No data loss. No drama.",
+client/src/sections/EmailCapture.jsx:2: * EmailCapture — homepage subscription surface.
+client/src/sections/ValueBridge.jsx:6: * upgrades, never charges, never overrides crisis routing.
+client/src/sections/ValueProposition.jsx:10: * (When a backend subscription endpoint lands, swap the handleSubmit.)
+client/src/design-system/components/MMHBCard.tsx:49:/** SSR-safe reduced-motion subscription. */
+client/src/checkin-flow/types/checkInFlowTypes.ts:3: * Trust-first contract: subscription messaging never appears before breathing completes.
+client/src/checkin-flow/types/checkInFlowTypes.ts:9:  | "checkout"
+client/src/checkin-flow/types/checkInFlowTypes.ts:51:  subscriptionMentioned: boolean;
+client/src/checkin-flow/types/checkInFlowTypes.ts:67:/** Selector contract: subscription UI MUST gate behind this. */
+client/src/checkin-flow/types/checkInFlowTypes.ts:68:export type IsSubscriptionMessagingAllowed = (state: FlowState) => boolean;
+client/src/checkin-flow/copy/microCopy.ts:60:export const checkoutCopy = {
+client/src/checkin-flow/state/useCheckInFlowStore.ts:5: *   - subscriptionMentioned can ONLY become true via the guarded goToOffer()
+client/src/checkin-flow/state/useCheckInFlowStore.ts:16:  IsSubscriptionMessagingAllowed,
+client/src/checkin-flow/state/useCheckInFlowStore.ts:29:  subscriptionMentioned: false,
+client/src/checkin-flow/state/useCheckInFlowStore.ts:63:      return { breathingCompleted: true, step: "checkout" };
+client/src/checkin-flow/state/useCheckInFlowStore.ts:83:    set({ step: "offer", subscriptionMentioned: true });
+client/src/checkin-flow/state/useCheckInFlowStore.ts:96: * Selector — subscription messaging is allowed ONLY when:
+client/src/checkin-flow/state/useCheckInFlowStore.ts:99: *   3. subscriptionMentioned has been flipped true by goToOffer()
+client/src/checkin-flow/state/useCheckInFlowStore.ts:101: * Any UI rendering subscription content MUST gate behind this.
+client/src/checkin-flow/state/useCheckInFlowStore.ts:103:export const isSubscriptionMessagingAllowed: IsSubscriptionMessagingAllowed = (
+client/src/checkin-flow/state/useCheckInFlowStore.ts:108:  state.subscriptionMentioned === true;
+client/src/checkin-flow/state/useCheckInFlowStore.ts:117: *    - useCheckInFlowState(selector) — read-only state subscription
+client/src/checkin-flow/state/useCheckInFlowStore.ts:119: *    - isSubscriptionMessagingAllowed selector
+client/src/checkin-flow/governance/checkInFlowRules.ts:15:  checkoutCopy,
+client/src/checkin-flow/governance/checkInFlowRules.ts:42:    checkoutCopy.title, checkoutCopy.subtitle,
+client/src/checkin-flow/governance/checkInFlowRules.ts:57:    checkoutCopy.title, checkoutCopy.subtitle,
+client/src/checkin-flow/governance/checkInFlowRules.ts:64:const SUBSCRIPTION_TERMS = [
+client/src/checkin-flow/governance/checkInFlowRules.ts:65:  "subscribe", "subscription", "upgrade", "premium", "plan",
+client/src/checkin-flow/governance/checkInFlowRules.ts:66:  "checkout", "buy", "purchase", "pay", "$", "trial",
+client/src/checkin-flow/governance/checkInFlowRules.ts:73:    description: "Subscription messaging never appears before breathing is completed.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:75:      !s.subscriptionMentioned ||
+client/src/checkin-flow/governance/checkInFlowRules.ts:76:      (s.subscriptionMentioned && s.breathingCompleted),
+client/src/checkin-flow/governance/checkInFlowRules.ts:81:    description: "Welcome copy contains no subscription terms.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:84:      return !SUBSCRIPTION_TERMS.some((t) => text.includes(t));
+client/src/checkin-flow/governance/checkInFlowRules.ts:90:    description: "Breathing-step copy contains no subscription terms.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:93:      // 'checkout' here refers to the FLOW step name (post-breathing feeling check),
+client/src/checkin-flow/governance/checkInFlowRules.ts:94:      // never to a payment checkout. Allow.
+client/src/checkin-flow/governance/checkInFlowRules.ts:95:      return !SUBSCRIPTION_TERMS
+client/src/checkin-flow/governance/checkInFlowRules.ts:96:        .filter((t) => t !== "checkout")
+client/src/checkin-flow/governance/checkInFlowRules.ts:187:    description: "Pre-offer copy carries no subscription / payment language (no hard-sell modal copy can leak).",
+client/src/checkin-flow/governance/checkInFlowRules.ts:189:      !SUBSCRIPTION_TERMS
+client/src/checkin-flow/governance/checkInFlowRules.ts:190:        .filter((t) => t !== "checkout") // step name, not payment
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:16:import { FlowStepCheckout } from "./FlowStepCheckout";
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:24:  /** Called when user accepts the offer (delegate to your subscription/onboarding entry). */
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:61:      {step === "checkout" && <FlowStepCheckout />}
+client/src/checkin-flow/components/FlowStepWelcome.tsx:4: * NO subscription content. Crisis link rendered.
+client/src/checkin-flow/components/FlowStepBreathing.tsx:4: * NO subscription content.
+client/src/checkin-flow/components/FlowStepCheckout.tsx:3: * 4 shift options. NO subscription content yet — that's the next step.
+client/src/checkin-flow/components/FlowStepCheckout.tsx:9:import { checkoutCopy, shiftOptions } from "../copy/microCopy";
+client/src/checkin-flow/components/FlowStepCheckout.tsx:12:export function FlowStepCheckout() {
+client/src/checkin-flow/components/FlowStepCheckout.tsx:23:      data-testid="checkin-flow-step-checkout"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:24:      aria-labelledby="checkin-checkout-title"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:27:        id="checkin-checkout-title"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:34:        data-testid="text-checkout-title"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:36:        {checkoutCopy.title}
+client/src/checkin-flow/components/FlowStepCheckout.tsx:46:        {checkoutCopy.subtitle}
+client/src/checkin-flow/components/FlowStepCheckout.tsx:116:          data-testid="button-checkout-continue"
+client/src/checkin-flow/components/FlowStepCheckout.tsx:134:          data-testid="link-crisis-checkout"
+client/src/checkin-flow/components/FlowStepOffer.tsx:2: * Phase 14 — Soft subscription invitation.
+client/src/checkin-flow/components/FlowStepOffer.tsx:3: * GUARDED: renders only when isSubscriptionMessagingAllowed(state) === true.
+client/src/checkin-flow/components/FlowStepOffer.tsx:12:  isSubscriptionMessagingAllowed,
+client/src/checkin-flow/components/FlowStepOffer.tsx:26:  if (!isSubscriptionMessagingAllowed(state)) {
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:3: * 22 assertions covering all 14 rules + the hard subscription guard.
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:25:  isSubscriptionMessagingAllowed,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:52:  // ---- Hard subscription guard --------------------------------------------
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:58:  it("isSubscriptionMessagingAllowed is false on initial state", () => {
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:59:    expect(isSubscriptionMessagingAllowed(useCheckInFlowStore.getState())).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:70:    expect(after.subscriptionMentioned).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:71:    expect(isSubscriptionMessagingAllowed(after)).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:83:    expect(after.subscriptionMentioned).toBe(true);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:85:    expect(isSubscriptionMessagingAllowed(after)).toBe(true);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:109:    expect(after.subscriptionMentioned).toBe(false);
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:159:  it("auditFlow detects illegal subscriptionMentioned-without-breathing combo (CF-R001)", () => {
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:165:      subscriptionMentioned: true,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:179:      subscriptionMentioned: true,
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:234:    expect(useCheckInFlowStore.getState().step).toBe("checkout");
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:298:      subscriptionMentioned: true,
+client/src/checkin-flow/index.ts:13:  isSubscriptionMessagingAllowed,
+client/src/checkin-flow/index.ts:35:  IsSubscriptionMessagingAllowed,
+client/src/calm-checkin/content/calmCheckinContent.ts:21:  "upgrade now",
+client/src/lumi-rituals/runtime/useRitual.ts:5: * SSR-safe reduced-motion subscription.
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:9: *  - Subscription CTA, upsell, "upgrade" prompt
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:72:  "upgrade now",
+client/src/lumi-rituals/tests/ritualSafety.test.ts:149:    expect(containsForbiddenPhrase("Upgrade now for the full ritual.")).toBe(true);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:378:    // No subscription / upsell language sneaks through.
+client/src/lumi-rituals/tests/ritualSafety.test.ts:380:    expect(html.toLowerCase()).not.toContain("upgrade");
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:5: *   - Reduced-motion subscription (SSR-safe). When set, the optional
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:69:  // Reduced-motion live subscription.
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:51:  "upgrade now",
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:54:  "premium",
+client/src/lumi-circadian/tests/circadianSafety.test.ts:465://   3. Commercial upsell phrases (subscribe/upgrade/buy now/free trial/
+client/src/lumi-circadian/tests/circadianSafety.test.ts:466://      premium) must fail the audit at the render sink.
+client/src/lumi-circadian/tests/circadianSafety.test.ts:488:    "Upgrade now for premium check-ins",
+client/src/lumi-circadian/tests/circadianSafety.test.ts:491:    "Premium feature — sign up",
+client/src/lumi-circadian/tests/circadianSafety.test.ts:500:      copy: "Subscribe today to unlock premium check-ins.",
+client/src/lumi-voice/governance/voiceSafetyRules.ts:46:  "upgrade now",
+client/src/lumi-voice/governance/voiceSafetyRules.ts:47:  "premium only",
+client/src/lumi-boundaries/governance/boundaryEnforcementRules.ts:43:  "premium boundaries",
+client/src/lumi-crisis/resources/crisisResources.ts:5: * account, without payment, and without analytics tracking. International
+client/src/lumi-notifications/governance/notificationRules.ts:37:  "Premium upgrade pushes",
+client/src/governance/interactions/__tests__/deriveGovernance.test.ts:17:    expect(result.overrideState.upgradePromptsBlocked).toBe(false);
+client/src/governance/interactions/__tests__/deriveGovernance.test.ts:49:    expect(result.overrideState.upgradePromptsBlocked).toBe(true);
+client/src/governance/interactions/__tests__/deriveGovernance.test.ts:66:    expect(result.overrideState.upgradePromptsBlocked).toBe(true);
+client/src/governance/interactions/CrisisOverrideEngine.ts:32:			upgradePromptsBlocked: suspended,
+client/src/governance/interactions/HealingFlowProtectionRules.ts:4:                "upgrade_prompt",
+client/src/governance/interactions/HealingFlowProtectionRules.ts:5:                "subscription_overlay",
+client/src/governance/interactions/buildGovernanceAttrs.ts:32:                "data-upgrade-prompts-blocked": b(input.overrideState.upgradePromptsBlocked),
+client/src/index.css.backup.1777434482:285:/* NOTE: .section-title is defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css.backup.1777434482:401:/* Premium Glassmorphism */
+client/src/index.css.backup.1777434482:402:.glass-premium {
+client/src/index.css.backup.1777434482:411:.dark .glass-premium {
+client/src/index.css.backup.1777434482:427:/* Premium Hero Gradient */
+client/src/index.css.backup.1777434482:456:/* Legacy btn-premium/btn-secondary-premium removed - see ENHANCED BUTTON SYSTEM section */
+client/src/index.css.backup.1777434482:466:/* NOTE: .decorative-orb classes are defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css.backup.1777434482:501:   the PREMIUM VISUAL ENHANCEMENTS section at the bottom of this file */
+client/src/index.css.backup.1777434482:560:/* NOTE: .content-wrapper is defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css.backup.1777434482:615:.badge-premium {
+client/src/index.css.backup.1777434482:665:.input-premium {
+client/src/index.css.backup.1777434482:675:.input-premium:focus {
+client/src/index.css.backup.1777434482:681:.input-premium::placeholder {
+client/src/index.css.backup.1777434482:751:/* --- Premium Color Palette Extensions --- */
+client/src/index.css.backup.1777434482:807:/* NOTE: .text-display-lg is defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css.backup.1777434482:956:/* --- Premium Card Variants --- */
+client/src/index.css.backup.1777434482:1384:/* Enhanced January 2026 - Premium Teal/Gold Design System */
+client/src/index.css.backup.1777434482:1405:  /* Premium Blush Tones */
+client/src/index.css.backup.1777434482:1410:  /* Premium Gradients */
+client/src/index.css.backup.1777434482:1412:  --gradient-premium-hero: linear-gradient(160deg, 
+client/src/index.css.backup.1777434482:1418:  --gradient-card-premium: linear-gradient(145deg, 
+client/src/index.css.backup.1777434482:1497:.icon-premium {
+client/src/index.css.backup.1777434482:1505:.icon-premium-xs { width: 1.75rem; height: 1.75rem; padding: 0.375rem; border-radius: 0.5rem; }
+client/src/index.css.backup.1777434482:1506:.icon-premium-sm { width: 2.25rem; height: 2.25rem; padding: 0.5rem; border-radius: 0.625rem; }
+client/src/index.css.backup.1777434482:1507:.icon-premium-md { width: 3rem; height: 3rem; padding: 0.625rem; border-radius: 0.875rem; }
+client/src/index.css.backup.1777434482:1508:.icon-premium-lg { width: 3.75rem; height: 3.75rem; padding: 0.875rem; border-radius: 1rem; }
+client/src/index.css.backup.1777434482:1509:.icon-premium-xl { width: 4.5rem; height: 4.5rem; padding: 1rem; border-radius: 1.25rem; }
+client/src/index.css.backup.1777434482:1510:.icon-premium-2xl { width: 6rem; height: 6rem; padding: 1.5rem; border-radius: 1.5rem; }
+client/src/index.css.backup.1777434482:1633:.card-premium {
+client/src/index.css.backup.1777434482:1634:  background: var(--gradient-card-premium);
+client/src/index.css.backup.1777434482:1644:.card-premium:hover {
+client/src/index.css.backup.1777434482:1652:.card-premium-gold {
+client/src/index.css.backup.1777434482:1662:.card-premium-gold:hover {
+client/src/index.css.backup.1777434482:1669:.card-premium-teal {
+client/src/index.css.backup.1777434482:1679:.card-premium-teal:hover {
+client/src/index.css.backup.1777434482:1706:.btn-premium-teal {
+client/src/index.css.backup.1777434482:1727:.btn-premium-teal:hover {
+client/src/index.css.backup.1777434482:1734:.btn-premium-gold {
+client/src/index.css.backup.1777434482:1755:.btn-premium-gold:hover {
+client/src/index.css.backup.1777434482:1785:.badge-premium {
+client/src/index.css.backup.1777434482:1798:.badge-premium-teal {
+client/src/index.css.backup.1777434482:1804:.badge-premium-gold {
+client/src/index.css.backup.1777434482:1810:.badge-premium-sage {
+client/src/index.css.backup.1777434482:1816:.badge-premium-featured {
+client/src/index.css.backup.1777434482:1824:.grid-premium {
+client/src/index.css.backup.1777434482:1847:.shadow-premium-sm {
+client/src/index.css.backup.1777434482:1851:.shadow-premium-md {
+client/src/index.css.backup.1777434482:1855:.shadow-premium-lg {
+client/src/index.css.backup.1777434482:1921:@keyframes shimmer-premium {
+client/src/index.css.backup.1777434482:1946:.animate-shimmer-premium {
+client/src/index.css.backup.1777434482:1949:  animation: shimmer-premium 2s ease-in-out infinite;
+client/src/index.css.backup.1777434482:1969:.divider-premium {
+client/src/index.css.backup.1777434482:1975:.divider-premium-bold {
+client/src/index.css.backup.1777434482:1983:.dark .card-premium {
+client/src/index.css.backup.1777434482:1998:.dark .badge-premium-teal {
+client/src/index.css.backup.1777434482:2004:.dark .badge-premium-gold {
+client/src/index.css.backup.1777434482:2020:  .card-premium { padding: 1.25rem; border-radius: 1rem; }
+client/src/index.css.backup.1777434482:2022:  .btn-premium-teal, .btn-premium-gold { 
+client/src/index.css.backup.1777434482:2032:  .animate-shimmer-premium,
+client/src/index.css.backup.1777434482:2041:  .card-premium:hover,
+client/src/index.css.backup.1777434482:2042:  .card-premium-gold:hover,
+client/src/index.css.backup.1777434482:2043:  .card-premium-teal:hover {
+client/src/index.css.backup.1777434482:2049:.card-premium:focus-visible,
+client/src/index.css.backup.1777434482:2050:.btn-premium-teal:focus-visible,
+client/src/index.css.backup.1777434482:2051:.btn-premium-gold:focus-visible {
+client/src/index.css.backup.1777434482:2077:  --gradient-card-premium: linear-gradient(145deg, 
+client/src/index.css.backup.1777434482:2091:.dark .card-premium {
+client/src/index.css.backup.1777434482:2097:.dark .card-premium:hover {
+client/src/index.css.backup.1777434482:2102:.dark .card-premium-gold {
+client/src/index.css.backup.1777434482:2107:.dark .card-premium-teal {
+client/src/index.css.backup.1777434482:2113:.dark .btn-premium-teal {
+client/src/index.css.backup.1777434482:2118:.dark .btn-premium-gold {
+client/src/index.css.backup.1777434482:2161:.dark .badge-premium-teal {
+client/src/index.css.backup.1777434482:2167:.dark .badge-premium-gold {
+client/src/index.css.backup.1777434482:2173:.dark .badge-premium-sage {
+client/src/index.css.backup.1777434482:2180:.dark .shadow-premium-sm {
+client/src/index.css.backup.1777434482:2184:.dark .shadow-premium-md {
+client/src/index.css.backup.1777434482:2188:.dark .shadow-premium-lg {
+client/src/index.css.backup.1777434482:2205:.dark .divider-premium {
+client/src/index.css.backup.1777434482:2209:.dark .divider-premium-bold {
+client/src/index.css.backup.1777434482:2316:   PREMIUM VISUAL ENHANCEMENTS section at the bottom of this file.
+client/src/index.css.backup.1777434482:2346:.text-gradient-premium {
+client/src/index.css.backup.1777434482:2490:/* Premium button base */
+client/src/index.css.backup.1777434482:2491:.btn-premium {
+client/src/index.css.backup.1777434482:2507:.btn-premium:hover {
+client/src/index.css.backup.1777434482:2512:.btn-premium:active {
+client/src/index.css.backup.1777434482:2516:.btn-premium:focus-visible {
+client/src/index.css.backup.1777434482:2521:/* Secondary premium button */
+client/src/index.css.backup.1777434482:2522:.btn-secondary-premium {
+client/src/index.css.backup.1777434482:2538:.btn-secondary-premium:hover {
+client/src/index.css.backup.1777434482:2544:.btn-secondary-premium:focus-visible {
+client/src/index.css.backup.1777434482:2650:.dark .btn-premium {
+client/src/index.css.backup.1777434482:2654:.dark .btn-secondary-premium {
+client/src/index.css.backup.1777434482:2660:.dark .btn-secondary-premium:hover {
+client/src/index.css.backup.1777434482:2847:.dark .btn-secondary-premium {
+client/src/index.css.backup.1777434482:2862:   PREMIUM VISUAL ENHANCEMENTS (January 2026)
+client/src/index.css.backup.1777434482:3064:.text-gradient-premium {
+client/src/index.css.backup.1777434482:3145:.icon-gradient-premium {
+client/src/index.css.backup.1777434482:3150:/* --- PREMIUM CONTAINER & ALIGNMENT --- */
+client/src/index.css.backup.1777434482:3221:/* --- PREMIUM CARD VARIANTS --- */
+client/src/index.css.backup.1777434482:3223:.card-premium {
+client/src/index.css.backup.1777434482:3236:.card-premium:hover {
+client/src/index.css.backup.1777434482:3261:/* --- PREMIUM HOVER EFFECTS --- */
+client/src/index.css.backup.1777434482:3353:.dark .icon-gradient-premium { background: linear-gradient(135deg, rgba(42, 84, 84, 0.2), rgba(127, 179, 154, 0.15), rgba(212, 168, 75, 0.1)); color: var(--teal-400); }
+client/src/index.css.backup.1777434482:3355:.dark .card-premium {
+client/src/index.css.backup.1777434482:3364:.dark .card-premium:hover {
+client/src/index.css.backup.1777434482:3555:.badge-premium {
+client/src/index.css.backup.1777434482:3565:.dark .badge-premium { background: linear-gradient(135deg, rgba(42, 84, 84, 0.2), rgba(212, 168, 75, 0.15)); color: var(--teal-300); }
+client/src/index.css.backup.1777434482:4012:.rounded-premium {
+client/src/index.css.backup.1777434482:4307:.bg-gradient-premium {
+client/src/index.css.backup.1777434482:4669:/* ===== SECTION 13: PREMIUM VISUAL REFINEMENTS ===== */
+client/src/index.css.backup.1777434482:4716:/* Premium Shimmer Effect */
+client/src/index.css.backup.1777434482:4717:.shimmer-premium {
+client/src/index.css.backup.1777434482:4722:.shimmer-premium::after {
+client/src/index.css.backup.1777434482:4797:.focus-ring-premium:focus-visible {
+client/src/index.css.backup.1777434482:4805:/* Premium Text Shadow */
+client/src/index.css.backup.1777434482:4841:/* Premium Button Glow Pulse */
+client/src/index.css.backup.1777434482:4842:@keyframes glow-pulse-premium {
+client/src/index.css.backup.1777434482:4856:  animation: glow-pulse-premium 3s ease-in-out infinite;
+client/src/index.css.backup.1777434482:4911:/* Premium Card Hover States */
+client/src/index.css.backup.1777434482:4912:.card-hover-premium {
+client/src/index.css.backup.1777434482:4916:.card-hover-premium:hover {
+client/src/index.css.backup.1777434482:4957:  .shimmer-premium::after {
+client/src/index.css.backup.1777434482:5247:/* Premium Gradient Backgrounds */
+client/src/index.css.backup.1777434482:5274:.bg-gradient-premium-hero {
+client/src/index.css.backup.1777434482:5762:/* Q&A Block - Premium Card with Breathing Room */
+client/src/index.css.backup.1777434482:6512:/* --- Card: aurora ring on hover (opt-in, doesn't touch .card-premium) */
+client/src/index.css.backup.1777434482:6627:/* --- Focus ring upgrade: aurora glow on top of accessible outline --- */
+client/src/App.jsx:72:const Premium = lazy(() => import("./pages/Premium.jsx"));
+client/src/App.jsx:79:const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
+client/src/App.jsx:225:const BillingViewer = lazy(() => import("./pages/admin/BillingViewer.jsx"));
+client/src/App.jsx:230:const AccountBilling = lazy(() => import("./pages/account/Billing.jsx"));
+client/src/App.jsx:284:// Batch 11 - Account & Payments (P241-P250)
+client/src/App.jsx:285:const Subscription = lazy(() => import("./pages/account/Subscription.jsx"));
+client/src/App.jsx:718:              <Route path="/premium">
+client/src/App.jsx:719:                <ProtectedRoute><Premium /></ProtectedRoute>
+client/src/App.jsx:721:              <Route path="/upgrade">
+client/src/App.jsx:722:                <ProtectedRoute><Upgrade /></ProtectedRoute>
+client/src/App.jsx:737:              <Route path="/billing">{() => <ConfigRoute route="/billing" />}</Route>
+client/src/App.jsx:890:              <Route path="/subscription">{() => <ConfigRoute route="/pricing" />}</Route>
+client/src/App.jsx:1544:              <Route path="/help/billing" component={RefundHelp} />
+client/src/App.jsx:1767:              <Route path="/admin/billing">
+client/src/App.jsx:1768:                <AdminGuard><BillingViewer /></AdminGuard>
+client/src/App.jsx:1808:              <Route path="/account/subscription">
+client/src/App.jsx:1809:                <ProtectedRoute><Subscription /></ProtectedRoute>
+client/src/App.jsx:1820:              <Route path="/account/billing">
+client/src/App.jsx:1821:                <ProtectedRoute><AccountBilling /></ProtectedRoute>
+client/src/index.css:291:/* NOTE: .section-title is defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css:407:/* Premium Glassmorphism */
+client/src/index.css:408:.glass-premium {
+client/src/index.css:417:.dark .glass-premium {
+client/src/index.css:433:/* Premium Hero Gradient */
+client/src/index.css:462:/* Legacy btn-premium/btn-secondary-premium removed - see ENHANCED BUTTON SYSTEM section */
+client/src/index.css:472:/* NOTE: .decorative-orb classes are defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css:507:   the PREMIUM VISUAL ENHANCEMENTS section at the bottom of this file */
+client/src/index.css:566:/* NOTE: .content-wrapper is defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css:621:.badge-premium {
+client/src/index.css:671:.input-premium {
+client/src/index.css:681:.input-premium:focus {
+client/src/index.css:687:.input-premium::placeholder {
+client/src/index.css:757:/* --- Premium Color Palette Extensions --- */
+client/src/index.css:813:/* NOTE: .text-display-lg is defined in PREMIUM VISUAL ENHANCEMENTS section below */
+client/src/index.css:962:/* --- Premium Card Variants --- */
+client/src/index.css:1390:/* Enhanced January 2026 - Premium Teal/Gold Design System */
+client/src/index.css:1411:  /* Premium Blush Tones */
+client/src/index.css:1416:  /* Premium Gradients */
+client/src/index.css:1418:  --gradient-premium-hero: linear-gradient(160deg, 
+client/src/index.css:1424:  --gradient-card-premium: linear-gradient(145deg, 
+client/src/index.css:1503:.icon-premium {
+client/src/index.css:1511:.icon-premium-xs { width: 1.75rem; height: 1.75rem; padding: 0.375rem; border-radius: 0.5rem; }
+client/src/index.css:1512:.icon-premium-sm { width: 2.25rem; height: 2.25rem; padding: 0.5rem; border-radius: 0.625rem; }
+client/src/index.css:1513:.icon-premium-md { width: 3rem; height: 3rem; padding: 0.625rem; border-radius: 0.875rem; }
+client/src/index.css:1514:.icon-premium-lg { width: 3.75rem; height: 3.75rem; padding: 0.875rem; border-radius: 1rem; }
+client/src/index.css:1515:.icon-premium-xl { width: 4.5rem; height: 4.5rem; padding: 1rem; border-radius: 1.25rem; }
+client/src/index.css:1516:.icon-premium-2xl { width: 6rem; height: 6rem; padding: 1.5rem; border-radius: 1.5rem; }
+client/src/index.css:1639:.card-premium {
+client/src/index.css:1640:  background: var(--gradient-card-premium);
+client/src/index.css:1650:.card-premium:hover {
+client/src/index.css:1658:.card-premium-gold {
+client/src/index.css:1668:.card-premium-gold:hover {
+client/src/index.css:1675:.card-premium-teal {
+client/src/index.css:1685:.card-premium-teal:hover {
+client/src/index.css:1712:.btn-premium-teal {
+client/src/index.css:1733:.btn-premium-teal:hover {
+client/src/index.css:1740:.btn-premium-gold {
+client/src/index.css:1761:.btn-premium-gold:hover {
+client/src/index.css:1791:.badge-premium {
+client/src/index.css:1804:.badge-premium-teal {
+client/src/index.css:1810:.badge-premium-gold {
+client/src/index.css:1816:.badge-premium-sage {
+client/src/index.css:1822:.badge-premium-featured {
+client/src/index.css:1830:.grid-premium {
+client/src/index.css:1853:.shadow-premium-sm {
+client/src/index.css:1857:.shadow-premium-md {
+client/src/index.css:1861:.shadow-premium-lg {
+client/src/index.css:1927:@keyframes shimmer-premium {
+client/src/index.css:1952:.animate-shimmer-premium {
+client/src/index.css:1955:  animation: shimmer-premium 2s ease-in-out infinite;
+client/src/index.css:1975:.divider-premium {
+client/src/index.css:1981:.divider-premium-bold {
+client/src/index.css:1989:.dark .card-premium {
+client/src/index.css:2004:.dark .badge-premium-teal {
+client/src/index.css:2010:.dark .badge-premium-gold {
+client/src/index.css:2026:  .card-premium { padding: 1.25rem; border-radius: 1rem; }
+client/src/index.css:2028:  .btn-premium-teal, .btn-premium-gold { 
+client/src/index.css:2038:  .animate-shimmer-premium,
+client/src/index.css:2047:  .card-premium:hover,
+client/src/index.css:2048:  .card-premium-gold:hover,
+client/src/index.css:2049:  .card-premium-teal:hover {
+client/src/index.css:2055:.card-premium:focus-visible,
+client/src/index.css:2056:.btn-premium-teal:focus-visible,
+client/src/index.css:2057:.btn-premium-gold:focus-visible {
+client/src/index.css:2083:  --gradient-card-premium: linear-gradient(145deg, 
+client/src/index.css:2097:.dark .card-premium {
+client/src/index.css:2103:.dark .card-premium:hover {
+client/src/index.css:2108:.dark .card-premium-gold {
+client/src/index.css:2113:.dark .card-premium-teal {
+client/src/index.css:2119:.dark .btn-premium-teal {
+client/src/index.css:2124:.dark .btn-premium-gold {
+client/src/index.css:2167:.dark .badge-premium-teal {
+client/src/index.css:2173:.dark .badge-premium-gold {
+client/src/index.css:2179:.dark .badge-premium-sage {
+client/src/index.css:2186:.dark .shadow-premium-sm {
+client/src/index.css:2190:.dark .shadow-premium-md {
+client/src/index.css:2194:.dark .shadow-premium-lg {
+client/src/index.css:2211:.dark .divider-premium {
+client/src/index.css:2215:.dark .divider-premium-bold {
+client/src/index.css:2322:   PREMIUM VISUAL ENHANCEMENTS section at the bottom of this file.
+client/src/index.css:2352:.text-gradient-premium {
+client/src/index.css:2496:/* Premium button base */
+client/src/index.css:2497:.btn-premium {
+client/src/index.css:2513:.btn-premium:hover {
+client/src/index.css:2518:.btn-premium:active {
+client/src/index.css:2522:.btn-premium:focus-visible {
+client/src/index.css:2527:/* Secondary premium button */
+client/src/index.css:2528:.btn-secondary-premium {
+client/src/index.css:2544:.btn-secondary-premium:hover {
+client/src/index.css:2550:.btn-secondary-premium:focus-visible {
+client/src/index.css:2656:.dark .btn-premium {
+client/src/index.css:2660:.dark .btn-secondary-premium {
+client/src/index.css:2666:.dark .btn-secondary-premium:hover {
+client/src/index.css:2853:.dark .btn-secondary-premium {
+client/src/index.css:2868:   PREMIUM VISUAL ENHANCEMENTS (January 2026)
+client/src/index.css:3070:.text-gradient-premium {
+client/src/index.css:3151:.icon-gradient-premium {
+client/src/index.css:3156:/* --- PREMIUM CONTAINER & ALIGNMENT --- */
+client/src/index.css:3227:/* --- PREMIUM CARD VARIANTS --- */
+client/src/index.css:3229:.card-premium {
+client/src/index.css:3242:.card-premium:hover {
+client/src/index.css:3267:/* --- PREMIUM HOVER EFFECTS --- */
+client/src/index.css:3359:.dark .icon-gradient-premium { background: linear-gradient(135deg, rgba(42, 84, 84, 0.2), rgba(127, 179, 154, 0.15), rgba(212, 168, 75, 0.1)); color: var(--teal-400); }
+client/src/index.css:3361:.dark .card-premium {
+client/src/index.css:3370:.dark .card-premium:hover {
+client/src/index.css:3561:.badge-premium {
+client/src/index.css:3571:.dark .badge-premium { background: linear-gradient(135deg, rgba(42, 84, 84, 0.2), rgba(212, 168, 75, 0.15)); color: var(--teal-300); }
+client/src/index.css:4018:.rounded-premium {
+client/src/index.css:4313:.bg-gradient-premium {
+client/src/index.css:4675:/* ===== SECTION 13: PREMIUM VISUAL REFINEMENTS ===== */
+client/src/index.css:4722:/* Premium Shimmer Effect */
+client/src/index.css:4723:.shimmer-premium {
+client/src/index.css:4728:.shimmer-premium::after {
+client/src/index.css:4803:.focus-ring-premium:focus-visible {
+client/src/index.css:4811:/* Premium Text Shadow */
+client/src/index.css:4847:/* Premium Button Glow Pulse */
+client/src/index.css:4848:@keyframes glow-pulse-premium {
+client/src/index.css:4862:  animation: glow-pulse-premium 3s ease-in-out infinite;
+client/src/index.css:4917:/* Premium Card Hover States */
+client/src/index.css:4918:.card-hover-premium {
+client/src/index.css:4922:.card-hover-premium:hover {
+client/src/index.css:4963:  .shimmer-premium::after {
+client/src/index.css:5253:/* Premium Gradient Backgrounds */
+client/src/index.css:5280:.bg-gradient-premium-hero {
+client/src/index.css:5768:/* Q&A Block - Premium Card with Breathing Room */
+client/src/index.css:6518:/* --- Card: aurora ring on hover (opt-in, doesn't touch .card-premium) */
+client/src/index.css:6633:/* --- Focus ring upgrade: aurora glow on top of accessible outline --- */
+client/src/index.css:7103: * white surface, sage-15 hairline border, 2px top accent stripe
+server/engine/therapyIntelligence.mjs:102: * upgradeTherapyReply(reply, { message, history })
+server/engine/therapyIntelligence.mjs:108:export function upgradeTherapyReply(reply, opts = {}) {
+server/engine/therapyIntelligence.mjs:238:  upgradeTherapyReply,
+server/routes/adminBilling.mjs:2: * Admin Billing Routes (P128)
+server/routes/adminBilling.mjs:3: * Read-only billing information for admins
+server/routes/adminBilling.mjs:18:// P128: Get billing overview stats
+server/routes/adminBilling.mjs:21:    // Total subscriptions
+server/routes/adminBilling.mjs:23:      SELECT COUNT(*) as count FROM subscriptions
+server/routes/adminBilling.mjs:25:    const totalSubscriptions = parseInt(totalResult.rows?.[0]?.count || 0);
+server/routes/adminBilling.mjs:27:    // Active subscriptions
+server/routes/adminBilling.mjs:29:      SELECT COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:32:    const activeSubscriptions = parseInt(activeResult.rows?.[0]?.count || 0);
+server/routes/adminBilling.mjs:36:      SELECT tier, COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:49:      SELECT COUNT(*) as count FROM subscriptions 
+server/routes/adminBilling.mjs:54:    const churnRate = totalSubscriptions > 0 ? (churned / totalSubscriptions) * 100 : 0;
+server/routes/adminBilling.mjs:57:      totalSubscriptions,
+server/routes/adminBilling.mjs:58:      activeSubscriptions,
+server/routes/adminBilling.mjs:64:    logger.error('Admin billing overview error', { error: err.message });
+server/routes/adminBilling.mjs:69:// P128: Get subscription list (read-only)
+server/routes/adminBilling.mjs:70:router.get('/subscriptions', async (req, res) => {
+server/routes/adminBilling.mjs:79:        s.stripe_subscription_id as "stripeSubscriptionId",
+server/routes/adminBilling.mjs:85:      FROM subscriptions s
+server/routes/adminBilling.mjs:92:    const subscriptions = result.rows?.map(s => ({
+server/routes/adminBilling.mjs:104:    return success(res, { subscriptions });
+server/routes/adminBilling.mjs:106:    logger.error('Admin subscriptions fetch error', { error: err.message });
+server/routes/adminBilling.mjs:116:      FROM subscriptions 
+server/routes/adminBilling.mjs:131:  res.json({ ok: true, module: "adminBilling", status: "operational", timestamp: new Date().toISOString() });
+server/routes/analytics-events.mjs:87:    const checkoutFunnel = {};
+server/routes/analytics-events.mjs:88:    for (const step of ["pricing_view", "checkout_start", "checkout_success", "checkout_cancel"]) {
+server/routes/analytics-events.mjs:98:      checkoutFunnel[step] = result?.total || 0;
+server/routes/analytics-events.mjs:123:      checkoutFunnel,
+server/routes/analytics.mjs:20:  "subscription_viewed", "error_occurred",
+server/routes/analytics.mjs:23:  "pricing_view", "checkout_start"
+server/routes/analytics.mjs:147:    const checkoutFunnel = {};
+server/routes/analytics.mjs:148:    for (const step of ["pricing_view", "checkout_start", "checkout_success", "checkout_cancel"]) {
+server/routes/analytics.mjs:153:      checkoutFunnel[step] = result?.total || 0;
+server/routes/analytics.mjs:167:    return res.json({ totalEvents: totalEvents?.total || 0, topPages24h, topCTAs7d, checkoutFunnel, newsletterFunnel });
+server/routes/deploymentReadiness.mjs:24:  results.checks.stripeSecretKey = {
+server/routes/deploymentReadiness.mjs:25:    status: !!process.env.STRIPE_SECRET_KEY ? "pass" : "fail",
+server/routes/deploymentReadiness.mjs:26:    detail: process.env.STRIPE_SECRET_KEY ? "Present" : "Missing STRIPE_SECRET_KEY",
+server/routes/deploymentReadiness.mjs:29:  results.checks.stripeWebhookSecret = {
+server/routes/deploymentReadiness.mjs:30:    status: !!process.env.STRIPE_WEBHOOK_SECRET ? "pass" : "fail",
+server/routes/deploymentReadiness.mjs:31:    detail: process.env.STRIPE_WEBHOOK_SECRET ? "Present" : "Missing STRIPE_WEBHOOK_SECRET",
+server/routes/deploymentReadiness.mjs:51:      WHERE table_name = 'users' AND column_name = 'subscription_status'
+server/routes/deploymentReadiness.mjs:54:      results.checks.subscriptionStatusColumn = {
+server/routes/deploymentReadiness.mjs:62:      results.checks.subscriptionStatusColumn = {
+server/routes/deploymentReadiness.mjs:64:        detail: "Column subscription_status not found in users table",
+server/routes/deploymentReadiness.mjs:68:    logger.warn("Deployment check: subscription_status column query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:69:    results.checks.subscriptionStatusColumn = { status: "fail", detail: "Query failed" };
+server/routes/deploymentReadiness.mjs:74:      SELECT subscription_status, COUNT(*) as count 
+server/routes/deploymentReadiness.mjs:76:      GROUP BY subscription_status
+server/routes/deploymentReadiness.mjs:78:    const statuses = statusCheck.rows?.map(r => r.subscription_status) || [];
+server/routes/deploymentReadiness.mjs:80:    results.checks.subscriptionStatusIntegrity = {
+server/routes/deploymentReadiness.mjs:88:    logger.warn("Deployment check: subscription status integrity query failed", { error: err?.message || err });
+server/routes/deploymentReadiness.mjs:89:    results.checks.subscriptionStatusIntegrity = { status: "fail", detail: "Query failed" };
+server/routes/integrationHealth.mjs:25:async function checkStripeHealth() {
+server/routes/integrationHealth.mjs:26:  const stripeKey = process.env.STRIPE_SECRET_KEY;
+server/routes/integrationHealth.mjs:27:  if (!stripeKey) {
+server/routes/integrationHealth.mjs:35:    const [database, openai, stripe] = await Promise.all([
+server/routes/integrationHealth.mjs:38:      checkStripeHealth(),
+server/routes/integrationHealth.mjs:44:      (stripe.status === "configured" || stripe.status === "not_configured");
+server/routes/integrationHealth.mjs:53:        stripe,
+server/routes/integrationHealth.mjs:86:router.get("/stripe", async (req, res) => {
+server/routes/integrationHealth.mjs:88:    const result = await checkStripeHealth();
+server/routes/integrationHealth.mjs:91:    logger.error("Stripe health sub-check failed", { error: err?.message || err });
+server/routes/newsletter.mjs:56:    logger.info("[Newsletter] Subscription request", { email: `${email.substring(0, 3)}***@***` });
+server/routes/newsletter.mjs:100:      message: 'Subscription received. Thank you for joining us.' 
+server/routes/newsletter.mjs:118:        message: 'Unable to process subscription'
+server/routes/products.mjs:256:    const { paymentMethod, transactionId } = req.body;
+server/routes/products.mjs:274:        paymentMethod: paymentMethod || null,
+server/routes/revenue.mjs:19:      SELECT subscription_status, COUNT(*) as count FROM users 
+server/routes/revenue.mjs:20:      WHERE subscription_status IN ('starter', 'pro', 'elite')
+server/routes/revenue.mjs:21:      GROUP BY subscription_status
+server/routes/revenue.mjs:27:      planBreakdown[row.subscription_status] = parseInt(row.count, 10);
+server/routes/revenue.mjs:65:      WHERE subscription_status IN ('starter', 'pro', 'elite') 
+server/routes/revenue.mjs:98:      WHERE subscription_status IN ('starter', 'pro', 'elite')
+server/routes/session-boundary.mjs:14:router.post("/upgrade-history", requireAuth, async (req, res) => {
+server/routes/session-boundary.mjs:43:        VALUES (${id}, ${userId}, ${role}, ${content}, ${"upgrade"}, ${false})
+server/routes/session-boundary.mjs:51:    console.error("upgrade-history failed:", err?.message || err);
+server/routes/session-boundary.mjs:52:    return res.status(500).json({ error: "Upgrade failed" });
+server/routes/soft-launch-metrics.mjs:16:    checkout_start: 0,
+server/routes/soft-launch-metrics.mjs:17:    checkout_success: 0,
+server/routes/sop.mjs:85:  { id: "admin-billing",     name: "Billing viewer",             domain: "business", method: "GET", path: "/api/admin/billing",         expect: [200, 401, 403, 404], protected: false, remediation: "server/routes/adminBilling.mjs" },
+server/routes/ai.mjs:13:  upgradeTherapyReply,
+server/routes/ai.mjs:47:// Expose for session-boundary upgrade-history endpoint (read + clear only).
+server/routes/admin.mjs:159:        stripe: { configured: !!process.env.STRIPE_SECRET_KEY },
+server/routes/admin.mjs:984:      'STRIPE_SECRET_KEY',
+server/routes/admin.mjs:985:      'STRIPE_PUBLISHABLE_KEY',
+server/routes/health.mjs:69:        stripe: !!process.env.STRIPE_SECRET_KEY,
+server/routes/health.mjs:119:    stripe: { ok: false, configured: false },
+server/routes/health.mjs:136:  checks.stripe.configured = !!process.env.STRIPE_SECRET_KEY;
+server/routes/health.mjs:137:  checks.stripe.ok = checks.stripe.configured;
+server/routes/health.mjs:269:        results.actions.push(`STRIPE_SECRET_KEY: ${!!process.env.STRIPE_SECRET_KEY ? "configured" : "not set"}`);
+server/routes/health.mjs:270:        results.actions.push(`STRIPE_WEBHOOK_SECRET: ${!!process.env.STRIPE_WEBHOOK_SECRET ? "configured" : "not set"}`);
+server/routes/health.mjs:377:        const envKeys = ["DATABASE_URL", "ADMIN_TOKEN", "STRIPE_SECRET_KEY", "RESEND_API_KEY", "PERPLEXITY_API_KEY", "OPENAI_API_KEY", "AI_INTEGRATIONS_OPENAI_API_KEY"];
+server/routes/health.mjs:403:        deepChecks.push({ check: "Stripe", status: !!process.env.STRIPE_SECRET_KEY ? "healthy" : "not configured" });
+server/routes/health.mjs:524:      case "verify-stripe":
+server/routes/health.mjs:525:        results.actions.push(`STRIPE_SECRET_KEY: ${process.env.STRIPE_SECRET_KEY ? "configured" : "MISSING"}`);
+server/routes/health.mjs:526:        results.actions.push(`STRIPE_WEBHOOK_SECRET: ${process.env.STRIPE_WEBHOOK_SECRET ? "configured" : "MISSING"}`);
+server/routes/health.mjs:527:        results.actions.push(`STRIPE_PUBLISHABLE_KEY: ${process.env.VITE_STRIPE_PUBLISHABLE_KEY ? "configured" : "not set (optional)"}`);
+server/routes/health.mjs:528:        results.success = !!process.env.STRIPE_SECRET_KEY;
+server/routes/health.mjs:529:        results.message = process.env.STRIPE_SECRET_KEY ? "Stripe configuration verified" : "Stripe not fully configured — STRIPE_SECRET_KEY missing";
+server/routes/health.mjs:611:          const criticalDeps = ["express", "drizzle-orm", "react", "vite", "stripe", "openai", "resend", "@neondatabase/serverless"];
+server/routes/health.mjs:639:        const sensitiveEnv = ["ADMIN_TOKEN", "STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "RESEND_API_KEY", "OPENAI_API_KEY", "AI_INTEGRATIONS_OPENAI_API_KEY", "DATABASE_URL", "SESSION_SECRET"];
+server/routes/health.mjs:730:    const criticalEnvVars = ["DATABASE_URL", "ADMIN_TOKEN", "STRIPE_SECRET_KEY", "RESEND_API_KEY", "PERPLEXITY_API_KEY"];
+server/routes/health.mjs:731:    const optionalEnvVars = ["OPENAI_API_KEY", "AI_INTEGRATIONS_OPENAI_API_KEY", "SENTRY_DSN", "GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET", "STRIPE_WEBHOOK_SECRET"];
+server/routes/health.mjs:740:      stripe: !!process.env.STRIPE_SECRET_KEY,
+server/routes/auth.mjs:32:        stripe_customer_id text,
+server/routes/auth.mjs:33:        subscription_status text DEFAULT 'free',
+server/routes/auth.mjs:34:        subscription_expires_at timestamp,
+server/routes/billing.mjs:2:import Stripe from "stripe";
+server/routes/billing.mjs:12:const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+server/routes/billing.mjs:13:let stripe = null;
+server/routes/billing.mjs:14:if (STRIPE_SECRET_KEY) {
+server/routes/billing.mjs:15:  stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" });
+server/routes/billing.mjs:20:  starter: { name: "Starter", priceId: process.env.STRIPE_PRICE_STARTER, mode: "payment", features: ["mood_tracking", "journaling", "daily_reflection", "community_wall", "crisis_support", "daily_wisdom", "extended_ai_chat", "journal_insights", "guided_reflections"] },
+server/routes/billing.mjs:21:  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
+server/routes/billing.mjs:22:  elite: { name: "Elite", priceId: process.env.STRIPE_PRICE_ELITE, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support", "voice_affirmations", "1on1_onboarding", "early_access", "elite_community"] },
+server/routes/billing.mjs:26:  monthly: process.env.STRIPE_PRICE_PRO_MONTHLY || process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:27:  yearly: process.env.STRIPE_PRICE_PRO_YEARLY || process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:31:  monthly: process.env.STRIPE_PRICE_ELITE_MONTHLY || process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:32:  yearly: process.env.STRIPE_PRICE_ELITE_YEARLY || process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:40:async function getOrCreateStripeCustomer(userId, email) {
+server/routes/billing.mjs:41:  const userResult = await db.execute(sql`SELECT stripe_customer_id, email FROM users WHERE id = ${userId}`);
+server/routes/billing.mjs:42:  const existingCustomerId = userResult.rows?.[0]?.stripe_customer_id;
+server/routes/billing.mjs:49:  const customer = await stripe.customers.create({
+server/routes/billing.mjs:54:  await db.execute(sql`UPDATE users SET stripe_customer_id = ${customer.id} WHERE id = ${userId}`);
+server/routes/billing.mjs:55:  logger.info("Created Stripe customer", { userId, customerId: customer.id });
+server/routes/billing.mjs:78:  res.json({ ok: true, module: "billing", status: "operational", timestamp: new Date().toISOString() });
+server/routes/billing.mjs:83:router.post("/checkout", async (req, res) => {
+server/routes/billing.mjs:86:    if (!stripe) return serverError(res, new Error("Stripe not configured"));
+server/routes/billing.mjs:91:    // STRIPE_PRICE_* env vars. Prevents arbitrary Stripe price IDs from
+server/routes/billing.mjs:92:    // being charged via the checkout endpoint.
+server/routes/billing.mjs:95:        process.env.STRIPE_PRICE_STARTER,
+server/routes/billing.mjs:96:        process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:97:        process.env.STRIPE_PRICE_PRO_MONTHLY,
+server/routes/billing.mjs:98:        process.env.STRIPE_PRICE_PRO_YEARLY,
+server/routes/billing.mjs:99:        process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:100:        process.env.STRIPE_PRICE_ELITE_MONTHLY,
+server/routes/billing.mjs:101:        process.env.STRIPE_PRICE_ELITE_YEARLY,
+server/routes/billing.mjs:104:        logger.warn("Checkout rejected: directPriceId not in allow-list", { userId: req.dbUserId, plan, interval });
+server/routes/billing.mjs:105:        increment("checkout_priceid_rejected", { plan });
+server/routes/billing.mjs:129:      logger.warn("checkout blocked: price/plan mismatch", {
+server/routes/billing.mjs:136:      increment("checkout_priceid_plan_mismatch", {
+server/routes/billing.mjs:157:    const checkoutMode = planConfig.mode || "subscription";
+server/routes/billing.mjs:160:    const customerId = await getOrCreateStripeCustomer(dbUserId, req.user?.email || req.user?.claims?.email);
+server/routes/billing.mjs:165:    const session = await stripe.checkout.sessions.create({
+server/routes/billing.mjs:166:      mode: checkoutMode,
+server/routes/billing.mjs:170:      success_url: `${baseUrl}/dashboard?billing=success`,
+server/routes/billing.mjs:171:      cancel_url: `${baseUrl}/account/billing?canceled=true`,
+server/routes/billing.mjs:177:    logger.info("Checkout session created", { userId: dbUserId, plan, interval, sessionId: session.id });
+server/routes/billing.mjs:178:    increment("checkout_initiated", { plan: `${plan}_${interval}` });
+server/routes/billing.mjs:181:    logger.error("Checkout error", { error: err.message, userId: req.dbUserId });
+server/routes/billing.mjs:189:    if (!stripe) return serverError(res, new Error("Stripe not configured"));
+server/routes/billing.mjs:191:    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.dbUserId}`);
+server/routes/billing.mjs:192:    const customerId = userResult.rows?.[0]?.stripe_customer_id;
+server/routes/billing.mjs:193:    if (!customerId) return badRequest(res, "Missing Stripe customer");
+server/routes/billing.mjs:197:    const portal = await stripe.billingPortal.sessions.create({
+server/routes/billing.mjs:199:      return_url: `${baseUrl}/account/billing`,
+server/routes/billing.mjs:207:router.get("/subscription-status", async (req, res) => {
+server/routes/billing.mjs:212:      SELECT subscription_status, subscription_expires_at, stripe_customer_id
+server/routes/billing.mjs:221:    const plan = user.subscription_status || "free";
+server/routes/billing.mjs:225:    if (["pro", "elite"].includes(plan) && stripe && user.stripe_customer_id) {
+server/routes/billing.mjs:227:        const subs = await stripe.subscriptions.list({
+server/routes/billing.mjs:228:          customer: user.stripe_customer_id,
+server/routes/billing.mjs:235:      } catch (stripeErr) {
+server/routes/billing.mjs:236:        logger.warn("Failed to fetch Stripe subscription details", { error: stripeErr.message });
+server/routes/billing.mjs:243:      currentPeriodEnd: user.subscription_expires_at || null,
+server/routes/billing.mjs:247:    logger.error("Subscription status error", { error: err.message });
+server/routes/billing.mjs:257:      SELECT subscription_status FROM users WHERE id = ${req.dbUserId} LIMIT 1
+server/routes/billing.mjs:260:    const plan = userResult.rows?.[0]?.subscription_status || "free";
+server/routes/billing.mjs:280:    if (!stripe) return ok(res, { invoices: [] });
+server/routes/billing.mjs:282:    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.dbUserId}`);
+server/routes/billing.mjs:283:    const customerId = userResult.rows?.[0]?.stripe_customer_id;
+server/routes/billing.mjs:289:    const invoices = await stripe.invoices.list({
+server/routes/billing.mjs:297:      description: inv.lines?.data?.[0]?.description || "Subscription",
+server/routes/webhook.mjs:3:import Stripe from "stripe";
+server/routes/webhook.mjs:9:import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
+server/routes/webhook.mjs:12:  mapSubscriptionToPlan,
+server/routes/webhook.mjs:14:  resolvePlanFromCheckoutSession,
+server/routes/webhook.mjs:19:const stripe = process.env.STRIPE_SECRET_KEY
+server/routes/webhook.mjs:20:  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" })
+server/routes/webhook.mjs:53:// IMPORTANT: raw body ONLY for stripe signature verification
+server/routes/webhook.mjs:55:  "/stripe",
+server/routes/webhook.mjs:58:    if (!stripe) {
+server/routes/webhook.mjs:59:      logger.warn("Stripe webhook received but STRIPE_SECRET_KEY not configured");
+server/routes/webhook.mjs:60:      return res.status(503).json({ error: "Stripe not configured" });
+server/routes/webhook.mjs:62:    const sig = req.headers["stripe-signature"];
+server/routes/webhook.mjs:67:      event = stripe.webhooks.constructEvent(
+server/routes/webhook.mjs:70:        process.env.STRIPE_WEBHOOK_SECRET
+server/routes/webhook.mjs:73:      logger.error("Stripe webhook signature verification failed", { error: err.message });
+server/routes/webhook.mjs:75:        provider: "stripe",
+server/routes/webhook.mjs:91:        case "checkout.session.completed": {
+server/routes/webhook.mjs:93:          if (!session.customer || !session.subscription) {
+server/routes/webhook.mjs:94:            logger.warn("checkout.session.completed missing customer or subscription", { sessionId: session.id });
+server/routes/webhook.mjs:97:          // Stripe leaves session.customer_email null when a Customer is
+server/routes/webhook.mjs:98:          // attached at session creation (billing.mjs passes `customer`);
+server/routes/webhook.mjs:103:            logger.warn("checkout.session.completed missing customer email — cannot match user", { customer: session.customer });
+server/routes/webhook.mjs:108:          // is the AUTHORITATIVE source for plan tier (what Stripe charged).
+server/routes/webhook.mjs:110:          // catch returns 500 without markProcessed, letting Stripe retry.
+server/routes/webhook.mjs:115:            authoritativeSession = await stripe.checkout.sessions.retrieve(session.id, {
+server/routes/webhook.mjs:119:            logger.error("checkout.session.completed: line_items retrieve FAILED — refusing entitlement, deferring to Stripe retry", {
+server/routes/webhook.mjs:123:            increment("subscription_mapping_unknown", { source: "checkout_retrieve_failed" });
+server/routes/webhook.mjs:124:            throw expandErr; // outer catch → 500 → no markProcessed → Stripe retries
+server/routes/webhook.mjs:126:          const checkoutPlan = resolvePlanFromCheckoutSession(authoritativeSession);
+server/routes/webhook.mjs:127:          if (!checkoutPlan) {
+server/routes/webhook.mjs:129:            const alertSource = diag.mismatch ? "checkout_mismatch" : "checkout";
+server/routes/webhook.mjs:132:                ? "checkout.session.completed: SECURITY metadata.plan != price-derived plan — refusing entitlement"
+server/routes/webhook.mjs:133:                : "checkout.session.completed: unknown plan — refusing to default",
+server/routes/webhook.mjs:140:            increment("subscription_mapping_unknown", { source: alertSource });
+server/routes/webhook.mjs:143:          const checkoutResult = await db
+server/routes/webhook.mjs:146:              stripeCustomerId: session.customer,
+server/routes/webhook.mjs:147:              subscriptionStatus: checkoutPlan,
+server/routes/webhook.mjs:151:          const checkoutRowsAffected = checkoutResult?.rowCount ?? checkoutResult?.changes ?? 0;
+server/routes/webhook.mjs:152:          if (checkoutRowsAffected === 0) {
+server/routes/webhook.mjs:153:            logger.warn("checkout.session.completed: no user matched by email", { email: customerEmail, customer: session.customer });
+server/routes/webhook.mjs:155:            logger.info("Subscription activated via checkout", { customer: session.customer, status: checkoutPlan });
+server/routes/webhook.mjs:156:            increment("subscription_transition", { plan: `free_to_${checkoutPlan}` });
+server/routes/webhook.mjs:158:          sendUpgradeConfirmation(customerEmail, session.customer_details?.name || "").catch(err => {
+server/routes/webhook.mjs:159:            logger.warn("Failed to send upgrade email", { error: err.message });
+server/routes/webhook.mjs:164:        case "customer.subscription.created":
+server/routes/webhook.mjs:165:        case "customer.subscription.updated": {
+server/routes/webhook.mjs:166:          const subscription = event.data.object;
+server/routes/webhook.mjs:167:          if (!subscription.customer) {
+server/routes/webhook.mjs:168:            logger.warn(`${event.type} missing customer field`, { subscriptionId: subscription.id });
+server/routes/webhook.mjs:171:          const isActive = ["active", "trialing"].includes(subscription.status);
+server/routes/webhook.mjs:174:            const mappedPlan = mapSubscriptionToPlan(subscription);
+server/routes/webhook.mjs:177:                subscriptionId: subscription.id,
+server/routes/webhook.mjs:178:                priceId: subscription?.items?.data?.[0]?.price?.id ?? null,
+server/routes/webhook.mjs:179:                customer: subscription.customer,
+server/routes/webhook.mjs:181:              increment("subscription_mapping_unknown", { source: "subscription" });
+server/routes/webhook.mjs:191:              subscriptionStatus: canonicalStatus,
+server/routes/webhook.mjs:192:              subscriptionExpiresAt: subscription.current_period_end
+server/routes/webhook.mjs:193:                ? new Date(subscription.current_period_end * 1000)
+server/routes/webhook.mjs:197:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:200:            logger.warn(`${event.type}: no user found for stripeCustomerId`, { customer: subscription.customer, stripeStatus: subscription.status });
+server/routes/webhook.mjs:202:            logger.info("Subscription status synced", { customer: subscription.customer, stripeStatus: subscription.status, canonicalStatus });
+server/routes/webhook.mjs:207:        case "customer.subscription.deleted": {
+server/routes/webhook.mjs:208:          const subscription = event.data.object;
+server/routes/webhook.mjs:209:          if (!subscription.customer) {
+server/routes/webhook.mjs:210:            logger.warn("customer.subscription.deleted missing customer field", { subscriptionId: subscription.id });
+server/routes/webhook.mjs:215:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:220:              subscriptionStatus: "free",
+server/routes/webhook.mjs:221:              subscriptionExpiresAt: new Date(),
+server/routes/webhook.mjs:224:            .where(eq(users.stripeCustomerId, subscription.customer));
+server/routes/webhook.mjs:227:            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId", { customer: subscription.customer });
+server/routes/webhook.mjs:229:            logger.info("Subscription deleted, reverted to free", { customer: subscription.customer });
+server/routes/webhook.mjs:230:            increment("subscription_transition", { plan: "pro_to_free" });
+server/routes/webhook.mjs:238:              subscription.current_period_end
+server/routes/webhook.mjs:259:            increment("subscription_mapping_unknown", { source: "invoice_paid" });
+server/routes/webhook.mjs:265:              subscriptionStatus: invoicePlan,
+server/routes/webhook.mjs:268:            .where(eq(users.stripeCustomerId, invoice.customer));
+server/routes/webhook.mjs:271:            logger.warn("invoice.paid: no user found for stripeCustomerId", { customer: invoice.customer });
+server/routes/webhook.mjs:278:        case "invoice.payment_failed": {
+server/routes/webhook.mjs:281:            logger.warn("invoice.payment_failed missing customer field", { invoiceId: invoice.id });
+server/routes/webhook.mjs:287:              subscriptionStatus: "free",
+server/routes/webhook.mjs:290:            .where(eq(users.stripeCustomerId, invoice.customer));
+server/routes/webhook.mjs:293:            logger.warn("invoice.payment_failed: no user found for stripeCustomerId", { customer: invoice.customer });
+server/routes/webhook.mjs:295:            logger.info("Invoice payment failed, reverted to free", { customer: invoice.customer });
+server/routes/webhook.mjs:301:          logger.info("Unhandled Stripe event type", { type: event.type });
+server/routes/webhook.mjs:309:      // Do NOT mark processed on failure; Stripe will retry.
+server/ai/system-prompts/mental-health-ux.txt:129:       • Pricing, plans, upgrade prompts, trial offers, conversion language
+server/ai/system-prompts/mental-health-ux.txt:136:   - Pricing pages, billing, account management, marketing copy.
+server/ai/system-prompts/mental-health-ux.txt:138:     even if the user asks "should I upgrade?" — instead validate the
+server/ai/system-prompts/mental-health-ux.txt:139:     underlying feeling and route the operational question to the billing
+server/ai/system-prompts/mental-health-ux.txt:141:     the billing page has the plan details; we can stay with how you're
+server/ai/paywallPolicy.mjs:12:  requestedPremium = false,
+server/ai/paywallPolicy.mjs:15:  if (requestedPremium) return true;
+server/ai/paywallPolicy.mjs:24:  requestedPremium = false,
+server/ai/paywallPolicy.mjs:26:  if (requestedPremium) return "premium_feature";
+server/ai/v2/constitutionalGate.mjs:31:const FORBIDDEN_PAYMENT_REQUEST_PATTERNS = [
+server/ai/v2/constitutionalGate.mjs:32:  /\b(?:send|wire|transfer|venmo|cashapp|zelle|paypal) (?:me )?(?:money|funds|payment)\b/i,
+server/ai/v2/constitutionalGate.mjs:95:  // Rule C4: Never request payment via chat.
+server/ai/v2/constitutionalGate.mjs:96:  for (const re of FORBIDDEN_PAYMENT_REQUEST_PATTERNS) {
+server/ai/v2/constitutionalGate.mjs:99:        rule: "C4_no_payment_request",
+server/ai/v2/constitutionalGate.mjs:101:        evidence: `payment-request pattern matched: ${re.source}`,
+server/ai/v2/constitutionalGate.mjs:179:  { id: "C4_no_payment_request", severity: "critical", description: "Never request payment via chat." },
+server/auth/webhookStripe.mjs:2:import { pendingEntitlements, users, subscriptions } from "../db/schema/index.mjs";
+server/auth/webhookStripe.mjs:5:export async function applyOrBufferEntitlement({ stripeCustomerId, email, tier, status }) {
+server/auth/webhookStripe.mjs:6:  // 1) try to find user by stripe_customer_id (best) or email (fallback)
+server/auth/webhookStripe.mjs:7:  const userByStripe = await db.select().from(users).where(eq(users.stripeCustomerId, stripeCustomerId)).limit(1);
+server/auth/webhookStripe.mjs:8:  const user = userByStripe[0];
+server/auth/webhookStripe.mjs:13:      stripeCustomerId,
+server/auth/webhookStripe.mjs:22:  await db.insert(subscriptions).values({
+server/auth/webhookStripe.mjs:25:    stripeCustomerId,
+server/auth/webhookStripe.mjs:28:    target: subscriptions.userId,
+server/auth/webhookStripe.mjs:29:    set: { tier, status, stripeCustomerId },
+server/billing/applyPendingEntitlements.mjs:2:import { pendingEntitlements, subscriptions } from "../db/schema/index.mjs";
+server/billing/applyPendingEntitlements.mjs:8:  const stripeCustomerId = user.stripeCustomerId;
+server/billing/applyPendingEntitlements.mjs:10:  const pending = stripeCustomerId
+server/billing/applyPendingEntitlements.mjs:11:    ? await db.select().from(pendingEntitlements).where(and(eq(pendingEntitlements.stripeCustomerId, stripeCustomerId), isNull(pendingEntitlements.appliedAt)))
+server/billing/applyPendingEntitlements.mjs:15:    await db.insert(subscriptions).values({
+server/billing/applyPendingEntitlements.mjs:18:      stripeCustomerId: p.stripeCustomerId,
+server/billing/applyPendingEntitlements.mjs:21:      target: subscriptions.userId,
+server/billing/applyPendingEntitlements.mjs:22:      set: { tier: p.tier, status: p.status, stripeCustomerId: p.stripeCustomerId },
+server/billing/entitlements.mjs:2:import { users, subscriptions } from "../db/schema.mjs";
+server/billing/entitlements.mjs:6:export async function applyOrBufferEntitlement({ stripeCustomerId, tier, status }) {
+server/billing/entitlements.mjs:7:  const found = await db.select().from(users).where(eq(users.stripeCustomerId, stripeCustomerId)).limit(1);
+server/billing/entitlements.mjs:11:    logger.warn("User not found for stripeCustomerId, entitlement not applied", { stripeCustomerId, tier });
+server/billing/entitlements.mjs:16:    .insert(subscriptions)
+server/billing/entitlements.mjs:17:    .values({ userId: user.id, stripeCustomerId, tier, status })
+server/billing/entitlements.mjs:19:      target: subscriptions.userId,
+server/billing/entitlements.mjs:20:      set: { stripeCustomerId, tier, status },
+server/billing/stripeCustomer.mjs:1:import Stripe from "stripe";
+server/billing/stripeCustomer.mjs:4:const stripe = process.env.STRIPE_SECRET_KEY
+server/billing/stripeCustomer.mjs:5:  ? new Stripe(process.env.STRIPE_SECRET_KEY)
+server/billing/stripeCustomer.mjs:8:export async function ensureStripeCustomer(user) {
+server/billing/stripeCustomer.mjs:9:  if (!stripe) throw new Error("Stripe is not configured");
+server/billing/stripeCustomer.mjs:10:  if (user.stripe_customer_id) return user.stripe_customer_id;
+server/billing/stripeCustomer.mjs:12:  const customer = await stripe.customers.create({
+server/billing/stripeCustomer.mjs:19:    `UPDATE users SET stripe_customer_id=$1 WHERE id=$2`,
+server/contracts/content-model.schema.mjs:62:  "billing",
+server/contracts/content-model.schema.mjs:87:    /\b(buy now|subscribe now|upgrade now|limited time|last chance|act now|start your paid plan|checkout now)\b/i;
+server/contracts/content/b1-content-contract.mjs:51:  /\bupgrade now\b/i,
+server/contracts/content/b1-content-contract.mjs:55:  /\bcheckout\b/i,
+server/contracts/content/b1-content-contract.mjs:60:  /\bupgrade your plan\b/i,
+server/lib/promptEngine.mjs:93:  if (/(price|tier|packaging|subscription plan)/i.test(t))     return "b07_pricing_packaging";
+server/middleware/requirePlan.mjs:13:      SELECT tier, status FROM subscriptions 
+server/middleware/requirePlan.mjs:62:        upgradeUrl: "/billing"
+server/premium/features.ts:1:export const premiumFeatures = {
+server/services/auditLog.mjs:48:  SUBSCRIPTION_CHANGE: "billing.subscription_change",
+server/services/email.mjs:314:export async function sendUpgradeConfirmation(toEmail, userName) {
+server/services/email.mjs:328:            and all premium tools are unlocked.
+server/services/email.mjs:339:              <li>All premium wellness tools</li>
+server/services/email.mjs:349:            You can manage your subscription anytime from your 
+server/services/email.mjs:350:            <a href="https://genuineloveproject.com/account/billing" style="color: #2d5a4a; text-decoration: underline;">billing page</a>.
+server/services/email.mjs:368:    logger.info("[Email] Upgrade confirmation sent", { toEmail });
+server/services/email.mjs:371:    logger.error("[Email] Failed to send upgrade confirmation", { error: error?.message || error });
+server/services/email.mjs:382:      : 'the end of your current billing period';
+server/services/email.mjs:387:      subject: 'Your Subscription Update',
+server/services/email.mjs:393:            Your Pro subscription has been canceled. You'll continue to have access to all Pro features 
+server/services/email.mjs:406:              <a href="https://genuineloveproject.com/account/billing" style="color: #2d5a4a; text-decoration: underline;">billing page</a>. 
+server/services/stripeSync.mjs:1:import Stripe from "stripe";
+server/services/stripeSync.mjs:4:const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+server/services/stripeSync.mjs:6:export async function ensureStripeCustomerForUser(userId, email) {
+server/services/stripeSync.mjs:8:    `SELECT stripe_customer_id FROM users WHERE id = $1`,
+server/services/stripeSync.mjs:12:  const existing = found.rows?.[0]?.stripe_customer_id;
+server/services/stripeSync.mjs:15:  const customer = await stripe.customers.create({
+server/services/stripeSync.mjs:21:    `UPDATE users SET stripe_customer_id = $1 WHERE id = $2`,
+server/services/stripeSync.mjs:28:export async function setUserSubscriptionStatusByCustomer(customerId, status, expiresAt = null) {
+server/services/stripeSync.mjs:30:    `UPDATE users SET subscription_status = $1, subscription_expires_at = $2 WHERE stripe_customer_id = $3`,
+server/services/stripeSync.mjs:35:export { stripe };
+server/services/aiChatService.mjs:10:import { upgradeTherapyReply } from "../engine/therapyIntelligence.mjs";
+server/services/aiChatService.mjs:88:			const upgraded = upgradeTherapyReply(reply, {
+server/services/aiChatService.mjs:92:			therapy = upgraded?.therapy || null;
+server/services/aiChatService.mjs:135:				const upgraded = upgradeTherapyReply(reply, {
+server/services/aiChatService.mjs:139:				therapy = upgraded?.therapy || null;
+server/services/aiChatService.mjs:167:			const upgraded = upgradeTherapyReply(reply, {
+server/services/aiChatService.mjs:171:			therapy = upgraded?.therapy || null;
+server/services/aiChatService.mjs:203:			const upgraded = upgradeTherapyReply(reply, {
+server/services/aiChatService.mjs:207:			therapy = upgraded?.therapy || null;
+server/shared/importMap.mjs:33:    billing: "../routes/billing.mjs",
+server/shared/importMap.mjs:34:    stripe: "../routes/stripe.mjs",
+server/tests/billing-response-shape.test.js:3:function validateCheckoutResponseShape(payload) {
+server/tests/billing-response-shape.test.js:10:		"Checkout response must expose top-level url"
+server/tests/billing-response-shape.test.js:15:validateCheckoutResponseShape({
+server/tests/billing-response-shape.test.js:17:	url: "https://checkout.stripe.com/test"
+server/tests/billing-response-shape.test.js:21:validateCheckoutResponseShape({
+server/tests/billing-response-shape.test.js:24:		url: "https://checkout.stripe.com/test"
+server/tests/billing-response-shape.test.js:29:console.log("✓ billing response shape valid");
+server/utils/stripe.mjs:1:// server/utils/stripe.mjs
+server/utils/stripe.mjs:2:import Stripe from "stripe";
+server/utils/stripe.mjs:5:const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
+server/utils/stripe.mjs:9:let stripe = null;
+server/utils/stripe.mjs:11:if (STRIPE_SECRET_KEY) {
+server/utils/stripe.mjs:12:  stripe = new Stripe(STRIPE_SECRET_KEY, {
+server/utils/stripe.mjs:16:  logger.warn("STRIPE_SECRET_KEY not set. Billing is disabled");
+server/utils/stripe.mjs:19:export function getStripeClient() {
+server/utils/stripe.mjs:20:  if (!stripe) {
+server/utils/stripe.mjs:21:    throw new Error("Stripe client not configured (missing STRIPE_SECRET_KEY).");
+server/utils/stripe.mjs:23:  return stripe;
+server/utils/stripe.mjs:26:export async function createSubscriptionCheckoutSession({
+server/utils/stripe.mjs:29:  successPath = "/billing/success",
+server/utils/stripe.mjs:30:  cancelPath = "/billing/cancel"
+server/utils/stripe.mjs:32:  const client = getStripeClient();
+server/utils/stripe.mjs:34:  const session = await client.checkout.sessions.create({
+server/utils/stripe.mjs:35:    mode: "subscription",
+server/utils/stripe.mjs:42:    success_url: `${APP_BASE_URL}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
+server/utils/stripe.mjs:50:export function constructStripeWebhookEvent(rawBody, signature) {
+server/utils/stripe.mjs:51:  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+server/utils/stripe.mjs:52:  const client = getStripeClient();
+server/utils/stripe.mjs:55:    throw new Error("STRIPE_WEBHOOK_SECRET not set");
+server/utils/planMapping.mjs:1:// Deterministic Stripe price-id → internal plan mapping.
+server/utils/planMapping.mjs:4:// Built from the same STRIPE_PRICE_* env vars billing.mjs uses, so the
+server/utils/planMapping.mjs:5:// checkout side and the webhook side stay in sync via shared env source.
+server/utils/planMapping.mjs:16:  add(process.env.STRIPE_PRICE_STARTER,        "starter");
+server/utils/planMapping.mjs:17:  add(process.env.STRIPE_PRICE_PRO,            "pro");
+server/utils/planMapping.mjs:18:  add(process.env.STRIPE_PRICE_PRO_MONTHLY,    "pro");
+server/utils/planMapping.mjs:19:  add(process.env.STRIPE_PRICE_PRO_YEARLY,     "pro");
+server/utils/planMapping.mjs:20:  add(process.env.STRIPE_PRICE_ELITE,          "elite");
+server/utils/planMapping.mjs:21:  add(process.env.STRIPE_PRICE_ELITE_MONTHLY,  "elite");
+server/utils/planMapping.mjs:22:  add(process.env.STRIPE_PRICE_ELITE_YEARLY,   "elite");
+server/utils/planMapping.mjs:32:export function mapSubscriptionToPlan(subscription) {
+server/utils/planMapping.mjs:33:  const priceId = subscription?.items?.data?.[0]?.price?.id;
+server/utils/planMapping.mjs:42:// AUTHORITATIVE plan derivation for a Stripe Checkout Session.
+server/utils/planMapping.mjs:43:// PRIORITY 1: line_items[0].price.id — what Stripe actually charged (trustworthy).
+server/utils/planMapping.mjs:57:export function resolvePlanFromCheckoutSession(session) {
+server/observability/safetyAlerts.mjs:77: * Stripe webhook signature verification failed.
+server/observability/safetyAlerts.mjs:87:    group: "billing",
+server/observability/safetyAlerts.mjs:122: * no payment requests, etc.). Should never happen in production.
+server/observability/alerter.mjs:98: * @param {string} [args.component] - Optional sub-component (e.g. "stripe-webhook").
+server/observability/alerter.mjs:99: * @param {string} [args.group] - Optional logical grouping (e.g. "billing").
+server/app.mjs.bak:5:import billingRoutes from "./routes/billing.mjs";
+server/app.mjs.bak:56:import adminBillingRoutes from "./routes/adminBilling.mjs";
+server/app.mjs.bak:106:// ===== STRIPE WEBHOOK — MUST mount BEFORE express.json so the router's
+server/app.mjs.bak:140:        // is still locked to 'self' + Stripe.
+server/app.mjs.bak:141:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs.bak:143:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs.bak:146:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+server/app.mjs.bak:251:app.use("/api/admin/billing", adminBillingRoutes);
+server/app.mjs.bak:274:app.use("/api/billing", billingRoutes);
+server/app.mjs:5:import billingRoutes from "./routes/billing.mjs";
+server/app.mjs:56:import adminBillingRoutes from "./routes/adminBilling.mjs";
+server/app.mjs:106:// ===== STRIPE WEBHOOK — MUST mount BEFORE express.json so the router's
+server/app.mjs:140:        // is still locked to 'self' + Stripe.
+server/app.mjs:141:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs:143:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs:146:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+server/app.mjs:251:app.use("/api/admin/billing", adminBillingRoutes);
+server/app.mjs:274:app.use("/api/billing", billingRoutes);
+server/app.mjs.STABLE:5:import billingRoutes from "./routes/billing.mjs";
+server/app.mjs.STABLE:56:import adminBillingRoutes from "./routes/adminBilling.mjs";
+server/app.mjs.STABLE:106:// ===== STRIPE WEBHOOK — MUST mount BEFORE express.json so the router's
+server/app.mjs.STABLE:140:        // is still locked to 'self' + Stripe.
+server/app.mjs.STABLE:141:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs.STABLE:143:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs.STABLE:146:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+server/app.mjs.STABLE:251:app.use("/api/admin/billing", adminBillingRoutes);
+server/app.mjs.STABLE:274:app.use("/api/billing", billingRoutes);
+server/app.mjs.bak-ready-alias:5:import billingRoutes from "./routes/billing.mjs";
+server/app.mjs.bak-ready-alias:56:import adminBillingRoutes from "./routes/adminBilling.mjs";
+server/app.mjs.bak-ready-alias:106:// ===== STRIPE WEBHOOK — MUST mount BEFORE express.json so the router's
+server/app.mjs.bak-ready-alias:140:        // is still locked to 'self' + Stripe.
+server/app.mjs.bak-ready-alias:141:        "script-src": ["'self'", "'unsafe-inline'", "https://js.stripe.com"],
+server/app.mjs.bak-ready-alias:143:        "connect-src": ["'self'", "https://api.stripe.com", "https://api.openai.com", "https://r.stripe.com"],
+server/app.mjs.bak-ready-alias:146:        "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+server/app.mjs.bak-ready-alias:251:app.use("/api/admin/billing", adminBillingRoutes);
+server/app.mjs.bak-ready-alias:274:app.use("/api/billing", billingRoutes);
+shared/schema.mjs:23:  stripeCustomerId: text("stripe_customer_id"),
+shared/schema.mjs:24:  subscriptionStatus: text("subscription_status").default("free"),
+shared/schema.mjs:25:  subscriptionExpiresAt: timestamp("subscription_expires_at"),
+shared/schema.mjs:120:export const subscriptions = pgTable("subscriptions", {
+shared/schema.mjs:253:  id: text("id").primaryKey(), // Stripe event ID (not UUID)
+shared/schema.mjs:519:  paymentMethod: varchar("payment_method", { length: 50 }),
+shared/featureFlags.mjs:33:    billingDashboard: { enabled: true, status: "ready", label: "Billing Dashboard" },
