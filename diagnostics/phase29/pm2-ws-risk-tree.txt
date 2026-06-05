@@ -1,0 +1,28 @@
+mymentalhealthbuddy@1.0.0 /home/runner/workspace
+├─┬ @langchain/openai@1.4.7
+│ └─┬ @langchain/core@1.1.48
+│   └─┬ langsmith@0.7.3
+│     └── ws@8.21.0 deduped
+├─┬ lighthouse@12.8.2
+│ ├─┬ puppeteer-core@24.43.1
+│ │ └── ws@8.21.0 deduped
+│ └── ws@7.5.11
+├─┬ openai@6.39.0
+│ └── ws@8.21.0 deduped
+├─┬ pm2@7.0.1
+│ ├─┬ @pm2/js-api@0.8.0
+│ │ └── ws@7.5.11
+│ └── ws@8.20.0
+├─┬ react-spring@10.0.4
+│ └─┬ @react-spring/native@10.1.0
+│   └─┬ react-native@0.85.3
+│     ├─┬ @react-native/community-cli-plugin@0.85.3
+│     │ ├─┬ @react-native/dev-middleware@0.85.3
+│     │ │ └── ws@7.5.11
+│     │ └─┬ metro@0.84.4
+│     │   └── ws@7.5.11
+│     ├─┬ react-devtools-core@6.1.5
+│     │ └── ws@7.5.11
+│     └── ws@7.5.11
+└── ws@8.21.0
+

@@ -1,0 +1,26 @@
+mymentalhealthbuddy@1.0.0 /home/runner/workspace
+├─┬ @google-cloud/storage@7.19.0
+│ ├─┬ gaxios@6.7.1
+│ │ └── uuid@9.0.1
+│ ├─┬ google-auth-library@9.15.1
+│ │ ├─┬ gaxios@6.7.1
+│ │ │ └── uuid@9.0.1
+│ │ ├─┬ gcp-metadata@6.1.1
+│ │ │ └── gaxios@6.7.1 deduped
+│ │ └─┬ gtoken@7.1.0
+│ │   └─┬ gaxios@6.7.1
+│ │     └── uuid@9.0.1
+│ ├─┬ retry-request@7.0.2
+│ │ └── teeny-request@9.0.0 deduped
+│ ├─┬ teeny-request@9.0.0
+│ │ └── uuid@9.0.1
+│ └── uuid@8.3.2
+├─┬ @opentelemetry/auto-instrumentations-node@0.76.0
+│ └─┬ @opentelemetry/resource-detector-gcp@0.53.0
+│   └─┬ gcp-metadata@8.1.2
+│     └── gaxios@7.1.4
+└─┬ broken-link-checker@0.7.8
+  └─┬ bhttp@1.2.8
+    └─┬ form-data2@1.0.4
+      └── uuid@2.0.3
+
