@@ -56,3 +56,11 @@
 
 ## Next Rule
 One blocker at a time. Verify before fixing. Fix smallest safe issue. Rebuild. Recheck runtime. Commit. Push. Stop.
+
+## Phase 8 Added Blocker
+- Stripe is currently blocked from real revenue testing because STRIPE_SECRET_KEY is TEST while STRIPE_PUBLISHABLE_KEY is LIVE and VITE_STRIPE_PUBLISHABLE_KEY is missing.
+- Required before checkout testing:
+  1. Rotate exposed Stripe/Replit/GitHub secrets.
+  2. Use matching Stripe mode keys only.
+  3. Add VITE_STRIPE_PUBLISHABLE_KEY.
+  4. Re-run Phase 8 audit.
