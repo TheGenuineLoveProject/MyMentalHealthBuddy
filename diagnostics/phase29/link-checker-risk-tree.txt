@@ -1,0 +1,11 @@
+mymentalhealthbuddy@1.0.0 /home/runner/workspace
+├─┬ broken-link-checker@0.7.8
+│ ├─┬ bhttp@1.2.8
+│ │ └── tough-cookie@2.5.0
+│ ├─┬ robot-directives@0.3.0
+│ │ └─┬ useragent@2.3.0
+│ │   └── tmp@0.0.33
+│ └── robots-txt-guard@0.1.1
+└─┬ vite-bundle-visualizer@1.2.1
+  └── tmp@0.2.7
+

@@ -1,0 +1,12 @@
+mymentalhealthbuddy@1.0.0 /home/runner/workspace
+├─┬ drizzle-kit@0.31.10
+│ ├─┬ @esbuild-kit/esm-loader@2.6.5
+│ │ └─┬ @esbuild-kit/core-utils@3.3.2
+│ │   └── esbuild@0.18.20
+│ ├── esbuild@0.25.12
+│ └─┬ tsx@4.22.3
+│   └── esbuild@0.28.0 deduped
+├── esbuild@0.28.0
+└─┬ vite@8.0.14
+  └── esbuild@0.28.0 deduped
+
