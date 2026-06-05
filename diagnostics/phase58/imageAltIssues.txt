@@ -1,0 +1,43 @@
+client/src/components/BrandHero.tsx:10:<img
+client/src/components/BrandLogo.tsx:10:<img
+client/src/components/BrandShell.jsx:24:<img
+client/src/components/KnowledgeBase.jsx:68:<img
+client/src/components/LazyImage.jsx:72:<img
+client/src/components/ReflectionCardExport.jsx:281:<img
+client/src/components/ToolCard.tsx:112:<img
+client/src/components/avatar/BuddyAvatar.tsx:443:<img
+client/src/components/chat/AIChatPanel.tsx:189:<img
+client/src/components/chat/AIChatPanel.tsx:220:<img
+client/src/components/lumi/FloatIdleAnimated.jsx:306:<img
+client/src/components/lumi/FloatIdleRig.jsx:264:<img
+client/src/components/lumi/LumiAccessibleWrapper.jsx:9:* Wraps any Lumi visual (typically an <img> or animated SVG) with the
+client/src/components/lumi/LumiBrandLockupImage.jsx:21:<img
+client/src/components/lumi/LumiBrandLogo.jsx:65:<img
+client/src/components/lumi/LumiCompanion.jsx:166:// Compose CSS class string for the <img>: base mascot class + the active
+client/src/components/lumi/LumiCompanion.jsx:287:<img
+client/src/components/lumi/LumiCustomizer.jsx:177:<img
+client/src/components/lumi/LumiMascotImage.jsx:37:<img
+client/src/components/lumi/LumiV6.tsx:979:<img
+client/src/components/lumi/TGLPMandala.jsx:17:<img
+client/src/components/lumi/TGLPMandalaImage.jsx:19:<img
+client/src/components/sacred/Hero.jsx:68:<img
+client/src/components/ui/LazyImage.jsx:98:<img
+client/src/components/ui/LazyImage.jsx:119:<img
+client/src/components/ui/WellnessToolkit.jsx:56:<img
+client/src/lumi-registry/components/OfficialLumi.tsx:9:* v5.8.64 — flipped to `<img>`-only rendering (literal-spec delta on top
+client/src/lumi-registry/components/OfficialLumi.tsx:34:* the SVG branch has been removed. Both values resolve to `<img>`-only render.
+client/src/lumi-registry/components/OfficialLumi.tsx:58:* but is a runtime no-op. Every render now goes through the `<img>` path.
+client/src/lumi-registry/components/OfficialLumi.tsx:74:* Asset render body. Owns the `<img>` 404-fallback state (lives in its
+client/src/lumi-registry/components/OfficialLumi.tsx:78:* On image load failure: the broken `<img>` is replaced by an empty,
+client/src/lumi-registry/components/OfficialLumi.tsx:142:<img
+client/src/pages/BlogEditor.jsx:170:<img
+client/src/pages/BlogIndex.jsx:24:<img
+client/src/pages/BlogPost.jsx:253:<img
+client/src/pages/Challenge.jsx:199:<img
+client/src/pages/CheckIn.jsx:229:<img
+client/src/pages/OnboardingFlow.jsx:121:<img
+client/src/pages/Profile.jsx:76:<img
+client/src/pages/account/Security.jsx:407:<img
+client/src/pages/admin/SocialGenerator.jsx:587:<img
+client/src/sections/NlpMiContent.jsx:216:<img
+client/src/sections/VisualBenefits.jsx:131:<img
