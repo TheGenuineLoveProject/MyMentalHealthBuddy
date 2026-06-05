@@ -1,0 +1,6 @@
+release/DEPLOYMENT_APPROVAL.md
+release/HEALTH.json
+release/NPM_AUDIT_SUMMARY.txt
+release/READY.json
+release/RELEASE_MANIFEST.txt
+release/SECRET_CERTIFICATION.md
