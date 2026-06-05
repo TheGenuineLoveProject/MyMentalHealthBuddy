@@ -1,0 +1,3 @@
+Severity: high
+Severity: high
+19 vulnerabilities (16 moderate, 3 high)
