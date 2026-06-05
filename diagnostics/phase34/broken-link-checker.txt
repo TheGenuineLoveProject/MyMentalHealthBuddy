@@ -1,0 +1,3 @@
+package.json:    "broken-link-checker": "^0.7.8",
+package-lock.json:        "broken-link-checker": "^0.7.8",
+package-lock.json:        "broken-link-checker": "bin/blc"
