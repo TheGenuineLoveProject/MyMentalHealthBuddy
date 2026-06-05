@@ -1,0 +1,147 @@
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @react-spring/zdog@10.1.0
+npm warn Found: react@19.2.6
+npm warn node_modules/react
+npm warn   react@"^19.2.5" from the root project
+npm warn   32 more (@react-native/virtualized-lists, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from @react-spring/zdog@10.1.0
+npm warn node_modules/react-spring/node_modules/@react-spring/zdog
+npm warn   @react-spring/zdog@"~10.1.0" from react-spring@10.0.4
+npm warn   node_modules/react-spring
+npm warn
+npm warn Conflicting peer dependency: react@18.3.1
+npm warn node_modules/react
+npm warn   peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from @react-spring/zdog@10.1.0
+npm warn   node_modules/react-spring/node_modules/@react-spring/zdog
+npm warn     @react-spring/zdog@"~10.1.0" from react-spring@10.0.4
+npm warn     node_modules/react-spring
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @react-spring/zdog@10.1.0
+npm warn Found: react-dom@19.2.6
+npm warn node_modules/react-dom
+npm warn   react-dom@"^19.2.5" from the root project
+npm warn   10 more (@react-spring/web, @react-three/fiber, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react-dom@"^16.8.0 || ^17.0.0 || ^18.0.0" from @react-spring/zdog@10.1.0
+npm warn node_modules/react-spring/node_modules/@react-spring/zdog
+npm warn   @react-spring/zdog@"~10.1.0" from react-spring@10.0.4
+npm warn   node_modules/react-spring
+npm warn
+npm warn Conflicting peer dependency: react-dom@18.3.1
+npm warn node_modules/react-dom
+npm warn   peer react-dom@"^16.8.0 || ^17.0.0 || ^18.0.0" from @react-spring/zdog@10.1.0
+npm warn   node_modules/react-spring/node_modules/@react-spring/zdog
+npm warn     @react-spring/zdog@"~10.1.0" from react-spring@10.0.4
+npm warn     node_modules/react-spring
+
+up to date, audited 1369 packages in 6s
+
+164 packages are looking for funding
+  run `npm fund` for details
+
+# npm audit report
+
+esbuild  <=0.24.2
+Severity: moderate
+esbuild enables any website to send any requests to the development server and read the response - https://github.com/advisories/GHSA-67mh-4wv8-2f99
+fix available via `npm audit fix --force`
+Will install drizzle-kit@0.18.1, which is a breaking change
+node_modules/@esbuild-kit/core-utils/node_modules/esbuild
+  @esbuild-kit/core-utils  *
+  Depends on vulnerable versions of esbuild
+  node_modules/@esbuild-kit/core-utils
+    @esbuild-kit/esm-loader  *
+    Depends on vulnerable versions of @esbuild-kit/core-utils
+    node_modules/@esbuild-kit/esm-loader
+      drizzle-kit  0.17.5-6b7793f - 0.17.5-e5944eb || 0.18.1-065de38 - 0.18.1-f3800bf || 0.19.0-07024c4 - 1.0.0-beta.1-fd8bfcc
+      Depends on vulnerable versions of @esbuild-kit/esm-loader
+      node_modules/drizzle-kit
+
+robots-txt-guard  <1.0.2
+Severity: high
+robots-txt-guard Inefficient Regular Expression Complexity vulnerability - https://github.com/advisories/GHSA-6g33-8w2q-4hxv
+fix available via `npm audit fix --force`
+Will install broken-link-checker@0.6.7, which is a breaking change
+node_modules/robots-txt-guard
+  broken-link-checker  >=0.5.0
+  Depends on vulnerable versions of bhttp
+  Depends on vulnerable versions of robot-directives
+  Depends on vulnerable versions of robots-txt-guard
+  node_modules/broken-link-checker
+
+tmp  <=0.2.5
+Severity: high
+tmp allows arbitrary temporary file / directory write via symbolic link `dir` parameter - https://github.com/advisories/GHSA-52f5-9888-hmc6
+tmp has Path Traversal via unsanitized prefix/postfix that enables directory escape - https://github.com/advisories/GHSA-ph9p-34f9-6g65
+fix available via `npm audit fix`
+node_modules/tmp
+  useragent  *
+  Depends on vulnerable versions of tmp
+  node_modules/useragent
+    robot-directives  >=0.3.0
+    Depends on vulnerable versions of useragent
+    node_modules/robot-directives
+
+tough-cookie  <4.1.3
+Severity: moderate
+tough-cookie Prototype Pollution vulnerability - https://github.com/advisories/GHSA-72xf-g2v4-qvf3
+fix available via `npm audit fix --force`
+Will install broken-link-checker@0.6.7, which is a breaking change
+node_modules/tough-cookie
+  bhttp  *
+  Depends on vulnerable versions of form-data2
+  Depends on vulnerable versions of tough-cookie
+  node_modules/bhttp
+
+
+uuid  <11.1.1
+Severity: moderate
+uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided - https://github.com/advisories/GHSA-w5hq-g745-h8pq
+fix available via `npm audit fix --force`
+Will install @google-cloud/storage@5.20.4, which is a breaking change
+node_modules/@google-cloud/storage/node_modules/gaxios/node_modules/uuid
+node_modules/@google-cloud/storage/node_modules/uuid
+node_modules/google-auth-library/node_modules/uuid
+node_modules/gtoken/node_modules/uuid
+node_modules/teeny-request/node_modules/uuid
+node_modules/uuid
+  @google-cloud/storage  2.2.0 - 2.5.0 || >=5.19.0
+  Depends on vulnerable versions of retry-request
+  Depends on vulnerable versions of teeny-request
+  Depends on vulnerable versions of uuid
+  node_modules/@google-cloud/storage
+  form-data2  *
+  Depends on vulnerable versions of uuid
+  node_modules/form-data2
+  gaxios  6.4.0 - 6.7.1
+  Depends on vulnerable versions of uuid
+  node_modules/@google-cloud/storage/node_modules/gaxios
+  node_modules/google-auth-library/node_modules/gaxios
+  node_modules/gtoken/node_modules/gaxios
+  teeny-request  3.9.1 - 9.0.0
+  Depends on vulnerable versions of uuid
+  node_modules/teeny-request
+    retry-request  7.0.0 - 7.0.2
+    Depends on vulnerable versions of teeny-request
+    node_modules/retry-request
+
+ws  8.0.0 - 8.20.0
+Severity: moderate
+ws: Uninitialized memory disclosure - https://github.com/advisories/GHSA-58qx-3vcg-4xpx
+fix available via `npm audit fix --force`
+Will install pm2@6.0.14, which is a breaking change
+node_modules/pm2/node_modules/ws
+  pm2  >=7.0.0
+  Depends on vulnerable versions of ws
+  node_modules/pm2
+
+19 vulnerabilities (16 moderate, 3 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
