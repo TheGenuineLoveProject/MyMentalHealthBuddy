@@ -124,3 +124,5 @@ Thumbs.db
 .vscode/
 yarn-debug.log*
 yarn-error.log*
+diagnostics/**/stripe-references.txt
+diagnostics/phase9/
