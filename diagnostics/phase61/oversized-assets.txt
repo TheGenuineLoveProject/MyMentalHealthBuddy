@@ -1,0 +1,2 @@
+client/dist/assets/mmhb_brand_logo_lockup_1777538625498-Bg5tRRhq.png
+client/dist/assets/thegenuineloveproject_logo_v2_1777538625498-B2Z66psB.png
