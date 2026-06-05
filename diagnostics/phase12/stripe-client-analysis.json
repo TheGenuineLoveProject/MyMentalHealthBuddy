@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-06-05T01:51:56.720Z",
+  "billingClientExists": true,
+  "usesViteStripePublishableKey": false,
+  "usesServerSecretKeyClientSide": false,
+  "exportsCreateCheckoutSession": true,
+  "recommendation": "Client must never use STRIPE_SECRET_KEY. Checkout should call server /api/billing/checkout only."
+}
