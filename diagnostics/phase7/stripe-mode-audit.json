@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-06-05T01:10:14.405Z",
+  "stripe": {
+    "secretMode": "test",
+    "serverPublicMode": "live",
+    "vitePublicMode": "missing",
+    "modeAligned": false
+  },
+  "webhookSecret": "present",
+  "prices": {
+    "STRIPE_PRICE_STARTER": "present",
+    "STRIPE_PRICE_PRO": "present",
+    "STRIPE_PRICE_PRO_MONTHLY": "present",
+    "STRIPE_PRICE_PRO_YEARLY": "present",
+    "STRIPE_PRICE_ELITE": "present",
+    "STRIPE_PRICE_ELITE_MONTHLY": "present",
+    "STRIPE_PRICE_ELITE_YEARLY": "present"
+  },
+  "recommendation": "CRITICAL: replace publishable key with TEST publishable key OR replace secret key with LIVE secret key. Do not mix test and live."
+}
