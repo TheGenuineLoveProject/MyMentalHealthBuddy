@@ -1,0 +1,26 @@
+server/routes/billing.mjs:  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
+server/routes/billing.mjs:  elite: { name: "Elite", priceId: process.env.STRIPE_PRICE_ELITE, mode: "subscription", features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support", "voice_affirmations", "1on1_onboarding", "early_access", "elite_community"] },
+server/routes/billing.mjs:  monthly: process.env.STRIPE_PRICE_PRO_MONTHLY || process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:  yearly: process.env.STRIPE_PRICE_PRO_YEARLY || process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:  monthly: process.env.STRIPE_PRICE_ELITE_MONTHLY || process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:  yearly: process.env.STRIPE_PRICE_ELITE_YEARLY || process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_PRO,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_PRO_MONTHLY,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_PRO_YEARLY,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_ELITE,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_ELITE_MONTHLY,
+server/routes/billing.mjs:        process.env.STRIPE_PRICE_ELITE_YEARLY,
+server/routes/billing.mjs:    const session = await stripe.checkout.sessions.create({
+server/routes/billing.mjs:router.get("/subscription-status", async (req, res) => {
+server/routes/webhook.mjs:        case "customer.subscription.created":
+server/routes/webhook.mjs:        case "customer.subscription.updated": {
+server/routes/webhook.mjs:        case "customer.subscription.deleted": {
+server/routes/webhook.mjs:            logger.warn("customer.subscription.deleted missing customer field", { subscriptionId: subscription.id });
+server/routes/webhook.mjs:            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId", { customer: subscription.customer });
+server/utils/stripe.mjs:  const session = await client.checkout.sessions.create({
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_PRO,            "pro");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_PRO_MONTHLY,    "pro");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_PRO_YEARLY,     "pro");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_ELITE,          "elite");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_ELITE_MONTHLY,  "elite");
+server/utils/planMapping.mjs:  add(process.env.STRIPE_PRICE_ELITE_YEARLY,   "elite");
