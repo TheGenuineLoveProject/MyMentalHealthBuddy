@@ -64,3 +64,17 @@ One blocker at a time. Verify before fixing. Fix smallest safe issue. Rebuild. R
   2. Use matching Stripe mode keys only.
   3. Add VITE_STRIPE_PUBLISHABLE_KEY.
   4. Re-run Phase 8 audit.
+
+## Phase 13 Git + Deployment State
+- Oversized Stripe diagnostic artifacts are ignored and removed from the working tree.
+- Current focus remains deployment readiness, revenue readiness, and safe checkout enablement.
+- Checkout testing must not proceed until all exposed secrets are rotated and Stripe key modes are aligned.
+- Deployment can proceed only after build, health, ready, CORS, auth, billing, webhook, legal, and security checks pass.
+
+## Phase 13 Active Blockers
+1. Rotate exposed secrets.
+2. Align Stripe key modes.
+3. Add VITE_STRIPE_PUBLISHABLE_KEY.
+4. Restrict CORS_ORIGIN to production domain.
+5. Resolve or document GitHub Dependabot vulnerabilities.
+6. Verify checkout, webhook, subscription activation, and billing portal.

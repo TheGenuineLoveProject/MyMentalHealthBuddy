@@ -130,3 +130,5 @@ diagnostics/**/stripe-references.txt
 diagnostics/phase9/
 diagnostics/**/stripe-references.txt
 diagnostics/phase9/
+diagnostics/**/stripe-references-raw.txt
+diagnostics/**/secrets*.txt
