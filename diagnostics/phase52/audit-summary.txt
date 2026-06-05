@@ -1,0 +1,4 @@
+low=0
+moderate=11
+high=0
+critical=0

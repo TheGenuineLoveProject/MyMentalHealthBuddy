@@ -1,0 +1,4 @@
+4:Severity: moderate
+20:Severity: moderate
+47:Severity: moderate
+56:11 moderate severity vulnerabilities

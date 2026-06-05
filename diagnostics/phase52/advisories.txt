@@ -1,0 +1,55 @@
+====================================
+@esbuild-kit/core-utils
+severity=moderate
+range=*
+fixAvailable={"name":"drizzle-kit","version":"0.18.1","isSemVerMajor":true}
+====================================
+@esbuild-kit/esm-loader
+severity=moderate
+range=*
+fixAvailable={"name":"drizzle-kit","version":"0.18.1","isSemVerMajor":true}
+====================================
+@google-cloud/storage
+severity=moderate
+range=2.2.0 - 2.5.0 || >=5.19.0
+fixAvailable={"name":"@google-cloud/storage","version":"5.20.4","isSemVerMajor":true}
+====================================
+drizzle-kit
+severity=moderate
+range=0.17.5-6b7793f - 0.17.5-e5944eb || 0.18.1-065de38 - 0.18.1-f3800bf || 0.19.0-07024c4 - 1.0.0-beta.1-fd8bfcc
+fixAvailable={"name":"drizzle-kit","version":"0.18.1","isSemVerMajor":true}
+====================================
+esbuild
+severity=moderate
+range=<=0.24.2
+fixAvailable={"name":"drizzle-kit","version":"0.18.1","isSemVerMajor":true}
+====================================
+gaxios
+severity=moderate
+range=6.4.0 - 6.7.1
+fixAvailable=true
+====================================
+pm2
+severity=moderate
+range=>=7.0.0
+fixAvailable={"name":"pm2","version":"6.0.14","isSemVerMajor":true}
+====================================
+retry-request
+severity=moderate
+range=7.0.0 - 7.0.2
+fixAvailable={"name":"@google-cloud/storage","version":"5.20.4","isSemVerMajor":true}
+====================================
+teeny-request
+severity=moderate
+range=3.9.1 - 9.0.0
+fixAvailable={"name":"@google-cloud/storage","version":"5.20.4","isSemVerMajor":true}
+====================================
+uuid
+severity=moderate
+range=<11.1.1
+fixAvailable={"name":"@google-cloud/storage","version":"5.20.4","isSemVerMajor":true}
+====================================
+ws
+severity=moderate
+range=8.0.0 - 8.20.0
+fixAvailable={"name":"pm2","version":"6.0.14","isSemVerMajor":true}
