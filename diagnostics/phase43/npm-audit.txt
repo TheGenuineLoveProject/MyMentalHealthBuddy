@@ -1,0 +1,62 @@
+# npm audit report
+
+esbuild  <=0.24.2
+Severity: moderate
+esbuild enables any website to send any requests to the development server and read the response - https://github.com/advisories/GHSA-67mh-4wv8-2f99
+fix available via `npm audit fix --force`
+Will install drizzle-kit@0.18.1, which is a breaking change
+node_modules/@esbuild-kit/core-utils/node_modules/esbuild
+  @esbuild-kit/core-utils  *
+  Depends on vulnerable versions of esbuild
+  node_modules/@esbuild-kit/core-utils
+    @esbuild-kit/esm-loader  *
+    Depends on vulnerable versions of @esbuild-kit/core-utils
+    node_modules/@esbuild-kit/esm-loader
+      drizzle-kit  0.17.5-6b7793f - 0.17.5-e5944eb || 0.18.1-065de38 - 0.18.1-f3800bf || 0.19.0-07024c4 - 1.0.0-beta.1-fd8bfcc
+      Depends on vulnerable versions of @esbuild-kit/esm-loader
+      node_modules/drizzle-kit
+
+uuid  <11.1.1
+Severity: moderate
+uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided - https://github.com/advisories/GHSA-w5hq-g745-h8pq
+fix available via `npm audit fix --force`
+Will install @google-cloud/storage@5.20.4, which is a breaking change
+node_modules/@google-cloud/storage/node_modules/gaxios/node_modules/uuid
+node_modules/@google-cloud/storage/node_modules/uuid
+node_modules/google-auth-library/node_modules/uuid
+node_modules/gtoken/node_modules/uuid
+node_modules/teeny-request/node_modules/uuid
+  @google-cloud/storage  2.2.0 - 2.5.0 || >=5.19.0
+  Depends on vulnerable versions of retry-request
+  Depends on vulnerable versions of teeny-request
+  Depends on vulnerable versions of uuid
+  node_modules/@google-cloud/storage
+  gaxios  6.4.0 - 6.7.1
+  Depends on vulnerable versions of uuid
+  node_modules/@google-cloud/storage/node_modules/gaxios
+  node_modules/google-auth-library/node_modules/gaxios
+  node_modules/gtoken/node_modules/gaxios
+  teeny-request  3.9.1 - 9.0.0
+  Depends on vulnerable versions of uuid
+  node_modules/teeny-request
+    retry-request  7.0.0 - 7.0.2
+    Depends on vulnerable versions of teeny-request
+    node_modules/retry-request
+
+ws  8.0.0 - 8.20.0
+Severity: moderate
+ws: Uninitialized memory disclosure - https://github.com/advisories/GHSA-58qx-3vcg-4xpx
+fix available via `npm audit fix --force`
+Will install pm2@6.0.14, which is a breaking change
+node_modules/pm2/node_modules/ws
+  pm2  >=7.0.0
+  Depends on vulnerable versions of ws
+  node_modules/pm2
+
+11 moderate severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force

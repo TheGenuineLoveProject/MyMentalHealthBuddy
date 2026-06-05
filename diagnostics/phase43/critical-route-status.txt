@@ -1,0 +1,17 @@
+200 /
+200 /pricing
+200 /premium
+200 /account/billing
+200 /account/subscription
+200 /login
+200 /register
+200 /safety
+200 /privacy
+200 /terms
+200 /admin
+200 /admin/billing
+200 /admin/revenue
+200 /admin/security
+200 /admin/health
+200 /api/health
+200 /api/ready
