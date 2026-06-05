@@ -1,0 +1,4 @@
+mymentalhealthbuddy@1.0.0 /home/runner/workspace
+└─┬ vite-bundle-visualizer@1.2.1
+  └── tmp@0.2.7
+
