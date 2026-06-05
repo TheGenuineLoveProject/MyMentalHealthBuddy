@@ -135,3 +135,4 @@ diagnostics/**/secrets*.txt
 diagnostics/phase6/
 diagnostics/phase10/
 diagnostics/phase11/
+diagnostics/**/env*.txt

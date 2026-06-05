@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-06-05T02:48:32.368Z",
+  "inventory": {
+    "pages": 319,
+    "components": 445,
+    "serverFiles": 314,
+    "sharedFiles": 14
+  },
+  "runtimeEntrypoint": {
+    "serverAppExists": true,
+    "usesProcessEnvPort": true,
+    "hasListen": true,
+    "hasHealthMount": true,
+    "hasReadyMount": true,
+    "hasBillingMount": true,
+    "hasWebhookMount": true
+  },
+  "revenueGate": {
+    "billingRouteExists": true,
+    "webhookRouteExists": true,
+    "checkoutSessionServerCreate": true,
+    "checkoutClientFunction": true,
+    "billingPortalServerCreate": true,
+    "subscriptionStatusRoute": true,
+    "webhookCheckoutCompleted": true,
+    "webhookSubscriptionUpdated": true,
+    "webhookInvoicePaid": true,
+    "pricingPageReferencesCheckout": true
+  },
+  "stripeMode": {
+    "secretMode": "test",
+    "publishableMode": "live",
+    "vitePublishableMode": "missing",
+    "aligned": false,
+    "safeForCheckoutTesting": false
+  },
+  "blockers": [
+    "Stripe keys are not aligned or VITE_STRIPE_PUBLISHABLE_KEY is missing.",
+    "CORS_ORIGIN is wildcard and must be restricted before production.",
+    "Rotate every secret/key/token that appeared in screenshots before production.",
+    "Review GitHub Dependabot vulnerabilities before production deployment.",
+    "Run real checkout and webhook tests only after Stripe mode alignment."
+  ],
+  "nextSafeAction": "Fix Replit Secrets first: align Stripe modes and add VITE_STRIPE_PUBLISHABLE_KEY."
+}

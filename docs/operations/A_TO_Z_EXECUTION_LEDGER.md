@@ -105,3 +105,22 @@ One blocker at a time. Verify before fixing. Fix smallest safe issue. Rebuild. R
 4. Restrict CORS_ORIGIN to production domain.
 5. Resolve or document GitHub Dependabot vulnerabilities.
 6. Verify checkout, webhook, subscription activation, and billing portal.
+
+## Phase 14 Deployment + Revenue Gate
+- Clean deployment readiness audit created without printing secrets.
+- Old generated Phase 6 and Phase 10 audit folders are ignored to keep Git clean.
+- Oversized Stripe reference artifacts are ignored and deleted from the working tree.
+- Revenue readiness is gated by Stripe key alignment, VITE_STRIPE_PUBLISHABLE_KEY, CORS restriction, secret rotation, Dependabot review, checkout test, webhook test, subscription activation test, and billing portal test.
+- No real checkout testing should occur until Stripe mode alignment passes.
+
+## Phase 14 Clean Git State + Deployment Blocker Ledger
+- Cleaned generated diagnostic tracking rules.
+- Restored unstable generated Phase 12 diagnostic modifications.
+- Confirmed billing client uses server checkout route.
+- Confirmed revenue testing remains blocked until Stripe secrets are rotated, Stripe modes are aligned, VITE_STRIPE_PUBLISHABLE_KEY is added, production CORS is restricted, Dependabot alerts are reviewed, and Stripe checkout/webhook tests pass.
+
+## Phase 16 Clean Worktree + Revenue Blocker Ledger
+- Added revenue launch blocker ledger.
+- Protected generated large/secret diagnostic artifacts in .gitignore.
+- Restored generated Phase 12 diagnostic drift.
+- Next required human action: rotate exposed secrets and align Stripe keys in Replit Secrets.
