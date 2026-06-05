@@ -1,0 +1,181 @@
+client/src/pages/admin/CommandCenter.jsx:301:    { title: "Users", value: stats.users?.toLocaleString() || "—", icon: Users, color: "sage", subtitle: "Total registered" },
+client/src/pages/admin/AdminUsers.jsx:50:    { label: "Total Users", value: userCount, icon: Users, desc: "Registered platform users", color: "text-blue-600" },
+client/src/pages/admin/EngagementDashboard.jsx:35:    { label: "Registered Users", value: userCount.toLocaleString(), icon: Users, desc: "Total platform users" },
+client/src/pages/_quarantine/legacy-landing/Home.jsx:189:                  registered placement. position="inline" used (NOT "hero")
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:66:            href="/register"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:68:            data-testid="link-nav-register"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:98:            href="/register"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:100:            data-testid="button-hero-register"
+client/src/pages/DesignSystem.jsx:756:                  {["Login", "Register", "Forgot Password"].map((screen, i) => (
+client/src/pages/Invite.jsx:19:    ? `${window.location.origin}/register?ref=${user?.id || 'friend'}`
+client/src/pages/Login.jsx:209:                <Link href="/register" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }} data-testid="link-register">
+client/src/pages/Register.jsx:10:export default function Register() {
+client/src/pages/Register.jsx:40:      const data = await apiRequest("POST", "/api/auth/register", {
+client/src/pages/Register.jsx:95:                data-testid="img-register-logo"
+client/src/pages/Register.jsx:101:                  data-testid="lumi-register"
+client/src/pages/Register.jsx:113:            data-testid="form-register"
+client/src/pages/Register.jsx:116:              <h1 className="text-2xl font-bold font-display mb-1" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-register-title">
+client/src/pages/Register.jsx:226:              data-testid="button-register"
+client/src/pages/ResetPassword.jsx:46:    register,
+client/src/pages/ResetPassword.jsx:284:                    {...register("newPassword")}
+client/src/pages/ResetPassword.jsx:320:                    {...register("confirmPassword")}
+client/src/pages/ForgotPassword.jsx:19:    register,
+client/src/pages/ForgotPassword.jsx:202:                    {...register("email")}
+client/src/pages/AgentInteraction.jsx:292:            <section aria-label="Registered agents" className="lg:col-span-2 space-y-2" data-testid="section-agents">
+client/src/pages/AgentInteraction.jsx:294:                Registered agents ({agents.length})
+client/src/pages/AgentInteraction.jsx:298:                  No agents registered yet.
+client/src/pages/AtlasDashboard.tsx:283:          "UNREGISTERED",
+client/src/pages/Admin.jsx:571:              <ActivityItem icon={UserPlus} text="New user registered" time="2 min ago" color="teal" />
+client/src/pages/Pricing.jsx:395:                      href="/register"
+client/src/pages/Start.tsx:1112:                href="/register"
+client/src/components/admin/OrchestratorTestPanel.jsx:46:  "Run a synthetic ops check across registered agents.",
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:350:              {createMutation.isPending ? "Saving…" : "Register agent"}
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:365:                <p className="text-sm text-muted-foreground italic px-1">No agents registered.</p>
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:439:        v2.0 Phase 0 · {agents.length} agent{agents.length === 1 ? "" : "s"} registered ·
+client/src/components/charts/MoodPieChart.jsx:6:ChartJS.register(ArcElement, Tooltip, Legend);
+client/src/components/charts/MoodTrendsChartJS.jsx:15:ChartJS.register(
+client/src/components/sacred/Hero.jsx:145:                href={primaryCta.href || '/register'}
+client/src/components/sacred/EmotionCharts.jsx:16:ChartJS.register(
+client/src/components/ui/HeroSection.jsx:88:      <CTAButton href="/login" testId="link-register-cta">Try It Free →</CTAButton>
+client/src/components/ui/tabs.tsx:7:  registerTab: (value: string) => void;
+client/src/components/ui/tabs.tsx:8:  unregisterTab: (value: string) => void;
+client/src/components/ui/tabs.tsx:32:  const registerTab = useCallback((tabValue: string) => {
+client/src/components/ui/tabs.tsx:38:  const unregisterTab = useCallback((tabValue: string) => {
+client/src/components/ui/tabs.tsx:47:      registerTab, 
+client/src/components/ui/tabs.tsx:48:      unregisterTab,
+client/src/components/avatar/BuddyAvatar.tsx.bak:230:   * above-the-fold call sites (header logo, login/register hero) to avoid
+client/src/components/avatar/BuddyAvatar.tsx:230:   * above-the-fold call sites (header logo, login/register hero) to avoid
+client/src/components/avatar/BuddyAvatar.tsx.BACKUP:230:   * above-the-fold call sites (header logo, login/register hero) to avoid
+client/src/components/lumi/LumiV6.css:509:   Sit above visual layers so clicks register, but pointer-events: none on the
+client/src/components/lumi/FloatIdleAnimated.css:134:  /* NOTE: cycle vars are not @property-registered, so they snap rather
+client/src/components/lumi/FloatIdleAnimated.css:137:   * register them via @property (or interpolate via JS) for smoothness. */
+client/src/components/lumi/LumiV6.tsx:206:   * call sites (login/register/forgot/reset hero lockups) to avoid
+client/src/components/Header.jsx:88:            href="/register"
+client/src/components/GratitudePrompt.jsx:20:  "/register",
+client/src/components/UpsellModal.jsx:116:          onClick={() => navigate('/register')}
+client/src/components/EmotionPieChart.jsx:3:import { Chart, registerables } from "chart.js";
+client/src/components/EmotionPieChart.jsx:7:Chart.register(...registerables);
+client/src/components/TglpNavbar.jsx:257:                data-testid="link-register"
+client/src/config/navConfig.js:52:  "/register",
+client/src/content/allRoutes.json:178:  "/register",
+client/src/content/meta/routeMeta.autogen.ts:2833:  "register": {
+client/src/content/meta/routeMeta.autogen.ts:2834:    "canonicalPath": "/register",
+client/src/content/meta/routeMeta.autogen.ts:2835:    "title": "Register",
+client/src/content/searchIndex.ts:662:  { id: "auth-register", title: "Register", description: "Create a new account.", path: "/register", type: "Platform", tags: ["register", "sign up"] },
+client/src/content/routes.js:210:        href: '/register' 
+client/src/content/routes.js:982:      primaryCta: { label: 'Begin when you\'re ready', href: '/register' },
+client/src/content/routes.js:1302:      primaryCta: { label: 'Create free account', href: '/register' },
+client/src/content/routes.js:1395:      primaryCta: { label: 'Start for free', href: '/register' },
+client/src/content/routes.js:1457:      primaryCta: { label: 'Try It Free', href: '/register' },
+client/src/content/routes.js:1528:      secondaryCta: { label: 'Create Account', href: '/register' }
+client/src/content/routes.js:1591:    route: '/register',
+client/src/content/routes.js:1645:      primaryCta: { label: 'Get Started Free', href: '#register-form' },
+client/src/content/routes.js:1659:    aliasOf: '/register'
+client/src/content/routes.js:1663:    aliasOf: '/register'
+client/src/content/routes.js.BACKUP.1780108447:203:        href: '/register' 
+client/src/content/routes.js.BACKUP.1780108447:975:      primaryCta: { label: 'Begin when you\'re ready', href: '/register' },
+client/src/content/routes.js.BACKUP.1780108447:1333:      primaryCta: { label: 'Get Started Free', href: '/register' },
+client/src/content/routes.js.BACKUP.1780108447:1416:      primaryCta: { label: 'Try It Free', href: '/register' },
+client/src/content/routes.js.BACKUP.1780108447:1603:      primaryCta: { label: 'Create free account', href: '/register' },
+client/src/content/routes.js.BACKUP.1780108447:1696:      primaryCta: { label: 'Start for free', href: '/register' },
+client/src/content/routes.js.BACKUP.1780108447:1758:      primaryCta: { label: 'Try It Free', href: '/register' },
+client/src/content/routes.js.BACKUP.1780108447:1829:      secondaryCta: { label: 'Create Account', href: '/register' }
+client/src/content/routes.js.BACKUP.1780108447:1892:    route: '/register',
+client/src/content/routes.js.BACKUP.1780108447:1946:      primaryCta: { label: 'Get Started Free', href: '#register-form' },
+client/src/content/routes.js.BACKUP.1780108447:1960:    aliasOf: '/register'
+client/src/content/routes.js.BACKUP.1780108447:1964:    aliasOf: '/register'
+client/src/content/routes/marketingRoutes.js:198:      primaryCta: { label: 'Get Started Free', href: '/register' },
+client/src/content/routes/marketingRoutes.js:281:      primaryCta: { label: 'Try It Free', href: '/register' },
+client/src/lib/buddyTelemetry.ts:9: *   any event name not registered in `eventSchema.ts`. Buddy Engine
+client/src/skills/packs/mi.ts:1:import { registerSkillPack, SkillPack, Skill } from "../skillRegistry";
+client/src/skills/packs/mi.ts:159:registerSkillPack(miPack);
+client/src/skills/packs/nlpReframe.ts:1:import { registerSkillPack, SkillPack, Skill } from "../skillRegistry";
+client/src/skills/packs/nlpReframe.ts:202:registerSkillPack(nlpReframePack);
+client/src/skills/packs/twelvePractices.ts:1:import { registerSkillPack, SkillPack, Skill } from "../skillRegistry";
+client/src/skills/packs/twelvePractices.ts:167:registerSkillPack(twelvePracticesPack);
+client/src/skills/skillRegistry.ts:20:export function registerSkillPack(pack: SkillPack): void {
+client/src/styles/checkin.css:131:   fully functional (clicks still register, phases still advance, ARIA
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:5: * ZERO journal/mood content ever. Subscribers register typed listeners
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:9: * adapter is registered. Per-event payloads are bounded (no arrays of
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:35:  it("registers exactly 14 rules", () => {
+client/src/companion-voice/__tests/companionGovernance.test.ts:31:  it("registers exactly 16 rules", () => {
+client/src/lumi-conversation/content/calmResponses.ts:5: * dependency invitations, no romantic register, no clinical authority.
+client/src/lumi-conversation/safety/forbiddenPatterns.ts:169: * register. We don't reject the user's message; we tag it so the router can
+client/src/lumi-conversation/safety/emotionalBoundaryRules.ts:127:      "Romantic boundary — response may not adopt romantic register.",
+client/src/lumi-conversation/prompts/lumiSystemPrompt.ts:57:- No romantic register of any kind.
+client/src/lumi-conversation/tests/conversationSafety.test.ts:91:  it("FP-5 catches romantic register", () => {
+client/src/lumi-scenes/governance/presetSafetyRules.ts:6: * any host attempting to register an ad-hoc scene MUST run `auditPreset()`.
+client/src/lumi-registry/registry/lumiEmotionalRoles.ts:6: * registered in `lumiSceneAssignments` but a host needs a sensible
+client/src/lumi-registry/registry/lumiSceneAssignments.ts:69:    issues.push(`scene "${scene}" is not registered in SCENE_ASSIGNMENTS`);
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:311:    return { allowed: false, reason: `unknown pageId "${pageId}" — policy gate fails closed; register the page in PAGE_PLACEMENT_MAP` };
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:6: * when a scene isn't registered. Optional override for variant lets
+client/src/lumi-registry/components/LumiSceneRenderer.tsx:62:        issues: [`scene "${scene}" is not registered`],
+client/src/App.jsx:52:const Register = lazy(() => import("./pages/Register.jsx"));
+client/src/App.jsx:460:              <Route path="/register" component={Register} />
+client/src/App.jsx:461:              <Route path="/signup" component={Register} />
+client/src/App.jsx:467:              <Route path="/create-account" component={Register} />
+client/src/App.jsx:976:              <Route path="/join">{() => <Redirect to="/register" />}</Route>
+client/src/main.jsx:46:// Register Service Worker for PWA support
+client/src/main.jsx:49:    navigator.serviceWorker.register('/serviceWorker.js')
+server/engine/prompt-os/kernel-bridge.mjs:98:    checks.push({ check: `domain:${domain}`, pass: true, detail: "registered" });
+server/routes/admin-social-studio.mjs:1079: * (Note: GET /analytics is registered earlier in this file at line ~409.
+server/routes/analytics.mjs:19:  "goal_set", "goal_completed", "auth_login", "auth_logout", "auth_register",
+server/routes/buddy.mjs:120:    "This is wonderful. Take a slow breath and let your body register the good — it deserves to land.",
+server/routes/sop.mjs:45:  { id: "auth-user",         name: "Auth: current user",         domain: "platform", method: "GET", path: "/api/auth/user",     expect: [200, 401],    protected: false, remediation: "server/routes/auth.mjs registerAuthRoutes()" },
+server/routes/consciousness.mjs:338: * for shadow-mode testing of registered synthetic employees from the
+server/routes/ai.healing.mjs:65:                 : err.code === "unregistered_prompt"  ? 404
+server/routes/ai.healing.mjs:97:                 : err.code === "unregistered_prompt" ? 404
+server/routes/ai.business.mjs:64:                 : err.code === "unregistered_prompt"  ? 404
+server/routes/ai.business.mjs:96:                 : err.code === "unregistered_prompt" ? 404
+server/routes/auth.mjs:51:router.post("/register", async (req, res) => {
+server/routes/auth.mjs:74:      return res.status(409).json({ error: "Email already registered" });
+server/routes/auth.mjs:100:    console.error("register error:", err);
+server/routes/auth.mjs:165://     /login and /register remain unchanged. /login therefore does NOT
+server/ai/system-prompts/mental-health-ux.txt:189:  • Mirror the user's emotional register without escalating it
+server/ai/v2/agentOrchestrator.mjs:12://     invoke for shadow-mode testing of registered synthetic employees.
+server/contracts/content-model.schema.mjs:67:  "register",
+server/lib/promptEngine.mjs:104:    throw Object.assign(new Error(`Prompt '${promptId}' not registered in '${engine}' engine.`), { code: "unregistered_prompt" });
+server/lib/promptEngine.mjs:140:    throw Object.assign(new Error(`Prompt '${promptId}' not registered in '${engine}' engine.`), { code: "unregistered_prompt" });
+server/middleware/rateLimit.mjs:4:// - authRateLimit (429 generic for register, etc.)
+server/middleware/rateLimit.mjs:117: * Auth rate limit (generic) - for register / refresh if desired.
+server/replit_integrations/audio/index.ts:1:export { registerAudioRoutes } from "./routes";
+server/replit_integrations/audio/routes.ts:6:export function registerAudioRoutes(app: Express): void {
+server/replit_integrations/auth/index.mjs:8:export { registerAuthRoutes } from "./routes.mjs";
+server/replit_integrations/auth/routes.mjs:12:export function registerAuthRoutes(app) {
+server/replit_integrations/auth/replitAuth.mjs:90:  const registeredStrategies = new Set();
+server/replit_integrations/auth/replitAuth.mjs:94:    if (!registeredStrategies.has(strategyName)) {
+server/replit_integrations/auth/replitAuth.mjs:105:      registeredStrategies.add(strategyName);
+server/replit_integrations/chat/index.ts:1:export { registerChatRoutes } from "./routes";
+server/replit_integrations/chat/routes.ts:10:export function registerChatRoutes(app: Express): void {
+server/replit_integrations/image/index.ts:8:	registerImageRoutes,
+server/replit_integrations/image/routes.ts:9:export function registerImageRoutes(
+server/replit_integrations/object_storage/index.ts:20:export { registerObjectStorageRoutes } from "./routes";
+server/replit_integrations/object_storage/routes.ts:5: * Register object storage routes for file uploads.
+server/replit_integrations/object_storage/routes.ts:16:export function registerObjectStorageRoutes(app: Express): void {
+server/services/auditLog.mjs:41:  REGISTER: "auth.register",
+server/utils/auditLogger.mjs:13:  REGISTER: "register",
+server/validation/schemas.mjs:7:export const registerSchema = z.object({
+server/app.mjs.bak:4:import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
+server/app.mjs.bak:230:// but never registered with app.use. Each module has been audited for
+server/app.mjs.bak:385:// Counts top-level routers/middlewares registered on the app stack for the
+server/app.mjs.bak:388:function countRegisteredRoutes() {
+server/app.mjs.bak:403:  const r = countRegisteredRoutes();
+server/app.mjs.bak:408:  console.log(`[SERVER] routes registered: ${r.total} (direct=${r.routes}, routers=${r.routers})`);
+server/app.mjs:4:import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
+server/app.mjs:230:// but never registered with app.use. Each module has been audited for
+server/app.mjs:398:// Counts top-level routers/middlewares registered on the app stack for the
+server/app.mjs:401:function countRegisteredRoutes() {
+server/app.mjs:455:  const r = countRegisteredRoutes();
+server/app.mjs:460:  console.log(`[SERVER] routes registered: ${r.total} (direct=${r.routes}, routers=${r.routers})`);
+server/app.mjs.STABLE:4:import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
+server/app.mjs.STABLE:230:// but never registered with app.use. Each module has been audited for
+server/app.mjs.STABLE:387:// Counts top-level routers/middlewares registered on the app stack for the
+server/app.mjs.STABLE:390:function countRegisteredRoutes() {
+server/app.mjs.STABLE:444:  const r = countRegisteredRoutes();
+server/app.mjs.STABLE:449:  console.log(`[SERVER] routes registered: ${r.total} (direct=${r.routes}, routers=${r.routers})`);
+server/app.mjs.bak-ready-alias:4:import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
+server/app.mjs.bak-ready-alias:230:// but never registered with app.use. Each module has been audited for
+server/app.mjs.bak-ready-alias:382:// Counts top-level routers/middlewares registered on the app stack for the
+server/app.mjs.bak-ready-alias:385:function countRegisteredRoutes() {
+server/app.mjs.bak-ready-alias:439:  const r = countRegisteredRoutes();
+server/app.mjs.bak-ready-alias:444:  console.log(`[SERVER] routes registered: ${r.total} (direct=${r.routes}, routers=${r.routers})`);

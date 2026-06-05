@@ -1,0 +1,1560 @@
+client/src/pages/admin/SocialLibrary.jsx:108:              Load Presets
+client/src/pages/admin/SocialLibrary.jsx:232:            <p className="text-slate-600 dark:text-slate-400 mb-4">Load presets or create your first template to get started</p>
+client/src/pages/admin/AdminSocial.jsx:35:const HASHTAG_PRESETS = {
+client/src/pages/admin/AdminSocial.jsx:533:    const combined = [...new Set([...current, ...HASHTAG_PRESETS[set]])];
+client/src/pages/admin/AdminSocial.jsx:622:          {Object.keys(HASHTAG_PRESETS).map(set => (
+client/src/pages/admin/NarrativeOpsConsole.jsx:216:      resetForm();
+client/src/pages/admin/NarrativeOpsConsole.jsx:314:  function resetForm() {
+client/src/pages/admin/NarrativeOpsConsole.jsx:445:            resetForm={resetForm}
+client/src/pages/admin/NarrativeOpsConsole.jsx:511:  showMarkPosted, setShowMarkPosted, openEdit, resetForm, getCampaignName,
+client/src/pages/admin/NarrativeOpsConsole.jsx:558:          onClick={() => { resetForm(); setShowCreateForm(true); }}
+client/src/pages/admin/NarrativeOpsConsole.jsx:600:          onCancel={resetForm}
+client/src/pages/admin/ContentStudioAdmin.jsx:55:      setTimeout(() => toast({ title: "Cache reset", description: "Using default content data." }), 100);
+client/src/pages/admin/SocialStudioAdmin.jsx:1071:                  <span className="text-sm text-muted-foreground">Presets:</span>
+client/src/pages/admin/SocialStudioAdmin.jsx:1077:                  ].map((preset, idx) => (
+client/src/pages/admin/SocialStudioAdmin.jsx:1082:                      onClick={() => setUtmParams({...preset, campaign: "", content: ""})}
+client/src/pages/admin/SocialStudioAdmin.jsx:1084:                      {preset.source}
+client/src/pages/admin/SystemAlerts.jsx:50:      setTimeout(() => toast({ title: "Cache reset", description: "Using default alert data." }), 100);
+client/src/pages/account/Profile.jsx:72:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/account/Settings.jsx:88:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/dashboard/Insights.tsx:68:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/dashboard/Journal.jsx:222:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/dashboard/MoodTracker.jsx:107:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/pathways/CalmPlan.jsx:50:  const handleReset = () => {
+client/src/pages/pathways/CalmPlan.jsx:154:            <Button variant="outline" onClick={handleReset} data-testid="button-reset">
+client/src/pages/pathways/CalmPlan.jsx:156:              Reset
+client/src/pages/tools/PHQ9Assessment.jsx:54:  function reset() {
+client/src/pages/tools/PHQ9Assessment.jsx:109:              onClick={reset}
+client/src/pages/tools/PHQ9Assessment.jsx:111:              data-testid="button-reset-phq9"
+client/src/pages/tools/PHQ9Assessment.jsx:113:              <RotateCcw className="h-4 w-4" aria-hidden /> Reset
+client/src/pages/tools/PHQ9Assessment.jsx:190:              onClick={reset}
+client/src/pages/tools/PHQ9Assessment.jsx:192:              data-testid="button-reset-phq9"
+client/src/pages/tools/BreathPacer.jsx:72:  function reset() {
+client/src/pages/tools/BreathPacer.jsx:178:              onClick={reset}
+client/src/pages/tools/BreathPacer.jsx:180:              data-testid="button-reset-pacer"
+client/src/pages/tools/BreathPacer.jsx:182:              <RotateCcw className="h-4 w-4" aria-hidden /> Reset
+client/src/pages/tools/GAD7Assessment.jsx:45:  function reset() {
+client/src/pages/tools/GAD7Assessment.jsx:167:              onClick={reset}
+client/src/pages/tools/GAD7Assessment.jsx:169:              data-testid="button-reset-gad7"
+client/src/pages/tools/BreathingTool.jsx:144:  function reset() {
+client/src/pages/tools/BreathingTool.jsx:180:        description="60-second breathing exercise with your companion. Reset your nervous system. Feel calmer. No signup needed."
+client/src/pages/tools/BreathingTool.jsx:390:                  onClick={reset}
+client/src/pages/tools/BoundaryBuilderTool.jsx:74:  function reset() {
+client/src/pages/tools/BoundaryBuilderTool.jsx:162:                onClick={reset}
+client/src/pages/tools/BoundaryBuilderTool.jsx:164:                data-testid="button-reset-boundary"
+client/src/pages/tools/CognitiveDistortionChecker.jsx:170:              data-testid="button-reset-distortion"
+client/src/pages/tools/ManipulationDetector.jsx:246:              data-testid="button-reset-manipulation"
+client/src/pages/tools/NervousSystemCheck.jsx:144:  function reset() {
+client/src/pages/tools/NervousSystemCheck.jsx:274:              onClick={reset}
+client/src/pages/tools/NervousSystemCheck.jsx:276:              data-testid="button-reset-ns"
+client/src/pages/tools/ReframePage.jsx:65:  const handleReset = () => {
+client/src/pages/tools/ReframePage.jsx:134:                  onClick={handleReset}
+client/src/pages/tools/ReframePage.jsx:136:                  data-testid="button-reset"
+client/src/pages/tools/SleepQualityCalculator.jsx:126:  function reset() {
+client/src/pages/tools/SleepQualityCalculator.jsx:258:              onClick={reset}
+client/src/pages/tools/SleepQualityCalculator.jsx:260:              data-testid="button-reset-sleep"
+client/src/pages/tools/AweMicrodose.jsx:46:  const reset = () => {
+client/src/pages/tools/AweMicrodose.jsx:95:                <Button onClick={reset} variant="outline" data-testid="button-restart">
+client/src/pages/tools/AweMicrodose.jsx:156:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset">
+client/src/pages/tools/BodyScan.jsx:71:  const reset = () => {
+client/src/pages/tools/BodyScan.jsx:120:                <Button onClick={reset} variant="outline" className="min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-restart">
+client/src/pages/tools/BodyScan.jsx:169:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset" aria-label="Reset body scan" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/tools/BreathTool.jsx:99:  const resetPractice = useCallback(() => {
+client/src/pages/tools/BreathTool.jsx:164:        title="Breath Reset | The Genuine Love Project"
+client/src/pages/tools/BreathTool.jsx:165:        description="A gentle breathing practice to help you reset and find calm. Choose your pace and begin when you're ready."
+client/src/pages/tools/BreathTool.jsx:180:          <h1 className="text-3xl font-semibold text-gray-900 dark:text-white mb-2" data-testid="heading-breath-reset">
+client/src/pages/tools/BreathTool.jsx:181:            Breath Reset
+client/src/pages/tools/BreathTool.jsx:184:            A gentle reset you can stop anytime.
+client/src/pages/tools/BreathTool.jsx:321:                onClick={resetPractice}
+client/src/pages/tools/BreathTool.jsx:323:                data-testid="button-reset"
+client/src/pages/tools/BreathTool.jsx:324:                aria-label="Stop and reset breathing exercise"
+client/src/pages/tools/BreathTool.jsx:375:                onClick={resetPractice}
+client/src/pages/tools/CompassionBreak.jsx:47:  const reset = () => {
+client/src/pages/tools/CompassionBreak.jsx:96:                <Button onClick={reset} variant="outline" data-testid="button-restart">
+client/src/pages/tools/CompassionBreak.jsx:144:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset" aria-label="Reset compassion break" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/tools/EmotionWheel.jsx:89:  const reset = () => {
+client/src/pages/tools/EmotionWheel.jsx:222:                <Button onClick={reset} variant="outline" className="min-h-[44px]">
+client/src/pages/tools/EmotionWheel.jsx:237:            <Button onClick={reset} variant="ghost" className="min-h-[44px]">
+client/src/pages/tools/MeditationPlayer.jsx:28:    { id: 6, title: "Quick Reset", duration: 180, category: "Quick", description: "A 3-minute refresh" }
+client/src/pages/tools/Reframe.jsx:42:  const handleReset = () => {
+client/src/pages/tools/Reframe.jsx:178:                <Button onClick={handleReset} variant="outline" data-testid="button-start-over">
+client/src/pages/tools/UrgeSurf.jsx:49:  const reset = () => {
+client/src/pages/tools/UrgeSurf.jsx:98:                <Button onClick={reset} variant="outline" data-testid="button-restart">
+client/src/pages/tools/UrgeSurf.jsx:166:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset" aria-label="Reset urge surf" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:62:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CanvaLanding.jsx.v19.bak:22:          <Link to="/7-day-reset" className="rounded-full bg-[#14342b] px-6 py-4 font-bold text-white">
+client/src/pages/CanvaLanding.jsx.v19.bak:23:            Start the 7-Day Reset
+client/src/pages/DesignSystem.jsx:61:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/LoginCallback.jsx:49:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CRMPage.jsx:52:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/WireframeTemplates.jsx:57:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ResetPassword.jsx:15:const resetPasswordSchema = z.object({
+client/src/pages/ResetPassword.jsx:23:export default function ResetPassword() {
+client/src/pages/ResetPassword.jsx:31:      <SEO title="Reset Password — MyMentalHealthBuddy" description="Explore reset password tools for your wellness journey." noindex />
+client/src/pages/ResetPassword.jsx:33:        <h1 className="text-3xl font-bold mb-4">Reset Password</h1>
+client/src/pages/ResetPassword.jsx:51:    resolver: zodResolver(resetPasswordSchema),
+client/src/pages/ResetPassword.jsx:58:  const resetMutation = useMutation({
+client/src/pages/ResetPassword.jsx:59:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/confirm", {
+client/src/pages/ResetPassword.jsx:65:        ? "This reset link has expired or is invalid. Please request a new one."
+client/src/pages/ResetPassword.jsx:73:      setError("root", { message: "Invalid reset token. Please request a new password reset link." });
+client/src/pages/ResetPassword.jsx:76:    resetMutation.mutate(data);
+client/src/pages/ResetPassword.jsx:82:    title="ResetPassword"
+client/src/pages/ResetPassword.jsx:89:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ResetPassword.jsx:102:          title="Invalid Reset Link"
+client/src/pages/ResetPassword.jsx:103:          description="This password reset link is invalid or has expired."
+client/src/pages/ResetPassword.jsx:115:              Invalid Reset Link
+client/src/pages/ResetPassword.jsx:118:              This password reset link is invalid or has expired. Please request a new one to continue.
+client/src/pages/ResetPassword.jsx:135:  if (resetMutation.isSuccess) {
+client/src/pages/ResetPassword.jsx:138:        title="Password Reset Complete"
+client/src/pages/ResetPassword.jsx:139:        subtitle="Your password has been successfully reset"
+client/src/pages/ResetPassword.jsx:142:          what: "Password reset confirmation.",
+client/src/pages/ResetPassword.jsx:144:          who: "For users who just reset their password.",
+client/src/pages/ResetPassword.jsx:145:          when: "After completing a password reset.",
+client/src/pages/ResetPassword.jsx:157:          title="Password Reset Complete"
+client/src/pages/ResetPassword.jsx:158:          description="Your password has been successfully reset."
+client/src/pages/ResetPassword.jsx:170:              Password Reset Complete
+client/src/pages/ResetPassword.jsx:173:              Your password has been successfully reset. You can now sign in with your new password.
+client/src/pages/ResetPassword.jsx:192:      title="Reset Password"
+client/src/pages/ResetPassword.jsx:196:        what: "A secure password reset form.",
+client/src/pages/ResetPassword.jsx:198:        who: "For users who need to reset their password.",
+client/src/pages/ResetPassword.jsx:199:        when: "When you have a valid reset link.",
+client/src/pages/ResetPassword.jsx:211:        title="Reset Password"
+client/src/pages/ResetPassword.jsx:236:                data-testid="lumi-reset"
+client/src/pages/ResetPassword.jsx:247:              <h1 className="text-2xl font-display font-bold mb-2 text-[var(--text)]" data-testid="text-reset-password-title">
+client/src/pages/ResetPassword.jsx:266:            <form onSubmit={handleSubmit(onSubmit)} data-testid="form-reset-password" noValidate>
+client/src/pages/ResetPassword.jsx:341:                disabled={resetMutation.isPending}
+client/src/pages/ResetPassword.jsx:345:                {resetMutation.isPending ? (
+client/src/pages/ResetPassword.jsx:348:                    Resetting...
+client/src/pages/ResetPassword.jsx:353:                    Reset Password
+client/src/pages/Blog.jsx:359:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Blog.jsx:452:        when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Profile.jsx:32:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/NotFound.jsx:26:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ForgotPassword.jsx:30:  const resetMutation = useMutation({
+client/src/pages/ForgotPassword.jsx:31:    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/request", data),
+client/src/pages/ForgotPassword.jsx:40:    resetMutation.mutate(data);
+client/src/pages/ForgotPassword.jsx:43:  if (resetMutation.isSuccess) {
+client/src/pages/ForgotPassword.jsx:53:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ForgotPassword.jsx:67:          description="Password reset instructions have been sent to your email address."
+client/src/pages/ForgotPassword.jsx:82:              If an account exists with that email address, we've sent instructions to reset your password.
+client/src/pages/ForgotPassword.jsx:109:      subtitle="Reset your password securely"
+client/src/pages/ForgotPassword.jsx:112:        what: "A secure password reset tool.",
+client/src/pages/ForgotPassword.jsx:114:        who: "For users who need to reset their password.",
+client/src/pages/ForgotPassword.jsx:120:        { label: "Beginner", examples: ["Enter your email address.", "Check your inbox for the reset link."] },
+client/src/pages/ForgotPassword.jsx:121:        { label: "Intermediate", examples: ["Click the reset link within 1 hour.", "Create a new secure password."] },
+client/src/pages/ForgotPassword.jsx:128:          description="Reset your MyMentalHealthBuddy password. We'll send you a secure link to create a new password."
+client/src/pages/ForgotPassword.jsx:169:                No worries! Enter your email and we'll send you a secure reset link.
+client/src/pages/ForgotPassword.jsx:215:                disabled={resetMutation.isPending}
+client/src/pages/ForgotPassword.jsx:219:                {resetMutation.isPending ? (
+client/src/pages/ForgotPassword.jsx:227:                    Send Reset Link
+client/src/pages/ForgotPassword.jsx:246:            Your security is our priority. Reset links expire after 1 hour.
+client/src/pages/DesignDashboard.jsx:20:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/DesignDashboard.jsx:144:                  2-minute breath reset
+client/src/pages/HealthPage.jsx:23:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/RigLab.jsx:42:  const reset = () =>
+client/src/pages/RigLab.jsx:164:              onClick={reset}
+client/src/pages/RigLab.jsx:173:              data-testid="button-reset-rig"
+client/src/pages/RigLab.jsx:175:              Reset
+client/src/pages/Upgrade.jsx:66:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ToolsPage.jsx:118:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CrisisResources.jsx:99:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/BreathingExercisesPage.jsx:59:    description: "Equal-duration breathing for balance and nervous system reset. Used by Navy SEALs to maintain composure under extreme stress.",
+client/src/pages/BreathingExercisesPage.jsx:106:    benefits: ["May quickly reduce stress", "Helps reinflate lung sacs", "Supports CO2 release", "Can help reset nervous system state"],
+client/src/pages/BreathingExercisesPage.jsx:173:  const reset = useCallback(() => {
+client/src/pages/BreathingExercisesPage.jsx:181:    reset();
+client/src/pages/BreathingExercisesPage.jsx:182:  }, [exercise, reset]);
+client/src/pages/BreathingExercisesPage.jsx:222:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/BreathingExercisesPage.jsx:268:          onClick={reset}
+client/src/pages/BreathingExercisesPage.jsx:271:          data-testid="button-reset-breathing"
+client/src/pages/BreathingExercisesPage.jsx:288:              onClick={() => { setTotalBreaths(num); reset(); }}
+client/src/pages/BreathingExercisesPage.jsx:356:          control="Pause, reset, or change exercises anytime"
+client/src/pages/BreathingExercisesPage.jsx:504:            { title: "Grounding Techniques", description: "Combine with grounding for deeper nervous system reset", path: "/grounding" },
+client/src/pages/ProfessionalResourcesPage.jsx:118:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/DailyRoutinesPage.jsx:121:    title: "Midday Reset",
+client/src/pages/DailyRoutinesPage.jsx:126:    overview: "Midday is when energy naturally dips. A reset routine prevents afternoon slumps and re-centers you for the second half of your day.",
+client/src/pages/DailyRoutinesPage.jsx:270:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CognitiveToolsPage.jsx:227:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/BehaviorChangePage.jsx:284:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/GlossaryPage.jsx:89:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Dashboard.jsx:55:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/DesignSystemV2.jsx:359:                  <button className="lumi-btn lumi-btn-ghost"    onClick={() => { setDemoCtx({}); setEmotion(null); }}    data-testid="ctx-reset">Reset</button>
+client/src/pages/CalmingScenesPage.jsx:157:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/MeditationGuidePage.jsx:291:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/InnerChildPage.jsx:245:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/HealingJourneysPage.jsx:323:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/GroundingTechniquesPage.jsx:94:    description: "Use cold temperature to rapidly reset your nervous system through the mammalian dive reflex—one of the fastest calming techniques available",
+client/src/pages/GroundingTechniquesPage.jsx:194:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/GroundingTechniquesPage.jsx:301:            data-testid="button-reset-steps"
+client/src/pages/EmotionalIntelligencePage.jsx:175:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/DailyPracticePage.jsx:17:  { id: "stress-reset", name: "Stress Reset", duration: "5 min", icon: Shield, description: "Release accumulated tension from the morning", href: "/breathing" },
+client/src/pages/DailyPracticePage.jsx:29:const QUICK_RESETS = [
+client/src/pages/DailyPracticePage.jsx:86:function QuickResetCard({ practice }) {
+client/src/pages/DailyPracticePage.jsx:91:        data-testid={`quick-reset-${practice.id}`}
+client/src/pages/DailyPracticePage.jsx:235:            title="Midday Reset" 
+client/src/pages/DailyPracticePage.jsx:258:                <h2 className="font-playfair text-xl text-slate-800 dark:text-slate-200">Quick Resets</h2>
+client/src/pages/DailyPracticePage.jsx:266:              {QUICK_RESETS.map(practice => (
+client/src/pages/DailyPracticePage.jsx:267:                <QuickResetCard key={practice.id} practice={practice} />
+client/src/pages/RoutinesPage.jsx:25:    name: "Stress Relief Reset",
+client/src/pages/RecoveryPage.jsx:26:      { name: "Nervous System Reset", href: "/breathing", description: "Calming breathing techniques" },
+client/src/pages/SystemMapPage.jsx:79:    action: "Body: drink water. Mind: reframe one sentence. Behavior: 60-second reset. Environment: reduce noise.",
+client/src/pages/StatePage.jsx:29:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SleepGuidePage.jsx:150:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SelfCareToolkitPage.jsx:181:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/NewsPage.jsx:169:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/WellnessHubPage.jsx:94:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Presence.jsx:13:  MemoryResetButton,
+client/src/pages/Presence.jsx:186:        never clinical labels. Off by default. You can review or reset
+client/src/pages/Presence.jsx:193:        <MemoryResetButton />
+client/src/pages/Challenge.jsx:144:        when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Wellness.jsx:317:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Disclaimer.tsx:16:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Terms.tsx:17:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Privacy.tsx:17:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/AdvancedToolsPage.tsx:101:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CognitiveArchitecturePage.tsx:159:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CollaborativeLabPage.tsx:204:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CommunityPage.tsx:18:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/DailyWisdomOraclePage.tsx:197:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/KnowledgeSynthesisPage.tsx:187:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/MasteryToolsPage.tsx:47:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/PhilosophicalInquiryPage.tsx:139:  const reset = () => {
+client/src/pages/PhilosophicalInquiryPage.tsx:154:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/PhilosophicalInquiryPage.tsx:251:                    onClick={reset}
+client/src/pages/PhilosophicalInquiryPage.tsx:253:                    data-testid="button-reset"
+client/src/pages/ProgressDashboardPage.tsx:174:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ResilienceMetricsPage.tsx:159:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/StrategyMapsPage.tsx:352:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/WisdomSynthesisPage.tsx:171:  const reset = () => {
+client/src/pages/WisdomSynthesisPage.tsx:185:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/WisdomSynthesisPage.tsx:303:                  onClick={reset}
+client/src/pages/WisdomSynthesisPage.tsx:305:                  data-testid="button-reset"
+client/src/pages/WisdomToolsPage.tsx:82:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/AtlasDashboard.tsx:298:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Settings.jsx.phase-s4.bak:217:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/AdaptiveCompanionPage.tsx:129:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ChallengeDay.jsx:161:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CheckIn.jsx:125:  function reset() {
+client/src/pages/CheckIn.jsx:352:                  Want to go a little deeper? A short breathing reset can help your body catch up with your awareness.
+client/src/pages/CheckIn.jsx:373:                  onClick={reset}
+client/src/pages/ContentIndexPage.jsx:166:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ControlDashboard.jsx:55:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ExamplesPage.jsx:82:      { step: "Make It Easy", detail: "Reduce friction: yoga mat out, journal on pillow, coffee preset" },
+client/src/pages/ExamplesPage.jsx:151:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/GuidedJournalingPage.tsx:197:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/HealingLibraryPage.jsx:156:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/HowToGuidesPage.jsx:206:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/InsightCardsPage.tsx:132:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/LumiV6Preview.jsx:515:  const [resetKey, setResetKey] = useState(0);
+client/src/pages/LumiV6Preview.jsx:521:  const resetEntrance = () => {
+client/src/pages/LumiV6Preview.jsx:523:    setResetKey((n) => n + 1);
+client/src/pages/LumiV6Preview.jsx:550:            key={`v9-base-${resetKey}`}
+client/src/pages/LumiV6Preview.jsx:563:            key={`v9-interactive-${resetKey}`}
+client/src/pages/LumiV6Preview.jsx:593:          onClick={resetEntrance}
+client/src/pages/LumiV6Preview.jsx:595:          data-testid="btn-reset-entrance"
+client/src/pages/Publishing.jsx:69:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ResearchEvidencePage.jsx:192:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ResourcesPage.jsx:113:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/StressResponseGuidePage.jsx:184:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SystemsThinkingPage.tsx:118:  const reset = () => {
+client/src/pages/SystemsThinkingPage.tsx:134:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SystemsThinkingPage.tsx:320:                  onClick={reset}
+client/src/pages/SystemsThinkingPage.tsx:322:                  data-testid="button-reset"
+client/src/pages/SystemsThinkingPage.tsx:324:                  Reset
+client/src/pages/WellnessGlossaryPage.jsx:317:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/BlogEditor.jsx:77:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/BodyWellnessPage.jsx:87:        benefits: "Discharges stress hormones, resets nervous system, releases trapped energy"
+client/src/pages/BodyWellnessPage.jsx:264:        description: "Brief cold exposure activates the vagus nerve and resets the stress response.",
+client/src/pages/BodyWellnessPage.jsx:334:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/BodyWellnessPage.jsx:368:              "Quick body resets you can do in under 5 minutes",
+client/src/pages/BodyWellnessPage.jsx:402:            <h2 className="text-heading-md text-teal mb-4">Quick Body Resets</h2>
+client/src/pages/BoundariesPage.jsx:147:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/CanvaLanding.jsx:22:          <Link to="/7-day-reset" className="rounded-full bg-[#163A36] px-6 py-4 font-bold text-white">
+client/src/pages/CanvaLanding.jsx:23:            Start the 7-Day Reset
+client/src/pages/CoherenceLadderPage.jsx:149:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/DailyRitualPage.tsx:256:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/GrowthAnalyticsPage.tsx:181:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/MetaLearningPage.tsx:117:  const reset = () => {
+client/src/pages/MetaLearningPage.tsx:134:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/MetaLearningPage.tsx:293:                    onClick={reset}
+client/src/pages/MetaLearningPage.tsx:295:                    data-testid="button-reset"
+client/src/pages/MirrorPage.tsx:122:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/MovementSnacksPage.jsx:148:        when: "Anytime you need a body reset.",
+client/src/pages/NervousSystemFloodingPage.jsx:88:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Onboarding.tsx:224:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/PerceptionRefinementPage.jsx:116:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/PermacultureWellnessPage.jsx:163:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Pricing.jsx:220:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SafetyPage.jsx:37:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SelfWorthReflectionPage.jsx:117:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Settings.jsx:218:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SocialHub.jsx:105:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/SoulWellnessPage.jsx:203:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/Start.tsx:73:    "Buddy helped me reset for one minute. Try MyMentalHealthBuddy: https://mymentalhealthbuddy.com/start";
+client/src/pages/Start.tsx:127:        Share a reset
+client/src/pages/Start.tsx:134:          If this helped, someone else may need a gentle reset too.
+client/src/pages/Start.tsx:140:          aria-label={copied ? "Share message copied to clipboard" : "Share Buddy with someone who may need a reset"}
+client/src/pages/Start.tsx:156:      ? "You've made the most of today's free reset"
+client/src/pages/Start.tsx:212:    description: "A guided breath reset to settle your nervous system.",
+client/src/pages/Start.tsx:252: *     toolId  "overload_reset"       → "anxious"  (held-not-flooded)
+client/src/pages/Start.tsx:286:  if (toolId === "overload_reset") return "anxious";
+client/src/pages/Start.tsx:356:  overload_reset: "Buddy is helping you make this smaller.",
+client/src/pages/Start.tsx:451:  // forever every 20 seconds. The signals fingerprint resets the latch
+client/src/pages/Start.tsx:603:    // v2.1 dedupe-reset: when result transitions to a new value (or to
+client/src/pages/Start.tsx:604:    // null on reset), clear the response-alignment latch so the next
+client/src/pages/Start.tsx:715:  // calm). The latch resets only when identity-level signals change.
+client/src/pages/Start.tsx:782:      if (currentStreakNum >= 3) return "Buddy is here for today\u2019s reset.";
+client/src/pages/Start.tsx:1150:              Come back tomorrow for a 1-minute reset.
+client/src/pages/Start.tsx:1199:            It's been {streak?.daysAway} days. Let's reset together.
+client/src/pages/Start.tsx:1241:          <p className="mb-2">You don't need to figure everything out. Start with one small reset.</p>
+client/src/pages/StudyVaultPage.jsx:358:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/pages/ValuesFinderPage.jsx:130:      when: "Anytime you want a small reset or a thoughtful pause.",
+client/src/components/ContentLevelToggle.module.css:132:  counter-reset: step-counter;
+client/src/components/PageTemplate.module.css:878:  counter-reset: practice-step;
+client/src/components/admin/OrchestratorTestPanel.jsx:35:const INTENT_PRESETS = [
+client/src/components/admin/OrchestratorTestPanel.jsx:160:              {INTENT_PRESETS.map((p) => (
+client/src/components/admin/DailyOpsChecklist.jsx:75:  const resetChecklist = () => {
+client/src/components/admin/DailyOpsChecklist.jsx:141:            onClick={resetChecklist}
+client/src/components/admin/DailyOpsChecklist.jsx:143:            data-testid="button-reset-checklist"
+client/src/components/admin/DailyOpsChecklist.jsx:145:            Reset
+client/src/components/inquiry/DialecticalInquiry.tsx:50:  function handleReset() {
+client/src/components/inquiry/DialecticalInquiry.tsx:80:          onClick={handleReset}
+client/src/components/inquiry/DialecticalInquiry.tsx:82:          data-testid="button-reset-dialectic"
+client/src/components/temporal/TemporalReflection.tsx:54:  function handleReset() {
+client/src/components/temporal/TemporalReflection.tsx:98:          onClick={handleReset}
+client/src/components/temporal/TemporalReflection.tsx:100:          data-testid="button-reset-temporal"
+client/src/components/wellness/JournalAI.jsx:347:            data-testid="reset-conversation"
+client/src/components/avatar/BuddyAvatar.css:658:   in CSS, so they need their own explicit reset to fully respect the
+client/src/components/lumi/FloatIdleAnimated.css:68: * same animation list (which would reset eye-settling's timeline every
+client/src/components/lumi/LumiCustomizer.jsx:34:  // Reset candidate to the persisted value every time the modal opens.
+client/src/components/lumi/LumiCompanion.jsx:42: *   - size            'sm' | 'md' | 'lg'   pixel preset (default 'md')
+client/src/components/lumi/LumiV6.tsx:206:   * call sites (login/register/forgot/reset hero lockups) to avoid
+client/src/components/lumi/LumiV6.tsx:565:    const reset = () => {
+client/src/components/lumi/LumiV6.tsx:569:    window.addEventListener("mousemove", reset);
+client/src/components/lumi/LumiV6.tsx:570:    window.addEventListener("click", reset);
+client/src/components/lumi/LumiV6.tsx:571:    window.addEventListener("keydown", reset);
+client/src/components/lumi/LumiV6.tsx:579:      window.removeEventListener("mousemove", reset);
+client/src/components/lumi/LumiV6.tsx:580:      window.removeEventListener("click", reset);
+client/src/components/lumi/LumiV6.tsx:581:      window.removeEventListener("keydown", reset);
+client/src/components/lumi/LumiV6.tsx:658:  // reset the timer.
+client/src/components/lumi/LumiV6.tsx:780:    const reset = () => {
+client/src/components/lumi/LumiV6.tsx:788:    window.addEventListener("mousemove", reset, { passive: true });
+client/src/components/lumi/LumiV6.tsx:789:    window.addEventListener("click", reset);
+client/src/components/lumi/LumiV6.tsx:790:    window.addEventListener("keydown", reset);
+client/src/components/lumi/LumiV6.tsx:794:      window.removeEventListener("mousemove", reset);
+client/src/components/lumi/LumiV6.tsx:795:      window.removeEventListener("click", reset);
+client/src/components/lumi/LumiV6.tsx:796:      window.removeEventListener("keydown", reset);
+client/src/components/AccessibilityToolbar.jsx:74:  const resetSettings = () => {
+client/src/components/AccessibilityToolbar.jsx:192:              onClick={resetSettings}
+client/src/components/AccessibilityToolbar.jsx:195:              data-testid="button-reset-a11y"
+client/src/components/AccessibilityToolbar.jsx:197:              Reset to Defaults
+client/src/components/AnxietyRelief.jsx:130:  const reset = () => {
+client/src/components/AnxietyRelief.jsx:372:              onClick={reset}
+client/src/components/BenefitsBlock.jsx:166:export const benefitsPresets = {
+client/src/components/BenefitsBlock.jsx:186:    benefit: "Calm, focus, nervous system reset",
+client/src/components/BodyScanMeditation.jsx:58:      reset();
+client/src/components/BodyScanMeditation.jsx:70:  const reset = () => {
+client/src/components/BodyScanMeditation.jsx:190:              onClick={reset}
+client/src/components/BreathingExercise.jsx:88:  const resetExercise = () => {
+client/src/components/BreathingExercise.jsx:282:              onClick={resetExercise}
+client/src/components/BreathingExercise.jsx:284:              data-testid="button-reset-breathing"
+client/src/components/BreathingExercise.jsx:287:              Reset
+client/src/components/BreathingExercise.jsx:299:              onClick={resetExercise}
+client/src/components/ContentStudio.jsx:70:        hook: "Feeling scattered or overwhelmed? Here's a 30-second reset.",
+client/src/components/ContentStudio.jsx:72:        cta: "Save this for when you need a quick reset. What helps you feel grounded?",
+client/src/components/ContentStudio.jsx:149:        body: "You don't need an elaborate routine. Start with something you can actually do.\n\n5-minute morning reset:\n1. Take 3 deep breaths before getting out of bed\n2. Drink a glass of water\n3. Spend 1 minute stretching\n4. Set one small intention for the day\n\nThat's it. Small actions, done consistently, create real change.",
+client/src/components/CrisisStabilizer.jsx:129:  const handleReset = () => {
+client/src/components/CrisisStabilizer.jsx:159:              onClick={handleReset}
+client/src/components/DigitalDetox.jsx:123:  const reset = () => {
+client/src/components/DigitalDetox.jsx:276:              onClick={reset}
+client/src/components/FocusTimer.jsx:5:const PRESETS = [
+client/src/components/FocusTimer.jsx:22:  const [selectedPreset, setSelectedPreset] = useState(PRESETS[0]);
+client/src/components/FocusTimer.jsx:23:  const [timeLeft, setTimeLeft] = useState(PRESETS[0].work * 60);
+client/src/components/FocusTimer.jsx:58:      if (newCompleted % selectedPreset.sessions === 0) {
+client/src/components/FocusTimer.jsx:60:        setTimeLeft(selectedPreset.longBreak * 60);
+client/src/components/FocusTimer.jsx:63:        setTimeLeft(selectedPreset.break * 60);
+client/src/components/FocusTimer.jsx:69:      setTimeLeft(selectedPreset.work * 60);
+client/src/components/FocusTimer.jsx:84:  const handleReset = () => {
+client/src/components/FocusTimer.jsx:88:    setTimeLeft(selectedPreset.work * 60);
+client/src/components/FocusTimer.jsx:92:  const handlePresetChange = (preset) => {
+client/src/components/FocusTimer.jsx:93:    setSelectedPreset(preset);
+client/src/components/FocusTimer.jsx:94:    setTimeLeft(preset.work * 60);
+client/src/components/FocusTimer.jsx:104:        preset: selectedPreset.name,
+client/src/components/FocusTimer.jsx:119:      ? selectedPreset.longBreak * 60 
+client/src/components/FocusTimer.jsx:121:        ? selectedPreset.break * 60 
+client/src/components/FocusTimer.jsx:122:        : selectedPreset.work * 60;
+client/src/components/FocusTimer.jsx:152:        {PRESETS.map((preset) => (
+client/src/components/FocusTimer.jsx:154:            key={preset.name}
+client/src/components/FocusTimer.jsx:155:            onClick={() => handlePresetChange(preset)}
+client/src/components/FocusTimer.jsx:157:              selectedPreset.name === preset.name
+client/src/components/FocusTimer.jsx:161:            data-testid={`button-preset-${preset.name.toLowerCase().replace(/\s+/g, "-")}`}
+client/src/components/FocusTimer.jsx:163:            <span className="text-2xl block mb-1">{preset.icon}</span>
+client/src/components/FocusTimer.jsx:164:            <span className="text-sm font-medium block">{preset.name}</span>
+client/src/components/FocusTimer.jsx:165:            <span className="text-xs opacity-70">{preset.work}m / {preset.break}m</span>
+client/src/components/FocusTimer.jsx:242:              onClick={handleReset}
+client/src/components/FocusTimer.jsx:244:              data-testid="button-reset-timer"
+client/src/components/FocusTimer.jsx:245:              aria-label="Reset timer"
+client/src/components/FocusTimer.jsx:260:            {Array.from({ length: selectedPreset.sessions }).map((_, i) => (
+client/src/components/HealingJourneys.jsx:101:      { day: 2, title: "Breathing Reset", tool: "breathing", type: "practice" },
+client/src/components/MindfulWalking.jsx:152:  const handleReset = () => {
+client/src/components/MindfulWalking.jsx:247:              onClick={handleReset}
+client/src/components/MindfulWalking.jsx:302:                onClick={handleReset}
+client/src/components/ObjectUploader.jsx:122:  const reset = () => {
+client/src/components/ObjectUploader.jsx:138:            onClick={reset}
+client/src/components/ObjectUploader.jsx:140:            data-testid="button-upload-reset"
+client/src/components/PowerNap.jsx:5:const NAP_PRESETS = [
+client/src/components/PowerNap.jsx:57:  const [selectedPreset, setSelectedPreset] = useState(NAP_PRESETS[0]);
+client/src/components/PowerNap.jsx:58:  const [timeLeft, setTimeLeft] = useState(NAP_PRESETS[0].duration * 60);
+client/src/components/PowerNap.jsx:103:    await recordSession("power_nap", selectedPreset.duration * 60, {
+client/src/components/PowerNap.jsx:104:      preset: selectedPreset.name,
+client/src/components/PowerNap.jsx:119:  const handleReset = () => {
+client/src/components/PowerNap.jsx:122:    setTimeLeft(selectedPreset.duration * 60);
+client/src/components/PowerNap.jsx:125:  const handlePresetChange = (preset) => {
+client/src/components/PowerNap.jsx:126:    setSelectedPreset(preset);
+client/src/components/PowerNap.jsx:127:    setTimeLeft(preset.duration * 60);
+client/src/components/PowerNap.jsx:138:  const progressPercent = ((selectedPreset.duration * 60 - timeLeft) / (selectedPreset.duration * 60)) * 100;
+client/src/components/PowerNap.jsx:154:        {NAP_PRESETS.map((preset) => (
+client/src/components/PowerNap.jsx:156:            key={preset.name}
+client/src/components/PowerNap.jsx:157:            onClick={() => handlePresetChange(preset)}
+client/src/components/PowerNap.jsx:159:              selectedPreset.name === preset.name
+client/src/components/PowerNap.jsx:160:                ? `bg-gradient-to-br ${preset.color} text-white shadow-lg`
+client/src/components/PowerNap.jsx:163:            data-testid={`button-preset-${preset.name.toLowerCase().replace(/\s+/g, "-")}`}
+client/src/components/PowerNap.jsx:166:              <span className="text-2xl">{preset.icon}</span>
+client/src/components/PowerNap.jsx:167:              <span className="font-semibold">{preset.name}</span>
+client/src/components/PowerNap.jsx:169:            <p className={`text-sm ${selectedPreset.name === preset.name ? "text-white/80" : "text-[var(--text-secondary)]"}`}>
+client/src/components/PowerNap.jsx:170:              {preset.duration} minutes - {preset.description}
+client/src/components/PowerNap.jsx:184:              Your {selectedPreset.name.toLowerCase()} is complete. You should feel refreshed!
+client/src/components/PowerNap.jsx:204:              onClick={handleReset}
+client/src/components/PowerNap.jsx:214:              <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${selectedPreset.color} mb-4`}>
+client/src/components/PowerNap.jsx:215:                <span className="text-xl">{selectedPreset.icon}</span>
+client/src/components/PowerNap.jsx:216:                <span className="text-white font-medium">{selectedPreset.name}</span>
+client/src/components/PowerNap.jsx:278:                  onClick={handleReset}
+client/src/components/PowerNap.jsx:280:                  data-testid="button-reset-nap"
+client/src/components/PowerNap.jsx:281:                  aria-label="Reset nap"
+client/src/components/PowerNap.jsx:301:                Benefits of {selectedPreset.name}
+client/src/components/PowerNap.jsx:304:                {selectedPreset.benefits.map((benefit, index) => (
+client/src/components/PowerNap.jsx:378:            {napCount * selectedPreset.duration}m
+client/src/components/ProgressiveMuscleRelaxation.jsx:70:    if (completed) reset();
+client/src/components/ProgressiveMuscleRelaxation.jsx:82:  const reset = () => {
+client/src/components/ProgressiveMuscleRelaxation.jsx:195:            <button onClick={reset} className="btn-gradient px-8 py-4 rounded-xl font-semibold shadow-lg flex items-center gap-2 mx-auto" data-testid="button-restart">
+client/src/components/QuestPanel.jsx:235:          Quests reset daily at midnight
+client/src/components/SelfCareBingo.jsx:127:  const resetBoard = () => {
+client/src/components/SelfCareBingo.jsx:179:            onClick={resetBoard}
+client/src/components/SelfCareChecklist.jsx:109:  const resetToday = () => {
+client/src/components/SelfCareChecklist.jsx:159:            onClick={resetToday}
+client/src/components/SelfCareChecklist.jsx:161:            aria-label="Reset today's progress"
+client/src/components/SelfCareChecklist.jsx:162:            data-testid="button-reset-selfcare"
+client/src/components/SomaticRelease.jsx:105:    benefits: ["Fastest calming technique", "Resets nervous system", "Can be done anywhere"],
+client/src/components/SomaticRelease.jsx:171:  const resetExercise = () => {
+client/src/components/SomaticRelease.jsx:263:              onClick={resetExercise}
+client/src/components/WellnessGoalTracker.jsx:41:  const resetGoal = (goalId) => {
+client/src/components/WellnessGoalTracker.jsx:104:              onClick={() => resetGoal(goal.id)}
+client/src/components/WellnessGoalTracker.jsx:106:              aria-label="Reset goal"
+client/src/components/WellnessGoalTracker.jsx:107:              data-testid={`button-reset-${goal.id}`}
+client/src/components/WellnessTimer.jsx:8:const PRESET_TIMERS = [
+client/src/components/WellnessTimer.jsx:9:  { id: "quick", name: "Quick Reset", duration: 60, icon: Wind, color: "from-cyan-500 to-blue-600", description: "1-minute mindful pause" },
+client/src/components/WellnessTimer.jsx:27:  const [selectedPreset, setSelectedPreset] = useState(PRESET_TIMERS[2]);
+client/src/components/WellnessTimer.jsx:46:            const minutes = Math.round(selectedPreset.duration / 60);
+client/src/components/WellnessTimer.jsx:58:  }, [isRunning, selectedPreset, addXP]);
+client/src/components/WellnessTimer.jsx:60:  const selectPreset = (preset) => {
+client/src/components/WellnessTimer.jsx:62:    setSelectedPreset(preset);
+client/src/components/WellnessTimer.jsx:63:    setCustomDuration(preset.duration);
+client/src/components/WellnessTimer.jsx:64:    setTimeRemaining(preset.duration);
+client/src/components/WellnessTimer.jsx:85:  const resetTimer = () => {
+client/src/components/WellnessTimer.jsx:101:  const Icon = selectedPreset.icon;
+client/src/components/WellnessTimer.jsx:131:        {PRESET_TIMERS.map(preset => {
+client/src/components/WellnessTimer.jsx:132:          const PresetIcon = preset.icon;
+client/src/components/WellnessTimer.jsx:133:          const isSelected = selectedPreset.id === preset.id;
+client/src/components/WellnessTimer.jsx:137:              key={preset.id}
+client/src/components/WellnessTimer.jsx:138:              onClick={() => selectPreset(preset)}
+client/src/components/WellnessTimer.jsx:142:                  ? `bg-gradient-to-br ${preset.color} text-white shadow-lg`
+client/src/components/WellnessTimer.jsx:145:              data-testid={`preset-${preset.id}`}
+client/src/components/WellnessTimer.jsx:148:                <PresetIcon className="w-4 h-4" />
+client/src/components/WellnessTimer.jsx:149:                <span className="font-medium text-sm">{preset.name}</span>
+client/src/components/WellnessTimer.jsx:152:                {preset.description}
+client/src/components/WellnessTimer.jsx:201:                <p className="text-sm text-[var(--text-secondary)] mt-1">{selectedPreset.name}</p>
+client/src/components/WellnessTimer.jsx:257:            className={`px-8 py-3 rounded-xl font-semibold text-white bg-gradient-to-r ${selectedPreset.color} hover:opacity-90 transition-opacity flex items-center gap-2`}
+client/src/components/WellnessTimer.jsx:276:            onClick={resetTimer}
+client/src/components/WellnessTimer.jsx:278:            data-testid="button-reset-timer"
+client/src/components/WellnessTimer.jsx:281:            Reset
+client/src/components/MeditationTimer.jsx:85:  const resetMeditation = () => {
+client/src/components/MeditationTimer.jsx:246:                onClick={resetMeditation}
+client/src/components/MeditationTimer.jsx:248:                data-testid="button-reset-meditation"
+client/src/components/MeditationTimer.jsx:276:              onClick={resetMeditation}
+client/src/components/MindfulBreathing.jsx:99:  const resetBreathing = () => {
+client/src/components/MindfulBreathing.jsx:231:                  resetBreathing();
+client/src/components/MindfulBreathing.jsx:358:            onClick={resetBreathing}
+client/src/components/MindfulBreathing.jsx:360:            data-testid="button-reset-breathing"
+client/src/components/MindfulBreathing.jsx:363:            Reset
+client/src/components/SafeBoundary.jsx:21:  reset = () => this.setState({ error: null, info: null });
+client/src/components/SafeBoundary.jsx:61:            onClick={this.reset}
+client/src/components/ShareableReflectionCard.jsx:7: * - Includes watermark + URL + CTA ("Try a 60-second reset")
+client/src/components/ShareableReflectionCard.jsx:41:const WATERMARK_CTA = 'Try a 60-second reset';
+client/src/components/ReflectionCardExport.jsx:147:  const handleReset = () => {
+client/src/components/ReflectionCardExport.jsx:310:                  onClick={handleReset}
+client/src/components/BenefitsBlock.d.ts:13:export const benefitsPresets: Record<string, unknown>;
+client/src/components/AngerManagement.jsx:134:  const reset = () => {
+client/src/components/AngerManagement.jsx:311:                onClick={reset}
+client/src/components/EmotionWheel.jsx:142:  const reset = () => {
+client/src/components/EmotionWheel.jsx:169:              onClick={reset}
+client/src/components/EmotionWheel.jsx:171:              aria-label="Reset"
+client/src/components/EmotionWheel.jsx:172:              data-testid="button-reset"
+client/src/components/EmotionWheel.jsx:257:                onClick={reset}
+client/src/components/EmotionalIntelligenceQuiz.jsx:116:  const resetQuiz = () => {
+client/src/components/EmotionalIntelligenceQuiz.jsx:285:              onClick={resetQuiz}
+client/src/components/EnergyBooster.jsx:125:  const reset = () => {
+client/src/components/EnergyBooster.jsx:235:                onClick={reset}
+client/src/components/EnergyBooster.jsx:267:              onClick={reset}
+client/src/components/GratitudePrompt.jsx:23:  "/reset-password",
+client/src/components/MindfulEating.jsx:130:  const reset = () => {
+client/src/components/MindfulEating.jsx:342:              onClick={reset}
+client/src/components/QuickActions.jsx:47:    name: "Nervous System Reset",
+client/src/components/FeedbackWidget.jsx:58:    resetForm();
+client/src/components/FeedbackWidget.jsx:61:      description: "Feedback will reappear after a week. Reset anytime via your browser data.",
+client/src/components/FeedbackWidget.jsx:69:  const resetForm = () => {
+client/src/components/FeedbackWidget.jsx:96:          resetForm();
+client/src/components/MicroWinPrompt.jsx:88:    const reset = () => {
+client/src/components/MicroWinPrompt.jsx:96:    // Start timer immediately; reset on any meaningful user activity.
+client/src/components/MicroWinPrompt.jsx:97:    reset();
+client/src/components/MicroWinPrompt.jsx:99:    window.addEventListener("click", reset, opts);
+client/src/components/MicroWinPrompt.jsx:100:    window.addEventListener("scroll", reset, opts);
+client/src/components/MicroWinPrompt.jsx:101:    window.addEventListener("keydown", reset, opts);
+client/src/components/MicroWinPrompt.jsx:102:    window.addEventListener("touchstart", reset, opts);
+client/src/components/MicroWinPrompt.jsx:106:      window.removeEventListener("click", reset, opts);
+client/src/components/MicroWinPrompt.jsx:107:      window.removeEventListener("scroll", reset, opts);
+client/src/components/MicroWinPrompt.jsx:108:      window.removeEventListener("keydown", reset, opts);
+client/src/components/MicroWinPrompt.jsx:109:      window.removeEventListener("touchstart", reset, opts);
+client/src/components/SessionTimeout.jsx:13:  const resetTimer = useCallback(() => {
+client/src/components/SessionTimeout.jsx:66:      resetTimer();
+client/src/components/SessionTimeout.jsx:68:      resetTimer();
+client/src/config/navConfig.js:54:  "/reset-password",
+client/src/config/platformMessaging.js:8:  primaryCTA: "Start Your Reset",
+client/src/content/allRoutes.json:180:  "/reset-password",
+client/src/content/flags/featureFlags.ts:48:export function resetFlags() {
+client/src/content/frameworks/benefitTokens.js:54:export const PAGE_BENEFIT_PRESETS = {
+client/src/content/frameworks/benefitTokens.js:142:export function getPreset(pageKey) {
+client/src/content/frameworks/benefitTokens.js:143:  return PAGE_BENEFIT_PRESETS[pageKey] || PAGE_BENEFIT_PRESETS.tools;
+client/src/content/frameworks/benefitTokens.js:152:  presets: PAGE_BENEFIT_PRESETS,
+client/src/content/frameworks/benefitTokens.js:153:  getPreset
+client/src/content/frameworks/index.js:10:export { benefitTokens, getPresetBenefits, assembleBenefitLine } from './benefitTokens.js';
+client/src/content/frameworks/twelvePhaseAlignment.js:176:    example: "Practice a 60-second breath reset. Stop if needed.",
+client/src/content/frameworks/wellnessMicrocopy.js:139: * Reset rotation for a specific category or all categories
+client/src/content/frameworks/wellnessMicrocopy.js:140: * @param {string|null} category - Category to reset, or null for all
+client/src/content/frameworks/wellnessMicrocopy.js:142:export function resetRotation(category = null) {
+client/src/content/hubs/topicHubs.ts:20:    title: "Sleep reset",
+client/src/content/meta/platformProcessRegistry.ts:83:    guardrails: ["Streaks never punish", "Always offer reset with kindness"],
+client/src/content/meta/routeMeta.autogen.ts:2883:  "reset-password": {
+client/src/content/meta/routeMeta.autogen.ts:2884:    "canonicalPath": "/reset-password",
+client/src/content/meta/routeMeta.autogen.ts:2885:    "title": "Reset password",
+client/src/content/meta/routeMetaRegistry.ts:204:      "Reduce overwhelm with 2-minute nervous system resets.",
+client/src/content/microcopy/wellness.js:29:    quick10s: ["10 seconds", "10-second reset", "10-second grounding"],
+client/src/content/microcopy/wellness.js:35:    quick10s: ["Start 10 seconds", "Do the quick reset", "Try the 10-second version"],
+client/src/content/microcopy/wellnessMicrocopy.ts:551:    'Reset this page'
+client/src/content/microcopy/wellnessMicrocopy.ts:668:    quick10s: { beginner: '10 seconds', intermediate: '10-second reset', advanced: 'Micro-regulation (10s)' },
+client/src/content/microcopy/wellnessMicrocopy.ts:708:    includes: ["Daily reset", "Crisis routing", "Basic cards"],
+client/src/content/progress/progressStore.ts:68:export function resetStreak() {
+client/src/content/healingConcepts.js:852:    title: "Zero-Pressure Resets",
+client/src/content/healingConcepts.js:856:    tool: "micro-reset"
+client/src/content/microcopy.js:38:    beginner: ['10-second reset', 'Quick reset (10s)', '10s grounding'],
+client/src/content/microcopy.js:117:      beginner: '10-second reset',
+client/src/content/microcopy.js:120:      quick10s: '10-second reset',
+client/src/content/searchIndex.ts:79:  // Calm & Reset (public tools)
+client/src/content/searchIndex.ts:82:    description: "Guided breathing practices to help you steady and reset your attention.",
+client/src/content/searchIndex.ts:83:    tags: ["breathing", "calm", "regulate", "reset"],
+client/src/content/searchIndex.ts:90:    tags: ["grounding", "present", "5-4-3-2-1", "reset"],
+client/src/content/searchIndex.ts:325:  // ---- Tools: calm & reset ----
+client/src/content/searchIndex.ts:332:    tags: ["calm", "breath", "reset", "stress"],
+client/src/content/searchIndex.ts:388:    tags: ["stress", "nervous system", "coping", "reset"],
+client/src/content/searchIndex.ts:663:  { id: "auth-forgot", title: "Forgot Password", description: "Reset your password if you can’t sign in.", path: "/forgot-password", type: "Platform", tags: ["password", "reset"] },
+client/src/content/searchIndex.ts:664:  { id: "auth-reset", title: "Reset Password", description: "Choose a new password.", path: "/reset-password", type: "Platform", tags: ["password", "reset"] },
+client/src/content/routes.js:13: * - Category presets with defaults for hero/sections/modules
+client/src/content/routes.js:17: * - Motion presets (minimal/calm/rich) per category
+client/src/content/routes.js:173:// CATEGORY PRESETS - Auto-generate defaults per category
+client/src/content/routes.js:176:const categoryPresets = {
+client/src/content/routes.js:584:          standard: 'Start 10-second reset',
+client/src/content/routes.js:602:          standard: '10-second reset',
+client/src/content/routes.js:910:// HELPER: Apply category preset to route
+client/src/content/routes.js:913:function applyPreset(route) {
+client/src/content/routes.js:914:  const preset = categoryPresets[route.category] || categoryPresets.system;
+client/src/content/routes.js:918:    motion: route.motion || preset.motion,
+client/src/content/routes.js:919:    protected: route.protected ?? preset.protected,
+client/src/content/routes.js:920:    adminOnly: route.adminOnly ?? preset.adminOnly,
+client/src/content/routes.js:921:    isAuthPage: route.isAuthPage ?? preset.isAuthPage,
+client/src/content/routes.js:923:      ...preset.defaultHero,
+client/src/content/routes.js:924:      title: route.pageLabel || preset.defaultHero.title,
+client/src/content/routes.js:926:    sections: route.sections || preset.defaultSections,
+client/src/content/routes.js:1669:    title: 'Reset Password — The Genuine Love Project',
+client/src/content/routes.js:1670:    description: 'Reset your password to regain access to your healing sanctuary.',
+client/src/content/routes.js:1688:          'We\'ll send you an email with a link to reset it',
+client/src/content/routes.js:1695:        title: 'Reset Your Password',
+client/src/content/routes.js:1699:          'We\'ll send a secure reset link within minutes',
+client/src/content/routes.js:1701:          'Your one next step: Enter your email to receive the reset link'
+client/src/content/routes.js:1711:          'Your one next step: Request the secure reset link'
+client/src/content/routes.js:1717:      title: 'Reset your',
+client/src/content/routes.js:1720:      primaryCta: { label: 'Send Reset Link', href: '#reset-form' },
+client/src/content/routes.js:1725:    route: '/reset-password',
+client/src/content/routes.js:1727:    pageLabel: 'Reset Password',
+client/src/content/routes.js:1769:          'Consider enabling two-factor authentication after reset',
+client/src/content/routes.js:1779:      primaryCta: { label: 'Reset Password', href: '#form' },
+client/src/content/routes.js:2608:          standard: 'Start 10-second reset',
+client/src/content/routes.js:2625:        title: '10-second reset',
+client/src/content/routes.js:2631:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:2661:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:2723:          standard: 'Start 10-second reset',
+client/src/content/routes.js:2740:        title: '10-second reset',
+client/src/content/routes.js:2746:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:2776:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:2838:          standard: 'Start 10-second reset',
+client/src/content/routes.js:2855:        title: '10-second reset',
+client/src/content/routes.js:2861:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:2890:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:2953:          standard: 'Start 10-second reset',
+client/src/content/routes.js:2970:        title: '10-second reset',
+client/src/content/routes.js:2976:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:3006:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:3067:          standard: 'Start 10-second reset',
+client/src/content/routes.js:3084:        title: '10-second reset',
+client/src/content/routes.js:3090:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:3120:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:3244:          { icon: 'Smile', title: 'Beginner', text: 'Simple belly breathing, 3-breath resets, counting inhales. Focus on noticing breath, not controlling it.' },
+client/src/content/routes.js:3282:        'Many find it easier to pause and reset during stressful moments.',
+client/src/content/routes.js:3303:        title: '10-second reset',
+client/src/content/routes.js:3309:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:3339:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:3390:          standard: 'Quick Reset',
+client/src/content/routes.js:3441:        eyebrow: 'Emergency Reset',
+client/src/content/routes.js:3506:          standard: 'Start 10-second reset',
+client/src/content/routes.js:3523:        title: '10-second reset',
+client/src/content/routes.js:3529:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:3558:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:3716:          standard: 'Start 10-second reset',
+client/src/content/routes.js:3733:        title: '10-second reset',
+client/src/content/routes.js:3739:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:3769:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:3901:          standard: 'Start 10-second reset',
+client/src/content/routes.js:3957:        title: '10-second reset',
+client/src/content/routes.js:3964:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:3996:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:4015:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:4128:          standard: 'Start 10-second reset',
+client/src/content/routes.js:4183:        title: '10-second reset',
+client/src/content/routes.js:4190:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:4222:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:4241:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:4411:        title: '10-second reset',
+client/src/content/routes.js:4418:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:4450:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:4464:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:4520:          standard: 'Start 10-second reset',
+client/src/content/routes.js:4577:        title: '10-second reset',
+client/src/content/routes.js:4584:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:4616:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:4635:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:4748:          standard: 'Start 10-second reset',
+client/src/content/routes.js:4805:        title: '10-second reset',
+client/src/content/routes.js:4812:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:4844:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:4868:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:4981:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5012:        title: '10-second reset',
+client/src/content/routes.js:5019:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:5051:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:5066:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:5122:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5153:        title: '10-second reset',
+client/src/content/routes.js:5160:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:5192:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:5206:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:5262:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5293:        title: '10-second reset',
+client/src/content/routes.js:5300:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:5332:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:5346:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:5402:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5433:        title: '10-second reset',
+client/src/content/routes.js:5440:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:5472:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:5486:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:5542:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5573:        title: '10-second reset',
+client/src/content/routes.js:5580:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:5612:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:5626:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:5682:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5713:        title: '10-second reset',
+client/src/content/routes.js:5720:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:5752:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:5767:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:5823:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5854:        title: '10-second reset',
+client/src/content/routes.js:5861:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:5893:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:5908:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:5964:          standard: 'Start 10-second reset',
+client/src/content/routes.js:5995:        title: '10-second reset',
+client/src/content/routes.js:6002:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:6034:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:6048:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:6104:          standard: 'Start 10-second reset',
+client/src/content/routes.js:6135:        title: '10-second reset',
+client/src/content/routes.js:6142:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:6174:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:6188:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:6244:          standard: 'Start 10-second reset',
+client/src/content/routes.js:6276:        title: '10-second reset',
+client/src/content/routes.js:6283:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:6315:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:6329:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:6385:          standard: 'Start 10-second reset',
+client/src/content/routes.js:6416:        title: '10-second reset',
+client/src/content/routes.js:6423:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js:6455:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js:6469:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:6862:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:6966:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:7070:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:7174:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:7278:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js:7616:// PROCESS ROUTES - Apply presets and create final routes array
+client/src/content/routes.js:7623:  return applyPreset(route);
+client/src/content/routes.js:7729:      const preset = categoryPresets.wellness;
+client/src/content/routes.js:7730:      enhanced.gentleBenefits = preset.defaultGentleBenefits;
+client/src/content/routes.js.BACKUP.1780108447:13: * - Category presets with defaults for hero/sections/modules
+client/src/content/routes.js.BACKUP.1780108447:17: * - Motion presets (minimal/calm/rich) per category
+client/src/content/routes.js.BACKUP.1780108447:166:// CATEGORY PRESETS - Auto-generate defaults per category
+client/src/content/routes.js.BACKUP.1780108447:169:const categoryPresets = {
+client/src/content/routes.js.BACKUP.1780108447:577:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:595:          standard: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:903:// HELPER: Apply category preset to route
+client/src/content/routes.js.BACKUP.1780108447:906:function applyPreset(route) {
+client/src/content/routes.js.BACKUP.1780108447:907:  const preset = categoryPresets[route.category] || categoryPresets.system;
+client/src/content/routes.js.BACKUP.1780108447:911:    motion: route.motion || preset.motion,
+client/src/content/routes.js.BACKUP.1780108447:912:    protected: route.protected ?? preset.protected,
+client/src/content/routes.js.BACKUP.1780108447:913:    adminOnly: route.adminOnly ?? preset.adminOnly,
+client/src/content/routes.js.BACKUP.1780108447:914:    isAuthPage: route.isAuthPage ?? preset.isAuthPage,
+client/src/content/routes.js.BACKUP.1780108447:916:      ...preset.defaultHero,
+client/src/content/routes.js.BACKUP.1780108447:917:      title: route.pageLabel || preset.defaultHero.title,
+client/src/content/routes.js.BACKUP.1780108447:919:    sections: route.sections || preset.defaultSections,
+client/src/content/routes.js.BACKUP.1780108447:1970:    title: 'Reset Password — The Genuine Love Project',
+client/src/content/routes.js.BACKUP.1780108447:1971:    description: 'Reset your password to regain access to your healing sanctuary.',
+client/src/content/routes.js.BACKUP.1780108447:1989:          'We\'ll send you an email with a link to reset it',
+client/src/content/routes.js.BACKUP.1780108447:1996:        title: 'Reset Your Password',
+client/src/content/routes.js.BACKUP.1780108447:2000:          'We\'ll send a secure reset link within minutes',
+client/src/content/routes.js.BACKUP.1780108447:2002:          'Your one next step: Enter your email to receive the reset link'
+client/src/content/routes.js.BACKUP.1780108447:2012:          'Your one next step: Request the secure reset link'
+client/src/content/routes.js.BACKUP.1780108447:2018:      title: 'Reset your',
+client/src/content/routes.js.BACKUP.1780108447:2021:      primaryCta: { label: 'Send Reset Link', href: '#reset-form' },
+client/src/content/routes.js.BACKUP.1780108447:2026:    route: '/reset-password',
+client/src/content/routes.js.BACKUP.1780108447:2028:    pageLabel: 'Reset Password',
+client/src/content/routes.js.BACKUP.1780108447:2070:          'Consider enabling two-factor authentication after reset',
+client/src/content/routes.js.BACKUP.1780108447:2080:      primaryCta: { label: 'Reset Password', href: '#form' },
+client/src/content/routes.js.BACKUP.1780108447:2909:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:2926:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:2932:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:2962:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:3024:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3041:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3047:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:3077:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:3139:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3156:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3162:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:3191:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:3254:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3271:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3277:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:3307:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:3368:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3385:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3391:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:3421:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:3545:          { icon: 'Smile', title: 'Beginner', text: 'Simple belly breathing, 3-breath resets, counting inhales. Focus on noticing breath, not controlling it.' },
+client/src/content/routes.js.BACKUP.1780108447:3583:        'Many find it easier to pause and reset during stressful moments.',
+client/src/content/routes.js.BACKUP.1780108447:3604:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3610:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:3640:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:3691:          standard: 'Quick Reset',
+client/src/content/routes.js.BACKUP.1780108447:3742:        eyebrow: 'Emergency Reset',
+client/src/content/routes.js.BACKUP.1780108447:3807:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3824:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:3830:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:3859:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:4017:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4034:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4040:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:4070:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:4202:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4258:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4265:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:4297:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:4316:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:4429:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4484:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4491:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:4523:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:4542:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:4712:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4719:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:4751:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:4765:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:4821:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4878:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:4885:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:4917:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:4936:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:5049:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5106:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5113:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:5145:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:5169:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:5282:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5313:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5320:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:5352:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:5367:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:5423:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5454:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5461:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:5493:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:5507:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:5563:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5594:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5601:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:5633:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:5647:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:5703:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5734:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5741:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:5773:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:5787:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:5843:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5874:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:5881:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:5913:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:5927:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:5983:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6014:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6021:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:6053:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:6068:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:6124:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6155:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6162:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:6194:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:6209:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:6265:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6296:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6303:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:6335:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:6349:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:6405:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6436:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6443:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:6475:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:6489:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:6545:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6577:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6584:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:6616:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:6630:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:6686:          standard: 'Start 10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6717:        title: '10-second reset',
+client/src/content/routes.js.BACKUP.1780108447:6724:        ctaLabel: 'Start 10-second reset'
+client/src/content/routes.js.BACKUP.1780108447:6756:      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+client/src/content/routes.js.BACKUP.1780108447:6770:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:7862:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:7966:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:8070:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:8174:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:8278:      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
+client/src/content/routes.js.BACKUP.1780108447:8703:// PROCESS ROUTES - Apply presets and create final routes array
+client/src/content/routes.js.BACKUP.1780108447:8710:  return applyPreset(route);
+client/src/content/routes.js.BACKUP.1780108447:8816:      const preset = categoryPresets.wellness;
+client/src/content/routes.js.BACKUP.1780108447:8817:      enhanced.gentleBenefits = preset.defaultGentleBenefits;
+client/src/data/lumiToySpec.ts:119:  /** Posture servo / body-flex preset key. */
+client/src/data/wisdomContent.ts:152:  { title: "Cold Water Reset", description: "Splash cold water on your face or hold an ice cube. This activates the dive reflex.", duration: "1 min" },
+client/src/features/community/DiscussionPage.jsx:31:        text: "I find that stepping outside for fresh air, even for just 2 minutes, can help reset my nervous system. The change of environment signals to my brain that the situation has shifted.",
+client/src/features/state/StatePage.jsx:25:    energy: "Try a body reset: water + small snack + 5 minutes of gentle movement.",
+client/src/features/state/StatePage.jsx:26:    clarity: 'Try a clarity reset: write one sentence: "Right now, what matters most is…"',
+client/src/hooks/useLumiBehavior.js:61:  // reset to 1 if it's been longer; leave alone if same calendar day.
+client/src/hooks/useBuddy.ts:4: * Owns Buddy conversation state, exposes send(), and resets visual state to
+client/src/hooks/useBuddy.ts:5: * "calm" after BUDDY_IDLE_RESET_MS of inactivity.
+client/src/hooks/useBuddy.ts:15:  BUDDY_IDLE_RESET_MS,
+client/src/hooks/useBuddy.ts:32:  reset: () => void;
+client/src/hooks/useBuddy.ts:47:  const armIdleReset = useCallback(() => {
+client/src/hooks/useBuddy.ts:51:    }, BUDDY_IDLE_RESET_MS);
+client/src/hooks/useBuddy.ts:108:        armIdleReset();
+client/src/hooks/useBuddy.ts:116:    [isSending, armIdleReset],
+client/src/hooks/useBuddy.ts:119:  const reset = useCallback(() => {
+client/src/hooks/useBuddy.ts:126:  return { state, messages, isSending, error, send, reset };
+client/src/hooks/useOptimistic.js:38:  const reset = useCallback(() => {
+client/src/hooks/useOptimistic.js:50:    reset
+client/src/hooks/useUndoRedo.js:38:  const reset = useCallback((newInitialState) => {
+client/src/hooks/useUndoRedo.js:50:    reset,
+client/src/lib/nlpReframes.ts:251:    name: "Cold Water Reset",
+client/src/lib/avatarState.ts:252:export const BUDDY_IDLE_RESET_MS = 60_000;
+client/src/lib/avatarState.ts.STABLE:252:export const BUDDY_IDLE_RESET_MS = 60_000;
+client/src/styles/brand-tokens.css:392:    Premium Gradient Presets — layered, dimensional, mesmerizing
+client/src/utils/trackSignalEvent.js:49:export function resetSignalTracking() {
+client/src/sections/EmailCapture.jsx:71:    // Intentionally do NOT reset `returning` here — the success state
+client/src/avatar-life/types/avatarLifeTypes.ts:9: * presets; they never blend, easing through is the renderer's job.
+client/src/avatar-life/types/avatarLifeTypes.ts:49: * EMOTION_MULTIPLIERS — STATIC presets, one per emotional state.
+client/src/avatar-life/types/avatarLifeTypes.ts:53: * pending final spec. Every preset MUST stay sub-pixel safe.
+client/src/avatar-life/state/useAvatarLifeStore.tsx:40:  resetForSurface: (surface: SurfaceContext) => void;
+client/src/avatar-life/state/useAvatarLifeStore.tsx:85:    resetForSurface: (surface) =>
+client/src/avatar-life/governance/nonDriftRules.ts:5: * that audit a multiplier preset OR a render context against the locked
+client/src/avatar-life/governance/nonDriftRules.ts:71:/** Validate a single MotionMultiplier preset against the 17 motion limits. */
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:47:export function __resetAvatarTelemetry(): void {
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:39:  // Mount: reset store for surface, set initial state, emit mount event.
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:43:    api.getState().resetForSurface(surface);
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:29:  __resetAvatarTelemetry,
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:41:  __resetAvatarTelemetry();
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:48:  it("provides a multiplier preset for every declared state", () => {
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:117:  it("resetForSurface assigns the surface's default state", () => {
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:118:    store.getState().resetForSurface("chat");
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:120:    store.getState().resetForSurface("buddy");
+client/src/design-system/tokens/shadows.ts:2: * Phase 12 — Shadow presets (9 values + component mapping).
+client/src/design-system/tokens/motion.ts:2: * Phase 12 — Motion tokens (8 durations + 8 easings + 9 presets).
+client/src/design-system/tokens/motion.ts:33:/** Curated transition presets. */
+client/src/design-system/tokens/motion.ts:46:export type TransitionPreset = keyof typeof transition;
+client/src/design-system/index.js:161:   PALETTE ALIAS — required by lumi-scenes presets
+client/src/checkin-flow/types/checkInFlowTypes.ts:64:  reset: () => void;
+client/src/checkin-flow/copy/microCopy.ts:24:  { id: "lifted",  label: "Already feeling lifted", reflection: "Beautiful. A short reset can protect that feeling for the rest of your day." },
+client/src/checkin-flow/state/useCheckInFlowStore.ts:92:  reset: () => set(() => ({ ...initialState })),
+client/src/checkin-flow/state/useCheckInFlowStore.ts:143:  const reset = useCheckInFlowStore((s) => s.reset);
+client/src/checkin-flow/state/useCheckInFlowStore.ts:153:      reset,
+client/src/checkin-flow/state/useCheckInFlowStore.ts:163:      reset,
+client/src/checkin-flow/state/useCheckInFlowStore.ts:185:    reset: typeof s.reset === "function" ? "function" : "missing",
+client/src/checkin-flow/governance/checkInFlowRules.ts:104:      "Early exit is always reachable — store exposes both reset() and declineOffer() actions.",
+client/src/checkin-flow/governance/checkInFlowRules.ts:107:      return api.reset === "function" && api.declineOffer === "function";
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:36:  const reset = useCheckInFlowStore((s) => s.reset);
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:38:  // Reset on unmount so re-mount always begins fresh.
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx:39:  useEffect(() => () => reset(), [reset]);
+client/src/checkin-flow/components/FlowStepBreathing.tsx:34:  const reset = useCheckInFlowStore((s) => s.reset);
+client/src/checkin-flow/components/FlowStepBreathing.tsx:165:          onClick={() => reset()}
+client/src/checkin-flow/components/FlowStepComplete.tsx:19:  const reset = useCheckInFlowStore((s) => s.reset);
+client/src/checkin-flow/components/FlowStepComplete.tsx:26:    reset();
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:31:    useCheckInFlowStore.getState().reset();
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:100:  it("reset() returns store to initial state", () => {
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:104:    s.reset();
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:217:      "reset",
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:251:    expect(r004.description.toLowerCase()).toContain("reset");
+client/src/calm-checkin/state/calmCheckinState.ts:50:  reset: () => void;
+client/src/calm-checkin/state/calmCheckinState.ts:132:    reset: () => set({ ...initialState }),
+client/src/calm-checkin/components/CalmCheckinEntry.tsx:36:      state.reset();
+client/src/calm-checkin/__tests/calmCheckinGovernance.test.ts:30:  useCalmCheckinStore.getState().reset();
+client/src/calm-checkin/__tests/calmCheckinGovernance.test.ts:138:  it("repeatBreathing increments counter and resets completed flag", () => {
+client/src/calm-checkin/__tests/calmCheckinGovernance.test.ts:163:      s.reset();
+client/src/lumi-conversation/state/conversationState.ts:13: *   - `escalated` is one-way until explicit reset — Lumi will keep gently
+client/src/lumi-conversation/state/conversationState.ts:58:  /** Live escalation level — once "critical", remains until user resets. */
+client/src/lumi-conversation/state/conversationState.ts:81:  reset: () => void;
+client/src/lumi-conversation/state/conversationState.ts:127:      // Critical is sticky — only `reset` clears it.
+client/src/lumi-conversation/state/conversationState.ts:137:      // Cannot leave "escalated" except via reset.
+client/src/lumi-conversation/state/conversationState.ts:144:    reset: () => set({ ...initialState, turns: [] }),
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:106:  const reset = useConversationStore((s) => s.reset);
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:141:    reset();
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:142:  }, [reset]);
+client/src/lumi-conversation/tests/conversationSafety.test.ts:295:    adversarialStore.getState().reset();
+client/src/lumi-conversation/tests/conversationSafety.test.ts:331:      adversarialStore.getState().reset();
+client/src/lumi-conversation/index.ts:28:// audited write path) or the public `reset()` action accessed via the store
+client/src/lumi-memory/state/memoryStore.ts:5: * directly — use `memoryRouter.{writeMemory, resetMemory, setConsent}`
+client/src/lumi-memory/state/memoryStore.ts:53:    | "reset"
+client/src/lumi-memory/state/memoryStore.ts:86:  reset: () => void;
+client/src/lumi-memory/state/memoryStore.ts:175:  reset() {
+client/src/lumi-memory/state/memoryStore.ts:176:    set(() => ({ ...initialState, audit: [makeAuditEntry("reset")] }));
+client/src/lumi-memory/runtime/memoryRouter.ts:135: * Public reset — wipes ALL memory and audit history immediately.
+client/src/lumi-memory/runtime/memoryRouter.ts:136: * Equivalent to calling `useMemoryStore.getState().reset()` but routed
+client/src/lumi-memory/runtime/memoryRouter.ts:139:export function resetMemory(): void {
+client/src/lumi-memory/runtime/memoryRouter.ts:140:  useMemoryStore.getState().reset();
+client/src/lumi-memory/runtime/memoryHooks.ts:37: * `writeMemory`/`readMemory`/`resetMemory` is called.
+client/src/lumi-memory/components/MemoryResetButton.tsx:4: * Instant-reset affordance. Two-tap (confirm) by default to prevent
+client/src/lumi-memory/components/MemoryResetButton.tsx:10:import { resetMemory } from "../runtime/memoryRouter";
+client/src/lumi-memory/components/MemoryResetButton.tsx:12:export type MemoryResetButtonProps = {
+client/src/lumi-memory/components/MemoryResetButton.tsx:14:  onReset?: () => void;
+client/src/lumi-memory/components/MemoryResetButton.tsx:19:export function MemoryResetButton({
+client/src/lumi-memory/components/MemoryResetButton.tsx:21:  onReset,
+client/src/lumi-memory/components/MemoryResetButton.tsx:22:  label = "Reset what Lumi remembers",
+client/src/lumi-memory/components/MemoryResetButton.tsx:24:}: MemoryResetButtonProps) {
+client/src/lumi-memory/components/MemoryResetButton.tsx:32:    resetMemory();
+client/src/lumi-memory/components/MemoryResetButton.tsx:34:    onReset?.();
+client/src/lumi-memory/components/MemoryResetButton.tsx:42:      data-testid="button-memory-reset"
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:24:import { MemoryResetButton } from "./MemoryResetButton";
+client/src/lumi-memory/components/MemorySettingsPanel.tsx:125:          <MemoryResetButton onReset={onChange} />
+client/src/lumi-memory/tests/memorySafety.test.ts:11: *   Reset + audit              1
+client/src/lumi-memory/tests/memorySafety.test.ts:44:  resetMemory,
+client/src/lumi-memory/tests/memorySafety.test.ts:57:  resetMemory();
+client/src/lumi-memory/tests/memorySafety.test.ts:60:  resetMemory();
+client/src/lumi-memory/tests/memorySafety.test.ts:236:describe("Reset + audit", () => {
+client/src/lumi-memory/tests/memorySafety.test.ts:237:  it("resetMemory wipes entries AND records a reset audit entry", () => {
+client/src/lumi-memory/tests/memorySafety.test.ts:242:    resetMemory();
+client/src/lumi-memory/tests/memorySafety.test.ts:246:    expect(auditAfter[0]?.kind).toBe("reset");
+client/src/lumi-memory/tests/memorySafety.test.ts:266:    // Public write/reset path MUST be reachable.
+client/src/lumi-memory/tests/memorySafety.test.ts:269:    expect(exposed).toContain("resetMemory");
+client/src/lumi-memory/index.ts:5: * `resetMemory` from this barrel — raw store mutators are intentionally
+client/src/lumi-memory/index.ts:12: *     MemoryResetButton,
+client/src/lumi-memory/index.ts:16: *     resetMemory,
+client/src/lumi-memory/index.ts:83:  resetMemory,
+client/src/lumi-memory/index.ts:98:export { MemoryResetButton } from "./components/MemoryResetButton";
+client/src/lumi-memory/index.ts:99:export type { MemoryResetButtonProps } from "./components/MemoryResetButton";
+client/src/lumi-scenes/presets/stillMeadow.ts:2: * Phase 19 — Scene preset: Still Meadow (calm)
+client/src/lumi-scenes/presets/stillMeadow.ts:9:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/presets/stillMeadow.ts:11:export const stillMeadow: ScenePreset = {
+client/src/lumi-scenes/presets/gentleLantern.ts:2: * Phase 19 — Scene preset: Gentle Lantern (comforting)
+client/src/lumi-scenes/presets/gentleLantern.ts:9:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/presets/gentleLantern.ts:11:export const gentleLantern: ScenePreset = {
+client/src/lumi-scenes/presets/quietOrbit.ts:2: * Phase 19 — Scene preset: Quiet Orbit (reflective)
+client/src/lumi-scenes/presets/quietOrbit.ts:11:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/presets/quietOrbit.ts:13:export const quietOrbit: ScenePreset = {
+client/src/lumi-scenes/presets/cloudRest.ts:2: * Phase 19 — Scene preset: Cloud Rest (sleepy)
+client/src/lumi-scenes/presets/cloudRest.ts:9:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/presets/cloudRest.ts:11:export const cloudRest: ScenePreset = {
+client/src/lumi-scenes/presets/softHorizon.ts:2: * Phase 19 — Scene preset: Soft Horizon (grounding)
+client/src/lumi-scenes/presets/softHorizon.ts:11:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/presets/softHorizon.ts:13:export const softHorizon: ScenePreset = {
+client/src/lumi-scenes/presets/tinyBloom.ts:2: * Phase 19 — Scene preset: Tiny Bloom (joySoft)
+client/src/lumi-scenes/presets/tinyBloom.ts:11:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/presets/tinyBloom.ts:13:export const tinyBloom: ScenePreset = {
+client/src/lumi-scenes/presets/holdingSpace.ts:2: * Phase 19 — Scene preset: Holding Space (concernSoft)
+client/src/lumi-scenes/presets/holdingSpace.ts:10:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/presets/holdingSpace.ts:12:export const holdingSpace: ScenePreset = {
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:2: * Phase 19 — Emotional Scene Presets
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:4: * Pure resolver: maps a Lumi emotional state → one of 7 named scene presets.
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:6: * NON-NEGOTIABLES (enforced by `governance/presetSafetyRules.ts`):
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:64:export type ScenePreset = {
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:84:import { stillMeadow } from "../presets/stillMeadow";
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:85:import { gentleLantern } from "../presets/gentleLantern";
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:86:import { quietOrbit } from "../presets/quietOrbit";
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:87:import { cloudRest } from "../presets/cloudRest";
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:88:import { softHorizon } from "../presets/softHorizon";
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:89:import { tinyBloom } from "../presets/tinyBloom";
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:90:import { holdingSpace } from "../presets/holdingSpace";
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:92:// Deep-freeze every preset (and the registry) at module load so that
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:105:const _registry: Record<SceneState, ScenePreset> = {
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:115:export const SCENE_REGISTRY: Readonly<Record<SceneState, ScenePreset>> =
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:118:// Module-load guards: registry shape and state↔preset coherence.
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:121:    `[lumi-scenes] SCENE_REGISTRY must contain exactly 7 presets, got ` +
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:127:  if (!p) throw new Error(`[lumi-scenes] missing preset for state "${s}"`);
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:130:      `[lumi-scenes] preset for "${s}" has wrong state field "${p.state}"`,
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:135:/** Resolve a state → preset. Pure. Never throws on a valid SceneState. */
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:136:export function resolvePreset(state: SceneState): ScenePreset {
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:144:/** All 7 presets (stable ordering for tests/transparency). */
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:145:export function listPresets(): ReadonlyArray<ScenePreset> {
+client/src/lumi-scenes/runtime/useScenePreset.ts:2: * Phase 19 — Emotional Scene Presets · React hook
+client/src/lumi-scenes/runtime/useScenePreset.ts:4: * Tracks current + previous preset for soft crossfade rendering.
+client/src/lumi-scenes/runtime/useScenePreset.ts:18: * crossfade animation, but the new preset still becomes current.
+client/src/lumi-scenes/runtime/useScenePreset.ts:23:  resolvePreset,
+client/src/lumi-scenes/runtime/useScenePreset.ts:24:  type ScenePreset,
+client/src/lumi-scenes/runtime/useScenePreset.ts:26:} from "./ScenePresetEngine";
+client/src/lumi-scenes/runtime/useScenePreset.ts:27:import { MIN_TRANSITION_MS } from "../governance/presetSafetyRules";
+client/src/lumi-scenes/runtime/useScenePreset.ts:29:export type UseScenePresetReturn = {
+client/src/lumi-scenes/runtime/useScenePreset.ts:30:  currentPreset: ScenePreset;
+client/src/lumi-scenes/runtime/useScenePreset.ts:31:  previousPreset: ScenePreset | null;
+client/src/lumi-scenes/runtime/useScenePreset.ts:66:export function useScenePreset(initial: SceneState = "calm"): UseScenePresetReturn {
+client/src/lumi-scenes/runtime/useScenePreset.ts:69:  const [previousPreset, setPreviousPreset] = useState<ScenePreset | null>(null);
+client/src/lumi-scenes/runtime/useScenePreset.ts:75:  const currentPreset = useMemo(() => resolvePreset(sceneState), [sceneState]);
+client/src/lumi-scenes/runtime/useScenePreset.ts:92:        const prevPreset = resolvePreset(prev);
+client/src/lumi-scenes/runtime/useScenePreset.ts:97:          setPreviousPreset(null);
+client/src/lumi-scenes/runtime/useScenePreset.ts:101:          setPreviousPreset(prevPreset);
+client/src/lumi-scenes/runtime/useScenePreset.ts:116:            setPreviousPreset(null);
+client/src/lumi-scenes/runtime/useScenePreset.ts:131:    if (reduced && (previousPreset !== null || isTransitioning)) {
+client/src/lumi-scenes/runtime/useScenePreset.ts:133:      setPreviousPreset(null);
+client/src/lumi-scenes/runtime/useScenePreset.ts:137:  }, [reduced, previousPreset, isTransitioning, clearAll]);
+client/src/lumi-scenes/runtime/useScenePreset.ts:145:    currentPreset,
+client/src/lumi-scenes/runtime/useScenePreset.ts:146:    previousPreset,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:13: *   z-4  lighting wash (opacity = preset.lighting * 0.4, max ~0.32)
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:26:import { useScenePreset } from "../runtime/useScenePreset";
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:30:} from "../governance/presetSafetyRules";
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:31:import type { SceneState, ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:38:   * this prop instead of relying on `useScenePreset.setSceneState`. Useful
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:49:  /** Test-only override: skip audio playback even if preset has audio.src. */
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:61:  const { currentPreset, previousPreset, isTransitioning, previousFading, setSceneState } =
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:62:    useScenePreset(initialState);
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:66:    if (state && state !== currentPreset.state) {
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:69:    // Intentionally not depending on currentPreset to avoid feedback loop.
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:82:      data-scene-state={currentPreset.state}
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:83:      data-scene-name={currentPreset.internalName}
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:93:        preset={currentPreset}
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:97:        keyId={`current-${currentPreset.state}`}
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:99:      {previousPreset ? (
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:101:          preset={previousPreset}
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:103:          // useScenePreset, previousFading flips true → CSS transitions 1→0
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:109:          keyId={`prev-${previousPreset.state}`}
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:121:      {!disableAudio && currentPreset.audio?.src ? (
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:122:        <ScenePresetAudio audio={currentPreset.audio} />
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:137:  preset,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:144:  preset: ScenePreset;
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:151:  const lightingOpacity = Math.min(0.32, preset.lighting * 0.4);
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:163:          background: preset.background.gradient,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:179:        {Array.from({ length: preset.particles.count }).map((_, i) => (
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:184:              left: `${(i + 1) * (100 / (preset.particles.count + 1))}%`,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:186:              width: preset.particles.sizePx,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:187:              height: preset.particles.sizePx,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:189:              background: preset.particles.color,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:203:          opacity: opacity * preset.fog.opacity,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:204:          background: preset.fog.color,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:217:          background: preset.background.wash,
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:226:function ScenePresetAudio({ audio }: { audio: NonNullable<ScenePreset["audio"]> }) {
+client/src/lumi-scenes/transitions/SceneTransitionController.tsx:228:  // Sink-time sanitization: even if a host swaps in an unaudited preset
+client/src/lumi-scenes/governance/presetSafetyRules.ts:2: * Phase 19 — Emotional Scene Presets · Governance
+client/src/lumi-scenes/governance/presetSafetyRules.ts:4: * Numeric ceilings + 14 forbidden effect categories. Every preset is
+client/src/lumi-scenes/governance/presetSafetyRules.ts:6: * any host attempting to register an ad-hoc scene MUST run `auditPreset()`.
+client/src/lumi-scenes/governance/presetSafetyRules.ts:18:import type { ScenePreset } from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/governance/presetSafetyRules.ts:64:// ─── Preset audit ──────────────────────────────────────────────────────────
+client/src/lumi-scenes/governance/presetSafetyRules.ts:81: * Audit a preset against all numeric ceilings + forbidden-effect rules.
+client/src/lumi-scenes/governance/presetSafetyRules.ts:82: * Returns `[]` when the preset is fully compliant.
+client/src/lumi-scenes/governance/presetSafetyRules.ts:84:export function auditPreset(p: ScenePreset): AuditFinding[] {
+client/src/lumi-scenes/governance/presetSafetyRules.ts:90:      message: "preset.internalName must be a non-empty string",
+client/src/lumi-scenes/governance/presetSafetyRules.ts:164: * Sink-time audio sanitizer. Used by `ScenePresetAudio` at playback time
+client/src/lumi-scenes/governance/presetSafetyRules.ts:166: * preset, the audio sink fails closed:
+client/src/lumi-scenes/governance/presetSafetyRules.ts:177:  audio: ScenePreset["audio"] | null | undefined,
+client/src/lumi-scenes/governance/presetSafetyRules.ts:192:/** Convenience: throws if the preset has any audit findings. */
+client/src/lumi-scenes/governance/presetSafetyRules.ts:193:export function assertPresetCompliant(p: ScenePreset): void {
+client/src/lumi-scenes/governance/presetSafetyRules.ts:194:  const findings = auditPreset(p);
+client/src/lumi-scenes/governance/presetSafetyRules.ts:197:      `[lumi-scenes] preset "${p.internalName}" failed audit: ` +
+client/src/lumi-scenes/tests/sceneSafety.test.ts:2: * Phase 19 — Emotional Scene Presets · Contract test suite
+client/src/lumi-scenes/tests/sceneSafety.test.ts:14:  listPresets,
+client/src/lumi-scenes/tests/sceneSafety.test.ts:15:  resolvePreset,
+client/src/lumi-scenes/tests/sceneSafety.test.ts:17:} from "../runtime/ScenePresetEngine";
+client/src/lumi-scenes/tests/sceneSafety.test.ts:26:  auditPreset,
+client/src/lumi-scenes/tests/sceneSafety.test.ts:29:} from "../governance/presetSafetyRules";
+client/src/lumi-scenes/tests/sceneSafety.test.ts:45:  it("registry contains exactly 7 presets", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:48:  it("every state maps to its named preset and the preset reports the same state back", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:55:  it("internal names are unique across presets", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:56:    const names = listPresets().map((p) => p.internalName);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:61:describe("Numeric ceilings (per-preset)", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:62:  it("lighting ≤ MAX_LIGHTING for every preset", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:63:    for (const p of listPresets()) expect(p.lighting).toBeLessThanOrEqual(MAX_LIGHTING);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:65:  it("particle count ≤ MAX_PARTICLE_COUNT for every preset", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:66:    for (const p of listPresets()) expect(p.particles.count).toBeLessThanOrEqual(MAX_PARTICLE_COUNT);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:68:  it("particle speed ≤ MAX_PARTICLE_SPEED for every preset", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:69:    for (const p of listPresets()) expect(p.particles.speed).toBeLessThanOrEqual(MAX_PARTICLE_SPEED);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:71:  it("fog opacity ≤ MAX_FOG_OPACITY for every preset", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:72:    for (const p of listPresets()) expect(p.fog.opacity).toBeLessThanOrEqual(MAX_FOG_OPACITY);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:75:    for (const p of listPresets()) {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:98:  it("no shipped preset references a forbidden effect in name or audio src", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:99:    for (const p of listPresets()) {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:106:describe("auditPreset", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:107:  it("returns [] for every shipped preset", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:108:    for (const p of listPresets()) expect(auditPreset(p)).toEqual([]);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:111:    const bad = { ...listPresets()[0], lighting: 0.95 };
+client/src/lumi-scenes/tests/sceneSafety.test.ts:112:    const findings = auditPreset(bad);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:116:    const base = listPresets()[0];
+client/src/lumi-scenes/tests/sceneSafety.test.ts:119:    expect(auditPreset(tooMany).some((f) => f.rule === "max-particle-count")).toBe(true);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:120:    expect(auditPreset(tooFast).some((f) => f.rule === "max-particle-speed")).toBe(true);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:123:    const base = listPresets()[0];
+client/src/lumi-scenes/tests/sceneSafety.test.ts:125:    expect(auditPreset(foggy).some((f) => f.rule === "max-fog-opacity")).toBe(true);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:128:    const base = listPresets()[0];
+client/src/lumi-scenes/tests/sceneSafety.test.ts:130:    expect(auditPreset(cursed).some((f) => f.rule === "forbidden-effect-name")).toBe(true);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:133:    const base = listPresets()[1]; // gentleLantern has audio
+client/src/lumi-scenes/tests/sceneSafety.test.ts:139:        auditPreset(cursedAudio).some((f) => f.rule === "forbidden-effect-audio"),
+client/src/lumi-scenes/tests/sceneSafety.test.ts:144:    const base = listPresets()[1];
+client/src/lumi-scenes/tests/sceneSafety.test.ts:147:      expect(auditPreset(loud).some((f) => f.rule === "max-audio-volume")).toBe(true);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:152:describe("resolvePreset", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:153:  it("returns the correct preset for every SceneState", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:155:      expect(resolvePreset(s).state).toBe(s);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:156:      expect(resolvePreset(s).internalName).toBe(STATE_TO_NAME[s]);
+client/src/lumi-scenes/tests/sceneSafety.test.ts:161:      expect(() => resolvePreset(s)).not.toThrow();
+client/src/lumi-scenes/tests/sceneSafety.test.ts:171:// (The crossfade fix lives in useScenePreset and is verified by the
+client/src/lumi-scenes/tests/sceneSafety.test.ts:177:    // Try to swap a preset reference — frozen registry must reject silently
+client/src/lumi-scenes/tests/sceneSafety.test.ts:187:    expect(resolvePreset("calm").internalName).toBe("Still Meadow");
+client/src/lumi-scenes/tests/sceneSafety.test.ts:190:  it("each preset is deep-frozen (nested mutation rejected)", () => {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:191:    for (const p of listPresets()) {
+client/src/lumi-scenes/tests/sceneSafety.test.ts:269:      "useScenePreset",
+client/src/lumi-scenes/tests/sceneSafety.test.ts:270:      "resolvePreset",
+client/src/lumi-scenes/tests/sceneSafety.test.ts:271:      "listPresets",
+client/src/lumi-scenes/tests/sceneSafety.test.ts:281:      "auditPreset",
+client/src/lumi-scenes/tests/sceneSafety.test.ts:282:      "assertPresetCompliant",
+client/src/lumi-scenes/tests/sceneSafety.test.ts:295:    // not affect resolvePreset (registry literal is reassigned per import).
+client/src/lumi-scenes/tests/sceneSafety.test.ts:296:    expect(typeof barrel.resolvePreset).toBe("function");
+client/src/lumi-scenes/index.ts:2: * Phase 19 — Emotional Scene Presets
+client/src/lumi-scenes/index.ts:6: *   - `useScenePreset` (programmatic scene changes)
+client/src/lumi-scenes/index.ts:7: *   - `resolvePreset` / `listPresets` (read-only inspection)
+client/src/lumi-scenes/index.ts:8: *   - `SceneState` / `ScenePreset` types
+client/src/lumi-scenes/index.ts:14: *     useScenePreset,
+client/src/lumi-scenes/index.ts:15: *     resolvePreset,
+client/src/lumi-scenes/index.ts:18: *   const { currentPreset, isTransitioning, setSceneState } = useScenePreset("calm");
+client/src/lumi-scenes/index.ts:27:  resolvePreset,
+client/src/lumi-scenes/index.ts:28:  listPresets,
+client/src/lumi-scenes/index.ts:31:} from "./runtime/ScenePresetEngine";
+client/src/lumi-scenes/index.ts:34:  ScenePreset,
+client/src/lumi-scenes/index.ts:38:} from "./runtime/ScenePresetEngine";
+client/src/lumi-scenes/index.ts:41:export { useScenePreset } from "./runtime/useScenePreset";
+client/src/lumi-scenes/index.ts:42:export type { UseScenePresetReturn } from "./runtime/useScenePreset";
+client/src/lumi-scenes/index.ts:58:  auditPreset,
+client/src/lumi-scenes/index.ts:59:  assertPresetCompliant,
+client/src/lumi-scenes/index.ts:61:} from "./governance/presetSafetyRules";
+client/src/lumi-scenes/index.ts:62:export type { AuditFinding } from "./governance/presetSafetyRules";
+client/src/lumi-rituals/presets/softArrival.ts:8:import type { RitualPreset } from "../runtime/RitualEngine";
+client/src/lumi-rituals/presets/softArrival.ts:9:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/presets/softArrival.ts:11:export const softArrival: RitualPreset = {
+client/src/lumi-rituals/presets/softArrival.ts:43:assertPresetCompliant(softArrival);
+client/src/lumi-rituals/presets/oneBreathReset.ts:2: * Phase 20 — One Breath Reset
+client/src/lumi-rituals/presets/oneBreathReset.ts:8:import type { RitualPreset } from "../runtime/RitualEngine";
+client/src/lumi-rituals/presets/oneBreathReset.ts:9:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/presets/oneBreathReset.ts:11:export const oneBreathReset: RitualPreset = {
+client/src/lumi-rituals/presets/oneBreathReset.ts:12:  internalName: "One Breath Reset",
+client/src/lumi-rituals/presets/oneBreathReset.ts:13:  id: "ritual-one-breath-reset",
+client/src/lumi-rituals/presets/oneBreathReset.ts:14:  ritualKey: "oneBreathReset",
+client/src/lumi-rituals/presets/oneBreathReset.ts:36:assertPresetCompliant(oneBreathReset);
+client/src/lumi-rituals/presets/grounding54321.ts:8:import type { RitualPreset } from "../runtime/RitualEngine";
+client/src/lumi-rituals/presets/grounding54321.ts:9:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/presets/grounding54321.ts:11:export const grounding54321: RitualPreset = {
+client/src/lumi-rituals/presets/grounding54321.ts:51:assertPresetCompliant(grounding54321);
+client/src/lumi-rituals/presets/gentleTransition.ts:8:import type { RitualPreset } from "../runtime/RitualEngine";
+client/src/lumi-rituals/presets/gentleTransition.ts:9:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/presets/gentleTransition.ts:11:export const gentleTransition: RitualPreset = {
+client/src/lumi-rituals/presets/gentleTransition.ts:47:assertPresetCompliant(gentleTransition);
+client/src/lumi-rituals/presets/holdingSpace.ts:9:import type { RitualPreset } from "../runtime/RitualEngine";
+client/src/lumi-rituals/presets/holdingSpace.ts:10:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/presets/holdingSpace.ts:12:export const holdingSpace: RitualPreset = {
+client/src/lumi-rituals/presets/holdingSpace.ts:49:assertPresetCompliant(holdingSpace);
+client/src/lumi-rituals/presets/sleepSoftener.ts:9:import type { RitualPreset } from "../runtime/RitualEngine";
+client/src/lumi-rituals/presets/sleepSoftener.ts:10:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/presets/sleepSoftener.ts:12:export const sleepSoftener: RitualPreset = {
+client/src/lumi-rituals/presets/sleepSoftener.ts:49:assertPresetCompliant(sleepSoftener);
+client/src/lumi-rituals/presets/tinyHope.ts:8:import type { RitualPreset } from "../runtime/RitualEngine";
+client/src/lumi-rituals/presets/tinyHope.ts:9:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/presets/tinyHope.ts:11:export const tinyHope: RitualPreset = {
+client/src/lumi-rituals/presets/tinyHope.ts:42:assertPresetCompliant(tinyHope);
+client/src/lumi-rituals/runtime/ritualRegistry.ts:2: * Phase 20 — Frozen registry of all 7 ritual presets.
+client/src/lumi-rituals/runtime/ritualRegistry.ts:5: *   - deepFreeze every preset + the registry at module load.
+client/src/lumi-rituals/runtime/ritualRegistry.ts:7: *   - State→preset coherence check (each preset's `ritualKey` matches its key).
+client/src/lumi-rituals/runtime/ritualRegistry.ts:10: * strict mode — host code cannot swap an audited preset for an unaudited one.
+client/src/lumi-rituals/runtime/ritualRegistry.ts:13:import { softArrival } from "../presets/softArrival";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:14:import { oneBreathReset } from "../presets/oneBreathReset";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:15:import { grounding54321 } from "../presets/grounding54321";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:16:import { gentleTransition } from "../presets/gentleTransition";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:17:import { holdingSpace } from "../presets/holdingSpace";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:18:import { sleepSoftener } from "../presets/sleepSoftener";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:19:import { tinyHope } from "../presets/tinyHope";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:20:import { RITUAL_KEYS, type RitualKey, type RitualPreset } from "./RitualEngine";
+client/src/lumi-rituals/runtime/ritualRegistry.ts:31:const _registry: Record<RitualKey, RitualPreset> = {
+client/src/lumi-rituals/runtime/ritualRegistry.ts:33:  oneBreathReset: deepFreeze(oneBreathReset),
+client/src/lumi-rituals/runtime/ritualRegistry.ts:41:export const RITUAL_REGISTRY: Readonly<Record<RitualKey, RitualPreset>> =
+client/src/lumi-rituals/runtime/ritualRegistry.ts:47:    `[lumi-rituals] RITUAL_REGISTRY must contain exactly 7 presets, got ` +
+client/src/lumi-rituals/runtime/ritualRegistry.ts:54:    throw new Error(`[lumi-rituals] missing preset for ritualKey "${key}".`);
+client/src/lumi-rituals/runtime/ritualRegistry.ts:58:      `[lumi-rituals] preset key/value mismatch: registry["${key}"].ritualKey ` +
+client/src/lumi-rituals/runtime/ritualRegistry.ts:64:/** Resolve a preset by key. Throws if no preset exists for the key. */
+client/src/lumi-rituals/runtime/ritualRegistry.ts:65:export function resolveRitual(key: RitualKey): RitualPreset {
+client/src/lumi-rituals/runtime/ritualRegistry.ts:71:/** All 7 presets, in spec order. */
+client/src/lumi-rituals/runtime/ritualRegistry.ts:72:export function listRituals(): readonly RitualPreset[] {
+client/src/lumi-rituals/runtime/useRitual.ts:25:  type RitualPreset,
+client/src/lumi-rituals/runtime/useRitual.ts:64:  reset: () => void;
+client/src/lumi-rituals/runtime/useRitual.ts:67:export function useRitual(preset: RitualPreset): UseRitualReturn {
+client/src/lumi-rituals/runtime/useRitual.ts:70:    (s: RitualState, a: RitualAction) => ritualReducer(s, a, preset),
+client/src/lumi-rituals/runtime/useRitual.ts:71:    [preset],
+client/src/lumi-rituals/runtime/useRitual.ts:89:    const step = preset.steps[state.stepIndex];
+client/src/lumi-rituals/runtime/useRitual.ts:98:  }, [state.status, state.stepIndex, reducedMotion, preset, clearTimer]);
+client/src/lumi-rituals/runtime/useRitual.ts:105:      return preset.steps[state.stepIndex] ?? null;
+client/src/lumi-rituals/runtime/useRitual.ts:108:  }, [state, preset]);
+client/src/lumi-rituals/runtime/useRitual.ts:110:  // If reset is dispatched while a timer is in flight, the effect above will
+client/src/lumi-rituals/runtime/useRitual.ts:127:    reset: useCallback(() => dispatch({ type: "reset" }), []),
+client/src/lumi-rituals/runtime/RitualEngine.ts:18:  | "oneBreathReset"
+client/src/lumi-rituals/runtime/RitualEngine.ts:27:  "oneBreathReset",
+client/src/lumi-rituals/runtime/RitualEngine.ts:60:export type RitualPreset = {
+client/src/lumi-rituals/runtime/RitualEngine.ts:88:  /** Index into preset.steps; valid only when status is "active" | "paused". */
+client/src/lumi-rituals/runtime/RitualEngine.ts:108:  | { type: "reset" };
+client/src/lumi-rituals/runtime/RitualEngine.ts:114:  preset: RitualPreset,
+client/src/lumi-rituals/runtime/RitualEngine.ts:134:      if (next >= preset.steps.length) {
+client/src/lumi-rituals/runtime/RitualEngine.ts:142:      if (next >= preset.steps.length) {
+client/src/lumi-rituals/runtime/RitualEngine.ts:155:    case "reset": {
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:26:import type { RitualPreset, RitualStatus } from "../runtime/RitualEngine";
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:28:import { assertPresetCompliant } from "../governance/ritualSafetyRules";
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:31:  preset: RitualPreset;
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:42:  preset,
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:49:  // just at preset-import time. A host could pass an unaudited preset (e.g.
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:51:  // assertPresetCompliant fails closed — render is refused if the preset
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:53:  // Cached by preset reference so the cost is paid once per preset prop.
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:55:    assertPresetCompliant(preset);
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:56:  }, [preset]);
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:58:  const r = useRitual(preset);
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:65:  // transition, and reset lets the host re-fire if the user starts again.
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:139:              {preset.internalName}
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:142:              {preset.invitationText}
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:172:        ? preset.closing
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:194:                onClick={r.reset}
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:21:import type { RitualPreset, RitualStep } from "../runtime/RitualEngine";
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:86: * by `auditPresetTonePresence()` to verify that across the WHOLE preset
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:169:/** Walks the full preset and returns every finding (empty array = compliant). */
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:170:export function auditPreset(preset: RitualPreset): AuditFinding[] {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:174:  if (containsForbiddenPhrase(preset.invitationText)) {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:180:  if (preset.invitationText.length > MAX_FRAME_COPY_CHARS) {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:186:  if (containsForbiddenPhrase(preset.closing)) {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:192:  if (preset.closing.length > MAX_FRAME_COPY_CHARS) {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:201:    preset.steps.length < MIN_STEPS_PER_RITUAL ||
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:202:    preset.steps.length > MAX_STEPS_PER_RITUAL
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:208:        `${MAX_STEPS_PER_RITUAL} steps; got ${preset.steps.length}.`,
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:213:  preset.steps.forEach((s, i) => {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:219:    typeof preset.totalSoftDurationMs === "number"
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:220:      ? preset.totalSoftDurationMs
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:221:      : preset.steps.reduce((sum, s) => sum + (s.durationMs ?? 0), 0);
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:231:  // Tone marker — at least one across the whole preset (defends against
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:235:      preset.invitationText,
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:236:      preset.closing,
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:237:      ...preset.steps.map((s) => `${s.copy} ${s.microCopy ?? ""}`),
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:247:        `Preset must contain at least one REQUIRED_TONE_MARKER ` +
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:253:  // exposes pause + skip + exit). The audit only checks that the preset
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:256:  if ((preset as unknown as { disableSkip?: boolean }).disableSkip === true) {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:259:      message: "Ritual presets MUST NOT disable skip — rituals are optional.",
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:266:/** Throws if any audit findings — used at module-load time by each preset file. */
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:267:export function assertPresetCompliant(p: RitualPreset): void {
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:268:  const findings = auditPreset(p);
+client/src/lumi-rituals/governance/ritualSafetyRules.ts:271:      `[lumi-rituals] preset "${p.internalName}" failed audit: ` +
+client/src/lumi-rituals/tests/ritualSafety.test.ts:8: *   - Required tone markers across each preset
+client/src/lumi-rituals/tests/ritualSafety.test.ts:9: *   - auditPreset rejects bad presets, accepts shipped presets
+client/src/lumi-rituals/tests/ritualSafety.test.ts:11: *   - Reducer never mutates terminal status into an active one without reset
+client/src/lumi-rituals/tests/ritualSafety.test.ts:32:  auditPreset,
+client/src/lumi-rituals/tests/ritualSafety.test.ts:41:  type RitualPreset,
+client/src/lumi-rituals/tests/ritualSafety.test.ts:50:  oneBreathReset: "One Breath Reset",
+client/src/lumi-rituals/tests/ritualSafety.test.ts:60:  it("contains exactly 7 presets", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:74:  it("each preset's ritualKey matches its registry key", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:80:  it("resolveRitual returns frozen preset", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:108:  it("every shipped preset stays within ceilings", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:168:  it("every preset surfaces at least one tone marker", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:170:      const findings = auditPreset(p).filter((f) => f.rule === "missing-tone-marker");
+client/src/lumi-rituals/tests/ritualSafety.test.ts:176:// ─── auditPreset behaviour ──────────────────────────────────────────────────
+client/src/lumi-rituals/tests/ritualSafety.test.ts:177:describe("auditPreset", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:178:  it("returns [] for every shipped preset", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:180:      expect(auditPreset(p)).toEqual([]);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:184:    const bad: RitualPreset = {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:188:    const findings = auditPreset(bad);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:192:    const base = resolveRitual("oneBreathReset");
+client/src/lumi-rituals/tests/ritualSafety.test.ts:193:    const bad: RitualPreset = {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:199:    const findings = auditPreset(bad);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:204:    const tooMany: RitualPreset = {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:212:    const findings = auditPreset(tooMany);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:224:    const long: RitualPreset = {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:228:    const findings = auditPreset(long);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:232:    const base = resolveRitual("oneBreathReset");
+client/src/lumi-rituals/tests/ritualSafety.test.ts:233:    const flat: RitualPreset = {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:239:    const findings = auditPreset(flat);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:244:    const bad = { ...base, disableSkip: true } as unknown as RitualPreset;
+client/src/lumi-rituals/tests/ritualSafety.test.ts:245:    const findings = auditPreset(bad);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:252:  const preset = resolveRitual("oneBreathReset");
+client/src/lumi-rituals/tests/ritualSafety.test.ts:254:    ritualReducer(s, a, preset);
+client/src/lumi-rituals/tests/ritualSafety.test.ts:273:    // oneBreathReset has 2 steps
+client/src/lumi-rituals/tests/ritualSafety.test.ts:285:  it("exit transitions to exited; reset returns to idle", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:290:    s = dispatch(s, { type: "reset" });
+client/src/lumi-rituals/tests/ritualSafety.test.ts:296:    for (let i = 0; i < preset.steps.length; i++) {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:301:  it("terminal status ignores active actions until reset", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:309:    // reset always works
+client/src/lumi-rituals/tests/ritualSafety.test.ts:310:    const afterReset = dispatch(s, { type: "reset" });
+client/src/lumi-rituals/tests/ritualSafety.test.ts:311:    expect(afterReset.status).toBe("idle");
+client/src/lumi-rituals/tests/ritualSafety.test.ts:318://   2. Governance bypass via direct unaudited preset injection at the sink.
+client/src/lumi-rituals/tests/ritualSafety.test.ts:353:    // user completes, then resets and exits → both should fire (separated by reset/idle)
+client/src/lumi-rituals/tests/ritualSafety.test.ts:366:  // SSR render is enough to invoke the useMemo(assertPresetCompliant) gate
+client/src/lumi-rituals/tests/ritualSafety.test.ts:367:  // because useMemo runs during render. If the preset is non-compliant the
+client/src/lumi-rituals/tests/ritualSafety.test.ts:370:  it("renders cleanly with an audited shipped preset", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:373:        preset: resolveRitual("softArrival"),
+client/src/lumi-rituals/tests/ritualSafety.test.ts:383:  it("refuses to render an unaudited preset that contains a forbidden phrase", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:384:    const bad: RitualPreset = {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:385:      ...resolveRitual("oneBreathReset"),
+client/src/lumi-rituals/tests/ritualSafety.test.ts:390:        React.createElement(GuidedPresenceRitual, { preset: bad }),
+client/src/lumi-rituals/tests/ritualSafety.test.ts:395:  it("refuses to render a preset with a step over the duration ceiling", () => {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:396:    const base = resolveRitual("oneBreathReset");
+client/src/lumi-rituals/tests/ritualSafety.test.ts:397:    const bad: RitualPreset = {
+client/src/lumi-rituals/tests/ritualSafety.test.ts:406:        React.createElement(GuidedPresenceRitual, { preset: bad }),
+client/src/lumi-rituals/tests/ritualSafety.test.ts:415:        preset: resolveRitual("holdingSpace"),
+client/src/lumi-rituals/tests/ritualSafety.test.ts:447:      "auditPreset",
+client/src/lumi-rituals/tests/ritualSafety.test.ts:449:      "assertPresetCompliant",
+client/src/lumi-rituals/index.ts:13: *     auditPreset,
+client/src/lumi-rituals/index.ts:19: *   - Direct preset objects (use `resolveRitual(key)` so frozen registry path is honored)
+client/src/lumi-rituals/index.ts:39:  RitualPreset,
+client/src/lumi-rituals/index.ts:63:  auditPreset,
+client/src/lumi-rituals/index.ts:65:  assertPresetCompliant,
+client/src/lumi-circadian/runtime/circadianStateMachine.ts:14: *    pending nudges and resets daily counters.
+client/src/lumi-circadian/runtime/circadianStateMachine.ts:74:  /** Gentle copy (already audited at preset-import time). */
+client/src/lumi-circadian/runtime/circadianStateMachine.ts:230:      // Day rollover — reset counter (preserve lastNudgeAt for spacing
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:29:import { resolveScene } from "../presets/circadianScenes";
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:30:import { assertScenePresetCompliant } from "../governance/schedulerSafetyRules";
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:148:      // entry can't slip an unaudited preset through to the user. Fails
+client/src/lumi-circadian/runtime/useCircadianScheduler.ts:151:        assertScenePresetCompliant(scene);
+client/src/lumi-circadian/presets/circadianScenes.ts:2: * Phase 22 — Circadian scene presets.
+client/src/lumi-circadian/presets/circadianScenes.ts:7: * presets are inert until the user opts in.
+client/src/lumi-circadian/presets/circadianScenes.ts:9: * Each preset is audited at module load via `assertScenePresetCompliant`.
+client/src/lumi-circadian/presets/circadianScenes.ts:10: * Non-compliant presets refuse to import (fail closed).
+client/src/lumi-circadian/presets/circadianScenes.ts:14:  assertScenePresetCompliant,
+client/src/lumi-circadian/presets/circadianScenes.ts:15:  type CircadianScenePreset,
+client/src/lumi-circadian/presets/circadianScenes.ts:19:const morning: CircadianScenePreset = Object.freeze({
+client/src/lumi-circadian/presets/circadianScenes.ts:26:const midday: CircadianScenePreset = Object.freeze({
+client/src/lumi-circadian/presets/circadianScenes.ts:33:const afternoon: CircadianScenePreset = Object.freeze({
+client/src/lumi-circadian/presets/circadianScenes.ts:40:const evening: CircadianScenePreset = Object.freeze({
+client/src/lumi-circadian/presets/circadianScenes.ts:47:// Sleep phase preset exists for completeness, but is *never* dispatched —
+client/src/lumi-circadian/presets/circadianScenes.ts:50:const sleep: CircadianScenePreset = Object.freeze({
+client/src/lumi-circadian/presets/circadianScenes.ts:54:  microCopy: "This preset is never sent — the scheduler stays gently silent at night.",
+client/src/lumi-circadian/presets/circadianScenes.ts:57:assertScenePresetCompliant(morning);
+client/src/lumi-circadian/presets/circadianScenes.ts:58:assertScenePresetCompliant(midday);
+client/src/lumi-circadian/presets/circadianScenes.ts:59:assertScenePresetCompliant(afternoon);
+client/src/lumi-circadian/presets/circadianScenes.ts:60:assertScenePresetCompliant(evening);
+client/src/lumi-circadian/presets/circadianScenes.ts:61:assertScenePresetCompliant(sleep);
+client/src/lumi-circadian/presets/circadianScenes.ts:63:const ALL: ReadonlyArray<CircadianScenePreset> = Object.freeze([
+client/src/lumi-circadian/presets/circadianScenes.ts:80:  Record<CircadianPhase, CircadianScenePreset>
+client/src/lumi-circadian/presets/circadianScenes.ts:89:// Floor guard: every phase must resolve to a preset whose `phase` matches.
+client/src/lumi-circadian/presets/circadianScenes.ts:90:for (const [key, preset] of Object.entries(CIRCADIAN_SCENES)) {
+client/src/lumi-circadian/presets/circadianScenes.ts:91:  if (preset.phase !== key) {
+client/src/lumi-circadian/presets/circadianScenes.ts:94:        `key="${key}" preset.phase="${preset.phase}"`,
+client/src/lumi-circadian/presets/circadianScenes.ts:99:/** Lookup helper — returns the audited, frozen preset for a phase. */
+client/src/lumi-circadian/presets/circadianScenes.ts:100:export function resolveScene(phase: CircadianPhase): CircadianScenePreset {
+client/src/lumi-circadian/presets/circadianScenes.ts:105:export function listScenes(): ReadonlyArray<CircadianScenePreset> {
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:27: * phrases is rejected by `auditScenePreset()`. Spec-locked at 15.
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:68:// ─── Required tone markers (any one must surface per preset) ───────────────
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:84:// ─── Scene preset shape ────────────────────────────────────────────────────
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:85:export type CircadianScenePreset = Readonly<{
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:119:export function auditScenePreset(
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:120:  p: CircadianScenePreset,
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:166:/** Throws if any audit findings — used at preset module-load time. */
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:167:export function assertScenePresetCompliant(p: CircadianScenePreset): void {
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:168:  const findings = auditScenePreset(p);
+client/src/lumi-circadian/governance/schedulerSafetyRules.ts:171:      `[lumi-circadian] preset "${p.internalName}" failed audit: ` +
+client/src/lumi-circadian/tests/circadianSafety.test.ts:26:} from "../presets/circadianScenes";
+client/src/lumi-circadian/tests/circadianSafety.test.ts:32:  auditScenePreset,
+client/src/lumi-circadian/tests/circadianSafety.test.ts:34:  assertScenePresetCompliant,
+client/src/lumi-circadian/tests/circadianSafety.test.ts:35:  type CircadianScenePreset,
+client/src/lumi-circadian/tests/circadianSafety.test.ts:234:  it("observePhase resets the daily counter when the local day changes", () => {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:253:// ─── Scene presets ─────────────────────────────────────────────────────────
+client/src/lumi-circadian/tests/circadianSafety.test.ts:254:describe("Circadian scene presets", () => {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:265:  it("every preset's phase matches its registry key", () => {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:266:    for (const [key, preset] of Object.entries(CIRCADIAN_SCENES)) {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:267:      expect(preset.phase).toBe(key);
+client/src/lumi-circadian/tests/circadianSafety.test.ts:270:  it("every shipped preset passes auditScenePreset()", () => {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:271:    for (const preset of listScenes()) {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:272:      expect(auditScenePreset(preset)).toEqual([]);
+client/src/lumi-circadian/tests/circadianSafety.test.ts:277:    for (const preset of Object.values(CIRCADIAN_SCENES)) {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:278:      expect(Object.isFrozen(preset)).toBe(true);
+client/src/lumi-circadian/tests/circadianSafety.test.ts:310:  it("auditScenePreset rejects forbidden + oversized + missing-tone", () => {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:311:    const bad: CircadianScenePreset = {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:316:    const findings = auditScenePreset(bad);
+client/src/lumi-circadian/tests/circadianSafety.test.ts:320:  it("auditScenePreset rejects when no required tone marker surfaces", () => {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:321:    const bare: CircadianScenePreset = {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:328:      auditScenePreset(bare).some((f) => f.rule === "missing-tone-marker"),
+client/src/lumi-circadian/tests/circadianSafety.test.ts:368:  it("QuietNudge renders cleanly with audited preset copy + /crisis anchor", () => {
+client/src/lumi-circadian/tests/circadianSafety.test.ts:438:      // Presets
+client/src/lumi-circadian/tests/circadianSafety.test.ts:448:      "auditScenePreset",
+client/src/lumi-circadian/tests/circadianSafety.test.ts:449:      "assertScenePresetCompliant",
+client/src/lumi-circadian/index.ts:45:// Presets
+client/src/lumi-circadian/index.ts:50:} from "./presets/circadianScenes";
+client/src/lumi-circadian/index.ts:59:  auditScenePreset,
+client/src/lumi-circadian/index.ts:60:  assertScenePresetCompliant,
+client/src/lumi-circadian/index.ts:63:  CircadianScenePreset,
+client/src/lumi-boundaries/runtime/useBoundaryState.ts:3: * SSR-safe React hook exposing boundaries + check + reset.
+client/src/lumi-boundaries/runtime/useBoundaryState.ts:19:  reset(): void;
+client/src/lumi-boundaries/runtime/useBoundaryState.ts:33:  const reset = useCallback(() => {
+client/src/lumi-boundaries/runtime/useBoundaryState.ts:40:  return { boundaries, violations, check, reset };
+client/src/lumi-integration/tests/crossModule.test.ts:12: *      valid scene preset; every ritual key resolves to a valid scene +
+client/src/lumi-integration/tests/crossModule.test.ts:16: *      copy contains a forbidden boundary phrase; no scene preset fails
+client/src/lumi-integration/tests/crossModule.test.ts:25: *      to a valid scene preset and avatar emotional state.
+client/src/lumi-integration/tests/crossModule.test.ts:40:  resolvePreset,
+client/src/lumi-integration/tests/crossModule.test.ts:41:  listPresets,
+client/src/lumi-integration/tests/crossModule.test.ts:43:} from "../../lumi-scenes/runtime/ScenePresetEngine";
+client/src/lumi-integration/tests/crossModule.test.ts:44:import { auditPreset as auditScenePreset } from "../../lumi-scenes/governance/presetSafetyRules";
+client/src/lumi-integration/tests/crossModule.test.ts:56:  auditPreset as auditRitualPreset,
+client/src/lumi-integration/tests/crossModule.test.ts:102:  oneBreathReset: "grounding",
+client/src/lumi-integration/tests/crossModule.test.ts:112:  oneBreathReset: "grounding",
+client/src/lumi-integration/tests/crossModule.test.ts:199:    for (const preset of listRituals()) {
+client/src/lumi-integration/tests/crossModule.test.ts:200:      // auditRitualPreset throws on violation
+client/src/lumi-integration/tests/crossModule.test.ts:201:      expect(() => auditRitualPreset(preset)).not.toThrow();
+client/src/lumi-integration/tests/crossModule.test.ts:205:  it("every shipped scene preset passes its own audit", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:206:    for (const preset of listPresets()) {
+client/src/lumi-integration/tests/crossModule.test.ts:207:      expect(() => auditScenePreset(preset)).not.toThrow();
+client/src/lumi-integration/tests/crossModule.test.ts:212:    for (const preset of listRituals()) {
+client/src/lumi-integration/tests/crossModule.test.ts:213:      expect(voiceContainsForbidden(preset.invitationText)).toBe(false);
+client/src/lumi-integration/tests/crossModule.test.ts:214:      expect(voiceContainsForbidden(preset.closing)).toBe(false);
+client/src/lumi-integration/tests/crossModule.test.ts:219:    for (const preset of listRituals()) {
+client/src/lumi-integration/tests/crossModule.test.ts:220:      for (const step of preset.steps) {
+client/src/lumi-integration/tests/crossModule.test.ts:230:    for (const preset of listRituals()) {
+client/src/lumi-integration/tests/crossModule.test.ts:231:      for (const step of preset.steps) {
+client/src/lumi-integration/tests/crossModule.test.ts:260:    for (const preset of listRituals()) {
+client/src/lumi-integration/tests/crossModule.test.ts:261:      const lines: string[] = [preset.invitationText, preset.closing];
+client/src/lumi-integration/tests/crossModule.test.ts:262:      for (const step of preset.steps) {
+client/src/lumi-integration/tests/crossModule.test.ts:269:          `ritual "${preset.ritualKey}" contains a forbidden boundary phrase: "${line}"`,
+client/src/lumi-integration/tests/crossModule.test.ts:346:  const preset = resolveRitual(key);
+client/src/lumi-integration/tests/crossModule.test.ts:347:  let state: RitualState = ritualReducer(INITIAL_STATE, { type: "start" }, preset);
+client/src/lumi-integration/tests/crossModule.test.ts:349:  const maxAdvances = preset.steps.length + 4;
+client/src/lumi-integration/tests/crossModule.test.ts:352:    state = ritualReducer(state, { type: "advance" }, preset);
+client/src/lumi-integration/tests/crossModule.test.ts:366:  it("terminal ritual maps to a resolvable scene preset for every key", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:371:      const preset = resolvePreset(sceneKey);
+client/src/lumi-integration/tests/crossModule.test.ts:372:      expect(preset).toBeDefined();
+client/src/lumi-integration/tests/crossModule.test.ts:373:      expect(preset.state).toBe(sceneKey);
+client/src/lumi-integration/tests/crossModule.test.ts:374:      expect(() => auditScenePreset(preset)).not.toThrow();
+client/src/lumi-integration/tests/crossModule.test.ts:384:      const preset = resolvePreset(scene);
+client/src/lumi-integration/tests/crossModule.test.ts:385:      expect(() => auditScenePreset(preset)).not.toThrow();
+client/src/lumi-registry/components/OfficialLumi.tsx:117:  // Reset 404 fallback when src changes so the new asset gets a fresh load attempt.
+client/src/App.jsx:54:const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
+client/src/App.jsx:466:              <Route path="/reset-password" component={ResetPassword} />
+server/routes/account.mjs:2:// Account management: password reset, account deletion, data export
+server/routes/account.mjs:8:import { users, passwordResetTokens, journals, moods, aiMessages, userPreferences } from "../db/schema.mjs";
+server/routes/account.mjs:97:const passwordResetRequestSchema = z.object({
+server/routes/account.mjs:101:const passwordResetConfirmSchema = z.object({
+server/routes/account.mjs:102:  token: z.string().min(1, "Reset token required"),
+server/routes/account.mjs:110:router.post("/password-reset/request", authRateLimit, async (req, res) => {
+server/routes/account.mjs:112:    const parsed = passwordResetRequestSchema.safeParse(req.body);
+server/routes/account.mjs:120:      action: AuditActions.PASSWORD_RESET_REQUEST,
+server/routes/account.mjs:132:      return success(res, null, "If an account exists with this email, a reset link will be sent.");
+server/routes/account.mjs:141:    await db.insert(passwordResetTokens).values({
+server/routes/account.mjs:149:      logger.info("Password reset token generated (dev only)", { email, token });
+server/routes/account.mjs:152:    return success(res, null, "If an account exists with this email, a reset link will be sent.");
+server/routes/account.mjs:154:    logger.error("Password reset request failed", { error: error.message, requestId: req.requestId });
+server/routes/account.mjs:159:router.post("/password-reset/confirm", authRateLimit, async (req, res) => {
+server/routes/account.mjs:161:    const parsed = passwordResetConfirmSchema.safeParse(req.body);
+server/routes/account.mjs:171:      .from(passwordResetTokens)
+server/routes/account.mjs:174:          eq(passwordResetTokens.tokenHash, tokenHash),
+server/routes/account.mjs:175:          gt(passwordResetTokens.expiresAt, new Date())
+server/routes/account.mjs:181:      return badRequest(res, "Invalid or expired reset token.");
+server/routes/account.mjs:184:    const resetToken = tokenRows[0];
+server/routes/account.mjs:191:      .where(eq(users.id, resetToken.userId));
+server/routes/account.mjs:194:      .update(passwordResetTokens)
+server/routes/account.mjs:196:      .where(eq(passwordResetTokens.id, resetToken.id));
+server/routes/account.mjs:199:      userId: resetToken.userId,
+server/routes/account.mjs:200:      action: AuditActions.PASSWORD_RESET_COMPLETE,
+server/routes/account.mjs:204:    return success(res, null, "Password has been reset successfully.");
+server/routes/account.mjs:206:    logger.error("Password reset confirm failed", { error: error.message, requestId: req.requestId });
+server/routes/account.mjs:248:    await db.delete(passwordResetTokens).where(eq(passwordResetTokens.userId, userId));
+server/routes/admin-social-studio.mjs:277:const PRESET_TEMPLATES = [
+server/routes/admin-social-studio.mjs:362:    const toInsert = PRESET_TEMPLATES.filter(t => !existingNames.has(t.name));
+server/routes/admin-social-studio.mjs:365:      return success(res, { message: "All preset templates already exist", added: 0 });
+server/routes/admin-social-studio.mjs:370:    return success(res, { message: `Added ${toInsert.length} preset templates`, added: toInsert.length });
+server/routes/admin-social-studio.mjs:377:router.get("/templates/presets", requireAuth, requireAdmin, async (req, res) => {
+server/routes/admin-social-studio.mjs:378:  return success(res, PRESET_TEMPLATES);
+server/routes/healing-intelligence.mjs:97:    id: "nervous-system-reset",
+server/routes/healing-intelligence.mjs:98:    name: "Nervous System Reset",
+server/routes/healing-intelligence.mjs:189:  { id: "anxiety-relief", name: "Anxiety Relief Journey", modalities: ["nervous-system-reset", "somatic-release", "cognitive-reframe"], duration: "7 days" },
+server/routes/mind-body-integration.mjs:119:        benefits: ["Trauma release", "Nervous system reset", "Deep relaxation"],
+server/routes/social-enterprise.mjs:557:      { type: "micro-tool", hook: `Try this 60-second reset inspired by "${blogPost.title}":`, cta: "Save this. Try it inside the app." },
+server/routes/trauma-healing-protocols.mjs:35:          whenToUse: "Quick reset, meetings, public spaces"
+server/routes/trauma-healing-protocols.mjs:39:          name: "Cold Water Reset",
+server/routes/content.mjs:49:      tiktok: `Hook: If your nervous system is loud, try this 10-second reset. Topic: ${topic}`,
+server/routes/content.mjs:53:      push: `Take 30 seconds for a reset. (${topic})`,
+server/routes/health.mjs:248:        results.actions.push("Static asset cache headers reset");
+server/ai/tools.mjs:96:        overload_reset: {
+server/ai/tools.mjs:97:                id: "overload_reset",
+server/ai/tools.mjs:99:                title: "Overload Reset",
+server/ai/toolSelector.mjs:36:                return TOOLS.overload_reset;
+server/ai/toolExecutor.mjs:19:        overload_reset:
+server/ai/v2/agentState.mjs:10://     only — restart resets to IDLE (matches HOT memory contract).
+server/ai/v2/agentState.mjs:162:export function resetAgentState(agentId) {
+server/lib/rateLimitLogger.mjs:92:      const reset = parseInt(res.getHeader('X-RateLimit-Reset')) || 0;
+server/lib/rateLimitLogger.mjs:103:        resetTime: reset,
+server/lib/healScheduler.mjs:10://   GOOD     — ALREADY_HEALTHY, REPAIRED_TO_HEALTHY                  (resets streak)
+server/lib/healScheduler.mjs:198:/** Clear the pausedReason and reset failure counter so the loop resumes. */
+server/lib/healAI.mjs:66:  /\bgit\s+(?:reset\s+--hard|push\s+--force|push\s+-f|filter-branch)\b/i,
+server/lib/promptEngine.mjs:82:    if (/(sleep|insomnia|tired|rest|can.t sleep)/i.test(t))              return "h06_sleep_reset";
+server/middleware/rateLimit.mjs:165: * Optional: sensitive operations (password reset/account changes)
+server/scripts/setAdminPassword.mjs:3: * Admin Password Reset Script
+server/services/auditLog.mjs:42:  PASSWORD_RESET_REQUEST: "auth.password_reset.request",
+server/services/auditLog.mjs:43:  PASSWORD_RESET_COMPLETE: "auth.password_reset.complete",
+server/services/email.mjs:7: * - Password reset
+server/tests/auth.test.mjs:9:  mockDb.insert.mockReset();
+server/tests/auth.test.mjs:10:  mockDb.select.mockReset();
+server/tests/auth.test.mjs:11:  mockDb.update.mockReset();
+server/tests/auth.test.mjs:12:  mockDb.deleteOp.mockReset();
+server/tests/test-mocks.mjs:8:export function resetMocks() {
+server/tests/test-mocks.mjs:9:  insert.mockReset();
+server/tests/test-mocks.mjs:10:  select.mockReset();
+server/tests/test-mocks.mjs:11:  update.mockReset();
+server/tests/test-mocks.mjs:12:  deleteOp.mockReset();
+server/utils/auditLogger.mjs:14:  PASSWORD_RESET_REQUEST: "password_reset_request",
+server/utils/auditLogger.mjs:15:  PASSWORD_RESET_COMPLETE: "password_reset_complete",
+server/utils/logger.mjs:16:const reset = "\x1b[0m";
+server/utils/logger.mjs:32:    logFn(`${color}[${level.toUpperCase()}]${reset} ${timestamp} - ${message}`, metaStr);
+server/utils/metrics.mjs:28:function reset() {
+server/utils/metrics.mjs:34:export { increment, getSummary, reset };
+server/utils/aiClient.mjs:144:  if (error.code === "ECONNRESET" || error.code === "ETIMEDOUT") {
