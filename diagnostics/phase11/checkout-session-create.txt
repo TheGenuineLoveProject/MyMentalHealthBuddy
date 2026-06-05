@@ -1,0 +1,2 @@
+server/routes/billing.mjs:165:    const session = await stripe.checkout.sessions.create({
+server/utils/stripe.mjs:34:  const session = await client.checkout.sessions.create({

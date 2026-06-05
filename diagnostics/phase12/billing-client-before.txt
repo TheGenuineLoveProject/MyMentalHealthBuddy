@@ -1,64 +1,87 @@
 /**
- * client/src/services/billingClient.js
- * Canonical billing client for checkout + portal
+ * Billing client
+ * Client-safe only. Never import or expose STRIPE_SECRET_KEY here.
  */
 
-const PRICE_IDS = {
-  monthly: 'price_1San16RtwDw9mKhak1ibDurJ',
-  annual: 'price_1San2IRtwDw9mKhaH1bCV0Vv',
+const JSON_HEADERS = {
+  "Content-Type": "application/json",
 };
 
-export async function createCheckoutSession(priceId) {
+async function parseJsonResponse(response) {
+  const text = await response.text();
+  let payload = null;
+
   try {
-    const res = await fetch('/api/billing/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ priceId }),
-    });
-
-    if (res.status === 401) {
-      const returnTo = encodeURIComponent(window.location.pathname);
-      window.location.href = `/login?returnTo=${returnTo}`;
-      return null;
-    }
-
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-      return data;
-    }
-
-    throw new Error(data.error?.message || data.message || 'Unable to start checkout');
-  } catch (err) {
-    throw err;
+    payload = text ? JSON.parse(text) : null;
+  } catch {
+    payload = { message: text };
   }
+
+  if (!response.ok) {
+    const message =
+      payload?.message ||
+      payload?.error ||
+      `Billing request failed with status ${response.status}`;
+    throw new Error(message);
+  }
+
+  return payload;
 }
 
-export async function openBillingPortal() {
-  try {
-    const res = await fetch('/api/billing/portal', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-    });
+export async function createCheckoutSession(priceIdOrOptions) {
+  const body =
+    typeof priceIdOrOptions === "string"
+      ? { priceId: priceIdOrOptions }
+      : priceIdOrOptions || {};
 
-    if (res.status === 401) {
-      const returnTo = encodeURIComponent(window.location.pathname);
-      window.location.href = `/login?returnTo=${returnTo}`;
-      return null;
-    }
+  const response = await fetch("/api/billing/checkout", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    credentials: "include",
+    body: JSON.stringify(body),
+  });
 
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-      return data;
-    }
-
-    throw new Error(data.error?.message || data.message || 'Unable to open billing portal');
-  } catch (err) {
-    throw err;
-  }
+  const payload = await parseJsonResponse(response);
+  return payload?.data || payload;
 }
 
-export { PRICE_IDS };
+export async function createBillingPortalSession() {
+  const response = await fetch("/api/billing/portal", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    credentials: "include",
+  });
+
+  const payload = await parseJsonResponse(response);
+  return payload?.data || payload;
+}
+
+export async function getSubscriptionStatus() {
+  const response = await fetch("/api/billing/subscription-status", {
+    method: "GET",
+    credentials: "include",
+  });
+
+  const payload = await parseJsonResponse(response);
+  return payload?.data || payload;
+}
+
+export async function getCurrentPlan() {
+  const response = await fetch("/api/billing/current-plan", {
+    method: "GET",
+    credentials: "include",
+  });
+
+  const payload = await parseJsonResponse(response);
+  return payload?.data || payload;
+}
+
+export async function getBillingPlans() {
+  const response = await fetch("/api/billing/plans", {
+    method: "GET",
+    credentials: "include",
+  });
+
+  const payload = await parseJsonResponse(response);
+  return payload?.data || payload;
+}

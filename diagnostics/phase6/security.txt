@@ -1,0 +1,17 @@
+client/src/components/AccessibilityAudit.jsx
+client/src/components/AgeConsentGate.jsx
+client/src/components/ConsentBanner.jsx
+client/src/components/wellness/ConsentRibbon.tsx
+client/src/components/wellness/ConsentStrip.tsx
+client/src/legal/PrivacyHighlights.tsx
+client/src/lib/security.ts
+client/src/lumi-audit/governance/auditGovernanceRules.ts
+client/src/lumi-audit/index.ts
+client/src/lumi-audit/logger/auditLogger.ts
+client/src/lumi-memory/safety/memoryConsentRules.ts
+client/src/lumi-tracker/governance/trackerPrivacyRules.ts
+client/src/pages/account/Security.jsx
+client/src/pages/admin/AuditLogExplorer.jsx
+client/src/pages/admin/SecurityDashboard.jsx
+client/src/pages/Privacy.jsx
+client/src/pages/Privacy.tsx
