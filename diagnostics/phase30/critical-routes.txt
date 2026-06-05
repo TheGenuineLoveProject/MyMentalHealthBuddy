@@ -1,0 +1,15 @@
+/
+/pricing
+/premium
+/account/billing
+/account/subscription
+/login
+/register
+/safety
+/privacy
+/terms
+/admin
+/admin/billing
+/admin/revenue
+/admin/security
+/admin/health
