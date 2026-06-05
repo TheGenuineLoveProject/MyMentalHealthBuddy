@@ -1,3 +1,4 @@
+import "./styles/phase58-visual-polish.css";
 import { Switch, Route, Redirect } from "wouter";
 import { Suspense, lazy } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
