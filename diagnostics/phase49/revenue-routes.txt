@@ -1,0 +1,4 @@
+/pricing -> 200
+/premium -> 200
+/account/billing -> 200
+/account/subscription -> 200
