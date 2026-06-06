@@ -1,0 +1,19 @@
+client/src/components/lumi/LumiBrandAvatar.tsx:81:    src: `${assetBase}/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp`,
+client/src/components/lumi/LumiBrandAvatar.tsx:82:    fallback: `${assetBase}/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.png`,
+client/src/components/lumi/LumiBrandAvatar.tsx:145:      data-official-lumi="segmented-brand-rig"
+client/src/components/lumi/LumiBrandAvatar.css:80:  animation: lumi-arm-left-wave 4.4s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:92:  animation: lumi-leg-left-sway 5.2s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:110:  animation: lumi-eye-blink 5.1s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:116:  animation: lumi-mouth-talk 5.8s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:184:@keyframes lumi-arm-left-wave {
+client/src/components/lumi/LumiBrandAvatar.css:196:@keyframes lumi-leg-left-sway {
+client/src/components/lumi/LumiBrandAvatar.css:211:@keyframes lumi-eye-blink {
+client/src/components/lumi/LumiBrandAvatar.css:216:@keyframes lumi-mouth-talk {
+scripts/visual-runtime-gate.mjs:29:  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp",
+scripts/visual-runtime-gate.mjs:42:  "data-official-lumi",
+scripts/visual-runtime-gate.mjs:43:  "segmented-brand-rig",
+scripts/visual-runtime-gate.mjs:44:  "MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp",
+scripts/visual-runtime-gate.mjs:57:  "lumi-eye-blink",
+scripts/visual-runtime-gate.mjs:58:  "lumi-mouth-talk",
+scripts/visual-runtime-gate.mjs:59:  "lumi-arm-left-wave",
+scripts/visual-runtime-gate.mjs:61:  "lumi-leg-left-sway",

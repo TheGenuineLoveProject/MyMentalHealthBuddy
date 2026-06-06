@@ -136,3 +136,10 @@ Thumbs.db
 .vscode/
 yarn-debug.log*
 yarn-error.log*
+diagnostics/visual-submit-check/button-contrast-risk-search.txt
+diagnostics/visual-submit-check/lumi-motion-search.txt
+*.tar.gz
+*.tgz
+*.sqlite
+*.sqlite3
+*.db

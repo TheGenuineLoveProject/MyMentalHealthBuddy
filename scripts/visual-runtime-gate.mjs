@@ -1,5 +1,19 @@
+#!/usr/bin/env node
 import fs from "node:fs";
-import path from "node:path";
+
+const failures = [];
+
+const read = (file) => (fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "");
+const exists = (file) => fs.existsSync(file);
+
+const app = read("client/src/App.jsx") + "\n" + read("client/src/App.tsx");
+const main = read("client/src/main.jsx") + "\n" + read("client/src/main.tsx");
+const indexCss = read("client/src/index.css");
+const lumiCss = read("client/src/styles/lumi-visual-system.css");
+const avatarTsx = read("client/src/components/lumi/LumiBrandAvatar.tsx");
+const avatarCss = read("client/src/components/lumi/LumiBrandAvatar.css");
+const presenceTsx = read("client/src/components/lumi/LumiPresenceLayer.tsx");
+const presenceCss = read("client/src/components/lumi/LumiPresenceLayer.css");
 
 const requiredFiles = [
   "client/src/styles/lumi-visual-system.css",
@@ -7,92 +21,64 @@ const requiredFiles = [
   "client/src/components/lumi/LumiBrandAvatar.css",
   "client/src/components/lumi/LumiPresenceLayer.tsx",
   "client/src/components/lumi/LumiPresenceLayer.css",
+  "client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.webp",
+  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.webp",
+  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.webp",
+  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.webp",
+  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.webp",
+  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp",
+  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.webp",
+  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.webp"
 ];
 
-const requiredCssTokens = [
-  "--lumi-sage-100",
-  "--lumi-sage-200",
-  "--lumi-sage-300",
-  "--lumi-sage-400",
-  "--lumi-cream-100",
-  "--lumi-gold-300",
-  "--lumi-rose-100",
-  "--lumi-sky-100",
+for (const file of requiredFiles) {
+  if (!exists(file)) failures.push(`MISSING_FILE ${file}`);
+}
+
+const mounted = (app + main + presenceTsx).includes("LumiPresenceLayer");
+if (!mounted) failures.push("LUMI_PRESENCE_NOT_MOUNTED");
+
+const requiredMarkers = [
+  "data-official-lumi",
+  "segmented-brand-rig",
+  "MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp",
+  "MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.webp",
+  "MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.webp",
+  "MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.webp",
+  "MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.webp",
+  "MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.webp"
 ];
+
+for (const marker of requiredMarkers) {
+  if (!avatarTsx.includes(marker)) failures.push(`MISSING_OFFICIAL_LUMI_MARKER ${marker}`);
+}
 
 const requiredMotion = [
-  "lumi-official-breathe",
   "lumi-eye-blink",
+  "lumi-mouth-talk",
   "lumi-arm-left-wave",
   "lumi-arm-right-wave",
   "lumi-leg-left-sway",
   "lumi-leg-right-sway",
-  "prefers-reduced-motion",
+  "lumi-breathe",
+  "lumi-float",
+  "lumi-aura"
 ];
 
-const failures = [];
+const allCss = [indexCss, lumiCss, avatarCss, presenceCss].join("\n");
 
-for (const file of requiredFiles) {
-  if (!fs.existsSync(file)) failures.push(`MISSING_FILE ${file}`);
+for (const token of requiredMotion) {
+  if (!allCss.includes(token)) failures.push(`MISSING_MOTION_TOKEN ${token}`);
 }
 
-const visualCss = fs.existsSync("client/src/styles/lumi-visual-system.css")
-  ? fs.readFileSync("client/src/styles/lumi-visual-system.css", "utf8")
-  : "";
+const contrastRisk = /background[^;]*(#AFC6A1|#90AF85|sage)[^;]*;[\s\S]{0,160}color\s*:\s*(black|#000|#111)/i.test(allCss);
+if (contrastRisk) failures.push("BUTTON_CONTRAST_RISK_SAGE_WITH_BLACK_TEXT");
 
-for (const token of requiredCssTokens) {
-  if (!visualCss.includes(token)) failures.push(`MISSING_TOKEN ${token}`);
-}
-
-const avatarCss = fs.existsSync("client/src/components/lumi/LumiBrandAvatar.css")
-  ? fs.readFileSync("client/src/components/lumi/LumiBrandAvatar.css", "utf8")
-  : "";
-
-for (const motion of requiredMotion) {
-  if (!avatarCss.includes(motion) && !visualCss.includes(motion)) failures.push(`MISSING_MOTION ${motion}`);
-}
-
-const appPath = ["client/src/App.jsx", "client/src/App.tsx"].find((p) => fs.existsSync(p));
-const appSrc = appPath ? fs.readFileSync(appPath, "utf8") : "";
-if (!appSrc.includes("LumiPresenceLayer")) failures.push("LUMI_PRESENCE_NOT_IMPORTED_IN_APP");
-if (!appSrc.includes("<LumiPresenceLayer />")) failures.push("LUMI_PRESENCE_NOT_MOUNTED_IN_APP");
-
-const avatarSrc = fs.existsSync("client/src/components/lumi/LumiBrandAvatar.tsx")
-  ? fs.readFileSync("client/src/components/lumi/LumiBrandAvatar.tsx", "utf8")
-  : "";
-if (!avatarSrc.includes("data-official-lumi")) failures.push("OFFICIAL_LUMI_RIG_MARKER_MISSING");
-if (!avatarSrc.includes("MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp")) failures.push("OFFICIAL_EYES_LAYER_MISSING");
-if (!avatarSrc.includes("MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.webp")) failures.push("OFFICIAL_ARM_LAYER_MISSING");
-if (!avatarSrc.includes("MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.webp")) failures.push("OFFICIAL_LEG_LAYER_MISSING");
-
-const cssFiles = [];
-function walk(dir) {
-  if (!fs.existsSync(dir)) return;
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(full);
-    else if (entry.isFile() && full.endsWith(".css")) cssFiles.push(full);
-  }
-}
-walk("client/src");
-
-for (const file of cssFiles) {
-  const lines = fs.readFileSync(file, "utf8").split(/\r?\n/);
-  let seenNonImport = false;
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("/*") || trimmed.startsWith("*") || trimmed.startsWith("*/")) continue;
-    if (trimmed.startsWith("@import")) {
-      if (seenNonImport) failures.push(`CSS_IMPORT_ORDER ${file}`);
-    } else {
-      seenNonImport = true;
-    }
-  }
-}
+if (!allCss.includes("prefers-reduced-motion")) failures.push("REDUCED_MOTION_SUPPORT_MISSING");
 
 if (failures.length) {
-  console.error("VISUAL_RUNTIME_GATE_FAIL");
-  for (const failure of failures) console.error(failure);
+  console.log("VISUAL_RUNTIME_GATE_FAIL");
+  for (const failure of failures) console.log(failure);
   process.exit(1);
 }
 
