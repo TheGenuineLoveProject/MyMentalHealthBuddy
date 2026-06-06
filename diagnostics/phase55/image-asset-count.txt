@@ -1,0 +1,1 @@
+221 diagnostics/phase55/image-asset-inventory.txt

@@ -1,0 +1,1029 @@
+client/src/pages/admin/AdminPublishing.jsx:312:                    <div className="text-xs text-gray-400 mt-1">{draftForm.content.length} characters</div>
+client/src/pages/admin/SocialDashboard.jsx:703:                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+client/src/pages/account/Profile.jsx:117:                    <button className="absolute bottom-0 right-0 icon-container icon-sm icon-soft-sage" data-testid="button-change-avatar">
+client/src/pages/account/Security.jsx:167:        description: "Password must be at least 8 characters long.",
+client/src/pages/dashboard/Insights.tsx:149:                  <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+client/src/pages/pathways/GoalOnboarding.jsx:7:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/pages/tools/BreathingTool.jsx:2: * BreathingTool — /tools/breathing  (Avatar v4.2 Flow A spec)
+client/src/pages/tools/BreathingTool.jsx:20:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/tools/BreathingTool.jsx:21:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/tools/BreathingTool.jsx:152:  // Per-phase avatar config per spec.
+client/src/pages/tools/BreathingTool.jsx:153:  const avatar = useMemo(() => {
+client/src/pages/tools/BreathingTool.jsx:217:          {/* Concentric breath rings — decorative, sit behind avatar.
+client/src/pages/tools/BreathingTool.jsx:225:            {/* Animated breath circle (decorative — wraps the avatar) */}
+client/src/pages/tools/BreathingTool.jsx:244:              {/* Soft glow halo behind the avatar — pulses synced to the
+client/src/pages/tools/BreathingTool.jsx:247:              <MMHBFloatAvatar
+client/src/pages/tools/BreathingTool.jsx:248:                imageSrc={getOfficialLumi("breathe")}
+client/src/pages/tools/CommunityCheckin.jsx:76:      toast({ title: "Please share a bit more", description: "Your reflection should be at least 10 characters.", variant: "destructive" });
+client/src/pages/tools/GriefLetter.jsx:57:      toast({ title: "Please write a bit more", description: "Your letter should have at least 10 characters.", variant: "destructive" });
+client/src/pages/_quarantine/legacy-landing/Home.jsx:7:// Iter 2d (2026-05-15): removed legacy LumiMascot import — sole usage at L184
+client/src/pages/_quarantine/legacy-landing/Home.jsx:186:              {/* Iter 2d (2026-05-15): swapped legacy LumiMascot (56px,
+client/src/pages/_quarantine/legacy-landing/Home.jsx:244:              data-testid="img-hero-mascot"
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:127:      avatar: "S",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:133:      avatar: "J",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:139:      avatar: "M",
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:426:                    {testimonial.avatar}
+client/src/pages/CRMPage.jsx:6:import LumiMascot from "../components/lumi/LumiMascot.jsx";
+client/src/pages/CRMPage.jsx:75:                    <LumiMascot emotion="neutral" size={40} />
+client/src/pages/AvatarLab.jsx:2: * AvatarLab — V32 LumiV7 coordination demo + QA surface.
+client/src/pages/AvatarLab.jsx:48:export default function AvatarLab() {
+client/src/pages/AvatarLab.jsx:56:  // Mouse-tracking gaze for the playground avatar
+client/src/pages/AvatarLab.jsx:71:    if (typeof document !== "undefined") document.title = "Avatar Lab — MyMentalHealthBuddy";
+client/src/pages/AvatarLab.jsx:78:      data-testid="page-avatar-lab"
+client/src/pages/AvatarLab.jsx:83:            V32 § Avatar Evolution Engine
+client/src/pages/Login.jsx:8:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/Login.jsx:109:                <LumiMascotImage
+client/src/pages/Register.jsx:8:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/Register.jsx:27:    if (!form.name || form.name.trim().length < 2) e.name = "Please enter your name (2+ characters).";
+client/src/pages/Register.jsx:29:    if (!form.password || form.password.length < 8) e.password = "Password must be at least 8 characters.";
+client/src/pages/Register.jsx:97:                <LumiMascotImage
+client/src/pages/Register.jsx:187:                    placeholder="Create a password (8+ characters)"
+client/src/pages/ResetPassword.jsx:10:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/ResetPassword.jsx:16:  newPassword: z.string().min(6, "Password must be at least 6 characters"),
+client/src/pages/ResetPassword.jsx:204:        { label: "Beginner", examples: ["Choose a password you'll remember.", "Make it at least 6 characters."] },
+client/src/pages/ResetPassword.jsx:231:                  Renders the canonical avatar-floating PNG from /brand/v17. */}
+client/src/pages/ResetPassword.jsx:232:              <LumiMascotImage
+client/src/pages/ResetPassword.jsx:279:                    placeholder="Min 6 characters"
+client/src/pages/ResetPassword.jsx:365:                <li>• Use at least 6 characters</li>
+client/src/pages/ForgotPassword.jsx:9:import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
+client/src/pages/ForgotPassword.jsx:148:                  invited to interact with the mascot). Renders the canonical
+client/src/pages/ForgotPassword.jsx:149:                  avatar-floating PNG from /brand/v17. */}
+client/src/pages/ForgotPassword.jsx:150:              <LumiMascotImage
+client/src/pages/RigLab.jsx:7: * surfaces. Mirrors the /avatar-lab pattern from v5.8.28.
+client/src/pages/MotionLab.jsx:43:  { name: "Click ack",          trigger: "pointerdown on avatar",     effect: "glow pulse +0.05, decays over 600ms", transition: "3s ease" },
+client/src/pages/MotionLab.jsx:179:              Move cursor near the avatar to see proximity build (4s). Hover for soft awareness. Click for a gentle glow pulse. Move away — Lumi gently returns to baseline.
+client/src/pages/OnboardingFlow.jsx:122:        src="/lumi/official/lumi-meditation.png"
+client/src/pages/GlossaryPage.jsx:15:  { term: "Burnout", category: "Mental Health", definition: "A state of chronic physical and emotional exhaustion caused by prolonged stress, often work-related. Characterized by reduced effectiveness, cynicism, and detachment.", example: "Feeling emotionally drained, dreading work, and unable to feel satisfaction from accomplishments." },
+client/src/pages/DesignSystemV2.jsx:4:import LumiMascot, { VALID_EMOTIONS } from "@/components/lumi/LumiMascot.jsx";
+client/src/pages/DesignSystemV2.jsx:5:import LumiMascotImage from "@/components/lumi/LumiMascotImage.jsx";
+client/src/pages/DesignSystemV2.jsx:89:          content="Living design system for MyMentalHealthBuddy: Lumi mascot, color tokens, typography, buttons, links, motion, and accessibility utilities."
+client/src/pages/DesignSystemV2.jsx:111:              <a href="#mascot" className="lumi-link-nav" data-testid="link-mascot">Mascot</a>
+client/src/pages/DesignSystemV2.jsx:135:                  <a href="#mascot" className="lumi-btn lumi-btn-primary lumi-btn--lg" data-testid="button-meet-lumi">Meet Lumi</a>
+client/src/pages/DesignSystemV2.jsx:143:              <LumiMascot emotion="joy" size={300} ariaLabel="Lumi waving hello" />
+client/src/pages/DesignSystemV2.jsx:147:          {/* Mascot gallery */}
+client/src/pages/DesignSystemV2.jsx:148:          <Section id="mascot" kicker="Phase D1 + I1" title="Lumi — 10 emotion states">
+client/src/pages/DesignSystemV2.jsx:161:                    <LumiMascot emotion={em} size={150} trackCursor={false} ariaLabel={`Lumi expressing ${em}`} />
+client/src/pages/DesignSystemV2.jsx:175:                <LumiMascot emotion={galleryEmotion} size={260} />
+client/src/pages/DesignSystemV2.jsx:330:                <LumiMascotImage size={240} animation="float" ariaLabel="Lumi (full-color illustration)" />
+client/src/pages/DesignSystemV2.jsx:332:                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>&lt;LumiMascotImage /&gt;</code>
+client/src/pages/DesignSystemV2.jsx:371:                <LumiMascot emotion={emotion} size={240} onEmote={() => celebrate("celebration", 1500)} />
+client/src/pages/PeacescapePage.jsx:14:  { phase: "Phase 2", title: "Avatar customizer",   body: "Choose your Buddy's palette and accessory. Small, gentle expressions of self." },
+client/src/pages/PeacescapePage.jsx:250:              <h3 className="font-bold mb-1" style={{ color: "var(--glp-sage-deep)" }}>Avatar customizer (coming soon)</h3>
+client/src/pages/AffirmationsPage.jsx:218:      "My reactions are not character flaws—they are adaptations.",
+client/src/pages/MeditationGuidePage.jsx:246:      "From your centered Self—characterized by curiosity, compassion, and calm—offer what the part needs.",
+client/src/pages/GrowthPage.jsx:82:      <svg viewBox="0 0 200 200" role="img" aria-label="Growth aura visualization">
+client/src/pages/InnerChildPage.jsx:222:  description: "In IFS, your inner child is often understood as an 'exile'—a wounded part that holds pain from the past. Healing happens when your core Self (characterized by curiosity, compassion, and calm) builds a relationship with these young parts.",
+client/src/pages/Presence.jsx:3:import { MMHBFloatAvatar, MMHBAvatarRuntimeProvider } from "@/avatar-life";
+client/src/pages/Presence.jsx:20:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/Presence.jsx:33: * The avatar renders in calmIdle as a visual anchor at the top.
+client/src/pages/Presence.jsx:57:    <MMHBAvatarRuntimeProvider surfaceContext="presence" defaultState="calmIdle">
+client/src/pages/Presence.jsx:59:    </MMHBAvatarRuntimeProvider>
+client/src/pages/Presence.jsx:109:// ─── Header with Lumi avatar in calmIdle ───────────────────────────────────
+client/src/pages/Presence.jsx:116:      <MMHBFloatAvatar
+client/src/pages/Presence.jsx:117:        imageSrc={getOfficialLumi("calm")}
+client/src/pages/Presence.jsx:120:        alt="Lumi, your gentle wellness companion"
+client/src/pages/CelebrationRitual.jsx:9:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/CelebrationRitual.jsx:10:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/CelebrationRitual.jsx:173:                    per Avatar v4.2; preserves Crown import for downstream phases. */}
+client/src/pages/CelebrationRitual.jsx:174:                <MMHBFloatAvatar
+client/src/pages/CelebrationRitual.jsx:175:                  imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CelebrationRitual.jsx:177:                  alt="Lumi celebrating your ritual"
+client/src/pages/CelebrationRitual.jsx:178:                  data-testid="img-celebration-ritual-lumi"
+client/src/pages/Challenge.jsx:11:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/Challenge.jsx:200:              src={getOfficialLumi("encouraging")}
+client/src/pages/Challenge.jsx:201:              alt="Lumi encouraging your challenge"
+client/src/pages/Challenge.jsx:203:              data-testid="img-challenge-lumi"
+client/src/pages/AIChatPage.tsx:14:          AIChatPanel itself does not render OfficialLumi (uses BuddyAvatar);
+client/src/pages/Admin.jsx:642:    { id: 1, name: "Sarah M.", email: "sarah@example.com", status: "active", plan: "premium", sessions: 24, joined: "2 days ago", avatar: "S" },
+client/src/pages/Admin.jsx:643:    { id: 2, name: "James K.", email: "james@example.com", status: "active", plan: "free", sessions: 8, joined: "1 week ago", avatar: "J" },
+client/src/pages/Admin.jsx:644:    { id: 3, name: "Emily R.", email: "emily@example.com", status: "trial", plan: "trial", sessions: 3, joined: "3 days ago", avatar: "E" },
+client/src/pages/Admin.jsx:645:    { id: 4, name: "Michael T.", email: "michael@example.com", status: "churned", plan: "free", sessions: 1, joined: "1 month ago", avatar: "M" },
+client/src/pages/Admin.jsx:699:                          {user.avatar}
+client/src/pages/CelebrationFlow.jsx:2: * CelebrationFlow — /celebration  (Avatar v4.2 Flow C spec)
+client/src/pages/CelebrationFlow.jsx:19:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/pages/CelebrationFlow.jsx:20:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/CelebrationFlow.jsx:170:              <MMHBFloatAvatar
+client/src/pages/CelebrationFlow.jsx:171:                imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CelebrationFlow.jsx:173:                alt="Lumi celebrating progress"
+client/src/pages/CelebrationFlow.jsx:185:              <MMHBFloatAvatar
+client/src/pages/CelebrationFlow.jsx:186:                imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CelebrationFlow.jsx:188:                alt="Lumi celebrating progress"
+client/src/pages/CelebrationFlow.jsx:200:              <MMHBFloatAvatar
+client/src/pages/CelebrationFlow.jsx:201:                imageSrc={getOfficialLumi("encouraging")}
+client/src/pages/CelebrationFlow.jsx:203:                alt="Lumi celebrating progress"
+client/src/pages/CheckIn.jsx:2: * CheckIn — /checkin  (Avatar v4.2 Flow B spec)
+client/src/pages/CheckIn.jsx:6: * Avatar color transitions in real time as the user picks an emotion,
+client/src/pages/CheckIn.jsx:13:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/pages/CheckIn.jsx:17:import { emotionToAvatar } from "@/lib/buddyEmotion";
+client/src/pages/CheckIn.jsx:79:  // Real-time avatar: greeting/default at start, then the picked emotion's
+client/src/pages/CheckIn.jsx:81:  const avatar = useMemo(() => {
+client/src/pages/CheckIn.jsx:84:    return emotionToAvatar(emotion);
+client/src/pages/CheckIn.jsx:230:            src={getOfficialLumi("supportive")}
+client/src/pages/CheckIn.jsx:231:            alt="Lumi gently checking in with you"
+client/src/pages/DiscernmentDashboard.jsx:298:        anyone&apos;s character.
+client/src/pages/LumiV6Preview.jsx:13:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/pages/LumiV6Preview.jsx:103:                <BuddyAvatar state={s} colorMode="default" overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:114:                <BuddyAvatar state="calm" colorMode={c} overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:125:                <BuddyAvatar state="encouraged" colorMode="pink" pose={p} overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:137:                  <BuddyAvatar state={s} colorMode="default" overlay={false} size={140} />
+client/src/pages/LumiV6Preview.jsx:140:                  <BuddyAvatar state={s} colorMode="default" overlay={true} size={140} />
+client/src/pages/LumiV6Preview.jsx:152:                <BuddyAvatar state="calm" colorMode="default" overlay={true} size={sz} />
+client/src/pages/LumiV6Preview.jsx:163:            New multi-layer component (separate from BuddyAvatar). Mouse-track,
+client/src/pages/LumiV6Preview.jsx:165:            <code className="mx-1">interactive</code>. Hover any avatar below
+client/src/pages/LumiV6Preview.jsx:384: * EmotionCycleDemo — interactive button cycles the avatar through all 7
+client/src/pages/LumiV6Preview.jsx:407:        <LumiV6 emotion={current} size="lg" data-testid={`cycle-avatar-${current}`} />
+client/src/pages/LumiV6Preview.jsx:445:        avatar's emotion → expression mapping mirrors this spec so the toy
+client/src/pages/WellnessGlossaryPage.jsx:13:    definition: "A natural response to stress characterized by feelings of worry, nervousness, or unease about something with an uncertain outcome.",
+client/src/pages/ContentStudioPage.tsx:265:                  <label htmlFor="content" className="form-label">Content (min 50 characters)</label>
+client/src/pages/ContentStudioPage.tsx:275:                    {content.length} / 50 minimum characters
+client/src/pages/MirrorPage.tsx:171:            placeholder="What's on your mind? Write at least 10 characters..."
+client/src/pages/Start.tsx:4:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/pages/Start.tsx:5:import type { BuddyState } from "@/lib/avatarState";
+client/src/pages/Start.tsx:82:  // double-counting when the avatar transitions (anxious → encouraged
+client/src/pages/Start.tsx:242: * avatar can render. Pure function — no side effects, no AI logic, no
+client/src/pages/Start.tsx:304: * Map the AI reply text → BuddyState so Buddy's avatar reflects the
+client/src/pages/Start.tsx:347: * v1.5 — Tool-specific helper copy shown beneath BuddyAvatar.
+client/src/pages/Start.tsx:431:  // for BuddyAvatar — never affects AI / tool execution / response logic.
+client/src/pages/Start.tsx:530:    // v1.3: capture the entry-point as a Buddy signal so the avatar can
+client/src/pages/Start.tsx:576:  // MMHB Buddy Engine v1.3 — connect avatar to REAL user-flow signals.
+client/src/pages/Start.tsx:697:  // Fires once per state-entry when the helper copy below the avatar
+client/src/pages/Start.tsx:753:  // Layered helper copy beneath the avatar:
+client/src/pages/Start.tsx:754:  //   1. crisis           → null (avatar speaks via presence)
+client/src/pages/Start.tsx:788:      // the helper-copy line below the avatar reads as noisy filler. Returning
+client/src/pages/Start.tsx:800:            Wraps the visual avatar + companion sr-only + dynamic helper-copy
+client/src/pages/Start.tsx:806:            (BuddyOutput contract surfaced via avatar data-attrs). */}
+client/src/pages/Start.tsx:817:            assistive tech (and reduced-motion users) that the avatar is
+client/src/pages/Start.tsx:832:            beneath the avatar/title for /start, while other surfaces
+client/src/components/a11y/ReducedMotionProvider.jsx:68:  // (e.g. lumi-mascot.css) can react without needing JS-time access.
+client/src/components/brand/BrandLogo.jsx:2:import LumiMascot from "../lumi/LumiMascot.jsx";
+client/src/components/brand/BrandLogo.jsx:32:          <LumiMascot emotion="neutral" size={s.px} />
+client/src/components/chat/AIChatPanel.tsx:3:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/chat/AIChatPanel.tsx:190:                      src={getOfficialLumi("supportive")}
+client/src/components/chat/AIChatPanel.tsx:191:                      alt="Lumi listening"
+client/src/components/chat/AIChatPanel.tsx:221:                  src={getOfficialLumi("supportive")}
+client/src/components/chat/AIChatPanel.tsx:222:                  alt="Lumi listening"
+client/src/components/consciousness/SilenceMode.tsx:50:          {text.length} characters
+client/src/components/layout/Header.jsx:6:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/layout/Header.jsx:7:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/layout/Header.jsx:112:            <MMHBFloatAvatar
+client/src/components/layout/Header.jsx:113:              imageSrc={getOfficialLumi("calm")}
+client/src/components/layout/Header.jsx:115:              alt="Lumi mark"
+client/src/components/layout/Header.jsx:116:              data-testid="img-header-lumi"
+client/src/components/layout/Footer.tsx:15:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/layout/Footer.tsx:16:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/layout/Footer.tsx:27:              <MMHBFloatAvatar
+client/src/components/layout/Footer.tsx:28:                imageSrc={getOfficialLumi("calm")}
+client/src/components/layout/Footer.tsx:30:                alt="Lumi mark"
+client/src/components/layout/Footer.tsx:31:                data-testid="img-footer-lumi"
+client/src/components/methods/StrengthsPIETile.jsx:153:          Character Strengths We Help You Build On
+client/src/components/methods/StrengthsPIETile.jsx:157:          aria-label="Character strengths"
+client/src/components/mindscape/MindscapeNavigator.tsx:116:                <h4 className="text-xs font-medium opacity-60 mb-2">Characteristics</h4>
+client/src/components/mindscape/MindscapeNavigator.tsx:118:                  {state.characteristics.map(char => (
+client/src/components/sacred/SacredFooter.jsx:22:import LumiMascot from "@/components/lumi/LumiMascot.jsx";
+client/src/components/sacred/SacredFooter.jsx:90:                <LumiMascot emotion="neutral" size={40} />
+client/src/components/share/ShareCardPrompt.tsx:12:    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+client/src/components/share/ShareCardPrompt.tsx:20:    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+client/src/components/share/ShareCardPrompt.tsx:28:    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+client/src/components/share/ShareCardPrompt.tsx:36:    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+client/src/components/ui/lotus-guide.svg:2:<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+client/src/components/ui/Skeleton.jsx:13:    avatar: 'h-12 w-12 rounded-full',
+client/src/components/ui/Skeleton.jsx:32:      <Skeleton variant="avatar" />
+client/src/components/ui/dropdown-menu.tsx:4:  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+client/src/components/ui/select.tsx:4:  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+client/src/components/ui/select.tsx:10:  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+client/src/components/avatar/BuddyAvatar.css:1:/* BuddyAvatar.css — visual-only styles. State + motion classes drive feel.
+client/src/components/avatar/BuddyAvatar.css:129:   .buddy__antenna is the outer fuzzy halo (r=14, see BuddyAvatar.tsx
+client/src/components/avatar/BuddyAvatar.css:296:   Default `d` is set in BuddyAvatar.tsx as a calm gentle line. State
+client/src/components/avatar/BuddyAvatar.css:596:   Shape comes from the inline <svg> child (viewBox-scaled) so geometry
+client/src/components/avatar/BuddyAvatar.tsx:2: * BuddyAvatar.tsx — MMHB Buddy Engine visual.
+client/src/components/avatar/BuddyAvatar.tsx:13: * Style still lives in BuddyAvatar.css (sibling) — keyframes are state-
+client/src/components/avatar/BuddyAvatar.tsx:29: * LEGACY AVATAR WRAPPER
+client/src/components/avatar/BuddyAvatar.tsx:32: * MMHBFloatAvatar
+client/src/components/avatar/BuddyAvatar.tsx:35: * client/src/avatar-life
+client/src/components/avatar/BuddyAvatar.tsx:41:import "./BuddyAvatar.css";
+client/src/components/avatar/BuddyAvatar.tsx:42:import { getBuddyVisualOutput } from "@/lib/avatarState";
+client/src/components/avatar/BuddyAvatar.tsx:47: * `default` is the canonical V17 official sage Lumi (avatar-floating-nobg.png).
+client/src/components/avatar/BuddyAvatar.tsx:61:// V17 sage Lumi (avatar-floating-nobg). The legacy lumi-v4-* tinted PNGs were
+client/src/components/avatar/BuddyAvatar.tsx:65:// always lands on the official artwork. `sleep` maps to avatar-breathing
+client/src/components/avatar/BuddyAvatar.tsx:91:// V17 sage Lumi. The legacy lumi-style-* alt-character PNGs were off-brand
+client/src/components/avatar/BuddyAvatar.tsx:92:// (third-party-character-inspired artwork that diluted the canonical Lumi
+client/src/components/avatar/BuddyAvatar.tsx:173: *   sm  →  32px (header logos, chat bubble avatars)
+client/src/components/avatar/BuddyAvatar.tsx:188:export interface BuddyAvatarProps {
+client/src/components/avatar/BuddyAvatar.tsx:223:   * state drift sends a non-crisis state, the avatar stays still.
+client/src/components/avatar/BuddyAvatar.tsx:229:   * off-screen avatar instances across the app). Set to "eager" at
+client/src/components/avatar/BuddyAvatar.tsx:248:  calm: "Buddy avatar showing calm support mode",
+client/src/components/avatar/BuddyAvatar.tsx:249:  anxious: "Buddy avatar showing anxious breathing support mode",
+client/src/components/avatar/BuddyAvatar.tsx:250:  sad: "Buddy avatar showing gentle support mode",
+client/src/components/avatar/BuddyAvatar.tsx:251:  encouraged: "Buddy avatar showing encouraging support mode",
+client/src/components/avatar/BuddyAvatar.tsx:252:  celebrate: "Buddy avatar showing celebrating support mode",
+client/src/components/avatar/BuddyAvatar.tsx:253:  sleep: "Buddy avatar showing sleep mode",
+client/src/components/avatar/BuddyAvatar.tsx:254:  crisis: "Buddy avatar showing crisis-safe support mode",
+client/src/components/avatar/BuddyAvatar.tsx:301:function BuddyAvatar({
+client/src/components/avatar/BuddyAvatar.tsx:312:  "data-testid": testId = "buddy-avatar",
+client/src/components/avatar/BuddyAvatar.tsx:313:}: BuddyAvatarProps) {
+client/src/components/avatar/BuddyAvatar.tsx:352:  // PNG-only render at sm reads cleaner and is what chat bubble avatars
+client/src/components/avatar/BuddyAvatar.tsx:359:  // chime) into BuddyAvatar so EVERY avatar surface in the app — header,
+client/src/components/avatar/BuddyAvatar.tsx:368:  //     N avatars mount; first claim wins, releases on unmount)
+client/src/components/avatar/BuddyAvatar.tsx:370:  // Tiny avatars (<48px — chat bubble badges, footer logos) skip the
+client/src/components/avatar/BuddyAvatar.tsx:375:  // 1) Entrance pop on first viewport intersection (any avatar can fire it;
+client/src/components/avatar/BuddyAvatar.tsx:394:  // 2) Heartbeat — only avatars rendered at >=96px try to claim ownership.
+client/src/components/avatar/BuddyAvatar.tsx:395:  //    This keeps tiny header / chat-bubble / footer avatars silent while
+client/src/components/avatar/BuddyAvatar.tsx:401:    if (!token) return; // another avatar already owns the beat
+client/src/components/avatar/BuddyAvatar.tsx:406:  //    means rapid taps across multiple avatars still yield at most one
+client/src/components/avatar/BuddyAvatar.tsx:444:          src={lumiArtworkUrl}
+client/src/components/avatar/BuddyAvatar.tsx:453:            // canonical sage Lumi so the avatar never renders as a broken image.
+client/src/components/avatar/BuddyAvatar.tsx:455:            if (img.src.indexOf(FALLBACK_LUMI) === -1) {
+client/src/components/avatar/BuddyAvatar.tsx:456:              img.src = FALLBACK_LUMI;
+client/src/components/avatar/BuddyAvatar.tsx:467:          Heart uses inline SVG (viewBox) so the shape scales correctly
+client/src/components/avatar/BuddyAvatar.tsx:502:export default BuddyAvatar;
+client/src/components/avatar/BuddyPanel.tsx:7: *   - imports BuddyAvatar
+client/src/components/avatar/BuddyPanel.tsx:25:import BuddyAvatar from "./BuddyAvatar";
+client/src/components/avatar/BuddyPanel.tsx:26:import type { BuddyState } from "@/lib/avatarState";
+client/src/components/avatar/BuddyPanel.tsx:68:  /** Buddy emotional state (drives avatar visuals via the v1.9 contract). */
+client/src/components/avatar/BuddyPanel.tsx:70:  /** Headline copy near the avatar. Optional — omit for surfaces that need only the avatar. */
+client/src/components/avatar/BuddyPanel.tsx:86:  /** Avatar pixel size. Defaults to 140 for parity with the /start hero. */
+client/src/components/avatar/BuddyPanel.tsx:190:      <BuddyAvatar
+client/src/components/avatar/BuddyPanel.tsx:194:        data-testid={`${testId}-avatar`}
+client/src/components/zen/buddy-bubble.css:1:/* BuddyBubble — gentle speech bubble next to BuddyAvatar.
+client/src/components/zen/BuddyBubble.jsx:6: * BuddyBubble — a small speech bubble next to BuddyAvatar that softly
+client/src/components/zen/ZenScape.jsx:1:import BuddyAvatar from "../avatar/BuddyAvatar";
+client/src/components/zen/ZenScape.jsx:12: *   - an optional BuddyAvatar hero (state="calm", default size 140) + bubble
+client/src/components/zen/ZenScape.jsx:114:              <BuddyAvatar
+client/src/components/peacescape/InteractiveBuddy.jsx:2:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/peacescape/InteractiveBuddy.jsx:12: *   - The wrapper does not modify BuddyAvatar source — it only swaps the
+client/src/components/peacescape/InteractiveBuddy.jsx:76:        <BuddyAvatar
+client/src/components/lumi/LumiMascot.css:2: * LumiMascot — Body-part animations for the interactive Buddy.
+client/src/components/lumi/LumiMascot.css:3: * State-driven via [data-emotion] attribute on .lumi-mascot wrapper.
+client/src/components/lumi/LumiMascot.css:6:.lumi-mascot {
+client/src/components/lumi/LumiMascot.css:15:.lumi-mascot__svg {
+client/src/components/lumi/LumiMascot.css:23:.lumi-mascot__body {
+client/src/components/lumi/LumiMascot.css:25:  animation: lumi-mascot-breathe 4.2s ease-in-out infinite;
+client/src/components/lumi/LumiMascot.css:28:.lumi-mascot__floater {
+client/src/components/lumi/LumiMascot.css:29:  animation: lumi-mascot-float 6.5s ease-in-out infinite;
+client/src/components/lumi/LumiMascot.css:32:@keyframes lumi-mascot-breathe {
+client/src/components/lumi/LumiMascot.css:36:@keyframes lumi-mascot-float {
+client/src/components/lumi/LumiMascot.css:42:.lumi-mascot__head {
+client/src/components/lumi/LumiMascot.css:46:.lumi-mascot[data-emotion="empathy"]     .lumi-mascot__head { transform: rotate(-5deg); }
+client/src/components/lumi/LumiMascot.css:47:.lumi-mascot[data-emotion="reflection"]  .lumi-mascot__head { transform: rotate(4deg); }
+client/src/components/lumi/LumiMascot.css:48:.lumi-mascot[data-emotion="surprise"]    .lumi-mascot__head { transform: rotate(-2deg) translateY(-2px); }
+client/src/components/lumi/LumiMascot.css:49:.lumi-mascot[data-emotion="sleepy"]      .lumi-mascot__head { transform: rotate(8deg) translateY(2px); }
+client/src/components/lumi/LumiMascot.css:50:.lumi-mascot[data-emotion="celebration"] .lumi-mascot__head { animation: lumi-head-bob 700ms ease-in-out infinite; }
+client/src/components/lumi/LumiMascot.css:57:.lumi-mascot__eyelid {
+client/src/components/lumi/LumiMascot.css:59:  animation: lumi-mascot-blink 5.5s infinite;
+client/src/components/lumi/LumiMascot.css:61:.lumi-mascot__eyelid--right { animation-delay: 30ms; }
+client/src/components/lumi/LumiMascot.css:62:@keyframes lumi-mascot-blink {
+client/src/components/lumi/LumiMascot.css:66:.lumi-mascot[data-emotion="sleepy"] .lumi-mascot__eyelid {
+client/src/components/lumi/LumiMascot.css:69:.lumi-mascot[data-emotion="surprise"] .lumi-mascot__pupil {
+client/src/components/lumi/LumiMascot.css:73:.lumi-mascot__pupil {
+client/src/components/lumi/LumiMascot.css:78:.lumi-mascot__arm--left  { transform-origin: 35% 0%; transition: transform 600ms var(--lumi-ease-out); }
+client/src/components/lumi/LumiMascot.css:79:.lumi-mascot__arm--right { transform-origin: 65% 0%; transition: transform 600ms var(--lumi-ease-out); }
+client/src/components/lumi/LumiMascot.css:81:.lumi-mascot[data-emotion="joy"]         .lumi-mascot__arm--left  { animation: lumi-wave 1.6s ease-in-out infinite; }
+client/src/components/lumi/LumiMascot.css:82:.lumi-mascot[data-emotion="celebration"] .lumi-mascot__arm--left  { transform: rotate(-45deg) translateY(-8px); }
+client/src/components/lumi/LumiMascot.css:83:.lumi-mascot[data-emotion="celebration"] .lumi-mascot__arm--right { transform: rotate(45deg)  translateY(-8px); }
+client/src/components/lumi/LumiMascot.css:84:.lumi-mascot[data-emotion="comfort"]     .lumi-mascot__arm--left  { transform: rotate(-22deg) translateY(2px); }
+client/src/components/lumi/LumiMascot.css:85:.lumi-mascot[data-emotion="comfort"]     .lumi-mascot__arm--right { transform: rotate(22deg)  translateY(2px); }
+client/src/components/lumi/LumiMascot.css:86:.lumi-mascot[data-emotion="reflection"]  .lumi-mascot__arm--left  { transform: rotate(-12deg) translateY(-4px); }
+client/src/components/lumi/LumiMascot.css:87:.lumi-mascot[data-emotion="reflection"]  .lumi-mascot__arm--right { transform: rotate(12deg)  translateY(-4px); }
+client/src/components/lumi/LumiMascot.css:94:.lumi-mascot__heart {
+client/src/components/lumi/LumiMascot.css:99:.lumi-mascot[data-emotion="celebration"] .lumi-mascot__heart {
+client/src/components/lumi/LumiMascot.css:103:.lumi-mascot[data-emotion="empathy"] .lumi-mascot__heart,
+client/src/components/lumi/LumiMascot.css:104:.lumi-mascot[data-emotion="comfort"] .lumi-mascot__heart {
+client/src/components/lumi/LumiMascot.css:107:.lumi-mascot[data-emotion="concern"] .lumi-mascot__heart {
+client/src/components/lumi/LumiMascot.css:111:.lumi-mascot[data-emotion="sleepy"] .lumi-mascot__heart {
+client/src/components/lumi/LumiMascot.css:115:.lumi-mascot[data-flash="true"] .lumi-mascot__heart {
+client/src/components/lumi/LumiMascot.css:125:.lumi-mascot[data-emotion="joy"]         .lumi-mascot__body { filter: hue-rotate(-12deg) saturate(1.1); }
+client/src/components/lumi/LumiMascot.css:126:.lumi-mascot[data-emotion="celebration"] .lumi-mascot__body { filter: hue-rotate(-20deg) saturate(1.2) brightness(1.05); }
+client/src/components/lumi/LumiMascot.css:127:.lumi-mascot[data-emotion="empathy"]     .lumi-mascot__body { filter: hue-rotate(8deg); }
+client/src/components/lumi/LumiMascot.css:128:.lumi-mascot[data-emotion="comfort"]     .lumi-mascot__body { filter: hue-rotate(15deg); }
+client/src/components/lumi/LumiMascot.css:129:.lumi-mascot[data-emotion="concern"]     .lumi-mascot__body { filter: saturate(0.85); }
+client/src/components/lumi/LumiMascot.css:130:.lumi-mascot[data-emotion="sleepy"]      .lumi-mascot__body { filter: saturate(0.7) brightness(0.95); }
+client/src/components/lumi/LumiMascot.css:133:.lumi-mascot__halo {
+client/src/components/lumi/LumiMascot.css:137:.lumi-mascot[data-emotion="celebration"] .lumi-mascot__halo { opacity: 0.95; }
+client/src/components/lumi/LumiMascot.css:138:.lumi-mascot[data-emotion="sleepy"]      .lumi-mascot__halo { opacity: 0.25; }
+client/src/components/lumi/LumiMascot.css:142:  .lumi-mascot__body,
+client/src/components/lumi/LumiMascot.css:143:  .lumi-mascot__floater,
+client/src/components/lumi/LumiMascot.css:144:  .lumi-mascot__eyelid,
+client/src/components/lumi/LumiMascot.css:145:  .lumi-mascot__heart,
+client/src/components/lumi/LumiMascot.css:146:  .lumi-mascot__arm--left,
+client/src/components/lumi/LumiMascot.css:147:  .lumi-mascot__arm--right,
+client/src/components/lumi/LumiMascot.css:148:  .lumi-mascot__head { animation: none !important; }
+client/src/components/lumi/LumiMascot.css:149:  .lumi-mascot__eyelid { transform: scaleY(0.05); opacity: 0; }
+client/src/components/lumi/LumiMascot.css:153: * PNG MASCOT ANIMATIONS (additive)
+client/src/components/lumi/LumiMascot.css:155: * The brand owners replaced the original hand-built SVG mascot with a
+client/src/components/lumi/LumiMascot.css:157: * the body-part-targeting rules above (`.lumi-mascot__body`,
+client/src/components/lumi/LumiMascot.css:158: * `.lumi-mascot__head`, `.lumi-mascot__arm--left`, etc.) inert.
+client/src/components/lumi/LumiMascot.css:172:.lumi-mascot--png {
+client/src/components/lumi/LumiMascot.css:180:.lumi-mascot--png[data-compact="true"] {
+client/src/components/lumi/LumiMascot.css:184:.lumi-mascot--png .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:194:.lumi-mascot--png[data-compact="true"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:198:/* Heart-glow halo pinned over the mascot's chest */
+client/src/components/lumi/LumiMascot.css:199:.lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:222:.lumi-mascot--png[data-compact="true"] .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:249:.lumi-mascot--png[data-emotion="joy"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:258:.lumi-mascot--png[data-emotion="celebration"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:267:.lumi-mascot--png[data-emotion="empathy"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:275:.lumi-mascot--png[data-emotion="comfort"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:283:.lumi-mascot--png[data-emotion="reflection"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:291:.lumi-mascot--png[data-emotion="concern"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:300:.lumi-mascot--png[data-emotion="sleepy"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:309:.lumi-mascot--png[data-emotion="surprise"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:318:.lumi-mascot--png[data-emotion="listening"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:327:.lumi-mascot--png[data-emotion="celebration"] .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:336:.lumi-mascot--png[data-emotion="joy"] .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:340:.lumi-mascot--png[data-emotion="empathy"] .lumi-mascot__heart-glow,
+client/src/components/lumi/LumiMascot.css:341:.lumi-mascot--png[data-emotion="comfort"] .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:349:.lumi-mascot--png[data-emotion="concern"] .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:353:.lumi-mascot--png[data-emotion="sleepy"] .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:358:/* ── Click flash (full-mascot pop) ─────────────────────────────── */
+client/src/components/lumi/LumiMascot.css:359:.lumi-mascot--png[data-flash="true"] .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:363:.lumi-mascot--png[data-flash="true"] .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:378:.lumi-mascot--png[role="button"] { cursor: pointer; }
+client/src/components/lumi/LumiMascot.css:379:.lumi-mascot--png[role="button"]:hover .lumi-mascot__img {
+client/src/components/lumi/LumiMascot.css:382:.lumi-mascot--png[role="button"]:focus-visible {
+client/src/components/lumi/LumiMascot.css:390:  .lumi-mascot--png,
+client/src/components/lumi/LumiMascot.css:391:  .lumi-mascot--png .lumi-mascot__img,
+client/src/components/lumi/LumiMascot.css:392:  .lumi-mascot--png .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiMascot.css:395:  .lumi-mascot--png .lumi-mascot__heart-glow {
+client/src/components/lumi/LumiV6.css:1:/* LumiV6.css — Living Lumi multi-layer avatar.
+client/src/components/lumi/LumiV6.css:2:   Scoped under .lumiv6 so it cannot collide with .buddy* (BuddyAvatar). */
+client/src/components/lumi/LumiV6.css:282:   .buddy* / .buddy__v6-* (BuddyAvatar overlay system).
+client/src/components/lumi/LumiV7.css:2: * LumiV7 — Avatar Evolution Engine (V32 spec)
+client/src/components/lumi/LumiV7.css:11: * Spec reference: V32 OMEGA INFINITY § Avatar Evolution
+client/src/components/lumi/FloatIdleAnimated.css:127: * The avatar itself never changes — only its emotional weather does. */
+client/src/components/lumi/FloatIdleAnimated.css:140:   * the avatar at rest behaves exactly like Phase 8 did. Interaction
+client/src/components/lumi/FloatIdleAnimated.css:371: *     hover/proximity/click cannot color or destabilize the avatar
+client/src/components/lumi/LumiAccessibleWrapper.jsx:10: * accessibility scaffolding the mascot needs to be a good citizen of the
+client/src/components/lumi/LumiAccessibleWrapper.jsx:22: * Children are expected to render the actual mascot image. The wrapper
+client/src/components/lumi/LumiAccessibleWrapper.jsx:33: *   - children       (node)    the actual mascot image / SVG
+client/src/components/lumi/LumiCustomizer.jsx:3:import { MASCOT_ASSETS } from "../../data/lumiAssets";
+client/src/components/lumi/LumiCustomizer.jsx:6:const PREVIEW_HERO = MASCOT_ASSETS.default;
+client/src/components/lumi/LumiCustomizer.jsx:179:                alt={`Lumi preview in ${candidateTheme.name}`}
+client/src/components/lumi/LumiCustomizerTrigger.jsx:9: * Designed to sit beside <LumiMascot /> in the header or chat.
+client/src/components/lumi/LumiCustomizerTrigger.jsx:55:// <LumiCustomizerTrigger /> placed next to <LumiMascot />
+client/src/components/lumi/LumiCompanion.jsx:5:import { preloadImage } from "../../utils/preloadMascots";
+client/src/components/lumi/LumiCompanion.jsx:7:import { MASCOT_ASSETS } from "../../data/lumiAssets";
+client/src/components/lumi/LumiCompanion.jsx:34: * The canonical Lumi mascot display surface. Owns:
+client/src/components/lumi/LumiCompanion.jsx:47: *   - lockImage          string   optional MASCOT_ASSETS key to pin the visible
+client/src/components/lumi/LumiCompanion.jsx:91:  // When `lockImage` is set, pin the displayed PNG to that MASCOT_ASSETS key
+client/src/components/lumi/LumiCompanion.jsx:97:    lockImage && MASCOT_ASSETS[lockImage] ? MASCOT_ASSETS[lockImage] : null;
+client/src/components/lumi/LumiCompanion.jsx:103:  // bundled MASCOT_ASSETS bitmap, so there is no upside to gating its
+client/src/components/lumi/LumiCompanion.jsx:166:  // Compose CSS class string for the <img>: base mascot class + the active
+client/src/components/lumi/LumiCompanion.jsx:174:      "lumi-mascot",
+client/src/components/lumi/LumiCompanion.jsx:175:      "lumi-mascot--png",
+client/src/components/lumi/LumiCompanion.jsx:206:  //     inline style defeats the body-level `body.lumi-theme-X .lumi-mascot`
+client/src/components/lumi/LumiCompanion.jsx:232:  // The mascot+customizer row ALWAYS uses containerStyle so its `gap`
+client/src/components/lumi/LumiCompanion.jsx:233:  // (which separates the mascot from the customizer trigger) is preserved
+client/src/components/lumi/LumiCompanion.jsx:246:  const mascotRowStyle = containerStyle;
+client/src/components/lumi/LumiCompanion.jsx:273:      <span style={mascotRowStyle}>
+client/src/components/lumi/LumiCompanion.jsx:299:              data-testid={`img-lumi-companion-${size}`}
+client/src/components/lumi/LumiCompanion.jsx:314:// <LumiCompanion size="sm" /> // for header avatar
+client/src/components/lumi/LumiBrandLogo.jsx:6: * uses the buddy character PNG cropped via object-fit.
+client/src/components/lumi/LumiBrandLogo.jsx:11: *   - "icon-only"             → buddy character only
+client/src/components/lumi/LumiBrandLogo.jsx:18:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/lumi/LumiBrandLogo.jsx:34:  // ariaHidden retained for API compat — BuddyAvatar handles its own
+client/src/components/lumi/LumiBrandLogo.jsx:42:      <BuddyAvatar state="calm" colorMode="default" size={size} data-testid="lumi-icon-mark" />
+client/src/components/lumi/FloatIdleRig.jsx:4: * Standalone — does NOT replace LumiV6 / LumiV7 / BuddyAvatar / LumiMascot.
+client/src/components/lumi/FloatIdleRig.jsx:5: * Mounts the 11 region PNGs from `client/public/avatar-core/regions/`
+client/src/components/lumi/FloatIdleRig.jsx:6: * (SSOT mirrored from repo `avatar-core/`, locked v5.8.41) at their
+client/src/components/lumi/FloatIdleRig.jsx:10: *   The avatar body is FROZEN. Permitted modifications are ONLY:
+client/src/components/lumi/FloatIdleRig.jsx:76:const REGION_BASE = "/avatar-core/regions";
+client/src/components/lumi/FloatIdleAnimated.jsx:29: *   The avatar has 8 verified emotional states (6 shipped + 2 pending
+client/src/components/lumi/FloatIdleAnimated.jsx:31: *   without changing the avatar's appearance. Each state is the same
+client/src/components/lumi/FloatIdleAnimated.jsx:71:const SHADOW_BASE = "/avatar-core/shadow/MMHB_FLOAT_IDLE_UNIT_v1_shadow";
+client/src/components/lumi/FloatIdleAnimated.jsx:96:  // v5.8.47 — Phase 9 interaction systems. When true, the avatar gently
+client/src/components/lumi/LumiMascotImage.jsx:2: * LumiMascotImage — Full-color PNG of Lumi (the real illustrated mascot).
+client/src/components/lumi/LumiMascotImage.jsx:4: * This is the *static art* counterpart to LumiMascot.jsx. Use this when you
+client/src/components/lumi/LumiMascotImage.jsx:8: * keep using <LumiMascot/> instead.
+client/src/components/lumi/LumiMascotImage.jsx:15:// v4 canonical PNG served from /public — see BuddyAvatar.tsx for the
+client/src/components/lumi/LumiMascotImage.jsx:21:export default function LumiMascotImage({
+client/src/components/lumi/LumiMascotImage.jsx:38:      src={lumiFullBodyPng}
+client/src/components/lumi/LumiMascotImage.jsx:45:      className={`lumi-mascot-image ${animClass} ${className}`.trim()}
+client/src/components/lumi/LumiMascotImage.jsx:46:      data-testid="lumi-mascot-image"
+client/src/components/lumi/LumiV7.jsx:2: * LumiV7 — Avatar Evolution Engine (V32 spec).
+client/src/components/lumi/LumiV7.jsx:4: * Standalone — does NOT replace LumiV6 / BuddyAvatar / LumiMascot.
+client/src/components/lumi/LumiV7.jsx:5: * This is a pure-SVG mascot whose body is FROZEN to the canonical
+client/src/components/lumi/LumiV7.jsx:94:  //   1. Explicit `eye` / `mouth` props (preserves AvatarLab gallery's
+client/src/components/lumi/LumiV7.jsx:105:  // P7 (v5.8.83) — Avatar Life System Phase 3: Arm & Leg Movement.
+client/src/components/lumi/LumiV7.jsx:208:      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+client/src/components/lumi/LumiMascot.jsx:2: * LumiMascot — renders the official MMHB Lumi character artwork.
+client/src/components/lumi/LumiMascot.jsx:12: *   size          — pixel width/height for the mascot box.
+client/src/components/lumi/LumiMascot.jsx:21: * LEGACY MASCOT SYSTEM
+client/src/components/lumi/LumiMascot.jsx:25: * Canonical avatar runtime:
+client/src/components/lumi/LumiMascot.jsx:26: * client/src/avatar-life
+client/src/components/lumi/LumiMascot.jsx:29:import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+client/src/components/lumi/LumiMascot.jsx:30:import "./LumiMascot.css";
+client/src/components/lumi/LumiMascot.jsx:37:// LumiMascot's emotion vocabulary → BuddyAvatar's BuddyState vocabulary.
+client/src/components/lumi/LumiMascot.jsx:56:export default function LumiMascot({
+client/src/components/lumi/LumiMascot.jsx:92:      className={`lumi-mascot lumi-mascot--png ${className}`.trim()}
+client/src/components/lumi/LumiMascot.jsx:103:      data-testid="lumi-mascot"
+client/src/components/lumi/LumiMascot.jsx:106:        className="lumi-mascot__img"
+client/src/components/lumi/LumiMascot.jsx:109:        <BuddyAvatar
+client/src/components/lumi/LumiMascot.jsx:113:          data-testid="lumi-mascot-img"
+client/src/components/lumi/LumiMascot.jsx:116:      <span className="lumi-mascot__heart-glow" aria-hidden="true" />
+client/src/components/lumi/LumiV6.tsx:2: * LumiV6 — "Living Lumi" multi-layer avatar.
+client/src/components/lumi/LumiV6.tsx:64: * Standalone — does NOT replace BuddyAvatar. All classes scoped under
+client/src/components/lumi/LumiV6.tsx:71: * TRANSITIONAL AVATAR SYSTEM
+client/src/components/lumi/LumiV6.tsx:79: * client/src/avatar-life
+client/src/components/lumi/LumiV6.tsx:85: * - all BuddyAvatar references removed
+client/src/components/lumi/LumiV6.tsx:86: * - all LumiMascot references removed
+client/src/components/lumi/LumiV6.tsx:163:  /** Show speech bubble above the avatar. Default false. */
+client/src/components/lumi/LumiV6.tsx:183:   *  avatar briefly switches emotion and plays a flourish. */
+client/src/components/lumi/LumiV6.tsx:189:  /** Exact pixel override for non-canonical sizes (legacy LumiMascot
+client/src/components/lumi/LumiV6.tsx:259:// Mirrors BuddyAvatar.COLOR_MODE_SRC. Legacy lumi-v4-* tinted PNGs deleted
+client/src/components/lumi/LumiV6.tsx:262:// Legacy /brand/v17/avatar-* (cream-blob, non-sprout) deleted per V26.
+client/src/components/lumi/LumiV6.tsx:385:  // BuddyAvatar cooperate when both are mounted on the same page (e.g. /v6
+client/src/components/lumi/LumiV6.tsx:626:          // gate is enforced inside tryPop, shared with BuddyAvatar so the
+client/src/components/lumi/LumiV6.tsx:643:  // Claims the global heartbeat slot. If another Lumi (BuddyAvatar / sibling
+client/src/components/lumi/LumiLivingAvatar.tsx:1:import "./LumiLivingAvatar.css";
+client/src/components/lumi/LumiLivingAvatar.tsx:12:export interface LumiLivingAvatarProps {
+client/src/components/lumi/LumiLivingAvatar.tsx:30:export default function LumiLivingAvatar({
+client/src/components/lumi/LumiLivingAvatar.tsx:36:}: LumiLivingAvatarProps) {
+client/src/components/lumi/LumiLivingAvatar.tsx:41:      className={`lumi-living-avatar lumi-living-avatar--${state} lumi-living-avatar--${size}`}
+client/src/components/lumi/LumiLivingAvatar.tsx:44:      <div className="lumi-living-avatar__aura" aria-hidden="true" />
+client/src/components/lumi/LumiLivingAvatar.tsx:45:      <div className="lumi-living-avatar__sparkles" aria-hidden="true" />
+client/src/components/lumi/LumiLivingAvatar.tsx:47:        <img className="lumi-living-avatar__image" src={src} alt={alt || accessibleLabel} />
+client/src/components/lumi/LumiLivingAvatar.tsx:49:        <div className="lumi-living-avatar__fallback" aria-hidden="true">
+client/src/components/lumi/LumiLivingAvatar.tsx:50:          <span className="lumi-living-avatar__face" />
+client/src/components/lumi/LumiLivingAvatar.tsx:51:          <span className="lumi-living-avatar__belly" />
+client/src/components/lumi/LumiLivingAvatar.css:1:.lumi-living-avatar {
+client/src/components/lumi/LumiLivingAvatar.css:2:  --lumi-avatar-size: clamp(220px, 32vw, 440px);
+client/src/components/lumi/LumiLivingAvatar.css:7:  inline-size: var(--lumi-avatar-size);
+client/src/components/lumi/LumiLivingAvatar.css:12:.lumi-living-avatar--sm { --lumi-avatar-size: clamp(120px, 18vw, 180px); }
+client/src/components/lumi/LumiLivingAvatar.css:13:.lumi-living-avatar--md { --lumi-avatar-size: clamp(180px, 25vw, 280px); }
+client/src/components/lumi/LumiLivingAvatar.css:14:.lumi-living-avatar--lg { --lumi-avatar-size: clamp(240px, 34vw, 430px); }
+client/src/components/lumi/LumiLivingAvatar.css:15:.lumi-living-avatar--xl { --lumi-avatar-size: clamp(300px, 42vw, 560px); }
+client/src/components/lumi/LumiLivingAvatar.css:17:.lumi-living-avatar__image,
+client/src/components/lumi/LumiLivingAvatar.css:18:.lumi-living-avatar__fallback {
+client/src/components/lumi/LumiLivingAvatar.css:27:  animation: lumiLivingAvatarBreath 5.8s ease-in-out infinite, lumiLivingAvatarFloat 8s cubic-bezier(.22, 1, .36, 1) infinite;
+client/src/components/lumi/LumiLivingAvatar.css:30:.lumi-living-avatar__aura {
+client/src/components/lumi/LumiLivingAvatar.css:40:  animation: lumiLivingAvatarAura 5.4s ease-in-out infinite;
+client/src/components/lumi/LumiLivingAvatar.css:43:.lumi-living-avatar__sparkles {
+client/src/components/lumi/LumiLivingAvatar.css:54:  animation: lumiLivingAvatarSparkle 22s linear infinite;
+client/src/components/lumi/LumiLivingAvatar.css:57:.lumi-living-avatar__fallback {
+client/src/components/lumi/LumiLivingAvatar.css:68:.lumi-living-avatar__face {
+client/src/components/lumi/LumiLivingAvatar.css:81:.lumi-living-avatar__belly {
+client/src/components/lumi/LumiLivingAvatar.css:92:.lumi-living-avatar--breathe .lumi-living-avatar__aura {
+client/src/components/lumi/LumiLivingAvatar.css:98:.lumi-living-avatar--support .lumi-living-avatar__aura {
+client/src/components/lumi/LumiLivingAvatar.css:104:.lumi-living-avatar--celebrate .lumi-living-avatar__aura {
+client/src/components/lumi/LumiLivingAvatar.css:110:.lumi-living-avatar--concerned .lumi-living-avatar__aura {
+client/src/components/lumi/LumiLivingAvatar.css:116:@keyframes lumiLivingAvatarBreath {
+client/src/components/lumi/LumiLivingAvatar.css:121:@keyframes lumiLivingAvatarFloat {
+client/src/components/lumi/LumiLivingAvatar.css:126:@keyframes lumiLivingAvatarAura {
+client/src/components/lumi/LumiLivingAvatar.css:131:@keyframes lumiLivingAvatarSparkle {
+client/src/components/lumi/LumiLivingAvatar.css:137:  .lumi-living-avatar__image,
+client/src/components/lumi/LumiLivingAvatar.css:138:  .lumi-living-avatar__fallback,
+client/src/components/lumi/LumiLivingAvatar.css:139:  .lumi-living-avatar__aura,
+client/src/components/lumi/LumiLivingAvatar.css:140:  .lumi-living-avatar__sparkles {
+client/src/components/lumi/LumiPresenceLayer.tsx:60:        <div className="lumi-character">
+client/src/components/lumi/LumiPresenceLayer.css:41:.lumi-character {
+client/src/components/lumi/LumiPresenceLayer.css:489:.lumi-presence-layer--breathe .lumi-character {
+client/src/components/lumi/LumiPresenceLayer.css:767:.lumi-avatar,
+client/src/components/lumi/LumiPresenceLayer.css:773:.lumi-avatar {
+client/src/components/lumi/LumiPresenceLayer.css:855:  .lumi-avatar,
+client/src/components/lumi/LivingLumiAvatar.tsx:3:export type LivingLumiAvatarProps = {
+client/src/components/lumi/LivingLumiAvatar.tsx:9:export default function LivingLumiAvatar({
+client/src/components/lumi/LivingLumiAvatar.tsx:13:}: LivingLumiAvatarProps) {
+client/src/components/ContentStudio.jsx:253:          { title: "Anxiety Through a Polyvagal Lens", body: "Stephen Porges' polyvagal theory offers a roadmap for understanding anxiety as a nervous system state, not a character flaw." },
+client/src/components/FlowDiagram.jsx:46:                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+client/src/components/FlowDiagram.jsx:220:  return `<svg width="900" height="180" viewBox="0 0 900 180" xmlns="http://www.w3.org/2000/svg">
+client/src/components/HydrationTracker.jsx:148:            <svg viewBox="0 0 100 150" className="w-full h-full">
+client/src/components/MoodVisualizer.jsx:178:        <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
+client/src/components/Sparkline.jsx:23:    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Mood trend">
+client/src/components/WellnessTimer.jsx:161:          <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+client/src/components/ReflectionCardExport.jsx:215:                <p className="text-xs text-[var(--text-muted)] mt-1">{quote.length}/200 characters</p>
+client/src/components/Header.jsx:4:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/Header.jsx:61:            <LumiMascot emotion="neutral" size={40} interactive={false} />
+client/src/components/Footer.jsx:4:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/Footer.jsx:24:              <LumiMascot emotion="neutral" size={40} />
+client/src/components/Footer.jsx:77:            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.49a8.21 8.21 0 0 0 4.8 1.54V6.69h-1.04z"/></svg>
+client/src/components/Footer.jsx:80:            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+client/src/components/EmptyState.jsx:4:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/EmptyState.jsx:5:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/EmptyState.jsx:94:          slot per Avatar Uniformity v4.2 spec. The original Icon is kept
+client/src/components/EmptyState.jsx:97:        <MMHBFloatAvatar
+client/src/components/EmptyState.jsx:98:          imageSrc={getOfficialLumi("supportive")}
+client/src/components/EmptyState.jsx:100:          alt="Lumi offering gentle support"
+client/src/components/SafetyDisclaimer.jsx:14:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/SafetyDisclaimer.jsx:15:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/SafetyDisclaimer.jsx:44:        <MMHBFloatAvatar
+client/src/components/SafetyDisclaimer.jsx:45:          imageSrc={getOfficialLumi("supportive")}
+client/src/components/SafetyDisclaimer.jsx:47:          alt="Lumi offering gentle support"
+client/src/components/SafetyDisclaimer.jsx:48:          data-testid="img-disclaimer-lumi"
+client/src/components/ErrorBoundary.jsx:3:const MMHBFloatAvatar = React.lazy(() =>
+client/src/components/ErrorBoundary.jsx:4:  import("@/avatar-life/components/MMHBFloatAvatar").then((m) => ({
+client/src/components/ErrorBoundary.jsx:5:    default: m.MMHBFloatAvatar || m.default,
+client/src/components/ErrorBoundary.jsx:8:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/ErrorBoundary.jsx:52:                guaranteed motion="steady" per avatarState.ts. Errors are
+client/src/components/ErrorBoundary.jsx:66:                <MMHBFloatAvatar
+client/src/components/ErrorBoundary.jsx:67:                  imageSrc={getOfficialLumi("supportive")}
+client/src/components/ErrorBoundary.jsx:69:                  alt="Lumi offering gentle support"
+client/src/components/LoadingSpinner.tsx:8: * Note: BuddyAvatar's `motion` is derived from `state`, not a prop —
+client/src/components/LoadingSpinner.tsx:11:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/LoadingSpinner.tsx:12:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/LoadingSpinner.tsx:51:        <MMHBFloatAvatar
+client/src/components/LoadingSpinner.tsx:52:          imageSrc={getOfficialLumi("calm")}
+client/src/components/LoadingSpinner.tsx:54:          alt="Lumi loading companion"
+client/src/components/CelebrationOverlay.tsx:9: * routing. State is "celebrate" (sparkle motion) per the avatar contract.
+client/src/components/CelebrationOverlay.tsx:12:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/CelebrationOverlay.tsx:13:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/CelebrationOverlay.tsx:126:      <MMHBFloatAvatar
+client/src/components/CelebrationOverlay.tsx:127:        imageSrc={getOfficialLumi("encouraging")}
+client/src/components/CelebrationOverlay.tsx:129:        alt="Lumi celebrating progress"
+client/src/components/ToolCard.tsx:3: * category-tinted Lumi avatar on the left and title/description on the right.
+client/src/components/ToolCard.tsx:13:} from "@/components/avatar/BuddyAvatar";
+client/src/components/ToolCard.tsx:14:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/ToolCard.tsx:39:// Per-category avatar state — kept emotionally safe (never alarming).
+client/src/components/ToolCard.tsx:113:          src={getOfficialLumi("calm")}
+client/src/components/ToolCard.tsx:114:          alt="Lumi tool helper"
+client/src/components/ToolCard.tsx:118:          data-testid={`${slug}-avatar`}
+client/src/components/UpsellModal.jsx:80:            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+client/src/components/UpsellModal.jsx:96:              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FBF9F" strokeWidth="2.5">
+client/src/components/BrandHero.tsx:3:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/BrandHero.tsx:11:            src={getOfficialLumi("calm")}
+client/src/components/BrandLogo.tsx:11:            src={officialLumiAssets.LogoMark}
+client/src/components/EmotionCalendar.jsx:41:      <svg viewBox="0 0 100 100" className="w-20 h-20" aria-label="Mood distribution chart">
+client/src/components/MoodTrendsChart.jsx:106:          <svg viewBox={`0 0 ${days * 24} 100`} className="w-full h-full" preserveAspectRatio="none">
+client/src/components/PageTemplate.jsx:17:import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
+client/src/components/PageTemplate.jsx:18:import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+client/src/components/PageTemplate.jsx:33:// Canonical Lumi brand PNG (matches LumiV6.tsx + BuddyAvatar.tsx). Restored
+client/src/components/PageTemplate.jsx:106:          <MMHBFloatAvatar imageSrc={getOfficialLumi("calm")} size={32} alt="Lumi mark" data-testid="img-logo-badge-lumi" />
+client/src/components/TglpNavbar.jsx:10:import LumiMascot from "./lumi/LumiMascot.jsx";
+client/src/components/TglpNavbar.jsx:173:            <LumiMascot emotion="neutral" size={40} className="w-full h-full" data-testid="img-brand-logo" />
+client/src/content/microcopy/wellnessMicrocopy.ts:1007: *   give the avatar an "active dedicated listener" feel without claiming
+client/src/content/social/socialTemplates.ts:14:  characterLimit: number;
+client/src/content/social/socialTemplates.ts:40:    characterLimit: 280,
+client/src/content/social/socialTemplates.ts:60:    characterLimit: 280,
+client/src/content/social/socialTemplates.ts:101:    characterLimit: 2200,
+client/src/content/social/socialTemplates.ts:126:    characterLimit: 2200,
+client/src/content/social/socialTemplates.ts:163:    characterLimit: 3000,
+client/src/content/social/socialTemplates.ts:199:    characterLimit: 150,
+client/src/content/social/socialTemplates.ts:231:    characterLimit: 500,
+client/src/content/healingConcepts.js:650:    description: "Identifying character strengths in action",
+client/src/content/healingFrameworks.ts:17:    coreInsight: "Your reactions aren't character flaws - they're your nervous system trying to protect you based on past experiences.",
+client/src/content/healingFrameworks.ts:41:    coreInsight: "Your attachment patterns are adaptations to your early environment, not permanent character traits. Earned secure attachment is possible through intentional healing.",
+client/src/content/routes.js:1748:          'Make it at least 8 characters',
+client/src/content/routes.js:1767:          'Minimum 8 characters with mixed character types recommended',
+client/src/content/trust/trustRegistry.js:109:          "AI cannot diagnose, prescribe, replace human connection, predict your future, judge your character, or guarantee outcomes. It is a mirror for your own reflection — not an authority.",
+client/src/data/lumiAssets.js:2: * Lumi mascot asset registry.
+client/src/data/lumiAssets.js:6: * `/brand/v17/avatar-{floating,heart,breathing}-nobg.png` (cream-blob,
+client/src/data/lumiAssets.js:7: * non-sprout) deleted per V26 brand mandate. MASCOT_ASSETS key shape
+client/src/data/lumiAssets.js:9: * `LumiCustomizer`, `preloadMascots`) keeps working.
+client/src/data/lumiAssets.js:20:export const MASCOT_ASSETS = {
+client/src/data/lumiAssets.js:26:  // (V17 visual contract: one canonical mascot, no off-brand tints).
+client/src/data/lumiAssets.js:38: * Resolve the right mascot PNG for a given emotion + theme combination.
+client/src/data/lumiAssets.js:43:export function getMascotSrc(emotionKey, themeId = "sage") {
+client/src/data/lumiAssets.js:48:  return MASCOT_ASSETS[variant] || MASCOT_ASSETS.default;
+client/src/data/lumiAssets.js:51:export default MASCOT_ASSETS;
+client/src/data/nlpMiContent.js:61:      avatar: '/lumi/official/lumi-meditation.png',
+client/src/data/nlpMiContent.js:62:      avatarWebp: undefined,
+client/src/data/nlpMiContent.js:77:      avatar: '/lumi/official/lumi-heart.png',
+client/src/data/nlpMiContent.js:78:      avatarWebp: undefined,
+client/src/data/nlpMiContent.js:93:      avatar: '/lumi/official/lumi-float-idle.png',
+client/src/data/nlpMiContent.js:94:      avatarWebp: undefined,
+client/src/data/nlpMiContent.js:109:      avatar: '/lumi/official/lumi-heart.png',
+client/src/data/nlpMiContent.js:110:      avatarWebp: undefined,
+client/src/data/lumiToySpec.ts:4: * Mirrors the on-screen V7 avatar's expression / posture / heart-rate
+client/src/data/lumiToySpec.ts:96: * RGB tint, and heart-LED pulse rate stay in lockstep with the avatar.
+client/src/data/lumiToySpec.ts:105:   *  LumiV6.tsx so the firmware lookup table stays 1:1 with the avatar. */
+client/src/data/lumiEmotionMap.ts:15: * surfaces that swap pose PNGs (`/brand/v17/avatar-{floating,heart,
+client/src/data/lumiEmotionMap.ts:16: * breathing}-nobg.png`) or render the multi-sprite LumiMascot arm/leg
+client/src/data/lumiEmotionMap.ts:17: * classes (.lumi-mascot__arm--*).
+client/src/data/lumiEmotionMap.ts:136: * Co-regulation helper: as user anxiety rises (0..1), the avatar's
+client/src/features/community/Community.tsx:98:                  {myReflection.length}/500 characters • Sharing is optional
+client/src/features/community/DiscussionPage.jsx:284:                {newAnswer.length}/500 characters • Min 10 characters
+client/src/features/journal/JournalPage.jsx:3:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/features/mirror/JournalMirror.tsx:53:      setError("Please write a little more (at least ~10 characters).");
+client/src/features/state/StatePage.jsx:2:import BuddyPanel from "@/components/avatar/BuddyPanel";
+client/src/hooks/useBuddyEmotion.js:5: * Lumi's 10 emotion states. Designed to compose with <LumiMascot/> via:
+client/src/hooks/useBuddyEmotion.js:8: *   <LumiMascot emotion={emotion} onEmote={celebrate} />
+client/src/hooks/useBuddyEmotion.js:50:   * snaps back to derived. Wires up nicely as <LumiMascot onEmote={celebrate}/>.
+client/src/hooks/useLumiEmotion.js:3:import { MASCOT_ASSETS } from '../data/lumiAssets';
+client/src/hooks/useLumiEmotion.js:12: * @property {string}     animationClass       CSS class to apply to the mascot (e.g. 'lumi-breathe').
+client/src/hooks/useLumiEmotion.js:31: * useLumiEmotion — single source of truth for the Lumi mascot's emotional state.
+client/src/hooks/useLumiEmotion.js:156:    // Only nudge to 'listen' if the mascot is in a passive resting state, so
+client/src/hooks/useLumiEmotion.js:187:    return MASCOT_ASSETS[variant] || MASCOT_ASSETS.default;
+client/src/hooks/useLumiTheme.js:30:  // CSS variables that lumi-mascot.css and lumi-tokens.css can read.
+client/src/hooks/useLumiAudio.js:127:  // Every Lumi avatar in the app shares one pop, one chime debounce window,
+client/src/hooks/useBuddy.ts:16:} from "@/lib/avatarState";
+client/src/lib/bias/biasBlindSpots.ts:68:    description: "Attributing others' actions to character while attributing your own to circumstances.",
+client/src/lib/metacognition/metacognitionStudio.ts:39:    description: "Attributing others' behavior to character while attributing your own to circumstances.",
+client/src/lib/metacognition/metacognitionStudio.ts:87:    description: "Letting one positive trait influence perception of unrelated characteristics.",
+client/src/lib/mindscape/mindscapeNavigator.ts:5:  characteristics: string[];
+client/src/lib/mindscape/mindscapeNavigator.ts:33:    characteristics: ["Time distortion", "Effortless attention", "Clear goals", "Immediate feedback"],
+client/src/lib/mindscape/mindscapeNavigator.ts:39:    characteristics: ["Stillness", "Openness", "Non-judgment", "Equanimity"],
+client/src/lib/mindscape/mindscapeNavigator.ts:45:    characteristics: ["Divergent thinking", "Novel connections", "Playfulness", "Risk tolerance"],
+client/src/lib/mindscape/mindscapeNavigator.ts:51:    characteristics: ["Sequential processing", "Precision", "Critical evaluation"],
+client/src/lib/mindscape/mindscapeNavigator.ts:57:    characteristics: ["Empathy", "Active listening", "Responsiveness"],
+client/src/lib/mindscape/mindscapeNavigator.ts:63:    characteristics: ["Low arousal", "Passivity", "Receptivity"],
+client/src/lib/mindscape/mindscapeNavigator.ts:69:    characteristics: ["Scanning", "Quick reactions", "Threat detection"],
+client/src/lib/mindscape/mindscapeNavigator.ts:75:    characteristics: ["Pattern recognition", "Aha moments", "Holistic view"],
+client/src/lib/moral/moralReasoning.ts:43:    question: "What would a person of good character do?",
+client/src/lib/moral/moralReasoning.ts:44:    description: "Emphasizes character traits and becoming a good person",
+client/src/lib/lumiAudio.js:126: * is fired from the same call so the bell character lands in one event;
+client/src/lib/lumiAudio.js:189:// V14 Coordinator — module-scoped state so every Lumi avatar in the app
+client/src/lib/lumiAudio.js:190:// cooperates. Without this, N BuddyAvatars on a page would each fire N
+client/src/lib/lumiAudio.js:225: * the V14 prime directive. Multiple avatars sharing a debounce window means
+client/src/lib/lumiAudio.js:226: * mashing different avatars (header logo + chat bubble + tool card) still
+client/src/lib/lumiAudio.js:238: * Single-owner heartbeat coordinator. The first avatar to call `claimHeartbeat`
+client/src/lib/reflectionModes.ts:20:      "What character are you playing right now — and who would you rather be?",
+client/src/lib/buddyTelemetry.ts:136:   * overwhelmed when the helper copy below the avatar becomes visible.
+client/src/lib/buddyEmotion.ts:3: * signals to BuddyAvatar visual state.
+client/src/lib/buddyEmotion.ts:7: *   BuddyEmotion  →  emotionToAvatar()  →  { state, colorMode, pose? }
+client/src/lib/buddyEmotion.ts:13: *     per avatarState.ts contract — non-flashing presence during destabilization.
+client/src/lib/buddyEmotion.ts:15: *     it only colors the avatar. 988/741741 surfacing remains the chat layer's job.
+client/src/lib/buddyEmotion.ts:21:} from "@/components/avatar/BuddyAvatar";
+client/src/lib/buddyEmotion.ts:45:export interface AvatarHint {
+client/src/lib/buddyEmotion.ts:51:// 18-emotion (+crisis +calm) → avatar lookup table.
+client/src/lib/buddyEmotion.ts:54:export const EMOTION_TO_AVATAR: Record<BuddyEmotion, AvatarHint> = {
+client/src/lib/buddyEmotion.ts:77:export function emotionToAvatar(emotion: BuddyEmotion): AvatarHint {
+client/src/lib/buddyEmotion.ts:78:  return EMOTION_TO_AVATAR[emotion] || EMOTION_TO_AVATAR.calm;
+client/src/lib/buddyEmotion.ts:82:// these run first and short-circuit. False positives on the avatar are
+client/src/lib/buddyEmotion.ts:144: * Convenience: text → avatar hint in one call.
+client/src/lib/buddyEmotion.ts:146:export function avatarForText(text: string | null | undefined): AvatarHint {
+client/src/lib/buddyEmotion.ts:147:  return emotionToAvatar(classifyEmotion(text));
+client/src/lib/buddyEmotion.ts:164:  listening:     "calm",       // active-listening posture (purple via avatar)
+client/src/lib/buddyEmotion.ts:183:export function legacyToAvatar(legacy: LegacyEmotion): AvatarHint {
+client/src/lib/buddyEmotion.ts:184:  return emotionToAvatar(LEGACY_TO_EMOTION[legacy] || "calm");
+client/src/lib/buddyEmotion.ts:192:export interface ChatSentimentResult extends AvatarHint {
+client/src/lib/buddyEmotion.ts:204:  // Crisis short-circuits everything — preserve avatar safety.
+client/src/lib/buddyEmotion.ts:206:    return { ...emotionToAvatar("crisis"), emotion };
+client/src/lib/buddyEmotion.ts:208:  if (!text) return { ...emotionToAvatar("calm"), emotion };
+client/src/lib/buddyEmotion.ts:215:  return { ...emotionToAvatar(emotion), emotion };
+client/src/lib/buddyEmotion.ts:221:export function aiStateToPose(s: AIChatState): import("@/components/avatar/BuddyAvatar").BuddyPose {
+client/src/lib/avatarState.ts:2: * avatarState.ts — MMHB Buddy Engine: state model + visual contract.
+client/src/lib/avatarState.ts:5: * Drives <BuddyAvatar /> visuals from server-resolved emotional state.
+client/src/styles/lumi-mascot.css:2: * Lumi Mascot — Performance & Reduced-Motion Hardening
+client/src/styles/lumi-mascot.css:4: * LumiMascot.css; this file owns GPU-accel hints and the global
+client/src/styles/lumi-mascot.css:8:.lumi-mascot {
+client/src/styles/lumi-mascot.css:9:  /* GPU-accel hint to keep the mascot on its own composite layer so
+client/src/styles/lumi-mascot.css:20:.lumi-mascot.animating {
+client/src/styles/lumi-mascot.css:25:.lumi-mascot[data-loading="true"] {
+client/src/styles/lumi-mascot.css:34:.lumi-reduced-motion .lumi-mascot,
+client/src/styles/lumi-mascot.css:35:.lumi-reduced-motion .lumi-mascot * {
+client/src/styles/lumi-mascot.css:41:  .lumi-mascot,
+client/src/styles/lumi-mascot.css:42:  .lumi-mascot * {
+client/src/styles/lumi-mascot.css:46:  .lumi-mascot.animating {
+client/src/styles/lumi-mascot.css:54: * theme in LumiCustomizer. Filters are applied to .lumi-mascot inside the
+client/src/styles/lumi-mascot.css:59:.lumi-mascot,
+client/src/styles/lumi-mascot.css:60:.lumi-mascot img {
+client/src/styles/lumi-mascot.css:64:body.lumi-theme-sage     .lumi-mascot { filter: none; }
+client/src/styles/lumi-mascot.css:65:body.lumi-theme-ocean    .lumi-mascot { filter: hue-rotate(190deg) saturate(1.1); }
+client/src/styles/lumi-mascot.css:66:body.lumi-theme-lavender .lumi-mascot { filter: hue-rotate(260deg) saturate(0.9) brightness(1.05); }
+client/src/styles/lumi-mascot.css:67:body.lumi-theme-coral    .lumi-mascot { filter: hue-rotate(320deg) saturate(1.2) brightness(1.02); }
+client/src/styles/lumi-mascot.css:68:body.lumi-theme-sunshine .lumi-mascot { filter: hue-rotate(40deg)  saturate(1.3) brightness(1.1); }
+client/src/styles/lumi-mascot.css:69:body.lumi-theme-rose     .lumi-mascot { filter: hue-rotate(340deg) saturate(1.1) brightness(0.95); }
+client/src/styles/lumi-mascot.css:70:body.lumi-theme-mint     .lumi-mascot { filter: hue-rotate(150deg) saturate(1.05) brightness(1.02); }
+client/src/styles/lumi-mascot.css:71:body.lumi-theme-onyx     .lumi-mascot { filter: grayscale(0.6) brightness(0.7) contrast(1.1); }
+client/src/styles/lumi-mascot.css:72:body.lumi-theme-snow     .lumi-mascot { filter: grayscale(0.3) brightness(1.3) saturate(0.5); }
+client/src/styles/lumi-mascot.css:77: * LumiMascot.css. Use these when you want to apply a one-shot or looping
+client/src/styles/lumi-mascot.css:78: * animation to ANY element (not just .lumi-mascot wrappers). Class-based
+client/src/styles/lumi-mascot.css:81: * bottom of this rule set + the .lumi-mascot * cascade above.
+client/src/styles/lumi-mascot.css:214:   .lumi-mascot wrappers, where the cascade above wouldn't reach). */
+client/src/styles/lumi-admin.css:6: * / lumi-mascot.css. Only ships classes that were NOT already present in the
+client/src/styles/lumi-admin.css:19: *   - .hero-mascot                                             (full-width hero artwork)
+client/src/styles/lumi-admin.css:20: *   - .mascot-container                                        (compact 48px mascot wrapper)
+client/src/styles/lumi-admin.css:219:   MASCOT WRAPPERS (admin / hero forms)
+client/src/styles/lumi-admin.css:221:/* Hero-form mascot rules per spec. CURRENT consumer status: CanvaLanding.jsx
+client/src/styles/lumi-admin.css:222: * and Home.jsx reference `hero-mascot` only via data-testid attributes, NOT
+client/src/styles/lumi-admin.css:227:.hero-mascot {
+client/src/styles/lumi-admin.css:233:.hero-mascot:hover {
+client/src/styles/lumi-admin.css:238:/* Compact 48px mascot wrapper for header logos / nav avatars. */
+client/src/styles/lumi-admin.css:239:.mascot-container {
+client/src/styles/lumi-admin.css:248:.mascot-container img {
+client/src/styles/lumi-admin.css:361:  .hero-mascot:hover { transition: none !important; }
+client/src/styles/visual-benefits.css:109:/* Floating avatar overlay (1:1) */
+client/src/styles/visual-benefits.css:110:.visual-benefits-polish .vb-avatar-overlay {
+client/src/styles/visual-benefits.css:124:.visual-benefits-polish .vb-row-reversed .vb-avatar-overlay {
+client/src/styles/visual-benefits.css:129:.visual-benefits-polish .vb-avatar-img {
+client/src/styles/visual-benefits.css:319:  .visual-benefits-polish .vb-avatar-overlay {
+client/src/styles/breathing-tool.css:70:/* 3. Concentric breath rings — 2 decorative rings sit BEHIND the avatar
+client/src/styles/breathing-tool.css:75:   wraps the avatar — they sit in front of it, around the avatar, as
+client/src/styles/breathing-tool.css:116:/* Soft glow halo — sits behind avatar (z-index -2, below rings),
+client/src/styles/canva-landing.css:839:.canva-landing .testimonial-avatar {
+client/src/styles/brand.css:1036:  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238FBF9F' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+client/src/styles/lumi-pastel-visual-system.css:212:img[alt*="Lumi"],
+client/src/styles/lumi-pastel-visual-system.css:213:img[alt*="lumi"],
+client/src/styles/lumi-pastel-visual-system.css:383:  img[alt*="Lumi"],
+client/src/styles/lumi-pastel-visual-system.css:384:  img[alt*="lumi"],
+client/src/styles/lumi-pastel-visual-system.css:412:  img[alt*="Lumi"],
+client/src/styles/lumi-pastel-visual-system.css:413:  img[alt*="lumi"],
+client/src/styles/lumi-living-presence-phase64.css:127:img[alt*="Lumi"],
+client/src/styles/lumi-living-presence-phase64.css:128:img[alt*="lumi"],
+client/src/styles/lumi-living-presence-phase64.css:129:img[src*="lumi"],
+client/src/styles/lumi-living-presence-phase64.css:130:img[src*="Lumi"],
+client/src/styles/lumi-living-presence-phase64.css:147:.lumi-avatar-scene,
+client/src/styles/lumi-living-presence-phase64.css:159:.lumi-avatar-scene::before,
+client/src/styles/lumi-living-presence-phase64.css:180:.lumi-avatar-scene::after,
+client/src/styles/lumi-living-presence-phase64.css:362:  img[alt*="Lumi"],
+client/src/styles/lumi-living-presence-phase64.css:363:  img[alt*="lumi"],
+client/src/styles/lumi-living-presence-phase64.css:364:  img[src*="lumi"],
+client/src/styles/lumi-living-presence-phase64.css:365:  img[src*="Lumi"],
+client/src/styles/lumi-living-presence-phase64.css:372:  .lumi-avatar-scene::before,
+client/src/styles/lumi-living-presence-phase64.css:373:  .lumi-avatar-scene::after,
+client/src/styles/lumi-visual-system.css:179:img[alt*="Lumi"],
+client/src/styles/lumi-visual-system.css:180:img[alt*="lumi"],
+client/src/styles/lumi-visual-system.css:181:img[src*="Lumi"],
+client/src/styles/lumi-visual-system.css:182:img[src*="lumi"],
+client/src/styles/lumi-visual-system.css:185:[class*="avatar"] img,
+client/src/styles/lumi-visual-system.css:186:[class*="Avatar"] img {
+client/src/utils/preloadMascots.js:1:import { MASCOT_ASSETS } from '../data/lumiAssets';
+client/src/utils/preloadMascots.js:4: * Preloads all mascot images into browser cache.
+client/src/utils/preloadMascots.js:7: * MASCOT_ASSETS is an object keyed by variant ({ default, blue, lavender, ... }).
+client/src/utils/preloadMascots.js:11:export function preloadMascots() {
+client/src/utils/preloadMascots.js:15:  Object.values(MASCOT_ASSETS).forEach((src) => {
+client/src/sections/NlpMiContent.jsx:190:        {/* 5. Benefit rows — alternating mascot + content (V17 VisualBenefits formatting) */}
+client/src/sections/NlpMiContent.jsx:211:                  {s.avatar && (
+client/src/sections/NlpMiContent.jsx:215:                        {s.avatarWebp && <source srcSet={s.avatarWebp} type="image/webp" />}
+client/src/sections/NlpMiContent.jsx:217:                          src={s.avatar}
+client/src/sections/NlpMiContent.jsx:221:                          className="nlp-mi-row-avatar"
+client/src/sections/NlpMiContent.jsx:378:        .nlp-mi-polish .nlp-mi-row-avatar {
+client/src/sections/VisualBenefits.jsx:6: * (with a small 1:1 floating Lumi avatar overlay) against an emotionally
+client/src/sections/VisualBenefits.jsx:19: *   - Avatar mapping aligned to spec (Companionship + Understanding share
+client/src/sections/VisualBenefits.jsx:20: *     avatar-heart; Growth uses avatar-floating)
+client/src/sections/VisualBenefits.jsx:44:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:47:    // v5.8.71 — avatar overlay swapped to canonical LUMI_MEDITATION
+client/src/sections/VisualBenefits.jsx:49:    avatar: '/lumi/official/lumi-meditation.png',
+client/src/sections/VisualBenefits.jsx:50:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:64:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:67:    // v5.8.71 — avatar overlay swapped to canonical LUMI_HEART
+client/src/sections/VisualBenefits.jsx:69:    avatar: '/lumi/official/lumi-heart.png',
+client/src/sections/VisualBenefits.jsx:70:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:84:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:85:    // Overlay reuses the official avatar-heart asset (sage hooded body
+client/src/sections/VisualBenefits.jsx:89:    // v5.8.71 — avatar overlay swapped to canonical LUMI_COMPANION
+client/src/sections/VisualBenefits.jsx:92:    avatar: '/lumi/official/lumi-companion.png',
+client/src/sections/VisualBenefits.jsx:93:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:107:    // v5.8.18 — user-supplied OFFICIAL avatar set (do NOT regenerate).
+client/src/sections/VisualBenefits.jsx:114:    avatar: '/lumi/official/lumi-path.png',
+client/src/sections/VisualBenefits.jsx:115:    avatarWebp: undefined,
+client/src/sections/VisualBenefits.jsx:245:                  <div className="vb-avatar-overlay" aria-hidden="true">
+client/src/sections/VisualBenefits.jsx:247:                      src={b.avatar}
+client/src/sections/VisualBenefits.jsx:248:                      srcWebp={b.avatarWebp}
+client/src/sections/VisualBenefits.jsx:250:                      className="vb-avatar-img"
+client/src/main.css:129:@import './styles/lumi-mascot.css';
+client/src/avatar-life/types/avatarLifeTypes.ts:140:export type AvatarTelemetryEvent =
+client/src/avatar-life/types/avatarLifeTypes.ts:141:  | { type: "avatar:mount"; surface: SurfaceContext; state: EmotionalState; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:142:  | { type: "avatar:unmount"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:143:  | { type: "avatar:state_change"; from: EmotionalState; to: EmotionalState; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:144:  | { type: "avatar:hover_start"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:145:  | { type: "avatar:hover_end"; surface: SurfaceContext; durationMs: number; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:146:  | { type: "avatar:proximity_enter"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:147:  | { type: "avatar:proximity_settled"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:148:  | { type: "avatar:proximity_leave"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:149:  | { type: "avatar:click"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:150:  | { type: "avatar:reduced_motion_change"; reduced: boolean; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:151:  | { type: "avatar:crisis_engage"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:152:  | { type: "avatar:crisis_release"; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:153:  | { type: "avatar:fps_sample"; fps: number; surface: SurfaceContext; ts: number }
+client/src/avatar-life/types/avatarLifeTypes.ts:154:  | { type: "avatar:contract_violation"; rule: string; detail: string; ts: number };
+client/src/avatar-life/types/avatarLifeTypes.ts:156:export type TelemetryListener = (event: AvatarTelemetryEvent) => void;
+client/src/avatar-life/types/avatarLifeTypes.ts:159:export interface AvatarReactState {
+client/src/avatar-life/types/avatarLifeTypes.ts:177:export const AVATAR_SOURCE_DIMENSION = 1024 as const;
+client/src/avatar-life/state/useAvatarLifeStore.tsx:5: * `MMHBAvatarRuntimeProvider` instantiates its own isolated store, so
+client/src/avatar-life/state/useAvatarLifeStore.tsx:18:} from "../types/avatarLifeTypes";
+client/src/avatar-life/state/useAvatarLifeStore.tsx:20:export interface AvatarLifeState {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:43:export type AvatarLifeStoreApi = ReturnType<typeof createAvatarLifeStore>;
+client/src/avatar-life/state/useAvatarLifeStore.tsx:47:/** Create an isolated avatar-life store. Called once per provider. */
+client/src/avatar-life/state/useAvatarLifeStore.tsx:48:export function createAvatarLifeStore(initialSurface: SurfaceContext = "hero") {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:49:  return createStore<AvatarLifeState>((set) => ({
+client/src/avatar-life/state/useAvatarLifeStore.tsx:97:const AvatarStoreContext = createContext<AvatarLifeStoreApi | null>(null);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:105:export function AvatarStoreProvider({ surface, children }: ProviderProps) {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:106:  const ref = useRef<AvatarLifeStoreApi | null>(null);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:107:  if (!ref.current) ref.current = createAvatarLifeStore(surface);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:109:    <AvatarStoreContext.Provider value={ref.current}>
+client/src/avatar-life/state/useAvatarLifeStore.tsx:111:    </AvatarStoreContext.Provider>
+client/src/avatar-life/state/useAvatarLifeStore.tsx:116:export function useAvatarStoreApi(): AvatarLifeStoreApi {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:117:  const api = useContext(AvatarStoreContext);
+client/src/avatar-life/state/useAvatarLifeStore.tsx:120:      "Avatar runtime hooks must be used inside <MMHBAvatarRuntimeProvider>.",
+client/src/avatar-life/state/useAvatarLifeStore.tsx:127:export function useAvatarLifeStore<T>(selector: (s: AvatarLifeState) => T): T {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:128:  const api = useAvatarStoreApi();
+client/src/avatar-life/state/useAvatarLifeStore.tsx:133:export function useAvatarLifeStoreActions() {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:134:  const api = useAvatarStoreApi();
+client/src/avatar-life/state/useAvatarLifeStore.tsx:145:export const selectInteractionIntensity = (s: AvatarLifeState): number => {
+client/src/avatar-life/state/useAvatarLifeStore.tsx:155:export const selectReactBridge = (s: AvatarLifeState) => ({
+client/src/avatar-life/governance/nonDriftRules.ts:8: * never make the avatar more energetic than the contract allows).
+client/src/avatar-life/governance/nonDriftRules.ts:20:} from "../types/avatarLifeTypes";
+client/src/avatar-life/governance/nonDriftRules.ts:48:/** 7 component identity rules — what the avatar must NEVER do. */
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:2: * Phase 11 — Type-safe avatar runtime telemetry.
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:14:  AvatarTelemetryEvent,
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:16:} from "../types/avatarLifeTypes";
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:22:/** Subscribe to avatar telemetry. Returns an unsubscribe function. */
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:23:export function onAvatarTelemetry(listener: TelemetryListener): () => void {
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:29:export function emitAvatarTelemetry(event: AvatarTelemetryEvent): void {
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:30:  if (event.type === "avatar:fps_sample") {
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:41:      // Telemetry must never break the avatar. Swallow listener errors.
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:47:export function __resetAvatarTelemetry(): void {
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:54:  emitAvatarTelemetry({
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts:55:    type: "avatar:contract_violation",
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:10:  useAvatarLifeStore,
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:11:  useAvatarStoreApi,
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:12:} from "../state/useAvatarLifeStore";
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:13:import { emitAvatarTelemetry } from "../observability/avatarRuntimeTelemetry";
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:18:} from "../types/avatarLifeTypes";
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:28:export function useAvatarPresenceRuntime({
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:33:  const api = useAvatarStoreApi();
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:35:  const setReducedMotion = useAvatarLifeStore((s) => s.setReducedMotion);
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:49:      emitAvatarTelemetry({
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:50:        type: "avatar:contract_violation",
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:56:    emitAvatarTelemetry({
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:57:      type: "avatar:mount",
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:64:      emitAvatarTelemetry({ type: "avatar:unmount", surface, ts: Date.now() });
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:73:    emitAvatarTelemetry({
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:74:      type: "avatar:reduced_motion_change",
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:86:        emitAvatarTelemetry({
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:87:          type: "avatar:state_change",
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:95:        emitAvatarTelemetry({
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:96:          type: s.crisis ? "avatar:crisis_engage" : "avatar:crisis_release",
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:117:        emitAvatarTelemetry({
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts:118:          type: "avatar:fps_sample",
+client/src/avatar-life/components/AvatarWithReactState.tsx:13:import { useAvatarLifeStore, selectReactBridge } from "../state/useAvatarLifeStore";
+client/src/avatar-life/components/AvatarWithReactState.tsx:14:import type { AvatarReactState } from "../types/avatarLifeTypes";
+client/src/avatar-life/components/AvatarWithReactState.tsx:17:  children: (state: AvatarReactState) => ReactNode;
+client/src/avatar-life/components/AvatarWithReactState.tsx:20:export function AvatarWithReactState({ children }: BridgeProps) {
+client/src/avatar-life/components/AvatarWithReactState.tsx:21:  const bridge = useAvatarLifeStore(selectReactBridge);
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:2: * Phase 11 — React provider that mounts an isolated avatar runtime per surface.
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:4: * Each provider creates its own Zustand store (via `AvatarStoreProvider`),
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:14:} from "../types/avatarLifeTypes";
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:15:import { AvatarStoreProvider } from "../state/useAvatarLifeStore";
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:16:import { useAvatarPresenceRuntime } from "../hooks/useAvatarPresenceRuntime";
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:40:  useAvatarPresenceRuntime({ surface: surfaceContext, initialState, sampleFps });
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:48:export function MMHBAvatarRuntimeProvider(props: ProviderProps) {
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:50:    <AvatarStoreProvider surface={props.surfaceContext}>
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:52:    </AvatarStoreProvider>
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:57:export function useAvatarRuntimeContext(): RuntimeContextValue {
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx:61:      "useAvatarRuntimeContext must be called inside <MMHBAvatarRuntimeProvider>",
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:2: * Phase 11 — Production Framer Motion avatar component.
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:28:} from "../types/avatarLifeTypes";
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:30:  useAvatarLifeStore,
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:31:  useAvatarStoreApi,
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:32:} from "../state/useAvatarLifeStore";
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:33:import { emitAvatarTelemetry } from "../observability/avatarRuntimeTelemetry";
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:35:interface MMHBFloatAvatarProps {
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:51:export function MMHBFloatAvatar({
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:59:  "data-testid": testId = "mmhb-float-avatar",
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:60:}: MMHBFloatAvatarProps) {
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:61:  const api = useAvatarStoreApi();
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:62:  const storeState = useAvatarLifeStore((s) => s.currentState);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:63:  const storeCrisis = useAvatarLifeStore((s) => s.crisis);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:64:  const reducedMotion = useAvatarLifeStore((s) => s.reducedMotion);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:65:  const hover = useAvatarLifeStore((s) => s.hover);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:66:  const proximity = useAvatarLifeStore((s) => s.proximity);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:67:  const clicked = useAvatarLifeStore((s) => s.clicked);
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:160:      emitAvatarTelemetry({
+client/src/avatar-life/components/MMHBFloatAvatar.tsx:161:        type: "avatar:click",
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:6: * Store tests use `createAvatarLifeStore()` directly (no React tree)
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:18:} from "../types/avatarLifeTypes";
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:25:  createAvatarLifeStore,
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:26:  type AvatarLifeStoreApi,
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:27:} from "../state/useAvatarLifeStore";
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:29:  __resetAvatarTelemetry,
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:30:  emitAvatarTelemetry,
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:31:  onAvatarTelemetry,
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:32:} from "../observability/avatarRuntimeTelemetry";
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:34:let store: AvatarLifeStoreApi;
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:37:  store = createAvatarLifeStore("hero");
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:41:  __resetAvatarTelemetry();
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:134:    onAvatarTelemetry((e) => received.push(e.type));
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:135:    emitAvatarTelemetry({
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:136:      type: "avatar:mount",
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:141:    expect(received).toEqual(["avatar:mount"]);
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:145:    const off = onAvatarTelemetry(() => count++);
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:147:    emitAvatarTelemetry({
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:148:      type: "avatar:click",
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:156:    onAvatarTelemetry((e) => {
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:157:      if (e.type === "avatar:fps_sample") seen.push(e.fps);
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:160:    emitAvatarTelemetry({ type: "avatar:fps_sample", fps: 60, surface: "hero", ts: now });
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:161:    emitAvatarTelemetry({ type: "avatar:fps_sample", fps: 58, surface: "hero", ts: now + 1000 });
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:162:    emitAvatarTelemetry({ type: "avatar:fps_sample", fps: 55, surface: "hero", ts: now + 5500 });
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:167:    onAvatarTelemetry((e) => {
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:168:      if (e.type === "avatar:fps_sample") seen.push({ surface: e.surface, fps: e.fps });
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:171:    emitAvatarTelemetry({ type: "avatar:fps_sample", fps: 60, surface: "hero", ts: t });
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:172:    emitAvatarTelemetry({ type: "avatar:fps_sample", fps: 58, surface: "chat", ts: t + 100 });
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:173:    emitAvatarTelemetry({ type: "avatar:fps_sample", fps: 55, surface: "hero", ts: t + 200 });
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:179:    onAvatarTelemetry(() => {
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:183:    onAvatarTelemetry(() => {
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:186:    emitAvatarTelemetry({
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts:187:      type: "avatar:mount",
+client/src/avatar-life/index.ts:2: * Phase 11 — Single import point for the production avatar runtime.
+client/src/avatar-life/index.ts:5: *   import { MMHBFloatAvatar, MMHBAvatarRuntimeProvider } from "@/avatar-life";
+client/src/avatar-life/index.ts:7: *   <MMHBAvatarRuntimeProvider surfaceContext="hero" defaultState="calmIdle">
+client/src/avatar-life/index.ts:8: *     <MMHBFloatAvatar
+client/src/avatar-life/index.ts:9: *       imageSrc="/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png"
+client/src/avatar-life/index.ts:14: *   </MMHBAvatarRuntimeProvider>
+client/src/avatar-life/index.ts:18:  MMHBFloatAvatar,
+client/src/avatar-life/index.ts:19:} from "./components/MMHBFloatAvatar";
+client/src/avatar-life/index.ts:21:  MMHBAvatarRuntimeProvider,
+client/src/avatar-life/index.ts:22:  useAvatarRuntimeContext,
+client/src/avatar-life/index.ts:23:} from "./components/MMHBAvatarRuntimeProvider";
+client/src/avatar-life/index.ts:24:export { AvatarWithReactState } from "./components/AvatarWithReactState";
+client/src/avatar-life/index.ts:27:  useAvatarLifeStore,
+client/src/avatar-life/index.ts:28:  useAvatarStoreApi,
+client/src/avatar-life/index.ts:29:  createAvatarLifeStore,
+client/src/avatar-life/index.ts:32:} from "./state/useAvatarLifeStore";
+client/src/avatar-life/index.ts:33:export type { AvatarLifeState, AvatarLifeStoreApi } from "./state/useAvatarLifeStore";
+client/src/avatar-life/index.ts:34:export { useAvatarPresenceRuntime } from "./hooks/useAvatarPresenceRuntime";
+client/src/avatar-life/index.ts:38:  onAvatarTelemetry,
+client/src/avatar-life/index.ts:39:  emitAvatarTelemetry,
+client/src/avatar-life/index.ts:41:} from "./observability/avatarRuntimeTelemetry";
+client/src/avatar-life/index.ts:56:  AVATAR_SOURCE_DIMENSION,
+client/src/avatar-life/index.ts:60:} from "./types/avatarLifeTypes";
+client/src/avatar-life/index.ts:66:  AvatarTelemetryEvent,
+client/src/avatar-life/index.ts:68:  AvatarReactState,
+client/src/avatar-life/index.ts:69:} from "./types/avatarLifeTypes";
+client/src/avatar-life/officialLumiAssets.ts:1:// FILE: client/src/avatar-life/officialLumiAssets.ts
+client/src/avatar-life/officialLumiAssets.ts:4: * Official Lumi avatar registry.
+client/src/avatar-life/officialLumiAssets.ts:21: * LEGACY AVATAR SYSTEM
+client/src/avatar-life/officialLumiAssets.ts:26: * client/src/avatar-life
+client/src/design-system/tokens/radius.ts:24:  avatar: radius.pill,
+client/src/design-system/tokens/colors.ts:73:/** Aura / glow colors — used by MMHBFloatAvatar emotional states. */
+client/src/companion-voice/governance/companionRules.ts:85:    description: "Response message MUST stay under MAX_MESSAGE_LENGTH characters.",
+client/src/companion-voice/components/MMHBCompanionMessage.tsx:5: * "your buddy" / "Lumi" — never "I" — and avatar is decorative only.
+client/src/lumi-conversation/safety/emotionalBoundaryRules.ts:65:    description: "Lumi responses must be 1-3 sentences and ≤320 characters.",
+client/src/lumi-conversation/prompts/lumiSystemPrompt.ts:31:- Maximum 320 characters total.
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:37:  /** Avatar slot — host can pass MMHBFloatAvatar or any element. */
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:38:  avatarSlot?: React.ReactNode;
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:97:  avatarSlot,
+client/src/lumi-conversation/components/LumiConversationPanel.tsx:177:            {avatarSlot}
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:9: *  - Avatar identity is frozen — the controller renders scene layers
+client/src/lumi-scenes/runtime/ScenePresetEngine.ts:52:  /** Spec-mandated audio character. Internal-only descriptor. */
+client/src/lumi-rituals/runtime/useRitual.ts:14: *  - This hook never reads, writes, or animates Lumi avatar state.
+client/src/lumi-rituals/runtime/useRitual.ts:16: *    touches avatar DOM.
+client/src/lumi-rituals/runtime/RitualEngine.ts:8: *  - Engine never references Lumi avatar shape, color, animation, or DOM.
+client/src/lumi-rituals/components/RitualStepCard.tsx:10: * Avatar identity untouched — this component never references Lumi DOM.
+client/src/lumi-rituals/components/GuidedPresenceRitual.tsx:11: *  - Avatar DOM (Lumi identity is preserved by not being touched)
+client/src/lumi-circadian/runtime/circadianStateMachine.ts:5: * Zero DOM. Zero Lumi avatar references. Sessions are ephemeral —
+client/src/lumi-circadian/components/OptInPrompt.tsx:11: * Avatar identity: this component does not import or render Lumi. It
+client/src/lumi-consistency/governance/crossPlatformAdaptationBoundaries.ts:20:    description: "Avatar render size in CSS pixels.",
+client/src/lumi-integration/tests/crossModule.test.ts:10: *   1. The ritual → scene → avatar end-to-end flow has a coherent type
+client/src/lumi-integration/tests/crossModule.test.ts:11: *      surface (every emotional state the avatar exposes resolves to a
+client/src/lumi-integration/tests/crossModule.test.ts:19: *      matches the actual content of the avatar / scene / ritual modules
+client/src/lumi-integration/tests/crossModule.test.ts:20: *      (LUMI_EMOTIONAL_STATES count = avatar EMOTIONAL_STATES count;
+client/src/lumi-integration/tests/crossModule.test.ts:25: *      to a valid scene preset and avatar emotional state.
+client/src/lumi-integration/tests/crossModule.test.ts:36:} from "../../avatar-life/types/avatarLifeTypes";
+client/src/lumi-integration/tests/crossModule.test.ts:82:// These tables encode the semantic equivalence between the avatar's
+client/src/lumi-integration/tests/crossModule.test.ts:89:const AVATAR_TO_SCENE: Readonly<Record<EmotionalState, SceneState>> = Object.freeze({
+client/src/lumi-integration/tests/crossModule.test.ts:110:const RITUAL_TO_AVATAR: Readonly<Record<RitualKey, EmotionalState>> = Object.freeze({
+client/src/lumi-integration/tests/crossModule.test.ts:121:// and the avatar emotional vocabulary. These two modules ship independent
+client/src/lumi-integration/tests/crossModule.test.ts:123://   consistency `joySoft`    ↔ avatar `peacefulJoy`
+client/src/lumi-integration/tests/crossModule.test.ts:124://   consistency `concernSoft` ↔ avatar `gentleConcern`
+client/src/lumi-integration/tests/crossModule.test.ts:125://   consistency `alert`       ↔ avatar `welcoming` (closest analogue —
+client/src/lumi-integration/tests/crossModule.test.ts:127://     the avatar's `welcoming` is its analogue surface state).
+client/src/lumi-integration/tests/crossModule.test.ts:132:const LUMI_TO_AVATAR: Readonly<Record<LumiEmotionalState, EmotionalState>> = Object.freeze({
+client/src/lumi-integration/tests/crossModule.test.ts:146:  it("avatar EMOTIONAL_STATES has 8 entries", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:154:  it("LUMI_EMOTIONAL_STATES count matches avatar count", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:162:  it("every LumiEmotionalState semantically maps to a valid avatar EmotionalState", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:164:    // 9th state without an avatar equivalent" or "avatar renamed
+client/src/lumi-integration/tests/crossModule.test.ts:167:      const avatarState = LUMI_TO_AVATAR[lumiState];
+client/src/lumi-integration/tests/crossModule.test.ts:168:      expect(avatarState, `no avatar equivalent for lumi state "${lumiState}"`).toBeDefined();
+client/src/lumi-integration/tests/crossModule.test.ts:169:      expect(EMOTIONAL_STATES.includes(avatarState)).toBe(true);
+client/src/lumi-integration/tests/crossModule.test.ts:173:  it("every avatar EmotionalState maps to a valid SceneState", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:175:      const scene = AVATAR_TO_SCENE[state];
+client/src/lumi-integration/tests/crossModule.test.ts:187:  it("every ritual key maps to a valid avatar EmotionalState", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:189:      const state = RITUAL_TO_AVATAR[key];
+client/src/lumi-integration/tests/crossModule.test.ts:343:// ─── 4. End-to-end ritual flow → scene + avatar resolution ───────────────────
+client/src/lumi-integration/tests/crossModule.test.ts:378:  it("terminal ritual maps to a valid avatar EmotionalState for every key", () => {
+client/src/lumi-integration/tests/crossModule.test.ts:380:      const avatarState = RITUAL_TO_AVATAR[key];
+client/src/lumi-integration/tests/crossModule.test.ts:381:      expect(EMOTIONAL_STATES.includes(avatarState)).toBe(true);
+client/src/lumi-integration/tests/crossModule.test.ts:382:      // And the avatar state's scene equivalent passes audit too.
+client/src/lumi-integration/tests/crossModule.test.ts:383:      const scene = AVATAR_TO_SCENE[avatarState];
+client/src/lumi-registry/registry/lumiUsageRules.ts:33:  { id: "a11y-role-img-when-meaningful", rule: "Meaningful Lumi MUST have role=\"img\".", severity: "critical" },
+client/src/lumi-registry/registry/lumiUsageRules.ts:55:  { id: "cohesion-no-legacy-imports", rule: "No legacy avatar imports (mascot, buddy-old, hero-bear, green-bear).", severity: "critical" },
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:218:export const OLD_AVATAR_GREP_PATTERNS: ReadonlyArray<string> = Object.freeze([
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:230:  "mascot",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:232:  "avatar-legacy",
+client/src/lumi-registry/registry/lumiPageReplacementMap.ts:238:  const pattern = OLD_AVATAR_GREP_PATTERNS.join("|");
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:47:    reasoning: "CanvaLanding.jsx mounted at /; opt-in entry unblocks OfficialLumi migration from legacy LumiMascot without forcing render. Position 'hero' chosen as closest legal value to user-requested 'floating' (PagePosition type does not include 'floating').",
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:346:  "mascot",
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:348:  "avatar-legacy",
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:365:      return { valid: false, issue: `forbidden legacy avatar reference "${pattern}" in import path "${importPath}"` };
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:373: * because they're driven by the MMHB runtime avatar provider (header
+client/src/lumi-registry/registry/lumiPagePlacementMap.ts:403:    // page-placement map (they're driven by the runtime avatar provider,
+client/src/lumi-registry/registry/officialLumiRegistry.ts:5: * back to one of these 7 IDs — never strings, never ad-hoc avatars.
+client/src/lumi-registry/registry/officialLumiRegistry.ts:24: * MMHB avatar runtime state ids that map onto each variant. These match
+client/src/lumi-registry/registry/officialLumiRegistry.ts:25: * the existing `MMHBAvatarRuntimeProvider` state machine (calmIdle,
+client/src/lumi-registry/index.ts:64:  OLD_AVATAR_GREP_PATTERNS,
+client/src/lumi-crisis/governance/crisisSafetyRules.ts:53:    title: "No Lumi avatar, no decorative elements on crisis surfaces",
+client/src/App.jsx:10:import LivingLumiAvatar from "./components/lumi/LivingLumiAvatar";
+client/src/App.jsx:22:import { MMHBAvatarRuntimeProvider } from "./avatar-life/components/MMHBAvatarRuntimeProvider.tsx";
+client/src/App.jsx:84:const AvatarLab = lazy(() => import("./pages/AvatarLab.jsx"));
+client/src/App.jsx:336:      <LivingLumiAvatar emotion="supportive" variant="floating" />
+client/src/App.jsx:405:          <MMHBAvatarRuntimeProvider surfaceContext="buddy" defaultState="calmIdle">
+client/src/App.jsx:735:              <Route path="/avatar-lab"><AvatarLab /></Route>
+client/src/App.jsx:1592:              {/* /celebration: 3-phase "I Did It!" flow per Avatar v4.2 Flow C.
+client/src/App.jsx:1938:          </MMHBAvatarRuntimeProvider>
+client/src/index.css:15:@import "./styles/lumi-mascot.css";
+client/src/index.css:6959:  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M3.5 8.5l3 3 6-7' stroke='%23fdfaf3' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+client/src/index.css:6995:    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M4 6l4 4 4-4' stroke='%234f8b80' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+client/src/index.css:7005:    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'><path d='M4 6l4 4 4-4' stroke='%2388b8af' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+public/brand/favicon.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+public/brand/logo-lockup.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" fill="none">
+public/brand/logo-mark.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+public/brand/og-image.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+public/icons/icon1.svg:2:<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+public/icons/icon2.svg:2:<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+public/icons/icon3.svg:2:<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+public/icons/flower-of-life.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Flower of Life sacred geometry pattern" fill="none" stroke="currentColor" stroke-width="1.2">
+public/logo.svg:2:<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+public/lotus-guide.svg:2:<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+public/lotus-guide.svg:11:<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+public/sacred-pattern.svg:2:<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
