@@ -1,0 +1,769 @@
+client/src/pages/DesignSystemV2.jsx:21:            style={{ color: "var(--lumi-amber-700)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}
+client/src/pages/DesignSystemV2.jsx:28:          style={{ margin: 0, marginBottom: "var(--lumi-space-6)", color: "var(--lumi-text)" }}
+client/src/pages/DesignSystemV2.jsx:40:    <div className="lumi-card" style={{ padding: "var(--lumi-space-4)" }} data-testid={`swatch-${name}`}>
+client/src/pages/DesignSystemV2.jsx:45:          borderRadius: "var(--lumi-radius-md)",
+client/src/pages/DesignSystemV2.jsx:48:          border: "1px solid var(--lumi-border)",
+client/src/pages/DesignSystemV2.jsx:52:      <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>{varName}</code>
+client/src/pages/DesignSystemV2.jsx:61:  ["calm","--lumi-calm"],["growth","--lumi-growth"],["love","--lumi-love"],
+client/src/pages/DesignSystemV2.jsx:62:  ["insight","--lumi-insight"],["energy","--lumi-energy"],["rest","--lumi-rest"],
+client/src/pages/DesignSystemV2.jsx:102:            background: "var(--lumi-bg-elev)",
+client/src/pages/DesignSystemV2.jsx:103:            borderBottom: "1px solid var(--lumi-border)",
+client/src/pages/DesignSystemV2.jsx:104:            padding: "var(--lumi-space-3) var(--lumi-space-5)",
+client/src/pages/DesignSystemV2.jsx:123:            <div className="lumi-container" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "var(--lumi-space-8)", alignItems: "center" }}>
+client/src/pages/DesignSystemV2.jsx:125:                <div className="lumi-text-sm font-body-lumi" style={{ color: "var(--lumi-amber-700)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 12 }}>
+client/src/pages/DesignSystemV2.jsx:128:                <h1 className="font-display-lumi lumi-text-4xl" style={{ margin: 0, color: "var(--lumi-text)" }}>
+client/src/pages/DesignSystemV2.jsx:131:                <p className="font-body-lumi lumi-text-lg" style={{ marginTop: 20, color: "var(--lumi-text)", maxWidth: 640 }}>
+client/src/pages/DesignSystemV2.jsx:138:                <p className="font-body-lumi lumi-text-xs" style={{ marginTop: 18, color: "var(--lumi-text-muted)" }}>
+client/src/pages/DesignSystemV2.jsx:149:            <p className="font-body-lumi lumi-text-base" style={{ color: "var(--lumi-text-muted)", marginTop: -16, marginBottom: 24, maxWidth: 720 }}>
+client/src/pages/DesignSystemV2.jsx:163:                  <div className="font-display-lumi lumi-text-base" style={{ marginTop: 8, fontWeight: 600, textTransform: "capitalize", color: "var(--lumi-text)" }}>
+client/src/pages/DesignSystemV2.jsx:171:              <p className="font-body-lumi lumi-text-sm" style={{ color: "var(--lumi-text-muted)", marginBottom: 16 }}>
+client/src/pages/DesignSystemV2.jsx:172:                Click Lumi (or focus + Enter / Space) to fire a brief celebration pulse. Currently signalling: <strong style={{ color: "var(--lumi-sage-700)" }}>{galleryEmotion}</strong>
+client/src/pages/DesignSystemV2.jsx:184:              {SAGE_SCALE.map((n) => <Swatch key={`s${n}`} name={`sage-${n}`} varName={`--lumi-sage-${n}`} />)}
+client/src/pages/DesignSystemV2.jsx:188:              {AMBER_SCALE.map((n) => <Swatch key={`a${n}`} name={`amber-${n}`} varName={`--lumi-amber-${n}`} />)}
+client/src/pages/DesignSystemV2.jsx:192:              {STONE_SCALE.map((n) => <Swatch key={`st${n}`} name={`stone-${n}`} varName={`--lumi-stone-${n}`} />)}
+client/src/pages/DesignSystemV2.jsx:204:                <div className="lumi-text-xs font-body-lumi" style={{ color: "var(--lumi-text-muted)" }}>Display — Fraunces</div>
+client/src/pages/DesignSystemV2.jsx:205:                <div className="font-display-lumi lumi-text-3xl" style={{ marginTop: 8, color: "var(--lumi-text)" }}>You are not your worst day.</div>
+client/src/pages/DesignSystemV2.jsx:208:                <div className="lumi-text-xs font-body-lumi" style={{ color: "var(--lumi-text-muted)" }}>Body — Inter</div>
+client/src/pages/DesignSystemV2.jsx:209:                <p className="font-body-lumi lumi-text-base" style={{ marginTop: 8, lineHeight: "var(--lumi-leading-body)" }}>
+client/src/pages/DesignSystemV2.jsx:214:                <div className="lumi-text-xs font-body-lumi" style={{ color: "var(--lumi-text-muted)" }}>Quote — Crimson Pro</div>
+client/src/pages/DesignSystemV2.jsx:215:                <p className="font-quote-lumi lumi-text-lg" style={{ marginTop: 8, color: "var(--lumi-text)" }}>
+client/src/pages/DesignSystemV2.jsx:285:                <div className="lumi-anim-breathe" style={{ display: "inline-block", width: 60, height: 60, borderRadius: "50%", background: "var(--lumi-grad-sage)" }} aria-hidden />
+client/src/pages/DesignSystemV2.jsx:290:                <div className="lumi-anim-float" style={{ display: "inline-block", width: 60, height: 60, borderRadius: "var(--lumi-radius-md)", background: "var(--lumi-grad-amber)" }} aria-hidden />
+client/src/pages/DesignSystemV2.jsx:295:                <div style={{ height: 60, borderRadius: "var(--lumi-radius-md)", background: "var(--lumi-amber-100)" }} aria-hidden />
+client/src/pages/DesignSystemV2.jsx:299:            <p className="font-body-lumi lumi-text-sm" style={{ marginTop: 16, color: "var(--lumi-text-muted)" }}>
+client/src/pages/DesignSystemV2.jsx:318:                <div className="font-display-lumi lumi-text-base" style={{ color: "var(--lumi-text)" }}>The Genuine Love Project</div>
+client/src/pages/DesignSystemV2.jsx:325:            <p className="font-body-lumi lumi-text-base" style={{ color: "var(--lumi-text-muted)", marginTop: -16, marginBottom: 24, maxWidth: 720 }}>
+client/src/pages/DesignSystemV2.jsx:331:                <div className="font-display-lumi lumi-text-base" style={{ fontWeight: 600, color: "var(--lumi-text)" }}>Lumi — Full body</div>
+client/src/pages/DesignSystemV2.jsx:332:                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>&lt;LumiMascotImage /&gt;</code>
+client/src/pages/DesignSystemV2.jsx:336:                <div className="font-display-lumi lumi-text-base" style={{ fontWeight: 600, color: "var(--lumi-text)" }}>MMHB lockup</div>
+client/src/pages/DesignSystemV2.jsx:337:                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-text-muted)" }}>&lt;LumiBrandLockupImage /&gt;</code>
+client/src/pages/DesignSystemV2.jsx:339:              <div className="lumi-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: 360, gap: 12, background: "var(--lumi-stone-900)" }}>
+client/src/pages/DesignSystemV2.jsx:341:                <div className="font-display-lumi lumi-text-base" style={{ fontWeight: 600, color: "var(--lumi-stone-50)" }}>The Genuine Love Project</div>
+client/src/pages/DesignSystemV2.jsx:342:                <code className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-stone-300)" }}>&lt;TGLPMandalaImage /&gt;</code>
+client/src/pages/DesignSystemV2.jsx:364:                <div className="font-body-lumi lumi-text-sm" style={{ marginTop: 16, color: "var(--lumi-text-muted)" }}>
+client/src/pages/DesignSystemV2.jsx:365:                  Derived: <strong style={{ color: "var(--lumi-sage-700)" }}>{derived}</strong> · Override:{" "}
+client/src/pages/DesignSystemV2.jsx:366:                  <strong style={{ color: "var(--lumi-amber-700)" }}>{override || "—"}</strong> · Active:{" "}
+client/src/pages/DesignSystemV2.jsx:367:                  <strong style={{ color: "var(--lumi-text)" }}>{emotion}</strong>
+client/src/pages/DesignSystemV2.jsx:379:              background: "var(--lumi-stone-900)",
+client/src/pages/DesignSystemV2.jsx:380:              color: "var(--lumi-stone-200)",
+client/src/pages/DesignSystemV2.jsx:381:              padding: "var(--lumi-space-8) var(--lumi-space-5)",
+client/src/pages/DesignSystemV2.jsx:382:              marginTop: "var(--lumi-space-9)",
+client/src/pages/DesignSystemV2.jsx:390:                  <p className="font-body-lumi lumi-text-sm" style={{ color: "var(--lumi-stone-300)" }}>
+client/src/pages/DesignSystemV2.jsx:395:                  <div className="font-display-lumi" style={{ marginBottom: 8, color: "var(--lumi-stone-50)", fontWeight: 600 }}>Platform</div>
+client/src/pages/DesignSystemV2.jsx:397:                    <Link href="/" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-home">Home</Link>
+client/src/pages/DesignSystemV2.jsx:398:                    <Link href="/wellness-tools-hub" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-tools">Wellness Tools</Link>
+client/src/pages/DesignSystemV2.jsx:399:                    <Link href="/discernment" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-discernment">Discernment</Link>
+client/src/pages/DesignSystemV2.jsx:403:                  <div className="font-display-lumi" style={{ marginBottom: 8, color: "var(--lumi-stone-50)", fontWeight: 600 }}>Resources</div>
+client/src/pages/DesignSystemV2.jsx:405:                    <Link href="/blog" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-blog">Blog</Link>
+client/src/pages/DesignSystemV2.jsx:406:                    <Link href="/learn" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-learn">Learn</Link>
+client/src/pages/DesignSystemV2.jsx:407:                    <Link href="/faq" className="lumi-link-footer" style={{ color: "var(--lumi-stone-200)" }} data-testid="footer-faq">FAQ</Link>
+client/src/pages/DesignSystemV2.jsx:411:                  <div className="font-display-lumi" style={{ marginBottom: 8, color: "var(--lumi-stone-50)", fontWeight: 600 }}>Safety</div>
+client/src/pages/DesignSystemV2.jsx:414:                    <span className="font-body-lumi lumi-text-sm" style={{ color: "var(--lumi-stone-300)" }}>988 — Suicide & Crisis Lifeline (US)</span>
+client/src/pages/DesignSystemV2.jsx:418:              <div style={{ marginTop: 32, paddingTop: 24, borderTop: "1px solid var(--lumi-stone-700)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+client/src/pages/DesignSystemV2.jsx:419:                <div className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-stone-400)" }}>
+client/src/pages/DesignSystemV2.jsx:424:                  <span className="font-body-lumi lumi-text-xs" style={{ color: "var(--lumi-stone-400)" }}>The Genuine Love Project</span>
+client/src/components/lumi/LumiMascot.css:26:  transition: filter 600ms var(--lumi-ease);
+client/src/components/lumi/LumiMascot.css:44:  transition: transform 700ms var(--lumi-ease-out);
+client/src/components/lumi/LumiMascot.css:74:  transition: cx 240ms var(--lumi-ease), cy 240ms var(--lumi-ease), r 300ms var(--lumi-ease);
+client/src/components/lumi/LumiMascot.css:78:.lumi-mascot__arm--left  { transform-origin: 35% 0%; transition: transform 600ms var(--lumi-ease-out); }
+client/src/components/lumi/LumiMascot.css:79:.lumi-mascot__arm--right { transform-origin: 65% 0%; transition: transform 600ms var(--lumi-ease-out); }
+client/src/components/lumi/LumiMascot.css:97:  transition: filter 400ms var(--lumi-ease);
+client/src/components/lumi/LumiMascot.css:101:  filter: drop-shadow(0 0 18px var(--lumi-amber-500));
+client/src/components/lumi/LumiMascot.css:109:  filter: drop-shadow(0 0 6px var(--lumi-amber-300));
+client/src/components/lumi/LumiMascot.css:119:  0%   { transform: scale(1); filter: drop-shadow(0 0 4px var(--lumi-amber-400)); }
+client/src/components/lumi/LumiMascot.css:120:  40%  { transform: scale(1.4); filter: drop-shadow(0 0 28px var(--lumi-amber-500)); }
+client/src/components/lumi/LumiMascot.css:121:  100% { transform: scale(1); filter: drop-shadow(0 0 4px var(--lumi-amber-400)); }
+client/src/components/lumi/LumiMascot.css:135:  transition: opacity 700ms var(--lumi-ease);
+client/src/components/lumi/LumiMascot.css:383:  outline: 2px solid var(--lumi-amber-500, #f59e0b);
+client/src/components/lumi/LumiV7.css:19:  --lumi-cream: #F5F0E8;
+client/src/components/lumi/LumiV7.css:20:  --lumi-sage: #A8C9A0;
+client/src/components/lumi/LumiV7.css:21:  --lumi-sage-deep: #4A7E72;
+client/src/components/lumi/LumiV7.css:22:  --lumi-blush: #F5A3A3;
+client/src/components/lumi/LumiV7.css:23:  --lumi-eye: #1A1A1A;
+client/src/components/lumi/LumiV7.css:24:  --lumi-mouth: #2A2A2A;
+client/src/components/lumi/LumiV7.css:25:  --lumi-shadow: rgba(74, 126, 114, 0.18);
+client/src/components/lumi/LumiV7.css:50:  fill: var(--lumi-eye);
+client/src/components/lumi/LumiV7.css:60:  fill: var(--lumi-eye);
+client/src/components/lumi/LumiV7.css:93:  stroke: var(--lumi-mouth);
+client/src/components/lumi/LumiV7.css:107:.lumi-v7 .lumi-v7-mouth.lumi-mouth--surprise  { stroke-width: 3.5; fill: var(--lumi-mouth); }
+client/src/components/lumi/LumiV7.css:109:.lumi-v7 .lumi-v7-mouth.lumi-mouth--open      { stroke-width: 3;   fill: var(--lumi-mouth); }
+client/src/components/lumi/LumiV7.css:111:.lumi-v7 .lumi-v7-mouth.lumi-mouth--excited   { stroke-width: 4.5; fill: var(--lumi-mouth); }
+client/src/components/lumi/LumiV7.css:112:.lumi-v7 .lumi-v7-mouth.lumi-mouth--loving    { stroke-width: 4;   fill: var(--lumi-blush); stroke: var(--lumi-blush); }
+client/src/components/lumi/LumiV7.css:114:.lumi-v7 .lumi-v7-mouth.lumi-mouth--breathing { stroke-width: 3;   fill: var(--lumi-mouth); opacity: 0.9; }
+client/src/components/lumi/LumiV7.css:189:  fill: var(--lumi-blush);
+client/src/components/lumi/LumiAccessibleWrapper.jsx:115:            "0 0 0 3px var(--lumi-amber-400, #f0a830)";
+client/src/components/lumi/LumiCustomizer.jsx:112:          background: "var(--lumi-stone-50, #faf8f5)",
+client/src/components/lumi/LumiCustomizer.jsx:113:          color: "var(--lumi-stone-900, #1c1c1c)",
+client/src/components/lumi/LumiCustomizer.jsx:128:              color: "var(--lumi-sage-800, #234034)",
+client/src/components/lumi/LumiCustomizer.jsx:138:              color: "var(--lumi-stone-700, #555)",
+client/src/components/lumi/LumiCustomizer.jsx:169:                  "radial-gradient(circle at 50% 45%, var(--lumi-stone-100,#f0eee9) 0%, transparent 80%)",
+client/src/components/lumi/LumiCustomizer.jsx:193:                color: "var(--lumi-sage-800, #234034)",
+client/src/components/lumi/LumiCustomizer.jsx:202:                color: "var(--lumi-stone-700, #555)",
+client/src/components/lumi/LumiCustomizer.jsx:239:                    background: "var(--lumi-stone-100, #f0eee9)",
+client/src/components/lumi/LumiCustomizer.jsx:241:                      ? "2px solid var(--lumi-amber-400, #f0a830)"
+client/src/components/lumi/LumiCustomizer.jsx:264:                      color: "var(--lumi-sage-800, #234034)",
+client/src/components/lumi/LumiCustomizerTrigger.jsx:38:          border: "1px solid var(--lumi-stone-200, #e0ddd5)",
+client/src/components/lumi/LumiCustomizerTrigger.jsx:39:          color: "var(--lumi-sage-700, #2f5443)",
+client/src/components/lumi/LumiCompanion.jsx:210:    ? " drop-shadow(0 0 12px var(--lumi-amber-400, #f0a830))"
+client/src/components/lumi/LumiCompanion.jsx:253:    color: "var(--lumi-sage-700, #2f5443)",
+client/src/components/lumi/TGLPMandalaImage.jsx:32:        borderRadius: rounded ? "var(--lumi-radius-lg, 16px)" : 0,
+client/src/components/lumi/LumiMascot.jsx:96:      style={{ width: size, height: size, "--lumi-size": `${size}px` }}
+client/src/components/lumi/LumiLivingAvatar.css:2:  --lumi-avatar-size: clamp(220px, 32vw, 440px);
+client/src/components/lumi/LumiLivingAvatar.css:7:  inline-size: var(--lumi-avatar-size);
+client/src/components/lumi/LumiLivingAvatar.css:12:.lumi-living-avatar--sm { --lumi-avatar-size: clamp(120px, 18vw, 180px); }
+client/src/components/lumi/LumiLivingAvatar.css:13:.lumi-living-avatar--md { --lumi-avatar-size: clamp(180px, 25vw, 280px); }
+client/src/components/lumi/LumiLivingAvatar.css:14:.lumi-living-avatar--lg { --lumi-avatar-size: clamp(240px, 34vw, 430px); }
+client/src/components/lumi/LumiLivingAvatar.css:15:.lumi-living-avatar--xl { --lumi-avatar-size: clamp(300px, 42vw, 560px); }
+client/src/components/lumi/LumiPresenceLayer.css:2:  --lumi-cream: #fff9f2;
+client/src/components/lumi/LumiPresenceLayer.css:3:  --lumi-cream-2: #f7f0e8;
+client/src/components/lumi/LumiPresenceLayer.css:4:  --lumi-sage-1: #dde7d5;
+client/src/components/lumi/LumiPresenceLayer.css:5:  --lumi-sage-2: #c7d8bc;
+client/src/components/lumi/LumiPresenceLayer.css:6:  --lumi-sage-3: #afc6a1;
+client/src/components/lumi/LumiPresenceLayer.css:7:  --lumi-sage-4: #90af85;
+client/src/components/lumi/LumiPresenceLayer.css:8:  --lumi-sage-5: #6f8f6f;
+client/src/components/lumi/LumiPresenceLayer.css:9:  --lumi-ink: #12342f;
+client/src/components/lumi/LumiPresenceLayer.css:10:  --lumi-muted: #5f746c;
+client/src/components/lumi/LumiPresenceLayer.css:11:  --lumi-gold: #ffd46b;
+client/src/components/lumi/LumiPresenceLayer.css:12:  --lumi-gold-2: #f6c14b;
+client/src/components/lumi/LumiPresenceLayer.css:13:  --lumi-rose: #ffd6da;
+client/src/components/lumi/LumiPresenceLayer.css:14:  --lumi-rose-2: #f9bec5;
+client/src/components/lumi/LumiPresenceLayer.css:15:  --lumi-sky: #aee9ff;
+client/src/components/lumi/LumiPresenceLayer.css:16:  --lumi-sky-2: #77d8ff;
+client/src/components/lumi/LumiPresenceLayer.css:17:  --lumi-lavender: #ece4ff;
+client/src/components/lumi/LumiPresenceLayer.css:18:  --lumi-size: clamp(112px, 11vw, 168px);
+client/src/components/lumi/LumiPresenceLayer.css:34:  inline-size: calc(var(--lumi-size) * 1.34);
+client/src/components/lumi/LumiPresenceLayer.css:35:  block-size: calc(var(--lumi-size) * 1.42);
+client/src/components/lumi/LumiPresenceLayer.css:43:  inline-size: var(--lumi-size);
+client/src/components/lumi/LumiPresenceLayer.css:44:  block-size: calc(var(--lumi-size) * 1.18);
+client/src/components/lumi/LumiPresenceLayer.css:56:    radial-gradient(circle at 50% 24%, var(--lumi-cream) 0 23%, transparent 24%),
+client/src/components/lumi/LumiPresenceLayer.css:57:    radial-gradient(circle at 50% 68%, var(--lumi-sage-3) 0 33%, transparent 34%),
+client/src/components/lumi/LumiPresenceLayer.css:58:    linear-gradient(155deg, #fff5df 0%, var(--lumi-cream) 36%, var(--lumi-sage-2) 66%, var(--lumi-sage-4) 100%);
+client/src/components/lumi/LumiPresenceLayer.css:194:    linear-gradient(180deg, var(--lumi-sage-2), var(--lumi-sage-4));
+client/src/components/lumi/LumiPresenceLayer.css:208:  background: var(--lumi-gold);
+client/src/components/lumi/LumiPresenceLayer.css:246:  background: #ffd46b;
+client/src/components/lumi/LumiPresenceLayer.css:252:  background: #ffd6da;
+client/src/components/lumi/LumiPresenceLayer.css:258:  background: #aee9ff;
+client/src/components/lumi/LumiPresenceLayer.css:273:  background: linear-gradient(160deg, var(--lumi-cream), var(--lumi-sage-3));
+client/src/components/lumi/LumiPresenceLayer.css:299:  background: linear-gradient(180deg, var(--lumi-sage-2), var(--lumi-sage-4));
+client/src/components/lumi/LumiPresenceLayer.css:313:  background: linear-gradient(180deg, var(--lumi-cream), var(--lumi-sage-3));
+client/src/components/lumi/LumiPresenceLayer.css:337:  background: linear-gradient(180deg, var(--lumi-sage-2), var(--lumi-sage-4));
+client/src/components/lumi/LumiPresenceLayer.css:346:  background: linear-gradient(145deg, var(--lumi-sage-2), var(--lumi-sage-4));
+client/src/components/lumi/LumiPresenceLayer.css:357:  background: linear-gradient(180deg, var(--lumi-rose), var(--lumi-rose-2));
+client/src/components/lumi/LumiPresenceLayer.css:378:  background: linear-gradient(145deg, var(--lumi-sage-2), var(--lumi-sage-5));
+client/src/components/lumi/LumiPresenceLayer.css:469:  color: var(--lumi-ink);
+client/src/components/lumi/LumiPresenceLayer.css:477:  color: var(--lumi-ink);
+client/src/components/lumi/LumiPresenceLayer.css:485:  color: var(--lumi-muted);
+client/src/components/lumi/LumiPresenceLayer.css:684:    --lumi-size: 92px;
+client/src/components/lumi/LumiPresenceLayer.css:696:    --lumi-size: 78px;
+client/src/components/lumi/LumiPresenceLayer.css:715:  --lumi-serenity-sage-50: #f4f8ef;
+client/src/components/lumi/LumiPresenceLayer.css:716:  --lumi-serenity-sage-100: #dde7d5;
+client/src/components/lumi/LumiPresenceLayer.css:717:  --lumi-serenity-sage-200: #c7d8bc;
+client/src/components/lumi/LumiPresenceLayer.css:718:  --lumi-serenity-sage-300: #afc6a1;
+client/src/components/lumi/LumiPresenceLayer.css:719:  --lumi-serenity-sage-400: #90af85;
+client/src/components/lumi/LumiPresenceLayer.css:720:  --lumi-serenity-sage-700: #405a37;
+client/src/components/lumi/LumiPresenceLayer.css:722:  --lumi-eternal-cream-50: #fffdf8;
+client/src/components/lumi/LumiPresenceLayer.css:723:  --lumi-eternal-cream-100: #fff9f2;
+client/src/components/lumi/LumiPresenceLayer.css:724:  --lumi-eternal-cream-200: #f7f0e8;
+client/src/components/lumi/LumiPresenceLayer.css:725:  --lumi-eternal-cream-300: #efe5d7;
+client/src/components/lumi/LumiPresenceLayer.css:727:  --lumi-healing-gold-100: #fff2bd;
+client/src/components/lumi/LumiPresenceLayer.css:728:  --lumi-healing-gold-200: #ffd46b;
+client/src/components/lumi/LumiPresenceLayer.css:729:  --lumi-healing-gold-300: #f6c14b;
+client/src/components/lumi/LumiPresenceLayer.css:730:  --lumi-healing-gold-500: #b97812;
+client/src/components/lumi/LumiPresenceLayer.css:732:  --lumi-compassion-rose-100: #ffd6da;
+client/src/components/lumi/LumiPresenceLayer.css:733:  --lumi-compassion-rose-200: #f9bec5;
+client/src/components/lumi/LumiPresenceLayer.css:735:  --lumi-hope-sky-100: #dff6ff;
+client/src/components/lumi/LumiPresenceLayer.css:736:  --lumi-hope-sky-200: #aee9ff;
+client/src/components/lumi/LumiPresenceLayer.css:737:  --lumi-hope-sky-300: #77d8ff;
+client/src/components/lumi/LumiPresenceLayer.css:739:  --lumi-readable-ink: #24301f;
+client/src/components/lumi/LumiPresenceLayer.css:740:  --lumi-readable-ink-soft: #34442f;
+client/src/components/lumi/LumiPresenceLayer.css:741:  --lumi-button-text-on-sage: #1f2a1c;
+client/src/components/lumi/LumiPresenceLayer.css:742:  --lumi-button-text-on-gold: #2f2406;
+client/src/components/lumi/LumiPresenceLayer.css:743:  --lumi-focus-ring: rgba(246, 193, 75, 0.72);
+client/src/components/lumi/LumiPresenceLayer.css:809:  color: var(--lumi-readable-ink) !important;
+client/src/components/lumi/LumiPresenceLayer.css:818:  color: var(--lumi-button-text-on-sage) !important;
+client/src/components/lumi/LumiPresenceLayer.css:829:  color: var(--lumi-button-text-on-gold) !important;
+client/src/components/lumi/LumiPresenceLayer.css:835:  outline: 3px solid var(--lumi-focus-ring) !important;
+client/src/components/lumi/LivingLumiAvatar.tsx:33:            <stop offset="46%" stopColor="#FFF9F2" />
+client/src/components/lumi/LivingLumiAvatar.tsx:34:            <stop offset="78%" stopColor="#DDE7D5" />
+client/src/components/lumi/LivingLumiAvatar.tsx:35:            <stop offset="100%" stopColor="#AFC6A1" />
+client/src/components/lumi/LivingLumiAvatar.tsx:39:            <stop offset="0%" stopColor="#FFD46B" />
+client/src/components/lumi/LivingLumiAvatar.tsx:40:            <stop offset="100%" stopColor="#F9BEC5" />
+client/src/components/lumi/LivingLumiAvatar.tsx:51:          <path d="M70 168 C62 184 63 198 76 202 C87 196 85 181 82 168 Z" fill="#C7D8BC" />
+client/src/components/lumi/LivingLumiAvatar.tsx:52:          <ellipse cx="76" cy="202" rx="16" ry="7" fill="#90AF85" />
+client/src/components/lumi/LivingLumiAvatar.tsx:56:          <path d="M108 168 C105 184 106 198 119 202 C132 196 128 181 121 168 Z" fill="#C7D8BC" />
+client/src/components/lumi/LivingLumiAvatar.tsx:57:          <ellipse cx="119" cy="202" rx="16" ry="7" fill="#90AF85" />
+client/src/components/lumi/LivingLumiAvatar.tsx:61:          <path d="M55 104 C32 112 25 132 35 143 C48 141 56 126 66 114 Z" fill="#DDE7D5" />
+client/src/components/lumi/LivingLumiAvatar.tsx:62:          <circle cx="34" cy="143" r="9" fill="#FFD6DA" />
+client/src/components/lumi/LivingLumiAvatar.tsx:66:          <path d="M135 104 C158 112 165 132 155 143 C142 141 134 126 124 114 Z" fill="#DDE7D5" />
+client/src/components/lumi/LivingLumiAvatar.tsx:67:          <circle cx="156" cy="143" r="9" fill="#AEE9FF" />
+client/src/components/lumi/LivingLumiAvatar.tsx:81:            stroke="#FFD46B"
+client/src/components/lumi/LivingLumiAvatar.tsx:91:          <ellipse cx="55" cy="122" rx="13" ry="7" fill="#FFD6DA" className="lumi-cheek" />
+client/src/components/lumi/LivingLumiAvatar.tsx:92:          <ellipse cx="135" cy="122" rx="13" ry="7" fill="#FFD6DA" className="lumi-cheek" />
+client/src/components/SafeBoundary.jsx:38:          margin: "var(--lumi-space-3, 0.75rem) 0",
+client/src/components/SafeBoundary.jsx:39:          padding: "var(--lumi-space-4, 1rem) var(--lumi-space-5, 1.25rem)",
+client/src/components/SafeBoundary.jsx:40:          borderRadius: "var(--lumi-radius-lg, 12px)",
+client/src/components/SafeBoundary.jsx:44:          fontFamily: "var(--lumi-font-body, system-ui, -apple-system, sans-serif)",
+client/src/components/SafeBoundary.jsx:51:            gap: "var(--lumi-space-2, 0.5rem)",
+client/src/components/SafeBoundary.jsx:52:            marginBottom: "var(--lumi-space-2, 0.4rem)",
+client/src/components/SafeBoundary.jsx:56:          <strong style={{ fontSize: "0.92rem", fontFamily: "var(--lumi-font-display, inherit)" }}>
+client/src/components/SafeBoundary.jsx:69:              borderRadius: "var(--lumi-radius-sm, 6px)",
+client/src/components/SafeBoundary.jsx:85:          <details style={{ marginTop: "var(--lumi-space-2, 0.5rem)", fontSize: "0.72rem", color: "#7f1d1d" }}>
+client/src/components/SafeBoundary.jsx:89:                marginTop: "var(--lumi-space-2, 0.4rem)",
+client/src/components/SafeBoundary.jsx:90:                padding: "var(--lumi-space-2, 0.5rem)",
+client/src/components/SafeBoundary.jsx:92:                borderRadius: "var(--lumi-radius-sm, 6px)",
+client/src/hooks/useLumiTheme.js:31:  root.style.setProperty("--lumi-primary", theme.primary);
+client/src/hooks/useLumiTheme.js:32:  root.style.setProperty("--lumi-accent", theme.accent);
+client/src/hooks/useLumiTheme.js:33:  root.style.setProperty("--lumi-filter", theme.filter);
+client/src/styles/lumi-layout.css:6:  padding-top: var(--lumi-space-9);
+client/src/styles/lumi-layout.css:7:  padding-bottom: var(--lumi-space-9);
+client/src/styles/lumi-layout.css:8:  padding-left: var(--lumi-space-5);
+client/src/styles/lumi-layout.css:9:  padding-right: var(--lumi-space-5);
+client/src/styles/lumi-layout.css:12:  .lumi-section { padding-top: var(--lumi-space-11); padding-bottom: var(--lumi-space-11); }
+client/src/styles/lumi-layout.css:24:.lumi-stack { display: flex; flex-direction: column; gap: var(--lumi-space-4); }
+client/src/styles/lumi-layout.css:25:.lumi-stack--lg { gap: var(--lumi-space-6); }
+client/src/styles/lumi-layout.css:26:.lumi-stack--xl { gap: var(--lumi-space-8); }
+client/src/styles/lumi-layout.css:27:.lumi-row { display: flex; flex-direction: row; gap: var(--lumi-space-4); flex-wrap: wrap; align-items: center; }
+client/src/styles/lumi-layout.css:32:  gap: var(--lumi-space-5);
+client/src/styles/lumi-layout.css:38:  background: var(--lumi-bg-elev);
+client/src/styles/lumi-layout.css:39:  color: var(--lumi-text);
+client/src/styles/lumi-layout.css:40:  border: 1px solid var(--lumi-border);
+client/src/styles/lumi-layout.css:41:  border-radius: var(--lumi-radius-lg);
+client/src/styles/lumi-layout.css:42:  padding: var(--lumi-space-6);
+client/src/styles/lumi-layout.css:43:  box-shadow: var(--lumi-shadow-1);
+client/src/styles/lumi-layout.css:45:    transform var(--lumi-dur-normal) var(--lumi-ease),
+client/src/styles/lumi-layout.css:46:    box-shadow var(--lumi-dur-normal) var(--lumi-ease),
+client/src/styles/lumi-layout.css:47:    border-color var(--lumi-dur-normal) var(--lumi-ease);
+client/src/styles/lumi-layout.css:53:  box-shadow: var(--lumi-shadow-3);
+client/src/styles/lumi-layout.css:54:  border-color: var(--lumi-sage-300);
+client/src/styles/lumi-layout.css:59:  border-radius: var(--lumi-radius-md);
+client/src/styles/lumi-layout.css:60:  background: var(--lumi-grad-sage);
+client/src/styles/lumi-layout.css:62:  margin-bottom: var(--lumi-space-4);
+client/src/styles/lumi-layout.css:65:  font-family: var(--lumi-font-display);
+client/src/styles/lumi-layout.css:66:  font-size: var(--lumi-text-lg);
+client/src/styles/lumi-layout.css:68:  line-height: var(--lumi-leading-heading);
+client/src/styles/lumi-layout.css:69:  margin: 0 0 var(--lumi-space-3);
+client/src/styles/lumi-layout.css:70:  color: var(--lumi-stone-900);
+client/src/styles/lumi-layout.css:72:.dark .lumi-card__title { color: var(--lumi-stone-50); }
+client/src/styles/lumi-layout.css:74:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-layout.css:75:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-layout.css:76:  line-height: var(--lumi-leading-body);
+client/src/styles/lumi-layout.css:77:  color: var(--lumi-text-muted);
+client/src/styles/lumi-layout.css:84:  background: var(--lumi-grad-sage);
+client/src/styles/lumi-layout.css:88:  transition: opacity var(--lumi-dur-normal) var(--lumi-ease);
+client/src/styles/lumi-motion.css:15:  0%, 100% { filter: drop-shadow(0 0 4px var(--lumi-amber-400)); transform: scale(1); }
+client/src/styles/lumi-motion.css:16:  50%      { filter: drop-shadow(0 0 14px var(--lumi-amber-500)); transform: scale(1.08); }
+client/src/styles/lumi-motion.css:31:.lumi-anim-breathe { animation: lumi-breathe var(--lumi-dur-breathe) ease-in-out infinite; transform-origin: center; }
+client/src/styles/lumi-motion.css:59:  transition: opacity 700ms var(--lumi-ease-out),
+client/src/styles/lumi-motion.css:60:              transform 700ms var(--lumi-ease-out);
+client/src/styles/lumi-motion.css:69:  transition: opacity 600ms var(--lumi-ease-out),
+client/src/styles/lumi-motion.css:70:              transform 600ms var(--lumi-ease-out);
+client/src/styles/lumi-a11y.css:9:  background: var(--lumi-sage-700);
+client/src/styles/lumi-a11y.css:12:  border-radius: 0 0 var(--lumi-radius-sm) 0;
+client/src/styles/lumi-a11y.css:16:  transition: top var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-a11y.css:20:  outline: 3px solid var(--lumi-amber-400);
+client/src/styles/lumi-a11y.css:25:  outline: 3px solid var(--lumi-amber-500);
+client/src/styles/lumi-a11y.css:27:  border-radius: var(--lumi-radius-sm);
+client/src/styles/lumi-buttons.css:7:  --_btn-bg: var(--lumi-sage-600);
+client/src/styles/lumi-buttons.css:10:  --_btn-shadow: var(--lumi-shadow-1);
+client/src/styles/lumi-buttons.css:15:  gap: var(--lumi-space-2);
+client/src/styles/lumi-buttons.css:18:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-buttons.css:20:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-buttons.css:23:  border-radius: var(--lumi-radius-md);
+client/src/styles/lumi-buttons.css:32:    transform var(--lumi-dur-quick) var(--lumi-ease),
+client/src/styles/lumi-buttons.css:33:    box-shadow var(--lumi-dur-quick) var(--lumi-ease),
+client/src/styles/lumi-buttons.css:34:    background var(--lumi-dur-quick) var(--lumi-ease),
+client/src/styles/lumi-buttons.css:35:    color var(--lumi-dur-quick) var(--lumi-ease),
+client/src/styles/lumi-buttons.css:36:    border-color var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-buttons.css:41:.lumi-btn:hover  { transform: translateY(var(--_btn-hover-lift)); box-shadow: var(--lumi-shadow-2); }
+client/src/styles/lumi-buttons.css:42:.lumi-btn:active { transform: translateY(0); box-shadow: var(--lumi-shadow-1); }
+client/src/styles/lumi-buttons.css:44:  outline: 3px solid var(--lumi-sage-300);
+client/src/styles/lumi-buttons.css:52:  box-shadow: var(--lumi-shadow-1) !important;
+client/src/styles/lumi-buttons.css:65:  margin-right: var(--lumi-space-2);
+client/src/styles/lumi-buttons.css:71:.lumi-btn--sm { padding: 0.4rem 0.875rem; font-size: var(--lumi-text-xs); min-height: 36px; }
+client/src/styles/lumi-buttons.css:72:.lumi-btn--lg { padding: 0.875rem 1.75rem; font-size: var(--lumi-text-base); min-height: 52px; }
+client/src/styles/lumi-buttons.css:77:  --_btn-bg: var(--lumi-amber-500);
+client/src/styles/lumi-buttons.css:94:  transition: background-position var(--lumi-dur-slow) var(--lumi-ease-out);
+client/src/styles/lumi-buttons.css:98:.lumi-btn-primary:hover { background: var(--lumi-amber-600); }
+client/src/styles/lumi-buttons.css:101:  --_btn-bg: var(--lumi-sage-600);
+client/src/styles/lumi-buttons.css:104:.lumi-btn-secondary:hover { background: var(--lumi-sage-700); }
+client/src/styles/lumi-buttons.css:108:  --_btn-fg: var(--lumi-sage-700);
+client/src/styles/lumi-buttons.css:109:  --_btn-border: var(--lumi-sage-400);
+client/src/styles/lumi-buttons.css:112:.lumi-btn-tertiary:hover { background: var(--lumi-sage-50); border-color: var(--lumi-sage-600); }
+client/src/styles/lumi-buttons.css:113:.dark .lumi-btn-tertiary { --_btn-fg: var(--lumi-sage-200); --_btn-border: var(--lumi-sage-500); }
+client/src/styles/lumi-buttons.css:118:  --_btn-fg: var(--lumi-stone-700);
+client/src/styles/lumi-buttons.css:122:.lumi-btn-ghost:hover { background: var(--lumi-stone-100); }
+client/src/styles/lumi-buttons.css:123:.dark .lumi-btn-ghost { --_btn-fg: var(--lumi-stone-200); }
+client/src/styles/lumi-buttons.css:128:  --_btn-fg: var(--lumi-sage-700);
+client/src/styles/lumi-buttons.css:135:  transition: text-decoration-color var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-buttons.css:138:.dark .lumi-btn-text { --_btn-fg: var(--lumi-sage-300); }
+client/src/styles/lumi-buttons.css:141:  --_btn-bg: var(--lumi-sage-100);
+client/src/styles/lumi-buttons.css:142:  --_btn-fg: var(--lumi-sage-800);
+client/src/styles/lumi-buttons.css:143:  --_btn-border: var(--lumi-sage-200);
+client/src/styles/lumi-buttons.css:145:.lumi-btn-calm:hover { background: var(--lumi-sage-200); }
+client/src/styles/lumi-buttons.css:146:.dark .lumi-btn-calm { --_btn-bg: var(--lumi-sage-800); --_btn-fg: var(--lumi-sage-100); --_btn-border: var(--lumi-sage-700); }
+client/src/styles/lumi-buttons.css:149:  /* AA fix: --lumi-love token (hsl 350 70% 62%) on #fff = ~3.32:1, fails WCAG AA.
+client/src/styles/lumi-links.css:7:  color: var(--lumi-sage-700);
+client/src/styles/lumi-links.css:9:  text-decoration-color: var(--lumi-sage-300);
+client/src/styles/lumi-links.css:11:  transition: color var(--lumi-dur-quick) var(--lumi-ease),
+client/src/styles/lumi-links.css:12:              text-decoration-color var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-links.css:14:.lumi-link-text:hover { color: var(--lumi-sage-800); text-decoration-color: currentColor; }
+client/src/styles/lumi-links.css:15:.dark .lumi-link-text { color: var(--lumi-sage-300); text-decoration-color: var(--lumi-sage-500); }
+client/src/styles/lumi-links.css:16:.dark .lumi-link-text:hover { color: var(--lumi-sage-100); }
+client/src/styles/lumi-links.css:19:  color: var(--lumi-stone-700);
+client/src/styles/lumi-links.css:23:  border-radius: var(--lumi-radius-sm);
+client/src/styles/lumi-links.css:25:  transition: color var(--lumi-dur-quick) var(--lumi-ease),
+client/src/styles/lumi-links.css:26:              background var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-links.css:30:  height: 2px; background: var(--lumi-amber-500); border-radius: 1px;
+client/src/styles/lumi-links.css:32:  transition: transform var(--lumi-dur-normal) var(--lumi-ease-out);
+client/src/styles/lumi-links.css:34:.lumi-link-nav:hover { color: var(--lumi-sage-800); }
+client/src/styles/lumi-links.css:37:.dark .lumi-link-nav { color: var(--lumi-stone-200); }
+client/src/styles/lumi-links.css:38:.dark .lumi-link-nav:hover { color: var(--lumi-sage-200); }
+client/src/styles/lumi-links.css:41:  color: var(--lumi-stone-600);
+client/src/styles/lumi-links.css:43:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-links.css:44:  transition: color var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-links.css:46:.lumi-link-footer:hover { color: var(--lumi-sage-700); text-decoration: underline; text-underline-offset: 3px; }
+client/src/styles/lumi-links.css:47:.dark .lumi-link-footer { color: var(--lumi-stone-300); }
+client/src/styles/lumi-links.css:48:.dark .lumi-link-footer:hover { color: var(--lumi-sage-200); }
+client/src/styles/lumi-links.css:53:  text-decoration-color: var(--lumi-amber-400);
+client/src/styles/lumi-links.css:56:  transition: text-decoration-color var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-links.css:58:.lumi-link-inline:hover { text-decoration-color: var(--lumi-amber-600); }
+client/src/styles/lumi-links.css:61:  color: var(--lumi-sage-800);
+client/src/styles/lumi-links.css:63:  font-family: var(--lumi-font-display);
+client/src/styles/lumi-links.css:67:.lumi-link-brand:hover { color: var(--lumi-amber-700); }
+client/src/styles/lumi-links.css:68:.dark .lumi-link-brand { color: var(--lumi-sage-100); }
+client/src/styles/lumi-links.css:71:  color: var(--lumi-sage-700);
+client/src/styles/lumi-links.css:73:  text-decoration-color: var(--lumi-sage-300);
+client/src/styles/lumi-links.css:79:  color: var(--lumi-stone-500);
+client/src/styles/lumi-links.css:81:.lumi-link-external:hover { color: var(--lumi-sage-800); }
+client/src/styles/lumi-links.css:82:.dark .lumi-link-external { color: var(--lumi-sage-300); }
+client/src/styles/lumi-links.css:89:  border-radius: var(--lumi-radius-sm);
+client/src/styles/lumi-links.css:93:  display: inline-flex; align-items: center; gap: var(--lumi-space-2);
+client/src/styles/lumi-links.css:94:  transition: background var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-links.css:102:  color: var(--lumi-stone-500);
+client/src/styles/lumi-links.css:104:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-links.css:106:.lumi-link-subtle:hover { color: var(--lumi-stone-700); text-decoration: underline; text-underline-offset: 3px; }
+client/src/styles/lumi-links.css:107:.dark .lumi-link-subtle { color: var(--lumi-stone-400); }
+client/src/styles/lumi-links.css:108:.dark .lumi-link-subtle:hover { color: var(--lumi-stone-200); }
+client/src/styles/lumi-links.css:111:  color: var(--lumi-stone-700);
+client/src/styles/lumi-links.css:114:  border-radius: var(--lumi-radius-sm);
+client/src/styles/lumi-links.css:115:  transition: background var(--lumi-dur-quick) var(--lumi-ease);
+client/src/styles/lumi-links.css:117:.lumi-link-ghost:hover { background: var(--lumi-stone-100); }
+client/src/styles/lumi-links.css:118:.dark .lumi-link-ghost { color: var(--lumi-stone-200); }
+client/src/styles/lumi-links.css:139:  outline: 2px solid var(--lumi-amber-600, hsl(38, 92%, 45%));
+client/src/styles/lumi-links.css:141:  border-radius: var(--lumi-radius-sm, 6px);
+client/src/styles/lumi-links.css:151:  outline-color: var(--lumi-amber-400, hsl(38, 92%, 65%));
+client/src/styles/lumi-admin.css:33:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:34:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-admin.css:37:  background: var(--lumi-sage-50);
+client/src/styles/lumi-admin.css:38:  color: var(--lumi-sage-800);
+client/src/styles/lumi-admin.css:42:  border-bottom: 2px solid var(--lumi-sage-200);
+client/src/styles/lumi-admin.css:43:  font-size: var(--lumi-text-xs);
+client/src/styles/lumi-admin.css:50:  border-bottom: 1px solid var(--lumi-stone-200);
+client/src/styles/lumi-admin.css:51:  color: var(--lumi-stone-700);
+client/src/styles/lumi-admin.css:55:  background: var(--lumi-sage-50);
+client/src/styles/lumi-admin.css:70:  font-size: var(--lumi-text-xs);
+client/src/styles/lumi-admin.css:73:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:90:.lumi-status-neutral { background: var(--lumi-stone-200); color: var(--lumi-stone-700); }
+client/src/styles/lumi-admin.css:91:.lumi-status-neutral::before { background: var(--lumi-stone-500); }
+client/src/styles/lumi-admin.css:97:  font-family: var(--lumi-font-display);
+client/src/styles/lumi-admin.css:98:  font-size: var(--lumi-text-2xl);
+client/src/styles/lumi-admin.css:100:  color: var(--lumi-stone-800);
+client/src/styles/lumi-admin.css:102:  margin: 0 0 var(--lumi-space-4) 0;
+client/src/styles/lumi-admin.css:105:  font-family: var(--lumi-font-display);
+client/src/styles/lumi-admin.css:106:  font-size: var(--lumi-text-xl);
+client/src/styles/lumi-admin.css:108:  color: var(--lumi-stone-700);
+client/src/styles/lumi-admin.css:110:  margin: 0 0 var(--lumi-space-3) 0;
+client/src/styles/lumi-admin.css:113:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:114:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-admin.css:115:  color: var(--lumi-stone-600);
+client/src/styles/lumi-admin.css:120:  font-family: var(--lumi-font-display);
+client/src/styles/lumi-admin.css:121:  font-size: var(--lumi-text-3xl);
+client/src/styles/lumi-admin.css:123:  color: var(--lumi-sage-700);
+client/src/styles/lumi-admin.css:128:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:129:  font-size: var(--lumi-text-xs);
+client/src/styles/lumi-admin.css:132:  color: var(--lumi-stone-500);
+client/src/styles/lumi-admin.css:134:  margin: var(--lumi-space-1) 0 0 0;
+client/src/styles/lumi-admin.css:137:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:138:  font-size: var(--lumi-text-xs);
+client/src/styles/lumi-admin.css:139:  color: var(--lumi-stone-500);
+client/src/styles/lumi-admin.css:151:  gap: var(--lumi-space-3);
+client/src/styles/lumi-admin.css:155:  font-family: var(--lumi-font-display);
+client/src/styles/lumi-admin.css:156:  font-size: var(--lumi-text-lg);
+client/src/styles/lumi-admin.css:158:  color: var(--lumi-stone-800);
+client/src/styles/lumi-admin.css:163:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:164:  font-size: var(--lumi-text-xs);
+client/src/styles/lumi-admin.css:167:  color: var(--lumi-sage-600);
+client/src/styles/lumi-admin.css:176:  background: var(--lumi-sage-50);
+client/src/styles/lumi-admin.css:181:  gap: var(--lumi-space-8);
+client/src/styles/lumi-admin.css:187:  gap: var(--lumi-space-4);
+client/src/styles/lumi-admin.css:188:  margin-top: var(--lumi-space-6);
+client/src/styles/lumi-admin.css:195:  gap: var(--lumi-space-8);
+client/src/styles/lumi-admin.css:197:  margin-top: var(--lumi-space-8);
+client/src/styles/lumi-admin.css:206:  gap: var(--lumi-space-2);
+client/src/styles/lumi-admin.css:207:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:208:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-admin.css:210:  color: var(--lumi-stone-600);
+client/src/styles/lumi-admin.css:212:  padding: var(--lumi-space-2) var(--lumi-space-4);
+client/src/styles/lumi-admin.css:214:  border: 1px solid var(--lumi-sage-200);
+client/src/styles/lumi-admin.css:265:  font-size: var(--lumi-text-xs);
+client/src/styles/lumi-admin.css:270:  font-size: var(--lumi-text-base);
+client/src/styles/lumi-admin.css:286: * host button variant; --lumi-on-* could be substituted by callers if needed. */
+client/src/styles/lumi-admin.css:301:  border: 2px solid var(--lumi-sage-700);
+client/src/styles/lumi-admin.css:311:  background: var(--lumi-grad-cta);
+client/src/styles/lumi-admin.css:312:  color: var(--lumi-stone-100);
+client/src/styles/lumi-admin.css:323:  color: var(--lumi-sage-300);
+client/src/styles/lumi-admin.css:325:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:331:  color: var(--lumi-amber-400);
+client/src/styles/lumi-admin.css:342:  padding: var(--lumi-space-6);
+client/src/styles/lumi-admin.css:344:  font-family: var(--lumi-font-body);
+client/src/styles/lumi-admin.css:345:  font-size: var(--lumi-text-sm);
+client/src/styles/lumi-admin.css:349:  font-family: var(--lumi-font-display);
+client/src/styles/lumi-admin.css:350:  font-size: var(--lumi-text-lg);
+client/src/styles/lumi-admin.css:353:  margin: 0 0 var(--lumi-space-2) 0;
+client/src/styles/lumi-tokens.css:3: * ADDITIVE ONLY: All variables prefixed with --lumi- to avoid colliding
+client/src/styles/lumi-tokens.css:13:  --lumi-sage-50:  hsl(150, 30%, 96%);
+client/src/styles/lumi-tokens.css:14:  --lumi-sage-100: hsl(150, 28%, 90%);
+client/src/styles/lumi-tokens.css:15:  --lumi-sage-200: hsl(150, 26%, 80%);
+client/src/styles/lumi-tokens.css:16:  --lumi-sage-300: hsl(150, 24%, 68%);
+client/src/styles/lumi-tokens.css:17:  --lumi-sage-400: hsl(150, 26%, 55%);
+client/src/styles/lumi-tokens.css:18:  --lumi-sage-500: hsl(150, 32%, 42%);
+client/src/styles/lumi-tokens.css:19:  --lumi-sage-600: hsl(150, 36%, 34%);
+client/src/styles/lumi-tokens.css:20:  --lumi-sage-700: hsl(150, 38%, 27%);
+client/src/styles/lumi-tokens.css:21:  --lumi-sage-800: hsl(150, 40%, 20%);
+client/src/styles/lumi-tokens.css:22:  --lumi-sage-900: hsl(150, 42%, 14%);
+client/src/styles/lumi-tokens.css:23:  --lumi-sage-950: hsl(150, 44%, 9%);
+client/src/styles/lumi-tokens.css:26:  --lumi-amber-50:  hsl(36, 92%, 96%);
+client/src/styles/lumi-tokens.css:27:  --lumi-amber-100: hsl(36, 90%, 90%);
+client/src/styles/lumi-tokens.css:28:  --lumi-amber-200: hsl(36, 88%, 80%);
+client/src/styles/lumi-tokens.css:29:  --lumi-amber-300: hsl(36, 86%, 68%);
+client/src/styles/lumi-tokens.css:30:  --lumi-amber-400: hsl(36, 88%, 56%);
+client/src/styles/lumi-tokens.css:31:  --lumi-amber-500: hsl(36, 92%, 48%);
+client/src/styles/lumi-tokens.css:32:  --lumi-amber-600: hsl(34, 90%, 42%);
+client/src/styles/lumi-tokens.css:33:  --lumi-amber-700: hsl(32, 88%, 35%);
+client/src/styles/lumi-tokens.css:34:  --lumi-amber-800: hsl(30, 84%, 28%);
+client/src/styles/lumi-tokens.css:35:  --lumi-amber-900: hsl(28, 80%, 20%);
+client/src/styles/lumi-tokens.css:38:  --lumi-stone-50:  hsl(36, 14%, 97%);
+client/src/styles/lumi-tokens.css:39:  --lumi-stone-100: hsl(36, 12%, 92%);
+client/src/styles/lumi-tokens.css:40:  --lumi-stone-200: hsl(34, 10%, 84%);
+client/src/styles/lumi-tokens.css:41:  --lumi-stone-300: hsl(32, 9%, 72%);
+client/src/styles/lumi-tokens.css:42:  --lumi-stone-400: hsl(30, 8%, 58%);
+client/src/styles/lumi-tokens.css:43:  --lumi-stone-500: hsl(28, 8%, 44%);
+client/src/styles/lumi-tokens.css:44:  --lumi-stone-600: hsl(28, 9%, 34%);
+client/src/styles/lumi-tokens.css:45:  --lumi-stone-700: hsl(28, 10%, 25%);
+client/src/styles/lumi-tokens.css:46:  --lumi-stone-800: hsl(28, 11%, 17%);
+client/src/styles/lumi-tokens.css:47:  --lumi-stone-900: hsl(28, 12%, 11%);
+client/src/styles/lumi-tokens.css:50:  --lumi-calm:    var(--lumi-sage-400);   /* breath, grounding */
+client/src/styles/lumi-tokens.css:51:  --lumi-growth:  var(--lumi-sage-600);   /* progress, mastery */
+client/src/styles/lumi-tokens.css:52:  --lumi-love:    hsl(350, 70%, 62%);     /* compassion, care */
+client/src/styles/lumi-tokens.css:53:  --lumi-insight: hsl(258, 60%, 64%);     /* wisdom, reflection */
+client/src/styles/lumi-tokens.css:54:  --lumi-energy:  var(--lumi-amber-500);  /* action, motivation */
+client/src/styles/lumi-tokens.css:55:  --lumi-rest:    hsl(218, 30%, 50%);     /* sleep, rest */
+client/src/styles/lumi-tokens.css:58:  --lumi-grad-sage:  linear-gradient(135deg, var(--lumi-sage-300), var(--lumi-sage-600));
+client/src/styles/lumi-tokens.css:59:  --lumi-grad-amber: linear-gradient(135deg, var(--lumi-amber-300), var(--lumi-amber-600));
+client/src/styles/lumi-tokens.css:60:  --lumi-grad-hero:  linear-gradient(135deg, var(--lumi-sage-100) 0%, var(--lumi-amber-50) 50%, var(--lumi-sage-200) 100%);
+client/src/styles/lumi-tokens.css:61:  --lumi-grad-cta:   linear-gradient(135deg, var(--lumi-amber-500), var(--lumi-amber-600));
+client/src/styles/lumi-tokens.css:62:  --lumi-grad-card:  linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+client/src/styles/lumi-tokens.css:63:  --lumi-grad-glow:  radial-gradient(circle at 50% 50%, var(--lumi-amber-400) 0%, transparent 65%);
+client/src/styles/lumi-tokens.css:66:  --lumi-font-display: 'Fraunces', 'Playfair Display', Georgia, serif;
+client/src/styles/lumi-tokens.css:67:  --lumi-font-body:    'Inter', system-ui, -apple-system, sans-serif;
+client/src/styles/lumi-tokens.css:68:  --lumi-font-quote:   'Crimson Pro', 'Cormorant Garamond', Georgia, serif;
+client/src/styles/lumi-tokens.css:71:  --lumi-text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+client/src/styles/lumi-tokens.css:72:  --lumi-text-sm:   clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+client/src/styles/lumi-tokens.css:73:  --lumi-text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+client/src/styles/lumi-tokens.css:74:  --lumi-text-lg:   clamp(1.125rem, 1rem + 0.625vw, 1.375rem);
+client/src/styles/lumi-tokens.css:75:  --lumi-text-xl:   clamp(1.375rem, 1.2rem + 0.875vw, 1.75rem);
+client/src/styles/lumi-tokens.css:76:  --lumi-text-2xl:  clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+client/src/styles/lumi-tokens.css:77:  --lumi-text-3xl:  clamp(2.25rem, 1.9rem + 1.75vw, 3.5rem);
+client/src/styles/lumi-tokens.css:78:  --lumi-text-4xl:  clamp(2.75rem, 2.3rem + 2.25vw, 4.5rem);
+client/src/styles/lumi-tokens.css:80:  --lumi-leading-body:    1.75;
+client/src/styles/lumi-tokens.css:81:  --lumi-leading-heading: 1.2;
+client/src/styles/lumi-tokens.css:82:  --lumi-leading-quote:   1.6;
+client/src/styles/lumi-tokens.css:85:  --lumi-space-1: 0.25rem;
+client/src/styles/lumi-tokens.css:86:  --lumi-space-2: 0.5rem;
+client/src/styles/lumi-tokens.css:87:  --lumi-space-3: 0.75rem;
+client/src/styles/lumi-tokens.css:88:  --lumi-space-4: 1rem;
+client/src/styles/lumi-tokens.css:89:  --lumi-space-5: 1.5rem;
+client/src/styles/lumi-tokens.css:90:  --lumi-space-6: 2rem;
+client/src/styles/lumi-tokens.css:91:  --lumi-space-7: 2.5rem;
+client/src/styles/lumi-tokens.css:92:  --lumi-space-8: 3rem;
+client/src/styles/lumi-tokens.css:93:  --lumi-space-9: 4rem;
+client/src/styles/lumi-tokens.css:94:  --lumi-space-10: 5rem;
+client/src/styles/lumi-tokens.css:95:  --lumi-space-11: 6rem;
+client/src/styles/lumi-tokens.css:96:  --lumi-space-12: 8rem;
+client/src/styles/lumi-tokens.css:99:  --lumi-radius-sm: 0.375rem;
+client/src/styles/lumi-tokens.css:100:  --lumi-radius-md: 0.625rem;
+client/src/styles/lumi-tokens.css:101:  --lumi-radius-lg: 1rem;
+client/src/styles/lumi-tokens.css:102:  --lumi-radius-xl: 1.5rem;
+client/src/styles/lumi-tokens.css:103:  --lumi-radius-pill: 999px;
+client/src/styles/lumi-tokens.css:105:  --lumi-shadow-1: 0 1px 2px rgba(28, 30, 28, 0.06), 0 2px 6px rgba(28, 30, 28, 0.04);
+client/src/styles/lumi-tokens.css:106:  --lumi-shadow-2: 0 4px 12px rgba(28, 30, 28, 0.08), 0 2px 4px rgba(28, 30, 28, 0.04);
+client/src/styles/lumi-tokens.css:107:  --lumi-shadow-3: 0 12px 28px rgba(28, 30, 28, 0.10), 0 4px 10px rgba(28, 30, 28, 0.06);
+client/src/styles/lumi-tokens.css:108:  --lumi-shadow-glow-amber: 0 0 24px rgba(243, 168, 49, 0.45);
+client/src/styles/lumi-tokens.css:109:  --lumi-shadow-glow-sage:  0 0 24px rgba(94, 168, 134, 0.35);
+client/src/styles/lumi-tokens.css:112:  --lumi-bg:        var(--lumi-stone-50);
+client/src/styles/lumi-tokens.css:113:  --lumi-bg-elev:   #ffffff;
+client/src/styles/lumi-tokens.css:114:  --lumi-bg-muted:  var(--lumi-sage-50);
+client/src/styles/lumi-tokens.css:115:  --lumi-text:      var(--lumi-stone-900);
+client/src/styles/lumi-tokens.css:116:  --lumi-text-muted:var(--lumi-stone-600);
+client/src/styles/lumi-tokens.css:117:  --lumi-border:    var(--lumi-stone-200);
+client/src/styles/lumi-tokens.css:118:  --lumi-accent:    var(--lumi-sage-600);
+client/src/styles/lumi-tokens.css:119:  --lumi-accent-fg: #ffffff;
+client/src/styles/lumi-tokens.css:122:  --lumi-ease:        cubic-bezier(0.4, 0, 0.2, 1);
+client/src/styles/lumi-tokens.css:123:  --lumi-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+client/src/styles/lumi-tokens.css:124:  --lumi-dur-quick:   140ms;
+client/src/styles/lumi-tokens.css:125:  --lumi-dur-normal:  240ms;
+client/src/styles/lumi-tokens.css:126:  --lumi-dur-slow:    480ms;
+client/src/styles/lumi-tokens.css:127:  --lumi-dur-breathe: 4s;
+client/src/styles/lumi-tokens.css:132:  --lumi-bg:        var(--lumi-stone-900);
+client/src/styles/lumi-tokens.css:133:  --lumi-bg-elev:   var(--lumi-stone-800);
+client/src/styles/lumi-tokens.css:134:  --lumi-bg-muted:  var(--lumi-sage-900);
+client/src/styles/lumi-tokens.css:135:  --lumi-text:      var(--lumi-stone-50);
+client/src/styles/lumi-tokens.css:136:  --lumi-text-muted:var(--lumi-stone-300);
+client/src/styles/lumi-tokens.css:137:  --lumi-border:    var(--lumi-stone-700);
+client/src/styles/lumi-tokens.css:138:  --lumi-accent:    var(--lumi-sage-300);
+client/src/styles/lumi-tokens.css:139:  --lumi-accent-fg: var(--lumi-stone-900);
+client/src/styles/lumi-tokens.css:140:  --lumi-grad-card: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+client/src/styles/lumi-tokens.css:144:.font-display-lumi { font-family: var(--lumi-font-display); line-height: var(--lumi-leading-heading); letter-spacing: -0.01em; }
+client/src/styles/lumi-tokens.css:145:.font-quote-lumi   { font-family: var(--lumi-font-quote); line-height: var(--lumi-leading-quote); font-style: italic; }
+client/src/styles/lumi-tokens.css:146:.font-body-lumi    { font-family: var(--lumi-font-body); line-height: var(--lumi-leading-body); }
+client/src/styles/lumi-tokens.css:148:.lumi-text-xs   { font-size: var(--lumi-text-xs); }
+client/src/styles/lumi-tokens.css:149:.lumi-text-sm   { font-size: var(--lumi-text-sm); }
+client/src/styles/lumi-tokens.css:150:.lumi-text-base { font-size: var(--lumi-text-base); }
+client/src/styles/lumi-tokens.css:151:.lumi-text-lg   { font-size: var(--lumi-text-lg); }
+client/src/styles/lumi-tokens.css:152:.lumi-text-xl   { font-size: var(--lumi-text-xl); }
+client/src/styles/lumi-tokens.css:153:.lumi-text-2xl  { font-size: var(--lumi-text-2xl); }
+client/src/styles/lumi-tokens.css:154:.lumi-text-3xl  { font-size: var(--lumi-text-3xl); }
+client/src/styles/lumi-tokens.css:155:.lumi-text-4xl  { font-size: var(--lumi-text-4xl); }
+client/src/styles/lumi-tokens.css:157:.lumi-bg          { background: var(--lumi-bg); color: var(--lumi-text); }
+client/src/styles/lumi-tokens.css:158:.lumi-bg-elev     { background: var(--lumi-bg-elev); color: var(--lumi-text); }
+client/src/styles/lumi-tokens.css:159:.lumi-text-muted  { color: var(--lumi-text-muted); }
+client/src/styles/lumi-tokens.css:160:.lumi-border      { border-color: var(--lumi-border); }
+client/src/styles/lumi-tokens.css:161:.lumi-accent-bg   { background: var(--lumi-accent); color: var(--lumi-accent-fg); }
+client/src/styles/lumi-tokens.css:162:.lumi-grad-hero-bg { background: var(--lumi-grad-hero); }
+client/src/styles/lumi-tokens.css:163:.lumi-grad-amber-bg { background: var(--lumi-grad-amber); color: white; }
+client/src/styles/lumi-tokens.css:164:.lumi-grad-sage-bg { background: var(--lumi-grad-sage); color: white; }
+client/src/styles/lumi-tokens.css:171: * existing MMHB consumer uses the namespaced `--lumi-*` form. To keep the
+client/src/styles/lumi-tokens.css:172: * project authoritative on `--lumi-*` while still letting drop-in spec
+client/src/styles/lumi-tokens.css:174: * defined ONLY in terms of the underlying `--lumi-*` token, so changing a
+client/src/styles/lumi-tokens.css:176: * direct `--lumi-*` counterpart (e.g. the spec's `--color-warning` /
+client/src/styles/lumi-tokens.css:182:  --color-sage-50:  var(--lumi-sage-50);
+client/src/styles/lumi-tokens.css:183:  --color-sage-100: var(--lumi-sage-100);
+client/src/styles/lumi-tokens.css:184:  --color-sage-200: var(--lumi-sage-200);
+client/src/styles/lumi-tokens.css:185:  --color-sage-300: var(--lumi-sage-300);
+client/src/styles/lumi-tokens.css:186:  --color-sage-400: var(--lumi-sage-400);
+client/src/styles/lumi-tokens.css:187:  --color-sage-500: var(--lumi-sage-500);
+client/src/styles/lumi-tokens.css:188:  --color-sage-600: var(--lumi-sage-600);
+client/src/styles/lumi-tokens.css:189:  --color-sage-700: var(--lumi-sage-700);
+client/src/styles/lumi-tokens.css:190:  --color-sage-800: var(--lumi-sage-800);
+client/src/styles/lumi-tokens.css:191:  --color-sage-900: var(--lumi-sage-900);
+client/src/styles/lumi-tokens.css:192:  --color-sage-950: var(--lumi-sage-950);
+client/src/styles/lumi-tokens.css:195:  --color-amber-50:  var(--lumi-amber-50);
+client/src/styles/lumi-tokens.css:196:  --color-amber-100: var(--lumi-amber-100);
+client/src/styles/lumi-tokens.css:197:  --color-amber-200: var(--lumi-amber-200);
+client/src/styles/lumi-tokens.css:198:  --color-amber-300: var(--lumi-amber-300);
+client/src/styles/lumi-tokens.css:199:  --color-amber-400: var(--lumi-amber-400);
+client/src/styles/lumi-tokens.css:200:  --color-amber-500: var(--lumi-amber-500);
+client/src/styles/lumi-tokens.css:201:  --color-amber-600: var(--lumi-amber-600);
+client/src/styles/lumi-tokens.css:202:  --color-amber-700: var(--lumi-amber-700);
+client/src/styles/lumi-tokens.css:203:  --color-amber-800: var(--lumi-amber-800);
+client/src/styles/lumi-tokens.css:204:  --color-amber-900: var(--lumi-amber-900);
+client/src/styles/lumi-tokens.css:207:  --color-stone-50:  var(--lumi-stone-50);
+client/src/styles/lumi-tokens.css:208:  --color-stone-100: var(--lumi-stone-100);
+client/src/styles/lumi-tokens.css:209:  --color-stone-200: var(--lumi-stone-200);
+client/src/styles/lumi-tokens.css:210:  --color-stone-300: var(--lumi-stone-300);
+client/src/styles/lumi-tokens.css:211:  --color-stone-400: var(--lumi-stone-400);
+client/src/styles/lumi-tokens.css:212:  --color-stone-500: var(--lumi-stone-500);
+client/src/styles/lumi-tokens.css:213:  --color-stone-600: var(--lumi-stone-600);
+client/src/styles/lumi-tokens.css:214:  --color-stone-700: var(--lumi-stone-700);
+client/src/styles/lumi-tokens.css:215:  --color-stone-800: var(--lumi-stone-800);
+client/src/styles/lumi-tokens.css:216:  --color-stone-900: var(--lumi-stone-900);
+client/src/styles/lumi-tokens.css:219:   * existing `--lumi-*` token; the `-light` companion is materialized from
+client/src/styles/lumi-tokens.css:221:  --color-calm:        var(--lumi-calm);
+client/src/styles/lumi-tokens.css:223:  --color-growth:      var(--lumi-growth);
+client/src/styles/lumi-tokens.css:225:  --color-love:        var(--lumi-love);
+client/src/styles/lumi-tokens.css:227:  --color-insight:     var(--lumi-insight);
+client/src/styles/lumi-tokens.css:229:  --color-energy:      var(--lumi-energy);
+client/src/styles/lumi-tokens.css:231:  --color-rest:        var(--lumi-rest);
+client/src/styles/lumi-tokens.css:243:  --gradient-sage:  var(--lumi-grad-sage);
+client/src/styles/lumi-tokens.css:244:  --gradient-amber: var(--lumi-grad-amber);
+client/src/styles/lumi-tokens.css:245:  --gradient-hero:  var(--lumi-grad-hero);
+client/src/styles/lumi-tokens.css:246:  --gradient-cta:   var(--lumi-grad-cta);
+client/src/styles/lumi-tokens.css:247:  --gradient-card:  var(--lumi-grad-card);
+client/src/styles/lumi-tokens.css:248:  --gradient-glow:  var(--lumi-grad-glow);
+client/src/styles/lumi-tokens.css:252:  --text-xs:   var(--lumi-text-xs);
+client/src/styles/lumi-tokens.css:253:  --text-sm:   var(--lumi-text-sm);
+client/src/styles/lumi-tokens.css:254:  --text-base: var(--lumi-text-base);
+client/src/styles/lumi-tokens.css:256:  --text-lg:   var(--lumi-text-lg);
+client/src/styles/lumi-tokens.css:257:  --text-xl:   var(--lumi-text-xl);
+client/src/styles/lumi-tokens.css:258:  --text-2xl:  var(--lumi-text-2xl);
+client/src/styles/lumi-tokens.css:259:  --text-3xl:  var(--lumi-text-3xl);
+client/src/styles/lumi-tokens.css:260:  --text-4xl:  var(--lumi-text-4xl);
+client/src/styles/lumi-tokens.css:282:  --font-display: var(--lumi-font-display);
+client/src/styles/lumi-tokens.css:283:  --font-body:    var(--lumi-font-body);
+client/src/styles/lumi-tokens.css:284:  --font-accent:  var(--lumi-font-quote);
+client/src/styles/lumi-tokens.css:287:  /* Button sizing tokens (spec-only — no prior --lumi-btn-* exposed) */
+client/src/styles/lumi-tokens.css:304:  /* Spacing aliases — map to existing --lumi-space-N */
+client/src/styles/lumi-tokens.css:305:  --space-1:  var(--lumi-space-1);
+client/src/styles/lumi-tokens.css:306:  --space-2:  var(--lumi-space-2);
+client/src/styles/lumi-tokens.css:307:  --space-3:  var(--lumi-space-3);
+client/src/styles/lumi-tokens.css:308:  --space-4:  var(--lumi-space-4);
+client/src/styles/lumi-tokens.css:309:  --space-5:  var(--lumi-space-5);
+client/src/styles/lumi-tokens.css:310:  --space-6:  var(--lumi-space-6);
+client/src/styles/lumi-tokens.css:311:  --space-8:  var(--lumi-space-8);
+client/src/styles/lumi-tokens.css:312:  --space-10: var(--lumi-space-10);
+client/src/styles/lumi-tokens.css:313:  --space-12: var(--lumi-space-12);
+client/src/styles/lumi-tokens.css:321:  --color-bg-primary:    var(--lumi-sage-950);
+client/src/styles/lumi-tokens.css:322:  --color-bg-secondary:  var(--lumi-sage-900);
+client/src/styles/lumi-tokens.css:323:  --color-bg-card:       var(--lumi-sage-800);
+client/src/styles/lumi-tokens.css:324:  --color-bg-elevated:   var(--lumi-sage-700);
+client/src/styles/lumi-tokens.css:325:  --color-text-primary:   var(--lumi-stone-100);
+client/src/styles/lumi-tokens.css:326:  --color-text-secondary: var(--lumi-stone-300);
+client/src/styles/lumi-tokens.css:327:  --color-text-muted:     var(--lumi-stone-500);
+client/src/styles/lumi-tokens.css:328:  --color-border:         var(--lumi-sage-700);
+client/src/styles/lumi-tokens.css:329:  --color-border-subtle:  var(--lumi-sage-800);
+client/src/styles/lumi-tokens.css:330:  --color-accent:         var(--lumi-amber-400);
+client/src/styles/lumi-tokens.css:331:  --color-accent-hover:   var(--lumi-amber-300);
+client/src/styles/lumi-tokens.css:332:  --gradient-hero:        linear-gradient(180deg, var(--lumi-sage-950) 0%, var(--lumi-sage-900) 100%);
+client/src/styles/lumi-pastel-visual-system.css:13:  --lumi-cream-00: #fffdf8;
+client/src/styles/lumi-pastel-visual-system.css:14:  --lumi-cream-50: #fff9f1;
+client/src/styles/lumi-pastel-visual-system.css:15:  --lumi-cream-100: #f9f1e7;
+client/src/styles/lumi-pastel-visual-system.css:16:  --lumi-cream-200: #efe3d4;
+client/src/styles/lumi-pastel-visual-system.css:19:  --lumi-sage-25: #f4f8f0;
+client/src/styles/lumi-pastel-visual-system.css:20:  --lumi-sage-50: #edf4e8;
+client/src/styles/lumi-pastel-visual-system.css:21:  --lumi-sage-100: #dfeadb;
+client/src/styles/lumi-pastel-visual-system.css:22:  --lumi-sage-200: #cdddc5;
+client/src/styles/lumi-pastel-visual-system.css:23:  --lumi-sage-300: #b4caa8;
+client/src/styles/lumi-pastel-visual-system.css:24:  --lumi-sage-400: #91ad86;
+client/src/styles/lumi-pastel-visual-system.css:25:  --lumi-sage-500: #6f936d;
+client/src/styles/lumi-pastel-visual-system.css:26:  --lumi-sage-600: #4f765b;
+client/src/styles/lumi-pastel-visual-system.css:27:  --lumi-sage-700: #315b4d;
+client/src/styles/lumi-pastel-visual-system.css:28:  --lumi-sage-800: #183f37;
+client/src/styles/lumi-pastel-visual-system.css:29:  --lumi-sage-900: #0f2d29;
+client/src/styles/lumi-pastel-visual-system.css:32:  --lumi-rose-50: #fff1f2;
+client/src/styles/lumi-pastel-visual-system.css:33:  --lumi-rose-100: #ffe0e4;
+client/src/styles/lumi-pastel-visual-system.css:34:  --lumi-rose-200: #ffc6cf;
+client/src/styles/lumi-pastel-visual-system.css:35:  --lumi-peach-50: #fff2e5;
+client/src/styles/lumi-pastel-visual-system.css:36:  --lumi-peach-100: #ffe0bf;
+client/src/styles/lumi-pastel-visual-system.css:37:  --lumi-gold-50: #fff8db;
+client/src/styles/lumi-pastel-visual-system.css:38:  --lumi-gold-100: #ffeaa3;
+client/src/styles/lumi-pastel-visual-system.css:39:  --lumi-gold-200: #ffd66e;
+client/src/styles/lumi-pastel-visual-system.css:40:  --lumi-sky-50: #edfaff;
+client/src/styles/lumi-pastel-visual-system.css:41:  --lumi-sky-100: #cdefff;
+client/src/styles/lumi-pastel-visual-system.css:42:  --lumi-sky-200: #9de0ff;
+client/src/styles/lumi-pastel-visual-system.css:43:  --lumi-lavender-50: #f6f1ff;
+client/src/styles/lumi-pastel-visual-system.css:44:  --lumi-lavender-100: #e8ddff;
+client/src/styles/lumi-pastel-visual-system.css:45:  --lumi-mint-50: #effbf4;
+client/src/styles/lumi-pastel-visual-system.css:46:  --lumi-mint-100: #d8f2e3;
+client/src/styles/lumi-pastel-visual-system.css:49:  --lumi-text-strong: #102f2b;
+client/src/styles/lumi-pastel-visual-system.css:50:  --lumi-text-main: #1f4039;
+client/src/styles/lumi-pastel-visual-system.css:51:  --lumi-text-soft: #5f756d;
+client/src/styles/lumi-pastel-visual-system.css:52:  --lumi-text-muted: #7f9089;
+client/src/styles/lumi-pastel-visual-system.css:53:  --lumi-text-inverse: #fffdf8;
+client/src/styles/lumi-pastel-visual-system.css:56:  --lumi-surface: rgba(255, 253, 248, 0.94);
+client/src/styles/lumi-pastel-visual-system.css:57:  --lumi-surface-soft: rgba(255, 249, 241, 0.88);
+client/src/styles/lumi-pastel-visual-system.css:58:  --lumi-surface-sage: rgba(244, 248, 240, 0.78);
+client/src/styles/lumi-pastel-visual-system.css:59:  --lumi-surface-rose: rgba(255, 241, 242, 0.72);
+client/src/styles/lumi-pastel-visual-system.css:60:  --lumi-surface-gold: rgba(255, 248, 219, 0.72);
+client/src/styles/lumi-pastel-visual-system.css:61:  --lumi-surface-sky: rgba(237, 250, 255, 0.7);
+client/src/styles/lumi-pastel-visual-system.css:64:  --lumi-border-soft: rgba(49, 91, 77, 0.14);
+client/src/styles/lumi-pastel-visual-system.css:65:  --lumi-border-sage: rgba(111, 147, 109, 0.22);
+client/src/styles/lumi-pastel-visual-system.css:66:  --lumi-shadow-soft: 0 18px 50px rgba(49, 91, 77, 0.10);
+client/src/styles/lumi-pastel-visual-system.css:67:  --lumi-shadow-card: 0 20px 60px rgba(49, 91, 77, 0.13);
+client/src/styles/lumi-pastel-visual-system.css:68:  --lumi-shadow-button: 0 12px 30px rgba(79, 118, 91, 0.22);
+client/src/styles/lumi-pastel-visual-system.css:69:  --lumi-glow-sage: 0 0 34px rgba(205, 221, 197, 0.72);
+client/src/styles/lumi-pastel-visual-system.css:70:  --lumi-glow-gold: 0 0 38px rgba(255, 214, 110, 0.54);
+client/src/styles/lumi-pastel-visual-system.css:71:  --lumi-glow-sky: 0 0 32px rgba(157, 224, 255, 0.48);
+client/src/styles/lumi-pastel-visual-system.css:74:  --lumi-radius-sm: 14px;
+client/src/styles/lumi-pastel-visual-system.css:75:  --lumi-radius-md: 20px;
+client/src/styles/lumi-pastel-visual-system.css:76:  --lumi-radius-lg: 30px;
+client/src/styles/lumi-pastel-visual-system.css:77:  --lumi-radius-xl: 42px;
+client/src/styles/lumi-pastel-visual-system.css:78:  --lumi-radius-pill: 999px;
+client/src/styles/lumi-pastel-visual-system.css:81:  --lumi-ease: cubic-bezier(.22, 1, .36, 1);
+client/src/styles/lumi-pastel-visual-system.css:86:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:91:    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-cream-50) 42%, var(--lumi-sage-25));
+client/src/styles/lumi-pastel-visual-system.css:102:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:114:  color: var(--lumi-text-inverse);
+client/src/styles/lumi-pastel-visual-system.css:116:    linear-gradient(135deg, var(--lumi-sage-600), var(--lumi-sage-500));
+client/src/styles/lumi-pastel-visual-system.css:118:  box-shadow: var(--lumi-shadow-button);
+client/src/styles/lumi-pastel-visual-system.css:126:  border-radius: var(--lumi-radius-pill);
+client/src/styles/lumi-pastel-visual-system.css:146:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:176:  border-color: var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:181:  box-shadow: var(--lumi-shadow-soft);
+client/src/styles/lumi-pastel-visual-system.css:220:  animation: lumiFloat 7.5s var(--lumi-ease) infinite, lumiGlow 5.8s ease-in-out infinite;
+client/src/styles/lumi-pastel-visual-system.css:271:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:273:  border: 1px solid var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:281:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:283:  border-color: var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:298:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:306:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:311:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:319:    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-sage-25));
+client/src/styles/lumi-pastel-visual-system.css:324:  border: 1px solid var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:325:  border-radius: var(--lumi-radius-lg);
+client/src/styles/lumi-pastel-visual-system.css:326:  box-shadow: var(--lumi-shadow-card);
+client/src/styles/lumi-pastel-visual-system.css:331:  color: var(--lumi-text-inverse);
+client/src/styles/lumi-pastel-visual-system.css:332:  background: linear-gradient(135deg, var(--lumi-sage-700), var(--lumi-sage-500));
+client/src/styles/lumi-pastel-visual-system.css:334:  border-radius: var(--lumi-radius-pill);
+client/src/styles/lumi-pastel-visual-system.css:335:  box-shadow: var(--lumi-shadow-button);
+client/src/styles/lumi-pastel-visual-system.css:339:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:341:  border: 1px solid var(--lumi-border-sage);
+client/src/styles/lumi-pastel-visual-system.css:342:  border-radius: var(--lumi-radius-pill);
+client/src/styles/lumi-pastel-visual-system.css:347:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:348:  background: linear-gradient(90deg, var(--lumi-sage-700), var(--lumi-sage-500), #b18d25);
+client/src/styles/lumi-pastel-visual-system.css:409:      linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-cream-50));
+client/src/styles/lumi-visual-system.css:2:  --lumi-sage-50: #F3F8EF;
+client/src/styles/lumi-visual-system.css:3:  --lumi-sage-100: #DDE7D5;
+client/src/styles/lumi-visual-system.css:4:  --lumi-sage-200: #C7D8BC;
+client/src/styles/lumi-visual-system.css:5:  --lumi-sage-300: #AFC6A1;
+client/src/styles/lumi-visual-system.css:6:  --lumi-sage-400: #90AF85;
+client/src/styles/lumi-visual-system.css:7:  --lumi-sage-500: #6F9367;
+client/src/styles/lumi-visual-system.css:9:  --lumi-cream-50: #FFFDF9;
+client/src/styles/lumi-visual-system.css:10:  --lumi-cream-100: #FFF9F2;
+client/src/styles/lumi-visual-system.css:11:  --lumi-cream-200: #F7F0E8;
+client/src/styles/lumi-visual-system.css:12:  --lumi-cream-300: #EFE5D7;
+client/src/styles/lumi-visual-system.css:14:  --lumi-gold-100: #FFE9A8;
+client/src/styles/lumi-visual-system.css:15:  --lumi-gold-200: #FFD46B;
+client/src/styles/lumi-visual-system.css:16:  --lumi-gold-300: #F6C14B;
+client/src/styles/lumi-visual-system.css:17:  --lumi-gold-400: #E2AA2B;
+client/src/styles/lumi-visual-system.css:19:  --lumi-rose-100: #FFE8EA;
+client/src/styles/lumi-visual-system.css:20:  --lumi-rose-200: #FFD6DA;
+client/src/styles/lumi-visual-system.css:21:  --lumi-rose-300: #F9BEC5;
+client/src/styles/lumi-visual-system.css:23:  --lumi-sky-100: #E8F9FF;
+client/src/styles/lumi-visual-system.css:24:  --lumi-sky-200: #AEE9FF;
+client/src/styles/lumi-visual-system.css:25:  --lumi-sky-300: #77D8FF;
+client/src/styles/lumi-visual-system.css:27:  --lumi-lavender-100: #EEE7FF;
+client/src/styles/lumi-visual-system.css:28:  --lumi-peach-100: #FFE7CF;
+client/src/styles/lumi-visual-system.css:29:  --lumi-mint-100: #DFF7EA;
+client/src/styles/lumi-visual-system.css:31:  --lumi-ink: #213628;
+client/src/styles/lumi-visual-system.css:32:  --lumi-ink-soft: #38533F;
+client/src/styles/lumi-visual-system.css:33:  --lumi-ink-muted: #5C705F;
+client/src/styles/lumi-visual-system.css:34:  --lumi-white: #FFFFFF;
+client/src/styles/lumi-visual-system.css:36:  --lumi-focus: #2F6F4E;
+client/src/styles/lumi-visual-system.css:37:  --lumi-shadow-soft: 0 18px 45px rgba(65, 91, 68, 0.14);
+client/src/styles/lumi-visual-system.css:38:  --lumi-shadow-glow: 0 0 34px rgba(255, 212, 107, 0.42), 0 0 72px rgba(174, 233, 255, 0.24);
+client/src/styles/lumi-visual-system.css:39:  --lumi-radius-lg: 24px;
+client/src/styles/lumi-visual-system.css:40:  --lumi-radius-xl: 34px;
+client/src/styles/lumi-visual-system.css:49:    linear-gradient(135deg, var(--lumi-cream-100), var(--lumi-sage-50) 52%, var(--lumi-sky-100));
+client/src/styles/lumi-visual-system.css:50:  color: var(--lumi-ink);
+client/src/styles/lumi-visual-system.css:78:  color: var(--lumi-ink);
+client/src/styles/lumi-visual-system.css:89:  color: var(--lumi-focus);
+client/src/styles/lumi-visual-system.css:108:  color: var(--lumi-ink) !important;
+client/src/styles/lumi-visual-system.css:117:  color: var(--lumi-ink) !important;
+client/src/styles/lumi-visual-system.css:121:  box-shadow: var(--lumi-shadow-soft), 0 0 0 1px rgba(255, 255, 255, 0.34) inset !important;
+client/src/styles/lumi-visual-system.css:129:  box-shadow: var(--lumi-shadow-soft);
+client/src/styles/lumi-visual-system.css:220:  background: var(--lumi-gold-200);
+client/src/styles/lumi-visual-system.css:221:  box-shadow: var(--lumi-shadow-glow);
+client/src/styles/lumi-visual-system.css:234:  background: var(--lumi-sky-200);
+client/src/styles/lumi-visual-system.css:241:  background: var(--lumi-rose-200);
+client/src/lumi-tokens/canonical/lumiTokens.css:5:	--lumi-sage: #A8BFA3;
+client/src/lumi-tokens/canonical/lumiTokens.css:6:	--lumi-sage-deep: #7E9B7B;
+client/src/lumi-tokens/canonical/lumiTokens.css:8:	--lumi-cream: #F6F1E8;
+client/src/lumi-tokens/canonical/lumiTokens.css:9:	--lumi-mist: #EEF5F0;
+client/src/lumi-tokens/canonical/lumiTokens.css:11:	--lumi-gold: #D6B36A;
+client/src/lumi-tokens/canonical/lumiTokens.css:12:	--lumi-gold-soft: #E7D2A1;
+client/src/lumi-tokens/canonical/lumiTokens.css:14:	--lumi-blush: #F6CFC7;
+client/src/lumi-tokens/canonical/lumiTokens.css:16:	--lumi-forest: #1F3A36;
+client/src/lumi-tokens/canonical/lumiTokens.css:17:	--lumi-night: #1C2524;
+client/src/lumi-tokens/canonical/lumiTokens.css:19:	--lumi-text: var(--lumi-forest);
+client/src/lumi-tokens/canonical/lumiTokens.css:21:	--lumi-bg: var(--lumi-cream);
+client/src/lumi-tokens/canonical/lumiTokens.css:23:	--lumi-card:
