@@ -1,0 +1,149 @@
+:root {
+  --lumi-sage-50: #F4F8F1;
+  --lumi-sage-100: #DDE7D5;
+  --lumi-sage-200: #C7D8BC;
+  --lumi-sage-300: #AFC6A1;
+  --lumi-sage-400: #90AF85;
+  --lumi-sage-700: #486B43;
+  --lumi-sage-900: #243A22;
+
+  --lumi-cream-50: #FFFDF9;
+  --lumi-cream-100: #FFF9F2;
+  --lumi-cream-200: #F7F0E8;
+  --lumi-cream-300: #EFE5D7;
+
+  --lumi-gold-100: #FFF2BF;
+  --lumi-gold-300: #FFD46B;
+  --lumi-gold-400: #F6C14B;
+  --lumi-gold-500: #E2AA2B;
+
+  --lumi-rose-100: #FFD6DA;
+  --lumi-rose-200: #F9BEC5;
+
+  --lumi-sky-100: #AEE9FF;
+  --lumi-sky-300: #77D8FF;
+
+  --lumi-ink: #17312D;
+  --lumi-ink-soft: #39534D;
+  --lumi-white: #FFFFFF;
+
+  --lumi-shadow-soft: 0 18px 50px rgba(36, 58, 34, 0.14);
+  --lumi-shadow-gold: 0 18px 45px rgba(246, 193, 75, 0.28);
+  --lumi-focus-ring: 0 0 0 4px rgba(255, 212, 107, 0.5);
+}
+
+.lumi-visual-page {
+  background:
+    radial-gradient(circle at 16% 12%, rgba(255, 214, 218, 0.46), transparent 28%),
+    radial-gradient(circle at 84% 18%, rgba(174, 233, 255, 0.38), transparent 26%),
+    radial-gradient(circle at 76% 82%, rgba(255, 212, 107, 0.28), transparent 28%),
+    linear-gradient(135deg, var(--lumi-cream-100), var(--lumi-sage-50));
+  color: var(--lumi-ink);
+}
+
+.lumi-glass-card,
+.card-premium,
+.card-elevated {
+  background: rgba(255, 253, 249, 0.88);
+  border: 1px solid rgba(144, 175, 133, 0.28);
+  box-shadow: var(--lumi-shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.btn-premium,
+.btn-premium-teal,
+button.btn-premium,
+a.btn-premium {
+  background: linear-gradient(135deg, var(--lumi-sage-700), var(--lumi-sage-900)) !important;
+  color: var(--lumi-white) !important;
+  border: 1px solid rgba(255,255,255,0.35) !important;
+  box-shadow: 0 12px 30px rgba(36, 58, 34, 0.18);
+}
+
+.btn-premium *,
+.btn-premium-teal *,
+button.btn-premium *,
+a.btn-premium * {
+  color: var(--lumi-white) !important;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.btn-secondary-premium,
+button.btn-secondary-premium,
+a.btn-secondary-premium {
+  background: rgba(255, 249, 242, 0.92) !important;
+  color: var(--lumi-ink) !important;
+  border: 1px solid rgba(144, 175, 133, 0.42) !important;
+}
+
+.btn-secondary-premium *,
+button.btn-secondary-premium *,
+a.btn-secondary-premium * {
+  color: var(--lumi-ink) !important;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+button,
+a,
+[role="button"] {
+  text-wrap: balance;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: none;
+  box-shadow: var(--lumi-focus-ring);
+}
+
+.lumi-ambient-scene {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.lumi-ambient-scene::before,
+.lumi-ambient-scene::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(4px);
+  opacity: 0.55;
+  animation: lumi-scene-float 10s ease-in-out infinite alternate;
+}
+
+.lumi-ambient-scene::before {
+  width: 260px;
+  height: 260px;
+  left: -80px;
+  top: 18%;
+  background: radial-gradient(circle, rgba(255, 214, 218, 0.5), transparent 64%);
+}
+
+.lumi-ambient-scene::after {
+  width: 320px;
+  height: 320px;
+  right: -120px;
+  bottom: 10%;
+  background: radial-gradient(circle, rgba(174, 233, 255, 0.42), transparent 66%);
+}
+
+@keyframes lumi-scene-float {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(0, -18px, 0) scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

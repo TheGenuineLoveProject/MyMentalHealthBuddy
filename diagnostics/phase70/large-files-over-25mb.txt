@@ -1,0 +1,10 @@
+17737663103 ./diagnostics/visual-submit-check/button-contrast-risk-search.txt
+9543867626 ./diagnostics/visual-submit-check/lumi-motion-search.txt
+5960321291 ./backups/final-launch-snapshot-20260522-231726.tar.gz
+61035059 ./logs/backups/STABLE_GREEN_20260530_005912.tar.gz
+60913185 ./logs/backups/STABLE_BUILD_20260530_005533.tar.gz
+60695425 ./production-backups/launch-stable-20260522-014111.tar.gz
+60672816 ./backups/pre-security-hardening-20260522-012029.tar.gz
+59191296 ./.local/state/replit/log-query.db
+49594350 ./stripe-audit.txt
+29214212 ./docs/inventory/AI_SURFACE_SCAN.txt

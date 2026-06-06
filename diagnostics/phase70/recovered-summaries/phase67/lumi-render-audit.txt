@@ -1,0 +1,4 @@
+client/src/components/lumi/LumiPresenceLayer.tsx:import "./LumiPresenceLayer.css";
+client/src/components/lumi/LumiPresenceLayer.tsx:export default function LumiPresenceLayer() {
+client/src/main.jsx:import LumiPresenceLayer from "./components/lumi/LumiPresenceLayer";
+client/src/main.jsx:      <><App /><LumiPresenceLayer /></>

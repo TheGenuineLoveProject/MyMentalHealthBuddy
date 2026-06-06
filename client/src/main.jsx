@@ -1,3 +1,4 @@
+import "./styles/lumi-visual-system.css";
 import LumiPresenceLayer from "./components/lumi/LumiPresenceLayer";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
