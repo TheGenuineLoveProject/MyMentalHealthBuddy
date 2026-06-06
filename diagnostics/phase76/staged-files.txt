@@ -3,6 +3,4 @@ diagnostics/phase76/git-log-start.txt
 diagnostics/phase76/git-status-start.txt
 diagnostics/phase76/head-start.txt
 diagnostics/phase76/health.json
-diagnostics/phase76/phase75-css-check.txt
 diagnostics/phase76/ready.json
-diagnostics/phase76/status-summary.md
