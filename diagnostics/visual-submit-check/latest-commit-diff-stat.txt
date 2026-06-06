@@ -1,0 +1,18 @@
+ client/src/components/lumi/LumiPresenceLayer.css   | 712 ++++++++++++++++++---
+ client/src/components/lumi/LumiPresenceLayer.tsx   | 114 +++-
+ .../src/components/lumi/LumiPresenceLayer.css      | 168 +++++
+ .../src/components/lumi/LumiPresenceLayer.tsx      |  53 ++
+ diagnostics/phase67/before/client/src/main.jsx     | 160 +++++
+ diagnostics/phase67/build.txt                      | 460 +++++++++++++
+ diagnostics/phase67/check-links.txt                |  18 +
+ diagnostics/phase67/git-status-before-commit.txt   |  16 +
+ diagnostics/phase67/git-status-start.txt           |   9 +
+ diagnostics/phase67/head.txt                       |   1 +
+ diagnostics/phase67/health.json                    |   1 +
+ diagnostics/phase67/lumi-kinetic-feature-audit.txt |  75 +++
+ diagnostics/phase67/lumi-render-audit.txt          |   4 +
+ diagnostics/phase67/ready.json                     |   1 +
+ diagnostics/phase67/result.md                      |  27 +
+ diagnostics/phase67/snapshot.txt                   |   3 +
+ docs/governance/LUMI_KINETIC_AVATAR_PHASE67.md     |  51 ++
+ 17 files changed, 1769 insertions(+), 104 deletions(-)
