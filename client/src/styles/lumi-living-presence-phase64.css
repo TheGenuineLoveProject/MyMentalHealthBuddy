@@ -1,0 +1,406 @@
+/* ==========================================================
+   Phase 64 — Lumi Living Presence + Page Scene Polish
+   Goals:
+   - Make Lumi feel alive, warm, premium, and emotionally present.
+   - Reduce empty hero whitespace without breaking routes.
+   - Improve page coherence, visual hierarchy, button readability,
+     content visibility, and soft pastel depth.
+   - Preserve reduced-motion accessibility.
+   ========================================================== */
+
+:root {
+  --phase64-cream: #fffaf2;
+  --phase64-cream-deep: #f7ecdc;
+  --phase64-soft-sage: #eaf3e5;
+  --phase64-sage: #b9d0ad;
+  --phase64-sage-strong: #5f8a68;
+  --phase64-evergreen: #12342f;
+  --phase64-text: #1d3f38;
+  --phase64-muted: #60766f;
+  --phase64-gold: #ffd875;
+  --phase64-gold-soft: #fff3bd;
+  --phase64-rose: #ffdfe4;
+  --phase64-sky: #c8efff;
+  --phase64-lavender: #ece4ff;
+  --phase64-card: rgba(255, 253, 248, 0.82);
+  --phase64-border: rgba(18, 52, 47, 0.12);
+  --phase64-shadow: 0 24px 70px rgba(18, 52, 47, 0.13);
+  --phase64-glow: 0 0 42px rgba(255, 216, 117, 0.36), 0 0 70px rgba(200, 239, 255, 0.24);
+  --phase64-radius-xl: 42px;
+  --phase64-radius-lg: 30px;
+  --phase64-radius-md: 20px;
+  --phase64-pill: 999px;
+  --phase64-ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Page-level depth */
+body {
+  background:
+    radial-gradient(circle at 10% 7%, rgba(255, 216, 117, .20), transparent 28%),
+    radial-gradient(circle at 92% 12%, rgba(200, 239, 255, .24), transparent 30%),
+    radial-gradient(circle at 52% 92%, rgba(255, 223, 228, .22), transparent 34%),
+    linear-gradient(180deg, #fffdf8 0%, var(--phase64-cream) 45%, var(--phase64-soft-sage) 100%) !important;
+  color: var(--phase64-text);
+}
+
+/* Premium page container feel */
+main,
+[class*="Page"],
+[class*="page"],
+[class*="Screen"],
+[class*="screen"] {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Coherent content width and vertical rhythm */
+main > section,
+[class*="section"],
+[class*="Section"] {
+  scroll-margin-top: 96px;
+}
+
+section,
+[class*="Section"],
+[class*="section"] {
+  position: relative;
+}
+
+/* Reduce plain empty hero whitespace while keeping calm breathing room */
+[class*="hero"],
+[class*="Hero"],
+[class*="journey"],
+[class*="Journey"],
+[class*="landing"],
+[class*="Landing"],
+[class*="Home"] {
+  min-height: auto;
+}
+
+[class*="hero"] > *,
+[class*="Hero"] > *,
+[class*="journey"] > *,
+[class*="Journey"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Add scene aura to hero / journey areas */
+[class*="hero"]::after,
+[class*="Hero"]::after,
+[class*="journey"]::after,
+[class*="Journey"]::after,
+[class*="landing"]::after,
+[class*="Landing"]::after {
+  content: "";
+  position: absolute;
+  inset: 4% 5%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: var(--phase64-radius-xl);
+  background:
+    radial-gradient(circle at 20% 28%, rgba(255, 216, 117, .22), transparent 30%),
+    radial-gradient(circle at 78% 22%, rgba(200, 239, 255, .22), transparent 34%),
+    radial-gradient(circle at 58% 82%, rgba(255, 223, 228, .18), transparent 36%);
+  filter: blur(8px);
+  opacity: .78;
+}
+
+/* Cards: stronger hierarchy, still gentle */
+.card,
+[class*="Card"],
+[class*="panel"],
+[class*="Panel"],
+[class*="module"],
+[class*="Module"] {
+  background-color: var(--phase64-card);
+  border: 1px solid var(--phase64-border);
+  box-shadow: 0 16px 50px rgba(18, 52, 47, .08);
+  backdrop-filter: blur(16px);
+}
+
+/* Visual cards with images should feel intentional */
+img {
+  max-width: 100%;
+}
+
+img[alt*="Lumi"],
+img[alt*="lumi"],
+img[src*="lumi"],
+img[src*="Lumi"],
+[class*="Lumi"] img,
+[class*="lumi"] img {
+  transform-origin: center bottom;
+  will-change: transform, filter;
+  filter:
+    drop-shadow(0 28px 42px rgba(18, 52, 47, .18))
+    drop-shadow(0 0 26px rgba(255, 216, 117, .22));
+  animation:
+    phase64LumiBreath 5.8s ease-in-out infinite,
+    phase64LumiFloat 8s var(--phase64-ease) infinite,
+    phase64LumiGlow 6.8s ease-in-out infinite;
+}
+
+/* Living Lumi scene wrapper — works when added later and also with common existing class names */
+.lumi-living-presence,
+.lumi-scene,
+.lumi-avatar-scene,
+[class*="LumiScene"],
+[class*="LumiPresence"],
+[class*="lumi-scene"],
+[class*="lumi-presence"] {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.lumi-living-presence::before,
+.lumi-scene::before,
+.lumi-avatar-scene::before,
+[class*="LumiScene"]::before,
+[class*="LumiPresence"]::before,
+[class*="lumi-scene"]::before,
+[class*="lumi-presence"]::before {
+  content: "";
+  position: absolute;
+  inset: 7%;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 216, 117, .42), transparent 42%),
+    radial-gradient(circle, rgba(200, 239, 255, .28), transparent 66%),
+    radial-gradient(circle, rgba(255, 223, 228, .24), transparent 76%);
+  filter: blur(22px);
+  animation: phase64ScenePulse 5.4s ease-in-out infinite;
+}
+
+.lumi-living-presence::after,
+.lumi-scene::after,
+.lumi-avatar-scene::after,
+[class*="LumiScene"]::after,
+[class*="LumiPresence"]::after,
+[class*="lumi-scene"]::after,
+[class*="lumi-presence"]::after {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255, 216, 117, .65) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(185, 208, 173, .58) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(200, 239, 255, .56) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(255, 223, 228, .46) 0 1px, transparent 2px);
+  background-size: 72px 72px, 104px 104px, 136px 136px, 168px 168px;
+  background-position: 10px 20px, 50px 80px, 90px 30px, 30px 120px;
+  opacity: .58;
+  animation: phase64SparkleDrift 22s linear infinite;
+}
+
+/* Button label visibility: force accessible contrast over opaque sage */
+button,
+a[role="button"],
+.btn,
+.button,
+[class*="Button"],
+[class*="button"],
+[class*="btn"] {
+  min-height: 44px;
+  color: var(--phase64-evergreen);
+  text-shadow: none !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Primary CTAs */
+button[class*="primary"],
+button[class*="Primary"],
+a[class*="primary"],
+a[class*="Primary"],
+[class*="CTA"],
+[class*="cta"],
+.btn-primary,
+.lumi-button-primary {
+  color: #fffdf8 !important;
+  background:
+    linear-gradient(135deg, #315f51 0%, #5f8a68 58%, #8fb98d 100%) !important;
+  border: 1px solid rgba(255, 253, 248, .42) !important;
+  box-shadow:
+    0 14px 34px rgba(49, 95, 81, .24),
+    0 0 0 1px rgba(255, 253, 248, .18) inset !important;
+}
+
+/* Soft CTAs */
+button[class*="secondary"],
+button[class*="Secondary"],
+a[class*="secondary"],
+a[class*="Secondary"],
+.lumi-button-soft {
+  color: var(--phase64-evergreen) !important;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, .96), rgba(234, 243, 229, .80)) !important;
+  border: 1px solid rgba(49, 95, 81, .20) !important;
+}
+
+/* Protect labels inside buttons */
+button *,
+a[role="button"] *,
+.btn *,
+.button *,
+[class*="Button"] *,
+[class*="button"] * {
+  color: inherit;
+}
+
+/* Links must be visible */
+a {
+  color: #315f51;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: #12342f;
+}
+
+/* Form clarity */
+input,
+textarea,
+select {
+  color: var(--phase64-text);
+  background: rgba(255, 253, 248, .94);
+  border: 1px solid rgba(18, 52, 47, .16);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(96, 118, 111, .70);
+}
+
+/* Headline readability */
+h1,
+h2,
+h3 {
+  color: var(--phase64-evergreen);
+  text-wrap: balance;
+}
+
+p,
+li {
+  color: var(--phase64-text);
+}
+
+/* Small labels should not disappear into pastel background */
+small,
+[class*="eyebrow"],
+[class*="Eyebrow"],
+[class*="label"],
+[class*="Label"] {
+  color: var(--phase64-muted);
+}
+
+/* Timeline / left rail polish from screenshot-like pages */
+[class*="timeline"],
+[class*="Timeline"],
+[class*="step"],
+[class*="Step"] {
+  border-color: rgba(95, 138, 104, .18);
+}
+
+/* Floating back-to-top / action buttons */
+[class*="floating"],
+[class*="Floating"],
+[class*="backToTop"],
+[class*="BackToTop"] {
+  color: #fffdf8 !important;
+  background: linear-gradient(135deg, #006f5e, #14967f) !important;
+  box-shadow: 0 18px 40px rgba(0, 111, 94, .24);
+}
+
+/* Motion */
+@keyframes phase64LumiBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.018); }
+}
+
+@keyframes phase64LumiFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+@keyframes phase64LumiGlow {
+  0%, 100% {
+    filter:
+      drop-shadow(0 28px 42px rgba(18, 52, 47, .18))
+      drop-shadow(0 0 26px rgba(255, 216, 117, .22));
+  }
+  50% {
+    filter:
+      drop-shadow(0 32px 52px rgba(18, 52, 47, .22))
+      drop-shadow(0 0 44px rgba(255, 216, 117, .40))
+      drop-shadow(0 0 24px rgba(200, 239, 255, .28));
+  }
+}
+
+@keyframes phase64ScenePulse {
+  0%, 100% { opacity: .48; transform: scale(.97); }
+  50% { opacity: .86; transform: scale(1.05); }
+}
+
+@keyframes phase64SparkleDrift {
+  0% { background-position: 10px 20px, 50px 80px, 90px 30px, 30px 120px; }
+  100% { background-position: 110px 90px, 10px 140px, 160px 20px, 90px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  img[alt*="Lumi"],
+  img[alt*="lumi"],
+  img[src*="lumi"],
+  img[src*="Lumi"],
+  [class*="Lumi"] img,
+  [class*="lumi"] img,
+  .lumi-living-presence::before,
+  .lumi-living-presence::after,
+  .lumi-scene::before,
+  .lumi-scene::after,
+  .lumi-avatar-scene::before,
+  .lumi-avatar-scene::after,
+  [class*="LumiScene"]::before,
+  [class*="LumiScene"]::after,
+  [class*="LumiPresence"]::before,
+  [class*="LumiPresence"]::after,
+  [class*="lumi-scene"]::before,
+  [class*="lumi-scene"]::after,
+  [class*="lumi-presence"]::before,
+  [class*="lumi-presence"]::after {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  [class*="hero"]::after,
+  [class*="Hero"]::after,
+  [class*="journey"]::after,
+  [class*="Journey"]::after,
+  [class*="landing"]::after,
+  [class*="Landing"]::after {
+    inset: 2%;
+    border-radius: 28px;
+  }
+
+  button,
+  a[role="button"],
+  .btn,
+  .button,
+  [class*="Button"],
+  [class*="button"],
+  [class*="btn"] {
+    min-height: 46px;
+  }
+}
