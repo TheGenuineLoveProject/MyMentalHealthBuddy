@@ -7633,3 +7633,5 @@ canvas {
     transition-duration: 0.001ms !important;
   }
 }
+
+@import "./styles/lumi-pastel-visual-system.css";

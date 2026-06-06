@@ -1,0 +1,425 @@
+/* ==========================================================
+   Phase 63 — Lumi Soft Pastel Visual System
+   Purpose:
+   - Reduce opaque sage heaviness
+   - Add Lumi-derived soft pastel palette
+   - Fix invisible button labels
+   - Add warmer visual depth, glow, motion, and scene polish
+   - Preserve accessibility and avoid dark patterns
+   ========================================================== */
+
+:root {
+  /* Lumi Core Neutrals */
+  --lumi-cream-00: #fffdf8;
+  --lumi-cream-50: #fff9f1;
+  --lumi-cream-100: #f9f1e7;
+  --lumi-cream-200: #efe3d4;
+
+  /* Soft Pastel Sage — lighter and less opaque than prior sage */
+  --lumi-sage-25: #f4f8f0;
+  --lumi-sage-50: #edf4e8;
+  --lumi-sage-100: #dfeadb;
+  --lumi-sage-200: #cdddc5;
+  --lumi-sage-300: #b4caa8;
+  --lumi-sage-400: #91ad86;
+  --lumi-sage-500: #6f936d;
+  --lumi-sage-600: #4f765b;
+  --lumi-sage-700: #315b4d;
+  --lumi-sage-800: #183f37;
+  --lumi-sage-900: #0f2d29;
+
+  /* Lumi Pastel Companions */
+  --lumi-rose-50: #fff1f2;
+  --lumi-rose-100: #ffe0e4;
+  --lumi-rose-200: #ffc6cf;
+  --lumi-peach-50: #fff2e5;
+  --lumi-peach-100: #ffe0bf;
+  --lumi-gold-50: #fff8db;
+  --lumi-gold-100: #ffeaa3;
+  --lumi-gold-200: #ffd66e;
+  --lumi-sky-50: #edfaff;
+  --lumi-sky-100: #cdefff;
+  --lumi-sky-200: #9de0ff;
+  --lumi-lavender-50: #f6f1ff;
+  --lumi-lavender-100: #e8ddff;
+  --lumi-mint-50: #effbf4;
+  --lumi-mint-100: #d8f2e3;
+
+  /* Text */
+  --lumi-text-strong: #102f2b;
+  --lumi-text-main: #1f4039;
+  --lumi-text-soft: #5f756d;
+  --lumi-text-muted: #7f9089;
+  --lumi-text-inverse: #fffdf8;
+
+  /* Surfaces */
+  --lumi-surface: rgba(255, 253, 248, 0.94);
+  --lumi-surface-soft: rgba(255, 249, 241, 0.88);
+  --lumi-surface-sage: rgba(244, 248, 240, 0.78);
+  --lumi-surface-rose: rgba(255, 241, 242, 0.72);
+  --lumi-surface-gold: rgba(255, 248, 219, 0.72);
+  --lumi-surface-sky: rgba(237, 250, 255, 0.7);
+
+  /* Borders / shadows / glow */
+  --lumi-border-soft: rgba(49, 91, 77, 0.14);
+  --lumi-border-sage: rgba(111, 147, 109, 0.22);
+  --lumi-shadow-soft: 0 18px 50px rgba(49, 91, 77, 0.10);
+  --lumi-shadow-card: 0 20px 60px rgba(49, 91, 77, 0.13);
+  --lumi-shadow-button: 0 12px 30px rgba(79, 118, 91, 0.22);
+  --lumi-glow-sage: 0 0 34px rgba(205, 221, 197, 0.72);
+  --lumi-glow-gold: 0 0 38px rgba(255, 214, 110, 0.54);
+  --lumi-glow-sky: 0 0 32px rgba(157, 224, 255, 0.48);
+
+  /* Radius */
+  --lumi-radius-sm: 14px;
+  --lumi-radius-md: 20px;
+  --lumi-radius-lg: 30px;
+  --lumi-radius-xl: 42px;
+  --lumi-radius-pill: 999px;
+
+  /* Motion */
+  --lumi-ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Global visual softness */
+body {
+  color: var(--lumi-text-main);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 214, 110, 0.16), transparent 32%),
+    radial-gradient(circle at 82% 18%, rgba(205, 239, 255, 0.22), transparent 34%),
+    radial-gradient(circle at 50% 92%, rgba(255, 224, 228, 0.24), transparent 38%),
+    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-cream-50) 42%, var(--lumi-sage-25));
+}
+
+/* Prevent sage opacity from swallowing labels */
+button,
+a[role="button"],
+.btn,
+.button,
+[class*="btn"],
+[class*="Button"],
+[class*="button"] {
+  color: var(--lumi-text-strong);
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Primary CTA visibility */
+button[class*="primary"],
+a[class*="primary"],
+.btn-primary,
+[class*="PrimaryButton"],
+[class*="cta"],
+[class*="CTA"] {
+  color: var(--lumi-text-inverse);
+  background:
+    linear-gradient(135deg, var(--lumi-sage-600), var(--lumi-sage-500));
+  border-color: rgba(255, 253, 248, 0.36);
+  box-shadow: var(--lumi-shadow-button);
+}
+
+/* Common green/sage buttons: brighten surface + ensure readable text */
+button:not([disabled]),
+a[role="button"],
+.btn,
+.button {
+  border-radius: var(--lumi-radius-pill);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+button:not([disabled]):hover,
+a[role="button"]:hover,
+.btn:hover,
+.button:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.03) brightness(1.02);
+}
+
+/* If buttons use pale sage backgrounds, force high-contrast deep text */
+button[style*="sage"],
+button[style*="green"],
+a[style*="sage"],
+a[style*="green"],
+[class*="sage"] button,
+[class*="green"] button {
+  color: var(--lumi-text-strong);
+}
+
+/* Disabled buttons must remain readable */
+button:disabled,
+[aria-disabled="true"] {
+  color: rgba(16, 47, 43, 0.58);
+  background: rgba(223, 234, 219, 0.48);
+  border-color: rgba(49, 91, 77, 0.12);
+}
+
+/* Accessible focus ring */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(157, 224, 255, 0.95);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 7px rgba(157, 224, 255, 0.22);
+}
+
+/* Cards and sections: more premium, less flat */
+section,
+.card,
+[class*="Card"],
+[class*="panel"],
+[class*="Panel"],
+[class*="surface"],
+[class*="Surface"] {
+  border-color: var(--lumi-border-soft);
+}
+
+.card,
+[class*="Card"] {
+  box-shadow: var(--lumi-shadow-soft);
+}
+
+/* Hero / journey areas: reduce empty flatness */
+[class*="hero"],
+[class*="Hero"],
+[class*="journey"],
+[class*="Journey"],
+[class*="gentle"],
+[class*="Gentle"] {
+  position: relative;
+  isolation: isolate;
+}
+
+[class*="hero"]::before,
+[class*="Hero"]::before,
+[class*="journey"]::before,
+[class*="Journey"]::before {
+  content: "";
+  position: absolute;
+  inset: -2rem;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 24% 24%, rgba(255, 214, 110, 0.18), transparent 32%),
+    radial-gradient(circle at 78% 28%, rgba(157, 224, 255, 0.22), transparent 34%),
+    radial-gradient(circle at 50% 78%, rgba(255, 198, 207, 0.18), transparent 38%);
+  filter: blur(2px);
+}
+
+/* Lumi image treatment */
+img[alt*="Lumi"],
+img[alt*="lumi"],
+[class*="lumi"] img,
+[class*="Lumi"] img {
+  filter:
+    drop-shadow(0 22px 34px rgba(49, 91, 77, 0.16))
+    drop-shadow(0 0 22px rgba(255, 214, 110, 0.18));
+  transform-origin: center bottom;
+  animation: lumiFloat 7.5s var(--lumi-ease) infinite, lumiGlow 5.8s ease-in-out infinite;
+}
+
+/* Living Lumi wrappers */
+.lumi-presence,
+[class*="LumiPresence"],
+[class*="lumi-presence"] {
+  position: relative;
+  isolation: isolate;
+}
+
+.lumi-presence::before,
+[class*="LumiPresence"]::before,
+[class*="lumi-presence"]::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  z-index: -1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 214, 110, 0.34), transparent 48%),
+    radial-gradient(circle, rgba(157, 224, 255, 0.22), transparent 64%);
+  filter: blur(18px);
+  animation: lumiPulse 4.8s ease-in-out infinite;
+}
+
+.lumi-presence::after,
+[class*="LumiPresence"]::after,
+[class*="lumi-presence"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(145, 173, 134, 0.40) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(255, 214, 110, 0.38) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(157, 224, 255, 0.34) 0 1px, transparent 2px);
+  background-size: 80px 80px, 120px 120px, 160px 160px;
+  background-position: 10px 20px, 40px 70px, 90px 30px;
+  opacity: .55;
+  animation: lumiSparkleDrift 18s linear infinite;
+}
+
+/* Pills / tags */
+[class*="tag"],
+[class*="Tag"],
+[class*="pill"],
+[class*="Pill"],
+.badge,
+[class*="Badge"] {
+  color: var(--lumi-text-main);
+  background: rgba(255, 253, 248, 0.68);
+  border: 1px solid var(--lumi-border-soft);
+  box-shadow: 0 6px 18px rgba(49, 91, 77, 0.06);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  color: var(--lumi-text-main);
+  background: rgba(255, 253, 248, 0.92);
+  border-color: var(--lumi-border-soft);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(95, 117, 109, 0.62);
+}
+
+/* Top banner readability */
+[class*="banner"],
+[class*="Banner"],
+[class*="notice"],
+[class*="Notice"],
+[class*="announcement"],
+[class*="Announcement"] {
+  color: var(--lumi-text-main);
+}
+
+/* Safer readable text gradients: do not let text become too pale */
+h1,
+h2,
+h3,
+h4 {
+  color: var(--lumi-text-strong);
+}
+
+p,
+li {
+  color: var(--lumi-text-main);
+}
+
+/* Utility classes for future components */
+.lumi-soft-page {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255, 214, 110, .18), transparent 30%),
+    radial-gradient(circle at 88% 14%, rgba(157, 224, 255, .22), transparent 28%),
+    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-sage-25));
+}
+
+.lumi-glass-card {
+  background: rgba(255, 253, 248, 0.78);
+  border: 1px solid var(--lumi-border-soft);
+  border-radius: var(--lumi-radius-lg);
+  box-shadow: var(--lumi-shadow-card);
+  backdrop-filter: blur(18px);
+}
+
+.lumi-button-primary {
+  color: var(--lumi-text-inverse);
+  background: linear-gradient(135deg, var(--lumi-sage-700), var(--lumi-sage-500));
+  border: 1px solid rgba(255, 253, 248, .34);
+  border-radius: var(--lumi-radius-pill);
+  box-shadow: var(--lumi-shadow-button);
+}
+
+.lumi-button-soft {
+  color: var(--lumi-text-strong);
+  background: linear-gradient(135deg, rgba(255,253,248,.92), rgba(223,234,219,.70));
+  border: 1px solid var(--lumi-border-sage);
+  border-radius: var(--lumi-radius-pill);
+  box-shadow: 0 10px 24px rgba(49, 91, 77, .10);
+}
+
+.lumi-gradient-text {
+  color: var(--lumi-text-strong);
+  background: linear-gradient(90deg, var(--lumi-sage-700), var(--lumi-sage-500), #b18d25);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Motion */
+@keyframes lumiFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.012); }
+}
+
+@keyframes lumiGlow {
+  0%, 100% {
+    filter:
+      drop-shadow(0 22px 34px rgba(49, 91, 77, 0.16))
+      drop-shadow(0 0 20px rgba(255, 214, 110, 0.16));
+  }
+  50% {
+    filter:
+      drop-shadow(0 28px 42px rgba(49, 91, 77, 0.20))
+      drop-shadow(0 0 34px rgba(255, 214, 110, 0.32));
+  }
+}
+
+@keyframes lumiPulse {
+  0%, 100% { opacity: .50; transform: scale(.98); }
+  50% { opacity: .82; transform: scale(1.04); }
+}
+
+@keyframes lumiSparkleDrift {
+  0% { background-position: 10px 20px, 40px 70px, 90px 30px; }
+  100% { background-position: 90px 80px, 140px 10px, 10px 130px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  img[alt*="Lumi"],
+  img[alt*="lumi"],
+  [class*="lumi"] img,
+  [class*="Lumi"] img,
+  .lumi-presence::before,
+  .lumi-presence::after,
+  [class*="LumiPresence"]::before,
+  [class*="LumiPresence"]::after,
+  [class*="lumi-presence"]::before,
+  [class*="lumi-presence"]::after {
+    animation: none !important;
+  }
+
+  button,
+  a,
+  .btn,
+  .button {
+    transition: none !important;
+  }
+}
+
+/* Mobile polish */
+@media (max-width: 768px) {
+  body {
+    background:
+      radial-gradient(circle at 50% 8%, rgba(255, 214, 110, 0.14), transparent 34%),
+      linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-cream-50));
+  }
+
+  img[alt*="Lumi"],
+  img[alt*="lumi"],
+  [class*="lumi"] img,
+  [class*="Lumi"] img {
+    max-width: min(84vw, 360px);
+  }
+
+  button,
+  a[role="button"],
+  .btn,
+  .button {
+    min-height: 44px;
+  }
+}
