@@ -239,3 +239,41 @@
     transition: none !important;
   }
 }
+
+/* ===== Phase 74: Official Lumi Avatar Brand Polish ===== */
+.lumi-brand-avatar,
+.lumi-brand-rig,
+[data-official-lumi="segmented-brand-rig"] {
+  filter:
+    drop-shadow(0 18px 34px rgba(80, 112, 76, 0.22))
+    drop-shadow(0 6px 18px rgba(255, 212, 107, 0.18));
+}
+
+[data-official-lumi="segmented-brand-rig"]::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  z-index: -1;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(255, 212, 107, 0.20), transparent 58%),
+    radial-gradient(circle at 60% 20%, rgba(174, 233, 255, 0.16), transparent 56%);
+  animation: lumi-soft-aura-pulse 5.8s ease-in-out infinite;
+}
+
+@keyframes lumi-soft-aura-pulse {
+  0%, 100% {
+    opacity: 0.62;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.92;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-official-lumi="segmented-brand-rig"]::before {
+    animation: none;
+  }
+}

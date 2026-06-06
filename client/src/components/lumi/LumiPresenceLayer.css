@@ -39,3 +39,46 @@
     transform: none;
   }
 }
+
+/* ===== Phase 74: Lumi Presence Pastel Scene Polish ===== */
+.lumi-presence-layer,
+.lumi-presence-shell,
+.lumi-presence-orb,
+.lumi-presence-card {
+  --lumi-presence-cream: var(--lumi-eternal-cream-100, #fff9f2);
+  --lumi-presence-sage: var(--lumi-serenity-sage-200, #dde7d5);
+  --lumi-presence-gold: var(--lumi-healing-gold-300, #ffd46b);
+  --lumi-presence-rose: var(--lumi-compassion-rose-200, #ffd6da);
+  --lumi-presence-sky: var(--lumi-hope-sky-200, #aee9ff);
+}
+
+.lumi-presence-layer {
+  pointer-events: none;
+}
+
+.lumi-presence-card,
+.lumi-presence-shell {
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255, 214, 218, 0.34), transparent 32%),
+    radial-gradient(circle at 82% 16%, rgba(174, 233, 255, 0.28), transparent 34%),
+    linear-gradient(145deg, rgba(255, 249, 242, 0.94), rgba(233, 242, 225, 0.82));
+  border: 1px solid rgba(36, 48, 36, 0.12);
+  box-shadow:
+    0 22px 70px rgba(144, 175, 133, 0.22),
+    0 12px 36px rgba(255, 212, 107, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.lumi-presence-card *,
+.lumi-presence-shell * {
+  color: var(--lumi-readable-ink, #243024);
+}
+
+.lumi-presence-glow,
+.lumi-aura,
+.lumi-orb-glow {
+  background:
+    radial-gradient(circle, rgba(255, 212, 107, 0.38), transparent 52%),
+    radial-gradient(circle, rgba(174, 233, 255, 0.22), transparent 64%);
+  filter: blur(10px);
+}

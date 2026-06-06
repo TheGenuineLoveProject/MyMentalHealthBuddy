@@ -1,0 +1,17 @@
+client/src/components/lumi/LumiBrandAvatar.css
+client/src/components/lumi/LumiPresenceLayer.css
+client/src/styles/lumi-visual-system.css
+diagnostics/phase74/build.txt
+diagnostics/phase74/button-contrast-token-scan-after.txt
+diagnostics/phase74/button-contrast-token-scan-before.txt
+diagnostics/phase74/check-links.txt
+diagnostics/phase74/git-log-start.txt
+diagnostics/phase74/git-status-start.txt
+diagnostics/phase74/head-start.txt
+diagnostics/phase74/health.json
+diagnostics/phase74/oversized-files-check.txt
+diagnostics/phase74/ready.json
+diagnostics/phase74/status-summary.md
+diagnostics/phase74/visual-polish-gate.txt
+diagnostics/phase74/visual-runtime-gate.txt
+scripts/visual-polish-gate.mjs

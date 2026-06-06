@@ -188,3 +188,137 @@ a:focus-visible,
     transform: none !important;
   }
 }
+
+/* ===== Phase 74: Lumi Pastel Palette + Button Label Visibility Polish ===== */
+:root {
+  --lumi-serenity-sage-50: #f3f8ef;
+  --lumi-serenity-sage-100: #e9f2e1;
+  --lumi-serenity-sage-200: #dde7d5;
+  --lumi-serenity-sage-300: #c7d8bc;
+  --lumi-serenity-sage-400: #afc6a1;
+  --lumi-serenity-sage-500: #90af85;
+
+  --lumi-eternal-cream-50: #fffdf9;
+  --lumi-eternal-cream-100: #fff9f2;
+  --lumi-eternal-cream-200: #f7f0e8;
+  --lumi-eternal-cream-300: #efe5d7;
+
+  --lumi-healing-gold-100: #fff1bd;
+  --lumi-healing-gold-200: #ffe38f;
+  --lumi-healing-gold-300: #ffd46b;
+  --lumi-healing-gold-400: #f6c14b;
+  --lumi-healing-gold-500: #e2aa2b;
+
+  --lumi-compassion-rose-100: #fff0f2;
+  --lumi-compassion-rose-200: #ffd6da;
+  --lumi-compassion-rose-300: #f9bec5;
+
+  --lumi-hope-sky-100: #eafbff;
+  --lumi-hope-sky-200: #aee9ff;
+  --lumi-hope-sky-300: #77d8ff;
+
+  --lumi-readable-ink: #243024;
+  --lumi-readable-ink-soft: #374637;
+  --lumi-readable-on-sage: #172517;
+  --lumi-readable-on-gold: #2e2608;
+  --lumi-readable-on-dark: #fffdf9;
+
+  --lumi-focus-ring: 0 0 0 4px rgba(255, 212, 107, 0.42);
+  --lumi-soft-border: rgba(36, 48, 36, 0.14);
+  --lumi-card-glow: 0 22px 70px rgba(144, 175, 133, 0.22);
+  --lumi-gold-glow: 0 18px 55px rgba(255, 212, 107, 0.28);
+}
+
+/* Safer readable buttons across generated pages */
+button,
+[role="button"],
+a[class*="button"],
+a[class*="Button"],
+.btn,
+[class*="btn"],
+[class*="Button"],
+[class*="button"] {
+  text-shadow: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+button:not(:disabled),
+[role="button"]:not(:disabled),
+a[class*="button"],
+a[class*="Button"],
+.btn,
+[class*="btn"],
+[class*="Button"],
+[class*="button"] {
+  color: var(--lumi-readable-ink);
+}
+
+button[class*="sage"],
+button[class*="Sage"],
+a[class*="sage"],
+a[class*="Sage"],
+[class*="sage"] button,
+[class*="Sage"] button {
+  color: var(--lumi-readable-on-sage) !important;
+}
+
+button[class*="gold"],
+button[class*="Gold"],
+a[class*="gold"],
+a[class*="Gold"],
+[class*="gold"] button,
+[class*="Gold"] button {
+  color: var(--lumi-readable-on-gold) !important;
+}
+
+button[class*="primary"],
+button[class*="Primary"],
+a[class*="primary"],
+a[class*="Primary"],
+[class*="primary"] button,
+[class*="Primary"] button {
+  color: var(--lumi-readable-on-dark);
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+.btn:focus-visible,
+[class*="Button"]:focus-visible,
+[class*="button"]:focus-visible {
+  outline: none;
+  box-shadow: var(--lumi-focus-ring);
+}
+
+/* Gentle page depth so visual sections feel less blank without layout refactors */
+main,
+.lumi-page-shell,
+.page-shell,
+.page-scaffold,
+[class*="Page"],
+[class*="page"] {
+  --lumi-page-wash:
+    radial-gradient(circle at 12% 8%, rgba(255, 214, 218, 0.18), transparent 28%),
+    radial-gradient(circle at 88% 12%, rgba(174, 233, 255, 0.18), transparent 30%),
+    radial-gradient(circle at 50% 0%, rgba(255, 212, 107, 0.12), transparent 32%);
+}
+
+/* Cards and surfaces receive brand-cohesive warmth without forcing opacity-heavy sage */
+.card,
+[class*="card"],
+[class*="Card"],
+.panel,
+[class*="panel"],
+[class*="Panel"],
+section {
+  border-color: var(--lumi-soft-border);
+}
+
+/* Accessibility: keep all animation polish safe for motion-sensitive users */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
