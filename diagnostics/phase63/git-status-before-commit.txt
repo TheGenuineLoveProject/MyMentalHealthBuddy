@@ -5,14 +5,9 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
 	modified:   diagnostics/phase63/build.txt
-	modified:   diagnostics/phase63/client-files.txt
-	modified:   diagnostics/phase63/css-files.txt
 	modified:   diagnostics/phase63/git-status-before-commit.txt
-	modified:   diagnostics/phase63/git-status-start.txt
 	modified:   diagnostics/phase63/head.txt
 	modified:   diagnostics/phase63/health.json
-	modified:   diagnostics/phase63/import-status.txt
 	modified:   diagnostics/phase63/ready.json
-	modified:   diagnostics/phase63/visual-signals.txt
 
 no changes added to commit (use "git add" and/or "git commit -a")
