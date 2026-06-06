@@ -1,0 +1,20 @@
+ client/src/styles/lumi-visual-system.css           |  41 ++
+ diagnostics/phase72/LumiBrandAvatar.css.before     | 241 +++++++++++
+ diagnostics/phase72/build.txt                      | 460 +++++++++++++++++++++
+ diagnostics/phase72/check-links.txt                |  18 +
+ diagnostics/phase72/git-log-start.txt              |   8 +
+ diagnostics/phase72/git-status-start.txt           |   8 +
+ diagnostics/phase72/head-start.txt                 |   1 +
+ diagnostics/phase72/health.json                    |   1 +
+ diagnostics/phase72/lumi-motion-token-search.txt   |  19 +
+ diagnostics/phase72/lumi-visual-system.css.before  | 149 +++++++
+ .../phase72/official-lumi-marker-verification.txt  |  39 ++
+ diagnostics/phase72/ready.json                     |   1 +
+ diagnostics/phase72/staged-file-sizes.txt          |  15 +
+ diagnostics/phase72/staged-files.txt               |  15 +
+ diagnostics/phase72/staged-size-gate.txt           |   1 +
+ diagnostics/phase72/status-summary.md              |  14 +
+ diagnostics/phase72/visual-runtime-gate-after.txt  |   1 +
+ diagnostics/phase72/visual-runtime-gate-before.txt |   3 +
+ diagnostics/phase72/visual-runtime-gate.mjs.before |  85 ++++
+ 19 files changed, 1120 insertions(+)

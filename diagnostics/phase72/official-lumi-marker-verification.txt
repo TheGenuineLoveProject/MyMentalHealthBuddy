@@ -1,0 +1,39 @@
+client/src/components/lumi/LumiCompanion.jsx: *                                 (e.g. 'lumi-breathe'). Overrides the
+client/src/components/lumi/LumiCompanion.jsx:  // class (e.g. forcing 'lumi-breathe' on the marketing hero so a night-time
+client/src/components/lumi/LumiMascotImage.jsx:const lumiFullBodyPng = "/lumi/official/lumi-float-idle.png";
+client/src/components/lumi/LumiV6.tsx:  default: "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  yellow:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  purple:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  orange:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  waving:      "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:const FALLBACK_PNG = "/lumi/official/lumi-float-idle.png";
+client/src/components/lumi/LumiBrandAvatar.tsx:    src: `${assetBase}/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp`,
+client/src/components/lumi/LumiBrandAvatar.tsx:      data-official-lumi="segmented-brand-rig"
+client/src/components/lumi/LumiBrandAvatar.css:  animation: lumi-arm-left-wave 4.4s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:  animation: lumi-arm-right-wave 4.4s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:  animation: lumi-leg-left-sway 5.2s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:  animation: lumi-leg-right-sway 5.2s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:  animation: lumi-eye-blink 5.1s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:  animation: lumi-mouth-talk 5.8s ease-in-out infinite;
+client/src/components/lumi/LumiBrandAvatar.css:@keyframes lumi-arm-left-wave {
+client/src/components/lumi/LumiBrandAvatar.css:@keyframes lumi-arm-right-wave {
+client/src/components/lumi/LumiBrandAvatar.css:@keyframes lumi-leg-left-sway {
+client/src/components/lumi/LumiBrandAvatar.css:@keyframes lumi-leg-right-sway {
+client/src/components/lumi/LumiBrandAvatar.css:@keyframes lumi-eye-blink {
+client/src/components/lumi/LumiBrandAvatar.css:@keyframes lumi-mouth-talk {
+client/src/styles/lumi-visual-system.css:@keyframes lumi-breathe {
+client/src/styles/lumi-visual-system.css:@keyframes lumi-float {
+client/src/styles/lumi-visual-system.css:  animation: lumi-breathe 5.6s ease-in-out infinite;
+client/src/styles/lumi-visual-system.css:  animation: lumi-float 6.8s ease-in-out infinite;
+scripts/visual-runtime-gate.mjs:  "client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp",
+scripts/visual-runtime-gate.mjs:  "data-official-lumi",
+scripts/visual-runtime-gate.mjs:  "segmented-brand-rig",
+scripts/visual-runtime-gate.mjs:  "MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp",
+scripts/visual-runtime-gate.mjs:  "lumi-eye-blink",
+scripts/visual-runtime-gate.mjs:  "lumi-mouth-talk",
+scripts/visual-runtime-gate.mjs:  "lumi-arm-left-wave",
+scripts/visual-runtime-gate.mjs:  "lumi-arm-right-wave",
+scripts/visual-runtime-gate.mjs:  "lumi-leg-left-sway",
+scripts/visual-runtime-gate.mjs:  "lumi-leg-right-sway",
+scripts/visual-runtime-gate.mjs:  "lumi-breathe",
+scripts/visual-runtime-gate.mjs:  "lumi-float",

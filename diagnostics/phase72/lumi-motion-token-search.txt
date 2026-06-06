@@ -1,0 +1,19 @@
+client/src/styles/lumi-visual-system.css:@keyframes lumi-breathe {
+client/src/styles/lumi-visual-system.css:@keyframes lumi-float {
+client/src/styles/lumi-visual-system.css:.lumi-motion-breathe {
+client/src/styles/lumi-visual-system.css:  animation: lumi-breathe 5.6s ease-in-out infinite;
+client/src/styles/lumi-visual-system.css:.lumi-motion-float {
+client/src/styles/lumi-visual-system.css:  animation: lumi-float 6.8s ease-in-out infinite;
+client/src/styles/lumi-visual-system.css:  .lumi-motion-breathe,
+client/src/styles/lumi-visual-system.css:  .lumi-motion-float {
+client/src/components/lumi/LumiCompanion.jsx: *                                 (e.g. 'lumi-breathe'). Overrides the
+client/src/components/lumi/LumiCompanion.jsx:  // class (e.g. forcing 'lumi-breathe' on the marketing hero so a night-time
+client/src/components/lumi/LumiMascotImage.jsx:const lumiFullBodyPng = "/lumi/official/lumi-float-idle.png";
+client/src/components/lumi/LumiV6.tsx:  default: "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  yellow:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  purple:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  orange:  "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:  waving:      "/lumi/official/lumi-float-idle.png",
+client/src/components/lumi/LumiV6.tsx:const FALLBACK_PNG = "/lumi/official/lumi-float-idle.png";
+scripts/visual-runtime-gate.mjs:  "lumi-breathe",
+scripts/visual-runtime-gate.mjs:  "lumi-float",

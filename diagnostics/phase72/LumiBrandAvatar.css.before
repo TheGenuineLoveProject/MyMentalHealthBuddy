@@ -1,0 +1,241 @@
+.lumi-brand-avatar {
+  --lumi-avatar-size: 188px;
+  position: relative;
+  width: var(--lumi-avatar-size);
+  height: calc(var(--lumi-avatar-size) * 1.16);
+  display: inline-grid;
+  place-items: center;
+  isolation: isolate;
+  filter: drop-shadow(0 24px 34px rgba(36, 58, 34, 0.2));
+}
+
+.lumi-brand-avatar--sm { --lumi-avatar-size: 92px; }
+.lumi-brand-avatar--md { --lumi-avatar-size: 132px; }
+.lumi-brand-avatar--lg { --lumi-avatar-size: 188px; }
+.lumi-brand-avatar--xl { --lumi-avatar-size: 248px; }
+
+.lumi-brand-avatar__aura {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.lumi-brand-avatar__aura-one {
+  inset: 5%;
+  background:
+    radial-gradient(circle at 48% 44%, rgba(255, 212, 107, 0.44), transparent 56%),
+    radial-gradient(circle at 56% 58%, rgba(174, 233, 255, 0.24), transparent 64%);
+  animation: lumi-aura-pulse 4.6s ease-in-out infinite;
+}
+
+.lumi-brand-avatar__aura-two {
+  inset: -10%;
+  background:
+    radial-gradient(circle at 38% 30%, rgba(255, 214, 218, 0.28), transparent 42%),
+    radial-gradient(circle at 72% 70%, rgba(221, 231, 213, 0.44), transparent 54%);
+  animation: lumi-aura-float 7s ease-in-out infinite;
+}
+
+.lumi-brand-avatar__stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: lumi-official-breathe 4.8s ease-in-out infinite;
+  transform-origin: 50% 58%;
+}
+
+.lumi-official-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity, filter;
+}
+
+.lumi-official-shadow {
+  opacity: 0.45;
+  transform-origin: 50% 84%;
+  animation: lumi-shadow-breathe 4.8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.lumi-official-body {
+  z-index: 2;
+  animation: lumi-body-soft-sway 6.8s ease-in-out infinite;
+}
+
+.lumi-official-torso {
+  z-index: 3;
+  animation: lumi-torso-breathe 4.8s ease-in-out infinite;
+}
+
+.lumi-official-arm-left {
+  z-index: 4;
+  transform-origin: 36% 44%;
+  animation: lumi-arm-left-wave 4.4s ease-in-out infinite;
+}
+
+.lumi-official-arm-right {
+  z-index: 4;
+  transform-origin: 64% 44%;
+  animation: lumi-arm-right-wave 4.4s ease-in-out infinite;
+}
+
+.lumi-official-leg-left {
+  z-index: 1;
+  transform-origin: 44% 68%;
+  animation: lumi-leg-left-sway 5.2s ease-in-out infinite;
+}
+
+.lumi-official-leg-right {
+  z-index: 1;
+  transform-origin: 56% 68%;
+  animation: lumi-leg-right-sway 5.2s ease-in-out infinite;
+}
+
+.lumi-official-face {
+  z-index: 5;
+  transform-origin: 50% 38%;
+  animation: lumi-face-tilt 7.2s ease-in-out infinite;
+}
+
+.lumi-official-eyes {
+  z-index: 6;
+  transform-origin: 50% 38%;
+  animation: lumi-eye-blink 5.1s ease-in-out infinite;
+}
+
+.lumi-official-mouth {
+  z-index: 7;
+  transform-origin: 50% 48%;
+  animation: lumi-mouth-talk 5.8s ease-in-out infinite;
+}
+
+.lumi-official-top-leaf {
+  z-index: 8;
+  transform-origin: 50% 18%;
+  animation: lumi-leaf-wiggle 5.7s ease-in-out infinite;
+}
+
+.lumi-official-sparkles {
+  z-index: 9;
+  opacity: 0.88;
+  animation: lumi-sparkle-twinkle 3.8s ease-in-out infinite;
+}
+
+.lumi-brand-avatar--calm .lumi-official-arm-left,
+.lumi-brand-avatar--calm .lumi-official-arm-right,
+.lumi-brand-avatar--listening .lumi-official-arm-left,
+.lumi-brand-avatar--listening .lumi-official-arm-right {
+  animation-duration: 7s;
+}
+
+.lumi-brand-avatar--celebrate .lumi-official-arm-left,
+.lumi-brand-avatar--celebrate .lumi-official-arm-right,
+.lumi-brand-avatar--celebrate .lumi-official-sparkles {
+  animation-duration: 2.2s;
+  filter: saturate(1.08) brightness(1.04);
+}
+
+.lumi-brand-avatar--reflect .lumi-official-face,
+.lumi-brand-avatar--reflect .lumi-official-eyes {
+  animation-duration: 8.8s;
+}
+
+.lumi-brand-avatar--guide .lumi-brand-avatar__aura-one {
+  opacity: 0.9;
+}
+
+@keyframes lumi-official-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-2.8%) scale(1.022); }
+}
+
+@keyframes lumi-aura-pulse {
+  0%, 100% { transform: scale(0.95); opacity: 0.48; }
+  50% { transform: scale(1.09); opacity: 0.78; }
+}
+
+@keyframes lumi-aura-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); opacity: 0.58; }
+  50% { transform: translate3d(0, -7%, 0) rotate(2deg); opacity: 0.86; }
+}
+
+@keyframes lumi-shadow-breathe {
+  0%, 100% { transform: translateY(2%) scaleX(1); opacity: 0.34; }
+  50% { transform: translateY(5%) scaleX(0.88); opacity: 0.22; }
+}
+
+@keyframes lumi-body-soft-sway {
+  0%, 100% { transform: rotate(-0.7deg); }
+  50% { transform: rotate(0.9deg); }
+}
+
+@keyframes lumi-torso-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.018); }
+}
+
+@keyframes lumi-arm-left-wave {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  45% { transform: rotate(7deg) translateY(-1.5%); }
+  70% { transform: rotate(2deg) translateY(-0.5%); }
+}
+
+@keyframes lumi-arm-right-wave {
+  0%, 100% { transform: rotate(3deg) translateY(0); }
+  45% { transform: rotate(-7deg) translateY(-1.5%); }
+  70% { transform: rotate(-2deg) translateY(-0.5%); }
+}
+
+@keyframes lumi-leg-left-sway {
+  0%, 100% { transform: rotate(1deg) translateY(0); }
+  50% { transform: rotate(-3.2deg) translateY(1.2%); }
+}
+
+@keyframes lumi-leg-right-sway {
+  0%, 100% { transform: rotate(-1deg) translateY(0); }
+  50% { transform: rotate(3.2deg) translateY(1.2%); }
+}
+
+@keyframes lumi-face-tilt {
+  0%, 100% { transform: rotate(-0.7deg) translateX(0); }
+  50% { transform: rotate(1.2deg) translateX(0.7%); }
+}
+
+@keyframes lumi-eye-blink {
+  0%, 88%, 100% { transform: scaleY(1); opacity: 1; }
+  91%, 94% { transform: scaleY(0.18); opacity: 0.78; }
+}
+
+@keyframes lumi-mouth-talk {
+  0%, 100% { transform: scaleY(1) translateY(0); opacity: 0.96; }
+  42% { transform: scaleY(1.18) translateY(0.5%); opacity: 1; }
+  56% { transform: scaleY(0.86) translateY(-0.4%); opacity: 0.92; }
+}
+
+@keyframes lumi-leaf-wiggle {
+  0%, 86%, 100% { transform: rotate(0deg); }
+  90% { transform: rotate(-5deg); }
+  95% { transform: rotate(4deg); }
+}
+
+@keyframes lumi-sparkle-twinkle {
+  0%, 100% { opacity: 0.42; transform: scale(0.98) rotate(0deg); }
+  50% { opacity: 0.96; transform: scale(1.035) rotate(1.2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumi-brand-avatar,
+  .lumi-brand-avatar *,
+  .lumi-brand-avatar *::before,
+  .lumi-brand-avatar *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
