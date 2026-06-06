@@ -12332,6 +12332,176 @@ client/src/styles/phase58-visual-polish.css:  button,
 client/src/styles/phase58-visual-polish.css:  a[role="button"],
 client/src/styles/phase58-visual-polish.css:  .btn,
 client/src/styles/phase58-visual-polish.css:  .button {
+client/src/styles/lumi-pastel-visual-system.css:   Phase 63 — Lumi Soft Pastel Visual System
+client/src/styles/lumi-pastel-visual-system.css:   - Reduce opaque sage heaviness
+client/src/styles/lumi-pastel-visual-system.css:   - Add Lumi-derived soft pastel palette
+client/src/styles/lumi-pastel-visual-system.css:   - Fix invisible button labels
+client/src/styles/lumi-pastel-visual-system.css:  /* Lumi Core Neutrals */
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-cream-00: #fffdf8;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-cream-50: #fff9f1;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-cream-100: #f9f1e7;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-cream-200: #efe3d4;
+client/src/styles/lumi-pastel-visual-system.css:  /* Soft Pastel Sage — lighter and less opaque than prior sage */
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-25: #f4f8f0;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-50: #edf4e8;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-100: #dfeadb;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-200: #cdddc5;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-300: #b4caa8;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-400: #91ad86;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-500: #6f936d;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-600: #4f765b;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-700: #315b4d;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-800: #183f37;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sage-900: #0f2d29;
+client/src/styles/lumi-pastel-visual-system.css:  /* Lumi Pastel Companions */
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-rose-50: #fff1f2;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-rose-100: #ffe0e4;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-rose-200: #ffc6cf;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-peach-50: #fff2e5;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-peach-100: #ffe0bf;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-gold-50: #fff8db;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-gold-100: #ffeaa3;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-gold-200: #ffd66e;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sky-50: #edfaff;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sky-100: #cdefff;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-sky-200: #9de0ff;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-lavender-50: #f6f1ff;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-lavender-100: #e8ddff;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-mint-50: #effbf4;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-mint-100: #d8f2e3;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-text-strong: #102f2b;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-text-main: #1f4039;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-text-soft: #5f756d;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-text-muted: #7f9089;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-text-inverse: #fffdf8;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-surface: rgba(255, 253, 248, 0.94);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-surface-soft: rgba(255, 249, 241, 0.88);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-surface-sage: rgba(244, 248, 240, 0.78);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-surface-rose: rgba(255, 241, 242, 0.72);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-surface-gold: rgba(255, 248, 219, 0.72);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-surface-sky: rgba(237, 250, 255, 0.7);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-border-soft: rgba(49, 91, 77, 0.14);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-border-sage: rgba(111, 147, 109, 0.22);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-shadow-soft: 0 18px 50px rgba(49, 91, 77, 0.10);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-shadow-card: 0 20px 60px rgba(49, 91, 77, 0.13);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-shadow-button: 0 12px 30px rgba(79, 118, 91, 0.22);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-glow-sage: 0 0 34px rgba(205, 221, 197, 0.72);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-glow-gold: 0 0 38px rgba(255, 214, 110, 0.54);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-glow-sky: 0 0 32px rgba(157, 224, 255, 0.48);
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-radius-sm: 14px;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-radius-md: 20px;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-radius-lg: 30px;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-radius-xl: 42px;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-radius-pill: 999px;
+client/src/styles/lumi-pastel-visual-system.css:  --lumi-ease: cubic-bezier(.22, 1, .36, 1);
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-cream-50) 42%, var(--lumi-sage-25));
+client/src/styles/lumi-pastel-visual-system.css:/* Prevent sage opacity from swallowing labels */
+client/src/styles/lumi-pastel-visual-system.css:button,
+client/src/styles/lumi-pastel-visual-system.css:a[role="button"],
+client/src/styles/lumi-pastel-visual-system.css:.btn,
+client/src/styles/lumi-pastel-visual-system.css:.button,
+client/src/styles/lumi-pastel-visual-system.css:[class*="btn"],
+client/src/styles/lumi-pastel-visual-system.css:[class*="Button"],
+client/src/styles/lumi-pastel-visual-system.css:[class*="button"] {
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:button[class*="primary"],
+client/src/styles/lumi-pastel-visual-system.css:.btn-primary,
+client/src/styles/lumi-pastel-visual-system.css:[class*="PrimaryButton"],
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-inverse);
+client/src/styles/lumi-pastel-visual-system.css:    linear-gradient(135deg, var(--lumi-sage-600), var(--lumi-sage-500));
+client/src/styles/lumi-pastel-visual-system.css:  box-shadow: var(--lumi-shadow-button);
+client/src/styles/lumi-pastel-visual-system.css:/* Common green/sage buttons: brighten surface + ensure readable text */
+client/src/styles/lumi-pastel-visual-system.css:button:not([disabled]),
+client/src/styles/lumi-pastel-visual-system.css:a[role="button"],
+client/src/styles/lumi-pastel-visual-system.css:.btn,
+client/src/styles/lumi-pastel-visual-system.css:.button {
+client/src/styles/lumi-pastel-visual-system.css:  border-radius: var(--lumi-radius-pill);
+client/src/styles/lumi-pastel-visual-system.css:button:not([disabled]):hover,
+client/src/styles/lumi-pastel-visual-system.css:a[role="button"]:hover,
+client/src/styles/lumi-pastel-visual-system.css:.btn:hover,
+client/src/styles/lumi-pastel-visual-system.css:.button:hover {
+client/src/styles/lumi-pastel-visual-system.css:/* If buttons use pale sage backgrounds, force high-contrast deep text */
+client/src/styles/lumi-pastel-visual-system.css:button[style*="sage"],
+client/src/styles/lumi-pastel-visual-system.css:button[style*="green"],
+client/src/styles/lumi-pastel-visual-system.css:a[style*="sage"],
+client/src/styles/lumi-pastel-visual-system.css:[class*="sage"] button,
+client/src/styles/lumi-pastel-visual-system.css:[class*="green"] button {
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:/* Disabled buttons must remain readable */
+client/src/styles/lumi-pastel-visual-system.css:button:disabled,
+client/src/styles/lumi-pastel-visual-system.css:button:focus-visible,
+client/src/styles/lumi-pastel-visual-system.css:  border-color: var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:  box-shadow: var(--lumi-shadow-soft);
+client/src/styles/lumi-pastel-visual-system.css:/* Lumi image treatment */
+client/src/styles/lumi-pastel-visual-system.css:img[alt*="Lumi"],
+client/src/styles/lumi-pastel-visual-system.css:img[alt*="lumi"],
+client/src/styles/lumi-pastel-visual-system.css:[class*="lumi"] img,
+client/src/styles/lumi-pastel-visual-system.css:[class*="Lumi"] img {
+client/src/styles/lumi-pastel-visual-system.css:  animation: lumiFloat 7.5s var(--lumi-ease) infinite, lumiGlow 5.8s ease-in-out infinite;
+client/src/styles/lumi-pastel-visual-system.css:/* Living Lumi wrappers */
+client/src/styles/lumi-pastel-visual-system.css:.lumi-presence,
+client/src/styles/lumi-pastel-visual-system.css:[class*="LumiPresence"],
+client/src/styles/lumi-pastel-visual-system.css:[class*="lumi-presence"] {
+client/src/styles/lumi-pastel-visual-system.css:.lumi-presence::before,
+client/src/styles/lumi-pastel-visual-system.css:[class*="LumiPresence"]::before,
+client/src/styles/lumi-pastel-visual-system.css:[class*="lumi-presence"]::before {
+client/src/styles/lumi-pastel-visual-system.css:  animation: lumiPulse 4.8s ease-in-out infinite;
+client/src/styles/lumi-pastel-visual-system.css:.lumi-presence::after,
+client/src/styles/lumi-pastel-visual-system.css:[class*="LumiPresence"]::after,
+client/src/styles/lumi-pastel-visual-system.css:[class*="lumi-presence"]::after {
+client/src/styles/lumi-pastel-visual-system.css:  animation: lumiSparkleDrift 18s linear infinite;
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:  border: 1px solid var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:  border-color: var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-main);
+client/src/styles/lumi-pastel-visual-system.css:.lumi-soft-page {
+client/src/styles/lumi-pastel-visual-system.css:    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-sage-25));
+client/src/styles/lumi-pastel-visual-system.css:.lumi-glass-card {
+client/src/styles/lumi-pastel-visual-system.css:  border: 1px solid var(--lumi-border-soft);
+client/src/styles/lumi-pastel-visual-system.css:  border-radius: var(--lumi-radius-lg);
+client/src/styles/lumi-pastel-visual-system.css:  box-shadow: var(--lumi-shadow-card);
+client/src/styles/lumi-pastel-visual-system.css:.lumi-button-primary {
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-inverse);
+client/src/styles/lumi-pastel-visual-system.css:  background: linear-gradient(135deg, var(--lumi-sage-700), var(--lumi-sage-500));
+client/src/styles/lumi-pastel-visual-system.css:  border-radius: var(--lumi-radius-pill);
+client/src/styles/lumi-pastel-visual-system.css:  box-shadow: var(--lumi-shadow-button);
+client/src/styles/lumi-pastel-visual-system.css:.lumi-button-soft {
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:  border: 1px solid var(--lumi-border-sage);
+client/src/styles/lumi-pastel-visual-system.css:  border-radius: var(--lumi-radius-pill);
+client/src/styles/lumi-pastel-visual-system.css:.lumi-gradient-text {
+client/src/styles/lumi-pastel-visual-system.css:  color: var(--lumi-text-strong);
+client/src/styles/lumi-pastel-visual-system.css:  background: linear-gradient(90deg, var(--lumi-sage-700), var(--lumi-sage-500), #b18d25);
+client/src/styles/lumi-pastel-visual-system.css:@keyframes lumiFloat {
+client/src/styles/lumi-pastel-visual-system.css:@keyframes lumiGlow {
+client/src/styles/lumi-pastel-visual-system.css:@keyframes lumiPulse {
+client/src/styles/lumi-pastel-visual-system.css:@keyframes lumiSparkleDrift {
+client/src/styles/lumi-pastel-visual-system.css:  img[alt*="Lumi"],
+client/src/styles/lumi-pastel-visual-system.css:  img[alt*="lumi"],
+client/src/styles/lumi-pastel-visual-system.css:  [class*="lumi"] img,
+client/src/styles/lumi-pastel-visual-system.css:  [class*="Lumi"] img,
+client/src/styles/lumi-pastel-visual-system.css:  .lumi-presence::before,
+client/src/styles/lumi-pastel-visual-system.css:  .lumi-presence::after,
+client/src/styles/lumi-pastel-visual-system.css:  [class*="LumiPresence"]::before,
+client/src/styles/lumi-pastel-visual-system.css:  [class*="LumiPresence"]::after,
+client/src/styles/lumi-pastel-visual-system.css:  [class*="lumi-presence"]::before,
+client/src/styles/lumi-pastel-visual-system.css:  [class*="lumi-presence"]::after {
+client/src/styles/lumi-pastel-visual-system.css:  button,
+client/src/styles/lumi-pastel-visual-system.css:  .btn,
+client/src/styles/lumi-pastel-visual-system.css:  .button {
+client/src/styles/lumi-pastel-visual-system.css:      linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-cream-50));
+client/src/styles/lumi-pastel-visual-system.css:  img[alt*="Lumi"],
+client/src/styles/lumi-pastel-visual-system.css:  img[alt*="lumi"],
+client/src/styles/lumi-pastel-visual-system.css:  [class*="lumi"] img,
+client/src/styles/lumi-pastel-visual-system.css:  [class*="Lumi"] img {
+client/src/styles/lumi-pastel-visual-system.css:  button,
+client/src/styles/lumi-pastel-visual-system.css:  a[role="button"],
+client/src/styles/lumi-pastel-visual-system.css:  .btn,
+client/src/styles/lumi-pastel-visual-system.css:  .button {
 client/src/utils/LocalSync.js:        item.lastError = error.message;
 client/src/utils/preloadMascots.js:import { MASCOT_ASSETS } from '../data/lumiAssets';
 client/src/sections/EmotionalJourney.jsx:            Every step is soft. Every step counts. Lumi walks with you.
@@ -14029,6 +14199,7 @@ client/src/index.css:[role="button"]:not(:disabled):hover,
 client/src/index.css:a[class*="button"]:hover,
 client/src/index.css:a[class*="Button"]:hover {
 client/src/index.css:button:disabled,
+client/src/index.css:@import "./styles/lumi-pastel-visual-system.css";
 client/src/main.jsx:  banner.innerHTML = '<span style="flex:1">A new version is available</span><button data-testid="btn-update-app" style="background:#fff;color:#5A8A6E;border:none;padding:8px 16px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap">Update now</button><button data-testid="btn-dismiss-update" style="background:transparent;color:rgba(255,255,255,0.8);border:none;cursor:pointer;font-size:18px;padding:4px" aria-label="Dismiss">&times;</button>';
 client/src/main.jsx:  banner.querySelector('[data-testid="btn-update-app"]').addEventListener('click', () => {
 client/src/main.jsx:    worker.postMessage({ type: 'SKIP_WAITING' });
