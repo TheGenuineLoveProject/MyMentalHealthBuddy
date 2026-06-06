@@ -1,0 +1,3 @@
+SNAPSHOT client/src/components/lumi/LumiPresenceLayer.tsx
+SNAPSHOT client/src/components/lumi/LumiPresenceLayer.css
+SNAPSHOT client/src/main.jsx

@@ -1,0 +1,75 @@
+===== TSX STRUCTURE =====
+61:          <div className="lumi-halo" />
+62:          <div className="lumi-leaf lumi-leaf--one" />
+63:          <div className="lumi-leaf lumi-leaf--two" />
+65:          <div className="lumi-ear lumi-ear--left">
+68:          <div className="lumi-ear lumi-ear--right">
+72:          <div className="lumi-body">
+77:              <div className="lumi-eye lumi-eye--left">
+78:                <span className="lumi-pupil" />
+81:              <div className="lumi-eye lumi-eye--right">
+82:                <span className="lumi-pupil" />
+89:              <div className="lumi-mouth">
+90:                <span className="lumi-mouth-line" />
+94:            <div className="lumi-belly">
+95:              <div className="lumi-heart-core" />
+96:              <div className="lumi-emotion-orb">
+97:                <span className="lumi-emotion-dot lumi-emotion-dot--joy" />
+98:                <span className="lumi-emotion-dot lumi-emotion-dot--calm" />
+99:                <span className="lumi-emotion-dot lumi-emotion-dot--sad" />
+100:                <span className="lumi-emotion-dot lumi-emotion-dot--care" />
+104:            <div className="lumi-arm lumi-arm--left">
+107:            <div className="lumi-arm lumi-arm--right">
+111:            <div className="lumi-leg lumi-leg--left">
+114:            <div className="lumi-leg lumi-leg--right">
+
+===== CSS ANIMATION KEYFRAMES =====
+46:  animation:
+66:  animation: lumiBodyBreathe 4.8s ease-in-out infinite;
+77:  animation: lumiFaceMicroTilt 6.6s ease-in-out infinite;
+87:  animation: lumiBrows 7.4s ease-in-out infinite;
+113:  animation:
+136:  animation: lumiPupilTrack 9.6s ease-in-out infinite;
+145:  animation: lumiShinePulse 4.8s ease-in-out infinite;
+156:  animation: lumiCheekGlow 4.8s ease-in-out infinite;
+175:  animation: lumiMouthExpression 10s ease-in-out infinite;
+198:  animation: lumiBellyBreathe 4.8s ease-in-out infinite;
+213:  animation: lumiHeartBeat 2.6s ease-in-out infinite;
+232:  animation: lumiOrbSpin 7s linear infinite;
+283:  animation: lumiLeftArmWave 5.8s ease-in-out infinite;
+289:  animation: lumiRightArmWave 5.8s ease-in-out infinite;
+321:  animation: lumiLeftLegWiggle 6.2s ease-in-out infinite;
+327:  animation: lumiRightLegWiggle 6.2s ease-in-out infinite;
+349:  animation: lumiEarWiggle 7.3s ease-in-out infinite;
+382:  animation: lumiLeafSway 5.4s ease-in-out infinite;
+410:  animation: lumiHaloFloat 5.8s ease-in-out infinite;
+422:  animation: lumiShadowPulse 7.2s ease-in-out infinite;
+439:  animation: lumiAuraPulse 6.8s ease-in-out infinite;
+445:  animation: lumiAuraDrift 9.6s ease-in-out infinite;
+458:  animation: lumiSparkDrift 18s linear infinite;
+543:@keyframes lumiWholeFloat {
+548:@keyframes lumiWholeSway {
+553:@keyframes lumiBodyBreathe {
+558:@keyframes lumiBellyBreathe {
+563:@keyframes lumiFaceMicroTilt {
+569:@keyframes lumiBlink {
+574:@keyframes lumiSoftClosedBlink {
+579:@keyframes lumiEyeLook {
+585:@keyframes lumiPupilTrack {
+591:@keyframes lumiShinePulse {
+596:@keyframes lumiBrows {
+601:@keyframes lumiCheekGlow {
+606:@keyframes lumiMouthExpression {
+612:@keyframes lumiHeartBeat {
+619:@keyframes lumiOrbSpin {
+624:@keyframes lumiLeftArmWave {
+630:@keyframes lumiRightArmWave {
+636:@keyframes lumiLeftLegWiggle {
+641:@keyframes lumiRightLegWiggle {
+646:@keyframes lumiEarWiggle {
+651:@keyframes lumiLeafSway {
+656:@keyframes lumiHaloFloat {
+661:@keyframes lumiShadowPulse {
+666:@keyframes lumiAuraPulse {
+671:@keyframes lumiAuraDrift {
+676:@keyframes lumiSparkDrift {
