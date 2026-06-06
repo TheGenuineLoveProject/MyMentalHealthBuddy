@@ -1,0 +1,6 @@
+/pricing -> 200
+/premium -> 200
+/account/billing -> 200
+/account/subscription -> 200
+/admin/revenue -> 200
+/admin/billing -> 200
