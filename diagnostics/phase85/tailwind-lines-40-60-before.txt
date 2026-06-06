@@ -1,0 +1,11 @@
+    40	                borderRadius: {
+    41	                  xl: '1rem',
+    42	                  sacred: '2rem',
+    43	                },
+    44	              },
+    45	            },  plugins: [
+    46	              require('@tailwindcss/typography'),
+    47	              require('@tailwindcss/forms'),
+    48	              require('@tailwindcss/aspect-ratio'),
+    49	              require('@tailwindcss/line-clamp'),
+    50	            ]

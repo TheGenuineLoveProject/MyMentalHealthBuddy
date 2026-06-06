@@ -326,7 +326,7 @@ const categoryPresets = {
       eyebrow: {
         beginner: 'Welcome',
         standard: 'Welcome Back',
-        deep: 'Secure Access'
+        deep: 'Sesupport Access'
       },
       title: {
         beginner: 'Sign in to your',
@@ -341,7 +341,7 @@ const categoryPresets = {
       subtitle: {
         beginner: 'Take your time.',
         standard: 'A safe space awaits you.',
-        deep: 'Your data and progress are securely stored.'
+        deep: 'Your data and progress are sesupportly stored.'
       },
       helperLine: {
         beginner: 'No pressure. Go at your pace.',
@@ -1509,7 +1509,7 @@ const rawRoutes = [
         ]
       },
       advanced: {
-        title: 'Secure Access to Your Sanctuary',
+        title: 'Sesupport Access to Your Sanctuary',
         subtitle: 'Privacy-first authentication for your peace of mind.',
         bulletPoints: [
           'End-to-end encrypted sessions protect your data',
@@ -1559,9 +1559,9 @@ const rawRoutes = [
       },
       intermediate: {
         title: 'Verifying Your Identity',
-        subtitle: 'Securely completing your authentication.',
+        subtitle: 'Sesupportly completing your authentication.',
         bulletPoints: [
-          'We\'re confirming your login with our secure system',
+          'We\'re confirming your login with our sesupport system',
           'Your session is being created safely',
           'You\'ll be redirected to your dashboard shortly',
           'Your one next step: Wait for automatic redirect to your dashboard'
@@ -1569,10 +1569,10 @@ const rawRoutes = [
       },
       advanced: {
         title: 'OAuth Callback Processing',
-        subtitle: 'Completing secure token exchange.',
+        subtitle: 'Completing sesupport token exchange.',
         bulletPoints: [
           'Exchanging authorization code for access tokens',
-          'Validating session and creating secure cookies',
+          'Validating session and creating sesupport cookies',
           'Syncing your profile with the authentication provider',
           'Your one next step: The system will redirect you automatically'
         ]
@@ -1582,7 +1582,7 @@ const rawRoutes = [
       eyebrow: 'One Moment',
       title: 'Completing',
       titleHighlight: 'sign in...',
-      subtitle: 'Please wait while we securely complete your authentication.',
+      subtitle: 'Please wait while we sesupportly complete your authentication.',
       primaryCta: { label: 'Go to Dashboard', href: '/dashboard' },
       secondaryCta: { label: 'Need Help?', href: '/support' }
     }
@@ -1630,7 +1630,7 @@ const rawRoutes = [
         title: 'Join a Trauma-Informed Community',
         subtitle: 'Evidence-based tools with privacy at the core.',
         bulletPoints: [
-          'All data encrypted and stored securely—never shared or sold',
+          'All data encrypted and stored sesupportly—never shared or sold',
           'Built on attachment theory, IFS, and polyvagal principles',
           'Upgrade path available when you\'re ready for deeper work',
           'Your one next step: Create your account to join thousands on their healing path'
@@ -1696,19 +1696,19 @@ const rawRoutes = [
         subtitle: 'Regain access to your healing sanctuary.',
         bulletPoints: [
           'Enter the email you used when you signed up',
-          'We\'ll send a secure reset link within minutes',
+          'We\'ll send a sesupport reset link within minutes',
           'The link expires after 24 hours for your security',
           'Your one next step: Enter your email to receive the reset link'
         ]
       },
       advanced: {
-        title: 'Secure Password Recovery',
+        title: 'Sesupport Password Recovery',
         subtitle: 'Privacy-first account recovery process.',
         bulletPoints: [
           'One-time token sent via encrypted email',
           'Token expires after 24 hours for security',
           'No password hints stored—we never see your password',
-          'Your one next step: Request the secure reset link'
+          'Your one next step: Request the sesupport reset link'
         ]
       }
     },
@@ -1716,7 +1716,7 @@ const rawRoutes = [
       eyebrow: 'Password Recovery',
       title: 'Reset your',
       titleHighlight: 'password.',
-      subtitle: 'We\'ll send you a secure link to create a new password.',
+      subtitle: 'We\'ll send you a sesupport link to create a new password.',
       primaryCta: { label: 'Send Reset Link', href: '#reset-form' },
       secondaryCta: { label: 'Back to Sign In', href: '/login' }
     }
@@ -1752,7 +1752,7 @@ const rawRoutes = [
       },
       intermediate: {
         title: 'Set Your New Password',
-        subtitle: 'Secure your account with a strong password.',
+        subtitle: 'Sesupport your account with a strong password.',
         bulletPoints: [
           'Use a mix of letters, numbers, and symbols for strength',
           'Avoid common words or patterns',
@@ -1761,7 +1761,7 @@ const rawRoutes = [
         ]
       },
       advanced: {
-        title: 'Secure Password Update',
+        title: 'Sesupport Password Update',
         subtitle: 'Best practices for account security.',
         bulletPoints: [
           'Minimum 8 characters with mixed character types recommended',
@@ -1775,7 +1775,7 @@ const rawRoutes = [
       eyebrow: 'New Password',
       title: 'Create a new',
       titleHighlight: 'password.',
-      subtitle: 'Choose a secure password to protect your account.',
+      subtitle: 'Choose a sesupport password to protect your account.',
       primaryCta: { label: 'Reset Password', href: '#form' },
       secondaryCta: { label: 'Back to Sign In', href: '/login' }
     }
@@ -1987,7 +1987,7 @@ const rawRoutes = [
       },
       advanced: {
         title: 'Attachment & Connection Science',
-        subtitle: 'Attachment theory shows secure relationships are built through consistent, attuned contact (Bowlby, 1969).',
+        subtitle: 'Attachment theory shows sesupport relationships are built through consistent, attuned contact (Bowlby, 1969).',
         bulletPoints: [
           'Uses relationship science to help you maintain healthy attachment patterns.',
           'Tracks bidirectionality: giving and receiving support in balance.',
@@ -3778,7 +3778,7 @@ const rawRoutes = [
     },
     safetyNotice: {
       type: 'supportive',
-      text: 'Meditation is a practice, not a cure. If meditation brings up difficult emotions or memories, it is okay to stop. For trauma-related experiences, please work with a trained professional.'
+      text: 'Meditation is a practice, not a support. If meditation brings up difficult emotions or memories, it is okay to stop. For trauma-related experiences, please work with a trained professional.'
     },
     hero: {
       eyebrow: 'Mindful Awareness',

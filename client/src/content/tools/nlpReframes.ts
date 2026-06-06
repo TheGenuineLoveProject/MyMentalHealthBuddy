@@ -3,7 +3,7 @@
  * Educational tool for self-talk and reframing
  * 
  * Usage: Import patterns for cognitive tools and reflection
- * Note: Educational only—no manipulation, no guarantees
+ * Note: Educational only—no manipulation, no promises
  * Framed as "language patterns for self-talk and reframing"
  */
 

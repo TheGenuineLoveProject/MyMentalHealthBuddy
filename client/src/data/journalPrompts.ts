@@ -27,7 +27,7 @@ export const journalPrompts = {
     "What would I regret not doing if I had six months left?",
     "What am I building that will outlast me?",
     "What truth have I learned this year that I didn't know before?",
-    "What would I do with my time if success were guaranteed?",
+    "What would I do with my time if success felt possible?",
     "What contribution feels most aligned with who I actually am?",
     "When do I feel most like myself, and what conditions create that?",
   ],

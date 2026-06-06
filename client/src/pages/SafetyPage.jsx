@@ -142,7 +142,7 @@ export default function SafetyPage() {
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="mt-1" style={{ color: 'var(--glp-gold)' }}>•</span>
-                        We cannot guarantee specific outcomes or results
+                        We cannot promise specific outcomes or results
                       </li>
                     </ul>
                   </div>
