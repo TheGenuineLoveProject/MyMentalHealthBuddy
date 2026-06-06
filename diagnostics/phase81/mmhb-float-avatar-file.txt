@@ -1,0 +1,1 @@
+MMHB_FLOAT_FILE=client/src/avatar-life/components/MMHBFloatAvatar.tsx

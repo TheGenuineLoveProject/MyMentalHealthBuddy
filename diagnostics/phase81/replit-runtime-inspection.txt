@@ -1,0 +1,527 @@
+===== .replit =====
+run = "node server/app.mjs"
+modules = ["nodejs-20", "python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "node server/bootstrap.mjs"]
+deploymentTarget = "vm"
+build = ["sh", "-c", "npm run build"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[agent]
+expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+===== package.json =====
+{
+  "name": "mymentalhealthbuddy",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server/app.mjs",
+  "scripts": {
+    "dev": "exec node server/app.mjs",
+    "start": "node server/app.mjs",
+    "build": "vite build",
+    "verify": "bash scripts/verify.sh",
+    "verify:foundation": "node scripts/verify-foundation.mjs",
+    "routes:manifest": "node scripts/generate-route-manifest.mjs",
+    "pretest": "bash scripts/check-contract-routes.sh",
+    "governor": "bash scripts/governor/run-governor.sh",
+    "governor:schema": "bash scripts/governor/schema-validator.sh",
+    "governor:contract": "bash scripts/governor/api-contract-enforcer.sh",
+    "governor:prompts": "bash scripts/governor/prompt-registry-linter.sh",
+    "governor:refactor-report": "bash scripts/governor/auto-refactor-report.sh",
+    "scan:trust": "node scripts/scan-trust-routes.mjs",
+    "scan:routes": "node scripts/scan-route-governance.mjs",
+    "audit:duplicates": "node scripts/audit-duplicate-routes.mjs",
+    "export:route-governance": "node scripts/export-route-governance.mjs",
+    "governance:copyright": "node governance/copyrightScanner.mjs",
+    "verify:all": "node scripts/verify-all.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'test placeholder active' && exit 0"
+  },
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/nunito": "^5.2.7",
+    "@google-cloud/storage": "^7.19.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@langchain/openai": "^1.4.5",
+    "@neondatabase/serverless": "^1.1.0",
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.76.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.215.0",
+    "@opentelemetry/resources": "^2.7.0",
+    "@opentelemetry/sdk-node": "^0.218.0",
+    "@opentelemetry/semantic-conventions": "^1.40.0",
+    "@playwright/test": "^1.59.1",
+    "@sentry/node": "^10.53.1",
+    "@stripe/stripe-js": "^9.7.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tanstack/react-query": "^5.99.0",
+    "@uppy/aws-s3": "^5.1.0",
+    "@uppy/core": "^5.2.0",
+    "@uppy/react": "^5.2.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.5",
+    "aos": "^2.3.4",
+    "argon2": "^0.44.0",
+    "autoprefixer": "^10.5.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "canvas-confetti": "^1.9.4",
+    "chart.js": "^4.5.1",
+    "clsx": "^2.1.1",
+    "compression": "^1.8.1",
+    "connect-pg-simple": "^10.0.0",
+    "cookie": "^1.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "cron-parser": "^5.5.0",
+    "csrf": "^3.1.0",
+    "date-fns": "^4.1.0",
+    "dompurify": "^3.4.2",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "drizzle-zod": "^0.8.3",
+    "esbuild": "^0.28.0",
+    "express": "^4.22.2",
+    "express-rate-limit": "^8.5.2",
+    "express-session": "^1.19.0",
+    "framer-motion": "^12.40.0",
+    "globals": "^17.5.0",
+    "gsap": "^3.15.0",
+    "helmet": "^8.2.0",
+    "howler": "^2.2.4",
+    "jsonwebtoken": "^9.0.3",
+    "kafkajs": "^2.2.4",
+    "lucide-react": "^1.8.0",
+    "memoizee": "^0.4.17",
+    "openai": "^6.34.0",
+    "openid-client": "^6.8.3",
+    "passport": "^0.7.0",
+    "passport-apple": "^2.0.2",
+    "passport-github2": "^0.1.12",
+    "passport-oauth2": "^1.8.0",
+    "pg": "^8.20.0",
+    "pgvector": "^0.2.1",
+    "pino-http": "^11.0.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.5",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^19.2.5",
+    "react-helmet-async": "^3.0.0",
+    "react-hook-form": "^7.73.1",
+    "react-icons": "^5.6.0",
+    "react-router-dom": "^7.16.0",
+    "react-spring": "^10.0.4",
+    "resend": "^6.12.0",
+    "speakeasy": "^2.0.0",
+    "stripe": "^22.2.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.2",
+    "valtio": "^2.3.2",
+    "vite": "^8.0.8",
+    "wouter": "^3.9.0",
+    "ws": "^8.20.0",
+    "xstate": "^5.32.0",
+    "zod": "^4.3.6",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.2",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.60.0",
+    "@typescript-eslint/parser": "^8.60.0",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^10.4.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "lighthouse": "^12.8.2",
+    "nodemon": "^3.1.14",
+    "playwright": "^1.60.0",
+    "pm2": "^7.0.1",
+    "prettier": "^3.8.3",
+    "rollup-plugin-visualizer": "^6.0.11",
+    "sharp": "^0.34.5",
+    "supertest": "^7.2.2",
+    "typescript": "^6.0.3",
+    "vite-bundle-visualizer": "^1.2.1",
+    "vitest": "^4.1.7"
+  }
+}
+
+===== ACTIVE ENTRYPOINT CANDIDATES =====
+./backups/phase31A/server-20260603-042302/app.mjs
+./backups/pre-phase151-20260527-050006/server/app.mjs
+./production-backups/phase189-live-snapshot/server/app.mjs
+./server/app.mjs
+./server/db/schema/index.mjs
+./server/replit_integrations/auth/index.mjs
+./server/tests/app.mjs
+./tests/app.mjs
+
+===== PORT / LISTEN / HOST BINDING =====
+server/routes/sop.mjs:8://   • Self-targeting: probes localhost via the bound port so it works
+server/routes/sop.mjs:286:    Number.parseInt(String(process.env.PORT || 5000), 10) || 5000
+server/routes/sop.mjs:330:    Number.parseInt(String(process.env.PORT || 5000), 10) || 5000
+server/routes/sop.mjs:584:  // Prefer localhost loopback over the public host so probes never leave the
+server/routes/sop.mjs:588:  const raw = process.env.PORT;
+server/routes/health.mjs:485:            const url = `http://0.0.0.0:${process.env.PORT || 5000}${target}`;
+server/routes/health.mjs:665:            await fetch(`http://0.0.0.0:${process.env.PORT || 5000}${p}`, { signal: AbortSignal.timeout(5000) }).catch(() => {});
+server/routes/billing.mjs:164:    const baseUrl = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+server/routes/billing.mjs:196:    const baseUrl = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+server/security/hardening.mjs:7:  const origin = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+server/utils/stripe.mjs:7:const APP_BASE_URL = process.env.APP_BASE_URL || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+server/biometrics/providers.mjs:36:    || `${process.env.REPLIT_DEV_DOMAIN ? "https://" + process.env.REPLIT_DEV_DOMAIN : "http://localhost:5000"}`;
+server/observability/otelApi.mjs:9:// could call app.listen() — turning observability (a non-essential feature)
+server/app.mjs.bak:372:const PORT = process.env.PORT || 5000;
+server/app.mjs.bak:402:const server = app.listen(PORT, "0.0.0.0", () => {
+server/app.mjs.bak:405:  console.log(`[SERVER] http://0.0.0.0:${PORT}`);
+server/app.mjs:385:const PORT = process.env.PORT || 5000;
+server/app.mjs:452:const server = app.listen(PORT, "0.0.0.0");
+server/app.mjs:457:  console.log(`[SERVER] http://0.0.0.0:${PORT}`);
+server/app.mjs:469:    relistenTimer = setTimeout(() => server.listen(PORT, "0.0.0.0"), RELISTEN_DELAY_MS);
+server/app.mjs.STABLE:374:const PORT = process.env.PORT || 5000;
+server/app.mjs.STABLE:441:const server = app.listen(PORT, "0.0.0.0");
+server/app.mjs.STABLE:446:  console.log(`[SERVER] http://0.0.0.0:${PORT}`);
+server/app.mjs.STABLE:458:    relistenTimer = setTimeout(() => server.listen(PORT, "0.0.0.0"), RELISTEN_DELAY_MS);
+server/app.mjs.bak-ready-alias:369:const PORT = process.env.PORT || 5000;
+server/app.mjs.bak-ready-alias:436:const server = app.listen(PORT, "0.0.0.0");
+server/app.mjs.bak-ready-alias:441:  console.log(`[SERVER] http://0.0.0.0:${PORT}`);
+server/app.mjs.bak-ready-alias:453:    relistenTimer = setTimeout(() => server.listen(PORT, "0.0.0.0"), RELISTEN_DELAY_MS);
+server/bootstrap.mjs:5:const PORT = Number(process.env.PORT || 5000);
+server/bootstrap.mjs:6:const HOST = "0.0.0.0";
+server/bootstrap.mjs:18:bootstrapServer.listen(PORT, HOST, async () => {
+scripts/production-check.sh:17:  "http://localhost:5000$p"
+scripts/runtime-report.sh:28:curl -s http://localhost:5000/api/health || true
+scripts/runtime-report.sh:32:curl -s http://localhost:5000/ready || true
+scripts/runtime-report.sh:36:curl -s http://localhost:5000/metrics | head || true
+scripts/uptime-log.sh:10:BASE_URL="${BASE_URL:-http://localhost:5000}"
+scripts/check-contract-routes.sh:10:  "http://localhost:5000/api/health"
+scripts/check-contract-routes.sh:11:  "http://localhost:5000/api/health"
+scripts/check-contract-routes.sh:12:  "http://localhost:5000/ready"
+scripts/check-links.mjs:2:const baseUrl = process.env.CHECK_LINKS_BASE_URL || "http://localhost:5000";
+scripts/verify-foundation.mjs:26:const BASE = process.env.VERIFY_BASE_URL || "http://localhost:5000";
+scripts/verify-platform.sh:4:curl -s http://localhost:5000/api/health
+scripts/verify-platform.sh:8:curl -s http://localhost:5000/readyz
+
+===== HEALTH READY METRICS ROUTES =====
+server/routes/kernel.mjs:16:router.get("/health", requireAuth, requireAdmin, (_req, res) => {
+server/routes/api.mjs:5:router.get("/health", (_req, res) => res.json({ ok: true }));
+server/routes/canva-oauth.mjs:16:router.get("/health", (req, res) => {
+server/routes/canva-oauth.mjs:188:      health: "/api/canva/health",
+server/routes/email.mjs:17:router.get('/health', async (req, res) => {
+server/routes/journal.mjs:7:import { increment } from "../utils/metrics.mjs";
+server/routes/metrics.mjs:1:// server/routes/metrics.mjs
+server/routes/metricsSummary.mjs:2:import { getSummary } from "../utils/metrics.mjs";
+server/routes/mood.mjs:12:import { increment } from "../utils/metrics.mjs";
+server/routes/perplexity.mjs:133:router.get('/health', async (_req, res) => {
+server/routes/pro-features.mjs:5:import { increment } from "../utils/metrics.mjs";
+server/routes/redirects.mjs:21:router.get("/health", (_req, res) => {
+server/routes/relationship-dynamics.mjs:156:// GET /api/relationship-dynamics/healthy-patterns
+server/routes/relationship-dynamics.mjs:157:router.get("/healthy-patterns", (_req, res) => {
+server/routes/sop.mjs:43:  { id: "health",            name: "Health probe",               domain: "platform", method: "GET", path: "/health",            expect: [200],         protected: false, remediation: "server/app.mjs /health route or readiness gate (503)" },
+server/routes/sop.mjs:53:  { id: "admin-health",      name: "Admin health (gated)",       domain: "admin",    method: "GET", path: "/api/admin/health",          expect: [200, 401, 403], protected: true, remediation: "server/routes/admin.mjs" },
+server/routes/biometrics.mjs:17://   POST   /api/biometrics/healthkit/webhook           iOS HealthKit push (HMAC)
+server/routes/biometrics.mjs:86:      apple_healthkit: "iOS-only. Use the /healthkit/webhook endpoint from a native companion app with HMAC-SHA256 signed body.",
+server/routes/biometrics.mjs:139:        help: "HealthKit has no public web API. Use a native iOS companion app to POST signed payloads to /api/biometrics/healthkit/webhook.",
+server/routes/biometrics.mjs:254: * POST /healthkit/webhook — iOS companion app push
+server/routes/biometrics.mjs:264:  "/healthkit/webhook",
+server/routes/consciousness.mjs:64:router.get("/health", async (_req, res) => {
+server/routes/observability.mjs:29:      "GET  /api/admin/observability/health",
+server/routes/observability.mjs:43:router.get("/health", (_req, res) => {
+server/routes/observability.mjs:47:  // which lives at /api/health). Operators alert on this rolling up to red
+server/routes/content.mjs:90:router.get("/health", (_req, res) => {
+server/routes/admin.mjs:103:router.get("/health", async (_req, res) => {
+server/routes/admin.mjs:174:router.get("/health-deep", async (_req, res) => {
+server/routes/admin.mjs:177:    const REPORT_PATH = "docs/health-check-result.json";
+server/routes/admin.mjs:178:    const WATCH_PATH = "docs/health-watch-status.json";
+server/routes/admin.mjs:195:    // resolution mirrors GET /health-deep/metrics for cross-endpoint
+server/routes/admin.mjs:253:// surfaced on the GET /api/admin/health-deep response under `probeHistory`.
+server/routes/admin.mjs:258:router.post("/health-deep/run", async (req, res) => {
+server/routes/admin.mjs:274:    const REPORT_PATH = "docs/health-check-result.json";
+server/routes/admin.mjs:327:// docs/health-self-status.json).  heal-self NEVER passes --apply-destructive,
+server/routes/admin.mjs:337:router.post("/health-deep/self-heal", async (req, res) => {
+server/routes/admin.mjs:353:    const STATUS_PATH = "docs/health-self-status.json";
+server/routes/admin.mjs:415:// docs/health-check-result.json, sends a slim digest to Perplexity, and
+server/routes/admin.mjs:422:router.post("/health-deep/ai-analyze", async (req, res) => {
+server/routes/admin.mjs:437:    const REPORT_PATH = "docs/health-check-result.json";
+server/routes/admin.mjs:494:router.post("/health-deep/scheduler/resume", (req, res) => {
+server/routes/admin.mjs:500:router.post("/health-deep/scheduler/pause", (req, res) => {
+server/routes/admin.mjs:511:// `mmhb_alert_firing{rule,severity}` gauge in /metrics for Prometheus
+server/routes/admin.mjs:657:    if (fs.existsSync("docs/health-check-result.json")) {
+server/routes/admin.mjs:658:      report = JSON.parse(fs.readFileSync("docs/health-check-result.json", "utf8"));
+server/routes/admin.mjs:663:    if (fs.existsSync("docs/health-watch-status.json")) {
+server/routes/admin.mjs:664:      watch = JSON.parse(fs.readFileSync("docs/health-watch-status.json", "utf8"));
+server/routes/admin.mjs:686:router.get("/health-deep/metrics", async (req, res) => {
+server/routes/admin.mjs:693:      if (fs.existsSync("docs/health-check-result.json")) {
+server/routes/admin.mjs:694:        report = JSON.parse(fs.readFileSync("docs/health-check-result.json", "utf8"));
+server/routes/admin.mjs:700:      if (fs.existsSync("docs/health-watch-status.json")) {
+server/routes/admin.mjs:701:        watch = JSON.parse(fs.readFileSync("docs/health-watch-status.json", "utf8"));
+server/routes/admin.mjs:729:    // totals-derived resolution mirroring the GET /health-deep computation.
+server/routes/admin.mjs:882:router.get("/health-deep/alerts", async (_req, res) => {
+server/routes/admin.mjs:897:router.get("/health-deep/export", async (req, res) => {
+server/routes/admin.mjs:904:      if (fs.existsSync("docs/health-check-result.json")) {
+server/routes/admin.mjs:905:        report = JSON.parse(fs.readFileSync("docs/health-check-result.json", "utf8"));
+server/routes/admin.mjs:914:      if (fs.existsSync("docs/health-watch-status.json")) {
+server/routes/admin.mjs:915:        watch = JSON.parse(fs.readFileSync("docs/health-watch-status.json", "utf8"));
+server/routes/health.mjs:11:// Bounds the latency of /api/health/ready so a hung DB cannot block the
+server/routes/health.mjs:87:router.get("/ready", async (_req, res) => {
+server/routes/health.mjs:154:router.get("/metrics", async (_req, res) => {
+server/routes/health.mjs:276:        const warmPaths = ["/api/health", "/api/health/ready", "/api/health/live"];
+server/routes/health.mjs:480:        const warmTargets = ["/api/health", "/api/health/ready", "/api/wellness-tools/all", "/api/wisdom", "/api/gratitude", "/api/reflection", "/api/prompts/daily"];
+server/routes/health.mjs:661:        const warmPaths = ["/api/health", "/api/health/ready", "/api/wellness-tools/all", "/api/wisdom", "/api/gratitude"];
+server/routes/billing.mjs:9:import { increment } from "../utils/metrics.mjs";
+server/routes/webhook.mjs:8:import { increment } from "../utils/metrics.mjs";
+server/lib/healScheduler.mjs:16:// `docs/health-scheduler-status.json` for off-process inspection.
+server/lib/healScheduler.mjs:26:const STATE_PATH = "docs/health-scheduler-status.json";
+server/lib/healScheduler.mjs:27:const STATUS_FILE = "docs/health-self-status.json";
+server/middleware/rateLimit.mjs:65:    if (req.path === "/api/health") return next();
+server/security/csrf.mjs:63:  if (req.path === "/api/biometrics/healthkit/webhook") return next();
+server/tests/app.mjs:7:  app.get("/api/health", (req, res) => {
+server/observability/alerter.mjs:54:  lastFailureAt: null, // ISO timestamp of most recent failure; used by /health
+server/observability/alerter.mjs:58:// If the most recent alerter failure is older than this window, /health no
+server/observability/tracing.mjs:124:                url === "/health" ||
+server/observability/tracing.mjs:125:                url === "/ready" ||
+server/observability/tracing.mjs:126:                url === "/api/health" ||
+server/app.mjs.bak:46:import healthRoutes from "./routes/health.mjs";
+server/app.mjs.bak:85:app.get("/healthz", (_req, res) => {
+server/app.mjs.bak:89:app.head("/healthz", (_req, res) => {
+server/app.mjs.bak:167:app.use("/api/health", healthRoutes);
+server/app.mjs.bak:233:// /api/session-boundary and /api/health mounts.
+server/app.mjs.bak:289:// bare /health, /ready, /live, /metrics paths. Canonical endpoints are
+server/app.mjs.bak:290:// /healthz and /api/health/* — these guards return 404 + JSON pointing to
+server/app.mjs.bak:294:// /health and /live remain 404 canonical-guards (point clients at /api/health/*).
+server/app.mjs.bak:295:// /ready and /metrics are exposed as bare 200 aliases per Phase 9A spec, while
+server/app.mjs.bak:296:// the canonical /api/health/ready and /api/health/metrics continue to serve
+server/app.mjs.bak:299:  "/health": "/api/health",
+server/app.mjs.bak:300:  "/live": "/api/health/live",
+server/app.mjs.bak:311:app.get("/health", (_req, res) => {
+server/app.mjs.bak:314:    canonical: "/api/health",
+server/app.mjs.bak:320:app.get("/ready", (_req, res) => {
+server/app.mjs.bak:325:app.get("/readyz", (_req, res) => {
+server/app.mjs.bak:330:app.get("/metrics", (_req, res) => {
+server/app.mjs:46:import healthRoutes from "./routes/health.mjs";
+server/app.mjs:85:app.get("/healthz", (_req, res) => {
+server/app.mjs:89:app.head("/healthz", (_req, res) => {
+server/app.mjs:167:app.use("/api/health", healthRoutes);
+server/app.mjs:233:// /api/session-boundary and /api/health mounts.
+server/app.mjs:289:// bare /health, /ready, /live, /metrics paths. Canonical endpoints are
+server/app.mjs:290:// /healthz and /api/health/* — these guards return 404 + JSON pointing to
+server/app.mjs:294:// /health and /live remain 404 canonical-guards (point clients at /api/health/*).
+server/app.mjs:295:// /ready and /metrics are exposed as bare 200 aliases per Phase 9A spec, while
+server/app.mjs:296:// the canonical /api/health/ready and /api/health/metrics continue to serve
+server/app.mjs:299:  "/health": "/api/health",
+server/app.mjs:300:  "/live": "/api/health/live",
+server/app.mjs:312:  app.get('/health', (_req, res) => {
+server/app.mjs:323:app.get("/api/ready", (_req, res) => {
+server/app.mjs:333:app.get("/ready", (_req, res) => {
+server/app.mjs:338:app.get("/readyz", (_req, res) => {
+server/app.mjs:343:app.get("/metrics", (_req, res) => {
+server/app.mjs.STABLE:46:import healthRoutes from "./routes/health.mjs";
+server/app.mjs.STABLE:85:app.get("/healthz", (_req, res) => {
+server/app.mjs.STABLE:89:app.head("/healthz", (_req, res) => {
+server/app.mjs.STABLE:167:app.use("/api/health", healthRoutes);
+server/app.mjs.STABLE:233:// /api/session-boundary and /api/health mounts.
+server/app.mjs.STABLE:289:// bare /health, /ready, /live, /metrics paths. Canonical endpoints are
+server/app.mjs.STABLE:290:// /healthz and /api/health/* — these guards return 404 + JSON pointing to
+server/app.mjs.STABLE:294:// /health and /live remain 404 canonical-guards (point clients at /api/health/*).
+server/app.mjs.STABLE:295:// /ready and /metrics are exposed as bare 200 aliases per Phase 9A spec, while
+server/app.mjs.STABLE:296:// the canonical /api/health/ready and /api/health/metrics continue to serve
+server/app.mjs.STABLE:299:  "/health": "/api/health",
+server/app.mjs.STABLE:300:  "/live": "/api/health/live",
+server/app.mjs.STABLE:312:  app.get('/health', (_req, res) => {
+server/app.mjs.STABLE:322:app.get("/ready", (_req, res) => {
+server/app.mjs.STABLE:327:app.get("/readyz", (_req, res) => {
+server/app.mjs.STABLE:332:app.get("/metrics", (_req, res) => {
+server/app.mjs.bak-ready-alias:46:import healthRoutes from "./routes/health.mjs";
+server/app.mjs.bak-ready-alias:85:app.get("/healthz", (_req, res) => {
+server/app.mjs.bak-ready-alias:89:app.head("/healthz", (_req, res) => {
+server/app.mjs.bak-ready-alias:167:app.use("/api/health", healthRoutes);
+server/app.mjs.bak-ready-alias:233:// /api/session-boundary and /api/health mounts.
+server/app.mjs.bak-ready-alias:289:// bare /health, /ready, /live, /metrics paths. Canonical endpoints are
+server/app.mjs.bak-ready-alias:290:// /healthz and /api/health/* — these guards return 404 + JSON pointing to
+server/app.mjs.bak-ready-alias:294:// /health and /live remain 404 canonical-guards (point clients at /api/health/*).
+server/app.mjs.bak-ready-alias:295:// /ready and /metrics are exposed as bare 200 aliases per Phase 9A spec, while
+server/app.mjs.bak-ready-alias:296:// the canonical /api/health/ready and /api/health/metrics continue to serve
+server/app.mjs.bak-ready-alias:299:  "/health": "/api/health",
+server/app.mjs.bak-ready-alias:300:  "/live": "/api/health/live",
+server/app.mjs.bak-ready-alias:312:  app.get('/health', (_req, res) => {
+server/app.mjs.bak-ready-alias:322:app.get("/readyz", (_req, res) => {
+server/app.mjs.bak-ready-alias:327:app.get("/metrics", (_req, res) => {
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:49:          await fetch('/api/health', { credentials: 'include' });
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:60:          await fetch('/api/health', { credentials: 'include' });
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:70:        try { await fetch('/api/health', { credentials: 'include', cache: 'no-store' }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:74:        try { await fetch('/api/health', { credentials: 'include', headers: { 'Cache-Control': 'no-cache' } }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:85:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:95:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:99:        try { await fetch('/api/health', { credentials: 'include' }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:103:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:107:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:111:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'prune-logs' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:115:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'health-deep-scan' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:119:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:123:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-queries' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:127:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-routes' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:131:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-sessions' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:135:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:139:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'audit-middleware' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:143:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-disk' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:147:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:151:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:155:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:159:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'vacuum-db' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:163:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'table-health' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:167:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'index-health' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:171:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'dependency-audit' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:175:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'security-headers-audit' }) }); } catch {}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:179:        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:101:    try { await fetch('/api/health/git-status', { credentials: 'include' }); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:107:    try { await fetch('/api/health/platform-integrity', { credentials: 'include' }); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:115:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-stripe' }) }).catch(() => {}),
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:116:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'verify-resend' }) }).catch(() => {}),
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:117:        fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'check-openai' }) }).catch(() => {}),
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:141:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {}); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:147:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {}); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:153:    try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {}); } catch {}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:274:                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-violet-500 text-white hover:bg-violet-600 transition-colors" data-testid="button-runbook-git">Scan</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:277:                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-teal-500 text-white hover:bg-teal-600 transition-colors" data-testid="button-runbook-deep-scan">Scan</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:280:                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:283:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-testid="button-runbook-warm">Warm</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:286:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:289:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:17:      const resp = await fetch('/api/health/git-status', { credentials: 'include' });
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:26:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) });
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:302:      const resp = await fetch('/api/health/repair', {
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:16:      const resp = await fetch('/api/health/platform-integrity', { credentials: 'include' });
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:24:      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) });
+client/src/pages/admin/_adminToolsShared.js:11:  "ai-chat": "/chat", "therapy": "/admin/tools", "mood-tracker": "/admin/health", "journal": "/admin/health",
+client/src/pages/admin/_adminToolsShared.js:13:  "mirror": "/admin/tools", "prompts": "/admin/engagement", "states": "/admin/health",
+client/src/pages/admin/_adminToolsShared.js:43:  "dashboard-api": "/admin/health", "pro-features": "/admin/revenue", "leads": "/admin/revenue",
+client/src/pages/admin/_adminToolsShared.js:44:  "feedback": "/admin/feedback", "account-actions": "/admin/users", "ai-dashboard": "/admin/health",
+client/src/pages/admin/_adminToolsShared.js:45:  "moods-alt": "/admin/health",
+client/src/pages/admin/_adminToolsShared.js:49:  "analytics": "/admin/analytics", "metrics": "/admin/analytics", "soft-launch": "/admin/health",
+client/src/pages/admin/_adminToolsShared.js:50:  "health-api": "/admin/health", "deployment": "/admin/tools", "integrations": "/admin/tools",
+client/src/pages/admin/_adminToolsShared.js:51:  "object-storage": "/admin/tools", "api-core": "/admin/health",
+client/src/pages/admin/_adminToolsShared.js:242:  "load-balancer-health": { suggestion: "Load balancer health check may be failing. Canva KB: Ensure /api/health endpoint responds within 5 seconds with 200 status. Check timeout and retry settings.", action: "Verify health endpoint", knowledgeBase: "Canva", autoFixable: true, fixCommand: "warm-all" },
+client/src/pages/admin/_adminToolsShared.js:431:      { id: "metrics", label: "Metrics System", endpoint: "/api/metrics", icon: Gauge, desc: "System metrics" },
+client/src/pages/admin/_adminToolsShared.js:433:      { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
+client/src/pages/admin/_adminToolsShared.js:435:      { id: "integrations", label: "Integration Health", endpoint: "/api/health", icon: Puzzle, desc: "Service integrations" },
+client/src/pages/admin/_adminToolsShared.js:437:      { id: "api-core", label: "Core API", endpoint: "/api/health", icon: Terminal, desc: "Base API health endpoint" },
+client/src/pages/admin/_adminToolsShared.js:456:      { id: "metrics-summary", label: "Metrics Summary", endpoint: "/api/metrics", icon: ListOrdered, desc: "Aggregated metrics" },
+client/src/pages/admin/_adminToolsShared.js:468:  { id: "health-api", label: "System Health", endpoint: "/api/health", icon: Activity, desc: "Server & DB status" },
+client/src/pages/admin/CommandCenter.jsx:70:    { id: 'health', label: 'System Health', endpoint: '/api/health' },
+client/src/pages/admin/CommandCenter.jsx:270:    queryKey: ['/api/health'],
+client/src/pages/admin/HealthDashboard.jsx:73:    queryKey: ["/api/admin/health", refreshKey],
+client/src/pages/admin/HealthDashboard.jsx:86:    queryKey: ["/api/admin/health-deep", refreshKey],
+client/src/pages/admin/HealthDashboard.jsx:93:    queryKey: ["/api/admin/health-deep/alerts", refreshKey],
+client/src/pages/admin/HealthDashboard.jsx:100:      const res = await apiRequest("POST", "/api/admin/health-deep/run");
+client/src/pages/admin/HealthDashboard.jsx:110:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:125:      const res = await apiRequest("POST", "/api/admin/health-deep/self-heal");
+client/src/pages/admin/HealthDashboard.jsx:135:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:151:      const res = await apiRequest("POST", "/api/admin/health-deep/ai-analyze");
+client/src/pages/admin/HealthDashboard.jsx:161:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:176:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/resume");
+client/src/pages/admin/HealthDashboard.jsx:181:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:189:      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/pause");
+client/src/pages/admin/HealthDashboard.jsx:194:      queryClient.invalidateQueries({ queryKey: ["/api/admin/health-deep"] });
+client/src/pages/admin/HealthDashboard.jsx:211:      const res = await fetch("/api/admin/health-deep/export", {
+client/src/pages/admin/HealthDashboard.jsx:859:                Source: {deep?.reportPath || "docs/health-check-result.json"}
+client/src/pages/admin/AdminUsers.jsx:23:    queryKey: ['/api/health'],
+client/src/pages/admin/ContentStudioAdmin.jsx:34:    queryKey: ['/api/health'],
+client/src/pages/admin/EngagementDashboard.jsx:21:    queryKey: ['/api/health'],
+client/src/pages/admin/SecurityDashboard.jsx:41:    queryKey: ['/api/health'],
+client/src/pages/admin/SystemAlerts.jsx:28:    queryKey: ['/api/health'],
+client/src/pages/HealthPage.jsx:11:    queryKey: ["/api/health"],
+client/src/pages/Admin.jsx:135:          fetchAdminMetric("/api/admin/health"),
+client/src/pages/Admin.jsx:136:          fetchAdminMetric("/api/admin/health-deep?format=json"),
+client/src/components/admin/OperationsPanel.jsx:184:      // /metrics defaults to Prometheus text/plain; ?format=json returns the
+client/src/components/admin/OperationsPanel.jsx:186:      const json = await apiFetch("/api/admin/health-deep/metrics?format=json");
+client/src/components/admin/OperationsPanel.jsx:273:      // /api/admin/health-deep returns the structured probe report:
+client/src/components/admin/OperationsPanel.jsx:275:      const json = await apiFetch("/api/admin/health-deep");
+client/src/components/admin/OperationsPanel.jsx:384:        fetch("/health/ready", { credentials: "include" }),
+client/src/components/admin/OperationsPanel.jsx:385:        fetch("/health/detailed", { credentials: "include" }),
+client/src/components/admin/OperationsPanel.jsx:472:      const json = await apiFetch("/api/admin/health-deep");
+client/src/components/admin/OperationsPanel.jsx:488:      const json = await apiFetch("/api/admin/health-deep/self-heal", { method: "POST" });
+client/src/components/admin/OperationsPanel.jsx:501:      await apiFetch(`/api/admin/health-deep/scheduler/${action}`, { method: "POST" });
+client/src/components/admin/OperationsPanel.jsx:642:    { label: "Public health", path: "/api/health",         protected: false },
+client/src/components/admin/OperationsPanel.jsx:643:    { label: "Admin health",  path: "/api/admin/health",   protected: true  },
+client/src/components/admin/OperationsPanel.jsx:645:    { label: "Kernel health", path: "/api/kernel/health",  protected: true  },
+client/src/components/admin/OperationsPanel.jsx:646:    { label: "Email health",  path: "/api/email/health",   protected: false },
+client/src/components/admin/AdminNavGrid.jsx:30:        { label: "System Health", icon: Activity, href: "/admin/health", desc: "Server, DB & service status" },
+client/src/components/SoftLaunchBanner.jsx:15:    fetch("/api/health")
+client/src/config/toolCategories.js:146:      { id: "metrics", label: "Metrics System", endpoint: "/api/metrics", icon: Gauge, desc: "System metrics" },
+client/src/config/toolCategories.js:148:      { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
+client/src/config/toolCategories.js:169:      { id: "metrics-summary", label: "Metrics Summary", endpoint: "/api/metrics/summary", icon: ListOrdered, desc: "Aggregated metrics" },
+client/src/config/navConfig.js:64:  "/health",
+client/src/content/allRoutes.json:17:  "/admin/health",
+client/src/content/allRoutes.json:90:  "/health",
+client/src/content/meta/routeMeta.autogen.ts:1509:    "canonicalPath": "/health",
+client/src/content/meta/integrationRegistry.ts:156:    canonicalFiles: ['server/routes/health.mjs'],
+client/src/content/routes.js:6747:      secondaryCta: { label: 'System Status', href: '/health' }
+client/src/content/routes.js:6772:    route: '/health',
+client/src/content/routes.js.BACKUP.1780108447:7747:      secondaryCta: { label: 'System Status', href: '/health' }
+client/src/content/routes.js.BACKUP.1780108447:7772:    route: '/health',
+client/src/App.jsx:1751:              <Route path="/admin/health">
+client/src/App.jsx:1842:              <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
+scripts/production-check.sh:10:/api/health \
+scripts/production-check.sh:11:/ready \
+scripts/production-check.sh:12:/metrics \
+scripts/production-check.sh:13:/healthz
+scripts/runtime-report.sh:28:curl -s http://localhost:5000/api/health || true
+scripts/runtime-report.sh:32:curl -s http://localhost:5000/ready || true
+scripts/runtime-report.sh:36:curl -s http://localhost:5000/metrics | head || true
+scripts/uptime-log.sh:18:for path in /api/health /ready /metrics /healthz; do
+scripts/uptime-log.sh:29:for path in /api/health /ready /metrics /healthz; do
+scripts/check-contract-routes.sh:10:  "http://localhost:5000/api/health"
+scripts/check-contract-routes.sh:11:  "http://localhost:5000/api/health"
+scripts/check-contract-routes.sh:12:  "http://localhost:5000/ready"
+scripts/check-links.mjs:19:  "/admin/health",
+scripts/check-links.mjs:20:  "/api/health",
+scripts/check-links.mjs:21:  "/api/ready"
+scripts/health/platformSnapshot.mjs:28:  "codex/health/platformSnapshot.json",
+scripts/release/finalReleaseCheck.sh:19:bash scripts/health/runtimeHealthCheck.sh
+scripts/release/finalReleaseCheck.sh:22:node scripts/health/platformSnapshot.mjs
+scripts/release/finalReleaseCheck.sh:23:cp codex/health/platformSnapshot.json codex/reports/finalReleaseSnapshot.latest.json
+scripts/verify-foundation.mjs:51:const health = await httpStatus("/api/health");
+scripts/verify-foundation.mjs:55:const healthz = await httpStatus("/healthz");
+scripts/verify-foundation.mjs:57:const ready = await httpStatus("/readyz");
+scripts/verify-platform.sh:4:curl -s http://localhost:5000/api/health
+scripts/verify-platform.sh:8:curl -s http://localhost:5000/readyz

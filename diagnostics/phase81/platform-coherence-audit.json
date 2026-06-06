@@ -1,0 +1,266 @@
+{
+  "scannedFiles": 2244,
+  "checks": [
+    {
+      "name": "business_healing_firewall_language",
+      "pass": true
+    },
+    {
+      "name": "clinical_boundary_language",
+      "pass": true
+    },
+    {
+      "name": "lumi_official_motion_markers",
+      "pass": true
+    },
+    {
+      "name": "content_outcome_language",
+      "pass": true
+    },
+    {
+      "name": "governance_or_zero_drift_markers",
+      "pass": true
+    }
+  ],
+  "failedChecks": [],
+  "duplicateRiskCount": 29,
+  "duplicateRisks": [
+    {
+      "base": "officialLumiAssets",
+      "count": 2,
+      "files": [
+        "client/src/avatar-life/officialLumiAssets.ts",
+        "client/src/officialLumiAssets.ts"
+      ]
+    },
+    {
+      "base": "EmotionLog",
+      "count": 2,
+      "files": [
+        "client/src/components/EmotionLog.jsx",
+        "client/src/components/wellness/EmotionLog.jsx"
+      ]
+    },
+    {
+      "base": "EmotionWheel",
+      "count": 2,
+      "files": [
+        "client/src/components/EmotionWheel.jsx",
+        "client/src/pages/tools/EmotionWheel.jsx"
+      ]
+    },
+    {
+      "base": "JournalAI",
+      "count": 2,
+      "files": [
+        "client/src/components/JournalAI.jsx",
+        "client/src/components/wellness/JournalAI.jsx"
+      ]
+    },
+    {
+      "base": "ProtectedRoute",
+      "count": 2,
+      "files": [
+        "client/src/components/ProtectedRoute.jsx",
+        "client/src/guards/ProtectedRoute.jsx"
+      ]
+    },
+    {
+      "base": "OfficialLumi",
+      "count": 2,
+      "files": [
+        "client/src/components/lumi/OfficialLumi.tsx",
+        "client/src/lumi-registry/components/OfficialLumi.tsx"
+      ]
+    },
+    {
+      "base": "EmailCapture",
+      "count": 2,
+      "files": [
+        "client/src/components/marketing/EmailCapture.jsx",
+        "client/src/sections/EmailCapture.jsx"
+      ]
+    },
+    {
+      "base": "journalPrompts",
+      "count": 2,
+      "files": [
+        "client/src/content/journalPrompts.js",
+        "client/src/data/journalPrompts.ts"
+      ]
+    },
+    {
+      "base": "disclaimer",
+      "count": 2,
+      "files": [
+        "client/src/content/legal/disclaimer.ts",
+        "client/src/lumi-disclaimer/disclaimer.ts"
+      ]
+    },
+    {
+      "base": "routeMetaRegistry",
+      "count": 2,
+      "files": [
+        "client/src/content/meta/routeMetaRegistry.ts",
+        "client/src/content/routeMetaRegistry.js"
+      ]
+    },
+    {
+      "base": "routeKey",
+      "count": 2,
+      "files": [
+        "client/src/content/routeKey.js",
+        "client/src/utils/routeKey.js"
+      ]
+    },
+    {
+      "base": "routes",
+      "count": 6,
+      "files": [
+        "client/src/content/routes.js",
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/auth/routes.mjs",
+        "server/replit_integrations/chat/routes.ts",
+        "server/replit_integrations/image/routes.ts",
+        "server/replit_integrations/object_storage/routes.ts"
+      ]
+    },
+    {
+      "base": "JournalPage",
+      "count": 2,
+      "files": [
+        "client/src/features/journal/JournalPage.jsx",
+        "client/src/pages/JournalPage.jsx"
+      ]
+    },
+    {
+      "base": "insightEngine",
+      "count": 2,
+      "files": [
+        "client/src/intelligence/insightEngine.ts",
+        "client/src/lib/insights/insightEngine.ts"
+      ]
+    },
+    {
+      "base": "Disclaimer",
+      "count": 2,
+      "files": [
+        "client/src/legal/Disclaimer.tsx",
+        "client/src/pages/Disclaimer.tsx"
+      ]
+    },
+    {
+      "base": "lumiSystemPrompt",
+      "count": 2,
+      "files": [
+        "client/src/lumi-agent/prompts/lumiSystemPrompt.ts",
+        "client/src/lumi-conversation/prompts/lumiSystemPrompt.ts"
+      ]
+    },
+    {
+      "base": "lumiRegistry",
+      "count": 2,
+      "files": [
+        "client/src/lumi-registry/config/lumiRegistry.ts",
+        "client/src/lumi-registry/runtime/lumiRegistry.ts"
+      ]
+    },
+    {
+      "base": "auth",
+      "count": 2,
+      "files": [
+        "server/middleware/auth.mjs",
+        "server/routes/auth.mjs"
+      ]
+    },
+    {
+      "base": "email",
+      "count": 3,
+      "files": [
+        "server/routes/email.mjs",
+        "server/services/email.mjs",
+        "server/utils/email.mjs"
+      ]
+    },
+    {
+      "base": "aiClient",
+      "count": 2,
+      "files": [
+        "server/services/aiClient.mjs",
+        "server/utils/aiClient.mjs"
+      ]
+    },
+    {
+      "base": "ai.test",
+      "count": 2,
+      "files": [
+        "server/tests/ai.test.mjs",
+        "tests/ai.test.mjs"
+      ]
+    },
+    {
+      "base": "auth.test",
+      "count": 2,
+      "files": [
+        "server/tests/auth.test.mjs",
+        "tests/auth.test.mjs"
+      ]
+    },
+    {
+      "base": "journal.test",
+      "count": 2,
+      "files": [
+        "server/tests/journal.test.mjs",
+        "tests/journal.test.mjs"
+      ]
+    },
+    {
+      "base": "mood.test",
+      "count": 2,
+      "files": [
+        "server/tests/mood.test.mjs",
+        "tests/mood.test.mjs"
+      ]
+    },
+    {
+      "base": "AI_BOUNDARIES",
+      "count": 2,
+      "files": [
+        "docs/AI_BOUNDARIES.md",
+        "docs/ethics/AI_BOUNDARIES.md"
+      ]
+    },
+    {
+      "base": "ROUTE_REGISTRY",
+      "count": 2,
+      "files": [
+        "docs/ROUTE_REGISTRY.md",
+        "docs/architecture/ROUTE_REGISTRY.md"
+      ]
+    },
+    {
+      "base": "CANONICAL_ROUTE_TAXONOMY",
+      "count": 2,
+      "files": [
+        "docs/governance/CANONICAL_ROUTE_TAXONOMY.md",
+        "docs/taxonomy/CANONICAL_ROUTE_TAXONOMY.md"
+      ]
+    },
+    {
+      "base": "PHASE_63_DUPLICATE_ROUTE_FAMILY_MAP",
+      "count": 2,
+      "files": [
+        "docs/platform-map/PHASE_63_DUPLICATE_ROUTE_FAMILY_MAP.md",
+        "docs/reports/PHASE_63_DUPLICATE_ROUTE_FAMILY_MAP.md"
+      ]
+    },
+    {
+      "base": "PHASE_66_ROUTE_CANDIDATE_INVENTORY",
+      "count": 2,
+      "files": [
+        "docs/platform-map/PHASE_66_ROUTE_CANDIDATE_INVENTORY.md",
+        "docs/reports/PHASE_66_ROUTE_CANDIDATE_INVENTORY.md"
+      ]
+    }
+  ]
+}

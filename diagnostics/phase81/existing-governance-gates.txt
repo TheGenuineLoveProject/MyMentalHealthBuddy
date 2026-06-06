@@ -1,0 +1,37 @@
+===== scripts/oversized-file-gate.mjs =====
+MISSING scripts/oversized-file-gate.mjs
+
+===== scripts/visual-runtime-gate.mjs =====
+VISUAL_RUNTIME_GATE_PASS
+
+===== scripts/content-coherence-gate.mjs =====
+
+===== scripts/page-coherence-gate.mjs =====
+PAGE_COHERENCE_GATE_PASS
+
+===== scripts/governance-zero-drift-gate.mjs =====
+MISSING scripts/governance-zero-drift-gate.mjs
+
+===== scripts/revenue-safety-firewall-gate.mjs =====
+MISSING scripts/revenue-safety-firewall-gate.mjs
+
+===== scripts/check-links.mjs =====
+PASS 200 /
+PASS 200 /pricing
+PASS 200 /premium
+PASS 200 /account/billing
+PASS 200 /account/subscription
+PASS 200 /login
+PASS 200 /register
+PASS 200 /safety
+PASS 200 /privacy
+PASS 200 /terms
+PASS 200 /admin
+PASS 200 /admin/billing
+PASS 200 /admin/revenue
+PASS 200 /admin/security
+PASS 200 /admin/health
+PASS 200 /api/health
+PASS 200 /api/ready
+Link check passed.
+
