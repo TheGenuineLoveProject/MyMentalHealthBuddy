@@ -24,7 +24,9 @@
     "verify:all": "node scripts/verify-all.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "echo 'test placeholder active' && exit 0"
+    "test": "echo 'test placeholder active' && exit 0",
+    "audit:phase83": "node scripts/phase83-platform-content-component-analysis.mjs",
+    "gate:constitution": "node scripts/constitution-implementation-gate.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",

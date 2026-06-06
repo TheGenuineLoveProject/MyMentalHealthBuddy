@@ -1,0 +1,6 @@
+
+> mymentalhealthbuddy@1.0.0 gate:constitution
+> node scripts/constitution-implementation-gate.mjs
+
+CONSTITUTION_IMPLEMENTATION_GATE_FAIL
+BUSINESS_HEALING_BOUNDARY_RISK_REQUIRES_NEXT_PHASE_REVIEW

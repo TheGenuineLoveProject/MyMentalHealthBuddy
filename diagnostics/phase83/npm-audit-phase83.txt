@@ -1,0 +1,16 @@
+
+> mymentalhealthbuddy@1.0.0 audit:phase83
+> node scripts/phase83-platform-content-component-analysis.mjs
+
+PHASE83_PLATFORM_ANALYSIS_COMPLETE
+{
+  "files": 2286,
+  "pages": 316,
+  "components": 423,
+  "serverFiles": 331
+}
+clinicalClaimRisks=121
+businessHealingBoundaryRisks=23
+duplicateBasenameRisks=34
+buttonRisks=26
+lumiFiles=388
