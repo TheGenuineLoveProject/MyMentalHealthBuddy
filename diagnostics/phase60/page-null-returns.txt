@@ -1,0 +1,24 @@
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:  if (issues.length === 0) return null;
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:  if (Object.keys(toolResults).length === 0) return null;
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:  if (checkedCount === 0) return null;
+client/src/pages/admin/AdminTools.jsx:    return null;
+client/src/pages/admin/AdminTools.jsx:            if ((searchFilter || statusFilter !== 'all') && filteredTools.length === 0) return null;
+client/src/pages/admin/HealthDashboard.jsx:                if (!dx) return null;
+client/src/pages/admin/NarrativeDrafts.jsx:                            if (!text) return null;
+client/src/pages/dashboard/Journal.jsx:  if (!isOpen) return null;
+client/src/pages/BlogDraftViewer.jsx:    if (!md) return null;
+client/src/pages/Reflection.jsx:  if (recent.length === 0) return null;
+client/src/pages/OnboardingFlow.jsx:  } catch { return null; }
+client/src/pages/GrowthPage.jsx:    if (typeof window === "undefined") return null;
+client/src/pages/GrowthPage.jsx:  if (invitations.length === 0) return null;
+client/src/pages/GratitudePractice.jsx:    if (!weeklySummary) return null;
+client/src/pages/GratitudePractice.jsx:  if (!entries || entries.length === 0) return null;
+client/src/pages/DiscernmentDashboard.jsx:    if (!beltsQuery.data?.belts || !progress) return null;
+client/src/pages/MoodPage.jsx:  if (entries.length < 2) return null;
+client/src/pages/BlogIndex.jsx:  if (!post || !post.slug) return null;
+client/src/pages/BlogPost.jsx:              if (!trimmed) return null;
+client/src/pages/MetaLearningPage.tsx:    if (entries.length === 0) return null;
+client/src/pages/Start.tsx:    if (buddyState === "crisis") return null;
+client/src/pages/Start.tsx:      return null;
+client/src/pages/Start.tsx:    return null;
+client/src/pages/TalkTopics.jsx:    if (pool.length === 0) return null;

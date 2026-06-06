@@ -1,0 +1,2 @@
+client/src/components/ui/EmptyState.jsx:      title={query ? `No results for "${query}"` : "No results found"}
+client/src/components/GlobalSearch.jsx:              <p>No results found for "{query}"</p>

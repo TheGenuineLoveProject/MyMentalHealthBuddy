@@ -1,0 +1,275 @@
+client/src/pages/admin/AdminPublishingToday.jsx:    <Button
+client/src/pages/admin/AdminPublishingToday.jsx:        <Button variant="outline" size="sm" onClick={handleRefresh} data-testid="button-refresh">
+client/src/pages/admin/AdminPublishingToday.jsx:              <Button
+client/src/pages/admin/AdminPublishingToday.jsx:          <Button
+client/src/pages/admin/AdminPublishingToday.jsx:                  <Button
+client/src/pages/admin/AdminPublishingToday.jsx:                    <Button
+client/src/pages/admin/AnalyticsDashboard.jsx:            <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
+client/src/pages/admin/AuditLogExplorer.jsx:          <Button variant="outline" size="sm" onClick={() => refetch()} data-testid="button-refresh">
+client/src/pages/admin/AuditLogExplorer.jsx:          <Button variant="outline" size="sm" onClick={() => handleExport("csv")} data-testid="button-export-csv">
+client/src/pages/admin/AuditLogExplorer.jsx:          <Button variant="outline" size="sm" onClick={() => handleExport("json")} data-testid="button-export-json">
+client/src/pages/admin/AuditLogExplorer.jsx:                <Button onClick={handleSearch} data-testid="button-search">
+client/src/pages/admin/AuditLogExplorer.jsx:              <Button variant="ghost" onClick={() => { setAction(""); setSearch(""); setSearchInput(""); setPage(1); }} data-testid="button-clear-filters">
+client/src/pages/admin/AuditLogExplorer.jsx:          <Button
+client/src/pages/admin/AuditLogExplorer.jsx:          <Button
+client/src/pages/admin/ContentStudioAdmin.jsx:                  <Button 
+client/src/pages/admin/FeatureFlags.jsx:          <Button 
+client/src/pages/admin/FeatureFlags.jsx:                <Button variant="ghost" size="sm" onClick={() => setShowAddForm(false)}>
+client/src/pages/admin/FeatureFlags.jsx:                <Button onClick={handleAddFlag} data-testid="button-create-flag">
+client/src/pages/admin/FeatureFlags.jsx:                <Button variant="outline" onClick={() => setShowAddForm(false)}>
+client/src/pages/admin/FeatureFlags.jsx:                    <Button
+client/src/pages/admin/FeatureFlags.jsx:                    <Button
+client/src/pages/admin/FeedbackAggregator.jsx:            <Button
+client/src/pages/admin/FeedbackAggregator.jsx:          <Button
+client/src/pages/admin/FeedbackAggregator.jsx:              <Button
+client/src/pages/admin/NarrativeDrafts.jsx:          <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
+client/src/pages/admin/NarrativeDrafts.jsx:          <Button
+client/src/pages/admin/NarrativeDrafts.jsx:            <Button
+client/src/pages/admin/NarrativeDrafts.jsx:              <Button variant="outline" onClick={() => refetch()} data-testid="button-retry">
+client/src/pages/admin/NarrativeDrafts.jsx:                        <Button
+client/src/pages/admin/NarrativeDrafts.jsx:                                  <Button
+client/src/pages/admin/NarrativeDrafts.jsx:                          <Button
+client/src/pages/admin/NarrativeDrafts.jsx:                              <Button
+client/src/pages/admin/NarrativeDrafts.jsx:                              <Button
+client/src/pages/admin/RevenueAdmin.jsx:            <Button
+client/src/pages/admin/SecurityDashboard.jsx:          <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:              <Button variant="outline" size="sm" onClick={() => setActiveTab("settings")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:              <Button size="sm" onClick={() => setActiveTab("create")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                          <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:                          <Button
+client/src/pages/admin/SocialStudioAdmin.jsx:                      <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:                      <Button variant="outline" onClick={() => setActiveTab("hashtags")} data-testid="button-add-hashtags">
+client/src/pages/admin/SocialStudioAdmin.jsx:                      <Button variant="outline" onClick={() => setActiveTab("hooks")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                    <Button variant="outline" className="w-full justify-start" onClick={handleGenerateAIContent} disabled={generatingAI}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                    <Button variant="outline" className="w-full justify-start" onClick={() => setActiveTab("templates")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                    <Button variant="outline" className="w-full justify-start" onClick={() => setActiveTab("hooks")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                            <Button size="sm" variant="ghost" className="text-xs" onClick={() => setConnectedPlatforms([...connectedPlatforms, p.id])}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                      <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:                            <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:                        <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:                      <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:                            <Button size="sm" variant="outline" onClick={() => handleCopyText(hook, "Hook")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                            <Button size="sm" variant="outline" onClick={() => {
+client/src/pages/admin/SocialStudioAdmin.jsx:                        <Button size="sm" variant="ghost" onClick={() => setSelectedHashtags([])}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                        <Button size="sm" onClick={() => handleCopyText(selectedHashtags.join(" "), "Hashtags")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                        <Button size="sm" variant="outline" onClick={() => setActiveTab("create")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                  <Button className="flex-1" onClick={() => handleCopyText(generateUTM(), "UTM URL")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                  <Button variant="outline" onClick={() => window.open(generateUTM(), '_blank')}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                    <Button 
+client/src/pages/admin/SocialStudioAdmin.jsx:                    <Button onClick={() => setActiveTab("create")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                              <Button variant="ghost" size="icon" onClick={() => handleCopyText(draft.content, "Content")}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                              <Button variant="ghost" size="icon" onClick={() => handleExportDraft(draft.id)}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                                <Button variant="ghost" size="icon" className="text-green-600" onClick={() => handleApproveDraft(draft.id)}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                                <Button variant="ghost" size="icon" className="text-purple-600" onClick={() => handlePublishDraft(draft.id)}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                              <Button variant="ghost" size="icon" className="text-red-600" onClick={() => handleDeleteDraft(draft.id)}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                            <Button size="sm" variant="ghost" onClick={() => setConnectedPlatforms(connectedPlatforms.filter(id => id !== p.id))}>
+client/src/pages/admin/SocialStudioAdmin.jsx:                          <Button size="sm" onClick={() => {
+client/src/pages/admin/SystemAlerts.jsx:            <Button
+client/src/pages/admin/SystemAlerts.jsx:                    <Button 
+client/src/pages/account/Billing.jsx:                  <Button
+client/src/pages/account/Billing.jsx:                    <Button 
+client/src/pages/account/Billing.jsx:                    <Button 
+client/src/pages/account/Billing.jsx:                    <Button 
+client/src/pages/account/Billing.jsx:                  <Button 
+client/src/pages/account/Billing.jsx:                          <Button 
+client/src/pages/account/Billing.jsx:                <Button 
+client/src/pages/account/DeleteAccount.jsx:          <Button
+client/src/pages/account/DeleteAccount.jsx:          <Button
+client/src/pages/account/OrderHistory.jsx:            <Button onClick={() => refetch()} variant="outline" data-testid="button-retry">
+client/src/pages/account/OrderHistory.jsx:                          <Button variant="ghost" size="icon" data-testid={`download-${order.id}`}>
+client/src/pages/account/OrderHistory.jsx:                          <Button variant="ghost" size="icon" data-testid={`view-${order.id}`}>
+client/src/pages/account/Profile.jsx:                <Button variant="outline" onClick={() => setEditing(true)} className="btn-secondary-premium" data-testid="button-edit-profile">
+client/src/pages/account/Profile.jsx:                  <Button variant="outline" onClick={() => setEditing(false)} data-testid="button-cancel">
+client/src/pages/account/Profile.jsx:                  <Button onClick={handleSave} disabled={profileMutation.isPending} className="btn-premium" data-testid="button-save-profile">
+client/src/pages/account/Security.jsx:            <Button variant="ghost" size="sm" className="gap-2" data-testid="button-back">
+client/src/pages/account/Security.jsx:                  <Button
+client/src/pages/account/Security.jsx:                  <Button
+client/src/pages/account/Security.jsx:              <Button 
+client/src/pages/account/Security.jsx:                  <Button 
+client/src/pages/account/Security.jsx:                  <Button 
+client/src/pages/account/Security.jsx:                    <Button variant="ghost" size="sm" onClick={() => { setShow2FASetup(false); setTwoFAStep(1); }}>
+client/src/pages/account/Security.jsx:                      <Button className="w-full" onClick={() => setTwoFAStep(3)}>
+client/src/pages/account/Security.jsx:                          <Button variant="ghost" size="sm" onClick={copyBackupCodes}>
+client/src/pages/account/Security.jsx:                      <Button 
+client/src/pages/account/Security.jsx:                <Button variant="outline" className="w-full" data-testid="button-view-sessions">
+client/src/pages/account/Sessions.jsx:                    <Button
+client/src/pages/account/Settings.jsx:                    <Button variant="outline" size="sm" data-testid="button-change-password">Change</Button>
+client/src/pages/account/Settings.jsx:                    <Button variant="outline" size="sm" data-testid="button-data-privacy">Manage</Button>
+client/src/pages/account/Settings.jsx:                <Button variant="destructive" size="sm" data-testid="button-delete-account">
+client/src/pages/account/Settings.jsx:              <Button 
+client/src/pages/account/Subscription.jsx:                  <Button 
+client/src/pages/account/Subscription.jsx:                    <Button className="flex-1 min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-resume" onClick={openPortal}>
+client/src/pages/account/Subscription.jsx:                    <Button variant="ghost" className="flex-1 min-h-[44px] px-6 py-3 rounded-lg text-muted-foreground" data-testid="button-cancel" onClick={openPortal}>
+client/src/pages/account/Subscription.jsx:                  <Button className="w-full min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-upgrade">
+client/src/pages/account/Subscription.jsx:              <Button variant="outline" data-testid="button-billing-help">
+client/src/pages/dashboard/Insights.tsx:              <Button variant="outline" className="btn-secondary-premium" data-testid="button-view-all-achievements">
+client/src/pages/dashboard/Journal.jsx:      <Button className="btn-premium" onClick={onNewEntry} data-testid="button-first-entry">
+client/src/pages/dashboard/Journal.jsx:            <Button type="button" variant="outline" onClick={onClose} className="btn-secondary-premium" data-testid="button-cancel">
+client/src/pages/dashboard/Journal.jsx:            <Button type="submit" className="btn-premium" disabled={createMutation.isPending} data-testid="button-save-entry">
+client/src/pages/dashboard/Journal.jsx:              <Button className="btn-premium" onClick={() => setIsModalOpen(true)} data-testid="button-new-entry">
+client/src/pages/dashboard/MoodTracker.jsx:              <Button 
+client/src/pages/help/RefundHelp.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/help/RefundHelp.jsx:                <Button variant="outline" className="justify-start w-full" data-testid="button-email">
+client/src/pages/help/RefundHelp.jsx:                <Button variant="outline" className="justify-start w-full" data-testid="button-chat">
+client/src/pages/pathways/CalmPlan.jsx:            <Button variant="outline" onClick={handleReset} data-testid="button-reset">
+client/src/pages/pathways/CalmPlan.jsx:            <Button onClick={handleSave} data-testid="button-save">
+client/src/pages/pathways/Favorites.jsx:          <Button onClick={() => refetch()} data-testid="button-retry">
+client/src/pages/pathways/Favorites.jsx:            <Button
+client/src/pages/pathways/Favorites.jsx:            <Button
+client/src/pages/pathways/Favorites.jsx:              <Button data-testid="button-browse-tools">
+client/src/pages/pathways/Favorites.jsx:                      <Button variant="ghost" size="sm" data-testid={`button-open-${favorite.id}`}>
+client/src/pages/pathways/Favorites.jsx:                    <Button 
+client/src/pages/pathways/GoalOnboarding.jsx:            <Button
+client/src/pages/pathways/GoalOnboarding.jsx:              <Button
+client/src/pages/pathways/GoalOnboarding.jsx:              <Button
+client/src/pages/pathways/PathwaysHome.jsx:                    <Button 
+client/src/pages/pathways/PathwaysHome.jsx:            <Button 
+client/src/pages/pathways/ProgressStreaks.jsx:          <Button onClick={() => refetch()} data-testid="button-retry">
+client/src/pages/pathways/ProgressStreaks.jsx:          <Button 
+client/src/pages/pathways/ProgressStreaks.jsx:            <Button data-testid="button-continue-practice">
+client/src/pages/pathways/ReflectionHistory.jsx:              <Button
+client/src/pages/pathways/ReflectionHistory.jsx:              <Button onClick={handleRetry} data-testid="button-retry">
+client/src/pages/pathways/ReflectionHistory.jsx:                <Button data-testid="button-start-journal">
+client/src/pages/pathways/ReflectionHistory.jsx:                  <Button 
+client/src/pages/pathways/ValuesToActions.jsx:              <Button 
+client/src/pages/pathways/ValuesToActions.jsx:          <Button 
+client/src/pages/preferences/NotificationPreferences.jsx:          <Button onClick={handleSave} disabled={notificationMutation.isPending} data-testid="button-save">
+client/src/pages/preferences/SafetyPreferences.jsx:          <Button onClick={handleSave} disabled={safetyMutation.isPending} data-testid="button-save">
+client/src/pages/settings/AIPersonality.jsx:        <Button onClick={handleSave} disabled={aiPersonalityMutation.isPending} className="w-full min-h-[44px]" data-testid="button-save">
+client/src/pages/settings/EmailDigest.jsx:        <Button
+client/src/pages/tools/AweMicrodose.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/tools/AweMicrodose.jsx:                <Button onClick={reset} variant="outline" data-testid="button-restart">
+client/src/pages/tools/AweMicrodose.jsx:                  <Button
+client/src/pages/tools/AweMicrodose.jsx:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset">
+client/src/pages/tools/BodyScan.jsx:          <Button variant="ghost" className="mb-8 min-h-[44px] px-4 py-2 rounded-lg" data-testid="button-back">
+client/src/pages/tools/BodyScan.jsx:                <Button onClick={reset} variant="outline" className="min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-restart">
+client/src/pages/tools/BodyScan.jsx:                  <Button
+client/src/pages/tools/BodyScan.jsx:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset" aria-label="Reset body scan" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/tools/BreathTool.jsx:            <Button
+client/src/pages/tools/BreathTool.jsx:                <Button
+client/src/pages/tools/BreathTool.jsx:                <Button
+client/src/pages/tools/BreathTool.jsx:              <Button
+client/src/pages/tools/BreathTool.jsx:              <Button
+client/src/pages/tools/BreathTool.jsx:              <Button
+client/src/pages/tools/CommunityCheckin.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/tools/CommunityCheckin.jsx:              <Button 
+client/src/pages/tools/CommunityCheckin.jsx:                <Button variant="outline" onClick={getRandomPrompt} data-testid="button-share-another">
+client/src/pages/tools/CommunityCheckin.jsx:                <Button 
+client/src/pages/tools/CompassionBreak.jsx:          <Button variant="ghost" className="mb-8 min-h-[44px] px-4 py-2 rounded-lg" data-testid="button-back">
+client/src/pages/tools/CompassionBreak.jsx:                <Button onClick={reset} variant="outline" data-testid="button-restart">
+client/src/pages/tools/CompassionBreak.jsx:                  <Button
+client/src/pages/tools/CompassionBreak.jsx:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset" aria-label="Reset compassion break" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/tools/DigitalSunset.jsx:          <Button variant="ghost" size="sm" className="mb-6 text-white/80 hover:text-white hover:bg-white/10" data-testid="button-back">
+client/src/pages/tools/EmotionWheel.jsx:                <Button onClick={reset} variant="outline" className="min-h-[44px]">
+client/src/pages/tools/EmotionWheel.jsx:                  <Button className="min-h-[44px]">
+client/src/pages/tools/EmotionWheel.jsx:            <Button onClick={reset} variant="ghost" className="min-h-[44px]">
+client/src/pages/tools/GriefLetter.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/tools/GriefLetter.jsx:          <Button
+client/src/pages/tools/GriefLetter.jsx:            <Button onClick={handleSave} disabled={!letterContent.trim() || letterMutation.isPending} data-testid="button-save" aria-label="Save letter" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/tools/MeaningMap.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/tools/MeaningMap.jsx:              <Button 
+client/src/pages/tools/MeaningMap.jsx:          <Button onClick={handleSave} disabled={meaningMapMutation.isPending} data-testid="button-save" aria-label="Save your meaning map" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/tools/MeditationPlayer.jsx:                <Button
+client/src/pages/tools/MeditationPlayer.jsx:                <Button
+client/src/pages/tools/MeditationPlayer.jsx:                <Button
+client/src/pages/tools/MeditationPlayer.jsx:                <Button
+client/src/pages/tools/MeditationPlayer.jsx:                <Button
+client/src/pages/tools/Reframe.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back-nav">
+client/src/pages/tools/Reframe.jsx:                <Button onClick={handleReset} variant="outline" data-testid="button-start-over">
+client/src/pages/tools/Reframe.jsx:                <Button
+client/src/pages/tools/Reframe.jsx:                <Button
+client/src/pages/tools/RepairScript.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/tools/RepairScript.jsx:                <Button onClick={handleCopy} variant="outline" data-testid="button-copy">
+client/src/pages/tools/UrgeSurf.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/tools/UrgeSurf.jsx:                <Button onClick={reset} variant="outline" data-testid="button-restart">
+client/src/pages/tools/UrgeSurf.jsx:                  <Button
+client/src/pages/tools/UrgeSurf.jsx:                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset" aria-label="Reset urge surf" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+client/src/pages/tools/WeeklyReflection.jsx:                <Button variant="outline" onClick={() => { setIsComplete(false); setCurrentStep(0); }} className="flex-1 min-h-[44px]">
+client/src/pages/tools/WeeklyReflection.jsx:                <Button onClick={handleSave} disabled={reflectionMutation.isPending || saved} className="flex-1 min-h-[44px]" data-testid="button-save">
+client/src/pages/tools/WeeklyReflection.jsx:                <Button variant="outline" onClick={handleBack} className="min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" data-testid="button-back" aria-label="Go to previous question">
+client/src/pages/tools/WeeklyReflection.jsx:              <Button onClick={handleNext} className="flex-1 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" data-testid="button-next" aria-label={currentStep === questions.length - 1 ? "Complete reflection" : "Go to next question"}>
+client/src/pages/BodyWellnessPage.jsx:              <Button
+client/src/pages/BoundariesPage.jsx:              <Button
+client/src/pages/CoherenceLadderPage.jsx:                <Button
+client/src/pages/CommunityGuidelines.jsx:            <Button variant="outline" className="min-h-[44px] px-4 py-2 rounded-lg border-amber-600 text-amber-900 dark:text-amber-100" data-testid="button-report">
+client/src/pages/CommunityGuidelines.jsx:            <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-explore-tools">
+client/src/pages/CourseCatalog.jsx:                <Button
+client/src/pages/CourseCatalog.jsx:            <Button
+client/src/pages/CourseCatalog.jsx:            <Button
+client/src/pages/CreatorProfile.jsx:              <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-explore-tools">
+client/src/pages/CreatorProfile.jsx:              <Button variant="outline" size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-view-pricing">
+client/src/pages/DataRetention.jsx:                  <Button variant="outline" className="min-h-[44px] px-4 py-2 rounded-lg" data-testid="button-export-data">
+client/src/pages/DataRetention.jsx:                  <Button variant="outline" className="min-h-[44px] px-4 py-2 rounded-lg text-destructive hover:text-destructive" data-testid="button-delete-account">
+client/src/pages/DataRetention.jsx:            <Button className="min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-contact-support">
+client/src/pages/LegalPage.jsx:          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
+client/src/pages/MirrorPage.tsx:            <Button 
+client/src/pages/MirrorPage.tsx:            <Button
+client/src/pages/MovementSnacksPage.jsx:                    <Button onClick={handleLogSnack} disabled={createMutation.isPending} data-testid="button-log">
+client/src/pages/MovementSnacksPage.jsx:                    <Button variant="secondary" onClick={() => { setActiveSnack(null); setTimer(0); }} data-testid="button-skip">
+client/src/pages/NervousSystemFloodingPage.jsx:                          <Button
+client/src/pages/Onboarding.tsx:              <Button
+client/src/pages/Onboarding.tsx:            <Button
+client/src/pages/Onboarding.tsx:            <Button
+client/src/pages/PerceptionRefinementPage.jsx:                      <Button
+client/src/pages/PermacultureWellnessPage.jsx:                      <Button
+client/src/pages/PracticeLibrary.jsx:              <Button variant="default" className="min-h-[40px] rounded-lg" data-testid="link-twelve-practices">
+client/src/pages/PracticeLibrary.jsx:              <Button
+client/src/pages/PracticeLibrary.jsx:                  <Button className="w-full min-h-[44px] rounded-lg" data-testid={`button-start-${practice.id}`}>
+client/src/pages/PracticeLibrary.jsx:            <Button
+client/src/pages/PracticeLibrary.jsx:            <Button className="min-h-[44px] px-6 rounded-lg" data-testid="button-start-breathing">
+client/src/pages/PressKit.jsx:                <Button className="min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-request-logos">
+client/src/pages/PressKit.jsx:            <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-contact-press">
+client/src/pages/PricingPage.jsx:                  <Button 
+client/src/pages/PublicRoadmap.jsx:            <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-share-feedback">
+client/src/pages/SafetyCenter.jsx:            <Button
+client/src/pages/SelfWorthReflectionPage.jsx:                      <Button
+client/src/pages/SocialHub.jsx:                <Button
+client/src/pages/SocialHub.jsx:                <Button
+client/src/pages/SocialHub.jsx:                    <Button
+client/src/pages/SoulWellnessPage.jsx:              <Button
+client/src/pages/StudyVaultPage.jsx:              <Button variant="ghost" size="icon" className="text-[var(--glp-sage)] hover:text-[var(--glp-sage-deep)]" data-testid="button-back">
+client/src/pages/StudyVaultPage.jsx:                  <Button variant="ghost" onClick={() => setSelectedTopic(null)} data-testid="button-back-topics">
+client/src/pages/UserProfile.jsx:                  <Button variant="outline" className="min-h-[44px]" data-testid="button-edit-profile">
+client/src/pages/UserProfile.jsx:                <Button variant="link" className="p-0 h-auto text-blue-600 text-sm">
+client/src/pages/ValuesFinderPage.jsx:              <Button
+client/src/pages/WellnessGoals.jsx:            <Button
+client/src/pages/WellnessGoals.jsx:                  <Button onClick={addGoal} className="min-h-[44px]" data-testid="button-save-goal">
+client/src/pages/WellnessGoals.jsx:                  <Button variant="outline" onClick={() => setShowAddGoal(false)} className="min-h-[44px]">
+client/src/pages/WellnessGoals.jsx:                  <Button
+client/src/pages/WellnessGoals.jsx:            <Button onClick={() => setShowAddGoal(true)} className="min-h-[44px]">
+client/src/components/content/ContentTierCompiler.jsx:          <Button 
+client/src/components/content/GlossaryTerm.jsx:            <Button 
+client/src/components/ui/EmptyState.jsx:        <Button 
+client/src/components/ui/Hero.jsx:              <Button
+client/src/components/ui/Hero.jsx:              <Button
+client/src/components/ObjectUploaderUppy.tsx:      <Button onClick={() => setShowModal(true)} className={buttonClassName}>
+client/src/components/ConsentBanner.jsx:              <Button
+client/src/components/ConsentBanner.jsx:              <Button
+client/src/components/ConsentBanner.jsx:              <Button
+client/src/components/ConsentBanner.jsx:              <Button
+client/src/components/ConsentBanner.jsx:              <Button
+client/src/components/ConsentBanner.jsx:              <Button
+client/src/components/EmotionCalendar.jsx:            <Button
+client/src/components/EmotionCalendar.jsx:            <Button
+client/src/components/EmotionLog.jsx:              <Button 
+client/src/components/FeedbackWidget.jsx:      <Button
+client/src/components/FeedbackWidget.jsx:          <Button
+client/src/components/FeedbackWidget.jsx:          <Button
+client/src/components/FeedbackWidget.jsx:                  <Button
+client/src/components/FeedbackWidget.jsx:              <Button
+client/src/components/FeedbackWidget.jsx:              <Button
+client/src/components/KeyboardShortcuts.jsx:          <Button
+client/src/components/LevelUpModal.jsx:        <Button
+client/src/components/LevelUpModal.jsx:          <Button onClick={handleClose} className="w-full min-h-[44px]" data-testid="button-continue">
+client/src/components/SacredNav.jsx:                  <Button variant="ghost" size="sm" className="text-muted-foreground" data-testid="button-logout">
+client/src/components/SacredNav.jsx:                <Button 
+client/src/components/SacredNav.jsx:            <Button
+client/src/components/SessionTimeout.jsx:          <Button
+client/src/components/SessionTimeout.jsx:          <Button
+client/src/components/StreakCelebration.jsx:        <Button
+client/src/components/StreakCelebration.jsx:        <Button onClick={handleClose} className="w-full min-h-[44px]" data-testid="button-continue">
+client/src/components/VoiceAffirmation.jsx:          <Button
+client/src/components/VoiceAffirmation.jsx:            <Button
+client/src/features/community/Community.tsx:                <Button
+client/src/guards/ProtectedRoute.jsx:            <Button 
+client/src/_quarantine/orphans/ReadingLevelSwitcher.jsx:        <Button 
