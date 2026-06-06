@@ -10,10 +10,10 @@ const faqs = [
     questions: [
       {
         q: "What is The Genuine Love Project?",
-        a: "MyMentalHealthBuddy by The Genuine Love Project is an AI-powered mental wellness platform designed to support self-love, healing, and emotional growth. We provide tools for mood tracking, journaling, guided reflections, and compassionate AI chat support."
+        a: "MyMentalHealthBuddy by The Genuine Love Project is an educational mental wellness platform designed to support self-reflection, emotional skills, and personal growth. We provide tools for mood tracking, journaling, guided reflections, and compassionate AI chat support."
       },
       {
-        q: "Is this a replacement for therapy?",
+        q: "Is this a educational wellness support, not a replacement for therapy?",
         a: "No. Our platform is a supportive wellness tool, not a substitute for professional mental health care. We always encourage seeking professional help when needed and provide crisis resources for emergencies."
       },
       {

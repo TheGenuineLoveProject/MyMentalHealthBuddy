@@ -432,7 +432,7 @@ export default function Start() {
   const [selectedToolId, setSelectedToolId] = useState<string | null>(null);
   // Synchronous one-shot latch for tool_completed: React state updates are
   // async, so two rapid clicks can both observe `toolCompleted === false`
-  // before re-render fires. The ref mutates synchronously and guarantees
+  // before re-render fires. The ref mutates synchronously and is designed to support
   // the telemetry call happens at most once per result panel.
   const toolCompletedLatchRef = useRef(false);
   // v1.5 — dedupe `buddy_tool_expression` telemetry per unique toolId so
@@ -1086,7 +1086,7 @@ export default function Start() {
                 type="button"
                 disabled={toolCompleted}
                 onClick={() => {
-                  // Synchronous latch wins over async setState — guarantees
+                  // Synchronous latch wins over async setState — is designed to support
                   // a single tool_completed beacon even under rapid double-click.
                   if (toolCompletedLatchRef.current) return;
                   toolCompletedLatchRef.current = true;

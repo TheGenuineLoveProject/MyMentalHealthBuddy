@@ -48,7 +48,7 @@ export default function CanvaLanding() {
           <h2 className="text-2xl font-extrabold">Safe, ethical, provider-informed wellness</h2>
           <p className="mt-3 leading-7 text-[#2A3F3D]">
             This platform supports education, reflection, and personal growth. It does not diagnose,
-            treat, prescribe, replace therapy, or provide emergency care.
+            treat, prescribe, support reflection alongside appropriate professional care, or provide emergency care.
           </p>
         </section>
       </section>

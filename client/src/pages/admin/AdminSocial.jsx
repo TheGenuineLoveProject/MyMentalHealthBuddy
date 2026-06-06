@@ -39,7 +39,7 @@ const HASHTAG_PRESETS = {
 };
 
 const BANNED_PHRASES = [
-  "diagnos", "treatment", "cure", "therapy session", "clinical",
+  "diagnos", "treatment", "support", "therapy session", "clinical",
   "today only", "don't miss", "fix yourself", "limited time",
   "act now", "hurry", "you're broken", "what's wrong with you"
 ];

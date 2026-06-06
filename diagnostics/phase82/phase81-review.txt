@@ -1,0 +1,1203 @@
+===== diagnostics/phase81/status-summary.md =====
+# Phase 81 Status
+
+Objective:
+Complete a non-blind A to Z platform, component, and content coherence audit focused on zero drift, zero duplicate shell command execution, zero duplication risk, Lumi avatar asset correctness, and user-facing content clarity.
+
+Completed:
+- Runtime inspection captured.
+- Governance rule implementation inventory captured.
+- Component inventory captured.
+- Page, route, button, and link coherence audit captured.
+- Content safety and monetization coherence audit captured.
+- Duplication and canonical ownership audit captured.
+- MMHBFloatAvatar objectFit and overflow safety patch attempted only if file exists.
+- Official Lumi asset pipeline audit captured.
+- Platform coherence audit script added.
+- Zero duplicate shell command ledger added.
+- Component/content/platform completion rules added.
+- Existing governance gates executed where available.
+- Typecheck, lint, build, health, ready, and route verification captured.
+
+Completion Rule:
+Do not proceed to a new feature phase until Phase 81 diagnostics are reviewed and the first verified blocker is selected as the only next objective.
+===== diagnostics/phase81/platform-coherence-audit.txt =====
+scannedFiles=2244
+PASS business_healing_firewall_language
+PASS clinical_boundary_language
+PASS lumi_official_motion_markers
+PASS content_outcome_language
+PASS governance_or_zero_drift_markers
+duplicateRiskCount=29
+===== diagnostics/phase81/platform-coherence-audit.json =====
+{
+  "scannedFiles": 2244,
+  "checks": [
+    {
+      "name": "business_healing_firewall_language",
+      "pass": true
+    },
+    {
+      "name": "clinical_boundary_language",
+      "pass": true
+    },
+    {
+      "name": "lumi_official_motion_markers",
+      "pass": true
+    },
+    {
+      "name": "content_outcome_language",
+      "pass": true
+    },
+    {
+      "name": "governance_or_zero_drift_markers",
+      "pass": true
+    }
+  ],
+  "failedChecks": [],
+  "duplicateRiskCount": 29,
+  "duplicateRisks": [
+    {
+      "base": "officialLumiAssets",
+      "count": 2,
+      "files": [
+        "client/src/avatar-life/officialLumiAssets.ts",
+        "client/src/officialLumiAssets.ts"
+      ]
+    },
+    {
+      "base": "EmotionLog",
+      "count": 2,
+      "files": [
+        "client/src/components/EmotionLog.jsx",
+        "client/src/components/wellness/EmotionLog.jsx"
+      ]
+    },
+    {
+      "base": "EmotionWheel",
+      "count": 2,
+      "files": [
+        "client/src/components/EmotionWheel.jsx",
+        "client/src/pages/tools/EmotionWheel.jsx"
+      ]
+    },
+    {
+      "base": "JournalAI",
+      "count": 2,
+      "files": [
+        "client/src/components/JournalAI.jsx",
+        "client/src/components/wellness/JournalAI.jsx"
+      ]
+    },
+    {
+      "base": "ProtectedRoute",
+      "count": 2,
+      "files": [
+        "client/src/components/ProtectedRoute.jsx",
+        "client/src/guards/ProtectedRoute.jsx"
+      ]
+    },
+    {
+      "base": "OfficialLumi",
+      "count": 2,
+      "files": [
+        "client/src/components/lumi/OfficialLumi.tsx",
+        "client/src/lumi-registry/components/OfficialLumi.tsx"
+      ]
+    },
+    {
+      "base": "EmailCapture",
+      "count": 2,
+      "files": [
+        "client/src/components/marketing/EmailCapture.jsx",
+        "client/src/sections/EmailCapture.jsx"
+      ]
+    },
+    {
+      "base": "journalPrompts",
+      "count": 2,
+      "files": [
+        "client/src/content/journalPrompts.js",
+        "client/src/data/journalPrompts.ts"
+      ]
+    },
+    {
+      "base": "disclaimer",
+      "count": 2,
+      "files": [
+        "client/src/content/legal/disclaimer.ts",
+        "client/src/lumi-disclaimer/disclaimer.ts"
+      ]
+    },
+    {
+      "base": "routeMetaRegistry",
+      "count": 2,
+      "files": [
+        "client/src/content/meta/routeMetaRegistry.ts",
+        "client/src/content/routeMetaRegistry.js"
+      ]
+    },
+    {
+      "base": "routeKey",
+      "count": 2,
+      "files": [
+        "client/src/content/routeKey.js",
+        "client/src/utils/routeKey.js"
+      ]
+    },
+    {
+      "base": "routes",
+      "count": 6,
+      "files": [
+        "client/src/content/routes.js",
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/auth/routes.mjs",
+        "server/replit_integrations/chat/routes.ts",
+        "server/replit_integrations/image/routes.ts",
+        "server/replit_integrations/object_storage/routes.ts"
+      ]
+    },
+    {
+      "base": "JournalPage",
+      "count": 2,
+      "files": [
+        "client/src/features/journal/JournalPage.jsx",
+        "client/src/pages/JournalPage.jsx"
+      ]
+    },
+    {
+      "base": "insightEngine",
+      "count": 2,
+      "files": [
+        "client/src/intelligence/insightEngine.ts",
+        "client/src/lib/insights/insightEngine.ts"
+      ]
+    },
+    {
+      "base": "Disclaimer",
+      "count": 2,
+      "files": [
+        "client/src/legal/Disclaimer.tsx",
+        "client/src/pages/Disclaimer.tsx"
+      ]
+    },
+    {
+      "base": "lumiSystemPrompt",
+      "count": 2,
+      "files": [
+        "client/src/lumi-agent/prompts/lumiSystemPrompt.ts",
+        "client/src/lumi-conversation/prompts/lumiSystemPrompt.ts"
+      ]
+    },
+    {
+      "base": "lumiRegistry",
+      "count": 2,
+      "files": [
+        "client/src/lumi-registry/config/lumiRegistry.ts",
+        "client/src/lumi-registry/runtime/lumiRegistry.ts"
+      ]
+    },
+    {
+      "base": "auth",
+      "count": 2,
+      "files": [
+        "server/middleware/auth.mjs",
+        "server/routes/auth.mjs"
+      ]
+    },
+    {
+      "base": "email",
+      "count": 3,
+      "files": [
+        "server/routes/email.mjs",
+        "server/services/email.mjs",
+        "server/utils/email.mjs"
+      ]
+    },
+    {
+      "base": "aiClient",
+      "count": 2,
+      "files": [
+        "server/services/aiClient.mjs",
+        "server/utils/aiClient.mjs"
+      ]
+    },
+    {
+      "base": "ai.test",
+      "count": 2,
+      "files": [
+        "server/tests/ai.test.mjs",
+        "tests/ai.test.mjs"
+      ]
+    },
+    {
+      "base": "auth.test",
+      "count": 2,
+      "files": [
+        "server/tests/auth.test.mjs",
+        "tests/auth.test.mjs"
+      ]
+    },
+    {
+      "base": "journal.test",
+      "count": 2,
+      "files": [
+        "server/tests/journal.test.mjs",
+        "tests/journal.test.mjs"
+      ]
+    },
+    {
+      "base": "mood.test",
+      "count": 2,
+      "files": [
+        "server/tests/mood.test.mjs",
+        "tests/mood.test.mjs"
+      ]
+    },
+    {
+      "base": "AI_BOUNDARIES",
+      "count": 2,
+      "files": [
+        "docs/AI_BOUNDARIES.md",
+        "docs/ethics/AI_BOUNDARIES.md"
+      ]
+    },
+    {
+      "base": "ROUTE_REGISTRY",
+      "count": 2,
+      "files": [
+        "docs/ROUTE_REGISTRY.md",
+        "docs/architecture/ROUTE_REGISTRY.md"
+      ]
+    },
+    {
+      "base": "CANONICAL_ROUTE_TAXONOMY",
+      "count": 2,
+      "files": [
+        "docs/governance/CANONICAL_ROUTE_TAXONOMY.md",
+        "docs/taxonomy/CANONICAL_ROUTE_TAXONOMY.md"
+      ]
+    },
+    {
+      "base": "PHASE_63_DUPLICATE_ROUTE_FAMILY_MAP",
+      "count": 2,
+      "files": [
+        "docs/platform-map/PHASE_63_DUPLICATE_ROUTE_FAMILY_MAP.md",
+        "docs/reports/PHASE_63_DUPLICATE_ROUTE_FAMILY_MAP.md"
+      ]
+    },
+    {
+      "base": "PHASE_66_ROUTE_CANDIDATE_INVENTORY",
+      "count": 2,
+      "files": [
+        "docs/platform-map/PHASE_66_ROUTE_CANDIDATE_INVENTORY.md",
+        "docs/reports/PHASE_66_ROUTE_CANDIDATE_INVENTORY.md"
+      ]
+    }
+  ]
+}
+===== diagnostics/phase81/content-coherence-safety-audit.txt =====
+===== USER OUTCOME LANGUAGE =====
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:56:          <span className="text-muted-foreground">{criticalIssues.map(i => i.label).join(', ')}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:62:          <span className="text-muted-foreground">{highIssues.map(i => i.label).join(', ')}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:68:          <span className="text-muted-foreground">{normalIssues.map(i => i.label).join(', ')}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:78:              <div key={issue.id} className={`p-3 rounded-lg border ${sevColor} bg-background`} data-testid={`diagnostics-${issue.id}`}>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:83:                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:100:                <div className="text-xs text-muted-foreground mt-1">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:254:        <div className="flex items-center gap-3 text-xs mb-3 p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:258:          <span className="text-muted-foreground">{repairStats.attempted} attempted</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:276:                    <div key={issue.id} className={`p-3 rounded-lg border ${issue.severity === 'critical' ? 'border-red-200 dark:border-red-800' : issue.severity === 'high' ? 'border-orange-200 dark:border-orange-800' : 'border-gray-200 dark:border-gray-700'} bg-background`} data-testid={`repair-${issue.id}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:298:                      <p className="text-[11px] text-muted-foreground mb-1.5 leading-relaxed">{rem?.suggestion}</p>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:302:                          <span className="font-medium text-muted-foreground">{rem?.action}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:333:                        <div key={tool.id} className="p-2.5 rounded-lg border border-amber-200 dark:border-amber-800 bg-background flex items-center justify-between" data-testid={`slow-${tool.id}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:354:                        <span className="text-muted-foreground">{entry.time}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:359:                        <span className="text-muted-foreground">→ {entry.action}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:375:                      <div key={cmd} className="p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800 text-[10px]" data-testid={`fix-cmd-${cmd}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:377:                        <div className="text-muted-foreground">{scenarios.length} scenario{scenarios.length !== 1 ? 's' : ''} · {kbs.join(', ')}</div>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:57:  const progress = Math.round((completedSteps / opsSteps.length) * 100);
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:189:          <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 font-medium" data-testid="text-runbook-progress">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:190:            {completedSteps}/{opsSteps.length} steps · {progress}%
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:219:        <div className="h-full rounded-full bg-blue-500 transition-all duration-500" style={{ width: `${progress}%` }} />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:244:                'border-gray-200 dark:border-gray-700 bg-background'
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:246:                <span className="text-xs font-bold text-muted-foreground w-5">{i + 1}.</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:252:                  <StepIcon size={14} className={`${catColors[step.category] || 'text-muted-foreground'} flex-shrink-0`} />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:256:                  {stepTimestamps[step.id] && <span className="text-[10px] text-muted-foreground ml-2 font-normal">({stepTimestamps[step.id]})</span>}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:265:                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50" data-testid="button-runbook-full-scan">Run All</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:302:                  <div key={i} className="flex items-center gap-3 text-[11px] p-1.5 rounded bg-background" data-testid={`daily-ops-history-${i}`}>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:303:                    <span className="text-muted-foreground font-mono w-20">{new Date(run.timestamp).toLocaleDateString()}</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:307:                    <span className="text-muted-foreground">{run.duration}s</span>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:65:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-branch">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:67:            <div className="text-[9px] text-muted-foreground">Branch</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:69:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-commits">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:71:            <div className="text-[9px] text-muted-foreground">Commits</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:73:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-changes">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:75:            <div className="text-[9px] text-muted-foreground">Changes</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:77:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-modified">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:79:            <div className="text-[9px] text-muted-foreground">Modified</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:81:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-untracked">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:83:            <div className="text-[9px] text-muted-foreground">Untracked</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:85:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-size">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:87:            <div className="text-[9px] text-muted-foreground">Repo Size</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:95:            <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:97:              <div className="text-[11px] font-mono text-muted-foreground break-all">{gitData.checks.lastCommit}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:112:              <div className="text-[11px] text-muted-foreground">{repairResult.message}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:114:                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:70:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-admin-links">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:72:          <div className="text-[9px] text-muted-foreground">Admin Links</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:74:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-prioritized">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:76:          <div className="text-[9px] text-muted-foreground">Classified</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:78:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-critical-count">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:80:          <div className="text-[9px] text-muted-foreground">Critical</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:82:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-high-count">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:84:          <div className="text-[9px] text-muted-foreground">High</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:86:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-medium-count">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:88:          <div className="text-[9px] text-muted-foreground">Medium</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:90:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-ai-scenarios">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:92:          <div className="text-[9px] text-muted-foreground">AI Scenarios</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:94:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-auto-fixable">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:96:          <div className="text-[9px] text-muted-foreground">Auto-Fixable</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:98:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-scan-coverage">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:100:          <div className="text-[9px] text-muted-foreground">Scan Coverage</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:102:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-normal-priority">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:104:          <div className="text-[9px] text-muted-foreground">Unclassified</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:137:                <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`coverage-cat-${i}`}>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:153:          <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:157:                <div className="text-muted-foreground mb-1">Admin Linking</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:164:                <div className="text-muted-foreground mb-1">Severity Classification</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:171:                <div className="text-muted-foreground mb-1">KB Scenarios</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:178:                <div className="text-muted-foreground mb-1">Auto-Fix Capability</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:185:                <div className="text-muted-foreground mb-1">Scan Coverage</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:215:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-pass">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:217:                <div className="text-[9px] text-muted-foreground">Pass</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:219:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fail">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:221:                <div className="text-[9px] text-muted-foreground">Fail</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:223:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-unchecked">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:225:                <div className="text-[9px] text-muted-foreground">Unchecked</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:227:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fix-cmds">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:229:                <div className="text-[9px] text-muted-foreground">Fix Commands</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:268:          <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:325:            <div key={i} className="text-[10px] p-1 rounded bg-background border flex items-center gap-1.5" data-testid={`optimize-result-${i}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:66:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-db">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:70:            <div className="text-[9px] text-muted-foreground">Database ({scanData.integrity?.database?.tableCount || 0} tables)</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:72:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-services">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:76:            <div className="text-[9px] text-muted-foreground">Services Active</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:78:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-env">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:82:            <div className="text-[9px] text-muted-foreground">Critical Env Vars</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:84:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-memory">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:88:            <div className="text-[9px] text-muted-foreground">Heap ({scanData.integrity?.memory?.heapUsedMB || 0}MB)</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:111:                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:118:                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:119:                  {set ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:121:                  <span className={`ml-auto font-semibold ${set ? 'text-green-600' : 'text-muted-foreground'}`}>{set ? 'SET' : 'optional'}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:132:                  <span key={t} className="text-[10px] px-2 py-1 rounded-lg bg-background border border-gray-100 dark:border-gray-800 font-mono" data-testid={`table-${t}`}>{t}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:148:                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:66:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-critical">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:68:          <div className="text-[10px] text-muted-foreground">Critical</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:70:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-high">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:72:          <div className="text-[10px] text-muted-foreground">High</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:74:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-medium">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:76:          <div className="text-[10px] text-muted-foreground">Medium</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:78:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-linked">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:80:          <div className="text-[10px] text-muted-foreground">Admin-Linked</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:82:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-unclassified">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:84:          <div className="text-[10px] text-muted-foreground">Unclassified</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:86:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-total">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:88:          <div className="text-[10px] text-muted-foreground">Total</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:100:                <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:105:                    <span className="text-muted-foreground">{cat.avgMs}ms avg</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:123:                  <div key={t.id} className="flex items-center gap-1.5 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`linked-${t.id}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:124:                    {result?.status === 'healthy' ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : result?.status === 'error' ? <AlertCircle size={10} className="text-red-500 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:142:                  <span key={t.id} className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground" data-testid={`unlinked-${t.id}`}>{t.label}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:157:                    <span className="text-muted-foreground ml-2">→ {ids.join(', ')}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:181:                    <div className="text-[10px] text-muted-foreground">{tierHealthy}/{tierChecked > 0 ? tierChecked : t.tools.length} healthy</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:182:                    <div className="text-[10px] text-muted-foreground">{t.tools.filter(tool => TOOL_ADMIN_LINKS[tool.id]).length} admin-linked</div>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:24:          <span className="text-xs text-muted-foreground">8 critical endpoints</span>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:53:                <RefreshCw size={14} className="animate-spin text-muted-foreground flex-shrink-0" />
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:59:                <Icon size={14} className="text-muted-foreground flex-shrink-0" />
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:63:                <div className="text-[10px] text-muted-foreground truncate">
+client/src/pages/admin/_adminToolsShared.js:12:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/_adminToolsShared.js:19:  "trauma-healing": "/admin/tools", "emotional-resilience": "/admin/tools", "emotional-mastery": "/admin/tools",
+client/src/pages/admin/_adminToolsShared.js:22:  "mind-body": "/admin/tools", "psychological-safety": "/admin/tools",
+client/src/pages/admin/_adminToolsShared.js:42:  "progress": "/admin/engagement", "badges": "/admin/engagement", "favorites": "/admin/engagement",
+client/src/pages/admin/_adminToolsShared.js:82:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/_adminToolsShared.js:89:  "emotional-resilience": "medium", "emotional-mastery": "medium",
+client/src/pages/admin/_adminToolsShared.js:92:  "mind-body": "medium", "psychological-safety": "medium",
+client/src/pages/admin/_adminToolsShared.js:110:  "progress": "medium", "badges": "medium", "favorites": "medium",
+client/src/pages/admin/_adminToolsShared.js:144:  "websocket-disconnect": { suggestion: "WebSocket connection dropped. Codex KB: Check for proxy timeout settings. Replit's infrastructure has WebSocket support but connections may drop after idle periods.", action: "Implement reconnection logic", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:163:  "upstream-504": { suggestion: "Gateway timeout from upstream. Codex KB: Request to external API timed out. May indicate heavy load on the third-party service. Implement circuit breaker pattern.", action: "Implement circuit breaker", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:174:  "db-deadlock": { suggestion: "Database deadlock detected. Codex KB: Two or more transactions are waiting on each other. Review query ordering and use consistent lock acquisition patterns.", action: "Review transaction lock ordering", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:201:  "worker-thread-hang": { suggestion: "Worker thread appears unresponsive. Perplexity KB: Background tasks may be stuck in infinite loops or deadlocked. Check async operation chains for unresolved promises.", action: "Review background task health", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:224:  "scheduled-task-stuck": { suggestion: "Scheduled background task appears stuck. Codex KB: Check for unresolved promises, infinite loops, or resource contention in cron/scheduled tasks.", action: "Review scheduled task logs", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
+client/src/pages/admin/_adminToolsShared.js:225:  "image-processing-fail": { suggestion: "Image processing or upload failed. Canva KB: Check file size limits, supported formats, and object storage connectivity. Verify storage bucket permissions.", action: "Check image pipeline", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:231:  "cookie-policy-violation": { suggestion: "Cookie handling may not comply with privacy regulations. Canva KB: Ensure consent banner is shown, SameSite attributes are set, and secure flag is enabled for all cookies.", action: "Review cookie policy", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:256:  "node-version-check": { suggestion: "Node.js version should be verified for compatibility. Canva KB: Ensure runtime version matches package.json engines field and supports all used language features.", action: "Check Node.js version", knowledgeBase: "Canva", autoFixable: true, fixCommand: "dependency-audit" },
+client/src/pages/admin/_adminToolsShared.js:296:      { id: "reflection", label: "Reflection Tools", endpoint: "/api/reflection", icon: Moon, desc: "Self-reflection engine" },
+client/src/pages/admin/_adminToolsShared.js:325:      { id: "trauma-healing", label: "Trauma Healing", endpoint: "/api/trauma-healing/grounding", icon: HeartHandshake, desc: "Trauma-informed protocols" },
+client/src/pages/admin/_adminToolsShared.js:326:      { id: "emotional-resilience", label: "Emotional Resilience", endpoint: "/api/emotional-resilience", icon: Flame, desc: "Emotional strength" },
+client/src/pages/admin/_adminToolsShared.js:327:      { id: "emotional-mastery", label: "Emotional Mastery", endpoint: "/api/emotional-mastery/daily-eq", icon: Target, desc: "Emotion regulation" },
+client/src/pages/admin/_adminToolsShared.js:332:      { id: "healing-intelligence", label: "Healing Intelligence", endpoint: "/api/healing-intelligence/categories", icon: Sparkles, desc: "AI-guided healing" },
+client/src/pages/admin/_adminToolsShared.js:335:      { id: "psychological-safety", label: "Psychological Safety", endpoint: "/api/psychological-safety/daily", icon: Shield, desc: "Safety frameworks" },
+client/src/pages/admin/_adminToolsShared.js:375:      { id: "relationship-dynamics", label: "Relationship Dynamics", endpoint: "/api/relationship-dynamics", icon: HeartHandshake, desc: "Relationship patterns" },
+client/src/pages/admin/_adminToolsShared.js:408:      { id: "progress", label: "Progress Tracker", endpoint: "/api/progress", icon: TrendingUp, desc: "User progress data" },
+client/src/pages/admin/CommandCenter.jsx:118:            border: '1px solid hsl(var(--border))', background: 'transparent', cursor: 'pointer',
+client/src/pages/admin/CommandCenter.jsx:131:                  <div key={ep.id} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', padding: '0.4rem 0.5rem', borderRadius: '6px', background: 'hsl(var(--muted))' }} data-testid={`quick-check-${ep.id}`}>
+client/src/pages/admin/CommandCenter.jsx:146:              background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))',
+client/src/pages/admin/CommandCenter.jsx:183:            border: '1px solid hsl(var(--border))', background: 'transparent', cursor: 'pointer',
+client/src/pages/admin/CommandCenter.jsx:184:            color: 'hsl(var(--muted-foreground))', opacity: isQuickChecking ? 0.5 : 1
+client/src/pages/admin/CommandCenter.jsx:202:              <div key={ep.id} style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.72rem', padding: '0.3rem 0.5rem', borderRadius: '5px', background: 'hsl(var(--muted))' }} data-testid={`quick-check-${ep.id}`}>
+client/src/pages/admin/CommandCenter.jsx:234:        <div style={{ height: '6px', borderRadius: '3px', background: '#e5e7eb', overflow: 'hidden' }}>
+client/src/pages/admin/CommandCenter.jsx:238:            background: scoreColor
+client/src/pages/admin/CommandCenter.jsx:247:            background: errors > 0 ? 'rgba(239,68,68,0.08)' : 'rgba(245,158,11,0.08)',
+client/src/pages/admin/CommandCenter.jsx:397:            <span className="text-xs uppercase tracking-wider px-2 py-1 rounded" style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}>Live</span>
+client/src/pages/admin/CommandCenter.jsx:399:          <p className="text-sm text-muted-foreground" style={{ marginTop: '-0.25rem' }}>
+client/src/pages/admin/AdminPublishing.jsx:122:          const safetyErrors = parsed.errors || [];
+client/src/pages/admin/AdminPublishing.jsx:123:          const safetyWarnings = parsed.warnings || [];
+client/src/pages/admin/AdminPublishing.jsx:125:          errorObj.safetyErrors = safetyErrors;
+client/src/pages/admin/AdminPublishing.jsx:126:          errorObj.safetyWarnings = safetyWarnings;
+client/src/pages/admin/AdminPublishing.jsx:138:      if (err.safetyErrors?.length) {
+client/src/pages/admin/AdminPublishing.jsx:139:        parts.push("Blocked: " + err.safetyErrors.join("; "));
+client/src/pages/admin/AdminPublishing.jsx:141:      if (err.safetyWarnings?.length) {
+client/src/pages/admin/AdminPublishing.jsx:142:        parts.push("Warnings: " + err.safetyWarnings.join("; "));
+client/src/pages/admin/AdminPublishing.jsx:258:            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Blog posts flow: Draft → Review → Approved → Published. Content safety validation runs before publishing.</p>
+client/src/pages/admin/AdminPublishing.jsx:297:                      <option value="reflection">Reflection</option>
+client/src/pages/admin/AdminPublishing.jsx:456:                  <span>Content safety checks run automatically before publishing. Posts with medical claims, urgency manipulation, or pathologizing language will be blocked. Sensitive topics require crisis resource links.</span>
+client/src/pages/admin/AdminSocial.jsx:47:function safetyCheck(text) {
+client/src/pages/admin/AdminSocial.jsx:446:    safetyNote: post?.safetyNote || "Educational content only. Not therapy or clinical advice.",
+client/src/pages/admin/AdminSocial.jsx:456:  const [safetyResult, setSafetyResult] = useState(null);
+client/src/pages/admin/AdminSocial.jsx:466:    setSafetyResult(safetyCheck(allText));
+client/src/pages/admin/AdminSocial.jsx:502:    const check = safetyCheck(allText);
+client/src/pages/admin/AdminSocial.jsx:505:    if (!form.safetyNote || !form.safetyNote.trim()) {
+client/src/pages/admin/AdminSocial.jsx:580:            {["self-compassion", "boundaries", "healing", "gratitude", "mindfulness", "inner-child", "self-worth", "resilience", "emotional-intelligence", "growth"].map(t => (
+client/src/pages/admin/AdminSocial.jsx:668:          <textarea value={form.safetyNote} onChange={e => updateField("safetyNote", e.target.value)} rows={2} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white resize-y" data-testid="textarea-safety" />
+client/src/pages/admin/AdminSocial.jsx:674:            <button onClick={runSafetyCheck} className="text-[10px] px-2 py-1 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1" data-testid="button-safety-check">
+client/src/pages/admin/AdminSocial.jsx:678:          {safetyResult && (
+client/src/pages/admin/AdminSocial.jsx:679:            <div className={`mt-1 p-2 rounded text-xs ${safetyResult.pass ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400" : "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400"}`} data-testid="text-safety-result">
+client/src/pages/admin/AdminSocial.jsx:680:              {safetyResult.pass ? (
+client/src/pages/admin/AdminSocial.jsx:681:                <span className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Content passes safety checks</span>
+client/src/pages/admin/AdminSocial.jsx:685:                  <ul className="mt-1 ml-4 list-disc">{safetyResult.issues.map((i, idx) => <li key={idx}>{i}</li>)}</ul>
+client/src/pages/admin/AdminTools.jsx:315:    <div className="min-h-screen bg-background">
+client/src/pages/admin/AdminTools.jsx:331:                <p className="text-muted-foreground text-sm">AI-powered health monitor with Codex, Perplexity & Canva knowledge base</p>
+client/src/pages/admin/AdminTools.jsx:340:                  <span className="text-muted-foreground">/ {totalTools}</span>
+client/src/pages/admin/AdminTools.jsx:346:                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
+client/src/pages/admin/AdminTools.jsx:403:            <div className="h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden" data-testid="progress-bar-tools">
+client/src/pages/admin/AdminTools.jsx:406:                background: errorCount > 0 ? '#ef4444' : warningCount > 0 ? '#eab308' : '#22c55e'
+client/src/pages/admin/AdminTools.jsx:423:                    <div className="text-xs text-muted-foreground">Last check: {lastFullCheck}</div>
+client/src/pages/admin/AdminTools.jsx:433:                  <div className="text-xs text-muted-foreground">Healthy</div>
+client/src/pages/admin/AdminTools.jsx:437:                  <div className="text-xs text-muted-foreground">Warnings</div>
+client/src/pages/admin/AdminTools.jsx:441:                  <div className="text-xs text-muted-foreground">Errors</div>
+client/src/pages/admin/AdminTools.jsx:445:                  <div className="text-xs text-muted-foreground">Auth-Gated</div>
+client/src/pages/admin/AdminTools.jsx:449:                  <div className="text-xs text-muted-foreground">Avg Response</div>
+client/src/pages/admin/AdminTools.jsx:453:                  <div className="text-xs text-muted-foreground">Slowest</div>
+client/src/pages/admin/AdminTools.jsx:457:                  <div className="text-xs text-muted-foreground">Total Tools</div>
+client/src/pages/admin/AdminTools.jsx:466:            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+client/src/pages/admin/AdminTools.jsx:472:                className="px-2 py-1 rounded border border-gray-200 dark:border-gray-700 bg-background text-xs"
+client/src/pages/admin/AdminTools.jsx:482:            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+client/src/pages/admin/AdminTools.jsx:488:                className="px-2 py-1 rounded border border-gray-200 dark:border-gray-700 bg-background text-xs"
+client/src/pages/admin/AdminTools.jsx:530:              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs text-muted-foreground hover:bg-muted transition-colors"
+client/src/pages/admin/AdminTools.jsx:540:            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+client/src/pages/admin/AdminTools.jsx:546:              className="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+client/src/pages/admin/AdminTools.jsx:553:            <span className="flex items-center gap-1.5 text-xs text-muted-foreground" data-testid="text-last-check">
+client/src/pages/admin/AdminTools.jsx:581:                  className="w-full flex items-center justify-between text-left py-2 px-0 bg-transparent border-none cursor-pointer text-sm font-semibold uppercase tracking-wide text-foreground/70 hover:text-foreground transition-colors"
+client/src/pages/admin/AdminTools.jsx:622:                            <div className="text-xs text-muted-foreground truncate flex items-center gap-1">
+client/src/pages/admin/AdminTools.jsx:624:                              {!adminLink && <span className="text-[9px] px-1 py-0 rounded bg-muted text-muted-foreground">API</span>}
+client/src/pages/admin/AdminTools.jsx:637:                                <span className={`text-[10px] ${result.ms > 2000 ? 'text-red-500 font-medium' : result.ms > 500 ? 'text-amber-500' : 'text-muted-foreground'}`}>
+client/src/pages/admin/AdminTools.jsx:644:                                <ExternalLink size={12} className="text-muted-foreground" />
+client/src/pages/admin/HealthDashboard.jsx:121:  // Self-heal: triggers heal-self.mjs (probe → safe-only repair → re-probe).
+client/src/pages/admin/HealthDashboard.jsx:204:  // attached via the same Bearer-token pattern apiRequest uses.
+client/src/pages/admin/HealthDashboard.jsx:427:                aria-label="Run autonomous self-heal (probe + safe-only repair + re-probe)"
+client/src/pages/admin/HealthDashboard.jsx:428:                title="Probe + safe-only repair + re-probe (autonomous, never destructive)"
+client/src/pages/admin/HealthDashboard.jsx:450:                title="Downloads a portable JSON snapshot for offline analysis and support handoff"
+client/src/pages/admin/HealthDashboard.jsx:460:              nothing is firing, shows a calm "All clear" state. */}
+client/src/pages/admin/HealthDashboard.jsx:729:                      {(latest.safetyFiltered || dx.safety_filtered) && (
+client/src/pages/admin/HealthDashboard.jsx:733:                          data-testid="ai-safety-filtered-pill"
+client/src/pages/admin/HealthDashboard.jsx:766:                                  s.risk_level === "safe" ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-300"
+client/src/pages/admin/NarrativeOpsConsole.jsx:35:  "inner-child", "self-worth", "resilience", "emotional-intelligence", "growth",
+client/src/pages/admin/NarrativeOpsConsole.jsx:39:const ORIGIN_TYPES = ["standalone", "blog", "newsletter", "reflection", "campaign"];
+client/src/pages/admin/NarrativeOpsConsole.jsx:127:    originType: "standalone", safetyNote: "", crisisLinkRequired: false,
+client/src/pages/admin/NarrativeOpsConsole.jsx:234:          errObj.safetyErrors = parsed.errors || [];
+client/src/pages/admin/NarrativeOpsConsole.jsx:235:          errObj.safetyWarnings = parsed.warnings || [];
+client/src/pages/admin/NarrativeOpsConsole.jsx:252:      if (err.safetyErrors?.length) parts.push("Blocked: " + err.safetyErrors.join("; "));
+client/src/pages/admin/NarrativeOpsConsole.jsx:253:      if (err.safetyWarnings?.length) parts.push("Warnings: " + err.safetyWarnings.join("; "));
+client/src/pages/admin/NarrativeOpsConsole.jsx:328:      safetyNote: post.safetyNote || "",
+client/src/pages/admin/NarrativeOpsConsole.jsx:849:              value={form.safetyNote}
+client/src/pages/admin/NarrativeOpsConsole.jsx:850:              onChange={(e) => setForm(f => ({ ...f, safetyNote: e.target.value }))}
+client/src/pages/admin/NarrativeOpsConsole.jsx:854:              data-testid="input-safety-note"
+client/src/pages/admin/NarrativeOpsConsole.jsx:973:              <p className="text-sm text-slate-700 dark:text-slate-300">{post.safetyNote || "—"}</p>
+client/src/pages/admin/NewsletterAdmin.jsx:209:            <div className="bg-amber-100/50 dark:bg-gray-700/50 rounded-xl p-4 border border-amber-200 dark:border-gray-600" data-testid="section-safety-note">
+client/src/pages/admin/SocialAnalytics.jsx:25:          style={{ backgroundColor: `var(--glp-${color}-10, rgba(107, 142, 35, 0.1))` }}
+client/src/pages/admin/SocialAnalytics.jsx:51:        style={{ backgroundColor: `${config.color}15` }}
+client/src/pages/admin/SocialAnalytics.jsx:174:    if (content.includes("ground") || content.includes("breath")) acc["Grounding"] = (acc["Grounding"] || 0) + 1;
+client/src/pages/admin/SocialAnalytics.jsx:176:    if (content.includes("nervous") || content.includes("calm")) acc["Nervous System"] = (acc["Nervous System"] || 0) + 1;
+client/src/pages/admin/SocialCalendar.jsx:293:                      style={{ backgroundColor: `${platform.color}20` }}
+client/src/pages/admin/SocialDashboard.jsx:69:            style={{ backgroundColor: `${platform.color}20` }}
+client/src/pages/admin/SocialDashboard.jsx:226:                style={{ backgroundColor: `${platform.color}15` }}
+client/src/pages/admin/SocialDashboard.jsx:302:    <div className="min-h-screen safe-padding hero-gradient">
+client/src/pages/admin/SocialDashboard.jsx:303:      <SEO title="Social Dashboard — The Genuine Love Project" description="Explore social dashboard tools for your wellness journey." />
+client/src/pages/admin/SocialDashboard.jsx:306:        <p className="text-muted-foreground mb-8">
+client/src/pages/admin/SocialDashboard.jsx:368:                      style={{ backgroundColor: `${platformInfo?.color || '#666'}20` }}
+client/src/pages/admin/SocialDashboard.jsx:742:                          style={{ backgroundColor: `${platform.color}15` }}
+client/src/pages/admin/SocialGenerator.jsx:42:  { id: "reflective", name: "Reflective", description: "Thoughtful, introspective" },
+client/src/pages/admin/SocialGenerator.jsx:52:  "This content is for educational purposes only and not a substitute for professional mental health support.",
+client/src/pages/admin/SocialGenerator.jsx:54:  "Everyone's healing journey is unique. Take what resonates and leave the rest.",
+client/src/pages/admin/SocialGenerator.jsx:598:                  Generate a calming, brand-aligned visual for your post
+client/src/pages/admin/SocialGenerator.jsx:611:                    {["engagement", "accessibility", "emotional"].map(type => (
+client/src/pages/admin/AdminPublishingToday.jsx:135:        <span className="ml-3 text-muted-foreground">Loading publishing dashboard...</span>
+client/src/pages/admin/AdminPublishingToday.jsx:153:          <h1 className="text-2xl font-semibold text-foreground" data-testid="heading-todays-pick">
+client/src/pages/admin/AdminPublishingToday.jsx:156:          <p className="text-sm text-muted-foreground mt-1" data-testid="text-summary">
+client/src/pages/admin/AdminPublishingToday.jsx:169:            <p className="text-xs text-muted-foreground">Total Drafts</p>
+client/src/pages/admin/AdminPublishingToday.jsx:175:            <p className="text-xs text-muted-foreground">Ready</p>
+client/src/pages/admin/AdminPublishingToday.jsx:181:            <p className="text-xs text-muted-foreground">Posted</p>
+client/src/pages/admin/AdminPublishingToday.jsx:187:            <p className="text-xs text-muted-foreground">Featured</p>
+client/src/pages/admin/AdminPublishingToday.jsx:204:            <p className="text-sm text-muted-foreground mb-4" data-testid="text-featured-meta">
+client/src/pages/admin/AdminPublishingToday.jsx:249:            <CardContent className="py-12 text-center text-muted-foreground">
+client/src/pages/admin/AdminPublishingToday.jsx:309:                <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid={`toggle-captions-${draft.id}`}>
+client/src/pages/admin/AdminPublishingToday.jsx:319:                      <p className="text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed">
+client/src/pages/admin/AdminUsers.jsx:36:      <div className="min-h-screen bg-background flex items-center justify-center" data-testid="loading-state">
+client/src/pages/admin/AdminUsers.jsx:39:          <p className="text-muted-foreground text-sm">Loading user data...</p>
+client/src/pages/admin/AdminUsers.jsx:71:    <div className="min-h-screen bg-background">
+client/src/pages/admin/AdminUsers.jsx:86:                <p className="text-muted-foreground">User management and admin access overview</p>
+client/src/pages/admin/AdminUsers.jsx:107:                  <span className="text-xs text-muted-foreground uppercase tracking-wide">{metric.label}</span>
+client/src/pages/admin/AdminUsers.jsx:110:                <p className="text-xs text-muted-foreground/70 mt-1">{metric.desc}</p>
+client/src/pages/admin/AdminUsers.jsx:127:                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+client/src/pages/admin/AdminUsers.jsx:133:                    className="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+client/src/pages/admin/AdminUsers.jsx:139:              <div className="p-4 rounded-lg bg-muted/50 text-sm text-muted-foreground" data-testid="panel-access-info">
+client/src/pages/admin/AdminUsers.jsx:153:                    <span className="text-xs text-muted-foreground" data-testid="text-no-links-match">No links match "{searchTerm}"</span>
+client/src/pages/admin/AdminUsers.jsx:164:                  <p className="text-xs text-muted-foreground">
+client/src/pages/admin/AdminUsers.jsx:173:                  <p className="text-xs text-muted-foreground">
+client/src/pages/admin/AnalyticsDashboard.jsx:22:        <span className="ml-3 text-muted-foreground">Loading analytics...</span>
+client/src/pages/admin/AuditLogExplorer.jsx:83:          <p className="text-muted-foreground">View and export system audit logs</p>
+client/src/pages/admin/AuditLogExplorer.jsx:189:                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+client/src/pages/admin/AuditLogExplorer.jsx:220:        <p className="text-sm text-muted-foreground">
+client/src/pages/admin/BillingViewer.jsx:107:        <p className="text-muted-foreground">Read-only view of subscription data</p>
+client/src/pages/admin/BillingViewer.jsx:115:            <Users className="h-4 w-4 text-muted-foreground" />
+client/src/pages/admin/BillingViewer.jsx:139:            <CreditCard className="h-4 w-4 text-muted-foreground" />
+client/src/pages/admin/BillingViewer.jsx:151:            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+client/src/pages/admin/BillingViewer.jsx:175:            <p className="text-center text-muted-foreground py-8" data-testid="text-empty-subscriptions">
+client/src/pages/admin/ContentStudioAdmin.jsx:51:        try { localStorage.setItem("glp_admin_content", JSON.stringify(DEFAULT_CONTENT)); } catch (err) { console.warn("[storage-safe-write]", err); }
+client/src/pages/admin/ContentStudioAdmin.jsx:91:        try { localStorage.setItem("glp_admin_content", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
+client/src/pages/admin/ContentStudioAdmin.jsx:125:    <div className="min-h-screen bg-background" data-testid="page-content-studio">
+client/src/pages/admin/ContentStudioAdmin.jsx:142:              <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-page-title">
+client/src/pages/admin/ContentStudioAdmin.jsx:145:              <p className="text-muted-foreground" data-testid="text-subtitle">
+client/src/pages/admin/ContentStudioAdmin.jsx:150:              <div className="flex items-center gap-2 text-xs text-muted-foreground" data-testid="text-server-status">
+client/src/pages/admin/ContentStudioAdmin.jsx:161:              <div className="text-2xl font-bold text-foreground">{contentList.length}</div>
+client/src/pages/admin/ContentStudioAdmin.jsx:162:              <div className="text-sm text-muted-foreground">Total Content</div>
+client/src/pages/admin/ContentStudioAdmin.jsx:170:              <div className="text-sm text-muted-foreground">Needs Tiers</div>
+client/src/pages/admin/ContentStudioAdmin.jsx:178:              <div className="text-sm text-muted-foreground">Complete</div>
+client/src/pages/admin/ContentStudioAdmin.jsx:190:                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+client/src/pages/admin/ContentStudioAdmin.jsx:202:                  <p className="text-sm text-muted-foreground text-center py-8" data-testid="text-no-results">No content matches "{searchTerm}"</p>
+client/src/pages/admin/ContentStudioAdmin.jsx:217:                        <FileText className="w-4 h-4 text-muted-foreground" />
+client/src/pages/admin/ContentStudioAdmin.jsx:275:                <div className="text-center py-12 text-muted-foreground" data-testid="text-select-content">
+client/src/pages/admin/EngagementDashboard.jsx:47:    { name: "Reflection Tools", endpoint: "/api/reflection", percentage: 32 },
+client/src/pages/admin/EngagementDashboard.jsx:63:      <div className="min-h-screen bg-background flex items-center justify-center">
+client/src/pages/admin/EngagementDashboard.jsx:74:    <div className="min-h-screen bg-background">
+client/src/pages/admin/EngagementDashboard.jsx:89:                <p className="text-muted-foreground">Platform metrics and feature usage overview</p>
+client/src/pages/admin/EngagementDashboard.jsx:112:                <p className="text-sm text-muted-foreground">{metric.label}</p>
+client/src/pages/admin/EngagementDashboard.jsx:113:                <p className="text-xs text-muted-foreground/70 mt-1">{metric.desc}</p>
+client/src/pages/admin/EngagementDashboard.jsx:130:                      <span className="text-muted-foreground text-xs">{feature.percentage}%</span>
+client/src/pages/admin/EngagementDashboard.jsx:153:                    <p className="text-xs text-muted-foreground">{stat.label}</p>
+client/src/pages/admin/EngagementDashboard.jsx:159:                  <p className="text-xs font-medium text-muted-foreground mb-2">Service Integrations</p>
+client/src/pages/admin/EngagementDashboard.jsx:169:                        <span className={svc.active ? 'text-foreground' : 'text-muted-foreground'}>{svc.name}</span>
+===== diagnostics/phase81/page-route-button-coherence-audit.txt =====
+===== ROUTE DEFINITIONS =====
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:126:                    <Link href={TOOL_ADMIN_LINKS[t.id]} className="ml-auto" data-testid={`scanner-link-${t.id}`}>
+client/src/pages/admin/_adminToolsShared.js:124:  "404": { suggestion: "Endpoint not found. Route may not be mounted or the path may be incorrect. Codex KB: Verify mountIfExists() call in server/app.mjs and check the route file exports a valid Express router.", action: "Check server/app.mjs for route mount", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:137:  "route-missing": { suggestion: "Route file exists but is not mounted. Codex KB: Add mountIfExists() call in server/app.mjs for the route path. Verify the file exports a default Express router.", action: "Mount route in server/app.mjs", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:208:  "route-health-degraded": { suggestion: "One or more API routes returning unexpected status codes. Codex KB: Verify all route files export valid Express routers and are mounted in server/app.mjs.", action: "Audit route health", knowledgeBase: "Codex", autoFixable: true, fixCommand: "check-routes" },
+client/src/pages/admin/CommandCenter.jsx:143:            <Link href="/admin/tools" style={{
+client/src/pages/admin/CommandCenter.jsx:189:          <Link href="/admin/tools" style={{
+client/src/pages/admin/CommandCenter.jsx:244:          <Link href="/admin/tools" style={{
+client/src/pages/admin/SocialLibrary.jsx:77:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SocialLibrary.jsx:83:            <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
+client/src/pages/admin/AdminPublishing.jsx:206:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/AdminPublishing.jsx:684:                {(signals.byRoute || []).length > 0 && (
+client/src/pages/admin/AdminPublishing.jsx:686:                    <h3 className="font-medium mb-2">Top Routes</h3>
+client/src/pages/admin/AdminPublishing.jsx:688:                      {(signals.byRoute || []).map(r => (
+client/src/pages/admin/AdminSocial.jsx:170:              <Link href="/admin" className="hover:text-indigo-500 transition-colors" data-testid="link-admin-home">Admin</Link>
+client/src/pages/admin/AdminTools.jsx:319:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/AdminTools.jsx:643:                              <Link href={adminLink} className="p-1 rounded hover:bg-muted transition-colors" title={`Open ${tool.label} admin page`} data-testid={`link-admin-${tool.id}`}>
+client/src/pages/admin/HealthDashboard.jsx:270:            <Link href="/admin" className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition" data-testid="link-admin-back" aria-label="Back to admin">
+client/src/pages/admin/HealthDashboard.jsx:376:            <Link href="/admin/security" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-security">
+client/src/pages/admin/HealthDashboard.jsx:380:            <Link href="/admin/audit-log" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-logs">
+client/src/pages/admin/HealthDashboard.jsx:384:            <Link href="/admin/social" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-social">
+client/src/pages/admin/HealthDashboard.jsx:388:            <Link href="/admin" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-command">
+client/src/pages/admin/NarrativeOpsConsole.jsx:381:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/NarrativeOpsConsole.jsx:386:          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
+client/src/pages/admin/NarrativeOpsConsole.jsx:979:              <a href={post.canvaUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline flex items-center gap-1">
+client/src/pages/admin/NewsletterAdmin.jsx:38:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/NewsletterAdmin.jsx:42:        <Link href="/admin/social-studio" className="inline-flex items-center gap-2 text-amber-700 dark:text-amber-300 hover:underline mb-6" data-testid="link-back-studio">
+client/src/pages/admin/NewsletterAdmin.jsx:141:                          <Link href="/admin/social-studio" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs bg-amber-100 dark:bg-gray-600 text-amber-800 dark:text-amber-200 hover:bg-amber-200 dark:hover:bg-gray-500 transition-colors" data-testid={`button-view-draft-${draft.id}`}>
+client/src/pages/admin/SocialAnalytics.jsx:203:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SocialAnalytics.jsx:208:          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
+client/src/pages/admin/SocialCalendar.jsx:128:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SocialCalendar.jsx:133:          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
+client/src/pages/admin/SocialDashboard.jsx:192:          href="https://docs.replit.com/hosting/secrets" 
+client/src/pages/admin/SocialDashboard.jsx:214:              href={platform.url || '#'}
+client/src/pages/admin/SocialDashboard.jsx:512:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SocialDashboard.jsx:524:            <Link href="/admin/social/ops" className="inline-flex items-center gap-1 text-xs mt-1 px-2 py-1 rounded bg-slate-800 dark:bg-slate-200 text-white dark:text-gray-900 hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors" data-testid="link-narrative-ops">
+client/src/pages/admin/SocialDashboard.jsx:539:              href="/admin/social/generate"
+client/src/pages/admin/SocialDashboard.jsx:547:              href="/admin/social/library"
+client/src/pages/admin/SocialDashboard.jsx:555:              href="/admin/social/calendar"
+client/src/pages/admin/SocialDashboard.jsx:563:              href="/admin/social/analytics"
+client/src/pages/admin/SocialDashboard.jsx:663:              href="/admin/social/generate"
+client/src/pages/admin/SocialGenerator.jsx:85:      navigate("/admin/social");
+client/src/pages/admin/SocialGenerator.jsx:198:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SocialGenerator.jsx:203:          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
+client/src/pages/admin/AdminPublishingToday.jsx:147:      <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/AdminUsers.jsx:75:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/AdminUsers.jsx:146:                      href={link.href}
+client/src/pages/admin/AnalyticsDashboard.jsx:35:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/AuditLogExplorer.jsx:77:      <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/BillingViewer.jsx:102:      <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/ContentStudioAdmin.jsx:132:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/EngagementDashboard.jsx:54:    { label: "API Routes", value: health?.platform?.totalRoutes || 123 },
+client/src/pages/admin/EngagementDashboard.jsx:78:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/FeatureFlags.jsx:171:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/FeedbackAggregator.jsx:87:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/NarrativeDrafts.jsx:132:            <Link href="/admin" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-white font-medium transition-all hover:-translate-y-0.5 no-underline" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }} data-testid="link-admin-gate">
+client/src/pages/admin/NarrativeDrafts.jsx:135:            <Link href="/" className="text-sm font-medium no-underline" style={{ color: 'var(--glp-sage)' }} data-testid="link-home-gate">
+client/src/pages/admin/NarrativeDrafts.jsx:152:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/RevenueAdmin.jsx:75:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/RevenueAdmin.jsx:176:          <Link href="/admin/billing" className="text-xs text-primary hover:underline" data-testid="link-billing-details">
+client/src/pages/admin/RolesPermissions.jsx:74:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/RolesPermissions.jsx:187:                <Link href="/admin/users" className="text-xs text-blue-700 dark:text-blue-300 hover:underline" data-testid="link-admin-users">
+client/src/pages/admin/RolesPermissions.jsx:191:                <Link href="/admin/audit-log" className="text-xs text-blue-700 dark:text-blue-300 hover:underline" data-testid="link-audit-log">
+client/src/pages/admin/SecurityDashboard.jsx:73:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SocialStudioAdmin.jsx:335:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SocialStudioAdmin.jsx:353:              <a href="/admin/newsletter" className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-input bg-background text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors" data-testid="link-newsletter-admin">
+client/src/pages/admin/SystemAlerts.jsx:117:        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+client/src/pages/admin/SystemAlerts.jsx:227:          <Link href="/admin/security" className="text-primary hover:underline" data-testid="link-security-dashboard">
+client/src/pages/account/Billing.jsx:167:            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+client/src/pages/account/DeleteAccount.jsx:69:                    Visit our <a href="/crisis" className="underline font-medium">crisis resources</a> page 
+client/src/pages/account/DeleteAccount.jsx:122:                  href="/support" 
+client/src/pages/account/OrderHistory.jsx:106:                        <a href={order.invoicePdf} target="_blank" rel="noopener noreferrer">
+client/src/pages/account/OrderHistory.jsx:112:                        <a href={order.hostedUrl} target="_blank" rel="noopener noreferrer">
+client/src/pages/account/Profile.jsx:87:            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+client/src/pages/account/Security.jsx:186:          <Link href="/settings">
+client/src/pages/account/Security.jsx:480:              <Link href="/account/sessions">
+client/src/pages/account/Settings.jsx:103:            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+client/src/pages/account/Settings.jsx:233:                  <Link href="/account/security">
+client/src/pages/account/Settings.jsx:245:                  <Link href="/preferences/safety">
+client/src/pages/account/Settings.jsx:262:              <Link href="/account/delete">
+client/src/pages/account/Subscription.jsx:149:                <Link href="/pricing" className="flex-1">
+client/src/pages/account/Subscription.jsx:188:            <Link href="/help/billing">
+client/src/pages/dashboard/ProgressDashboard.jsx:23:  const lastRouteKey = wins[0]?.routeKey || "hubs__anxiety";
+client/src/pages/dashboard/ProgressDashboard.jsx:24:  const recs = getRecommendations(lastRouteKey, 6).map((r) => ({
+client/src/pages/dashboard/Overview.jsx:135:    <Link href={action.href} className={styles.quickActionButton} data-testid={`quick-action-${action.label.toLowerCase().replace(/\s+/g, '-')}`}>
+client/src/pages/dashboard/Overview.jsx:338:            <Link href="/analytics" className={styles.viewAllLink} data-testid="link-view-activity">
+client/src/pages/dashboard/Overview.jsx:415:                href="/account/subscription"
+client/src/pages/dashboard/Insights.tsx:83:            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+client/src/pages/dashboard/Journal.jsx:237:            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+client/src/pages/dashboard/MoodTracker.jsx:122:            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+client/src/pages/help/RefundHelp.jsx:43:        <Link href="/help">
+client/src/pages/help/RefundHelp.jsx:105:              <a href="mailto:support@genuinelove.app">
+client/src/pages/help/RefundHelp.jsx:111:              <Link href="/contact">
+client/src/pages/hubs/AcceptanceHubPage.jsx:73:                href={resource.href}
+client/src/pages/hubs/AnxietyHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/BodyMindHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/BoundariesHubPage.jsx:65:                href={resource.href}
+client/src/pages/hubs/BreathworkHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/CommunicationHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/ConfidenceHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/CopingSkillsHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/CreativityHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/DailyPracticeHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/EmotionalIntelligenceHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/EnergyManagementHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/FocusHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/ForgivenessHubPage.jsx:73:                href={resource.href}
+client/src/pages/hubs/GratitudeHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/GriefHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/HabitsHubPage.jsx:72:                href={resource.href}
+client/src/pages/hubs/HealingJourneyHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/InnerPeaceHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/InnerWorkHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/JournalingHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/LifePurposeHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/MindfulnessHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/MotivationHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/NervousSystemHubPage.jsx:73:                href={resource.href}
+client/src/pages/hubs/PersonalGrowthHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/PresenceHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/RelationshipsHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/ResilienceHubPage.jsx:65:                href={resource.href}
+client/src/pages/hubs/SelfAwarenessHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/SelfCareHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/SelfCompassionHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/SelfDiscoveryHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/SelfWorthHubPage.jsx:65:                href={resource.href}
+client/src/pages/hubs/SleepHubPage.jsx:65:                href={resource.href}
+client/src/pages/hubs/SpiritualityHubPage.jsx:73:                href={resource.href}
+client/src/pages/hubs/StressHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/ThoughtworkHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/TraumaHealingHubPage.jsx:64:            <Link href="/crisis" className="underline ml-1">Crisis resources are always available.</Link>
+client/src/pages/hubs/TraumaHealingHubPage.jsx:74:                href={resource.href}
+client/src/pages/hubs/WisdomHubPage.jsx:66:                href={resource.href}
+client/src/pages/hubs/HubsIndexPage.jsx:353:              onClick={() => navigate(hub.href)}
+client/src/pages/hubs/HubsIndexPage.jsx:354:              onKeyDown={(e) => e.key === 'Enter' && navigate(hub.href)}
+client/src/pages/library/SavedLibrary.jsx:3:import { getRouteMeta, resolveRoutePath } from "../../content/meta/routeMetaRegistry";
+client/src/pages/library/SavedLibrary.jsx:18:      const m = getRouteMeta(rk);
+client/src/pages/library/SavedLibrary.jsx:19:      return { routeKey: rk, title: m.title, description: m.description, href: resolveRoutePath(rk) };
+client/src/pages/library/SavedLibrary.jsx:47:              <Link key={it.routeKey} href={it.href} className="block" data-testid={`link-saved-${it.routeKey}`}>
+client/src/pages/pathways/Favorites.jsx:132:            <Link href="/tools">
+client/src/pages/pathways/Favorites.jsx:162:                    <Link href={favorite.path}>
+client/src/pages/pathways/PathwaysHome.jsx:128:                  <Link href={`/pathways/${pathway.id}`}>
+client/src/pages/pathways/PathwaysHome.jsx:150:          <Link href="/pathways/onboarding">
+client/src/pages/pathways/ProgressStreaks.jsx:193:          <Link href="/tools">
+client/src/pages/pathways/ReflectionHistory.jsx:115:      navigate("/journal");
+client/src/pages/pathways/ReflectionHistory.jsx:117:      navigate("/mood");
+client/src/pages/pathways/ReflectionHistory.jsx:119:      navigate("/hubs/gratitude");
+client/src/pages/pathways/ReflectionHistory.jsx:121:      navigate("/reflect");
+client/src/pages/pathways/ReflectionHistory.jsx:211:              <Link href="/journal">
+client/src/pages/tools/PHQ9Assessment.jsx:64:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/PHQ9Assessment.jsx:67:          <Link href="/crisis" className="inline-flex items-center gap-1 text-sm font-medium text-rose-700 dark:text-rose-300 hover:underline" data-testid="link-crisis-header">
+client/src/pages/tools/PHQ9Assessment.jsx:101:              href="/crisis"
+client/src/pages/tools/BreathPacer.jsx:100:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/BreathPacer.jsx:103:          <Link href="/crisis" className="inline-flex items-center gap-1 text-sm font-medium text-rose-700 dark:text-rose-300 hover:underline" data-testid="link-crisis-header">
+client/src/pages/tools/GAD7Assessment.jsx:55:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/GAD7Assessment.jsx:58:          <Link href="/crisis" className="inline-flex items-center gap-1 text-sm font-medium text-rose-700 dark:text-rose-300 hover:underline" data-testid="link-crisis-header">
+client/src/pages/tools/GAD7Assessment.jsx:154:                  href="/crisis"
+client/src/pages/tools/BreathingTool.jsx:184:          <Link href="/dashboard" className="text-emerald-800 hover:underline" data-testid="link-back-dashboard">
+client/src/pages/tools/BreathingTool.jsx:188:          <Link href="/tools" className="text-gray-600 hover:underline" data-testid="link-back-tools">All tools</Link>
+client/src/pages/tools/BreathingTool.jsx:190:            href="/crisis"
+client/src/pages/tools/BreathingTool.jsx:399:                  href="/checkin"
+client/src/pages/tools/BreathingTool.jsx:407:                  href="/celebration"
+client/src/pages/tools/BreathingTool.jsx:432:            <Link href="/crisis" className="font-semibold text-rose-700 underline">our crisis page</Link>{" "}
+client/src/pages/tools/ToolDirectoryPage.jsx:53:              href={tool.route}
+client/src/pages/tools/BoundaryBuilderTool.jsx:87:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/BoundaryBuilderTool.jsx:90:          <Link href="/crisis" className="inline-flex items-center gap-1 text-sm font-medium text-rose-700 dark:text-rose-300 hover:underline" data-testid="link-crisis-header">
+client/src/pages/tools/CognitiveDistortionChecker.jsx:85:          <Link href="/wellness-tools-hub" className="inline-flex items-center gap-1 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-back-tools">
+client/src/pages/tools/CognitiveDistortionChecker.jsx:88:          <Link href="/crisis" className="inline-flex items-center gap-1 text-sm font-medium text-rose-700 dark:text-rose-300 hover:underline" data-testid="link-crisis-header">
+client/src/pages/tools/ManipulationDetector.jsx:142:            href="/wellness-tools-hub"
+client/src/pages/tools/ManipulationDetector.jsx:149:            href="/crisis"
+client/src/pages/tools/ManipulationDetector.jsx:256:          <Link href="/crisis" className="underline" data-testid="link-crisis-inline">
+client/src/pages/tools/NervousSystemCheck.jsx:158:            href="/wellness-tools-hub"
+client/src/pages/tools/NervousSystemCheck.jsx:165:            href="/crisis"
+client/src/pages/tools/NervousSystemCheck.jsx:264:                href="/tools/breath-pacer"
+client/src/pages/tools/NervousSystemCheck.jsx:286:          <Link href="/crisis" className="underline" data-testid="link-crisis-inline">
+client/src/pages/tools/SleepQualityCalculator.jsx:147:            href="/wellness-tools-hub"
+client/src/pages/tools/SleepQualityCalculator.jsx:154:            href="/crisis"
+client/src/pages/tools/SleepQualityCalculator.jsx:270:          <Link href="/crisis" className="underline" data-testid="link-crisis-inline">
+client/src/pages/tools/AweMicrodose.jsx:64:        <Link href="/tools">
+client/src/pages/tools/BodyScan.jsx:89:        <Link href="/tools">
+client/src/pages/tools/BreathTool.jsx:170:        <Link href="/tools" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6" data-testid="link-back-tools">
+client/src/pages/tools/BreathTool.jsx:384:                <Link href="/tools" data-testid="link-back-tools-complete">
+client/src/pages/tools/CommunityCheckin.jsx:91:        <Link href="/tools">
+client/src/pages/tools/CompassionBreak.jsx:65:        <Link href="/tools">
+client/src/pages/tools/DigitalSunset.jsx:48:        <Link href="/tools">
+client/src/pages/tools/EmotionWheel.jsx:225:                <Link href="/journal">
+client/src/pages/tools/GriefLetter.jsx:80:        <Link href="/tools">
+client/src/pages/tools/MeaningMap.jsx:111:        <Link href="/tools">
+client/src/pages/tools/Reframe.jsx:57:        <Link href="/tools">
+client/src/pages/tools/RepairScript.jsx:59:        <Link href="/tools">
+client/src/pages/tools/UrgeSurf.jsx:67:        <Link href="/tools">
+client/src/pages/tools/index.jsx:15:      href={tool.href}
+client/src/pages/tools/index.jsx:53:            href="/"
+client/src/pages/tools/index.jsx:60:            href="/crisis"
+client/src/pages/tools/index.jsx:101:                <Link href="/crisis" className="underline" data-testid="link-crisis-inline">
+client/src/pages/_quarantine/legacy-landing/Home.jsx:175:          <Link href="/" className="flex items-center gap-4 min-w-0">
+client/src/pages/_quarantine/legacy-landing/Home.jsx:215:              href="/pricing" 
+client/src/pages/_quarantine/legacy-landing/Home.jsx:223:              href="/login" 
+client/src/pages/_quarantine/legacy-landing/Home.jsx:575:              href="/login"
+client/src/pages/_quarantine/legacy-landing/Home.jsx:599:            <a href="/crisis" className="text-[var(--glp-sage)] hover:underline">
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx:479:            href="/login"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:63:          <Link href="/blog" className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-nav-blog">Blog</Link>
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:64:          <Link href="/login" className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100" data-testid="link-nav-login">Sign in</Link>
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:66:            href="/register"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:73:            href="/crisis"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:98:            href="/register"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:105:            href="/wellness-tools-hub"
+client/src/pages/_quarantine/legacy-landing/LandingV2.jsx:124:                href={p.href}
+client/src/pages/AboutApproachPage.jsx:10:            <li><Link href="/" className="hover:text-purple-600 dark:hover:text-purple-400" data-testid="link-breadcrumb-home">Home</Link></li>
+client/src/pages/AboutApproachPage.jsx:11:            <li className="before:content-['/'] before:mx-2"><Link href="/about" className="hover:text-purple-600 dark:hover:text-purple-400" data-testid="link-breadcrumb-about">About</Link></li>
+client/src/pages/AboutApproachPage.jsx:92:              href="/crisis"
+client/src/pages/AlignmentPath.jsx:260:          href="/tools"
+client/src/pages/Analytics.jsx:115:                href="/dashboard" 
+client/src/pages/Analytics.jsx:231:                href="/dashboard"
+client/src/pages/BlogDraftViewer.jsx:2:import { useRoute } from "wouter";
+client/src/pages/BlogDraftViewer.jsx:5:  const [, params] = useRoute("/blog/draft/:id");
+client/src/pages/BlogDraftViewer.jsx:142:          <a key={keyIdx++} href={href} style={{ color: "#2563eb", textDecoration: "underline" }}>
+client/src/pages/ComingSoon.jsx:55:                href="/tools"
+client/src/pages/ComingSoon.jsx:67:                href="/blog"
+client/src/pages/ComingSoon.jsx:79:                href="/newsletter"
+client/src/pages/ComingSoon.jsx:91:                href="/crisis"
+client/src/pages/Contact.jsx:156:                  <Link href="/">
+client/src/pages/Contact.jsx:266:            <Link href="/chat">
+client/src/pages/DesignSystem.jsx:86:          <Link href="/">
+client/src/pages/DesignSystem.jsx:784:                <Link href="/wireframes">
+client/src/pages/Invite.jsx:91:          <Link href="/dashboard" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group" data-testid="link-back">
+client/src/pages/Invite.jsx:138:                    href={option.url}
+client/src/pages/ValuesPage.jsx:53:            <li><Link href="/" className="hover:text-purple-600 dark:hover:text-purple-400" data-testid="link-breadcrumb-home">Home</Link></li>
+client/src/pages/ValuesPage.jsx:100:              href="/about/approach"
+client/src/pages/ValuesPage.jsx:107:              href="/features"
+client/src/pages/ValuesPage.jsx:122:            href="/crisis"
+client/src/pages/LearnDetail.jsx:1:import { Link, useRoute } from "wouter";
+client/src/pages/LearnDetail.jsx:40:          href={backHref}
+client/src/pages/LearnDetail.jsx:69:          href={backHref}
+client/src/pages/LearnDetail.jsx:133:                  href={item.relatedHub}
+client/src/pages/LearnDetail.jsx:158:                href="/crisis"
+client/src/pages/LearnDetail.jsx:180:                  href={isGuide ? `/learn/guides/${other.slug}` : `/learn/articles/${other.slug}`}
+client/src/pages/LearnDetail.jsx:195:  const [, params] = useRoute("/learn/guides/:slug");
+client/src/pages/LearnDetail.jsx:203:  const [, params] = useRoute("/learn/articles/:slug");
+client/src/pages/LearnHub.jsx:55:                href={card.href}
+client/src/pages/LearnHub.jsx:79:            href="/"
+client/src/pages/CRMPage.jsx:73:                <Link href="/" className="flex items-center gap-3" data-testid="link-home">
+client/src/pages/CRMPage.jsx:80:                  <Link href="/dashboard" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Overview</Link>
+client/src/pages/CRMPage.jsx:81:                  <Link href="/journal" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Journal</Link>
+client/src/pages/CRMPage.jsx:82:                  <Link href="/mood" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Mood</Link>
+client/src/pages/CRMPage.jsx:83:                  <Link href="/tools" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Tools</Link>
+client/src/pages/CRMPage.jsx:143:                  href="/dashboard" 
+client/src/pages/CRMPage.jsx:184:                    href={action.href}
+client/src/pages/CRMPage.jsx:260:                href="/community"
+client/src/pages/CRMPage.jsx:275:            <Link href="/" className="hover:opacity-80 transition-opacity" data-testid="link-footer-home">Home</Link>
+client/src/pages/CRMPage.jsx:276:            <Link href="/content-index" className="hover:opacity-80 transition-opacity" data-testid="link-footer-content">Content</Link>
+client/src/pages/CRMPage.jsx:277:            <Link href="/qa" className="hover:opacity-80 transition-opacity" data-testid="link-footer-qa">Q&A</Link>
+client/src/pages/CRMPage.jsx:278:            <Link href="/privacy" className="hover:opacity-80 transition-opacity" data-testid="link-footer-privacy">Privacy</Link>
+client/src/pages/CRMPage.jsx:279:            <Link href="/terms" className="hover:opacity-80 transition-opacity" data-testid="link-footer-terms">Terms</Link>
+client/src/pages/WireframeTemplates.jsx:115:            <Link href="/design-system">
+client/src/pages/WireframeTemplates.jsx:319:          <a href="#features" className="hover:opacity-70" style={{ color: '#3a3a3a' }} data-testid="link-features">Features</a>
+client/src/pages/WireframeTemplates.jsx:320:          <a href="#about" className="hover:opacity-70" style={{ color: '#3a3a3a' }} data-testid="link-about">About</a>
+client/src/pages/WireframeTemplates.jsx:321:          <a href="#testimonials" className="hover:opacity-70" style={{ color: '#3a3a3a' }} data-testid="link-testimonials">Stories</a>
+client/src/pages/WireframeTemplates.jsx:518:            <a href="#privacy" style={{ color: '#3a3a3a' }} data-testid="link-privacy">Privacy</a>
+client/src/pages/WireframeTemplates.jsx:519:            <a href="#terms" style={{ color: '#3a3a3a' }} data-testid="link-terms">Terms</a>
+client/src/pages/WireframeTemplates.jsx:520:            <a href="#contact" style={{ color: '#3a3a3a' }} data-testid="link-contact">Contact</a>
+client/src/pages/WireframeTemplates.jsx:712:              href={item.href}
+client/src/pages/WireframeTemplates.jsx:1285:            <a href="#forgot" className="text-sm" style={{ color: '#8fbf9f' }} data-testid="link-forgot-password">
+client/src/pages/WireframeTemplates.jsx:1334:          <a href="#signup" className="font-medium" style={{ color: '#2f5d5d' }} data-testid="link-signup">
+client/src/pages/AvatarLab.jsx:180:          Body appearance per V22/V24/V27 specs is locked. <Link href="/" className="underline">Back home</Link>
+client/src/pages/Login.jsx:102:            <Link href="/" className="inline-flex flex-col items-center gap-3 group">
+client/src/pages/Login.jsx:178:                <Link href="/forgot-password" className="text-xs font-medium" style={{ color: 'var(--glp-sage-deep)' }} data-testid="link-forgot-password">
+client/src/pages/Login.jsx:209:                <Link href="/register" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }} data-testid="link-register">
+client/src/pages/Login.jsx:218:            <Link href="/terms" className="underline">Terms of Service</Link>{" "}
+client/src/pages/Login.jsx:220:            <Link href="/privacy" className="underline">Privacy Policy</Link>
+client/src/pages/Register.jsx:90:            <Link href="/" className="inline-flex items-center gap-3 group">
+client/src/pages/Register.jsx:247:                <Link href="/login" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}
+client/src/pages/Register.jsx:258:            <Link href="/terms" className="underline">Terms of Service</Link>{" "}
+client/src/pages/Register.jsx:260:            <Link href="/privacy" className="underline">Privacy Policy</Link>
+client/src/pages/ResetPassword.jsx:121:              href="/forgot-password" 
+client/src/pages/ResetPassword.jsx:176:              href="/login" 
+client/src/pages/ResetPassword.jsx:221:            href="/" 
+client/src/pages/Privacy.jsx:22:            href="/"
+client/src/pages/Privacy.jsx:181:                <Link href="/crisis" className="underline font-medium" data-testid="link-crisis">
+client/src/pages/Blog.jsx:427:                    href="/crisis" 
+client/src/pages/Blog.jsx:541:                <Link href="/write" className="btn-primary flex items-center gap-2" data-testid="link-write">
+client/src/pages/Blog.jsx:552:              <Link href="/crisis" className="text-[var(--teal-600)] hover:underline font-medium" data-testid="link-crisis-footer">
+client/src/pages/Profile.jsx:51:          <Link href="/dashboard" className="inline-flex items-center gap-2 text-[var(--teal-600)] hover:text-[var(--teal-700)] mb-8 transition-colors" data-testid="link-back-dashboard">
+client/src/pages/Profile.jsx:138:                  href="/privacy" 
+client/src/pages/FAQPage.jsx:196:            <Link href="/" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+client/src/pages/FAQPage.jsx:233:                <Link href="/support" className="btn-primary-premium" data-testid="link-support">
+client/src/pages/FAQPage.jsx:236:                <Link href="/crisis" className="btn-secondary-premium" data-testid="link-crisis">
+client/src/pages/NotFound.jsx:49:            href="/" 
+client/src/pages/NotFound.jsx:74:                href="/"
+client/src/pages/NotFound.jsx:102:                      href={link.href}
+client/src/pages/NotFound.jsx:118:            You're not alone. <Link href="/crisis" className="text-[var(--primary)] hover:underline">Crisis support is always available</Link>, or <Link href="/chat" className="text-[var(--primary)] hover:underline">talk with our compassionate AI companion</Link>.
+client/src/pages/ForgotPassword.jsx:92:              href="/login" 
+client/src/pages/ForgotPassword.jsx:137:            href="/" 
+client/src/pages/ForgotPassword.jsx:236:                href="/login" 
+client/src/pages/DesignDashboard.jsx:41:              <Link href="/dashboard" className="text-caption hover:text-[var(--teal-600)] transition">
+client/src/pages/DesignDashboard.jsx:113:                <Link href="/mood" className="btn-secondary w-full text-center flex items-center justify-center gap-2" data-testid="link-mood-tracker">
+client/src/pages/DesignDashboard.jsx:129:                <Link href="/journal" className="btn-primary w-full text-center flex items-center justify-center gap-2" data-testid="link-journal">
+client/src/pages/DesignDashboard.jsx:160:                <Link href="/tools" className="btn-secondary w-full text-center flex items-center justify-center gap-2" data-testid="link-tools">
+client/src/pages/HealthPage.jsx:43:              href="/" 
+===== diagnostics/phase81/lumi-asset-pipeline-audit.txt =====
+===== OFFICIAL LUMI ASSET DIRECTORIES =====
+client/public/assets
+client/public/avatar-core
+client/public/avatar-core/master
+client/public/avatar-core/regions
+client/public/avatar-core/shadow
+client/public/brand
+client/public/brand/v17
+client/public/lumi
+client/public/lumi/official
+client/src/assets
+client/src/avatar-life
+client/src/avatar-life/accessibility
+client/src/avatar-life/aura
+client/src/avatar-life/body
+client/src/avatar-life/breathing
+client/src/avatar-life/components
+client/src/avatar-life/eyes
+client/src/avatar-life/governance
+client/src/avatar-life/hooks
+client/src/avatar-life/interactions
+client/src/avatar-life/mouth
+client/src/avatar-life/observability
+client/src/avatar-life/state
+client/src/avatar-life/state-machine
+client/src/avatar-life/__tests__
+client/src/avatar-life/types
+client/src/avatar-system
+client/src/brand
+client/src/components/avatar
+client/src/components/brand
+client/src/components/lumi
+client/src/lumi-agent
+client/src/lumi-agent/feedback
+client/src/lumi-agent/governance
+client/src/lumi-agent/prompts
+client/src/lumi-agent/runtime
+client/src/lumi-agent/verification
+client/src/lumi-audit
+client/src/lumi-audit/governance
+client/src/lumi-audit/logger
+client/src/lumi-boundaries
+client/src/lumi-boundaries/components
+client/src/lumi-boundaries/content
+client/src/lumi-boundaries/governance
+client/src/lumi-boundaries/runtime
+client/src/lumi-boundaries/verification
+client/src/lumi-bridge
+client/src/lumi-bridge/governance
+client/src/lumi-bridge/mappings
+client/src/lumi-bridge/runtime
+client/src/lumi-bridge/transitions
+client/src/lumi-bridge/verification
+client/src/lumi-cbt
+client/src/lumi-cbt/engine
+client/src/lumi-cbt/governance
+client/src/lumi-cbt/verification
+client/src/lumi-cbt/worksheets
+client/src/lumi-circadian
+client/src/lumi-circadian/components
+client/src/lumi-circadian/governance
+client/src/lumi-circadian/presets
+client/src/lumi-circadian/runtime
+client/src/lumi-circadian/tests
+client/src/lumi-circadian/verification
+client/src/lumi-cohesion
+client/src/lumi-cohesion/canonical
+client/src/lumi-cohesion/repairs
+client/src/lumi-cohesion/runtime
+client/src/lumi-cohesion/verification
+client/src/lumi-consistency
+client/src/lumi-consistency/governance
+client/src/lumi-consistency/identity
+client/src/lumi-consistency/runtime
+client/src/lumi-consistency/tokens
+client/src/lumi-consistency/verification
+client/src/lumi-conversation
+client/src/lumi-conversation/components
+client/src/lumi-conversation/content
+client/src/lumi-conversation/motion
+client/src/lumi-conversation/prompts
+client/src/lumi-conversation/runtime
+client/src/lumi-conversation/safety
+client/src/lumi-conversation/state
+client/src/lumi-conversation/tests
+client/src/lumi-conversation/verification
+client/src/lumi-crisis
+client/src/lumi-crisis/components
+client/src/lumi-crisis/governance
+client/src/lumi-crisis/resources
+client/src/lumi-crisis/verification
+client/src/lumi-disclaimer
+client/src/lumi-integration
+client/src/lumi-integration/tests
+client/src/lumi-integration/verification
+client/src/lumi-language
+client/src/lumi-library
+client/src/lumi-library/components
+client/src/lumi-library/content
+client/src/lumi-library/governance
+client/src/lumi-library/verification
+client/src/lumi-memory
+client/src/lumi-memory/components
+client/src/lumi-memory/runtime
+client/src/lumi-memory/safety
+client/src/lumi-memory/state
+client/src/lumi-memory/tests
+client/src/lumi-memory/verification
+client/src/lumi-motion
+client/src/lumi-motion/components
+client/src/lumi-motion/constants
+client/src/lumi-motion/governance
+client/src/lumi-motion/runtime
+client/src/lumi-motion/verification
+client/src/lumi-notifications
+client/src/lumi-notifications/governance
+client/src/lumi-notifications/push
+client/src/lumi-presence
+client/src/lumi-rbac
+client/src/lumi-rbac/middleware
+client/src/lumi-rbac/roles
+client/src/lumi-registry
+client/src/lumi-registry/components
+client/src/lumi-registry/config
+client/src/lumi-registry/governance
+client/src/lumi-registry/internal
+client/src/lumi-registry/registry
+client/src/lumi-registry/runtime
+client/src/lumi-registry/styles
+client/src/lumi-registry/types
+client/src/lumi-registry/variants
+client/src/lumi-registry/verification
+client/src/lumi-rituals
+client/src/lumi-rituals/components
+client/src/lumi-rituals/governance
+client/src/lumi-rituals/presets
+client/src/lumi-rituals/runtime
+client/src/lumi-rituals/tests
+client/src/lumi-rituals/verification
+client/src/lumi-scenes
+client/src/lumi-scenes/governance
+client/src/lumi-scenes/presets
+client/src/lumi-scenes/runtime
+client/src/lumi-scenes/tests
+client/src/lumi-scenes/transitions
+client/src/lumi-scenes/verification
+client/src/lumi-tokens
+client/src/lumi-tokens/canonical
+client/src/lumi-tokens/colors
+client/src/lumi-tokens/components
+client/src/lumi-tokens/shadows
+client/src/lumi-tokens/spacing
+client/src/lumi-tokens/typography
+client/src/lumi-tracker
+client/src/lumi-tracker/governance
+client/src/lumi-tracker/habits
+client/src/lumi-tracker/mood
+client/src/lumi-tracker/verification
+client/src/lumi-tracker/visualization
+client/src/lumi-voice
+client/src/lumi-voice/accessibility
+client/src/lumi-voice/components
+client/src/lumi-voice/governance
+client/src/lumi-voice/profiles
+client/src/lumi-voice/runtime
+client/src/lumi-voice/verification
+client/src/shared/brand
+public/assets
+public/assets/lumi
+public/assets/lumi/official
+public/brand
+public/brand/variants
+public/lumi
+public/lumi/avatar
+public/lumi/avatar/base
+public/lumi/avatar/emotions
+public/lumi/avatar/glow
+public/lumi/avatar/rituals
+public/lumi/avatar/scenes
+
+===== LUMI ASSET FILES =====
+client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_body-residual.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_body-residual.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_face.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_face.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.webp
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.png
+client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.webp
+client/public/avatar-core/shadow/MMHB_FLOAT_IDLE_UNIT_v1_shadow.png
+client/public/avatar-core/shadow/MMHB_FLOAT_IDLE_UNIT_v1_shadow.webp
+client/public/brand/favicon.png
+client/public/brand/favicon.webp
+client/public/brand/footer-logo.png
+client/public/brand/footer-logo.webp
+client/public/brand/inspirational-words.png
+client/public/brand/inspirational-words.webp
+client/public/brand/login-logo.png
+client/public/brand/login-logo.webp
+client/public/brand/logo-mark.png
+client/public/brand/logo-mark.webp
+client/public/brand/logo-monogram.png
+client/public/brand/logo-monogram.webp
+client/public/brand/logo.png
+client/public/brand/logo-square.png
+client/public/brand/logo-square.webp
+client/public/brand/logo.webp
+client/public/brand/og-image.png
+client/public/brand/og-image.webp
+client/public/brand/sacred-pattern.svg
+client/public/brand/v17/benefit-companionship.png
+client/public/brand/v17/benefit-companionship.webp
+client/public/brand/v17/benefit-growth.png
+client/public/brand/v17/benefit-growth.webp
+client/public/brand/v17/benefit-relief.png
+client/public/brand/v17/benefit-relief.webp
+client/public/brand/v17/benefit-understanding.png
+client/public/brand/v17/benefit-understanding.webp
+client/public/brand/wellness-illustration.png
+client/public/brand/wellness-illustration.webp
+client/public/lumi/official/lumi-calm-float.png
+client/public/lumi/official/lumi-calm-float.webp
+client/public/lumi/official/lumi-companion.png
+client/public/lumi/official/lumi-companion.webp
+client/public/lumi/official/lumi-emotion-orb.png
+client/public/lumi/official/lumi-emotion-orb.webp
+client/public/lumi/official/lumi-float-idle.png
+client/public/lumi/official/lumi-heart.png
+client/public/lumi/official/lumi-meditation.png
+client/public/lumi/official/lumi-meditation.webp
+client/public/lumi/official/lumi-path.png
+client/public/lumi/official/lumi-path.webp
+client/public/lumi/official/lumi-soft-presence.png
+client/public/lumi/official/lumi-soft-presence.webp
+client/public/lumi/official/MANIFEST.md
+client/src/avatar-life/components/AvatarWithReactState.tsx
+client/src/avatar-life/components/MMHBAvatarRuntimeProvider.tsx
+client/src/avatar-life/components/MMHBFloatAvatar.tsx
+client/src/avatar-life/governance/nonDriftRules.ts
+client/src/avatar-life/hooks/useAvatarPresenceRuntime.ts
+client/src/avatar-life/hooks/useReducedMotionSafe.ts
+client/src/avatar-life/index.ts
+client/src/avatar-life/observability/avatarRuntimeTelemetry.ts
+client/src/avatar-life/officialLumiAssets.ts
+client/src/avatar-life/state-machine/avatarStates.ts
+client/src/avatar-life/state/useAvatarLifeStore.tsx
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts
+client/src/avatar-life/__tests__/vitest.config.mjs
+client/src/avatar-life/types/avatarLifeTypes.ts
+client/src/avatar-system/LumiEmotionalStates.ts
+client/src/avatar-system/LumiRoleMap.ts
+client/src/avatar-system/LumiRoles.ts
+client/src/avatar-system/LumiStates.ts
+client/src/avatar-system/OfficialLumiRegistry.ts
+client/src/brand/brand.ts
+client/src/brand/copy.ts
+client/src/brand/tokens.ts
+client/src/brand/voice.ts
+client/src/checkin-flow/components/MMHBCheckInFlow.tsx
+client/src/companion-voice/components/MMHBCompanionInput.tsx
+client/src/companion-voice/components/MMHBCompanionMessage.tsx
+client/src/companion-voice/components/MMHBCompanion.tsx
+client/src/components/avatar/BuddyAvatar.css
+client/src/components/avatar/BuddyAvatar.tsx
+client/src/components/avatar/BuddyAvatar.tsx.BACKUP
+client/src/components/avatar/BuddyAvatar.tsx.bak
+client/src/components/avatar/BuddyPanel.tsx
+client/src/components/brand/BrandLogo.jsx
+client/src/components/BrandGlow.tsx
+client/src/components/BrandHero.tsx
+client/src/components/BrandLogo.tsx
+client/src/components/BrandShell.jsx
+client/src/components/FloatingLotusGuide.jsx
+client/src/components/lumi/FloatIdleAnimated.css
+client/src/components/lumi/FloatIdleAnimated.jsx
+client/src/components/lumi/FloatIdleRig.css
+client/src/components/lumi/FloatIdleRig.jsx
+client/src/components/lumi/LivingLumiAvatar.tsx
+client/src/components/lumi/LumiAccessibleWrapper.jsx
+client/src/components/lumi/LumiAura.tsx
+client/src/components/lumi/LumiBrandAvatar.css
+client/src/components/lumi/LumiBrandAvatar.tsx
+client/src/components/lumi/LumiBrandLockupImage.jsx
+client/src/components/lumi/LumiBrandLogo.jsx
+===== diagnostics/phase81/staged-size-gate.txt =====
+STAGED_SIZE_GATE_PASS

@@ -1,0 +1,22 @@
+ M client/src/components/CrisisStabilizer.jsx
+ M client/src/content/healingFrameworks.ts
+ M client/src/pages/AffirmationsPage.jsx
+ M client/src/pages/BehaviorChangePage.jsx
+ M client/src/pages/FAQPage.jsx
+ M client/src/pages/HealingJourneysPage.jsx
+ M client/src/pages/MeditationGuidePage.jsx
+ M client/src/pages/Pricing.jsx
+ M client/src/pages/PricingPage.jsx
+ M client/src/pages/QAPage.jsx
+ M client/src/pages/Register.jsx
+ M client/src/pages/Upgrade.jsx
+ M client/src/pages/Wellness.jsx
+ M client/src/pages/account/Billing.jsx
+ M client/src/pages/account/Subscription.jsx
+ M client/src/pages/admin/_adminToolsShared.js
+ M logs/events.jsonl
+ M scripts/content-coherence-gate.mjs
+?? diagnostics/phase82/
+?? diagnostics/phase84/
+?? scripts/button-link-visibility-gate.mjs
+?? scripts/phase82-content-coherence-patch.mjs

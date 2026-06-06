@@ -195,7 +195,7 @@ export const evidenceBasedInsights = {
   },
   gratitude: {
     research: "Studies by Dr. Robert Emmons show that regular gratitude practice increases happiness by 25%, improves sleep quality, and reduces symptoms of illness. The brain cannot simultaneously process gratitude and negative emotions in the same neural pathways.",
-    mechanism: "Gratitude activates the hypothalamus and ventral tegmental area, releasing dopamine and creating a positive feedback loop. It literally rewires the brain toward noticing good."
+    mechanism: "Gratitude activates the hypothalamus and ventral tegmental area, releasing dopamine and creating a positive feedback loop. It helps practice new supportive patterns the brain toward noticing good."
   },
   meditation: {
     research: "Meta-analyses show meditation reduces anxiety, depression, and pain while improving attention and emotional regulation. Sara Lazar's research at Harvard shows 8 weeks of meditation practice increases gray matter in areas associated with learning, memory, and emotional regulation.",

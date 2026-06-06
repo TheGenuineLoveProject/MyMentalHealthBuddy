@@ -9,7 +9,7 @@ const LEGAL_LINKS = [
   { title: "Terms of Service", path: "/legal/terms", description: "Our terms and conditions for using the platform." },
   { title: "Privacy Policy", path: "/legal/privacy", description: "How we collect, use, and protect your data." },
   { title: "Cookie Policy", path: "/legal/cookies", description: "Information about cookies and tracking." },
-  { title: "Refund Policy", path: "/legal/refunds", description: "Our 30-day money-back guarantee details." },
+  { title: "Refund Policy", path: "/legal/refunds", description: "Our 30-day money-back support intention details." },
   { title: "Accessibility Statement", path: "/legal/accessibility", description: "Our commitment to WCAG AA compliance." },
   { title: "DMCA Policy", path: "/legal/dmca", description: "Copyright and intellectual property." }
 ];

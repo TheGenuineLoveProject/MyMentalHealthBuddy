@@ -13,7 +13,7 @@ export const MODULES = {
   nlp: {
     key: "nlp",
     title: "Reframe Language Toolkit",
-    description: "Safe self-talk templates and gentle reframes (no manipulation language, no guarantees).",
+    description: "Safe self-talk templates and gentle reframes (no manipulation language, no is designed to support).",
     payload: NLP_REFRAMES,
   },
   "12practices": {

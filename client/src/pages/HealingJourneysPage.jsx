@@ -72,7 +72,7 @@ const healingJourneys = [
     outcomes: [
       "Understand your anxiety patterns through polyvagal lens (fight/flight/freeze)",
       "Master breathwork, grounding, and nervous system regulation techniques",
-      "Rewire anxious thought patterns using CBT principles",
+      "practice responding to anxious thought patterns using CBT principles",
       "Expand your window of tolerance for life's challenges"
     ],
     weeks: [
@@ -237,7 +237,7 @@ const healingJourneys = [
       },
       {
         title: "Week 3-4: Healing",
-        theme: "Rewiring old attachment patterns",
+        theme: "practicing new relationship patterns",
         activities: [
           { name: "Self-Soothing for Attachment", description: "Learn to calm your own nervous system when triggered" },
           { name: "Trigger & Response Work", description: "Create space between attachment trigger and reaction" },

@@ -35,7 +35,7 @@ const REFRAME_TEMPLATES = [
 const GUARDRAILS = [
   "No \"subconscious reprogramming\" claims",
   "No hypnosis or trance techniques",
-  "No guarantees or promises",
+  "No is designed to support or promises",
   "Just language clarity + actionable steps",
   "Educational purposes only",
 ];

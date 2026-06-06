@@ -16,7 +16,7 @@ export default function Register() {
   const [submitting, setSubmitting] = useState(false);
 
   const benefits = [
-    "24/7 AI wellness companion",
+    "AI-guided wellness reflection companion",
     "Private mood tracking & analytics",
     "Secure personal journaling",
     "Crisis resources when you need them"

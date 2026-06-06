@@ -13,7 +13,7 @@ const PRO_FEATURES = [
   { name: "AI-powered insights", description: "Personalized recommendations and reflections", icon: Zap },
   { name: "Guided journaling", description: "Advanced prompts and guided exercises", icon: Star },
   { name: "Priority support", description: "Fast, dedicated assistance when you need it", icon: Shield },
-  { name: "1000+ wellness tools", description: "Full access to our complete toolkit", icon: Crown },
+  { name: "expanded wellness tools", description: "Full access to our complete toolkit", icon: Crown },
 ];
 
 export default function Upgrade() {

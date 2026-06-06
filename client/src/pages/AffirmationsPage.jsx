@@ -13,7 +13,7 @@ import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import ZenScape from "@/components/zen/ZenScape";
 
 const AFFIRMATIONS_CLARITY = {
-  what: "Evidence-based affirmations designed to rewire neural pathways toward self-love, healing, resilience, and nervous system regulation.",
+  what: "Evidence-based affirmations designed to supports practicing new supportive thought patterns toward self-love, healing, resilience, and nervous system regulation.",
   who: "Anyone working to shift their inner dialogue, heal from past wounds, or build self-compassion.",
   when: "During morning routines, before sleep, after meditation, or when you notice critical self-talk.",
   why: "Repeated thoughts strengthen neural pathways. Affirmations deliberately create new, supportive patterns in your brain.",
@@ -213,7 +213,7 @@ const affirmationCategories = [
       "My fight-flight-freeze response is not a flaw—it's protection.",
       "I am learning to expand my window of tolerance.",
       "I trust my body's wisdom to return to calm.",
-      "I am rewiring my nervous system toward safety and connection.",
+      "I am supporting my nervous system with practice toward safety and connection.",
       "Each moment of calm builds my capacity for more calm.",
       "My reactions are not character flaws—they are adaptations.",
       "I am not my anxiety. I am the witness of my anxiety.",
@@ -246,7 +246,7 @@ const affirmationPractices = [
 ];
 
 const scienceOfAffirmations = {
-  neuroplasticity: "Every thought creates neural pathways. Repeated thoughts strengthen those pathways. Affirmations are deliberate thought repetition that literally rewires brain structure toward more supportive patterns.",
+  neuroplasticity: "Every thought creates neural pathways. Repeated thoughts strengthen those pathways. Affirmations are deliberate thought repetition that helps practice new supportive patterns brain structure toward more supportive patterns.",
   selfTalkResearch: "Research shows we have 12,000-60,000 thoughts per day, and 80% are negative, 95% are repetitive. Affirmations interrupt this pattern with intentional positive repetition.",
   embodiment: "Neuroscience shows that combining words with body awareness, emotion, and sensory experience creates stronger neural encoding than words alone.",
   timing: "Studies on self-affirmation theory show affirmations work best when tailored to personal values and practiced during receptive states rather than acute stress."
@@ -364,7 +364,7 @@ export default function AffirmationsPage() {
           </div>
           <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Transformational Affirmations</h1>
           <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
-            Not positive thinking platitudes—evidence-based statements designed to rewire neural pathways.
+            Not positive thinking platitudes—evidence-based statements designed to supports practicing new supportive thought patterns.
             Each affirmation is crafted to speak directly to your nervous system, inner critic, and wounded parts with the compassion they deserve.
           </p>
         </div>

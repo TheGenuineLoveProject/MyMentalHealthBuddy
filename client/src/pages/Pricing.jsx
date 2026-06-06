@@ -80,7 +80,7 @@ const proYearly = {
 
 const proFeatures = [
   "Everything in Your Personal Guide",
-  "Unlimited AI chat sessions",
+  "Expanded AI-guided reflection sessions",
   "Advanced emotional insights",
   "Guided healing journeys",
   "Content studio access",
@@ -412,7 +412,7 @@ className={`w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 rounded-full f
                       data-testid={`text-money-back-${tier.legacyName.toLowerCase()}`}
                     >
                       <Shield className="w-3 h-3" aria-hidden="true" />
-                      30-day money-back guarantee
+                      30-day money-back support intention
                     </p>
                   )}
                 </div>

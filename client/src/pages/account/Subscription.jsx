@@ -11,9 +11,9 @@ import { apiRequest } from "@/lib/queryClient";
 
 const PLAN_FEATURES = {
   free: ["Mood tracking", "Basic journaling", "Core wellness tools"],
-  pro: ["Unlimited AI chat sessions", "All wellness tools", "Advanced analytics", "Healing journeys"],
+  pro: ["Expanded AI-guided reflection sessions", "All wellness tools", "Advanced analytics", "Healing journeys"],
   team: ["Everything in Pro", "Team dashboard", "Admin controls", "Priority support"],
-  premium: ["Unlimited AI chat sessions", "All wellness tools", "Priority support", "Advanced analytics"]
+  premium: ["Expanded AI-guided reflection sessions", "All wellness tools", "Priority support", "Advanced analytics"]
 };
 
 export default function Subscription() {

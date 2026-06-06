@@ -1,0 +1,29 @@
+CLINICAL_CLAIM_COHERENCE_GATE_FAIL
+activeRisks=27
+THERAPY_REPLACEMENT_CLAIM client/src/pages/CanvaLanding.jsx:51
+GUARANTEE_CLAIM client/src/pages/CognitiveArchitecturePage.tsx:70
+THERAPY_REPLACEMENT_CLAIM client/src/pages/FAQPage.jsx:16
+GUARANTEE_CLAIM client/src/pages/LegalPage.jsx:12
+GUARANTEE_CLAIM client/src/pages/Pricing.jsx:415
+GUARANTEE_CLAIM client/src/pages/Start.tsx:435
+GUARANTEE_CLAIM client/src/pages/Start.tsx:1089
+GUARANTEE_CLAIM client/src/pages/WellnessGlossaryPage.jsx:278
+CURE_CLAIM client/src/pages/admin/AdminSocial.jsx:42
+GUARANTEE_CLAIM client/src/pages/admin/SocialStudioAdmin.jsx:494
+GUARANTEE_CLAIM client/src/pages/admin/SocialStudioAdmin.jsx:874
+GUARANTEE_CLAIM client/src/pages/help/RefundHelp.jsx:9
+GUARANTEE_CLAIM client/src/pages/help/RefundHelp.jsx:30
+GUARANTEE_CLAIM client/src/pages/help/RefundHelp.jsx:67
+GUARANTEE_CLAIM client/src/pages/tools/ReframePage.jsx:38
+GUARANTEE_CLAIM client/src/components/ErrorBoundary.jsx:52
+GUARANTEE_CLAIM client/src/components/lumi/LumiCompanion.jsx:62
+GUARANTEE_CLAIM client/src/components/modules/ModulesPanel.tsx:203
+GUARANTEE_CLAIM client/src/content/frameworks/benefitPillars.js:117
+GUARANTEE_CLAIM client/src/content/journalPrompts.js:40
+CURE_CLAIM client/src/content/microcopy/wellnessMicrocopy.ts:13
+GUARANTEE_CLAIM client/src/content/microcopy/wellnessMicrocopy.ts:13
+GUARANTEE_CLAIM client/src/content/modules/modules.js:16
+CURE_CLAIM client/src/content/readingLevels.js:32
+GUARANTEE_CLAIM client/src/content/readingLevels.js:32
+GUARANTEE_CLAIM client/src/content/routeMetaRegistry.js:5
+GUARANTEE_CLAIM client/src/content/trust/trustRegistry.js:109

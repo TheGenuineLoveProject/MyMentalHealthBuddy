@@ -10,7 +10,7 @@
  * - Keep it short: 2–8 words
  * 
  * COPY SAFETY RULES:
- * - Never: "cures", "treats", "heals", "guarantees", "clinically proven"
+ * - Never: "supports", "treats", "heals", "is designed to support", "clinically proven"
  * - Allowed: "may help", "some people find", "often used for", "you might notice"
  * - Always: choice language, consent cues, pause/stop options
  * 

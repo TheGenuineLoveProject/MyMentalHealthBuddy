@@ -289,7 +289,7 @@ export const toolCategories = [
     title: "AI & Core Wellness Tools",
     tools: [
       { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai/history", icon: MessageSquare, desc: "AI conversation engine" },
-      { id: "therapy", label: "Therapy Engine", endpoint: "/api/therapy/crisis-resources", icon: Headphones, desc: "Guided therapy sessions" },
+      { id: "therapy", label: "wellness support engine", endpoint: "/api/therapy/crisis-resources", icon: Headphones, desc: "Guided wellness sessions" },
       { id: "mood-tracker", label: "Mood Tracker", endpoint: "/api/mood", icon: Heart, desc: "User mood tracking" },
       { id: "journal", label: "Journal System", endpoint: "/api/journal", icon: BookOpen, desc: "Journaling engine" },
       { id: "gratitude", label: "Gratitude Prompts", endpoint: "/api/gratitude", icon: Sun, desc: "Daily gratitude system" },
