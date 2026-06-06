@@ -322,3 +322,223 @@ section {
     scroll-behavior: auto !important;
   }
 }
+
+/* ===== Phase 75: Page Hero Coherence + Visual Depth Polish ===== */
+
+:root {
+  --lumi-page-max: 1180px;
+  --lumi-section-gap: clamp(3.5rem, 8vw, 7rem);
+  --lumi-hero-gap: clamp(2rem, 5vw, 4.5rem);
+  --lumi-radius-xl: 28px;
+  --lumi-radius-2xl: 36px;
+  --lumi-text-strong: #1f2d22;
+  --lumi-text-body: #3d4c3d;
+  --lumi-text-muted: #637263;
+  --lumi-surface-glass: rgba(255, 253, 249, 0.78);
+  --lumi-surface-warm: rgba(255, 249, 242, 0.92);
+  --lumi-surface-sage: rgba(233, 242, 225, 0.72);
+  --lumi-surface-rose: rgba(255, 214, 218, 0.28);
+  --lumi-surface-sky: rgba(174, 233, 255, 0.22);
+}
+
+/* Global page background: soft pastel atmosphere without heavy opaque sage */
+body {
+  background:
+    radial-gradient(circle at 8% 6%, rgba(255, 214, 218, 0.22), transparent 28%),
+    radial-gradient(circle at 92% 10%, rgba(174, 233, 255, 0.20), transparent 30%),
+    radial-gradient(circle at 50% 0%, rgba(255, 212, 107, 0.13), transparent 34%),
+    linear-gradient(180deg, var(--lumi-eternal-cream-50, #fffdf9), var(--lumi-eternal-cream-100, #fff9f2));
+  color: var(--lumi-text-strong);
+}
+
+/* Common page shells */
+main,
+.page-shell,
+.page-scaffold,
+.lumi-page-shell,
+[class*="PageShell"],
+[class*="page-shell"],
+[class*="Scaffold"],
+[class*="scaffold"] {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Hero sections: reduce blankness, add visual depth, preserve existing layout */
+.hero,
+[class*="hero"],
+[class*="Hero"],
+section:first-of-type {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before,
+[class*="hero"]::before,
+[class*="Hero"]::before,
+section:first-of-type::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 214, 218, 0.25), transparent 30%),
+    radial-gradient(circle at 78% 16%, rgba(174, 233, 255, 0.22), transparent 34%),
+    radial-gradient(circle at 52% 88%, rgba(255, 212, 107, 0.18), transparent 32%);
+  filter: blur(2px);
+}
+
+/* Content cards: more premium, coherent, readable */
+.card,
+[class*="card"],
+[class*="Card"],
+.panel,
+[class*="panel"],
+[class*="Panel"],
+article {
+  background:
+    linear-gradient(145deg, rgba(255, 253, 249, 0.94), rgba(247, 240, 232, 0.72));
+  border: 1px solid rgba(36, 48, 36, 0.12);
+  box-shadow:
+    0 18px 55px rgba(80, 112, 76, 0.10),
+    0 6px 22px rgba(255, 212, 107, 0.08);
+}
+
+/* Headline readability and hierarchy */
+h1,
+[class*="headline"],
+[class*="Headline"],
+[class*="title"],
+[class*="Title"] {
+  color: var(--lumi-text-strong);
+  letter-spacing: -0.035em;
+}
+
+h2,
+h3 {
+  color: var(--lumi-text-strong);
+}
+
+p,
+li,
+[class*="description"],
+[class*="Description"],
+[class*="subtitle"],
+[class*="Subtitle"] {
+  color: var(--lumi-text-body);
+}
+
+/* CTA visibility: button text must stay readable on pastel/gold/sage surfaces */
+button,
+[role="button"],
+a[class*="button"],
+a[class*="Button"],
+.btn,
+[class*="btn"],
+[class*="Button"],
+[class*="button"] {
+  min-height: 2.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-radius: 999px;
+}
+
+button:not(:disabled),
+[role="button"]:not(:disabled),
+a[class*="button"],
+a[class*="Button"],
+.btn,
+[class*="btn"],
+[class*="Button"],
+[class*="button"] {
+  color: var(--lumi-readable-ink, #243024);
+}
+
+.btn-primary,
+button.primary,
+[class*="primary"],
+[class*="Primary"],
+[class*="premium"],
+[class*="Premium"] {
+  color: var(--lumi-readable-on-dark, #fffdf9);
+}
+
+.btn-secondary,
+[class*="secondary"],
+[class*="Secondary"],
+[class*="outline"],
+[class*="Outline"],
+[class*="ghost"],
+[class*="Ghost"] {
+  color: var(--lumi-readable-ink, #243024);
+}
+
+/* Ensure black text issue does not happen on dark/filled CTAs */
+button[style*="background"],
+a[style*="background"],
+[class*="primary"] button,
+[class*="Primary"] button,
+[class*="premium"] button,
+[class*="Premium"] button {
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Page section rhythm */
+section {
+  scroll-margin-top: 96px;
+}
+
+/* Pricing and premium surfaces */
+[class*="pricing"],
+[class*="Pricing"],
+[class*="premium"],
+[class*="Premium"],
+[class*="billing"],
+[class*="Billing"] {
+  --lumi-commerce-glow:
+    radial-gradient(circle at 16% 18%, rgba(255, 212, 107, 0.18), transparent 34%),
+    radial-gradient(circle at 86% 12%, rgba(174, 233, 255, 0.16), transparent 32%);
+}
+
+/* Accessibility-safe motion and visibility */
+@media (prefers-reduced-motion: no-preference) {
+  .card,
+  [class*="card"],
+  [class*="Card"],
+  button,
+  [role="button"],
+  a[class*="button"],
+  a[class*="Button"] {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease;
+  }
+
+  button:hover,
+  [role="button"]:hover,
+  a[class*="button"]:hover,
+  a[class*="Button"]:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 768px) {
+  h1,
+  [class*="headline"],
+  [class*="Headline"] {
+    letter-spacing: -0.025em;
+  }
+
+  button,
+  [role="button"],
+  a[class*="button"],
+  a[class*="Button"],
+  .btn {
+    width: auto;
+    max-width: 100%;
+  }
+}
