@@ -1,0 +1,13 @@
+19:  --lumi-sage-25: #f4f8f0;
+49:  --lumi-text-strong: #102f2b;
+91:    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-cream-50) 42%, var(--lumi-sage-25));
+102:  color: var(--lumi-text-strong);
+146:  color: var(--lumi-text-strong);
+220:  animation: lumiFloat 7.5s var(--lumi-ease) infinite, lumiGlow 5.8s ease-in-out infinite;
+306:  color: var(--lumi-text-strong);
+319:    linear-gradient(180deg, var(--lumi-cream-00), var(--lumi-sage-25));
+330:.lumi-button-primary {
+339:  color: var(--lumi-text-strong);
+347:  color: var(--lumi-text-strong);
+354:@keyframes lumiFloat {
+382:@media (prefers-reduced-motion: reduce) {
