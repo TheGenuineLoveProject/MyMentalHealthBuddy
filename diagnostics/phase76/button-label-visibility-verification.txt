@@ -1,0 +1,600 @@
+client/src/styles/lumi-visual-system.css:36:  background:
+client/src/styles/lumi-visual-system.css:41:  color: var(--lumi-ink);
+client/src/styles/lumi-visual-system.css:47:  background: rgba(255, 253, 249, 0.88);
+client/src/styles/lumi-visual-system.css:53:.btn-premium,
+client/src/styles/lumi-visual-system.css:54:.btn-premium-teal,
+client/src/styles/lumi-visual-system.css:55:button.btn-premium,
+client/src/styles/lumi-visual-system.css:56:a.btn-premium {
+client/src/styles/lumi-visual-system.css:57:  background: linear-gradient(135deg, var(--lumi-sage-700), var(--lumi-sage-900)) !important;
+client/src/styles/lumi-visual-system.css:58:  color: var(--lumi-white) !important;
+client/src/styles/lumi-visual-system.css:63:.btn-premium *,
+client/src/styles/lumi-visual-system.css:64:.btn-premium-teal *,
+client/src/styles/lumi-visual-system.css:65:button.btn-premium *,
+client/src/styles/lumi-visual-system.css:66:a.btn-premium * {
+client/src/styles/lumi-visual-system.css:67:  color: var(--lumi-white) !important;
+client/src/styles/lumi-visual-system.css:72:.btn-secondary-premium,
+client/src/styles/lumi-visual-system.css:73:button.btn-secondary-premium,
+client/src/styles/lumi-visual-system.css:74:a.btn-secondary-premium {
+client/src/styles/lumi-visual-system.css:75:  background: rgba(255, 249, 242, 0.92) !important;
+client/src/styles/lumi-visual-system.css:76:  color: var(--lumi-ink) !important;
+client/src/styles/lumi-visual-system.css:80:.btn-secondary-premium *,
+client/src/styles/lumi-visual-system.css:81:button.btn-secondary-premium *,
+client/src/styles/lumi-visual-system.css:82:a.btn-secondary-premium * {
+client/src/styles/lumi-visual-system.css:83:  color: var(--lumi-ink) !important;
+client/src/styles/lumi-visual-system.css:88:button,
+client/src/styles/lumi-visual-system.css:90:[role="button"] {
+client/src/styles/lumi-visual-system.css:94:button:focus-visible,
+client/src/styles/lumi-visual-system.css:96:[role="button"]:focus-visible {
+client/src/styles/lumi-visual-system.css:124:  background: radial-gradient(circle, rgba(255, 214, 218, 0.5), transparent 64%);
+client/src/styles/lumi-visual-system.css:132:  background: radial-gradient(circle, rgba(174, 233, 255, 0.42), transparent 66%);
+client/src/styles/lumi-visual-system.css:192:/* ===== Phase 74: Lumi Pastel Palette + Button Label Visibility Polish ===== */
+client/src/styles/lumi-visual-system.css:220:  --lumi-readable-ink: #243024;
+client/src/styles/lumi-visual-system.css:221:  --lumi-readable-ink-soft: #374637;
+client/src/styles/lumi-visual-system.css:224:  --lumi-readable-on-dark: #fffdf9;
+client/src/styles/lumi-visual-system.css:232:/* Safer readable buttons across generated pages */
+client/src/styles/lumi-visual-system.css:233:button,
+client/src/styles/lumi-visual-system.css:234:[role="button"],
+client/src/styles/lumi-visual-system.css:235:a[class*="button"],
+client/src/styles/lumi-visual-system.css:236:a[class*="Button"],
+client/src/styles/lumi-visual-system.css:237:.btn,
+client/src/styles/lumi-visual-system.css:239:[class*="Button"],
+client/src/styles/lumi-visual-system.css:240:[class*="button"] {
+client/src/styles/lumi-visual-system.css:242:  -webkit-text-fill-color: currentColor;
+client/src/styles/lumi-visual-system.css:245:button:not(:disabled),
+client/src/styles/lumi-visual-system.css:246:[role="button"]:not(:disabled),
+client/src/styles/lumi-visual-system.css:247:a[class*="button"],
+client/src/styles/lumi-visual-system.css:248:a[class*="Button"],
+client/src/styles/lumi-visual-system.css:249:.btn,
+client/src/styles/lumi-visual-system.css:251:[class*="Button"],
+client/src/styles/lumi-visual-system.css:252:[class*="button"] {
+client/src/styles/lumi-visual-system.css:253:  color: var(--lumi-readable-ink);
+client/src/styles/lumi-visual-system.css:256:button[class*="sage"],
+client/src/styles/lumi-visual-system.css:257:button[class*="Sage"],
+client/src/styles/lumi-visual-system.css:260:[class*="sage"] button,
+client/src/styles/lumi-visual-system.css:261:[class*="Sage"] button {
+client/src/styles/lumi-visual-system.css:262:  color: var(--lumi-readable-on-sage) !important;
+client/src/styles/lumi-visual-system.css:265:button[class*="gold"],
+client/src/styles/lumi-visual-system.css:266:button[class*="Gold"],
+client/src/styles/lumi-visual-system.css:269:[class*="gold"] button,
+client/src/styles/lumi-visual-system.css:270:[class*="Gold"] button {
+client/src/styles/lumi-visual-system.css:271:  color: var(--lumi-readable-on-gold) !important;
+client/src/styles/lumi-visual-system.css:274:button[class*="primary"],
+client/src/styles/lumi-visual-system.css:275:button[class*="Primary"],
+client/src/styles/lumi-visual-system.css:278:[class*="primary"] button,
+client/src/styles/lumi-visual-system.css:279:[class*="Primary"] button {
+client/src/styles/lumi-visual-system.css:280:  color: var(--lumi-readable-on-dark);
+client/src/styles/lumi-visual-system.css:283:button:focus-visible,
+client/src/styles/lumi-visual-system.css:284:[role="button"]:focus-visible,
+client/src/styles/lumi-visual-system.css:286:.btn:focus-visible,
+client/src/styles/lumi-visual-system.css:287:[class*="Button"]:focus-visible,
+client/src/styles/lumi-visual-system.css:288:[class*="button"]:focus-visible {
+client/src/styles/lumi-visual-system.css:314:  border-color: var(--lumi-soft-border);
+client/src/styles/lumi-visual-system.css:344:/* Global page background: soft pastel atmosphere without heavy opaque sage */
+client/src/styles/lumi-visual-system.css:346:  background:
+client/src/styles/lumi-visual-system.css:351:  color: var(--lumi-text-strong);
+client/src/styles/lumi-visual-system.css:385:  background:
+client/src/styles/lumi-visual-system.css:400:  background:
+client/src/styles/lumi-visual-system.css:414:  color: var(--lumi-text-strong);
+client/src/styles/lumi-visual-system.css:420:  color: var(--lumi-text-strong);
+client/src/styles/lumi-visual-system.css:429:  color: var(--lumi-text-body);
+client/src/styles/lumi-visual-system.css:432:/* CTA visibility: button text must stay readable on pastel/gold/sage surfaces */
+client/src/styles/lumi-visual-system.css:433:button,
+client/src/styles/lumi-visual-system.css:434:[role="button"],
+client/src/styles/lumi-visual-system.css:435:a[class*="button"],
+client/src/styles/lumi-visual-system.css:436:a[class*="Button"],
+client/src/styles/lumi-visual-system.css:437:.btn,
+client/src/styles/lumi-visual-system.css:439:[class*="Button"],
+client/src/styles/lumi-visual-system.css:440:[class*="button"] {
+client/src/styles/lumi-visual-system.css:447:button:not(:disabled),
+client/src/styles/lumi-visual-system.css:448:[role="button"]:not(:disabled),
+client/src/styles/lumi-visual-system.css:449:a[class*="button"],
+client/src/styles/lumi-visual-system.css:450:a[class*="Button"],
+client/src/styles/lumi-visual-system.css:451:.btn,
+client/src/styles/lumi-visual-system.css:453:[class*="Button"],
+client/src/styles/lumi-visual-system.css:454:[class*="button"] {
+client/src/styles/lumi-visual-system.css:455:  color: var(--lumi-readable-ink, #243024);
+client/src/styles/lumi-visual-system.css:458:.btn-primary,
+client/src/styles/lumi-visual-system.css:459:button.primary,
+client/src/styles/lumi-visual-system.css:464:  color: var(--lumi-readable-on-dark, #fffdf9);
+client/src/styles/lumi-visual-system.css:467:.btn-secondary,
+client/src/styles/lumi-visual-system.css:474:  color: var(--lumi-readable-ink, #243024);
+client/src/styles/lumi-visual-system.css:478:button[style*="background"],
+client/src/styles/lumi-visual-system.css:479:a[style*="background"],
+client/src/styles/lumi-visual-system.css:480:[class*="primary"] button,
+client/src/styles/lumi-visual-system.css:481:[class*="Primary"] button,
+client/src/styles/lumi-visual-system.css:482:[class*="premium"] button,
+client/src/styles/lumi-visual-system.css:483:[class*="Premium"] button {
+client/src/styles/lumi-visual-system.css:484:  -webkit-text-fill-color: currentColor;
+client/src/styles/lumi-visual-system.css:509:  button,
+client/src/styles/lumi-visual-system.css:510:  [role="button"],
+client/src/styles/lumi-visual-system.css:511:  a[class*="button"],
+client/src/styles/lumi-visual-system.css:512:  a[class*="Button"] {
+client/src/styles/lumi-visual-system.css:517:      background 180ms ease,
+client/src/styles/lumi-visual-system.css:521:  button:hover,
+client/src/styles/lumi-visual-system.css:522:  [role="button"]:hover,
+client/src/styles/lumi-visual-system.css:523:  a[class*="button"]:hover,
+client/src/styles/lumi-visual-system.css:524:  a[class*="Button"]:hover {
+client/src/styles/lumi-visual-system.css:536:  button,
+client/src/styles/lumi-visual-system.css:537:  [role="button"],
+client/src/styles/lumi-visual-system.css:538:  a[class*="button"],
+client/src/styles/lumi-visual-system.css:539:  a[class*="Button"],
+client/src/styles/lumi-visual-system.css:540:  .btn {
+client/src/index.css:11:@import "./styles/lumi-buttons.css";
+client/src/index.css:35:  --background: 36 33% 98%;
+client/src/index.css:58:  --background: 180 22% 10%;
+client/src/index.css:75:  border-color: hsl(var(--border));
+client/src/index.css:84:  background: hsl(var(--background));
+client/src/index.css:85:  color: hsl(var(--foreground));
+client/src/index.css:114:/* Gradient backgrounds */
+client/src/index.css:116:  background: linear-gradient(135deg, var(--sage) 0%, var(--blossom) 50%, var(--gold) 100%);
+client/src/index.css:120:  background:
+client/src/index.css:128:  background: rgba(255, 255, 255, 0.8);
+client/src/index.css:150:/* Emotion-Linked Gradient Backgrounds */
+client/src/index.css:152:  background: linear-gradient(135deg, rgba(143, 191, 159, 0.15) 0%, rgba(250, 249, 247, 1) 50%, rgba(173, 216, 230, 0.1) 100%);
+client/src/index.css:156:  background: linear-gradient(135deg, rgba(255, 223, 186, 0.2) 0%, rgba(250, 249, 247, 1) 50%, rgba(212, 175, 55, 0.1) 100%);
+client/src/index.css:160:  background: linear-gradient(135deg, rgba(200, 162, 200, 0.15) 0%, rgba(250, 249, 247, 1) 50%, rgba(143, 191, 159, 0.1) 100%);
+client/src/index.css:164:  background: linear-gradient(135deg, rgba(244, 199, 195, 0.2) 0%, rgba(250, 249, 247, 1) 50%, rgba(143, 191, 159, 0.15) 100%);
+client/src/index.css:168:  background: linear-gradient(135deg, rgba(90, 138, 110, 0.1) 0%, rgba(250, 249, 247, 1) 50%, rgba(70, 130, 180, 0.1) 100%);
+client/src/index.css:172:  background: linear-gradient(135deg, rgba(143, 191, 159, 0.1) 0%, hsl(180, 22%, 10%) 50%, rgba(173, 216, 230, 0.05) 100%);
+client/src/index.css:176:  background: linear-gradient(135deg, rgba(255, 223, 186, 0.1) 0%, hsl(180, 22%, 10%) 50%, rgba(212, 175, 55, 0.05) 100%);
+client/src/index.css:180:  background: linear-gradient(135deg, rgba(200, 162, 200, 0.08) 0%, hsl(180, 22%, 10%) 50%, rgba(143, 191, 159, 0.05) 100%);
+client/src/index.css:184:  background: linear-gradient(135deg, rgba(244, 199, 195, 0.1) 0%, hsl(180, 22%, 10%) 50%, rgba(143, 191, 159, 0.08) 100%);
+client/src/index.css:188:  background: linear-gradient(135deg, rgba(90, 138, 110, 0.08) 0%, hsl(180, 22%, 10%) 50%, rgba(70, 130, 180, 0.05) 100%);
+client/src/index.css:191:/* Animated Gradient Background */
+client/src/index.css:193:  0%, 100% { background-position: 0% 50%; }
+client/src/index.css:194:  50% { background-position: 100% 50%; }
+client/src/index.css:198:  background: linear-gradient(-45deg, rgba(143, 191, 159, 0.15), rgba(244, 199, 195, 0.15), rgba(212, 175, 55, 0.1), rgba(173, 216, 230, 0.1));
+client/src/index.css:199:  background-size: 400% 400%;
+client/src/index.css:206:    background-size: 100% 100%;
+client/src/index.css:210:/* Button styles */
+client/src/index.css:211:.btn {
+client/src/index.css:221:.btn-primary {
+client/src/index.css:222:  background: var(--glp-sage-deep);
+client/src/index.css:223:  color: var(--glp-paper);
+client/src/index.css:229:.btn-primary:hover {
+client/src/index.css:235:.btn-secondary {
+client/src/index.css:236:  background: var(--glp-surface);
+client/src/index.css:237:  color: var(--glp-sage-deep);
+client/src/index.css:241:.btn-secondary:hover {
+client/src/index.css:242:  background: var(--sage);
+client/src/index.css:243:  color: white;
+client/src/index.css:248:  background: white;
+client/src/index.css:263:  color: var(--teal);
+client/src/index.css:271:  background: rgba(var(--glp-sage-rgb), 0.15);
+client/src/index.css:296:  color: var(--charcoal);
+client/src/index.css:304:  background: white;
+client/src/index.css:381:    background-position: -200% 0;
+client/src/index.css:384:    background-position: 200% 0;
+client/src/index.css:410:  background: rgba(255, 255, 255, 0.75);
+client/src/index.css:419:  background: rgba(26, 32, 44, 0.8);
+client/src/index.css:436:  background: 
+client/src/index.css:440:    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
+client/src/index.css:444:  background: 
+client/src/index.css:448:    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
+client/src/index.css:463:/* Legacy btn-premium/btn-secondary-premium removed - see ENHANCED BUTTON SYSTEM section */
+client/src/index.css:467:  background: linear-gradient(135deg, var(--glp-sage) 0%, var(--glp-sage-deep) 40%, var(--glp-gold) 100%);
+client/src/index.css:468:  -webkit-background-clip: text;
+client/src/index.css:469:  -webkit-text-fill-color: transparent;
+client/src/index.css:470:  background-clip: text;
+client/src/index.css:503:  color: var(--teal);
+client/src/index.css:519:/* Legacy icon sizes with padding - use for icon containers with background */
+client/src/index.css:547:  background: linear-gradient(135deg, rgba(143, 191, 159, 0.2) 0%, rgba(90, 138, 110, 0.15) 100%);
+client/src/index.css:548:  color: #5A8A6E;
+client/src/index.css:552:  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(180, 145, 35, 0.15) 100%);
+client/src/index.css:553:  color: #B4912A;
+client/src/index.css:557:  background: linear-gradient(135deg, rgba(244, 199, 195, 0.35) 0%, rgba(196, 154, 130, 0.2) 100%);
+client/src/index.css:558:  color: #A87D68;
+client/src/index.css:562:  background: linear-gradient(135deg, rgba(47, 93, 93, 0.15) 0%, rgba(47, 93, 93, 0.1) 100%);
+client/src/index.css:563:  color: #2F5D5D;
+client/src/index.css:611:  background: rgba(143, 191, 159, 0.2);
+client/src/index.css:612:  color: #4a7a5e;
+client/src/index.css:617:  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.25));
+client/src/index.css:618:  color: #8B7023;
+client/src/index.css:623:  background: linear-gradient(135deg, #D4AF37 0%, #F0D878 50%, #D4AF37 100%);
+client/src/index.css:624:  color: #5A4510;
+client/src/index.css:632:  background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+client/src/index.css:638:  background: hsl(var(--border) / 0.5);
+client/src/index.css:663:  background: linear-gradient(135deg, #8FBF9F, #5A8A6E);
+client/src/index.css:664:  color: white;
+client/src/index.css:677:  background: white;
+client/src/index.css:684:  border-color: var(--sage);
+client/src/index.css:689:  color: hsl(var(--muted-foreground));
+client/src/index.css:694:  background: white;
+client/src/index.css:705:  color: var(--teal);
+client/src/index.css:711:  color: hsl(var(--muted-foreground));
+client/src/index.css:726:  background: rgba(34, 197, 94, 0.1);
+client/src/index.css:727:  color: #16A34A;
+client/src/index.css:731:  background: rgba(239, 68, 68, 0.1);
+client/src/index.css:732:  color: #DC2626;
+client/src/index.css:737:button, input, textarea, select {
+client/src/index.css:738:  color: var(--charcoal);
+client/src/index.css:741:button {
+client/src/index.css:742:  background: var(--panel-strong);
+client/src/index.css:746:button.primary, .btn-primary {
+client/src/index.css:747:  background: var(--glp-sage-deep);
+client/src/index.css:748:  color: var(--glp-paper);
+client/src/index.css:753:  color: var(--teal);
+client/src/index.css:821:  color: var(--sage-500);
+client/src/index.css:827:  color: hsl(var(--foreground) / 0.85);
+client/src/index.css:832:  color: hsl(var(--foreground) / 0.9);
+client/src/index.css:840:  color: var(--teal-600);
+client/src/index.css:860:  background: white;
+client/src/index.css:861:  color: var(--sage-500);
+client/src/index.css:866:  background: linear-gradient(135deg, var(--sage-400) 0%, var(--sage-600) 100%);
+client/src/index.css:867:  color: white;
+client/src/index.css:872:  background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-500) 100%);
+client/src/index.css:873:  color: white;
+client/src/index.css:878:  background: linear-gradient(135deg, var(--blush-300) 0%, var(--blush-500) 100%);
+client/src/index.css:879:  color: white;
+client/src/index.css:884:  background: linear-gradient(135deg, var(--teal-300) 0%, var(--teal-500) 100%);
+client/src/index.css:885:  color: white;
+client/src/index.css:890:  background: transparent;
+client/src/index.css:895:  background: var(--sage-100);
+client/src/index.css:896:  color: var(--sage-600);
+client/src/index.css:900:  background: var(--gold-100);
+client/src/index.css:901:  color: var(--gold-600);
+client/src/index.css:905:  background: var(--blush-100);
+client/src/index.css:906:  color: var(--blush-600);
+client/src/index.css:910:  background: var(--teal-100);
+client/src/index.css:911:  color: var(--teal-600);
+client/src/index.css:965:  background: rgba(255, 255, 255, 0.65);
+client/src/index.css:976:  background: white;
+client/src/index.css:984:  border-color: var(--sage-400);
+client/src/index.css:989:  background: linear-gradient(135deg, var(--sage-50) 0%, white 100%);
+client/src/index.css:1004:  background: linear-gradient(90deg, var(--sage-400), var(--gold-400));
+client/src/index.css:1008:  background: white;
+client/src/index.css:1028:  background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+client/src/index.css:1029:  color: white;
+client/src/index.css:1037:/* --- Enhanced Button Variants --- */
+client/src/index.css:1038:.btn-ghost {
+client/src/index.css:1039:  background: transparent;
+client/src/index.css:1040:  color: var(--sage-600);
+client/src/index.css:1047:.btn-ghost:hover {
+client/src/index.css:1048:  background: var(--sage-100);
+client/src/index.css:1049:  color: var(--sage-700);
+client/src/index.css:1052:.btn-outline-sage {
+client/src/index.css:1053:  background: transparent;
+client/src/index.css:1054:  color: var(--sage-600);
+client/src/index.css:1062:.btn-outline-sage:hover {
+client/src/index.css:1063:  background: var(--sage-500);
+client/src/index.css:1064:  color: white;
+client/src/index.css:1065:  border-color: var(--sage-500);
+client/src/index.css:1068:.btn-outline-gold {
+client/src/index.css:1069:  background: transparent;
+client/src/index.css:1070:  color: var(--gold-600);
+client/src/index.css:1078:.btn-outline-gold:hover {
+client/src/index.css:1079:  background: var(--gold-500);
+client/src/index.css:1080:  color: white;
+client/src/index.css:1081:  border-color: var(--gold-500);
+client/src/index.css:1084:.btn-gradient-gold {
+client/src/index.css:1085:  background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 100%);
+client/src/index.css:1086:  color: white;
+client/src/index.css:1095:.btn-gradient-gold:hover {
+client/src/index.css:1100:.btn-lg {
+client/src/index.css:1106:.btn-sm {
+client/src/index.css:1114:  background: var(--teal-100);
+client/src/index.css:1115:  color: var(--teal-700);
+client/src/index.css:1120:  background: var(--blush-100);
+client/src/index.css:1121:  color: var(--blush-700);
+client/src/index.css:1126:  background: transparent;
+client/src/index.css:1135:/* --- Section Backgrounds --- */
+client/src/index.css:1137:  background: linear-gradient(180deg, var(--sage-50) 0%, white 100%);
+client/src/index.css:1141:  background: linear-gradient(180deg, var(--blush-50) 0%, white 100%);
+client/src/index.css:1145:  background: linear-gradient(180deg, var(--gold-50) 0%, white 100%);
+client/src/index.css:1149:  background: linear-gradient(180deg, var(--teal-900) 0%, var(--teal-800) 100%);
+client/src/index.css:1150:  color: white;
+client/src/index.css:1163:  color: var(--teal-700);
+client/src/index.css:1168:  color: hsl(var(--muted-foreground));
+client/src/index.css:1180:  color: hsl(var(--muted-foreground));
+client/src/index.css:1274:  background: linear-gradient(90deg, transparent, var(--sage-300), var(--gold-300), transparent);
+client/src/index.css:1292:  background: var(--sage-300);
+client/src/index.css:1296:.text-sage { color: var(--sage-500); }
+client/src/index.css:1297:.text-sage-dark { color: var(--sage-700); }
+client/src/index.css:1298:.text-gold { color: var(--gold-500); }
+client/src/index.css:1299:.text-gold-dark { color: var(--gold-700); }
+client/src/index.css:1300:.text-blush { color: var(--blush-500); }
+client/src/index.css:1301:.text-teal { color: var(--teal-500); }
+client/src/index.css:1302:.text-teal-dark { color: var(--teal-700); }
+client/src/index.css:1304:.bg-sage-soft { background: var(--sage-50); }
+client/src/index.css:1305:.bg-sage { background: var(--sage-100); }
+client/src/index.css:1306:.bg-gold-soft { background: var(--gold-50); }
+client/src/index.css:1307:.bg-gold { background: var(--gold-100); }
+client/src/index.css:1308:.bg-blush-soft { background: var(--blush-50); }
+client/src/index.css:1309:.bg-blush { background: var(--blush-100); }
+client/src/index.css:1311:.border-sage { border-color: var(--sage-300); }
+client/src/index.css:1312:.border-gold { border-color: var(--gold-300); }
+client/src/index.css:1313:.border-blush { border-color: var(--blush-300); }
+client/src/index.css:1335:  background: var(--panel);
+client/src/index.css:1348:  color: var(--teal);
+client/src/index.css:1354:  background: rgba(255,255,255,0.55);
+client/src/index.css:1368:  color: var(--teal);
+client/src/index.css:1440:  color: var(--teal-500);
+client/src/index.css:1450:  background: linear-gradient(135deg, var(--teal-500) 0%, var(--sage-500) 40%, var(--gold-400) 100%);
+client/src/index.css:1451:  -webkit-background-clip: text;
+client/src/index.css:1452:  -webkit-text-fill-color: transparent;
+client/src/index.css:1453:  background-clip: text;
+client/src/index.css:1462:  color: var(--teal-600);
+client/src/index.css:1471:  color: var(--teal-700);
+client/src/index.css:1479:  color: hsl(var(--foreground) / 0.78);
+client/src/index.css:1487:  color: hsl(var(--muted-foreground) / 0.9);
+client/src/index.css:1496:  color: var(--gold-500);
+client/src/index.css:1520:  background: linear-gradient(145deg, var(--teal-300), var(--teal-600));
+client/src/index.css:1521:  color: white;
+client/src/index.css:1526:  background: linear-gradient(145deg, var(--gold-300), var(--gold-600));
+client/src/index.css:1527:  color: white;
+client/src/index.css:1532:  background: linear-gradient(145deg, var(--sage-300), var(--sage-600));
+client/src/index.css:1533:  color: white;
+client/src/index.css:1538:  background: linear-gradient(145deg, var(--blush-300), var(--blush-600));
+client/src/index.css:1539:  color: white;
+client/src/index.css:1544:  background: var(--teal-50);
+client/src/index.css:1545:  color: var(--teal-600);
+client/src/index.css:1550:  background: var(--gold-50);
+client/src/index.css:1551:  color: var(--gold-600);
+client/src/index.css:1556:  background: var(--sage-50);
+client/src/index.css:1557:  color: var(--sage-600);
+client/src/index.css:1562:  background: var(--blush-50);
+client/src/index.css:1563:  color: var(--blush-600);
+client/src/index.css:1641:  background: var(--gradient-card-premium);
+client/src/index.css:1656:  border-color: rgba(var(--glp-sage-rgb), 0.22);
+client/src/index.css:1660:  background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(252,248,237,0.92));
+client/src/index.css:1677:  background: linear-gradient(145deg, rgba(240,245,245,0.95), rgba(255,255,255,0.9));
+client/src/index.css:1703:  background: linear-gradient(135deg, transparent, rgba(var(--glp-gold-rgb), 0.06));
+client/src/index.css:1712:/* --- ENHANCED BUTTON SYSTEM --- */
+client/src/index.css:1713:.btn-premium-teal {
+client/src/index.css:1719:  background: linear-gradient(145deg, var(--teal-400), var(--teal-600));
+client/src/index.css:1720:  color: white;
+client/src/index.css:1734:.btn-premium-teal:hover {
+client/src/index.css:1741:.btn-premium-gold {
+client/src/index.css:1747:  background: linear-gradient(145deg, var(--gold-400), var(--gold-600));
+client/src/index.css:1748:  color: white;
+client/src/index.css:1762:.btn-premium-gold:hover {
+client/src/index.css:1769:.btn-glass {
+client/src/index.css:1774:  background: rgba(255, 255, 255, 0.75);
+client/src/index.css:1776:  color: var(--teal-600);
+client/src/index.css:1785:.btn-glass:hover {
+client/src/index.css:1786:  background: rgba(255, 255, 255, 0.92);
+client/src/index.css:1787:  border-color: rgba(var(--glp-sage-rgb), 0.35);
+client/src/index.css:1806:  background: linear-gradient(145deg, var(--teal-50), var(--teal-100));
+client/src/index.css:1807:  color: var(--teal-700);
+client/src/index.css:1812:  background: linear-gradient(145deg, var(--gold-50), var(--gold-100));
+client/src/index.css:1813:  color: var(--gold-700);
+client/src/index.css:1818:  background: linear-gradient(145deg, var(--sage-50), var(--sage-100));
+client/src/index.css:1819:  color: var(--sage-700);
+client/src/index.css:1824:  background: linear-gradient(145deg, var(--gold-400), var(--gold-500));
+client/src/index.css:1825:  color: white;
+client/src/index.css:1929:  0% { background-position: -200% 0; }
+client/src/index.css:1930:  100% { background-position: 200% 0; }
+client/src/index.css:1954:  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+client/src/index.css:1955:  background-size: 200% 100%;
+client/src/index.css:1978:  background: linear-gradient(90deg, transparent, var(--teal-200), var(--gold-200), var(--sage-200), transparent);
+client/src/index.css:1984:  background: linear-gradient(90deg, var(--teal-400), var(--gold-400), var(--sage-400));
+client/src/index.css:1991:  background: linear-gradient(145deg, rgba(30, 40, 50, 0.95), rgba(25, 35, 45, 0.9));
+client/src/index.css:1992:  border-color: rgba(var(--glp-sage-rgb), 0.15);
+client/src/index.css:1996:  background: rgba(42, 84, 84, 0.2);
+client/src/index.css:1997:  border-color: rgba(42, 84, 84, 0.3);
+client/src/index.css:2001:  background: rgba(212, 175, 55, 0.15);
+client/src/index.css:2002:  border-color: rgba(212, 175, 55, 0.25);
+client/src/index.css:2006:  background: rgba(42, 84, 84, 0.25);
+client/src/index.css:2007:  color: var(--teal-300);
+client/src/index.css:2008:  border-color: rgba(42, 84, 84, 0.35);
+client/src/index.css:2012:  background: rgba(212, 175, 55, 0.2);
+client/src/index.css:2013:  color: var(--gold-300);
+client/src/index.css:2014:  border-color: rgba(212, 175, 55, 0.3);
+client/src/index.css:2029:  .btn-premium-teal, .btn-premium-gold { 
+client/src/index.css:2057:.btn-premium-teal:focus-visible,
+client/src/index.css:2058:.btn-premium-gold:focus-visible {
+client/src/index.css:2090:.dark .text-hero { color: var(--teal-300); }
+client/src/index.css:2091:.dark .text-section-title { color: var(--teal-300); }
+client/src/index.css:2092:.dark .text-card-title { color: var(--teal-200); }
+client/src/index.css:2093:.dark .text-card-body { color: rgba(250, 250, 248, 0.78); }
+client/src/index.css:2094:.dark .text-meta { color: rgba(250, 250, 248, 0.6); }
+client/src/index.css:2095:.dark .text-overline { color: var(--gold-400); }
+client/src/index.css:2099:  background: linear-gradient(145deg, rgba(30, 42, 42, 0.95), rgba(25, 35, 35, 0.9));
+client/src/index.css:2100:  border-color: rgba(127, 179, 154, 0.18);
+client/src/index.css:2105:  border-color: rgba(127, 179, 154, 0.3);
+client/src/index.css:2110:  background: linear-gradient(145deg, rgba(40, 35, 25, 0.95), rgba(30, 28, 20, 0.9));
+client/src/index.css:2111:  border-color: rgba(212, 175, 55, 0.25);
+client/src/index.css:2115:  background: linear-gradient(145deg, rgba(25, 40, 40, 0.95), rgba(20, 35, 35, 0.9));
+client/src/index.css:2116:  border-color: rgba(42, 84, 84, 0.25);
+client/src/index.css:2119:/* Dark mode buttons */
+client/src/index.css:2120:.dark .btn-premium-teal {
+client/src/index.css:2121:  background: linear-gradient(145deg, var(--teal-500), var(--teal-700));
+client/src/index.css:2125:.dark .btn-premium-gold {
+client/src/index.css:2126:  background: linear-gradient(145deg, var(--gold-500), var(--gold-700));
+client/src/index.css:2130:.dark .btn-glass {
+client/src/index.css:2131:  background: rgba(30, 42, 42, 0.8);
+client/src/index.css:2133:  color: var(--teal-300);
+client/src/index.css:2134:  border-color: rgba(127, 179, 154, 0.25);
+client/src/index.css:2137:.dark .btn-glass:hover {
+client/src/index.css:2138:  background: rgba(40, 52, 52, 0.9);
+client/src/index.css:2139:  border-color: rgba(127, 179, 154, 0.4);
+client/src/index.css:2144:  background: rgba(60, 160, 160, 0.15);
+client/src/index.css:2145:  color: var(--teal-300);
+client/src/index.css:2146:  border-color: rgba(60, 160, 160, 0.25);
+client/src/index.css:2150:  background: rgba(229, 199, 110, 0.12);
+client/src/index.css:2151:  color: var(--gold-300);
+client/src/index.css:2152:  border-color: rgba(229, 199, 110, 0.2);
+client/src/index.css:2156:  background: rgba(107, 170, 128, 0.12);
+client/src/index.css:2157:  color: var(--sage-300);
+client/src/index.css:2158:  border-color: rgba(107, 170, 128, 0.2);
+client/src/index.css:2162:  background: rgba(245, 196, 192, 0.1);
+client/src/index.css:2163:  color: var(--blush-300);
+client/src/index.css:2164:  border-color: rgba(245, 196, 192, 0.18);
+client/src/index.css:2169:  background: rgba(60, 160, 160, 0.2);
+client/src/index.css:2170:  color: var(--teal-300);
+client/src/index.css:2171:  border-color: rgba(60, 160, 160, 0.35);
+client/src/index.css:2175:  background: rgba(229, 199, 110, 0.15);
+client/src/index.css:2176:  color: var(--gold-300);
+client/src/index.css:2177:  border-color: rgba(229, 199, 110, 0.3);
+client/src/index.css:2181:  background: rgba(107, 170, 128, 0.15);
+client/src/index.css:2182:  color: var(--sage-300);
+client/src/index.css:2183:  border-color: rgba(107, 170, 128, 0.3);
+client/src/index.css:2213:  background: linear-gradient(90deg, transparent, var(--teal-700), var(--gold-700), var(--sage-700), transparent);
+client/src/index.css:2217:  background: linear-gradient(90deg, var(--teal-500), var(--gold-500), var(--sage-500));
+client/src/index.css:2221:.dark .text-sage { color: var(--sage-400); }
+client/src/index.css:2222:.dark .text-sage-dark { color: var(--sage-300); }
+client/src/index.css:2223:.dark .text-gold { color: var(--gold-400); }
+client/src/index.css:2224:.dark .text-gold-dark { color: var(--gold-300); }
+client/src/index.css:2225:.dark .text-blush { color: var(--blush-400); }
+client/src/index.css:2226:.dark .text-teal { color: var(--teal-400); }
+client/src/index.css:2227:.dark .text-teal-dark { color: var(--teal-300); }
+client/src/index.css:2229:/* Dark mode backgrounds */
+client/src/index.css:2230:.dark .bg-sage-soft { background: rgba(107, 170, 128, 0.1); }
+client/src/index.css:2231:.dark .bg-sage { background: rgba(107, 170, 128, 0.15); }
+client/src/index.css:2232:.dark .bg-gold-soft { background: rgba(229, 199, 110, 0.08); }
+client/src/index.css:2233:.dark .bg-gold { background: rgba(229, 199, 110, 0.12); }
+client/src/index.css:2234:.dark .bg-blush-soft { background: rgba(245, 196, 192, 0.06); }
+client/src/index.css:2235:.dark .bg-blush { background: rgba(245, 196, 192, 0.1); }
+client/src/index.css:2237:/* Dark mode section backgrounds */
+client/src/index.css:2239:  background: linear-gradient(180deg, rgba(107, 170, 128, 0.08) 0%, transparent 100%);
+client/src/index.css:2243:  background: linear-gradient(180deg, rgba(245, 196, 192, 0.06) 0%, transparent 100%);
+client/src/index.css:2247:  background: linear-gradient(180deg, rgba(229, 199, 110, 0.06) 0%, transparent 100%);
+client/src/index.css:2252:  background: transparent;
+client/src/index.css:2340:.text-success { color: #10b981; }
+client/src/index.css:2341:.text-warning { color: #f59e0b; }
+client/src/index.css:2342:.text-error { color: #ef4444; }
+client/src/index.css:2343:.text-info { color: #3b82f6; }
+client/src/index.css:2347:  background: linear-gradient(135deg, var(--sage) 0%, var(--teal) 50%, var(--gold) 100%);
+client/src/index.css:2348:  -webkit-background-clip: text;
+client/src/index.css:2349:  -webkit-text-fill-color: transparent;
+client/src/index.css:2350:  background-clip: text;
+client/src/index.css:2354:  background: linear-gradient(135deg, #2A5454 0%, #7FB39A 50%, #D4AF37 100%);
+client/src/index.css:2355:  -webkit-background-clip: text;
+client/src/index.css:2356:  -webkit-text-fill-color: transparent;
+client/src/index.css:2357:  background-clip: text;
+client/src/index.css:2361:  background: linear-gradient(135deg, #D4AF37 0%, #F5D76E 50%, #D4AF37 100%);
+client/src/index.css:2362:  -webkit-background-clip: text;
+client/src/index.css:2363:  -webkit-text-fill-color: transparent;
+client/src/index.css:2364:  background-clip: text;
+client/src/index.css:2371:.bg-teal-50 { background: var(--teal-50); }
+client/src/index.css:2372:.bg-teal-100 { background: var(--teal-100); }
+client/src/index.css:2373:.bg-teal-500 { background: var(--teal-500); }
+client/src/index.css:2374:.bg-teal-600 { background: var(--teal-600); }
+client/src/index.css:2376:.bg-gold-50 { background: var(--gold-50); }
+client/src/index.css:2377:.bg-gold-100 { background: var(--gold-100); }
+client/src/index.css:2378:.bg-gold-500 { background: var(--gold-500); }
+client/src/index.css:2380:.bg-sage-50 { background: var(--sage-50); }
+client/src/index.css:2381:.bg-sage-100 { background: var(--sage-100); }
+client/src/index.css:2382:.bg-sage-500 { background: var(--sage-500); }
+client/src/index.css:2384:.bg-blush-50 { background: var(--blush-50); }
+client/src/index.css:2385:.bg-blush-100 { background: var(--blush-100); }
+client/src/index.css:2388:.border-teal { border-color: var(--teal-400); }
+client/src/index.css:2389:.border-gold { border-color: var(--gold-400); }
+client/src/index.css:2390:.border-sage { border-color: var(--sage-400); }
+client/src/index.css:2391:.border-blush { border-color: var(--blush-400); }
+client/src/index.css:2425:  background: linear-gradient(135deg, var(--sage-400) 0%, var(--sage-600) 100%);
+client/src/index.css:2426:  color: white;
+client/src/index.css:2431:  background: linear-gradient(135deg, var(--teal-400) 0%, var(--teal-600) 100%);
+client/src/index.css:2432:  color: white;
+client/src/index.css:2437:  background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-600) 100%);
+client/src/index.css:2438:  color: white;
+client/src/index.css:2443:  background: linear-gradient(135deg, var(--blush-400) 0%, var(--blush-600) 100%);
+client/src/index.css:2444:  color: white;
+client/src/index.css:2450:  background: var(--sage-100);
+client/src/index.css:2451:  color: var(--sage-600);
+client/src/index.css:2455:  background: var(--teal-100);
+client/src/index.css:2456:  color: var(--teal-600);
+client/src/index.css:2460:  background: var(--gold-100);
+client/src/index.css:2461:  color: var(--gold-600);
+client/src/index.css:2465:  background: var(--blush-100);
+client/src/index.css:2466:  color: var(--blush-600);
+client/src/index.css:2470:.icon-primary { color: var(--teal-600); }
+client/src/index.css:2471:.icon-secondary { color: var(--sage-500); }
+client/src/index.css:2472:.icon-accent { color: var(--gold-500); }
+client/src/index.css:2473:.icon-muted { color: var(--charcoal); opacity: 0.4; }
+client/src/index.css:2474:.icon-success { color: #10b981; }
+client/src/index.css:2475:.icon-warning { color: #f59e0b; }
+client/src/index.css:2476:.icon-error { color: #ef4444; }
+client/src/index.css:2495:/* === ENHANCED BUTTON SYSTEM === */
+client/src/index.css:2497:/* Premium button base */
+client/src/index.css:2498:.btn-premium {
+client/src/index.css:2506:  background: linear-gradient(135deg, var(--teal-500) 0%, var(--teal-600) 100%);
+client/src/index.css:2507:  color: white;
+client/src/index.css:2514:.btn-premium:hover {
+client/src/index.css:2519:.btn-premium:active {
+client/src/index.css:2523:.btn-premium:focus-visible {
+client/src/index.css:2528:/* Secondary premium button */
+client/src/index.css:2529:.btn-secondary-premium {
+client/src/index.css:2537:  background: white;
+client/src/index.css:2538:  color: var(--teal-600);
+client/src/index.css:2545:.btn-secondary-premium:hover {
+client/src/index.css:2546:  background: var(--sage-50);
+client/src/index.css:2547:  border-color: var(--sage-400);
+client/src/index.css:2551:.btn-secondary-premium:focus-visible {
+client/src/index.css:2556:/* Ghost button */
+client/src/index.css:2557:.btn-ghost {
+client/src/index.css:2564:  color: var(--teal-600);
+client/src/index.css:2565:  background: transparent;
+client/src/index.css:2571:.btn-ghost:hover {
+client/src/index.css:2572:  background: var(--sage-100);
+client/src/index.css:2575:.btn-ghost:focus-visible {
+client/src/index.css:2580:/* Button sizes */
+client/src/index.css:2581:.btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; }
+client/src/index.css:2582:.btn-lg { padding: 1rem 2rem; font-size: 1rem; }
+client/src/index.css:2588:  background: white;
+client/src/index.css:2603:  background: rgba(255, 255, 255, 0.7);
+client/src/index.css:2613:  background: white;
+client/src/index.css:2633:  background: rgba(30, 35, 45, 0.9);
+client/src/index.css:2634:  border-color: rgba(var(--glp-sage-rgb), 0.15);
+client/src/index.css:2643:  background: rgba(30, 35, 45, 0.7);
+client/src/index.css:2644:  border-color: rgba(255, 255, 255, 0.1);
+client/src/index.css:2648:  background: rgba(30, 35, 45, 0.9);
+client/src/index.css:2649:  border-color: rgba(var(--glp-sage-rgb), 0.15);
+client/src/index.css:2653:  color: var(--glp-paper);
+client/src/index.css:2656:/* Dark mode support for buttons */
+client/src/index.css:2657:.dark .btn-premium {
+client/src/index.css:2661:.dark .btn-secondary-premium {
+client/src/index.css:2662:  background: rgba(30, 35, 45, 0.9);
+client/src/index.css:2663:  color: var(--glp-sage);
+client/src/index.css:2664:  border-color: rgba(var(--glp-sage-rgb), 0.3);
+client/src/index.css:2667:.dark .btn-secondary-premium:hover {
+client/src/index.css:2668:  background: rgba(var(--glp-sage-rgb), 0.15);
+client/src/index.css:2669:  border-color: var(--glp-sage);
+client/src/index.css:2672:.dark .btn-ghost {
+client/src/index.css:2673:  color: var(--glp-paper);
+client/src/index.css:2676:.dark .btn-ghost:hover {
+client/src/index.css:2677:  background: rgba(255, 255, 255, 0.08);
+client/src/index.css:2758:  background: var(--sage-100);
+client/src/index.css:2759:  color: var(--sage-700);
+client/src/index.css:2763:  background: var(--teal-100);
+client/src/index.css:2764:  color: var(--teal-700);
+client/src/index.css:2768:  background: var(--gold-100);
+client/src/index.css:2769:  color: var(--gold-700);
+client/src/index.css:2773:  background: var(--blush-100);
+client/src/index.css:2774:  color: var(--blush-700);
+client/src/index.css:2781:  background: linear-gradient(90deg, transparent, var(--sage-300), var(--gold-300), var(--sage-300), transparent);
+client/src/index.css:2786:  background: linear-gradient(90deg, transparent, var(--sage-200), transparent);
+client/src/index.css:2797:  background: white;
+client/src/index.css:2806:  border-color: rgba(var(--glp-sage-rgb), 0.25);
+client/src/index.css:2822:.dark .text-lead { color: var(--ivory); opacity: 0.8; }
+client/src/index.css:2823:.dark .text-body-lg { color: var(--ivory); opacity: 0.85; }
+client/src/index.css:2824:.dark .text-brand { color: var(--teal-300); }
+client/src/index.css:2825:.dark .text-accent { color: var(--gold-400); }
+client/src/index.css:2826:.dark .text-secondary { color: var(--ivory); opacity: 0.7; }
+client/src/index.css:2827:.dark .text-tertiary { color: var(--ivory); opacity: 0.5; }
+client/src/index.css:2832:  background: rgba(30, 42, 42, 0.9);
+client/src/index.css:2833:  border-color: rgba(var(--glp-sage-rgb), 0.12);
+client/src/index.css:2837:  border-color: rgba(var(--glp-sage-rgb), 0.3);
+client/src/index.css:2840:.dark .icon-soft-sage { background: rgba(127, 179, 154, 0.15); color: var(--sage-400); }
+client/src/index.css:2841:.dark .icon-soft-teal { background: rgba(42, 84, 84, 0.2); color: var(--teal-400); }
+client/src/index.css:2842:.dark .icon-soft-gold { background: rgba(212, 175, 55, 0.15); color: var(--gold-400); }
+client/src/index.css:2843:.dark .icon-soft-blush { background: rgba(232, 169, 163, 0.12); color: var(--blush-400); }
+client/src/index.css:2845:.dark .badge-sage { background: rgba(127, 179, 154, 0.2); color: var(--sage-400); }
+client/src/index.css:2846:.dark .badge-teal { background: rgba(42, 84, 84, 0.25); color: var(--teal-400); }
+client/src/index.css:2847:.dark .badge-gold { background: rgba(212, 175, 55, 0.2); color: var(--gold-400); }
+client/src/index.css:2848:.dark .badge-blush { background: rgba(232, 169, 163, 0.15); color: var(--blush-400); }
+client/src/index.css:2851:  background: linear-gradient(90deg, transparent, var(--sage-700), var(--gold-700), var(--sage-700), transparent);
+client/src/index.css:2854:.dark .btn-secondary-premium {
+client/src/index.css:2855:  background: rgba(30, 42, 42, 0.9);
+client/src/index.css:2856:  color: var(--teal-300);
+client/src/index.css:2857:  border-color: var(--sage-600);
+client/src/index.css:2860:.dark .btn-ghost {
+client/src/index.css:2861:  color: var(--teal-300);
+client/src/index.css:2864:.dark .btn-ghost:hover {
+client/src/index.css:2865:  background: rgba(127, 179, 154, 0.15);
+client/src/index.css:2896:  color: var(--glp-sage-deep);
+client/src/index.css:2903:  color: var(--glp-text-secondary);
+client/src/index.css:2921:  color: var(--glp-sage-deep);
+client/src/index.css:2927:  color: var(--glp-text-secondary);
+client/src/index.css:2997:  color: var(--glp-text-secondary);
+client/src/index.css:3010:  color: var(--glp-text-secondary);

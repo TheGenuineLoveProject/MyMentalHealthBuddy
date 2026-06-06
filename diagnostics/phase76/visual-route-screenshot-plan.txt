@@ -1,0 +1,13 @@
+VISUAL_ROUTE_SCREENSHOT_PLAN_CREATED
+/
+/pricing
+/premium
+/account/billing
+/account/subscription
+/wellness
+/tools
+/safety
+/privacy
+/terms
+/login
+/register
