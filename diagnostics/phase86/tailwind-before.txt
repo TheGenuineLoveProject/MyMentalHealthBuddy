@@ -1,0 +1,50 @@
+     1	/** @type {import('tailwindcss').Config} */
+     2	module.exports = {
+     3	  content: [
+     4	    "./client/src/**/*.{js,jsx,ts,tsx,html}",
+     5	    "./public/index.html"
+     6	  ],
+     7	            theme: {
+     8	              extend: {
+     9	                fontFamily: {
+    10	                  serif: ['Playfair Display', 'serif'],
+    11	                  sans: ['Inter', 'sans-serif'],
+    12	                },
+    13	                colors: {
+    14	                  softWhite: '#faf9f7',
+    15	                  dustyRose: '#f4c7c3',
+    16	                  sageGreen: '#8fbf9f',
+    17	                  deepTeal: '#2f5d5d',
+    18	                  charcoal: '#3a3a3a',
+    19	                  metallicGold: '#d4af37',
+    20	                  metallicGoldLight: '#ffd700',
+    21	                },
+    22	                boxShadow: {
+    23	                  glow: '0 0 20px rgba(212,175,55,0.5)',
+    24	                  pulse: '0 0 10px rgba(244,199,195,0.7) inset',
+    25	                },
+    26	                animation: {
+    27	                  float: 'float 4s ease-in-out infinite',
+    28	                  fadeIn: 'fadeIn 0.6s ease-out',
+    29	                },
+    30	                keyframes: {
+    31	                  float: {
+    32	                    '0%, 100%': { transform: 'translateY(0)' },
+    33	                    '50%': { transform: 'translateY(-12px)' },
+    34	                  },
+    35	                  fadeIn: {
+    36	                    '0%': { opacity: 0, transform: 'translateY(6px)' },
+    37	                    '100%': { opacity: 1, transform: 'translateY(0)' },
+    38	                  },
+    39	                },
+    40	                borderRadius: {
+    41	                  xl: '1rem',
+    42	                  sacred: '2rem',
+    43	                },
+    44	              },
+    45	            },  plugins: [
+    46	              require('@tailwindcss/typography'),
+    47	              require('@tailwindcss/forms'),
+    48	              require('@tailwindcss/aspect-ratio'),
+    49	              require('@tailwindcss/line-clamp'),
+    50	            ]
