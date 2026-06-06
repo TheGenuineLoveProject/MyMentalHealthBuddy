@@ -1,0 +1,700 @@
+client/src/pages/admin/CommandCenter.module.css:3:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/admin/CommandCenter.module.css:72:.refreshButton {
+client/src/pages/admin/CommandCenter.module.css:86:.refreshButton:hover {
+client/src/pages/admin/CommandCenter.module.css:91:.refreshButton:disabled {
+client/src/pages/admin/CommandCenter.module.css:138:.metricCard {
+client/src/pages/admin/CommandCenter.module.css:241:.card {
+client/src/pages/admin/CommandCenter.module.css:249:.cardHeader {
+client/src/pages/admin/CommandCenter.module.css:256:.cardTitleContainer {
+client/src/pages/admin/CommandCenter.module.css:262:.cardHeaderIcon {
+client/src/pages/admin/CommandCenter.module.css:268:.cardTitle {
+client/src/pages/admin/CommandCenter.module.css:550:.quickActionButton {
+client/src/pages/admin/CommandCenter.module.css:564:.quickActionButton:hover {
+client/src/pages/admin/CommandCenter.module.css:599:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/admin/CommandCenter.module.css:622:  background: var(--glp-bg-gradient, linear-gradient(180deg, #fdfcfb 0%, #f5f2ef 100%));
+client/src/pages/admin/CommandCenter.module.css:644:.retryButton {
+client/src/pages/admin/CommandCenter.module.css:657:.retryButton:hover {
+client/src/pages/admin/CommandCenter.module.css:668:.navSection {
+client/src/pages/admin/CommandCenter.module.css:676:.navSectionTitle {
+client/src/pages/admin/CommandCenter.module.css:693:.navCard {
+client/src/pages/admin/CommandCenter.module.css:706:.navCard:hover {
+client/src/pages/admin/CommandCenter.module.css:712:.navCardIcon {
+client/src/pages/admin/CommandCenter.module.css:725:.navCardContent {
+client/src/pages/admin/CommandCenter.module.css:730:.navCardLabel {
+client/src/pages/admin/CommandCenter.module.css:738:.navCardDesc {
+client/src/pages/admin/CommandCenter.module.css:746:.navCardArrow {
+client/src/pages/admin/CommandCenter.module.css:752:.navCard:hover .navCardArrow {
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:23:      <div className="mb-6 p-4 rounded-xl border border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20" data-testid="panel-ai-diagnostics-clear">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:24:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:25:          <Stethoscope size={16} className="text-green-600" />
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:26:          <span className="text-sm font-semibold text-green-700 dark:text-green-400">AI Diagnostics: All Systems Healthy</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:27:          <CheckCircle size={14} className="text-green-600" />
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:29:        <p className="text-xs text-green-600 dark:text-green-500 mt-1">Codex Knowledge Base confirms all monitored tools are operational. No remediation required.</p>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:37:    <div className="mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20" data-testid="panel-ai-diagnostics">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:38:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:39:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:40:          <Stethoscope size={16} className="text-amber-600" />
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:41:          <span className="text-sm font-semibold">AI Diagnostics & Remediation</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:42:          <span className="text-xs px-2 py-0.5 rounded-full bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 font-medium">{issues.length} issues</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:44:        <button
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:46:          className="text-xs px-3 py-1.5 rounded-lg border border-amber-300 dark:border-amber-700 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:47:          data-testid="button-toggle-diagnostics"
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:50:        </button>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:54:        <div className="mb-2 flex items-center gap-2 text-xs">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:55:          <span className="px-1.5 py-0.5 rounded bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 font-semibold">CRITICAL: {criticalIssues.length}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:56:          <span className="text-muted-foreground">{criticalIssues.map(i => i.label).join(', ')}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:60:        <div className="mb-2 flex items-center gap-2 text-xs">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:61:          <span className="px-1.5 py-0.5 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 font-semibold">HIGH: {highIssues.length}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:62:          <span className="text-muted-foreground">{highIssues.map(i => i.label).join(', ')}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:66:        <div className="mb-2 flex items-center gap-2 text-xs">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:67:          <span className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium">NORMAL: {normalIssues.length}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:68:          <span className="text-muted-foreground">{normalIssues.map(i => i.label).join(', ')}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:73:        <div className="mt-3 space-y-2">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:78:              <div key={issue.id} className={`p-3 rounded-lg border ${sevColor} bg-background`} data-testid={`diagnostics-${issue.id}`}>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:79:                <div className="flex items-center justify-between mb-1">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:80:                  <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:81:                    <issue.icon size={14} className={issue.result.status === 'error' ? 'text-red-500' : 'text-amber-500'} />
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:82:                    <span className="text-sm font-medium">{issue.label}</span>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:83:                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:87:                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:92:                  <button
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:94:                    className="text-xs px-2 py-1 rounded border border-gray-200 dark:border-gray-700 hover:bg-muted transition-colors flex items-center gap-1"
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:95:                    data-testid={`button-retry-${issue.id}`}
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:98:                  </button>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:100:                <div className="text-xs text-muted-foreground mt-1">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:101:                  <div className="flex items-start gap-1.5 mb-1">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:102:                    <Brain size={11} className="mt-0.5 text-purple-500 flex-shrink-0" />
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:105:                      <span className={`text-[9px] px-1 py-0.5 rounded font-medium flex-shrink-0 ${remediation.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : remediation.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:110:                  <div className="flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:111:                    <Wrench size={11} className="text-blue-500 flex-shrink-0" />
+client/src/pages/admin/_adminTools/AIDiagnosticsPanel.jsx:112:                    <span className="font-medium">{remediation?.action}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:207:    <div className="mb-6 p-4 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/30 dark:bg-purple-950/20" data-testid="panel-repair-center">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:208:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:209:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:210:          <Wrench size={16} className="text-purple-600" />
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:211:          <span className="text-sm font-semibold">AI Repair Center</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:212:          <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-200 font-medium">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:216:            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-800 text-amber-700 dark:text-amber-200 font-medium">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:221:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:223:            <button
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:226:              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium hover:bg-purple-700 transition-colors disabled:opacity-50"
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:227:              data-testid="button-auto-repair"
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:229:              {isRepairing ? <RefreshCw size={12} className="animate-spin" /> : <Wand2 size={12} />}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:231:            </button>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:234:            <button
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:237:              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-xs font-medium hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors disabled:opacity-50"
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:238:              data-testid="button-batch-recheck"
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:241:            </button>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:243:          <button
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:245:            className="text-xs px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:246:            data-testid="button-toggle-repair"
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:249:          </button>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:254:        <div className="flex items-center gap-3 text-xs mb-3 p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:255:          <span className="font-medium">Last Repair Run:</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:256:          <span className="text-green-600">{repairStats.fixed} fixed</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:257:          <span className="text-red-500">{repairStats.failed} failed</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:258:          <span className="text-muted-foreground">{repairStats.attempted} attempted</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:263:        <div className="mt-3 space-y-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:265:            <div className="text-center py-4 text-sm text-green-600">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:266:              <CheckCircle size={20} className="mx-auto mb-2" />
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:271:              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:276:                    <div key={issue.id} className={`p-3 rounded-lg border ${issue.severity === 'critical' ? 'border-red-200 dark:border-red-800' : issue.severity === 'high' ? 'border-orange-200 dark:border-orange-800' : 'border-gray-200 dark:border-gray-700'} bg-background`} data-testid={`repair-${issue.id}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:277:                      <div className="flex items-center justify-between mb-1.5">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:278:                        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:279:                          <issue.icon size={13} className={issue.result.status === 'error' ? 'text-red-500' : 'text-amber-500'} />
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:280:                          <span className="text-xs font-medium">{issue.label}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:282:                            <span className={`text-[9px] px-1 py-0.5 rounded font-bold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:287:                        <div className="flex items-center gap-1">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:289:                            <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${rem.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rem.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:294:                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 font-medium">Auto-Fix</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:298:                      <p className="text-[11px] text-muted-foreground mb-1.5 leading-relaxed">{rem?.suggestion}</p>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:299:                      <div className="flex items-center justify-between">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:300:                        <div className="flex items-center gap-1 text-[10px]">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:301:                          <Wrench size={10} className="text-blue-500" />
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:302:                          <span className="font-medium text-muted-foreground">{rem?.action}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:305:                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${logEntry.status === 'fixed' ? 'bg-green-100 text-green-600' : logEntry.status === 'failed' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:310:                          <button
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:312:                            className="text-[10px] px-2 py-0.5 rounded border border-gray-200 dark:border-gray-700 hover:bg-muted transition-colors flex items-center gap-1"
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:313:                            data-testid={`button-repair-retry-${issue.id}`}
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:316:                          </button>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:325:                <div className="mt-3">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:326:                  <div className="text-xs font-semibold text-amber-600 mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:329:                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:333:                        <div key={tool.id} className="p-2.5 rounded-lg border border-amber-200 dark:border-amber-800 bg-background flex items-center justify-between" data-testid={`slow-${tool.id}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:334:                          <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:335:                            <tool.icon size={12} className="text-amber-500" />
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:336:                            <span className="text-xs font-medium">{tool.label}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:338:                          <span className="text-xs font-bold text-amber-600">{r?.ms}ms</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:347:                <div className="mt-3 p-3 rounded-lg bg-muted/30 border border-gray-200 dark:border-gray-700">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:348:                  <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:351:                  <div className="space-y-1 max-h-32 overflow-y-auto">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:353:                      <div key={i} className="text-[10px] font-mono flex items-center gap-2">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:354:                        <span className="text-muted-foreground">{entry.time}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:355:                        <span className={entry.status === 'fixed' ? 'text-green-600' : entry.status === 'failed' ? 'text-red-500' : 'text-blue-500'}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:359:                        <span className="text-muted-foreground">→ {entry.action}</span>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:366:              <div className="mt-3">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:367:                <div className="text-xs font-semibold mb-2 flex items-center gap-1.5 text-purple-600">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:370:                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5">
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:375:                      <div key={cmd} className="p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800 text-[10px]" data-testid={`fix-cmd-${cmd}`}>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:376:                        <div className="font-mono font-bold text-purple-600 mb-0.5">{cmd}</div>
+client/src/pages/admin/_adminTools/AIRepairCenter.jsx:377:                        <div className="text-muted-foreground">{scenarios.length} scenario{scenarios.length !== 1 ? 's' : ''} · {kbs.join(', ')}</div>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:184:    <div className="mb-6 p-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50/30 dark:bg-blue-950/20" data-testid="panel-daily-ops-runbook">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:185:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:186:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:187:          <Clipboard size={16} className="text-blue-600" />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:188:          <span className="text-sm font-semibold">Daily Operations Runbook</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:189:          <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 font-medium" data-testid="text-runbook-progress">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:193:            <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200 font-medium" data-testid="text-runbook-duration">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:198:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:199:          <button
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:202:            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:203:            data-testid="button-run-full-pipeline"
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:205:            {pipelineRunning ? <RefreshCw size={12} className="animate-spin" /> : <Rocket size={12} />}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:207:          </button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:208:          <button
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:210:            className="text-xs px-3 py-1.5 rounded-lg border border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:211:            data-testid="button-toggle-runbook"
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:214:          </button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:218:      <div className="h-2 rounded-full bg-blue-200 dark:bg-blue-800 overflow-hidden mb-2">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:219:        <div className="h-full rounded-full bg-blue-500 transition-all duration-500" style={{ width: `${progress}%` }} />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:223:        <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 mb-2 p-2 rounded-lg bg-blue-100/50 dark:bg-blue-900/20" data-testid="text-runbook-current-step">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:224:          <RefreshCw size={12} className="animate-spin" />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:225:          <span className="font-medium">Currently executing: {opsSteps.find(s => s.id === currentStep)?.label || currentStep}</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:230:        <div className="mt-3 space-y-2">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:241:              <div key={step.id} className={`flex items-center gap-3 p-2.5 rounded-lg border transition-all ${
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:242:                isActive ? 'border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-950/30 ring-1 ring-blue-300' :
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:243:                step.done ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/20' : 
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:244:                'border-gray-200 dark:border-gray-700 bg-background'
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:246:                <span className="text-xs font-bold text-muted-foreground w-5">{i + 1}.</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:248:                  <RefreshCw size={14} className="animate-spin text-blue-500 flex-shrink-0" />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:250:                  <CheckCircle size={14} className="text-green-600 flex-shrink-0" />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:252:                  <StepIcon size={14} className={`${catColors[step.category] || 'text-muted-foreground'} flex-shrink-0`} />
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:254:                <span className={`text-sm flex-1 ${isActive ? 'text-blue-700 dark:text-blue-300 font-medium' : step.done ? 'text-green-700 dark:text-green-400 line-through' : ''}`}>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:256:                  {stepTimestamps[step.id] && <span className="text-[10px] text-muted-foreground ml-2 font-normal">({stepTimestamps[step.id]})</span>}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:258:                <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${catColors[step.category] || 'text-gray-500'} bg-muted/50`}>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:262:                  <button onClick={() => Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)))} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-quick-diag">Run</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:265:                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50" data-testid="button-runbook-full-scan">Run All</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:268:                  <button onClick={runErrorsOnly} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-recheck">Re-check</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:271:                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition-colors disabled:opacity-50" data-testid="button-runbook-integrity">Verify</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:274:                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-violet-500 text-white hover:bg-violet-600 transition-colors" data-testid="button-runbook-git">Scan</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:277:                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-teal-500 text-white hover:bg-teal-600 transition-colors" data-testid="button-runbook-deep-scan">Scan</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:280:                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:283:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-testid="button-runbook-warm">Warm</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:286:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:289:                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:296:            <div className="mt-3 p-3 rounded-lg bg-muted/30 border border-gray-200 dark:border-gray-700">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:297:              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:300:              <div className="space-y-1.5 max-h-32 overflow-y-auto">
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:302:                  <div key={i} className="flex items-center gap-3 text-[11px] p-1.5 rounded bg-background" data-testid={`daily-ops-history-${i}`}>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:303:                    <span className="text-muted-foreground font-mono w-20">{new Date(run.timestamp).toLocaleDateString()}</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:304:                    <span className={`font-bold ${run.score >= 90 ? 'text-green-600' : run.score >= 70 ? 'text-amber-500' : 'text-red-500'}`}>{run.score}%</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:305:                    <span className="text-green-600">{run.healthy} ok</span>
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:306:                    {run.errors > 0 && <span className="text-red-500">{run.errors} err</span>}
+client/src/pages/admin/_adminTools/DailyOpsRunbook.jsx:307:                    <span className="text-muted-foreground">{run.duration}s</span>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:32:    <div className="mb-6 p-4 rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/30 dark:bg-violet-950/20" data-testid="panel-git-integrity">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:33:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:34:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:35:          <GitBranch size={16} className="text-violet-600" />
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:36:          <span className="text-sm font-semibold">Git Integrity Scanner</span>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:38:            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${gitData.status === 'healthy' ? 'bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200' : 'bg-amber-100 dark:bg-amber-800 text-amber-700 dark:text-amber-200'}`}>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:43:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:44:          <button
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:47:            className="text-xs px-3 py-1.5 rounded-lg border border-violet-300 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-900/30 transition-colors flex items-center gap-1"
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:48:            data-testid="button-scan-git"
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:50:            {loading ? <RefreshCw size={10} className="animate-spin" /> : <ScanLine size={10} />}
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:52:          </button>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:53:          <button
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:55:            className="text-xs px-3 py-1.5 rounded-lg border border-violet-300 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-900/30 transition-colors"
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:56:            data-testid="button-toggle-git"
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:59:          </button>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:64:        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 mb-2">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:65:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-branch">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:66:            <div className="text-sm font-bold text-violet-600 truncate">{gitData.checks?.branch || '—'}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:67:            <div className="text-[9px] text-muted-foreground">Branch</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:69:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-commits">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:70:            <div className="text-lg font-bold text-blue-600">{gitData.checks?.commitCount || 0}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:71:            <div className="text-[9px] text-muted-foreground">Commits</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:73:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-changes">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:74:            <div className={`text-lg font-bold ${(gitData.checks?.totalChanges || 0) > 10 ? 'text-amber-500' : 'text-green-600'}`}>{gitData.checks?.totalChanges || 0}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:75:            <div className="text-[9px] text-muted-foreground">Changes</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:77:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-modified">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:78:            <div className="text-lg font-bold text-orange-500">{gitData.checks?.modifiedFiles || 0}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:79:            <div className="text-[9px] text-muted-foreground">Modified</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:81:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-untracked">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:82:            <div className={`text-lg font-bold ${(gitData.checks?.untrackedFiles || 0) > 5 ? 'text-red-500' : 'text-gray-500'}`}>{gitData.checks?.untrackedFiles || 0}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:83:            <div className="text-[9px] text-muted-foreground">Untracked</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:85:          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-size">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:86:            <div className="text-sm font-bold text-gray-600">{gitData.checks?.repoSize || '—'}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:87:            <div className="text-[9px] text-muted-foreground">Repo Size</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:93:        <div className="mt-3 space-y-3">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:95:            <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:96:              <div className="text-xs font-semibold mb-1 flex items-center gap-1.5"><Clipboard size={12} /> Last Commit</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:97:              <div className="text-[11px] font-mono text-muted-foreground break-all">{gitData.checks.lastCommit}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:100:          <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:101:            <button
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:103:              className="text-xs px-3 py-1.5 rounded-lg bg-violet-600 text-white hover:bg-violet-700 transition-colors flex items-center gap-1"
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:104:              data-testid="button-repair-git"
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:107:            </button>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:110:            <div className={`p-3 rounded-lg border ${repairResult.success ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/15'}`}>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:111:              <div className="text-xs font-semibold mb-1">{repairResult.success ? 'Repair Successful' : 'Repair Issues Found'}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:112:              <div className="text-[11px] text-muted-foreground">{repairResult.message}</div>
+client/src/pages/admin/_adminTools/GitIntegrityScanner.jsx:114:                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:3:// OptimizeAllButton (originally lines 672-713) co-located here — it was used only by PlatformCoverageReport.
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:51:    <div className="mb-6 p-4 rounded-xl border border-rose-200 dark:border-rose-800 bg-rose-50/30 dark:bg-rose-950/20" data-testid="panel-coverage-report">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:52:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:53:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:54:          <Target size={16} className="text-rose-600" />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:55:          <span className="text-sm font-semibold">360° Platform Coverage Report</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:56:          <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${overallScore >= 85 ? 'bg-green-100 text-green-700' : overallScore >= 65 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`} data-testid="text-coverage-score">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:60:        <button
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:62:          className="text-xs px-3 py-1.5 rounded-lg border border-rose-300 dark:border-rose-700 hover:bg-rose-100 dark:hover:bg-rose-900/30 transition-colors"
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:63:          data-testid="button-toggle-coverage"
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:66:        </button>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:69:      <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:70:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-admin-links">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:71:          <div className="text-lg font-bold text-emerald-600">{linkCoverage}/{totalTools}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:72:          <div className="text-[9px] text-muted-foreground">Admin Links</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:74:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-prioritized">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:75:          <div className="text-lg font-bold text-orange-600">{sevCoverage}/{totalTools}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:76:          <div className="text-[9px] text-muted-foreground">Classified</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:78:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-critical-count">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:79:          <div className="text-lg font-bold text-red-500">{critCount}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:80:          <div className="text-[9px] text-muted-foreground">Critical</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:82:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-high-count">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:83:          <div className="text-lg font-bold text-amber-500">{highCount}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:84:          <div className="text-[9px] text-muted-foreground">High</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:86:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-medium-count">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:87:          <div className="text-lg font-bold text-blue-500">{medCount}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:88:          <div className="text-[9px] text-muted-foreground">Medium</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:90:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-ai-scenarios">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:91:          <div className="text-lg font-bold text-indigo-600">{remScenarios}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:92:          <div className="text-[9px] text-muted-foreground">AI Scenarios</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:94:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-auto-fixable">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:95:          <div className="text-lg font-bold text-purple-600">{autoFixable}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:96:          <div className="text-[9px] text-muted-foreground">Auto-Fixable</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:98:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-scan-coverage">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:99:          <div className="text-lg font-bold text-blue-600">{scanCoverage}%</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:100:          <div className="text-[9px] text-muted-foreground">Scan Coverage</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:102:        <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-normal-priority">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:103:          <div className="text-lg font-bold text-gray-500">{normalCount}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:104:          <div className="text-[9px] text-muted-foreground">Unclassified</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:109:        <div className="mt-4 space-y-4">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:111:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:114:            <div className="grid grid-cols-3 gap-2">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:116:                const color = name === 'Codex' ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-700' : name === 'Perplexity' ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-700' : 'bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800 text-pink-700';
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:118:                  <div key={name} className={`p-3 rounded-lg border ${color}`} data-testid={`coverage-kb-${name.toLowerCase()}`}>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:119:                    <div className="text-xs font-bold">{name}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:120:                    <div className="text-2xl font-bold">{count}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:121:                    <div className="text-[10px] opacity-70">{Math.round((count / remScenarios) * 100)}% of scenarios</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:122:                    <div className="w-full h-1 rounded-full bg-current/20 mt-1.5 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:123:                      <div className="h-full rounded-full bg-current/60" style={{ width: `${(count / remScenarios) * 100}%` }} />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:132:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:135:            <div className="space-y-1.5 max-h-64 overflow-y-auto">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:137:                <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`coverage-cat-${i}`}>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:138:                  <span className="font-medium flex-1 truncate">{cat.title}</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:139:                  <div className="flex items-center gap-3 text-[10px]">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:140:                    <span className="text-emerald-600" title="Admin-linked">{cat.linked}/{cat.total} linked</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:141:                    <span className="text-orange-500" title="Prioritized">{cat.prioritized} prioritized</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:142:                    <span className="text-blue-600" title="Scanned">{cat.checked}/{cat.total} scanned</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:143:                    <span className="text-green-600" title="Healthy">{cat.healthy} healthy</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:145:                  <div className="w-20 h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:146:                    <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${cat.total > 0 ? (cat.linked / cat.total) * 100 : 0}%` }} />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:153:          <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:154:            <div className="text-xs font-semibold mb-2">Coverage Summary</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:155:            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-[11px]">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:157:                <div className="text-muted-foreground mb-1">Admin Linking</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:158:                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:159:                  <div className="h-full rounded-full bg-emerald-500" style={{ width: `${(linkCoverage / totalTools) * 100}%` }} />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:161:                <div className="text-right font-medium mt-0.5">{Math.round((linkCoverage / totalTools) * 100)}%</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:164:                <div className="text-muted-foreground mb-1">Severity Classification</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:165:                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:166:                  <div className="h-full rounded-full bg-orange-500" style={{ width: `${(sevCoverage / totalTools) * 100}%` }} />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:168:                <div className="text-right font-medium mt-0.5">{Math.round((sevCoverage / totalTools) * 100)}%</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:171:                <div className="text-muted-foreground mb-1">KB Scenarios</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:172:                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:173:                  <div className="h-full rounded-full bg-indigo-500" style={{ width: `${Math.min((remScenarios / 143) * 100, 100)}%` }} />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:175:                <div className="text-right font-medium mt-0.5">{remScenarios}/143</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:178:                <div className="text-muted-foreground mb-1">Auto-Fix Capability</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:179:                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:180:                  <div className="h-full rounded-full bg-purple-500" style={{ width: `${(autoFixable / Math.max(remScenarios, 1)) * 100}%` }} />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:182:                <div className="text-right font-medium mt-0.5">{Math.round((autoFixable / Math.max(remScenarios, 1)) * 100)}%</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:185:                <div className="text-muted-foreground mb-1">Scan Coverage</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:186:                <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:187:                  <div className="h-full rounded-full bg-blue-500" style={{ width: `${scanCoverage}%` }} />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:189:                <div className="text-right font-medium mt-0.5">{scanCoverage}%</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:195:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:198:            <div className="flex flex-wrap gap-1.5">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:202:                  <span key={cmd} className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 font-mono" data-testid={`fix-summary-${cmd}`}>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:203:                    <Terminal size={9} /> {cmd} <span className="font-bold">({count})</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:210:          <div className="p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20 border border-emerald-200 dark:border-emerald-800">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:211:            <div className="text-xs font-semibold mb-2.5 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:212:              <Activity size={12} className="text-emerald-600" /> System Health Summary
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:214:            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:215:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-pass">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:216:                <div className="text-xl font-bold text-green-600">{healthyCount}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:217:                <div className="text-[9px] text-muted-foreground">Pass</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:219:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fail">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:220:                <div className="text-xl font-bold text-red-500">{errorCount}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:221:                <div className="text-[9px] text-muted-foreground">Fail</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:223:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-unchecked">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:224:                <div className="text-xl font-bold text-gray-400">{totalTools - checkedCount}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:225:                <div className="text-[9px] text-muted-foreground">Unchecked</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:227:              <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fix-cmds">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:228:                <div className="text-xl font-bold text-purple-600">{[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].length}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:229:                <div className="text-[9px] text-muted-foreground">Fix Commands</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:242:                <div className="mb-3">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:243:                  <div className="text-[10px] font-semibold mb-1.5">Latency Distribution</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:244:                  <div className="flex gap-1.5">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:245:                    <div className="flex-1 text-center p-1.5 rounded bg-green-100 dark:bg-green-900/30 text-[10px]" data-testid="latency-fast">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:246:                      <div className="font-bold text-green-700 dark:text-green-400">{latencyBands.fast}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:247:                      <div className="text-green-600 dark:text-green-500">&lt;500ms</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:249:                    <div className="flex-1 text-center p-1.5 rounded bg-blue-100 dark:bg-blue-900/30 text-[10px]" data-testid="latency-normal">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:250:                      <div className="font-bold text-blue-700 dark:text-blue-400">{latencyBands.normal}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:251:                      <div className="text-blue-600 dark:text-blue-500">500-2s</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:253:                    <div className="flex-1 text-center p-1.5 rounded bg-amber-100 dark:bg-amber-900/30 text-[10px]" data-testid="latency-slow">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:254:                      <div className="font-bold text-amber-700 dark:text-amber-400">{latencyBands.slow}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:255:                      <div className="text-amber-600 dark:text-amber-500">2-5s</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:257:                    <div className="flex-1 text-center p-1.5 rounded bg-red-100 dark:bg-red-900/30 text-[10px]" data-testid="latency-timeout">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:258:                      <div className="font-bold text-red-700 dark:text-red-400">{latencyBands.timeout}</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:259:                      <div className="text-red-600 dark:text-red-500">&gt;5s</div>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:265:            <OptimizeAllButton />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:268:          <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:269:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:272:            <div className="space-y-1 max-h-48 overflow-y-auto">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:274:                <div key={t.id} className="flex items-center gap-2 text-[10px] p-1.5 rounded bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-800" data-testid={`audit-gap-${t.id}`}>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:275:                  <AlertTriangle size={10} className="text-amber-500 shrink-0" />
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:276:                  <span className="font-mono font-medium">{t.id}</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:277:                  {!TOOL_ADMIN_LINKS[t.id] && <span className="text-amber-600 text-[9px] px-1 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30">missing admin link</span>}
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:278:                  {!TOOL_SEVERITY[t.id] && <span className="text-orange-600 text-[9px] px-1 py-0.5 rounded bg-orange-100 dark:bg-orange-900/30">unclassified severity</span>}
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:282:                <div className="text-[11px] text-green-600 flex items-center gap-1.5 p-2">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:294:function OptimizeAllButton() {
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:314:      <button
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:317:        className="w-full py-2 px-4 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white text-xs font-semibold hover:from-emerald-600 hover:to-blue-600 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:318:        data-testid="button-optimize-all"
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:320:        {running ? <><Loader2 size={14} className="animate-spin" /> Running Full Optimization...</> : <><Zap size={14} /> Optimize All — Vacuum + Cache + Warm + Clean</>}
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:321:      </button>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:323:        <div className="mt-2 space-y-1 max-h-32 overflow-y-auto">
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:325:            <div key={i} className="text-[10px] p-1 rounded bg-background border flex items-center gap-1.5" data-testid={`optimize-result-${i}`}>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:326:              {a.startsWith('✓') ? <CheckCircle2 size={9} className="text-green-500 shrink-0" /> : a.startsWith('✗') ? <XCircle size={9} className="text-red-500 shrink-0" /> : <Zap size={9} className="text-amber-500 shrink-0" />}
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:327:              <span className="font-mono">{a}</span>
+client/src/pages/admin/_adminTools/PlatformCoverageReport.jsx:330:          <div className="text-[10px] font-semibold text-emerald-600 mt-1">{result.message}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:33:    <div className="mb-6 p-4 rounded-xl border border-teal-200 dark:border-teal-800 bg-teal-50/30 dark:bg-teal-950/20" data-testid="panel-deep-scan">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:34:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:35:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:36:          <Stethoscope size={16} className="text-teal-600" />
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:37:          <span className="text-sm font-semibold">Platform Integrity Deep Scan</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:39:            <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${scanData.integrity?.score >= 70 ? 'bg-green-100 text-green-700' : scanData.integrity?.score >= 40 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`} data-testid="text-integrity-score">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:44:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:45:          <button
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:48:            className="text-xs px-3 py-1.5 rounded-lg border border-teal-300 dark:border-teal-700 hover:bg-teal-100 dark:hover:bg-teal-900/30 transition-colors flex items-center gap-1"
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:49:            data-testid="button-deep-scan"
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:51:            {loading ? <RefreshCw size={10} className="animate-spin" /> : <ScanLine size={10} />}
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:53:          </button>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:54:          <button
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:56:            className="text-xs px-3 py-1.5 rounded-lg border border-teal-300 dark:border-teal-700 hover:bg-teal-100 dark:hover:bg-teal-900/30 transition-colors"
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:57:            data-testid="button-toggle-deep-scan"
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:60:          </button>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:65:        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:66:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-db">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:67:            <div className={`text-lg font-bold ${scanData.integrity?.database?.connected ? 'text-green-600' : 'text-red-500'}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:70:            <div className="text-[9px] text-muted-foreground">Database ({scanData.integrity?.database?.tableCount || 0} tables)</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:72:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-services">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:73:            <div className="text-lg font-bold text-blue-600">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:76:            <div className="text-[9px] text-muted-foreground">Services Active</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:78:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-env">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:79:            <div className={`text-lg font-bold ${(scanData.integrity?.env?.criticalMissing || 0) === 0 ? 'text-green-600' : 'text-red-500'}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:82:            <div className="text-[9px] text-muted-foreground">Critical Env Vars</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:84:          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-memory">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:85:            <div className={`text-lg font-bold ${(scanData.integrity?.memory?.heapPercent || 0) < 80 ? 'text-green-600' : 'text-amber-500'}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:88:            <div className="text-[9px] text-muted-foreground">Heap ({scanData.integrity?.memory?.heapUsedMB || 0}MB)</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:94:        <div className="mt-3 space-y-3">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:96:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><Shield size={12} /> Service Health</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:97:            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:99:                <div key={name} className={`p-2 rounded-lg border text-center ${active ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/15'}`} data-testid={`service-${name}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:100:                  <div className="text-xs font-semibold capitalize">{name}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:101:                  <div className={`text-[10px] ${active ? 'text-green-600' : 'text-red-500'}`}>{active ? 'Active' : 'Not Configured'}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:108:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><Key size={12} /> Environment Variables</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:109:            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:111:                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:112:                  {set ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : <AlertCircle size={10} className="text-red-500 flex-shrink-0" />}
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:113:                  <span className="font-mono truncate">{key}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:114:                  <span className={`ml-auto font-semibold ${set ? 'text-green-600' : 'text-red-500'}`}>{set ? 'SET' : 'MISSING'}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:118:                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:119:                  {set ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:120:                  <span className="font-mono truncate">{key}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:121:                  <span className={`ml-auto font-semibold ${set ? 'text-green-600' : 'text-muted-foreground'}`}>{set ? 'SET' : 'optional'}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:129:              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><HardDrive size={12} /> Database Tables ({scanData.integrity.database.tableCount})</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:130:              <div className="flex flex-wrap gap-1.5">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:132:                  <span key={t} className="text-[10px] px-2 py-1 rounded-lg bg-background border border-gray-100 dark:border-gray-800 font-mono" data-testid={`table-${t}`}>{t}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:138:          <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:139:            <button onClick={envValidate} className="text-xs px-3 py-1.5 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors flex items-center gap-1" data-testid="button-validate-env">
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:141:            </button>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:145:            <div className={`p-3 rounded-lg border ${scanData.envValidation.success ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/15'}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:146:              <div className="text-xs font-semibold mb-1">{scanData.envValidation.message}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityDeepScan.jsx:148:                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:47:    <div className="mb-6 p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/30 dark:bg-emerald-950/20" data-testid="panel-integrity-scanner">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:48:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:49:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:50:          <GitBranch size={16} className="text-emerald-600" />
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:51:          <span className="text-sm font-semibold">Platform Integrity Scanner</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:52:          <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-800 text-emerald-700 dark:text-emerald-200 font-medium">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:56:        <button
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:58:          className="text-xs px-3 py-1.5 rounded-lg border border-emerald-300 dark:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-colors"
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:59:          data-testid="button-toggle-scanner"
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:62:        </button>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:65:      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:66:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-critical">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:67:          <div className="text-lg font-bold text-red-500">{criticalTools.length}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:68:          <div className="text-[10px] text-muted-foreground">Critical</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:70:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-high">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:71:          <div className="text-lg font-bold text-orange-500">{highTools.length}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:72:          <div className="text-[10px] text-muted-foreground">High</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:74:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-medium">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:75:          <div className="text-lg font-bold text-blue-500">{mediumTools.length}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:76:          <div className="text-[10px] text-muted-foreground">Medium</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:78:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-linked">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:79:          <div className="text-lg font-bold text-emerald-500">{linkedTools.length}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:80:          <div className="text-[10px] text-muted-foreground">Admin-Linked</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:82:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-unclassified">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:83:          <div className="text-lg font-bold text-gray-500">{normalTools.length}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:84:          <div className="text-[10px] text-muted-foreground">Unclassified</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:86:        <div className="text-center p-2 rounded-lg bg-background border border-emerald-100 dark:border-emerald-800" data-testid="scanner-total">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:87:          <div className="text-lg font-bold text-emerald-600">{totalTools}</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:88:          <div className="text-[10px] text-muted-foreground">Total</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:93:        <div className="mt-3 space-y-3">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:95:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:98:            <div className="space-y-1.5">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:100:                <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:101:                  <span className="text-xs font-medium flex-1 truncate">{cat.title}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:102:                  <div className="flex items-center gap-2 text-[10px]">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:103:                    <span className="text-green-600 font-medium">{cat.healthy}/{cat.total}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:104:                    {cat.errors > 0 && <span className="text-red-500 font-bold">{cat.errors} err</span>}
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:105:                    <span className="text-muted-foreground">{cat.avgMs}ms avg</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:107:                  <div className="w-16 h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:108:                    <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${cat.total > 0 ? (cat.healthy / cat.total) * 100 : 0}%` }} />
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:116:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:119:            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 max-h-36 overflow-y-auto">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:123:                  <div key={t.id} className="flex items-center gap-1.5 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`linked-${t.id}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:124:                    {result?.status === 'healthy' ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : result?.status === 'error' ? <AlertCircle size={10} className="text-red-500 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:125:                    <span className="truncate">{t.label}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:126:                    <Link href={TOOL_ADMIN_LINKS[t.id]} className="ml-auto" data-testid={`scanner-link-${t.id}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:127:                      <ExternalLink size={9} className="text-blue-500" />
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:137:              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5 text-blue-600">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:140:              <div className="flex flex-wrap gap-1">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:142:                  <span key={t.id} className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground" data-testid={`unlinked-${t.id}`}>{t.label}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:150:              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5 text-amber-600">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:153:              <div className="space-y-1">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:155:                  <div key={endpoint} className="text-[10px] p-2 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:156:                    <span className="font-mono text-amber-700 dark:text-amber-400">{endpoint}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:157:                    <span className="text-muted-foreground ml-2">→ {ids.join(', ')}</span>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:167:            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:170:            <div className="grid grid-cols-3 gap-2">
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:172:                { tier: 'Critical', tools: criticalTools, color: 'border-red-200 dark:border-red-800 bg-red-50/30 dark:bg-red-950/15', textColor: 'text-red-600' },
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:173:                { tier: 'High', tools: highTools, color: 'border-orange-200 dark:border-orange-800 bg-orange-50/30 dark:bg-orange-950/15', textColor: 'text-orange-600' },
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:174:                { tier: 'Medium', tools: mediumTools, color: 'border-blue-200 dark:border-blue-800 bg-blue-50/30 dark:bg-blue-950/15', textColor: 'text-blue-600' },
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:179:                  <div key={ti} className={`p-2.5 rounded-lg border ${t.color}`} data-testid={`kb-tier-${t.tier.toLowerCase()}`}>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:180:                    <div className={`text-xs font-bold ${t.textColor} mb-0.5`}>{t.tier} ({t.tools.length})</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:181:                    <div className="text-[10px] text-muted-foreground">{tierHealthy}/{tierChecked > 0 ? tierChecked : t.tools.length} healthy</div>
+client/src/pages/admin/_adminTools/PlatformIntegrityScanner.jsx:182:                    <div className="text-[10px] text-muted-foreground">{t.tools.filter(tool => TOOL_ADMIN_LINKS[tool.id]).length} admin-linked</div>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:19:    <div className="mb-6 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-card" data-testid="panel-quick-diagnostics">
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:20:      <div className="flex items-center justify-between mb-3">
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:21:        <div className="flex items-center gap-2">
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:22:          <Zap size={16} className="text-amber-500" />
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:23:          <h3 className="text-sm font-semibold">Quick Diagnostics</h3>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:24:          <span className="text-xs text-muted-foreground">8 critical endpoints</span>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:26:        <button
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:29:          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500 text-white text-xs font-medium hover:bg-amber-600 transition-colors disabled:opacity-50"
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:30:          data-testid="button-quick-diagnostics"
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:32:          {isRunning ? <RefreshCw size={12} className="animate-spin" /> : <Play size={12} />}
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:34:        </button>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:36:      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:44:              className={`flex items-center gap-2 p-2.5 rounded-lg border transition-colors ${
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:45:                result?.status === 'healthy' ? 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20' :
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:46:                result?.status === 'error' ? 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20' :
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:47:                result?.status === 'warning' ? 'border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20' :
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:48:                'border-gray-100 dark:border-gray-800 bg-muted/30'
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:53:                <RefreshCw size={14} className="animate-spin text-muted-foreground flex-shrink-0" />
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:55:                result.status === 'healthy' ? <CheckCircle size={14} className="text-green-600 flex-shrink-0" /> :
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:56:                result.status === 'error' ? <AlertCircle size={14} className="text-red-500 flex-shrink-0" /> :
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:57:                <AlertTriangle size={14} className="text-amber-500 flex-shrink-0" />
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:59:                <Icon size={14} className="text-muted-foreground flex-shrink-0" />
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:61:              <div className="min-w-0">
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:62:                <div className="text-xs font-medium truncate">{check.label}</div>
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:63:                <div className="text-[10px] text-muted-foreground truncate">
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:72:        <div className={`mt-3 text-xs text-center py-1.5 rounded-lg ${
+client/src/pages/admin/_adminTools/QuickDiagnostics.jsx:73:          critErrors > 0 ? 'bg-red-50 dark:bg-red-900/20 text-red-600' : 'bg-green-50 dark:bg-green-900/20 text-green-600'
+client/src/pages/admin/_adminToolsShared.js:8:import { MessageSquare, Headphones, Heart, BookOpen, Sun, Moon, Leaf, Eye, FileQuestion, Gauge, Lightbulb, Landmark, GraduationCap, Brain, Sparkles, Mountain, Compass, Trophy, Layers, Puzzle, Milestone, HeartHandshake, Flame, Target, Flower2, TreePine, Feather, CircleDot, Shield, Gem, Award, Zap, TrendingUp, Star, Rocket, Orbit, Footprints, Workflow, Globe, Network, Users, FileText, Palette, Mail, Share2, Megaphone, PenTool, Search, Rss, UserCheck, LayoutDashboard, Inbox, Wand2, ShieldCheck, ClipboardList, CreditCard, BarChart3, Activity, PackageCheck, HardDrive, Terminal, DollarSign, Webhook, Contact, Key, Handshake, LogIn, UserCog, Upload, ListOrdered, Radio, Fingerprint, FolderKanban } from 'lucide-react';
+client/src/pages/admin/_adminToolsShared.js:12:  "gratitude": "/admin/engagement", "reflection": "/admin/engagement", "wellness-tools": "/admin/tools",
+client/src/pages/admin/_adminToolsShared.js:43:  "dashboard-api": "/admin/health", "pro-features": "/admin/revenue", "leads": "/admin/revenue",
+client/src/pages/admin/_adminToolsShared.js:44:  "feedback": "/admin/feedback", "account-actions": "/admin/users", "ai-dashboard": "/admin/health",
+client/src/pages/admin/_adminToolsShared.js:66:  "therapy": "critical", "dashboard-api": "critical",
+client/src/pages/admin/_adminToolsShared.js:82:  "gratitude": "medium", "reflection": "medium", "wellness-tools": "medium",
+client/src/pages/admin/_adminToolsShared.js:111:  "ai-dashboard": "medium", "moods-alt": "medium",
+client/src/pages/admin/_adminToolsShared.js:139:  "stripe-webhook-fail": { suggestion: "Stripe webhook endpoint is failing. Canva KB: Verify STRIPE_WEBHOOK_SECRET is configured and webhook signature validation matches. Check Stripe dashboard for delivery failures.", action: "Verify Stripe webhook secret", knowledgeBase: "Canva", autoFixable: true, fixCommand: "verify-admin-token" },
+client/src/pages/admin/_adminToolsShared.js:140:  "openai-quota": { suggestion: "OpenAI API quota exceeded or rate limited. Perplexity KB: Check billing status on OpenAI dashboard. Implement exponential backoff and request queueing for high-volume periods.", action: "Check OpenAI billing/quota", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:141:  "resend-bounce": { suggestion: "Email delivery failing through Resend. Canva KB: Check sender domain verification, SPF/DKIM records, and Resend dashboard for bounce rates. Hard bounces require address cleanup.", action: "Review Resend delivery logs", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:215:  "openai-config-invalid": { suggestion: "OpenAI API configuration issue. Codex KB: Verify API key validity, check model access permissions, and ensure billing is active on the OpenAI dashboard.", action: "Verify OpenAI setup", knowledgeBase: "Codex", autoFixable: true, fixCommand: "check-openai" },
+client/src/pages/admin/_adminToolsShared.js:221:  "payment-flow-error": { suggestion: "Payment processing flow encountered an error. Canva KB: Check Stripe dashboard for declined payments, webhook delivery failures, and checkout session status.", action: "Review payment flow logs", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:223:  "api-key-expired": { suggestion: "API key has expired or been revoked. Perplexity KB: Rotate expired keys immediately. Check API provider dashboard for key status and regenerate if needed.", action: "Rotate expired API keys", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:233:  "backup-stale": { suggestion: "Database backup is overdue or stale. Perplexity KB: Neon PostgreSQL handles automatic backups but verify backup health on the Neon dashboard. Point-in-time recovery should be enabled.", action: "Verify backup status", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+client/src/pages/admin/_adminToolsShared.js:289:    title: "AI & Core Wellness Tools",
+client/src/pages/admin/_adminToolsShared.js:297:      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
+client/src/pages/admin/_adminToolsShared.js:329:      { id: "holistic-healing", label: "Holistic Healing", endpoint: "/api/holistic-healing", icon: TreePine, desc: "Whole-person wellness" },
+client/src/pages/admin/_adminToolsShared.js:411:      { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
+client/src/pages/admin/_adminToolsShared.js:412:      { id: "pro-features", label: "Pro Features", endpoint: "/api/pro-features", icon: Gem, desc: "Premium feature gates" },
+client/src/pages/admin/_adminToolsShared.js:416:      { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
+client/src/pages/admin/_adminToolsShared.js:426:      { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+client/src/pages/admin/_adminToolsShared.js:471:  { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: CreditCard, desc: "Stripe billing" },
+client/src/pages/admin/CommandCenter.jsx:4:import { Shield, Activity, Users, Database, Server, Globe, AlertTriangle, CheckCircle, Clock, RefreshCw, BarChart3, Zap, FileText, Settings, ArrowRight, TrendingUp, Eye, Lock, HardDrive, AlertCircle, BookOpen, MessageSquare, Heart, Calendar, Megaphone, Mail, Flag, Palette, Search, LayoutDashboard, PenTool, Layers, LineChart, ShieldCheck, ToggleLeft, Star, ClipboardList, Sparkles, Brain, Compass, Flame, Leaf, Sun, Moon, Lightbulb, Target, DollarSign, Wand2, GraduationCap, Headphones, HeartHandshake, Flower2, TreePine, CircleDot, Footprints, Gem, Mountain, Feather, CheckSquare, Play, UserCheck, CreditCard, Key, Workflow, Network, Gauge, Trophy, Award, Landmark, Orbit, Rocket, Puzzle, FileQuestion, Webhook, Share2, Contact, Inbox, LogIn, PackageCheck, Milestone, Handshake, Upload, UserCog, ListOrdered, Radio, Fingerprint, FolderKanban, Rss } from 'lucide-react';
+client/src/pages/admin/CommandCenter.jsx:13:import MetricCard from "@/components/admin/MetricCard";
+client/src/pages/admin/CommandCenter.jsx:109:      <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
+client/src/pages/admin/CommandCenter.jsx:110:        <div className={styles.cardHeader}>
+client/src/pages/admin/CommandCenter.jsx:111:          <div className={styles.cardTitleContainer}>
+client/src/pages/admin/CommandCenter.jsx:112:            <Zap className={styles.cardHeaderIcon} />
+client/src/pages/admin/CommandCenter.jsx:113:            <h2 className={styles.cardTitle}>Platform Tools Status</h2>
+client/src/pages/admin/CommandCenter.jsx:115:          <button onClick={runQuickCheck} disabled={isQuickChecking} style={{
+client/src/pages/admin/CommandCenter.jsx:120:          }} data-testid="button-quick-check">
+client/src/pages/admin/CommandCenter.jsx:121:            {isQuickChecking ? <RefreshCw size={12} className={styles.refreshIconSpinning} /> : <Activity size={12} />}
+client/src/pages/admin/CommandCenter.jsx:123:          </button>
+client/src/pages/admin/CommandCenter.jsx:169:    <div className={styles.card} style={{ gridColumn: '1 / -1' }} data-testid="panel-tools-status">
+client/src/pages/admin/CommandCenter.jsx:170:      <div className={styles.cardHeader}>
+client/src/pages/admin/CommandCenter.jsx:171:        <div className={styles.cardTitleContainer}>
+client/src/pages/admin/CommandCenter.jsx:172:          <Zap className={styles.cardHeaderIcon} />
+client/src/pages/admin/CommandCenter.jsx:173:          <h2 className={styles.cardTitle}>Platform Tools Status</h2>
+client/src/pages/admin/CommandCenter.jsx:180:          <button onClick={runQuickCheck} disabled={isQuickChecking} style={{
+client/src/pages/admin/CommandCenter.jsx:185:          }} data-testid="button-quick-recheck">
+client/src/pages/admin/CommandCenter.jsx:186:            {isQuickChecking ? <RefreshCw size={11} className={styles.refreshIconSpinning} /> : <Activity size={11} />}
+client/src/pages/admin/CommandCenter.jsx:188:          </button>
+client/src/pages/admin/CommandCenter.jsx:265:    description: "Platform administration dashboard with system monitoring, user management, and analytics.",
+client/src/pages/admin/CommandCenter.jsx:278:    queryKey: ['/api/admin/dashboard-stats'],
+client/src/pages/admin/CommandCenter.jsx:311:      <div className={styles.loadingContainer}>
+client/src/pages/admin/CommandCenter.jsx:312:        <RefreshCw className={styles.loadingSpinner} />
+client/src/pages/admin/CommandCenter.jsx:313:        <p className={styles.loadingText} data-testid="text-loading">Loading admin dashboard...</p>
+client/src/pages/admin/CommandCenter.jsx:320:      <div className={styles.errorContainer}>
+client/src/pages/admin/CommandCenter.jsx:321:        <AlertCircle className={styles.errorIcon} />
+client/src/pages/admin/CommandCenter.jsx:322:        <h2 className={styles.errorTitle} data-testid="text-error-title">Unable to load admin dashboard</h2>
+client/src/pages/admin/CommandCenter.jsx:323:        <p className={styles.errorText} data-testid="text-error-message">We're having trouble connecting to the server. Please try again.</p>
+client/src/pages/admin/CommandCenter.jsx:324:        <button className={styles.retryButton} onClick={handleRefreshAll} data-testid="button-retry">
+client/src/pages/admin/CommandCenter.jsx:326:        </button>
+client/src/pages/admin/CommandCenter.jsx:332:    <div className={styles.pageContainer}>
+client/src/pages/admin/CommandCenter.jsx:333:      <div className={styles.contentWrapper}>
+client/src/pages/admin/CommandCenter.jsx:334:        <header className={styles.header}>
+client/src/pages/admin/CommandCenter.jsx:335:          <div className={styles.headerTop}>
+client/src/pages/admin/CommandCenter.jsx:336:            <div className={styles.titleContainer}>
+client/src/pages/admin/CommandCenter.jsx:337:              <div className={styles.titleIcon}>
+client/src/pages/admin/CommandCenter.jsx:338:                <Shield className={styles.titleIconInner} />
+client/src/pages/admin/CommandCenter.jsx:340:              <h1 className={styles.pageTitle} data-testid="text-page-title">Command Center</h1>
+client/src/pages/admin/CommandCenter.jsx:342:            <div className={styles.headerActions}>
+client/src/pages/admin/CommandCenter.jsx:343:              <span className={styles.lastUpdated} data-testid="text-last-updated">
+client/src/pages/admin/CommandCenter.jsx:344:                <Clock className={styles.clockIcon} />
+client/src/pages/admin/CommandCenter.jsx:347:              <button 
+client/src/pages/admin/CommandCenter.jsx:348:                className={styles.refreshButton}
+client/src/pages/admin/CommandCenter.jsx:351:                data-testid="button-refresh-all"
+client/src/pages/admin/CommandCenter.jsx:353:                <RefreshCw className={`${styles.refreshIcon} ${isHealthRefetching ? styles.refreshIconSpinning : ''}`} />
+client/src/pages/admin/CommandCenter.jsx:355:              </button>
+client/src/pages/admin/CommandCenter.jsx:358:          <p className={styles.leadText}>Monitor system health, manage content, and track platform performance.</p>
+client/src/pages/admin/CommandCenter.jsx:361:        <div className={styles.metricsGrid}>
+client/src/pages/admin/CommandCenter.jsx:363:            <MetricCard key={i} {...metric} />
+client/src/pages/admin/CommandCenter.jsx:367:        <div className={styles.mainGrid}>
+client/src/pages/admin/CommandCenter.jsx:380:        <div className={styles.mainGrid}>
+client/src/pages/admin/CommandCenter.jsx:393:        <div className="my-8 space-y-6" data-testid="section-platform-healing">
+client/src/pages/admin/CommandCenter.jsx:394:          <div className="flex items-center gap-3">
+client/src/pages/admin/CommandCenter.jsx:395:            <Shield className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} />
+client/src/pages/admin/CommandCenter.jsx:396:            <h2 className="text-2xl font-serif" style={{ color: 'var(--glp-ink)' }}>Platform Healing &amp; Operations</h2>
+client/src/pages/admin/CommandCenter.jsx:397:            <span className="text-xs uppercase tracking-wider px-2 py-1 rounded" style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}>Live</span>
+client/src/pages/admin/CommandCenter.jsx:399:          <p className="text-sm text-muted-foreground" style={{ marginTop: '-0.25rem' }}>
+client/src/pages/admin/CommandCenter.jsx:431:        <SafetyFooter variant="compact" className="mt-12" />
+client/src/pages/admin/SocialLibrary.jsx:14:  { id: "carousel", name: "Carousel", description: "5-card outline" },
+client/src/pages/admin/SocialLibrary.jsx:15:  { id: "cta", name: "CTA", description: "Call to action" },
+client/src/pages/admin/SocialLibrary.jsx:74:    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+client/src/pages/admin/SocialLibrary.jsx:76:      <div className="max-w-6xl mx-auto px-4 py-8">
+client/src/pages/admin/SocialLibrary.jsx:81:        <div className="flex items-center justify-between mb-8">
+client/src/pages/admin/SocialLibrary.jsx:82:          <div className="flex items-center gap-4">
+client/src/pages/admin/SocialLibrary.jsx:83:            <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
+client/src/pages/admin/SocialLibrary.jsx:84:              <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+client/src/pages/admin/SocialLibrary.jsx:87:              <h1 className="text-2xl font-bold text-slate-900 dark:text-white" data-testid="text-page-title">
+client/src/pages/admin/SocialLibrary.jsx:90:              <p className="text-slate-600 dark:text-slate-400">
+client/src/pages/admin/SocialLibrary.jsx:96:          <div className="flex gap-3">
+client/src/pages/admin/SocialLibrary.jsx:97:            <button
+client/src/pages/admin/SocialLibrary.jsx:100:              className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--glp-sage)] text-[var(--glp-sage)] rounded-lg hover:bg-[var(--glp-sage-10)] transition-colors disabled:opacity-50"
+client/src/pages/admin/SocialLibrary.jsx:101:              data-testid="button-seed-templates"
+client/src/pages/admin/SocialLibrary.jsx:104:                <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" />
+client/src/pages/admin/SocialLibrary.jsx:106:                <Download className="w-4 h-4" />
+client/src/pages/admin/SocialLibrary.jsx:109:            </button>
+client/src/pages/admin/SocialLibrary.jsx:110:            <button
+client/src/pages/admin/SocialLibrary.jsx:112:              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity"
+client/src/pages/admin/SocialLibrary.jsx:113:              data-testid="button-add-template"
+client/src/pages/admin/SocialLibrary.jsx:115:              <Plus className="w-4 h-4" />
+client/src/pages/admin/SocialLibrary.jsx:117:            </button>
+client/src/pages/admin/SocialLibrary.jsx:122:          <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+client/src/pages/admin/SocialLibrary.jsx:123:            <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+client/src/pages/admin/SocialLibrary.jsx:127:            <div className="grid md:grid-cols-3 gap-4 mb-4">
+client/src/pages/admin/SocialLibrary.jsx:129:                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Type</label>
+client/src/pages/admin/SocialLibrary.jsx:133:                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+client/src/pages/admin/SocialLibrary.jsx:143:                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Name</label>
+client/src/pages/admin/SocialLibrary.jsx:149:                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+client/src/pages/admin/SocialLibrary.jsx:155:                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Level</label>
+client/src/pages/admin/SocialLibrary.jsx:159:                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+client/src/pages/admin/SocialLibrary.jsx:169:            <div className="mb-4">
+client/src/pages/admin/SocialLibrary.jsx:170:              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Structure</label>
+client/src/pages/admin/SocialLibrary.jsx:176:                className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 resize-none"
+client/src/pages/admin/SocialLibrary.jsx:181:            <div className="mb-4">
+client/src/pages/admin/SocialLibrary.jsx:182:              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Voice Rules (optional)</label>
+client/src/pages/admin/SocialLibrary.jsx:188:                className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+client/src/pages/admin/SocialLibrary.jsx:193:            <div className="flex gap-2">
+client/src/pages/admin/SocialLibrary.jsx:194:              <button
+client/src/pages/admin/SocialLibrary.jsx:197:                className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+client/src/pages/admin/SocialLibrary.jsx:198:                data-testid="button-save-template"
+client/src/pages/admin/SocialLibrary.jsx:201:              </button>
+client/src/pages/admin/SocialLibrary.jsx:202:              <button
+client/src/pages/admin/SocialLibrary.jsx:203:                type="button"
+client/src/pages/admin/SocialLibrary.jsx:205:                className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg"
+client/src/pages/admin/SocialLibrary.jsx:206:                data-testid="button-cancel-template"
+client/src/pages/admin/SocialLibrary.jsx:209:              </button>
+client/src/pages/admin/SocialLibrary.jsx:215:          <div className="text-center py-16" data-testid="section-error">
+client/src/pages/admin/SocialLibrary.jsx:216:            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+client/src/pages/admin/SocialLibrary.jsx:217:            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+client/src/pages/admin/SocialLibrary.jsx:218:            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+client/src/pages/admin/SocialLibrary.jsx:220:            </button>
+client/src/pages/admin/SocialLibrary.jsx:225:          <div className="flex items-center justify-center py-12">
+client/src/pages/admin/SocialLibrary.jsx:226:            <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
+client/src/pages/admin/SocialLibrary.jsx:229:          <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700" data-testid="section-empty">
+client/src/pages/admin/SocialLibrary.jsx:230:            <BookOpen className="w-12 h-12 mx-auto text-slate-400 mb-4" />
+client/src/pages/admin/SocialLibrary.jsx:231:            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No templates yet</h3>
+client/src/pages/admin/SocialLibrary.jsx:232:            <p className="text-slate-600 dark:text-slate-400 mb-4">Load presets or create your first template to get started</p>
+client/src/pages/admin/SocialLibrary.jsx:235:          <div className="space-y-8">
+client/src/pages/admin/SocialLibrary.jsx:239:                <div key={type.id} data-testid={`section-type-${type.id}`}>
+client/src/pages/admin/SocialLibrary.jsx:240:                  <div className="flex items-center gap-2 mb-4">
+client/src/pages/admin/SocialLibrary.jsx:241:                    <FileText className="w-5 h-5 text-[var(--glp-sage)]" />
+client/src/pages/admin/SocialLibrary.jsx:242:                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+client/src/pages/admin/SocialLibrary.jsx:245:                    <span className="text-sm text-slate-500">({typeTemplates.length})</span>
+client/src/pages/admin/SocialLibrary.jsx:249:                    <p className="text-sm text-slate-500 italic" data-testid={`text-empty-${type.id}`}>No templates yet</p>
+client/src/pages/admin/SocialLibrary.jsx:251:                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+client/src/pages/admin/SocialLibrary.jsx:255:                          className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4"
+client/src/pages/admin/SocialLibrary.jsx:256:                          data-testid={`card-template-${template.id}`}
+client/src/pages/admin/SocialLibrary.jsx:258:                          <div className="flex items-start justify-between mb-2">
+client/src/pages/admin/SocialLibrary.jsx:259:                            <h3 className="font-medium text-slate-900 dark:text-white">
+client/src/pages/admin/SocialLibrary.jsx:262:                            <button
+client/src/pages/admin/SocialLibrary.jsx:264:                              className="p-1 text-slate-400 hover:text-red-500 transition-colors"
+client/src/pages/admin/SocialLibrary.jsx:265:                              data-testid={`button-delete-template-${template.id}`}
+client/src/pages/admin/SocialLibrary.jsx:267:                              <Trash2 className="w-4 h-4" />
+client/src/pages/admin/SocialLibrary.jsx:268:                            </button>
+client/src/pages/admin/SocialLibrary.jsx:271:                          <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 mb-2">
+client/src/pages/admin/SocialLibrary.jsx:275:                          <div className="flex items-center gap-2">
+client/src/pages/admin/SocialLibrary.jsx:276:                            <span className="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-400" data-testid={`badge-level-${template.id}`}>
+client/src/pages/admin/SocialLibrary.jsx:290:        <SafetyFooter variant="compact" className="mt-12" />
+client/src/pages/admin/AdminPublishing.jsx:11:function CopyButton({ text, label }) {
+client/src/pages/admin/AdminPublishing.jsx:19:    <button
+client/src/pages/admin/AdminPublishing.jsx:21:      className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-amber-100 dark:bg-amber-900/30 hover:bg-amber-200 dark:hover:bg-amber-800/40 transition-colors"
+client/src/pages/admin/AdminPublishing.jsx:22:      data-testid={`button-copy-${label}`}
+client/src/pages/admin/AdminPublishing.jsx:24:      {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+client/src/pages/admin/AdminPublishing.jsx:26:    </button>
+client/src/pages/admin/AdminPublishing.jsx:31:  draft: { label: "Draft", className: "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400", icon: PenLine },
+client/src/pages/admin/AdminPublishing.jsx:32:  review: { label: "In Review", className: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300", icon: Eye },
+client/src/pages/admin/AdminPublishing.jsx:33:  approved: { label: "Approved", className: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300", icon: CheckCircle },
+client/src/pages/admin/AdminPublishing.jsx:34:  published: { label: "Published", className: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300", icon: CheckCircle },
+client/src/pages/admin/AdminPublishing.jsx:38:  instagram: (title, url) => `${title}\n\nRead more on our blog \u2192 ${url}\n\n#genuinelove #mentalwellness #selfcare #healing`,
+client/src/pages/admin/AdminPublishing.jsx:39:  x: (title, url) => `${title}\n\n${url}\n\n#mentalwellness #selfcare`,
+client/src/pages/admin/AdminPublishing.jsx:49:      <button onClick={() => setOpen(true)} className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-indigo-100 dark:bg-indigo-900/30 hover:bg-indigo-200 dark:hover:bg-indigo-800/40 transition-colors" data-testid={`button-share-${slug}`}>
+client/src/pages/admin/AdminPublishing.jsx:50:        <Share2 className="w-3 h-3" /> Share
+client/src/pages/admin/AdminPublishing.jsx:51:      </button>
