@@ -47,6 +47,7 @@ client/src/styles/lumi-layout.css
 client/src/styles/lumi-links.css
 client/src/styles/lumi-mascot.css
 client/src/styles/lumi-motion.css
+client/src/styles/lumi-pastel-visual-system.css
 client/src/styles/lumi-tokens.css
 client/src/styles/peacescape-shell.css
 client/src/styles/phase58-visual-polish.css
