@@ -1,0 +1,4 @@
+NO_PATCH_NEEDED
+"/api/gamification"=PRESENT
+"/api/analytics"=PRESENT
+"/api/blog"=PRESENT

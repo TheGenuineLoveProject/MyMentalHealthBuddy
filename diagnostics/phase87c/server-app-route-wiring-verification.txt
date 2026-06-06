@@ -1,0 +1,7 @@
+120:import gamificationRoutes from "./routes/gamification.mjs";
+121:import analyticsEventsRoutes from "./routes/analytics-events.mjs";
+122:import blogRoutes from "./routes/blog.mjs";
+361:// Phase 87C: mounted previously orphaned API route modules.
+362:app.use("/api/gamification", gamificationRoutes);
+363:app.use("/api/analytics", analyticsEventsRoutes);
+364:app.use("/api/blog", blogRoutes);

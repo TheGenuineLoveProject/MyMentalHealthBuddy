@@ -1,0 +1,15 @@
+30eaec700 (HEAD -> clean-push, origin/main, origin/HEAD) phase86 close parser blockers before route wiring
+927422c45 phase85 close content coherence and parser blocker findings
+9b5e6e9dd phase84 enforce active business healing firewall and safe content claims
+50cbdc507 phase83 implement canonical constitution audit and component content map
+b2dd91299 Document platform structure and orphaned API routes
+8a5d069fe phase81 audit platform coherence and enforce zero drift completion rules
+800dfb1be phase78 add client content coherence clarity layer
+428a46eb7 phase77 verify disappeared push and continue safely
+095bc5118 Published your App
+e23348aa7 phase76 verify and recover phase75 page coherence polish
+09e4c1f9c phase76 verify and recover phase75 page coherence polish
+6daae3d57 phase76 add visual route QA gates and screenshot plan
+7a8095542 phase75 add page hero coherence and CTA visibility polish
+717f35b58 phase74 polish Lumi pastel palette and button contrast visibility
+b0ee32832 phase73 verify disappeared command and visual runtime state

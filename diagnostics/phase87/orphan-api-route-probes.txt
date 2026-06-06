@@ -1,0 +1,5 @@
+GET /api/gamification/progress
+GET /api/gamification/quests
+POST /api/analytics/event
+GET /api/blog
+GET /api/blog/rss

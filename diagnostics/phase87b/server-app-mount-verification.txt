@@ -1,0 +1,6 @@
+120:import gamificationRoutes from "./routes/gamification.mjs";
+121:import analyticsEventsRoutes from "./routes/analytics-events.mjs";
+122:import blogRoutes from "./routes/blog.mjs";
+366:app.use("/api/gamification", gamificationRoutes);
+367:app.use("/api/analytics", analyticsEventsRoutes);
+368:app.use("/api/blog", blogRoutes);
