@@ -437,11 +437,9 @@ client/dist/assets/_autopilot-CJdbJgTa.js                                      2
 client/dist/assets/WellnessDashboard-weGPPgbp.js                               275.14 kB │ gzip: 89.13 kB
 
 [33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
-  - vite:esbuild-transpile (62%)
-  - vite:css (12%)
-  - vite:css-post (9%)
-  - visualizer (6%)
-  - vite:asset (5%)
+  - vite:esbuild-transpile (50%)
+  - vite:css (33%)
+  - vite:asset (4%)
 See https://rolldown.rs/options/checks#plugintimings for more details.
 
-✓ built in 31.38s
+✓ built in 53.41s
