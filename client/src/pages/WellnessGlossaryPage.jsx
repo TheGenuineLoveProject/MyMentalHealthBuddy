@@ -275,7 +275,7 @@ const glossaryTerms = [
   {
     term: "Vulnerability",
     category: "Growth",
-    definition: "The courage to show up authentically and be seen, even when there's no guarantee of the outcome.",
+    definition: "The courage to show up authentically and be seen, even when there's no support intention of the outcome.",
     explanation: "Vulnerability isn't weakness—it's the birthplace of connection, creativity, and courage. It means allowing yourself to be truly seen, accepting uncertainty, and taking emotional risks. True intimacy requires vulnerability.",
     examples: [
       "Asking for help when you need it",

@@ -114,7 +114,7 @@ export const antiLiabilityProof = {
   noClaimsCopy: [
     'Educational wellness support — not medical advice.',
     'Self-directed tools for personal reflection.',
-    'No diagnosis, no treatment claims, no medical guarantees.'
+    'No diagnosis, no treatment claims, no medical is designed to support.'
   ]
 };
 

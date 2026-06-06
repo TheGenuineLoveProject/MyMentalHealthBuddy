@@ -156,7 +156,7 @@ const TOOL_CATEGORIES = {
     name: "Healing & Recovery",
     icon: Heart,
     tools: [
-      { id: "crisis", name: "Crisis Stabilizer", icon: Shield, color: "from-rose-500 to-pink-600" },
+      { id: "crisis", name: "Crisis Resources", icon: Shield, color: "from-rose-500 to-pink-600" },
       { id: "somatic", name: "Somatic Release", icon: Activity, color: "from-violet-400 to-purple-500" },
       { id: "perception", name: "Perception Refinement", icon: Eye, color: "from-teal-400 to-cyan-500", link: "/tools/perception-refinement" },
       { id: "nervous-system", name: "Nervous System Flooding", icon: Zap, color: "from-amber-400 to-orange-500", link: "/tools/nervous-system-flooding" },

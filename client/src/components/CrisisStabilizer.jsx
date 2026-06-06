@@ -122,7 +122,7 @@ export default function CrisisStabilizer({ onComplete, onXpEarned }) {
     setIsCompleted(true);
     setIsActive(false);
     const duration = startTime ? Math.floor((Date.now() - startTime) / 1000) : 180;
-    if (onXpEarned) onXpEarned("Crisis Stabilizer", duration);
+    if (onXpEarned) onXpEarned("Crisis Resources", duration);
     if (onComplete) onComplete();
   }, [startTime, onXpEarned, onComplete]);
 
@@ -197,7 +197,7 @@ export default function CrisisStabilizer({ onComplete, onXpEarned }) {
       className="bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-2xl overflow-hidden border border-slate-700/50"
       data-testid="crisis-stabilizer"
       role="application"
-      aria-label="Crisis Stabilizer Grounding Exercise"
+      aria-label="Crisis Resources Grounding Exercise"
     >
       <div className="p-6 border-b border-slate-700/50">
         <div className="flex items-center justify-between mb-4">
@@ -206,7 +206,7 @@ export default function CrisisStabilizer({ onComplete, onXpEarned }) {
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">Crisis Stabilizer</h2>
+              <h2 className="text-xl font-bold text-white">Crisis Resources</h2>
               <p className="text-slate-400 text-sm">Guided grounding for difficult moments</p>
             </div>
           </div>

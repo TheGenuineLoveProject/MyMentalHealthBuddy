@@ -29,7 +29,7 @@
  * 
  * COPY SAFETY:
  * - Allowed: "may help", "some people find...", "often used for..."
- * - Never: "cures", "treats", "guarantees", "clinically proven"
+ * - Never: "supports", "treats", "is designed to support", "clinically proven"
  */
 
 export const READING_LEVELS = ['beginner', 'intermediate', 'advanced'];

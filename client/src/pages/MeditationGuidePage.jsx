@@ -12,10 +12,10 @@ import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const MEDITATION_CLARITY = {
-  what: "Research-backed guided meditations that literally change your brain structure through practices like body scans, loving-kindness, and mindfulness.",
+  what: "Research-backed guided meditations that support meaningful mental and emotional practice over time structure through practices like body scans, loving-kindness, and mindfulness.",
   who: "Anyone seeking calm, clarity, self-compassion, or a deeper connection with themselves.",
   when: "Morning intention-setting, evening wind-down, during stress, or as a daily practice for long-term brain changes.",
-  why: "Just 8 weeks of regular practice increases prefrontal cortex density (self-regulation) while reducing amygdala volume (fear response).",
+  why: "Just 8 weeks of regular practice may support attention, self-regulation, and stress-response skills over time.",
   howSteps: [
     "Choose a meditation that matches your current need or time of day",
     "Find a comfortable position where you won't be disturbed",
@@ -430,8 +430,8 @@ export default function MeditationGuidePage() {
           </div>
           <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Meditation Guide</h1>
           <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
-            Evidence-based guided meditations that literally change your brain. Research shows just 8 weeks of regular practice 
-            increases prefrontal cortex density (self-regulation) while reducing amygdala volume (fear response). 
+            Evidence-based guided meditations that support meaningful mental and emotional practice over time. Research shows just 8 weeks of regular practice 
+            may support attention, self-regulation, and stress-response skills over time. 
             Each practice includes step-by-step guidance to support your inner journey.
           </p>
         </div>
@@ -464,7 +464,7 @@ export default function MeditationGuidePage() {
             <div>
               <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>How Meditation Changes the Brain</h3>
               <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-                Neuroimaging studies show meditation increases gray matter in areas responsible for learning, memory, emotional regulation, 
+                Neuroimaging studies show meditation has been associated in some studies with changes related to learning, memory, and emotional regulation, 
                 and perspective-taking. It also reduces the size of the amygdala, your brain's fear center. 
                 These aren't temporary states—they're lasting structural changes that accumulate with practice.
               </p>

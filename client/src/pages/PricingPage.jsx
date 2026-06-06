@@ -48,7 +48,7 @@ const PLANS = [
     description: "Unlimited AI sessions and the full wellness toolkit",
     features: [
       "Everything in Starter",
-      "Unlimited AI chat sessions",
+      "Expanded AI-guided reflection sessions",
       "Advanced emotional insights",
       "Guided healing journeys",
       "Content studio access",

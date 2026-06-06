@@ -52,7 +52,7 @@ const qaItems = [
   {
     category: "healing-basics",
     question: "Can I heal without a therapist?",
-    answer: "Self-guided healing can support your journey significantly. However, for trauma, persistent mental health challenges, or severe symptoms, professional support is recommended. Think of our tools as complementary to professional care, not a replacement. We provide resources to help you find affordable therapy options."
+    answer: "Self-guided wellness tools may support reflection and daily coping. However, for trauma, persistent mental health challenges, or severe symptoms, professional support is recommended. Think of our tools as complementary to professional care, not a replacement. We provide resources to help you find affordable therapy options."
   },
   {
     category: "mental-health",

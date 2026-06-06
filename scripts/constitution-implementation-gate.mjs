@@ -45,7 +45,12 @@ const boundaryRisk = fs.existsSync("diagnostics/phase83/business-healing-boundar
   ? fs.readFileSync("diagnostics/phase83/business-healing-boundary-risks.txt", "utf8").trim()
   : "";
 
-if (boundaryRisk) failures.push("BUSINESS_HEALING_BOUNDARY_RISK_REQUIRES_NEXT_PHASE_REVIEW");
+const activeFirewallRiskFile = "diagnostics/phase84/business-healing-firewall-active-risks.txt";
+const activeFirewallRisk = fs.existsSync(activeFirewallRiskFile)
+  ? fs.readFileSync(activeFirewallRiskFile, "utf8").trim()
+  : boundaryRisk;
+
+if (activeFirewallRisk) failures.push("BUSINESS_HEALING_BOUNDARY_RISK_REQUIRES_NEXT_PHASE_REVIEW");
 
 fs.writeFileSync("diagnostics/phase83/constitution-gate-failures.txt", failures.join("\n") + (failures.length ? "\n" : ""));
 

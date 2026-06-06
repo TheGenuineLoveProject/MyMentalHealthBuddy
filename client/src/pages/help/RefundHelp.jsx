@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const REFUND_STEPS = [
-  "We offer a 30-day money-back guarantee on all paid plans.",
+  "We offer a 30-day money-back support intention on all paid plans.",
   "Contact our support team with your request.",
   "We'll process your refund within 5-7 business days.",
   "You'll receive a confirmation email when complete."
@@ -27,7 +27,7 @@ const FAQ = [
   },
   {
     q: "What about lifetime purchases?",
-    a: "Lifetime purchases are also covered by our 30-day guarantee."
+    a: "Lifetime purchases are also covered by our 30-day support intention."
   }
 ];
 
@@ -64,7 +64,7 @@ export default function RefundHelp() {
           <CardContent className="p-6">
             <h2 className="font-semibold mb-4 flex items-center gap-2">
               <Check className="w-5 h-5 text-green-600" />
-              30-Day Money-Back Guarantee
+              30-Day Money-Back Support intention
             </h2>
             <ol className="space-y-3">
               {REFUND_STEPS.map((step, i) => (

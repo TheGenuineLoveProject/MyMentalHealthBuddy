@@ -2,7 +2,7 @@
 import { titleFromRouteKey } from "./routeKey";
 
 // Keep bullets legally safe: educational + self-reflection + skills practice.
-// No therapy/diagnosis/treatment/guarantees.
+// No therapy/diagnosis/treatment/is designed to support.
 const DEFAULT_BENEFITS = [
   "Practice a small, realistic next step you can repeat.",
   "Build self-awareness through gentle reflection prompts.",

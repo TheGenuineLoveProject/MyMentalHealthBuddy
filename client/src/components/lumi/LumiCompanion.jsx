@@ -59,7 +59,7 @@ function currentTimeStateKey(now = new Date()) {
  *                                 brand-pure sage Lumi. Default false.
  *
  * Together, lockImage + lockAnimationClass + ignoreThemeFilter let a single
- * call site (e.g. the home hero) guarantee "canonical sage, breathing"
+ * call site (e.g. the home hero) support intention "canonical sage, breathing"
  * regardless of clock hour, sleep state, saved theme, or emotion changes,
  * while every other consumer continues to use the full behavior pipeline.
  *

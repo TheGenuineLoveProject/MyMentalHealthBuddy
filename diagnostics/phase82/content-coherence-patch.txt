@@ -1,0 +1,17 @@
+PATCHED_FILES=16
+client/src/pages/AffirmationsPage.jsx
+client/src/pages/BehaviorChangePage.jsx
+client/src/pages/FAQPage.jsx
+client/src/pages/HealingJourneysPage.jsx
+client/src/pages/MeditationGuidePage.jsx
+client/src/pages/Pricing.jsx
+client/src/pages/PricingPage.jsx
+client/src/pages/QAPage.jsx
+client/src/pages/Register.jsx
+client/src/pages/Upgrade.jsx
+client/src/pages/Wellness.jsx
+client/src/pages/account/Billing.jsx
+client/src/pages/account/Subscription.jsx
+client/src/pages/admin/_adminToolsShared.js
+client/src/components/CrisisStabilizer.jsx
+client/src/content/healingFrameworks.ts

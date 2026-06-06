@@ -18,7 +18,7 @@ const PRO_PLAN = {
   yearly: { price: "$109", period: "/year", savings: "Save $47/year" },
   icon: Zap,
   features: [
-    "Unlimited AI chat sessions",
+    "Expanded AI-guided reflection sessions",
     "All wellness tools unlocked",
     "Advanced insights & analytics",
     "Healing journey access",

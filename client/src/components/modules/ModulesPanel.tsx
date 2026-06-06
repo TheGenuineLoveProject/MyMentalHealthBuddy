@@ -200,7 +200,7 @@ export function ModulesPanel({ routeKey }: { routeKey: string }) {
       {modules.includes("nlp") && (
         <div className="mt-5 rounded-xl border border-[rgba(255,255,255,0.08)] p-4">
           <h3 className="font-semibold">NLP Reframe Prompts (safe self-talk)</h3>
-          <p className="text-sm opacity-80 mt-1">Language templates for reframing — no manipulation, no guarantees.</p>
+          <p className="text-sm opacity-80 mt-1">Language templates for reframing — no manipulation, no is designed to support.</p>
 
           <div className="mt-3 grid gap-3">
             <div className="text-sm opacity-90">• {NLP.labels[0]}</div>

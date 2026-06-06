@@ -67,7 +67,7 @@ const behaviorModules = [
         {
           title: "Neuroplasticity",
           description: "Your brain physically changes when you repeat behaviors. New neural pathways form and strengthen with practice—this is why consistency matters more than intensity.",
-          example: "Each time you meditate, you strengthen the neural pathways for calm and focus. After 8 weeks of daily practice, brain scans show measurable changes in the amygdala."
+          example: "Each time you meditate, you strengthen the neural pathways for calm and focus. After 8 weeks of daily practice, research suggests consistent practice may support measurable changes in the amygdala."
         },
         {
           title: "Willpower is Limited",

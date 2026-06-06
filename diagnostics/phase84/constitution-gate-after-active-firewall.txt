@@ -1,0 +1,6 @@
+
+> mymentalhealthbuddy@1.0.0 gate:constitution
+> node scripts/constitution-implementation-gate.mjs
+
+CONSTITUTION_IMPLEMENTATION_GATE_PASS
+clinicalClaimRiskLines=121

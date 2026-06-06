@@ -106,7 +106,7 @@ export const trustRegistry = {
         id: "what-ai-cannot-do",
         title: "What AI Cannot Do",
         body:
-          "AI cannot diagnose, prescribe, replace human connection, predict your future, judge your character, or guarantee outcomes. It is a mirror for your own reflection — not an authority.",
+          "AI cannot diagnose, prescribe, replace human connection, predict your future, judge your character, or support intention outcomes. It is a mirror for your own reflection — not an authority.",
       },
       {
         id: "user-autonomy",
