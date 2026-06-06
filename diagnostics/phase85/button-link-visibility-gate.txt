@@ -1,0 +1,11 @@
+BUTTON_LINK_VISIBILITY_GATE_PASS
+warnings=9
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/components/SocialLinks.jsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/design-system/components/MMHBButton.tsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/features/mirror/JournalMirror.tsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/pages/admin/AdminSocial.jsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/pages/admin/NarrativeOpsConsole.jsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/pages/admin/SocialAnalytics.jsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/pages/admin/SocialCalendar.jsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/pages/admin/SocialDashboard.jsx
+WARN BLACK_TEXT_CONTRAST_REVIEW client/src/pages/admin/SocialGenerator.jsx

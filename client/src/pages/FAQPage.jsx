@@ -13,7 +13,7 @@ const faqs = [
         a: "MyMentalHealthBuddy by The Genuine Love Project is an educational mental wellness platform designed to support self-reflection, emotional skills, and personal growth. We provide tools for mood tracking, journaling, guided reflections, and compassionate AI chat support."
       },
       {
-        q: "Is this a educational wellness support, not a replacement for therapy?",
+        q: "Is this a educational wellness support, not a professional mental health care?",
         a: "No. Our platform is a supportive wellness tool, not a substitute for professional mental health care. We always encourage seeking professional help when needed and provide crisis resources for emergencies."
       },
       {

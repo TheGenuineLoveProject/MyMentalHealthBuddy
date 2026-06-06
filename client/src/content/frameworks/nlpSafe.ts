@@ -1,7 +1,7 @@
 export const NLP_SAFE = {
   name: "Language Tools (Ethical NLP-Inspired)",
   rules: [
-    "No coercion. No guaranteed claims. No replacing professional care.",
+    "No coercion. No promised claims. No replacing professional care.",
     "Use language to reduce shame, increase agency, and clarify next steps.",
   ],
   tools: [

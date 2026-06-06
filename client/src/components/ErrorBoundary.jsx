@@ -49,7 +49,7 @@ export class ErrorBoundary extends React.Component {
         >
           <div style={{ maxWidth: 480, textAlign: "center" }}>
             {/* CRITICAL SAFETY: state="crisis" is the only state with
-                guaranteed motion="steady" per avatarState.ts. Errors are
+                configured motion="steady" per avatarState.ts. Errors are
                 a crisis-adjacent moment; per the kernel "asymmetric risk:
                 err toward safety", non-flashing presence is mandatory. */}
             <div

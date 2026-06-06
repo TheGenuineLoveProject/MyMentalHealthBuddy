@@ -1,0 +1,8 @@
+/home/runner/workspace/tailwind.config.js:50
+            ]
+             
+
+SyntaxError: Unexpected end of input
+    at checkSyntax (node:internal/main/check_syntax:74:5)
+
+Node.js v20.20.0
