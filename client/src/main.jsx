@@ -1,3 +1,4 @@
+import LumiPresenceLayer from "./components/lumi/LumiPresenceLayer";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
@@ -151,7 +152,7 @@ const root = document.getElementById("root");
 if (root) {
   ReactDOM.createRoot(root).render(
     <HelmetProvider>
-      <App />
+      <><App /><LumiPresenceLayer /></>
     </HelmetProvider>
   );
 } else {
