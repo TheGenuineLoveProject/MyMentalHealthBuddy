@@ -1,0 +1,718 @@
+.archive/attached_assets_2026-05-10/lumi-admin_1777440789106.css -> #2d6a4f, #c4e5d8, #a65d4a, #f0c4b8, #b34d3d, #8a5a00, #d4943a, #8a3a2a, #3a5a8a, #5a8ad4
+.archive/attached_assets_2026-05-10/lumi-admin_1777524566229.css -> #2d6a4f, #c4e5d8, #a65d4a, #f0c4b8, #b34d3d, #8a5a00, #d4943a, #8a3a2a, #3a5a8a, #5a8ad4
+.archive/attached_assets_2026-05-10/lumi-mascot_1777440789106.css -> #ffffff, #f4f7f4, #faf9f6, #a3c2a3, #f5a623, #fff8ed, #6b655c
+.archive/attached_assets_2026-05-10/lumi-mascot_1777524566228.css -> #ffffff, #f4f7f4, #faf9f6, #a3c2a3, #f5a623, #fff8ed, #6b655c
+.archive/attached_assets_2026-05-10/lumi-tokens_1777440789106.css -> #f4f7f4, #e3ebe3, #c8d9c8, #a3c2a3, #7aa87a, #5a8a5a, #4a7a4a, #3d6b3d, #2f5a2f, #1f3d1f, #112811, #fff8ed, #ffefc4, #ffe09a, #ffce6b, #ffb93d, #f5a623, #e09000, #b87200, #8a5a00, #5c3d00, #faf9f6, #f2f0eb, #e6e2da, #d1ccc0, #a8a095, #8a8278, #6b655c, #4d4842, #2e2c28, #1a1917, #7eb8a2, #d4ede4, #a8c686, #e1edd3, #e8927c, #f5d4cc, #8fa7d4, #d8e0f0, #f5c156, #fcebc7, #b8a9c9, #e5deec, #ffffff, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+.archive/attached_assets_2026-05-10/lumi-tokens_1777524566228.css -> #f4f7f4, #e3ebe3, #c8d9c8, #a3c2a3, #7aa87a, #5a8a5a, #4a7a4a, #3d6b3d, #2f5a2f, #1f3d1f, #112811, #fff8ed, #ffefc4, #ffe09a, #ffce6b, #ffb93d, #f5a623, #e09000, #b87200, #8a5a00, #5c3d00, #faf9f6, #f2f0eb, #e6e2da, #d1ccc0, #a8a095, #8a8278, #6b655c, #4d4842, #2e2c28, #1a1917, #7eb8a2, #d4ede4, #a8c686, #e1edd3, #e8927c, #f5d4cc, #8fa7d4, #d8e0f0, #f5c156, #fcebc7, #b8a9c9, #e5deec, #ffffff, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+.config/npm/node_global/lib/node_modules/vite-bundle-visualizer/node_modules/rollup-plugin-visualizer/dist/lib/flamegraph.css -> #2b2d42, #edf2f4
+.config/npm/node_global/lib/node_modules/vite-bundle-visualizer/node_modules/rollup-plugin-visualizer/dist/lib/network.css -> #2b2d42, #edf2f4
+.config/npm/node_global/lib/node_modules/vite-bundle-visualizer/node_modules/rollup-plugin-visualizer/dist/lib/sunburst.css -> #2b2d42, #edf2f4
+.config/npm/node_global/lib/node_modules/vite-bundle-visualizer/node_modules/rollup-plugin-visualizer/dist/lib/treemap.css -> #2b2d42, #edf2f4
+.hx-backups/20260516-065915/client/dist/assets/AvatarLab-B6WI5thR.css -> #f5f0e8, #a8c9a0, #f5a3a3, #1a1a1a, #2a2a2a, #4a7e722e, #fff
+.hx-backups/20260516-065915/client/dist/assets/BreathingTool-DS2q5R40.css -> #74c0fc1f, #0000, #a8d5ba24, #ffb88c1a, #c8b6ff24, #ffd93d24, #74c0fc, #74c0fc59, #a8d5ba4d, #74c0fc73, #74c0fc4d, #c8b6ff80, #c8b6ff52, #a8c9a073, #a8c9a04d, #74c0fc2e, #c8b6ff38, #a8c9a02e, #c8b6ff, #a8c9a0, #74c0fc33, #74c0fcf2, #c8b6fff2, #a8c9a0f2, #74c0fc00
+.hx-backups/20260516-065915/client/dist/assets/CanvaLanding-Bi6MZ_aZ.css -> #be862259, #be86228c, #be862266, #be862299, #f6f1e8, #163a36, #8fbf9f, #2f5d5d, #c4787a, #8fbf9f1a, #8fbf9f26, #8fbf9f33, #8fbf9f4d, #8fbf9f66, #2f5d5d1f, #2f5d5d33, #2f5d5d4d, #2f5d5d66, #c4787a1a, #c4787a26, #c4787a33, #c4787a4d, #0000, #fff, #be86224d, #be862280, #be86222e, #fcf6eaf2, #1ec8902e, #fff9, #be862214, #062a2a0f, #ffffff80, #ffffffb3, #be86223d, #be86221a, #062a2a14, #00000026, #00000080, #1ec89014, #062a2a0a, #6c58b80f, #d086720d, #1ec89040, #6c58b826, #1ec89000, #6c58b800, #f0d080, #163d3d0a, #163d3d0f
+.hx-backups/20260516-065915/client/dist/assets/CelebrationFlow-D71fqt0c.css -> #ffd93d38, #0000, #ffb88c26, #ffd93d1f, #a8c9a01a, #ffd93d, #ffd93d2e
+.hx-backups/20260516-065915/client/dist/assets/CheckIn-KbUv1xsW.css -> #c8b6ff2e, #0000, #c8b6ff1a, #ff9a8b0f, #ffd93d2e, #ffd93d14, #ffb88c0f, #c8b6ff
+.hx-backups/20260516-065915/client/dist/assets/CommandCenter-BfVTyNhP.css -> #fdfcfb, #f5f2ef, #8a9a5b33, #fff, #8a9a5b0d, #0000000a, #2d6a4f1a, #8a9a5b1a, #8a9a5b, #8a9a5b08, #0000, #8a9a5b14, #2c6e63, #888, #8a9a5b4d
+.hx-backups/20260516-065915/client/dist/assets/ContentStudioPage-DH_xWkv_.css -> #3a3a3a, #faf9f7, #0000, #8fbf9f1a, #8fbf9f4d, #2f5d5d, #8fbf9f, #8fbf9f26, #2f5d5d1a, #fff, #0000000d, #2f5d5d33, #8fbf9f33, #eac33b, #eac33b1a, #2f5d5d0d
+.hx-backups/20260516-065915/client/dist/assets/LumiV6Preview-DMCLDRmU.css -> #141e1917, #141e191a, #fff7e8c7, #fff7e88c, #fff7e81a, #0000, #fff8ee, #50321e2e, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240, #1a1917, #fff, #ead7b9, #3c28141a, #d4546a, #a8c9a02e, #0000001a, #ffb247e6, #ffb247a6, #ff8c4200, #ffd93d8c, #ffb88c80, #ff9a8b80, #a8d5ba80, #c8b6ff80, #e8913a59, #e8913ad9, #e8913a8c, #e8913a00, #e8913ab3, #ffd93d99, #ffd93d, #ffc857, #a8c9a099, #74c0fc8c, #c8b6ff8c, #ff9a8b00, #ffd93d80, #ffd93d00, #ff9a8b8c, #c8b6ff00, #a8c9a073, #a8c9a000, #74c0fc80, #74c0fc1a, #a8c9a01a, #c8b6ff14
+.hx-backups/20260516-065915/client/dist/assets/Overview-DThRZbH-.css -> #fdfcfb, #f5f2ef, #d4a80040, #1a1917, #fff, #0000000a, #00000014, #2d6a4f1a, #8a9a5b0d, #5a8a5a, #c8d9c8, #f5faf5, #a3c2a3, #8a9a5b4d, #7a8c7e
+.hx-backups/20260516-065915/client/dist/assets/PeacescapePage-DfUayL-v.css -> #be86220d, #0000, #1ec8900d, #be86228c, #1ec890a6, #1ec8904d, #ffffffd9, #062a2a14, #062a2a12, #fffc, #be86222e, #2d503c1f, #fffffff5, #fcf6ea73, #1ec89033, #062a2a0a, #062a2a0d, #be862280, #1ec89052, #ffffffe6, #062a2a0f, #062a2a, #0d4a3d
+.hx-backups/20260516-065915/client/dist/assets/WellnessPageShell-DJNG-4h4.css -> #be86220a, #0000, #1ec8900b, #fffffff2, #fcf6ea66, #ffffffb3, #062a2a0a, #fff, #fcf6eaa6, #1ec89066, #ffffffd9, #062a2a0f, #be86221f, #062a2a0d, #fcf6ea4d, #1ec89033, #be862280, #1ec89099, #ffffffe6, #062a2a14, #1ec8904d, #fffc, #062a2a08, #fffffff7, #fcf6ea40, #1ec8902e, #062a2a, #0d4a3d
+.hx-backups/20260516-065915/client/dist/assets/ZenScape-CBZtDpQF.css -> #1f2933, #7fd8a859, #0000, #fffffff5, #2d503c2e, #2d503c14, #2d5040, #7fd8a82e, #7fd8a873, #7fd8a8b3, #f5fcf8fa, #7fd8a88c, #7fd8a838, #7fd8a824, #7fd8a8a6, #7fd8a800, #ffd75a1a, #ffd75a00, #faf8f3, #8fbf9f0f, #ffffffd9, #264f4f, #7fd8a8, #5ddb94, #ffd75a, #f4b6c2, #e08fa1, #ffd7ba, #ffe08a, #f0c46a, #ffaa6e, #9fd4f4, #7bb8e8, #d4e8fa, #c8b6f0, #a693dc, #f0e0f8, #ffb89d, #f09a85, #ffe2b5, #00000014, #fffffff2
+.hx-backups/20260516-065915/client/dist/assets/glp-pane-DKnephKp.css -> #1ec89033, #ffffffd9, #062a2a0a, #062a2a0d, #fff, #fcf6ea4d, #0000, #be862280, #1ec89099, #1ec8904d, #ffffffe6, #062a2a0f, #062a2a14, #be862238, #1ec89038, #ffffff0a, #0003, #00000040, #1f2937, #062a2a8c, #1ec8905c
+.hx-backups/20260516-065915/client/dist/assets/index-kUhkFgOY.css -> #141e1917, #141e191a, #7fd8a8, #6fe3b0, #5da3c9, #5ddb94, #ffd75a, #a78bfa, #0000, #000, #fff7e8f2, #fff7e8cc, #fff7e833, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240, #faf9f7, #3a3a3a, #8fbf9f14, #f4c7c30f, #eac33b08, #2f5d5d, #fff, #8fbf9f4d, #8fbf9f26, #8fbf9f80, #8fbf9f40, #8fbf9f66, #8fbf9f99, #8fbf9f00, #ed5e76, #7a91b8, #ffaa508c, #ffaa5033, #ffaa5000, #ffb45ad9, #ffb45a4d, #ffb45a00, #f472b68c, #f472b62e, #f472b600, #ffb45acc, #f59e0b, #8fbf9f0d, #2f5d5d08, #f4c7c314, #2f5d5d0d, #8fbf9f1a
+.hx-backups/20260516-065915/client/dist/assets/lumi-registry-Pmn-ADNv.css -> #7e906e29
+.hx-backups/20260516-065915/client/dist/assets/sacred-C3NivM-a.css -> #0000, #2f5d5d, #8fbf9f, #fff, #2f5d5d4d, #2f5d5d66, #8fbf9f1a
+.hx-backups/20260516-065915/client/dist/assets/sacred-visuals-CKPEwYqm.css -> #f472b64d, #fbbf2433, #a78bfa1a, #f472b680, #fbbf244d, #a78bfa33, #facc1566, #facc154d, #facc151a, #38bdf866, #0ea5e933, #38bdf84d, #38bdf81a, #f472b666, #ec489933, #f472b61a, #4ade8066, #22c55e33, #4ade804d, #4ade801a, #2dd4bf66, #14b8a633, #2dd4bf4d, #2dd4bf1a, #fb718566, #f43f5e33, #fb71854d, #fb71851a, #818cf866, #6366f133, #818cf84d, #818cf81a, #fb923c66, #f9731633, #fb923c4d, #fb923c1a, #a78bfa66, #8b5cf633, #a78bfa4d, #fff4e6, #ffd6dd, #f0dafb, #dee2f7, #dbd1f0, #e9dbf0, #e0ebf5, #f7dee7, #fcf4e3, #2b2112, #240f13
+.hx-backups/20260516-065915/client/src/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+.hx-backups/20260516-065915/client/src/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+.hx-backups/20260516-065915/client/src/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+.hx-backups/20260516-065915/client/src/components/SacredBackground.css -> #ffd700
+.hx-backups/20260516-065915/client/src/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+.hx-backups/20260516-065915/client/src/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+.hx-backups/20260516-065915/client/src/components/lumi/LumiMascot.css -> #f59e0b
+.hx-backups/20260516-065915/client/src/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+.hx-backups/20260516-065915/client/src/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+.hx-backups/20260516-065915/client/src/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/20260516-065915/client/src/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+.hx-backups/20260516-065915/client/src/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/20260516-065915/client/src/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/20260516-065915/client/src/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+.hx-backups/20260516-065915/client/src/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/20260516-065915/client/src/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+.hx-backups/20260516-065915/client/src/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+.hx-backups/20260516-065915/client/src/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+.hx-backups/20260516-065915/client/src/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+.hx-backups/20260516-065915/client/src/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+.hx-backups/20260516-065915/client/src/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+.hx-backups/20260516-065915/client/src/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+.hx-backups/20260516-065915/client/src/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+.hx-backups/20260516-065915/client/src/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+.hx-backups/20260516-065915/client/src/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+.hx-backups/20260516-065915/client/src/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+.hx-backups/20260516-065915/client/src/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+.hx-backups/20260516-065915/client/src/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+.hx-backups/20260516-065915/client/src/styles/celebration.css -> #FFD93D
+.hx-backups/20260516-065915/client/src/styles/checkin.css -> #C8B6FF
+.hx-backups/20260516-065915/client/src/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+.hx-backups/20260516-065915/client/src/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+.hx-backups/20260516-065915/client/src/styles/lumi-a11y.css -> #ffffff
+.hx-backups/20260516-065915/client/src/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+.hx-backups/20260516-065915/client/src/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+.hx-backups/20260516-065915/client/src/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+.hx-backups/20260516-065915/client/src/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+.hx-backups/20260516-065915/client/src/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+.hx-backups/20260516-065915/client/src/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+.hx-backups/20260516-065915/client/src/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+.hx-backups/20260516-065915/client/src/styles/v6-preview.css -> #FFD93D, #FFB88C
+.hx-backups/20260516-065915/client/src/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+.hx-backups/20260516-065915/client/src/styles/wellness-shell.css -> #062a2a, #0d4a3d
+.hx-backups/v47-20260515-144035/client/dist/assets/AvatarLab-B6WI5thR.css -> #f5f0e8, #a8c9a0, #f5a3a3, #1a1a1a, #2a2a2a, #4a7e722e, #fff
+.hx-backups/v47-20260515-144035/client/dist/assets/BreathingTool-DS2q5R40.css -> #74c0fc1f, #0000, #a8d5ba24, #ffb88c1a, #c8b6ff24, #ffd93d24, #74c0fc, #74c0fc59, #a8d5ba4d, #74c0fc73, #74c0fc4d, #c8b6ff80, #c8b6ff52, #a8c9a073, #a8c9a04d, #74c0fc2e, #c8b6ff38, #a8c9a02e, #c8b6ff, #a8c9a0, #74c0fc33, #74c0fcf2, #c8b6fff2, #a8c9a0f2, #74c0fc00
+.hx-backups/v47-20260515-144035/client/dist/assets/CanvaLanding-Bi6MZ_aZ.css -> #be862259, #be86228c, #be862266, #be862299, #f6f1e8, #163a36, #8fbf9f, #2f5d5d, #c4787a, #8fbf9f1a, #8fbf9f26, #8fbf9f33, #8fbf9f4d, #8fbf9f66, #2f5d5d1f, #2f5d5d33, #2f5d5d4d, #2f5d5d66, #c4787a1a, #c4787a26, #c4787a33, #c4787a4d, #0000, #fff, #be86224d, #be862280, #be86222e, #fcf6eaf2, #1ec8902e, #fff9, #be862214, #062a2a0f, #ffffff80, #ffffffb3, #be86223d, #be86221a, #062a2a14, #00000026, #00000080, #1ec89014, #062a2a0a, #6c58b80f, #d086720d, #1ec89040, #6c58b826, #1ec89000, #6c58b800, #f0d080, #163d3d0a, #163d3d0f
+.hx-backups/v47-20260515-144035/client/dist/assets/CelebrationFlow-D71fqt0c.css -> #ffd93d38, #0000, #ffb88c26, #ffd93d1f, #a8c9a01a, #ffd93d, #ffd93d2e
+.hx-backups/v47-20260515-144035/client/dist/assets/CheckIn-KbUv1xsW.css -> #c8b6ff2e, #0000, #c8b6ff1a, #ff9a8b0f, #ffd93d2e, #ffd93d14, #ffb88c0f, #c8b6ff
+.hx-backups/v47-20260515-144035/client/dist/assets/CommandCenter-BfVTyNhP.css -> #fdfcfb, #f5f2ef, #8a9a5b33, #fff, #8a9a5b0d, #0000000a, #2d6a4f1a, #8a9a5b1a, #8a9a5b, #8a9a5b08, #0000, #8a9a5b14, #2c6e63, #888, #8a9a5b4d
+.hx-backups/v47-20260515-144035/client/dist/assets/ContentStudioPage-DH_xWkv_.css -> #3a3a3a, #faf9f7, #0000, #8fbf9f1a, #8fbf9f4d, #2f5d5d, #8fbf9f, #8fbf9f26, #2f5d5d1a, #fff, #0000000d, #2f5d5d33, #8fbf9f33, #eac33b, #eac33b1a, #2f5d5d0d
+.hx-backups/v47-20260515-144035/client/dist/assets/LumiV6Preview-DMCLDRmU.css -> #141e1917, #141e191a, #fff7e8c7, #fff7e88c, #fff7e81a, #0000, #fff8ee, #50321e2e, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240, #1a1917, #fff, #ead7b9, #3c28141a, #d4546a, #a8c9a02e, #0000001a, #ffb247e6, #ffb247a6, #ff8c4200, #ffd93d8c, #ffb88c80, #ff9a8b80, #a8d5ba80, #c8b6ff80, #e8913a59, #e8913ad9, #e8913a8c, #e8913a00, #e8913ab3, #ffd93d99, #ffd93d, #ffc857, #a8c9a099, #74c0fc8c, #c8b6ff8c, #ff9a8b00, #ffd93d80, #ffd93d00, #ff9a8b8c, #c8b6ff00, #a8c9a073, #a8c9a000, #74c0fc80, #74c0fc1a, #a8c9a01a, #c8b6ff14
+.hx-backups/v47-20260515-144035/client/dist/assets/Overview-DThRZbH-.css -> #fdfcfb, #f5f2ef, #d4a80040, #1a1917, #fff, #0000000a, #00000014, #2d6a4f1a, #8a9a5b0d, #5a8a5a, #c8d9c8, #f5faf5, #a3c2a3, #8a9a5b4d, #7a8c7e
+.hx-backups/v47-20260515-144035/client/dist/assets/PeacescapePage-DfUayL-v.css -> #be86220d, #0000, #1ec8900d, #be86228c, #1ec890a6, #1ec8904d, #ffffffd9, #062a2a14, #062a2a12, #fffc, #be86222e, #2d503c1f, #fffffff5, #fcf6ea73, #1ec89033, #062a2a0a, #062a2a0d, #be862280, #1ec89052, #ffffffe6, #062a2a0f, #062a2a, #0d4a3d
+.hx-backups/v47-20260515-144035/client/dist/assets/WellnessPageShell-DJNG-4h4.css -> #be86220a, #0000, #1ec8900b, #fffffff2, #fcf6ea66, #ffffffb3, #062a2a0a, #fff, #fcf6eaa6, #1ec89066, #ffffffd9, #062a2a0f, #be86221f, #062a2a0d, #fcf6ea4d, #1ec89033, #be862280, #1ec89099, #ffffffe6, #062a2a14, #1ec8904d, #fffc, #062a2a08, #fffffff7, #fcf6ea40, #1ec8902e, #062a2a, #0d4a3d
+.hx-backups/v47-20260515-144035/client/dist/assets/ZenScape-CBZtDpQF.css -> #1f2933, #7fd8a859, #0000, #fffffff5, #2d503c2e, #2d503c14, #2d5040, #7fd8a82e, #7fd8a873, #7fd8a8b3, #f5fcf8fa, #7fd8a88c, #7fd8a838, #7fd8a824, #7fd8a8a6, #7fd8a800, #ffd75a1a, #ffd75a00, #faf8f3, #8fbf9f0f, #ffffffd9, #264f4f, #7fd8a8, #5ddb94, #ffd75a, #f4b6c2, #e08fa1, #ffd7ba, #ffe08a, #f0c46a, #ffaa6e, #9fd4f4, #7bb8e8, #d4e8fa, #c8b6f0, #a693dc, #f0e0f8, #ffb89d, #f09a85, #ffe2b5, #00000014, #fffffff2
+.hx-backups/v47-20260515-144035/client/dist/assets/glp-pane-DKnephKp.css -> #1ec89033, #ffffffd9, #062a2a0a, #062a2a0d, #fff, #fcf6ea4d, #0000, #be862280, #1ec89099, #1ec8904d, #ffffffe6, #062a2a0f, #062a2a14, #be862238, #1ec89038, #ffffff0a, #0003, #00000040, #1f2937, #062a2a8c, #1ec8905c
+.hx-backups/v47-20260515-144035/client/dist/assets/index-B7UecdY-.css -> #141e1917, #141e191a, #7fd8a8, #6fe3b0, #5da3c9, #5ddb94, #ffd75a, #a78bfa, #0000, #000, #fff7e8f2, #fff7e8cc, #fff7e833, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240, #faf9f7, #3a3a3a, #8fbf9f14, #f4c7c30f, #eac33b08, #2f5d5d, #fff, #8fbf9f4d, #8fbf9f26, #8fbf9f80, #8fbf9f40, #8fbf9f66, #8fbf9f99, #8fbf9f00, #ed5e76, #7a91b8, #ffaa508c, #ffaa5033, #ffaa5000, #ffb45ad9, #ffb45a4d, #ffb45a00, #f472b68c, #f472b62e, #f472b600, #ffb45acc, #f59e0b, #8fbf9f0d, #2f5d5d08, #f4c7c314, #2f5d5d0d, #8fbf9f1a
+.hx-backups/v47-20260515-144035/client/dist/assets/lumi-registry-Pmn-ADNv.css -> #7e906e29
+.hx-backups/v47-20260515-144035/client/dist/assets/sacred-C3NivM-a.css -> #0000, #2f5d5d, #8fbf9f, #fff, #2f5d5d4d, #2f5d5d66, #8fbf9f1a
+.hx-backups/v47-20260515-144035/client/dist/assets/sacred-visuals-CKPEwYqm.css -> #f472b64d, #fbbf2433, #a78bfa1a, #f472b680, #fbbf244d, #a78bfa33, #facc1566, #facc154d, #facc151a, #38bdf866, #0ea5e933, #38bdf84d, #38bdf81a, #f472b666, #ec489933, #f472b61a, #4ade8066, #22c55e33, #4ade804d, #4ade801a, #2dd4bf66, #14b8a633, #2dd4bf4d, #2dd4bf1a, #fb718566, #f43f5e33, #fb71854d, #fb71851a, #818cf866, #6366f133, #818cf84d, #818cf81a, #fb923c66, #f9731633, #fb923c4d, #fb923c1a, #a78bfa66, #8b5cf633, #a78bfa4d, #fff4e6, #ffd6dd, #f0dafb, #dee2f7, #dbd1f0, #e9dbf0, #e0ebf5, #f7dee7, #fcf4e3, #2b2112, #240f13
+.hx-backups/v47-20260515-144035/client/src/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+.hx-backups/v47-20260515-144035/client/src/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+.hx-backups/v47-20260515-144035/client/src/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+.hx-backups/v47-20260515-144035/client/src/components/SacredBackground.css -> #ffd700
+.hx-backups/v47-20260515-144035/client/src/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+.hx-backups/v47-20260515-144035/client/src/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+.hx-backups/v47-20260515-144035/client/src/components/lumi/LumiMascot.css -> #f59e0b
+.hx-backups/v47-20260515-144035/client/src/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+.hx-backups/v47-20260515-144035/client/src/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+.hx-backups/v47-20260515-144035/client/src/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/v47-20260515-144035/client/src/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+.hx-backups/v47-20260515-144035/client/src/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/v47-20260515-144035/client/src/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/v47-20260515-144035/client/src/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+.hx-backups/v47-20260515-144035/client/src/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+.hx-backups/v47-20260515-144035/client/src/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+.hx-backups/v47-20260515-144035/client/src/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+.hx-backups/v47-20260515-144035/client/src/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+.hx-backups/v47-20260515-144035/client/src/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+.hx-backups/v47-20260515-144035/client/src/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+.hx-backups/v47-20260515-144035/client/src/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+.hx-backups/v47-20260515-144035/client/src/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+.hx-backups/v47-20260515-144035/client/src/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+.hx-backups/v47-20260515-144035/client/src/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+.hx-backups/v47-20260515-144035/client/src/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+.hx-backups/v47-20260515-144035/client/src/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+.hx-backups/v47-20260515-144035/client/src/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+.hx-backups/v47-20260515-144035/client/src/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+.hx-backups/v47-20260515-144035/client/src/styles/celebration.css -> #FFD93D
+.hx-backups/v47-20260515-144035/client/src/styles/checkin.css -> #C8B6FF
+.hx-backups/v47-20260515-144035/client/src/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+.hx-backups/v47-20260515-144035/client/src/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+.hx-backups/v47-20260515-144035/client/src/styles/lumi-a11y.css -> #ffffff
+.hx-backups/v47-20260515-144035/client/src/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+.hx-backups/v47-20260515-144035/client/src/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+.hx-backups/v47-20260515-144035/client/src/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+.hx-backups/v47-20260515-144035/client/src/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+.hx-backups/v47-20260515-144035/client/src/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+.hx-backups/v47-20260515-144035/client/src/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+.hx-backups/v47-20260515-144035/client/src/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+.hx-backups/v47-20260515-144035/client/src/styles/v6-preview.css -> #FFD93D, #FFB88C
+.hx-backups/v47-20260515-144035/client/src/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+.hx-backups/v47-20260515-144035/client/src/styles/wellness-shell.css -> #062a2a, #0d4a3d
+.local/skills/artifacts/artifacts/slides/files/src/index.css -> #4f46e5, #06b6d4, #f8fafc, #0f172a, #64748b
+.local/skills/artifacts/artifacts/video-js/files/src/index.css -> #000000, #6B7280, #3B82F6, #FFFFFF, #0F172A, #F8FAFC, #111827, #9CA3AF, #10B981, #F59E0B, #EF4444
+backups/phase-d1-nav-20260528-225045/client-src/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+backups/phase-d1-nav-20260528-225045/client-src/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+backups/phase-d1-nav-20260528-225045/client-src/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+backups/phase-d1-nav-20260528-225045/client-src/components/SacredBackground.css -> #ffd700
+backups/phase-d1-nav-20260528-225045/client-src/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+backups/phase-d1-nav-20260528-225045/client-src/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+backups/phase-d1-nav-20260528-225045/client-src/components/lumi/LumiMascot.css -> #f59e0b
+backups/phase-d1-nav-20260528-225045/client-src/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+backups/phase-d1-nav-20260528-225045/client-src/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+backups/phase-d1-nav-20260528-225045/client-src/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d1-nav-20260528-225045/client-src/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+backups/phase-d1-nav-20260528-225045/client-src/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d1-nav-20260528-225045/client-src/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d1-nav-20260528-225045/client-src/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+backups/phase-d1-nav-20260528-225045/client-src/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d1-nav-20260528-225045/client-src/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+backups/phase-d1-nav-20260528-225045/client-src/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+backups/phase-d1-nav-20260528-225045/client-src/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+backups/phase-d1-nav-20260528-225045/client-src/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+backups/phase-d1-nav-20260528-225045/client-src/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+backups/phase-d1-nav-20260528-225045/client-src/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+backups/phase-d1-nav-20260528-225045/client-src/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+backups/phase-d1-nav-20260528-225045/client-src/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+backups/phase-d1-nav-20260528-225045/client-src/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+backups/phase-d1-nav-20260528-225045/client-src/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+backups/phase-d1-nav-20260528-225045/client-src/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+backups/phase-d1-nav-20260528-225045/client-src/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+backups/phase-d1-nav-20260528-225045/client-src/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+backups/phase-d1-nav-20260528-225045/client-src/styles/celebration.css -> #FFD93D
+backups/phase-d1-nav-20260528-225045/client-src/styles/checkin.css -> #C8B6FF
+backups/phase-d1-nav-20260528-225045/client-src/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+backups/phase-d1-nav-20260528-225045/client-src/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+backups/phase-d1-nav-20260528-225045/client-src/styles/lumi-a11y.css -> #ffffff
+backups/phase-d1-nav-20260528-225045/client-src/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+backups/phase-d1-nav-20260528-225045/client-src/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+backups/phase-d1-nav-20260528-225045/client-src/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+backups/phase-d1-nav-20260528-225045/client-src/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+backups/phase-d1-nav-20260528-225045/client-src/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+backups/phase-d1-nav-20260528-225045/client-src/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+backups/phase-d1-nav-20260528-225045/client-src/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+backups/phase-d1-nav-20260528-225045/client-src/styles/v6-preview.css -> #FFD93D, #FFB88C
+backups/phase-d1-nav-20260528-225045/client-src/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+backups/phase-d1-nav-20260528-225045/client-src/styles/wellness-shell.css -> #062a2a, #0d4a3d
+backups/phase-d2-nav-20260528-230452/client-src/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+backups/phase-d2-nav-20260528-230452/client-src/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+backups/phase-d2-nav-20260528-230452/client-src/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+backups/phase-d2-nav-20260528-230452/client-src/components/SacredBackground.css -> #ffd700
+backups/phase-d2-nav-20260528-230452/client-src/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+backups/phase-d2-nav-20260528-230452/client-src/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+backups/phase-d2-nav-20260528-230452/client-src/components/lumi/LumiMascot.css -> #f59e0b
+backups/phase-d2-nav-20260528-230452/client-src/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+backups/phase-d2-nav-20260528-230452/client-src/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+backups/phase-d2-nav-20260528-230452/client-src/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d2-nav-20260528-230452/client-src/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+backups/phase-d2-nav-20260528-230452/client-src/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d2-nav-20260528-230452/client-src/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d2-nav-20260528-230452/client-src/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+backups/phase-d2-nav-20260528-230452/client-src/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase-d2-nav-20260528-230452/client-src/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+backups/phase-d2-nav-20260528-230452/client-src/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+backups/phase-d2-nav-20260528-230452/client-src/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+backups/phase-d2-nav-20260528-230452/client-src/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+backups/phase-d2-nav-20260528-230452/client-src/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+backups/phase-d2-nav-20260528-230452/client-src/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+backups/phase-d2-nav-20260528-230452/client-src/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+backups/phase-d2-nav-20260528-230452/client-src/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+backups/phase-d2-nav-20260528-230452/client-src/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+backups/phase-d2-nav-20260528-230452/client-src/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+backups/phase-d2-nav-20260528-230452/client-src/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+backups/phase-d2-nav-20260528-230452/client-src/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+backups/phase-d2-nav-20260528-230452/client-src/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+backups/phase-d2-nav-20260528-230452/client-src/styles/celebration.css -> #FFD93D
+backups/phase-d2-nav-20260528-230452/client-src/styles/checkin.css -> #C8B6FF
+backups/phase-d2-nav-20260528-230452/client-src/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+backups/phase-d2-nav-20260528-230452/client-src/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+backups/phase-d2-nav-20260528-230452/client-src/styles/lumi-a11y.css -> #ffffff
+backups/phase-d2-nav-20260528-230452/client-src/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+backups/phase-d2-nav-20260528-230452/client-src/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+backups/phase-d2-nav-20260528-230452/client-src/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+backups/phase-d2-nav-20260528-230452/client-src/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+backups/phase-d2-nav-20260528-230452/client-src/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+backups/phase-d2-nav-20260528-230452/client-src/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+backups/phase-d2-nav-20260528-230452/client-src/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+backups/phase-d2-nav-20260528-230452/client-src/styles/v6-preview.css -> #FFD93D, #FFB88C
+backups/phase-d2-nav-20260528-230452/client-src/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+backups/phase-d2-nav-20260528-230452/client-src/styles/wellness-shell.css -> #062a2a, #0d4a3d
+backups/phase31A/client-20260603-042301/dist/assets/AvatarLab-B6WI5thR.css -> #f5f0e8, #a8c9a0, #f5a3a3, #1a1a1a, #2a2a2a, #4a7e722e, #fff
+backups/phase31A/client-20260603-042301/dist/assets/BreathingTool-DS2q5R40.css -> #74c0fc1f, #0000, #a8d5ba24, #ffb88c1a, #c8b6ff24, #ffd93d24, #74c0fc, #74c0fc59, #a8d5ba4d, #74c0fc73, #74c0fc4d, #c8b6ff80, #c8b6ff52, #a8c9a073, #a8c9a04d, #74c0fc2e, #c8b6ff38, #a8c9a02e, #c8b6ff, #a8c9a0, #74c0fc33, #74c0fcf2, #c8b6fff2, #a8c9a0f2, #74c0fc00
+backups/phase31A/client-20260603-042301/dist/assets/CelebrationFlow-D71fqt0c.css -> #ffd93d38, #0000, #ffb88c26, #ffd93d1f, #a8c9a01a, #ffd93d, #ffd93d2e
+backups/phase31A/client-20260603-042301/dist/assets/CheckIn-KbUv1xsW.css -> #c8b6ff2e, #0000, #c8b6ff1a, #ff9a8b0f, #ffd93d2e, #ffd93d14, #ffb88c0f, #c8b6ff
+backups/phase31A/client-20260603-042301/dist/assets/CommandCenter-BfVTyNhP.css -> #fdfcfb, #f5f2ef, #8a9a5b33, #fff, #8a9a5b0d, #0000000a, #2d6a4f1a, #8a9a5b1a, #8a9a5b, #8a9a5b08, #0000, #8a9a5b14, #2c6e63, #888, #8a9a5b4d
+backups/phase31A/client-20260603-042301/dist/assets/ContentStudioPage-DH_xWkv_.css -> #3a3a3a, #faf9f7, #0000, #8fbf9f1a, #8fbf9f4d, #2f5d5d, #8fbf9f, #8fbf9f26, #2f5d5d1a, #fff, #0000000d, #2f5d5d33, #8fbf9f33, #eac33b, #eac33b1a, #2f5d5d0d
+backups/phase31A/client-20260603-042301/dist/assets/LumiV6Preview-DMCLDRmU.css -> #141e1917, #141e191a, #fff7e8c7, #fff7e88c, #fff7e81a, #0000, #fff8ee, #50321e2e, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240, #1a1917, #fff, #ead7b9, #3c28141a, #d4546a, #a8c9a02e, #0000001a, #ffb247e6, #ffb247a6, #ff8c4200, #ffd93d8c, #ffb88c80, #ff9a8b80, #a8d5ba80, #c8b6ff80, #e8913a59, #e8913ad9, #e8913a8c, #e8913a00, #e8913ab3, #ffd93d99, #ffd93d, #ffc857, #a8c9a099, #74c0fc8c, #c8b6ff8c, #ff9a8b00, #ffd93d80, #ffd93d00, #ff9a8b8c, #c8b6ff00, #a8c9a073, #a8c9a000, #74c0fc80, #74c0fc1a, #a8c9a01a, #c8b6ff14
+backups/phase31A/client-20260603-042301/dist/assets/Overview-DThRZbH-.css -> #fdfcfb, #f5f2ef, #d4a80040, #1a1917, #fff, #0000000a, #00000014, #2d6a4f1a, #8a9a5b0d, #5a8a5a, #c8d9c8, #f5faf5, #a3c2a3, #8a9a5b4d, #7a8c7e
+backups/phase31A/client-20260603-042301/dist/assets/PageTemplate-DPX131m5.css -> #3a3a3a, #8fbf9f1a, #8fbf9f33, #2f5d5d, #8fbf9f, #fff, #2f5d5d33, #8fbf9f14, #faf9f7, #eac33b, #eac33b14, #eac33b4d, #2f5d5d0d, #8fbf9f26, #f4c7c31a, #f4c7c333, #eac33b1a, #eac33b33, #f4c7c326, #f4c7c3, #8fbf9f40, #8fbf9f4d, #8fbf9f66, #0000, #fffc, #2f5d5d14, #2f5d5d1f, #2f5d5d1a, #8fbf9f0d, #2f5d5d26, #2f5d5d0a, #8fbf9f59, #f4c7c30d, #f4c7c30f, #f4c7c34d, #f4c7c340, #f4c7c380, #0000000a, #00000014, #2f5d5d0f, #eac33b0f, #eac33b40, #eac33b26, #3339, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #3a3a3ab3
+backups/phase31A/client-20260603-042301/dist/assets/PeacescapePage-DfUayL-v.css -> #be86220d, #0000, #1ec8900d, #be86228c, #1ec890a6, #1ec8904d, #ffffffd9, #062a2a14, #062a2a12, #fffc, #be86222e, #2d503c1f, #fffffff5, #fcf6ea73, #1ec89033, #062a2a0a, #062a2a0d, #be862280, #1ec89052, #ffffffe6, #062a2a0f, #062a2a, #0d4a3d
+backups/phase31A/client-20260603-042301/dist/assets/SacredFooter-DSt2bIFs.css -> #faf9f7, #3a3a3a, #8fbf9f14, #0000, #f4c7c30f, #eac33b08, #2f5d5d, #fff, #8fbf9f4d, #8fbf9f0d, #2f5d5d08, #f4c7c314, #2f5d5d0d, #8fbf9f26, #8fbf9f80, #8fbf9f40, #8fbf9f66, #8fbf9f99, #8fbf9f00, #fff6, #8fbf9f1a, #eac33b59, #eac33b33, #f4c7c366, #f4c7c333, #8fbf9f33, #f4c7c31f, #eac33b14
+backups/phase31A/client-20260603-042301/dist/assets/WellnessPageShell-DJNG-4h4.css -> #be86220a, #0000, #1ec8900b, #fffffff2, #fcf6ea66, #ffffffb3, #062a2a0a, #fff, #fcf6eaa6, #1ec89066, #ffffffd9, #062a2a0f, #be86221f, #062a2a0d, #fcf6ea4d, #1ec89033, #be862280, #1ec89099, #ffffffe6, #062a2a14, #1ec8904d, #fffc, #062a2a08, #fffffff7, #fcf6ea40, #1ec8902e, #062a2a, #0d4a3d
+backups/phase31A/client-20260603-042301/dist/assets/ZenScape-CBZtDpQF.css -> #1f2933, #7fd8a859, #0000, #fffffff5, #2d503c2e, #2d503c14, #2d5040, #7fd8a82e, #7fd8a873, #7fd8a8b3, #f5fcf8fa, #7fd8a88c, #7fd8a838, #7fd8a824, #7fd8a8a6, #7fd8a800, #ffd75a1a, #ffd75a00, #faf8f3, #8fbf9f0f, #ffffffd9, #264f4f, #7fd8a8, #5ddb94, #ffd75a, #f4b6c2, #e08fa1, #ffd7ba, #ffe08a, #f0c46a, #ffaa6e, #9fd4f4, #7bb8e8, #d4e8fa, #c8b6f0, #a693dc, #f0e0f8, #ffb89d, #f09a85, #ffe2b5, #00000014, #fffffff2
+backups/phase31A/client-20260603-042301/dist/assets/_autopilot-BZu_wX0b.css -> #faf9f7, #2f5d5d, #3a3a3a, #fff, #8fbf9f, #8fbf9f4d, #8fbf9f66
+backups/phase31A/client-20260603-042301/dist/assets/glp-pane-DKnephKp.css -> #1ec89033, #ffffffd9, #062a2a0a, #062a2a0d, #fff, #fcf6ea4d, #0000, #be862280, #1ec89099, #1ec8904d, #ffffffe6, #062a2a0f, #062a2a14, #be862238, #1ec89038, #ffffff0a, #0003, #00000040, #1f2937, #062a2a8c, #1ec8905c
+backups/phase31A/client-20260603-042301/dist/assets/index-CzUsbJH3.css -> #141e1917, #141e191a, #7fd8a8, #6fe3b0, #5da3c9, #5ddb94, #ffd75a, #a78bfa, #0000, #000, #fff7e8f2, #fff7e8cc, #fff7e833, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240, #ed5e76, #7a91b8, #ffaa508c, #ffaa5033, #ffaa5000, #ffb45ad9, #ffb45a4d, #ffb45a00, #f472b68c, #f472b62e, #f472b600, #ffb45acc, #f59e0b, #fff, #1ec890, #d08672, #062a2a, #fcf6ea, #142626, #e8913a, #c9701f, #6c58b8, #5c4aa0, #1ec8901a, #1ec89026, #1ec89033, #1ec8904d, #1ec89066, #d086721a, #d0867226, #d0867233, #d086724d
+backups/phase31A/client-20260603-042301/dist/assets/lumi-registry-Pmn-ADNv.css -> #7e906e29
+backups/phase31A/client-20260603-042301/dist/assets/sacred-C3NivM-a.css -> #0000, #2f5d5d, #8fbf9f, #fff, #2f5d5d4d, #2f5d5d66, #8fbf9f1a
+backups/phase31A/client-20260603-042301/dist/assets/sacred-visuals-CKPEwYqm.css -> #f472b64d, #fbbf2433, #a78bfa1a, #f472b680, #fbbf244d, #a78bfa33, #facc1566, #facc154d, #facc151a, #38bdf866, #0ea5e933, #38bdf84d, #38bdf81a, #f472b666, #ec489933, #f472b61a, #4ade8066, #22c55e33, #4ade804d, #4ade801a, #2dd4bf66, #14b8a633, #2dd4bf4d, #2dd4bf1a, #fb718566, #f43f5e33, #fb71854d, #fb71851a, #818cf866, #6366f133, #818cf84d, #818cf81a, #fb923c66, #f9731633, #fb923c4d, #fb923c1a, #a78bfa66, #8b5cf633, #a78bfa4d, #fff4e6, #ffd6dd, #f0dafb, #dee2f7, #dbd1f0, #e9dbf0, #e0ebf5, #f7dee7, #fcf4e3, #2b2112, #240f13
+backups/phase31A/client-20260603-042301/src/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+backups/phase31A/client-20260603-042301/src/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+backups/phase31A/client-20260603-042301/src/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+backups/phase31A/client-20260603-042301/src/components/SacredBackground.css -> #ffd700
+backups/phase31A/client-20260603-042301/src/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+backups/phase31A/client-20260603-042301/src/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+backups/phase31A/client-20260603-042301/src/components/lumi/LumiMascot.css -> #f59e0b
+backups/phase31A/client-20260603-042301/src/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+backups/phase31A/client-20260603-042301/src/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+backups/phase31A/client-20260603-042301/src/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase31A/client-20260603-042301/src/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+backups/phase31A/client-20260603-042301/src/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase31A/client-20260603-042301/src/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase31A/client-20260603-042301/src/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+backups/phase31A/client-20260603-042301/src/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase31A/client-20260603-042301/src/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+backups/phase31A/client-20260603-042301/src/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+backups/phase31A/client-20260603-042301/src/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+backups/phase31A/client-20260603-042301/src/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+backups/phase31A/client-20260603-042301/src/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+backups/phase31A/client-20260603-042301/src/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+backups/phase31A/client-20260603-042301/src/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+backups/phase31A/client-20260603-042301/src/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+backups/phase31A/client-20260603-042301/src/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+backups/phase31A/client-20260603-042301/src/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+backups/phase31A/client-20260603-042301/src/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+backups/phase31A/client-20260603-042301/src/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+backups/phase31A/client-20260603-042301/src/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+backups/phase31A/client-20260603-042301/src/styles/celebration.css -> #FFD93D
+backups/phase31A/client-20260603-042301/src/styles/checkin.css -> #C8B6FF
+backups/phase31A/client-20260603-042301/src/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+backups/phase31A/client-20260603-042301/src/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+backups/phase31A/client-20260603-042301/src/styles/lumi-a11y.css -> #ffffff
+backups/phase31A/client-20260603-042301/src/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+backups/phase31A/client-20260603-042301/src/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+backups/phase31A/client-20260603-042301/src/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+backups/phase31A/client-20260603-042301/src/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+backups/phase31A/client-20260603-042301/src/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+backups/phase31A/client-20260603-042301/src/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+backups/phase31A/client-20260603-042301/src/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+backups/phase31A/client-20260603-042301/src/styles/v6-preview.css -> #FFD93D, #FFB88C
+backups/phase31A/client-20260603-042301/src/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+backups/phase31A/client-20260603-042301/src/styles/wellness-shell.css -> #062a2a, #0d4a3d
+backups/phase80-20260525-024842/src-backup/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+backups/phase80-20260525-024842/src-backup/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+backups/phase80-20260525-024842/src-backup/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+backups/phase80-20260525-024842/src-backup/components/SacredBackground.css -> #ffd700
+backups/phase80-20260525-024842/src-backup/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+backups/phase80-20260525-024842/src-backup/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+backups/phase80-20260525-024842/src-backup/components/lumi/LumiMascot.css -> #f59e0b
+backups/phase80-20260525-024842/src-backup/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+backups/phase80-20260525-024842/src-backup/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+backups/phase80-20260525-024842/src-backup/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase80-20260525-024842/src-backup/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+backups/phase80-20260525-024842/src-backup/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase80-20260525-024842/src-backup/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase80-20260525-024842/src-backup/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+backups/phase80-20260525-024842/src-backup/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+backups/phase80-20260525-024842/src-backup/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+backups/phase80-20260525-024842/src-backup/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+backups/phase80-20260525-024842/src-backup/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+backups/phase80-20260525-024842/src-backup/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+backups/phase80-20260525-024842/src-backup/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+backups/phase80-20260525-024842/src-backup/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+backups/phase80-20260525-024842/src-backup/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+backups/phase80-20260525-024842/src-backup/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+backups/phase80-20260525-024842/src-backup/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+backups/phase80-20260525-024842/src-backup/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+backups/phase80-20260525-024842/src-backup/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+backups/phase80-20260525-024842/src-backup/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+backups/phase80-20260525-024842/src-backup/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+backups/phase80-20260525-024842/src-backup/styles/celebration.css -> #FFD93D
+backups/phase80-20260525-024842/src-backup/styles/checkin.css -> #C8B6FF
+backups/phase80-20260525-024842/src-backup/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+backups/phase80-20260525-024842/src-backup/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+backups/phase80-20260525-024842/src-backup/styles/lumi-a11y.css -> #ffffff
+backups/phase80-20260525-024842/src-backup/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+backups/phase80-20260525-024842/src-backup/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+backups/phase80-20260525-024842/src-backup/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+backups/phase80-20260525-024842/src-backup/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+backups/phase80-20260525-024842/src-backup/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+backups/phase80-20260525-024842/src-backup/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+backups/phase80-20260525-024842/src-backup/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+backups/phase80-20260525-024842/src-backup/styles/v6-preview.css -> #FFD93D, #FFB88C
+backups/phase80-20260525-024842/src-backup/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+backups/phase80-20260525-024842/src-backup/styles/wellness-shell.css -> #062a2a, #0d4a3d
+client/src.bak.phase31b/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+client/src.bak.phase31b/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+client/src.bak.phase31b/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+client/src.bak.phase31b/components/SacredBackground.css -> #ffd700
+client/src.bak.phase31b/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+client/src.bak.phase31b/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+client/src.bak.phase31b/components/lumi/LumiMascot.css -> #f59e0b
+client/src.bak.phase31b/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+client/src.bak.phase31b/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+client/src.bak.phase31b/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase31b/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+client/src.bak.phase31b/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase31b/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase31b/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+client/src.bak.phase31b/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase31b/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+client/src.bak.phase31b/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+client/src.bak.phase31b/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+client/src.bak.phase31b/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+client/src.bak.phase31b/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+client/src.bak.phase31b/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+client/src.bak.phase31b/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+client/src.bak.phase31b/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+client/src.bak.phase31b/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+client/src.bak.phase31b/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+client/src.bak.phase31b/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+client/src.bak.phase31b/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+client/src.bak.phase31b/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+client/src.bak.phase31b/styles/celebration.css -> #FFD93D
+client/src.bak.phase31b/styles/checkin.css -> #C8B6FF
+client/src.bak.phase31b/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+client/src.bak.phase31b/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+client/src.bak.phase31b/styles/lumi-a11y.css -> #ffffff
+client/src.bak.phase31b/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+client/src.bak.phase31b/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+client/src.bak.phase31b/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+client/src.bak.phase31b/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+client/src.bak.phase31b/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+client/src.bak.phase31b/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+client/src.bak.phase31b/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+client/src.bak.phase31b/styles/v6-preview.css -> #FFD93D, #FFB88C
+client/src.bak.phase31b/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+client/src.bak.phase31b/styles/wellness-shell.css -> #062a2a, #0d4a3d
+client/src.bak.phase32/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+client/src.bak.phase32/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+client/src.bak.phase32/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+client/src.bak.phase32/components/SacredBackground.css -> #ffd700
+client/src.bak.phase32/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+client/src.bak.phase32/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+client/src.bak.phase32/components/lumi/LumiMascot.css -> #f59e0b
+client/src.bak.phase32/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+client/src.bak.phase32/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+client/src.bak.phase32/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase32/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+client/src.bak.phase32/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase32/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase32/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+client/src.bak.phase32/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src.bak.phase32/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+client/src.bak.phase32/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+client/src.bak.phase32/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+client/src.bak.phase32/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+client/src.bak.phase32/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+client/src.bak.phase32/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+client/src.bak.phase32/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+client/src.bak.phase32/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+client/src.bak.phase32/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+client/src.bak.phase32/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+client/src.bak.phase32/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+client/src.bak.phase32/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+client/src.bak.phase32/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+client/src.bak.phase32/styles/celebration.css -> #FFD93D
+client/src.bak.phase32/styles/checkin.css -> #C8B6FF
+client/src.bak.phase32/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+client/src.bak.phase32/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+client/src.bak.phase32/styles/lumi-a11y.css -> #ffffff
+client/src.bak.phase32/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+client/src.bak.phase32/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+client/src.bak.phase32/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+client/src.bak.phase32/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+client/src.bak.phase32/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+client/src.bak.phase32/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+client/src.bak.phase32/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+client/src.bak.phase32/styles/v6-preview.css -> #FFD93D, #FFB88C
+client/src.bak.phase32/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+client/src.bak.phase32/styles/wellness-shell.css -> #062a2a, #0d4a3d
+client/src/App.jsx -> #8fbf9f, #d4af37, #2f5d5d
+client/src/_quarantine/orphans/SacredNavBar.jsx -> #f8f7f4, #2f5d5d, #333
+client/src/avatar-life/__tests__/avatarLifeContract.test.ts -> #FF00FF
+client/src/avatar-life/governance/nonDriftRules.ts -> #A8C9A0, #7AA86F, #74C0FC, #A78BFA, #A8E6CF, #F8C6C0, #F4C95D, #142626
+client/src/avatar-life/types/avatarLifeTypes.ts -> #A8C9A0, #7AA86F, #74C0FC, #A78BFA, #F8C6C0, #F4C95D
+client/src/brand/brand.ts -> #7BAE9D, #C9A227, #0B0F14, #F7F5F2
+client/src/brand/tokens.ts -> #8fbf9f, #2f5d5d, #f4c7c3, #faf9f7, #3a3a3a, #eac33b, #ddb12d, #ffffff, #EDF5F5, #D5E8E8, #A8D1D1, #6FB3B3, #3D8585, #2A5454, #234747, #1C3939, #152C2C, #0E1F1F, #FCF8ED, #F7EDD4, #EDDBA8, #E3C87C, #D4A84B, #C4922D, #A47724, #845C1C, #634314, #422C0D, #F0F7F2, #D9EBE0, #BFDDCA, #A1CDB2, #7FB39A, #5D9A7F, #4A7A65, #375A4B, #253D32, #131F1A, #FDF6F5, #FAEAE8, #F5D5D2, #EFC0BB, #E8A9A3, #E0918A, #D47A72, #C4635A, #A54D45, #7A3933
+client/src/components/AboutSection.jsx -> #f4c7c3, #8fbf9f, #eac33b, #2f5d5d, #faf9f7, #3a3a3a
+client/src/components/Badges.jsx -> #d4af37, #f97316, #ef4444, #8b5cf6, #10b981, #ec4899, #6366f1, #fbbf24, #14b8a6, #0ea5e9, #f59e0b, #e5e7eb, #9ca3af, #A8C9A0, #FFD93D
+client/src/components/BenefitsSection.jsx -> #8fbf9f, #f4c7c3, #2f5d5d, #eac33b, #faf9f7, #8B7023, #3a3a3a
+client/src/components/CelebrationOverlay.tsx -> #FFD75A, #7FD8A8, #B19CD9, #7AE2A6, #F4A6CD, #FFB36F
+client/src/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+client/src/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+client/src/components/CreativeExpression.jsx -> #1F2937, #DC2626, #EA580C, #D97706, #CA8A04, #65A30D, #16A34A, #0D9488, #0891B2, #0284C7, #2563EB, #4F46E5, #7C3AED, #9333EA, #C026D3, #DB2777, #E11D48, #F8FAFC, #94A3B8, #475569, #FFFFFF
+client/src/components/EmotionAuraRing.jsx -> #fbbf24, #f59e0b, #d4af37, #ec4899, #2f5d5d, #22c55e, #8fbf9f, #9ca3af, #6b7280, #f4c7c3, #6b8cae, #ef4444
+client/src/components/EmotionCalendar.jsx -> #14b8a6, #f43f5e, #f59e0b, #fbbf24, #3b82f6, #6b7280, #10b981, #eab308, #ef4444, #ec4899, #0ea5e9, #8b5cf6, #d4af37
+client/src/components/EmotionLog.jsx -> #fbbf24, #8fbf9f, #d4af37, #2f5d5d, #9ca3af, #f4c7c3, #6b8cae, #ef4444, #ffd700
+client/src/components/EmotionPieChart.jsx -> #fbbf24, #f59e0b, #d4af37, #ec4899, #2f5d5d, #22c55e, #8fbf9f, #9ca3af, #6b7280, #f4c7c3, #6b8cae, #ef4444, #fff
+client/src/components/ErrorBoundary.jsx -> #faf9f7, #3a3a3a, #2f5d5d, #666, #7f1d1d, #991b1b, #ddd, #999
+client/src/components/FloatingLotusGuide.jsx -> #d4af37
+client/src/components/FlowDiagram.jsx -> #8fbf9f, #eac33b, #2f5d5d, #f4c7c3, #3a3a3a
+client/src/components/GlowFooter.jsx -> #8fbf9f, #d4af37, #ffd700, #2f5d5d
+client/src/components/HealingHero.jsx -> #faf9f7, #8fbf9f, #eac33b, #f4c7c3, #2f5d5d, #8B7023, #3a3a3a, #ddb12d
+client/src/components/JoinSection.jsx -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #6ba87e, #eac33b, #ddb12d
+client/src/components/JournalInsights.jsx -> #FFD93D, #8FBF9F, #D4AF37, #E8A0BF, #87CEEB, #9CA3AF, #6B7280, #F59E0B, #EF4444, #8B5CF6
+client/src/components/LoadingSpinner.tsx -> #6b6b6b
+client/src/components/MicroWinPrompt.jsx -> #74C0FC, #FFB88C, #C8B6FF, #FFFFFF, #6B7B6E, #D4AF37, #2F5443, #5C4A1A, #8FBF9F
+client/src/components/MoodResponder.jsx -> #d4af37, #8fbf9f, #2f5d5d
+client/src/components/MoodTrendsChart.jsx -> #fbbf24, #d4af37, #2f5d5d, #8fbf9f, #9ca3af, #f4c7c3, #6b8cae, #ef4444
+client/src/components/OnboardingFlow.jsx -> #8fbf9f, #2f5d5d
+client/src/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+client/src/components/ProgressRing.jsx -> #8fbf9f, #5a8a6e, #d4af37, #b8962f, #e8b4a0, #d4a090, #f4c7c3, #e0b0ac, #a78bfa, #6366f1, #f472b6, #f43f5e, #34d399, #14b8a6, #fbbf24, #f97316, #22d3ee, #3b82f6
+client/src/components/ReflectionCardExport.jsx -> #f8f6f3, #faf9f7, #f5f3ef, #e8e4df, #6b9080, #4a5568, #2d3748, #a0aec0
+client/src/components/ReminderSettings.jsx -> #8fbf9f, #2f5d5d, #d4af37
+client/src/components/ReturnLoop.jsx -> #8FBF9F, #2F5443, #D4AF37, #5C4A1A, #9B86E0, #3F2F66, #7FB89A, #E89685, #5C2F2A, #FBF8F1
+client/src/components/SacredBackground.css -> #ffd700
+client/src/components/SacredFooter.jsx -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #eac33b
+client/src/components/SacredGeometryBg.jsx -> #8fbf9f, #f4c7c3, #2f5d5d
+client/src/components/SacredNav.jsx -> #d4af37, #ffd700, #2f5d5d, #8fbf9f
+client/src/components/SafeBoundary.jsx -> #7f1d1d, #991b1b
+client/src/components/SafetyDisclaimer.jsx -> #e8efe8
+client/src/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+client/src/components/SharedEntryCard.jsx -> #f59e0b, #22c55e, #d4af37, #8fbf9f, #2f5d5d, #9ca3af, #84cc16, #b48c8c, #93a5b4, #b4a08c, #be8282, #be7878
+client/src/components/SocialLinks.jsx -> #FF0000, #000000, #E4405F, #1877F2, #5A8A6E, #666
+client/src/components/StreakCelebration.jsx -> #FFD700, #FF6B6B, #4ECDC4, #A855F7, #F97316
+client/src/components/TestimonialCarousel.jsx -> #8fbf9f
+client/src/components/TglpNavbar.jsx -> #d4a843, #c49a38, #1a3a2a, #a07d2e
+client/src/components/TimeOfDayBackground.jsx -> #fff9e6, #ffe4c4, #ffd4a8, #ffc58b, #f0f9f4, #d4e8dc, #8fbf9f, #2f5d5d, #f5e6d3, #e8c4a8, #b48c8c, #8b6b6b, #1a1a2e, #16213e
+client/src/components/ToolCard.tsx -> #ffffff, #e5e7eb, #c8d9c8, #1a1917, #4a4540
+client/src/components/UpsellModal.jsx -> #faf9f7, #e4f0e8, #2f5d5d, #5a8585, #3a3a3a, #6B7B6E, #8FBF9F, #f4f9f6, #c9e1d1, #9CA5A0
+client/src/components/VoiceAffirmation.jsx -> #d4af37, #ffd700
+client/src/components/WelcomeBackBanner.jsx -> #8FBF9F, #2F5443, #D4AF37
+client/src/components/admin/AIKnowledgeHub.jsx -> #10a37f, #1da1f2, #7d2ae8, #f59e0b, #dcfce7, #fef3c7, #16a34a, #d97706, #22c55e, #eab308, #ef4444, #94a3b8, #fbbf2433, #ef444433, #888, #aaa, #999
+client/src/components/admin/ConsciousnessRegistryPanel.jsx -> #475569, #8a6322, #8a2240, #334155, #0f766e, #faf6ef
+client/src/components/admin/DailyOpsChecklist.jsx -> #888, #fef3c7, #92400e, #22c55e, #666, #e5e7eb, #3b82f6, #16a34a, #ef4444, #f59e0b, #6b7280, #fff
+client/src/components/admin/DailyToolsPanel.jsx -> #22c55e, #eab308, #ef4444, #888, #e5e7eb, #f59e0b, #dc2626, #666, #3b82f6, #8b5cf6, #64748b
+client/src/components/admin/KernelStatusPanel.jsx -> #555
+client/src/components/admin/OperationsPanel.jsx -> #7a3041
+client/src/components/admin/OrchestratorTestPanel.jsx -> #fde2e2, #7a1f1f
+client/src/components/admin/RecentActivityPanel.jsx -> #888
+client/src/components/admin/SOPMonitorPanel.jsx -> #8a6322, #8a2240, #d9a441
+client/src/components/admin/SystemHealthPanel.jsx -> #666, #22c55e, #d1d5db, #333, #999
+client/src/components/admin/SystemTelemetryPanel.jsx -> #555, #2f5d5d, #ef4444, #22c55e, #f59e0b
+client/src/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+client/src/components/avatar/BuddyAvatar.tsx -> #FFD27A, #FFB347, #FF8C42
+client/src/components/charts/MoodPieChart.jsx -> #1f2937, #4b5563, #e5e7eb
+client/src/components/charts/MoodTrendsChartJS.jsx -> #eac33b, #8fbf9f, #f4c7c3, #2f5d5d, #6fb3b3, #a8d1d1, #dc3545, #969696, #fff, #6b7280
+client/src/components/coherence/ContentCoherenceLayer.css -> #5f7f55, #263326, #556455, #243024
+client/src/components/lumi/LivingLumiAvatar.tsx -> #FFFDF9, #38533F, #213628, #FFFFFF
+client/src/components/lumi/LumiAccessibleWrapper.jsx -> #f0a830
+client/src/components/lumi/LumiCompanion.jsx -> #f0a830, #2f5443
+client/src/components/lumi/LumiCustomizer.jsx -> #faf8f5, #1c1c1c, #234034, #555, #f0eee9, #f0a830
+client/src/components/lumi/LumiCustomizerTrigger.jsx -> #e0ddd5, #2f5443
+client/src/components/lumi/LumiLivingAvatar.css -> #fffaf2, #b9d0ad, #fff4df, #eaf3e5, #9fbb95, #12342f, #ffd2d7
+client/src/components/lumi/LumiMascot.css -> #f59e0b
+client/src/components/lumi/LumiPresenceLayer.css -> #17312D, #243024
+client/src/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+client/src/components/lumi/LumiV6.tsx -> #FFD27A, #FFB347, #FF8C42
+client/src/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+client/src/components/lumi/LumiV7.jsx -> #C8DCBF, #A8C9A0, #F5A3A3, #F5F0E8, #8FB78A, #6B9866, #FFFFFF
+client/src/components/navigation/CanonicalNavbar.jsx -> #A8D5BA, #F7F4EE, #2F4F4A, #F4B942
+client/src/components/peacescape/CustomizerPanel.jsx -> #7FD8A8, #2D5040, #F4A6B5, #B86A7C, #FFD75A, #B8902F, #A8D5F2, #4A7AA8, #C9A9E8, #6F4D9C, #FFD9B5, #C97755, #6E5A8C, #fde8ec, #7a3344
+client/src/components/sacred/EmotionBackground.jsx -> #ffd700, #ffb347, #fff4cc, #8fbf9f, #a8d5ba, #e8f5e9, #6b8cae, #8fa8c8, #b8c9dc, #f4c7c3, #e8b4b0, #fce4e1, #e8a5b3, #f4c7d4, #ffeef2, #2f5d5d, #4a7a7a, #d4af37, #e8c766, #f5f5f5, #e8e8e8, #ffffff
+client/src/components/sacred/EmotionCharts.jsx -> #8fbf9f, #d4af37, #e8a5b3, #2f5d5d, #fff4cc, #f4c7c3, #6b8cae, #ffd700, #e8f5e9, #b8c9dc, #fce4e1, #ffeef2, #9ca3af, #e5e7eb
+client/src/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+client/src/components/sacred/LotusGuide.jsx -> #8fbf9f, #f4c7c3, #ffd700, #6b8cae, #9ca3af, #2f5d5d, #d4af37
+client/src/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src/components/sacred/ProgressTracker.jsx -> #ff6b35, #ffd700, #8fbf9f, #d4af37, #e8a5b3, #2f5d5d
+client/src/components/sacred/SacredBackground.jsx -> #d4af37, #c9a227, #8fbf9f, #2f5d5d
+client/src/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src/components/sacred/SacredFooter.jsx -> #faf9f7, #2f5d5d, #3a3a3a, #eac33b, #8fbf9f
+client/src/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+client/src/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+client/src/components/share/ReflectionCard.jsx -> #6B8E23, #8FBC8F, #fff, #D4A5A5, #E8C4C4, #4A4A4A, #C9A227, #E8D59E, #3D3D3D, #87CEEB, #B0E0E6, #2F4F4F, #9370DB, #DDA0DD
+client/src/components/theme.ts -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #d4af37, #ffd700
+client/src/components/trust/TrustPageLayout.jsx -> #F7F4EE, #1E293B, #475569, #E8913A, #FFD93D, #A8C9A0
+client/src/components/trust/TrustSection.jsx -> #A8C9A0, #E8913A, #1E293B, #334155, #FFD93D
+client/src/components/ui/CRMWidgets.jsx -> #8fbf9f, #f4c7c3, #2f5d5d, #eac33b, #059669, #dc2626, #3a3a3a, #d4a84b
+client/src/components/ui/LotusLoader.jsx -> #8fbf9f, #d4af37, #ffd700
+client/src/components/ui/QuoteBlock.jsx -> #8fbf9f, #f4c7c3, #2f5d5d, #eac33b, #d4a84b, #3a3a3a
+client/src/components/ui/ResourceTiles.jsx -> #8fbf9f, #f4c7c3, #2f5d5d, #eac33b, #8B7023, #8b5a5a, #3a3a3a, #1f3f3f
+client/src/components/ui/theme.js -> #6B8E7B, #2D2D2D, #FAF9F6, #D4AF37, #C9A227, #B8860B
+client/src/components/ui/toast-container.tsx -> #C4787A
+client/src/components/wellness/EmotionLog.jsx -> #22c55e, #d4af37, #3b82f6, #8fbf9f, #64748b, #f59e0b, #6366f1, #8b5cf6, #e8f5e9, #fce4ec, #e3f2fd, #fff8e1
+client/src/components/wellness/HealingGraph.jsx -> #22c55e, #d4af37, #3b82f6, #8fbf9f, #64748b, #f59e0b, #6366f1, #8b5cf6, #e5e7eb
+client/src/components/wellness/JournalAI.jsx -> #d4af37
+client/src/components/wellness/MoodCalendar.jsx -> #22c55e, #d4af37, #3b82f6, #8fbf9f, #64748b, #f59e0b, #6366f1, #8b5cf6
+client/src/components/wellness/WeatherMoodSync.jsx -> #fbbf24, #fef3c7, #fde68a, #94a3b8, #f1f5f9, #e2e8f0, #3b82f6, #dbeafe, #bfdbfe, #60a5fa, #e0f2fe, #bae6fd, #8b5cf6, #ede9fe, #ddd6fe, #f8fafc, #a1a1aa, #fafafa, #e4e4e7, #9ca3af, #f9fafb, #e5e7eb, #06b6d4, #cffafe, #a5f3fc, #6366f1, #e0e7ff, #c7d2fe, #f8f9fa, #e8f5e9
+client/src/components/zen/ZenScape.jsx -> #7FD8A8, #5DDB94, #FFD75A
+client/src/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+client/src/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+client/src/content/routes.js -> #add
+client/src/content/tools/toolsRegistry.js -> #B88A1F, #C2604F, #6B5BA8, #B8662E, #3D78B8, #4A7E62
+client/src/context/EmotionContext.jsx -> #fbbf24, #14b8a6, #6366f1, #a855f7, #ec4899, #10b981, #f59e0b, #6b7280, #ef4444, #0ea5e9, #f97316, #8b5cf6
+client/src/data/emotionalJourney.js -> #A8C9A0, #74C0FC, #C8B6FF, #FFD93D, #FF9A8B
+client/src/data/lumiEmotionMap.ts -> #A8C9A0, #74C0FC, #C8B6FF, #FF9A8B, #FFD93D, #FFB88C, #A8D5BA
+client/src/data/lumiThemes.js -> #5a8a5a, #5a8aaa, #8a7aaa, #c47a6a, #d4a830, #b46a7a, #5aaa8a, #4a4a4a, #8a9aaa
+client/src/data/lumiToySpec.ts -> #E8913A, #A8C9A0, #FFD93D, #FF9A8B, #74C0FC, #C8B6FF, #A8D5BA, #FFB88C
+client/src/data/nlpMiContent.js -> #A8C9A0, #C8B6FF, #FFD93D, #FF9A8B
+client/src/design-system/index.js -> #A8D5BA, #F4B942, #FFC857, #F7B7A3, #F7F4EE, #BFA2DB, #75C7FF, #1f2937, #ffffff, #6b7280
+client/src/design-system/tokens.ts -> #A8B5A2, #6E7C68, #D4A64A, #E6C98A, #F8F6F2, #2B2B2B, #4C8C4A, #C65B5B, #E5E2DA, #6B7280
+client/src/design-system/tokens/colors.ts -> #7BA483, #163A36, #F6F1E8, #D4B06A, #E5B8AE, #F8F8F4, #F7F1E8, #A8B89A, #7C9271, #F6C9B8, #F3D98A, #BEEFFF, #CFC7F8, #DDEBD7, #FFE6B8, #2A3F3D
+client/src/design-system/tokens/legacyMap.ts -> #7BA483
+client/src/features/community/SharedReflectionsPage.jsx -> #2f5d5d, #8fbf9f
+client/src/guards/ProtectedRoute.jsx -> #8fbf9f, #2f5d5d, #d4af37, #ffd700
+client/src/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+client/src/lib/avatarState.ts -> #A7F3D0, #6EE7B7, #93C5FD, #60A5FA, #FDE68A, #F59E0B, #7AE2A6, #5DDB94, #6FE3B0, #7FD8A8, #A78BFA, #C4B5FD, #FFD75A
+client/src/lib/security.ts -> #000000
+client/src/lib/userMetrics.js -> #8fbf9f, #a8d4a8, #d4af37, #e8b4a0, #f4c7c3
+client/src/lib/weave/knowledgeWeave.ts -> #8B5CF6, #EC4899, #3B82F6, #10B981, #F59E0B, #6366F1, #14B8A6, #F97316
+client/src/lumi-crisis/components/CrisisPanel.tsx -> #FFFFFF, #1A1A1A, #1B5E20, #F5F5F5, #444444, #CCCCCC
+client/src/lumi-library/components/LibraryCard.tsx -> #FFFFFF, #E5E5E0, #1A1A1A, #F0F4EF, #3D5C3F, #4A4A4A, #666666, #F5F5F0
+client/src/lumi-registry/components/LumiSceneRenderer.tsx -> #dc2626
+client/src/lumi-tokens/canonical/lumiTokens.css -> #A8BFA3, #7E9B7B, #F6F1E8, #EEF5F0, #D6B36A, #E7D2A1, #F6CFC7, #1F3A36, #1C2524
+client/src/lumi-tokens/colors/colorTokens.ts -> #8FBF9F, #7BA483, #2F5D50, #163A36, #D4AF37, #F6F1E8, #FAF9F7, #E5B8AE, #F8F8F4, #3A3A3A, #6B6B6B, #C4787A, #D4A76A, #FFF5F0, #000000, #FF0000, #FF6B6B, #00FF00, #0000FF, #FF00FF, #00FFFF, #FFA500, #FFFFFF
+client/src/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+client/src/main.jsx -> #5A8A6E, #fff
+client/src/pages/Admin.jsx -> #555, #3d7a7a, #e9a8a3
+client/src/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+client/src/pages/AvatarLab.jsx -> #FFFFFF
+client/src/pages/BlogDraftViewer.jsx -> #6b7280, #ef4444, #1f2937, #374151, #e5e7eb, #4b5563, #2563eb, #fef3c7, #fbbf24, #92400e, #e0e7ff, #3730a3, #dcfce7, #dbeafe, #f3f4f6, #166534, #1e40af, #fef2f2, #991b1b, #fecaca
+client/src/pages/CanvaLanding.jsx -> #F6F1E8, #F8F8F4, #7BA483, #163A36, #2A3F3D
+client/src/pages/CelebrationFlow.jsx -> #FFD93D, #FFB88C, #FF9A8B, #A8C9A0, #74C0FC, #C8B6FF
+client/src/pages/CelebrationRitual.jsx -> #fbbf24, #f472b6, #a78bfa, #38bdf8
+client/src/pages/CheckIn.jsx -> #F7F4EE
+client/src/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+client/src/pages/CourseCatalog.jsx -> #5a6a5a, #f4f7f4, #1a1917, #c8d9c8, #ffb93d, #f5a623, #faf9f6, #ffffff, #4a4540, #8a8278, #e8f0e8, #2d5a3d, #f4f2ee, #5a5550, #dcfce7, #166534
+client/src/pages/Dashboard.jsx -> #2f5d5d, #8fbf9f, #74C0FC, #4A90D9, #C8B6FF, #9B85DB, #d4a574
+client/src/pages/DesignSystem.jsx -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #e57373, #b8941e, #8b5a5a
+client/src/pages/Disclaimer.tsx -> #F7F4EE, #FF9A8B, #E8913A
+client/src/pages/ForgotPassword.jsx -> #A8C9A0
+client/src/pages/GratitudePractice.jsx -> #e8a0a0, #d4a574
+client/src/pages/GrowthPage.jsx -> #fef3c7, #a7f3d0, #84cc16, #86efac, #a3e635, #fcd34d, #fbbf24
+client/src/pages/Invite.jsx -> #25D366, #EA4335, #ec4899, #d4af37, #8fbf9f, #7aab8a, #f59e0b
+client/src/pages/Login.jsx -> #FFFFFF, #b13c3c
+client/src/pages/MoodPage.jsx -> #f59e0b, #fef3c7, #3b82f6, #dbeafe, #6b7280, #f3f4f6, #ef4444, #fee2e2, #10b981, #d1fae5, #8b5cf6, #ede9fe
+client/src/pages/MotionLab.jsx -> #FBF8F1, #142626, #E8913A, #fff, #A8C9A0
+client/src/pages/Onboarding.tsx -> #f4c7c3, #8fbf9f, #eac33b
+client/src/pages/OnboardingFlow.jsx -> #A8C9A0, #74C0FC, #FF9A8B, #FFD93D, #C8B6FF
+client/src/pages/PressKit.jsx -> #0D9488, #84A98C, #F9A8D4, #1E3A3A
+client/src/pages/Pricing.jsx -> #F7F1E8, #FFFFFF, #E8913A
+client/src/pages/Privacy.jsx -> #FFFFFF, #F7F4EE, #A8C9A0
+client/src/pages/Reflection.jsx -> #d4a574
+client/src/pages/Register.jsx -> #FFFFFF, #b13c3c
+client/src/pages/ResetPassword.jsx -> #FFFFFF, #E8913A, #A8C9A0
+client/src/pages/RigLab.jsx -> #FBF8F1, #142626, #E8913A, #fff, #A8C9A0, #74C0FC
+client/src/pages/WellnessDashboard.jsx -> #f59e0b
+client/src/pages/WellnessToolsHub.jsx -> #FFFFFF, #1F2937, #4B5563, #F7F4EE, #C2604F
+client/src/pages/WireframeTemplates.jsx -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #8B7023, #059669, #dc2626, #DB4437, #333, #1a1a2e, #a0aec0
+client/src/pages/_quarantine/legacy-landing/HealingLandingPage.jsx -> #8fbf9f, #f4c7c3, #2f5d5d, #eac33b, #faf9f7, #3a3a3a, #8B5A5A, #ddb12d
+client/src/pages/_quarantine/legacy-landing/Home.jsx -> #2f5d5d, #8fbf9f, #3a3a3a, #faf9f7
+client/src/pages/admin/AdminPublishing.jsx -> #8A9A5B
+client/src/pages/admin/AdminPublishingToday.jsx -> #8A9A5B
+client/src/pages/admin/AdminSocial.jsx -> #E4405F, #000000, #1877F2, #0A66C2, #FF0000, #BD081C
+client/src/pages/admin/AdminTools.jsx -> #8A9A5B, #ef4444, #eab308, #22c55e
+client/src/pages/admin/AdminUsers.jsx -> #8A9A5B
+client/src/pages/admin/AnalyticsDashboard.jsx -> #8A9A5B
+client/src/pages/admin/AuditLogExplorer.jsx -> #8A9A5B
+client/src/pages/admin/BillingViewer.jsx -> #8A9A5B
+client/src/pages/admin/CommandCenter.jsx -> #22c55e, #ef4444, #888, #f59e0b, #64748b, #e5e7eb, #dc2626, #d97706
+client/src/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+client/src/pages/admin/ContentStudioAdmin.jsx -> #8A9A5B
+client/src/pages/admin/EngagementDashboard.jsx -> #8A9A5B
+client/src/pages/admin/FeatureFlags.jsx -> #8A9A5B
+client/src/pages/admin/FeedbackAggregator.jsx -> #8A9A5B
+client/src/pages/admin/NarrativeDrafts.jsx -> #8A9A5B
+client/src/pages/admin/NarrativeOpsConsole.jsx -> #E4405F, #000000, #FF0000, #1877F2, #0A66C2, #E60023, #8A9A5B
+client/src/pages/admin/NewsletterAdmin.jsx -> #8A9A5B
+client/src/pages/admin/RevenueAdmin.jsx -> #8A9A5B
+client/src/pages/admin/RolesPermissions.jsx -> #8A9A5B
+client/src/pages/admin/SecurityDashboard.jsx -> #8A9A5B
+client/src/pages/admin/SocialAnalytics.jsx -> #E4405F, #000000, #FF0000, #1877F2, #6B8E23, #8A9A5B
+client/src/pages/admin/SocialCalendar.jsx -> #E4405F, #000000, #1DA1F2, #FF0000, #8A9A5B
+client/src/pages/admin/SocialDashboard.jsx -> #FF0000, #000000, #E4405F, #1877F2, #E60023, #0A66C2, #666, #8A9A5B
+client/src/pages/admin/SocialGenerator.jsx -> #E4405F, #000000, #1DA1F2, #FF0000, #0A66C2, #8A9A5B
+client/src/pages/admin/SocialLibrary.jsx -> #8A9A5B
+client/src/pages/admin/SocialStudioAdmin.jsx -> #8A9A5B
+client/src/pages/admin/SystemAlerts.jsx -> #8A9A5B
+client/src/pages/dashboard/Overview.jsx -> #d4a843, #c49a38, #1a3a2a, #d4ddd4, #faf9f6, #f5e6c0, #a07d2e, #7a8a7a, #c8d9c8, #ffffff, #5a8a5a
+client/src/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+client/src/pages/tools/BreathingTool.jsx -> #F7F4EE
+client/src/sections/EmailCapture.jsx -> #F0F7F4, #2F5443, #6B7B6E, #8FBF9F, #3a3a36, #FFFFFF, #c1554b, #D4AF37, #b74840
+client/src/sections/EmotionalJourney.jsx -> #F9F7F4, #A8C9A0, #2C3531, #6B7B6E, #A8C9A033, #74C0FC33, #C8B6FF33, #FFD93D33, #FF9A8B33, #9AA59C, #C8B6FF
+client/src/sections/NextStepCTA.jsx -> #74C0FC, #A8C9A0, #FFD93D, #8FBF9F, #C8B6FF, #FFB88C, #2F5443, #3a3a36, #a04a40
+client/src/sections/NlpMiContent.jsx -> #74C0FC, #C8B6FF, #A8C9A0, #FBFAF7, #F5F3EE, #2F5443, #FFFFFF, #7C5FCF, #3D2F66, #6B7B6E, #5C6B62, #E8913A, #5C4A22, #FFB88C, #D4AF37
+client/src/sections/PricingFAQ.jsx -> #2F5443, #8FBF9F, #D4AF37, #6B7B6E, #3a3a36
+client/src/sections/ValueBridge.jsx -> #A8C9A0, #74C0FC, #C8B6FF, #F7F4EE, #2F5443, #6B7B6E, #FFFFFF, #3a3a36
+client/src/sections/ValueProposition.jsx -> #A8C9A0, #E8913A, #74C0FC, #C8B6FF, #F7F4EE, #2F5443, #3a3a36, #FFFFFF, #c1554b, #b74840
+client/src/sections/VisualBenefits.jsx -> #A8C9A0, #C8B6FF, #FF9A8B, #FFD93D, #F4B942, #2d3a35
+client/src/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+client/src/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+client/src/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+client/src/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+client/src/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+client/src/styles/celebration.css -> #FFD93D
+client/src/styles/checkin.css -> #C8B6FF
+client/src/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+client/src/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+client/src/styles/lumi-a11y.css -> #ffffff
+client/src/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+client/src/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+client/src/styles/lumi-living-presence-phase64.css -> #fffaf2, #f7ecdc, #eaf3e5, #b9d0ad, #5f8a68, #12342f, #1d3f38, #60766f, #ffd875, #fff3bd, #ffdfe4, #c8efff, #ece4ff, #fffdf8, #315f51, #8fb98d, #006f5e, #14967f
+client/src/styles/lumi-pastel-visual-system.css -> #fffdf8, #fff9f1, #f9f1e7, #efe3d4, #f4f8f0, #edf4e8, #dfeadb, #cdddc5, #b4caa8, #91ad86, #6f936d, #4f765b, #315b4d, #183f37, #0f2d29, #fff1f2, #ffe0e4, #ffc6cf, #fff2e5, #ffe0bf, #fff8db, #ffeaa3, #ffd66e, #edfaff, #cdefff, #9de0ff, #f6f1ff, #e8ddff, #effbf4, #d8f2e3, #102f2b, #1f4039, #5f756d, #7f9089, #b18d25
+client/src/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+client/src/styles/lumi-visual-system.css -> #F4F8F1, #486B43, #243A22, #FFFDF9, #FFF2BF, #17312D, #39534D, #FFFFFF, #f3f8ef, #e9f2e1, #fffdf9, #fff1bd, #ffe38f, #fff0f2, #eafbff, #243024, #374637, #172517, #2e2608, #1f2d22, #3d4c3d, #637263
+client/src/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+client/src/styles/phase58-visual-polish.css -> #111827, #374151
+client/src/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+client/src/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+client/src/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+client/src/styles/v6-preview.css -> #FFD93D, #FFB88C
+client/src/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+client/src/styles/wellness-shell.css -> #062a2a, #0d4a3d
+client/src/utils/exportPdf.js -> #1a1a1a, #0d9488, #1e3a3a, #374151, #6b7280, #9ca3af, #4b5563
+components/PageTemplate.module.css -> #faf9f7, #3a3a3a, #2f5d5d, #eac33b
+diagnostics/phase67/before/client/src/components/lumi/LumiPresenceLayer.css -> #b9d0ad, #fff4df, #edf5e8, #9fbf98, #12342f, #5f746c
+diagnostics/phase68/before/client/src/components/lumi/LumiPresenceLayer.css -> #6f8f6f, #12342f, #5f746c, #ece4ff, #fff5df, #fff, #2a1f1d, #0b0c0c, #6b4c2e
+production-backups/phase189-live-snapshot/client/dist/assets/AvatarLab-B6WI5thR.css -> #f5f0e8, #a8c9a0, #f5a3a3, #1a1a1a, #2a2a2a, #4a7e722e, #fff
+production-backups/phase189-live-snapshot/client/dist/assets/BreathingTool-DS2q5R40.css -> #74c0fc1f, #0000, #a8d5ba24, #ffb88c1a, #c8b6ff24, #ffd93d24, #74c0fc, #74c0fc59, #a8d5ba4d, #74c0fc73, #74c0fc4d, #c8b6ff80, #c8b6ff52, #a8c9a073, #a8c9a04d, #74c0fc2e, #c8b6ff38, #a8c9a02e, #c8b6ff, #a8c9a0, #74c0fc33, #74c0fcf2, #c8b6fff2, #a8c9a0f2, #74c0fc00
+production-backups/phase189-live-snapshot/client/dist/assets/BuddyAvatar-CjKorakm.css -> #141e1917, #141e191a, #7fd8a8, #6fe3b0, #5da3c9, #5ddb94, #ffd75a, #a78bfa, #0000, #000, #fff7e8f2, #fff7e8cc, #fff7e833, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240
+production-backups/phase189-live-snapshot/client/dist/assets/CanvaLanding-Bi6MZ_aZ.css -> #be862259, #be86228c, #be862266, #be862299, #f6f1e8, #163a36, #8fbf9f, #2f5d5d, #c4787a, #8fbf9f1a, #8fbf9f26, #8fbf9f33, #8fbf9f4d, #8fbf9f66, #2f5d5d1f, #2f5d5d33, #2f5d5d4d, #2f5d5d66, #c4787a1a, #c4787a26, #c4787a33, #c4787a4d, #0000, #fff, #be86224d, #be862280, #be86222e, #fcf6eaf2, #1ec8902e, #fff9, #be862214, #062a2a0f, #ffffff80, #ffffffb3, #be86223d, #be86221a, #062a2a14, #00000026, #00000080, #1ec89014, #062a2a0a, #6c58b80f, #d086720d, #1ec89040, #6c58b826, #1ec89000, #6c58b800, #f0d080, #163d3d0a, #163d3d0f
+production-backups/phase189-live-snapshot/client/dist/assets/CelebrationFlow-D71fqt0c.css -> #ffd93d38, #0000, #ffb88c26, #ffd93d1f, #a8c9a01a, #ffd93d, #ffd93d2e
+production-backups/phase189-live-snapshot/client/dist/assets/CheckIn-KbUv1xsW.css -> #c8b6ff2e, #0000, #c8b6ff1a, #ff9a8b0f, #ffd93d2e, #ffd93d14, #ffb88c0f, #c8b6ff
+production-backups/phase189-live-snapshot/client/dist/assets/CommandCenter-BfVTyNhP.css -> #fdfcfb, #f5f2ef, #8a9a5b33, #fff, #8a9a5b0d, #0000000a, #2d6a4f1a, #8a9a5b1a, #8a9a5b, #8a9a5b08, #0000, #8a9a5b14, #2c6e63, #888, #8a9a5b4d
+production-backups/phase189-live-snapshot/client/dist/assets/ContentStudioPage-DH_xWkv_.css -> #3a3a3a, #faf9f7, #0000, #8fbf9f1a, #8fbf9f4d, #2f5d5d, #8fbf9f, #8fbf9f26, #2f5d5d1a, #fff, #0000000d, #2f5d5d33, #8fbf9f33, #eac33b, #eac33b1a, #2f5d5d0d
+production-backups/phase189-live-snapshot/client/dist/assets/LumiMascot-Bl-icsbP.css -> #ed5e76, #7a91b8, #ffaa508c, #ffaa5033, #ffaa5000, #ffb45ad9, #ffb45a4d, #ffb45a00, #f472b68c, #f472b62e, #f472b600, #ffb45acc, #f59e0b
+production-backups/phase189-live-snapshot/client/dist/assets/LumiV6Preview-DMCLDRmU.css -> #141e1917, #141e191a, #fff7e8c7, #fff7e88c, #fff7e81a, #0000, #fff8ee, #50321e2e, #2d1810, #ffffff8c, #ff8c4273, #ffb2478c, #ff8c4240, #1a1917, #fff, #ead7b9, #3c28141a, #d4546a, #a8c9a02e, #0000001a, #ffb247e6, #ffb247a6, #ff8c4200, #ffd93d8c, #ffb88c80, #ff9a8b80, #a8d5ba80, #c8b6ff80, #e8913a59, #e8913ad9, #e8913a8c, #e8913a00, #e8913ab3, #ffd93d99, #ffd93d, #ffc857, #a8c9a099, #74c0fc8c, #c8b6ff8c, #ff9a8b00, #ffd93d80, #ffd93d00, #ff9a8b8c, #c8b6ff00, #a8c9a073, #a8c9a000, #74c0fc80, #74c0fc1a, #a8c9a01a, #c8b6ff14
+production-backups/phase189-live-snapshot/client/dist/assets/Overview-DThRZbH-.css -> #fdfcfb, #f5f2ef, #d4a80040, #1a1917, #fff, #0000000a, #00000014, #2d6a4f1a, #8a9a5b0d, #5a8a5a, #c8d9c8, #f5faf5, #a3c2a3, #8a9a5b4d, #7a8c7e
+production-backups/phase189-live-snapshot/client/dist/assets/PageTemplate-DPX131m5.css -> #3a3a3a, #8fbf9f1a, #8fbf9f33, #2f5d5d, #8fbf9f, #fff, #2f5d5d33, #8fbf9f14, #faf9f7, #eac33b, #eac33b14, #eac33b4d, #2f5d5d0d, #8fbf9f26, #f4c7c31a, #f4c7c333, #eac33b1a, #eac33b33, #f4c7c326, #f4c7c3, #8fbf9f40, #8fbf9f4d, #8fbf9f66, #0000, #fffc, #2f5d5d14, #2f5d5d1f, #2f5d5d1a, #8fbf9f0d, #2f5d5d26, #2f5d5d0a, #8fbf9f59, #f4c7c30d, #f4c7c30f, #f4c7c34d, #f4c7c340, #f4c7c380, #0000000a, #00000014, #2f5d5d0f, #eac33b0f, #eac33b40, #eac33b26, #3339, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #3a3a3ab3
+production-backups/phase189-live-snapshot/client/dist/assets/PeacescapePage-DfUayL-v.css -> #be86220d, #0000, #1ec8900d, #be86228c, #1ec890a6, #1ec8904d, #ffffffd9, #062a2a14, #062a2a12, #fffc, #be86222e, #2d503c1f, #fffffff5, #fcf6ea73, #1ec89033, #062a2a0a, #062a2a0d, #be862280, #1ec89052, #ffffffe6, #062a2a0f, #062a2a, #0d4a3d
+production-backups/phase189-live-snapshot/client/dist/assets/SacredFooter-DSt2bIFs.css -> #faf9f7, #3a3a3a, #8fbf9f14, #0000, #f4c7c30f, #eac33b08, #2f5d5d, #fff, #8fbf9f4d, #8fbf9f0d, #2f5d5d08, #f4c7c314, #2f5d5d0d, #8fbf9f26, #8fbf9f80, #8fbf9f40, #8fbf9f66, #8fbf9f99, #8fbf9f00, #fff6, #8fbf9f1a, #eac33b59, #eac33b33, #f4c7c366, #f4c7c333, #8fbf9f33, #f4c7c31f, #eac33b14
+production-backups/phase189-live-snapshot/client/dist/assets/WellnessPageShell-DJNG-4h4.css -> #be86220a, #0000, #1ec8900b, #fffffff2, #fcf6ea66, #ffffffb3, #062a2a0a, #fff, #fcf6eaa6, #1ec89066, #ffffffd9, #062a2a0f, #be86221f, #062a2a0d, #fcf6ea4d, #1ec89033, #be862280, #1ec89099, #ffffffe6, #062a2a14, #1ec8904d, #fffc, #062a2a08, #fffffff7, #fcf6ea40, #1ec8902e, #062a2a, #0d4a3d
+production-backups/phase189-live-snapshot/client/dist/assets/ZenScape-CBZtDpQF.css -> #1f2933, #7fd8a859, #0000, #fffffff5, #2d503c2e, #2d503c14, #2d5040, #7fd8a82e, #7fd8a873, #7fd8a8b3, #f5fcf8fa, #7fd8a88c, #7fd8a838, #7fd8a824, #7fd8a8a6, #7fd8a800, #ffd75a1a, #ffd75a00, #faf8f3, #8fbf9f0f, #ffffffd9, #264f4f, #7fd8a8, #5ddb94, #ffd75a, #f4b6c2, #e08fa1, #ffd7ba, #ffe08a, #f0c46a, #ffaa6e, #9fd4f4, #7bb8e8, #d4e8fa, #c8b6f0, #a693dc, #f0e0f8, #ffb89d, #f09a85, #ffe2b5, #00000014, #fffffff2
+production-backups/phase189-live-snapshot/client/dist/assets/_autopilot-BZu_wX0b.css -> #faf9f7, #2f5d5d, #3a3a3a, #fff, #8fbf9f, #8fbf9f4d, #8fbf9f66
+production-backups/phase189-live-snapshot/client/dist/assets/glp-pane-DKnephKp.css -> #1ec89033, #ffffffd9, #062a2a0a, #062a2a0d, #fff, #fcf6ea4d, #0000, #be862280, #1ec89099, #1ec8904d, #ffffffe6, #062a2a0f, #062a2a14, #be862238, #1ec89038, #ffffff0a, #0003, #00000040, #1f2937, #062a2a8c, #1ec8905c
+production-backups/phase189-live-snapshot/client/dist/assets/index-82DfazQF.css -> #0000, #fff, #1ec890, #d08672, #062a2a, #fcf6ea, #142626, #e8913a, #c9701f, #6c58b8, #5c4aa0, #1ec8901a, #1ec89026, #1ec89033, #1ec8904d, #1ec89066, #d086721a, #d0867226, #d0867233, #d086724d, #e8913a1a, #e8913a26, #e8913a33, #e8913a4d, #e8913a99, #6c58b81a, #6c58b833, #6c58b84d, #062a2a1f, #062a2a33, #062a2a4d, #062a2a66, #fcf6eab3, #fcf6eaf2, #fcf6eafa, #00000080, #fff6, #fffc, #1ec8908c, #be862280, #6c58b873, #d0867273, #1ec8902e, #6c58b81f, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e
+production-backups/phase189-live-snapshot/client/dist/assets/lumi-registry-Pmn-ADNv.css -> #7e906e29
+production-backups/phase189-live-snapshot/client/dist/assets/sacred-C3NivM-a.css -> #0000, #2f5d5d, #8fbf9f, #fff, #2f5d5d4d, #2f5d5d66, #8fbf9f1a
+production-backups/phase189-live-snapshot/client/dist/assets/sacred-visuals-CKPEwYqm.css -> #f472b64d, #fbbf2433, #a78bfa1a, #f472b680, #fbbf244d, #a78bfa33, #facc1566, #facc154d, #facc151a, #38bdf866, #0ea5e933, #38bdf84d, #38bdf81a, #f472b666, #ec489933, #f472b61a, #4ade8066, #22c55e33, #4ade804d, #4ade801a, #2dd4bf66, #14b8a633, #2dd4bf4d, #2dd4bf1a, #fb718566, #f43f5e33, #fb71854d, #fb71851a, #818cf866, #6366f133, #818cf84d, #818cf81a, #fb923c66, #f9731633, #fb923c4d, #fb923c1a, #a78bfa66, #8b5cf633, #a78bfa4d, #fff4e6, #ffd6dd, #f0dafb, #dee2f7, #dbd1f0, #e9dbf0, #e0ebf5, #f7dee7, #fcf4e3, #2b2112, #240f13
+production-backups/phase189-live-snapshot/client/src/components/ContentLevelToggle.module.css -> #3a3a3a, #2f5d5d, #8fbf9f, #faf9f7, #eac33b
+production-backups/phase189-live-snapshot/client/src/components/ContentStudio.module.css -> #3a3a3a, #faf9f7, #2f5d5d, #8fbf9f, #eac33b
+production-backups/phase189-live-snapshot/client/src/components/PageTemplate.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #fafaf8, #333, #245050, #d4a574, #f8f6f0, #fff
+production-backups/phase189-live-snapshot/client/src/components/SacredBackground.css -> #ffd700
+production-backups/phase189-live-snapshot/client/src/components/SafetyDisclaimer.module.css -> #2f5d5d, #3a3a3a, #8fbf9f, #f4c7c3
+production-backups/phase189-live-snapshot/client/src/components/avatar/BuddyAvatar.css -> #7FD8A8, #6FE3B0, #5DA3C9, #5DDB94, #FFD75A, #A78BFA, #2d1810
+production-backups/phase189-live-snapshot/client/src/components/lumi/LumiMascot.css -> #f59e0b
+production-backups/phase189-live-snapshot/client/src/components/lumi/LumiV6.css -> #fff8ee, #2d1810, #fff, #1a1917, #ead7b9, #d4546a, #FFD93D, #FFC857
+production-backups/phase189-live-snapshot/client/src/components/lumi/LumiV7.css -> #F5F0E8, #A8C9A0, #F5A3A3, #1A1A1A, #2A2A2A, #FFFFFF
+production-backups/phase189-live-snapshot/client/src/components/sacred/Hero.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+production-backups/phase189-live-snapshot/client/src/components/sacred/Layout.module.css -> #faf9f7, #3a3a3a, #2f5d5d
+production-backups/phase189-live-snapshot/client/src/components/sacred/PlatformComponent.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+production-backups/phase189-live-snapshot/client/src/components/sacred/SacredButton.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+production-backups/phase189-live-snapshot/client/src/components/sacred/SacredFooter.module.css -> #faf9f7, #8fbf9f, #2f5d5d, #3a3a3a, #f4c7c3
+production-backups/phase189-live-snapshot/client/src/components/sacred/SacredSection.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+production-backups/phase189-live-snapshot/client/src/components/zen/buddy-bubble.css -> #1f2933, #2d5040
+production-backups/phase189-live-snapshot/client/src/components/zen/zen-scape.css -> #faf8f3, #264f4f, #7FD8A8, #5DDB94, #FFD75A, #F4B6C2, #E08FA1, #FFD7BA, #FFE08A, #F0C46A, #FFAA6E, #9FD4F4, #7BB8E8, #D4E8FA, #C8B6F0, #A693DC, #F0E0F8, #FFB89D, #F09A85, #FFE2B5
+production-backups/phase189-live-snapshot/client/src/index.css -> #ffffff, #5A8A6E, #B4912A, #A87D68, #2F5D5D, #4a7a5e, #8B7023, #D4AF37, #F0D878, #5A4510, #8FBF9F, #16A34A, #DC2626, #f4f9f6, #e4f0e8, #c9e1d1, #a8cfb5, #3d6550, #335443, #2a4537, #fffbeb, #fef3c7, #fde68a, #fcd34d, #92751f, #7a5f18, #634c14, #4d3b10, #fef7f6, #fdeeed, #fbd6d4, #F4C7C3, #e6a9a4, #d48b85, #be6e68, #a55550, #8a4541, #733a37, #f0f5f5, #d8e5e5, #b1cbcb, #7fa5a5, #5a8585, #274d4d, #1f3f3f, #183232, #112525, #1A4F4F, #2D7A7A, #3CA0A0
+production-backups/phase189-live-snapshot/client/src/main.css -> #fff, #3d6b50, #4a7a5e, #5A8A6E
+production-backups/phase189-live-snapshot/client/src/pages/AutopilotFallback.module.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a
+production-backups/phase189-live-snapshot/client/src/pages/ContentStudioPage.module.css -> #8fbf9f, #2f5d5d, #3a3a3a
+production-backups/phase189-live-snapshot/client/src/pages/admin/CommandCenter.module.css -> #fdfcfb, #f5f2ef, #8A9A5B, #2C6E63, #888
+production-backups/phase189-live-snapshot/client/src/pages/dashboard/Overview.module.css -> #fdfcfb, #f5f2ef, #FFD700, #1a1917, #2d5a3d, #c8d9c8, #ffffff, #5a8a5a, #a3c2a3, #f5faf5, #7a8c7e
+production-backups/phase189-live-snapshot/client/src/styles/accessibility.css -> #ffffff, #000000, #006400, #004d00, #e6ffe6, #ccffcc, #b3ffb3, #99ff99, #cc0000, #990000, #ffe6e6, #ffcccc, #cc9900, #996600, #fff5cc, #ffeb99, #e6ffff, #8FBF9F
+production-backups/phase189-live-snapshot/client/src/styles/brand-tokens.css -> #1ec890, #062a2a, #fcf6ea, #142626, #be8622, #d08672, #6c58b8, #E8913A, #C9701F, #5c4aa0, #ffffff, #dff1ee, #aedcd6, #74beb6, #3e9c94, #1c6e6c, #0e4e4e, #0b4040, #041e1e, #021414, #fdf2e8, #fbe0c5, #f6c388, #f0a55a, #a55a14, #82480f, #5e340a, #3a2106, #e0f9f0, #b2f0d6, #7ee5ba, #4cd8a0, #18a876, #148a60, #0e6c4a, #094e34, #04301e, #f8ede8, #efd4ca, #e2b2a4, #c07060, #ae584c, #984840, #7e3832, #642c26, #4a1e1a, #FFFFFF, #F5F2EE, #1A1A1A, #10b981
+production-backups/phase189-live-snapshot/client/src/styles/brand.css -> #D4AF37, #be8622, #062a2a, #2F5443
+production-backups/phase189-live-snapshot/client/src/styles/breathing-tool.css -> #74C0FC, #C8B6FF, #A8C9A0
+production-backups/phase189-live-snapshot/client/src/styles/canva-landing.css -> #F6F1E8, #C4787A, #fff, #FFFFFF, #f0d080, #b07c1c, #0a3a3a, #ffffff, #D4AF37, #2F5443, #0a3636, #0d4242, #062a2a, #9e7018, #fbe39a, #f4d271, #e7bf5d, #1ec890, #A8C9A0
+production-backups/phase189-live-snapshot/client/src/styles/celebration.css -> #FFD93D
+production-backups/phase189-live-snapshot/client/src/styles/checkin.css -> #C8B6FF
+production-backups/phase189-live-snapshot/client/src/styles/emotion-effects.css -> #8fbf9f, #d4af37, #f4c7c3, #fef9e7, #fff8e1, #fffbf0, #fff3e0, #ffe0b2, #f5f5dc, #fdf5e6, #fffaf0, #fff0f5, #ffe4ec, #fff5f8, #e8f5e9, #f1f8e9, #f5fff5, #c8e6c9, #e3f2fd, #f5f5f5, #fafafa, #eeeeee, #eceff1, #e0e0e0, #fce4ec, #f3e5f5, #ede7f6, #bbdefb, #e1f5fe, #ffebee, #ffcdd2, #fff5f5, #1a1a0f, #1f1a10, #1a1815, #0f1a1a, #101815, #121a18, #0f1520, #101822, #0f1a25, #1a0f18, #1a1020, #180f1a, #1a1a1a, #1f1f1f, #181818
+production-backups/phase189-live-snapshot/client/src/styles/hxos-vnext.css -> #E8913A, #6c58b8, #F6F1E8, #C4787A, #FAFAF7, #F0EDE6
+production-backups/phase189-live-snapshot/client/src/styles/lumi-a11y.css -> #ffffff
+production-backups/phase189-live-snapshot/client/src/styles/lumi-admin.css -> #d4ede4, #2d6a4f, #fcebc7, #8a5a00, #d4943a, #f0d4d0, #8a3a2a, #c45b4a, #d8e0f0, #3a5a8a, #5a8ad4, #ffffff, #5a2a20
+production-backups/phase189-live-snapshot/client/src/styles/lumi-buttons.css -> #ffffff, #1a1308, #fff
+production-backups/phase189-live-snapshot/client/src/styles/lumi-tokens.css -> #ffffff, #d4ede4, #e1edd3, #f5d4cc, #d8e0f0, #fcebc7, #e5deec, #000000, #c45b4a, #f0d4d0, #d4943a, #f5e5d0
+production-backups/phase189-live-snapshot/client/src/styles/peacescape-shell.css -> #062a2a, #0d4a3d
+production-backups/phase189-live-snapshot/client/src/styles/sacred-typography.css -> #3a3a3a, #2f5d5d, #8fbf9f
+production-backups/phase189-live-snapshot/client/src/styles/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #274e4e, #3d7a7a
+production-backups/phase189-live-snapshot/client/src/styles/tokens.css -> #8fbf9f, #2f5d5d, #D4A520
+production-backups/phase189-live-snapshot/client/src/styles/v6-preview.css -> #FFD93D, #FFB88C
+production-backups/phase189-live-snapshot/client/src/styles/visual-benefits.css -> #fdfcf9, #2d3a35, #ffffff, #F4B942
+production-backups/phase189-live-snapshot/client/src/styles/wellness-shell.css -> #062a2a, #0d4a3d
+static-export/css/responsive.css -> #ccc, #006600, #003333, #996600, #000000
+static-export/css/sacred.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #ddb12d, #d9a8a4
+static-export/css/style.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #1f3f3f, #d4a84b, #ffffff
+styles.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b, #ffffff, #ccc
+styles/globals.css -> #8fbf9f, #f4c7c3, #2f5d5d, #faf9f7, #3a3a3a, #eac33b
+styles/tokens.css -> #f2fbff, #dff4ff, #bfeaff, #8fdcff, #56c6ff, #22a7ff, #0a84ff, #0b68d6, #0d53ad, #0f468f, #0b0f14, #0f1620, #131c28, #223042, #eaf2ff, #a8b3c6, #22c55e, #fbbf24, #ef4444

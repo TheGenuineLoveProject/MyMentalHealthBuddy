@@ -1,0 +1,94 @@
+[
+  {
+    "path": "/api/webhooks",
+    "handler": "webhookRoutes"
+  },
+  {
+    "path": "/api/session-boundary",
+    "handler": "sessionBoundaryRoutes"
+  },
+  {
+    "path": "/api/health",
+    "handler": "healthRoutes"
+  },
+  {
+    "path": "/api/ai",
+    "handler": "aiLimiter"
+  },
+  {
+    "path": "/api/admin/verify-token",
+    "handler": "adminLoginLimiter"
+  },
+  {
+    "path": "/api/admin",
+    "handler": "adminLimiter"
+  },
+  {
+    "path": "/api/auth",
+    "handler": "authRoutes"
+  },
+  {
+    "path": "/api/ai",
+    "handler": "aiRoutes"
+  },
+  {
+    "path": "/api/ai/healing",
+    "handler": "aiHealingRoutes"
+  },
+  {
+    "path": "/api/ai/business",
+    "handler": "aiBusinessRoutes"
+  },
+  {
+    "path": "/api/admin/billing",
+    "handler": "adminBillingRoutes"
+  },
+  {
+    "path": "/api/admin/publishing",
+    "handler": "adminPublishingRoutes"
+  },
+  {
+    "path": "/api/admin/security",
+    "handler": "requireAuth"
+  },
+  {
+    "path": "/api/admin",
+    "handler": "adminRoutes"
+  },
+  {
+    "path": "/api/telemetry",
+    "handler": "telemetryRoutes"
+  },
+  {
+    "path": "/api/buddy",
+    "handler": "buddyLimiter"
+  },
+  {
+    "path": "/api",
+    "handler": "buddyRoutes"
+  },
+  {
+    "path": "/api/streaks",
+    "handler": "streaksLimiter"
+  },
+  {
+    "path": "/api/billing",
+    "handler": "billingRoutes"
+  },
+  {
+    "path": "/api/user",
+    "handler": "userRoutes"
+  },
+  {
+    "path": "/api/gamification",
+    "handler": "gamificationRoutes"
+  },
+  {
+    "path": "/api/analytics",
+    "handler": "analyticsEventsRoutes"
+  },
+  {
+    "path": "/api/blog",
+    "handler": "blogRoutes"
+  }
+]
