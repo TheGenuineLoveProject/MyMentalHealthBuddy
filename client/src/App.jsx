@@ -7,6 +7,8 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { EmotionProvider } from "./context/EmotionContext.jsx";
 import ResponsiveWrapper from "./components/ResponsiveWrapper.jsx";
 import EmotionBackgroundProvider from "./components/EmotionBackgroundProvider.jsx";
+import LivingLumiAvatar from "./components/lumi/LivingLumiAvatar";
+import LumiPresenceLayer from "@/components/lumi/LumiPresenceLayer";
 // v5.8.35 perf: GratitudePrompt lazy — global widget, mounts on every page but
 // rarely used; no need to block initial render.
 const GratitudePrompt = lazy(() => import("./components/GratitudePrompt.jsx"));
@@ -331,7 +333,9 @@ function ConfigRoute({ route }) {
 
 function LoadingFallback() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30 page-entering">
+    <
+
+      div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30 page-entering">
       <div className="text-center space-y-6" role="status" aria-label="Loading page">
         <div className="relative mx-auto w-20 h-20">
           <svg

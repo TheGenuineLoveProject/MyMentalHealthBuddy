@@ -1,0 +1,43 @@
+PASS main imports LumiPresenceLayer
+PASS main renders LumiPresenceLayer
+FAIL lumi presence test hook exists
+FAIL lumi avatar alive hook exists
+PASS tsx contains lumi-eye
+PASS tsx contains lumi-pupil
+PASS tsx contains lumi-mouth
+PASS tsx contains lumi-arm
+PASS tsx contains lumi-leg
+PASS tsx contains lumi-belly
+PASS tsx contains lumi-heart-core
+PASS tsx contains lumi-emotion-orb
+PASS tsx contains lumi-halo
+PASS tsx contains lumi-aura
+PASS css contains @keyframes lumiWholeFloat
+PASS css contains @keyframes lumiWholeSway
+PASS css contains @keyframes lumiBodyBreathe
+PASS css contains @keyframes lumiBellyBreathe
+PASS css contains @keyframes lumiFaceMicroTilt
+PASS css contains @keyframes lumiBlink
+PASS css contains @keyframes lumiPupilTrack
+PASS css contains @keyframes lumiMouthExpression
+PASS css contains @keyframes lumiLeftArmWave
+PASS css contains @keyframes lumiRightArmWave
+PASS css contains @keyframes lumiLeftLegWiggle
+PASS css contains @keyframes lumiRightLegWiggle
+PASS css contains @keyframes lumiHaloFloat
+PASS css contains @keyframes lumiAuraPulse
+PASS css contains @keyframes lumiSparkDrift
+PASS css token --lumi-serenity-sage-100
+PASS css token --lumi-serenity-sage-200
+PASS css token --lumi-eternal-cream-100
+PASS css token --lumi-healing-gold-200
+PASS css token --lumi-compassion-rose-100
+PASS css token --lumi-hope-sky-200
+PASS css token --lumi-readable-ink
+PASS visibility lock exists
+PASS z-index lock exists
+PASS pointer events disabled
+PASS button contrast patch exists
+PASS mobile scaling exists
+PASS reduced motion support exists
+SUMMARY passed=40 failed=2

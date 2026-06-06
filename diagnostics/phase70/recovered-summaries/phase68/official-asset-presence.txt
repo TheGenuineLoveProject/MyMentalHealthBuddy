@@ -1,0 +1,14 @@
+FOUND client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.webp
+FOUND client/public/avatar-core/master/MMHB_FLOAT_IDLE_UNIT_v1_clean_master.png
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-l.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_arm-r.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_body-residual.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_eyes.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_face.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-l.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_leg-r.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_mouth.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_top-leaf.webp
+FOUND client/public/avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_torso.webp
+FOUND client/public/avatar-core/shadow/MMHB_FLOAT_IDLE_UNIT_v1_shadow.webp

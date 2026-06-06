@@ -1,0 +1,17 @@
+ client/src/components/lumi/LumiPresenceLayer.css   |  166 ++
+ .../src/components/lumi/LumiPresenceLayer.css      |  710 ++++++++
+ .../src/components/lumi/LumiPresenceLayer.tsx      |  129 ++
+ diagnostics/phase68/before/client/src/main.jsx     |  160 ++
+ diagnostics/phase68/git-status-start.txt           |    8 +
+ diagnostics/phase68/head.txt                       |    1 +
+ diagnostics/phase68/lumi-kinetic-verify.txt        |   43 +
+ diagnostics/phase68/main-render-check.txt          |    3 +
+ diagnostics/phase68/required-files.txt             |    3 +
+ diagnostics/visual-submit-check/git-log.txt        |   10 +
+ diagnostics/visual-submit-check/git-status.txt     |   15 +
+ .../latest-commit-diff-stat.txt                    |   18 +
+ .../visual-submit-check/latest-commit-files.txt    |   18 +
+ .../visual-submit-check/lumi-motion-search.txt     |    0
+ diagnostics/visual-submit-check/visual-files.txt   | 1846 ++++++++++++++++++++
+ scripts/verify-lumi-kinetic.mjs                    |   81 +
+ 16 files changed, 3211 insertions(+)

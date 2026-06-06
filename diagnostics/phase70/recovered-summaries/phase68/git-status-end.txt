@@ -1,0 +1,30 @@
+On branch clean-push
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   client/src/components/lumi/LumiBrandAvatar.css
+	modified:   client/src/components/lumi/LumiBrandAvatar.tsx
+	modified:   diagnostics/phase68/git-status-start.txt
+	modified:   diagnostics/phase68/head.txt
+	modified:   scripts/visual-runtime-gate.mjs
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	diagnostics/phase67b/git-log-after-push.txt
+	diagnostics/phase67b/git-status-after-push.txt
+	diagnostics/phase68/LumiBrandAvatar.css.before
+	diagnostics/phase68/LumiBrandAvatar.tsx.before
+	diagnostics/phase68/build.txt
+	diagnostics/phase68/check-links.txt
+	diagnostics/phase68/git-status-end.txt
+	diagnostics/phase68/health.json
+	diagnostics/phase68/official-asset-presence.txt
+	diagnostics/phase68/official-lumi-marker-verification.txt
+	diagnostics/phase68/ready.json
+	diagnostics/phase68/status-summary.md
+	diagnostics/phase68/visual-runtime-gate.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
