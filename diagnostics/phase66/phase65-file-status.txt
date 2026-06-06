@@ -1,0 +1,3 @@
+MISSING client/src/components/lumi/LumiPresenceLayer.tsx
+MISSING client/src/components/lumi/LumiPresenceLayer.css
+MISSING docs/governance/LUMI_PRESENCE_INTEGRATION_PHASE65.md
