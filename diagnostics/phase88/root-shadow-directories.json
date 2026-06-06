@@ -1,0 +1,22 @@
+[
+  {
+    "dir": "src",
+    "files": 43
+  },
+  {
+    "dir": "components",
+    "files": 23
+  },
+  {
+    "dir": "pages",
+    "files": 21
+  },
+  {
+    "dir": "api",
+    "files": 1
+  },
+  {
+    "dir": "app",
+    "files": 1
+  }
+]
