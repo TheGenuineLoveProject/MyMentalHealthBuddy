@@ -1,0 +1,8 @@
+/ -> 200
+/pricing -> 200
+/premium -> 200
+/account/billing -> 200
+/account/subscription -> 200
+/safety -> 200
+/privacy -> 200
+/terms -> 200
