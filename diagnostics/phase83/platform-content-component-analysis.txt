@@ -1,0 +1,12 @@
+PHASE83_PLATFORM_ANALYSIS_COMPLETE
+{
+  "files": 2285,
+  "pages": 316,
+  "components": 423,
+  "serverFiles": 331
+}
+clinicalClaimRisks=121
+businessHealingBoundaryRisks=23
+duplicateBasenameRisks=34
+buttonRisks=26
+lumiFiles=387
