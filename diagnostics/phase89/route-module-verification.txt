@@ -1,0 +1,36 @@
+===== server/routes/gamification.mjs =====
+8:const router = express.Router();
+38:router.get("/progress", async (req, res) => {
+95:router.post("/record-session", async (req, res) => {
+198:router.get("/quests", async (req, res) => {
+253:router.post("/complete-quest", async (req, res) => {
+314:router.get("/leaderboard", async (req, res) => {
+335:router.get("/", (req, res) => {
+339:export default router;
+===== server/routes/analytics-events.mjs =====
+6:const router = Router();
+8:router.post("/event", async (req, res) => {
+44:router.get("/admin/summary", async (req, res) => {
+134:router.get("/", (req, res) => {
+138:export default router;
+===== server/routes/blog.mjs =====
+11:const router = express.Router();
+14:router.get('/posts', (req, res) => {
+32:router.get("/", async (req, res) => {
+99:router.get("/admin", requireAuth, requireAdmin, async (req, res) => {
+114:router.get("/admin/stats", requireAuth, requireAdmin, async (req, res) => {
+167:router.post("/admin/test-send", requireAuth, requireAdmin, async (req, res) => {
+229:router.get("/rss", async (_req, res) => {
+266:router.get("/:slug", async (req, res) => {
+334:router.post("/", requireAuth, async (req, res) => {
+380:router.put("/:id", requireAuth, async (req, res) => {
+444:router.delete("/:id", requireAuth, async (req, res) => {
+469:router.post("/:postId/comments", requireAuth, async (req, res) => {
+518:router.delete("/comments/:commentId", requireAuth, async (req, res) => {
+543:router.post("/admin/create", requireAuth, requireAdmin, async (req, res) => {
+587:router.put("/admin/:id", requireAuth, requireAdmin, async (req, res) => {
+618:router.post("/admin/:id/submit", requireAuth, requireAdmin, async (req, res) => {
+642:router.post("/admin/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+666:router.post("/admin/:id/publish", requireAuth, requireAdmin, async (req, res) => {
+705:router.get("/user/drafts", requireAuth, async (req, res) => {
+722:export default router;

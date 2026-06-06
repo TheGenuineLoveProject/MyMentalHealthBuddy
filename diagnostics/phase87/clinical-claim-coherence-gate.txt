@@ -1,0 +1,3 @@
+CLINICAL_CLAIM_COHERENCE_GATE_PASS
+scannedFiles=831
+activeRisks=0
