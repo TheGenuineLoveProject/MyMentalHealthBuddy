@@ -2,28 +2,27 @@
 
 Completed:
 - Verified whether Phase75 completed or disappeared.
-- Recovered Phase75 only if no Phase75 commit existed.
-- Added screenshot-ready visual route QA planning.
-- Added page visual QA gate.
+- Added/repaired page coherence gate.
+- Added Phase75 CSS only if missing.
 - Verified visual runtime gate.
 - Verified visual polish gate.
 - Verified page coherence gate.
-- Verified page visual QA gate.
-- Verified official Lumi rig and motion markers.
-- Verified button label visibility tokens.
 - Verified build.
 - Verified critical routes.
 - Verified health and ready endpoints.
 
 Current state:
-The visual system has advanced from official Lumi runtime recovery into guarded page-level visual QA readiness. The next phase should perform targeted route-specific visual fixes only after verified route/page evidence.
+Phase75 page hero coherence and CTA visibility polish is now verified or recovered.
 
 Next recommended phase:
-Phase77 should inspect the highest-value monetization routes first:
+Phase77 should focus only on monetization route clarity:
 - /pricing
 - /premium
 - /account/billing
 - /account/subscription
 
-Goal:
-Improve conversion clarity, subscription CTA hierarchy, provider-monitoring trust language, and visible value proposition without making clinical claims or using healing data for monetization.
+Rules:
+- No clinical claims.
+- No healing-data monetization.
+- No broad refactor.
+- Smallest safe page-level fix only.

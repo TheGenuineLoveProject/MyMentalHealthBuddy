@@ -450,11 +450,11 @@ client/dist/assets/_autopilot-Ofkb06xF.js                                      2
 client/dist/assets/WellnessDashboard-CqoES-gA.js                               275.14 kB │ gzip: 89.13 kB
 
 [33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
-  - vite:esbuild-transpile (64%)
+  - vite:esbuild-transpile (63%)
   - vite:css (13%)
-  - vite:css-post (6%)
+  - vite:css-post (7%)
   - visualizer (6%)
-  - vite:asset (4%)
+  - vite:asset (5%)
 See https://rolldown.rs/options/checks#plugintimings for more details.
 
-✓ built in 39.39s
+✓ built in 39.11s
