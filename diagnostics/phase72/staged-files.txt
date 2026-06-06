@@ -1,0 +1,15 @@
+client/src/styles/lumi-visual-system.css
+diagnostics/phase72/LumiBrandAvatar.css.before
+diagnostics/phase72/build.txt
+diagnostics/phase72/check-links.txt
+diagnostics/phase72/git-log-start.txt
+diagnostics/phase72/git-status-start.txt
+diagnostics/phase72/head-start.txt
+diagnostics/phase72/health.json
+diagnostics/phase72/lumi-motion-token-search.txt
+diagnostics/phase72/lumi-visual-system.css.before
+diagnostics/phase72/official-lumi-marker-verification.txt
+diagnostics/phase72/ready.json
+diagnostics/phase72/visual-runtime-gate-after.txt
+diagnostics/phase72/visual-runtime-gate-before.txt
+diagnostics/phase72/visual-runtime-gate.mjs.before
