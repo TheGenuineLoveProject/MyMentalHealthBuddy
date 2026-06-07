@@ -1,0 +1,36 @@
+===== GET /serviceWorker.js =====
+HTTP=200
+7: * - Stop serving cached / or cached index.html for navigations.
+10: * - Fall back only to offline.html when network fails.
+13:const CACHE_VERSION = "mmhb-pwa-phase100-v1";
+17:const OFFLINE_URL = "/offline.html";
+19:const PRECACHE_URLS = [
+29:      .then((cache) => cache.addAll(PRECACHE_URLS))
+42:              .map((key) => caches.delete(key))
+55:  return url.pathname.startsWith("/api/");
+76:async function networkFirstNavigation(request) {
+79:      cache: "no-store"
+93:          "Cache-Control": "no-store"
+130:    event.respondWith(networkFirstNavigation(request));
+
+===== GET /offline.html =====
+HTTP=200
+6:  <title>MyMentalHealthBuddy Offline</title>
+76:    <h1>You are offline</h1>
+77:    <p>MyMentalHealthBuddy needs a connection to safely refresh the latest interface.</p>
+78:    <p>This offline screen is shown only when the network is unavailable. It prevents an old cached page from loading outdated app files after a deploy.</p>
+80:      <p><strong>Safety note:</strong> If you may be in immediate danger or need urgent help, call local emergency services. In the U.S. you can call or text <strong>988</strong>.</p>
+
+===== GET / =====
+HTTP=200
+119:    <script type="module" crossorigin src="/assets/index-Ch2plxy6.js"></script>
+120:    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-M0oDzQ_3.js">
+121:    <link rel="modulepreload" crossorigin href="/assets/vendor-forms-Dormiaj6.js">
+122:    <link rel="modulepreload" crossorigin href="/assets/vendor-motion-vEZRdoSu.js">
+123:    <link rel="modulepreload" crossorigin href="/assets/vendor-query-C659wCYX.js">
+124:    <link rel="modulepreload" crossorigin href="/assets/vendor-router-PpFy-odC.js">
+125:    <link rel="modulepreload" crossorigin href="/assets/vendor-lucide-0ZteGzjh.js">
+126:    <link rel="modulepreload" crossorigin href="/assets/vendor-react-D1d-zYPS.js">
+127:    <link rel="stylesheet" crossorigin href="/assets/index-CtY-PVuV.css">
+136:    <div id="root"></div>
+
