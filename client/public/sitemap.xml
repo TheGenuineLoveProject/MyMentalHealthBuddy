@@ -43,6 +43,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mymentalhealthbuddy.com/wellness-glossary</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/research-evidence</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mymentalhealthbuddy.com/professional-resources</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
