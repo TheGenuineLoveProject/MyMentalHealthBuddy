@@ -381,8 +381,8 @@ function ReadinessPanel() {
     setError(null);
     try {
       const [readyRes, detailRes] = await Promise.allSettled([
-        fetch("/health/ready", { credentials: "include" }),
-        fetch("/health/detailed", { credentials: "include" }),
+        fetch("/api/health/ready", { credentials: "include" }),
+        fetch("/api/health/detailed", { credentials: "include" }),
       ]);
       if (readyRes.status === "fulfilled") {
         const ok = readyRes.value.ok;

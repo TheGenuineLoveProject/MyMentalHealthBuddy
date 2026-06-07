@@ -19,6 +19,9 @@
 /* HX-OS vNEXT scoped palette — opt-in via .hxos-vnext / .hxos-vnext-crisis */
 @import "./styles/hxos-vnext.css";
 
+@import "./styles/lumi-pastel-visual-system.css";
+@import "./styles/lumi-living-presence-phase64.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7634,7 +7637,3 @@ canvas {
     transition-duration: 0.001ms !important;
   }
 }
-
-@import "./styles/lumi-pastel-visual-system.css";
-
-@import "./styles/lumi-living-presence-phase64.css";
