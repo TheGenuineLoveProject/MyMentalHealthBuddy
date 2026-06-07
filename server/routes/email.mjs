@@ -11,6 +11,7 @@ import {
   sendMilestoneEmail,
   testEmailConnection 
 } from '../services/email.mjs';
+import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.get('/health', async (req, res) => {
   }
 });
 
-router.post('/welcome', async (req, res) => {
+router.post('/welcome', requireAuth, requireAdmin, async (req, res) => {
   try {
     const { email, name } = req.body;
     
@@ -54,7 +55,7 @@ router.post('/welcome', async (req, res) => {
   }
 });
 
-router.post('/challenge-reminder', async (req, res) => {
+router.post('/challenge-reminder', requireAuth, requireAdmin, async (req, res) => {
   try {
     const { email, name, day } = req.body;
     
@@ -75,7 +76,7 @@ router.post('/challenge-reminder', async (req, res) => {
   }
 });
 
-router.post('/milestone', async (req, res) => {
+router.post('/milestone', requireAuth, requireAdmin, async (req, res) => {
   try {
     const { email, name, milestone } = req.body;
     
