@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T09:15:15.908Z",
+  "generatedAt": "2026-06-07T09:22:10.707Z",
   "activeRoots": [
     "client/src",
     "server",
@@ -30,7 +30,7 @@
     "coverage",
     ".tmp_drizzle"
   ],
-  "activeFileCount": 1815,
+  "activeFileCount": 1812,
   "duplicateFamilyCount": 120,
   "shadowTreeCount": 5,
   "selectedFamily": {
@@ -265,36 +265,6 @@
       "hasServer": true,
       "hasRootShadow": true,
       "hasJsxTsxPair": true
-    },
-    {
-      "family": "ProtectedRoute",
-      "fileCount": 5,
-      "files": [
-        "client/src/components/ProtectedRoute.jsx",
-        "client/src/guards/ProtectedRoute.jsx",
-        "src/auth/ProtectedRoute.jsx",
-        "src/components/ProtectedRoute.jsx",
-        "src/pages/ProtectedRoute.jsx"
-      ],
-      "hasClientSrc": true,
-      "hasServer": false,
-      "hasRootShadow": true,
-      "hasJsxTsxPair": false
-    },
-    {
-      "family": "SacredBackground",
-      "fileCount": 5,
-      "files": [
-        "client/src/components/SacredBackground.jsx",
-        "client/src/components/sacred/SacredBackground.jsx",
-        "client/src/components/ui/SacredBackground.jsx",
-        "src/auth/sacred/SacredBackground.jsx",
-        "src/sacred/SacredBackground.jsx"
-      ],
-      "hasClientSrc": true,
-      "hasServer": false,
-      "hasRootShadow": true,
-      "hasJsxTsxPair": false
     },
     {
       "family": "EmotionLog",
@@ -1080,6 +1050,19 @@
       "hasJsxTsxPair": false
     },
     {
+      "family": "SacredBackground",
+      "fileCount": 3,
+      "files": [
+        "client/src/components/SacredBackground.jsx",
+        "client/src/components/sacred/SacredBackground.jsx",
+        "client/src/components/ui/SacredBackground.jsx"
+      ],
+      "hasClientSrc": true,
+      "hasServer": false,
+      "hasRootShadow": false,
+      "hasJsxTsxPair": false
+    },
+    {
       "family": "twelvePractices",
       "fileCount": 3,
       "files": [
@@ -1453,6 +1436,18 @@
       "hasJsxTsxPair": false
     },
     {
+      "family": "ProtectedRoute",
+      "fileCount": 2,
+      "files": [
+        "client/src/components/ProtectedRoute.jsx",
+        "client/src/guards/ProtectedRoute.jsx"
+      ],
+      "hasClientSrc": true,
+      "hasServer": false,
+      "hasRootShadow": false,
+      "hasJsxTsxPair": false
+    },
+    {
       "family": "protocols",
       "fileCount": 2,
       "files": [
@@ -1665,10 +1660,8 @@
         "src/WellnessDashboard.jsx",
         "src/auth/AuthContext.jsx",
         "src/auth/Login.jsx",
-        "src/auth/ProtectedRoute.jsx",
         "src/auth/Signup.jsx",
         "src/auth/sacred/LotusGuide.jsx",
-        "src/auth/sacred/SacredBackground.jsx",
         "src/components/EmotionCalendar.jsx",
         "src/components/EmotionLog.jsx",
         "src/components/EmotionRing.jsx",
@@ -1677,7 +1670,6 @@
         "src/components/MoodDashboard.jsx",
         "src/components/MoodTrendsChart.jsx",
         "src/components/Navbar.jsx",
-        "src/components/ProtectedRoute.jsx",
         "src/components/VoiceAffirmation.jsx",
         "src/components/WellnessDashboard.jsx",
         "src/components/benefits/BenefitBlock.tsx",
@@ -1691,9 +1683,7 @@
         "src/lib/safety.ts",
         "src/pages/JournalPage.jsx",
         "src/pages/LandingPage.jsx",
-        "src/pages/ProtectedRoute.jsx",
         "src/sacred/LotusGuide.jsx",
-        "src/sacred/SacredBackground.jsx",
         "src/sacred/SacredNav.jsx",
         "src/tailwind.config.js",
         "src/theme.js",
@@ -1829,13 +1819,6 @@
       ]
     },
     {
-      "shadowFile": "src/auth/ProtectedRoute.jsx",
-      "family": "ProtectedRoute",
-      "canonicalMentions": [
-        "client/src/App.jsx"
-      ]
-    },
-    {
       "shadowFile": "src/auth/Signup.jsx",
       "family": "Signup",
       "canonicalMentions": [
@@ -1845,13 +1828,6 @@
     {
       "shadowFile": "src/auth/sacred/LotusGuide.jsx",
       "family": "LotusGuide",
-      "canonicalMentions": [
-        "client/src/components/sacred/index.js"
-      ]
-    },
-    {
-      "shadowFile": "src/auth/sacred/SacredBackground.jsx",
-      "family": "SacredBackground",
       "canonicalMentions": [
         "client/src/components/sacred/index.js"
       ]
@@ -1902,13 +1878,6 @@
       "shadowFile": "src/components/Navbar.jsx",
       "family": "Navbar",
       "canonicalMentions": []
-    },
-    {
-      "shadowFile": "src/components/ProtectedRoute.jsx",
-      "family": "ProtectedRoute",
-      "canonicalMentions": [
-        "client/src/App.jsx"
-      ]
     },
     {
       "shadowFile": "src/components/VoiceAffirmation.jsx",
@@ -2226,22 +2195,8 @@
       "canonicalMentions": []
     },
     {
-      "shadowFile": "src/pages/ProtectedRoute.jsx",
-      "family": "ProtectedRoute",
-      "canonicalMentions": [
-        "client/src/App.jsx"
-      ]
-    },
-    {
       "shadowFile": "src/sacred/LotusGuide.jsx",
       "family": "LotusGuide",
-      "canonicalMentions": [
-        "client/src/components/sacred/index.js"
-      ]
-    },
-    {
-      "shadowFile": "src/sacred/SacredBackground.jsx",
-      "family": "SacredBackground",
       "canonicalMentions": [
         "client/src/components/sacred/index.js"
       ]

@@ -1,6 +1,4 @@
-fc13c75d8 (HEAD -> clean-push, origin/main, origin/HEAD) phase97 add active runtime duplicate ownership gate
-3033bcc1c phase97 add active runtime duplicate ownership gate
-8d2a6ee48 phase96 select duplicate family for canonicalization planning
+8d2a6ee48 (HEAD -> clean-push, origin/main, origin/HEAD) phase96 select duplicate family for canonicalization planning
 6a1cfb7ce phase95b verify duplicate ownership audit completion
 803e55ad6 Add durable database schema provisioning and fix analytics beacon
 a7e6e2184 Fix analytics beacon and database schema provisioning issues
@@ -100,21 +98,3 @@ aa71bfed0 Ignore generated stripe audit artifacts
 feead6cc0 Add phase 8 Stripe mode blocker guard and secret rotation ledger
 48c9a5bdf Add phase 7 execution ledger and Stripe mode audit
 573b29758 (tag: PHASE5_COVERAGE_AUDIT_20260605_003216) Add phase 5 platform coverage audit reports
-2f7fbd1a4 Add deployment readiness endpoint
-42915ef29 (tag: PHASE1_VERIFIED_20260604_195044) Remove duplicate and conflicting component files from the UI
-11cec09af deployment-ready platform state
-553564c14 Add canonical route taxonomy and audit report to governance documents
-5f99d04df feat(discovery): add canonical discover tools navbar link
-1501a6bb2 docs(discovery): identify visible navigation placement
-ba3780467 docs(discovery): verify discovery route visibility
-a35d0713b docs(discovery): define discovery route wiring
-cd5166059 feat(discovery): add global tool discovery engine
-975e80d3a feat(platform): add canonical wellness tool directory
-d00b1f924 docs(governance): verify advertised tool visibility
-d03bcad68 Update documentation for low-risk route family audit
-ee566a5e5 chore(repo): untrack route backup artifacts
-2c48ed0aa docs(governance): audit public content route family
-614d97713 Published your App
-28662f872 Create inventory of current application routes for future consolidation
-84935e6d3 docs(governance): add route candidate inventory
-e34c0edcc docs(governance): add route consolidation decision ledger

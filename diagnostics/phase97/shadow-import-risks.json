@@ -69,13 +69,6 @@
     ]
   },
   {
-    "shadowFile": "src/auth/ProtectedRoute.jsx",
-    "family": "ProtectedRoute",
-    "canonicalMentions": [
-      "client/src/App.jsx"
-    ]
-  },
-  {
     "shadowFile": "src/auth/Signup.jsx",
     "family": "Signup",
     "canonicalMentions": [
@@ -85,13 +78,6 @@
   {
     "shadowFile": "src/auth/sacred/LotusGuide.jsx",
     "family": "LotusGuide",
-    "canonicalMentions": [
-      "client/src/components/sacred/index.js"
-    ]
-  },
-  {
-    "shadowFile": "src/auth/sacred/SacredBackground.jsx",
-    "family": "SacredBackground",
     "canonicalMentions": [
       "client/src/components/sacred/index.js"
     ]
@@ -142,13 +128,6 @@
     "shadowFile": "src/components/Navbar.jsx",
     "family": "Navbar",
     "canonicalMentions": []
-  },
-  {
-    "shadowFile": "src/components/ProtectedRoute.jsx",
-    "family": "ProtectedRoute",
-    "canonicalMentions": [
-      "client/src/App.jsx"
-    ]
   },
   {
     "shadowFile": "src/components/VoiceAffirmation.jsx",
@@ -466,22 +445,8 @@
     "canonicalMentions": []
   },
   {
-    "shadowFile": "src/pages/ProtectedRoute.jsx",
-    "family": "ProtectedRoute",
-    "canonicalMentions": [
-      "client/src/App.jsx"
-    ]
-  },
-  {
     "shadowFile": "src/sacred/LotusGuide.jsx",
     "family": "LotusGuide",
-    "canonicalMentions": [
-      "client/src/components/sacred/index.js"
-    ]
-  },
-  {
-    "shadowFile": "src/sacred/SacredBackground.jsx",
-    "family": "SacredBackground",
     "canonicalMentions": [
       "client/src/components/sacred/index.js"
     ]

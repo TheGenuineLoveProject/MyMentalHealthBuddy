@@ -1,0 +1,11 @@
+39:    worker.postMessage({ type: 'SKIP_WAITING' });
+49:if ('serviceWorker' in navigator) {
+51:    navigator.serviceWorker.register('/serviceWorker.js')
+54:          const newWorker = registration.installing;
+57:              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+63:                      newWorker.postMessage({ type: 'SKIP_WAITING' });
+70:                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+88:  navigator.serviceWorker.addEventListener("controllerchange", () => {
+91:      source: "controllerchange",
+97:  navigator.serviceWorker.addEventListener('message', (event) => {
+125:        navigator.serviceWorker.ready.then(registration => {

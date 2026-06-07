@@ -161,36 +161,6 @@
     "hasJsxTsxPair": true
   },
   {
-    "family": "ProtectedRoute",
-    "fileCount": 5,
-    "files": [
-      "client/src/components/ProtectedRoute.jsx",
-      "client/src/guards/ProtectedRoute.jsx",
-      "src/auth/ProtectedRoute.jsx",
-      "src/components/ProtectedRoute.jsx",
-      "src/pages/ProtectedRoute.jsx"
-    ],
-    "hasClientSrc": true,
-    "hasServer": false,
-    "hasRootShadow": true,
-    "hasJsxTsxPair": false
-  },
-  {
-    "family": "SacredBackground",
-    "fileCount": 5,
-    "files": [
-      "client/src/components/SacredBackground.jsx",
-      "client/src/components/sacred/SacredBackground.jsx",
-      "client/src/components/ui/SacredBackground.jsx",
-      "src/auth/sacred/SacredBackground.jsx",
-      "src/sacred/SacredBackground.jsx"
-    ],
-    "hasClientSrc": true,
-    "hasServer": false,
-    "hasRootShadow": true,
-    "hasJsxTsxPair": false
-  },
-  {
     "family": "EmotionLog",
     "fileCount": 4,
     "files": [
@@ -974,6 +944,19 @@
     "hasJsxTsxPair": false
   },
   {
+    "family": "SacredBackground",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/SacredBackground.jsx",
+      "client/src/components/sacred/SacredBackground.jsx",
+      "client/src/components/ui/SacredBackground.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
     "family": "twelvePractices",
     "fileCount": 3,
     "files": [
@@ -1340,6 +1323,18 @@
     "files": [
       "client/src/components/ProgressTracker.jsx",
       "client/src/components/sacred/ProgressTracker.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "ProtectedRoute",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ProtectedRoute.jsx",
+      "client/src/guards/ProtectedRoute.jsx"
     ],
     "hasClientSrc": true,
     "hasServer": false,
