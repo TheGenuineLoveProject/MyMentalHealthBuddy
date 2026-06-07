@@ -1,0 +1,9 @@
+===== GET /api/gamification/quests =====
+HTTP=401
+{"error":"Authentication required"}
+===== POST /api/analytics/event =====
+HTTP=400
+{"error":"Invalid event_name"}
+===== GET /api/blog/posts =====
+HTTP=200
+{"posts":[]}
