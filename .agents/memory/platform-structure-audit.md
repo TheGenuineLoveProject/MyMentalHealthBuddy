@@ -19,9 +19,26 @@ description: Durable map of MMHB's biggest structural debt — built-but-unmount
 **Why:** auth is Bearer-only and lazy — nothing populates `req.user` unless an auth middleware runs. A router whose handler does `const user = req.user || null` (e.g. `growth-journey.mjs` `GET /journey`) mounted as a plain `app.use("/api/x", router)` always sees `req.user` undefined, so signed-in callers get guest/zeroed personalized data. This PASSES a 200 smoke check and only fails on personalization — easy to miss.
 **How to apply:** when mounting any router that reads `req.user` but has no per-route `requireAuth`, wrap the mount with `optionalAuth` (imported in app.mjs): `app.use("/api/x", optionalAuth, router)`. Precedent: `/api/streaks`, `/api/growth`. Verify with two curls (guest vs `Bearer <jwt>`) that an identity flag (`privacy.signedIn`) flips.
 
+## "Unmounted route" cross-refs are mostly PHANTOMS — verify before wiring
+**Why:** A naive gap scan (frontend `/api/x` strings minus `app.use("/api/x")`
+mounts) reports ~55 "built-but-unmounted" routers. Almost all are false positives,
+for two reasons: (1) the bare `/api/<topic>` strings come from admin **tool-catalog
+config files** (`client/src/config/toolCategories.js`,
+`client/src/pages/admin/_adminToolsShared.js`) — these are endpoint METADATA lists
+for an admin dashboard, NOT live `fetch()` calls; the real admin tool hits
+`/api/admin/<topic>/...`. (2) Many routers (e.g. `consciousness.mjs`) are mounted
+under `/api/admin/<topic>` via an admin block, and the file header documents its
+real mount. Plus a regex footgun: `app.use("/api/x")` matches double quotes only —
+single-quoted mounts (e.g. `app.use('/api/session-boundary', …)`) are missed and
+look "unmounted." **How to apply:** before mounting any "gap," (a) match BOTH quote
+styles, (b) check the route file's header for an existing `/api/admin/...` mount,
+(c) grep the frontend refs EXCLUDING `toolCategories.js`/`_adminToolsShared.js` — if
+the only refs are in those catalog files, it is NOT a live gap. Real live gaps are
+rare; confirm each with an actual reachable page fetch (and curl the live status).
+
 ## Frontend-called prefixes with NO backend (need implementation, NOT just mounting)
 **Why:** A 2026-06 full frontend↔mount cross-ref mounted every `/api/*` prefix that had a matching `server/routes/*.mjs`. As of Batch 3-4, `/api/user-settings`, `/api/dashboard`, `/api/uploads`, `/api/social`, `/api/system`, `/api/kernel`, `/api/growth` are all built+mounted; `/api/subscribe` and `/api/session/extend` were resolved by repointing the frontend to existing routes (`/api/newsletter/subscribe`, `/api/session-boundary/extend`) rather than new backends.
-**How to apply:** remaining non-live items are deferrals, NOT gaps: `/api/v1/*` (rbac map only, aspirational); `/api/pathways/progress` (consumer `useQuery enabled:false` — never fires); `/api/journals` (consumers expect a bare DB-backed array but `journal.mjs` GET "/" returns `{ok,data}` from an in-memory `journalStore` — data-source mismatch, needs a product/contract decision before wiring). Prefer the smallest engine: a 1-line frontend repoint to an existing tested route beats a new backend module.
+**How to apply:** remaining non-live items are deferrals, NOT gaps: `/api/v1/*` (rbac map only, aspirational); `/api/pathways/progress` (consumer `useQuery enabled:false` — never fires). `/api/journals` is now RESOLVED — DB-backed plural bare-array route exists (see journal-store-contract.md). Prefer the smallest engine: a 1-line frontend repoint to an existing tested route beats a new backend module.
 
 ## Shadow / legacy trees (clutter, not the live app)
 - Root-level `src/`, `components/`, `pages/`, `api/`, `app/` duplicate the real `client/`+`server/` trees. `app/backend/server/` is a legacy shadow holding STUB routes (e.g. blog stub returning `{"posts":[]}`). The live entry is `server/app.mjs` + `client/src/App.jsx`.

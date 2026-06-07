@@ -37,3 +37,16 @@ headers: {
 `fetch("<that-path>"` and confirm each adds the bearer header. Verify with curl:
 no token → 401, valid `Bearer` (mint via `jwt.sign({id,email,role}, JWT_SECRET)`
 with a real UUID `id`) → 200.
+
+## Logout is client-side; GET /api/logout is a 404 trap
+The Replit OIDC blueprint (`server/replit_integrations/auth/` — `setupAuth`,
+`registerAuthRoutes`) is **imported but NEVER invoked**, so `GET /api/logout`
+404s live and `replitUser` (from `/api/auth/user`, which 401s for Bearer clients)
+is always null. The canonical logout is **client-side** `AuthContext.logout()`:
+it clears the localStorage token (`mmhb_token`/`mmhb_user`) + react-query cache.
+**Why:** the JWT lives in localStorage, NOT a cookie — a server redirect can never
+log the user out. Any UI control that does `window.location.href="/api/logout"` (or
+`<a href="/api/logout">`) is a bug: it 404s AND leaves the token intact. Route all
+logout controls through `AuthContext.logout()` then `window.location.href="/"` for a
+clean guest reload. Note `AuthContext.logout`'s own `if (replitUser) → /api/logout`
+branch and `hooks/useAuth.js` logout are dead while OIDC stays un-invoked.

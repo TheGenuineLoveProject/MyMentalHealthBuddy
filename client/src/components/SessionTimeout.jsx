@@ -2,13 +2,20 @@ import { useState, useEffect, useCallback } from "react";
 import { Clock, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getAuthToken } from "@/lib/api";
+import { useAuth } from "../context/AuthContext";
 
 const TIMEOUT_WARNING = 5 * 60 * 1000;
 const SESSION_TIMEOUT = 30 * 60 * 1000;
 
 export default function SessionTimeout() {
+  const { logout } = useAuth();
   const [showWarning, setShowWarning] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
+
+  const handleLogout = useCallback(() => {
+    logout();
+    window.location.href = "/";
+  }, [logout]);
 
   const resetTimer = useCallback(() => {
     setShowWarning(false);
@@ -106,7 +113,7 @@ export default function SessionTimeout() {
           </Button>
           <Button
             variant="outline"
-            onClick={() => (window.location.href = "/api/logout")}
+            onClick={handleLogout}
             className="flex-1 min-h-[44px]"
             data-testid="button-logout"
           >

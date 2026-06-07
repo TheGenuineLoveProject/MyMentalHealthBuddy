@@ -25,7 +25,12 @@ const AUTH_NAV_LINKS = [
 export default function SacredNav({ className = "" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, logout } = useAuth();
+
+  const handleSignOut = () => {
+    logout();
+    window.location.href = "/";
+  };
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -124,12 +129,10 @@ export default function SacredNav({ className = "" }) {
                 <span className="text-sm text-muted-foreground">
                   Welcome, <span className="font-medium text-foreground">{user.username || 'Friend'}</span>
                 </span>
-                <a href="/api/logout">
-                  <Button variant="ghost" size="sm" className="text-muted-foreground" data-testid="button-logout">
-                    <LogOut className="w-4 h-4 mr-1" aria-hidden="true" />
-                    Sign out
-                  </Button>
-                </a>
+                <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-muted-foreground" data-testid="button-logout">
+                  <LogOut className="w-4 h-4 mr-1" aria-hidden="true" />
+                  Sign out
+                </Button>
               </div>
             )}
 
@@ -191,12 +194,17 @@ export default function SacredNav({ className = "" }) {
               })}
               
               {!isLoading && user && (
-                <a href="/api/logout" className="mt-2 pt-2 border-t border-border/50">
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="mt-2 pt-2 border-t border-border/50 w-full text-left"
+                  data-testid="button-logout-mobile"
+                >
                   <div className="flex items-center gap-3 px-4 py-3 text-sm text-muted-foreground">
                     <LogOut className="w-5 h-5" aria-hidden="true" />
                     Sign out ({user.username || 'User'})
                   </div>
-                </a>
+                </button>
               )}
             </div>
           </div>
