@@ -1,0 +1,9 @@
+753:              <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+1624:              <Route path="/glossary">{() => <ConfigRoute route="/glossary" />}</Route>
+1625:              <Route path="/wellness-glossary">{() => <ConfigRoute route="/wellness-glossary" />}</Route>
+1626:              <Route path="/research-evidence">{() => <ConfigRoute route="/research-evidence" />}</Route>
+1628:              <Route path="/how-to-guides">{() => <ConfigRoute route="/how-to-guides" />}</Route>
+1634:              <Route path="/examples">{() => <ConfigRoute route="/examples" />}</Route>
+1635:              <Route path="/professional-resources">{() => <ConfigRoute route="/professional-resources" />}</Route>
+1846:              <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
+1848:              <Route path="/qa">{() => <ConfigRoute route="/qa" />}</Route>
