@@ -1,0 +1,10 @@
+PHASE93E_COMPLETION_GATE_PASS
+COMPLETE /glossary
+COMPLETE /wellness-glossary
+COMPLETE /research-evidence
+COMPLETE /professional-resources
+COMPLETE /how-to-guides
+COMPLETE /qa
+COMPLETE /examples
+COMPLETE /health
+COMPLETE /calming-scenes

@@ -1,0 +1,9 @@
+40:    <loc>https://mymentalhealthbuddy.com/glossary</loc>
+46:    <loc>https://mymentalhealthbuddy.com/wellness-glossary</loc>
+52:    <loc>https://mymentalhealthbuddy.com/research-evidence</loc>
+58:    <loc>https://mymentalhealthbuddy.com/professional-resources</loc>
+64:    <loc>https://mymentalhealthbuddy.com/how-to-guides</loc>
+70:    <loc>https://mymentalhealthbuddy.com/qa</loc>
+76:    <loc>https://mymentalhealthbuddy.com/examples</loc>
+82:    <loc>https://mymentalhealthbuddy.com/health</loc>
+88:    <loc>https://mymentalhealthbuddy.com/calming-scenes</loc>
