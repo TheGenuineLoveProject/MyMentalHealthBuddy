@@ -58,7 +58,7 @@ export default function SessionTimeout() {
   const handleExtend = async () => {
     try {
       const extendToken = getAuthToken();
-      await fetch("/api/session/extend", {
+      await fetch("/api/session-boundary/extend", {
         method: "POST",
         credentials: "include",
         headers: extendToken ? { Authorization: `Bearer ${extendToken}` } : {},
