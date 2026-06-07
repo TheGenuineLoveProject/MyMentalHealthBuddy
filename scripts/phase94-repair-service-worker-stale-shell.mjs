@@ -1,4 +1,15 @@
-/* Phase 94: stale-shell-safe service worker.
+import fs from "node:fs";
+
+const swPath = "client/public/serviceWorker.js";
+if (!fs.existsSync(swPath)) {
+  throw new Error("client/public/serviceWorker.js not found");
+}
+
+const original = fs.readFileSync(swPath, "utf8");
+const cacheVersionMatch = original.match(/CACHE_VERSION\s*=\s*["'`]([^"'`]+)["'`]/);
+const existingVersion = cacheVersionMatch?.[1] || "unknown";
+
+const next = `/* Phase 94: stale-shell-safe service worker.
  * Purpose:
  * - Never serve cached index.html for navigations.
  * - Use network-first navigation.
@@ -8,8 +19,8 @@
  */
 
 const CACHE_VERSION = "mmhb-pwa-v94-stale-shell-safe";
-const STATIC_CACHE = `${CACHE_VERSION}-static`;
-const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+const STATIC_CACHE = \`\${CACHE_VERSION}-static\`;
+const RUNTIME_CACHE = \`\${CACHE_VERSION}-runtime\`;
 
 const STATIC_ASSETS = [
   "/offline.html",
@@ -51,7 +62,7 @@ function isCacheableAssetRequest(request) {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return false;
   if (isNavigationRequest(request)) return false;
-  return /\.(?:js|css|woff2?|ttf|otf|png|jpg|jpeg|webp|svg|gif|ico|json|txt|xml)$/i.test(url.pathname);
+  return /\\.(?:js|css|woff2?|ttf|otf|png|jpg|jpeg|webp|svg|gif|ico|json|txt|xml)$/i.test(url.pathname);
 }
 
 async function networkFirstNavigation(request) {
@@ -110,3 +121,22 @@ self.addEventListener("message", (event) => {
     );
   }
 });
+`;
+
+fs.writeFileSync(swPath, next);
+
+const summary = {
+  previousCacheVersion: existingVersion,
+  newCacheVersion: "mmhb-pwa-v94-stale-shell-safe",
+  removedIndexHtmlPrecache: !next.includes('"/index.html"') && !next.includes("'/index.html'") && !next.includes('"/"') && !next.includes("'/'"),
+  navigationNetworkFirst: next.includes("networkFirstNavigation"),
+  offlineOnlyFallback: next.includes('cache.match("/offline.html")'),
+};
+
+fs.mkdirSync("diagnostics/phase94", { recursive: true });
+fs.writeFileSync("diagnostics/phase94/service-worker-repair-summary.json", JSON.stringify(summary, null, 2));
+console.log(JSON.stringify(summary, null, 2));
+
+if (!summary.removedIndexHtmlPrecache || !summary.navigationNetworkFirst || !summary.offlineOnlyFallback) {
+  process.exit(1);
+}

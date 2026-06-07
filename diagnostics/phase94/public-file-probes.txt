@@ -1,0 +1,103 @@
+===== GET /serviceWorker.js =====
+HTTP=200
+3: * - Never serve cached index.html for navigations.
+5: * - Fall back only to offline.html when network is unavailable.
+10:const CACHE_VERSION = "mmhb-pwa-v94-stale-shell-safe";
+15:  "/offline.html",
+57:async function networkFirstNavigation(request) {
+63:    return (await cache.match("/offline.html")) || new Response(
+93:    event.respondWith(networkFirstNavigation(request));
+
+===== GET /offline.html =====
+HTTP=200
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Moment of Pause - The Genuine Love Project</title>
+  <meta name="description" content="You are currently offline. Take this moment to breathe. The Genuine Love Project will reconnect when your connection is restored.">
+  <meta name="theme-color" content="#8FBF9F">
+  <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #FAF9F7 0%, #E8F5E9 40%, #F3E5F5 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .container {
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 60px rgba(90, 138, 110, 0.12);
+    }
+    
+    .lotus {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    
+    @keyframes breathe {
+
+===== GET /sitemap.xml =====
+HTTP=200
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mymentalhealthbuddy.com</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/pricing</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/premium</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/safety</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/privacy</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/terms</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/glossary</loc>
+
+===== GET /robots.txt =====
+HTTP=200
+User-agent: *
+Allow: /
+
+Sitemap: https://mymentalhealthbuddy.com/sitemap.xml
+

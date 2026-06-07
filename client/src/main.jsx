@@ -37,7 +37,7 @@ function showUpdateBanner(worker) {
   banner.appendChild(style);
   banner.querySelector('[data-testid="btn-update-app"]').addEventListener('click', () => {
     worker.postMessage({ type: 'SKIP_WAITING' });
-    window.location.reload();
+    window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
   });
   banner.querySelector('[data-testid="btn-dismiss-update"]').addEventListener('click', () => {
     banner.remove();
@@ -61,14 +61,14 @@ if ('serviceWorker' in navigator) {
                   } else {
                     if (window.confirm('A new version is available. Refresh to update?')) {
                       newWorker.postMessage({ type: 'SKIP_WAITING' });
-                      window.location.reload();
+                      window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
                     }
                   }
                 } catch (e) {
                   console.warn('Update banner failed, using fallback:', e);
                   if (window.confirm('A new version is available. Refresh to update?')) {
                     newWorker.postMessage({ type: 'SKIP_WAITING' });
-                    window.location.reload();
+                    window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
                   }
                 }
               }
@@ -85,9 +85,14 @@ if ('serviceWorker' in navigator) {
       });
   });
 
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    window.location.reload();
-  });
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+  window.dispatchEvent(new CustomEvent("mmhb-service-worker-updated", {
+    detail: {
+      source: "controllerchange",
+      action: "manual-refresh-available",
+    },
+  }));
+});
 
   navigator.serviceWorker.addEventListener('message', (event) => {
     if (event.data?.type === 'CHECK_REMINDER') {

@@ -1,253 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Moment of Pause - The Genuine Love Project</title>
-  <meta name="description" content="You are currently offline. Take this moment to breathe. The Genuine Love Project will reconnect when your connection is restored.">
-  <meta name="theme-color" content="#8FBF9F">
-  <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyMentalHealthBuddy Offline</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+    :root {
+      --serenity-sage: #4a7e72;
+      --eternal-gold: #b8963e;
+      --warm-cream: #fff9f2;
+      --deep-text: #243d38;
+    }
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #FAF9F7 0%, #E8F5E9 40%, #F3E5F5 100%);
+      margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1.5rem;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 212, 107, 0.28), transparent 32%),
+        radial-gradient(circle at 86% 14%, rgba(174, 233, 255, 0.24), transparent 30%),
+        var(--warm-cream);
+      color: var(--deep-text);
     }
-    
-    .container {
-      max-width: 480px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      border-radius: 24px;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 20px 60px rgba(90, 138, 110, 0.12);
+
+    main {
+      width: min(680px, calc(100% - 32px));
+      padding: clamp(24px, 5vw, 40px);
+      border: 1px solid rgba(74, 126, 114, 0.22);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 24px 70px rgba(74, 126, 114, 0.14);
     }
-    
-    .lotus {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 1.5rem;
-      animation: breathe 4s ease-in-out infinite;
-    }
-    
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); opacity: 0.88; }
-      50% { transform: scale(1.06); opacity: 1; }
-    }
-    
-    .brand {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #8FBF9F;
-      margin-bottom: 0.5rem;
-    }
-    
+
     h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      color: #2D5A4A;
-      font-size: 1.875rem;
-      font-weight: 600;
-      margin-bottom: 0.875rem;
-      line-height: 1.25;
+      margin: 0 0 12px;
+      font-size: clamp(1.55rem, 4vw, 2.35rem);
+      line-height: 1.1;
     }
-    
+
     p {
-      color: #6B7280;
+      margin: 0 0 16px;
       line-height: 1.65;
-      margin-bottom: 1.25rem;
       font-size: 1rem;
     }
-    
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(143, 191, 159, 0.15);
-      padding: 0.625rem 1.25rem;
-      border-radius: 50px;
-      margin-bottom: 1.5rem;
-      font-size: 0.875rem;
-      color: #5A8A6E;
+
+    .safety {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 212, 107, 0.18);
+      border: 1px solid rgba(184, 150, 62, 0.25);
     }
-    
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #E57373;
-      border-radius: 50%;
-      animation: pulse-dot 1.5s ease-in-out infinite;
+
+    a {
+      color: var(--serenity-sage);
+      font-weight: 800;
     }
-    
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    
-    .affirmation {
-      background: linear-gradient(135deg, rgba(143, 191, 159, 0.1) 0%, rgba(200, 162, 200, 0.08) 100%);
-      border: 1px solid rgba(143, 191, 159, 0.2);
-      border-radius: 16px;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .affirmation-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #8FBF9F;
-      margin-bottom: 0.5rem;
-    }
-    
-    .affirmation-text {
-      color: #5A8A6E;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.05rem;
-      font-style: italic;
-      line-height: 1.5;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, #8FBF9F 0%, #5A8A6E 100%);
+
+    button {
+      margin-top: 8px;
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: var(--serenity-sage);
       color: white;
-      border: none;
-      padding: 0.875rem 2rem;
-      border-radius: 50px;
-      font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 800;
       cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(90, 138, 110, 0.25);
     }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(90, 138, 110, 0.35);
-    }
-    
-    .mindfulness {
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .mindfulness-title {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #9CA3AF;
-      margin-bottom: 0.625rem;
-    }
-    
-    .mindfulness-list {
-      list-style: none;
-      font-size: 0.875rem;
-      color: #6B7280;
-      display: flex;
-      flex-direction: column;
-      gap: 0.375rem;
-    }
-    
-    .crisis-link {
-      display: inline-block;
-      margin-top: 1.25rem;
-      color: #C88AC8;
-      font-size: 0.85rem;
-      text-decoration: none;
-    }
-    
-    .crisis-link:hover { text-decoration: underline; }
-    
-    @media (max-width: 480px) {
-      .container { padding: 2rem 1.5rem; }
-      h1 { font-size: 1.5rem; }
-      .lotus { width: 100px; height: 100px; }
+
+    button:focus-visible {
+      outline: 3px solid rgba(255, 212, 107, 0.7);
+      outline-offset: 3px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <svg class="lotus" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <ellipse cx="50" cy="68" rx="9" ry="28" fill="#8FBF9F" opacity="0.95"/>
-      <ellipse cx="33" cy="62" rx="8" ry="24" fill="#A8D4B8" opacity="0.88" transform="rotate(-22 33 62)"/>
-      <ellipse cx="67" cy="62" rx="8" ry="24" fill="#A8D4B8" opacity="0.88" transform="rotate(22 67 62)"/>
-      <ellipse cx="18" cy="52" rx="6" ry="19" fill="#C5E8D2" opacity="0.8" transform="rotate(-45 18 52)"/>
-      <ellipse cx="82" cy="52" rx="6" ry="19" fill="#C5E8D2" opacity="0.8" transform="rotate(45 82 52)"/>
-      <ellipse cx="8" cy="40" rx="5" ry="14" fill="#D4EFE0" opacity="0.7" transform="rotate(-65 8 40)"/>
-      <ellipse cx="92" cy="40" rx="5" ry="14" fill="#D4EFE0" opacity="0.7" transform="rotate(65 92 40)"/>
-      <circle cx="50" cy="42" r="10" fill="#FFD93D" opacity="0.95"/>
-      <circle cx="50" cy="42" r="5" fill="#FFC107" opacity="0.9"/>
-    </svg>
-    
-    <div class="brand">The Genuine Love Project</div>
-    <h1>A Moment of Pause</h1>
-    <p>You appear to be offline. This is an invitation to breathe, reflect, and return to yourself.</p>
-    
-    <div class="status">
-      <span class="status-dot" aria-label="Offline status indicator"></span>
-      <span id="status-text">Waiting for connection...</span>
+  <main>
+    <h1>You are offline</h1>
+    <p>MyMentalHealthBuddy needs a connection to safely refresh the latest interface.</p>
+    <p>This offline screen is shown only when the network is unavailable. It prevents an old cached page from loading outdated app files after a deploy.</p>
+    <div class="safety">
+      <p><strong>Safety note:</strong> If you may be in immediate danger or need urgent help, call local emergency services. In the U.S. you can call or text <strong>988</strong>.</p>
     </div>
-    
-    <div class="affirmation">
-      <div class="affirmation-label">Healing Affirmation</div>
-      <p class="affirmation-text">"In stillness, I find my strength. In pause, I discover my peace."</p>
-    </div>
-    
-    <button class="btn" onclick="retryConnection()" data-testid="button-retry-connection">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 2v6h-6"></path>
-        <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
-        <path d="M3 22v-6h6"></path>
-        <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
-      </svg>
-      Reconnect
-    </button>
-    
-    <div class="mindfulness">
-      <div class="mindfulness-title">While You Wait</div>
-      <ul class="mindfulness-list">
-        <li>Take 3 slow, deep breaths</li>
-        <li>Notice 5 things you can see around you</li>
-        <li>Place a gentle hand on your heart</li>
-      </ul>
-    </div>
-    
-    <a href="tel:988" class="crisis-link">In crisis? Call or text 988</a>
-  </div>
-  
-  <script>
-    function updateOnlineStatus() {
-      if (navigator.onLine) {
-        document.getElementById('status-text').textContent = 'Connection restored!';
-        document.querySelector('.status-dot').style.background = '#8FBF9F';
-        setTimeout(() => window.location.reload(), 1200);
-      }
-    }
-    
-    function retryConnection() {
-      if (navigator.onLine) {
-        window.location.reload();
-      } else {
-        const status = document.getElementById('status-text');
-        status.textContent = 'Still offline. Take another breath...';
-        setTimeout(() => { status.textContent = 'Waiting for connection...'; }, 3000);
-      }
-    }
-    
-    window.addEventListener('online', updateOnlineStatus);
-    if (navigator.onLine) updateOnlineStatus();
-  </script>
+    <button type="button" onclick="window.location.reload()">Try loading again</button>
+  </main>
 </body>
 </html>
