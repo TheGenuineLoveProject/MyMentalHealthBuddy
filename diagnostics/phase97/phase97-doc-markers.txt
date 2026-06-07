@@ -1,0 +1,5 @@
+40:- Active runtime files scanned: 1815
+41:- Active duplicate families found: 120
+42:- Root shadow trees found: 5
+45:Selected: **index**
+117:Phase 98 should inspect only the selected family and produce a canonical owner + rollback-safe mutation plan.

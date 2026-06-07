@@ -1,0 +1,120 @@
+8d2a6ee48 (HEAD -> clean-push, origin/main, origin/HEAD) phase96 select duplicate family for canonicalization planning
+6a1cfb7ce phase95b verify duplicate ownership audit completion
+803e55ad6 Add durable database schema provisioning and fix analytics beacon
+a7e6e2184 Fix analytics beacon and database schema provisioning issues
+354b99ca3 Fix service worker to prevent stale interfaces after updates
+b9d667708 phase94 close phase93 seo discovery before service worker repair
+74776ebe4 Make several educational and SEO pages accessible on the website
+096ea06f1 Published your App
+c01c7b869 phase88 audit platform structure content components and visual coherence
+4725f8150 phase90 finalize orphan api route wiring before seo routing
+7cb25394d phase88 audit platform structure content components and visual coherence
+30eaec700 phase86 close parser blockers before route wiring
+927422c45 phase85 close content coherence and parser blocker findings
+9b5e6e9dd phase84 enforce active business healing firewall and safe content claims
+50cbdc507 phase83 implement canonical constitution audit and component content map
+b2dd91299 Document platform structure and orphaned API routes
+8a5d069fe phase81 audit platform coherence and enforce zero drift completion rules
+800dfb1be phase78 add client content coherence clarity layer
+428a46eb7 phase77 verify disappeared push and continue safely
+095bc5118 Published your App
+e23348aa7 phase76 verify and recover phase75 page coherence polish
+09e4c1f9c phase76 verify and recover phase75 page coherence polish
+6daae3d57 phase76 add visual route QA gates and screenshot plan
+7a8095542 phase75 add page hero coherence and CTA visibility polish
+717f35b58 phase74 polish Lumi pastel palette and button contrast visibility
+b0ee32832 phase73 verify disappeared command and visual runtime state
+7ae44343d phase72 fix Lumi motion token gate
+9f50e9497 phase71 clean visual payload and verify official Lumi runtime
+4da3bad8e phase70 recover official Lumi visual system with small push payload
+b403dcc4d phase55 audit visual rule implementation and official Lumi avatar gap
+9281d270e Saved progress at the end of the loop
+01c220185 phase67 upgrade lumi to kinetic avatar motion system
+ea897ba6b Published your App
+47fa336f1 phase66 verify and recover lumi presence integration
+457c54202 phase64 add lumi living presence and page scene polish
+0a26f49d9 phase63 add lumi pastel palette and button contrast polish
+bc661df8e phase63 add lumi pastel palette and button contrast polish
+08a7d1e19 phase63 add lumi pastel palette and button contrast polish
+1a3ff12d5 Published your App
+fb1596b1a phase62 add visual coherence execution ledger
+189694f11 phase62 capture visual coherence diagnostics state
+f75a05c1c phase61 visual coherence execution gate
+07b8b38a0 phase61 visual coherence execution gate
+e13e5eaf2 phase58 add visual polish and ux coherence audit
+a14400d43 phase58 implement visual polish and ux coherence audit
+f363f197a checkpoint before phase58 visual polish implementation
+7e8b61910 phase57 visual coherence and ux audit
+a762a3099 phase56 production release package and go live readiness
+0dacd484e phase56 final production package and post deploy verification
+163fbbc78 phase54 release candidate verification and remote sync
+e9d65d59d phase53 production deployment gate verification
+d9e8a1f8b phase50 production deployment evidence package
+3b0143f78 phase49 close deployment readiness scorecard
+41a9b5be7 phase47 deployment candidate readiness review
+7d6a9fccc phase46 investigate secret token hits and remaining moderate vulnerabilities
+023da40c0 phase45 add self-improving platform governance ledger
+72f75fc49 phase45 add self-improving platform governance ledger
+4191e8619 phase44 deployment readiness and vulnerability inventory
+a59bd49cd phase43 production deployment gate verification
+436032885 phase42 production readiness and revenue audit
+dc53adeb4 phase41 remove broken-link-checker and verify route checks
+a3cb1d353 phase40 verify broken-link-checker execution path
+00bba4b26 phase41 remove broken-link-checker and verify route checks
+9b1eb359d phase40 verify broken-link-checker execution path
+aa5f6d6cc phase39 move drizzle-kit to devDependencies
+6d4a3b001 phase39 move drizzle-kit to devDependencies
+31b71f9ac phase38 dependency usage verification
+641bf371a phase37 dependency scope classification
+1d1ad8263 phase36 dependency classification audit
+a26257540 phase35 runtime dependency reference extraction
+8bbe1c897 phase34 runtime vulnerability usage verification
+cf58a12b7 phase33 vulnerable package usage audit
+847f41db1 phase32 vulnerability identification ledger
+153f91385 phase31 apply safe npm audit fix and verify
+475bfbe14 phase30 launch route visibility and revenue gate
+642648ead phase29 security remediation plan
+9fd1d8d6b phase28 dependency audit
+4b36780a2 phase25 revenue checkout readiness verification
+bdc4c1761 phase25 revenue checkout readiness verification
+5788a05d8 phase25 revenue checkout readiness verification
+f87b06e26 phase22 complete secret purge and rebuild
+f7c9515ee Remove hardcoded Stripe publishable key and rebuild safely
+ce69b7711 Phase 20 production gate validation
+b2cf57078 Add phase 19 production safety gate and dependency audit summary
+4a70c5b24 Add phase 18 release gate and dependency audit
+8e17d94c8 Add phase 18 release gate and dependency audit
+619f47b01 Remove obsolete diagnostics and preserve current deployment audits
+1fd175b6e Add phase 17 deployment gate and human secret rotation checklist
+064549080 Add phase 16 revenue launch blocker ledger and clean worktree audit
+b78b2acef Add phase 15 deployment readiness audit
+f75a03ccf Add phase 13 deployment blocker ledger and billing client safety audit
+6649f719f Published your App
+acdc83fb4 Add phase 13 deployment blocker ledger and billing client safety audit
+cbb3597ea Harden client billing service against secret exposure
+aa71bfed0 Ignore generated stripe audit artifacts
+43444a8a4 Ignore generated stripe audit artifacts
+78522b9f8 Ignore generated stripe audit artifacts
+feead6cc0 Add phase 8 Stripe mode blocker guard and secret rotation ledger
+48c9a5bdf Add phase 7 execution ledger and Stripe mode audit
+573b29758 (tag: PHASE5_COVERAGE_AUDIT_20260605_003216) Add phase 5 platform coverage audit reports
+2f7fbd1a4 Add deployment readiness endpoint
+42915ef29 (tag: PHASE1_VERIFIED_20260604_195044) Remove duplicate and conflicting component files from the UI
+11cec09af deployment-ready platform state
+553564c14 Add canonical route taxonomy and audit report to governance documents
+5f99d04df feat(discovery): add canonical discover tools navbar link
+1501a6bb2 docs(discovery): identify visible navigation placement
+ba3780467 docs(discovery): verify discovery route visibility
+a35d0713b docs(discovery): define discovery route wiring
+cd5166059 feat(discovery): add global tool discovery engine
+975e80d3a feat(platform): add canonical wellness tool directory
+d00b1f924 docs(governance): verify advertised tool visibility
+d03bcad68 Update documentation for low-risk route family audit
+ee566a5e5 chore(repo): untrack route backup artifacts
+2c48ed0aa docs(governance): audit public content route family
+614d97713 Published your App
+28662f872 Create inventory of current application routes for future consolidation
+84935e6d3 docs(governance): add route candidate inventory
+e34c0edcc docs(governance): add route consolidation decision ledger
+355b49a17 chore(repo): untrack generated inventory dumps
+3f1dbcaa1 docs(governance): define canonical route ownership
