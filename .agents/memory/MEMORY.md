@@ -9,3 +9,4 @@
 - [Verification foundation](verification-foundation.md) — canonical non-destructive `npm run verify`; docs memory system under `docs/`; distrust placeholder lint/typecheck/test (always exit 0) and `/ready` SPA-fallback contract check.
 - [Canonical palette & homepage](canonical-palette-and-homepage.md) — colors.ts is the locked palette; canonical gold #D4B06A fails AA as text; `/` renders the CanvaLanding stub, not the PageTemplate landing.
 - [rg replace-flag footgun](rg-replace-flag-footgun.md) — `rg -rn`/`-rc` means --replace; output `n` artifacts are NOT file corruption. Use `-n` for line numbers, never `-r` unless replacing.
+- [Schema provisioning drift](schema-provisioning-drift.md) — no live auto-sync; shared/schema.mjs is canonical but ensureSchema() is dead code & drizzle.config points at an near-empty schema dir, so drifted tables silently 500 inserts.

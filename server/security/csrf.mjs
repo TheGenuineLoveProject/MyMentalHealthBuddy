@@ -53,6 +53,10 @@ export function csrfProtection(req, res, next) {
   if (req.path === "/api/leads") return next();
   if (req.path === "/api/contact") return next();
   if (req.path === "/api/feedback") return next();
+  // Anonymous, no-credential analytics beacon (fire-and-forget, no PII, no
+  // auth state). Browser sends it without a CSRF token; it only writes a
+  // single low-risk telemetry row, so it is exempt by design.
+  if (req.path === "/api/analytics/event") return next();
   // v2.0 Prompt 3.2 — public awareness scanning (optionalAuth, stateless,
   // no DB writes unless severity threshold crossed). Authenticated /report
   // and /progress routes pass through the Bearer-token check below.

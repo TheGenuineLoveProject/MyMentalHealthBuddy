@@ -36,14 +36,22 @@ export function trackSignalEvent(eventType, metadata = {}) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        eventType,
-        page: window.location.pathname,
-        metadata: safeMetadata,
+        event_name: eventType,
+        event_category: categoryFor(eventType),
+        path: window.location.pathname,
+        meta: safeMetadata,
       }),
     }).catch(() => {});
   } catch {
     // Silent failure — never block UI
   }
+}
+
+function categoryFor(eventType) {
+  if (eventType.startsWith('newsletter')) return 'newsletter';
+  if (eventType.startsWith('blog')) return 'content';
+  if (eventType === 'pricing_view' || eventType.startsWith('checkout')) return 'conversion';
+  return 'engagement';
 }
 
 export function resetSignalTracking() {
