@@ -1,0 +1,1085 @@
+client/src/pages/admin/SocialLibrary.jsx:148:                  placeholder="e.g., Gentle Invitation"
+client/src/pages/admin/SocialLibrary.jsx:174:                placeholder="Template structure with [placeholders]..."
+client/src/pages/admin/SocialLibrary.jsx:187:                placeholder="e.g., Calm, non-clinical, consent-based language"
+client/src/pages/admin/AdminPublishing.jsx:272:                      placeholder="A gentle title for your post..."
+client/src/pages/admin/AdminPublishing.jsx:282:                      placeholder="A brief summary..."
+client/src/pages/admin/AdminPublishing.jsx:307:                      placeholder="Write your compassionate, healing-focused content here..."
+client/src/pages/admin/AdminSocial.jsx:569:          <input value={form.title} onChange={e => updateField("title", e.target.value)} placeholder="Post title" className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white" data-testid="input-title" />
+client/src/pages/admin/AdminSocial.jsx:590:        <textarea value={form.content} onChange={e => updateField("content", e.target.value)} rows={4} placeholder="Write your post content..." className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white resize-y" data-testid="textarea-content" />
+client/src/pages/admin/AdminSocial.jsx:608:        <textarea value={form.captions[activeCaption] || ""} onChange={e => updateCaption(activeCaption, e.target.value)} rows={3} placeholder={`${activeCaption} caption...`} className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white resize-y" data-testid={`textarea-caption-${activeCaption}`} />
+client/src/pages/admin/AdminSocial.jsx:620:        <input value={form.hashtags} onChange={e => updateField("hashtags", e.target.value)} placeholder="#TheGenuineLoveProject #SelfCompassion" className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white" data-testid="input-hashtags" />
+client/src/pages/admin/AdminSocial.jsx:635:            <input value={form.gentleCtaUrl} onChange={e => updateField("gentleCtaUrl", e.target.value)} placeholder="/tools" className="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white" data-testid="input-cta-url" />
+client/src/pages/admin/AdminSocial.jsx:706:              <input value={form.canvaUrl} onChange={e => updateField("canvaUrl", e.target.value)} placeholder="https://canva.com/..." className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white" data-testid="input-canva" />
+client/src/pages/admin/AdminSocial.jsx:710:              <input value={form.mediaAssetUrl} onChange={e => updateField("mediaAssetUrl", e.target.value)} placeholder="https://..." className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white" data-testid="input-media" />
+client/src/pages/admin/AdminSocial.jsx:942:          <input value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Spring 2026 Launch" className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm" data-testid="input-campaign-name" />
+client/src/pages/admin/AdminSocial.jsx:946:          <textarea value={goal} onChange={e => setGoal(e.target.value)} rows={2} placeholder="Drive newsletter signups..." className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm resize-y" data-testid="textarea-campaign-goal" />
+client/src/pages/admin/AdminTools.jsx:543:              placeholder="Search tools..."
+client/src/pages/admin/NarrativeOpsConsole.jsx:771:              placeholder="Post title"
+client/src/pages/admin/NarrativeOpsConsole.jsx:800:            placeholder="Main content..."
+client/src/pages/admin/NarrativeOpsConsole.jsx:833:              placeholder={`${PLATFORM_INFO[platformTab]?.name} caption...`}
+client/src/pages/admin/NarrativeOpsConsole.jsx:852:              placeholder="e.g. Educational only. Not therapy."
+client/src/pages/admin/NarrativeOpsConsole.jsx:879:              placeholder="https://www.canva.com/design/..."
+client/src/pages/admin/NarrativeOpsConsole.jsx:889:              placeholder="Image/video URL..."
+client/src/pages/admin/NarrativeOpsConsole.jsx:912:              placeholder="#selflove #healing #mentalwellness"
+client/src/pages/admin/NarrativeOpsConsole.jsx:1106:                  placeholder="e.g. Launch Week, Journal Series"
+client/src/pages/admin/NarrativeOpsConsole.jsx:1117:                  placeholder="e.g. Drive 200 newsletter signups"
+client/src/pages/admin/NarrativeOpsConsole.jsx:1283:              placeholder="Or paste custom URL..."
+client/src/pages/admin/NarrativeOpsConsole.jsx:1317:                placeholder="e.g. launch-week-feb"
+client/src/pages/admin/NarrativeOpsConsole.jsx:1328:                placeholder="e.g. carousel-1, cta-button"
+client/src/pages/admin/SocialCalendar.jsx:415:                    placeholder="e.g., Self-Compassion Monday"
+client/src/pages/admin/SocialGenerator.jsx:371:                      placeholder="e.g., Your nervous system isn't broken..."
+client/src/pages/admin/SocialGenerator.jsx:406:                      placeholder="Write your main content here. Use trauma-informed language..."
+client/src/pages/admin/SocialGenerator.jsx:424:                        placeholder="e.g., Save this for later..."
+client/src/pages/admin/SocialGenerator.jsx:438:                        placeholder="#mentalhealth #healing #wellness"
+client/src/pages/admin/AdminUsers.jsx:130:                    placeholder="Search admin links..."
+client/src/pages/admin/AuditLogExplorer.jsx:139:                  placeholder="Search logs..."
+client/src/pages/admin/AuditLogExplorer.jsx:152:                <SelectValue placeholder="Filter by action" />
+client/src/pages/admin/ContentStudioAdmin.jsx:192:                  placeholder="Search content..."
+client/src/pages/admin/ContentStudioAdmin.jsx:256:                        placeholder={`Enter ${tier} version...`}
+client/src/pages/admin/FeatureFlags.jsx:192:              placeholder="Search flags..."
+client/src/pages/admin/FeatureFlags.jsx:223:                    placeholder="e.g., new_feature"
+client/src/pages/admin/FeatureFlags.jsx:232:                    placeholder="e.g., New Feature"
+client/src/pages/admin/FeatureFlags.jsx:242:                  placeholder="What does this feature do?"
+client/src/pages/admin/NarrativeDrafts.jsx:361:                                placeholder="Edit caption (leave empty to use original)..."
+client/src/pages/admin/NarrativeDrafts.jsx:372:                                placeholder="Internal notes (not published)..."
+client/src/pages/admin/SocialStudioAdmin.jsx:525:                            <SelectValue placeholder="Select theme..." />
+client/src/pages/admin/SocialStudioAdmin.jsx:563:                        placeholder="Write your compassionate, healing-focused content here..."
+client/src/pages/admin/SocialStudioAdmin.jsx:901:                        placeholder="e.g., self-compassion, boundaries, healing" 
+client/src/pages/admin/SocialStudioAdmin.jsx:1019:                      placeholder="e.g., instagram, newsletter" 
+client/src/pages/admin/SocialStudioAdmin.jsx:1028:                      placeholder="e.g., social, email" 
+client/src/pages/admin/SocialStudioAdmin.jsx:1037:                      placeholder="e.g., healing-week" 
+client/src/pages/admin/SocialStudioAdmin.jsx:1046:                      placeholder="e.g., post-1" 
+client/src/pages/admin/SocialStudioAdmin.jsx:1104:                        placeholder="Search..." 
+client/src/pages/admin/SocialStudioAdmin.jsx:1242:                      placeholder="Comma-separated words..."
+client/src/pages/account/DeleteAccount.jsx:142:                placeholder="Type confirmation text"
+client/src/pages/account/Profile.jsx:163:                      placeholder="Your city (optional)"
+client/src/pages/account/Profile.jsx:233:                placeholder="Tell us a bit about yourself and your wellness journey..."
+client/src/pages/account/Security.jsx:264:                    placeholder="Enter current password"
+client/src/pages/account/Security.jsx:286:                    placeholder="Enter new password"
+client/src/pages/account/Security.jsx:307:                  placeholder="Confirm new password"
+client/src/pages/account/Security.jsx:435:                        placeholder="000000"
+client/src/pages/account/Settings.jsx:130:                    placeholder="Your name" 
+client/src/pages/account/Settings.jsx:140:                    placeholder="you@example.com"
+client/src/pages/dashboard/Journal.jsx:118:              placeholder="Give your entry a title..."
+client/src/pages/dashboard/Journal.jsx:129:              placeholder="Write freely... this is your safe space."
+client/src/pages/dashboard/Journal.jsx:265:                    placeholder="Search your entries..."
+client/src/pages/dashboard/MoodTracker.jsx:227:                placeholder="What's on your mind? Any context you'd like to add..."
+client/src/pages/hubs/HubsIndexPage.jsx:333:          placeholder="Search topics..."
+client/src/pages/pathways/CalmPlan.jsx:131:              placeholder="Add any reminders, intentions, or notes for yourself..."
+client/src/pages/pathways/Favorites.jsx:98:              placeholder="Search favorites..."
+client/src/pages/pathways/ReflectionHistory.jsx:164:              placeholder="Search reflections..."
+client/src/pages/pathways/ValuesToActions.jsx:112:                placeholder="Add your own value..."
+client/src/pages/pathways/ValuesToActions.jsx:149:                            placeholder="Small action..."
+client/src/pages/tools/ToolDirectoryPage.jsx:29:        placeholder="Search tools..."
+client/src/pages/tools/BoundaryBuilderTool.jsx:11:    placeholder: "e.g. rest, honesty, my time, my body, my children's safety",
+client/src/pages/tools/BoundaryBuilderTool.jsx:17:    placeholder: "e.g. calling after 9pm, raising your voice, commenting on my body",
+client/src/pages/tools/BoundaryBuilderTool.jsx:23:    placeholder: "e.g. exhausted, unsafe, dismissed, on edge",
+client/src/pages/tools/BoundaryBuilderTool.jsx:29:    placeholder: "e.g. text instead of call after 9pm, lower your voice, change the subject",
+client/src/pages/tools/BoundaryBuilderTool.jsx:35:    placeholder: "e.g. let calls go to voicemail, leave the room, end the visit early",
+client/src/pages/tools/BoundaryBuilderTool.jsx:126:                placeholder={s.placeholder}
+client/src/pages/tools/CognitiveDistortionChecker.jsx:119:            placeholder="e.g. 'I always mess everything up. They probably hate me.'"
+client/src/pages/tools/ManipulationDetector.jsx:188:            placeholder="e.g. 'After everything I've done for you, you're going to leave? You're imagining things — that never happened.'"
+client/src/pages/tools/ReframePage.jsx:116:                placeholder="e.g., I am failing at everything or I will never get better"
+client/src/pages/tools/ReframePage.jsx:117:                className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm"
+client/src/pages/tools/CommunityCheckin.jsx:149:                  placeholder="Share your thoughts with the community..."
+client/src/pages/tools/GriefLetter.jsx:118:                placeholder="The person or thing you're writing to..."
+client/src/pages/tools/GriefLetter.jsx:127:                placeholder="Begin when you're ready..."
+client/src/pages/tools/MeaningMap.jsx:152:                placeholder="Add a core value..."
+client/src/pages/tools/MeaningMap.jsx:185:                  placeholder="Take your time..."
+client/src/pages/tools/MeaningMap.jsx:202:              placeholder="My life is meaningful because..."
+client/src/pages/tools/Reframe.jsx:95:                  placeholder="e.g., 'I'm not good enough' or 'This will never work out'"
+client/src/pages/tools/Reframe.jsx:118:                        placeholder="Take your time..."
+client/src/pages/tools/Reframe.jsx:141:                        placeholder="Consider..."
+client/src/pages/tools/Reframe.jsx:156:                    placeholder="Write a more balanced version of your original thought..."
+client/src/pages/tools/WeeklyReflection.jsx:12:  { id: "highlight", label: "What was the highlight of your week?", placeholder: "A moment that brought you joy..." },
+client/src/pages/tools/WeeklyReflection.jsx:13:  { id: "challenge", label: "What challenge did you face?", placeholder: "Something difficult you encountered..." },
+client/src/pages/tools/WeeklyReflection.jsx:14:  { id: "learned", label: "What did you learn about yourself?", placeholder: "An insight or realization..." },
+client/src/pages/tools/WeeklyReflection.jsx:15:  { id: "grateful", label: "What are you grateful for this week?", placeholder: "People, moments, or things you appreciate..." },
+client/src/pages/tools/WeeklyReflection.jsx:16:  { id: "intention", label: "What's your intention for next week?", placeholder: "How you want to show up..." }
+client/src/pages/tools/WeeklyReflection.jsx:153:              placeholder={currentQuestion.placeholder}
+client/src/pages/discovery/DiscoveryPage.jsx:32:          placeholder="Search tools..."
+client/src/pages/Contact.jsx:183:                          placeholder="Your name"
+client/src/pages/Contact.jsx:198:                          placeholder="you@example.com"
+client/src/pages/Contact.jsx:215:                        placeholder="How can we help?"
+client/src/pages/Contact.jsx:231:                        placeholder="Tell us more about how we can support you..."
+client/src/pages/DesignSystem.jsx:356:                        placeholder="Enter your email..."
+client/src/pages/Invite.jsx:164:                placeholder="friend@example.com"
+client/src/pages/Invite.jsx:165:                className="flex-1 px-4 py-3 rounded-xl border bg-white/50 dark:bg-black/20 text-foreground placeholder:text-muted-foreground"
+client/src/pages/Reflection.jsx:337:          placeholder={pickPrompt()}
+client/src/pages/AffirmationWall.jsx:220:              placeholder="Write an affirmation to share with the community..."
+client/src/pages/AdminLogin.jsx:156:                  placeholder="Paste your ADMIN_TOKEN"
+client/src/pages/WireframeTemplates.jsx:481:              placeholder="Your email address"
+client/src/pages/WireframeTemplates.jsx:1002:            placeholder="Search articles, topics, or practices..."
+client/src/pages/WireframeTemplates.jsx:1243:              placeholder="you@example.com"
+client/src/pages/WireframeTemplates.jsx:1259:                placeholder="••••••••"
+client/src/pages/Login.jsx:143:                    placeholder="you@email.com"
+client/src/pages/Login.jsx:164:                    placeholder="Your password"
+client/src/pages/Register.jsx:144:                    placeholder="Your name"
+client/src/pages/Register.jsx:165:                    placeholder="you@email.com"
+client/src/pages/Register.jsx:187:                    placeholder="Create a password (8+ characters)"
+client/src/pages/Register.jsx:208:                    placeholder="Confirm password"
+client/src/pages/ResetPassword.jsx:279:                    placeholder="Min 6 characters"
+client/src/pages/ResetPassword.jsx:315:                    placeholder="Confirm your password"
+client/src/pages/ForgotPassword.jsx:197:                    placeholder="you@example.com"
+client/src/pages/QAPage.jsx:215:              placeholder="Search questions..."
+client/src/pages/JournalPage.jsx:322:              placeholder="A word or phrase to remember this by..."
+client/src/pages/JournalPage.jsx:323:              className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+client/src/pages/JournalPage.jsx:335:              placeholder="Whatever is on your mind — no pressure, no structure needed..."
+client/src/pages/JournalPage.jsx:337:              className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm"
+client/src/pages/AgentInteraction.jsx:142:            placeholder="e.g. summarize_session, plan_protocol"
+client/src/pages/AgentInteraction.jsx:155:            placeholder="Provide the message or context for the agent…"
+client/src/pages/GlossaryPage.jsx:126:                  placeholder="Search terms..."
+client/src/pages/DailyReflection.jsx:205:              placeholder="Write here if it feels right..."
+client/src/pages/DailyReflection.jsx:206:              className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/15 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm resize-none focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/55"
+client/src/pages/DailyReflection.jsx:224:              placeholder="I intend to..."
+client/src/pages/DailyReflection.jsx:225:              className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/15 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/55"
+client/src/pages/PeacescapePage.jsx:250:              <h3 className="font-bold mb-1" style={{ color: "var(--glp-sage-deep)" }}>Avatar customizer (coming soon)</h3>
+client/src/pages/GratitudePractice.jsx:263:              placeholder="Write what comes to mind... even a single word counts."
+client/src/pages/BehaviorChangePage.tsx:134:                placeholder="e.g., Setting better boundaries, starting a morning routine..."
+client/src/pages/BehaviorChangePage.tsx:295:                placeholder="What's coming up for you as you work through this?"
+client/src/pages/CognitiveArchitecturePage.tsx:246:              placeholder="Search models, tags, or concepts..."
+client/src/pages/CognitiveArchitecturePage.tsx:247:              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/CollaborativeLabPage.tsx:373:                    placeholder="Share what you've learned, what you're questioning, or wisdom for fellow travelers..."
+client/src/pages/CollaborativeLabPage.tsx:374:                    className="w-full h-32 px-4 py-3 rounded-xl border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 resize-none focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
+client/src/pages/CollaborativeLabPage.tsx:436:                placeholder="Take your time with this prompt. There's no rush, no right answer..."
+client/src/pages/CollaborativeLabPage.tsx:437:                className="w-full h-40 px-4 py-3 rounded-xl border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 resize-none focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
+client/src/pages/DailyWisdomOraclePage.tsx:305:              placeholder="What does this wisdom mean to you today? How might you apply it?"
+client/src/pages/DailyWisdomOraclePage.tsx:306:              className="w-full h-24 p-4 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/KnowledgeSynthesisPage.tsx:290:                placeholder="Search concepts..."
+client/src/pages/KnowledgeSynthesisPage.tsx:291:                className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/KnowledgeSynthesisPage.tsx:304:                  placeholder="Concept name"
+client/src/pages/KnowledgeSynthesisPage.tsx:305:                  className="w-full px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400"
+client/src/pages/KnowledgeSynthesisPage.tsx:311:                  placeholder="Your understanding of this concept..."
+client/src/pages/KnowledgeSynthesisPage.tsx:312:                  className="w-full h-24 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none"
+client/src/pages/KnowledgeSynthesisPage.tsx:328:                  placeholder="Sources (one per line)"
+client/src/pages/KnowledgeSynthesisPage.tsx:329:                  className="w-full h-16 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none"
+client/src/pages/KnowledgeSynthesisPage.tsx:392:                  placeholder="What did you learn about?"
+client/src/pages/KnowledgeSynthesisPage.tsx:393:                  className="w-full px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400"
+client/src/pages/KnowledgeSynthesisPage.tsx:399:                  placeholder="Key takeaways (one per line)"
+client/src/pages/KnowledgeSynthesisPage.tsx:400:                  className="w-full h-20 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none"
+client/src/pages/KnowledgeSynthesisPage.tsx:406:                  placeholder="Questions that arose (one per line)"
+client/src/pages/KnowledgeSynthesisPage.tsx:407:                  className="w-full h-16 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none"
+client/src/pages/KnowledgeSynthesisPage.tsx:413:                  placeholder="How might you apply this? (one per line)"
+client/src/pages/KnowledgeSynthesisPage.tsx:414:                  className="w-full h-16 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none"
+client/src/pages/KnowledgeSynthesisPage.tsx:479:                  placeholder="Source (book, article, conversation...)"
+client/src/pages/KnowledgeSynthesisPage.tsx:480:                  className="w-full px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400"
+client/src/pages/KnowledgeSynthesisPage.tsx:486:                  placeholder="The core insight in your own words..."
+client/src/pages/KnowledgeSynthesisPage.tsx:487:                  className="w-full h-24 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none"
+client/src/pages/KnowledgeSynthesisPage.tsx:493:                  placeholder="What are the implications? (one per line)"
+client/src/pages/KnowledgeSynthesisPage.tsx:494:                  className="w-full h-16 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none"
+client/src/pages/KnowledgeSynthesisPage.tsx:500:                  placeholder="Related concepts (comma-separated)"
+client/src/pages/KnowledgeSynthesisPage.tsx:501:                  className="w-full px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400"
+client/src/pages/PhilosophicalInquiryPage.tsx:232:                  placeholder="Enter a topic, belief, or question to examine..."
+client/src/pages/PhilosophicalInquiryPage.tsx:233:                  className="w-full p-4 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 mb-4"
+client/src/pages/PhilosophicalInquiryPage.tsx:281:                      placeholder="Reflect and respond..."
+client/src/pages/PhilosophicalInquiryPage.tsx:282:                      className="w-full h-24 p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/WisdomPracticesPage.tsx:302:                placeholder="Sit with this question. What arises?"
+client/src/pages/WisdomPracticesPage.tsx:303:                className="w-full h-40 px-4 py-3 rounded-xl border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 resize-none"
+client/src/pages/WisdomPracticesPage.tsx:346:                    placeholder={`I'm grateful for...`}
+client/src/pages/WisdomPracticesPage.tsx:347:                    className="w-full px-3 py-2 rounded-lg border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/WisdomPracticesPage.tsx:355:                placeholder="What do these have in common? What pattern of blessing emerges?"
+client/src/pages/WisdomPracticesPage.tsx:356:                className="w-full h-20 px-3 py-2 rounded-lg border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 resize-none mb-4"
+client/src/pages/WisdomPracticesPage.tsx:413:                  placeholder="Any insights or reflections from your practice?"
+client/src/pages/WisdomPracticesPage.tsx:414:                  className="w-full h-24 px-3 py-2 rounded-lg border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/WisdomSynthesisPage.tsx:287:                placeholder="Write freely... What's on your mind? What did you learn today? What pattern are you noticing?"
+client/src/pages/WisdomSynthesisPage.tsx:288:                className="w-full h-40 p-4 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/Admin.jsx:641:  const mockUsers = [
+client/src/pages/Admin.jsx:665:                  placeholder="Search users..." 
+client/src/pages/Admin.jsx:694:                {mockUsers.map(user => (
+client/src/pages/ChallengeDay.jsx:215:              placeholder="Write your reflection here... (only you see this)"
+client/src/pages/CheckIn.jsx:306:                placeholder="What's on your mind?"
+client/src/pages/ContentAdminDashboard.jsx:220:              placeholder="Post title or hook"
+client/src/pages/ContentAdminDashboard.jsx:231:              placeholder="Write your social media post content..."
+client/src/pages/ContentAdminDashboard.jsx:396:                  placeholder="0.00"
+client/src/pages/ContentAdminDashboard.jsx:411:                placeholder="Product title"
+client/src/pages/ContentAdminDashboard.jsx:422:                placeholder="Describe your product..."
+client/src/pages/ContentIndexPage.jsx:225:                placeholder="Search all content..."
+client/src/pages/DiscernmentDashboard.jsx:308:          placeholder="Paste a message here…"
+client/src/pages/GuidedJournalingPage.tsx:348:                placeholder="Take your time. Write what comes naturally..."
+client/src/pages/GuidedJournalingPage.tsx:349:                className="w-full h-48 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 resize-none"
+client/src/pages/InsightCardsPage.tsx:224:              placeholder="Search insights or tags..."
+client/src/pages/InsightCardsPage.tsx:227:              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
+client/src/pages/InsightCardsPage.tsx:283:              placeholder="Write your insight, quote, or wisdom..."
+client/src/pages/InsightCardsPage.tsx:284:              className="w-full h-32 px-4 py-3 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none resize-none"
+client/src/pages/InsightCardsPage.tsx:292:                placeholder="Source (optional)"
+client/src/pages/InsightCardsPage.tsx:293:                className="px-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
+client/src/pages/InsightCardsPage.tsx:300:                placeholder="Tags (comma separated)"
+client/src/pages/InsightCardsPage.tsx:301:                className="px-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
+client/src/pages/MoodPage.jsx:469:            placeholder="Any thoughts you'd like to add..."
+client/src/pages/MoodPage.jsx:471:            className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm"
+client/src/pages/ProtocolSession.jsx:106:            placeholder="Type what comes up. There are no wrong answers."
+client/src/pages/Publishing.jsx:306:                  placeholder="Enter draft title..."
+client/src/pages/SystemsThinkingPage.tsx:219:                placeholder="Name your system (e.g., 'Team Productivity')"
+client/src/pages/SystemsThinkingPage.tsx:220:                className="w-full p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 mb-4"
+client/src/pages/SystemsThinkingPage.tsx:232:                    placeholder="Add an element..."
+client/src/pages/SystemsThinkingPage.tsx:233:                    className="flex-1 p-2 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/WellnessGlossaryPage.jsx:446:              placeholder="Search terms..."
+client/src/pages/BlogEditor.jsx:205:                placeholder="Enter your post title..."
+client/src/pages/BlogEditor.jsx:206:                className="w-full text-3xl font-bold text-[var(--glp-sage-deep)] bg-transparent border-none focus:outline-none placeholder:text-[var(--glp-ink)]/30"
+client/src/pages/BlogEditor.jsx:215:                placeholder="Write your story..."
+client/src/pages/BlogEditor.jsx:217:                className="w-full text-base text-[var(--glp-ink)]/90 bg-transparent border-none focus:outline-none placeholder:text-[var(--glp-ink)]/30 resize-none leading-relaxed"
+client/src/pages/BlogEditor.jsx:231:                  placeholder="https://example.com/image.jpg"
+client/src/pages/BlogEditor.jsx:245:                  placeholder="wellness, self-care, mindfulness"
+client/src/pages/BlogEditor.jsx:259:                placeholder="A brief summary of your post (auto-generated if left empty)..."
+client/src/pages/BlogIndex.jsx:138:                placeholder="Search articles..."
+client/src/pages/BlogIndex.jsx:164:              {searchQuery ? "No articles match your search" : "New posts are coming soon. You're welcome here."}
+client/src/pages/BlogPost.jsx:58:            placeholder="Write a reply..."
+client/src/pages/BlogPost.jsx:109:            placeholder="Share your thoughts..."
+client/src/pages/BoundariesPage.jsx:268:                  placeholder="e.g., When someone asks me to work late..."
+client/src/pages/BoundariesPage.jsx:281:                  placeholder="What you might say..."
+client/src/pages/BoundariesPage.jsx:295:                  placeholder="A gentler way to say the same thing..."
+client/src/pages/CoherenceLadderPage.jsx:330:                    placeholder="Any notes or context? (you can skip this)"
+client/src/pages/ContentStudioPage.tsx:257:                    placeholder="Give your content a title..."
+client/src/pages/ContentStudioPage.tsx:268:                    placeholder="Paste or type your content here... This will be transformed into multiple platform-specific formats."
+client/src/pages/CourseCatalog.jsx:188:              placeholder="Search courses..."
+client/src/pages/CourseCatalog.jsx:191:              className="pl-10 min-h-[44px] placeholder:text-[#5a6a5a]"
+client/src/pages/DailyRitualPage.tsx:457:                placeholder="Write whatever comes up... no one will judge."
+client/src/pages/MetaLearningPage.tsx:221:                    placeholder="What did you learn?"
+client/src/pages/MetaLearningPage.tsx:222:                    className="w-full p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/MetaLearningPage.tsx:276:                    placeholder="Key insights, difficulties, connections..."
+client/src/pages/MetaLearningPage.tsx:277:                    className="w-full h-20 p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/MirrorPage.tsx:171:            placeholder="What's on your mind? Write at least 10 characters..."
+client/src/pages/MirrorPage.tsx:172:            className="min-h-[150px] bg-white border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:ring-2 focus:ring-sage-400/50"
+client/src/pages/MovementSnacksPage.jsx:293:                      placeholder="How do you feel? (you can skip this)"
+client/src/pages/PracticeLibrary.jsx:307:            placeholder="Search practices..."
+client/src/pages/Pricing.jsx:494:                  placeholder="your@email.com"
+client/src/pages/StudyVaultPage.jsx:432:                    placeholder="Search topics..."
+client/src/pages/ValuesFinderPage.jsx:251:                  placeholder="Type a value that resonates with you..."
+client/src/pages/ValuesFinderPage.jsx:264:                  placeholder="Why do these values matter to you? What do they mean in your life?"
+client/src/pages/WellnessGoals.jsx:190:                  placeholder="Enter your wellness goal..."
+client/src/pages/WellnessGoals.jsx:211:                    placeholder="Target"
+client/src/components/admin/SOPMonitorPanel.jsx:14: * sign-in placeholder rather than a red "unavailable" alert. */
+client/src/components/admin/SOPMonitorPanel.jsx:122:  // Render a calm sign-in placeholder, NOT a red alert. This keeps the
+client/src/components/admin/OperationsPanel.jsx:103:    // neutral "sign in" placeholder (NOT a red role="alert" panel). The
+client/src/components/admin/OrchestratorTestPanel.jsx:175:              placeholder="e.g. crisis-response-v1"
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:273:                placeholder="crisis-response-v1"
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:285:                placeholder="Crisis Response Agent"
+client/src/components/admin/ConsciousnessRegistryPanel.jsx:325:              placeholder="What is this agent responsible for? Who supervises?"
+client/src/components/admin/DailyToolsPanel.jsx:234:            placeholder="Search tools..."
+client/src/components/atlas/PhilosophicalAtlas.jsx:116:            placeholder="Take your time with this question..."
+client/src/components/autodidact/AutodidactForge.tsx:139:            placeholder="What question drives your learning?"
+client/src/components/autodidact/AutodidactForge.tsx:260:              placeholder="What's your hypothesis or approach?"
+client/src/components/autodidact/AutodidactForge.tsx:299:          placeholder="I am someone who..."
+client/src/components/beliefs/BeliefMapper.tsx:87:          placeholder="A belief I notice in myself..."
+client/src/components/bias/BiasBlindSpots.tsx:146:              placeholder="What was the situation?"
+client/src/components/bias/BiasBlindSpots.tsx:153:              placeholder="How did you notice it?"
+client/src/components/bias/BiasBlindSpots.tsx:223:              placeholder="Your ongoing reflections on bias awareness..."
+client/src/components/chat/AIChatPanel.tsx:247:          placeholder="What feels most present right now?"
+client/src/components/consciousness/QuestionReflection.tsx:107:        placeholder="Your reflection..."
+client/src/components/consciousness/SilenceMode.tsx:43:        placeholder="Write freely. Nothing will be analyzed or reflected back. This is just for you."
+client/src/components/creative/CreativeProblemSolver.jsx:185:                placeholder="What problem are you working on?"
+client/src/components/creative/CreativeProblemSolver.jsx:196:                placeholder="Describe the problem in detail..."
+client/src/components/creative/CreativeProblemSolver.jsx:210:                placeholder="Add an idea..."
+client/src/components/decision/DecisionArchitecture.jsx:100:            placeholder="Add an option to consider..."
+client/src/components/decision/DecisionArchitecture.jsx:155:                      placeholder="Add benefit..."
+client/src/components/decision/DecisionArchitecture.jsx:180:                      placeholder="Add drawback..."
+client/src/components/decision/DecisionArchitecture.jsx:215:            placeholder="What could go wrong? What are you not seeing?"
+client/src/components/decision/DecisionArchitecture.jsx:264:          placeholder="What decision are you facing?"
+client/src/components/epistemic/EpistemicCalibration.tsx:105:              placeholder="I predict that..."
+client/src/components/epistemic/EpistemicCalibration.tsx:219:              placeholder="I believe that..."
+client/src/components/existential/ExistentialInquiry.tsx:106:              placeholder="There are no right answers here. Just write what comes..."
+client/src/components/flow/TimedSession.tsx:131:        placeholder="Start writing... let your thoughts flow without judgment."
+client/src/components/inquiry/DialecticalInquiry.tsx:115:              placeholder="Enter a belief, question, or dilemma..."
+client/src/components/inquiry/DialecticalInquiry.tsx:173:            placeholder="Write your response..."
+client/src/components/journey/JourneyComposer.tsx:145:          placeholder="Your reflection for this step..."
+client/src/components/logic/LogicLatticeLab.tsx:131:                placeholder="Enter your reasoning..."
+client/src/components/logic/LogicLatticeLab.tsx:213:          placeholder="What argument or position do you want to explore?"
+client/src/components/marketing/EmailCapture.jsx:77:          placeholder="you@example.com"
+client/src/components/mastery/DeepWorkTracker.tsx:125:                placeholder="What are you working on?"
+client/src/components/mastery/DeepWorkTracker.tsx:168:              placeholder="One item per line..."
+client/src/components/mastery/DeepWorkTracker.tsx:179:              placeholder="One item per line..."
+client/src/components/mastery/MentalModelsLibrary.tsx:182:                  placeholder="What situation are you thinking about?"
+client/src/components/mastery/MentalModelsLibrary.tsx:193:                  placeholder="Apply the model's key question..."
+client/src/components/mastery/MentalModelsLibrary.tsx:204:                  placeholder="What did you learn from applying this model?"
+client/src/components/mastery/SkillForge.tsx:194:              placeholder="What specific aspect are you working on?"
+client/src/components/mastery/SkillForge.tsx:285:              placeholder="e.g., Public Speaking, Piano, Programming"
+client/src/components/metacognition/MetacognitionDashboard.tsx:136:                placeholder="Any context for this state?"
+client/src/components/metacognition/MetacognitionDashboard.tsx:264:              placeholder="Morning, after exercise, quiet environment, etc."
+client/src/components/metacognition/MetaCognitionStudio.tsx:138:            placeholder="What situation or belief are you examining? (optional)"
+client/src/components/metacognition/MetaCognitionStudio.tsx:156:                placeholder="Your reflection..."
+client/src/components/metacognition/MetaCognitionStudio.tsx:188:                placeholder="I believe that..."
+client/src/components/metacognition/MetaCognitionStudio.tsx:199:                placeholder="What supports this belief?"
+client/src/components/metacognition/MetaCognitionStudio.tsx:210:                placeholder="What might contradict this belief?"
+client/src/components/metacognition/MetaCognitionStudio.tsx:259:                placeholder="What situation or experience do you want to explore?"
+client/src/components/metacognition/MetaCognitionStudio.tsx:303:                placeholder="Your reflection at this level..."
+client/src/components/mi/MITools.tsx:300:            placeholder="e.g., Take 3 deep breaths before responding"
+client/src/components/mi/MITools.tsx:314:            placeholder="e.g., Tomorrow morning when I wake up"
+client/src/components/mi/MITools.tsx:328:            placeholder="e.g., If I forget, I'll set a phone reminder"
+client/src/components/mi/MicroCommitmentEngine.tsx:21:    placeholder: "e.g., Take 3 deep breaths before bed tonight",
+client/src/components/mi/MicroCommitmentEngine.tsx:27:    placeholder: "e.g., Tonight at 10pm, in my bedroom",
+client/src/components/mi/MicroCommitmentEngine.tsx:33:    placeholder: "e.g., I might forget or get distracted",
+client/src/components/mi/MicroCommitmentEngine.tsx:39:    placeholder: "e.g., Set a phone reminder for 9:55pm",
+client/src/components/mi/MicroCommitmentEngine.tsx:152:        placeholder={currentPrompt.placeholder}
+client/src/components/mi/MicroCommitmentEngine.tsx:154:        className="w-full p-3 rounded-lg border border-rose-200 dark:border-rose-800 bg-white/80 dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-rose-300 dark:focus:ring-rose-700 resize-none"
+client/src/components/mindscape/MindscapeNavigator.tsx:204:              placeholder="Notes (optional)"
+client/src/components/mindscape/MindscapeNavigator.tsx:264:              placeholder="Context (optional)"
+client/src/components/modules/ModulesPanel.tsx:142:              placeholder="Because... (one honest reason is enough)"
+client/src/components/modules/ModulesPanel.tsx:153:              placeholder="Example: 2 minutes of breathing after I brush my teeth"
+client/src/components/modules/ModulesPanel.tsx:167:              placeholder="Example: Tonight at 8pm on my bed"
+client/src/components/modules/ModulesPanel.tsx:178:              placeholder="Example: I feel tired and scroll my phone"
+client/src/components/modules/ModulesPanel.tsx:189:              placeholder="If I start scrolling, then I put the phone down for 60 seconds and breathe."
+client/src/components/moral/MoralReasoningLab.tsx:151:                  placeholder="Work through your reasoning here..."
+client/src/components/narrative/NarrativeIdentityStudio.tsx:82:                placeholder="Chapter title (e.g., 'The College Years')"
+client/src/components/narrative/NarrativeIdentityStudio.tsx:90:                placeholder="Timeframe (e.g., '2015-2019')"
+client/src/components/narrative/NarrativeIdentityStudio.tsx:98:              placeholder="What happened in this chapter? What was the arc?"
+client/src/components/paradox/ParadoxCartographer.tsx:153:            placeholder="What do you notice at this position?"
+client/src/components/paradox/ParadoxCartographer.tsx:185:            placeholder="What emerges when you hold both poles?"
+client/src/components/paradox/ParadoxCartographer.tsx:215:              placeholder="What synthesis emerges from this paradox?"
+client/src/components/patterns/InsightPatternLab.tsx:192:          placeholder="What do you notice about these patterns?"
+client/src/components/progress/TinyStepPanel.jsx:38:        placeholder="Example: '3 slow breaths', 'write one honest sentence', 'drink a glass of water'..."
+client/src/components/publishing/NewsletterInvite.jsx:56:              placeholder="your@email.com"
+client/src/components/publishing/NewsletterInvite.jsx:102:                placeholder="your@email.com"
+client/src/components/search/RouteSearchBox.jsx:5:export function RouteSearchBox({ placeholder = "Search tools, hubs, paths..." }) {
+client/src/components/search/RouteSearchBox.jsx:20:        placeholder={placeholder}
+client/src/components/semantic/SemanticMapping.tsx:124:            placeholder="The word..."
+client/src/components/semantic/SemanticMapping.tsx:131:            placeholder="What does it mean to you?"
+client/src/components/semantic/SemanticMapping.tsx:263:          placeholder="What semantic territory do you want to map?"
+client/src/components/share/ReflectionCard.jsx:56:              placeholder="Write your reflection here..."
+client/src/components/stance/PhilosophicalStanceMapper.tsx:132:            placeholder="Why do you hold this position? What informs your view?"
+client/src/components/state/StateTracker.tsx:150:          placeholder="Context, observations..."
+client/src/components/synthesis/SynthesisCollider.tsx:125:            placeholder="Give it a name..."
+client/src/components/synthesis/SynthesisCollider.tsx:132:            placeholder={ARTIFACT_TYPES.find(t => t.type === artifactType)?.placeholder}
+client/src/components/synthesis/SynthesisCollider.tsx:213:              placeholder="What emerges when you combine these through this lens?"
+client/src/components/synthesis/SynthesisCollider.tsx:268:          placeholder="What do you want to synthesize toward?"
+client/src/components/systems/SystemsResonance.tsx:124:                placeholder="Element name..."
+client/src/components/systems/SystemsResonance.tsx:290:          placeholder="What system do you want to explore?"
+client/src/components/temporal/TemporalReflection.tsx:131:            placeholder="A relationship, a fear, a goal, a pattern..."
+client/src/components/temporal/TemporalReflection.tsx:203:            placeholder="Write your reflection..."
+client/src/components/thought/ThoughtExperimentsLab.tsx:116:              placeholder="Your thoughts..."
+client/src/components/thought/ThoughtExperimentsLab.tsx:148:                placeholder="Looking back at your responses, what patterns or insights emerge?"
+client/src/components/ui/select.tsx:67:  placeholder?: string;
+client/src/components/ui/select.tsx:70:function SelectTrigger({ children, className = "", "data-testid": testId, placeholder }: SelectTriggerProps) {
+client/src/components/ui/select.tsx:103:        text-[var(--glp-text)] placeholder:text-[var(--glp-text-tertiary)]
+client/src/components/ui/select.tsx:120:  placeholder?: string;
+client/src/components/ui/select.tsx:123:function SelectValue({ placeholder = "Select..." }: SelectValueProps) {
+client/src/components/ui/select.tsx:125:  return <span className={value ? "" : "text-[var(--glp-text-tertiary)]"}>{value || placeholder}</span>;
+client/src/components/ui/textarea.tsx:12:          "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+client/src/components/ui/LazyImage.jsx:15:  placeholder = 'blur',
+client/src/components/ui/LazyImage.jsx:67:        aria-label={alt || 'Image placeholder'}
+client/src/components/ui/LazyImage.jsx:80:      {placeholder === 'blur' && !isLoaded && !hasError && (
+client/src/components/weave/KnowledgeWeaveMap.tsx:107:              placeholder="Concept title..."
+client/src/components/weave/KnowledgeWeaveMap.tsx:127:              placeholder="Brief summary..."
+client/src/components/weave/KnowledgeWeaveMap.tsx:263:          placeholder="What area of knowledge do you want to map?"
+client/src/components/wellness/JournalAI.jsx:203:                placeholder="Write openly about what you're experiencing..."
+client/src/components/wellness/JournalAI.jsx:205:                className="w-full px-4 py-3 rounded-xl border border-sageGreen/30 dark:border-gray-600 bg-softWhite dark:bg-gray-700 text-deepTeal dark:text-white placeholder-deepTeal/40 font-sans focus:ring-2 focus:ring-deepTeal focus:border-transparent resize-none transition"
+client/src/components/wellness/WeatherMoodSync.jsx:236:                  placeholder="Enter your city..."
+client/src/components/wellness/WeatherMoodSync.jsx:237:                  className="flex-1 px-4 py-2.5 rounded-xl border border-sageGreen/30 bg-softWhite/80 text-deepTeal placeholder-deepTeal/40 font-sans focus:ring-2 focus:ring-sageGreen focus:border-transparent transition"
+client/src/components/wellness/ReflectionPrompt.tsx:18:        placeholder="Write freely…"
+client/src/components/wellness/EmotionLog.jsx:146:              placeholder="What's on your mind? Take a moment to explore this feeling..."
+client/src/components/wellness/EmotionLog.jsx:148:              className="w-full px-4 py-3 rounded-xl border border-sageGreen/30 dark:border-gray-600 bg-softWhite dark:bg-gray-700 text-deepTeal dark:text-white placeholder-deepTeal/40 font-sans focus:ring-2 focus:ring-sageGreen focus:border-transparent resize-none transition"
+client/src/components/lumi/LumiCompanion.jsx:192:  // doesn't shift on first paint. Uses an aspect-ratio placeholder.
+client/src/components/lumi/LumiCompanion.jsx:193:  const placeholderStyle = {
+client/src/components/lumi/LumiCompanion.jsx:282:            style={placeholderStyle}
+client/src/components/lumi/LumiV7.jsx:6: * shape (cream head, sage belly, stubby arms+legs, two-leaf sprout)
+client/src/components/AICompanion.jsx:349:                  placeholder="Share what's on your heart..."
+client/src/components/FocusTimer.jsx:309:                placeholder="Set your intention for this session..."
+client/src/components/FocusTimer.jsx:310:                className="flex-1 bg-slate-800/50 border border-slate-700/50 rounded-lg px-4 py-2 text-white placeholder-slate-500"
+client/src/components/GlobalSearch.jsx:128:            placeholder="Search tools, guides, glossary, FAQ..."
+client/src/components/GlobalSearch.jsx:129:            className="flex-1 bg-transparent text-[var(--text-1)] placeholder-[var(--text-3)] outline-none text-lg"
+client/src/components/HabitTracker.jsx:165:                placeholder="Enter habit name..."
+client/src/components/HabitTracker.jsx:166:                className="flex-1 px-4 py-3 rounded-xl border-2 border-[var(--border)] bg-[var(--bg)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)]"
+client/src/components/KnowledgeBase.jsx:52:              placeholder="Ask Lotus anything..."
+client/src/components/ResilienceStories.jsx:152:              placeholder="Give your story a title..."
+client/src/components/ResilienceStories.jsx:153:              className="w-full p-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:border-rose-500/50 focus:outline-none"
+client/src/components/ResilienceStories.jsx:165:              placeholder="Share your experience... What happened? How did you feel? What did you do?"
+client/src/components/ResilienceStories.jsx:167:              className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:border-rose-500/50 focus:outline-none resize-none"
+client/src/components/ResilienceStories.jsx:180:              placeholder="e.g., perseverance, courage, self-compassion..."
+client/src/components/ResilienceStories.jsx:181:              className="w-full p-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:border-rose-500/50 focus:outline-none"
+client/src/components/ResilienceStories.jsx:193:              placeholder="Take a moment to reflect..."
+client/src/components/ResilienceStories.jsx:195:              className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:border-rose-500/50 focus:outline-none resize-none"
+client/src/components/SacredForm.jsx:93:              placeholder="Your email address"
+client/src/components/SelfCompassion.jsx:254:                placeholder="Write your compassionate letter here..."
+client/src/components/SelfCompassion.jsx:255:                className="w-full px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none mb-4"
+client/src/components/ShareReflection.jsx:119:              placeholder="Share a thought, insight, or moment of gratitude..."
+client/src/components/ShareReflection.jsx:187:                placeholder="How would you like to be known?"
+client/src/components/SocialConnection.jsx:155:                      placeholder="Optional: How did it go? How did it make you feel?"
+client/src/components/SocialConnection.jsx:156:                      className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder:text-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none"
+client/src/components/StateTracker.jsx:127:          placeholder="Context, observations..."
+client/src/components/StressMonitor.jsx:225:                placeholder="Any additional notes? (optional)"
+client/src/components/StressMonitor.jsx:226:                className="w-full px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
+client/src/components/WeeklyReflection.jsx:11:    placeholder: "I completed..., I'm proud of..., I succeeded in...",
+client/src/components/WeeklyReflection.jsx:18:    placeholder: "I struggled with..., It was hard when..., I learned that...",
+client/src/components/WeeklyReflection.jsx:25:    placeholder: "I'm thankful for..., I appreciated when..., It meant a lot that...",
+client/src/components/WeeklyReflection.jsx:32:    placeholder: "I discovered..., I realized..., I'm getting better at...",
+client/src/components/WeeklyReflection.jsx:39:    placeholder: "I will..., My goal is..., I want to...",
+client/src/components/WeeklyReflection.jsx:264:                placeholder={section.placeholder}
+client/src/components/WeeklyReflection.jsx:265:                className="w-full h-32 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
+client/src/components/WellnessGoalTracker.jsx:225:                placeholder="Goal title..."
+client/src/components/WellnessGoalTracker.jsx:228:                className="px-3 py-2 rounded-lg bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-secondary)]"
+client/src/components/WellnessGoalTracker.jsx:247:                  placeholder="Target"
+client/src/components/ReflectionCardExport.jsx:210:                  placeholder="A meaningful sentence from your reflection..."
+client/src/components/ReflectionCardExport.jsx:211:                  className="w-full h-24 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
+client/src/components/ReflectionCardExport.jsx:227:                  placeholder="e.g., Self-respect, Growth, Courage..."
+client/src/components/ReflectionCardExport.jsx:228:                  className="w-full px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+client/src/components/ReflectionCardExport.jsx:260:                  placeholder="A small, doable action..."
+client/src/components/ReflectionCardExport.jsx:261:                  className="w-full px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+client/src/components/NewsletterSignup.jsx:128:            placeholder="your@email.com"
+client/src/components/NewsletterSignup.jsx:129:            className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface-1)] text-[var(--text-1)] placeholder-[var(--text-3)] focus:outline-none focus:ring-2 focus:ring-[var(--glp-primary)] focus:border-transparent"
+client/src/components/AIChat.jsx:70:          placeholder="Say something..."
+client/src/components/ChatWidget.tsx:170:          placeholder="Type a message..."
+client/src/components/BoundaryBuilder.jsx:185:              placeholder="I will..."
+client/src/components/BoundaryBuilder.jsx:186:              className="flex-1 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-violet-400"
+client/src/components/CBTThoughtDiary.jsx:129:                placeholder="What happened? Where were you? Who was there?"
+client/src/components/CBTThoughtDiary.jsx:145:                placeholder="What thought went through your mind?"
+client/src/components/CBTThoughtDiary.jsx:159:                  placeholder="e.g., Anxious, Sad, Angry"
+client/src/components/CBTThoughtDiary.jsx:224:                  placeholder="What facts support this thought?"
+client/src/components/CBTThoughtDiary.jsx:238:                  placeholder="What facts contradict this thought?"
+client/src/components/CBTThoughtDiary.jsx:254:                placeholder="What's a more balanced way to think about this?"
+client/src/components/GratitudeJar.jsx:191:              placeholder="I'm grateful for..."
+client/src/components/GratitudePrompt.jsx:146:            placeholder="Take a moment to reflect and write your thoughts..."
+client/src/components/GratitudePrompt.jsx:148:            className="w-full p-4 rounded-xl border-2 border-[var(--border)] bg-[var(--surface)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 resize-none transition-all"
+client/src/components/LazyImage.jsx:8:  placeholder = null,
+client/src/components/LazyImage.jsx:66:        placeholder || (
+client/src/components/PositiveReframing.jsx:143:                placeholder="Write the negative thought that's bothering you..."
+client/src/components/PositiveReframing.jsx:144:                className="w-full px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-red-400 resize-none"
+client/src/components/PositiveReframing.jsx:200:                placeholder="Write a more balanced, compassionate perspective..."
+client/src/components/PositiveReframing.jsx:201:                className="w-full px-4 py-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-emerald-400 resize-none"
+client/src/components/ReminderScheduler.jsx:233:                placeholder="Your gentle reminder message..."
+client/src/components/SleepTracker.jsx:241:                placeholder="Any dreams or thoughts about your sleep..."
+client/src/components/SleepTracker.jsx:242:                className="w-full px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
+client/src/components/ValuesExplorer.jsx:252:              placeholder="Write your reflection..."
+client/src/components/ValuesExplorer.jsx:253:              className="w-full px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-emerald-400 resize-none mb-4"
+client/src/components/WorryTimeScheduler.jsx:156:                  placeholder="What's on your mind?"
+client/src/components/WorryTimeScheduler.jsx:157:                  className="flex-1 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+client/src/components/AdvisorySection.jsx:73:                  <p className={styles.placeholder}>
+client/src/components/JoinSection.jsx:183:                placeholder="Enter your email"
+client/src/components/EmotionLog.jsx:133:                placeholder="Write freely... this is your safe space."
+client/src/components/FeedbackWidget.jsx:194:              placeholder="Your thoughts help us improve..."
+client/src/components/FeedbackWidget.jsx:204:              placeholder="Email (optional — only if you want a reply)"
+client/src/components/GoalProgress.jsx:180:              placeholder="Enter your goal..."
+client/src/components/GoalProgress.jsx:181:              className="w-full px-4 py-3 rounded-xl bg-[var(--bg)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] mb-3"
+client/src/components/TglpNavbar.jsx:295:                placeholder="Search..."
+client/src/components/UpsellModal.tsx:25:            ? `Premium features for ${toolName} are coming soon.`
+client/src/components/UpsellModal.tsx:26:            : "Premium features coming soon."}
+client/src/config/leadMagnets.ts:51:    placeholder: 'Your email',
+client/src/config/leadMagnets.ts:60:    placeholder: 'Email address',
+client/src/features/community/Community.tsx:90:                placeholder="If you'd like to share a reflection, write here. Your response will be anonymous."
+client/src/features/community/DiscussionPage.jsx:277:              placeholder="Share your experience or wisdom to help others on their journey..."
+client/src/features/community/SharedReflectionsPage.jsx:185:              placeholder="Search questions..."
+client/src/features/community/SharedReflectionsPage.jsx:212:              placeholder="What would you like to ask? Remember to be kind and specific..."
+client/src/features/daily/DailyFlow.tsx:198:                  placeholder="Write here if it helps..."
+client/src/features/daily/DailyFlow.tsx:199:                  className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/10 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm resize-none focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/55"
+client/src/features/journal/JournalPage.jsx:99:            placeholder="Write gently. You can start with one sentence."
+client/src/features/mirror/JournalMirror.tsx:126:            placeholder='Example: "I want to feel calmer and trust myself again…"'
+client/src/features/mirror/JournalMirror.tsx:127:            className="min-h-[140px] w-full resize-y rounded-2xl border border-white/10 bg-black/30 p-4 text-white placeholder:text-white/30 outline-none focus:border-white/25"
+client/src/lib/synthesis/synthesisCollider.ts:43:export const ARTIFACT_TYPES: { type: ColliderArtifact["sourceType"]; label: string; placeholder: string }[] = [
+client/src/lib/synthesis/synthesisCollider.ts:44:  { type: "quote", label: "Quote", placeholder: "A passage that moved you..." },
+client/src/lib/synthesis/synthesisCollider.ts:45:  { type: "experience", label: "Experience", placeholder: "Something you lived through..." },
+client/src/lib/synthesis/synthesisCollider.ts:46:  { type: "concept", label: "Concept", placeholder: "An idea or framework..." },
+client/src/lib/synthesis/synthesisCollider.ts:47:  { type: "question", label: "Question", placeholder: "A question that haunts you..." },
+client/src/lib/synthesis/synthesisCollider.ts:48:  { type: "image", label: "Image", placeholder: "Describe a visual memory or symbol..." },
+client/src/lib/synthesis/synthesisCollider.ts:49:  { type: "pattern", label: "Pattern", placeholder: "A recurring theme you've noticed..." }
+client/src/sections/EmailCapture.jsx:115:                  placeholder="Your email address..."
+client/src/sections/EmailCapture.jsx:200:        .ec-form__input::placeholder { color: rgba(58, 58, 54, 0.45); }
+client/src/sections/ValueProposition.jsx:146:              placeholder="you@example.com"
+client/src/sections/ValueProposition.jsx:365:        .vp-form__input::placeholder {
+client/src/design-system/Container.d.ts:1:// Declaration for the empty Container.jsx stub (no runtime exports yet).
+client/src/design-system/PageSection.d.ts:1:// Declaration for the empty PageSection.jsx stub (no runtime exports yet).
+client/src/design-system/Stack.d.ts:1:// Declaration for the empty Stack.jsx stub (no runtime exports yet).
+client/src/design-system/Surface.d.ts:1:// Declaration for the empty Surface.jsx stub (no runtime exports yet).
+client/src/checkin-flow/state/useCheckInFlowStore.ts:172: * This avoids placeholder `() => true` rules that audit nothing.
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:244:  it("CF-R004 and CF-R011 are no longer placeholder true-returns (architect P14.3)", () => {
+client/src/checkin-flow/__tests/checkInFlowGovernance.test.ts:250:    // …and their description strings reflect real predicates, not placeholders.
+client/src/companion-voice/components/MMHBCompanionInput.tsx:17:  placeholder?: string;
+client/src/companion-voice/components/MMHBCompanionInput.tsx:23:  placeholder = "Whatever's on your mind — a word, a phrase, anything.",
+client/src/companion-voice/components/MMHBCompanionInput.tsx:55:        placeholder={placeholder}
+client/src/calm-checkin/content/calmCheckinContent.ts:65:  placeholder: string;
+client/src/calm-checkin/content/calmCheckinContent.ts:140:    placeholder: "A word, a phrase, or nothing at all…",
+client/src/calm-checkin/components/CalmReflectionPrompt.tsx:48:        placeholder={CALM_CONTENT.reflection.placeholder}
+client/src/lumi-conversation/components/LumiInputBar.tsx:24:  /** Optional placeholder override (rare — defaults are calm and inviting). */
+client/src/lumi-conversation/components/LumiInputBar.tsx:25:  placeholder?: string;
+client/src/lumi-conversation/components/LumiInputBar.tsx:69:  placeholder = "Type whatever feels honest. There's no required length.",
+client/src/lumi-conversation/components/LumiInputBar.tsx:110:        placeholder={placeholder}
+client/src/lumi-conversation/components/LumiReflectionCard.tsx:95:          placeholder="Type a few words, or none. Either is okay."
+server/routes/account.mjs:325:    // Since we're using Replit Auth with session store, generate a mock session list
+server/routes/figma.mjs:5:// Placeholder route (keeps the platform stable even if Figma is not configured yet)
+server/routes/figma.mjs:10:    status: "placeholder",
+server/routes/mood.mjs:29:    const mockData = [
+server/routes/mood.mjs:39:      data: mockData
+server/routes/relationship-dynamics.mjs:59:    description: "Disrespect, mockery, sarcasm, eye-rolling, name-calling",
+server/routes/peacescape.mjs:5:// Read-only stub that powers the /peacescape page. Returns the user's
+server/tests/app.mjs:24:    res.json({ token: "mock-jwt-token", user: { id: "u1", email } });
+server/tests/auth.test.mjs:4:import * as mockDb from "./test-mocks.mjs";
+server/tests/auth.test.mjs:9:  mockDb.insert.mockReset();
+server/tests/auth.test.mjs:10:  mockDb.select.mockReset();
+server/tests/auth.test.mjs:11:  mockDb.update.mockReset();
+server/tests/auth.test.mjs:12:  mockDb.deleteOp.mockReset();
+server/tests/auth.test.mjs:17:    mockDb.insert.mockResolvedValue({
+server/tests/auth.test.mjs:33:    mockDb.select.mockResolvedValue([
+server/tests/test-mocks.mjs:8:export function resetMocks() {
+server/tests/test-mocks.mjs:9:  insert.mockReset();
+server/tests/test-mocks.mjs:10:  select.mockReset();
+server/tests/test-mocks.mjs:11:  update.mockReset();
+server/tests/test-mocks.mjs:12:  deleteOp.mockReset();
+server/awareness/detection/pipeline.mjs:12://   LAYER 2 — MLClassifier       (statistical, target 100-200 ms; STUB)
+server/awareness/detection/pipeline.mjs:175: * LAYER 2 — MLClassifier (stub)
+server/awareness/detection/pipeline.mjs:179:    // TODO (v2.0 Phase 4): load fine-tuned BERT / RoBERTa from
+server/awareness/detection/pipeline.mjs:190:   * @returns {Promise<Array<{tactic: string, category: string, confidence: number, source: 'ml-stub'}>>}
+server/awareness/detection/pipeline.mjs:200:        source: "ml-stub",
+server/awareness/detection/pipeline.mjs:203:    // Placeholder for the real model invocation when wired up.
+server/awareness/detection/pipeline.mjs:503:        // stub (modelLoaded === false), so we attribute as "rule" or "ensemble".
+shared/schema.mjs:779:  // Persona + capability config (tone, values, capability vectors stub)
+docs/DEEP_SCAN_REPORT.md:75:| TODO/FIXME | ~20 |
+docs/DEEP_SCAN_REPORT.md:76:| placeholder | ~50 |
+docs/ISSUE_REGISTER.md:6:3. Refresh token rotation not implemented (PENDING)
+docs/NO_DUPES_REPORT.md:14:| TODO/FIXME Count | 516 (non-blocking) |
+docs/NO_DUPES_REPORT.md:16:| Remaining TODO | 31/50 |
+docs/NO_DUPES_REPORT.md:53:None blocking. 516 TODO/FIXME are non-critical (mostly enhancement notes).
+docs/NO_DUPES_REPORT.md:64:| TODO/FIXME Count | 0 |
+docs/NO_DUPES_REPORT.md:66:| Remaining TODO | 30 |
+docs/NO_DUPES_REPORT.md:92:None found. No TODO/FIXME/placeholder detected.
+docs/NO_DUPES_REPORT.md:142:### D) Placeholder/Unfinished Code
+docs/NO_DUPES_REPORT.md:146:| TODO | 0 | Clean |
+docs/NO_DUPES_REPORT.md:147:| FIXME | 0 | Clean |
+docs/NO_DUPES_REPORT.md:149:| placeholder | 0 | Clean (content only) |
+docs/PATCHLOG.md:77:  - Created Batch 3 roadmap tracking 50 processes (18 done, 32 TODO)
+docs/PATCHLOG.md:96:  - Created Batch 2 roadmap tracking 50 processes (19 done, 31 TODO)
+docs/PATCHLOG.md:132:- Summary: Fixed interface/design-system pages showing placeholder instead of content
+docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md:34:- **PressKit.jsx**: Updated platform description from "Mobile coming soon" to "Progressive Web App" (accurate)
+docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md:84:| Social media placeholder URLs | Cannot verify account ownership — flagged for manual verification |
+docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md:92:1. Social media links (Instagram, YouTube, TikTok, X) are placeholder URLs — verify accounts exist before public launch
+docs/PUBLIC_SURFACE_ALIGNMENT_COMPLETE.md:105:Verify social media placeholder URLs point to real, claimed accounts before enabling public visibility of footer social links.
+docs/PUBLIC_SURFACE_MAP.md:80:| Instagram | https://instagram.com/thegenuineloveproject | Placeholder — verify before launch |
+docs/PUBLIC_SURFACE_MAP.md:81:| YouTube | https://youtube.com/@GenuineLoveProject | Placeholder — verify before launch |
+docs/PUBLIC_SURFACE_MAP.md:82:| TikTok | https://tiktok.com/@genuineloveproject | Placeholder — verify before launch |
+docs/PUBLIC_SURFACE_MAP.md:83:| X/Twitter | https://x.com/GenuineLoveProj | Placeholder — verify before launch |
+docs/ROADMAP_P051_P100.md:10:2) Finish incomplete stubs from prior batches
+docs/ROADMAP_P051_P100.md:19:- No critical TODO/stub remains in core flows ✅
+docs/ROADMAP_P051_P100.md:28:| Category | Done | TODO | Total |
+docs/ROADMAP_P051_P100.md:45:| P053 | Log redaction rules + PII guard | TODO | |
+docs/ROADMAP_P051_P100.md:46:| P054 | Structured logging (levels, request ids) | TODO | |
+docs/ROADMAP_P051_P100.md:47:| P055 | Frontend performance budget checks (LCP/CLS) | TODO | |
+docs/ROADMAP_P051_P100.md:48:| P056 | Bundle analysis script | TODO | |
+docs/ROADMAP_P051_P100.md:49:| P057 | Sentry-ready hooks (disabled by default) | TODO | |
+docs/ROADMAP_P051_P100.md:62:| P063 | Session/token storage hardening | TODO | |
+docs/ROADMAP_P051_P100.md:63:| P064 | Secrets scan script | TODO | |
+docs/ROADMAP_P051_P100.md:66:| P067 | Data retention rules | TODO | |
+docs/ROADMAP_P051_P100.md:69:| P070 | Cookie banner | TODO | |
+docs/ROADMAP_P051_P100.md:77:| P071 | MDX/Markdown content pipeline | TODO | |
+docs/ROADMAP_P051_P100.md:78:| P072 | Content schema validation (frontmatter zod) | TODO | |
+docs/ROADMAP_P051_P100.md:82:| P076 | "Evidence notes" widget | TODO | |
+docs/ROADMAP_P051_P100.md:83:| P077 | Citation storage format | TODO | |
+docs/ROADMAP_P051_P100.md:84:| P078 | Content versioning + preview | TODO | |
+docs/ROADMAP_P051_P100.md:85:| P079 | Content lint (no medical claims scanner) | TODO | |
+docs/ROADMAP_P051_P100.md:86:| P080 | Translation-ready structure | TODO | |
+docs/ROADMAP_P051_P100.md:95:| P082 | Email capture API + provider | TODO | |
+docs/ROADMAP_P051_P100.md:96:| P083 | Segmentation tags | TODO | |
+docs/ROADMAP_P051_P100.md:97:| P084 | Onboarding drip templates | TODO | |
+docs/ROADMAP_P051_P100.md:98:| P085 | UTM attribution storage | TODO | |
+docs/ROADMAP_P051_P100.md:99:| P086 | Referral tracking | TODO | |
+docs/ROADMAP_P051_P100.md:101:| P088 | Social studio → blog repurpose | TODO | |
+docs/ROADMAP_P051_P100.md:102:| P089 | SEO keyword map doc | TODO | |
+docs/ROADMAP_P051_P100.md:112:| P092 | One-command "safe apply" script | TODO | |
+docs/ROADMAP_P051_P100.md:113:| P093 | Repo guardrails (pre-commit) | TODO | |
+docs/ROADMAP_P051_P100.md:114:| P094 | Dependency upgrade workflow | TODO | |
+docs/ROADMAP_P051_P100.md:115:| P095 | Backup/export script | TODO | |
+docs/ROADMAP_P051_P100.md:116:| P096 | Staging mode config | TODO | |
+docs/ROADMAP_P051_P100.md:117:| P097 | Feature flags admin UI | TODO | |
+docs/ROADMAP_P051_P100.md:120:| P100 | Release checklist | TODO | |
+docs/ROADMAP_P101_P150.md:10:2) Finish carryover TODO/stubs (core flows)
+docs/ROADMAP_P101_P150.md:29:| Category | Done | TODO | Total |
+docs/ROADMAP_P101_P150.md:48:| P105 | "Related content" engine | TODO | |
+docs/ROADMAP_P101_P150.md:52:| P109 | Site-wide "pause" affordance | TODO | |
+docs/ROADMAP_P101_P150.md:63:| P113 | Form field consistency + error states | TODO | |
+docs/ROADMAP_P101_P150.md:64:| P114 | Card system (3 densities) | TODO | |
+docs/ROADMAP_P101_P150.md:65:| P115 | Icon system + sizing rules | TODO | |
+docs/ROADMAP_P101_P150.md:66:| P116 | Motion system (reduced-motion support) | TODO | |
+docs/ROADMAP_P101_P150.md:80:| P123 | Practice timer + "stop now" button | TODO | |
+docs/ROADMAP_P101_P150.md:81:| P124 | Reflection prompt library | TODO | |
+docs/ROADMAP_P101_P150.md:82:| P125 | Risk labeling for tools | TODO | |
+docs/ROADMAP_P101_P150.md:83:| P126 | Crisis detection phrasing guard | TODO | |
+docs/ROADMAP_P101_P150.md:84:| P127 | Tool completion logging (privacy-safe) | TODO | |
+docs/ROADMAP_P101_P150.md:85:| P128 | Export user entries + delete controls | TODO | |
+docs/ROADMAP_P101_P150.md:86:| P129 | Data minimization audit | TODO | |
+docs/ROADMAP_P101_P150.md:95:| P131 | Admin role gate middleware hardening | TODO | |
+docs/ROADMAP_P101_P150.md:97:| P133 | Admin content editor safe-mode | TODO | |
+docs/ROADMAP_P101_P150.md:98:| P134 | Admin social studio approvals | TODO | |
+docs/ROADMAP_P101_P150.md:99:| P135 | Calendar view improvements | TODO | |
+docs/ROADMAP_P101_P150.md:100:| P136 | Export formats expanded | TODO | |
+docs/ROADMAP_P101_P150.md:101:| P137 | Content template versioning | TODO | |
+docs/ROADMAP_P101_P150.md:102:| P138 | "No plagiarism" checker prompts | TODO | |
+docs/ROADMAP_P101_P150.md:103:| P139 | Evidence links manager | TODO | |
+docs/ROADMAP_P101_P150.md:104:| P140 | Admin "release notes" generator | TODO | |
+docs/ROADMAP_P101_P150.md:113:| P142 | Dependency health report | TODO | |
+docs/ROADMAP_P101_P150.md:114:| P143 | Safe upgrade workflow | TODO | |
+docs/ROADMAP_P101_P150.md:115:| P144 | CI gates: build/typecheck/lint | TODO | |
+docs/ROADMAP_P101_P150.md:116:| P145 | Lighthouse/checklist docs | TODO | |
+docs/ROADMAP_P101_P150.md:117:| P146 | Backup export of content + settings | TODO | |
+docs/ROADMAP_P101_P150.md:118:| P147 | Environment variable validator | TODO | |
+docs/ROADMAP_P101_P150.md:120:| P149 | Security headers test checklist | TODO | |
+docs/WORK_LEDGER.md:13:- Mark each process as: TODO / IN PROGRESS / DONE / SKIPPED (already exists) / CARRYOVER (finished from Batch 1)
+docs/WORK_LEDGER.md:23:| TODO | 27 |
+docs/automation/scan-errors.md:11:  - `TODO`
+docs/automation/scan-errors.md:12:  - `FIXME`
+docs/batch-10/deep-scan.md:15:| TODO/FIXME | 0 |
+docs/batch-10/summary.md:15:- **TODO/FIXME**: 0
+docs/batch-9/deep-scan.md:86:| 111 | Email verification stub | ✅ DONE | server/routes/auth.mjs (token flow) |
+docs/batch-9/deep-scan.md:94:| 119 | Delete account flow stub | ⏳ MISSING | Need delete request flow |
+docs/batch-9/deep-scan.md:161:3. P119 - Delete account flow stub
+docs/brand/BRAND_TOKENS.md:26:| Muted | `#6B7280` | Secondary text, placeholders |
+docs/design/VOICE_AND_MICROCOPY.md:77:## Placeholders
+docs/e2e-testing.md:122:4. **Mock external services** when possible
+docs/flaky-tests.md:38:| External deps | Mock external services |
+docs/flaky-tests.md:40:| Date/time | Mock Date, use fixed timestamps |
+docs/flaky-tests.md:52:3. Mock external services
+docs/integration-batches/integration-151-200.md:47:| 171 | SAML SSO stub | 🔒 |
+docs/platform-analysis-2026-01-27.md:68:## Components with Placeholder Content (74 total)
+docs/platform-analysis-2026-01-27.md:70:These components contain "Coming soon", "Under construction", or "placeholder" text - they are functional but may need content refinement:
+docs/platform-analysis-2026-01-27.md:246:- Components with placeholder content are functional but could benefit from:
+docs/platform-analysis-2026-01-27.md:247:  - Replacing "Coming soon" with actual content
+docs/platform-analysis-2026-01-27.md:257:2. Refine placeholder content in wellness tools
+docs/platform/top-platform-processes-matrix.md:182:| B14-363 | Comments system stub | ✅ DONE | Disabled by design |
+docs/platform/top-platform-processes-matrix.md:199:| B14-375 | Course authoring stub | ✅ DONE | Admin course editor ready |
+docs/platform/top-platform-processes-matrix.md:212:| B14-383 | Cohort analysis stub | ✅ DONE | Admin analytics |
+docs/platform/top-platform-processes-matrix.md:213:| B14-384 | A/B test framework stub | ✅ DONE | Feature flag ready |
+docs/prompts/NAV_DOCTOR.md:78:         - If destination is planned: keep link behind feature flag and label “Coming soon” (non-clickable) + document.
+docs/prompts/VISUAL_SYSTEM.md:40:     1.1 Create/Update docs_outputs with concrete rules, not placeholders.
+docs/reports/PUBLIC_SURFACE_FIX_PLAN.md:43:- **Assessment**: These are intentional wireframe/mockup buttons. No fix needed.
+docs/reports/PHASE_18_PRODUCTION_SNAPSHOT_20260522T185852Z.md:104:## 8. Deferred TODOs
+docs/reports/PHASE_18_PRODUCTION_SNAPSHOT_20260522T185852Z.md:106:### TODO-18.1: www → apex 301 redirect (LOW PRIORITY)
+docs/reports/PHASE_18_PRODUCTION_SNAPSHOT_20260522T185852Z.md:119:### TODO-18.2: 7 npm vulnerabilities classified (DO NOT auto-fix)
+docs/reports/PHASE_18_PRODUCTION_SNAPSHOT_20260522T185852Z.md:125:### TODO-18.3: SPA-fallback text files (COSMETIC)
+docs/reports/PHASE_18_PRODUCTION_SNAPSHOT_20260522T185852Z.md:131:### TODO-18.4: Duplicate HSTS header (COSMETIC)
+docs/reports/phase19_20260522T190303Z/05_server_route_inventory.md:512:server/tests/test-mocks.mjs
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:101:## Deferred TODOs
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:108:- TODO-23.1 — `/metrics` → Prometheus format
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:109:- TODO-18.1 — www → apex 301 redirect (panel toggle)
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:110:- TODO-18.4 — duplicate HSTS header (cosmetic)
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:111:- TODO-22.1 — `express` 4→5 major upgrade
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:112:- TODO-22.2 — OTel cluster coordinated bump
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:113:- TODO-24.1 / 24.2 / 24.3 — JS chunk splits + Sentry sourcemap upload (all optional)
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:114:- TODO-26.1 — AVIF/WebP siblings for 11 avatar region PNGs (highest-impact asset win)
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:115:- TODO-26.2 — AVIF/WebP/SVG for two large brand logos
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:116:- TODO-26.3 — De-dupe 4 byte-identical pairs `lumi/official/` ↔ `brand/v17/`
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:117:- TODO-26.4 — Consolidate 6 parallel avatar-region source directories
+docs/reports/PHASE_27_LAUNCH_OPS_RUNBOOK_20260522T204637Z.md:120:- TODO-23.2 — CSS purge audit (closed by Phase 25)
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:1:# MMHB Phase 28 — Post-Launch TODO Ledger
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:4:**Scope:** consolidation of every deferred TODO accumulated across Phases 18–27
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:37:### TODO-26.1 — AVIF/WebP siblings for 11 avatar region PNGs ⭐ highest impact
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:49:### TODO-26.2 — AVIF/WebP/SVG for brand logos
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:61:### TODO-22.1 — `express` 4 → 5 major upgrade
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:73:### TODO-22.2 — OpenTelemetry cluster coordinated bump
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:84:### TODO-26.4 — Consolidate 6 parallel avatar-region source directories
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:95:### TODO-24.1 — Split `WellnessDashboard` if it grows past 350 KB raw
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:106:### TODO-24.3 — Split `_autopilot` / `AdvancedToolsPage` if either grows past 350 KB raw
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:112:- **Detail:** Same trigger and approach as TODO-24.1, applied per-chunk.
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:113:- **Verification gate:** same as TODO-24.1.
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:117:### TODO-23.1 — `/metrics` endpoint → Prometheus exposition format
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:123:- **Detail:** Promote the current internal metrics surface to standard Prometheus text format so any compliant scraper can ingest without custom adapters. Coordinate scrape interval with the OTel cluster (TODO-22.2).
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:125:- **Dependencies:** preferably done after TODO-22.2 (OTel bump) to avoid double-migration of the metrics pipeline.
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:128:### TODO-18.1 — www → apex 301 redirect (panel toggle)
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:135:- **Verification gate:** `curl -I https://www.mymentalhealthbuddy.com/` returns 301 with `Location: https://mymentalhealthbuddy.com/...`; apex still 200; HSTS still present (and ideally TODO-18.4 closed at the same time).
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:139:### TODO-26.3 — De-dupe 4 byte-identical pairs in `client/dist`
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:151:### TODO-18.4 — Duplicate HSTS header (cosmetic)
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:162:### TODO-24.2 — Source-map upload to Sentry release artifacts
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:177:| TODO | Origin | Closed by | Notes |
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:179:| TODO-23.2 | Phase 23 | **Phase 25** | CSS purge audit — pipeline verified well-tuned (60 KB gz on wire, purge config correct, 0 duplicate selectors, near-zero vendor prefix). No source change recommended. |
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:188:| **S1** | **4** | TODO-26.1, 26.2, 22.1, 22.2 |
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:189:| **S2** | **5** | TODO-26.4, 24.1, 24.3, 23.1, 18.1 |
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:190:| **S3** | **3** | TODO-26.3, 18.4, 24.2 |
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:192:| Retired | 1 | TODO-23.2 |
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:200:1. **TODO-18.1** (XS) — www→apex 301, panel toggle
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:201:2. **TODO-26.1** (S) — AVIF/WebP for avatar regions
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:202:3. **TODO-26.2** (S) — AVIF/WebP/SVG for brand logos
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:203:4. **TODO-26.3** (XS) — de-dupe 4 byte-identical pairs
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:204:5. **TODO-18.4** (XS) — duplicate HSTS investigation
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:212:6. **TODO-22.2** (M) — OTel coordinated bump
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:213:7. **TODO-23.1** (M) — Prometheus `/metrics` (after TODO-22.2)
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:214:8. **TODO-26.4** (M) — consolidate avatar source directories
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:220:9. **TODO-22.1** (L) — Express 4→5 (outside any launch window, full probe smoke required)
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:221:10. **TODO-24.2** (M) — Sentry sourcemap upload (optional)
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:225:11. **TODO-24.1** — only if `WellnessDashboard` > 350 KB raw on weekly re-baseline
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:226:12. **TODO-24.3** — only if `_autopilot` or `AdvancedToolsPage` > 350 KB raw on weekly re-baseline
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:234:- **Primary law** — no item mixes healing and business domain logic. Each TODO is scoped to a single domain (assets, observability, dependencies, HTTP hygiene).
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:245:| All deferred TODOs from Phases 18–27 enumerated | ✅ 12 open + 1 retired |
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:252:**Post-launch TODO ledger: ESTABLISHED. Backlog ready for sprint planning.**
+docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md:270:*Phase 28 post-launch TODO ledger complete. Documentation only. No source code, no refactor, no auth/db/routes/UI/.replit/deployment-config/infrastructure changes.*
+docs/reports/PHASE_29_RELEASE_READINESS.md:14:- **Phase 28** (`PHASE_28_POST_LAUNCH_TODO_LEDGER.md`) — the post-launch backlog
+docs/reports/PHASE_29_RELEASE_READINESS.md:72:| open TODO carry-forward map | §8 (cross-references TODO-22.1, 22.2; checklist §12 references Phase 28 ledger) — also restated in §6 below for completeness |
+docs/reports/PHASE_29_RELEASE_READINESS.md:78:## 6. Open TODO carry-forward map (Phase 28 ledger → Phase 29 verification gates)
+docs/reports/PHASE_29_RELEASE_READINESS.md:80:| Phase 28 TODO | Affects which Phase 29 gate / probe | Effect when item completes |
+docs/reports/PHASE_29_RELEASE_READINESS.md:82:| **TODO-26.1** (AVIF avatar regions) | §7 row 12 (dist ≤ 50 MB) | dist drops ~10 MB; score remains 1 |
+docs/reports/PHASE_29_RELEASE_READINESS.md:83:| **TODO-26.2** (AVIF logos) | §7 row 12 | dist drops ~3 MB |
+docs/reports/PHASE_29_RELEASE_READINESS.md:84:| **TODO-26.3** (de-dupe 4 pairs) | §7 row 12 | dist drops ~2.7 MB |
+docs/reports/PHASE_29_RELEASE_READINESS.md:85:| **TODO-26.4** (consolidate avatar dirs) | §2.5 asset 404 probe | repo hygiene only; on-the-wire unchanged |
+docs/reports/PHASE_29_RELEASE_READINESS.md:86:| **TODO-22.1** (Express 4→5) | §3 row 1 (root 200), full smoke matrix | requires full §3 re-run after migration; do NOT execute under launch window |
+docs/reports/PHASE_29_RELEASE_READINESS.md:87:| **TODO-22.2** (OTel cluster) | §9 traces row, metrics row | telemetry signals must remain green through bump |
+docs/reports/PHASE_29_RELEASE_READINESS.md:88:| **TODO-23.1** (Prometheus /metrics) | §9 metrics row | standardizes format; backend integration verification |
+docs/reports/PHASE_29_RELEASE_READINESS.md:89:| **TODO-24.1 / 24.3** (conditional chunk splits) | §7 row 8 (largest JS ≤ 350 KB) | triggered only if measurement crosses threshold |
+docs/reports/PHASE_29_RELEASE_READINESS.md:90:| **TODO-24.2** (Sentry sourcemap upload) | §7 row 10 (0 source maps in dist) | must remain 0 in public dist after upload |
+docs/reports/PHASE_29_RELEASE_READINESS.md:91:| **TODO-18.1** (www → apex 301) | §2.6, §3 row 12 | changes www expected status from 200 to 301 — checklist already pre-documents both states |
+docs/reports/PHASE_29_RELEASE_READINESS.md:92:| **TODO-18.4** (duplicate HSTS) | §2.3 security header probe, §7 row 15 | makes HSTS count = 1 exactly |
+docs/reports/PHASE_29_RELEASE_READINESS.md:94:Every open TODO has at least one corresponding Phase 29 gate or probe. No TODO can be silently completed.
+docs/reports/PHASE_29_RELEASE_READINESS.md:132:| Every Phase 28 TODO mapped to a Phase 29 gate or probe | ✅ §6 carry-forward map |
+docs/reports/PHASE_29_RELEASE_READINESS.md:140:## 10. Carried-forward TODO ledger pointer
+docs/reports/PHASE_29_RELEASE_READINESS.md:142:The full open TODO ledger lives in `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`. Summary:
+docs/reports/PHASE_29_RELEASE_READINESS.md:145:- **S1:** 4 (TODO-26.1, 26.2, 22.1, 22.2)
+docs/reports/PHASE_29_RELEASE_READINESS.md:146:- **S2:** 5 (TODO-26.4, 24.1, 24.3, 23.1, 18.1)
+docs/reports/PHASE_29_RELEASE_READINESS.md:147:- **S3:** 3 (TODO-26.3, 18.4, 24.2)
+docs/reports/PHASE_29_RELEASE_READINESS.md:148:- **Total open:** 12 | **Retired:** 1 (TODO-23.2, closed by Phase 25)
+docs/reports/PHASE_29_RELEASE_READINESS.md:150:Phase 29 adds **zero** new TODOs. The checklist is the contract.
+docs/reports/PHASE_29_RELEASE_READINESS.md:158:- Post-Launch TODO Ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:36:| 10 | Open TODO carry-forward list (Phase 28 snapshot) | informational |
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:54:| domain readiness note | §9 (apex 200 + www 200, TODO-18.1 deferred non-blocker) |
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:55:| open TODO carry-forward list | §10 (12 open, 0 S0, sprint mapping) |
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:84:| 12 open TODOs, 0 S0 | Phase 28 ledger |
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:118:| Backlog discipline | 28 | ✅ 12 TODOs, 0 S0 |
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:128:**No risk in the inventory blocks v1.0.0 launch.** The 4 S1 items (TODO-26.1, 26.2, 22.1, 22.2) are dependency / asset-weight optimizations whose deferral has been explicitly accepted as part of the Phase 28 ledger.
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:147:## 9. Carried-forward TODO ledger pointer
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:149:Full ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`.
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:152:- **S1:** 4 (TODO-26.1, 26.2, 22.1, 22.2)
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:153:- **S2:** 5 (TODO-26.4, 24.1, 24.3, 23.1, 18.1)
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:154:- **S3:** 3 (TODO-26.3, 18.4, 24.2)
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:155:- **Total open:** 12 | **Retired:** 1 (TODO-23.2, closed by Phase 25)
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:157:Phase 30 adds **zero** new TODOs. The matrix is the contract.
+docs/reports/PHASE_30_LAUNCH_APPROVAL.md:166:- Post-Launch TODO Ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:103:## 8. TODO ledger pointer (unchanged)
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:105:Full ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`.
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:108:- **S1:** 4 (TODO-26.1, 26.2, 22.1, 22.2)
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:109:- **S2:** 5 (TODO-26.4, 24.1, 24.3, 23.1, 18.1)
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:110:- **S3:** 3 (TODO-26.3, 18.4, 24.2)
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:111:- **Total open:** 12 | **Retired:** 1 (TODO-23.2)
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:113:Phase 31 adds **zero** new TODOs. The packet is the contract.
+docs/reports/PHASE_31_T_MINUS_1H_SIGNOFF.md:122:- Post-Launch TODO Ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:77:| No framework migration | TODO-22.1 (Express 4→5) remains ledgered, not actioned |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:79:| No deployment topology changes | TODO-18.1 (www→apex) and TODO-18.4 (dup HSTS) ledgered, not actioned |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:93:| Image inventory commands | Phase 26 baseline (35 MB dist, 14.8 MB avatars → TODO-26.1) |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:98:| Dependency audit | Phase 22 baseline + Phase 28 ledger (TODO-22.1, 22.2) |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:100:| CSP audit | Phase 18 baseline (HSTS verified, TODO-18.4 dup) |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:114:- **Output contract** — every section produces structured outputs (pass/fail, command outputs, score bands). §16 standardizes finding format with TODO-ID, severity, source, evidence, sprint, owner.
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:121:Phase 32 produces no new TODOs. It re-anchors and cross-references the following already-ledgered items from Phase 28 within the hardening lens:
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:123:| Existing TODO | Hardening §  | Why surfaced |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:125:| TODO-26.1 (AVIF avatars) | §4 row 3, §5 row 6 | image optimization + dist size |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:126:| TODO-26.2 (AVIF logos) | §4 row 3, §5 row 6 | image optimization + dist size |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:127:| TODO-26.3 (de-dupe pairs) | §4 row 5, §10 row 2 | image optimization + dead-code detection |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:128:| TODO-26.4 (consolidate avatar dirs) | §10 row 1 | unused asset surface |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:129:| TODO-24.1 (split WellnessDashboard) | §5 row 2 | bundle ceiling guard |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:130:| TODO-24.3 (split _autopilot / AdvancedToolsPage) | §5 row 2 | bundle ceiling guard |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:131:| TODO-24.2 (Sentry sourcemap upload) | §5 row 4 | source map governance |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:132:| TODO-23.1 (Prometheus `/metrics`) | §13 row 6 | metrics standardization |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:133:| TODO-22.1 (Express 4→5) | §9 row 4 | dependency hygiene |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:134:| TODO-22.2 (OTel cluster) | §9 row 5, §13 row 5 | dependency + observability |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:135:| TODO-18.1 (www → apex 301) | (cross-doc) | edge consolidation |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:136:| TODO-18.4 (duplicate HSTS) | §11 row 6 | security header hygiene |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:138:**Net new TODOs:** 0. The hardening checklist surfaces existing work; it does not create new commitments.
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:149:| Zero new contracts introduced | ✅ no new TODOs created |
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:157:## 10. TODO ledger pointer (unchanged)
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:159:Full ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`.
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:162:- **S1:** 4 (TODO-26.1, 26.2, 22.1, 22.2)
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:163:- **S2:** 5 (TODO-26.4, 24.1, 24.3, 23.1, 18.1)
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:164:- **S3:** 3 (TODO-26.3, 18.4, 24.2)
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:165:- **Total open:** 12 | **Retired:** 1 (TODO-23.2)
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:167:Phase 32 adds **zero** new TODOs. The hardening checklist is the verification contract; routing produces ledger entries only when concrete findings are observed in a subsequent execution cycle.
+docs/reports/PHASE_32_PRODUCTION_HARDENING.md:177:- Post-Launch TODO Ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:18:| 4 | Security headers | ⚠ CONDITIONAL | CSP+COOP+CORP+HSTS+XCTO+XFO all present; HSTS appears twice (TODO-18.4 confirmed); CSP includes `'unsafe-inline'` (SPA limitation) |
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:181:strict-transport-security:     max-age=31536000; includeSubDomains       ← duplicate (TODO-18.4)
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:190:- **Finding F-33.2 (confirmed existing TODO-18.4):** HSTS appears twice (Replit edge + app). Browsers honor the strictest; cosmetic, non-blocking.
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:215:- `'unsafe-inline'` retained for SPA inline styles and any inline `<script>` injection. Known industry pattern; nonce-based migration is a TODO-class hardening, not v1.0.0 blocker.
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:237:All Phase 24 + 25 + 26 budget gates PASS. WellnessDashboard at 275 KB raw is within budget but approaches the 350 KB ceiling — TODO-24.1 conditional split remains valid post-launch trigger.
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:284:- TODO-22.x family in Phase 28 already governs dependency hygiene.
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:311:## 5. Non-blocking TODOs (new findings)
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:318:| F-33.2 | S3 | §11 | Already-ledgered TODO-18.4 (duplicate HSTS) — re-confirmed | (existing) |
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:324:**Net new TODOs proposed:** 5 (F-33.1, F-33.3, F-33.4, F-33.5, F-33.6).
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:325:**Re-confirmed existing:** 1 (TODO-18.4).
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:363:  Re-confirmed existing:   1 (TODO-18.4)
+docs/reports/PHASE_33_HARDENING_VERIFICATION.md:378:- Phase 28 TODO ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:14:Phase 34 introduces **no new contracts**. Every gate, every TODO, every monitoring window is sourced from a verified Phase 21–33 baseline.
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:30:| 3 | Current known non-blocking TODOs (17 total — Phase 28 ledger + Phase 33 findings) |
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:44:| current known non-blocking TODOs | §3 (17 total: 12 from Phase 28 + 5 new Phase 33 findings) |
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:61:| §3 TODO carry-forward | Phase 28 ledger (12) + Phase 33 §5 (5 new findings) |
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:94:## 8. TODO consolidation (final pre-launch snapshot)
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:96:Total open TODOs at launch: **17** (12 from Phase 28 ledger + 5 new from Phase 33). **Zero S0.** All deferred to post-launch sprints.
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:101:| S1 | 5 | F-33.6 (SSR BHCE resources), TODO-26.1, TODO-26.2, TODO-22.1, TODO-22.2 |
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:102:| S2 | 8 | F-33.1, F-33.5, TODO-26.4, TODO-24.1, TODO-24.3, TODO-23.1, TODO-18.1, (one more if re-counted) |
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:103:| S3 | 5 | F-33.3, F-33.4, TODO-26.3, TODO-18.4, TODO-24.2 |
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:106:- **Sprint 1:** F-33.6, F-33.3, F-33.4, TODO-26.1, 26.2, 26.3, 18.1, 18.4
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:107:- **Sprint 2:** F-33.1, F-33.5, TODO-22.2, 23.1, 26.4
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:108:- **Sprint 3:** TODO-22.1, 24.2
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:109:- **Conditional:** TODO-24.1, 24.3 (triggered if bundle ceiling crossed)
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:111:Phase 34 adds **zero** new TODOs. The 5 Phase 33 findings remain ledger candidates to be formally absorbed by the next planning cycle.
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:122:| Zero new contracts introduced | ✅ no new gates, no new TODOs |
+docs/reports/PHASE_34_PUBLIC_BETA_LAUNCH_FINALIZATION.md:186:- Phase 28 post-launch TODO ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:12:Phase 35 produces the **post-launch hardening execution ledger** — a single planning artifact that consolidates Phase 28's 12 carried-forward TODOs with Phase 33's 5 newly-identified findings into a unified, severity-ranked, sprint-mapped, gate-and-rollback-equipped execution plan for Sprint 1–3.
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:14:Phase 35 introduces **zero new contracts**, **zero new TODOs**, and **zero changes to the v1.0.0 GO decision**. It is purely a planning document for the Sprint 1–3 hardening window.
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:34:| 6 | Deferred items — www → apex 301 (TODO-18.1) |
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:43:| all open non-blocking TODOs | §2 (17 items, full table) |
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:49:| www redirect TODO kept deferred | §6 (TODO-18.1 explicitly deferred, no sprint) |
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:59:| Carried from Phase 28 ledger | 12 | TODOs prefixed `TODO-` |
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:80:| §5 rollback rules | F-33.6 has 5-min SLO + 24h BHCE post-incident document; TODO-23.1 (`/metrics`) treated as P0 if it leaks; any future fix touching `/crisis` escalates to BHCE P0 |
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:95:| Zero new TODOs introduced | ✅ ledger composition: 12 carried + 5 from Phase 33; net new from Phase 35 = 0 |
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:119:Deferred items     0 explicit            Deferred items     1 (TODO-18.1, explicitly deferred per directive)
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:151:| Zero new contracts / TODOs introduced | ✅ pure consolidation |
+docs/reports/PHASE_35_POST_LAUNCH_HARDENING_LEDGER.md:165:- Phase 28 post-launch TODO ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/reports/PHASE_36_F_33_6_CRISIS_RESOURCE_PLAN.md:14:Phase 36 introduces **zero new contracts**, **zero new TODOs**, and **zero changes to the v1.0.0 GO decision**. The plan is implementation-ready for a future Phase 37 (the actual edit), which is **not** included here.
+docs/reports/PHASE_36_F_33_6_CRISIS_RESOURCE_PLAN.md:97:| Zero new contracts / TODOs introduced | ✅ Phase 36 plans the existing F-33.6 ledger row; nothing new is created |
+docs/reports/PHASE_36_F_33_6_CRISIS_RESOURCE_PLAN.md:121:New TODOs          —                     New TODOs          0
+docs/reports/PHASE_36_F_33_6_CRISIS_RESOURCE_PLAN.md:142:| Zero new contracts / TODOs introduced | ✅ pure planning |
+docs/reports/PHASE_37_F_33_6_IMPLEMENTATION.md:220:NEW TODOs:                    0
+docs/reports/PHASE_38_DEPLOYED_CRISIS_FALLBACK_VERIFY.md:217:NEW DEPS / CONTRACTS / TODOs: 0
+docs/reports/PHASE_39_POST_REPUBLISH_CRISIS_FALLBACK_VERIFY.md:4:**HEAD:** `7a952f5f8` (`origin/main` in sync) — Phase 38 + prior Phase 39 stub
+docs/reports/PHASE_39_POST_REPUBLISH_CRISIS_FALLBACK_VERIFY.md:201:| Generate `docs/reports/PHASE_39_POST_REPUBLISH_CRISIS_FALLBACK_VERIFY.md` | ✅ this file (overwrites prior 12-line stub committed at `7a952f5f8` with full evidence-based verification) |
+docs/reports/PHASE_39_POST_REPUBLISH_CRISIS_FALLBACK_VERIFY.md:216:NEW DEPS / CONTRACTS / TODOs: 0
+docs/reports/PHASE_39_POST_REPUBLISH_CRISIS_FALLBACK_VERIFY.md:217:NEW DOC ARTIFACTS:            1 (this report, replacing prior 12-line stub)
+docs/reports/PHASE_40_SECURITY_AUDIT.md:197:| Generate this report | ✅ this file (overwrites prior 21-line stub committed at `07ce54318`) |
+docs/reports/PHASE_40_SECURITY_AUDIT.md:212:NEW DEPS / CONTRACTS / TODOs: 0
+docs/reports/PHASE_46_READYZ_JSON_CONTRACT.md:18:This re-issue verified state is clean, refreshed the backup, re-ran `npm run build` as explicitly requested by the re-issued spec, and restored this comprehensive report (which was truncated to a 17-line stub between turns by an external process).
+docs/reports/PHASE_46_READYZ_JSON_CONTRACT.md:27:| Generate report | ✅ this file (restored after external stub-overwrite) |
+docs/reports/PHASE_46_READYZ_JSON_CONTRACT.md:180:| `docs/reports/PHASE_46_READYZ_JSON_CONTRACT.md` | rev 1 (initial 14 KB pass) → external stub truncation to 344 B → rev 2 (this restoration) | full restored | report restored to comprehensive form |
+docs/reports/PHASE_46_READYZ_JSON_CONTRACT.md:209:- **Report integrity note.** The initial Phase 46 report was overwritten by an external process between turns, reducing it from a comprehensive ~14 KB attestation to a 17-line / 344 B stub. The full attestation is restored above. If a comparable overwrite happens to other reports, restoration is safe because all artifact evidence (build logs, backup SHAs, captured curl output) lives in `.local/phase46-backup/` and git history.
+docs/reports/PHASE_46_READYZ_JSON_CONTRACT.md:240:*Phase 46 `/readyz` readiness JSON contract complete (re-issue verified). The Phase 45 §5.1 recommended patch is on `main` at commit `e1128bb22` (`server/app.mjs:313-316`); platform checkpoint `45f8396a6` was the prior Phase 46 commit. This re-issue refreshed the backup (same SHA `28356f33…`), re-ran `npm run build` (PASS in 52.90 s, matching the initial 52.83 s), and restored this comprehensive report after an external process truncated it to a 17-line stub between turns. Local `/readyz` returns `application/json` 57 B `{"status":"ready","timestamp":"…"}` with `cache-control: no-store`, exactly matching `/ready`. Production still serves the pre-fix SPA shell — republish required to promote, same pattern as Phase 37 → 38. v1.0.0 public beta launch state: GO, blockers 0, unchanged.*
+docs/reports/PHASE_59_BACKUP_ISOLATION.md:22:- Created the original stub `docs/reports/PHASE_59_BACKUP_ISOLATION.md` (591 B / 23 lines), which **this expanded report replaces**
+docs/reports/PHASE_59_BACKUP_ISOLATION.md:47:| Insertions | 47 lines (gitignore + new stub report) |
+docs/reports/PHASE_59_BACKUP_ISOLATION.md:119:| Task 5 — Create `docs/reports/PHASE_59_BACKUP_ISOLATION.md` | ✅ exists (stub at 591 B; this report expands it) |
+docs/reports/PHASE_66_ROUTE_CONSOLIDATION_CANDIDATES.md:28:5. **Orphan/legacy marker scan:** `rg "NOT MOUNTED|DEPRECATED|disabled|legacy|TODO.*remove" server/routes/`.
+docs/reports/PHASE_66_ROUTE_CONSOLIDATION_CANDIDATES.md:95:**Disposition:** do NOT remove without per-file verification against the live `ADMIN_SUB_ROUTERS` + `EXTENDED_ROUTES` arrays in `app.mjs`. Many "markers" are inline `TODO`/legacy comments, not actual orphan status. Re-audit in a future phase.
+docs/reports/PHASE_68_CRISIS_FOOTER_AUDIT.md:52:client/src/pages/admin/NarrativeOpsConsole.jsx:852:              placeholder="e.g. Educational only. Not therapy."
+docs/reports/PHASE_68_CRISIS_FOOTER_AUDIT.md:58:client/src/pages/admin/SocialGenerator.jsx:406:                      placeholder="Write your main content here. Use trauma-informed language..."
+docs/reports/PHASE_103_AZ_PLATFORM_SUCCESS_ROADMAP.md:22:| `docs/governance/AZ_PLATFORM_SUCCESS_GOVERNANCE.md` | Decision contract | Upgraded from 2.2 KB stub → full v1.0 |
+docs/reports/PHASE_103_AZ_PLATFORM_SUCCESS_ROADMAP.md:23:| `registry/platform/az-platform-success-registry.json` | Machine-readable mirror | Upgraded from 865 B stub → full v1.0.0 schema |
+docs/reports/PHASE_103_AZ_PLATFORM_SUCCESS_ROADMAP.md:24:| `docs/reports/PHASE_103_AZ_PLATFORM_SUCCESS_ROADMAP.md` | Execution ledger (this file) | Upgraded from 27-line stub → full report |
+docs/reports/PHASE_103_AZ_PLATFORM_SUCCESS_ROADMAP.md:82:| rollback | YES | `git revert <this-commit>` restores prior stubs cleanly |
+docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md:20:| `docs/governance/SEMANTIC_SEARCH_AND_TOOL_INDEX_GOVERNANCE.md` | Decision contract | Upgraded from 49-line stub → full v1.0 LOCKED |
+docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md:21:| `registry/search/semantic-search-registry.json` | Machine-readable mirror (search) | Upgraded from 32-line stub → full v1.0.0 schema |
+docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md:22:| `registry/tools/visible-tool-index-contract.json` | Machine-readable mirror (tools) | Upgraded from 31-line stub → full v1.0.0 schema |
+docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md:23:| `docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md` | Execution ledger (this file) | Upgraded from 21-line stub → full report |
+docs/reports/PHASE_105_SEMANTIC_SEARCH_TOOL_INDEX_REPORT.md:122:| rollback | YES | ✅ one `git revert` restores prior stubs |
+docs/reports/PHASE_112_EMOTIONAL_STATE_ENGINE_GOVERNANCE.md:18:| `docs/governance/EMOTIONAL_STATE_ENGINE_GOVERNANCE.md` | Decision contract | Upgraded from 47-line stub → full v1.0 LOCKED |
+docs/reports/PHASE_112_EMOTIONAL_STATE_ENGINE_GOVERNANCE.md:19:| `registry/emotional-state/emotional-state-engine-registry.json` | Machine-readable mirror | Upgraded from 41-line stub → full v1.0.0 schema |
+docs/reports/PHASE_112_EMOTIONAL_STATE_ENGINE_GOVERNANCE.md:20:| `docs/reports/PHASE_112_EMOTIONAL_STATE_ENGINE_GOVERNANCE.md` | Execution ledger (this file) | Upgraded from 14-line stub → full report |
+docs/reports/PHASE_112_EMOTIONAL_STATE_ENGINE_GOVERNANCE.md:108:| rollback | YES | ✅ one `git revert` restores prior stubs |
+docs/architecture/PLATFORM_AUDIT_PHASE88.md:21:- TODO/FIXME/stub/placeholder findings: 9015
+docs/architecture/PLATFORM_AUDIT_PHASE88.md:32:P3: Placeholder/stub content and incomplete user-facing journeys.
+docs/architecture/PLATFORM_AUDIT_PHASE88.md:48:- diagnostics/phase88/todo-placeholder-stub-findings.txt
+docs/architecture/PHASE88_PRIORITY_REPORT.md:218:## P3 — Incomplete/Placeholder Content Risk
+docs/architecture/PHASE88_PRIORITY_REPORT.md:219:Stub/placeholder/TODO findings detected: 9015
+docs/architecture/PHASE88_PRIORITY_REPORT.md:221:- .archive/runtime-violations/server/routes/content.ts:15: // TODO: persist to DB
+docs/architecture/PHASE88_PRIORITY_REPORT.md:225:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/base64-js/index.js:29: // Trim off extra bytes after placeholder bytes are found
+docs/architecture/PHASE88_PRIORITY_REPORT.md:234:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/base64-js/index.js:63: // if there are placeholders, only get up to the last complete 4 chars
+docs/architecture/PHASE88_PRIORITY_REPORT.md:238:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/chalk/index.d.ts:148: (text: TemplateStringsArray, ...placeholders: unknown[]): string;
+docs/architecture/PHASE88_PRIORITY_REPORT.md:241:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/cli-spinners/index.d.ts:124: // TODO: Remove this for the next major release
+docs/architecture/PHASE88_PRIORITY_REPORT.md:243:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/commander/index.js:2049: // message: do not have all displayed text available so only passing placeholder.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:244:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/commander/index.js:2129: // (Do not have all displayed text available so only passing placeholder.)
+docs/architecture/PHASE88_PRIORITY_REPORT.md:245:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/commander/index.js:21: * Get an array of the visible subcommands. Includes a placeholder for the implicit help command, if there is one.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:246:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/commander/index.js:47: * Get an array of the visible options. Includes a placeholder for the implicit help option, if there is one.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:247:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/commander/typings/index.d.ts:110: /** Get an array of the visible subcommands. Includes a placeholder for the implicit help command, if there is one. */
+docs/architecture/PHASE88_PRIORITY_REPORT.md:248:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/commander/typings/index.d.ts:112: /** Get an array of the visible options. Includes a placeholder for the implicit help option, if there is one. */
+docs/architecture/PHASE88_PRIORITY_REPORT.md:249:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/mimic-fn/index.d.ts:41: // TODO: Remove this for the next major release, refactor the whole definition to:
+docs/architecture/PHASE88_PRIORITY_REPORT.md:250:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/mimic-fn/index.js:12: // TODO: Remove this for the next major release
+docs/architecture/PHASE88_PRIORITY_REPORT.md:251:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/onetime/index.d.ts:60: // TODO: Remove this for the next major release
+docs/architecture/PHASE88_PRIORITY_REPORT.md:252:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/onetime/index.js:35: // TODO: Remove this for the next major release
+docs/architecture/PHASE88_PRIORITY_REPORT.md:253:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/readable-stream/errors-browser.js:113: return 'The ' + name + ' method is not implemented';
+docs/architecture/PHASE88_PRIORITY_REPORT.md:254:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/readable-stream/errors.js:101: return 'The ' + name + ' method is not implemented'
+docs/architecture/PHASE88_PRIORITY_REPORT.md:255:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/readable-stream/lib/_stream_readable.js:324: // TODO(ronag): Throw ERR_VALUE_OUT_OF_RANGE.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:256:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/readable-stream/lib/_stream_transform.js:184: // TODO(BridgeAR): Write a test for these two error cases
+docs/architecture/PHASE88_PRIORITY_REPORT.md:257:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/readable-stream/lib/_stream_writable.js:265: // TODO: defer error events consistently everywhere, not just the cb
+docs/architecture/PHASE88_PRIORITY_REPORT.md:258:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.js:1058: // TODO: Test controller argument
+docs/architecture/PHASE88_PRIORITY_REPORT.md:259:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.js:1378: // TODO: Ideally in this branch detaching should happen only if the buffer is not consumed fully.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:260:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.js:2167: // TODO(ricea): Fix alphabetical order.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:261:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.js:355: // TODO Use BigInt if supported?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:263:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.js:576: // FIXME Is this a bug in the specification, or in the test?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:266:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.mjs:1052: // TODO: Test controller argument
+docs/architecture/PHASE88_PRIORITY_REPORT.md:267:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.mjs:1372: // TODO: Ideally in this branch detaching should happen only if the buffer is not consumed fully.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:268:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.mjs:2161: // TODO(ricea): Fix alphabetical order.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:269:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.mjs:349: // TODO Use BigInt if supported?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:271:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es2018.mjs:570: // FIXME Is this a bug in the specification, or in the test?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:274:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.js:1131: // TODO: Test controller argument
+docs/architecture/PHASE88_PRIORITY_REPORT.md:275:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.js:1451: // TODO: Ideally in this branch detaching should happen only if the buffer is not consumed fully.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:276:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.js:2240: // TODO(ricea): Fix alphabetical order.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:277:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.js:355: // TODO Use BigInt if supported?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:281:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.js:757: // FIXME Is this a bug in the specification, or in the test?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:282:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.mjs:1125: // TODO: Test controller argument
+docs/architecture/PHASE88_PRIORITY_REPORT.md:283:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.mjs:1445: // TODO: Ideally in this branch detaching should happen only if the buffer is not consumed fully.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:284:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.mjs:2234: // TODO(ricea): Fix alphabetical order.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:285:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.mjs:349: // TODO Use BigInt if supported?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:289:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.es6.mjs:751: // FIXME Is this a bug in the specification, or in the test?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:290:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.js:1204: // TODO: Test controller argument
+docs/architecture/PHASE88_PRIORITY_REPORT.md:291:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.js:1524: // TODO: Ideally in this branch detaching should happen only if the buffer is not consumed fully.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:292:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.js:2330: // TODO(ricea): Fix alphabetical order.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:294:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.js:457: // TODO Use BigInt if supported?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:297:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.js:814: // FIXME Is this a bug in the specification, or in the test?
+docs/architecture/PHASE88_PRIORITY_REPORT.md:298:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.mjs:1198: // TODO: Test controller argument
+docs/architecture/PHASE88_PRIORITY_REPORT.md:299:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.mjs:1518: // TODO: Ideally in this branch detaching should happen only if the buffer is not consumed fully.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:300:- .config/npm/node_global/lib/node_modules/@squoosh/cli/node_modules/web-streams-polyfill/dist/polyfill.mjs:2324: // TODO(ricea): Fix alphabetical order.
+docs/architecture/PHASE88_PRIORITY_REPORT.md:476:6. Replace or hide placeholder/stub user-facing surfaces.
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:49:| Backlog | 12 ledger TODOs, 0 S0, all post-launch | Phase 28 |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:65:## 3. Current known non-blocking TODOs
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:71:| TODO | Severity | Sprint | One-line |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:73:| TODO-26.1 | S1 | 1 | AVIF avatar regions |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:74:| TODO-26.2 | S1 | 1 | AVIF brand logos |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:75:| TODO-22.2 | S1 | 2 | OTel cluster coordinated bump |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:76:| TODO-22.1 | S1 | 3 | Express 4→5 migration |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:77:| TODO-26.4 | S2 | 2 | consolidate avatar source dirs |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:78:| TODO-24.1 | S2 | conditional | split WellnessDashboard if >350 KB raw |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:79:| TODO-24.3 | S2 | conditional | split _autopilot / AdvancedToolsPage |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:80:| TODO-23.1 | S2 | 2 | Prometheus `/metrics` endpoint |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:81:| TODO-18.1 | S2 | 1 | www → apex 301 redirect |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:82:| TODO-26.3 | S3 | 1 | de-dupe 4 byte-identical asset pairs |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:83:| TODO-18.4 | S3 | 1 | duplicate HSTS header investigation |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:84:| TODO-24.2 | S3 | 3 | Sentry source-map upload (optional) |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:88:| TODO | Severity | Sprint | One-line |
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:153:# expected: both 200 (or apex 200 + www 301 once TODO-18.1 lands)
+docs/launch/V1_PUBLIC_BETA_LAUNCH_DECISION.md:299:- Post-Launch TODO Ledger (Phase 28): `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:6:**Companion docs:** `docs/runbooks/LAUNCH_OPERATIONS_RUNBOOK.md`, `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:10:> **Discipline:** every probe in this checklist runs without side effects. If a check would require a write, it does not belong here — file it as a TODO in the Phase 28 ledger instead.
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:19:| www | `https://www.mymentalhealthbuddy.com` | TODO-18.1 will 301 → apex post-launch |
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:89:**Pass (current):** both `200` (TODO-18.1 will change www to `301`).
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:90:**Pass (post-TODO-18.1):** apex `200`, www `301` with `Location: https://mymentalhealthbuddy.com/`.
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:130:| 12 | Apex+www | both | apex 200; www 200 (or 301 post-TODO-18.1) |
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:164:| **P3** | Cosmetic | Duplicate header, stale cache on one asset | Triage within 24 hr | File in Phase 28 TODO ledger |
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:196:| 5 | www 200 (or 301 post-TODO-18.1) | yes |
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:229:| `express` | 4.x | **Medium** (deferred 4→5, TODO-22.1) | Post-launch sprint 3 |
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:230:| `@opentelemetry/*` cluster | partial | **Medium** (silent telemetry loss if partial bump, TODO-22.2) | Post-launch sprint 2 |
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:250:| Metrics | internal endpoint | (TODO-23.1 will standardize to Prometheus) | endpoint reachable |
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:307:- [ ] Phase 28 TODO ledger reviewed — no carry-forward item escalated to S0
+docs/operations/PRODUCTION_PROBE_CHECKLIST.md:316:- Phase 28 TODO ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:9:- `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:28:| 5 | www reachable | Phase 18, 29 §2.6 | `www.mymentalhealthbuddy.com` 200 (or 301 post-TODO-18.1) | ☐ |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:174:- `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload` (exactly one occurrence post-TODO-18.4)
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:177:- HSTS may appear twice pre-TODO-18.4 (one from Replit edge, one from app) — cosmetic, browsers honor strictest
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:188:- www `www.mymentalhealthbuddy.com` → 200 (will become 301 → apex post-TODO-18.1)
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:192:**Pre-launch:** both apex and www returning 200 is acceptable for v1.0.0 launch. The www → apex 301 redirect (TODO-18.1) is a post-launch Sprint-1 item to consolidate SEO signal.
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:198:## 10. Open TODO carry-forward list (Phase 28 ledger snapshot)
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:202:| TODO | Severity | Sprint | One-line |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:204:| TODO-18.1 | S2 | 1 | www → apex 301 |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:205:| TODO-26.1 | S1 | 1 | AVIF avatar regions |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:206:| TODO-26.2 | S1 | 1 | AVIF brand logos |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:207:| TODO-26.3 | S3 | 1 | de-dupe 4 byte-identical pairs |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:208:| TODO-18.4 | S3 | 1 | duplicate HSTS investigation |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:209:| TODO-22.2 | S1 | 2 | OTel cluster coordinated bump |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:210:| TODO-23.1 | S2 | 2 | Prometheus `/metrics` |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:211:| TODO-26.4 | S2 | 2 | consolidate avatar source dirs |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:212:| TODO-22.1 | S1 | 3 | Express 4→5 |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:213:| TODO-24.2 | S3 | 3 | Sentry sourcemap upload (optional) |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:214:| TODO-24.1 | S2 | conditional | split WellnessDashboard if >350 KB raw |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:215:| TODO-24.3 | S2 | conditional | split _autopilot / AdvancedToolsPage |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:217:**Retired:** TODO-23.2 (CSS purge — closed by Phase 25).
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:236:| Backlog discipline | Phase 28 | 12 TODOs ledgered, 0 S0, schedule defined |
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:253:- Asset weight optimization scheduled Sprint 1 (TODO-26.1/26.2) — initial page weight will drop ~17 MB within 14 days
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:254:- Observability standardization scheduled Sprint 2 (TODO-22.2 / 23.1)
+docs/operations/LAUNCH_APPROVAL_MATRIX.md:341:- TODO Ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/operations/T_MINUS_1H_LAUNCH_SIGNOFF.md:10:- `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/operations/T_MINUS_1H_LAUNCH_SIGNOFF.md:44:| 5 | www reachable | `curl -s -o /dev/null -w "%{http_code}\n" https://www.mymentalhealthbuddy.com/` = 200 (or 301 post-TODO-18.1) | ☐ GO  ☐ NO-GO |
+docs/operations/T_MINUS_1H_LAUNCH_SIGNOFF.md:387:- Post-Launch TODO Ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/operations/T_MINUS_1H_LAUNCH_SIGNOFF.md:392:*This packet is the executable T-1h surface for the Phase 30 approval matrix. It introduces no new contracts and adds no TODOs. Documentation only.*
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:12:- `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:14:This document is the **production hardening verification plan**. Every check is a single, read-only, Replit-native command. Nothing here mutates production. Findings are routed to the Phase 28 TODO ledger for scheduling; no source modifications are made by this phase.
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:46:Any `opportunities` array entry with `details.overallSavingsMs > 200ms` is logged as a TODO candidate in the Phase 28 ledger. Items below the threshold are noted but not scheduled.
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:103:Phase 26 baseline: 35 MB total dist, 14.8 MB avatar PNGs identified as top opportunity (TODO-26.1).
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:129:| # | Check | Pass | TODO if failing |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:131:| 1 | Avatar PNGs ≤ 200 KB each | per-file `du -k` | TODO-26.1 (already open) |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:132:| 2 | Hero/banner JPEGs ≤ 300 KB each | per-file | new TODO |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:133:| 3 | All PNGs > 100 KB have WebP/AVIF | command above | TODO-26.1 / 26.2 (already open) |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:134:| 4 | All SVGs minified | `svgo --dry-run` (if installed) | new TODO if many savings |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:135:| 5 | No duplicate byte-identical pairs | `find ... -exec md5sum {} + \| sort \| uniq -d -w 32` | TODO-26.3 (already open) |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:136:| 6 | `loading="lazy"` on below-fold `<img>` | grep public HTML | new TODO if missing |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:137:| 7 | `width`/`height` attributes set (CLS prevention) | grep public HTML | new TODO if missing |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:178:| # | Budget | Source | Pass | TODO if failing |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:180:| 1 | Initial path ≤ 150 KB gz | Phase 24 | yes | TODO-24.1/24.3 conditional split |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:181:| 2 | Largest JS chunk ≤ 350 KB raw | Phase 24 | yes | TODO-24.1 if WellnessDashboard crosses |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:182:| 3 | Main CSS ≤ 100 KB gz | Phase 25 (60 KB current) | yes | new TODO if regresses |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:185:| 6 | dist ≤ 50 MB | Phase 26 | yes (35 MB current) | TODO-26.1/26.2 mid-term |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:186:| 7 | No JS chunk > 500 KB raw (hard ceiling) | Phase 24 | yes | new S0 TODO if hit |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:297:Phase 22 baseline + Phase 28 ledger (TODO-22.1 Express 4→5, TODO-22.2 OTel cluster).
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:317:| 1 | 0 High or Critical CVEs in production deps | `npm audit --omit=dev` | open S0 TODO, do not launch with High/Critical |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:318:| 2 | No extraneous/invalid top-level packages | `npm ls --depth=0` | new TODO |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:320:| 4 | Deferred Express 4→5 still flagged | TODO-22.1 | already ledgered |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:321:| 5 | Deferred OTel cluster still flagged | TODO-22.2 | already ledgered |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:351:| 2 | dist duplicate byte-identical pairs catalogued | TODO-26.3 (already open) |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:352:| 3 | Unreferenced source assets ≤ 20 files | candidates added to new S3 TODO |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:379:| 1 | `Content-Security-Policy` | present, restrictive | informational at v1.0.0 — TODO if absent |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:383:| 5 | `Permissions-Policy` | restrictive (camera/mic/geolocation off unless needed) | TODO if absent |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:384:| 6 | `Strict-Transport-Security` | `max-age >= 31536000; includeSubDomains; preload` | Phase 18 verified present (TODO-18.4 duplicate to dedupe) |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:388:**Pass criteria at v1.0.0:** row 6 (HSTS) is launch-blocking (already verified by Phase 18). Rows 1–5, 7, 8 are S1/S2 post-launch hardening TODOs if missing.
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:424:**Pass criteria:** rows 2, 3, 4 launch-blocking. Row 1 = perf TODO if regressed.
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:439:| 6 | Metrics endpoint | (TODO-23.1 Prometheus) | post-TODO-23.1 — informational at v1.0.0 |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:506:| P3 | Phase 28 TODO ledger entry | next sprint |
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:536:1. **Already open** in Phase 28 ledger → cross-reference TODO ID; no new entry needed
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:544:TODO-<n>.<m>  [S0|S1|S2|S3]  <one-line summary>
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:557:- Phase 28 TODO ledger (`docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`) for scheduling
+docs/operations/PRODUCTION_HARDENING_CHECKLIST.md:568:- Post-Launch TODO Ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (Phase 28)
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:8:- `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md` (original 12 TODOs)
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:13:This document is the **single source of truth for post-launch hardening execution**. It consolidates Phase 28's 12 carried-forward TODOs with Phase 33's 5 newly-identified findings into a unified, severity-ranked, sprint-mapped execution ledger.
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:26:DEFERRED TODOs (no sprint):   TODO-18.1 (www→apex 301) — see §6
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:51:Items prefixed `TODO-` are carried from Phase 28. Items prefixed `F-` are new findings from Phase 33 verification.
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:58:| TODO-26.1 | S1 | AVIF avatar regions (image format upgrade) | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:59:| TODO-26.2 | S1 | AVIF brand logos (image format upgrade) | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:62:| TODO-26.3 | S3 | De-dupe 4 byte-identical asset pairs | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:63:| TODO-18.4 | S3 | Investigate duplicate HSTS header (edge + app); cosmetic | Phase 28 / re-confirmed Phase 33 §3.4 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:69:| TODO-22.2 | S1 | OTel cluster coordinated bump | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:72:| TODO-26.4 | S2 | Consolidate avatar source directories | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:73:| TODO-23.1 | S2 | Prometheus `/metrics` endpoint | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:79:| TODO-22.1 | S1 | Express 4 → 5 migration | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:80:| TODO-24.2 | S3 | Sentry source-map upload (optional) | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:86:| TODO-24.1 | S2 | WellnessDashboard > 350 KB raw (currently 275 KB) | Phase 28 / Phase 33 §3.7 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:87:| TODO-24.3 | S2 | `_autopilot` / `AdvancedToolsPage` exceed split heuristic | Phase 28 / Phase 33 §3.7 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:93:| TODO-18.1 | S2 | www → apex 301 redirect — kept deferred per Phase 35 directive | Phase 28 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:109:| 4 | TODO-26.3 — de-dupe byte-identical assets | D+14 | Engineering | §4 gate TODO-26.3 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:110:| 5 | TODO-18.4 — duplicate HSTS investigation | D+18 | Engineering | §4 gate TODO-18.4 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:111:| 6 | TODO-26.1 — AVIF avatar regions | D+22 | Engineering | §4 gate TODO-26.1 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:112:| 7 | TODO-26.2 — AVIF brand logos | D+28 | Engineering | §4 gate TODO-26.2 |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:156:#### TODO-26.3 — de-dupe byte-identical assets
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:165:#### TODO-18.4 — duplicate HSTS
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:172:#### TODO-26.1 / TODO-26.2 — AVIF
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:183:#### TODO-22.2 — OTel cluster coordinated bump
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:209:#### TODO-26.4 — consolidate avatar source dirs
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:216:#### TODO-23.1 — Prometheus `/metrics`
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:225:#### TODO-22.1 — Express 4 → 5
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:232:#### TODO-24.2 — Sentry source maps
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:241:#### TODO-24.1 / TODO-24.3 — bundle splits
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:262:| TODO-26.3 asset de-dupe | Any asset 404 in production | Restore (de-dupe changes asset paths) | List of broken paths |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:263:| TODO-18.4 HSTS | HSTS count goes to 0 (regression beyond fix) OR max-age drops below 31536000 | Restore immediately; HSTS removal is a security regression | INC + 48h post-mortem |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:264:| TODO-26.1/26.2 AVIF | AVIF fails to render in Safari (most likely failure mode) OR bundle > 50 MB | Restore; ensure PNG/JPG fallback was retained | Browser matrix screenshot |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:265:| TODO-22.2 OTel bump | `/api/health` `services.sentry` flips to false OR observability gap > 5 min | Restore; re-pin previous OTel cluster | Health output log |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:268:| TODO-26.4 avatar dirs | Source-only refactor — runtime output should be identical; any visual diff = failure | Restore (git revert of refactor commit) | Visual diff screenshot |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:269:| TODO-23.1 `/metrics` | Endpoint exposed without auth OR leaks secret/PII | **Immediate P0 restore** (security boundary breach) | INC + 24h post-mortem |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:270:| TODO-22.1 Express 5 | Any 127-route regression in integration sweep | Full restore; Express 5 migration is high-blast-radius — restore decision authority lies with Architecture signer | Integration sweep log + 7d post-mortem |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:271:| TODO-24.2 Sentry maps | Source maps accidentally shipped in dist (find = nonzero) | Restore; this is a source-leak risk | Phase 24 baseline reaffirmed |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:272:| TODO-24.1 / 24.3 splits | Initial-path gz > 150 KB OR any chunk > 350 KB OR TTFB regression > 50% | Restore; bundle splits are reversible by reverting Vite config | Bundle stats + TTFB sample |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:280:## 6. Deferred items — www → apex 301 (TODO-18.1)
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:282:Per Phase 35 directive, **TODO-18.1 (www → apex 301 redirect) is kept deferred** beyond Sprint 1–3.
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:286:| TODO-18.1 — www → apex 301 redirect | **DEFERRED** (no sprint assignment) | Both apex and www currently return 200 (Phase 33 §3.1 maintained). The redirect is a SEO polish item, not a launch or operational gate. Holding it allows future hosting-config decisions (CDN, multi-region) to be made before fixing the redirect topology. |
+docs/operations/POST_LAUNCH_HARDENING_LEDGER.md:332:- Phase 28 post-launch TODO ledger: `docs/reports/PHASE_28_POST_LAUNCH_TODO_LEDGER.md`
+docs/operations/F_33_6_CRISIS_RESOURCE_RESILIENCE_PLAN.md:55:            (HSTS appears twice — TODO-18.4, separate ledger item)
+docs/operations/F_33_6_CRISIS_RESOURCE_RESILIENCE_PLAN.md:325:PHASE 36 NEW TODOs:           0
+docs/PEACESCAPE_ROADMAP.md:21:This roadmap is the path from a quiet stub today → a full sanctuary fabric.
+docs/adr/0001-modular-monolith-to-strangler-fig.md:127:- **Awareness pipeline** (`awareness.mjs`, `discernment.mjs`, the rule library + ML classifier stub + LLM reasoner ensemble). Tightly coupled to chat-path latency budgets — extracting it would add a network hop on the safety hot-path, which is the exact opposite of what we want.
+docs/adr/0001-modular-monolith-to-strangler-fig.md:172:- [ ] The Crisis Service has been extracted, runs in its own process, and the in-monolith `crisis.mjs` implementation has been replaced by a thin client. Tracked as ADR-0003 (placeholder) with its own roadmap and runbook.
+docs/adr/0001-modular-monolith-to-strangler-fig.md:173:- [ ] The Billing Service has been extracted with the same criteria. Tracked as ADR-0004 (placeholder).
+docs/adr/0001-modular-monolith-to-strangler-fig.md:174:- [ ] The Biometrics Service has been extracted with the same criteria. Tracked as ADR-0005 (placeholder).
+docs/adr/0001-modular-monolith-to-strangler-fig.md:175:- [ ] The Agent Orchestrator Service has been extracted with the same criteria, *only after the prior three are stable*. Tracked as ADR-0006 (placeholder).
+docs/runbooks/pagerduty.md:87:| `alertCrisisPipelineFailure` | **critical** | 5 min per stage | The crisis-detection short-circuit failed at one of its stages (rule match, ML stub, LLM reasoner). User-facing crisis routing may be degraded. | Page on-call; check `/api/admin/observability/health`; check `server/ai/safety/crisis.mjs` logs; if the failure is in the LLM reasoner, traffic still routes via rules layer — verify by looking at recent `awareness_detections` rows. |
+docs/runbooks/LAUNCH_OPERATIONS_RUNBOOK.md:148:3. **Do not** add caching or refactor under pressure. Capture data, file as TODO-postlaunch, restart workflow if CPU/memory saturated.
+docs/runbooks/LAUNCH_OPERATIONS_RUNBOOK.md:229:- Weekly: re-run Phases 23 (perf baseline) and 24 (bundle budget) and compare against pre-launch numbers. Any regression → file a Phase-numbered TODO.
+docs/runbooks/LAUNCH_OPERATIONS_RUNBOOK.md:230:- T+14d: cut a `v1.0.x` patch release if any in-flight TODOs from the Phase 21–26 deferred list have been addressed.
+docs/inventory/route-inventory.md:1035:| `server/routes/api.mjs` | 2 | Likely a meta-router stub. Check whether merge-into-other-router is intended. |
+docs/inventory/ROUTE_CANDIDATES_PHASE_66.md:101:(NOT MOUNTED / DEPRECATED / disabled / legacy / TODO remove) include:
+docs/inventory/ROUTE_CANDIDATES_PHASE_66.md:120:"markers" are inline TODO/legacy comments, not actual orphans.
+docs/inventory/ROUTE_FAMILY_LOWRISK_PHASE_67.md:41:| `/coming-soon` | ComingSoon | Pre-launch placeholder |
+docs/inventory/PHASE_68_SENSITIVE_ROUTE_CRISIS_AUDIT.md:22:client/src/pages/admin/NarrativeOpsConsole.jsx:852:              placeholder="e.g. Educational only. Not therapy."
+docs/inventory/PHASE_68_SENSITIVE_ROUTE_CRISIS_AUDIT.md:28:client/src/pages/admin/SocialGenerator.jsx:406:                      placeholder="Write your main content here. Use trauma-informed language..."
+docs/governance/incidents/INC-001_learning_library_loop.md:41:// placeholder color: '#5a6a5a' (darker than spec '#8a8278' for WCAG AA — 4.7:1 vs 3.1:1)
+docs/governance/AVATAR_V4.2_EXECUTION_PLAN.md:58:| `/tools/breathing`| ConfigRoute → autopilot stub           | Replace with real `BreathingTool.jsx` (4-7-8 cycle, big Lumi anchor, calm/blue) |
+docs/governance/AVATAR_V4.2_EXECUTION_PLAN.md:76:**Change:** import `classifyEmotion` + `emotionToAvatar`. For each assistant bubble, derive `{state, colorMode, pose}` from that bubble's text. Typing indicator stays `state="anxious"` (breathe motion). Replaces TODO(buddy-emotion) marker.
+docs/governance/PHASE12_DRIFT_AUDIT.md:106:  (mockups). Safe to leave unmigrated.
+docs/CANONICAL.md:14:| 1 | **Lumi rendering** | `client/src/lumi-*/` (25 opt-in modules: `lumi-registry`, `lumi-tokens`, `lumi-disclaimer`, `lumi-cbt`, `lumi-tracker`, `lumi-crisis`, `lumi-conversation`, `lumi-rituals`, `lumi-scenes`, `lumi-memory`, `lumi-circadian`, `lumi-voice`, `lumi-boundaries`, `lumi-consistency`, `lumi-language`, `lumi-rbac`, `lumi-audit`, `lumi-notifications`, `lumi-backend`, `lumi-bridge`, `lumi-cohesion`, `lumi-integration`, `lumi-motion`, `lumi-library`, `lumi-agent`) — render via `OfficialLumi` + `lumiPagePlacementMap.ts` | `client/src/components/lumi/` (19 files: `LumiV6.tsx`, `LumiV7.jsx`, `LumiMascot.jsx`, `LumiCompanion.jsx`, `FloatIdleAnimated.jsx`, `FloatIdleRig.jsx`, `LumiMascotImage.jsx`, `LumiBrandLockupImage.jsx`, `LumiBrandLogo.jsx`, `LumiAccessibleWrapper.jsx`, `LumiCustomizer.jsx`, `LumiCustomizerTrigger.jsx`, `TGLPMandala.jsx`, `TGLPMandalaImage.jsx` + 5 CSS) | **MIGRATION_IN_PROGRESS** — Iter 2b (2026-05-15): `landing-canva` placement entry added to `lumiPagePlacementMap.ts` (variant `LUMI_SOFT_PRESENCE`, assignment `optional`, position `hero`, maxWidth 320, floor bumped 17→18); `OfficialLumi` policy gate now permits opt-in render on `/`. Iter 2c (2026-05-15): first legacy `<LumiMascot>` (header logo, L360, 48px) swapped → `<OfficialLumi variant="LUMI_SOFT_PRESENCE" pageId="landing-canva" position="inline" widthPx=48>`; screenshot-verified visible. Iter 2c-bridge (2026-05-15): the v5.8.62 registry hard-codes 8 paths under `/lumi/official/*.png` but the directory did not exist (pre-existing canonical-asset gap, not migration-introduced). Bridged 8 canonical PNGs by `cp` from real sources: `lumi-soft-presence` ← `brand/v17/avatar-breathing`, `lumi-heart` ← `brand/v17/avatar-heart`, `lumi-calm-float` ← `brand/v17/avatar-floating`, `lumi-meditation` ← `attached_assets/generated_images/lumi-hooded-meditating-aura`, `lumi-companion` ← `lumi-sprout-heart-glow`, `lumi-path` ← `lumi-hooded-walking-path`, `lumi-emotion-orb` ← `lumi-hooded-emotion-orbs`, `lumi-float-idle` ← `avatar-core/regions/MMHB_FLOAT_IDLE_UNIT_v1_region_sparkles`. tsc + vite build clean. **Remaining on `CanvaLanding.jsx`:** L1246 hero `<LumiMascot>` and L522 `<FloatIdleAnimated>` (untouched pending screenshot-verified next iteration). **Open follow-up:** the bridged assets are functional placeholders sourced from real artwork — formal brand-approved canonical PNGs (matched 1:1 to each variant's intended emotional role) should still be commissioned before opt-in flags flip from admin-only. |
+docs/architecture.md:15:An "Awareness Detection Pipeline" uses a three-layer ensemble (RuleMatcher, MLClassifier stub, LLMReasoner) for detecting manipulation, distortion, and fallacies, integrating with the AI chat. An "Agent Orchestrator" is a pure-JS deterministic state machine for AI agent invocation, with actions recorded in an audit log and a three-tier memory abstraction (Hot, Warm, Cold). "Consciousness OS Foundation Primitives" establish persistence and audit with Drizzle tables.
+docs/replit-history.md:42:| v5.8.76 | 2026-05-15 | Unofficial avatar removal (sprout-only enforcement) | Repointed 14 live refs across 8 source files (`lumiAssets`, `nlpMiContent`, `PageTemplate`, `LumiV6`, `BuddyAvatar`, `LumiMascotImage`, `OnboardingFlow`, `officialLumiRegistry`+`VisualBenefits`) from legacy `/brand/v17/avatar-*` (cream-blob) to canonical `/lumi/official/lumi-{float-idle,heart,meditation}.png` (sprout-only per V26). Tier A rm: 4 placeholder-bak + 5 .archive-pre-v5.8.40 (~4.7 MB). Tier B mv→archive: 12 legacy avatars (4.1 MB). Pre-existing missing `lumi-path.png` repointed to `lumi-float-idle.png`. Final state: 7 sprout PNGs + MANIFEST in `/lumi/official/`; 4 benefit-scene pairs only in `/brand/v17/`. Full detail → `docs/changelog.md`. |
+docs/replit-history.md:44:| v5.8.74 | 2026-05-15 | Canonical Lumi sprout-only replacement (`/lumi/official/` × 7 + `benefit-companionship.png`) | All-sprout V26 mandate. 7/8 canonical PNGs replaced with sprout artwork (`LUMI_SOFT_PRESENCE`, `LUMI_HEART`, `LUMI_CALM_FLOAT`, `LUMI_MEDITATION`, `LUMI_COMPANION`, `LUMI_EMOTION_ORB`, `LUMI_FLOAT_IDLE`). 1 exception: `LUMI_PATH` kept on hooded source pending sprout walking-path commission. Hooded `benefit-companionship.png` swapped to sprout halo (708 KB vs 2.2 MB prior). 8 placeholders preserved as `*.placeholder-bak.png` siblings. Zero code changes — registry path constants unchanged. Full detail → `docs/changelog.md`. |
+docs/replit-history.md:194:- Intermediate edit produced a transient malformed `_monetizationGateUnused` stub which was cleaned up in the same iter before verify; final file has zero residual dead memos (architect confirmed).
+docs/archive/lumi-verification/phase28-avatar-governance.md:49:2. **Silent correction** — size violations are clamped, not thrown. Unknown variants render a zero-size `role="img"` placeholder. Unassigned scenes render an inline error span (visible only in dev). UI never crashes on a misconfigured Lumi.
+docs/archive/lumi-verification/deprecated-avatar-list.md:7:| Green Hero Bear | REMOVED | Off-brand mascot from earliest mock; bear ≠ Lumi | `LUMI_SOFT_PRESENCE` |
+docs/changelog.md:39:- **Intermediate edit quality issue (caught + recovered same iter):** first edit transition produced a malformed `_monetizationGateUnused` useMemo stub from a mis-targeted old_string boundary. Detected by structural re-read, cleaned up via second edit removing the stub + the residual 10 inline data-* attrs together. Final file (verified by grep + architect) contains zero `_monetizationGateUnused`, zero residual dead memos, zero `overrideState.` or `monetizationGate.` references outside the canonical helper return values.
+docs/changelog.md:137:Each with own `express()` + `PORT=5000` + `listen("0.0.0.0")`. Plus `app.ts` (0-byte stale placeholder).
+docs/changelog.md:700:  - 4× `/lumi/official/*.placeholder-bak.png` (3.3 MB rollback safety placeholders)
+docs/changelog.md:730:  **All-sprout canonical mandate.** Per user authority, every rendered Lumi must be sprout-on-head; hooded designs archive-only; long-eared forbidden (V26). Replaced 7 of 8 canonical bridged placeholders with user-supplied sprout artwork: **(1)** `LUMI_SOFT_PRESENCE` ← `57FC35F4` (sprout hugging green orb, 2.2 MB); **(2)** `LUMI_HEART` ← cropped from 6-pose grid `2B638A20` cell (1024,0,512,512); **(3)** `LUMI_CALM_FLOAT` ← `25F728DB` (sprout floating + glow, 1.5 MB); **(4)** `LUMI_MEDITATION` ← cropped grid cell (0,512,512,512); **(5)** `LUMI_COMPANION` ← cropped grid cell (512,0,512,512) — closest-sprout substitution per V26 rule; **(6)** `LUMI_EMOTION_ORB` ← `AFEC27DF` (sprout emotion-orb, 2.3 MB); **(7)** `LUMI_FLOAT_IDLE` ← `FA65B1F0` (sprout standing, 2.2 MB) — **resolves architect-flagged identity-drift** (prior sourced from sparkles region artifact).
+docs/changelog.md:738:  **Non-destructive safety:** all 8 prior placeholders preserved as `*.placeholder-bak.png` siblings (removed in v5.8.76 Tier A). MANIFEST.md rewritten — new provenance table, new "Brand rule (v5.8.74)" section, reversal + forward-path docs. Zero code changes (registry path constants unchanged; all 7 enrolled pages auto-pick up new sprout artwork on next render). `tsc` clean. `vite build` clean.
+docs/changelog.md:748:**lumi-backend** (5 files): `config/apiConfig.ts` (API_CONFIG / AUTH_CONFIG / RATE_LIMIT_CONFIG / DB_CONFIG / REDIS_CONFIG / HIPAA_CONFIG / HEALTH_CONFIG / CORS_CONFIG / UPLOAD_CONFIG — `as const` everywhere); `routes/apiRoutes.ts` (8 route groups + `HEALTH_ROUTE` + `ALL_ROUTES` + `getRouteStats()` returning `{total, authRequired, public, hipaaProtected}` — route-array literals deliberately mutable so `: ApiRoute[]` typechecks against `...spread` into `ALL_ROUTES`); `middleware/middlewareSpec.ts` (JWT / RateLimit / HIPAA / ErrorHandler / Validation / Logging / CORS / Upload specs — pure config interfaces); `health/healthCheck.ts` (4 stub component checks for database/redis/disk/memory + `runHealthCheck()` aggregator + `isSystemReady()` — SSR-safe `typeof process !== "undefined"` guards on `memoryUsage()` / `uptime()` so spec module type-checks in browser-targeted tsconfig despite never being imported by App.jsx); `index.ts` (barrel).
+docs/changelog.md:772:4. **DELIBERATE LITERAL-SPEC** — `healthCheck.ts` component checks for database/redis/disk are unconditional success stubs (no real DB ping). Spec text matches byte-for-byte; module explicitly described as spec for actual middleware to implement; SSR-safe `process` guards added per #5 below.
+docs/changelog.md:1000:**2nd pass** confirmed all 3 fixes correct and caught 1 non-blocking gap: `AssetLumiBody.errored` wasn't reset on `variantData.src` change → if one asset errored and the same component instance was reused with a new variant, it'd stick on placeholder forever. Fix shipped: added `useEffect(() => setErrored(false), [variantData.src])`.
+docs/changelog.md:1002:The architect also noted (deferred follow-ups, not blocking): (a) unit test covering 404 → placeholder → src-change → retry, (b) keyboard-accessibility (tabIndex / Enter / Space) for clickable Lumi instances. Asset mode is opt-in and not yet wired anywhere in production — both are best added when the first production wiring lands.
+docs/changelog.md:1094:6. Inline error states — unknown variants render zero-size placeholders; unassigned scenes render a dev-only red error pill. UI never crashes on a misconfigured Lumi.
+docs/changelog.md:1664:- **P14.3** — `CF-R004` and `CF-R011` were placeholder `() => true` — auditing nothing. Both now invoke `getStoreApiSurface()` and verify `reset` / `declineOffer` actions exist by structural probe; descriptions updated to reflect the real predicate. Test: "CF-R004 and CF-R011 are no longer placeholder true-returns".
+docs/changelog.md:2159:Anchors exposed: float-center, body-centerline-top, body-centerline-bottom, arm-l, arm-r, leg-l, leg-r, blink-l, blink-r, mouth, top-leaf. Note: `eyes` region is the *combined* L+R blink bbox (manifest's L 365-420 and R 490-545 share Y range 330-385); independent L/R blink would require a sub-region split (Phase 2.5) — flagged as TODO in component header docstring.
+docs/changelog.md:2949:- `client/src/hooks/useSEO.ts` — `BASE_URL` fallback inside the JSON-LD organization stub
+docs/changelog.md:3224:- `client/src/sections/ValueProposition.jsx` — email signup with two variants. **`full`** ships a 4-benefit grid (Heart / Sparkles / Shield / Compass — trauma-informed support, daily reflection cues, privacy by default, free tools). **`compact`** ships headline + form only. Email persistence: `localStorage["mmhb:email_subscribers"]` as a JSON array of unique lowercased emails (frontend stub — when a backend `/api/subscribe` lands, swap `handleSubmit`). Email regex `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`. Success state restores on mount if device already subscribed (no re-prompt). A11y: `<label for>`/`<input id>`, `aria-live="polite"` status, `aria-invalid` + `aria-describedby` on errors, scoped `<style>` block with `prefers-reduced-motion` collapsing all transforms.
+docs/changelog.md:3475:The workspace has multiple Drizzle `pgTable(...)` declaration sites that have grown organically: `shared/schema.mjs` is the **canonical source of truth** (78 tables, 46 importers); `server/db/schema.mjs` + `server/db/schema/*.{js,mjs}` hold server-internal duplicates (`users`, `refreshTokens`, etc.); `db/schema.ts` is a 271-byte legacy stub with **0 active importers** but a dangerous `users.id: serial` declaration (canonical is `uuid`); `database/schema/*.ts` is empty scaffolding that `drizzle.config.ts` points at for migration generation. Because `drizzle.config.ts` is forbidden to edit per dev guidelines, the four-source structure is preserved; instead, `scripts/checkSchemaDrift.mjs` provides a CI-grade guardrail that text-parses every `pgTable(...)` definition across `shared/`, `server/`, `db/`, `database/`, and `client/src/`, then for any table declared in >1 location reports both **column-set drift** (`missing_columns`) and **column-type drift** (`type_drift`, e.g. `serial` vs `uuid` on a primary key — the exact landmine pattern that compiles fine but corrupts the runtime). Run before any `npm run db:push` or schema PR: `node scripts/checkSchemaDrift.mjs` (human report) or `--json` (machine-readable). Exits non-zero on drift. Documented current dormant divergence: `db/schema.ts` `users.id` is `serial` while canonical is `uuid` — the file has zero importers so no runtime impact, but the guardrail flags it so any new importer of the stub triggers a CI failure instead of a silent column-type bug.
