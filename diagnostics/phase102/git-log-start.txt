@@ -1,0 +1,30 @@
+81191bbd5 (HEAD -> clean-push, origin/main, origin/HEAD) phase101b correct browser smoke environment evidence
+44b1095ba phase101 verify browser startup service worker regression
+e4ed0f8ee phase100b verify recovered service worker stale shell fix
+ec0af3590 Add and update several API endpoints for improved functionality
+2674aac5f Add authentication to file uploads and new user settings
+ee063b518 Connect more API features and add security to email and AI services
+8130b4bb1 Securely manage content creation and update API endpoints
+bcfea9d0b phase99 quarantine next verified root shadow duplicate family
+6dc5eb6dd phase98 quarantine one verified shadow duplicate family
+fc13c75d8 phase97 add active runtime duplicate ownership gate
+3033bcc1c phase97 add active runtime duplicate ownership gate
+8d2a6ee48 phase96 select duplicate family for canonicalization planning
+6a1cfb7ce phase95b verify duplicate ownership audit completion
+803e55ad6 Add durable database schema provisioning and fix analytics beacon
+a7e6e2184 Fix analytics beacon and database schema provisioning issues
+354b99ca3 Fix service worker to prevent stale interfaces after updates
+b9d667708 phase94 close phase93 seo discovery before service worker repair
+74776ebe4 Make several educational and SEO pages accessible on the website
+096ea06f1 Published your App
+c01c7b869 phase88 audit platform structure content components and visual coherence
+4725f8150 phase90 finalize orphan api route wiring before seo routing
+7cb25394d phase88 audit platform structure content components and visual coherence
+30eaec700 phase86 close parser blockers before route wiring
+927422c45 phase85 close content coherence and parser blocker findings
+9b5e6e9dd phase84 enforce active business healing firewall and safe content claims
+50cbdc507 phase83 implement canonical constitution audit and component content map
+b2dd91299 Document platform structure and orphaned API routes
+8a5d069fe phase81 audit platform coherence and enforce zero drift completion rules
+800dfb1be phase78 add client content coherence clarity layer
+428a46eb7 phase77 verify disappeared push and continue safely
