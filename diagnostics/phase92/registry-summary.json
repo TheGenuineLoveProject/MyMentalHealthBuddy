@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-06-07T03:47:03.171Z",
+  "siteUrl": "https://mymentalhealthbuddy.com",
+  "totalRoutes": 15,
+  "presentRoutes": 13,
+  "missingRoutes": [
+    "/wellness-glossary",
+    "/research-evidence"
+  ],
+  "duplicatePaths": [],
+  "sitemapUrlCount": 13
+}

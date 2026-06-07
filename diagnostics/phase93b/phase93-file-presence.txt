@@ -1,0 +1,4 @@
+FOUND client/src/components/navigation/SEOContentDiscoveryRail.jsx
+FOUND client/src/components/navigation/SEOContentDiscoveryRail.css
+FOUND scripts/phase93-mount-seo-discovery-rail.mjs
+FOUND scripts/phase93-seo-discoverability-gate.mjs
