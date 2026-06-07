@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Upload, X, CheckCircle, AlertCircle } from 'lucide-react';
+import { getAuthToken } from '@/lib/api';
 
 const ALLOWED_TYPES = {
   image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
@@ -56,7 +57,10 @@ export default function ObjectUploader({
     try {
       const presignRes = await fetch('/api/uploads/request-url', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(getAuthToken() ? { Authorization: `Bearer ${getAuthToken()}` } : {}),
+        },
         body: JSON.stringify({ 
           name: file.name,
           contentType: file.type,

@@ -9,4 +9,5 @@
 - [Verification foundation](verification-foundation.md) — canonical non-destructive `npm run verify`; docs memory system under `docs/`; distrust placeholder lint/typecheck/test (always exit 0) and `/ready` SPA-fallback contract check.
 - [Canonical palette & homepage](canonical-palette-and-homepage.md) — colors.ts is the locked palette; canonical gold #D4B06A fails AA as text; `/` renders the CanvaLanding stub, not the PageTemplate landing.
 - [rg replace-flag footgun](rg-replace-flag-footgun.md) — `rg -rn`/`-rc` means --replace; output `n` artifacts are NOT file corruption. Use `-n` for line numbers, never `-r` unless replacing.
-- [Schema provisioning drift](schema-provisioning-drift.md) — no live auto-sync; shared/schema.mjs is canonical but ensureSchema() is dead code & drizzle.config points at an near-empty schema dir, so drifted tables silently 500 inserts.
+- [Schema provisioning drift](schema-provisioning-drift.md) — no db:push; ensureSchema() IS live (replays schema.canonical.sql every boot). Add a column in BOTH the CREATE TABLE block AND a standalone idempotent ALTER there, or prod silently 500s.
+- [Bearer-auth gating contract](bearer-auth-gating.md) — requireAuth is Bearer-only (no cookie), CSRF exempts Bearer; to gate a frontend-fetched endpoint you MUST add Authorization:Bearer getAuthToken() at every call site or it 401s.

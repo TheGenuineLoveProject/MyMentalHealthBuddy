@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import type { UppyFile } from "@uppy/core";
+import { getAuthToken } from "@/lib/api";
 
 interface UploadMetadata {
   name: string;
@@ -66,6 +67,7 @@ export function useUpload(options: UseUploadOptions = {}) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...(getAuthToken() ? { Authorization: `Bearer ${getAuthToken()}` } : {}),
         },
         body: JSON.stringify({
           name: file.name,
@@ -166,6 +168,7 @@ export function useUpload(options: UseUploadOptions = {}) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...(getAuthToken() ? { Authorization: `Bearer ${getAuthToken()}` } : {}),
         },
         body: JSON.stringify({
           name: file.name,
