@@ -101,19 +101,23 @@ const STATEMENTS = [
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
   )`,
 
+  // Canonical shape — must match shared/schema.mjs::analyticsEvents exactly.
+  // The route (server/routes/analytics-events.mjs) queries via that Drizzle
+  // model, so any drift here silently 500s every analytics insert.
   `CREATE TABLE IF NOT EXISTS analytics_events (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    event_type VARCHAR(100) NOT NULL,
-    event_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     user_id UUID,
-    session_id VARCHAR(255),
-    properties TEXT,
-    page_url TEXT,
-    referrer TEXT,
-    user_agent TEXT,
-    ip_address VARCHAR(45),
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    session_id VARCHAR(64),
+    event_name VARCHAR(100) NOT NULL,
+    event_category VARCHAR(50) NOT NULL,
+    path VARCHAR(500),
+    meta JSONB,
+    privacy_level VARCHAR(20) NOT NULL DEFAULT 'minimal'
   )`,
+  `CREATE INDEX IF NOT EXISTS idx_analytics_events_created ON analytics_events (created_at)`,
+  `CREATE INDEX IF NOT EXISTS idx_analytics_events_name ON analytics_events (event_name)`,
+  `CREATE INDEX IF NOT EXISTS idx_analytics_events_category ON analytics_events (event_category)`,
 
   // Peace Scape — Layer 2 foundation. Idempotent. Matches shared/schema.mjs::userAvatars.
   `CREATE TABLE IF NOT EXISTS user_avatars (

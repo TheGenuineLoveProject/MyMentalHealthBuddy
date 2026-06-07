@@ -1,0 +1,67 @@
+===== GET /serviceWorker.js =====
+HTTP=200
+3: * - Never serve cached index.html for navigations.
+5: * - Fall back only to offline.html when network is unavailable.
+10:const CACHE_VERSION = "mmhb-pwa-v94-stale-shell-safe";
+15:  "/offline.html",
+57:async function networkFirstNavigation(request) {
+62:    return (await cache.match("/offline.html")) || new Response(
+92:    event.respondWith(networkFirstNavigation(request));
+106:  if (event.data?.type === "CLEAR_MHB_CACHES") {
+
+===== GET /offline.html =====
+HTTP=200
+76:    <h1>You are offline</h1>
+78:    <p>This offline screen is shown only when the network is unavailable. It prevents an old cached page from loading outdated app files after a deploy.</p>
+80:      <p><strong>Safety note:</strong> If you may be in immediate danger or need urgent help, call local emergency services. In the U.S. you can call or text <strong>988</strong>.</p>
+
+===== GET /sitemap.xml =====
+HTTP=200
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mymentalhealthbuddy.com</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/pricing</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/premium</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/safety</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/privacy</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/terms</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mymentalhealthbuddy.com/glossary</loc>
+
+===== GET /robots.txt =====
+HTTP=200
+User-agent: *
+Allow: /
+
+Sitemap: https://mymentalhealthbuddy.com/sitemap.xml
+

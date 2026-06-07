@@ -56,8 +56,7 @@ function isCacheableAssetRequest(request) {
 
 async function networkFirstNavigation(request) {
   try {
-    const response = await fetch(request, { cache: "no-store" });
-    return response;
+    return await fetch(request, { cache: "no-store" });
   } catch (_error) {
     const cache = await caches.open(STATIC_CACHE);
     return (await cache.match("/offline.html")) || new Response(
