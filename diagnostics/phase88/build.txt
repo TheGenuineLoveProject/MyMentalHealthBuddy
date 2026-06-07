@@ -450,11 +450,8 @@ client/dist/assets/_autopilot-C8zoTabF.js                                      2
 client/dist/assets/WellnessDashboard-DiAk1vU7.js                               275.14 kB │ gzip: 89.13 kB
 
 [33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
-  - vite:esbuild-transpile (61%)
-  - vite:css (14%)
-  - vite:css-post (7%)
-  - visualizer (7%)
-  - vite:asset (5%)
+  - vite:esbuild-transpile (65%)
+  - vite:css (19%)
 See https://rolldown.rs/options/checks#plugintimings for more details.
 
-✓ built in 40.46s
+✓ built in 34.31s
