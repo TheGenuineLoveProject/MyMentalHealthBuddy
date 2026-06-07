@@ -57,6 +57,7 @@ import adminBillingRoutes from "./routes/adminBilling.mjs";
 import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
 import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
 import db from "./db/client.mjs";
+import { ensureSchema } from "./db/ensureSchema.mjs";
 
 // Expose to session-boundary helpers without touching working modules.
 globalThis.issueCsrfToken = issueCsrfToken;
@@ -467,6 +468,16 @@ server.on("listening", () => {
   console.log(`[SERVER] NODE_ENV=${process.env.NODE_ENV || "development"}`);
   console.log(`[SERVER] started_at=${SERVER_START_ISO} uptime=${process.uptime().toFixed(3)}s`);
   console.log(`[SERVER] routes registered: ${r.total} (direct=${r.routes}, routers=${r.routers})`);
+
+  // Self-heal schema AFTER the port is open, non-blocking. A fresh database or a
+  // disaster-recovery restore gets the full canonical schema (IF NOT EXISTS, so a
+  // healthy DB is all no-ops). Fully isolated: it can never block port-open or
+  // crash boot — any failure is logged and swallowed inside ensureSchema().
+  setImmediate(() => {
+    ensureSchema().catch((err) => {
+      console.warn("[SERVER] ensureSchema bootstrap skipped:", err?.message || err);
+    });
+  });
 });
 
 server.on("error", (err) => {

@@ -1,5 +1,9 @@
-096ea06f1 (HEAD -> clean-push) Published your App
-c01c7b869 (origin/main, origin/HEAD) phase88 audit platform structure content components and visual coherence
+a7e6e2184 (HEAD -> clean-push) Fix analytics beacon and database schema provisioning issues
+354b99ca3 Fix service worker to prevent stale interfaces after updates
+b9d667708 (origin/main, origin/HEAD) phase94 close phase93 seo discovery before service worker repair
+74776ebe4 Make several educational and SEO pages accessible on the website
+096ea06f1 Published your App
+c01c7b869 phase88 audit platform structure content components and visual coherence
 4725f8150 phase90 finalize orphan api route wiring before seo routing
 7cb25394d phase88 audit platform structure content components and visual coherence
 30eaec700 phase86 close parser blockers before route wiring
@@ -44,7 +48,3 @@ a762a3099 phase56 production release package and go live readiness
 e9d65d59d phase53 production deployment gate verification
 d9e8a1f8b phase50 production deployment evidence package
 3b0143f78 phase49 close deployment readiness scorecard
-41a9b5be7 phase47 deployment candidate readiness review
-7d6a9fccc phase46 investigate secret token hits and remaining moderate vulnerabilities
-023da40c0 phase45 add self-improving platform governance ledger
-72f75fc49 phase45 add self-improving platform governance ledger

@@ -1,0 +1,6 @@
+40:    window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
+64:                      window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
+71:                    window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
+88:  navigator.serviceWorker.addEventListener("controllerchange", () => {
+89:  window.dispatchEvent(new CustomEvent("mmhb-service-worker-updated", {
+91:      source: "controllerchange",
