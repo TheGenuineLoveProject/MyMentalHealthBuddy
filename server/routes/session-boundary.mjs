@@ -1,7 +1,7 @@
 import express from "express";
 import crypto from "node:crypto";
 import { sql } from "drizzle-orm";
-import { requireAuth } from "../middleware/auth.mjs";
+import { requireAuth, optionalAuth, signUserToken } from "../middleware/auth.mjs";
 import { csrfProtection, issueCsrfToken } from "../security/csrf.mjs";
 
 const router = express.Router();
@@ -9,6 +9,17 @@ const router = express.Router();
 router.get("/csrf-token", (req, res) => {
   const token = issueCsrfToken(req, res);
   return res.json({ ok: true, csrfToken: token });
+});
+
+// Keep an idle session alive from the timeout-warning UI. Auth here is stateless
+// JWT, so there is no server-side session record to extend; if the caller is
+// authenticated we hand back a freshly-signed token they may adopt. Stays 200 for
+// anonymous callers so the client never sees a 404 on activity ping.
+router.post("/extend", optionalAuth, (req, res) => {
+  if (req.user) {
+    return res.json({ ok: true, token: signUserToken(req.user) });
+  }
+  return res.json({ ok: true });
 });
 
 router.post("/upgrade-history", requireAuth, async (req, res) => {
