@@ -10,4 +10,5 @@
 - [Canonical palette & homepage](canonical-palette-and-homepage.md) — colors.ts is the locked palette; canonical gold #D4B06A fails AA as text; `/` renders the CanvaLanding stub, not the PageTemplate landing.
 - [rg replace-flag footgun](rg-replace-flag-footgun.md) — `rg -rn`/`-rc` means --replace; output `n` artifacts are NOT file corruption. Use `-n` for line numbers, never `-r` unless replacing.
 - [Schema provisioning drift](schema-provisioning-drift.md) — no db:push; ensureSchema() IS live (replays schema.canonical.sql every boot). Add a column in BOTH the CREATE TABLE block AND a standalone idempotent ALTER there, or prod silently 500s.
+- [Journal storage + API contract](journal-store-contract.md) — journals are DB-backed; map MUST emit both content+text; /api/journal={ok,data} vs /api/journals=bare array; getUserJournals default unbounded; invalidate both query keys.
 - [Bearer-auth gating contract](bearer-auth-gating.md) — requireAuth is Bearer-only (no cookie), CSRF exempts Bearer; to gate a frontend-fetched endpoint you MUST add Authorization:Bearer getAuthToken() at every call site or it 401s.

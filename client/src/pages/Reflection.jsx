@@ -206,6 +206,7 @@ export default function Reflection() {
         mood: "neutral",
       });
       queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/journals"] });
       queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
       setJournalStatus("saved");
       setTimeout(() => setJournalStatus(null), 3000);

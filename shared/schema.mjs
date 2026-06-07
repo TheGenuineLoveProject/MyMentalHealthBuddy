@@ -34,6 +34,7 @@ export const journals = pgTable("journals", {
   userId: uuid("user_id").notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   text: text("text").notNull(),
+  mood: varchar("mood", { length: 50 }).default("neutral"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 }, (table) => ({

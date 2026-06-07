@@ -413,6 +413,7 @@ CREATE TABLE IF NOT EXISTS "journals" (
         "user_id" uuid NOT NULL,
         "title" varchar(255) NOT NULL,
         "text" text NOT NULL,
+        "mood" varchar(50) DEFAULT 'neutral',
         "created_at" timestamp DEFAULT now() NOT NULL,
         "updated_at" timestamp DEFAULT now() NOT NULL
 );
@@ -778,6 +779,8 @@ CREATE TABLE IF NOT EXISTS "user_preferences" (
 );
 --> statement-breakpoint
 ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "preferences" jsonb;
+--> statement-breakpoint
+ALTER TABLE "journals" ADD COLUMN IF NOT EXISTS "mood" varchar(50) DEFAULT 'neutral';
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_progress" (
         "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
