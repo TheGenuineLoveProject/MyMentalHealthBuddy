@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./SEOContentDiscoveryRail.css";
 
 const seoContentLinks = [
@@ -31,15 +30,15 @@ export default function SEOContentDiscoveryRail() {
 
         <div className="seo-content-discovery-rail__links">
           {seoContentLinks.map((item) => (
-            <Link
+            <a
               key={item.to}
-              to={item.to}
+              href={item.to}
               className="seo-content-discovery-rail__link"
               aria-label={`${item.label}: ${item.description}`}
             >
               <span className="seo-content-discovery-rail__link-label">{item.label}</span>
               <span className="seo-content-discovery-rail__link-description">{item.description}</span>
-            </Link>
+            </a>
           ))}
         </div>
       </div>

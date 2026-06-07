@@ -44,6 +44,7 @@ import { usePageViewTracker } from "./hooks/useAnalytics.mjs";
 const AICompanion = lazy(() => import("./components/AICompanion.jsx"));
 const AccessibilityToolbar = lazy(() => import("./components/AccessibilityToolbar.jsx"));
 import ToastContainer from "./components/ui/toast-container";
+import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscoveryRail.jsx";
 import './index.css'; // Your Tailwind import
 const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 
@@ -440,6 +441,7 @@ export default function App() {
             <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Landing & Public Pages */}
+<SEOContentDiscoveryRail />
               <Route path="/">
                 <CanvaLanding />
               </Route>
@@ -1620,6 +1622,8 @@ export default function App() {
               <Route path="/news">{() => <ConfigRoute route="/news" />}</Route>
               <Route path="/research">{() => <ConfigRoute route="/research" />}</Route>
               <Route path="/glossary">{() => <ConfigRoute route="/glossary" />}</Route>
+              <Route path="/wellness-glossary">{() => <ConfigRoute route="/wellness-glossary" />}</Route>
+              <Route path="/research-evidence">{() => <ConfigRoute route="/research-evidence" />}</Route>
               <Route path="/glossary-full">{() => <ConfigRoute route="/glossary-full" />}</Route>
               <Route path="/how-to-guides">{() => <ConfigRoute route="/how-to-guides" />}</Route>
               <Route path="/daily-routines">{() => <ConfigRoute route="/daily-routines" />}</Route>

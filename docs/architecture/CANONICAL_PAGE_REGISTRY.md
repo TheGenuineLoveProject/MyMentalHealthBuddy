@@ -1,5 +1,8 @@
 # Canonical Page Registry
 
+## Purpose
+Canonical public page ownership registry for SEO, sitemap, route governance, and zero-drift page accountability.
+
 | Path | Title | Domain | Priority | Present In App | Sitemap | Intent |
 |---|---|---:|---:|---:|---:|---|
 | / | Home | PUBLIC | P0 | YES | YES | Primary landing page |
@@ -9,8 +12,8 @@
 | /privacy | Privacy | LEGAL | P0 | YES | YES | Privacy policy |
 | /terms | Terms | LEGAL | P0 | YES | YES | Terms of service |
 | /glossary | Glossary | SEO_CONTENT | P1 | YES | YES | Plain-language wellness definitions |
-| /wellness-glossary | Wellness Glossary | SEO_CONTENT | P1 | NO | YES | Searchable wellness education glossary |
-| /research-evidence | Research and Evidence | SEO_CONTENT | P1 | NO | YES | Trust, evidence, and educational credibility |
+| /wellness-glossary | Wellness Glossary | SEO_CONTENT | P1 | YES | YES | Searchable wellness education glossary |
+| /research-evidence | Research and Evidence | SEO_CONTENT | P1 | YES | YES | Trust, evidence, and educational credibility |
 | /professional-resources | Professional Resources | SEO_CONTENT | P1 | YES | YES | Resources for providers and professionals |
 | /how-to-guides | How-To Guides | SEO_CONTENT | P1 | YES | YES | Practical wellness guide hub |
 | /qa | Q&A | SEO_CONTENT | P1 | YES | YES | Educational questions and answers |
@@ -20,5 +23,4 @@
 
 ## Missing From App.jsx
 
-- /wellness-glossary
-- /research-evidence
+None
