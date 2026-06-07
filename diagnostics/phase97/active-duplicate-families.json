@@ -1,0 +1,1553 @@
+[
+  {
+    "family": "index",
+    "fileCount": 61,
+    "files": [
+      "client/src/avatar-life/index.ts",
+      "client/src/calm-checkin/index.ts",
+      "client/src/checkin-flow/index.ts",
+      "client/src/companion-voice/index.ts",
+      "client/src/components/benefits/index.js",
+      "client/src/components/methods/index.js",
+      "client/src/components/mi/index.ts",
+      "client/src/components/referral/index.js",
+      "client/src/components/sacred/index.js",
+      "client/src/components/share/index.js",
+      "client/src/components/state/index.ts",
+      "client/src/components/ui/index.js",
+      "client/src/content/frameworks/index.js",
+      "client/src/content/index.ts",
+      "client/src/content/microcopy/index.js",
+      "client/src/content/routes/index.js",
+      "client/src/design-system/components/index.ts",
+      "client/src/design-system/index.js",
+      "client/src/design-system/index.ts",
+      "client/src/design-system/tokens/index.ts",
+      "client/src/lumi-agent/index.ts",
+      "client/src/lumi-audit/index.ts",
+      "client/src/lumi-boundaries/index.ts",
+      "client/src/lumi-cbt/index.ts",
+      "client/src/lumi-circadian/index.ts",
+      "client/src/lumi-consistency/index.ts",
+      "client/src/lumi-conversation/index.ts",
+      "client/src/lumi-crisis/index.ts",
+      "client/src/lumi-disclaimer/index.ts",
+      "client/src/lumi-language/index.ts",
+      "client/src/lumi-library/index.ts",
+      "client/src/lumi-memory/index.ts",
+      "client/src/lumi-notifications/index.ts",
+      "client/src/lumi-rbac/index.ts",
+      "client/src/lumi-registry/index.ts",
+      "client/src/lumi-rituals/index.ts",
+      "client/src/lumi-scenes/index.ts",
+      "client/src/lumi-tokens/index.ts",
+      "client/src/lumi-tracker/index.ts",
+      "client/src/lumi-voice/index.ts",
+      "client/src/pages/hubs/index.jsx",
+      "client/src/pages/tools/index.jsx",
+      "client/src/skills/index.ts",
+      "database/schema/index.ts",
+      "pages/forgot-password/index.jsx",
+      "pages/index.jsx",
+      "pages/login/index.jsx",
+      "pages/onboarding/index.jsx",
+      "pages/register/index.jsx",
+      "pages/reset-password/index.jsx",
+      "server/db/schema/index.mjs",
+      "server/replit_integrations/audio/index.ts",
+      "server/replit_integrations/auth/index.mjs",
+      "server/replit_integrations/batch/index.ts",
+      "server/replit_integrations/chat/index.ts",
+      "server/replit_integrations/image/index.ts",
+      "server/replit_integrations/object_storage/index.ts",
+      "shared/constants/index.ts",
+      "shared/types/index.ts",
+      "shared/validators/index.ts",
+      "src/index.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "Hero",
+    "fileCount": 4,
+    "files": [
+      "client/src/components/landing/Hero.tsx",
+      "client/src/components/sacred/Hero.jsx",
+      "client/src/components/ui/Hero.jsx",
+      "components/Hero.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "App",
+    "fileCount": 3,
+    "files": [
+      "client/src/App.jsx",
+      "client/src/components/App.tsx",
+      "src/App.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "microcopy",
+    "fileCount": 3,
+    "files": [
+      "client/src/content/microcopy.js",
+      "client/src/lib/microcopy.ts",
+      "src/lib/microcopy.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "theme",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/theme.ts",
+      "client/src/components/ui/theme.js",
+      "src/theme.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "wellnessMicrocopy",
+    "fileCount": 3,
+    "files": [
+      "client/src/content/frameworks/wellnessMicrocopy.js",
+      "client/src/content/microcopy/wellnessMicrocopy.ts",
+      "components/microcopy/wellnessMicrocopy.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "healing",
+    "fileCount": 2,
+    "files": [
+      "pages/healing.jsx",
+      "server/routes/healing.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "journal",
+    "fileCount": 2,
+    "files": [
+      "server/routes/journal.mjs",
+      "src/utils/journal.js"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "ProtectedRoute",
+    "fileCount": 5,
+    "files": [
+      "client/src/components/ProtectedRoute.jsx",
+      "client/src/guards/ProtectedRoute.jsx",
+      "src/auth/ProtectedRoute.jsx",
+      "src/components/ProtectedRoute.jsx",
+      "src/pages/ProtectedRoute.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SacredBackground",
+    "fileCount": 5,
+    "files": [
+      "client/src/components/SacredBackground.jsx",
+      "client/src/components/sacred/SacredBackground.jsx",
+      "client/src/components/ui/SacredBackground.jsx",
+      "src/auth/sacred/SacredBackground.jsx",
+      "src/sacred/SacredBackground.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "EmotionLog",
+    "fileCount": 4,
+    "files": [
+      "client/src/components/EmotionLog.jsx",
+      "client/src/components/wellness/EmotionLog.jsx",
+      "components/EmotionLog.jsx",
+      "src/components/EmotionLog.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "JournalAI",
+    "fileCount": 4,
+    "files": [
+      "client/src/components/JournalAI.jsx",
+      "client/src/components/wellness/JournalAI.jsx",
+      "components/JournalAI.jsx",
+      "src/components/JournalAI.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "JournalPage",
+    "fileCount": 4,
+    "files": [
+      "client/src/features/journal/JournalPage.jsx",
+      "client/src/pages/JournalPage.jsx",
+      "pages/JournalPage.jsx",
+      "src/pages/JournalPage.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "LotusGuide",
+    "fileCount": 4,
+    "files": [
+      "client/src/components/LotusGuide.jsx",
+      "client/src/components/sacred/LotusGuide.jsx",
+      "src/auth/sacred/LotusGuide.jsx",
+      "src/sacred/LotusGuide.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "WellnessDashboard",
+    "fileCount": 4,
+    "files": [
+      "client/src/pages/WellnessDashboard.jsx",
+      "components/WellnessDashboard.jsx",
+      "src/WellnessDashboard.jsx",
+      "src/components/WellnessDashboard.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "EmotionCalendar",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/EmotionCalendar.jsx",
+      "components/EmotionCalendar.jsx",
+      "src/components/EmotionCalendar.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "MoodTrendsChart",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/MoodTrendsChart.jsx",
+      "components/MoodTrendsChart.jsx",
+      "src/components/MoodTrendsChart.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SacredFooter",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/SacredFooter.jsx",
+      "client/src/components/sacred/SacredFooter.jsx",
+      "components/SacredFooter.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "aiChat",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/aiChat.ts",
+      "src/lib/aiChat.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "AuthContext",
+    "fileCount": 2,
+    "files": [
+      "client/src/context/AuthContext.jsx",
+      "src/auth/AuthContext.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "BenefitBlock",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/benefits/BenefitBlock.tsx",
+      "src/components/benefits/BenefitBlock.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "benefits",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/benefits.ts",
+      "src/lib/benefits.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "blog",
+    "fileCount": 2,
+    "files": [
+      "app/backend/server/routes/blog.mjs",
+      "server/routes/blog.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "EmotionBackground",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/sacred/EmotionBackground.jsx",
+      "components/EmotionBackground.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "LandingPage",
+    "fileCount": 2,
+    "files": [
+      "pages/LandingPage.jsx",
+      "src/pages/LandingPage.jsx"
+    ],
+    "hasClientSrc": false,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Login",
+    "fileCount": 2,
+    "files": [
+      "client/src/pages/Login.jsx",
+      "src/auth/Login.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "PageTemplate",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/PageTemplate.jsx",
+      "components/PageTemplate.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "PlatformComponent",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/sacred/PlatformComponent.jsx",
+      "components/PlatformComponent.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SacredButton",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/sacred/SacredButton.jsx",
+      "components/SacredButton.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SacredNav",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/SacredNav.jsx",
+      "src/sacred/SacredNav.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SacredSection",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/sacred/SacredSection.jsx",
+      "components/SacredSection.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "safety",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/safety.ts",
+      "src/lib/safety.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SafetyFooterStrip",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/safety/SafetyFooterStrip.tsx",
+      "src/components/safety/SafetyFooterStrip.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "VoiceAffirmation",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/VoiceAffirmation.jsx",
+      "src/components/VoiceAffirmation.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": true,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "brand",
+    "fileCount": 6,
+    "files": [
+      "client/src/brand/brand.ts",
+      "client/src/config/brand.ts",
+      "client/src/layouts/brand.ts",
+      "client/src/lib/brand.ts",
+      "shared/brand.mjs",
+      "shared/brand.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "routes",
+    "fileCount": 6,
+    "files": [
+      "client/src/content/routes.js",
+      "server/replit_integrations/audio/routes.ts",
+      "server/replit_integrations/auth/routes.mjs",
+      "server/replit_integrations/chat/routes.ts",
+      "server/replit_integrations/image/routes.ts",
+      "server/replit_integrations/object_storage/routes.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "users",
+    "fileCount": 4,
+    "files": [
+      "database/schema/users.ts",
+      "server/db/queries/users.js",
+      "server/db/schema/users.js",
+      "server/services/users.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "BenefitsBlock",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/BenefitsBlock.jsx",
+      "client/src/components/marketing/BenefitsBlock.tsx",
+      "client/src/components/wellness/BenefitsBlock.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "client",
+    "fileCount": 3,
+    "files": [
+      "server/db/client.mjs",
+      "server/replit_integrations/audio/client.ts",
+      "server/replit_integrations/image/client.ts"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "disclaimer",
+    "fileCount": 3,
+    "files": [
+      "client/src/content/legal/disclaimer.ts",
+      "client/src/lumi-disclaimer/disclaimer.ts",
+      "shared/disclaimer.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "Footer",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/Footer.jsx",
+      "client/src/components/layout/Footer.tsx",
+      "client/src/components/ui/Footer.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "StateTracker",
+    "fileCount": 3,
+    "files": [
+      "client/src/components/StateTracker.jsx",
+      "client/src/components/StateTracker.tsx",
+      "client/src/components/state/StateTracker.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "tokens",
+    "fileCount": 3,
+    "files": [
+      "client/src/brand/tokens.ts",
+      "client/src/design-system/tokens.ts",
+      "server/auth/tokens.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "analytics",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/analytics.ts",
+      "server/routes/analytics.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "api",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/api.ts",
+      "server/routes/api.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "auditLogger",
+    "fileCount": 2,
+    "files": [
+      "client/src/lumi-audit/logger/auditLogger.ts",
+      "server/utils/auditLogger.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "BehaviorChangePage",
+    "fileCount": 2,
+    "files": [
+      "client/src/pages/BehaviorChangePage.jsx",
+      "client/src/pages/BehaviorChangePage.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "BrandLogo",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/BrandLogo.tsx",
+      "client/src/components/brand/BrandLogo.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "ClarityCard",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/content/ClarityCard.jsx",
+      "client/src/components/wellness/ClarityCard.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "copy",
+    "fileCount": 2,
+    "files": [
+      "client/src/brand/copy.ts",
+      "client/src/shared/brand/copy.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "ExamplesAccordion",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/content/ExamplesAccordion.jsx",
+      "client/src/components/wellness/ExamplesAccordion.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "featureFlags",
+    "fileCount": 2,
+    "files": [
+      "client/src/content/flags/featureFlags.ts",
+      "shared/featureFlags.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "journalPrompts",
+    "fileCount": 2,
+    "files": [
+      "client/src/content/journalPrompts.js",
+      "client/src/data/journalPrompts.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "modules",
+    "fileCount": 2,
+    "files": [
+      "client/src/content/modules/modules.js",
+      "server/ai/modules.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "PageScaffold",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/PageScaffold.jsx",
+      "client/src/components/layout/PageScaffold.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "PageShell",
+    "fileCount": 2,
+    "files": [
+      "client/src/design-system/PageShell.jsx",
+      "client/src/design-system/layouts/PageShell.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "password",
+    "fileCount": 2,
+    "files": [
+      "server/auth/password.js",
+      "server/utils/password.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "PrimaryButton",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ui/PrimaryButton.jsx",
+      "client/src/design-system/components/PrimaryButton.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "Privacy",
+    "fileCount": 2,
+    "files": [
+      "client/src/pages/Privacy.jsx",
+      "client/src/pages/Privacy.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "reflection",
+    "fileCount": 2,
+    "files": [
+      "client/src/pages/reflection.tsx",
+      "server/routes/reflection.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "ReflectionFooter",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ui/ReflectionFooter.jsx",
+      "client/src/components/ui/ReflectionFooter.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "routeMetaRegistry",
+    "fileCount": 2,
+    "files": [
+      "client/src/content/meta/routeMetaRegistry.ts",
+      "client/src/content/routeMetaRegistry.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "SafetyFooter",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/SafetyFooter.jsx",
+      "client/src/components/wellness/SafetyFooter.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "security",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/security.ts",
+      "server/middleware/security.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "sentry",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/sentry.js",
+      "server/utils/sentry.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "SkipToContent",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/SkipToContent.jsx",
+      "client/src/components/a11y/SkipToContent.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "storage",
+    "fileCount": 2,
+    "files": [
+      "server/replit_integrations/auth/storage.mjs",
+      "server/replit_integrations/chat/storage.ts"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "ToolCard",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ToolCard.tsx",
+      "client/src/components/discovery/ToolCard.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "UpsellModal",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/UpsellModal.jsx",
+      "client/src/components/UpsellModal.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": true
+  },
+  {
+    "family": "vitest.config",
+    "fileCount": 10,
+    "files": [
+      "client/src/avatar-life/__tests__/vitest.config.mjs",
+      "client/src/calm-checkin/__tests/vitest.config.mjs",
+      "client/src/checkin-flow/__tests/vitest.config.mjs",
+      "client/src/companion-voice/__tests/vitest.config.mjs",
+      "client/src/lumi-circadian/tests/vitest.config.mjs",
+      "client/src/lumi-conversation/tests/vitest.config.mjs",
+      "client/src/lumi-integration/tests/vitest.config.mjs",
+      "client/src/lumi-memory/tests/vitest.config.mjs",
+      "client/src/lumi-rituals/tests/vitest.config.mjs",
+      "client/src/lumi-scenes/tests/vitest.config.mjs"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "csrf",
+    "fileCount": 3,
+    "files": [
+      "server/lib/csrf.mjs",
+      "server/middleware/csrf.mjs",
+      "server/security/csrf.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "email",
+    "fileCount": 3,
+    "files": [
+      "server/routes/email.mjs",
+      "server/services/email.mjs",
+      "server/utils/email.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "twelvePractices",
+    "fileCount": 3,
+    "files": [
+      "client/src/content/modules/twelvePractices.ts",
+      "client/src/content/paths/twelvePractices.ts",
+      "client/src/skills/packs/twelvePractices.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "aiClient",
+    "fileCount": 2,
+    "files": [
+      "server/services/aiClient.mjs",
+      "server/utils/aiClient.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "app",
+    "fileCount": 2,
+    "files": [
+      "server/app.mjs",
+      "server/tests/app.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "audit",
+    "fileCount": 2,
+    "files": [
+      "server/middleware/audit.mjs",
+      "server/security/audit.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "auth",
+    "fileCount": 2,
+    "files": [
+      "server/middleware/auth.mjs",
+      "server/routes/auth.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Button",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ui/Button.jsx",
+      "client/src/design-system/Button.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "calmCheckinMotion",
+    "fileCount": 2,
+    "files": [
+      "client/src/calm-checkin/motion/calmCheckinMotion.ts",
+      "client/src/lumi-conversation/motion/calmCheckinMotion.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Card",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ui/Card.jsx",
+      "client/src/design-system/Card.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "cookies",
+    "fileCount": 2,
+    "files": [
+      "server/security/cookies.mjs",
+      "server/utils/cookies.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Disclaimer",
+    "fileCount": 2,
+    "files": [
+      "client/src/legal/Disclaimer.tsx",
+      "client/src/pages/Disclaimer.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "EmailCapture",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/marketing/EmailCapture.jsx",
+      "client/src/sections/EmailCapture.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "EmotionWheel",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/EmotionWheel.jsx",
+      "client/src/pages/tools/EmotionWheel.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "EmptyState",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/EmptyState.jsx",
+      "client/src/components/ui/EmptyState.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Header",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/Header.jsx",
+      "client/src/components/layout/Header.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "HeroSection",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/HeroSection.jsx",
+      "client/src/components/ui/HeroSection.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "holdingSpace",
+    "fileCount": 2,
+    "files": [
+      "client/src/lumi-rituals/presets/holdingSpace.ts",
+      "client/src/lumi-scenes/presets/holdingSpace.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "insightEngine",
+    "fileCount": 2,
+    "files": [
+      "client/src/intelligence/insightEngine.ts",
+      "client/src/lib/insights/insightEngine.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "jwt",
+    "fileCount": 2,
+    "files": [
+      "server/auth/jwt.mjs",
+      "server/utils/jwt.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "LazyImage",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/LazyImage.jsx",
+      "client/src/components/ui/LazyImage.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "lumiRegistry",
+    "fileCount": 2,
+    "files": [
+      "client/src/lumi-registry/config/lumiRegistry.ts",
+      "client/src/lumi-registry/runtime/lumiRegistry.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "lumiSystemPrompt",
+    "fileCount": 2,
+    "files": [
+      "client/src/lumi-agent/prompts/lumiSystemPrompt.ts",
+      "client/src/lumi-conversation/prompts/lumiSystemPrompt.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "metrics",
+    "fileCount": 2,
+    "files": [
+      "server/routes/metrics.mjs",
+      "server/utils/metrics.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "mi",
+    "fileCount": 2,
+    "files": [
+      "client/src/content/modules/mi.ts",
+      "client/src/skills/packs/mi.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "mode",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/mode.js",
+      "server/lib/mode.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "nlpReframes",
+    "fileCount": 2,
+    "files": [
+      "client/src/content/tools/nlpReframes.ts",
+      "client/src/lib/nlpReframes.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "OfficialLumi",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/lumi/OfficialLumi.tsx",
+      "client/src/lumi-registry/components/OfficialLumi.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "officialLumiAssets",
+    "fileCount": 2,
+    "files": [
+      "client/src/avatar-life/officialLumiAssets.ts",
+      "client/src/officialLumiAssets.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "OnboardingFlow",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/OnboardingFlow.jsx",
+      "client/src/pages/OnboardingFlow.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "pipeline",
+    "fileCount": 2,
+    "files": [
+      "server/awareness/detection/pipeline.mjs",
+      "server/biometrics/pipeline.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Profile",
+    "fileCount": 2,
+    "files": [
+      "client/src/pages/Profile.jsx",
+      "client/src/pages/account/Profile.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "ProgressTracker",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ProgressTracker.jsx",
+      "client/src/components/sacred/ProgressTracker.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "protocols",
+    "fileCount": 2,
+    "files": [
+      "server/protocols/seed/protocols.mjs",
+      "server/routes/protocols.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "reflectionPrompts",
+    "fileCount": 2,
+    "files": [
+      "client/src/data/reflectionPrompts.ts",
+      "client/src/lumi-conversation/content/reflectionPrompts.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "routeKey",
+    "fileCount": 2,
+    "files": [
+      "client/src/content/routeKey.js",
+      "client/src/utils/routeKey.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SafetyFooter.d",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/SafetyFooter.d.ts",
+      "client/src/components/ui/SafetyFooter.d.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "schema",
+    "fileCount": 2,
+    "files": [
+      "server/db/schema.mjs",
+      "shared/schema.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "SEO",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/SEO.tsx",
+      "client/src/components/seo/SEO.tsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "sessionStore",
+    "fileCount": 2,
+    "files": [
+      "server/db/sessionStore.mjs",
+      "server/sessionStore.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Settings",
+    "fileCount": 2,
+    "files": [
+      "client/src/pages/Settings.jsx",
+      "client/src/pages/account/Settings.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "Skeleton",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/Skeleton.jsx",
+      "client/src/components/ui/Skeleton.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "social-posting",
+    "fileCount": 2,
+    "files": [
+      "server/routes/social-posting.mjs",
+      "server/services/social-posting.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "StatePage",
+    "fileCount": 2,
+    "files": [
+      "client/src/features/state/StatePage.jsx",
+      "client/src/pages/StatePage.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "streaks",
+    "fileCount": 2,
+    "files": [
+      "server/db/streaks.mjs",
+      "server/routes/streaks.mjs"
+    ],
+    "hasClientSrc": false,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "utils",
+    "fileCount": 2,
+    "files": [
+      "client/src/lib/utils.ts",
+      "server/replit_integrations/batch/utils.ts"
+    ],
+    "hasClientSrc": true,
+    "hasServer": true,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "WeeklyRecap",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/WeeklyRecap.jsx",
+      "client/src/components/dashboard/WeeklyRecap.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "WeeklyReflection",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/WeeklyReflection.jsx",
+      "client/src/pages/tools/WeeklyReflection.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "WellnessToolkit",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/WellnessToolkit.jsx",
+      "client/src/components/ui/WellnessToolkit.jsx"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  },
+  {
+    "family": "wellnessToolsData",
+    "fileCount": 2,
+    "files": [
+      "client/src/components/ui/wellnessToolsData.js",
+      "client/src/components/wellnessToolsData.js"
+    ],
+    "hasClientSrc": true,
+    "hasServer": false,
+    "hasRootShadow": false,
+    "hasJsxTsxPair": false
+  }
+]

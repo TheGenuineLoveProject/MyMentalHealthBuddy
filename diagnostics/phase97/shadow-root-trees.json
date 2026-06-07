@@ -1,0 +1,101 @@
+[
+  {
+    "root": "src",
+    "files": [
+      "src/App.jsx",
+      "src/WellnessDashboard.jsx",
+      "src/auth/AuthContext.jsx",
+      "src/auth/Login.jsx",
+      "src/auth/ProtectedRoute.jsx",
+      "src/auth/Signup.jsx",
+      "src/auth/sacred/LotusGuide.jsx",
+      "src/auth/sacred/SacredBackground.jsx",
+      "src/components/EmotionCalendar.jsx",
+      "src/components/EmotionLog.jsx",
+      "src/components/EmotionRing.jsx",
+      "src/components/EmotionTrendChart.jsx",
+      "src/components/JournalAI.jsx",
+      "src/components/MoodDashboard.jsx",
+      "src/components/MoodTrendsChart.jsx",
+      "src/components/Navbar.jsx",
+      "src/components/ProtectedRoute.jsx",
+      "src/components/VoiceAffirmation.jsx",
+      "src/components/WellnessDashboard.jsx",
+      "src/components/benefits/BenefitBlock.tsx",
+      "src/components/safety/SafetyFooterStrip.tsx",
+      "src/firebase/firebase.js",
+      "src/firebase/firebaseMetrics.js",
+      "src/index.js",
+      "src/lib/aiChat.ts",
+      "src/lib/benefits.ts",
+      "src/lib/microcopy.ts",
+      "src/lib/safety.ts",
+      "src/pages/JournalPage.jsx",
+      "src/pages/LandingPage.jsx",
+      "src/pages/ProtectedRoute.jsx",
+      "src/sacred/LotusGuide.jsx",
+      "src/sacred/SacredBackground.jsx",
+      "src/sacred/SacredNav.jsx",
+      "src/tailwind.config.js",
+      "src/theme.js",
+      "src/utils/journal.js",
+      "src/utils/saveEntry.js"
+    ]
+  },
+  {
+    "root": "components",
+    "files": [
+      "components/AuthTemplate.jsx",
+      "components/EmotionBackground.jsx",
+      "components/EmotionCalendar.jsx",
+      "components/EmotionLog.jsx",
+      "components/Hero.jsx",
+      "components/JournalAI.jsx",
+      "components/Layout.jsx",
+      "components/MoodTrendsChart.jsx",
+      "components/PageTemplate.jsx",
+      "components/PlatformComponent.jsx",
+      "components/SacredButton.jsx",
+      "components/SacredFooter.jsx",
+      "components/SacredSection.jsx",
+      "components/WellnessDashboard.jsx",
+      "components/microcopy/wellnessMicrocopy.js"
+    ]
+  },
+  {
+    "root": "pages",
+    "files": [
+      "pages/404.jsx",
+      "pages/JournalPage.jsx",
+      "pages/LandingPage.jsx",
+      "pages/[...slug].jsx",
+      "pages/_app.jsx",
+      "pages/_document.jsx",
+      "pages/blog/[slug].jsx",
+      "pages/community/discussion/[id].jsx",
+      "pages/forgot-password/index.jsx",
+      "pages/healing.jsx",
+      "pages/home.jsx",
+      "pages/index.jsx",
+      "pages/landing.jsx",
+      "pages/login/callback.jsx",
+      "pages/login/index.jsx",
+      "pages/onboarding/index.jsx",
+      "pages/original-home.jsx",
+      "pages/pricing.jsx",
+      "pages/register/index.jsx",
+      "pages/reset-password/index.jsx",
+      "pages/welcome.jsx"
+    ]
+  },
+  {
+    "root": "api",
+    "files": []
+  },
+  {
+    "root": "app",
+    "files": [
+      "app/backend/server/routes/blog.mjs"
+    ]
+  }
+]
