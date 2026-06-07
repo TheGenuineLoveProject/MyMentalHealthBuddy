@@ -1,3 +1,8 @@
+ M diagnostics/phase97/build-wait-loop.txt
+ M diagnostics/phase97/git-log-start.txt
+ M diagnostics/phase97/git-status-after-drift-restore.txt
+ M diagnostics/phase97/git-status-start.txt
+ M diagnostics/phase97/head-start.txt
 ?? diagnostics/phase95b/ahead-behind-final.txt
 ?? diagnostics/phase95b/final-completion-gate.txt
 ?? diagnostics/phase95b/git-log-final.txt
@@ -8,4 +13,8 @@
 ?? diagnostics/phase96/git-log-final.txt
 ?? diagnostics/phase96/git-status-final.txt
 ?? diagnostics/phase96/push.txt
-?? diagnostics/phase97/
+?? diagnostics/phase97/ahead-behind-final.txt
+?? diagnostics/phase97/final-completion-gate.txt
+?? diagnostics/phase97/git-log-final.txt
+?? diagnostics/phase97/git-status-final.txt
+?? diagnostics/phase97/push.txt
