@@ -37,7 +37,7 @@ The previous broad duplicate report included backup trees, cache folders, npm-gl
 - .tmp_drizzle
 
 ## Counts
-- Active runtime files scanned: 1815
+- Active runtime files scanned: 1812
 - Active duplicate families found: 120
 - Root shadow trees found: 5
 
@@ -262,32 +262,6 @@ Phase 98 should inspect only the selected family and produce a canonical owner +
 
   - server/routes/journal.mjs
   - src/utils/journal.js
-
-## ProtectedRoute
-- File count: 5
-- Has client/src: yes
-- Has server: no
-- Has root shadow: yes
-- Has JSX/TSX/JS/TS mix: no
-
-  - client/src/components/ProtectedRoute.jsx
-  - client/src/guards/ProtectedRoute.jsx
-  - src/auth/ProtectedRoute.jsx
-  - src/components/ProtectedRoute.jsx
-  - src/pages/ProtectedRoute.jsx
-
-## SacredBackground
-- File count: 5
-- Has client/src: yes
-- Has server: no
-- Has root shadow: yes
-- Has JSX/TSX/JS/TS mix: no
-
-  - client/src/components/SacredBackground.jsx
-  - client/src/components/sacred/SacredBackground.jsx
-  - client/src/components/ui/SacredBackground.jsx
-  - src/auth/sacred/SacredBackground.jsx
-  - src/sacred/SacredBackground.jsx
 
 ## EmotionLog
 - File count: 4
@@ -948,6 +922,17 @@ Phase 98 should inspect only the selected family and produce a canonical owner +
   - server/services/email.mjs
   - server/utils/email.mjs
 
+## SacredBackground
+- File count: 3
+- Has client/src: yes
+- Has server: no
+- Has root shadow: no
+- Has JSX/TSX/JS/TS mix: no
+
+  - client/src/components/SacredBackground.jsx
+  - client/src/components/sacred/SacredBackground.jsx
+  - client/src/components/ui/SacredBackground.jsx
+
 ## twelvePractices
 - File count: 3
 - Has client/src: yes
@@ -1258,6 +1243,16 @@ Phase 98 should inspect only the selected family and produce a canonical owner +
 
   - client/src/components/ProgressTracker.jsx
   - client/src/components/sacred/ProgressTracker.jsx
+
+## ProtectedRoute
+- File count: 2
+- Has client/src: yes
+- Has server: no
+- Has root shadow: no
+- Has JSX/TSX/JS/TS mix: no
+
+  - client/src/components/ProtectedRoute.jsx
+  - client/src/guards/ProtectedRoute.jsx
 
 ## protocols
 - File count: 2

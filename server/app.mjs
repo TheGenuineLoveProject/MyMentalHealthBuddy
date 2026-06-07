@@ -121,6 +121,19 @@ import cookieParser from "cookie-parser";
 import gamificationRoutes from "./routes/gamification.mjs";
 import analyticsEventsRoutes from "./routes/analytics-events.mjs";
 import blogRoutes from "./routes/blog.mjs";
+import reflectionRoutes from "./routes/reflection.mjs";
+import communityRoutes from "./routes/community.mjs";
+import progressRoutes from "./routes/progress.mjs";
+import biometricsRoutes from "./routes/biometrics.mjs";
+import protocolsRoutes from "./routes/protocols.mjs";
+import statesRoutes from "./routes/states.mjs";
+import badgesRoutes from "./routes/badges.mjs";
+import invitesRoutes from "./routes/invites.mjs";
+import leadsRoutes from "./routes/leads.mjs";
+import contactRoutes from "./routes/contact.mjs";
+import mirrorRoutes from "./routes/mirror.mjs";
+import onboardingRoutes from "./routes/onboarding.mjs";
+import contentRoutes from "./routes/content.mjs";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
 console.log(`[boot] mode=${IS_DEV ? "development" : "production"} (NODE_ENV=${process.env.NODE_ENV || "<unset>"})`);
@@ -363,6 +376,21 @@ app.get("/metrics", (_req, res) => {
 app.use("/api/gamification", gamificationRoutes);
 app.use("/api/analytics", analyticsEventsRoutes);
 app.use("/api/blog", blogRoutes);
+// Mount route modules the frontend already calls but that were never wired
+// (verified live 404s: route file exists + exports a router, but no app.use).
+app.use("/api/reflection", reflectionRoutes);
+app.use("/api/community", communityRoutes);
+app.use("/api/progress", progressRoutes);
+app.use("/api/biometrics", biometricsRoutes);
+app.use("/api/protocols", protocolsRoutes);
+app.use("/api/states", statesRoutes);
+app.use("/api/badges", badgesRoutes);
+app.use("/api/invites", invitesRoutes);
+app.use("/api/leads", leadsRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/mirror", mirrorRoutes);
+app.use("/api/onboarding", onboardingRoutes);
+app.use("/api/content", contentRoutes);
 
 
 app.use(express.static(CLIENT_DIST, {

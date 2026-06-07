@@ -11,6 +11,7 @@ import {
   normalizeGenerateInput,
 } from "../contracts/content/b1-content-contract.mjs";
 import { validateBody } from "../middleware/validate-body.mjs";
+import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 
 const router = Router();
 
@@ -111,7 +112,7 @@ router.get("/items/:id", (req, res) => {
   return res.json({ ok: true, item });
 });
 
-router.post("/items", requireValidContentModel, (req, res) => {
+router.post("/items", requireAuth, requireAdmin, requireValidContentModel, (req, res) => {
   const content = req.validatedContent;
 
   if (contentStore.has(content.id)) {
@@ -135,7 +136,7 @@ router.post("/items", requireValidContentModel, (req, res) => {
   });
 });
 
-router.patch("/items/:id", requireValidContentPatch, (req, res) => {
+router.patch("/items/:id", requireAuth, requireAdmin, requireValidContentPatch, (req, res) => {
   const existing = contentStore.get(req.params.id);
 
   if (!existing) {
@@ -190,7 +191,7 @@ router.patch("/items/:id", requireValidContentPatch, (req, res) => {
   });
 });
 
-router.post("/seed-demo", (_req, res) => {
+router.post("/seed-demo", requireAuth, requireAdmin, (_req, res) => {
   const now = new Date().toISOString();
   const id = randomUUID();
 

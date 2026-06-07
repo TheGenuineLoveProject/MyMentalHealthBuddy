@@ -1418,6 +1418,8 @@ scripts/phase94d-service-worker-stale-shell-gate.mjs
 scripts/phase95b-audit-completion-gate.mjs
 scripts/phase96-select-duplicate-family.mjs
 scripts/phase97-active-runtime-duplicate-gate.mjs
+scripts/phase98-quarantine-one-shadow-duplicate-family.mjs
+scripts/phase99-quarantine-next-shadow-duplicate-family.mjs
 scripts/platform-coherence-audit.mjs
 scripts/production-gate.mjs
 scripts/scan-route-governance.mjs
@@ -1779,10 +1781,8 @@ src/App.jsx
 src/WellnessDashboard.jsx
 src/auth/AuthContext.jsx
 src/auth/Login.jsx
-src/auth/ProtectedRoute.jsx
 src/auth/Signup.jsx
 src/auth/sacred/LotusGuide.jsx
-src/auth/sacred/SacredBackground.jsx
 src/components/EmotionCalendar.jsx
 src/components/EmotionLog.jsx
 src/components/EmotionRing.jsx
@@ -1791,7 +1791,6 @@ src/components/JournalAI.jsx
 src/components/MoodDashboard.jsx
 src/components/MoodTrendsChart.jsx
 src/components/Navbar.jsx
-src/components/ProtectedRoute.jsx
 src/components/VoiceAffirmation.jsx
 src/components/WellnessDashboard.jsx
 src/components/benefits/BenefitBlock.tsx
@@ -1805,9 +1804,7 @@ src/lib/microcopy.ts
 src/lib/safety.ts
 src/pages/JournalPage.jsx
 src/pages/LandingPage.jsx
-src/pages/ProtectedRoute.jsx
 src/sacred/LotusGuide.jsx
-src/sacred/SacredBackground.jsx
 src/sacred/SacredNav.jsx
 src/tailwind.config.js
 src/theme.js

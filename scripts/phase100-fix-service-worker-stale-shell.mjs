@@ -1,4 +1,19 @@
-/* 
+import fs from "node:fs";
+
+const file = "client/public/serviceWorker.js";
+const out = "diagnostics/phase100";
+fs.mkdirSync(out, { recursive: true });
+
+if (!fs.existsSync(file)) {
+  throw new Error("client/public/serviceWorker.js not found");
+}
+
+const before = fs.readFileSync(file, "utf8");
+
+const versionMatch = before.match(/CACHE_VERSION\s*=\s*["'`](.*?)["'`]/);
+const oldVersion = versionMatch?.[1] || "unknown";
+
+const replacement = `/* 
  * MyMentalHealthBuddy Service Worker
  * Phase 100: stale app-shell protection.
  *
@@ -11,8 +26,8 @@
  */
 
 const CACHE_VERSION = "mmhb-pwa-phase100-v1";
-const STATIC_CACHE = `${CACHE_VERSION}-static`;
-const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+const STATIC_CACHE = \`\${CACHE_VERSION}-static\`;
+const RUNTIME_CACHE = \`\${CACHE_VERSION}-runtime\`;
 
 const OFFLINE_URL = "/offline.html";
 
@@ -141,3 +156,53 @@ self.addEventListener("message", (event) => {
     self.skipWaiting();
   }
 });
+`;
+
+fs.writeFileSync(file, replacement);
+
+const after = fs.readFileSync(file, "utf8");
+
+const checks = [
+  {
+    name: "CACHE_VERSION_BUMPED",
+    pass: after.includes('CACHE_VERSION = "mmhb-pwa-phase100-v1"')
+  },
+  {
+    name: "DOES_NOT_PRECACHE_INDEX_HTML",
+    pass: !/PRECACHE_URLS[\s\S]*["'`]\/["'`][\s\S]*\]/.test(after) && !/PRECACHE_URLS[\s\S]*index\.html[\s\S]*\]/.test(after)
+  },
+  {
+    name: "NAVIGATION_NETWORK_FIRST",
+    pass: after.includes("networkFirstNavigation") && after.includes('cache: "no-store"')
+  },
+  {
+    name: "OFFLINE_HTML_FALLBACK_ONLY",
+    pass: after.includes('const OFFLINE_URL = "/offline.html"') && after.includes("caches.match(OFFLINE_URL)")
+  },
+  {
+    name: "API_REQUESTS_NOT_INTERCEPTED",
+    pass: after.includes('url.pathname.startsWith("/api/")') && after.includes("return;")
+  },
+  {
+    name: "OLD_CACHE_PURGE_PRESENT",
+    pass: after.includes("caches.delete(key)")
+  }
+];
+
+const report = {
+  generatedAt: new Date().toISOString(),
+  file,
+  oldVersion,
+  checks,
+  pass: checks.every((check) => check.pass)
+};
+
+fs.writeFileSync(`${out}/service-worker-patch-report.json`, JSON.stringify(report, null, 2));
+
+if (!report.pass) {
+  console.error(JSON.stringify(report, null, 2));
+  throw new Error("Phase100 service worker patch checks failed");
+}
+
+console.log("PHASE100_SERVICE_WORKER_PATCH_COMPLETE");
+console.log(JSON.stringify(report, null, 2));

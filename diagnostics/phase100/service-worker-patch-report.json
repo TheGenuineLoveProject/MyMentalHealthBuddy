@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-06-07T09:27:08.218Z",
+  "file": "client/public/serviceWorker.js",
+  "oldVersion": "mmhb-pwa-v94-stale-shell-safe",
+  "checks": [
+    {
+      "name": "CACHE_VERSION_BUMPED",
+      "pass": true
+    },
+    {
+      "name": "DOES_NOT_PRECACHE_INDEX_HTML",
+      "pass": true
+    },
+    {
+      "name": "NAVIGATION_NETWORK_FIRST",
+      "pass": true
+    },
+    {
+      "name": "OFFLINE_HTML_FALLBACK_ONLY",
+      "pass": true
+    },
+    {
+      "name": "API_REQUESTS_NOT_INTERCEPTED",
+      "pass": true
+    },
+    {
+      "name": "OLD_CACHE_PURGE_PRESENT",
+      "pass": true
+    }
+  ],
+  "pass": true
+}
