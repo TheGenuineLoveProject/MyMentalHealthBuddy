@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-06T19:35:22.206Z",
+  "generatedAt": "2026-06-07T03:35:09.501Z",
   "counts": {
-    "allFiles": 57958,
-    "codeFiles": 20711,
+    "allFiles": 58078,
+    "codeFiles": 20712,
     "clientFiles": 1384,
     "pageFiles": 320,
     "componentFiles": 499,
@@ -15,10 +15,10 @@
     "duplicateComponentGroups": 9,
     "rootShadowDirs": 5,
     "topLevelClutterFiles": 31,
-    "markerFindings": 9010,
+    "markerFindings": 9015,
     "suspiciousButtons": 190,
     "offPaletteFiles": 718,
-    "lumiFiles": 2870,
+    "lumiFiles": 2872,
     "lumiReferences": 266,
     "duplicateFrontendRoutes": 0
   },

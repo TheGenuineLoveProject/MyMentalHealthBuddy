@@ -4,8 +4,8 @@
 Create a verified, non-mutating audit of platform structure, components, content, routing, visual system, Lumi/avatar usage, duplicate risk, stale surfaces, and coherence gaps before the next implementation phase.
 
 ## Counts
-- All files scanned: 57958
-- Code files scanned: 20711
+- All files scanned: 58078
+- Code files scanned: 20712
 - Client files: 1384
 - Page files: 320
 - Component files: 499
@@ -18,10 +18,10 @@ Create a verified, non-mutating audit of platform structure, components, content
 - Duplicate component/page groups: 9
 - Root shadow directories: 5
 - Top-level clutter files: 31
-- TODO/FIXME/stub/placeholder findings: 9010
+- TODO/FIXME/stub/placeholder findings: 9015
 - Button visible-label risk findings: 190
 - Off-palette visual files: 718
-- Lumi/avatar files: 2870
+- Lumi/avatar files: 2872
 - Lumi/avatar references: 266
 - Duplicate frontend route paths: 0
 

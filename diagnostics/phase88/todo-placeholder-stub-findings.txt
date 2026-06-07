@@ -8956,6 +8956,11 @@ scripts/phase88-platform-audit.mjs:227: write("todo-placeholder-stub-findings.tx
 scripts/phase88-platform-audit.mjs:253: - TODO/FIXME/stub/placeholder findings: ${summary.counts.markerFindings}
 scripts/phase88-platform-audit.mjs:264: P3: Placeholder/stub content and incomplete user-facing journeys.
 scripts/phase88-platform-audit.mjs:280: - diagnostics/phase88/todo-placeholder-stub-findings.txt
+scripts/phase88-priority-report.mjs:15: const stubs = readLines("diagnostics/phase88/todo-placeholder-stub-findings.txt", 80);
+scripts/phase88-priority-report.mjs:44: ## P3 — Incomplete/Placeholder Content Risk
+scripts/phase88-priority-report.mjs:45: Stub/placeholder/TODO findings detected: ${summary.counts.markerFindings}
+scripts/phase88-priority-report.mjs:47: ${stubs.length ? stubs.map((x) => `- ${x}`).join("\n") : "- None found by this audit."}
+scripts/phase88-priority-report.mjs:65: 6. Replace or hide placeholder/stub user-facing surfaces.
 server/awareness/detection/pipeline.mjs:12: //   LAYER 2 — MLClassifier       (statistical, target 100-200 ms; STUB)
 server/awareness/detection/pipeline.mjs:175: * LAYER 2 — MLClassifier (stub)
 server/awareness/detection/pipeline.mjs:179: // TODO (v2.0 Phase 4): load fine-tuned BERT / RoBERTa from

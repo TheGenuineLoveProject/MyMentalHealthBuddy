@@ -1,10 +1,14 @@
- M server/app.mjs
-?? diagnostics/phase87/
-?? diagnostics/phase87b/
-?? diagnostics/phase87c/
-?? diagnostics/phase87d/
-?? diagnostics/phase87e/
-?? diagnostics/phase88/
-?? scripts/phase87-wire-orphan-api-routes.mjs
-?? scripts/phase87b-wire-missing-api-routes.mjs
-?? scripts/phase87c-repair-api-route-wiring.mjs
+ M diagnostics/phase88/git-log-start.txt
+ M diagnostics/phase88/git-status-after-drift-restore.txt
+ M diagnostics/phase88/git-status-start.txt
+ M diagnostics/phase88/head-start.txt
+?? diagnostics/phase90/ahead-behind-after-push.txt
+?? diagnostics/phase90/ahead-behind-before-push.txt
+?? diagnostics/phase90/api-route-gate-before-p1.txt
+?? diagnostics/phase90/api-route-probes-before-p1.txt
+?? diagnostics/phase90/build-before-p1.txt
+?? diagnostics/phase90/check-links-before-p1.txt
+?? diagnostics/phase90/health-before-p1.json
+?? diagnostics/phase90/push-before-p1.txt
+?? diagnostics/phase90/push-needed.txt
+?? diagnostics/phase90/ready-before-p1.json

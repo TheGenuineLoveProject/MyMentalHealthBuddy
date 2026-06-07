@@ -2,7 +2,7 @@
 > mymentalhealthbuddy@1.0.0 lint
 > eslint .
 
-(node:10371) ESLintIgnoreWarning: The ".eslintignore" file is no longer supported. Switch to using the "ignores" property in "eslint.config.js": https://eslint.org/docs/latest/use/configure/migration-guide#ignore-files
+(node:623) ESLintIgnoreWarning: The ".eslintignore" file is no longer supported. Switch to using the "ignores" property in "eslint.config.js": https://eslint.org/docs/latest/use/configure/migration-guide#ignore-files
 (Use `node --trace-warnings ...` to show where the warning was created)
 
 /home/runner/workspace/.hx-backups/20260516-065915/client/src/hooks/useLumiBehavior.js

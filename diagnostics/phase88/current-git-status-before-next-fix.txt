@@ -1,14 +1,24 @@
- M server/app.mjs
-?? diagnostics/phase87/
-?? diagnostics/phase87b/
-?? diagnostics/phase87c/
-?? diagnostics/phase87d/
-?? diagnostics/phase87e/
-?? diagnostics/phase88/
-?? docs/architecture/PHASE88_PRIORITY_REPORT.md
-?? docs/architecture/PLATFORM_AUDIT_PHASE88.md
-?? scripts/phase87-wire-orphan-api-routes.mjs
-?? scripts/phase87b-wire-missing-api-routes.mjs
-?? scripts/phase87c-repair-api-route-wiring.mjs
-?? scripts/phase88-platform-audit.mjs
-?? scripts/phase88-priority-report.mjs
+ M diagnostics/phase88/PLATFORM_AUDIT_PHASE88.md
+ M diagnostics/phase88/current-git-status-before-next-fix.txt
+ M diagnostics/phase88/git-log-start.txt
+ M diagnostics/phase88/git-status-after-drift-restore.txt
+ M diagnostics/phase88/git-status-start.txt
+ M diagnostics/phase88/head-start.txt
+ M diagnostics/phase88/lumi-files.txt
+ M diagnostics/phase88/platform-audit-run.txt
+ M diagnostics/phase88/platform-audit-summary.json
+ M diagnostics/phase88/priority-report-run.txt
+ M diagnostics/phase88/priority-report.md
+ M diagnostics/phase88/todo-placeholder-stub-findings.txt
+ M docs/architecture/PHASE88_PRIORITY_REPORT.md
+ M docs/architecture/PLATFORM_AUDIT_PHASE88.md
+?? diagnostics/phase90/ahead-behind-after-push.txt
+?? diagnostics/phase90/ahead-behind-before-push.txt
+?? diagnostics/phase90/api-route-gate-before-p1.txt
+?? diagnostics/phase90/api-route-probes-before-p1.txt
+?? diagnostics/phase90/build-before-p1.txt
+?? diagnostics/phase90/check-links-before-p1.txt
+?? diagnostics/phase90/health-before-p1.json
+?? diagnostics/phase90/push-before-p1.txt
+?? diagnostics/phase90/push-needed.txt
+?? diagnostics/phase90/ready-before-p1.json

@@ -2507,6 +2507,8 @@ diagnostics/phase81/mmhb-float-avatar-file.txt
 diagnostics/phase81/mmhb-float-avatar-safety-verification.txt
 diagnostics/phase83/lumi-findings.txt
 diagnostics/phase84/client__src__components__lumi__LumiCompanion.jsx.before
+diagnostics/phase88/lumi-files.txt
+diagnostics/phase88/lumi-references.txt
 diagnostics/visual-submit-check/lumi-motion-search.txt
 docs/archive/lumi-verification/deprecated-avatar-list.md
 docs/archive/lumi-verification/phase28-avatar-audit.md
