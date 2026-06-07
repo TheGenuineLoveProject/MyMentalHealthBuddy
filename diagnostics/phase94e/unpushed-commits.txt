@@ -1,0 +1,2 @@
+a7e6e2184 Fix analytics beacon and database schema provisioning issues
+354b99ca3 Fix service worker to prevent stale interfaces after updates

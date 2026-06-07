@@ -20,23 +20,44 @@ live database:
    runtime tables** (e.g. analytics_events). So `drizzle-kit push` is NOT a safe
    blanket reconcile tool here — it doesn't know about most tables and could
    touch unrelated ones.
-3. `server/db/ensureSchema.mjs` — a `CREATE TABLE IF NOT EXISTS ...` boot
-   "safety net" referenced in comments and `server/routes/sop.mjs` remediation
-   text. **It is dead code: `ensureSchema()` is never imported or called
-   anywhere.** Its `IF NOT EXISTS` DDL also historically drifted from
-   `shared/schema.mjs` (it had the old analytics_events shape), so even if wired
-   it would not fix an already-existing mis-shaped table.
+3. `server/db/ensureSchema.mjs` — the boot "safety net". It was historically
+   **dead code** with hand-maintained DDL that drifted from `shared/schema.mjs`.
+   It has since been rewritten (see below).
 
 **Why this matters:** a fresh DB, a disaster-recovery restore, or any table that
 was created from an older definition will silently 500 on the first write that
 touches a drifted column. There is no `npm run db:push` script either.
 
-**How to apply / fix drift today:** identify the canonical shape in
-`shared/schema.mjs`, check the live table with `information_schema.columns`, and
-if it's empty, drop + recreate it directly with SQL matching the canonical shape
-(or ALTER if it has data). Do NOT assume a boot bootstrap will heal it.
+**How to fix an already-drifted live table:** identify the canonical shape in
+`shared/schema.mjs`, check the live table with `information_schema.columns`
+(ALWAYS filter `table_schema='public'` — there is a separate `stripe` schema with
+~29 Stripe-sync tables, several sharing names like `subscriptions`; an unfiltered
+column count double-counts and lies), and if empty, drop + recreate with SQL
+matching the canonical shape (ALTER if it has data). `IF NOT EXISTS` bootstrap
+will NOT heal a table that already exists with the wrong columns.
 
-**Durable improvement (not yet done — needs user sign-off, larger scope):** make
-provisioning deterministic — either wire `ensureSchema()` at boot AND keep its
-DDL in lockstep with `shared/schema.mjs`, or repoint `drizzle.config.ts` at the
-real runtime schema and generate proper migrations.
+## Durable auto-provisioning (DONE)
+
+Fresh-DB / restore self-heal now exists and is wired:
+- `server/db/schema.canonical.sql` — generated, idempotent (`IF NOT EXISTS`)
+  snapshot of all public tables+indexes, generated FROM `shared/schema.mjs` via
+  `node scripts/generate-canonical-schema.mjs` (wraps `drizzle-kit generate` +
+  transforms to IF NOT EXISTS). Regenerate after any schema.mjs change.
+- `ensureSchema()` reads that file and applies each statement; it is invoked
+  **non-blocking inside `server.on("listening")` via `setImmediate`** in
+  `server/app.mjs`, so it can never block port-open or crash boot (a past DB hang
+  at boot caused a port-never-opened crash-loop). All failures are logged+swallowed.
+
+**Why:** the generated SQL is the right bootstrap source (cleaner than `pg_dump`,
+which carries functions + 147 split constraints), and public schema matches the
+models except `user_achievements` (a model stub). NOTE several models ARE 1-col
+stubs (`subscriptions`, `support_circles`, `wellness_goals/insights/streaks`,
+`user_journey_progress`) — bootstrapping reproduces them faithfully; that
+incompleteness is a pre-existing design gap, not something the bootstrap fixes.
+
+**Splitter footgun:** `drizzle-kit generate` puts the `--> statement-breakpoint`
+marker STANDALONE after `CREATE TABLE` but INLINE (`...);--> statement-breakpoint`)
+after `CREATE INDEX`. Split on the marker anywhere (`/-->\s*statement-breakpoint/`),
+NOT with a line-anchored `^...$/m` regex — anchoring silently merges every index
+into its preceding chunk (140 statements collapse to 79). Keep the literal marker
+out of the file's header comments or the split severs the first real statement.

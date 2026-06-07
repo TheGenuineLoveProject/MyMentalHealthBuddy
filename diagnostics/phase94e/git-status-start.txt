@@ -1,0 +1,24 @@
+On branch clean-push
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   diagnostics/phase94c/ahead-behind-start.txt
+	modified:   diagnostics/phase94c/build.txt
+	modified:   diagnostics/phase94c/git-log-start.txt
+	modified:   diagnostics/phase94c/git-status-after-drift-restore.txt
+	modified:   diagnostics/phase94c/git-status-start.txt
+	modified:   diagnostics/phase94c/head-start.txt
+	modified:   diagnostics/phase94c/health.json
+	modified:   diagnostics/phase94c/ready.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.tmp_drizzle/
+	diagnostics/phase94d/
+	diagnostics/phase94e/
+	scripts/phase94d-service-worker-stale-shell-gate.mjs
+
+no changes added to commit (use "git add" and/or "git commit -a")

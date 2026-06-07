@@ -1,0 +1,39 @@
+On branch clean-push
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   diagnostics/phase93e/ahead-behind-start.txt
+	modified:   diagnostics/phase93e/app-patch-script-run.txt
+	modified:   diagnostics/phase93e/app-patch-summary.json
+	modified:   diagnostics/phase93e/build.txt
+	modified:   diagnostics/phase93e/git-log-start.txt
+	modified:   diagnostics/phase93e/git-status-after-drift-restore.txt
+	modified:   diagnostics/phase93e/git-status-start.txt
+	modified:   diagnostics/phase93e/head-start.txt
+	modified:   diagnostics/phase93e/health.json
+	modified:   diagnostics/phase93e/ready.json
+	modified:   diagnostics/phase94c/ahead-behind-start.txt
+	modified:   diagnostics/phase94c/build.txt
+	modified:   diagnostics/phase94c/git-log-start.txt
+	modified:   diagnostics/phase94c/git-status-after-drift-restore.txt
+	modified:   diagnostics/phase94c/git-status-start.txt
+	modified:   diagnostics/phase94c/head-start.txt
+	modified:   diagnostics/phase94c/health.json
+	modified:   diagnostics/phase94c/ready.json
+	modified:   server/app.mjs
+	modified:   server/db/ensureSchema.mjs
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.tmp_drizzle/
+	diagnostics/phase94d/
+	diagnostics/phase94e/
+	diagnostics/phase94g/
+	scripts/generate-canonical-schema.mjs
+	scripts/phase94d-service-worker-stale-shell-gate.mjs
+	server/db/schema.canonical.sql
+
+no changes added to commit (use "git add" and/or "git commit -a")
