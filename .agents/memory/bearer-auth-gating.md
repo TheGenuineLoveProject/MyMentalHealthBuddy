@@ -50,3 +50,18 @@ log the user out. Any UI control that does `window.location.href="/api/logout"` 
 logout controls through `AuthContext.logout()` then `window.location.href="/"` for a
 clean guest reload. Note `AuthContext.logout`'s own `if (replitUser) → /api/logout`
 branch and `hooks/useAuth.js` logout are dead while OIDC stays un-invoked.
+
+## CSRF curl-testing footgun (Bearer OR x-guest-id bypass)
+`server/security/csrf.mjs` `csrfProtection` enforces a double-submit cookie/header
+token on non-safe `/api/*` methods, BUT bypasses entirely when the request has an
+`Authorization: Bearer …` header OR an `x-guest-id` header (plus a small exempt-path
+allowlist: `/api/auth/*`, `/api/buddy`, newsletter/leads/contact/feedback,
+`/api/analytics/event`, `/api/awareness/detect`, healthkit webhook).
+**Why:** the real frontend never sends a CSRF token from `apiRequest` — authed users
+ride the Bearer bypass, guests ride `x-guest-id`. A plain `curl` POST (no Bearer, no
+guest-id) gets `403 {"error":"CSRF token missing or invalid"}` — this is NOT a broken
+endpoint and is returned BEFORE routing (so it masks 404s).
+**How to apply:** to reproduce a real frontend POST from the shell, add
+`-H "x-guest-id: g1"` (optionalAuth routes) or a real `Authorization: Bearer …`.
+A 403 means you forgot the bypass header; only after adding it does a 404 mean the
+route is genuinely unmounted.

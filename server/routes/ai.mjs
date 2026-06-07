@@ -384,4 +384,154 @@ router.get("/insights", requireAuth, requireAdmin, async (_req, res) => {
   });
 });
 
+/**
+ * Coerce an untrusted weekly-summary body into a safe, counts-only shape.
+ * Numeric fields are clamped to non-negative bounds; `dominantEmotion` is the
+ * only string field, so it is length-capped and stripped to a word-like label
+ * (letters/spaces/hyphens) before it can reach the AI prompt or output. The
+ * original raw emotion string is preserved separately for a crisis scan only.
+ */
+const EMOTION_MAX_LEN = 40;
+
+function sanitizeWeeklySummary(raw = {}) {
+  const clampCount = (v) => {
+    const n = Math.floor(Number(v));
+    if (!Number.isFinite(n) || n < 0) return 0;
+    return Math.min(n, 100000);
+  };
+  const score = Number(raw?.averageMoodScore);
+  const out = {
+    moodEntryCount: clampCount(raw?.moodEntryCount),
+    journalCount: clampCount(raw?.journalCount),
+    gratitudeCount: clampCount(raw?.gratitudeCount),
+    averageMoodScore: Number.isFinite(score) ? Math.max(0, Math.min(10, score)) : null,
+    dominantEmotion: null,
+    dominantEmotionRaw: null,
+  };
+  if (typeof raw?.dominantEmotion === "string" && raw.dominantEmotion.trim()) {
+    const trimmed = raw.dominantEmotion.trim().slice(0, EMOTION_MAX_LEN);
+    out.dominantEmotionRaw = trimmed;
+    const cleaned = trimmed.replace(/[^a-zA-Z\s-]/g, "").trim().toLowerCase();
+    out.dominantEmotion = cleaned || null;
+  }
+  return out;
+}
+
+/**
+ * Build a gentle, deterministic weekly reflection from a sanitized counts-only
+ * summary. Used as the AI fallback so the endpoint always returns supportive
+ * language, even when the AI client is unconfigured or unavailable. Educational
+ * only, non-clinical, no diagnosis.
+ */
+function buildWeeklyReflectionInsight(summary = {}) {
+  const moodCount = summary.moodEntryCount || 0;
+  const journalCount = summary.journalCount || 0;
+  const gratitudeCount = summary.gratitudeCount || 0;
+  const emotion = summary.dominantEmotion || null;
+  const avg = summary.averageMoodScore;
+  const hasAvg = Number.isFinite(avg) && avg > 0;
+  const total = moodCount + journalCount + gratitudeCount;
+
+  if (total === 0) {
+    return "This week was quiet here, and that's okay. There's no pace you're supposed to keep. Whenever you're ready, even one small check-in is a gentle way to come back to yourself.";
+  }
+
+  const parts = [];
+  parts.push(
+    `This week you showed up for yourself ${total} ${total === 1 ? "time" : "times"} — that steadiness matters more than it might feel like in the moment.`,
+  );
+  if (emotion) {
+    parts.push(
+      `"${emotion}" came through most often. That's worth noticing with kindness, not judgment — feelings are information, not verdicts.`,
+    );
+  }
+  if (journalCount > 0) {
+    parts.push(
+      `You gave words to your inner world ${journalCount} ${journalCount === 1 ? "time" : "times"}; naming what's there is its own quiet form of care.`,
+    );
+  }
+  if (gratitudeCount > 0) {
+    parts.push(
+      `You also paused for gratitude ${gratitudeCount} ${gratitudeCount === 1 ? "time" : "times"} — small noticings like these tend to add up.`,
+    );
+  }
+  if (hasAvg) {
+    parts.push(
+      `Your mood averaged around ${avg}/10 this week. Wherever that lands, it's a snapshot, not a measure of your worth.`,
+    );
+  }
+  parts.push("Take what serves you. You know yourself best.");
+  return parts.join(" ");
+}
+
+/**
+ * POST /api/ai/weekly-reflection
+ * Body: { summary: { moodEntryCount, journalCount, gratitudeCount,
+ *                    dominantEmotion, averageMoodScore } }
+ * Returns: { ok: true, insight: string, source: "ai" | "reflection" | "crisis" }
+ * The body is sanitized to a counts-only shape so no untrusted free-text can
+ * reach the AI prompt or output. As a BHCE safeguard (asymmetric risk), the
+ * single string field is crisis-scanned first; on a signal we return supportive
+ * text with the canonical crisis resources instead of a generic reflection.
+ * Always returns 200 with a supportive `insight`; AI-enhanced when available.
+ */
+router.post("/weekly-reflection", optionalAuth, async (req, res) => {
+  const summary = sanitizeWeeklySummary(
+    req.body && typeof req.body.summary === "object" && req.body.summary
+      ? req.body.summary
+      : {},
+  );
+  const fallback = buildWeeklyReflectionInsight(summary);
+
+  try {
+    // BHCE safeguard: the only free-text-ish field is dominantEmotion. Scan the
+    // raw value for crisis signals before it is used anywhere. Err toward
+    // resource provision — surface 988 / 741741 / /crisis in the insight itself.
+    if (summary.dominantEmotionRaw && detectCrisis(summary.dominantEmotionRaw)) {
+      return res.json({
+        ok: true,
+        source: "crisis",
+        insight:
+          "It sounds like things may feel really heavy right now, and you don't have to carry that alone. If you're in crisis, please reach out: call or text 988 (Suicide & Crisis Lifeline), or text HOME to 741741. If you're in immediate danger, call 911. You can also visit /crisis for more support. You deserve care, and reaching out is a brave first step.",
+      });
+    }
+
+    if (!aiConfigured()) {
+      return res.json({ ok: true, insight: fallback, source: "reflection" });
+    }
+
+    const userContent = [
+      "Here is a gentle weekly wellness summary (counts only, no clinical data):",
+      `- Mood check-ins: ${summary.moodEntryCount}`,
+      `- Journal entries: ${summary.journalCount}`,
+      `- Gratitude reflections: ${summary.gratitudeCount}`,
+      summary.dominantEmotion ? `- Most frequent feeling: ${summary.dominantEmotion}` : null,
+      Number.isFinite(summary.averageMoodScore) && summary.averageMoodScore > 0
+        ? `- Average mood: ${summary.averageMoodScore}/10`
+        : null,
+      "",
+      "Write a short (3-5 sentence), warm, non-clinical reflection on this week. Validate feelings, do not diagnose, do not give medical advice, use calm grounded language.",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const result = await chatCompletion({
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: userContent },
+      ],
+      temperature: 0.8,
+      maxTokens: 320,
+    });
+
+    if (result?.success && typeof result.content === "string" && result.content.trim()) {
+      return res.json({ ok: true, insight: result.content.trim(), source: "ai" });
+    }
+    return res.json({ ok: true, insight: fallback, source: "reflection" });
+  } catch (err) {
+    console.error("weekly-reflection error:", err);
+    return res.json({ ok: true, insight: fallback, source: "reflection" });
+  }
+});
+
 export default router;
