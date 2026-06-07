@@ -1,0 +1,9 @@
+===== GET /api/health =====
+HTTP=200
+{"status":"healthy","environment":"development","version":"1.0.0","uptime":905,"uptimeFormatted":"15m 5s","startedAt":"2026-06-07T18:04:55.209Z","database":{"connected":true},"ai":{"available":true},"softLaunch":false,"platform":{"totalTools":127,"totalRoutes":127,"adminPages":27},"services":{"stripe":true,"resend":true,"perplexity":true,"sentry":true},"memory":{"heapUsedMB":33,"heapTotalMB":35,"rssMB":100},"node":"v20.20.0"}
+===== GET /api/ready =====
+HTTP=200
+{"status":"ready","environment":"development","version":"1.0.0","timestamp":"2026-06-07T18:19:54.330Z"}
+===== GET /api/blog/posts =====
+HTTP=200
+{"posts":[]}
