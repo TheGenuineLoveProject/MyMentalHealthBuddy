@@ -1,0 +1,7 @@
+{
+  "previousCacheVersion": "2.2.0",
+  "newCacheVersion": "mmhb-pwa-v94-stale-shell-safe",
+  "removedIndexHtmlPrecache": true,
+  "navigationNetworkFirst": true,
+  "offlineOnlyFallback": true
+}

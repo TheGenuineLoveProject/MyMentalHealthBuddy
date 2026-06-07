@@ -1,0 +1,12 @@
+3: * - Never serve cached index.html for navigations.
+5: * - Fall back only to offline.html when network is unavailable.
+10:const CACHE_VERSION = "mmhb-pwa-v94-stale-shell-safe";
+11:const STATIC_CACHE = `${CACHE_VERSION}-static`;
+12:const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+15:  "/offline.html",
+57:async function networkFirstNavigation(request) {
+59:    const response = await fetch(request, { cache: "no-store" });
+63:    return (await cache.match("/offline.html")) || new Response(
+77:  const networkPromise = fetch(request)
+93:    event.respondWith(networkFirstNavigation(request));
+107:  if (event.data?.type === "CLEAR_MHB_CACHES") {

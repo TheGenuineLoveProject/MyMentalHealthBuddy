@@ -1,0 +1,23 @@
+1:const CACHE_VERSION = '2.2.0';
+2:const CACHE_NAME = `genuine-love-${CACHE_VERSION}`;
+3:const RUNTIME_CACHE = `genuine-love-runtime-${CACHE_VERSION}`;
+9:  '/index.html',
+23:// v5.7.8: Google Fonts prefetch removed — fonts are now self-hosted (see client/index.html @font-face block).
+25:self.addEventListener('install', (event) => {
+27:    caches.open(CACHE_NAME).then((cache) => {
+33:  self.skipWaiting();
+36:self.addEventListener('activate', (event) => {
+41:          .filter((name) => name !== CACHE_NAME && name !== RUNTIME_CACHE)
+49:  self.clients.claim();
+52:self.addEventListener('fetch', (event) => {
+72:    event.respondWith(cacheFirst(request, RUNTIME_CACHE));
+89:async function cacheFirst(request, cacheName = CACHE_NAME) {
+95:    const response = await fetch(request);
+108:    const response = await fetch(request);
+124:    const response = await fetch(request);
+126:      const cache = await caches.open(CACHE_NAME);
+147:  const cache = await caches.open(CACHE_NAME);
+150:  const fetchPromise = fetch(request).then((response) => {
+157:  return cached || fetchPromise;
+247:    self.skipWaiting();
+442:      const response = await fetch(entry.url, {
