@@ -1,0 +1,10 @@
+PHASE99_ROOT_SHADOW_DUPLICATE_QUARANTINE_COMPLETE
+{
+  "selectedFamily": "SacredBackground",
+  "canonicalOwners": [
+    "client/src/components/SacredBackground.jsx",
+    "client/src/components/sacred/SacredBackground.jsx",
+    "client/src/components/ui/SacredBackground.jsx"
+  ],
+  "movedCount": 2
+}
