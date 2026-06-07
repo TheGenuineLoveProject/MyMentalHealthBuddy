@@ -162,6 +162,10 @@ import valuesRoutes from "./routes/values.mjs";
 import wisdomEngineRoutes from "./routes/wisdom-engine.mjs";
 import healingIntelligenceRoutes from "./routes/healing-intelligence.mjs";
 import cognitiveMasteryRoutes from "./routes/cognitive-mastery.mjs";
+import objectStorageRoutes from "./routes/object-storage.mjs";
+import userSettingsRoutes from "./routes/user-settings.mjs";
+import dashboardRoutes from "./routes/dashboard.mjs";
+import socialRoutes from "./routes/social.mjs";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
 console.log(`[boot] mode=${IS_DEV ? "development" : "production"} (NODE_ENV=${process.env.NODE_ENV || "<unset>"})`);
@@ -449,6 +453,11 @@ app.use("/api/values", valuesRoutes);
 app.use("/api/wisdom-engine", wisdomEngineRoutes);
 app.use("/api/healing-intelligence", healingIntelligenceRoutes);
 app.use("/api/cognitive-mastery", cognitiveMasteryRoutes);
+// Batch 3: previously file-less prefixes — object storage (existing module), plus new user-settings/dashboard/social backends.
+app.use("/api/uploads", objectStorageRoutes);
+app.use("/api/user-settings", userSettingsRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/social", socialRoutes);
 
 
 app.use(express.static(CLIENT_DIST, {

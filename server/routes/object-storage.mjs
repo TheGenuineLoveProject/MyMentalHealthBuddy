@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { randomUUID } from 'crypto';
 import { logger } from "../utils/logger.mjs";
+import { requireAuth } from "../middleware/auth.mjs";
 
 const router = Router();
 
@@ -97,7 +98,7 @@ function normalizeObjectEntityPath(rawPath) {
   return `/objects/${entityId}`;
 }
 
-router.post("/request-url", async (req, res) => {
+router.post("/request-url", requireAuth, async (req, res) => {
   try {
     const { name, size, contentType } = req.body;
 

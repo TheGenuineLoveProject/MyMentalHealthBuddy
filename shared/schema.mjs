@@ -141,6 +141,7 @@ export const userPreferences = pgTable("user_preferences", {
   disclaimerAcceptedAt: timestamp("disclaimer_accepted_at"),
   theme: varchar("theme", { length: 20 }).default("system"),
   notifications: boolean("notifications").default(true),
+  preferences: jsonb("preferences"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

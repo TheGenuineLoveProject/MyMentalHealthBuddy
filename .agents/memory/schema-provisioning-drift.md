@@ -36,6 +36,20 @@ column count double-counts and lies), and if empty, drop + recreate with SQL
 matching the canonical shape (ALTER if it has data). `IF NOT EXISTS` bootstrap
 will NOT heal a table that already exists with the wrong columns.
 
+**How to ADD a column reproducibly (no db:push exists):** do BOTH, in
+`server/db/schema.canonical.sql`, so every env self-heals on next boot via
+`ensureSchema()`: (1) add the column to the `CREATE TABLE IF NOT EXISTS` block
+(covers fresh DBs), AND (2) add a standalone idempotent
+`ALTER TABLE "x" ADD COLUMN IF NOT EXISTS "col" type;` statement delimited by its
+own `--> statement-breakpoint` (covers existing/prod DBs — the CREATE block is a
+no-op there). Also add it to `shared/schema.mjs` (runtime source of truth). A
+manual one-off `ALTER` on the live dev DB only fixes that one DB; without the
+canonical-SQL edit, prod/staging silently 500 on first write.
+**Why:** `ensureSchema()` replays canonical SQL on EVERY boot (it is NOT dead
+code — confirmed live, statement count ticks up by exactly the number of new
+statements you add, e.g. 140→141). Each statement is wrapped in try/catch, so
+idempotent `IF NOT EXISTS` statements are safe to leave in permanently.
+
 ## Durable auto-provisioning (DONE)
 
 Fresh-DB / restore self-heal now exists and is wired:
