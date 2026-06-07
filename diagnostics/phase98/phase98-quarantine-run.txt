@@ -1,0 +1,9 @@
+PHASE98_SHADOW_DUPLICATE_QUARANTINE_COMPLETE
+{
+  "selectedFamily": "ProtectedRoute",
+  "canonicalOwners": [
+    "client/src/components/ProtectedRoute.jsx",
+    "client/src/guards/ProtectedRoute.jsx"
+  ],
+  "movedCount": 3
+}
