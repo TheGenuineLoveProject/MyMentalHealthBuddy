@@ -21,7 +21,7 @@ export default function DataExportButton({
   });
 
   const { data: journals } = useQuery({
-    queryKey: ["/api/journal"],
+    queryKey: ["/api/journals"],
     enabled: dataType === "all" || dataType === "journals"
   });
 

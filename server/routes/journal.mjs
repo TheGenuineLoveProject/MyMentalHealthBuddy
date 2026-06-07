@@ -1,16 +1,23 @@
 // server/routes/journal.mjs
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import crypto from "crypto";
 import { db } from "../db/client.mjs";
 import { anonymousReflections } from "../../shared/schema.mjs";
+import {
+  createJournalEntry,
+  getUserJournals,
+  getJournalById,
+  updateJournalEntry,
+  deleteJournalEntry,
+  mapJournalEntry,
+} from "../db/helpers.mjs";
 import { increment } from "../utils/metrics.mjs";
 import { logger } from "../utils/logger.mjs";
 import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
 
 const router = Router();
 
-const journalStore = new Map();
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function requireAuth(req, res, next) {
   try {
@@ -31,12 +38,12 @@ function requireAuth(req, res, next) {
 /**
  * POST /api/journal
  * body: { title, content, shareWithCommunity?, isAnonymous?, mood? }
- * Returns: { ok:true, data:{...entry} }
+ * Persists to the DB `journals` table. Returns: { ok:true, data:{...entry} }
  */
 router.post("/", requireAuth, async (req, res) => {
   try {
     const { title, content, shareWithCommunity, isAnonymous = true, mood = "neutral" } = req.body || {};
-    
+
     if (!title || String(title).trim().length === 0) {
       return res.status(400).json({ ok: false, message: "Title is required." });
     }
@@ -44,22 +51,13 @@ router.post("/", requireAuth, async (req, res) => {
       return res.status(400).json({ ok: false, message: "Content is required." });
     }
 
-    const id = crypto.randomUUID();
-    const now = new Date().toISOString();
-
-    const entry = {
-      id,
-      title: String(title).trim(),
-      content: String(content),
-      mood: mood || "neutral",
-      shareWithCommunity: Boolean(shareWithCommunity),
-      isAnonymous: Boolean(isAnonymous),
-      createdAt: now,
-      updatedAt: now,
+    const row = await createJournalEntry({
       userId: req.dbUserId,
-    };
+      title: String(title).trim(),
+      text: String(content),
+      mood: mood || "neutral",
+    });
 
-    journalStore.set(id, entry);
     increment("journal_entry_created", { plan: "unknown" });
 
     if (shareWithCommunity) {
@@ -76,7 +74,7 @@ router.post("/", requireAuth, async (req, res) => {
       }
     }
 
-    return res.status(200).json({ ok: true, data: entry });
+    return res.status(200).json({ ok: true, data: mapJournalEntry(row) });
   } catch (err) {
     logger.error("Failed to create journal entry", { error: err?.message || err });
     if (!res.headersSent) {
@@ -87,13 +85,12 @@ router.post("/", requireAuth, async (req, res) => {
 
 /**
  * GET /api/journal
- * Returns: { ok:true, data:[...entries] }
+ * Returns: { ok:true, data:[...entries] } (newest first)
  */
 router.get("/", requireAuth, async (req, res) => {
   try {
-    const userId = req.dbUserId;
-    const entries = Array.from(journalStore.values()).filter((e) => e.userId === userId);
-    return res.status(200).json({ ok: true, data: entries });
+    const rows = await getUserJournals({ userId: req.dbUserId });
+    return res.status(200).json({ ok: true, data: rows.map(mapJournalEntry) });
   } catch (err) {
     logger.error("Failed to list journal entries", { error: err?.message || err });
     if (!res.headersSent) {
@@ -105,22 +102,22 @@ router.get("/", requireAuth, async (req, res) => {
 /**
  * GET /api/journal/:id
  * Returns single journal entry
- * - If id doesn't exist -> 400 (tests expect 400, NOT 404)
+ * - Invalid or non-existent id -> 400 (tests expect 400, NOT 404)
  */
 router.get("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (!id || id === "undefined" || id === "null") {
+    if (!UUID_RE.test(id || "")) {
       return res.status(400).json({ ok: false, message: "Invalid journal id." });
     }
 
-    const entry = journalStore.get(id);
-    if (!entry) {
+    const row = await getJournalById({ id, userId: req.dbUserId });
+    if (!row) {
       return res.status(400).json({ ok: false, message: "Journal entry not found." });
     }
 
-    return res.status(200).json({ ok: true, data: entry });
+    return res.status(200).json({ ok: true, data: mapJournalEntry(row) });
   } catch (err) {
     logger.error("Failed to get journal entry", { error: err?.message || err });
     if (!res.headersSent) {
@@ -131,38 +128,35 @@ router.get("/:id", requireAuth, async (req, res) => {
 
 /**
  * PUT /api/journal/:id
- * - If id does not exist -> 400 (tests expect 400, NOT 404)
+ * - Invalid or non-existent id -> 400 (tests expect 400, NOT 404)
  * - If exists -> 200 with updated entry in data
  */
 router.put("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, content } = req.body || {};
+    const { title, content, mood } = req.body || {};
 
-    if (!id || id === "undefined" || id === "null") {
+    if (!UUID_RE.test(id || "")) {
       return res.status(400).json({ ok: false, message: "Invalid journal id." });
     }
 
-    const existing = journalStore.get(id);
-    if (!existing) {
-      return res.status(400).json({ ok: false, message: "Journal entry not found." });
-    }
-
+    const fields = {};
     if (title != null) {
       const t = String(title).trim();
       if (t.length === 0) {
         return res.status(400).json({ ok: false, message: "Title cannot be empty." });
       }
-      existing.title = t;
+      fields.title = t;
     }
-    if (content != null) {
-      existing.content = String(content);
+    if (content != null) fields.text = String(content);
+    if (mood != null) fields.mood = String(mood);
+
+    const row = await updateJournalEntry({ id, userId: req.dbUserId, ...fields });
+    if (!row) {
+      return res.status(400).json({ ok: false, message: "Journal entry not found." });
     }
 
-    existing.updatedAt = new Date().toISOString();
-    journalStore.set(id, existing);
-
-    return res.status(200).json({ ok: true, data: existing });
+    return res.status(200).json({ ok: true, data: mapJournalEntry(row) });
   } catch (err) {
     logger.error("Failed to update journal entry", { error: err?.message || err });
     if (!res.headersSent) {
@@ -174,21 +168,21 @@ router.put("/:id", requireAuth, async (req, res) => {
 /**
  * DELETE /api/journal/:id
  * - Existing -> 200 {ok:true}
- * - Non-existent -> 400 (tests expect 400, NOT 404)
+ * - Invalid or non-existent -> 400 (tests expect 400, NOT 404)
  */
 router.delete("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (!id || id === "undefined" || id === "null") {
+    if (!UUID_RE.test(id || "")) {
       return res.status(400).json({ ok: false, message: "Invalid journal id." });
     }
 
-    if (!journalStore.has(id)) {
+    const row = await deleteJournalEntry({ id, userId: req.dbUserId });
+    if (!row) {
       return res.status(400).json({ ok: false, message: "Journal entry not found." });
     }
 
-    journalStore.delete(id);
     return res.status(200).json({ ok: true });
   } catch (err) {
     logger.error("Failed to delete journal entry", { error: err?.message || err });

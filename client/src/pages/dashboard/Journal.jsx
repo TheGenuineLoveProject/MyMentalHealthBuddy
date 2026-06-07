@@ -85,6 +85,7 @@ function NewEntryModal({ isOpen, onClose, selectedPrompt }) {
     mutationFn: (data) => apiRequest("POST", "/api/journal", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/journals"] });
       onClose();
       setTitle("");
       setContent("");

@@ -169,6 +169,7 @@ import socialRoutes from "./routes/social.mjs";
 import systemRoutes from "./routes/system.mjs";
 import kernelRoutes from "./routes/kernel.mjs";
 import growthJourneyRoutes from "./routes/growth-journey.mjs";
+import journalsRoutes from "./routes/journals.mjs";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
 console.log(`[boot] mode=${IS_DEV ? "development" : "production"} (NODE_ENV=${process.env.NODE_ENV || "<unset>"})`);
@@ -464,6 +465,7 @@ app.use("/api/social", socialRoutes);
 app.use("/api/system", systemRoutes);
 app.use("/api/kernel", kernelRoutes);
 app.use("/api/growth", optionalAuth, growthJourneyRoutes);
+app.use("/api/journals", journalsRoutes);
 
 
 app.use(express.static(CLIENT_DIST, {

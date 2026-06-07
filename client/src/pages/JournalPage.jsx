@@ -133,6 +133,7 @@ export default function JournalPage() {
     mutationFn: (data) => apiRequest("POST", "/api/journal", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/journals"] });
       queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
       awardXp("journal-entry", 180, { type: "journaling" }).catch(() => {});
       setTitle("");
@@ -149,6 +150,7 @@ export default function JournalPage() {
     mutationFn: (id) => apiRequest("DELETE", `/api/journal/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/journals"] });
       queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
     },
     onError: (err) => {

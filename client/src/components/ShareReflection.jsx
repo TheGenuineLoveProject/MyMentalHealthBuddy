@@ -21,8 +21,8 @@ export default function ShareReflection({ onClose, onSuccess }) {
   const [isBlessing, setIsBlessing] = useState(false);
 
   const { data: journals } = useQuery({
-    queryKey: ["/api/journal"],
-    select: (data) => data?.slice(0, 10)
+    queryKey: ["/api/journals"],
+    select: (data) => (Array.isArray(data) ? data.slice(0, 10) : []),
   });
 
   const shareMutation = useMutation({
