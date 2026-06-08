@@ -334,9 +334,7 @@ function ConfigRoute({ route }) {
 
 function LoadingFallback() {
   return (
-    <
-
-      div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30 page-entering">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30 page-entering">
       <div className="text-center space-y-6" role="status" aria-label="Loading page">
         <div className="relative mx-auto w-20 h-20">
           <svg
@@ -441,7 +439,6 @@ export default function App() {
             <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Landing & Public Pages */}
-<SEOContentDiscoveryRail />
               <Route path="/">
                 <CanvaLanding />
               </Route>
@@ -1909,6 +1906,9 @@ export default function App() {
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>
             </Switch>
           </Suspense>
+          </SafeBoundary>
+          <SafeBoundary label="DiscoveryRail">
+            <SEOContentDiscoveryRail />
           </SafeBoundary>
           </main>
           {/* v5.8.35 perf: lazy global widgets — Suspense fallback is null

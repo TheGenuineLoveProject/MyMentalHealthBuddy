@@ -10,9 +10,9 @@ import { useSEO } from "@/hooks/useSEO";
 import "@/styles/peacescape-shell.css";
 
 const ROADMAP_TEASERS = [
-  { phase: "Phase 1", title: "Sanctuary foundation", body: "A quiet, breathing scape. Buddy beside you. Tenure-aware copy." },
-  { phase: "Phase 2", title: "Avatar customizer",   body: "Choose your Buddy's palette and accessory. Small, gentle expressions of self." },
-  { phase: "Phase 3", title: "Scape evolution",     body: "Your sanctuary grows with each reflection — meadow → grove → forest → cathedral." },
+  { phase: "Phase 1", title: "Sanctuary foundation", body: "A quiet, breathing scape. Buddy beside you. Tenure-aware copy.", live: true },
+  { phase: "Phase 2", title: "Avatar customizer",   body: "Choose your Buddy's palette, accessory, and sanctuary theme. Small, gentle expressions of self.", live: true },
+  { phase: "Phase 3", title: "Scape evolution",     body: "Your sanctuary grows with each reflection — meadow → grove → forest → cathedral.", live: true },
   { phase: "Phase 4", title: "Learning curriculum", body: "Bite-sized, trauma-informed micro-lessons that unlock alongside you." },
   { phase: "Phase 5", title: "Enlightenment journey", body: "A long-arc map of your inner work — chapters, not levels." },
   { phase: "Phase 6", title: "360° support fabric", body: "Your sanctuary, your check-ins, and your Buddy — woven together as one companion." },
@@ -219,7 +219,7 @@ export default function PeacescapePage() {
                 key={p.phase}
                 className="rounded-2xl p-5"
                 style={{
-                  background: i === 0 ? "var(--glp-sage-10)" : "var(--glp-paper)",
+                  background: p.live ? "var(--glp-sage-10)" : "var(--glp-paper)",
                   border: "1px solid var(--glp-sage-10)",
                   boxShadow: "0 4px 16px -8px rgba(45, 80, 60, 0.12)",
                 }}
@@ -227,9 +227,9 @@ export default function PeacescapePage() {
               >
                 <div
                   className="text-xs font-semibold uppercase tracking-wider mb-2"
-                  style={{ color: i === 0 ? "var(--glp-sage-deep)" : "var(--glp-sage)" }}
+                  style={{ color: p.live ? "var(--glp-sage-deep)" : "var(--glp-sage)" }}
                 >
-                  {p.phase}{i === 0 && " · live now"}
+                  {p.phase}{p.live && " · live now"}
                 </div>
                 <h3 className="text-lg font-bold mb-2" style={{ color: "var(--glp-sage-deep)" }}>{p.title}</h3>
                 <p className="text-sm" style={{ color: "var(--glp-ink)", opacity: 0.75 }}>{p.body}</p>
@@ -247,9 +247,9 @@ export default function PeacescapePage() {
           >
             <Wand2 className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: "var(--glp-sage-deep)" }} />
             <div>
-              <h3 className="font-bold mb-1" style={{ color: "var(--glp-sage-deep)" }}>Avatar customizer (coming soon)</h3>
+              <h3 className="font-bold mb-1" style={{ color: "var(--glp-sage-deep)" }}>Avatar customizer</h3>
               <p className="text-sm" style={{ color: "var(--glp-ink)", opacity: 0.78 }}>
-                Choose your Buddy's palette and accessory. Small, considered ways to make this companion feel like yours.
+                Live now — use the panel above to choose your Buddy's palette, accessory, and sanctuary theme. Small, considered ways to make this companion feel like yours.
               </p>
             </div>
           </div>

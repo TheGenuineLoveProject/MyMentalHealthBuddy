@@ -5,7 +5,6 @@ import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
-import SafetyFooter from "@/components/ui/ReflectionFooter";
 
 // HX-OS Interaction Governance — passive crisis-language detection.
 // Pure read-only regex; no fetch, no AI, no behavior modification.
@@ -159,18 +158,7 @@ export default function DailyRitualPage() {
   const [currentQuestion, setCurrentQuestion] = useState<string | null>(null);
 
   const insightOutput = useMemo(() => {
-    if (reflectionText.trim().length < 10) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Daily Ritual — The Genuine Love Project" description="Build meaningful daily routines for self-care." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Daily Ritual</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+    if (reflectionText.trim().length < 10) return null;
     return buildInsightCards(reflectionText);
   }, [reflectionText]);
 
