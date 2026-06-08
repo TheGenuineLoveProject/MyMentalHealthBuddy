@@ -7,8 +7,6 @@ import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/ReflectionFooter";
-import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
-import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import ZenScape from "@/components/zen/ZenScape";
 import { OfficialLumi } from "@/lumi-registry";
@@ -155,18 +153,7 @@ function BreathingTimer({ exercise, onComplete }) {
   };
 
   const getPhaseInstruction = () => {
-    if (phaseDurations[currentPhase] === 0) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Breathing Exercises — The Genuine Love Project" description="Simple breathing techniques for calming your nervous system." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Breathing Exercises</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+    if (phaseDurations[currentPhase] === 0) return "";
     return phases[currentPhase];
   };
 
@@ -209,29 +196,7 @@ function BreathingTimer({ exercise, onComplete }) {
       });
     }, 1000);
 
-    return (
-  <div className="hxos-vnext">
-  <WellnessPageShell
-    title="BreathingExercisesPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="Breathing Exercises — The Genuine Love Project" description="Simple breathing techniques for calming your nervous system." />
-
-) => clearInterval(timer);
+    return () => clearInterval(timer);
   }, [isRunning, currentPhase, cycles, totalBreaths, phaseDurations, onComplete]);
 
   const instruction = getPhaseInstruction();
@@ -511,7 +476,5 @@ export default function BreathingExercisesPage() {
         <SafetyFooter variant="prominent" />
       </div>
     </div>
-  </WellnessPageShell>
-  </div>
   );
 }

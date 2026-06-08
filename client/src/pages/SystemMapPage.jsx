@@ -133,18 +133,7 @@ function LeverCard({ lever, isSelected, onSelect }) {
 }
 
 function SelectedLeverDetail({ lever }) {
-  if (!lever) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="System Map — The Genuine Love Project" description="Visual overview of wellness connections." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">System Map</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!lever) return null;
 
   const Icon = lever.icon;
 

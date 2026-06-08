@@ -298,18 +298,7 @@ function ContentAnalytics() {
     );
   }
   
-  if (!analytics) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Social Dashboard — The Genuine Love Project" description="Explore social dashboard tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Social Dashboard</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!analytics) return null;
   
   const { totals, contentHealth, platformBreakdown, weeklyActivity } = analytics;
   
