@@ -232,13 +232,13 @@ export default function TglpNavbar() {
               )}
               <Link
                 href="/dashboard"
-                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-semibold hover:opacity-90 focus:outline-none text-[var(--glp-sage-deep)]"
+                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-semibold hover:opacity-90 focus:outline-none"
                 style={{ background: "var(--glp-gold-gradient)", boxShadow: "var(--glp-gold-shadow)" }}
                 data-testid="link-dashboard-cta"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
-                <span className="hidden sm:inline">Dashboard</span>
-                <span className="sm:hidden">Go</span>
+                <span className="cta-label-full">Dashboard</span>
+                <span className="cta-label-short">Go</span>
               </Link>
             </>
           ) : (
@@ -252,13 +252,13 @@ export default function TglpNavbar() {
               </Link>
               <Link
                 href="/login"
-                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-semibold hover:opacity-90 focus:outline-none text-[var(--glp-sage-deep)]"
+                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-semibold hover:opacity-90 focus:outline-none"
                 style={{ background: "var(--glp-gold-gradient)", boxShadow: "var(--glp-gold-shadow)" }}
                 data-testid="link-register"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
-                <span className="hidden sm:inline">Get Started</span>
-                <span className="sm:hidden">Start</span>
+                <span className="cta-label-full">Get Started</span>
+                <span className="cta-label-short">Start</span>
               </Link>
             </>
           )}
@@ -396,7 +396,7 @@ export default function TglpNavbar() {
                 )}
                 <Link
                   href="/dashboard"
-                  className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+                  className="btn-header-cta flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold"
                   style={{ background: "var(--glp-gold-gradient)" }}
                   onClick={() => setMobileMenuOpen(false)}
                   data-testid="link-mobile-dashboard"
@@ -416,7 +416,7 @@ export default function TglpNavbar() {
                 </a>
                 <a
                   href="/login"
-                  className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+                  className="btn-header-cta flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold"
                   style={{ background: "var(--glp-gold-gradient)" }}
                   data-testid="link-mobile-get-started"
                 >
