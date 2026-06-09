@@ -51,6 +51,7 @@ const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
 const CanvaLanding = lazy(() => import("./pages/CanvaLanding.jsx"));
+const MeetLumi = lazy(() => import("./pages/MeetLumi.jsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
 const Start = lazy(() => import("./pages/Start.tsx"));
 const Register = lazy(() => import("./pages/Register.jsx"));
@@ -452,6 +453,8 @@ export default function App() {
               <Route path="/features" component={FeaturesPage} />
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />
+              <Route path="/meet-lumi" component={MeetLumi} />
+              <Route path="/lumi">{() => <Redirect to="/meet-lumi" />}</Route>
               <Route path="/start" component={Start} />
               <Route path="/pricing" component={PricingReal} />
               <Route path="/coming-soon">{() => <ComingSoon />}</Route>
