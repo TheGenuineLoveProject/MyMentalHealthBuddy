@@ -161,6 +161,7 @@ export default function BlogIndex() {
           <div className="text-center py-16" data-testid="section-blog-empty">
             <BookOpen className="w-16 h-16 mx-auto text-[var(--glp-sage)]/50 mb-4" />
             <h3 className="text-xl font-semibold text-[var(--glp-sage-deep)]">
+              {/* platform-evolution-ignore: blog empty-state copy, only shown when zero posts exist */}
               {searchQuery ? "No articles match your search" : "New posts are coming soon. You're welcome here."}
             </h3>
             <p className="mt-3 text-[var(--glp-ink)]/70 max-w-md mx-auto">

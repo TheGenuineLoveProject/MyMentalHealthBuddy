@@ -34,6 +34,7 @@ process.on('unhandledRejection', (err) => {
 import express from "express";
 import cors from "cors";
 import path from "node:path";
+import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -54,10 +55,14 @@ import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
 import { requireAdult } from "./middleware/requireAdult.mjs";
 import adminRoutes from "./routes/admin.mjs";
 import adminBillingRoutes from "./routes/adminBilling.mjs";
+import platformEvolutionRoutes from "./routes/platform-evolution.mjs";
+import integrationHealthRoutes from "./routes/integrationHealth.mjs";
 import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
 import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
 import db from "./db/client.mjs";
 import { ensureSchema } from "./db/ensureSchema.mjs";
+import { blogPosts as blogPostsTable, users as usersTable } from "../shared/schema.mjs";
+import { eq, and } from "drizzle-orm";
 
 // Expose to session-boundary helpers without touching working modules.
 globalThis.issueCsrfToken = issueCsrfToken;
@@ -301,9 +306,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/ai/healing", aiHealingRoutes);
 app.use("/api/ai/business", aiBusinessRoutes);
+app.use("/api/integrations", requireAuth, requireAdmin, integrationHealthRoutes);
 app.use("/api/admin/billing", adminBillingRoutes);
 app.use("/api/admin/publishing", adminPublishingRoutes);
 app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
+app.use("/api/admin/platform-evolution", requireAuth, requireAdmin, platformEvolutionRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/telemetry", telemetryRoutes);
 
@@ -333,7 +340,11 @@ const CLIENT_ROOT = path.join(__dirname, "..", "client");
    FINAL VERIFIED SPA FALLBACK
 ========================================================= */
 
-const CLIENT_DIST = path.join(process.cwd(), "client/dist");
+// Resolve from this module's own location (NOT process.cwd()). The deployment
+// VM does not guarantee the process working directory is the repo root, so a
+// cwd-relative path can point at a non-existent dir and make every SPA route
+// 404 even though the built assets exist. __dirname is cwd-independent.
+const CLIENT_DIST = path.join(__dirname, "..", "client", "dist");
 
 console.log("[SPA] CLIENT_DIST =", CLIENT_DIST);
 
@@ -472,8 +483,170 @@ app.use(express.static(CLIENT_DIST, {
   index: "index.html"
 }));
 
+// ===== SERVER-SIDE META INJECTION =====
+// Injects route-specific title, description, canonical, and Open Graph/Twitter
+// tags into the initial HTML response so social crawlers and AI crawlers receive
+// the correct metadata without waiting for JavaScript execution.
 
-app.get("*", (req, res, next) => {
+const SITE_ORIGIN = "https://mymentalhealthbuddy.com";
+const BRAND_FULL = "MyMentalHealthBuddy by The Genuine Love Project";
+const BRAND_OG_IMAGE = "https://mymentalhealthbuddy.com/brand/og-image.png";
+
+const ROUTE_META = {
+  "/about": {
+    title: `About | ${BRAND_FULL}`,
+    description: "The mission of The Genuine Love Project — fostering self-love, healing, and emotional growth.",
+    canonical: `${SITE_ORIGIN}/about`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/features": {
+    title: `Features | ${BRAND_FULL}`,
+    description: "Explore MyMentalHealthBuddy features — AI-assisted guidance, mood tracking, journaling, and gentle daily practices.",
+    canonical: `${SITE_ORIGIN}/features`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/pricing": {
+    title: `Pricing | ${BRAND_FULL}`,
+    description: "Simple, compassionate pricing for mental wellness support. Start free, upgrade when you're ready.",
+    canonical: `${SITE_ORIGIN}/pricing`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/healing": {
+    title: `Healing | ${BRAND_FULL}`,
+    description: "Trauma-informed healing tools — gentle reflection prompts, recovery practices, and compassionate guidance.",
+    canonical: `${SITE_ORIGIN}/healing`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/trust": {
+    title: `Trust Center | ${BRAND_FULL}`,
+    description: "How we protect your privacy, handle your data, and keep MyMentalHealthBuddy safe and transparent.",
+    canonical: `${SITE_ORIGIN}/trust`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/ai-transparency": {
+    title: `AI Transparency | ${BRAND_FULL}`,
+    description: "How our AI works, its limitations, and how we keep you safe. Full transparency about MyMentalHealthBuddy's AI.",
+    canonical: `${SITE_ORIGIN}/ai-transparency`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/faq": {
+    title: `FAQ | ${BRAND_FULL}`,
+    description: "Frequently asked questions about MyMentalHealthBuddy — mental wellness, trauma healing, wellness tools, and getting started.",
+    canonical: `${SITE_ORIGIN}/faq`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/blog": {
+    title: `Blog | ${BRAND_FULL}`,
+    description: "Educational reflections, wellness articles, and healing insights from The Genuine Love Project community.",
+    canonical: `${SITE_ORIGIN}/blog`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/mental-wellness": {
+    title: `Mental Wellness | ${BRAND_FULL}`,
+    description: "Supportive mental wellness practices — non-clinical, trauma-informed, and gently paced.",
+    canonical: `${SITE_ORIGIN}/mental-wellness`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/self-love": {
+    title: `Self-Love | ${BRAND_FULL}`,
+    description: "Gentle self-love practices — compassion, acceptance, and tender self-care for emotional wellbeing.",
+    canonical: `${SITE_ORIGIN}/self-love`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/wellbeing": {
+    title: `Wellbeing | ${BRAND_FULL}`,
+    description: "Holistic wellbeing resources — emotional regulation, relational health, and self-care practices.",
+    canonical: `${SITE_ORIGIN}/wellbeing`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/depression": {
+    title: `Depression Support | ${BRAND_FULL}`,
+    description: "Gentle, trauma-informed support for low moods — recovery resources, reflection, and compassionate guidance. Educational, never clinical.",
+    canonical: `${SITE_ORIGIN}/depression`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/anxiety": {
+    title: `Anxiety Support | ${BRAND_FULL}`,
+    description: "Supportive anxiety resources — guided breathing, grounding, and calming practices. Trauma-informed, never clinical.",
+    canonical: `${SITE_ORIGIN}/anxiety`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/mindfulness": {
+    title: `Mindfulness | ${BRAND_FULL}`,
+    description: "Accessible mindfulness practices — grounding, present-moment awareness, and gentle meditation for emotional regulation.",
+    canonical: `${SITE_ORIGIN}/mindfulness`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+  "/growth": {
+    title: `Growth | ${BRAND_FULL}`,
+    description: "Gentle, trauma-informed practices for personal growth, mindset shifts, and emotional expansion.",
+    canonical: `${SITE_ORIGIN}/growth`,
+    ogImage: BRAND_OG_IMAGE,
+  },
+};
+
+function escAttr(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+// Serialize JSON for safe inline <script> embedding.
+// Escapes `<`, `>`, and `&` so user-supplied values cannot break out of
+// the script tag (stored-XSS mitigation). JSON.stringify alone is not
+// sufficient because `</script>` in a string value terminates the tag.
+function safeJsonLd(obj) {
+  return JSON.stringify(obj)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
+}
+
+function injectMeta(html, { title, description, canonical, ogType = "website", ogImage, articleJsonLd }) {
+  const t = escAttr(title);
+  const d = escAttr(description);
+  const c = escAttr(canonical);
+  const img = escAttr(ogImage || BRAND_OG_IMAGE);
+
+  let out = html
+    .replace(/<title>[^<]*<\/title>/, `<title>${t}</title>`)
+    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/i, `$1${d}$2`)
+    .replace(/(<meta\s+property="og:title"\s+content=")[^"]*(")/i, `$1${t}$2`)
+    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/i, `$1${d}$2`)
+    .replace(/(<meta\s+property="og:type"\s+content=")[^"]*(")/i, `$1${ogType}$2`)
+    .replace(/(<meta\s+property="og:url"\s+content=")[^"]*(")/i, `$1${c}$2`)
+    .replace(/(<meta\s+property="og:image"\s+content=")[^"]*(")/i, `$1${img}$2`)
+    .replace(/(<meta\s+name="twitter:title"\s+content=")[^"]*(")/i, `$1${t}$2`)
+    .replace(/(<meta\s+name="twitter:description"\s+content=")[^"]*(")/i, `$1${d}$2`)
+    .replace(/(<meta\s+name="twitter:image"\s+content=")[^"]*(")/i, `$1${img}$2`)
+    .replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/i, `$1${c}$2`);
+
+  if (articleJsonLd) {
+    const tag = `<script type="application/ld+json">${safeJsonLd(articleJsonLd)}</script>`;
+    out = out.replace("</head>", `${tag}\n</head>`);
+  }
+
+  return out;
+}
+
+let _indexHtmlCache = null;
+function getIndexHtml() {
+  if (!_indexHtmlCache) {
+    const f = path.join(CLIENT_DIST, "index.html");
+    try {
+      _indexHtmlCache = fs.readFileSync(f, "utf-8");
+    } catch {
+      return null;
+    }
+  }
+  return _indexHtmlCache;
+}
+
+const BLOG_SLUG_RE = /^\/blog\/([^/]+)$/;
+
+app.get("*", async (req, res, next) => {
 
   if (req.path.startsWith("/api/")) {
     return next();
@@ -483,12 +656,97 @@ app.get("*", (req, res, next) => {
     return next();
   }
 
-  const indexFile = path.join(CLIENT_DIST, "index.html");
-
   console.log("[SPA ROUTE]", req.path);
-  console.log("[SPA INDEX]", indexFile);
 
-  return res.sendFile(path.resolve(indexFile));
+  const baseHtml = getIndexHtml();
+
+  if (!baseHtml) {
+    const indexFile = path.join(CLIENT_DIST, "index.html");
+    return res.sendFile(path.resolve(indexFile));
+  }
+
+  const staticMeta = ROUTE_META[req.path] || null;
+
+  if (staticMeta) {
+    return res.type("html").send(injectMeta(baseHtml, staticMeta));
+  }
+
+  const blogSlugMatch = req.path.match(BLOG_SLUG_RE);
+  if (blogSlugMatch && db) {
+    try {
+      const slug = blogSlugMatch[1];
+      const rows = await db
+        .select({
+          title: blogPostsTable.title,
+          slug: blogPostsTable.slug,
+          excerpt: blogPostsTable.excerpt,
+          featuredImage: blogPostsTable.featuredImage,
+          publishedAt: blogPostsTable.publishedAt,
+          updatedAt: blogPostsTable.updatedAt,
+          authorName: usersTable.name,
+        })
+        .from(blogPostsTable)
+        .leftJoin(usersTable, eq(blogPostsTable.authorId, usersTable.id))
+        .where(
+          and(
+            eq(blogPostsTable.slug, slug),
+            eq(blogPostsTable.status, "published"),
+            eq(blogPostsTable.visibility, "public"),
+          ),
+        )
+        .limit(1);
+
+      if (rows.length > 0) {
+        const post = rows[0];
+        const canonicalUrl = `${SITE_ORIGIN}/blog/${post.slug}`;
+        const publishedIso = post.publishedAt ? new Date(post.publishedAt).toISOString() : null;
+        const modifiedIso = post.updatedAt ? new Date(post.updatedAt).toISOString() : publishedIso;
+        const postImage = post.featuredImage || BRAND_OG_IMAGE;
+
+        const articleJsonLd = {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": post.excerpt || `Read "${post.title}" on MyMentalHealthBuddy.`,
+          "url": canonicalUrl,
+          "image": postImage,
+          ...(publishedIso && { "datePublished": publishedIso }),
+          ...(modifiedIso && { "dateModified": modifiedIso }),
+          ...(post.authorName && {
+            "author": {
+              "@type": "Person",
+              "name": post.authorName,
+            },
+          }),
+          "publisher": {
+            "@type": "Organization",
+            "name": BRAND_FULL,
+            "url": SITE_ORIGIN,
+          },
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": BRAND_FULL,
+            "url": SITE_ORIGIN,
+          },
+        };
+
+        return res.type("html").send(
+          injectMeta(baseHtml, {
+            title: `${post.title} | The Genuine Love Project Blog`,
+            description: post.excerpt || `Read "${post.title}" — insights from The Genuine Love Project.`,
+            canonical: canonicalUrl,
+            ogType: "article",
+            ogImage: postImage,
+            articleJsonLd,
+          }),
+        );
+      }
+    } catch (err) {
+      console.warn("[SPA META] Blog meta lookup failed:", err.message);
+    }
+  }
+
+  return res.type("html").send(baseHtml);
 });
 
 /* =========================================================
