@@ -144,3 +144,9 @@ diagnostics/visual-submit-check/lumi-motion-search.txt
 *.sqlite3
 *.db
 .agents/
+
+# Runtime data storage policy: keep generated memory/usage records out of git.
+data/memory/*
+data/memory-summary/*
+data/memory-profile/*
+data/usage/*
