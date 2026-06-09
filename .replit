@@ -5,9 +5,9 @@ modules = ["nodejs-20", "python-3.11", "postgresql-16"]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "node server/bootstrap.mjs"]
+run = ["node", "dist/server.mjs"]
 deploymentTarget = "vm"
-build = ["sh", "-c", "npm install && NODE_OPTIONS=--max-old-space-size=4096 npm run build"]
+build = ["sh", "-c", "npm install && NODE_OPTIONS=--max-old-space-size=4096 npm run build && node scripts/build-server.mjs"]
 
 [[ports]]
 localPort = 5000
@@ -16,6 +16,10 @@ externalPort = 80
 [[ports]]
 localPort = 5098
 externalPort = 3000
+
+[[ports]]
+localPort = 5099
+externalPort = 3002
 
 [agent]
 expertMode = true
