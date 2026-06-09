@@ -143,7 +143,7 @@ export default function TglpNavbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`tglp-nav-root sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
           ? "bg-[var(--glp-paper)]/95 backdrop-blur-lg shadow-sm border-b border-[var(--glp-sage-10)]"
           : "bg-transparent"
