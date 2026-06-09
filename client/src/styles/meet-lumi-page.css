@@ -1,0 +1,169 @@
+/* Phase 113I: public /meet-lumi custom class stabilization.
+   Purpose: restore real spacing, sizing, cards, pills, and grid behavior
+   for MeetLumi.jsx without rewriting route logic, content, or data. */
+
+.meet-lumi {
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2rem);
+  background:
+    radial-gradient(circle at top left, rgba(143, 191, 159, 0.18), transparent 32rem),
+    radial-gradient(circle at top right, rgba(244, 199, 195, 0.22), transparent 30rem),
+    var(--glp-paper, #faf9f7);
+  color: var(--glp-ink, #3a3a3a);
+}
+
+.ml-wrap {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.ml-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(143, 191, 159, 0.16);
+  color: var(--glp-sage-deep, #2f5d5d);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ml-h1 {
+  max-width: 900px;
+  font-size: clamp(2.25rem, 7vw, 5rem);
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  margin: 0;
+}
+
+.ml-lead {
+  max-width: 760px;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.75;
+  margin: 0;
+  color: rgba(58, 58, 58, 0.78);
+}
+
+.ml-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  width: 100%;
+}
+
+.ml-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(47, 93, 93, 0.12);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.ml-card-img {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1rem auto;
+  filter: drop-shadow(0 16px 24px rgba(15, 23, 42, 0.16));
+}
+
+.ml-role {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.14);
+  color: #7a5a00;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ml-pill,
+.ml-pill-soft,
+.ml-pill-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.ml-pill {
+  border: 1px solid rgba(47, 93, 93, 0.16);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--glp-ink, #3a3a3a);
+}
+
+.ml-pill-soft {
+  background: rgba(244, 199, 195, 0.28);
+  color: #7a3f3b;
+}
+
+.ml-pill-solid {
+  background: var(--glp-sage, #8fbf9f);
+  color: #163333;
+  box-shadow: 0 12px 30px rgba(47, 93, 93, 0.16);
+}
+
+.ml-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ml-stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.ml-crisis {
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(180, 83, 9, 0.18);
+  background: rgba(255, 247, 237, 0.86);
+  color: #7c2d12;
+}
+
+@media (max-width: 640px) {
+  .meet-lumi {
+    padding: 1rem;
+  }
+
+  .ml-actions {
+    align-items: stretch;
+  }
+
+  .ml-pill,
+  .ml-pill-soft,
+  .ml-pill-solid {
+    width: 100%;
+  }
+}

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "wouter";
 import LumiCarousel from "../components/lumi/LumiCarousel.jsx";
 import { OFFICIAL_LUMI_REGISTRY } from "../lumi-registry/registry/officialLumiRegistry";
+import "../styles/meet-lumi-page.css";
 
 const SHOWCASE_ORDER = [
   "LUMI_CALM_FLOAT",
