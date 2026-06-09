@@ -92,12 +92,12 @@ export default function Login() {
         description="Sign in to your MyMentalHealthBuddy account to access your wellness tools."
         noindex
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6 py-12" style={{ background: 'var(--glp-paper)' }}>
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center" style={{ background: 'var(--glp-paper)', padding: '3rem 1.5rem' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
 
-        <div className="relative z-10 w-full max-w-md animate-fade-in-up">
+        <div className="relative z-10 w-full max-w-md animate-fade-in-up" style={{ maxWidth: '28rem' }}>
           <div className="text-center mb-6">
             <Link href="/" className="inline-flex flex-col items-center gap-3 group">
               <span
@@ -120,22 +120,22 @@ export default function Login() {
           <form
             onSubmit={onSubmit}
             noValidate
-            className="rounded-3xl p-8 shadow-2xl"
-            style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}
+            className="rounded-3xl shadow-2xl"
+            style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)', borderRadius: '1.5rem', padding: '2rem', boxShadow: '0 22px 55px rgba(31, 71, 51, 0.12)' }}
             data-testid="form-login"
           >
-            <div className="text-center mb-6">
+            <div className="text-center" style={{ marginBottom: '1.5rem' }}>
               <h1 className="text-3xl font-bold font-display" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-login-title">
                 Welcome Back
               </h1>
               <p className="mt-2 text-sm" style={{ color: 'var(--glp-sage)' }}>Sign in to access your tools and reflections</p>
             </div>
 
-            <div className="space-y-3">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <label className="block">
                 <span className="sr-only">Email address</span>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
+                  <Mail className="absolute w-4 h-4" style={{ color: 'var(--glp-sage)', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} aria-hidden="true" />
                   <input
                     type="email"
                     autoComplete="email"
@@ -143,8 +143,8 @@ export default function Login() {
                     placeholder="you@email.com"
                     value={form.email}
                     onChange={(e) => set("email", e.target.value)}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl text-sm focus:outline-none focus:ring-2"
-                    style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
+                    className="w-full text-sm focus:outline-none focus:ring-2"
+                    style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)', width: '100%', padding: '0.7rem 0.75rem 0.7rem 2.5rem', borderRadius: '0.75rem' }}
                     data-testid="input-email"
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "err-email" : undefined}
@@ -156,7 +156,7 @@ export default function Login() {
               <label className="block">
                 <span className="sr-only">Password</span>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
+                  <Lock className="absolute w-4 h-4" style={{ color: 'var(--glp-sage)', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} aria-hidden="true" />
                   <input
                     type="password"
                     autoComplete="current-password"
@@ -164,8 +164,8 @@ export default function Login() {
                     placeholder="Your password"
                     value={form.password}
                     onChange={(e) => set("password", e.target.value)}
-                    className="w-full pl-10 pr-3 py-3 rounded-xl text-sm focus:outline-none focus:ring-2"
-                    style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
+                    className="w-full text-sm focus:outline-none focus:ring-2"
+                    style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)', width: '100%', padding: '0.7rem 0.75rem 0.7rem 2.5rem', borderRadius: '0.75rem' }}
                     data-testid="input-password"
                     aria-invalid={!!errors.password}
                     aria-describedby={errors.password ? "err-password" : undefined}
@@ -184,26 +184,27 @@ export default function Login() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full mt-4 btn-premium py-4 hover-glow-gold flex items-center justify-center gap-3 min-h-[56px] text-lg font-semibold rounded-xl disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full btn-premium hover-glow-gold flex items-center justify-center text-lg font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+              style={{ width: '100%', marginTop: '1.25rem', padding: '0.95rem 1.5rem', minHeight: '56px', borderRadius: '0.75rem', gap: '0.75rem' }}
               data-testid="button-login"
             >
               {submitting ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <Sparkles className="w-5 h-5" aria-hidden="true" />}
               <span>{submitting ? "Signing you in…" : "Sign In"}</span>
-              {!submitting && <ArrowRight className="w-5 h-5" />}
+              {!submitting && <ArrowRight className="w-5 h-5" aria-hidden="true" />}
             </button>
 
-            <div className="mt-6 space-y-2">
-              <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+            <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <div className="flex items-center text-sm" style={{ color: 'var(--glp-sage)', gap: '0.75rem' }}>
                 <Shield className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
                 <span>Encrypted in transit. Private by default.</span>
               </div>
-              <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+              <div className="flex items-center text-sm" style={{ color: 'var(--glp-sage)', gap: '0.75rem' }}>
                 <Heart className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
                 <span>Your data stays private and secure.</span>
               </div>
             </div>
 
-            <div className="mt-6 pt-5 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
+            <div className="text-center" style={{ borderTop: '1px solid var(--glp-sage-20)', marginTop: '1.5rem', paddingTop: '1.25rem' }}>
               <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 New here?{" "}
                 <Link href="/register" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }} data-testid="link-register">
