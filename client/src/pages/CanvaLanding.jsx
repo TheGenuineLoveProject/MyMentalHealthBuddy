@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "wouter";
 import LumiCarousel from "../components/lumi/LumiCarousel.jsx";
+import NlpMiContent from "../sections/NlpMiContent.jsx";
+import VisualBenefits from "../sections/VisualBenefits.jsx";
 
 const FEATURES = [
   ["Emotional Clarity", "Understand what you feel and what your emotions may be signaling."],
@@ -199,7 +201,7 @@ export default function CanvaLanding() {
         </p>
 
         <div className="cl-actions">
-          <Link to="/7-day-reset" className="cl-pill cl-pill-solid" data-testid="link-start-reset">
+          <Link to="/challenge" className="cl-pill cl-pill-solid" data-testid="link-start-reset">
             Start the 7-Day Reset
           </Link>
           <Link to="/pricing" className="cl-pill cl-pill-soft" data-testid="link-view-pricing">
@@ -219,7 +221,12 @@ export default function CanvaLanding() {
             </article>
           ))}
         </div>
+      </section>
 
+      <NlpMiContent path="/" />
+      <VisualBenefits />
+
+      <section className="cl-wrap" style={{ paddingTop: 0 }}>
         <section className="cl-lumi" aria-labelledby="meet-lumi-heading">
           <h2 id="meet-lumi-heading">Meet Lumi, your gentle companion</h2>
           <p>

@@ -173,7 +173,7 @@ export default function MeetLumi() {
         </div>
 
         <div className="ml-actions">
-          <Link to="/7-day-reset" className="ml-pill ml-pill-solid" data-testid="link-start-reset">
+          <Link to="/challenge" className="ml-pill ml-pill-solid" data-testid="link-start-reset">
             Start the 7-Day Reset
           </Link>
           <Link to="/tools" className="ml-pill ml-pill-soft" data-testid="link-explore-tools">
