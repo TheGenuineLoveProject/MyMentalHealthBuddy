@@ -294,7 +294,7 @@ export default function Pricing() {
           </div>
 
           {/* Tier cards — V28: white cards, circle icons, sage gradient buttons */}
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 max-w-5xl mx-auto">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 max-w-5xl mx-auto" style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', maxWidth: '64rem', margin: '0 auto' }}>
             {tiers.map((tier, index) => {
               const Icon = tier.icon;
               return (
@@ -303,6 +303,7 @@ export default function Pricing() {
                   className="rounded-3xl p-8 relative animate-fade-in-scale transition-all hover:-translate-y-1"
                   style={{
                     animationDelay: `${index * 100}ms`,
+                    padding: '2rem',
                     background: '#FFFFFF',
                     border: tier.popular ? '2px solid var(--glp-gold)' : '1px solid var(--glp-sage-20)',
                     boxShadow: tier.popular
