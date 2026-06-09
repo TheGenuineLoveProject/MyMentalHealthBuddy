@@ -92,23 +92,23 @@ export default function ResetPassword() {
           description="This password reset link is invalid or has expired."
           noindex
         />
-        <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
+        <div className="min-h-screen flex items-center justify-center overflow-hidden relative" style={{ background: 'var(--glp-paper)', padding: '1.5rem' }}>
           <div className="decorative-orb decorative-orb-blush w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-sage w-[300px] h-[300px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md rounded-2xl p-8 text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
-            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-rose) 0%, #E8913A 100%)' }}>
+          <div className="w-full text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)', maxWidth: '28rem', borderRadius: '1.25rem', padding: '2rem' }}>
+            <div className="w-20 h-20 flex items-center justify-center mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-rose) 0%, #E8913A 100%)', borderRadius: '1rem', marginBottom: '1.5rem' }}>
               <AlertCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
-            <h1 className="text-2xl font-display font-bold mb-3 text-[var(--text)]" data-testid="text-error-title">
+            <h1 className="text-2xl font-display font-bold text-[var(--text)]" style={{ marginBottom: '0.75rem' }} data-testid="text-error-title">
               Invalid Reset Link
             </h1>
-            <p className="text-[var(--text-secondary)] mb-6" data-testid="text-error-message">
+            <p className="text-[var(--text-secondary)]" style={{ marginBottom: '1.5rem' }} data-testid="text-error-message">
               This password reset link is invalid or has expired. Please request a new one to continue.
             </p>
             <Link 
               href="/forgot-password" 
-              className="btn btn-gradient px-8 py-3 inline-flex items-center gap-2"
+              className="btn-premium inline-flex items-center" style={{ padding: '0.7rem 2rem', borderRadius: '0.75rem', gap: '0.5rem' }}
               data-testid="link-request-new"
             >
               Request New Link
@@ -147,23 +147,23 @@ export default function ResetPassword() {
           description="Your password has been successfully reset."
           noindex
         />
-        <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
+        <div className="min-h-screen flex items-center justify-center overflow-hidden relative" style={{ background: 'var(--glp-paper)', padding: '1.5rem' }}>
           <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md rounded-2xl p-8 text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
-            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)' }}>
+          <div className="w-full text-center relative z-10 animate-fade-in-up shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)', maxWidth: '28rem', borderRadius: '1.25rem', padding: '2rem' }}>
+            <div className="w-20 h-20 flex items-center justify-center mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)', borderRadius: '1rem', marginBottom: '1.5rem' }}>
               <CheckCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
-            <h1 className="text-2xl font-display font-bold mb-3 text-[var(--text)]" data-testid="text-success-title">
+            <h1 className="text-2xl font-display font-bold text-[var(--text)]" style={{ marginBottom: '0.75rem' }} data-testid="text-success-title">
               Password Reset Complete
             </h1>
-            <p className="text-[var(--text-secondary)] mb-6" data-testid="text-success-message">
+            <p className="text-[var(--text-secondary)]" style={{ marginBottom: '1.5rem' }} data-testid="text-success-message">
               Your password has been successfully reset. You can now sign in with your new password.
             </p>
             <Link 
               href="/login" 
-              className="btn btn-gradient px-8 py-3 inline-flex items-center gap-2"
+              className="btn-premium inline-flex items-center" style={{ padding: '0.7rem 2rem', borderRadius: '0.75rem', gap: '0.5rem' }}
               data-testid="link-login"
             >
               Sign In
@@ -190,7 +190,7 @@ export default function ResetPassword() {
         how: "Enter your new password twice and submit."
       }}
       examples={[
-        { label: "Beginner", examples: ["Choose a password you'll remember.", "Make it at least 6 characters."] },
+        { label: "Beginner", examples: ["Choose a password you'll remember.", "Make it at least 8 characters."] },
         { label: "Intermediate", examples: ["Use a mix of letters and numbers.", "Avoid common words."] },
         { label: "Advanced", examples: ["Use a password manager.", "Enable two-factor authentication."] }
       ]}
@@ -201,14 +201,15 @@ export default function ResetPassword() {
         description="Create a new password for your MyMentalHealthBuddy account."
         noindex
       />
-      <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
+      <div className="min-h-screen flex items-center justify-center overflow-hidden relative" style={{ background: 'var(--glp-paper)', padding: '1.5rem' }}>
         <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -right-20 absolute" aria-hidden="true" />
         
-        <div className="w-full max-w-md relative z-10 animate-fade-in-up">
+        <div className="w-full relative z-10 animate-fade-in-up" style={{ maxWidth: '28rem' }}>
           <Link 
             href="/" 
-            className="flex items-center justify-center gap-3 mb-8 hover:opacity-80 transition-opacity"
+            className="flex items-center justify-center hover:opacity-80 transition-opacity"
+            style={{ gap: '0.75rem', marginBottom: '2rem' }}
             data-testid="link-home"
           >
             <span
@@ -228,12 +229,12 @@ export default function ResetPassword() {
             <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
           </Link>
           
-          <div className="rounded-3xl p-8 shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)' }}>
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)' }}>
+          <div className="shadow-2xl" style={{ background: 'var(--glp-white, #FFFFFF)', border: '1px solid var(--glp-sage-15)', borderRadius: '1.5rem', padding: '2rem' }}>
+            <div className="text-center" style={{ marginBottom: '1.5rem' }}>
+              <div className="w-16 h-16 flex items-center justify-center mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)', borderRadius: '1rem', marginBottom: '1rem' }}>
                 <Lock className="w-8 h-8 text-white" aria-hidden="true" />
               </div>
-              <h1 className="text-2xl font-display font-bold mb-2 text-[var(--text)]" data-testid="text-reset-password-title">
+              <h1 className="text-2xl font-display font-bold text-[var(--text)]" style={{ marginBottom: '0.5rem' }} data-testid="text-reset-password-title">
                 Create New Password
               </h1>
               <p className="text-[var(--text-secondary)]">
@@ -243,29 +244,31 @@ export default function ResetPassword() {
 
             {errors.root && (
               <div 
-                className="mb-4 p-4 bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 rounded-xl text-[var(--accent-rose)] text-sm flex items-start gap-3" 
+                className="bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 text-[var(--accent-rose)] text-sm flex items-start" 
+                style={{ marginBottom: '1rem', padding: '1rem', borderRadius: '0.75rem', gap: '0.75rem' }}
                 data-testid="text-error"
                 role="alert"
               >
-                <Shield className="w-5 h-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <Shield className="w-5 h-5 flex-shrink-0" style={{ marginTop: '0.125rem' }} aria-hidden="true" />
                 <span>{errors.root.message}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit(onSubmit)} data-testid="form-reset-password" noValidate>
-              <div className="mb-4">
-                <label htmlFor="newPassword" className="block mb-2 text-sm font-medium text-[var(--text)]">
+              <div style={{ marginBottom: '1rem' }}>
+                <label htmlFor="newPassword" className="block text-sm font-medium text-[var(--text)]" style={{ marginBottom: '0.5rem' }}>
                   New Password
                 </label>
                 <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">
+                  <div className="absolute text-[var(--text-muted)]" style={{ left: '1rem', top: '50%', transform: 'translateY(-50%)' }}>
                     <Lock className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <input
                     id="newPassword"
                     type={showPassword ? "text" : "password"}
-                    className={`input-lg pl-12 pr-12 w-full ${errors.newPassword ? "border-[var(--accent-rose)] focus:border-[var(--accent-rose)]" : ""}`}
-                    placeholder="Min 6 characters"
+                    className={`input-lg w-full ${errors.newPassword ? "border-[var(--accent-rose)] focus:border-[var(--accent-rose)]" : ""}`}
+                    style={{ paddingLeft: '3rem', paddingRight: '3rem' }}
+                    placeholder="Min 8 characters"
                     autoComplete="new-password"
                     aria-invalid={errors.newPassword ? "true" : "false"}
                     aria-describedby={errors.newPassword ? "newPassword-error" : undefined}
@@ -275,32 +278,33 @@ export default function ResetPassword() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
+                    className="absolute text-[var(--text-muted)] hover:text-[var(--text)] transition-colors" style={{ right: '1rem', top: '50%', transform: 'translateY(-50%)' }}
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
                 {errors.newPassword && (
-                  <p id="newPassword-error" className="mt-2 text-sm text-[var(--accent-rose)] flex items-center gap-1.5" role="alert">
+                  <p id="newPassword-error" className="text-sm text-[var(--accent-rose)] flex items-center" style={{ marginTop: '0.5rem', gap: '0.375rem' }} role="alert">
                     <span className="w-1 h-1 bg-[var(--accent-rose)] rounded-full"></span>
                     {errors.newPassword.message}
                   </p>
                 )}
               </div>
 
-              <div className="mb-6">
-                <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-[var(--text)]">
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-[var(--text)]" style={{ marginBottom: '0.5rem' }}>
                   Confirm Password
                 </label>
                 <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">
+                  <div className="absolute text-[var(--text-muted)]" style={{ left: '1rem', top: '50%', transform: 'translateY(-50%)' }}>
                     <Lock className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <input
                     id="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
-                    className={`input-lg pl-12 pr-12 w-full ${errors.confirmPassword ? "border-[var(--accent-rose)] focus:border-[var(--accent-rose)]" : ""}`}
+                    className={`input-lg w-full ${errors.confirmPassword ? "border-[var(--accent-rose)] focus:border-[var(--accent-rose)]" : ""}`}
+                    style={{ paddingLeft: '3rem', paddingRight: '3rem' }}
                     placeholder="Confirm your password"
                     autoComplete="new-password"
                     aria-invalid={errors.confirmPassword ? "true" : "false"}
@@ -311,14 +315,14 @@ export default function ResetPassword() {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
+                    className="absolute text-[var(--text-muted)] hover:text-[var(--text)] transition-colors" style={{ right: '1rem', top: '50%', transform: 'translateY(-50%)' }}
                     aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                   >
                     {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
                 {errors.confirmPassword && (
-                  <p id="confirmPassword-error" className="mt-2 text-sm text-[var(--accent-rose)] flex items-center gap-1.5" role="alert">
+                  <p id="confirmPassword-error" className="text-sm text-[var(--accent-rose)] flex items-center" style={{ marginTop: '0.5rem', gap: '0.375rem' }} role="alert">
                     <span className="w-1 h-1 bg-[var(--accent-rose)] rounded-full"></span>
                     {errors.confirmPassword.message}
                   </p>
@@ -328,7 +332,8 @@ export default function ResetPassword() {
               <button
                 type="submit"
                 disabled={resetMutation.isPending}
-                className="btn btn-gradient w-full py-4 text-base font-medium flex items-center justify-center gap-2"
+                className="btn-premium w-full text-base font-medium flex items-center justify-center"
+                style={{ width: '100%', padding: '0.95rem 1.5rem', minHeight: '54px', borderRadius: '0.75rem', gap: '0.5rem' }}
                 data-testid="button-submit"
               >
                 {resetMutation.isPending ? (
@@ -345,13 +350,13 @@ export default function ResetPassword() {
               </button>
             </form>
 
-            <div className="mt-6 p-4 bg-[var(--surface)]/50 rounded-xl">
-              <h3 className="text-sm font-medium text-[var(--text)] mb-2 flex items-center gap-2">
+            <div className="bg-[var(--surface)]/50" style={{ marginTop: '1.5rem', padding: '1rem', borderRadius: '0.75rem' }}>
+              <h3 className="text-sm font-medium text-[var(--text)] flex items-center" style={{ marginBottom: '0.5rem', gap: '0.5rem' }}>
                 <Shield className="w-4 h-4 text-[var(--primary)]" aria-hidden="true" />
                 Password Tips
               </h3>
-              <ul className="text-xs text-[var(--text-muted)] space-y-1">
-                <li>• Use at least 6 characters</li>
+              <ul className="text-xs text-[var(--text-muted)]" style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                <li>• Use at least 8 characters</li>
                 <li>• Mix letters, numbers, and symbols</li>
                 <li>• Avoid common words or patterns</li>
               </ul>
