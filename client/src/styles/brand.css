@@ -283,6 +283,23 @@ a.btn-header-cta svg {
   -webkit-text-fill-color: #0A1F1B !important;
 }
 
+/* Real-CSS layout for the header CTA. Tailwind's numeric spacing utilities
+   (px-*, py-*, gap-*) do NOT emit in this build (v3/v4 mismatch), so the
+   inline `px-5 py-3 gap-2.5` produced a zero-padding pill whose label
+   collided with the rounded-full curved ends and spilled out. Define the
+   geometry explicitly so the pill always has proper padding, icon gap, and a
+   clean stadium shape regardless of which utilities compile. */
+.btn-header-cta {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem !important;
+  border-radius: 9999px !important;
+  line-height: 1;
+  white-space: nowrap;
+}
+
 /* Secondary header CTA — the text-link "Sign In" / "Log Out" sibling. */
 .btn-header-secondary {
   transition:
