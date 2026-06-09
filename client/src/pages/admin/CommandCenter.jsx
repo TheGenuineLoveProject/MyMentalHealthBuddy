@@ -6,6 +6,7 @@ import { useSEO } from "@/hooks/useSEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import SafeBoundary from "../../components/SafeBoundary";
 import SOPMonitorPanel from "@/components/admin/SOPMonitorPanel";
+import PlatformEvolutionPanel from "@/components/admin/PlatformEvolutionPanel";
 import OperationsPanel from "@/components/admin/OperationsPanel";
 import ConsciousnessRegistryPanel from "@/components/admin/ConsciousnessRegistryPanel";
 import OrchestratorTestPanel from "@/components/admin/OrchestratorTestPanel";
@@ -401,6 +402,9 @@ export default function AdminCommandCenter() {
           </p>
           <SafeBoundary label="SOP Monitor">
             <SOPMonitorPanel />
+          </SafeBoundary>
+          <SafeBoundary label="Platform Evolution">
+            <PlatformEvolutionPanel />
           </SafeBoundary>
           <SafeBoundary label="Operations Panel">
             <OperationsPanel />

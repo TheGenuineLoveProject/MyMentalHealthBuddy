@@ -1246,7 +1246,7 @@ export default function Start() {
         </footer>
       </main>
       <UpsellModal
-        open={showUpsell}
+        isOpen={showUpsell}
         onClose={() => setShowUpsell(false)}
         toolName={tool?.tool?.title || 'this exercise'}
       />

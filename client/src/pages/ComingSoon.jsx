@@ -1,3 +1,4 @@
+// platform-evolution-ignore-file: stale-content — dedicated Coming Soon page for genuinely unbuilt features
 import { Link, useSearch } from "wouter";
 import { Heart, ArrowRight, BookOpen, Wrench, Phone, Mail } from "lucide-react";
 import SEO from "../components/SEO";
