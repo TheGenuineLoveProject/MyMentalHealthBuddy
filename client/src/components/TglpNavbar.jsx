@@ -184,7 +184,7 @@ export default function TglpNavbar() {
 
         {/* Right: Navigation */}
         <nav className="flex items-center gap-2 md:gap-3 shrink-0" aria-label="Main navigation">
-          <div className="hidden md:block">
+          <div className="hidden">
             <GlobalSearch />
           </div>
 
