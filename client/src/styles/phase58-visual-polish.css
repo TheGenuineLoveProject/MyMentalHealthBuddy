@@ -83,10 +83,11 @@ video {
   height: auto;
 }
 
-img[alt=""]:not([aria-hidden="true"]):not([role]),
-img:not([alt]):not([aria-hidden="true"]):not([role]) {
-  outline: 2px dashed rgba(220, 38, 38, 0.55);
-}
+/* a11y-lint indicator REMOVED — this red dashed outline on unlabeled images
+   was a development audit helper that leaked into production and rendered as
+   "red squares" around decorative avatars (NlpMiContent / VisualBenefits).
+   Decorative images carry alt="" by design; enforcement belongs in tooling,
+   never as a user-visible outline. Do not re-add a visible outline here. */
 
 .prose,
 .content,

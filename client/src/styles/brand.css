@@ -248,6 +248,41 @@ body {
   outline-offset: 3px;
 }
 
+/* ---------------------------------------------------------------------------
+   CTA RECLAMATION — restore the canonical amber-gold navbar pill.
+   The generated-page button helpers in lumi-*.css use over-broad attribute
+   selectors ([class*="cta"], [class*="primary"]) with !important to repaint
+   ANY element whose class contains those substrings. "btn-header-cta" matches
+   [class*="cta"], so the navbar CTA's inline gold gradient + dark text were
+   clobbered into a sage fill with white text and an oversized sage box-shadow
+   (the "square box behind the rounded pill"). Element-qualified selectors
+   (a.btn-header-cta = specificity 0,1,1) outrank the attribute selectors
+   (0,1,0), so these win regardless of stylesheet import order. */
+a.btn-header-cta,
+a.btn-header-cta:link,
+a.btn-header-cta:visited,
+a.btn-header-cta:hover,
+a.btn-header-cta:focus {
+  background: var(--glp-gold-gradient) !important;
+  background-image: var(--glp-gold-gradient) !important;
+  color: #0A1F1B !important;
+  border: none !important;
+  -webkit-text-fill-color: #0A1F1B !important;
+  box-shadow: var(--glp-gold-shadow) !important;
+}
+a.btn-header-cta:hover {
+  box-shadow:
+    0 8px 22px rgba(212, 175, 55, 0.32),
+    0 0 0 4px rgba(212, 175, 55, 0.10) !important;
+}
+/* Keep the label + sparkle icon dark on the gold gradient (children would
+   otherwise inherit the global helpers' white !important color). */
+a.btn-header-cta > *,
+a.btn-header-cta svg {
+  color: #0A1F1B !important;
+  -webkit-text-fill-color: #0A1F1B !important;
+}
+
 /* Secondary header CTA — the text-link "Sign In" / "Log Out" sibling. */
 .btn-header-secondary {
   transition:
