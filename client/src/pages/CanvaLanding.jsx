@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "wouter";
+import LumiCarousel from "../components/lumi/LumiCarousel.jsx";
 
 const FEATURES = [
   ["Emotional Clarity", "Understand what you feel and what your emotions may be signaling."],
@@ -116,6 +117,48 @@ export default function CanvaLanding() {
         }
         .cl-note h2 { margin: 0; font-size: clamp(1.25rem, 2.4vw, 1.6rem); font-weight: 800; color: #14332F; }
         .cl-note p { margin: 0.7rem 0 0; line-height: 1.65; color: #2A3F3D; max-width: 70ch; }
+        .cl-lumi {
+          margin-top: clamp(2.5rem, 6vw, 4rem);
+          border-radius: 1.75rem;
+          border: 1px solid rgba(22, 58, 54, 0.10);
+          background: rgba(255, 255, 255, 0.62);
+          padding: clamp(2rem, 5vw, 3rem) clamp(1.4rem, 4vw, 2.5rem);
+          box-shadow: 0 18px 40px rgba(22, 58, 54, 0.06);
+          text-align: center;
+        }
+        .cl-lumi h2 {
+          margin: 0 auto;
+          max-width: 22ch;
+          font-size: clamp(1.4rem, 3vw, 2rem);
+          font-weight: 800;
+          color: #14332F;
+        }
+        .cl-lumi p {
+          margin: 0.7rem auto 0;
+          max-width: 56ch;
+          line-height: 1.6;
+          color: #2A3F3D;
+          font-size: clamp(1rem, 1.9vw, 1.12rem);
+        }
+        .cl-lumi-carousel { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+        .cl-lumi-link {
+          margin-top: clamp(1.5rem, 3.5vw, 2rem);
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          border-radius: 999px;
+          padding: 0.85rem 1.5rem;
+          font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+          font-weight: 700;
+          text-decoration: none;
+          line-height: 1;
+          background: #163A36;
+          color: #FFFFFF;
+          box-shadow: 0 10px 24px rgba(22, 58, 54, 0.22);
+          transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+        }
+        .cl-lumi-link:hover { background: #0F2A27; transform: translateY(-2px); box-shadow: 0 14px 30px rgba(22, 58, 54, 0.28); }
+        .cl-lumi-link:focus-visible { outline: 3px solid #2F6B4F; outline-offset: 3px; }
         .cl-crisis {
           margin-top: clamp(1.5rem, 3vw, 2rem);
           display: flex;
@@ -176,6 +219,20 @@ export default function CanvaLanding() {
             </article>
           ))}
         </div>
+
+        <section className="cl-lumi" aria-labelledby="meet-lumi-heading">
+          <h2 id="meet-lumi-heading">Meet Lumi, your gentle companion</h2>
+          <p>
+            Lumi adapts to what you need — a calm presence, a grounding breath, a reassuring heart.
+            Here are a few of the ways Lumi shows up alongside your reflection.
+          </p>
+          <div className="cl-lumi-carousel">
+            <LumiCarousel size={180} intervalMs={4200} />
+          </div>
+          <Link to="/meet-lumi" className="cl-lumi-link" data-testid="link-meet-lumi">
+            Meet all 7 Lumi →
+          </Link>
+        </section>
 
         <section className="cl-note">
           <h2>Safe, ethical, provider-informed wellness</h2>
