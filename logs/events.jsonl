@@ -534,3 +534,12 @@
 {"type":"buddy_panel_viewed","guestId":"g_mq6nxq2b_bt3kug","metadata":{"surface":"start","state":"calm"},"ts":1781010952502}
 {"type":"start_page_click","guestId":"g_mq6nxq2b_bt3kug","metadata":{},"ts":1781010952543}
 {"type":"buddy_accessibility_ready","guestId":"g_mq6nxq2b_bt3kug","metadata":{},"ts":1781010952544}
+{"type":"buddy_panel_viewed","guestId":"g_mq6ob5yf_l0fswe","metadata":{"surface":"start","state":"calm"},"ts":1781011579714}
+{"type":"start_page_click","guestId":"g_mq6ob5yf_l0fswe","metadata":{},"ts":1781011579716}
+{"type":"buddy_accessibility_ready","guestId":"g_mq6ob5yf_l0fswe","metadata":{},"ts":1781011579717}
+{"type":"buddy_panel_viewed","guestId":"g_mq6ob5yf_l0fswe","metadata":{"surface":"start","state":"calm"},"ts":1781011991024}
+{"type":"start_page_click","guestId":"g_mq6ob5yf_l0fswe","metadata":{},"ts":1781011991026}
+{"type":"buddy_accessibility_ready","guestId":"g_mq6ob5yf_l0fswe","metadata":{},"ts":1781011991028}
+{"type":"buddy_panel_viewed","guestId":"g_mq6ob5yf_l0fswe","metadata":{"surface":"start","state":"calm"},"ts":1781012242295}
+{"type":"start_page_click","guestId":"g_mq6ob5yf_l0fswe","metadata":{},"ts":1781012242297}
+{"type":"buddy_accessibility_ready","guestId":"g_mq6ob5yf_l0fswe","metadata":{},"ts":1781012242298}
