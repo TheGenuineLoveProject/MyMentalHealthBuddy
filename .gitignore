@@ -153,3 +153,6 @@ data/usage/*
 
 # Generated diagnostics and audit outputs
 diagnostics/
+
+# Generated audit/report artifacts
+reports/
