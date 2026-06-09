@@ -732,7 +732,7 @@ function PostCard({ post, onSelect, isSelected, onAction, onEdit, onMarkPosted, 
             <>
               <button onClick={onEdit} className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300" data-testid={`button-edit-${post.id}`}>Edit</button>
               <button onClick={() => onAction("submit")} disabled={isPending} className="px-2 py-0.5 rounded bg-amber-100 text-amber-700 hover:bg-amber-200" data-testid={`button-submit-${post.id}`}>Submit</button>
-              <button onClick={onSchedule} className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 hover:bg-blue-200" data-testid={`button-schedule-${post.id}`}><Calendar className="w-3 h-3" /></button>
+              <button onClick={onSchedule} aria-label="Schedule post" title="Schedule post" className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 hover:bg-blue-200" data-testid={`button-schedule-${post.id}`}><Calendar className="w-3 h-3" aria-hidden="true" /></button>
             </>
           )}
           {post.status === "review" && (
@@ -744,7 +744,7 @@ function PostCard({ post, onSelect, isSelected, onAction, onEdit, onMarkPosted, 
           {post.status === "approved" && (
             <>
               <button onClick={onMarkPosted} className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 hover:bg-emerald-200 flex items-center gap-0.5" data-testid={`button-mark-posted-${post.id}`}><Send className="w-3 h-3" />Post</button>
-              <button onClick={onSchedule} className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 hover:bg-blue-200" data-testid={`button-schedule-approved-${post.id}`}><Calendar className="w-3 h-3" /></button>
+              <button onClick={onSchedule} aria-label="Schedule post" title="Schedule post" className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 hover:bg-blue-200" data-testid={`button-schedule-approved-${post.id}`}><Calendar className="w-3 h-3" aria-hidden="true" /></button>
             </>
           )}
         </div>

@@ -243,14 +243,14 @@ export default function TglpNavbar() {
             </>
           ) : (
             <>
-              <a
+              <Link
                 href="/login"
                 className="btn-header-secondary hidden md:flex items-center px-4 py-3 rounded-lg text-sm font-medium hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)]"
                 data-testid="link-login"
               >
                 Sign In
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/login"
                 className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-semibold hover:opacity-90 focus:outline-none text-[var(--glp-sage-deep)]"
                 style={{ background: "var(--glp-gold-gradient)", boxShadow: "var(--glp-gold-shadow)" }}
@@ -259,7 +259,7 @@ export default function TglpNavbar() {
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
                 <span className="hidden sm:inline">Get Started</span>
                 <span className="sm:hidden">Start</span>
-              </a>
+              </Link>
             </>
           )}
 

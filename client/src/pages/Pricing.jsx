@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Check, Star, Crown, Zap, Gem, ArrowLeft, Loader2, Heart, Shield, Sparkles, Users, Mail, ArrowRight } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/ReflectionFooter";
@@ -136,6 +136,7 @@ const VALUE_BRIDGE = [
 export default function Pricing() {
   const { user } = useAuth();
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
 
   const [checkingOut, setCheckingOut] = useState(false);
   const [interval, setInterval] = useState("yearly");
@@ -162,7 +163,7 @@ export default function Pricing() {
 
   const startCheckout = async (plan, billingInterval) => {
     if (!user) {
-      window.location.href = "/login";
+      setLocation("/login");
       return;
     }
 
