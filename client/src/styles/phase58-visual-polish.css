@@ -83,8 +83,8 @@ video {
   height: auto;
 }
 
-img[alt=""],
-img:not([alt]) {
+img[alt=""]:not([aria-hidden="true"]):not([role]),
+img:not([alt]):not([aria-hidden="true"]):not([role]) {
   outline: 2px dashed rgba(220, 38, 38, 0.55);
 }
 
