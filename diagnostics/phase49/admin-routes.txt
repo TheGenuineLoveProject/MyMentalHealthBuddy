@@ -1,5 +1,0 @@
-/admin -> 200
-/admin/revenue -> 200
-/admin/billing -> 200
-/admin/security -> 200
-/admin/health -> 200

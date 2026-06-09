@@ -1,3 +1,0 @@
-FOUND client/src/styles/lumi-visual-system.css
-FOUND client/src/components/lumi/LivingLumiAvatar.tsx
-FOUND scripts/integrate-lumi-visual-system.mjs

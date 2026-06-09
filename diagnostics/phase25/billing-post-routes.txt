@@ -1,3 +1,0 @@
-71:router.post("/pricing-view", (req, res) => {
-83:router.post("/checkout", async (req, res) => {
-186:router.post("/portal", async (req, res) => {

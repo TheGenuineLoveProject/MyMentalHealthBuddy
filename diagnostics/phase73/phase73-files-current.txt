@@ -1,9 +1,0 @@
-diagnostics/phase73/git-log-current.txt
-diagnostics/phase73/git-log-start.txt
-diagnostics/phase73/git-status-current.txt
-diagnostics/phase73/git-status-start.txt
-diagnostics/phase73/head-current.txt
-diagnostics/phase73/head-start.txt
-diagnostics/phase73/node-version.txt
-diagnostics/phase73/npm-version.txt
-diagnostics/phase73/worktree-clean-gate.txt

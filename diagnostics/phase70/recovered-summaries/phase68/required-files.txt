@@ -1,3 +1,0 @@
-PRESENT client/src/components/lumi/LumiPresenceLayer.tsx
-PRESENT client/src/components/lumi/LumiPresenceLayer.css
-PRESENT client/src/main.jsx

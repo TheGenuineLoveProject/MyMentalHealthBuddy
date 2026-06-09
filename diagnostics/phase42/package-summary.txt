@@ -1,5 +1,0 @@
-===== PACKAGE AUDIT =====
-name= mymentalhealthbuddy
-version= 1.0.0
-dependencies= 90
-devDependencies= 21

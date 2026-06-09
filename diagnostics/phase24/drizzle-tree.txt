@@ -1,3 +1,0 @@
-mymentalhealthbuddy@1.0.0 /home/runner/workspace
-└── drizzle-kit@0.31.10
-

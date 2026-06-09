@@ -1,5 +1,0 @@
-mymentalhealthbuddy@1.0.0 /home/runner/workspace
-└─┬ drizzle-kit@0.31.10
-  └─┬ @esbuild-kit/esm-loader@2.6.5
-    └── @esbuild-kit/core-utils@3.3.2
-

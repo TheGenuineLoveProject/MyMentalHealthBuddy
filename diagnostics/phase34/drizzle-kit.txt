@@ -1,3 +1,0 @@
-package.json:    "drizzle-kit": "^0.31.10",
-package-lock.json:        "drizzle-kit": "^0.31.10",
-package-lock.json:        "drizzle-kit": "bin.cjs"

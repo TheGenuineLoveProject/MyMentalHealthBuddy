@@ -1,2 +1,0 @@
-server/routes/billing.mjs:    const session = await stripe.checkout.sessions.create({
-server/routes/webhook.mjs:            authoritativeSession = await stripe.checkout.sessions.retrieve(session.id, {

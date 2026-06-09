@@ -1,3 +1,0 @@
-client/dist/index.html
-client/dist/offline.html
-client/dist/serviceWorker.js

@@ -1,7 +1,0 @@
-PHASE101B_BROWSER_OR_STATIC_STARTUP_GATE_PASS
-{
-  "verificationMode": "STATIC_STARTUP_PASS_BROWSER_ENV_BLOCKED",
-  "staticPass": true,
-  "browserPass": false,
-  "environmentBlocked": true
-}

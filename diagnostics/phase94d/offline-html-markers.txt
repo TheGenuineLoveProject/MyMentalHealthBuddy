@@ -1,3 +1,0 @@
-76:    <h1>You are offline</h1>
-78:    <p>This offline screen is shown only when the network is unavailable. It prevents an old cached page from loading outdated app files after a deploy.</p>
-80:      <p><strong>Safety note:</strong> If you may be in immediate danger or need urgent help, call local emergency services. In the U.S. you can call or text <strong>988</strong>.</p>

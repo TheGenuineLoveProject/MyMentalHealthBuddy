@@ -150,3 +150,6 @@ data/memory/*
 data/memory-summary/*
 data/memory-profile/*
 data/usage/*
+
+# Generated diagnostics and audit outputs
+diagnostics/

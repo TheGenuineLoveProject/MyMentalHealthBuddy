@@ -1,7 +1,0 @@
-751:              <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
-1622:              <Route path="/glossary">{() => <ConfigRoute route="/glossary" />}</Route>
-1624:              <Route path="/how-to-guides">{() => <ConfigRoute route="/how-to-guides" />}</Route>
-1630:              <Route path="/examples">{() => <ConfigRoute route="/examples" />}</Route>
-1631:              <Route path="/professional-resources">{() => <ConfigRoute route="/professional-resources" />}</Route>
-1842:              <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
-1844:              <Route path="/qa">{() => <ConfigRoute route="/qa" />}</Route>

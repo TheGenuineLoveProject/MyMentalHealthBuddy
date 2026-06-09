@@ -1,6 +1,0 @@
-./.local/state/replit/log-query.db
-./logs/backups/STABLE_BUILD_20260530_005533.tar.gz
-./logs/backups/STABLE_GREEN_20260530_005912.tar.gz
-./backups/pre-security-hardening-20260522-012029.tar.gz
-./backups/final-launch-snapshot-20260522-231726.tar.gz
-./production-backups/launch-stable-20260522-014111.tar.gz

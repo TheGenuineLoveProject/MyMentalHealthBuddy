@@ -1,4 +1,0 @@
-client/src/pages/PeacescapePage.jsx:              <h3 className="font-bold mb-1" style={{ color: "var(--glp-sage-deep)" }}>Avatar customizer (coming soon)</h3>
-client/src/pages/BlogIndex.jsx:              {searchQuery ? "No articles match your search" : "New posts are coming soon. You're welcome here."}
-client/src/components/UpsellModal.tsx:            ? `Premium features for ${toolName} are coming soon.`
-client/src/components/UpsellModal.tsx:            : "Premium features coming soon."}

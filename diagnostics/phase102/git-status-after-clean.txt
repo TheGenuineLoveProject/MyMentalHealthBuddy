@@ -1,5 +1,0 @@
-?? diagnostics/phase101b/ahead-behind-final.txt
-?? diagnostics/phase101b/final-completion-gate.txt
-?? diagnostics/phase101b/git-log-final.txt
-?? diagnostics/phase102/
-?? docs/governance/generated-diagnostics-drift-policy.md

@@ -1,3 +1,0 @@
-BUSINESS_HEALING_FIREWALL_GATE_PASS
-scannedFiles=1161
-activeRisks=0

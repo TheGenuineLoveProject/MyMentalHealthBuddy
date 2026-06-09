@@ -1,4 +1,0 @@
-FOUND client/public/serviceWorker.js
-FOUND client/public/offline.html
-FOUND client/src/main.jsx
-FOUND client/index.html

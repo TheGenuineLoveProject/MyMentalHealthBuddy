@@ -1,2 +1,0 @@
-client/dist/assets/WellnessDashboard-B_p1eErf.js
-client/dist/assets/_autopilot-93DB6_To.js

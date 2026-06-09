@@ -1,8 +1,0 @@
-/home/runner/workspace/tests/unit/buddyImportBoundary.test.mjs:65
-  if (aliased
-             
-
-SyntaxError: Unexpected end of input
-    at checkSyntax (node:internal/main/check_syntax:74:5)
-
-Node.js v20.20.0

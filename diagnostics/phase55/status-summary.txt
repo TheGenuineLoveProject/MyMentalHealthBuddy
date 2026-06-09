@@ -1,5 +1,0 @@
-PHASE55=AUDIT_ONLY
-BUILD_EXIT=1
-RULE_AUDIT=diagnostics/phase55/visual-rule-audit.md
-ASSET_INVENTORY=diagnostics/phase55/brand-avatar-asset-inventory.txt
-RECOMMENDATION=canonical official Lumi brand avatar component, not generic SVG-only avatar
