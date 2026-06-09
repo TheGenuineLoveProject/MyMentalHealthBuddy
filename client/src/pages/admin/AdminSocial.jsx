@@ -542,7 +542,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
           <button onClick={() => setShowTemplates(!showTemplates)} className="px-3 py-1.5 text-xs rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors flex items-center gap-1" data-testid="button-templates">
             <Sparkles className="w-3 h-3" /> Pillar Templates
           </button>
-          <button onClick={onCancel} className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-testid="button-cancel-editor"><X className="w-4 h-4" /></button>
+          <button onClick={onCancel} aria-label="Close editor" title="Close editor" className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" data-testid="button-cancel-editor"><X className="w-4 h-4" aria-hidden="true" /></button>
         </div>
       </div>
 
@@ -935,7 +935,7 @@ function CampaignModal({ onClose, onCreated }) {
       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md space-y-4 shadow-2xl" onClick={e => e.stopPropagation()} data-testid="modal-campaign">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">New Campaign</h3>
-          <button onClick={onClose} className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><X className="w-4 h-4" /></button>
+          <button onClick={onClose} aria-label="Close" title="Close" className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700" data-testid="button-close-campaign"><X className="w-4 h-4" aria-hidden="true" /></button>
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Campaign Name</label>
