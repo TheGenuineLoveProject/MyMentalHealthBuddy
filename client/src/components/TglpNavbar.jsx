@@ -167,8 +167,7 @@ export default function TglpNavbar() {
           data-testid="link-brand-home"
         >
           <div
-            className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
-            style={{ boxShadow: "0 2px 12px var(--glp-sage-deep-20)" }}
+            className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-transform group-hover:scale-105"
           >
             <LumiMascot emotion="neutral" size={40} className="w-full h-full" data-testid="img-brand-logo" />
             <Heart className="w-7 h-7 md:w-8 md:h-8 hidden text-[var(--glp-sage)]" fill="currentColor" />
