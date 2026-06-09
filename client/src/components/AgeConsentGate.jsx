@@ -4,6 +4,81 @@ import { Shield, Heart, AlertCircle, ExternalLink, ArrowLeft } from 'lucide-reac
 
 const CONSENT_STORAGE_KEY = 'glp_age_confirmed';
 
+const S = {
+  page: {
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '2rem 1rem',
+    background: 'linear-gradient(135deg, #ecf6ee 0%, #f4faf4 100%)',
+  },
+  card: {
+    width: '100%',
+    maxWidth: '46rem',
+    background: '#ffffff',
+    borderRadius: '1.5rem',
+    border: '1px solid var(--glp-sage-20, #d8e6d3)',
+    boxShadow: '0 20px 55px rgba(31, 71, 51, 0.10)',
+    padding: '2.25rem 1.75rem',
+  },
+  shieldCircle: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '64px',
+    height: '64px',
+    borderRadius: '9999px',
+    background: 'rgba(168, 201, 160, 0.28)',
+    marginBottom: '1rem',
+  },
+  infoRow: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '0.75rem',
+    padding: '1rem',
+    background: '#fdf6e9',
+    borderRadius: '0.75rem',
+  },
+  confirmItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    padding: '0.75rem 1rem',
+    background: 'rgba(168, 201, 160, 0.16)',
+    border: '1px solid var(--glp-sage-20, #d8e6d3)',
+    borderRadius: '0.75rem',
+  },
+  badge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '34px',
+    height: '34px',
+    flexShrink: 0,
+    borderRadius: '9999px',
+    background: 'var(--glp-sage-deep, #2f6b4f)',
+    color: '#ffffff',
+    fontWeight: 700,
+    fontSize: '0.8rem',
+  },
+  btnBase: {
+    width: '100%',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem',
+    padding: '0.8rem 1.5rem',
+    borderRadius: '0.6rem',
+    fontWeight: 600,
+    fontSize: '0.95rem',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'opacity 0.18s ease',
+    textDecoration: 'none',
+  },
+};
+
 export default function AgeConsentGate({ children, onConsent }) {
   const [hasConsented, setHasConsented] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,11 +99,8 @@ export default function AgeConsentGate({ children, onConsent }) {
 
   if (isLoading) {
     return (
-      <div 
-        className="min-h-screen flex items-center justify-center px-4 py-8 md:py-12 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30"
-        data-testid="consent-loading"
-      >
-        <div className="animate-pulse motion-reduce:animate-none text-muted-foreground">Loading...</div>
+      <div style={S.page} data-testid="consent-loading">
+        <div className="animate-pulse motion-reduce:animate-none" style={{ color: 'var(--glp-ink, #4a5a4f)' }}>Loading...</div>
       </div>
     );
   }
@@ -38,118 +110,115 @@ export default function AgeConsentGate({ children, onConsent }) {
   }
 
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center px-4 py-8 md:py-12 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30"
-      data-testid="age-consent-gate"
-    >
-        <div className="max-w-3xl mx-auto w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden px-6 py-8 md:px-10 border border-emerald-200 dark:border-emerald-800">
+    <div style={S.page} data-testid="age-consent-gate">
+      <div style={S.card}>
 
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/50 mb-4">
-            <Shield className="w-8 h-8 text-emerald-700 dark:text-emerald-300" aria-hidden="true" />
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <div style={S.shieldCircle}>
+            <Shield style={{ width: '32px', height: '32px' }} color="var(--glp-sage-deep, #2f6b4f)" aria-hidden="true" />
           </div>
-          <h1 className="text-2xl font-serif font-bold text-foreground mb-2">
+          <h1 style={{ fontFamily: 'var(--font-serif, Georgia, serif)', fontWeight: 700, fontSize: '1.6rem', color: 'var(--glp-sage-deep, #2f6b4f)', margin: '0 0 0.5rem' }}>
             Welcome to The Genuine Love Project
           </h1>
-          <p className="text-muted-foreground">
+          <p style={{ color: 'var(--glp-ink, #5a6b5f)', margin: 0 }}>
             A safe space for emotional wellness and self-discovery
           </p>
         </div>
 
-        <div className="space-y-4 mb-8">
-          <div className="flex items-start gap-3 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
-            <Heart className="w-5 h-5 text-rose-500 mt-0.5 flex-shrink-0" aria-hidden="true" />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+          <div style={S.infoRow}>
+            <Heart style={{ width: '20px', height: '20px', flexShrink: 0, marginTop: '0.15rem' }} color="#e8736b" aria-hidden="true" />
             <div>
-              <h2 className="font-medium text-foreground">What We Offer</h2>
-              <p className="text-sm text-muted-foreground">
-                Educational wellness tools, journaling prompts, self-reflection exercises, 
+              <h2 style={{ fontWeight: 600, color: 'var(--glp-ink, #36443b)', margin: '0 0 0.25rem' }}>What We Offer</h2>
+              <p style={{ fontSize: '0.9rem', color: 'var(--glp-ink, #5a6b5f)', margin: 0 }}>
+                Educational wellness tools, journaling prompts, self-reflection exercises,
                 and AI-assisted emotional guidance.
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
-            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
+          <div style={S.infoRow}>
+            <AlertCircle style={{ width: '20px', height: '20px', flexShrink: 0, marginTop: '0.15rem' }} color="#c98a2e" aria-hidden="true" />
             <div>
-              <h2 className="font-medium text-foreground">Important Notice</h2>
-              <p className="text-sm text-muted-foreground">
-                This platform provides educational wellness support, not medical or mental 
+              <h2 style={{ fontWeight: 600, color: 'var(--glp-ink, #36443b)', margin: '0 0 0.25rem' }}>Important Notice</h2>
+              <p style={{ fontSize: '0.9rem', color: 'var(--glp-ink, #5a6b5f)', margin: 0 }}>
+                This platform provides educational wellness support, not medical or mental
                 health treatment. It is not a substitute for professional care.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-emerald-200 dark:border-emerald-800 pt-6 mb-6">
-          <p className="text-base font-medium text-foreground text-center mb-5">
+        <div style={{ borderTop: '1px solid var(--glp-sage-20, #d8e6d3)', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
+          <p style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--glp-ink, #36443b)', textAlign: 'center', margin: '0 0 1.25rem' }}>
             By continuing, you confirm:
           </p>
-          <ul className="space-y-4 mb-6">
-            <li className="flex items-center gap-4 p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 text-white font-bold text-sm flex-shrink-0" aria-hidden="true">18+</span>
-              <span className="text-base text-foreground font-medium">You are 18 years of age or older</span>
+          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <li style={S.confirmItem}>
+              <span style={S.badge} aria-hidden="true">18+</span>
+              <span style={{ fontSize: '1rem', color: 'var(--glp-ink, #36443b)', fontWeight: 500 }}>You are 18 years of age or older</span>
             </li>
-            <li className="flex items-center gap-4 p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 flex-shrink-0" aria-hidden="true">
-                <Heart className="w-4 h-4 text-white" />
+            <li style={S.confirmItem}>
+              <span style={S.badge} aria-hidden="true">
+                <Heart style={{ width: '16px', height: '16px' }} color="#ffffff" />
               </span>
-              <span className="text-base text-foreground font-medium">You understand this is educational wellness support only</span>
+              <span style={{ fontSize: '1rem', color: 'var(--glp-ink, #36443b)', fontWeight: 500 }}>You understand this is educational wellness support only</span>
             </li>
-            <li className="flex items-center gap-4 p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 flex-shrink-0" aria-hidden="true">
-                <Shield className="w-4 h-4 text-white" />
+            <li style={S.confirmItem}>
+              <span style={S.badge} aria-hidden="true">
+                <Shield style={{ width: '16px', height: '16px' }} color="#ffffff" />
               </span>
-              <span className="text-base text-foreground font-medium">You may pause or stop using the platform at any time</span>
+              <span style={{ fontSize: '1rem', color: 'var(--glp-ink, #36443b)', fontWeight: 500 }}>You may pause or stop using the platform at any time</span>
             </li>
           </ul>
         </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', justifyContent: 'center' }}>
           <button
             onClick={handleConsent}
-            className="w-full py-3 px-6 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+            style={{ ...S.btnBase, background: 'var(--glp-sage-deep, #2f6b4f)', color: '#ffffff' }}
             data-testid="button-confirm-consent"
           >
-            I Confirm & Continue
+            I Confirm &amp; Continue
           </button>
 
           <Link
             href="/dashboard"
-            className="w-full py-3 px-6 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/40 text-emerald-800 dark:text-emerald-200 font-medium rounded-lg transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2 border border-emerald-200 dark:border-emerald-800"
+            style={{ ...S.btnBase, background: 'rgba(168, 201, 160, 0.18)', color: 'var(--glp-sage-deep, #2f6b4f)', border: '1px solid var(--glp-sage-20, #d8e6d3)' }}
             data-testid="link-back-to-dashboard"
           >
-            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+            <ArrowLeft style={{ width: '16px', height: '16px' }} aria-hidden="true" />
             Back to Dashboard
           </Link>
 
           <Link
             href="/"
-            className="w-full py-3 px-6 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+            style={{ ...S.btnBase, background: '#f1f3f1', color: '#55615a' }}
             data-testid="button-exit"
           >
             Exit
           </Link>
         </div>
 
-        <div className="mt-6 text-center">
-          <p className="text-xs text-muted-foreground mb-2">
+        <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--glp-ink, #5a6b5f)', margin: '0 0 0.5rem' }}>
             Need immediate support?
           </p>
           <Link
             href="/crisis"
-            className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 font-medium"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.875rem', color: 'var(--glp-sage-deep, #2f6b4f)', fontWeight: 600 }}
             data-testid="link-crisis-resources"
           >
             Access Crisis Resources
-            <ExternalLink className="w-3 h-3" aria-hidden="true" />
+            <ExternalLink style={{ width: '12px', height: '12px' }} aria-hidden="true" />
           </Link>
         </div>
 
-        <p className="mt-4 text-xs text-muted-foreground text-center">
-          By clicking "I Confirm & Continue," you agree to our{' '}
-          <Link href="/terms" className="underline hover:text-foreground">Terms</Link>
+        <p style={{ marginTop: '1rem', fontSize: '0.75rem', color: 'var(--glp-ink, #5a6b5f)', textAlign: 'center' }}>
+          By clicking "I Confirm &amp; Continue," you agree to our{' '}
+          <Link href="/terms" style={{ textDecoration: 'underline', color: 'inherit' }}>Terms</Link>
           {' '}and{' '}
-          <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>
+          <Link href="/privacy" style={{ textDecoration: 'underline', color: 'inherit' }}>Privacy Policy</Link>
         </p>
       </div>
     </div>
@@ -158,7 +227,7 @@ export default function AgeConsentGate({ children, onConsent }) {
 
 export function useHasConsented() {
   const [hasConsented, setHasConsented] = useState(false);
-  
+
   useEffect(() => {
     const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
     setHasConsented(stored === 'true');
