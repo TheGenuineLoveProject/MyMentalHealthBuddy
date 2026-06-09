@@ -143,3 +143,4 @@ diagnostics/visual-submit-check/lumi-motion-search.txt
 *.sqlite
 *.sqlite3
 *.db
+.agents/
