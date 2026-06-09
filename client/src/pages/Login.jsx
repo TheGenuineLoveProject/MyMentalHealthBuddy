@@ -98,8 +98,8 @@ export default function Login() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
 
         <div className="relative z-10 w-full max-w-md animate-fade-in-up" style={{ maxWidth: '28rem' }}>
-          <div className="text-center mb-6">
-            <Link href="/" className="inline-flex flex-col items-center gap-3 group">
+          <div className="text-center" style={{ marginBottom: '1.5rem' }}>
+            <Link href="/" className="inline-flex flex-col items-center group" style={{ gap: '0.75rem' }}>
               <span
                 aria-hidden="true"
                 className="w-24 h-24 flex items-center justify-center transition-all group-hover:scale-105"
@@ -150,7 +150,7 @@ export default function Login() {
                     aria-describedby={errors.email ? "err-email" : undefined}
                   />
                 </div>
-                {errors.email && <p id="err-email" className="text-xs mt-1" style={{ color: '#b13c3c' }} data-testid="error-email">{errors.email}</p>}
+                {errors.email && <p id="err-email" className="text-xs" style={{ color: '#b13c3c', marginTop: '0.25rem' }} data-testid="error-email">{errors.email}</p>}
               </label>
 
               <label className="block">
@@ -171,7 +171,7 @@ export default function Login() {
                     aria-describedby={errors.password ? "err-password" : undefined}
                   />
                 </div>
-                {errors.password && <p id="err-password" className="text-xs mt-1" style={{ color: '#b13c3c' }} data-testid="error-password">{errors.password}</p>}
+                {errors.password && <p id="err-password" className="text-xs" style={{ color: '#b13c3c', marginTop: '0.25rem' }} data-testid="error-password">{errors.password}</p>}
               </label>
 
               <div className="text-right">
@@ -214,7 +214,7 @@ export default function Login() {
             </div>
           </form>
 
-          <p className="text-center text-xs mt-6" style={{ color: 'var(--glp-sage)' }}>
+          <p className="text-center text-xs" style={{ color: 'var(--glp-sage)', marginTop: '1.5rem' }}>
             By signing in, you agree to our{" "}
             <Link href="/terms" className="underline">Terms of Service</Link>{" "}
             and{" "}
