@@ -18,6 +18,58 @@ import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
+
+const toolsPageStyles = {
+  page: {
+    minHeight: "100vh",
+    padding: "clamp(1rem, 3vw, 2rem)",
+  },
+  shell: {
+    width: "100%",
+    maxWidth: "1200px",
+    margin: "0 auto",
+  },
+  section: {
+    marginTop: "clamp(1.25rem, 3vw, 2rem)",
+    marginBottom: "clamp(1.25rem, 3vw, 2rem)",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
+    gap: "clamp(1rem, 2vw, 1.5rem)",
+  },
+  card: {
+    padding: "clamp(1rem, 2.5vw, 1.5rem)",
+    borderRadius: "1.25rem",
+    boxShadow: "0 16px 44px rgba(15, 23, 42, 0.08)",
+  },
+  icon: {
+    width: "2.75rem",
+    height: "2.75rem",
+    flexShrink: 0,
+  },
+  stack: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+  },
+  row: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.75rem",
+  },
+  title: {
+    fontSize: "clamp(2rem, 5vw, 4rem)",
+    lineHeight: 1.05,
+    fontWeight: 800,
+  },
+  subtitle: {
+    fontSize: "clamp(1rem, 2vw, 1.25rem)",
+    lineHeight: 1.7,
+  },
+};
+
+
 const TOOLS_CLARITY = {
   what: "A collection of gentle self-reflection tools including belief mapping, timed writing, silence mode, and growth tracking.",
   who: "Anyone seeking to understand themselves better through structured reflection practices.",
@@ -128,7 +180,7 @@ export default function ToolsPage() {
 
       <>
         <SEO title="Reflection Tools - The Genuine Love Project" description="Privacy-focused self-discovery tools for journaling and personal growth." />
-        <div className="min-h-screen bg-[var(--glp-paper)] px-4 py-10">
+        <div className="min-h-screen bg-[var(--glp-paper)]  ">
           <div className="mx-auto max-w-3xl">
             <button
               onClick={() => setActiveTool(null)}
@@ -139,7 +191,7 @@ export default function ToolsPage() {
               Back to tools
             </button>
 
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-[var(--glp-sage-10)]">
+            <div style={toolsPageStyles.card} className="bg-white   shadow-sm border border-[var(--glp-sage-10)]">
               {activeTool === "beliefs" && <BeliefMapper />}
               {activeTool === "timed" && (
                 <TimedSession
@@ -153,8 +205,8 @@ export default function ToolsPage() {
               {activeTool === "export" && <ExportPanel />}
             </div>
 
-            <div className="mt-8 p-4 bg-[var(--glp-sage-10)] rounded-lg text-center">
-              <p className="text-sm text-[var(--glp-ink)]/70 flex items-center justify-center gap-2">
+            <div className="mt-8  bg-[var(--glp-sage-10)] rounded-lg text-center">
+              <p style={toolsPageStyles.subtitle} className="text-sm text-[var(--glp-ink)]/70 flex items-center justify-center gap-2">
                 <Shield className="w-4 h-4" />
                 Your reflections stay on your device unless you choose to export them.
               </p>
@@ -192,7 +244,7 @@ export default function ToolsPage() {
         description="A gentle toolkit for self-discovery including belief mapping, timed writing, and growth tracking." 
       />
       <div className="min-h-screen relative overflow-hidden" style={{ background: 'var(--glp-paper)' }}>
-        <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -to0 -right-40 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-gold w-[350px] h-[350px] top-1/3 -left-32 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-blush w-[300px] h-[300px] bottom-20 right-10 absolute" aria-hidden="true" />
         <div className="relative z-10">
@@ -204,7 +256,7 @@ export default function ToolsPage() {
           helperLine={heroCopy.helperLine}
         />
 
-        <div className="px-4 pb-16">
+        <div className=" pb-16">
           <div className="mx-auto max-w-3xl">
             <BenefitsBlock
               benefit="Agency, gentle habits, and your pace"
@@ -226,7 +278,7 @@ export default function ToolsPage() {
             <p className="text-center text-sm text-[var(--glp-ink)]/60 italic mb-8">
               <Microcopy slot="consent" seed="tools-page" as="span" />
             </p>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div style={toolsPageStyles.grid} className="grid ga sm:grid-cols-2">
               {TOOLS.map((tool, idx) => {
                 const Icon = tool.icon;
                 const gradients = ['icon-gradient-sage', 'icon-gradient-gold', 'icon-gradient-blush', 'icon-gradient-teal'];
@@ -235,10 +287,10 @@ export default function ToolsPage() {
                   <button
                     key={tool.id}
                     onClick={() => setActiveTool(tool.id)}
-                    className="card-premium p-6 text-left transition-all group"
+                    className="card-premium  text-left transition-all group"
                     data-testid={`button-tool-${tool.id}`}
                   >
-                    <div className="flex items-start gap-4">
+                    <div className="flex items-start ga">
                       <div
                         className={`icon-container icon-lg ${gradientClass} group-hover:scale-110 transition-transform`}
                         style={{ borderRadius: "9999px", width: 48, height: 48, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
@@ -263,8 +315,8 @@ export default function ToolsPage() {
               })}
             </div>
 
-            <div className="mt-10 p-6 bg-[var(--glp-blush-50)] rounded-xl border border-[var(--glp-blush-100)]">
-              <div className="flex items-start gap-4">
+            <div className="mt-10  bg-[var(--glp-blush-50)]  border border-[var(--glp-blush-100)]">
+              <div className="flex items-start ga">
                 <Phone className="w-5 h-5 text-[var(--glp-sage-deep)] flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-[var(--glp-ink)]">
