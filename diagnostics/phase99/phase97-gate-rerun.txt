@@ -1,7 +1,0 @@
-ACTIVE_RUNTIME_DUPLICATE_GATE_PASS
-{
-  "activeFileCount": 1813,
-  "duplicateFamilyCount": 120,
-  "shadowTreeCount": 5,
-  "selectedFamily": "index"
-}

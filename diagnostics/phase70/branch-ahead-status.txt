@@ -1,4 +1,0 @@
-## clean-push...origin/main [ahead 2]
-?? diagnostics/phase67b/git-log-after-push.txt
-?? diagnostics/phase67b/git-status-after-push.txt
-?? diagnostics/phase70/

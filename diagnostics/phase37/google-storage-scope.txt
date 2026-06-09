@@ -1,5 +1,0 @@
-31-    "@fontsource/inter": "^5.2.8",
-32-    "@fontsource/nunito": "^5.2.7",
-33:    "@google-cloud/storage": "^7.19.0",
-34-    "@hookform/resolvers": "^5.2.2",
-35-    "@langchain/openai": "^1.4.5",

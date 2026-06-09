@@ -1,8 +1,0 @@
-139:    phase64LumiBreath 5.8s ease-in-out infinite,
-140:    phase64LumiFloat 8s var(--phase64-ease) infinite,
-175:  animation: phase64ScenePulse 5.4s ease-in-out infinite;
-225:  color: #fffdf8 !important;
-315:  color: #fffdf8 !important;
-321:@keyframes phase64LumiBreath {
-326:@keyframes phase64LumiFloat {
-345:@keyframes phase64ScenePulse {

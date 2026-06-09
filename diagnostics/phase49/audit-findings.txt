@@ -1,4 +1,0 @@
-Severity: moderate
-Severity: moderate
-Severity: moderate
-11 moderate severity vulnerabilities

@@ -1,9 +1,0 @@
-FOUND client/src/App.jsx
-FOUND client/src/main.jsx
-FOUND client/src/index.css
-FOUND client/src/styles/lumi-visual-system.css
-FOUND client/src/components/lumi/LumiBrandAvatar.tsx
-FOUND client/src/components/lumi/LumiBrandAvatar.css
-FOUND client/src/components/lumi/LumiPresenceLayer.tsx
-FOUND client/src/components/lumi/LumiPresenceLayer.css
-FOUND scripts/visual-runtime-gate.mjs

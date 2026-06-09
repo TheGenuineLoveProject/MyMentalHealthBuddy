@@ -1,3 +1,0 @@
-client/src/hooks/use-upload.ts: *       console.log("Uploaded to:", response.objectPath);
-client/src/lib/track.ts:    console.log(`[Analytics] ${message}`, data || '');
-client/src/lumi-audit/logger/auditLogger.ts:    console.log("[AUDIT]", sanitized);

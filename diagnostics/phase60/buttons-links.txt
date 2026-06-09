@@ -1,3 +1,0 @@
-client/src/pages/CanvaLanding.jsx:          <Link to="/7-day-reset" className="rounded-full bg-[#163A36] px-6 py-4 font-bold text-white">
-client/src/pages/CanvaLanding.jsx:          <Link to="/pricing" className="rounded-full border border-[#163A36]/20 bg-white/70 px-6 py-4 font-bold">
-client/src/pages/CanvaLanding.jsx:          <Link to="/tools" className="rounded-full border border-[#163A36]/20 bg-white/70 px-6 py-4 font-bold">

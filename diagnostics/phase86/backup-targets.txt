@@ -1,2 +1,0 @@
-BACKED_UP tailwind.config.js
-BACKED_UP tests/unit/buddyImportBoundary.test.mjs

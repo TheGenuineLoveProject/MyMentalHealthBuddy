@@ -1,9 +1,0 @@
-  color: var(--lumi-text-strong);
-  color: var(--lumi-text-inverse);
-  color: var(--lumi-text-strong);
-  color: var(--lumi-text-strong);
-  color: var(--lumi-text-inverse);
-  background: linear-gradient(135deg, var(--lumi-sage-700), var(--lumi-sage-500));
-  color: var(--lumi-text-strong);
-  color: var(--lumi-text-strong);
-  background: linear-gradient(90deg, var(--lumi-sage-700), var(--lumi-sage-500), #b18d25);

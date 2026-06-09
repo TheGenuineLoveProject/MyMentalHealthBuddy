@@ -303,6 +303,7 @@ export default function Pricing() {
                   className="rounded-3xl p-8 relative animate-fade-in-scale transition-all hover:-translate-y-1"
                   style={{
                     animationDelay: `${index * 100}ms`,
+                    position: 'relative',
                     padding: '2rem',
                     background: '#FFFFFF',
                     border: tier.popular ? '2px solid var(--glp-gold)' : '1px solid var(--glp-sage-20)',
@@ -315,7 +316,7 @@ export default function Pricing() {
                   {tier.popular && (
                     <div
                       className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg"
-                      style={{ background: '#E8913A', boxShadow: '0 6px 18px rgba(232, 145, 58, 0.42)' }}
+                      style={{ position: 'absolute', top: '-0.75rem', left: '50%', transform: 'translateX(-50%)', padding: '0.375rem 1rem', whiteSpace: 'nowrap', background: '#E8913A', boxShadow: '0 6px 18px rgba(232, 145, 58, 0.42)' }}
                       data-testid="badge-most-popular"
                     >
                       ★ Most Popular

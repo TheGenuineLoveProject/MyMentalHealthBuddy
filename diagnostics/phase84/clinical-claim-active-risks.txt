@@ -1,4 +1,0 @@
-GUARANTEE_CLAIM client/src/pages/admin/SocialStudioAdmin.jsx:494: Avoid sensationalism, fear-mongering, or guaranteed outcomes. Include trigger warnings when needed.
-GUARANTEE_CLAIM client/src/pages/admin/SocialStudioAdmin.jsx:874: Avoid sensationalism, fear-mongering, or guaranteed outcomes.
-GUARANTEE_CLAIM client/src/components/ErrorBoundary.jsx:52: guaranteed motion="steady" per avatarState.ts. Errors are
-GUARANTEE_CLAIM client/src/content/journalPrompts.js:40: "What would I do with my time if success were guaranteed?",

@@ -1,4 +1,0 @@
-client/src/components/lumi/LumiLivingAvatar.tsx:import "./LumiLivingAvatar.css";
-client/src/components/lumi/LumiLivingAvatar.tsx:export interface LumiLivingAvatarProps {
-client/src/components/lumi/LumiLivingAvatar.tsx:export default function LumiLivingAvatar({
-client/src/components/lumi/LumiLivingAvatar.tsx:}: LumiLivingAvatarProps) {

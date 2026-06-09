@@ -1,9 +1,0 @@
-THERAPY_REPLACEMENT_CLAIM client/src/pages/FAQPage.jsx
-GUARANTEE_CLAIM client/src/pages/SafetyPage.jsx
-GUARANTEE_CLAIM client/src/pages/admin/SocialStudioAdmin.jsx
-GUARANTEE_CLAIM client/src/components/ErrorBoundary.jsx
-GUARANTEE_CLAIM client/src/content/frameworks/nlpSafe.ts
-GUARANTEE_CLAIM client/src/content/journalPrompts.js
-CURE_CLAIM client/src/content/routes.js
-GUARANTEE_CLAIM client/src/content/tools/nlpReframes.ts
-GUARANTEE_CLAIM client/src/data/journalPrompts.ts

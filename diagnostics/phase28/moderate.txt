@@ -1,5 +1,0 @@
-Severity: moderate
-Severity: moderate
-Severity: moderate
-Severity: moderate
-19 vulnerabilities (16 moderate, 3 high)

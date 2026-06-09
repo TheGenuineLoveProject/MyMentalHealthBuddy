@@ -1,3 +1,0 @@
-client/src/pages/ComingSoon.jsx:export default function ComingSoon() {
-client/src/App.jsx:import ComingSoon from "./pages/ComingSoon.jsx";
-client/src/App.jsx:              <Route path="/coming-soon">{() => <ComingSoon />}</Route>
