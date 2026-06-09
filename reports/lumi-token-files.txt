@@ -1,6 +1,0 @@
-client/src/lumi-tokens/colors/colorTokens.ts
-client/src/lumi-tokens/spacing/spacingTokens.ts
-client/src/lumi-tokens/typography/typographyTokens.ts
-client/src/lumi-tokens/shadows/shadowTokens.ts
-client/src/lumi-tokens/components/componentTokens.ts
-client/src/lumi-tokens/index.ts

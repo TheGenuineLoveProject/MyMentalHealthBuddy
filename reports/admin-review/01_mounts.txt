@@ -1,5 +1,0 @@
-## app.mjs admin mount lines
-99:app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);
-
-## any admin-ish mount lines
-99:app.use("/api/admin", adminLimiter, requireAuth, requireAdmin, adminRoutes);

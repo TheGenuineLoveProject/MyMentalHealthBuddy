@@ -1,1 +1,0 @@
-legal/authorAttribution.mjs:3:  thirdPartyText: "Do not paste copyrighted long-form text without permission.",

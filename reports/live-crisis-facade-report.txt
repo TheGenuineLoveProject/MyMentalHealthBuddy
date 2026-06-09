@@ -1,8 +1,0 @@
-LIVE CRISIS FACADE REPORT
-
-[HEALTH]
-{"status":"healthy","environment":"development","version":"2.0.0","uptime":4,"uptimeFormatted":"4s","startedAt":"2026-04-18T22:15:15.147Z","database":{"connected":true},"ai":{"available":true},"softLaunch":false,"platform":{"totalTools":127,"totalRoutes":127,"adminPages":27},"services":{"stripe":true,"resend":true,"perplexity":true,"sentry":true},"memory":{"heapUsedMB":22,"heapTotalMB":33,"rssMB":94},"node":"v20.20.0"}
-[CRISIS TEST]
-{"error":"CSRF token missing or invalid"}
-[NEGATIVE CONTROL]
-{"error":"CSRF token missing or invalid"}
