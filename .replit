@@ -13,6 +13,10 @@ build = ["sh", "-c", "npm install && NODE_OPTIONS=--max-old-space-size=4096 npm 
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 5098
+externalPort = 3000
+
 [agent]
 expertMode = true
 
