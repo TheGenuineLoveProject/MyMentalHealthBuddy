@@ -85,6 +85,18 @@ const SELF_CARE_TIPS = [
   },
 ];
 
+const SHADOW_MD = '0 4px 6px -1px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.10)';
+const SHADOW_LG = '0 10px 15px -3px rgba(0,0,0,0.10), 0 4px 6px -4px rgba(0,0,0,0.10)';
+const ic = (s) => ({ width: s, height: s, flexShrink: 0 });
+const actionBtnStyle = {
+  gap: '0.5rem',
+  padding: '0.625rem 1rem',
+  fontSize: '0.875rem',
+  fontWeight: 500,
+  borderRadius: '0.75rem',
+  boxShadow: SHADOW_MD,
+};
+
 export default function CrisisResources() {
   return (
   <div className="hxos-vnext-crisis">
@@ -116,24 +128,24 @@ export default function CrisisResources() {
         <div className="relative z-10">
           <Link 
             href="/"
-            className="inline-flex items-center gap-2 text-body-sm transition mb-6 hover:opacity-80"
-            style={{ color: 'var(--glp-sage-deep)' }}
+            className="inline-flex items-center text-body-sm transition hover:opacity-80"
+            style={{ color: 'var(--glp-sage-deep)', gap: '0.5rem', marginBottom: '1.5rem' }}
             data-testid="link-back-home"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft style={ic('1rem')} />
             Back to Home
           </Link>
 
-          <div className="rounded-2xl p-6 mb-8" style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-blush)' }}>
-            <div className="flex items-start gap-4">
+          <div style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-blush)', borderRadius: '1rem', padding: '1.5rem', marginBottom: '2rem' }}>
+            <div className="flex items-start" style={{ gap: '1rem' }}>
               <div 
-                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: 'var(--glp-rose-20)', color: 'var(--glp-rose-dark)' }}
+                className="flex items-center justify-center flex-shrink-0"
+                style={{ background: 'var(--glp-rose-20)', color: 'var(--glp-rose-dark)', width: '3rem', height: '3rem', borderRadius: '0.75rem' }}
               >
-                <AlertTriangle className="w-6 h-6" />
+                <AlertTriangle style={ic('1.5rem')} />
               </div>
               <div>
-                <h2 className="text-heading-md mb-2" style={{ color: 'var(--glp-rose-dark)' }}>In immediate danger?</h2>
+                <h2 className="text-heading-md" style={{ color: 'var(--glp-rose-dark)', marginBottom: '0.5rem' }}>In immediate danger?</h2>
                 <p className="text-body-sm" style={{ color: 'var(--glp-ink)' }}>
                   Call 911 or go to your nearest emergency room. Your safety is the priority.
                 </p>
@@ -141,65 +153,67 @@ export default function CrisisResources() {
             </div>
           </div>
 
-          <section aria-labelledby="hotlines-heading" className="mb-10">
-            <div className="flex items-center gap-3 mb-6">
+          <section aria-labelledby="hotlines-heading" style={{ marginBottom: '2.5rem' }}>
+            <div className="flex items-center" style={{ gap: '0.75rem', marginBottom: '1.5rem' }}>
               <div 
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}
+                className="flex items-center justify-center flex-shrink-0"
+                style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)', width: '2.5rem', height: '2.5rem', borderRadius: '0.75rem' }}
               >
-                <Phone className="w-5 h-5" aria-hidden="true" />
+                <Phone style={ic('1.25rem')} aria-hidden="true" />
               </div>
               <h2 id="hotlines-heading" className="text-heading-lg" style={{ color: 'var(--glp-sage-deep)' }}>
                 Crisis Hotlines & Support
               </h2>
             </div>
             
-            <div className="space-y-4">
+            <div className="flex flex-col" style={{ gap: '1rem' }}>
               {CRISIS_HOTLINES.map((hotline, idx) => (
                 <article
                   key={idx}
-                  className="card-elevated p-5 transition-all hover:shadow-lg"
-                  style={hotline.priority ? { background: 'linear-gradient(135deg, var(--glp-sage-10), var(--glp-teal-50))', border: '1px solid var(--glp-sage-30)' } : {}}
+                  className="card-elevated transition-all"
+                  style={hotline.priority
+                    ? { padding: '1.25rem', background: 'linear-gradient(135deg, var(--glp-sage-10), var(--glp-teal-50))', border: '1px solid var(--glp-sage-30)' }
+                    : { padding: '1.25rem' }}
                   data-testid={`card-hotline-${idx}`}
                 >
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                  <div className="flex flex-col" style={{ gap: '1rem' }}>
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-1">
+                      <div className="flex items-center" style={{ gap: '0.75rem', marginBottom: '0.25rem' }}>
                         {hotline.priority && (
-                          <span className="px-2 py-0.5 text-xs font-medium rounded-full flex-shrink-0" style={{ background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }}>
+                          <span className="rounded-full flex-shrink-0" style={{ background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)', padding: '0.125rem 0.5rem', fontSize: '0.75rem', fontWeight: 500 }}>
                             Priority
                           </span>
                         )}
-                        <h3 className="text-lg font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
+                        <h3 style={{ color: 'var(--glp-sage-deep)', fontSize: '1.125rem', fontWeight: 600 }}>
                           {hotline.name}
                         </h3>
                       </div>
-                      <p className="text-sm mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{hotline.description}</p>
-                      <p className="text-xs flex items-center gap-1.5" style={{ color: 'var(--glp-ink)' }}>
-                        <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--glp-sage)' }}></span>
+                      <p style={{ color: 'var(--glp-sage-deep)', fontSize: '0.875rem', marginBottom: '0.5rem' }}>{hotline.description}</p>
+                      <p className="flex items-center" style={{ color: 'var(--glp-ink)', fontSize: '0.75rem', gap: '0.375rem' }}>
+                        <span className="rounded-full" style={{ background: 'var(--glp-sage)', width: '0.375rem', height: '0.375rem' }}></span>
                         Available: {hotline.available}
                       </p>
                     </div>
                     
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap" style={{ gap: '0.5rem' }}>
                       {hotline.phone && (
                         <a
-                          href={`tel:${hotline.phone.replace(/[^0-9]/g, "")}`}
-                          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all shadow-md hover:shadow-lg hover:opacity-90 focus:outline-none"
-                          style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+                          href={`tel:${hotline.phone.split(",")[0].replace(/[^0-9]/g, "")}`}
+                          className="inline-flex items-center transition-all hover:opacity-90"
+                          style={{ ...actionBtnStyle, background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
                           data-testid={`link-call-${idx}`}
                         >
-                          <Phone className="w-4 h-4" aria-hidden="true" />
+                          <Phone style={ic('1rem')} aria-hidden="true" />
                           {hotline.phone}
                         </a>
                       )}
                       {hotline.text && (
                         <span 
-                          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl shadow-md"
-                          style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', color: 'var(--glp-sage-deep)' }}
+                          className="inline-flex items-center"
+                          style={{ ...actionBtnStyle, background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', color: 'var(--glp-sage-deep)' }}
                           aria-label={`Text support: ${hotline.text}`}
                         >
-                          <MessageSquare className="w-4 h-4" aria-hidden="true" />
+                          <MessageSquare style={ic('1rem')} aria-hidden="true" />
                           {hotline.text}
                         </span>
                       )}
@@ -208,13 +222,13 @@ export default function CrisisResources() {
                           href={hotline.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all hover:opacity-80 focus:outline-none"
-                          style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
+                          className="inline-flex items-center transition-all hover:opacity-80"
+                          style={{ ...actionBtnStyle, boxShadow: 'none', background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
                           data-testid={`link-website-${idx}`}
                         >
-                          <Globe className="w-4 h-4" aria-hidden="true" />
+                          <Globe style={ic('1rem')} aria-hidden="true" />
                           Website
-                          <ExternalLink className="w-3 h-3 opacity-50" aria-hidden="true" />
+                          <ExternalLink style={{ ...ic('0.75rem'), opacity: 0.5 }} aria-hidden="true" />
                         </a>
                       )}
                     </div>
@@ -224,36 +238,37 @@ export default function CrisisResources() {
             </div>
           </section>
 
-          <section aria-labelledby="selfcare-heading" className="mb-10">
-            <div className="flex items-center gap-3 mb-6">
+          <section aria-labelledby="selfcare-heading" style={{ marginBottom: '2.5rem' }}>
+            <div className="flex items-center" style={{ gap: '0.75rem', marginBottom: '1.5rem' }}>
               <div 
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))', color: 'var(--glp-paper)' }}
+                className="flex items-center justify-center flex-shrink-0"
+                style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))', color: 'var(--glp-paper)', width: '2.5rem', height: '2.5rem', borderRadius: '0.75rem' }}
               >
-                <HandHeart className="w-5 h-5" aria-hidden="true" />
+                <HandHeart style={ic('1.25rem')} aria-hidden="true" />
               </div>
-              <h2 id="selfcare-heading" className="text-xl font-display font-bold" style={{ color: 'var(--glp-sage-deep)' }}>
+              <h2 id="selfcare-heading" className="font-display" style={{ color: 'var(--glp-sage-deep)', fontSize: '1.25rem', fontWeight: 700 }}>
                 Immediate Self-Care Steps
               </h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
               {SELF_CARE_TIPS.map((tip, idx) => {
                 const Icon = tip.icon;
                 return (
                   <article
                     key={idx}
-                    className="card-elevated p-5 hover:shadow-lg transition-all group"
+                    className="card-elevated transition-all group"
+                    style={{ padding: '1.25rem' }}
                     data-testid={`card-tip-${idx}`}
                   >
                     <div 
-                      className="w-12 h-12 rounded-full flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform"
-                      style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+                      className="rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                      style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)', width: '3rem', height: '3rem', marginBottom: '1rem', boxShadow: SHADOW_MD }}
                     >
-                      <Icon className="w-6 h-6" aria-hidden="true" />
+                      <Icon style={ic('1.5rem')} aria-hidden="true" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{tip.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-sage-deep)' }}>{tip.description}</p>
+                    <h3 style={{ color: 'var(--glp-sage-deep)', fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem' }}>{tip.title}</h3>
+                    <p style={{ color: 'var(--glp-sage-deep)', fontSize: '0.875rem', lineHeight: 1.625 }}>{tip.description}</p>
                   </article>
                 );
               })}
@@ -262,34 +277,34 @@ export default function CrisisResources() {
 
           <section 
             aria-labelledby="reminder-heading"
-            className="card-elevated p-8 text-center"
-            style={{ background: 'linear-gradient(135deg, var(--glp-sage-10), var(--glp-teal-50))' }}
+            className="card-elevated text-center"
+            style={{ background: 'linear-gradient(135deg, var(--glp-sage-10), var(--glp-teal-50))', padding: '2rem', textAlign: 'center' }}
           >
             <div 
-              className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
-              style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+              className="flex items-center justify-center mx-auto"
+              style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)', width: '4rem', height: '4rem', borderRadius: '1rem', marginBottom: '1rem', boxShadow: SHADOW_LG }}
             >
-              <Heart className="w-8 h-8" aria-hidden="true" />
+              <Heart style={ic('2rem')} aria-hidden="true" />
             </div>
-            <h2 id="reminder-heading" className="text-2xl font-display font-bold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>You Are Not Alone</h2>
-            <p className="mb-6 max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--glp-sage-deep)' }}>
+            <h2 id="reminder-heading" className="font-display" style={{ color: 'var(--glp-sage-deep)', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.75rem' }}>You Are Not Alone</h2>
+            <p className="mx-auto" style={{ color: 'var(--glp-sage-deep)', marginBottom: '1.5rem', maxWidth: '36rem', lineHeight: 1.625 }}>
               Whatever you're going through, there are people who care and want to help. 
               Reaching out is a sign of strength, not weakness. You matter, and your life has value.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center" style={{ gap: '1rem' }}>
               <Link
                 href="/chat"
-                className="px-6 py-3 inline-flex items-center gap-2 font-medium rounded-xl transition-all hover:opacity-90 shadow-md"
-                style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+                className="inline-flex items-center transition-all hover:opacity-90"
+                style={{ gap: '0.5rem', padding: '0.75rem 1.5rem', fontWeight: 500, borderRadius: '0.75rem', boxShadow: SHADOW_MD, background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
                 data-testid="link-chat"
               >
-                <MessageSquare className="w-5 h-5" aria-hidden="true" />
+                <MessageSquare style={ic('1.25rem')} aria-hidden="true" />
                 Talk to Wellness Companion
               </Link>
               <Link
                 href="/journal"
-                className="inline-flex items-center gap-2 px-6 py-3 font-medium rounded-xl transition-all hover:opacity-80 focus:outline-none"
-                style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
+                className="inline-flex items-center transition-all hover:opacity-80"
+                style={{ gap: '0.5rem', padding: '0.75rem 1.5rem', fontWeight: 500, borderRadius: '0.75rem', background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
                 data-testid="link-journal"
               >
                 Write in Journal
