@@ -117,16 +117,18 @@ function ShareCard({
 
   return (
     <section
-      className="rounded-2xl border border-sky-200 dark:border-sky-800 bg-sky-50/60 dark:bg-sky-950/30 p-5 mb-6"
+      className="border border-sky-200 dark:border-sky-800 bg-sky-50/60 dark:bg-sky-950/30"
+      style={{ borderRadius: "1rem", padding: "1.25rem", marginBottom: "1.5rem" }}
       data-testid="panel-share"
     >
       <h3
-        className="text-base font-semibold text-sky-900 dark:text-sky-100 mb-1"
+        className="text-base font-semibold text-sky-900 dark:text-sky-100"
+        style={{ marginBottom: "0.25rem" }}
         data-testid="text-share-title"
       >
         Share a reset
       </h3>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center" style={{ gap: "1rem" }}>
         <p
           className="text-sm text-sky-800 dark:text-sky-200 flex-1 text-center sm:text-left"
           data-testid="text-share-body"
@@ -135,7 +137,8 @@ function ShareCard({
         </p>
         <button
           onClick={handleShare}
-          className="inline-flex items-center gap-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium px-4 py-2 transition-colors motion-reduce:transition-none"
+          className="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium transition-colors motion-reduce:transition-none"
+          style={{ gap: "0.5rem", borderRadius: "0.75rem", padding: "0.5rem 1rem" }}
           data-testid="button-share"
           aria-label={copied ? "Share message copied to clipboard" : "Share Buddy with someone who may need a reset"}
         >
@@ -167,20 +170,22 @@ function PaywallCard({ reason }: { reason: PaywallReason }) {
 
   return (
     <section
-      className="mt-6 rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50/70 dark:bg-amber-950/30 p-6"
+      className="border border-amber-200 dark:border-amber-800 bg-amber-50/70 dark:bg-amber-950/30"
+      style={{ marginTop: "1.5rem", borderRadius: "1rem", padding: "1.5rem" }}
       data-testid="panel-paywall"
     >
       <h3 className="font-semibold text-lg text-slate-900 dark:text-slate-100" data-testid="text-paywall-headline">
         {headline}
       </h3>
-      <p className="text-sm text-slate-700 dark:text-slate-300 mt-2" data-testid="text-paywall-body">
+      <p className="text-sm text-slate-700 dark:text-slate-300" style={{ marginTop: "0.5rem" }} data-testid="text-paywall-body">
         {body}
       </p>
-      <div className="mt-4 flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col sm:flex-row" style={{ marginTop: "1rem", gap: "0.75rem" }}>
         <Link
           href="/pricing"
           onClick={() => track("paywall_clicked", { reason: reason ?? "unspecified", action: "upgrade" })}
-          className="inline-flex items-center justify-center rounded-lg bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 text-sm font-medium"
+          className="inline-flex items-center justify-center bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium"
+          style={{ borderRadius: "0.5rem", padding: "0.5rem 1rem" }}
           data-testid="link-paywall-upgrade"
         >
           Unlock Pro
@@ -188,7 +193,8 @@ function PaywallCard({ reason }: { reason: PaywallReason }) {
         <button
           type="button"
           onClick={() => track("paywall_clicked", { reason: reason ?? "unspecified", action: "dismiss" })}
-          className="inline-flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+          className="inline-flex items-center justify-center border border-slate-300 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+          style={{ borderRadius: "0.5rem", padding: "0.5rem 1rem" }}
           data-testid="button-paywall-dismiss"
         >
           Keep using free tools
@@ -795,7 +801,7 @@ export default function Start() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
-      <main className="mx-auto max-w-2xl px-6 py-12 md:py-20" data-testid="page-start">
+      <main className="mx-auto" style={{ maxWidth: "42rem", margin: "0 auto", padding: "3rem 1.5rem" }} data-testid="page-start">
         {/* MMHB Buddy v2.0 — cross-platform visual companion via BuddyPanel.
             Wraps the visual avatar + companion sr-only + dynamic helper-copy
             live region in one reusable shell so other healing surfaces
@@ -804,12 +810,12 @@ export default function Start() {
             v1.5/v1.6 (tool/baseline copy), v1.7 (sr-only companion line +
             keyboard-pass-through), v1.8 (share gating downstream), v1.9
             (BuddyOutput contract surfaced via avatar data-attrs). */}
+        <div style={{ marginBottom: "1.5rem" }}>
         <BuddyPanel
           state={buddyState}
           title="Buddy is here with you"
           surface="start"
           size={180}
-          className="mb-6"
           data-testid="panel-buddy-start"
         >
           {/*
@@ -835,23 +841,25 @@ export default function Start() {
           <div
             role="status"
             aria-live="polite"
-            className="mt-3 min-h-[1.25rem] text-sm text-slate-600 dark:text-slate-400 text-center transition-opacity duration-500 motion-reduce:transition-none"
-            style={{ opacity: buddyHelperCopy ? 1 : 0 }}
+            className="text-sm text-slate-600 dark:text-slate-400 text-center transition-opacity duration-500 motion-reduce:transition-none"
+            style={{ opacity: buddyHelperCopy ? 1 : 0, marginTop: "0.75rem", minHeight: "1.25rem" }}
             data-testid="text-buddy-helper-copy"
           >
             {buddyHelperCopy ?? "\u00A0"}
           </div>
         </BuddyPanel>
+        </div>
 
         {/* HERO */}
-        <section className="text-center mb-10" data-testid="section-hero">
+        <section className="text-center" style={{ marginBottom: "2.5rem" }} data-testid="section-hero">
           <h1
-            className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 dark:text-slate-50 mb-4"
+            className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 dark:text-slate-50"
+            style={{ marginBottom: "1rem" }}
             data-testid="text-hero-headline"
           >
             Feel better in 60 seconds.
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-300 mb-2" data-testid="text-hero-sub">
+          <p className="text-lg text-slate-600 dark:text-slate-300" style={{ marginBottom: "0.5rem" }} data-testid="text-hero-sub">
             Not another mental health app.
           </p>
           <p className="text-base text-slate-500 dark:text-slate-400" data-testid="text-hero-tagline">
@@ -860,15 +868,19 @@ export default function Start() {
         </section>
 
         {/* PROMISE BULLETS */}
-        <ul className="mb-10 space-y-2 text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto" data-testid="list-promises">
-          <li className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-500" /> Calm anxiety instantly</li>
-          <li className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-500" /> Break negative thought loops</li>
-          <li className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-500" /> Understand your patterns</li>
-          <li className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-500" /> Get personalized tools that actually work</li>
+        <ul
+          className="text-sm text-slate-600 dark:text-slate-400"
+          style={{ maxWidth: "28rem", margin: "0 auto 2.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}
+          data-testid="list-promises"
+        >
+          <li className="flex items-center" style={{ gap: "0.5rem" }}><Sparkles className="text-amber-500" style={{ width: "1rem", height: "1rem", flexShrink: 0 }} /> Calm anxiety instantly</li>
+          <li className="flex items-center" style={{ gap: "0.5rem" }}><Sparkles className="text-amber-500" style={{ width: "1rem", height: "1rem", flexShrink: 0 }} /> Break negative thought loops</li>
+          <li className="flex items-center" style={{ gap: "0.5rem" }}><Sparkles className="text-amber-500" style={{ width: "1rem", height: "1rem", flexShrink: 0 }} /> Understand your patterns</li>
+          <li className="flex items-center" style={{ gap: "0.5rem" }}><Sparkles className="text-amber-500" style={{ width: "1rem", height: "1rem", flexShrink: 0 }} /> Get personalized tools that actually work</li>
         </ul>
 
         {/* DISCLAIMER */}
-        <p className="mb-6 text-xs text-slate-500 dark:text-slate-400 text-center" data-testid="text-disclaimer">
+        <p className="text-xs text-slate-500 dark:text-slate-400 text-center" style={{ marginBottom: "1.5rem" }} data-testid="text-disclaimer">
           Educational wellness tools — not medical advice. By tapping below, you confirm you are 18+. In crisis?{" "}
           <Link href="/crisis" className="underline font-medium text-rose-600 dark:text-rose-400" data-testid="link-crisis-inline">
             Get help now
@@ -876,7 +888,7 @@ export default function Start() {
         </p>
 
         {/* THREE TOOL BUTTONS */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8" data-testid="section-tools">
+        <section className="grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "0.75rem", marginBottom: "2rem" }} data-testid="section-tools">
           {TOOL_BUTTONS.map((btn) => {
             const Icon = btn.icon;
             const isLoading = loading === btn.id;
@@ -886,21 +898,22 @@ export default function Start() {
                 onClick={() => runTool(btn.id, btn.message)}
                 disabled={loading !== null}
                 data-testid={btn.testId}
-                className="group flex flex-col items-start text-left gap-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-5 text-slate-900 dark:text-slate-50 shadow-sm hover:shadow-md hover:border-amber-400 dark:hover:border-amber-500 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                className="group flex flex-col items-start text-left border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-50 shadow-sm hover:shadow-md hover:border-amber-400 dark:hover:border-amber-500 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                style={{ gap: "0.75rem", borderRadius: "1rem", padding: "1.25rem" }}
               >
                 <div className="flex items-center justify-between w-full">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 flex items-center justify-center group-hover:scale-105 transition-transform" style={{ width: "2.5rem", height: "2.5rem", borderRadius: "0.75rem", flexShrink: 0 }}>
                     {isLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin text-amber-600 dark:text-amber-400" />
+                      <Loader2 className="animate-spin text-amber-600 dark:text-amber-400" style={{ width: "1.25rem", height: "1.25rem" }} />
                     ) : (
-                      <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                      <Icon className="text-amber-600 dark:text-amber-400" style={{ width: "1.25rem", height: "1.25rem" }} />
                     )}
                   </div>
-                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-700/50">
+                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 rounded-full bg-slate-100 dark:bg-slate-700/50" style={{ padding: "0.25rem 0.5rem" }}>
                     {btn.duration}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col" style={{ gap: "0.25rem" }}>
                   <span className="text-base font-semibold text-slate-900 dark:text-slate-50">{btn.label}</span>
                   <span className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{btn.description}</span>
                 </div>
@@ -911,7 +924,7 @@ export default function Start() {
 
         {/* BROWSE FREE TOOLS — full-width sage CTA (v5.8.102 V49 Fix H1), additive to paywall */}
         <section
-          className="mb-8"
+          style={{ marginBottom: "2rem" }}
           aria-label="Browse all free wellness tools"
           data-testid="section-browse-free-tools"
         >
@@ -929,11 +942,11 @@ export default function Start() {
             }}
             data-testid="link-browse-free-tools"
           >
-            <Sparkles className="w-5 h-5" aria-hidden="true" />
+            <Sparkles aria-hidden="true" style={{ width: "1.25rem", height: "1.25rem" }} />
             <span>Browse all free tools</span>
-            <ArrowRight className="w-5 h-5" aria-hidden="true" />
+            <ArrowRight aria-hidden="true" style={{ width: "1.25rem", height: "1.25rem" }} />
           </Link>
-          <p className="mt-2 text-center text-xs text-slate-600 dark:text-slate-400">
+          <p className="text-center text-xs text-slate-600 dark:text-slate-400" style={{ marginTop: "0.5rem" }}>
             Free, no signup needed. 8 evidence-informed exercises.
           </p>
         </section>
@@ -941,11 +954,12 @@ export default function Start() {
         {/* RESULT PANEL */}
         {error && (
           <div
-            className="mb-6 rounded-xl border border-rose-200 bg-rose-50 dark:border-rose-900 dark:bg-rose-950/40 p-4 text-sm text-rose-800 dark:text-rose-200 flex items-start gap-2"
+            className="border border-rose-200 bg-rose-50 dark:border-rose-900 dark:bg-rose-950/40 text-sm text-rose-800 dark:text-rose-200 flex items-start"
+            style={{ marginBottom: "1.5rem", borderRadius: "0.75rem", padding: "1rem", gap: "0.5rem" }}
             data-testid="alert-error"
           >
-            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-            <div className="flex-1 flex flex-col gap-2">
+            <AlertCircle className="flex-shrink-0" style={{ width: "1rem", height: "1rem", marginTop: "0.125rem", flexShrink: 0 }} />
+            <div className="flex flex-col" style={{ flex: 1, gap: "0.5rem" }}>
               <span>{error}</span>
               {lastAttemptRef.current && (
                 <button
@@ -955,11 +969,12 @@ export default function Start() {
                     if (a) void runTool(a.id, a.message);
                   }}
                   disabled={!!loading}
-                  className="self-start inline-flex items-center gap-1.5 rounded-lg border border-rose-300 dark:border-rose-700 bg-white dark:bg-rose-900/40 px-3 py-1.5 text-xs font-semibold text-rose-800 dark:text-rose-100 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="inline-flex items-center border border-rose-300 dark:border-rose-700 bg-white dark:bg-rose-900/40 text-xs font-semibold text-rose-800 dark:text-rose-100 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={{ alignSelf: "flex-start", gap: "0.375rem", borderRadius: "0.5rem", padding: "0.375rem 0.75rem" }}
                   data-testid="button-retry-tool"
                   aria-label="Try again"
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
+                  <RefreshCw className={loading ? "animate-spin" : ""} style={{ width: "0.875rem", height: "0.875rem" }} />
                   {loading ? "Trying again…" : "Try again"}
                 </button>
               )}
@@ -969,23 +984,25 @@ export default function Start() {
 
         {crisis && (
           <div
-            className="mb-6 rounded-xl border-2 border-rose-300 bg-rose-50 dark:border-rose-700 dark:bg-rose-950/60 p-5"
+            className="border-2 border-rose-300 bg-rose-50 dark:border-rose-700 dark:bg-rose-950/60"
+            style={{ marginBottom: "1.5rem", borderRadius: "0.75rem", padding: "1.25rem" }}
             data-testid="alert-crisis"
           >
-            <h2 className="text-lg font-semibold text-rose-900 dark:text-rose-100 mb-2">You're not alone.</h2>
-            <p className="text-sm text-rose-800 dark:text-rose-200 mb-3">
+            <h2 className="text-lg font-semibold text-rose-900 dark:text-rose-100" style={{ marginBottom: "0.5rem" }}>You're not alone.</h2>
+            <p className="text-sm text-rose-800 dark:text-rose-200" style={{ marginBottom: "0.75rem" }}>
               If you're in crisis, please reach out for immediate support.
             </p>
-            <ul className="space-y-1 text-sm text-rose-800 dark:text-rose-200 mb-4">
+            <ul className="text-sm text-rose-800 dark:text-rose-200" style={{ display: "flex", flexDirection: "column", gap: "0.25rem", marginBottom: "1rem" }}>
               <li><strong>988</strong> — Suicide & Crisis Lifeline (call or text)</li>
               <li><strong>Text HOME to 741741</strong> — Crisis Text Line</li>
             </ul>
             <Link
               href="/crisis"
-              className="inline-flex items-center gap-1 text-sm font-medium text-rose-900 dark:text-rose-100 underline"
+              className="inline-flex items-center text-sm font-medium text-rose-900 dark:text-rose-100 underline"
+              style={{ gap: "0.25rem" }}
               data-testid="link-crisis-resources"
             >
-              More crisis resources <ArrowRight className="w-3 h-3" />
+              More crisis resources <ArrowRight style={{ width: "0.75rem", height: "0.75rem" }} />
             </Link>
           </div>
         )}
@@ -996,11 +1013,13 @@ export default function Start() {
           const body = match ? match[2] : null;
           return (
             <section
-              className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 mb-4 shadow-sm"
+              className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm"
+              style={{ borderRadius: "1rem", padding: "1.5rem", marginBottom: "1rem" }}
               data-testid="panel-reply"
             >
               <p
-                className="text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-50 leading-snug mb-3"
+                className="text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-50 leading-snug"
+                style={{ marginBottom: "0.75rem" }}
                 data-testid="text-reply-validation"
               >
                 {validation}
@@ -1018,7 +1037,7 @@ export default function Start() {
                   scrolling on most viewports, but never intercepts the user's
                   flow with the tool/share affordances below. Fires only on
                   explicit click, never on impression. */}
-              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/60">
+              <div className="border-t border-slate-100 dark:border-slate-700/60" style={{ marginTop: "1rem", paddingTop: "1rem" }}>
                 <FeedbackPrompt
                   surface="start"
                   /* Prefer the CANONICAL server-resolved tool id (the actual
@@ -1037,33 +1056,35 @@ export default function Start() {
 
         {tool && !crisis && (
           <section
-            className="rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20 p-6 mb-6"
+            className="border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20"
+            style={{ borderRadius: "1rem", padding: "1.5rem", marginBottom: "1.5rem" }}
             data-testid="panel-tool-result"
           >
-            <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-5 h-5 text-amber-600" />
+            <div className="flex items-center" style={{ gap: "0.5rem", marginBottom: "0.75rem" }}>
+              <Sparkles className="text-amber-600" style={{ width: "1.25rem", height: "1.25rem", flexShrink: 0 }} />
               <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50" data-testid="text-tool-title">
                 {tool.tool.title}
               </h2>
-              <span className="text-xs text-slate-500 dark:text-slate-400 ml-auto" data-testid="text-tool-duration">
+              <span className="text-xs text-slate-500 dark:text-slate-400" style={{ marginLeft: "auto" }} data-testid="text-tool-duration">
                 ~{tool.tool.durationMin} min
               </span>
             </div>
-            <p className="text-slate-700 dark:text-slate-300 mb-4 italic" data-testid="text-tool-intro">
+            <p className="text-slate-700 dark:text-slate-300 italic" style={{ marginBottom: "1rem" }} data-testid="text-tool-intro">
               {tool.exercise.intro}
             </p>
-            <ol className="space-y-3 mb-4" data-testid="list-tool-steps">
+            <ol style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1rem" }} data-testid="list-tool-steps">
               {tool.exercise.steps.map((step, i) => (
                 <Fragment key={i}>
-                  <li className="flex items-start gap-4" data-testid={`step-tool-${i}`}>
-                    <span className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 dark:from-amber-600 dark:to-amber-800 text-white font-semibold text-base flex items-center justify-center shadow-sm ring-1 ring-amber-400/40 dark:ring-amber-700/60">
+                  <li className="flex items-start" style={{ gap: "1rem" }} data-testid={`step-tool-${i}`}>
+                    <span className="rounded-full bg-gradient-to-br from-amber-300 to-amber-500 dark:from-amber-600 dark:to-amber-800 text-white font-semibold text-base flex items-center justify-center shadow-sm ring-1 ring-amber-400/40 dark:ring-amber-700/60" style={{ flexShrink: 0, width: "2.25rem", height: "2.25rem" }}>
                       {i + 1}
                     </span>
-                    <span className="text-slate-800 dark:text-slate-200 pt-1.5 leading-relaxed">{step}</span>
+                    <span className="text-slate-800 dark:text-slate-200 leading-relaxed" style={{ paddingTop: "0.375rem" }}>{step}</span>
                   </li>
                   {i === 0 && tool.exercise.steps.length > 1 && (
                     <p
-                      className="text-xs text-amber-700 dark:text-amber-400 italic text-center pl-10"
+                      className="text-xs text-amber-700 dark:text-amber-400 italic text-center"
+                      style={{ paddingLeft: "2.5rem" }}
                       data-testid="text-mid-reinforce"
                     >
                       You're doing this right — keep going.
@@ -1072,16 +1093,17 @@ export default function Start() {
                 </Fragment>
               ))}
             </ol>
-            <p className="text-slate-700 dark:text-slate-300 text-sm border-t border-amber-200 dark:border-amber-800 pt-3" data-testid="text-tool-closing">
+            <p className="text-slate-700 dark:text-slate-300 text-sm border-t border-amber-200 dark:border-amber-800" style={{ paddingTop: "0.75rem" }} data-testid="text-tool-closing">
               {tool.exercise.closing}
             </p>
             <p
-              className="text-sm font-medium text-slate-800 dark:text-slate-100 text-center mt-3"
+              className="text-sm font-medium text-slate-800 dark:text-slate-100 text-center"
+              style={{ marginTop: "0.75rem" }}
               data-testid="text-completion-anchor"
             >
               Take a second — something just shifted.
             </p>
-            <div className="mt-4 flex justify-center">
+            <div className="flex justify-center" style={{ marginTop: "1rem" }}>
               <button
                 type="button"
                 disabled={toolCompleted}
@@ -1098,22 +1120,24 @@ export default function Start() {
                   });
                   setShowUpsell(true);
                 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-medium text-amber-800 dark:text-amber-200 hover:bg-amber-50 dark:hover:bg-amber-950/40 disabled:opacity-60 disabled:cursor-default transition-colors"
+                className="inline-flex items-center border border-amber-300 dark:border-amber-700 bg-white dark:bg-slate-800 text-sm font-medium text-amber-800 dark:text-amber-200 hover:bg-amber-50 dark:hover:bg-amber-950/40 disabled:opacity-60 disabled:cursor-default transition-colors"
+                style={{ gap: "0.5rem", borderRadius: "0.75rem", padding: "0.5rem 1rem" }}
                 data-testid="button-tool-complete"
               >
                 {toolCompleted ? "Marked complete" : "I did it"}
               </button>
             </div>
-            <div className="mt-5 pt-4 border-t border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
+            <div className="border-t border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row items-center justify-between" style={{ marginTop: "1.25rem", paddingTop: "1rem", gap: "0.75rem" }}>
               <p className="text-xs text-slate-600 dark:text-slate-400 text-center sm:text-left">
                 Want to track your streak and unlock deeper tools?
               </p>
               <Link
                 href="/register"
-                className="inline-flex items-center gap-1 text-sm font-medium text-amber-700 dark:text-amber-400 hover:underline"
+                className="inline-flex items-center text-sm font-medium text-amber-700 dark:text-amber-400 hover:underline"
+                style={{ gap: "0.25rem" }}
                 data-testid="link-signup"
               >
-                Create free account <ArrowRight className="w-3 h-3" />
+                Create free account <ArrowRight style={{ width: "0.75rem", height: "0.75rem" }} />
               </Link>
             </div>
           </section>
@@ -1121,15 +1145,17 @@ export default function Start() {
 
         {result && !crisis && !error && (
           <section
-            className="rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/60 dark:bg-emerald-950/30 p-5 mb-6 flex flex-col sm:flex-row items-center gap-4"
+            className="border border-emerald-200 dark:border-emerald-800 bg-emerald-50/60 dark:bg-emerald-950/30 flex flex-col sm:flex-row items-center"
+            style={{ borderRadius: "1rem", padding: "1.25rem", marginBottom: "1.5rem", gap: "1rem" }}
             data-testid="panel-return-cta"
           >
             {streak?.authenticated && typeof streak.currentStreak === "number" && streak.currentStreak > 0 ? (
               <div
-                className="flex items-center gap-2 text-emerald-900 dark:text-emerald-100"
+                className="flex items-center text-emerald-900 dark:text-emerald-100"
+                style={{ gap: "0.5rem" }}
                 data-testid="badge-streak"
               >
-                <Flame className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                <Flame className="text-emerald-600 dark:text-emerald-400" style={{ width: "1.25rem", height: "1.25rem", flexShrink: 0 }} />
                 <span className="font-semibold" data-testid="text-streak-day">
                   Day {streak.currentStreak}
                 </span>
@@ -1138,13 +1164,14 @@ export default function Start() {
                 </span>
               </div>
             ) : (
-              <div className="flex items-center gap-2 text-emerald-900 dark:text-emerald-100" data-testid="badge-progress">
-                <Sunrise className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+              <div className="flex items-center text-emerald-900 dark:text-emerald-100" style={{ gap: "0.5rem" }} data-testid="badge-progress">
+                <Sunrise className="text-emerald-600 dark:text-emerald-400" style={{ width: "1.25rem", height: "1.25rem", flexShrink: 0 }} />
                 <span className="text-sm font-medium">You showed up for yourself today.</span>
               </div>
             )}
             <p
               className="text-sm text-emerald-800 dark:text-emerald-200 sm:ml-auto text-center sm:text-right"
+              style={{ marginLeft: "auto" }}
               data-testid="text-return-tomorrow"
             >
               Come back tomorrow for a 1-minute reset.
@@ -1154,7 +1181,8 @@ export default function Start() {
 
         {result && !crisis && !error && (
           <p
-            className="text-sm text-center text-slate-600 dark:text-slate-300 mb-6"
+            className="text-sm text-center text-slate-600 dark:text-slate-300"
+            style={{ marginBottom: "1.5rem" }}
             data-testid="text-identity-reinforce"
           >
             You're building a habit of taking care of yourself.
@@ -1164,27 +1192,27 @@ export default function Start() {
         {streak?.authenticated && typeof streak.currentStreak === "number" && (
           <>
             {streak.currentStreak === 3 && (
-              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-3">
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400" style={{ marginBottom: "1rem" }} data-testid="text-milestone-3">
                 You're building momentum.
               </p>
             )}
             {streak.currentStreak === 7 && (
-              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-7">
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400" style={{ marginBottom: "1rem" }} data-testid="text-milestone-7">
                 This is becoming a real habit.
               </p>
             )}
             {streak.currentStreak === 14 && (
-              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-14">
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400" style={{ marginBottom: "1rem" }} data-testid="text-milestone-14">
                 You're showing up for yourself consistently.
               </p>
             )}
             {streak.currentStreak === 30 && (
-              <p className="text-sm text-center text-amber-700 dark:text-amber-400 mb-4" data-testid="text-milestone-30">
+              <p className="text-sm text-center text-amber-700 dark:text-amber-400" style={{ marginBottom: "1rem" }} data-testid="text-milestone-30">
                 This is part of who you are now.
               </p>
             )}
             {streak.currentStreak === 1 && (streak.longestStreak ?? 0) > 1 && (
-              <p className="text-sm text-center text-slate-600 dark:text-slate-300 mb-4" data-testid="text-recovery">
+              <p className="text-sm text-center text-slate-600 dark:text-slate-300" style={{ marginBottom: "1rem" }} data-testid="text-recovery">
                 Starting fresh counts. You're back.
               </p>
             )}
@@ -1193,7 +1221,8 @@ export default function Start() {
 
         {result && !crisis && !error && (streak?.daysAway ?? 0) >= 2 && (
           <p
-            className="text-sm text-center text-slate-700 dark:text-slate-200 mb-6"
+            className="text-sm text-center text-slate-700 dark:text-slate-200"
+            style={{ marginBottom: "1.5rem" }}
             data-testid="text-reactivation"
           >
             It's been {streak?.daysAway} days. Let's reset together.
@@ -1224,22 +1253,22 @@ export default function Start() {
 
         {/* HOW IT WORKS */}
         {!result && (
-          <section className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8" data-testid="section-how-it-works">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-4 text-center">
+          <section className="border-t border-slate-200 dark:border-slate-800" style={{ marginTop: "3rem", paddingTop: "2rem" }} data-testid="section-how-it-works">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 text-center" style={{ marginBottom: "1rem" }}>
               How it works
             </h3>
-            <ol className="space-y-3 max-w-md mx-auto text-sm text-slate-700 dark:text-slate-300">
-              <li className="flex gap-3"><span className="font-semibold text-amber-600">1.</span> Say what's going on</li>
-              <li className="flex gap-3"><span className="font-semibold text-amber-600">2.</span> We understand the pattern</li>
-              <li className="flex gap-3"><span className="font-semibold text-amber-600">3.</span> You get a real tool — not advice</li>
+            <ol className="text-sm text-slate-700 dark:text-slate-300" style={{ maxWidth: "28rem", margin: "0 auto", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              <li className="flex" style={{ gap: "0.75rem" }}><span className="font-semibold text-amber-600">1.</span> Say what's going on</li>
+              <li className="flex" style={{ gap: "0.75rem" }}><span className="font-semibold text-amber-600">2.</span> We understand the pattern</li>
+              <li className="flex" style={{ gap: "0.75rem" }}><span className="font-semibold text-amber-600">3.</span> You get a real tool — not advice</li>
             </ol>
           </section>
         )}
 
         {/* FINAL CTA */}
-        <footer className="mt-16 text-center text-xs text-slate-500 dark:text-slate-400">
-          <p className="mb-2">You don't need to figure everything out. Start with one small reset.</p>
-          <p className="mb-3 opacity-80" data-testid="text-bookmark-tip">
+        <footer className="text-center text-xs text-slate-500 dark:text-slate-400" style={{ marginTop: "4rem" }}>
+          <p style={{ marginBottom: "0.5rem" }}>You don't need to figure everything out. Start with one small reset.</p>
+          <p className="opacity-80" style={{ marginBottom: "0.75rem" }} data-testid="text-bookmark-tip">
             Tip: bookmark this page and come back daily.
           </p>
           <Link href="/" className="underline" data-testid="link-home">Back to homepage</Link>
