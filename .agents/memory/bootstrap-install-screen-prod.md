@@ -1,15 +1,14 @@
 ---
 name: Production stuck on "MMHB bootstrap (installing)" screen
-description: Prod shows the bootstrap placeholder because deps aren't installed at build time, forcing a slow runtime npm install that races the healthcheck.
+description: bootstrap.mjs used a cwd-relative existsSync("node_modules/express") that falsely reports deps missing in the prod VM, triggering an endless slow runtime npm install.
 ---
 
-**Symptom:** published app serves "MMHB bootstrap (installing)" / "MMHB BOOTSTRAP INSTALL" for every URL; deployment logs show repeated `healthcheck / returned status 500`, then `[bootstrap] listening ... needs_install=true`, then `[bootstrap] running npm install --omit=dev` taking 145s+.
+**Symptom:** published app serves "MMHB bootstrap (installing)" / "MMHB BOOTSTRAP INSTALL" for every URL; deployment logs repeat `healthcheck / returned status 500`, then `[bootstrap] listening ... needs_install=true`, then `[bootstrap] running npm install --omit=dev` — and never log "install complete" / "handing off".
 
-**Mechanism:** `.replit [deployment] run = node server/bootstrap.mjs`. bootstrap.mjs checks `existsSync("node_modules/express")`; if absent it serves a placeholder page and runs `npm install` AT RUNTIME, then hands off to `server/app.mjs`. The runtime install is slow and loses the race against the deploy healthcheck, so the app never goes healthy and users see the placeholder.
+**ROOT CAUSE (cwd trap):** `server/bootstrap.mjs` checked `existsSync("node_modules/express")` — a path relative to `process.cwd()`. In the prod VM the working dir is NOT the repo root, so the check returns false even though `node_modules` IS present at runtime → bootstrap needlessly runs a slow `npm install` that races/loses the healthcheck and never hands off. `server/app.mjs` was already fixed for this same trap (resolves assets via `__dirname`, not cwd — see its inline comment).
 
-**Root cause:** the deploy `build` was `npm run build` (vite build ONLY) — it never populated `node_modules`, so the runtime VM image had no express.
+**FIX:** resolve deps cwd-independently — `createRequire(import.meta.url).resolve("express")` (fallback `existsSync(path.join(ROOT, "node_modules","express"))` where `ROOT = path.resolve(__dirname,"..")`), and pass `cwd: ROOT` to the install spawn. ESM `import("./app.mjs")` is already cwd-independent. Then user must REPUBLISH (bootstrap.mjs is a server file, not part of vite build; no local rebuild needed).
 
-**Fix:** make the build install deps so they persist into the runtime image and bootstrap hands off instantly:
-`build = ["sh","-c","npm install && NODE_OPTIONS=--max-old-space-size=4096 npm run build"]` (heap flag avoids the known vite "rendering chunks" OOM). Keep run = bootstrap (it now finds express → immediate handoff). Set via deployConfig, then user must REPUBLISH.
+**MISTAKE TO AVOID:** my first attempt added `npm install` to the deploy build command — did NOT help, because deps already reach runtime; the bug was purely the cwd-relative existence check. When prod shows "installing" forever, suspect cwd-relative path checks before build config.
 
-**How to apply:** dev preview can be perfectly fine while prod is broken — always check `fetch_deployment_logs`, not the dev screenshot, when the user reports the live/published app is broken.
+**How to apply:** dev preview is served by `node server/app.mjs` directly (never exercises bootstrap.mjs), so dev can look perfect while prod is broken — always read `fetch_deployment_logs`, and grep boot/server code for cwd-relative `existsSync(...)`/`readFile(...)`/static-dir paths.
