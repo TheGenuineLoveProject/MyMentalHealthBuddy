@@ -67,30 +67,31 @@ export default function ForgotPassword() {
           description="Password reset instructions have been sent to your email address."
           noindex
         />
-        <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
+        <div className="min-h-screen flex items-center justify-center overflow-hidden relative" style={{ background: 'var(--glp-paper)', padding: '1.5rem' }}>
           <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
           <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md v28-card rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
-            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+          <div className="w-full v28-card text-center relative z-10 animate-fade-in-up" style={{ maxWidth: '28rem', borderRadius: '1.25rem', padding: '2rem' }}>
+            <div className="w-20 h-20 flex items-center justify-center mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', borderRadius: '1rem', marginBottom: '1.5rem' }}>
               <CheckCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
-            <h1 className="text-2xl font-display font-bold mb-3 text-[var(--text)]" data-testid="text-success-title">
+            <h1 className="text-2xl font-display font-bold text-[var(--text)]" style={{ marginBottom: '0.75rem' }} data-testid="text-success-title">
               Check Your Email
             </h1>
-            <p className="text-[var(--text-secondary)] mb-4" data-testid="text-success-message">
+            <p className="text-[var(--text-secondary)]" style={{ marginBottom: '1rem' }} data-testid="text-success-message">
               If an account exists with that email address, we've sent instructions to reset your password.
             </p>
-            <div className="flex items-center justify-center gap-2 text-[var(--text-muted)] text-sm mb-6 p-3 bg-[var(--surface)]/50 rounded-xl">
+            <div className="flex items-center justify-center text-[var(--text-muted)] text-sm bg-[var(--surface)]/50" style={{ gap: '0.5rem', marginBottom: '1.5rem', padding: '0.75rem', borderRadius: '0.75rem' }}>
               <Clock className="w-4 h-4" aria-hidden="true" />
               <span>Link expires in 1 hour</span>
             </div>
-            <p className="text-[var(--text-muted)] text-sm mb-6">
+            <p className="text-[var(--text-muted)] text-sm" style={{ marginBottom: '1.5rem' }}>
               Didn't receive an email? Check your spam folder or try again.
             </p>
             <Link 
               href="/login" 
-              className="inline-flex items-center justify-center gap-2 text-[var(--primary)] hover:text-[var(--primary-hover)] font-medium transition-colors"
+              className="inline-flex items-center justify-center text-[var(--primary)] hover:text-[var(--primary-hover)] font-medium transition-colors"
+              style={{ gap: '0.5rem' }}
               data-testid="link-back-to-login"
             >
               <ArrowLeft className="w-4 h-4" aria-hidden="true" />
@@ -128,14 +129,15 @@ export default function ForgotPassword() {
           description="Reset your MyMentalHealthBuddy password. We'll send you a secure link to create a new password."
           noindex
         />
-      <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'var(--glp-paper)' }}>
+      <div className="min-h-screen flex items-center justify-center overflow-hidden relative" style={{ background: 'var(--glp-paper)', padding: '1.5rem' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse motion-reduce:animate-none" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse motion-reduce:animate-none" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         
-        <div className="w-full max-w-md relative z-10 animate-fade-in-up">
+        <div className="w-full relative z-10 animate-fade-in-up" style={{ maxWidth: '28rem' }}>
           <Link 
             href="/" 
-            className="flex items-center justify-center gap-4 mb-10 hover:opacity-90 transition-opacity group"
+            className="flex items-center justify-center hover:opacity-90 transition-opacity group"
+            style={{ gap: '1rem', marginBottom: '2.5rem' }}
             data-testid="link-home"
           >
             <span
@@ -157,12 +159,12 @@ export default function ForgotPassword() {
             <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>MyMentalHealthBuddy</span>
           </Link>
           
-          <div className="card-elevated p-8">
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)' }}>
+          <div className="card-elevated" style={{ padding: '2rem', borderRadius: '1.25rem' }}>
+            <div className="text-center" style={{ marginBottom: '1.5rem' }}>
+              <div className="w-16 h-16 flex items-center justify-center mx-auto shadow-lg" style={{ background: 'linear-gradient(135deg, #4A7E72 0%, #A8C9A0 100%)', borderRadius: '1rem', marginBottom: '1rem' }}>
                 <Mail className="w-8 h-8 text-white" aria-hidden="true" />
               </div>
-              <h1 className="text-2xl font-display font-bold mb-2 text-[var(--text)]" data-testid="text-forgot-password-title">
+              <h1 className="text-2xl font-display font-bold text-[var(--text)]" style={{ marginBottom: '0.5rem' }} data-testid="text-forgot-password-title">
                 Forgot Password?
               </h1>
               <p className="text-[var(--text-secondary)]">
@@ -172,28 +174,30 @@ export default function ForgotPassword() {
 
             {errors.root && (
               <div 
-                className="mb-4 p-4 bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 rounded-xl text-[var(--accent-rose)] text-sm flex items-start gap-3" 
+                className="bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 text-[var(--accent-rose)] text-sm flex items-start" 
+                style={{ marginBottom: '1rem', padding: '1rem', borderRadius: '0.75rem', gap: '0.75rem' }}
                 data-testid="text-error"
                 role="alert"
               >
-                <Shield className="w-5 h-5 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <Shield className="w-5 h-5 flex-shrink-0" style={{ marginTop: '0.125rem' }} aria-hidden="true" />
                 <span>{errors.root.message}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit(onSubmit)} data-testid="form-forgot-password" noValidate>
-              <div className="mb-6">
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-[var(--text)]">
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label htmlFor="email" className="block text-sm font-medium text-[var(--text)]" style={{ marginBottom: '0.5rem' }}>
                   Email Address
                 </label>
                 <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">
+                  <div className="absolute text-[var(--text-muted)]" style={{ left: '1rem', top: '50%', transform: 'translateY(-50%)' }}>
                     <Mail className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <input
                     id="email"
                     type="email"
-                    className={`input-lg pl-12 w-full ${errors.email ? "border-[var(--accent-rose)] focus:border-[var(--accent-rose)]" : ""}`}
+                    className={`input-lg w-full ${errors.email ? "border-[var(--accent-rose)] focus:border-[var(--accent-rose)]" : ""}`}
+                    style={{ paddingLeft: '3rem' }}
                     placeholder="you@example.com"
                     autoComplete="email"
                     aria-invalid={errors.email ? "true" : "false"}
@@ -203,7 +207,7 @@ export default function ForgotPassword() {
                   />
                 </div>
                 {errors.email && (
-                  <p id="email-error" className="mt-2 text-sm text-[var(--accent-rose)] flex items-center gap-1.5" role="alert">
+                  <p id="email-error" className="text-sm text-[var(--accent-rose)] flex items-center" style={{ marginTop: '0.5rem', gap: '0.375rem' }} role="alert">
                     <span className="w-1 h-1 bg-[var(--accent-rose)] rounded-full"></span>
                     {errors.email.message}
                   </p>
@@ -213,7 +217,8 @@ export default function ForgotPassword() {
               <button
                 type="submit"
                 disabled={resetMutation.isPending}
-                className="btn btn-gradient w-full py-4 text-base font-medium flex items-center justify-center gap-2"
+                className="btn-premium w-full text-base font-medium flex items-center justify-center"
+                style={{ width: '100%', padding: '0.95rem 1.5rem', minHeight: '54px', borderRadius: '0.75rem', gap: '0.5rem' }}
                 data-testid="button-submit"
               >
                 {resetMutation.isPending ? (
@@ -230,7 +235,7 @@ export default function ForgotPassword() {
               </button>
             </form>
 
-            <p className="mt-6 text-center text-[var(--text-secondary)]">
+            <p className="text-center text-[var(--text-secondary)]" style={{ marginTop: '1.5rem' }}>
               Remember your password?{" "}
               <Link 
                 href="/login" 
@@ -242,7 +247,7 @@ export default function ForgotPassword() {
             </p>
           </div>
           
-          <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
+          <p className="text-center text-sm text-[var(--text-muted)]" style={{ marginTop: '1.5rem' }}>
             Your security is our priority. Reset links expire after 1 hour.
           </p>
         </div>
