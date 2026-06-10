@@ -247,3 +247,6 @@ docs/platform-map/
 
 # Generated docs automation scan artifacts
 docs/automation/scan-errors.md
+
+# Generated docs migration audit artifacts
+docs/migration/avatar-legacy-audit.txt
