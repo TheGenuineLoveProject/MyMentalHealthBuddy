@@ -235,3 +235,6 @@ docs/inventory/route-inventory.md
 
 # Generated docs duplicate scan artifacts
 docs/duplicates/
+
+# Generated docs audit artifacts
+docs/audits/
