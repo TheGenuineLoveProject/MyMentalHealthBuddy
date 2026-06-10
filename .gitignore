@@ -241,3 +241,6 @@ docs/audits/
 
 # Generated docs design audit artifacts
 docs/design-audit/
+
+# Generated docs platform-map artifacts
+docs/platform-map/
