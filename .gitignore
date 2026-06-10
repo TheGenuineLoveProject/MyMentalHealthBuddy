@@ -177,3 +177,24 @@ client/analytics/
 *.sha256
 *.tsbuildinfo
 *.STABLE
+
+# Generated root docs report artifacts
+docs/API_WIRING_REPORT.md
+docs/DEDUP_REPORT.md
+docs/DEEP_SCAN_REPORT.md
+docs/DRIFT_SCAN.md
+docs/DRY-RUN-AUDIT-REPORT.md
+docs/DUPLICATE_PREVENTION.md
+docs/DUPLICATE_REPORT.md
+docs/EVOLUTION_REPORT.md
+docs/FULL_SYSTEM_AUDIT_SUMMARY.md
+docs/INVENTORY.md
+docs/LINK_AUDIT_REPORT.md
+docs/NAV_LINK_AUDIT.md
+docs/NO_DUPES_REPORT.md
+docs/VISUAL_DOCTOR_AUDIT.md
+docs/VISUAL_DOCTOR_REPORT.md
+docs/scan-broken-links-result.json
+docs/scan-deadcode-result.json
+docs/scan-duplicates-result.json
+docs/scan-routes-result.json
