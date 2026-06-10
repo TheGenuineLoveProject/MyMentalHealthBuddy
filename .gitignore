@@ -265,3 +265,6 @@ static-export/
 
 # Generated screenshot review artifacts
 screenshots/
+
+# Generated docs content-audit artifacts
+docs/content-audit/
