@@ -232,3 +232,6 @@ docs/inventory/RUNTIME_ENTRYPOINT_SCAN.txt
 docs/inventory/database-tables.txt
 docs/inventory/package-snapshot.txt
 docs/inventory/route-inventory.md
+
+# Generated docs duplicate scan artifacts
+docs/duplicates/
