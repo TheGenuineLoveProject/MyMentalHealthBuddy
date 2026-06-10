@@ -256,3 +256,6 @@ docs/process-engine/reports/*_dryrun.json
 
 # Generated docs conversion audit artifacts
 docs/conversion-audit/subscription-flow.md
+
+# Generated docs avatar audit artifacts
+docs/avatar-audit/avatar-registry.md
