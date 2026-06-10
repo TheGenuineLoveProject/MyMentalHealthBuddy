@@ -162,3 +162,6 @@ client/public/lumi/official_backup_orig/
 
 # Generated client diagnostic snapshots
 client/docs/diagnostics/
+
+# Generated client analytics reports and snapshots
+client/analytics/
