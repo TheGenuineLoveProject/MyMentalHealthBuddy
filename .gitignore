@@ -198,3 +198,20 @@ docs/scan-broken-links-result.json
 docs/scan-deadcode-result.json
 docs/scan-duplicates-result.json
 docs/scan-routes-result.json
+
+# Generated docs batch scan artifacts
+docs/batch-10/deep-scan.json
+docs/batch-10/deep-scan.md
+docs/batch-11/deep-scan.json
+docs/batch-11/deep-scan.md
+docs/batch-11/health-report.md
+docs/batch-11/ui-consistency-audit.md
+docs/batch-12/ui-overcrowding-audit.md
+docs/batch-14/deep-scan.json
+docs/batch-14/deep-scan.md
+docs/batch-14/duplicate-risk-ledger.md
+docs/batch-14/safety-copy-scan.md
+docs/batch-6/final-report.md
+docs/batch-6/scan-report.md
+docs/batch-9/deep-scan.json
+docs/batch-9/deep-scan.md
