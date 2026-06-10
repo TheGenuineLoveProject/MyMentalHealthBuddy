@@ -259,3 +259,6 @@ docs/conversion-audit/subscription-flow.md
 
 # Generated docs avatar audit artifacts
 docs/avatar-audit/avatar-registry.md
+
+# Generated static export mirror artifacts
+static-export/
