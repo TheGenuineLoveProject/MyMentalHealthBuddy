@@ -253,3 +253,6 @@ docs/migration/avatar-legacy-audit.txt
 
 # Generated process-engine dry-run report artifacts
 docs/process-engine/reports/*_dryrun.json
+
+# Generated docs conversion audit artifacts
+docs/conversion-audit/subscription-flow.md
