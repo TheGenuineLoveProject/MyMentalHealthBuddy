@@ -244,3 +244,6 @@ docs/design-audit/
 
 # Generated docs platform-map artifacts
 docs/platform-map/
+
+# Generated docs automation scan artifacts
+docs/automation/scan-errors.md
