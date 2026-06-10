@@ -156,3 +156,6 @@ diagnostics/
 
 # Generated audit/report artifacts
 reports/
+
+# Generated/duplicate Lumi backup artifacts
+client/public/lumi/official_backup_orig/
