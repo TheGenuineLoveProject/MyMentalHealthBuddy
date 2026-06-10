@@ -238,3 +238,6 @@ docs/duplicates/
 
 # Generated docs audit artifacts
 docs/audits/
+
+# Generated docs design audit artifacts
+docs/design-audit/
