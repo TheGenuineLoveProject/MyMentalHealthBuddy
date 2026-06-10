@@ -215,3 +215,20 @@ docs/batch-6/final-report.md
 docs/batch-6/scan-report.md
 docs/batch-9/deep-scan.json
 docs/batch-9/deep-scan.md
+
+# Generated docs inventory artifacts
+docs/inventory/BUILD_SYSTEM_SCAN.txt
+docs/inventory/COMPONENT_LIST.txt
+docs/inventory/ENV_USAGE_SCAN_SUMMARY.md
+docs/inventory/GENERATED_ARTIFACT_BOUNDARY_PHASE_58.txt
+docs/inventory/LARGE_TRACKED_FILES_PHASE_58.txt
+docs/inventory/PHASE_67_TRACKED_ROUTE_BAK_FILES.md
+docs/inventory/PHASE_68_SENSITIVE_ROUTE_CRISIS_AUDIT.md
+docs/inventory/PHASE_69_ROUTE_DECLARATION_SCAN.md
+docs/inventory/ROUTE_CANDIDATES_PHASE_66.md
+docs/inventory/ROUTE_FAMILY_LOWRISK_PHASE_67.md
+docs/inventory/ROUTE_SCAN.txt
+docs/inventory/RUNTIME_ENTRYPOINT_SCAN.txt
+docs/inventory/database-tables.txt
+docs/inventory/package-snapshot.txt
+docs/inventory/route-inventory.md
