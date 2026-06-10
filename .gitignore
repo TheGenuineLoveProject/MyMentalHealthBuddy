@@ -262,3 +262,6 @@ docs/avatar-audit/avatar-registry.md
 
 # Generated static export mirror artifacts
 static-export/
+
+# Generated screenshot review artifacts
+screenshots/
