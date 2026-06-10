@@ -1,7 +1,0 @@
-{
-  "generatedAt": "2026-01-27T22:05:55.230Z",
-  "start": 1,
-  "count": 50,
-  "dryRun": true,
-  "note": "This is the shell-backed NEXT50 runner stub. It prints the plan and exits. Wire it to your process catalog as you build."
-}

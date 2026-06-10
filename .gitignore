@@ -250,3 +250,6 @@ docs/automation/scan-errors.md
 
 # Generated docs migration audit artifacts
 docs/migration/avatar-legacy-audit.txt
+
+# Generated process-engine dry-run report artifacts
+docs/process-engine/reports/*_dryrun.json
