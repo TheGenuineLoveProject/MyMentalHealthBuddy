@@ -282,3 +282,6 @@ platform-audit/runtime/
 # Generated local checkpoint markers
 checkpoints/current-branch.txt
 checkpoints/current-stable-sha.txt
+
+# Generated npm audit JSON snapshot
+/audit.json
