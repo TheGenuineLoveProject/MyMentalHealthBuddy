@@ -275,3 +275,6 @@ logs/*.log
 logs/**/*.jsonl
 logs/**/*.log
 ai/**/_audit.log.jsonl
+
+# Generated platform audit runtime snapshots
+platform-audit/runtime/
