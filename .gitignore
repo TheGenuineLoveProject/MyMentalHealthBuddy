@@ -278,3 +278,7 @@ ai/**/_audit.log.jsonl
 
 # Generated platform audit runtime snapshots
 platform-audit/runtime/
+
+# Generated local checkpoint markers
+checkpoints/current-branch.txt
+checkpoints/current-stable-sha.txt
