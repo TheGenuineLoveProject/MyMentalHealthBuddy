@@ -268,3 +268,10 @@ screenshots/
 
 # Generated docs content-audit artifacts
 docs/content-audit/
+
+# Generated runtime logs and AI audit logs
+logs/*.jsonl
+logs/*.log
+logs/**/*.jsonl
+logs/**/*.log
+ai/**/_audit.log.jsonl
