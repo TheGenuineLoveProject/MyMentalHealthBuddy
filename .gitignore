@@ -285,3 +285,6 @@ checkpoints/current-stable-sha.txt
 
 # Generated npm audit JSON snapshot
 /audit.json
+
+# Generated Vite bundle visualizer output
+/client/analysis.html
