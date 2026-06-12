@@ -288,3 +288,7 @@ checkpoints/current-stable-sha.txt
 
 # Generated Vite bundle visualizer output
 /client/analysis.html
+
+/docs/governance/reports/route-manifest.json
+
+/docs/governance/reports/route-integrity-report.md
