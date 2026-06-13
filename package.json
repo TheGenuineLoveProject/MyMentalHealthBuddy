@@ -76,7 +76,7 @@
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "drizzle-zod": "^0.8.3",
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.1",
     "express": "^4.22.2",
     "express-rate-limit": "^8.5.2",
     "express-session": "^1.19.0",
