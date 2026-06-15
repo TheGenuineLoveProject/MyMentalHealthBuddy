@@ -93,6 +93,26 @@ app.get("/health", (_req, res) => {
 });
 
 
+// Phase 113EG: /api/health must return 200 for API/runtime health checks.
+// Keep this before /api/health router mounts and canonical health guards.
+app.head("/api/health", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).end();
+});
+
+app.get("/api/health", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({
+    ok: true,
+    status: "healthy",
+    service: "tglp-mmmb-runtime",
+    endpoint: "/api/health",
+    publicHealth: "/health",
+    timestamp: new Date().toISOString()
+  });
+});
+
+
 // Trust the immediate proxy (Replit autoscale / load balancer) so that
 // req.ip and X-Forwarded-For are honoured by express-rate-limit. Without
 // this, rate limiters can either silently misfire (counting all traffic
