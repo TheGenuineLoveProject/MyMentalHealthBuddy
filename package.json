@@ -113,7 +113,7 @@
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.2",
     "valtio": "^2.3.2",
-    "vite": "^8.0.8",
+    "vite": "^8.0.16",
     "wouter": "^3.9.0",
     "ws": "^8.20.0",
     "xstate": "^5.32.0",
