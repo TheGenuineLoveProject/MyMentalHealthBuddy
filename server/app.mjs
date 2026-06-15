@@ -73,6 +73,53 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// Phase 113EK: universal earliest runtime health alias responder.
+// This must remain before canonical guards, routers, and static handlers.
+// It normalizes runtime health aliases used by Replit, deployment probes, and internal audits.
+app.use((req, res, next) => {
+  const rawUrl = String(req.originalUrl || req.url || req.path || "").split("?")[0].replace(/\/+$/, "") || "/";
+  const path = String(req.path || "").split("?")[0].replace(/\/+$/, "") || "/";
+
+  const runtimeHealthAliases = new Set([
+    "/health",
+    "/api/health",
+    "/healthz",
+    "/api/healthz",
+    "/live",
+    "/api/live",
+    "/ready",
+    "/api/ready"
+  ]);
+
+  const isRuntimeHealthAlias =
+    runtimeHealthAliases.has(rawUrl) ||
+    runtimeHealthAliases.has(path);
+
+  const isRuntimeHealthMethod =
+    req.method === "GET" ||
+    req.method === "HEAD";
+
+  if (!isRuntimeHealthAlias || !isRuntimeHealthMethod) {
+    return next();
+  }
+
+  res.set("Cache-Control", "no-store");
+
+  if (req.method === "HEAD") {
+    return res.status(200).end();
+  }
+
+  return res.status(200).json({
+    ok: true,
+    status: rawUrl.includes("ready") || path.includes("ready") ? "ready" : "healthy",
+    service: "tglp-mmmb-runtime",
+    endpoint: rawUrl,
+    normalizedPath: path,
+    timestamp: new Date().toISOString()
+  });
+});
+
+
 // Phase 113EI: earliest runtime health responder before routers, canonical guards, and static handlers.
 app.use((req, res, next) => {
   const isRuntimeHealthPath = req.path === "/health" || req.path === "/api/health";
