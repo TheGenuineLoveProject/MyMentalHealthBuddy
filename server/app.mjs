@@ -73,6 +73,26 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// Phase 113ED: public /health must return 200 for Replit/runtime health checks.
+// Keep this before canonical /health guard routes, API mounts, and static catch-alls.
+app.head("/health", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).end();
+});
+
+app.get("/health", (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({
+    ok: true,
+    status: "healthy",
+    service: "tglp-mmmb-runtime",
+    endpoint: "/health",
+    canonicalApi: "/api/health",
+    timestamp: new Date().toISOString()
+  });
+});
+
+
 // Trust the immediate proxy (Replit autoscale / load balancer) so that
 // req.ip and X-Forwarded-For are honoured by express-rate-limit. Without
 // this, rate limiters can either silently misfire (counting all traffic
