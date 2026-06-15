@@ -26,7 +26,9 @@
     "typecheck": "tsc --noEmit",
     "test": "echo 'test placeholder active' && exit 0",
     "audit:phase83": "node scripts/phase83-platform-content-component-analysis.mjs",
-    "gate:constitution": "node scripts/constitution-implementation-gate.mjs"
+    "gate:constitution": "node scripts/constitution-implementation-gate.mjs",
+    "platform:evolution:audit": "node scripts/platform-evolution-audit.mjs",
+    "audit:registry-routes": "node scripts/audit-registry-routes.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
