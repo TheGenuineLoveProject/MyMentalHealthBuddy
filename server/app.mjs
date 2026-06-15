@@ -73,6 +73,31 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// Phase 113EI: earliest runtime health responder before routers, canonical guards, and static handlers.
+app.use((req, res, next) => {
+  const isRuntimeHealthPath = req.path === "/health" || req.path === "/api/health";
+  const isRuntimeHealthMethod = req.method === "GET" || req.method === "HEAD";
+
+  if (!isRuntimeHealthPath || !isRuntimeHealthMethod) {
+    return next();
+  }
+
+  res.set("Cache-Control", "no-store");
+
+  if (req.method === "HEAD") {
+    return res.status(200).end();
+  }
+
+  return res.status(200).json({
+    ok: true,
+    status: "healthy",
+    service: "tglp-mmmb-runtime",
+    endpoint: req.path,
+    timestamp: new Date().toISOString()
+  });
+});
+
+
 // Phase 113ED: public /health must return 200 for Replit/runtime health checks.
 // Keep this before canonical /health guard routes, API mounts, and static catch-alls.
 app.head("/health", (_req, res) => {
