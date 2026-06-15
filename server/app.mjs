@@ -73,6 +73,45 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// Phase 113ER: compatibility bridge for legacy GET /api/logout links.
+// Keeps existing client logout links from becoming a runtime 404.
+// POST logout behavior remains owned by the authenticated auth router.
+app.get("/api/logout", (req, res) => {
+  res.set("Cache-Control", "no-store");
+
+  try {
+    if (typeof req.logout === "function") {
+      req.logout(() => {});
+    }
+  } catch {}
+
+  try {
+    if (req.session && typeof req.session.destroy === "function") {
+      req.session.destroy(() => {});
+    }
+  } catch {}
+
+  const commonCookieNames = [
+    "connect.sid",
+    "sid",
+    "session",
+    "sessionId",
+    "auth",
+    "token",
+    "access_token",
+    "refresh_token"
+  ];
+
+  for (const name of commonCookieNames) {
+    try {
+      res.clearCookie(name);
+    } catch {}
+  }
+
+  return res.redirect(302, "/login");
+});
+
+
 // Phase 113EK: universal earliest runtime health alias responder.
 // This must remain before canonical guards, routers, and static handlers.
 // It normalizes runtime health aliases used by Replit, deployment probes, and internal audits.
