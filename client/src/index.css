@@ -7637,3 +7637,174 @@ canvas {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* TGLP_VISUAL_FOUNDATION_POLISH_V1_START
+   Purpose: global visual consistency, accessibility, button/link polish, and responsive layout stability.
+   Guardrail: CSS-only; no routing, auth, data, analytics, or runtime logic mutation.
+*/
+
+:root {
+  --tglp-serenity-sage: #8FBF9F;
+  --tglp-warm-blossom-pink: #F4C7C3;
+  --tglp-deep-teal: #2F5D5D;
+  --tglp-ivory-light: #FAF9F7;
+  --tglp-charcoal-deep: #3A3A3A;
+  --tglp-eternal-gold: #D4AF37;
+
+  --tglp-page-max: 1200px;
+  --tglp-section-gap: clamp(2rem, 5vw, 5rem);
+  --tglp-card-radius: 1.25rem;
+  --tglp-control-radius: 999px;
+  --tglp-soft-shadow: 0 18px 50px rgba(47, 93, 93, 0.12);
+  --tglp-focus-ring: 0 0 0 3px rgba(212, 175, 55, 0.42);
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(244, 199, 195, 0.20), transparent 34rem),
+    radial-gradient(circle at top right, rgba(143, 191, 159, 0.20), transparent 34rem),
+    var(--tglp-ivory-light);
+  color: var(--tglp-charcoal-deep);
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-color: var(--tglp-eternal-gold);
+}
+
+button,
+[role="button"],
+a[href],
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+.btn,
+.button,
+[class*="Button"],
+[class*="button"] {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: none;
+  box-shadow: var(--tglp-focus-ring);
+}
+
+main,
+.page,
+.page-shell,
+.route-shell,
+.content-shell,
+.dashboard-shell,
+.admin-shell,
+section {
+  min-width: 0;
+}
+
+.page-shell,
+.route-shell,
+.content-shell,
+.dashboard-shell,
+.admin-shell,
+.tglp-container {
+  width: min(100% - 2rem, var(--tglp-page-max));
+  margin-inline: auto;
+}
+
+.card,
+.panel,
+.surface,
+.content-card,
+.dashboard-card,
+.admin-card,
+.wellness-card,
+.analytics-card {
+  border-radius: var(--tglp-card-radius);
+  box-shadow: var(--tglp-soft-shadow);
+}
+
+.hero,
+.section,
+.content-section,
+.dashboard-section,
+.admin-section {
+  padding-block: var(--tglp-section-gap);
+}
+
+.grid,
+.card-grid,
+.feature-grid,
+.tool-grid,
+.dashboard-grid,
+.admin-grid {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .page-shell,
+  .route-shell,
+  .content-shell,
+  .dashboard-shell,
+  .admin-shell,
+  .tglp-container {
+    width: min(100% - 1rem, var(--tglp-page-max));
+  }
+
+  .hero,
+  .section,
+  .content-section,
+  .dashboard-section,
+  .admin-section {
+    padding-block: clamp(1.5rem, 7vw, 3rem);
+  }
+
+  button,
+  [role="button"],
+  a[href] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* TGLP_VISUAL_FOUNDATION_POLISH_V1_END */
