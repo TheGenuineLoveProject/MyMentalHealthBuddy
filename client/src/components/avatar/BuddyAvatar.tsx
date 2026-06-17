@@ -334,11 +334,17 @@ const ariaLabel =
   BUDDY_ARIA_LABEL[state] ?? `MMHB Buddy: ${v.label}`;
 
     const styleVars: React.CSSProperties &
-      Record<`--${string}`, string> = {
-      width: `${sizePx}px`,
-      height: `${sizePx}px`,
-      "--buddy-eye-color": v.eyeColor,
-      "--buddy-heart-color": v.heartColor,
+  Record<`--${string}`, string> = {
+  width: `${sizePx}px`,
+  height: `${sizePx}px`,
+  "--buddy-eye-color": v.eyeColor,
+  "--buddy-heart-color": v.heartColor,
+  "--buddy-heart-pulse": `${v.heartPulse}ms`,
+};
+
+  "--buddy-heart-pulse": `${v.heartPulse}ms`,
+};
+
       "--buddy-heart-pulse": `${v.heartPulse}ms`,
     };
 
