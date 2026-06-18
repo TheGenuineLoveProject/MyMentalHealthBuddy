@@ -334,21 +334,14 @@ const ariaLabel =
   BUDDY_ARIA_LABEL[state] ?? `MMHB Buddy: ${v.label}`;
 
     const styleVars: React.CSSProperties &
-  Record<`--${string}`, string> = {
-  width: `${sizePx}px`,
-  height: `${sizePx}px`,
-  "--buddy-eye-color": v.eyeColor,
-  "--buddy-heart-color": v.heartColor,
-  "--buddy-heart-pulse": `${v.heartPulse}ms`,
-};
-
-  "--buddy-heart-pulse": `${v.heartPulse}ms`,
-};
-
-      "--buddy-heart-pulse": `${v.heartPulse}ms`,
-    };
-
-  // V6 mouth is emotion-gated. Per the "Hello Kitty principle" (less face =
+    Record<`--${string}`, string> = {
+    width: `${sizePx}px`,
+    height: `${sizePx}px`,
+    "--buddy-eye-color": v.eyeColor,
+    "--buddy-heart-color": v.heartColor,
+    "--buddy-heart-pulse": `${v.heartPulse}ms`,
+  };
+// V6 mouth is emotion-gated. Per the "Hello Kitty principle" (less face =
   // more cute, user projects own emotion), no mouth on calm/default. We
   // only render a mouth when the emotional content benefits from it.
   const v6ShowMouth =
