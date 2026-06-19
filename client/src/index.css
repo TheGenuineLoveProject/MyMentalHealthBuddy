@@ -7808,3 +7808,35 @@ section {
 }
 
 /* TGLP_VISUAL_FOUNDATION_POLISH_V1_END */
+
+/* PHASE113HI_INDEX_CSS_GLOBAL_FOCUS_OUTLINE_RESTORE
+   Purpose: restore a real visible outline for keyboard focus after late global
+   TGLP focus rules suppressed outline and relied only on box-shadow.
+   Scope: additive accessibility patch only; no route, component, layout, token,
+   navigation, or visual-system rewrite.
+   Why: box-shadow-only focus indicators can be clipped by overflow-hidden
+   containers; outline remains reliably visible outside the element box.
+*/
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--tglp-eternal-gold, #D4AF37);
+  outline-offset: 3px;
+  box-shadow: var(--tglp-focus-ring, 0 0 0 3px rgba(212, 175, 55, 0.42));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible {
+    transition: none !important;
+  }
+}
