@@ -94,8 +94,29 @@ function inTree(relPath, prefixes) {
 const ARTIFACT_PATTERNS = [
   /\.bak$/i, /\.bak-[\w.-]+$/i, /\.STABLE$/i, /\.orig$/i, /\.old$/i,
   /~$/, /\.disabled$/i, /\.phase-[\w.-]+\.bak$/i, /\.v\d+\.bak$/i,
-  /\.copy(\.\w+)?$/i, /\.rej$/i,
+  /\.rej$/i,
 ];
+
+
+// PHASE113IG_ARTIFACT_SCANNER_COPY_FALSE_POSITIVE_FILTER: do not treat legitimate
+// product copy/microcopy/copyright modules as backup artifacts. Real backup roots
+// and backup suffixes remain detected.
+function isLegitimateCopyNamedSource(r, base) {
+  const normalized = r.replace(/\\/g, "/");
+  const lower = normalized.toLowerCase();
+  const lowerBase = base.toLowerCase();
+
+  return (
+    /(^|\/)copy\.(js|jsx|ts|tsx|mjs|cjs)$/.test(lower) ||
+    /microcopy/.test(lower) ||
+    /copyright/.test(lower) ||
+    /pagescaffold/.test(lowerBase) ||
+    /marketings?copy\.(js|jsx|ts|tsx|mjs|cjs)$/.test(lowerBase) ||
+    /boundarycopy\.(js|jsx|ts|tsx|mjs|cjs)$/.test(lowerBase) ||
+    /responsebank\.(js|jsx|ts|tsx|mjs|cjs)$/.test(lowerBase) ||
+    /hx-backup\.sh$/.test(lowerBase)
+  );
+}
 
 function scanArtifactPollution(files) {
   const findings = [];
@@ -103,6 +124,7 @@ function scanArtifactPollution(files) {
     const r = rel(f);
     if (!inTree(r, ["server/", "client/src/", "shared/"])) continue;
     const base = path.basename(r);
+    if (isLegitimateCopyNamedSource(r, base)) continue;
     if (ARTIFACT_PATTERNS.some((re) => re.test(base))) {
       findings.push({
         severity: "warning",
