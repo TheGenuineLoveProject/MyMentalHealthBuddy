@@ -202,48 +202,49 @@ export default function HealingHero({
         </p>
 
         {/* CTA Buttons */}
+        {/* PHASE113HN_HEALING_HERO_CTA_NESTED_INTERACTIVE_FIX
+            Purpose: remove Link-wrapped button nesting; each CTA is now one
+            semantic link styled as the existing button. Scope: CTA semantics only. */}
         <div 
           className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up stagger-3"
           data-testid="cta-healing-hero"
         >
-          {/* Primary CTA - Glowing Gold Button */}
-          <Link href={primaryCTA.href}>
-            <button 
-              className="group relative px-10 py-4 rounded-full font-semibold text-lg flex items-center gap-3 transition-all duration-400 hover-glow-gold overflow-hidden"
-              style={{ 
-                background: 'linear-gradient(135deg, #eac33b 0%, #ddb12d 100%)',
-                color: '#2f5d5d',
-                boxShadow: '0 4px 20px rgba(234, 195, 59, 0.3)',
+          {/* Primary CTA - Glowing Gold Link */}
+          <Link
+            href={primaryCTA.href}
+            className="group relative px-10 py-4 rounded-full font-semibold text-lg flex items-center gap-3 transition-all duration-400 hover-glow-gold overflow-hidden"
+            style={{ 
+              background: 'linear-gradient(135deg, #eac33b 0%, #ddb12d 100%)',
+              color: '#2f5d5d',
+              boxShadow: '0 4px 20px rgba(234, 195, 59, 0.3)',
+            }}
+            data-testid="button-healing-hero-primary"
+          >
+            {/* Shimmer Effect */}
+            <span 
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
+                animation: 'shimmer 2s ease-in-out infinite',
               }}
-              data-testid="button-healing-hero-primary"
-            >
-              {/* Shimmer Effect */}
-              <span 
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
-                  animation: 'shimmer 2s ease-in-out infinite',
-                }}
-                aria-hidden="true"
-              />
-              <span className="relative">{primaryCTA.text}</span>
-              <ArrowRight className="w-5 h-5 relative transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </button>
+              aria-hidden="true"
+            />
+            <span className="relative">{primaryCTA.text}</span>
+            <ArrowRight className="w-5 h-5 relative transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </Link>
 
-          {/* Secondary CTA - Subtle Outline */}
-          <Link href={secondaryCTA.href}>
-            <button 
-              className="px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-teal-50"
-              style={{ 
-                background: 'transparent',
-                color: '#2f5d5d',
-                border: '2px solid rgba(47, 93, 93, 0.3)',
-              }}
-              data-testid="button-healing-hero-secondary"
-            >
-              {secondaryCTA.text}
-            </button>
+          {/* Secondary CTA - Subtle Outline Link */}
+          <Link
+            href={secondaryCTA.href}
+            className="px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-teal-50"
+            style={{ 
+              background: 'transparent',
+              color: '#2f5d5d',
+              border: '2px solid rgba(47, 93, 93, 0.3)',
+            }}
+            data-testid="button-healing-hero-secondary"
+          >
+            {secondaryCTA.text}
           </Link>
         </div>
 
