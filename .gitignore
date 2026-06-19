@@ -292,3 +292,15 @@ checkpoints/current-stable-sha.txt
 /docs/governance/reports/route-manifest.json
 
 /docs/governance/reports/route-integrity-report.md
+
+# PHASE113IL_RUNTIME_DATA_ARTIFACT_GITIGNORE_POLICY
+# Runtime AI memory/profile/usage files are local operational data, not source.
+# Keep directory placeholders only; never commit generated user/session artifacts.
+data/memory/*.json
+data/memory/*.txt
+data/memory-profile/*.json
+data/memory-profile/*.txt
+data/memory-summary/*.json
+data/memory-summary/*.txt
+data/usage/*.json
+data/usage/*.txt
