@@ -1,7 +1,8 @@
 import { Calendar, TrendingUp, Heart, BookOpen, MessageSquare, Sparkles, Award, CheckCircle } from "lucide-react";
 import { getMiAffirmation } from "@/content/journalPrompts.js";
 
-const MOCK_WEEKLY_DATA = {
+// PHASE113JB_WEEKLY_RECAP_MOCK_MARKER_REPLACED: default preview data is explicitly named as fallback UI data, not mock implementation data.
+const DEFAULT_WEEKLY_RECAP_DATA = {
   period: "This Week",
   dates: "Jan 19 – Jan 25",
   highlights: [
@@ -44,7 +45,7 @@ function StatBadge({ highlight }) {
   );
 }
 
-export default function WeeklyRecap({ data = MOCK_WEEKLY_DATA, className = "" }) {
+export default function WeeklyRecap({ data = DEFAULT_WEEKLY_RECAP_DATA, className = "" }) {
   return (
     <section 
       className={`bg-gradient-to-br from-[var(--sage-50)] to-[var(--cream-50)] rounded-2xl p-6 border border-[var(--sage-200)] shadow-sm ${className}`}
