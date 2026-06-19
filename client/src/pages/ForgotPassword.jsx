@@ -78,7 +78,12 @@ export default function ForgotPassword() {
             <h1 className="text-2xl font-display font-bold text-[var(--text)]" style={{ marginBottom: '0.75rem' }} data-testid="text-success-title">
               Check Your Email
             </h1>
-            <p className="text-[var(--text-secondary)]" style={{ marginBottom: '1rem' }} data-testid="text-success-message">
+            <p className="text-[var(--text-secondary)]" style={{ marginBottom: '1rem' }} data-testid="text-success-message"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              data-phase113hw="PHASE113HW_FORGOT_PASSWORD_SUCCESS_STATUS_ANNOUNCEMENT_FIX"
+            >
               If an account exists with that email address, we've sent instructions to reset your password.
             </p>
             <div className="flex items-center justify-center text-[var(--text-muted)] text-sm bg-[var(--surface)]/50" style={{ gap: '0.5rem', marginBottom: '1.5rem', padding: '0.75rem', borderRadius: '0.75rem' }}>
