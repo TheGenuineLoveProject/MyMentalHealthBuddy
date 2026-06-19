@@ -21,7 +21,11 @@ df -h || true
 
 echo ""
 echo "PM2:"
-npx pm2 list || true
+if command -v pm2 >/dev/null 2>&1; then
+  pm2 list || true
+else
+  echo "PM2_NOT_INSTALLED_OPTIONAL_RUNTIME_REPORT_SKIPPED"
+fi
 
 echo ""
 echo "Health:"
