@@ -10,17 +10,26 @@
 //
 // This script touches NO database. It is deterministic and non-destructive.
 
-import { execSync } from "node:child_process";
-import { mkdtempSync, readFileSync, writeFileSync, readdirSync, rmSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { existsSync, mkdtempSync, readFileSync, writeFileSync, readdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const OUT = "server/db/schema.canonical.sql";
+const DRIZZLE_KIT_BIN = join("node_modules", ".bin", "drizzle-kit");
+
+if (!existsSync(DRIZZLE_KIT_BIN)) {
+  console.error("[generate-canonical-schema] drizzle-kit is not installed locally.");
+  console.error("[generate-canonical-schema] The committed server/db/schema.canonical.sql remains the boot-time canonical schema.");
+  console.error("[generate-canonical-schema] To regenerate intentionally, install a vetted drizzle-kit version in a controlled dependency phase.");
+  process.exit(1);
+}
 
 const tmp = mkdtempSync(join(tmpdir(), "drizzle-gen-"));
 try {
-  execSync(
-    `npx drizzle-kit generate --dialect postgresql --schema ./shared/schema.mjs --out ${tmp}`,
+  execFileSync(
+    DRIZZLE_KIT_BIN,
+    ["generate", "--dialect", "postgresql", "--schema", "./shared/schema.mjs", "--out", tmp],
     { stdio: "inherit" },
   );
 
