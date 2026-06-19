@@ -2846,3 +2846,23 @@
     box-shadow: none !important;
   }
 }
+
+/* PHASE113HG_CANVA_LANDING_EMOTIONAL_JOURNEY_FOCUS_FIX
+   Purpose: restore visible keyboard focus for emotional journey cards.
+   Scope: additive accessibility patch only; no route, component, layout, or token rewrite.
+   Defect source: earlier .emotional-journey-card:focus-visible used outline: none.
+*/
+.canva-landing .emotional-journey-polish .emotional-journey-card:focus-visible {
+  outline: 3px solid var(--glp-sage-deep, #2F5D5D);
+  outline-offset: 4px;
+  box-shadow:
+    0 0 0 6px rgba(var(--glp-sage-rgb), 0.18),
+    0 12px 32px rgba(var(--glp-sage-deep-rgb), 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing .emotional-journey-polish .emotional-journey-card:focus-visible {
+    transition: none !important;
+    transform: none !important;
+  }
+}
