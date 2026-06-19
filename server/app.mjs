@@ -73,6 +73,70 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// PHASE113JG_V3B_PRE_ROUTE_ADMIN_DIAGNOSTIC_EXACT_PATH_BLOCK: exact-path block for internal admin diagnostic APIs.
+// This must run before any later admin route definitions.
+app.use((req, res, next) => {
+  const blockedAdminDiagnosticPaths = new Set([
+    "/api/admin/health",
+    "/api/admin/diagnostics"
+  ]);
+
+  if (!blockedAdminDiagnosticPaths.has(req.path)) {
+    return next();
+  }
+
+  const configuredToken =
+    process.env.ADMIN_API_TOKEN ||
+    process.env.ADMIN_SECRET ||
+    process.env.ADMIN_TOKEN ||
+    "";
+
+  const providedToken =
+    req.get("x-admin-token") ||
+    req.get("x-internal-admin-token") ||
+    "";
+
+  if (configuredToken && providedToken && providedToken === configuredToken) {
+    return next();
+  }
+
+  return res.status(404).json({
+    ok: false,
+    error: "not_found"
+  });
+});
+
+
+
+// PHASE113JG_V2_ADMIN_DIAGNOSTIC_API_GUARD: block unauthenticated public access to admin diagnostic APIs.
+// These endpoints are operational/internal only and must not return 200 publicly.
+const phase113jgV2AdminDiagnosticGuard = (req, res, next) => {
+  const configuredToken =
+    process.env.ADMIN_API_TOKEN ||
+    process.env.ADMIN_SECRET ||
+    process.env.ADMIN_TOKEN ||
+    "";
+
+  const providedToken =
+    req.get("x-admin-token") ||
+    req.get("x-internal-admin-token") ||
+    "";
+
+  if (configuredToken && providedToken && providedToken === configuredToken) {
+    return next();
+  }
+
+  return res.status(404).json({
+    ok: false,
+    error: "not_found"
+  });
+};
+
+app.use("/api/admin/health", phase113jgV2AdminDiagnosticGuard);
+app.use("/api/admin/diagnostics", phase113jgV2AdminDiagnosticGuard);
+
+
+
 // Phase 113ER: compatibility bridge for legacy GET /api/logout links.
 // Keeps existing client logout links from becoming a runtime 404.
 // POST logout behavior remains owned by the authenticated auth router.
