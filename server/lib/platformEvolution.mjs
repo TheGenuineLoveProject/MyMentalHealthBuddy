@@ -249,12 +249,19 @@ function fileHasIgnore(txt, category) {
 // Exposed for unit tests only — not part of the public audit surface.
 export const __sentinelInternals = { meaningfulReason, lineIgnoreReason, hasIgnoreSentinel, fileHasIgnore };
 
+// PHASE113IB_PLATFORM_EVOLUTION_SELF_MARKER_FILTER: the audit engine must not count its own detector/remediation language
+// as shipped product incompleteness. Product files remain fully scanned.
+function isPlatformEvolutionSelfFile(r) {
+  return r === "server/lib/platformEvolution.mjs";
+}
+
 const STUB_RE = /\b(TODO|FIXME|XXX|HACK)\b|not implemented|notImplemented|res\.status\(\s*501\s*\)/i; // platform-evolution-ignore: detector pattern definition, not a shipped stub
 
 function scanExposedStubs(files) {
   const findings = [];
   for (const f of files) {
     const r = rel(f);
+    if (isPlatformEvolutionSelfFile(r)) continue;
     if (!inTree(r, ["client/src/", "server/"])) continue;
     if (!SOURCE_EXTS.has(path.extname(r))) continue;
     if (/\.test\.|\.spec\./.test(r)) continue;
@@ -281,6 +288,7 @@ function scanStaleContent(files) {
   const findings = [];
   for (const f of files) {
     const r = rel(f);
+    if (isPlatformEvolutionSelfFile(r)) continue;
     if (!r.startsWith("client/src/")) continue;
     if (!SOURCE_EXTS.has(path.extname(r))) continue;
     const txt = readSafe(f);
