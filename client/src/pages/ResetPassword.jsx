@@ -158,7 +158,12 @@ export default function ResetPassword() {
             <h1 className="text-2xl font-display font-bold text-[var(--text)]" style={{ marginBottom: '0.75rem' }} data-testid="text-success-title">
               Password Reset Complete
             </h1>
-            <p className="text-[var(--text-secondary)]" style={{ marginBottom: '1.5rem' }} data-testid="text-success-message">
+            <p className="text-[var(--text-secondary)]" style={{ marginBottom: '1.5rem' }} data-testid="text-success-message"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            data-phase113hr="PHASE113HR_RESET_PASSWORD_SUCCESS_STATUS_ANNOUNCEMENT_FIX"
+          >
               Your password has been successfully reset. You can now sign in with your new password.
             </p>
             <Link 
