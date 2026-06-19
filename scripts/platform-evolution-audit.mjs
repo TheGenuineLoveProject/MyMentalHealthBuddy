@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 
 const OUT = process.env.PLATFORM_EVOLUTION_OUT || "diagnostics/platform-evolution";
@@ -11,6 +12,27 @@ const roots = ["client/src", "server", "shared", "scripts", "docs/architecture",
  // is verified by build gates and cleaned by phase scripts; counting it here
  // inflates risk immediately after successful builds.
 const artifactRoots = [".agents", ".archive", "_quarantine", "data", "diagnostics", "logs", "reports", "screenshots"];
+
+// PHASE113IN_ARTIFACT_AUDIT_IGNORED_RISK_SEPARATION:
+// The audit may report filesystem artifact files for visibility, but ignored local
+// runtime/generated outputs must not be scored as active source-risk. Tracked
+// placeholders that only preserve runtime directories are also excluded from risk.
+function isIgnoredByGit(file) {
+  try {
+    execFileSync("git", ["check-ignore", "-q", "--", file], { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function isTrackedPlaceholderArtifact(file) {
+  return file === "data/logs/.gitkeep";
+}
+
+function isActiveArtifactRiskFile(file) {
+  return !isIgnoredByGit(file) && !isTrackedPlaceholderArtifact(file);
+}
 const requiredFiles = [".replit", "package.json", "server/app.mjs", "client/src/App.jsx"];
 const requiredGates = ["scripts/check-links.mjs", "scripts/phase100-service-worker-cache-gate.mjs", "scripts/journal-db-schema-gate.mjs"];
 const textExts = new Set([".js", ".jsx", ".ts", ".tsx", ".mjs", ".json", ".md", ".css", ".html", ".sql"]);
@@ -64,6 +86,7 @@ const duplicateFamilies = [...duplicateMap.entries()]
   .map(([basename, files]) => ({ basename, files: files.sort() }));
 
 const artifactFiles = artifactRoots.flatMap((root) => walk(root));
+const artifactRiskFiles = artifactFiles.filter(isActiveArtifactRiskFile);
 const serverApp = read("server/app.mjs");
 const clientApp = read("client/src/App.jsx");
 const routes = [...clientApp.matchAll(/path=["'`]([^"'`]+)["'`]/g)].map((m) => m[1]).sort();
@@ -86,17 +109,20 @@ const report = {
     incompleteMarkers: incompleteMarkers.length,
     duplicateFamilies: duplicateFamilies.length,
     artifactFiles: artifactFiles.length,
+    artifactRiskFiles: artifactRiskFiles.length,
+    ignoredArtifactFiles: artifactFiles.length - artifactRiskFiles.length,
   },
   routes,
   incompleteMarkers: incompleteMarkers.slice(0, 300),
   duplicateFamilies: duplicateFamilies.slice(0, 100),
-  artifactPollution: artifactFiles.slice(0, 100),
+  artifactPollution: artifactRiskFiles.slice(0, 100),
+  filesystemArtifactPollution: artifactFiles.slice(0, 100),
 };
 
 let risk = 0;
 risk += report.requiredFilesMissing.length * 25;
 risk += report.requiredGatesMissing.length * 20;
-risk += report.summary.artifactFiles > 0 ? 25 : 0;
+risk += report.summary.artifactRiskFiles > 0 ? 25 : 0;
 risk += report.summary.incompleteMarkers > 200 ? 25 : Math.ceil(report.summary.incompleteMarkers / 10);
 risk += report.summary.duplicateFamilies > 50 ? 20 : Math.ceil(report.summary.duplicateFamilies / 5);
 for (const value of Object.values(report.runtimeContracts)) if (!value) risk += 10;
@@ -119,3 +145,5 @@ console.log(`ROUTES=${report.summary.routes}`);
 console.log(`INCOMPLETE_MARKERS=${report.summary.incompleteMarkers}`);
 console.log(`DUPLICATE_FAMILIES=${report.summary.duplicateFamilies}`);
 console.log(`ARTIFACT_FILES=${report.summary.artifactFiles}`);
+console.log(`ARTIFACT_RISK_FILES=${report.summary.artifactRiskFiles}`);
+console.log(`IGNORED_ARTIFACT_FILES=${report.summary.ignoredArtifactFiles}`);
