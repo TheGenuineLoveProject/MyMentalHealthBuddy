@@ -58,6 +58,7 @@ const formatAmount = (amount) => {
   return `$${Number(amount).toFixed(2)}`;
 };
 
+// PHASE113JW_BILLING_DISABLED_BUTTON_ACTIONS_PATCH
 export default function Billing() {
   useSEO({
     title: "Billing & Subscription",
@@ -128,11 +129,13 @@ export default function Billing() {
   });
 
   const handleUpgrade = (interval) => {
+    if (checkoutMutation.isPending) return;
     setUpgrading(true);
     checkoutMutation.mutate(interval || billingInterval);
   };
 
   const handleOpenPortal = () => {
+    if (portalMutation.isPending) return;
     portalMutation.mutate();
   };
 
@@ -204,7 +207,7 @@ export default function Billing() {
                   <Button
                     variant="outline"
                     onClick={handleOpenPortal}
-                    disabled={portalMutation.isPending}
+                    aria-busy={portalMutation.isPending ? "true" : "false"}
                     data-testid="button-manage-subscription"
                   >
                     {portalMutation.isPending ? (
@@ -317,7 +320,7 @@ export default function Billing() {
                   {currentPlan === "free" ? (
                     <Button 
                       className="w-full btn-premium"
-                      disabled={upgrading}
+                      aria-busy={upgrading ? "true" : "false"}
                       onClick={() => handleUpgrade(billingInterval)}
                       data-testid="button-upgrade-pro"
                     >
@@ -332,7 +335,7 @@ export default function Billing() {
                       className="w-full"
                       variant="outline"
                       onClick={handleOpenPortal}
-                      disabled={portalMutation.isPending}
+                      aria-busy={portalMutation.isPending ? "true" : "false"}
                       data-testid="button-manage-subscription-plan"
                     >
                       {portalMutation.isPending ? (
@@ -344,7 +347,7 @@ export default function Billing() {
                   ) : (
                     <Button 
                       className="w-full btn-premium"
-                      disabled={upgrading}
+                      aria-busy={upgrading ? "true" : "false"}
                       onClick={() => handleUpgrade(billingInterval)}
                       data-testid="button-resubscribe"
                     >
@@ -371,7 +374,7 @@ export default function Billing() {
                     size="sm" 
                     className="btn-secondary-premium" 
                     onClick={handleOpenPortal}
-                    disabled={portalMutation.isPending}
+                    aria-busy={portalMutation.isPending ? "true" : "false"}
                     data-testid="button-view-all-invoices"
                   >
                     {portalMutation.isPending ? (
@@ -419,6 +422,7 @@ export default function Billing() {
                             size="sm" 
                             onClick={() => handleDownloadInvoice(invoice.invoicePdf || invoice.hostedUrl)}
                             data-testid={`button-download-${invoice.id}`}
+                            aria-label={`Download invoice ${invoice.description || invoice.id}`}
                           >
                             <Download className="h-4 w-4" />
                           </Button>
@@ -448,7 +452,7 @@ export default function Billing() {
                   variant="outline" 
                   size="sm" 
                   onClick={handleOpenPortal}
-                  disabled={portalMutation.isPending}
+                  aria-busy={portalMutation.isPending ? "true" : "false"}
                   data-testid="button-update-payment"
                 >
                   {portalMutation.isPending ? (
