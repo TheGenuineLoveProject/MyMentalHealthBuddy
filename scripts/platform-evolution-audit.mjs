@@ -5,7 +5,12 @@ const OUT = process.env.PLATFORM_EVOLUTION_OUT || "diagnostics/platform-evolutio
 fs.mkdirSync(OUT, { recursive: true });
 
 const roots = ["client/src", "server", "shared", "scripts", "docs/architecture", "docs/governance"];
-const artifactRoots = [".agents", ".archive", "_quarantine", "data", "diagnostics", "logs", "reports", "screenshots", "client/dist", "dist"];
+// PHASE113II_GENERATED_BUILD_OUTPUT_ARTIFACT_POLICY:
+ // Count local diagnostic/runtime artifact roots, but do not count generated build
+ // output roots (`client/dist`, `dist`) as platform artifact-risk files. Build output
+ // is verified by build gates and cleaned by phase scripts; counting it here
+ // inflates risk immediately after successful builds.
+const artifactRoots = [".agents", ".archive", "_quarantine", "data", "diagnostics", "logs", "reports", "screenshots"];
 const requiredFiles = [".replit", "package.json", "server/app.mjs", "client/src/App.jsx"];
 const requiredGates = ["scripts/check-links.mjs", "scripts/phase100-service-worker-cache-gate.mjs", "scripts/journal-db-schema-gate.mjs"];
 const textExts = new Set([".js", ".jsx", ".ts", ".tsx", ".mjs", ".json", ".md", ".css", ".html", ".sql"]);
