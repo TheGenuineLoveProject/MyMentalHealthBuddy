@@ -1,3 +1,4 @@
+// PHASE114L_AFFIRMATION_CARDS_ACCESSIBLE_ACTIONS_PATCH
 import { useState, useEffect } from "react";
 import { Heart, RefreshCw, Share2, Star, ChevronLeft, ChevronRight, Sparkles, Sun, Zap, Shield, Flower2 } from 'lucide-react';
 
@@ -228,9 +229,16 @@ export default function AffirmationCards() {
 
         <div className="flex items-center justify-center gap-4 mb-6">
           <button
-            onClick={prevCard}
-            disabled={affirmations.length === 0}
-            className="w-12 h-12 rounded-full bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
+            onClick={() => {
+              if (affirmations.length === 0) return;
+              prevCard();
+            }}
+            aria-disabled={affirmations.length === 0 ? "true" : "false"}
+            className={`w-12 h-12 rounded-full bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shadow-lg transition-all ${
+              affirmations.length === 0
+                ? "cursor-not-allowed opacity-50"
+                : "hover:shadow-xl"
+            }`}
             data-testid="button-prev-card"
             aria-label="Previous affirmation"
           >
@@ -268,9 +276,16 @@ export default function AffirmationCards() {
           </div>
 
           <button
-            onClick={nextCard}
-            disabled={affirmations.length === 0}
-            className="w-12 h-12 rounded-full bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
+            onClick={() => {
+              if (affirmations.length === 0) return;
+              nextCard();
+            }}
+            aria-disabled={affirmations.length === 0 ? "true" : "false"}
+            className={`w-12 h-12 rounded-full bg-white/80 dark:bg-gray-800/80 flex items-center justify-center shadow-lg transition-all ${
+              affirmations.length === 0
+                ? "cursor-not-allowed opacity-50"
+                : "hover:shadow-xl"
+            }`}
             data-testid="button-next-card"
             aria-label="Next affirmation"
           >
