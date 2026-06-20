@@ -58,6 +58,7 @@ function ProgressBar({ value, max, label }) {
   );
 }
 
+// PHASE114B_DISCERNMENT_ACCESSIBLE_ACTIONS_PATCH
 function LessonCard({ lesson, onStart, locked }) {
   return (
     <article
@@ -74,9 +75,16 @@ function LessonCard({ lesson, onStart, locked }) {
       <p className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">{lesson.category}</p>
       <button
         type="button"
-        onClick={() => onStart(lesson)}
-        disabled={locked}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-300 hover:text-indigo-800 dark:hover:text-indigo-100 disabled:cursor-not-allowed disabled:hover:text-indigo-600"
+        onClick={() => {
+          if (locked) return;
+          onStart(lesson);
+        }}
+        aria-disabled={locked ? "true" : "false"}
+        className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
+          locked
+            ? "cursor-not-allowed text-slate-400 dark:text-slate-500"
+            : "text-indigo-600 dark:text-indigo-300 hover:text-indigo-800 dark:hover:text-indigo-100"
+        }`}
         data-testid={`button-start-lesson-${lesson.id}`}
       >
         <Brain className="h-4 w-4" aria-hidden /> {locked ? "Locked" : "Open lesson"}
@@ -144,7 +152,7 @@ function LessonRunner({ lesson, onClose, onSubmitted }) {
             </blockquote>
           </section>
 
-          <fieldset disabled={!!feedback || mutation.isPending} className="space-y-2">
+          <fieldset aria-disabled={!!feedback || mutation.isPending ? "true" : "false"} className="space-y-2">
             <legend className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">
               What pattern best describes what is happening?
             </legend>
@@ -171,7 +179,10 @@ function LessonRunner({ lesson, onClose, onSubmitted }) {
                     name="lesson-option"
                     value={opt.id}
                     checked={isSelected}
-                    onChange={() => setSelected(opt.id)}
+                    onChange={() => {
+                      if (feedback || mutation.isPending) return;
+                      setSelected(opt.id);
+                    }}
                     className="mt-1 h-4 w-4 accent-indigo-600"
                     data-testid={`input-option-${opt.id}`}
                   />
@@ -248,9 +259,17 @@ function LessonRunner({ lesson, onClose, onSubmitted }) {
             {!feedback && (
               <button
                 type="button"
-                onClick={() => selected && mutation.mutate(selected)}
-                disabled={!selected || mutation.isPending}
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-400 disabled:cursor-not-allowed"
+                onClick={() => {
+                  if (!selected || mutation.isPending) return;
+                  mutation.mutate(selected);
+                }}
+                aria-disabled={!selected || mutation.isPending ? "true" : "false"}
+                aria-busy={mutation.isPending ? "true" : "false"}
+                className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white transition-colors ${
+                  !selected || mutation.isPending
+                    ? "cursor-not-allowed bg-slate-400"
+                    : "bg-indigo-600 hover:bg-indigo-700"
+                }`}
                 data-testid="button-submit-answer"
               >
                 {mutation.isPending && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
@@ -313,8 +332,13 @@ function RealWorldDetector() {
           <span className="text-xs text-slate-500 dark:text-slate-400">{text.length} / 4000</span>
           <button
             type="submit"
-            disabled={mutation.isPending || text.trim().length < 4}
-            className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-400 disabled:cursor-not-allowed"
+            aria-disabled={mutation.isPending || text.trim().length < 4 ? "true" : "false"}
+            aria-busy={mutation.isPending ? "true" : "false"}
+            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white transition-colors ${
+              mutation.isPending || text.trim().length < 4
+                ? "cursor-not-allowed bg-slate-400"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
             data-testid="button-real-world-submit"
           >
             {mutation.isPending && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
