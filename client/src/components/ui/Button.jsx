@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { Link } from 'wouter';
 
+// PHASE114S_SHARED_BUTTON_ACCESSIBLE_ARIA_DISABLED_PATCH
 const variants = {
   primary: 'bg-[var(--glp-sage-deep)] text-white hover:bg-[var(--glp-teal-600)] focus-visible:ring-[var(--glp-gold)]',
   secondary: 'border-2 border-[var(--glp-sage-deep)] text-[var(--glp-sage-deep)] bg-transparent hover:bg-[var(--glp-sage-10)] focus-visible:ring-[var(--glp-gold)]',
