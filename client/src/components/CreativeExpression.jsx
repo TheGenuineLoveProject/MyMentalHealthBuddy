@@ -28,6 +28,7 @@ const ART_PROMPTS = [
   { emoji: "🔮", prompt: "Illustrate your future self", theme: "Vision" },
 ];
 
+// PHASE114H_CREATIVE_EXPRESSION_ACCESSIBLE_ACTIONS_PATCH
 export default function CreativeExpression() {
   const { recordSession } = useGamification();
   const canvasRef = useRef(null);
@@ -299,18 +300,32 @@ export default function CreativeExpression() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <button
-              onClick={undo}
-              disabled={historyIndex <= 0}
-              className="p-2 bg-slate-700/50 rounded-lg hover:bg-slate-600/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => {
+                if (historyIndex <= 0) return;
+                undo();
+              }}
+              aria-disabled={historyIndex <= 0 ? "true" : "false"}
+              className={`p-2 rounded-lg transition-colors ${
+                historyIndex <= 0
+                  ? "cursor-not-allowed opacity-50 bg-slate-700/50"
+                  : "bg-slate-700/50 hover:bg-slate-600/50"
+              }`}
               data-testid="button-undo"
               aria-label="Undo"
             >
               <Undo className="w-5 h-5 text-slate-300" />
             </button>
             <button
-              onClick={redo}
-              disabled={historyIndex >= history.length - 1}
-              className="p-2 bg-slate-700/50 rounded-lg hover:bg-slate-600/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => {
+                if (historyIndex >= history.length - 1) return;
+                redo();
+              }}
+              aria-disabled={historyIndex >= history.length - 1 ? "true" : "false"}
+              className={`p-2 rounded-lg transition-colors ${
+                historyIndex >= history.length - 1
+                  ? "cursor-not-allowed opacity-50 bg-slate-700/50"
+                  : "bg-slate-700/50 hover:bg-slate-600/50"
+              }`}
               data-testid="button-redo"
               aria-label="Redo"
             >
@@ -360,11 +375,14 @@ export default function CreativeExpression() {
       </div>
 
       <button
-        onClick={handleSaveSession}
-        disabled={artworkSaved}
+        onClick={() => {
+          if (artworkSaved) return;
+          handleSaveSession();
+        }}
+        aria-disabled={artworkSaved ? "true" : "false"}
         className={`w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
           artworkSaved
-            ? "bg-emerald-600 text-white"
+            ? "cursor-not-allowed bg-emerald-600 text-white"
             : "bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:shadow-lg hover:shadow-pink-500/25"
         }`}
         data-testid="button-save-session"
