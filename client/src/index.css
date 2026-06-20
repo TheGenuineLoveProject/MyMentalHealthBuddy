@@ -8039,3 +8039,231 @@ h3,
     transform: none;
   }
 }
+
+/* PHASE114P_GLOBAL_VISUAL_SYSTEM_FOUNDATION_PATCH
+   Governed visual foundation for MyMentalHealthBuddy / The Genuine Love Project.
+   Scope: palette cohesion, mobile typography, button readability, avatar background blending.
+   Canonical brand palette:
+   Serenity Sage #8FBF9F | Warm Blossom Pink #F4C7C3 | Deep Teal #2F5D5D
+   Ivory Light #FAF9F7 | Charcoal Deep #3A3A3A | Eternal Gold #D4AF37
+*/
+
+:root {
+  --mmhb-serenity-sage: #8FBF9F;
+  --mmhb-serenity-sage-soft: #DDEBDD;
+  --mmhb-serenity-sage-deep: #6EA985;
+  --mmhb-warm-blossom-pink: #F4C7C3;
+  --mmhb-warm-blossom-pink-soft: #FBE7E4;
+  --mmhb-deep-teal: #2F5D5D;
+  --mmhb-deep-teal-ink: #183A3A;
+  --mmhb-ivory-light: #FAF9F7;
+  --mmhb-ivory-warm: #F7F4EE;
+  --mmhb-charcoal-deep: #3A3A3A;
+  --mmhb-eternal-gold: #D4AF37;
+  --mmhb-eternal-gold-soft: #F1DF9A;
+
+  --mmhb-text-primary: var(--mmhb-charcoal-deep);
+  --mmhb-text-strong: #243737;
+  --mmhb-text-muted: #5F6F6F;
+  --mmhb-surface: rgba(250, 249, 247, 0.94);
+  --mmhb-surface-soft: rgba(255, 255, 255, 0.72);
+  --mmhb-border-soft: rgba(47, 93, 93, 0.16);
+  --mmhb-focus-ring: rgba(143, 191, 159, 0.46);
+  --mmhb-shadow-soft: 0 14px 34px rgba(47, 93, 93, 0.14);
+  --mmhb-shadow-button: 0 10px 22px rgba(47, 93, 93, 0.18);
+  --mmhb-radius-button: 999px;
+  --mmhb-radius-card: 28px;
+}
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(circle at top left, rgba(143, 191, 159, 0.18), transparent 34rem),
+    radial-gradient(circle at top right, rgba(244, 199, 195, 0.18), transparent 32rem),
+    var(--mmhb-ivory-light);
+}
+
+body {
+  color: var(--mmhb-text-primary);
+  background:
+    linear-gradient(135deg, rgba(250, 249, 247, 0.98), rgba(247, 244, 238, 0.92)),
+    var(--mmhb-ivory-light);
+}
+
+/* Mobile-first type restraint: prevents oversized hero/headline text on phones while preserving desktop scale. */
+h1,
+.text-5xl,
+.text-6xl,
+.text-7xl,
+.text-8xl,
+.text-9xl {
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+@media (max-width: 640px) {
+  h1,
+  .text-5xl,
+  .text-6xl,
+  .text-7xl,
+  .text-8xl,
+  .text-9xl {
+    font-size: clamp(2rem, 9.5vw, 3.35rem) !important;
+    line-height: 1.06 !important;
+  }
+
+  h2,
+  .text-4xl {
+    font-size: clamp(1.65rem, 7vw, 2.35rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  h3,
+  .text-3xl {
+    font-size: clamp(1.35rem, 5.8vw, 1.85rem) !important;
+    line-height: 1.16 !important;
+  }
+
+  p,
+  li {
+    line-height: 1.65;
+  }
+}
+
+/* Button visibility + polish foundation. Keeps labels visible inside buttons and reduces plain/flat appearance. */
+button,
+[role="button"],
+a[class*="button"],
+a[class*="Button"],
+.mmhb-button,
+.btn {
+  min-height: 44px;
+  color: inherit;
+  text-decoration: none;
+  text-wrap: balance;
+}
+
+button:not([class*="unstyled"]):not([class*="ghost"]),
+[role="button"]:not([class*="unstyled"]):not([class*="ghost"]),
+.mmhb-button,
+.btn {
+  border-radius: var(--mmhb-radius-button);
+  border-color: var(--mmhb-border-soft);
+  box-shadow: var(--mmhb-shadow-button);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+button:not([class*="unstyled"]):not([class*="ghost"]):hover,
+[role="button"]:not([class*="unstyled"]):not([class*="ghost"]):hover,
+.mmhb-button:hover,
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(47, 93, 93, 0.22);
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+.mmhb-button:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--mmhb-focus-ring);
+  outline-offset: 3px;
+}
+
+button[aria-disabled="true"],
+[role="button"][aria-disabled="true"],
+.mmhb-button[aria-disabled="true"],
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.62;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Canonical gradient utility for premium primary actions without forcing every button to change. */
+.mmhb-primary-action,
+.tglp-primary-action,
+[data-visual-role="primary-action"] {
+  color: #183A3A !important;
+  background:
+    linear-gradient(135deg, var(--mmhb-serenity-sage), var(--mmhb-warm-blossom-pink)) !important;
+  border: 1px solid rgba(47, 93, 93, 0.18) !important;
+  box-shadow: var(--mmhb-shadow-button) !important;
+}
+
+.mmhb-gold-action,
+.tglp-gold-action,
+[data-visual-role="premium-action"] {
+  color: #2F2A14 !important;
+  background:
+    linear-gradient(135deg, var(--mmhb-eternal-gold-soft), var(--mmhb-eternal-gold)) !important;
+  border: 1px solid rgba(212, 175, 55, 0.34) !important;
+}
+
+/* Avatar/mascot visual foundation: remove hard square/red-box feel and blend objects into the scene. */
+[class*="avatar" i],
+[class*="lumi" i],
+[class*="buddy" i],
+[class*="mascot" i],
+[data-avatar],
+[data-mascot] {
+  background-color: transparent;
+  border-color: rgba(143, 191, 159, 0.18);
+  box-shadow:
+    0 18px 40px rgba(47, 93, 93, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.56);
+}
+
+[class*="avatar" i] img,
+[class*="lumi" i] img,
+[class*="buddy" i] img,
+[class*="mascot" i] img,
+[data-avatar] img,
+[data-mascot] img {
+  background: transparent !important;
+  border-color: transparent !important;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 22px rgba(47, 93, 93, 0.20));
+}
+
+/* Suppress accidental red square artifacts around avatar/mascot surfaces without altering alert/error UI globally. */
+[class*="avatar" i][class*="red" i],
+[class*="lumi" i][class*="red" i],
+[class*="buddy" i][class*="red" i],
+[class*="mascot" i][class*="red" i],
+[data-avatar][class*="red" i],
+[data-mascot][class*="red" i] {
+  background: transparent !important;
+  border-color: rgba(143, 191, 159, 0.22) !important;
+}
+
+/* Cohesive surface helpers available to components without forcing source refactors. */
+.mmhb-healing-surface,
+.tglp-healing-surface,
+[data-visual-role="healing-surface"] {
+  background:
+    linear-gradient(145deg, rgba(250, 249, 247, 0.94), rgba(247, 244, 238, 0.86)),
+    var(--mmhb-surface);
+  border: 1px solid var(--mmhb-border-soft);
+  border-radius: var(--mmhb-radius-card);
+  box-shadow: var(--mmhb-shadow-soft);
+  color: var(--mmhb-text-primary);
+}
+
+.mmhb-sage-text,
+.tglp-sage-text {
+  color: var(--mmhb-deep-teal) !important;
+}
+
+.mmhb-muted-text,
+.tglp-muted-text {
+  color: var(--mmhb-text-muted) !important;
+}
+
+/* End PHASE114P_GLOBAL_VISUAL_SYSTEM_FOUNDATION_PATCH */
