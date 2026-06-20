@@ -10,6 +10,8 @@ import { useAuth } from "../context/AuthContext";
 import LumiMascot from "./lumi/LumiMascot.jsx";
 import { WELLNESS_HUB_TOOLS } from "../content/tools/toolsRegistry.js";
 
+// PHASE114V_FIX_TGLP_NAVBAR_BRAND_VISUAL_POLISH_PATCH
+
 function ProBadge() {
   return (
     <span
@@ -162,15 +164,15 @@ export default function TglpNavbar() {
         {/* Center: Logo */}
         <Link
           href="/"
-          className="flex items-center gap-4 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-sage)] focus-visible:ring-offset-2 rounded-xl py-2 px-3 transition-all hover:bg-[var(--glp-sage)]/5"
+          className="flex items-center gap-4 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 rounded-2xl py-2 px-3 transition-all hover:bg-[var(--glp-sage)]/10"
           aria-label="MyMentalHealthBuddy home"
           data-testid="link-brand-home"
         >
           <div
-            className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-transform group-hover:scale-105"
+            className="relative size-12 md:size-14 flex items-center justify-center overflow-hidden rounded-full border border-[var(--glp-sage-15)] bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,0.92),rgba(143,191,159,0.24)_44%,rgba(47,93,93,0.12))] shadow-[0_10px_30px_rgba(47,93,93,0.16)] transition-transform group-hover:scale-105"
           >
-            <LumiMascot emotion="neutral" size={40} className="w-full h-full" data-testid="img-brand-logo" />
-            <Heart className="w-7 h-7 md:w-8 md:h-8 hidden text-[var(--glp-sage)]" fill="currentColor" />
+            <LumiMascot emotion="neutral" size={40} className="size-full drop-shadow-sm" data-testid="img-brand-logo" />
+            <Heart className="hidden size-7 md:size-8 text-[var(--glp-sage)] drop-shadow-sm" fill="currentColor" />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
             <span className="text-xl md:text-2xl font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]" data-testid="text-brand-name">
