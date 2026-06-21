@@ -15,6 +15,7 @@ import { OfficialLumi } from "@/lumi-registry";
 // v5.8.80 P6 ReturnLoop tier-aware welcome (writes silently no-op until
 // consent.state === "granted").
 import { MemorySettingsPanel, MemoryTransparencyView } from "@/lumi-memory";
+// PHASE115Q_SETTINGS_BUTTON_AND_BRAND_COHESION_PATCH
 
 const VISUAL_MODES = [
   { id: "", label: "Default", icon: Sun, description: "Standard brand palette with Deep Teal primary + Gold accent" },
@@ -244,7 +245,7 @@ export default function Settings() {
             <header className="flex items-center gap-4 mb-8">
               <Link 
                 href="/dashboard" 
-                className="p-3 rounded-xl bg-white border border-[var(--sage-200)] text-[var(--teal-600)] hover:bg-[var(--sage-50)] transition shadow-sm" 
+                className="p-3 rounded-xl bg-[var(--glp-ivory)] border border-[var(--glp-sage)]/40 text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]/15 transition shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2" 
                 data-testid="link-back" 
                 aria-label="Back to dashboard"
               >
@@ -269,7 +270,7 @@ export default function Settings() {
               <div
                 data-testid="text-success-message"
                 role="status"
-                className="p-4 rounded-xl mb-6 flex items-center gap-3 bg-[var(--sage-100)] border border-[var(--sage-300)] text-[var(--sage-700)] animate-fade-in-up"
+                className="p-4 rounded-2xl mb-6 flex items-center gap-3 bg-[var(--glp-sage)]/15 border border-[var(--glp-sage)]/40 text-[var(--glp-deep-teal)] animate-fade-in-up shadow-sm"
               >
                 <div className="icon-container icon-sm icon-gradient-sage">
                   <Check className="w-4 h-4" aria-hidden="true" />
@@ -322,7 +323,7 @@ export default function Settings() {
                       data-testid="checkbox-notifications"
                       checked={notifications}
                       onChange={(e) => setNotifications(e.target.checked)}
-                      className="w-5 h-5 rounded accent-[var(--sage-500)] focus:ring-2 focus:ring-[var(--sage-400)]"
+                      className="w-5 h-5 rounded accent-[var(--glp-sage)] focus:ring-2 focus:ring-[var(--glp-gold)]"
                     />
                   </div>
                   <div className="flex-1">
@@ -346,7 +347,7 @@ export default function Settings() {
                           type="button"
                           onClick={() => setTheme(option.value)}
                           data-testid={`button-theme-${option.value}`}
-                          className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition ${
+                          className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                             isSelected
                               ? "border-[var(--sage-500)] bg-[var(--sage-100)] text-[var(--sage-700)]"
                               : "border-[var(--sage-200)] bg-white hover:border-[var(--sage-300)] text-[var(--teal-600)]"
@@ -374,10 +375,10 @@ export default function Settings() {
                           onClick={() => handleVisualModeChange(mode.id)}
                           aria-pressed={isSelected}
                           data-testid={`button-visual-mode-${mode.id || "default"}`}
-                          className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 ${
+                          className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                             isSelected
-                              ? "border-[var(--glp-primary)] bg-[var(--surface-2)]"
-                              : "border-[var(--border)] bg-[var(--surface-1)] hover:border-[var(--glp-sage)]"
+                              ? "border-[var(--glp-sage)] bg-[var(--glp-sage)]/15"
+                              : "border-[var(--glp-sage)]/35 bg-[var(--glp-ivory)] hover:border-[var(--glp-sage)] hover:bg-[var(--glp-sage)]/10"
                           }`}
                         >
                           <Icon className={`w-5 h-5 flex-shrink-0 ${isSelected ? "text-[var(--primary)]" : "text-[var(--text-2)]"}`} aria-hidden="true" />
@@ -411,9 +412,9 @@ export default function Settings() {
                           onClick={() => setAffirmationTone(tone.id)}
                           aria-pressed={isSelected}
                           data-testid={`button-tone-${tone.id}`}
-                          className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition ${
+                          className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                             isSelected
-                              ? "border-[var(--glp-gold)] bg-[var(--glp-gold)]/10 text-[var(--teal-700)]"
+                              ? "border-[var(--glp-gold)] bg-[var(--glp-gold)]/12 text-[var(--glp-deep-teal)]"
                               : "border-[var(--sage-200)] bg-white hover:border-[var(--sage-300)] text-[var(--teal-600)]"
                           }`}
                         >
@@ -433,7 +434,7 @@ export default function Settings() {
                       data-testid="checkbox-voice"
                       checked={voiceEnabled}
                       onChange={(e) => setVoiceEnabled(e.target.checked)}
-                      className="w-5 h-5 rounded accent-[var(--sage-500)] focus:ring-2 focus:ring-[var(--sage-400)]"
+                      className="w-5 h-5 rounded accent-[var(--glp-sage)] focus:ring-2 focus:ring-[var(--glp-gold)]"
                     />
                   </div>
                   <div className="flex-1">
@@ -458,10 +459,10 @@ export default function Settings() {
                           onClick={() => setMoodBackground(bg.id)}
                           aria-pressed={isSelected}
                           data-testid={`button-mood-bg-${bg.id}`}
-                          className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 ${
+                          className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                             isSelected
-                              ? "border-[var(--glp-primary)] bg-[var(--surface-2)]"
-                              : "border-[var(--border)] bg-[var(--surface-1)] hover:border-[var(--glp-sage)]"
+                              ? "border-[var(--glp-sage)] bg-[var(--glp-sage)]/15"
+                              : "border-[var(--glp-sage)]/35 bg-[var(--glp-ivory)] hover:border-[var(--glp-sage)] hover:bg-[var(--glp-sage)]/10"
                           }`}
                         >
                           <div className="flex-1 min-w-0">
@@ -486,7 +487,7 @@ export default function Settings() {
                   data-testid="button-save-preferences"
                   disabled={isSaving}
                   aria-busy={isSaving}
-                  className="w-full btn-premium py-3.5 disabled:opacity-50"
+                  className="w-full btn-premium py-3.5 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 shadow-[0_12px_30px_rgba(212,175,55,0.22)]"
                 >
                   {isSaving ? (
                     <span className="flex items-center justify-center gap-2">
@@ -517,7 +518,7 @@ export default function Settings() {
                 data-testid="button-export-data"
                 disabled={isExporting}
                 aria-busy={isExporting}
-                className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 border-[var(--sage-300)] bg-[var(--sage-50)] hover:bg-[var(--sage-100)] hover:border-[var(--sage-400)] transition text-[var(--teal-600)] font-medium disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 border-[var(--glp-sage)]/45 bg-[var(--glp-sage)]/12 hover:bg-[var(--glp-sage)]/20 hover:border-[var(--glp-sage)] transition text-[var(--glp-deep-teal)] font-semibold disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
               >
                 {isExporting ? (
                   <span className="flex items-center justify-center gap-2">
@@ -532,7 +533,7 @@ export default function Settings() {
                 )}
               </button>
 
-              <div className="mt-4 p-3 rounded-lg bg-[var(--sage-50)] border border-[var(--sage-200)]">
+              <div className="mt-4 p-3 rounded-xl bg-[var(--glp-sage)]/12 border border-[var(--glp-sage)]/35">
                 <div className="flex items-start gap-2">
                   <FileText className="w-4 h-4 text-[var(--teal-500)] mt-0.5 flex-shrink-0" aria-hidden="true" />
                   <p className="text-caption">
@@ -576,7 +577,7 @@ export default function Settings() {
                 <button
                   onClick={handleLogout}
                   data-testid="button-logout"
-                  className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 border-[var(--sage-200)] bg-white hover:bg-[var(--sage-50)] hover:border-[var(--sage-300)] transition text-[var(--teal-600)] font-medium"
+                  className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 border-[var(--glp-sage)]/40 bg-[var(--glp-ivory)] hover:bg-[var(--glp-sage)]/15 hover:border-[var(--glp-sage)] transition text-[var(--glp-deep-teal)] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
                 >
                   <LogOut className="w-4 h-4" aria-hidden="true" />
                   Log Out
@@ -585,7 +586,7 @@ export default function Settings() {
                 <button
                   onClick={handleDeleteAccount}
                   data-testid="button-delete-account"
-                  className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 border-[var(--blush-200)] bg-white hover:bg-[var(--blush-50)] hover:border-[var(--blush-400)] transition text-[var(--blush-600)] font-medium"
+                  className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 border-[var(--glp-blossom)]/55 bg-[var(--glp-ivory)] hover:bg-[var(--glp-blossom)]/20 hover:border-[var(--glp-blossom)] transition text-[var(--glp-deep-teal)] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
                 >
                   <Trash2 className="w-4 h-4" aria-hidden="true" />
                   Delete Account
