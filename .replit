@@ -7,7 +7,8 @@ channel = "stable-24_05"
 [deployment]
 run = ["node", "dist/server.mjs"]
 deploymentTarget = "vm"
-build = ["sh", "-c", "npm install && NODE_OPTIONS=--max-old-space-size=4096 npm run build && node scripts/build-server.mjs"]
+# PHASE115O7_REPLIT_DEPLOYMENT_CLEAN_BUILD_REPAIR
+build = ["sh", "-c", "npm install && rm -rf dist client/dist && NODE_OPTIONS=--max-old-space-size=4096 npm run build && node scripts/build-server.mjs"]
 
 [[ports]]
 localPort = 5000
