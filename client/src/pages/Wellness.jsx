@@ -15,6 +15,7 @@ import SafetyFooter from "../components/ui/ReflectionFooter";
 import { SafeBoundary } from "../components/SafeBoundary.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+// PHASE115T_WELLNESS_PALETTE_COHESION_PATCH
 
 const BreathingExercise = lazy(() => import("../components/BreathingExercise.jsx"));
 const MeditationTimer = lazy(() => import("../components/MeditationTimer.jsx"));
@@ -98,8 +99,8 @@ const TOOL_CATEGORIES = {
     icon: Heart,
     tools: [
       { id: "emotions", name: "Emotion Wheel", icon: Heart, color: "from-pink-400 to-rose-500" },
-      { id: "anxiety", name: "Anxiety Relief", icon: Zap, color: "from-orange-400 to-red-500" },
-      { id: "anger", name: "Anger Management", icon: ThermometerSun, color: "from-red-400 to-orange-500" },
+      { id: "anxiety", name: "Anxiety Relief", icon: Zap, color: "from-[var(--glp-blossom)] to-[var(--glp-gold)]" },
+      { id: "anger", name: "Anger Management", icon: ThermometerSun, color: "from-[var(--glp-blossom)] to-[var(--glp-deep-teal)]" },
       { id: "coping", name: "Coping Strategies", icon: Brain, color: "from-purple-400 to-indigo-500" },
       { id: "reframing", name: "Positive Reframing", icon: Lightbulb, color: "from-amber-400 to-yellow-500" },
       { id: "compassion", name: "Self-Compassion", icon: Heart, color: "from-rose-400 to-pink-500" },
@@ -129,7 +130,7 @@ const TOOL_CATEGORIES = {
     tools: [
       { id: "selfcare", name: "Self-Care Checklist", icon: Heart, color: "from-pink-400 to-rose-500" },
       { id: "gratitude", name: "Gratitude Journal", icon: Lightbulb, color: "from-rose-400 to-pink-500" },
-      { id: "energy", name: "Energy Booster", icon: Activity, color: "from-orange-400 to-red-500" },
+      { id: "energy", name: "Energy Booster", icon: Activity, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
       { id: "social", name: "Social Connection", icon: Users, color: "from-cyan-400 to-blue-500" },
       { id: "eating", name: "Mindful Eating", icon: Apple, color: "from-lime-400 to-green-500" },
       { id: "detox", name: "Digital Detox", icon: Smartphone, color: "from-sky-400 to-blue-500" },
@@ -340,7 +341,7 @@ export default function Wellness() {
           <header className="mb-8">
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition mb-6"
+              className="inline-flex items-center gap-2 text-body-sm text-[var(--glp-sage)] hover:text-[var(--glp-deep-teal)] transition mb-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 rounded-lg"
               data-testid="link-back-dashboard"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -375,7 +376,7 @@ export default function Wellness() {
                     <div key={catKey} className="mb-3">
                       <button
                         onClick={() => setActiveCategory(catKey)}
-                        className={`w-full flex items-center justify-between p-3 rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                        className={`w-full flex items-center justify-between p-3 rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                           isActive
                             ? "bg-[var(--primary)]/10 text-[var(--primary)]"
                             : "hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]"
@@ -406,7 +407,7 @@ export default function Wellness() {
                                 <Link
                                   key={tool.id}
                                   href={tool.link}
-                                  className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all hover:bg-[var(--surface)] text-[var(--text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+                                  className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all hover:bg-[var(--surface)] text-[var(--text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2`}
                                   data-testid={`button-tool-${tool.id}`}
                                 >
                                   <ToolIcon className="w-4 h-4" aria-hidden="true" />
@@ -419,7 +420,7 @@ export default function Wellness() {
                               <button
                                 key={tool.id}
                                 onClick={() => setActiveTool(tool.id)}
-                                className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                                className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                                   isToolActive
                                     ? `bg-gradient-to-r ${tool.color} text-white shadow-md`
                                     : "hover:bg-[var(--surface)] text-[var(--text-secondary)]"
@@ -535,7 +536,7 @@ export default function Wellness() {
                   className="p-4 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-hover)] transition-all text-center group"
                   data-testid="link-crisis"
                 >
-                  <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br from-red-400 to-rose-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                  <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br from-[var(--glp-blossom)] to-[var(--glp-deep-teal)] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                     <Zap className="w-5 h-5 text-white" />
                   </div>
                   <span className="text-sm font-medium text-[var(--text)]">Crisis Help</span>
