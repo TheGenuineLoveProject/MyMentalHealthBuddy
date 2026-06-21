@@ -1,12 +1,14 @@
 import { Link } from "wouter";
 import LumiMascot from "../lumi/LumiMascot.jsx";
 
+// PHASE114Y_BRANDLOGO_VISUAL_POLISH_PATCH
+
 const SIZES = {
-  xs: { img: "w-8 h-8", radius: "rounded-lg", shadow: "0 1px 6px", px: 32 },
-  sm: { img: "w-10 h-10", radius: "rounded-xl", shadow: "0 2px 10px", px: 40 },
-  md: { img: "w-12 h-12 sm:w-14 sm:h-14", radius: "rounded-xl", shadow: "0 3px 14px", px: 56 },
-  lg: { img: "w-14 h-14 sm:w-16 sm:h-16", radius: "rounded-2xl", shadow: "0 4px 18px", px: 64 },
-  xl: { img: "w-20 h-20 md:w-24 md:h-24", radius: "rounded-2xl", shadow: "0 6px 24px", px: 96 },
+  xs: { img: "w-8 h-8", radius: "rounded-full", shadow: "0 1px 6px", px: 32 },
+  sm: { img: "w-10 h-10", radius: "rounded-full", shadow: "0 2px 10px", px: 40 },
+  md: { img: "w-12 h-12 sm:w-14 sm:h-14", radius: "rounded-full", shadow: "0 3px 14px", px: 56 },
+  lg: { img: "w-14 h-14 sm:w-16 sm:h-16", radius: "rounded-full", shadow: "0 4px 18px", px: 64 },
+  xl: { img: "w-20 h-20 md:w-24 md:h-24", radius: "rounded-full", shadow: "0 6px 24px", px: 96 },
 };
 
 export default function BrandLogo({
@@ -18,18 +20,18 @@ export default function BrandLogo({
   "data-testid": testId = "brand-logo",
 }) {
   const s = SIZES[size] || SIZES.md;
-  const shadowColor = "var(--glp-sage-deep-20, rgba(38,79,79,0.2))";
+  const shadowColor = "rgba(47,93,93,0.18)";
 
   const content = (
     <div className={`flex items-center gap-3 ${className}`} data-testid={testId}>
-      <span className={`brand-logo-mark relative inline-block ${s.img} ${s.radius}`}>
-        <span aria-hidden className="brand-logo-halo" />
+      <span className={`brand-logo-mark relative inline-block ${s.img} ${s.radius} transition-transform duration-300 group-hover:scale-105`}>
+        <span aria-hidden className="brand-logo-halo absolute inset-[-10%] rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.20),rgba(143,191,159,0.16)_45%,transparent_72%)] blur-md" />
         <span
           aria-hidden="true"
           className={`brand-logo-img relative z-[1] w-full h-full ${s.radius} flex items-center justify-center overflow-hidden transition-transform duration-300`}
-          style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: `${s.shadow} ${shadowColor}` }}
+          style={{ background: 'radial-gradient(circle at 35% 25%, rgba(255,255,255,0.96) 0%, rgba(143,191,159,0.24) 48%, rgba(47,93,93,0.10) 100%)', boxShadow: `${s.shadow} ${shadowColor}` }}
         >
-          <LumiMascot emotion="neutral" size={s.px} />
+          <LumiMascot emotion="neutral" size={s.px} className="drop-shadow-sm" />
         </span>
       </span>
       {showText && (
