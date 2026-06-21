@@ -10,6 +10,7 @@ import DataExportButton from "../components/DataExportButton";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
 import "../styles/sacred-visuals.css";
+// PHASE115H_MOODPAGE_PALETTE_COHESION_PATCH
 
 // HX-OS Interaction Governance — passive crisis-language detection.
 // Pure read-only regex; no fetch, no AI, no behavior modification.
@@ -23,8 +24,8 @@ const VULNERABLE_EMOTIONS = new Set(["Sad", "Anxious", "Tired"]);
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "#f59e0b", bgColor: "#fef3c7", tw: "border-amber-400 bg-amber-50 dark:bg-amber-950/40" },
   { name: "Sad", icon: Frown, color: "#3b82f6", bgColor: "#dbeafe", tw: "border-blue-400 bg-blue-50 dark:bg-blue-950/40" },
-  { name: "Neutral", icon: Meh, color: "#6b7280", bgColor: "#f3f4f6", tw: "border-gray-400 bg-gray-50 dark:bg-gray-800/40" },
-  { name: "Anxious", icon: Zap, color: "#ef4444", bgColor: "#fee2e2", tw: "border-red-400 bg-red-50 dark:bg-red-950/40" },
+  { name: "Neutral", icon: Meh, color: "#2F5D5D", bgColor: "#FAF9F7", tw: "border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)]/20" },
+  { name: "Anxious", icon: Zap, color: "#F4C7C3", bgColor: "#FAF9F7", tw: "border-[var(--glp-blossom)] bg-[var(--glp-blossom)]/20 dark:bg-[var(--glp-blossom)]/15" },
   { name: "Calm", icon: Sun, color: "#10b981", bgColor: "#d1fae5", tw: "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40" },
   { name: "Tired", icon: Moon, color: "#8b5cf6", bgColor: "#ede9fe", tw: "border-violet-400 bg-violet-50 dark:bg-violet-950/40" },
 ];
@@ -58,7 +59,7 @@ function getRatingLabel(r) {
 function getRatingColor(r) {
   const num = Number(r);
   if (num <= 3) return "#3b82f6";
-  if (num <= 5) return "#ef4444";
+  if (num <= 5) return "#F4C7C3";
   if (num <= 7) return "#10b981";
   return "#f59e0b";
 }
@@ -169,9 +170,9 @@ function MoodStats({ entries }) {
           {trend > 0 ? (
             <TrendingUp className="w-4 h-4 text-emerald-500" aria-hidden="true" />
           ) : trend < 0 ? (
-            <TrendingUp className="w-4 h-4 text-red-400 rotate-180" aria-hidden="true" />
+            <TrendingUp className="w-4 h-4 text-[var(--glp-blossom)] rotate-180" aria-hidden="true" />
           ) : null}
-          <span className={trend > 0 ? "text-emerald-600" : trend < 0 ? "text-red-500" : "text-muted-foreground"}>
+          <span className={trend > 0 ? "text-[var(--glp-sage)]" : trend < 0 ? "text-[var(--glp-blossom)]" : "text-[var(--glp-charcoal)]/70"}>
             {trend > 0 ? `+${trend}` : trend === 0 ? "—" : trend}
           </span>
         </p>
@@ -249,7 +250,7 @@ export default function MoodPage() {
 
   function getMoodColor() {
     if (rating <= 3) return "#3b82f6";
-    if (rating <= 5) return "#ef4444";
+    if (rating <= 5) return "#F4C7C3";
     if (rating <= 7) return "#10b981";
     return "#f59e0b";
   }
@@ -352,11 +353,11 @@ export default function MoodPage() {
       )}
 
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-sm flex items-center justify-between" role="alert" data-testid="text-error">
+        <div className="mb-6 p-4 rounded-2xl bg-[var(--glp-blossom)]/20 border border-[var(--glp-blossom)]/60 text-[var(--glp-deep-teal)] text-sm flex items-center justify-between shadow-sm" role="alert" data-testid="text-error">
           <span>{error}</span>
           <button
             onClick={() => setError("")}
-            className="p-1 hover:bg-red-200 dark:hover:bg-red-800 rounded-lg transition"
+            className="p-1 hover:bg-[var(--glp-blossom)]/35 rounded-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
             aria-label="Dismiss error"
             data-testid="button-dismiss-error"
           >
@@ -395,7 +396,7 @@ export default function MoodPage() {
             onChange={(e) => setRating(Number(e.target.value))}
             className="w-full h-3 rounded-full appearance-none cursor-pointer"
             style={{
-              background: `linear-gradient(to right, #3b82f6 0%, #ef4444 40%, #10b981 70%, #f59e0b 100%)`,
+              background: `linear-gradient(to right, #8FBF9F 0%, #F4C7C3 40%, #2F5D5D 70%, #D4AF37 100%)`,
             }}
             data-testid="input-rating"
             aria-label={`Mood rating: ${rating} out of 10`}
