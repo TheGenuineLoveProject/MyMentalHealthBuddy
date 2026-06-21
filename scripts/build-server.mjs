@@ -54,6 +54,16 @@ copyFileSync(
   path.join(ROOT, "dist", "schema.canonical.sql"),
 );
 
+// PHASE115D6_PACKAGE_CLIENT_DIST_FOR_REPLIT_DEPLOY
+// Replit Deployments run dist/server.mjs. Package the current Vite frontend
+// inside dist so the deployed server can serve the same freshly built assets.
+const packagedClientDist = path.join(ROOT, "dist", "client", "dist");
+rmSync(packagedClientDist, { recursive: true, force: true });
+cpSync(path.join(ROOT, "client", "dist"), packagedClientDist, {
+  recursive: true,
+  dereference: true,
+});
+
 // Stage the pinned native-dep tree under dist/node_modules so require("bcrypt")
 // resolves at runtime with no npm install. Rebuilt fresh every time so the
 // shipped tree always matches the installed version.
