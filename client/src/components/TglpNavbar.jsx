@@ -9,6 +9,7 @@ import GlobalSearch from "./GlobalSearch.jsx";
 import { useAuth } from "../context/AuthContext";
 import LumiMascot from "./lumi/LumiMascot.jsx";
 import { WELLNESS_HUB_TOOLS } from "../content/tools/toolsRegistry.js";
+// PHASE115N_TGLP_NAVBAR_SHARED_BUTTON_POLISH_PATCH
 
 // PHASE114V_FIX_TGLP_NAVBAR_BRAND_VISUAL_POLISH_PATCH
 
@@ -87,7 +88,7 @@ function Dropdown({ id, label, icon: Icon, items, openId, setOpenId, isActive })
       <button
         type="button"
         onClick={() => setOpenId(open ? null : id)}
-        className="hidden md:flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)]"
+        className="hidden md:flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]/15 hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
         aria-haspopup="menu"
         aria-expanded={open}
         data-testid={`button-nav-${id}`}
@@ -195,7 +196,7 @@ export default function TglpNavbar() {
             <Link
               key={href}
               href={href}
-              className={`hidden md:flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 ${
+              className={`hidden md:flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-[var(--glp-sage)]/15 hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                 isActive(href)
                   ? "bg-[var(--glp-sage)]/15 text-[var(--glp-sage-deep)]"
                   : "text-[var(--glp-ink)]"
@@ -233,7 +234,7 @@ export default function TglpNavbar() {
               )}
               <Link
                 href="/dashboard"
-                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-semibold hover:opacity-90 focus:outline-none"
+                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-bold text-[var(--glp-deep-teal)] hover:opacity-95 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 shadow-[0_12px_30px_rgba(212,175,55,0.28)]"
                 style={{ background: "var(--glp-gold-gradient)", boxShadow: "var(--glp-gold-shadow)" }}
                 data-testid="link-dashboard-cta"
               >
@@ -246,14 +247,14 @@ export default function TglpNavbar() {
             <>
               <Link
                 href="/login"
-                className="btn-header-secondary hidden md:flex items-center px-4 py-3 rounded-lg text-sm font-medium hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)]"
+                className="btn-header-secondary hidden md:flex items-center px-4 py-3 rounded-xl text-sm font-semibold hover:bg-[var(--glp-sage)]/15 hover:-translate-y-0.5 text-[var(--glp-deep-teal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
                 data-testid="link-login"
               >
                 Sign In
               </Link>
               <Link
                 href="/login"
-                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-semibold hover:opacity-90 focus:outline-none"
+                className="btn-header-cta flex items-center gap-2.5 rounded-full px-5 md:px-6 py-3 md:py-3.5 text-sm font-bold text-[var(--glp-deep-teal)] hover:opacity-95 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 shadow-[0_12px_30px_rgba(212,175,55,0.28)]"
                 style={{ background: "var(--glp-gold-gradient)", boxShadow: "var(--glp-gold-shadow)" }}
                 data-testid="link-register"
               >
@@ -266,7 +267,7 @@ export default function TglpNavbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg transition-colors hover:bg-[var(--glp-sage)]/10"
+            className="md:hidden p-2 rounded-xl transition-colors hover:bg-[var(--glp-sage)]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
@@ -305,7 +306,7 @@ export default function TglpNavbar() {
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all hover:bg-[var(--glp-sage)]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 ${
                 isActive(href)
                   ? "bg-[var(--glp-sage)]/15 text-[var(--glp-sage-deep)]"
                   : "text-[var(--glp-ink)]"
@@ -325,7 +326,7 @@ export default function TglpNavbar() {
               <Link
                 key={href}
                 href={href}
-                className="block px-4 py-2.5 rounded-xl text-sm text-[var(--glp-ink)] hover:bg-[var(--glp-sage)]/10"
+                className="block px-4 py-2.5 rounded-xl text-sm font-medium text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
                 onClick={() => setMobileMenuOpen(false)}
                 data-testid={`link-mobile-topic-${href.replace(/\W+/g, "-")}`}
               >
@@ -341,7 +342,7 @@ export default function TglpNavbar() {
               <Link
                 key={href}
                 href={href}
-                className="block px-4 py-2.5 rounded-xl text-sm text-[var(--glp-ink)] hover:bg-[var(--glp-sage)]/10"
+                className="block px-4 py-2.5 rounded-xl text-sm font-medium text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
                 onClick={() => setMobileMenuOpen(false)}
                 data-testid={`link-mobile-tool-${href.replace(/\W+/g, "-")}`}
               >
@@ -357,7 +358,7 @@ export default function TglpNavbar() {
               <Link
                 key={href}
                 href={href}
-                className="block px-4 py-2.5 rounded-xl text-sm text-[var(--glp-ink)] hover:bg-[var(--glp-sage)]/10"
+                className="block px-4 py-2.5 rounded-xl text-sm font-medium text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
                 onClick={() => setMobileMenuOpen(false)}
                 data-testid={`link-mobile-about-${href.replace(/\W+/g, "-")}`}
               >
@@ -397,7 +398,7 @@ export default function TglpNavbar() {
                 )}
                 <Link
                   href="/dashboard"
-                  className="btn-header-cta flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold"
+                  className="btn-header-cta flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-[var(--glp-deep-teal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 shadow-[0_12px_30px_rgba(212,175,55,0.24)]"
                   style={{ background: "var(--glp-gold-gradient)" }}
                   onClick={() => setMobileMenuOpen(false)}
                   data-testid="link-mobile-dashboard"
@@ -417,7 +418,7 @@ export default function TglpNavbar() {
                 </a>
                 <a
                   href="/login"
-                  className="btn-header-cta flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold"
+                  className="btn-header-cta flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-[var(--glp-deep-teal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 shadow-[0_12px_30px_rgba(212,175,55,0.24)]"
                   style={{ background: "var(--glp-gold-gradient)" }}
                   data-testid="link-mobile-get-started"
                 >
