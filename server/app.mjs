@@ -390,6 +390,8 @@ import systemRoutes from "./routes/system.mjs";
 import kernelRoutes from "./routes/kernel.mjs";
 import growthJourneyRoutes from "./routes/growth-journey.mjs";
 import journalsRoutes from "./routes/journals.mjs";
+import { existsSync } from "node:fs";
+// PHASE115E3_EXISTSSYNC_IMPORT_FIX
 
 const IS_DEV = process.env.NODE_ENV !== "production";
 console.log(`[boot] mode=${IS_DEV ? "development" : "production"} (NODE_ENV=${process.env.NODE_ENV || "<unset>"})`);
