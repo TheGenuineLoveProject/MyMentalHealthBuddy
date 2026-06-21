@@ -17,6 +17,7 @@ import { Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Spar
 import ReflectionCardExport from "../components/ReflectionCardExport";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
+// PHASE115K_JOURNALPAGE_PALETTE_AND_BUTTON_COHESION_PATCH
 import { useGamification } from "../context/GamificationContext.jsx";
 import { miReflectivePrompts } from "../content/frameworks/motivationalInterviewing";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
@@ -57,11 +58,11 @@ function JournalPrompts({ onSelectPrompt }) {
     <div className="mb-6 p-4 rounded-xl bg-primary/5 border border-primary/20" data-testid="journal-prompts">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <Lightbulb className="w-4 h-4 text-primary" aria-hidden="true" />
+          <div className="w-8 h-8 rounded-xl bg-[var(--glp-sage)]/20 border border-[var(--glp-sage)]/40 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <Lightbulb className="w-4 h-4 text-[var(--glp-deep-teal)]" aria-hidden="true" />
           </div>
           <div className="min-w-0">
-            <span className="text-xs font-medium text-primary uppercase tracking-wide">{currentPrompt.category}</span>
+            <span className="text-xs font-semibold text-[var(--glp-deep-teal)] uppercase tracking-wide">{currentPrompt.category}</span>
             <p className="text-sm text-foreground mt-1 break-words">{currentPrompt.prompt}</p>
           </div>
         </div>
@@ -69,7 +70,7 @@ function JournalPrompts({ onSelectPrompt }) {
           <button
             type="button"
             onClick={refreshPrompt}
-            className="p-2 rounded-lg hover:bg-primary/10 transition text-primary"
+            className="p-2 rounded-lg hover:bg-[var(--glp-sage)]/20 transition text-[var(--glp-deep-teal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
             aria-label="Get new prompt"
             data-testid="button-refresh-prompt"
           >
@@ -78,7 +79,7 @@ function JournalPrompts({ onSelectPrompt }) {
           <button
             type="button"
             onClick={() => onSelectPrompt(currentPrompt)}
-            className="px-3 py-1.5 text-xs font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+            className="px-3 py-1.5 text-xs font-semibold bg-[var(--glp-deep-teal)] text-white rounded-lg hover:bg-[var(--glp-deep-teal)]/90 transition shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
             data-testid="button-use-prompt"
           >
             Use This
@@ -276,7 +277,7 @@ export default function JournalPage() {
         <DataExportButton dataType="journals" />
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 transition-colors flex items-center gap-2 text-sm"
+          className="px-4 py-2.5 rounded-xl font-semibold text-white bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-deep-teal)]/90 transition-colors flex items-center gap-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
           data-testid="button-new"
           aria-expanded={showForm}
           aria-controls="journal-form"
@@ -289,11 +290,11 @@ export default function JournalPage() {
       {!showForm && <JournalPrompts onSelectPrompt={handleSelectPrompt} />}
           
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-sm flex items-center justify-between" role="alert" data-testid="text-error">
+        <div className="mb-6 p-4 rounded-2xl bg-[var(--glp-blossom)]/20 border border-[var(--glp-blossom)]/60 text-[var(--glp-deep-teal)] text-sm flex items-center justify-between shadow-sm" role="alert" data-testid="text-error">
           <span>{error}</span>
           <button 
             onClick={() => setError("")} 
-            className="p-1 hover:bg-red-200 dark:hover:bg-red-800 rounded-lg transition"
+            className="p-1 hover:bg-[var(--glp-blossom)]/35 rounded-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
             aria-label="Dismiss error"
           >
             <X className="w-4 h-4" aria-hidden="true" />
@@ -358,7 +359,7 @@ export default function JournalPage() {
           <div className="mb-5 p-4 rounded-xl bg-primary/5 border border-primary/20">
             <label className="flex items-center justify-between cursor-pointer">
               <div className="flex items-center gap-3">
-                <Share2 className="w-4 h-4 text-primary" aria-hidden="true" />
+                <Share2 className="w-4 h-4 text-[var(--glp-deep-teal)]" aria-hidden="true" />
                 <div>
                   <span className="font-medium text-foreground block text-sm">Share with Community</span>
                   <span className="text-xs text-muted-foreground">Share your reflection anonymously</span>
@@ -393,7 +394,7 @@ export default function JournalPage() {
             <button
               type="submit"
               disabled={createMutation.isPending}
-              className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm"
+              className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-white bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-deep-teal)]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
               data-testid="button-save"
               aria-busy={createMutation.isPending}
             >
@@ -412,7 +413,7 @@ export default function JournalPage() {
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="px-4 py-2.5 rounded-xl font-medium border border-border text-foreground hover:bg-muted transition-colors text-sm"
+              className="px-4 py-2.5 rounded-xl font-medium border border-[var(--glp-sage)]/50 text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]/15 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
               data-testid="button-cancel"
             >
               Cancel
@@ -430,7 +431,7 @@ export default function JournalPage() {
           <p className="text-sm text-muted-foreground mb-5">Whenever you're ready, this space is here for you. No rush.</p>
           <button
             onClick={() => setShowForm(true)}
-            className="px-5 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 transition-colors inline-flex items-center gap-2 text-sm"
+            className="px-5 py-2.5 rounded-xl font-semibold text-white bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-deep-teal)]/90 transition-colors inline-flex items-center gap-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
             data-testid="button-first-entry"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
@@ -477,7 +478,7 @@ export default function JournalPage() {
                       handleDelete(entry.id);
                     }}
                     disabled={deleteMutation.isPending}
-                    className="p-2 rounded-lg text-muted-foreground hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition disabled:opacity-50"
+                    className="p-2 rounded-lg text-muted-foreground hover:text-[var(--glp-deep-teal)] hover:bg-[var(--glp-blossom)]/25 transition disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
                     data-testid={`button-delete-${entry.id}`}
                     aria-label={`Delete entry: ${entry.title || "Untitled"}`}
                   >
@@ -502,7 +503,7 @@ export default function JournalPage() {
                       setSelectedEntryForCard(entry);
                       setReflectionCardOpen(true);
                     }}
-                    className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition"
+                    className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[var(--glp-sage)]/20 text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]/30 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
                     data-testid={`btn-reflection-card-${entry.id}`}
                   >
                     <Share2 className="w-3 h-3" />
