@@ -559,7 +559,10 @@ const CLIENT_ROOT = path.join(__dirname, "..", "client");
 // VM does not guarantee the process working directory is the repo root, so a
 // cwd-relative path can point at a non-existent dir and make every SPA route
 // 404 even though the built assets exist. __dirname is cwd-independent.
-const CLIENT_DIST = path.join(__dirname, "..", "client", "dist");
+// PHASE115D6_DEPLOY_PACKAGED_CLIENT_DIST_PREFERENCE
+const PACKAGED_CLIENT_DIST = path.join(__dirname, "client", "dist");
+const SOURCE_CLIENT_DIST = path.join(__dirname, "..", "client", "dist");
+const CLIENT_DIST = existsSync(PACKAGED_CLIENT_DIST) ? PACKAGED_CLIENT_DIST : SOURCE_CLIENT_DIST;
 
 console.log("[SPA] CLIENT_DIST =", CLIENT_DIST);
 
