@@ -8,6 +8,7 @@ import DailyInsight from "../components/DailyInsight.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/brand.css";
 import "../styles/sacred-visuals.css";
+// PHASE115X_DASHBOARD_VISUAL_COHESION_PATCH
 
 // PHASE115C_DASHBOARD_VISUAL_POLISH_PATCH
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
@@ -101,7 +102,7 @@ export default function Dashboard() {
       >
       <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }} role="alert">
         <div className="rounded-3xl p-10 text-center max-w-md shadow-sm" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
-          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5" style={{ background: 'var(--glp-rose-15)' }}>
+          <div className="size-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: 'color-mix(in srgb, var(--glp-blossom) 18%, transparent)' }}>
             <Heart className="w-8 h-8" style={{ color: 'var(--glp-blush)' }} aria-hidden="true" />
           </div>
           <h2 className="text-xl font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Unable to load dashboard</h2>
@@ -134,7 +135,7 @@ export default function Dashboard() {
       <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} />
-          <div className="absolute bottom-0 -left-32 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)' }} />
+          <div className="absolute bottom-0 -left-32 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, color-mix(in srgb, var(--glp-blossom) 18%, transparent), transparent 70%)' }} />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-10">
@@ -233,7 +234,7 @@ export default function Dashboard() {
           <section className="mb-8 grid grid-cols-3 gap-4" aria-label="Quick navigation" data-testid="section-quick-nav">
             <Link href="/community" className="group" data-testid="link-quick-community" aria-label="Go to Q&A Community">
               <div className="p-4 rounded-2xl transition-all text-center hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(47,93,93,0.12)] focus-within:ring-2 focus-within:ring-[var(--glp-gold)]" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-gold-30)' }}>
+                <div className="size-12 mx-auto mb-3 rounded-full flex items-center justify-center" style={{ background: 'var(--glp-gold-30)' }}>
                   <MessageCircle className="w-6 h-6" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
                 </div>
                 <span className="font-semibold transition-colors" style={{ color: 'var(--glp-ink)' }}>Q&A Community</span>
@@ -241,7 +242,7 @@ export default function Dashboard() {
             </Link>
             <Link href="/crisis" className="group" data-testid="link-quick-crisis" aria-label="Go to Crisis Support">
               <div className="p-4 rounded-2xl transition-all text-center hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(47,93,93,0.12)] focus-within:ring-2 focus-within:ring-[var(--glp-gold)]" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}>
+                <div className="size-12 mx-auto mb-3 rounded-full flex items-center justify-center" style={{ background: 'color-mix(in srgb, var(--glp-blossom) 18%, transparent)' }}>
                   <Heart className="w-6 h-6" style={{ color: 'var(--glp-rose)' }} aria-hidden="true" />
                 </div>
                 <span className="font-semibold transition-colors" style={{ color: 'var(--glp-ink)' }}>Crisis Support</span>
@@ -249,7 +250,7 @@ export default function Dashboard() {
             </Link>
             <Link href="/tools" className="group" data-testid="link-quick-tools" aria-label="Go to Tools Library">
               <div className="p-4 rounded-2xl transition-all text-center hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(47,93,93,0.12)] focus-within:ring-2 focus-within:ring-[var(--glp-gold)]" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-sage-10)' }}>
+                <div className="size-12 mx-auto mb-3 rounded-full flex items-center justify-center" style={{ background: 'var(--glp-sage-10)' }}>
                   <Brain className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} aria-hidden="true" />
                 </div>
                 <span className="font-semibold transition-colors" style={{ color: 'var(--glp-ink)' }}>Tools Library</span>
@@ -279,7 +280,7 @@ export default function Dashboard() {
                   )}
                 </div>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-bold" aria-label={`Average mood score: ${moodData.averageMoodLast7Days || '--'} out of 10`}>
+                  <span className="text-3xl sm:text-[2.25rem] font-bold" aria-label={`Average mood score: ${moodData.averageMoodLast7Days || '--'} out of 10`}>
                     {moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : "--"}
                   </span>
                   <span className="text-xl opacity-60">/10</span>
@@ -303,7 +304,7 @@ export default function Dashboard() {
                   </div>
                   <span className="font-medium opacity-90">Journal Entries</span>
                 </div>
-                <span className="text-4xl font-bold" aria-label={`${journalData.totalEntries || 0} total journal entries`}>
+                <span className="text-3xl sm:text-[2.25rem] font-bold" aria-label={`${journalData.totalEntries || 0} total journal entries`}>
                   {journalData.totalEntries || 0}
                 </span>
                 <p className="text-sm text-white/70 mt-2">Total entries written</p>
@@ -489,7 +490,7 @@ export default function Dashboard() {
           <Link 
             href="/crisis" 
             className="flex items-center justify-between p-5 rounded-2xl transition-all group shadow-sm mb-10"
-            style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-rose)' }}
+            style={{ background: 'color-mix(in srgb, var(--glp-blossom) 18%, transparent)', border: '1px solid color-mix(in srgb, var(--glp-blossom) 46%, transparent)' }}
             data-testid="link-crisis-resources"
           >
             <div className="flex items-center gap-4">
@@ -497,7 +498,7 @@ export default function Dashboard() {
                 <Heart className="w-5 h-5" style={{ color: 'var(--glp-rose)' }} aria-hidden="true" />
               </div>
               <div>
-                <h3 className="font-semibold" style={{ color: 'var(--glp-rose-dark)' }}>Crisis Resources</h3>
+                <h3 className="font-semibold" style={{ color: 'var(--glp-deep-teal)' }}>Crisis Resources</h3>
                 <p className="text-sm" style={{ color: 'var(--glp-rose)', opacity: 0.8 }}>24/7 support when you need it most</p>
               </div>
             </div>
@@ -572,7 +573,7 @@ function QuickAction({ href, icon: Icon, label, color, testId }) {
       style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
       data-testid={testId}
     >
-      <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: colors.bg }}>
+      <div className="size-12 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: colors.bg }}>
         <Icon className="w-6 h-6" style={{ color: colors.icon }} aria-hidden="true" />
       </div>
       <span className="text-sm font-medium" style={{ color: 'var(--glp-ink)' }}>{label}</span>
