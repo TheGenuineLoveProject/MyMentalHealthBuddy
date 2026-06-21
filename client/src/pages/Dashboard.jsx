@@ -8,6 +8,8 @@ import DailyInsight from "../components/DailyInsight.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/brand.css";
 import "../styles/sacred-visuals.css";
+
+// PHASE115C_DASHBOARD_VISUAL_POLISH_PATCH
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
 import SafetyFooter from "../components/ui/ReflectionFooter";
@@ -151,7 +153,7 @@ export default function Dashboard() {
             <div className="flex items-center gap-2">
               <Link 
                 href="/settings" 
-                className="p-3 rounded-xl transition-all shadow-sm hover:shadow-md" 
+                className="p-3 rounded-xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2" 
                 style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-ink)' }}
                 data-testid="link-settings" 
                 aria-label="Settings"
@@ -160,7 +162,7 @@ export default function Dashboard() {
               </Link>
               <button
                 onClick={handleLogout}
-                className="p-3 rounded-xl transition-all shadow-sm hover:shadow-md"
+                className="p-3 rounded-xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
                 style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-ink)' }}
                 data-testid="button-logout"
                 aria-label="Logout"
@@ -230,7 +232,7 @@ export default function Dashboard() {
           {/* Quick Nav to CRM, Q&A, Support */}
           <section className="mb-8 grid grid-cols-3 gap-4" aria-label="Quick navigation" data-testid="section-quick-nav">
             <Link href="/community" className="group" data-testid="link-quick-community" aria-label="Go to Q&A Community">
-              <div className="p-4 rounded-2xl transition-all text-center" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+              <div className="p-4 rounded-2xl transition-all text-center hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(47,93,93,0.12)] focus-within:ring-2 focus-within:ring-[var(--glp-gold)]" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
                 <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-gold-30)' }}>
                   <MessageCircle className="w-6 h-6" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
                 </div>
@@ -238,7 +240,7 @@ export default function Dashboard() {
               </div>
             </Link>
             <Link href="/crisis" className="group" data-testid="link-quick-crisis" aria-label="Go to Crisis Support">
-              <div className="p-4 rounded-2xl transition-all text-center" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+              <div className="p-4 rounded-2xl transition-all text-center hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(47,93,93,0.12)] focus-within:ring-2 focus-within:ring-[var(--glp-gold)]" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
                 <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}>
                   <Heart className="w-6 h-6" style={{ color: 'var(--glp-rose)' }} aria-hidden="true" />
                 </div>
@@ -246,7 +248,7 @@ export default function Dashboard() {
               </div>
             </Link>
             <Link href="/tools" className="group" data-testid="link-quick-tools" aria-label="Go to Tools Library">
-              <div className="p-4 rounded-2xl transition-all text-center" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+              <div className="p-4 rounded-2xl transition-all text-center hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(47,93,93,0.12)] focus-within:ring-2 focus-within:ring-[var(--glp-gold)]" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
                 <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-sage-10)' }}>
                   <Brain className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} aria-hidden="true" />
                 </div>
@@ -313,7 +315,7 @@ export default function Dashboard() {
 
           {/* Mood History Visual */}
           <section 
-            className="mb-8 p-6 rounded-2xl"
+            className="mb-8 p-6 rounded-3xl shadow-[0_18px_45px_rgba(47,93,93,0.10)]"
             style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
             aria-label="Your mood history"
             data-testid="section-mood-history"
@@ -337,7 +339,7 @@ export default function Dashboard() {
 
           {/* Emotion Aura & Export */}
           <section 
-            className="mb-8 p-6 rounded-2xl"
+            className="mb-8 p-6 rounded-3xl shadow-[0_18px_45px_rgba(47,93,93,0.10)]"
             style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
             aria-label="Emotion visualization and data export"
             data-testid="section-emotion-aura"
@@ -377,7 +379,7 @@ export default function Dashboard() {
             </div>
           </Link>
 
-          <section aria-label="Quick actions" className="mb-10">
+          <section aria-label="Quick actions" className="mb-10 rounded-3xl p-1">
             <h2 className="text-lg font-semibold mb-5 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
               <Sparkles className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
               Quick Actions
@@ -414,7 +416,7 @@ export default function Dashboard() {
             </div>
           </section>
 
-          <section aria-label="Explore more" className="mb-10">
+          <section aria-label="Explore more" className="mb-10 rounded-3xl p-1">
             <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Explore</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <ExploreCard 
@@ -460,26 +462,26 @@ export default function Dashboard() {
             </div>
           </section>
 
-          <section className="mb-10" aria-label="Daily affirmation">
+          <section className="mb-10 rounded-3xl p-1" aria-label="Daily affirmation">
             <DailyAffirmations compact />
           </section>
 
-          <section className="mb-10" aria-label="Progress tracking">
+          <section className="mb-10 rounded-3xl p-1" aria-label="Progress tracking">
             <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Your Progress</h2>
             <ProgressTracker />
           </section>
 
-          <section className="mb-10" aria-label="Achievements">
+          <section className="mb-10 rounded-3xl p-1" aria-label="Achievements">
             <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Sacred Achievements</h2>
             <AchievementsPanel />
           </section>
 
-          <section className="mb-10" aria-label="Mood insights">
+          <section className="mb-10 rounded-3xl p-1" aria-label="Mood insights">
             <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Your Inner Wisdom</h2>
             <MoodInsight />
           </section>
 
-          <section className="mb-10" aria-label="Journal insights">
+          <section className="mb-10 rounded-3xl p-1" aria-label="Journal insights">
             <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Journal Journey</h2>
             <JournalInsights />
           </section>
@@ -503,7 +505,7 @@ export default function Dashboard() {
           </Link>
 
           {moodData.recentMoods && moodData.recentMoods.length > 0 && (
-            <section className="mb-10" aria-label="Recent mood history">
+            <section className="mb-10 rounded-3xl p-1" aria-label="Recent mood history">
               <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Recent Moods</h2>
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" role="list">
                 {moodData.recentMoods.map((mood, idx) => (
@@ -529,7 +531,7 @@ export default function Dashboard() {
           <DailyInsight />
 
           {/* CRM Widgets Section */}
-          <section className="mt-8 space-y-6" aria-label="Personal wellness hub">
+          <section className="mt-8 space-y-6 rounded-3xl" aria-label="Personal wellness hub">
             <h2 className="text-lg font-semibold" style={{ color: 'var(--glp-ink)' }}>Your Wellness Hub</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <QuickActionsWidget />
