@@ -9,6 +9,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/brand.css";
 import "../styles/sacred-visuals.css";
 // PHASE115X_DASHBOARD_VISUAL_COHESION_PATCH
+// PHASE116R_DASHBOARD_BRAND_COLOR_AND_STREAK_PATCH
 
 // PHASE115C_DASHBOARD_VISUAL_POLISH_PATCH
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
@@ -219,8 +220,8 @@ export default function Dashboard() {
                 <button 
                   className="px-6 py-3 rounded-full font-semibold text-white transition-all hover:-translate-y-1"
                   style={{ 
-                    background: 'linear-gradient(135deg, #2f5d5d, #8fbf9f)',
-                    boxShadow: '0 8px 24px rgba(47, 93, 93, 0.3)'
+                    background: 'linear-gradient(135deg, var(--glp-deep-teal), var(--glp-sage))',
+                    boxShadow: '0 8px 24px color-mix(in srgb, var(--glp-deep-teal) 28%, transparent)'
                   }}
                   data-testid="button-start-focus"
                 >
@@ -261,7 +262,7 @@ export default function Dashboard() {
           <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10" aria-label="Wellness statistics">
             <article 
               className="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl"
-              style={{ background: 'linear-gradient(135deg, #74C0FC 0%, #4A90D9 100%)', boxShadow: '0 20px 25px -5px rgba(116, 192, 252, 0.25), 0 8px 10px -6px rgba(116, 192, 252, 0.2)' }}
+              style={{ background: 'linear-gradient(135deg, var(--glp-sage) 0%, var(--glp-deep-teal) 100%)', boxShadow: '0 20px 25px -5px color-mix(in srgb, var(--glp-deep-teal) 22%, transparent), 0 8px 10px -6px color-mix(in srgb, var(--glp-sage) 20%, transparent)' }}
               data-testid="card-mood-score"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -293,7 +294,7 @@ export default function Dashboard() {
 
             <article 
               className="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl"
-              style={{ background: 'linear-gradient(135deg, #C8B6FF 0%, #9B85DB 100%)', boxShadow: '0 20px 25px -5px rgba(200, 182, 255, 0.25), 0 8px 10px -6px rgba(200, 182, 255, 0.2)' }}
+              style={{ background: 'linear-gradient(135deg, var(--glp-blossom) 0%, var(--glp-deep-teal) 100%)', boxShadow: '0 20px 25px -5px color-mix(in srgb, var(--glp-blossom) 28%, transparent), 0 8px 10px -6px color-mix(in srgb, var(--glp-deep-teal) 18%, transparent)' }}
               data-testid="card-journal"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -359,7 +360,7 @@ export default function Dashboard() {
 
           <Link 
             href="/today" 
-            className="block mb-10 p-5 rounded-2xl bg-gradient-to-r from-sage-50 to-teal-50/50 border border-sage-200/50 hover:border-sage-300 transition-all group shadow-sm"
+            className="block mb-10 p-5 rounded-2xl transition-all group shadow-sm" style={{ background: 'linear-gradient(90deg, var(--glp-sage-10), var(--glp-teal-50))', border: '1px solid var(--glp-sage-20)' }}
             data-testid="link-today"
           >
             <div className="flex items-center justify-between">
