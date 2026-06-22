@@ -1,3 +1,4 @@
+// PHASE116K_PRICING_VISUAL_CONVERSION_POLISH_PATCH
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useLocation } from "wouter";
@@ -249,7 +250,7 @@ export default function Pricing() {
 
           {/* Hero */}
           <div className="text-center mb-12 animate-fade-in-up">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-pricing-title">
+            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] font-bold mb-6 font-display leading-tight" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-pricing-title">
               Continue Your Journey <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>With Lumi</span>
             </h1>
             <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--glp-ink)', opacity: 0.78 }} data-testid="text-pricing-subtitle">
@@ -277,7 +278,7 @@ export default function Pricing() {
               <button
                 onClick={() => setInterval("monthly")}
                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${interval === "monthly" ? "shadow-sm text-white" : "opacity-70 hover:opacity-90"}`}
-                style={interval === "monthly" ? { background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' } : { color: 'var(--glp-sage-deep)' }}
+                style={interval === "monthly" ? { background: 'linear-gradient(135deg, var(--glp-deep-teal, var(--glp-sage-deep)), var(--glp-sage))' } : { color: 'var(--glp-sage-deep)' }}
                 data-testid="button-interval-monthly"
               >
                 Monthly
@@ -285,7 +286,7 @@ export default function Pricing() {
               <button
                 onClick={() => setInterval("yearly")}
                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${interval === "yearly" ? "shadow-sm text-white" : "opacity-70 hover:opacity-90"}`}
-                style={interval === "yearly" ? { background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' } : { color: 'var(--glp-sage-deep)' }}
+                style={interval === "yearly" ? { background: 'linear-gradient(135deg, var(--glp-deep-teal, var(--glp-sage-deep)), var(--glp-sage))' } : { color: 'var(--glp-sage-deep)' }}
                 data-testid="button-interval-yearly"
               >
                 Yearly <span className="ml-1 inline-block px-1.5 py-0.5 rounded-full text-[10px] font-bold" style={interval === "yearly" ? { background: 'rgba(255,255,255,0.25)' } : { background: 'var(--glp-gold-30)', color: 'var(--glp-gold-dark)' }}>Save 31%</span>
@@ -305,7 +306,7 @@ export default function Pricing() {
                     animationDelay: `${index * 100}ms`,
                     position: 'relative',
                     padding: '2rem',
-                    background: '#FFFFFF',
+                    background: 'linear-gradient(180deg, var(--glp-paper, #FAF9F7), color-mix(in srgb, var(--glp-sage) 7%, white))',
                     border: tier.popular ? '2px solid var(--glp-gold)' : '1px solid var(--glp-sage-20)',
                     boxShadow: tier.popular
                       ? '0 20px 50px -12px rgba(232, 145, 58, 0.25), 0 4px 12px rgba(0,0,0,0.04)'
@@ -316,7 +317,7 @@ export default function Pricing() {
                   {tier.popular && (
                     <div
                       className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg"
-                      style={{ position: 'absolute', top: '-0.75rem', left: '50%', transform: 'translateX(-50%)', padding: '0.375rem 1rem', whiteSpace: 'nowrap', background: '#E8913A', boxShadow: '0 6px 18px rgba(232, 145, 58, 0.42)' }}
+                      style={{ position: 'absolute', top: '-0.75rem', left: '50%', transform: 'translateX(-50%)', padding: '0.375rem 1rem', whiteSpace: 'nowrap', background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 8px 20px color-mix(in srgb, var(--glp-gold) 32%, transparent)' }}
                       data-testid="badge-most-popular"
                     >
                       ★ Most Popular
@@ -342,7 +343,7 @@ export default function Pricing() {
                   </div>
 
                   <div className="flex items-baseline gap-2 mb-2">
-                    <span className="text-4xl font-bold" style={{ color: tier.popular ? 'var(--glp-gold-dark)' : 'var(--glp-sage-deep)' }}>{tier.price}</span>
+                    <span className="text-[2rem] sm:text-[2.25rem] font-bold" style={{ color: tier.popular ? 'var(--glp-gold-dark)' : 'var(--glp-sage-deep)' }}>{tier.price}</span>
                     <span className="text-sm font-medium ml-1" style={{ color: 'var(--glp-sage-deep)', opacity: 0.78 }}>
                       {tier.period?.startsWith('/') ? tier.period : ` ${tier.period}`}
                     </span>
@@ -398,8 +399,8 @@ className={`w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 rounded-full f
                       href="/register"
                       className="block w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 text-center rounded-full font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-lg"
                       style={{
-                        background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))',
-                        boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)'
+                        background: 'linear-gradient(135deg, var(--glp-deep-teal, var(--glp-sage-deep)), var(--glp-sage))',
+                        boxShadow: '0 10px 24px color-mix(in srgb, var(--glp-deep-teal, var(--glp-sage-deep)) 26%, transparent)'
                       }}
                       data-testid="button-get-started"
                     >
@@ -503,7 +504,7 @@ className={`w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 rounded-full f
                 <button
                   type="submit"
                   className="rounded-full px-6 py-3 font-semibold text-white text-sm transition-all hover:scale-[1.02] hover:shadow-lg"
-                  style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)' }}
+                  style={{ background: 'linear-gradient(135deg, var(--glp-deep-teal, var(--glp-sage-deep)), var(--glp-sage))', boxShadow: '0 10px 24px color-mix(in srgb, var(--glp-deep-teal, var(--glp-sage-deep)) 26%, transparent)' }}
                   data-testid="button-email-submit"
                 >
                   Remind me gently
@@ -526,7 +527,7 @@ className={`w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 rounded-full f
                 <Link
                   href="/checkin"
                   className="inline-flex items-center gap-2 rounded-full px-5 py-3 font-semibold text-white text-sm transition-all hover:scale-[1.02] hover:shadow-lg"
-                  style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 8px 20px rgba(95, 138, 110, 0.28)' }}
+                  style={{ background: 'linear-gradient(135deg, var(--glp-deep-teal, var(--glp-sage-deep)), var(--glp-sage))', boxShadow: '0 10px 24px color-mix(in srgb, var(--glp-deep-teal, var(--glp-sage-deep)) 26%, transparent)' }}
                   data-testid="button-return-checkin"
                 >
                   Start with a free check-in <ArrowRight className="w-4 h-4" />
