@@ -8441,3 +8441,154 @@ button:disabled,
   }
 }
 
+/* PHASE116X1_CANONICAL_PALETTE_SAGE_TONE_BRIDGE_PATCH */
+:root {
+  /* Canonical Genuine Love Project palette bridge.
+     This layer intentionally reasserts the approved brand colors after legacy
+     token blocks so the live UI resolves to one cohesive visual language. */
+
+  --glp-sage: #8FBF9F;
+  --glp-sage-rgb: 143 191 159;
+  --glp-sage-soft: #DDECE3;
+  --glp-sage-mist: #EEF7F1;
+  --glp-sage-light: #CFE5D7;
+  --glp-sage-vivid: #8FBF9F;
+  --glp-sage-glow: #BFDCC9;
+  --glp-sage-deep: #2F5D5D;
+  --glp-sage-deep-rgb: 47 93 93;
+
+  --glp-blossom: #F4C7C3;
+  --glp-blossom-rgb: 244 199 195;
+  --glp-blossom-soft: #FBE9E7;
+  --glp-blossom-mist: #FFF5F3;
+  --glp-blossom-glow: #F8D7D4;
+
+  --glp-rose: var(--glp-blossom);
+  --glp-rose-rgb: var(--glp-blossom-rgb);
+  --glp-rose-soft: var(--glp-blossom-soft);
+  --glp-rose-mist: var(--glp-blossom-mist);
+
+  --glp-deep-teal: #2F5D5D;
+  --glp-deep-teal-rgb: 47 93 93;
+  --glp-teal: #2F5D5D;
+  --glp-teal-rgb: 47 93 93;
+  --glp-teal-soft: #D8E5E5;
+  --glp-teal-mist: #EEF5F5;
+  --glp-teal-glow: #B8D2D2;
+
+  --glp-ivory: #FAF9F7;
+  --glp-paper: #FAF9F7;
+  --glp-surface: #FFFFFF;
+  --glp-surface-soft: color-mix(in srgb, var(--glp-ivory) 88%, var(--glp-sage) 12%);
+
+  --glp-ink: #3A3A3A;
+  --glp-ink-rgb: 58 58 58;
+  --glp-ink-70: color-mix(in srgb, var(--glp-ink) 70%, transparent);
+  --glp-ink-60: color-mix(in srgb, var(--glp-ink) 60%, transparent);
+  --glp-ink-40: color-mix(in srgb, var(--glp-ink) 40%, transparent);
+
+  --glp-gold: #D4AF37;
+  --glp-gold-rgb: 212 175 55;
+  --glp-gold-soft: #F3E6B2;
+  --glp-gold-mist: #FBF6DF;
+  --glp-gold-glow: #E7CB6A;
+
+  /* Legacy scale aliases pointed back to canonical brand tone. */
+  --sage-50: #F3F8F5;
+  --sage-100: #E7F1EB;
+  --sage-200: #D4E8DC;
+  --sage-300: #B7D8C4;
+  --sage-400: #8FBF9F;
+  --sage-500: #7AAE8A;
+  --sage-600: #5F9471;
+  --sage-700: #47775A;
+  --sage-800: #355B46;
+  --sage-900: #244132;
+
+  --teal-50: #EEF5F5;
+  --teal-100: #D8E5E5;
+  --teal-200: #B8D2D2;
+  --teal-300: #82AFAF;
+  --teal-400: #4F8585;
+  --teal-500: #2F5D5D;
+  --teal-600: #2A5252;
+  --teal-700: #234545;
+  --teal-800: #1B3535;
+  --teal-900: #142727;
+
+  --blush-50: #FFF7F6;
+  --blush-100: #FDEDEC;
+  --blush-200: #FADAD7;
+  --blush-300: #F4C7C3;
+  --blush-400: #E9AAA4;
+  --blush-500: #D98C85;
+  --blush-600: #BC6962;
+  --blush-700: #95504B;
+  --blush-800: #703D39;
+  --blush-900: #4C2927;
+
+  --gold-50: #FBF6DF;
+  --gold-100: #F7EDC3;
+  --gold-200: #EEDB8B;
+  --gold-300: #E3C653;
+  --gold-400: #D4AF37;
+  --gold-500: #B89427;
+  --gold-600: #93731D;
+  --gold-700: #6F5618;
+  --gold-800: #4F3D13;
+  --gold-900: #33280D;
+
+  /* Softer status semantics to avoid harsh red/orange/blue visual drift. */
+  --glp-success: var(--glp-sage-deep);
+  --glp-warning: var(--glp-gold);
+  --glp-error: color-mix(in srgb, var(--glp-blossom) 72%, var(--glp-ink) 28%);
+  --glp-info: var(--glp-deep-teal);
+
+  --glp-gradient-primary: linear-gradient(135deg, var(--glp-deep-teal) 0%, var(--glp-sage) 58%, var(--glp-gold) 100%);
+  --glp-gradient-soft: linear-gradient(135deg, var(--glp-ivory) 0%, var(--glp-sage-mist) 52%, var(--glp-blossom-soft) 100%);
+  --glp-gradient-premium: linear-gradient(135deg, var(--glp-deep-teal) 0%, var(--glp-sage) 48%, var(--glp-gold) 100%);
+}
+
+.text-success,
+.icon-success {
+  color: var(--glp-success) !important;
+}
+
+.text-warning,
+.icon-warning {
+  color: var(--glp-warning) !important;
+}
+
+.text-error,
+.icon-error {
+  color: var(--glp-error) !important;
+}
+
+.text-info,
+.icon-info {
+  color: var(--glp-info) !important;
+}
+
+/* Gentle global palette stabilization for legacy utility-like custom classes. */
+.bg-brand-gradient,
+.bg-glp-gradient,
+.glp-gradient,
+.glp-premium-gradient {
+  background: var(--glp-gradient-primary) !important;
+}
+
+.glp-soft-gradient,
+.bg-glp-soft {
+  background: var(--glp-gradient-soft) !important;
+}
+
+.glp-sage-surface {
+  background: color-mix(in srgb, var(--glp-sage) 16%, var(--glp-ivory)) !important;
+  color: var(--glp-ink) !important;
+}
+
+.glp-blossom-surface {
+  background: color-mix(in srgb, var(--glp-blossom) 18%, var(--glp-ivory)) !important;
+  color: var(--glp-ink) !important;
+}
+
