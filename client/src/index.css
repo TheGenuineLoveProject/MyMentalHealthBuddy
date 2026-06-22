@@ -8267,3 +8267,177 @@ button[aria-disabled="true"],
 }
 
 /* End PHASE114P_GLOBAL_VISUAL_SYSTEM_FOUNDATION_PATCH */
+
+/* PHASE116W1_SHARED_BUTTON_CTA_VISIBILITY_POLISH_PATCH */
+:root {
+  --glp-button-radius: 999px;
+  --glp-button-min-height: 44px;
+  --glp-button-shadow: 0 14px 32px color-mix(in srgb, var(--glp-deep-teal, #2F5D5D) 16%, transparent);
+  --glp-button-shadow-hover: 0 18px 42px color-mix(in srgb, var(--glp-deep-teal, #2F5D5D) 22%, transparent);
+  --glp-button-focus: 0 0 0 3px color-mix(in srgb, var(--glp-gold, #D4AF37) 45%, transparent);
+}
+
+/* Shared CTA/button clarity layer.
+   Goal: readable labels, cohesive palette, mobile-safe sizing, and polished states
+   without refactoring route/component structure. */
+button,
+[role="button"],
+.button,
+.btn,
+[class*="Button"],
+[class*="button"],
+[class*="btn"],
+[class*="cta"],
+[class*="CTA"] {
+  min-height: var(--glp-button-min-height);
+  border-radius: var(--glp-button-radius);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-wrap: balance;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Keep button titles visible even when page-level classes accidentally over-flatten contrast. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+.button,
+.btn,
+[class*="button"],
+[class*="btn"],
+[class*="cta"],
+[class*="CTA"] {
+  color: var(--glp-ink, #3A3A3A);
+}
+
+/* Primary/premium CTA polish: deep teal + sage + gold, no harsh red/orange drift. */
+.glp-button-primary,
+.glp-cta-primary,
+.premium-button,
+.premium-btn,
+button[data-variant="primary"],
+button[data-variant="premium"],
+a[data-variant="primary"],
+a[data-variant="premium"] {
+  color: var(--glp-paper, #FAF9F7) !important;
+  background:
+    linear-gradient(
+      135deg,
+      var(--glp-deep-teal, #2F5D5D) 0%,
+      color-mix(in srgb, var(--glp-sage, #8FBF9F) 76%, var(--glp-deep-teal, #2F5D5D)) 58%,
+      var(--glp-gold, #D4AF37) 100%
+    ) !important;
+  border: 1px solid color-mix(in srgb, var(--glp-gold, #D4AF37) 42%, transparent) !important;
+  box-shadow: var(--glp-button-shadow) !important;
+}
+
+/* Secondary/soft CTA polish. */
+.glp-button-secondary,
+.glp-cta-secondary,
+.secondary-button,
+.secondary-btn,
+button[data-variant="secondary"],
+a[data-variant="secondary"] {
+  color: var(--glp-deep-teal, #2F5D5D) !important;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--glp-ivory, #FAF9F7) 88%, transparent),
+      color-mix(in srgb, var(--glp-sage, #8FBF9F) 22%, var(--glp-ivory, #FAF9F7))
+    ) !important;
+  border: 1px solid color-mix(in srgb, var(--glp-sage, #8FBF9F) 45%, transparent) !important;
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--glp-deep-teal, #2F5D5D) 10%, transparent) !important;
+}
+
+/* Ghost/link buttons remain visible on light backgrounds. */
+.glp-button-ghost,
+.glp-cta-ghost,
+.ghost-button,
+.ghost-btn,
+button[data-variant="ghost"],
+a[data-variant="ghost"] {
+  color: var(--glp-deep-teal, #2F5D5D) !important;
+  background: color-mix(in srgb, var(--glp-ivory, #FAF9F7) 72%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--glp-sage, #8FBF9F) 28%, transparent) !important;
+}
+
+/* Interaction states: polished but not jumpy. */
+button:not(:disabled):hover,
+[role="button"]:not([aria-disabled="true"]):hover,
+.button:hover,
+.btn:hover,
+[class*="button"]:hover,
+[class*="btn"]:hover,
+[class*="cta"]:hover,
+[class*="CTA"]:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--glp-button-shadow-hover);
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+.button:focus-visible,
+.btn:focus-visible,
+[class*="button"]:focus-visible,
+[class*="btn"]:focus-visible,
+[class*="cta"]:focus-visible,
+[class*="CTA"]:focus-visible {
+  outline: none;
+  box-shadow: var(--glp-button-focus), var(--glp-button-shadow-hover);
+}
+
+/* Disabled buttons should still show their title clearly. */
+button:disabled,
+[aria-disabled="true"] {
+  opacity: 0.58;
+  cursor: not-allowed;
+  color: color-mix(in srgb, var(--glp-ink, #3A3A3A) 82%, transparent) !important;
+}
+
+/* Mobile button safety: prevent oversized labels, clipped titles, and cramped CTAs. */
+@media (max-width: 640px) {
+  button,
+  [role="button"],
+  .button,
+  .btn,
+  [class*="Button"],
+  [class*="button"],
+  [class*="btn"],
+  [class*="cta"],
+  [class*="CTA"] {
+    min-height: 44px;
+    max-width: 100%;
+    font-size: clamp(0.875rem, 3.45vw, 1rem);
+    line-height: 1.18;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    padding-inline: max(1rem, 4vw);
+  }
+
+  button svg,
+  [role="button"] svg,
+  .button svg,
+  .btn svg,
+  [class*="button"] svg,
+  [class*="btn"] svg,
+  [class*="cta"] svg,
+  [class*="CTA"] svg {
+    flex: 0 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  [role="button"],
+  .button,
+  .btn,
+  [class*="button"],
+  [class*="btn"],
+  [class*="cta"],
+  [class*="CTA"] {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
