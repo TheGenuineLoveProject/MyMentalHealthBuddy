@@ -1,4 +1,5 @@
 // FILE: client/src/avatar-life/officialLumiAssets.ts
+// PHASE116T2_AVATAR_LIFE_DISTINCT_SLEEPY_ASSET_PATCH
 
 /**
  * Official Lumi avatar registry.
@@ -33,7 +34,7 @@ export const OFFICIAL_LUMI = {
         heartGlow: "/lumi/official/lumi-heart.png",
         reflective: "/lumi/official/lumi-soft-presence.png",
         supportive: "/lumi/official/lumi-companion.png",
-        sleepy: "/lumi/official/lumi-soft-presence.png",
+        sleepy: "/lumi/official/lumi-float-idle.png",
         encouraging: "/lumi/official/lumi-emotion-orb.png",
         grounded: "/lumi/official/lumi-path.png",
 } as const;

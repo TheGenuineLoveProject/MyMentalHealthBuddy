@@ -167,3 +167,29 @@
     width: 100%;
   }
 }
+
+
+/* PHASE116T2_MEET_LUMI_TRANSPARENT_AVATAR_SHOWCASE_PATCH */
+.meet-lumi-page .lumi-showcase,
+.meet-lumi-page .lumi-showcase-card,
+.meet-lumi-page [data-testid*="lumi"],
+.meet-lumi-page [class*="lumi-avatar"],
+.meet-lumi-page [class*="lumi-official"] {
+  background-color: transparent !important;
+}
+
+.meet-lumi-page .lumi-showcase-card {
+  background:
+    radial-gradient(circle at 50% 62%, color-mix(in srgb, var(--glp-sage) 16%, transparent), transparent 58%),
+    radial-gradient(circle at 50% 78%, color-mix(in srgb, var(--glp-deep-teal) 8%, transparent), transparent 64%) !important;
+  border-color: color-mix(in srgb, var(--glp-sage) 18%, transparent) !important;
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--glp-deep-teal) 8%, transparent) !important;
+}
+
+.meet-lumi-page .lumi-showcase-card img,
+.meet-lumi-page .lumi-official img {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
