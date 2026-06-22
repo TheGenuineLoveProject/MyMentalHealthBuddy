@@ -1,4 +1,4 @@
-run = "node server/app.mjs"
+run = "node dist/server.mjs"
 modules = ["nodejs-20", "python-3.11", "postgresql-16"]
 
 [nix]
@@ -66,3 +66,5 @@ outputType = "webview"
 # PHASE116H4_FORCE_LEGACY_LUMI_DEPLOYMENT_PICKUP_MARKER 2026-06-22T01:18:49Z f5cf2c5f8
 
 # PHASE116L3_FORCE_PRICING_DEPLOYMENT_PICKUP_MARKER 2026-06-22T03:09:48Z ab00455ab
+
+# PHASE116M_REPLIT_RUNTIME_ENTRYPOINT_ALIGNMENT_PATCH
