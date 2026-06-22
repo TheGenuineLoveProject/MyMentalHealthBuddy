@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { OfficialLumi } from "../../lumi-registry/components/OfficialLumi";
 import { OFFICIAL_LUMI_REGISTRY } from "../../lumi-registry/registry/officialLumiRegistry";
+// PHASE116T2_LUMI_CAROUSEL_TRANSPARENT_3D_SHELL_PATCH
 
 /**
  * LumiCarousel — rotating showcase of the canonical Lumi companions.
@@ -221,16 +222,66 @@ export default function LumiCarousel({
           background: transparent;
           transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
         }
-        .lumi-carousel .lc-dot:hover::before { transform: scale(1.15); border-color: #2F6B4F; }
+        .lumi-carousel .lc-dot:hover::before { transform: scale(1.15); border-color: var(--glp-deep-teal); }
         .lumi-carousel .lc-dot.is-active::before {
           background: #7BA483;
-          border-color: #2F6B4F;
+          border-color: var(--glp-deep-teal);
           transform: scale(1.15);
         }
         .lumi-carousel .lc-dot:focus-visible {
           outline: 3px solid #2F6B4F;
           outline-offset: 2px;
         }
+
+        /* PHASE116T2_CAROUSEL_TRANSPARENT_SHELL_CSS */
+        .lumi-carousel .lc-avatar,
+        .lumi-carousel .lc-avatar *,
+        .lumi-carousel .lc-avatar .lumi-official,
+        .lumi-carousel .lc-avatar .lumi-official * {
+          background: transparent !important;
+          background-color: transparent !important;
+          border-color: transparent !important;
+          box-shadow: none !important;
+        }
+
+        .lumi-carousel .lc-viewport {
+          background:
+            radial-gradient(circle at 50% 62%, color-mix(in srgb, var(--glp-sage) 18%, transparent), transparent 56%),
+            radial-gradient(circle at 50% 80%, color-mix(in srgb, var(--glp-deep-teal) 10%, transparent), transparent 62%) !important;
+          border: 0 !important;
+          box-shadow: none !important;
+          overflow: visible !important;
+        }
+
+        .lumi-carousel .lc-viewport::before {
+          background:
+            radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--glp-gold) 16%, transparent), transparent 58%) !important;
+          border: 0 !important;
+          box-shadow: none !important;
+        }
+
+        .lumi-carousel .lc-slide,
+        .lumi-carousel .lc-avatar {
+          overflow: visible !important;
+        }
+
+        .lumi-carousel .lc-arrow {
+          color: var(--glp-deep-teal) !important;
+          background: color-mix(in srgb, var(--glp-ivory) 78%, transparent) !important;
+          border-color: color-mix(in srgb, var(--glp-sage) 35%, transparent) !important;
+          box-shadow: 0 10px 24px color-mix(in srgb, var(--glp-deep-teal) 12%, transparent) !important;
+        }
+
+        .lumi-carousel .lc-dot::before {
+          background: color-mix(in srgb, var(--glp-sage) 32%, var(--glp-ivory)) !important;
+          border-color: color-mix(in srgb, var(--glp-sage) 45%, transparent) !important;
+        }
+
+        .lumi-carousel .lc-dot.is-active::before {
+          background: var(--glp-deep-teal) !important;
+          border-color: var(--glp-gold) !important;
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .lumi-carousel .lc-slide,
           .lumi-carousel .lc-viewport::before,
