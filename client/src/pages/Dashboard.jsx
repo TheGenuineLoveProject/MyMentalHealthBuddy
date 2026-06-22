@@ -10,6 +10,7 @@ import "../styles/brand.css";
 import "../styles/sacred-visuals.css";
 // PHASE115X_DASHBOARD_VISUAL_COHESION_PATCH
 // PHASE116R_DASHBOARD_BRAND_COLOR_AND_STREAK_PATCH
+// PHASE116R2_DASHBOARD_FLAME_BRAND_PATCH
 
 // PHASE115C_DASHBOARD_VISUAL_POLISH_PATCH
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
