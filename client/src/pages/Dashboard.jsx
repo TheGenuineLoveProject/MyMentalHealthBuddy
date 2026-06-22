@@ -11,6 +11,7 @@ import "../styles/sacred-visuals.css";
 // PHASE115X_DASHBOARD_VISUAL_COHESION_PATCH
 // PHASE116R_DASHBOARD_BRAND_COLOR_AND_STREAK_PATCH
 // PHASE116R2_DASHBOARD_FLAME_BRAND_PATCH
+// PHASE116R3_FORCE_DASHBOARD_FLAME_LINE_PATCH
 
 // PHASE115C_DASHBOARD_VISUAL_POLISH_PATCH
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
@@ -634,10 +635,10 @@ function ReflectionCard() {
   const info = getReflectionStreak();
   const totalXp = parseInt(localStorage.getItem("glp_reflection_xp") || "0", 10);
 
-  const flameColor = info.current >= 14 ? "from-orange-400 to-red-500"
-    : info.current >= 7 ? "from-yellow-400 to-orange-500"
+  const flameColor = info.current >= 14 ? "from-[var(--glp-gold)] to-[var(--glp-deep-teal)]"
+    : info.current >= 7 ? "from-[var(--glp-gold)] to-[var(--glp-sage)]"
     : info.current >= 3 ? "from-amber-300 to-yellow-500"
-    : "from-gray-300 to-gray-400";
+    : "from-[var(--glp-sage-10)] to-[var(--glp-sage-20)]";
 
   return (
     <Link
