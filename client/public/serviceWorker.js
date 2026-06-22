@@ -1,16 +1,20 @@
 /* 
  * MyMentalHealthBuddy Service Worker
- * Phase 100: stale app-shell protection.
+ * Phase 115: durable anti-stale caching.
  *
  * Purpose:
  * - Keep offline support.
- * - Stop serving cached / or cached index.html for navigations.
- * - Prevent old HTML from pointing to deleted Vite hashed chunks after deploys.
- * - Use network-first navigation.
- * - Fall back only to offline.html when network fails.
+ * - Navigations (HTML): network-first, no-store — HTML is never stale.
+ * - Vite hashed assets (/assets/*): cache-first — content-addressed, so a cached
+ *   copy can never be stale, and it's fast. New deploys = new filenames = cache miss.
+ * - All OTHER static assets (images like /lumi/*.png & /brand/*, fonts, any
+ *   public-dir file with a STABLE url): network-first, so a redeploy is reflected
+ *   immediately when online. This makes freshness INDEPENDENT of bumping
+ *   CACHE_VERSION — the recurring "stale deployment" failure mode.
+ * - Fall back to offline.html (navigations) or cache (assets) only when offline.
  */
 
-const CACHE_VERSION = "mmhb-pwa-phase115-v1";
+const CACHE_VERSION = "mmhb-pwa-phase115-v2";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -97,20 +101,47 @@ async function networkFirstNavigation(request) {
   }
 }
 
-async function staleWhileRevalidateAsset(request) {
+// Vite emits content-hashed bundles as /assets/<name>-<hash>.<ext> (hash = 8+
+// base64url chars). ONLY those are truly immutable, so only those are safe to
+// cache-first. Stable public files that also live under /assets/ (e.g.
+// /assets/tglp-logo.svg) must NOT be treated as immutable, or they go stale again.
+const HASHED_ASSET_RE = /^\/assets\/.+-[A-Za-z0-9_-]{8,}\.[^/]+$/;
+function isHashedAsset(url) {
+  return HASHED_ASSET_RE.test(url.pathname);
+}
+
+// Cache writes are best-effort: never cache partial/range (206) responses, and
+// never let a cache.put rejection surface as an unhandled promise error.
+function putInCache(cache, request, response) {
+  if (request.headers.has("range")) return;
+  if (!response || !response.ok || response.status === 206) return;
+  cache.put(request, response.clone()).catch(() => {});
+}
+
+async function cacheFirstImmutable(request) {
   const cache = await caches.open(RUNTIME_CACHE);
   const cached = await cache.match(request);
+  if (cached) return cached;
 
-  const networkPromise = fetch(request)
-    .then((response) => {
-      if (response && response.ok) {
-        cache.put(request, response.clone());
-      }
-      return response;
-    })
-    .catch(() => cached);
+  const response = await fetch(request);
+  putInCache(cache, request, response);
+  return response;
+}
 
-  return cached || networkPromise;
+// Stable-URL assets (images, fonts, public-dir files): try the network FIRST so a
+// redeploy is reflected immediately when online; fall back to cache only offline.
+async function networkFirstAsset(request) {
+  const cache = await caches.open(RUNTIME_CACHE);
+
+  try {
+    const response = await fetch(request);
+    putInCache(cache, request, response);
+    return response;
+  } catch (error) {
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    throw error;
+  }
 }
 
 self.addEventListener("fetch", (event) => {
@@ -132,7 +163,11 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (isStaticAssetRequest(request, url)) {
-    event.respondWith(staleWhileRevalidateAsset(request));
+    if (isHashedAsset(url)) {
+      event.respondWith(cacheFirstImmutable(request));
+    } else {
+      event.respondWith(networkFirstAsset(request));
+    }
   }
 });
 
