@@ -16,6 +16,7 @@ import { SafeBoundary } from "../components/SafeBoundary.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 // PHASE115T_WELLNESS_PALETTE_COHESION_PATCH
+// PHASE116P1_WELLNESS_BRAND_PALETTE_COHESION_PATCH
 
 const BreathingExercise = lazy(() => import("../components/BreathingExercise.jsx"));
 const MeditationTimer = lazy(() => import("../components/MeditationTimer.jsx"));
@@ -86,9 +87,9 @@ const TOOL_CATEGORIES = {
     tools: [
       { id: "breathing", name: "Breathing Exercise", icon: Wind, color: "from-teal-400 to-cyan-500" },
       { id: "meditation", name: "Meditation Timer", icon: Moon, color: "from-indigo-400 to-purple-500" },
-      { id: "visualization", name: "Guided Visualization", icon: Sparkles, color: "from-amber-400 to-yellow-500" },
+      { id: "visualization", name: "Guided Visualization", icon: Sparkles, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
       { id: "bell", name: "Mindfulness Bell", icon: Bell, color: "from-violet-400 to-purple-500" },
-      { id: "bodyscan", name: "Body Scan", icon: Heart, color: "from-pink-400 to-rose-500" },
+      { id: "bodyscan", name: "Body Scan", icon: Heart, color: "from-[var(--glp-blossom)] to-[var(--glp-sage)]" },
       { id: "pmr", name: "Muscle Relaxation", icon: Activity, color: "from-violet-400 to-purple-500" },
       { id: "sound", name: "Sound Healing", icon: Music, color: "from-indigo-400 to-purple-500" },
       { id: "walking", name: "Mindful Walking", icon: Footprints, color: "from-emerald-400 to-teal-500" },
@@ -98,13 +99,13 @@ const TOOL_CATEGORIES = {
     name: "Emotional Wellness",
     icon: Heart,
     tools: [
-      { id: "emotions", name: "Emotion Wheel", icon: Heart, color: "from-pink-400 to-rose-500" },
+      { id: "emotions", name: "Emotion Wheel", icon: Heart, color: "from-[var(--glp-blossom)] to-[var(--glp-sage)]" },
       { id: "anxiety", name: "Anxiety Relief", icon: Zap, color: "from-[var(--glp-blossom)] to-[var(--glp-gold)]" },
       { id: "anger", name: "Anger Management", icon: ThermometerSun, color: "from-[var(--glp-blossom)] to-[var(--glp-deep-teal)]" },
       { id: "coping", name: "Coping Strategies", icon: Brain, color: "from-purple-400 to-indigo-500" },
-      { id: "reframing", name: "Positive Reframing", icon: Lightbulb, color: "from-amber-400 to-yellow-500" },
-      { id: "compassion", name: "Self-Compassion", icon: Heart, color: "from-rose-400 to-pink-500" },
-      { id: "affirmations", name: "Daily Affirmations", icon: Sun, color: "from-amber-400 to-orange-500" },
+      { id: "reframing", name: "Positive Reframing", icon: Lightbulb, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
+      { id: "compassion", name: "Self-Compassion", icon: Heart, color: "from-[var(--glp-blossom)] to-[var(--glp-deep-teal)]" },
+      { id: "affirmations", name: "Daily Affirmations", icon: Sun, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
       { id: "cbt", name: "CBT Thought Diary", icon: Brain, color: "from-violet-400 to-purple-500" },
       { id: "eq", name: "EQ Assessment", icon: Brain, color: "from-indigo-400 to-blue-500" },
     ],
@@ -114,27 +115,27 @@ const TOOL_CATEGORIES = {
     icon: Target,
     tools: [
       { id: "habits", name: "Habit Tracker", icon: Target, color: "from-emerald-400 to-teal-500" },
-      { id: "goals", name: "Goal Progress", icon: Trophy, color: "from-amber-400 to-orange-500" },
+      { id: "goals", name: "Goal Progress", icon: Trophy, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
       { id: "sleep", name: "Sleep Tracker", icon: Bed, color: "from-indigo-400 to-purple-500" },
       { id: "stress", name: "Stress Monitor", icon: Activity, color: "from-blue-400 to-indigo-500" },
       { id: "reflection", name: "Weekly Reflection", icon: Calendar, color: "from-blue-400 to-indigo-500" },
-      { id: "worry", name: "Worry Time", icon: Clock, color: "from-sage-400 to-sage-500" },
-      { id: "streaks", name: "Wellness Streaks", icon: Flame, color: "from-orange-400 to-amber-500" },
+      { id: "worry", name: "Worry Time", icon: Clock, color: "from-[var(--glp-sage)] to-[var(--glp-deep-teal)]" },
+      { id: "streaks", name: "Wellness Streaks", icon: Flame, color: "from-[var(--glp-sage)] to-[var(--glp-gold)]" },
       { id: "challenges", name: "Challenges", icon: Target, color: "from-emerald-400 to-teal-500" },
-      { id: "focus", name: "Focus Timer", icon: Timer, color: "from-rose-400 to-orange-500" },
+      { id: "focus", name: "Focus Timer", icon: Timer, color: "from-[var(--glp-blossom)] to-[var(--glp-gold)]" },
     ],
   },
   selfcare: {
     name: "Self-Care & Lifestyle",
     icon: Sparkles,
     tools: [
-      { id: "selfcare", name: "Self-Care Checklist", icon: Heart, color: "from-pink-400 to-rose-500" },
-      { id: "gratitude", name: "Gratitude Journal", icon: Lightbulb, color: "from-rose-400 to-pink-500" },
+      { id: "selfcare", name: "Self-Care Checklist", icon: Heart, color: "from-[var(--glp-blossom)] to-[var(--glp-sage)]" },
+      { id: "gratitude", name: "Gratitude Journal", icon: Lightbulb, color: "from-[var(--glp-blossom)] to-[var(--glp-deep-teal)]" },
       { id: "energy", name: "Energy Booster", icon: Activity, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
       { id: "social", name: "Social Connection", icon: Users, color: "from-cyan-400 to-blue-500" },
       { id: "eating", name: "Mindful Eating", icon: Apple, color: "from-lime-400 to-green-500" },
       { id: "detox", name: "Digital Detox", icon: Smartphone, color: "from-sky-400 to-blue-500" },
-      { id: "bingo", name: "Self-Care Bingo", icon: Gamepad2, color: "from-pink-400 to-rose-500" },
+      { id: "bingo", name: "Self-Care Bingo", icon: Gamepad2, color: "from-[var(--glp-blossom)] to-[var(--glp-sage)]" },
       { id: "hydration", name: "Hydration Tracker", icon: Droplets, color: "from-cyan-400 to-blue-500" },
       { id: "powernap", name: "Power Nap", icon: Moon, color: "from-indigo-400 to-purple-500" },
     ],
@@ -144,28 +145,28 @@ const TOOL_CATEGORIES = {
     icon: Compass,
     tools: [
       { id: "values", name: "Values Explorer", icon: Compass, color: "from-emerald-400 to-teal-500" },
-      { id: "motivation", name: "Motivation Booster", icon: Flame, color: "from-amber-400 to-orange-500" },
+      { id: "motivation", name: "Motivation Booster", icon: Flame, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
       { id: "boundaries", name: "Boundary Builder", icon: Shield, color: "from-violet-400 to-purple-500" },
-      { id: "cards", name: "Affirmation Cards", icon: Star, color: "from-rose-400 to-pink-500" },
-      { id: "jar", name: "Gratitude Jar", icon: Gift, color: "from-amber-400 to-orange-500" },
-      { id: "resilience", name: "Resilience Stories", icon: BookOpen, color: "from-rose-400 to-pink-500" },
+      { id: "cards", name: "Affirmation Cards", icon: Star, color: "from-[var(--glp-blossom)] to-[var(--glp-deep-teal)]" },
+      { id: "jar", name: "Gratitude Jar", icon: Gift, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
+      { id: "resilience", name: "Resilience Stories", icon: BookOpen, color: "from-[var(--glp-blossom)] to-[var(--glp-deep-teal)]" },
       { id: "creative", name: "Creative Expression", icon: Palette, color: "from-pink-400 to-purple-500" },
-      { id: "achievements", name: "Achievement System", icon: Award, color: "from-amber-400 to-yellow-500" },
+      { id: "achievements", name: "Achievement System", icon: Award, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
     ],
   },
   healing: {
     name: "Healing & Recovery",
     icon: Heart,
     tools: [
-      { id: "crisis", name: "Crisis Resources", icon: Shield, color: "from-rose-500 to-pink-600" },
+      { id: "crisis", name: "Crisis Resources", icon: Shield, color: "from-[var(--glp-deep-teal)] to-[var(--glp-blossom)]" },
       { id: "somatic", name: "Somatic Release", icon: Activity, color: "from-violet-400 to-purple-500" },
       { id: "perception", name: "Perception Refinement", icon: Eye, color: "from-teal-400 to-cyan-500", link: "/tools/perception-refinement" },
-      { id: "nervous-system", name: "Nervous System Flooding", icon: Zap, color: "from-amber-400 to-orange-500", link: "/tools/nervous-system-flooding" },
+      { id: "nervous-system", name: "Nervous System Flooding", icon: Zap, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]", link: "/tools/nervous-system-flooding" },
       { id: "permaculture", name: "Permaculture Wellness", icon: Sunrise, color: "from-emerald-400 to-green-500", link: "/tools/permaculture" },
       { id: "self-worth", name: "Self-Worth Reflection", icon: Heart, color: "from-violet-400 to-purple-500", link: "/tools/self-worth" },
       { id: "sleepsanctuary", name: "Sleep Sanctuary", icon: Moon, color: "from-indigo-500 to-purple-600" },
-      { id: "rituals", name: "Morning/Evening Rituals", icon: Sunrise, color: "from-amber-400 to-orange-500" },
-      { id: "laughter", name: "Laughter Therapy", icon: Smile, color: "from-yellow-400 to-orange-500" },
+      { id: "rituals", name: "Morning/Evening Rituals", icon: Sunrise, color: "from-[var(--glp-gold)] to-[var(--glp-sage)]" },
+      { id: "laughter", name: "Laughter Therapy", icon: Smile, color: "from-[var(--glp-gold)] to-[var(--glp-blossom)]" },
     ],
   },
 };
@@ -506,7 +507,7 @@ export default function Wellness() {
                   className="p-4 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-hover)] transition-all text-center group"
                   data-testid="link-mood"
                 >
-                  <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                  <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-gradient-to-br from-[var(--glp-gold)] to-[var(--glp-sage)] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                     <Sun className="w-5 h-5 text-white" />
                   </div>
                   <span className="text-sm font-medium text-[var(--text)]">Track Mood</span>
