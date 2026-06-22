@@ -396,3 +396,63 @@
     opacity: 0.4;
   }
 }
+
+/* PHASE116G_LEGACY_LUMI_MASCOT_TRANSPARENT_SHELL_PATCH
+   Legacy LumiMascot shell: remove visible square/panel artifacts while
+   preserving BuddyAvatar animation, sizing API, and compact logo behavior.
+*/
+.lumi-mascot,
+.lumi-mascot--png,
+.lumi-mascot__img {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline-color: color-mix(in srgb, var(--glp-sage) 46%, transparent);
+  overflow: visible !important;
+}
+
+.lumi-mascot {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+}
+
+.lumi-mascot__img {
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 999px;
+  isolation: isolate;
+}
+
+.lumi-mascot__img img,
+.lumi-mascot__img svg,
+.lumi-mascot svg,
+.lumi-mascot img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+.lumi-mascot__heart-glow {
+  background:
+    radial-gradient(
+      circle,
+      color-mix(in srgb, var(--glp-gold) 34%, transparent) 0%,
+      color-mix(in srgb, var(--glp-blossom) 22%, transparent) 44%,
+      transparent 76%
+    ) !important;
+  filter: blur(7px);
+  mix-blend-mode: screen;
+}
+
+.lumi-mascot[data-compact="true"] .lumi-mascot__heart-glow {
+  opacity: 0.46;
+  filter: blur(4px);
+}
