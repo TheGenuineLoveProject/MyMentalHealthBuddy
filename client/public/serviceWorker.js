@@ -10,7 +10,7 @@
  * - Fall back only to offline.html when network fails.
  */
 
-const CACHE_VERSION = "mmhb-pwa-phase100-v1";
+const CACHE_VERSION = "mmhb-pwa-phase115-v1";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
