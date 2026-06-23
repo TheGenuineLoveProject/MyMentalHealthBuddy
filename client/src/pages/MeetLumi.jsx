@@ -15,6 +15,7 @@ const SHOWCASE_ORDER = [
 ];
 
 // PHASE116Z10_MEET_LUMI_VISIBLE_PANEL_COLOR_DRIFT_PATCH
+// PHASE116Z18_FORCE_MEET_LUMI_SOURCE_BUNDLE_PICKUP_MARKER
 export default function MeetLumi() {
   useEffect(() => {
     const prev = document.title;
