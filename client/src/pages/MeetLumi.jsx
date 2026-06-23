@@ -14,6 +14,7 @@ const SHOWCASE_ORDER = [
   "LUMI_SOFT_PRESENCE",
 ];
 
+// PHASE116Z10_MEET_LUMI_VISIBLE_PANEL_COLOR_DRIFT_PATCH
 export default function MeetLumi() {
   useEffect(() => {
     const prev = document.title;
@@ -32,7 +33,7 @@ export default function MeetLumi() {
             radial-gradient(120% 90% at 8% -10%, rgba(255, 217, 61, 0.10) 0%, transparent 45%),
             radial-gradient(120% 100% at 100% 0%, rgba(123, 164, 131, 0.18) 0%, transparent 50%),
             linear-gradient(160deg, #F6F1E8 0%, #F8F8F4 55%, rgba(123, 164, 131, 0.12) 100%);
-          color: #163A36;
+          color: var(--glp-deep-teal);
         }
         .ml-wrap {
           max-width: 1140px;
@@ -78,7 +79,7 @@ export default function MeetLumi() {
         .ml-card {
           border-radius: 1.5rem;
           border: 1px solid rgba(22, 58, 54, 0.10);
-          background: rgba(255, 255, 255, 0.74);
+          background: color-mix(in srgb, var(--glp-ivory) 74%, transparent);
           padding: clamp(1.4rem, 3vw, 1.85rem);
           box-shadow: 0 18px 40px rgba(22, 58, 54, 0.06);
           text-align: center;
@@ -115,10 +116,10 @@ export default function MeetLumi() {
           border: 1.5px solid transparent;
           transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
         }
-        .ml-pill-solid { background: #163A36; color: #FFFFFF; box-shadow: 0 10px 24px rgba(22, 58, 54, 0.22); }
-        .ml-pill-solid:hover { background: #0F2A27; transform: translateY(-2px); box-shadow: 0 14px 30px rgba(22, 58, 54, 0.28); }
-        .ml-pill-soft { background: rgba(255, 255, 255, 0.78); color: #163A36; border-color: rgba(22, 58, 54, 0.18); }
-        .ml-pill-soft:hover { background: #FFFFFF; transform: translateY(-2px); box-shadow: 0 10px 22px rgba(22, 58, 54, 0.12); }
+        .ml-pill-solid { background: var(--glp-deep-teal); color: var(--glp-ivory); box-shadow: 0 10px 24px rgba(22, 58, 54, 0.22); }
+        .ml-pill-solid:hover { background: var(--glp-deep-teal); transform: translateY(-2px); box-shadow: 0 14px 30px rgba(22, 58, 54, 0.28); }
+        .ml-pill-soft { background: color-mix(in srgb, var(--glp-ivory) 78%, transparent); color: var(--glp-deep-teal); border-color: rgba(22, 58, 54, 0.18); }
+        .ml-pill-soft:hover { background: var(--glp-ivory); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(22, 58, 54, 0.12); }
         .ml-pill:focus-visible { outline: 3px solid #2F6B4F; outline-offset: 3px; }
         .ml-crisis {
           margin-top: clamp(1.75rem, 4vw, 2.5rem);
@@ -129,7 +130,7 @@ export default function MeetLumi() {
           gap: 0.4rem 0.75rem;
           border-radius: 1.25rem;
           border: 1px solid rgba(232, 145, 58, 0.30);
-          background: rgba(255, 184, 140, 0.12);
+          background: color-mix(in srgb, var(--glp-blossom) 18%, transparent);
           padding: clamp(0.9rem, 2.5vw, 1.15rem) clamp(1.1rem, 3vw, 1.5rem);
           font-size: clamp(0.95rem, 1.8vw, 1.05rem);
           color: #5A3415;
