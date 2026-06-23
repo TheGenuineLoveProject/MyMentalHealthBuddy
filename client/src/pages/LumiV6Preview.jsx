@@ -1,3 +1,4 @@
+/* PHASE116Z2_LUMIV6PREVIEW_VISIBLE_DRIFT_PATCH */
 /**
  * LumiV6Preview — /v6
  *
@@ -45,7 +46,7 @@ const COORDINATION_TABLE = [
 function Cell({ label, children, testId }) {
   return (
     <div
-      className="v6-preview-cell-hoverable flex flex-col items-center gap-2 rounded-2xl border border-amber-100 bg-white p-4 shadow-sm"
+      className="v6-preview-cell-hoverable flex flex-col items-center gap-2 rounded-2xl border border-[var(--glp-sage-15)] bg-[var(--glp-ivory)] p-4 shadow-sm"
       data-testid={testId}
     >
       <div className="flex h-40 w-40 items-center justify-center">
@@ -58,7 +59,7 @@ function Cell({ label, children, testId }) {
 
 export default function LumiV6Preview() {
   return (
-    <div className="v6-preview-polish min-h-screen bg-gradient-to-b from-amber-50 via-white to-rose-50">
+    <div className="v6-preview-polish min-h-screen bg-gradient-to-b from-[var(--glp-ivory)] via-[var(--glp-sage-10)] to-[var(--glp-blossom-10)]">
       {/* Workspace ambient wash — V10 §3.5 control-panel feel. */}
       <div className="v6-preview-wash" aria-hidden="true" />
       <SEO
@@ -72,7 +73,7 @@ export default function LumiV6Preview() {
           </Link>
           <Link
             href="/crisis"
-            className="rounded-md bg-rose-50 px-3 py-1 font-semibold text-rose-700 hover:bg-rose-100"
+            className="rounded-md bg-[var(--glp-blossom-10)] px-3 py-1 font-semibold text-rose-700 hover:bg-[var(--glp-blossom-10)]"
             data-testid="link-crisis"
           >
             Crisis Support
@@ -157,7 +158,7 @@ export default function LumiV6Preview() {
         </section>
 
         {/* ---------- Section 1: LumiV6 "Living Lumi" component ---------- */}
-        <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-amber-100" data-testid="section-lumiv6">
+        <section className="mb-10 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-amber-100" data-testid="section-lumiv6">
           <h2 className="mb-2 text-2xl font-semibold text-slate-900">LumiV6 — "Living Lumi"</h2>
           <p className="mb-6 text-sm text-slate-600">
             New multi-layer component (separate from BuddyAvatar). Mouse-track,
@@ -228,7 +229,7 @@ export default function LumiV6Preview() {
         </section>
 
         {/* ---------- V7 "Expressive Soul" playground ---------- */}
-        <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-rose-100" data-testid="section-lumiv7">
+        <section className="mb-10 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-rose-100" data-testid="section-lumiv7">
           <h2 className="mb-2 text-2xl font-semibold text-slate-900">LumiV7 — "Expressive Soul"</h2>
           <p className="mb-6 text-sm text-slate-600">
             Additive on top of V6: 5 new mouth shapes, 2 new eye variants, 5 body
@@ -300,7 +301,7 @@ export default function LumiV6Preview() {
                   <th className="px-3 py-2">Heart (Hz)</th>
                 </tr>
               </thead>
-              <tbody className="bg-white">
+              <tbody className="bg-[var(--glp-ivory)]">
                 {COORDINATION_TABLE.map((row) => (
                   <tr key={row.emotion} className="border-t border-amber-50" data-testid={`row-coord-${row.emotion}`}>
                     <td className="px-3 py-2 font-medium text-slate-900">{row.emotion}</td>
@@ -332,7 +333,7 @@ export default function LumiV6Preview() {
         </section>
 
         {/* ---------- V8 "Heart, Mind & Soul" demo ---------- */}
-        <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-purple-100" data-testid="section-lumiv8">
+        <section className="mb-10 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-purple-100" data-testid="section-lumiv8">
           <h2 className="mb-2 text-2xl font-semibold text-slate-900">LumiV8 — "Heart, Mind & Soul"</h2>
           <p className="mb-6 text-sm text-slate-600">
             Procedural breathing (every 15s the cadence drifts), randomized
@@ -400,7 +401,7 @@ function EmotionCycleDemo() {
 
   return (
     <div
-      className="flex flex-col items-center gap-4 rounded-2xl bg-white p-6 ring-1 ring-amber-100"
+      className="flex flex-col items-center gap-4 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-amber-100"
       data-testid="cell-v7-cycle"
     >
       <div className="flex h-44 w-44 items-center justify-center">
@@ -421,7 +422,7 @@ function EmotionCycleDemo() {
         <button
           type="button"
           onClick={() => setAuto((a) => !a)}
-          className={`rounded-md px-3 py-1.5 text-sm font-semibold ${auto ? "bg-rose-600 text-white hover:bg-rose-700" : "bg-amber-100 text-amber-900 hover:bg-amber-200"}`}
+          className={`rounded-md px-3 py-1.5 text-sm font-semibold ${auto ? "bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-sage)]" : "bg-[var(--glp-gold)] text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)]"}`}
           data-testid="button-cycle-auto"
         >
           {auto ? "Stop auto-cycle" : "Start auto-cycle"}
@@ -438,7 +439,7 @@ function EmotionCycleDemo() {
 function ToySpecPanel() {
   const s = LUMI_TOY_SPEC;
   return (
-    <section className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-emerald-100" data-testid="section-toy-spec">
+    <section className="mb-10 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-emerald-100" data-testid="section-toy-spec">
       <h2 className="mb-2 text-2xl font-semibold text-slate-900">Lumi Toy — Manufacturing Spec</h2>
       <p className="mb-6 text-sm text-slate-600">
         Canonical hardware contract for the physical AI companion. The on-screen
@@ -492,7 +493,7 @@ function ToySpecPanel() {
                     <td className="py-1 pr-3 font-medium text-slate-900">{e.name}</td>
                     <td className="py-1 pr-3 text-slate-700">
                       <span
-                        className="mr-2 inline-block h-3 w-3 rounded-full align-middle ring-1 ring-slate-200"
+                        className="mr-2 inline-block h-3 w-3 rounded-full align-middle ring-1 ring-[var(--glp-sage-20)]"
                         style={{ background: e.color }}
                       />
                       {e.color}
@@ -524,7 +525,7 @@ function V9DemoSection() {
   };
   return (
     <section
-      className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-amber-200"
+      className="mb-10 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-[var(--glp-gold)]"
       data-testid="section-lumiv9"
     >
       <h2 className="mb-2 text-2xl font-semibold text-slate-900">
@@ -582,7 +583,7 @@ function V9DemoSection() {
             key={s}
             type="button"
             onClick={() => fireSentiment(s)}
-            className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900 ring-1 ring-amber-200 hover:bg-amber-100"
+            className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900 ring-1 ring-[var(--glp-gold)] hover:bg-amber-100"
             data-testid={`btn-mirror-${s}`}
           >
             {s}
@@ -591,7 +592,7 @@ function V9DemoSection() {
         <button
           type="button"
           onClick={resetEntrance}
-          className="ml-auto rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 ring-1 ring-slate-200 hover:bg-slate-200"
+          className="ml-auto rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700 ring-1 ring-[var(--glp-sage-20)] hover:bg-slate-200"
           data-testid="btn-reset-entrance"
         >
           Replay entrance (clears session gate)
@@ -611,7 +612,7 @@ function V9DemoSection() {
 function V20EffectsSection() {
   return (
     <section
-      className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-yellow-200"
+      className="mb-10 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-[var(--glp-gold)]"
       data-testid="section-lumiv20"
     >
       <h2 className="mb-2 text-2xl font-semibold text-slate-900">
@@ -684,7 +685,7 @@ function LumiAudioPanel() {
   const { enabled, effective, available, reducedMotion, setEnabled, pop, heartbeat, chime } = useLumiAudio();
   return (
     <section
-      className="mb-10 rounded-2xl bg-white/70 p-6 ring-1 ring-sky-100"
+      className="mb-10 rounded-2xl bg-[var(--glp-ivory)] p-6 ring-1 ring-sky-100"
       data-testid="section-lumi-audio"
       aria-labelledby="lumi-audio-title"
     >
@@ -710,7 +711,7 @@ function LumiAudioPanel() {
             type="checkbox"
             checked={enabled}
             onChange={(e) => setEnabled(e.target.checked)}
-            className="h-4 w-4 accent-sky-600"
+            className="h-4 w-4 accent-[var(--glp-deep-teal)]"
             disabled={!available}
             data-testid="toggle-lumi-audio"
             aria-describedby="lumi-audio-status"
@@ -737,7 +738,7 @@ function LumiAudioPanel() {
           type="button"
           onClick={pop}
           disabled={!effective}
-          className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900 ring-1 ring-amber-200 hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-900 ring-1 ring-[var(--glp-gold)] hover:bg-amber-100 disabled:cursor-not-allowed disabled:opacity-50"
           data-testid="btn-lumi-audio-pop"
           aria-label="Preview Lumi entrance pop"
         >
@@ -747,7 +748,7 @@ function LumiAudioPanel() {
           type="button"
           onClick={heartbeat}
           disabled={!effective}
-          className="rounded-full bg-rose-50 px-3 py-1 text-xs font-medium text-rose-900 ring-1 ring-rose-200 hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-full bg-[var(--glp-blossom-10)] px-3 py-1 text-xs font-medium text-[var(--glp-deep-teal)] ring-1 ring-[var(--glp-blossom)] hover:bg-[var(--glp-blossom-10)] disabled:cursor-not-allowed disabled:opacity-50"
           data-testid="btn-lumi-audio-heartbeat"
           aria-label="Preview Lumi heartbeat"
         >
@@ -777,7 +778,7 @@ function LumiAudioPanel() {
 
 function SpecCard({ title, children }) {
   return (
-    <div className="rounded-xl bg-white p-4 ring-1 ring-slate-100">
+    <div className="rounded-xl bg-[var(--glp-ivory)] p-4 ring-1 ring-[var(--glp-sage-15)]">
       <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">{title}</h3>
       <dl className="space-y-1 text-sm">{children}</dl>
     </div>
