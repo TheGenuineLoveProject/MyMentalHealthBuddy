@@ -24,6 +24,11 @@ try {
   console.warn('Brand initialization failed, continuing with defaults:', err);
 }
 
+// Set ONLY when the user explicitly clicks "Update now" (or confirms the fallback
+// prompt). controllerchange reloads the page solely when this is true, so a new
+// service worker can never reload someone mid-journal/check-in without consent.
+let updateConsentGiven = false;
+
 function showUpdateBanner(worker) {
   if (document.getElementById('sw-update-banner')) return;
   const banner = document.createElement('div');
@@ -36,6 +41,7 @@ function showUpdateBanner(worker) {
   style.textContent = '@keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
   banner.appendChild(style);
   banner.querySelector('[data-testid="btn-update-app"]').addEventListener('click', () => {
+    updateConsentGiven = true;
     worker.postMessage({ type: 'SKIP_WAITING' });
     window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
   });
@@ -50,6 +56,13 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/serviceWorker.js')
       .then((registration) => {
+        // Surface a worker that was already waiting before this page load (e.g.
+        // the user dismissed the banner then revisited) so they are never stuck
+        // without an "Update now" prompt. showUpdateBanner de-dupes itself.
+        if (registration.waiting && navigator.serviceWorker.controller) {
+          showUpdateBanner(registration.waiting);
+        }
+
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;
           if (newWorker) {
@@ -60,6 +73,7 @@ if ('serviceWorker' in navigator) {
                     showUpdateBanner(newWorker);
                   } else {
                     if (window.confirm('A new version is available. Refresh to update?')) {
+                      updateConsentGiven = true;
                       newWorker.postMessage({ type: 'SKIP_WAITING' });
                       window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
                     }
@@ -67,6 +81,7 @@ if ('serviceWorker' in navigator) {
                 } catch (e) {
                   console.warn('Update banner failed, using fallback:', e);
                   if (window.confirm('A new version is available. Refresh to update?')) {
+                    updateConsentGiven = true;
                     newWorker.postMessage({ type: 'SKIP_WAITING' });
                     window.dispatchEvent(new CustomEvent("mmhb-service-worker-refresh-available"));
                   }
@@ -77,7 +92,11 @@ if ('serviceWorker' in navigator) {
         });
 
         setInterval(() => {
-          registration.update();
+          registration.update().then(() => {
+            if (registration.waiting && navigator.serviceWorker.controller) {
+              showUpdateBanner(registration.waiting);
+            }
+          }).catch(() => {});
         }, 60 * 60 * 1000);
       })
       .catch((error) => {
@@ -85,14 +104,23 @@ if ('serviceWorker' in navigator) {
       });
   });
 
+  // A new service worker only takes control after the user CONSENTS via the
+  // "Update now" banner (the SW no longer auto-activates via skipWaiting on
+  // install). When that consented takeover happens, reload exactly once so the
+  // user lands on the fresh bundle. Without consent (e.g. another tab, or first
+  // install) we never reload — protecting in-progress journaling/check-ins.
+  let reloadingForUpdate = false;
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-  window.dispatchEvent(new CustomEvent("mmhb-service-worker-updated", {
-    detail: {
-      source: "controllerchange",
-      action: "manual-refresh-available",
-    },
-  }));
-});
+    window.dispatchEvent(new CustomEvent("mmhb-service-worker-updated", {
+      detail: {
+        source: "controllerchange",
+        action: "consented-refresh",
+      },
+    }));
+    if (reloadingForUpdate || !updateConsentGiven) return;
+    reloadingForUpdate = true;
+    window.location.reload();
+  });
 
   navigator.serviceWorker.addEventListener('message', (event) => {
     if (event.data?.type === 'CHECK_REMINDER') {

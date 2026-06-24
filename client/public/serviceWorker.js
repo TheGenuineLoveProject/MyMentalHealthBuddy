@@ -25,8 +25,11 @@ const PRECACHE_URLS = [
 ];
 
 self.addEventListener("install", (event) => {
-  self.skipWaiting();
-
+  // NOTE: intentionally NO self.skipWaiting() here. A new worker WAITS until the
+  // user consents via the in-app "Update now" banner (which posts SKIP_WAITING).
+  // The active worker is already network-first, so freshness on the next
+  // navigation is preserved WITHOUT forcing a disruptive takeover/reload while
+  // someone is mid-journal, mid-check-in, or on crisis content.
   event.waitUntil(
     caches
       .open(STATIC_CACHE)
