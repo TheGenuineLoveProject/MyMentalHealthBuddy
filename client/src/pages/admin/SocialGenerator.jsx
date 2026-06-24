@@ -1,4 +1,5 @@
 // PHASE116Z32_ADMIN_SOCIAL_GENERATOR_VISUAL_DRIFT_PATCH
+// PHASE11673_SOCIAL_GENERATOR_VISUAL_TOKEN_PATCH
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -201,14 +202,14 @@ export default function SocialGenerator() {
           Back to Command Center
         </Link>
         <div className="flex items-center gap-4 mb-8">
-          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
-            <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid="link-back-social">
+            <ArrowLeft className="w-5 h-5 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
           </Link>
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="text-page-title">
               AI Content Generator
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
               Create trauma-informed wellness content with AI assistance
             </p>
           </div>
@@ -216,7 +217,7 @@ export default function SocialGenerator() {
             type="button"
             onClick={handleGenerate}
             disabled={generateMutation.isPending || !form.theme}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
             data-testid="button-ai-generate"
           >
             {generateMutation.isPending ? (
@@ -248,7 +249,7 @@ export default function SocialGenerator() {
                         className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all ${
                           isSelected 
                             ? "border-[var(--glp-sage)] bg-[var(--glp-sage-10)]" 
-                            : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] hover:border-slate-300"
+                            : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] hover:border-[var(--glp-sage)]"
                         }`}
                         data-testid={`button-platform-${platform.id}`}
                       >
@@ -263,15 +264,15 @@ export default function SocialGenerator() {
                 
                 {currentSpec.maxChars && (
                   <div className="flex items-center gap-4 p-3 rounded-lg bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] mb-4 text-sm">
-                    <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center gap-1 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                       <Zap className="w-4 h-4" />
                       <span>Max: {currentSpec.maxChars} chars</span>
                     </div>
-                    <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center gap-1 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                       <Hash className="w-4 h-4" />
                       <span>Hashtags: {currentSpec.hashtagLimit}</span>
                     </div>
-                    <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center gap-1 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                       <Clock className="w-4 h-4" />
                       <span>Best: {currentSpec.bestTimes?.join(", ")}</span>
                     </div>
@@ -287,7 +288,7 @@ export default function SocialGenerator() {
                       value={form.theme}
                       onChange={(e) => handleChange("theme", e.target.value)}
                       className={`w-full px-3 py-2 rounded-lg border ${
-                        errors.theme ? "border-red-500" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
+                        errors.theme ? "border-[var(--glp-blossom)]" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
                       } bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] text-sm`}
                       data-testid="select-theme"
                     >
@@ -340,10 +341,10 @@ export default function SocialGenerator() {
                   {complianceResult && (
                     <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
                       complianceResult.status === "pass" 
-                        ? "bg-emerald-100 text-emerald-700"
+                        ? "bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)]"
                         : complianceResult.status === "review"
                         ? "bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)]"
-                        : "bg-red-100 text-red-700"
+                        : "bg-[rgba(244,199,195,0.24)] text-[var(--glp-charcoal)]"
                     }`}>
                       {complianceResult.status === "pass" ? (
                         <CheckCircle className="w-4 h-4" />
@@ -362,7 +363,7 @@ export default function SocialGenerator() {
                         Hook (2-second attention grabber) *
                       </label>
                       {alternativeHooks.length > 0 && (
-                        <span className="text-xs text-slate-500">{alternativeHooks.length} alternatives available</span>
+                        <span className="text-xs text-[var(--glp-deep-teal)]">{alternativeHooks.length} alternatives available</span>
                       )}
                     </div>
                     <input
@@ -371,7 +372,7 @@ export default function SocialGenerator() {
                       onChange={(e) => handleChange("hook", e.target.value)}
                       placeholder="e.g., Your nervous system isn't broken..."
                       className={`w-full px-4 py-3 rounded-lg border ${
-                        errors.hook ? "border-red-500" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
+                        errors.hook ? "border-[var(--glp-blossom)]" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
                       } bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]`}
                       data-testid="input-hook"
                     />
@@ -382,7 +383,7 @@ export default function SocialGenerator() {
                             key={idx}
                             type="button"
                             onClick={() => handleChange("hook", hook)}
-                            className="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                            className="text-xs px-2 py-1 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[var(--glp-sage)] dark:hover:bg-[var(--glp-charcoal)] transition-colors"
                           >
                             {hook.substring(0, 40)}...
                           </button>
@@ -396,7 +397,7 @@ export default function SocialGenerator() {
                       <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                         Caption *
                       </label>
-                      <span className={`text-xs ${isOverLimit ? "text-red-500" : "text-slate-500"}`}>
+                      <span className={`text-xs ${isOverLimit ? "text-[var(--glp-blossom)]" : "text-[var(--glp-deep-teal)]"}`}>
                         {captionLength}{currentSpec.maxChars ? ` / ${currentSpec.maxChars}` : ""} chars
                       </span>
                     </div>
@@ -407,7 +408,7 @@ export default function SocialGenerator() {
                       placeholder="Write your main content here. Use trauma-informed language..."
                       rows={6}
                       className={`w-full px-4 py-3 rounded-lg border ${
-                        errors.caption ? "border-red-500" : isOverLimit ? "border-amber-500" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
+                        errors.caption ? "border-[var(--glp-blossom)]" : isOverLimit ? "border-[var(--glp-gold)]" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
                       } bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] resize-none`}
                       data-testid="input-caption"
                     />
@@ -466,7 +467,7 @@ export default function SocialGenerator() {
                 <button
                   type="submit"
                   disabled={createMutation.isPending}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--glp-sage-deep)] text-white font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
                   data-testid="button-save-draft"
                 >
                   {createMutation.isPending ? (
@@ -493,7 +494,7 @@ export default function SocialGenerator() {
                       type="button"
                       onClick={handleRewrite}
                       disabled={rewriteMutation.isPending}
-                      className="text-xs px-2 py-1 rounded bg-purple-100 text-purple-700 hover:bg-purple-200 flex items-center gap-1"
+                      className="text-xs px-2 py-1 rounded bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)] flex items-center gap-1"
                       data-testid="button-ai-rewrite"
                     >
                       {rewriteMutation.isPending ? (
@@ -508,9 +509,9 @@ export default function SocialGenerator() {
                 
                 {complianceResult.issues?.length > 0 && (
                   <div className="space-y-2 mb-4">
-                    <p className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Issues Found</p>
+                    <p className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] uppercase">Issues Found</p>
                     {complianceResult.issues.slice(0, 5).map((issue, idx) => (
-                      <div key={idx} className="text-sm p-2 rounded bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300">
+                      <div key={idx} className="text-sm p-2 rounded bg-[rgba(244,199,195,0.22)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                         <span className="font-medium">"{issue.phrase}"</span>
                         <p className="text-xs mt-1 opacity-80">{issue.suggestion}</p>
                       </div>
@@ -520,7 +521,7 @@ export default function SocialGenerator() {
                 
                 {complianceResult.suggestions?.length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Suggestions</p>
+                    <p className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] uppercase">Suggestions</p>
                     {complianceResult.suggestions.slice(0, 3).map((sug, idx) => (
                       <div key={idx} className="text-sm p-2 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                         {sug.message}
@@ -530,7 +531,7 @@ export default function SocialGenerator() {
                 )}
                 
                 {complianceResult.status === "pass" && (
-                  <div className="text-sm p-3 rounded bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
+                  <div className="text-sm p-3 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] flex items-center gap-2">
                     <CheckCircle className="w-4 h-4" />
                     Content passes trauma-informed guidelines
                   </div>
@@ -544,7 +545,7 @@ export default function SocialGenerator() {
                   <Sparkles className="w-4 h-4" />
                   AI Notes
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
+                <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                   {aiGenerated.contentNotes}
                 </p>
               </div>
@@ -553,7 +554,7 @@ export default function SocialGenerator() {
             <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-purple-500" />
+                  <Zap className="w-4 h-4 text-[var(--glp-deep-teal)]" />
                   AI Image Generation
                 </h3>
                 <button
@@ -564,7 +565,7 @@ export default function SocialGenerator() {
                     style: "minimalist"
                   })}
                   disabled={imageGenerateMutation.isPending}
-                  className="text-xs px-3 py-1.5 rounded-lg bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 flex items-center gap-1"
+                  className="text-xs px-3 py-1.5 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)] disabled:opacity-50 flex items-center gap-1"
                   data-testid="button-generate-image"
                 >
                   {imageGenerateMutation.isPending ? (
@@ -577,7 +578,7 @@ export default function SocialGenerator() {
               </div>
               
               {imageError && (
-                <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg text-sm text-red-700 dark:text-red-300 flex items-center gap-2">
+                <div className="p-3 bg-[rgba(244,199,195,0.22)] dark:bg-[var(--glp-deep-teal)] rounded-lg text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
                   <AlertCircle className="w-4 h-4" />
                   {imageError}
                 </div>
@@ -605,7 +606,7 @@ export default function SocialGenerator() {
               <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-blue-500" />
+                    <Zap className="w-4 h-4 text-[var(--glp-deep-teal)]" />
                     Content Enhancement
                   </h3>
                   <div className="flex gap-2">
@@ -615,7 +616,7 @@ export default function SocialGenerator() {
                         type="button"
                         onClick={() => enhanceMutation.mutate({ text: form.caption, type })}
                         disabled={enhanceMutation.isPending}
-                        className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 capitalize"
+                        className="text-xs px-2 py-1 rounded bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage)] capitalize"
                         data-testid={`button-enhance-${type}`}
                       >
                         {type}
@@ -625,7 +626,7 @@ export default function SocialGenerator() {
                 </div>
                 
                 {enhanceError && (
-                  <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg text-sm text-red-700 dark:text-red-300 flex items-center gap-2">
+                  <div className="p-3 bg-[rgba(244,199,195,0.22)] dark:bg-[var(--glp-deep-teal)] rounded-lg text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
                     <AlertCircle className="w-4 h-4" />
                     {enhanceError}
                   </div>
@@ -641,11 +642,11 @@ export default function SocialGenerator() {
                 {enhancementSuggestions?.suggestions && (
                   <div className="space-y-3">
                     {enhancementSuggestions.suggestions.map((sug, idx) => (
-                      <div key={idx} className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                        <p className="text-sm font-medium text-blue-800 dark:text-blue-200">{sug.title}</p>
-                        <p className="text-xs text-blue-600 dark:text-blue-300 mt-1">{sug.description}</p>
+                      <div key={idx} className="p-3 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg">
+                        <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-ivory)]">{sug.title}</p>
+                        <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mt-1">{sug.description}</p>
                         {sug.example && (
-                          <p className="text-xs mt-2 p-2 bg-[var(--glp-ivory)] dark:bg-slate-700 rounded border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] italic">
+                          <p className="text-xs mt-2 p-2 bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] italic">
                             "{sug.example}"
                           </p>
                         )}
@@ -654,14 +655,14 @@ export default function SocialGenerator() {
                     
                     {enhancementSuggestions.enhancedVersion && (
                       <div className="pt-3 border-t border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]">
-                        <p className="text-xs font-medium text-blue-800 dark:text-blue-200 mb-2">Enhanced Version:</p>
-                        <p className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] p-2 bg-[var(--glp-ivory)] dark:bg-slate-700 rounded">
+                        <p className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-ivory)] mb-2">Enhanced Version:</p>
+                        <p className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] p-2 bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded">
                           {enhancementSuggestions.enhancedVersion}
                         </p>
                         <button
                           type="button"
                           onClick={() => setForm(prev => ({ ...prev, caption: enhancementSuggestions.enhancedVersion }))}
-                          className="mt-2 text-xs px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700"
+                          className="mt-2 text-xs px-2 py-1 rounded bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)]"
                           data-testid="button-apply-enhanced"
                         >
                           Apply Enhanced Version
@@ -677,21 +678,21 @@ export default function SocialGenerator() {
               <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-3">
                 Trauma-Informed Tips
               </h3>
-              <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2">
+              <ul className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] space-y-2">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[var(--glp-sage)] mt-0.5 flex-shrink-0" />
                   Use "you might" instead of "you should"
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[var(--glp-sage)] mt-0.5 flex-shrink-0" />
                   Say "may help" instead of "will fix"
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[var(--glp-sage)] mt-0.5 flex-shrink-0" />
                   Include pacing cues like "at your own pace"
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-[var(--glp-sage)] mt-0.5 flex-shrink-0" />
                   Add crisis resources for sensitive topics
                 </li>
               </ul>
@@ -700,7 +701,7 @@ export default function SocialGenerator() {
             {form.caption && (
               <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4" data-testid="section-canva-export">
                 <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-3 flex items-center gap-2">
-                  <Save className="w-4 h-4 text-purple-500" />
+                  <Save className="w-4 h-4 text-[var(--glp-deep-teal)]" />
                   Canva Export Copy Blocks
                 </h3>
                 <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3">
@@ -716,7 +717,7 @@ export default function SocialGenerator() {
                   ].map(({ label, format }) => {
                     const formatted = format(form.caption);
                     return (
-                      <div key={label} className="border border-slate-100 dark:border-slate-700 rounded-lg p-3">
+                      <div key={label} className="border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] rounded-lg p-3">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{label}</span>
                           <button
@@ -724,13 +725,13 @@ export default function SocialGenerator() {
                             onClick={() => {
                               navigator.clipboard.writeText(formatted);
                             }}
-                            className="text-xs px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors"
+                            className="text-xs px-2 py-0.5 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[var(--glp-sage)] dark:hover:bg-[var(--glp-charcoal)] transition-colors"
                             data-testid={`button-copy-${label.toLowerCase().replace(/[^a-z0-9]/g, "-")}`}
                           >
                             Copy
                           </button>
                         </div>
-                        <pre className="text-xs text-slate-600 dark:text-slate-400 whitespace-pre-wrap font-sans leading-relaxed max-h-24 overflow-y-auto">
+                        <pre className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] whitespace-pre-wrap font-sans leading-relaxed max-h-24 overflow-y-auto">
                           {formatted}
                         </pre>
                       </div>
