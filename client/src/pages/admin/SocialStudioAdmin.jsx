@@ -17,14 +17,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/Switch";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 
+// PHASE11678_SOCIAL_STUDIO_ADMIN_VISUAL_TOKEN_PATCH
+
 const PLATFORMS = [
-  { id: "instagram", name: "Instagram", icon: SiInstagram, color: "bg-gradient-to-r from-purple-500 to-pink-500", charLimit: 2200, textColor: "text-white" },
-  { id: "twitter", name: "Twitter/X", icon: SiX, color: "bg-black", charLimit: 280, textColor: "text-white" },
-  { id: "linkedin", name: "LinkedIn", icon: SiLinkedin, color: "bg-blue-600", charLimit: 3000, textColor: "text-white" },
-  { id: "youtube", name: "YouTube", icon: SiYoutube, color: "bg-red-600", charLimit: 5000, textColor: "text-white" },
-  { id: "facebook", name: "Facebook", icon: SiFacebook, color: "bg-blue-500", charLimit: 63206, textColor: "text-white" },
-  { id: "pinterest", name: "Pinterest", icon: SiPinterest, color: "bg-red-500", charLimit: 500, textColor: "text-white" },
-  { id: "tiktok", name: "TikTok", icon: SiTiktok, color: "bg-black", charLimit: 2200, textColor: "text-white" },
+  { id: "instagram", name: "Instagram", icon: SiInstagram, color: "bg-[var(--glp-deep-teal)]", charLimit: 2200, textColor: "text-[var(--glp-ivory)]" },
+  { id: "twitter", name: "Twitter/X", icon: SiX, color: "bg-black", charLimit: 280, textColor: "text-[var(--glp-ivory)]" },
+  { id: "linkedin", name: "LinkedIn", icon: SiLinkedin, color: "bg-[var(--glp-deep-teal)]", charLimit: 3000, textColor: "text-[var(--glp-ivory)]" },
+  { id: "youtube", name: "YouTube", icon: SiYoutube, color: "bg-[var(--glp-deep-teal)]", charLimit: 5000, textColor: "text-[var(--glp-ivory)]" },
+  { id: "facebook", name: "Facebook", icon: SiFacebook, color: "bg-[var(--glp-deep-teal)]", charLimit: 63206, textColor: "text-[var(--glp-ivory)]" },
+  { id: "pinterest", name: "Pinterest", icon: SiPinterest, color: "bg-[var(--glp-deep-teal)]", charLimit: 500, textColor: "text-[var(--glp-ivory)]" },
+  { id: "tiktok", name: "TikTok", icon: SiTiktok, color: "bg-black", charLimit: 2200, textColor: "text-[var(--glp-ivory)]" },
 ];
 
 const HASHTAG_SETS = {
@@ -302,10 +304,10 @@ export default function SocialStudioAdmin() {
 
   const getStatusBadge = (status) => {
     const styles = {
-      draft: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
-      scheduled: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
-      approved: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
-      published: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
+      draft: "bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)] dark:bg-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]",
+      scheduled: "bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)] dark:bg-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]",
+      approved: "bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)] dark:bg-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]",
+      published: "bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)] dark:bg-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]"
     };
     return styles[status] || styles.draft;
   };
@@ -370,8 +372,8 @@ export default function SocialStudioAdmin() {
           <Card className="cursor-pointer hover:border-primary/50" onClick={() => { setFilterStatus("all"); setActiveTab("queue"); }}>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <FileText className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                <div className="p-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg">
+                  <FileText className="w-4 h-4 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
                 </div>
                 <div>
                   <p className="text-xl font-bold">{stats.total}</p>
@@ -383,8 +385,8 @@ export default function SocialStudioAdmin() {
           <Card className="cursor-pointer hover:border-primary/50" onClick={() => { setFilterStatus("draft"); setActiveTab("queue"); }}>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                  <Edit className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                <div className="p-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg">
+                  <Edit className="w-4 h-4 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
                 </div>
                 <div>
                   <p className="text-xl font-bold">{stats.draft}</p>
@@ -396,8 +398,8 @@ export default function SocialStudioAdmin() {
           <Card className="cursor-pointer hover:border-primary/50" onClick={() => { setFilterStatus("scheduled"); setActiveTab("queue"); }}>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                  <Clock className="w-4 h-4 text-blue-600" />
+                <div className="p-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg">
+                  <Clock className="w-4 h-4 text-[var(--glp-deep-teal)]" />
                 </div>
                 <div>
                   <p className="text-xl font-bold">{stats.scheduled}</p>
@@ -409,8 +411,8 @@ export default function SocialStudioAdmin() {
           <Card className="cursor-pointer hover:border-primary/50" onClick={() => { setFilterStatus("approved"); setActiveTab("queue"); }}>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-                  <Check className="w-4 h-4 text-green-600" />
+                <div className="p-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg">
+                  <Check className="w-4 h-4 text-[var(--glp-sage)]" />
                 </div>
                 <div>
                   <p className="text-xl font-bold">{stats.approved}</p>
@@ -422,8 +424,8 @@ export default function SocialStudioAdmin() {
           <Card className="cursor-pointer hover:border-primary/50" onClick={() => { setFilterStatus("published"); setActiveTab("queue"); }}>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                  <Send className="w-4 h-4 text-purple-600" />
+                <div className="p-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg">
+                  <Send className="w-4 h-4 text-[var(--glp-deep-teal)]" />
                 </div>
                 <div>
                   <p className="text-xl font-bold">{stats.published}</p>
@@ -478,7 +480,7 @@ export default function SocialStudioAdmin() {
                     <CardTitle className="flex items-center justify-between">
                       <span>Create New Post</span>
                       {newPost.aiGenerated && (
-                        <Badge variant="secondary" className="bg-purple-100 text-purple-700">
+                        <Badge variant="secondary" className="bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)]">
                           <Bot className="w-3 h-3 mr-1" /> AI Generated
                         </Badge>
                       )}
@@ -486,10 +488,10 @@ export default function SocialStudioAdmin() {
                     <CardDescription>Write trauma-informed content for your audience</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                    <div className="p-4 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)]">
                       <div className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                        <div className="text-sm text-amber-800 dark:text-amber-200">
+                        <AlertTriangle className="w-5 h-5 text-[var(--glp-gold)] flex-shrink-0 mt-0.5" />
+                        <div className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                           <strong>Brand Safety:</strong> Use compassionate, non-judgmental language. 
                           Avoid sensationalism, fear-mongering, or promised outcomes. Include trigger warnings when needed.
                         </div>
@@ -510,7 +512,7 @@ export default function SocialStudioAdmin() {
                                   <p.icon className="w-4 h-4" />
                                   <span>{p.name}</span>
                                   {connectedPlatforms.includes(p.id) && (
-                                    <Check className="w-3 h-3 text-green-500 ml-auto" />
+                                    <Check className="w-3 h-3 text-[var(--glp-sage)] ml-auto" />
                                   )}
                                 </div>
                               </SelectItem>
@@ -552,7 +554,7 @@ export default function SocialStudioAdmin() {
                           </Button>
                           <span className={`text-xs ${
                             newPost.content.length > getPlatformInfo(newPost.platform).charLimit 
-                              ? "text-red-500 font-medium" 
+                              ? "text-[var(--glp-blossom)] font-medium" 
                               : "text-muted-foreground"
                           }`}>
                             {newPost.content.length} / {getPlatformInfo(newPost.platform).charLimit}
@@ -655,15 +657,15 @@ export default function SocialStudioAdmin() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <Button variant="outline" className="w-full justify-start" onClick={handleGenerateAIContent} disabled={generatingAI}>
-                      <Wand2 className="w-4 h-4 mr-2 text-purple-500" />
+                      <Wand2 className="w-4 h-4 mr-2 text-[var(--glp-deep-teal)]" />
                       {generatingAI ? "Generating..." : "Generate with AI"}
                     </Button>
                     <Button variant="outline" className="w-full justify-start" onClick={() => setActiveTab("templates")}>
-                      <Layout className="w-4 h-4 mr-2 text-blue-500" />
+                      <Layout className="w-4 h-4 mr-2 text-[var(--glp-deep-teal)]" />
                       Use Template
                     </Button>
                     <Button variant="outline" className="w-full justify-start" onClick={() => setActiveTab("hooks")}>
-                      <Zap className="w-4 h-4 mr-2 text-amber-500" />
+                      <Zap className="w-4 h-4 mr-2 text-[var(--glp-gold)]" />
                       Generate Hooks
                     </Button>
                   </CardContent>
@@ -682,7 +684,7 @@ export default function SocialStudioAdmin() {
                             <span className="text-sm">{p.name}</span>
                           </div>
                           {connectedPlatforms.includes(p.id) ? (
-                            <Badge variant="outline" className="text-green-600 border-green-200">
+                            <Badge variant="outline" className="text-[var(--glp-sage)] border-[var(--glp-sage)]">
                               <Check className="w-3 h-3 mr-1" /> Connected
                             </Badge>
                           ) : (
@@ -703,19 +705,19 @@ export default function SocialStudioAdmin() {
                   <CardContent>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <Heart className="w-4 h-4 text-pink-500 mt-0.5 flex-shrink-0" />
+                        <Heart className="w-4 h-4 text-[var(--glp-blossom)] mt-0.5 flex-shrink-0" />
                         Lead with empathy and validation
                       </li>
                       <li className="flex items-start gap-2">
-                        <Target className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                        <Target className="w-4 h-4 text-[var(--glp-deep-teal)] mt-0.5 flex-shrink-0" />
                         Focus on one clear message
                       </li>
                       <li className="flex items-start gap-2">
-                        <Users className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <Users className="w-4 h-4 text-[var(--glp-sage)] mt-0.5 flex-shrink-0" />
                         Invite engagement naturally
                       </li>
                       <li className="flex items-start gap-2">
-                        <Sparkles className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                        <Sparkles className="w-4 h-4 text-[var(--glp-gold)] mt-0.5 flex-shrink-0" />
                         End with hope or actionable wisdom
                       </li>
                     </ul>
@@ -866,10 +868,10 @@ export default function SocialStudioAdmin() {
                 <CardDescription>Generate trauma-informed hooks that engage your audience</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="mb-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                <div className="mb-6 p-4 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)]">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0" />
-                    <div className="text-sm text-amber-800 dark:text-amber-200">
+                    <AlertTriangle className="w-5 h-5 text-[var(--glp-gold)] flex-shrink-0" />
+                    <div className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                       <strong>Brand Safety:</strong> All hooks are checked for trauma-informed language. 
                       Avoid sensationalism, fear-mongering, or promised outcomes.
                     </div>
@@ -1188,16 +1190,16 @@ export default function SocialStudioAdmin() {
                                 <Download className="w-4 h-4" />
                               </Button>
                               {draft.status === "draft" && (
-                                <Button variant="ghost" size="icon" className="text-green-600" onClick={() => handleApproveDraft(draft.id)}>
+                                <Button variant="ghost" size="icon" className="text-[var(--glp-sage)]" onClick={() => handleApproveDraft(draft.id)}>
                                   <Check className="w-4 h-4" />
                                 </Button>
                               )}
                               {draft.status === "approved" && (
-                                <Button variant="ghost" size="icon" className="text-purple-600" onClick={() => handlePublishDraft(draft.id)}>
+                                <Button variant="ghost" size="icon" className="text-[var(--glp-deep-teal)]" onClick={() => handlePublishDraft(draft.id)}>
                                   <Send className="w-4 h-4" />
                                 </Button>
                               )}
-                              <Button variant="ghost" size="icon" className="text-red-600" onClick={() => handleDeleteDraft(draft.id)}>
+                              <Button variant="ghost" size="icon" className="text-[var(--glp-blossom)]" onClick={() => handleDeleteDraft(draft.id)}>
                                 <Trash2 className="w-4 h-4" />
                               </Button>
                             </div>
@@ -1288,7 +1290,7 @@ export default function SocialStudioAdmin() {
                         </div>
                         {connectedPlatforms.includes(p.id) ? (
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-green-600 border-green-200">
+                            <Badge variant="outline" className="text-[var(--glp-sage)] border-[var(--glp-sage)]">
                               Connected
                             </Badge>
                             <Button size="sm" variant="ghost" onClick={() => setConnectedPlatforms(connectedPlatforms.filter(id => id !== p.id))}>
