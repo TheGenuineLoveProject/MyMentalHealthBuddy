@@ -11,6 +11,7 @@ import { OFFICIAL_LUMI_REGISTRY } from "../../lumi-registry/registry/officialLum
  * square size with transparent backgrounds. Auto-rotation is paused on
  * hover / focus and fully disabled under prefers-reduced-motion.
  *
+ * PHASE11689_LUMI_CAROUSEL_AVATAR_SHELL_TRANSPARENCY_PATCH
  * The duplicate floating variant (LUMI_FLOAT_IDLE ≈ LUMI_CALM_FLOAT) is
  * intentionally excluded from the default order so the showcase shows 7
  * distinct companions.
@@ -118,7 +119,7 @@ export default function LumiCarousel({
           position: absolute;
           inset: -8%;
           border-radius: 50%;
-          background: radial-gradient(circle at 50% 45%, var(--lc-glow, rgba(123,164,131,0.18)) 0%, transparent 68%);
+          background: transparent;
           z-index: 0;
           transition: background 600ms ease;
         }
