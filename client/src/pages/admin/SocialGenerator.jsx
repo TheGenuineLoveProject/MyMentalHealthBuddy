@@ -1,3 +1,4 @@
+// PHASE116Z32_ADMIN_SOCIAL_GENERATOR_VISUAL_DRIFT_PATCH
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -192,7 +193,7 @@ export default function SocialGenerator() {
   const isOverLimit = currentSpec.maxChars && captionLength > currentSpec.maxChars;
   
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)]">
       <SEO title="Social Generator — Admin" noindex />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
@@ -204,7 +205,7 @@ export default function SocialGenerator() {
             <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
           </Link>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white" data-testid="text-page-title">
+            <h1 className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="text-page-title">
               AI Content Generator
             </h1>
             <p className="text-slate-600 dark:text-slate-400">
@@ -230,8 +231,8 @@ export default function SocialGenerator() {
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+              <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-6">
+                <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-4">
                   Platform & Settings
                 </h2>
                 
@@ -247,12 +248,12 @@ export default function SocialGenerator() {
                         className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all ${
                           isSelected 
                             ? "border-[var(--glp-sage)] bg-[var(--glp-sage-10)]" 
-                            : "border-slate-200 dark:border-slate-700 hover:border-slate-300"
+                            : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] hover:border-slate-300"
                         }`}
                         data-testid={`button-platform-${platform.id}`}
                       >
                         <Icon className="w-5 h-5" style={{ color: platform.color }} />
-                        <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
+                        <span className="text-xs font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                           {platform.name}
                         </span>
                       </button>
@@ -261,7 +262,7 @@ export default function SocialGenerator() {
                 </div>
                 
                 {currentSpec.maxChars && (
-                  <div className="flex items-center gap-4 p-3 rounded-lg bg-slate-50 dark:bg-slate-900 mb-4 text-sm">
+                  <div className="flex items-center gap-4 p-3 rounded-lg bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] mb-4 text-sm">
                     <div className="flex items-center gap-1 text-slate-600 dark:text-slate-400">
                       <Zap className="w-4 h-4" />
                       <span>Max: {currentSpec.maxChars} chars</span>
@@ -279,15 +280,15 @@ export default function SocialGenerator() {
                 
                 <div className="grid md:grid-cols-3 gap-4 mb-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">
                       Theme *
                     </label>
                     <select
                       value={form.theme}
                       onChange={(e) => handleChange("theme", e.target.value)}
                       className={`w-full px-3 py-2 rounded-lg border ${
-                        errors.theme ? "border-red-500" : "border-slate-200 dark:border-slate-700"
-                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm`}
+                        errors.theme ? "border-red-500" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
+                      } bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] text-sm`}
                       data-testid="select-theme"
                     >
                       <option value="">Select theme...</option>
@@ -298,13 +299,13 @@ export default function SocialGenerator() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">
                       Style
                     </label>
                     <select
                       value={form.style}
                       onChange={(e) => handleChange("style", e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] text-sm"
                       data-testid="select-style"
                     >
                       {STYLES.map(style => (
@@ -314,13 +315,13 @@ export default function SocialGenerator() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">
                       Level
                     </label>
                     <select
                       value={form.level}
                       onChange={(e) => handleChange("level", e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] text-sm"
                       data-testid="select-level"
                     >
                       {LEVELS.map(level => (
@@ -331,9 +332,9 @@ export default function SocialGenerator() {
                 </div>
               </div>
               
-              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+              <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                  <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                     Content
                   </h2>
                   {complianceResult && (
@@ -341,7 +342,7 @@ export default function SocialGenerator() {
                       complianceResult.status === "pass" 
                         ? "bg-emerald-100 text-emerald-700"
                         : complianceResult.status === "review"
-                        ? "bg-amber-100 text-amber-700"
+                        ? "bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)]"
                         : "bg-red-100 text-red-700"
                     }`}>
                       {complianceResult.status === "pass" ? (
@@ -357,7 +358,7 @@ export default function SocialGenerator() {
                 <div className="space-y-4">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                      <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                         Hook (2-second attention grabber) *
                       </label>
                       {alternativeHooks.length > 0 && (
@@ -370,8 +371,8 @@ export default function SocialGenerator() {
                       onChange={(e) => handleChange("hook", e.target.value)}
                       placeholder="e.g., Your nervous system isn't broken..."
                       className={`w-full px-4 py-3 rounded-lg border ${
-                        errors.hook ? "border-red-500" : "border-slate-200 dark:border-slate-700"
-                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white`}
+                        errors.hook ? "border-red-500" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
+                      } bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]`}
                       data-testid="input-hook"
                     />
                     {alternativeHooks.length > 0 && (
@@ -392,7 +393,7 @@ export default function SocialGenerator() {
                   
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                      <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                         Caption *
                       </label>
                       <span className={`text-xs ${isOverLimit ? "text-red-500" : "text-slate-500"}`}>
@@ -406,15 +407,15 @@ export default function SocialGenerator() {
                       placeholder="Write your main content here. Use trauma-informed language..."
                       rows={6}
                       className={`w-full px-4 py-3 rounded-lg border ${
-                        errors.caption ? "border-red-500" : isOverLimit ? "border-amber-500" : "border-slate-200 dark:border-slate-700"
-                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white resize-none`}
+                        errors.caption ? "border-red-500" : isOverLimit ? "border-amber-500" : "border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
+                      } bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] resize-none`}
                       data-testid="input-caption"
                     />
                   </div>
                   
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">
                         Call to Action
                       </label>
                       <input
@@ -422,13 +423,13 @@ export default function SocialGenerator() {
                         value={form.cta}
                         onChange={(e) => handleChange("cta", e.target.value)}
                         placeholder="e.g., Save this for later..."
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
                         data-testid="input-cta"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">
                         Hashtags
                       </label>
                       <input
@@ -436,20 +437,20 @@ export default function SocialGenerator() {
                         value={form.hashtags}
                         onChange={(e) => handleChange("hashtags", e.target.value)}
                         placeholder="#mentalhealth #healing #wellness"
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                        className="w-full px-4 py-3 rounded-lg border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
                         data-testid="input-hashtags"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">
                       Disclaimer
                     </label>
                     <select
                       value={form.disclaimer}
                       onChange={(e) => handleChange("disclaimer", e.target.value)}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                      className="w-full px-4 py-3 rounded-lg border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
                       data-testid="select-disclaimer"
                     >
                       <option value="">Select a disclaimer...</option>
@@ -481,9 +482,9 @@ export default function SocialGenerator() {
           
           <div className="space-y-6">
             {complianceResult && (
-              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+              <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
                     <Shield className="w-4 h-4" />
                     Compliance Check
                   </h3>
@@ -521,7 +522,7 @@ export default function SocialGenerator() {
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Suggestions</p>
                     {complianceResult.suggestions.slice(0, 3).map((sug, idx) => (
-                      <div key={idx} className="text-sm p-2 rounded bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300">
+                      <div key={idx} className="text-sm p-2 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                         {sug.message}
                       </div>
                     ))}
@@ -538,8 +539,8 @@ export default function SocialGenerator() {
             )}
             
             {aiGenerated?.contentNotes && (
-              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
-                <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+              <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4">
+                <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2 mb-3">
                   <Sparkles className="w-4 h-4" />
                   AI Notes
                 </h3>
@@ -549,9 +550,9 @@ export default function SocialGenerator() {
               </div>
             )}
             
-            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+            <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
                   <Zap className="w-4 h-4 text-purple-500" />
                   AI Image Generation
                 </h3>
@@ -587,23 +588,23 @@ export default function SocialGenerator() {
                   <img 
                     src={generatedImage.image} 
                     alt="AI-generated visual" 
-                    className="w-full rounded-lg border border-slate-200 dark:border-slate-700"
+                    className="w-full rounded-lg border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]"
                   />
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                     Trauma-informed visual for {generatedImage.platform}
                   </p>
                 </div>
               ) : !imageError && (
-                <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+                <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] text-center py-4">
                   Generate a calming, brand-aligned visual for your post
                 </p>
               )}
             </div>
             
             {form.caption && (
-              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+              <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
                     <Zap className="w-4 h-4 text-blue-500" />
                     Content Enhancement
                   </h3>
@@ -631,7 +632,7 @@ export default function SocialGenerator() {
                 )}
                 
                 {enhanceMutation.isPending && (
-                  <div className="flex items-center justify-center py-4 text-slate-500 dark:text-slate-400">
+                  <div className="flex items-center justify-center py-4 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                     <Loader2 className="w-5 h-5 animate-spin motion-reduce:animate-none mr-2" />
                     Analyzing content...
                   </div>
@@ -644,7 +645,7 @@ export default function SocialGenerator() {
                         <p className="text-sm font-medium text-blue-800 dark:text-blue-200">{sug.title}</p>
                         <p className="text-xs text-blue-600 dark:text-blue-300 mt-1">{sug.description}</p>
                         {sug.example && (
-                          <p className="text-xs mt-2 p-2 bg-white dark:bg-slate-700 rounded border border-blue-100 dark:border-blue-800 italic">
+                          <p className="text-xs mt-2 p-2 bg-[var(--glp-ivory)] dark:bg-slate-700 rounded border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] italic">
                             "{sug.example}"
                           </p>
                         )}
@@ -652,9 +653,9 @@ export default function SocialGenerator() {
                     ))}
                     
                     {enhancementSuggestions.enhancedVersion && (
-                      <div className="pt-3 border-t border-blue-100 dark:border-blue-800">
+                      <div className="pt-3 border-t border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)]">
                         <p className="text-xs font-medium text-blue-800 dark:text-blue-200 mb-2">Enhanced Version:</p>
-                        <p className="text-sm text-slate-700 dark:text-slate-300 p-2 bg-white dark:bg-slate-700 rounded">
+                        <p className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] p-2 bg-[var(--glp-ivory)] dark:bg-slate-700 rounded">
                           {enhancementSuggestions.enhancedVersion}
                         </p>
                         <button
@@ -672,8 +673,8 @@ export default function SocialGenerator() {
               </div>
             )}
             
-            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-3">
+            <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4">
+              <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-3">
                 Trauma-Informed Tips
               </h3>
               <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-2">
@@ -697,12 +698,12 @@ export default function SocialGenerator() {
             </div>
 
             {form.caption && (
-              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4" data-testid="section-canva-export">
-                <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+              <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage-20)] dark:border-[var(--glp-sage)] p-4" data-testid="section-canva-export">
+                <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-3 flex items-center gap-2">
                   <Save className="w-4 h-4 text-purple-500" />
                   Canva Export Copy Blocks
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3">
                   Copy these pre-formatted text blocks into your Canva designs. Each is sized for a different platform.
                 </p>
                 <div className="space-y-3">
@@ -717,7 +718,7 @@ export default function SocialGenerator() {
                     return (
                       <div key={label} className="border border-slate-100 dark:border-slate-700 rounded-lg p-3">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{label}</span>
+                          <span className="text-xs font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{label}</span>
                           <button
                             type="button"
                             onClick={() => {
