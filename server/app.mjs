@@ -704,8 +704,47 @@ app.use("/api/growth", optionalAuth, growthJourneyRoutes);
 app.use("/api/journals", journalsRoutes);
 
 
+// Vite content-hashed assets are immutable: their filename changes on every
+// build, so a cached copy can never be stale. The HTML shell and the service
+// worker are the opposite — they are stable-URL entry points that gate every
+// deploy's freshness, so they must NEVER be cached or returning users get a
+// stale app. Mirror the service worker's own hashed-asset test exactly.
+const HASHED_ASSET_RE = /^\/assets\/.+-[A-Za-z0-9_-]{8,}\.[^/]+$/;
+const HTML_SW_NO_STORE = "no-store, no-cache, must-revalidate";
+
+// Legacy worker retirement: clients that registered the pre-rename kebab-case
+// "/service-worker.js" (which called skipWaiting() on install — uncontrolled
+// auto-reload) are migrated onto the canonical consent-based worker by serving
+// serviceWorker.js bytes at that URL. no-store so the update is never blocked by
+// a cached copy. Must sit BEFORE express.static so it wins over the stale kebab
+// file still present in the build. Non-destructive: the old file is left on disk.
+app.get("/service-worker.js", (req, res) => {
+  res.setHeader("Cache-Control", HTML_SW_NO_STORE);
+  res.sendFile(path.join(CLIENT_DIST, "serviceWorker.js"), { cacheControl: false }, (err) => {
+    if (err && !res.headersSent) res.status(404).end();
+  });
+});
+
 app.use(express.static(CLIENT_DIST, {
-  index: "index.html"
+  index: "index.html",
+  etag: true,
+  lastModified: true,
+  setHeaders: (res, filePath) => {
+    const rel = "/" + path.relative(CLIENT_DIST, filePath).split(path.sep).join("/");
+    if (rel === "/index.html" || rel === "/serviceWorker.js") {
+      // Entry points that gate freshness — never cache them.
+      res.setHeader("Cache-Control", HTML_SW_NO_STORE);
+      return;
+    }
+    if (HASHED_ASSET_RE.test(rel)) {
+      // Content-addressed + immutable → cache hard for speed.
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      return;
+    }
+    // Stable-URL public files (avatars, fonts, logos): always revalidate so a
+    // redeploy is reflected immediately; the SW is network-first for these too.
+    res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+  }
 }));
 
 // ===== SERVER-SIDE META INJECTION =====
@@ -881,13 +920,19 @@ app.get("*", async (req, res, next) => {
     return next();
   }
 
+  // Every response from this SPA handler is the HTML shell (optionally with
+  // injected meta) — never cache it, so the entry point that references the
+  // content-hashed bundles is always fresh on every navigation/redeploy.
+  res.setHeader("Cache-Control", HTML_SW_NO_STORE);
+
   console.log("[SPA ROUTE]", req.path);
 
   const baseHtml = getIndexHtml();
 
   if (!baseHtml) {
     const indexFile = path.join(CLIENT_DIST, "index.html");
-    return res.sendFile(path.resolve(indexFile));
+    // cacheControl:false so sendFile doesn't overwrite the no-store header above.
+    return res.sendFile(path.resolve(indexFile), { cacheControl: false });
   }
 
   const staticMeta = ROUTE_META[req.path] || null;
