@@ -1,3 +1,4 @@
+// PHASE11697_SOCIAL_LIBRARY_BUTTON_PALETTE_PATCH
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -71,7 +72,7 @@ export default function SocialLibrary() {
   }
   
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)]">
       <SEO title="Social Library — Admin" noindex />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
@@ -80,14 +81,14 @@ export default function SocialLibrary() {
         </Link>
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
-            <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
-              <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+            <Link href="/admin/social" className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-deep-teal)] transition-colors" data-testid="link-back-social">
+              <ArrowLeft className="w-5 h-5 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-slate-900 dark:text-white" data-testid="text-page-title">
+              <h1 className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="text-page-title">
                 Template Library
               </h1>
-              <p className="text-slate-600 dark:text-slate-400">
+              <p className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                 Reusable content structures for consistency
               </p>
             </div>
@@ -109,7 +110,7 @@ export default function SocialLibrary() {
             </button>
             <button
               onClick={() => setShowForm(!showForm)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:opacity-90 transition-opacity"
               data-testid="button-add-template"
             >
               <Plus className="w-4 h-4" />
@@ -119,18 +120,18 @@ export default function SocialLibrary() {
         </div>
         
         {showForm && (
-          <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+          <form onSubmit={handleSubmit} className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] p-6 mb-8">
+            <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-4">
               New Template
             </h2>
             
             <div className="grid md:grid-cols-3 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Type</label>
+                <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-1">Type</label>
                 <select
                   value={form.type}
                   onChange={(e) => setForm(prev => ({ ...prev, type: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)]"
                   data-testid="select-template-type"
                 >
                   {TEMPLATE_TYPES.map(t => (
@@ -140,23 +141,23 @@ export default function SocialLibrary() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Name</label>
+                <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-1">Name</label>
                 <input
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="e.g., Gentle Invitation"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)]"
                   data-testid="input-template-name"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Level</label>
+                <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-1">Level</label>
                 <select
                   value={form.level}
                   onChange={(e) => setForm(prev => ({ ...prev, level: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)]"
                   data-testid="select-template-level"
                 >
                   {LEVELS.map(l => (
@@ -167,25 +168,25 @@ export default function SocialLibrary() {
             </div>
             
             <div className="mb-4">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Structure</label>
+              <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-1">Structure</label>
               <textarea
                 value={form.structure}
                 onChange={(e) => setForm(prev => ({ ...prev, structure: e.target.value }))}
                 placeholder="Template structure with [placeholders]..."
                 rows={4}
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 resize-none"
+                className="w-full px-3 py-2 rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] resize-none"
                 data-testid="input-template-structure"
               />
             </div>
             
             <div className="mb-4">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Voice Rules (optional)</label>
+              <label className="block text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-1">Voice Rules (optional)</label>
               <input
                 type="text"
                 value={form.voiceRules}
                 onChange={(e) => setForm(prev => ({ ...prev, voiceRules: e.target.value }))}
                 placeholder="e.g., Calm, non-clinical, consent-based language"
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+                className="w-full px-3 py-2 rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)]"
                 data-testid="input-template-voice"
               />
             </div>
@@ -194,7 +195,7 @@ export default function SocialLibrary() {
               <button
                 type="submit"
                 disabled={createMutation.isPending}
-                className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                className="px-4 py-2 bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
                 data-testid="button-save-template"
               >
                 {createMutation.isPending ? "Saving..." : "Save Template"}
@@ -202,7 +203,7 @@ export default function SocialLibrary() {
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg"
+                className="px-4 py-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] rounded-lg"
                 data-testid="button-cancel-template"
               >
                 Cancel
@@ -213,9 +214,9 @@ export default function SocialLibrary() {
         
         {error && (
           <div className="text-center py-16" data-testid="section-error">
-            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
-            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+            <AlertCircle className="w-12 h-12 text-[var(--glp-blossom)] mx-auto mb-4" />
+            <p className="text-[var(--glp-blossom)] dark:text-[var(--glp-blossom)] mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:opacity-90" data-testid="button-retry">
               Retry
             </button>
           </div>
@@ -226,10 +227,10 @@ export default function SocialLibrary() {
             <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
           </div>
         ) : !error && templates.length === 0 ? (
-          <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700" data-testid="section-empty">
-            <BookOpen className="w-12 h-12 mx-auto text-slate-400 mb-4" />
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No templates yet</h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-4">Load presets or create your first template to get started</p>
+          <div className="text-center py-12 bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage)] dark:border-[var(--glp-sage)]" data-testid="section-empty">
+            <BookOpen className="w-12 h-12 mx-auto text-[var(--glp-sage)] mb-4" />
+            <h3 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">No templates yet</h3>
+            <p className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-4">Load presets or create your first template to get started</p>
           </div>
         ) : !error ? (
           <div className="space-y-8">
@@ -239,41 +240,41 @@ export default function SocialLibrary() {
                 <div key={type.id} data-testid={`section-type-${type.id}`}>
                   <div className="flex items-center gap-2 mb-4">
                     <FileText className="w-5 h-5 text-[var(--glp-sage)]" />
-                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                       {type.name}
                     </h2>
-                    <span className="text-sm text-slate-500">({typeTemplates.length})</span>
+                    <span className="text-sm text-[var(--glp-deep-teal)]">({typeTemplates.length})</span>
                   </div>
                   
                   {typeTemplates.length === 0 ? (
-                    <p className="text-sm text-slate-500 italic" data-testid={`text-empty-${type.id}`}>No templates yet</p>
+                    <p className="text-sm text-[var(--glp-deep-teal)] italic" data-testid={`text-empty-${type.id}`}>No templates yet</p>
                   ) : (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {typeTemplates.map(template => (
                         <div 
                           key={template.id}
-                          className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4"
+                          className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] p-4"
                           data-testid={`card-template-${template.id}`}
                         >
                           <div className="flex items-start justify-between mb-2">
-                            <h3 className="font-medium text-slate-900 dark:text-white">
+                            <h3 className="font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                               {template.name || "Untitled"}
                             </h3>
                             <button
                               onClick={() => deleteMutation.mutate(template.id)}
-                              className="p-1 text-slate-400 hover:text-red-500 transition-colors"
+                              className="p-1 text-[var(--glp-sage)] hover:text-[var(--glp-blossom)] transition-colors"
                               data-testid={`button-delete-template-${template.id}`}
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
                           </div>
                           
-                          <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 mb-2">
+                          <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] line-clamp-3 mb-2">
                             {template.structure}
                           </p>
                           
                           <div className="flex items-center gap-2">
-                            <span className="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-400" data-testid={`badge-level-${template.id}`}>
+                            <span className="text-xs px-2 py-0.5 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" data-testid={`badge-level-${template.id}`}>
                               {template.level}
                             </span>
                           </div>
