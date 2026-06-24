@@ -154,5 +154,10 @@
     "phase": "PHASE116Z24_PACKAGE_METADATA_DEPLOYMENT_PICKUP_MARKER",
     "reason": "Force Replit deployment source pickup after live bundle remained stale",
     "timestamp": "2026-06-23T23:56:10Z"
+  },
+  "x_replit_deployment_pickup": {
+    "phase": "PHASE116Z42_FORCE_PACKAGE_DEPLOYMENT_PICKUP_MARKER_3",
+    "reason": "Force Replit to rebuild and publish current client bundle after stale live assets",
+    "timestamp": "2026-06-24T01:25:31Z"
   }
 }

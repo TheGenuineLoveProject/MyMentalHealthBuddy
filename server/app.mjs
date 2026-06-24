@@ -73,6 +73,9 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// PHASE116Z43_INTERNAL_INTELLIGENCE_SERVER_REGISTRATION
+registerInternalIntelligenceServer(app);
+
 // PHASE113JG_V3B_PRE_ROUTE_ADMIN_DIAGNOSTIC_EXACT_PATH_BLOCK: exact-path block for internal admin diagnostic APIs.
 // This must run before any later admin route definitions.
 app.use((req, res, next) => {
@@ -391,6 +394,8 @@ import kernelRoutes from "./routes/kernel.mjs";
 import growthJourneyRoutes from "./routes/growth-journey.mjs";
 import journalsRoutes from "./routes/journals.mjs";
 import { existsSync } from "node:fs";
+import { registerInternalIntelligenceServer } from "./internal-intelligence-server.mjs";
+
 // PHASE115E3_EXISTSSYNC_IMPORT_FIX
 
 const IS_DEV = process.env.NODE_ENV !== "production";
