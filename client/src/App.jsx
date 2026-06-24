@@ -46,6 +46,7 @@ const AccessibilityToolbar = lazy(() => import("./components/AccessibilityToolba
 import ToastContainer from "./components/ui/toast-container";
 import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscoveryRail.jsx";
 import './index.css'; // Your Tailwind import
+// PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
 const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 
 const Login = lazy(() => import("./pages/Login.jsx"));
