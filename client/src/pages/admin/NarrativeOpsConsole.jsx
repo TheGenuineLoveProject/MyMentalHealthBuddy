@@ -1,3 +1,4 @@
+// PHASE11721_NARRATIVE_OPS_CONSOLE_VISUAL_TOKEN_PATCH
 import { useState, useCallback } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -24,10 +25,10 @@ const PLATFORM_INFO = {
 };
 
 const STATUS_CONFIG = {
-  draft: { label: "Draft", className: "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300", icon: FileText },
-  review: { label: "In Review", className: "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300", icon: Clock },
-  approved: { label: "Approved", className: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300", icon: CheckCircle },
-  posted: { label: "Posted", className: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300", icon: Send },
+  draft: { label: "Draft", className: "bg-slate-100 dark:bg-slate-800 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]", icon: FileText },
+  review: { label: "In Review", className: "bg-amber-100 dark:bg-amber-900/30 text-[var(--glp-gold)] dark:text-amber-300", icon: Clock },
+  approved: { label: "Approved", className: "bg-blue-100 dark:bg-blue-900/30 text-[var(--glp-deep-teal)] dark:text-blue-300", icon: CheckCircle },
+  posted: { label: "Posted", className: "bg-green-100 dark:bg-green-900/30 text-[var(--glp-sage)] dark:text-green-300", icon: Send },
 };
 
 const THEMES = [
@@ -68,7 +69,7 @@ function CopyBtn({ text, label }) {
   };
   return (
     <button onClick={handleCopy} className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" data-testid={`button-copy-${label}`}>
-      {copied ? <Check className="w-3 h-3 text-green-600" /> : <Copy className="w-3 h-3" />}
+      {copied ? <Check className="w-3 h-3 text-[var(--glp-sage)]" /> : <Copy className="w-3 h-3" />}
       {copied ? "Copied" : label || "Copy"}
     </button>
   );
@@ -87,17 +88,17 @@ function StatusBadge({ status }) {
 function CharCount({ text, limit }) {
   const len = (text || "").length;
   const pct = limit ? (len / limit) * 100 : 0;
-  const color = pct > 90 ? "text-red-500" : pct > 70 ? "text-amber-500" : "text-gray-400";
+  const color = pct > 90 ? "text-[var(--glp-blossom)]" : pct > 70 ? "text-[var(--glp-gold)]" : "text-gray-400";
   return <span className={`text-xs ${color}`}>{len}{limit ? `/${limit}` : ""}</span>;
 }
 
 function SectionCard({ title, icon: Icon, children, className = "" }) {
   return (
-    <div className={`bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 ${className}`}>
+    <div className={`bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] ${className}`}>
       {title && (
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-100 dark:border-slate-700">
-          {Icon && <Icon className="w-4 h-4 text-slate-500" />}
-          <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-200">{title}</h3>
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--glp-sage)] dark:border-[var(--glp-sage)]">
+          {Icon && <Icon className="w-4 h-4 text-[var(--glp-deep-teal)]" />}
+          <h3 className="text-sm font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{title}</h3>
         </div>
       )}
       <div className="p-4">{children}</div>
@@ -375,7 +376,7 @@ export default function NarrativeOpsConsole() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)]">
       <SEO title="Narrative Ops Console — Admin" noindex />
       <div className="max-w-[1600px] mx-auto px-4 py-6">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
@@ -383,20 +384,20 @@ export default function NarrativeOpsConsole() {
           Back to Command Center
         </Link>
         <div className="flex items-center gap-4 mb-6">
-          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
-            <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
+          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid="link-back-social">
+            <ArrowLeft className="w-5 h-5 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white" data-testid="text-page-title">
+            <h1 className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="text-page-title">
               Enterprise Social + Publishing Ops
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
               Campaigns, editorial pipeline, UTM tracking, weekly queue — manual-first
             </p>
           </div>
         </div>
 
-        <div className="flex gap-1 mb-6 overflow-x-auto pb-2 border-b border-slate-200 dark:border-slate-700">
+        <div className="flex gap-1 mb-6 overflow-x-auto pb-2 border-b border-[var(--glp-sage)] dark:border-[var(--glp-sage)]">
           {NAV_TABS.map(tab => {
             const Icon = tab.icon;
             return (
@@ -405,8 +406,8 @@ export default function NarrativeOpsConsole() {
                 onClick={() => setActivePanel(tab.key)}
                 className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap transition-colors ${
                   activePanel === tab.key
-                    ? "bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-b-0 border-slate-200 dark:border-slate-700"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                    ? "bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] border border-b-0 border-[var(--glp-sage)] dark:border-[var(--glp-sage)]"
+                    : "text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:text-[var(--glp-deep-teal)] dark:hover:text-slate-300"
                 }`}
                 data-testid={`tab-${tab.key}`}
               >
@@ -520,11 +521,11 @@ function PipelinePanel({
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-slate-400" />
+          <Filter className="w-4 h-4 text-[var(--glp-sage)]" />
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-sm border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-1.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+            className="text-sm border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-1.5 bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]"
             data-testid="select-status-filter"
           >
             <option value="all">All Statuses</option>
@@ -537,7 +538,7 @@ function PipelinePanel({
         <select
           value={campaignFilter}
           onChange={(e) => setCampaignFilter(e.target.value)}
-          className="text-sm border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-1.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+          className="text-sm border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-1.5 bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]"
           data-testid="select-campaign-filter"
         >
           <option value="all">All Campaigns</option>
@@ -548,7 +549,7 @@ function PipelinePanel({
         <div className="flex-1" />
         <button
           onClick={() => setShowBlogGenerator(!showBlogGenerator)}
-          className="flex items-center gap-2 px-3 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-purple-600 text-[var(--glp-ivory)] rounded-lg hover:bg-purple-700 transition-colors"
           data-testid="button-blog-generator"
         >
           <Zap className="w-4 h-4" />
@@ -556,7 +557,7 @@ function PipelinePanel({
         </button>
         <button
           onClick={() => { resetForm(); setShowCreateForm(true); }}
-          className="flex items-center gap-2 px-3 py-2 text-sm bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-slate-200 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-[var(--glp-charcoal)] dark:bg-[var(--glp-ivory)] text-[var(--glp-ivory)] dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-[var(--glp-sage-10)] transition-colors"
           data-testid="button-create-post"
         >
           <Plus className="w-4 h-4" />
@@ -567,24 +568,24 @@ function PipelinePanel({
       {showBlogGenerator && (
         <SectionCard title="Generate 7 Social Drafts from Blog Post" icon={BookOpen}>
           <div className="space-y-3">
-            <p className="text-xs text-slate-500">Select a blog post to automatically generate 7 social drafts (micro-tool, quote, story, demo, newsletter bridge, invitation, authority). All created as drafts — human review required.</p>
+            <p className="text-xs text-[var(--glp-deep-teal)]">Select a blog post to automatically generate 7 social drafts (micro-tool, quote, story, demo, newsletter bridge, invitation, authority). All created as drafts — human review required.</p>
             <div className="grid gap-2 max-h-48 overflow-y-auto">
               {(Array.isArray(blogs) ? blogs : []).map(blog => (
                 <button
                   key={blog.id}
                   onClick={() => blogToSocialMutation.mutate({ blogPostId: blog.id })}
                   disabled={blogToSocialMutation.isPending}
-                  className="flex items-center justify-between p-2 text-left text-sm rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                  className="flex items-center justify-between p-2 text-left text-sm rounded-lg border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] transition-colors"
                   data-testid={`button-generate-from-blog-${blog.id}`}
                 >
                   <span className="truncate">{blog.title}</span>
-                  <Zap className="w-3 h-3 text-purple-500 flex-shrink-0 ml-2" />
+                  <Zap className="w-3 h-3 text-[var(--glp-deep-teal)] flex-shrink-0 ml-2" />
                 </button>
               ))}
-              {(!blogs || blogs.length === 0) && <p className="text-xs text-slate-400">No blog posts found.</p>}
+              {(!blogs || blogs.length === 0) && <p className="text-xs text-[var(--glp-sage)]">No blog posts found.</p>}
             </div>
             {blogToSocialMutation.isPending && (
-              <div className="flex items-center gap-2 text-sm text-purple-600">
+              <div className="flex items-center gap-2 text-sm text-[var(--glp-deep-teal)]">
                 <Loader2 className="w-4 h-4 animate-spin" /> Generating drafts...
               </div>
             )}
@@ -608,7 +609,7 @@ function PipelinePanel({
 
       {postsLoading ? (
         <div className="flex items-center justify-center py-16">
-          <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+          <Loader2 className="w-6 h-6 animate-spin text-[var(--glp-sage)]" />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -616,7 +617,7 @@ function PipelinePanel({
             <div key={status} className="space-y-2">
               <div className="flex items-center justify-between px-2">
                 <StatusBadge status={status} />
-                <span className="text-xs text-slate-400">{postsByStatus[status]?.length || 0}</span>
+                <span className="text-xs text-[var(--glp-sage)]">{postsByStatus[status]?.length || 0}</span>
               </div>
               <div className="space-y-2 max-h-[600px] overflow-y-auto">
                 {(postsByStatus[status] || []).map(post => (
@@ -634,7 +635,7 @@ function PipelinePanel({
                   />
                 ))}
                 {(postsByStatus[status] || []).length === 0 && (
-                  <p className="text-xs text-slate-400 text-center py-4">No posts</p>
+                  <p className="text-xs text-[var(--glp-sage)] text-center py-4">No posts</p>
                 )}
               </div>
             </div>
@@ -665,22 +666,22 @@ function PipelinePanel({
 
       {showScheduleModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Schedule Post</h3>
-            <p className="text-sm text-slate-500 mb-3">{showScheduleModal.title || showScheduleModal.content?.substring(0, 60)}</p>
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
+            <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-4">Schedule Post</h3>
+            <p className="text-sm text-[var(--glp-deep-teal)] mb-3">{showScheduleModal.title || showScheduleModal.content?.substring(0, 60)}</p>
             <input
               type="datetime-local"
               value={scheduleDate}
               onChange={(e) => setScheduleDate(e.target.value)}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white mb-4"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-4"
               data-testid="input-schedule-date"
             />
             <div className="flex gap-2 justify-end">
-              <button onClick={() => setShowScheduleModal(null)} className="px-3 py-2 text-sm text-slate-600 dark:text-slate-400" data-testid="button-cancel-schedule">Cancel</button>
+              <button onClick={() => setShowScheduleModal(null)} className="px-3 py-2 text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" data-testid="button-cancel-schedule">Cancel</button>
               <button
                 onClick={() => scheduleMutation.mutate({ id: showScheduleModal.id, scheduledFor: scheduleDate })}
                 disabled={!scheduleDate || scheduleMutation.isPending}
-                className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                className="px-4 py-2 text-sm bg-blue-600 text-[var(--glp-ivory)] rounded-lg hover:bg-blue-700 disabled:opacity-50"
                 data-testid="button-confirm-schedule"
               >
                 {scheduleMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Schedule"}
@@ -700,51 +701,51 @@ function PostCard({ post, onSelect, isSelected, onAction, onEdit, onMarkPosted, 
       className={`p-3 rounded-lg border cursor-pointer transition-all ${
         isSelected
           ? "border-blue-400 dark:border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-sm"
-          : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:shadow-sm"
+          : "border-[var(--glp-sage)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] hover:shadow-sm"
       }`}
       data-testid={`card-post-${post.id}`}
     >
-      <p className="text-sm font-medium text-slate-800 dark:text-slate-200 line-clamp-2 mb-1">
+      <p className="text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] line-clamp-2 mb-1">
         {post.title || post.content?.substring(0, 80)}
       </p>
       <div className="flex flex-wrap gap-1 mb-2">
         {post.theme && (
-          <span className="text-[10px] px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-slate-500">
+          <span className="text-[10px] px-1.5 py-0.5 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded text-[var(--glp-deep-teal)]">
             {post.theme}
           </span>
         )}
         {post.campaignId && (
-          <span className="text-[10px] px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 rounded text-purple-600 dark:text-purple-400">
+          <span className="text-[10px] px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 rounded text-[var(--glp-deep-teal)] dark:text-purple-400">
             {getCampaignName(post.campaignId)}
           </span>
         )}
         {post.scheduledFor && (
-          <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 rounded text-blue-600 dark:text-blue-400 flex items-center gap-0.5">
+          <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 rounded text-[var(--glp-deep-teal)] dark:text-blue-400 flex items-center gap-0.5">
             <Calendar className="w-2.5 h-2.5" />
             {new Date(post.scheduledFor).toLocaleDateString()}
           </span>
         )}
       </div>
-      <div className="flex items-center justify-between text-xs text-slate-400">
+      <div className="flex items-center justify-between text-xs text-[var(--glp-sage)]">
         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
         <div className="flex gap-1" onClick={e => e.stopPropagation()}>
           {post.status === "draft" && (
             <>
-              <button onClick={onEdit} className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300" data-testid={`button-edit-${post.id}`}>Edit</button>
-              <button onClick={() => onAction("submit")} disabled={isPending} className="px-2 py-0.5 rounded bg-amber-100 text-amber-700 hover:bg-amber-200" data-testid={`button-submit-${post.id}`}>Submit</button>
-              <button onClick={onSchedule} aria-label="Schedule post" title="Schedule post" className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 hover:bg-blue-200" data-testid={`button-schedule-${post.id}`}><Calendar className="w-3 h-3" aria-hidden="true" /></button>
+              <button onClick={onEdit} className="px-2 py-0.5 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] text-[var(--glp-deep-teal)] dark:text-slate-300" data-testid={`button-edit-${post.id}`}>Edit</button>
+              <button onClick={() => onAction("submit")} disabled={isPending} className="px-2 py-0.5 rounded bg-amber-100 text-[var(--glp-gold)] hover:bg-amber-200" data-testid={`button-submit-${post.id}`}>Submit</button>
+              <button onClick={onSchedule} aria-label="Schedule post" title="Schedule post" className="px-2 py-0.5 rounded bg-blue-100 text-[var(--glp-deep-teal)] hover:bg-blue-200" data-testid={`button-schedule-${post.id}`}><Calendar className="w-3 h-3" aria-hidden="true" /></button>
             </>
           )}
           {post.status === "review" && (
             <>
-              <button onClick={onEdit} className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300" data-testid={`button-edit-review-${post.id}`}>Edit</button>
-              <button onClick={() => onAction("approve")} disabled={isPending} className="px-2 py-0.5 rounded bg-green-100 text-green-700 hover:bg-green-200" data-testid={`button-approve-${post.id}`}>Approve</button>
+              <button onClick={onEdit} className="px-2 py-0.5 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] text-[var(--glp-deep-teal)] dark:text-slate-300" data-testid={`button-edit-review-${post.id}`}>Edit</button>
+              <button onClick={() => onAction("approve")} disabled={isPending} className="px-2 py-0.5 rounded bg-green-100 text-[var(--glp-sage)] hover:bg-green-200" data-testid={`button-approve-${post.id}`}>Approve</button>
             </>
           )}
           {post.status === "approved" && (
             <>
               <button onClick={onMarkPosted} className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 hover:bg-emerald-200 flex items-center gap-0.5" data-testid={`button-mark-posted-${post.id}`}><Send className="w-3 h-3" />Post</button>
-              <button onClick={onSchedule} aria-label="Schedule post" title="Schedule post" className="px-2 py-0.5 rounded bg-blue-100 text-blue-700 hover:bg-blue-200" data-testid={`button-schedule-approved-${post.id}`}><Calendar className="w-3 h-3" aria-hidden="true" /></button>
+              <button onClick={onSchedule} aria-label="Schedule post" title="Schedule post" className="px-2 py-0.5 rounded bg-blue-100 text-[var(--glp-deep-teal)] hover:bg-blue-200" data-testid={`button-schedule-approved-${post.id}`}><Calendar className="w-3 h-3" aria-hidden="true" /></button>
             </>
           )}
         </div>
@@ -763,26 +764,26 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
       <form onSubmit={onSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Title</label>
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Title</label>
             <input
               value={form.title}
               onChange={(e) => setForm(f => ({ ...f, title: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               placeholder="Post title"
               data-testid="input-title"
             />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Theme</label>
-              <select value={form.theme} onChange={(e) => setForm(f => ({ ...f, theme: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="select-theme">
+              <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Theme</label>
+              <select value={form.theme} onChange={(e) => setForm(f => ({ ...f, theme: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="select-theme">
                 <option value="">Select theme</option>
                 {THEMES.map(t => <option key={t} value={t}>{t}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Campaign</label>
-              <select value={form.campaignId} onChange={(e) => setForm(f => ({ ...f, campaignId: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="select-campaign">
+              <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Campaign</label>
+              <select value={form.campaignId} onChange={(e) => setForm(f => ({ ...f, campaignId: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="select-campaign">
                 <option value="">No campaign</option>
                 {(Array.isArray(campaigns) ? campaigns : []).map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
@@ -791,12 +792,12 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Content (primary)</label>
+          <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Content (primary)</label>
           <textarea
             value={form.content}
             onChange={(e) => setForm(f => ({ ...f, content: e.target.value }))}
             rows={3}
-            className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+            className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
             placeholder="Main content..."
             required
             data-testid="textarea-content"
@@ -804,7 +805,7 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">Platform Captions</label>
+          <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-2">Platform Captions</label>
           <div className="flex gap-1 mb-2 flex-wrap">
             {Object.entries(PLATFORM_INFO).map(([key, info]) => {
               const Icon = info.icon;
@@ -814,7 +815,7 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
                   type="button"
                   onClick={() => setPlatformTab(key)}
                   className={`flex items-center gap-1 px-2.5 py-1 text-xs rounded-lg transition-colors ${
-                    platformTab === key ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900" : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
+                    platformTab === key ? "bg-[var(--glp-charcoal)] dark:bg-[var(--glp-ivory)] text-[var(--glp-ivory)] dark:text-slate-900" : "bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-slate-300"
                   }`}
                   data-testid={`tab-platform-${key}`}
                 >
@@ -829,7 +830,7 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
               value={form.captions[platformTab] || ""}
               onChange={(e) => updateCaption(platformTab, e.target.value)}
               rows={3}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               placeholder={`${PLATFORM_INFO[platformTab]?.name} caption...`}
               data-testid={`textarea-caption-${platformTab}`}
             />
@@ -844,26 +845,26 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Safety Note *</label>
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Safety Note *</label>
             <input
               value={form.safetyNote}
               onChange={(e) => setForm(f => ({ ...f, safetyNote: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               placeholder="e.g. Educational only. Not therapy."
               required
               data-testid="input-safety-note"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">CTA URL</label>
-            <select value={form.gentleCtaUrl} onChange={(e) => setForm(f => ({ ...f, gentleCtaUrl: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="select-cta">
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">CTA URL</label>
+            <select value={form.gentleCtaUrl} onChange={(e) => setForm(f => ({ ...f, gentleCtaUrl: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="select-cta">
               <option value="">Select destination</option>
               {CTA_DESTINATIONS.map(d => <option key={d.path} value={d.path}>{d.label} ({d.path})</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Origin Type</label>
-            <select value={form.originType} onChange={(e) => setForm(f => ({ ...f, originType: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="select-origin">
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Origin Type</label>
+            <select value={form.originType} onChange={(e) => setForm(f => ({ ...f, originType: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="select-origin">
               {ORIGIN_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
@@ -871,32 +872,32 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Canva URL</label>
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Canva URL</label>
             <input
               value={form.canvaUrl}
               onChange={(e) => setForm(f => ({ ...f, canvaUrl: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               placeholder="https://www.canva.com/design/..."
               data-testid="input-canva-url"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Media Asset URL</label>
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Media Asset URL</label>
             <input
               value={form.mediaAssetUrl}
               onChange={(e) => setForm(f => ({ ...f, mediaAssetUrl: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               placeholder="Image/video URL..."
               data-testid="input-media-url"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Scheduled For</label>
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Scheduled For</label>
             <input
               type="datetime-local"
               value={form.scheduledFor}
               onChange={(e) => setForm(f => ({ ...f, scheduledFor: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               data-testid="input-scheduled-for"
             />
           </div>
@@ -904,17 +905,17 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Hashtags</label>
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Hashtags</label>
             <input
               value={form.hashtags}
               onChange={(e) => setForm(f => ({ ...f, hashtags: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               placeholder="#selflove #healing #mentalwellness"
               data-testid="input-hashtags"
             />
           </div>
           <div className="flex items-end gap-4">
-            <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 cursor-pointer">
+            <label className="flex items-center gap-2 text-sm text-[var(--glp-deep-teal)] dark:text-slate-300 cursor-pointer">
               <input
                 type="checkbox"
                 checked={form.crisisLinkRequired}
@@ -927,9 +928,9 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
           </div>
         </div>
 
-        <div className="flex gap-2 justify-end pt-2 border-t border-slate-100 dark:border-slate-700">
-          <button type="button" onClick={onCancel} className="px-4 py-2 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg" data-testid="button-cancel-form">Cancel</button>
-          <button type="submit" disabled={isPending} className="px-4 py-2 text-sm bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-slate-200 disabled:opacity-50 flex items-center gap-2" data-testid="button-submit-form">
+        <div className="flex gap-2 justify-end pt-2 border-t border-[var(--glp-sage)] dark:border-[var(--glp-sage)]">
+          <button type="button" onClick={onCancel} className="px-4 py-2 text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] rounded-lg" data-testid="button-cancel-form">Cancel</button>
+          <button type="submit" disabled={isPending} className="px-4 py-2 text-sm bg-[var(--glp-charcoal)] dark:bg-[var(--glp-ivory)] text-[var(--glp-ivory)] dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-[var(--glp-sage-10)] disabled:opacity-50 flex items-center gap-2" data-testid="button-submit-form">
             {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
             {isEdit ? "Update Post" : "Create Draft"}
           </button>
@@ -942,62 +943,62 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
 function PostDetailPanel({ post, onClose, getCampaignName, platformTab, setPlatformTab }) {
   return (
     <SectionCard title="Post Details" icon={Eye} className="mt-4">
-      <button onClick={onClose} className="absolute top-3 right-4 text-slate-400 hover:text-slate-600" data-testid="button-close-detail">
+      <button onClick={onClose} className="absolute top-3 right-4 text-[var(--glp-sage)] hover:text-[var(--glp-deep-teal)]" data-testid="button-close-detail">
         <X className="w-4 h-4" />
       </button>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="space-y-3">
           <div>
-            <span className="text-xs font-medium text-slate-500">Title</span>
-            <p className="text-sm text-slate-800 dark:text-slate-200">{post.title || "Untitled"}</p>
+            <span className="text-xs font-medium text-[var(--glp-deep-teal)]">Title</span>
+            <p className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{post.title || "Untitled"}</p>
           </div>
           <div>
-            <span className="text-xs font-medium text-slate-500">Content</span>
-            <p className="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-wrap">{post.content}</p>
+            <span className="text-xs font-medium text-[var(--glp-deep-teal)]">Content</span>
+            <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] whitespace-pre-wrap">{post.content}</p>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <span className="text-xs font-medium text-slate-500">Status</span>
+              <span className="text-xs font-medium text-[var(--glp-deep-teal)]">Status</span>
               <div><StatusBadge status={post.status} /></div>
             </div>
             <div>
-              <span className="text-xs font-medium text-slate-500">Theme</span>
-              <p className="text-sm text-slate-700 dark:text-slate-300">{post.theme || "—"}</p>
+              <span className="text-xs font-medium text-[var(--glp-deep-teal)]">Theme</span>
+              <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.theme || "—"}</p>
             </div>
             <div>
-              <span className="text-xs font-medium text-slate-500">Campaign</span>
-              <p className="text-sm text-slate-700 dark:text-slate-300">{getCampaignName(post.campaignId)}</p>
+              <span className="text-xs font-medium text-[var(--glp-deep-teal)]">Campaign</span>
+              <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{getCampaignName(post.campaignId)}</p>
             </div>
             <div>
-              <span className="text-xs font-medium text-slate-500">Safety Note</span>
-              <p className="text-sm text-slate-700 dark:text-slate-300">{post.safetyNote || "—"}</p>
+              <span className="text-xs font-medium text-[var(--glp-deep-teal)]">Safety Note</span>
+              <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.safetyNote || "—"}</p>
             </div>
           </div>
           {post.canvaUrl && (
             <div>
-              <span className="text-xs font-medium text-slate-500">Canva</span>
-              <a href={post.canvaUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline flex items-center gap-1">
+              <span className="text-xs font-medium text-[var(--glp-deep-teal)]">Canva</span>
+              <a href={post.canvaUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-[var(--glp-deep-teal)] hover:underline flex items-center gap-1">
                 Open in Canva <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           )}
           {post.utmUrl && (
             <div>
-              <span className="text-xs font-medium text-slate-500">UTM Link</span>
+              <span className="text-xs font-medium text-[var(--glp-deep-teal)]">UTM Link</span>
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-600 dark:text-slate-400 truncate max-w-xs">{post.utmUrl}</span>
+                <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate max-w-xs">{post.utmUrl}</span>
                 <CopyBtn text={post.utmUrl} label="UTM" />
               </div>
             </div>
           )}
-          <div className="grid grid-cols-3 gap-2 text-xs text-slate-400">
+          <div className="grid grid-cols-3 gap-2 text-xs text-[var(--glp-sage)]">
             {post.createdBy && <div>Created: {post.createdBy}</div>}
             {post.reviewedBy && <div>Reviewed: {post.reviewedBy}</div>}
             {post.approvedBy && <div>Approved: {post.approvedBy}</div>}
           </div>
         </div>
         <div>
-          <span className="text-xs font-medium text-slate-500 mb-2 block">Platform Captions</span>
+          <span className="text-xs font-medium text-[var(--glp-deep-teal)] mb-2 block">Platform Captions</span>
           <div className="flex gap-1 mb-2 flex-wrap">
             {Object.entries(PLATFORM_INFO).map(([key, info]) => {
               const Icon = info.icon;
@@ -1009,10 +1010,10 @@ function PostDetailPanel({ post, onClose, getCampaignName, platformTab, setPlatf
                   onClick={() => setPlatformTab(key)}
                   className={`flex items-center gap-1 px-2 py-1 text-xs rounded transition-colors ${
                     platformTab === key
-                      ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+                      ? "bg-[var(--glp-charcoal)] dark:bg-[var(--glp-ivory)] text-[var(--glp-ivory)] dark:text-slate-900"
                       : hasContent
-                        ? "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
-                        : "bg-slate-50 dark:bg-slate-800 text-slate-400"
+                        ? "bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-slate-300"
+                        : "bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-sage)]"
                   }`}
                   data-testid={`detail-tab-${key}`}
                 >
@@ -1022,8 +1023,8 @@ function PostDetailPanel({ post, onClose, getCampaignName, platformTab, setPlatf
               );
             })}
           </div>
-          <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-3 min-h-[120px]">
-            <p className="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-wrap">
+          <div className="bg-[var(--glp-sage-10)] dark:bg-[var(--glp-charcoal)] rounded-lg p-3 min-h-[120px]">
+            <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] whitespace-pre-wrap">
               {post.captions?.[platformTab] || "(No caption for this platform)"}
             </p>
             <div className="flex items-center justify-between mt-2">
@@ -1042,10 +1043,10 @@ function MarkPostedModal({ post, platforms, setPlatforms, onConfirm, onClose, is
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-slate-800 rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Mark as Posted</h3>
-        <p className="text-sm text-slate-500 mb-4">{post.title || post.content?.substring(0, 60)}</p>
-        <p className="text-xs text-slate-500 mb-2">Select platforms where you manually posted:</p>
+      <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
+        <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">Mark as Posted</h3>
+        <p className="text-sm text-[var(--glp-deep-teal)] mb-4">{post.title || post.content?.substring(0, 60)}</p>
+        <p className="text-xs text-[var(--glp-deep-teal)] mb-2">Select platforms where you manually posted:</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {Object.entries(PLATFORM_INFO).map(([key, info]) => {
             const Icon = info.icon;
@@ -1055,7 +1056,7 @@ function MarkPostedModal({ post, platforms, setPlatforms, onConfirm, onClose, is
                 key={key}
                 onClick={() => togglePlatform(key)}
                 className={`flex items-center gap-1 px-3 py-1.5 text-xs rounded-lg border transition-colors ${
-                  isSelected ? "border-green-400 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400" : "border-slate-200 dark:border-slate-600 text-slate-500"
+                  isSelected ? "border-green-400 bg-green-50 dark:bg-green-900/20 text-[var(--glp-sage)] dark:text-green-400" : "border-[var(--glp-sage)] dark:border-[var(--glp-sage)] text-[var(--glp-deep-teal)]"
                 }`}
                 data-testid={`toggle-platform-${key}`}
               >
@@ -1067,8 +1068,8 @@ function MarkPostedModal({ post, platforms, setPlatforms, onConfirm, onClose, is
           })}
         </div>
         <div className="flex gap-2 justify-end">
-          <button onClick={onClose} className="px-3 py-2 text-sm text-slate-600 dark:text-slate-400" data-testid="button-cancel-posted">Cancel</button>
-          <button onClick={onConfirm} disabled={platforms.length === 0 || isPending} className="px-4 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 flex items-center gap-2" data-testid="button-confirm-posted">
+          <button onClick={onClose} className="px-3 py-2 text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" data-testid="button-cancel-posted">Cancel</button>
+          <button onClick={onConfirm} disabled={platforms.length === 0 || isPending} className="px-4 py-2 text-sm bg-green-600 text-[var(--glp-ivory)] rounded-lg hover:bg-green-700 disabled:opacity-50 flex items-center gap-2" data-testid="button-confirm-posted">
             {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
             Confirm Posted
           </button>
@@ -1082,10 +1083,10 @@ function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShow
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200">Campaigns</h2>
+        <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">Campaigns</h2>
         <button
           onClick={() => setShowCampaignForm(!showCampaignForm)}
-          className="flex items-center gap-2 px-3 py-2 text-sm bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-slate-200 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-[var(--glp-charcoal)] dark:bg-[var(--glp-ivory)] text-[var(--glp-ivory)] dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-[var(--glp-sage-10)] transition-colors"
           data-testid="button-new-campaign"
         >
           <Plus className="w-4 h-4" />
@@ -1098,22 +1099,22 @@ function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShow
           <form onSubmit={(e) => { e.preventDefault(); campaignMutation.mutate(campaignForm); }} className="space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Campaign Name *</label>
+                <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Campaign Name *</label>
                 <input
                   value={campaignForm.name}
                   onChange={(e) => setCampaignForm(f => ({ ...f, name: e.target.value }))}
-                  className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                  className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
                   placeholder="e.g. Launch Week, Journal Series"
                   required
                   data-testid="input-campaign-name"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Goal</label>
+                <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Goal</label>
                 <input
                   value={campaignForm.goal}
                   onChange={(e) => setCampaignForm(f => ({ ...f, goal: e.target.value }))}
-                  className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                  className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
                   placeholder="e.g. Drive 200 newsletter signups"
                   data-testid="input-campaign-goal"
                 />
@@ -1121,17 +1122,17 @@ function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShow
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Start Date</label>
-                <input type="date" value={campaignForm.startDate} onChange={(e) => setCampaignForm(f => ({ ...f, startDate: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="input-campaign-start" />
+                <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Start Date</label>
+                <input type="date" value={campaignForm.startDate} onChange={(e) => setCampaignForm(f => ({ ...f, startDate: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="input-campaign-start" />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">End Date</label>
-                <input type="date" value={campaignForm.endDate} onChange={(e) => setCampaignForm(f => ({ ...f, endDate: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="input-campaign-end" />
+                <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">End Date</label>
+                <input type="date" value={campaignForm.endDate} onChange={(e) => setCampaignForm(f => ({ ...f, endDate: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="input-campaign-end" />
               </div>
             </div>
             <div className="flex gap-2 justify-end">
-              <button type="button" onClick={() => setShowCampaignForm(false)} className="px-3 py-2 text-sm text-slate-600 dark:text-slate-400" data-testid="button-cancel-campaign">Cancel</button>
-              <button type="submit" disabled={campaignMutation.isPending} className="px-4 py-2 text-sm bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-slate-200 disabled:opacity-50 flex items-center gap-2" data-testid="button-save-campaign">
+              <button type="button" onClick={() => setShowCampaignForm(false)} className="px-3 py-2 text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" data-testid="button-cancel-campaign">Cancel</button>
+              <button type="submit" disabled={campaignMutation.isPending} className="px-4 py-2 text-sm bg-[var(--glp-charcoal)] dark:bg-[var(--glp-ivory)] text-[var(--glp-ivory)] dark:text-slate-900 rounded-lg hover:bg-slate-700 dark:hover:bg-[var(--glp-sage-10)] disabled:opacity-50 flex items-center gap-2" data-testid="button-save-campaign">
                 {campaignMutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
                 Create Campaign
               </button>
@@ -1141,7 +1142,7 @@ function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShow
       )}
 
       {campaignsLoading ? (
-        <div className="flex items-center justify-center py-8"><Loader2 className="w-5 h-5 animate-spin text-slate-400" /></div>
+        <div className="flex items-center justify-center py-8"><Loader2 className="w-5 h-5 animate-spin text-[var(--glp-sage)]" /></div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {(Array.isArray(campaigns) ? campaigns : []).map(campaign => {
@@ -1149,32 +1150,32 @@ function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShow
             const draftCount = campPosts.filter(p => p.status === "draft").length;
             const postedCount = campPosts.filter(p => p.status === "posted").length;
             return (
-              <div key={campaign.id} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4" data-testid={`card-campaign-${campaign.id}`}>
+              <div key={campaign.id} className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] p-4" data-testid={`card-campaign-${campaign.id}`}>
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <Megaphone className="w-4 h-4 text-purple-500" />
-                    <h3 className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{campaign.name}</h3>
+                    <Megaphone className="w-4 h-4 text-[var(--glp-deep-teal)]" />
+                    <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] text-sm">{campaign.name}</h3>
                   </div>
-                  <span className={`text-[10px] px-2 py-0.5 rounded ${campaign.status === "active" ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-500"}`}>
+                  <span className={`text-[10px] px-2 py-0.5 rounded ${campaign.status === "active" ? "bg-green-100 text-[var(--glp-sage)]" : "bg-slate-100 text-[var(--glp-deep-teal)]"}`}>
                     {campaign.status}
                   </span>
                 </div>
-                {campaign.goal && <p className="text-xs text-slate-500 mb-3">{campaign.goal}</p>}
-                <div className="flex items-center gap-3 text-xs text-slate-400">
+                {campaign.goal && <p className="text-xs text-[var(--glp-deep-teal)] mb-3">{campaign.goal}</p>}
+                <div className="flex items-center gap-3 text-xs text-[var(--glp-sage)]">
                   {campaign.startDate && <span>{new Date(campaign.startDate).toLocaleDateString()}</span>}
                   {campaign.startDate && campaign.endDate && <span>→</span>}
                   {campaign.endDate && <span>{new Date(campaign.endDate).toLocaleDateString()}</span>}
                 </div>
-                <div className="flex gap-3 mt-3 pt-3 border-t border-slate-100 dark:border-slate-700 text-xs">
-                  <span className="text-slate-500">{campPosts.length} posts</span>
-                  <span className="text-amber-500">{draftCount} drafts</span>
+                <div className="flex gap-3 mt-3 pt-3 border-t border-[var(--glp-sage)] dark:border-[var(--glp-sage)] text-xs">
+                  <span className="text-[var(--glp-deep-teal)]">{campPosts.length} posts</span>
+                  <span className="text-[var(--glp-gold)]">{draftCount} drafts</span>
                   <span className="text-green-500">{postedCount} posted</span>
                 </div>
               </div>
             );
           })}
           {(!campaigns || campaigns.length === 0) && (
-            <p className="text-sm text-slate-400 col-span-full text-center py-8">No campaigns yet. Create one to organize your posts.</p>
+            <p className="text-sm text-[var(--glp-sage)] col-span-full text-center py-8">No campaigns yet. Create one to organize your posts.</p>
           )}
         </div>
       )}
@@ -1200,15 +1201,15 @@ function WeeklyQueuePanel({ weeklyPosts, weeklyLoading, getCampaignName, setSele
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+        <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
           <Calendar className="w-5 h-5" />
           Weekly Queue — Next 7 Days
         </h2>
-        <span className="text-sm text-slate-400">{(Array.isArray(weeklyPosts) ? weeklyPosts : []).length} scheduled</span>
+        <span className="text-sm text-[var(--glp-sage)]">{(Array.isArray(weeklyPosts) ? weeklyPosts : []).length} scheduled</span>
       </div>
 
       {weeklyLoading ? (
-        <div className="flex items-center justify-center py-8"><Loader2 className="w-5 h-5 animate-spin text-slate-400" /></div>
+        <div className="flex items-center justify-center py-8"><Loader2 className="w-5 h-5 animate-spin text-[var(--glp-sage)]" /></div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-7 gap-2">
           {days.map(day => {
@@ -1220,19 +1221,19 @@ function WeeklyQueuePanel({ weeklyPosts, weeklyLoading, getCampaignName, setSele
                 className={`rounded-xl border p-3 min-h-[120px] ${
                   isToday
                     ? "border-blue-300 dark:border-blue-600 bg-blue-50 dark:bg-blue-900/10"
-                    : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+                    : "border-[var(--glp-sage)] dark:border-[var(--glp-sage)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)]"
                 }`}
               >
-                <div className="text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">
+                <div className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-2">
                   {day.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
-                  {isToday && <span className="ml-1 text-blue-600 dark:text-blue-400">(Today)</span>}
+                  {isToday && <span className="ml-1 text-[var(--glp-deep-teal)] dark:text-blue-400">(Today)</span>}
                 </div>
                 <div className="space-y-1">
                   {dayPosts.map(post => (
                     <div
                       key={post.id}
                       onClick={() => { setSelectedPost(post); setActivePanel("pipeline"); }}
-                      className="p-2 rounded bg-slate-50 dark:bg-slate-700/50 text-xs text-slate-700 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-600/50 transition-colors"
+                      className="p-2 rounded bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)]/50 text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] cursor-pointer hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)]/50 transition-colors"
                       data-testid={`weekly-post-${post.id}`}
                     >
                       <p className="line-clamp-2">{post.title || post.content?.substring(0, 50)}</p>
@@ -1240,7 +1241,7 @@ function WeeklyQueuePanel({ weeklyPosts, weeklyLoading, getCampaignName, setSele
                     </div>
                   ))}
                   {dayPosts.length === 0 && (
-                    <p className="text-[10px] text-slate-300 dark:text-slate-600 text-center pt-4">No posts</p>
+                    <p className="text-[10px] text-slate-300 dark:text-[var(--glp-deep-teal)] text-center pt-4">No posts</p>
                   )}
                 </div>
               </div>
@@ -1261,14 +1262,14 @@ function UTMBuilderPanel({ utmForm, setUtmForm, utmResult, setUtmResult, utmMuta
   return (
     <div className="max-w-2xl mx-auto">
       <SectionCard title="UTM Link Builder" icon={Link2}>
-        <p className="text-xs text-slate-500 mb-4">Generate trackable links for social posts. Links follow your CTA destinations for clean attribution.</p>
+        <p className="text-xs text-[var(--glp-deep-teal)] mb-4">Generate trackable links for social posts. Links follow your CTA destinations for clean attribution.</p>
         <form onSubmit={handleBuild} className="space-y-3">
           <div>
-            <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Base URL *</label>
+            <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Base URL *</label>
             <select
               value={utmForm.baseUrl}
               onChange={(e) => setUtmForm(f => ({ ...f, baseUrl: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
               data-testid="select-utm-base"
             >
               <option value="">Select page or enter URL</option>
@@ -1279,15 +1280,15 @@ function UTMBuilderPanel({ utmForm, setUtmForm, utmResult, setUtmResult, utmMuta
             <input
               value={utmForm.baseUrl}
               onChange={(e) => setUtmForm(f => ({ ...f, baseUrl: e.target.value }))}
-              className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white mt-1"
+              className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mt-1"
               placeholder="Or paste custom URL..."
               data-testid="input-utm-base"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Source *</label>
-              <select value={utmForm.source} onChange={(e) => setUtmForm(f => ({ ...f, source: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="select-utm-source">
+              <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Source *</label>
+              <select value={utmForm.source} onChange={(e) => setUtmForm(f => ({ ...f, source: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="select-utm-source">
                 <option value="instagram">Instagram</option>
                 <option value="tiktok">TikTok</option>
                 <option value="x">X / Twitter</option>
@@ -1298,8 +1299,8 @@ function UTMBuilderPanel({ utmForm, setUtmForm, utmResult, setUtmResult, utmMuta
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Medium *</label>
-              <select value={utmForm.medium} onChange={(e) => setUtmForm(f => ({ ...f, medium: e.target.value }))} className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white" data-testid="select-utm-medium">
+              <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Medium *</label>
+              <select value={utmForm.medium} onChange={(e) => setUtmForm(f => ({ ...f, medium: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="select-utm-medium">
                 <option value="social">Social</option>
                 <option value="organic">Organic</option>
                 <option value="email">Email</option>
@@ -1309,28 +1310,28 @@ function UTMBuilderPanel({ utmForm, setUtmForm, utmResult, setUtmResult, utmMuta
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Campaign *</label>
+              <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Campaign *</label>
               <input
                 value={utmForm.campaign}
                 onChange={(e) => setUtmForm(f => ({ ...f, campaign: e.target.value }))}
-                className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
                 placeholder="e.g. launch-week-feb"
                 required
                 data-testid="input-utm-campaign"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Content (optional)</label>
+              <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Content (optional)</label>
               <input
                 value={utmForm.content}
                 onChange={(e) => setUtmForm(f => ({ ...f, content: e.target.value }))}
-                className="w-full border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
                 placeholder="e.g. carousel-1, cta-button"
                 data-testid="input-utm-content"
               />
             </div>
           </div>
-          <button type="submit" disabled={utmMutation.isPending || !utmForm.baseUrl || !utmForm.campaign} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2" data-testid="button-build-utm">
+          <button type="submit" disabled={utmMutation.isPending || !utmForm.baseUrl || !utmForm.campaign} className="px-4 py-2 text-sm bg-blue-600 text-[var(--glp-ivory)] rounded-lg hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2" data-testid="button-build-utm">
             {utmMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Link2 className="w-4 h-4" />}
             Build UTM Link
           </button>
@@ -1338,7 +1339,7 @@ function UTMBuilderPanel({ utmForm, setUtmForm, utmResult, setUtmResult, utmMuta
 
         {utmResult && (
           <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-            <p className="text-xs font-medium text-green-700 dark:text-green-400 mb-1">Generated UTM Link:</p>
+            <p className="text-xs font-medium text-[var(--glp-sage)] dark:text-green-400 mb-1">Generated UTM Link:</p>
             <div className="flex items-center gap-2">
               <code className="text-xs text-green-800 dark:text-green-300 break-all flex-1">{utmResult}</code>
               <CopyBtn text={utmResult} label="Copy Link" />
@@ -1352,7 +1353,7 @@ function UTMBuilderPanel({ utmForm, setUtmForm, utmResult, setUtmResult, utmMuta
 
 function SignalsPanel({ signals, clicks, signalsLoading }) {
   if (signalsLoading) {
-    return <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-slate-400" /></div>;
+    return <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[var(--glp-sage)]" /></div>;
   }
 
   const statusCounts = signals?.statusCounts || {};
@@ -1363,16 +1364,16 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+      <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
         <BarChart3 className="w-5 h-5" />
         Performance Signals (Read-Only)
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {Object.entries(STATUS_CONFIG).map(([key, config]) => (
-          <div key={key} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-center">
-            <div className="text-2xl font-bold text-slate-900 dark:text-white">{statusCounts[key] || 0}</div>
-            <div className="text-xs text-slate-500">{config.label}</div>
+          <div key={key} className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] p-4 text-center">
+            <div className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{statusCounts[key] || 0}</div>
+            <div className="text-xs text-[var(--glp-deep-teal)]">{config.label}</div>
           </div>
         ))}
       </div>
@@ -1381,7 +1382,7 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
         <SectionCard title="Suggested Focus" icon={TrendingUp}>
           <ul className="space-y-2">
             {suggestedFocus.map((tip, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
+              <li key={i} className="flex items-start gap-2 text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                 <ChevronRight className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
                 {tip}
               </li>
@@ -1396,12 +1397,12 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
             <div className="space-y-2">
               {topThemes.map((t, i) => (
                 <div key={i} className="flex items-center justify-between text-sm">
-                  <span className="text-slate-700 dark:text-slate-300">{t.theme}</span>
-                  <span className="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded text-slate-500">{t.count} posts</span>
+                  <span className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{t.theme}</span>
+                  <span className="text-xs bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] px-2 py-0.5 rounded text-[var(--glp-deep-teal)]">{t.count} posts</span>
                 </div>
               ))}
             </div>
-          ) : <p className="text-xs text-slate-400">No posted themes yet.</p>}
+          ) : <p className="text-xs text-[var(--glp-sage)]">No posted themes yet.</p>}
         </SectionCard>
 
         <SectionCard title="UTM Click Stats (7 days)" icon={Clipboard}>
@@ -1409,12 +1410,12 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
             <div className="space-y-2">
               {clickStats.map((c, i) => (
                 <div key={i} className="flex items-center justify-between text-sm">
-                  <span className="text-slate-700 dark:text-slate-300 truncate max-w-[200px]">{c.path}</span>
-                  <span className="text-xs bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 rounded text-blue-600">{c.count} clicks</span>
+                  <span className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate max-w-[200px]">{c.path}</span>
+                  <span className="text-xs bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 rounded text-[var(--glp-deep-teal)]">{c.count} clicks</span>
                 </div>
               ))}
             </div>
-          ) : <p className="text-xs text-slate-400">No UTM click data yet.</p>}
+          ) : <p className="text-xs text-[var(--glp-sage)]">No UTM click data yet.</p>}
         </SectionCard>
       </div>
 
@@ -1423,8 +1424,8 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
           <div className="space-y-2">
             {recentBlog.map((b, i) => (
               <div key={i} className="flex items-center justify-between text-sm">
-                <span className="text-slate-700 dark:text-slate-300 truncate">{b.path}</span>
-                <span className="text-xs text-slate-500">{b.eventName}: {b.count}</span>
+                <span className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate">{b.path}</span>
+                <span className="text-xs text-[var(--glp-deep-teal)]">{b.eventName}: {b.count}</span>
               </div>
             ))}
           </div>
@@ -1436,14 +1437,14 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
 
 function AuditPanel({ audit, auditLoading }) {
   if (auditLoading) {
-    return <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-slate-400" /></div>;
+    return <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[var(--glp-sage)]" /></div>;
   }
 
   const events = Array.isArray(audit) ? audit : [];
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+      <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
         <Shield className="w-5 h-5" />
         Audit Log (Immutable)
       </h2>
@@ -1451,15 +1452,15 @@ function AuditPanel({ audit, auditLoading }) {
         {events.length > 0 ? (
           <div className="space-y-2 max-h-[600px] overflow-y-auto">
             {events.map((evt, i) => (
-              <div key={evt.id || i} className="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700/50 text-sm" data-testid={`audit-event-${evt.id || i}`}>
+              <div key={evt.id || i} className="flex items-start gap-3 p-2 rounded-lg hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)]/50 text-sm" data-testid={`audit-event-${evt.id || i}`}>
                 <div className="flex-shrink-0 w-2 h-2 rounded-full bg-slate-400 mt-2" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-medium text-slate-800 dark:text-slate-200">{evt.type}</span>
-                    <span className="text-xs text-slate-400">{new Date(evt.createdAt).toLocaleString()}</span>
+                    <span className="font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{evt.type}</span>
+                    <span className="text-xs text-[var(--glp-sage)]">{new Date(evt.createdAt).toLocaleString()}</span>
                   </div>
                   {evt.meta && (
-                    <p className="text-xs text-slate-500 mt-0.5 truncate">
+                    <p className="text-xs text-[var(--glp-deep-teal)] mt-0.5 truncate">
                       {typeof evt.meta === "string" ? evt.meta : JSON.stringify(evt.meta)}
                     </p>
                   )}
@@ -1467,7 +1468,7 @@ function AuditPanel({ audit, auditLoading }) {
               </div>
             ))}
           </div>
-        ) : <p className="text-sm text-slate-400 text-center py-8">No audit events yet.</p>}
+        ) : <p className="text-sm text-[var(--glp-sage)] text-center py-8">No audit events yet.</p>}
       </SectionCard>
     </div>
   );
