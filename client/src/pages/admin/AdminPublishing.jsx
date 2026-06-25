@@ -1,3 +1,4 @@
+// PHASE11714_ADMIN_PUBLISHING_VISUAL_TOKEN_PATCH
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -18,7 +19,7 @@ function CopyButton({ text, label }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-amber-100 dark:bg-amber-900/30 hover:bg-amber-200 dark:hover:bg-amber-800/40 transition-colors"
+      className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-[var(--glp-sage-10)] dark:bg-[color-mix(in_srgb,var(--glp-gold)_18%,var(--glp-charcoal))] hover:bg-[color-mix(in_srgb,var(--glp-gold)_22%,var(--glp-ivory))] dark:hover:bg-[var(--glp-deep-teal)] transition-colors"
       data-testid={`button-copy-${label}`}
     >
       {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
@@ -28,7 +29,7 @@ function CopyButton({ text, label }) {
 }
 
 const PIPELINE_STATUS_BADGES = {
-  draft: { label: "Draft", className: "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400", icon: PenLine },
+  draft: { label: "Draft", className: "bg-[var(--glp-sage-10)] dark:bg-[var(--glp-charcoal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]", icon: PenLine },
   review: { label: "In Review", className: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300", icon: Eye },
   approved: { label: "Approved", className: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300", icon: CheckCircle },
   published: { label: "Published", className: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300", icon: CheckCircle },
@@ -55,11 +56,11 @@ function ShareCaptions({ title, slug }) {
     <div className="mt-2 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg space-y-2 text-xs">
       <div className="flex justify-between items-center mb-1">
         <span className="font-medium text-indigo-700 dark:text-indigo-300">Share Captions (copy & paste)</span>
-        <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600" data-testid={`button-close-share`}><X className="w-3 h-3" /></button>
+        <button onClick={() => setOpen(false)} className="text-[var(--glp-sage)] hover:text-[var(--glp-deep-teal)]" data-testid={`button-close-share`}><X className="w-3 h-3" /></button>
       </div>
       {Object.entries(SHARE_TEMPLATES).map(([platform, fn]) => (
         <div key={platform} className="flex items-start gap-2">
-          <span className="w-16 shrink-0 font-medium capitalize text-gray-600 dark:text-gray-400">{platform}</span>
+          <span className="w-16 shrink-0 font-medium capitalize text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{platform}</span>
           <CopyButton text={fn(title, url)} label={`Copy ${platform}`} />
         </div>
       ))}
@@ -207,19 +208,19 @@ export default function AdminPublishing() {
           <ArrowLeft size={16} /> Back to Command Center
         </Link>
 
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2" data-testid="text-publishing-title">
+        <h1 className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2" data-testid="text-publishing-title">
           Publishing Command Center
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-6">Manual-first publishing. No auto-posting. Human decisions only.</p>
+        <p className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-6">Manual-first publishing. No auto-posting. Human decisions only.</p>
 
         {todayItems.length > 0 && (
           <div className="mb-6 p-4 rounded-lg border-2 border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30">
             <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-2">Today's Publishing ({today})</h3>
             {todayItems.map((item, i) => (
               <div key={i} className="flex items-center gap-3 py-1">
-                <span className="text-xs px-2 py-0.5 rounded bg-amber-200 dark:bg-amber-800">{item.channel}</span>
+                <span className="text-xs px-2 py-0.5 rounded bg-[color-mix(in_srgb,var(--glp-gold)_22%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)]">{item.channel}</span>
                 <span className="text-sm">{item.title}</span>
-                <span className="text-xs text-gray-500">{item.pillar}</span>
+                <span className="text-xs text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))]">{item.pillar}</span>
                 {item.draft_id && <CopyButton text={item.draft_id} label="Copy ID" />}
               </div>
             ))}
@@ -233,8 +234,8 @@ export default function AdminPublishing() {
               onClick={() => setActiveTab(tab.key)}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 activeTab === tab.key
-                  ? "bg-amber-600 text-white"
-                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-gray-700"
+                  ? "bg-[var(--glp-sage)] text-[var(--glp-ivory)]"
+                  : "bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-ivory)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-gray-700"
               }`}
               data-testid={`tab-${tab.key}`}
             >
@@ -244,52 +245,52 @@ export default function AdminPublishing() {
         </div>
 
         {activeTab === "pipeline" && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-lg font-semibold" data-testid="text-pipeline-title">Editorial Pipeline</h2>
               <button
                 onClick={() => { setEditingPost(null); setDraftForm({ title: "", content: "", excerpt: "", contentType: "blog_post" }); setShowCreateDraft(!showCreateDraft); }}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg bg-[var(--glp-sage)] text-[var(--glp-ivory)] hover:bg-[var(--glp-deep-teal)] transition-colors"
                 data-testid="button-create-draft"
               >
                 <Plus className="w-4 h-4" /> Create Draft
               </button>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Blog posts flow: Draft → Review → Approved → Published. Content safety validation runs before publishing.</p>
+            <p className="text-sm text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))] dark:text-[var(--glp-sage)] mb-4">Blog posts flow: Draft → Review → Approved → Published. Content safety validation runs before publishing.</p>
 
             {showCreateDraft && (
               <div className="mb-6 p-4 border-2 border-amber-200 dark:border-amber-800 rounded-lg bg-amber-50/50 dark:bg-amber-950/20">
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="font-medium">{editingPost ? `Editing: ${editingPost.title}` : "New Draft"}</h3>
-                  <button onClick={handleCancelForm} className="text-gray-400 hover:text-gray-600" data-testid="button-cancel-draft"><X className="w-4 h-4" /></button>
+                  <button onClick={handleCancelForm} className="text-[var(--glp-sage)] hover:text-[var(--glp-deep-teal)]" data-testid="button-cancel-draft"><X className="w-4 h-4" /></button>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Title</label>
+                    <label className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1 block">Title</label>
                     <input
                       type="text" value={draftForm.title}
                       onChange={(e) => setDraftForm({ ...draftForm, title: e.target.value })}
                       placeholder="A gentle title for your post..."
-                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none"
+                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)] focus:ring-2 focus:ring-amber-400 outline-none"
                       data-testid="input-draft-title"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Excerpt (optional)</label>
+                    <label className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1 block">Excerpt (optional)</label>
                     <input
                       type="text" value={draftForm.excerpt}
                       onChange={(e) => setDraftForm({ ...draftForm, excerpt: e.target.value })}
                       placeholder="A brief summary..."
-                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none"
+                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)] focus:ring-2 focus:ring-amber-400 outline-none"
                       data-testid="input-draft-excerpt"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Content Type</label>
+                    <label className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1 block">Content Type</label>
                     <select
                       value={draftForm.contentType}
                       onChange={(e) => setDraftForm({ ...draftForm, contentType: e.target.value })}
-                      className="px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none"
+                      className="px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)] focus:ring-2 focus:ring-amber-400 outline-none"
                       data-testid="select-draft-type"
                     >
                       <option value="blog_post">Blog Post</option>
@@ -300,27 +301,27 @@ export default function AdminPublishing() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Content</label>
+                    <label className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1 block">Content</label>
                     <textarea
                       value={draftForm.content}
                       onChange={(e) => setDraftForm({ ...draftForm, content: e.target.value })}
                       placeholder="Write your compassionate, healing-focused content here..."
                       rows={8}
-                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none resize-y"
+                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)] focus:ring-2 focus:ring-amber-400 outline-none resize-y"
                       data-testid="textarea-draft-content"
                     />
-                    <div className="text-xs text-gray-400 mt-1">{draftForm.content.length} characters</div>
+                    <div className="text-xs text-[var(--glp-sage)] mt-1">{draftForm.content.length} characters</div>
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => createDraftMutation.mutate(draftForm)}
                       disabled={!draftForm.title.trim() || !draftForm.content.trim() || createDraftMutation.isPending}
-                      className="px-4 py-2 text-sm rounded-lg bg-amber-600 text-white hover:bg-amber-700 disabled:opacity-50 transition-colors"
+                      className="px-4 py-2 text-sm rounded-lg bg-[var(--glp-sage)] text-[var(--glp-ivory)] hover:bg-[var(--glp-deep-teal)] disabled:opacity-50 transition-colors"
                       data-testid="button-save-draft"
                     >
                       {createDraftMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : editingPost ? "Update Draft" : "Save Draft"}
                     </button>
-                    <button onClick={handleCancelForm} className="px-4 py-2 text-sm rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors" data-testid="button-cancel-form">
+                    <button onClick={handleCancelForm} className="px-4 py-2 text-sm rounded-lg bg-[color-mix(in_srgb,var(--glp-sage)_18%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-sage-10)]0 transition-colors" data-testid="button-cancel-form">
                       Cancel
                     </button>
                   </div>
@@ -351,11 +352,11 @@ export default function AdminPublishing() {
                 </div>
 
                 <div className="flex items-center gap-2 mb-4">
-                  <Filter className="w-4 h-4 text-gray-400" />
+                  <Filter className="w-4 h-4 text-[var(--glp-sage)]" />
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="text-sm px-2 py-1 rounded border dark:border-gray-600 bg-white dark:bg-gray-700"
+                    className="text-sm px-2 py-1 rounded border dark:border-gray-600 bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)]"
                     data-testid="select-status-filter"
                   >
                     <option value="all">All ({allPipelinePosts.length})</option>
@@ -367,7 +368,7 @@ export default function AdminPublishing() {
                 </div>
 
                 {filteredPosts.length === 0 ? (
-                  <p className="text-center text-gray-500 dark:text-gray-400 py-6">
+                  <p className="text-center text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))] dark:text-[var(--glp-sage)] py-6">
                     {allPipelinePosts.length === 0
                       ? "No blog posts in the pipeline yet. Click 'Create Draft' to start your first post."
                       : `No posts with status "${statusFilter}". Try a different filter.`}
@@ -376,7 +377,7 @@ export default function AdminPublishing() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm" data-testid="table-pipeline">
                       <thead>
-                        <tr className="border-b dark:border-gray-700">
+                        <tr className="border-b dark:border-[color-mix(in_srgb,var(--glp-sage)_35%,transparent)]">
                           <th className="text-left py-2 px-2">Title</th>
                           <th className="text-left py-2 px-2">Type</th>
                           <th className="text-left py-2 px-2">Status</th>
@@ -389,7 +390,7 @@ export default function AdminPublishing() {
                           const badge = PIPELINE_STATUS_BADGES[post.status] || PIPELINE_STATUS_BADGES.draft;
                           const StatusIcon = badge.icon;
                           return (
-                            <tr key={post.id} className="border-b dark:border-gray-700/50" data-testid={`row-pipeline-${post.id}`}>
+                            <tr key={post.id} className="border-b dark:border-[color-mix(in_srgb,var(--glp-sage)_35%,transparent)]/50" data-testid={`row-pipeline-${post.id}`}>
                               <td className="py-2 px-2 font-medium max-w-xs truncate">{post.title}</td>
                               <td className="py-2 px-2"><span className="text-xs px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">{post.contentType || "blog_post"}</span></td>
                               <td className="py-2 px-2">
@@ -397,13 +398,13 @@ export default function AdminPublishing() {
                                   <StatusIcon className="w-3 h-3" /> {badge.label}
                                 </span>
                               </td>
-                              <td className="py-2 px-2 text-xs text-gray-500">{post.updatedAt ? new Date(post.updatedAt).toLocaleDateString() : "—"}</td>
+                              <td className="py-2 px-2 text-xs text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))]">{post.updatedAt ? new Date(post.updatedAt).toLocaleDateString() : "—"}</td>
                               <td className="py-2 px-2">
                                 <div className="flex gap-1 flex-wrap">
                                   {(post.status === "draft" || post.status === "review") && (
                                     <button
                                       onClick={() => handleEditPost(post)}
-                                      className="text-xs px-2 py-1 rounded bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500"
+                                      className="text-xs px-2 py-1 rounded bg-[color-mix(in_srgb,var(--glp-sage)_18%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-sage-10)]0"
                                       data-testid={`button-edit-${post.id}`}
                                     >
                                       Edit
@@ -413,7 +414,7 @@ export default function AdminPublishing() {
                                     <button
                                       onClick={() => pipelineActionMutation.mutate({ id: post.id, action: "submit" })}
                                       disabled={pipelineActionMutation.isPending}
-                                      className="text-xs px-2 py-1 rounded bg-yellow-500 text-white hover:bg-yellow-600 disabled:opacity-50"
+                                      className="text-xs px-2 py-1 rounded bg-yellow-500 text-[var(--glp-ivory)] hover:bg-yellow-600 disabled:opacity-50"
                                       data-testid={`button-submit-${post.id}`}
                                     >
                                       Submit for Review
@@ -423,7 +424,7 @@ export default function AdminPublishing() {
                                     <button
                                       onClick={() => pipelineActionMutation.mutate({ id: post.id, action: "approve" })}
                                       disabled={pipelineActionMutation.isPending}
-                                      className="text-xs px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
+                                      className="text-xs px-2 py-1 rounded bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)] disabled:opacity-50"
                                       data-testid={`button-approve-${post.id}`}
                                     >
                                       Approve
@@ -433,7 +434,7 @@ export default function AdminPublishing() {
                                     <button
                                       onClick={() => pipelineActionMutation.mutate({ id: post.id, action: "publish" })}
                                       disabled={pipelineActionMutation.isPending}
-                                      className="text-xs px-2 py-1 rounded bg-green-500 text-white hover:bg-green-600 disabled:opacity-50"
+                                      className="text-xs px-2 py-1 rounded bg-[var(--glp-sage)] text-[var(--glp-ivory)] hover:bg-[var(--glp-deep-teal)] disabled:opacity-50"
                                       data-testid={`button-publish-${post.id}`}
                                     >
                                       Publish
@@ -461,9 +462,9 @@ export default function AdminPublishing() {
         )}
 
         {activeTab === "recommendations" && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 shadow-sm">
             <h2 className="text-lg font-semibold mb-2" data-testid="text-recommendations-title">Publishing Recommendations</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Analytics-driven insights from the last 7 days. No PII collected. All suggestions are manual — you decide what to act on.</p>
+            <p className="text-sm text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))] dark:text-[var(--glp-sage)] mb-4">Analytics-driven insights from the last 7 days. No PII collected. All suggestions are manual — you decide what to act on.</p>
             {recsLoading ? (
               <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
             ) : (
@@ -472,17 +473,17 @@ export default function AdminPublishing() {
                   <div className="rounded-lg p-4 bg-green-50 dark:bg-green-950/30 text-center" data-testid="stat-subscribers">
                     <Users className="w-5 h-5 mx-auto mb-1 text-green-600 dark:text-green-400" />
                     <div className="text-2xl font-bold text-green-700 dark:text-green-300">{recs.newsletter?.totalSubscribers || 0}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Total Subscribers</div>
+                    <div className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Total Subscribers</div>
                   </div>
                   <div className="rounded-lg p-4 bg-blue-50 dark:bg-blue-950/30 text-center" data-testid="stat-signup-attempts">
                     <TrendingUp className="w-5 h-5 mx-auto mb-1 text-blue-600 dark:text-blue-400" />
                     <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">{recs.newsletter?.attemptsLast7d || 0}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Signup Attempts (7d)</div>
+                    <div className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Signup Attempts (7d)</div>
                   </div>
                   <div className="rounded-lg p-4 bg-purple-50 dark:bg-purple-950/30 text-center" data-testid="stat-signup-success">
                     <CheckCircle className="w-5 h-5 mx-auto mb-1 text-purple-600 dark:text-purple-400" />
                     <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">{recs.newsletter?.successesLast7d || 0}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">Successful Signups (7d)</div>
+                    <div className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Successful Signups (7d)</div>
                   </div>
                 </div>
 
@@ -491,7 +492,7 @@ export default function AdminPublishing() {
                     <h3 className="font-medium mb-2 flex items-center gap-2"><Eye className="w-4 h-4" /> Top Pages (7d)</h3>
                     <div className="space-y-1">
                       {(recs.topPages || []).map((p, i) => (
-                        <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-gray-50 dark:bg-gray-700/50 rounded">
+                        <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-charcoal)]/50 rounded">
                           <span className="text-sm font-mono">{p.path}</span>
                           <span className="text-sm font-medium">{p.views} views</span>
                         </div>
@@ -505,7 +506,7 @@ export default function AdminPublishing() {
                     <h3 className="font-medium mb-2 flex items-center gap-2"><TrendingUp className="w-4 h-4" /> Top CTAs (7d)</h3>
                     <div className="space-y-1">
                       {(recs.topCTAs || []).map((c, i) => (
-                        <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-gray-50 dark:bg-gray-700/50 rounded">
+                        <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-charcoal)]/50 rounded">
                           <span className="text-sm">{c.name}</span>
                           <span className="text-sm font-medium">{c.clicks} clicks</span>
                         </div>
@@ -517,15 +518,15 @@ export default function AdminPublishing() {
                 {(recs.suggestedTopics || []).length > 0 && (
                   <div>
                     <h3 className="font-medium mb-2 flex items-center gap-2"><Lightbulb className="w-4 h-4" /> Suggested Blog Topics</h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Based on most-visited pages — write about what your audience is already exploring.</p>
+                    <p className="text-xs text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))] dark:text-[var(--glp-sage)] mb-2">Based on most-visited pages — write about what your audience is already exploring.</p>
                     <div className="space-y-2">
                       {(recs.suggestedTopics || []).map((t, i) => (
                         <div key={i} className="flex justify-between items-center py-2 px-3 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
                           <div>
                             <span className="text-sm font-medium text-amber-800 dark:text-amber-200">{t.topic}</span>
-                            <span className="text-xs text-gray-500 ml-2">(from {t.path})</span>
+                            <span className="text-xs text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))] ml-2">(from {t.path})</span>
                           </div>
-                          <span className="text-xs bg-amber-200 dark:bg-amber-800 px-2 py-0.5 rounded">{t.views} views</span>
+                          <span className="text-xs bg-[color-mix(in_srgb,var(--glp-gold)_22%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)] px-2 py-0.5 rounded">{t.views} views</span>
                         </div>
                       ))}
                     </div>
@@ -533,7 +534,7 @@ export default function AdminPublishing() {
                 )}
 
                 {(recs.topPages || []).length === 0 && (recs.suggestedTopics || []).length === 0 && (
-                  <p className="text-center text-gray-500 dark:text-gray-400 py-6">
+                  <p className="text-center text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))] dark:text-[var(--glp-sage)] py-6">
                     Not enough analytics data yet. Recommendations will appear as visitors interact with the site over the next few days.
                   </p>
                 )}
@@ -543,7 +544,7 @@ export default function AdminPublishing() {
         )}
 
         {activeTab === "registry" && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Publishing Registry ({registry.length} items)</h2>
             {regLoading ? (
               <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
@@ -551,7 +552,7 @@ export default function AdminPublishing() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm" data-testid="table-registry">
                   <thead>
-                    <tr className="border-b dark:border-gray-700">
+                    <tr className="border-b dark:border-[color-mix(in_srgb,var(--glp-sage)_35%,transparent)]">
                       <th className="text-left py-2 px-2">Type</th>
                       <th className="text-left py-2 px-2">Title</th>
                       <th className="text-left py-2 px-2">Pillar</th>
@@ -561,24 +562,24 @@ export default function AdminPublishing() {
                   </thead>
                   <tbody>
                     {registry.map(item => (
-                      <tr key={item.id} className="border-b dark:border-gray-700/50">
+                      <tr key={item.id} className="border-b dark:border-[color-mix(in_srgb,var(--glp-sage)_35%,transparent)]/50">
                         <td className="py-2 px-2"><span className="text-xs px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30">{item.type}</span></td>
                         <td className="py-2 px-2 font-medium">{item.title}</td>
-                        <td className="py-2 px-2 text-xs text-gray-500">{item.pillar}</td>
+                        <td className="py-2 px-2 text-xs text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))]">{item.pillar}</td>
                         <td className="py-2 px-2">
                           <span className={`text-xs px-2 py-0.5 rounded ${
                             item.status === 'published' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' :
                             item.status === 'approved' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' :
-                            'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                            'bg-[var(--glp-sage-10)] dark:bg-[var(--glp-charcoal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]'
                           }`}>{item.status}</span>
                         </td>
                         <td className="py-2 px-2">
                           <div className="flex gap-1">
                             {item.status === 'draft' && (
-                              <button onClick={() => statusMutation.mutate({ id: item.id, status: 'approved' })} className="text-xs px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600" data-testid={`button-approve-${item.id}`}>Approve</button>
+                              <button onClick={() => statusMutation.mutate({ id: item.id, status: 'approved' })} className="text-xs px-2 py-1 rounded bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)]" data-testid={`button-approve-${item.id}`}>Approve</button>
                             )}
                             {item.status === 'approved' && (
-                              <button onClick={() => statusMutation.mutate({ id: item.id, status: 'published' })} className="text-xs px-2 py-1 rounded bg-green-500 text-white hover:bg-green-600" data-testid={`button-publish-${item.id}`}>Publish</button>
+                              <button onClick={() => statusMutation.mutate({ id: item.id, status: 'published' })} className="text-xs px-2 py-1 rounded bg-[var(--glp-sage)] text-[var(--glp-ivory)] hover:bg-[var(--glp-deep-teal)]" data-testid={`button-publish-${item.id}`}>Publish</button>
                             )}
                             {item.slug && <CopyButton text={`/blog/${item.slug}`} label="Copy URL" />}
                           </div>
@@ -593,22 +594,22 @@ export default function AdminPublishing() {
         )}
 
         {activeTab === "drafts" && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Newsletter Drafts ({drafts.length})</h2>
             {draftsLoading ? (
               <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
             ) : (
               <div className="space-y-4">
                 {drafts.map(draft => (
-                  <div key={draft.id} className="border dark:border-gray-700 rounded-lg p-4">
+                  <div key={draft.id} className="border dark:border-[color-mix(in_srgb,var(--glp-sage)_35%,transparent)] rounded-lg p-4">
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <h3 className="font-medium">{draft.title}</h3>
-                        <p className="text-xs text-gray-500">{draft.pillar} · {draft.status}</p>
+                        <p className="text-xs text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))]">{draft.pillar} · {draft.status}</p>
                       </div>
-                      <span className={`text-xs px-2 py-0.5 rounded ${draft.status === 'approved' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>{draft.status}</span>
+                      <span className={`text-xs px-2 py-0.5 rounded ${draft.status === 'approved' ? 'bg-green-100 text-green-700' : 'bg-[var(--glp-sage-10)] text-[var(--glp-deep-teal)]'}`}>{draft.status}</span>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{draft.subject}</p>
+                    <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3">{draft.subject}</p>
                     <div className="flex gap-2">
                       <CopyButton text={draft.subject} label="Subject" />
                       <CopyButton text={draft.body_md} label="Body" />
@@ -622,7 +623,7 @@ export default function AdminPublishing() {
         )}
 
         {activeTab === "calendar" && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Editorial Calendar ({calendar.length} entries)</h2>
             {calLoading ? (
               <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
@@ -630,7 +631,7 @@ export default function AdminPublishing() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm" data-testid="table-calendar">
                   <thead>
-                    <tr className="border-b dark:border-gray-700">
+                    <tr className="border-b dark:border-[color-mix(in_srgb,var(--glp-sage)_35%,transparent)]">
                       <th className="text-left py-2 px-2">Date</th>
                       <th className="text-left py-2 px-2">Channel</th>
                       <th className="text-left py-2 px-2">Pillar</th>
@@ -640,7 +641,7 @@ export default function AdminPublishing() {
                   </thead>
                   <tbody>
                     {calendar.map((item, i) => (
-                      <tr key={i} className={`border-b dark:border-gray-700/50 ${item.date === today ? 'bg-amber-50 dark:bg-amber-950/20' : ''}`}>
+                      <tr key={i} className={`border-b dark:border-[color-mix(in_srgb,var(--glp-sage)_35%,transparent)]/50 ${item.date === today ? 'bg-amber-50 dark:bg-amber-950/20' : ''}`}>
                         <td className="py-2 px-2 font-mono text-xs">{item.date}</td>
                         <td className="py-2 px-2"><span className="text-xs px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30">{item.channel}</span></td>
                         <td className="py-2 px-2 text-xs">{item.pillar}</td>
@@ -656,7 +657,7 @@ export default function AdminPublishing() {
         )}
 
         {activeTab === "signals" && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Publishing Signals (Last 7 Days)</h2>
             {sigLoading ? (
               <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
@@ -664,7 +665,7 @@ export default function AdminPublishing() {
               <div className="space-y-6">
                 <div className="text-center p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
                   <div className="text-3xl font-bold text-amber-700 dark:text-amber-300">{signals.totalEvents || 0}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Total Events</div>
+                  <div className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Total Events</div>
                 </div>
 
                 {(signals.byEvent || []).length > 0 && (
@@ -672,7 +673,7 @@ export default function AdminPublishing() {
                     <h3 className="font-medium mb-2">Events by Type</h3>
                     <div className="space-y-1">
                       {(signals.byEvent || []).map(e => (
-                        <div key={e.name} className="flex justify-between items-center py-1 px-2 bg-gray-50 dark:bg-gray-700/50 rounded">
+                        <div key={e.name} className="flex justify-between items-center py-1 px-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-charcoal)]/50 rounded">
                           <span className="text-sm">{e.name}</span>
                           <span className="text-sm font-medium">{e.count}</span>
                         </div>
@@ -686,7 +687,7 @@ export default function AdminPublishing() {
                     <h3 className="font-medium mb-2">Top Routes</h3>
                     <div className="space-y-1">
                       {(signals.byRoute || []).map(r => (
-                        <div key={r.route} className="flex justify-between items-center py-1 px-2 bg-gray-50 dark:bg-gray-700/50 rounded">
+                        <div key={r.route} className="flex justify-between items-center py-1 px-2 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-charcoal)]/50 rounded">
                           <span className="text-sm font-mono">{r.route}</span>
                           <span className="text-sm font-medium">{r.count}</span>
                         </div>
@@ -696,14 +697,14 @@ export default function AdminPublishing() {
                 )}
 
                 {(signals.totalEvents || 0) === 0 && (
-                  <p className="text-center text-gray-500 dark:text-gray-400 py-4">
+                  <p className="text-center text-[color-mix(in_srgb,var(--glp-deep-teal)_72%,var(--glp-charcoal))] dark:text-[var(--glp-sage)] py-4">
                     No signal events recorded yet. Events will appear as users interact with blog, newsletter, and pricing pages.
                   </p>
                 )}
 
                 <div className="p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
                   <h3 className="font-medium mb-1">Recommendations</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
                     Once enough data accumulates, review which pillars drive the most engagement and adjust your editorial calendar accordingly. All changes are manual — the system suggests, you decide.
                   </p>
                 </div>
