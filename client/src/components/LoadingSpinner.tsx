@@ -8,8 +8,7 @@
  * Note: BuddyAvatar's `motion` is derived from `state`, not a prop —
  * the gentle pulse motion comes from the calm-state contract.
  */
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 
 export interface LoadingSpinnerProps {
   text?: string;
@@ -48,10 +47,15 @@ export default function LoadingSpinner({
           animation: "loadingSpinnerRotate 2.6s linear infinite",
         }}
       >
-        <MMHBFloatAvatar
-          imageSrc={getOfficialLumi("calm")}
-          size={48}
-          alt="Lumi loading companion"
+        <OfficialLumi
+          variant="LUMI_COMPANION"
+          scene="loading-spinner"
+          position="inline"
+          pageId="loading-spinner"
+          widthPx={48}
+          heightPx={48}
+          decorative={false}
+          motion="reduced"
           data-testid="loading-spinner-buddy"
         />
       </div>
