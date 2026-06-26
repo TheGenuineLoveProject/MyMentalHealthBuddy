@@ -12,8 +12,7 @@
 import { Link } from "wouter";
 import { Heart, Mail, Shield, FileText, HelpCircle, BookOpen, LifeBuoy, Newspaper, Library, Wind, Sparkles, Anchor, Brain } from "lucide-react";
 import { BRAND } from "@shared/brand";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,10 +23,14 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <MMHBFloatAvatar
-                imageSrc={getOfficialLumi("calm")}
-                size={32}
-                alt="Lumi mark"
+              <OfficialLumi
+                variant="LUMI_CALM"
+                scene="footer-brand-mark"
+                position="inline"
+                widthPx={32}
+                heightPx={32}
+                decorative={false}
+                motion="reduced"
                 data-testid="img-footer-lumi"
               />
               <span className="font-serif text-xl font-semibold text-gray-900">
