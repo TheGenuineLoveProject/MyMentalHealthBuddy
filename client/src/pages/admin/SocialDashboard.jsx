@@ -1,3 +1,5 @@
+// PHASE11760_SOCIAL_DASHBOARD_VISUAL_TOKEN_PATCH
+// PHASE11762_SOCIAL_DASHBOARD_REMAINING_TOKEN_CLEANUP
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -25,11 +27,11 @@ const PLATFORMS = [
 ];
 
 const STATUS_CONFIG = {
-  draft: { label: "Draft", color: "bg-slate-100 text-slate-700", icon: FileText },
-  review: { label: "In Review", color: "bg-amber-100 text-amber-700", icon: Clock },
-  approved: { label: "Approved", color: "bg-emerald-100 text-emerald-700", icon: CheckCircle },
-  scheduled: { label: "Scheduled", color: "bg-blue-100 text-blue-700", icon: Calendar },
-  exported: { label: "Exported", color: "bg-purple-100 text-purple-700", icon: Send },
+  draft: { label: "Draft", color: "bg-[rgba(143,191,159,0.16)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.10)] dark:text-[var(--glp-sage)]", icon: FileText },
+  review: { label: "In Review", color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: Clock },
+  approved: { label: "Approved", color: "bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.14)] dark:text-[var(--glp-sage)]", icon: CheckCircle },
+  scheduled: { label: "Scheduled", color: "bg-[rgba(143,191,159,0.18)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.12)] dark:text-[var(--glp-sage)]", icon: Calendar },
+  exported: { label: "Exported", color: "bg-[rgba(244,199,195,0.26)] text-[var(--glp-deep-teal)] dark:bg-[rgba(244,199,195,0.12)] dark:text-[var(--glp-blossom)]", icon: Send },
 };
 
 function StatusBadge({ status }) {
@@ -49,8 +51,8 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
   
   return (
     <div 
-      className={`bg-white dark:bg-slate-800 rounded-xl border p-4 hover:shadow-md transition-all ${
-        isSelected ? "border-purple-500 ring-2 ring-purple-200" : "border-slate-200 dark:border-slate-700"
+      className={`bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border p-4 hover:shadow-md transition-all ${
+        isSelected ? "border-[var(--glp-sage)] ring-2 ring-[rgba(143,191,159,0.28)]" : "border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]"
       }`}
       data-testid={`card-draft-${draft.id}`}
       onClick={() => bulkMode && onToggleSelect?.(draft.id)}
@@ -59,9 +61,9 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
         <div className="flex items-center gap-2">
           {bulkMode && (
             <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-              isSelected ? "bg-purple-600 border-purple-600" : "border-slate-300 dark:border-slate-600"
+              isSelected ? "bg-[var(--glp-deep-teal)] border-[var(--glp-deep-teal)]" : "border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.28)]"
             }`}>
-              {isSelected && <CheckCircle className="w-3 h-3 text-white" />}
+              {isSelected && <CheckCircle className="w-3 h-3 text-[var(--glp-ivory)]" />}
             </div>
           )}
           <div 
@@ -70,7 +72,7 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
           >
             <PlatformIcon className="w-4 h-4" style={{ color: platform.color }} />
           </div>
-          <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+          <span className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
             {platform.name}
           </span>
         </div>
@@ -78,25 +80,25 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
       </div>
       
       {draft.hook && (
-        <p className="text-sm font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2">
+        <p className="text-sm font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2 line-clamp-2">
           {draft.hook}
         </p>
       )}
       
       {draft.caption && (
-        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 mb-3">
+        <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] line-clamp-3 mb-3">
           {draft.caption}
         </p>
       )}
       
       {draft.theme && (
-        <span className="inline-block px-2 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-xs text-slate-600 dark:text-slate-400 mb-3">
+        <span className="inline-block px-2 py-0.5 bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] rounded text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3">
           {draft.theme}
         </span>
       )}
       
-      <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-        <span className="text-xs text-slate-500">
+      <div className="flex items-center justify-between pt-3 border-t border-[rgba(143,191,159,0.24)] dark:border-[rgba(143,191,159,0.18)]">
+        <span className="text-xs text-[var(--glp-deep-teal)]">
           {new Date(draft.createdAt).toLocaleDateString()}
         </span>
         {!bulkMode && (
@@ -104,7 +106,7 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
             {draft.status === "draft" && (
               <button
                 onClick={(e) => { e.stopPropagation(); onApprove(draft.id); }}
-                className="text-xs px-2 py-1 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition-colors"
+                className="text-xs px-2 py-1 bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)] rounded hover:bg-[rgba(143,191,159,0.32)] transition-colors"
                 data-testid={`button-approve-${draft.id}`}
               >
                 Approve
@@ -113,7 +115,7 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
             {draft.status === "approved" && (
               <button
                 onClick={(e) => { e.stopPropagation(); onPublish?.(draft); }}
-                className="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors flex items-center gap-1"
+                className="text-xs px-2 py-1 bg-[rgba(244,199,195,0.26)] text-[var(--glp-deep-teal)] rounded hover:bg-[rgba(244,199,195,0.36)] transition-colors flex items-center gap-1"
                 data-testid={`button-publish-${draft.id}`}
               >
                 <Send className="w-3 h-3" />
@@ -122,7 +124,7 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
             )}
             <button
               onClick={(e) => { e.stopPropagation(); onDelete(draft.id); }}
-              className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
+              className="text-xs px-2 py-1 bg-[rgba(244,199,195,0.30)] text-[var(--glp-charcoal)] rounded hover:bg-[rgba(244,199,195,0.42)] transition-colors"
               data-testid={`button-delete-${draft.id}`}
             >
               Delete
@@ -145,14 +147,14 @@ function QuickStats({ drafts }) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       {[
-        { label: "Total Drafts", value: stats.total, color: "bg-slate-100 text-slate-700" },
-        { label: "In Progress", value: stats.drafts, color: "bg-amber-100 text-amber-700" },
-        { label: "Approved", value: stats.approved, color: "bg-emerald-100 text-emerald-700" },
-        { label: "Scheduled", value: stats.scheduled, color: "bg-blue-100 text-blue-700" },
+        { label: "Total Drafts", value: stats.total, color: "bg-[rgba(143,191,159,0.16)] text-[var(--glp-deep-teal)]" },
+        { label: "In Progress", value: stats.drafts, color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)]" },
+        { label: "Approved", value: stats.approved, color: "bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)]" },
+        { label: "Scheduled", value: stats.scheduled, color: "bg-[rgba(143,191,159,0.18)] text-[var(--glp-deep-teal)]" },
       ].map(stat => (
-        <div key={stat.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700" data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white">{stat.value}</p>
-          <p className="text-sm text-slate-600 dark:text-slate-400">{stat.label}</p>
+        <div key={stat.label} className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-4 border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]" data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
+          <p className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{stat.value}</p>
+          <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{stat.label}</p>
         </div>
       ))}
     </div>
@@ -166,10 +168,10 @@ function PlatformConnections() {
   
   if (isLoading) {
     return (
-      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+      <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] p-4 sm:p-6 mb-8">
         <div className="animate-pulse motion-reduce:animate-none flex items-center gap-3">
-          <div className="w-5 h-5 bg-slate-200 dark:bg-slate-700 rounded" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-40" />
+          <div className="w-5 h-5 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] rounded" />
+          <div className="h-4 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] rounded w-40" />
         </div>
       </div>
     );
@@ -179,12 +181,12 @@ function PlatformConnections() {
   const connectedCount = platforms.filter(p => p.connected).length;
   
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8" data-testid="section-platform-connections">
+    <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] p-4 sm:p-6 mb-8" data-testid="section-platform-connections">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <Settings className="w-5 h-5 text-slate-500" />
-          <h3 className="font-semibold text-slate-900 dark:text-white">Platform Connections</h3>
-          <span className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded-full text-slate-600 dark:text-slate-400">
+          <Settings className="w-5 h-5 text-[var(--glp-deep-teal)]" />
+          <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">Platform Connections</h3>
+          <span className="text-xs px-2 py-1 bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] rounded-full text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
             {connectedCount}/{platforms.length} connected
           </span>
         </div>
@@ -216,8 +218,8 @@ function PlatformConnections() {
               rel="noopener noreferrer"
               className={`flex flex-col items-center p-3 rounded-lg border transition-all hover:shadow-sm ${
                 hasHandle
-                  ? "border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20" 
-                  : "border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 opacity-60"
+                  ? "border-[rgba(143,191,159,0.42)] dark:border-[rgba(143,191,159,0.26)] bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)]" 
+                  : "border-[rgba(143,191,159,0.30)] dark:border-[rgba(143,191,159,0.18)] bg-[rgba(143,191,159,0.08)] dark:bg-[rgba(143,191,159,0.06)] opacity-70"
               } ${platform.url ? 'cursor-pointer' : ''}`}
               data-testid={`platform-status-${platform.id}`}
             >
@@ -227,29 +229,29 @@ function PlatformConnections() {
               >
                 <PlatformIcon className="w-5 h-5" style={{ color: platform.color }} />
               </div>
-              <span className="text-xs font-medium text-slate-700 dark:text-slate-300 text-center">
+              <span className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] text-center">
                 {platform.name}
               </span>
               {platform.handle && (
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-full">
+                <span className="text-[10px] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate max-w-full">
                   {platform.handle}
                 </span>
               )}
               <div className="flex items-center gap-1 mt-1">
                 {hasHandle ? (
                   <>
-                    <CheckCircle className="w-3 h-3 text-emerald-500" />
-                    <span className="text-xs text-emerald-600 dark:text-emerald-400 capitalize">{platform.status}</span>
+                    <CheckCircle className="w-3 h-3 text-[var(--glp-sage)]" />
+                    <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] capitalize">{platform.status}</span>
                   </>
                 ) : isConnected ? (
                   <>
-                    <Wifi className="w-3 h-3 text-emerald-500" />
-                    <span className="text-xs text-emerald-600 dark:text-emerald-400">API Ready</span>
+                    <Wifi className="w-3 h-3 text-[var(--glp-sage)]" />
+                    <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">API Ready</span>
                   </>
                 ) : (
                   <>
-                    <WifiOff className="w-3 h-3 text-slate-400" />
-                    <span className="text-xs text-slate-500">Pending</span>
+                    <WifiOff className="w-3 h-3 text-[var(--glp-sage)]" />
+                    <span className="text-xs text-[var(--glp-deep-teal)]">Pending</span>
                   </>
                 )}
               </div>
@@ -259,14 +261,14 @@ function PlatformConnections() {
       </div>
       
       {connectedCount === 0 && (
-        <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+        <div className="mt-4 p-4 bg-[rgba(212,175,55,0.16)] dark:bg-[rgba(212,175,55,0.10)] rounded-lg border border-[rgba(212,175,55,0.35)] dark:border-[rgba(212,175,55,0.22)]">
           <div className="flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-[var(--glp-gold)] dark:text-[var(--glp-gold)] flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+              <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-gold)]">
                 No platforms connected yet
               </p>
-              <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
+              <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-gold)] mt-1">
                 Add your social media API keys in Replit Secrets to enable automated posting. 
                 Content will be generated for manual export until platforms are connected.
               </p>
@@ -285,12 +287,12 @@ function ContentAnalytics() {
   
   if (isLoading) {
     return (
-      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+      <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] p-4 sm:p-6 mb-8">
         <div className="animate-pulse motion-reduce:animate-none">
-          <div className="h-5 bg-slate-200 dark:bg-slate-700 rounded w-48 mb-4" />
+          <div className="h-5 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] rounded w-48 mb-4" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="h-20 bg-slate-200 dark:bg-slate-700 rounded" />
+              <div key={i} className="h-20 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] rounded" />
             ))}
           </div>
         </div>
@@ -303,46 +305,46 @@ function ContentAnalytics() {
   const { totals, contentHealth, platformBreakdown, weeklyActivity } = analytics;
   
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+    <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] p-4 sm:p-6 mb-8">
       <div className="flex items-center gap-3 mb-6">
         <BarChart2 className="w-5 h-5 text-[var(--glp-sage)]" />
-        <h3 className="font-semibold text-slate-900 dark:text-white">Content Analytics</h3>
+        <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">Content Analytics</h3>
       </div>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg" data-testid="metric-total-drafts">
+        <div className="p-4 bg-[rgba(143,191,159,0.12)] dark:bg-[rgba(143,191,159,0.10)] rounded-lg border border-[rgba(143,191,159,0.20)]" data-testid="metric-total-drafts">
           <div className="flex items-center gap-2 mb-2">
-            <FileText className="w-4 h-4 text-slate-500" />
-            <span className="text-xs text-slate-500 dark:text-slate-400">Total Drafts</span>
+            <FileText className="w-4 h-4 text-[var(--glp-deep-teal)]" />
+            <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Total Drafts</span>
           </div>
-          <p className="text-2xl font-bold text-slate-900 dark:text-white">{totals?.drafts || 0}</p>
+          <p className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{totals?.drafts || 0}</p>
         </div>
-        <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg" data-testid="metric-ready-to-publish">
+        <div className="p-4 bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] rounded-lg border border-[rgba(143,191,159,0.25)]" data-testid="metric-ready-to-publish">
           <div className="flex items-center gap-2 mb-2">
-            <CheckCircle className="w-4 h-4 text-emerald-500" />
-            <span className="text-xs text-emerald-600 dark:text-emerald-400">Ready to Publish</span>
+            <CheckCircle className="w-4 h-4 text-[var(--glp-sage)]" />
+            <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Ready to Publish</span>
           </div>
-          <p className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">{contentHealth?.readyToPublish || 0}</p>
+          <p className="text-2xl font-bold text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{contentHealth?.readyToPublish || 0}</p>
         </div>
-        <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg" data-testid="metric-pending-review">
+        <div className="p-4 bg-[rgba(212,175,55,0.16)] dark:bg-[rgba(212,175,55,0.10)] rounded-lg border border-[rgba(212,175,55,0.25)]" data-testid="metric-pending-review">
           <div className="flex items-center gap-2 mb-2">
-            <Clock className="w-4 h-4 text-amber-500" />
-            <span className="text-xs text-amber-600 dark:text-amber-400">Pending Review</span>
+            <Clock className="w-4 h-4 text-[var(--glp-gold)]" />
+            <span className="text-xs text-[var(--glp-gold)] dark:text-[var(--glp-gold)]">Pending Review</span>
           </div>
-          <p className="text-2xl font-bold text-amber-700 dark:text-amber-300">{contentHealth?.pendingReview || 0}</p>
+          <p className="text-2xl font-bold text-[var(--glp-deep-teal)] dark:text-[var(--glp-gold)]">{contentHealth?.pendingReview || 0}</p>
         </div>
-        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg" data-testid="metric-scheduled">
+        <div className="p-4 bg-[rgba(143,191,159,0.14)] dark:bg-[rgba(143,191,159,0.09)] rounded-lg border border-[rgba(143,191,159,0.24)]" data-testid="metric-scheduled">
           <div className="flex items-center gap-2 mb-2">
-            <Calendar className="w-4 h-4 text-blue-500" />
-            <span className="text-xs text-blue-600 dark:text-blue-400">Scheduled</span>
+            <Calendar className="w-4 h-4 text-[var(--glp-sage)]" />
+            <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Scheduled</span>
           </div>
-          <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">{totals?.upcoming || 0}</p>
+          <p className="text-2xl font-bold text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{totals?.upcoming || 0}</p>
         </div>
       </div>
       
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+          <h4 className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3 flex items-center gap-2">
             <PieChart className="w-4 h-4" />
             Content by Platform
           </h4>
@@ -350,7 +352,7 @@ function ContentAnalytics() {
             {Object.entries(platformBreakdown || {}).map(([platform, count]) => {
               const platformInfo = PLATFORMS.find(p => p.id === platform);
               return (
-                <div key={platform} className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/50 rounded">
+                <div key={platform} className="flex items-center justify-between p-2 bg-[rgba(143,191,159,0.12)] dark:bg-[rgba(143,191,159,0.10)] rounded">
                   <div className="flex items-center gap-2">
                     <div 
                       className="w-6 h-6 rounded flex items-center justify-center"
@@ -358,14 +360,14 @@ function ContentAnalytics() {
                     >
                       {platformInfo?.icon && <platformInfo.icon className="w-3 h-3" style={{ color: platformInfo.color }} />}
                     </div>
-                    <span className="text-sm text-slate-700 dark:text-slate-300 capitalize">{platform}</span>
+                    <span className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] capitalize">{platform}</span>
                   </div>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">{count}</span>
+                  <span className="text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{count}</span>
                 </div>
               );
             })}
             {Object.keys(platformBreakdown || {}).length === 0 && (
-              <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+              <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] text-center py-4">
                 No platform data yet
               </p>
             )}
@@ -373,25 +375,25 @@ function ContentAnalytics() {
         </div>
         
         <div>
-          <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+          <h4 className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3 flex items-center gap-2">
             <Activity className="w-4 h-4" />
             Weekly Activity
           </h4>
           <div className="space-y-2">
             {(weeklyActivity || []).slice(-5).map(({ week, count }) => (
               <div key={week} className="flex items-center gap-3">
-                <span className="text-xs text-slate-500 dark:text-slate-400 w-20">{week}</span>
-                <div className="flex-1 h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] w-20">{week}</span>
+                <div className="flex-1 h-3 bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-[var(--glp-sage)] rounded-full transition-all"
                     style={{ width: `${Math.min(100, (count / 10) * 100)}%` }}
                   />
                 </div>
-                <span className="text-xs font-medium text-slate-700 dark:text-slate-300 w-8 text-right">{count}</span>
+                <span className="text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] w-8 text-right">{count}</span>
               </div>
             ))}
             {(weeklyActivity || []).length === 0 && (
-              <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+              <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] text-center py-4">
                 No activity data yet
               </p>
             )}
@@ -496,7 +498,7 @@ export default function SocialDashboard() {
   }
   
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)]">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} />
@@ -504,13 +506,13 @@ export default function SocialDashboard() {
         </Link>
         <div className="flex items-center gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white" data-testid="text-page-title">
+            <h1 className="text-2xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="text-page-title">
               Social Content Studio
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
               Create, approve, and schedule wellness content
             </p>
-            <Link href="/admin/social/ops" className="inline-flex items-center gap-1 text-xs mt-1 px-2 py-1 rounded bg-slate-800 dark:bg-slate-200 text-white dark:text-gray-900 hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors" data-testid="link-narrative-ops">
+            <Link href="/admin/social/ops" className="inline-flex items-center gap-1 text-xs mt-1 px-2 py-1 rounded bg-[var(--glp-deep-teal)] dark:bg-[var(--glp-sage)] text-[var(--glp-ivory)] dark:text-[var(--glp-deep-teal)] hover:bg-[var(--glp-charcoal)] dark:hover:bg-[var(--glp-gold)] transition-colors" data-testid="link-narrative-ops">
               Open Narrative Ops Console (Enterprise v3.0)
             </Link>
           </div>
@@ -526,7 +528,7 @@ export default function SocialDashboard() {
           <div className="flex gap-2 flex-wrap">
             <Link 
               href="/admin/social/generate"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:bg-[var(--glp-charcoal)] transition-opacity"
               data-testid="link-create-draft"
             >
               <Plus className="w-4 h-4" />
@@ -534,7 +536,7 @@ export default function SocialDashboard() {
             </Link>
             <Link 
               href="/admin/social/library"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] rounded-lg hover:bg-[rgba(143,191,159,0.26)] dark:hover:bg-[rgba(143,191,159,0.18)] transition-colors"
               data-testid="link-templates"
             >
               <LayoutGrid className="w-4 h-4" />
@@ -542,7 +544,7 @@ export default function SocialDashboard() {
             </Link>
             <Link 
               href="/admin/social/calendar"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] rounded-lg hover:bg-[rgba(143,191,159,0.26)] dark:hover:bg-[rgba(143,191,159,0.18)] transition-colors"
               data-testid="link-calendar"
             >
               <Calendar className="w-4 h-4" />
@@ -550,7 +552,7 @@ export default function SocialDashboard() {
             </Link>
             <Link 
               href="/admin/social/analytics"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] rounded-lg hover:bg-[rgba(143,191,159,0.26)] dark:hover:bg-[rgba(143,191,159,0.18)] transition-colors"
               data-testid="link-analytics"
             >
               <BarChart2 className="w-4 h-4" />
@@ -561,8 +563,8 @@ export default function SocialDashboard() {
               onClick={() => { setBulkMode(!bulkMode); setSelectedIds([]); }}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 bulkMode 
-                  ? "bg-purple-600 text-white" 
-                  : "bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600"
+                  ? "bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)]" 
+                  : "bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[rgba(143,191,159,0.26)] dark:hover:bg-[rgba(143,191,159,0.18)]"
               }`}
               data-testid="button-bulk-mode"
             >
@@ -572,11 +574,11 @@ export default function SocialDashboard() {
           </div>
           
           <div className="flex items-center gap-2 md:ml-auto">
-            <ListFilter className="w-4 h-4 text-slate-500" />
+            <ListFilter className="w-4 h-4 text-[var(--glp-deep-teal)]" />
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm"
+              className="px-3 py-2 rounded-lg border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] text-sm"
               data-testid="select-filter-status"
             >
               <option value="all">All Status</option>
@@ -589,16 +591,16 @@ export default function SocialDashboard() {
         </div>
         
         {bulkMode && (
-          <div className="flex items-center gap-4 p-4 mb-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-200 dark:border-purple-800">
+          <div className="flex items-center gap-4 p-4 mb-6 bg-[rgba(244,199,195,0.18)] dark:bg-[rgba(244,199,195,0.10)] rounded-xl border border-[rgba(244,199,195,0.35)] dark:border-[rgba(244,199,195,0.22)]">
             <button
               type="button"
               onClick={selectAll}
-              className="text-sm text-purple-700 dark:text-purple-300 hover:underline"
+              className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-blossom)] hover:underline"
               data-testid="button-select-all"
             >
               {selectedIds.length === filteredDrafts.length ? "Deselect All" : "Select All"}
             </button>
-            <span className="text-sm text-purple-600 dark:text-purple-400">
+            <span className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-blossom)]">
               {selectedIds.length} selected
             </span>
             <div className="flex gap-2 ml-auto">
@@ -606,7 +608,7 @@ export default function SocialDashboard() {
                 type="button"
                 onClick={() => bulkApproveMutation.mutate(selectedIds)}
                 disabled={selectedIds.length === 0 || bulkApproveMutation.isPending}
-                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-colors"
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:bg-[var(--glp-charcoal)] disabled:opacity-50 transition-colors"
                 data-testid="button-bulk-approve"
               >
                 <CheckCircle className="w-4 h-4" />
@@ -616,7 +618,7 @@ export default function SocialDashboard() {
                 type="button"
                 onClick={() => bulkDeleteMutation.mutate(selectedIds)}
                 disabled={selectedIds.length === 0 || bulkDeleteMutation.isPending}
-                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 transition-colors"
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-[var(--glp-blossom)] text-[var(--glp-charcoal)] rounded-lg hover:bg-[var(--glp-gold)] disabled:opacity-50 transition-colors"
                 data-testid="button-bulk-delete"
               >
                 Delete Selected
@@ -627,9 +629,9 @@ export default function SocialDashboard() {
         
         {error && (
           <div className="text-center py-16" data-testid="section-error">
-            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
-            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+            <AlertCircle className="w-12 h-12 text-[var(--glp-blossom)] mx-auto mb-4" />
+            <p className="text-[var(--glp-charcoal)] dark:text-[var(--glp-blossom)] mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:bg-[var(--glp-charcoal)]" data-testid="button-retry">
               Retry
             </button>
           </div>
@@ -640,17 +642,17 @@ export default function SocialDashboard() {
             <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
           </div>
         ) : !error && filteredDrafts.length === 0 ? (
-          <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-            <Sparkles className="w-12 h-12 mx-auto text-slate-400 mb-4" />
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+          <div className="text-center py-12 bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]">
+            <Sparkles className="w-12 h-12 mx-auto text-[var(--glp-sage)] mb-4" />
+            <h3 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2">
               No content yet
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-4">
+            <p className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-4">
               Start creating wellness content for your audience
             </p>
             <Link 
               href="/admin/social/generate"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:bg-[var(--glp-charcoal)] transition-opacity"
             >
               <Plus className="w-4 h-4" />
               Create Your First Draft
@@ -678,35 +680,35 @@ export default function SocialDashboard() {
       
       {showPublishModal && publishDraft && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-lg">
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                <Send className="w-5 h-5 text-purple-500" />
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl shadow-xl w-full max-w-lg border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]">
+            <div className="flex items-center justify-between p-4 border-b border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]">
+              <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
+                <Send className="w-5 h-5 text-[var(--glp-blossom)]" />
                 Publish to Platforms
               </h2>
               <button
                 onClick={() => setShowPublishModal(false)}
-                className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                className="p-2 hover:bg-[rgba(143,191,159,0.16)] dark:hover:bg-[rgba(143,191,159,0.10)] rounded-lg transition-colors"
               >
                 <span className="sr-only">Close</span>
-                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[var(--glp-deep-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
             
             <div className="p-4 space-y-4">
-              <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                <p className="text-sm font-medium text-purple-800 dark:text-purple-200 mb-1">
+              <div className="p-3 bg-[rgba(244,199,195,0.18)] dark:bg-[rgba(244,199,195,0.10)] rounded-lg">
+                <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-blossom)] mb-1">
                   {publishDraft.hook?.slice(0, 60) || "Draft Content"}
                 </p>
-                <p className="text-xs text-purple-600 dark:text-purple-300">
+                <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-blossom)]">
                   {publishDraft.caption?.slice(0, 100)}...
                 </p>
               </div>
               
               <div>
-                <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
+                <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3">
                   Select platforms to publish:
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -721,8 +723,8 @@ export default function SocialDashboard() {
                         onClick={() => togglePublishPlatform(platform.id)}
                         className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
                           isSelected 
-                            ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20" 
-                            : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
+                            ? "border-[var(--glp-sage)] bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)]" 
+                            : "border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] hover:bg-[rgba(143,191,159,0.14)] dark:hover:bg-[rgba(143,191,159,0.10)]"
                         }`}
                         data-testid={`toggle-platform-${platform.id}`}
                       >
@@ -733,13 +735,13 @@ export default function SocialDashboard() {
                           <PlatformIcon className="w-4 h-4" style={{ color: platform.color }} />
                         </div>
                         <div className="text-left">
-                          <p className="text-sm font-medium text-slate-900 dark:text-white">{platform.name}</p>
+                          <p className="text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{platform.name}</p>
                           {platform.handle && (
-                            <p className="text-xs text-slate-500">{platform.handle}</p>
+                            <p className="text-xs text-[var(--glp-deep-teal)]">{platform.handle}</p>
                           )}
                         </div>
                         {isSelected && (
-                          <CheckCircle className="w-5 h-5 text-purple-500 ml-auto" />
+                          <CheckCircle className="w-5 h-5 text-[var(--glp-blossom)] ml-auto" />
                         )}
                       </button>
                     );
@@ -751,7 +753,7 @@ export default function SocialDashboard() {
                 <button
                   type="button"
                   onClick={() => setShowPublishModal(false)}
-                  className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                  className="flex-1 px-4 py-2 border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] rounded-lg text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[rgba(143,191,159,0.14)] dark:hover:bg-[rgba(143,191,159,0.10)] transition-colors"
                 >
                   Cancel
                 </button>
@@ -759,7 +761,7 @@ export default function SocialDashboard() {
                   type="button"
                   onClick={handleBatchPublish}
                   disabled={batchPublishMutation.isPending || publishPlatforms.length === 0}
-                  className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-2 bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:bg-[var(--glp-charcoal)] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   data-testid="button-confirm-publish"
                 >
                   {batchPublishMutation.isPending ? (
