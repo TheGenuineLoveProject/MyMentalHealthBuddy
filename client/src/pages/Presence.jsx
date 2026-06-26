@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Redirect, Link } from "wouter";
-import { MMHBFloatAvatar, MMHBAvatarRuntimeProvider } from "@/avatar-life";
+import { MMHBAvatarRuntimeProvider } from "@/avatar-life";
+import { OfficialLumi } from "@/lumi-registry";
 import { MMHBCard, MMHBButton } from "@/design-system";
 import {
   OptInPrompt,
@@ -17,7 +18,6 @@ import { SceneTransitionController } from "@/lumi-scenes";
 import { useFeatureFlags } from "@/contexts/FeatureFlagContext";
 import { hasCompletedFirstCheckin } from "@/lib/firstCheckinFlag";
 import SEO from "@/components/SEO";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
 /**
  * /presence — gentle gathering of all four opt-in modules.
  *
@@ -113,11 +113,16 @@ function PresenceHeader() {
       className="flex flex-col items-center text-center space-y-4 pt-2"
       data-testid="section-presence-header"
     >
-      <MMHBFloatAvatar
-        imageSrc={getOfficialLumi("calm")}
-        state="calmIdle"
-        size={180}
-        alt="Lumi, your gentle wellness companion"
+      <OfficialLumi
+        variant="LUMI_COMPANION"
+        scene="presence-header"
+        position="card"
+        pageId="presence"
+        widthPx={180}
+        heightPx={180}
+        decorative={false}
+        motion="soft"
+        data-testid="presence-lumi"
       />
       <h1
         className="font-serif text-3xl md:text-4xl"
