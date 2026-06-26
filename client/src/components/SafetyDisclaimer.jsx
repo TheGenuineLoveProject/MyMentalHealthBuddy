@@ -11,8 +11,7 @@
 import { Link } from 'wouter';
 import { AlertTriangle, Phone, ExternalLink } from 'lucide-react';
 import styles from './SafetyDisclaimer.module.css';
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 
 export function SafetyDisclaimer({
   variant = 'default',
