@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { sendAIMessage, getAIHistory, clearAIHistory } from "../../lib/aiChat";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 import { detectChatSentiment, aiStateToPose } from "@/lib/buddyEmotion";
 import { CRISIS_LANGUAGE_PATTERN } from "@/governance/interactions/CrisisLanguagePattern";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
@@ -186,12 +186,14 @@ export default function AIChatPanel() {
                 const pose = s.pose ?? aiStateToPose(aiState);
                 return (
                   <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
-                    <img
-                      src={getOfficialLumi("supportive")}
-                      alt="Lumi listening"
-                      width={32}
-                      height={32}
-                      className="object-contain rounded-full"
+                    <OfficialLumi
+                      variant="LUMI_COMPANION"
+                      scene="chat-assistant-message"
+                      position="inline"
+                      widthPx={32}
+                      heightPx={32}
+                      decorative={false}
+                      motion="soft"
                       data-testid={`img-chat-assistant-${i}`}
                     />
                   </div>
@@ -217,12 +219,14 @@ export default function AIChatPanel() {
               <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
                 {/* Part 4 spec: AI typing → pose="thinking". State stays
                     "anxious" so lumi-breathe motion still plays during wait. */}
-                <img
-                  src={getOfficialLumi("supportive")}
-                  alt="Lumi listening"
-                  width={32}
-                  height={32}
-                  className="object-contain rounded-full"
+                <OfficialLumi
+                  variant="LUMI_COMPANION"
+                  scene="chat-assistant-typing"
+                  position="inline"
+                  widthPx={32}
+                  heightPx={32}
+                  decorative={false}
+                  motion="soft"
                   data-testid="img-chat-assistant-typing"
                 />
               </div>
