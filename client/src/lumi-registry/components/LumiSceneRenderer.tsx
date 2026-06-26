@@ -129,10 +129,6 @@ export const LumiSceneRenderer: React.FC<LumiSceneRendererProps> = ({
         className={className}
         data-testid={dataTestId}
       />
-      {/* PHASE11811: keep Lumi validation console-only; no visible red dev overlay. */}
-      {false && isDev() && resolved.issues.length > 0 && (
-        <div aria-hidden="true" data-testid="lumi-scene-warning" />
-      )}
     </>
   );
 };
