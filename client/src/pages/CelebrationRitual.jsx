@@ -6,8 +6,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import confetti from "canvas-confetti";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 import "@/styles/sacred-visuals.css";
 
 const AFFIRMATION_TEMPLATES = {
@@ -171,8 +170,15 @@ export default function CelebrationRitual() {
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-amber-400 via-rose-400 to-pink-400 flex items-center justify-center shadow-2xl animate-pulse">
                 {/* Lumi (joy/yellow/celebrating) anchors the celebration intro
                     per Avatar v4.2; preserves Crown import for downstream phases. */}
-                <MMHBFloatAvatar
-                  imageSrc={getOfficialLumi("encouraging")}
+                <OfficialLumi
+                  variant="LUMI_CELEBRATION"
+                  scene="celebration-ritual"
+                  position="card"
+                  pageId="celebration-ritual"
+                  widthPx={180}
+                  heightPx={180}
+                  decorative={false}
+                  motion={reducedMotion ? "reduced" : "soft"}
                   size={160}
                   alt="Lumi celebrating your ritual"
                   data-testid="img-celebration-ritual-lumi"
