@@ -113,6 +113,8 @@ export default function LumiCarousel({
           border-radius: 50%;
           display: grid;
           place-items: center;
+          isolation: isolate;
+          background: transparent;
         }
         .lumi-carousel .lc-viewport::before {
           content: "";
@@ -149,6 +151,8 @@ export default function LumiCarousel({
           width: 100% !important;
           height: 100% !important;
           object-fit: contain;
+          display: block;
+          background: transparent !important;
           filter: drop-shadow(0 14px 26px rgba(22, 58, 54, 0.16));
         }
         .lumi-carousel .lc-arrow {
@@ -238,11 +242,14 @@ export default function LumiCarousel({
         .lumi-carousel .lc-avatar,
         .lumi-carousel .lc-avatar *,
         .lumi-carousel .lc-avatar .lumi-official,
-        .lumi-carousel .lc-avatar .lumi-official * {
+        .lumi-carousel .lc-avatar .lumi-official *,
+        .lumi-carousel .lc-avatar [data-lumi-protected="true"],
+        .lumi-carousel .lc-avatar [data-lumi-protected="true"] * {
           background: transparent !important;
           background-color: transparent !important;
           border-color: transparent !important;
           box-shadow: none !important;
+          outline: 0 !important;
         }
 
         .lumi-carousel .lc-viewport {
@@ -318,7 +325,7 @@ export default function LumiCarousel({
               className={`lc-slide ${i === index ? "is-active" : ""}`.trim()}
               aria-hidden={i === index ? undefined : "true"}
             >
-              <div className="lc-avatar" style={{ width: size, height: size }}>
+              <div className="lc-avatar" style={{ width: size, height: size, background: "transparent" }}>
                 <OfficialLumi
                   variant={id}
                   scene="meet-lumi-gallery"
