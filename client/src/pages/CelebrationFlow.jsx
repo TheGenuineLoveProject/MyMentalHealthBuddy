@@ -16,8 +16,7 @@ import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import NextStepCTA from "@/sections/NextStepCTA.jsx";
 import "@/styles/celebration.css";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 
 const PHASE_1_MS = 3000;
 const PHASE_2_MS = 3000;
@@ -167,8 +166,13 @@ export default function CelebrationFlow() {
         >
           {phase === 1 && (
             <>
-              <MMHBFloatAvatar
-                imageSrc={getOfficialLumi("encouraging")}
+              <OfficialLumi
+                variant="LUMI_CELEBRATION"
+                scene="celebration-flow"
+                position="card"
+                pageId="celebration-flow"
+                decorative={false}
+                motion={reducedMotion ? "reduced" : "soft" }
                 size={160}
                 alt="Lumi celebrating progress"
                 data-testid="img-celebration-phase-1"
@@ -182,8 +186,13 @@ export default function CelebrationFlow() {
 
           {phase === 2 && (
             <>
-              <MMHBFloatAvatar
-                imageSrc={getOfficialLumi("encouraging")}
+              <OfficialLumi
+                variant="LUMI_CELEBRATION"
+                scene="celebration-flow"
+                position="card"
+                pageId="celebration-flow"
+                decorative={false}
+                motion={reducedMotion ? "reduced" : "soft" }
                 size={160}
                 alt="Lumi celebrating progress"
                 data-testid="img-celebration-phase-2"
@@ -197,8 +206,13 @@ export default function CelebrationFlow() {
 
           {phase === 3 && (
             <>
-              <MMHBFloatAvatar
-                imageSrc={getOfficialLumi("encouraging")}
+              <OfficialLumi
+                variant="LUMI_CELEBRATION"
+                scene="celebration-flow"
+                position="card"
+                pageId="celebration-flow"
+                decorative={false}
+                motion={reducedMotion ? "reduced" : "soft" }
                 size={160}
                 alt="Lumi celebrating progress"
                 data-testid="img-celebration-phase-3"
