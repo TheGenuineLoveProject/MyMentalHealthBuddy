@@ -1,11 +1,6 @@
 import React from "react";
 import { RefreshCw, Home } from 'lucide-react';
-const MMHBFloatAvatar = React.lazy(() =>
-  import("@/avatar-life/components/MMHBFloatAvatar").then((m) => ({
-    default: m.MMHBFloatAvatar || m.default,
-  }))
-);
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 
 function shouldShowDiagnostics() {
   try {
@@ -63,8 +58,11 @@ export class ErrorBoundary extends React.Component {
               }}
             >
               <React.Suspense fallback={null}>
-                <MMHBFloatAvatar
-                  imageSrc={getOfficialLumi("supportive")}
+                <OfficialLumi
+                  variant="LUMI_SUPPORTIVE"
+                  scene="error-boundary"
+                  position="card"
+                  pageId="error-boundary"
                   size={128}
                   alt="Lumi offering gentle support"
                   data-testid="error-boundary-buddy"
