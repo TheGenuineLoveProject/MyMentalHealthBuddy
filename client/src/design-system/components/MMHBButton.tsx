@@ -26,34 +26,34 @@ export function MMHBButton({
     string
   > = {
     primary:
-      "bg-blue-600 text-white hover:bg-blue-700",
+      "bg-[#2F5D5D] text-[#FAF9F7] hover:bg-[#274F4F] shadow-sm shadow-[#2F5D5D]/20",
 
     secondary:
-      "bg-gray-200 text-black hover:bg-gray-300",
+      "bg-[#F4C7C3]/55 text-[#3A3A3A] hover:bg-[#F4C7C3]/75 border border-[#F4C7C3]/80 shadow-sm",
 
     tertiary:
-      "bg-transparent border border-gray-400 text-gray-800 hover:bg-gray-100",
+      "bg-[#FAF9F7]/80 border border-[#8FBF9F]/60 text-[#2F5D5D] hover:bg-[#8FBF9F]/18 shadow-sm",
 
     ghost:
-      "bg-transparent text-gray-700 hover:bg-gray-100",
+      "bg-transparent text-[#2F5D5D] hover:bg-[#8FBF9F]/16",
 
     danger:
-      "bg-red-600 text-white hover:bg-red-700",
+      "bg-[#7F1D1D] text-[#FAF9F7] hover:bg-[#991B1B] shadow-sm",
   };
 
   const sizeClasses: Record<
     NonNullable<MMHBButtonProps["size"]>,
     string
   > = {
-    sm: "px-2 py-1 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
+    sm: "px-3 py-2 text-sm min-h-[40px]",
+    md: "px-5 py-2.5 text-sm sm:text-base min-h-[44px]",
+    lg: "px-6 py-3 text-base sm:text-lg min-h-[48px]",
   };
 
   return (
     <button
       className={`
-        rounded-md
+        rounded-full
         transition-colors
         duration-200
         font-medium
