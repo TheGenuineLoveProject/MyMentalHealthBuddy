@@ -3,8 +3,7 @@ import { Sparkles, Menu, X, Eye, Home, BookOpen, LayoutDashboard, MessageCircle,
 import { useState, useEffect, useRef } from "react";
 import { BRAND } from "@shared/brand";
 import { useAuth } from "@/context/AuthContext";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 import { useFeatureFlags } from "@/contexts/FeatureFlagContext";
 import { hasCompletedFirstCheckin } from "@/lib/firstCheckinFlag";
 
@@ -109,10 +108,14 @@ function Header() {
               overflow: "visible",
             }}
           >
-            <MMHBFloatAvatar
-              imageSrc={getOfficialLumi("calm")}
-              size={56}
-              alt="Lumi mark"
+            <OfficialLumi
+              variant="LUMI_CALM"
+              scene="header-brand-mark"
+              position="inline"
+              widthPx={56}
+              heightPx={56}
+              decorative={false}
+              motion="reduced"
               data-testid="img-header-lumi"
             />
           </div>
