@@ -129,24 +129,9 @@ export const LumiSceneRenderer: React.FC<LumiSceneRendererProps> = ({
         className={className}
         data-testid={dataTestId}
       />
-      {isDev() && resolved.issues.length > 0 && (
-        <div
-          aria-hidden="true"
-          data-testid="lumi-scene-warning"
-          style={{
-            display: "block",
-            marginTop: 4,
-            padding: "2px 6px",
-            fontSize: 10,
-            background: "rgba(220, 38, 38, 0.9)",
-            color: "white",
-            borderRadius: 4,
-            fontFamily: "system-ui, sans-serif",
-            maxWidth: 240,
-          }}
-        >
-          {resolved.issues.join(" · ")}
-        </div>
+      {/* PHASE11811: keep Lumi validation console-only; no visible red dev overlay. */}
+      {false && isDev() && resolved.issues.length > 0 && (
+        <div aria-hidden="true" data-testid="lumi-scene-warning" />
       )}
     </>
   );
