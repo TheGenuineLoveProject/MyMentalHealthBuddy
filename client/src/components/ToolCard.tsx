@@ -11,7 +11,7 @@ import type {
   BuddyColorMode,
   BuddyState,
 } from "@/components/avatar/BuddyAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { getOfficialAsset } from "@/lumi-registry/registry/officialLumiRegistry";
 
 export type ToolCategory =
   | "anxiety"
@@ -110,7 +110,7 @@ export default function ToolCard({
     >
       <div style={{ flexShrink: 0, alignSelf: "flex-start" }}>
         <img
-          src={getOfficialLumi("calm")}
+          src={getOfficialAsset("LUMI_CALM_FLOAT").src}
           alt="Lumi tool helper"
           width={32}
           height={32}

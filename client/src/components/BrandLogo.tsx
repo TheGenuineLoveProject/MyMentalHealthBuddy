@@ -1,6 +1,6 @@
 import React from "react";
 import { brand } from "../brand/tokens";
-import { officialLumiAssets } from "../officialLumiAssets";
+import { getOfficialAsset } from "@/lumi-registry/registry/officialLumiRegistry";
 
 export default function BrandHero() {
   return (
@@ -8,7 +8,7 @@ export default function BrandHero() {
       <div className="glass" style={{ padding: 26 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
           <img
-            src={officialLumiAssets.LogoMark}
+            src={getOfficialAsset("LUMI_CALM_FLOAT").src}
             alt={brand.name}
             style={{ width: 56, height: 56, borderRadius: 12 }}
           />
