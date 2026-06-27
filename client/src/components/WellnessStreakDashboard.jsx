@@ -198,7 +198,7 @@ export default function WellnessStreakDashboard() {
                   >
                     {hasActivity && <Flame className="w-4 h-4" />}
                   </div>
-                  <span className="text-[10px] text-white/80">{day.label}</span>
+                  <span className="text-xs text-white/80">{day.label}</span>
                 </div>
               );
             })}
@@ -259,7 +259,7 @@ export default function WellnessStreakDashboard() {
                 data-testid={`button-log-${activity.id}`}
               >
                 <span className="text-xs font-medium">{activity.name}</span>
-                <div className="text-[10px] opacity-80 mt-1">
+                <div className="text-xs opacity-80 mt-1">
                   {stats.activityCounts[activity.id] || 0}
                 </div>
               </button>
@@ -289,9 +289,9 @@ export default function WellnessStreakDashboard() {
                 >
                   <Icon className={`w-8 h-8 mx-auto mb-2 ${isUnlocked ? "" : "opacity-30"}`} aria-hidden="true" />
                   <p className="text-xs font-semibold">{achievement.name}</p>
-                  <p className="text-[10px] opacity-80 mt-1">{achievement.description}</p>
+                  <p className="text-xs opacity-80 mt-1">{achievement.description}</p>
                   {isUnlocked && (
-                    <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full mt-2 inline-block">
+                    <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full mt-2 inline-block">
                       +{achievement.points} pts
                     </span>
                   )}
