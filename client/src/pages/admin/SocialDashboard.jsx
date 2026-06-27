@@ -233,7 +233,7 @@ function PlatformConnections() {
                 {platform.name}
               </span>
               {platform.handle && (
-                <span className="text-[10px] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate max-w-full">
+                <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate max-w-full">
                   {platform.handle}
                 </span>
               )}
