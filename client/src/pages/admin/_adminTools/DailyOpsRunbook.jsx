@@ -259,34 +259,34 @@ export default function DailyOpsRunbook({ toolResults, isAnyRunning, runAllCheck
                   {step.category}
                 </span>
                 {!step.done && !pipelineRunning && step.id === 'quick-diag' && (
-                  <button onClick={() => Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)))} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-quick-diag">Run</button>
+                  <button onClick={() => Promise.all(CRITICAL_CHECKS.map(t => runHealthCheck(t)))} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-gold)] text-[var(--glp-charcoal)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-quick-diag">Run</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'full-scan' && (
-                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50" data-testid="button-runbook-full-scan">Run All</button>
+                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-sage)] text-[var(--glp-ivory)] hover:opacity-90 transition-colors disabled:opacity-50 font-medium" data-testid="button-runbook-full-scan">Run All</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'recheck' && checkedCount === totalTools && (
-                  <button onClick={runErrorsOnly} className="text-[10px] px-2 py-1 rounded bg-amber-500 text-white hover:bg-amber-600 transition-colors" data-testid="button-runbook-recheck">Re-check</button>
+                  <button onClick={runErrorsOnly} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-gold)] text-[var(--glp-charcoal)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-recheck">Re-check</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'integrity' && (
-                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-[10px] px-2 py-1 rounded bg-emerald-500 text-white hover:bg-emerald-600 transition-colors disabled:opacity-50" data-testid="button-runbook-integrity">Verify</button>
+                  <button onClick={runAllChecks} disabled={isAnyRunning} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-sage)] text-[var(--glp-ivory)] hover:opacity-90 transition-colors disabled:opacity-50 font-medium" data-testid="button-runbook-integrity">Verify</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'git-integrity' && (
-                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-violet-500 text-white hover:bg-violet-600 transition-colors" data-testid="button-runbook-git">Scan</button>
+                  <button onClick={() => fetch('/api/health/git-status', { credentials: 'include' }).catch(() => {})} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-git">Scan</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'deep-scan' && (
-                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-teal-500 text-white hover:bg-teal-600 transition-colors" data-testid="button-runbook-deep-scan">Scan</button>
+                  <button onClick={() => fetch('/api/health/platform-integrity', { credentials: 'include' }).catch(() => {})} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-deep-scan">Scan</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'service-verify' && (
-                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-[10px] px-2 py-1 rounded bg-cyan-500 text-white hover:bg-cyan-600 transition-colors" data-testid="button-runbook-service-verify">Verify</button>
+                  <button onClick={() => Promise.all(['verify-stripe', 'verify-resend', 'check-openai'].map(cmd => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) }).catch(() => {})))} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-service-verify">Verify</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'warm-endpoints' && (
-                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-testid="button-runbook-warm">Warm</button>
+                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'warm-all' }) }).catch(() => {})} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-blossom)] text-[var(--glp-charcoal)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-warm">Warm</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'cache-rebuild' && (
-                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-indigo-500 text-white hover:bg-indigo-600 transition-colors" data-testid="button-runbook-cache">Rebuild</button>
+                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'rebuild-cache' }) }).catch(() => {})} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-cache">Rebuild</button>
                 )}
                 {!step.done && !pipelineRunning && step.id === 'optimize-all' && (
-                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-[10px] px-2 py-1 rounded bg-gradient-to-r from-emerald-500 to-blue-500 text-white hover:from-emerald-600 hover:to-blue-600 transition-colors" data-testid="button-runbook-optimize-all">Optimize</button>
+                  <button onClick={() => fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'optimize-all' }) }).catch(() => {})} className="text-xs px-2.5 py-1.5 rounded-lg bg-[var(--glp-sage)] text-[var(--glp-ivory)] hover:opacity-90 transition-colors font-medium" data-testid="button-runbook-optimize-all">Optimize</button>
                 )}
               </div>
             );
