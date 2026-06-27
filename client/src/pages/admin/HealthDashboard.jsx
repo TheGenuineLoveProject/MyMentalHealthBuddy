@@ -698,7 +698,7 @@ export default function HealthDashboard() {
                         />
                       );
                     })}
-                    <span className="ml-2 text-[10px] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] tabular-nums">
+                    <span className="ml-2 text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] tabular-nums">
                       ← older · newer →
                     </span>
                   </div>
@@ -725,12 +725,12 @@ export default function HealthDashboard() {
                     <div className="flex items-center gap-2 mb-2">
                       <BotMessageSquare className="w-4 h-4 text-[var(--glp-deep-teal)]" />
                       <h3 className="text-sm font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">Latest AI diagnosis</h3>
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${sevColor}`} data-testid="ai-severity-pill">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${sevColor}`} data-testid="ai-severity-pill">
                         {dx.overall_severity || "unknown"}
                       </span>
                       {(latest.safetyFiltered || dx.safety_filtered) && (
                         <span
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-[rgba(244,199,195,0.32)] text-[var(--glp-charcoal)] dark:bg-[rgba(244,199,195,0.14)] dark:text-[var(--glp-blossom)]"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[rgba(244,199,195,0.32)] text-[var(--glp-charcoal)] dark:bg-[rgba(244,199,195,0.14)] dark:text-[var(--glp-blossom)]"
                           title="Destructive-language filter modified one or more remediation steps. Review carefully."
                           data-testid="ai-safety-filtered-pill"
                         >
@@ -764,7 +764,7 @@ export default function HealthDashboard() {
                               {" — "}
                               <span className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{s.suggested_fix}</span>
                               {s.risk_level && (
-                                <span className={`ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wide ${
+                                <span className={`ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-xs uppercase tracking-wide ${
                                   s.risk_level === "safe" ? "bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.14)] dark:text-[var(--glp-sage)]"
                                   : s.risk_level === "moderate" ? "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]"
                                   : "bg-[rgba(244,199,195,0.34)] text-[var(--glp-charcoal)] dark:bg-[rgba(244,199,195,0.16)] dark:text-[var(--glp-blossom)]"
@@ -800,7 +800,7 @@ export default function HealthDashboard() {
                           data-testid={`self-heal-history-${i}`}
                         >
                           <span className="flex items-center gap-2">
-                            <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                            <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium ${
                               isGood ? "bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.14)] dark:text-[var(--glp-sage)]"
                               : isPartial ? "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]"
                               : "bg-[rgba(244,199,195,0.34)] text-[var(--glp-charcoal)] dark:bg-[rgba(244,199,195,0.16)] dark:text-[var(--glp-blossom)]"
@@ -833,7 +833,7 @@ export default function HealthDashboard() {
                         data-testid={`probe-history-${i}`}
                       >
                         <span className="flex items-center gap-2">
-                          <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                          <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium ${
                             p.verdict === "HEALTHY" ? "bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.14)] dark:text-[var(--glp-sage)]"
                             : p.verdict === "DEGRADED" ? "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]"
                             : "bg-[rgba(244,199,195,0.34)] text-[var(--glp-charcoal)] dark:bg-[rgba(244,199,195,0.16)] dark:text-[var(--glp-blossom)]"
