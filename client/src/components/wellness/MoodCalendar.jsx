@@ -225,7 +225,7 @@ export default function MoodCalendar({ className = "" }) {
                     </span>
                   )}
                   {dayEntriesCount > 1 && (
-                    <span className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-deepTeal text-softWhite text-[10px] flex items-center justify-center font-sans font-bold">
+                    <span className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-deepTeal text-softWhite text-xs flex items-center justify-center font-sans font-bold">
                       {dayEntriesCount}
                     </span>
                   )}
