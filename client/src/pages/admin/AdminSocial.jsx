@@ -362,21 +362,21 @@ function PipelineBoard({ grouped, actionLoading, transitionPost, onEdit }) {
                     <div className="text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] line-clamp-2">{post.title || "Untitled"}</div>
                     <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] line-clamp-2">{post.content?.substring(0, 100)}</p>
                     <div className="flex items-center gap-1 flex-wrap">
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.28)] dark:bg-[rgba(143,191,159,0.18)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.platform}</span>
-                      {post.theme && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.22)] dark:bg-[rgba(143,191,159,0.16)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.theme}</span>}
-                      {post.scheduledFor && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(47,93,93,0.14)] dark:bg-[rgba(143,191,159,0.14)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] flex items-center gap-0.5"><Clock className="w-2.5 h-2.5" />{new Date(post.scheduledFor).toLocaleDateString()}</span>}
+                      <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.28)] dark:bg-[rgba(143,191,159,0.18)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.platform}</span>
+                      {post.theme && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.22)] dark:bg-[rgba(143,191,159,0.16)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.theme}</span>}
+                      {post.scheduledFor && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(47,93,93,0.14)] dark:bg-[rgba(143,191,159,0.14)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] flex items-center gap-0.5"><Clock className="w-2.5 h-2.5" />{new Date(post.scheduledFor).toLocaleDateString()}</span>}
                       {Array.isArray(post.postedPlatforms) && post.postedPlatforms.length > 0 && (
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.22)] dark:bg-[rgba(143,191,159,0.14)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.postedPlatforms.join(", ")}</span>
+                        <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.22)] dark:bg-[rgba(143,191,159,0.14)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{post.postedPlatforms.join(", ")}</span>
                       )}
                     </div>
                     <div className="flex items-center gap-1">
                       {col.status !== "posted" && (
-                        <button onClick={() => onEdit(post)} className="text-[10px] px-2 py-1 rounded bg-[rgba(143,191,159,0.28)] dark:bg-[rgba(143,191,159,0.18)] hover:bg-[rgba(143,191,159,0.32)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-edit-${post.id}`}>
+                        <button onClick={() => onEdit(post)} className="text-xs px-2 py-1 rounded bg-[rgba(143,191,159,0.28)] dark:bg-[rgba(143,191,159,0.18)] hover:bg-[rgba(143,191,159,0.32)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-edit-${post.id}`}>
                           <Edit className="w-3 h-3" />
                         </button>
                       )}
                       {col.nextAction && (
-                        <button onClick={() => handleAction(post.id, col.nextAction, post)} disabled={actionLoading === post.id} className="text-[10px] px-2 py-1 rounded bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)] disabled:opacity-50 transition-colors flex items-center gap-1" data-testid={`button-${col.nextAction}-${post.id}`}>
+                        <button onClick={() => handleAction(post.id, col.nextAction, post)} disabled={actionLoading === post.id} className="text-xs px-2 py-1 rounded bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)] disabled:opacity-50 transition-colors flex items-center gap-1" data-testid={`button-${col.nextAction}-${post.id}`}>
                           {actionLoading === post.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <ArrowRight className="w-3 h-3" />}
                           {col.nextLabel}
                         </button>
@@ -419,11 +419,11 @@ function WeeklyQueueView({ queue }) {
               </div>
             </div>
             {day.posts.length === 0 ? (
-              <p className="text-[10px] text-[var(--glp-sage)] text-center">No posts</p>
+              <p className="text-xs text-[var(--glp-sage)] text-center">No posts</p>
             ) : (
               <div className="space-y-1">
                 {day.posts.map(p => (
-                  <div key={p.id} className="p-1.5 rounded bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] border border-[rgba(143,191,159,0.38)] dark:border-[rgba(143,191,159,0.28)] text-[10px]" data-testid={`queue-post-${p.id}`}>
+                  <div key={p.id} className="p-1.5 rounded bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] border border-[rgba(143,191,159,0.38)] dark:border-[rgba(143,191,159,0.28)] text-xs" data-testid={`queue-post-${p.id}`}>
                     <StatusBadge status={p.status} />
                     <div className="mt-1 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] line-clamp-2">{p.title || p.content?.substring(0, 40)}</div>
                   </div>
@@ -557,7 +557,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
               <button key={t.id} onClick={() => applyTemplate(t)} className="p-3 rounded-lg bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] border border-[rgba(244,199,195,0.48)] dark:border-[rgba(244,199,195,0.30)] hover:border-[var(--glp-blossom)] dark:hover:border-[var(--glp-blossom)] transition-colors text-left" data-testid={`button-template-${t.id}`}>
                 <Icon className="w-4 h-4 text-[var(--glp-deep-teal)] mb-1" />
                 <div className="text-xs font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{t.name}</div>
-                <div className="text-[10px] text-[var(--glp-deep-teal)] mt-0.5">{t.hook}</div>
+                <div className="text-xs text-[var(--glp-deep-teal)] mt-0.5">{t.hook}</div>
               </button>
             );
           })}
@@ -610,7 +610,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
         <textarea value={form.captions[activeCaption] || ""} onChange={e => updateCaption(activeCaption, e.target.value)} rows={3} placeholder={`${activeCaption} caption...`} className="w-full px-3 py-2 rounded-lg border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] resize-y" data-testid={`textarea-caption-${activeCaption}`} />
         <div className="flex items-center gap-2 mt-1">
           <CopyButton text={form.captions[activeCaption] || form.content} label={activeCaption} />
-          <button onClick={() => updateCaption(activeCaption, form.content)} className="text-[10px] px-2 py-1 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] hover:bg-[rgba(143,191,159,0.28)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-fill-caption-${activeCaption}`}>
+          <button onClick={() => updateCaption(activeCaption, form.content)} className="text-xs px-2 py-1 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] hover:bg-[rgba(143,191,159,0.28)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-fill-caption-${activeCaption}`}>
             Fill from main content
           </button>
         </div>
@@ -622,7 +622,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
         <input value={form.hashtags} onChange={e => updateField("hashtags", e.target.value)} placeholder="#TheGenuineLoveProject #SelfCompassion" className="w-full px-3 py-2 rounded-lg border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="input-hashtags" />
         <div className="flex gap-1 mt-1">
           {Object.keys(HASHTAG_PRESETS).map(set => (
-            <button key={set} onClick={() => applyHashtags(set)} className="text-[10px] px-2 py-0.5 rounded bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[rgba(143,191,159,0.22)] dark:hover:bg-[rgba(143,191,159,0.18)] transition-colors" data-testid={`button-hashtag-${set}`}>
+            <button key={set} onClick={() => applyHashtags(set)} className="text-xs px-2 py-0.5 rounded bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[rgba(143,191,159,0.22)] dark:hover:bg-[rgba(143,191,159,0.18)] transition-colors" data-testid={`button-hashtag-${set}`}>
               + {set}
             </button>
           ))}
@@ -638,7 +638,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
           </div>
           <div className="flex gap-1 mt-1">
             {["/tools", "/mood", "/blog", "/newsletter", "/pricing", "/crisis"].map(url => (
-              <button key={url} onClick={() => updateField("gentleCtaUrl", url)} className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] hover:bg-[rgba(143,191,159,0.28)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-cta-${url.slice(1)}`}>
+              <button key={url} onClick={() => updateField("gentleCtaUrl", url)} className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] hover:bg-[rgba(143,191,159,0.28)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-cta-${url.slice(1)}`}>
                 {url}
               </button>
             ))}
@@ -656,7 +656,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
           </div>
           {utmResult && (
             <div className="mt-1 flex items-center gap-1">
-              <input value={utmResult} readOnly className="flex-1 px-2 py-1 rounded text-[10px] bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" data-testid="input-utm-result" />
+              <input value={utmResult} readOnly className="flex-1 px-2 py-1 rounded text-xs bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" data-testid="input-utm-result" />
               <CopyButton text={utmResult} label="link" />
             </div>
           )}
@@ -673,7 +673,7 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
               <input type="checkbox" checked={!!form.crisisLinkRequired} onChange={e => updateField("crisisLinkRequired", e.target.checked ? 1 : 0)} className="rounded" data-testid="checkbox-crisis" />
               Crisis link required
             </label>
-            <button onClick={runSafetyCheck} className="text-[10px] px-2 py-1 rounded bg-[rgba(212,175,55,0.18)] dark:bg-[rgba(212,175,55,0.18)] text-[var(--glp-charcoal)] dark:text-[var(--glp-gold)] hover:bg-[rgba(212,175,55,0.26)] dark:hover:bg-[rgba(212,175,55,0.22)] transition-colors flex items-center gap-1" data-testid="button-safety-check">
+            <button onClick={runSafetyCheck} className="text-xs px-2 py-1 rounded bg-[rgba(212,175,55,0.18)] dark:bg-[rgba(212,175,55,0.18)] text-[var(--glp-charcoal)] dark:text-[var(--glp-gold)] hover:bg-[rgba(212,175,55,0.26)] dark:hover:bg-[rgba(212,175,55,0.22)] transition-colors flex items-center gap-1" data-testid="button-safety-check">
               <Shield className="w-3 h-3" /> Run Safety Check
             </button>
           </div>
@@ -827,7 +827,7 @@ function SignalsPanel({ clickStats, redirectsList, signals, onRefresh }) {
                 <div key={r.id} className="flex items-center justify-between py-1.5 border-b border-[rgba(143,191,159,0.28)] dark:border-[rgba(143,191,159,0.24)] last:border-0" data-testid={`redirect-${r.id}`}>
                   <div>
                     <div className="text-xs font-mono text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">/r/{r.slug}</div>
-                    <div className="text-[10px] text-[var(--glp-sage)] truncate max-w-[180px]">{r.url}</div>
+                    <div className="text-xs text-[var(--glp-sage)] truncate max-w-[180px]">{r.url}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{r.clicks}</span>
@@ -993,12 +993,12 @@ function AuditLogPanel({ auditLog }) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-sm font-medium text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{label}</span>
-                      {meta.createdBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.createdBy}</span>}
-                      {meta.submittedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.submittedBy}</span>}
-                      {meta.approvedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.approvedBy}</span>}
-                      {meta.postedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.postedBy}</span>}
-                      {meta.editedBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.editedBy}</span>}
-                      {meta.scheduledBy && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.scheduledBy}</span>}
+                      {meta.createdBy && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.createdBy}</span>}
+                      {meta.submittedBy && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.submittedBy}</span>}
+                      {meta.approvedBy && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.approvedBy}</span>}
+                      {meta.postedBy && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.postedBy}</span>}
+                      {meta.editedBy && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.editedBy}</span>}
+                      {meta.scheduledBy && <span className="text-xs px-1.5 py-0.5 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)]">by {meta.scheduledBy}</span>}
                     </div>
                     <div className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mt-0.5">
                       {meta.title && <span>"{meta.title}" </span>}
@@ -1007,7 +1007,7 @@ function AuditLogPanel({ auditLog }) {
                       {meta.platforms && <span>on {Array.isArray(meta.platforms) ? meta.platforms.join(", ") : meta.platforms} </span>}
                       {meta.name && <span>"{meta.name}" </span>}
                     </div>
-                    <div className="text-[10px] text-[var(--glp-sage)] mt-0.5">
+                    <div className="text-xs text-[var(--glp-sage)] mt-0.5">
                       {event.createdAt ? new Date(event.createdAt).toLocaleString() : ""}
                     </div>
                   </div>
