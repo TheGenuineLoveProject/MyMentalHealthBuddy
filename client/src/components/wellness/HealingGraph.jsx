@@ -285,9 +285,9 @@ export default function HealingGraph({ className = "" }) {
               Average score: {stats.avg.toFixed(1)} out of 10. {stats.totalEntries} entries across {stats.activeDays} active days.
             </figcaption>
             <div className="absolute left-0 top-0 bottom-8 w-8 flex flex-col justify-between text-right pr-2">
-              <span className="font-sans text-[10px] text-deepTeal/40">10</span>
-              <span className="font-sans text-[10px] text-deepTeal/40">5</span>
-              <span className="font-sans text-[10px] text-deepTeal/40">0</span>
+              <span className="font-sans text-xs text-deepTeal/40">10</span>
+              <span className="font-sans text-xs text-deepTeal/40">5</span>
+              <span className="font-sans text-xs text-deepTeal/40">0</span>
             </div>
 
             <div className="ml-8 h-full">
@@ -327,7 +327,7 @@ export default function HealingGraph({ className = "" }) {
                 ))}
               </div>
 
-              <div className="flex justify-between mt-1 text-[10px] font-sans text-deepTeal/40">
+              <div className="flex justify-between mt-1 text-xs font-sans text-deepTeal/40">
                 <span>{graphData[0]?.dateStr}</span>
                 <span>{graphData[graphData.length - 1]?.dateStr}</span>
               </div>
