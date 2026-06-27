@@ -162,7 +162,7 @@ export default function LumiCarousel({
           border-radius: 50%;
           border: 1.5px solid rgba(22, 58, 54, 0.18);
           background: rgba(255, 255, 255, 0.86);
-          color: #163A36;
+          color: var(--glp-deep-teal);
           font-size: 1.6rem;
           line-height: 1;
           font-weight: 700;
@@ -173,12 +173,12 @@ export default function LumiCarousel({
           box-shadow: 0 6px 16px rgba(22, 58, 54, 0.08);
         }
         .lumi-carousel .lc-arrow:hover {
-          background: #FFFFFF;
+          background: var(--glp-ivory);
           transform: translateY(-1px);
           box-shadow: 0 10px 22px rgba(22, 58, 54, 0.14);
         }
         .lumi-carousel .lc-arrow:focus-visible {
-          outline: 3px solid #2F6B4F;
+          outline: 3px solid var(--glp-sage);
           outline-offset: 3px;
         }
         .lumi-carousel .lc-caption {
@@ -189,13 +189,13 @@ export default function LumiCarousel({
           margin: 0;
           font-size: clamp(1.15rem, 2.4vw, 1.5rem);
           font-weight: 800;
-          color: #14332F;
+          color: var(--glp-deep-teal);
         }
         .lumi-carousel .lc-role {
           margin: 0.35rem 0 0;
           font-size: clamp(0.9rem, 1.7vw, 1.02rem);
           line-height: 1.5;
-          color: #2A3F3D;
+          color: var(--glp-charcoal);
           max-width: 36ch;
         }
         .lumi-carousel .lc-dots {
@@ -234,7 +234,7 @@ export default function LumiCarousel({
           transform: scale(1.15);
         }
         .lumi-carousel .lc-dot:focus-visible {
-          outline: 3px solid #2F6B4F;
+          outline: 3px solid var(--glp-sage);
           outline-offset: 2px;
         }
 
