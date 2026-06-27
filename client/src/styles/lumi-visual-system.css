@@ -542,3 +542,44 @@ section {
     max-width: 100%;
   }
 }
+
+/* PHASE11923: Official Lumi transparent 3D shell hardening */
+.lumi-official,
+.lumi-official *,
+[data-lumi-protected="true"],
+[data-lumi-protected="true"] *,
+[data-official-lumi],
+[data-official-lumi] *,
+.lumi-carousel .lc-avatar,
+.lumi-carousel .lc-avatar *,
+.lumi-mascot-image {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  outline-color: transparent !important;
+}
+
+.lumi-official,
+[data-lumi-protected="true"],
+[data-official-lumi],
+.lumi-carousel .lc-avatar {
+  box-shadow: none !important;
+}
+
+.lumi-official img,
+[data-lumi-protected="true"] img,
+[data-official-lumi] img,
+.lumi-carousel img,
+.lumi-mascot-image {
+  object-fit: contain !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.lumi-carousel .lc-avatar img,
+.lumi-carousel .lc-avatar svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
