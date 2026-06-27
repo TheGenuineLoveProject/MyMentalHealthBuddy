@@ -197,7 +197,7 @@ export default function Challenge() {
 
           <div className="mt-6 flex justify-center">
             <img
-              src={getOfficialLumi("encouraging")}
+              src={getOfficialAsset("LUMI_ENCOURAGING_SPARK").src}
               alt="Lumi encouraging your challenge"
               className="w-32 h-32 object-contain rounded-full"
               data-testid="img-challenge-lumi"

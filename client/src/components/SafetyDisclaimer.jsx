@@ -41,7 +41,7 @@ export function SafetyDisclaimer({
         }}
       >
         <MMHBFloatAvatar
-          imageSrc={getOfficialLumi("supportive")}
+          imageSrc={getOfficialAsset("LUMI_SUPPORTIVE_HEART").src}
           size={32}
           alt="Lumi offering gentle support"
           data-testid="img-disclaimer-lumi"

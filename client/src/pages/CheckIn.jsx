@@ -227,7 +227,7 @@ export default function CheckIn() {
           data-testid="container-buddy"
         >
           <img
-            src={getOfficialLumi("supportive")}
+            src={getOfficialAsset("LUMI_SUPPORTIVE_HEART").src}
             alt="Lumi gently checking in with you"
             width={128}
             height={128}
