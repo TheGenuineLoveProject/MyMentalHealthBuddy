@@ -441,7 +441,7 @@ export const toolCategories = [
     title: "Infrastructure & Auth Tools",
     tools: [
       { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: DollarSign, desc: "Stripe billing" },
-      { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
+      { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhooks/health", icon: Webhook, desc: "Stripe webhooks" },
       { id: "email", label: "Email Service", endpoint: "/api/email", icon: Mail, desc: "Resend email" },
       { id: "contact", label: "Contact System", endpoint: "/api/contact", icon: Contact, desc: "Contact forms" },
       { id: "auth-github", label: "GitHub Auth", endpoint: "/api/auth/github", icon: Key, desc: "GitHub OAuth" },
