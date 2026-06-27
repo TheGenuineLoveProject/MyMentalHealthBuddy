@@ -9,8 +9,7 @@
  * routing. State is "celebrate" (sparkle motion) per the avatar contract.
  */
 import { useEffect, useMemo, useRef } from "react";
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 
 // Robust modal focus management: capture the previously-focused element on
 // mount, move focus into the dialog, then restore focus to the original
@@ -123,9 +122,15 @@ export default function CelebrationOverlay({
         ))}
       </div>
 
-      <MMHBFloatAvatar
-        imageSrc={getOfficialLumi("encouraging")}
-        size={160}
+      <OfficialLumi
+        variant="LUMI_CELEBRATION"
+        scene="celebration-overlay"
+        position="card"
+        pageId="celebration-overlay"
+        widthPx={160}
+        heightPx={160}
+        decorative={false}
+        motion="soft"
         alt="Lumi celebrating progress"
         data-testid="celebration-overlay-buddy"
       />
