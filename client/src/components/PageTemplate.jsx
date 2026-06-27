@@ -14,8 +14,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import AOS from 'aos';
 import { gsap } from 'gsap';
-import { MMHBFloatAvatar } from "@/avatar-life/components/MMHBFloatAvatar";
-import { getOfficialLumi } from "@/avatar-life/officialLumiAssets";
+import { OfficialLumi } from "@/lumi-registry";
 import { 
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,
   BookOpen, MessageCircle, Users, Zap, Target, Compass,
@@ -103,7 +102,17 @@ function HeroSection({ hero, readingLevel = 'intermediate' }) {
           data-aos="fade-down"
           data-aos-delay="100"
         >
-          <MMHBFloatAvatar imageSrc={getOfficialLumi("calm")} size={32} alt="Lumi mark" data-testid="img-logo-badge-lumi" />
+          <OfficialLumi
+                variant="LUMI_COMPANION"
+                scene="page-template-logo-badge"
+                position="inline"
+                pageId="page-template"
+                widthPx={32}
+                heightPx={32}
+                decorative={false}
+                motion="reduced"
+                data-testid="img-logo-badge-lumi"
+              />
           <span className={styles.logoBadgeText}>Genuine Love</span>
         </div>
 
