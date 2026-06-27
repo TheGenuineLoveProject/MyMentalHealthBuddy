@@ -119,7 +119,7 @@ export default function MoodVisualizer() {
                 <Icon className="w-4 h-4" />
               </div>
               <span className="text-lg font-bold text-[var(--text)]">{day.score}</span>
-              <span className="text-[10px] text-[var(--text-secondary)] capitalize truncate w-full text-center">
+              <span className="text-xs text-[var(--text-secondary)] capitalize truncate w-full text-center">
                 {day.emotion}
               </span>
             </div>
@@ -151,7 +151,7 @@ export default function MoodVisualizer() {
             >
               {day.score}
             </div>
-            <span className="text-[10px] text-[var(--text-secondary)] mt-1">
+            <span className="text-xs text-[var(--text-secondary)] mt-1">
               {new Date(day.date).getDate()}
             </span>
           </div>
@@ -204,7 +204,7 @@ export default function MoodVisualizer() {
             />
           ))}
         </svg>
-        <div className="absolute bottom-2 left-0 right-0 flex justify-between px-4 text-[10px] text-[var(--text-secondary)]">
+        <div className="absolute bottom-2 left-0 right-0 flex justify-between px-4 text-xs text-[var(--text-secondary)]">
           <span>14 days ago</span>
           <span>Today</span>
         </div>
