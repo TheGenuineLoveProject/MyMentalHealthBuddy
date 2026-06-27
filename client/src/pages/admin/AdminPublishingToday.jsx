@@ -262,13 +262,13 @@ export default function AdminPublishingToday() {
                 <div>
                   <h4 className="font-semibold text-sm" data-testid={`text-draft-title-${draft.id}`}>{draft.title}</h4>
                   <div className="flex gap-1.5 mt-1 flex-wrap">
-                    <span className="text-[11px] px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300" data-testid={`badge-type-${draft.id}`}>
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300" data-testid={`badge-type-${draft.id}`}>
                       {draft.type}
                     </span>
-                    <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300" data-testid={`badge-pillar-${draft.id}`}>
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300" data-testid={`badge-pillar-${draft.id}`}>
                       {draft.pillar}
                     </span>
-                    <span className="text-[11px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400" data-testid={`badge-cta-${draft.id}`}>
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400" data-testid={`badge-cta-${draft.id}`}>
                       {draft.primaryCta}
                     </span>
                   </div>

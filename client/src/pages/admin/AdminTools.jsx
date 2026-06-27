@@ -614,14 +614,14 @@ export default function AdminTools() {
                             <div className="text-sm font-medium truncate flex items-center gap-1.5">
                               {tool.label}
                               {severity && severity !== 'medium' && (
-                                <span className={`text-[9px] px-1 py-0.5 rounded font-semibold ${severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+                                <span className={`text-xs px-1 py-0.5 rounded font-semibold ${severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
                                   {severity === 'critical' ? 'CRIT' : 'HIGH'}
                                 </span>
                               )}
                             </div>
                             <div className="text-xs text-muted-foreground truncate flex items-center gap-1">
                               {tool.desc}
-                              {!adminLink && <span className="text-[9px] px-1 py-0 rounded bg-muted text-muted-foreground">API</span>}
+                              {!adminLink && <span className="text-xs px-1 py-0 rounded bg-muted text-muted-foreground">API</span>}
                             </div>
                           </div>
                           <div className="flex items-center gap-1.5 flex-shrink-0">
@@ -634,7 +634,7 @@ export default function AdminTools() {
                                 ) : (
                                   <AlertCircle size={14} className="text-red-500" />
                                 )}
-                                <span className={`text-[10px] ${result.ms > 2000 ? 'text-red-500 font-medium' : result.ms > 500 ? 'text-amber-500' : 'text-muted-foreground'}`}>
+                                <span className={`text-xs ${result.ms > 2000 ? 'text-red-500 font-medium' : result.ms > 500 ? 'text-amber-500' : 'text-muted-foreground'}`}>
                                   {result.label && result.label !== 'ok' ? result.label : ''}{result.ms != null ? ` ${result.ms}ms` : ''}
                                 </span>
                               </span>

@@ -60,7 +60,7 @@ export default function QuickDiagnostics({ toolResults, runHealthCheck, runningT
               )}
               <div className="min-w-0">
                 <div className="text-xs font-medium truncate">{check.label}</div>
-                <div className="text-[10px] text-muted-foreground truncate">
+                <div className="text-xs text-muted-foreground truncate">
                   {running ? 'Checking...' : result ? `${result.label} ${result.ms}ms` : check.desc}
                 </div>
               </div>
