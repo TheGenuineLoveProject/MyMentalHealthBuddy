@@ -50,6 +50,15 @@ async function markProcessed(event) {
   }
 }
 
+
+router.get("/", (_req, res) => {
+  res.json({ ok: true, module: "webhooks", status: "operational", timestamp: new Date().toISOString() });
+});
+
+router.get("/health", (_req, res) => {
+  res.json({ ok: true, module: "stripeWebhook", status: stripe ? "configured" : "not_configured", timestamp: new Date().toISOString() });
+});
+
 // IMPORTANT: raw body ONLY for stripe signature verification
 router.post(
   "/stripe",
