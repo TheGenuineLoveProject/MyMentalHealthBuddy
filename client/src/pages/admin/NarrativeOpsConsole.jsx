@@ -710,17 +710,17 @@ function PostCard({ post, onSelect, isSelected, onAction, onEdit, onMarkPosted, 
       </p>
       <div className="flex flex-wrap gap-1 mb-2">
         {post.theme && (
-          <span className="text-[10px] px-1.5 py-0.5 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded text-[var(--glp-deep-teal)]">
+          <span className="text-xs px-1.5 py-0.5 bg-[var(--glp-sage-10)] dark:bg-[var(--glp-deep-teal)] rounded text-[var(--glp-deep-teal)]">
             {post.theme}
           </span>
         )}
         {post.campaignId && (
-          <span className="text-[10px] px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 rounded text-[var(--glp-deep-teal)] dark:text-purple-400">
+          <span className="text-xs px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 rounded text-[var(--glp-deep-teal)] dark:text-purple-400">
             {getCampaignName(post.campaignId)}
           </span>
         )}
         {post.scheduledFor && (
-          <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 rounded text-[var(--glp-deep-teal)] dark:text-blue-400 flex items-center gap-0.5">
+          <span className="text-xs px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 rounded text-[var(--glp-deep-teal)] dark:text-blue-400 flex items-center gap-0.5">
             <Calendar className="w-2.5 h-2.5" />
             {new Date(post.scheduledFor).toLocaleDateString()}
           </span>
@@ -1156,7 +1156,7 @@ function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShow
                     <Megaphone className="w-4 h-4 text-[var(--glp-deep-teal)]" />
                     <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] text-sm">{campaign.name}</h3>
                   </div>
-                  <span className={`text-[10px] px-2 py-0.5 rounded ${campaign.status === "active" ? "bg-green-100 text-[var(--glp-sage)]" : "bg-slate-100 text-[var(--glp-deep-teal)]"}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded ${campaign.status === "active" ? "bg-green-100 text-[var(--glp-sage)]" : "bg-slate-100 text-[var(--glp-deep-teal)]"}`}>
                     {campaign.status}
                   </span>
                 </div>
@@ -1241,7 +1241,7 @@ function WeeklyQueuePanel({ weeklyPosts, weeklyLoading, getCampaignName, setSele
                     </div>
                   ))}
                   {dayPosts.length === 0 && (
-                    <p className="text-[10px] text-slate-300 dark:text-[var(--glp-deep-teal)] text-center pt-4">No posts</p>
+                    <p className="text-xs text-slate-300 dark:text-[var(--glp-deep-teal)] text-center pt-4">No posts</p>
                   )}
                 </div>
               </div>
