@@ -8730,3 +8730,43 @@ button:disabled,
   }
 }
 
+
+/* PHASE11938: Safe mobile typography polish */
+@media (max-width: 640px) {
+  .text-display-xl,
+  .text-display-lg {
+    font-size: clamp(1.85rem, 8vw, 2.35rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.035em;
+  }
+
+  h1.text-4xl,
+  h1.text-5xl,
+  h1.text-6xl,
+  .text-4xl,
+  .text-5xl,
+  .text-6xl {
+    font-size: clamp(1.75rem, 8vw, 2.4rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  [data-testid*="timer"],
+  [data-testid*="time"],
+  [data-testid*="count"],
+  [data-testid*="score"] {
+    font-size: clamp(2rem, 11vw, 3rem) !important;
+    line-height: 1 !important;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-premium,
+  .btn-premium-teal,
+  .btn-ghost {
+    min-height: 44px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+}
