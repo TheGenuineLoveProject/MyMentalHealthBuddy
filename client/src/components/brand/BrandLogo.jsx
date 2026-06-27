@@ -43,7 +43,7 @@ export default function BrandLogo({
             MyMentalHealthBuddy
           </span>
           <span
-            className="text-[10px] sm:text-xs font-semibold tracking-[0.14em] uppercase mt-0.5"
+            className="text-xs sm:text-xs font-semibold tracking-[0.14em] uppercase mt-0.5"
             style={{ color: "var(--glp-sage)" }}
           >
             by The Genuine Love Project
