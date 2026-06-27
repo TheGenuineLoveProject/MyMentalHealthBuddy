@@ -236,7 +236,7 @@ export default function SelfCareBingo() {
                   </div>
                 )}
                 
-                <span className="text-[10px] leading-tight font-medium">
+                <span className="text-xs leading-tight font-medium">
                   {activity.text}
                 </span>
                 
