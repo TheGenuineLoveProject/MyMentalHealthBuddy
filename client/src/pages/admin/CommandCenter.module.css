@@ -678,7 +678,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--glp-sage, #8A9A5B);
+  color: var(--glp-sage);
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--glp-sage-10, rgba(138, 154, 91, 0.1));
@@ -717,7 +717,7 @@
   align-items: center;
   justify-content: center;
   background: white;
-  color: var(--glp-sage, #8A9A5B);
+  color: var(--glp-sage);
   flex-shrink: 0;
   border: 1px solid var(--glp-sage-10, rgba(138, 154, 91, 0.1));
 }
