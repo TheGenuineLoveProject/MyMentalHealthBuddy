@@ -140,7 +140,7 @@ export default function MindfulnessChallenges() {
                 style={{ width: `${((totalPoints % 500) / 500) * 100}%` }}
               />
             </div>
-            <p className="text-[10px] text-gray-500 mt-1">{pointsToNextLevel} pts to next level</p>
+            <p className="text-xs text-gray-500 mt-1">{pointsToNextLevel} pts to next level</p>
           </div>
           
           <div className="bg-white/80 dark:bg-gray-800/80 rounded-xl p-4 shadow-md">
@@ -157,7 +157,7 @@ export default function MindfulnessChallenges() {
               <span className="text-xs text-gray-500 dark:text-gray-400">Streak</span>
             </div>
             <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">{currentStreak}</div>
-            <p className="text-[10px] text-gray-500">days</p>
+            <p className="text-xs text-gray-500">days</p>
           </div>
           
           <div className="bg-white/80 dark:bg-gray-800/80 rounded-xl p-4 shadow-md">
