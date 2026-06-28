@@ -115,7 +115,7 @@ export default function SystemOptimizationAdvisor({
             }`} data-testid={`advisor-${i}`}>
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold uppercase ${
+                  <span className={`text-xs px-1.5 py-0.5 rounded font-bold uppercase ${
                     adv.priority === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' :
                     adv.priority === 'high' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-600' :
                     adv.priority === 'success' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' :
@@ -124,12 +124,12 @@ export default function SystemOptimizationAdvisor({
                   }`}>{adv.priority}</span>
                   <span className="text-xs font-semibold">{adv.category}</span>
                 </div>
-                <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${adv.kb === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : adv.kb === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${adv.kb === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : adv.kb === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
                   {adv.kb}
                 </span>
               </div>
-              <p className="text-[11px] text-muted-foreground mb-1">{adv.text}</p>
-              <div className="flex items-center gap-1.5 text-[10px]">
+              <p className="text-xs text-muted-foreground mb-1">{adv.text}</p>
+              <div className="flex items-center gap-1.5 text-xs">
                 <Wrench size={10} className="text-cyan-500" />
                 <span className="font-medium text-cyan-700 dark:text-cyan-400">{adv.action}</span>
               </div>
