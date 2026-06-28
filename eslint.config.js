@@ -1,7 +1,37 @@
+import reactHooks from "eslint-plugin-react-hooks";
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
+  {
+  ignores: [
+    "docs/**",
+    "backups/**",
+    ".hx-backups/**",
+    "client/src.bak*/**",
+    "client/dist/**",
+    "dist/**",
+    "node_modules/**",
+    "content/routes.js",
+    "**/*.backup",
+    "**/*.bak",
+    "**/*.phase*.backup"
+  ],
+},
+
+  {
+    ignores: [
+      "docs/**",
+      "**/*.backup",
+      "**/*.bak",
+      "**/*.phase*.backup",
+      "phase*-*.mjs",
+      "client/dist/**",
+      "dist/**",
+      "node_modules/**"
+    ],
+  },
+
 
   {
     ignores: [
@@ -28,6 +58,8 @@ export default [
     },
 
     plugins: {
+      'react-hooks': reactHooks,
+      "react-hooks": reactHooks,
       '@typescript-eslint': tsPlugin
     },
 
