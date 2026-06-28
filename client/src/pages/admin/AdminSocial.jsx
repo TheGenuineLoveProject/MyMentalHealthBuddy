@@ -7,6 +7,7 @@ import { SiInstagram, SiX, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "
 import { FaLinkedin as SiLinkedin } from "react-icons/fa";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
+import Button from "../../components/ui/Button";
 
 const API_BASE = "/api/admin/social/enterprise";
 
@@ -179,14 +180,14 @@ export default function AdminSocial() {
             <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mt-1">Publish → Repurpose → Track → Learn → Improve</p>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={fetchData} className="px-3 py-2 rounded-lg bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] transition-colors text-sm flex items-center gap-2" data-testid="button-refresh">
+            <Button onClick={fetchData} variant="secondary" size="sm" data-testid="button-refresh">
               <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
               Refresh
-            </button>
-            <button onClick={() => setShowCampaignModal(true)} className="px-3 py-2 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)] transition-colors text-sm flex items-center gap-2" data-testid="button-new-campaign">
+            </Button>
+            <Button onClick={() => setShowCampaignModal(true)} variant="primary" size="sm" data-testid="button-new-campaign">
               <Megaphone className="w-4 h-4" />
               New Campaign
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -331,10 +332,10 @@ function PipelineBoard({ grouped, actionLoading, transitionPost, onEdit }) {
             })}
           </div>
           <div className="flex gap-2">
-            <button onClick={confirmMarkPosted} disabled={selectedPlatforms.length === 0} className="px-4 py-2 rounded-lg bg-[var(--glp-sage)] text-[var(--glp-charcoal)] text-xs font-medium hover:bg-[var(--glp-deep-teal)] hover:text-[var(--glp-ivory)] disabled:opacity-50 transition-colors flex items-center gap-1" data-testid="button-confirm-posted">
+            <Button onClick={confirmMarkPosted} disabled={selectedPlatforms.length === 0} variant="gold" size="sm" data-testid="button-confirm-posted">
               <CheckCircle2 className="w-3 h-3" /> Confirm Posted
-            </button>
-            <button onClick={() => setMarkPostedId(null)} className="px-4 py-2 rounded-lg border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] text-xs text-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid="button-cancel-posted">Cancel</button>
+            </Button>
+            <Button onClick={() => setMarkPostedId(null)} variant="secondary" size="sm" data-testid="button-cancel-posted">Cancel</Button>
           </div>
         </div>
       )}
@@ -647,12 +648,12 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
         <div>
           <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Tracked Link / UTM</label>
           <div className="flex gap-1">
-            <button onClick={buildUtm} className="px-3 py-2 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] text-xs hover:bg-[var(--glp-charcoal)] transition-colors flex items-center gap-1" data-testid="button-build-utm">
+            <Button onClick={buildUtm} variant="primary" size="sm" data-testid="button-build-utm">
               <Link2 className="w-3 h-3" /> Build UTM
-            </button>
-            <button onClick={createTrackedLink} className="px-3 py-2 rounded-lg bg-[var(--glp-sage)] text-[var(--glp-charcoal)] text-xs hover:bg-[var(--glp-deep-teal)] hover:text-[var(--glp-ivory)] transition-colors flex items-center gap-1" data-testid="button-tracked-link">
+            </Button>
+            <Button onClick={createTrackedLink} variant="gold" size="sm" data-testid="button-tracked-link">
               <Globe className="w-3 h-3" /> Create /r/ Link
-            </button>
+            </Button>
           </div>
           {utmResult && (
             <div className="mt-1 flex items-center gap-1">
@@ -717,11 +718,11 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
 
       {/* Save */}
       <div className="flex justify-end gap-2 pt-4 border-t border-[rgba(143,191,159,0.38)] dark:border-[rgba(143,191,159,0.28)]">
-        <button onClick={onCancel} className="px-4 py-2 rounded-lg border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid="button-cancel">Cancel</button>
-        <button onClick={handleSave} disabled={saving || !form.title || !form.content} className="px-6 py-2 rounded-lg bg-gradient-to-r from-[var(--glp-deep-teal)] to-[var(--glp-sage)] text-[var(--glp-ivory)] text-sm font-medium hover:from-[var(--glp-charcoal)] hover:to-[var(--glp-deep-teal)] disabled:opacity-50 transition-all flex items-center gap-2" data-testid="button-save-post">
+        <Button onClick={onCancel} variant="secondary" size="sm" data-testid="button-cancel">Cancel</Button>
+        <Button onClick={handleSave} disabled={saving || !form.title || !form.content} variant="primary" size="sm" data-testid="button-save-post">
           {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
           {isEdit ? "Update Post" : "Create Draft"}
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -891,10 +892,10 @@ function RepurposePanel({ blogPosts, campaigns, onDone }) {
           </div>
         </div>
 
-        <button onClick={handleGenerate} disabled={!selectedBlog || generating} className="px-4 py-2 rounded-lg bg-gradient-to-r from-[var(--glp-deep-teal)] to-[var(--glp-sage)] text-[var(--glp-ivory)] text-sm font-medium hover:from-[var(--glp-charcoal)] hover:to-[var(--glp-deep-teal)] disabled:opacity-50 transition-all flex items-center gap-2" data-testid="button-generate-drafts">
+        <Button onClick={handleGenerate} disabled={!selectedBlog || generating} variant="primary" size="sm" data-testid="button-generate-drafts">
           {generating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
           Generate Draft Posts
-        </button>
+        </Button>
 
         {result && result.data && (
           <div className="p-3 bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.10)] rounded-lg border border-[rgba(143,191,159,0.38)] dark:border-[rgba(143,191,159,0.24)]">
@@ -948,11 +949,11 @@ function CampaignModal({ onClose, onCreated }) {
           <textarea value={goal} onChange={e => setGoal(e.target.value)} rows={2} placeholder="Drive newsletter signups..." className="w-full px-3 py-2 rounded-lg border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-sm resize-y" data-testid="textarea-campaign-goal" />
         </div>
         <div className="flex justify-end gap-2">
-          <button onClick={onClose} className="px-3 py-2 rounded-lg border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] text-sm text-[var(--glp-deep-teal)]" data-testid="button-cancel-campaign">Cancel</button>
-          <button onClick={handleCreate} disabled={!name.trim() || saving} className="px-4 py-2 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] text-sm hover:bg-[var(--glp-charcoal)] disabled:opacity-50 flex items-center gap-2" data-testid="button-create-campaign">
+          <Button onClick={onClose} variant="secondary" size="sm" data-testid="button-cancel-campaign">Cancel</Button>
+          <Button onClick={handleCreate} disabled={!name.trim() || saving} variant="primary" size="sm" data-testid="button-create-campaign">
             {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Plus className="w-3 h-3" />}
             Create Campaign
-          </button>
+          </Button>
         </div>
       </div>
     </div>
