@@ -1327,6 +1327,21 @@ a, a:visited {
   .section-spacing { padding: 3rem 0; }
   .section-spacing-lg { padding: 4rem 0; }
 }
+
+/* --- Fluid scale for large Tailwind text utilities (mobile-safe) ---
+   This project's Tailwind responsive variants (sm:/md:/lg:) emit no CSS, so
+   bare `text-4xl`..`text-9xl` apply their large desktop size on ALL viewports,
+   producing oversized text on phones. These plain (unlayered) rules override
+   Tailwind's @layer utilities and make the size fluid via clamp(): the desktop
+   maximum is preserved, while small screens scale down to a readable minimum.
+   T003 — typography/mobile fonts. */
+.text-4xl { font-size: clamp(1.75rem, 5vw, 2.25rem); }
+.text-5xl { font-size: clamp(2rem, 6vw, 3rem); }
+.text-6xl { font-size: clamp(2.25rem, 7vw, 3.75rem); }
+.text-7xl { font-size: clamp(2.5rem, 8vw, 4.5rem); }
+.text-8xl { font-size: clamp(3rem, 10vw, 6rem); }
+.text-9xl { font-size: clamp(3.5rem, 12vw, 8rem); }
+
 /* ===== Dashboard v2 Layout + Motion ===== */
 
 .dash { margin-top: 18px; }

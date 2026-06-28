@@ -179,7 +179,7 @@ export default function TglpNavbar() {
             <span className="text-xl md:text-2xl font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]" data-testid="text-brand-name">
               MyMentalHealthBuddy
             </span>
-            <span className="text-sm md:text-base font-medium tracking-wide text-[var(--glp-sage)]">
+            <span className="text-sm md:text-base font-medium tracking-wide text-[var(--glp-sage-deep)]">
               by The Genuine Love Project
             </span>
           </div>
@@ -224,7 +224,7 @@ export default function TglpNavbar() {
                   className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium transition-all hover:opacity-90"
                   style={{
                     border: "1px solid var(--glp-gold, #d4a843)",
-                    color: "var(--glp-gold-dark, #a07d2e)",
+                    color: "var(--glp-sage-deep)",
                   }}
                   data-testid="link-navbar-upgrade"
                 >
@@ -409,22 +409,24 @@ export default function TglpNavbar() {
               </>
             ) : (
               <>
-                <a
+                <Link
                   href="/login"
                   className="block text-center px-4 py-3 rounded-xl text-sm font-medium transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep-20)]"
+                  onClick={() => setMobileMenuOpen(false)}
                   data-testid="link-mobile-signin"
                 >
                   Sign In
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/login"
                   className="btn-header-cta flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-[var(--glp-deep-teal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 shadow-[0_12px_30px_rgba(212,175,55,0.24)]"
                   style={{ background: "var(--glp-gold-gradient)" }}
+                  onClick={() => setMobileMenuOpen(false)}
                   data-testid="link-mobile-get-started"
                 >
                   <Sparkles className="w-4 h-4" />
                   Get Started Free
-                </a>
+                </Link>
               </>
             )}
           </div>

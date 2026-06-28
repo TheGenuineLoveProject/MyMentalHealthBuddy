@@ -1547,7 +1547,7 @@ export default function App() {
               </Route>
 
               {/* Batch 11 - Public Pages (P241, P248-P249) */}
-              <Route path="/pricing-page" component={PricingPage} />
+              <Route path="/pricing-page">{() => <Redirect to="/pricing" />}</Route>
               <Route path="/legal-info" component={LegalPage} />
               <Route path="/help/billing" component={RefundHelp} />
 

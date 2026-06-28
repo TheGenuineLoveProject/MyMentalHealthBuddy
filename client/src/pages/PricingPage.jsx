@@ -154,7 +154,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <a href={plan.id === "free" ? "/login" : "/pricing"}>
+                <a href={plan.id === "free" ? "/login" : `/account/billing?plan=${plan.id}&period=${billingPeriod}`}>
                   <Button 
                     className="w-full min-h-[48px] px-6 py-3 text-base font-semibold rounded-lg" 
                     variant={plan.popular ? "default" : "outline"}

@@ -187,7 +187,7 @@ export default function Pricing() {
       } else {
         toast({
           title: "Checkout unavailable",
-          description: data.error || "Unable to start checkout. Please try again.",
+          description: data.error || data.message || "Unable to start checkout. Please try again.",
           variant: "destructive"
         });
         setCheckingOut(false);
