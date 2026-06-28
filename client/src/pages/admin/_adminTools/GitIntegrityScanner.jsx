@@ -64,27 +64,27 @@ export default function GitIntegrityScanner() {
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 mb-2">
           <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-branch">
             <div className="text-sm font-bold text-violet-600 truncate">{gitData.checks?.branch || '—'}</div>
-            <div className="text-[9px] text-muted-foreground">Branch</div>
+            <div className="text-xs text-muted-foreground">Branch</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-commits">
             <div className="text-lg font-bold text-blue-600">{gitData.checks?.commitCount || 0}</div>
-            <div className="text-[9px] text-muted-foreground">Commits</div>
+            <div className="text-xs text-muted-foreground">Commits</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-changes">
             <div className={`text-lg font-bold ${(gitData.checks?.totalChanges || 0) > 10 ? 'text-amber-500' : 'text-green-600'}`}>{gitData.checks?.totalChanges || 0}</div>
-            <div className="text-[9px] text-muted-foreground">Changes</div>
+            <div className="text-xs text-muted-foreground">Changes</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-modified">
             <div className="text-lg font-bold text-orange-500">{gitData.checks?.modifiedFiles || 0}</div>
-            <div className="text-[9px] text-muted-foreground">Modified</div>
+            <div className="text-xs text-muted-foreground">Modified</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-untracked">
             <div className={`text-lg font-bold ${(gitData.checks?.untrackedFiles || 0) > 5 ? 'text-red-500' : 'text-gray-500'}`}>{gitData.checks?.untrackedFiles || 0}</div>
-            <div className="text-[9px] text-muted-foreground">Untracked</div>
+            <div className="text-xs text-muted-foreground">Untracked</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-size">
             <div className="text-sm font-bold text-gray-600">{gitData.checks?.repoSize || '—'}</div>
-            <div className="text-[9px] text-muted-foreground">Repo Size</div>
+            <div className="text-xs text-muted-foreground">Repo Size</div>
           </div>
         </div>
       )}
@@ -94,7 +94,7 @@ export default function GitIntegrityScanner() {
           {gitData.checks?.lastCommit && gitData.checks.lastCommit !== 'unknown' && (
             <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
               <div className="text-xs font-semibold mb-1 flex items-center gap-1.5"><Clipboard size={12} /> Last Commit</div>
-              <div className="text-[11px] font-mono text-muted-foreground break-all">{gitData.checks.lastCommit}</div>
+              <div className="text-xs font-mono text-muted-foreground break-all">{gitData.checks.lastCommit}</div>
             </div>
           )}
           <div className="flex items-center gap-2">
@@ -109,9 +109,9 @@ export default function GitIntegrityScanner() {
           {repairResult && (
             <div className={`p-3 rounded-lg border ${repairResult.success ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/15'}`}>
               <div className="text-xs font-semibold mb-1">{repairResult.success ? 'Repair Successful' : 'Repair Issues Found'}</div>
-              <div className="text-[11px] text-muted-foreground">{repairResult.message}</div>
+              <div className="text-xs text-muted-foreground">{repairResult.message}</div>
               {repairResult.actions?.map((a, i) => (
-                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+                <div key={i} className="text-xs font-mono text-muted-foreground mt-0.5">→ {a}</div>
               ))}
             </div>
           )}
