@@ -78,10 +78,10 @@ function CopyButton({ text, label }) {
     } catch { /* clipboard not available */ }
   };
   return (
-    <button onClick={handleCopy} className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-[rgba(250,249,247,0.86)] dark:bg-[var(--glp-deep-teal)] border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-copy-${label}`}>
+    <Button onClick={handleCopy} variant="secondary" size="sm" className="min-h-[32px] px-2 py-1 text-xs" data-testid={`button-copy-${label}`}>
       {copied ? <CheckCircle2 className="w-3 h-3 text-[var(--glp-sage)]" /> : <Copy className="w-3 h-3" />}
       {copied ? "Copied!" : `Copy ${label}`}
-    </button>
+    </Button>
   );
 }
 
@@ -372,15 +372,15 @@ function PipelineBoard({ grouped, actionLoading, transitionPost, onEdit }) {
                     </div>
                     <div className="flex items-center gap-1">
                       {col.status !== "posted" && (
-                        <button onClick={() => onEdit(post)} className="text-xs px-2 py-1 rounded bg-[rgba(143,191,159,0.28)] dark:bg-[rgba(143,191,159,0.18)] hover:bg-[rgba(143,191,159,0.32)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-edit-${post.id}`}>
+                        <Button onClick={() => onEdit(post)} variant="ghost" size="sm" className="min-h-[32px] px-2 py-1 text-xs" data-testid={`button-edit-${post.id}`}>
                           <Edit className="w-3 h-3" />
-                        </button>
+                        </Button>
                       )}
                       {col.nextAction && (
-                        <button onClick={() => handleAction(post.id, col.nextAction, post)} disabled={actionLoading === post.id} className="text-xs px-2 py-1 rounded bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] hover:bg-[var(--glp-charcoal)] disabled:opacity-50 transition-colors flex items-center gap-1" data-testid={`button-${col.nextAction}-${post.id}`}>
+                        <Button onClick={() => handleAction(post.id, col.nextAction, post)} disabled={actionLoading === post.id} variant="primary" size="sm" className="min-h-[32px] px-2 py-1 text-xs" data-testid={`button-${col.nextAction}-${post.id}`}>
                           {actionLoading === post.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <ArrowRight className="w-3 h-3" />}
                           {col.nextLabel}
-                        </button>
+                        </Button>
                       )}
                     </div>
                   </div>
@@ -542,9 +542,9 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{isEdit ? "Edit Post" : "Create New Post"}</h2>
         <div className="flex items-center gap-2">
-          <button onClick={() => setShowTemplates(!showTemplates)} className="px-3 py-1.5 text-xs rounded-lg bg-[rgba(244,199,195,0.38)] dark:bg-[rgba(244,199,195,0.16)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[rgba(244,199,195,0.48)] dark:hover:bg-[rgba(244,199,195,0.22)] transition-colors flex items-center gap-1" data-testid="button-templates">
+          <Button onClick={() => setShowTemplates(!showTemplates)} variant="secondary" size="sm" className="min-h-[34px] px-3 py-1.5 text-xs" data-testid="button-templates">
             <Sparkles className="w-3 h-3" /> Pillar Templates
-          </button>
+          </Button>
           <button onClick={onCancel} aria-label="Close editor" title="Close editor" className="p-1.5 rounded-lg hover:bg-[rgba(143,191,159,0.18)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid="button-cancel-editor"><X className="w-4 h-4" aria-hidden="true" /></button>
         </div>
       </div>
@@ -611,9 +611,9 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
         <textarea value={form.captions[activeCaption] || ""} onChange={e => updateCaption(activeCaption, e.target.value)} rows={3} placeholder={`${activeCaption} caption...`} className="w-full px-3 py-2 rounded-lg border border-[rgba(143,191,159,0.45)] dark:border-[rgba(143,191,159,0.32)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] resize-y" data-testid={`textarea-caption-${activeCaption}`} />
         <div className="flex items-center gap-2 mt-1">
           <CopyButton text={form.captions[activeCaption] || form.content} label={activeCaption} />
-          <button onClick={() => updateCaption(activeCaption, form.content)} className="text-xs px-2 py-1 rounded bg-[rgba(143,191,159,0.18)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] hover:bg-[rgba(143,191,159,0.28)] dark:hover:bg-[var(--glp-charcoal)] transition-colors" data-testid={`button-fill-caption-${activeCaption}`}>
+          <Button onClick={() => updateCaption(activeCaption, form.content)} variant="ghost" size="sm" className="min-h-[32px] px-2 py-1 text-xs" data-testid={`button-fill-caption-${activeCaption}`}>
             Fill from main content
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -674,9 +674,9 @@ function PostEditor({ post, campaigns, onSave, onCancel }) {
               <input type="checkbox" checked={!!form.crisisLinkRequired} onChange={e => updateField("crisisLinkRequired", e.target.checked ? 1 : 0)} className="rounded" data-testid="checkbox-crisis" />
               Crisis link required
             </label>
-            <button onClick={runSafetyCheck} className="text-xs px-2 py-1 rounded bg-[rgba(212,175,55,0.18)] dark:bg-[rgba(212,175,55,0.18)] text-[var(--glp-charcoal)] dark:text-[var(--glp-gold)] hover:bg-[rgba(212,175,55,0.26)] dark:hover:bg-[rgba(212,175,55,0.22)] transition-colors flex items-center gap-1" data-testid="button-safety-check">
+            <Button onClick={runSafetyCheck} variant="gold" size="sm" className="min-h-[32px] px-2 py-1 text-xs" data-testid="button-safety-check">
               <Shield className="w-3 h-3" /> Run Safety Check
-            </button>
+            </Button>
           </div>
           {safetyResult && (
             <div className={`mt-1 p-2 rounded text-xs ${safetyResult.pass ? "bg-[rgba(143,191,159,0.18)] dark:bg-[rgba(143,191,159,0.12)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" : "bg-[rgba(244,199,195,0.26)] dark:bg-[rgba(244,199,195,0.14)] text-[#9F3434] dark:text-[var(--glp-blossom)]"}`} data-testid="text-safety-result">
