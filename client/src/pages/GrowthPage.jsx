@@ -169,7 +169,7 @@ function MirrorStat({ label, value, hint, icon: Icon, testid }) {
     >
       <div className="flex items-center gap-2 mb-2 text-slate-500 dark:text-slate-400">
         <Icon className="w-4 h-4" />
-        <span className="text-[11px] tracking-wider uppercase">{label}</span>
+        <span className="text-xs tracking-wider uppercase">{label}</span>
       </div>
       <div className="font-playfair text-3xl text-slate-800 dark:text-slate-100" data-testid={`${testid}-value`}>
         {value}
@@ -211,7 +211,7 @@ function ReflectionMirror({ data }) {
       ) : (
         <div className="grid md:grid-cols-2 gap-4">
           <div className="rounded-xl bg-white/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 p-5" data-testid="reflection-feelings">
-            <div className="text-[11px] tracking-wider uppercase text-slate-500 dark:text-slate-400 mb-2">Feelings showing up most</div>
+            <div className="text-xs tracking-wider uppercase text-slate-500 dark:text-slate-400 mb-2">Feelings showing up most</div>
             {dominant.length === 0 ? (
               <p className="text-sm text-slate-500">No single feeling dominates yet — that mix is human.</p>
             ) : (
@@ -226,7 +226,7 @@ function ReflectionMirror({ data }) {
             )}
           </div>
           <div className="rounded-xl bg-white/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 p-5" data-testid="reflection-themes">
-            <div className="text-[11px] tracking-wider uppercase text-slate-500 dark:text-slate-400 mb-2">Threads in your reflections</div>
+            <div className="text-xs tracking-wider uppercase text-slate-500 dark:text-slate-400 mb-2">Threads in your reflections</div>
             {themes.length === 0 ? (
               <p className="text-sm text-slate-500">No clear themes yet. They'll emerge with time.</p>
             ) : (
@@ -255,7 +255,7 @@ function ReflectionMirror({ data }) {
           “{observation}”
         </p>
       )}
-      <p className="mt-3 text-[11px] text-slate-400">
+      <p className="mt-3 text-xs text-slate-400">
         This is a reflection — not a diagnosis.
       </p>
     </section>
@@ -348,7 +348,7 @@ function MilestoneCard({ milestone }) {
           data-testid={`milestone-${milestone.id}-progress`}
         />
       </div>
-      <div className="mt-1 text-[10px] text-slate-400 text-right">
+      <div className="mt-1 text-xs text-slate-400 text-right">
         {milestone.progress}/{milestone.target}
       </div>
     </div>
@@ -560,7 +560,7 @@ export default function GrowthPage() {
               Some days you'll leap forward, others you'll need to rest. Both belong to the journey. Honor wherever you are today.
             </p>
             {data?.privacy?.consent && (
-              <p className="mt-4 text-[11px] text-slate-500 dark:text-slate-500" data-testid="text-consent">
+              <p className="mt-4 text-xs text-slate-500 dark:text-slate-500" data-testid="text-consent">
                 {data.privacy.consent}
               </p>
             )}
