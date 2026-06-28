@@ -752,7 +752,7 @@ function RouteStatusPanel() {
                   {row.label}
                   {row.protected && (
                     <span
-                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide"
+                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-semibold uppercase tracking-wide"
                       style={{
                         background: "var(--glp-sage-15)",
                         color: "var(--glp-sage-deep)",
@@ -776,13 +776,13 @@ function RouteStatusPanel() {
               >
                 <div>{row.status === 0 ? "—" : row.status} · {row.ms}ms</div>
                 {row.protected && row.state === "ok" && (
-                  <div className="flex items-center justify-end gap-1 mt-0.5 text-[10px]" style={{ color: "var(--glp-sage-deep)" }}>
+                  <div className="flex items-center justify-end gap-1 mt-0.5 text-xs" style={{ color: "var(--glp-sage-deep)" }}>
                     <ShieldCheck className="w-3 h-3" aria-hidden="true" />
                     <span>secured</span>
                   </div>
                 )}
                 {row.protected && row.state === "fail" && row.status >= 200 && row.status < 300 && (
-                  <div className="flex items-center justify-end gap-1 mt-0.5 text-[10px]" style={{ color: "var(--glp-rose-deep, #7a3041)" }}>
+                  <div className="flex items-center justify-end gap-1 mt-0.5 text-xs" style={{ color: "var(--glp-rose-deep, #7a3041)" }}>
                     <ShieldAlert className="w-3 h-3" aria-hidden="true" />
                     <span>LEAK — auth bypassed</span>
                   </div>
