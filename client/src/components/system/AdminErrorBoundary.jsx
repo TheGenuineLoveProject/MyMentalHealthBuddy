@@ -66,15 +66,15 @@ export class AdminErrorBoundary extends React.Component {
           </p>
           {showDetails && (
             <details className="mt-2" data-testid={`details-panel-error-${name}`}>
-              <summary className="text-[11px] cursor-pointer text-amber-700 dark:text-amber-300 font-medium">
+              <summary className="text-xs cursor-pointer text-amber-700 dark:text-amber-300 font-medium">
                 Technical details
               </summary>
-              <p className="mt-1 text-[11px] font-mono text-red-700 dark:text-red-400 break-all">
+              <p className="mt-1 text-xs font-mono text-red-700 dark:text-red-400 break-all">
                 {(this.state.error && (this.state.error.message || String(this.state.error))) ||
                   "Unknown error"}
               </p>
               {this.state.info?.componentStack ? (
-                <pre className="mt-1 p-2 rounded bg-background border border-amber-100 dark:border-amber-800 text-[10px] whitespace-pre-wrap overflow-x-auto text-amber-900 dark:text-amber-200">
+                <pre className="mt-1 p-2 rounded bg-background border border-amber-100 dark:border-amber-800 text-xs whitespace-pre-wrap overflow-x-auto text-amber-900 dark:text-amber-200">
                   {this.state.info.componentStack.trim()}
                 </pre>
               ) : null}

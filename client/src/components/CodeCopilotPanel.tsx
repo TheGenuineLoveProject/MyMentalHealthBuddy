@@ -67,7 +67,7 @@ const CodeCopilotPanel = ({ name }: CodeCopilotPanelProps) => {
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
                 Build Status Helper
               </span>
-              <span className="text-[10px] text-slate-300">SAFE • HUMAN-LED</span>
+              <span className="text-xs text-slate-300">SAFE • HUMAN-LED</span>
             </div>
 
             <div className="space-y-2 text-xs text-slate-100">
@@ -81,13 +81,13 @@ const CodeCopilotPanel = ({ name }: CodeCopilotPanelProps) => {
                 ✅ Step 3:{" "}
                 <code className="font-mono">npm run build-and-start</code>
               </p>
-              <p className="pt-1 text-[11px] text-slate-300/90">
+              <p className="pt-1 text-xs text-slate-300/90">
                 If something fails, breathe, read the message slowly, and fix
                 one thing at a time. You&apos;re doing real engineering work. 💛
               </p>
             </div>
 
-            <div className="mt-4 flex items-center justify-between text-[11px] text-slate-300/90">
+            <div className="mt-4 flex items-center justify-between text-xs text-slate-300/90">
               <span>Guardian-aligned • No hidden automation</span>
               <span className="font-mono text-emerald-300">ROGER.dev</span>
             </div>
