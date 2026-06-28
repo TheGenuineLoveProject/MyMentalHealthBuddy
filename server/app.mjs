@@ -1,7 +1,6 @@
 import adminPublishingRoutes from "./routes/admin-publishing.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
 import authRoutes from "./routes/auth.mjs";
-import { registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
 import billingRoutes from "./routes/billing.mjs";
 import webhookRoutes from "./routes/webhook.mjs";
 process.on('uncaughtException', (err) => {
@@ -52,7 +51,6 @@ import userRoutes from "./routes/user.mjs";
 
 // ✅ OPTIONAL AUTH (FIXES authMiddleware error)
 import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
-import { requireAdult } from "./middleware/requireAdult.mjs";
 import adminRoutes from "./routes/admin.mjs";
 import adminBillingRoutes from "./routes/adminBilling.mjs";
 import platformEvolutionRoutes from "./routes/platform-evolution.mjs";
@@ -556,7 +554,6 @@ app.use("/api/streaks", streaksLimiter, optionalAuth, streaksRoutes);
 app.use("/api/billing", billingRoutes);
 app.use("/api/user", userRoutes);
 // Serve built React app in prod; in dev, attach Vite middleware for HMR/transform.
-const CLIENT_ROOT = path.join(__dirname, "..", "client");
 
 /* =========================================================
    FINAL VERIFIED SPA FALLBACK
