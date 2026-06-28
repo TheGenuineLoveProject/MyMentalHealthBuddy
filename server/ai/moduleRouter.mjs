@@ -1,4 +1,3 @@
-import { MODULES } from "./modules.mjs";
 
 // server/ai/moduleRouter.mjs
 //
