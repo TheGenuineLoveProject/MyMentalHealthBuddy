@@ -81,7 +81,7 @@ export default function AIKnowledgeBaseSummary({
                 <span className="text-xs font-bold">{name} AI</span>
               </div>
               <div className="text-lg font-bold">{stats.total}</div>
-              <div className="text-[10px] opacity-80">{stats.total} scenarios · {stats.fixes} auto-fixable · {stats.applied} active</div>
+              <div className="text-xs opacity-80">{stats.total} scenarios · {stats.fixes} auto-fixable · {stats.applied} active</div>
             </div>
           );
         })}
@@ -98,7 +98,7 @@ export default function AIKnowledgeBaseSummary({
             }`} data-testid={`kb-rec-${i}`}>
               {rec.level === 'critical' ? <AlertCircle size={12} /> : rec.level === 'warning' ? <AlertTriangle size={12} /> : rec.level === 'success' ? <CheckCircle size={12} /> : <Lightbulb size={12} />}
               <span className="flex-1">{rec.text}</span>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${rec.kb === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rec.kb === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+              <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${rec.kb === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rec.kb === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
                 {rec.kb}
               </span>
             </div>
@@ -111,19 +111,19 @@ export default function AIKnowledgeBaseSummary({
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
               <div className="text-lg font-bold text-indigo-600">{linkedCount}</div>
-              <div className="text-[10px] text-muted-foreground">Admin-Linked Tools</div>
+              <div className="text-xs text-muted-foreground">Admin-Linked Tools</div>
             </div>
             <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
               <div className="text-lg font-bold text-indigo-600">{severityCount}</div>
-              <div className="text-[10px] text-muted-foreground">Priority-Classified</div>
+              <div className="text-xs text-muted-foreground">Priority-Classified</div>
             </div>
             <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
               <div className="text-lg font-bold text-indigo-600">{totalScenarios}</div>
-              <div className="text-[10px] text-muted-foreground">Error Scenarios</div>
+              <div className="text-xs text-muted-foreground">Error Scenarios</div>
             </div>
             <div className="text-center p-2 rounded-lg bg-background border border-indigo-100 dark:border-indigo-800">
               <div className="text-lg font-bold text-indigo-600">{autoFixableCount}</div>
-              <div className="text-[10px] text-muted-foreground">Auto-Fixable</div>
+              <div className="text-xs text-muted-foreground">Auto-Fixable</div>
             </div>
           </div>
 
@@ -131,12 +131,12 @@ export default function AIKnowledgeBaseSummary({
             <div className="text-xs font-semibold mb-2">All Remediation Scenarios</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-48 overflow-y-auto">
               {Object.entries(AI_REMEDIATION).map(([key, rem]) => (
-                <div key={key} className="flex items-center gap-2 p-2 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[11px]" data-testid={`kb-scenario-${key}`}>
+                <div key={key} className="flex items-center gap-2 p-2 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`kb-scenario-${key}`}>
                   <span className="font-mono font-medium text-foreground/70 flex-1 truncate">{key}</span>
-                  <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${rem.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rem.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                  <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${rem.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rem.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
                     {rem.knowledgeBase}
                   </span>
-                  {rem.autoFixable && <span className="text-[9px] px-1 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 font-medium">Fix</span>}
+                  {rem.autoFixable && <span className="text-xs px-1 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 font-medium">Fix</span>}
                 </div>
               ))}
             </div>
