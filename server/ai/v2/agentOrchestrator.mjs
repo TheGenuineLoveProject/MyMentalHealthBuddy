@@ -51,13 +51,10 @@ import {
 import {
   AGENT_STATES,
   transitionAgentState,
-  getAgentState,
-  recentTransitions,
-  stateMachineSnapshot,
 } from "./agentState.mjs";
-import { evaluateEscalation, escalationConfig } from "./agentEscalation.mjs";
+import { evaluateEscalation } from "./agentEscalation.mjs";
 import { runConstitutionalGate } from "./constitutionalGate.mjs";
-import { wmRead, wmWrite, workingMemoryStatus } from "./agentWorkingMemory.mjs";
+import { wmRead, wmWrite } from "./agentWorkingMemory.mjs";
 import { withSpan } from "../../observability/spans.mjs";
 import { alertConstitutionalViolation } from "../../observability/safetyAlerts.mjs";
 
