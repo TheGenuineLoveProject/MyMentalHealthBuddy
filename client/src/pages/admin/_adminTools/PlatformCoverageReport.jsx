@@ -69,39 +69,39 @@ export default function PlatformCoverageReport({ toolResults }) {
       <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-admin-links">
           <div className="text-lg font-bold text-emerald-600">{linkCoverage}/{totalTools}</div>
-          <div className="text-[9px] text-muted-foreground">Admin Links</div>
+          <div className="text-xs text-muted-foreground">Admin Links</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-prioritized">
           <div className="text-lg font-bold text-orange-600">{sevCoverage}/{totalTools}</div>
-          <div className="text-[9px] text-muted-foreground">Classified</div>
+          <div className="text-xs text-muted-foreground">Classified</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-critical-count">
           <div className="text-lg font-bold text-red-500">{critCount}</div>
-          <div className="text-[9px] text-muted-foreground">Critical</div>
+          <div className="text-xs text-muted-foreground">Critical</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-high-count">
           <div className="text-lg font-bold text-amber-500">{highCount}</div>
-          <div className="text-[9px] text-muted-foreground">High</div>
+          <div className="text-xs text-muted-foreground">High</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-medium-count">
           <div className="text-lg font-bold text-blue-500">{medCount}</div>
-          <div className="text-[9px] text-muted-foreground">Medium</div>
+          <div className="text-xs text-muted-foreground">Medium</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-ai-scenarios">
           <div className="text-lg font-bold text-indigo-600">{remScenarios}</div>
-          <div className="text-[9px] text-muted-foreground">AI Scenarios</div>
+          <div className="text-xs text-muted-foreground">AI Scenarios</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-auto-fixable">
           <div className="text-lg font-bold text-purple-600">{autoFixable}</div>
-          <div className="text-[9px] text-muted-foreground">Auto-Fixable</div>
+          <div className="text-xs text-muted-foreground">Auto-Fixable</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-scan-coverage">
           <div className="text-lg font-bold text-blue-600">{scanCoverage}%</div>
-          <div className="text-[9px] text-muted-foreground">Scan Coverage</div>
+          <div className="text-xs text-muted-foreground">Scan Coverage</div>
         </div>
         <div className="text-center p-2 rounded-lg bg-background border border-rose-100 dark:border-rose-800" data-testid="stat-normal-priority">
           <div className="text-lg font-bold text-gray-500">{normalCount}</div>
-          <div className="text-[9px] text-muted-foreground">Unclassified</div>
+          <div className="text-xs text-muted-foreground">Unclassified</div>
         </div>
       </div>
 
@@ -118,7 +118,7 @@ export default function PlatformCoverageReport({ toolResults }) {
                   <div key={name} className={`p-3 rounded-lg border ${color}`} data-testid={`coverage-kb-${name.toLowerCase()}`}>
                     <div className="text-xs font-bold">{name}</div>
                     <div className="text-2xl font-bold">{count}</div>
-                    <div className="text-[10px] opacity-70">{Math.round((count / remScenarios) * 100)}% of scenarios</div>
+                    <div className="text-xs opacity-70">{Math.round((count / remScenarios) * 100)}% of scenarios</div>
                     <div className="w-full h-1 rounded-full bg-current/20 mt-1.5 overflow-hidden">
                       <div className="h-full rounded-full bg-current/60" style={{ width: `${(count / remScenarios) * 100}%` }} />
                     </div>
@@ -136,7 +136,7 @@ export default function PlatformCoverageReport({ toolResults }) {
               {categoryBreakdown.map((cat, i) => (
                 <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`coverage-cat-${i}`}>
                   <span className="font-medium flex-1 truncate">{cat.title}</span>
-                  <div className="flex items-center gap-3 text-[10px]">
+                  <div className="flex items-center gap-3 text-xs">
                     <span className="text-emerald-600" title="Admin-linked">{cat.linked}/{cat.total} linked</span>
                     <span className="text-orange-500" title="Prioritized">{cat.prioritized} prioritized</span>
                     <span className="text-blue-600" title="Scanned">{cat.checked}/{cat.total} scanned</span>
@@ -152,7 +152,7 @@ export default function PlatformCoverageReport({ toolResults }) {
 
           <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
             <div className="text-xs font-semibold mb-2">Coverage Summary</div>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-[11px]">
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
               <div>
                 <div className="text-muted-foreground mb-1">Admin Linking</div>
                 <div className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
@@ -199,7 +199,7 @@ export default function PlatformCoverageReport({ toolResults }) {
               {[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].map(cmd => {
                 const count = Object.values(AI_REMEDIATION).filter(r => r.fixCommand === cmd).length;
                 return (
-                  <span key={cmd} className="inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 font-mono" data-testid={`fix-summary-${cmd}`}>
+                  <span key={cmd} className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 font-mono" data-testid={`fix-summary-${cmd}`}>
                     <Terminal size={9} /> {cmd} <span className="font-bold">({count})</span>
                   </span>
                 );
@@ -214,19 +214,19 @@ export default function PlatformCoverageReport({ toolResults }) {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
               <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-pass">
                 <div className="text-xl font-bold text-green-600">{healthyCount}</div>
-                <div className="text-[9px] text-muted-foreground">Pass</div>
+                <div className="text-xs text-muted-foreground">Pass</div>
               </div>
               <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fail">
                 <div className="text-xl font-bold text-red-500">{errorCount}</div>
-                <div className="text-[9px] text-muted-foreground">Fail</div>
+                <div className="text-xs text-muted-foreground">Fail</div>
               </div>
               <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-unchecked">
                 <div className="text-xl font-bold text-gray-400">{totalTools - checkedCount}</div>
-                <div className="text-[9px] text-muted-foreground">Unchecked</div>
+                <div className="text-xs text-muted-foreground">Unchecked</div>
               </div>
               <div className="text-center p-2 rounded-lg bg-background border" data-testid="summary-fix-cmds">
                 <div className="text-xl font-bold text-purple-600">{[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].length}</div>
-                <div className="text-[9px] text-muted-foreground">Fix Commands</div>
+                <div className="text-xs text-muted-foreground">Fix Commands</div>
               </div>
             </div>
             {(() => {
@@ -240,21 +240,21 @@ export default function PlatformCoverageReport({ toolResults }) {
               });
               return (
                 <div className="mb-3">
-                  <div className="text-[10px] font-semibold mb-1.5">Latency Distribution</div>
+                  <div className="text-xs font-semibold mb-1.5">Latency Distribution</div>
                   <div className="flex gap-1.5">
-                    <div className="flex-1 text-center p-1.5 rounded bg-green-100 dark:bg-green-900/30 text-[10px]" data-testid="latency-fast">
+                    <div className="flex-1 text-center p-1.5 rounded bg-green-100 dark:bg-green-900/30 text-xs" data-testid="latency-fast">
                       <div className="font-bold text-green-700 dark:text-green-400">{latencyBands.fast}</div>
                       <div className="text-green-600 dark:text-green-500">&lt;500ms</div>
                     </div>
-                    <div className="flex-1 text-center p-1.5 rounded bg-blue-100 dark:bg-blue-900/30 text-[10px]" data-testid="latency-normal">
+                    <div className="flex-1 text-center p-1.5 rounded bg-blue-100 dark:bg-blue-900/30 text-xs" data-testid="latency-normal">
                       <div className="font-bold text-blue-700 dark:text-blue-400">{latencyBands.normal}</div>
                       <div className="text-blue-600 dark:text-blue-500">500-2s</div>
                     </div>
-                    <div className="flex-1 text-center p-1.5 rounded bg-amber-100 dark:bg-amber-900/30 text-[10px]" data-testid="latency-slow">
+                    <div className="flex-1 text-center p-1.5 rounded bg-amber-100 dark:bg-amber-900/30 text-xs" data-testid="latency-slow">
                       <div className="font-bold text-amber-700 dark:text-amber-400">{latencyBands.slow}</div>
                       <div className="text-amber-600 dark:text-amber-500">2-5s</div>
                     </div>
-                    <div className="flex-1 text-center p-1.5 rounded bg-red-100 dark:bg-red-900/30 text-[10px]" data-testid="latency-timeout">
+                    <div className="flex-1 text-center p-1.5 rounded bg-red-100 dark:bg-red-900/30 text-xs" data-testid="latency-timeout">
                       <div className="font-bold text-red-700 dark:text-red-400">{latencyBands.timeout}</div>
                       <div className="text-red-600 dark:text-red-500">&gt;5s</div>
                     </div>
@@ -271,15 +271,15 @@ export default function PlatformCoverageReport({ toolResults }) {
             </div>
             <div className="space-y-1 max-h-48 overflow-y-auto">
               {allTools.filter(t => !TOOL_ADMIN_LINKS[t.id] || !TOOL_SEVERITY[t.id]).map(t => (
-                <div key={t.id} className="flex items-center gap-2 text-[10px] p-1.5 rounded bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-800" data-testid={`audit-gap-${t.id}`}>
+                <div key={t.id} className="flex items-center gap-2 text-xs p-1.5 rounded bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-800" data-testid={`audit-gap-${t.id}`}>
                   <AlertTriangle size={10} className="text-amber-500 shrink-0" />
                   <span className="font-mono font-medium">{t.id}</span>
-                  {!TOOL_ADMIN_LINKS[t.id] && <span className="text-amber-600 text-[9px] px-1 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30">missing admin link</span>}
-                  {!TOOL_SEVERITY[t.id] && <span className="text-orange-600 text-[9px] px-1 py-0.5 rounded bg-orange-100 dark:bg-orange-900/30">unclassified severity</span>}
+                  {!TOOL_ADMIN_LINKS[t.id] && <span className="text-amber-600 text-xs px-1 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30">missing admin link</span>}
+                  {!TOOL_SEVERITY[t.id] && <span className="text-orange-600 text-xs px-1 py-0.5 rounded bg-orange-100 dark:bg-orange-900/30">unclassified severity</span>}
                 </div>
               ))}
               {allTools.filter(t => !TOOL_ADMIN_LINKS[t.id] || !TOOL_SEVERITY[t.id]).length === 0 && (
-                <div className="text-[11px] text-green-600 flex items-center gap-1.5 p-2">
+                <div className="text-xs text-green-600 flex items-center gap-1.5 p-2">
                   <CheckCircle2 size={12} /> All {totalTools} tools have admin links and severity classification
                 </div>
               )}
@@ -322,12 +322,12 @@ function OptimizeAllButton() {
       {result && (
         <div className="mt-2 space-y-1 max-h-32 overflow-y-auto">
           {result.actions?.map((a, i) => (
-            <div key={i} className="text-[10px] p-1 rounded bg-background border flex items-center gap-1.5" data-testid={`optimize-result-${i}`}>
+            <div key={i} className="text-xs p-1 rounded bg-background border flex items-center gap-1.5" data-testid={`optimize-result-${i}`}>
               {a.startsWith('✓') ? <CheckCircle2 size={9} className="text-green-500 shrink-0" /> : a.startsWith('✗') ? <XCircle size={9} className="text-red-500 shrink-0" /> : <Zap size={9} className="text-amber-500 shrink-0" />}
               <span className="font-mono">{a}</span>
             </div>
           ))}
-          <div className="text-[10px] font-semibold text-emerald-600 mt-1">{result.message}</div>
+          <div className="text-xs font-semibold text-emerald-600 mt-1">{result.message}</div>
         </div>
       )}
     </div>
