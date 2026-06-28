@@ -45,15 +45,15 @@
  * ────────────────────────────────────────────────────────────────────── */
 .canva-landing {
   /* Surface */
-  --glp-paper: #F6F1E8;
+  --glp-paper: #FAF9F7;
   --glp-paper-98: #F6F1E8;
   --glp-ink: rgb(22, 58, 54);
 
   /* Brand line — shifted to HX-OS vNEXT */
-  --glp-sage: rgb(143, 191, 159);
+  --glp-sage: #8FBF9F;
   --glp-sage-deep: rgb(47, 93, 93);
   --glp-rose: #C4787A;
-  --glp-blush: #C4787A;
+  --glp-blush: #F4C7C3;
 
   /* Alpha derivatives — recomputed from new sage rgb(143,191,159) */
   --glp-sage-10: rgba(143, 191, 159, 0.10);
