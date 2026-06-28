@@ -279,37 +279,37 @@ export default function AIRepairCenter({ toolResults, runHealthCheck, runAllChec
                           <issue.icon size={13} className={issue.result.status === 'error' ? 'text-red-500' : 'text-amber-500'} />
                           <span className="text-xs font-medium">{issue.label}</span>
                           {issue.severity !== 'normal' && (
-                            <span className={`text-[9px] px-1 py-0.5 rounded font-bold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+                            <span className={`text-xs px-1 py-0.5 rounded font-bold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
                               {issue.severity.toUpperCase()}
                             </span>
                           )}
                         </div>
                         <div className="flex items-center gap-1">
                           {rem?.knowledgeBase && (
-                            <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${rem.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rem.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                            <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${rem.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : rem.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
                               {rem.knowledgeBase}
                             </span>
                           )}
                           {rem?.autoFixable && (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 font-medium">Auto-Fix</span>
+                            <span className="text-xs px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 font-medium">Auto-Fix</span>
                           )}
                         </div>
                       </div>
-                      <p className="text-[11px] text-muted-foreground mb-1.5 leading-relaxed">{rem?.suggestion}</p>
+                      <p className="text-xs text-muted-foreground mb-1.5 leading-relaxed">{rem?.suggestion}</p>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 text-[10px]">
+                        <div className="flex items-center gap-1 text-xs">
                           <Wrench size={10} className="text-blue-500" />
                           <span className="font-medium text-muted-foreground">{rem?.action}</span>
                         </div>
                         {logEntry && (
-                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${logEntry.status === 'fixed' ? 'bg-green-100 text-green-600' : logEntry.status === 'failed' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${logEntry.status === 'fixed' ? 'bg-green-100 text-green-600' : logEntry.status === 'failed' ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
                             {logEntry.status === 'running' ? 'Repairing...' : logEntry.status === 'fixed' ? 'Fixed' : 'Needs Manual Fix'}
                           </span>
                         )}
                         {!logEntry && (
                           <button
                             onClick={() => runHealthCheck(issue)}
-                            className="text-[10px] px-2 py-0.5 rounded border border-gray-200 dark:border-gray-700 hover:bg-muted transition-colors flex items-center gap-1"
+                            className="text-xs px-2 py-0.5 rounded border border-gray-200 dark:border-gray-700 hover:bg-muted transition-colors flex items-center gap-1"
                             data-testid={`button-repair-retry-${issue.id}`}
                           >
                             <RotateCcw size={9} /> Retry
@@ -350,7 +350,7 @@ export default function AIRepairCenter({ toolResults, runHealthCheck, runAllChec
                   </div>
                   <div className="space-y-1 max-h-32 overflow-y-auto">
                     {repairLog.map((entry, i) => (
-                      <div key={i} className="text-[10px] font-mono flex items-center gap-2">
+                      <div key={i} className="text-xs font-mono flex items-center gap-2">
                         <span className="text-muted-foreground">{entry.time}</span>
                         <span className={entry.status === 'fixed' ? 'text-green-600' : entry.status === 'failed' ? 'text-red-500' : 'text-blue-500'}>
                           [{entry.status.toUpperCase()}]
@@ -372,7 +372,7 @@ export default function AIRepairCenter({ toolResults, runHealthCheck, runAllChec
                     const scenarios = Object.entries(AI_REMEDIATION).filter(([, r]) => r.fixCommand === cmd);
                     const kbs = [...new Set(scenarios.map(([, r]) => r.knowledgeBase))];
                     return (
-                      <div key={cmd} className="p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800 text-[10px]" data-testid={`fix-cmd-${cmd}`}>
+                      <div key={cmd} className="p-2 rounded-lg bg-background border border-purple-100 dark:border-purple-800 text-xs" data-testid={`fix-cmd-${cmd}`}>
                         <div className="font-mono font-bold text-purple-600 mb-0.5">{cmd}</div>
                         <div className="text-muted-foreground">{scenarios.length} scenario{scenarios.length !== 1 ? 's' : ''} · {kbs.join(', ')}</div>
                       </div>
