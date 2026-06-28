@@ -67,25 +67,25 @@ export default function PlatformIntegrityDeepScan() {
             <div className={`text-lg font-bold ${scanData.integrity?.database?.connected ? 'text-green-600' : 'text-red-500'}`}>
               {scanData.integrity?.database?.connected ? 'Connected' : 'Down'}
             </div>
-            <div className="text-[9px] text-muted-foreground">Database ({scanData.integrity?.database?.tableCount || 0} tables)</div>
+            <div className="text-xs text-muted-foreground">Database ({scanData.integrity?.database?.tableCount || 0} tables)</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-services">
             <div className="text-lg font-bold text-blue-600">
               {Object.values(scanData.integrity?.services || {}).filter(Boolean).length}/4
             </div>
-            <div className="text-[9px] text-muted-foreground">Services Active</div>
+            <div className="text-xs text-muted-foreground">Services Active</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-env">
             <div className={`text-lg font-bold ${(scanData.integrity?.env?.criticalMissing || 0) === 0 ? 'text-green-600' : 'text-red-500'}`}>
               {(scanData.integrity?.env?.criticalMissing || 0) === 0 ? 'Complete' : `${scanData.integrity?.env?.criticalMissing} Missing`}
             </div>
-            <div className="text-[9px] text-muted-foreground">Critical Env Vars</div>
+            <div className="text-xs text-muted-foreground">Critical Env Vars</div>
           </div>
           <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-memory">
             <div className={`text-lg font-bold ${(scanData.integrity?.memory?.heapPercent || 0) < 80 ? 'text-green-600' : 'text-amber-500'}`}>
               {scanData.integrity?.memory?.heapPercent || 0}%
             </div>
-            <div className="text-[9px] text-muted-foreground">Heap ({scanData.integrity?.memory?.heapUsedMB || 0}MB)</div>
+            <div className="text-xs text-muted-foreground">Heap ({scanData.integrity?.memory?.heapUsedMB || 0}MB)</div>
           </div>
         </div>
       )}
@@ -98,7 +98,7 @@ export default function PlatformIntegrityDeepScan() {
               {Object.entries(scanData.integrity?.services || {}).map(([name, active]) => (
                 <div key={name} className={`p-2 rounded-lg border text-center ${active ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/15'}`} data-testid={`service-${name}`}>
                   <div className="text-xs font-semibold capitalize">{name}</div>
-                  <div className={`text-[10px] ${active ? 'text-green-600' : 'text-red-500'}`}>{active ? 'Active' : 'Not Configured'}</div>
+                  <div className={`text-xs ${active ? 'text-green-600' : 'text-red-500'}`}>{active ? 'Active' : 'Not Configured'}</div>
                 </div>
               ))}
             </div>
@@ -108,14 +108,14 @@ export default function PlatformIntegrityDeepScan() {
             <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><Key size={12} /> Environment Variables</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
               {Object.entries(scanData.integrity?.env?.critical || {}).map(([key, set]) => (
-                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`env-${key}`}>
                   {set ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : <AlertCircle size={10} className="text-red-500 flex-shrink-0" />}
                   <span className="font-mono truncate">{key}</span>
                   <span className={`ml-auto font-semibold ${set ? 'text-green-600' : 'text-red-500'}`}>{set ? 'SET' : 'MISSING'}</span>
                 </div>
               ))}
               {Object.entries(scanData.integrity?.env?.optional || {}).map(([key, set]) => (
-                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-xs" data-testid={`env-${key}`}>
                   {set ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
                   <span className="font-mono truncate">{key}</span>
                   <span className={`ml-auto font-semibold ${set ? 'text-green-600' : 'text-muted-foreground'}`}>{set ? 'SET' : 'optional'}</span>
@@ -129,7 +129,7 @@ export default function PlatformIntegrityDeepScan() {
               <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><HardDrive size={12} /> Database Tables ({scanData.integrity.database.tableCount})</div>
               <div className="flex flex-wrap gap-1.5">
                 {scanData.integrity.database.tables.map(t => (
-                  <span key={t} className="text-[10px] px-2 py-1 rounded-lg bg-background border border-gray-100 dark:border-gray-800 font-mono" data-testid={`table-${t}`}>{t}</span>
+                  <span key={t} className="text-xs px-2 py-1 rounded-lg bg-background border border-gray-100 dark:border-gray-800 font-mono" data-testid={`table-${t}`}>{t}</span>
                 ))}
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function PlatformIntegrityDeepScan() {
             <div className={`p-3 rounded-lg border ${scanData.envValidation.success ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/15'}`}>
               <div className="text-xs font-semibold mb-1">{scanData.envValidation.message}</div>
               {scanData.envValidation.actions?.map((a, i) => (
-                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+                <div key={i} className="text-xs font-mono text-muted-foreground mt-0.5">→ {a}</div>
               ))}
             </div>
           )}
