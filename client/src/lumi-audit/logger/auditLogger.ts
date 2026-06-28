@@ -92,7 +92,7 @@ export function logAuditEvent(event: AuditEvent): void {
   };
   if (typeof process !== "undefined" && process.env?.NODE_ENV === "development") {
     // eslint-disable-next-line no-console
-    console.log("[AUDIT]", sanitized);
+    console.debug("[AUDIT]", sanitized);
   }
 }
 

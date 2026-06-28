@@ -14,7 +14,7 @@
  *   const recorder = useVoiceRecorder();
  *   const stream = useVoiceStream({
  *     onTranscript: (_, full) => setTranscript(full),
- *     onComplete: (text) => console.log("Done:", text),
+ *     onComplete: (text) => console.debug("Done:", text),
  *   });
  * 
  *   const handleClick = async () => {

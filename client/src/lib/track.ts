@@ -5,7 +5,7 @@ const ANALYTICS_ENABLED = Boolean(import.meta.env.VITE_GA_MEASUREMENT_ID);
 
 function log(message: string, data?: unknown) {
   if (IS_DEV) {
-    console.log(`[Analytics] ${message}`, data || '');
+    console.debug(`[Analytics] ${message}`, data || '');
   }
 }
 
