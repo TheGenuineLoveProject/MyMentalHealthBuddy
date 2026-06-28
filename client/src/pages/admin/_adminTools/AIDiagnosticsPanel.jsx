@@ -80,11 +80,11 @@ export default function AIDiagnosticsPanel({ toolResults, runHealthCheck }) {
                   <div className="flex items-center gap-2">
                     <issue.icon size={14} className={issue.result.status === 'error' ? 'text-red-500' : 'text-amber-500'} />
                     <span className="text-sm font-medium">{issue.label}</span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                       {issue.result.label} · {issue.result.ms}ms
                     </span>
                     {issue.severity !== 'normal' && (
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
+                      <span className={`text-xs px-1.5 py-0.5 rounded font-semibold ${issue.severity === 'critical' ? 'bg-red-100 dark:bg-red-900/30 text-red-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'}`}>
                         {issue.severity.toUpperCase()}
                       </span>
                     )}
@@ -102,7 +102,7 @@ export default function AIDiagnosticsPanel({ toolResults, runHealthCheck }) {
                     <Brain size={11} className="mt-0.5 text-purple-500 flex-shrink-0" />
                     <span>{remediation?.suggestion}</span>
                     {remediation?.knowledgeBase && (
-                      <span className={`text-[9px] px-1 py-0.5 rounded font-medium flex-shrink-0 ${remediation.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : remediation.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
+                      <span className={`text-xs px-1 py-0.5 rounded font-medium flex-shrink-0 ${remediation.knowledgeBase === 'Codex' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600' : remediation.knowledgeBase === 'Perplexity' ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600'}`}>
                         {remediation.knowledgeBase}
                       </span>
                     )}
