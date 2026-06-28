@@ -1,5 +1,4 @@
 import express from "express";
-import crypto from "node:crypto";
 import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { optionalAuth, requireAuth, requireAdmin } from "../middleware/auth.mjs";
@@ -7,18 +6,12 @@ import { incrementSuccessfulSession } from "../utils/usageCounter.mjs";
 import { shouldShowPaywall, getPaywallReason } from "../ai/paywallPolicy.mjs";
 import { detectCrisis, CRISIS_RESPONSE } from "../ai/safety/crisis.mjs";
 import { safetyGuardInput } from "../ai/safety/guard.mjs";
-import { classifyCrisis } from "../ai/crisisClassifier.mjs";
-import { assessRisk } from "../lib/promptEngine.mjs";
 import {
-  upgradeTherapyReply,
   buildJournalSummary,
   buildCopingPlan,
 } from "../engine/therapyIntelligence.mjs";
 import { chatCompletion, isConfigured as aiConfigured, getOpenAIClient } from "../utils/aiClient.mjs";
-import { logger } from "../utils/logger.mjs";
-import { logAISuccess, logAIFailure, logAIFallback } from "../logging/aiLogger.mjs";
 import { orchestrateAIRequest } from "../ai/orchestrator.mjs";
-import { normalizeAIResponse } from "../ai/normalizeResponse.mjs";
 // v2.0 Prompt 3.2 gap closure: read-only Layer-1 awareness scan attached to req.
 // Never blocks the response path — purely instrumentation. The detection event
 // is later written by /api/awareness/detect; this middleware only enriches
@@ -28,8 +21,6 @@ import { withCriticalSpan, setObservabilityBaggage } from "../observability/span
 import { alertCrisisPipelineFailure } from "../observability/safetyAlerts.mjs";
 
 const router = express.Router();
-const MAX_INPUT_LENGTH = 4000;
-
 const SYSTEM_PROMPT = `
 You are a gentle, supportive mental health companion.
 Rules:
@@ -46,8 +37,6 @@ Always end with:
 const guestHistory = new Map();
 // Expose for session-boundary upgrade-history endpoint (read + clear only).
 globalThis.__guestHistory__ = guestHistory;
-const GUEST_HISTORY_MAX = 10;
-const GUEST_BUCKETS_MAX = 5000;
 
 function getGuestId(req) {
   const raw = req.headers?.["x-guest-id"];
@@ -57,96 +46,11 @@ function getGuestId(req) {
   return trimmed;
 }
 
-function pushGuestMessage(guestId, role, content) {
-  if (!guestId) return;
-
-  if (!guestHistory.has(guestId)) {
-    if (guestHistory.size >= GUEST_BUCKETS_MAX) {
-      const firstKey = guestHistory.keys().next().value;
-      guestHistory.delete(firstKey);
-    }
-    guestHistory.set(guestId, []);
-  }
-
-  const arr = guestHistory.get(guestId);
-  arr.push({ role, content });
-
-  if (arr.length > GUEST_HISTORY_MAX) {
-    arr.splice(0, arr.length - GUEST_HISTORY_MAX);
-  }
-}
-
 async function ensureAiMessagesTable() {
   // ai_messages table is managed by Drizzle schema:
   // id text NOT NULL (no default), user_id uuid NOT NULL, etc.
   // No-op here to avoid schema collision.
   return;
-}
-
-function newMessageId() {
-  return crypto.randomUUID();
-}
-
-function buildTherapyReply(message) {
-  const t = String(message || "").toLowerCase();
-
-  if (t.includes("anxious") || t.includes("panic") || t.includes("worried")) {
-    return [
-      "It sounds like your system may be on high alert right now.",
-      "Try this short grounding sequence:",
-      "1. Name 5 things you can see.",
-      "2. Name 4 things you can feel.",
-      "3. Take one slow breath in for 4 and out for 6.",
-      "What feels most uncertain right now?",
-      "",
-      "Take what serves you. You know yourself best."
-    ].join("\n");
-  }
-
-  if (t.includes("overwhelmed") || t.includes("too much") || t.includes("can't cope")) {
-    return [
-      "It makes sense that things feel heavy right now.",
-      "Let’s reduce the load into one small next step:",
-      "1. What is the heaviest piece?",
-      "2. What can wait?",
-      "3. What is one kind action you can take in the next 10 minutes?",
-      "",
-      "Take what serves you. You know yourself best."
-    ].join("\n");
-  }
-
-  if (t.includes("sad") || t.includes("down") || t.includes("hopeless")) {
-    return [
-      "I hear the heaviness in what you shared.",
-      "You do not have to solve everything in this moment.",
-      "Would it help to name what happened, what you’re feeling, and what you need most right now?",
-      "",
-      "Take what serves you. You know yourself best."
-    ].join("\n");
-  }
-
-  if (t.includes("angry") || t.includes("mad") || t.includes("furious") || t.includes("resentful")) {
-    return [
-      "Anger can be a signal that something important feels crossed.",
-      "Before acting, try pausing long enough to ask:",
-      "1. What boundary feels crossed?",
-      "2. What need is underneath this anger?",
-      "3. What response would protect you without harming you?",
-      "",
-      "Take what serves you. You know yourself best."
-    ].join("\n");
-  }
-
-  return [
-    "I’m here with you.",
-    "Would you like to explore this using one of these paths?",
-    "- what happened",
-    "- what I’m feeling",
-    "- what I need",
-    "- one small next step",
-    "",
-    "Take what serves you. You know yourself best."
-  ].join("\n");
 }
 
 // Lightweight GET probe so browser hits don't show "Cannot GET"
