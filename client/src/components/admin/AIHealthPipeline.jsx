@@ -140,7 +140,7 @@ export default function AIHealthPipeline({
             const isActive = currentPhase === phase.id;
             const isDone = phases.indexOf(phase) < phases.findIndex(p => p.id === currentPhase);
             return (
-              <div key={phase.id} className={`flex items-center gap-1.5 p-2 rounded-lg border text-[10px] ${isActive ? 'border-violet-400 bg-violet-100 dark:bg-violet-900/30' : isDone ? 'border-green-200 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 dark:border-gray-700 bg-background'}`} data-testid={`pipeline-phase-${phase.id}`}>
+              <div key={phase.id} className={`flex items-center gap-1.5 p-2 rounded-lg border text-xs ${isActive ? 'border-violet-400 bg-violet-100 dark:bg-violet-900/30' : isDone ? 'border-green-200 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 dark:border-gray-700 bg-background'}`} data-testid={`pipeline-phase-${phase.id}`}>
                 {isActive ? <RefreshCw size={10} className="animate-spin text-violet-600" /> : isDone ? <CheckCircle size={10} className="text-green-600" /> : <PhaseIcon size={10} className="text-muted-foreground" />}
                 <span className={`font-medium ${isActive ? 'text-violet-700 dark:text-violet-300' : isDone ? 'text-green-600' : ''}`}>{phase.label}</span>
               </div>

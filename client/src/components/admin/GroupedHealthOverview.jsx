@@ -28,10 +28,10 @@ export default function GroupedHealthOverview({ toolResults, toolCategories }) {
           return (
             <div key={gi} className="p-2.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800" data-testid={`matrix-${gi}`}>
               <div className="flex items-center justify-between mb-1">
-                <span className={`text-[10px] font-bold ${group.color}`}>{group.label}</span>
+                <span className={`text-xs font-bold ${group.color}`}>{group.label}</span>
                 <span className={`text-xs font-bold ${pct >= 90 ? 'text-green-600' : pct >= 60 ? 'text-amber-500' : groupChecked === 0 ? 'text-gray-400' : 'text-red-500'}`}>{groupChecked > 0 ? `${pct}%` : '—'}</span>
               </div>
-              <div className="text-[9px] text-muted-foreground">{groupHealthy}/{group.tools.length} healthy{groupErrors > 0 ? ` · ${groupErrors} err` : ''}</div>
+              <div className="text-xs text-muted-foreground">{groupHealthy}/{group.tools.length} healthy{groupErrors > 0 ? ` · ${groupErrors} err` : ''}</div>
               <div className="w-full h-1 rounded-full bg-gray-200 dark:bg-gray-700 mt-1 overflow-hidden">
                 <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${groupChecked > 0 ? (groupHealthy / group.tools.length) * 100 : 0}%` }} />
               </div>
