@@ -202,7 +202,7 @@ export function useLumiEmotion(initial = 'idle') {
     };
     // Initial-mount only — intentionally no deps. Subsequent emotion changes
     // are handled inside setEmotion.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   return useMemo(
