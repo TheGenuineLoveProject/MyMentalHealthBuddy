@@ -1,0 +1,11 @@
+{
+  "enabled": false,
+  "intervalMs": 1800000,
+  "startedAt": null,
+  "lastRunAt": null,
+  "nextRunAt": null,
+  "pausedReason": "Manually paused by admin",
+  "consecutiveFails": 0,
+  "totalRuns": 0,
+  "history": []
+}

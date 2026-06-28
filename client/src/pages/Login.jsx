@@ -5,6 +5,7 @@ import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest } from "../lib/queryClient";
 import { useToast } from "../hooks/use-toast";
+import { setAuthToken } from "../lib/api";
 import LumiMascotImage from "../components/lumi/LumiMascotImage.jsx";
 
 function landingPathFor(u) {
@@ -62,7 +63,12 @@ export default function Login() {
         return;
       }
       if (data?.token) login(data.token, data.user || null);
+      if (data?.token) {
+        setAuthToken(data.token);
+        try { localStorage.setItem("mmhb_user", JSON.stringify(data.user)); } catch {}
+      }
       toast({ title: "Welcome back", description: "You're signed in." });
+      window.location.href = data?.user?.role === "admin" ? "/admin" : "/dashboard";
       setLocation(landingPathFor(data?.user));
     } catch (err) {
       const raw = err?.message || "";
