@@ -253,9 +253,9 @@ export default function DailyOpsRunbook({ toolResults, isAnyRunning, runAllCheck
                 )}
                 <span className={`text-sm flex-1 ${isActive ? 'text-blue-700 dark:text-blue-300 font-medium' : step.done ? 'text-green-700 dark:text-green-400 line-through' : ''}`}>
                   {step.label}
-                  {stepTimestamps[step.id] && <span className="text-[10px] text-muted-foreground ml-2 font-normal">({stepTimestamps[step.id]})</span>}
+                  {stepTimestamps[step.id] && <span className="text-xs text-muted-foreground ml-2 font-normal">({stepTimestamps[step.id]})</span>}
                 </span>
-                <span className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${catColors[step.category] || 'text-gray-500'} bg-muted/50`}>
+                <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${catColors[step.category] || 'text-gray-500'} bg-muted/50`}>
                   {step.category}
                 </span>
                 {!step.done && !pipelineRunning && step.id === 'quick-diag' && (
@@ -299,7 +299,7 @@ export default function DailyOpsRunbook({ toolResults, isAnyRunning, runAllCheck
               </div>
               <div className="space-y-1.5 max-h-32 overflow-y-auto">
                 {dailyOpsHistory.map((run, i) => (
-                  <div key={i} className="flex items-center gap-3 text-[11px] p-1.5 rounded bg-background" data-testid={`daily-ops-history-${i}`}>
+                  <div key={i} className="flex items-center gap-3 text-xs p-1.5 rounded bg-background" data-testid={`daily-ops-history-${i}`}>
                     <span className="text-muted-foreground font-mono w-20">{new Date(run.timestamp).toLocaleDateString()}</span>
                     <span className={`font-bold ${run.score >= 90 ? 'text-green-600' : run.score >= 70 ? 'text-amber-500' : 'text-red-500'}`}>{run.score}%</span>
                     <span className="text-green-600">{run.healthy} ok</span>
