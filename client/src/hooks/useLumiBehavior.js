@@ -137,7 +137,6 @@ export function useLumiBehavior() {
       if (rolled !== prev) writeStats(rolled);
       return rolled;
     });
-    // eslint-disable-next-line
   }, []);
 
   // ── Sleep watcher ──────────────────────────────────────────────────────
