@@ -135,7 +135,7 @@ export default function MasteryToolsPage() {
             <p className="text-caption">
               All data stays in your browser. Mastery is earned through consistent practice.
             </p>
-            <p className="text-[11px] text-[var(--teal-400)] italic">
+            <p className="text-xs text-[var(--teal-400)] italic">
               "We are what we repeatedly do. Excellence, then, is not an act, but a habit." — Aristotle
             </p>
           </footer>

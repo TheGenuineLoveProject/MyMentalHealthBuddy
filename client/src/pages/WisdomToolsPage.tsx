@@ -152,7 +152,7 @@ export default function WisdomToolsPage() {
                   <div className={`font-medium text-sm ${isActive ? 'text-[var(--teal-700)]' : 'text-[var(--teal-600)]'}`}>
                     {tool.name}
                   </div>
-                  <div className="text-[11px] text-[var(--teal-500)] mt-0.5 hidden lg:block leading-tight">
+                  <div className="text-xs text-[var(--teal-500)] mt-0.5 hidden lg:block leading-tight">
                     {tool.description}
                   </div>
                 </button>

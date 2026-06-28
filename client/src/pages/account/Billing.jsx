@@ -252,7 +252,7 @@ export default function Billing() {
                     data-testid="button-interval-yearly"
                   >
                     Annual
-                    <span className="px-1.5 py-0.5 text-[10px] font-semibold rounded-full bg-gradient-to-r from-[var(--gold-500)] to-[var(--gold-400)] text-white leading-none">
+                    <span className="px-1.5 py-0.5 text-xs font-semibold rounded-full bg-gradient-to-r from-[var(--gold-500)] to-[var(--gold-400)] text-white leading-none">
                       BEST VALUE
                     </span>
                   </button>

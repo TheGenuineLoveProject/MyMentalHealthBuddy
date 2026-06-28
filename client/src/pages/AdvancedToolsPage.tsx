@@ -176,7 +176,7 @@ export default function AdvancedToolsPage() {
                           {tool.name}
                         </span>
                       </div>
-                      <p className="text-[11px] text-[var(--teal-500)] mt-1 ml-7">{tool.description}</p>
+                      <p className="text-xs text-[var(--teal-500)] mt-1 ml-7">{tool.description}</p>
                     </button>
                   );
                 })}
@@ -211,7 +211,7 @@ export default function AdvancedToolsPage() {
             <p className="text-caption">
               All data stays in your browser. These tools are offerings for exploration — use what resonates, leave what doesn't.
             </p>
-            <p className="text-[11px] text-[var(--teal-400)] italic">
+            <p className="text-xs text-[var(--teal-400)] italic">
               You know yourself best.
             </p>
           </footer>

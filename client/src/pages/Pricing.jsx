@@ -289,7 +289,7 @@ export default function Pricing() {
                 style={interval === "yearly" ? { background: 'linear-gradient(135deg, var(--glp-deep-teal, var(--glp-sage-deep)), var(--glp-sage))' } : { color: 'var(--glp-sage-deep)' }}
                 data-testid="button-interval-yearly"
               >
-                Yearly <span className="ml-1 inline-block px-1.5 py-0.5 rounded-full text-[10px] font-bold" style={interval === "yearly" ? { background: 'rgba(255,255,255,0.25)' } : { background: 'var(--glp-gold-30)', color: 'var(--glp-gold-dark)' }}>Save 31%</span>
+                Yearly <span className="ml-1 inline-block px-1.5 py-0.5 rounded-full text-xs font-bold" style={interval === "yearly" ? { background: 'rgba(255,255,255,0.25)' } : { background: 'var(--glp-gold-30)', color: 'var(--glp-gold-dark)' }}>Save 31%</span>
               </button>
             </div>
           </div>

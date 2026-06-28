@@ -295,7 +295,7 @@ export default function BiometricDashboard() {
                             <Icon className="h-4 w-4 text-indigo-500 dark:text-indigo-300" aria-hidden />
                             <div>
                               <p className="text-xs font-medium text-slate-700 dark:text-slate-200">{metricLabel(r.metricType)}</p>
-                              <p className="text-[10px] text-slate-500 dark:text-slate-400">{r.deviceSource}</p>
+                              <p className="text-xs text-slate-500 dark:text-slate-400">{r.deviceSource}</p>
                             </div>
                           </div>
                           <div className="text-right">

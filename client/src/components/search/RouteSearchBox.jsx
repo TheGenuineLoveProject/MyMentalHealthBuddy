@@ -42,7 +42,7 @@ export function RouteSearchBox({ placeholder = "Search tools, hubs, paths..." })
                 {!!h.tags?.length && (
                   <div className="mt-2 flex flex-wrap gap-1">
                     {h.tags.slice(0, 5).map((t) => (
-                      <span key={t} className="text-[11px] rounded-full border border-sage-200 dark:border-white/10 bg-sage-100 dark:bg-white/5 px-2 py-0.5 text-gray-600 dark:text-white/80">
+                      <span key={t} className="text-xs rounded-full border border-sage-200 dark:border-white/10 bg-sage-100 dark:bg-white/5 px-2 py-0.5 text-gray-600 dark:text-white/80">
                         {t}
                       </span>
                     ))}

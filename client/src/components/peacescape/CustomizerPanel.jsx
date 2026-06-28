@@ -209,7 +209,7 @@ export default function CustomizerPanel({
                 <div className="text-2xl text-center select-none" style={{ color: "var(--glp-sage-deep)" }} aria-hidden="true">
                   {a.glyph}
                 </div>
-                <div className="text-[10px] font-medium text-center mt-1" style={{ color: "var(--glp-sage-deep)", opacity: 0.8 }}>
+                <div className="text-xs font-medium text-center mt-1" style={{ color: "var(--glp-sage-deep)", opacity: 0.8 }}>
                   {a.label}
                 </div>
               </button>
