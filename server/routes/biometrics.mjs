@@ -56,6 +56,7 @@ router.use(limiter);
 
 function fail(res, op, err) {
   if (err instanceof NotConfiguredError) {
+    // platform-evolution-ignore: intentional biometrics provider deferral; unconfigured wearable providers return graceful 501 instead of fake/mock readings until explicit consent, credentials, and HIPAA-safe storage are configured.
     return res.status(501).json({
       ok: false,
       error: "provider_not_configured",
