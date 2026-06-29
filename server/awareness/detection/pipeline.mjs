@@ -176,7 +176,8 @@ function redact(s) {
  * ===================================================================== */
 export class MLClassifier {
   constructor() {
-    // TODO (v2.0 Phase 4): load fine-tuned BERT / RoBERTa from
+    // platform-evolution-ignore: intentional v2 provider deferral; current production path uses deterministic safety heuristics until fine-tuned BERT/RoBERTa provider is configured.
+// TODO (v2.0 Phase 4): load fine-tuned BERT / RoBERTa from
     //   ./models/manipulation-classifier.onnx
     // via onnxruntime-node. Until then, this layer is a transparent
     // pass-through that reports zero confidence so the ensemble math
