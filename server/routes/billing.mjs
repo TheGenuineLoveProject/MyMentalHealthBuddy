@@ -161,7 +161,15 @@ router.post("/checkout", async (req, res) => {
     const idempotencyKey = generateIdempotencyKey(dbUserId, `${plan}-${interval}`, Date.now());
 
     const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
-    const baseUrl = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+    const candidateBaseUrl =
+      process.env.APP_BASE_URL ||
+      process.env.PUBLIC_APP_URL ||
+      process.env.CLIENT_URL ||
+      process.env.CORS_ORIGIN ||
+      (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+    const baseUrl = /^https?:\/\//.test(candidateBaseUrl)
+      ? candidateBaseUrl.replace(/\/$/, "")
+      : "http://localhost:5000";
     const session = await stripe.checkout.sessions.create({
       mode: checkoutMode,
       customer: customerId,
@@ -193,7 +201,15 @@ router.post("/portal", async (req, res) => {
     if (!customerId) return badRequest(res, "Missing Stripe customer");
 
     const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
-    const baseUrl = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+    const candidateBaseUrl =
+      process.env.APP_BASE_URL ||
+      process.env.PUBLIC_APP_URL ||
+      process.env.CLIENT_URL ||
+      process.env.CORS_ORIGIN ||
+      (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
+    const baseUrl = /^https?:\/\//.test(candidateBaseUrl)
+      ? candidateBaseUrl.replace(/\/$/, "")
+      : "http://localhost:5000";
     const portal = await stripe.billingPortal.sessions.create({
       customer: customerId,
       return_url: `${baseUrl}/account/billing`,
