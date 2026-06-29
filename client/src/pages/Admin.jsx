@@ -979,7 +979,7 @@ function SystemSection({ stats, realtimeData }) {
             </thead>
             <tbody>
               {[
-                { endpoint: "/api/chat", method: "POST", status: 200, duration: "234ms", time: "Just now" },
+                { endpoint: "/api/ai/chat", method: "POST", status: 200, duration: "234ms", time: "Just now" },
                 { endpoint: "/api/journal", method: "GET", status: 200, duration: "45ms", time: "1 min ago" },
                 { endpoint: "/api/mood", method: "POST", status: 201, duration: "67ms", time: "2 min ago" },
                 { endpoint: "/api/user/profile", method: "GET", status: 200, duration: "23ms", time: "3 min ago" },
