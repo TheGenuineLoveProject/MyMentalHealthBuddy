@@ -46,6 +46,7 @@ const AccessibilityToolbar = lazy(() => import("./components/AccessibilityToolba
 import ToastContainer from "./components/ui/toast-container";
 import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscoveryRail.jsx";
 import HubRoutes from "./routes/HubRoutes.jsx";
+import ToolRoutes from "./routes/ToolRoutes.jsx";
 import './index.css'; // Your Tailwind import
 // PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
 import {
@@ -560,6 +561,7 @@ export default function App() {
               <Route path="/wellness-dashboard">
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
+              <ToolRoutes WellnessRoute={WellnessRoute} ConfigRoute={ConfigRoute} />
               <HubRoutes WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
               <Route path="/twelve-practices">
                 <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
@@ -601,13 +603,6 @@ export default function App() {
               <Route path="/emotional-intelligence">{() => <ConfigRoute route="/emotional-intelligence" />}</Route>
 
               {/* Tools Route Aliases */}
-              <Route path="/tools/journal"><WellnessRoute><JournalPage /></WellnessRoute></Route>
-              <Route path="/tools/mood"><WellnessRoute><MoodPage /></WellnessRoute></Route>
-              <Route path="/tools/breathing"><BreathingTool /></Route>
-              <Route path="/tools/affirmations"><AffirmationWall /></Route>
-              <Route path="/tools/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/tools/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
-              <Route path="/tools/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
 
               {/* Daily Practice & Routines Pages */}
               <Route path="/daily"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
@@ -675,7 +670,6 @@ export default function App() {
               <Route path="/loneliness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/isolation"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/self-love"><WellnessRoute><SelfLoveCanonical /></WellnessRoute></Route>
-              <Route path="/wellness-tools">{() => <PracticeLibrary />}</Route>
               <Route path="/counseling">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/wellbeing" component={WellbeingPage} />
               <Route path="/well-being">{() => <ConfigRoute route="/healing" />}</Route>
