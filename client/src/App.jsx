@@ -47,6 +47,7 @@ import ToastContainer from "./components/ui/toast-container";
 import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscoveryRail.jsx";
 import HubRoutes from "./routes/HubRoutes.jsx";
 import ToolRoutes from "./routes/ToolRoutes.jsx";
+import AdvancedGrowthRoutes from "./routes/AdvancedGrowthRoutes.jsx";
 import './index.css'; // Your Tailwind import
 // PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
 import {
@@ -1271,85 +1272,7 @@ export default function App() {
                 <WellnessRoute><DailyWisdomOraclePage /></WellnessRoute>
               </Route>
 
-              {/* Advanced Tools - Wellness Gated */}
-              <Route path="/tools">
-                <WellnessRoute><ToolsPage /></WellnessRoute>
-              </Route>
-              <Route path="/alignment-path">
-                <WellnessRoute><AlignmentPath /></WellnessRoute>
-              </Route>
-              <Route path="/system-map">
-                <WellnessRoute><SystemMapPage /></WellnessRoute>
-              </Route>
-              <Route path="/tools/breath">
-                <WellnessRoute><BreathTool /></WellnessRoute>
-              </Route>
-              <Route path="/tools/reframe">
-                <WellnessRoute><ReframePage /></WellnessRoute>
-              </Route>
-              <Route path="/advanced">
-                <WellnessRoute><AdvancedToolsPage /></WellnessRoute>
-              </Route>
-              <Route path="/mastery">
-                <WellnessRoute><MasteryToolsPage /></WellnessRoute>
-              </Route>
-              <Route path="/ritual">
-                <WellnessRoute><DailyRitualPage /></WellnessRoute>
-              </Route>
-              <Route path="/atlas">
-                <ProtectedRoute><AtlasDashboard /></ProtectedRoute>
-              </Route>
-              <Route path="/strategy-maps">
-                <ProtectedRoute><StrategyMapsPage /></ProtectedRoute>
-              </Route>
-              <Route path="/meta-learning">
-                <ProtectedRoute><MetaLearningPage /></ProtectedRoute>
-              </Route>
-              <Route path="/systems-thinking">
-                <ProtectedRoute><SystemsThinkingPage /></ProtectedRoute>
-              </Route>
-              <Route path="/cognitive-architecture">
-                <ProtectedRoute><CognitiveArchitecturePage /></ProtectedRoute>
-              </Route>
-              <Route path="/philosophical-inquiry">
-                <ProtectedRoute><PhilosophicalInquiryPage /></ProtectedRoute>
-              </Route>
-              <Route path="/knowledge-synthesis">
-                <ProtectedRoute><KnowledgeSynthesisPage /></ProtectedRoute>
-              </Route>
-              <Route path="/content-studio">
-                <ProtectedRoute><ContentStudioPage /></ProtectedRoute>
-              </Route>
-              <Route path="/study-vault">
-                <ProtectedRoute><StudyVaultPage /></ProtectedRoute>
-              </Route>
-              <Route path="/elite-tools">
-                <ProtectedRoute><EliteToolsDashboard /></ProtectedRoute>
-              </Route>
-              <Route path="/resilience">
-                <ProtectedRoute><ResilienceCanonical /></ProtectedRoute>
-              </Route>
-              <Route path="/companion">
-                <ProtectedRoute><AdaptiveCompanionPage /></ProtectedRoute>
-              </Route>
-              <Route path="/collaborative-lab">
-                <ProtectedRoute><CollaborativeLabPage /></ProtectedRoute>
-              </Route>
-              <Route path="/growth-analytics">
-                <ProtectedRoute><GrowthAnalyticsPage /></ProtectedRoute>
-              </Route>
-              <Route path="/guided-journaling">
-                <WellnessRoute><GuidedJournalingPage /></WellnessRoute>
-              </Route>
-              <Route path="/insight-cards">
-                <WellnessRoute><InsightCardsPage /></WellnessRoute>
-              </Route>
-              <Route path="/progress">
-                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
-              </Route>
-              <Route path="/mirror">
-                <ProtectedRoute><MirrorPage /></ProtectedRoute>
-              </Route>
+                            <AdvancedGrowthRoutes WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
 
               {/* Batch 11 - Personalization (P201-P210) */}
               <Route path="/pathways">
