@@ -47,287 +47,267 @@ import ToastContainer from "./components/ui/toast-container";
 import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscoveryRail.jsx";
 import './index.css'; // Your Tailwind import
 // PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
-const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
-
-const Login = lazy(() => import("./pages/Login.jsx"));
-const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
-const CanvaLanding = lazy(() => import("./pages/CanvaLanding.jsx"));
-const MeetLumi = lazy(() => import("./pages/MeetLumi.jsx"));
-const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
-const Start = lazy(() => import("./pages/Start.tsx"));
-const Register = lazy(() => import("./pages/Register.jsx"));
-const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
-const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
-const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
-const BlogPost = lazy(() => import("./pages/BlogPost.jsx"));
-const BlogIndex = lazy(() => import("./pages/BlogIndex.jsx"));
-const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
-const StatePage = lazy(() => import("./pages/StatePage.jsx"));
-const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
-const ReflectionPage = lazy(() => import("./pages/Reflection.jsx"));
-const DailyReflection = lazy(() => import("./pages/DailyReflection.jsx"));
-const AIChatPage = lazy(() => import("./pages/AIChatPage.tsx"));
-const Analytics = lazy(() => import("./pages/Analytics.jsx"));
-const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
-const Settings = lazy(() => import("./pages/Settings.jsx"));
-const ReminderScheduler = lazy(() => import("./components/ReminderScheduler.jsx"));
-const VoiceSettings = lazy(() => import("./components/VoiceSettings.jsx"));
-const Wellness = lazy(() => import("./pages/Wellness.jsx"));
-const AffirmationWall = lazy(() => import("./pages/AffirmationWall.jsx"));
-const TalkTopics = lazy(() => import("./pages/TalkTopics.jsx"));
-const Premium = lazy(() => import("./pages/Premium.jsx"));
-const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage.jsx"));
-const Admin = lazy(() => import("./pages/Admin.jsx"));
-const Contact = lazy(() => import("./pages/Contact.jsx"));
-const FAQPage = lazy(() => import("./pages/FAQPage.jsx"));
-const Privacy = lazy(() => import("./pages/Privacy.jsx"));
-const Invite = lazy(() => import("./pages/Invite.jsx"));
-const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
-const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
-const OnboardingFlow = lazy(() => import("./pages/OnboardingFlow.jsx"));
-const AvatarLab = lazy(() => import("./pages/AvatarLab.jsx"));
-const RigLab = lazy(() => import("./pages/RigLab.jsx"));
-const MotionLab = lazy(() => import("./pages/MotionLab.jsx"));
-const Profile = lazy(() => import("./pages/Profile.jsx"));
-const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
-const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
-const DiscernmentDashboard = lazy(() => import("./pages/DiscernmentDashboard.jsx"));
-const ProtocolBrowser = lazy(() => import("./pages/ProtocolBrowser.jsx"));
-const ProtocolSession = lazy(() => import("./pages/ProtocolSession.jsx"));
-const BiometricDashboard = lazy(() => import("./pages/BiometricDashboard.jsx"));
-const AgentInteraction = lazy(() => import("./pages/AgentInteraction.jsx"));
-const WellnessToolsHub = lazy(() => import("./pages/WellnessToolsHub.jsx"));
-const DesignSystemV2 = lazy(() => import("./pages/DesignSystemV2.jsx"));
-const GAD7Assessment = lazy(() => import("./pages/tools/GAD7Assessment.jsx"));
-const PHQ9Assessment = lazy(() => import("./pages/tools/PHQ9Assessment.jsx"));
-const CognitiveDistortionChecker = lazy(() => import("./pages/tools/CognitiveDistortionChecker.jsx"));
-const BreathPacer = lazy(() => import("./pages/tools/BreathPacer.jsx"));
-const BoundaryBuilderTool = lazy(() => import("./pages/tools/BoundaryBuilderTool.jsx"));
-const ManipulationDetector = lazy(() => import("./pages/tools/ManipulationDetector.jsx"));
-const SleepQualityCalculator = lazy(() => import("./pages/tools/SleepQualityCalculator.jsx"));
-const NervousSystemCheck = lazy(() => import("./pages/tools/NervousSystemCheck.jsx"));
-const ToolsIndex = lazy(() => import("./pages/tools/index.jsx"));
-const CommunityPage = lazy(() => import("./pages/CommunityFeed.jsx"));
-const CommunityHub = lazy(() => import("./pages/CommunityHub.jsx"));
-const CommunityCircle = lazy(() => import("./pages/CommunityCircle.jsx"));
-const InsightsDashboard = lazy(() => import("./pages/InsightsDashboard.jsx"));
-const CelebrationRitual = lazy(() => import("./pages/CelebrationRitual.jsx"));
-const DiscussionPage = lazy(() => import("./features/community/DiscussionPage.jsx"));
-const ToolsPage = lazy(() => import("./pages/ToolsPage.jsx"));
-const BreathTool = lazy(() => import("./pages/tools/BreathTool.jsx"));
-const BreathingTool = lazy(() => import("./pages/tools/BreathingTool.jsx"));
-const CheckIn = lazy(() => import("./pages/CheckIn.jsx"));
-const CelebrationFlow = lazy(() => import("./pages/CelebrationFlow.jsx"));
-const LumiV6Preview = lazy(() => import("./pages/LumiV6Preview.jsx"));
-const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
-const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
-const AdvancedToolsPage = lazy(() => import("./pages/AdvancedToolsPage.tsx"));
-const MasteryToolsPage = lazy(() => import("./pages/MasteryToolsPage.tsx"));
-const AtlasDashboard = lazy(() => import("./pages/AtlasDashboard.tsx"));
-const StrategyMapsPage = lazy(() => import("./pages/StrategyMapsPage.tsx"));
-const CollaborativeLabPage = lazy(() => import("./pages/CollaborativeLabPage.tsx"));
-const ResilienceMetricsPage = lazy(() => import("./pages/ResilienceMetricsPage.tsx"));
-const AdaptiveCompanionPage = lazy(() => import("./pages/AdaptiveCompanionPage.tsx"));
-const KnowledgeSynthesisPage = lazy(() => import("./pages/KnowledgeSynthesisPage.tsx"));
-const WisdomPracticesPage = lazy(() => import("./pages/WisdomPracticesPage.tsx"));
-const GrowthAnalyticsPage = lazy(() => import("./pages/GrowthAnalyticsPage.tsx"));
-const DailyPracticePage = lazy(() => import("./pages/DailyPracticePage.jsx"));
-const RoutinesPage = lazy(() => import("./pages/RoutinesPage.jsx"));
-const GrowthPage = lazy(() => import("./pages/GrowthPage.jsx"));
-const PeacescapePage = lazy(() => import("./pages/PeacescapePage.jsx"));
-const RecoveryPage = lazy(() => import("./pages/RecoveryPage.jsx"));
-const SelfLovePage = lazy(() => import("./pages/SelfLovePage.jsx"));
-const SleepHubPage = lazy(() => import("./pages/hubs/SleepHubPage.jsx"));
-const BoundariesHubPage = lazy(() => import("./pages/hubs/BoundariesHubPage.jsx"));
-const SelfWorthHubPage = lazy(() => import("./pages/hubs/SelfWorthHubPage.jsx"));
-const ResilienceHubPage = lazy(() => import("./pages/hubs/ResilienceHubPage.jsx"));
-const AnxietyHubPage = lazy(() => import("./pages/hubs/AnxietyHubPage.jsx"));
-const RelationshipsHubPage = lazy(() => import("./pages/hubs/RelationshipsHubPage.jsx"));
-const GriefHubPage = lazy(() => import("./pages/hubs/GriefHubPage.jsx"));
-const SelfCompassionHubPage = lazy(() => import("./pages/hubs/SelfCompassionHubPage.jsx"));
-const MindfulnessHubPage = lazy(() => import("./pages/hubs/MindfulnessHubPage.jsx"));
-const StressHubPage = lazy(() => import("./pages/hubs/StressHubPage.jsx"));
-const TraumaHealingHubPage = lazy(() => import("./pages/hubs/TraumaHealingHubPage.jsx"));
-const EmotionalIntelligenceHubPage = lazy(() => import("./pages/hubs/EmotionalIntelligenceHubPage.jsx"));
-const PersonalGrowthHubPage = lazy(() => import("./pages/hubs/PersonalGrowthHubPage.jsx"));
-const InnerPeaceHubPage = lazy(() => import("./pages/hubs/InnerPeaceHubPage.jsx"));
-const HubsIndexPage = lazy(() => import("./pages/hubs/HubsIndexPage.jsx"));
-const HealingJourneyHubPage = lazy(() => import("./pages/hubs/HealingJourneyHubPage.jsx"));
-const SelfCareHubPage = lazy(() => import("./pages/hubs/SelfCareHubPage.jsx"));
-const CopingSkillsHubPage = lazy(() => import("./pages/hubs/CopingSkillsHubPage.jsx"));
-const InnerWorkHubPage = lazy(() => import("./pages/hubs/InnerWorkHubPage.jsx"));
-const BreathworkHubPage = lazy(() => import("./pages/hubs/BreathworkHubPage.jsx"));
-const JournalingHubPage = lazy(() => import("./pages/hubs/JournalingHubPage.jsx"));
-const BodyMindHubPage = lazy(() => import("./pages/hubs/BodyMindHubPage.jsx"));
-const DailyPracticeHubPage = lazy(() => import("./pages/hubs/DailyPracticeHubPage.jsx"));
-const GratitudeHubPage = lazy(() => import("./pages/hubs/GratitudeHubPage.jsx"));
-const GratitudePractice = lazy(() => import("./pages/GratitudePractice.jsx"));
-const LearnHub = lazy(() => import("./pages/LearnHub.jsx"));
-const LearnGuides = lazy(() => import("./pages/LearnGuides.jsx"));
-const LearnArticles = lazy(() => import("./pages/LearnArticles.jsx"));
-const LearnGuideDetail = lazy(() => import("./pages/LearnDetail.jsx").then(m => ({ default: m.LearnGuideDetail })));
-const LearnArticleDetail = lazy(() => import("./pages/LearnDetail.jsx").then(m => ({ default: m.LearnArticleDetail })));
-const ThoughtworkHubPage = lazy(() => import("./pages/hubs/ThoughtworkHubPage.jsx"));
-const LifePurposeHubPage = lazy(() => import("./pages/hubs/LifePurposeHubPage.jsx"));
-const CommunicationHubPage = lazy(() => import("./pages/hubs/CommunicationHubPage.jsx"));
-const ForgivenessHubPage = lazy(() => import("./pages/hubs/ForgivenessHubPage.jsx"));
-const EnergyManagementHubPage = lazy(() => import("./pages/hubs/EnergyManagementHubPage.jsx"));
-const HabitsHubPage = lazy(() => 
-import("./pages/hubs/HabitsHubPage.jsx"));
-const ConfidenceHubPage = lazy(() => import("./pages/hubs/ConfidenceHubPage.jsx"));
-const AboutPage = lazy(() => import("./pages/About.jsx"));
-const FeaturesPage = lazy(() => import("./pages/Features.jsx"));
-const HealingPage = lazy(() => import("./pages/Healing.jsx"));
-const WellbeingPage = lazy(() => import("./pages/Wellbeing.jsx"));
-const MentalWellnessPage = lazy(() => import("./pages/MentalWellness.jsx"));
-const SelfLoveCanonical = lazy(() => import("./pages/SelfLove.jsx"));
-const GrowthCanonical = lazy(() => import("./pages/Growth.jsx"));
-const MindfulnessCanonical = lazy(() => import("./pages/Mindfulness.jsx"));
-const ResilienceCanonical = lazy(() => import("./pages/Resilience.jsx"));
-const AnxietyCanonical = lazy(() => import("./pages/Anxiety.jsx"));
-const DepressionCanonical = lazy(() => import("./pages/Depression.jsx"));
-const TrustCenterPage = lazy(() =>
-  import("./pages/trust/TrustCenterPage.jsx")
-);
-const AITransparencyPage = lazy(() =>
-  import("./pages/trust/AITransparencyPage.jsx")
-);
-const FocusHubPage = lazy(() => import("./pages/hubs/FocusHubPage.jsx"));
-const SpiritualityHubPage = lazy(() => import("./pages/hubs/SpiritualityHubPage.jsx"));
-const MotivationHubPage = lazy(() => import("./pages/hubs/MotivationHubPage.jsx"));
-const AcceptanceHubPage = lazy(() => import("./pages/hubs/AcceptanceHubPage.jsx"));
-const CreativityHubPage = lazy(() => import("./pages/hubs/CreativityHubPage.jsx"));
-const SelfAwarenessHubPage = lazy(() => import("./pages/hubs/SelfAwarenessHubPage.jsx"));
-const NervousSystemHubPage = lazy(() => import("./pages/hubs/NervousSystemHubPage.jsx"));
-const PresenceHubPage = lazy(() => import("./pages/hubs/PresenceHubPage.jsx"));
-const WisdomHubPage = lazy(() => import("./pages/hubs/WisdomHubPage.jsx"));
-const SelfDiscoveryHubPage = lazy(() => import("./pages/hubs/SelfDiscoveryHubPage.jsx"));
-const TwelvePracticesPage = lazy(() => import("./pages/TwelvePracticesPage.jsx"));
-const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
-const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
-const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
-const WisdomSynthesisPage = lazy(() => import("./pages/WisdomSynthesisPage.tsx"));
-const CognitiveArchitecturePage = lazy(() => import("./pages/CognitiveArchitecturePage.tsx"));
-const PhilosophicalInquiryPage = lazy(() => import("./pages/PhilosophicalInquiryPage.tsx"));
-const DailyWisdomOraclePage = lazy(() => import("./pages/DailyWisdomOraclePage.tsx"));
-const SystemsThinkingPage = lazy(() => import("./pages/SystemsThinkingPage.tsx"));
-const MetaLearningPage = lazy(() => import("./pages/MetaLearningPage.tsx"));
-const ContentStudioPage = lazy(() => import("./pages/ContentStudioPage.tsx"));
-const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.jsx"));
-const EliteToolsDashboard = lazy(() => import("./pages/EliteToolsDashboard.tsx"));
-const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.jsx"));
-const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
-const DashboardOverview = lazy(() => import("./pages/dashboard/Overview.jsx"));
-const AdminCommandCenter = lazy(() => import("./pages/admin/CommandCenter.jsx"));
-const AdminHealthDashboard = lazy(() => import("./pages/admin/HealthDashboard.jsx"));
-const SocialDashboard = lazy(() => import("./pages/admin/SocialDashboard.jsx"));
-const NarrativeOpsConsole = lazy(() => import("./pages/admin/NarrativeOpsConsole.jsx"));
-const AdminSocial = lazy(() => import("./pages/admin/AdminSocial.jsx"));
-const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
-const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
-const SocialCalendar = lazy(() => import("./pages/admin/SocialCalendar.jsx"));
-const SocialAnalytics = lazy(() => import("./pages/admin/SocialAnalytics.jsx"));
-const SocialHub = lazy(() => import("./pages/SocialHub.jsx"));
-const BillingViewer = lazy(() => import("./pages/admin/BillingViewer.jsx"));
-const Sessions = lazy(() => import("./pages/account/Sessions.jsx"));
-const DeleteAccount = lazy(() => import("./pages/account/DeleteAccount.jsx"));
-const AccountProfile = lazy(() => import("./pages/account/Profile.jsx"));
-const AccountSecurity = lazy(() => import("./pages/account/Security.jsx"));
-const AccountBilling = lazy(() => import("./pages/account/Billing.jsx"));
-const ValuesFinderPage = lazy(() => import("./pages/ValuesFinderPage.jsx"));
-const ValuesPage = lazy(() => import("./pages/ValuesPage.jsx"));
-const AboutApproachPage = lazy(() => import("./pages/AboutApproachPage.jsx"));
-const BoundariesPage = lazy(() => import("./pages/BoundariesPage.jsx"));
-const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
-const CoherenceLadderPage = lazy(() => import("./pages/CoherenceLadderPage.jsx"));
-const PerceptionRefinementPage = lazy(() => import("./pages/PerceptionRefinementPage.jsx"));
-const NervousSystemFloodingPage = lazy(() => import("./pages/NervousSystemFloodingPage.jsx"));
-const PermacultureWellnessPage = lazy(() => import("./pages/PermacultureWellnessPage.jsx"));
-const SelfWorthReflectionPage = lazy(() => import("./pages/SelfWorthReflectionPage.jsx"));
-const Challenge = lazy(() => import("./pages/Challenge.jsx"));
-const ChallengeDay = lazy(() => import("./pages/ChallengeDay.jsx"));
-const AlignmentPath = lazy(() => import("./pages/AlignmentPath.jsx"));
-const SystemMapPage = lazy(() => import("./pages/SystemMapPage.jsx"));
-const ReframePage = lazy(() => import("./pages/tools/ReframePage.jsx"));
-const TwelveStepsPage = lazy(() => import("./pages/TwelveStepsPage.tsx"));
-const BehaviorChangePage = lazy(() => import("./pages/BehaviorChangePage.tsx"));
-const SavedLibrary = lazy(() => import("./pages/library/SavedLibrary.jsx"));
-const GentleProgressDashboard = lazy(() => import("./pages/dashboard/ProgressDashboard.jsx"));
-const TopicHubPage = lazy(() => import("./pages/hubs/TopicHubPage.jsx"));
-
-// Batch 11 - Personalization (P201-P210)
-const PathwaysHome = lazy(() => import("./pages/pathways/PathwaysHome.jsx"));
-const GoalOnboarding = lazy(() => import("./pages/pathways/GoalOnboarding.jsx"));
-const Favorites = lazy(() => import("./pages/pathways/Favorites.jsx"));
-const ProgressStreaks = lazy(() => import("./pages/pathways/ProgressStreaks.jsx"));
-const CalmPlan = lazy(() => import("./pages/pathways/CalmPlan.jsx"));
-const ValuesToActions = lazy(() => import("./pages/pathways/ValuesToActions.jsx"));
-const ReflectionHistory = lazy(() => import("./pages/pathways/ReflectionHistory.jsx"));
-const NotificationPreferences = lazy(() => import("./pages/preferences/NotificationPreferences.jsx"));
-const SafetyPreferences = lazy(() => import("./pages/preferences/SafetyPreferences.jsx"));
-
-// Batch 11 - Tools Expansion (P211-P220)
-const CompassionBreak = lazy(() => import("./pages/tools/CompassionBreak.jsx"));
-const Reframe = lazy(() => import("./pages/tools/Reframe.jsx"));
-const UrgeSurf = lazy(() => import("./pages/tools/UrgeSurf.jsx"));
-const GriefLetter = lazy(() => import("./pages/tools/GriefLetter.jsx"));
-const RepairScript = lazy(() => import("./pages/tools/RepairScript.jsx"));
-const AweMicrodose = lazy(() => import("./pages/tools/AweMicrodose.jsx"));
-const BodyScan = lazy(() => import("./pages/tools/BodyScan.jsx"));
-const DigitalSunset = lazy(() => import("./pages/tools/DigitalSunset.jsx"));
-const MeaningMap = lazy(() => import("./pages/tools/MeaningMap.jsx"));
-const CommunityCheckin = lazy(() => import("./pages/tools/CommunityCheckin.jsx"));
-
-// Batch 11 - Admin & Content (P221-P240)
-const ContentStudioAdmin = lazy(() => import("./pages/admin/ContentStudioAdmin.jsx"));
-const SocialStudioAdmin = lazy(() => import("./pages/admin/SocialStudioAdmin.jsx"));
-const NewsletterAdmin = lazy(() => import("./pages/admin/NewsletterAdmin.jsx"));
-const AdminPublishing = lazy(() => import("./pages/admin/AdminPublishing.jsx"));
-const AdminPublishingToday = lazy(() => import("./pages/admin/AdminPublishingToday.jsx"));
-const BlogDraftViewer = lazy(() => import("./pages/BlogDraftViewer.jsx"));
-const RevenueAdmin = lazy(() => import("./pages/admin/RevenueAdmin.jsx"));
-
-// Batch 11 - Account & Payments (P241-P250)
-const Subscription = lazy(() => import("./pages/account/Subscription.jsx"));
-const OrderHistory = lazy(() => import("./pages/account/OrderHistory.jsx"));
-const PricingPage = lazy(() => import("./pages/PricingPage.jsx"));
-const PricingReal = lazy(() => import("./pages/Pricing.jsx"));
-const RefundHelp = lazy(() => import("./pages/help/RefundHelp.jsx"));
-const LegalPage = lazy(() => import("./pages/LegalPage.jsx"));
-
-// Batch 14 - Trust, Safety, Community, Learning (P351-P400)
-const SafetyCenter = lazy(() => import("./pages/SafetyCenter.jsx"));
-const DataRetention = lazy(() => import("./pages/DataRetention.jsx"));
-const CommunityGuidelines = lazy(() => import("./pages/CommunityGuidelines.jsx"));
-const PublicRoadmap = lazy(() => import("./pages/PublicRoadmap.jsx"));
-const CreatorProfile = lazy(() => import("./pages/CreatorProfile.jsx"));
-const PressKit = lazy(() => import("./pages/PressKit.jsx"));
-const CourseCatalog = lazy(() => import("./pages/CourseCatalog.jsx"));
-const PracticeLibrary = lazy(() => import("./pages/PracticeLibrary.jsx"));
-const RolesPermissions = lazy(() => import("./pages/admin/RolesPermissions.jsx"));
-
-// Batch 15 - Optimization + Admin Tools (P401-P450)
-const FeatureFlags = lazy(() => import("./pages/admin/FeatureFlags.jsx"));
-const SystemAlerts = lazy(() => import("./pages/admin/SystemAlerts.jsx"));
-const FeedbackAggregator = lazy(() => import("./pages/admin/FeedbackAggregator.jsx"));
-const NarrativeDrafts = lazy(() => import("./pages/admin/NarrativeDrafts.jsx"));
-const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard.jsx"));
-const AuditLogExplorer = lazy(() => import("./pages/admin/AuditLogExplorer.jsx"));
-
-// Batch 16 - Analytics, Community, Personalization, Wellness (P451-P500)
-const EngagementDashboard = lazy(() => import("./pages/admin/EngagementDashboard.jsx"));
-const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.jsx"));
-const AdminTools = lazy(() => import("./pages/admin/AdminTools.jsx"));
-const UserProfile = lazy(() => import("./pages/UserProfile.jsx"));
-const WellnessGoals = lazy(() => import("./pages/WellnessGoals.jsx"));
-const MeditationPlayer = lazy(() => import("./pages/tools/MeditationPlayer.jsx"));
-const EmotionWheel = lazy(() => import("./pages/tools/EmotionWheel.jsx"));
-const EmailDigest = lazy(() => import("./pages/settings/EmailDigest.jsx"));
-
-// Batch 17 - Content, Engagement, AI, A11y, Performance (P501-P550)
-const AIPersonality = lazy(() => import("./pages/settings/AIPersonality.jsx"));
-const WeeklyReflection = lazy(() => import("./pages/tools/WeeklyReflection.jsx"));
-const Presence = lazy(() => import("./pages/Presence.jsx"));
+import {
+  WellnessDashboard,
+  Login,
+  LoginCallback,
+  CanvaLanding,
+  MeetLumi,
+  AdminLogin,
+  Start,
+  Register,
+  ForgotPassword,
+  ResetPassword,
+  BlogEditor,
+  BlogPost,
+  BlogIndex,
+  MoodPage,
+  StatePage,
+  JournalPage,
+  ReflectionPage,
+  DailyReflection,
+  AIChatPage,
+  Analytics,
+  CrisisResources,
+  Settings,
+  ReminderScheduler,
+  VoiceSettings,
+  Wellness,
+  AffirmationWall,
+  TalkTopics,
+  Premium,
+  SubscriberBenefitsPage,
+  Admin,
+  Contact,
+  FAQPage,
+  Privacy,
+  Invite,
+  Upgrade,
+  Onboarding,
+  OnboardingFlow,
+  AvatarLab,
+  RigLab,
+  MotionLab,
+  Profile,
+  DailyFlow,
+  MirrorPage,
+  DiscernmentDashboard,
+  ProtocolBrowser,
+  ProtocolSession,
+  BiometricDashboard,
+  AgentInteraction,
+  WellnessToolsHub,
+  DesignSystemV2,
+  GAD7Assessment,
+  PHQ9Assessment,
+  CognitiveDistortionChecker,
+  BreathPacer,
+  BoundaryBuilderTool,
+  ManipulationDetector,
+  SleepQualityCalculator,
+  NervousSystemCheck,
+  ToolsIndex,
+  CommunityPage,
+  CommunityHub,
+  CommunityCircle,
+  InsightsDashboard,
+  CelebrationRitual,
+  DiscussionPage,
+  ToolsPage,
+  BreathTool,
+  BreathingTool,
+  CheckIn,
+  CelebrationFlow,
+  LumiV6Preview,
+  DailyRitualPage,
+  WisdomToolsPage,
+  AdvancedToolsPage,
+  MasteryToolsPage,
+  AtlasDashboard,
+  StrategyMapsPage,
+  CollaborativeLabPage,
+  ResilienceMetricsPage,
+  AdaptiveCompanionPage,
+  KnowledgeSynthesisPage,
+  WisdomPracticesPage,
+  GrowthAnalyticsPage,
+  DailyPracticePage,
+  RoutinesPage,
+  GrowthPage,
+  PeacescapePage,
+  RecoveryPage,
+  SelfLovePage,
+  SleepHubPage,
+  BoundariesHubPage,
+  SelfWorthHubPage,
+  ResilienceHubPage,
+  AnxietyHubPage,
+  RelationshipsHubPage,
+  GriefHubPage,
+  SelfCompassionHubPage,
+  MindfulnessHubPage,
+  StressHubPage,
+  TraumaHealingHubPage,
+  EmotionalIntelligenceHubPage,
+  PersonalGrowthHubPage,
+  InnerPeaceHubPage,
+  HubsIndexPage,
+  HealingJourneyHubPage,
+  SelfCareHubPage,
+  CopingSkillsHubPage,
+  InnerWorkHubPage,
+  BreathworkHubPage,
+  JournalingHubPage,
+  BodyMindHubPage,
+  DailyPracticeHubPage,
+  GratitudeHubPage,
+  GratitudePractice,
+  LearnHub,
+  LearnGuides,
+  LearnArticles,
+  LearnGuideDetail,
+  LearnArticleDetail,
+  ThoughtworkHubPage,
+  LifePurposeHubPage,
+  CommunicationHubPage,
+  ForgivenessHubPage,
+  EnergyManagementHubPage,
+  HabitsHubPage,
+  ConfidenceHubPage,
+  AboutPage,
+  FeaturesPage,
+  HealingPage,
+  WellbeingPage,
+  MentalWellnessPage,
+  SelfLoveCanonical,
+  GrowthCanonical,
+  MindfulnessCanonical,
+  ResilienceCanonical,
+  AnxietyCanonical,
+  DepressionCanonical,
+  TrustCenterPage,
+  AITransparencyPage,
+  FocusHubPage,
+  SpiritualityHubPage,
+  MotivationHubPage,
+  AcceptanceHubPage,
+  CreativityHubPage,
+  SelfAwarenessHubPage,
+  NervousSystemHubPage,
+  PresenceHubPage,
+  WisdomHubPage,
+  SelfDiscoveryHubPage,
+  TwelvePracticesPage,
+  GuidedJournalingPage,
+  InsightCardsPage,
+  ProgressDashboardPage,
+  WisdomSynthesisPage,
+  CognitiveArchitecturePage,
+  PhilosophicalInquiryPage,
+  DailyWisdomOraclePage,
+  SystemsThinkingPage,
+  MetaLearningPage,
+  ContentStudioPage,
+  StudyVaultPage,
+  EliteToolsDashboard,
+  ContentAdminDashboard,
+  CRMPage,
+  DashboardOverview,
+  AdminCommandCenter,
+  AdminHealthDashboard,
+  SocialDashboard,
+  NarrativeOpsConsole,
+  AdminSocial,
+  SocialGenerator,
+  SocialLibrary,
+  SocialCalendar,
+  SocialAnalytics,
+  SocialHub,
+  BillingViewer,
+  Sessions,
+  DeleteAccount,
+  AccountProfile,
+  AccountSecurity,
+  AccountBilling,
+  ValuesFinderPage,
+  ValuesPage,
+  AboutApproachPage,
+  BoundariesPage,
+  MovementSnacksPage,
+  CoherenceLadderPage,
+  PerceptionRefinementPage,
+  NervousSystemFloodingPage,
+  PermacultureWellnessPage,
+  SelfWorthReflectionPage,
+  Challenge,
+  ChallengeDay,
+  AlignmentPath,
+  SystemMapPage,
+  ReframePage,
+  TwelveStepsPage,
+  BehaviorChangePage,
+  SavedLibrary,
+  GentleProgressDashboard,
+  TopicHubPage,
+  PathwaysHome,
+  GoalOnboarding,
+  Favorites,
+  ProgressStreaks,
+  CalmPlan,
+  ValuesToActions,
+  ReflectionHistory,
+  NotificationPreferences,
+  SafetyPreferences,
+  CompassionBreak,
+  Reframe,
+  UrgeSurf,
+  GriefLetter,
+  RepairScript,
+  AweMicrodose,
+  BodyScan,
+  DigitalSunset,
+  MeaningMap,
+  CommunityCheckin,
+  ContentStudioAdmin,
+  SocialStudioAdmin,
+  NewsletterAdmin,
+  AdminPublishing,
+  AdminPublishingToday,
+  BlogDraftViewer,
+  RevenueAdmin,
+  Subscription,
+  OrderHistory,
+  PricingPage,
+  PricingReal,
+  RefundHelp,
+  LegalPage,
+  SafetyCenter,
+  DataRetention,
+  CommunityGuidelines,
+  PublicRoadmap,
+  CreatorProfile,
+  PressKit,
+  CourseCatalog,
+  PracticeLibrary,
+  RolesPermissions,
+  FeatureFlags,
+  SystemAlerts,
+  FeedbackAggregator,
+  NarrativeDrafts,
+  SecurityDashboard,
+  AuditLogExplorer,
+  EngagementDashboard,
+  AdminUsers,
+  AdminTools,
+  UserProfile,
+  WellnessGoals,
+  MeditationPlayer,
+  EmotionWheel,
+  EmailDigest,
+  AIPersonality,
+  WeeklyReflection,
+  Presence
+} from "./routes/lazyRoutes.jsx";
 
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
