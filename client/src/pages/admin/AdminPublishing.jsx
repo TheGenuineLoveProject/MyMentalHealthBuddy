@@ -262,7 +262,7 @@ export default function AdminPublishing() {
               <div className="mb-6 p-4 border-2 border-amber-200 dark:border-amber-800 rounded-lg bg-amber-50/50 dark:bg-amber-950/20">
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="font-medium">{editingPost ? `Editing: ${editingPost.title}` : "New Draft"}</h3>
-                  <button onClick={handleCancelForm} className="text-[var(--glp-sage)] hover:text-[var(--glp-deep-teal)]" data-testid="button-cancel-draft"><X className="w-4 h-4" /></button>
+                  <button onClick={handleCancelForm} aria-label="Cancel draft" title="Cancel draft" className="text-[var(--glp-sage)] hover:text-[var(--glp-deep-teal)]" data-testid="button-cancel-draft"><X className="w-4 h-4" aria-hidden="true" /></button>
                 </div>
                 <div className="space-y-3">
                   <div>
@@ -321,7 +321,7 @@ export default function AdminPublishing() {
                     >
                       {createDraftMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : editingPost ? "Update Draft" : "Save Draft"}
                     </button>
-                    <button onClick={handleCancelForm} className="px-4 py-2 text-sm rounded-lg bg-[color-mix(in_srgb,var(--glp-sage)_18%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-sage-10)]0 transition-colors" data-testid="button-cancel-form">
+                    <button onClick={handleCancelForm} className="px-4 py-2 text-sm rounded-lg bg-[color-mix(in_srgb,var(--glp-sage)_18%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-sage-10)] transition-colors" data-testid="button-cancel-form">
                       Cancel
                     </button>
                   </div>
@@ -404,7 +404,7 @@ export default function AdminPublishing() {
                                   {(post.status === "draft" || post.status === "review") && (
                                     <button
                                       onClick={() => handleEditPost(post)}
-                                      className="text-xs px-2 py-1 rounded bg-[color-mix(in_srgb,var(--glp-sage)_18%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-sage-10)]0"
+                                      className="text-xs px-2 py-1 rounded bg-[color-mix(in_srgb,var(--glp-sage)_18%,var(--glp-ivory))] dark:bg-[var(--glp-deep-teal)] hover:bg-[var(--glp-sage-10)] dark:hover:bg-[var(--glp-sage-10)]"
                                       data-testid={`button-edit-${post.id}`}
                                     >
                                       Edit
