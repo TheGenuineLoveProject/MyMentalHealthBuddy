@@ -48,6 +48,7 @@ import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscovery
 import HubRoutes from "./routes/HubRoutes.jsx";
 import ToolRoutes from "./routes/ToolRoutes.jsx";
 import AliasRedirectRoutes from "./routes/AliasRedirectRoutes.jsx";
+import ConfigUtilityRoutes from "./routes/ConfigUtilityRoutes.jsx";
 import AccountAdminRoutes from "./routes/AccountAdminRoutes.jsx";
 import AdvancedGrowthRoutes from "./routes/AdvancedGrowthRoutes.jsx";
 import './index.css'; // Your Tailwind import
@@ -581,14 +582,8 @@ export default function App() {
               <Route path="/profile">
                 <ProtectedRoute><Profile /></ProtectedRoute>
               </Route>
-              <Route path="/billing">{() => <ConfigRoute route="/billing" />}</Route>
-              <Route path="/overview">{() => <ConfigRoute route="/overview" />}</Route>
 
               {/* Wellness Pages - Config Driven */}
-              <Route path="/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
-              <Route path="/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
-              <Route path="/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
-              <Route path="/mindfulness" component={MindfulnessCanonical} />
               <Route path="/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
               <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
               <Route path="/sleep-guide">{() => <ConfigRoute route="/sleep-guide" />}</Route>
@@ -759,6 +754,7 @@ export default function App() {
               <Route path="/session">{() => <Redirect to="/meditation" />}</Route>
               <Route path="/program">{() => <Redirect to="/courses" />}</Route>
               <AliasRedirectRoutes />
+              <ConfigUtilityRoutes ConfigRoute={ConfigRoute} MindfulnessCanonical={MindfulnessCanonical} />
               <Route path="/log-out">{() => <Redirect to="/login" />}</Route>
               <Route path="/products">{() => <Redirect to="/features" />}</Route>
               <Route path="/index">{() => <Redirect to="/" />}</Route>
