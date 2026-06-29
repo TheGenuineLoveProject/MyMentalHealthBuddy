@@ -47,6 +47,7 @@ import ToastContainer from "./components/ui/toast-container";
 import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscoveryRail.jsx";
 import HubRoutes from "./routes/HubRoutes.jsx";
 import ToolRoutes from "./routes/ToolRoutes.jsx";
+import AccountAdminRoutes from "./routes/AccountAdminRoutes.jsx";
 import AdvancedGrowthRoutes from "./routes/AdvancedGrowthRoutes.jsx";
 import './index.css'; // Your Tailwind import
 // PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
@@ -1572,32 +1573,6 @@ export default function App() {
               <Route path="/account/orders">
                 <ProtectedRoute><OrderHistory /></ProtectedRoute>
               </Route>
-              <Route path="/account/profile">
-                <ProtectedRoute><AccountProfile /></ProtectedRoute>
-              </Route>
-              <Route path="/account/security">
-                <ProtectedRoute><AccountSecurity /></ProtectedRoute>
-              </Route>
-              <Route path="/account/billing">
-                <ProtectedRoute><AccountBilling /></ProtectedRoute>
-              </Route>
-              <Route path="/preferences/notifications">
-                <ProtectedRoute><NotificationPreferences /></ProtectedRoute>
-              </Route>
-              <Route path="/preferences/safety">
-                <ProtectedRoute><SafetyPreferences /></ProtectedRoute>
-              </Route>
-
-              <Route path="/content-admin">
-                <AdminGuard><ContentAdminDashboard /></AdminGuard>
-              </Route>
-              <Route path="/crm">
-                <AdminGuard><CRMPage /></AdminGuard>
-              </Route>
-              <Route path="/control">{() => <ConfigRoute route="/control" />}</Route>
-              <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
-              <Route path="/publishing">{() => <ConfigRoute route="/publishing" />}</Route>
-              <Route path="/qa">{() => <ConfigRoute route="/qa" />}</Route>
               <Route path="/design-system">{() => <ConfigRoute route="/design-system" />}</Route>
               <Route path="/wireframes">{() => <ConfigRoute route="/wireframes" />}</Route>
               <Route path="/design-dashboard">{() => <ConfigRoute route="/design-dashboard" />}</Route>
@@ -1656,6 +1631,18 @@ export default function App() {
               <Route path="/workshop">{() => <CourseCatalog />}</Route>
               <Route path="/workshops">{() => <CourseCatalog />}</Route>
               <Route path="/library" component={LearnHub} />
+
+              <AccountAdminRoutes
+                ProtectedRoute={ProtectedRoute}
+                AdminGuard={AdminGuard}
+                ConfigRoute={ConfigRoute}
+                AccountProfile={AccountProfile}
+                AccountBilling={AccountBilling}
+                NotificationPreferences={NotificationPreferences}
+                SafetyPreferences={SafetyPreferences}
+                ContentAdminDashboard={ContentAdminDashboard}
+                CRMPage={CRMPage}
+              />
 
               {/* Fallback - Config Driven Not Found */}
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>
