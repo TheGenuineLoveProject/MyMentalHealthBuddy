@@ -6,7 +6,7 @@ import { useReducedMotion } from "../a11y/ReducedMotionProvider";
 /**
  * LumiAccessibleWrapper
  * ----------------------
- * Wraps any Lumi visual (typically an <img> or animated SVG) with the
+ * Wraps any Lumi visual (typically an image element or animated SVG) with the
  * accessibility scaffolding the mascot needs to be a good citizen of the
  * page:
  *

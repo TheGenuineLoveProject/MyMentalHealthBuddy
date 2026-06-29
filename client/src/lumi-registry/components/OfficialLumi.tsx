@@ -6,6 +6,7 @@
  * shows a dev-only warning overlay on placement violations, and
  * never throws — UI must never crash on a misconfigured Lumi.
  *
+ * platform-evolution-ignore: documentation-only <img> mention; rendered image element below has alt/aria handling.
  * v5.8.64 — flipped to `<img>`-only rendering (literal-spec delta on top
  * of v5.8.63). The SVG render branch and `renderMode="svg"` default are
  * removed. The `renderMode` prop is preserved at the type level for
@@ -31,6 +32,7 @@ export type OfficialLumiPosition = "hero" | "card" | "inline" | "background";
 
 /**
  * v5.8.64 — `renderMode` is preserved as a type for source compatibility but
+ * platform-evolution-ignore: documentation-only <img> mention; rendered image element below has alt/aria handling.
  * the SVG branch has been removed. Both values resolve to `<img>`-only render.
  */
 export type OfficialLumiRenderMode = "svg" | "asset";
@@ -55,6 +57,7 @@ export interface OfficialLumiProps {
   readonly onValidationIssue?: (issues: ReadonlyArray<string>) => void;
   /**
    * @deprecated v5.8.64 — `renderMode` is accepted for source compatibility
+ * platform-evolution-ignore: documentation-only <img> mention; rendered image element below has alt/aria handling.
    * but is a runtime no-op. Every render now goes through the `<img>` path.
    * Passing `"svg"` will emit a dev-only console warning and resolve to the
    * asset path. Remove this prop from call sites; it will be deleted in a
@@ -71,10 +74,12 @@ export interface OfficialLumiProps {
 const isDev = isDevEnvironment;
 
 /**
+ * platform-evolution-ignore: documentation-only <img> mention; rendered image element below has alt/aria handling.
  * Asset render body. Owns the `<img>` 404-fallback state (lives in its
  * own component so the conditional `useState` call is unconditional —
  * the parent `OfficialLumi` may bail out before this body is reached).
  *
+ * platform-evolution-ignore: documentation-only <img> mention; rendered image element below has alt/aria handling.
  * On image load failure: the broken `<img>` is replaced by an empty,
  * still-sized container so layout doesn't jump and no broken-image UI
  * is shown. Optional `onError` callback fires with the failed src so

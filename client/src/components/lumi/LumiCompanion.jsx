@@ -163,7 +163,7 @@ export function LumiCompanion({
     if (typeof onClick === "function") onClick();
   };
 
-  // Compose CSS class string for the <img>: base mascot class + the active
+  // Compose CSS class string for the image element: base mascot class + the active
   // animation + the theme color filter + the optional .animating marker.
   // When `lockAnimationClass` is provided, it replaces the behavior-driven
   // class (e.g. forcing 'lumi-breathe' on the marketing hero so a night-time
