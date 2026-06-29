@@ -47,6 +47,7 @@ import ToastContainer from "./components/ui/toast-container";
 import SEOContentDiscoveryRail from "./components/navigation/SEOContentDiscoveryRail.jsx";
 import HubRoutes from "./routes/HubRoutes.jsx";
 import ToolRoutes from "./routes/ToolRoutes.jsx";
+import AliasRedirectRoutes from "./routes/AliasRedirectRoutes.jsx";
 import AccountAdminRoutes from "./routes/AccountAdminRoutes.jsx";
 import AdvancedGrowthRoutes from "./routes/AdvancedGrowthRoutes.jsx";
 import './index.css'; // Your Tailwind import
@@ -760,21 +761,7 @@ export default function App() {
               <Route path="/challenges">{() => <Redirect to="/challenge" />}</Route>
               <Route path="/therapist">{() => <Redirect to="/therapy" />}</Route>
               <Route path="/donate">{() => <Redirect to="/pricing" />}</Route>
-              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
-              <Route path="/article">{() => <Redirect to="/articles" />}</Route>
-              <Route path="/posts">{() => <Redirect to="/blog" />}</Route>
-              <Route path="/breathwork">{() => <Redirect to="/breathing" />}</Route>
-              <Route path="/meditate">{() => <Redirect to="/meditation" />}</Route>
-              <Route path="/affirmation">{() => <Redirect to="/affirmations" />}</Route>
-              <Route path="/timer">{() => <Redirect to="/breathing" />}</Route>
-              <Route path="/activity">{() => <Redirect to="/activities" />}</Route>
-              <Route path="/prompt">{() => <Redirect to="/prompts" />}</Route>
-              <Route path="/story">{() => <Redirect to="/journal" />}</Route>
-              <Route path="/stories">{() => <Redirect to="/journal" />}</Route>
-              <Route path="/track">{() => <Redirect to="/mood" />}</Route>
-              <Route path="/tracker">{() => <Redirect to="/mood" />}</Route>
-              <Route path="/tracking">{() => <Redirect to="/mood" />}</Route>
-              <Route path="/log">{() => <Redirect to="/journal" />}</Route>
+              <AliasRedirectRoutes />
               <Route path="/logs">{() => <Redirect to="/journal" />}</Route>
               <Route path="/tutorial">{() => <Redirect to="/guides" />}</Route>
               <Route path="/class">{() => <Redirect to="/courses" />}</Route>
