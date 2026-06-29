@@ -54,6 +54,7 @@ import { optionalAuth, requireAuth, requireAdmin } from "./middleware/auth.mjs";
 import adminRoutes from "./routes/admin.mjs";
 import adminBillingRoutes from "./routes/adminBilling.mjs";
 import platformEvolutionRoutes from "./routes/platform-evolution.mjs";
+import pathwaysRoutes from "./routes/pathways.mjs";
 import integrationHealthRoutes from "./routes/integrationHealth.mjs";
 import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
 import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
@@ -531,6 +532,7 @@ app.use("/api/admin/billing", adminBillingRoutes);
 app.use("/api/admin/publishing", adminPublishingRoutes);
 app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
 app.use("/api/admin/platform-evolution", requireAuth, requireAdmin, platformEvolutionRoutes);
+app.use("/api/pathways", pathwaysRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/telemetry", telemetryRoutes);
 

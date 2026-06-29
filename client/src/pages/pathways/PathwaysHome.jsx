@@ -74,7 +74,7 @@ export default function PathwaysHome() {
   const [selectedPathway, setSelectedPathway] = useState(null);
 
   const { data: userProgress } = useQuery({
-    queryKey: ["/api/pathways/progress /* platform-evolution-ignore: intentional disabled future Pathways progress endpoint; enabled:false prevents runtime request until feature is built. */"],
+    queryKey: ["/api/pathways/progress"],
     enabled: false
   });
 
