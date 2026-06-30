@@ -51,7 +51,7 @@ export const EMOTIONAL_CONSTRAINTS: ReadonlyArray<UsageRule> = Object.freeze([
 ] as const);
 
 export const VISUAL_COHESION_REQUIREMENTS: ReadonlyArray<UsageRule> = Object.freeze([
-  { id: "cohesion-canonical-only", rule: "Only the 7 canonical variants may appear.", severity: "critical" },
+  { id: "cohesion-canonical-only", rule: "Only protected registry Lumi variants may appear; showcase surfaces use the 7 distinct display companions.", severity: "critical" },
   { id: "cohesion-no-legacy-imports", rule: "No legacy avatar imports (mascot, buddy-old, hero-bear, green-bear).", severity: "critical" },
   { id: "cohesion-no-inline-svg-redefinition", rule: "Lumi SVG must not be hand-redefined per page.", severity: "warning" },
   { id: "cohesion-canonical-color-tokens", rule: "Lumi colors must use canonical body/belly/sprout tokens.", severity: "critical" },

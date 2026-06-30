@@ -1,7 +1,7 @@
 /**
  * Phase 29 — Page Placement Map (the core of the registry).
  *
- * Maps every product page to one of the 7 canonical Lumi variants
+ * Maps every product page to protected Lumi variants; showcase surfaces use the 7 distinct display companions
  * (or `null` for forbidden surfaces like crisis support). This is the
  * authoritative table that placement audits resolve against.
  */

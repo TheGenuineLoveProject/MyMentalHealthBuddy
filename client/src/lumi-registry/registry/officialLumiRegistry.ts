@@ -1,8 +1,8 @@
 /**
  * Phase 28 — Official Lumi Variant Registry (canonical, frozen)
  *
- * The 7 canonical Lumi variants. ALL future placement decisions resolve
- * back to one of these 7 IDs — never strings, never ad-hoc avatars.
+ * The 8 protected Lumi registry variants. Product showcase placement resolves
+ * to 7 distinct display companions; LUMI_FLOAT_IDLE is reserved for runtime idle use — never strings, never ad-hoc avatars.
  *
  * Trust boundary: this file is the source of truth. All scene → variant
  * mappings, emotional-role assignments, and placement audits MUST go
