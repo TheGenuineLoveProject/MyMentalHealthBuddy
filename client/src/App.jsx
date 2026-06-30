@@ -54,6 +54,7 @@ import AdvancedGrowthRoutes from "./routes/AdvancedGrowthRoutes.jsx";
 import './index.css'; // Your Tailwind import
 // PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
 import {
+import AdminRoutes from "./routes/AdminRoutes";
   WellnessDashboard,
   Login,
   LoginCallback,
@@ -1521,15 +1522,7 @@ export default function App() {
               <Route path="/courses">{() => <CourseCatalog />}</Route>
               <Route path="/learn/courses">{() => <CourseCatalog />}</Route>
               <Route path="/practices">{() => <PracticeLibrary />}</Route>
-              <Route path="/admin/roles">{() => <AdminGuard><RolesPermissions /></AdminGuard>}</Route>
-              <Route path="/admin/feature-flags">{() => <AdminGuard><FeatureFlags /></AdminGuard>}</Route>
-              <Route path="/admin/alerts">{() => <AdminGuard><SystemAlerts /></AdminGuard>}</Route>
-              <Route path="/admin/feedback">{() => <AdminGuard><FeedbackAggregator /></AdminGuard>}</Route>
-              <Route path="/admin/narrative">{() => <AdminGuard><NarrativeDrafts /></AdminGuard>}</Route>
-              <Route path="/admin/engagement">{() => <AdminGuard><EngagementDashboard /></AdminGuard>}</Route>
-              <Route path="/admin/analytics">{() => <AdminGuard><AnalyticsDashboard /></AdminGuard>}</Route>
-              <Route path="/admin/users">{() => <AdminGuard><AdminUsers /></AdminGuard>}</Route>
-              <Route path="/admin/tools">{() => <AdminGuard><AdminTools /></AdminGuard>}</Route>
+              <AdminRoutes AdminGuard={AdminGuard} RolesPermissions={RolesPermissions} FeatureFlags={FeatureFlags} SystemAlerts={SystemAlerts} FeedbackAggregator={FeedbackAggregator} NarrativeDrafts={NarrativeDrafts} EngagementDashboard={EngagementDashboard} AnalyticsDashboard={AnalyticsDashboard} AdminUsers={AdminUsers} AdminTools={AdminTools} />
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
               
               <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
