@@ -250,13 +250,13 @@ export default function SecurityDashboard() {
             <div className="grid md:grid-cols-3 gap-4">
               <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg" data-testid="stat-ws-connections">
                 <p className="text-sm text-purple-600 dark:text-purple-400 font-medium">Active Connections</p>
-                <p className="text-3xl font-bold text-purple-800 dark:text-purple-200">
+                <p className="text-2xl sm:text-3xl font-bold text-purple-800 dark:text-purple-200">
                   {overview?.websocket?.activeConnections || 0}
                 </p>
               </div>
               <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg" data-testid="stat-ws-rooms">
                 <p className="text-sm text-purple-600 dark:text-purple-400 font-medium">Active Rooms</p>
-                <p className="text-3xl font-bold text-purple-800 dark:text-purple-200">
+                <p className="text-2xl sm:text-3xl font-bold text-purple-800 dark:text-purple-200">
                   {overview?.websocket?.activeRooms || 0}
                 </p>
               </div>

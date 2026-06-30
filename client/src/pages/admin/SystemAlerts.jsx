@@ -123,7 +123,7 @@ export default function SystemAlerts() {
               <Bell className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold" data-testid="text-page-title">System Alerts</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold" data-testid="text-page-title">System Alerts</h1>
               <p className="text-muted-foreground">Monitor system health notifications</p>
             </div>
           </div>

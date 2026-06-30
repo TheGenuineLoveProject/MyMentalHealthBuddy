@@ -664,7 +664,7 @@ export default function AdminPublishing() {
             ) : (
               <div className="space-y-6">
                 <div className="text-center p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
-                  <div className="text-3xl font-bold text-amber-700 dark:text-amber-300">{signals.totalEvents || 0}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-amber-700 dark:text-amber-300">{signals.totalEvents || 0}</div>
                   <div className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Total Events</div>
                 </div>
 

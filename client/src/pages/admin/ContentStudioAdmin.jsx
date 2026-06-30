@@ -139,7 +139,7 @@ export default function ContentStudioAdmin() {
                 <Layers className="w-5 h-5" />
                 <span className="text-sm font-medium">Admin</span>
               </div>
-              <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-page-title">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2" data-testid="text-page-title">
                 Content Tier Compiler
               </h1>
               <p className="text-muted-foreground" data-testid="text-subtitle">

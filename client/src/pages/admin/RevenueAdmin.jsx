@@ -82,7 +82,7 @@ export default function RevenueAdmin() {
                 <DollarSign className="w-5 h-5" />
                 <span className="text-sm font-medium">Admin</span>
               </div>
-              <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-page-title">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2" data-testid="text-page-title">
                 Revenue Dashboard
               </h1>
               <p className="text-muted-foreground">

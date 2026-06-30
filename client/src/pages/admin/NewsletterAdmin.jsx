@@ -46,7 +46,7 @@ export default function NewsletterAdmin() {
           Back to Publishing Studio
         </Link>
 
-        <h1 className="text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2" data-testid="text-newsletter-title">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] mb-2" data-testid="text-newsletter-title">
           Newsletter Admin
         </h1>
         <p className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-8">
@@ -75,7 +75,7 @@ export default function NewsletterAdmin() {
                   <Users className="w-5 h-5 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
                   <span className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Total Subscribers</span>
                 </div>
-                <p className="text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{totalSignups}</p>
+                <p className="text-2xl sm:text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">{totalSignups}</p>
               </div>
 
               <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl p-6 shadow-sm border border-[var(--glp-sage)] dark:border-[var(--glp-sage)]" data-testid="card-drafts-count">
@@ -83,7 +83,7 @@ export default function NewsletterAdmin() {
                   <FileText className="w-5 h-5 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
                   <span className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Newsletter Drafts</span>
                 </div>
-                <p className="text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
+                <p className="text-2xl sm:text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                   {drafts.filter(d => d.contentType === "newsletter").length}
                 </p>
               </div>
@@ -93,7 +93,7 @@ export default function NewsletterAdmin() {
                   <BarChart3 className="w-5 h-5 text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]" />
                   <span className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Last 7 Days</span>
                 </div>
-                <p className="text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
+                <p className="text-2xl sm:text-3xl font-bold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">
                   {signupsByDay.slice(0, 7).reduce((sum, d) => sum + (d.count || 0), 0)}
                 </p>
               </div>

@@ -174,7 +174,7 @@ export default function AdminSocial() {
               <ChevronRight className="w-3 h-3" />
               <span>Social Ops Console</span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[var(--glp-deep-teal)] to-[var(--glp-sage)] bg-clip-text text-transparent" data-testid="text-page-title">
+            <h1 className="text-2xl md:text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[var(--glp-deep-teal)] to-[var(--glp-sage)] bg-clip-text text-transparent" data-testid="text-page-title">
               Enterprise Social Ops Console
             </h1>
             <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mt-1">Publish → Repurpose → Track → Learn → Improve</p>

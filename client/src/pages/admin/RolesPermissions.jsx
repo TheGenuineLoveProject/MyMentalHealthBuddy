@@ -80,7 +80,7 @@ export default function RolesPermissions() {
               <Shield className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground" data-testid="text-page-title">
+              <h1 className="text-2xl sm:text-3xl md:text-2xl sm:text-3xl sm:text-4xl font-bold text-foreground" data-testid="text-page-title">
                 Roles & Permissions
               </h1>
               <p className="text-muted-foreground">Manage access control for admin users</p>

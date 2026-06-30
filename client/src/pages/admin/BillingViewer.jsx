@@ -103,7 +103,7 @@ export default function BillingViewerPage() {
         <ArrowLeft size={16} /> Back to Command Center
       </Link>
       <div>
-        <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">Billing Overview</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight" data-testid="text-page-title">Billing Overview</h1>
         <p className="text-muted-foreground">Read-only view of subscription data</p>
       </div>
 

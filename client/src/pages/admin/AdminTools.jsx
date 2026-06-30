@@ -327,7 +327,7 @@ export default function AdminTools() {
                 <Wand2 className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold" data-testid="text-page-title">Platform Tools ({totalTools})</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold" data-testid="text-page-title">Platform Tools ({totalTools})</h1>
                 <p className="text-muted-foreground text-sm">AI-powered health monitor with Codex, Perplexity & Canva knowledge base</p>
               </div>
             </div>
@@ -417,7 +417,7 @@ export default function AdminTools() {
             <div className={`mb-6 p-4 rounded-xl border ${scoreBg}`} data-testid="panel-results-summary">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className={`text-4xl font-bold ${scoreColor}`} data-testid="text-health-score">{healthScore}%</div>
+                  <div className={`text-2xl sm:text-3xl sm:text-4xl font-bold ${scoreColor}`} data-testid="text-health-score">{healthScore}%</div>
                   <div>
                     <div className="font-semibold text-sm">Platform Health Score</div>
                     <div className="text-xs text-muted-foreground">Last check: {lastFullCheck}</div>

@@ -344,7 +344,7 @@ export default function SocialStudioAdmin() {
                 <Share2 className="w-5 h-5" />
                 <span className="text-sm font-medium">Admin Dashboard</span>
               </div>
-              <h1 className="text-3xl font-bold text-foreground mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
                 Social Content Studio
               </h1>
               <p className="text-muted-foreground">

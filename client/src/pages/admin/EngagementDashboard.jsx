@@ -85,7 +85,7 @@ export default function EngagementDashboard() {
                 <BarChart3 className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold" data-testid="text-page-title">Engagement Dashboard</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold" data-testid="text-page-title">Engagement Dashboard</h1>
                 <p className="text-muted-foreground">Platform metrics and feature usage overview</p>
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function EngagementDashboard() {
                 <div className="flex items-center justify-between">
                   <metric.icon className="w-8 h-8 text-primary/60" />
                 </div>
-                <p className="text-3xl font-bold mt-4" data-testid={`metric-value-${i}`}>{metric.value}</p>
+                <p className="text-2xl sm:text-3xl font-bold mt-4" data-testid={`metric-value-${i}`}>{metric.value}</p>
                 <p className="text-sm text-muted-foreground">{metric.label}</p>
                 <p className="text-xs text-muted-foreground/70 mt-1">{metric.desc}</p>
               </CardContent>

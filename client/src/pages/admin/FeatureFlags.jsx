@@ -177,7 +177,7 @@ export default function FeatureFlags() {
               <Flag className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold" data-testid="text-page-title">Feature Flags</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold" data-testid="text-page-title">Feature Flags</h1>
               <p className="text-muted-foreground" data-testid="text-subtitle">
                 {flags.length} flags &middot; {enabledCount} enabled &middot; {disabledCount} disabled
               </p>

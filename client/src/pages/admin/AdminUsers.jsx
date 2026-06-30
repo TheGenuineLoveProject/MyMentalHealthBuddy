@@ -82,7 +82,7 @@ export default function AdminUsers() {
                 <Users className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold" data-testid="text-page-title">Admin Users</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold" data-testid="text-page-title">Admin Users</h1>
                 <p className="text-muted-foreground">User management and admin access overview</p>
               </div>
             </div>
@@ -106,7 +106,7 @@ export default function AdminUsers() {
                   <metric.icon className={`w-8 h-8 ${metric.color} opacity-60`} />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">{metric.label}</span>
                 </div>
-                <p className="text-3xl font-bold" data-testid={`user-metric-value-${i}`}>{metric.value}</p>
+                <p className="text-2xl sm:text-3xl font-bold" data-testid={`user-metric-value-${i}`}>{metric.value}</p>
                 <p className="text-xs text-muted-foreground/70 mt-1">{metric.desc}</p>
               </CardContent>
             </Card>
