@@ -7,7 +7,7 @@
  * across viewports, prefer the SVG <LumiBrandLogo/>.
  */
 import { Link } from "wouter";
-import lockupPng from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+const lockupPng = "/brand/logo.webp";
 
 export default function LumiBrandLockupImage({
   height = 64,

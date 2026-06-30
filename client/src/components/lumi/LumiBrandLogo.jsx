@@ -14,7 +14,7 @@
  * Sizes: sm | md | lg | xl
  */
 import { Link } from "wouter";
-import lockupUrl from "@assets/mmhb_brand_logo_lockup_1777538625498.png";
+const lockupUrl = "/brand/logo.webp";
 import BuddyAvatar from "@/components/avatar/BuddyAvatar";
 
 const SIZES = {
