@@ -1338,7 +1338,7 @@ a, a:visited {
 .text-4xl { font-size: clamp(1.75rem, 5vw, 2.25rem); }
 .text-5xl { font-size: clamp(2rem, 6vw, 3rem); }
 .text-6xl { font-size: clamp(2.25rem, 7vw, 3.75rem); }
-.text-7xl { font-size: clamp(2.5rem, 8vw, 4.5rem); }
+.text-7xl { font-size: clamp(1.9rem, 7vw, 3.25rem); }
 .text-8xl { font-size: clamp(3rem, 10vw, 6rem); }
 .text-9xl { font-size: clamp(3.5rem, 12vw, 8rem); }
 
@@ -8012,7 +8012,7 @@ h3,
   .text-9xl,
   [class*="hero" i] h1,
   [class*="title" i] {
-    font-size: clamp(2rem, 9vw, 3.25rem);
+    font-size: clamp(1.6rem, 6.5vw, 2.4rem);
     line-height: 1.05;
     letter-spacing: -0.04em;
   }
@@ -8615,7 +8615,7 @@ button:disabled,
    - preserves desktop visual hierarchy
 */
 :root {
-  --glp-mobile-title-max: clamp(1.75rem, 8vw, 2.75rem);
+  --glp-mobile-title-max: clamp(1.45rem, 6vw, 2.1rem);
   --glp-mobile-heading-max: clamp(1.45rem, 6vw, 2.15rem);
   --glp-mobile-subheading-max: clamp(1.125rem, 4.5vw, 1.5rem);
   --glp-mobile-body: clamp(0.9375rem, 3.45vw, 1rem);
@@ -8750,7 +8750,7 @@ button:disabled,
 @media (max-width: 640px) {
   .text-display-xl,
   .text-display-lg {
-    font-size: clamp(1.85rem, 8vw, 2.35rem) !important;
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
     line-height: 1.08 !important;
     letter-spacing: -0.035em;
   }
@@ -8761,7 +8761,7 @@ button:disabled,
   .text-4xl,
   .text-5xl,
   .text-6xl {
-    font-size: clamp(1.75rem, 8vw, 2.4rem) !important;
+    font-size: clamp(1.45rem, 6vw, 2.05rem) !important;
     line-height: 1.12 !important;
   }
 
@@ -8769,7 +8769,7 @@ button:disabled,
   [data-testid*="time"],
   [data-testid*="count"],
   [data-testid*="score"] {
-    font-size: clamp(2rem, 11vw, 3rem) !important;
+    font-size: clamp(1.55rem, 6vw, 2.15rem) !important;
     line-height: 1 !important;
   }
 
