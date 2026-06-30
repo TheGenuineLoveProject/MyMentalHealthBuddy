@@ -51,6 +51,7 @@ import AliasRedirectRoutes from "./routes/AliasRedirectRoutes.jsx";
 import ConfigUtilityRoutes from "./routes/ConfigUtilityRoutes.jsx";
 import AccountAdminRoutes from "./routes/AccountAdminRoutes.jsx";
 import AdminRoutes from "./routes/AdminRoutes";
+import CommunityRoutes from "./routes/CommunityRoutes.jsx";
 import AdvancedGrowthRoutes from "./routes/AdvancedGrowthRoutes.jsx";
 import './index.css'; // Your Tailwind import
 // PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
@@ -1252,20 +1253,18 @@ export default function App() {
               </Route>
 
               {/* Community Routes */}
-              <Route path="/community">
-                <CommunityHub />
-              </Route>
-              <Route path="/community/feed">
-                <ProtectedRoute><CommunityPage /></ProtectedRoute>
-              </Route>
+              <CommunityRoutes
+                CommunityHub={CommunityHub}
+                CommunityPage={CommunityPage}
+                CommunityCircle={CommunityCircle}
+                DiscussionPage={DiscussionPage}
+                CommunityCheckin={CommunityCheckin}
+                CommunityGuidelines={CommunityGuidelines}
+                ProtectedRoute={ProtectedRoute}
+                ConfigRoute={ConfigRoute}
+              />
               <Route path="/forum">
                 <ProtectedRoute><CommunityPage /></ProtectedRoute>
-              </Route>
-              <Route path="/community/circle">
-                <ProtectedRoute><CommunityCircle /></ProtectedRoute>
-              </Route>
-              <Route path="/community/discussion/:id">
-                <ProtectedRoute><DiscussionPage /></ProtectedRoute>
               </Route>
               <Route path="/insights">
                 <ProtectedRoute><InsightsDashboard /></ProtectedRoute>
@@ -1412,19 +1411,7 @@ export default function App() {
                 <ProtectedRoute><ConfigRoute route="/ai/meditation" /></ProtectedRoute>
               </Route>
 
-              {/* Additional Community Routes - Config Driven */}
-              <Route path="/community/events">
-                <ProtectedRoute><ConfigRoute route="/community/events" /></ProtectedRoute>
-              </Route>
-              <Route path="/community/stories">
-                <ProtectedRoute><ConfigRoute route="/community/stories" /></ProtectedRoute>
-              </Route>
-              <Route path="/community/mentors">
-                <ProtectedRoute><ConfigRoute route="/community/mentors" /></ProtectedRoute>
-              </Route>
-              <Route path="/community/challenges">
-                <ProtectedRoute><ConfigRoute route="/community/challenges" /></ProtectedRoute>
-              </Route>
+
 
               {/* Admin Routes (require admin role) */}
               <Route path="/admin">
@@ -1515,7 +1502,7 @@ export default function App() {
               {/* Batch 14 - Trust, Safety, Community, Learning */}
               <Route path="/safety-center">{() => <SafetyCenter />}</Route>
               <Route path="/data-retention">{() => <DataRetention />}</Route>
-              <Route path="/community-guidelines">{() => <CommunityGuidelines />}</Route>
+
               <Route path="/roadmap">{() => <PublicRoadmap />}</Route>
               <Route path="/our-story">{() => <CreatorProfile />}</Route>
               <Route path="/press">{() => <PressKit />}</Route>
