@@ -50,11 +50,11 @@ import ToolRoutes from "./routes/ToolRoutes.jsx";
 import AliasRedirectRoutes from "./routes/AliasRedirectRoutes.jsx";
 import ConfigUtilityRoutes from "./routes/ConfigUtilityRoutes.jsx";
 import AccountAdminRoutes from "./routes/AccountAdminRoutes.jsx";
+import AdminRoutes from "./routes/AdminRoutes";
 import AdvancedGrowthRoutes from "./routes/AdvancedGrowthRoutes.jsx";
 import './index.css'; // Your Tailwind import
 // PHASE116Z28_FORCE_MAIN_JS_BUNDLE_PICKUP_MARKER 2026-06-24
 import {
-import AdminRoutes from "./routes/AdminRoutes";
   WellnessDashboard,
   Login,
   LoginCallback,
