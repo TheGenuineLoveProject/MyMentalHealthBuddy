@@ -109,7 +109,7 @@ function Header() {
             }}
           >
             <OfficialLumi
-              variant="LUMI_CALM"
+              variant="LUMI_CALM_FLOAT"
               scene="header-brand-mark"
               position="inline"
               widthPx={56}

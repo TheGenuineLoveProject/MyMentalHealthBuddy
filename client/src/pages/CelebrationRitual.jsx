@@ -171,7 +171,7 @@ export default function CelebrationRitual() {
                 {/* Lumi (joy/yellow/celebrating) anchors the celebration intro
                     per Avatar v4.2; preserves Crown import for downstream phases. */}
                 <OfficialLumi
-                  variant="LUMI_CELEBRATION"
+                  variant="LUMI_HEART"
                   scene="celebration-ritual"
                   position="card"
                   pageId="celebration-ritual"

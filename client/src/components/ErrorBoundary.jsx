@@ -59,7 +59,7 @@ export class ErrorBoundary extends React.Component {
             >
               <React.Suspense fallback={null}>
                 <OfficialLumi
-                  variant="LUMI_SUPPORTIVE"
+                  variant="LUMI_COMPANION"
                   scene="error-boundary"
                   position="card"
                   pageId="error-boundary"

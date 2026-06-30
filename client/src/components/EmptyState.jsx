@@ -94,7 +94,7 @@ export default function EmptyState({
           imported for EmptyStateInline below. */}
       <div className="mx-auto mb-6 flex items-center justify-center" style={{ width: 128, height: 128 }}>
         <OfficialLumi
-          variant="LUMI_SUPPORTIVE"
+          variant="LUMI_COMPANION"
           scene="empty-state"
           position="card"
           pageId={`empty-state-${type}`}

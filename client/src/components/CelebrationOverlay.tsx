@@ -123,7 +123,7 @@ export default function CelebrationOverlay({
       </div>
 
       <OfficialLumi
-        variant="LUMI_CELEBRATION"
+        variant="LUMI_HEART"
         scene="celebration-overlay"
         position="card"
         pageId="celebration-overlay"

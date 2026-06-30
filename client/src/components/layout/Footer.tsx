@@ -24,7 +24,7 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <OfficialLumi
-                variant="LUMI_CALM"
+                variant="LUMI_CALM_FLOAT"
                 scene="footer-brand-mark"
                 position="inline"
                 widthPx={32}

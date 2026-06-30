@@ -167,7 +167,7 @@ export default function CelebrationFlow() {
           {phase === 1 && (
             <>
               <OfficialLumi
-                variant="LUMI_CELEBRATION"
+                variant="LUMI_HEART"
                 scene="celebration-flow"
                 position="card"
                 pageId="celebration-flow"
@@ -187,7 +187,7 @@ export default function CelebrationFlow() {
           {phase === 2 && (
             <>
               <OfficialLumi
-                variant="LUMI_CELEBRATION"
+                variant="LUMI_HEART"
                 scene="celebration-flow"
                 position="card"
                 pageId="celebration-flow"
@@ -207,7 +207,7 @@ export default function CelebrationFlow() {
           {phase === 3 && (
             <>
               <OfficialLumi
-                variant="LUMI_CELEBRATION"
+                variant="LUMI_HEART"
                 scene="celebration-flow"
                 position="card"
                 pageId="celebration-flow"
