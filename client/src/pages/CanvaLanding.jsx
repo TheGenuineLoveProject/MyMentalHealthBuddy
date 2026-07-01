@@ -122,10 +122,10 @@ export default function CanvaLanding() {
         .cl-lumi {
           margin-top: clamp(2.5rem, 6vw, 4rem);
           border-radius: 1.75rem;
-          border: 1px solid rgba(22, 58, 54, 0.10);
-          background: rgba(255, 255, 255, 0.62);
-          padding: clamp(2rem, 5vw, 3rem) clamp(1.4rem, 4vw, 2.5rem);
-          box-shadow: 0 18px 40px rgba(22, 58, 54, 0.06);
+          border: 0;
+          background: transparent;
+          padding: clamp(1.25rem, 4vw, 2rem) 0;
+          box-shadow: none;
           text-align: center;
         }
         .cl-lumi h2 {
