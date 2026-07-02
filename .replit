@@ -6,7 +6,7 @@ channel = "stable-24_05"
 packages = ["dig", "lsof"]
 
 [deployment]
-run = ["node", "dist/server.mjs"]
+run = ["sh", "-c", "NODE_ENV=production node dist/server.mjs"]
 deploymentTarget = "vm"
 # PHASE115O7_REPLIT_DEPLOYMENT_CLEAN_BUILD_REPAIR
 build = ["sh", "-c", "npm install && rm -rf dist client/dist && NODE_OPTIONS=--max-old-space-size=4096 npm run build && node scripts/build-server.mjs"]
@@ -133,3 +133,5 @@ outputType = "webview"
 # phase11748 force health dashboard deployment pickup 2026-06-25T22:10:33Z
 
 # phase11766 force social dashboard deployment pickup 2026-06-26T00:34:50Z
+
+# PHASE12471_PRODUCTION_NODE_ENV_FIX - deployment run now sets NODE_ENV=production
