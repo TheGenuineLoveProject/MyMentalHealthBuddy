@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { signUserToken, requireAuth } from "../middleware/auth.mjs";
+import { loginRateLimit, authRateLimit } from "../middleware/rateLimit.mjs";
 
 const router = express.Router();
 
@@ -48,7 +49,7 @@ function deriveNameFromEmail(email) {
   return local.slice(0, 64) || "user";
 }
 
-router.post("/register", async (req, res) => {
+router.post("/register", authRateLimit, async (req, res) => {
   try {
     await ensureUsersTable();
 
@@ -102,7 +103,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", loginRateLimit, async (req, res) => {
   try {
     await ensureUsersTable();
 
