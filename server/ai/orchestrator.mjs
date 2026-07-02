@@ -302,6 +302,63 @@ export async function orchestrateAIRequest({
                 };
         }
 
+        // PHASE12485: Post-generation safety gate.
+        // The user input is already scanned before provider call. This closes the
+        // second half of the safety loop by scanning the AI text before it is
+        // returned or stored in memory.
+        const outputText = String(aiResult.reply || "").trim();
+        const guardedOutput = safetyGuardInput(outputText);
+
+        if (guardedOutput?.blocked && guardedOutput?.crisis) {
+                logSafetyEvent({
+                        route,
+                        type: "ai_output_crisis_blocked",
+                        category: "crisis",
+                        severity: "high",
+                        signal: "ai_output_crisis_match",
+                });
+
+                return {
+                        ok: true,
+                        stage: "ai_output_safety",
+                        outcome: "crisis",
+                        mode: "crisis_response",
+                        response: {
+                                isCrisis: true,
+                                reply: CRISIS_RESPONSE.reply,
+                                resources: CRISIS_RESPONSE.resources,
+                                signals: ["ai_output_crisis_match"],
+                                action: "escalate_immediately",
+                        },
+                };
+        }
+
+        if (guardedOutput?.blocked) {
+                logSafetyEvent({
+                        route,
+                        type: "ai_output_policy_blocked",
+                        category: "policy",
+                        severity: "high",
+                        signal: "ai_output_blocked_pattern",
+                });
+
+                return {
+                        ok: true,
+                        stage: "ai_output_safety",
+                        outcome: "soft_response",
+                        mode: "safety_replacement",
+                        response: {
+                                reply:
+                                        "I want to keep this safe and grounded. Let’s pause and choose one gentle next step: take one slow breath, name what you’re feeling, or open the crisis page if you might be at risk.",
+                                source: "safety_replacement",
+                                modelUsed: aiResult.modelUsed,
+                                latencyMs: aiResult.latency,
+                                modules,
+                                tool: toolPayload,
+                        },
+                };
+        }
+
         // Persist conversation memory (skip on crisis — already short-circuited above).
         // Awaited so the next turn deterministically sees the freshly-written summary
         // (acceptance: turn N+1 must show hasSummary: true after a summarization run).
