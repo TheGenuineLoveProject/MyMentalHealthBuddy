@@ -48,6 +48,8 @@ export function csrfProtection(req, res, next) {
   // Public/bootstrap entry points that must work without an established session:
   // admin login token verification + public lead / newsletter forms.
   if (req.path === "/api/admin/verify-token") return next();
+  if (req.path === "/api/account/password-reset/request") return next();
+  if (req.path === "/api/account/password-reset/confirm") return next();
   if (req.path === "/api/newsletter/subscribe") return next();
   if (req.path === "/api/newsletter/unsubscribe") return next();
   if (req.path === "/api/leads") return next();
