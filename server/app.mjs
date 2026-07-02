@@ -400,6 +400,14 @@ import { registerInternalIntelligenceServer } from "./internal-intelligence-serv
 const IS_DEV = process.env.NODE_ENV !== "production";
 console.log(`[boot] mode=${IS_DEV ? "development" : "production"} (NODE_ENV=${process.env.NODE_ENV || "<unset>"})`);
 app.use(helmet({
+  // The Replit workspace preview (and canvas webview) embed this app in an
+  // iframe from a replit.com origin. helmet's defaults (X-Frame-Options:
+  // SAMEORIGIN + CSP frame-ancestors 'self') make the browser show
+  // "refused to connect" in that preview. Frame embedding is governed by the
+  // frame-ancestors directives below (which modern browsers prefer over XFO);
+  // the legacy X-Frame-Options header can't express an allow-list, so it is
+  // disabled rather than emitting a conflicting SAMEORIGIN.
+  frameguard: false,
   contentSecurityPolicy: IS_DEV
     ? {
       useDefaults: true,
@@ -409,6 +417,8 @@ app.use(helmet({
         "connect-src": ["'self'", "ws:", "wss:", "http:", "https:"],
         "img-src": ["'self'", "data:", "blob:", "https:"],
         "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
+        // Dev preview is proxied through changing Replit origins — allow framing.
+        "frame-ancestors": ["*"],
       },
     }
     : {
@@ -423,6 +433,8 @@ app.use(helmet({
         "img-src": ["'self'", "data:", "blob:", "https:"],
         "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
         "frame-src": ["'self'", "https://js.stripe.com", "https://hooks.stripe.com", "https://m.stripe.network"],
+        // Prod stays locked down except the Replit workspace webview.
+        "frame-ancestors": ["'self'", "https://replit.com", "https://*.replit.com"],
       },
     },
 }));

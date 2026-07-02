@@ -629,7 +629,7 @@ router.post("/repair", requireAdminForRepair, async (req, res) => {
         secChecks.push("Helmet middleware: enabled");
         secChecks.push(`CORS: configured`);
         secChecks.push(`CSP: ${process.env.NODE_ENV === 'production' ? 'enforced' : 'report-only in dev'}`);
-        secChecks.push(`X-Frame-Options: DENY`);
+        secChecks.push(`Frame embedding: CSP frame-ancestors (dev: any — Replit preview; prod: 'self' + replit.com only)`);
         secChecks.push(`X-Content-Type-Options: nosniff`);
         secChecks.push(`Referrer-Policy: strict-origin-when-cross-origin`);
         secChecks.push(`HSTS: ${process.env.NODE_ENV === 'production' ? 'enabled' : 'dev mode - disabled'}`);
