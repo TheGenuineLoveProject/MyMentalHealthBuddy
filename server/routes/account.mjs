@@ -11,6 +11,7 @@ import { authRateLimit, sensitiveRateLimit } from "../middleware/rateLimit.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 import { logAuditEvent, AuditActions } from "../utils/auditLogger.mjs";
 import { logger } from "../utils/logger.mjs";
+import { sendTransactionalEmail } from "../utils/email.mjs";
 import { z } from "zod";
 
 const router = express.Router();
@@ -145,8 +146,42 @@ router.post("/password-reset/request", authRateLimit, async (req, res) => {
       expiresAt,
     });
 
-    if (process.env.NODE_ENV === "development" && !process.env.REPLIT_DEPLOYMENT) {
-      logger.info("Password reset token generated (dev only)", { email, token });
+    const publicBaseUrl =
+      process.env.PUBLIC_APP_URL ||
+      process.env.APP_PUBLIC_URL ||
+      process.env.FRONTEND_URL ||
+      process.env.REPLIT_DOMAINS?.split(",")?.[0]?.replace(/^/, "https://") ||
+      "https://www.genuineloveproject.com";
+
+    const resetUrl = `${publicBaseUrl.replace(/\/$/, "")}/reset-password?token=${encodeURIComponent(token)}`;
+
+    const emailResult = await sendTransactionalEmail({
+      to: email,
+      subject: "Reset your MyMentalHealthBuddy password",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; color: #2f3a3a;">
+          <h1 style="color:#2F5D5D;">Password reset request</h1>
+          <p>We received a request to reset your password.</p>
+          <p>This link expires in 1 hour. If you did not request this, you can ignore this email.</p>
+          <p style="margin: 28px 0;">
+            <a href="${resetUrl}" style="background:#2F5D5D;color:#ffffff;padding:12px 18px;border-radius:8px;text-decoration:none;display:inline-block;">
+              Reset password
+            </a>
+          </p>
+          <p style="font-size:13px;color:#667;">If the button does not work, copy and paste this link into your browser:</p>
+          <p style="font-size:13px;word-break:break-all;color:#2F5D5D;">${resetUrl}</p>
+          <hr style="border:none;border-top:1px solid #eee;margin:24px 0;" />
+          <p style="font-size:12px;color:#777;">
+            Educational wellness support only. If you are in crisis, call or text 988, or text HOME to 741741.
+          </p>
+        </div>
+      `
+    });
+
+    if (emailResult?.skipped) {
+      logger.warn("Password reset email skipped because email service is not configured", { email });
+    } else {
+      logger.info("Password reset email queued", { email });
     }
 
     return success(res, null, "If an account exists with this email, a reset link will be sent.");
