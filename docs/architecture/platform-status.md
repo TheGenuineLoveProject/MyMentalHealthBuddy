@@ -4,13 +4,13 @@
 > overwritten on every `npm run verify` / `npm run verify:foundation`.
 > Structured history: `logs/verification.jsonl`.
 
-- **Last verified:** 2026-06-01T06:29:49.264Z
+- **Last verified:** 2026-07-02T05:38:54.080Z
 - **Base URL:** http://localhost:5000
 - **Overall (hard gates):** PASS
 
 | check | gate | result | detail |
 | --- | --- | --- | --- |
-| build_artifact | hard | PASS | present (10652 bytes) |
+| build_artifact | hard | PASS | present (10568 bytes) |
 | api_health | hard | PASS | http://localhost:5000/api/health -> 200 |
 | healthz | soft | PASS | http://localhost:5000/healthz -> 200 |
 | readyz | soft | PASS | http://localhost:5000/readyz -> 200 |
