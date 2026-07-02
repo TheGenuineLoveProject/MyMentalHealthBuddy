@@ -1089,6 +1089,73 @@ let listenRetries = 0;
 let relistenTimer = null;
 let shuttingDown = false;
 
+// ===== SINGLE-INSTANCE ENFORCEMENT (port reclaim) =====
+// Publish/redeploy cycles can leave a stale copy of THIS server (an older
+// `node server/app.mjs` whose shutdown signal never arrived) squatting :5000,
+// which made the workflow fail with EADDRINUSE after every deploy. If the bind
+// keeps failing past the normal handoff window, find that stale duplicate and
+// reclaim the port. Strictly scoped — a candidate must be ALL of:
+//   1. a node process whose argv includes server/app.mjs (this exact app),
+//   2. running in this same workspace (same cwd, when readable),
+//   3. started BEFORE this process (only older generations; two racing fresh
+//      starters can never kill each other — newest deterministically wins).
+// It can never touch npm, shells, the supervisor, or any unrelated process.
+function procStartTicks(pid) {
+  try {
+    const stat = fs.readFileSync(`/proc/${pid}/stat`, "utf8");
+    // comm field may contain spaces/parens — parse after the last ')'
+    const rest = stat.slice(stat.lastIndexOf(")") + 2).split(" ");
+    return Number(rest[19]); // field 22 = starttime (clock ticks since boot)
+  } catch {
+    return null;
+  }
+}
+
+function findStaleDuplicateServers() {
+  const found = [];
+  const selfStart = procStartTicks(process.pid);
+  let selfCwd = null;
+  try { selfCwd = fs.readlinkSync("/proc/self/cwd"); } catch {}
+  let entries = [];
+  try { entries = fs.readdirSync("/proc"); } catch { return found; }
+  for (const name of entries) {
+    if (!/^\d+$/.test(name)) continue;
+    const pid = Number(name);
+    if (pid === process.pid) continue;
+    let argv;
+    try {
+      argv = fs.readFileSync(`/proc/${pid}/cmdline`, "utf8").split("\0").filter(Boolean);
+    } catch { continue; }
+    if (!argv.length || !/(^|\/)node$/.test(argv[0])) continue;
+    if (!argv.some((a) => a === "server/app.mjs" || a.endsWith("/server/app.mjs"))) continue;
+    const start = procStartTicks(pid);
+    if (selfStart == null || start == null || start >= selfStart) continue; // fail closed: only provably-older candidates
+    try {
+      const cwd = fs.readlinkSync(`/proc/${pid}/cwd`);
+      if (selfCwd && cwd && cwd !== selfCwd) continue; // different workspace — leave it alone
+    } catch {}
+    found.push(pid);
+  }
+  return found;
+}
+
+function reclaimPortFromStaleDuplicates(signal) {
+  const stale = findStaleDuplicateServers();
+  for (const pid of stale) {
+    try {
+      process.kill(pid, signal);
+      console.warn(
+        `[SERVER] port ${PORT} reclaim: sent ${signal} to stale duplicate server pid=${pid} ` +
+        `(older server/app.mjs left over from a previous restart/redeploy)`,
+      );
+    } catch {}
+  }
+  if (!stale.length) {
+    console.warn(`[SERVER] port ${PORT} reclaim: no stale duplicate server found (holder is not this app)`);
+  }
+  return stale.length;
+}
+
 const server = app.listen(PORT, "0.0.0.0");
 
 server.on("listening", () => {
@@ -1116,6 +1183,13 @@ server.on("error", (err) => {
     console.warn(
       `[SERVER] port ${PORT} busy (EADDRINUSE) — previous instance still releasing it; retry ${listenRetries}/${MAX_LISTEN_RETRIES} in ${RELISTEN_DELAY_MS}ms`,
     );
+    // Normal graceful handoff resolves within ~2 retries. If we're still locked
+    // out after 3 (~1.2s), the holder is a stale duplicate that never got its
+    // shutdown signal (post-publish orphan) — reclaim gracefully (it has SIGTERM
+    // handlers that release the port instantly). If it STILL holds the port by
+    // retry 8 (~3.2s), it's wedged — force it. Retries continue either way.
+    if (listenRetries === 3) reclaimPortFromStaleDuplicates("SIGTERM");
+    else if (listenRetries === 8) reclaimPortFromStaleDuplicates("SIGKILL");
     relistenTimer = setTimeout(() => server.listen(PORT, "0.0.0.0"), RELISTEN_DELAY_MS);
     return;
   }
