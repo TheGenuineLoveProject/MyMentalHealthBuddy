@@ -21,7 +21,7 @@ export function signUserToken(user) {
       role: user.role || "user"
     },
     JWT_SECRET,
-    { expiresIn: "7d" }
+    { expiresIn: process.env.JWT_ACCESS_EXPIRES || "15m" }
   );
 }
 

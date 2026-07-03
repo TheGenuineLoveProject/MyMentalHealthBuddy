@@ -34,3 +34,18 @@ export async function revokeRefreshToken({ userId, token }) {
     eq(refreshTokens.tokenHash, tokenHash)
   ));
 }
+
+
+export async function findValidRefreshToken(token) {
+  const tokenHash = hashToken(token);
+  const rows = await db
+    .select()
+    .from(refreshTokens)
+    .where(and(
+      eq(refreshTokens.tokenHash, tokenHash),
+      gt(refreshTokens.expiresAt, new Date())
+    ))
+    .limit(1);
+
+  return rows[0] || null;
+}

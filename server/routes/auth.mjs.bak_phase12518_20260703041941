@@ -78,7 +78,7 @@ function deriveNameFromEmail(email) {
 }
 
 async function issueSession(res, user) {
-  const token = signUserToken(user);
+  const token = await issueSession(res, user);
   const refreshToken = newRefreshToken();
 
   await storeRefreshToken({

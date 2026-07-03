@@ -14,7 +14,7 @@ import {
   revokeAllRefreshTokens,
 } from "../services/refreshTokens.service.mjs";
 
-const router = express.Router();
+const token = await issueSession(res,user);
 
 let _usersTableEnsured = false;
 async function ensureUsersTable() {
@@ -134,7 +134,7 @@ router.post("/register", authRateLimit, async (req, res) => {
     `);
 
     const user = created.rows[0];
-    const token = await issueSession(res, user);
+    const token = await issueSession(res,user);
 
     return res.json({
       ok: true,

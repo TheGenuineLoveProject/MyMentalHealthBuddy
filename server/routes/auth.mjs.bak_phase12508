@@ -134,7 +134,7 @@ router.post("/register", authRateLimit, async (req, res) => {
     `);
 
     const user = created.rows[0];
-    const token = await issueSession(res, user);
+    const token = signUserToken(user);
 
     return res.json({
       ok: true,
