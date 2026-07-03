@@ -180,7 +180,7 @@ router.post("/login", loginRateLimit, async (req, res) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const token = signUserToken(user);
+    const token = await issueSession(res, user);
 
     return res.json({
       ok: true,
@@ -261,7 +261,7 @@ router.post("/refresh", async (req, res) => {
     }
 
     await revokeRefreshToken({ userId: user.id, token: refreshToken });
-    const token = signUserToken(user);
+    const token = await issueSession(res, user);
 
     return res.json({
       ok: true,
