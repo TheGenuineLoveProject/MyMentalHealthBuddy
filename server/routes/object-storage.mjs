@@ -6,6 +6,15 @@ import { requireAuth } from "../middleware/auth.mjs";
 const router = Router();
 
 const REPLIT_SIDECAR_ENDPOINT = "http://127.0.0.1:1106";
+const MAX_OBJECT_UPLOAD_SIZE_BYTES = 10 * 1024 * 1024;
+const ALLOWED_OBJECT_UPLOAD_MIME_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "application/pdf",
+  "text/plain",
+]);
 
 function getPrivateObjectDir() {
   const dir = process.env.PRIVATE_OBJECT_DIR || "";
@@ -102,9 +111,21 @@ router.post("/request-url", requireAuth, async (req, res) => {
   try {
     const { name, size, contentType } = req.body;
 
-    if (!name) {
+    if (!name || typeof name !== "string") {
       return res.status(400).json({
         error: "Missing required field: name",
+      });
+    }
+
+    if (!contentType || typeof contentType !== "string" || !ALLOWED_OBJECT_UPLOAD_MIME_TYPES.has(contentType)) {
+      return res.status(400).json({
+        error: "Unsupported content type",
+      });
+    }
+
+    if (!Number.isFinite(Number(size)) || Number(size) <= 0 || Number(size) > MAX_OBJECT_UPLOAD_SIZE_BYTES) {
+      return res.status(400).json({
+        error: "Invalid upload size",
       });
     }
 
