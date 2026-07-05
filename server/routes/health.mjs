@@ -19,7 +19,7 @@ const READINESS_DB_TIMEOUT_MS = parseInt(
 
 function requireAdminForRepair(req, res, next) {
   const adminToken = process.env.ADMIN_TOKEN;
-  if (!adminToken) return next();
+  if (!adminToken) return res.status(503).json({ ok: false, error: "Admin repair disabled" });
   const provided = req.headers['x-admin-token'] || req.headers.authorization?.replace('Bearer ', '');
   if (!provided) {
     if (req.session?.user?.isAdmin) return next();
