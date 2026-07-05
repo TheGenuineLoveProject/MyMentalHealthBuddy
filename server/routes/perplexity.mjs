@@ -14,6 +14,7 @@ router.use(aiRateLimit);
 router.use(requireAuth);
 
 const PERPLEXITY_API_URL = 'https://api.perplexity.ai/chat/completions';
+const PERPLEXITY_TIMEOUT_MS = 30000;
 
 function getApiKey() {
   const apiKey = process.env.PERPLEXITY_API_KEY;
@@ -37,27 +38,36 @@ async function queryPerplexity(messages, options = {}) {
     searchRecencyFilter = 'month',
   } = options;
 
-  const response = await fetch(PERPLEXITY_API_URL, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model,
-      messages,
-      max_tokens: maxTokens,
-      temperature,
-      top_p: topP,
-      search_domain_filter: searchDomainFilter,
-      return_images: returnImages,
-      return_related_questions: returnRelatedQuestions,
-      search_recency_filter: searchRecencyFilter,
-      stream: false,
-      presence_penalty: 0,
-      frequency_penalty: 1,
-    }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), PERPLEXITY_TIMEOUT_MS);
+
+  let response;
+  try {
+    response = await fetch(PERPLEXITY_API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model,
+        messages,
+        max_tokens: maxTokens,
+        temperature,
+        top_p: topP,
+        search_domain_filter: searchDomainFilter,
+        return_images: returnImages,
+        return_related_questions: returnRelatedQuestions,
+        search_recency_filter: searchRecencyFilter,
+        stream: false,
+        presence_penalty: 0,
+        frequency_penalty: 1,
+      }),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
 
   if (!response.ok) {
     const errorText = await response.text();
