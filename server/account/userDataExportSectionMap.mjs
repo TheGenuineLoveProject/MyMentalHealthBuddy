@@ -9,9 +9,7 @@ export const USER_DATA_EXPORT_SECTION_MAP_STATUS = {
 };
 
 export const USER_DATA_EXPORT_SECTION_MAP = {
-  profile: [
-    "users",
-  ],
+  profile: [],
 
   privateData: [
     "journals",
@@ -65,6 +63,7 @@ export const USER_DATA_EXPORT_SECTION_MAP = {
   accountSettings: [
     "userSettings",
     "userAvatars",
+    "passwordResetTokens",
   ],
 
   exportMetadata: [
