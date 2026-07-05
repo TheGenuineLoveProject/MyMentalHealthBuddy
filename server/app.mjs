@@ -1,5 +1,6 @@
 import adminPublishingRoutes from "./routes/admin-publishing.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
+import auditLogRoutes from "./routes/audit-logs.mjs";
 import authRoutes from "./routes/auth.mjs";
 import billingRoutes from "./routes/billing.mjs";
 import webhookRoutes from "./routes/webhook.mjs";
@@ -544,6 +545,7 @@ app.use("/api/admin/billing", adminBillingRoutes);
 app.use("/api/admin/publishing", adminPublishingRoutes);
 app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
 app.use("/api/admin/platform-evolution", requireAuth, requireAdmin, platformEvolutionRoutes);
+app.use("/api/admin/audit-logs", requireAuth, requireAdmin, auditLogRoutes);
 app.use("/api/pathways", pathwaysRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/telemetry", telemetryRoutes);
