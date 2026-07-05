@@ -235,7 +235,9 @@ router.get("/subscription-status", async (req, res) => {
     }
 
     const plan = user.subscription_status || "free";
-    const isActive = ["starter", "pro", "elite"].includes(plan);
+    const expiresAt = user.subscription_expires_at ? new Date(user.subscription_expires_at) : null;
+    const hasValidExpiry = !expiresAt || (!Number.isNaN(expiresAt.getTime()) && expiresAt > new Date());
+    const isActive = ["starter", "pro", "elite"].includes(plan) && hasValidExpiry;
 
     let cancelAtPeriodEnd = false;
     if (["pro", "elite"].includes(plan) && stripe && user.stripe_customer_id) {
