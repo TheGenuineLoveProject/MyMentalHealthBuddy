@@ -6,6 +6,16 @@
 import { PLATFORMS, checkPlatformCredentials } from './social-platforms.mjs';
 import { logger } from '../utils/logger.mjs';
 
+const SOCIAL_POSTING_FETCH_TIMEOUT_MS = 30000;
+
+function socialFetch(url, options = {}) {
+  return fetch(url, {
+    ...options,
+    signal: options.signal || AbortSignal.timeout(SOCIAL_POSTING_FETCH_TIMEOUT_MS),
+  });
+}
+
+
 /**
  * Post content to a specific platform
  */
@@ -70,7 +80,7 @@ const platformHandlers = {
     const accountId = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
     
     if (content.type === 'photo' || content.type === 'image') {
-      const containerRes = await fetch(
+      const containerRes = await socialFetch(
         `https://graph.facebook.com/v21.0/${accountId}/media`,
         {
           method: 'POST',
@@ -85,7 +95,7 @@ const platformHandlers = {
       const containerData = await containerRes.json();
       if (containerData.error) throw new Error(containerData.error.message);
 
-      const publishRes = await fetch(
+      const publishRes = await socialFetch(
         `https://graph.facebook.com/v21.0/${accountId}/media_publish`,
         {
           method: 'POST',
@@ -103,7 +113,7 @@ const platformHandlers = {
     }
 
     if (content.type === 'video' || content.type === 'reel') {
-      const containerRes = await fetch(
+      const containerRes = await socialFetch(
         `https://graph.facebook.com/v21.0/${accountId}/media`,
         {
           method: 'POST',
@@ -121,7 +131,7 @@ const platformHandlers = {
 
       await pollForMediaReady(accountId, containerData.id, accessToken);
 
-      const publishRes = await fetch(
+      const publishRes = await socialFetch(
         `https://graph.facebook.com/v21.0/${accountId}/media_publish`,
         {
           method: 'POST',
@@ -149,7 +159,7 @@ const platformHandlers = {
     const pageId = process.env.FACEBOOK_PAGE_ID;
 
     if (content.type === 'photo' || content.type === 'image') {
-      const res = await fetch(
+      const res = await socialFetch(
         `https://graph.facebook.com/v21.0/${pageId}/photos`,
         {
           method: 'POST',
@@ -167,7 +177,7 @@ const platformHandlers = {
     }
 
     if (content.type === 'text' || content.type === 'link') {
-      const res = await fetch(
+      const res = await socialFetch(
         `https://graph.facebook.com/v21.0/${pageId}/feed`,
         {
           method: 'POST',
@@ -193,7 +203,7 @@ const platformHandlers = {
   tiktok: async (content) => {
     const accessToken = process.env.TIKTOK_ACCESS_TOKEN;
 
-    const initRes = await fetch(
+    const initRes = await socialFetch(
       'https://open.tiktokapis.com/v2/post/publish/inbox/video/init/',
       {
         method: 'POST',
@@ -244,7 +254,7 @@ const platformHandlers = {
       logger.info('X media upload requires separate endpoint - posting text only');
     }
 
-    const res = await fetch('https://api.twitter.com/2/tweets', {
+    const res = await socialFetch('https://api.twitter.com/2/tweets', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${bearerToken}`,
@@ -267,7 +277,7 @@ const platformHandlers = {
     const accessToken = process.env.THREADS_ACCESS_TOKEN;
     const userId = process.env.THREADS_USER_ID;
 
-    const containerRes = await fetch(
+    const containerRes = await socialFetch(
       `https://graph.threads.net/v1.0/${userId}/threads`,
       {
         method: 'POST',
@@ -283,7 +293,7 @@ const platformHandlers = {
     const containerData = await containerRes.json();
     if (containerData.error) throw new Error(containerData.error.message);
 
-    const publishRes = await fetch(
+    const publishRes = await socialFetch(
       `https://graph.threads.net/v1.0/${userId}/threads_publish`,
       {
         method: 'POST',
@@ -307,7 +317,7 @@ const platformHandlers = {
     const accessToken = process.env.PINTEREST_ACCESS_TOKEN;
     const boardId = process.env.PINTEREST_BOARD_ID;
 
-    const res = await fetch('https://api.pinterest.com/v5/pins', {
+    const res = await socialFetch('https://api.pinterest.com/v5/pins', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -339,7 +349,7 @@ const platformHandlers = {
 
     const author = orgId ? `urn:li:organization:${orgId}` : 'urn:li:person:me';
 
-    const res = await fetch('https://api.linkedin.com/v2/ugcPosts', {
+    const res = await socialFetch('https://api.linkedin.com/v2/ugcPosts', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -370,7 +380,7 @@ const platformHandlers = {
  */
 async function pollForMediaReady(accountId, containerId, accessToken, maxAttempts = 30) {
   for (let i = 0; i < maxAttempts; i++) {
-    const res = await fetch(
+    const res = await socialFetch(
       `https://graph.facebook.com/v21.0/${containerId}?fields=status_code&access_token=${accessToken}`
     );
     const data = await res.json();
