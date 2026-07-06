@@ -7,6 +7,7 @@ import { logger } from "../utils/logger.mjs";
 import { success, badRequest, serverError } from "../utils/response.mjs";
 
 const router = express.Router();
+const CANVA_FETCH_TIMEOUT_MS = 10000;
 
 const CANVA_APP_ID = process.env.CANVA_APP_ID || process.env.CANVA_CLIENT_ID || "";
 const CANVA_APP_ORIGIN = process.env.CANVA_APP_ORIGIN || "";
@@ -154,7 +155,7 @@ router.get("/asset-proxy", async (req, res) => {
       return badRequest(res, "URL domain not allowed.");
     }
 
-    const response = await fetch(url);
+    const response = await fetch(url, { signal: AbortSignal.timeout(CANVA_FETCH_TIMEOUT_MS) });
     
     if (!response.ok) {
       return serverError(res, new Error(`Failed to fetch asset: ${response.status}`));
