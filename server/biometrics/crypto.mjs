@@ -15,6 +15,7 @@ const IV_LEN = 12;
 const TAG_LEN = 16;
 const SALT = Buffer.from("mmhb-biometric-aead-v1-salt00000", "utf8");
 const INFO = Buffer.from("biometric-token-encryption", "utf8");
+export const HEALTHKIT_SIGNATURE_MAX_SKEW_MS = 5 * 60 * 1000;
 
 let _cachedKey = null;
 
@@ -74,16 +75,23 @@ function getWebhookKey() {
   return _webhookKey;
 }
 
-export function verifyHealthKitSignature(rawBody, providedHexSig, userId) {
+export function verifyHealthKitSignature(rawBody, providedHexSig, userId, timestamp) {
   if (!rawBody || !providedHexSig || typeof providedHexSig !== "string") return false;
   if (!userId || typeof userId !== "string") return false;
+  if (!timestamp || typeof timestamp !== "string") return false;
+
+  const timestampMs = Date.parse(timestamp);
+  if (Number.isNaN(timestampMs)) return false;
+  if (Math.abs(Date.now() - timestampMs) > HEALTHKIT_SIGNATURE_MAX_SKEW_MS) return false;
 
   try {
-    // HMAC binds the claimed user identity to the exact raw body bytes.
-    // Client canonical payload must be: `${userId}.${rawBodyBytes}`.
+    // HMAC binds identity + timestamp + exact raw body bytes.
+    // Client canonical payload: `${userId}.${timestamp}.${rawBodyBytes}`.
     const data = Buffer.isBuffer(rawBody) ? rawBody : Buffer.from(String(rawBody));
     const signedPayload = Buffer.concat([
       Buffer.from(userId, "utf8"),
+      Buffer.from(".", "utf8"),
+      Buffer.from(timestamp, "utf8"),
       Buffer.from(".", "utf8"),
       data,
     ]);

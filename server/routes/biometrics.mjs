@@ -253,7 +253,7 @@ router.post("/upload", requireAuth, async (req, res) => {
 
 /* ------------------------------------------------------------ *
  * POST /healthkit/webhook — iOS companion app push
- * Headers: X-MMHB-User-Id, X-MMHB-Signature (hex sha256 HMAC of `${userId}.${rawBody}`)
+ * Headers: X-MMHB-User-Id, X-MMHB-Timestamp, X-MMHB-Signature (hex sha256 HMAC of `${userId}.${timestamp}.${rawBody}`)
  * Body:    { samples: [HKSample, ...] }
  *
  * Note: this route is NOT requireAuth — auth is via HMAC signature
@@ -267,14 +267,15 @@ router.post(
     try {
       const userId = req.header("x-mmhb-user-id");
       const sig = req.header("x-mmhb-signature");
+      const timestamp = req.header("x-mmhb-timestamp");
       // Raw body is captured by the global express.json verify hook
       // (server/app.mjs). HMAC must be computed over the EXACT bytes
       // the iOS client signed, never over a re-stringified object.
       const raw = req.rawBody;
-      if (!userId || !sig || !raw) {
+      if (!userId || !sig || !timestamp || !raw) {
         return res.status(400).json({ ok: false, error: "missing_signature_or_user_or_body" });
       }
-      if (!verifyHealthKitSignature(raw, sig, userId)) {
+      if (!verifyHealthKitSignature(raw, sig, userId, timestamp)) {
         return res.status(401).json({ ok: false, error: "invalid_signature" });
       }
       const payload = req.body || {};
