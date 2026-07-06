@@ -1,3 +1,11 @@
+/**
+ * DEPRECATED / NOT RUNTIME-MOUNTED
+ *
+ * Reference template only.
+ * Do not import, register, or mount in production.
+ * Active runtime route: server/routes/object-storage.mjs
+ */
+
 import type { Express } from "express";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
 

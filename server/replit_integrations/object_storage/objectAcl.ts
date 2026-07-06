@@ -1,3 +1,11 @@
+/**
+ * DEPRECATED / NOT RUNTIME-MOUNTED
+ *
+ * Reference template only.
+ * Do not import, register, or mount in production.
+ * Active runtime route: server/routes/object-storage.mjs
+ */
+
 import { File } from "@google-cloud/storage";
 
 const ACL_POLICY_METADATA_KEY = "custom:aclPolicy";
