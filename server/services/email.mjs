@@ -13,6 +13,7 @@ import { Resend } from 'resend';
 import { logger } from '../utils/logger.mjs';
 
 let connectionSettings = null;
+const EMAIL_CONNECTOR_TIMEOUT_MS = 10000;
 
 async function getCredentials() {
   const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
@@ -32,7 +33,8 @@ async function getCredentials() {
       headers: {
         'Accept': 'application/json',
         'X_REPLIT_TOKEN': xReplitToken
-      }
+      },
+      signal: AbortSignal.timeout(EMAIL_CONNECTOR_TIMEOUT_MS)
     }
   ).then(res => res.json()).then(data => data.items?.[0]);
 
