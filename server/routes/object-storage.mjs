@@ -6,6 +6,7 @@ import { requireAuth } from "../middleware/auth.mjs";
 const router = Router();
 
 const REPLIT_SIDECAR_ENDPOINT = "http://127.0.0.1:1106";
+const OBJECT_STORAGE_SIDECAR_TIMEOUT_MS = 10000;
 const MAX_OBJECT_UPLOAD_SIZE_BYTES = 10 * 1024 * 1024;
 const ALLOWED_OBJECT_UPLOAD_MIME_TYPES = new Set([
   "image/jpeg",
@@ -58,6 +59,7 @@ async function signObjectURL({ bucketName, objectName, method, ttlSec }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(request),
+      signal: AbortSignal.timeout(OBJECT_STORAGE_SIDECAR_TIMEOUT_MS),
     }
   );
   
