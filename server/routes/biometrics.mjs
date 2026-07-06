@@ -253,7 +253,7 @@ router.post("/upload", requireAuth, async (req, res) => {
 
 /* ------------------------------------------------------------ *
  * POST /healthkit/webhook — iOS companion app push
- * Headers: X-MMHB-User-Id, X-MMHB-Signature (hex sha256 HMAC of raw body)
+ * Headers: X-MMHB-User-Id, X-MMHB-Signature (hex sha256 HMAC of `${userId}.${rawBody}`)
  * Body:    { samples: [HKSample, ...] }
  *
  * Note: this route is NOT requireAuth — auth is via HMAC signature
@@ -274,7 +274,7 @@ router.post(
       if (!userId || !sig || !raw) {
         return res.status(400).json({ ok: false, error: "missing_signature_or_user_or_body" });
       }
-      if (!verifyHealthKitSignature(raw, sig)) {
+      if (!verifyHealthKitSignature(raw, sig, userId)) {
         return res.status(401).json({ ok: false, error: "invalid_signature" });
       }
       const payload = req.body || {};

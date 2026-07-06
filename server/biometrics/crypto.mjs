@@ -74,14 +74,21 @@ function getWebhookKey() {
   return _webhookKey;
 }
 
-export function verifyHealthKitSignature(rawBody, providedHexSig) {
+export function verifyHealthKitSignature(rawBody, providedHexSig, userId) {
   if (!rawBody || !providedHexSig || typeof providedHexSig !== "string") return false;
+  if (!userId || typeof userId !== "string") return false;
+
   try {
-    // hmac.update() natively accepts Buffer or string. We must NEVER
-    // pass a parsed object — JSON.stringify is non-canonical and the
-    // iOS client signed exact bytes.
-    const data = Buffer.isBuffer(rawBody) ? rawBody : String(rawBody);
-    const expected = crypto.createHmac("sha256", getWebhookKey()).update(data).digest();
+    // HMAC binds the claimed user identity to the exact raw body bytes.
+    // Client canonical payload must be: `${userId}.${rawBodyBytes}`.
+    const data = Buffer.isBuffer(rawBody) ? rawBody : Buffer.from(String(rawBody));
+    const signedPayload = Buffer.concat([
+      Buffer.from(userId, "utf8"),
+      Buffer.from(".", "utf8"),
+      data,
+    ]);
+
+    const expected = crypto.createHmac("sha256", getWebhookKey()).update(signedPayload).digest();
     const provided = Buffer.from(providedHexSig.toLowerCase(), "hex");
     if (provided.length !== expected.length) return false;
     return crypto.timingSafeEqual(expected, provided);
