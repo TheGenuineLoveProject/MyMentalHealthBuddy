@@ -71,23 +71,37 @@ export async function executeBiometricRetries({
       EXECUTION_ENABLED,
 
     attempted:
-      EXECUTION_ENABLED
-        ? 0
-        : candidates.length,
+      candidates.length,
 
     executed:
       0,
 
+    succeeded:
+      0,
+
+    failed:
+      0,
+
+    exhausted:
+      0,
+
     skipped:
-      candidates.length,
+      EXECUTION_ENABLED
+        ? 0
+        : candidates.length,
 
     failures:
       0,
 
     mode:
       EXECUTION_ENABLED
-        ? "executor_reserved"
+        ? "executor_ready_guarded"
         : "dry_run_executor",
+
+    safety:
+      EXECUTION_ENABLED
+        ? "execution_enabled_but_replay_not_implemented"
+        : "dry_run_no_state_changes",
 
     candidates,
 
