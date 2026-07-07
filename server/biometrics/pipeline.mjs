@@ -27,6 +27,27 @@ import {
 import { encryptToken, decryptToken } from "./crypto.mjs";
 import { getProvider, NotConfiguredError } from "./providers.mjs";
 
+async function persistIngestionFailure(userId, reading, failureReason, { recoverable = true } = {}) {
+  try {
+    await db.execute(sql`
+      INSERT INTO biometric_ingestion_failures
+        (user_id, device_source, metric_type, failure_reason, retry_count, recoverable, payload)
+      VALUES
+        (
+          ${userId},
+          ${reading?.deviceSource || "unknown"},
+          ${reading?.metricType || null},
+          ${failureReason},
+          0,
+          ${recoverable},
+          ${JSON.stringify(reading || {})}::jsonb
+        )
+    `);
+  } catch {
+    // Reliability ledger writes must never block primary ingestion responses.
+  }
+}
+
 export class BiometricIngestionService {
   /**
    * Persist already-normalized readings. Skips invalid/out-of-range
@@ -51,6 +72,7 @@ export class BiometricIngestionService {
       if (!v.ok) {
         rejected++;
         rejections.push({ metricType: r.metricType, reason: v.reason });
+        await persistIngestionFailure(userId, r, v.reason, { recoverable: false });
         continue;
       }
       try {
@@ -71,6 +93,7 @@ export class BiometricIngestionService {
       } catch (err) {
         rejected++;
         rejections.push({ metricType: r.metricType, reason: "db_error" });
+        await persistIngestionFailure(userId, r, "db_error", { recoverable: true });
       }
     }
     return { stored, rejected, deduped, rejections };
