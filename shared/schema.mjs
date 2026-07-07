@@ -974,6 +974,23 @@ export const biometricReadings = pgTable("biometric_readings", {
   index("idx_biometric_readings_user_metric").on(table.userId, table.metricType, table.recordedAt),
 ]);
 
+
+export const biometricIngestionFailures = pgTable("biometric_ingestion_failures", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  deviceSource: varchar("device_source", { length: 32 }).notNull(),
+  metricType: varchar("metric_type", { length: 48 }),
+  failureReason: varchar("failure_reason", { length: 96 }).notNull(),
+  retryCount: integer("retry_count").notNull().default(0),
+  recoverable: boolean("recoverable").notNull().default(true),
+  lastRetryAt: timestamp("last_retry_at"),
+  payload: jsonb("payload").default({}).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_biometric_ingestion_failures_user_created").on(table.userId, table.createdAt),
+  index("idx_biometric_ingestion_failures_recoverable_retry").on(table.recoverable, table.retryCount, table.createdAt),
+]);
+
 export const nervousSystemStates = pgTable("nervous_system_states", {
   id: uuid("id").defaultRandom().primaryKey(),
   userId: uuid("user_id").notNull(),

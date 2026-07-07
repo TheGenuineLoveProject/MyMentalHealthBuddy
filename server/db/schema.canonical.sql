@@ -152,6 +152,19 @@ CREATE TABLE IF NOT EXISTS "biometric_connections" (
         "updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "biometric_ingestion_failures" (
+        "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+        "user_id" uuid NOT NULL,
+        "device_source" varchar(32) NOT NULL,
+        "metric_type" varchar(48),
+        "failure_reason" varchar(96) NOT NULL,
+        "retry_count" integer DEFAULT 0 NOT NULL,
+        "recoverable" boolean DEFAULT true NOT NULL,
+        "last_retry_at" timestamp,
+        "payload" jsonb DEFAULT '{}'::jsonb NOT NULL,
+        "created_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "biometric_readings" (
         "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
         "user_id" uuid NOT NULL,
@@ -926,3 +939,7 @@ CREATE INDEX IF NOT EXISTS "idx_therapy_sessions_user" ON "therapy_sessions" USI
 CREATE INDEX IF NOT EXISTS "idx_user_avatars_user_id" ON "user_avatars" USING btree ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "user_favorites_user_id_idx" ON "user_favorites" USING btree ("user_id");
 CREATE INDEX IF NOT EXISTS "idx_healthkit_webhook_nonces_received" ON "healthkit_webhook_nonces" USING btree ("received_at");--> statement-breakpoint
+
+CREATE INDEX IF NOT EXISTS "idx_biometric_ingestion_failures_user_created" ON "biometric_ingestion_failures" USING btree ("user_id","created_at");--> statement-breakpoint
+
+CREATE INDEX IF NOT EXISTS "idx_biometric_ingestion_failures_recoverable_retry" ON "biometric_ingestion_failures" USING btree ("recoverable","retry_count","created_at");--> statement-breakpoint
