@@ -31,8 +31,18 @@ export async function listBiometricRetryCandidates({
       created_at AS "createdAt"
     FROM biometric_ingestion_failures
     WHERE recoverable = true
+
+      AND status='pending'
+
       AND retry_count < ${safeMaxRetryCount}
-    ORDER BY created_at ASC
+
+      AND (
+            next_retry_at IS NULL
+            OR next_retry_at <= NOW()
+          )
+
+    ORDER BY
+      created_at ASC
     LIMIT ${safeLimit}
   `);
 
