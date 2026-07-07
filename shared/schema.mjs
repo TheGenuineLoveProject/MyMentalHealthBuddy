@@ -981,14 +981,55 @@ export const biometricIngestionFailures = pgTable("biometric_ingestion_failures"
   deviceSource: varchar("device_source", { length: 32 }).notNull(),
   metricType: varchar("metric_type", { length: 48 }),
   failureReason: varchar("failure_reason", { length: 96 }).notNull(),
-  retryCount: integer("retry_count").notNull().default(0),
-  recoverable: boolean("recoverable").notNull().default(true),
-  lastRetryAt: timestamp("last_retry_at"),
-  payload: jsonb("payload").default({}).notNull(),
+  retryCount:
+    integer("retry_count")
+    .notNull()
+    .default(0),
+
+  recoverable:
+    boolean("recoverable")
+    .notNull()
+    .default(true),
+
+  status:
+    varchar("status",{length:24})
+    .default("pending")
+    .notNull(),
+
+  lastRetryAt:
+    timestamp("last_retry_at"),
+
+  nextRetryAt:
+    timestamp("next_retry_at"),
+
+  completedAt:
+    timestamp("completed_at"),
+
+  exhaustedAt:
+    timestamp("exhausted_at"),
+
+  payload:
+    jsonb("payload")
+    .default({})
+    .notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 }, (table) => [
   index("idx_biometric_ingestion_failures_user_created").on(table.userId, table.createdAt),
-  index("idx_biometric_ingestion_failures_recoverable_retry").on(table.recoverable, table.retryCount, table.createdAt),
+  index(
+    "idx_biometric_ingestion_failures_recoverable_retry"
+  ).on(
+    table.recoverable,
+    table.retryCount,
+    table.createdAt
+  ),
+
+  index(
+    "idx_biometric_ingestion_failures_status_next_retry"
+  ).on(
+    table.status,
+    table.nextRetryAt
+  ),
+
 ]);
 
 export const nervousSystemStates = pgTable("nervous_system_states", {

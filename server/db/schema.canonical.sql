@@ -160,7 +160,19 @@ CREATE TABLE IF NOT EXISTS "biometric_ingestion_failures" (
         "failure_reason" varchar(96) NOT NULL,
         "retry_count" integer DEFAULT 0 NOT NULL,
         "recoverable" boolean DEFAULT true NOT NULL,
+
+        "status" varchar(24)
+        DEFAULT 'pending'
+        NOT NULL,
+
         "last_retry_at" timestamp,
+
+        "next_retry_at" timestamp,
+
+        "completed_at" timestamp,
+
+        "exhausted_at" timestamp,
+
         "payload" jsonb DEFAULT '{}'::jsonb NOT NULL,
         "created_at" timestamp DEFAULT now() NOT NULL
 );
