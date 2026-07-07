@@ -253,7 +253,7 @@ router.post("/upload", requireAuth, async (req, res) => {
 
 /* ------------------------------------------------------------ *
  * POST /healthkit/webhook — iOS companion app push
- * Headers: X-MMHB-User-Id, X-MMHB-Timestamp, X-MMHB-Signature (hex sha256 HMAC of `${userId}.${timestamp}.${rawBody}`)
+ * Headers: X-MMHB-User-Id, X-MMHB-Timestamp, X-MMHB-Nonce, X-MMHB-Signature (hex sha256 HMAC of `${userId}.${timestamp}.${rawBody}`)
  * Body:    { samples: [HKSample, ...] }
  *
  * Note: this route is NOT requireAuth — auth is via HMAC signature
@@ -268,16 +268,33 @@ router.post(
       const userId = req.header("x-mmhb-user-id");
       const sig = req.header("x-mmhb-signature");
       const timestamp = req.header("x-mmhb-timestamp");
+      const nonce = req.header("x-mmhb-nonce");
       // Raw body is captured by the global express.json verify hook
       // (server/app.mjs). HMAC must be computed over the EXACT bytes
       // the iOS client signed, never over a re-stringified object.
       const raw = req.rawBody;
-      if (!userId || !sig || !timestamp || !raw) {
+      if (!userId || !sig || !timestamp || !nonce || !raw) {
         return res.status(400).json({ ok: false, error: "missing_signature_or_user_or_body" });
       }
       if (!verifyHealthKitSignature(raw, sig, userId, timestamp)) {
         return res.status(401).json({ ok: false, error: "invalid_signature" });
       }
+
+      const nonceResult = await db.execute(sql`
+        INSERT INTO healthkit_webhook_nonces (nonce, user_id)
+        VALUES (${nonce}, ${userId})
+        ON CONFLICT (nonce) DO NOTHING
+        RETURNING nonce
+      `);
+
+      if (!nonceResult.rows?.length) {
+        return res.status(409).json({ ok: false, error: "replay_detected" });
+      }
+
+      await db.execute(sql`
+        DELETE FROM healthkit_webhook_nonces
+        WHERE received_at < now() - interval '10 minutes'
+      `);
       const payload = req.body || {};
       const samples = Array.isArray(payload?.samples) ? payload.samples : [];
       if (samples.length === 0) return res.json({ ok: true, stored: 0, rejected: 0, deduped: 0 });

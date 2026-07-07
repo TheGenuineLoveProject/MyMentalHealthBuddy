@@ -110,6 +110,15 @@ export const circleMembers = pgTable("circle_members", {
   id: uuid("id").defaultRandom().primaryKey(),
 });
 
+
+export const healthkitWebhookNonces = pgTable("healthkit_webhook_nonces", {
+  nonce: varchar("nonce", { length: 128 }).primaryKey(),
+  userId: uuid("user_id").notNull(),
+  receivedAt: timestamp("received_at").defaultNow().notNull(),
+}, (table) => ({
+  receivedAtIdx: index("idx_healthkit_webhook_nonces_received").on(table.receivedAt),
+}));
+
 export const healingJourneys = pgTable("healing_journeys", {
   id: uuid("id").defaultRandom().primaryKey(),
 });

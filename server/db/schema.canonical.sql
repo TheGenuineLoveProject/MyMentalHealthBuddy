@@ -396,6 +396,12 @@ CREATE TABLE IF NOT EXISTS "gratitude_entries" (
         "created_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "healthkit_webhook_nonces" (
+        "nonce" varchar(128) PRIMARY KEY NOT NULL,
+        "user_id" uuid NOT NULL,
+        "received_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "healing_journeys" (
         "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL
 );
@@ -919,3 +925,4 @@ CREATE INDEX IF NOT EXISTS "idx_social_posts_scheduled" ON "social_posts" USING 
 CREATE INDEX IF NOT EXISTS "idx_therapy_sessions_user" ON "therapy_sessions" USING btree ("user_id","created_at");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "idx_user_avatars_user_id" ON "user_avatars" USING btree ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "user_favorites_user_id_idx" ON "user_favorites" USING btree ("user_id");
+CREATE INDEX IF NOT EXISTS "idx_healthkit_webhook_nonces_received" ON "healthkit_webhook_nonces" USING btree ("received_at");--> statement-breakpoint
