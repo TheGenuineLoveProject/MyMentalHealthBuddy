@@ -3,7 +3,7 @@ modules = ["nodejs-20", "python-3.11", "postgresql-16"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["dig", "lsof", "nano"]
+packages = ["dig", "lsof", "nano", "q-text-as-data"]
 
 [deployment]
 run = ["sh", "-c", "NODE_ENV=production node dist/server.mjs"]
