@@ -12,6 +12,18 @@ const metrics = {
   memory: {},
   uptime: Date.now(),
   errors: { total: 0, byType: {} },
+  healthkit: {
+    webhooksTotal: 0,
+    signatureFailuresTotal: 0,
+    replaysTotal: 0,
+    invalidPayloadTotal: 0,
+    invalidSamplesTotal: 0,
+    tooManySamplesTotal: 0,
+    samplesIngestedTotal: 0,
+    samplesRejectedTotal: 0,
+    processingLatencyMs: { sum: 0, count: 0, max: 0 },
+    lastSuccessTimestamp: null,
+  },
 };
 
 export function recordRequest(path, status, duration) {
@@ -29,6 +41,32 @@ export function recordRequest(path, status, duration) {
 export function recordError(type) {
   metrics.errors.total++;
   metrics.errors.byType[type] = (metrics.errors.byType[type] || 0) + 1;
+}
+
+export function recordHealthKitWebhook(event = {}) {
+  metrics.healthkit.webhooksTotal++;
+
+  if (event.signatureFailure) metrics.healthkit.signatureFailuresTotal++;
+  if (event.replay) metrics.healthkit.replaysTotal++;
+  if (event.invalidPayload) metrics.healthkit.invalidPayloadTotal++;
+  if (event.invalidSamples) metrics.healthkit.invalidSamplesTotal++;
+  if (event.tooManySamples) metrics.healthkit.tooManySamplesTotal++;
+
+  const ingested = Number(event.samplesIngested || 0);
+  const rejected = Number(event.samplesRejected || 0);
+  if (Number.isFinite(ingested) && ingested > 0) metrics.healthkit.samplesIngestedTotal += ingested;
+  if (Number.isFinite(rejected) && rejected > 0) metrics.healthkit.samplesRejectedTotal += rejected;
+
+  const latency = Number(event.processingLatencyMs);
+  if (Number.isFinite(latency) && latency >= 0) {
+    metrics.healthkit.processingLatencyMs.sum += latency;
+    metrics.healthkit.processingLatencyMs.count++;
+    metrics.healthkit.processingLatencyMs.max = Math.max(metrics.healthkit.processingLatencyMs.max, latency);
+  }
+
+  if (event.success) {
+    metrics.healthkit.lastSuccessTimestamp = new Date().toISOString();
+  }
 }
 
 function getMemoryMetrics() {
@@ -87,6 +125,51 @@ function formatPrometheusMetrics() {
   lines.push("# TYPE nodejs_cpu_count gauge");
   lines.push(`nodejs_cpu_count ${os.cpus().length}`);
 
+  const hk = metrics.healthkit;
+  const hkAvgLatency = hk.processingLatencyMs.count > 0
+    ? Math.round(hk.processingLatencyMs.sum / hk.processingLatencyMs.count)
+    : 0;
+
+  lines.push("# HELP healthkit_webhooks_total Total HealthKit webhook attempts");
+  lines.push("# TYPE healthkit_webhooks_total counter");
+  lines.push(`healthkit_webhooks_total ${hk.webhooksTotal}`);
+
+  lines.push("# HELP healthkit_signature_failures_total Total HealthKit signature failures");
+  lines.push("# TYPE healthkit_signature_failures_total counter");
+  lines.push(`healthkit_signature_failures_total ${hk.signatureFailuresTotal}`);
+
+  lines.push("# HELP healthkit_replays_total Total HealthKit replay attempts");
+  lines.push("# TYPE healthkit_replays_total counter");
+  lines.push(`healthkit_replays_total ${hk.replaysTotal}`);
+
+  lines.push("# HELP healthkit_invalid_payload_total Total invalid HealthKit payloads");
+  lines.push("# TYPE healthkit_invalid_payload_total counter");
+  lines.push(`healthkit_invalid_payload_total ${hk.invalidPayloadTotal}`);
+
+  lines.push("# HELP healthkit_invalid_samples_total Total invalid HealthKit samples arrays");
+  lines.push("# TYPE healthkit_invalid_samples_total counter");
+  lines.push(`healthkit_invalid_samples_total ${hk.invalidSamplesTotal}`);
+
+  lines.push("# HELP healthkit_too_many_samples_total Total HealthKit oversized sample batches");
+  lines.push("# TYPE healthkit_too_many_samples_total counter");
+  lines.push(`healthkit_too_many_samples_total ${hk.tooManySamplesTotal}`);
+
+  lines.push("# HELP healthkit_samples_ingested_total Total HealthKit samples ingested");
+  lines.push("# TYPE healthkit_samples_ingested_total counter");
+  lines.push(`healthkit_samples_ingested_total ${hk.samplesIngestedTotal}`);
+
+  lines.push("# HELP healthkit_samples_rejected_total Total HealthKit samples rejected");
+  lines.push("# TYPE healthkit_samples_rejected_total counter");
+  lines.push(`healthkit_samples_rejected_total ${hk.samplesRejectedTotal}`);
+
+  lines.push("# HELP healthkit_processing_latency_ms_avg Average HealthKit webhook processing latency");
+  lines.push("# TYPE healthkit_processing_latency_ms_avg gauge");
+  lines.push(`healthkit_processing_latency_ms_avg ${hkAvgLatency}`);
+
+  lines.push("# HELP healthkit_processing_latency_ms_max Maximum HealthKit webhook processing latency");
+  lines.push("# TYPE healthkit_processing_latency_ms_max gauge");
+  lines.push(`healthkit_processing_latency_ms_max ${hk.processingLatencyMs.max}`);
+
   return lines.join("\n");
 }
 
@@ -113,6 +196,7 @@ router.get("/json", (_req, res) => {
       memory,
       uptime: uptimeSeconds,
       errors: metrics.errors,
+      healthkit: metrics.healthkit,
       system: {
         cpus: os.cpus().length,
         platform: os.platform(),

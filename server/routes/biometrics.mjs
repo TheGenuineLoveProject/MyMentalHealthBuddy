@@ -39,6 +39,7 @@ import {
 } from "../biometrics/normalizers.mjs";
 import { verifyHealthKitSignature } from "../biometrics/crypto.mjs";
 import { inferState } from "../biometrics/inference.mjs";
+import { recordHealthKitWebhook } from "./metrics.mjs";
 
 const router = express.Router();
 const svc = getIngestionService();
@@ -264,6 +265,7 @@ router.post("/upload", requireAuth, async (req, res) => {
 router.post(
   "/healthkit/webhook",
   async (req, res) => {
+    const startedAt = Date.now();
     try {
       const userId = req.header("x-mmhb-user-id");
       const sig = req.header("x-mmhb-signature");
@@ -274,9 +276,11 @@ router.post(
       // the iOS client signed, never over a re-stringified object.
       const raw = req.rawBody;
       if (!userId || !sig || !timestamp || !nonce || !raw) {
+        recordHealthKitWebhook({ invalidPayload: true, processingLatencyMs: Date.now() - startedAt });
         return res.status(400).json({ ok: false, error: "missing_signature_or_user_or_body" });
       }
       if (!verifyHealthKitSignature(raw, sig, userId, timestamp)) {
+        recordHealthKitWebhook({ signatureFailure: true, processingLatencyMs: Date.now() - startedAt });
         return res.status(401).json({ ok: false, error: "invalid_signature" });
       }
 
@@ -288,6 +292,7 @@ router.post(
       `);
 
       if (!nonceResult.rows?.length) {
+        recordHealthKitWebhook({ replay: true, processingLatencyMs: Date.now() - startedAt });
         return res.status(409).json({ ok: false, error: "replay_detected" });
       }
 
@@ -297,20 +302,32 @@ router.post(
       `);
       const payload = req.body || {};
       if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+        recordHealthKitWebhook({ invalidPayload: true, processingLatencyMs: Date.now() - startedAt });
         return res.status(422).json({ ok: false, error: "invalid_payload" });
       }
       if (!Array.isArray(payload.samples)) {
+        recordHealthKitWebhook({ invalidSamples: true, processingLatencyMs: Date.now() - startedAt });
         return res.status(422).json({ ok: false, error: "invalid_samples" });
       }
       const samples = payload.samples;
-      if (samples.length === 0) return res.json({ ok: true, stored: 0, rejected: 0, deduped: 0 });
+      if (samples.length === 0) {
+        recordHealthKitWebhook({ success: true, processingLatencyMs: Date.now() - startedAt });
+        return res.json({ ok: true, stored: 0, rejected: 0, deduped: 0 });
+      }
       if (samples.length > 1000) {
+        recordHealthKitWebhook({ tooManySamples: true, processingLatencyMs: Date.now() - startedAt });
         return res.status(422).json({ ok: false, error: "too_many_samples", max: 1000 });
       }
       const normalized = samples
         .map((s) => normalizeHealthKitSample(s))
         .filter(Boolean);
       const result = await svc.ingest(userId, normalized);
+      recordHealthKitWebhook({
+        success: true,
+        samplesIngested: result?.stored || 0,
+        samplesRejected: result?.rejected || 0,
+        processingLatencyMs: Date.now() - startedAt,
+      });
       return res.json({ ok: true, ...result });
     } catch (err) {
       return fail(res, "healthkit_webhook", err);
