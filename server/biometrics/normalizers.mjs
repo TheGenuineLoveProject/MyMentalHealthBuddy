@@ -120,23 +120,39 @@ const HEALTHKIT_MAP = {
 };
 
 export function normalizeHealthKitSample(sample) {
-  const map = HEALTHKIT_MAP[sample?.type];
+  if (!sample || typeof sample !== "object" || Array.isArray(sample)) return null;
+  const map = HEALTHKIT_MAP[sample.type];
   if (!map) return null;
   if (sample.value == null || !sample.startDate) return null;
+
   let value = Number(sample.value);
+  if (!Number.isFinite(value)) return null;
+
+  const recordedAt = new Date(sample.startDate);
+  if (Number.isNaN(recordedAt.getTime())) return null;
+
+  const endDate = sample.endDate ? new Date(sample.endDate) : null;
+  if (endDate && Number.isNaN(endDate.getTime())) return null;
+
   // SpO2 in HealthKit is fractional 0-1; convert to percent.
   if (map.metric === "SPO2_PCT" && value <= 1.5) value = value * 100;
+
+  const sourceName =
+    typeof sample?.metadata?.sourceName === "string"
+      ? sample.metadata.sourceName.slice(0, 120)
+      : null;
+
   return {
     deviceSource: "apple_healthkit",
     metricType: map.metric,
     value: String(value),
     unit: map.unit,
-    recordedAt: new Date(sample.startDate),
+    recordedAt,
     metadata: {
       hkType: sample.type,
-      hkUnit: sample.unit,
-      endDate: sample.endDate || null,
-      sourceName: sample?.metadata?.sourceName || null,
+      hkUnit: typeof sample.unit === "string" ? sample.unit.slice(0, 40) : null,
+      endDate: endDate ? endDate.toISOString() : null,
+      sourceName,
     },
   };
 }
