@@ -296,10 +296,16 @@ router.post(
         WHERE received_at < now() - interval '10 minutes'
       `);
       const payload = req.body || {};
-      const samples = Array.isArray(payload?.samples) ? payload.samples : [];
+      if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+        return res.status(422).json({ ok: false, error: "invalid_payload" });
+      }
+      if (!Array.isArray(payload.samples)) {
+        return res.status(422).json({ ok: false, error: "invalid_samples" });
+      }
+      const samples = payload.samples;
       if (samples.length === 0) return res.json({ ok: true, stored: 0, rejected: 0, deduped: 0 });
       if (samples.length > 1000) {
-        return res.status(400).json({ ok: false, error: "batch_too_large", max: 1000 });
+        return res.status(422).json({ ok: false, error: "too_many_samples", max: 1000 });
       }
       const normalized = samples
         .map((s) => normalizeHealthKitSample(s))
