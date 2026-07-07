@@ -28,7 +28,8 @@
     "audit:phase83": "node scripts/phase83-platform-content-component-analysis.mjs",
     "gate:constitution": "node scripts/constitution-implementation-gate.mjs",
     "platform:evolution:audit": "node scripts/platform-evolution-audit.mjs",
-    "audit:registry-routes": "node scripts/audit-registry-routes.mjs"
+    "audit:registry-routes": "node scripts/audit-registry-routes.mjs",
+    "verify:healthkit-signature": "node scripts/biometrics/verify-healthkit-signature-contract.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
