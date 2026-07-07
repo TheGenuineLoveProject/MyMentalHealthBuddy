@@ -96,6 +96,118 @@ export async function executeBiometricRetries({
 }
 
 
+export function calculateRetryBackoffMs(
+  retryCount=0
+){
+
+  const n=Math.max(
+    0,
+    Number(retryCount)||0
+  );
+
+  return Math.min(
+
+    60*60*1000,
+
+    (
+      2**n
+    )*60*1000
+
+  );
+
+}
+
+export async function markRetrying(id){
+
+  await db.execute(sql`
+
+    UPDATE biometric_ingestion_failures
+
+    SET
+      status='retrying',
+      last_retry_at=NOW()
+
+    WHERE id=${id}
+
+  `);
+
+}
+
+export async function markRetrySuccess(id){
+
+  await db.execute(sql`
+
+    UPDATE biometric_ingestion_failures
+
+    SET
+      status='completed',
+      completed_at=NOW()
+
+    WHERE id=${id}
+
+  `);
+
+}
+
+export async function markRetryFailure(
+
+  id,
+
+  retryCount
+
+){
+
+  const delay=
+
+    calculateRetryBackoffMs(
+      retryCount
+    );
+
+  await db.execute(sql`
+
+    UPDATE biometric_ingestion_failures
+
+    SET
+
+      status='pending',
+
+      retry_count=
+        retry_count+1,
+
+      next_retry_at=
+        NOW() +
+        (${delay} || ' milliseconds')
+        ::interval
+
+    WHERE id=${id}
+
+  `);
+
+}
+
+export async function markRetryExhausted(
+  id
+){
+
+  await db.execute(sql`
+
+    UPDATE biometric_ingestion_failures
+
+    SET
+
+      status='exhausted',
+
+      exhausted_at=NOW()
+
+    WHERE id=${id}
+
+  `);
+
+}
+
+
+
+
 export function getBiometricRetryPolicy() {
   return {
     executionEnabled:
