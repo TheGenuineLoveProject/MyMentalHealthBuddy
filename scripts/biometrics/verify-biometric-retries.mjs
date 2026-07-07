@@ -1,6 +1,7 @@
 import {
   listBiometricRetryCandidates,
-  getBiometricRetryPolicy
+  getBiometricRetryPolicy,
+  executeBiometricRetries
 } from "../../server/biometrics/retryService.mjs";
 
 function assert(x,msg){
@@ -57,6 +58,32 @@ typeof listBiometricRetryCandidates==="function",
 
 console.log(
 "PASS retry candidate query"
+);
+
+assert(
+typeof executeBiometricRetries==="function",
+"executor function missing"
+);
+
+const dryRun=await executeBiometricRetries({limit:1});
+
+assert(
+dryRun.executionEnabled===false,
+"retry executor must be disabled by default"
+);
+
+assert(
+dryRun.mode==="dry_run_executor",
+"retry executor must default to dry_run_executor"
+);
+
+assert(
+dryRun.executed===0,
+"dry run must not execute retries"
+);
+
+console.log(
+"PASS retry dry-run executor"
 );
 
 console.log(
