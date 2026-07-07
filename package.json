@@ -35,7 +35,9 @@
     "verify:healthkit-observability": "node scripts/biometrics/verify-healthkit-observability.mjs",
     "verify:healthkit-full": "npm run verify:healthkit && npm run verify:healthkit-observability && npm run verify:foundation",
     "verify:biometric-retries": "node scripts/biometrics/verify-biometric-retries.mjs",
-    "verify:biometric-full": "npm run verify:biometric-retries && npm run verify:healthkit-full"
+    "verify:biometric-full": "npm run verify:biometric-retries && npm run verify:healthkit-full",
+    "verify:rate-limit": "node scripts/security/verify-rate-limit-ip-spoof.mjs",
+    "verify:security-full": "npm run verify:rate-limit && npm run verify:biometric-full"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
