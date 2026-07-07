@@ -7,6 +7,17 @@ import os from "os";
 const router = express.Router();
 
 const metrics = {
+  biometricRetries: {
+    dryRunTotal: 0,
+    executionReservedTotal: 0,
+    candidatesTotal: 0,
+    attemptedTotal: 0,
+    executedTotal: 0,
+    skippedTotal: 0,
+    failuresTotal: 0,
+    exhaustedTotal: 0,
+    lastRunTimestamp: null,
+  },
   requests: { total: 0, byStatus: {}, byPath: {} },
   responseTime: { sum: 0, count: 0, max: 0 },
   memory: {},
@@ -41,6 +52,22 @@ export function recordRequest(path, status, duration) {
 export function recordError(type) {
   metrics.errors.total++;
   metrics.errors.byType[type] = (metrics.errors.byType[type] || 0) + 1;
+}
+
+export function recordBiometricRetryExecution(event = {}) {
+  const br = metrics.biometricRetries;
+
+  br.lastRunTimestamp = new Date().toISOString();
+
+  if (event.mode === "dry_run_executor") br.dryRunTotal++;
+  if (event.mode === "executor_reserved") br.executionReservedTotal++;
+
+  br.candidatesTotal += Number(event.candidates || 0);
+  br.attemptedTotal += Number(event.attempted || 0);
+  br.executedTotal += Number(event.executed || 0);
+  br.skippedTotal += Number(event.skipped || 0);
+  br.failuresTotal += Number(event.failures || 0);
+  br.exhaustedTotal += Number(event.exhausted || 0);
 }
 
 export function recordHealthKitWebhook(event = {}) {
@@ -130,6 +157,38 @@ function formatPrometheusMetrics() {
     ? Math.round(hk.processingLatencyMs.sum / hk.processingLatencyMs.count)
     : 0;
 
+  lines.push("# HELP biometric_retry_dry_run_total Total biometric retry dry-run executions");
+  lines.push("# TYPE biometric_retry_dry_run_total counter");
+  lines.push(`biometric_retry_dry_run_total ${br.dryRunTotal}`);
+
+  lines.push("# HELP biometric_retry_execution_reserved_total Total guarded biometric retry executor reserved runs");
+  lines.push("# TYPE biometric_retry_execution_reserved_total counter");
+  lines.push(`biometric_retry_execution_reserved_total ${br.executionReservedTotal}`);
+
+  lines.push("# HELP biometric_retry_candidates_total Total biometric retry candidates observed");
+  lines.push("# TYPE biometric_retry_candidates_total counter");
+  lines.push(`biometric_retry_candidates_total ${br.candidatesTotal}`);
+
+  lines.push("# HELP biometric_retry_attempted_total Total biometric retry attempts reported");
+  lines.push("# TYPE biometric_retry_attempted_total counter");
+  lines.push(`biometric_retry_attempted_total ${br.attemptedTotal}`);
+
+  lines.push("# HELP biometric_retry_executed_total Total biometric retries executed");
+  lines.push("# TYPE biometric_retry_executed_total counter");
+  lines.push(`biometric_retry_executed_total ${br.executedTotal}`);
+
+  lines.push("# HELP biometric_retry_skipped_total Total biometric retries skipped");
+  lines.push("# TYPE biometric_retry_skipped_total counter");
+  lines.push(`biometric_retry_skipped_total ${br.skippedTotal}`);
+
+  lines.push("# HELP biometric_retry_failures_total Total biometric retry failures");
+  lines.push("# TYPE biometric_retry_failures_total counter");
+  lines.push(`biometric_retry_failures_total ${br.failuresTotal}`);
+
+  lines.push("# HELP biometric_retry_exhausted_total Total biometric retry exhausted records");
+  lines.push("# TYPE biometric_retry_exhausted_total counter");
+  lines.push(`biometric_retry_exhausted_total ${br.exhaustedTotal}`);
+
   lines.push("# HELP healthkit_webhooks_total Total HealthKit webhook attempts");
   lines.push("# TYPE healthkit_webhooks_total counter");
   lines.push(`healthkit_webhooks_total ${hk.webhooksTotal}`);
@@ -196,6 +255,7 @@ router.get("/json", (_req, res) => {
       memory,
       uptime: uptimeSeconds,
       errors: metrics.errors,
+      biometricRetries: metrics.biometricRetries,
       healthkit: metrics.healthkit,
       system: {
         cpus: os.cpus().length,
