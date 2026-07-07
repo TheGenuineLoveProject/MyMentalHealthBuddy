@@ -87,6 +87,31 @@ dryRun.executed===0,
 "dry run must not execute retries"
 );
 
+assert(
+dryRun.succeeded===0,
+"dry run must not succeed retries"
+);
+
+assert(
+dryRun.failed===0,
+"dry run must not fail retries"
+);
+
+assert(
+dryRun.exhausted===0,
+"dry run must not exhaust retries"
+);
+
+assert(
+dryRun.skipped===dryRun.attempted,
+"dry run must skip all candidates"
+);
+
+assert(
+dryRun.safety==="dry_run_no_state_changes",
+"dry run safety marker missing"
+);
+
 console.log(
 "PASS retry dry-run executor"
 );
