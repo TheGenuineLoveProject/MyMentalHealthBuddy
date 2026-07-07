@@ -33,7 +33,9 @@
     "verify:healthkit-webhook": "node scripts/biometrics/verify-healthkit-webhook-contract.mjs",
     "verify:healthkit": "npm run verify:healthkit-signature && npm run verify:healthkit-webhook",
     "verify:healthkit-observability": "node scripts/biometrics/verify-healthkit-observability.mjs",
-    "verify:healthkit-full": "npm run verify:healthkit && npm run verify:healthkit-observability && npm run verify:foundation"
+    "verify:healthkit-full": "npm run verify:healthkit && npm run verify:healthkit-observability && npm run verify:foundation",
+    "verify:biometric-retries": "node scripts/biometrics/verify-biometric-retries.mjs",
+    "verify:biometric-full": "npm run verify:biometric-retries && npm run verify:healthkit-full"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
