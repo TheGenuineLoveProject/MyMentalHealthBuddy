@@ -29,7 +29,9 @@
     "gate:constitution": "node scripts/constitution-implementation-gate.mjs",
     "platform:evolution:audit": "node scripts/platform-evolution-audit.mjs",
     "audit:registry-routes": "node scripts/audit-registry-routes.mjs",
-    "verify:healthkit-signature": "node scripts/biometrics/verify-healthkit-signature-contract.mjs"
+    "verify:healthkit-signature": "node scripts/biometrics/verify-healthkit-signature-contract.mjs",
+    "verify:healthkit-webhook": "node scripts/biometrics/verify-healthkit-webhook-contract.mjs",
+    "verify:healthkit": "npm run verify:healthkit-signature && npm run verify:healthkit-webhook"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
