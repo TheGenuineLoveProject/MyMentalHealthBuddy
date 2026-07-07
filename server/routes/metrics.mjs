@@ -152,6 +152,7 @@ function formatPrometheusMetrics() {
   lines.push("# TYPE nodejs_cpu_count gauge");
   lines.push(`nodejs_cpu_count ${os.cpus().length}`);
 
+  const br = metrics.biometricRetries;
   const hk = metrics.healthkit;
   const hkAvgLatency = hk.processingLatencyMs.count > 0
     ? Math.round(hk.processingLatencyMs.sum / hk.processingLatencyMs.count)
