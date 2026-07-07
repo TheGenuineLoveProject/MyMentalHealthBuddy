@@ -35,9 +35,10 @@ function nowMs() {
 }
 
 function getClientKey(req) {
-  const xf = req.headers["x-forwarded-for"];
-  const ip = Array.isArray(xf) ? xf[0] : xf;
-  return (ip || req.ip || "unknown").toString();
+  // Express already normalizes proxy chains according
+  // to app.set("trust proxy", ...). Never trust raw
+  // X-Forwarded-For headers directly.
+  return (req.ip || "unknown").toString();
 }
 
 /**
