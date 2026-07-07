@@ -1,7 +1,12 @@
 import {
   listBiometricRetryCandidates,
   getBiometricRetryPolicy,
-  executeBiometricRetries
+  executeBiometricRetries,
+  calculateRetryBackoffMs,
+  markRetrying,
+  markRetrySuccess,
+  markRetryFailure,
+  markRetryExhausted
 } from "../../server/biometrics/retryService.mjs";
 
 function assert(x,msg){
@@ -84,6 +89,50 @@ dryRun.executed===0,
 
 console.log(
 "PASS retry dry-run executor"
+);
+
+assert(
+typeof calculateRetryBackoffMs==="function",
+"backoff function missing"
+);
+
+assert(
+calculateRetryBackoffMs(0)===60000,
+"backoff attempt 0 must be 60000ms"
+);
+
+assert(
+calculateRetryBackoffMs(1)===120000,
+"backoff attempt 1 must be 120000ms"
+);
+
+assert(
+calculateRetryBackoffMs(20)===3600000,
+"backoff must cap at 3600000ms"
+);
+
+assert(
+typeof markRetrying==="function",
+"markRetrying missing"
+);
+
+assert(
+typeof markRetrySuccess==="function",
+"markRetrySuccess missing"
+);
+
+assert(
+typeof markRetryFailure==="function",
+"markRetryFailure missing"
+);
+
+assert(
+typeof markRetryExhausted==="function",
+"markRetryExhausted missing"
+);
+
+console.log(
+"PASS retry lifecycle helpers"
 );
 
 console.log(
