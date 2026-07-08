@@ -37,7 +37,9 @@
     "verify:biometric-retries": "node scripts/biometrics/verify-biometric-retries.mjs",
     "verify:biometric-full": "npm run verify:biometric-retries && npm run verify:healthkit-full",
     "verify:rate-limit": "node scripts/security/verify-rate-limit-ip-spoof.mjs",
-    "verify:security-full": "npm run verify:rate-limit && npm run verify:biometric-full"
+    "verify:security-full": "npm run verify:rate-limit && npm run verify:biometric-full",
+    "verify:stripe-contract": "node scripts/billing/verify-stripe-contract.mjs",
+    "verify:monetization-full": "npm run verify:stripe-contract && npm run verify:security-full && npm run verify:foundation"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
