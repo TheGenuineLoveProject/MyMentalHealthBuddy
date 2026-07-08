@@ -19,3 +19,5 @@ Hard gates must pass for the foundation to be considered green. Soft checks are
 informational (they do not fail the run).
 
 - Real backup secret setup checklist is documented.
+
+- Production backup launch blocker is documented.
