@@ -2,6 +2,7 @@
 // Single Drizzle client for the whole app
 
 import pg from "pg";
+import { getPostgresSslConfig } from "./sslConfig.mjs";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "../../shared/schema.mjs";
 import { logger } from "../utils/logger.mjs";
@@ -26,7 +27,7 @@ try {
 
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_SSL === "false" ? false : { rejectUnauthorized: false },
+  ssl: getPostgresSslConfig(),
   // Hard timeouts so a hung Neon endpoint can never block boot. Without
   // these, ensureSchema() can wait forever on the first execute() call
   // (this exact failure mode caused the 2026-05-10 production crash-loop:

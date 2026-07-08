@@ -1,6 +1,7 @@
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
+import { getPostgresSslConfig } from "./db/sslConfig.mjs";
 
 const PgSession = connectPgSimple(session);
 
@@ -28,7 +29,7 @@ export function buildSessionMiddleware() {
   if (isProd && hasDb) {
     const pool = new pg.Pool({
       connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false },
+      ssl: getPostgresSslConfig(),
     });
 
     return session({
