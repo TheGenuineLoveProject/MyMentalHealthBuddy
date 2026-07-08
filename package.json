@@ -48,7 +48,8 @@
     "verify:operations-full": "npm run verify:backup-readiness && npm run verify:foundation",
     "backup:upload:placeholder": "node scripts/operations/upload-backup-placeholder.mjs",
     "verify:backup-upload-readiness": "node scripts/operations/verify-backup-upload-readiness.mjs",
-    "db:backup:upload": "node scripts/operations/upload-backup-s3.mjs"
+    "db:backup:upload": "node scripts/operations/upload-backup-s3.mjs",
+    "verify:backup-env": "node scripts/operations/verify-backup-env.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
