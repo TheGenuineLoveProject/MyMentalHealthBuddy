@@ -50,7 +50,8 @@
     "verify:backup-upload-readiness": "node scripts/operations/verify-backup-upload-readiness.mjs",
     "db:backup:upload": "node scripts/operations/upload-backup-s3.mjs",
     "verify:backup-env": "node scripts/operations/verify-backup-env.mjs",
-    "verify:backup-env-example": "node scripts/operations/verify-backup-env-example.mjs"
+    "verify:backup-env-example": "node scripts/operations/verify-backup-env-example.mjs",
+    "verify:backup-env-real": "node scripts/operations/verify-backup-env-real.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
