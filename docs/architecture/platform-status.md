@@ -4,7 +4,7 @@
 > overwritten on every `npm run verify` / `npm run verify:foundation`.
 > Structured history: `logs/verification.jsonl`.
 
-- **Last verified:** 2026-07-08T22:05:05.122Z
+- **Last verified:** 2026-07-08T23:23:42.495Z
 - **Base URL:** http://localhost:5000
 - **Overall (hard gates):** PASS
 
@@ -17,11 +17,3 @@
 
 Hard gates must pass for the foundation to be considered green. Soft checks are
 informational (they do not fail the run).
-
-- Real backup secret setup checklist is documented.
-
-- Production backup launch blocker is documented.
-
-- Real backup secret validation checklist is documented.
-
-- Production backup launch proof is documented.
