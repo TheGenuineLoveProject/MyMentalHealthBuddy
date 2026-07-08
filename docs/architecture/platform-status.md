@@ -21,3 +21,5 @@ informational (they do not fail the run).
 - Real backup secret setup checklist is documented.
 
 - Production backup launch blocker is documented.
+
+- Real backup secret validation checklist is documented.
