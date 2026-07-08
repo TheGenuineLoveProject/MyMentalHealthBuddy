@@ -45,7 +45,8 @@
     "db:backup": "bash scripts/db/backup-database.sh",
     "db:restore:verify": "bash scripts/db/verify-restore.sh",
     "verify:backup-readiness": "node scripts/operations/verify-backup-readiness.mjs",
-    "verify:operations-full": "npm run verify:backup-readiness && npm run verify:foundation"
+    "verify:operations-full": "npm run verify:backup-readiness && npm run verify:foundation",
+    "backup:upload:placeholder": "node scripts/operations/upload-backup-placeholder.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
