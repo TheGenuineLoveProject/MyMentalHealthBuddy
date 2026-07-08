@@ -1,0 +1,60 @@
+commit 6927019ae7012c029c0aee764e68e7a28002dbe6
+Author: Maria Landa <you@example.com>
+Date:   Wed Jul 8 04:54:18 2026 +0000
+
+    ci: add release safety gate
+
+diff --git a/.github/workflows/release-safety-gate.yml b/.github/workflows/release-safety-gate.yml
+new file mode 100644
+index 000000000..438d45fa2
+--- /dev/null
++++ b/.github/workflows/release-safety-gate.yml
+@@ -0,0 +1,48 @@
++name: Release Safety Gate
++
++on:
++  push:
++    branches:
++      - W12_DEVELOPMENT
++      - main
++  pull_request:
++    branches:
++      - W12_DEVELOPMENT
++      - main
++
++jobs:
++  release-safety:
++    name: Release Safety Verification
++    runs-on: ubuntu-latest
++    timeout-minutes: 20
++
++    steps:
++      - name: Checkout
++        uses: actions/checkout@v4
++
++      - name: Setup Node
++        uses: actions/setup-node@v4
++        with:
++          node-version: 20
++          cache: npm
++
++      - name: Install dependencies
++        run: npm ci
++
++      - name: Typecheck
++        run: npm run typecheck --if-present
++
++      - name: Safety guardrails
++        run: npm run verify:safety-guardrails
++
++      - name: Stripe contract
++        run: npm run verify:stripe-contract
++
++      - name: Rate-limit guardrail
++        run: npm run verify:rate-limit
++
++      - name: HealthKit contract
++        run: npm run verify:healthkit
++
++      - name: Build
++        run: npm run build
