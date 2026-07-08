@@ -4,7 +4,8 @@ const requiredFiles = [
   "docs/operations/backup-disaster-recovery-runbook.md",
   "docs/operations/monthly-restore-drill-log.md",
   "scripts/db/backup-database.sh",
-  "scripts/db/verify-restore.sh"
+  "scripts/db/verify-restore.sh",
+  "scripts/operations/upload-backup-s3.mjs",
 ];
 
 let failed = false;
