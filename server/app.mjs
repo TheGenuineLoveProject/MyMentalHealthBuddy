@@ -78,6 +78,10 @@ registerInternalIntelligenceServer(app);
 
 // PHASE113JG_V3B_PRE_ROUTE_ADMIN_DIAGNOSTIC_EXACT_PATH_BLOCK: exact-path block for internal admin diagnostic APIs.
 // This must run before any later admin route definitions.
+
+app.use("/api/crisis", crisisRouter);
+app.use("/api/disclaimer", disclaimerRouter);
+
 app.use((req, res, next) => {
   const blockedAdminDiagnosticPaths = new Set([
     "/api/admin/health",
@@ -395,6 +399,8 @@ import growthJourneyRoutes from "./routes/growth-journey.mjs";
 import journalsRoutes from "./routes/journals.mjs";
 import { existsSync } from "node:fs";
 import { registerInternalIntelligenceServer } from "./internal-intelligence-server.mjs";
+import crisisRouter from "./routes/crisis.mjs";
+import disclaimerRouter from "./routes/disclaimer.mjs";
 
 // PHASE115E3_EXISTSSYNC_IMPORT_FIX
 

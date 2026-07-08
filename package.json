@@ -39,7 +39,9 @@
     "verify:rate-limit": "node scripts/security/verify-rate-limit-ip-spoof.mjs",
     "verify:security-full": "npm run verify:rate-limit && npm run verify:biometric-full",
     "verify:stripe-contract": "node scripts/billing/verify-stripe-contract.mjs",
-    "verify:monetization-full": "npm run verify:stripe-contract && npm run verify:security-full && npm run verify:foundation"
+    "verify:monetization-full": "npm run verify:stripe-contract && npm run verify:security-full && npm run verify:foundation",
+    "verify:safety-guardrails": "node scripts/safety/verify-safety-guardrails.mjs",
+    "verify:release-full": "npm run verify:safety-guardrails && npm run verify:monetization-full && npm run verify:security-full && npm run verify:foundation && npm run build"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
