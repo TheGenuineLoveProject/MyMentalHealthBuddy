@@ -140,8 +140,32 @@ Required environment variables:
 Launch requirement:
 - No production launch until at least one backup is uploaded externally and restored successfully into a disposable database.
 
+
+## Production Backup Provider Decision
+
+Recommended initial production provider:
+- AWS S3 with SSE-KMS encryption.
+- Private bucket only.
+- Versioning enabled.
+- Lifecycle retention enabled.
+- Separate IAM service account for backup upload only.
+- No public access.
+- No application runtime credential reuse.
+- Restore verification required before production readiness.
+
+Required environment variables before enabling real upload:
+- BACKUP_STORAGE_PROVIDER
+- BACKUP_BUCKET_NAME
+- BACKUP_REGION
+- BACKUP_KMS_KEY_ID
+- BACKUP_UPLOAD_ROLE_OR_ACCESS_KEY
+- BACKUP_UPLOAD_SECRET_REF
+
+Production launch blocker:
+- Real encrypted external upload must be configured and verified before claiming production backup readiness.
+
 ## Current Status
-Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage provider selection, scheduled automation, and monthly restore drills remain pending. Retention policy is documented. Backup failure alerting plan is documented.
+Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage provider decision is documented. Real provider credential setup, real upload implementation, scheduled automation, and monthly restore drills remain pending. Retention policy is documented. Backup failure alerting plan is documented.
 
 
 ## External Encrypted Backup Storage Plan
