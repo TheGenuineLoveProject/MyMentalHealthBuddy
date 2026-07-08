@@ -43,7 +43,9 @@
     "verify:safety-guardrails": "node scripts/safety/verify-safety-guardrails.mjs",
     "verify:release-full": "npm run typecheck && npm test && npm run build",
     "db:backup": "bash scripts/db/backup-database.sh",
-    "db:restore:verify": "bash scripts/db/verify-restore.sh"
+    "db:restore:verify": "bash scripts/db/verify-restore.sh",
+    "verify:backup-readiness": "node scripts/operations/verify-backup-readiness.mjs",
+    "verify:operations-full": "npm run verify:backup-readiness && npm run verify:foundation"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
