@@ -41,7 +41,7 @@
     "verify:stripe-contract": "node scripts/billing/verify-stripe-contract.mjs",
     "verify:monetization-full": "npm run verify:stripe-contract && npm run verify:security-full && npm run verify:foundation",
     "verify:safety-guardrails": "node scripts/safety/verify-safety-guardrails.mjs",
-    "verify:release-full": "npm run typecheck && npm test && npm run verify:backup-readiness && npm run build",
+    "verify:release-full": "npm run typecheck && npm test && npm run verify:backup-env-example && npm run verify:backup-readiness && npm run build",
     "db:backup": "bash scripts/db/backup-database.sh",
     "db:restore:verify": "bash scripts/db/verify-restore.sh",
     "verify:backup-readiness": "node scripts/operations/verify-backup-readiness.mjs",
@@ -49,7 +49,8 @@
     "backup:upload:placeholder": "node scripts/operations/upload-backup-placeholder.mjs",
     "verify:backup-upload-readiness": "node scripts/operations/verify-backup-upload-readiness.mjs",
     "db:backup:upload": "node scripts/operations/upload-backup-s3.mjs",
-    "verify:backup-env": "node scripts/operations/verify-backup-env.mjs"
+    "verify:backup-env": "node scripts/operations/verify-backup-env.mjs",
+    "verify:backup-env-example": "node scripts/operations/verify-backup-env-example.mjs"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
