@@ -95,8 +95,26 @@ Required proof before production launch:
 - Retention policy is documented and followed.
 - Restore drill result is recorded.
 
+
+## Backup Failure Alerting
+
+Production backup failures must never be silent.
+
+Initial alerting requirements:
+- Failed database backup must create an operational incident.
+- Failed external upload must create an operational incident.
+- Failed restore verification must block production readiness.
+- Alert must include timestamp, environment, job name, and failure category.
+- Alert must never include DATABASE_URL, tokens, secrets, or raw user data.
+- Until resolved, failed backup status must remain visible in platform status documentation.
+
+Minimum launch requirement:
+- Backup success/failure is logged.
+- Failure alert path is documented.
+- Manual operator review is required before production launch.
+
 ## Current Status
-Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage provider selection, scheduled automation, and monthly restore drills remain pending. Retention policy is documented.
+Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage provider selection, scheduled automation, and monthly restore drills remain pending. Retention policy is documented. Backup failure alerting plan is documented.
 
 
 ## External Encrypted Backup Storage Plan
