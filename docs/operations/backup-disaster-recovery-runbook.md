@@ -113,6 +113,33 @@ Minimum launch requirement:
 - Failure alert path is documented.
 - Manual operator review is required before production launch.
 
+
+## Production Backup Storage Provider Checklist
+
+Before production launch, configure one encrypted external backup destination.
+
+Required provider capabilities:
+- Encryption at rest.
+- Private access only.
+- Versioning or object lock preferred.
+- Lifecycle retention rules.
+- Separate credentials from the production database.
+- Access logs enabled.
+- Restore download tested.
+- Secrets stored only in environment variables.
+
+Required environment variables:
+- BACKUP_STORAGE_PROVIDER
+- BACKUP_STORAGE_BUCKET
+- BACKUP_STORAGE_REGION
+- BACKUP_STORAGE_ACCESS_KEY_ID
+- BACKUP_STORAGE_SECRET_ACCESS_KEY
+- BACKUP_ENCRYPTION_KEY
+- BACKUP_ALERT_WEBHOOK_URL
+
+Launch requirement:
+- No production launch until at least one backup is uploaded externally and restored successfully into a disposable database.
+
 ## Current Status
 Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage provider selection, scheduled automation, and monthly restore drills remain pending. Retention policy is documented. Backup failure alerting plan is documented.
 
