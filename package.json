@@ -24,7 +24,7 @@
     "verify:all": "node scripts/verify-all.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "echo 'test placeholder active' && exit 0",
+    "test": "npm run verify:safety-guardrails && npm run verify:stripe-contract && npm run verify:rate-limit && npm run verify:healthkit && npm run verify:foundation",
     "audit:phase83": "node scripts/phase83-platform-content-component-analysis.mjs",
     "gate:constitution": "node scripts/constitution-implementation-gate.mjs",
     "platform:evolution:audit": "node scripts/platform-evolution-audit.mjs",

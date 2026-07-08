@@ -4,7 +4,7 @@
 > overwritten on every `npm run verify` / `npm run verify:foundation`.
 > Structured history: `logs/verification.jsonl`.
 
-- **Last verified:** 2026-07-08T03:54:11.420Z
+- **Last verified:** 2026-07-08T04:23:55.591Z
 - **Base URL:** http://localhost:5000
 - **Overall (hard gates):** PASS
 
