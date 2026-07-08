@@ -24,7 +24,7 @@
     "verify:all": "node scripts/verify-all.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "npm run verify:safety-guardrails && npm run verify:stripe-contract && npm run verify:rate-limit && npm run verify:healthkit && npm run verify:foundation",
+    "test": "npm run typecheck && npm run verify:safety-guardrails && npm run verify:stripe-contract && npm run verify:rate-limit && npm run verify:healthkit && npm run verify:foundation",
     "audit:phase83": "node scripts/phase83-platform-content-component-analysis.mjs",
     "gate:constitution": "node scripts/constitution-implementation-gate.mjs",
     "platform:evolution:audit": "node scripts/platform-evolution-audit.mjs",
@@ -41,7 +41,7 @@
     "verify:stripe-contract": "node scripts/billing/verify-stripe-contract.mjs",
     "verify:monetization-full": "npm run verify:stripe-contract && npm run verify:security-full && npm run verify:foundation",
     "verify:safety-guardrails": "node scripts/safety/verify-safety-guardrails.mjs",
-    "verify:release-full": "npm run verify:safety-guardrails && npm run verify:monetization-full && npm run verify:security-full && npm run verify:foundation && npm run build"
+    "verify:release-full": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
