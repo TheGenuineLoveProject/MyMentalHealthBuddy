@@ -38,6 +38,26 @@ Operational:
 6. Never expose DATABASE_URL in logs.
 7. Verify restore into scratch database before claiming backup readiness.
 
+
+## Backup Retention Policy
+
+Initial retention targets:
+- Daily backups retained for 14 days.
+- Weekly backups retained for 8 weeks.
+- Monthly backups retained for 12 months.
+- Production launch requires encrypted external storage before automated deletion.
+- No backup may be deleted unless at least one newer backup has passed restore verification.
+- Retention deletion must never run against primary production data.
+- Restore verification logs must be preserved with the backup history.
+
+Minimum deletion safety rules:
+1. Confirm the backup file exists.
+2. Confirm at least one newer backup exists.
+3. Confirm a newer backup has passed disposable restore verification.
+4. Confirm the file is outside the active production database.
+5. Log the deletion decision.
+6. Never print database secrets in logs.
+
 ## Restore Procedure
 1. Confirm incident type.
 2. Freeze destructive writes if needed.
@@ -57,7 +77,7 @@ Operational:
 - /api/health returns 200 after restore.
 
 ## Current Status
-Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage, scheduled automation, retention policy, and monthly restore drills are pending.
+Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage provider selection, scheduled automation, and monthly restore drills remain pending. Retention policy is documented.
 
 
 ## External Encrypted Backup Storage Plan
