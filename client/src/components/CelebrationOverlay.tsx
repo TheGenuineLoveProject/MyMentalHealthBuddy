@@ -131,7 +131,6 @@ export default function CelebrationOverlay({
         heightPx={160}
         decorative={false}
         motion="soft"
-        alt="Lumi celebrating progress"
         data-testid="celebration-overlay-buddy"
       />
 
