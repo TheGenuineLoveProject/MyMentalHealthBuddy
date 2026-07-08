@@ -76,6 +76,25 @@ Minimum deletion safety rules:
 - Application can connect to restored DB.
 - /api/health returns 200 after restore.
 
+
+## Backup Automation Schedule
+
+Initial production target:
+- Database backups run daily.
+- Backup job must run outside peak user activity.
+- Backup output must be written to a protected backup directory before external upload.
+- Backup logs must record timestamp, file path, file size, and completion status.
+- Backup logs must never print DATABASE_URL or secrets.
+- Failed backups must block production readiness until resolved.
+- At least one backup per month must be restored into a disposable restore-test database.
+
+Required proof before production launch:
+- `npm run db:backup` completes successfully.
+- `npm run db:restore:verify` completes successfully against a disposable database.
+- External encrypted storage is configured.
+- Retention policy is documented and followed.
+- Restore drill result is recorded.
+
 ## Current Status
 Runbook created. Backup and disposable restore verification scripts implemented. External encrypted storage provider selection, scheduled automation, and monthly restore drills remain pending. Retention policy is documented.
 
