@@ -23,3 +23,5 @@ informational (they do not fail the run).
 - Production backup launch blocker is documented.
 
 - Real backup secret validation checklist is documented.
+
+- Production backup launch proof is documented.
