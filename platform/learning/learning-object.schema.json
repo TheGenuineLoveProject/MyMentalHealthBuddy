@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "requiredFields": [
+    "id",
+    "type",
+    "targetCapability",
+    "educationalObjective",
+    "learnerStage",
+    "accessibilityNeeds",
+    "cognitiveLoad",
+    "emotionalLoad",
+    "evidenceClassification",
+    "confidenceEstimate",
+    "progressIndicators",
+    "reviewSchedule",
+    "adaptationRule",
+    "safetyBoundary"
+  ],
+  "allowedTypes": [
+    "lesson",
+    "affirmation",
+    "journal_prompt",
+    "reflection",
+    "behavioral_experiment",
+    "assessment",
+    "retrieval_question"
+  ],
+  "safetyRules": [
+    "Do not diagnose.",
+    "Do not promise guaranteed transformation.",
+    "Do not replace therapy, medical care, legal advice, or crisis support.",
+    "Use IFS only as optional reflective language.",
+    "Separate healing content from monetization pressure."
+  ]
+}

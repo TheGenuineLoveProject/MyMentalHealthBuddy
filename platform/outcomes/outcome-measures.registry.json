@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "outcomeDomains": [
+    {
+      "id": "emotional_regulation",
+      "measures": ["self-rated calm", "trigger recovery time", "practice completion"]
+    },
+    {
+      "id": "learning_progress",
+      "measures": ["retrieval accuracy", "lesson completion", "reflection depth"]
+    },
+    {
+      "id": "executive_function",
+      "measures": ["task initiation", "follow-through", "planning consistency"]
+    },
+    {
+      "id": "relational_skills",
+      "measures": ["communication practice", "repair attempts", "boundary clarity"]
+    },
+    {
+      "id": "retention_and_engagement",
+      "measures": ["daily active use", "return rate", "program completion"]
+    },
+    {
+      "id": "ethical_monetization",
+      "measures": ["conversion outside healing flows", "billing clarity", "no crisis upsell"]
+    }
+  ]
+}
