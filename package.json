@@ -41,7 +41,7 @@
     "verify:stripe-contract": "node scripts/billing/verify-stripe-contract.mjs",
     "verify:monetization-full": "npm run verify:stripe-contract && npm run verify:security-full && npm run verify:foundation",
     "verify:safety-guardrails": "node scripts/safety/verify-safety-guardrails.mjs",
-    "verify:release-full": "npm run typecheck && npm test && npm run verify:backup-env-example && npm run verify:backup-env-docs && npm run verify:backup-readiness && npm run verify:production-backup-launch-proof && npm run verify:real-backup-env && npm run verify:deployment-target-health && npm run build",
+    "verify:release-full": "npm run typecheck && npm test && npm run verify:backup-env-example && npm run verify:backup-env-docs && npm run verify:backup-readiness && npm run verify:production-backup-launch-proof && npm run verify:real-backup-env && npm run verify:deployment-target-health && npm run verify:clinical-safety-taxonomy && npm run build",
     "db:backup": "bash scripts/db/backup-database.sh",
     "db:restore:verify": "bash scripts/db/verify-restore.sh",
     "verify:backup-readiness": "node scripts/operations/verify-backup-readiness.mjs",
@@ -56,7 +56,8 @@
     "verify:real-backup-env": "node scripts/operations/verify-real-backup-env.mjs",
     "verify:backup-env-docs": "node scripts/operations/verify-backup-env-docs.mjs",
     "upload:backup:s3": "node scripts/operations/upload-backup-s3.mjs",
-    "verify:deployment-target-health": "node scripts/operations/verify-deployment-target-health.mjs"
+    "verify:deployment-target-health": "node scripts/operations/verify-deployment-target-health.mjs",
+    "verify:clinical-safety-taxonomy": "node scripts/governance/verify-clinical-safety-taxonomy.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
