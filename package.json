@@ -55,7 +55,8 @@
     "verify:production-backup-launch-proof": "node scripts/operations/verify-production-backup-launch-proof.mjs",
     "verify:real-backup-env": "node scripts/operations/verify-real-backup-env.mjs",
     "verify:backup-env-docs": "node scripts/operations/verify-backup-env-docs.mjs",
-    "upload:backup:s3": "node scripts/operations/upload-backup-s3.mjs"
+    "upload:backup:s3": "node scripts/operations/upload-backup-s3.mjs",
+    "verify:deployment-target-health": "node scripts/operations/verify-deployment-target-health.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
