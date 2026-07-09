@@ -41,7 +41,7 @@
     "verify:stripe-contract": "node scripts/billing/verify-stripe-contract.mjs",
     "verify:monetization-full": "npm run verify:stripe-contract && npm run verify:security-full && npm run verify:foundation",
     "verify:safety-guardrails": "node scripts/safety/verify-safety-guardrails.mjs",
-    "verify:release-full": "npm run typecheck && npm test && npm run verify:backup-env-example && npm run verify:backup-env-docs && npm run verify:backup-readiness && npm run verify:production-backup-launch-proof && npm run verify:real-backup-env && npm run build",
+    "verify:release-full": "npm run typecheck && npm test && npm run verify:backup-env-example && npm run verify:backup-env-docs && npm run verify:backup-readiness && npm run verify:production-backup-launch-proof && npm run verify:real-backup-env && npm run verify:deployment-target-health && npm run build",
     "db:backup": "bash scripts/db/backup-database.sh",
     "db:restore:verify": "bash scripts/db/verify-restore.sh",
     "verify:backup-readiness": "node scripts/operations/verify-backup-readiness.mjs",
