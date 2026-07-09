@@ -1,0 +1,5 @@
+{
+  "version": "1.0.0",
+  "status": "registry_placeholder",
+  "rule": "All production prompts must include owner, domain, safety level, evidence level, and last review date."
+}

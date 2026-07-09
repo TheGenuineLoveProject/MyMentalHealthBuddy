@@ -1,0 +1,5 @@
+{
+  "version": "1.0.0",
+  "status": "registry_placeholder",
+  "rule": "All production assets must include source, license/status, route usage, and accessibility description."
+}

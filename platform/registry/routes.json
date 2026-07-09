@@ -1,0 +1,5 @@
+{
+  "version": "1.0.0",
+  "status": "registry_placeholder",
+  "rule": "Populate from verified route audit only. Do not manually invent route completion."
+}

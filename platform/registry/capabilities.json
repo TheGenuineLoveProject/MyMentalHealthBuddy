@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "capabilities": [
+    "biological_regulation",
+    "attention",
+    "emotional_literacy",
+    "self_compassion",
+    "habit_formation",
+    "executive_function",
+    "communication",
+    "boundaries",
+    "repair",
+    "values_clarity",
+    "metacognition",
+    "adaptive_learning"
+  ]
+}
