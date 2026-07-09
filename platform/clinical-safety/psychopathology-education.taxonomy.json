@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "purpose": "Support education about mental health patterns without diagnosis, treatment claims, or crisis replacement.",
+  "nonDiagnosticRule": "The platform may describe patterns, experiences, and educational concepts, but must not assign diagnoses or tell a user they have a disorder.",
+  "domains": [
+    "stress_and_overwhelm",
+    "anxiety_patterns",
+    "depressive_patterns",
+    "trauma_related_patterns",
+    "attention_and_executive_function_patterns",
+    "emotion_regulation_patterns",
+    "relationship_and_attachment_patterns",
+    "identity_meaning_and_values_patterns",
+    "substance_use_related_patterns",
+    "sleep_energy_and_recovery_patterns"
+  ],
+  "requiredSafeguards": [
+    "Use educational language.",
+    "Avoid diagnostic certainty.",
+    "Encourage professional support when distress, impairment, risk, or safety concerns are present.",
+    "Escalate crisis language to crisis resources.",
+    "Avoid replacing therapy, medical advice, legal advice, or emergency support.",
+    "Avoid shame-based, fear-based, or coercive language.",
+    "Do not monetize inside crisis or high-distress support flows."
+  ],
+  "contentRules": {
+    "allowed": [
+      "This pattern can happen when...",
+      "Some people experience...",
+      "A possible skill to practice is...",
+      "You may consider discussing this with a qualified professional..."
+    ],
+    "disallowed": [
+      "You have...",
+      "This proves...",
+      "This will cure...",
+      "You do not need professional help...",
+      "Buy this to heal trauma..."
+    ]
+  },
+  "adaptationRules": [
+    {
+      "condition": "emotionalLoad >= 4",
+      "action": "reduce content intensity, shorten exercise, add grounding option"
+    },
+    {
+      "condition": "distressOrImpairmentMentioned === true",
+      "action": "encourage professional support and use non-diagnostic language"
+    },
+    {
+      "condition": "crisisLanguageDetected === true",
+      "action": "show crisis resources and stop normal coaching flow"
+    }
+  ]
+}
