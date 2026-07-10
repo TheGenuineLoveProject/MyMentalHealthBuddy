@@ -14,6 +14,11 @@ const checks = [
     label: "Governance registry integrity",
     script: "scripts/governance/verify-governance-registry-integrity.mjs",
   },
+{
+  id: "registry_schema",
+  label: "Registry schema contracts",
+  script: "scripts/governance/verify-registry-schemas.mjs",
+},
   {
     id: "domain_separation",
     label: "Domain separation",
