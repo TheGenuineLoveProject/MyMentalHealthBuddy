@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mymentalhealthbuddy.com/schemas/registry/routes.schema.json",
+  "title": "Routes Registry",
+  "description": "Generated structural compatibility schema for platform/registry/routes.json. This schema preserves the currently observed registry shape and does not by itself verify repository references or business meaning.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "rule": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "status",
+    "rule"
+  ],
+  "additionalProperties": true,
+  "x-registry-source": "platform/registry/routes.json",
+  "x-generation-mode": "observed-structure-compatible",
+  "x-schema-version": "1.0.0"
+}

@@ -59,7 +59,9 @@
     "verify:deployment-target-health": "node scripts/operations/verify-deployment-target-health.mjs",
     "verify:clinical-safety-taxonomy": "node scripts/governance/verify-clinical-safety-taxonomy.mjs",
     "verify:governance-release": "node scripts/governance/verify-governance-release.mjs",
-    "audit:registry-semantics": "node scripts/governance/audit-registry-semantics.mjs"
+    "audit:registry-semantics": "node scripts/governance/audit-registry-semantics.mjs",
+    "generate:registry-schemas": "node scripts/governance/generate-registry-schemas.mjs",
+    "verify:registry-schemas": "node scripts/governance/verify-registry-schemas.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",

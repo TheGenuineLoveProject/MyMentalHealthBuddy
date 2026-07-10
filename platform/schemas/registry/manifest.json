@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "generationMode": "observed-structure-compatible",
+  "generatedAt": "2026-07-10T02:20:21.820Z",
+  "schemas": [
+    {
+      "registryFile": "platform/registry/assets.json",
+      "schemaFile": "platform/schemas/registry/assets.schema.json",
+      "topLevelType": "object"
+    },
+    {
+      "registryFile": "platform/registry/prompts.json",
+      "schemaFile": "platform/schemas/registry/prompts.schema.json",
+      "topLevelType": "object"
+    },
+    {
+      "registryFile": "platform/registry/routes.json",
+      "schemaFile": "platform/schemas/registry/routes.schema.json",
+      "topLevelType": "object"
+    },
+    {
+      "registryFile": "platform/registry/components.json",
+      "schemaFile": "platform/schemas/registry/components.schema.json",
+      "topLevelType": "object"
+    },
+    {
+      "registryFile": "platform/registry/capabilities.json",
+      "schemaFile": "platform/schemas/registry/capabilities.schema.json",
+      "topLevelType": "object"
+    }
+  ]
+}
