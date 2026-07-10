@@ -58,7 +58,8 @@
     "upload:backup:s3": "node scripts/operations/upload-backup-s3.mjs",
     "verify:deployment-target-health": "node scripts/operations/verify-deployment-target-health.mjs",
     "verify:clinical-safety-taxonomy": "node scripts/governance/verify-clinical-safety-taxonomy.mjs",
-    "verify:governance-release": "node scripts/governance/verify-governance-release.mjs"
+    "verify:governance-release": "node scripts/governance/verify-governance-release.mjs",
+    "audit:registry-semantics": "node scripts/governance/audit-registry-semantics.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
