@@ -304,3 +304,13 @@ data/memory-summary/*.json
 data/memory-summary/*.txt
 data/usage/*.json
 data/usage/*.txt
+# Generated governance discovery and diagnostic evidence.
+# Source scripts are committed; these reports are reproducible and non-authoritative.
+artifacts/governance/registry-candidate-inventory.json
+artifacts/governance/registry-candidate-inventory.canonical-filtered.json
+artifacts/governance/registry-candidate-precision-diagnostic.json
+artifacts/governance/registry-candidate-filter-review.json
+artifacts/governance/registry-reconciliation-classification.json
+artifacts/governance/registry-reference-coverage-diagnostic.json
+artifacts/governance/registry-repository-reconciliation.json
+tmp/governance/registry-semantic-audit.json

@@ -62,7 +62,11 @@
     "audit:registry-semantics": "node scripts/governance/audit-registry-semantics.mjs",
     "generate:registry-schemas": "node scripts/governance/generate-registry-schemas.mjs",
     "verify:registry-schemas": "node scripts/governance/verify-registry-schemas.mjs",
-    "audit:registry-reconciliation": "node scripts/governance/audit-registry-repository-reconciliation.mjs"
+    "audit:registry-reconciliation": "node scripts/governance/audit-registry-repository-reconciliation.mjs",
+    "generate:registry-candidates": "node scripts/governance/generate-registry-candidate-inventory.mjs",
+    "diagnose:registry-candidates": "node scripts/governance/diagnose-registry-candidate-precision.mjs",
+    "filter:registry-candidates": "node scripts/governance/filter-registry-candidates-to-canonical-sources.mjs",
+    "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
