@@ -314,3 +314,7 @@ artifacts/governance/registry-reconciliation-classification.json
 artifacts/governance/registry-reference-coverage-diagnostic.json
 artifacts/governance/registry-repository-reconciliation.json
 tmp/governance/registry-semantic-audit.json
+
+# Ephemeral governance discovery outputs
+# Generated evidence only; not authoritative production source.
+/tmp/governance/
