@@ -20,6 +20,11 @@ const checks = [
   script: "scripts/governance/verify-registry-schemas.mjs",
 },
   {
+    id: "registry_reconciliation",
+    label: "Registry/repository reconciliation",
+    script: "scripts/governance/audit-registry-repository-reconciliation.mjs",
+  },
+  {
     id: "domain_separation",
     label: "Domain separation",
     script: "scripts/governance/verify-domain-separation.mjs",
