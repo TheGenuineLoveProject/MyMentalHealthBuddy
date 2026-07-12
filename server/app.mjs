@@ -921,16 +921,23 @@ function injectMeta(html, { title, description, canonical, ogType = "website", o
 }
 
 let _indexHtmlCache = null;
+let _indexHtmlMtimeMs = null;
+
 function getIndexHtml() {
-  if (!_indexHtmlCache) {
-    const f = path.join(CLIENT_DIST, "index.html");
-    try {
+  const f = path.join(CLIENT_DIST, "index.html");
+
+  try {
+    const mtimeMs = fs.statSync(f).mtimeMs;
+
+    if (!_indexHtmlCache || _indexHtmlMtimeMs !== mtimeMs) {
       _indexHtmlCache = fs.readFileSync(f, "utf-8");
-    } catch {
-      return null;
+      _indexHtmlMtimeMs = mtimeMs;
     }
+
+    return _indexHtmlCache;
+  } catch {
+    return null;
   }
-  return _indexHtmlCache;
 }
 
 const BLOG_SLUG_RE = /^\/blog\/([^/]+)$/;
