@@ -558,12 +558,12 @@ export default function App() {
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
               <ToolRoutes path="/tools/*" WellnessRoute={WellnessRoute} ConfigRoute={ConfigRoute} />
-              <HubRoutes WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
+              <HubRoutes path={/^\/(?:hubs(?:\/.*)?|explore\/(?:topics|pathways|search))\/?$/} WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
               <Route path="/twelve-practices">
-                <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
+                <AgeConsentGate><TwelvePracticesPage /></AgeConsentGate>
               </Route>
               <Route path="/paths/12-practices">
-                <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
+                <AgeConsentGate><TwelvePracticesPage /></AgeConsentGate>
               </Route>
               <Route path="/premium">
                 <ProtectedRoute><Premium /></ProtectedRoute>
