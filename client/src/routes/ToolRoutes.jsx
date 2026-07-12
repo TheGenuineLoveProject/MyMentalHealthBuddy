@@ -1,8 +1,6 @@
 import React from "react";
-import { Route } from "react-router-dom";
-
-export default function ToolRoutes({
-  WellnessRoute,
+import { Route } from "wouter";
+import {
   ValuesFinderPage,
   BoundariesPage,
   MovementSnacksPage,
@@ -25,31 +23,33 @@ export default function ToolRoutes({
   CommunityCheckin,
   EmotionWheel,
   WeeklyReflection,
-}) {
+} from "./lazyRoutes.jsx";
+
+export default function ToolRoutes({ WellnessRoute }) {
   return (
     <>
-      <Route path="/tools/values" element={<WellnessRoute><ValuesFinderPage /></WellnessRoute>} />
-      <Route path="/tools/boundaries" element={<WellnessRoute><BoundariesPage /></WellnessRoute>} />
-      <Route path="/tools/movement-snacks" element={<WellnessRoute><MovementSnacksPage /></WellnessRoute>} />
-      <Route path="/tools/coherence" element={<WellnessRoute><CoherenceLadderPage /></WellnessRoute>} />
-      <Route path="/tools/perception-refinement" element={<WellnessRoute><PerceptionRefinementPage /></WellnessRoute>} />
-      <Route path="/tools/nervous-system-flooding" element={<WellnessRoute><NervousSystemFloodingPage /></WellnessRoute>} />
-      <Route path="/tools/permaculture" element={<WellnessRoute><PermacultureWellnessPage /></WellnessRoute>} />
-      <Route path="/tools/self-worth" element={<WellnessRoute><SelfWorthReflectionPage /></WellnessRoute>} />
-      <Route path="/tools/twelve-steps" element={<WellnessRoute><TwelveStepsPage /></WellnessRoute>} />
-      <Route path="/tools/behavior-change" element={<WellnessRoute><BehaviorChangePage /></WellnessRoute>} />
-      <Route path="/tools/compassion-break" element={<WellnessRoute><CompassionBreak /></WellnessRoute>} />
-      <Route path="/tools/reframe-tool" element={<WellnessRoute><Reframe /></WellnessRoute>} />
-      <Route path="/tools/urge-surf" element={<WellnessRoute><UrgeSurf /></WellnessRoute>} />
-      <Route path="/tools/grief-letter" element={<WellnessRoute><GriefLetter /></WellnessRoute>} />
-      <Route path="/tools/repair-script" element={<WellnessRoute><RepairScript /></WellnessRoute>} />
-      <Route path="/tools/awe-microdose" element={<WellnessRoute><AweMicrodose /></WellnessRoute>} />
-      <Route path="/tools/body-scan" element={<WellnessRoute><BodyScan /></WellnessRoute>} />
-      <Route path="/tools/digital-sunset" element={<WellnessRoute><DigitalSunset /></WellnessRoute>} />
-      <Route path="/tools/meaning-map" element={<WellnessRoute><MeaningMap /></WellnessRoute>} />
-      <Route path="/tools/community-checkin" element={<WellnessRoute><CommunityCheckin /></WellnessRoute>} />
-      <Route path="/tools/emotion-wheel" element={<WellnessRoute><EmotionWheel /></WellnessRoute>} />
-      <Route path="/tools/weekly-reflection" element={<WellnessRoute><WeeklyReflection /></WellnessRoute>} />
+      <Route path="/tools/values"><WellnessRoute><ValuesFinderPage /></WellnessRoute></Route>
+      <Route path="/tools/boundaries"><WellnessRoute><BoundariesPage /></WellnessRoute></Route>
+      <Route path="/tools/movement-snacks"><WellnessRoute><MovementSnacksPage /></WellnessRoute></Route>
+      <Route path="/tools/coherence"><WellnessRoute><CoherenceLadderPage /></WellnessRoute></Route>
+      <Route path="/tools/perception-refinement"><WellnessRoute><PerceptionRefinementPage /></WellnessRoute></Route>
+      <Route path="/tools/nervous-system-flooding"><WellnessRoute><NervousSystemFloodingPage /></WellnessRoute></Route>
+      <Route path="/tools/permaculture"><WellnessRoute><PermacultureWellnessPage /></WellnessRoute></Route>
+      <Route path="/tools/self-worth"><WellnessRoute><SelfWorthReflectionPage /></WellnessRoute></Route>
+      <Route path="/tools/twelve-steps"><WellnessRoute><TwelveStepsPage /></WellnessRoute></Route>
+      <Route path="/tools/behavior-change"><WellnessRoute><BehaviorChangePage /></WellnessRoute></Route>
+      <Route path="/tools/compassion-break"><WellnessRoute><CompassionBreak /></WellnessRoute></Route>
+      <Route path="/tools/reframe-tool"><WellnessRoute><Reframe /></WellnessRoute></Route>
+      <Route path="/tools/urge-surf"><WellnessRoute><UrgeSurf /></WellnessRoute></Route>
+      <Route path="/tools/grief-letter"><WellnessRoute><GriefLetter /></WellnessRoute></Route>
+      <Route path="/tools/repair-script"><WellnessRoute><RepairScript /></WellnessRoute></Route>
+      <Route path="/tools/awe-microdose"><WellnessRoute><AweMicrodose /></WellnessRoute></Route>
+      <Route path="/tools/body-scan"><WellnessRoute><BodyScan /></WellnessRoute></Route>
+      <Route path="/tools/digital-sunset"><WellnessRoute><DigitalSunset /></WellnessRoute></Route>
+      <Route path="/tools/meaning-map"><WellnessRoute><MeaningMap /></WellnessRoute></Route>
+      <Route path="/tools/community-checkin"><WellnessRoute><CommunityCheckin /></WellnessRoute></Route>
+      <Route path="/tools/emotion-wheel"><WellnessRoute><EmotionWheel /></WellnessRoute></Route>
+      <Route path="/tools/weekly-reflection"><WellnessRoute><WeeklyReflection /></WellnessRoute></Route>
     </>
   );
 }

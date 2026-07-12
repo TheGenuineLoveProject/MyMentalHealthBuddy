@@ -2,6 +2,7 @@ import adminPublishingRoutes from "./routes/admin-publishing.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
 import auditLogRoutes from "./routes/audit-logs.mjs";
 import authRoutes from "./routes/auth.mjs";
+import { setupAuth } from "./replit_integrations/auth/index.mjs";
 import billingRoutes from "./routes/billing.mjs";
 import webhookRoutes from "./routes/webhook.mjs";
 process.on('uncaughtException', (err) => {
@@ -445,7 +446,12 @@ app.use(helmet({
       },
     },
 }));
-app.use(cookieParser()); // ✅ MUST COME BEFORE CSRF
+app.use(cookieParser());
+
+// Canonical authentication/session owner.
+// Must run after cookie parsing and before routes
+// that depend on req.session, req.user, or Passport.
+await setupAuth(app); // ✅ MUST COME BEFORE CSRF
 
 // ===== OBSERVABILITY: requestId + OTel baggage =====
 // requestId stamps req.requestId (uuid) on every request. observabilityContext

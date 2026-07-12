@@ -557,7 +557,7 @@ export default function App() {
               <Route path="/wellness-dashboard">
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
-              <ToolRoutes WellnessRoute={WellnessRoute} ConfigRoute={ConfigRoute} />
+              <ToolRoutes path="/tools/*" WellnessRoute={WellnessRoute} ConfigRoute={ConfigRoute} />
               <HubRoutes WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
               <Route path="/twelve-practices">
                 <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
