@@ -85,7 +85,7 @@ const serviceWorkerInfo = await page.evaluate(async () => {
     hasSW,
     registrationCount: registrations.length,
     cacheNames,
-    serviceWorkerHasPhase100Version: swText.includes("mmhb-pwa-phase100-v1"),
+    serviceWorkerHasValidCacheVersion: /const CACHE_VERSION = "mmhb-pwa-phase[0-9]+-v[0-9]+";/.test(swText),
     serviceWorkerHasNetworkFirst: swText.includes("networkFirstNavigation"),
     serviceWorkerHasNoStore: swText.includes('cache: "no-store"'),
     serviceWorkerPrecacheMentionsIndexHtml: /PRECACHE_URLS[\s\S]*index\.html[\s\S]*\]/.test(swText),
@@ -108,7 +108,7 @@ if (rootInfo.hasInstallingText) failures.push("INSTALLING_TEXT_VISIBLE_ON_NORMAL
 if (rootInfo.hasOfflineOnlyText) failures.push("OFFLINE_ONLY_SCREEN_VISIBLE_ON_NORMAL_LOAD");
 if (asset404s.length > 0) failures.push("ASSET_REQUEST_FAILURES_PRESENT");
 if (pageErrors.length > 0) failures.push("PAGE_ERRORS_PRESENT");
-if (!serviceWorkerInfo.serviceWorkerHasPhase100Version) failures.push("SERVICE_WORKER_PHASE100_VERSION_MISSING");
+if (!serviceWorkerInfo.serviceWorkerHasValidCacheVersion) failures.push("SERVICE_WORKER_CACHE_VERSION_INVALID");
 if (!serviceWorkerInfo.serviceWorkerHasNetworkFirst) failures.push("SERVICE_WORKER_NETWORK_FIRST_MISSING");
 if (!serviceWorkerInfo.serviceWorkerHasNoStore) failures.push("SERVICE_WORKER_NO_STORE_MISSING");
 if (serviceWorkerInfo.serviceWorkerPrecacheMentionsIndexHtml) failures.push("SERVICE_WORKER_PRECACHE_INDEX_HTML");

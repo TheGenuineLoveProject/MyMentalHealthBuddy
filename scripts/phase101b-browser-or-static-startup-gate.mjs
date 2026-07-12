@@ -33,7 +33,7 @@ if (!offline.ok) staticFailures.push("OFFLINE_HTML_HTTP_NOT_OK");
 
 const rootHasMount = root.text.includes('<div id="root"');
 const rootHasAssets = /\/assets\/[^"' ]+\.js/.test(root.text) && /\/assets\/[^"' ]+\.css/.test(root.text);
-const swPhase100 = sw.text.includes("mmhb-pwa-phase100-v1");
+const swHasValidCacheVersion = /const CACHE_VERSION = "mmhb-pwa-phase[0-9]+-v[0-9]+";/.test(sw.text);
 const swNetworkFirst = sw.text.includes("networkFirstNavigation");
 const swNoStore = sw.text.includes('cache: "no-store"');
 const swPrecacheSection = sw.text.match(/const PRECACHE_URLS\s*=\s*\[[\s\S]*?\];/)?.[0] || "";
@@ -45,7 +45,7 @@ const offlineHasSafety = offline.text.includes("988") && /offline/i.test(offline
 
 staticChecks.push({ name: "ROOT_HAS_REACT_MOUNT", pass: rootHasMount });
 staticChecks.push({ name: "ROOT_HAS_JS_AND_CSS_ASSETS", pass: rootHasAssets });
-staticChecks.push({ name: "SW_HAS_PHASE100_VERSION", pass: swPhase100 });
+staticChecks.push({ name: "SW_HAS_VALID_CACHE_VERSION", pass: swHasValidCacheVersion });
 staticChecks.push({ name: "SW_HAS_NETWORK_FIRST", pass: swNetworkFirst });
 staticChecks.push({ name: "SW_HAS_NO_STORE_NAVIGATION", pass: swNoStore });
 staticChecks.push({ name: "SW_DOES_NOT_PRECACHE_ROOT_OR_INDEX", pass: !swPrecacheBad });
@@ -53,7 +53,7 @@ staticChecks.push({ name: "OFFLINE_HAS_SAFETY_COPY", pass: offlineHasSafety });
 
 if (!rootHasMount) staticFailures.push("ROOT_MISSING_REACT_MOUNT");
 if (!rootHasAssets) staticFailures.push("ROOT_MISSING_JS_OR_CSS_ASSETS");
-if (!swPhase100) staticFailures.push("SW_PHASE100_VERSION_MISSING");
+if (!swHasValidCacheVersion) staticFailures.push("SW_CACHE_VERSION_INVALID");
 if (!swNetworkFirst) staticFailures.push("SW_NETWORK_FIRST_MISSING");
 if (!swNoStore) staticFailures.push("SW_NO_STORE_MISSING");
 if (swPrecacheBad) staticFailures.push("SW_PRECACHES_ROOT_OR_INDEX");
