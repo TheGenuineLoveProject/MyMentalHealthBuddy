@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Cookie, X, Settings, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const CONSENT_KEY = "glp_cookie_consent";
+import {
+  ANALYTICS_CONSENT_KEY,
+  persistAnalyticsConsent,
+} from "@/lib/analyticsConsent";
 
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
@@ -14,7 +16,7 @@ export default function ConsentBanner() {
   });
 
   useEffect(() => {
-    const consent = localStorage.getItem(CONSENT_KEY);
+    const consent = localStorage.getItem(ANALYTICS_CONSENT_KEY);
     if (!consent) {
       const timer = setTimeout(() => setVisible(true), 1000);
       return () => clearTimeout(timer);
@@ -31,7 +33,11 @@ export default function ConsentBanner() {
         ? { essential: true, analytics: false, marketing: false }
         : preferences
     };
-    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(consentData)); } catch (err) { console.warn("[storage-safe-write]", err); }
+    try {
+      persistAnalyticsConsent(consentData);
+    } catch (err) {
+      console.warn("[storage-safe-write]", err);
+    }
     setVisible(false);
   };
 

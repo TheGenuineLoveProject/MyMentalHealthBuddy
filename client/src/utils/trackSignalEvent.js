@@ -1,3 +1,5 @@
+import { isAnalyticsAllowed } from "../lib/analyticsConsent.js";
+
 /**
  * client/src/utils/trackSignalEvent.js
  * Minimal, privacy-first signal event tracker
@@ -17,6 +19,7 @@ const PUBLISHING_EVENTS = [
 const firedThisPage = new Set();
 
 export function trackSignalEvent(eventType, metadata = {}) {
+  if (!isAnalyticsAllowed()) return;
   if (!PUBLISHING_EVENTS.includes(eventType)) return;
 
   const dedupeKey = `${eventType}:${metadata.slug || metadata.page || ''}`;

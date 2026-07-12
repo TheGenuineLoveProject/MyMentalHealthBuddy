@@ -1,5 +1,6 @@
 import { useCallback, useRef, useEffect } from "react";
 import { useLocation } from "wouter";
+import { isAnalyticsAllowed } from "../lib/analyticsConsent.js";
 
 let sessionId = null;
 function getSessionId() {
@@ -9,16 +10,8 @@ function getSessionId() {
   return sessionId;
 }
 
-function isOptedOut() {
-  try {
-    return localStorage.getItem("analytics_opt_out") === "true";
-  } catch {
-    return false;
-  }
-}
-
 async function sendEvent(eventName, eventCategory, path, meta) {
-  if (isOptedOut()) return;
+  if (!isAnalyticsAllowed()) return;
   try {
     await fetch("/api/analytics/event", {
       method: "POST",
