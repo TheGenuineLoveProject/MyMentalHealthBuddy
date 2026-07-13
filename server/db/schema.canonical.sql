@@ -828,6 +828,7 @@ CREATE TABLE IF NOT EXISTS "user_progress" (
         "updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "uniq_user_progress_user_id" ON "user_progress" USING btree ("user_id");--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_settings" (
         "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
         "user_id" uuid NOT NULL,

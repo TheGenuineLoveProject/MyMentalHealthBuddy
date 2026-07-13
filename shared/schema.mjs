@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, integer, varchar, boolean, jsonb, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid, integer, varchar, boolean, jsonb, index, uniqueIndex } from "drizzle-orm/pg-core";
 
 /**
  * =====================================================
@@ -240,7 +240,9 @@ export const userProgress = pgTable("user_progress", {
   totalSessionMinutes: integer("total_session_minutes").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+}, (table) => ({
+  userIdUnique: uniqueIndex("uniq_user_progress_user_id").on(table.userId),
+}));
 
 export const userAchievements = pgTable("user_achievements", {
   id: uuid("id").defaultRandom().primaryKey(),

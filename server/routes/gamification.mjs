@@ -4,6 +4,11 @@ import { userProgress, dailyQuests, toolSessions } from "../../shared/schema.mjs
 import { eq, and, gte, sql } from "drizzle-orm";
 import { authGuard } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
+import {
+  isPreviousUtcDay,
+  isSameUtcDay,
+  withUserProgressLock,
+} from "../services/userProgressLock.mjs";
 
 const router = express.Router();
 
@@ -42,28 +47,36 @@ router.get("/progress", async (req, res) => {
       return res.status(401).json({ ok: false, error: "Unauthorized" });
     }
 
-    let [progress] = await db
-      .select()
-      .from(userProgress)
-      .where(eq(userProgress.userId, userId))
-      .limit(1);
+    const progress = await withUserProgressLock(
+      userId,
+      async (tx) => {
+        const [existing] = await tx
+          .select()
+          .from(userProgress)
+          .where(eq(userProgress.userId, userId))
+          .limit(1);
 
-    if (!progress) {
-      const [newProgress] = await db
-        .insert(userProgress)
-        .values({
-          userId,
-          totalXp: 0,
-          level: 1,
-          currentStreak: 0,
-          longestStreak: 0,
-          toolsUsedToday: 0,
-          totalToolsUsed: 0,
-          totalSessionMinutes: 0,
-        })
-        .returning();
-      progress = newProgress;
-    }
+        if (existing) {
+          return existing;
+        }
+
+        const [created] = await tx
+          .insert(userProgress)
+          .values({
+            userId,
+            totalXp: 0,
+            level: 1,
+            currentStreak: 0,
+            longestStreak: 0,
+            toolsUsedToday: 0,
+            totalToolsUsed: 0,
+            totalSessionMinutes: 0,
+          })
+          .returning();
+
+        return created;
+      },
+    );
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -95,103 +108,167 @@ router.get("/progress", async (req, res) => {
 router.post("/record-session", async (req, res) => {
   try {
     const userId = req.dbUserId;
-    const { toolName, durationSeconds = 60, metadata } = req.body;
+    const {
+      toolName,
+      durationSeconds = 60,
+      metadata,
+    } = req.body;
 
     if (!userId || !toolName) {
-      return res.status(400).json({ ok: false, error: "Missing required fields" });
-    }
-
-    const timeBonus = Math.floor(durationSeconds / 60) * 5;
-    const xpEarned = BASE_TOOL_XP + timeBonus;
-
-    await db.insert(toolSessions).values({
-      userId,
-      toolName,
-      durationSeconds,
-      xpEarned,
-      metadata: metadata || null,
-    });
-
-    let [progress] = await db
-      .select()
-      .from(userProgress)
-      .where(eq(userProgress.userId, userId))
-      .limit(1);
-
-    if (!progress) {
-      const [newProgress] = await db
-        .insert(userProgress)
-        .values({
-          userId,
-          totalXp: xpEarned,
-          level: 1,
-          currentStreak: 1,
-          longestStreak: 1,
-          toolsUsedToday: 1,
-          totalToolsUsed: 1,
-          totalSessionMinutes: Math.ceil(durationSeconds / 60),
-          lastActivityDate: new Date(),
-        })
-        .returning();
-      progress = newProgress;
-    } else {
-      const newTotalXp = progress.totalXp + xpEarned;
-      const newLevel = calculateLevel(newTotalXp);
-      const leveledUp = newLevel > progress.level;
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const lastActivity = progress.lastActivityDate ? new Date(progress.lastActivityDate) : null;
-      lastActivity?.setHours(0, 0, 0, 0);
-
-      let newStreak = progress.currentStreak;
-      if (!lastActivity || lastActivity.getTime() < today.getTime()) {
-        const yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
-        if (lastActivity && lastActivity.getTime() === yesterday.getTime()) {
-          newStreak = progress.currentStreak + 1;
-        } else if (!lastActivity || lastActivity.getTime() < yesterday.getTime()) {
-          newStreak = 1;
-        }
-      }
-
-      const [_updatedProgress] = await db
-        .update(userProgress)
-        .set({
-          totalXp: newTotalXp,
-          level: newLevel,
-          currentStreak: newStreak,
-          longestStreak: Math.max(progress.longestStreak, newStreak),
-          toolsUsedToday: progress.toolsUsedToday + 1,
-          totalToolsUsed: progress.totalToolsUsed + 1,
-          totalSessionMinutes: progress.totalSessionMinutes + Math.ceil(durationSeconds / 60),
-          lastActivityDate: new Date(),
-          updatedAt: new Date(),
-        })
-        .where(eq(userProgress.userId, userId))
-        .returning();
-
-      return res.json({
-        ok: true,
-        xpEarned,
-        newTotalXp,
-        leveledUp,
-        newLevel,
-        currentStreak: newStreak,
+      return res.status(400).json({
+        ok: false,
+        error: "Missing required fields",
       });
     }
 
-    res.json({
-      ok: true,
-      xpEarned,
-      newTotalXp: progress.totalXp,
-      leveledUp: false,
-      newLevel: progress.level,
-      currentStreak: progress.currentStreak,
-    });
+    const normalizedDuration = Number(durationSeconds);
+
+    if (
+      !Number.isFinite(normalizedDuration) ||
+      !Number.isInteger(normalizedDuration) ||
+      normalizedDuration < 0 ||
+      normalizedDuration > 86_400
+    ) {
+      return res.status(400).json({
+        ok: false,
+        error:
+          "durationSeconds must be a whole number from 0 to 86400",
+      });
+    }
+
+    if (
+      typeof toolName !== "string" ||
+      toolName.trim().length === 0 ||
+      toolName.trim().length > 100
+    ) {
+      return res.status(400).json({
+        ok: false,
+        error: "toolName must be between 1 and 100 characters",
+      });
+    }
+
+    const normalizedToolName = toolName.trim();
+
+    const timeBonus =
+      Math.floor(normalizedDuration / 60) * 5;
+
+    const xpEarned = BASE_TOOL_XP + timeBonus;
+    const sessionMinutes = Math.ceil(normalizedDuration / 60);
+
+    const result = await withUserProgressLock(
+      userId,
+      async (tx) => {
+        const now = new Date();
+
+        await tx.insert(toolSessions).values({
+          userId,
+          toolName: normalizedToolName,
+          durationSeconds: normalizedDuration,
+          xpEarned,
+          metadata: metadata || null,
+        });
+
+        const [progress] = await tx
+          .select()
+          .from(userProgress)
+          .where(eq(userProgress.userId, userId))
+          .limit(1);
+
+        if (!progress) {
+          const [created] = await tx
+            .insert(userProgress)
+            .values({
+              userId,
+              totalXp: xpEarned,
+              level: 1,
+              currentStreak: 1,
+              longestStreak: 1,
+              toolsUsedToday: 1,
+              totalToolsUsed: 1,
+              totalSessionMinutes: sessionMinutes,
+              lastActivityDate: now,
+            })
+            .returning();
+
+          return {
+            ok: true,
+            xpEarned,
+            newTotalXp: created.totalXp,
+            leveledUp: false,
+            newLevel: created.level,
+            currentStreak: created.currentStreak,
+          };
+        }
+
+        const newTotalXp =
+          (progress.totalXp || 0) + xpEarned;
+
+        const newLevel = calculateLevel(newTotalXp);
+        const leveledUp = newLevel > progress.level;
+        const sameDay = isSameUtcDay(
+          progress.lastActivityDate,
+          now,
+        );
+
+        let newStreak = progress.currentStreak || 0;
+
+        if (!sameDay) {
+          newStreak = isPreviousUtcDay(
+            progress.lastActivityDate,
+            now,
+          )
+            ? newStreak + 1
+            : 1;
+        }
+
+        const nextToolsToday = sameDay
+          ? (progress.toolsUsedToday || 0) + 1
+          : 1;
+
+        const [updated] = await tx
+          .update(userProgress)
+          .set({
+            totalXp: newTotalXp,
+            level: newLevel,
+            currentStreak: newStreak,
+            longestStreak: Math.max(
+              progress.longestStreak || 0,
+              newStreak,
+            ),
+            toolsUsedToday: nextToolsToday,
+            totalToolsUsed:
+              (progress.totalToolsUsed || 0) + 1,
+            totalSessionMinutes:
+              (progress.totalSessionMinutes || 0) +
+              sessionMinutes,
+            lastActivityDate: now,
+            updatedAt: now,
+          })
+          .where(eq(userProgress.userId, userId))
+          .returning();
+
+        return {
+          ok: true,
+          xpEarned,
+          newTotalXp: updated.totalXp,
+          leveledUp,
+          newLevel: updated.level,
+          currentStreak: updated.currentStreak,
+        };
+      },
+    );
+
+    return res.json(result);
   } catch (error) {
-    logger.error("Error recording session", { error: error.message, userId: req.dbUserId });
-    res.status(500).json({ ok: false, error: "Failed to record session" });
+    logger.error("Error recording session", {
+      error: error.message,
+      userId: req.dbUserId,
+    });
+
+    return res.status(500).json({
+      ok: false,
+      error: "Failed to record session",
+    });
   }
 });
 
@@ -253,61 +330,135 @@ router.get("/quests", async (req, res) => {
 router.post("/complete-quest", async (req, res) => {
   try {
     const userId = req.dbUserId;
-    const { questId } = req.body;
+    const { questId } = req.body || {};
 
     if (!userId || !questId) {
-      return res.status(400).json({ ok: false, error: "Missing required fields" });
+      return res.status(400).json({
+        ok: false,
+        error: "Missing required fields",
+      });
     }
 
-    const [quest] = await db
-      .select()
-      .from(dailyQuests)
-      .where(and(
-        eq(dailyQuests.id, questId),
-        eq(dailyQuests.userId, userId)
-      ))
-      .limit(1);
+    const result = await withUserProgressLock(
+      userId,
+      async (tx) => {
+        const [quest] = await tx
+          .select()
+          .from(dailyQuests)
+          .where(and(
+            eq(dailyQuests.id, questId),
+            eq(dailyQuests.userId, userId),
+          ))
+          .limit(1);
 
-    if (!quest) {
-      return res.status(404).json({ ok: false, error: "Quest not found" });
-    }
+        if (!quest) {
+          return {
+            status: 404,
+            body: {
+              ok: false,
+              error: "Quest not found",
+            },
+          };
+        }
 
-    if (quest.isCompleted) {
-      return res.json({ ok: true, message: "Quest already completed" });
-    }
+        if (quest.isCompleted) {
+          return {
+            status: 200,
+            body: {
+              ok: true,
+              alreadyCompleted: true,
+              xpReward: 0,
+              message: "Quest already completed",
+            },
+          };
+        }
 
-    await db
-      .update(dailyQuests)
-      .set({
-        currentCount: quest.targetCount,
-        isCompleted: 1,
-      })
-      .where(eq(dailyQuests.id, questId));
+        const [completedQuest] = await tx
+          .update(dailyQuests)
+          .set({
+            currentCount: quest.targetCount,
+            isCompleted: 1,
+          })
+          .where(and(
+            eq(dailyQuests.id, questId),
+            eq(dailyQuests.userId, userId),
+            eq(dailyQuests.isCompleted, 0),
+          ))
+          .returning();
 
-    const [progress] = await db
-      .select()
-      .from(userProgress)
-      .where(eq(userProgress.userId, userId))
-      .limit(1);
+        if (!completedQuest) {
+          return {
+            status: 200,
+            body: {
+              ok: true,
+              alreadyCompleted: true,
+              xpReward: 0,
+              message: "Quest already completed",
+            },
+          };
+        }
 
-    if (progress) {
-      const newTotalXp = progress.totalXp + quest.xpReward;
-      const newLevel = calculateLevel(newTotalXp);
+        const [progress] = await tx
+          .select()
+          .from(userProgress)
+          .where(eq(userProgress.userId, userId))
+          .limit(1);
 
-      await db
-        .update(userProgress)
-        .set({
-          totalXp: newTotalXp,
-          level: newLevel,
-          updatedAt: new Date(),
-        })
-        .where(eq(userProgress.userId, userId));
-    }
+        let newTotalXp = quest.xpReward;
+        let newLevel = calculateLevel(newTotalXp);
 
-    res.json({ ok: true, xpReward: quest.xpReward });
+        if (progress) {
+          newTotalXp =
+            (progress.totalXp || 0) + quest.xpReward;
+
+          newLevel = calculateLevel(newTotalXp);
+
+          await tx
+            .update(userProgress)
+            .set({
+              totalXp: newTotalXp,
+              level: newLevel,
+              updatedAt: new Date(),
+            })
+            .where(eq(userProgress.userId, userId));
+        } else {
+          await tx
+            .insert(userProgress)
+            .values({
+              userId,
+              totalXp: newTotalXp,
+              level: newLevel,
+              currentStreak: 0,
+              longestStreak: 0,
+              toolsUsedToday: 0,
+              totalToolsUsed: 0,
+              totalSessionMinutes: 0,
+            });
+        }
+
+        return {
+          status: 200,
+          body: {
+            ok: true,
+            xpReward: quest.xpReward,
+            newTotalXp,
+            newLevel,
+          },
+        };
+      },
+    );
+
+    return res.status(result.status).json(result.body);
   } catch (error) {
-    logger.error("Error completing quest", { error: error.message, userId: req.dbUserId });
-    res.status(500).json({ ok: false, error: "Failed to complete quest" });
+    logger.error("Error completing quest", {
+      error: error.message,
+      userId: req.dbUserId,
+    });
+
+    return res.status(500).json({
+      ok: false,
+      error: "Failed to complete quest",
+    });
   }
 });
 
