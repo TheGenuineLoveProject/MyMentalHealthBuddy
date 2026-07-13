@@ -856,9 +856,13 @@ CREATE TABLE IF NOT EXISTS "users" (
         "github_id" text,
         "replit_id" text,
         "profile_image_url" text,
+        "timezone" varchar(100) DEFAULT 'UTC' NOT NULL,
         CONSTRAINT "users_email_unique" UNIQUE("email"),
         CONSTRAINT "users_replit_id_unique" UNIQUE("replit_id")
 );
+--> statement-breakpoint
+ALTER TABLE "users"
+ADD COLUMN IF NOT EXISTS "timezone" varchar(100) DEFAULT 'UTC' NOT NULL;
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "values_entries" (
         "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,

@@ -26,6 +26,7 @@ export const users = pgTable("users", {
   githubId: text("github_id"),
   replitId: text("replit_id").unique(),
   profileImageUrl: text("profile_image_url"),
+  timezone: varchar("timezone", { length: 100 }).default("UTC").notNull(),
 });
 
 /* ================= JOURNALS ================= */
