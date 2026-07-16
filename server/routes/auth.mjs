@@ -44,8 +44,14 @@ async function ensureUsersTable() {
         subscription_expires_at timestamp,
         github_id text,
         replit_id text UNIQUE,
-        profile_image_url text
+        profile_image_url text,
+        timezone varchar(100) NOT NULL DEFAULT 'UTC'
       )
+    `);
+
+    await db.execute(sql`
+      ALTER TABLE users
+      ADD COLUMN IF NOT EXISTS timezone varchar(100) NOT NULL DEFAULT 'UTC'
     `);
 
     await db.execute(sql`
@@ -75,6 +81,40 @@ async function ensureUsersTable() {
 function deriveNameFromEmail(email) {
   const local = String(email || "").split("@")[0] || "user";
   return local.slice(0, 64) || "user";
+}
+
+function toPublicUser(user) {
+  if (!user) return null;
+
+  return {
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role || "user",
+    createdAt: user.created_at,
+    subscriptionStatus: user.subscription_status || "free",
+    profileImageUrl: user.profile_image_url || null,
+    timezone: user.timezone || "UTC",
+  };
+}
+
+async function findHydratedUserById(userId) {
+  const result = await db.execute(sql`
+    SELECT
+      id,
+      email,
+      name,
+      role,
+      created_at,
+      subscription_status,
+      profile_image_url,
+      timezone
+    FROM users
+    WHERE id = ${userId}
+    LIMIT 1
+  `);
+
+  return result.rows?.[0] || null;
 }
 
 async function issueSession(res, user) {
@@ -130,7 +170,15 @@ router.post("/register", authRateLimit, async (req, res) => {
     const created = await db.execute(sql`
       INSERT INTO users (email, password_hash, name, role)
       VALUES (${email}, ${passwordHash}, ${name}, 'user')
-      RETURNING id, email, role, created_at
+      RETURNING
+        id,
+        email,
+        name,
+        role,
+        created_at,
+        subscription_status,
+        profile_image_url,
+        timezone
     `);
 
     const user = created.rows[0];
@@ -139,12 +187,7 @@ router.post("/register", authRateLimit, async (req, res) => {
     return res.json({
       ok: true,
       token,
-      user: {
-        id: user.id,
-        email: user.email,
-        role: user.role,
-        createdAt: user.created_at
-      }
+      user: toPublicUser(user)
     });
   } catch (err) {
     console.error("register error:", err);
@@ -164,7 +207,16 @@ router.post("/login", loginRateLimit, async (req, res) => {
     }
 
     const result = await db.execute(sql`
-      SELECT id, email, role, password_hash, created_at
+      SELECT
+        id,
+        email,
+        name,
+        role,
+        password_hash,
+        created_at,
+        subscription_status,
+        profile_image_url,
+        timezone
       FROM users
       WHERE email = ${email}
       LIMIT 1
@@ -185,12 +237,7 @@ router.post("/login", loginRateLimit, async (req, res) => {
     return res.json({
       ok: true,
       token,
-      user: {
-        id: user.id,
-        email: user.email,
-        role: user.role,
-        createdAt: user.created_at
-      }
+      user: toPublicUser(user)
     });
   } catch (err) {
     console.error("login error:", err);
@@ -199,13 +246,38 @@ router.post("/login", loginRateLimit, async (req, res) => {
 });
 
 router.get("/me", requireAuth, async (req, res) => {
-  return res.json({
-    ok: true,
-    user: req.user
-  });
+  try {
+    await ensureUsersTable();
+    const user = await findHydratedUserById(req.dbUserId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json({
+      ok: true,
+      user: toPublicUser(user),
+    });
+  } catch (err) {
+    console.error("auth me error:", err);
+    return res.status(500).json({ error: "Unable to load user profile" });
+  }
 });
+
 router.get("/user", requireAuth, async (req, res) => {
-  res.json(req.user);
+  try {
+    await ensureUsersTable();
+    const user = await findHydratedUserById(req.dbUserId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json(toPublicUser(user));
+  } catch (err) {
+    console.error("auth user error:", err);
+    return res.status(500).json({ error: "Unable to load user profile" });
+  }
 });
 // ─────────────────────────────────────────────────────────────────────────────
 // Round 3 (Apr-26 user-approved unlock): /refresh + /logout
@@ -247,7 +319,15 @@ router.post("/refresh", async (req, res) => {
     }
 
     const userRows = await db.execute(sql`
-      SELECT id, email, role, created_at
+      SELECT
+        id,
+        email,
+        name,
+        role,
+        created_at,
+        subscription_status,
+        profile_image_url,
+        timezone
       FROM users
       WHERE id = ${existing.userId}
       LIMIT 1
@@ -267,11 +347,7 @@ router.post("/refresh", async (req, res) => {
       ok: true,
       refreshed: true,
       token,
-      user: {
-        id: user.id,
-        email: user.email,
-        role: user.role,
-      },
+      user: toPublicUser(user),
     });
   } catch (err) {
     console.error("refresh error:", err);

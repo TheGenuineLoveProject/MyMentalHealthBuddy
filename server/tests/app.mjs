@@ -18,10 +18,22 @@ export function createTestApp() {
 
   app.post("/api/auth/login", (req, res) => {
     const { email, password } = req.body;
+
     if (!email || !password) {
       return res.status(400).json({ error: "Email and password required" });
     }
-    res.json({ token: "mock-jwt-token", user: { id: "u1", email } });
+
+    if (
+      email !== "test@example.com" ||
+      !["123456", "password123"].includes(password)
+    ) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    return res.json({
+      token: "mock-jwt-token",
+      user: { id: "u1", email },
+    });
   });
 
   app.get("/api/mood", (req, res) => {
@@ -44,6 +56,10 @@ export function createTestApp() {
 
   app.post("/api/ai/chat", (req, res) => {
     res.json({ response: "I'm here to help you." });
+  });
+
+  app.get("/api/admin/stats", (_req, res) => {
+    return res.status(401).json({ error: "Authentication required" });
   });
 
   return app;

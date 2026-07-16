@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
 import request from "supertest";
-import app from "../server/app.mjs";
+import { createTestApp } from "../server/tests/app.mjs";
+
+const app = createTestApp();
 
 describe("Session Security", () => {
   it("should not expose sensitive data in error messages", async () => {
