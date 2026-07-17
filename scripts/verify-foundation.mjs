@@ -13,8 +13,9 @@
  *  - Soft checks (informational only): readyz, healthz.
  *  - Emits one structured JSONL record to logs/verification.jsonl (same
  *    convention as logs/events.jsonl, logs/uptime.jsonl).
- *  - Regenerates docs/architecture/platform-status.md as an auto-generated
- *    snapshot (the "architecture memory" surface).
+ *  - Outside CI, regenerates docs/architecture/platform-status.md as an
+ *    auto-generated snapshot (the "architecture memory" surface).
+ *  - In CI, verification is read-only with respect to tracked repository files.
  */
 
 import { appendFileSync, existsSync, mkdirSync, statSync, writeFileSync } from "node:fs";
@@ -24,6 +25,7 @@ const ROOT = process.cwd();
 const LOG_FILE = join(ROOT, "logs", "verification.jsonl");
 const STATUS_DOC = join(ROOT, "docs", "architecture", "platform-status.md");
 const BASE = process.env.VERIFY_BASE_URL || "http://localhost:5000";
+const WRITE_STATUS_DOC = process.env.CI !== "true";
 
 const HARD = new Set(["build_artifact", "api_health"]);
 const checks = [];
@@ -87,8 +89,10 @@ ${rows}
 Hard gates must pass for the foundation to be considered green. Soft checks are
 informational (they do not fail the run).
 `;
-mkdirSync(dirname(STATUS_DOC), { recursive: true });
-writeFileSync(STATUS_DOC, doc);
+if (WRITE_STATUS_DOC) {
+  mkdirSync(dirname(STATUS_DOC), { recursive: true });
+  writeFileSync(STATUS_DOC, doc);
+}
 
 // Console summary.
 console.log(`[verify-foundation] ${ok ? "PASS" : "FAIL"} @ ${ts}`);
@@ -96,6 +100,10 @@ for (const c of checks) {
   console.log(`  [${c.ok ? "ok" : "XX"}] (${HARD.has(c.name) ? "hard" : "soft"}) ${c.name}: ${c.detail}`);
 }
 console.log(`[verify-foundation] log -> ${LOG_FILE}`);
-console.log(`[verify-foundation] status -> ${STATUS_DOC}`);
+console.log(
+  `[verify-foundation] status -> ${
+    WRITE_STATUS_DOC ? STATUS_DOC : "skipped (CI=true)"
+  }`,
+);
 
 process.exit(ok ? 0 : 1);
