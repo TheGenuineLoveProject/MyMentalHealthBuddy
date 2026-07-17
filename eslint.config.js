@@ -21,6 +21,7 @@ export default [
 
   {
     ignores: [
+      ".local/**",
       "docs/**",
       "**/*.backup",
       "**/*.bak",
