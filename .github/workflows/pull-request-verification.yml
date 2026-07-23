@@ -1,0 +1,71 @@
+name: Pull Request Verification
+
+on:
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 20
+
+    env:
+      CI: "true"
+      NODE_ENV: test
+      OTEL_DISABLED: "true"
+      PORT: "5099"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm audit --omit=dev --audit-level=high
+
+      - run: npm run typecheck
+
+      - run: npm run lint
+
+      - run: npm run build
+
+      - run: npm run verify:safety-guardrails
+
+      - run: npm run verify:rate-limit
+
+      - name: Start isolated server
+        run: |
+          node server/app.mjs &
+          echo $! > server.pid
+
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:5099/health >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          exit 1
+
+      - run: npm run verify:foundation
+
+      - run: npm run verify:clinical-safety-taxonomy
+
+      - name: Verify clean repository
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain)"
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill "$(cat server.pid)" || true
+          fi
