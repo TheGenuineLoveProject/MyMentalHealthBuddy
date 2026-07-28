@@ -1,6 +1,9 @@
 name: Pull Request Verification
 
 on:
+  push:
+    branches:
+      - W12_DEVELOPMENT
   pull_request:
     branches:
       - "**"
