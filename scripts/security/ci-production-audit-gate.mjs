@@ -3,6 +3,8 @@ import { spawnSync } from "node:child_process";
 
 const ADVISORY_ID = "GHSA-qwww-vcr4-c8h2";
 
+const POLICY_SOURCE_PATH = "scripts/security/ci-production-audit-gate.mjs";
+
 const EXACT_RSC_PATTERNS = [
   /unstable_[A-Za-z0-9_]*(?:RSC|rsc)/i,
   /react-server-dom-(?:webpack|vite|turbopack)/i,
@@ -142,6 +144,10 @@ function trackedFiles() {
 }
 
 function eligible(path) {
+  if (path === POLICY_SOURCE_PATH) {
+    return false;
+  }
+
   if (!SOURCE_EXTENSIONS.test(path)) {
     return false;
   }
