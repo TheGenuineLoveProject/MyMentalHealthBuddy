@@ -30,7 +30,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm audit --omit=dev --audit-level=high
+      - run: node scripts/security/ci-production-audit-gate.mjs
 
       - run: npm run typecheck
 
