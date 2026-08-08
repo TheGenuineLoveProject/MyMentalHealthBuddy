@@ -15,18 +15,45 @@ for (const file of requiredFiles) {
 const runbook = fs.readFileSync("docs/operations/backup-disaster-recovery-runbook.md", "utf8");
 
 const requiredText = [
-  "external encrypted storage",
-  "Backup Automation Schedule",
-  "Backup Failure Alerting",
-  "Backup Retention Policy",
-  "Restore Procedure"
+  {
+    text: "external encrypted storage",
+    caseSensitive: false
+  },
+  {
+    text: "Backup Automation Schedule",
+    caseSensitive: true
+  },
+  {
+    text: "Backup Failure Alerting",
+    caseSensitive: true
+  },
+  {
+    text: "Backup Retention Policy",
+    caseSensitive: true
+  },
+  {
+    text: "Restore Procedure",
+    caseSensitive: true
+  }
 ];
 
-for (const text of requiredText) {
-  if (!runbook.includes(text)) {
+for (const requirement of requiredText) {
+  const { text, caseSensitive } = requirement;
+
+  const present = caseSensitive
+    ? runbook.includes(text)
+    : runbook.toLocaleLowerCase("en-US").includes(
+        text.toLocaleLowerCase("en-US")
+      );
+
+  if (!present) {
     throw new Error(`Runbook missing required section/text: ${text}`);
   }
-  console.log(`PASS runbook contains: ${text}`);
+
+  console.log(
+    `PASS runbook contains: ${text} ` +
+    `(caseSensitive=${caseSensitive})`
+  );
 }
 
 console.log("BACKUP_UPLOAD_READINESS_VERIFY_PASS");

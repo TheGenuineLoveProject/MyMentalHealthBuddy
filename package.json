@@ -66,7 +66,8 @@
     "generate:registry-candidates": "node scripts/governance/generate-registry-candidate-inventory.mjs",
     "diagnose:registry-candidates": "node scripts/governance/diagnose-registry-candidate-precision.mjs",
     "filter:registry-candidates": "node scripts/governance/filter-registry-candidates-to-canonical-sources.mjs",
-    "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates"
+    "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates",
+    "postbuild": "node --input-type=module -e 'import fs from \"node:fs\";import path from \"node:path\";import crypto from \"node:crypto\";const source=path.resolve(\"public/brand/favicon.svg\");const target=path.resolve(\"client/dist/brand/favicon.svg\");if(!fs.existsSync(source)||!fs.statSync(source).isFile()){throw new Error(\"POSTBUILD_FAVICON_SOURCE_MISSING:\"+source);}fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(source,target);const hash=(file)=>crypto.createHash(\"sha256\").update(fs.readFileSync(file)).digest(\"hex\");const sourceHash=hash(source);const targetHash=hash(target);if(sourceHash!==targetHash){throw new Error(\"POSTBUILD_FAVICON_HASH_MISMATCH\");}console.log(\"POSTBUILD_FAVICON_COPY=PASS\");console.log(\"POSTBUILD_FAVICON_TARGET=\"+target);console.log(\"POSTBUILD_FAVICON_SHA256=\"+targetHash);'"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
@@ -146,7 +147,7 @@
     "react-helmet-async": "^3.0.0",
     "react-hook-form": "^7.73.1",
     "react-icons": "^5.6.0",
-    "react-router-dom": "^7.16.0",
+    "react-router-dom": "7.18.0",
     "react-spring": "^10.0.4",
     "resend": "^6.12.0",
     "speakeasy": "^2.0.0",
@@ -175,7 +176,7 @@
     "playwright": "^1.60.0",
     "prettier": "^3.8.3",
     "rollup-plugin-visualizer": "^6.0.11",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.3",
     "supertest": "^7.2.2",
     "typescript": "^6.0.3",
     "vite-bundle-visualizer": "^1.2.1",

@@ -73,6 +73,16 @@ if (db) globalThis.db = db;
 // APP INIT
 // ----------------------------
 const app = express();
+app.disable("x-powered-by");
+
+// PCC-CI-001 PHASE11B GLOBAL XCTO SECURITY BASELINE
+// Security invariant: all responses emitted after this point receive
+// MIME-sniffing protection before route dispatch.
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  next();
+});
+
 
 // PHASE116Z43_INTERNAL_INTELLIGENCE_SERVER_REGISTRATION
 registerInternalIntelligenceServer(app);
