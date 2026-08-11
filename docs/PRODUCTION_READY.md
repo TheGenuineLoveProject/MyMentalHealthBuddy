@@ -147,3 +147,165 @@ Advisory items are documented for future improvement sprints.
 | docs/AI_GOVERNANCE.md | AI agent authority and safety guardrails |
 | docs/PRODUCTION_READY.md | Final readiness assessment (this file) |
 | scripts/verify-commit-signing.mjs | Commit signing verification tool |
+
+---
+
+<!-- R6C2A6P:FIVE-WAVE-DEFINITION-OF-DONE -->
+
+## Governed Five-Wave Definition-of-Done Contract
+
+### Purpose
+
+This section provides the authoritative completion semantics for the five
+ordered mitigation waves already established by the platform completion and
+production-readiness governance evidence.
+
+This contract does not create new product scope, reopen completed technical
+release gates, or modify application behavior.
+
+It defines when each existing mitigation wave may be considered complete.
+
+### Governing invariants
+
+For every wave:
+
+1. The wave MUST have an explicitly bounded scope.
+2. Every mandatory in-scope item MUST reach an explicit terminal state.
+3. Mandatory work MUST NOT be silently deferred.
+4. A mandatory item may be excluded only when authoritative evidence proves
+   that it is non-applicable or formally outside the governed scope.
+5. Every satisfied mandatory item MUST have auditable evidence.
+6. Any unresolved hard blocker, failed mandatory requirement, or unknown
+   mandatory state keeps the wave incomplete.
+7. Advisory future improvements MAY remain open only when they are explicitly
+   classified as non-blocking.
+8. Completion of a wave MUST be recorded before the next wave can rely upon it
+   as a satisfied predecessor.
+9. "Work performed", "test executed", or "assessment started" alone does not
+   constitute completion.
+10. A wave is complete only when its Definition of Done below is satisfied.
+
+### Wave 1
+
+**Entry condition:** The governed mitigation program is active and the bounded
+Wave 1 scope is identified.
+
+**Required work:** Resolve or formally adjudicate every mandatory item assigned
+to the first ordered mitigation wave.
+
+**Required evidence:** Item-level completion evidence, verification results,
+applicable governance decisions, and evidence that no unresolved hard blocker
+remains within Wave 1 scope.
+
+**Pass condition:** Every mandatory Wave 1 item is PASS, SATISFIED, COMPLETE,
+or authoritatively proven non-applicable.
+
+**Definition of Done:** Wave 1 is done only when its complete mandatory scope
+has terminal evidence, no unresolved hard blocker remains, evidence is
+auditable, and the wave closure state has been recorded.
+
+**Closure state:** `WAVE_1_COMPLETE`
+
+### Wave 2
+
+**Entry condition:** `WAVE_1_COMPLETE` is proven and Wave 2 scope is bounded.
+
+**Required work:** Resolve or formally adjudicate every mandatory item assigned
+to the second ordered mitigation wave.
+
+**Required evidence:** Item-level completion evidence, verification results,
+applicable governance decisions, predecessor evidence for Wave 1, and evidence
+that no unresolved hard blocker remains within Wave 2 scope.
+
+**Pass condition:** Every mandatory Wave 2 item is PASS, SATISFIED, COMPLETE,
+or authoritatively proven non-applicable.
+
+**Definition of Done:** Wave 2 is done only when Wave 1 remains closed, the
+complete mandatory Wave 2 scope has terminal evidence, no unresolved hard
+blocker remains, evidence is auditable, and the Wave 2 closure state has been
+recorded.
+
+**Closure state:** `WAVE_2_COMPLETE`
+
+### Wave 3
+
+**Entry condition:** `WAVE_2_COMPLETE` is proven and Wave 3 scope is bounded.
+
+**Required work:** Resolve or formally adjudicate every mandatory item assigned
+to the third ordered mitigation wave.
+
+**Required evidence:** Item-level completion evidence, verification results,
+applicable governance decisions, predecessor evidence for Waves 1 and 2, and
+evidence that no unresolved hard blocker remains within Wave 3 scope.
+
+**Pass condition:** Every mandatory Wave 3 item is PASS, SATISFIED, COMPLETE,
+or authoritatively proven non-applicable.
+
+**Definition of Done:** Wave 3 is done only when all predecessor waves remain
+closed, the complete mandatory Wave 3 scope has terminal evidence, no
+unresolved hard blocker remains, evidence is auditable, and the Wave 3 closure
+state has been recorded.
+
+**Closure state:** `WAVE_3_COMPLETE`
+
+### Wave 4
+
+**Entry condition:** `WAVE_3_COMPLETE` is proven and Wave 4 scope is bounded.
+
+**Required work:** Resolve or formally adjudicate every mandatory item assigned
+to the fourth ordered mitigation wave.
+
+**Required evidence:** Item-level completion evidence, verification results,
+applicable governance decisions, predecessor evidence for Waves 1 through 3,
+and evidence that no unresolved hard blocker remains within Wave 4 scope.
+
+**Pass condition:** Every mandatory Wave 4 item is PASS, SATISFIED, COMPLETE,
+or authoritatively proven non-applicable.
+
+**Definition of Done:** Wave 4 is done only when all predecessor waves remain
+closed, the complete mandatory Wave 4 scope has terminal evidence, no
+unresolved hard blocker remains, evidence is auditable, and the Wave 4 closure
+state has been recorded.
+
+**Closure state:** `WAVE_4_COMPLETE`
+
+### Wave 5
+
+**Entry condition:** `WAVE_4_COMPLETE` is proven and the final mitigation-wave
+scope is bounded.
+
+**Required work:** Resolve or formally adjudicate every mandatory item assigned
+to the fifth ordered mitigation wave and reconcile the five-wave program as a
+whole.
+
+**Required evidence:** Item-level Wave 5 completion evidence, predecessor
+evidence for Waves 1 through 4, final cross-wave reconciliation evidence,
+applicable governance decisions, and evidence that no unresolved hard blocker
+remains in the governed five-wave program.
+
+**Pass condition:** Every mandatory Wave 5 item is PASS, SATISFIED, COMPLETE,
+or authoritatively proven non-applicable, and Waves 1 through 4 remain closed.
+
+**Definition of Done:** Wave 5 is done only when the complete mandatory Wave 5
+scope has terminal evidence, all predecessor waves remain closed, no unresolved
+hard blocker remains anywhere in the governed five-wave program, all required
+evidence is auditable, and the final wave closure state has been recorded.
+
+**Closure state:** `WAVE_5_COMPLETE`
+
+### Five-wave program closure rule
+
+The five-wave mitigation program is complete only when all of the following are
+simultaneously proven:
+
+- `WAVE_1_COMPLETE`
+- `WAVE_2_COMPLETE`
+- `WAVE_3_COMPLETE`
+- `WAVE_4_COMPLETE`
+- `WAVE_5_COMPLETE`
+- no unresolved hard blocker remains in governed scope
+- every mandatory completion requirement has auditable terminal evidence
+- any remaining advisory item is explicitly classified as non-blocking
+
+Only after these conditions are proven may the five-wave program be used as
+satisfied evidence in the final platform-completion adjudication.

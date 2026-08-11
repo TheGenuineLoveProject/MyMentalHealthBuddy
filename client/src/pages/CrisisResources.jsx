@@ -145,7 +145,7 @@ export default function CrisisResources() {
                 <AlertTriangle style={ic('1.5rem')} />
               </div>
               <div>
-                <h2 className="text-heading-md" style={{ color: 'var(--glp-rose-dark)', marginBottom: '0.5rem' }}>In immediate danger?</h2>
+                <h2 className="text-heading-md" style={{ color: 'var(--mmhb-text-strong)', backgroundColor: 'var(--glp-surface-2)', marginBottom: '0.5rem' }}>In immediate danger?</h2>
                 <p className="text-body-sm" style={{ color: 'var(--glp-ink)' }}>
                   Call 911 or go to your nearest emergency room. Your safety is the priority.
                 </p>
