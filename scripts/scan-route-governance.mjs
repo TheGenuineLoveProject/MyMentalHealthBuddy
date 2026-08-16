@@ -33,6 +33,45 @@ if (errors.length) {
 }
 
 const app = readFileSync(APP, "utf8");
+
+// Route governance must evaluate the effective mounted route surface,
+// not only literal <Route> declarations physically present in App.jsx.
+//
+// These aggregators are included only when:
+//   1. the aggregator file exists; and
+//   2. App.jsx actually mounts that aggregator component.
+//
+// This preserves App.jsx as the composition root while allowing
+// governed routes to live in bounded route modules.
+const ROUTE_AGGREGATOR_SPECS = [
+  {
+    component: "ConfigUtilityRoutes",
+    file: resolve(ROOT, "client/src/routes/ConfigUtilityRoutes.jsx"),
+  },
+  {
+    component: "AdvancedGrowthRoutes",
+    file: resolve(ROOT, "client/src/routes/AdvancedGrowthRoutes.jsx"),
+  },
+];
+
+const mountedRouteAggregatorSources = ROUTE_AGGREGATOR_SPECS
+  .filter(
+    ({ component, file }) =>
+      existsSync(file) &&
+      new RegExp(`<${component}\\b`).test(app),
+  )
+  .map(({ component, file }) => ({
+    component,
+    file,
+    source: readFileSync(file, "utf8"),
+  }));
+
+const governedRouteSurface = [
+  app,
+  ...mountedRouteAggregatorSources.map(({ source }) => source),
+].join("\n");
+
+
 const mod = await import(pathToFileURL(REGISTRY).href);
 const registry = mod.routeRegistry || mod.default;
 const list = Object.values(registry);
@@ -85,7 +124,7 @@ for (const entry of list) {
 
 ok(`registry has ${list.length} entries, ${REQUIRED_FIELDS.length} required fields each`);
 
-const appRouteMatches = [...app.matchAll(/<Route\s+path="([^"]+)"/g)].map(
+const appRouteMatches = [...governedRouteSurface.matchAll(/<Route\s+path="([^"]+)"/g)].map(
   (m) => m[1],
 );
 const appPathCounts = appRouteMatches.reduce((acc, p) => {
@@ -398,8 +437,11 @@ if (!existsSync(resiliencePage)) {
   check("Resilience.jsx: preserves ResilienceMetricsPage body", /ResilienceMetricsPage/.test(src));
 }
 
-const appHasResilienceRoute = /<Route\s+path="\/resilience">\s*<ProtectedRoute><ResilienceCanonical\s*\/><\/ProtectedRoute>\s*<\/Route>/.test(app);
-check("App.jsx: /resilience route renders ResilienceCanonical inside ProtectedRoute", appHasResilienceRoute);
+const appHasResilienceRoute =
+  /<Route\s+path="\/resilience">\s*<ProtectedRoute><ResilienceCanonical\s*\/><\/ProtectedRoute>\s*<\/Route>/.test(
+    governedRouteSurface,
+  );
+check("mounted route surface: /resilience route renders ResilienceCanonical inside ProtectedRoute", appHasResilienceRoute);
 
 const registrySrcForResilience = readFileSync(REGISTRY, "utf8");
 const resilienceRegBlock = registrySrcForResilience.match(/"\/resilience"\s*:\s*\{[\s\S]*?\n\s*\}/);
@@ -435,8 +477,11 @@ if (!existsSync(mindfulnessPage)) {
   );
 }
 
-const appHasMindfulnessRoute = /<Route\s+path="\/mindfulness"\s+component=\{MindfulnessCanonical\}/.test(app);
-check("App.jsx: /mindfulness route uses MindfulnessCanonical component", appHasMindfulnessRoute);
+const appHasMindfulnessRoute =
+  /<Route\s+path="\/mindfulness"\s+component=\{MindfulnessCanonical\}/.test(
+    governedRouteSurface,
+  );
+check("mounted route surface: /mindfulness route uses MindfulnessCanonical component", appHasMindfulnessRoute);
 
 const registrySrcForMindfulness = readFileSync(REGISTRY, "utf8");
 const mindfulnessRegBlock = registrySrcForMindfulness.match(/"\/mindfulness"\s*:\s*\{[\s\S]*?\n\s*\}/);
