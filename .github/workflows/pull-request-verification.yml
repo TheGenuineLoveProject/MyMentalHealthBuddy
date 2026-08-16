@@ -46,7 +46,7 @@ jobs:
 
       - name: Start isolated server
         run: |
-          node server/app.mjs &
+          JWT_SECRET="ci-only-nonproduction-jwt-secret-1234567890" node server/app.mjs &
           echo $! > server.pid
 
       - name: Wait for server
