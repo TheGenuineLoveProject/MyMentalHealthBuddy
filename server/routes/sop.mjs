@@ -89,20 +89,17 @@ const CHECKS = [
   // -----------------------------------------------------------------------------
   // Static checks (no HTTP probe — inspect source / config state instead)
   // -----------------------------------------------------------------------------
-  // Tracked technical debt — advisor instruction (Apr-26 v1.1): log this as a
-  // WARNING in SOP, do NOT fix yet. Bug: server/app.mjs:101 uses
-  // `app.use(csrfProtection)` (passing the factory itself as middleware) instead
-  // of `app.use(csrfProtection())` (invoking the factory). Result: CSRF middleware
-  // never enforces tokens. Tokens are still ISSUED (cookies set on safe methods),
-  // so client-side CSRF flow appears intact. Fix scheduled for a future SOP-driven
-  // release once the failure-list is clear.
+  // csrfProtection is a standard Express middleware function with signature
+  // csrfProtection(req, res, next), so app.use(csrfProtection) is the canonical
+  // mount. Live qualification separately proves 403 without a valid token and
+  // 200 with the legitimate cookie + x-csrf-token flow on protected requests.
   {
     id: "csrf-middleware-active",
-    name: "CSRF middleware actively enforcing (tracked debt)",
+    name: "CSRF middleware actively enforcing",
     domain: "platform",
     type: "static",
     staticCheck: csrfMountCheck,
-    remediation: "Tracked debt (advisor: do NOT fix yet). server/app.mjs:101 — change `app.use(csrfProtection)` to `app.use(csrfProtection())`. Test order: (1) verify CSRF cookie issuance still works on GET, (2) verify state-changing requests now require x-csrf-token header, (3) update any client mutations to send the cookie value as the header.",
+    remediation: "If this check warns, verify server/security/csrf.mjs exports csrfProtection(req, res, next), server/app.mjs mounts app.use(csrfProtection), and the live CSRF negative/positive flow before changing security code.",
   },
 
   // PWA cache hygiene (Apr-27) — three checks that together prove every
@@ -215,28 +212,29 @@ async function csrfMountCheck() {
     .filter((line) => !/^\s*\/\//.test(line))
     .join("\n");
 
-  // Fixed pattern: factory invoked → `app.use(csrfProtection())`
-  const fixedPattern = /app\.use\(\s*csrfProtection\s*\(/;
-  // Buggy pattern: factory passed directly → `app.use(csrfProtection)`
-  const buggyPattern = /app\.use\(\s*csrfProtection\s*\)/;
+  // Current implementation exports csrfProtection(req, res, next), so Express
+  // must receive the middleware function itself.
+  const fixedPattern = /app\.use\(\s*csrfProtection\s*\)/;
+  const erroneousInvocationPattern =
+    /app\.use\(\s*csrfProtection\s*\(\s*\)\s*\)/;
 
   if (fixedPattern.test(stripped)) {
     return {
       status: "pass",
-      message: "csrfProtection() is invoked correctly — middleware is active",
+      message: "csrfProtection is mounted as Express middleware",
       endpoint: "static:server/app.mjs",
     };
   }
-  if (buggyPattern.test(stripped)) {
+  if (erroneousInvocationPattern.test(stripped)) {
     return {
       status: "warn",
-      message: "csrfProtection mounted as factory reference, not as middleware — token enforcement is a no-op (advisor: tracked, do not fix yet)",
+      message: "csrfProtection is invoked with no req/res/next; current implementation expects Express middleware signature",
       endpoint: "static:server/app.mjs",
     };
   }
   return {
     status: "warn",
-    message: "Could not locate csrfProtection mount in server/app.mjs (manual review needed)",
+    message: "Could not locate canonical csrfProtection middleware mount in server/app.mjs",
     endpoint: "static:server/app.mjs",
   };
 }

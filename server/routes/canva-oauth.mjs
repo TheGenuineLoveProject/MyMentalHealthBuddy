@@ -5,6 +5,8 @@
 import express from "express";
 import { logger } from "../utils/logger.mjs";
 import { success, badRequest, serverError } from "../utils/response.mjs";
+import jwt from "jsonwebtoken";
+import { JwksClient } from "jwks-rsa";
 
 const router = express.Router();
 const CANVA_FETCH_TIMEOUT_MS = 10000;
@@ -12,6 +14,52 @@ const CANVA_FETCH_TIMEOUT_MS = 10000;
 const CANVA_APP_ID = process.env.CANVA_APP_ID || process.env.CANVA_CLIENT_ID || "";
 const CANVA_APP_ORIGIN = process.env.CANVA_APP_ORIGIN || "";
 const CANVA_HMR_ENABLED = process.env.CANVA_HMR_ENABLED === "TRUE";
+
+const CANVA_JWKS_CACHE_EXPIRY_MS = 60 * 60 * 1000;
+const CANVA_JWKS_TIMEOUT_MS = 30 * 1000;
+
+const canvaJwksClient = new JwksClient({
+  cache: true,
+  cacheMaxAge: CANVA_JWKS_CACHE_EXPIRY_MS,
+  timeout: CANVA_JWKS_TIMEOUT_MS,
+  rateLimit: true,
+  jwksUri: `https://api.canva.com/rest/v1/apps/${CANVA_APP_ID}/jwks`,
+});
+
+async function verifyCanvaUserJwt(token) {
+  const decoded = jwt.decode(token, { complete: true });
+
+  if (
+    !decoded ||
+    typeof decoded !== "object" ||
+    !decoded.header ||
+    !decoded.header.kid
+  ) {
+    throw new Error("Canva JWT is missing a valid key identifier.");
+  }
+
+  const signingKey = await canvaJwksClient.getSigningKey(
+    decoded.header.kid
+  );
+
+  const publicKey = signingKey.getPublicKey();
+
+  const verified = jwt.verify(token, publicKey, {
+    audience: CANVA_APP_ID,
+  });
+
+  if (
+    !verified ||
+    typeof verified !== "object" ||
+    !verified.aud ||
+    !verified.userId ||
+    !verified.brandId
+  ) {
+    throw new Error("Canva user JWT is missing required verified claims.");
+  }
+
+  return verified;
+}
 
 // Health check endpoint
 router.get("/health", (req, res) => {
@@ -45,61 +93,50 @@ router.get("/config", (req, res) => {
   });
 });
 
-// Verify Canva JWT token (for authenticated requests from Canva Apps)
+// Verify Canva JWT token for authenticated requests from Canva Apps.
+// IMPORTANT: Decoding is used only to obtain the JWT header `kid`.
+// No payload claim is trusted until cryptographic signature verification succeeds.
 router.post("/verify-token", async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
-    
+
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return badRequest(res, "Authorization header with Bearer token required.");
+      return badRequest(
+        res,
+        "Authorization header with Bearer token required."
+      );
     }
 
-    const token = authHeader.split(" ")[1];
-    
-    // Decode JWT payload (Canva tokens are signed but we verify origin)
-    const parts = token.split(".");
-    if (parts.length !== 3) {
-      return badRequest(res, "Invalid token format.");
+    const token = authHeader.slice("Bearer ".length).trim();
+
+    if (!token) {
+      return badRequest(res, "Bearer token required.");
     }
 
-    try {
-      const payload = JSON.parse(Buffer.from(parts[1], "base64url").toString());
-      
-      // Verify the token is for our app
-      if (payload.aud !== CANVA_APP_ID) {
-        logger.warn("Canva token audience mismatch", { 
-          expected: CANVA_APP_ID, 
-          received: payload.aud 
-        });
-        return badRequest(res, "Token not issued for this application.");
-      }
+    const payload = await verifyCanvaUserJwt(token);
 
-      // Check expiration
-      const now = Math.floor(Date.now() / 1000);
-      if (payload.exp && payload.exp < now) {
-        return badRequest(res, "Token has expired.");
-      }
+    logger.info("Canva token cryptographically verified", {
+      userId: payload.userId,
+      brandId: payload.brandId,
+    });
 
-      logger.info("Canva token verified", { 
-        userId: payload.userId,
-        brandId: payload.brandId 
-      });
+    return success(res, {
+      valid: true,
+      userId: payload.userId,
+      brandId: payload.brandId,
+      expiresAt: payload.exp
+        ? new Date(payload.exp * 1000).toISOString()
+        : null,
+    });
+  } catch (verifyErr) {
+    logger.warn("Canva token verification failed", {
+      error: verifyErr?.message || String(verifyErr),
+    });
 
-      return success(res, {
-        valid: true,
-        userId: payload.userId,
-        brandId: payload.brandId,
-        expiresAt: payload.exp ? new Date(payload.exp * 1000).toISOString() : null
-      });
-    } catch (decodeErr) {
-      logger.warn("Canva token decode failed", { error: decodeErr?.message || decodeErr });
-      return badRequest(res, "Failed to decode token.");
-    }
-  } catch (err) {
-    logger.error("Canva token verification error", { error: err.message });
-    return serverError(res, err);
+    return badRequest(res, "Invalid Canva token.");
   }
 });
+
 
 // Webhook endpoint for Canva events
 router.post("/webhook", async (req, res) => {
@@ -186,12 +223,12 @@ router.get("/status", (req, res) => {
       hmrEnabled: CANVA_HMR_ENABLED
     },
     endpoints: {
-      health: "/api/canva/health",
-      config: "/api/canva/config",
-      verifyToken: "/api/canva/verify-token",
-      webhook: "/api/canva/webhook",
-      assetProxy: "/api/canva/asset-proxy",
-      status: "/api/canva/status"
+      health: "/api/canva-oauth/health",
+      config: "/api/canva-oauth/config",
+      verifyToken: "/api/canva-oauth/verify-token",
+      webhook: "/api/canva-oauth/webhook",
+      assetProxy: "/api/canva-oauth/asset-proxy",
+      status: "/api/canva-oauth/status"
     },
     documentation: "https://www.canva.dev/docs/apps/"
   });
