@@ -54,7 +54,7 @@ function showUpdateBanner(worker) {
 // Register Service Worker for PWA support
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/serviceWorker.js')
+    navigator.serviceWorker.register('/service-worker.js')
       .then((registration) => {
         // Surface a worker that was already waiting before this page load (e.g.
         // the user dismissed the banner then revisited) so they are never stuck
