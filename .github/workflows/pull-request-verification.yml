@@ -64,7 +64,7 @@ jobs:
       - name: Start isolated server
         run: |
           JWT_SECRET="ci-only-nonproduction-jwt-secret-1234567890" OPENAI_API_KEY="ci-only-nonproduction-openai-key" SESSION_SECRET="ci-only-nonproduction-session-secret-1234567890" REPL_ID="ci-only-nonproduction-repl-id" node server/app.mjs &
-          echo $! > server.pid
+          echo $! > "$RUNNER_TEMP/mmhb-pr-server.pid"
 
       - name: Wait for server
         run: |
@@ -88,6 +88,6 @@ jobs:
       - name: Stop server
         if: always()
         run: |
-          if [ -f server.pid ]; then
-            kill "$(cat server.pid)" || true
+          if [ -f "$RUNNER_TEMP/mmhb-pr-server.pid" ]; then
+            kill "$(cat "$RUNNER_TEMP/mmhb-pr-server.pid")" || true
           fi
