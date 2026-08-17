@@ -14,11 +14,30 @@ jobs:
 
     timeout-minutes: 20
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mmhb_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
     env:
       CI: "true"
       NODE_ENV: test
       OTEL_DISABLED: "true"
       PORT: "5099"
+      VERIFY_BASE_URL: "http://127.0.0.1:5099"
+      NPM_CONFIG_REGISTRY: "https://registry.npmjs.org/"
+      DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/mmhb_ci"
+      DATABASE_SSL: "false"
 
     steps:
       - uses: actions/checkout@v4
@@ -44,8 +63,8 @@ jobs:
 
       - name: Start isolated server
         run: |
-          node server/app.mjs &
-          echo $! > server.pid
+          JWT_SECRET="ci-only-nonproduction-jwt-secret-1234567890" OPENAI_API_KEY="ci-only-nonproduction-openai-key" SESSION_SECRET="ci-only-nonproduction-session-secret-1234567890" REPL_ID="ci-only-nonproduction-repl-id" node server/app.mjs &
+          echo $! > "$RUNNER_TEMP/mmhb-pr-server.pid"
 
       - name: Wait for server
         run: |
@@ -69,6 +88,6 @@ jobs:
       - name: Stop server
         if: always()
         run: |
-          if [ -f server.pid ]; then
-            kill "$(cat server.pid)" || true
+          if [ -f "$RUNNER_TEMP/mmhb-pr-server.pid" ]; then
+            kill "$(cat "$RUNNER_TEMP/mmhb-pr-server.pid")" || true
           fi

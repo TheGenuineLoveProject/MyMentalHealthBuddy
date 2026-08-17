@@ -20,18 +20,20 @@ if (!existsSync(APP)) {
   errors.push(`FAIL  App.jsx not found at ${APP}`);
 } else {
   const app = readFileSync(APP, "utf8");
+  const lazyRoutes = readFileSync(resolve(ROOT, "client/src/routes/lazyRoutes.jsx"), "utf8");
+  const trustSurface = app + "\n" + lazyRoutes;
 
-  const trustRouteMatches = app.match(/path="\/trust"/g) || [];
-  const aiRouteMatches = app.match(/path="\/ai-transparency"/g) || [];
+  const trustRouteMatches = trustSurface.match(/path="\/trust"/g) || [];
+  const aiRouteMatches = trustSurface.match(/path="\/ai-transparency"/g) || [];
   const trustImports =
-    app.match(/import\([^)]*pages\/trust\/TrustCenterPage\.jsx[^)]*\)/g) || [];
+    trustSurface.match(/import\([^)]*pages\/trust\/TrustCenterPage\.jsx[^)]*\)/g) || [];
   const aiImports =
-    app.match(/import\([^)]*pages\/trust\/AITransparencyPage\.jsx[^)]*\)/g) ||
+    trustSurface.match(/import\([^)]*pages\/trust\/AITransparencyPage\.jsx[^)]*\)/g) ||
     [];
   const trustDecls =
-    app.match(/const\s+TrustCenterPage\s*=\s*lazy/g) || [];
+    trustSurface.match(/const\s+TrustCenterPage\s*=\s*lazy/g) || [];
   const aiDecls =
-    app.match(/const\s+AITransparencyPage\s*=\s*lazy/g) || [];
+    trustSurface.match(/const\s+AITransparencyPage\s*=\s*lazy/g) || [];
 
   check("/trust route present", trustRouteMatches.length >= 1);
   check(
