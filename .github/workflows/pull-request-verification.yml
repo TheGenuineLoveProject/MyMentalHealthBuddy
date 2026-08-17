@@ -63,7 +63,7 @@ jobs:
 
       - name: Start isolated server
         run: |
-          JWT_SECRET="ci-only-nonproduction-jwt-secret-1234567890" OPENAI_API_KEY="ci-only-nonproduction-openai-key" node server/app.mjs &
+          JWT_SECRET="ci-only-nonproduction-jwt-secret-1234567890" OPENAI_API_KEY="ci-only-nonproduction-openai-key" SESSION_SECRET="ci-only-nonproduction-session-secret-1234567890" REPL_ID="ci-only-nonproduction-repl-id" node server/app.mjs &
           echo $! > server.pid
 
       - name: Wait for server
