@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { BRAND } from "@shared/brand.mjs";
 import { Home, Sparkles, ClipboardCheck, MessageCircle, BookOpen } from "lucide-react";
-import LumiMascot from "./lumi/LumiMascot.jsx";
+import { LumiSceneRenderer } from "../lumi-registry/components/LumiSceneRenderer";
 
 function NavLink({ href, children, className = "", active = false, ...props }) {
   return (
@@ -58,7 +58,7 @@ export default function Header() {
             }}
             data-testid="img-header-logo"
           >
-            <LumiMascot emotion="neutral" size={40} interactive={false} />
+            <LumiSceneRenderer scene="global-header" widthPx={40} />
           </span>
           <span className="hidden sm:inline text-heading-sm text-brand tracking-tight">
             {BRAND?.name}
