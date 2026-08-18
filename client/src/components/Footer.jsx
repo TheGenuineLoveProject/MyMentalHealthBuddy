@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Shield, BookOpen, Mail, Settings as SettingsIcon } from 'lucide-react';
 import { Instagram, Youtube } from "../lib/lucide-brands";
-import LumiMascot from "./lumi/LumiMascot.jsx";
+import { LumiSceneRenderer } from "../lumi-registry/components/LumiSceneRenderer";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,7 +21,7 @@ export default function Footer() {
               className="w-10 h-10 flex items-center justify-center"
               style={{ background: 'radial-gradient(circle at 50% 55%, var(--glp-sage-10) 0%, transparent 72%)', overflow: 'visible' }}
             >
-              <LumiMascot emotion="neutral" size={40} />
+              <LumiSceneRenderer scene="global-footer" widthPx={40} />
             </span>
             <span className="font-serif text-xl font-bold text-gray-900 dark:text-white">
               MyMentalHealthBuddy
