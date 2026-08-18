@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import ModeToggle from "./ModeToggle.jsx";
 import GlobalSearch from "./GlobalSearch.jsx";
 import { useAuth } from "../context/AuthContext";
-import LumiMascot from "./lumi/LumiMascot.jsx";
+import { LumiSceneRenderer } from "../lumi-registry/components/LumiSceneRenderer";
 import { WELLNESS_HUB_TOOLS } from "../content/tools/toolsRegistry.js";
 // PHASE115N_TGLP_NAVBAR_SHARED_BUTTON_POLISH_PATCH
 
@@ -172,7 +172,7 @@ export default function TglpNavbar() {
           <div
             className="relative size-12 md:size-14 flex items-center justify-center overflow-hidden rounded-full border border-[var(--glp-sage-15)] bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,0.92),rgba(143,191,159,0.24)_44%,rgba(47,93,93,0.12))] shadow-[0_10px_30px_rgba(47,93,93,0.16)] transition-transform group-hover:scale-105"
           >
-            <LumiMascot emotion="neutral" size={40} className="size-full drop-shadow-sm" data-testid="img-brand-logo" />
+            <LumiSceneRenderer scene="global-header" widthPx={40} className="drop-shadow-sm" data-testid="img-brand-logo" />
             <Heart className="hidden size-7 md:size-8 text-[var(--glp-sage)] drop-shadow-sm" fill="currentColor" />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
