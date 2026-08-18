@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import LumiMascot from "../lumi/LumiMascot.jsx";
+import { LumiSceneRenderer } from "../../lumi-registry/components/LumiSceneRenderer";
 
 // PHASE114Y_BRANDLOGO_VISUAL_POLISH_PATCH
 
@@ -31,7 +31,7 @@ export default function BrandLogo({
           className={`brand-logo-img relative z-[1] w-full h-full ${s.radius} flex items-center justify-center overflow-hidden transition-transform duration-300`}
           style={{ background: 'radial-gradient(circle at 35% 25%, rgba(255,255,255,0.96) 0%, rgba(143,191,159,0.24) 48%, rgba(47,93,93,0.10) 100%)', boxShadow: `${s.shadow} ${shadowColor}` }}
         >
-          <LumiMascot emotion="neutral" size={s.px} className="drop-shadow-sm" />
+          <LumiSceneRenderer scene="brand-logo" widthPx={s.px} className="drop-shadow-sm" />
         </span>
       </span>
       {showText && (

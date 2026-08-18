@@ -23,6 +23,7 @@ export interface SceneAssignment {
 export const SCENE_ASSIGNMENTS: ReadonlyArray<SceneAssignment> = Object.freeze([
   { scene: "global-header", variant: "LUMI_FLOAT_IDLE", position: "inline", maxSizePx: 40, notes: "Canonical global header idle anchor" },
   { scene: "global-footer", variant: "LUMI_FLOAT_IDLE", position: "inline", maxSizePx: 40, notes: "Canonical global footer idle anchor" },
+  { scene: "brand-logo", variant: "LUMI_FLOAT_IDLE", position: "inline", maxSizePx: 96, notes: "Canonical shared brand mark" },
   { scene: "homepage-hero", variant: "LUMI_SOFT_PRESENCE", fallback: "LUMI_PATH", position: "hero", maxSizePx: 320, notes: "Folded-hands homepage anchor" },
   { scene: "homepage-background", variant: "LUMI_CALM_FLOAT", position: "background", maxSizePx: 220, notes: "Ambient calm behind content" },
   { scene: "onboarding-entry", variant: "LUMI_PATH", position: "hero", maxSizePx: 260, notes: "Walking with the user from step 1" },
@@ -43,8 +44,8 @@ export const SCENE_ASSIGNMENTS: ReadonlyArray<SceneAssignment> = Object.freeze([
   { scene: "welcome-return", variant: "LUMI_HEART", fallback: "LUMI_SOFT_PRESENCE", position: "hero", maxSizePx: 260, notes: "Heart glow for returning users" },
 ] as const);
 
-if (SCENE_ASSIGNMENTS.length !== 20) {
-  throw new Error(`[lumi-registry] SCENE_ASSIGNMENTS floor violated: expected 20, got ${SCENE_ASSIGNMENTS.length}.`);
+if (SCENE_ASSIGNMENTS.length !== 21) {
+  throw new Error(`[lumi-registry] SCENE_ASSIGNMENTS floor violated: expected 21, got ${SCENE_ASSIGNMENTS.length}.`);
 }
 
 export function getSceneAssignment(scene: string): SceneAssignment | undefined {
