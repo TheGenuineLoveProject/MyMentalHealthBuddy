@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Calendar, Bell, Users, TrendingUp, Heart, Clock, Star, Activity, Target, ChevronRight, User, Settings, Home, BookOpen } from 'lucide-react';
 import SEO from '../components/SEO';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
-import LumiMascot from "../components/lumi/LumiMascot.jsx";
+import { LumiSceneRenderer } from "../lumi-registry/components/LumiSceneRenderer";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 
@@ -72,7 +72,7 @@ export default function CRMPage() {
               <div className="flex items-center gap-8">
                 <Link href="/" className="flex items-center gap-3" data-testid="link-home">
                   <span aria-hidden="true" className="h-10 w-10 rounded-xl flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', boxShadow: '0 2px 10px var(--glp-sage-deep-12)' }}>
-                    <LumiMascot emotion="neutral" size={40} />
+                    <LumiSceneRenderer scene="global-header" widthPx={40} />
                   </span>
                   <span className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Dashboard</span>
                 </Link>
