@@ -14,7 +14,7 @@ export interface LumiSceneMaster {
 export const LUMI_SCENE_MASTERS: Readonly<
   Partial<Record<LumiVariantId, LumiSceneMaster>>
 > = Object.freeze({
-  LUMI_FLOAT_IDLE: {
+  LUMI_FLOAT_IDLE: Object.freeze({
     variant: "LUMI_FLOAT_IDLE",
     pngSrc: "/lumi/scenes/lumi-float-idle-scene.png",
     webpSrc: "/lumi/scenes/lumi-float-idle-scene.webp",
@@ -23,8 +23,8 @@ export const LUMI_SCENE_MASTERS: Readonly<
     objectPosition: "50% 50%",
     decorative: true,
     provenanceSource: "IMG_4345_1778823252522.png",
-  },
-  LUMI_HEART: {
+  }),
+  LUMI_HEART: Object.freeze({
     variant: "LUMI_HEART",
     pngSrc: "/lumi/scenes/lumi-heart-scene.png",
     webpSrc: "/lumi/scenes/lumi-heart-scene.webp",
@@ -33,8 +33,8 @@ export const LUMI_SCENE_MASTERS: Readonly<
     objectPosition: "50% 50%",
     decorative: true,
     provenanceSource: "IMG_4346_1778823252522.png",
-  },
-  LUMI_MEDITATION: {
+  }),
+  LUMI_MEDITATION: Object.freeze({
     variant: "LUMI_MEDITATION",
     pngSrc: "/lumi/scenes/lumi-meditation-scene.png",
     webpSrc: "/lumi/scenes/lumi-meditation-scene.webp",
@@ -43,8 +43,8 @@ export const LUMI_SCENE_MASTERS: Readonly<
     objectPosition: "50% 50%",
     decorative: true,
     provenanceSource: "IMG_4347_1778823252522.png",
-  },
-  LUMI_COMPANION: {
+  }),
+  LUMI_COMPANION: Object.freeze({
     variant: "LUMI_COMPANION",
     pngSrc: "/lumi/scenes/lumi-companion-scene.png",
     webpSrc: "/lumi/scenes/lumi-companion-scene.webp",
@@ -53,8 +53,8 @@ export const LUMI_SCENE_MASTERS: Readonly<
     objectPosition: "50% 50%",
     decorative: true,
     provenanceSource: "IMG_4348_1778823252522.png",
-  },
-  LUMI_PATH: {
+  }),
+  LUMI_PATH: Object.freeze({
     variant: "LUMI_PATH",
     pngSrc: "/lumi/scenes/lumi-path-scene.png",
     webpSrc: "/lumi/scenes/lumi-path-scene.webp",
@@ -63,8 +63,8 @@ export const LUMI_SCENE_MASTERS: Readonly<
     objectPosition: "50% 50%",
     decorative: true,
     provenanceSource: "IMG_4349_1778823252522.png",
-  },
-  LUMI_EMOTION_ORB: {
+  }),
+  LUMI_EMOTION_ORB: Object.freeze({
     variant: "LUMI_EMOTION_ORB",
     pngSrc: "/lumi/scenes/lumi-emotion-orb-scene.png",
     webpSrc: "/lumi/scenes/lumi-emotion-orb-scene.webp",
@@ -73,8 +73,8 @@ export const LUMI_SCENE_MASTERS: Readonly<
     objectPosition: "50% 50%",
     decorative: true,
     provenanceSource: "IMG_4350_1778823252522.png",
-  },
-  LUMI_SOFT_PRESENCE: {
+  }),
+  LUMI_SOFT_PRESENCE: Object.freeze({
     variant: "LUMI_SOFT_PRESENCE",
     pngSrc: "/lumi/scenes/lumi-soft-presence-scene.png",
     webpSrc: "/lumi/scenes/lumi-soft-presence-scene.webp",
@@ -83,7 +83,7 @@ export const LUMI_SCENE_MASTERS: Readonly<
     objectPosition: "50% 50%",
     decorative: true,
     provenanceSource: "IMG_4351_1778823252522.png",
-  },
+  }),
 });
 
 export function getLumiSceneMaster(

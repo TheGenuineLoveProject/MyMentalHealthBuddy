@@ -128,6 +128,19 @@ export const LumiSceneRenderer: React.FC<LumiSceneRendererProps> = ({
   }, [presentation, resolved.variant, sceneMaster, onValidationError]);
 
   useEffect(() => {
+    if (
+      presentation === "scene" &&
+      resolved.variant &&
+      policyDecision &&
+      !policyDecision.allowed &&
+      policyDecision.reason &&
+      onValidationError
+    ) {
+      onValidationError([policyDecision.reason]);
+    }
+  }, [presentation, resolved.variant, policyDecision, onValidationError]);
+
+  useEffect(() => {
     if (resolved.issues.length > 0 && onValidationError) {
       onValidationError(resolved.issues);
     }
