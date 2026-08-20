@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "main": "server/app.mjs",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
     "dev": "exec node server/app.mjs",
     "start": "node server/app.mjs",
