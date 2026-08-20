@@ -8,7 +8,7 @@
  */
 
 import * as React from "react";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 import { OfficialLumi, type OfficialLumiPosition } from "./OfficialLumi";
 import {
@@ -18,6 +18,8 @@ import {
   getSceneAssignment,
   validateSceneConfig,
 } from "../registry/lumiSceneAssignments";
+import { getLumiSceneMaster } from "../registry/lumiSceneMasters";
+import { canRenderLumi } from "../registry/lumiPagePlacementMap";
 import { isDevEnvironment } from "../internal/devGate";
 
 export interface LumiSceneRendererProps {
@@ -33,6 +35,11 @@ export interface LumiSceneRendererProps {
   readonly widthPx?: number;
   readonly isMobile?: boolean;
   readonly reducedMotion?: boolean;
+  /**
+   * Presentation is character-first by default.
+   * "scene" opts into the governed full-scene media master when available.
+   */
+  readonly presentation?: "character" | "scene";
   readonly className?: string;
   readonly onValidationError?: (issues: ReadonlyArray<string>) => void;
   readonly "data-testid"?: string;
@@ -47,6 +54,7 @@ export const LumiSceneRenderer: React.FC<LumiSceneRendererProps> = ({
   widthPx,
   isMobile = false,
   reducedMotion = false,
+  presentation = "character",
   className,
   onValidationError,
   "data-testid": dataTestId,
@@ -84,6 +92,54 @@ export const LumiSceneRenderer: React.FC<LumiSceneRendererProps> = ({
     return { variant: v, position, sizePx, issues: [...overrideIssues, ...validation.issues] };
   }, [assignment, scene, variantOverride, widthPx]);
 
+  const sceneMaster = useMemo(
+    () => resolved.variant ? getLumiSceneMaster(resolved.variant) : undefined,
+    [resolved.variant],
+  );
+
+  const sceneDisplayWidth = assignment
+    ? Math.min(resolved.sizePx, assignment.maxSizePx)
+    : resolved.sizePx;
+
+  const policyDecision = useMemo(
+    () => resolved.variant
+      ? canRenderLumi({ pageId, variant: resolved.variant })
+      : null,
+    [pageId, resolved.variant],
+  );
+
+  const [sceneAssetErrored, setSceneAssetErrored] = useState(false);
+
+  useEffect(() => {
+    setSceneAssetErrored(false);
+  }, [sceneMaster?.pngSrc, sceneMaster?.webpSrc]);
+
+  useEffect(() => {
+    if (
+      presentation === "scene" &&
+      resolved.variant &&
+      !sceneMaster &&
+      onValidationError
+    ) {
+      onValidationError([
+        `scene presentation requested for "${resolved.variant}" but no governed scene master exists; falling back to canonical character`,
+      ]);
+    }
+  }, [presentation, resolved.variant, sceneMaster, onValidationError]);
+
+  useEffect(() => {
+    if (
+      presentation === "scene" &&
+      resolved.variant &&
+      policyDecision &&
+      !policyDecision.allowed &&
+      policyDecision.reason &&
+      onValidationError
+    ) {
+      onValidationError([policyDecision.reason]);
+    }
+  }, [presentation, resolved.variant, policyDecision, onValidationError]);
+
   useEffect(() => {
     if (resolved.issues.length > 0 && onValidationError) {
       onValidationError(resolved.issues);
@@ -111,6 +167,77 @@ export const LumiSceneRenderer: React.FC<LumiSceneRendererProps> = ({
         }}
       >
         {isDev() ? `Lumi: unassigned scene "${scene}"` : null}
+      </div>
+    );
+  }
+
+  if (
+    presentation === "scene" &&
+    resolved.variant &&
+    policyDecision &&
+    !policyDecision.allowed
+  ) {
+    return (
+      <div
+        aria-hidden="true"
+        data-testid={dataTestId ?? "lumi-policy-blocked"}
+        data-variant={resolved.variant}
+        data-scene={scene}
+        data-page-id={pageId}
+        data-policy-blocked="true"
+        data-presentation="scene"
+        style={{ display: "none" }}
+      />
+    );
+  }
+
+  if (
+    presentation === "scene" &&
+    resolved.variant &&
+    sceneMaster &&
+    !sceneAssetErrored
+  ) {
+    return (
+      <div
+        aria-hidden={sceneMaster.decorative}
+        data-testid={dataTestId ?? `lumi-scene-${resolved.variant.toLowerCase()}`}
+        data-variant={resolved.variant}
+        data-scene={scene}
+        data-position={resolved.position}
+        data-presentation="scene"
+        data-lumi-protected="true"
+        data-reduced-motion={reducedMotion ? "true" : undefined}
+        className={className}
+        style={{
+          width: sceneDisplayWidth,
+          maxWidth: "100%",
+          display: "block",
+        }}
+      >
+        <picture>
+          <source
+            srcSet={sceneMaster.webpSrc}
+            type="image/webp"
+          />
+          <img
+            src={sceneMaster.pngSrc}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            draggable={false}
+            width={sceneMaster.width}
+            height={sceneMaster.height}
+            style={{
+              display: "block",
+              width: "100%",
+              height: "auto",
+              objectFit: "cover",
+              objectPosition: sceneMaster.objectPosition,
+            }}
+            onError={() => setSceneAssetErrored(true)}
+          />
+        </picture>
       </div>
     );
   }

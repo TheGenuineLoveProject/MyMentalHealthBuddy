@@ -76,6 +76,14 @@ export {
 } from "./registry/lumiEmotionalRoles";
 export type { EmotionalRole } from "./registry/lumiEmotionalRoles";
 
+// Registry — canonical scene presentation masters
+export {
+  LUMI_SCENE_MASTERS,
+  getLumiSceneMaster,
+  hasLumiSceneMaster,
+} from "./registry/lumiSceneMasters";
+export type { LumiSceneMaster } from "./registry/lumiSceneMasters";
+
 // Registry — scene assignments
 export {
   SCENE_ASSIGNMENTS,
