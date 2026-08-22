@@ -1,7 +1,7 @@
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
-import { getPostgresSslConfig } from "./db/sslConfig.mjs";
+import { getPostgresConnectionString, getPostgresSslConfig } from "./db/sslConfig.mjs";
 
 const PgSession = connectPgSimple(session);
 
@@ -28,7 +28,7 @@ export function buildSessionMiddleware() {
   // ✅ Production + DATABASE_URL => Postgres-backed sessions (Autoscale safe)
   if (isProd && hasDb) {
     const pool = new pg.Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: getPostgresConnectionString(process.env.DATABASE_URL),
       ssl: getPostgresSslConfig(),
     });
 
