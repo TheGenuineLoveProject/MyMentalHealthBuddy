@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - W12_DEVELOPMENT
+      - integration
   pull_request:
     branches:
       - "**"
