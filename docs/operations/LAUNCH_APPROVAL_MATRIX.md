@@ -73,7 +73,7 @@ Execute strictly in order on launch day. Do not parallelize. Each line is a Shel
 | # | Step | Command / panel action | Verify |
 |---|---|---|---|
 | 1 | Announce window open | (post in launch channel) | acknowledged |
-| 2 | Freeze main | (post in #engineering: "no merges until further notice") | acknowledged |
+| 2 | Freeze integration | (post in #engineering: "no merges to integration until further notice") | acknowledged |
 | 3 | Run final §1 matrix | each row, top-to-bottom | 25/25 GO |
 | 4 | Both signers sign §2 | (post sign-offs in launch channel) | both names captured |
 | 5 | Tag release | `git tag -a v1.0.0 -m "MMHB public launch"` then `git push origin v1.0.0` (Shell tab) | tag visible on origin |

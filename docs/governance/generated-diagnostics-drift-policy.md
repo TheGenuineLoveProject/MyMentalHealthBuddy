@@ -22,7 +22,7 @@ Generated diagnostic files should not create platform drift.
 Before continuing to a new engineering phase:
 
 - `git status` must be clean or only show intentional Phase-current files.
-- `git rev-list --left-right --count origin/main...HEAD` must be `0   0`.
+- `git rev-list --left-right --count origin/integration...HEAD` must be `0   0`.
 - Any remaining drift must be classified before action.
 
 ## Reason

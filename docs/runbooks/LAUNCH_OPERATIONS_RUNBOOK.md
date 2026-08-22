@@ -78,7 +78,7 @@ Use the Replit secrets panel. If any is missing, request from the user via the e
 
 Execute strictly in order. Do not parallelize.
 
-1. **Freeze main.** Announce in chat: "MMHB launch window open — no merges to main until further notice."
+1. **Freeze integration.** Announce in chat: "MMHB launch window open — no merges to integration until further notice."
 2. **Tag release.** From Shell tab: `git tag -a v1.0.0 -m "MMHB public launch"` then `git push origin v1.0.0`.
 3. **Deploy.** Use the Publishing flow (`suggest_deploy`) — Replit handles build, hosting, TLS, health checks. Do not invoke a separate Dockerfile or external CI.
 4. **Smoke test (post-deploy, against the published `.replit.app` or apex domain):**
