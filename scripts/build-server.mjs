@@ -35,7 +35,7 @@ await build({
   bundle: true,
   platform: "node",
   format: "esm",
-  target: "node20",
+  target: "node24",
   outfile: path.join(ROOT, "dist", "server.mjs"),
   external: EXTERNAL,
   banner: {

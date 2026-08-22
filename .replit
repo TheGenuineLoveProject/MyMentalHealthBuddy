@@ -1,5 +1,5 @@
 run = "node dist/server.mjs"
-modules = ["nodejs-20", "python-3.11", "postgresql-16"]
+modules = ["nodejs-24", "python-3.11", "postgresql-16"]
 
 [nix]
 channel = "stable-24_05"
