@@ -1,15 +1,19 @@
 import assert from "node:assert/strict";
 import {
   mkdtempSync,
+  readdirSync,
+  readFileSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import {
   getPostgresConnectionString,
   getPostgresSslConfig,
+  isPostgresSslDisabled,
 } from "../../server/db/sslConfig.mjs";
 
 const original =
@@ -49,6 +53,43 @@ assert.equal(
   normalizedUrl.searchParams.get("application_name"),
   "mmhb",
   "unrelated query parameters must be preserved"
+);
+
+assert.equal(
+  isPostgresSslDisabled({ DATABASE_SSL: " False " }),
+  true,
+  "DATABASE_SSL parsing must trim whitespace and ignore case"
+);
+
+const serverRoot = fileURLToPath(new URL("../../server/", import.meta.url));
+
+function rawConsumers(dir) {
+  const found = [];
+
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      found.push(...rawConsumers(full));
+      continue;
+    }
+
+    if (!/\.(mjs|js|ts|tsx)$/.test(entry.name)) continue;
+
+    const source = readFileSync(full, "utf8");
+
+    if (/\b(?:connectionString|conString)\s*:\s*process\.env\.DATABASE_URL\b/.test(source)) {
+      found.push(full.slice(serverRoot.length));
+    }
+  }
+
+  return found.sort();
+}
+
+assert.deepEqual(
+  rawConsumers(serverRoot),
+  [],
+  "all PostgreSQL consumers must use canonical TLS policy"
 );
 
 assert.deepEqual(

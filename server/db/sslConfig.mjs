@@ -53,9 +53,12 @@ function resolveCertificateAuthority(env) {
   return readFileSync(env.PGSSLROOTCERT, "utf8");
 }
 
+export function isPostgresSslDisabled(env = process.env) {
+  return String(env.DATABASE_SSL || "").trim().toLowerCase() === "false";
+}
+
 export function getPostgresSslConfig(env = process.env) {
-  const sslDisabled =
-    String(env.DATABASE_SSL || "").trim().toLowerCase() === "false";
+  const sslDisabled = isPostgresSslDisabled(env);
 
   if (sslDisabled) {
     if (env.NODE_ENV === "production") {

@@ -12,6 +12,10 @@ import connectPg from "connect-pg-simple";
 import { authStorage } from "./storage.mjs";
 import { sendWelcomeEmail } from "../../services/email.mjs";
 import { logger } from "../../utils/logger.mjs";
+import {
+  getPostgresConnectionString,
+  getPostgresSslConfig,
+} from "../../db/sslConfig.mjs";
 
 const getOidcConfig = memoize(
   async () => {
@@ -27,7 +31,10 @@ export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
   const pgStore = connectPg(session);
   const sessionStore = new pgStore({
-    conString: process.env.DATABASE_URL,
+    conObject: {
+      connectionString: getPostgresConnectionString(process.env.DATABASE_URL),
+      ssl: getPostgresSslConfig(),
+    },
     createTableIfMissing: false,
     ttl: sessionTtl,
     tableName: "sessions",
