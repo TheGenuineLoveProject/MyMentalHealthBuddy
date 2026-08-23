@@ -1,5 +1,5 @@
 import pg from "pg";
-import { getPostgresSslConfig } from "./sslConfig.mjs";
+import { getPostgresConnectionString, getPostgresSslConfig } from "./sslConfig.mjs";
 import connectPgSimple from "connect-pg-simple";
 import session from "express-session";
 
@@ -9,7 +9,7 @@ export function createSessionMiddleware() {
   const PgSession = connectPgSimple(session);
 
   const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: getPostgresConnectionString(process.env.DATABASE_URL),
     ssl: process.env.NODE_ENV === "production" ? getPostgresSslConfig() : false
   });
 

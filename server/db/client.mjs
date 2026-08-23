@@ -1,7 +1,7 @@
 // server/db/client.mjs
 import 'dotenv/config';
 import pg from "pg";
-import { getPostgresSslConfig } from "./sslConfig.mjs";
+import { getPostgresConnectionString, getPostgresSslConfig } from "./sslConfig.mjs";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { logger } from "../utils/logger.mjs";
 import * as schema from "../../shared/schema.mjs";
@@ -14,7 +14,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 export const pool = new Pool({ 
-  connectionString: process.env.DATABASE_URL, 
+  connectionString: getPostgresConnectionString(process.env.DATABASE_URL),
   ssl: getPostgresSslConfig(),
   max: 5,
   idleTimeoutMillis: 30000,

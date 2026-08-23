@@ -2,7 +2,11 @@
 // Single Drizzle client for the whole app
 
 import pg from "pg";
-import { getPostgresSslConfig } from "./sslConfig.mjs";
+import {
+  getPostgresConnectionString,
+  getPostgresSslConfig,
+  isPostgresSslDisabled,
+} from "./sslConfig.mjs";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "../../shared/schema.mjs";
 import { logger } from "../utils/logger.mjs";
@@ -19,14 +23,14 @@ if (!process.env.DATABASE_URL) {
 // "host=... db=... ssl=..." and never the password or full URL.
 try {
   const u = new URL(process.env.DATABASE_URL);
-  const ssl = process.env.DATABASE_SSL === "false" ? "off" : "on";
+  const ssl = isPostgresSslDisabled() ? "off" : "on";
   logger.info(`[db] connecting host=${u.hostname} db=${u.pathname.slice(1)} ssl=${ssl}`);
 } catch {
   logger.warn("[db] DATABASE_URL is set but not a parseable URL");
 }
 
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: getPostgresConnectionString(process.env.DATABASE_URL),
   ssl: getPostgresSslConfig(),
   // Hard timeouts so a hung Neon endpoint can never block boot. Without
   // these, ensureSchema() can wait forever on the first execute() call

@@ -13,6 +13,12 @@ This file documents the production secrets required before final deployment.
 - APP_BASE_URL
 - NODE_ENV=production
 
+### Database TLS Policy
+- `DATABASE_SSL` — optional; omit for the secure default. Must never be `false` in production.
+- `DATABASE_SSL_CA_PEM` — optional CA certificate PEM contents for explicit private/custom trust.
+- `PGSSLROOTCERT` — optional PostgreSQL/libpq-compatible root CA certificate file path; legacy direct PEM content remains accepted for backward compatibility. Prefer `DATABASE_SSL_CA_PEM` for PEM contents.
+- SSL query parameters in `DATABASE_URL` are normalized out so application TLS policy remains authoritative.
+
 ### Stripe
 - STRIPE_SECRET_KEY
 - STRIPE_WEBHOOK_SECRET
