@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { Heart, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
+import { OfficialLumi } from "@/lumi-registry";
 
 const STORAGE_KEY = "mmhb-welcome-flow-v1";
 const SCREENS = ["welcome", "goal", "relief", "personalize", "progress", "return"];
@@ -118,13 +119,17 @@ function LumiOrb({ size = 160, glow = "#A8C9A0" }) {
       }}
       aria-hidden="true"
     >
-      <img
-        src="/lumi/official/lumi-meditation.png"
-        alt=""
-        className="absolute inset-0 m-auto onboarding-lumi-breathe"
-        style={{ width: "75%", height: "75%", objectFit: "contain" }}
-        onError={(e) => { e.currentTarget.style.display = "none"; }}
-      />
+      <div className="absolute inset-0 flex items-center justify-center onboarding-lumi-breathe">
+        <OfficialLumi
+          variant="LUMI_PATH"
+          scene="onboarding-welcome"
+          position="hero"
+          widthPx={Math.round(size * 0.75)}
+          decorative
+          motion="none"
+          data-testid="onboarding-lumi"
+        />
+      </div>
     </div>
   );
 }

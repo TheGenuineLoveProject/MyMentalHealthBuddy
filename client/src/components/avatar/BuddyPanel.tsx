@@ -4,7 +4,7 @@
  * Reusable, cross-platform Buddy companion wrapper.
  *
  * Visual / presentational only:
- *   - imports BuddyAvatar
+ *   - renders through the canonical OfficialLumi registry
  *   - NO fetch
  *   - NO AI calls
  *   - NO business logic
@@ -22,7 +22,7 @@
  */
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import BuddyAvatar from "./BuddyAvatar";
+import { OfficialLumi, type LumiVariantId } from "@/lumi-registry";
 import type { BuddyState } from "@/lib/avatarState";
 import { emitBuddyEvent } from "@/lib/buddyTelemetry";
 import { BUDDY_PANEL_COPY } from "@/content/microcopy/wellnessMicrocopy";
@@ -63,6 +63,38 @@ function getReflectionForSurface(
 }
 
 const REFLECTION_ROTATE_MS = 5500;
+
+function resolveBuddyPanelVariant(
+  surface: string,
+  state: BuddyState,
+): LumiVariantId {
+  const normalizedSurface = surface.toLowerCase();
+
+  if (normalizedSurface.includes("journal")) return "LUMI_COMPANION";
+  if (normalizedSurface.includes("state")) return "LUMI_EMOTION_ORB";
+  if (
+    normalizedSurface.includes("onboarding") ||
+    normalizedSurface.includes("goal")
+  ) return "LUMI_PATH";
+  if (normalizedSurface.includes("start")) return "LUMI_SOFT_PRESENCE";
+
+  switch (state) {
+    case "encouraged":
+    case "celebrate":
+      return "LUMI_HEART";
+    case "sleep":
+      return "LUMI_CALM_FLOAT";
+    case "anxious":
+      return "LUMI_SOFT_PRESENCE";
+    case "sad":
+      return "LUMI_COMPANION";
+    case "crisis":
+      return "LUMI_COMPANION";
+    case "calm":
+    default:
+      return "LUMI_CALM_FLOAT";
+  }
+}
 
 export interface BuddyPanelProps {
   /** Buddy emotional state (drives avatar visuals via the v1.9 contract). */
@@ -187,10 +219,13 @@ export default function BuddyPanel({
       data-dysregulated={dysregulated ? "true" : "false"}
       {...governanceAttrs}
     >
-      <BuddyAvatar
-        state={state}
-        size={size}
-        overlay
+      <OfficialLumi
+        variant={resolveBuddyPanelVariant(surface, state)}
+        scene={`buddy-panel-${surface}`}
+        position="hero"
+        widthPx={size}
+        decorative={false}
+        motion={dysregulated ? "none" : "soft"}
         data-testid={`${testId}-avatar`}
       />
 

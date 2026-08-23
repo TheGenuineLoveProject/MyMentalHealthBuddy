@@ -1,4 +1,4 @@
-import BuddyAvatar from "../avatar/BuddyAvatar";
+import { OfficialLumi } from "@/lumi-registry";
 import BuddyBubble from "./BuddyBubble";
 import "./zen-scape.css";
 
@@ -9,7 +9,7 @@ import "./zen-scape.css";
  *   - a soft cool→warm radial gradient wash (palette-aware)
  *   - 3 concentric breathing rings (slow, off-phase, prefers-reduced-motion gated)
  *   - 6 floating zen "petals" drifting upward (theme-aware)
- *   - an optional BuddyAvatar hero (state="calm", default size 140) + bubble
+ *   - an optional OfficialLumi hero (state="calm", default size 140) + bubble
  *   - an optional accessory glyph that floats above Buddy
  *
  * Palette + theme + accessory are visual-only labels (validated server-side
@@ -30,6 +30,25 @@ const ACCESSORY_GLYPH = {
   sun: "☀",
   feather: "⌇",
 };
+
+function zenVariantForState(state) {
+  switch (state) {
+    case "encouraged":
+    case "celebrate":
+      return "LUMI_HEART";
+    case "sad":
+      return "LUMI_COMPANION";
+    case "anxious":
+      return "LUMI_MEDITATION";
+    case "sleep":
+      return "LUMI_CALM_FLOAT";
+    case "crisis":
+      return "LUMI_SOFT_PRESENCE";
+    case "calm":
+    default:
+      return "LUMI_CALM_FLOAT";
+  }
+}
 
 export default function ZenScape({
   children,
@@ -111,10 +130,13 @@ export default function ZenScape({
                   {accessoryGlyph}
                 </span>
               ) : null}
-              <BuddyAvatar
-                state={buddyState}
-                size={buddySize}
-                overlay
+              <OfficialLumi
+                variant={zenVariantForState(buddyState)}
+                scene="zenscape-companion"
+                position="hero"
+                widthPx={buddySize}
+                decorative={false}
+                motion={buddyState === "crisis" ? "none" : "soft"}
                 data-testid="zenscape-buddy"
               />
             </div>
