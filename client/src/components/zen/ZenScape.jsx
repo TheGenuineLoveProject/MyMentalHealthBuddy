@@ -1,4 +1,4 @@
-import BuddyAvatar from "../avatar/BuddyAvatar";
+import { OfficialLumi } from "@/lumi-registry";
 import BuddyBubble from "./BuddyBubble";
 import "./zen-scape.css";
 
@@ -111,10 +111,21 @@ export default function ZenScape({
                   {accessoryGlyph}
                 </span>
               ) : null}
-              <BuddyAvatar
-                state={buddyState}
-                size={buddySize}
-                overlay
+              <OfficialLumi
+                variant={
+                  buddyState === "encouraged" || buddyState === "celebrate"
+                    ? "LUMI_HEART"
+                    : buddyState === "sad"
+                      ? "LUMI_COMPANION"
+                      : buddyState === "sleep"
+                        ? "LUMI_CALM_FLOAT"
+                        : "LUMI_MEDITATION"
+                }
+                scene="zenscape-companion"
+                position="hero"
+                widthPx={buddySize}
+                decorative={false}
+                motion={buddyState === "crisis" ? "none" : "soft"}
                 data-testid="zenscape-buddy"
               />
             </div>

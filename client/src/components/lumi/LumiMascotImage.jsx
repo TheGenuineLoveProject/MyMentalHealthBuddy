@@ -1,26 +1,16 @@
 /*
- * LumiMascotImage — Full-color PNG of Lumi (the real illustrated mascot).
+ * LumiMascotImage — compatibility wrapper for static Lumi placements.
  *
- * This is the *static art* counterpart to LumiMascot.jsx. Use this when you
- * want the rich, painted look of the full-body Lumi (e.g. hero headers,
- * marketing sections, /landing-v2 splash, social cards). For interactive
- * cases that need cursor-tracking eyes, blinking, or per-emotion morphs,
- * keep using <LumiMascot/> instead.
- *
- * Animations:
- *   - .lumi-anim-float   slow vertical drift
- *   - .lumi-anim-breathe gentle scale pulse
- * Both honor prefers-reduced-motion (defined in lumi-motion.css).
+ * Production artwork is rendered exclusively through the canonical
+ * OfficialLumi registry. The legacy component API remains intact so
+ * authentication and other existing callers do not need simultaneous
+ * layout refactors.
  */
-// v4 canonical PNG served from /public — see BuddyAvatar.tsx for the
-// full color-mode/style/pose registry. This component preserves its
-// own static-image contract (size/animation/aria/onClick passthrough);
-// the swap is import-source only.
-const lumiFullBodyPng = "/lumi/official/lumi-float-idle.png";
+import { OfficialLumi } from "@/lumi-registry";
 
 export default function LumiMascotImage({
   size = 280,
-  animation = "float",            // "float" | "breathe" | "none"
+  animation = "float",
   ariaLabel = "Lumi, your gentle companion",
   decorative = false,
   className = "",
@@ -28,32 +18,41 @@ export default function LumiMascotImage({
   onClick,
 }) {
   const animClass =
-    animation === "float"   ? "lumi-anim-float"   :
+    animation === "float" ? "lumi-anim-float" :
     animation === "breathe" ? "lumi-anim-breathe" :
     "";
+
   const clickable = typeof onClick === "function";
 
   return (
-    <img
-      src={lumiFullBodyPng}
-      width={size}
-      height={size}
-      alt={decorative ? "" : ariaLabel}
-      role={decorative ? "presentation" : "img"}
+    <div
+      role={decorative ? undefined : "img"}
+      aria-label={decorative ? undefined : ariaLabel}
       aria-hidden={decorative || undefined}
       onClick={onClick}
       className={`lumi-mascot-image ${animClass} ${className}`.trim()}
       data-testid="lumi-mascot-image"
       style={{
-        display: "block",
+        width: size,
+        height: size,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         userSelect: "none",
         cursor: clickable ? "pointer" : "default",
-        // PNG itself has no background; let it sit on whatever surface it's on.
         background: "transparent",
-        objectFit: "contain",
         ...style,
       }}
-      draggable={false}
-    />
+    >
+      <OfficialLumi
+        variant="LUMI_CALM_FLOAT"
+        scene="compat-mascot-image"
+        position="hero"
+        widthPx={size}
+        decorative
+        motion="none"
+        data-testid="lumi-mascot-image-asset"
+      />
+    </div>
   );
 }

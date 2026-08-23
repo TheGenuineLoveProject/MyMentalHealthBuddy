@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import BuddyAvatar from "@/components/avatar/BuddyAvatar";
+import { OfficialLumi } from "@/lumi-registry";
 
 /**
  * InteractiveBuddy — gentle wrapper that lets the user tap Buddy to cycle
@@ -16,6 +16,25 @@ import BuddyAvatar from "@/components/avatar/BuddyAvatar";
  * existing global styles; we don't add new animations here.
  */
 const CYCLE = ["calm", "encouraging", "curious", "celebratory", "nudging"];
+
+function interactiveVariantForState(state) {
+  switch (state) {
+    case "encouraged":
+    case "celebrate":
+      return "LUMI_HEART";
+    case "sad":
+      return "LUMI_COMPANION";
+    case "anxious":
+      return "LUMI_SOFT_PRESENCE";
+    case "sleep":
+      return "LUMI_CALM_FLOAT";
+    case "crisis":
+      return "LUMI_COMPANION";
+    case "calm":
+    default:
+      return "LUMI_CALM_FLOAT";
+  }
+}
 
 export default function InteractiveBuddy({
   initialState = "calm",
@@ -73,11 +92,14 @@ export default function InteractiveBuddy({
           outline: "none",
         }}
       >
-        <BuddyAvatar
-          state={state}
-          size={size}
-          overlay
-          ariaLabel={`Buddy is feeling ${state}.`}
+        <OfficialLumi
+          variant={interactiveVariantForState(state)}
+          scene="peacescape-interactive-companion"
+          position="hero"
+          widthPx={size}
+          decorative
+          motion={isLocked ? "none" : "reduced"}
+          data-testid={`${testId}-avatar`}
         />
       </button>
       <div

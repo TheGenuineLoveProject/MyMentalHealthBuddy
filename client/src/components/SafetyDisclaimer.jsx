@@ -40,10 +40,13 @@ export function SafetyDisclaimer({
           borderRadius: '50%',
         }}
       >
-        <MMHBFloatAvatar
-          imageSrc={getOfficialAsset("LUMI_SUPPORTIVE_HEART").src}
-          size={32}
-          alt="Lumi offering gentle support"
+        <OfficialLumi
+          variant="LUMI_COMPANION"
+          scene="safety-disclaimer-support"
+          position="inline"
+          widthPx={32}
+          decorative
+          motion="reduced"
           data-testid="img-disclaimer-lumi"
         />
       </div>
