@@ -236,8 +236,8 @@ export default function CanvaLanding() {
           <div className="cl-lumi-carousel">
             <LumiCarousel size={180} intervalMs={4200} />
           </div>
-          <Link to="/meet-lumi" className="cl-lumi-link" data-testid="link-meet-lumi">
-            Meet all 7 Lumi →
+          <Link to="/lumi" className="cl-lumi-link" data-testid="link-meet-lumi">
+            Meet Lumi →
           </Link>
         </section>
 

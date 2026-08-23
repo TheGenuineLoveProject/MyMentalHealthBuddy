@@ -442,8 +442,8 @@ export default function App() {
               <Route path="/features" component={FeaturesPage} />
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />
-              <Route path="/meet-lumi" component={MeetLumi} />
-              <Route path="/lumi">{() => <Redirect to="/meet-lumi" />}</Route>
+              <Route path="/lumi" component={MeetLumi} />
+              <Route path="/meet-lumi">{() => <Redirect to="/lumi" />}</Route>
               <Route path="/start" component={Start} />
               <Route path="/pricing" component={PricingReal} />
               <Route path="/coming-soon">{() => <ComingSoon />}</Route>
