@@ -24,12 +24,22 @@ export default function LumiMascotImage({
 
   const clickable = typeof onClick === "function";
 
+  function handleKeyDown(event) {
+    if (!clickable) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onClick(event);
+    }
+  }
+
   return (
     <div
-      role={decorative ? undefined : "img"}
-      aria-label={decorative ? undefined : ariaLabel}
-      aria-hidden={decorative || undefined}
+      role={clickable ? "button" : decorative ? undefined : "img"}
+      tabIndex={clickable ? 0 : undefined}
+      aria-label={clickable || !decorative ? ariaLabel : undefined}
+      aria-hidden={!clickable && decorative ? true : undefined}
       onClick={onClick}
+      onKeyDown={clickable ? handleKeyDown : undefined}
       className={`lumi-mascot-image ${animClass} ${className}`.trim()}
       data-testid="lumi-mascot-image"
       style={{

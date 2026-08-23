@@ -4,7 +4,7 @@
  * Reusable, cross-platform Buddy companion wrapper.
  *
  * Visual / presentational only:
- *   - imports BuddyAvatar
+ *   - renders through the canonical OfficialLumi registry
  *   - NO fetch
  *   - NO AI calls
  *   - NO business logic

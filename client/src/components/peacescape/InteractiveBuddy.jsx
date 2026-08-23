@@ -9,8 +9,8 @@ import { OfficialLumi } from "@/lumi-registry";
  * SAFETY CONTRACT (preserves Buddy v2.11 crisis-color stability):
  *   - When the parent passes state="crisis", clicks become NO-OPs.
  *   - The cycle list NEVER includes "crisis" or any safety-mode state.
- *   - The wrapper does not modify BuddyAvatar source — it only swaps the
- *     `state` prop, which is the documented public surface.
+ *   - The wrapper resolves the current state to a canonical OfficialLumi
+ *     variant without changing the upstream crisis/safety state.
  *
  * Reduced motion: button transition is gated by prefers-reduced-motion via
  * existing global styles; we don't add new animations here.
@@ -19,17 +19,27 @@ const CYCLE = ["calm", "encouraging", "curious", "celebratory", "nudging"];
 
 function interactiveVariantForState(state) {
   switch (state) {
+    // InteractiveBuddy local positive-expression vocabulary.
+    case "encouraging":
     case "encouraged":
-    case "celebrate":
       return "LUMI_HEART";
+    case "curious":
+      return "LUMI_EMOTION_ORB";
+    case "celebratory":
+    case "celebrate":
+      return "LUMI_SOFT_PRESENCE";
+    case "nudging":
+      return "LUMI_PATH";
+
+    // Canonical BuddyState compatibility for initialState callers.
     case "sad":
       return "LUMI_COMPANION";
     case "anxious":
-      return "LUMI_SOFT_PRESENCE";
+      return "LUMI_MEDITATION";
     case "sleep":
       return "LUMI_CALM_FLOAT";
     case "crisis":
-      return "LUMI_COMPANION";
+      return "LUMI_SOFT_PRESENCE";
     case "calm":
     default:
       return "LUMI_CALM_FLOAT";
