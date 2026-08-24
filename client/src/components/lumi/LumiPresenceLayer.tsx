@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "wouter";
 import { OfficialLumi, canRenderLumi } from "@/lumi-registry";
 import "./LumiPresenceLayer.css";
 
@@ -58,8 +59,10 @@ function captionFromPath(pathname: string): string {
 }
 
 export default function LumiPresenceLayer() {
-  const pathname =
-    typeof window !== "undefined" ? window.location.pathname : "/";
+  // Wouter location is reactive to client-side SPA navigation.
+  // This keeps the crisis fail-closed decision synchronized with the
+  // current route rather than sampling window.location only at render time.
+  const [pathname] = useLocation();
 
   /*
    * Constitutional safety boundary:
