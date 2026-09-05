@@ -7,28 +7,91 @@ const TOKEN_KEY = "mmhb_token";
 const USER_KEY = "mmhb_user";
 const TOKEN_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
 
-async function fetchReplitUser() {
-  const headers = {};
-  const storedToken = safeGetItem(TOKEN_KEY);
-  if (storedToken) {
-    headers["Authorization"] = `Bearer ${storedToken}`;
+async function recoverLocalSession() {
+  const response = await fetch("/api/auth/refresh", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (response.status === 401) return null;
+
+  if (!response.ok) {
+    throw new Error(`${response.status}: ${response.statusText}`);
   }
+
+  const data = await response.json();
+  if (!data?.token || !data?.user?.id) {
+    throw new Error("Invalid session recovery response");
+  }
+
+  safeSetItem(TOKEN_KEY, data.token);
+  safeSetItem(USER_KEY, JSON.stringify(data.user));
+  return data.user;
+}
+
+async function fetchReplitUser() {
+  const storedToken = safeGetItem(TOKEN_KEY);
+
+  if (storedToken) {
+    if (isTokenExpired(storedToken)) {
+      const recoveredUser = await recoverLocalSession();
+
+      if (!recoveredUser) {
+        safeRemoveItem(TOKEN_KEY);
+        safeRemoveItem(USER_KEY);
+      }
+
+      return recoveredUser;
+    }
+
+    const response = await fetch("/api/auth/me", {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${storedToken}`,
+      },
+    });
+
+    if (response.status === 401) {
+      const recoveredUser = await recoverLocalSession();
+
+      if (!recoveredUser) {
+        safeRemoveItem(TOKEN_KEY);
+        safeRemoveItem(USER_KEY);
+      }
+
+      return recoveredUser;
+    }
+
+    if (response.status === 404) {
+      safeRemoveItem(TOKEN_KEY);
+      safeRemoveItem(USER_KEY);
+      return null;
+    }
+
+    if (!response.ok) {
+      throw new Error(`${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const currentUser = data?.user ?? null;
+
+    if (!currentUser) {
+      safeRemoveItem(TOKEN_KEY);
+      safeRemoveItem(USER_KEY);
+    }
+
+    return currentUser;
+  }
+
   const response = await fetch("/api/auth/user", {
     credentials: "include",
-    headers,
   });
-  if (response.status === 401) {
-    safeRemoveItem(TOKEN_KEY);
-    safeRemoveItem(USER_KEY);
-    return null;
-  }
+
   if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
-  const data = await response.json();
-  if (!data) {
-    safeRemoveItem(TOKEN_KEY);
-    safeRemoveItem(USER_KEY);
-  }
-  return data;
+  return response.json();
 }
 
 function parseJwt(token) {
@@ -94,8 +157,10 @@ export function AuthProvider({ children }) {
     if (typeof window !== "undefined") {
       const stored = safeGetItem(TOKEN_KEY);
       if (stored && isTokenExpired(stored)) {
-        safeRemoveItem(TOKEN_KEY);
-        safeRemoveItem(USER_KEY);
+        /*
+         * Preserve the expired access token long enough for the bootstrap
+         * query to attempt recovery using the HttpOnly refresh cookie.
+         */
         return null;
       }
       return stored || null;
@@ -117,19 +182,115 @@ export function AuthProvider({ children }) {
 
   const [isLoading, setIsLoading] = useState(true);
   const refreshTimerRef = useRef(null);
-  
+
+  /*
+   * Bootstrap recovery runs inside the query function, outside React state.
+   * Adopt its newly persisted token and user after the query completes.
+   */
+  useEffect(() => {
+    const recoveredToken = safeGetItem(TOKEN_KEY);
+
+    if (
+      !replitUser ||
+      !recoveredToken ||
+      recoveredToken === token ||
+      isTokenExpired(recoveredToken)
+    ) {
+      return;
+    }
+
+    setToken(recoveredToken);
+    setLocalUser(replitUser);
+  }, [replitUser, token]);
+
+  /*
+   * localStorage is the canonical persistence layer for the local access
+   * token. Synchronize rotations and logout into all other browser tabs.
+   * The originating document updates its own React state directly; storage
+   * events are delivered to the other same-origin documents.
+   */
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const handleAuthStorage = (event) => {
+      if (event.key === TOKEN_KEY) {
+        const nextToken = event.newValue;
+
+        if (nextToken && !isTokenExpired(nextToken)) {
+          setToken(nextToken);
+        } else {
+          /*
+           * Token deletion is the canonical cross-tab logout signal.
+           * Clear every client-side owner that could otherwise keep the
+           * derived authentication state truthy.
+           */
+          setToken(null);
+          setLocalUser(null);
+          queryClient.setQueryData(["/api/auth/user"], null);
+        }
+      }
+
+      if (event.key === USER_KEY) {
+        if (!event.newValue) {
+          setLocalUser(null);
+          queryClient.setQueryData(["/api/auth/user"], null);
+          return;
+        }
+
+        try {
+          setLocalUser(JSON.parse(event.newValue));
+        } catch {
+          setLocalUser(null);
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleAuthStorage);
+
+    return () => {
+      window.removeEventListener("storage", handleAuthStorage);
+    };
+  }, [queryClient]);
+
   const user = replitUser || localUser;
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    const currentToken = safeGetItem(TOKEN_KEY);
+
     setToken(null);
     setLocalUser(null);
     safeRemoveItem(TOKEN_KEY);
     safeRemoveItem(USER_KEY);
     queryClient.setQueryData(["/api/auth/user"], null);
+
     if (refreshTimerRef.current) {
       clearInterval(refreshTimerRef.current);
       refreshTimerRef.current = null;
     }
+
+    /*
+     * Local JWT/password sessions own an HttpOnly refresh-token cookie.
+     * Ask the server to revoke that credential set. Browser state has already
+     * been cleared so logout remains locally effective if networking fails.
+     */
+    if (currentToken) {
+      try {
+        await fetch("/api/auth/logout", {
+          method: "POST",
+          credentials: "include",
+          keepalive: true,
+        });
+      } catch {
+        // Browser-local logout remains complete; server credentials expire
+        // naturally if the revocation request cannot be delivered.
+      }
+      return;
+    }
+
+    /*
+     * Preserve the existing federated-session bridge when there is no local
+     * JWT. Canonical OIDC ownership will be qualified in its own bounded gate.
+     */
     if (replitUser) {
       window.location.href = "/api/logout";
     }
@@ -142,6 +303,7 @@ export function AuthProvider({ children }) {
     try {
       const response = await fetch("/api/auth/refresh", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${currentToken}`,
@@ -158,8 +320,15 @@ export function AuthProvider({ children }) {
             safeSetItem(USER_KEY, JSON.stringify(data.user));
           }
         }
+      } else if (response.status === 409) {
+        /*
+         * Another tab/request won the atomic refresh rotation. Do not destroy
+         * this tab's session. The winning tab publishes its replacement JWT
+         * through localStorage, and this tab adopts it via the storage event.
+         */
+        return;
       } else if (response.status === 401) {
-        logout();
+        await logout();
       }
     } catch {
       // Network error - don't logout, just skip refresh

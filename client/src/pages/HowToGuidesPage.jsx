@@ -195,25 +195,6 @@ const toolGuides = [
 
 function GuideCard({ guide, isExpanded, onToggle }) {
   return (
-  <WellnessPageShell
-    title="HowToGuidesPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="How To Guides — The Genuine Love Project" description="Step-by-step guides for wellness practices." />
 
 
     <div className={`card-bordered ${guide.bgColor} overflow-hidden`}>
@@ -315,6 +296,25 @@ export default function HowToGuidesPage() {
   const [expandedGuide, setExpandedGuide] = useState(null);
 
   return (
+    <WellnessPageShell
+      title="HowToGuidesPage"
+      subtitle="Educational reflection tools. Choose what feels safe and supportive."
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
+      clarity={{
+        what: "A self-paced reflection tool you control.",
+        why: "To support clarity, values alignment, and gentle next steps.",
+        who: "For adults (18+) who want educational wellness tools (not medical care).",
+        when: "Anytime you want a small reset or a thoughtful pause.",
+        where: "Anywhere you can breathe and write for 1–5 minutes.",
+        how: "Pick one prompt, answer briefly, stop whenever you want."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+        { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+        { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+      ]}
+    >
+      <SEO title="How To Guides — The Genuine Love Project" description="Step-by-step guides for wellness practices." />
     <div className="min-h-screen v28-paper-bg">
       <div className="content-wrapper py-8">
         <div className="max-w-4xl mx-auto">

@@ -280,25 +280,6 @@ function MeditationPlayer({ meditation }) {
   };
 
   return (
-  <WellnessPageShell
-    title="MeditationGuidePage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="Meditation Guide — The Genuine Love Project" description="Guided meditations for calm and clarity." />
 
 
     <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)' }}>
@@ -417,6 +398,25 @@ export default function MeditationGuidePage() {
     : meditations.filter(m => m.category === selectedCategory);
 
   return (
+    <WellnessPageShell
+      title="MeditationGuidePage"
+      subtitle="Educational reflection tools. Choose what feels safe and supportive."
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
+      clarity={{
+        what: "A self-paced reflection tool you control.",
+        why: "To support clarity, values alignment, and gentle next steps.",
+        who: "For adults (18+) who want educational wellness tools (not medical care).",
+        when: "Anytime you want a small reset or a thoughtful pause.",
+        where: "Anywhere you can breathe and write for 1–5 minutes.",
+        how: "Pick one prompt, answer briefly, stop whenever you want."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+        { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+        { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+      ]}
+    >
+      <SEO title="Meditation Guide — The Genuine Love Project" description="Guided meditations for calm and clarity." />
     <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-paper), var(--glp-sage-10))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
         <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage)' }} data-testid="link-back-home">

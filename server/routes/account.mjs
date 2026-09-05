@@ -3,7 +3,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import crypto, { randomUUID } from "crypto";
-import { eq, and, gt } from "drizzle-orm";
+import { eq, and, gt, isNull } from "drizzle-orm";
 import { db } from "../db/connection.mjs";
 import { users, passwordResetTokens, journals, moods, aiMessages, userPreferences } from "../db/schema.mjs";
 import { success, badRequest } from "../utils/response.mjs";
@@ -13,6 +13,22 @@ import { logAuditEvent, AuditActions } from "../utils/auditLogger.mjs";
 import { logger } from "../utils/logger.mjs";
 import { sendTransactionalEmail } from "../utils/email.mjs";
 import { z } from "zod";
+import {
+  createMfaEnrollment,
+  encryptMfaSecret,
+  decryptMfaSecret,
+  verifyTotpCode,
+} from "../auth/mfa.service.mjs";
+import {
+  generateMfaRecoverySet,
+  verifyMfaRecoveryCode,
+} from "../auth/mfaRecovery.service.mjs";
+import {
+  deleteMfaLoginChallengesForUser,
+} from "../services/mfaChallenges.service.mjs";
+import {
+  revokeAllRefreshTokens,
+} from "../services/refreshTokens.service.mjs";
 
 const router = express.Router();
 
@@ -513,159 +529,675 @@ router.post("/password", requireAuth, sensitiveRateLimit, async (req, res) => {
 });
 
 router.post("/2fa/setup", requireAuth, sensitiveRateLimit, async (req, res) => {
+  res.set("Cache-Control", "no-store");
+
   try {
-    const { authenticator } = await import("otplib");
-    const QRCode = await import("qrcode");
+    const currentPassword =
+      typeof req.body?.currentPassword === "string"
+        ? req.body.currentPassword
+        : "";
+
+    if (!currentPassword) {
+      return badRequest(
+        res,
+        "Current password is required"
+      );
+    }
 
     const userRows = await db
-      .select({ email: users.email, mfaEnabled: users.mfaEnabled })
+      .select({
+        email: users.email,
+        passwordHash: users.passwordHash,
+        mfaEnabled: users.mfaEnabled,
+      })
       .from(users)
       .where(eq(users.id, req.dbUserId))
       .limit(1);
 
-    if (userRows.length === 0) return badRequest(res, "User not found");
-    if (userRows[0].mfaEnabled) return badRequest(res, "2FA is already enabled");
+    if (userRows.length === 0) {
+      return badRequest(res, "User not found");
+    }
 
-    const secret = authenticator.generateSecret();
-    const otpauth = authenticator.keyuri(
-      userRows[0].email || req.dbUserId,
-      "Genuine Love Project",
-      secret
-    );
+    const user = userRows[0];
 
-    const qrCodeDataUrl = await QRCode.toDataURL(otpauth);
+    if (user.mfaEnabled) {
+      return badRequest(
+        res,
+        "2FA is already enabled"
+      );
+    }
 
-    const codes = Array.from({ length: 6 }, () =>
-      crypto.randomBytes(4).toString("hex").toUpperCase().match(/.{4}/g).join("-")
-    );
+    /*
+     * External-auth-only accounts currently have no purpose-bound
+     * provider reauthentication primitive. Fail closed rather than
+     * treating an existing bearer token as fresh authentication.
+     */
+    if (!user.passwordHash) {
+      return badRequest(
+        res,
+        "This account requires provider reauthentication before changing two-factor authentication."
+      );
+    }
 
-    const storedSecret = encryptMfaSecret(secret);
+    const passwordMatches =
+      await bcrypt.compare(
+        currentPassword,
+        user.passwordHash
+      );
 
-    await db
+    if (!passwordMatches) {
+      return badRequest(
+        res,
+        "Current password is incorrect"
+      );
+    }
+
+    const enrollment =
+      await createMfaEnrollment(
+        user.email || req.dbUserId
+      );
+
+    const storedSecret =
+      encryptMfaSecret(
+        enrollment.secret
+      );
+
+    /*
+     * Setup establishes only a pending authenticator secret.
+     *
+     * Recovery credentials do not exist until successful TOTP
+     * verification in /2fa/verify.
+     */
+    const prepared = await db
       .update(users)
-      .set({ mfaSecret: storedSecret, mfaBackupCodes: JSON.stringify(codes) })
-      .where(eq(users.id, req.dbUserId));
+      .set({
+        mfaEnabled: false,
+        mfaSecret: storedSecret,
+        mfaBackupCodes: null,
+        updatedAt: new Date(),
+      })
+      .where(
+        and(
+          eq(
+            users.id,
+            req.dbUserId
+          ),
+          eq(
+            users.mfaEnabled,
+            false
+          )
+        )
+      )
+      .returning({
+        id: users.id,
+      });
+
+    /*
+     * Older rows may contain NULL mfa_enabled. Preserve the same
+     * security semantics without permitting an enabled account to be
+     * downgraded by a racing setup request.
+     */
+    if (prepared.length !== 1) {
+      const legacyRows = await db
+        .select({
+          mfaEnabled:
+            users.mfaEnabled,
+        })
+        .from(users)
+        .where(
+          eq(
+            users.id,
+            req.dbUserId
+          )
+        )
+        .limit(1);
+
+      if (
+        legacyRows.length !== 1 ||
+        legacyRows[0].mfaEnabled === true
+      ) {
+        return badRequest(
+          res,
+          "Unable to start 2FA setup because the account security state changed."
+        );
+      }
+
+      const legacyMfaEnabledPredicate =
+        legacyRows[0].mfaEnabled === null
+          ? isNull(users.mfaEnabled)
+          : eq(
+              users.mfaEnabled,
+              false
+            );
+
+      const legacyPrepared = await db
+        .update(users)
+        .set({
+          mfaEnabled: false,
+          mfaSecret: storedSecret,
+          mfaBackupCodes: null,
+          updatedAt: new Date(),
+        })
+        .where(
+          and(
+            eq(
+              users.id,
+              req.dbUserId
+            ),
+            legacyMfaEnabledPredicate
+          )
+        )
+        .returning({
+          id: users.id,
+        });
+
+      if (legacyPrepared.length !== 1) {
+        return badRequest(
+          res,
+          "Unable to start 2FA setup because the account security state changed."
+        );
+      }
+    }
 
     return res.json({
-      qrCode: qrCodeDataUrl,
-      backupCodes: codes,
+      ok: true,
+      qrCode:
+        enrollment.qrCodeDataUrl,
     });
   } catch (error) {
-    logger.error("2FA setup failed", { error: error.message, requestId: req.requestId });
-    return res.status(500).json({ ok: false, message: "Server error" });
+    logger.error(
+      "2FA setup failed",
+      {
+        error: error.message,
+        requestId: req.requestId,
+      }
+    );
+
+    return res
+      .status(500)
+      .json({
+        ok: false,
+        message: "Server error",
+      });
   }
 });
 
 router.post("/2fa/verify", requireAuth, sensitiveRateLimit, async (req, res) => {
-  try {
-    const { authenticator } = await import("otplib");
-    const { code } = req.body;
+  res.set("Cache-Control", "no-store");
 
-    if (!code || typeof code !== "string" || code.length !== 6) {
-      return badRequest(res, "A 6-digit verification code is required");
+  try {
+    const currentPassword =
+      typeof req.body?.currentPassword === "string"
+        ? req.body.currentPassword
+        : "";
+
+    const code =
+      typeof req.body?.code === "string"
+        ? req.body.code.trim()
+        : "";
+
+    if (!currentPassword) {
+      return badRequest(
+        res,
+        "Current password is required"
+      );
+    }
+
+    if (!/^\d{6}$/.test(code)) {
+      return badRequest(
+        res,
+        "A 6-digit verification code is required"
+      );
     }
 
     const userRows = await db
-      .select({ mfaSecret: users.mfaSecret, mfaEnabled: users.mfaEnabled })
+      .select({
+        passwordHash:
+          users.passwordHash,
+        mfaSecret:
+          users.mfaSecret,
+        mfaEnabled:
+          users.mfaEnabled,
+      })
       .from(users)
-      .where(eq(users.id, req.dbUserId))
+      .where(
+        eq(
+          users.id,
+          req.dbUserId
+        )
+      )
       .limit(1);
 
-    if (userRows.length === 0) return badRequest(res, "User not found");
-    if (!userRows[0].mfaSecret) return badRequest(res, "2FA setup not started. Please start setup first.");
-    if (userRows[0].mfaEnabled) return badRequest(res, "2FA is already enabled");
-
-    const decryptedSecret = decryptMfaSecret(userRows[0].mfaSecret);
-    const isValid = authenticator.verify({ token: code, secret: decryptedSecret });
-    if (!isValid) {
-      return badRequest(res, "Invalid verification code. Please check your authenticator app and try again.");
+    if (userRows.length === 0) {
+      return badRequest(
+        res,
+        "User not found"
+      );
     }
 
-    await db
-      .update(users)
-      .set({ mfaEnabled: true, updatedAt: new Date() })
-      .where(eq(users.id, req.dbUserId));
+    const user = userRows[0];
+
+    if (!user.passwordHash) {
+      return badRequest(
+        res,
+        "This account requires provider reauthentication before changing two-factor authentication."
+      );
+    }
+
+    if (!user.mfaSecret) {
+      return badRequest(
+        res,
+        "2FA setup not started. Please start setup first."
+      );
+    }
+
+    if (user.mfaEnabled) {
+      return badRequest(
+        res,
+        "2FA is already enabled"
+      );
+    }
+
+    const passwordMatches =
+      await bcrypt.compare(
+        currentPassword,
+        user.passwordHash
+      );
+
+    if (!passwordMatches) {
+      return badRequest(
+        res,
+        "Current password is incorrect"
+      );
+    }
+
+    const decryptedSecret =
+      decryptMfaSecret(
+        user.mfaSecret
+      );
+
+    if (
+      !verifyTotpCode(
+        decryptedSecret,
+        code
+      )
+    ) {
+      return badRequest(
+        res,
+        "Invalid verification code. Please check your authenticator app and try again."
+      );
+    }
+
+    /*
+     * Recovery credentials are generated only after both password
+     * reauthentication and pending-secret TOTP verification succeed.
+     *
+     * A racing loser may generate an in-memory candidate set, but
+     * only the transaction winner can persist hashes or return the
+     * corresponding plaintext values.
+     */
+    const {
+      codes,
+      storage,
+    } = generateMfaRecoverySet({
+      count: 6,
+    });
+
+    const enabled =
+      await db.transaction(
+        async (tx) => {
+          const updated = await tx
+            .update(users)
+            .set({
+              mfaEnabled: true,
+              mfaBackupCodes:
+                storage,
+              updatedAt:
+                new Date(),
+            })
+            .where(
+              and(
+                eq(
+                  users.id,
+                  req.dbUserId
+                ),
+                eq(
+                  users.mfaEnabled,
+                  false
+                ),
+                eq(
+                  users.mfaSecret,
+                  user.mfaSecret
+                )
+              )
+            )
+            .returning({
+              id: users.id,
+            });
+
+          if (
+            updated.length !== 1
+          ) {
+            return false;
+          }
+
+          await deleteMfaLoginChallengesForUser({
+            userId:
+              req.dbUserId,
+            executor: tx,
+          });
+
+          await revokeAllRefreshTokens(
+            req.dbUserId,
+            tx
+          );
+
+          return true;
+        }
+      );
+
+    if (!enabled) {
+      return badRequest(
+        res,
+        "Unable to enable 2FA because the account security state changed."
+      );
+    }
 
     await logAuditEvent({
       userId: req.dbUserId,
-      action: AuditActions.MFA_ENABLE || "MFA_ENABLE",
+      action:
+        AuditActions.MFA_ENABLE ||
+        "MFA_ENABLE",
       req,
     });
 
-    return success(res, null, "Two-factor authentication enabled successfully");
+    /*
+     * Plaintext recovery credentials cross the response boundary
+     * exactly once after the security transaction has committed.
+     */
+    return res.json({
+      ok: true,
+      backupCodes: codes,
+      message:
+        "Two-factor authentication enabled successfully",
+    });
   } catch (error) {
-    logger.error("2FA verify failed", { error: error.message, requestId: req.requestId });
-    return res.status(500).json({ ok: false, message: "Server error" });
+    logger.error(
+      "2FA verify failed",
+      {
+        error: error.message,
+        requestId: req.requestId,
+      }
+    );
+
+    return res
+      .status(500)
+      .json({
+        ok: false,
+        message: "Server error",
+      });
   }
 });
 
 router.post("/2fa/disable", requireAuth, sensitiveRateLimit, async (req, res) => {
+  res.set("Cache-Control", "no-store");
+
   try {
+    const currentPassword =
+      typeof req.body?.currentPassword === "string"
+        ? req.body.currentPassword
+        : "";
+
+    const code =
+      typeof req.body?.code === "string"
+        ? req.body.code.trim()
+        : "";
+
+    const recoveryCode =
+      typeof req.body?.recoveryCode === "string"
+        ? req.body.recoveryCode.trim()
+        : "";
+
+    if (!currentPassword) {
+      return badRequest(
+        res,
+        "Current password is required"
+      );
+    }
+
+    const totpSupplied =
+      code.length > 0;
+
+    const recoverySupplied =
+      recoveryCode.length > 0;
+
+    if (
+      totpSupplied ===
+      recoverySupplied
+    ) {
+      return badRequest(
+        res,
+        "Provide exactly one MFA verification method."
+      );
+    }
+
+    if (
+      totpSupplied &&
+      !/^\d{6}$/.test(code)
+    ) {
+      return badRequest(
+        res,
+        "A 6-digit verification code is required"
+      );
+    }
+
+    if (
+      recoverySupplied &&
+      recoveryCode.length > 128
+    ) {
+      return badRequest(
+        res,
+        "Invalid MFA recovery credential"
+      );
+    }
+
     const userRows = await db
-      .select({ mfaEnabled: users.mfaEnabled })
+      .select({
+        passwordHash:
+          users.passwordHash,
+        mfaEnabled:
+          users.mfaEnabled,
+        mfaSecret:
+          users.mfaSecret,
+        mfaBackupCodes:
+          users.mfaBackupCodes,
+      })
       .from(users)
-      .where(eq(users.id, req.dbUserId))
+      .where(
+        eq(
+          users.id,
+          req.dbUserId
+        )
+      )
       .limit(1);
 
-    if (userRows.length === 0) return badRequest(res, "User not found");
-    if (!userRows[0].mfaEnabled) return badRequest(res, "2FA is not currently enabled");
+    if (userRows.length === 0) {
+      return badRequest(
+        res,
+        "User not found"
+      );
+    }
 
-    await db
-      .update(users)
-      .set({
-        mfaEnabled: false,
-        mfaSecret: null,
-        mfaBackupCodes: null,
-        updatedAt: new Date(),
-      })
-      .where(eq(users.id, req.dbUserId));
+    const user = userRows[0];
+
+    if (!user.mfaEnabled) {
+      return badRequest(
+        res,
+        "2FA is not currently enabled"
+      );
+    }
+
+    if (!user.passwordHash) {
+      return badRequest(
+        res,
+        "This account requires provider reauthentication before changing two-factor authentication."
+      );
+    }
+
+    const passwordMatches =
+      await bcrypt.compare(
+        currentPassword,
+        user.passwordHash
+      );
+
+    if (!passwordMatches) {
+      return badRequest(
+        res,
+        "Current password is incorrect"
+      );
+    }
+
+    if (totpSupplied) {
+      if (!user.mfaSecret) {
+        return badRequest(
+          res,
+          "MFA authenticator state is unavailable"
+        );
+      }
+
+      const secret =
+        decryptMfaSecret(
+          user.mfaSecret
+        );
+
+      if (
+        !verifyTotpCode(
+          secret,
+          code
+        )
+      ) {
+        return badRequest(
+          res,
+          "Invalid MFA verification credential"
+        );
+      }
+    } else {
+      if (!user.mfaBackupCodes) {
+        return badRequest(
+          res,
+          "MFA recovery credentials are unavailable"
+        );
+      }
+
+      let recoveryValid = false;
+
+      try {
+        recoveryValid =
+          verifyMfaRecoveryCode({
+            stored:
+              user.mfaBackupCodes,
+            code:
+              recoveryCode,
+          });
+      } catch {
+        recoveryValid = false;
+      }
+
+      if (!recoveryValid) {
+        return badRequest(
+          res,
+          "Invalid MFA verification credential"
+        );
+      }
+    }
+
+    const disabled =
+      await db.transaction(
+        async (tx) => {
+          const updated = await tx
+            .update(users)
+            .set({
+              mfaEnabled: false,
+              mfaSecret: null,
+              mfaBackupCodes:
+                null,
+              updatedAt:
+                new Date(),
+            })
+            .where(
+              and(
+                eq(
+                  users.id,
+                  req.dbUserId
+                ),
+                eq(
+                  users.mfaEnabled,
+                  true
+                )
+              )
+            )
+            .returning({
+              id: users.id,
+            });
+
+          if (
+            updated.length !== 1
+          ) {
+            return false;
+          }
+
+          await deleteMfaLoginChallengesForUser({
+            userId:
+              req.dbUserId,
+            executor: tx,
+          });
+
+          await revokeAllRefreshTokens(
+            req.dbUserId,
+            tx
+          );
+
+          return true;
+        }
+      );
+
+    if (!disabled) {
+      return badRequest(
+        res,
+        "Unable to disable 2FA because the account security state changed."
+      );
+    }
 
     await logAuditEvent({
       userId: req.dbUserId,
-      action: AuditActions.MFA_DISABLE || "MFA_DISABLE",
+      action:
+        AuditActions.MFA_DISABLE ||
+        "MFA_DISABLE",
       req,
     });
 
-    return success(res, null, "Two-factor authentication disabled");
+    return success(
+      res,
+      null,
+      "Two-factor authentication disabled"
+    );
   } catch (error) {
-    logger.error("2FA disable failed", { error: error.message, requestId: req.requestId });
-    return res.status(500).json({ ok: false, message: "Server error" });
+    logger.error(
+      "2FA disable failed",
+      {
+        error: error.message,
+        requestId: req.requestId,
+      }
+    );
+
+    return res
+      .status(500)
+      .json({
+        ok: false,
+        message: "Server error",
+      });
   }
 });
-
-function getMfaEncryptionKey() {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret) {
-    throw new Error("SESSION_SECRET is required for MFA encryption");
-  }
-  return crypto.createHash("sha256").update(secret).digest();
-}
-
-function encryptMfaSecret(plainSecret) {
-  const key = getMfaEncryptionKey();
-  const iv = crypto.randomBytes(12);
-  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
-  let encrypted = cipher.update(plainSecret, "utf8", "hex");
-  encrypted += cipher.final("hex");
-  const authTag = cipher.getAuthTag().toString("hex");
-  return iv.toString("hex") + ":" + authTag + ":" + encrypted;
-}
-
-function decryptMfaSecret(storedSecret) {
-  const parts = storedSecret.split(":");
-  if (parts.length !== 3) {
-    throw new Error("Invalid MFA secret format");
-  }
-  const [ivHex, authTagHex, encrypted] = parts;
-  const key = getMfaEncryptionKey();
-  const iv = Buffer.from(ivHex, "hex");
-  const authTag = Buffer.from(authTagHex, "hex");
-  const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
-  decipher.setAuthTag(authTag);
-  let decrypted = decipher.update(encrypted, "hex", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
-}
 
 function parseDeviceName(userAgent) {
   if (!userAgent) return 'Unknown Device';

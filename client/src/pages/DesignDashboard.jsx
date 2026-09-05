@@ -181,6 +181,7 @@ export default function DesignDashboard() {
         </main>
       </div>
     </>
+  </WellnessPageShell>
   );
 }
 
@@ -214,6 +215,5 @@ function Metric({ label, value }) {
       <p className="text-caption">{label}</p>
       <p className="text-heading-sm text-teal mt-1">{value}</p>
     </div>
-  </WellnessPageShell>
   );
 }

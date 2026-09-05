@@ -189,6 +189,7 @@ export default function ControlDashboard() {
         </div>
       </div>
     </>
+  </WellnessPageShell>
   );
 }
 
@@ -897,6 +898,5 @@ function DeveloperSection({ settings, toggleSetting, setSettings }) {
         </div>
       </SettingCard>
     </div>
-  </WellnessPageShell>
   );
 }

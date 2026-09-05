@@ -29,7 +29,7 @@ const tmp = mkdtempSync(join(tmpdir(), "drizzle-gen-"));
 try {
   execFileSync(
     DRIZZLE_KIT_BIN,
-    ["generate", "--dialect", "postgresql", "--schema", "./shared/schema.mjs", "--out", tmp],
+    ["generate", "--dialect", "postgresql", "--schema", "./database/schema/index.ts", "--out", tmp],
     { stdio: "inherit" },
   );
 
@@ -67,4 +67,60 @@ try {
   console.log(`[generate-canonical-schema] wrote ${OUT}: ${tables} tables, ${indexes} indexes`);
 } finally {
   rmSync(tmp, { recursive: true, force: true });
+}
+
+/*
+ * MMHB_LEGACY_BOOTSTRAP_BACKFILLS_V1
+ *
+ * The CREATE TABLE graph is the declarative desired state.
+ * These three idempotent ALTER statements preserve compatibility for
+ * pre-existing databases whose tables may predate these columns.
+ *
+ * Keep each definition byte-semantically aligned with its Drizzle column.
+ */
+{
+  const {
+    readFileSync: __mmhbReadFileSync,
+    writeFileSync: __mmhbWriteFileSync,
+  } = await import("node:fs");
+
+  const __mmhbCanonicalPath =
+    "server/db/schema.canonical.sql";
+
+  const __mmhbBackfills = [
+    `ALTER TABLE "journals" ADD COLUMN IF NOT EXISTS "mood" varchar(50) DEFAULT 'neutral';`,
+    `ALTER TABLE "user_preferences" ADD COLUMN IF NOT EXISTS "preferences" jsonb;`,
+    `ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "timezone" varchar(100) DEFAULT 'UTC' NOT NULL;`,
+  ];
+
+  let __mmhbSql =
+    __mmhbReadFileSync(
+      __mmhbCanonicalPath,
+      "utf8",
+    );
+
+  const __mmhbMissing =
+    __mmhbBackfills.filter(
+      statement =>
+        !__mmhbSql.includes(statement),
+    );
+
+  if (__mmhbMissing.length > 0) {
+    const __mmhbBreakpoint =
+      "\n--> statement-breakpoint\n";
+
+    __mmhbSql =
+      __mmhbSql.replace(/\s*$/, "") +
+      __mmhbBreakpoint +
+      __mmhbMissing.join(
+        __mmhbBreakpoint,
+      ) +
+      "\n";
+
+    __mmhbWriteFileSync(
+      __mmhbCanonicalPath,
+      __mmhbSql,
+      "utf8",
+    );
+  }
 }

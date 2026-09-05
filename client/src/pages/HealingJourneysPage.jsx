@@ -312,25 +312,6 @@ const healingJourneys = [
 
 function JourneyCard({ journey, onSelect }) {
   return (
-  <WellnessPageShell
-    title="HealingJourneysPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="Healing Journeys — The Genuine Love Project" description="Explore paths for personal healing and growth." />
 
 
     <button
@@ -501,6 +482,24 @@ export default function HealingJourneysPage() {
   });
 
   return (
+    <WellnessPageShell
+      title="HealingJourneysPage"
+      subtitle="Educational reflection tools. Choose what feels safe and supportive."
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
+      clarity={{
+        what: "A self-paced reflection tool you control.",
+        why: "To support clarity, values alignment, and gentle next steps.",
+        who: "For adults (18+) who want educational wellness tools (not medical care).",
+        when: "Anytime you want a small reset or a thoughtful pause.",
+        where: "Anywhere you can breathe and write for 1–5 minutes.",
+        how: "Pick one prompt, answer briefly, stop whenever you want."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+        { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+        { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+      ]}
+    >
     <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
       <div className="content-wrapper py-8">
         <div className="max-w-4xl mx-auto">
